@@ -8,21 +8,37 @@ use App\Http\Controllers\MbtiController;
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
+|
+| 这里注册 API 路由，由 RouteServiceProvider 加载，并自动带上 /api 前缀。
+| 也就是说，下面 prefix('v0.2') 里的 /health 实际访问路径是：
+|   /api/v0.2/health
+|
 */
 
+// 默认示例（目前用不到，可以保留，也可以删掉）
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+// FAP v0.2 · MBTI 最小骨架 API
 Route::prefix('v0.2')->group(function () {
-    // 健康检查
+    // 1. 健康检查
+    // GET /api/v0.2/health
     Route::get('/health', [MbtiController::class, 'health']);
 
-    // MBTI 量表元信息
+    // 2. MBTI 量表元信息
+    // GET /api/v0.2/scales/MBTI
     Route::get('/scales/MBTI', [MbtiController::class, 'scaleMeta']);
 
-    // MBTI 题目列表（Demo）
+    // 3. MBTI 题目列表（Demo）
+    // GET /api/v0.2/scales/MBTI/questions
     Route::get('/scales/MBTI/questions', [MbtiController::class, 'questions']);
 
-    // 接收一次作答
-    Route::post('/attempts', [MbtiController::class, 'createAttempt']);
+    // 4. 接收一次测评作答（创建 attempt）
+    // POST /api/v0.2/attempts
+    Route::post('/attempts', [MbtiController::class, 'storeAttempt']);
 
-    // 查询作答结果
+    // 5. 查询某次测评的结果
+    // GET /api/v0.2/attempts/{id}/result
     Route::get('/attempts/{id}/result', [MbtiController::class, 'getResult']);
 });
