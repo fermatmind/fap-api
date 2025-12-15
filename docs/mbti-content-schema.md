@@ -1,237 +1,328 @@
-# MBTI 内容结构规范（mbti-content-schema）
+# MBTI 内容结构规范（Content Schema）— v0.2.1（对齐 API / 合规 / 发布）
 
-> 适用范围：Fermat Assessment Platform v0.2  
-> 目标：统一 32 个 MBTI 类型结果文案的字段、命名与存储格式，方便前后端与数据分析共用。
-
----
-
-## 0. 总体设计
-
-- 内容库名称：`MBTI 32-type Profiles`
-- 内容版本号：`profile_version = "mbti32-v2.5"`
-- 人格类型：32 种（16 型 × A/T 两种，如 `ENFJ-A`、`ENFJ-T`）
-- 每种类型支持多个文案变体：`v1` ~ `vN`（目前规划 `v1`~`v10`）
-
-### 0.1 文件布局（建议）
-
-#### JS 版本（供 Node / Laravel 直接 `require`）
-
-- 目录：`backend/data/mbti32/`
-- 命名：`result_<TYPE>.js`
-  - 示例：`result_ENFJ-A.js`、`result_INTJ-T.js`
-- 每个文件导出一个 `ARRAY`：
-  - 变量名：`<TYPE>_VARIANTS`
-  - 示例：`const ENFJ_A_VARIANTS = [ { ... }, { ... } ];`
-
-#### JSONL 版本（供批处理 / 训练 / 备份）
-
-- 目录：`backend/data/mbti32/jsonl/`
-- 命名：`result_<TYPE>.jsonl`
-  - 示例：`result_ENFJ-A.jsonl`
-- 一行一个对象：
-  - 示例：
-    ```jsonc
-    {"id":"v1", "typeCode":"ENFJ-A", ...}
-    {"id":"v2", "typeCode":"ENFJ-A", ...}
-    ```
+> 适用范围：FAP `v0.2.x`（MBTI 主流程）内容资产的**权威规范源**。  
+> 本版本：**v0.2.1**（新增：`content_package_version`、动态报告字段、分享模板协议、合规模块与写作约束对齐）
 
 ---
 
-## 1. 顶层对象结构（Profile Variant）
+## 0. 总原则
 
-每一条文案变体 = 一个 `Profile Variant` 对象。
+1. **前端只渲染，不做规则**  
+   - 轴强度分档（`axis_states`）、推荐卡片选择、语气滤镜等均由后端/内容包决定。  
+2. **内容必须可版本化、可回滚**  
+   - 所有内容资产必须属于某个 `content_package_version`。  
+3. **同型不同百分比的差异化来自“动态模块”**  
+   - 32 型只写“静态骨架”（TypeProfile），差异化主要靠 `scores_pct + axis_states + dynamic_cards`。  
+4. **合规优先**  
+   - 所有对外文案必须遵守 `docs/copywriting-no-go-list.md`；所有结果页/分享页必须包含合规模块或等效提示（见第 8 节）。  
 
-### 1.1 必填字段列表
+---
 
-| 字段名          | 类型          | 示例 / 说明                                  |
-|----------------|--------------|----------------------------------------------|
-| `id`           | `string`     | `"v1"`、`"v2"`，同一类型内唯一               |
-| `typeCode`     | `string`     | `"ENFJ-A"`、`"INTP-T"`                        |
-| `typeName`     | `string`     | `"主人公型"`                                  |
-| `tagline`      | `string`     | `"笃定型领路人"`                              |
-| `rarity`       | `string`     | `"约 2%（较为少见）"`                         |
-| `keywords`     | `string[]`   | 若干标签词                                   |
-| `intro`        | `string`     | 开头 1 段总述                                |
-| `traits`       | `Section`    | 人格特征模块                                 |
-| `career`       | `Section`    | 学习 / 职业建议模块                          |
-| `relationships`| `Section`    | 人际 / 亲密关系模块                          |
-| `growth`       | `Section`    | 成长建议模块                                 |
-| `meta`         | `Meta`       | 元信息（文案风格、版本号等）                 |
+## 1. 版本与目录约定（强制）
 
-### 1.2 Section 结构
+### 1.1 三类版本号
 
-```ts
-type Section = {
-  title: string;        // 小节标题
-  paragraphs: string[]; // 段落数组，每项一段完整文案
-};
+| 名称 | 字段 | 示例 | 含义 | 变更时机 |
+|---|---|---|---|---|
+| 题库/评分版本 | `scale_version` | `v0.2` | 题目与计分规则版本 | 改题/改评分必须升版本 |
+| 类型骨架文案版本 | `profile_version` | `mbti32-v2.5` | 32 型长文/骨架结构版本 | 文案结构或叙事升级 |
+| 内容资产包版本（权威） | `content_package_version` | `MBTI-CN-v0.2.1` | 动态模块/分享/免责声明/推荐等一揽子版本 | 任何可发布内容变化都应升版本或 hotfix |
 
-1.3 Meta 结构
+> v0.2.1：**以 `content_package_version` 作为“发布/回滚”的最小单位**（对齐 `content-release-checklist.md`）。
 
-type Meta = {
-  profile_version: string;   // 如 "mbti32-v2.5"
-  variant_id: string;        // 与顶层 id 保持一致，如 "v1"
-  tone: string;              // 文案语气，如 "standard" / "funny" / "serious"
-  scene_tags: string[];      // 适用场景标签，例如 ["首次测试", "分享朋友圈"]
-  created_at?: string;       // ISO 时间，可选
-  updated_at?: string;       // ISO 时间，可选
-};
+### 1.2 目录结构（建议，但强烈推荐）
+
+content_packages/
+MBTI-CN-v0.2.1/
+manifest.json
+type_profiles/
+ENFJ-A.json
+ENFJ-T.json
+…
+share_templates/
+wechat-moment-v1.json
+axis_dynamics/
+…（可从 v0.2.2 起逐步填充）
+layer_profiles/
+role.json
+strategy.json
+identity.json
+disclaimers/
+mbti-v0.2.1.json
+content_graph/
+nodes.json
+rules.json
+
+---
+
+## 2. 内容包清单（Content Package Manifest）
+
+### 2.1 manifest.json（内容包元信息）
+
+**字段：**
+
+- `content_package_version`（string，必填）
+- `region`（string，必填，例：`CN_MAINLAND`）
+- `locale`（string，必填，例：`zh-CN`）
+- `scale_code`（string，必填，固定：`MBTI`）
+- `scale_version`（string，必填，例：`v0.2`）
+- `profile_version`（string，必填，例：`mbti32-v2.5`）
+- `created_at` / `updated_at`（ISO8601）
+- `notes`（string，可选）
+
+**示例：**
+```jsonc
+{
+  "content_package_version": "MBTI-CN-v0.2.1",
+  "region": "CN_MAINLAND",
+  "locale": "zh-CN",
+  "scale_code": "MBTI",
+  "scale_version": "v0.2",
+  "profile_version": "mbti32-v2.5",
+  "created_at": "2025-12-15T00:00:00Z",
+  "updated_at": "2025-12-15T00:00:00Z",
+  "notes": "v0.2.1: add share template protocol + dynamic report fields placeholders + compliance modules"
+}
 
 
 ⸻
 
-2. 完整示例：单个 Variant 对象
+3. TypeProfile（32 型静态骨架）
+
+TypeProfile 用于结果页的“主叙事骨架”。
+写作约束：不得写死轴强度（避免与 scores_pct/axis_states 打架）。
+
+3.1 TypeProfile 结构（每个 type_code 一份）
+
+字段：
+	•	type_code（string，必填，如 ENFJ-A）
+	•	type_name（string，必填，如 主人公型）
+	•	tagline（string，必填，一句话签名句）
+	•	rarity（string，可选，如 约 2%（较为少见））
+	•	keywords（string[]，必填，3–8 个）
+	•	intro（string，必填，建议 120–180 字）
+	•	traits（object，必填）
+	•	career（object，必填）
+	•	relationships（object，必填）
+	•	growth（object，必填）
+	•	disclaimers（object，必填，引用第 8 节合规模块）
+	•	meta（object，可选：作者/更新时间/适用范围）
+
+段落对象结构：
+	•	title（string）
+	•	paragraphs（string[]，1–6 段）
+
+示例（节选）：
 
 {
-  "id": "v1",
-  "typeCode": "ENFJ-A",
-  "typeName": "主人公型",
+  "type_code": "ENFJ-A",
+  "type_name": "主人公型",
   "tagline": "笃定型领路人",
   "rarity": "约 2%（较为少见）",
-  "keywords": [
-    "理想主义",
-    "高共情",
-    "号召力强",
-    "有责任感",
-    "自信稳重",
-    "目标导向"
-  ],
-  "intro": "你像一束方向感清晰的聚光灯：很少犹豫要不要站出来，更关心怎样带着大家一起向前。你擅长把零散的意见整合成清晰的路径，用愿景、决心和行动感召周围的人。即便现实一时还达不到你的理想标准，你通常也能保持稳定和乐观，相信只要大家一起努力，事情终会朝更好的方向发展。",
-  "traits": {
-    "title": "人格特征",
-    "paragraphs": [
-      "你天生愿意为集体负责，很少袖手旁观。看到混乱和低效，你会忍不住站出来协调资源、分配任务，希望把每个人都放在更合适的位置上。",
-      "你对他人的情绪非常敏感，会注意到谁情绪低落、谁没被听见，然后主动拉他们入局。你希望的是“大家一起好”，而不是一个人赢。",
-      "在目标感清晰时，你会展现出极强的执行力与耐心，可以为了一个长期愿景持续投入很久。"
-    ]
-  },
-  "career": {
-    "title": "适合的学习与职业方向",
-    "paragraphs": [
-      "你适合在需要“统筹 + 沟通 + 推进”的位置发挥，例如项目负责人、活动策划、班委/学生会骨干、组织运营等。",
-      "在专业选择上，只要能让你感到“对人有价值”“能推动改变”，你就容易长期投入，例如教育、心理、公共管理、品牌与市场、公关等方向。",
-      "在工作中，如果角色过于被动、缺乏决策空间，你会容易感到压抑和消耗。相反，能让你参与规划和带团队的环境，会让你更有动力。"
-    ]
-  },
-  "relationships": {
-    "title": "在人际与亲密关系中的样子",
-    "paragraphs": [
-      "在人际相处中，你常常扮演“气氛担当 + 调解者”的角色，会主动找话题、照顾每个人的感受，尽量让大家都处在舒服的状态里。",
-      "在亲密关系中，你很重视对方的情绪与成长，希望彼此能一起进步，而不是只是“凑合在一起”。你会认真规划未来，也会期待对方给出同等级的投入。",
-      "有时你可能会因为太在意他人的感受，而忽略自己的真实需要，甚至为避免冲突而把问题拖很久。"
-    ]
-  },
-  "growth": {
-    "title": "给 ENFJ-A 的成长建议",
-    "paragraphs": [
-      "学会区分“我真的有责任去管”和“这件事并不归我管”，给自己留出休息和发呆的空间。不是所有混乱都需要你出手拯救。",
-      "在帮助他人之前，先确认对方是否真的需要或欢迎你的介入，避免出于善意却被误解为控制或过度干涉。",
-      "多留意自己的界限：当你感到长期疲惫、情绪变得容易暴躁时，往往不是你“突然变差了”，而是你已经长期透支，需要适当抽离和补充能量。"
-    ]
-  },
-  "meta": {
-    "profile_version": "mbti32-v2.5",
-    "variant_id": "v1",
-    "tone": "standard",
-    "scene_tags": [
-      "首次测试",
-      "结果页默认展示",
-      "适合分享到同学群"
-    ],
-    "created_at": "2025-12-01T00:00:00Z",
-    "updated_at": "2025-12-01T00:00:00Z"
+  "keywords": ["理想主义","高共情","号召力强","责任感","目标导向"],
+  "intro": "你像一束方向感清晰的聚光灯：更关心怎样带着大家一起向前……",
+  "traits": { "title": "人格特征", "paragraphs": ["……","……"] },
+  "career": { "title": "学习与职业倾向", "paragraphs": ["……"] },
+  "relationships": { "title": "关系中的你", "paragraphs": ["……"] },
+  "growth": { "title": "成长建议", "paragraphs": ["……"] },
+  "disclaimers": {
+    "title": "重要说明",
+    "items": ["本结果为倾向性分析，不构成临床诊断……"]
   }
 }
 
 
 ⸻
 
-3. JS 文件结构示例（result_ENFJ-A.js）
+4. 动态报告模块（Dynamic Report Modules）— v0.2.1 新增口径
 
-// data/mbti32/result_ENFJ-A.js
-// ENFJ-A · 结果页文案（多个风格版本）
+v0.2.1 先把“结构与字段”定下来；内容可以逐步补齐。
+对齐 api-v0.2-spec.md v0.2.1：后端返回 scores_pct、axis_states、highlights、sections.cards 等。
 
-const ENFJ_A_VARIANTS = [
-  {
-    "id": "v1",
-    "typeCode": "ENFJ-A",
-    "typeName": "主人公型",
-    "tagline": "笃定型领路人",
-    "rarity": "约 2%（较为少见）",
-    "keywords": ["理想主义", "高共情", "号召力强", "有责任感", "自信稳重", "目标导向"],
-    "intro": "……",
-    "traits": { "title": "人格特征", "paragraphs": ["……"] },
-    "career": { "title": "适合的学习与职业方向", "paragraphs": ["……"] },
-    "relationships": { "title": "在人际与亲密关系中的样子", "paragraphs": ["……"] },
-    "growth": { "title": "成长建议", "paragraphs": ["……"] },
-    "meta": {
-      "profile_version": "mbti32-v2.5",
-      "variant_id": "v1",
-      "tone": "standard",
-      "scene_tags": ["首次测试", "结果页默认展示"]
-    }
-  },
-  {
-    "id": "v2",
-    "typeCode": "ENFJ-A",
-    "typeName": "主人公型",
-    "tagline": "校园里最会带队的人",
-    "rarity": "约 2%（较为少见）",
-    "keywords": ["社交能量", "组织力", "同理心"],
-    "intro": "……（更轻松 / 搞笑一点的版本）",
-    "traits": { "title": "人格特征", "paragraphs": ["……"] },
-    "career": { "title": "适合的学习与职业方向", "paragraphs": ["……"] },
-    "relationships": { "title": "在人际与亲密关系中的样子", "paragraphs": ["……"] },
-    "growth": { "title": "成长建议", "paragraphs": ["……"] },
-    "meta": {
-      "profile_version": "mbti32-v2.5",
-      "variant_id": "v2",
-      "tone": "funny",
-      "scene_tags": ["适合同学群转发", "社交场景"],
-      "created_at": "2025-12-01T00:00:00Z"
-    }
-  }
-  // ... v3 ~ v10
-];
+4.1 scores_pct（五轴百分比）
+	•	字段名：scores_pct
+	•	类型：object（key 为 EI/SN/TF/JP/AT，value 为 0–100 int）
+	•	来源：后端计算结果（不来自内容包）
+	•	用途：展示轴倾向 + 触发动态卡片选择
 
-module.exports = {
-  ENFJ_A_VARIANTS
-};
+4.2 axis_states（五轴状态机输出）
+	•	字段名：axis_states
+	•	类型：object（key 为轴，value 为枚举）
+	•	枚举：very_weak / weak / moderate / clear / strong / very_strong
+	•	来源：后端按阈值配置计算（阈值属于内容包或配置资产）
+	•	用途：动态卡片索引键之一
 
+4.3 DynamicCard（动态卡片）
+
+统一卡片字段（前端稳定渲染）：
+	•	card_id（string，必填，内容资产唯一 ID）
+	•	card_type（string，必填）
+	•	v0.2.1 建议先支持：explain / action
+	•	预留：behavior / pitfall
+	•	title（string，必填）
+	•	body（string|string[]，必填）
+	•	tags（string[]，可选）
+	•	meta（object，可选，用于埋点/AB/调试）
+
+4.4 highlights（高亮卡）
+	•	字段名：highlights
+	•	类型：DynamicCard[]
+	•	口径：Top-2 强度轴（或可配置）对应的关键解释 + 关键建议卡
+
+4.5 sections（分区卡片）
+	•	字段名：sections
+	•	结构：
+	•	traits.cards[]
+	•	career.cards[]
+	•	growth.cards[]
+	•	relationships.cards[]
+	•	说明：后端按组装策略（AssemblyPolicy）分发卡片，前端只展示。
+
+v0.2.1：你可以先做到 highlights + identity_card 有内容，sections.* 先为空数组也可上线。
 
 ⸻
 
-4. JSONL 文件结构示例（result_ENFJ-A.jsonl）
+5. 分享资产协议（Share Template Protocol）— v0.2.1 必须对齐
 
-{"id":"v1","typeCode":"ENFJ-A","typeName":"主人公型","tagline":"笃定型领路人","rarity":"约 2%（较为少见）","keywords":["理想主义","高共情","号召力强","有责任感","自信稳重","目标导向"],"intro":"……","traits":{"title":"人格特征","paragraphs":["……"]},"career":{"title":"适合的学习与职业方向","paragraphs":["……"]},"relationships":{"title":"在人际与亲密关系中的样子","paragraphs":["……"]},"growth":{"title":"成长建议","paragraphs":["……"]},"meta":{"profile_version":"mbti32-v2.5","variant_id":"v1","tone":"standard","scene_tags":["首次测试","结果页默认展示"]}}
-{"id":"v2","typeCode":"ENFJ-A","typeName":"主人公型","tagline":"校园里最会带队的人","rarity":"约 2%（较为少见）","keywords":["社交能量","组织力","同理心"],"intro":"……（更轻松 / 搞笑一点的版本）","traits":{"title":"人格特征","paragraphs":["……"]},"career":{"title":"适合的学习与职业方向","paragraphs":["……"]},"relationships":{"title":"在人际与亲密关系中的样子","paragraphs":["……"]},"growth":{"title":"成长建议","paragraphs":["……"]},"meta":{"profile_version":"mbti32-v2.5","variant_id":"v2","tone":"funny","scene_tags":["适合同学群转发","社交场景"]}}
+对齐 api-v0.2-spec.md v0.2.1 新增接口：
+GET /api/v0.2/attempts/{attempt_id}/share
 
-注意：
-	•	每行必须是一个合法 JSON 对象；
-	•	不允许出现多余逗号；
-	•	换行只作为记录分隔符。
+5.1 SharePayload（后端返回给前端生成分享卡的最小字段）
+
+字段（必填优先）：
+	•	share_id（string，必填）：分享追踪 ID（不可当成用户身份证号对外展示）
+	•	content_package_version（string，必填）
+	•	type_code（string，必填）
+	•	type_name（string，必填）
+	•	tagline（string，必填）
+	•	rarity（string，可选）
+	•	keywords（string[]，必填，3–5 个）
+	•	short_summary（string，必填，1–2 句）
+	•	brand（object，可选：logo/slogan）
+	•	meta（object，可选：用于埋点/模板版本）
+
+示例：
+
+{
+  "share_id": "sh_2f1a8c...9d",
+  "content_package_version": "MBTI-CN-v0.2.1",
+  "type_code": "ENFJ-A",
+  "type_name": "主人公型",
+  "tagline": "笃定型领路人",
+  "rarity": "约 2%（较为少见）",
+  "keywords": ["理想主义","高共情","号召力强","责任感","目标导向"],
+  "short_summary": "你更擅长把人心与目标拧成一股绳，做团队的稳定发动机。",
+  "brand": { "name": "费马测试", "slogan": "心里有问，上费马测试" },
+  "meta": { "template": "wechat-moment-v1" }
+}
+
+5.2 share_templates（模板资产）
+	•	目录：share_templates/
+	•	字段建议：
+	•	template_id（如 wechat-moment-v1）
+	•	aspect_ratio（如 9:16）
+	•	required_fields[]（与 SharePayload 对齐）
+	•	copy_rules（文案规则：不得医学化/恐吓/绝对化）
+	•	fallbacks（缺字段时的兜底策略）
 
 ⸻
 
-5. 命名与版本约束
-	1.	profile_version 必须一致
-	•	当前版本固定为 "mbti32-v2.5"，方便后端按版本加载。
-	2.	typeCode 与文件名保持一致
-	•	result_ENFJ-A.js / .jsonl 中的所有对象 typeCode 必须为 "ENFJ-A"。
-	3.	id（variant_id）在同一类型内唯一
-	•	建议统一使用 "v1" ~ "v10"，不跨类型复用。
-	4.	字段增减规则
-	•	新增字段时：向后兼容，旧数据可不填；
-	•	废弃字段时：先标注为 deprecated，至少一个版本后再从代码中移除。
+6. 合规模块（Compliance Modules）— v0.2.1 必须落地
+
+对齐 compliance-basics.md v0.2.1：结果页/分享页/权益说明必须可引用同一套合规模块资产。
+
+6.1 DisclaimerBlock（结果页免责声明块）
+	•	字段：
+	•	title（string）
+	•	items（string[]）
+	•	links（object，可选：指向权益说明页）
+
+要求：
+	•	必须包含“非诊断/非医疗建议”类提示（按禁区清单约束措辞）
+	•	必须给出“用户权益入口”（如 /user-rights）
+
+6.2 UserRightsSnippet（用户权益摘要块）
+	•	字段：
+	•	summary（string）
+	•	contact（object：邮箱/客服）
+	•	actions（string[]：删除/导出）
+	•	rights_api（可选：若前端需要展示 API 文案，可由接口返回）
 
 ⸻
 
-6. 前端消费约定（Result 页）
-	•	后端接口 /attempts/{id}/result 返回的 profile 字段，结构与本规范中 Profile Variant 一致。
-	•	前端展示：
-	•	顶部卡片：typeCode + typeName + tagline + rarity + keywords
-	•	正文模块：按 intro → traits → career → relationships → growth 顺序排版
-	•	当需要不同风格版本（如“搞笑版”“学习向”）时：
-	•	后端在选取 variant 时根据 scene_tags / tone 进行筛选；
-	•	或在请求参数中增加 variant_id，精确指定。
+7. 组装策略（Assembly Policy）— v0.2.1 结构预留
+
+v0.2.1 不强制你一次做完，但要把“规则入口”留好，避免未来推翻。
+
+7.1 Policy 关键概念（术语对齐 glossary）
+	•	top_strength_axes：强度最高的 Top-2/Top-3 轴
+	•	weakest_axis：最弱轴（可用于边缘特质解释）
+	•	identity_overlay：A/T 作为语气滤镜
+	•	section_mapping：四大区块如何分发卡片类型
+	•	tone_filter：根据 Identity 与强度状态调整措辞力度
+
+⸻
+
+8. 写作约束（必须遵守）
+
+本节对齐 copywriting-no-go-list.md，用于内容审核与发布自检。
+
+8.1 禁止项（摘要）
+	•	不得出现“诊断/治愈/药物/替代治疗”等医疗化表达
+	•	不得“恐吓式结论/绝对化断言/羞辱用户”
+	•	不得宣称“权威认证/临床同等/官方背书”除非你有可公开证明材料
+	•	不得暗示基于人格给出确定的人生结论（如“你一定会失败/你不适合恋爱”）
+
+8.2 推荐写法（统一口径）
+	•	用“倾向/更可能/常见表现/在压力下可能…”
+	•	弱特质（接近 50）用“更灵活/更情境化/可能在两端切换”
+	•	A/T 的差异只放到 Identity 或语气滤镜，不把它写死进类型骨架
+
+⸻
+
+9. 与 API 的字段/接口对齐清单（v0.2.1）
+
+9.1 结果接口返回中，与内容相关的字段（必须）
+	•	profile_version（用于加载 TypeProfile）
+	•	content_package_version（用于加载动态模块/分享模板/免责声明）
+	•	type_code
+	•	scores_json（可保留）
+	•	新增：scores_pct
+	•	新增：axis_states
+	•	新增（可渐进）：highlights[]
+	•	新增（可渐进）：sections.{...}.cards[]
+	•	新增（建议）：disclaimer_block（或由内容包注入）
+
+9.2 分享接口（新增）
+	•	GET /api/v0.2/attempts/{attempt_id}/share
+	•	返回 SharePayload
+	•	包含 share_id、content_package_version、模板所需字段
+	•	前端生成图片后触发 share_generate 事件
+
+9.3 用户权益相关接口（新增/补齐）
+	•	GET /api/v0.2/user-rights
+	•	返回权益说明摘要（可用于前端展示/落地页一致性）
+	•	POST /api/v0.2/user-requests
+	•	提交删除/导出请求（可配合事件：delete_request_submit / export_request_submit）
+
+⸻
+
+10. 最低可上线标准（v0.2.1）
+
+只要你满足以下内容资产，就能稳定上线并支持后续扩展：
+	•	✅ 内容包 manifest.json（含 content_package_version）
+	•	✅ 32 条 TypeProfile（每条 intro + 四区块各 1–2 段 + disclaimers）
+	•	✅ 1 套 share_template（字段协议固定）
+	•	✅ 1 套 DisclaimerBlock（结果页可复用）
+	•	✅ API 返回中包含：profile_version + content_package_version + scores_pct + axis_states
+
+⸻
+
+11. 变更与发布约定（对齐发布清单）
+	1.	任何内容变更必须归属某个内容包版本
+	2.	发布前自检：字段完整性 / 缺字段兜底 / 合规模块存在 / 分享字段齐全
+	3.	回滚：只回滚 content_package_version 对应目录，不回滚代码实现逻辑（除非事故）
+
+⸻
+
 

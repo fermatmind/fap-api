@@ -1,0 +1,31 @@
+cat > content_packages/MBTI-CN-v0.2.1/manifest.json <<'EOF'
+{
+  "content_package_version": "MBTI-CN-v0.2.1",
+  "scale_code": "MBTI",
+  "scale_version": "v0.2",
+  "profile_version": "mbti32-v2.5",
+  "region": "CN_MAINLAND",
+  "locale": "zh-CN",
+  "status": "draft",
+  "schema_version": "mbti-content-schema@v0.2.1",
+  "assets": {
+    "type_profiles": {
+      "path": "type_profiles",
+      "expected_count": 32
+    },
+    "share_templates": {
+      "path": "share_templates",
+      "expected_count_min": 1
+    },
+    "disclaimers": {
+      "path": "disclaimers",
+      "expected_count_min": 1
+    },
+    "content_graph": {
+      "path": "content_graph",
+      "expected_count_min": 0
+    }
+  },
+  "notes": "Initial skeleton package for MBTI CN. Content to be filled progressively; publish/rollback by switching content_package_version."
+}
+EOF
