@@ -1,14 +1,15 @@
-> Status: Active
-> Owner: liufuwei
-> Last Updated: 2025-12-16
-> Version: Stage 1 (V0.2-A)
+> Status: Active  
+> Owner: liufuwei  
+> Last Updated: 2025-12-16  
+> Version: Stage 1 (V0.2-A)  
 > Related Docs:
-> - docs/04-stage2/README.md
+> - docs/03-stage1/README.md
 > - docs/03-stage1/api-v0.2-spec.md
 > - docs/03-stage1/fap-v0.2-glossary.md
 > - docs/03-stage1/content-release-checklist.md
 > - docs/03-stage1/compliance-basics.md
 > - docs/03-stage1/copywriting-no-go-list.md
+> - docs/04-stage2/README.md
 
 # Stage 1 (V0.2-A) — 中台最小骨架（规范 + 口径 + 最小数据闭环）
 

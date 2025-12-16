@@ -1,7 +1,7 @@
-> Status: Active
-> Owner: liufuwei
-> Last Updated: 2025-12-16
-> Version: Repo README v0.2.1
+> Status: Active  
+> Owner: liufuwei  
+> Last Updated: 2025-12-16  
+> Version: Repo README v0.2.1  
 > Related Docs:
 > - docs/README.md
 > - docs/03-stage1/README.md
@@ -16,9 +16,9 @@
 
 ## 0. Quick Links（先看这里）
 
-- 文档总入口：`docs/README.md`
-- Stage 1（V0.2-A）索引：`docs/03-stage1/README.md`
-- Stage 2（V0.2-B）索引：`docs/04-stage2/README.md`
+- 文档总入口：docs/README.md  
+- Stage 1（V0.2-A）索引：docs/03-stage1/README.md  
+- Stage 2（V0.2-B）索引：docs/04-stage2/README.md  
 
 如果你只做一件事：  
 **先按 Stage 1 的规范把接口/术语/事件口径对齐，再按 Stage 2 跑通“测评→报告→分享→增长”的闭环。**
@@ -33,11 +33,12 @@
 
 - ✅ 独立 API 仓库：`fap-api`
 - ✅ 服务定位明确：只做「数据 + 业务规则」，不渲染页面
-- ✅ 参考 `fap-specs`（规范仓库），开始按模块沉淀设计：
+- ✅ 文档与设计已按模块沉淀：
   - API 端点设计（01-api-design）
   - DB 结构草图（02-db-design）
   - 环境与配置策略（03-env-config）
   - 埋点与数据运营方案（04-analytics）
+  - Stage 1/2 规范文档（docs/03-stage1, docs/04-stage2）
 - ⏳ 还未开始：
   - Laravel 项目正式初始化与跑通
   - 路由 / 控制器 / 数据库存储实现
@@ -96,9 +97,10 @@ fap-api/
   README.md
 
   content_packages/
-    ...                           # 内容资产包（后续会用于报告引擎与版本化）
+    ...                           # 内容资产包（用于报告引擎与版本化）
 
   docs/
+    README.md                     # 文档总入口（索引）
     03-stage1/
       README.md
       api-v0.2-spec.md
@@ -116,7 +118,7 @@ fap-api/
       analytics-stage2-funnel-spec.md
       compliance-stage2-user-rights.md
       event-responsibility-matrix.md
-      acceptance-playbook.md
+      stage2-acceptance-playbook.md
 
   00-plan/
     Stage2-skeleton-checklist.md   # 阶段 2 骨架验收清单（打勾用）
