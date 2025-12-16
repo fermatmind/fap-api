@@ -1,5 +1,5 @@
 {
-  "content_package_version": "MBTI-CN-v0.2.1",
+  "content_package_version": "MBTI-CN-v0.2.1-TEST",
   "scale_code": "MBTI",
   "scale_version": "v0.2",
   "profile_version": "mbti32-v2.5",
@@ -23,7 +23,8 @@
     "content_graph": {
       "path": "content_graph",
       "expected_count_min": 0
-    }
+    },
+    "type_profile": "type_profiles.json"
   },
   "notes": "Initial skeleton package for MBTI CN. Content to be filled progressively; publish/rollback by switching content_package_version."
 }

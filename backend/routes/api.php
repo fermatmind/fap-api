@@ -34,11 +34,15 @@ Route::prefix('v0.2')->group(function () {
     // GET /api/v0.2/scales/MBTI/questions
     Route::get('/scales/MBTI/questions', [MbtiController::class, 'questions']);
 
-    // 4. 接收一次测评作答（创建 attempt）
+    // 4. 接收一次测评作答（创建 attempt + result）
     // POST /api/v0.2/attempts
     Route::post('/attempts', [MbtiController::class, 'storeAttempt']);
 
     // 5. 查询某次测评的结果
     // GET /api/v0.2/attempts/{id}/result
     Route::get('/attempts/{id}/result', [MbtiController::class, 'getResult']);
+
+    // 6. 获取分享模板数据（含 share_id / content_package_version）
+    // GET /api/v0.2/attempts/{id}/share
+    Route::get('/attempts/{id}/share', [MbtiController::class, 'getShare']);
 });
