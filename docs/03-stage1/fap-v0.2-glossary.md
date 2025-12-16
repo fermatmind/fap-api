@@ -1,3 +1,14 @@
+> Status: Active
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: Glossary v0.2.1 (Stage 1 / v0.2-A)
+> Related Docs:
+> - docs/README.md
+> - docs/03-stage1/README.md
+> - docs/03-stage1/api-v0.2-spec.md
+> - docs/03-stage1/compliance-basics.md
+> - docs/04-stage2/event-responsibility-matrix.md
+
 # FAP v0.2 领域词典（Glossary）— v0.2.1（对齐 API / 合规 / 发布）
 
 > FAP = Fermat Assessment Platform  
@@ -339,7 +350,7 @@ v0.2.x 核心 5 类：
 
 ## 11. API 端点术语索引（Endpoints Index）— v0.2.1 补齐
 
-这里仅登记“端点名称与用途口径”，详细请求/响应以 `docs/api-v0.2-spec.md`（v0.2.1）为准。
+这里仅登记“端点名称与用途口径”，详细请求/响应以 `docs/03-stage1/api-v0.2-spec.md`（v0.2.1）为准。
 
 ### 11.1 Ping
 

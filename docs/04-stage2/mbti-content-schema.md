@@ -1,3 +1,11 @@
+> Status: Stable
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: MBTI Content Schema v0.2
+> Related Docs:
+> - docs/04-stage2/mbti-report-engine-v1.2.md
+> - docs/04-stage2/mbti-content-package-spec.md
+
 # MBTI 内容结构规范（Content Schema）— v0.2.1（对齐 API / 合规 / 发布）
 
 > 适用范围：FAP `v0.2.x`（MBTI 主流程）内容资产的**权威规范源**。  
@@ -14,7 +22,7 @@
 3. **同型不同百分比的差异化来自“动态模块”**  
    - 32 型只写“静态骨架”（TypeProfile），差异化主要靠 `scores_pct + axis_states + dynamic_cards`。  
 4. **合规优先**  
-   - 所有对外文案必须遵守 `docs/copywriting-no-go-list.md`；所有结果页/分享页必须包含合规模块或等效提示（见第 8 节）。  
+   - 所有对外文案必须遵守 `docs/03-stage1/copywriting-no-go-list.md`；所有结果页/分享页必须包含合规模块或等效提示（见第 8 节）。  
 
 ---
 

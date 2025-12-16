@@ -1,3 +1,16 @@
+> Status: Active
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: Release Checklist v0.2.1 (Stage 1 / v0.2-A)
+> Related Docs:
+> - docs/README.md
+> - docs/03-stage1/README.md
+> - docs/03-stage1/fap-v0.2-glossary.md
+> - docs/03-stage1/api-v0.2-spec.md
+> - docs/03-stage1/copywriting-no-go-list.md
+> - docs/04-stage2/mbti-content-package-spec.md
+> - docs/04-stage2/mbti-report-engine-v1.2.md
+
 # 内容发布 / 回滚清单（Content Release Checklist）— v0.2.1（对齐 API & 合规）
 
 版本：**v0.2.1**  
@@ -27,7 +40,7 @@
 ### 0.3 合规要求（本次必须满足）
 
 - 分享接口不得返回可逆/可重建作答明细（不得返回 answers 或 answer_summary 全量）
-- 对外权益通道存在（见 `docs/compliance-basics.md v0.2.1`），并且内容发布不破坏删除/导出流程口径
+- 对外权益通道存在（见 `docs/03-stage1/compliance-basics.md v0.2.1`），并且内容发布不破坏删除/导出流程口径
 
 ---
 

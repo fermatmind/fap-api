@@ -1,3 +1,15 @@
+> Status: Active
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: Compliance Basics v0.2.1 (Stage 1 / v0.2-A)
+> Related Docs:
+> - docs/README.md
+> - docs/03-stage1/README.md
+> - docs/03-stage1/fap-v0.2-glossary.md
+> - docs/03-stage1/api-v0.2-spec.md
+> - docs/03-stage1/copywriting-no-go-list.md
+> - docs/04-stage2/compliance-stage2-user-rights.md
+
 # 合规最小三件套（Compliance Basics）— v0.2.1（对齐 API v0.2.1）
 
 版本：**v0.2.1**  
@@ -8,7 +20,7 @@
 
 ## 0. v0.2.1 本次修订要点（对齐 API）
 
-本文件对齐 `docs/api-v0.2-spec.md` 的 v0.2.1 修订版，明确以下新增点的合规口径：
+本文件对齐 `docs/03-stage1/api-v0.2-spec.md` 的 v0.2.1 修订版，明确以下新增点的合规口径：
 
 ### 0.1 新增字段（可能涉及个人信息/可识别信息）
 

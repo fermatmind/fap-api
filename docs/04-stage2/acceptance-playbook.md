@@ -1,3 +1,14 @@
+> Status: Active
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: Acceptance v0.2-B
+> Related Docs:
+> - docs/04-stage2/README.md
+> - docs/04-stage2/stage2-v0.2-b-overview.md
+> - docs/04-stage2/mbti-report-engine-v1.2.md
+> - docs/04-stage2/analytics-stage2-funnel-spec.md
+> - docs/04-stage2/compliance-stage2-user-rights.md
+
 cat > docs/acceptance-playbook.md <<'EOF'
 # Acceptance Playbook（发布验收剧本）— v0.2.1
 

@@ -1,3 +1,14 @@
+> Status: Active
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: API v0.2.1 (Stage 1 / v0.2-A)
+> Related Docs:
+> - docs/README.md
+> - docs/03-stage1/README.md
+> - docs/03-stage1/fap-v0.2-glossary.md
+> - docs/03-stage1/compliance-basics.md
+> - docs/03-stage1/content-release-checklist.md
+
 # API v0.2 规范（FAP / MBTI 主流程）— v0.2.1 修订版
 
 版本：**v0.2.1（文档修订）**  
@@ -383,7 +394,7 @@ GET /api/v0.2/attempts/b4e1a8f3-0c91-4a25-a57d-abc123456789/share
 6. 上报埋点事件（Events）
 
 前端在关键节点调用，用于写入 events 表。
-事件类型请参考 docs/fap-v0.2-glossary.md 中 event_code 定义。
+事件类型请参考 docs/03-stage1/fap-v0.2-glossary.md 中 event_code 定义。
 
 6.1 POST /api/v0.2/events
 

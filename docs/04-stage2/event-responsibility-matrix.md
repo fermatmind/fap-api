@@ -1,3 +1,11 @@
+> Status: Active
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: Events v0.2
+> Related Docs:
+> - docs/04-stage2/analytics-stage2-funnel-spec.md
+> - docs/03-stage1/api-v0.2-spec.md
+
 cat > docs/event-responsibility-matrix.md <<'EOF'
 # Event Responsibility Matrix（事件责任矩阵）— v0.2.1
 
@@ -9,7 +17,7 @@ cat > docs/event-responsibility-matrix.md <<'EOF'
 ## 1. 通用约定（v0.2.1）
 
 ### 1.1 字段约定
-- **event_code**：事件代码（见 `docs/fap-v0.2-glossary.md`）
+- **event_code**：事件代码（见 `docs/03-stage1/fap-v0.2-glossary.md`）
 - **trigger_side**：`frontend` / `backend`
 - **trigger_time**：触发时机（接口成功返回 / 页面渲染完成 / 按钮点击成功等）
 - **dedup_key**：去重口径（建议组合键）

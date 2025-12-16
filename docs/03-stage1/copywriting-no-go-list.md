@@ -1,3 +1,14 @@
+> Status: Active
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: Copywriting No-Go v0.2.1 (Stage 1 / v0.2-A)
+> Related Docs:
+> - docs/README.md
+> - docs/03-stage1/README.md
+> - docs/03-stage1/compliance-basics.md
+> - docs/03-stage1/content-release-checklist.md
+> - docs/04-stage2/mbti-report-engine-v1.2.md
+
 # 文案禁区清单（Copywriting No-Go List）— v0.2.1（对齐 API & 合规）
 
 版本：**v0.2.1**  

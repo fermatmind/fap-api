@@ -1,112 +1,82 @@
-# FAP 文档体系与版本规则（Stage 1 / v0.2-A）
+> Status: Active
+> Owner: liufuwei
+> Last Updated: 2025-12-16
+> Version: Docs Index v0.2.1
+> Related Docs:
+> - docs/03-stage1/README.md
+> - docs/04-stage2/README.md
 
-本目录（docs/）是 FAP v0.2 的“规范与口径权威源”。  
-任何接口字段、事件口径、内容资产结构、发布回滚规则的变更，必须先改 docs，再改代码。
+# FAP 文档总入口（Docs Index）
 
----
-
-## 1) 文档分层：哪些是“规范源”，哪些是“说明/记录”
-
-### 1.1 规范源（Source of Truth）
-以下文件属于“规范源”，出现冲突时以它们为准：
-
-- `docs/fap-v0.2-glossary.md`  
-  领域词典：字段名、概念、口径定义（scale/attempt/result/event 等）
-- `docs/api-v0.2-spec.md`  
-  API 契约：路由、请求/响应结构、错误码、字段类型
-- `docs/mbti-content-schema.md`  
-  内容结构规范：TypeProfile、profile_version 命名、资产目录规则
-- `docs/content-release-checklist.md`  
-  内容发布/回滚清单：发布步骤、回滚条件、验证点
-- `docs/compliance-basics.md`  
-  合规最小三件套：隐私说明、数据用途、用户权益通道
-- `docs/copywriting-no-go-list.md`  
-  文案禁区：绝对化用语、医疗诊断、歧视与高风险表达等
-
-### 1.2 说明/记录（Optional / Notes）
-可选文档，不作为强制口径源（但建议保留）：
-- `docs/weekly-ritual.md`（周复盘执行流程）
-- `docs/acceptance-playbook.md`（验收剧本 / 手工测试步骤）
-- `docs/deploy-basics.md`（部署说明）
-- 任何 `docs/notes-*`、`docs/rfcs/*`（讨论稿、会议纪要、决策记录）
+本目录是 Fermat Assessment Platform（FAP）的规范与阶段执行文档入口。
+原则：**Docs-first、口径统一、可验收、可回滚**。
 
 ---
 
-## 2) 版本命名规则（v0.2 / v0.2-A / v0.2-B）
+## 0) 快速导航（Start Here）
 
-### 2.1 平台版本（Platform Version）
-- `v0.2`：对外 API 版本（路由前缀 `/api/v0.2`）
-- `v0.2-A`：Stage 1（系统能力建设）里程碑标签
-- `v0.2-B`：Stage 2（业务闭环：测评→报告→分享→增长）里程碑标签
+- Stage 1（V0.2-A）：中台最小骨架（规范/口径/发布/合规基础）
+  - docs/03-stage1/README.md
 
-> 说明：A/B 是“阶段里程碑”，不一定体现在 API 路由里；API 路由仍保持 v0.2。
-
-### 2.2 量表版本（scale_version）
-- `scale_version`：量表题库与评分逻辑的版本号  
-- 示例：`MBTI` 的 `scale_version = v0.2`（对应 144 题 + 当前评分逻辑）
-
-规则：
-- 改题目/改评分逻辑 => 必须升 `scale_version`（例如 v0.3）
-- 旧版本结果可回溯、可重算，不被新版本破坏
-
-### 2.3 内容版本（profile_version）
-- `profile_version`：解释文案/报告内容资产版本号（与题库/评分版本解耦）
-- 示例：`mbti32-v2.5`、`mbti32-cn-v1`
-
-规则：
-- 改文案/改结构/改分享字段 => 升 `profile_version`
-- 不改变 `scale_version` 的情况下也可以升级 `profile_version`
-
-### 2.4 内容包版本（content_package_version）
-- `content_package_version`：内容资产包的版本号（用于发布/回滚与灰度）
-- 示例：`MBTI-CN-v0.2-pack.1`
-
-规则：
-- 每次内容包发布，版本 +1（pack.1 / pack.2…）
-- `profile_version` 属于“对外标识”，`content_package_version` 属于“发布工单/包版本”
+- Stage 2（V0.2-B）：中国大陆业务闭环（测评→报告→分享→增长）
+  - docs/04-stage2/README.md
 
 ---
 
-## 3) 三个版本之间的关系（速查表）
+## 1) 文档体系与目录约定
 
-| 概念 | 字段名 | 决定什么 | 什么时候升级 | 示例 |
-|---|---|---|---|---|
-| API版本 | 路由前缀 | 对外接口契约 | 接口结构/契约破坏性变更 | `/api/v0.2` |
-| 量表版本 | scale_version | 题库与评分逻辑 | 改题/改算分/改维度 | `v0.2` |
-| 内容版本 | profile_version | 报告文案与结构 | 改文案/模块/卡片 | `mbti32-v2.5` |
-| 内容包版本 | content_package_version | 发布/回滚与灰度包 | 每次发布动作 | `MBTI-CN-v0.2-pack.1` |
+- `docs/03-stage1/`：Stage 1 产物（全局口径、API 规范、合规基础、发布清单）
+- `docs/04-stage2/`：Stage 2 产物（闭环总纲、报告引擎 v1.2、漏斗、用户权益、验收剧本）
+- `content_packages/`：内容资产包（可版本化、可灰度、可回滚）
 
 ---
 
-## 4) 变更流程（Docs-first）
+## 2) 全局口径（所有阶段必须遵守）
 
-### 4.1 改动原则
-- 任何“口径、字段、契约、事件、内容结构”变更：先改 docs，再改代码
-- 禁止“只改代码不改 docs”，否则视为不合格变更
+### 2.1 版本号口径（最小集合）
+- `scale_version`：量表/题库版本（例：`v0.2`）
+- `profile_version`：32 型主档骨架版本（例：`mbti32-v2.5`）
+- `content_package_version`：内容资产包版本（例：`MBTI-CN-v0.2`）
+- `report_engine_version`：报告引擎版本（例：`v1.2`）
+- `policy_version`：组装策略/阈值策略版本（例：`policy-v0.2-r1`）
 
-### 4.2 文档改动的自检清单（PR 合并前）
-改动任一规范源文档时，必须自检：
+> 约束：线上数据可回溯；升级只能“加版本”，不能覆盖旧版本的语义。
 
-1) 字段名是否与 Glossary 一致（snake_case / enum 值一致）
-2) API 请求/响应结构是否与 `api-v0.2-spec.md` 一致（ok/error/message/data）
-3) 事件口径是否与 Glossary 的 event_code 定义一致
-4) 版本号是否符合规则：scale_version / profile_version / content_package_version
-5) 是否影响已落库数据：attempts/results/events 的兼容性是否仍然成立
-6) 是否需要更新发布/回滚清单（content-release-checklist）
+### 2.2 API 返回 Envelope 口径
+所有接口统一返回：
+- `ok`
+- `error`
+- `message`
+- `data`
 
-### 4.3 发布回滚边界（避免线上不可控）
-允许“只改内容不改代码”的范围（推荐）：
-- `content_packages/**`（内容资产包）
-- `docs/**`（规范与说明）
+（详细定义见 Stage 1 API 文档）
 
-需要发版/迁移的范围（谨慎）：
-- `backend/**`（接口、模型、逻辑）
-- `database/migrations/**`（结构变更）
+### 2.3 命名与字段风格
+- 字段命名：`snake_case`
+- 时间：ISO8601（UTC 或明确时区）
+- 枚举值：在 Glossary 内定义为准
 
 ---
 
-## 5) Stage 1 完成定义（v0.2-A）
-当以下条件同时满足，可认为 Stage 1 完成：
-- 规范源文档齐全且互相一致（glossary / api spec / content schema / release / compliance）
-- POST /attempts 与 GET /attempts/{id}/result 可跑通
-- events 可落库并能拉出 7 天统计（D1 周报口径可执行）
+## 3) 变更与发布规则（Docs-first）
+
+- 任何“口径/字段/事件/版本号”变化：先改文档，再改代码。
+- 内容资产变更：按发布清单走（灰度→发布→回滚）。
+- 事件词典与漏斗口径：以 Stage 1 Glossary + Stage 2 Funnel Spec 为准。
+
+---
+
+## 4) 推荐阅读顺序（新加入项目时）
+
+1) docs/03-stage1/README.md（先理解口径与规范）
+2) docs/03-stage1/api-v0.2-spec.md（接口口径）
+3) docs/04-stage2/README.md（Stage2 总纲与里程碑）
+4) docs/04-stage2/mbti-report-engine-v1.2.md（报告引擎结构）
+5) docs/04-stage2/analytics-stage2-funnel-spec.md（漏斗指标与事件映射）
+
+---
+
+## 5) 验收入口（Definition of Done）
+
+- Stage 1 验收：见 `docs/03-stage1/README.md`
+- Stage 2 验收：见 `docs/04-stage2/acceptance-playbook.md`
