@@ -2,23 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasUuids;
 
-    protected $table = 'events';
-
-    // 主键是 UUID，不自增
     public $incrementing = false;
-    protected $keyType = 'string';
+    protected $keyType = "string";
 
-    protected $guarded = [];
+    protected $fillable = [
+        "event_code",
+        "anon_id",
+        "attempt_id",
+        "meta_json",
+    ];
 
     protected $casts = [
-        'meta_json'   => 'array',
-        'occurred_at' => 'datetime',
+        "meta_json" => "array",
     ];
 }
