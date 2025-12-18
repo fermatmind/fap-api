@@ -10,7 +10,7 @@ use App\Http\Controllers\EventController;
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-| 由 RouteServiceProvider 加载，并自动带上 /api 前缀
+| 由框架加载，并自动带上 /api 前缀
 | 所以 prefix('v0.2') 下的 /health 实际路径是：
 |   /api/v0.2/health
 |--------------------------------------------------------------------------
@@ -50,4 +50,8 @@ Route::prefix('v0.2')->group(function () {
     // 7) ✅ 统一事件上报接口
     // POST /api/v0.2/events
     Route::post('/events', [EventController::class, 'store']);
+
+    // 8) ✅ v1.2 Report（M3-0：契约冻结）
+    // GET /api/v0.2/attempts/{id}/report
+    Route::get('/attempts/{id}/report', [MbtiController::class, 'getReport']);
 });

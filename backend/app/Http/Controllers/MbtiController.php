@@ -99,8 +99,8 @@ class MbtiController extends Controller
         }
 
         // 只取 active + 排序
-        $items = array_values(array_filter($items, fn($q) => ($q['is_active'] ?? true) === true));
-        usort($items, fn($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
+        $items = array_values(array_filter($items, fn ($q) => ($q['is_active'] ?? true) === true));
+        usort($items, fn ($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
 
         if (count($items) !== 144) {
             return response()->json([
@@ -230,9 +230,13 @@ class MbtiController extends Controller
             $dimN[$dim] += 1;
             $sumTowardP1[$dim] += $towardP1;
 
-            if ($towardP1 > 0) $countP1[$dim] += 1;
-            elseif ($towardP1 < 0) $countP2[$dim] += 1;
-            else $countNeutral[$dim] += 1;
+            if ($towardP1 > 0) {
+                $countP1[$dim] += 1;
+            } elseif ($towardP1 < 0) {
+                $countP2[$dim] += 1;
+            } else {
+                $countNeutral[$dim] += 1;
+            }
         }
 
         // scores_pct：[-2n,+2n] -> [0,100]
@@ -371,13 +375,13 @@ class MbtiController extends Controller
                 'region'        => $payload['region'] ?? 'CN_MAINLAND',
                 'locale'        => $payload['locale'] ?? 'zh-CN',
                 'meta_json'     => [
-                    'answer_count'   => count($payload['answers']),
-                    'question_count' => $attempt->question_count,
-                    'type_code'      => $result->type_code,
-                    'scores_pct'     => $scoresPct,
-                    'axis_states'    => $axisStates,
-                    'profile_version'=> $profileVersion,
-                    'content_package_version' => $contentPackageVersion,
+                    'answer_count'             => count($payload['answers']),
+                    'question_count'           => $attempt->question_count,
+                    'type_code'                => $result->type_code,
+                    'scores_pct'               => $scoresPct,
+                    'axis_states'              => $axisStates,
+                    'profile_version'          => $profileVersion,
+                    'content_package_version'  => $contentPackageVersion,
                 ],
             ]);
 
@@ -465,33 +469,6 @@ class MbtiController extends Controller
     }
 
     /**
-     * 从 storage/app(private)/content_packages/<pkg>/share_snippets.json 读取指定 type_code 分享字段
-     */
-    private function loadShareSnippet(string $contentPackageVersion, string $typeCode): ?array
-    {
-        $path = "content_packages/{$contentPackageVersion}/share_snippets.json";
-
-        if (!Storage::disk('local')->exists($path)) {
-            return null;
-        }
-
-        $raw  = Storage::disk('local')->get($path);
-        $json = json_decode($raw, true);
-
-        if (!is_array($json)) {
-            return null;
-        }
-
-        $items = $json['items'] ?? [];
-        if (!is_array($items)) {
-            return null;
-        }
-
-        $snippet = $items[$typeCode] ?? null;
-        return is_array($snippet) ? $snippet : null;
-    }
-
-    /**
      * GET /api/v0.2/attempts/{id}/share
      * ✅ 只返回分享文案骨架
      * ✅ 不写 events（share_generate/share_click 由前端 POST /events 上报）
@@ -533,6 +510,162 @@ class MbtiController extends Controller
             'keywords'      => $merged['keywords'] ?? [],
             'short_summary' => $merged['short_summary'] ?? null,
         ]);
+    }
+
+    /**
+     * GET /api/v0.2/attempts/{id}/report
+     * v1.2 动态报告引擎（M3-0：先把 JSON 契约定死）
+     *
+     * 约定：
+     * - 不让前端传阈值、不让前端算 Top2、不让前端判断 borderline
+     * - 字段必须稳定存在（哪怕内容是占位）
+     */
+    public function getReport(Request $request, string $attemptId)
+    {
+        $result = Result::where('attempt_id', $attemptId)->first();
+
+        if (!$result) {
+            return response()->json([
+                'ok'      => false,
+                'error'   => 'RESULT_NOT_FOUND',
+                'message' => 'Result not found for given attempt_id',
+            ], 404);
+        }
+
+        $attempt = Attempt::where('id', $attemptId)->first();
+
+        // 版本信息：全部从 results/配置里取（不依赖前端）
+        $profileVersion = $result->profile_version
+            ?? config('fap.profile_version', 'mbti32-v2.5');
+
+        $contentPackageVersion = $result->content_package_version
+            ?? $this->currentContentPackageVersion();
+
+        // 读 type_profiles（最小骨架）
+        $profile = $this->loadTypeProfile($contentPackageVersion, $result->type_code);
+
+        // ✅ 强制 5 轴全量输出
+        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
+
+        $scoresPct  = $result->scores_pct ?? [];
+        $axisStates = $result->axis_states ?? [];
+
+        foreach ($dims as $d) {
+            if (!array_key_exists($d, $scoresPct)) {
+                $scoresPct[$d] = 50;
+            }
+            if (!array_key_exists($d, $axisStates)) {
+                $axisStates[$d] = 'moderate';
+            }
+        }
+
+        // scores（稳定结构：pct/state/side/delta）
+        $scores = [];
+        foreach ($dims as $dim) {
+            $pct   = (int) ($scoresPct[$dim] ?? 50);
+            $state = (string) ($axisStates[$dim] ?? 'moderate');
+
+            [$p1, $p2] = $this->getDimensionPoles($dim);
+            $side = ($pct >= 50) ? $p1 : $p2;
+
+            $scores[$dim] = [
+                'pct'   => $pct,
+                'state' => $state,
+                'side'  => $side,
+                'delta' => abs($pct - 50),
+            ];
+        }
+
+        // 可选：记录 report_view（和 result_view 类似）
+        $this->logEvent('report_view', $request, [
+            'anon_id'       => $attempt?->anon_id,
+            'scale_code'    => $result->scale_code,
+            'scale_version' => $result->scale_version,
+            'attempt_id'    => $attemptId,
+            'region'        => $attempt?->region ?? 'CN_MAINLAND',
+            'locale'        => $attempt?->locale ?? 'zh-CN',
+            'meta_json'     => [
+                'type_code' => $result->type_code,
+                'engine'    => 'v1.2',
+            ],
+        ]);
+
+        // ✅ M3-0：契约先定死，后续只“填内容”，不改结构
+        return response()->json([
+            'ok'         => true,
+            'attempt_id' => $attemptId,
+            'type_code'  => $result->type_code,
+
+            'versions' => [
+                'engine'                  => 'v1.2',
+                'profile_version'         => $profileVersion,
+                'content_package_version' => $contentPackageVersion,
+            ],
+
+            'scores' => $scores,
+
+            // TypeProfile（最小骨架：先返回 short 版也行）
+            'profile' => [
+                'type_code'     => $profile['type_code'] ?? $result->type_code,
+                'type_name'     => $profile['type_name'] ?? null,
+                'tagline'       => $profile['tagline'] ?? null,
+                'rarity'        => $profile['rarity'] ?? null,
+                'keywords'      => $profile['keywords'] ?? [],
+                'short_summary' => $profile['short_summary'] ?? null,
+            ],
+
+            // M3-1～M3-6 后续逐步填充（先占位，字段必须存在）
+            'identity_card'   => null,
+            'highlights'      => [],
+            'borderline_note' => null,
+
+            'layers' => [
+                'role_card'     => null,
+                'strategy_card' => null,
+                'identity'      => null,
+            ],
+
+            // 结果四区块：先空 cards（字段必须存在）
+            'sections' => [
+                'traits' => ['cards' => []],
+                'career' => ['cards' => []],
+                'growth' => ['cards' => []],
+                'relationships' => ['cards' => []],
+            ],
+
+            'recommended_reads' => [],
+        ]);
+    }
+
+    // =========================
+    // Private helpers (must be last)
+    // =========================
+
+    /**
+     * 从 storage/app(private)/content_packages/<pkg>/share_snippets.json 读取指定 type_code 分享字段
+     */
+    private function loadShareSnippet(string $contentPackageVersion, string $typeCode): ?array
+    {
+        $path = "content_packages/{$contentPackageVersion}/share_snippets.json";
+
+        if (!Storage::disk('local')->exists($path)) {
+            return null;
+        }
+
+        $raw  = Storage::disk('local')->get($path);
+        $json = json_decode($raw, true);
+
+        if (!is_array($json)) {
+            return null;
+        }
+
+        $items = $json['items'] ?? [];
+        if (!is_array($items)) {
+            return null;
+        }
+
+        $snippet = $items[$typeCode] ?? null;
+        return is_array($snippet) ? $snippet : null;
     }
 
     /**
@@ -592,16 +725,20 @@ class MbtiController extends Controller
             return $this->questionsIndex;
         }
 
-        $items = array_values(array_filter($items, fn($q) => ($q['is_active'] ?? true) === true));
+        $items = array_values(array_filter($items, fn ($q) => ($q['is_active'] ?? true) === true));
 
         $idx = [];
         foreach ($items as $q) {
             $qid = $q['question_id'] ?? null;
-            if (!$qid) continue;
+            if (!$qid) {
+                continue;
+            }
 
             $scoreMap = [];
             foreach (($q['options'] ?? []) as $o) {
-                if (!isset($o['code'])) continue;
+                if (!isset($o['code'])) {
+                    continue;
+                }
                 $scoreMap[strtoupper($o['code'])] = (int) ($o['score'] ?? 0);
             }
 
