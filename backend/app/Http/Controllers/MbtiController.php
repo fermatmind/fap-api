@@ -5,20 +5,33 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Attempt;
 use App\Models\Result;
-use App\Models\Event;
+
+use App\Support\WritesEvents;
 
 class MbtiController extends Controller
 {
+    use WritesEvents;
+
     /**
      * 缓存：本次请求内复用题库索引
      * @var array|null
      */
     private ?array $questionsIndex = null;
+
+    /**
+     * 当前内容包版本（统一入口）
+     * - 优先 env('MBTI_CONTENT_PACKAGE')
+     * - 否则用 config('fap.content_package_version')
+     */
+    private function currentContentPackageVersion(): string
+    {
+        return env('MBTI_CONTENT_PACKAGE', config('fap.content_package_version', 'MBTI-CN-v0.2.1'));
+    }
 
     /**
      * 健康检查：确认 API 服务在线
@@ -51,12 +64,12 @@ class MbtiController extends Controller
 
     /**
      * GET /api/v0.2/scales/MBTI/questions
-     * ✅ 读 content_packages/<pkg>/questions.json
+     * ✅ 读 content_packages/<pkg>/questions.json（仓库根目录 content_packages）
      * ✅ 对外脱敏：不返回 score / key_pole / direction / irt / is_active
      */
     public function questions()
     {
-        $pkg  = env('MBTI_CONTENT_PACKAGE', 'MBTI-CN-v0.2.1-TEST');
+        $pkg  = $this->currentContentPackageVersion();
         $path = $this->contentPackagePath($pkg, 'questions.json');
 
         if (!is_file($path)) {
@@ -116,13 +129,13 @@ class MbtiController extends Controller
         }, $items);
 
         return response()->json([
-            'ok'       => true,
-            'scale_code' => 'MBTI',
-            'version'  => 'v0.2',
-            'region'   => 'CN_MAINLAND',
-            'locale'   => 'zh-CN',
+            'ok'                      => true,
+            'scale_code'              => 'MBTI',
+            'version'                 => 'v0.2',
+            'region'                  => 'CN_MAINLAND',
+            'locale'                  => 'zh-CN',
             'content_package_version' => $pkg,
-            'items'    => $safe,
+            'items'                   => $safe,
         ]);
     }
 
@@ -174,16 +187,16 @@ class MbtiController extends Controller
         }
 
         // 维度：固定 5 轴
-        $dims = ['EI','SN','TF','JP','AT'];
+        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
 
         // 统计
-        $dimN        = array_fill_keys($dims, 0); // 题数
-        $sumTowardP1 = array_fill_keys($dims, 0); // 朝 “第一极” 的累积分（-2..+2）
+        $dimN        = array_fill_keys($dims, 0);
+        $sumTowardP1 = array_fill_keys($dims, 0);
 
         // 额外归档：用于审计/可视化
-        $countP1     = array_fill_keys($dims, 0); // >0
-        $countP2     = array_fill_keys($dims, 0); // <0
-        $countNeutral= array_fill_keys($dims, 0); // ==0
+        $countP1      = array_fill_keys($dims, 0);
+        $countP2      = array_fill_keys($dims, 0);
+        $countNeutral = array_fill_keys($dims, 0);
 
         foreach ($payload['answers'] as $a) {
             $qid  = $a['question_id'];
@@ -196,27 +209,19 @@ class MbtiController extends Controller
                 continue;
             }
 
-            // 取选项分值
             $scoreMap = $meta['score_map'] ?? [];
             if (!array_key_exists($code, $scoreMap)) {
-                // 理论上不会发生（validate 已限制 A~E），但还是防御一下
                 continue;
             }
 
-            $rawScore  = (int) $scoreMap[$code];                 // 例如 A=2 ... E=-2
-            $direction = (int) ($meta['direction'] ?? 1);        // 1 或 -1
-            $keyPole   = (string) ($meta['key_pole'] ?? '');     // 例如 E/I/S/N/T/F/J/P/A/T
+            $rawScore  = (int) $scoreMap[$code];
+            $direction = (int) ($meta['direction'] ?? 1);
+            $keyPole   = (string) ($meta['key_pole'] ?? '');
 
-            // 先应用 direction（决定该题正负方向）
             $signed = $rawScore * ($direction === 0 ? 1 : $direction);
 
-            // 把“signed 分数”统一换算成：朝维度第一极（P1）的分数
-            // 维度第一极定义：EI=>E, SN=>S, TF=>T, JP=>J, AT=>A
             [$p1, $p2] = $this->getDimensionPoles($dim);
 
-            // 约定：signed 的“正方向”指向 key_pole
-            // 若 key_pole 是 p1，则 signed 正 -> 朝 p1
-            // 若 key_pole 是 p2，则 signed 正 -> 朝 p2，所以朝 p1 要取反
             $towardP1 = $signed;
             if ($keyPole === $p2) {
                 $towardP1 = -$signed;
@@ -230,7 +235,7 @@ class MbtiController extends Controller
             else $countNeutral[$dim] += 1;
         }
 
-        // scores_pct：把 sumTowardP1（范围 [-2n, +2n]）映射到 0~100（50 是中性）
+        // scores_pct：[-2n,+2n] -> [0,100]
         $scoresPct = [];
         foreach ($dims as $dim) {
             $n = (int) $dimN[$dim];
@@ -238,11 +243,10 @@ class MbtiController extends Controller
                 $scoresPct[$dim] = 50;
                 continue;
             }
-            // 公式：pct = (sum + 2n) / (4n) * 100
             $scoresPct[$dim] = (int) round((($sumTowardP1[$dim] + 2 * $n) / (4 * $n)) * 100);
         }
 
-        // type_code：四字母 + -A/-T（AT>=50 => A，否则 T）
+        // type_code：四字母 + -A/-T
         $letters = [
             'EI' => $scoresPct['EI'] >= 50 ? 'E' : 'I',
             'SN' => $scoresPct['SN'] >= 50 ? 'S' : 'N',
@@ -252,7 +256,7 @@ class MbtiController extends Controller
         $atSuffix = $scoresPct['AT'] >= 50 ? 'A' : 'T';
         $typeCode = implode('', $letters) . '-' . $atSuffix;
 
-        // axis_states：把连续百分比离散化
+        // axis_states：离散化
         $axisStates = [];
         foreach ($scoresPct as $dim => $pct) {
             $d = abs($pct - 50);
@@ -266,19 +270,18 @@ class MbtiController extends Controller
             };
         }
 
-        // scores_json：可审计（仍保持 a/b/total 字段，兼容你原来的结构）
+        // scores_json：可审计
         $scoresJson = [];
         foreach ($dims as $dim) {
             $scoresJson[$dim] = [
-                'a'       => $countP1[$dim],          // 朝 P1 的次数（>0）
-                'b'       => $countP2[$dim],          // 朝 P2 的次数（<0）
-                'neutral' => $countNeutral[$dim],     // 中立次数（=0）
-                'sum'     => $sumTowardP1[$dim],      // 朝 P1 的累计分
-                'total'   => $dimN[$dim],             // 该维度题数
+                'a'       => $countP1[$dim],
+                'b'       => $countP2[$dim],
+                'neutral' => $countNeutral[$dim],
+                'sum'     => $sumTowardP1[$dim],
+                'total'   => $dimN[$dim],
             ];
         }
 
-        // answers_summary_json：最小归档
         $answersSummary = [
             'answer_count' => count($payload['answers']),
             'dims_total'   => $dimN,
@@ -286,7 +289,7 @@ class MbtiController extends Controller
         ];
 
         $profileVersion        = config('fap.profile_version', 'mbti32-v2.5');
-        $contentPackageVersion = config('fap.content_package_version', 'MBTI-CN-v0.2.1');
+        $contentPackageVersion = $this->currentContentPackageVersion();
 
         return DB::transaction(function () use (
             $request,
@@ -358,7 +361,7 @@ class MbtiController extends Controller
 
             $result = Result::create($resultData);
 
-            // 3) 记录 test_submit 事件
+            // 3) test_submit（强一致：事务成功后写）
             $this->logEvent('test_submit', $request, [
                 'anon_id'       => $payload['anon_id'],
                 'scale_code'    => $attempt->scale_code,
@@ -373,6 +376,8 @@ class MbtiController extends Controller
                     'type_code'      => $result->type_code,
                     'scores_pct'     => $scoresPct,
                     'axis_states'    => $axisStates,
+                    'profile_version'=> $profileVersion,
+                    'content_package_version' => $contentPackageVersion,
                 ],
             ]);
 
@@ -394,12 +399,13 @@ class MbtiController extends Controller
 
     /**
      * GET /api/v0.2/attempts/{id}/result
+     * 注意：这里会写 result_view（但会在 logEvent 内 10 秒去抖）
      */
     public function getResult(Request $request, string $attemptId)
     {
         $result = Result::where('attempt_id', $attemptId)->first();
 
-        if (! $result) {
+        if (!$result) {
             return response()->json([
                 'ok'      => false,
                 'error'   => 'RESULT_NOT_FOUND',
@@ -422,7 +428,7 @@ class MbtiController extends Controller
         ]);
 
         // ✅ 强制 5 轴全量输出
-        $dims = ['EI','SN','TF','JP','AT'];
+        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
 
         $scoresJson = $result->scores_json ?? [];
         $scoresPct  = $result->scores_pct ?? [];
@@ -430,7 +436,7 @@ class MbtiController extends Controller
 
         foreach ($dims as $d) {
             if (!array_key_exists($d, $scoresJson)) {
-                $scoresJson[$d] = ['a'=>0,'b'=>0,'neutral'=>0,'sum'=>0,'total'=>0];
+                $scoresJson[$d] = ['a' => 0, 'b' => 0, 'neutral' => 0, 'sum' => 0, 'total' => 0];
             }
             if (!array_key_exists($d, $scoresPct)) {
                 $scoresPct[$d] = 50;
@@ -452,20 +458,49 @@ class MbtiController extends Controller
             'scores_pct'              => $scoresPct,
             'axis_states'             => $axisStates,
             'profile_version'         => $result->profile_version ?? config('fap.profile_version', 'mbti32-v2.5'),
-            'content_package_version' => $result->content_package_version ?? config('fap.content_package_version', 'MBTI-CN-v0.2.1'),
+            'content_package_version' => $result->content_package_version ?? $this->currentContentPackageVersion(),
 
             'computed_at'             => $result->computed_at,
         ]);
     }
 
     /**
+     * 从 storage/app(private)/content_packages/<pkg>/share_snippets.json 读取指定 type_code 分享字段
+     */
+    private function loadShareSnippet(string $contentPackageVersion, string $typeCode): ?array
+    {
+        $path = "content_packages/{$contentPackageVersion}/share_snippets.json";
+
+        if (!Storage::disk('local')->exists($path)) {
+            return null;
+        }
+
+        $raw  = Storage::disk('local')->get($path);
+        $json = json_decode($raw, true);
+
+        if (!is_array($json)) {
+            return null;
+        }
+
+        $items = $json['items'] ?? [];
+        if (!is_array($items)) {
+            return null;
+        }
+
+        $snippet = $items[$typeCode] ?? null;
+        return is_array($snippet) ? $snippet : null;
+    }
+
+    /**
      * GET /api/v0.2/attempts/{id}/share
+     * ✅ 只返回分享文案骨架
+     * ✅ 不写 events（share_generate/share_click 由前端 POST /events 上报）
      */
     public function getShare(Request $request, string $attemptId)
     {
         $result = Result::where('attempt_id', $attemptId)->first();
 
-        if (! $result) {
+        if (!$result) {
             return response()->json([
                 'ok'      => false,
                 'error'   => 'RESULT_NOT_FOUND',
@@ -473,30 +508,17 @@ class MbtiController extends Controller
             ], 404);
         }
 
-        $attempt = Attempt::where('id', $attemptId)->first();
-
         $shareId = (string) Str::uuid();
 
         $contentPackageVersion = $result->content_package_version
-            ?? config('fap.content_package_version', 'MBTI-CN-v0.2.1');
+            ?? $this->currentContentPackageVersion();
 
         $typeCode = $result->type_code;
 
+        $snippet = $this->loadShareSnippet($contentPackageVersion, $typeCode);
         $profile = $this->loadTypeProfile($contentPackageVersion, $typeCode);
 
-        $this->logEvent('share_view', $request, [
-            'anon_id'       => $attempt?->anon_id,
-            'scale_code'    => $result->scale_code,
-            'scale_version' => $result->scale_version,
-            'attempt_id'    => $attemptId,
-            'region'        => $attempt?->region ?? 'CN_MAINLAND',
-            'locale'        => $attempt?->locale ?? 'zh-CN',
-            'meta_json'     => [
-                'share_id'  => $shareId,
-                'type_code' => $typeCode,
-                'pkg'       => $contentPackageVersion,
-            ],
-        ]);
+        $merged = array_merge($profile ?: [], $snippet ?: []);
 
         return response()->json([
             'ok'                      => true,
@@ -505,57 +527,20 @@ class MbtiController extends Controller
             'content_package_version' => $contentPackageVersion,
             'type_code'               => $typeCode,
 
-            'type_name'     => $profile['type_name'] ?? null,
-            'tagline'       => $profile['tagline'] ?? null,
-            'rarity'        => $profile['rarity'] ?? null,
-            'keywords'      => $profile['keywords'] ?? [],
-            'short_summary' => $profile['short_summary'] ?? null,
+            'type_name'     => $merged['type_name'] ?? null,
+            'tagline'       => $merged['tagline'] ?? null,
+            'rarity'        => $merged['rarity'] ?? null,
+            'keywords'      => $merged['keywords'] ?? [],
+            'short_summary' => $merged['short_summary'] ?? null,
         ]);
     }
 
     /**
-     * 内部方法：写 events 表
-     */
-    protected function logEvent(string $eventCode, Request $request, array $extra = []): void
-    {
-        try {
-            $eventId = (string) Str::uuid();
-
-            Event::create([
-                'id'              => $eventId,
-                'event_code'      => $eventCode,
-                'user_id'         => null,
-                'anon_id'         => $extra['anon_id'] ?? $request->input('anon_id'),
-
-                'scale_code'      => $extra['scale_code']     ?? null,
-                'scale_version'   => $extra['scale_version']  ?? null,
-                'attempt_id'      => $extra['attempt_id']     ?? null,
-
-                'channel'         => $request->input('channel', $extra['channel'] ?? null),
-                'region'          => $extra['region']         ?? 'CN_MAINLAND',
-                'locale'          => $extra['locale']         ?? 'zh-CN',
-
-                'client_platform' => $request->input('client_platform', $extra['client_platform'] ?? null),
-                'client_version'  => $request->input('client_version',  $extra['client_version'] ?? null),
-
-                'occurred_at'     => now(),
-                'meta_json'       => $extra['meta_json']      ?? [],
-            ]);
-        } catch (\Throwable $e) {
-            Log::warning('event_log_failed', [
-                'event_code' => $eventCode,
-                'error'      => $e->getMessage(),
-            ]);
-        }
-    }
-     
-    /**
      * 内容包文件路径（统一入口）
-     * Laravel base_path() = backend/，内容包在仓库根目录 content_packages/
+     * Laravel base_path() = backend/，仓库根目录 content_packages/
      */
     private function contentPackagePath(string $pkg, string $file): string
     {
-        // 防止传入 ../ 之类的路径穿越
         $pkg  = trim($pkg, "/\\");
         $file = trim($file, "/\\");
 
@@ -564,7 +549,6 @@ class MbtiController extends Controller
 
     /**
      * 维度极性定义（第一极 / 第二极）
-     * EI=>E/I, SN=>S/N, TF=>T/F, JP=>J/P, AT=>A/T
      */
     private function getDimensionPoles(string $dim): array
     {
@@ -588,7 +572,7 @@ class MbtiController extends Controller
             return $this->questionsIndex;
         }
 
-        $pkg  = env('MBTI_CONTENT_PACKAGE', 'MBTI-CN-v0.2.1-TEST');
+        $pkg  = $this->currentContentPackageVersion();
         $path = $this->contentPackagePath($pkg, 'questions.json');
 
         if (!is_file($path)) {
@@ -615,7 +599,6 @@ class MbtiController extends Controller
             $qid = $q['question_id'] ?? null;
             if (!$qid) continue;
 
-            // options score map
             $scoreMap = [];
             foreach (($q['options'] ?? []) as $o) {
                 if (!isset($o['code'])) continue;
@@ -623,10 +606,10 @@ class MbtiController extends Controller
             }
 
             $idx[$qid] = [
-                'dimension'  => $q['dimension'] ?? null,
-                'key_pole'   => $q['key_pole'] ?? null,
-                'direction'  => $q['direction'] ?? 1,
-                'score_map'  => $scoreMap,
+                'dimension' => $q['dimension'] ?? null,
+                'key_pole'  => $q['key_pole'] ?? null,
+                'direction' => $q['direction'] ?? 1,
+                'score_map' => $scoreMap,
             ];
         }
 
@@ -636,7 +619,7 @@ class MbtiController extends Controller
 
     /**
      * 从内容包读取 type_profiles.json 并返回指定 type_code 的 profile
-     * 注意：Laravel 的 base_path() 是 backend 目录，所以要用 ../content_packages
+     * 注意：这里读的是仓库根目录 content_packages/<pkg>/type_profiles.json
      */
     private function loadTypeProfile(string $contentPackageVersion, string $typeCode): array
     {

@@ -11,11 +11,17 @@ class Event extends Model
 
     protected $table = 'events';
 
-    // 主键是 UUID，不自增
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'id',
+        'event_code',
+        'anon_id',
+        'attempt_id',
+        'occurred_at',
+        'meta_json',
+    ];
 
     protected $casts = [
         'meta_json'   => 'array',
