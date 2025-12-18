@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasUuids;
 
     protected $table = 'events';
 
+    // UUID 主键
     public $incrementing = false;
     protected $keyType = 'string';
 
@@ -24,7 +25,7 @@ class Event extends Model
     ];
 
     protected $casts = [
-        'meta_json'   => 'array',
+        'meta_json' => 'array',
         'occurred_at' => 'datetime',
     ];
 }
