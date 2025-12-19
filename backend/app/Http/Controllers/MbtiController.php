@@ -493,6 +493,7 @@ class MbtiController extends Controller
 
         $typeCode = $result->type_code;
 
+        // ✅ 统一走多路径兜底（修掉 share_snippets “storage-only” 的坑）
         $snippet = $this->loadShareSnippet($contentPackageVersion, $typeCode);
         $profile = $this->loadTypeProfile($contentPackageVersion, $typeCode);
 
@@ -592,29 +593,25 @@ class MbtiController extends Controller
         ]);
 
         // =========================
-        // M3-1：读 4 个 report 资产（替换占位）
+        // M3-1：读 report 资产（替换占位）
         // =========================
         $typeCode = $result->type_code;
 
-        $identityItems  = $this->loadReportAssetItems($contentPackageVersion, 'report_identity_cards.json');
-        $highlightItems = $this->loadReportAssetItems($contentPackageVersion, 'report_highlights.json');
-        $borderItems    = $this->loadReportAssetItems($contentPackageVersion, 'report_borderline_notes.json');
-        $readsItems     = $this->loadReportAssetItems($contentPackageVersion, 'report_recommended_reads.json');
+        $identityItems   = $this->loadReportAssetItems($contentPackageVersion, 'report_identity_cards.json');
+        $highlightItems  = $this->loadReportAssetItems($contentPackageVersion, 'report_highlights.json');
+        $borderItems     = $this->loadReportAssetItems($contentPackageVersion, 'report_borderline_notes.json');
+        $readsItems      = $this->loadReportAssetItems($contentPackageVersion, 'report_recommended_reads.json');
 
-        $identityCard    = $identityItems[$typeCode] ?? null;
-        $highlights      = $highlightItems[$typeCode] ?? [];
-        $borderlineNote  = $borderItems[$typeCode] ?? null;
-        $recommendedReads = $readsItems[$typeCode] ?? [];
+        $identityCard      = $identityItems[$typeCode] ?? null;
+        $highlights        = $highlightItems[$typeCode] ?? [];
+        $borderlineNote    = $borderItems[$typeCode] ?? null;
+        $recommendedReads  = $readsItems[$typeCode] ?? [];
 
         if (!is_array($highlights)) $highlights = [];
         if (!is_array($recommendedReads)) $recommendedReads = [];
 
-        // ✅ M3-0：契约先定死，后续只“填内容”，不改结构
-        return response()->json([
-            'ok'         => true,
-            'attempt_id' => $attemptId,
-            'type_code'  => $typeCode,
-
+        // ✅ 报告主体（同时返回顶层字段 + 兼容 report 包一层，避免 smoke jq 取错路径）
+        $reportPayload = [
             'versions' => [
                 'engine'                  => 'v1.2',
                 'profile_version'         => $profileVersion,
@@ -646,13 +643,25 @@ class MbtiController extends Controller
 
             // 结果四区块：先空 cards（字段必须存在）
             'sections' => [
-                'traits' => ['cards' => []],
-                'career' => ['cards' => []],
-                'growth' => ['cards' => []],
-                'relationships' => ['cards' => []],
+                'traits'         => ['cards' => []],
+                'career'         => ['cards' => []],
+                'growth'         => ['cards' => []],
+                'relationships'  => ['cards' => []],
             ],
 
             'recommended_reads' => $recommendedReads,
+        ];
+
+        return response()->json([
+            'ok'         => true,
+            'attempt_id' => $attemptId,
+            'type_code'  => $typeCode,
+
+            // ✅ 兼容：你之前 smoke 用 .report.identity_card
+            'report' => $reportPayload,
+
+            // ✅ 保持旧结构（如果前端已经在读顶层字段）
+            ...$reportPayload,
         ]);
     }
 
@@ -661,28 +670,11 @@ class MbtiController extends Controller
     // =========================
 
     /**
-     * 从 storage/app(private)/content_packages/<pkg>/share_snippets.json 读取指定 type_code 分享字段
+     * 从内容包读取 share_snippets.json 并返回指定 type_code（统一走多路径兜底）
      */
     private function loadShareSnippet(string $contentPackageVersion, string $typeCode): ?array
     {
-        $path = "content_packages/{$contentPackageVersion}/share_snippets.json";
-
-        if (!Storage::disk('local')->exists($path)) {
-            return null;
-        }
-
-        $raw  = Storage::disk('local')->get($path);
-        $json = json_decode($raw, true);
-
-        if (!is_array($json)) {
-            return null;
-        }
-
-        $items = $json['items'] ?? [];
-        if (!is_array($items)) {
-            return null;
-        }
-
+        $items = $this->loadReportAssetItems($contentPackageVersion, 'share_snippets.json');
         $snippet = $items[$typeCode] ?? null;
         return is_array($snippet) ? $snippet : null;
     }
@@ -842,96 +834,100 @@ class MbtiController extends Controller
         return is_array($profile) ? $profile : [];
     }
 
-/**
- * 读取 report assets（identity_cards / share_snippets / 其它 assets）
- * - 多路径兜底（storage private -> storage -> repo root -> backend）
- * - 兼容 JSON 结构：{items:{...}} / {items:[...]} / 直接是对象/数组
- * - 若 items 是 list，会按 type_code（或 meta.type_code）重建索引，避免 $items["ENTJ-A"] 取不到
- */
-private function loadReportAssetItems(string $contentPackageVersion, string $filename, ?string $primaryIndexKey = 'type_code'): array
-{
-    static $cache = [];
+    /**
+     * 读取 report assets（identity_cards / share_snippets / 其它 assets）
+     * - 多路径兜底（storage private -> storage -> repo root -> backend）
+     * - 兼容 JSON 结构：{items:{...}} / {items:[...]} / 直接是对象/数组
+     * - 若 items 是 list，会按 type_code（或 meta.type_code）重建索引，避免 $items["ENTJ-A"] 取不到
+     */
+    private function loadReportAssetItems(string $contentPackageVersion, string $filename, ?string $primaryIndexKey = 'type_code'): array
+    {
+        static $cache = [];
 
-    $cacheKey = $contentPackageVersion . '|' . $filename;
-    if (isset($cache[$cacheKey])) {
-        return $cache[$cacheKey];
-    }
-
-    $pkg = $contentPackageVersion;
-
-    // 允许你未来用 env 强行指定内容包根目录（可选）
-    $envRoot = env('FAP_CONTENT_PACKAGES_DIR');
-    $envRoot = is_string($envRoot) && $envRoot !== '' ? rtrim($envRoot, '/') : null;
-
-    $candidates = array_values(array_filter([
-        // 1) 优先：storage 私有内容包（你注释里提到的 share_snippets 典型放这里）
-        storage_path("app/private/content_packages/{$pkg}/{$filename}"),
-        // 2) 其次：storage 普通目录
-        storage_path("app/content_packages/{$pkg}/{$filename}"),
-
-        // 3) repo 根目录 content_packages（✅ 你的部署结构里这是最标准的）
-        base_path("../content_packages/{$pkg}/{$filename}"),
-
-        // 4) 兜底：backend/content_packages（有些人会把内容包 copy/symlink 到 backend 下）
-        base_path("content_packages/{$pkg}/{$filename}"),
-
-        // 5) 可选：env 指定根目录（如果你未来把内容包迁出 repo）
-        $envRoot ? "{$envRoot}/{$pkg}/{$filename}" : null,
-    ]));
-
-    $path = null;
-    foreach ($candidates as $p) {
-        if (is_string($p) && $p !== '' && file_exists($p)) {
-            $path = $p;
-            break;
+        $cacheKey = $contentPackageVersion . '|' . $filename;
+        if (isset($cache[$cacheKey])) {
+            return $cache[$cacheKey];
         }
-    }
 
-    if ($path === null) {
-        return $cache[$cacheKey] = [];
-    }
+        $pkg = trim($contentPackageVersion, "/\\");
 
-    $raw = file_get_contents($path);
-    $json = json_decode($raw, true);
-    if (!is_array($json)) {
-        return $cache[$cacheKey] = [];
-    }
+        // 可选：未来用 env 强行指定内容包根目录
+        $envRoot = env('FAP_CONTENT_PACKAGES_DIR');
+        $envRoot = is_string($envRoot) && $envRoot !== '' ? rtrim($envRoot, '/') : null;
 
-    // 兼容：{items: ...} 或者根就是 items
-    $items = $json['items'] ?? $json;
-    if (!is_array($items)) {
-        return $cache[$cacheKey] = [];
-    }
+        $candidates = array_values(array_filter([
+            // 1) storage 私有目录
+            storage_path("app/private/content_packages/{$pkg}/{$filename}"),
+            // 2) storage 普通目录
+            storage_path("app/content_packages/{$pkg}/{$filename}"),
 
-    // 判断是否 list（0..N）
-    $keys = array_keys($items);
-    $isList = (count($keys) > 0) && ($keys === range(0, count($keys) - 1));
+            // 3) repo 根目录 content_packages（✅ 你当前部署结构的标准位置）
+            base_path("../content_packages/{$pkg}/{$filename}"),
 
-    // 若是 list，则按 type_code 重建索引
-    if ($isList) {
-        $indexed = [];
-        foreach ($items as $it) {
-            if (!is_array($it)) continue;
+            // 4) backend/content_packages（兜底）
+            base_path("content_packages/{$pkg}/{$filename}"),
 
-            $k = null;
-            if ($primaryIndexKey && isset($it[$primaryIndexKey])) {
-                $k = $it[$primaryIndexKey];
-            } elseif (isset($it['type_code'])) {
-                $k = $it['type_code'];
-            } elseif (isset($it['meta']['type_code'])) {
-                $k = $it['meta']['type_code'];
-            } elseif (isset($it['id'])) {
-                $k = $it['id'];
-            } elseif (isset($it['code'])) {
-                $k = $it['code'];
+            // 5) env 指定根目录（可选）
+            $envRoot ? "{$envRoot}/{$pkg}/{$filename}" : null,
+        ]));
+
+        $path = null;
+        foreach ($candidates as $p) {
+            if (is_string($p) && $p !== '' && file_exists($p)) {
+                $path = $p;
+                break;
             }
-
-            if (!$k) continue;
-            $indexed[(string)$k] = $it;
         }
-        $items = $indexed;
-    }
 
-    return $cache[$cacheKey] = $items;
-}
+        if ($path === null) {
+            return $cache[$cacheKey] = [];
+        }
+
+        $raw = file_get_contents($path);
+        if ($raw === false || trim($raw) === '') {
+            return $cache[$cacheKey] = [];
+        }
+
+        $json = json_decode($raw, true);
+        if (!is_array($json)) {
+            return $cache[$cacheKey] = [];
+        }
+
+        // 兼容：{items: ...} 或者根就是 items
+        $items = $json['items'] ?? $json;
+        if (!is_array($items)) {
+            return $cache[$cacheKey] = [];
+        }
+
+        // 判断是否 list（0..N）
+        $keys = array_keys($items);
+        $isList = (count($keys) > 0) && ($keys === range(0, count($keys) - 1));
+
+        // 若是 list，则按 type_code 重建索引
+        if ($isList) {
+            $indexed = [];
+            foreach ($items as $it) {
+                if (!is_array($it)) continue;
+
+                $k = null;
+                if ($primaryIndexKey && isset($it[$primaryIndexKey])) {
+                    $k = $it[$primaryIndexKey];
+                } elseif (isset($it['type_code'])) {
+                    $k = $it['type_code'];
+                } elseif (isset($it['meta']['type_code'])) {
+                    $k = $it['meta']['type_code'];
+                } elseif (isset($it['id'])) {
+                    $k = $it['id'];
+                } elseif (isset($it['code'])) {
+                    $k = $it['code'];
+                }
+
+                if (!$k) continue;
+                $indexed[(string) $k] = $it;
+            }
+            $items = $indexed;
+        }
+
+        return $cache[$cacheKey] = $items;
+    }
 }

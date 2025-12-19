@@ -11,51 +11,67 @@ class ContentPackage
     }
 
     /**
-     * 内容包在仓库根目录 repo/content_packages/...
-     * Laravel base_path() 在 repo/backend
-     *
-     * 所以在服务器上通常是：
-     *   base_path("../content_packages/<pkg>/questions.json")
-     * 同时做一个兜底：允许本地有人把 content_packages 放在 backend/content_packages/
+     * 统一做“多路径兜底”：
+     * - 你的部署结构 base_path() = .../repo/backend
+     * - 内容包真实位置在 .../repo/content_packages（即 base_path("../content_packages")）
      */
+    private static function resolvePkgFile(string $pkg, string $file): string
+    {
+        $candidates = [
+            // ✅ 你当前真实存在的位置（repo 根目录）
+            base_path("../content_packages/{$pkg}/{$file}"),
+
+            // 兼容：如果未来把 content_packages 放进 backend/ 里
+            base_path("content_packages/{$pkg}/{$file}"),
+
+            // 兼容：如果内容包被搬到 storage（私有内容包）
+            storage_path("app/private/content_packages/{$pkg}/{$file}"),
+            storage_path("app/content_packages/{$pkg}/{$file}"),
+        ];
+
+        foreach ($candidates as $p) {
+            if (is_file($p)) return $p;
+        }
+
+        throw new \RuntimeException("content package file not found: pkg={$pkg}, file={$file}");
+    }
+
+    private static function loadJson(string $path): array
+    {
+        $raw = file_get_contents($path);
+        $json = json_decode($raw, true);
+
+        if ($json === null) {
+            throw new \RuntimeException("invalid JSON: {$path}");
+        }
+        if (!is_array($json)) {
+            throw new \RuntimeException("JSON must decode to array/object: {$path}");
+        }
+
+        return $json;
+    }
+
     public static function loadMbtiQuestionsRaw(): array
     {
         static $cache = null;
         if ($cache !== null) return $cache;
 
-        $pkg = self::mbtiPackageVersion();
+        $pkg  = self::mbtiPackageVersion();
+        $path = self::resolvePkgFile($pkg, "questions.json");
 
-        $candidates = [
-            base_path("../content_packages/{$pkg}/questions.json"), // ✅ 正确：repo/content_packages
-            base_path("content_packages/{$pkg}/questions.json"),    // 兜底：backend/content_packages
-        ];
+        $json = self::loadJson($path);
 
-        $path = null;
-        foreach ($candidates as $p) {
-            if (file_exists($p)) {
-                $path = $p;
-                break;
-            }
-        }
-
-        if ($path === null) {
-            throw new \RuntimeException(
-                "questions.json not found. tried: " . implode(" | ", $candidates)
-            );
-        }
-
-        $json = json_decode(file_get_contents($path), true);
-        if ($json === null) {
-            throw new \RuntimeException("questions.json invalid JSON: {$path}");
-        }
-
-        // 兼容两种格式：
-        // A) 直接是 144 个对象的数组（你截图这种 v2025）
-        // B) { items: [...] } 包装格式
-        $items = isset($json['items']) ? $json['items'] : $json;
+        // 兼容多种格式：
+        // A) 直接是数组 []
+        // B) { items: [...] }
+        // C) { questions: [...] } / { data: [...] }
+        $items = $json;
+        if (isset($json['items'])) $items = $json['items'];
+        if (isset($json['questions'])) $items = $json['questions'];
+        if (isset($json['data'])) $items = $json['data'];
 
         if (!is_array($items)) {
-            throw new \RuntimeException("questions.json must be array or {items:[]}: {$path}");
+            throw new \RuntimeException("questions.json must be array or {items/questions/data:[]}: {$path}");
         }
 
         $cache = $items;
@@ -68,15 +84,15 @@ class ContentPackage
         return array_map(function ($q) {
             $opts = $q['options'] ?? [];
             $opts = array_map(fn($o) => [
-                'code' => $o['code'],
-                'text' => $o['text'],
+                'code' => $o['code'] ?? null,
+                'text' => $o['text'] ?? null,
             ], $opts);
 
             return [
-                'question_id' => $q['question_id'],
-                'order'       => $q['order'],
-                'dimension'   => $q['dimension'],
-                'text'        => $q['text'],
+                'question_id' => $q['question_id'] ?? null,
+                'order'       => $q['order'] ?? null,
+                'dimension'   => $q['dimension'] ?? null,
+                'text'        => $q['text'] ?? null,
                 'options'     => $opts,
             ];
         }, $items);
