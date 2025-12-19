@@ -25,8 +25,7 @@ class MbtiController extends Controller
 
     /**
      * 当前内容包版本（统一入口）
-     * - 优先 env('MBTI_CONTENT_PACKAGE')
-     * - 否则用 config('fap.content_package_version')
+     * ✅ config-cache 安全：业务代码只读 config（.env 由 config/fap.php 读取）
      */
     private function currentContentPackageVersion(): string
     {
@@ -64,19 +63,21 @@ class MbtiController extends Controller
 
     /**
      * GET /api/v0.2/scales/MBTI/questions
-     * ✅ 读 content_packages/<pkg>/questions.json（仓库根目录 content_packages）
+     * ✅ 读 content_packages/<pkg>/questions.json（兼容根目录 or 子目录）
      * ✅ 对外脱敏：不返回 score / key_pole / direction / irt / is_active
      */
     public function questions()
     {
         $pkg  = $this->currentContentPackageVersion();
-        $path = $this->contentPackagePath($pkg, 'questions.json');
 
-        if (!is_file($path)) {
+        // ✅ 兼容：questions.json 在根目录 or 子目录
+        $path = $this->findPackageFile($pkg, 'questions.json');
+
+        if (!$path || !is_file($path)) {
             return response()->json([
                 'ok'    => false,
                 'error' => 'questions.json not found',
-                'path'  => $path,
+                'path'  => $path ?: "(not found in package: {$pkg})",
             ], 500);
         }
 
@@ -375,13 +376,13 @@ class MbtiController extends Controller
                 'region'        => $payload['region'] ?? 'CN_MAINLAND',
                 'locale'        => $payload['locale'] ?? 'zh-CN',
                 'meta_json'     => [
-                    'answer_count'             => count($payload['answers']),
-                    'question_count'           => $attempt->question_count,
-                    'type_code'                => $result->type_code,
-                    'scores_pct'               => $scoresPct,
-                    'axis_states'              => $axisStates,
-                    'profile_version'          => $profileVersion,
-                    'content_package_version'  => $contentPackageVersion,
+                    'answer_count'            => count($payload['answers']),
+                    'question_count'          => $attempt->question_count,
+                    'type_code'               => $result->type_code,
+                    'scores_pct'              => $scoresPct,
+                    'axis_states'             => $axisStates,
+                    'profile_version'         => $profileVersion,
+                    'content_package_version' => $contentPackageVersion,
                 ],
             ]);
 
@@ -590,11 +591,29 @@ class MbtiController extends Controller
             ],
         ]);
 
+        // =========================
+        // M3-1：读 4 个 report 资产（替换占位）
+        // =========================
+        $typeCode = $result->type_code;
+
+        $identityItems  = $this->loadReportAssetItems($contentPackageVersion, 'report_identity_cards.json');
+        $highlightItems = $this->loadReportAssetItems($contentPackageVersion, 'report_highlights.json');
+        $borderItems    = $this->loadReportAssetItems($contentPackageVersion, 'report_borderline_notes.json');
+        $readsItems     = $this->loadReportAssetItems($contentPackageVersion, 'report_recommended_reads.json');
+
+        $identityCard    = $identityItems[$typeCode] ?? null;
+        $highlights      = $highlightItems[$typeCode] ?? [];
+        $borderlineNote  = $borderItems[$typeCode] ?? null;
+        $recommendedReads = $readsItems[$typeCode] ?? [];
+
+        if (!is_array($highlights)) $highlights = [];
+        if (!is_array($recommendedReads)) $recommendedReads = [];
+
         // ✅ M3-0：契约先定死，后续只“填内容”，不改结构
         return response()->json([
             'ok'         => true,
             'attempt_id' => $attemptId,
-            'type_code'  => $result->type_code,
+            'type_code'  => $typeCode,
 
             'versions' => [
                 'engine'                  => 'v1.2',
@@ -606,7 +625,7 @@ class MbtiController extends Controller
 
             // TypeProfile（最小骨架：先返回 short 版也行）
             'profile' => [
-                'type_code'     => $profile['type_code'] ?? $result->type_code,
+                'type_code'     => $profile['type_code'] ?? $typeCode,
                 'type_name'     => $profile['type_name'] ?? null,
                 'tagline'       => $profile['tagline'] ?? null,
                 'rarity'        => $profile['rarity'] ?? null,
@@ -614,10 +633,10 @@ class MbtiController extends Controller
                 'short_summary' => $profile['short_summary'] ?? null,
             ],
 
-            // M3-1～M3-6 后续逐步填充（先占位，字段必须存在）
-            'identity_card'   => null,
-            'highlights'      => [],
-            'borderline_note' => null,
+            // M3-1：真实读取资产（结构稳定，内容可空）
+            'identity_card'   => $identityCard,
+            'highlights'      => $highlights,
+            'borderline_note' => $borderlineNote,
 
             'layers' => [
                 'role_card'     => null,
@@ -633,7 +652,7 @@ class MbtiController extends Controller
                 'relationships' => ['cards' => []],
             ],
 
-            'recommended_reads' => [],
+            'recommended_reads' => $recommendedReads,
         ]);
     }
 
@@ -669,18 +688,6 @@ class MbtiController extends Controller
     }
 
     /**
-     * 内容包文件路径（统一入口）
-     * Laravel base_path() = backend/，仓库根目录 content_packages/
-     */
-    private function contentPackagePath(string $pkg, string $file): string
-    {
-        $pkg  = trim($pkg, "/\\");
-        $file = trim($file, "/\\");
-
-        return base_path("../content_packages/{$pkg}/{$file}");
-    }
-
-    /**
      * 维度极性定义（第一极 / 第二极）
      */
     private function getDimensionPoles(string $dim): array
@@ -696,6 +703,55 @@ class MbtiController extends Controller
     }
 
     /**
+     * 在内容包目录里找某个文件（兼容：根目录 or 子目录）
+     * - 优先命中 root/<filename>
+     * - 否则递归搜索（限制深度，避免扫太大）
+     */
+    private function findPackageFile(string $pkg, string $filename, int $maxDepth = 3): ?string
+    {
+        $pkg = trim($pkg, "/\\");
+        $root = base_path("../content_packages/{$pkg}");
+
+        if (!is_dir($root)) {
+            return null;
+        }
+
+        // 1) 优先根目录直达
+        $direct = $root . DIRECTORY_SEPARATOR . $filename;
+        if (is_file($direct)) {
+            return $direct;
+        }
+
+        // 2) 递归找（限制深度）
+        try {
+            $dirIter = new \RecursiveDirectoryIterator(
+                $root,
+                \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS
+            );
+            $iter = new \RecursiveIteratorIterator($dirIter, \RecursiveIteratorIterator::SELF_FIRST);
+
+            foreach ($iter as $fileInfo) {
+                /** @var \SplFileInfo $fileInfo */
+                if (!$fileInfo->isFile()) continue;
+                if ($fileInfo->getFilename() !== $filename) continue;
+
+                // 计算相对深度
+                $relDir = str_replace($root, '', $fileInfo->getPath());
+                $relDir = trim(str_replace('\\', '/', $relDir), '/');
+                $depth = ($relDir === '') ? 0 : substr_count($relDir, '/') + 1;
+
+                if ($depth <= $maxDepth) {
+                    return $fileInfo->getPathname();
+                }
+            }
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        return null;
+    }
+
+    /**
      * 读取题库，并构建 question_id => meta 索引
      * meta: dimension, key_pole, direction, score_map
      */
@@ -706,9 +762,9 @@ class MbtiController extends Controller
         }
 
         $pkg  = $this->currentContentPackageVersion();
-        $path = $this->contentPackagePath($pkg, 'questions.json');
+        $path = $this->findPackageFile($pkg, 'questions.json');
 
-        if (!is_file($path)) {
+        if (!$path || !is_file($path)) {
             $this->questionsIndex = [];
             return $this->questionsIndex;
         }
@@ -756,13 +812,14 @@ class MbtiController extends Controller
 
     /**
      * 从内容包读取 type_profiles.json 并返回指定 type_code 的 profile
-     * 注意：这里读的是仓库根目录 content_packages/<pkg>/type_profiles.json
+     * 兼容：root/type_profiles.json 或子目录内的 type_profiles.json
      */
     private function loadTypeProfile(string $contentPackageVersion, string $typeCode): array
     {
-        $path = $this->contentPackagePath($contentPackageVersion, 'type_profiles.json');
+        $contentPackageVersion = trim($contentPackageVersion, "/\\");
+        $path = $this->findPackageFile($contentPackageVersion, 'type_profiles.json');
 
-        if (!is_file($path)) {
+        if (!$path || !is_file($path)) {
             return [];
         }
 
@@ -783,5 +840,31 @@ class MbtiController extends Controller
 
         $profile = $items[$typeCode] ?? null;
         return is_array($profile) ? $profile : [];
+    }
+
+    /**
+     * 读取 report 资产文件并返回 items（约定：{ "items": { "ESTJ-A": ... } }）
+     */
+    private function loadReportAssetItems(string $contentPackageVersion, string $filename): array
+    {
+        $contentPackageVersion = trim($contentPackageVersion, "/\\");
+        $path = $this->findPackageFile($contentPackageVersion, $filename);
+
+        if (!$path || !is_file($path)) {
+            return [];
+        }
+
+        $raw = file_get_contents($path);
+        if ($raw === false || trim($raw) === '') {
+            return [];
+        }
+
+        $data = json_decode($raw, true);
+        if (!is_array($data)) {
+            return [];
+        }
+
+        $items = $data['items'] ?? [];
+        return is_array($items) ? $items : [];
     }
 }
