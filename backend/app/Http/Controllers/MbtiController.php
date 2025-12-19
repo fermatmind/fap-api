@@ -30,7 +30,7 @@ class MbtiController extends Controller
      */
     private function currentContentPackageVersion(): string
     {
-        return env('MBTI_CONTENT_PACKAGE', config('fap.content_package_version', 'MBTI-CN-v0.2.1'));
+        return (string) config('fap.content_package_version', 'MBTI-CN-v0.2.1-TEST');
     }
 
     /**
