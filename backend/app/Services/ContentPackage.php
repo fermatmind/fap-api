@@ -10,16 +10,38 @@ class ContentPackage
         return env('MBTI_CONTENT_PACKAGE', 'MBTI-CN-v0.2.1-TEST');
     }
 
+    /**
+     * 内容包在仓库根目录 repo/content_packages/...
+     * Laravel base_path() 在 repo/backend
+     *
+     * 所以在服务器上通常是：
+     *   base_path("../content_packages/<pkg>/questions.json")
+     * 同时做一个兜底：允许本地有人把 content_packages 放在 backend/content_packages/
+     */
     public static function loadMbtiQuestionsRaw(): array
     {
         static $cache = null;
         if ($cache !== null) return $cache;
 
         $pkg = self::mbtiPackageVersion();
-        $path = base_path("content_packages/{$pkg}/questions.json");
 
-        if (!file_exists($path)) {
-            throw new \RuntimeException("questions.json not found: {$path}");
+        $candidates = [
+            base_path("../content_packages/{$pkg}/questions.json"), // ✅ 正确：repo/content_packages
+            base_path("content_packages/{$pkg}/questions.json"),    // 兜底：backend/content_packages
+        ];
+
+        $path = null;
+        foreach ($candidates as $p) {
+            if (file_exists($p)) {
+                $path = $p;
+                break;
+            }
+        }
+
+        if ($path === null) {
+            throw new \RuntimeException(
+                "questions.json not found. tried: " . implode(" | ", $candidates)
+            );
         }
 
         $json = json_decode(file_get_contents($path), true);
@@ -33,7 +55,7 @@ class ContentPackage
         $items = isset($json['items']) ? $json['items'] : $json;
 
         if (!is_array($items)) {
-            throw new \RuntimeException("questions.json must be array or {items:[]}");
+            throw new \RuntimeException("questions.json must be array or {items:[]}: {$path}");
         }
 
         $cache = $items;
