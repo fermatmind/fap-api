@@ -1,15 +1,813 @@
 {
-  "schema": "fap.report.identity_card.v1",
+  "schema": "fap.report.identity_cards.v1",
   "engine": "v1.2",
+  "rules": {
+    "style_presets": [
+      "classic",
+      "youth",
+      "minimal"
+    ],
+    "max_tags": 6
+  },
   "items": {
-    "DEFAULT": {
-      "template_id": "default",
-      "title": null,
-      "subtitle": null,
-      "badges": [],
-      "theme": {
-        "bg": null,
-        "accent": null
+    "ENTJ-A": {
+      "id": "idcard_ENTJ-A",
+      "type_code": "ENTJ-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ENTJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ENTJ-T": {
+      "id": "idcard_ENTJ-T",
+      "type_code": "ENTJ-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ENTJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ENTP-A": {
+      "id": "idcard_ENTP-A",
+      "type_code": "ENTP-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ENTP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ENTP-T": {
+      "id": "idcard_ENTP-T",
+      "type_code": "ENTP-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ENTP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ENFJ-A": {
+      "id": "idcard_ENFJ-A",
+      "type_code": "ENFJ-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ENFJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ENFJ-T": {
+      "id": "idcard_ENFJ-T",
+      "type_code": "ENFJ-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ENFJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ENFP-A": {
+      "id": "idcard_ENFP-A",
+      "type_code": "ENFP-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ENFP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ENFP-T": {
+      "id": "idcard_ENFP-T",
+      "type_code": "ENFP-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ENFP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ESTJ-A": {
+      "id": "idcard_ESTJ-A",
+      "type_code": "ESTJ-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ESTJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ESTJ-T": {
+      "id": "idcard_ESTJ-T",
+      "type_code": "ESTJ-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ESTJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ESTP-A": {
+      "id": "idcard_ESTP-A",
+      "type_code": "ESTP-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ESTP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ESTP-T": {
+      "id": "idcard_ESTP-T",
+      "type_code": "ESTP-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ESTP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ESFJ-A": {
+      "id": "idcard_ESFJ-A",
+      "type_code": "ESFJ-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ESFJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ESFJ-T": {
+      "id": "idcard_ESFJ-T",
+      "type_code": "ESFJ-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ESFJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ESFP-A": {
+      "id": "idcard_ESFP-A",
+      "type_code": "ESFP-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ESFP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ESFP-T": {
+      "id": "idcard_ESFP-T",
+      "type_code": "ESFP-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ESFP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "INTJ-A": {
+      "id": "idcard_INTJ-A",
+      "type_code": "INTJ-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "INTJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "INTJ-T": {
+      "id": "idcard_INTJ-T",
+      "type_code": "INTJ-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "INTJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "INTP-A": {
+      "id": "idcard_INTP-A",
+      "type_code": "INTP-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "INTP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "INTP-T": {
+      "id": "idcard_INTP-T",
+      "type_code": "INTP-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "INTP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "INFJ-A": {
+      "id": "idcard_INFJ-A",
+      "type_code": "INFJ-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "INFJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "INFJ-T": {
+      "id": "idcard_INFJ-T",
+      "type_code": "INFJ-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "INFJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "INFP-A": {
+      "id": "idcard_INFP-A",
+      "type_code": "INFP-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "INFP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "INFP-T": {
+      "id": "idcard_INFP-T",
+      "type_code": "INFP-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "INFP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ISTJ-A": {
+      "id": "idcard_ISTJ-A",
+      "type_code": "ISTJ-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ISTJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ISTJ-T": {
+      "id": "idcard_ISTJ-T",
+      "type_code": "ISTJ-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ISTJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ISTP-A": {
+      "id": "idcard_ISTP-A",
+      "type_code": "ISTP-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ISTP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ISTP-T": {
+      "id": "idcard_ISTP-T",
+      "type_code": "ISTP-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ISTP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ISFJ-A": {
+      "id": "idcard_ISFJ-A",
+      "type_code": "ISFJ-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ISFJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ISFJ-T": {
+      "id": "idcard_ISFJ-T",
+      "type_code": "ISFJ-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ISFJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ISFP-A": {
+      "id": "idcard_ISFP-A",
+      "type_code": "ISFP-A",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ISFP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ISFP-T": {
+      "id": "idcard_ISFP-T",
+      "type_code": "ISFP-T",
+      "locale": "zh-CN",
+      "title": "",
+      "subtitle": "",
+      "tagline": "",
+      "tags": [],
+      "summary": "",
+      "share_text": "",
+      "badge": {
+        "text": "费马人格档案",
+        "version": "MBTI v2.5"
+      },
+      "visual": {
+        "icon": "",
+        "bg_pattern": "",
+        "theme_color": "",
+        "accent_color": ""
+      },
+      "meta": {
+        "type_code": "ISFP-T",
+        "locale": "zh-CN"
       }
     }
   }

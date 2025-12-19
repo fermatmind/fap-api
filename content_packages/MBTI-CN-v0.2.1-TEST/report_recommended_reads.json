@@ -1,9 +1,44 @@
 {
   "schema": "fap.report.recommended_reads.v1",
   "engine": "v1.2",
-  "items": {
-    "ESTJ-A": [
-      { "id": "r1", "title": "高效沟通", "url": "https://fermatmind.com/reads/communication" }
+  "rules": {
+    "max_items": 5,
+    "allowed_domains": [
+      "fermatmind.com"
     ]
+  },
+  "items": {
+    "ENTJ-A": [],
+    "ENTJ-T": [],
+    "ENTP-A": [],
+    "ENTP-T": [],
+    "ENFJ-A": [],
+    "ENFJ-T": [],
+    "ENFP-A": [],
+    "ENFP-T": [],
+    "ESTJ-A": [],
+    "ESTJ-T": [],
+    "ESTP-A": [],
+    "ESTP-T": [],
+    "ESFJ-A": [],
+    "ESFJ-T": [],
+    "ESFP-A": [],
+    "ESFP-T": [],
+    "INTJ-A": [],
+    "INTJ-T": [],
+    "INTP-A": [],
+    "INTP-T": [],
+    "INFJ-A": [],
+    "INFJ-T": [],
+    "INFP-A": [],
+    "INFP-T": [],
+    "ISTJ-A": [],
+    "ISTJ-T": [],
+    "ISTP-A": [],
+    "ISTP-T": [],
+    "ISFJ-A": [],
+    "ISFJ-T": [],
+    "ISFP-A": [],
+    "ISFP-T": []
   }
 }

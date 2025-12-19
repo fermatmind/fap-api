@@ -2,7 +2,489 @@
   "schema": "fap.report.borderline_notes.v1",
   "engine": "v1.2",
   "rules": {
-    "borderline_delta_max": 4
+    "borderline_delta_max": 4,
+    "max_axes": 2
   },
-  "items": {}
+  "items": {
+    "ENTJ-A": {
+      "id": "bn_ENTJ-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ENTJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ENTJ-T": {
+      "id": "bn_ENTJ-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ENTJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ENTP-A": {
+      "id": "bn_ENTP-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ENTP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ENTP-T": {
+      "id": "bn_ENTP-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ENTP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ENFJ-A": {
+      "id": "bn_ENFJ-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ENFJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ENFJ-T": {
+      "id": "bn_ENFJ-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ENFJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ENFP-A": {
+      "id": "bn_ENFP-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ENFP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ENFP-T": {
+      "id": "bn_ENFP-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ENFP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ESTJ-A": {
+      "id": "bn_ESTJ-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ESTJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ESTJ-T": {
+      "id": "bn_ESTJ-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ESTJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ESTP-A": {
+      "id": "bn_ESTP-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ESTP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ESTP-T": {
+      "id": "bn_ESTP-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ESTP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ESFJ-A": {
+      "id": "bn_ESFJ-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ESFJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ESFJ-T": {
+      "id": "bn_ESFJ-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ESFJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ESFP-A": {
+      "id": "bn_ESFP-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ESFP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ESFP-T": {
+      "id": "bn_ESFP-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ESFP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "INTJ-A": {
+      "id": "bn_INTJ-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "INTJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "INTJ-T": {
+      "id": "bn_INTJ-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "INTJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "INTP-A": {
+      "id": "bn_INTP-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "INTP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "INTP-T": {
+      "id": "bn_INTP-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "INTP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "INFJ-A": {
+      "id": "bn_INFJ-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "INFJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "INFJ-T": {
+      "id": "bn_INFJ-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "INFJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "INFP-A": {
+      "id": "bn_INFP-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "INFP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "INFP-T": {
+      "id": "bn_INFP-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "INFP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ISTJ-A": {
+      "id": "bn_ISTJ-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ISTJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ISTJ-T": {
+      "id": "bn_ISTJ-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ISTJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ISTP-A": {
+      "id": "bn_ISTP-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ISTP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ISTP-T": {
+      "id": "bn_ISTP-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ISTP-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ISFJ-A": {
+      "id": "bn_ISFJ-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ISFJ-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ISFJ-T": {
+      "id": "bn_ISFJ-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ISFJ-T",
+        "locale": "zh-CN"
+      }
+    },
+    "ISFP-A": {
+      "id": "bn_ISFP-A",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ISFP-A",
+        "locale": "zh-CN"
+      }
+    },
+    "ISFP-T": {
+      "id": "bn_ISFP-T",
+      "generic": "",
+      "by_axis": {
+        "EI": null,
+        "SN": null,
+        "TF": null,
+        "JP": null,
+        "AT": null
+      },
+      "meta": {
+        "type_code": "ISFP-T",
+        "locale": "zh-CN"
+      }
+    }
+  }
 }
