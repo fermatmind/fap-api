@@ -842,29 +842,96 @@ class MbtiController extends Controller
         return is_array($profile) ? $profile : [];
     }
 
-    /**
-     * 读取 report 资产文件并返回 items（约定：{ "items": { "ESTJ-A": ... } }）
-     */
-    private function loadReportAssetItems(string $contentPackageVersion, string $filename): array
-    {
-        $contentPackageVersion = trim($contentPackageVersion, "/\\");
-        $path = $this->findPackageFile($contentPackageVersion, $filename);
+/**
+ * 读取 report assets（identity_cards / share_snippets / 其它 assets）
+ * - 多路径兜底（storage private -> storage -> repo root -> backend）
+ * - 兼容 JSON 结构：{items:{...}} / {items:[...]} / 直接是对象/数组
+ * - 若 items 是 list，会按 type_code（或 meta.type_code）重建索引，避免 $items["ENTJ-A"] 取不到
+ */
+private function loadReportAssetItems(string $contentPackageVersion, string $filename, ?string $primaryIndexKey = 'type_code'): array
+{
+    static $cache = [];
 
-        if (!$path || !is_file($path)) {
-            return [];
-        }
-
-        $raw = file_get_contents($path);
-        if ($raw === false || trim($raw) === '') {
-            return [];
-        }
-
-        $data = json_decode($raw, true);
-        if (!is_array($data)) {
-            return [];
-        }
-
-        $items = $data['items'] ?? [];
-        return is_array($items) ? $items : [];
+    $cacheKey = $contentPackageVersion . '|' . $filename;
+    if (isset($cache[$cacheKey])) {
+        return $cache[$cacheKey];
     }
+
+    $pkg = $contentPackageVersion;
+
+    // 允许你未来用 env 强行指定内容包根目录（可选）
+    $envRoot = env('FAP_CONTENT_PACKAGES_DIR');
+    $envRoot = is_string($envRoot) && $envRoot !== '' ? rtrim($envRoot, '/') : null;
+
+    $candidates = array_values(array_filter([
+        // 1) 优先：storage 私有内容包（你注释里提到的 share_snippets 典型放这里）
+        storage_path("app/private/content_packages/{$pkg}/{$filename}"),
+        // 2) 其次：storage 普通目录
+        storage_path("app/content_packages/{$pkg}/{$filename}"),
+
+        // 3) repo 根目录 content_packages（✅ 你的部署结构里这是最标准的）
+        base_path("../content_packages/{$pkg}/{$filename}"),
+
+        // 4) 兜底：backend/content_packages（有些人会把内容包 copy/symlink 到 backend 下）
+        base_path("content_packages/{$pkg}/{$filename}"),
+
+        // 5) 可选：env 指定根目录（如果你未来把内容包迁出 repo）
+        $envRoot ? "{$envRoot}/{$pkg}/{$filename}" : null,
+    ]));
+
+    $path = null;
+    foreach ($candidates as $p) {
+        if (is_string($p) && $p !== '' && file_exists($p)) {
+            $path = $p;
+            break;
+        }
+    }
+
+    if ($path === null) {
+        return $cache[$cacheKey] = [];
+    }
+
+    $raw = file_get_contents($path);
+    $json = json_decode($raw, true);
+    if (!is_array($json)) {
+        return $cache[$cacheKey] = [];
+    }
+
+    // 兼容：{items: ...} 或者根就是 items
+    $items = $json['items'] ?? $json;
+    if (!is_array($items)) {
+        return $cache[$cacheKey] = [];
+    }
+
+    // 判断是否 list（0..N）
+    $keys = array_keys($items);
+    $isList = (count($keys) > 0) && ($keys === range(0, count($keys) - 1));
+
+    // 若是 list，则按 type_code 重建索引
+    if ($isList) {
+        $indexed = [];
+        foreach ($items as $it) {
+            if (!is_array($it)) continue;
+
+            $k = null;
+            if ($primaryIndexKey && isset($it[$primaryIndexKey])) {
+                $k = $it[$primaryIndexKey];
+            } elseif (isset($it['type_code'])) {
+                $k = $it['type_code'];
+            } elseif (isset($it['meta']['type_code'])) {
+                $k = $it['meta']['type_code'];
+            } elseif (isset($it['id'])) {
+                $k = $it['id'];
+            } elseif (isset($it['code'])) {
+                $k = $it['code'];
+            }
+
+            if (!$k) continue;
+            $indexed[(string)$k] = $it;
+        }
+        $items = $indexed;
+    }
+
+    return $cache[$cacheKey] = $items;
+}
 }
