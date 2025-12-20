@@ -688,6 +688,10 @@ class MbtiController extends Controller
     {
         $tpl = $this->loadReportAssetJson($contentPackageVersion, 'report_highlights_templates.json');
         $ovr = $this->loadReportAssetJson($contentPackageVersion, 'report_highlights_overrides.json');
+        // fallback: old static highlights by type (report_highlights.json)
+        // 注意：旧文件先别删，这里用于“模板命中失败/为空”时兜底
+        $oldItems   = $this->loadReportAssetItems($contentPackageVersion, 'report_highlights.json');
+        $oldPerType = is_array($oldItems[$typeCode] ?? null) ? $oldItems[$typeCode] : [];
 
         $tplRules = is_array($tpl['rules'] ?? null) ? $tpl['rules'] : [];
         $tplTemplates = is_array($tpl['templates'] ?? null) ? $tpl['templates'] : [];
@@ -807,7 +811,13 @@ class MbtiController extends Controller
         $take = min(max($topN, 0), max($maxItems, 0));
         $out  = array_slice($candidates, 0, $take);
 
-        if (empty($out) && $allowEmpty) {
+        if (empty($out)) {
+            // 先 fallback 回旧版（如果旧版存在）
+            if (!empty($oldPerType)) {
+                return $oldPerType;
+        }
+
+            // 再按 allowEmpty 决定是否允许空（这里两种都只能返回空了）
             return [];
         }
 
