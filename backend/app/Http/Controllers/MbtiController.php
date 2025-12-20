@@ -514,161 +514,166 @@ class MbtiController extends Controller
         ]);
     }
 
-    /**
-     * GET /api/v0.2/attempts/{id}/report
-     * v1.2 动态报告引擎（M3-0：先把 JSON 契约定死）
-     *
-     * 约定：
-     * - 不让前端传阈值、不让前端算 Top2、不让前端判断 borderline
-     * - 字段必须稳定存在（哪怕内容是占位）
-     */
-    public function getReport(Request $request, string $attemptId)
-    {
-        $result = Result::where('attempt_id', $attemptId)->first();
+/**
+ * GET /api/v0.2/attempts/{id}/report
+ * v1.2 动态报告引擎（M3-0：先把 JSON 契约定死）
+ *
+ * 约定：
+ * - 不让前端传阈值、不让前端算 Top2、不让前端判断 borderline
+ * - 字段必须稳定存在（哪怕内容是占位）
+ */
+public function getReport(Request $request, string $attemptId)
+{
+    $result = Result::where('attempt_id', $attemptId)->first();
 
-        if (!$result) {
-            return response()->json([
-                'ok'      => false,
-                'error'   => 'RESULT_NOT_FOUND',
-                'message' => 'Result not found for given attempt_id',
-            ], 404);
-        }
-
-        $attempt = Attempt::where('id', $attemptId)->first();
-
-        // 版本信息：全部从 results/配置里取（不依赖前端）
-        $profileVersion = $result->profile_version
-            ?? config('fap.profile_version', 'mbti32-v2.5');
-
-        $contentPackageVersion = $result->content_package_version
-            ?? $this->currentContentPackageVersion();
-
-        // 读 type_profiles（最小骨架）
-        $profile = $this->loadTypeProfile($contentPackageVersion, $result->type_code);
-
-        // ✅ 强制 5 轴全量输出
-        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
-
-        $scoresPct  = $result->scores_pct ?? [];
-        $axisStates = $result->axis_states ?? [];
-
-        foreach ($dims as $d) {
-            if (!array_key_exists($d, $scoresPct)) {
-                $scoresPct[$d] = 50;
-            }
-            if (!array_key_exists($d, $axisStates)) {
-                $axisStates[$d] = 'moderate';
-            }
-        }
-
-        // scores（稳定结构：pct/state/side/delta）
-        // ✅ delta 统一为 0~100：abs(pct-50)*2（用于 highlight 排序/阈值更直观）
-        $scores = [];
-        foreach ($dims as $dim) {
-            $pct   = (int) ($scoresPct[$dim] ?? 50);
-            $state = (string) ($axisStates[$dim] ?? 'moderate');
-
-            [$p1, $p2] = $this->getDimensionPoles($dim);
-            $side = ($pct >= 50) ? $p1 : $p2;
-
-            $scores[$dim] = [
-                'pct'   => $pct,
-                'state' => $state,
-                'side'  => $side,
-                'delta' => abs($pct - 50) * 2,
-            ];
-        }
-
-        // 可选：记录 report_view（和 result_view 类似）
-        $this->logEvent('report_view', $request, [
-            'anon_id'       => $attempt?->anon_id,
-            'scale_code'    => $result->scale_code,
-            'scale_version' => $result->scale_version,
-            'attempt_id'    => $attemptId,
-            'region'        => $attempt?->region ?? 'CN_MAINLAND',
-            'locale'        => $attempt?->locale ?? 'zh-CN',
-            'meta_json'     => [
-                'type_code' => $result->type_code,
-                'engine'    => 'v1.2',
-            ],
-        ]);
-
-        // =========================
-        // M3-1：读 report 资产（identity / borderline / reads）
-        // M3-3：highlights 改为 templates + overrides 动态生成
-        // =========================
-        $typeCode = $result->type_code;
-
-        $identityItems   = $this->loadReportAssetItems($contentPackageVersion, 'report_identity_cards.json');
-        $borderItems     = $this->loadReportAssetItems($contentPackageVersion, 'report_borderline_notes.json');
-        $readsItems      = $this->loadReportAssetItems($contentPackageVersion, 'report_recommended_reads.json');
-
-        $identityCard      = $identityItems[$typeCode] ?? null;
-        $borderlineNote    = $borderItems[$typeCode] ?? null;
-        $recommendedReads  = $readsItems[$typeCode] ?? [];
-
-        if (!is_array($recommendedReads)) $recommendedReads = [];
-
-        // ✅ M3-3 highlights（templates + overrides）
-        $highlights = $this->buildHighlights($scoresPct, $axisStates, $typeCode, $contentPackageVersion);
-
-        // ✅ 报告主体（同时返回顶层字段 + 兼容 report 包一层，避免 smoke jq 取错路径）
-        $reportPayload = [
-            'versions' => [
-                'engine'                  => 'v1.2',
-                'profile_version'         => $profileVersion,
-                'content_package_version' => $contentPackageVersion,
-            ],
-
-            'scores' => $scores,
-
-            // TypeProfile（最小骨架：先返回 short 版也行）
-            'profile' => [
-                'type_code'     => $profile['type_code'] ?? $typeCode,
-                'type_name'     => $profile['type_name'] ?? null,
-                'tagline'       => $profile['tagline'] ?? null,
-                'rarity'        => $profile['rarity'] ?? null,
-                'keywords'      => $profile['keywords'] ?? [],
-                'short_summary' => $profile['short_summary'] ?? null,
-            ],
-
-            // M3-1：真实读取资产（结构稳定，内容可空）
-            'identity_card'   => $identityCard,
-
-            // ✅ M3-3：动态 highlights（结构稳定，内容可空）
-            'highlights'      => $highlights,
-
-            'borderline_note' => $borderlineNote,
-
-            'layers' => [
-                'role_card'     => null,
-                'strategy_card' => null,
-                'identity'      => null,
-            ],
-
-            // 结果四区块：先空 cards（字段必须存在）
-            'sections' => [
-                'traits'         => ['cards' => []],
-                'career'         => ['cards' => []],
-                'growth'         => ['cards' => []],
-                'relationships'  => ['cards' => []],
-            ],
-
-            'recommended_reads' => $recommendedReads,
-        ];
-
+    if (!$result) {
         return response()->json([
-            'ok'         => true,
-            'attempt_id' => $attemptId,
-            'type_code'  => $typeCode,
-
-            // ✅ 兼容：你之前 smoke 用 .report.identity_card
-            'report' => $reportPayload,
-
-            // ✅ 保持旧结构（如果前端已经在读顶层字段）
-            ...$reportPayload,
-        ]);
+            'ok'      => false,
+            'error'   => 'RESULT_NOT_FOUND',
+            'message' => 'Result not found for given attempt_id',
+        ], 404);
     }
+
+    $attempt = Attempt::where('id', $attemptId)->first();
+
+    // 版本信息：全部从 results/配置里取（不依赖前端）
+    $profileVersion = $result->profile_version
+        ?? config('fap.profile_version', 'mbti32-v2.5');
+
+    $contentPackageVersion = $result->content_package_version
+        ?? $this->currentContentPackageVersion();
+
+    // 读 type_profiles（最小骨架）
+    $profile = $this->loadTypeProfile($contentPackageVersion, $result->type_code);
+
+    // ✅ 强制 5 轴全量输出
+    $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
+
+    $scoresPct  = $result->scores_pct ?? [];
+    $axisStates = $result->axis_states ?? [];
+
+    foreach ($dims as $d) {
+        if (!array_key_exists($d, $scoresPct)) {
+            $scoresPct[$d] = 50;
+        }
+        if (!array_key_exists($d, $axisStates)) {
+            $axisStates[$d] = 'moderate';
+        }
+    }
+
+    // scores（稳定结构：pct/state/side/delta）
+    // ✅ delta 统一为 0~100：abs(pct-50)*2（用于 highlight 排序/阈值更直观）
+    $scores = [];
+    foreach ($dims as $dim) {
+        $pct   = (int) ($scoresPct[$dim] ?? 50);
+        $state = (string) ($axisStates[$dim] ?? 'moderate');
+
+        [$p1, $p2] = $this->getDimensionPoles($dim);
+        $side = ($pct >= 50) ? $p1 : $p2;
+
+        $scores[$dim] = [
+            'pct'   => $pct,
+            'state' => $state,
+            'side'  => $side,
+            'delta' => abs($pct - 50) * 2,
+        ];
+    }
+
+    // 可选：记录 report_view（和 result_view 类似）
+    $this->logEvent('report_view', $request, [
+        'anon_id'       => $attempt?->anon_id,
+        'scale_code'    => $result->scale_code,
+        'scale_version' => $result->scale_version,
+        'attempt_id'    => $attemptId,
+        'region'        => $attempt?->region ?? 'CN_MAINLAND',
+        'locale'        => $attempt?->locale ?? 'zh-CN',
+        'meta_json'     => [
+            'type_code' => $result->type_code,
+            'engine'    => 'v1.2',
+        ],
+    ]);
+
+    // =========================
+    // M3-1：读 report 资产（identity / reads）
+    // M3-3：highlights 改为 templates + overrides 动态生成
+    // M3-4：borderline_note 改为“按 delta 命中 + 按轴模板”
+    // =========================
+    $typeCode = $result->type_code;
+
+    $identityItems = $this->loadReportAssetItems($contentPackageVersion, 'report_identity_cards.json');
+    $readsItems    = $this->loadReportAssetItems($contentPackageVersion, 'report_recommended_reads.json');
+
+    $identityCard     = $identityItems[$typeCode] ?? null;
+    $recommendedReads = $readsItems[$typeCode] ?? [];
+    if (!is_array($recommendedReads)) $recommendedReads = [];
+
+    // ✅ M3-3 highlights（templates + overrides）
+    $highlights = $this->buildHighlights($scoresPct, $axisStates, $typeCode, $contentPackageVersion);
+
+    // ✅ M3-4 borderline_note（按 delta 命中 0~2 条；结构稳定）
+    // 返回结构固定：{ items: [...] }
+    $borderlineNote = $this->buildBorderlineNote($scoresPct, $contentPackageVersion);
+    if (!is_array($borderlineNote)) $borderlineNote = ['items' => []];
+    if (!is_array($borderlineNote['items'] ?? null)) $borderlineNote['items'] = [];
+
+    // ✅ 报告主体（同时返回顶层字段 + 兼容 report 包一层，避免 smoke jq 取错路径）
+    $reportPayload = [
+        'versions' => [
+            'engine'                  => 'v1.2',
+            'profile_version'         => $profileVersion,
+            'content_package_version' => $contentPackageVersion,
+        ],
+
+        'scores' => $scores,
+
+        // TypeProfile（最小骨架：先返回 short 版也行）
+        'profile' => [
+            'type_code'     => $profile['type_code'] ?? $typeCode,
+            'type_name'     => $profile['type_name'] ?? null,
+            'tagline'       => $profile['tagline'] ?? null,
+            'rarity'        => $profile['rarity'] ?? null,
+            'keywords'      => $profile['keywords'] ?? [],
+            'short_summary' => $profile['short_summary'] ?? null,
+        ],
+
+        // M3-1：真实读取资产（结构稳定，内容可空）
+        'identity_card' => $identityCard,
+
+        // ✅ M3-3：动态 highlights（结构稳定，内容可空）
+        'highlights' => $highlights,
+
+        // ✅ M3-4：按轴模板生成的 borderline_note（结构稳定，内容可空）
+        'borderline_note' => $borderlineNote,
+
+        'layers' => [
+            'role_card'     => null,
+            'strategy_card' => null,
+            'identity'      => null,
+        ],
+
+        // 结果四区块：先空 cards（字段必须存在）
+        'sections' => [
+            'traits'        => ['cards' => []],
+            'career'        => ['cards' => []],
+            'growth'        => ['cards' => []],
+            'relationships' => ['cards' => []],
+        ],
+
+        'recommended_reads' => $recommendedReads,
+    ];
+
+    return response()->json([
+        'ok'         => true,
+        'attempt_id' => $attemptId,
+        'type_code'  => $typeCode,
+
+        // ✅ 兼容：你之前 smoke 用 .report.identity_card
+        'report' => $reportPayload,
+
+        // ✅ 保持旧结构（如果前端已经在读顶层字段）
+        ...$reportPayload,
+    ]);
+}
 
     // =========================
     // Private helpers (must be last)
@@ -869,6 +874,57 @@ class MbtiController extends Controller
 
          return $out;
 }
+    
+    /**
+ * borderline_note：对“靠近中间”的轴给解释（最多 2 条）
+ * - delta100 = abs(pct-50)*2
+ * - strong:  delta100 <= 12
+ * - light:   13..24
+ */
+private function buildBorderlineNote(array $scoresPct, string $contentPackageVersion): array
+{
+    $tpl = $this->loadReportAssetJson($contentPackageVersion, 'report_borderline_templates.json');
+    $items = is_array($tpl['items'] ?? null) ? $tpl['items'] : [];
+
+    $dims = ['EI','SN','TF','JP','AT'];
+    $cands = [];
+
+    foreach ($dims as $dim) {
+        $pct = (int) ($scoresPct[$dim] ?? 50);
+        $delta100 = abs($pct - 50) * 2;
+
+        // 只在 borderline 范围内才输出解释
+        if ($delta100 <= 24) {
+            $cands[] = [
+                'dim' => $dim,
+                'pct' => $pct,
+                'delta' => $delta100,
+            ];
+        }
+    }
+
+    // 越接近 50 越需要解释
+    usort($cands, fn($a, $b) => ($a['delta'] ?? 999) <=> ($b['delta'] ?? 999));
+
+    $out = [];
+    foreach ($cands as $c) {
+        if (count($out) >= 2) break;
+
+        $dim = $c['dim'];
+        $t = $items[$dim] ?? null;
+        if (!is_array($t)) continue;
+
+        $out[] = [
+            'dim' => $dim,
+            'title' => (string) ($t['title'] ?? ''),
+            'text' => (string) ($t['text'] ?? ''),
+            'examples' => is_array($t['examples'] ?? null) ? $t['examples'] : [],
+            'suggestions' => is_array($t['suggestions'] ?? null) ? $t['suggestions'] : [],
+        ];
+    }
+
+    return ['items' => $out];
+}   
 
     /**
      * 读取“非 items 结构”的 report assets（templates/overrides）
