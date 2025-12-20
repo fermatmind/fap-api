@@ -860,67 +860,74 @@ class MbtiController extends Controller
     }
 
     /**
-     * borderline_note：对“靠近中间”的轴给解释（最多 2 条）
-     * - delta100 = abs(pct-50)*2
-     * - strong:  delta100 <= 12   (abs<=6)
-     * - light:   13..24          (abs 7..12)
-     *
-     * ✅ 排序规则“定死”：
-     * 1) delta 小优先（越接近 50 越要解释）
-     * 2) 同 delta 用固定优先级：EI > SN > TF > JP > AT
-     */
-    private function buildBorderlineNote(array $scoresPct, string $contentPackageVersion): array
-    {
-        $tpl   = $this->loadReportAssetJson($contentPackageVersion, 'report_borderline_templates.json');
-        $items = is_array($tpl['items'] ?? null) ? $tpl['items'] : [];
+ * borderline_note：对“靠近中间”的轴给解释（最多 2 条）
+ *
+ * delta100 = abs(pct-50)*2  (0..100)
+ * - strong: delta100 <= 12  (abs<=6)
+ * - light : delta100 14..24 (abs 7..12)
+ *
+ * ✅ 排序规则“定死”：
+ * 1) delta 小优先（越接近 50 越要解释）
+ * 2) 同 delta 用固定优先级：EI > SN > TF > JP > AT
+ */
+private function buildBorderlineNote(array $scoresPct, string $contentPackageVersion): array
+{
+    $tpl   = $this->loadReportAssetJson($contentPackageVersion, 'report_borderline_templates.json');
+    $items = is_array($tpl['items'] ?? null) ? $tpl['items'] : [];
 
-        $dims = ['EI','SN','TF','JP','AT'];
-        $cands = [];
+    $dims = ['EI','SN','TF','JP','AT'];
+    $priority = ['EI'=>0,'SN'=>1,'TF'=>2,'JP'=>3,'AT'=>4];
 
-        foreach ($dims as $dim) {
-            $pct = (int) ($scoresPct[$dim] ?? 50);
-            $delta100 = abs($pct - 50) * 2;
+    // ✅ 默认 true：强+轻都输出；以后想关 light 就改成 false 或接 config
+    $includeLight = true;
 
-            if ($delta100 <= 24) {
-                $cands[] = [
-                    'dim'   => $dim,
-                    'pct'   => $pct,
-                    'delta' => $delta100,
-                ];
-            }
+    $cands = [];
+    foreach ($dims as $dim) {
+        $pct = (int) ($scoresPct[$dim] ?? 50);
+        $delta100 = abs($pct - 50) * 2;
+
+        // strong
+        if ($delta100 <= 12) {
+            $cands[] = ['dim'=>$dim,'pct'=>$pct,'delta'=>$delta100];
+            continue;
         }
 
-        $priority = ['EI'=>0,'SN'=>1,'TF'=>2,'JP'=>3,'AT'=>4];
-
-        usort($cands, function ($a, $b) use ($priority) {
-            $da = (int)($a['delta'] ?? 999);
-            $db = (int)($b['delta'] ?? 999);
-            if ($da !== $db) return $da <=> $db;
-
-            $pa = $priority[$a['dim'] ?? 'AT'] ?? 99;
-            $pb = $priority[$b['dim'] ?? 'AT'] ?? 99;
-            return $pa <=> $pb;
-        });
-
-        $out = [];
-        foreach ($cands as $c) {
-            if (count($out) >= 2) break;
-
-            $dim = $c['dim'];
-            $t = $items[$dim] ?? null;
-            if (!is_array($t)) continue;
-
-            $out[] = [
-                'dim'         => $dim,
-                'title'       => (string) ($t['title'] ?? ''),
-                'text'        => (string) ($t['text'] ?? ''),
-                'examples'    => is_array($t['examples'] ?? null) ? $t['examples'] : [],
-                'suggestions' => is_array($t['suggestions'] ?? null) ? $t['suggestions'] : [],
-            ];
+        // light
+        if ($includeLight && $delta100 >= 14 && $delta100 <= 24) {
+            $cands[] = ['dim'=>$dim,'pct'=>$pct,'delta'=>$delta100];
+            continue;
         }
-
-        return ['items' => $out];
     }
+
+    usort($cands, function ($a, $b) use ($priority) {
+        $da = (int)($a['delta'] ?? 999);
+        $db = (int)($b['delta'] ?? 999);
+        if ($da !== $db) return $da <=> $db;
+
+        $pa = $priority[$a['dim'] ?? 'AT'] ?? 99;
+        $pb = $priority[$b['dim'] ?? 'AT'] ?? 99;
+        return $pa <=> $pb;
+    });
+
+    $out = [];
+    foreach ($cands as $c) {
+        if (count($out) >= 2) break;
+
+        $dim = (string)($c['dim'] ?? '');
+        $t = $items[$dim] ?? null;
+        if (!is_array($t)) continue;
+
+        $out[] = [
+            'dim'         => $dim,
+            'title'       => (string) ($t['title'] ?? ''),
+            'text'        => (string) ($t['text'] ?? ''),
+            'examples'    => is_array($t['examples'] ?? null) ? $t['examples'] : [],
+            'suggestions' => is_array($t['suggestions'] ?? null) ? $t['suggestions'] : [],
+        ];
+    }
+
+    return ['items' => $out];
+}
 
     /**
      * 读取“非 items 结构”的 report assets（templates/overrides）
