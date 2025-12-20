@@ -562,6 +562,7 @@ class MbtiController extends Controller
         }
 
         // scores（稳定结构：pct/state/side/delta）
+        // ✅ delta 统一为 0~100：abs(pct-50)*2（用于 highlight 排序/阈值更直观）
         $scores = [];
         foreach ($dims as $dim) {
             $pct   = (int) ($scoresPct[$dim] ?? 50);
@@ -574,7 +575,7 @@ class MbtiController extends Controller
                 'pct'   => $pct,
                 'state' => $state,
                 'side'  => $side,
-                'delta' => abs($pct - 50),
+                'delta' => abs($pct - 50) * 2,
             ];
         }
 
@@ -593,22 +594,23 @@ class MbtiController extends Controller
         ]);
 
         // =========================
-        // M3-1：读 report 资产（替换占位）
+        // M3-1：读 report 资产（identity / borderline / reads）
+        // M3-3：highlights 改为 templates + overrides 动态生成
         // =========================
         $typeCode = $result->type_code;
 
         $identityItems   = $this->loadReportAssetItems($contentPackageVersion, 'report_identity_cards.json');
-        $highlightItems  = $this->loadReportAssetItems($contentPackageVersion, 'report_highlights.json');
         $borderItems     = $this->loadReportAssetItems($contentPackageVersion, 'report_borderline_notes.json');
         $readsItems      = $this->loadReportAssetItems($contentPackageVersion, 'report_recommended_reads.json');
 
         $identityCard      = $identityItems[$typeCode] ?? null;
-        $highlights        = $highlightItems[$typeCode] ?? [];
         $borderlineNote    = $borderItems[$typeCode] ?? null;
         $recommendedReads  = $readsItems[$typeCode] ?? [];
 
-        if (!is_array($highlights)) $highlights = [];
         if (!is_array($recommendedReads)) $recommendedReads = [];
+
+        // ✅ M3-3 highlights（templates + overrides）
+        $highlights = $this->buildHighlights($scoresPct, $axisStates, $typeCode, $contentPackageVersion);
 
         // ✅ 报告主体（同时返回顶层字段 + 兼容 report 包一层，避免 smoke jq 取错路径）
         $reportPayload = [
@@ -632,7 +634,10 @@ class MbtiController extends Controller
 
             // M3-1：真实读取资产（结构稳定，内容可空）
             'identity_card'   => $identityCard,
+
+            // ✅ M3-3：动态 highlights（结构稳定，内容可空）
             'highlights'      => $highlights,
+
             'borderline_note' => $borderlineNote,
 
             'layers' => [
@@ -668,6 +673,187 @@ class MbtiController extends Controller
     // =========================
     // Private helpers (must be last)
     // =========================
+
+    /**
+     * M3-3: 从 templates + overrides 动态生成 highlights
+     *
+     * 输出结构（每张卡字段固定）：
+     * {id, dim, side, level, pct, delta, title, text, tips, tags}
+     *
+     * overrides 支持两种写法（二选一即可）：
+     * 1) items[type_code][card_id] = {...partial fields...}
+     * 2) items[type_code][dim][side][level] = {...partial fields...}
+     */
+    private function buildHighlights(array $scoresPct, array $axisStates, string $typeCode, string $contentPackageVersion): array
+    {
+        $tpl = $this->loadReportAssetJson($contentPackageVersion, 'report_highlights_templates.json');
+        $ovr = $this->loadReportAssetJson($contentPackageVersion, 'report_highlights_overrides.json');
+
+        $tplRules = is_array($tpl['rules'] ?? null) ? $tpl['rules'] : [];
+        $tplTemplates = is_array($tpl['templates'] ?? null) ? $tpl['templates'] : [];
+
+        $topN         = (int) ($tplRules['top_n'] ?? 2);
+        $maxItems     = (int) ($tplRules['max_items'] ?? 2);
+        $minDelta     = (int) ($tplRules['min_delta'] ?? 15);
+        $minLevel     = (string) ($tplRules['min_level'] ?? 'clear');
+        $allowEmpty   = (bool) ($tplRules['allow_empty'] ?? true);
+        $allowedLvls  = $tplRules['allowed_levels'] ?? ['clear','strong','very_strong'];
+        $levelOrder   = $tplRules['level_order'] ?? ['very_weak','weak','moderate','clear','strong','very_strong'];
+        $idFormat     = (string) ($tplRules['id_format'] ?? '${dim}_${side}_${level}');
+
+        if (!is_array($allowedLvls)) $allowedLvls = ['clear','strong','very_strong'];
+        if (!is_array($levelOrder))  $levelOrder = ['very_weak','weak','moderate','clear','strong','very_strong'];
+
+        // overrides
+        $ovrItems = is_array($ovr['items'] ?? null) ? $ovr['items'] : [];
+        $perType  = is_array($ovrItems[$typeCode] ?? null) ? $ovrItems[$typeCode] : [];
+
+        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
+        $candidates = [];
+
+        foreach ($dims as $dim) {
+            $pct   = (int) ($scoresPct[$dim] ?? 50);
+            $level = (string) ($axisStates[$dim] ?? 'moderate');
+
+            [$p1, $p2] = $this->getDimensionPoles($dim);
+            $side = ($pct >= 50) ? $p1 : $p2;
+
+            // delta 0~100
+            $delta = abs($pct - 50) * 2;
+
+            // gate: allowed levels
+            if (!in_array($level, $allowedLvls, true)) {
+                continue;
+            }
+
+            // gate: min_level（按 level_order 比较）
+            $idxLevel = array_search($level, $levelOrder, true);
+            $idxMin   = array_search($minLevel, $levelOrder, true);
+            if ($idxLevel === false || $idxMin === false || $idxLevel < $idxMin) {
+                continue;
+            }
+
+            // gate: min_delta
+            if ($delta < $minDelta) {
+                continue;
+            }
+
+            // template hit: templates[dim][side][level]
+            $hit = $tplTemplates[$dim][$side][$level] ?? null;
+            if (!is_array($hit)) {
+                continue;
+            }
+
+            // ensure id
+            $id = (string) ($hit['id'] ?? '');
+            if ($id === '') {
+                $id = str_replace(['${dim}','${side}','${level}'], [$dim,$side,$level], $idFormat);
+            }
+
+            // normalize base card
+            $card = [
+                'id'    => $id,
+                'dim'   => $dim,
+                'side'  => $side,
+                'level' => $level,
+                'pct'   => $pct,
+                'delta' => $delta,
+                'title' => (string) ($hit['title'] ?? ''),
+                'text'  => (string) ($hit['text'] ?? ''),
+                'tips'  => is_array($hit['tips'] ?? null) ? $hit['tips'] : [],
+                'tags'  => is_array($hit['tags'] ?? null) ? $hit['tags'] : [],
+            ];
+
+            // overrides (mode=merge)
+            $override = null;
+
+            // 1) by card_id
+            if (isset($perType[$id]) && is_array($perType[$id])) {
+                $override = $perType[$id];
+            }
+
+            // 2) by dim/side/level
+            if ($override === null) {
+                $o2 = $perType[$dim][$side][$level] ?? null;
+                if (is_array($o2)) $override = $o2;
+            }
+
+            if (is_array($override)) {
+                $card = array_replace_recursive($card, $override);
+                // 再做一次 tips/tags 兜底
+                if (!is_array($card['tips'] ?? null)) $card['tips'] = [];
+                if (!is_array($card['tags'] ?? null)) $card['tags'] = [];
+            }
+
+            $candidates[] = $card;
+        }
+
+        // sort by delta desc
+        usort($candidates, function ($a, $b) {
+            return (int) ($b['delta'] ?? 0) <=> (int) ($a['delta'] ?? 0);
+        });
+
+        $take = min(max($topN, 0), max($maxItems, 0));
+        $out  = array_slice($candidates, 0, $take);
+
+        if (empty($out) && $allowEmpty) {
+            return [];
+        }
+
+        return $out;
+    }
+
+    /**
+     * 读取“非 items 结构”的 report assets（templates/overrides）
+     * - 走与你 loadReportAssetItems 同一套多路径兜底
+     * - 返回整个 JSON array（不做 items 结构重建）
+     */
+    private function loadReportAssetJson(string $contentPackageVersion, string $filename): array
+    {
+        static $cache = [];
+
+        $cacheKey = $contentPackageVersion . '|' . $filename . '|RAW';
+        if (isset($cache[$cacheKey])) {
+            return $cache[$cacheKey];
+        }
+
+        $pkg = trim($contentPackageVersion, "/\\");
+
+        $envRoot = env('FAP_CONTENT_PACKAGES_DIR');
+        $envRoot = is_string($envRoot) && $envRoot !== '' ? rtrim($envRoot, '/') : null;
+
+        $candidates = array_values(array_filter([
+            storage_path("app/private/content_packages/{$pkg}/{$filename}"),
+            storage_path("app/content_packages/{$pkg}/{$filename}"),
+            base_path("../content_packages/{$pkg}/{$filename}"),
+            base_path("content_packages/{$pkg}/{$filename}"),
+            $envRoot ? "{$envRoot}/{$pkg}/{$filename}" : null,
+        ]));
+
+        $path = null;
+        foreach ($candidates as $p) {
+            if (is_string($p) && $p !== '' && file_exists($p)) {
+                $path = $p;
+                break;
+            }
+        }
+
+        if ($path === null) {
+            return $cache[$cacheKey] = [];
+        }
+
+        $raw = file_get_contents($path);
+        if ($raw === false || trim($raw) === '') {
+            return $cache[$cacheKey] = [];
+        }
+
+        $json = json_decode($raw, true);
+        if (!is_array($json)) {
+            return $cache[$cacheKey] = [];
+        }
+
+        return $cache[$cacheKey] = $json;
+    }
 
     /**
      * 从内容包读取 share_snippets.json 并返回指定 type_code（统一走多路径兜底）

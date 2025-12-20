@@ -1,6 +1,14 @@
 {
-  "schema": "fap.report.highlights_overrides.v1",
+  "schema": "fap.report.highlights.overrides.v1",
   "engine": "v1.2",
-  "rules": { "mode": "append" },
+  "meta": {
+    "package": "MBTI-CN-v0.2.1-TEST",
+    "updated_at": "2025-12-20",
+    "notes": "Optional per-type overrides for M3-3 highlights. Keep items empty until needed."
+  },
+  "rules": {
+    "override_mode": "merge",
+    "id_format": "${dim}_${side}_${level}"
+  },
   "items": {}
 }
