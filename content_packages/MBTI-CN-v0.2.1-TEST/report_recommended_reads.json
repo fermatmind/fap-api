@@ -1,30 +1,1348 @@
 {
   "schema": "fap.report.reads.v2",
   "engine": "v1.2",
-  "meta": { "updated_at": "2025-12-20", "notes": "M3-6 recommended_reads buckets" },
+  "meta": {
+    "package": "MBTI-CN-v0.2.1-TEST",
+    "updated_at": "2025-12-20",
+    "change_id": "CHG-2025-12-20-M3-6-V2",
+    "notes": "M3-6 recommended_reads 生产级加强版：职责边界=内容库+策略配置；defaults 下沉；bucket_quota 配额；去重=硬(id)+软(canonical_id/url)；axis 统一标识；URL 统一可落地（coming-soon）。",
+    "updated_by": "content_owner",
+    "reviewed_by": "qa_owner"
+  },
+  "rules": {
+    "max_items": 8,
+    "min_items": 3,
+    "sort": "priority_desc",
+    "fill_order": [
+      "by_type",
+      "by_role",
+      "by_strategy",
+      "by_top_axis",
+      "fallback"
+    ],
+    "top_axis_mode": "top1",
+    "allow_missing_bucket": true,
+    "bucket_quota": {
+      "by_type": 2,
+      "by_role": 2,
+      "by_strategy": 2,
+      "by_top_axis": 1,
+      "fallback": "remaining"
+    },
+    "dedupe": {
+      "hard_by": [
+        "id"
+      ],
+      "soft_by": [
+        "canonical_id",
+        "canonical_url",
+        "url"
+      ]
+    },
+    "defaults": {
+      "locale": "zh-CN",
+      "access": "free",
+      "channel": "miniapp",
+      "cta": "去看看",
+      "status": "active"
+    },
+    "axis_key_format": "axis:${DIM}:${SIDE}",
+    "tag_prefixes_allowed": [
+      "type:",
+      "role:",
+      "strategy:",
+      "axis:",
+      "topic:",
+      "stage:",
+      "channel:"
+    ],
+    "by_role_keys_allowed": [
+      "NT",
+      "NF",
+      "SJ",
+      "SP"
+    ],
+    "by_strategy_keys_allowed": [
+      "EA",
+      "ET",
+      "IA",
+      "IT"
+    ],
+    "by_top_axis_key_regex": "^axis:(EI|SN|TF|JP|AT):(E|I|S|N|T|F|J|P|A|T)$",
+    "by_top_axis_key_rules": {
+      "EI": [
+        "E",
+        "I"
+      ],
+      "SN": [
+        "S",
+        "N"
+      ],
+      "TF": [
+        "T",
+        "F"
+      ],
+      "JP": [
+        "J",
+        "P"
+      ],
+      "AT": [
+        "A",
+        "T"
+      ]
+    }
+  },
+  "catalog": {
+    "topics": [
+      {
+        "id": "topic.relationships",
+        "slug": "relationships",
+        "order": 10,
+        "icon": "relationships",
+        "title": "关系",
+        "desc": "亲密、边界、冲突与修复：让关系更轻松也更稳定。",
+        "tags": [
+          "topic:relationships"
+        ]
+      },
+      {
+        "id": "topic.communication",
+        "slug": "communication",
+        "order": 20,
+        "icon": "communication",
+        "title": "沟通",
+        "desc": "更清晰地表达、更准确地理解：把对话变成协商。",
+        "tags": [
+          "topic:communication"
+        ]
+      },
+      {
+        "id": "topic.career",
+        "slug": "career",
+        "order": 30,
+        "icon": "career",
+        "title": "职业",
+        "desc": "目标、执行、复盘与协作：把优势用在关键处。",
+        "tags": [
+          "topic:career"
+        ]
+      },
+      {
+        "id": "topic.growth",
+        "slug": "growth",
+        "order": 40,
+        "icon": "growth",
+        "title": "成长",
+        "desc": "把自我认知变成可行动的改变：一步一步更像你。",
+        "tags": [
+          "topic:growth"
+        ]
+      },
+      {
+        "id": "topic.stress",
+        "slug": "stress",
+        "order": 50,
+        "icon": "stress",
+        "title": "压力",
+        "desc": "识别过载信号、建立恢复机制：让能量可持续。",
+        "tags": [
+          "topic:stress"
+        ]
+      }
+    ]
+  },
   "items": {
     "by_type": {
+      "INTJ-A": [],
+      "INTP-A": [],
       "ENTJ-A": [
-        {"id":"t1","type":"article","title":"ENTJ-A 专属阅读 1","desc":"...","url":"...","cover":"","priority":120,"tags":["type:ENTJ-A"]}
-      ]
+        {
+          "id": "art_type_entj_a_01",
+          "canonical_id": "cn.read.plan_execute_review.v1",
+          "type": "article",
+          "title": "把想法落地：目标—拆解—复盘",
+          "desc": "一套可复用的执行框架：先定目标，再拆动作，最后复盘让系统更顺。",
+          "url": "/reads/coming-soon?id=art_type_entj_a_01",
+          "cover": "/covers/type/entj-a-plan.png",
+          "priority": 160,
+          "tags": [
+            "type:ENTJ-A",
+            "topic:career",
+            "topic:growth",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "estimated_minutes": 7,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_type_entj_a_01"
+        },
+        {
+          "id": "exercise_type_entj_a_01",
+          "canonical_id": "cn.exercise.decision_review.v1",
+          "type": "exercise",
+          "title": "决策复盘：给反证留一个入口",
+          "desc": "让「果断」更稳：写清证据、反证与复盘节点，降低拍脑袋概率。",
+          "url": "/reads/coming-soon?id=exercise_type_entj_a_01",
+          "cover": "/covers/exercise-decision-review.png",
+          "priority": 135,
+          "tags": [
+            "type:ENTJ-A",
+            "topic:career",
+            "topic:communication",
+            "stage:deepdive",
+            "channel:miniapp"
+          ],
+          "cta": "开始练习",
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=exercise_type_entj_a_01"
+        }
+      ],
+      "ENTP-A": [],
+      "INFJ-A": [],
+      "INFP-A": [
+        {
+          "id": "art_type_infp_a_01",
+          "canonical_id": "cn.read.soft_boundaries.v1",
+          "type": "article",
+          "title": "温柔但有边界：把需求讲清",
+          "desc": "不吵不憋也能表达：用「我感受—我需要—我请求」的三段式说清楚。",
+          "url": "/reads/coming-soon?id=art_type_infp_a_01",
+          "cover": "/covers/type/infp-a-boundaries.png",
+          "priority": 155,
+          "tags": [
+            "type:INFP-A",
+            "topic:relationships",
+            "topic:communication",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_type_infp_a_01"
+        },
+        {
+          "id": "exercise_type_infp_a_01",
+          "canonical_id": "cn.exercise.say_no_list.v1",
+          "type": "exercise",
+          "title": "可拒绝清单：把「取舍」写下来",
+          "desc": "把消耗你的事情列出来，练一次「礼貌拒绝」，让关系更轻松。",
+          "url": "/reads/coming-soon?id=exercise_type_infp_a_01",
+          "cover": "/covers/exercise-say-no.png",
+          "priority": 135,
+          "tags": [
+            "type:INFP-A",
+            "topic:relationships",
+            "topic:stress",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "cta": "开始练习",
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=exercise_type_infp_a_01"
+        }
+      ],
+      "ENFJ-A": [],
+      "ENFP-A": [],
+      "ISTJ-A": [],
+      "ISFJ-A": [],
+      "ESTJ-A": [],
+      "ESFJ-A": [],
+      "ISTP-A": [],
+      "ISFP-A": [],
+      "ESTP-A": [],
+      "ESFP-A": [],
+      "INTJ-T": [
+        {
+          "id": "art_type_intj_t_01",
+          "canonical_id": "cn.read.verify_list.v1",
+          "type": "article",
+          "title": "把担心写成「待验证清单」",
+          "desc": "把不确定从脑内循环搬到纸面：担心→假设→验证动作，减少内耗。",
+          "url": "/reads/coming-soon?id=art_type_intj_t_01",
+          "cover": "/covers/type/intj-t-verify-list.png",
+          "priority": 160,
+          "tags": [
+            "type:INTJ-T",
+            "topic:growth",
+            "topic:stress",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_type_intj_t_01"
+        },
+        {
+          "id": "tool_type_intj_t_01",
+          "canonical_id": "cn.tool.minimum_experiment.v1",
+          "type": "tool",
+          "title": "10分钟最小实验模板",
+          "desc": "给「想很多但很难开始」的你：用一个小实验换来新信息，再决定下一步。",
+          "url": "/reads/coming-soon?id=tool_type_intj_t_01",
+          "cover": "/covers/tools-minimum-experiment.png",
+          "priority": 140,
+          "tags": [
+            "type:INTJ-T",
+            "topic:growth",
+            "topic:career",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "cta": "开始使用",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_type_intj_t_01"
+        }
+      ],
+      "INTP-T": [],
+      "ENTJ-T": [],
+      "ENTP-T": [],
+      "INFJ-T": [],
+      "INFP-T": [],
+      "ENFJ-T": [],
+      "ENFP-T": [
+        {
+          "id": "art_type_enfp_t_01",
+          "canonical_id": "cn.read.ten_minutes_start.v1",
+          "type": "article",
+          "title": "停止「想太多」：先动10分钟",
+          "desc": "当你被情绪和可能性淹没时，用一个短动作打断循环：先动起来，再迭代。",
+          "url": "/reads/coming-soon?id=art_type_enfp_t_01",
+          "cover": "/covers/type/enfp-t-10m.png",
+          "priority": 155,
+          "tags": [
+            "type:ENFP-T",
+            "topic:growth",
+            "topic:stress",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_type_enfp_t_01"
+        },
+        {
+          "id": "tool_type_enfp_t_01",
+          "canonical_id": "cn.tool.feeling_fact_separator.v1",
+          "type": "tool",
+          "title": "情绪→事实分离小卡",
+          "desc": "把「我觉得」拆成「发生了什么」：减少误读，沟通更稳。",
+          "url": "/reads/coming-soon?id=tool_type_enfp_t_01",
+          "cover": "/covers/tools-feeling-fact.png",
+          "priority": 130,
+          "tags": [
+            "type:ENFP-T",
+            "topic:communication",
+            "topic:relationships",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "cta": "打开工具",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_type_enfp_t_01"
+        }
+      ],
+      "ISTJ-T": [],
+      "ISFJ-T": [],
+      "ESTJ-T": [],
+      "ESFJ-T": [],
+      "ISTP-T": [],
+      "ISFP-T": [],
+      "ESTP-T": [],
+      "ESFP-T": []
     },
     "by_role": {
       "NT": [
-        {"id":"r_nt_1","type":"article","title":"NT 通用阅读","desc":"...","url":"...","cover":"","priority":100,"tags":["role:NT"]}
+        {
+          "id": "art_role_nt_01",
+          "canonical_id": "cn.read.nt.plan_to_execution.v1",
+          "type": "article",
+          "title": "把想法变成可执行方案",
+          "desc": "给偏结构化思考的人：目标—约束—动作—复盘，一次写清。",
+          "url": "/reads/coming-soon?id=art_role_nt_01",
+          "cover": "/covers/role-nt-execution.png",
+          "priority": 120,
+          "tags": [
+            "role:NT",
+            "topic:career",
+            "topic:growth",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_role_nt_01"
+        },
+        {
+          "id": "tool_role_nt_01",
+          "canonical_id": "cn.tool.counterevidence.v1",
+          "type": "tool",
+          "title": "反证入口：避免自信偏差",
+          "desc": "给每个结论留一个反证问题：让判断更稳，而不是更慢。",
+          "url": "/reads/coming-soon?id=tool_role_nt_01",
+          "cover": "/covers/tools-counterevidence.png",
+          "priority": 110,
+          "tags": [
+            "role:NT",
+            "topic:growth",
+            "topic:career",
+            "stage:deepdive",
+            "channel:miniapp"
+          ],
+          "cta": "开始使用",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_role_nt_01"
+        },
+        {
+          "id": "exercise_role_nt_01",
+          "canonical_id": "cn.exercise.one_page_retro.v1",
+          "type": "exercise",
+          "title": "复盘一页纸：哪里有效，哪里浪费",
+          "desc": "用一页纸复盘本周：保留有效动作，删掉低收益忙碌。",
+          "url": "/reads/coming-soon?id=exercise_role_nt_01",
+          "cover": "/covers/exercise-one-page-retro.png",
+          "priority": 105,
+          "tags": [
+            "role:NT",
+            "topic:growth",
+            "topic:stress",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "cta": "开始练习",
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=exercise_role_nt_01"
+        },
+        {
+          "id": "art_role_nt_02",
+          "canonical_id": "cn.read.nt.good_enough.v1",
+          "type": "article",
+          "title": "高标准不等于高产出",
+          "desc": "把「追求更好」变成「更可持续」：设可用线、再迭代。",
+          "url": "/reads/coming-soon?id=art_role_nt_02",
+          "cover": "/covers/role-nt-good-enough.png",
+          "priority": 100,
+          "tags": [
+            "role:NT",
+            "topic:stress",
+            "topic:growth",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_role_nt_02"
+        }
+      ],
+      "NF": [
+        {
+          "id": "art_role_nf_01",
+          "canonical_id": "cn.read.nf.boundaries_with_warmth.v1",
+          "type": "article",
+          "title": "共情不内耗：把界限说清",
+          "desc": "在意他人是天赋，但界限是技能：用清晰表达减少误会。",
+          "url": "/reads/coming-soon?id=art_role_nf_01",
+          "cover": "/covers/role-nf-boundaries.png",
+          "priority": 120,
+          "tags": [
+            "role:NF",
+            "topic:relationships",
+            "topic:communication",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_role_nf_01"
+        },
+        {
+          "id": "exercise_role_nf_01",
+          "canonical_id": "cn.exercise.relationship_retro.v1",
+          "type": "exercise",
+          "title": "关系复盘：我在乎什么，我需要什么",
+          "desc": "把模糊的情绪变清晰：价值—需求—请求三步写出来。",
+          "url": "/reads/coming-soon?id=exercise_role_nf_01",
+          "cover": "/covers/exercise-relationship-retro.png",
+          "priority": 110,
+          "tags": [
+            "role:NF",
+            "topic:relationships",
+            "topic:growth",
+            "stage:deepdive",
+            "channel:miniapp"
+          ],
+          "cta": "开始练习",
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=exercise_role_nf_01"
+        },
+        {
+          "id": "tool_role_nf_01",
+          "canonical_id": "cn.tool.emotion_labels.v1",
+          "type": "tool",
+          "title": "情绪命名卡：先把感受叫对名字",
+          "desc": "当你说不清时，先命名情绪；表达会更稳、冲突会更少。",
+          "url": "/reads/coming-soon?id=tool_role_nf_01",
+          "cover": "/covers/tools-emotion-labels.png",
+          "priority": 105,
+          "tags": [
+            "role:NF",
+            "topic:communication",
+            "topic:stress",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "cta": "打开工具",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_role_nf_01"
+        },
+        {
+          "id": "art_role_nf_02",
+          "canonical_id": "cn.read.nf.stop_being_too_nice.v1",
+          "type": "article",
+          "title": "别把「懂事」当默认设置",
+          "desc": "你可以温柔，但不必委屈：把取舍摆到台面上。",
+          "url": "/reads/coming-soon?id=art_role_nf_02",
+          "cover": "/covers/role-nf-too-nice.png",
+          "priority": 100,
+          "tags": [
+            "role:NF",
+            "topic:growth",
+            "topic:relationships",
+            "stage:deepdive",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_role_nf_02"
+        }
+      ],
+      "SJ": [
+        {
+          "id": "art_role_sj_01",
+          "canonical_id": "cn.read.sj.systemize_reliability.v1",
+          "type": "article",
+          "title": "把靠谱做成系统：流程与模板",
+          "desc": "把经验沉淀为可复用模板：减少返工，稳定输出。",
+          "url": "/reads/coming-soon?id=art_role_sj_01",
+          "cover": "/covers/role-sj-system.png",
+          "priority": 120,
+          "tags": [
+            "role:SJ",
+            "topic:career",
+            "topic:growth",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_role_sj_01"
+        },
+        {
+          "id": "tool_role_sj_01",
+          "canonical_id": "cn.tool.three_step_checklist.v1",
+          "type": "tool",
+          "title": "三步清单：从混乱到有序",
+          "desc": "把任务变成三步：收集—排序—执行，快速恢复秩序感。",
+          "url": "/reads/coming-soon?id=tool_role_sj_01",
+          "cover": "/covers/tools-3step.png",
+          "priority": 110,
+          "tags": [
+            "role:SJ",
+            "topic:stress",
+            "topic:growth",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "cta": "开始使用",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_role_sj_01"
+        },
+        {
+          "id": "exercise_role_sj_01",
+          "canonical_id": "cn.exercise.done_then_better.v1",
+          "type": "exercise",
+          "title": "标准校准：先完成，再精修",
+          "desc": "把高标准变成可持续：先交付可用版本，再做第二轮优化。",
+          "url": "/reads/coming-soon?id=exercise_role_sj_01",
+          "cover": "/covers/exercise-done-better.png",
+          "priority": 105,
+          "tags": [
+            "role:SJ",
+            "topic:career",
+            "topic:stress",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "cta": "开始练习",
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=exercise_role_sj_01"
+        },
+        {
+          "id": "art_role_sj_02",
+          "canonical_id": "cn.read.sj.ask_for_help.v1",
+          "type": "article",
+          "title": "求助不是失误：分工更高效",
+          "desc": "把「全靠我」改成「系统协作」：明确边界，减少压垮。",
+          "url": "/reads/coming-soon?id=art_role_sj_02",
+          "cover": "/covers/role-sj-help.png",
+          "priority": 100,
+          "tags": [
+            "role:SJ",
+            "topic:communication",
+            "topic:career",
+            "stage:deepdive",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_role_sj_02"
+        }
+      ],
+      "SP": [
+        {
+          "id": "art_role_sp_01",
+          "canonical_id": "cn.read.sp.iterate_by_doing.v1",
+          "type": "article",
+          "title": "边做边调：用小胜利推进",
+          "desc": "把行动变成连续小步：每次只改一个关键点，越做越顺。",
+          "url": "/reads/coming-soon?id=art_role_sp_01",
+          "cover": "/covers/role-sp-iterate.png",
+          "priority": 120,
+          "tags": [
+            "role:SP",
+            "topic:growth",
+            "topic:career",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_role_sp_01"
+        },
+        {
+          "id": "tool_role_sp_01",
+          "canonical_id": "cn.tool.low_cost_pilot.v1",
+          "type": "tool",
+          "title": "低成本试跑：先跑通再加码",
+          "desc": "先做一轮小试跑，验证方向与风险，再决定是否加投入。",
+          "url": "/reads/coming-soon?id=tool_role_sp_01",
+          "cover": "/covers/tools-low-cost-pilot.png",
+          "priority": 110,
+          "tags": [
+            "role:SP",
+            "topic:career",
+            "topic:stress",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "cta": "开始使用",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_role_sp_01"
+        },
+        {
+          "id": "exercise_role_sp_01",
+          "canonical_id": "cn.exercise.checkpoint_decision.v1",
+          "type": "exercise",
+          "title": "手感+检查点：重要决定更稳",
+          "desc": "用一个检查点把「凭感觉」升级成「有把握」：补一条对照数据。",
+          "url": "/reads/coming-soon?id=exercise_role_sp_01",
+          "cover": "/covers/exercise-checkpoint.png",
+          "priority": 105,
+          "tags": [
+            "role:SP",
+            "topic:growth",
+            "topic:career",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "cta": "开始练习",
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=exercise_role_sp_01"
+        },
+        {
+          "id": "art_role_sp_02",
+          "canonical_id": "cn.read.sp.process_over_anxiety.v1",
+          "type": "article",
+          "title": "紧绷不是保护罩：用流程替代焦虑",
+          "desc": "越紧张越要靠流程：固定步骤+复盘，让安全感可复制。",
+          "url": "/reads/coming-soon?id=art_role_sp_02",
+          "cover": "/covers/role-sp-process.png",
+          "priority": 100,
+          "tags": [
+            "role:SP",
+            "topic:stress",
+            "topic:growth",
+            "stage:deepdive",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_role_sp_02"
+        }
       ]
     },
     "by_strategy": {
       "EA": [
-        {"id":"s_ea_1","type":"article","title":"外放笃定策略建议","desc":"...","url":"...","cover":"","priority":90,"tags":["strategy:EA"]}
+        {
+          "id": "art_strategy_ea_01",
+          "canonical_id": "cn.read.strategy.ea.lead_with_clarity.v1",
+          "type": "article",
+          "title": "外放笃定：用清晰愿景带队",
+          "desc": "把愿景说清，把节奏带起来：让协作更顺、推进更稳。",
+          "url": "/reads/coming-soon?id=art_strategy_ea_01",
+          "cover": "/covers/strategy-ea.png",
+          "priority": 115,
+          "tags": [
+            "strategy:EA",
+            "topic:communication",
+            "topic:career",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_strategy_ea_01"
+        },
+        {
+          "id": "tool_strategy_ea_01",
+          "canonical_id": "cn.tool.meeting_two_things.v1",
+          "type": "tool",
+          "title": "会议两件事：结论与下一步",
+          "desc": "把讨论收束成可执行：每次会议只留两样东西。",
+          "url": "/reads/coming-soon?id=tool_strategy_ea_01",
+          "cover": "/covers/tools-meeting.png",
+          "priority": 105,
+          "tags": [
+            "strategy:EA",
+            "topic:career",
+            "topic:communication",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "cta": "打开工具",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_strategy_ea_01"
+        }
+      ],
+      "ET": [
+        {
+          "id": "art_strategy_et_01",
+          "canonical_id": "cn.read.strategy.et.filter_feedback.v1",
+          "type": "article",
+          "title": "外放敏感：先降噪再表达",
+          "desc": "先把噪音过滤，再选择要说的重点：减少误读与自责。",
+          "url": "/reads/coming-soon?id=art_strategy_et_01",
+          "cover": "/covers/strategy-et.png",
+          "priority": 115,
+          "tags": [
+            "strategy:ET",
+            "topic:communication",
+            "topic:stress",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_strategy_et_01"
+        },
+        {
+          "id": "tool_strategy_et_01",
+          "canonical_id": "cn.tool.feedback_triage.v1",
+          "type": "tool",
+          "title": "反馈三分法：事实/推测/感受",
+          "desc": "把反馈拆开看：减少误读与自责，沟通更稳。",
+          "url": "/reads/coming-soon?id=tool_strategy_et_01",
+          "cover": "/covers/tools-feedback.png",
+          "priority": 105,
+          "tags": [
+            "strategy:ET",
+            "topic:communication",
+            "topic:relationships",
+            "stage:deepdive",
+            "channel:miniapp"
+          ],
+          "cta": "打开工具",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_strategy_et_01"
+        }
+      ],
+      "IA": [
+        {
+          "id": "art_strategy_ia_01",
+          "canonical_id": "cn.read.strategy.ia.deep_work_rhythm.v1",
+          "type": "article",
+          "title": "内收笃定：用稳定节奏做深事",
+          "desc": "保护你的深度时间：独处充电后，输出会更稳。",
+          "url": "/reads/coming-soon?id=art_strategy_ia_01",
+          "cover": "/covers/strategy-ia.png",
+          "priority": 115,
+          "tags": [
+            "strategy:IA",
+            "topic:growth",
+            "topic:career",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_strategy_ia_01"
+        },
+        {
+          "id": "tool_strategy_ia_01",
+          "canonical_id": "cn.tool.recharge_list.v1",
+          "type": "tool",
+          "title": "独处清单：我怎么补能量",
+          "desc": "把真正有效的充电方式列出来：减少无效休息。",
+          "url": "/reads/coming-soon?id=tool_strategy_ia_01",
+          "cover": "/covers/tools-recharge.png",
+          "priority": 105,
+          "tags": [
+            "strategy:IA",
+            "topic:stress",
+            "topic:growth",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "cta": "打开工具",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_strategy_ia_01"
+        }
+      ],
+      "IT": [
+        {
+          "id": "art_strategy_it_01",
+          "canonical_id": "cn.read.strategy.it.turn_reflection_into_iteration.v1",
+          "type": "article",
+          "title": "内收敏感：把自省变成迭代",
+          "desc": "把「想」转成「小步试验」：你会更敢开始，也更快走出来。",
+          "url": "/reads/coming-soon?id=art_strategy_it_01",
+          "cover": "/covers/strategy-it.png",
+          "priority": 115,
+          "tags": [
+            "strategy:IT",
+            "topic:growth",
+            "topic:stress",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_strategy_it_01"
+        },
+        {
+          "id": "tool_strategy_it_01",
+          "canonical_id": "cn.tool.reversible_experiment.v1",
+          "type": "tool",
+          "title": "可撤回实验：降低行动门槛",
+          "desc": "把决定改成「可撤回的小实验」：减少自我审查吞掉行动。",
+          "url": "/reads/coming-soon?id=tool_strategy_it_01",
+          "cover": "/covers/tools-reversible.png",
+          "priority": 105,
+          "tags": [
+            "strategy:IT",
+            "topic:growth",
+            "topic:career",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "cta": "打开工具",
+          "estimated_minutes": 4,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=tool_strategy_it_01"
+        }
       ]
     },
     "by_top_axis": {
-      "EI:E": [
-        {"id":"a_ei_e_1","type":"test","title":"外向能量补给测评","desc":"...","url":"...","cover":"","priority":80,"tags":["EI","axis:EI:E"]}
+      "axis:EI:E": [
+        {
+          "id": "art_axis_ei_e_01",
+          "canonical_id": "cn.read.axis.ei_e.social_as_energy.v1",
+          "type": "article",
+          "title": "外向充电：把互动变成能量",
+          "desc": "适合更偏 E 的你：用更聪明的社交让你越聊越清醒。",
+          "url": "/reads/coming-soon?id=art_axis_ei_e_01",
+          "cover": "/covers/axis-ei-e.png",
+          "priority": 108,
+          "tags": [
+            "axis:EI:E",
+            "topic:growth",
+            "topic:communication",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_ei_e_01"
+        }
+      ],
+      "axis:EI:I": [
+        {
+          "id": "art_axis_ei_i_01",
+          "canonical_id": "cn.read.axis.ei_i.solitude_for_focus.v1",
+          "type": "article",
+          "title": "内向充电：把独处用在刀刃上",
+          "desc": "适合更偏 I 的你：更高质量的独处，带来更高质量的输出。",
+          "url": "/reads/coming-soon?id=art_axis_ei_i_01",
+          "cover": "/covers/axis-ei-i.png",
+          "priority": 108,
+          "tags": [
+            "axis:EI:I",
+            "topic:growth",
+            "topic:stress",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_ei_i_01"
+        }
+      ],
+      "axis:SN:S": [
+        {
+          "id": "art_axis_sn_s_01",
+          "canonical_id": "cn.read.axis.sn_s.details_to_loop.v1",
+          "type": "article",
+          "title": "更偏 S：把细节做成闭环",
+          "desc": "用事实、步骤和复盘把质量守住：稳定感会越来越强。",
+          "url": "/reads/coming-soon?id=art_axis_sn_s_01",
+          "cover": "/covers/axis-sn-s.png",
+          "priority": 108,
+          "tags": [
+            "axis:SN:S",
+            "topic:career",
+            "topic:growth",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_sn_s_01"
+        }
+      ],
+      "axis:SN:N": [
+        {
+          "id": "art_axis_sn_n_01",
+          "canonical_id": "cn.read.axis.sn_n.idea_to_roadmap.v1",
+          "type": "article",
+          "title": "更偏 N：把灵感变成路线",
+          "desc": "让「想法很多」不再飘：给每个点子一个下一步动作。",
+          "url": "/reads/coming-soon?id=art_axis_sn_n_01",
+          "cover": "/covers/axis-sn-n.png",
+          "priority": 108,
+          "tags": [
+            "axis:SN:N",
+            "topic:career",
+            "topic:growth",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_sn_n_01"
+        }
+      ],
+      "axis:TF:T": [
+        {
+          "id": "art_axis_tf_t_01",
+          "canonical_id": "cn.read.axis.tf_t.decide_by_principles.v1",
+          "type": "article",
+          "title": "更偏 T：用原则做决策",
+          "desc": "把选择变清晰：标准先定好，情绪就不会带着你乱跑。",
+          "url": "/reads/coming-soon?id=art_axis_tf_t_01",
+          "cover": "/covers/axis-tf-t.png",
+          "priority": 108,
+          "tags": [
+            "axis:TF:T",
+            "topic:career",
+            "topic:growth",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_tf_t_01"
+        }
+      ],
+      "axis:TF:F": [
+        {
+          "id": "art_axis_tf_f_01",
+          "canonical_id": "cn.read.axis.tf_f.feelings_in_decisions.v1",
+          "type": "article",
+          "title": "更偏 F：把感受纳入决策",
+          "desc": "不是「情绪化」，是「考虑人」：用同理心做更稳的选择。",
+          "url": "/reads/coming-soon?id=art_axis_tf_f_01",
+          "cover": "/covers/axis-tf-f.png",
+          "priority": 108,
+          "tags": [
+            "axis:TF:F",
+            "topic:relationships",
+            "topic:communication",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 6,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_tf_f_01"
+        }
+      ],
+      "axis:JP:J": [
+        {
+          "id": "art_axis_jp_j_01",
+          "canonical_id": "cn.read.axis.jp_j.plan_for_control.v1",
+          "type": "article",
+          "title": "更偏 J：用计划换掌控",
+          "desc": "计划不是束缚：它是在不确定里给你一条稳定的路。",
+          "url": "/reads/coming-soon?id=art_axis_jp_j_01",
+          "cover": "/covers/axis-jp-j.png",
+          "priority": 108,
+          "tags": [
+            "axis:JP:J",
+            "topic:career",
+            "topic:stress",
+            "stage:onboarding",
+            "channel:web"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_jp_j_01"
+        }
+      ],
+      "axis:JP:P": [
+        {
+          "id": "art_axis_jp_p_01",
+          "canonical_id": "cn.read.axis.jp_p.flexible_but_steady.v1",
+          "type": "article",
+          "title": "更偏 P：用弹性换空间",
+          "desc": "保持开放不是拖延：给自己一个「可变更但不失控」的节奏。",
+          "url": "/reads/coming-soon?id=art_axis_jp_p_01",
+          "cover": "/covers/axis-jp-p.png",
+          "priority": 108,
+          "tags": [
+            "axis:JP:P",
+            "topic:growth",
+            "topic:stress",
+            "stage:onboarding",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_jp_p_01"
+        }
+      ],
+      "axis:AT:A": [
+        {
+          "id": "art_axis_at_a_01",
+          "canonical_id": "cn.read.axis.at_a.steady_advance.v1",
+          "type": "article",
+          "title": "更偏 A：稳住节奏再推进",
+          "desc": "把笃定用在关键处：分担、复盘、留缓冲，稳才能更快。",
+          "url": "/reads/coming-soon?id=art_axis_at_a_01",
+          "cover": "/covers/axis-at-a.png",
+          "priority": 108,
+          "tags": [
+            "axis:AT:A",
+            "topic:growth",
+            "topic:career",
+            "stage:deepdive",
+            "channel:web"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_at_a_01"
+        }
+      ],
+      "axis:AT:T": [
+        {
+          "id": "art_axis_at_t_01",
+          "canonical_id": "cn.read.axis.at_t.sensitive_as_skill.v1",
+          "type": "article",
+          "title": "更偏 T：把敏感变成校准力",
+          "desc": "敏锐不是负担：用小实验和够用线，把自省变成迭代。",
+          "url": "/reads/coming-soon?id=art_axis_at_t_01",
+          "cover": "/covers/axis-at-t.png",
+          "priority": 108,
+          "tags": [
+            "axis:AT:T",
+            "topic:stress",
+            "topic:growth",
+            "stage:deepdive",
+            "channel:miniapp"
+          ],
+          "estimated_minutes": 5,
+          "status": "active",
+          "published_at": "2025-12-20",
+          "updated_at": "2025-12-20",
+          "canonical_url": "/reads/coming-soon?id=art_axis_at_t_01"
+        }
       ]
     },
     "fallback": [
-      {"id":"g1","type":"article","title":"所有人都适用的入门阅读","desc":"...","url":"...","cover":"","priority":10,"tags":[]}
+      {
+        "id": "test_fallback_01",
+        "canonical_id": "cn.test.stress_check.v1",
+        "type": "test",
+        "title": "压力状态小测：你现在需要补哪种能量",
+        "desc": "快速定位你的压力来源与恢复方式，给你一条可执行的下一步。",
+        "url": "/reads/coming-soon?id=test_fallback_01",
+        "cover": "/covers/test-stress.png",
+        "priority": 90,
+        "tags": [
+          "topic:stress",
+          "stage:onboarding",
+          "channel:miniapp"
+        ],
+        "cta": "去测测",
+        "estimated_minutes": 4,
+        "status": "active",
+        "published_at": "2025-12-20",
+        "updated_at": "2025-12-20",
+        "canonical_url": "/reads/coming-soon?id=test_fallback_01"
+      },
+      {
+        "id": "art_fallback_01",
+        "canonical_id": "cn.read.onboarding.understand_scores.v1",
+        "type": "article",
+        "title": "新手必读：看懂你的五轴分数",
+        "desc": "EI/SN/TF/JP/AT 分别代表什么？怎么把分数用到日常决策里？",
+        "url": "/reads/coming-soon?id=art_fallback_01",
+        "cover": "/covers/onboarding-scores.png",
+        "priority": 85,
+        "tags": [
+          "topic:growth",
+          "stage:onboarding",
+          "channel:web"
+        ],
+        "estimated_minutes": 7,
+        "status": "active",
+        "published_at": "2025-12-20",
+        "updated_at": "2025-12-20",
+        "canonical_url": "/reads/coming-soon?id=art_fallback_01"
+      },
+      {
+        "id": "tool_fallback_01",
+        "canonical_id": "cn.tool.communication_script.v1",
+        "type": "tool",
+        "title": "沟通句式：把冲突说成协商",
+        "desc": "三句话模板：事实—感受—请求，让对话不升级。",
+        "url": "/reads/coming-soon?id=tool_fallback_01",
+        "cover": "/covers/tools-communication.png",
+        "priority": 80,
+        "tags": [
+          "topic:communication",
+          "topic:relationships",
+          "stage:onboarding",
+          "channel:miniapp"
+        ],
+        "cta": "打开工具",
+        "estimated_minutes": 4,
+        "status": "active",
+        "published_at": "2025-12-20",
+        "updated_at": "2025-12-20",
+        "canonical_url": "/reads/coming-soon?id=tool_fallback_01"
+      },
+      {
+        "id": "exercise_fallback_01",
+        "canonical_id": "cn.exercise.weekly_top3.v1",
+        "type": "exercise",
+        "title": "一页纸复盘：本周更值的三件事",
+        "desc": "把注意力从「忙」拉回「值」：保留有效动作，删掉低收益消耗。",
+        "url": "/reads/coming-soon?id=exercise_fallback_01",
+        "cover": "/covers/exercise-weekly-top3.png",
+        "priority": 78,
+        "tags": [
+          "topic:growth",
+          "topic:career",
+          "stage:deepdive",
+          "channel:web"
+        ],
+        "cta": "开始练习",
+        "estimated_minutes": 6,
+        "status": "active",
+        "published_at": "2025-12-20",
+        "updated_at": "2025-12-20",
+        "canonical_url": "/reads/coming-soon?id=exercise_fallback_01"
+      },
+      {
+        "id": "art_fallback_02",
+        "canonical_id": "cn.read.relationships.boundary_first.v1",
+        "type": "article",
+        "title": "关系不累：先把界限画出来",
+        "desc": "越清晰越温柔：界限不是疏远，是让关系更长久。",
+        "url": "/reads/coming-soon?id=art_fallback_02",
+        "cover": "/covers/relationships-boundary.png",
+        "priority": 76,
+        "tags": [
+          "topic:relationships",
+          "topic:communication",
+          "stage:onboarding",
+          "channel:web"
+        ],
+        "estimated_minutes": 6,
+        "status": "active",
+        "published_at": "2025-12-20",
+        "updated_at": "2025-12-20",
+        "canonical_url": "/reads/coming-soon?id=art_fallback_02"
+      },
+      {
+        "id": "art_fallback_03",
+        "canonical_id": "cn.read.career.minimum_next_step.v1",
+        "type": "article",
+        "title": "职业成长：从目标到行动的最短路径",
+        "desc": "把目标拆到「今天能做的最小一步」，行动就会开始滚起来。",
+        "url": "/reads/coming-soon?id=art_fallback_03",
+        "cover": "/covers/career-next-step.png",
+        "priority": 75,
+        "tags": [
+          "topic:career",
+          "topic:growth",
+          "stage:onboarding",
+          "channel:miniapp"
+        ],
+        "estimated_minutes": 6,
+        "status": "active",
+        "published_at": "2025-12-20",
+        "updated_at": "2025-12-20",
+        "canonical_url": "/reads/coming-soon?id=art_fallback_03"
+      },
+      {
+        "id": "tool_fallback_02",
+        "canonical_id": "cn.tool.worry_to_test.v1",
+        "type": "tool",
+        "title": "担心→验证：三步止损卡",
+        "desc": "把焦虑变成动作：写下担心、改成假设、选择验证方式。",
+        "url": "/reads/coming-soon?id=tool_fallback_02",
+        "cover": "/covers/tools-worry-test.png",
+        "priority": 74,
+        "tags": [
+          "topic:stress",
+          "topic:growth",
+          "stage:onboarding",
+          "channel:miniapp"
+        ],
+        "cta": "打开工具",
+        "estimated_minutes": 4,
+        "status": "active",
+        "published_at": "2025-12-20",
+        "updated_at": "2025-12-20",
+        "canonical_url": "/reads/coming-soon?id=tool_fallback_02"
+      },
+      {
+        "id": "art_fallback_04",
+        "canonical_id": "cn.read.onboarding.explore_how_to_use.v1",
+        "type": "article",
+        "title": "Explore 导航：从结果走向下一步",
+        "desc": "给你一条最短路径：读什么、练什么、测什么，按主题快速进入。",
+        "url": "/reads/coming-soon?id=art_fallback_04",
+        "cover": "/covers/explore-guide.png",
+        "priority": 73,
+        "tags": [
+          "topic:growth",
+          "topic:communication",
+          "stage:onboarding",
+          "channel:web"
+        ],
+        "estimated_minutes": 5,
+        "status": "active",
+        "published_at": "2025-12-20",
+        "updated_at": "2025-12-20",
+        "canonical_url": "/reads/coming-soon?id=art_fallback_04"
+      }
     ]
   }
 }
