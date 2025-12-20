@@ -1,46 +1,30 @@
 {
-  "schema": "fap.report.recommended_reads.v1",
+  "schema": "fap.report.reads.v2",
   "engine": "v1.2",
-  "rules": {
-    "max_items": 5,
-    "allowed_domains": [
-      "fermatmind.com"
-    ]
-  },
+  "meta": { "updated_at": "2025-12-20", "notes": "M3-6 recommended_reads buckets" },
   "items": {
-    "ENTJ-A": [],
-    "ENTJ-T": [],
-    "ENTP-A": [],
-    "ENTP-T": [],
-    "ENFJ-A": [],
-    "ENFJ-T": [],
-    "ENFP-A": [],
-    "ENFP-T": [],
-    "ESTJ-A": [
-  { "id": "r1", "title": "高效沟通", "url": "https://fermatmind.com/reads/communication" }
-],
-    "ESTJ-T": [],
-    "ESTP-A": [],
-    "ESTP-T": [],
-    "ESFJ-A": [],
-    "ESFJ-T": [],
-    "ESFP-A": [],
-    "ESFP-T": [],
-    "INTJ-A": [],
-    "INTJ-T": [],
-    "INTP-A": [],
-    "INTP-T": [],
-    "INFJ-A": [],
-    "INFJ-T": [],
-    "INFP-A": [],
-    "INFP-T": [],
-    "ISTJ-A": [],
-    "ISTJ-T": [],
-    "ISTP-A": [],
-    "ISTP-T": [],
-    "ISFJ-A": [],
-    "ISFJ-T": [],
-    "ISFP-A": [],
-    "ISFP-T": []
+    "by_type": {
+      "ENTJ-A": [
+        {"id":"t1","type":"article","title":"ENTJ-A 专属阅读 1","desc":"...","url":"...","cover":"","priority":120,"tags":["type:ENTJ-A"]}
+      ]
+    },
+    "by_role": {
+      "NT": [
+        {"id":"r_nt_1","type":"article","title":"NT 通用阅读","desc":"...","url":"...","cover":"","priority":100,"tags":["role:NT"]}
+      ]
+    },
+    "by_strategy": {
+      "EA": [
+        {"id":"s_ea_1","type":"article","title":"外放笃定策略建议","desc":"...","url":"...","cover":"","priority":90,"tags":["strategy:EA"]}
+      ]
+    },
+    "by_top_axis": {
+      "EI:E": [
+        {"id":"a_ei_e_1","type":"test","title":"外向能量补给测评","desc":"...","url":"...","cover":"","priority":80,"tags":["EI","axis:EI:E"]}
+      ]
+    },
+    "fallback": [
+      {"id":"g1","type":"article","title":"所有人都适用的入门阅读","desc":"...","url":"...","cover":"","priority":10,"tags":[]}
+    ]
   }
 }

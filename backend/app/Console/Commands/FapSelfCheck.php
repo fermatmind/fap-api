@@ -67,6 +67,12 @@ class FapSelfCheck extends Command
         $ok = $ok && $sOk;
         $this->printSectionResult('report_strategies.json', $sOk, $sMsg);
 
+        // 8) report_recommended_reads.json (M3-6)
+        $rrPath = $this->contentPackagePath($pkg, 'report_recommended_reads.json');
+        [$rrOk, $rrMsg] = $this->checkRecommendedReads($rrPath);
+        $ok = $ok && $rrOk;
+        $this->printSectionResult('report_recommended_reads.json', $rrOk, $rrMsg);
+
         $this->line(str_repeat('-', 60));
         if ($ok) {
             $this->info('✅ SELF-CHECK PASSED');
@@ -629,6 +635,197 @@ class FapSelfCheck extends Command
 
         return [true, ['OK (EA/ET/IA/IT present & valid)']];
     }
+
+    /**
+ * M3-6: 检查 report_recommended_reads.json
+ *
+ * 约束：
+ * - 文件必须存在且 JSON 合法
+ * - items 必须包含：by_type/by_role/by_strategy/by_top_axis/fallback
+ * - 每条 read 必须包含：
+ *   id/type/title/desc/url/priority/tags（cover 可选）
+ * - id 在同一个文件内全局不重复
+ */
+private function checkRecommendedReads(string $path): array
+{
+    if (!is_file($path)) {
+        return [false, ["File not found: {$path}"]];
+    }
+
+    $raw = file_get_contents($path);
+    if ($raw === false || trim($raw) === '') {
+        return [false, ["File empty/unreadable: {$path}"]];
+    }
+
+    $json = json_decode($raw, true);
+    if (!is_array($json)) {
+        return [false, ["Invalid JSON: {$path}"]];
+    }
+
+    $items = $json['items'] ?? null;
+    if (!is_array($items)) {
+        return [false, ['Missing/invalid key: items']];
+    }
+
+    $requiredBuckets = ['by_type', 'by_role', 'by_strategy', 'by_top_axis', 'fallback'];
+    $errors = [];
+
+    foreach ($requiredBuckets as $k) {
+        if (!array_key_exists($k, $items)) {
+            $errors[] = "Missing bucket: items.{$k}";
+            continue;
+        }
+        if ($k === 'fallback') {
+            if (!is_array($items[$k])) $errors[] = "items.{$k} must be array(list)";
+        } else {
+            if (!is_array($items[$k])) $errors[] = "items.{$k} must be object(map)";
+        }
+    }
+
+    if (!empty($errors)) {
+        return [false, array_merge(
+            ['Recommended reads structure invalid: ' . count($errors)],
+            array_slice($errors, 0, 50)
+        )];
+    }
+
+    $seenIds = [];
+    $dupIds  = [];
+    $badRows = 0;
+
+    // helper: validate one read item
+    $validateRead = function (array $it, string $where) use (&$seenIds, &$dupIds, &$errors, &$badRows) {
+        $reqStr = ['id','type','title','desc','url'];
+        foreach ($reqStr as $f) {
+            if (!isset($it[$f]) || !is_string($it[$f]) || trim($it[$f]) === '') {
+                $errors[] = "{$where}: missing/invalid {$f}";
+                $badRows++;
+                // 不 return，继续收集更多错误
+            }
+        }
+
+        if (!array_key_exists('priority', $it) || !is_numeric($it['priority'])) {
+            $errors[] = "{$where}: missing/invalid priority (number)";
+            $badRows++;
+        }
+
+        if (!array_key_exists('tags', $it) || !is_array($it['tags'])) {
+            $errors[] = "{$where}: missing/invalid tags (array)";
+            $badRows++;
+        }
+
+        if (array_key_exists('cover', $it) && !is_string($it['cover'])) {
+            $errors[] = "{$where}: cover must be string if present";
+            $badRows++;
+        }
+
+        $id = (string)($it['id'] ?? '');
+        if ($id !== '') {
+            if (isset($seenIds[$id])) {
+                $dupIds[$id] = ($dupIds[$id] ?? 1) + 1;
+            } else {
+                $seenIds[$id] = true;
+            }
+        }
+    };
+
+    // 1) by_type (map: type_code => list)
+    $byType = $items['by_type'] ?? [];
+    if (!is_array($byType)) $byType = [];
+    foreach ($byType as $typeCode => $list) {
+        if (!is_array($list)) {
+            $errors[] = "items.by_type.{$typeCode} must be array(list)";
+            continue;
+        }
+        foreach ($list as $i => $it) {
+            if (!is_array($it)) {
+                $errors[] = "items.by_type.{$typeCode}[{$i}] must be object";
+                continue;
+            }
+            $validateRead($it, "items.by_type.{$typeCode}[{$i}]");
+        }
+    }
+
+    // 2) by_role (map: NT/NF/SJ/SP => list)
+    $byRole = $items['by_role'] ?? [];
+    if (!is_array($byRole)) $byRole = [];
+    foreach ($byRole as $role => $list) {
+        if (!is_array($list)) {
+            $errors[] = "items.by_role.{$role} must be array(list)";
+            continue;
+        }
+        foreach ($list as $i => $it) {
+            if (!is_array($it)) {
+                $errors[] = "items.by_role.{$role}[{$i}] must be object";
+                continue;
+            }
+            $validateRead($it, "items.by_role.{$role}[{$i}]");
+        }
+    }
+
+    // 3) by_strategy (map: EA/ET/IA/IT => list)
+    $byStrategy = $items['by_strategy'] ?? [];
+    if (!is_array($byStrategy)) $byStrategy = [];
+    foreach ($byStrategy as $st => $list) {
+        if (!is_array($list)) {
+            $errors[] = "items.by_strategy.{$st} must be array(list)";
+            continue;
+        }
+        foreach ($list as $i => $it) {
+            if (!is_array($it)) {
+                $errors[] = "items.by_strategy.{$st}[{$i}] must be object";
+                continue;
+            }
+            $validateRead($it, "items.by_strategy.{$st}[{$i}]");
+        }
+    }
+
+    // 4) by_top_axis (map: "EI:E" / "SN:N" / "AT:A" ... => list)
+    $byTopAxis = $items['by_top_axis'] ?? [];
+    if (!is_array($byTopAxis)) $byTopAxis = [];
+    foreach ($byTopAxis as $axisKey => $list) {
+        if (!is_array($list)) {
+            $errors[] = "items.by_top_axis.{$axisKey} must be array(list)";
+            continue;
+        }
+        foreach ($list as $i => $it) {
+            if (!is_array($it)) {
+                $errors[] = "items.by_top_axis.{$axisKey}[{$i}] must be object";
+                continue;
+            }
+            $validateRead($it, "items.by_top_axis.{$axisKey}[{$i}]");
+        }
+    }
+
+    // 5) fallback (list)
+    $fallback = $items['fallback'] ?? [];
+    if (!is_array($fallback)) $fallback = [];
+    foreach ($fallback as $i => $it) {
+        if (!is_array($it)) {
+            $errors[] = "items.fallback[{$i}] must be object";
+            continue;
+        }
+        $validateRead($it, "items.fallback[{$i}]");
+    }
+
+    if (!empty($dupIds)) {
+        $pairs = [];
+        foreach ($dupIds as $id => $n) {
+            $pairs[] = "{$id}×{$n}";
+        }
+        $errors[] = 'Duplicate read ids detected: ' . count($dupIds);
+        $errors[] = 'e.g. ' . implode(', ', array_slice($pairs, 0, 12));
+    }
+
+    if (!empty($errors)) {
+        return [false, array_merge(
+            ['Recommended reads invalid: ' . count($errors)],
+            array_slice($errors, 0, 80)
+        )];
+    }
+
+    return [true, ['OK (recommended_reads structure valid, required fields present, ids unique)']];
+}
 
     private function expectedTypeCodes32(): array
     {

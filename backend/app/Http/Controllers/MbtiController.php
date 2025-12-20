@@ -601,11 +601,10 @@ class MbtiController extends Controller
         $typeCode = $result->type_code;
 
         $identityItems = $this->loadReportAssetItems($contentPackageVersion, 'report_identity_cards.json');
-        $readsItems    = $this->loadReportAssetItems($contentPackageVersion, 'report_recommended_reads.json');
+$identityCard  = $identityItems[$typeCode] ?? null;
 
-        $identityCard     = $identityItems[$typeCode] ?? null;
-        $recommendedReads = $readsItems[$typeCode] ?? [];
-        if (!is_array($recommendedReads)) $recommendedReads = [];
+// ✅ M3-6：按优先级拼装 recommended_reads（type > role > strategy > top_axis > fallback）
+$recommendedReads = $this->buildRecommendedReads($contentPackageVersion, $typeCode, $scoresPct);
 
         // ✅ M3-3 highlights（templates + overrides）
         $highlights = $this->buildHighlights($scoresPct, $axisStates, $typeCode, $contentPackageVersion);
@@ -1314,5 +1313,71 @@ private function buildStrategyCard(string $contentPackageVersion, string $typeCo
     if (!is_array($out['tags'] ?? null)) $out['tags'] = [];
     $out['code'] = $code; // 强制一致
     return $out;
+}
+
+private function buildRecommendedReads(string $contentPackageVersion, string $typeCode, array $scoresPct, int $max = 8): array
+{
+    $raw   = $this->loadReportAssetJson($contentPackageVersion, 'report_recommended_reads.json');
+    $items = is_array($raw['items'] ?? null) ? $raw['items'] : [];
+
+    $byType     = is_array($items['by_type'] ?? null) ? $items['by_type'] : [];
+    $byRole     = is_array($items['by_role'] ?? null) ? $items['by_role'] : [];
+    $byStrategy = is_array($items['by_strategy'] ?? null) ? $items['by_strategy'] : [];
+    $byTopAxis  = is_array($items['by_top_axis'] ?? null) ? $items['by_top_axis'] : [];
+    $fallback   = is_array($items['fallback'] ?? null) ? $items['fallback'] : [];
+
+    $roleCode     = $this->roleCodeFromType($typeCode);     // NT/NF/SJ/SP
+    $strategyCode = $this->strategyCodeFromType($typeCode); // EA/ET/IA/IT
+
+    // 取 delta 最大的一轴作为 top_axis
+    $dims = ['EI','SN','TF','JP','AT'];
+    $best = ['dim' => 'EI', 'delta' => -1, 'side' => 'E'];
+
+    foreach ($dims as $dim) {
+        $pct   = (int)($scoresPct[$dim] ?? 50);
+        $delta = abs($pct - 50) * 2;
+        [$p1, $p2] = $this->getDimensionPoles($dim);
+        $side = ($pct >= 50) ? $p1 : $p2;
+
+        if ($delta > $best['delta']) {
+            $best = ['dim' => $dim, 'delta' => $delta, 'side' => $side];
+        }
+    }
+    $topAxisKey = $best['dim'] . ':' . $best['side']; // 例：EI:E
+
+    $buckets = [
+        is_array($byType[$typeCode] ?? null) ? $byType[$typeCode] : [],
+        is_array($byRole[$roleCode] ?? null) ? $byRole[$roleCode] : [],
+        is_array($byStrategy[$strategyCode] ?? null) ? $byStrategy[$strategyCode] : [],
+        is_array($byTopAxis[$topAxisKey] ?? null) ? $byTopAxis[$topAxisKey] : [],
+        $fallback,
+    ];
+
+    // 合并 + 去重
+    $seen = [];
+    $out  = [];
+
+    foreach ($buckets as $list) {
+        foreach ($list as $it) {
+            if (!is_array($it)) continue;
+            $id = (string)($it['id'] ?? '');
+            if ($id === '' || isset($seen[$id])) continue;
+            $seen[$id] = true;
+
+            $out[] = [
+                'id'       => $id,
+                'type'     => (string)($it['type'] ?? 'article'),
+                'title'    => (string)($it['title'] ?? ''),
+                'desc'     => (string)($it['desc'] ?? ''),
+                'url'      => (string)($it['url'] ?? ''),
+                'cover'    => (string)($it['cover'] ?? ''),
+                'priority' => (int)($it['priority'] ?? 0),
+                'tags'     => is_array($it['tags'] ?? null) ? $it['tags'] : [],
+            ];
+        }
+    }
+
+    usort($out, fn($a, $b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
+    return array_slice($out, 0, max(0, $max));
 }
 }
