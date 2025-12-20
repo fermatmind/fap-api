@@ -813,12 +813,13 @@ class MbtiController extends Controller
 
         if (empty($out)) {
             // 先 fallback 回旧版（如果旧版存在）
-            if (!empty($oldPerType)) {
-                return $oldPerType;
-        }
+            if (is_array($oldPerType) && !empty($oldPerType)) {
+                $take = min(max($topN, 0), max($maxItems, 0));
+                return array_slice(array_values($oldPerType), 0, $take);
+            }
 
-            // 再按 allowEmpty 决定是否允许空（这里两种都只能返回空了）
-            return [];
+            // 再按 allowEmpty 决定是否允许空
+            return $allowEmpty ? [] : [];
         }
 
         return $out;
