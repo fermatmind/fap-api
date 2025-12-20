@@ -13,7 +13,7 @@ class FapSelfCheck extends Command
      */
     protected $signature = 'fap:self-check {--pkg= : Override MBTI content package folder name}';
 
-    protected $description = 'Quick self-check for MBTI content package (questions.json + type_profiles.json + highlights templates/overrides)';
+    protected $description = 'Quick self-check for MBTI content package (questions.json + type_profiles.json + highlights templates/overrides + borderline templates)';
 
     public function handle(): int
     {
@@ -48,6 +48,12 @@ class FapSelfCheck extends Command
         [$oOk, $oMsg] = $this->checkHighlightsOverrides($ovrPath);
         $ok = $ok && $oOk;
         $this->printSectionResult('report_highlights_overrides.json', $oOk, $oMsg);
+
+        // 5) report_borderline_templates.json (M3-4)
+        $bdPath = $this->contentPackagePath($pkg, 'report_borderline_templates.json');
+        [$bOk, $bMsg] = $this->checkBorderlineTemplates($bdPath);
+        $ok = $ok && $bOk;
+        $this->printSectionResult('report_borderline_templates.json', $bOk, $bMsg);
 
         $this->line(str_repeat('-', 60));
         if ($ok) {
@@ -404,6 +410,72 @@ class FapSelfCheck extends Command
         }
 
         return [true, ["OK (items valid, no per-type duplicate ids)"]];
+    }
+
+    /**
+     * M3-4: 检查 report_borderline_templates.json
+     * 要求：
+     * - 必须有 items.EI/SN/TF/JP/AT
+     * - 每个 dim 必须有 title/text（非空字符串）
+     * - examples/suggestions 必须是数组（允许空数组）
+     */
+    private function checkBorderlineTemplates(string $path): array
+    {
+        if (!is_file($path)) {
+            return [false, ["File not found: {$path}"]];
+        }
+
+        $raw = file_get_contents($path);
+        if ($raw === false || trim($raw) === '') {
+            return [false, ["File empty/unreadable: {$path}"]];
+        }
+
+        $json = json_decode($raw, true);
+        if (!is_array($json)) {
+            return [false, ["Invalid JSON: {$path}"]];
+        }
+
+        $items = $json['items'] ?? null;
+        if (!is_array($items)) {
+            return [false, ["Missing/invalid key: items"]];
+        }
+
+        $dims = ['EI','SN','TF','JP','AT'];
+        $errors = [];
+
+        foreach ($dims as $dim) {
+            $t = $items[$dim] ?? null;
+            if (!is_array($t)) {
+                $errors[] = "Missing/invalid: items.{$dim}";
+                continue;
+            }
+
+            $title = $t['title'] ?? null;
+            $text  = $t['text'] ?? null;
+
+            if (!is_string($title) || trim($title) === '') {
+                $errors[] = "items.{$dim}.title must be non-empty string";
+            }
+            if (!is_string($text) || trim($text) === '') {
+                $errors[] = "items.{$dim}.text must be non-empty string";
+            }
+
+            if (!array_key_exists('examples', $t) || !is_array($t['examples'])) {
+                $errors[] = "items.{$dim}.examples must be array (can be empty [])";
+            }
+            if (!array_key_exists('suggestions', $t) || !is_array($t['suggestions'])) {
+                $errors[] = "items.{$dim}.suggestions must be array (can be empty [])";
+            }
+        }
+
+        if (!empty($errors)) {
+            return [false, array_merge(
+                ["Borderline templates invalid: " . count($errors)],
+                array_slice($errors, 0, 30)
+            )];
+        }
+
+        return [true, ["OK (5 dims present & valid)"]];
     }
 
     private function expectedTypeCodes32(): array
