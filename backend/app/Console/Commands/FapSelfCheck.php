@@ -13,13 +13,13 @@ class FapSelfCheck extends Command
      */
     protected $signature = 'fap:self-check {--pkg= : Override MBTI content package folder name}';
 
-    protected $description = 'Quick self-check for MBTI content package (questions.json + type_profiles.json + highlights templates/overrides + borderline templates)';
+    protected $description = 'Quick self-check for MBTI content package (questions.json + type_profiles.json + highlights templates/overrides + borderline templates + roles/strategies)';
 
     public function handle(): int
     {
         $pkg = $this->option('pkg') ?: env('MBTI_CONTENT_PACKAGE', 'MBTI-CN-v0.2.1-TEST');
 
-        $this->info("FAP Self Check");
+        $this->info('FAP Self Check');
         $this->line("Package: <comment>{$pkg}</comment>");
         $this->line(str_repeat('-', 60));
 
@@ -55,13 +55,25 @@ class FapSelfCheck extends Command
         $ok = $ok && $bOk;
         $this->printSectionResult('report_borderline_templates.json', $bOk, $bMsg);
 
+        // 6) report_roles.json (M3-5)
+        $rolesPath = $this->contentPackagePath($pkg, 'report_roles.json');
+        [$rOk, $rMsg] = $this->checkReportRoles($rolesPath);
+        $ok = $ok && $rOk;
+        $this->printSectionResult('report_roles.json', $rOk, $rMsg);
+
+        // 7) report_strategies.json (M3-5)
+        $strPath = $this->contentPackagePath($pkg, 'report_strategies.json');
+        [$sOk, $sMsg] = $this->checkReportStrategies($strPath);
+        $ok = $ok && $sOk;
+        $this->printSectionResult('report_strategies.json', $sOk, $sMsg);
+
         $this->line(str_repeat('-', 60));
         if ($ok) {
-            $this->info("✅ SELF-CHECK PASSED");
+            $this->info('✅ SELF-CHECK PASSED');
             return 0;
         }
 
-        $this->error("❌ SELF-CHECK FAILED (see errors above)");
+        $this->error('❌ SELF-CHECK FAILED (see errors above)');
         return 1;
     }
 
@@ -92,20 +104,20 @@ class FapSelfCheck extends Command
 
         $items = isset($json['items']) ? $json['items'] : $json;
         if (!is_array($items)) {
-            return [false, ["Invalid items structure: expect array or {items:[]}"]];
+            return [false, ['Invalid items structure: expect array or {items:[]}']];
         }
 
         // active filter + sort by order
-        $items = array_values(array_filter($items, fn($q) => ($q['is_active'] ?? true) === true));
-        usort($items, fn($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
+        $items = array_values(array_filter($items, fn ($q) => ($q['is_active'] ?? true) === true));
+        usort($items, fn ($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
 
         $errors = [];
 
         if (count($items) !== 144) {
-            $errors[] = "Active questions must be 144, got: " . count($items);
+            $errors[] = 'Active questions must be 144, got: ' . count($items);
         }
 
-        $validDims = ['EI','SN','TF','JP','AT'];
+        $validDims = ['EI', 'SN', 'TF', 'JP', 'AT'];
         $seenQid = [];
         $orders = [];
 
@@ -113,19 +125,33 @@ class FapSelfCheck extends Command
             $idx = $i + 1;
 
             $qid = $q['question_id'] ?? null;
-            if (!$qid) $errors[] = "#{$idx}: missing question_id";
-            if ($qid && isset($seenQid[$qid])) $errors[] = "#{$idx}: duplicate question_id {$qid}";
-            if ($qid) $seenQid[$qid] = true;
+            if (!$qid) {
+                $errors[] = "#{$idx}: missing question_id";
+            }
+            if ($qid && isset($seenQid[$qid])) {
+                $errors[] = "#{$idx}: duplicate question_id {$qid}";
+            }
+            if ($qid) {
+                $seenQid[$qid] = true;
+            }
 
             $order = $q['order'] ?? null;
-            if (!is_int($order) && !is_numeric($order)) $errors[] = "#{$idx}: invalid order";
-            if (is_numeric($order)) $orders[] = (int)$order;
+            if (!is_int($order) && !is_numeric($order)) {
+                $errors[] = "#{$idx}: invalid order";
+            }
+            if (is_numeric($order)) {
+                $orders[] = (int) $order;
+            }
 
             $dim = $q['dimension'] ?? null;
-            if (!in_array($dim, $validDims, true)) $errors[] = "#{$idx} ({$qid}): invalid dimension {$dim}";
+            if (!in_array($dim, $validDims, true)) {
+                $errors[] = "#{$idx} ({$qid}): invalid dimension {$dim}";
+            }
 
             $text = $q['text'] ?? null;
-            if (!is_string($text) || trim($text) === '') $errors[] = "#{$idx} ({$qid}): missing text";
+            if (!is_string($text) || trim($text) === '') {
+                $errors[] = "#{$idx} ({$qid}): missing text";
+            }
 
             // internal scoring fields (for storeAttempt)
             $keyPole = $q['key_pole'] ?? null;
@@ -134,7 +160,7 @@ class FapSelfCheck extends Command
             }
 
             $direction = $q['direction'] ?? null;
-            if (!in_array((int)$direction, [1, -1], true)) {
+            if (!in_array((int) $direction, [1, -1], true)) {
                 $errors[] = "#{$idx} ({$qid}): direction must be 1 or -1";
             }
 
@@ -144,11 +170,13 @@ class FapSelfCheck extends Command
                 continue;
             }
 
-            $needCodes = ['A','B','C','D','E'];
+            $needCodes = ['A', 'B', 'C', 'D', 'E'];
             $optMap = [];
             foreach ($opts as $o) {
-                $c = strtoupper((string)($o['code'] ?? ''));
-                if ($c === '') continue;
+                $c = strtoupper((string) ($o['code'] ?? ''));
+                if ($c === '') {
+                    continue;
+                }
                 $optMap[$c] = $o;
             }
 
@@ -180,7 +208,7 @@ class FapSelfCheck extends Command
             return [false, $errors];
         }
 
-        return [true, ["OK (144 active questions, A~E options + scoring fields present)"]];
+        return [true, ['OK (144 active questions, A~E options + scoring fields present)']];
     }
 
     private function checkTypeProfiles(string $path): array
@@ -201,7 +229,7 @@ class FapSelfCheck extends Command
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) {
-            return [false, ["Invalid items: expect {items:{...}}"]];
+            return [false, ['Invalid items: expect {items:{...}}']];
         }
 
         $errors = [];
@@ -219,17 +247,17 @@ class FapSelfCheck extends Command
 
         // missing / extra
         $missing = array_values(array_diff($expected, $keys));
-        $extra   = array_values(array_diff($keys, $expected));
+        $extra = array_values(array_diff($keys, $expected));
 
         if (count($missing) > 0) {
-            $errors[] = "Missing types: " . implode(', ', $missing);
+            $errors[] = 'Missing types: ' . implode(', ', $missing);
         }
         if (count($extra) > 0) {
-            $errors[] = "Extra types: " . implode(', ', $extra);
+            $errors[] = 'Extra types: ' . implode(', ', $extra);
         }
 
         if (count($items) !== 32) {
-            $errors[] = "items count must be 32, got: " . count($items);
+            $errors[] = 'items count must be 32, got: ' . count($items);
         }
 
         // required fields
@@ -258,7 +286,7 @@ class FapSelfCheck extends Command
             return [false, $errors];
         }
 
-        return [true, ["OK (32 types, all required fields present)"]];
+        return [true, ['OK (32 types, all required fields present)']];
     }
 
     /**
@@ -283,18 +311,18 @@ class FapSelfCheck extends Command
 
         $tpl = $json['templates'] ?? null;
         if (!is_array($tpl)) {
-            return [false, ["Missing/invalid key: templates"]];
+            return [false, ['Missing/invalid key: templates']];
         }
 
-        $dims  = ['EI','SN','TF','JP','AT'];
+        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
         $sides = [
-            'EI' => ['E','I'],
-            'SN' => ['S','N'],
-            'TF' => ['T','F'],
-            'JP' => ['J','P'],
-            'AT' => ['A','T'],
+            'EI' => ['E', 'I'],
+            'SN' => ['S', 'N'],
+            'TF' => ['T', 'F'],
+            'JP' => ['J', 'P'],
+            'AT' => ['A', 'T'],
         ];
-        $lvls = ['clear','strong','very_strong'];
+        $lvls = ['clear', 'strong', 'very_strong'];
 
         $missing = [];
         $bad = [];
@@ -313,10 +341,11 @@ class FapSelfCheck extends Command
                     $tips  = $cell['tips'] ?? null;
                     $tags  = $cell['tags'] ?? null;
 
-                    if (!is_string($title) || trim($title) === ''
-                        || !is_string($text) || trim($text) === ''
-                        || !is_array($tips)
-                        || !is_array($tags)
+                    if (
+                        !is_string($title) || trim($title) === '' ||
+                        !is_string($text) || trim($text) === '' ||
+                        !is_array($tips) ||
+                        !is_array($tags)
                     ) {
                         $bad[] = "{$d}.{$s}.{$l}";
                     }
@@ -326,24 +355,24 @@ class FapSelfCheck extends Command
 
         $errors = [];
         if (!empty($missing)) {
-            $errors[] = "Missing cells: " . count($missing);
-            $errors[] = "e.g. " . implode(', ', array_slice($missing, 0, 16));
+            $errors[] = 'Missing cells: ' . count($missing);
+            $errors[] = 'e.g. ' . implode(', ', array_slice($missing, 0, 16));
         }
         if (!empty($bad)) {
-            $errors[] = "Bad cells (missing required fields title/text/tips/tags): " . count($bad);
-            $errors[] = "e.g. " . implode(', ', array_slice($bad, 0, 16));
+            $errors[] = 'Bad cells (missing required fields title/text/tips/tags): ' . count($bad);
+            $errors[] = 'e.g. ' . implode(', ', array_slice($bad, 0, 16));
         }
 
         if (!empty($errors)) {
             return [false, $errors];
         }
 
-        return [true, ["OK (5 dims × 2 sides × 3 levels present & valid)"]];
+        return [true, ['OK (5 dims × 2 sides × 3 levels present & valid)']];
     }
 
     /**
      * M3-3: 检查 report_highlights_overrides.json
-     * 要求：JSON 可解析，items 为数组；同一个 type 内 id 不重复（递归遍历所有 override 卡片）
+     * 要求：JSON 可解析；items 为对象；同一个 type 内 id 不重复（递归遍历所有 override 卡片）
      */
     private function checkHighlightsOverrides(string $path): array
     {
@@ -363,38 +392,50 @@ class FapSelfCheck extends Command
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) {
-            return [false, ["Missing/invalid key: items"]];
+            return [false, ['Missing/invalid key: items']];
         }
 
         $dupTypes = [];
 
         foreach ($items as $typeCode => $node) {
-            if (!is_array($node)) continue;
+            if (!is_array($node)) {
+                continue;
+            }
 
             $ids = [];
 
             $walk = function ($x) use (&$walk, &$ids) {
-                if (!is_array($x)) return;
+                if (!is_array($x)) {
+                    return;
+                }
 
                 if (array_key_exists('id', $x) && is_string($x['id']) && $x['id'] !== '') {
                     $ids[] = $x['id'];
                 }
 
                 foreach ($x as $v) {
-                    if (is_array($v)) $walk($v);
+                    if (is_array($v)) {
+                        $walk($v);
+                    }
                 }
             };
 
             $walk($node);
 
-            if (empty($ids)) continue;
+            if (empty($ids)) {
+                continue;
+            }
 
             $count = [];
-            foreach ($ids as $id) $count[$id] = ($count[$id] ?? 0) + 1;
+            foreach ($ids as $id) {
+                $count[$id] = ($count[$id] ?? 0) + 1;
+            }
 
             $dups = [];
             foreach ($count as $id => $c) {
-                if ($c > 1) $dups[] = "{$id}×{$c}";
+                if ($c > 1) {
+                    $dups[] = "{$id}×{$c}";
+                }
             }
 
             if (!empty($dups)) {
@@ -404,12 +445,12 @@ class FapSelfCheck extends Command
 
         if (!empty($dupTypes)) {
             return [false, [
-                "Duplicate ids detected (per-type): " . count($dupTypes),
-                "e.g. " . implode(' | ', array_slice($dupTypes, 0, 6)),
+                'Duplicate ids detected (per-type): ' . count($dupTypes),
+                'e.g. ' . implode(' | ', array_slice($dupTypes, 0, 6)),
             ]];
         }
 
-        return [true, ["OK (items valid, no per-type duplicate ids)"]];
+        return [true, ['OK (items valid, no per-type duplicate ids)']];
     }
 
     /**
@@ -437,10 +478,10 @@ class FapSelfCheck extends Command
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) {
-            return [false, ["Missing/invalid key: items"]];
+            return [false, ['Missing/invalid key: items']];
         }
 
-        $dims = ['EI','SN','TF','JP','AT'];
+        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
         $errors = [];
 
         foreach ($dims as $dim) {
@@ -470,21 +511,132 @@ class FapSelfCheck extends Command
 
         if (!empty($errors)) {
             return [false, array_merge(
-                ["Borderline templates invalid: " . count($errors)],
+                ['Borderline templates invalid: ' . count($errors)],
                 array_slice($errors, 0, 30)
             )];
         }
 
-        return [true, ["OK (5 dims present & valid)"]];
+        return [true, ['OK (5 dims present & valid)']];
+    }
+
+    private function checkReportRoles(string $path): array
+    {
+        if (!is_file($path)) {
+            return [false, ["File not found: {$path}"]];
+        }
+
+        $raw = file_get_contents($path);
+        if ($raw === false || trim($raw) === '') {
+            return [false, ["File empty/unreadable: {$path}"]];
+        }
+
+        $json = json_decode($raw, true);
+        if (!is_array($json)) {
+            return [false, ["Invalid JSON: {$path}"]];
+        }
+
+        $items = $json['items'] ?? null;
+        if (!is_array($items)) {
+            return [false, ['Missing/invalid key: items']];
+        }
+
+        $expected = ['NT', 'NF', 'SJ', 'SP'];
+        $errors = [];
+
+        foreach ($expected as $k) {
+            $it = $items[$k] ?? null;
+            if (!is_array($it)) {
+                $errors[] = "Missing item: {$k}";
+                continue;
+            }
+
+            if (($it['code'] ?? null) !== $k) {
+                $errors[] = "{$k}: code mismatch";
+            }
+
+            foreach (['title', 'subtitle', 'desc'] as $f) {
+                if (!isset($it[$f]) || !is_string($it[$f])) {
+                    $errors[] = "{$k}: missing {$f}";
+                }
+            }
+
+            $theme = $it['theme'] ?? null;
+            if (!is_array($theme) || !isset($theme['color']) || !is_string($theme['color'])) {
+                $errors[] = "{$k}: theme.color missing";
+            }
+
+            if (isset($it['tags']) && !is_array($it['tags'])) {
+                $errors[] = "{$k}: tags must be array";
+            }
+        }
+
+        if (!empty($errors)) {
+            return [false, $errors];
+        }
+
+        return [true, ['OK (NT/NF/SJ/SP present & valid)']];
+    }
+
+    private function checkReportStrategies(string $path): array
+    {
+        if (!is_file($path)) {
+            return [false, ["File not found: {$path}"]];
+        }
+
+        $raw = file_get_contents($path);
+        if ($raw === false || trim($raw) === '') {
+            return [false, ["File empty/unreadable: {$path}"]];
+        }
+
+        $json = json_decode($raw, true);
+        if (!is_array($json)) {
+            return [false, ["Invalid JSON: {$path}"]];
+        }
+
+        $items = $json['items'] ?? null;
+        if (!is_array($items)) {
+            return [false, ['Missing/invalid key: items']];
+        }
+
+        $expected = ['EA', 'ET', 'IA', 'IT'];
+        $errors = [];
+
+        foreach ($expected as $k) {
+            $it = $items[$k] ?? null;
+            if (!is_array($it)) {
+                $errors[] = "Missing item: {$k}";
+                continue;
+            }
+
+            if (($it['code'] ?? null) !== $k) {
+                $errors[] = "{$k}: code mismatch";
+            }
+
+            foreach (['title', 'subtitle', 'desc'] as $f) {
+                if (!isset($it[$f]) || !is_string($it[$f])) {
+                    $errors[] = "{$k}: missing {$f}";
+                }
+            }
+
+            if (isset($it['tags']) && !is_array($it['tags'])) {
+                $errors[] = "{$k}: tags must be array";
+            }
+        }
+
+        if (!empty($errors)) {
+            return [false, $errors];
+        }
+
+        return [true, ['OK (EA/ET/IA/IT present & valid)']];
     }
 
     private function expectedTypeCodes32(): array
     {
-        $first = ['E','I'];
-        $second = ['S','N'];
-        $third = ['T','F'];
-        $fourth = ['J','P'];
-        $suffix = ['A','T'];
+        $first = ['E', 'I'];
+        $second = ['S', 'N'];
+        $third = ['T', 'F'];
+        $fourth = ['J', 'P'];
+        $suffix = ['A', 'T'];
 
         $out = [];
         foreach ($first as $a) {
@@ -498,6 +650,7 @@ class FapSelfCheck extends Command
                 }
             }
         }
+
         sort($out);
         return $out;
     }

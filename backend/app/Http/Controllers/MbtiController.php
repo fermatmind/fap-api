@@ -615,6 +615,10 @@ class MbtiController extends Controller
         if (!is_array($borderlineNote)) $borderlineNote = ['items' => []];
         if (!is_array($borderlineNote['items'] ?? null)) $borderlineNote['items'] = [];
 
+        // ✅ M3-5 role_card / strategy_card
+        $roleCard     = $this->buildRoleCard($contentPackageVersion, $typeCode);
+        $strategyCard = $this->buildStrategyCard($contentPackageVersion, $typeCode);
+
         $reportPayload = [
             'versions' => [
                 'engine'                  => 'v1.2',
@@ -638,8 +642,8 @@ class MbtiController extends Controller
             'borderline_note' => $borderlineNote,
 
             'layers' => [
-                'role_card'     => null,
-                'strategy_card' => null,
+                'role_card'     => $roleCard,
+                'strategy_card' => $strategyCard,
                 'identity'      => null,
             ],
 
@@ -1230,4 +1234,85 @@ private function buildBorderlineNote(array $scoresPct, string $contentPackageVer
 
         return $cache[$cacheKey] = $items;
     }
+
+    /**
+ * M3-5: role_code 规则（16P 同款）
+ * - 若第二字母是 N：Role = N + (第三字母 T/F) => NT / NF
+ * - 若第二字母是 S：Role = S + (第四字母 J/P) => SJ / SP
+ */
+private function roleCodeFromType(string $typeCode): string
+{
+    if (preg_match('/^(E|I)(S|N)(T|F)(J|P)-(A|T)$/', $typeCode, $m)) {
+        $sn = $m[2]; // S/N
+        $tf = $m[3]; // T/F
+        $jp = $m[4]; // J/P
+        if ($sn === 'N') return 'N' . $tf;   // NT / NF
+        return 'S' . $jp;                   // SJ / SP
+    }
+    return 'NT';
+}
+
+/**
+ * M3-5: strategy_code 规则（EI + AT）
+ * - EA / ET / IA / IT
+ */
+private function strategyCodeFromType(string $typeCode): string
+{
+    if (preg_match('/^(E|I)(S|N)(T|F)(J|P)-(A|T)$/', $typeCode, $m)) {
+        $ei = $m[1]; // E/I
+        $at = $m[5]; // A/T
+        return $ei . $at; // EA/ET/IA/IT
+    }
+    return 'EA';
+}
+
+private function buildRoleCard(string $contentPackageVersion, string $typeCode): array
+{
+    $items = $this->loadReportAssetItems($contentPackageVersion, 'report_roles.json', 'code');
+    $code  = $this->roleCodeFromType($typeCode);
+
+    $base = [
+        'code'     => $code,
+        'title'    => '',
+        'subtitle' => '',
+        'theme'    => ['color' => ''],
+        'desc'     => '',
+        'tags'     => [],
+    ];
+
+    $card = $items[$code] ?? null;
+    if (!is_array($card)) $card = [];
+
+    $out = array_replace_recursive($base, $card);
+
+    if (!is_array($out['theme'] ?? null)) $out['theme'] = ['color' => ''];
+    if (!is_string($out['theme']['color'] ?? '')) $out['theme']['color'] = '';
+    if (!is_array($out['tags'] ?? null)) $out['tags'] = [];
+
+    $out['code'] = $code; // 强制一致
+    return $out;
+}
+
+private function buildStrategyCard(string $contentPackageVersion, string $typeCode): array
+{
+    $items = $this->loadReportAssetItems($contentPackageVersion, 'report_strategies.json', 'code');
+    $code  = $this->strategyCodeFromType($typeCode);
+
+    $base = [
+        'code'     => $code,
+        'title'    => '',
+        'subtitle' => '',
+        'desc'     => '',
+        'tags'     => [],
+    ];
+
+    $card = $items[$code] ?? null;
+    if (!is_array($card)) $card = [];
+
+    $out = array_replace_recursive($base, $card);
+
+    if (!is_array($out['tags'] ?? null)) $out['tags'] = [];
+    $out['code'] = $code; // 强制一致
+    return $out;
+}
 }
