@@ -13,7 +13,7 @@ class FapSelfCheck extends Command
      */
     protected $signature = 'fap:self-check {--pkg= : Override MBTI content package folder name}';
 
-    protected $description = 'Quick self-check for MBTI content package (questions.json + type_profiles.json)';
+    protected $description = 'Quick self-check for MBTI content package (questions.json + type_profiles.json + highlights templates/overrides)';
 
     public function handle(): int
     {
@@ -36,6 +36,18 @@ class FapSelfCheck extends Command
         [$pOk, $pMsg] = $this->checkTypeProfiles($profilesPath);
         $ok = $ok && $pOk;
         $this->printSectionResult('type_profiles.json', $pOk, $pMsg);
+
+        // 3) report_highlights_templates.json (M3-3)
+        $tplPath = $this->contentPackagePath($pkg, 'report_highlights_templates.json');
+        [$tOk, $tMsg] = $this->checkHighlightsTemplates($tplPath);
+        $ok = $ok && $tOk;
+        $this->printSectionResult('report_highlights_templates.json', $tOk, $tMsg);
+
+        // 4) report_highlights_overrides.json (M3-3)
+        $ovrPath = $this->contentPackagePath($pkg, 'report_highlights_overrides.json');
+        [$oOk, $oMsg] = $this->checkHighlightsOverrides($ovrPath);
+        $ok = $ok && $oOk;
+        $this->printSectionResult('report_highlights_overrides.json', $oOk, $oMsg);
 
         $this->line(str_repeat('-', 60));
         if ($ok) {
@@ -241,6 +253,157 @@ class FapSelfCheck extends Command
         }
 
         return [true, ["OK (32 types, all required fields present)"]];
+    }
+
+    /**
+     * M3-3: 检查 report_highlights_templates.json 是否完整
+     * 要求：5 dims × 2 sides × 3 levels 均存在，且每格有 title/text/tips/tags
+     */
+    private function checkHighlightsTemplates(string $path): array
+    {
+        if (!is_file($path)) {
+            return [false, ["File not found: {$path}"]];
+        }
+
+        $raw = file_get_contents($path);
+        if ($raw === false || trim($raw) === '') {
+            return [false, ["File empty/unreadable: {$path}"]];
+        }
+
+        $json = json_decode($raw, true);
+        if (!is_array($json)) {
+            return [false, ["Invalid JSON: {$path}"]];
+        }
+
+        $tpl = $json['templates'] ?? null;
+        if (!is_array($tpl)) {
+            return [false, ["Missing/invalid key: templates"]];
+        }
+
+        $dims  = ['EI','SN','TF','JP','AT'];
+        $sides = [
+            'EI' => ['E','I'],
+            'SN' => ['S','N'],
+            'TF' => ['T','F'],
+            'JP' => ['J','P'],
+            'AT' => ['A','T'],
+        ];
+        $lvls = ['clear','strong','very_strong'];
+
+        $missing = [];
+        $bad = [];
+
+        foreach ($dims as $d) {
+            foreach ($sides[$d] as $s) {
+                foreach ($lvls as $l) {
+                    $cell = $tpl[$d][$s][$l] ?? null;
+                    if (!is_array($cell)) {
+                        $missing[] = "{$d}.{$s}.{$l}";
+                        continue;
+                    }
+
+                    $title = $cell['title'] ?? null;
+                    $text  = $cell['text'] ?? null;
+                    $tips  = $cell['tips'] ?? null;
+                    $tags  = $cell['tags'] ?? null;
+
+                    if (!is_string($title) || trim($title) === ''
+                        || !is_string($text) || trim($text) === ''
+                        || !is_array($tips)
+                        || !is_array($tags)
+                    ) {
+                        $bad[] = "{$d}.{$s}.{$l}";
+                    }
+                }
+            }
+        }
+
+        $errors = [];
+        if (!empty($missing)) {
+            $errors[] = "Missing cells: " . count($missing);
+            $errors[] = "e.g. " . implode(', ', array_slice($missing, 0, 16));
+        }
+        if (!empty($bad)) {
+            $errors[] = "Bad cells (missing required fields title/text/tips/tags): " . count($bad);
+            $errors[] = "e.g. " . implode(', ', array_slice($bad, 0, 16));
+        }
+
+        if (!empty($errors)) {
+            return [false, $errors];
+        }
+
+        return [true, ["OK (5 dims × 2 sides × 3 levels present & valid)"]];
+    }
+
+    /**
+     * M3-3: 检查 report_highlights_overrides.json
+     * 要求：JSON 可解析，items 为数组；同一个 type 内 id 不重复（递归遍历所有 override 卡片）
+     */
+    private function checkHighlightsOverrides(string $path): array
+    {
+        if (!is_file($path)) {
+            return [false, ["File not found: {$path}"]];
+        }
+
+        $raw = file_get_contents($path);
+        if ($raw === false || trim($raw) === '') {
+            return [false, ["File empty/unreadable: {$path}"]];
+        }
+
+        $json = json_decode($raw, true);
+        if (!is_array($json)) {
+            return [false, ["Invalid JSON: {$path}"]];
+        }
+
+        $items = $json['items'] ?? null;
+        if (!is_array($items)) {
+            return [false, ["Missing/invalid key: items"]];
+        }
+
+        $dupTypes = [];
+
+        foreach ($items as $typeCode => $node) {
+            if (!is_array($node)) continue;
+
+            $ids = [];
+
+            $walk = function ($x) use (&$walk, &$ids) {
+                if (!is_array($x)) return;
+
+                if (array_key_exists('id', $x) && is_string($x['id']) && $x['id'] !== '') {
+                    $ids[] = $x['id'];
+                }
+
+                foreach ($x as $v) {
+                    if (is_array($v)) $walk($v);
+                }
+            };
+
+            $walk($node);
+
+            if (empty($ids)) continue;
+
+            $count = [];
+            foreach ($ids as $id) $count[$id] = ($count[$id] ?? 0) + 1;
+
+            $dups = [];
+            foreach ($count as $id => $c) {
+                if ($c > 1) $dups[] = "{$id}×{$c}";
+            }
+
+            if (!empty($dups)) {
+                $dupTypes[] = "{$typeCode}: " . implode(', ', $dups);
+            }
+        }
+
+        if (!empty($dupTypes)) {
+            return [false, [
+                "Duplicate ids detected (per-type): " . count($dupTypes),
+                "e.g. " . implode(' | ', array_slice($dupTypes, 0, 6)),
+            ]];
+        }
+
+        return [true, ["OK (items valid, no per-type duplicate ids)"]];
     }
 
     private function expectedTypeCodes32(): array
