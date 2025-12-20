@@ -812,18 +812,63 @@ class MbtiController extends Controller
         $out  = array_slice($candidates, 0, $take);
 
         if (empty($out)) {
-            // 先 fallback 回旧版（如果旧版存在）
-            if (is_array($oldPerType) && !empty($oldPerType)) {
-                $take = min(max($topN, 0), max($maxItems, 0));
-                return array_slice(array_values($oldPerType), 0, $take);
+        // 先 fallback 回旧版（如果旧版存在）——但必须“归一化到新结构”，否则丢弃
+        if (is_array($oldPerType) && !empty($oldPerType)) {
+        $take = min(max($topN, 0), max($maxItems, 0));
+        $norm = [];
+
+        foreach (array_values($oldPerType) as $c) {
+            if (!is_array($c)) continue;
+
+            $id = (string) ($c['id'] ?? '');
+            if ($id === '') continue;
+
+            $dim   = $c['dim']   ?? null;
+            $side  = $c['side']  ?? null;
+            $level = $c['level'] ?? null;
+
+            // 尝试从 id 解析（仅支持 EI_E_clear / EI_E_strong / EI_E_very_strong 这类）
+            if (($dim === null || $side === null || $level === null)
+                && preg_match('/^(EI|SN|TF|JP|AT)_([EINSJPTFA])_(clear|strong|very_strong)$/', $id, $m)) {
+                $dim   = $m[1];
+                $side  = $m[2];
+                $level = $m[3];
             }
 
-            // 再按 allowEmpty 决定是否允许空
-            return $allowEmpty ? [] : [];
+            // 还解析不出来（比如老的 h1/h2）就丢弃
+            if (!$dim || !$side || !$level) continue;
+
+            $pct   = (int) ($scoresPct[$dim] ?? 50);
+            $delta = abs($pct - 50) * 2;
+
+            $title = (string) ($c['title'] ?? '');
+            $text  = (string) ($c['text']  ?? $title); // 老结构没 text 时兜一个
+
+            $norm[] = [
+                'id'    => $id,
+                'dim'   => $dim,
+                'side'  => $side,
+                'level' => $level,
+                'pct'   => $pct,
+                'delta' => $delta,
+                'title' => $title,
+                'text'  => $text,
+                'tips'  => is_array($c['tips'] ?? null) ? $c['tips'] : [],
+                'tags'  => is_array($c['tags'] ?? null) ? $c['tags'] : [],
+            ];
         }
 
-        return $out;
+            if (!empty($norm)) {
+            return array_slice($norm, 0, $take);
+        }
     }
+
+            // fallback 也没有合格卡：按 allowEmpty 返回空（目前两种都只能是空）
+            return [];
+    }
+
+         return $out;
+}
 
     /**
      * 读取“非 items 结构”的 report assets（templates/overrides）
