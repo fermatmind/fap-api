@@ -779,10 +779,21 @@ class MbtiController extends Controller
             }
 
             if (is_array($override)) {
+                // 先做递归 merge（字符串字段/对象字段很好用）
                 $card = array_replace_recursive($card, $override);
-                // 再做一次 tips/tags 兜底
-                if (!is_array($card['tips'] ?? null)) $card['tips'] = [];
-                if (!is_array($card['tags'] ?? null)) $card['tags'] = [];
+
+                // ✅ 关键：tips/tags 只要 overrides 提供了，就整段覆盖（不与模板合并）
+                if (array_key_exists('tips', $override)) {
+                    $card['tips'] = is_array($override['tips'] ?? null) ? $override['tips'] : [];
+                } else {    
+                    if (!is_array($card['tips'] ?? null)) $card['tips'] = [];
+                }
+
+                if (array_key_exists('tags', $override)) {
+                    $card['tags'] = is_array($override['tags'] ?? null) ? $override['tags'] : [];
+                } else {
+                    if (!is_array($card['tags'] ?? null)) $card['tags'] = [];
+                }
             }
 
             $candidates[] = $card;
