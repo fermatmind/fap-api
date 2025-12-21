@@ -1,11 +1,13 @@
 <?php
 
 return [
-    // ✅ 统一使用 .env 里的 MBTI_CONTENT_PACKAGE
-    'content_package_version' => env('MBTI_CONTENT_PACKAGE', 'MBTI-CN-v0.2.1-TEST'),
+    'content_package_version' => env('FAP_CONTENT_PACKAGE_VERSION', 'MBTI-CN-v0.2.1-TEST'),
+    'content_packages_dir'    => env('FAP_CONTENT_PACKAGES_DIR', null),
 
-    // ✅ 同理：你可以在 .env 里加 MBTI_PROFILE_VERSION
-    'profile_version'         => env('MBTI_PROFILE_VERSION', 'mbti32-v2.5'),
+    'profile_version' => env('FAP_PROFILE_VERSION', 'mbti32-v2.5'),
+
+    // ✅ 关键开关：写入 storage/app/... 的 answers 原文
+    'store_answers_to_storage' => (bool) env('FAP_STORE_ANSWERS_TO_STORAGE', false),
 
     'reads_debug' => (bool) env('FAP_READS_DEBUG', false),
 ];
