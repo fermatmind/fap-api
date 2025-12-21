@@ -1319,7 +1319,28 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
 {
     $raw   = $this->loadReportAssetJson($contentPackageVersion, 'report_recommended_reads.json');
     $items = is_array($raw['items'] ?? null) ? $raw['items'] : [];
+    $rules = is_array($raw['rules'] ?? null) ? $raw['rules'] : [];
 
+    // ----------------------------
+    // 1) rules
+    // ----------------------------
+    $maxItems  = (int)($rules['max_items'] ?? $max);
+    $minItems  = (int)($rules['min_items'] ?? 0);
+    $sortMode  = (string)($rules['sort'] ?? ''); // e.g. "priority_desc"
+    $fillOrder = is_array($rules['fill_order'] ?? null)
+        ? $rules['fill_order']
+        : ['by_type','by_role','by_strategy','by_top_axis','fallback'];
+
+    $bucketQuota = is_array($rules['bucket_quota'] ?? null) ? $rules['bucket_quota'] : [];
+    $defaults    = is_array($rules['defaults'] ?? null) ? $rules['defaults'] : [];
+
+    $dedupe = is_array($rules['dedupe'] ?? null) ? $rules['dedupe'] : [];
+    $hardBy = is_array($dedupe['hard_by'] ?? null) ? $dedupe['hard_by'] : ['id'];
+    $softBy = is_array($dedupe['soft_by'] ?? null) ? $dedupe['soft_by'] : ['canonical_id','canonical_url','url'];
+
+    // ----------------------------
+    // 2) items buckets
+    // ----------------------------
     $byType     = is_array($items['by_type'] ?? null) ? $items['by_type'] : [];
     $byRole     = is_array($items['by_role'] ?? null) ? $items['by_role'] : [];
     $byStrategy = is_array($items['by_strategy'] ?? null) ? $items['by_strategy'] : [];
@@ -1329,7 +1350,9 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     $roleCode     = $this->roleCodeFromType($typeCode);     // NT/NF/SJ/SP
     $strategyCode = $this->strategyCodeFromType($typeCode); // EA/ET/IA/IT
 
-    // 取 delta 最大的一轴作为 top_axis
+    // ----------------------------
+    // 3) top axis (best delta)
+    // ----------------------------
     $dims = ['EI','SN','TF','JP','AT'];
     $best = ['dim' => 'EI', 'delta' => -1, 'side' => 'E'];
 
@@ -1343,41 +1366,218 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
             $best = ['dim' => $dim, 'delta' => $delta, 'side' => $side];
         }
     }
-    $topAxisKey = $best['dim'] . ':' . $best['side']; // 例：EI:E
 
-    $buckets = [
-        is_array($byType[$typeCode] ?? null) ? $byType[$typeCode] : [],
-        is_array($byRole[$roleCode] ?? null) ? $byRole[$roleCode] : [],
-        is_array($byStrategy[$strategyCode] ?? null) ? $byStrategy[$strategyCode] : [],
-        is_array($byTopAxis[$topAxisKey] ?? null) ? $byTopAxis[$topAxisKey] : [],
-        $fallback,
+    // by_top_axis key：走新口径（axis_key_format），并兼容旧格式
+    $plainAxisKey = $best['dim'] . ':' . $best['side'];        // "EI:E"
+    $prefAxisKey  = 'axis:' . $plainAxisKey;                   // "axis:EI:E"
+    $axisKeyFormat = (string)($rules['axis_key_format'] ?? ''); // e.g. "axis:${DIM}:${SIDE}"
+
+    $formattedAxisKey = '';
+    if ($axisKeyFormat !== '') {
+        $formattedAxisKey = str_replace(
+            ['${DIM}', '${SIDE}'],
+            [$best['dim'], $best['side']],
+            $axisKeyFormat
+        );
+    }
+
+    // ----------------------------
+    // 4) build candidate lists per bucket
+    // ----------------------------
+    $bucketLists = [
+        'by_type'     => (is_array($byType[$typeCode] ?? null) ? $byType[$typeCode] : []),
+        'by_role'     => (is_array($byRole[$roleCode] ?? null) ? $byRole[$roleCode] : []),
+        'by_strategy' => (is_array($byStrategy[$strategyCode] ?? null) ? $byStrategy[$strategyCode] : []),
+        'by_top_axis' => [],
+        'fallback'    => $fallback,
     ];
 
-    // 合并 + 去重
-    $seen = [];
-    $out  = [];
+    // 选择存在的轴桶（优先：axis_key_format -> axis:EI:E -> EI:E）
+    if ($formattedAxisKey !== '' && is_array($byTopAxis[$formattedAxisKey] ?? null)) {
+        $bucketLists['by_top_axis'] = $byTopAxis[$formattedAxisKey];
+    } elseif (is_array($byTopAxis[$prefAxisKey] ?? null)) {
+        $bucketLists['by_top_axis'] = $byTopAxis[$prefAxisKey];
+    } elseif (is_array($byTopAxis[$plainAxisKey] ?? null)) {
+        $bucketLists['by_top_axis'] = $byTopAxis[$plainAxisKey];
+    } else {
+        $bucketLists['by_top_axis'] = [];
+    }
 
-    foreach ($buckets as $list) {
+    // 每桶内部按 priority desc
+    $sortByPriorityDesc = function (&$list): void {
+        if (!is_array($list)) { $list = []; return; }
+        usort($list, fn($a, $b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
+    };
+
+    foreach ($bucketLists as $k => &$list) {
+        $sortByPriorityDesc($list);
+    }
+    unset($list);
+
+    // ----------------------------
+    // 5) dedupe state
+    // ----------------------------
+    $seenId   = [];
+    $seenCid  = [];
+    $seenCUrl = [];
+    $seenUrl  = [];
+
+    $getNonEmptyString = function ($v): string {
+        if ($v === null) return '';
+        if (is_string($v)) return trim($v);
+        if (is_numeric($v)) return (string)$v;
+        return '';
+    };
+
+    $isDup = function (array $it) use (&$seenId, &$seenCid, &$seenCUrl, &$seenUrl, $hardBy, $softBy, $getNonEmptyString): bool {
+        // hard dedupe
+        if (in_array('id', $hardBy, true)) {
+            $id = $getNonEmptyString($it['id'] ?? '');
+            if ($id === '' || isset($seenId[$id])) return true;
+        }
+
+        // soft dedupe
+        foreach ($softBy as $k) {
+            $v = $getNonEmptyString($it[$k] ?? '');
+            if ($v === '') continue;
+
+            if ($k === 'canonical_id' && isset($seenCid[$v])) return true;
+            if ($k === 'canonical_url' && isset($seenCUrl[$v])) return true;
+            if ($k === 'url' && isset($seenUrl[$v])) return true;
+        }
+
+        return false;
+    };
+
+    $markSeen = function (array $it) use (&$seenId, &$seenCid, &$seenCUrl, &$seenUrl, $getNonEmptyString): void {
+        $id = $getNonEmptyString($it['id'] ?? '');
+        if ($id !== '') $seenId[$id] = true;
+
+        $cid = $getNonEmptyString($it['canonical_id'] ?? '');
+        if ($cid !== '') $seenCid[$cid] = true;
+
+        $curl = $getNonEmptyString($it['canonical_url'] ?? '');
+        if ($curl !== '') $seenCUrl[$curl] = true;
+
+        $url = $getNonEmptyString($it['url'] ?? '');
+        if ($url !== '') $seenUrl[$url] = true;
+    };
+
+    // ----------------------------
+    // 6) normalize output (canonical_id 透出 + defaults 下沉)
+    // ----------------------------
+    $normalize = function (array $it) use ($defaults, $getNonEmptyString): array {
+        // defaults 下沉：JSON 里没写的字段用 defaults 填
+        $it = array_merge($defaults, $it);
+
+        $id  = $getNonEmptyString($it['id'] ?? '');
+        $cid = $getNonEmptyString($it['canonical_id'] ?? '');
+        $cuz = $getNonEmptyString($it['canonical_url'] ?? '');
+
+        $out = [
+            'id'            => $id,
+            'canonical_id'  => ($cid === '' ? null : $cid),
+            'canonical_url' => ($cuz === '' ? null : $cuz),
+
+            'type'     => (string)($it['type'] ?? 'article'),
+            'title'    => (string)($it['title'] ?? ''),
+            'desc'     => (string)($it['desc'] ?? ''),
+            'url'      => (string)($it['url'] ?? ''),
+            'cover'    => (string)($it['cover'] ?? ''),
+            'priority' => (int)($it['priority'] ?? 0),
+            'tags'     => is_array($it['tags'] ?? null) ? $it['tags'] : [],
+        ];
+
+        // 可选字段（有就带上）
+        if (array_key_exists('cta', $it)) $out['cta'] = (string)$it['cta'];
+        if (array_key_exists('estimated_minutes', $it)) $out['estimated_minutes'] = (int)$it['estimated_minutes'];
+        if (array_key_exists('locale', $it)) $out['locale'] = (string)$it['locale'];
+        if (array_key_exists('access', $it)) $out['access'] = (string)$it['access'];
+        if (array_key_exists('channel', $it)) $out['channel'] = (string)$it['channel'];
+        if (array_key_exists('status', $it)) $out['status'] = (string)$it['status'];
+        if (array_key_exists('published_at', $it)) $out['published_at'] = (string)$it['published_at'];
+        if (array_key_exists('updated_at', $it)) $out['updated_at'] = (string)$it['updated_at'];
+
+        return $out;
+    };
+
+    // ----------------------------
+    // 7) quota helper (supports "remaining")
+    // ----------------------------
+    $resolveCap = function ($capRaw, int $remaining): int {
+        if (is_string($capRaw)) {
+            $s = strtolower(trim($capRaw));
+            if ($s === 'remaining' || $s === '*' || $s === 'all') return $remaining;
+            // 数字字符串也支持
+            if (is_numeric($capRaw)) return (int)$capRaw;
+            return 0;
+        }
+        if (is_int($capRaw) || is_float($capRaw)) return (int)$capRaw;
+        return $remaining;
+    };
+
+    // ----------------------------
+    // 8) fill by bucket (bucket_quota 真执行)
+    // ----------------------------
+    $out = [];
+
+    foreach ($fillOrder as $bucketName) {
+        if (count($out) >= $maxItems) break;
+
+        $list = $bucketLists[$bucketName] ?? [];
+        if (!is_array($list) || empty($list)) continue;
+
+        $remaining = $maxItems - count($out);
+
+        // cap：fallback 建议可以配置 "remaining"
+        $capRaw = $bucketQuota[$bucketName] ?? $remaining;
+        $cap    = $resolveCap($capRaw, $remaining);
+        if ($cap <= 0) continue;
+        $cap = min($cap, $remaining);
+
+        $taken = 0;
         foreach ($list as $it) {
+            if (count($out) >= $maxItems) break;
+            if ($taken >= $cap) break;
             if (!is_array($it)) continue;
-            $id = (string)($it['id'] ?? '');
-            if ($id === '' || isset($seen[$id])) continue;
-            $seen[$id] = true;
 
-            $out[] = [
-                'id'       => $id,
-                'type'     => (string)($it['type'] ?? 'article'),
-                'title'    => (string)($it['title'] ?? ''),
-                'desc'     => (string)($it['desc'] ?? ''),
-                'url'      => (string)($it['url'] ?? ''),
-                'cover'    => (string)($it['cover'] ?? ''),
-                'priority' => (int)($it['priority'] ?? 0),
-                'tags'     => is_array($it['tags'] ?? null) ? $it['tags'] : [],
-            ];
+            $id = $getNonEmptyString($it['id'] ?? '');
+            if ($id === '') continue;
+
+            if ($isDup($it)) continue;
+
+            $markSeen($it);
+            $out[] = $normalize($it);
+            $taken++;
         }
     }
 
-    usort($out, fn($a, $b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
-    return array_slice($out, 0, max(0, $max));
+    // min_items：强制用 fallback 补齐（不受 quota 限制，但受 maxItems 限制）
+    if ($minItems > 0 && count($out) < min($minItems, $maxItems)) {
+        $need = min($minItems, $maxItems) - count($out);
+        if ($need > 0 && is_array($bucketLists['fallback'] ?? null)) {
+            foreach ($bucketLists['fallback'] as $it) {
+                if (count($out) >= $maxItems) break;
+                if ($need <= 0) break;
+                if (!is_array($it)) continue;
+
+                $id = $getNonEmptyString($it['id'] ?? '');
+                if ($id === '') continue;
+
+                if ($isDup($it)) continue;
+
+                $markSeen($it);
+                $out[] = $normalize($it);
+                $need--;
+            }
+        }
+    }
+
+    // 可选：最终排序（严格遵循 rules.sort=priority_desc）
+    if ($sortMode === 'priority_desc') {
+        usort($out, fn($a, $b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
+    }
+
+    return $out;
 }
 }
