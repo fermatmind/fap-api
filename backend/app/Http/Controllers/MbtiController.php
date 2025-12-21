@@ -1325,7 +1325,7 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     // ----------------------------
     // Debug switch (dev only)
     // ----------------------------
-    $debugReads = (app()->environment('local', 'development') && (bool)env('FAP_READS_DEBUG', false));
+    $debugReads = (app()->environment('local', 'development') && (bool) env('FAP_READS_DEBUG', false));
     $debug = [
         'pkg' => $contentPackageVersion,
         'type' => $typeCode,
@@ -1339,9 +1339,9 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     // ----------------------------
     // 1) rules
     // ----------------------------
-    $maxItems  = (int)($rules['max_items'] ?? $max);
-    $minItems  = (int)($rules['min_items'] ?? 0);
-    $sortMode  = (string)($rules['sort'] ?? ''); // e.g. "priority_desc"
+    $maxItems  = (int) ($rules['max_items'] ?? $max);
+    $minItems  = (int) ($rules['min_items'] ?? 0);
+    $sortMode  = (string) ($rules['sort'] ?? ''); // e.g. "priority_desc"
     $fillOrder = is_array($rules['fill_order'] ?? null)
         ? $rules['fill_order']
         : ['by_type','by_role','by_strategy','by_top_axis','fallback'];
@@ -1384,8 +1384,9 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     $best = ['dim' => 'EI', 'delta' => -1, 'side' => 'E'];
 
     foreach ($dims as $dim) {
-        $pct   = (int)($scoresPct[$dim] ?? 50);
+        $pct   = (int) ($scoresPct[$dim] ?? 50);
         $delta = abs($pct - 50) * 2;
+
         [$p1, $p2] = $this->getDimensionPoles($dim);
         $side = ($pct >= 50) ? $p1 : $p2;
 
@@ -1394,10 +1395,9 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
         }
     }
 
-    // by_top_axis key：走新口径（axis_key_format），并兼容旧格式
-    $plainAxisKey = $best['dim'] . ':' . $best['side'];        // "EI:E"
-    $prefAxisKey  = 'axis:' . $plainAxisKey;                   // "axis:EI:E"
-    $axisKeyFormat = (string)($rules['axis_key_format'] ?? ''); // e.g. "axis:${DIM}:${SIDE}"
+    $plainAxisKey  = $best['dim'] . ':' . $best['side'];        // "EI:E"
+    $prefAxisKey   = 'axis:' . $plainAxisKey;                   // "axis:EI:E"
+    $axisKeyFormat = (string) ($rules['axis_key_format'] ?? ''); // e.g. "axis:${DIM}:${SIDE}"
 
     $formattedAxisKey = '';
     if ($axisKeyFormat !== '') {
@@ -1443,7 +1443,7 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     // 每桶内部按 priority desc
     $sortByPriorityDesc = function (&$list): void {
         if (!is_array($list)) { $list = []; return; }
-        usort($list, fn($a, $b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
+        usort($list, fn($a, $b) => (int) ($b['priority'] ?? 0) <=> (int) ($a['priority'] ?? 0));
     };
 
     foreach ($bucketLists as $k => &$list) {
@@ -1456,86 +1456,95 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     // ----------------------------
     $seenId   = [];
     $seenCid  = [];
-    $seenCUrl = [];
-    $seenUrl  = [];
+    $seenCUrl = []; // key = normalized canonical_url
+    $seenUrl  = []; // key = normalized url
 
     $getNonEmptyString = function ($v): string {
         if ($v === null) return '';
         if (is_string($v)) return trim($v);
-        if (is_numeric($v)) return (string)$v;
+        if (is_numeric($v)) return (string) $v;
         return '';
     };
 
-    // URL 归一化：去常见追踪参数 + 参数排序（保留业务参数如 id）
-    $normalizeUrlKey = function (?string $url): string {
-        $url = trim((string)$url);
+    // URL 归一化（用于 soft dedupe）：
+    // - host(可选)+path
+    // - query 只保留白名单业务参数（默认仅保留 id）
+    $normalizeUrlKey = function (?string $url) use ($getNonEmptyString): string {
+        $url = $getNonEmptyString($url);
         if ($url === '') return '';
 
         $parts = parse_url($url);
-        $path  = $parts['path'] ?? '';
-        $query = $parts['query'] ?? '';
+        if (!is_array($parts)) return $url;
 
-        if ($path === '' && $query === '') return $url;
+        $host  = isset($parts['host']) ? strtolower((string) $parts['host']) : '';
+        $path  = isset($parts['path']) ? (string) $parts['path'] : '';
+        $query = isset($parts['query']) ? (string) $parts['query'] : '';
 
+        if ($path === '') return $url;
+
+        // 去掉尾部 /
+        if ($path !== '/' && str_ends_with($path, '/')) {
+            $path = rtrim($path, '/');
+        }
+
+        // 只保留业务参数（默认 id）
+        $keep = ['id'];
         $qs = [];
         if ($query !== '') {
             parse_str($query, $qs);
         }
 
-        $dropKeys = [
-            'utm_source','utm_medium','utm_campaign','utm_term','utm_content',
-            'gclid','fbclid','msclkid','wbraid','gbraid',
-            '_ga','_gl',
-        ];
-        foreach ($dropKeys as $k) {
-            unset($qs[$k]);
+        $filtered = [];
+        foreach ($keep as $k) {
+            if (array_key_exists($k, $qs) && $qs[$k] !== '' && $qs[$k] !== null) {
+                $filtered[$k] = $qs[$k];
+            }
         }
 
-        if (!empty($qs)) {
-            ksort($qs);
-            $q = http_build_query($qs);
-            return $q ? ($path . '?' . $q) : $path;
-        }
+        ksort($filtered);
+        $q = http_build_query($filtered);
+        $key = $q !== '' ? ($path . '?' . $q) : $path;
 
-        return $path;
+        return $host !== '' ? ($host . $key) : $key;
     };
 
-    $isDup = function (array $it) use (
+    // 返回 dup 信息：null=不重复；否则 ['by'=>..., 'key'=>...]
+    $dupCheck = function (array $it) use (
         &$seenId, &$seenCid, &$seenCUrl, &$seenUrl,
         $hardBy, $softBy, $getNonEmptyString, $normalizeUrlKey
-    ): bool {
-        // hard dedupe
+    ): ?array {
+        // hard: id
         if (in_array('id', $hardBy, true)) {
             $id = $getNonEmptyString($it['id'] ?? '');
-            if ($id === '' || isset($seenId[$id])) return true;
+            if ($id !== '' && isset($seenId[$id])) {
+                return ['by' => 'id', 'key' => $id];
+            }
         }
 
-        // soft dedupe
+        // soft
         foreach ($softBy as $k) {
             $v = $getNonEmptyString($it[$k] ?? '');
             if ($v === '') continue;
 
             if ($k === 'canonical_id') {
-                if (isset($seenCid[$v])) return true;
+                if (isset($seenCid[$v])) return ['by' => 'canonical_id', 'key' => $v];
                 continue;
             }
 
             if ($k === 'canonical_url') {
                 $key = $normalizeUrlKey($v);
-                if ($key !== '' && isset($seenCUrl[$key])) return true;
+                if ($key !== '' && isset($seenCUrl[$key])) return ['by' => 'canonical_urlKey', 'key' => $key];
                 continue;
             }
 
             if ($k === 'url') {
                 $key = $normalizeUrlKey($v);
-                if ($key !== '' && isset($seenUrl[$key])) return true;
+                if ($key !== '' && isset($seenUrl[$key])) return ['by' => 'urlKey', 'key' => $key];
                 continue;
             }
-
-            // 其它 soft key（未来扩展）默认不处理
         }
 
-        return false;
+        return null;
     };
 
     $markSeen = function (array $it) use (
@@ -1548,18 +1557,17 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
         $cid = $getNonEmptyString($it['canonical_id'] ?? '');
         if ($cid !== '') $seenCid[$cid] = true;
 
-        $curl = $normalizeUrlKey($getNonEmptyString($it['canonical_url'] ?? ''));
-        if ($curl !== '') $seenCUrl[$curl] = true;
+        $curlKey = $normalizeUrlKey($getNonEmptyString($it['canonical_url'] ?? ''));
+        if ($curlKey !== '') $seenCUrl[$curlKey] = true;
 
-        $url = $normalizeUrlKey($getNonEmptyString($it['url'] ?? ''));
-        if ($url !== '') $seenUrl[$url] = true;
+        $urlKey = $normalizeUrlKey($getNonEmptyString($it['url'] ?? ''));
+        if ($urlKey !== '') $seenUrl[$urlKey] = true;
     };
 
     // ----------------------------
-    // 6) normalize output (canonical_id 透出 + defaults 下沉)
+    // 6) normalize output
     // ----------------------------
     $normalize = function (array $it) use ($defaults, $getNonEmptyString): array {
-        // defaults 下沉：JSON 里没写的字段用 defaults 填
         $it = array_merge($defaults, $it);
 
         $id  = $getNonEmptyString($it['id'] ?? '');
@@ -1571,46 +1579,46 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
             'canonical_id'  => ($cid === '' ? null : $cid),
             'canonical_url' => ($cuz === '' ? null : $cuz),
 
-            'type'     => (string)($it['type'] ?? 'article'),
-            'title'    => (string)($it['title'] ?? ''),
-            'desc'     => (string)($it['desc'] ?? ''),
-            'url'      => (string)($it['url'] ?? ''),
-            'cover'    => (string)($it['cover'] ?? ''),
-            'priority' => (int)($it['priority'] ?? 0),
+            'type'     => (string) ($it['type'] ?? 'article'),
+            'title'    => (string) ($it['title'] ?? ''),
+            'desc'     => (string) ($it['desc'] ?? ''),
+            'url'      => (string) ($it['url'] ?? ''),
+            'cover'    => (string) ($it['cover'] ?? ''),
+            'priority' => (int) ($it['priority'] ?? 0),
             'tags'     => is_array($it['tags'] ?? null) ? $it['tags'] : [],
         ];
 
-        // 可选字段（有就带上）
-        if (array_key_exists('cta', $it)) $out['cta'] = (string)$it['cta'];
-        if (array_key_exists('estimated_minutes', $it)) $out['estimated_minutes'] = (int)$it['estimated_minutes'];
-        if (array_key_exists('locale', $it)) $out['locale'] = (string)$it['locale'];
-        if (array_key_exists('access', $it)) $out['access'] = (string)$it['access'];
-        if (array_key_exists('channel', $it)) $out['channel'] = (string)$it['channel'];
-        if (array_key_exists('status', $it)) $out['status'] = (string)$it['status'];
-        if (array_key_exists('published_at', $it)) $out['published_at'] = (string)$it['published_at'];
-        if (array_key_exists('updated_at', $it)) $out['updated_at'] = (string)$it['updated_at'];
+        if (array_key_exists('cta', $it)) $out['cta'] = (string) $it['cta'];
+        if (array_key_exists('estimated_minutes', $it)) $out['estimated_minutes'] = (int) $it['estimated_minutes'];
+        if (array_key_exists('locale', $it)) $out['locale'] = (string) $it['locale'];
+        if (array_key_exists('access', $it)) $out['access'] = (string) $it['access'];
+        if (array_key_exists('channel', $it)) $out['channel'] = (string) $it['channel'];
+        if (array_key_exists('status', $it)) $out['status'] = (string) $it['status'];
+        if (array_key_exists('published_at', $it)) $out['published_at'] = (string) $it['published_at'];
+        if (array_key_exists('updated_at', $it)) $out['updated_at'] = (string) $it['updated_at'];
 
         return $out;
     };
 
     // ----------------------------
-    // 7) quota helper (supports "remaining")
+    // 7) quota helper
     // ----------------------------
     $resolveCap = function ($capRaw, int $remaining): int {
         if (is_string($capRaw)) {
             $s = strtolower(trim($capRaw));
             if ($s === 'remaining' || $s === '*' || $s === 'all') return $remaining;
-            if (is_numeric($capRaw)) return (int)$capRaw;
+            if (is_numeric($capRaw)) return (int) $capRaw;
             return 0;
         }
-        if (is_int($capRaw) || is_float($capRaw)) return (int)$capRaw;
+        if (is_int($capRaw) || is_float($capRaw)) return (int) $capRaw;
         return $remaining;
     };
 
     // ----------------------------
-    // 8) fill by bucket (bucket_quota 真执行 + debug)
+    // 8) fill by bucket (quota + debug dup reasons)
     // ----------------------------
     $out = [];
+    $SAMPLE_LIMIT = 5;
 
     foreach ($fillOrder as $bucketName) {
         if (count($out) >= $maxItems) break;
@@ -1624,6 +1632,8 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
                     'taken' => 0,
                     'skip_no_id' => 0,
                     'skip_dup' => 0,
+                    'skip_dup_by' => [],
+                    'dup_samples' => [],
                     'skip_invalid' => 0,
                     'stop_cap' => false,
                     'skip_empty' => true,
@@ -1643,6 +1653,8 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
                     'taken' => 0,
                     'skip_no_id' => 0,
                     'skip_dup' => 0,
+                    'skip_dup_by' => [],
+                    'dup_samples' => [],
                     'skip_invalid' => 0,
                     'stop_cap' => false,
                     'skip_empty' => false,
@@ -1660,6 +1672,8 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
                 'taken' => 0,
                 'skip_no_id' => 0,
                 'skip_dup' => 0,
+                'skip_dup_by' => [],
+                'dup_samples' => [],
                 'skip_invalid' => 0,
                 'stop_cap' => false,
                 'skip_empty' => false,
@@ -1686,8 +1700,23 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
                 continue;
             }
 
-            if ($isDup($it)) {
-                if ($debugReads) $debug['buckets'][$bucketName]['skip_dup']++;
+            $dup = $dupCheck($it);
+            if ($dup !== null) {
+                if ($debugReads) {
+                    $debug['buckets'][$bucketName]['skip_dup']++;
+
+                    $by = (string) ($dup['by'] ?? 'unknown');
+                    $debug['buckets'][$bucketName]['skip_dup_by'][$by] =
+                        (int) ($debug['buckets'][$bucketName]['skip_dup_by'][$by] ?? 0) + 1;
+
+                    if (count($debug['buckets'][$bucketName]['dup_samples']) < $SAMPLE_LIMIT) {
+                        $debug['buckets'][$bucketName]['dup_samples'][] = [
+                            'id' => $id,
+                            'dup_by' => $by,
+                            'dup_key' => (string) ($dup['key'] ?? ''),
+                        ];
+                    }
+                }
                 continue;
             }
 
@@ -1699,7 +1728,7 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
         }
     }
 
-    // min_items：强制用 fallback 补齐（不受 quota 限制，但受 maxItems 限制）
+    // min_items：强制用 fallback 补齐
     if ($minItems > 0 && count($out) < min($minItems, $maxItems)) {
         $need = min($minItems, $maxItems) - count($out);
 
@@ -1709,6 +1738,8 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
                 'taken' => 0,
                 'skip_no_id' => 0,
                 'skip_dup' => 0,
+                'skip_dup_by' => [],
+                'dup_samples' => [],
                 'skip_invalid' => 0,
             ];
         }
@@ -1729,8 +1760,23 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
                     continue;
                 }
 
-                if ($isDup($it)) {
-                    if ($debugReads) $debug['min_items_fill']['skip_dup']++;
+                $dup = $dupCheck($it);
+                if ($dup !== null) {
+                    if ($debugReads) {
+                        $debug['min_items_fill']['skip_dup']++;
+
+                        $by = (string) ($dup['by'] ?? 'unknown');
+                        $debug['min_items_fill']['skip_dup_by'][$by] =
+                            (int) ($debug['min_items_fill']['skip_dup_by'][$by] ?? 0) + 1;
+
+                        if (count($debug['min_items_fill']['dup_samples']) < $SAMPLE_LIMIT) {
+                            $debug['min_items_fill']['dup_samples'][] = [
+                                'id' => $id,
+                                'dup_by' => $by,
+                                'dup_key' => (string) ($dup['key'] ?? ''),
+                            ];
+                        }
+                    }
                     continue;
                 }
 
@@ -1745,7 +1791,7 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
 
     // 可选：最终排序（严格遵循 rules.sort=priority_desc）
     if ($sortMode === 'priority_desc') {
-        usort($out, fn($a, $b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
+        usort($out, fn($a, $b) => (int) ($b['priority'] ?? 0) <=> (int) ($a['priority'] ?? 0));
     }
 
     if ($debugReads) {
