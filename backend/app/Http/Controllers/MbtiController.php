@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\Attempt;
 use App\Models\Result;
@@ -1322,6 +1323,20 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     $rules = is_array($raw['rules'] ?? null) ? $raw['rules'] : [];
 
     // ----------------------------
+    // Debug switch (dev only)
+    // ----------------------------
+    $debugReads = (app()->environment('local', 'development') && (bool)env('FAP_READS_DEBUG', false));
+    $debug = [
+        'pkg' => $contentPackageVersion,
+        'type' => $typeCode,
+        'max' => $max,
+        'rules' => [],
+        'axis' => [],
+        'buckets' => [],
+        'min_items_fill' => null,
+    ];
+
+    // ----------------------------
     // 1) rules
     // ----------------------------
     $maxItems  = (int)($rules['max_items'] ?? $max);
@@ -1337,6 +1352,18 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     $dedupe = is_array($rules['dedupe'] ?? null) ? $rules['dedupe'] : [];
     $hardBy = is_array($dedupe['hard_by'] ?? null) ? $dedupe['hard_by'] : ['id'];
     $softBy = is_array($dedupe['soft_by'] ?? null) ? $dedupe['soft_by'] : ['canonical_id','canonical_url','url'];
+
+    if ($debugReads) {
+        $debug['rules'] = [
+            'max_items' => $maxItems,
+            'min_items' => $minItems,
+            'sort' => $sortMode,
+            'fill_order' => $fillOrder,
+            'bucket_quota' => $bucketQuota,
+            'hard_by' => $hardBy,
+            'soft_by' => $softBy,
+        ];
+    }
 
     // ----------------------------
     // 2) items buckets
@@ -1381,6 +1408,16 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
         );
     }
 
+    if ($debugReads) {
+        $debug['axis'] = [
+            'best' => $best,
+            'plain' => $plainAxisKey,
+            'pref' => $prefAxisKey,
+            'format' => $axisKeyFormat,
+            'formatted' => $formattedAxisKey,
+        ];
+    }
+
     // ----------------------------
     // 4) build candidate lists per bucket
     // ----------------------------
@@ -1415,7 +1452,7 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     unset($list);
 
     // ----------------------------
-    // 5) dedupe state
+    // 5) dedupe state + helpers
     // ----------------------------
     $seenId   = [];
     $seenCid  = [];
@@ -1429,7 +1466,44 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
         return '';
     };
 
-    $isDup = function (array $it) use (&$seenId, &$seenCid, &$seenCUrl, &$seenUrl, $hardBy, $softBy, $getNonEmptyString): bool {
+    // URL 归一化：去常见追踪参数 + 参数排序（保留业务参数如 id）
+    $normalizeUrlKey = function (?string $url): string {
+        $url = trim((string)$url);
+        if ($url === '') return '';
+
+        $parts = parse_url($url);
+        $path  = $parts['path'] ?? '';
+        $query = $parts['query'] ?? '';
+
+        if ($path === '' && $query === '') return $url;
+
+        $qs = [];
+        if ($query !== '') {
+            parse_str($query, $qs);
+        }
+
+        $dropKeys = [
+            'utm_source','utm_medium','utm_campaign','utm_term','utm_content',
+            'gclid','fbclid','msclkid','wbraid','gbraid',
+            '_ga','_gl',
+        ];
+        foreach ($dropKeys as $k) {
+            unset($qs[$k]);
+        }
+
+        if (!empty($qs)) {
+            ksort($qs);
+            $q = http_build_query($qs);
+            return $q ? ($path . '?' . $q) : $path;
+        }
+
+        return $path;
+    };
+
+    $isDup = function (array $it) use (
+        &$seenId, &$seenCid, &$seenCUrl, &$seenUrl,
+        $hardBy, $softBy, $getNonEmptyString, $normalizeUrlKey
+    ): bool {
         // hard dedupe
         if (in_array('id', $hardBy, true)) {
             $id = $getNonEmptyString($it['id'] ?? '');
@@ -1441,25 +1515,43 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
             $v = $getNonEmptyString($it[$k] ?? '');
             if ($v === '') continue;
 
-            if ($k === 'canonical_id' && isset($seenCid[$v])) return true;
-            if ($k === 'canonical_url' && isset($seenCUrl[$v])) return true;
-            if ($k === 'url' && isset($seenUrl[$v])) return true;
+            if ($k === 'canonical_id') {
+                if (isset($seenCid[$v])) return true;
+                continue;
+            }
+
+            if ($k === 'canonical_url') {
+                $key = $normalizeUrlKey($v);
+                if ($key !== '' && isset($seenCUrl[$key])) return true;
+                continue;
+            }
+
+            if ($k === 'url') {
+                $key = $normalizeUrlKey($v);
+                if ($key !== '' && isset($seenUrl[$key])) return true;
+                continue;
+            }
+
+            // 其它 soft key（未来扩展）默认不处理
         }
 
         return false;
     };
 
-    $markSeen = function (array $it) use (&$seenId, &$seenCid, &$seenCUrl, &$seenUrl, $getNonEmptyString): void {
+    $markSeen = function (array $it) use (
+        &$seenId, &$seenCid, &$seenCUrl, &$seenUrl,
+        $getNonEmptyString, $normalizeUrlKey
+    ): void {
         $id = $getNonEmptyString($it['id'] ?? '');
         if ($id !== '') $seenId[$id] = true;
 
         $cid = $getNonEmptyString($it['canonical_id'] ?? '');
         if ($cid !== '') $seenCid[$cid] = true;
 
-        $curl = $getNonEmptyString($it['canonical_url'] ?? '');
+        $curl = $normalizeUrlKey($getNonEmptyString($it['canonical_url'] ?? ''));
         if ($curl !== '') $seenCUrl[$curl] = true;
 
-        $url = $getNonEmptyString($it['url'] ?? '');
+        $url = $normalizeUrlKey($getNonEmptyString($it['url'] ?? ''));
         if ($url !== '') $seenUrl[$url] = true;
     };
 
@@ -1508,7 +1600,6 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
         if (is_string($capRaw)) {
             $s = strtolower(trim($capRaw));
             if ($s === 'remaining' || $s === '*' || $s === 'all') return $remaining;
-            // 数字字符串也支持
             if (is_numeric($capRaw)) return (int)$capRaw;
             return 0;
         }
@@ -1517,7 +1608,7 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     };
 
     // ----------------------------
-    // 8) fill by bucket (bucket_quota 真执行)
+    // 8) fill by bucket (bucket_quota 真执行 + debug)
     // ----------------------------
     $out = [];
 
@@ -1525,50 +1616,129 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
         if (count($out) >= $maxItems) break;
 
         $list = $bucketLists[$bucketName] ?? [];
-        if (!is_array($list) || empty($list)) continue;
+        if (!is_array($list) || empty($list)) {
+            if ($debugReads) {
+                $debug['buckets'][$bucketName] = [
+                    'candidates' => is_array($list) ? count($list) : 0,
+                    'cap' => 0,
+                    'taken' => 0,
+                    'skip_no_id' => 0,
+                    'skip_dup' => 0,
+                    'skip_invalid' => 0,
+                    'stop_cap' => false,
+                    'skip_empty' => true,
+                ];
+            }
+            continue;
+        }
 
         $remaining = $maxItems - count($out);
-
-        // cap：fallback 建议可以配置 "remaining"
         $capRaw = $bucketQuota[$bucketName] ?? $remaining;
         $cap    = $resolveCap($capRaw, $remaining);
-        if ($cap <= 0) continue;
+        if ($cap <= 0) {
+            if ($debugReads) {
+                $debug['buckets'][$bucketName] = [
+                    'candidates' => count($list),
+                    'cap' => $cap,
+                    'taken' => 0,
+                    'skip_no_id' => 0,
+                    'skip_dup' => 0,
+                    'skip_invalid' => 0,
+                    'stop_cap' => false,
+                    'skip_empty' => false,
+                    'skip_reason' => 'cap<=0',
+                ];
+            }
+            continue;
+        }
         $cap = min($cap, $remaining);
+
+        if ($debugReads) {
+            $debug['buckets'][$bucketName] = [
+                'candidates' => count($list),
+                'cap' => $cap,
+                'taken' => 0,
+                'skip_no_id' => 0,
+                'skip_dup' => 0,
+                'skip_invalid' => 0,
+                'stop_cap' => false,
+                'skip_empty' => false,
+            ];
+        }
 
         $taken = 0;
         foreach ($list as $it) {
             if (count($out) >= $maxItems) break;
-            if ($taken >= $cap) break;
-            if (!is_array($it)) continue;
+
+            if ($taken >= $cap) {
+                if ($debugReads) $debug['buckets'][$bucketName]['stop_cap'] = true;
+                break;
+            }
+
+            if (!is_array($it)) {
+                if ($debugReads) $debug['buckets'][$bucketName]['skip_invalid']++;
+                continue;
+            }
 
             $id = $getNonEmptyString($it['id'] ?? '');
-            if ($id === '') continue;
+            if ($id === '') {
+                if ($debugReads) $debug['buckets'][$bucketName]['skip_no_id']++;
+                continue;
+            }
 
-            if ($isDup($it)) continue;
+            if ($isDup($it)) {
+                if ($debugReads) $debug['buckets'][$bucketName]['skip_dup']++;
+                continue;
+            }
 
             $markSeen($it);
             $out[] = $normalize($it);
             $taken++;
+
+            if ($debugReads) $debug['buckets'][$bucketName]['taken']++;
         }
     }
 
     // min_items：强制用 fallback 补齐（不受 quota 限制，但受 maxItems 限制）
     if ($minItems > 0 && count($out) < min($minItems, $maxItems)) {
         $need = min($minItems, $maxItems) - count($out);
+
+        if ($debugReads) {
+            $debug['min_items_fill'] = [
+                'need' => $need,
+                'taken' => 0,
+                'skip_no_id' => 0,
+                'skip_dup' => 0,
+                'skip_invalid' => 0,
+            ];
+        }
+
         if ($need > 0 && is_array($bucketLists['fallback'] ?? null)) {
             foreach ($bucketLists['fallback'] as $it) {
                 if (count($out) >= $maxItems) break;
                 if ($need <= 0) break;
-                if (!is_array($it)) continue;
+
+                if (!is_array($it)) {
+                    if ($debugReads) $debug['min_items_fill']['skip_invalid']++;
+                    continue;
+                }
 
                 $id = $getNonEmptyString($it['id'] ?? '');
-                if ($id === '') continue;
+                if ($id === '') {
+                    if ($debugReads) $debug['min_items_fill']['skip_no_id']++;
+                    continue;
+                }
 
-                if ($isDup($it)) continue;
+                if ($isDup($it)) {
+                    if ($debugReads) $debug['min_items_fill']['skip_dup']++;
+                    continue;
+                }
 
                 $markSeen($it);
                 $out[] = $normalize($it);
                 $need--;
+
+                if ($debugReads) $debug['min_items_fill']['taken']++;
             }
         }
     }
@@ -1576,6 +1746,14 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     // 可选：最终排序（严格遵循 rules.sort=priority_desc）
     if ($sortMode === 'priority_desc') {
         usort($out, fn($a, $b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
+    }
+
+    if ($debugReads) {
+        $debug['result'] = [
+            'count' => count($out),
+            'ids' => array_values(array_map(fn($x) => $x['id'] ?? null, $out)),
+        ];
+        Log::debug('[recommended_reads] build', $debug);
     }
 
     return $out;
