@@ -403,6 +403,22 @@ public function storeAttempt(Request $request)
             $answersHash
         );
     }
+    
+    $canStoreJson = Schema::hasColumn('attempts', 'answers_json');
+    $canStorePath = Schema::hasColumn('attempts', 'answers_storage_path');
+
+    if (!$canStoreJson && (!$storeToStorage || !$canStorePath)) {
+    return response()->json([
+        'ok' => false,
+        'error' => 'PERSISTENCE_NOT_SUPPORTED',
+        'message' => 'Attempt answers persistence is required for audit, but attempts.answers_json / answers_storage_path is not available.',
+        'data' => [
+            'has_answers_json_column' => $canStoreJson,
+            'has_answers_storage_path_column' => $canStorePath,
+            'store_to_storage' => $storeToStorage,
+        ],
+    ], 500);
+}
 
     return DB::transaction(function () use (
         $request,
@@ -423,46 +439,43 @@ public function storeAttempt(Request $request)
         $resultId  = (string) Str::uuid();
 
         // 1) attempts
-        $attemptData = [
-            'id'                   => $attemptId,
-            'anon_id'              => $payload['anon_id'],
-            'user_id'              => null,
-            'scale_code'           => $payload['scale_code'],
-            'scale_version'        => $payload['scale_version'],
-            'question_count'       => $expectedQuestionCount,
-            'answers_summary_json' => $answersSummary,
+$attemptData = [
+    'id'                   => $attemptId,
+    'anon_id'              => $payload['anon_id'],
+    'user_id'              => null,
+    'scale_code'           => $payload['scale_code'],
+    'scale_version'        => $payload['scale_version'],
+    'question_count'       => $expectedQuestionCount,
+    'answers_summary_json' => $answersSummary,
 
-            'client_platform'      => $payload['client_platform'] ?? 'unknown',
-            'client_version'       => $payload['client_version'] ?? 'unknown',
-            'channel'              => $payload['channel'] ?? 'direct',
-            'referrer'             => $payload['referrer'] ?? '',
+    'client_platform'      => $payload['client_platform'] ?? 'unknown',
+    'client_version'       => $payload['client_version'] ?? 'unknown',
+    'channel'              => $payload['channel'] ?? 'direct',
+    'referrer'             => $payload['referrer'] ?? '',
 
-            'started_at'           => now(),
-            'submitted_at'         => now(),
-        ];
+    'started_at'           => now(),
+    'submitted_at'         => now(),
+];
 
-        // ✅ 修改点 1：把 Schema::hasColumn 的条件写到数组外（避免语法错误）
-        if (Schema::hasColumn('attempts', 'answers_json')) {
-            $attemptData['answers_json'] = json_encode(
-                $answers,
-                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-            );
-        }
-        if (Schema::hasColumn('attempts', 'answers_hash')) {
-            $attemptData['answers_hash'] = $answersHash;
-        }
-        if (Schema::hasColumn('attempts', 'answers_storage_path')) {
-            $attemptData['answers_storage_path'] = $answersStoragePath;
-        }
+// ✅ 关键：answers_json 直接存 array（不要 json_encode）
+if (Schema::hasColumn('attempts', 'answers_json')) {
+    $attemptData['answers_json'] = $answers;
+}
+if (Schema::hasColumn('attempts', 'answers_hash')) {
+    $attemptData['answers_hash'] = $answersHash;
+}
+if (Schema::hasColumn('attempts', 'answers_storage_path')) {
+    $attemptData['answers_storage_path'] = $answersStoragePath;
+}
 
-        if (Schema::hasColumn('attempts', 'region')) {
-            $attemptData['region'] = $payload['region'] ?? 'CN_MAINLAND';
-        }
-        if (Schema::hasColumn('attempts', 'locale')) {
-            $attemptData['locale'] = $payload['locale'] ?? 'zh-CN';
-        }
+if (Schema::hasColumn('attempts', 'region')) {
+    $attemptData['region'] = $payload['region'] ?? 'CN_MAINLAND';
+}
+if (Schema::hasColumn('attempts', 'locale')) {
+    $attemptData['locale'] = $payload['locale'] ?? 'zh-CN';
+}
 
-        $attempt = Attempt::create($attemptData);
+$attempt = Attempt::create($attemptData);
 
         // 2) results
         $resultData = [
