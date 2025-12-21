@@ -31,7 +31,11 @@ final class SectionCardGenerator
 
         // assets 不存在：直接返回兜底（最少 2 张）
         if (empty($items)) {
-            return $this->fallbackCards($section, $minCards);
+            $out = $this->fallbackCards($section, $minCards);
+            // 体验层：确保至少 1 张 non-axis（fallback 本身就是 non-axis，保险起见仍跑一次）
+            $seen = [];
+            $out  = $this->ensureNonAxisCard($section, $out, [], $seen, $targetCards);
+            return array_slice(array_values($out), 0, $maxCards);
         }
 
         // normalize userTags set
@@ -98,17 +102,17 @@ final class SectionCardGenerator
         $seen = [];
         foreach ($cands as $c) {
             if (count($out) >= $targetCards) break;
-            if ((int)$c['_hit'] <= 0) continue;
+            if ((int)($c['_hit'] ?? 0) <= 0) continue;
 
             $id = (string)$c['id'];
-            if (isset($seen[$id])) continue;
-            $seen[$id] = true;
+            if ($id === '' || isset($seen[$id])) continue;
 
+            $seen[$id] = true;
             unset($c['_hit']);
             $out[] = $c;
         }
 
-        // 不足：用 fallback_tags 补齐
+        // 不足：用 fallback_tags 补齐（仍优先 hit/priority 排过序的候选）
         if (count($out) < $minCards) {
             foreach ($cands as $c) {
                 if (count($out) >= $targetCards) break;
@@ -147,6 +151,9 @@ final class SectionCardGenerator
             $out = array_merge($out, $this->fallbackCards($section, $minCards - count($out)));
         }
 
+        // ✅体验层硬规则：至少 1 张 non-axis（否则报告看起来“全是分数模板拼接”）
+        $out = $this->ensureNonAxisCard($section, $out, $cands, $seen, $targetCards);
+
         // 截断到 max
         return array_slice(array_values($out), 0, $maxCards);
     }
@@ -176,6 +183,132 @@ final class SectionCardGenerator
         if ($delta < $minDelta) return false;
 
         return true;
+    }
+
+    /**
+     * ✅体验层修复：
+     * - 每个 section 至少 1 张 non-axis（id 不含 "_axis_"）
+     * - 优先从候选里找 non-axis 替换最后一张（保持长度不变）
+     * - 若候选也没有 non-axis，则用“topic 非轴向兜底卡”替换最后一张
+     */
+    private function ensureNonAxisCard(string $section, array $out, array $cands, array &$seen, int $targetCards): array
+    {
+        $out = array_values(array_filter($out, fn($x) => is_array($x)));
+        if (count($out) === 0) return $out;
+
+        // 已经有 non-axis 就不动
+        foreach ($out as $c) {
+            $id = (string)($c['id'] ?? '');
+            if ($id !== '' && !$this->isAxisId($id)) {
+                return $out;
+            }
+        }
+
+        // 1) 先尝试从候选里找一张 non-axis（优先 hit/priority 高的，因为 cands 已排序）
+        $pick = null;
+        foreach ($cands as $c) {
+            if (!is_array($c)) continue;
+            $id = (string)($c['id'] ?? '');
+            if ($id === '' || isset($seen[$id])) continue;
+            if ($this->isAxisId($id)) continue;
+
+            $pick = $c;
+            break;
+        }
+
+        if ($pick) {
+            unset($pick['_hit']);
+            $seen[(string)$pick['id']] = true;
+
+            // 保持总数不变：替换最后一张
+            if (count($out) >= max(1, $targetCards)) {
+                $out[count($out) - 1] = $pick;
+            } else {
+                $out[] = $pick;
+            }
+
+            return array_values($out);
+        }
+
+        // 2) 候选也没有 non-axis：用“topic 非轴向兜底卡”替换最后一张（保持总数不变）
+        $fallback = $this->topicFallbackCard($section);
+        $fid = (string)($fallback['id'] ?? '');
+        if ($fid !== '') $seen[$fid] = true;
+
+        $out[count($out) - 1] = $fallback;
+
+        return array_values($out);
+    }
+
+    private function isAxisId(string $id): bool
+    {
+        return str_contains($id, '_axis_');
+    }
+
+    /**
+     * 非轴向兜底卡（让 section 不再“全是轴向模板”）
+     */
+    private function topicFallbackCard(string $section): array
+    {
+        $title = match ($section) {
+            'traits' => '补充洞察：你更像哪种“做事风格”',
+            'career' => '补充洞察：你更适合的工作形态',
+            'growth' => '补充洞察：把优势变成稳定输出',
+            'relationships' => '补充洞察：你在关系里的默认设置',
+            default => '补充洞察：一个更贴近你的角度',
+        };
+
+        $desc = match ($section) {
+            'traits' => '这条不依赖某个轴的极端分数，而是对你整体风格的总结。',
+            'career' => '这条不只是“你像什么”，而是“你在什么环境里最容易做出成绩”。',
+            'growth' => '这条用于把优势落到动作上，让报告更像“可执行建议”。',
+            'relationships' => '这条用于解释互动模式，减少“看完也不知道怎么用”的空转。',
+            default => '用于让报告结构更完整、更可读。',
+        };
+
+        $bullets = match ($section) {
+            'traits' => [
+                '目标一旦明确，你会自动进入推进状态',
+                '你更在意“结果是否落地”，而不是过程是否漂亮',
+                '你愿意为长期收益做短期取舍',
+            ],
+            'career' => [
+                '适合目标清晰、允许你做决策的岗位/团队',
+                '你在“复杂任务拆解 + 推动落地”上更占优势',
+                '给你明确指标，你会越做越强',
+            ],
+            'growth' => [
+                '把你最强的能力沉淀成模板/清单',
+                '关键场景增加一次“反向校验”',
+                '每周固定 10 分钟复盘：保留有效、删除无效',
+            ],
+            'relationships' => [
+                '你更在意确定性，但对方可能更在意感受与过程',
+                '用一句“我理解你”替代直接给方案，冲突会明显减少',
+                '约定沟通规则：什么时候讨论、什么时候先缓一缓',
+            ],
+            default => ['把优势沉淀成流程', '关键场景加一次反向校验', '每周一次复盘'],
+        };
+
+        $tips = match ($section) {
+            'traits' => ['写下你最常用的 3 个“决策标准”', '把它当作你的个人规则库'],
+            'career' => ['找一个“你负责推进”的位置', '把拆解任务当成你的核心能力展示'],
+            'growth' => ['先写第一反应，再补一个备选', '给重要决定加 10 分钟冷却'],
+            'relationships' => ['先共情再给建议', '用“我需要……”说需求，而不是指责'],
+            default => ['先写第一反应，再补一个备选', '用清单降低临场消耗'],
+        };
+
+        return [
+            'id'       => "{$section}_topic_fallback_1",
+            'section'  => $section,
+            'title'    => $title,
+            'desc'     => $desc,
+            'bullets'  => $bullets,
+            'tips'     => $tips,
+            'tags'     => ['fallback', 'kind:topic', "section:{$section}"],
+            'priority' => 0,
+            'match'    => null,
+        ];
     }
 
     private function fallbackCards(string $section, int $need): array
