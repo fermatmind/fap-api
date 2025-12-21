@@ -153,6 +153,7 @@ class HighlightsGenerator
         if ($take < $minItems) $take = $minItems;
 
         $out = array_slice($candidates, 0, $take);
+        $out = $this->forceIncludeDim($out, $candidates, 'AT', $take);
 
         // 7) fallback: old static highlights if template miss
         if (empty($out)) {
@@ -228,6 +229,43 @@ class HighlightsGenerator
 
         return array_slice($norm, 0, $take);
     }
+
+    private function forceIncludeDim(array $out, array $candidates, string $dim, int $take): array
+{
+    // 已经有就不动
+    $has = false;
+    foreach ($out as $h) {
+        if (is_array($h) && (($h['dim'] ?? null) === $dim)) { $has = true; break; }
+    }
+    if ($has) return $out;
+
+    // 找 candidates 里该 dim 的最佳卡（delta 最大）
+    $best = null;
+    $bestDelta = -1;
+    foreach ($candidates as $c) {
+        if (!is_array($c)) continue;
+        if (($c['dim'] ?? null) !== $dim) continue;
+        $d = (int)($c['delta'] ?? 0);
+        if ($d > $bestDelta) { $bestDelta = $d; $best = $c; }
+    }
+    if (!$best) return $out;
+
+    // 保持长度不变：用它替换掉 out 最后一张（避免无限增多）
+    if (count($out) >= $take && $take > 0) {
+        array_pop($out);
+    }
+    $out[] = $best;
+
+    // 去重
+    $out = $this->dedupeById($out);
+
+    // 仍超长就截断
+    if ($take > 0 && count($out) > $take) {
+        $out = array_slice($out, 0, $take);
+    }
+
+    return $out;
+}
 
     /**
      * ✅改动重点在这里：
