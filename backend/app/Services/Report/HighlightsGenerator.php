@@ -2,8 +2,6 @@
 
 namespace App\Services\Report;
 
-use Illuminate\Support\Facades\Log;
-
 class HighlightsGenerator
 {
     /**
@@ -34,16 +32,15 @@ class HighlightsGenerator
 
         // 2) rules with defaults
         $topN        = (int)($tplRules['top_n'] ?? 2);
-        $maxItems    = (int)($tplRules['max_items'] ?? 2);
+        $maxItems    = (int)($tplRules['max_items'] ?? 8);
 
-        // M3 硬保证：最少 3 条
+        // ✅体验优先：最少 4 条（strength/risk/action/axis）
         $minItems    = (int)($tplRules['min_items'] ?? 3);
-        if ($minItems < 3) $minItems = 3;
+        if ($minItems < 4) $minItems = 4;
 
         // delta：0..50 的阈值（推荐 10~20）
         $minDelta    = (int)($tplRules['min_delta'] ?? 15);
         $minLevel    = (string)($tplRules['min_level'] ?? 'clear');
-        $allowEmpty  = (bool)($tplRules['allow_empty'] ?? true);
 
         $allowedLvls = is_array($tplRules['allowed_levels'] ?? null)
             ? $tplRules['allowed_levels']
@@ -64,7 +61,7 @@ class HighlightsGenerator
         $ovrItems = is_array($ovr['items'] ?? null) ? $ovr['items'] : [];
         $perType  = is_array($ovrItems[$typeCode] ?? null) ? $ovrItems[$typeCode] : [];
 
-        // 4) build candidates from scores
+        // 4) build candidates from scores (模板命中才作为候选)
         $candidates = [];
 
         foreach ($this->dims as $dim) {
@@ -72,9 +69,9 @@ class HighlightsGenerator
             if (!$s) continue;
 
             $side  = (string)($s['side'] ?? '');
-            $level = (string)($s['state'] ?? 'moderate'); // 你 AxisScore 输出的是 state
-            $pct   = (int)($s['pct'] ?? 50);              // 50..100
-            $delta = (int)($s['delta'] ?? max(0, abs($pct - 50))); // 0..50
+            $level = (string)($s['state'] ?? 'moderate');
+            $pct   = (int)($s['pct'] ?? 50);
+            $delta = (int)($s['delta'] ?? max(0, abs($pct - 50)));
 
             if ($side === '') continue;
 
@@ -89,7 +86,7 @@ class HighlightsGenerator
             // gate: min_delta
             if ($delta < $minDelta) continue;
 
-            // template hit: templates[dim][side][level]
+            // template hit
             $hit = $tplTemplates[$dim][$side][$level] ?? null;
             if (!is_array($hit)) continue;
 
@@ -145,27 +142,26 @@ class HighlightsGenerator
             $candidates[] = $card;
         }
 
-        // sort by delta desc
-        usort($candidates, fn($a, $b) => (int)($b['delta'] ?? 0) <=> (int)($a['delta'] ?? 0));
-
-        // 6) choose take count
-        $take = max($minItems, min(max($topN, 0), max($maxItems, 0)));
-        if ($take < $minItems) $take = $minItems;
-
-        $out = array_slice($candidates, 0, $take);
-        $out = $this->forceIncludeDim($out, $candidates, 'AT', $take);
-
-        // 7) fallback: old static highlights if template miss
-        if (empty($out)) {
+        // 如果模板完全没命中：用 old highlights
+        if (empty($candidates)) {
+            $take = max($minItems, min(max($topN, 0), max($maxItems, 0)));
             $out = $this->normalizeOldHighlights($oldPerType, $scores, $take);
+
+            // 兜底：仍为空就返回空（允许上层处理）
+            if (empty($out)) return [];
+
+            // 给 old 也做 kind 标注 + 最少 4 条（必要时才 fallback）
+            $out = $this->composeHighlightsForUX($out, $typeCode, $scores, $minItems);
+            $out = $this->normalizeHighlightKinds($out);
+            $out = $this->sortHighlightsForUX($out);
+            return array_slice($out, 0, 8);
         }
 
-        // 8) hard guarantee: >=3, must have strength/risk/action
-        // ✅关键改动：优先“在已有 out 里标注 kind”，只有缺失时才追加 hl_fallback_*
-        $out = $this->dedupeById($out);
-        $out = $this->ensureKinds($out, $typeCode, $scores);
+        // 6) 体验组装：strength / risk / action / axis（必要时才 fallback）
+        $out = $this->composeHighlightsForUX($candidates, $typeCode, $scores, $minItems);
 
-        // 9) normalize kind/axis tags, UX sort, limit
+        // 7) normalize + UX sort
+        $out = $this->dedupeById($out);
         $out = $this->normalizeHighlightKinds($out);
         $out = $this->sortHighlightsForUX($out);
 
@@ -173,7 +169,233 @@ class HighlightsGenerator
     }
 
     // =========================
-    // Helpers
+    // UX Composer（核心体验逻辑）
+    // =========================
+
+    private function composeHighlightsForUX(array $candidates, string $typeCode, array $scores, int $minItems = 4): array
+    {
+        $minItems = max(4, $minItems);
+
+        $axisInfo = $this->buildAxisInfo($scores);
+
+        // bestByDim：每个 dim 只保留 delta 最大的那张（避免同轴重复）
+        $bestByDim = $this->bestByDim($candidates);
+
+        $availableDims = array_values(array_keys($bestByDim));
+        if (empty($availableDims)) {
+            // 没模板卡：只能 fallback
+            return $this->fallbackOnly($typeCode, $axisInfo, $minItems);
+        }
+
+        // strengthDim：delta 最大（尽量不选 AT）
+        $strengthDim = $this->pickStrongestDim($axisInfo, $availableDims, true);
+
+        // riskDim：delta 最小，且避开 strengthDim，尽量不选 AT
+        $riskDim = $this->pickWeakestDim($axisInfo, $availableDims, [$strengthDim], true);
+
+        // actionDim：优先 AT（模板卡），否则选一个未使用的“次强”
+        $actionDim = in_array('AT', $availableDims, true) ? 'AT' : $this->pickNextStrongDim($axisInfo, $availableDims, [$strengthDim, $riskDim]);
+
+        $out = [];
+        $usedDims = [];
+
+        // 1) strength（优先模板卡，否则 fallback）
+        $out[] = $this->takeOrFallback($bestByDim, $axisInfo, $typeCode, 'strength', $strengthDim);
+        $usedDims[$strengthDim] = true;
+
+        // 2) risk
+        if ($riskDim !== '' && !isset($usedDims[$riskDim])) {
+            $out[] = $this->takeOrFallback($bestByDim, $axisInfo, $typeCode, 'risk', $riskDim);
+            $usedDims[$riskDim] = true;
+        } else {
+            // 再兜底选一个不同轴
+            $altRisk = $this->pickWeakestDim($axisInfo, $availableDims, array_keys($usedDims), true);
+            if ($altRisk !== '' && !isset($usedDims[$altRisk])) {
+                $out[] = $this->takeOrFallback($bestByDim, $axisInfo, $typeCode, 'risk', $altRisk);
+                $usedDims[$altRisk] = true;
+            }
+        }
+
+        // 3) action（优先 AT）
+        if ($actionDim !== '' && !isset($usedDims[$actionDim])) {
+            $out[] = $this->takeOrFallback($bestByDim, $axisInfo, $typeCode, 'action', $actionDim);
+            $usedDims[$actionDim] = true;
+        } else {
+            $altAction = $this->pickNextStrongDim($axisInfo, $availableDims, array_keys($usedDims));
+            if ($altAction !== '' && !isset($usedDims[$altAction])) {
+                $out[] = $this->takeOrFallback($bestByDim, $axisInfo, $typeCode, 'action', $altAction);
+                $usedDims[$altAction] = true;
+            } else {
+                // 最后兜底：用 AT fallback（即使没有模板卡）
+                $out[] = $this->makeFallback('action', $typeCode, $axisInfo['AT'] ?? []);
+            }
+        }
+
+        // 4) 额外补一条 axis（模板卡）凑到 >=4
+        $dimsByDeltaDesc = $this->dimsByDeltaDesc($axisInfo, $availableDims);
+        foreach ($dimsByDeltaDesc as $dim) {
+            if (count($out) >= $minItems) break;
+            if (isset($usedDims[$dim])) continue;
+            $card = $bestByDim[$dim] ?? null;
+            if (is_array($card)) {
+                // 没 kind 的会在 normalizeHighlightKinds 里补 kind:axis
+                $out[] = $card;
+                $usedDims[$dim] = true;
+            }
+        }
+
+        // 如果还不够：才补 fallback（不会固定每次加 3 条）
+        while (count($out) < $minItems) {
+            $dim = $this->pickNextStrongDim($axisInfo, $this->dims, array_keys($usedDims));
+            if ($dim === '') break;
+            $out[] = $this->makeFallback('axis', $typeCode, $axisInfo[$dim] ?? []);
+            $usedDims[$dim] = true;
+        }
+
+        return $this->dedupeById($out);
+    }
+
+    private function takeOrFallback(array $bestByDim, array $axisInfo, string $typeCode, string $kind, string $dim): array
+    {
+        $card = $bestByDim[$dim] ?? null;
+        if (is_array($card)) {
+            $this->forceSetKind($card, $kind);
+            return $card;
+        }
+
+        $pick = $axisInfo[$dim] ?? null;
+        if (is_array($pick) && ($pick['side'] ?? '') !== '') {
+            return $this->makeFallback($kind, $typeCode, $pick);
+        }
+
+        // 极端兜底：用 strongest fallback
+        $strongest = $this->pickStrongestDim($axisInfo, $this->dims, false);
+        return $this->makeFallback($kind, $typeCode, $axisInfo[$strongest] ?? []);
+    }
+
+    private function fallbackOnly(string $typeCode, array $axisInfo, int $minItems): array
+    {
+        $out = [];
+        $strength = $this->pickStrongestDim($axisInfo, $this->dims, true);
+        $risk     = $this->pickWeakestDim($axisInfo, $this->dims, [$strength], true);
+
+        $out[] = $this->makeFallback('strength', $typeCode, $axisInfo[$strength] ?? []);
+        $out[] = $this->makeFallback('risk',     $typeCode, $axisInfo[$risk] ?? []);
+        $out[] = $this->makeFallback('action',   $typeCode, $axisInfo['AT'] ?? []);
+
+        while (count($out) < max(4, $minItems)) {
+            $dim = $this->pickNextStrongDim($axisInfo, $this->dims, []);
+            if ($dim === '') break;
+            $out[] = $this->makeFallback('axis', $typeCode, $axisInfo[$dim] ?? []);
+        }
+
+        return $this->dedupeById($out);
+    }
+
+    private function forceSetKind(array &$card, string $kind): void
+    {
+        $tags = is_array($card['tags'] ?? null) ? $card['tags'] : [];
+        $tags = array_values(array_filter($tags, fn($t) => !(is_string($t) && str_starts_with($t, 'kind:'))));
+        $tags[] = "kind:{$kind}";
+        $card['tags'] = $tags;
+    }
+
+    private function buildAxisInfo(array $scores): array
+    {
+        $axisInfo = [];
+        foreach ($this->dims as $dim) {
+            $s = is_array($scores[$dim] ?? null) ? $scores[$dim] : [];
+            $axisInfo[$dim] = [
+                'dim'   => $dim,
+                'side'  => (string)($s['side'] ?? ''),
+                'pct'   => (int)($s['pct'] ?? 50),
+                'delta' => (int)($s['delta'] ?? max(0, abs(((int)($s['pct'] ?? 50)) - 50))),
+                'level' => (string)($s['state'] ?? 'moderate'),
+            ];
+        }
+        return $axisInfo;
+    }
+
+    private function bestByDim(array $candidates): array
+    {
+        $best = [];
+        foreach ($candidates as $c) {
+            if (!is_array($c)) continue;
+            $dim = (string)($c['dim'] ?? '');
+            if ($dim === '') continue;
+
+            $d = (int)($c['delta'] ?? 0);
+            if (!isset($best[$dim]) || $d > (int)($best[$dim]['delta'] ?? 0)) {
+                $best[$dim] = $c;
+            }
+        }
+        return $best;
+    }
+
+    private function pickStrongestDim(array $axisInfo, array $dims, bool $avoidAT): string
+    {
+        $pool = $dims;
+        if ($avoidAT) {
+            $pool = array_values(array_filter($pool, fn($d) => $d !== 'AT'));
+            if (empty($pool)) $pool = $dims;
+        }
+
+        $bestDim = $pool[0] ?? 'EI';
+        $best = -1;
+        foreach ($pool as $dim) {
+            $delta = (int)($axisInfo[$dim]['delta'] ?? 0);
+            if ($delta > $best) {
+                $best = $delta;
+                $bestDim = $dim;
+            }
+        }
+        return $bestDim;
+    }
+
+    private function pickWeakestDim(array $axisInfo, array $dims, array $excludeDims, bool $avoidAT): string
+    {
+        $pool = array_values(array_filter($dims, fn($d) => !in_array($d, $excludeDims, true)));
+        if ($avoidAT) {
+            $poolNoAT = array_values(array_filter($pool, fn($d) => $d !== 'AT'));
+            if (!empty($poolNoAT)) $pool = $poolNoAT;
+        }
+        if (empty($pool)) return '';
+
+        $bestDim = $pool[0];
+        $best = PHP_INT_MAX;
+        foreach ($pool as $dim) {
+            $delta = (int)($axisInfo[$dim]['delta'] ?? 0);
+            if ($delta < $best) {
+                $best = $delta;
+                $bestDim = $dim;
+            }
+        }
+        return $bestDim;
+    }
+
+    private function pickNextStrongDim(array $axisInfo, array $dims, array $excludeDims): string
+    {
+        $pool = array_values(array_filter($dims, fn($d) => !in_array($d, $excludeDims, true)));
+        if (empty($pool)) return '';
+
+        usort($pool, function ($a, $b) use ($axisInfo) {
+            return (int)($axisInfo[$b]['delta'] ?? 0) <=> (int)($axisInfo[$a]['delta'] ?? 0);
+        });
+
+        return (string)($pool[0] ?? '');
+    }
+
+    private function dimsByDeltaDesc(array $axisInfo, array $dims): array
+    {
+        $pool = $dims;
+        usort($pool, function ($a, $b) use ($axisInfo) {
+            return (int)($axisInfo[$b]['delta'] ?? 0) <=> (int)($axisInfo[$a]['delta'] ?? 0);
+        });
+        return $pool;
+    }
+
+    // =========================
+    // Old highlights normalize
     // =========================
 
     private function normalizeOldHighlights(array $oldPerType, array $scores, int $take): array
@@ -230,246 +452,9 @@ class HighlightsGenerator
         return array_slice($norm, 0, $take);
     }
 
-    private function forceIncludeDim(array $out, array $candidates, string $dim, int $take): array
-{
-    // 已经有就不动
-    $has = false;
-    foreach ($out as $h) {
-        if (is_array($h) && (($h['dim'] ?? null) === $dim)) { $has = true; break; }
-    }
-    if ($has) return $out;
-
-    // 找 candidates 里该 dim 的最佳卡（delta 最大）
-    $best = null;
-    $bestDelta = -1;
-    foreach ($candidates as $c) {
-        if (!is_array($c)) continue;
-        if (($c['dim'] ?? null) !== $dim) continue;
-        $d = (int)($c['delta'] ?? 0);
-        if ($d > $bestDelta) { $bestDelta = $d; $best = $c; }
-    }
-    if (!$best) return $out;
-
-    // 保持长度不变：用它替换掉 out 最后一张（避免无限增多）
-    if (count($out) >= $take && $take > 0) {
-        array_pop($out);
-    }
-    $out[] = $best;
-
-    // 去重
-    $out = $this->dedupeById($out);
-
-    // 仍超长就截断
-    if ($take > 0 && count($out) > $take) {
-        $out = array_slice($out, 0, $take);
-    }
-
-    return $out;
-}
-
-    /**
-     * ✅改动重点在这里：
-     * - 如果 out 里已经有足够 axis 卡（模板命中），就从 out 中选 3 张分别标注为 strength/risk/action
-     * - risk 会避开 strength 的 dim，避免“同轴强项+风险”
-     * - 只有缺对应 dim 的卡时才 append fallback
-     */
-    private function ensureKinds(array $out, string $typeCode, array $scores): array
-    {
-        $need = ['strength', 'risk', 'action'];
-
-        // 当前已存在的 kinds（如果某些模板/override 已经写了 kind:*，就尊重）
-        $has = [];
-        foreach ($out as $h) {
-            $tags = is_array($h['tags'] ?? null) ? $h['tags'] : [];
-            foreach ($tags as $t) {
-                if (is_string($t) && str_starts_with($t, 'kind:')) {
-                    $has[substr($t, 5)] = true;
-                }
-            }
-        }
-
-        // axisInfo（来自 scores）
-        $axisInfo = [];
-        foreach ($this->dims as $dim) {
-            $s = is_array($scores[$dim] ?? null) ? $scores[$dim] : [];
-            $axisInfo[$dim] = [
-                'dim'   => $dim,
-                'side'  => (string)($s['side'] ?? ''),
-                'pct'   => (int)($s['pct'] ?? 50),
-                'delta' => (int)($s['delta'] ?? 0),
-                'level' => (string)($s['state'] ?? 'moderate'),
-            ];
-        }
-
-        // out 里目前有哪些 dim（模板命中的 dim）
-        $presentDims = [];
-        foreach ($out as $h) {
-            $d = (string)($h['dim'] ?? '');
-            if ($d !== '' && in_array($d, $this->dims, true) && !in_array($d, $presentDims, true)) {
-                $presentDims[] = $d;
-            }
-        }
-
-        // 选择 strength/risk/action 的 dim（优先选 present 的）
-        $strengthDim = $this->pickStrongestDim($axisInfo, $presentDims);
-        $riskDim     = $this->pickWeakestDim($axisInfo, $presentDims, [$strengthDim]); // ✅避开 strengthDim
-        $actionDim   = in_array('AT', $presentDims, true) ? 'AT' : 'AT'; // 仍然优先 AT（即使不 present，后面会 fallback）
-
-        // 标注 kind 时避免复用同一张卡
-        $usedIds = [];
-
-        // 1) strength
-        if (!isset($has['strength'])) {
-            $ok = $this->markKindOnOut($out, 'strength', $strengthDim, $usedIds);
-            if (!$ok) {
-                $pick = $axisInfo[$strengthDim] ?? null;
-                if ($pick && ($pick['side'] ?? '') !== '') $out[] = $this->makeFallback('strength', $typeCode, $pick);
-            }
-        }
-
-        // 2) risk（不能和 strength 同轴）
-        if (!isset($has['risk'])) {
-            $ok = $this->markKindOnOut($out, 'risk', $riskDim, $usedIds);
-            if (!$ok) {
-                $pick = $axisInfo[$riskDim] ?? null;
-                if ($pick && ($pick['side'] ?? '') !== '') $out[] = $this->makeFallback('risk', $typeCode, $pick);
-            }
-        }
-
-        // 3) action（优先 AT；如果 AT 不在 out 里，就 fallback）
-        if (!isset($has['action'])) {
-            $ok = $this->markKindOnOut($out, 'action', $actionDim, $usedIds);
-            if (!$ok) {
-                $pick = $axisInfo['AT'] ?? null;
-                if (!$pick || ($pick['side'] ?? '') === '') {
-                    // 再兜底：用 strongest
-                    $pick = $axisInfo[$strengthDim] ?? null;
-                }
-                if ($pick && ($pick['side'] ?? '') !== '') $out[] = $this->makeFallback('action', $typeCode, $pick);
-            }
-        }
-
-        // 去重
-        $out = $this->dedupeById($out);
-
-        // 仍不足 3（极端）：用 strongest 继续补（尽量不重复 dim）
-        while (count($out) < 3) {
-            $dim = $this->pickNextDimByDeltaDesc($axisInfo, $presentDims, $usedIds);
-            $pick = $axisInfo[$dim] ?? null;
-            if (!$pick || ($pick['side'] ?? '') === '') break;
-            $out[] = $this->makeFallback('action', $typeCode, $pick);
-            $out = $this->dedupeById($out);
-        }
-
-        // 为了 UX：先不按 delta 排，交给 sortHighlightsForUX（kind 优先）做最终排序
-        return $out;
-    }
-
-    /**
-     * 在 out 中找一个 dim 对应的卡，把它“标注”为 kind
-     * - 不新增卡（避免 fallback 永远出现）
-     * - 避免一张卡被多个 kind 占用（用 $usedIds）
-     */
-    private function markKindOnOut(array &$out, string $kind, string $dim, array &$usedIds): bool
-    {
-        if ($dim === '') return false;
-
-        // 选择 out 里该 dim 中 delta 最大的一张（更合理）
-        $bestIdx = null;
-        $bestDelta = -1;
-
-        foreach ($out as $i => $h) {
-            if (!is_array($h)) continue;
-
-            $hDim = (string)($h['dim'] ?? '');
-            if ($hDim !== $dim) continue;
-
-            $id = (string)($h['id'] ?? '');
-            if ($id !== '' && in_array($id, $usedIds, true)) continue;
-
-            $d = (int)($h['delta'] ?? 0);
-            if ($d > $bestDelta) {
-                $bestDelta = $d;
-                $bestIdx = $i;
-            }
-        }
-
-        if ($bestIdx === null) return false;
-
-        $id = (string)($out[$bestIdx]['id'] ?? '');
-        if ($id !== '') $usedIds[] = $id;
-
-        $tags = $out[$bestIdx]['tags'] ?? [];
-        if (!is_array($tags)) $tags = [];
-
-        // 移除旧 kind:*（避免混乱）
-        $tags2 = [];
-        foreach ($tags as $t) {
-            if (!is_string($t) || $t === '') continue;
-            if (str_starts_with($t, 'kind:')) continue;
-            $tags2[] = $t;
-        }
-        $tags2[] = "kind:{$kind}";
-
-        $out[$bestIdx]['tags'] = $tags2;
-
-        return true;
-    }
-
-    private function pickStrongestDim(array $axisInfo, array $preferDims = []): string
-    {
-        $dims = !empty($preferDims) ? $preferDims : $this->dims;
-
-        $bestDim = $dims[0] ?? 'EI';
-        $best = -1;
-        foreach ($dims as $dim) {
-            $abs = abs((int)($axisInfo[$dim]['delta'] ?? 0));
-            if ($abs > $best) {
-                $best = $abs;
-                $bestDim = $dim;
-            }
-        }
-        return $bestDim;
-    }
-
-    private function pickWeakestDim(array $axisInfo, array $preferDims = [], array $excludeDims = []): string
-    {
-        $dims = !empty($preferDims) ? $preferDims : $this->dims;
-        $dims = array_values(array_filter($dims, fn($d) => !in_array($d, $excludeDims, true)));
-
-        // 如果 preferDims 被排空了，就用全量 dims 再试一次
-        if (empty($dims)) {
-            $dims = array_values(array_filter($this->dims, fn($d) => !in_array($d, $excludeDims, true)));
-        }
-
-        $bestDim = $dims[0] ?? 'SN';
-        $best = PHP_INT_MAX;
-
-        foreach ($dims as $dim) {
-            $abs = abs((int)($axisInfo[$dim]['delta'] ?? 0));
-            if ($abs < $best) {
-                $best = $abs;
-                $bestDim = $dim;
-            }
-        }
-        return $bestDim;
-    }
-
-    private function pickNextDimByDeltaDesc(array $axisInfo, array $preferDims, array $usedIds): string
-    {
-        $dims = !empty($preferDims) ? $preferDims : $this->dims;
-
-        $list = [];
-        foreach ($dims as $dim) {
-            $list[] = [
-                'dim' => $dim,
-                'delta' => (int)($axisInfo[$dim]['delta'] ?? 0),
-            ];
-        }
-        usort($list, fn($a, $b) => (int)$b['delta'] <=> (int)$a['delta']);
-
-        return (string)($list[0]['dim'] ?? 'EI');
-    }
+    // =========================
+    // Fallback builder
+    // =========================
 
     private function makeFallback(string $kind, string $typeCode, array $pick): array
     {
@@ -499,19 +484,22 @@ class HighlightsGenerator
         $title = match ($kind) {
             'strength' => "强项：你的{$dimName}更偏 {$side}",
             'risk'     => "盲点：{$dimName}容易出现“惯性误判”",
-            default    => "建议：把{$dimName}优势用对地方",
+            'action'   => "建议：把{$dimName}优势用对地方",
+            default    => "提示：{$dimName}是你的一条关键轴",
         };
 
         $text = match ($kind) {
             'strength' => "你在「{$dimName}」更偏 {$side}（强度 {$pct}%）：{$hint}。这会让你在相关场景里更容易做出高质量决策与行动。",
             'risk'     => "在「{$dimName}」上，你更偏 {$side}（强度 {$pct}%）。优势用过头时可能变成惯性：建议在关键场景加入一次“反向校验”，避免单一路径误判。",
-            default    => "你在「{$dimName}」更偏 {$side}（强度 {$pct}%）。给自己加一个小流程：先写下第一反应，再补一个反向备选，然后再做决定/表达，输出会更稳。",
+            'action'   => "你在「{$dimName}」更偏 {$side}（强度 {$pct}%）。给自己加一个小流程：先写下第一反应，再补一个反向备选，然后再做决定/表达，输出会更稳。",
+            default    => "你在「{$dimName}」更偏 {$side}（强度 {$pct}%）：{$hint}。",
         };
 
         $tips = match ($kind) {
             'strength' => ["把这个优势固定成你的“常用模板/流程”", "在团队里明确：你负责哪类决策最擅长"],
             'risk'     => ["重要决定前写一个“反方理由”", "找一个互补型的人做 2 分钟校验"],
-            default    => ["第一反应写下来，再补一个反向备选", "给重要决定加 10 分钟冷却/复盘"],
+            'action'   => ["第一反应写下来，再补一个反向备选", "给重要决定加 10 分钟冷却/复盘"],
+            default    => [],
         };
 
         return [
@@ -527,6 +515,10 @@ class HighlightsGenerator
             'tags'  => ["kind:{$kind}", "axis:{$dim}:{$side}", "fallback:true"],
         ];
     }
+
+    // =========================
+    // Normalize + UX sorting
+    // =========================
 
     private function normalizeHighlightKinds(array $cards): array
     {
