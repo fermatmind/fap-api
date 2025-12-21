@@ -38,6 +38,9 @@ class Attempt extends Model
         'referrer',
         'started_at',
         'submitted_at',
+        'answers_json',
+        'answers_hash',
+        'answers_storage_path',
     ];
 
     /**
@@ -45,11 +48,34 @@ class Attempt extends Model
      */
     protected $casts = [
         'answers_summary_json' => 'array',
+        'answers_json'         => 'array',
         'started_at'           => 'datetime',
         'submitted_at'         => 'datetime',
         'created_at'           => 'datetime',
         'updated_at'           => 'datetime',
     ];
+
+    /**
+     * 把 summary 作为一个“便捷 result 对象”暴露出来：
+     * 让你可以直接写：$attempt->summary?->type_code
+     */
+    protected $appends = ['summary'];
+
+    public function getSummaryAttribute(): ?object
+    {
+        $sum = $this->answers_summary_json;
+
+        if (!$sum) {
+            return null;
+        }
+
+        // 保险：万一某些场景下 cast 没生效（或返回 string）
+        if (is_string($sum)) {
+            $sum = json_decode($sum, true);
+        }
+
+        return is_array($sum) ? (object) $sum : null;
+    }
 
     /**
      * 关联：一次 Attempt 有一个 Result

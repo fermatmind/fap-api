@@ -6,4 +6,6 @@ return [
 
     // ✅ 同理：你可以在 .env 里加 MBTI_PROFILE_VERSION
     'profile_version'         => env('MBTI_PROFILE_VERSION', 'mbti32-v2.5'),
+
+    'reads_debug' => (bool) env('FAP_READS_DEBUG', false),
 ];

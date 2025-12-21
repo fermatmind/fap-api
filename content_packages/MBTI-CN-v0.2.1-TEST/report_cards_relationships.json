@@ -1,0 +1,268 @@
+{
+  "schema": "fap.report.cards.v1",
+  "engine": "v1.2",
+  "section": "relationships",
+  "meta": {
+    "package": "MBTI-CN-v0.2.1-TEST",
+    "updated_at": "2025-12-21",
+    "change_id": "LAUNCH-V1-REPORT-CARDS-RELATIONSHIPS",
+    "notes": "Launch v1.0: relationships cards production pool (23). 10 axis directional strong-only (min_delta=12) + 6 axis intro guardrail-friendly (min_delta=0, AT split A/T) + 7 core fallback-safe. Tags are primary selector hooks; match rules are optional constraints."
+  },
+  "rules": {
+    "min_cards": 2,
+    "target_cards": 3,
+    "max_cards": 6,
+    "fallback_tags": ["kind:core"],
+    "sort": ["priority_desc"]
+  },
+  "items": [
+    {
+      "id": "rel_axis_EI_E_strong",
+      "section": "relationships",
+      "title": "E 偏好较强：关系靠互动保温",
+      "desc": "你更容易在频繁互动里建立亲密感：越聊越熟，越见越近。",
+      "bullets": ["更愿意主动开启话题", "在一起做事会更亲", "互动能快速修复距离感"],
+      "tips": ["把联系做成‘小频率’，别等大事件", "聊感受前先聊事实，沟通更顺"],
+      "tags": ["kind:axis", "axis:EI:E", "state:strong", "topic:connection"],
+      "priority": 96,
+      "match": { "axis": { "dim": "EI", "side": "E", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_EI_I_strong",
+      "section": "relationships",
+      "title": "I 偏好较强：关系要空间才更稳",
+      "desc": "你更需要边界与独处充电。亲密不是黏在一起，而是彼此安心。",
+      "bullets": ["更偏好深度而非高频", "更在意边界与尊重", "沉默不代表冷淡"],
+      "tips": ["提前说清你的充电方式：我需要一点安静时间", "用文字表达也很好：先写后聊更稳"],
+      "tags": ["kind:axis", "axis:EI:I", "state:strong", "topic:boundary"],
+      "priority": 96,
+      "match": { "axis": { "dim": "EI", "side": "I", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_SN_S_strong",
+      "section": "relationships",
+      "title": "S 偏好较强：爱体现在细节与兑现",
+      "desc": "你更相信可见的行动：说到做到、照顾细节，会让你更安心。",
+      "bullets": ["更在意‘做没做到’", "细节是你的安全感来源", "关系靠稳定投入"],
+      "tips": ["把期待说成具体行为：比如每周一次一起吃饭", "别用‘你懂的’测试对方，直接说更省心"],
+      "tags": ["kind:axis", "axis:SN:S", "state:strong", "topic:security"],
+      "priority": 95,
+      "match": { "axis": { "dim": "SN", "side": "S", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_SN_N_strong",
+      "section": "relationships",
+      "title": "N 偏好较强：你更在意意义与共鸣",
+      "desc": "你渴望被理解与共鸣：价值观、未来感、精神连接会让你很投入。",
+      "bullets": ["更在意‘我们是否同频’", "容易被愿景与可能性点燃", "喜欢一起想象未来"],
+      "tips": ["把浪漫落地成小仪式：更容易被长期维持", "当对方更务实时，试着把期待说得更具体"],
+      "tags": ["kind:axis", "axis:SN:N", "state:strong", "topic:meaning"],
+      "priority": 95,
+      "match": { "axis": { "dim": "SN", "side": "N", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_TF_T_strong",
+      "section": "relationships",
+      "title": "T（理性）偏好较强：你用“解决问题”表达在乎",
+      "desc": "你更习惯把关系议题当成问题来处理：讲逻辑、讲方案、讲可行性。",
+      "bullets": ["更关注事实与改进", "冲突时更想找原因", "表达偏直接"],
+      "tips": ["先共情一句再给方案：我懂你在意…我们可以…", "减少‘对错’，多对齐‘目标’"],
+      "tags": ["kind:axis", "axis:TF:T", "state:strong", "topic:conflict"],
+      "priority": 94,
+      "match": { "axis": { "dim": "TF", "side": "T", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_TF_F_strong",
+      "section": "relationships",
+      "title": "F（感受）偏好较强：你用“照顾感受”表达在乎",
+      "desc": "你更在意对方感受与氛围：关系对你来说是彼此成全。",
+      "bullets": ["共情更自然", "擅长照顾氛围", "更在意长期关系"],
+      "tips": ["善良要配边界：明确什么是你能承受的", "冲突时先说需求：我希望你…而不是你总是…"],
+      "tags": ["kind:axis", "axis:TF:F", "state:strong", "topic:care"],
+      "priority": 94,
+      "match": { "axis": { "dim": "TF", "side": "F", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_JP_J_strong",
+      "section": "relationships",
+      "title": "J 偏好较强：你要确定感与承诺",
+      "desc": "你更希望关系有清晰边界与约定：确定感会让你更安心、更投入。",
+      "bullets": ["更在意承诺与稳定", "更喜欢提前沟通计划", "不爱长期悬而未决"],
+      "tips": ["把期待写成可协商的约定：频率/分工/底线", "给对方一点适应期：别用一次表现定终身"],
+      "tags": ["kind:axis", "axis:JP:J", "state:strong", "topic:commitment"],
+      "priority": 93,
+      "match": { "axis": { "dim": "JP", "side": "J", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_JP_P_strong",
+      "section": "relationships",
+      "title": "P 偏好较强：你要自由感与新鲜感",
+      "desc": "你更舒服在不被束缚的节奏里：空间、弹性、探索会让你更亲近。",
+      "bullets": ["不喜欢被过早锁死", "更适应变化", "更爱一起体验新事物"],
+      "tips": ["给关系加一点‘结构’：比如固定一次约会，但内容随意", "当对方需要确定感时，给一个时间点会很有用"],
+      "tags": ["kind:axis", "axis:JP:P", "state:strong", "topic:freedom"],
+      "priority": 93,
+      "match": { "axis": { "dim": "JP", "side": "P", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_AT_A_strong",
+      "section": "relationships",
+      "title": "A（自信型）偏好较强：你更能稳住关系节奏",
+      "desc": "你在压力下更笃定，能在冲突里保持主心骨，但要注意别太快下结论。",
+      "bullets": ["更不容易被情绪带跑", "更敢拍板与推进沟通", "更能扛住矛盾期"],
+      "tips": ["冲突里加一道反问：我是不是太快判断了？", "多问一句：你真正想要我怎么做？"],
+      "tags": ["kind:axis", "axis:AT:A", "state:strong", "topic:stability"],
+      "priority": 92,
+      "match": { "axis": { "dim": "AT", "side": "A", "min_delta": 12 } }
+    },
+    {
+      "id": "rel_axis_AT_T_strong",
+      "section": "relationships",
+      "title": "T（敏感型）偏好较强：你更会自省与修复",
+      "desc": "你更谨慎、更在意做对。优势是修复力强，风险是容易把自己耗在内耗里。",
+      "bullets": ["更愿意反思与道歉", "对细节更敏感", "更在意关系质量"],
+      "tips": ["把‘我是不是不好’换成‘下一步我能做什么’", "设一个停止线：讨论到这里，先休息再继续"],
+      "tags": ["kind:axis", "axis:AT:T", "state:strong", "topic:repair"],
+      "priority": 92,
+      "match": { "axis": { "dim": "AT", "side": "T", "min_delta": 12 } }
+    },
+
+    {
+      "id": "rel_axis_EI_E_intro",
+      "section": "relationships",
+      "title": "E 轻解释：关系靠联系变熟",
+      "desc": "即便不是强外向，你也会在适度互动里更容易拉近距离。",
+      "bullets": ["互动能带来熟悉感", "一起做事会更亲", "更愿意主动联系"],
+      "tips": ["把联系做短：一条消息也算", "别等对方读心：直接说想见面更有效"],
+      "tags": ["kind:axis_intro", "axis:EI:E", "state:clear"],
+      "priority": 60,
+      "match": { "axis": { "dim": "EI", "side": "E", "min_delta": 0 } }
+    },
+    {
+      "id": "rel_axis_EI_I_intro",
+      "section": "relationships",
+      "title": "I 轻解释：关系靠尊重与空间",
+      "desc": "即便不是强内向，你也会在有边界、有独处的关系里更安心。",
+      "bullets": ["需要安静充电", "偏好深度交流", "讨厌被打断与逼问"],
+      "tips": ["提前说清你的充电方式，误会会少很多", "用文字表达也很好：先写后聊更稳"],
+      "tags": ["kind:axis_intro", "axis:EI:I", "state:clear"],
+      "priority": 60,
+      "match": { "axis": { "dim": "EI", "side": "I", "min_delta": 0 } }
+    },
+    {
+      "id": "rel_axis_JP_J_intro",
+      "section": "relationships",
+      "title": "J 轻解释：你喜欢确定感",
+      "desc": "即便不算强 J，你也更舒服在有约定、有节奏的关系里。",
+      "bullets": ["更喜欢提前沟通计划", "更在意承诺与稳定", "不爱长期悬而未决"],
+      "tips": ["把期待说成可协商的约定：频率/分工/底线", "给对方适应期：别用一次表现定终身"],
+      "tags": ["kind:axis_intro", "axis:JP:J", "state:clear"],
+      "priority": 58,
+      "match": { "axis": { "dim": "JP", "side": "J", "min_delta": 0 } }
+    },
+    {
+      "id": "rel_axis_JP_P_intro",
+      "section": "relationships",
+      "title": "P 轻解释：你喜欢弹性与自由",
+      "desc": "即便不算强 P，你也更舒服在不过度束缚的关系节奏里。",
+      "bullets": ["更喜欢留余地", "更能适应变化", "更在意轻松感"],
+      "tips": ["给关系加一点结构：固定频率，但内容随意", "当对方需要确定感时，给时间点会更稳"],
+      "tags": ["kind:axis_intro", "axis:JP:P", "state:clear"],
+      "priority": 58,
+      "match": { "axis": { "dim": "JP", "side": "P", "min_delta": 0 } }
+    },
+    {
+      "id": "rel_axis_AT_A_intro",
+      "section": "relationships",
+      "title": "A（自信型）轻解释：更稳、更敢沟通",
+      "desc": "即便不是强 A，你也可能在关键时刻更愿意先稳住节奏、推进沟通。",
+      "bullets": ["更敢把话说清楚", "更能稳住矛盾期", "更少被情绪拖走"],
+      "tips": ["冲突里加一道反问：我是不是太快判断了？", "多问一句：你希望我怎么做？"],
+      "tags": ["kind:axis_intro", "axis:AT:A", "state:clear"],
+      "priority": 56,
+      "match": { "axis": { "dim": "AT", "side": "A", "min_delta": 0 } }
+    },
+    {
+      "id": "rel_axis_AT_T_intro",
+      "section": "relationships",
+      "title": "T（敏感型）轻解释：更会在意与修复",
+      "desc": "即便不是强 T，你也可能在压力下更倾向复查与修复，让关系更可靠。",
+      "bullets": ["更愿意反思与道歉", "对细节更敏感", "更在意关系质量"],
+      "tips": ["把内耗写成下一步：我能做的一件事是什么？", "设一个停止线：先休息再继续讨论"],
+      "tags": ["kind:axis_intro", "axis:AT:T", "state:clear"],
+      "priority": 56,
+      "match": { "axis": { "dim": "AT", "side": "T", "min_delta": 0 } }
+    },
+
+    {
+      "id": "rel_core_01",
+      "section": "relationships",
+      "title": "关系的底层能力：把期待说清楚",
+      "desc": "很多关系问题不是不爱，而是期待没说清。你说清楚，关系就会轻很多。",
+      "bullets": ["把‘我希望’说成具体行为", "把‘不舒服’说成边界", "把‘在乎’说成行动"],
+      "tips": ["用句式：我在意…我希望你…我能…", "避免让对方猜：猜中是运气，猜错是误会"],
+      "tags": ["kind:core", "tone:neutral", "topic:communication"],
+      "priority": 100
+    },
+    {
+      "id": "rel_core_02",
+      "section": "relationships",
+      "title": "冲突处理：先降温，再对齐目标",
+      "desc": "冲突不是输赢，而是信息。先把情绪降下来，再对齐要解决的事。",
+      "bullets": ["先复述对方诉求", "再说自己的需求", "最后给出可执行方案"],
+      "tips": ["用一句话复述：我听到你在意的是…", "给一个选项：我们可以 A/B，你更想哪个？"],
+      "tags": ["kind:core", "tone:warm", "topic:conflict"],
+      "priority": 96
+    },
+    {
+      "id": "rel_core_03",
+      "section": "relationships",
+      "title": "边界感：善良要配规则",
+      "desc": "你越能说清楚边界，越能长期稳定地付出。边界不是冷漠，是自我保护。",
+      "bullets": ["明确什么能做/不能做", "明确什么会消耗你", "明确底线触发条件"],
+      "tips": ["提前声明边界比事后爆炸更温柔", "用‘我需要’替代‘你总是’"],
+      "tags": ["kind:core", "tone:neutral", "topic:boundary"],
+      "priority": 94
+    },
+    {
+      "id": "rel_core_04",
+      "section": "relationships",
+      "title": "亲密建立：靠稳定的小投入",
+      "desc": "亲密不是一次性的大浪漫，而是长期的稳定投入：频率、回应、在场。",
+      "bullets": ["小频率联系", "及时回应", "一起做事/共享体验"],
+      "tips": ["固定一个小仪式：每周一次散步/晚餐", "在忙的时候也给一句确认：我在/我会回你"],
+      "tags": ["kind:core", "tone:warm", "topic:intimacy"],
+      "priority": 92
+    },
+    {
+      "id": "rel_core_05",
+      "section": "relationships",
+      "title": "减少误会：别用‘读心’当测试",
+      "desc": "用沉默、冷处理、试探来测试对方，成本很高。直接表达更有效。",
+      "bullets": ["把不满说成需求", "把期待说成请求", "把担心说成事实"],
+      "tips": ["用句式：我担心…我希望…你能…吗？", "如果你不确定，就问：你是这个意思吗？"],
+      "tags": ["kind:core", "tone:neutral", "topic:misunderstanding"],
+      "priority": 90
+    },
+    {
+      "id": "rel_core_06",
+      "section": "relationships",
+      "title": "修复能力：关系不是不吵，而是能和好",
+      "desc": "真正成熟的关系不是没有冲突，而是有修复机制：道歉、复盘、改进。",
+      "bullets": ["及时道歉与解释", "复盘触发点", "约定下次怎么做"],
+      "tips": ["把道歉说完整：我做了什么-影响了你什么-我下次怎么改", "复盘只讨论行为，不攻击人格"],
+      "tags": ["kind:core", "tone:warm", "topic:repair"],
+      "priority": 88
+    },
+    {
+      "id": "rel_core_07",
+      "section": "relationships",
+      "title": "安全感：一致性比热情更重要",
+      "desc": "安全感来自一致性：说到做到、情绪稳定、回应可靠。",
+      "bullets": ["一致性建立信任", "可预测降低焦虑", "长期投入更能打动人"],
+      "tips": ["把承诺量力而行：少承诺，多兑现", "在情绪上头时先暂停，等冷静再谈"],
+      "tags": ["kind:core", "tone:neutral", "topic:security"],
+      "priority": 86
+    }
+  ]
+}
