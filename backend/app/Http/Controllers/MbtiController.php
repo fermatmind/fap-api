@@ -559,6 +559,8 @@ $attempt = Attempt::create($attemptData);
 
         $attempt = Attempt::where('id', $attemptId)->first();
 
+        $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
+
         $this->logEvent('result_view', $request, [
             'anon_id'       => $attempt?->anon_id,
             'scale_code'    => $result->scale_code,
@@ -568,6 +570,7 @@ $attempt = Attempt::create($attemptData);
             'locale'        => $attempt?->locale ?? 'zh-CN',
             'meta_json'     => [
                 'type_code' => $result->type_code,
+                'share_id'  => $shareId !== '' ? $shareId : null,
             ],
         ]);
 
@@ -778,6 +781,8 @@ public function getReport(Request $request, string $attemptId)
 
     $attempt = Attempt::find($attemptId);
 
+    $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
+
     // ✅ 事件仍然由 Controller 负责（因为它需要 $request）
     $this->logEvent('report_view', $request, [
         'anon_id'       => $attempt?->anon_id,
@@ -789,6 +794,7 @@ public function getReport(Request $request, string $attemptId)
         'meta_json'     => [
             'type_code' => $result->type_code,
             'engine'    => 'v1.2',
+            'share_id'  => $shareId !== '' ? $shareId : null,
         ],
     ]);
 
