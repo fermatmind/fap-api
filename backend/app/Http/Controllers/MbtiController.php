@@ -631,67 +631,112 @@ public function getShare(Request $request, string $attemptId)
     $ttlMinutes = (int) config('fap.share_id_ttl_minutes', 10);
     if ($ttlMinutes <= 0) $ttlMinutes = 10;
 
-    // ====== 用 events 表做去抖 + share_id 复用 ======
-    $recent = \App\Models\Event::where('event_code', 'share_generate')
-        ->where('attempt_id', $attemptId)
-        ->where('occurred_at', '>=', now()->subMinutes($ttlMinutes))
-        ->orderByDesc('occurred_at')
-        ->first();
+    $typeCode = (string) $result->type_code;
 
-    $shareId = null;
-    $isNewShareId = false;
+    $contentPackageVersion = (string) (
+        $result->content_package_version
+        ?? $this->currentContentPackageVersion()
+    );
 
-    if ($recent) {
-        // meta_json 可能是 array，也可能是 string（保险起见两种都兼容）
-        $meta = $recent->meta_json ?? null;
-        if (is_string($meta) && $meta !== '') {
-            $decoded = json_decode($meta, true);
-            if (is_array($decoded)) $meta = $decoded;
-        }
-        if (is_array($meta) && isset($meta['share_id']) && is_string($meta['share_id']) && $meta['share_id'] !== '') {
-            $shareId = $meta['share_id'];
-        }
+    // ✅ 强并发幂等：Redis lock + cache + events
+    $store = Cache::store(); // 你后面还要用 $store->get/$store->put，保留
+    $lock  = Cache::lock($this->shareLockKey($attemptId), 8); // ✅ IDE/运行时都稳
+
+    try {
+        $locked = $lock->block(3, function () use (
+            $store, $attemptId, $ttlMinutes, $request, $attempt, $result, $typeCode, $contentPackageVersion
+        ) {
+            $cacheKey = $this->shareCacheKey($attemptId);
+
+            // 1) 先走 cache（最快）
+            $cachedShareId = $store->get($cacheKey);
+            if (is_string($cachedShareId) && trim($cachedShareId) !== '') {
+                return [
+                    'share_id' => trim($cachedShareId),
+                    'is_new'   => false,
+                ];
+            }
+
+            // 2) 查 events：TTL 内是否已有 share_generate
+            $recent = \App\Models\Event::where('event_code', 'share_generate')
+                ->where('attempt_id', $attemptId)
+                ->where('occurred_at', '>=', now()->subMinutes($ttlMinutes))
+                ->orderByDesc('occurred_at')
+                ->first();
+
+            $shareId = null;
+
+            if ($recent) {
+                $meta = $recent->meta_json ?? null;
+                if (is_string($meta) && $meta !== '') {
+                    $decoded = json_decode($meta, true);
+                    if (is_array($decoded)) $meta = $decoded;
+                }
+                if (is_array($meta) && !empty($meta['share_id']) && is_string($meta['share_id'])) {
+                    $shareId = trim($meta['share_id']);
+                }
+            }
+
+            // 3) 仍没有：生成一次，并写 event（在 lock 内，只会发生一次）
+            $isNew = false;
+            if (!is_string($shareId) || $shareId === '') {
+                $shareId = (string) Str::uuid();
+                $isNew = true;
+
+                $this->logEvent('share_generate', $request, [
+                    'anon_id'       => $attempt?->anon_id,
+                    'scale_code'    => $result->scale_code,
+                    'scale_version' => $result->scale_version,
+                    'attempt_id'    => $attemptId,
+                    'channel'       => $attempt?->channel,
+                    'region'        => $attempt?->region ?? 'CN_MAINLAND',
+                    'locale'        => $attempt?->locale ?? 'zh-CN',
+                    'meta_json'     => [
+                        'engine'                  => 'v1.2',
+                        'type_code'               => $typeCode,
+                        'share_id'                => $shareId,
+                        'profile_version'         => $result->profile_version ?? config('fap.profile_version', 'mbti32-v2.5'),
+                        'content_package_version' => $contentPackageVersion,
+                        'share_id_ttl_minutes'    => $ttlMinutes,
+                    ],
+                ]);
+            }
+
+            // 4) 回写 cache（无论新旧，统一缓存到 TTL）
+            $store->put($cacheKey, $shareId, now()->addMinutes($ttlMinutes));
+
+            return [
+                'share_id' => $shareId,
+                'is_new'   => $isNew,
+            ];
+        });
+    } catch (\Throwable $e) {
+        // 拿不到锁/Redis 异常：给个可观测的错误（也可降级到“只查 recent 不写入”）
+        Log::warning('[share] lock failed', [
+            'attempt_id' => $attemptId,
+            'err' => $e->getMessage(),
+        ]);
+
+        return response()->json([
+            'ok'      => false,
+            'error'   => 'SHARE_BUSY',
+            'message' => 'Share generation is busy, please retry.',
+        ], 429);
+    } finally {
+        optional($lock)->release();
     }
 
-    if (!is_string($shareId) || trim($shareId) === '') {
-        $shareId = (string) Str::uuid();
-        $isNewShareId = true;
-    }
+    $shareId = (string) ($locked['share_id'] ?? '');
 
-    $contentPackageVersion = $result->content_package_version
-        ?? $this->currentContentPackageVersion();
-
-    $typeCode = $result->type_code;
-
-    // ✅ 统一走多路径兜底
+    // ====== lock 外：加载内容包文案（不影响幂等，避免占锁太久）======
     $snippet = $this->loadShareSnippet($contentPackageVersion, $typeCode);
     $profile = $this->loadTypeProfile($contentPackageVersion, $typeCode);
     $merged  = array_merge($profile ?: [], $snippet ?: []);
 
-    // ✅ 只有 TTL 内没有记录过 share_generate，才写一条
-    if ($isNewShareId) {
-        $this->logEvent('share_generate', $request, [
-            'anon_id'       => $attempt?->anon_id,
-            'scale_code'    => $result->scale_code,
-            'scale_version' => $result->scale_version,
-            'attempt_id'    => $attemptId,
-            'channel'       => $attempt?->channel,
-            'region'        => $attempt?->region ?? 'CN_MAINLAND',
-            'locale'        => $attempt?->locale ?? 'zh-CN',
-            'meta_json'     => [
-                'engine'                  => 'v1.2',
-                'type_code'               => $typeCode,
-                'share_id'                => $shareId,
-                'content_package_version' => $contentPackageVersion,
-                'share_id_ttl_minutes'    => $ttlMinutes,
-            ],
-        ]);
-    }
-
     return response()->json([
         'ok'                      => true,
         'attempt_id'              => $attemptId,
-        'share_id'                => $shareId, // ✅ TTL 内稳定复用
+        'share_id'                => $shareId,
         'content_package_version' => $contentPackageVersion,
         'type_code'               => $typeCode,
 
@@ -1360,6 +1405,16 @@ private function loadReportAssetJson(string $contentPackageVersion, string $file
             default => ['', ''],
         };
     }
+
+    private function shareLockKey(string $attemptId): string
+{
+    return "lock:attempt:{$attemptId}:share";
+}
+
+private function shareCacheKey(string $attemptId): string
+{
+    return "attempt:{$attemptId}:share_id";
+}
 
 /**
  * 在内容包目录里找某个文件（兼容：根目录 or 子目录）
