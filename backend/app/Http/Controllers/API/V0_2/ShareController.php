@@ -12,7 +12,11 @@ class ShareController extends Controller
 {
     /**
      * POST /api/v0.2/shares/{shareId}/click
-     * 目标：落地页点击分享链接时记录 share_click，并确保 meta_json 里有 share_id + (experiment/version 尽量全链路可用)
+     *
+     * 目标：
+     * 1) 记录 share_click 事件
+     * 2) meta_json 必带 share_id/channel/page/ua/ip
+     * 3) experiment/version：优先 header，其次 body，再否则从 share_generate 继承
      */
     public function click(Request $request, string $shareId)
     {
@@ -22,65 +26,55 @@ class ShareController extends Controller
             'occurred_at' => ['nullable', 'date'],
             'meta_json'   => ['nullable', 'array'],
 
-            // 允许 body 传（也支持 header）
+            // 可选：body 传 experiment/version（也支持 header）
             'experiment'  => ['nullable', 'string', 'max:64'],
             'version'     => ['nullable', 'string', 'max:64'],
         ]);
 
-        $attemptId = (string) $data['attempt_id'];
-
-        // -------- meta 合并 --------
+        // ---------- 1) 组装 meta ----------
         $meta = is_array($data['meta_json'] ?? null) ? $data['meta_json'] : [];
 
-        // 强制写入 share_id（以 path 为准）
-        if (!isset($meta['share_id']) || !is_string($meta['share_id']) || trim($meta['share_id']) === '') {
-            $meta['share_id'] = $shareId;
-        }
+        // 强制写入 share_id（不覆盖也无所谓，这里统一覆盖为 path 里的 shareId）
+        $meta['share_id'] = $shareId;
 
-        // 1) 先拿 header/body
-        $experiment = (string) ($request->header('X-Experiment') ?? ($data['experiment'] ?? ''));
-        $version    = (string) ($request->header('X-App-Version') ?? ($data['version'] ?? ''));
-
-        // 2) 如果还没有 experiment/version：从 share_generate 继承（同 share_id）
-        if ($experiment === '' || $version === '') {
-            $recentGen = Event::where('event_code', 'share_generate')
-                ->where('attempt_id', $attemptId)
-                ->whereRaw('JSON_EXTRACT(meta_json, "$.share_id") = ?', [$shareId])
-                ->orderByDesc('occurred_at')
-                ->first();
-
-            if ($recentGen && is_array($recentGen->meta_json)) {
-                if ($experiment === '') {
-                    $experiment = (string) ($recentGen->meta_json['experiment'] ?? '');
-                }
-                if ($version === '') {
-                    $version = (string) ($recentGen->meta_json['version'] ?? '');
-                }
-            }
-        }
-
-        // 3) 落到 meta（不覆盖客户端已有值）
-        if ($experiment !== '' && !isset($meta['experiment'])) $meta['experiment'] = $experiment;
-        if ($version !== '' && !isset($meta['version']))       $meta['version'] = $version;
-
-        // 通用字段（不覆盖已有）
+        // 通用字段（不覆盖客户端已有）
         if (!isset($meta['ua']))  $meta['ua']  = (string) ($request->userAgent() ?? '');
         if (!isset($meta['ip']))  $meta['ip']  = (string) ($request->ip() ?? '');
         if (!isset($meta['ref'])) $meta['ref'] = (string) ($request->header('Referer') ?? '');
 
+        // ---------- 2) experiment/version：header > body > inherit(share_generate) ----------
+        $experiment = (string) ($request->header('X-Experiment') ?? ($data['experiment'] ?? ''));
+        $version    = (string) ($request->header('X-App-Version') ?? ($data['version'] ?? ''));
+
+        // 如果 header/body 都没给，则从 share_generate 继承
+        if ($experiment === '' || $version === '') {
+            $gen = Event::where('event_code', 'share_generate')
+                ->whereRaw('JSON_EXTRACT(meta_json, "$.share_id") = ?', [$shareId])
+                ->orderByDesc('occurred_at')
+                ->first();
+
+            if ($gen && is_array($gen->meta_json)) {
+                if ($experiment === '') $experiment = (string) ($gen->meta_json['experiment'] ?? '');
+                if ($version === '')    $version    = (string) ($gen->meta_json['version'] ?? '');
+            }
+        }
+
+        // 写回 meta（不覆盖客户端已显式传入的 experiment/version）
+        if ($experiment !== '' && !isset($meta['experiment'])) $meta['experiment'] = $experiment;
+        if ($version !== '' && !isset($meta['version']))       $meta['version'] = $version;
+
         // 清理空值（可选）
         $meta = array_filter($meta, fn($v) => !($v === null || $v === ''));
 
-        // -------- 写事件 --------
+        // ---------- 3) 写入 Event ----------
         $event = new Event();
-
         $event->id = method_exists(Str::class, 'uuid7')
             ? (string) Str::uuid7()
             : (string) Str::uuid();
 
         $event->event_code  = 'share_click';
         $event->anon_id     = $data['anon_id'] ?? null;
-        $event->attempt_id  = $attemptId;
+        $event->attempt_id  = $data['attempt_id'];
         $event->meta_json   = $meta;
 
         $event->occurred_at = !empty($data['occurred_at'])
