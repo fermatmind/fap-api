@@ -47,9 +47,9 @@ Route::prefix('v0.2')->group(function () {
     // GET /api/v0.2/attempts/{id}/share
     Route::get('/attempts/{id}/share', [MbtiController::class, 'getShare']);
 
-        // 6.1) ✅ share_click（打开分享落地页 / 点击分享链接时打点）
-    // POST /api/v0.2/shares/{shareId}/click
-    Route::post('/shares/{shareId}/click', [\App\Http\Controllers\Api\V0_2\ShareController::class, 'click']);
+    // 6.1) ✅ share_click（打开分享落地页 / 点击分享链接时打点）
+    // POST /api/v0.2/shares/{share_id}/click
+    Route::post('/shares/{share_id}/click', [EventController::class, 'shareClick']);
 
     // 7) ✅ 统一事件上报接口
     // POST /api/v0.2/events
