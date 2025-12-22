@@ -47,6 +47,26 @@ class IdentityLayerBuilder
             $base['micro_line'] = '';
         }
 
+        // ✅ subtitle：做成肉眼可见的 A/T 差异（优先不覆盖已有 subtitle）
+if (trim((string)($base['subtitle'] ?? '')) === '') {
+    $at = $scoresPct['AT'] ?? null;
+    $side  = $this->pickSide($at);   // A / T
+    $pct   = $this->pickPct($at);    // 50..100
+    $delta = $this->pickDelta($at);  // 0..50
+
+    if ($side) {
+        if ($delta !== null && $delta >= 20) {
+            $base['subtitle'] = $side === 'A'
+                ? "更稳、更自洽（A），压力下更能扛住。"
+                : "更敏感、更自我要求（T），更在意细节与评价。";
+        } else {
+            $base['subtitle'] = $side === 'A'
+                ? "略偏 A：倾向先稳住再推进。"
+                : "略偏 T：倾向边走边校准。";
+        }
+    }
+}
+        
         // 附上 type_code，方便前端/埋点
         $base['type_code'] = $typeCode;
 
@@ -90,47 +110,55 @@ class IdentityLayerBuilder
 
     // ===== tolerant extractors (兼容你现在的 scoresPct 结构) =====
 
-    private function pickSide($axis): ?string
-    {
-        if (is_array($axis)) {
-            $s = $axis['side'] ?? $axis['letter'] ?? null;
-            if (is_string($s) && $s !== '') return $s;
-
-            // 兼容：['A'=>70,'T'=>30]
-            if (isset($axis['A']) || isset($axis['T'])) {
-                $a = (int)($axis['A'] ?? 0);
-                $t = (int)($axis['T'] ?? 0);
-                return $a >= $t ? 'A' : 'T';
-            }
-        }
-        return null;
+ private function pickSide($axis): ?string
+{
+    // ✅ 支持 int pct（你现在 results.scores_pct 就是这样）
+    if (is_int($axis) || is_float($axis) || (is_string($axis) && is_numeric($axis))) {
+        $raw = (int)$axis; // 0..100 或 1..99
+        return $raw >= 50 ? 'A' : 'T';
     }
 
-    private function pickPct($axis): ?int
-    {
-        if (is_array($axis)) {
-            if (isset($axis['pct'])) return (int)$axis['pct'];
-            if (isset($axis['percent'])) return (int)$axis['percent'];
+    if (is_array($axis)) {
+        $s = $axis['side'] ?? $axis['letter'] ?? null;
+        if (is_string($s) && $s !== '') return $s;
 
-            // 兼容：['A'=>70,'T'=>30] 取主侧
-            if ((isset($axis['A']) || isset($axis['T']))) {
-                $a = (int)($axis['A'] ?? 0);
-                $t = (int)($axis['T'] ?? 0);
-                return max($a, $t);
-            }
+        if (isset($axis['A']) || isset($axis['T'])) {
+            $a = (int)($axis['A'] ?? 0);
+            $t = (int)($axis['T'] ?? 0);
+            return $a >= $t ? 'A' : 'T';
         }
-        return null;
+    }
+    return null;
+}
+
+private function pickPct($axis): ?int
+{
+    // ✅ 支持 int pct：统一成 50..100（主侧强度）
+    if (is_int($axis) || is_float($axis) || (is_string($axis) && is_numeric($axis))) {
+        $raw = (int)$axis;
+        return $raw >= 50 ? $raw : (100 - $raw);
     }
 
-    private function pickDelta($axis): ?int
-    {
-        if (is_array($axis)) {
-            if (isset($axis['delta'])) return (int)$axis['delta'];
-            $pct = $this->pickPct($axis);
-            if ($pct !== null) return abs($pct - 50);
+    if (is_array($axis)) {
+        if (isset($axis['pct'])) return (int)$axis['pct'];
+        if (isset($axis['percent'])) return (int)$axis['percent'];
+
+        if ((isset($axis['A']) || isset($axis['T']))) {
+            $a = (int)($axis['A'] ?? 0);
+            $t = (int)($axis['T'] ?? 0);
+            return max($a, $t);
         }
-        return null;
     }
+    return null;
+}
+
+private function pickDelta($axis): ?int
+{
+    // ✅ delta 用 0..50
+    $pct = $this->pickPct($axis);
+    if ($pct !== null) return abs($pct - 50);
+    return null;
+}
 
     // ===== package loaders =====
 

@@ -149,6 +149,29 @@
       "priority": 94,
       "match": { "axis": { "dim": "JP", "side": "P", "min_delta": 12 } }
     },
+    
+    {
+  "id": "career_axis_AT_A_strong",
+  "section": "career",
+  "title": "A（坚定）偏好较强：更能稳住并扛住压力场景",
+  "desc": "你更倾向在压力下先稳住节奏与判断，更敢拍板推进，适合承担明确责任与关键节点交付。",
+  "bullets": ["关键时刻更敢做决策", "更容易稳定输出与扛责任", "更少被情绪波动拖慢节奏"],
+  "tips": ["把优势落到“节点-负责人-验收标准”，推进会更快", "注意留出校准机制：重大决策加一次反向验证"],
+  "tags": ["kind:axis", "axis:AT:A", "state:strong", "career:stress", "career:delivery"],
+  "priority": 94,
+  "match": { "axis": { "dim": "AT", "side": "A", "min_delta": 12 } }
+},
+{
+  "id": "career_axis_AT_T_strong",
+  "section": "career",
+  "title": "T（敏感）偏好较强：更擅长校准风险与提升质量",
+  "desc": "你更倾向在压力下自我校准、反复检查细节与风险，适合做质量把控、策略复盘与持续改进。",
+  "bullets": ["更敏锐地发现隐患与风险点", "更重视质量与可控性", "更愿意复盘并不断优化"],
+  "tips": ["把担心写成清单：风险点-证据-应对策略，会明显降内耗", "设置“到点必须定稿”的收束点，避免无限优化"],
+  "tags": ["kind:axis", "axis:AT:T", "state:strong", "career:quality", "career:review"],
+  "priority": 94,
+  "match": { "axis": { "dim": "AT", "side": "T", "min_delta": 12 } }
+},
 
     {
       "id": "career_axis_EI_E_intro",
