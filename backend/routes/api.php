@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MbtiController;
-use App\Http\Controllers\Api\V0_2\ShareController;
+use App\Http\Controllers\API\V0_2\ShareController;
 use App\Http\Controllers\EventController;
 
 /*
