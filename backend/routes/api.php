@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MbtiController;
+use App\Http\Controllers\Api\V0_2\ShareController;
 use App\Http\Controllers\EventController;
 
 /*
@@ -49,7 +50,7 @@ Route::prefix('v0.2')->group(function () {
 
     // 6.1) ✅ share_click（打开分享落地页 / 点击分享链接时打点）
     // POST /api/v0.2/shares/{share_id}/click
-    Route::post('/shares/{share_id}/click', [EventController::class, 'shareClick']);
+    Route::post('/shares/{shareId}/click', [ShareController::class, 'click']);
 
     // 7) ✅ 统一事件上报接口
     // POST /api/v0.2/events
