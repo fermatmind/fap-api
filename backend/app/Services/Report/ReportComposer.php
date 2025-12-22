@@ -33,17 +33,26 @@ class ReportComposer
     public function compose(string $attemptId, array $ctx): array
     {
         // 1) Load Attempt + Result
-        $attempt = Attempt::where('id', $attemptId)->first();
-        $result  = Result::where('attempt_id', $attemptId)->first();
+$attempt = Attempt::where('id', $attemptId)->first();
+$result  = Result::where('attempt_id', $attemptId)->first();
 
-        if (!$result) {
-            return [
-                'ok' => false,
-                'error' => 'RESULT_NOT_FOUND',
-                'message' => 'Result not found for given attempt_id',
-                'status' => 404,
-            ];
-        }
+if (!$attempt) {
+    return [
+        'ok' => false,
+        'error' => 'ATTEMPT_NOT_FOUND',
+        'message' => 'Attempt not found for given attempt_id',
+        'status' => 404,
+    ];
+}
+
+if (!$result) {
+    return [
+        'ok' => false,
+        'error' => 'RESULT_NOT_FOUND',
+        'message' => 'Result not found for given attempt_id',
+        'status' => 404,
+    ];
+}
 
         // 版本信息：全部从 results/配置里取（不依赖前端）
         $profileVersion = $result->profile_version
@@ -60,13 +69,20 @@ class ReportComposer
 
         // 2) Score（你当前版本：复用 results.scores_pct/axis_states；不现场重算）
         $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
+        $warnings = [];
         $scoresPct  = is_array($result->scores_pct ?? null) ? $result->scores_pct : [];
         $axisStates = is_array($result->axis_states ?? null) ? $result->axis_states : [];
 
         foreach ($dims as $d) {
-            if (!array_key_exists($d, $scoresPct))  $scoresPct[$d]  = 50;
-            if (!array_key_exists($d, $axisStates)) $axisStates[$d] = 'moderate';
-        }
+    if (!array_key_exists($d, $scoresPct)) {
+        $warnings[] = "scores_pct_missing:$d";
+        $scoresPct[$d] = 50;
+    }
+    if (!array_key_exists($d, $axisStates)) {
+        $warnings[] = "axis_states_missing:$d";
+        $axisStates[$d] = 'moderate';
+    }
+}
 
         // 3) Load Profile / IdentityCard
         $loadTypeProfile = $ctx['loadTypeProfile'] ?? null;
@@ -157,6 +173,8 @@ class ReportComposer
                 'content_package_version' => $contentPackageVersion,
             ],
             'scores' => $scores,
+            'scores_pct'  => $scoresPct,
+            'axis_states' => $axisStates,
             'tags'   => $tags,
             'profile' => [
                 'type_code'     => $profile['type_code'] ?? $typeCode,
@@ -176,6 +194,7 @@ class ReportComposer
             ],
             'sections' => $sections,
             'recommended_reads' => $recommendedReads,
+            'warnings' => $warnings,
         ];
 
         return [
