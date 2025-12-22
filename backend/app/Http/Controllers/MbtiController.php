@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\Attempt;
 use App\Models\Result;
@@ -608,13 +609,13 @@ $attempt = Attempt::create($attemptData);
     }
 
     /**
-    * GET /api/v0.2/attempts/{id}/share
-    * ✅ 返回分享文案骨架
-    * ✅ 后端写 share_generate（服务端生成 share_id 的事实打点）
-    *    - share_click 仍建议由前端在真正点击分享时 POST /events 上报
-    */
-    public function getShare(Request $request, string $attemptId)
-    {
+ * GET /api/v0.2/attempts/{id}/share
+ * ✅ 返回分享文案骨架
+ * ✅ share_id 10 分钟内复用：避免重复请求导致 share_generate 事件膨胀
+ * ✅ 仅在“新生成 share_id”时写 share_generate
+ */
+public function getShare(Request $request, string $attemptId)
+{
     $result = Result::where('attempt_id', $attemptId)->first();
 
     if (!$result) {
@@ -625,59 +626,56 @@ $attempt = Attempt::create($attemptData);
         ], 404);
     }
 
-    // 拿 attempt（用于 anon_id/region/locale/channel 等事件字段）
     $attempt = Attempt::find($attemptId);
 
-    $shareId = (string) Str::uuid();
+    // ===== share_id 复用（避免重复请求膨胀）=====
+    $ttlMinutes = (int) config('fap.share_id_ttl_minutes', 10);
+    if ($ttlMinutes <= 0) $ttlMinutes = 10;
+
+    $cacheKey = "share_id:v0.2:attempt:{$attemptId}";
+    $shareId  = Cache::get($cacheKey);
+    $isNewShareId = false;
+
+    if (!is_string($shareId) || trim($shareId) === '') {
+        $shareId = (string) Str::uuid();
+        Cache::put($cacheKey, $shareId, now()->addMinutes($ttlMinutes));
+        $isNewShareId = true;
+    }
 
     $contentPackageVersion = $result->content_package_version
         ?? $this->currentContentPackageVersion();
 
-    $profileVersion = $result->profile_version
-        ?? config('fap.profile_version', 'mbti32-v2.5');
-
-    $typeCode = (string) $result->type_code;
+    $typeCode = $result->type_code;
 
     // ✅ 统一走多路径兜底（修掉 share_snippets “storage-only” 的坑）
     $snippet = $this->loadShareSnippet($contentPackageVersion, $typeCode);
     $profile = $this->loadTypeProfile($contentPackageVersion, $typeCode);
+    $merged  = array_merge($profile ?: [], $snippet ?: []);
 
-    $merged = array_merge($profile ?: [], $snippet ?: []);
-
-    // ✅ 去抖：同 anon_id + attempt_id + event_code，10 秒内只记一次
-    $recent = \App\Models\Event::where('event_code', 'share_generate')
-    ->where('attempt_id', $attemptId)
-    ->where('anon_id', $attempt?->anon_id)
-    ->where('occurred_at', '>=', now()->subSeconds(10))
-    ->exists();
-
-    if (!$recent) {
-    $this->logEvent('share_generate', $request, [ /* 原参数不变 */ ]);
-}
-
-    // ✅ 写事件：share_generate
-    // 注意：这代表“服务端生成分享内容/分享ID”，不是“用户点击分享”
-    $this->logEvent('share_generate', $request, [
-        'anon_id'       => $attempt?->anon_id,
-        'scale_code'    => $result->scale_code,
-        'scale_version' => $result->scale_version,
-        'attempt_id'    => $attemptId,
-        'channel'       => $attempt?->channel ?? 'direct',
-        'region'        => $attempt?->region ?? 'CN_MAINLAND',
-        'locale'        => $attempt?->locale ?? 'zh-CN',
-        'meta_json'     => [
-            'engine'                 => 'v1.2',
-            'type_code'              => $typeCode,
-            'share_id'               => $shareId,
-            'profile_version'        => $profileVersion,
-            'content_package_version'=> $contentPackageVersion,
-        ],
-    ]);
+    // ✅ 只有在真正“生成”新的 share_id 时，才记录 share_generate
+    if ($isNewShareId) {
+        $this->logEvent('share_generate', $request, [
+            'anon_id'       => $attempt?->anon_id,
+            'scale_code'    => $result->scale_code,
+            'scale_version' => $result->scale_version,
+            'attempt_id'    => $attemptId,
+            'channel'       => $attempt?->channel,
+            'region'        => $attempt?->region ?? 'CN_MAINLAND',
+            'locale'        => $attempt?->locale ?? 'zh-CN',
+            'meta_json'     => [
+                'engine'                 => 'v1.2',
+                'type_code'              => $typeCode,
+                'share_id'               => $shareId,
+                'content_package_version'=> $contentPackageVersion,
+                'share_id_ttl_minutes'   => $ttlMinutes,
+            ],
+        ]);
+    }
 
     return response()->json([
         'ok'                      => true,
         'attempt_id'              => $attemptId,
-        'share_id'                => $shareId,
+        'share_id'                => $shareId, // ✅ 10 分钟内稳定
         'content_package_version' => $contentPackageVersion,
         'type_code'               => $typeCode,
 
