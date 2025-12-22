@@ -608,49 +608,75 @@ $attempt = Attempt::create($attemptData);
     }
 
     /**
-     * GET /api/v0.2/attempts/{id}/share
-     * ✅ 只返回分享文案骨架
-     * ✅ 不写 events（share_generate/share_click 由前端 POST /events 上报）
-     */
+    * GET /api/v0.2/attempts/{id}/share
+    * ✅ 返回分享文案骨架
+    * ✅ 后端写 share_generate（服务端生成 share_id 的事实打点）
+    *    - share_click 仍建议由前端在真正点击分享时 POST /events 上报
+    */
     public function getShare(Request $request, string $attemptId)
     {
-        $result = Result::where('attempt_id', $attemptId)->first();
+    $result = Result::where('attempt_id', $attemptId)->first();
 
-        if (!$result) {
-            return response()->json([
-                'ok'      => false,
-                'error'   => 'RESULT_NOT_FOUND',
-                'message' => 'Result not found for given attempt_id',
-            ], 404);
-        }
-
-        $shareId = (string) Str::uuid();
-
-        $contentPackageVersion = $result->content_package_version
-            ?? $this->currentContentPackageVersion();
-
-        $typeCode = $result->type_code;
-
-        // ✅ 统一走多路径兜底（修掉 share_snippets “storage-only” 的坑）
-        $snippet = $this->loadShareSnippet($contentPackageVersion, $typeCode);
-        $profile = $this->loadTypeProfile($contentPackageVersion, $typeCode);
-
-        $merged = array_merge($profile ?: [], $snippet ?: []);
-
+    if (!$result) {
         return response()->json([
-            'ok'                      => true,
-            'attempt_id'              => $attemptId,
-            'share_id'                => $shareId,
-            'content_package_version' => $contentPackageVersion,
-            'type_code'               => $typeCode,
-
-            'type_name'     => $merged['type_name'] ?? null,
-            'tagline'       => $merged['tagline'] ?? null,
-            'rarity'        => $merged['rarity'] ?? null,
-            'keywords'      => $merged['keywords'] ?? [],
-            'short_summary' => $merged['short_summary'] ?? null,
-        ]);
+            'ok'      => false,
+            'error'   => 'RESULT_NOT_FOUND',
+            'message' => 'Result not found for given attempt_id',
+        ], 404);
     }
+
+    // 拿 attempt（用于 anon_id/region/locale/channel 等事件字段）
+    $attempt = Attempt::find($attemptId);
+
+    $shareId = (string) Str::uuid();
+
+    $contentPackageVersion = $result->content_package_version
+        ?? $this->currentContentPackageVersion();
+
+    $profileVersion = $result->profile_version
+        ?? config('fap.profile_version', 'mbti32-v2.5');
+
+    $typeCode = (string) $result->type_code;
+
+    // ✅ 统一走多路径兜底（修掉 share_snippets “storage-only” 的坑）
+    $snippet = $this->loadShareSnippet($contentPackageVersion, $typeCode);
+    $profile = $this->loadTypeProfile($contentPackageVersion, $typeCode);
+
+    $merged = array_merge($profile ?: [], $snippet ?: []);
+
+    // ✅ 写事件：share_generate
+    // 注意：这代表“服务端生成分享内容/分享ID”，不是“用户点击分享”
+    $this->logEvent('share_generate', $request, [
+        'anon_id'       => $attempt?->anon_id,
+        'scale_code'    => $result->scale_code,
+        'scale_version' => $result->scale_version,
+        'attempt_id'    => $attemptId,
+        'channel'       => $attempt?->channel ?? 'direct',
+        'region'        => $attempt?->region ?? 'CN_MAINLAND',
+        'locale'        => $attempt?->locale ?? 'zh-CN',
+        'meta_json'     => [
+            'engine'                 => 'v1.2',
+            'type_code'              => $typeCode,
+            'share_id'               => $shareId,
+            'profile_version'        => $profileVersion,
+            'content_package_version'=> $contentPackageVersion,
+        ],
+    ]);
+
+    return response()->json([
+        'ok'                      => true,
+        'attempt_id'              => $attemptId,
+        'share_id'                => $shareId,
+        'content_package_version' => $contentPackageVersion,
+        'type_code'               => $typeCode,
+
+        'type_name'     => $merged['type_name'] ?? null,
+        'tagline'       => $merged['tagline'] ?? null,
+        'rarity'        => $merged['rarity'] ?? null,
+        'keywords'      => $merged['keywords'] ?? [],
+        'short_summary' => $merged['short_summary'] ?? null,
+    ]);
+}
 
 /**
  * GET /api/v0.2/attempts/{id}/report
