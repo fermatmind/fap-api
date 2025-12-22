@@ -644,6 +644,17 @@ $attempt = Attempt::create($attemptData);
 
     $merged = array_merge($profile ?: [], $snippet ?: []);
 
+    // ✅ 去抖：同 anon_id + attempt_id + event_code，10 秒内只记一次
+    $recent = \App\Models\Event::where('event_code', 'share_generate')
+    ->where('attempt_id', $attemptId)
+    ->where('anon_id', $attempt?->anon_id)
+    ->where('occurred_at', '>=', now()->subSeconds(10))
+    ->exists();
+
+    if (!$recent) {
+    $this->logEvent('share_generate', $request, [ /* 原参数不变 */ ]);
+}
+
     // ✅ 写事件：share_generate
     // 注意：这代表“服务端生成分享内容/分享ID”，不是“用户点击分享”
     $this->logEvent('share_generate', $request, [
