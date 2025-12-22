@@ -1,29 +1,25 @@
 {
-  "content_package_version": "MBTI-CN-v0.2.1",
+  "schema_version": "pack-manifest@v1",
   "scale_code": "MBTI",
-  "scale_version": "v0.2",
-  "profile_version": "mbti32-v2.5",
   "region": "CN_MAINLAND",
   "locale": "zh-CN",
-  "status": "draft",
-  "schema_version": "mbti-content-schema@v0.2.1",
+  "content_package_version": "v0.2.1",
+  "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.1",
+  "fallback": [
+    "MBTI.global.en.default"
+  ],
   "assets": {
-    "type_profiles": {
-      "path": "type_profiles",
-      "expected_count": 32
-    },
-    "share_templates": {
-      "path": "share_templates",
-      "expected_count_min": 1
-    },
-    "disclaimers": {
-      "path": "disclaimers",
-      "expected_count_min": 1
-    },
-    "content_graph": {
-      "path": "content_graph",
-      "expected_count_min": 0
-    }
-  },
-  "notes": "Initial skeleton package for MBTI CN. Content to be filled progressively; publish/rollback by switching content_package_version."
+    "disclaimers": [
+      "disclaimers/"
+    ],
+    "share_templates": [
+      "share_templates/"
+    ],
+    "type_profiles_dir": [
+      "type_profiles/"
+    ],
+    "content_graph": [
+      "content_graph/"
+    ]
+  }
 }

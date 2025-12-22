@@ -1,30 +1,44 @@
 {
-  "content_package_version": "MBTI-CN-v0.2.1-TEST",
+  "schema_version": "pack-manifest@v1",
   "scale_code": "MBTI",
-  "scale_version": "v0.2",
-  "profile_version": "mbti32-v2.5",
   "region": "CN_MAINLAND",
   "locale": "zh-CN",
-  "status": "draft",
-  "schema_version": "mbti-content-schema@v0.2.1",
+  "content_package_version": "v0.2.1-TEST",
+  "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.1-TEST",
+  "fallback": [
+    "MBTI.cn-mainland.zh-CN.v0.2.1",
+    "MBTI.global.en.default"
+  ],
   "assets": {
-    "type_profiles": {
-      "path": "type_profiles",
-      "expected_count": 32
-    },
-    "share_templates": {
-      "path": "share_templates",
-      "expected_count_min": 1
-    },
-    "disclaimers": {
-      "path": "disclaimers",
-      "expected_count_min": 1
-    },
-    "content_graph": {
-      "path": "content_graph",
-      "expected_count_min": 0
-    },
-    "type_profile": "type_profiles.json"
-  },
-  "notes": "Initial skeleton package for MBTI CN. Content to be filled progressively; publish/rollback by switching content_package_version."
+    "questions": [
+      "questions.json"
+    ],
+    "cards": [
+      "report_cards_traits.json",
+      "report_cards_career.json",
+      "report_cards_growth.json",
+      "report_cards_relationships.json"
+    ],
+    "highlights": [
+      "report_highlights.json",
+      "report_highlights_templates.json"
+    ],
+    "reads": [
+      "report_recommended_reads.json"
+    ],
+    "overrides": [
+      "report_highlights_overrides.json"
+    ],
+    "identity": [
+      "report_identity_cards.json",
+      "identity_layers.json",
+      "type_profiles.json",
+      "report_roles.json",
+      "report_strategies.json"
+    ],
+    "borderline": [
+      "report_borderline_templates.json",
+      "report_borderline_notes.json"
+    ]
+  }
 }
