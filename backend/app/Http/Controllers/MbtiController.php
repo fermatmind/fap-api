@@ -611,8 +611,8 @@ $attempt = Attempt::create($attemptData);
     /**
  * GET /api/v0.2/attempts/{id}/share
  * ✅ 返回分享文案骨架
- * ✅ share_id 10 分钟内复用：避免重复请求导致 share_generate 事件膨胀
- * ✅ 仅在“新生成 share_id”时写 share_generate
+ * ✅ 用 events 表做“10分钟去重”，避免重复请求导致 share_generate 膨胀
+ * ✅ share_id 在 TTL 内复用（从最近一次 share_generate 的 meta_json.share_id 读取）
  */
 public function getShare(Request $request, string $attemptId)
 {
@@ -628,17 +628,33 @@ public function getShare(Request $request, string $attemptId)
 
     $attempt = Attempt::find($attemptId);
 
-    // ===== share_id 复用（避免重复请求膨胀）=====
     $ttlMinutes = (int) config('fap.share_id_ttl_minutes', 10);
     if ($ttlMinutes <= 0) $ttlMinutes = 10;
 
-    $cacheKey = "share_id:v0.2:attempt:{$attemptId}";
-    $shareId  = Cache::get($cacheKey);
+    // ====== 用 events 表做去抖 + share_id 复用 ======
+    $recent = \App\Models\Event::where('event_code', 'share_generate')
+        ->where('attempt_id', $attemptId)
+        ->where('occurred_at', '>=', now()->subMinutes($ttlMinutes))
+        ->orderByDesc('occurred_at')
+        ->first();
+
+    $shareId = null;
     $isNewShareId = false;
+
+    if ($recent) {
+        // meta_json 可能是 array，也可能是 string（保险起见两种都兼容）
+        $meta = $recent->meta_json ?? null;
+        if (is_string($meta) && $meta !== '') {
+            $decoded = json_decode($meta, true);
+            if (is_array($decoded)) $meta = $decoded;
+        }
+        if (is_array($meta) && isset($meta['share_id']) && is_string($meta['share_id']) && $meta['share_id'] !== '') {
+            $shareId = $meta['share_id'];
+        }
+    }
 
     if (!is_string($shareId) || trim($shareId) === '') {
         $shareId = (string) Str::uuid();
-        Cache::put($cacheKey, $shareId, now()->addMinutes($ttlMinutes));
         $isNewShareId = true;
     }
 
@@ -647,12 +663,12 @@ public function getShare(Request $request, string $attemptId)
 
     $typeCode = $result->type_code;
 
-    // ✅ 统一走多路径兜底（修掉 share_snippets “storage-only” 的坑）
+    // ✅ 统一走多路径兜底
     $snippet = $this->loadShareSnippet($contentPackageVersion, $typeCode);
     $profile = $this->loadTypeProfile($contentPackageVersion, $typeCode);
     $merged  = array_merge($profile ?: [], $snippet ?: []);
 
-    // ✅ 只有在真正“生成”新的 share_id 时，才记录 share_generate
+    // ✅ 只有 TTL 内没有记录过 share_generate，才写一条
     if ($isNewShareId) {
         $this->logEvent('share_generate', $request, [
             'anon_id'       => $attempt?->anon_id,
@@ -663,11 +679,11 @@ public function getShare(Request $request, string $attemptId)
             'region'        => $attempt?->region ?? 'CN_MAINLAND',
             'locale'        => $attempt?->locale ?? 'zh-CN',
             'meta_json'     => [
-                'engine'                 => 'v1.2',
-                'type_code'              => $typeCode,
-                'share_id'               => $shareId,
-                'content_package_version'=> $contentPackageVersion,
-                'share_id_ttl_minutes'   => $ttlMinutes,
+                'engine'                  => 'v1.2',
+                'type_code'               => $typeCode,
+                'share_id'                => $shareId,
+                'content_package_version' => $contentPackageVersion,
+                'share_id_ttl_minutes'    => $ttlMinutes,
             ],
         ]);
     }
@@ -675,7 +691,7 @@ public function getShare(Request $request, string $attemptId)
     return response()->json([
         'ok'                      => true,
         'attempt_id'              => $attemptId,
-        'share_id'                => $shareId, // ✅ 10 分钟内稳定
+        'share_id'                => $shareId, // ✅ TTL 内稳定复用
         'content_package_version' => $contentPackageVersion,
         'type_code'               => $typeCode,
 
