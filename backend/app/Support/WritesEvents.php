@@ -21,19 +21,56 @@ trait WritesEvents
             $anonId    = $extra['anon_id'] ?? $request->input('anon_id');
             $attemptId = $extra['attempt_id'] ?? null;
 
-            // ============ A) result_view 10s 去抖（强制） ============
-            if ($eventCode === 'result_view' && $anonId && $attemptId) {
-                $exists = Event::query()
-                    ->where('event_code', 'result_view')
-                    ->where('anon_id', $anonId)
-                    ->where('attempt_id', $attemptId)
-                    ->where('occurred_at', '>=', now()->subSeconds(10))
-                    ->exists();
+            // ============ A) result_view 10s 去抖（强制，但允许回填 share_id） ============
+if ($eventCode === 'result_view' && $anonId && $attemptId) {
+    $existing = Event::query()
+        ->where('event_code', 'result_view')
+        ->where('anon_id', $anonId)
+        ->where('attempt_id', $attemptId)
+        ->where('occurred_at', '>=', now()->subSeconds(10))
+        ->orderByDesc('occurred_at')
+        ->first();
 
-                if ($exists) {
-                    return; // 丢弃：不报错、不影响业务接口返回
-                }
+    if ($existing) {
+        // 这次传入的 meta（来自 $extra['meta_json']）
+        $incoming = $extra['meta_json'] ?? [];
+
+        // 旧 meta（确保是数组）
+        $old = $existing->meta_json;
+        if (!is_array($old)) {
+            $old = json_decode((string)$old, true) ?: [];
+        }
+
+        // ✅ 回填逻辑：旧的为空/没有，新来的有，就补上
+        $keys = ['share_id', 'experiment', 'version', 'page'];
+        $changed = false;
+
+        foreach ($keys as $k) {
+            $oldEmpty = !isset($old[$k]) || $old[$k] === null || $old[$k] === '';
+            $newVal   = $incoming[$k] ?? null;
+            $newGood  = $newVal !== null && $newVal !== '';
+
+            if ($oldEmpty && $newGood) {
+                $old[$k] = $newVal;
+                $changed = true;
             }
+        }
+
+        // type_code 也允许补一次（可选，但很实用）
+        if ((!isset($old['type_code']) || $old['type_code'] === null || $old['type_code'] === '')
+            && !empty($incoming['type_code'])) {
+            $old['type_code'] = $incoming['type_code'];
+            $changed = true;
+        }
+
+        if ($changed) {
+            $existing->meta_json = $old;
+            $existing->save();
+        }
+
+        return; // ✅ 仍然去抖：不新增事件，只做必要回填
+    }
+}
 
             // ============ B) share_generate / share_click 轻量去重 ============
             if (in_array($eventCode, ['share_generate', 'share_click'], true) && $anonId && $attemptId) {
