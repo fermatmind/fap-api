@@ -683,23 +683,31 @@ public function getShare(Request $request, string $attemptId)
                 $shareId = (string) Str::uuid();
                 $isNew = true;
 
-                $this->logEvent('share_generate', $request, [
-                    'anon_id'       => $attempt?->anon_id,
-                    'scale_code'    => $result->scale_code,
-                    'scale_version' => $result->scale_version,
-                    'attempt_id'    => $attemptId,
-                    'channel'       => $attempt?->channel,
-                    'region'        => $attempt?->region ?? 'CN_MAINLAND',
-                    'locale'        => $attempt?->locale ?? 'zh-CN',
-                    'meta_json'     => [
-                        'engine'                  => 'v1.2',
-                        'type_code'               => $typeCode,
-                        'share_id'                => $shareId,
-                        'profile_version'         => $result->profile_version ?? config('fap.profile_version', 'mbti32-v2.5'),
-                        'content_package_version' => $contentPackageVersion,
-                        'share_id_ttl_minutes'    => $ttlMinutes,
-                    ],
-                ]);
+                // ✅ 从 header 里拿 experiment/version（跟 /events 一致）
+$experiment = (string) ($request->header('X-Experiment') ?? '');
+$version    = (string) ($request->header('X-App-Version') ?? '');
+
+$this->logEvent('share_generate', $request, [
+    'anon_id'       => $attempt?->anon_id,
+    'scale_code'    => $result->scale_code,
+    'scale_version' => $result->scale_version,
+    'attempt_id'    => $attemptId,
+    'channel'       => $attempt?->channel,
+    'region'        => $attempt?->region ?? 'CN_MAINLAND',
+    'locale'        => $attempt?->locale ?? 'zh-CN',
+    'meta_json'     => [
+        'engine'                  => 'v1.2',
+        'type_code'               => $typeCode,
+        'share_id'                => $shareId,
+        'profile_version'         => $result->profile_version ?? config('fap.profile_version', 'mbti32-v2.5'),
+        'content_package_version' => $contentPackageVersion,
+        'share_id_ttl_minutes'    => $ttlMinutes,
+
+        // ✅ AB 字段：share_generate 也要有（不然漏斗断）
+        'experiment'              => $experiment !== '' ? $experiment : null,
+        'version'                 => $version !== '' ? $version : null,
+    ],
+]);
             }
 
             // 4) 回写 cache（无论新旧，统一缓存到 TTL）
