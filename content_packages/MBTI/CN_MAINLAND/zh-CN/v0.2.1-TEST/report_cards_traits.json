@@ -263,6 +263,18 @@
       "tips": ["给自己设一个固定收尾仪式（5 分钟复盘）", "把休息也写进计划：休息是续航，不是浪费"],
       "tags": ["kind:core", "tone:warm", "topic:energy"],
       "priority": 88
-    }
+    },
+    {
+  "id": "card.canary.rule_engine",
+  "section": "traits",
+  "title": "CANARY_CARD_SELECTED",
+  "desc": "如果你看到这张卡，说明 cards 走了 templates + rules 选择器",
+  "bullets": [],
+  "tips": [],
+  "tags": ["canary:card", "role:SJ"],
+  "rules": { "require_any": [], "require_all": [], "forbid": ["role:SJ"], "min_match": 0 },
+  "priority": 999,
+  "match": { "axis": { "dim": "EI", "side": "E", "min_delta": 0 } }
+     }
   ]
 }

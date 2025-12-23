@@ -20,6 +20,7 @@
       "by_top_axis",
       "fallback"
     ],
+    "require_all_tags": ["role:SJ", "strategy:EA"],
     "top_axis_mode": "top1",
     "allow_missing_bucket": true,
     "bucket_quota": {
@@ -556,6 +557,19 @@
         }
       ],
       "SJ": [
+        {
+  "id": "read.canary.rule_engine",
+  "type": "article",
+  "title": "READS_CANARY_SELECTED",
+  "desc": "如果你看到这条，说明 reads 从模板库被筛出来并进入结果",
+  "url": "/reads/coming-soon?id=read.canary.rule_engine",
+  "canonical_id": "cn.read.canary.rule_engine.v1",
+  "canonical_url": "/reads/coming-soon?id=read.canary.rule_engine",
+  "cover": "/covers/canary.png",
+  "priority": 9999,
+  "tags": ["topic:canary", "role:SJ", "strategy:EA"],
+  "status": "active"
+},
         {
           "id": "art_role_sj_01",
           "canonical_id": "cn.read.sj.systemize_reliability.v1",

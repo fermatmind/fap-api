@@ -77,7 +77,7 @@ class MbtiController extends Controller
      */
     public function questions()
     {
-        $pkg  = $this->currentContentPackageVersion();
+        $pkg = $this->normalizeContentPackageDir($this->currentContentPackageVersion());
 
         // ✅ 兼容：questions.json 在根目录 or 子目录
         $path = $this->findPackageFile($pkg, 'questions.json');
@@ -1349,6 +1349,7 @@ private function buildBorderlineNote(array $scoresPct, string $contentPackageVer
  */
 private function loadReportAssetJson(string $contentPackageVersion, string $filename): array
 {
+    $contentPackageVersion = $this->normalizeContentPackageDir($contentPackageVersion); // ✅
     static $cache = [];
 
     $cacheKey = $contentPackageVersion . '|' . $filename . '|RAW';
@@ -1438,6 +1439,7 @@ private function shareCacheKey(string $attemptId): string
  */
 private function findPackageFile(string $pkg, string $filename, int $maxDepth = 3): ?string
 {
+    $pkg = $this->normalizeContentPackageDir($pkg);   // ✅ 加这一行
     $pkg = trim($pkg, "/\\");
     $filename = trim($filename, "/\\");
 
@@ -1509,7 +1511,7 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
             return $this->questionsIndex;
         }
 
-        $pkg  = $this->currentContentPackageVersion();
+        $pkg = $this->normalizeContentPackageDir($this->currentContentPackageVersion());
         $path = $this->findPackageFile($pkg, 'questions.json');
 
         if (!$path || !is_file($path)) {
@@ -1564,7 +1566,7 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
      */
     private function loadTypeProfile(string $contentPackageVersion, string $typeCode): array
     {
-        $contentPackageVersion = trim($contentPackageVersion, "/\\");
+        $contentPackageVersion = $this->normalizeContentPackageDir($contentPackageVersion); // ✅
         $path = $this->findPackageFile($contentPackageVersion, 'type_profiles.json');
 
         if (!$path || !is_file($path)) {
@@ -1600,6 +1602,7 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
  */
 private function loadReportAssetItems(string $contentPackageVersion, string $filename, ?string $primaryIndexKey = 'type_code'): array
 {
+    $contentPackageVersion = $this->normalizeContentPackageDir($contentPackageVersion); // ✅
     static $cache = [];
 
     $cacheKey = $contentPackageVersion . '|' . $filename . '|' . (string)($primaryIndexKey ?? 'null');
@@ -1798,18 +1801,29 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
     $dedupe = is_array($rules['dedupe'] ?? null) ? $rules['dedupe'] : [];
     $hardBy = is_array($dedupe['hard_by'] ?? null) ? $dedupe['hard_by'] : ['id'];
     $softBy = is_array($dedupe['soft_by'] ?? null) ? $dedupe['soft_by'] : ['canonical_id','canonical_url','url'];
+    $forbidTags = $rules['forbid_tags'] ?? [];
+if (!is_array($forbidTags)) $forbidTags = [];
+
+$requireAnyTags = $rules['require_any_tags'] ?? [];
+if (!is_array($requireAnyTags)) $requireAnyTags = [];
+
+$requireAllTags = $rules['require_all_tags'] ?? [];
+if (!is_array($requireAllTags)) $requireAllTags = [];
 
     if ($debugReads) {
-        $debug['rules'] = [
-            'max_items' => $maxItems,
-            'min_items' => $minItems,
-            'sort' => $sortMode,
-            'fill_order' => $fillOrder,
-            'bucket_quota' => $bucketQuota,
-            'hard_by' => $hardBy,
-            'soft_by' => $softBy,
-        ];
-    }
+    $debug['rules'] = [
+        'max_items' => $maxItems,
+        'min_items' => $minItems,
+        'sort' => $sortMode,
+        'fill_order' => $fillOrder,
+        'bucket_quota' => $bucketQuota,
+        'hard_by' => $hardBy,
+        'soft_by' => $softBy,
+        'forbid_tags' => $forbidTags,
+        'require_any_tags' => $requireAnyTags,
+        'require_all_tags' => $requireAllTags,
+    ];
+}
 
     // ----------------------------
     // 2) items buckets
@@ -1891,6 +1905,28 @@ private function buildRecommendedReads(string $contentPackageVersion, string $ty
         if (!is_array($list)) { $list = []; return; }
         usort($list, fn($a, $b) => (int) ($b['priority'] ?? 0) <=> (int) ($a['priority'] ?? 0));
     };
+
+    $filterForbid = function(array $list) use ($forbidTags): array {
+    if (empty($forbidTags)) return $list;
+    $out = [];
+    foreach ($list as $it) {
+        if (!is_array($it)) continue;
+        $tags = is_array($it['tags'] ?? null) ? $it['tags'] : [];
+        $hit = false;
+        foreach ($forbidTags as $t) {
+            if (is_string($t) && $t !== '' && in_array($t, $tags, true)) { $hit = true; break; }
+        }
+        if ($hit) continue; // ✅ forbid：直接排除
+        $out[] = $it;
+    }
+    return $out;
+};
+
+foreach ($bucketLists as $k => &$list) {
+    $list = $filterForbid($list);   // ✅ 先过滤
+    $sortByPriorityDesc($list);     // 再排序
+}
+unset($list);
 
     foreach ($bucketLists as $k => &$list) {
         $sortByPriorityDesc($list);
@@ -3286,5 +3322,36 @@ private function persistAnswersToStorage(array $answers, string $pkg, string $an
     $disk->put($path, json_encode($answers, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
     return $path;
+}
+
+/**
+ * 归一化内容包入参：
+ * - v0.2.1-TEST              => MBTI-CN-v0.2.1-TEST
+ * - MBTI.cn-mainland.zh-CN.v0.2.1-TEST => MBTI-CN-v0.2.1-TEST
+ * - MBTI-CN-v0.2.1-TEST      => 原样返回
+ */
+private function normalizeContentPackageDir(string $pkgOrVersion): string
+{
+    $s = trim((string)$pkgOrVersion);
+    if ($s === '') return $this->currentContentPackageVersion();
+
+    if (str_starts_with($s, 'MBTI-CN-')) {
+        return $s;
+    }
+
+    // pack_id: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+    if (substr_count($s, '.') >= 3) {
+        $parts = explode('.', $s);
+        $ver = implode('.', array_slice($parts, 3)); // v0.2.1-TEST
+        return 'MBTI-CN-' . $ver;
+    }
+
+    // pure version: v0.2.1-TEST
+    if (str_starts_with($s, 'v')) {
+        return 'MBTI-CN-' . $s;
+    }
+
+    // 兜底：当作目录名
+    return $s;
 }
 }

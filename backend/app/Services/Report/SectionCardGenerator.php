@@ -2,6 +2,8 @@
 
 namespace App\Services\Report;
 
+use Illuminate\Support\Facades\Log;
+
 final class SectionCardGenerator
 {
     /**
@@ -16,6 +18,14 @@ final class SectionCardGenerator
     {
         $file = "report_cards_{$section}.json";
         $json = $this->loadReportAssetJson($contentPackageVersion, $file);
+
+        Log::info('[CARDS] loaded', [
+    'section' => $section,
+    'pkg'     => $contentPackageVersion,
+    'file'    => $file,
+    'items'   => is_array($json['items'] ?? null) ? count($json['items']) : 0,
+    'rules'   => $json['rules'] ?? null,
+]);
 
         $items = is_array($json['items'] ?? null) ? $json['items'] : [];
         $rules = is_array($json['rules'] ?? null) ? $json['rules'] : [];
@@ -61,6 +71,10 @@ final class SectionCardGenerator
             $tags = array_values(array_filter($tags, fn($x) => is_string($x) && trim($x) !== ''));
             $prio = (int)($it['priority'] ?? 0);
 
+            // 先做 rules 的硬门槛（如果存在）
+            if (!$this->passesRules($it, $userSet)) {
+            continue;
+}
             // 先做 match.axis 的硬门槛（如果存在）
             if (!$this->passesAxisMatch($it, $userSet, $axisInfo)) {
                 continue;
@@ -238,9 +252,58 @@ final class SectionCardGenerator
         }
 
         // 截断到 max
-        return array_slice(array_values($out), 0, $maxCards);
+$out = array_slice(array_values($out), 0, $maxCards);
+
+Log::info('[CARDS] selected', [
+    'section' => $section,
+    'ids'     => array_map(fn($x) => $x['id'] ?? null, $out),
+]);
+
+return $out;
     }
 
+    private function passesRules(array $card, array $userSet): bool
+{
+    $rules = is_array($card['rules'] ?? null) ? $card['rules'] : null;
+    if (!$rules) return true;
+
+    $requireAll = is_array($rules['require_all'] ?? null) ? $rules['require_all'] : [];
+    $requireAny = is_array($rules['require_any'] ?? null) ? $rules['require_any'] : [];
+    $forbid     = is_array($rules['forbid'] ?? null) ? $rules['forbid'] : [];
+    $minMatch   = (int)($rules['min_match'] ?? 0);
+
+    // forbid：命中即排除
+    foreach ($forbid as $t) {
+        if (is_string($t) && $t !== '' && isset($userSet[$t])) return false;
+    }
+
+    // require_all：必须全部命中
+    foreach ($requireAll as $t) {
+        if (!is_string($t) || $t === '' || !isset($userSet[$t])) return false;
+    }
+
+    // require_any：至少命中一个（如果给了的话）
+    if (!empty($requireAny)) {
+        $ok = false;
+        foreach ($requireAny as $t) {
+            if (is_string($t) && $t !== '' && isset($userSet[$t])) { $ok = true; break; }
+        }
+        if (!$ok) return false;
+    }
+
+    // min_match：card.tags 与 userSet 交集至少多少
+    if ($minMatch > 0) {
+        $tags = is_array($card['tags'] ?? null) ? $card['tags'] : [];
+        $hit = 0;
+        foreach ($tags as $t) {
+            if (is_string($t) && $t !== '' && isset($userSet[$t])) $hit++;
+        }
+        if ($hit < $minMatch) return false;
+    }
+
+    return true;
+}
+    
     private function passesAxisMatch(array $card, array $userSet, array $axisInfo): bool
     {
         $match = is_array($card['match'] ?? null) ? $card['match'] : null;

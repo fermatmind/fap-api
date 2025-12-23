@@ -2,14 +2,18 @@
 
 namespace App\Services\Report;
 
+use Illuminate\Support\Facades\Log;
+
 use App\Models\Attempt;
 use App\Models\Result;
 
 use App\Services\Report\TagBuilder;
 use App\Services\Report\SectionCardGenerator;
-use App\Services\Report\HighlightsGenerator;
 use App\Services\Overrides\HighlightsOverridesApplier;
 use App\Services\Report\IdentityLayerBuilder;
+use App\Services\Report\HighlightBuilder;
+
+use App\Services\Content\ContentPackResolver;
 
 use App\Domain\Score\AxisScore;
 
@@ -18,164 +22,237 @@ class ReportComposer
     public function __construct(
         private TagBuilder $tagBuilder,
         private SectionCardGenerator $cardGen,
-        private HighlightsGenerator $highGen,
         private HighlightsOverridesApplier $overridesApplier,
         private IdentityLayerBuilder $identityLayerBuilder,
     ) {}
 
-    /**
-     * 组合报告（Controller 只负责调用它）
-     *
-     * @param string $attemptId
-     * @param array $ctx 通过闭包注入 Controller 的私有 loader/helper（避免 composer 依赖 Controller）
-     * @return array 统一返回：['ok'=>true,'type_code'=>...,'report'=>...] 或 ['ok'=>false,...]
-     */
     public function compose(string $attemptId, array $ctx): array
     {
         // 1) Load Attempt + Result
-$attempt = Attempt::where('id', $attemptId)->first();
-$result  = Result::where('attempt_id', $attemptId)->first();
+        $attempt = Attempt::where('id', $attemptId)->first();
+        $result  = Result::where('attempt_id', $attemptId)->first();
 
-if (!$attempt) {
-    return [
-        'ok' => false,
-        'error' => 'ATTEMPT_NOT_FOUND',
-        'message' => 'Attempt not found for given attempt_id',
-        'status' => 404,
-    ];
-}
+        if (!$attempt) {
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_NOT_FOUND',
+                'message' => 'Attempt not found for given attempt_id',
+                'status' => 404,
+            ];
+        }
 
-if (!$result) {
-    return [
-        'ok' => false,
-        'error' => 'RESULT_NOT_FOUND',
-        'message' => 'Result not found for given attempt_id',
-        'status' => 404,
-    ];
-}
+        if (!$result) {
+            return [
+                'ok' => false,
+                'error' => 'RESULT_NOT_FOUND',
+                'message' => 'Result not found for given attempt_id',
+                'status' => 404,
+            ];
+        }
 
-        // 版本信息：全部从 results/配置里取（不依赖前端）
+        // =========================
+        // 版本信息：从 Result/配置/Resolver 统一收敛
+        // =========================
         $profileVersion = $result->profile_version
             ?? ($ctx['defaultProfileVersion'] ?? 'mbti32-v2.5');
 
-        $contentPackageVersion = $result->content_package_version
-            ?? ($ctx['currentContentPackageVersion'] ? ($ctx['currentContentPackageVersion'])() : null);
+        $scaleCode = (string) ($result->scale_code ?? 'MBTI');
+        $region    = (string) ($attempt->region ?? 'CN_MAINLAND');
+        $locale    = (string) ($attempt->locale ?? 'zh-CN');
 
-        if (!is_string($contentPackageVersion) || $contentPackageVersion === '') {
-            $contentPackageVersion = (string) ($ctx['defaultContentPackageVersion'] ?? 'MBTI-CN-v0.2.1-TEST');
+        $requested = $result->content_package_version
+            ?? (isset($ctx['currentContentPackageVersion']) && is_callable($ctx['currentContentPackageVersion'])
+                ? ($ctx['currentContentPackageVersion'])()
+                : null);
+
+        $requestedVersion = null;
+        if (is_string($requested) && $requested !== '') {
+            if (str_starts_with($requested, 'MBTI-CN-')) {
+                $requestedVersion = substr($requested, strlen('MBTI-CN-')); // v0.2.1-TEST
+            } elseif (substr_count($requested, '.') >= 3) {
+                $parts = explode('.', $requested);
+                $requestedVersion = implode('.', array_slice($parts, 3));   // v0.2.1-TEST
+            } else {
+                $requestedVersion = $requested;
+            }
         }
 
-        $typeCode = (string) $result->type_code;
+        $resolver = ContentPackResolver::make();
+        $chain    = $resolver->resolveWithFallbackChain($scaleCode, $region, $locale, $requestedVersion);
+        $pack     = $chain[0];
 
-        // 2) Score（你当前版本：复用 results.scores_pct/axis_states；不现场重算）
+        // ✅ 新体系：真正的版本号
+        $contentPackageVersion = (string) $pack->version; // e.g. v0.2.1-TEST
+
+        // ✅ 旧 loader 兼容：旧目录名（你已做 symlink）
+        $contentPackageDir = 'MBTI-CN-' . $contentPackageVersion; // e.g. MBTI-CN-v0.2.1-TEST
+
+        $typeCode = (string) ($result->type_code ?? '');
+
+        // =========================
+        // 2) Score（复用 results.scores_pct/axis_states）
+        // =========================
         $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
         $warnings = [];
+
         $scoresPct  = is_array($result->scores_pct ?? null) ? $result->scores_pct : [];
         $axisStates = is_array($result->axis_states ?? null) ? $result->axis_states : [];
 
         foreach ($dims as $d) {
-    if (!array_key_exists($d, $scoresPct)) {
-        $warnings[] = "scores_pct_missing:$d";
-        $scoresPct[$d] = 50;
-    }
-    if (!array_key_exists($d, $axisStates)) {
-        $warnings[] = "axis_states_missing:$d";
-        $axisStates[$d] = 'moderate';
-    }
-}
+            if (!array_key_exists($d, $scoresPct)) {
+                $warnings[] = "scores_pct_missing:$d";
+                $scoresPct[$d] = 50;
+            }
+            if (!array_key_exists($d, $axisStates)) {
+                $warnings[] = "axis_states_missing:$d";
+                $axisStates[$d] = 'moderate';
+            }
+        }
 
-        // 3) Load Profile / IdentityCard
+        // =========================
+        // 3) Load Profile / IdentityCard（通过 ctx 注入 loader）
+        // =========================
         $loadTypeProfile = $ctx['loadTypeProfile'] ?? null;
         $loadAssetItems  = $ctx['loadReportAssetItems'] ?? null;
 
         $profile = is_callable($loadTypeProfile)
-            ? (array) $loadTypeProfile($contentPackageVersion, $typeCode)
+            ? (array) $loadTypeProfile($contentPackageDir, $typeCode)
             : [];
 
-        // 6) identity_card（旧 assets：report_identity_cards.json）
         $identityItems = is_callable($loadAssetItems)
-            ? (array) $loadAssetItems($contentPackageVersion, 'report_identity_cards.json', 'type_code')
+            ? (array) $loadAssetItems($contentPackageDir, 'report_identity_cards.json', 'type_code')
             : [];
+
         $identityCard  = is_array($identityItems[$typeCode] ?? null) ? $identityItems[$typeCode] : null;
 
         // scores（稳定结构：pct/state/side/delta）
         $scores = $this->buildScoresValueObject($scoresPct, $dims);
 
-        // 1) role/strategy（必须先算出来）
+        // =========================
+        // 4) role/strategy（必须先算出来）
+        // =========================
         $roleCard = is_callable($ctx['buildRoleCard'] ?? null)
-            ? (array) ($ctx['buildRoleCard'])($contentPackageVersion, $typeCode)
+            ? (array) ($ctx['buildRoleCard'])($contentPackageDir, $typeCode)
             : [];
 
         $strategyCard = is_callable($ctx['buildStrategyCard'] ?? null)
-            ? (array) ($ctx['buildStrategyCard'])($contentPackageVersion, $typeCode)
+            ? (array) ($ctx['buildStrategyCard'])($contentPackageDir, $typeCode)
             : [];
 
-        // 4) Build Tags（依赖 role/strategy）
+        // =========================
+        // 5) Build Tags（依赖 role/strategy）
+        // =========================
         $tags = $this->tagBuilder->build($scores, [
             'role_card'     => $roleCard,
             'strategy_card' => $strategyCard,
         ]);
 
-        // 6) Build Highlights（base + overrides）
-        $baseHighlights = $this->highGen->generate($contentPackageVersion, $typeCode, $scores, [
-            'role_card'     => $roleCard,
-            'strategy_card' => $strategyCard,
-            'tags'          => $tags,
-        ]);
+        // =========================
+        // 6) Build Highlights（templates -> builder）
+        // =========================
+        $reportForHL = [
+            'profile'     => ['type_code' => $typeCode],
+            'scores_pct'  => $scoresPct,
+            'axis_states' => $axisStates,
+        ];
 
-        $highlights = $this->overridesApplier->apply(
+        $hlTemplatesDoc = $this->loadHighlightsTemplatesDoc(
+            $scaleCode,
+            $region,
+            $locale,
             $contentPackageVersion,
-            $typeCode,
-            $baseHighlights
+            $contentPackageDir,
+            $ctx
         );
 
-        // 8) borderline_note（给 identity micro 用）
+        $builder = new HighlightBuilder();
+        $baseHighlights = $builder->buildFromTemplatesDoc($reportForHL, $hlTemplatesDoc, 3, 10);
+
+        Log::info('[HL] base_highlights', [
+            'count' => count($baseHighlights),
+            'ids'   => array_slice(array_map(fn ($x) => $x['id'] ?? null, $baseHighlights), 0, 10),
+        ]);
+
+        // =========================
+        // 7) borderline_note（给 identity micro 用）
+        // =========================
         $borderlineNote = is_callable($ctx['buildBorderlineNote'] ?? null)
-            ? (array) ($ctx['buildBorderlineNote'])($scoresPct, $contentPackageVersion)
+            ? (array) ($ctx['buildBorderlineNote'])($scoresPct, $contentPackageDir)
             : ['items' => []];
 
-        if (!is_array($borderlineNote['items'] ?? null)) $borderlineNote['items'] = [];
+        if (!is_array($borderlineNote['items'] ?? null)) {
+            $borderlineNote['items'] = [];
+        }
 
+        // =========================
         // 8) Build layers.identity
+        // =========================
         $identityLayer = $this->identityLayerBuilder->build(
-            $contentPackageVersion,
+            $contentPackageDir,
             $typeCode,
             $scoresPct,
             $borderlineNote
         );
 
-        // 5) Build Sections Cards
+        // =========================
+        // 9) Build Sections Cards
+        // =========================
         $sections = [
             'traits' => [
-                'cards' => $this->cardGen->generate('traits', $contentPackageVersion, $tags, $scores),
+                'cards' => $this->cardGen->generate('traits', $contentPackageDir, $tags, $scores),
             ],
             'career' => [
-                'cards' => $this->cardGen->generate('career', $contentPackageVersion, $tags, $scores),
+                'cards' => $this->cardGen->generate('career', $contentPackageDir, $tags, $scores),
             ],
             'growth' => [
-                'cards' => $this->cardGen->generate('growth', $contentPackageVersion, $tags, $scores),
+                'cards' => $this->cardGen->generate('growth', $contentPackageDir, $tags, $scores),
             ],
             'relationships' => [
-                'cards' => $this->cardGen->generate('relationships', $contentPackageVersion, $tags, $scores),
+                'cards' => $this->cardGen->generate('relationships', $contentPackageDir, $tags, $scores),
             ],
         ];
 
-        // 9) recommended_reads（放最后）
+        // =========================
+        // 10) recommended_reads（放最后）
+        // =========================
         $recommendedReads = is_callable($ctx['buildRecommendedReads'] ?? null)
-            ? (array) ($ctx['buildRecommendedReads'])($contentPackageVersion, $typeCode, $scoresPct)
+            ? (array) ($ctx['buildRecommendedReads'])($contentPackageDir, $typeCode, $scoresPct)
             : [];
 
+        // =========================
+        // 11) ✅ Overrides 统一入口（当前先接 highlights；cards/reads 后续接入同一个引擎）
+        // =========================
+        [$highlights, $sections, $recommendedReads] = $this->applyOverridesUnified(
+            $contentPackageDir,
+            $typeCode,
+            $baseHighlights,
+            $sections,
+            $recommendedReads
+        );
+
+        Log::info('[HL] final_highlights', [
+            'count' => count($highlights),
+            'ids'   => array_slice(array_map(fn ($x) => $x['id'] ?? null, $highlights), 0, 10),
+        ]);
+
+        // =========================
         // 最终 report payload（schema 不变）
+        // =========================
         $reportPayload = [
             'versions' => [
                 'engine'                  => 'v1.2',
                 'profile_version'         => $profileVersion,
                 'content_package_version' => $contentPackageVersion,
+                'content_pack_id'         => $pack->packId,
+                'content_package_dir'     => $contentPackageDir,
             ],
-            'scores' => $scores,
+
+            'scores'      => $scores,
             'scores_pct'  => $scoresPct,
             'axis_states' => $axisStates,
+
             'tags'   => $tags,
+
             'profile' => [
                 'type_code'     => $profile['type_code'] ?? $typeCode,
                 'type_name'     => $profile['type_name'] ?? null,
@@ -184,16 +261,21 @@ if (!$result) {
                 'keywords'      => $profile['keywords'] ?? [],
                 'short_summary' => $profile['short_summary'] ?? null,
             ],
+
             'identity_card'   => $identityCard,
             'highlights'      => $highlights,
             'borderline_note' => $borderlineNote,
+
             'layers' => [
                 'role_card'     => $roleCard,
                 'strategy_card' => $strategyCard,
                 'identity'      => $identityLayer,
             ],
+
             'sections' => $sections,
+
             'recommended_reads' => $recommendedReads,
+
             'warnings' => $warnings,
         ];
 
@@ -203,6 +285,79 @@ if (!$result) {
             'type_code'  => $typeCode,
             'report'     => $reportPayload,
         ];
+    }
+
+    /**
+     * ✅ Overrides 统一入口（现在只接 highlights，后续把 cards/reads 也接到同一引擎即可）
+     * 返回：[$highlights, $sections, $recommendedReads]
+     */
+    private function applyOverridesUnified(
+        string $contentPackageDir,
+        string $typeCode,
+        array $baseHighlights,
+        array $sections,
+        array $recommendedReads
+    ): array {
+        // 目前你已有的 overrides 只对 highlights 生效
+        $highlights = $this->overridesApplier->apply($contentPackageDir, $typeCode, $baseHighlights);
+
+        // cards / reads：先原样返回；等你实现统一 overrides 引擎后，在这里替换成一次 applyAll(...)
+        return [$highlights, $sections, $recommendedReads];
+    }
+
+    /**
+     * 读取 report_highlights_templates.json（新体系优先 + 旧体系兜底 + ctx loader 兜底）
+     */
+    private function loadHighlightsTemplatesDoc(
+        string $scaleCode,
+        string $region,
+        string $locale,
+        string $contentPackageVersion,
+        string $contentPackageDir,
+        array $ctx
+    ): ?array {
+        $tplNewRel = 'content_packages/' . $scaleCode . '/' . $region . '/' . $locale . '/' . $contentPackageVersion . '/report_highlights_templates.json';
+        $tplOldRel = rtrim($contentPackageDir, '/') . '/report_highlights_templates.json';
+
+        $repoRoot = realpath(base_path('..')) ?: dirname(base_path());
+
+        $candidates = [
+            base_path('../' . $tplNewRel),
+            $repoRoot . '/' . ltrim($tplNewRel, '/'),
+            $tplOldRel,
+            base_path($tplOldRel),
+            base_path('../' . $tplOldRel),
+        ];
+
+        foreach ($candidates as $path) {
+            if (!is_file($path)) continue;
+            $json = json_decode((string) file_get_contents($path), true);
+            if (is_array($json)) {
+                Log::info('[HL] templates_loaded', [
+                    'path' => $path,
+                    'schema' => $json['schema'] ?? null,
+                    'rules_keys' => array_keys($json['rules'] ?? []),
+                    'templates_keys' => array_keys($json['templates'] ?? []),
+                ]);
+                return $json;
+            }
+        }
+
+        // fallback: ctx loader（可选保留）
+        if (is_callable($ctx['loadReportAssetJson'] ?? null)) {
+            $raw = ($ctx['loadReportAssetJson'])($contentPackageDir, 'report_highlights_templates.json');
+
+            if (is_object($raw)) $raw = json_decode(json_encode($raw, JSON_UNESCAPED_UNICODE), true);
+            if (is_array($raw)) {
+                $doc = $raw['doc'] ?? $raw['data'] ?? $raw;
+                if (is_object($doc)) {
+                    $doc = json_decode(json_encode($doc, JSON_UNESCAPED_UNICODE), true);
+                }
+                if (is_array($doc)) return $doc;
+            }
+        }
+
+        return null;
     }
 
     private function buildScoresValueObject(array $scoresPct, array $dims): array
@@ -224,7 +379,6 @@ if (!$result) {
             $side = $rawPct >= 50 ? $p1 : $p2;
             $displayPct = $rawPct >= 50 ? $rawPct : (100 - $rawPct); // 50..100
 
-            // 复用你现有 AxisScore（保持 state/delta 口径一致）
             $axis = AxisScore::fromPctAndSide($displayPct, $side);
 
             $out[$dim] = [
