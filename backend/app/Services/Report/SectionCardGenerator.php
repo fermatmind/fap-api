@@ -3,6 +3,7 @@
 namespace App\Services\Report;
 
 use Illuminate\Support\Facades\Log;
+use App\Services\Rules\RuleEngine;
 
 final class SectionCardGenerator
 {
@@ -59,6 +60,13 @@ final class SectionCardGenerator
 
         // 用于“稳定打散”的种子（同一个用户/attempt 结果稳定，不同 attempt 会变化）
         $seed = $this->stableSeed($userSet, $axisInfo);
+        // RuleEngine (D: 通用规则引擎) - cards 侧接入
+$re = app(RuleEngine::class);
+$ctx = "cards:{$section}";
+$debugRE = app()->environment('local', 'development') && (bool) env('FAP_RE_DEBUG', false);
+// 可观测：记录 explain 所需信息
+$evalById = [];
+$rejectedSamples = [];
 
         // normalize + score
         $cands = [];
@@ -71,64 +79,95 @@ final class SectionCardGenerator
             $tags = array_values(array_filter($tags, fn($x) => is_string($x) && trim($x) !== ''));
             $prio = (int)($it['priority'] ?? 0);
 
-            // 先做 rules 的硬门槛（如果存在）
-            if (!$this->passesRules($it, $userSet)) {
-            continue;
+            // 统一：RuleEngine 评估 item-level rules + score
+$base = [
+    'id'       => $id,
+    'tags'     => $tags,
+    'priority' => $prio,
+    'rules'    => is_array($it['rules'] ?? null) ? $it['rules'] : [],
+];
+
+// cards 侧暂不需要 global_rules（你 section rules 目前是 min_cards/target/max/fallback/sort）
+$ev = $re->evaluate($base, $userSet, [
+    'seed' => $seed,
+    'ctx'  => $ctx,
+    'debug' => $debugRE,
+    'global_rules' => [],
+]);
+
+$evalById[$id] = $ev;
+
+if (!$ev['ok']) {
+    // 你现在只打印 canary 的 rejected，也可以保持这个策略
+    if (str_contains($id, 'canary')) {
+        Log::info('[CARDS] rejected', array_merge(
+            ['section' => $section, 'id' => $id, 'reason' => $ev['reason']],
+            is_array($ev['detail'] ?? null) ? $ev['detail'] : []
+        ));
+    }
+    // RE explain 用：抽样收集几条 rejected
+    if ($debugRE && count($rejectedSamples) < 6) {
+        $rejectedSamples[] = [
+            'id' => $id,
+            'reason' => $ev['reason'],
+            'detail' => $ev['detail'] ?? null,
+            'hit' => $ev['hit'],
+            'priority' => $ev['priority'],
+            'min_match' => $ev['min_match'],
+            'score' => $ev['score'],
+        ];
+    }
+    continue;
 }
             // 先做 match.axis 的硬门槛（如果存在）
             if (!$this->passesAxisMatch($it, $userSet, $axisInfo)) {
                 continue;
             }
 
-            // 交集分
-            $hit = 0;
-            foreach ($tags as $t) {
-                if (isset($userSet[$t])) $hit++;
-            }
-
             $isAxis = $this->isAxisCardId($id);
 
-            $cands[] = [
-                'id'       => $id,
-                'section'  => (string)($it['section'] ?? $section),
-                'title'    => (string)($it['title'] ?? ''),
-                'desc'     => (string)($it['desc'] ?? ''),
-                'bullets'  => is_array($it['bullets'] ?? null) ? array_values($it['bullets']) : [],
-                'tips'     => is_array($it['tips'] ?? null) ? array_values($it['tips']) : [],
-                'tags'     => $tags,
-                'priority' => $prio,
-                'match'    => $it['match'] ?? null,
+$cands[] = [
+    'id'       => $id,
+    'section'  => (string)($it['section'] ?? $section),
+    'title'    => (string)($it['title'] ?? ''),
+    'desc'     => (string)($it['desc'] ?? ''),
+    'bullets'  => is_array($it['bullets'] ?? null) ? array_values($it['bullets']) : [],
+    'tips'     => is_array($it['tips'] ?? null) ? array_values($it['tips']) : [],
+    'tags'     => $tags,
+    'priority' => $prio,
+    'match'    => $it['match'] ?? null,
 
-                // internal score for sorting
-                '_hit'     => $hit,
-                '_is_axis' => $isAxis,
-                '_shuffle' => $this->stableShuffleKey($seed, $id),
-            ];
+    // internal for sorting / explain
+    '_hit'     => (int)($ev['hit'] ?? 0),
+    '_score'   => (int)($ev['score'] ?? 0),
+    '_min'     => (int)($ev['min_match'] ?? 0),
+    '_is_axis' => $isAxis,
+    '_shuffle' => (int)($ev['shuffle'] ?? 0),
+];
         }
 
         // 排序（主排序：hit/priority；同分时做稳定打散；最后 id）
         usort($cands, function ($a, $b) {
-            $ha = (int)($a['_hit'] ?? 0);
-            $hb = (int)($b['_hit'] ?? 0);
-            if ($ha !== $hb) return $hb <=> $ha;
+    $sa = (int)($a['_score'] ?? 0);
+    $sb = (int)($b['_score'] ?? 0);
+    if ($sa !== $sb) return $sb <=> $sa;
 
-            $pa = (int)($a['priority'] ?? 0);
-            $pb = (int)($b['priority'] ?? 0);
-            if ($pa !== $pb) return $pb <=> $pa;
+    $sha = (int)($a['_shuffle'] ?? 0);
+    $shb = (int)($b['_shuffle'] ?? 0);
+    if ($sha !== $shb) return $sha <=> $shb;
 
-            $sa = (int)($a['_shuffle'] ?? 0);
-            $sb = (int)($b['_shuffle'] ?? 0);
-            if ($sa !== $sb) return $sa <=> $sb;
-
-            return strcmp((string)($a['id'] ?? ''), (string)($b['id'] ?? ''));
-        });
+    return strcmp((string)($a['id'] ?? ''), (string)($b['id'] ?? ''));
+});
 
         $out  = [];
         $seen = [];
 
+        // 主选：RuleEngine 决定顺序，先取前 targetCards
+$primary = array_slice($cands, 0, $targetCards);
+
         // A) 先拿 hit>0 的（更贴用户），但优先保证 non-axis 至少 1 张（当 nonAxisMin=1 时）
         if ($nonAxisMin > 0) {
-            foreach ($cands as $c) {
+            foreach ($primary as $c) {
                 if (count($out) >= $targetCards) break;
                 if ((int)($c['_hit'] ?? 0) <= 0) continue;
                 if ((bool)($c['_is_axis'] ?? false) === true) continue;
@@ -145,7 +184,7 @@ final class SectionCardGenerator
         }
 
         // 2) 再挑 hit>0 的 axis / non-axis（按排序继续填）
-        foreach ($cands as $c) {
+        foreach ($primary as $c) {
             if (count($out) >= $targetCards) break;
             if ((int)($c['_hit'] ?? 0) <= 0) continue;
 
@@ -254,6 +293,25 @@ final class SectionCardGenerator
         // 截断到 max
 $out = array_slice(array_values($out), 0, $maxCards);
 
+// [RE] explain：cards 侧可解释闭环
+$selectedExplains = [];
+if ($debugRE) {
+    foreach ($out as $c) {
+        $id = (string)($c['id'] ?? '');
+        $ev = $evalById[$id] ?? null;
+        if (is_array($ev)) {
+            $selectedExplains[] = [
+                'id' => $id,
+                'hit' => $ev['hit'],
+                'priority' => $ev['priority'],
+                'min_match' => $ev['min_match'],
+                'score' => $ev['score'],
+            ];
+        }
+    }
+}
+$re->explain($ctx, $selectedExplains, $rejectedSamples, ['debug' => $debugRE]);
+
 Log::info('[CARDS] selected', [
     'section' => $section,
     'ids'     => array_map(fn($x) => $x['id'] ?? null, $out),
@@ -304,6 +362,65 @@ return $out;
     return true;
 }
     
+    private function passesRulesWithReason(array $card, array $userSet, ?array &$rej = null): bool
+{
+    $rej = null;
+
+    $rules = is_array($card['rules'] ?? null) ? $card['rules'] : null;
+    if (!$rules) return true;
+
+    $requireAll = is_array($rules['require_all'] ?? null) ? $rules['require_all'] : [];
+    $requireAny = is_array($rules['require_any'] ?? null) ? $rules['require_any'] : [];
+    $forbid     = is_array($rules['forbid'] ?? null) ? $rules['forbid'] : [];
+    $minMatch   = (int)($rules['min_match'] ?? 0);
+
+    // forbid：命中即排除
+    foreach ($forbid as $t) {
+        if (is_string($t) && $t !== '' && isset($userSet[$t])) {
+            $rej = ['reason' => 'forbid_hit', 'hit' => [$t]];
+            return false;
+        }
+    }
+
+    // require_all：必须全部命中
+    $missing = [];
+    foreach ($requireAll as $t) {
+        if (!is_string($t) || $t === '') continue;
+        if (!isset($userSet[$t])) $missing[] = $t;
+    }
+    if (!empty($missing)) {
+        $rej = ['reason' => 'require_all_missing', 'missing' => $missing];
+        return false;
+    }
+
+    // require_any：至少命中一个（如果给了的话）
+    if (!empty($requireAny)) {
+        $ok = false;
+        foreach ($requireAny as $t) {
+            if (is_string($t) && $t !== '' && isset($userSet[$t])) { $ok = true; break; }
+        }
+        if (!$ok) {
+            $rej = ['reason' => 'require_any_miss', 'need_any' => array_values($requireAny)];
+            return false;
+        }
+    }
+
+    // min_match：card.tags 与 userSet 交集至少多少
+    if ($minMatch > 0) {
+        $tags = is_array($card['tags'] ?? null) ? $card['tags'] : [];
+        $hit = 0;
+        foreach ($tags as $t) {
+            if (is_string($t) && $t !== '' && isset($userSet[$t])) $hit++;
+        }
+        if ($hit < $minMatch) {
+            $rej = ['reason' => 'min_match_fail', 'min_match' => $minMatch, 'hitCount' => $hit];
+            return false;
+        }
+    }
+
+    return true;
+}
+
     private function passesAxisMatch(array $card, array $userSet, array $axisInfo): bool
     {
         $match = is_array($card['match'] ?? null) ? $card['match'] : null;

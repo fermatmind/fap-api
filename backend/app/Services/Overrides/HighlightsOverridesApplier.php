@@ -129,16 +129,18 @@ if (is_array($rule['items'] ?? null)) {
 
             if (is_array($override)) {
                 if ($overrideMode === 'merge') {
-                    $h = array_replace_recursive($h, $override);
-                } else {
-                    $h = $override + $h;
-                }
+    $h = $this->mergeNonNull($h, $override); // ignore null
+} else {
+    // 这个分支本身不会用 null 覆盖（+ 运算符不覆盖已有 key）
+    $h = $override + $h;
+}
 
                 foreach ($replaceFields as $rf) {
                     if (!is_string($rf) || $rf === '') continue;
                     if (array_key_exists($rf, $override)) {
-                        $h[$rf] = is_array($override[$rf] ?? null) ? $override[$rf] : [];
-                    }
+    if ($override[$rf] === null) continue; // null 不清空
+    $h[$rf] = is_array($override[$rf]) ? $override[$rf] : [];
+}
                 }
             }
 
@@ -301,6 +303,21 @@ if ($mode === 'append' || $mode === 'prepend') {
         return $list;
     }
 
+    private function mergeNonNull(array $base, array $override): array
+{
+    foreach ($override as $k => $v) {
+        // 关键：null 不覆盖
+        if ($v === null) continue;
+
+        if (is_array($v) && is_array($base[$k] ?? null)) {
+            $base[$k] = $this->mergeNonNull($base[$k], $v);
+        } else {
+            $base[$k] = $v;
+        }
+    }
+    return $base;
+}
+
     private function applyOneItem(array $item, string $mode, array $patch, array $replaceFields): array
     {
         if ($mode === 'replace') {
@@ -309,16 +326,19 @@ if ($mode === 'append' || $mode === 'prepend') {
             $item = $patch;
             if (!isset($item['id']) && $id !== null) $item['id'] = $id;
         } else {
-            // patch (deep merge)
-            $item = array_replace_recursive($item, $patch);
+            // patch (deep merge, but ignore null in patch)
+$item = $this->mergeNonNull($item, $patch);
         }
 
         // replace_fields semantics (force replace arrays like tags/tips when patch provides them)
         foreach ($replaceFields as $rf) {
             if (!is_string($rf) || $rf === '') continue;
             if (array_key_exists($rf, $patch)) {
-                $item[$rf] = is_array($patch[$rf] ?? null) ? $patch[$rf] : [];
-            }
+    if ($patch[$rf] === null) {
+        continue; // 不允许用 null 清空
+    }
+    $item[$rf] = is_array($patch[$rf]) ? $patch[$rf] : [];
+}
         }
 
         // normalize

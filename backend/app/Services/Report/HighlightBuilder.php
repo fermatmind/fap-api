@@ -3,6 +3,7 @@
 namespace App\Services\Report;
 
 use Illuminate\Support\Facades\Log;
+use App\Services\Rules\RuleEngine;
 
 class HighlightBuilder
 {
@@ -69,6 +70,9 @@ Log::info('[HL] builder_recv', [
                 'text'  => $tpl['text'] ?? '',
                 'tips'  => $tpl['tips'] ?? [],
                 'tags'  => $tpl['tags'] ?? [],
+
+                'priority' => (int)($tpl['priority'] ?? 0),          // 没有就 0
+                'rules'    => is_array($tpl['rules'] ?? null) ? $tpl['rules'] : [], // 没有就空
                 '_dim'  => $dim,
                 '_side' => $side,
                 '_lvl'  => $level,
@@ -92,12 +96,61 @@ Log::info('[HL] builder_recv', [
             $pool = $softCands; // ✅ 全选 C / delta=0 也能从 very_weak 模板出 strength
         }
 
-        usort($pool, function ($a, $b) use ($levelOrder) {
-            if ($a['_delta'] !== $b['_delta']) return $b['_delta'] <=> $a['_delta'];
-            return $this->levelRank($b['_lvl'], $levelOrder) <=> $this->levelRank($a['_lvl'], $levelOrder);
-        });
+        // ✅ priority 兜底：模板没给 priority 时，用 delta 当 priority（更符合 highlights 直觉）
+foreach ($pool as &$it) {
+    if (!is_array($it)) continue;
+    if (!isset($it['priority']) || (int)$it['priority'] === 0) {
+        $it['priority'] = (int)($it['_delta'] ?? 0);
+    }
+}
+unset($it);
 
-        $strength = array_slice($pool, 0, max(0, min($topN, $maxItems)));
+// ✅ 用 RuleEngine 做 “排序+截断+explain”
+/** @var RuleEngine $re */
+$re = app(RuleEngine::class);
+
+// userSet：用 report.tags 做集合（cards/reads 也是同口径）
+$userSet = [];
+$rtags = $report['tags'] ?? [];
+if (is_array($rtags)) {
+    foreach ($rtags as $t) {
+        if (is_string($t) && $t !== '') $userSet[$t] = true;
+    }
+}
+
+// 兜底：至少塞一个 type tag（避免完全空集合）
+$typeCode = (string)($report['profile']['type_code'] ?? '');
+if ($typeCode !== '') $userSet["type:{$typeCode}"] = true;
+
+// ✅ priority 兜底：模板没给 priority 时，用 delta 当 priority
+foreach ($pool as &$it) {
+    if (!is_array($it)) continue;
+    if (!isset($it['priority']) || (int)$it['priority'] === 0) {
+        $it['priority'] = (int)($it['_delta'] ?? 0);
+    }
+}
+unset($it);
+
+// take：保持你原意 topN/maxItems 取较小
+$take = max(0, min((int)$topN, (int)$maxItems));
+
+// seed：稳定（同一个 type_code 每次一致）
+$seed = (int)(sprintf('%u', crc32($typeCode)));
+
+[$selectedPool, $_evals] = $re->select(
+    $pool,
+    $userSet,
+    [
+        'ctx' => 'highlights:strength',
+        'seed' => $seed,
+        'max_items' => $take,
+        'rejected_samples' => 5,
+        'debug' => true, // ✅ 关键：强制出 [RE] explain（只要 APP_ENV=local）
+    ]
+);
+
+// select() 返回 item（可能带 _re），后续 stripPrivate 会删掉
+$strength = $selectedPool;
 
         // 3) blindspot
         $blindspot = $this->buildBlindspot($report, $tpls, $levelOrder);
@@ -116,7 +169,12 @@ Log::info('[HL] builder_recv', [
         }
 
         $out = $this->dedupeById($out);
-        return array_slice($out, 0, $max);
+
+// ✅ 新增：统一补齐 title/tips/tags 等
+$typeCode = (string)($report['profile']['type_code'] ?? '');
+$out = $this->normalizeHighlights($out, $typeCode);
+
+return array_slice($out, 0, $max);
     }
 
     /**
@@ -283,10 +341,10 @@ Log::info('[HL] builder_recv', [
     }
 
     private function stripPrivate(array $x): array
-    {
-        unset($x['_dim'], $x['_side'], $x['_lvl'], $x['_delta']);
-        return $x;
-    }
+{
+    unset($x['_dim'], $x['_side'], $x['_lvl'], $x['_delta'], $x['_re']);
+    return $x;
+}
 
     private function dedupeById(array $items): array
     {
@@ -300,4 +358,38 @@ Log::info('[HL] builder_recv', [
         }
         return $out;
     }
+
+    public function normalizeHighlights(array $highlights, string $typeCode): array
+{
+    $out = [];
+    foreach ($highlights as $h) {
+        if (!is_array($h)) continue;
+        $out[] = $this->normalizeHighlightItem($h, $typeCode);
+    }
+    return $out;
+}
+
+private function normalizeHighlightItem(array $h, string $typeCode): array
+{
+    // kind/id/text：保证是 string
+    $h['kind'] = is_string($h['kind'] ?? null) && $h['kind'] !== '' ? $h['kind'] : 'highlight';
+    $h['id']   = is_string($h['id'] ?? null)   && $h['id'] !== ''   ? $h['id']   : ('hl.generated.'.uniqid());
+    $h['text'] = is_string($h['text'] ?? null) && $h['text'] !== '' ? $h['text'] : '';
+
+    // title：你现在 blindspot/action 是 null，这里兜底
+    if (!is_string($h['title'] ?? null) || trim($h['title']) === '') {
+        $h['title'] =
+            $h['kind'] === 'blindspot' ? '盲点提醒' :
+            ($h['kind'] === 'action'   ? '行动建议' : '要点');
+    }
+
+    // tips/tags：把 null 统一变成数组（你后续 jq 要求 array 且 len>=1 就给默认值）
+    if (!is_array($h['tips'] ?? null)) $h['tips'] = [];
+    if (!is_array($h['tags'] ?? null)) $h['tags'] = [];
+
+    if (count($h['tips']) < 1) $h['tips'] = ['先做一小步，再迭代优化'];
+    if (count($h['tags']) < 1) $h['tags'] = ['generated', $h['kind'], $typeCode];
+
+    return $h;
+}
 }

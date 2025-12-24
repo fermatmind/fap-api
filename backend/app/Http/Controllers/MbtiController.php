@@ -21,6 +21,7 @@ use App\Services\Report\HighlightsGenerator;
 use App\Services\Overrides\HighlightsOverridesApplier;
 use App\Services\Report\IdentityLayerBuilder;
 use App\Services\Report\ReportComposer;
+use App\Services\Rules\RuleEngine;
 
 class MbtiController extends Controller
 {
@@ -837,6 +838,12 @@ public function getReport(Request $request, string $attemptId)
 
     $reportPayload = $res['report'] ?? [];
 
+    // ✅ 最终兜底：强制 highlights 满足契约（kind/id/title/text + tips/tags 非空）
+if (isset($reportPayload['highlights']) && is_array($reportPayload['highlights'])) {
+    $type = (string)($res['type_code'] ?? $result->type_code ?? '');
+    $reportPayload['highlights'] = $this->finalizeHighlightsSchema($reportPayload['highlights'], $type);
+}
+
     return response()->json([
         'ok'         => true,
         'attempt_id' => $attemptId,
@@ -974,21 +981,19 @@ private function buildHighlights(array $scoresPct, array $axisStates, string $ty
         }
 
         if (is_array($override)) {
-            // 递归 merge
-            $card = array_replace_recursive($card, $override);
+    // ✅ 关键：忽略 null 覆盖（防止 title/tips/tags 被覆盖成 null）
+    $card = $this->mergeNonNullRecursive($card, $override);
 
-            // ✅ tips/tags 若 overrides 提供则整段覆盖
-            if (array_key_exists('tips', $override)) {
-                $card['tips'] = is_array($override['tips'] ?? null) ? $override['tips'] : [];
-            } else {
-                if (!is_array($card['tips'] ?? null)) $card['tips'] = [];
-            }
+    // ✅ tips/tags：只有 override 给了“数组”才覆盖；给 null 就当没给
+    if (array_key_exists('tips', $override) && is_array($override['tips'])) {
+        $card['tips'] = $override['tips'];
+    }
+    if (array_key_exists('tags', $override) && is_array($override['tags'])) {
+        $card['tags'] = $override['tags'];
+    }
 
-            if (array_key_exists('tags', $override)) {
-                $card['tags'] = is_array($override['tags'] ?? null) ? $override['tags'] : [];
-            } else {
-                if (!is_array($card['tags'] ?? null)) $card['tags'] = [];
-            }
+    if (!is_array($card['tips'] ?? null)) $card['tips'] = [];
+    if (!is_array($card['tags'] ?? null)) $card['tags'] = [];
         }
 
         $candidates[] = $card;
@@ -1245,6 +1250,18 @@ private function normalizeHighlightKinds(array $cards): array
         if (!$hasKind) {
             $tags[] = 'kind:axis';
         }
+
+        // ✅ 同步写入 kind 字段（CI 要求 report.highlights[].kind）
+if (!is_string($c['kind'] ?? null) || trim((string)$c['kind']) === '') {
+    $k = null;
+    foreach ($tags as $t) {
+        if (is_string($t) && str_starts_with($t, 'kind:')) {
+            $k = substr($t, 5);
+            break;
+        }
+    }
+    $c['kind'] = is_string($k) && $k !== '' ? $k : 'axis';
+}
 
         // 补 axis:DIM:SIDE（如果缺）
         $dim  = (string)($c['dim'] ?? '');
@@ -1810,6 +1827,55 @@ if (!is_array($requireAnyTags)) $requireAnyTags = [];
 $requireAllTags = $rules['require_all_tags'] ?? [];
 if (!is_array($requireAllTags)) $requireAllTags = [];
 
+// ============================
+// ✅ RuleEngine (reads) setup
+// ============================
+/** @var \App\Services\Rules\RuleEngine $re */
+$re = app(RuleEngine::class);
+
+// ✅ 关键改动：reads_debug 开了就强制打开 RE explain
+$debugRE = $debugReads || (
+    app()->environment('local', 'development')
+    && (bool) config('fap.re_debug', false)
+);
+
+$ctx  = "reads:{$typeCode}";
+$seed = crc32($ctx . '|' . $contentPackageVersion . '|' . $typeCode);
+
+// userTagsSet：把“用户画像标签”转成 set（给 require/forbid 命中用）
+$roleCode = $this->roleCodeFromType($typeCode);
+$strategyCode = $this->strategyCodeFromType($typeCode);
+
+$userTags = [
+    "type:{$typeCode}",
+    "role:{$roleCode}",
+    "strategy:{$strategyCode}",
+];
+
+// 补齐全部轴 side（这样 reads 以后也能写 axis 规则）
+foreach (['EI','SN','TF','JP','AT'] as $d) {
+    $pct = (int)($scoresPct[$d] ?? 50);
+    [$p1, $p2] = $this->getDimensionPoles($d);
+    $side = ($pct >= 50) ? $p1 : $p2;
+    $userTags[] = "axis:{$d}:{$side}";
+}
+
+$userTags = array_values(array_unique(array_filter($userTags, fn($x) => is_string($x) && trim($x) !== '')));
+// RuleEngine 用 set（更快更明确）
+$userTagsSet = array_fill_keys($userTags, true);
+
+// globalRules：把 reads 的 require_*_tags / forbid_tags 映射成 RuleEngine 字段
+$globalRules = [
+    'require_all' => array_values(array_filter($requireAllTags, fn($x)=>is_string($x)&&trim($x)!=='')),
+    'require_any' => array_values(array_filter($requireAnyTags, fn($x)=>is_string($x)&&trim($x)!=='')),
+    'forbid'      => array_values(array_filter($forbidTags, fn($x)=>is_string($x)&&trim($x)!=='')),
+    'min_match'   => 0,
+];
+
+// explain 需要的容器
+$reSelectedExplain = [];
+$reRejectedSamples = [];
+
     if ($debugReads) {
     $debug['rules'] = [
         'max_items' => $maxItems,
@@ -1900,38 +1966,89 @@ if (!is_array($requireAllTags)) $requireAllTags = [];
         $bucketLists['by_top_axis'] = [];
     }
 
-    // 每桶内部按 priority desc
-    $sortByPriorityDesc = function (&$list): void {
-        if (!is_array($list)) { $list = []; return; }
-        usort($list, fn($a, $b) => (int) ($b['priority'] ?? 0) <=> (int) ($a['priority'] ?? 0));
-    };
+    // ============================
+// ✅ 用 RuleEngine 统一：过滤 + 打分 + 稳定打散排序
+// ============================
+$rankBucket = function (string $bucketName, array $list) use (
+    $re, $userTagsSet, $globalRules, $seed, $ctx, $debugRE,
+    &$reRejectedSamples
+): array {
+    if (!is_array($list) || empty($list)) return [];
 
-    $filterForbid = function(array $list) use ($forbidTags): array {
-    if (empty($forbidTags)) return $list;
-    $out = [];
+    $ranked = [];
+
     foreach ($list as $it) {
         if (!is_array($it)) continue;
+
+        $id = (string)($it['id'] ?? '');
+        if ($id === '') continue;
+
         $tags = is_array($it['tags'] ?? null) ? $it['tags'] : [];
-        $hit = false;
-        foreach ($forbidTags as $t) {
-            if (is_string($t) && $t !== '' && in_array($t, $tags, true)) { $hit = true; break; }
+        $tags = array_values(array_filter($tags, fn($x)=>is_string($x)&&trim($x)!==''));
+
+        $item = [
+            'id'       => $id,
+            'priority' => (int)($it['priority'] ?? 0),
+            'tags'     => $tags,
+            'rules'    => is_array($it['rules'] ?? null) ? $it['rules'] : [], // 允许 items 自带 rules（没有就空）
+            '_raw'     => $it, // 保留原对象
+        ];
+
+        // ✅ 让 RuleEngine 评估（要求你的 RuleEngine 已提供 evaluate() / 或等价公开方法）
+        $ev = $re->evaluate($item, $userTagsSet, [
+            'ctx'          => $ctx,
+            'seed'         => $seed,
+            'bucket'       => $bucketName,
+            'global_rules' => $globalRules,
+            'debug'        => $debugRE,
+        ]);
+
+        if (!($ev['ok'] ?? false)) {
+            if ($debugRE && count($reRejectedSamples) < 8) {
+                $reRejectedSamples[] = [
+                    'id'       => $id,
+                    'reason'   => $ev['reason'] ?? 'rejected',
+                    'detail'   => $ev['detail'] ?? null,
+                    'hit'      => (int)($ev['hit'] ?? 0),
+                    'priority' => (int)($ev['priority'] ?? $item['priority']),
+                    'min_match'=> (int)($ev['min_match'] ?? 0),
+                    'score'    => (int)($ev['score'] ?? 0),
+                ];
+            }
+            continue;
         }
-        if ($hit) continue; // ✅ forbid：直接排除
-        $out[] = $it;
+
+        // 把 RE 结果挂回原 item，供后续 quota/dedupe 选择时使用
+        $raw = $item['_raw'];
+        $raw['_re'] = [
+            'hit'       => (int)($ev['hit'] ?? 0),
+            'priority'  => (int)($ev['priority'] ?? $item['priority']),
+            'min_match' => (int)($ev['min_match'] ?? 0),
+            'score'     => (int)($ev['score'] ?? 0),
+            'shuffle'   => (int)($ev['shuffle'] ?? 0),
+        ];
+        $ranked[] = $raw;
     }
-    return $out;
+
+    usort($ranked, function ($a, $b) {
+        $sa = (int)(($a['_re']['score'] ?? 0));
+        $sb = (int)(($b['_re']['score'] ?? 0));
+        if ($sa !== $sb) return $sb <=> $sa;
+
+        $sha = (int)(($a['_re']['shuffle'] ?? 0));
+        $shb = (int)(($b['_re']['shuffle'] ?? 0));
+        if ($sha !== $shb) return $sha <=> $shb;
+
+        return strcmp((string)($a['id'] ?? ''), (string)($b['id'] ?? ''));
+    });
+
+    return $ranked;
 };
 
 foreach ($bucketLists as $k => &$list) {
-    $list = $filterForbid($list);   // ✅ 先过滤
-    $sortByPriorityDesc($list);     // 再排序
+    $list = $rankBucket((string)$k, is_array($list) ? $list : []);
 }
 unset($list);
-
-    foreach ($bucketLists as $k => &$list) {
-        $sortByPriorityDesc($list);
-    }
-    unset($list);
 
     // ----------------------------
     // 5) dedupe state + helpers
@@ -2203,8 +2320,20 @@ unset($list);
             }
 
             $markSeen($it);
-            $out[] = $normalize($it);
-            $taken++;
+
+// ✅ 记录 explain（最终只对“真正被选中”的条目输出）
+if (is_array($it['_re'] ?? null)) {
+    $reSelectedExplain[] = [
+        'id'        => (string)($it['id'] ?? ''),
+        'hit'       => (int)($it['_re']['hit'] ?? 0),
+        'priority'  => (int)($it['_re']['priority'] ?? 0),
+        'min_match' => (int)($it['_re']['min_match'] ?? 0),
+        'score'     => (int)($it['_re']['score'] ?? 0),
+    ];
+}
+
+$out[] = $normalize($it);
+$taken++;
 
             if ($debugReads) $debug['buckets'][$bucketName]['taken']++;
         }
@@ -2263,8 +2392,20 @@ unset($list);
                 }
 
                 $markSeen($it);
-                $out[] = $normalize($it);
-                $need--;
+
+// ✅ 记录 explain（最终只对“真正被选中”的条目输出）
+if (is_array($it['_re'] ?? null)) {
+    $reSelectedExplain[] = [
+        'id'        => (string)($it['id'] ?? ''),
+        'hit'       => (int)($it['_re']['hit'] ?? 0),
+        'priority'  => (int)($it['_re']['priority'] ?? 0),
+        'min_match' => (int)($it['_re']['min_match'] ?? 0),
+        'score'     => (int)($it['_re']['score'] ?? 0),
+    ];
+}
+
+$out[] = $normalize($it);
+$taken++;
 
                 if ($debugReads) $debug['min_items_fill']['taken']++;
             }
@@ -2283,6 +2424,12 @@ unset($list);
         ];
         Log::debug('[recommended_reads] build', $debug);
     }
+
+// ✅ 统一 [RE] explain：reads
+$re->explain($ctx, $reSelectedExplain, $reRejectedSamples, [
+    'debug' => $debugRE,
+    'seed'  => $seed,
+]);
 
     return $out;
 }
@@ -3353,5 +3500,103 @@ private function normalizeContentPackageDir(string $pkgOrVersion): string
 
     // 兜底：当作目录名
     return $s;
+}
+
+private function mergeNonNullRecursive(array $base, array $override): array
+{
+    foreach ($override as $k => $v) {
+        if ($v === null) continue; // ✅ 关键：不允许 null 覆盖
+
+        if (is_array($v) && is_array($base[$k] ?? null)) {
+            $base[$k] = $this->mergeNonNullRecursive($base[$k], $v);
+        } else {
+            $base[$k] = $v;
+        }
+    }
+    return $base;
+}
+
+private function finalizeHighlightsSchema(array $highlights, string $typeCode): array
+{
+    $out = [];
+
+    foreach ($highlights as $h) {
+        if (!is_array($h)) continue;
+
+        // kind：优先字段，其次 tags(kind:xxx)，最后按 id 前缀兜底
+        $kind = is_string($h['kind'] ?? null) ? trim($h['kind']) : '';
+        if ($kind === '') {
+            $tags = is_array($h['tags'] ?? null) ? $h['tags'] : [];
+            foreach ($tags as $t) {
+                if (is_string($t) && str_starts_with($t, 'kind:')) {
+                    $kind = trim(substr($t, 5));
+                    break;
+                }
+            }
+        }
+        if ($kind === '') {
+            $id0 = (string)($h['id'] ?? '');
+            if (str_starts_with($id0, 'hl.action')) $kind = 'action';
+            elseif (str_starts_with($id0, 'hl.blindspot')) $kind = 'blindspot';
+            else $kind = 'axis';
+        }
+        $h['kind'] = $kind;
+
+        // id
+        $id = is_string($h['id'] ?? null) ? trim($h['id']) : '';
+        if ($id === '') $id = 'hl.generated.' . (string) \Illuminate\Support\Str::uuid();
+        $h['id'] = $id;
+
+        // title
+        $title = is_string($h['title'] ?? null) ? trim($h['title']) : '';
+        if ($title === '') {
+            $title = match ($kind) {
+                'blindspot' => '盲点提醒',
+                'action'    => '行动建议',
+                'strength'  => '你的优势',
+                'risk'      => '风险提醒',
+                default     => '要点',
+            };
+        }
+        $h['title'] = $title;
+
+        // text：优先 text，其次 desc，最后给一个兜底句（确保 length>0）
+        $text = is_string($h['text'] ?? null) ? trim($h['text']) : '';
+        if ($text === '') {
+            $desc = is_string($h['desc'] ?? null) ? trim($h['desc']) : '';
+            $text = $desc !== '' ? $desc : '这一条是系统生成的重点提示，可作为自我观察的参考。';
+        }
+        $h['text'] = $text;
+
+        // tips/tags：必须 array 且 length>=1
+        $tips = is_array($h['tips'] ?? null) ? $h['tips'] : [];
+        $tags = is_array($h['tags'] ?? null) ? $h['tags'] : [];
+
+        $tips = array_values(array_filter($tips, fn($x) => is_string($x) && trim($x) !== ''));
+        $tags = array_values(array_filter($tags, fn($x) => is_string($x) && trim($x) !== ''));
+
+        if (count($tips) < 1) {
+            $tips = match ($kind) {
+                'action'    => ['把目标写成 1 句话，再拆成 3 个可交付节点'],
+                'blindspot' => ['重要场景先做一次“反向校验”再决定'],
+                default     => ['先做一小步，再迭代优化'],
+            };
+        }
+        if (count($tags) < 1) {
+            $tags = ['generated', "kind:{$kind}", "type:{$typeCode}"];
+        } else {
+            // 确保 kind 标签存在（你后续也用它排序）
+            $hasKindTag = false;
+            foreach ($tags as $t) if (str_starts_with($t, 'kind:')) { $hasKindTag = true; break; }
+            if (!$hasKindTag) $tags[] = "kind:{$kind}";
+        }
+
+        $h['tips'] = $tips;
+        $h['tags'] = $tags;
+
+        $out[] = $h;
+    }
+
+    return $out;
 }
 }
