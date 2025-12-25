@@ -218,31 +218,76 @@ class ReportOverridesApplier
      * Apply rules to a list with context.
      */
     private function applyRulesToList(array $items, array $rules, array $context): array
-    {
-        $debug = (bool)(($context['ctx']['overrides_debug'] ?? false));
+{
+    $debugPerRule = (bool)(($context['ctx']['overrides_debug'] ?? false));
 
-        $list = $items;
-        foreach ($rules as $rule) {
-            if (!is_array($rule)) continue;
-            if (!$this->ruleMatchesContext($rule, $context)) continue;
+    $list = $items;
 
-            $beforeCount = count($list);
-            $list = $this->applyRuleToList($list, $rule, $context);
+    // ✅ 收集本次 target 实际改动/命中的 ids
+    $appliedIds = [];
 
-            if ($debug) {
-                Log::info('[OVR] rule_applied', [
-                    'id' => $rule['id'] ?? null,
-                    'target' => $context['target'] ?? null,
-                    'mode' => $rule['mode'] ?? null,
-                    'before' => $beforeCount,
-                    'after' => count($list),
-                ]);
+    foreach ($rules as $rule) {
+        if (!is_array($rule)) continue;
+        if (!$this->ruleMatchesContext($rule, $context)) continue;
+
+        $mode = (string)($rule['mode'] ?? 'patch');
+        $selector = $rule['selector'] ?? null;
+
+        // ✅ 先算 matches（后面用于收集 ids + 执行）
+        $matches = $this->selectIndexes($list, $selector);
+
+        // ✅ 收集“这条 rule 影响到谁”
+        if (!empty($matches)) {
+            foreach ($matches as $idx) {
+                $it = $list[$idx] ?? null;
+                if (is_array($it)) {
+                    $id = $it['id'] ?? null;
+                    if (is_string($id) && $id !== '') $appliedIds[] = $id;
+                }
+            }
+        } else {
+            // upsert/append/prepend 这种可能是“新增项”，也收一下新增 items 的 id
+            if (in_array($mode, ['append','prepend'], true) || $mode === 'upsert') {
+                $newItems = $this->ruleItems($rule, $context) ?? [];
+                foreach ($newItems as $x) {
+                    if (!is_array($x)) continue;
+                    $id = $x['id'] ?? null;
+                    if (is_string($id) && $id !== '') $appliedIds[] = $id;
+                }
             }
         }
 
-        // keep stable numeric indexes
-        return array_values($list);
+        $beforeCount = count($list);
+
+        // ✅ 用 matches 执行（下面第 3 步会改 applyRuleToList 的签名）
+        $list = $this->applyRuleToList($list, $matches, $rule, $context);
+
+        if ($debugPerRule) {
+            Log::info('[OVR] rule_applied', [
+                'id' => $rule['id'] ?? null,
+                'target' => $context['target'] ?? null,
+                'mode' => $mode,
+                'before' => $beforeCount,
+                'after' => count($list),
+            ]);
+        }
     }
+
+    // ✅ 统一 applied 日志：不需要 overrides_debug，只要 RE_EXPLAIN=1 即可看到
+    $appliedIds = array_values(array_unique(array_filter($appliedIds, fn($x)=>is_string($x) && $x !== '')));
+
+    if (!empty($appliedIds) && $this->shouldExplain((array)($context['ctx'] ?? []))) {
+        Log::info('[OVR] applied', [
+            'target' => (string)($context['target'] ?? ''),
+            'section_key' => $context['section_key'] ?? null,
+            'type_code' => (string)($context['type_code'] ?? ''),
+            'count' => count($appliedIds),
+            'ids' => $appliedIds,
+        ]);
+    }
+
+    return array_values($list);
+}
 
     /**
      * Match rule against context.
@@ -305,12 +350,8 @@ class ReportOverridesApplier
      * - append/prepend: add rule.items to end/start
      * - upsert: if matched -> patch, else -> append
      */
-    private function applyRuleToList(array $list, array $rule, array $context): array
-    {
+private function applyRuleToList(array $list, array $matches, array $rule, array $context): array    {
         $mode = (string)($rule['mode'] ?? 'patch');
-        $selector = $rule['selector'] ?? null;
-
-        $matches = $this->selectIndexes($list, $selector);
 
         return match ($mode) {
             'append'  => $this->modeAppend($list, $rule, $context),
@@ -654,4 +695,19 @@ class ReportOverridesApplier
             $cur =& $cur[$p];
         }
     }
+
+    private function shouldExplain(array $ctx = []): bool
+{
+    if (!app()->environment('local')) return false;
+
+    if ((bool)($ctx['overrides_debug'] ?? false)) return true;
+
+    // ✅ 你现在验证时已经在用 RE_EXPLAIN=1，就复用它
+    if ((bool) env('RE_EXPLAIN', false)) return true;
+
+    // 也允许单独开关
+    if ((bool) env('OVR_EXPLAIN', false)) return true;
+
+    return false;
+}
 }
