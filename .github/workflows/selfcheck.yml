@@ -1,8 +1,8 @@
 name: selfcheck
 
 on:
-  push:
   pull_request:
+  push:
 
 jobs:
   selfcheck:
@@ -21,5 +21,5 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Run selfcheck (default manifest)
-  working-directory: backend
-  run: composer selfcheck
+        working-directory: backend
+        run: composer selfcheck
