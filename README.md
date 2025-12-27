@@ -136,3 +136,4 @@ fap-api/
     mbti-v0.2-event-mapping.md     # A3 事件词典 → events 表/日志字段映射
     D1-mapping-from-events.md      # D1 KPI 从 events/表 的计算口径
     weekly-ritual.md               # 每周固定复盘流程模板# test
+# direct push test
