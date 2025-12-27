@@ -73,40 +73,46 @@ if (trim((string)($base['subtitle'] ?? '')) === '') {
         return $base;
     }
 
-    private function buildMicroLine(array $scoresPct, ?array $borderlineNote): ?string
-    {
-        // 1) 优先：borderline_note 命中（取第一条）
-        if (is_array($borderlineNote) && is_array($borderlineNote['items'] ?? null) && count($borderlineNote['items']) > 0) {
-            $it = $borderlineNote['items'][0];
-            // 兼容不同结构：text / title / dim
-            $txt = is_array($it) ? (string)($it['text'] ?? $it['title'] ?? '') : '';
-            if ($txt !== '') {
-                return "边界提示：{$txt}";
-            }
+private function buildMicroLine(array $scoresPct, ?array $borderlineNote): ?string
+{
+    // 1) 优先：borderline_note 命中（取“第一个 item”，兼容 list / map 两种结构）
+    $itemsRaw = (is_array($borderlineNote) && is_array($borderlineNote['items'] ?? null))
+        ? $borderlineNote['items']
+        : null;
+
+    if (is_array($itemsRaw) && count($itemsRaw) > 0) {
+        // ✅ 关键：map -> list，保证 [0] 一定存在
+        $items = array_values($itemsRaw);
+        $it = $items[0] ?? null;
+
+        // 兼容不同结构：text / title
+        $txt = is_array($it) ? (string)($it['text'] ?? $it['title'] ?? '') : '';
+        if ($txt !== '') {
+            return "边界提示：{$txt}";
         }
-
-        // 2) 否则：按 AT 强弱加一句
-        $at = $scoresPct['AT'] ?? null;
-        $side = $this->pickSide($at);     // A / T
-        $pct  = $this->pickPct($at);      // 50..100
-        $delta = $this->pickDelta($at);   // 0..50
-
-        if ($side && $pct !== null) {
-            // 强阈值：可按你引擎的 clear/strong/very_strong 再调
-            if ($delta !== null && $delta >= 20) {
-                return $side === 'A'
-                    ? "压力姿态：更偏 A（{$pct}%）——更稳、更敢拍板。"
-                    : "压力姿态：更偏 T（{$pct}%）——更敏感、更会自省与校准。";
-            }
-
-            // 中等强度也给一句更“轻”的
-            return $side === 'A'
-                ? "压力姿态：略偏 A（{$pct}%）——倾向先稳住再推进。"
-                : "压力姿态：略偏 T（{$pct}%）——倾向边走边校准。";
-        }
-
-        return null;
     }
+
+    // 2) 否则：按 AT 强弱加一句
+    $at = $scoresPct['AT'] ?? null;
+    $side  = $this->pickSide($at);     // A / T
+    $pct   = $this->pickPct($at);      // 50..100
+    $delta = $this->pickDelta($at);    // 0..50
+
+    if ($side && $pct !== null) {
+        // 强阈值：可按你引擎的 clear/strong/very_strong 再调
+        if ($delta >= 20) {
+            return $side === 'A'
+                ? "你更偏 A：更稳、更抗压。"
+                : "你更偏 T：更敏感、更易受情境影响。";
+        }
+
+        return $side === 'A'
+            ? "略偏 A：整体更稳定。"
+            : "略偏 T：倾向边走边校准。";
+    }
+
+    return null;
+}
 
     // ===== tolerant extractors (兼容你现在的 scoresPct 结构) =====
 

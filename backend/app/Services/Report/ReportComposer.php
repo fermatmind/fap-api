@@ -15,6 +15,7 @@ use App\Services\Report\HighlightBuilder;
 use App\Services\Overrides\ReportOverridesApplier;
 
 use App\Services\Content\ContentPackResolver;
+use App\Services\Content\ContentPack;
 
 use App\Domain\Score\AxisScore;
 
@@ -25,7 +26,8 @@ class ReportComposer
         private SectionCardGenerator $cardGen,
         private HighlightsOverridesApplier $overridesApplier,
         private IdentityLayerBuilder $identityLayerBuilder,
-        private ReportOverridesApplier $reportOverridesApplier
+        private ReportOverridesApplier $reportOverridesApplier,
+        private ContentPackResolver $resolver, // ✅ 改为 DI：不再 ContentPackResolver::make()
     ) {}
 
     public function compose(string $attemptId, array $ctx): array
@@ -67,27 +69,18 @@ class ReportComposer
                 ? ($ctx['currentContentPackageVersion'])()
                 : null);
 
-        $requestedVersion = null;
-        if (is_string($requested) && $requested !== '') {
-            if (str_starts_with($requested, 'MBTI-CN-')) {
-                $requestedVersion = substr($requested, strlen('MBTI-CN-')); // v0.2.1-TEST
-            } elseif (substr_count($requested, '.') >= 3) {
-                $parts = explode('.', $requested);
-                $requestedVersion = implode('.', array_slice($parts, 3));   // v0.2.1-TEST
-            } else {
-                $requestedVersion = $requested;
-            }
-        }
+        $requestedVersion = $this->normalizeRequestedVersion($requested);
 
-        $resolver = ContentPackResolver::make();
-        $chain    = $resolver->resolveWithFallbackChain($scaleCode, $region, $locale, $requestedVersion);
-        $pack     = $chain[0];
+        // ✅ 新体系：resolver + fallback chain
+        $chain = $this->resolver->resolveWithFallbackChain($scaleCode, $region, $locale, $requestedVersion);
+        /** @var ContentPack $pack */
+        $pack = $chain[0];
 
-        // ✅ 新体系：真正的版本号
-        $contentPackageVersion = (string)$pack->version; // e.g. v0.2.1-TEST
+        $contentPackageVersion = (string)$pack->version(); // e.g. v0.2.1-TEST
+        $contentPackId         = (string)$pack->packId();
 
-        // ✅ 旧 loader 兼容：旧目录名（你已做 symlink）
-        $contentPackageDir = 'MBTI-CN-' . $contentPackageVersion; // e.g. MBTI-CN-v0.2.1-TEST
+        // ✅ 旧 loader 兼容：旧目录名（你已做 symlink/兼容层）
+        $contentPackageDir = 'MBTI-CN-' . $contentPackageVersion;
 
         $typeCode = (string)($result->type_code ?? '');
 
@@ -111,35 +104,20 @@ class ReportComposer
             }
         }
 
-        // =========================
-        // 3) Load Profile / IdentityCard（通过 ctx 注入 loader）
-        // =========================
-        $loadTypeProfile = $ctx['loadTypeProfile'] ?? null;
-        $loadAssetItems  = $ctx['loadReportAssetItems'] ?? null;
-
-        $profile = is_callable($loadTypeProfile)
-            ? (array)$loadTypeProfile($contentPackageDir, $typeCode)
-            : [];
-
-        $identityItems = is_callable($loadAssetItems)
-            ? (array)$loadAssetItems($contentPackageDir, 'report_identity_cards.json', 'type_code')
-            : [];
-
-        $identityCard = is_array($identityItems[$typeCode] ?? null) ? $identityItems[$typeCode] : null;
-
         // scores（稳定结构：pct/state/side/delta）
         $scores = $this->buildScoresValueObject($scoresPct, $dims);
 
         // =========================
+        // 3) Load Profile / IdentityCard（保留 ctx 注入 loader 兜底）
+        // =========================
+        $profile = $this->loadTypeProfileFromPackChain($chain, $typeCode, $ctx, $contentPackageDir);
+$identityCard = $this->loadIdentityCardFromPackChain($chain, $typeCode, $ctx, $contentPackageDir);
+
+        // =========================
         // 4) role/strategy（必须先算出来）
         // =========================
-        $roleCard = is_callable($ctx['buildRoleCard'] ?? null)
-            ? (array)($ctx['buildRoleCard'])($contentPackageDir, $typeCode)
-            : [];
-
-        $strategyCard = is_callable($ctx['buildStrategyCard'] ?? null)
-            ? (array)($ctx['buildStrategyCard'])($contentPackageDir, $typeCode)
-            : [];
+        $roleCard = $this->loadRoleCardFromPackChain($chain, $typeCode, $ctx, $contentPackageDir);
+$strategyCard = $this->loadStrategyCardFromPackChain($chain, $typeCode, $ctx, $contentPackageDir);
 
         // =========================
         // 5) Build Tags（依赖 role/strategy）
@@ -156,22 +134,24 @@ class ReportComposer
             'profile'     => ['type_code' => $typeCode],
             'scores_pct'  => $scoresPct,
             'axis_states' => $axisStates,
-            'tags'        => $tags, // ✅ 关键：让 highlights 的 RuleEngine 有 userSet 可命中
+            'tags'        => $tags,
         ];
 
-        $hlTemplatesDoc = $this->loadHighlightsTemplatesDoc(
-            $scaleCode,
-            $region,
-            $locale,
-            $contentPackageVersion,
-            $contentPackageDir,
-            $ctx
+        // ✅ 不再拼路径：从 pack.assets(highlights) 在 chain 里找 report_highlights_templates.json
+        $hlTemplatesDoc = $this->loadJsonDocFromPackChain(
+            $chain,
+            'highlights',
+            'report_highlights_templates.json',
+            $ctx,
+            $contentPackageDir
         );
 
         $builder = new HighlightBuilder();
         $baseHighlights = $builder->buildFromTemplatesDoc($reportForHL, $hlTemplatesDoc, 3, 10);
 
         Log::info('[HL] base_highlights', [
+            'pack_id' => $contentPackId,
+            'version' => $contentPackageVersion,
             'count' => count($baseHighlights),
             'ids'   => array_slice(array_map(fn($x) => $x['id'] ?? null, $baseHighlights), 0, 10),
         ]);
@@ -179,13 +159,16 @@ class ReportComposer
         // =========================
         // 7) borderline_note（给 identity micro 用）
         // =========================
-        $borderlineNote = is_callable($ctx['buildBorderlineNote'] ?? null)
-            ? (array)($ctx['buildBorderlineNote'])($scoresPct, $contentPackageDir)
-            : ['items' => []];
+        $borderlineNote = $this->loadBorderlineNoteFromPackChain(
+    $chain,
+    $scoresPct,
+    $ctx,
+    $contentPackageDir
+);
 
-        if (!is_array($borderlineNote['items'] ?? null)) {
-            $borderlineNote['items'] = [];
-        }
+if (!is_array($borderlineNote['items'] ?? null)) {
+    $borderlineNote['items'] = [];
+}
 
         // =========================
         // 8) Build layers.identity
@@ -202,52 +185,66 @@ class ReportComposer
         // =========================
         $sections = [
             'traits' => [
-                'cards' => $this->cardGen->generate('traits', $contentPackageDir, $tags, $scores),
+                'cards' => $this->cardGen->generateFromPackChain('traits', $chain, $tags, $scores, $contentPackageDir),
             ],
             'career' => [
-                'cards' => $this->cardGen->generate('career', $contentPackageDir, $tags, $scores),
+                'cards' => $this->cardGen->generateFromPackChain('career', $chain, $tags, $scores, $contentPackageDir),
             ],
             'growth' => [
-                'cards' => $this->cardGen->generate('growth', $contentPackageDir, $tags, $scores),
+                'cards' => $this->cardGen->generateFromPackChain('growth', $chain, $tags, $scores, $contentPackageDir),
             ],
             'relationships' => [
-                'cards' => $this->cardGen->generate('relationships', $contentPackageDir, $tags, $scores),
+                'cards' => $this->cardGen->generateFromPackChain('relationships', $chain, $tags, $scores, $contentPackageDir),
             ],
         ];
 
         // =========================
         // 10) recommended_reads（放最后）
         // =========================
-        $recommendedReads = is_callable($ctx['buildRecommendedReads'] ?? null)
-            ? (array)($ctx['buildRecommendedReads'])($contentPackageDir, $typeCode, $scoresPct)
-            : [];
+        $readsDoc = $this->loadJsonDocFromPackChain(
+    $chain,
+    'reads',
+    'report_recommended_reads.json',
+    $ctx,
+    $contentPackageDir
+);
+
+$recommendedReads = $this->buildRecommendedReadsFromDoc(
+    $readsDoc,
+    $typeCode,
+    $scoresPct,
+    $roleCard,
+    $strategyCard
+);
 
         // =========================
         // 10.5) load unified overrides doc
         // =========================
-        $overridesDoc = $this->loadReportOverridesDoc(
-            $scaleCode,
-            $region,
-            $locale,
-            $contentPackageVersion,
-            $contentPackageDir,
-            $ctx
-        );
+        // ✅ 不再拼路径：从 pack.assets(overrides) 在 chain 里找 report_overrides.json
+        // ✅ 按 manifest.assets.overrides 的 order 定死顺序加载（支持多文件）
+// 并给每条 override 注入 __src（pack_id/file/idx），用于 rule_applied 可追溯
+$overridesDocs = $this->loadOverridesDocsFromPackChain($chain, $ctx, $contentPackageDir);
+// 合并成一个 doc（overrides 顺序 = docs 顺序；每条 rule 自带 __src，不丢来源）
+$overridesDoc = $this->mergeOverridesDocs($overridesDocs);
+$overridesOrderBuckets = $this->getOverridesOrderBucketsFromPackChain($chain);
 
         // =========================
         // 11) ✅ Overrides 统一入口
         // =========================
         [$highlights, $sections, $recommendedReads] = $this->applyOverridesUnified(
-            $contentPackageDir,
-            $typeCode,
-            $tags,
-            $baseHighlights,
-            $sections,
-            $recommendedReads,
-            $overridesDoc
-        );
+    $contentPackageDir,
+    $typeCode,
+    $tags,
+    $baseHighlights,
+    $sections,
+    $recommendedReads,
+    $overridesDoc,
+    $overridesOrderBuckets
+);
 
         Log::info('[HL] final_highlights', [
+            'pack_id' => $contentPackId,
+            'version' => $contentPackageVersion,
             'count' => count($highlights),
             'ids'   => array_slice(array_map(fn($x) => $x['id'] ?? null, $highlights), 0, 10),
         ]);
@@ -260,7 +257,7 @@ class ReportComposer
                 'engine'                  => 'v1.2',
                 'profile_version'         => $profileVersion,
                 'content_package_version' => $contentPackageVersion,
-                'content_pack_id'         => $pack->packId,
+                'content_pack_id'         => $contentPackId,
                 'content_package_dir'     => $contentPackageDir,
             ],
 
@@ -304,37 +301,165 @@ class ReportComposer
         ];
     }
 
+    private function normalizeRequestedVersion($requested): ?string
+    {
+        if (!is_string($requested) || $requested === '') return null;
+
+        if (str_starts_with($requested, 'MBTI-CN-')) {
+            return substr($requested, strlen('MBTI-CN-')); // v0.2.1-TEST
+        }
+
+        // pack_id like MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+        if (substr_count($requested, '.') >= 3) {
+            $parts = explode('.', $requested);
+            return implode('.', array_slice($parts, 3));   // v0.2.1-TEST
+        }
+
+        return $requested;
+    }
+
     /**
-     * ✅ Overrides 统一入口
-     * 返回：[$highlights, $sections, $recommendedReads]
+     * ✅ 从 pack chain 里按 manifest.assets 声明的文件列表加载指定 basename 的 JSON
+     * - assetKey: highlights / overrides / cards / reads / identity ...
+     * - wantedBasename: 例如 report_highlights_templates.json / report_overrides.json
+     * - 找不到：fallback 到 ctx['loadReportAssetJson']（保持你旧逻辑可用）
      */
-    private function applyOverridesUnified(
+    private function loadJsonDocFromPackChain(
+        array $chain,
+        string $assetKey,
+        string $wantedBasename,
+        array $ctx,
+        string $legacyContentPackageDir
+    ): ?array {
+        foreach ($chain as $p) {
+            if (!$p instanceof ContentPack) continue;
+
+            $paths = $this->flattenAssetPaths($p->assets()[$assetKey] ?? null);
+
+            foreach ($paths as $rel) {
+                if (!is_string($rel) || trim($rel) === '') continue;
+                if (basename($rel) !== $wantedBasename) continue;
+
+                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
+                if (!is_file($abs)) continue;
+
+                $json = json_decode((string)file_get_contents($abs), true);
+                if (is_array($json)) {
+                    Log::info('[PACK] json_loaded', [
+                        'asset' => $assetKey,
+                        'file'  => $wantedBasename,
+                        'pack_id' => $p->packId(),
+                        'version' => $p->version(),
+                        'path' => $abs,
+                        'schema' => $json['schema'] ?? null,
+                    ]);
+                    return $json;
+                }
+            }
+        }
+
+        // fallback: ctx loader（旧兼容）
+        if (is_callable($ctx['loadReportAssetJson'] ?? null)) {
+            $raw = ($ctx['loadReportAssetJson'])($legacyContentPackageDir, $wantedBasename);
+
+            if (is_object($raw)) $raw = json_decode(json_encode($raw, JSON_UNESCAPED_UNICODE), true);
+            if (is_array($raw)) {
+                $doc = $raw['doc'] ?? $raw['data'] ?? $raw;
+                if (is_object($doc)) {
+                    $doc = json_decode(json_encode($doc, JSON_UNESCAPED_UNICODE), true);
+                }
+                if (is_array($doc)) return $doc;
+            }
+        }
+
+        Log::warning('[PACK] json_not_found', [
+            'asset' => $assetKey,
+            'file' => $wantedBasename,
+            'legacy_dir' => $legacyContentPackageDir,
+        ]);
+
+        return null;
+    }
+
+    /**
+     * 把 manifest.assets[xxx] 可能出现的几种结构统一 flatten 成 “相对路径 list”
+     * - 常见：["a.json","b.json"]
+     * - overrides：{"order":[...], "unified":[...], "highlights_legacy":[...]}
+     */
+    private function flattenAssetPaths($assetVal): array
+    {
+        if (!is_array($assetVal)) return [];
+
+        // list
+        if ($this->isListArray($assetVal)) {
+            return array_values(array_filter($assetVal, fn($x) => is_string($x) && trim($x) !== ''));
+        }
+
+        // map (e.g. overrides)
+        $out = [];
+        foreach ($assetVal as $k => $v) {
+            if ($k === 'order') continue;
+            $list = is_array($v) ? $v : [$v];
+            foreach ($list as $x) {
+                if (is_string($x) && trim($x) !== '') $out[] = $x;
+            }
+        }
+        return array_values(array_unique($out));
+    }
+
+    private function isListArray(array $a): bool
+    {
+        if ($a === []) return true;
+        return array_keys($a) === range(0, count($a) - 1);
+    }
+
+    /**
+ * ✅ Overrides 统一入口（Step3）
+ * - highlights: legacy/unified 的执行顺序由 manifest.assets.overrides.order 决定
+ * - cards/reads: 只有 unified 生效（legacy 只影响 highlights）
+ */
+private function applyOverridesUnified(
     string $contentPackageDir,
     string $typeCode,
     array $tags,
     array $baseHighlights,
     array $sections,
     array $recommendedReads,
-    ?array $overridesDoc
+    ?array $overridesDoc,
+    array $overridesOrderBuckets
 ): array {
-    // 1) 先跑旧 highlights overrides（兼容旧逻辑）
-    $highlights = $this->overridesApplier->apply($contentPackageDir, $typeCode, $baseHighlights);
-
-    // 2) 用统一 overrides（把已加载的 doc 直接塞给 applier，避免路径/变量问题）
+    // 统一 overrides：把已加载的 doc 直接塞给 applier
     $ovrCtx = [
-        'report_overrides_doc' => $overridesDoc, // ✅ 关键：直接用你 loadReportOverridesDoc 读到的
-        'overrides_debug' => true,
-    ];
+    'report_overrides_doc' => $overridesDoc,
 
-    // highlights
-    $highlights = $this->reportOverridesApplier->applyHighlights(
-        $contentPackageDir,
-        $typeCode,
-        $highlights,
-        $ovrCtx
-    );
+    // ✅ 默认关闭；需要时才打开
+    // 用法：FAP_OVR_DEBUG=1 php artisan ...
+    'overrides_debug' => (bool) env('FAP_OVR_DEBUG', false),
+];
 
-    // cards（逐 section）
+    // 1) highlights pipeline：严格按 manifest order
+    $highlights = $baseHighlights;
+
+    foreach ($overridesOrderBuckets as $bucket) {
+        if ($bucket === 'highlights_legacy') {
+            // legacy highlights overrides
+            $highlights = $this->overridesApplier->apply($contentPackageDir, $typeCode, $highlights);
+            continue;
+        }
+        if ($bucket === 'unified') {
+            // unified overrides (highlights target)
+            $highlights = $this->reportOverridesApplier->applyHighlights(
+                $contentPackageDir,
+                $typeCode,
+                $highlights,
+                $ovrCtx
+            );
+            continue;
+        }
+        // 其他 bucket 暂不处理（但 file_loaded 仍会被审计）
+    }
+
+    // 2) cards（逐 section）只跑 unified
     foreach ($sections as $sectionKey => &$sec) {
         $cards = is_array($sec['cards'] ?? null) ? $sec['cards'] : [];
         $sec['cards'] = $this->reportOverridesApplier->applyCards(
@@ -347,7 +472,7 @@ class ReportComposer
     }
     unset($sec);
 
-    // reads
+    // 3) reads 只跑 unified
     $recommendedReads = $this->reportOverridesApplier->applyReads(
         $contentPackageDir,
         $typeCode,
@@ -357,115 +482,6 @@ class ReportComposer
 
     return [$highlights, $sections, $recommendedReads];
 }
-
-    /**
-     * 读取 report_highlights_templates.json（新体系优先 + 旧体系兜底 + ctx loader 兜底）
-     */
-    private function loadHighlightsTemplatesDoc(
-        string $scaleCode,
-        string $region,
-        string $locale,
-        string $contentPackageVersion,
-        string $contentPackageDir,
-        array $ctx
-    ): ?array {
-        $tplNewRel = 'content_packages/' . $scaleCode . '/' . $region . '/' . $locale . '/' . $contentPackageVersion . '/report_highlights_templates.json';
-        $tplOldRel = rtrim($contentPackageDir, '/') . '/report_highlights_templates.json';
-
-        $repoRoot = realpath(base_path('..')) ?: dirname(base_path());
-
-        $candidates = [
-            base_path('../' . $tplNewRel),
-            $repoRoot . '/' . ltrim($tplNewRel, '/'),
-            $tplOldRel,
-            base_path($tplOldRel),
-            base_path('../' . $tplOldRel),
-        ];
-
-        foreach ($candidates as $path) {
-            if (!is_file($path)) continue;
-            $json = json_decode((string)file_get_contents($path), true);
-            if (is_array($json)) {
-                Log::info('[HL] templates_loaded', [
-                    'path' => $path,
-                    'schema' => $json['schema'] ?? null,
-                    'rules_keys' => array_keys($json['rules'] ?? []),
-                    'templates_keys' => array_keys($json['templates'] ?? []),
-                ]);
-                return $json;
-            }
-        }
-
-        // fallback: ctx loader（可选保留）
-        if (is_callable($ctx['loadReportAssetJson'] ?? null)) {
-            $raw = ($ctx['loadReportAssetJson'])($contentPackageDir, 'report_highlights_templates.json');
-
-            if (is_object($raw)) $raw = json_decode(json_encode($raw, JSON_UNESCAPED_UNICODE), true);
-            if (is_array($raw)) {
-                $doc = $raw['doc'] ?? $raw['data'] ?? $raw;
-                if (is_object($doc)) {
-                    $doc = json_decode(json_encode($doc, JSON_UNESCAPED_UNICODE), true);
-                }
-                if (is_array($doc)) return $doc;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * 读取 report_overrides.json（新体系优先 + 旧体系兜底 + ctx loader 兜底）
-     */
-    private function loadReportOverridesDoc(
-        string $scaleCode,
-        string $region,
-        string $locale,
-        string $contentPackageVersion,
-        string $contentPackageDir,
-        array $ctx
-    ): ?array {
-        $ovrNewRel = 'content_packages/' . $scaleCode . '/' . $region . '/' . $locale . '/' . $contentPackageVersion . '/report_overrides.json';
-        $ovrOldRel = rtrim($contentPackageDir, '/') . '/report_overrides.json';
-
-        $repoRoot = realpath(base_path('..')) ?: dirname(base_path());
-
-        $candidates = [
-            base_path('../' . $ovrNewRel),
-            $repoRoot . '/' . ltrim($ovrNewRel, '/'),
-            $ovrOldRel,
-            base_path($ovrOldRel),
-            base_path('../' . $ovrOldRel),
-        ];
-
-        foreach ($candidates as $path) {
-            if (!is_file($path)) continue;
-            $json = json_decode((string)file_get_contents($path), true);
-            if (is_array($json)) {
-                Log::info('[OVR] overrides_loaded', [
-                    'path' => $path,
-                    'schema' => $json['schema'] ?? null,
-                    'count' => is_array($json['overrides'] ?? null) ? count($json['overrides']) : 0,
-                ]);
-                return $json;
-            }
-        }
-
-        // fallback: ctx loader（可选保留）
-        if (is_callable($ctx['loadReportAssetJson'] ?? null)) {
-            $raw = ($ctx['loadReportAssetJson'])($contentPackageDir, 'report_overrides.json');
-
-            if (is_object($raw)) $raw = json_decode(json_encode($raw, JSON_UNESCAPED_UNICODE), true);
-            if (is_array($raw)) {
-                $doc = $raw['doc'] ?? $raw['data'] ?? $raw;
-                if (is_object($doc)) {
-                    $doc = json_decode(json_encode($doc, JSON_UNESCAPED_UNICODE), true);
-                }
-                if (is_array($doc)) return $doc;
-            }
-        }
-
-        return null;
-    }
 
     private function buildScoresValueObject(array $scoresPct, array $dims): array
     {
@@ -498,4 +514,547 @@ class ReportComposer
 
         return $out;
     }
+
+/**
+ * 从 pack chain 读取 type_profiles.json，并取出 $typeCode 对应 profile
+ * 优先：pack.assets(type_profiles) 声明的文件
+ * 兜底：ctx['loadTypeProfile']（仅当 pack 找不到时才会触发）
+ */
+private function loadTypeProfileFromPackChain(
+    array $chain,
+    string $typeCode,
+    array $ctx,
+    string $legacyContentPackageDir
+): array {
+    $doc = $this->loadJsonDocFromPackChain(
+        $chain,
+        'type_profiles',
+        'type_profiles.json',
+        $ctx,
+        $legacyContentPackageDir
+    );
+
+    $items = null;
+
+    // 常见结构：{ "items": { "ESTJ-A": {...} } }
+    if (is_array($doc) && is_array($doc['items'] ?? null)) {
+        $items = $doc['items'];
+    } elseif (is_array($doc)) {
+        // 兜底：有些文件可能直接就是 map 或 list
+        $items = $doc;
+    }
+
+    $picked = $this->pickItemByTypeCode($items, $typeCode, 'type_code');
+    if (is_array($picked)) return $picked;
+
+    // fallback：旧 ctx loader（测试“爆炸验证”时这里不应该被走到）
+    if (is_callable($ctx['loadTypeProfile'] ?? null)) {
+        $p = ($ctx['loadTypeProfile'])($legacyContentPackageDir, $typeCode);
+        if (is_array($p)) return $p;
+        if (is_object($p)) return json_decode(json_encode($p, JSON_UNESCAPED_UNICODE), true) ?: [];
+    }
+
+    return [];
+}
+
+/**
+ * 从 pack chain 读取 report_identity_cards.json，并取出 $typeCode 对应 identity card
+ * 优先：pack.assets(identity) 声明的文件
+ * 兜底：ctx['loadReportAssetItems']（仅当 pack 找不到时才会触发）
+ */
+private function loadIdentityCardFromPackChain(
+    array $chain,
+    string $typeCode,
+    array $ctx,
+    string $legacyContentPackageDir
+): ?array {
+    $doc = $this->loadJsonDocFromPackChain(
+        $chain,
+        'identity',
+        'report_identity_cards.json',
+        $ctx,
+        $legacyContentPackageDir
+    );
+
+    $items = null;
+
+    // 可能结构 1：{items: { "ESTJ-A": {...} } }
+    if (is_array($doc) && is_array($doc['items'] ?? null)) {
+        $items = $doc['items'];
+    } elseif (is_array($doc)) {
+        $items = $doc;
+    }
+
+    $picked = $this->pickItemByTypeCode($items, $typeCode, 'type_code');
+    if (is_array($picked)) return $picked;
+
+    // fallback：旧 ctx loader
+    if (is_callable($ctx['loadReportAssetItems'] ?? null)) {
+        $map = ($ctx['loadReportAssetItems'])($legacyContentPackageDir, 'report_identity_cards.json', 'type_code');
+        if (is_object($map)) $map = json_decode(json_encode($map, JSON_UNESCAPED_UNICODE), true);
+        if (is_array($map) && is_array($map[$typeCode] ?? null)) return $map[$typeCode];
+    }
+
+    return null;
+}
+
+/**
+ * 支持两种 items 形态：
+ * 1) map：items["ESTJ-A"] = {...}
+ * 2) list：items[] = ["type_code"=>"ESTJ-A", ...]
+ */
+private function pickItemByTypeCode($items, string $typeCode, string $keyField = 'type_code'): ?array
+{
+    if (!is_array($items)) return null;
+
+    // map 形态：key 就是 typeCode
+    if (isset($items[$typeCode]) && is_array($items[$typeCode])) {
+        return $items[$typeCode];
+    }
+
+    // list 形态：遍历找 keyField
+    $isList = (array_keys($items) === range(0, count($items) - 1));
+    if ($isList) {
+        foreach ($items as $row) {
+            if (!is_array($row)) continue;
+            $k = (string)($row[$keyField] ?? '');
+            if ($k === $typeCode) return $row;
+        }
+    }
+
+    return null;
+}
+
+private function loadRoleCardFromPackChain(
+    array $chain,
+    string $typeCode,
+    array $ctx,
+    string $legacyContentPackageDir
+): array {
+    $role = $this->roleCodeFromType($typeCode);
+
+    $doc = $this->loadJsonDocFromPackChain(
+        $chain,
+        'identity',                 // ✅ 大概率 roles/strategies 都挂在 identity 资产里
+        'report_roles.json',
+        $ctx,
+        $legacyContentPackageDir
+    );
+
+    $items = is_array($doc['items'] ?? null) ? $doc['items'] : (is_array($doc) ? $doc : []);
+    $card = (isset($items[$role]) && is_array($items[$role])) ? $items[$role] : [];
+
+    if ($card) {
+        $card['code'] = $card['code'] ?? $role;
+    }
+
+    // fallback（只有 pack 找不到时才会触发；做“爆炸验证”时不应走到）
+    if (!$card && is_callable($ctx['buildRoleCard'] ?? null)) {
+        $x = ($ctx['buildRoleCard'])($legacyContentPackageDir, $typeCode);
+        if (is_array($x)) return $x;
+        if (is_object($x)) return json_decode(json_encode($x, JSON_UNESCAPED_UNICODE), true) ?: [];
+    }
+
+    return $card ?: [];
+}
+
+private function loadStrategyCardFromPackChain(
+    array $chain,
+    string $typeCode,
+    array $ctx,
+    string $legacyContentPackageDir
+): array {
+    $st = $this->strategyCodeFromType($typeCode);
+
+    $doc = $this->loadJsonDocFromPackChain(
+        $chain,
+        'identity',
+        'report_strategies.json',
+        $ctx,
+        $legacyContentPackageDir
+    );
+
+    $items = is_array($doc['items'] ?? null) ? $doc['items'] : (is_array($doc) ? $doc : []);
+    $card = (isset($items[$st]) && is_array($items[$st])) ? $items[$st] : [];
+
+    if ($card) {
+        $card['code'] = $card['code'] ?? $st;
+    }
+
+    if (!$card && is_callable($ctx['buildStrategyCard'] ?? null)) {
+        $x = ($ctx['buildStrategyCard'])($legacyContentPackageDir, $typeCode);
+        if (is_array($x)) return $x;
+        if (is_object($x)) return json_decode(json_encode($x, JSON_UNESCAPED_UNICODE), true) ?: [];
+    }
+
+    return $card ?: [];
+}
+
+/**
+ * Role: NT / NF / SJ / SP
+ * - N+T => NT
+ * - N+F => NF
+ * - S+J => SJ
+ * - S+P => SP
+ */
+private function roleCodeFromType(string $typeCode): string
+{
+    // e.g. "ESTJ-A" => "ESTJ"
+    $core = strtoupper(explode('-', $typeCode)[0] ?? '');
+    if (strlen($core) < 4) return 'NT';
+
+    $m2 = $core[1]; // S/N
+    $m3 = $core[2]; // T/F
+    $m4 = $core[3]; // J/P
+
+    if ($m2 === 'N') {
+        return ($m3 === 'F') ? 'NF' : 'NT';
+    }
+
+    // S
+    return ($m4 === 'P') ? 'SP' : 'SJ';
+}
+
+/**
+ * Strategy: EA / ET / IA / IT
+ * - E/I + A/T
+ */
+private function strategyCodeFromType(string $typeCode): string
+{
+    $core = strtoupper(explode('-', $typeCode)[0] ?? '');
+    $suffix = strtoupper(explode('-', $typeCode)[1] ?? 'T'); // A/T
+
+    $ei = ($core !== '' && ($core[0] === 'I')) ? 'I' : 'E';
+    $at = ($suffix === 'A') ? 'A' : 'T';
+
+    return $ei . $at; // EA/ET/IA/IT
+}
+
+private function loadBorderlineNoteFromPackChain(
+    array $chain,
+    array $scoresPct,
+    array $ctx,
+    string $legacyContentPackageDir
+): array {
+    // 这里的文件名按你 CN v0.2.1 的资产命名：
+    // borderline 是一个 assetKey，里面通常有 templates + notes 两个文件
+    // 你这里要的是“note”（给 identity micro 用），一般是 report_borderline_notes.json
+    $doc = $this->loadJsonDocFromPackChain(
+        $chain,
+        'borderline',
+        'report_borderline_notes.json',
+        $ctx,
+        $legacyContentPackageDir
+    );
+
+    // 如果你的实际文件名不是 notes，而是 report_borderline_note.json 或 items 结构不同，
+    // 这里先做一个“宽松兜底”：保证返回至少 {items:[]}
+    if (is_array($doc)) {
+        if (isset($doc['items']) && is_array($doc['items'])) {
+            return $doc;
+        }
+        // 有的会直接把 items 放在顶层
+        if ($this->isAssocArrayLoose($doc)) {
+            return ['items' => $doc];
+        }
+    }
+
+    // fallback：只在 pack 没找到时才会触发（爆炸验证时不应走到）
+    if (is_callable($ctx['buildBorderlineNote'] ?? null)) {
+        $x = ($ctx['buildBorderlineNote'])($scoresPct, $legacyContentPackageDir);
+        if (is_array($x)) return $x;
+        if (is_object($x)) return json_decode(json_encode($x, JSON_UNESCAPED_UNICODE), true) ?: ['items' => []];
+    }
+
+    return ['items' => []];
+}
+
+/**
+ * 轻量判断 assoc（不依赖你别的 helper）
+ */
+private function isAssocArrayLoose(array $a): bool
+{
+    if ($a === []) return false;
+    return array_keys($a) !== range(0, count($a) - 1);
+}
+
+private function buildRecommendedReadsFromDoc(
+    ?array $doc,
+    string $typeCode,
+    array $scoresPct,
+    array $roleCard,
+    array $strategyCard,
+    int $limit = 10
+): array {
+    if (!is_array($doc)) return [];
+
+    $items = $doc['items'] ?? null;
+    if (!is_array($items)) return [];
+
+    $picked = [];
+
+    $pushList = function ($list) use (&$picked) {
+        if (!is_array($list)) return;
+        foreach ($list as $it) {
+            if (!is_array($it)) continue;
+            $id = (string)($it['id'] ?? '');
+            if ($id === '') continue;
+            if (isset($picked[$id])) continue;
+            $picked[$id] = $it;
+        }
+    };
+
+    // 1) by_type
+    $pushList($items['by_type'][$typeCode] ?? null);
+
+    // 2) by_role (NT/NF/SJ/SP)
+    $role = (string)($roleCard['code'] ?? '');
+    if ($role !== '') $pushList($items['by_role'][$role] ?? null);
+
+    // 3) by_strategy (EA/ET/IA/IT)
+    $st = (string)($strategyCard['code'] ?? '');
+    if ($st !== '') $pushList($items['by_strategy'][$st] ?? null);
+
+    // 4) by_top_axis（按每轴“更偏的一边”挑）
+    $dims = ['EI','SN','TF','JP','AT'];
+    foreach ($dims as $d) {
+        $raw = (int)($scoresPct[$d] ?? 50);
+        [$p1,$p2] = match ($d) {
+            'EI' => ['E','I'],
+            'SN' => ['S','N'],
+            'TF' => ['T','F'],
+            'JP' => ['J','P'],
+            'AT' => ['A','T'],
+            default => ['',''],
+        };
+        $side = $raw >= 50 ? $p1 : $p2;
+        $axisKey = "{$d}:{$side}";
+        $pushList($items['by_top_axis'][$axisKey] ?? null);
+    }
+
+    // 5) fallback
+    $pushList($items['fallback'] ?? null);
+
+    // 最后按 priority 降序 + 截断
+    $out = array_values($picked);
+    usort($out, fn($a,$b) => ((float)($b['priority'] ?? 0)) <=> ((float)($a['priority'] ?? 0)));
+
+    return array_slice($out, 0, $limit);
+}
+
+/**
+ * ✅ 按 manifest.assets.overrides 的 order 定死顺序加载 overrides 文件（支持多文件/多 bucket）
+ * - 每个 doc 会带 __src
+ * - 每条 rule 会带 __src（src_idx/src_pack_id/src_file）
+ * - FAP_OVR_TRACE=1 时打印 [OVR] file_loaded
+ */
+private function loadOverridesDocsFromPackChain(array $chain, array $ctx, string $legacyContentPackageDir): array
+{
+    $trace = (bool) env('FAP_OVR_TRACE', false);
+
+    $docs = [];
+    $idx  = 0;
+
+    foreach ($chain as $p) {
+        if (!$p instanceof ContentPack) continue;
+
+        $assetVal = $p->assets()['overrides'] ?? null;
+        if (!is_array($assetVal) || $assetVal === []) continue;
+
+        // 1) 先按 order 拿到 “相对路径列表”
+        $orderedPaths = $this->getOverridesOrderedPaths($assetVal);
+
+        // 2) 依次加载（顺序就是 manifest 定死的顺序）
+        foreach ($orderedPaths as $rel) {
+            if (!is_string($rel) || trim($rel) === '') continue;
+
+            $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
+            if (!is_file($abs)) continue;
+
+            $json = json_decode((string) file_get_contents($abs), true);
+            if (!is_array($json)) continue;
+
+            // ✅ 归一化：允许 doc 用 overrides:[]，统一映射到 rules:[]
+if (!is_array($json['rules'] ?? null) && is_array($json['overrides'] ?? null)) {
+    $json['rules'] = $json['overrides'];
+}
+
+            // 注入 doc 源信息
+            $src = [
+                'idx'     => $idx,
+                'pack_id' => $p->packId(),
+                'version' => $p->version(),
+                'file'    => basename($rel),
+                'rel'     => $rel,
+                'path'    => $abs,
+            ];
+            $json['__src'] = $src;
+
+            // 注入每条 rule 源信息（用于 rule_applied 可追溯）
+            if (is_array($json['rules'] ?? null)) {
+    foreach ($json['rules'] as &$r) {
+        if (is_array($r)) $r['__src'] = $src;
+    }
+    unset($r);
+}
+
+            if ($trace) {
+                Log::info('[OVR] file_loaded', [
+                    'idx'     => $src['idx'],
+                    'pack_id' => $src['pack_id'],
+                    'version' => $src['version'],
+                    'file'    => $src['file'],
+                    'rel'     => $src['rel'],
+                    'schema'  => $json['schema'] ?? null,
+        'count'   => is_array($json['rules'] ?? null) ? count($json['rules']) : 0,
+                ]);
+            }
+
+            $docs[] = $json;
+            $idx++;
+        }
+    }
+
+    // 兜底：如果 pack chain 完全没找到 overrides 文件，才允许走 ctx['loadReportAssetJson']
+    if (empty($docs) && is_callable($ctx['loadReportAssetJson'] ?? null)) {
+        $raw = ($ctx['loadReportAssetJson'])($legacyContentPackageDir, 'report_overrides.json');
+        if (is_object($raw)) $raw = json_decode(json_encode($raw, JSON_UNESCAPED_UNICODE), true);
+        if (is_array($raw)) {
+            $doc = $raw['doc'] ?? $raw['data'] ?? $raw;
+            if (is_object($doc)) $doc = json_decode(json_encode($doc, JSON_UNESCAPED_UNICODE), true);
+            if (is_array($doc)) {
+                $doc['__src'] = [
+                    'idx' => 0,
+                    'pack_id' => 'LEGACY_CTX',
+                    'version' => null,
+                    'file' => 'report_overrides.json',
+                    'rel' => null,
+                    'path' => null,
+                ];
+                if (is_array($doc['rules'] ?? null)) {
+    foreach ($doc['rules'] as &$r) {
+        if (is_array($r)) $r['__src'] = $doc['__src'];
+    }
+    unset($r);
+}
+                $docs[] = $doc;
+            }
+        }
+    }
+
+    return $docs;
+}
+
+/**
+ * 把 manifest.assets.overrides 解析成“按 order 的相对路径列表”
+ * 支持两种形态：
+ * 1) list: ["report_overrides.json"]
+ * 2) map : {"order":["highlights_legacy","unified"], "highlights_legacy":[...], "unified":[...]}
+ */
+private function getOverridesOrderedPaths(array $assetVal): array
+{
+    // 形态 1：list
+    if ($this->isListArray($assetVal)) {
+        return array_values(array_filter($assetVal, fn($x) => is_string($x) && trim($x) !== ''));
+    }
+
+    // 形态 2：map + order
+    $order = $assetVal['order'] ?? null;
+    $out = [];
+
+    if (is_array($order) && $order !== []) {
+        foreach ($order as $bucket) {
+            if (!is_string($bucket) || $bucket === '') continue;
+            $v = $assetVal[$bucket] ?? null;
+            if (!is_array($v)) continue;
+
+            foreach ($v as $path) {
+                if (is_string($path) && trim($path) !== '') $out[] = $path;
+            }
+        }
+        return array_values(array_unique($out));
+    }
+
+    // 没有 order：退化为“所有 bucket（排除 order）拼起来”
+    foreach ($assetVal as $k => $v) {
+        if ($k === 'order') continue;
+        if (!is_array($v)) continue;
+        foreach ($v as $path) {
+            if (is_string($path) && trim($path) !== '') $out[] = $path;
+        }
+    }
+    return array_values(array_unique($out));
+}
+
+/**
+ * 从 pack chain 的第一个可用 pack 里取 overrides 的 bucket 顺序（manifest.assets.overrides.order）
+ * - list 形态：返回 ['unified']（只是一个默认 bucket 名）
+ * - map 形态：返回 order 数组；没有 order 则返回除 order 外的 keys（顺序按出现顺序）
+ */
+private function getOverridesOrderBucketsFromPackChain(array $chain): array
+{
+    foreach ($chain as $p) {
+        if (!$p instanceof ContentPack) continue;
+        $assetVal = $p->assets()['overrides'] ?? null;
+        if (!is_array($assetVal) || $assetVal === []) continue;
+        return $this->getOverridesOrderBuckets($assetVal);
+    }
+    return ['highlights_legacy', 'unified']; // 兜底
+}
+
+private function getOverridesOrderBuckets(array $assetVal): array
+{
+    // list
+    if ($this->isListArray($assetVal)) {
+        return ['unified'];
+    }
+
+    // map + order
+    $order = $assetVal['order'] ?? null;
+    if (is_array($order) && $order !== []) {
+        $out = [];
+        foreach ($order as $x) {
+            if (is_string($x) && trim($x) !== '') $out[] = $x;
+        }
+        return $out ?: ['highlights_legacy', 'unified'];
+    }
+
+    // no order: keys except order
+    $out = [];
+    foreach ($assetVal as $k => $_) {
+        if ($k === 'order') continue;
+        if (is_string($k) && trim($k) !== '') $out[] = $k;
+    }
+    return $out ?: ['highlights_legacy', 'unified'];
+}
+
+/**
+ * 把多个 overrides doc 合并成一个 doc：
+ * - overrides = 按 docs 顺序依次 concat
+ * - 每条 rule 已经带 __src，不会丢“来源”
+ */
+private function mergeOverridesDocs(array $docs): ?array
+{
+    if (empty($docs)) return null;
+
+    $base = [
+    'schema' => 'fap.report.overrides.v1',
+    'rules' => [],
+    '__src_chain' => [],
+];
+
+foreach ($docs as $d) {
+    if (!is_array($d)) continue;
+
+    if (is_array($d['rules'] ?? null)) {
+        foreach ($d['rules'] as $r) {
+            if (is_array($r)) $base['rules'][] = $r;
+        }
+    }
+
+    if (is_array($d['__src'] ?? null)) $base['__src_chain'][] = $d['__src'];
+}
+
+    return $base;
+}
 }

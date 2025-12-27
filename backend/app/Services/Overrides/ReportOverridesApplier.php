@@ -70,121 +70,51 @@ class ReportOverridesApplier
     // ======================================================================
 
     /**
-     * Load report_overrides.json.
-     *
-     * Supported sources (best-effort):
-     * - filesystem candidates (old dir / new content_packages layout)
-     * - ctx loader: $ctx['loadReportAssetJson']($contentPackageDir, 'report_overrides.json')
-     */
-    private function loadOverridesDoc(string $contentPackageDir, array $ctx = []): ?array
-    {
-        $debug = (bool)($ctx['overrides_debug'] ?? false);
-
-        // If caller passes an already-loaded doc
-        if (isset($ctx['report_overrides_doc']) && is_array($ctx['report_overrides_doc'])) {
-            return $ctx['report_overrides_doc'];
-        }
-
-        $repoRoot = realpath(base_path('..')) ?: dirname(base_path());
-
-        $scaleCode = (string)($ctx['scale_code'] ?? '');
-        $region    = (string)($ctx['region'] ?? '');
-        $locale    = (string)($ctx['locale'] ?? '');
-        $version   = (string)($ctx['content_package_version'] ?? $ctx['contentPackageVersion'] ?? '');
-
-        $candidates = [];
-
-        // New layout candidate (only if ctx has enough fields)
-        if ($scaleCode !== '' && $region !== '' && $locale !== '' && $version !== '') {
-            $tplNewRel = 'content_packages/' . $scaleCode . '/' . $region . '/' . $locale . '/' . $version . '/report_overrides.json';
-            $candidates[] = base_path('../' . $tplNewRel);
-            $candidates[] = $repoRoot . '/' . ltrim($tplNewRel, '/');
-        }
-
-        // Old layout candidates (relative to backend)
-        $oldRel = rtrim($contentPackageDir, '/') . '/report_overrides.json';
-        $candidates[] = $oldRel;                  // cwd relative (if you run inside backend and have symlink)
-        $candidates[] = base_path($oldRel);        // backend/{MBTI-CN-...}/...
-        $candidates[] = base_path('../' . $oldRel);// repoRoot/{MBTI-CN-...}/... (rare)
-
-        // Extra: allow caller to inject custom candidates
-        if (!empty($ctx['overrides_candidates']) && is_array($ctx['overrides_candidates'])) {
-            foreach ($ctx['overrides_candidates'] as $p) {
-                if (is_string($p) && $p !== '') $candidates[] = $p;
-            }
-        }
-
-        if ($debug) {
-            Log::info('[OVR] overrides_candidates', [
-                'contentPackageDir' => $contentPackageDir,
-                'repoRoot' => $repoRoot,
-                'candidates' => array_map(fn($p) => [
-                    'path' => $p,
-                    'is_file' => is_string($p) ? is_file($p) : false,
-                    'size' => (is_string($p) && is_file($p)) ? filesize($p) : null,
-                ], $candidates),
-            ]);
-        }
-
-        foreach ($candidates as $path) {
-            if (!is_string($path) || !is_file($path)) continue;
-            $raw = @file_get_contents($path);
-            if ($raw === false) continue;
-
-            $json = json_decode($raw, true);
-            if (is_array($json)) {
-                if ($debug) {
-                    Log::info('[OVR] overrides_loaded', [
-                        'path' => $path,
-                        'schema' => $json['schema'] ?? null,
-                        'rules_count' => is_array($json['rules'] ?? null) ? count($json['rules']) : null,
-                    ]);
-                }
-                return $json;
-            }
-
-            if ($debug) {
-                Log::warning('[OVR] overrides_json_decode_failed', [
-                    'path' => $path,
-                    'json_error' => json_last_error_msg(),
-                ]);
-            }
-        }
-
-        // Fallback: ctx loader
-        if (is_callable($ctx['loadReportAssetJson'] ?? null)) {
-            $raw = ($ctx['loadReportAssetJson'])($contentPackageDir, 'report_overrides.json');
-
-            // normalize stdClass etc.
-            if (is_object($raw)) {
-                $raw = json_decode(json_encode($raw, JSON_UNESCAPED_UNICODE), true);
-            }
-
-            if (is_array($raw)) {
-                $doc = $raw['doc'] ?? $raw['data'] ?? $raw;
-                if (is_object($doc)) {
-                    $doc = json_decode(json_encode($doc, JSON_UNESCAPED_UNICODE), true);
-                }
-                if (is_array($doc)) {
-                    if ($debug) {
-                        Log::info('[OVR] overrides_loaded_from_ctx', [
-                            'schema' => $doc['schema'] ?? null,
-                            'rules_count' => is_array($doc['rules'] ?? null) ? count($doc['rules']) : null,
-                        ]);
-                    }
-                    return $doc;
-                }
-            }
-        }
-
-        if ($debug) {
-            Log::info('[OVR] overrides_doc_missing', [
-                'contentPackageDir' => $contentPackageDir,
-            ]);
-        }
-
-        return null;
+ * Load unified overrides doc.
+ *
+ * ✅ Step3: 不再自己扫文件/拼路径；只认调用方（ReportComposer）按 manifest 展开的结果
+ * - 支持 ctx['report_overrides_doc']（推荐）
+ * - 兼容 ctx['report_overrides_docs']（数组：多个 doc）
+ */
+private function loadOverridesDoc(string $contentPackageDir, array $ctx = []): ?array
+{
+    // 1) 最推荐：Composer 已经合并好并注入 __src 到每条 rule
+    if (isset($ctx['report_overrides_doc']) && is_array($ctx['report_overrides_doc'])) {
+        return $ctx['report_overrides_doc'];
     }
+
+    // 2) 兼容：Composer 也可能传多个 doc（不合并）
+    if (isset($ctx['report_overrides_docs']) && is_array($ctx['report_overrides_docs'])) {
+        $docs = $ctx['report_overrides_docs'];
+
+        $base = [
+            'schema' => 'fap.report.overrides.v1',
+            'rules' => [],
+            '__src_chain' => [],
+        ];
+
+        foreach ($docs as $d) {
+            if (!is_array($d)) continue;
+
+            $rules = null;
+            if (is_array($d['rules'] ?? null)) $rules = $d['rules'];
+            elseif (is_array($d['overrides'] ?? null)) $rules = $d['overrides']; // 兼容 key
+
+            if (is_array($rules)) {
+                foreach ($rules as $r) {
+                    if (is_array($r)) $base['rules'][] = $r;
+                }
+            }
+
+            if (is_array($d['__src'] ?? null)) $base['__src_chain'][] = $d['__src'];
+        }
+
+        return $base;
+    }
+
+    // ✅ Step3：没有 ctx 注入就视为“无 overrides”
+    return null;
+}
 
     /**
      * Select rules matching a target: highlights/cards/reads
@@ -193,7 +123,7 @@ class ReportOverridesApplier
     {
         if (!is_array($doc)) return [];
 
-        $rules = $doc['rules'] ?? [];
+        $rules = $doc['rules'] ?? ($doc['overrides'] ?? []);
         if (!is_array($rules)) return [];
 
         $out = [];
@@ -233,6 +163,11 @@ class ReportOverridesApplier
         $mode = (string)($rule['mode'] ?? 'patch');
         $selector = $rule['selector'] ?? null;
 
+        // ✅ 兼容 overrides schema：match.item -> selector
+if ($selector === null && isset($rule['match']['item']) && is_array($rule['match']['item'])) {
+    $selector = $this->selectorFromMatchItem($rule['match']['item']);
+}
+
         // ✅ 先算 matches（后面用于收集 ids + 执行）
         $matches = $this->selectIndexes($list, $selector);
 
@@ -262,15 +197,24 @@ class ReportOverridesApplier
         // ✅ 用 matches 执行（下面第 3 步会改 applyRuleToList 的签名）
         $list = $this->applyRuleToList($list, $matches, $rule, $context);
 
-        if ($debugPerRule) {
-            Log::info('[OVR] rule_applied', [
-                'id' => $rule['id'] ?? null,
-                'target' => $context['target'] ?? null,
-                'mode' => $mode,
-                'before' => $beforeCount,
-                'after' => count($list),
-            ]);
-        }
+        $src = (isset($rule['__src']) && is_array($rule['__src'])) ? $rule['__src'] : null;
+
+if ($debugPerRule || (bool) env('FAP_OVR_TRACE', false)) {
+    Log::info('[OVR] rule_applied', [
+        'id' => $rule['id'] ?? null,
+        'target' => $context['target'] ?? null,
+        'mode' => $mode,
+        'before' => $beforeCount,
+        'after' => count($list),
+
+        // ✅ 来源透明（由 ReportComposer 注入）
+        'src_idx'     => $src['idx'] ?? null,
+        'src_pack_id' => $src['pack_id'] ?? null,
+        'src_version' => $src['version'] ?? null,
+        'src_file'    => $src['file'] ?? null,
+        'src_rel'     => $src['rel'] ?? null,
+    ]);
+}
     }
 
     // ✅ 统一 applied 日志：不需要 overrides_debug，只要 RE_EXPLAIN=1 即可看到
@@ -299,46 +243,63 @@ class ReportOverridesApplier
      * - locale/region/scale_code/content_package_dir (string or array forms)
      */
     private function ruleMatchesContext(array $rule, array $context): bool
-    {
-        $match = $rule['match'] ?? [];
-        if ($match === null) return true; // allow match: null
-        if (!is_array($match)) return true;
+{
+    $match = $rule['match'] ?? [];
+    if ($match === null) return true;
+    if (!is_array($match)) return true;
 
-        $typeCode = (string)($context['type_code'] ?? '');
-        $sectionKey = $context['section_key'] ?? null;
+    $typeCode   = (string)($context['type_code'] ?? '');
+    $sectionKey = (string)($context['section_key'] ?? '');
 
-        // type_code
-        if (isset($match['type_code']) && is_string($match['type_code'])) {
-            if ($match['type_code'] !== $typeCode) return false;
+    // ✅ type_code: 支持 string / array
+    if (array_key_exists('type_code', $match)) {
+        $want = $match['type_code'];
+        if (is_string($want)) {
+            if ($want !== $typeCode) return false;
+        } elseif (is_array($want)) {
+            if (!in_array($typeCode, $want, true)) return false;
         }
-        if (isset($match['type_codes']) && is_array($match['type_codes'])) {
-            if (!in_array($typeCode, $match['type_codes'], true)) return false;
-        }
-
-        // cards section
-        if (isset($match['section_key']) && is_string($match['section_key'])) {
-            if ((string)$sectionKey !== $match['section_key']) return false;
-        }
-        if (isset($match['sections']) && is_array($match['sections'])) {
-            if (!in_array((string)$sectionKey, $match['sections'], true)) return false;
-        }
-
-        // generic string fields
-        foreach (['locale', 'region', 'scale_code', 'content_package_dir'] as $k) {
-            if (!array_key_exists($k, $match)) continue;
-
-            $want = $match[$k];
-            $have = (string)($context['ctx'][$k] ?? ($context[$k] ?? ''));
-
-            if (is_string($want)) {
-                if ($want !== $have) return false;
-            } elseif (is_array($want)) {
-                if (!in_array($have, $want, true)) return false;
-            }
-        }
-
-        return true;
     }
+
+    // 兼容旧字段 type_codes
+    if (isset($match['type_codes']) && is_array($match['type_codes'])) {
+        if (!in_array($typeCode, $match['type_codes'], true)) return false;
+    }
+
+    // ✅ section: 兼容你 overrides.json 用的 section
+    if (array_key_exists('section', $match)) {
+        $want = $match['section'];
+        if (is_string($want)) {
+            if ($want !== $sectionKey) return false;
+        } elseif (is_array($want)) {
+            if (!in_array($sectionKey, $want, true)) return false;
+        }
+    }
+
+    // 兼容旧字段 section_key / sections
+    if (isset($match['section_key']) && is_string($match['section_key'])) {
+        if ($sectionKey !== $match['section_key']) return false;
+    }
+    if (isset($match['sections']) && is_array($match['sections'])) {
+        if (!in_array($sectionKey, $match['sections'], true)) return false;
+    }
+
+    // generic string fields
+    foreach (['locale', 'region', 'scale_code', 'content_package_dir'] as $k) {
+        if (!array_key_exists($k, $match)) continue;
+
+        $want = $match[$k];
+        $have = (string)($context['ctx'][$k] ?? ($context[$k] ?? ''));
+
+        if (is_string($want)) {
+            if ($want !== $have) return false;
+        } elseif (is_array($want)) {
+            if (!in_array($have, $want, true)) return false;
+        }
+    }
+
+    return true;
+}
 
     /**
      * Apply one rule to list based on mode.
@@ -362,6 +323,31 @@ private function applyRuleToList(array $list, array $matches, array $rule, array
             default   => $this->modePatch($list, $matches, $rule, $context),
         };
     }
+
+    private function selectorFromMatchItem(array $item): ?array
+{
+    // match.item.id: ["read_03"] or "read_03"
+    if (isset($item['id'])) {
+        $ids = $item['id'];
+        if (is_string($ids)) $ids = [$ids];
+        if (is_array($ids)) {
+            $ids = array_values(array_filter($ids, fn($x) => is_string($x) && $x !== ''));
+            if (!empty($ids)) return ['ids' => $ids];
+        }
+    }
+
+    // match.item.kind: ["action"] or "action"
+    if (isset($item['kind'])) {
+        $kinds = $item['kind'];
+        if (is_string($kinds)) $kinds = [$kinds];
+        if (is_array($kinds)) {
+            $kinds = array_values(array_filter($kinds, fn($x) => is_string($x) && $x !== ''));
+            if (count($kinds) === 1) return ['kind' => $kinds[0]];
+        }
+    }
+
+    return null;
+}
 
     // ======================================================================
     // Selector + modes
@@ -709,5 +695,19 @@ private function applyRuleToList(array $list, array $matches, array $rule, array
     if ((bool) env('OVR_EXPLAIN', false)) return true;
 
     return false;
+}
+
+private function withSrcOnRules(array $doc, array $src): array
+{
+    $rules = $doc['rules'] ?? null;
+    if (!is_array($rules)) return $doc;
+
+    foreach ($rules as $i => $r) {
+        if (!is_array($r)) continue;
+        $r['__src'] = $r['__src'] ?? $src;
+        $doc['rules'][$i] = $r;
+    }
+
+    return $doc;
 }
 }
