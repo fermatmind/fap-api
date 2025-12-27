@@ -15,9 +15,10 @@ class FapSelfCheck extends Command
      *  php artisan fap:self-check --pack_id=MBTI.cn-mainland.zh-CN.v0.2.1-TEST
      */
     protected $signature = 'fap:self-check
-        {--pkg= : Relative folder under content_packages (e.g. MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST)}
-        {--path= : Path to manifest.json}
-        {--pack_id= : Resolve manifest.json by pack_id (scan content_packages)}';
+    {--pkg= : Relative folder under content_packages (e.g. MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST)}
+    {--path= : Path to manifest.json}
+    {--pack_id= : Resolve manifest.json by pack_id (scan content_packages)}
+    {--strict-assets : Fail if known files exist in package dir but are not declared in manifest.assets}';
 
     protected $description = 'Self-check: manifest contract + assets existence/schema + key JSON validations + unified overrides rule validation';
 
@@ -53,6 +54,12 @@ class FapSelfCheck extends Command
 
         // build declared asset basenames set (for conditional checks)
         $declaredBasenames = $this->declaredAssetBasenames($manifest);
+        // (optional) strict-assets: if certain known files exist but are not declared in manifest.assets -> fail
+if ((bool)$this->option('strict-assets')) {
+    [$sOk, $sMsg] = $this->checkStrictAssets($baseDir, $declaredBasenames, $packId);
+    $ok = $ok && $sOk;
+    $this->printSectionResult('strict-assets (undeclared known files)', $sOk, $sMsg);
+}
 
         $runIfDeclared = function (string $sectionName, string $filename, callable $runner) use (&$ok, $declaredBasenames) {
             if (!isset($declaredBasenames[$filename])) {
@@ -1160,6 +1167,33 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
 
         return $out;
     }
+
+    private function checkStrictAssets(string $baseDir, array $declaredBasenames, string $packId): array
+{
+    // files that, if present on disk, must be declared in manifest.assets (when strict-assets is enabled)
+    $known = [
+        'report_highlights_overrides.json',
+        'identity_cards.json',
+        'report_identity_layers.json',
+    ];
+
+    $errors = [];
+    $notes  = [];
+
+    foreach ($known as $fname) {
+        $abs = $this->pathOf($baseDir, $fname);
+        if (!is_file($abs)) continue;
+
+        if (!isset($declaredBasenames[$fname])) {
+            $errors[] = "pack={$packId} file={$abs} :: exists on disk but NOT declared in manifest.assets (strict-assets)";
+        } else {
+            $notes[] = "OK declared: {$fname}";
+        }
+    }
+
+    if (!empty($errors)) return [false, array_merge(["Undeclared known files found: " . count($errors)], $errors)];
+    return [true, $notes ?: ["OK (no undeclared known files found)"]];
+}
 
     private function expectedTypeCodes32(): array
     {
