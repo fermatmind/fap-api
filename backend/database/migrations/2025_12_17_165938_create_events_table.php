@@ -8,24 +8,23 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create("events", function (Blueprint $table) {
-            $table->uuid("id")->primary();
+        // 幂等：线上表已存在时，直接跳过，避免部署炸迁移
+        if (Schema::hasTable('events')) {
+            return;
+        }
 
-            $table->string("event_code", 64);
-            $table->string("anon_id", 128)->nullable();
-            $table->string("attempt_id", 64);
-            $table->json("meta_json")->nullable();
-
+        Schema::create('events', function (Blueprint $table) {
+            $table->char('id', 36)->primary();
+            $table->string('event_code', 64);
+            $table->string('anon_id', 128)->nullable();
+            $table->string('attempt_id', 64);
+            $table->json('meta_json')->nullable();
             $table->timestamps();
-
-            $table->index(["attempt_id"]);
-            $table->index(["event_code"]);
-            $table->index(["created_at"]);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists("events");
+        Schema::dropIfExists('events');
     }
 };
