@@ -328,94 +328,82 @@ class FapSelfCheck extends Command
     }
 
     private function checkAssetsSchemasAgainstManifest(array $manifest, string $baseDir, string $packId): array
-    {
-        $errs = [];
+{
+    $errs = [];
 
-        $schemas = $manifest['schemas'] ?? null;
-        $assets  = $manifest['assets'] ?? null;
+    $schemas = $manifest['schemas'] ?? null;
+    $assets  = $manifest['assets'] ?? null;
 
-        if (!is_array($schemas) || !is_array($assets)) return $errs;
+    if (!is_array($schemas) || !is_array($assets)) return $errs;
 
-        foreach ($schemas as $schemaKey => $expectedSchema) {
-            if (!is_string($expectedSchema) || trim($expectedSchema) === '') continue;
+    $checkOne = function (string $assetLabel, string $rel, ?string $expectedSchema) use (&$errs, $baseDir, $packId) {
+    if (!is_string($rel) || trim($rel) === '') return;
+    if (str_ends_with($rel, '/')) return;
 
-            $rels = $this->selectAssetFilesForSchemaKey($assets, (string)$schemaKey);
+    $abs = $this->pathOf($baseDir, $rel);
+    if (!is_file($abs)) return;
+    if (!$this->isJsonFile($abs)) return;
 
-            foreach ($rels as $rel) {
-                if (!is_string($rel) || trim($rel) === '') continue;
-                if (str_ends_with($rel, '/')) continue;
+    // ✅ 关键：expectedSchema 缺失也要报错（manifest.schemas 漏配）
+    if ($expectedSchema === null) {
+        $errs[] = "pack={$packId} file={$abs} :: missing manifest.schemas mapping (asset={$assetLabel})";
+        return;
+    }
 
-                $abs = $this->pathOf($baseDir, $rel);
-                if (!is_file($abs)) continue;
+    $doc = $this->readJsonFile($abs);
+    $got = is_array($doc) ? ($doc['schema'] ?? null) : null;
 
-                $doc = $this->readJsonFile($abs);
-                $got = is_array($doc) ? ($doc['schema'] ?? null) : null;
+    if ($got !== $expectedSchema) {
+        $errs[] = "pack={$packId} file={$abs} path=$.schema :: schema mismatch got="
+            . var_export($got, true)
+            . " want="
+            . var_export($expectedSchema, true)
+            . " (asset={$assetLabel})";
+    }
+};
 
-                if ($got !== $expectedSchema) {
-                    $errs[] = "pack={$packId} file={$abs} path=$.schema :: schema mismatch got=" . var_export($got, true) . " want=" . var_export($expectedSchema, true);
-                }
+    foreach ($assets as $assetKey => $paths) {
+        // overrides: object(map) with buckets + order
+        if ($assetKey === 'overrides' && is_array($paths) && $this->isAssocArray($paths)) {
+            foreach ($paths as $bucket => $list) {
+                if ($bucket === 'order') continue;
+
+                if (!is_array($list)) $list = [$list];
+
+                // bucket -> schema key
+                $schemaKey = null;
+if ($bucket === 'unified') $schemaKey = 'overrides_unified';
+elseif ($bucket === 'highlights_legacy') $schemaKey = 'overrides_highlights_legacy';
+
+if ($schemaKey === null) {
+    $errs[] = "pack={$packId} file=manifest.json path=$.assets.overrides :: unknown bucket '{$bucket}' (no schema mapping rule)";
+    continue;
+}
+
+$expected = $schemas[$schemaKey] ?? null;
+
+foreach ($list as $rel) {
+    $checkOne("overrides.{$bucket}", (string)$rel, $expected);
+}
             }
+            continue;
         }
 
-        return $errs;
+        // normal assets: list
+        if (!is_array($paths)) continue;
+
+        foreach ($paths as $rel) {
+            if (!is_string($rel)) continue;
+
+            // 这里用你新加的 helper 来计算 expected schema
+            $expected = $this->expectedSchemaFor($manifest, (string)$assetKey, basename($rel));
+
+            $checkOne((string)$assetKey, $rel, $expected);
+        }
     }
 
-    /**
-     * Map schemaKey -> asset file list
-     * (must match your manifest.schemas keys)
-     */
-    private function selectAssetFilesForSchemaKey(array $assets, string $schemaKey): array
-    {
-        // direct groups
-        if (in_array($schemaKey, ['questions','type_profiles','cards','highlights','reads'], true)) {
-            return is_array($assets[$schemaKey] ?? null) ? $assets[$schemaKey] : [];
-        }
-
-        // borderline split
-        if ($schemaKey === 'borderline_templates') {
-            return $this->filterBySubstring($assets['borderline'] ?? [], 'templates');
-        }
-        if ($schemaKey === 'borderline_notes') {
-            return $this->filterBySubstring($assets['borderline'] ?? [], 'notes');
-        }
-
-        // identity split
-        if ($schemaKey === 'identity_cards') {
-            return $this->filterBySubstring($assets['identity'] ?? [], 'identity_cards');
-        }
-        if ($schemaKey === 'identity_layers') {
-            return $this->filterBySubstring($assets['identity'] ?? [], 'identity_layers');
-        }
-        if ($schemaKey === 'roles') {
-            return $this->filterBySubstring($assets['identity'] ?? [], 'roles');
-        }
-        if ($schemaKey === 'strategies') {
-            return $this->filterBySubstring($assets['identity'] ?? [], 'strategies');
-        }
-
-        // overrides split (special object)
-        if ($schemaKey === 'overrides_unified') {
-            $ov = $assets['overrides'] ?? null;
-            return (is_array($ov) && isset($ov['unified']) && is_array($ov['unified'])) ? $ov['unified'] : [];
-        }
-        if ($schemaKey === 'overrides_highlights_legacy') {
-            $ov = $assets['overrides'] ?? null;
-            return (is_array($ov) && isset($ov['highlights_legacy']) && is_array($ov['highlights_legacy'])) ? $ov['highlights_legacy'] : [];
-        }
-
-        return [];
-    }
-
-    private function filterBySubstring($list, string $needle): array
-    {
-        if (!is_array($list)) return [];
-        $out = [];
-        foreach ($list as $x) {
-            if (!is_string($x)) continue;
-            if (str_contains($x, $needle)) $out[] = $x;
-        }
-        return $out;
-    }
+    return $errs;
+}
 
 // -------------------------
 // Unified overrides rules validation
@@ -1072,4 +1060,53 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         $rp = @realpath($p);
         return $rp !== false ? $rp : $p;
     }
+
+    private function expectedSchemaFor(array $manifest, string $assetKey, string $file): ?string
+{
+    $schemas = $manifest['schemas'] ?? [];
+
+    // 绝大多数 asset 是“一类文件一个 schema”
+    $direct = [
+        'questions'      => 'questions',
+        'type_profiles'  => 'type_profiles',
+        'cards'          => 'cards',
+        'highlights'     => 'highlights',
+        'reads'          => 'reads',
+    ];
+    if (isset($direct[$assetKey])) {
+        return $schemas[$direct[$assetKey]] ?? null;
+    }
+
+    // borderline: 两个文件两个 schema
+    if ($assetKey === 'borderline') {
+        if (str_contains($file, 'report_borderline_templates')) {
+            return $schemas['borderline_templates'] ?? null;
+        }
+        if (str_contains($file, 'report_borderline_notes')) {
+            return $schemas['borderline_notes'] ?? null;
+        }
+        return null;
+    }
+
+    // identity: 多文件多 schema（按文件名/子串判断，兼容不同命名）
+if ($assetKey === 'identity') {
+    if (str_contains($file, 'identity_cards'))  return $schemas['identity_cards'] ?? null;
+    if (str_contains($file, 'identity_layers')) return $schemas['identity_layers'] ?? null;
+    if (str_contains($file, 'roles'))           return $schemas['roles'] ?? null;
+    if (str_contains($file, 'strategies'))      return $schemas['strategies'] ?? null;
+    return null;
+}
+
+    // overrides: 你现在 manifest.assets.overrides 是对象（order/unified/..）
+    // self-check 里遍历时，你会知道当前 bucket 名：unified / highlights_legacy
+    // 这里假设你把 bucket 当成 assetKey 传进来（见第 3 步）
+    if ($assetKey === 'overrides_unified') {
+        return $schemas['overrides_unified'] ?? null;
+    }
+    if ($assetKey === 'overrides_highlights_legacy') {
+        return $schemas['overrides_highlights_legacy'] ?? null;
+    }
+
+    return null;
+}
 }
