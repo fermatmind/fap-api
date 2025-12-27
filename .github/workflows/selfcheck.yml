@@ -22,4 +22,4 @@ jobs:
 
       - name: Run selfcheck (default manifest)
         working-directory: backend
-        run: composer selfcheck
+        run: php artisan fap:self-check --strict-assets
