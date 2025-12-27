@@ -150,6 +150,57 @@ class MbtiController extends Controller
         ]);
     }
 
+public function startAttempt(Request $request)
+{
+    $payload = $request->validate([
+        'anon_id'        => ['required', 'string', 'max:64'],
+        'scale_code'     => ['required', 'string', 'in:MBTI'],
+        'scale_version'  => ['required', 'string', 'in:v0.2'],
+
+        // ✅ 你的 attempts 表里是 NOT NULL：必须补齐
+        'question_count'  => ['required', 'integer', 'in:24,93,144'],
+        'client_platform' => ['required', 'string', 'max:32'],
+
+        // 可选字段（表里有就存，没有也不影响 create）
+        'client_version' => ['nullable', 'string', 'max:32'],
+        'channel'        => ['nullable', 'string', 'max:32'],
+        'referrer'       => ['nullable', 'string', 'max:255'],
+
+        'meta_json'      => ['sometimes', 'array'],
+    ]);
+
+    // ✅ 兜底：即使 Attempt 模型没自动填 id，这里也保证不报错
+    $attempt = Attempt::create([
+        'id'            => (string) Str::uuid(),
+
+        'anon_id'       => $payload['anon_id'],
+        'scale_code'    => $payload['scale_code'],
+        'scale_version' => $payload['scale_version'],
+
+        'question_count'  => (int) $payload['question_count'],
+        'client_platform' => (string) $payload['client_platform'],
+
+        'client_version' => $payload['client_version'] ?? null,
+        'channel'        => $payload['channel'] ?? null,
+        'referrer'       => $payload['referrer'] ?? null,
+
+        'started_at'    => now(),
+
+        'answers_summary_json' => [
+            'stage' => 'start',
+            'created_at_ms' => (int) round(microtime(true) * 1000),
+            'meta' => $payload['meta_json'] ?? null,
+        ],
+    ]);
+
+    return response()->json([
+        'ok' => true,
+        'id' => (string) $attempt->id,
+        'scale_code' => $attempt->scale_code,
+        'scale_version' => $attempt->scale_version,
+    ]);
+}
+
     /**
      * POST /api/v0.2/attempts
      * ✅ 前端提交：answers[].question_id + answers[].code(A~E)

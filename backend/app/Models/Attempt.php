@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Attempt extends Model
 {
@@ -15,17 +16,31 @@ class Attempt extends Model
     protected $table = 'attempts';
 
     /**
-     * 主键是 UUID 字符串，不是自增 int
+     * 主键是 UUID 字符串（char(36)），不是自增 int
      */
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
 
     /**
+     * 创建时自动生成 UUID（避免 "Field 'id' doesn't have a default value"）
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (self $m) {
+            if (empty($m->id)) {
+                $m->id = (string) Str::uuid();
+            }
+        });
+    }
+
+    /**
      * 允许批量写入的字段
      */
     protected $fillable = [
+        // id 可以保留（允许外部显式传入），但一般不需要传
         'id',
+
         'anon_id',
         'user_id',
         'scale_code',
@@ -49,7 +64,7 @@ class Attempt extends Model
      * 字段类型转换
      *
      * 注意：
-     * - answers_json / answers_summary_json 用 array cast，Controller 里就应直接赋值数组，不要 json_encode()
+     * - answers_json / answers_summary_json 用 array cast，Controller 里应直接赋值数组，不要 json_encode()
      */
     protected $casts = [
         'answers_summary_json' => 'array',
@@ -62,7 +77,7 @@ class Attempt extends Model
     ];
 
     /**
-     * 把 summary 作为一个“便捷 result 对象”暴露出来：
+     * 把 summary 作为一个“便捷对象”暴露出来：
      * 让你可以直接写：$attempt->summary?->type_code
      */
     protected $appends = ['summary'];
@@ -118,9 +133,10 @@ class Attempt extends Model
 
     /**
      * 关联：一次 Attempt 有一个 Result
+     * - 约定：results.attempt_id -> attempts.id
      */
     public function result()
     {
-        return $this->hasOne(Result::class, 'attempt_id', 'attempt_id');
+        return $this->hasOne(Result::class, 'attempt_id', 'id');
     }
 }
