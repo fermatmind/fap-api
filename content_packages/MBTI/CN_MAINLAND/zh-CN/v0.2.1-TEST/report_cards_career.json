@@ -12,8 +12,12 @@
     "min_cards": 2,
     "target_cards": 3,
     "max_cards": 6,
-    "fallback_tags": ["kind:core"],
-    "sort": ["priority_desc"]
+    "fallback_tags": [
+      "kind:core"
+    ],
+    "sort": [
+      "priority_desc"
+    ]
   },
   "items": [
     {
@@ -21,211 +25,536 @@
       "section": "career",
       "title": "SJ 职业底盘：把秩序做成生产力",
       "desc": "你更适合在“规则清晰、责任明确、可持续交付”的环境里建立优势。",
-      "bullets": ["偏爱稳定可控的流程与标准", "擅长把工作做成可复制的体系", "对风险与细节更敏感"],
-      "tips": ["把你擅长的流程沉淀成模板/规范，会很快形成护城河", "避免长期处在“目标不清、频繁变更”的团队里消耗"],
-      "tags": ["kind:role", "role:SJ", "career:operations", "career:process"],
+      "bullets": [
+        "偏爱稳定可控的流程与标准",
+        "擅长把工作做成可复制的体系",
+        "对风险与细节更敏感"
+      ],
+      "tips": [
+        "把你擅长的流程沉淀成模板/规范，会很快形成护城河",
+        "避免长期处在“目标不清、频繁变更”的团队里消耗"
+      ],
+      "tags": [
+        "kind:role",
+        "role:SJ",
+        "career:operations",
+        "career:process"
+      ],
       "priority": 94,
-      "match": { "tags_any": ["role:SJ"] }
+      "match": {
+        "tags_any": [
+          "role:SJ"
+        ]
+      }
     },
     {
       "id": "career_role_SP",
       "section": "career",
       "title": "SP 职业底盘：在变化里抓机会",
       "desc": "你更适合“节奏快、反馈快、允许试错”的场景，用行动换结果。",
-      "bullets": ["临场应变强，敢先做再调", "擅长解决现场问题", "对体验与效率敏感"],
-      "tips": ["选岗位看‘反馈周期’，越短越能发挥优势", "给自己补一套轻量复盘机制，避免只忙不升级"],
-      "tags": ["kind:role", "role:SP", "career:execution", "career:field"],
+      "bullets": [
+        "临场应变强，敢先做再调",
+        "擅长解决现场问题",
+        "对体验与效率敏感"
+      ],
+      "tips": [
+        "选岗位看‘反馈周期’，越短越能发挥优势",
+        "给自己补一套轻量复盘机制，避免只忙不升级"
+      ],
+      "tags": [
+        "kind:role",
+        "role:SP",
+        "career:execution",
+        "career:field"
+      ],
       "priority": 94,
-      "match": { "tags_any": ["role:SP"] }
+      "match": {
+        "tags_any": [
+          "role:SP"
+        ]
+      }
     },
     {
       "id": "career_role_NT",
       "section": "career",
       "title": "NT 职业底盘：用模型与系统赢",
       "desc": "你更适合“复杂问题、强挑战、需要抽象与策略”的领域建立核心竞争力。",
-      "bullets": ["擅长搭框架、做系统设计", "喜欢高难度与高自由度", "对逻辑一致性要求高"],
-      "tips": ["把你的思考固化成方法论/工具，会形成长期复利", "注意沟通时先对齐目标，再谈推导过程"],
-      "tags": ["kind:role", "role:NT", "career:strategy", "career:analysis"],
+      "bullets": [
+        "擅长搭框架、做系统设计",
+        "喜欢高难度与高自由度",
+        "对逻辑一致性要求高"
+      ],
+      "tips": [
+        "把你的思考固化成方法论/工具，会形成长期复利",
+        "注意沟通时先对齐目标，再谈推导过程"
+      ],
+      "tags": [
+        "kind:role",
+        "role:NT",
+        "career:strategy",
+        "career:analysis"
+      ],
       "priority": 94,
-      "match": { "tags_any": ["role:NT"] }
+      "match": {
+        "tags_any": [
+          "role:NT"
+        ]
+      }
     },
     {
       "id": "career_role_NF",
       "section": "career",
       "title": "NF 职业底盘：用影响力与意义驱动",
       "desc": "你更适合“人和关系很重要、需要共情与引导”的场景，把愿景变成团队行动。",
-      "bullets": ["擅长理解人、激发人", "更在意价值与使命感", "能把分歧拉回共识"],
-      "tips": ["选择能“看见人”的组织文化，你会更容易持续发光", "建立边界与规则，避免把能量用在无效照顾上"],
-      "tags": ["kind:role", "role:NF", "career:people", "career:impact"],
+      "bullets": [
+        "擅长理解人、激发人",
+        "更在意价值与使命感",
+        "能把分歧拉回共识"
+      ],
+      "tips": [
+        "选择能“看见人”的组织文化，你会更容易持续发光",
+        "建立边界与规则，避免把能量用在无效照顾上"
+      ],
+      "tags": [
+        "kind:role",
+        "role:NF",
+        "career:people",
+        "career:impact"
+      ],
       "priority": 94,
-      "match": { "tags_any": ["role:NF"] }
+      "match": {
+        "tags_any": [
+          "role:NF"
+        ]
+      }
     },
-
     {
       "id": "career_axis_EI_E_strong",
       "section": "career",
       "title": "E 偏好较强：前台协作型岗位更加分",
       "desc": "你在交流、协作、协调资源的场景中更容易进入状态并拿到结果。",
-      "bullets": ["更适合对外沟通/跨团队协作", "在快节奏会议与现场推进中更强", "适合需要影响他人的岗位"],
-      "tips": ["把你的沟通优势沉淀成 SOP（会议节奏、推进模板）", "注意把输出落到“决策与行动项”，避免只热闹不收敛"],
-      "tags": ["kind:axis", "axis:EI:E", "state:strong", "career:collaboration"],
+      "bullets": [
+        "更适合对外沟通/跨团队协作",
+        "在快节奏会议与现场推进中更强",
+        "适合需要影响他人的岗位"
+      ],
+      "tips": [
+        "把你的沟通优势沉淀成 SOP（会议节奏、推进模板）",
+        "注意把输出落到“决策与行动项”，避免只热闹不收敛"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:E",
+        "state:strong",
+        "career:collaboration"
+      ],
       "priority": 96,
-      "match": { "axis": { "dim": "EI", "side": "E", "min_delta": 12 } }
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 12
+        }
+      }
     },
     {
       "id": "career_axis_EI_I_strong",
       "section": "career",
       "title": "I 偏好较强：深度型岗位更能吃到红利",
       "desc": "你在独立研究、深度分析、复杂推演的场景里更稳定地产出高质量成果。",
-      "bullets": ["适合研究/分析/工程/写作等深度工作", "对复杂问题能持续钻研", "更需要低打扰环境"],
-      "tips": ["用“先写后聊”提高协作效率：先发 3 行结论+证据", "争取固定深度时间块，产出会显著提升"],
-      "tags": ["kind:axis", "axis:EI:I", "state:strong", "career:deepwork"],
+      "bullets": [
+        "适合研究/分析/工程/写作等深度工作",
+        "对复杂问题能持续钻研",
+        "更需要低打扰环境"
+      ],
+      "tips": [
+        "用“先写后聊”提高协作效率：先发 3 行结论+证据",
+        "争取固定深度时间块，产出会显著提升"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:I",
+        "state:strong",
+        "career:deepwork"
+      ],
       "priority": 96,
-      "match": { "axis": { "dim": "EI", "side": "I", "min_delta": 12 } }
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 12
+        }
+      }
     },
     {
       "id": "career_axis_SN_S_strong",
       "section": "career",
       "title": "S 偏好较强：流程、运营、交付更稳",
       "desc": "你更擅长把事情做成可执行的步骤与标准，在交付体系中形成稳定优势。",
-      "bullets": ["适合运营/项目/质量/供应链/财务等", "对细节与风险更敏感", "更相信验证与经验"],
-      "tips": ["用 checklist/模板把经验产品化，你会越做越轻松", "刻意补“趋势视角”：每月抬头看一次方向与外部变化"],
-      "tags": ["kind:axis", "axis:SN:S", "state:strong", "career:operations"],
+      "bullets": [
+        "适合运营/项目/质量/供应链/财务等",
+        "对细节与风险更敏感",
+        "更相信验证与经验"
+      ],
+      "tips": [
+        "用 checklist/模板把经验产品化，你会越做越轻松",
+        "刻意补“趋势视角”：每月抬头看一次方向与外部变化"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:S",
+        "state:strong",
+        "career:operations"
+      ],
       "priority": 95,
-      "match": { "axis": { "dim": "SN", "side": "S", "min_delta": 12 } }
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "S",
+          "min_delta": 12
+        }
+      }
     },
     {
       "id": "career_axis_SN_N_strong",
       "section": "career",
       "title": "N 偏好较强：创新、策略、产品更适配",
       "desc": "你更擅长从模式与可能性里提炼方向，在不确定中做出更有想象力的方案。",
-      "bullets": ["适合产品/战略/咨询/创意/研究等", "能快速抽象并搭框架", "对趋势与机会更敏感"],
-      "tips": ["把灵感落到 3 条可执行 next step，避免停在想法里", "找一位 S 偏好伙伴做落地校验，会更快成事"],
-      "tags": ["kind:axis", "axis:SN:N", "state:strong", "career:strategy"],
+      "bullets": [
+        "适合产品/战略/咨询/创意/研究等",
+        "能快速抽象并搭框架",
+        "对趋势与机会更敏感"
+      ],
+      "tips": [
+        "把灵感落到 3 条可执行 next step，避免停在想法里",
+        "找一位 S 偏好伙伴做落地校验，会更快成事"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:N",
+        "state:strong",
+        "career:strategy"
+      ],
       "priority": 95,
-      "match": { "axis": { "dim": "SN", "side": "N", "min_delta": 12 } }
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "N",
+          "min_delta": 12
+        }
+      }
     },
     {
       "id": "career_axis_TF_T_strong",
       "section": "career",
       "title": "T（理性）偏好较强：规则与决策岗位更占优",
       "desc": "你更擅长用标准与逻辑推进决策，在压力下也能保持清晰与一致性。",
-      "bullets": ["适合管理、策略、谈判、工程、数据等", "敢做取舍，能扛关键决策", "喜欢明确指标与验收"],
-      "tips": ["对人际沟通补一句“我理解你的诉求”，阻力会小很多", "把观点写成“结论-依据-影响”，推进更快"],
-      "tags": ["kind:axis", "axis:TF:T", "state:strong", "career:decision"],
+      "bullets": [
+        "适合管理、策略、谈判、工程、数据等",
+        "敢做取舍，能扛关键决策",
+        "喜欢明确指标与验收"
+      ],
+      "tips": [
+        "对人际沟通补一句“我理解你的诉求”，阻力会小很多",
+        "把观点写成“结论-依据-影响”，推进更快"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:T",
+        "state:strong",
+        "career:decision"
+      ],
       "priority": 94,
-      "match": { "axis": { "dim": "TF", "side": "T", "min_delta": 12 } }
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "T",
+          "min_delta": 12
+        }
+      }
     },
     {
       "id": "career_axis_TF_F_strong",
       "section": "career",
       "title": "F（感受）偏好较强：人和氛围是你的杠杆",
       "desc": "你更擅长理解需求、维护关系与凝聚团队，在服务与影响力场景里更强。",
-      "bullets": ["适合 HR/教育/咨询/用户运营/社区等", "更能提升团队信任与稳定", "擅长冲突调停与共识建立"],
-      "tips": ["把边界写清楚：可做/不可做/需要交换什么", "用数据或事实补强判断，避免被情绪带着跑"],
-      "tags": ["kind:axis", "axis:TF:F", "state:strong", "career:people"],
+      "bullets": [
+        "适合 HR/教育/咨询/用户运营/社区等",
+        "更能提升团队信任与稳定",
+        "擅长冲突调停与共识建立"
+      ],
+      "tips": [
+        "把边界写清楚：可做/不可做/需要交换什么",
+        "用数据或事实补强判断，避免被情绪带着跑"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:F",
+        "state:strong",
+        "career:people"
+      ],
       "priority": 94,
-      "match": { "axis": { "dim": "TF", "side": "F", "min_delta": 12 } }
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "F",
+          "min_delta": 12
+        }
+      }
     },
     {
       "id": "career_axis_JP_J_strong",
       "section": "career",
       "title": "J 偏好较强：项目与管理更能发挥",
       "desc": "你更擅长规划、推进、闭环与交付，能把团队节奏拉稳。",
-      "bullets": ["适合项目管理/运营管理/带团队", "对节点与风险敏感", "执行与收尾能力强"],
-      "tips": ["给计划留 15% 缓冲，抗波动更强", "练习“60 分先交付”，再迭代到 90 分"],
-      "tags": ["kind:axis", "axis:JP:J", "state:strong", "career:management"],
+      "bullets": [
+        "适合项目管理/运营管理/带团队",
+        "对节点与风险敏感",
+        "执行与收尾能力强"
+      ],
+      "tips": [
+        "给计划留 15% 缓冲，抗波动更强",
+        "练习“60 分先交付”，再迭代到 90 分"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:J",
+        "state:strong",
+        "career:management"
+      ],
       "priority": 94,
-      "match": { "axis": { "dim": "JP", "side": "J", "min_delta": 12 } }
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 12
+        }
+      }
     },
     {
       "id": "career_axis_JP_P_strong",
       "section": "career",
       "title": "P 偏好较强：敏捷型、探索型岗位更适配",
       "desc": "你更擅长在变化中试错迭代、快速调整，适合需要探索与应变的工作。",
-      "bullets": ["适合创业/增长/销售/创意/现场交付等", "临场反应快，适应变化强", "能在不确定中抓机会"],
-      "tips": ["给探索设收束点：到点必须定一个版本", "用看板管理任务，避免注意力发散"],
-      "tags": ["kind:axis", "axis:JP:P", "state:strong", "career:agile"],
+      "bullets": [
+        "适合创业/增长/销售/创意/现场交付等",
+        "临场反应快，适应变化强",
+        "能在不确定中抓机会"
+      ],
+      "tips": [
+        "给探索设收束点：到点必须定一个版本",
+        "用看板管理任务，避免注意力发散"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:P",
+        "state:strong",
+        "career:agile"
+      ],
       "priority": 94,
-      "match": { "axis": { "dim": "JP", "side": "P", "min_delta": 12 } }
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 12
+        }
+      }
     },
-    
     {
-  "id": "career_axis_AT_A_strong",
-  "section": "career",
-  "title": "A（坚定）偏好较强：更能稳住并扛住压力场景",
-  "desc": "你更倾向在压力下先稳住节奏与判断，更敢拍板推进，适合承担明确责任与关键节点交付。",
-  "bullets": ["关键时刻更敢做决策", "更容易稳定输出与扛责任", "更少被情绪波动拖慢节奏"],
-  "tips": ["把优势落到“节点-负责人-验收标准”，推进会更快", "注意留出校准机制：重大决策加一次反向验证"],
-  "tags": ["kind:axis", "axis:AT:A", "state:strong", "career:stress", "career:delivery"],
-  "priority": 94,
-  "match": { "axis": { "dim": "AT", "side": "A", "min_delta": 12 } }
-},
-{
-  "id": "career_axis_AT_T_strong",
-  "section": "career",
-  "title": "T（敏感）偏好较强：更擅长校准风险与提升质量",
-  "desc": "你更倾向在压力下自我校准、反复检查细节与风险，适合做质量把控、策略复盘与持续改进。",
-  "bullets": ["更敏锐地发现隐患与风险点", "更重视质量与可控性", "更愿意复盘并不断优化"],
-  "tips": ["把担心写成清单：风险点-证据-应对策略，会明显降内耗", "设置“到点必须定稿”的收束点，避免无限优化"],
-  "tags": ["kind:axis", "axis:AT:T", "state:strong", "career:quality", "career:review"],
-  "priority": 94,
-  "match": { "axis": { "dim": "AT", "side": "T", "min_delta": 12 } }
-},
-
+      "id": "career_axis_AT_A_strong",
+      "section": "career",
+      "title": "A（坚定）偏好较强：更能稳住并扛住压力场景",
+      "desc": "你更倾向在压力下先稳住节奏与判断，更敢拍板推进，适合承担明确责任与关键节点交付。",
+      "bullets": [
+        "关键时刻更敢做决策",
+        "更容易稳定输出与扛责任",
+        "更少被情绪波动拖慢节奏"
+      ],
+      "tips": [
+        "把优势落到“节点-负责人-验收标准”，推进会更快",
+        "注意留出校准机制：重大决策加一次反向验证"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:A",
+        "state:strong",
+        "career:stress",
+        "career:delivery"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "career_axis_AT_T_strong",
+      "section": "career",
+      "title": "T（敏感）偏好较强：更擅长校准风险与提升质量",
+      "desc": "你更倾向在压力下自我校准、反复检查细节与风险，适合做质量把控、策略复盘与持续改进。",
+      "bullets": [
+        "更敏锐地发现隐患与风险点",
+        "更重视质量与可控性",
+        "更愿意复盘并不断优化"
+      ],
+      "tips": [
+        "把担心写成清单：风险点-证据-应对策略，会明显降内耗",
+        "设置“到点必须定稿”的收束点，避免无限优化"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:T",
+        "state:strong",
+        "career:quality",
+        "career:review"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 12
+        }
+      }
+    },
     {
       "id": "career_axis_EI_E_intro",
       "section": "career",
       "title": "E 轻解释：协作能帮你更快拿到结果",
       "desc": "即便不是强外向，你也会在适度交流中更快推进、对齐与收敛。",
-      "bullets": ["讨论能帮助你理清思路", "更愿意通过协作推进", "更容易在互动中被点亮"],
-      "tips": ["用短会议+行动项替代长拉扯", "把关键结论写下来，避免只靠口头记忆"],
-      "tags": ["kind:axis_intro", "axis:EI:E", "state:clear", "career:collaboration"],
+      "bullets": [
+        "讨论能帮助你理清思路",
+        "更愿意通过协作推进",
+        "更容易在互动中被点亮"
+      ],
+      "tips": [
+        "用短会议+行动项替代长拉扯",
+        "把关键结论写下来，避免只靠口头记忆"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:E",
+        "state:clear",
+        "career:collaboration"
+      ],
       "priority": 60,
-      "match": { "axis": { "dim": "EI", "side": "E", "min_delta": 0 } }
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 0
+        }
+      }
     },
     {
       "id": "career_axis_EI_I_intro",
       "section": "career",
       "title": "I 轻解释：深度时间是你的增益器",
       "desc": "即便不是强内向，你也会在安静专注中更快恢复与校准。",
-      "bullets": ["独处能让你恢复专注", "更偏好深度而非频繁互动", "更喜欢先想清楚再表达"],
-      "tips": ["争取固定深度时段，产出会更稳定", "先发文字结论再讨论，协作更省力"],
-      "tags": ["kind:axis_intro", "axis:EI:I", "state:clear", "career:deepwork"],
+      "bullets": [
+        "独处能让你恢复专注",
+        "更偏好深度而非频繁互动",
+        "更喜欢先想清楚再表达"
+      ],
+      "tips": [
+        "争取固定深度时段，产出会更稳定",
+        "先发文字结论再讨论，协作更省力"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:I",
+        "state:clear",
+        "career:deepwork"
+      ],
       "priority": 60,
-      "match": { "axis": { "dim": "EI", "side": "I", "min_delta": 0 } }
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 0
+        }
+      }
     },
     {
       "id": "career_axis_JP_J_intro",
       "section": "career",
       "title": "J 轻解释：你更舒服在“有计划”的节奏里",
       "desc": "即便不算强 J，你也更喜欢清晰的优先级、节点与收尾感。",
-      "bullets": ["更愿意先定关键节点", "更喜欢明确的优先级", "收尾会让你更安心"],
-      "tips": ["计划做轻：只定 3 个关键节点即可", "给变化留口子，别把自己锁死在完美计划里"],
-      "tags": ["kind:axis_intro", "axis:JP:J", "state:clear", "career:management"],
+      "bullets": [
+        "更愿意先定关键节点",
+        "更喜欢明确的优先级",
+        "收尾会让你更安心"
+      ],
+      "tips": [
+        "计划做轻：只定 3 个关键节点即可",
+        "给变化留口子，别把自己锁死在完美计划里"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:J",
+        "state:clear",
+        "career:management"
+      ],
       "priority": 58,
-      "match": { "axis": { "dim": "JP", "side": "J", "min_delta": 0 } }
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 0
+        }
+      }
     },
     {
       "id": "career_axis_JP_P_intro",
       "section": "career",
       "title": "P 轻解释：你更舒服在“先试试看”的节奏里",
       "desc": "即便不算强 P，你也更喜欢先探索、后收束，保留选择空间。",
-      "bullets": ["更愿意先试出可行性", "更能适应变化", "更喜欢保留选择空间"],
-      "tips": ["探索也要有收束点，避免无限延展", "把灵感记成清单，再按优先级推进"],
-      "tags": ["kind:axis_intro", "axis:JP:P", "state:clear", "career:agile"],
+      "bullets": [
+        "更愿意先试出可行性",
+        "更能适应变化",
+        "更喜欢保留选择空间"
+      ],
+      "tips": [
+        "探索也要有收束点，避免无限延展",
+        "把灵感记成清单，再按优先级推进"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:P",
+        "state:clear",
+        "career:agile"
+      ],
       "priority": 58,
-      "match": { "axis": { "dim": "JP", "side": "P", "min_delta": 0 } }
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 0
+        }
+      }
     },
-
     {
       "id": "career_core_01",
       "section": "career",
       "title": "你的职业策略：先选“环境”，再选“岗位名”",
       "desc": "同一个岗位名在不同组织里差异很大。对你来说，环境匹配比头衔更关键。",
-      "bullets": ["看清组织节奏：稳定 vs 变化", "看清衡量方式：指标 vs 关系", "看清决策结构：集中 vs 分散"],
-      "tips": ["面试时问 3 个问题：如何决策？如何评价？如何协作？", "把“我不适合的环境”列出来，能少走弯路"],
-      "tags": ["kind:core", "tone:neutral", "career:strategy"],
+      "bullets": [
+        "看清组织节奏：稳定 vs 变化",
+        "看清衡量方式：指标 vs 关系",
+        "看清决策结构：集中 vs 分散"
+      ],
+      "tips": [
+        "面试时问 3 个问题：如何决策？如何评价？如何协作？",
+        "把“我不适合的环境”列出来，能少走弯路"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:strategy"
+      ],
       "priority": 100
     },
     {
@@ -233,9 +562,20 @@
       "section": "career",
       "title": "优势放大法：把擅长的事做成可复用资产",
       "desc": "比起到处补短板，你更适合把强项产品化：模板、流程、方法论、作品集。",
-      "bullets": ["把经验沉淀成 SOP/清单", "把成果沉淀成作品集/案例", "把思考沉淀成方法论/工具"],
-      "tips": ["每完成一个项目，补一页“复盘卡片”", "把可复用的东西放进个人资料夹，长期复利"],
-      "tags": ["kind:core", "tone:neutral", "career:portfolio"],
+      "bullets": [
+        "把经验沉淀成 SOP/清单",
+        "把成果沉淀成作品集/案例",
+        "把思考沉淀成方法论/工具"
+      ],
+      "tips": [
+        "每完成一个项目，补一页“复盘卡片”",
+        "把可复用的东西放进个人资料夹，长期复利"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:portfolio"
+      ],
       "priority": 97
     },
     {
@@ -243,9 +583,20 @@
       "section": "career",
       "title": "协作打法：把分工写清楚，摩擦会少一半",
       "desc": "你在合作中更吃“清晰”。当职责、标准、节奏明确，你会进入高效区。",
-      "bullets": ["把目标写成一句话", "把标准写成验收条件", "把节奏写成节点与行动项"],
-      "tips": ["开会必产出：结论+行动项+负责人+截止时间", "冲突先对齐目标，再讨论方案"],
-      "tags": ["kind:core", "tone:neutral", "career:collaboration"],
+      "bullets": [
+        "把目标写成一句话",
+        "把标准写成验收条件",
+        "把节奏写成节点与行动项"
+      ],
+      "tips": [
+        "开会必产出：结论+行动项+负责人+截止时间",
+        "冲突先对齐目标，再讨论方案"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:collaboration"
+      ],
       "priority": 95
     },
     {
@@ -253,9 +604,20 @@
       "section": "career",
       "title": "成长路径：先把“可替代”变成“不可替代”",
       "desc": "你的职业升级关键在于：从执行者变成能定义问题、搭系统、带结果的人。",
-      "bullets": ["从做事 → 负责模块", "从负责模块 → 负责系统", "从负责系统 → 负责结果"],
-      "tips": ["给自己加一项“可见度工作”：让成果被看到", "每季度选一个“硬技能+软技能”组合升级"],
-      "tags": ["kind:core", "tone:neutral", "career:growth"],
+      "bullets": [
+        "从做事 → 负责模块",
+        "从负责模块 → 负责系统",
+        "从负责系统 → 负责结果"
+      ],
+      "tips": [
+        "给自己加一项“可见度工作”：让成果被看到",
+        "每季度选一个“硬技能+软技能”组合升级"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:growth"
+      ],
       "priority": 94
     },
     {
@@ -263,9 +625,20 @@
       "section": "career",
       "title": "选择原则：优先进入“能学到东西”的战场",
       "desc": "对你来说，学习速度和反馈质量决定了成长上限。",
-      "bullets": ["有优秀同事与清晰反馈", "有高密度问题可练", "有可复盘的项目闭环"],
-      "tips": ["别只看薪资和 title，也看成长曲线", "如果 3 个月没有新能力增量，就该调整策略"],
-      "tags": ["kind:core", "tone:warm", "career:learning"],
+      "bullets": [
+        "有优秀同事与清晰反馈",
+        "有高密度问题可练",
+        "有可复盘的项目闭环"
+      ],
+      "tips": [
+        "别只看薪资和 title，也看成长曲线",
+        "如果 3 个月没有新能力增量，就该调整策略"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "career:learning"
+      ],
       "priority": 92
     },
     {
@@ -273,9 +646,20 @@
       "section": "career",
       "title": "压力管理：把焦虑转成“可执行清单”",
       "desc": "职业压力多来自不确定。把不确定拆成可执行步骤，你会更快稳住。",
-      "bullets": ["把担心写下来", "按影响大小排序", "先解决最高影响的一条"],
-      "tips": ["设一个完成线：到线就交付，再迭代", "用周复盘替代日内耗：每周校准一次方向"],
-      "tags": ["kind:core", "tone:warm", "career:stress"],
+      "bullets": [
+        "把担心写下来",
+        "按影响大小排序",
+        "先解决最高影响的一条"
+      ],
+      "tips": [
+        "设一个完成线：到线就交付，再迭代",
+        "用周复盘替代日内耗：每周校准一次方向"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "career:stress"
+      ],
       "priority": 90
     },
     {
@@ -283,9 +667,20 @@
       "section": "career",
       "title": "长期护城河：把“稳定输出”变成品牌",
       "desc": "当别人靠爆发时，你靠稳定输出会越来越值钱：可靠、可预测、可复用。",
-      "bullets": ["稳定交付 = 信任资本", "方法论沉淀 = 复利资本", "好合作 = 口碑资本"],
-      "tips": ["让自己的输出可被复盘：指标/案例/总结", "持续做一件能复利的事（写作/作品/工具）"],
-      "tags": ["kind:core", "tone:neutral", "career:moat"],
+      "bullets": [
+        "稳定交付 = 信任资本",
+        "方法论沉淀 = 复利资本",
+        "好合作 = 口碑资本"
+      ],
+      "tips": [
+        "让自己的输出可被复盘：指标/案例/总结",
+        "持续做一件能复利的事（写作/作品/工具）"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:moat"
+      ],
       "priority": 88
     }
   ]

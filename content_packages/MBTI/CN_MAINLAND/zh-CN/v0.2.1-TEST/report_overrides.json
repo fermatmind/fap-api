@@ -3,54 +3,45 @@
   "engine": "v1",
   "rules": [
     {
-      "id": "hl_estj_action_tone",
-      "target": "highlights",
-      "priority": 100,
-
-      "match": {
-        "type_code": ["ESTJ-A", "ESTJ-T"],
-        "item": { "kind": ["action"] }
-      },
-
-      "mode": "patch",
-      "replace_fields": {
-        "title": "行动建议（更适合你）"
-      },
-      "patch": {
-        "text": "行动建议：先把目标拆成 3 个交付节点，然后立刻推进最小一步。"
-      }
-    },
-
-    {
       "id": "traits_add_card",
       "target": "cards",
       "priority": 50,
-
       "match": {
-        "section": ["traits"]
+        "section": [
+          "traits"
+        ]
       },
-
       "mode": "append",
-      "patch": {
-        "id": "traits_extra_01",
-        "title": "你的小优势",
-        "text": "……"
-      }
+      "items": [
+        {
+          "id": "traits_extra_01",
+          "title": "你的小优势",
+          "text": "……"
+        }
+      ]
     },
-
     {
       "id": "reads_replace_one",
       "target": "reads",
       "priority": 10,
       "match": {
-        "item": { "id": ["read_03"] }
+        "item": {
+          "id": [
+            "read.canary.rule_engine"
+          ]
+        }
       },
       "mode": "replace",
-      "patch": {
-        "id": "read_03",
-        "title": "替换后的推荐阅读",
-        "url": "https://example.com"
-      }
+      "items": [
+        {
+          "id": "read.canary.rule_engine",
+          "type": "article",
+          "title": "OVR_REPLACED_OK",
+          "desc": "这条是 overrides replace 生成的",
+          "url": "/reads/override-hit?id=read.canary.rule_engine",
+          "priority": 9999
+        }
+      ]
     }
   ]
 }
