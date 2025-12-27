@@ -21,4 +21,5 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Run selfcheck (default manifest)
-        run: make selfcheck
+  working-directory: backend
+  run: composer selfcheck
