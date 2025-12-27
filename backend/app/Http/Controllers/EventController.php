@@ -16,6 +16,7 @@ class EventController extends Controller
             'anon_id'     => ['nullable', 'string', 'max:128'],
             'attempt_id'  => ['required', 'string', 'max:64'],
             'occurred_at' => ['nullable', 'date'],
+            'props'       => ['nullable', 'array'], 
             'meta_json'   => ['nullable', 'array'],
         ]);
 
@@ -28,7 +29,7 @@ class EventController extends Controller
         $event->event_code  = $data['event_code'];
         $event->anon_id     = $data['anon_id'] ?? null;
         $event->attempt_id  = $data['attempt_id'];
-        $event->meta_json   = $data['meta_json'] ?? null;
+        $event->meta_json   = $data['props'] ?? ($data['meta_json'] ?? null);
 
         $event->occurred_at = !empty($data['occurred_at'])
             ? Carbon::parse($data['occurred_at'])
