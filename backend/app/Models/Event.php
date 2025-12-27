@@ -9,23 +9,17 @@ class Event extends Model
 {
     use HasUuids;
 
-    protected $table = 'events';
-
-    // UUID 主键
     public $incrementing = false;
-    protected $keyType = 'string';
+    protected $keyType = "string";
 
     protected $fillable = [
-        'id',
-        'event_code',
-        'anon_id',
-        'attempt_id',
-        'occurred_at',
-        'meta_json',
+        "event_code",
+        "anon_id",
+        "attempt_id",
+        "meta_json",
     ];
 
     protected $casts = [
-        'meta_json' => 'array',
-        'occurred_at' => 'datetime',
+        "meta_json" => "array",
     ];
 }
