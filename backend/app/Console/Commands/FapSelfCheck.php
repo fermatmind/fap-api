@@ -66,10 +66,14 @@ class FapSelfCheck extends Command
 
         // 1) questions.json
         $runIfDeclared(
-            'questions.json',
-            'questions.json',
-            fn () => $this->checkQuestions($this->pathOf($baseDir, 'questions.json'), $packId)
-        );
+    'questions.json',
+    'questions.json',
+    fn () => $this->checkQuestions(
+        $this->pathOf($baseDir, 'questions.json'),
+        $packId,
+        $this->expectedSchemaFor($manifest, 'questions', 'questions.json')
+    )
+);
 
         // 2) type_profiles.json
         $runIfDeclared(
@@ -336,55 +340,73 @@ class FapSelfCheck extends Command
 
     if (!is_array($schemas) || !is_array($assets)) return $errs;
 
-    $checkOne = function (string $assetLabel, string $rel, ?string $expectedSchema) use (&$errs, $baseDir, $packId) {
-    if (!is_string($rel) || trim($rel) === '') return;
-    if (str_ends_with($rel, '/')) return;
+    // 记录哪些 schemaKey 被 assets 实际用到了（用于做覆盖检查/提示）
+    $usedSchemaKeys = [];
 
-    $abs = $this->pathOf($baseDir, $rel);
-    if (!is_file($abs)) return;
-    if (!$this->isJsonFile($abs)) return;
+    $readSchema = function (string $rel) use ($baseDir) {
+        $abs = $this->pathOf($baseDir, $rel);
+        if (!is_file($abs)) return [null, null, $abs];
+        if (!$this->isJsonFile($abs)) return [null, null, $abs];
 
-    // ✅ 关键：expectedSchema 缺失也要报错（manifest.schemas 漏配）
-    if ($expectedSchema === null) {
-        $errs[] = "pack={$packId} file={$abs} :: missing manifest.schemas mapping (asset={$assetLabel})";
-        return;
-    }
+        $doc = $this->readJsonFile($abs);
+        $got = is_array($doc) ? ($doc['schema'] ?? null) : null;
+        return [$doc, $got, $abs];
+    };
 
-    $doc = $this->readJsonFile($abs);
-    $got = is_array($doc) ? ($doc['schema'] ?? null) : null;
+    $assertOne = function (string $assetLabel, string $assetKey, string $rel) use (&$errs, &$usedSchemaKeys, $manifest, $schemas, $readSchema, $packId) {
+        if (!is_string($rel) || trim($rel) === '') return;
+        if (str_ends_with($rel, '/')) return;
 
-    if ($got !== $expectedSchema) {
-        $errs[] = "pack={$packId} file={$abs} path=$.schema :: schema mismatch got="
-            . var_export($got, true)
-            . " want="
-            . var_export($expectedSchema, true)
-            . " (asset={$assetLabel})";
-    }
-};
+        // 只对 JSON 做 schema 对齐
+        [$doc, $got, $abs] = $readSchema($rel);
+        if ($doc === null && $got === null) {
+            // 不是 JSON 或文件不存在（存在性在上层 assets check 已经报过，这里不重复）
+            return;
+        }
+        if (!$this->isJsonFile($abs)) return;
 
+        // 通过 manifest + assetKey + 文件名，推导“应该用哪个 schema”
+        $expected = $this->expectedSchemaFor($manifest, $assetKey, basename($rel));
+        if ($expected === null) {
+            $errs[] = "pack={$packId} file={$abs} :: missing manifest.schemas mapping (asset={$assetLabel})";
+            return;
+        }
+
+        // 记录 used schemaKey（从 expected 字符串反推 schemaKey 不可靠，所以这里用 expectedSchemaFor 的“存在性”即可）
+        // 更严格的覆盖检查放到后面：通过 assets 重新推 schemaKey
+        // 这里先不做 usedSchemaKeys 统计，避免反推误差
+
+        if (!is_string($got) || trim((string)$got) === '') {
+            $errs[] = "pack={$packId} file={$abs} path=$.schema :: missing schema field (asset={$assetLabel}) want=" . var_export($expected, true);
+            return;
+        }
+
+        if ($got !== $expected) {
+            $errs[] = "pack={$packId} file={$abs} path=$.schema :: schema mismatch got="
+                . var_export($got, true)
+                . " want="
+                . var_export($expected, true)
+                . " (asset={$assetLabel})";
+        }
+    };
+
+    // 1) 遍历 assets：每个 JSON 都必须能映射到 schema，且 schema 必须一致
     foreach ($assets as $assetKey => $paths) {
         // overrides: object(map) with buckets + order
         if ($assetKey === 'overrides' && is_array($paths) && $this->isAssocArray($paths)) {
             foreach ($paths as $bucket => $list) {
                 if ($bucket === 'order') continue;
 
-                if (!is_array($list)) $list = [$list];
+                $list = is_array($list) ? $list : [$list];
 
-                // bucket -> schema key
-                $schemaKey = null;
-if ($bucket === 'unified') $schemaKey = 'overrides_unified';
-elseif ($bucket === 'highlights_legacy') $schemaKey = 'overrides_highlights_legacy';
+                // bucket -> “伪 assetKey”，让 expectedSchemaFor 能识别
+                $bucketKey = null;
+                if ($bucket === 'unified') $bucketKey = 'overrides_unified';
+                if ($bucket === 'highlights_legacy') $bucketKey = 'overrides_highlights_legacy';
 
-if ($schemaKey === null) {
-    $errs[] = "pack={$packId} file=manifest.json path=$.assets.overrides :: unknown bucket '{$bucket}' (no schema mapping rule)";
-    continue;
-}
-
-$expected = $schemas[$schemaKey] ?? null;
-
-foreach ($list as $rel) {
-    $checkOne("overrides.{$bucket}", (string)$rel, $expected);
-}
+                foreach ($list as $rel) {
+                    $assertOne("overrides.{$bucket}", $bucketKey ?? 'overrides', (string)$rel);
+                }
             }
             continue;
         }
@@ -394,12 +416,74 @@ foreach ($list as $rel) {
 
         foreach ($paths as $rel) {
             if (!is_string($rel)) continue;
-
-            // 这里用你新加的 helper 来计算 expected schema
-            $expected = $this->expectedSchemaFor($manifest, (string)$assetKey, basename($rel));
-
-            $checkOne((string)$assetKey, $rel, $expected);
+            $assertOne((string)$assetKey, (string)$assetKey, $rel);
         }
+    }
+
+    // 2) 覆盖检查：assets 中出现的 schemaKey 必须在 manifest.schemas 有声明
+    //    （这个检查实际已经被 assertOne 的 expectedSchemaFor -> null 覆盖了）
+    //    但我们额外检查 “manifest.schemas 里声明了但 assets 没用到”的情况，给 warning（不 fail）
+    //    你如果想强制 fail，把 warn 改成 errs 即可。
+    $knownSchemaKeys = array_keys(is_array($schemas) ? $schemas : []);
+    // 根据 assets 重新推导 schemaKey（比 usedSchemaKeys 更准确）
+    $used = [];
+    $collectSchemaKey = function (string $assetKey, string $file) use (&$used) {
+        // 与 expectedSchemaFor 保持同样的分类口径（只收集 schemaKey，不做值判断）
+        $file = (string)$file;
+
+        if (in_array($assetKey, ['questions','type_profiles','cards','highlights','reads'], true)) {
+            $used[$assetKey] = true;
+            return;
+        }
+
+        if ($assetKey === 'borderline') {
+            if (str_contains($file, 'borderline_templates')) $used['borderline_templates'] = true;
+            if (str_contains($file, 'borderline_notes')) $used['borderline_notes'] = true;
+            return;
+        }
+
+        if ($assetKey === 'identity') {
+            if (str_contains($file, 'identity_cards'))  $used['identity_cards'] = true;
+            if (str_contains($file, 'identity_layers')) $used['identity_layers'] = true;
+            if (str_contains($file, 'roles'))           $used['roles'] = true;
+            if (str_contains($file, 'strategies'))      $used['strategies'] = true;
+            return;
+        }
+
+        if ($assetKey === 'overrides_unified') $used['overrides_unified'] = true;
+        if ($assetKey === 'overrides_highlights_legacy') $used['overrides_highlights_legacy'] = true;
+    };
+
+    foreach ($assets as $assetKey => $paths) {
+        if ($assetKey === 'overrides' && is_array($paths) && $this->isAssocArray($paths)) {
+            foreach ($paths as $bucket => $list) {
+                if ($bucket === 'order') continue;
+                $list = is_array($list) ? $list : [$list];
+
+                $bucketKey = null;
+                if ($bucket === 'unified') $bucketKey = 'overrides_unified';
+                if ($bucket === 'highlights_legacy') $bucketKey = 'overrides_highlights_legacy';
+
+                foreach ($list as $rel) {
+                    if (!is_string($rel)) continue;
+                    $collectSchemaKey($bucketKey ?? 'overrides', basename($rel));
+                }
+            }
+            continue;
+        }
+
+        if (!is_array($paths)) continue;
+        foreach ($paths as $rel) {
+            if (!is_string($rel)) continue;
+            $collectSchemaKey((string)$assetKey, basename($rel));
+        }
+    }
+
+    $unusedSchemaKeys = array_values(array_diff($knownSchemaKeys, array_keys($used)));
+    if (!empty($unusedSchemaKeys)) {
+        // 不 fail，只提示（如果你想 fail，把这一段改成 $errs[]）
+        // $errs[] = "pack={$packId} file=manifest.json path=$.schemas :: unused schema keys: " . implode(', ', $unusedSchemaKeys);
+        // 这里选择不加 errs，避免你未来扩展 schemas 时被卡死
     }
 
     return $errs;
@@ -409,7 +493,7 @@ foreach ($list as $rel) {
 // Unified overrides rules validation
 // -------------------------
 
-private function checkReportOverrides(string $path, array $manifest, string $packId): array
+private function checkReportOverrides(string $path, array $manifest, string $packId, ?string $expectedSchema = null): array
 {
     if (!is_file($path)) {
         return [false, ["pack={$packId} file={$path} :: File not found"]];
@@ -418,6 +502,10 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
     $doc = $this->readJsonFile($path);
     if (!is_array($doc)) {
         return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+    }
+
+        if ($errs = $this->checkSchemaField($doc, $expectedSchema, $packId, $path, 'overrides_unified')) {
+        return [false, $errs];
     }
 
     // ------------------------------------------------------------------
@@ -539,102 +627,114 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
     // File checks
     // -------------------------
 
-    private function checkQuestions(string $path, string $packId): array
-    {
-        if (!is_file($path)) {
-            return [false, ["pack={$packId} file={$path} :: File not found"]];
-        }
-
-        $json = $this->readJsonFile($path);
-        if (!is_array($json)) {
-            return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
-        }
-
-        $items = isset($json['items']) ? $json['items'] : $json;
-        if (!is_array($items)) {
-            return [false, ["pack={$packId} file={$path} path=$.items :: Invalid items structure (expect array or {items:[]})"]];
-        }
-
-        $items = array_values(array_filter($items, fn ($q) => ($q['is_active'] ?? true) === true));
-        usort($items, fn ($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
-
-        $errors = [];
-
-        if (count($items) !== 144) {
-            $errors[] = "pack={$packId} file={$path} :: Active questions must be 144, got " . count($items);
-        }
-
-        $validDims = ['EI', 'SN', 'TF', 'JP', 'AT'];
-        $seenQid = [];
-        $orders = [];
-
-        foreach ($items as $i => $q) {
-            $idx = $i + 1;
-            $qid = $q['question_id'] ?? null;
-
-            if (!$qid) $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].question_id :: missing question_id";
-            if ($qid && isset($seenQid[$qid])) $errors[] = "pack={$packId} file={$path} :: duplicate question_id {$qid}";
-            if ($qid) $seenQid[$qid] = true;
-
-            $order = $q['order'] ?? null;
-            if (!is_int($order) && !is_numeric($order)) $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].order :: invalid order";
-            if (is_numeric($order)) $orders[] = (int)$order;
-
-            $dim = $q['dimension'] ?? null;
-            if (!in_array($dim, $validDims, true)) $errors[] = "pack={$packId} file={$path} :: invalid dimension {$dim} (qid={$qid})";
-
-            $text = $q['text'] ?? null;
-            if (!is_string($text) || trim($text) === '') $errors[] = "pack={$packId} file={$path} :: missing text (qid={$qid})";
-
-            $keyPole = $q['key_pole'] ?? null;
-            if (!is_string($keyPole) || $keyPole === '') $errors[] = "pack={$packId} file={$path} :: missing key_pole (qid={$qid})";
-
-            $direction = $q['direction'] ?? null;
-            if (!in_array((int)$direction, [1, -1], true)) $errors[] = "pack={$packId} file={$path} :: direction must be 1 or -1 (qid={$qid})";
-
-            $opts = $q['options'] ?? null;
-            if (!is_array($opts) || count($opts) < 2) {
-                $errors[] = "pack={$packId} file={$path} :: options invalid (qid={$qid})";
-                continue;
-            }
-
-            $needCodes = ['A','B','C','D','E'];
-            $optMap = [];
-            foreach ($opts as $o) {
-                $c = strtoupper((string)($o['code'] ?? ''));
-                if ($c !== '') $optMap[$c] = $o;
-            }
-
-            foreach ($needCodes as $c) {
-                if (!isset($optMap[$c])) {
-                    $errors[] = "pack={$packId} file={$path} :: missing option {$c} (qid={$qid})";
-                    continue;
-                }
-                $t = $optMap[$c]['text'] ?? null;
-                if (!is_string($t) || trim($t) === '') $errors[] = "pack={$packId} file={$path} :: option {$c} missing text (qid={$qid})";
-                if (!array_key_exists('score', $optMap[$c]) || !is_numeric($optMap[$c]['score'])) {
-                    $errors[] = "pack={$packId} file={$path} :: option {$c} missing numeric score (qid={$qid})";
-                }
-            }
-        }
-
-        if (count($orders) > 0) {
-            $min = min($orders);
-            $max = max($orders);
-            if ($min !== 1 || $max !== 144) $errors[] = "pack={$packId} file={$path} :: order range should be 1..144, got {$min}..{$max}";
-        }
-
-        if (!empty($errors)) return [false, array_slice($errors, 0, 120)];
-
-        return [true, ['OK (144 active questions, A~E options + scoring fields present)']];
+    private function checkQuestions(string $path, string $packId, ?string $expectedSchema = null): array
+{
+    if (!is_file($path)) {
+        return [false, ["pack={$packId} file={$path} :: File not found"]];
     }
 
-    private function checkTypeProfiles(string $path, string $packId): array
+    $json = $this->readJsonFile($path);
+    if (!is_array($json)) {
+        return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+    }
+
+    $errors = [];
+
+    // ✅ 0) schema field check (so this section can fail too, not only manifest section)
+    if ($expectedSchema !== null && trim($expectedSchema) !== '') {
+        $schemaErrs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'questions');
+        if (is_array($schemaErrs) && !empty($schemaErrs)) {
+            $errors = array_merge($errors, $schemaErrs);
+        }
+    }
+
+    $items = isset($json['items']) ? $json['items'] : $json;
+    if (!is_array($items)) {
+        $errors[] = "pack={$packId} file={$path} path=$.items :: Invalid items structure (expect array or {items:[]})";
+        return [false, array_slice($errors, 0, 120)];
+    }
+
+    $items = array_values(array_filter($items, fn ($q) => ($q['is_active'] ?? true) === true));
+    usort($items, fn ($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
+
+    if (count($items) !== 144) {
+        $errors[] = "pack={$packId} file={$path} :: Active questions must be 144, got " . count($items);
+    }
+
+    $validDims = ['EI', 'SN', 'TF', 'JP', 'AT'];
+    $seenQid = [];
+    $orders = [];
+
+    foreach ($items as $i => $q) {
+        $qid = $q['question_id'] ?? null;
+
+        if (!$qid) $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].question_id :: missing question_id";
+        if ($qid && isset($seenQid[$qid])) $errors[] = "pack={$packId} file={$path} :: duplicate question_id {$qid}";
+        if ($qid) $seenQid[$qid] = true;
+
+        $order = $q['order'] ?? null;
+        if (!is_int($order) && !is_numeric($order)) $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].order :: invalid order";
+        if (is_numeric($order)) $orders[] = (int)$order;
+
+        $dim = $q['dimension'] ?? null;
+        if (!in_array($dim, $validDims, true)) $errors[] = "pack={$packId} file={$path} :: invalid dimension {$dim} (qid={$qid})";
+
+        $text = $q['text'] ?? null;
+        if (!is_string($text) || trim($text) === '') $errors[] = "pack={$packId} file={$path} :: missing text (qid={$qid})";
+
+        $keyPole = $q['key_pole'] ?? null;
+        if (!is_string($keyPole) || $keyPole === '') $errors[] = "pack={$packId} file={$path} :: missing key_pole (qid={$qid})";
+
+        $direction = $q['direction'] ?? null;
+        if (!in_array((int)$direction, [1, -1], true)) $errors[] = "pack={$packId} file={$path} :: direction must be 1 or -1 (qid={$qid})";
+
+        $opts = $q['options'] ?? null;
+        if (!is_array($opts) || count($opts) < 2) {
+            $errors[] = "pack={$packId} file={$path} :: options invalid (qid={$qid})";
+            continue;
+        }
+
+        $needCodes = ['A','B','C','D','E'];
+        $optMap = [];
+        foreach ($opts as $o) {
+            $c = strtoupper((string)($o['code'] ?? ''));
+            if ($c !== '') $optMap[$c] = $o;
+        }
+
+        foreach ($needCodes as $c) {
+            if (!isset($optMap[$c])) {
+                $errors[] = "pack={$packId} file={$path} :: missing option {$c} (qid={$qid})";
+                continue;
+            }
+            $t = $optMap[$c]['text'] ?? null;
+            if (!is_string($t) || trim($t) === '') $errors[] = "pack={$packId} file={$path} :: option {$c} missing text (qid={$qid})";
+            if (!array_key_exists('score', $optMap[$c]) || !is_numeric($optMap[$c]['score'])) {
+                $errors[] = "pack={$packId} file={$path} :: option {$c} missing numeric score (qid={$qid})";
+            }
+        }
+    }
+
+    if (count($orders) > 0) {
+        $min = min($orders);
+        $max = max($orders);
+        if ($min !== 1 || $max !== 144) $errors[] = "pack={$packId} file={$path} :: order range should be 1..144, got {$min}..{$max}";
+    }
+
+    if (!empty($errors)) return [false, array_slice($errors, 0, 120)];
+
+    return [true, ['OK (144 active questions, A~E options + scoring fields present)']];
+}
+
+    private function checkTypeProfiles(string $path, string $packId, ?string $expectedSchema = null): array
     {
         if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
 
         $json = $this->readJsonFile($path);
         if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+        if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'type_profiles')) {
+            return [false, $errs];
+        }        
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) return [false, ["pack={$packId} file={$path} path=$.items :: Invalid items (expect {items:{...}})"]];
@@ -670,12 +770,16 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return [true, ['OK (32 types, required fields present)']];
     }
 
-    private function checkHighlightsTemplates(string $path, string $packId): array
+    private function checkHighlightsTemplates(string $path, string $packId, ?string $expectedSchema = null): array
     {
         if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
 
         $json = $this->readJsonFile($path);
         if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+        if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'highlights')) {
+            return [false, $errs];
+        }
 
         $tpl = $json['templates'] ?? null;
         if (!is_array($tpl)) return [false, ["pack={$packId} file={$path} path=$.templates :: Missing/invalid templates"]];
@@ -729,12 +833,16 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return [true, ['OK (5 dims × 2 sides × 3 levels present & valid)']];
     }
 
-    private function checkHighlightsOverrides(string $path, string $packId): array
+    private function checkHighlightsOverrides(string $path, string $packId, ?string $expectedSchema = null): array
     {
         if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
 
         $json = $this->readJsonFile($path);
         if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+        if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'overrides_highlights_legacy')) {
+            return [false, $errs];
+        }
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) return [false, ["pack={$packId} file={$path} path=$.items :: Missing/invalid items"]];
@@ -772,12 +880,16 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return [true, ['OK (items valid, no per-type duplicate ids)']];
     }
 
-    private function checkBorderlineTemplates(string $path, string $packId): array
+    private function checkBorderlineTemplates(string $path, string $packId, ?string $expectedSchema = null): array
     {
         if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
 
         $json = $this->readJsonFile($path);
         if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+        if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'borderline_templates')) {
+            return [false, $errs];
+        }
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) return [false, ["pack={$packId} file={$path} path=$.items :: Missing/invalid items"]];
@@ -803,12 +915,16 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return [true, ['OK (5 dims present & valid)']];
     }
 
-    private function checkReportRoles(string $path, string $packId): array
+    private function checkReportRoles(string $path, string $packId, ?string $expectedSchema = null): array
     {
         if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
 
         $json = $this->readJsonFile($path);
         if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+        if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'roles')) {
+            return [false, $errs];
+        }
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) return [false, ["pack={$packId} file={$path} path=$.items :: Missing/invalid items"]];
@@ -837,12 +953,16 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return [true, ['OK (NT/NF/SJ/SP present & valid)']];
     }
 
-    private function checkReportStrategies(string $path, string $packId): array
+    private function checkReportStrategies(string $path, string $packId, ?string $expectedSchema = null): array
     {
         if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
 
         $json = $this->readJsonFile($path);
         if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+        if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'strategies')) {
+            return [false, $errs];
+        }
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) return [false, ["pack={$packId} file={$path} path=$.items :: Missing/invalid items"]];
@@ -866,12 +986,16 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return [true, ['OK (EA/ET/IA/IT present & valid)']];
     }
 
-    private function checkRecommendedReads(string $path, string $packId): array
+    private function checkRecommendedReads(string $path, string $packId, ?string $expectedSchema = null): array
     {
         if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
 
         $json = $this->readJsonFile($path);
         if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+        if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'reads')) {
+            return [false, $errs];
+        }
 
         $items = $json['items'] ?? null;
         if (!is_array($items)) return [false, ["pack={$packId} file={$path} path=$.items :: Missing/invalid items"]];
@@ -976,6 +1100,29 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return array_keys($a) !== range(0, count($a) - 1);
     }
 
+    private function checkSchemaField(array $doc, ?string $expectedSchema, string $packId, string $path, string $assetLabel): ?array
+{
+    if ($expectedSchema === null || trim($expectedSchema) === '') return null;
+
+    $got = $doc['schema'] ?? null;
+
+    if ($got === null || $got === '') {
+        return [
+            "pack={$packId} file={$path} path=$.schema :: missing schema field (asset={$assetLabel}) want=" . var_export($expectedSchema, true)
+        ];
+    }
+
+    if ($got !== $expectedSchema) {
+        return [
+            "pack={$packId} file={$path} path=$.schema :: schema mismatch got=" . var_export($got, true)
+            . " want=" . var_export($expectedSchema, true)
+            . " (asset={$assetLabel})"
+        ];
+    }
+
+    return null;
+}
+
     private function declaredAssetBasenames(array $manifest): array
     {
         $out = [];
@@ -1065,7 +1212,7 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
 {
     $schemas = $manifest['schemas'] ?? [];
 
-    // 绝大多数 asset 是“一类文件一个 schema”
+    // 1) 绝大多数 asset：一类一个 schema
     $direct = [
         'questions'      => 'questions',
         'type_profiles'  => 'type_profiles',
@@ -1077,29 +1224,23 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return $schemas[$direct[$assetKey]] ?? null;
     }
 
-    // borderline: 两个文件两个 schema
+    // 2) borderline：templates / notes
     if ($assetKey === 'borderline') {
-        if (str_contains($file, 'report_borderline_templates')) {
-            return $schemas['borderline_templates'] ?? null;
-        }
-        if (str_contains($file, 'report_borderline_notes')) {
-            return $schemas['borderline_notes'] ?? null;
-        }
+        if (str_contains($file, 'borderline_templates')) return $schemas['borderline_templates'] ?? null;
+        if (str_contains($file, 'borderline_notes'))     return $schemas['borderline_notes'] ?? null;
         return null;
     }
 
-    // identity: 多文件多 schema（按文件名/子串判断，兼容不同命名）
-if ($assetKey === 'identity') {
-    if (str_contains($file, 'identity_cards'))  return $schemas['identity_cards'] ?? null;
-    if (str_contains($file, 'identity_layers')) return $schemas['identity_layers'] ?? null;
-    if (str_contains($file, 'roles'))           return $schemas['roles'] ?? null;
-    if (str_contains($file, 'strategies'))      return $schemas['strategies'] ?? null;
-    return null;
-}
+    // 3) identity：cards / layers / roles / strategies（兼容 report_ 前缀与不带前缀）
+    if ($assetKey === 'identity') {
+        if (str_contains($file, 'identity_cards'))  return $schemas['identity_cards'] ?? null;
+        if (str_contains($file, 'identity_layers')) return $schemas['identity_layers'] ?? null;
+        if (str_contains($file, 'roles'))           return $schemas['roles'] ?? null;
+        if (str_contains($file, 'strategies'))      return $schemas['strategies'] ?? null;
+        return null;
+    }
 
-    // overrides: 你现在 manifest.assets.overrides 是对象（order/unified/..）
-    // self-check 里遍历时，你会知道当前 bucket 名：unified / highlights_legacy
-    // 这里假设你把 bucket 当成 assetKey 传进来（见第 3 步）
+    // 4) overrides buckets（你在 checkAssetsSchemasAgainstManifest 里会把 bucket 转成这个 assetKey）
     if ($assetKey === 'overrides_unified') {
         return $schemas['overrides_unified'] ?? null;
     }
