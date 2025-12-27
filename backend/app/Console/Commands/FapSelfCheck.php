@@ -357,6 +357,16 @@ class FapSelfCheck extends Command
         if (!is_string($rel) || trim($rel) === '') return;
         if (str_ends_with($rel, '/')) return;
 
+    // refine label for better error messages (identity -> identity_cards/identity_layers/roles/strategies)
+        $label = $assetLabel;
+        if ($assetKey === 'identity') {
+            $bn = basename($rel);
+            if (str_contains($bn, 'identity_cards'))       $label = 'identity_cards';
+            elseif (str_contains($bn, 'identity_layers'))  $label = 'identity_layers';
+            elseif (str_contains($bn, 'roles'))            $label = 'roles';
+            elseif (str_contains($bn, 'strategies'))       $label = 'strategies';
+        }
+
         // 只对 JSON 做 schema 对齐
         [$doc, $got, $abs] = $readSchema($rel);
         if ($doc === null && $got === null) {
@@ -368,8 +378,7 @@ class FapSelfCheck extends Command
         // 通过 manifest + assetKey + 文件名，推导“应该用哪个 schema”
         $expected = $this->expectedSchemaFor($manifest, $assetKey, basename($rel));
         if ($expected === null) {
-            $errs[] = "pack={$packId} file={$abs} :: missing manifest.schemas mapping (asset={$assetLabel})";
-            return;
+$errs[] = "pack={$packId} file={$abs} :: missing manifest.schemas mapping (asset={$label})";            return;
         }
 
         // 记录 used schemaKey（从 expected 字符串反推 schemaKey 不可靠，所以这里用 expectedSchemaFor 的“存在性”即可）
@@ -377,16 +386,15 @@ class FapSelfCheck extends Command
         // 这里先不做 usedSchemaKeys 统计，避免反推误差
 
         if (!is_string($got) || trim((string)$got) === '') {
-            $errs[] = "pack={$packId} file={$abs} path=$.schema :: missing schema field (asset={$assetLabel}) want=" . var_export($expected, true);
-            return;
+$errs[] = "pack={$packId} file={$abs} path=$.schema :: missing schema field (asset={$label}) want=" . var_export($expected, true);            return;
         }
 
         if ($got !== $expected) {
             $errs[] = "pack={$packId} file={$abs} path=$.schema :: schema mismatch got="
-                . var_export($got, true)
-                . " want="
-                . var_export($expected, true)
-                . " (asset={$assetLabel})";
+    . var_export($got, true)
+    . " want="
+    . var_export($expected, true)
+    . " (asset={$label})";
         }
     };
 
