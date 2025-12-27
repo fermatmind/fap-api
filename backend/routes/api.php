@@ -40,4 +40,5 @@ Route::prefix("v0.2")->group(function () {
 
     // 7) 事件上报（恢复 /api/v0.2/events）
     Route::post("/events", [EventController::class, "store"]);
-});
+
+Route::post('attempts/start', [\App\Http\Controllers\MbtiController::class, 'startAttempt']);});
