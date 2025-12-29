@@ -38,6 +38,7 @@ Route::prefix("v0.2")->group(function () {
     // 6) 获取分享模板数据
     Route::get("/attempts/{id}/share", [MbtiController::class, "getShare"]);
 
+    Route::get('attempts/{id}/report', [\App\Http\Controllers\MbtiController::class, 'getReport']);
     // 7) 事件上报（恢复 /api/v0.2/events）
     Route::post("/events", [EventController::class, "store"]);
 
