@@ -224,6 +224,7 @@ public function storeAttempt(Request $request)
         'referrer'        => ['nullable', 'string', 'max:255'],
         'region'          => ['nullable', 'string', 'max:32'],
         'locale'          => ['nullable', 'string', 'max:16'],
+        'attempt_id'      => ['nullable', 'string', 'max:64'],
     ]);
 
     $expectedQuestionCount = 144;
@@ -290,6 +291,9 @@ public function storeAttempt(Request $request)
     $countP1      = array_fill_keys($dims, 0);
     $countP2      = array_fill_keys($dims, 0);
     $countNeutral = array_fill_keys($dims, 0);
+
+    // ✅ 用于记录被跳过的题（invalid_dimension 等）
+$skipped = [];
 
     // 默认 5 档（当 score_map 缺失/异常时兜底）
     $defaultScoreMap = ['A' => 2, 'B' => 1, 'C' => 0, 'D' => -1, 'E' => -2];
@@ -429,6 +433,7 @@ public function storeAttempt(Request $request)
         'dims_sum_p1'  => $sumTowardP1,
         'scores_pct'   => $scoresPct,
         'type_code'    => $typeCode,
+        'skipped'      => $skipped,
         'counts'       => [
             'p1'      => $countP1,
             'p2'      => $countP2,
@@ -473,124 +478,151 @@ public function storeAttempt(Request $request)
     ], 500);
 }
 
-    return DB::transaction(function () use (
-        $request,
-        $payload,
-        $expectedQuestionCount,
-        $answersSummary,
-        $typeCode,
-        $scoresJson,
-        $scoresPct,
-        $axisStates,
-        $profileVersion,
-        $contentPackageVersion,
-        $answers,
-        $answersHash,
-        $answersStoragePath
-    ) {
-        $attemptId = (string) Str::uuid();
-        $resultId  = (string) Str::uuid();
+return DB::transaction(function () use (
+    $request,
+    $payload,
+    $expectedQuestionCount,
+    $answersSummary,
+    $typeCode,
+    $scoresJson,
+    $scoresPct,
+    $axisStates,
+    $profileVersion,
+    $contentPackageVersion,
+    $answers,
+    $answersHash,
+    $answersStoragePath
+) {
+    // ✅ 1) 优先复用 startAttempt 生成的 attempt_id
+    $attemptId = isset($payload['attempt_id']) && is_string($payload['attempt_id']) && trim($payload['attempt_id']) !== ''
+        ? trim($payload['attempt_id'])
+        : (string) Str::uuid();
 
-        // 1) attempts
-$attemptData = [
-    'id'                   => $attemptId,
-    'anon_id'              => $payload['anon_id'],
-    'user_id'              => null,
-    'scale_code'           => $payload['scale_code'],
-    'scale_version'        => $payload['scale_version'],
-    'question_count'       => $expectedQuestionCount,
-    'answers_summary_json' => $answersSummary,
+    $resultId  = (string) Str::uuid();
 
-    'client_platform'      => $payload['client_platform'] ?? 'unknown',
-    'client_version'       => $payload['client_version'] ?? 'unknown',
-    'channel'              => $payload['channel'] ?? 'direct',
-    'referrer'             => $payload['referrer'] ?? '',
+    // ✅ 若 attempt_id 已存在：校验归属（anon_id / scale_code / version），并更新提交信息
+    $existingAttempt = Attempt::where('id', $attemptId)->first();
 
-    'started_at'           => now(),
-    'submitted_at'         => now(),
-];
-
-// ✅ 关键：answers_json 直接存 array（不要 json_encode）
-if (Schema::hasColumn('attempts', 'answers_json')) {
-    $attemptData['answers_json'] = $answers;
-}
-if (Schema::hasColumn('attempts', 'answers_hash')) {
-    $attemptData['answers_hash'] = $answersHash;
-}
-if (Schema::hasColumn('attempts', 'answers_storage_path')) {
-    $attemptData['answers_storage_path'] = $answersStoragePath;
-}
-
-if (Schema::hasColumn('attempts', 'region')) {
-    $attemptData['region'] = $payload['region'] ?? 'CN_MAINLAND';
-}
-if (Schema::hasColumn('attempts', 'locale')) {
-    $attemptData['locale'] = $payload['locale'] ?? 'zh-CN';
-}
-
-$attempt = Attempt::create($attemptData);
-
-        // 2) results
-        $resultData = [
-            'id'            => $resultId,
-            'attempt_id'    => $attemptId,
-            'scale_code'    => $payload['scale_code'],
-            'scale_version' => $payload['scale_version'],
-            'type_code'     => $typeCode,
-            'scores_json'   => $scoresJson,
-            'is_valid'      => true,
-            'computed_at'   => now(),
-        ];
-
-        if (Schema::hasColumn('results', 'scores_pct')) {
-            $resultData['scores_pct'] = $scoresPct;
+    if ($existingAttempt) {
+        // 归属校验（防止串单）
+        if ((string)$existingAttempt->anon_id !== (string)$payload['anon_id']
+            || (string)$existingAttempt->scale_code !== (string)$payload['scale_code']
+            || (string)$existingAttempt->scale_version !== (string)$payload['scale_version']
+        ) {
+            return response()->json([
+                'ok'      => false,
+                'error'   => 'ATTEMPT_MISMATCH',
+                'message' => 'attempt_id does not match anon_id/scale.',
+            ], 409);
         }
-        if (Schema::hasColumn('results', 'axis_states')) {
-            $resultData['axis_states'] = $axisStates;
-        }
-        if (Schema::hasColumn('results', 'profile_version')) {
-            $resultData['profile_version'] = $profileVersion;
-        }
-        if (Schema::hasColumn('results', 'content_package_version')) {
-            $resultData['content_package_version'] = $contentPackageVersion;
-        }
+    }
 
-        $result = Result::create($resultData);
+    // 2) attempts（create or update）
+    $attemptData = [
+        'id'                   => $attemptId,
+        'anon_id'              => $payload['anon_id'],
+        'user_id'              => null,
+        'scale_code'           => $payload['scale_code'],
+        'scale_version'        => $payload['scale_version'],
+        'question_count'       => $expectedQuestionCount,
+        'answers_summary_json' => $answersSummary,
 
-        // 3) test_submit（强一致：事务成功后写）
-        $this->logEvent('test_submit', $request, [
-            'anon_id'       => $payload['anon_id'],
-            'scale_code'    => $attempt->scale_code,
-            'scale_version' => $attempt->scale_version,
-            'attempt_id'    => $attemptId,
-            'channel'       => $attempt->channel,
-            'region'        => $payload['region'] ?? 'CN_MAINLAND',
-            'locale'        => $payload['locale'] ?? 'zh-CN',
-            'meta_json'     => [
-                'answer_count'            => count($payload['answers']),
-                'question_count'          => $attempt->question_count,
-                'type_code'               => $result->type_code,
-                'scores_pct'              => $scoresPct,
-                'axis_states'             => $axisStates,
-                'profile_version'         => $profileVersion,
-                'content_package_version' => $contentPackageVersion,
-            ],
-        ]);
+        'client_platform'      => $payload['client_platform'] ?? ($existingAttempt?->client_platform ?? 'unknown'),
+        'client_version'       => $payload['client_version'] ?? ($existingAttempt?->client_version ?? 'unknown'),
+        'channel'              => $payload['channel'] ?? ($existingAttempt?->channel ?? 'direct'),
+        'referrer'             => $payload['referrer'] ?? ($existingAttempt?->referrer ?? ''),
 
-        return response()->json([
-            'ok'         => true,
-            'attempt_id' => $attemptId,
-            'result_id'  => $resultId,
-            'result'     => [
-                'type_code'               => $typeCode,
-                'scores'                  => $scoresJson,
-                'scores_pct'              => $scoresPct,
-                'axis_states'             => $axisStates,
-                'profile_version'         => $profileVersion,
-                'content_package_version' => $contentPackageVersion,
-            ],
-        ], 201);
-    });
+        // ✅ started_at：复用已有；没有就 now
+        'started_at'           => $existingAttempt?->started_at ?? now(),
+        'submitted_at'         => now(),
+    ];
+
+    if (Schema::hasColumn('attempts', 'answers_json')) {
+        $attemptData['answers_json'] = $answers;
+    }
+    if (Schema::hasColumn('attempts', 'answers_hash')) {
+        $attemptData['answers_hash'] = $answersHash;
+    }
+    if (Schema::hasColumn('attempts', 'answers_storage_path')) {
+        $attemptData['answers_storage_path'] = $answersStoragePath;
+    }
+    if (Schema::hasColumn('attempts', 'region')) {
+        $attemptData['region'] = $payload['region'] ?? ($existingAttempt?->region ?? 'CN_MAINLAND');
+    }
+    if (Schema::hasColumn('attempts', 'locale')) {
+        $attemptData['locale'] = $payload['locale'] ?? ($existingAttempt?->locale ?? 'zh-CN');
+    }
+
+    if ($existingAttempt) {
+        // update（避免重复 attempts）
+        $existingAttempt->fill($attemptData);
+        $existingAttempt->save();
+        $attempt = $existingAttempt;
+    } else {
+        $attempt = Attempt::create($attemptData);
+    }
+
+    // 3) results（保持你原逻辑）
+    $resultData = [
+        'id'            => $resultId,
+        'attempt_id'    => $attemptId,
+        'scale_code'    => $payload['scale_code'],
+        'scale_version' => $payload['scale_version'],
+        'type_code'     => $typeCode,
+        'scores_json'   => $scoresJson,
+        'is_valid'      => true,
+        'computed_at'   => now(),
+    ];
+
+    if (Schema::hasColumn('results', 'scores_pct')) {
+        $resultData['scores_pct'] = $scoresPct;
+    }
+    if (Schema::hasColumn('results', 'axis_states')) {
+        $resultData['axis_states'] = $axisStates;
+    }
+    if (Schema::hasColumn('results', 'profile_version')) {
+        $resultData['profile_version'] = $profileVersion;
+    }
+    if (Schema::hasColumn('results', 'content_package_version')) {
+        $resultData['content_package_version'] = $contentPackageVersion;
+    }
+
+    $result = Result::create($resultData);
+
+    // 4) test_submit event（保持你原逻辑）
+    $this->logEvent('test_submit', $request, [
+        'anon_id'       => $payload['anon_id'],
+        'scale_code'    => $attempt->scale_code,
+        'scale_version' => $attempt->scale_version,
+        'attempt_id'    => $attemptId,
+        'channel'       => $attempt->channel,
+        'region'        => $payload['region'] ?? 'CN_MAINLAND',
+        'locale'        => $payload['locale'] ?? 'zh-CN',
+        'meta_json'     => [
+            'answer_count'            => count($payload['answers']),
+            'question_count'          => $attempt->question_count,
+            'type_code'               => $result->type_code,
+            'scores_pct'              => $scoresPct,
+            'axis_states'             => $axisStates,
+            'profile_version'         => $profileVersion,
+            'content_package_version' => $contentPackageVersion,
+        ],
+    ]);
+
+    return response()->json([
+        'ok'         => true,
+        'attempt_id' => $attemptId,
+        'result_id'  => $resultId,
+        'result'     => [
+            'type_code'               => $typeCode,
+            'scores'                  => $scoresJson,
+            'scores_pct'              => $scoresPct,
+            'axis_states'             => $axisStates,
+            'profile_version'         => $profileVersion,
+            'content_package_version' => $contentPackageVersion,
+        ],
+    ], 201);
+});
 }
 
     /**
@@ -893,6 +925,26 @@ public function getReport(Request $request, string $attemptId)
 if (isset($reportPayload['highlights']) && is_array($reportPayload['highlights'])) {
     $type = (string)($res['type_code'] ?? $result->type_code ?? '');
     $reportPayload['highlights'] = $this->finalizeHighlightsSchema($reportPayload['highlights'], $type);
+}
+
+// (1) 把 tags 塞进 report（也可以塞到 report._debug.tags，看你契约）
+$reportPayload['tags'] = $res['tags'] ?? ($reportPayload['tags'] ?? []);
+
+// (2) 写 report.json 到 storage（private 优先）
+try {
+    $disk = array_key_exists('private', config('filesystems.disks', []))
+        ? Storage::disk('private')
+        : Storage::disk(config('filesystems.default', 'local'));
+
+    $disk->put(
+        "reports/{$attemptId}/report.json",
+        json_encode($reportPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+    );
+} catch (\Throwable $e) {
+    Log::warning('[report] persist report.json failed', [
+        'attempt_id' => $attemptId,
+        'err' => $e->getMessage(),
+    ]);
 }
 
     return response()->json([
@@ -1884,6 +1936,10 @@ if (!is_array($requireAllTags)) $requireAllTags = [];
 /** @var \App\Services\Rules\RuleEngine $re */
 $re = app(RuleEngine::class);
 
+// ✅ 兜底：RuleEngine 未实现 evaluate/explain 时，直接关闭 RE 流程
+$hasEvaluate = method_exists($re, 'evaluate');
+$hasExplain  = method_exists($re, 'explain');
+
 // ✅ 关键改动：reads_debug 开了就强制打开 RE explain
 $debugRE = $debugReads || (
     app()->environment('local', 'development')
@@ -2021,7 +2077,7 @@ $reRejectedSamples = [];
 // ✅ 用 RuleEngine 统一：过滤 + 打分 + 稳定打散排序
 // ============================
 $rankBucket = function (string $bucketName, array $list) use (
-    $re, $userTagsSet, $globalRules, $seed, $ctx, $debugRE,
+    $re, $userTagsSet, $globalRules, $seed, $ctx, $debugRE,$hasEvaluate,
     &$reRejectedSamples
 ): array {
     if (!is_array($list) || empty($list)) return [];
@@ -2046,13 +2102,24 @@ $rankBucket = function (string $bucketName, array $list) use (
         ];
 
         // ✅ 让 RuleEngine 评估（要求你的 RuleEngine 已提供 evaluate() / 或等价公开方法）
-        $ev = $re->evaluate($item, $userTagsSet, [
-            'ctx'          => $ctx,
-            'seed'         => $seed,
-            'bucket'       => $bucketName,
-            'global_rules' => $globalRules,
-            'debug'        => $debugRE,
-        ]);
+        if (!$hasEvaluate) {
+    // 没有 evaluate：不做过滤打分，直接把原 item 当作通过
+    $raw = $it;
+    $raw['_re'] = [
+        'hit' => 0, 'priority' => (int)($it['priority'] ?? 0),
+        'min_match' => 0, 'score' => (int)($it['priority'] ?? 0), 'shuffle' => 0,
+    ];
+    $ranked[] = $raw;
+    continue;
+}
+
+$ev = $re->evaluate($item, $userTagsSet, [
+    'ctx'          => $ctx,
+    'seed'         => $seed,
+    'bucket'       => $bucketName,
+    'global_rules' => $globalRules,
+    'debug'        => $debugRE,
+]);
 
         if (!($ev['ok'] ?? false)) {
             if ($debugRE && count($reRejectedSamples) < 8) {
@@ -2477,10 +2544,12 @@ $taken++;
     }
 
 // ✅ 统一 [RE] explain：reads
-$re->explain($ctx, $reSelectedExplain, $reRejectedSamples, [
-    'debug' => $debugRE,
-    'seed'  => $seed,
-]);
+if ($hasExplain) {
+    $re->explain($ctx, $reSelectedExplain, $reRejectedSamples, [
+        'debug' => $debugRE,
+        'seed'  => $seed,
+    ]);
+}
 
     return $out;
 }

@@ -61,6 +61,18 @@ if ((bool)$this->option('strict-assets')) {
     $this->printSectionResult('strict-assets (undeclared known files)', $sOk, $sMsg);
 }
 
+// ✅ schema-alignment: declared JSON assets' $.schema must match manifest.schemas mapping
+[$saOk, $saMsg] = $this->checkSchemaAlignment($manifest, $manifestPath, $packId);
+$ok = $ok && $saOk;
+$this->printSectionResult('schema-alignment (declared JSON assets)', $saOk, $saMsg);
+
+// 可选：如果你希望 schema 不对就直接中止（减少噪音），打开下面 4 行
+// if (!$saOk) {
+//     $this->line(str_repeat('-', 72));
+//     $this->error('❌ SELF-CHECK FAILED (see errors above)');
+//     return 1;
+// }
+
         $runIfDeclared = function (string $sectionName, string $filename, callable $runner) use (&$ok, $declaredBasenames) {
             if (!isset($declaredBasenames[$filename])) {
                 $this->printSectionResult($sectionName, true, ["SKIPPED (not declared in manifest.assets): {$filename}"]);
@@ -88,6 +100,42 @@ if ((bool)$this->option('strict-assets')) {
             'type_profiles.json',
             fn () => $this->checkTypeProfiles($this->pathOf($baseDir, 'type_profiles.json'), $packId)
         );
+
+// 2.2) identity_cards.json (ids unique)
+// 你包里实际文件名是 report_identity_cards.json（ls 已看到）
+$runIfDeclared(
+    'identity_cards.json',
+    'report_identity_cards.json',
+    fn () => $this->checkIdentityCards(
+        $this->pathOf($baseDir, 'report_identity_cards.json'),
+        $packId,
+        $this->expectedSchemaFor($manifest, 'identity', 'report_identity_cards.json')
+    )
+);
+
+// 2.3) identity_layers.json (ids unique)
+// 你包里实际文件名是 identity_layers.json（ls 已看到）
+$runIfDeclared(
+    'identity_layers.json',
+    'identity_layers.json',
+    fn () => $this->checkIdentityLayers(
+        $this->pathOf($baseDir, 'identity_layers.json'),
+        $packId,
+        $this->expectedSchemaFor($manifest, 'identity', 'identity_layers.json')
+    )
+);
+
+                // 2.5) report_cards_*.json (cards)
+        $cardFiles = $manifest['assets']['cards'] ?? null;
+        if (is_array($cardFiles) && !empty($cardFiles)) {
+            $expectedCardsSchema = $manifest['schemas']['cards'] ?? null;
+
+            [$cOk, $cMsg] = $this->checkCards($baseDir, $cardFiles, $packId, $expectedCardsSchema);
+            $ok = $ok && $cOk;
+            $this->printSectionResult('report_cards_*.json', $cOk, $cMsg);
+        } else {
+            $this->printSectionResult('report_cards_*.json', true, ["SKIPPED (no manifest.assets.cards)"]);
+        }
 
         // 3) report_highlights_templates.json
         $runIfDeclared(
@@ -318,10 +366,6 @@ if ((bool)$this->option('strict-assets')) {
             }
         }
 
-        // 5) schema alignment: each JSON asset must have top-level .schema matching manifest.schemas mapping
-        $schemaErrors = $this->checkAssetsSchemasAgainstManifest($manifest, $baseDir, $packId);
-        foreach ($schemaErrors as $e) $errors[] = $e;
-
         // 6) optional: minimal JSON parse check for every declared json file
         foreach (array_values(array_unique($jsonFiles)) as $abs) {
             $doc = $this->readJsonFile($abs);
@@ -504,6 +548,22 @@ $errs[] = "pack={$packId} file={$abs} path=$.schema :: missing schema field (ass
     return $errs;
 }
 
+private function checkSchemaAlignment(array $manifest, string $manifestPath, string $packId): array
+{
+    $baseDir = dirname($manifestPath);
+
+    $errs = $this->checkAssetsSchemasAgainstManifest($manifest, $baseDir, $packId);
+
+    if (!empty($errs)) {
+        return [false, array_merge(
+            ["Schema alignment invalid: " . count($errs)],
+            array_slice($errs, 0, 120)
+        )];
+    }
+
+    return [true, ["OK (declared JSON assets schema aligned)"]];
+}
+
 // -------------------------
 // Unified overrides rules validation
 // -------------------------
@@ -601,9 +661,13 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
             $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.mode :: invalid mode (allowed: " . implode(',', $allowedModes) . ")";
         }
 
-        if (array_key_exists('match', $r) && !is_array($r['match'])) {
-            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: match must be object(map)";
-        }
+        if (array_key_exists('match', $r)) {
+    if (!is_array($r['match']) || !$this->isAssocArray($r['match'])) {
+        $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: match must be object(map)";
+    } else {
+        $this->validateOverrideMatch($r['match'], $packId, $path, $basePath, $rid, $errors);
+    }
+}
 
         // required payloads (compatible with your current applier behavior)
         $hasItem    = array_key_exists('item', $r) && is_array($r['item']);
@@ -783,6 +847,87 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
 
         if ($errors) return [false, array_slice($errors, 0, 120)];
         return [true, ['OK (32 types, required fields present)']];
+    }
+
+        private function checkCards(string $baseDir, array $cardFiles, string $packId, ?string $expectedSchema = null): array
+    {
+        $errors = [];
+
+        // id -> "file"
+        $seenIds = [];
+
+        $countFiles = 0;
+        $countCards = 0;
+
+        foreach ($cardFiles as $i => $rel) {
+            if (!is_string($rel) || trim($rel) === '') {
+                $errors[] = "pack={$packId} path=$.assets.cards[{$i}] :: must be non-empty string";
+                continue;
+            }
+
+            $abs = $this->pathOf($baseDir, $rel);
+            if (!is_file($abs)) {
+                $errors[] = "pack={$packId} file={$abs} :: File not found (cards)";
+                continue;
+            }
+
+            $json = $this->readJsonFile($abs);
+            if (!is_array($json)) {
+                $errors[] = "pack={$packId} file={$abs} :: Invalid JSON (cards)";
+                continue;
+            }
+
+            // schema check (same schema for all cards)
+            if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $abs, 'cards')) {
+                $errors = array_merge($errors, $errs);
+                continue;
+            }
+
+            $items = $json['items'] ?? ($json['cards'] ?? null);
+            if (!is_array($items)) {
+                $errors[] = "pack={$packId} file={$abs} path=$.items :: Invalid items (expect {items:[...]})";
+                continue;
+            }
+
+            $countFiles++;
+
+            foreach ($items as $j => $it) {
+                if (!is_array($it) || !$this->isAssocArray($it)) {
+                    $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}] :: card must be object";
+                    continue;
+                }
+
+                $id = $it['id'] ?? null;
+                if (!is_string($id) || trim($id) === '') {
+                    $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].id :: missing/invalid id";
+                    continue;
+                }
+
+                // minimal required fields (你可以按需增减)
+                foreach (['section','title','desc'] as $f) {
+                    if (!isset($it[$f]) || !is_string($it[$f]) || trim($it[$f]) === '') {
+                        $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].{$f} :: missing/invalid {$f} (id={$id})";
+                    }
+                }
+
+                if (isset($seenIds[$id])) {
+                    $errors[] = "pack={$packId} :: Duplicate card id detected: {$id} (file={$abs}, prev={$seenIds[$id]})";
+                } else {
+                    $seenIds[$id] = $abs;
+                }
+
+                $countCards++;
+            }
+        }
+
+        if (!empty($errors)) {
+            return [false, array_merge(
+                ["Cards invalid: " . count($errors)],
+                array_slice($errors, 0, 120)
+            )];
+        }
+
+        return [true, ["OK ({$countFiles} card files, {$countCards} cards, ids unique)"]];
     }
 
     private function checkHighlightsTemplates(string $path, string $packId, ?string $expectedSchema = null): array
@@ -1097,6 +1242,155 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return [true, ['OK (structure valid, required fields present, ids unique)']];
     }
 
+    private function checkIdentityCards(string $path, string $packId, ?string $expectedSchema = null): array
+{
+    if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
+
+    $json = $this->readJsonFile($path);
+    if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+    if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'identity_cards')) {
+        return [false, $errs];
+    }
+
+    // items can be list OR object(map)
+$items = $json['items'] ?? null;
+if (!is_array($items) || $items === []) {
+    return [false, ["pack={$packId} file={$path} path=$.items :: must be array(list) or object(map)"]];
+}
+
+// list vs map
+$isList = array_keys($items) === range(0, count($items) - 1);
+
+$errors = [];
+$seenIds = [];
+$count = 0;
+
+$takeId = function ($key, $node) {
+    // map: id defaults to key; list: key is numeric index, so must rely on node.id
+    if (is_array($node) && isset($node['id']) && is_string($node['id']) && trim($node['id']) !== '') {
+        return trim($node['id']);
+    }
+    if (is_string($key) && trim($key) !== '') return trim($key);
+    return '';
+};
+
+if ($isList) {
+    foreach ($items as $i => $node) {
+        if (!is_array($node) || !$this->isAssocArray($node)) {
+            $errors[] = "pack={$packId} file={$path} path=$.items[{$i}] :: identity card must be object";
+            continue;
+        }
+        $id = $takeId((string)$i, $node);
+        if ($id === '') {
+            $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].id :: missing/invalid id";
+            continue;
+        }
+        if (isset($seenIds[$id])) {
+            $errors[] = "pack={$packId} file={$path} :: Duplicate identity_card id detected: {$id} (prev={$seenIds[$id]}, cur=$.items[{$i}])";
+        } else {
+            $seenIds[$id] = "$.items[{$i}]";
+        }
+        $count++;
+    }
+} else {
+    // object(map): items = { "ENFJ-A": {...}, ... }
+    foreach ($items as $k => $node) {
+        if (!is_string($k) || trim($k) === '') {
+            $errors[] = "pack={$packId} file={$path} path=$.items :: map key must be non-empty string";
+            continue;
+        }
+        if (!is_array($node) || !$this->isAssocArray($node)) {
+            $errors[] = "pack={$packId} file={$path} path=$.items.{$k} :: identity card must be object";
+            continue;
+        }
+        $id = $takeId($k, $node); // ✅ dict 时优先 node.id，否则用 key
+        if ($id === '') {
+            $errors[] = "pack={$packId} file={$path} path=$.items.{$k} :: missing/invalid id (need node.id or non-empty key)";
+            continue;
+        }
+        if (isset($seenIds[$id])) {
+            $errors[] = "pack={$packId} file={$path} :: Duplicate identity_card id detected: {$id} (prev={$seenIds[$id]}, cur=$.items.{$k})";
+        } else {
+            $seenIds[$id] = "$.items.{$k}";
+        }
+        $count++;
+    }
+}
+
+if (!empty($errors)) {
+    return [false, array_merge(
+        ["Identity cards invalid: " . count($errors)],
+        array_slice($errors, 0, 120)
+    )];
+}
+
+return [true, ["OK (identity_cards ids unique; count={$count})"]];
+}
+
+private function checkIdentityLayers(string $path, string $packId, ?string $expectedSchema = null): array
+{
+    if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
+
+    $json = $this->readJsonFile($path);
+    if (!is_array($json)) return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+
+    if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $path, 'identity_layers')) {
+        return [false, $errs];
+    }
+
+    $items = $json['items'] ?? ($json['layers'] ?? null);
+    if (!is_array($items)) {
+        return [false, ["pack={$packId} file={$path} path=$.items :: Invalid items (expect {items:[...]})"]];
+    }
+
+    // 允许 list 或 map：如果是 map，用 key 当 id（也顺便验证 value.id 一致性）
+    $seen = [];
+    $errs = [];
+
+    if ($this->isAssocArray($items)) {
+        foreach ($items as $k => $it) {
+            if (!is_array($it) || !$this->isAssocArray($it)) {
+                $errs[] = "pack={$packId} file={$path} path=$.items.{$k} :: item must be object";
+                continue;
+            }
+            $id = $it['id'] ?? (string)$k;
+            if (!is_string($id) || trim($id) === '') {
+                $errs[] = "pack={$packId} file={$path} path=$.items.{$k}.id :: missing/invalid id";
+                continue;
+            }
+            if (isset($seen[$id])) {
+                $errs[] = "pack={$packId} file={$path} :: Duplicate identity_layer id detected: {$id} (first at {$seen[$id]})";
+            } else {
+                $seen[$id] = "$.items.{$k}";
+            }
+        }
+        if ($errs) return [false, array_merge(["Identity layers invalid: " . count($errs)], array_slice($errs, 0, 120))];
+        return [true, ["OK (identity_layers ids unique; count=" . count($items) . ")"]];
+    }
+
+    // list
+    foreach ($items as $i => $it) {
+        if (!is_array($it) || !$this->isAssocArray($it)) {
+            $errs[] = "pack={$packId} file={$path} path=$.items[{$i}] :: item must be object";
+            continue;
+        }
+        $id = $it['id'] ?? null;
+        if (!is_string($id) || trim($id) === '') {
+            $errs[] = "pack={$packId} file={$path} path=$.items[{$i}].id :: missing/invalid id";
+            continue;
+        }
+        if (isset($seen[$id])) {
+            $errs[] = "pack={$packId} file={$path} :: Duplicate identity_layer id detected: {$id} (first at {$seen[$id]})";
+        } else {
+            $seen[$id] = "$.items[{$i}]";
+        }
+    }
+
+    if ($errs) return [false, array_merge(["Identity layers invalid: " . count($errs)], array_slice($errs, 0, 120))];
+    return [true, ["OK (identity_layers ids unique; count=" . count($items) . ")"]];
+}
+
     // -------------------------
     // Helpers
     // -------------------------
@@ -1291,5 +1585,171 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
     }
 
     return null;
+}
+
+private function validateOverrideMatch(
+    array $match,
+    string $packId,
+    string $path,
+    string $basePath,
+    string $rid,
+    array &$errors
+): void {
+    // 允许的 match keys
+    $allowed = ['require_all', 'require_any', 'forbid', 'min_match', 'section', 'item'];
+
+    // 1) unknown key 拦截
+    foreach ($match as $k => $_) {
+        if (!in_array((string)$k, $allowed, true)) {
+            $errors[] =
+                "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.{$k} :: unknown match key (allowed: "
+                . implode(',', $allowed)
+                . ")";
+        }
+    }
+
+    // ✅ token 白名单（最小可用版：支持 type/role/strategy/top_axis）
+    $tokenAllowed = function (string $tok) use (&$errors, $packId, $path, $basePath, $rid): void {
+        $t = trim($tok);
+
+        // 允许前缀
+        if (!preg_match('/^(type|role|strategy|top_axis)[=:].+$/', $t)) {
+            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: token not allowed: {$t}";
+            return;
+        }
+
+        // type=ENFJ-A
+        if (preg_match('/^type[=:](.+)$/', $t, $m)) {
+            $v = $m[1];
+            if (!preg_match('/^(E|I)(S|N)(T|F)(J|P)-(A|T)$/', $v)) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: invalid type token: {$t}";
+            }
+            return;
+        }
+
+        // role=NT/NF/SJ/SP
+        if (preg_match('/^role[=:](.+)$/', $t, $m)) {
+            $v = $m[1];
+            if (!in_array($v, ['NT','NF','SJ','SP'], true)) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: invalid role token: {$t}";
+            }
+            return;
+        }
+
+        // strategy=EA/ET/IA/IT
+        if (preg_match('/^strategy[=:](.+)$/', $t, $m)) {
+            $v = $m[1];
+            if (!in_array($v, ['EA','ET','IA','IT'], true)) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: invalid strategy token: {$t}";
+            }
+            return;
+        }
+
+        // top_axis=EI/SN/TF/JP/AT
+        if (preg_match('/^top_axis[=:](.+)$/', $t, $m)) {
+            $v = $m[1];
+            if (!in_array($v, ['EI','SN','TF','JP','AT'], true)) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: invalid top_axis token: {$t}";
+            }
+            return;
+        }
+    };
+
+    // 2) require_* / forbid 必须是 list[str]，且 token 必须在白名单
+    $checkStringList = function (string $key) use ($match, $packId, $path, $basePath, $rid, &$errors, $tokenAllowed): void {
+        if (!array_key_exists($key, $match)) return;
+
+        $v = $match[$key];
+
+        // 必须是 list（非 assoc）
+        if (!is_array($v) || $this->isAssocArray($v)) {
+            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.{$key} :: must be array(list of strings)";
+            return;
+        }
+
+        // ✅ require_any 不允许空数组
+        if ($key === 'require_any' && count($v) === 0) {
+            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.require_any :: must be non-empty array(list of strings)";
+            return;
+        }
+
+        $seen = [];
+        foreach ($v as $i => $s) {
+            if (!is_string($s) || trim($s) === '') {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.{$key}[{$i}] :: must be non-empty string";
+                continue;
+            }
+            $ss = trim($s);
+
+            if (isset($seen[$ss])) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.{$key} :: duplicate entry '{$ss}'";
+            }
+            $seen[$ss] = true;
+
+            // ✅ token 白名单
+            $tokenAllowed($ss);
+        }
+    };
+
+    $checkStringList('require_all');
+    $checkStringList('require_any');
+    $checkStringList('forbid');
+
+    // 2.5) section / item: allow string OR list[string]
+    $checkStringOrList = function (string $key) use ($match, $packId, $path, $basePath, $rid, &$errors): void {
+        if (!array_key_exists($key, $match)) return;
+
+        $v = $match[$key];
+
+        // allow scalar string
+        if (is_string($v)) {
+            if (trim($v) === '') {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.{$key} :: must be non-empty string or array(list of strings)";
+            }
+            return;
+        }
+
+        // allow list[str]
+        if (!is_array($v) || $this->isAssocArray($v)) {
+            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.{$key} :: must be non-empty string or array(list of strings)";
+            return;
+        }
+
+        foreach ($v as $i => $s) {
+            if (!is_string($s) || trim($s) === '') {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.{$key}[{$i}] :: must be non-empty string";
+            }
+        }
+    };
+
+    $checkStringOrList('section');
+    $checkStringOrList('item');
+
+    // 3) min_match：必须是 integer 且 >=1；并且必须配合 require_any(非空 list)；且 <= count(require_any)
+    if (array_key_exists('min_match', $match)) {
+        $mm = $match['min_match'];
+
+        if (!is_int($mm) && !(is_numeric($mm) && (int)$mm == $mm)) {
+            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.min_match :: must be integer";
+            return;
+        }
+
+        $mm = (int)$mm;
+        if ($mm < 1) {
+            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.min_match :: must be >= 1";
+            return;
+        }
+
+        $ra = $match['require_any'] ?? null;
+        if (!is_array($ra) || $this->isAssocArray($ra) || count($ra) === 0) {
+            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.min_match :: require_any must be non-empty when min_match is set";
+            return;
+        }
+
+        $n = count($ra);
+        if ($mm > $n) {
+            $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match.min_match :: must be <= count(require_any) (= {$n})";
+        }
+    }
 }
 }

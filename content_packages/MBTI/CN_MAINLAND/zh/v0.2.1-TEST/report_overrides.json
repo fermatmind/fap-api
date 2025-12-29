@@ -1,0 +1,47 @@
+{
+  "schema": "fap.report.overrides.v1",
+  "engine": "v1",
+  "rules": [
+    {
+      "id": "traits_add_card",
+      "target": "cards",
+      "priority": 50,
+      "match": {
+        "section": [
+          "traits"
+        ]
+      },
+      "mode": "append",
+      "items": [
+        {
+          "id": "traits_extra_01",
+          "title": "你的小优势",
+          "text": "……"
+        }
+      ]
+    },
+    {
+      "id": "reads_replace_one",
+      "target": "reads",
+      "priority": 10,
+      "match": {
+        "item": {
+          "id": [
+            "read.canary.rule_engine"
+          ]
+        }
+      },
+      "mode": "replace",
+      "items": [
+        {
+          "id": "read.canary.rule_engine",
+          "type": "article",
+          "title": "OVR_REPLACED_OK",
+          "desc": "这条是 overrides replace 生成的",
+          "url": "/reads/override-hit?id=read.canary.rule_engine",
+          "priority": 9999
+        }
+      ]
+    }
+  ]
+}

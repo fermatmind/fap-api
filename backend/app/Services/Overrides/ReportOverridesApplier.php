@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Services\Overrides;
+use App\Services\Report\ReportContentNormalizer;
 
 use Illuminate\Support\Facades\Log;
 
@@ -43,7 +44,22 @@ class ReportOverridesApplier
             'ctx' => $ctx,
         ];
 
-        return $this->applyRulesToList($cards, $rules, $context);
+        $out = $this->applyRulesToList($cards, $rules, $context);
+
+// ✅ final normalize for cards: tips must be array[string] and >= 1
+$out = array_map(function ($it) {
+    if (!is_array($it)) $it = [];
+
+    // tips: array[string] + >=1
+    if (!isset($it['tips']) || !is_array($it['tips'])) $it['tips'] = [];
+    $it['tips'] = array_values(array_filter($it['tips'], fn($x) => is_string($x) && trim($x) !== ''));
+    if (count($it['tips']) < 1) {
+    }
+
+    return $it;
+}, $out);
+
+return $out;
     }
 
     /**
@@ -311,18 +327,26 @@ if ($debugPerRule || (bool) env('FAP_OVR_TRACE', false)) {
      * - append/prepend: add rule.items to end/start
      * - upsert: if matched -> patch, else -> append
      */
-private function applyRuleToList(array $list, array $matches, array $rule, array $context): array    {
-        $mode = (string)($rule['mode'] ?? 'patch');
+private function applyRuleToList(array $list, array $matches, array $rule, array $context): array
+{
+    $mode = (string)($rule['mode'] ?? 'patch');
 
-        return match ($mode) {
-            'append'  => $this->modeAppend($list, $rule, $context),
-            'prepend' => $this->modePrepend($list, $rule, $context),
-            'remove'  => $this->modeRemove($list, $matches),
-            'replace' => $this->modeReplace($list, $matches, $rule, $context),
-            'upsert'  => $this->modeUpsert($list, $matches, $rule, $context),
-            default   => $this->modePatch($list, $matches, $rule, $context),
-        };
-    }
+    $list = match ($mode) {
+        'append'  => $this->modeAppend($list, $rule, $context),
+        'prepend' => $this->modePrepend($list, $rule, $context),
+        'remove'  => $this->modeRemove($list, $matches),
+        'replace' => $this->modeReplace($list, $matches, $rule, $context),
+        'upsert'  => $this->modeUpsert($list, $matches, $rule, $context),
+        default   => $this->modePatch($list, $matches, $rule, $context),
+    };
+
+    // ✅ 就加在这里：match 之后、return 之前（对 list 每个 item 统一补默认）
+    $list = array_map(
+    fn($it) => \App\Services\Report\ReportContentNormalizer::card(is_array($it) ? $it : []),
+    $list
+);
+    return $list;
+}
 
     private function selectorFromMatchItem(array $item): ?array
 {
@@ -582,19 +606,23 @@ private function applyRuleToList(array $list, array $matches, array $rule, array
      * - {{type_code}}, {{section_key}}, {{content_package_dir}}
      */
     private function applyReplaceFields(array $item, array $replaceFields, array $context): array
-    {
-        foreach ($replaceFields as $k => $v) {
-            if (!is_string($k) || $k === '') continue;
+{
+    foreach ($replaceFields as $k => $v) {
+        if (!is_string($k) || $k === '') continue;
 
-            if (is_string($v)) {
-                $v = $this->renderTemplateString($v, $context);
-            }
-
-            // dot-path supported: "meta.title"
-            $this->setByDotPath($item, $k, $v);
+        if (is_string($v)) {
+            $v = $this->renderTemplateString($v, $context);
         }
-        return $item;
+
+        // ✅ ignore null (do not overwrite)
+        if ($v === null) {
+            continue;
+        }
+
+        $this->setByDotPath($item, $k, $v);
     }
+    return $item;
+}
 
     private function renderTemplateString(string $s, array $context): string
     {
@@ -620,30 +648,38 @@ private function applyRuleToList(array $list, array $matches, array $rule, array
         }, $s) ?? $s;
     }
 
-    /**
-     * Deep merge: assoc arrays merge recursively; numeric arrays replace.
-     */
-    private function deepMerge(array $base, array $patch): array
-    {
-        foreach ($patch as $k => $v) {
-            if (is_int($k)) {
-                // numeric keys => replace behavior at this level
-                return $patch;
-            }
+/**
+ * Deep merge (NON-NULL):
+ * - assoc arrays merge recursively
+ * - numeric arrays replace
+ * - ✅ null in patch will be ignored (will NOT overwrite base)
+ */
+private function deepMerge(array $base, array $patch): array
+{
+    foreach ($patch as $k => $v) {
+        // ✅ ignore null (do not overwrite)
+        if ($v === null) {
+            continue;
+        }
 
-            if (is_array($v) && isset($base[$k]) && is_array($base[$k])) {
-                if ($this->isAssoc($v) && $this->isAssoc($base[$k])) {
-                    $base[$k] = $this->deepMerge($base[$k], $v);
-                } else {
-                    // numeric arrays => replace
-                    $base[$k] = $v;
-                }
+        if (is_int($k)) {
+            // numeric keys => replace behavior at this level
+            return $patch;
+        }
+
+        if (is_array($v) && isset($base[$k]) && is_array($base[$k])) {
+            if ($this->isAssoc($v) && $this->isAssoc($base[$k])) {
+                $base[$k] = $this->deepMerge($base[$k], $v);
             } else {
+                // numeric arrays => replace
                 $base[$k] = $v;
             }
+        } else {
+            $base[$k] = $v;
         }
-        return $base;
     }
+    return $base;
+}
 
     private function isAssoc(array $arr): bool
     {
