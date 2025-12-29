@@ -1,0 +1,78 @@
+{
+  "schema": "fap.report.overrides.v1",
+  "engine": "v1",
+  "rules": [
+    {
+      "id": "hl_replace_tf_t_very_strong_canary",
+      "target": "highlights",
+      "priority": 50,
+      "match": {
+        "item": {
+          "id": [
+            "TF_T_very_strong"
+          ]
+        }
+      },
+      "mode": "replace",
+      "items": [
+        {
+          "id": "TF_T_very_strong",
+          "title": "极强的逻辑与原则感",
+          "text": "你很容易站在规则与系统视角思考：追求最优解与长期一致性，适合在混乱中建立秩序。",
+          "tips": [
+            "把结论翻译成对方听得懂的话",
+            "为关系留“缓冲区”",
+            "提醒自己：人不是公式"
+          ],
+          "tags": [
+            "youth",
+            "16p-like",
+            "TF",
+            "T"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traits_add_card",
+      "target": "cards",
+      "priority": 50,
+      "match": {
+        "section": [
+          "traits"
+        ]
+      },
+      "mode": "append",
+      "items": [
+        {
+          "id": "traits_extra_01",
+          "title": "你的小优势",
+          "text": "……"
+        }
+      ]
+    },
+    {
+      "id": "reads_replace_one",
+      "target": "reads",
+      "priority": 10,
+      "match": {
+        "item": {
+          "id": [
+            "art_fallback_01"
+          ]
+        }
+      },
+      "mode": "replace",
+      "items": [
+        {
+          "id": "art_fallback_01",
+          "type": "article",
+          "title": "OVR_REPLACED_OK",
+          "desc": "这条是 overrides replace 生成的",
+          "url": "/reads/override-hit?id=art_fallback_01",
+          "priority": 9999
+        }
+      ]
+    }
+  ]
+}

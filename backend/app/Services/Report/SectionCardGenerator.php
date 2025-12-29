@@ -3,13 +3,14 @@
 namespace App\Services\Report;
 
 use App\Services\Content\ContentPack;
+use App\Services\Content\ContentStore;
 use App\Services\Rules\RuleEngine;
 use Illuminate\Support\Facades\Log;
 
 final class SectionCardGenerator
 {
     /**
-     * ✅ 新入口：从 pack chain + manifest.assets.cards 加载 cards
+     * ✅ 新入口：统一走 ContentStore（pack chain -> store -> 标准化 doc）
      *
      * @param string $section traits/career/growth/relationships
      * @param ContentPack[] $chain primary + fallback packs
@@ -25,41 +26,69 @@ final class SectionCardGenerator
         array $axisInfo = [],
         ?string $legacyContentPackageDir = null
     ): array {
-        $file = "report_cards_{$section}.json";
+        // ✅ 统一加载器：所有 items/rules 标准化都在 store 内完成
+        $store = new ContentStore($chain);
 
-        $json = $this->loadJsonDocFromPackChain($chain, 'cards', $file);
+        $doc = $store->loadCardsDoc($section);
+        $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
+        $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
 
-        Log::info('[CARDS] loaded', [
-            'section' => $section,
-            'file'    => $file,
-            'items'   => is_array($json['items'] ?? null) ? count($json['items']) : 0,
-            'rules'   => $json['rules'] ?? null,
+        Log::info('[CARDS] loaded_from_store', [
+            'section'    => $section,
+            'file'       => "report_cards_{$section}.json",
+            'items'      => count($items),
+            'rules'      => $rules,
             'legacy_dir' => $legacyContentPackageDir,
         ]);
 
-        $items = is_array($json['items'] ?? null) ? $json['items'] : [];
-        $rules = is_array($json['rules'] ?? null) ? $json['rules'] : [];
+        return $this->generateFromItems(
+            $section,
+            $items,
+            $userTags,
+            $axisInfo,
+            $legacyContentPackageDir,
+            $rules
+        );
+    }
 
-        // 规则：至少 2 张
-        $minCards    = max(2, (int)($rules['min_cards'] ?? 2));
-        $targetCards = (int)($rules['target_cards'] ?? 3);
-        $maxCards    = (int)($rules['max_cards'] ?? 6);
-        if ($targetCards < $minCards) $targetCards = $minCards;
-        if ($maxCards < $targetCards) $maxCards = $targetCards;
+    /**
+     * ✅ 从 “已标准化的 items(+rules)” 生成 cards
+     * 注意：这里不再做 rules/tags/priority/tips 的缺省补齐——这些都应由 ContentStore 负责。
+     */
+    private function generateFromItems(
+        string $section,
+        array $items,
+        array $userTags,
+        array $axisInfo = [],
+        ?string $legacyContentPackageDir = null,
+        array $rules = []
+    ): array {
+        // ==========
+        // rules：强依赖 store 的标准输出（不在 generator 兜底）
+        // ==========
+        $minCardsVal    = $rules['min_cards'] ?? null;
+        $targetCardsVal = $rules['target_cards'] ?? null;
+        $maxCardsVal    = $rules['max_cards'] ?? null;
+        $fallbackTags   = $rules['fallback_tags'] ?? null;
+
+        if (!is_numeric($minCardsVal) || !is_numeric($targetCardsVal) || !is_numeric($maxCardsVal) || !is_array($fallbackTags)) {
+            throw new \RuntimeException('CARDS_RULES_NOT_NORMALIZED: generator expects store-normalized rules (min_cards/target_cards/max_cards/fallback_tags)');
+        }
+
+        $minCards    = (int)$minCardsVal;
+        $targetCards = (int)$targetCardsVal;
+        $maxCards    = (int)$maxCardsVal;
 
         // 体验目标：axis 最多 2，且至少 1 张 non-axis（当 target>=3 时）
         $axisMax     = max(0, min(2, $targetCards - 1));
         $nonAxisMin  = ($targetCards >= 3) ? 1 : 0;
-
-        $fallbackTags = $rules['fallback_tags'] ?? ['fallback', 'kind:core'];
-        if (!is_array($fallbackTags)) $fallbackTags = ['fallback', 'kind:core'];
 
         // assets 不存在：直接返回兜底
         if (empty($items)) {
             return $this->fallbackCards($section, $minCards);
         }
 
-        // normalize userTags set
+        // normalize userTags set（这里仅做 userTags 的集合化，不涉及 content item 标准化）
         $userSet = [];
         foreach ($userTags as $t) {
             if (!is_string($t)) continue;
@@ -78,7 +107,7 @@ final class SectionCardGenerator
         $evalById = [];
         $rejectedSamples = [];
 
-        // normalize + evaluate + score
+        // evaluate + score (items 已由 store 标准化)
         $cands = [];
         foreach ($items as $it) {
             if (!is_array($it)) continue;
@@ -86,16 +115,16 @@ final class SectionCardGenerator
             $id = (string)($it['id'] ?? '');
             if ($id === '') continue;
 
+            // store 已保证 tags/rules/priority 存在且类型正确；这里不再补默认，只做最小安全读取
             $tags = is_array($it['tags'] ?? null) ? $it['tags'] : [];
-            $tags = array_values(array_filter($tags, fn($x) => is_string($x) && trim($x) !== ''));
-
             $prio = (int)($it['priority'] ?? 0);
+            $itRules = is_array($it['rules'] ?? null) ? $it['rules'] : [];
 
             $base = [
                 'id'       => $id,
                 'tags'     => $tags,
                 'priority' => $prio,
-                'rules'    => is_array($it['rules'] ?? null) ? $it['rules'] : [],
+                'rules'    => $itRules,
             ];
 
             $ev = $re->evaluate($base, $userSet, [
@@ -129,6 +158,7 @@ final class SectionCardGenerator
 
             $isAxis = $this->isAxisCardId($id);
 
+            // store 已保证 bullets/tips 为 array 且 tips 已由 normalizer 补齐
             $cands[] = [
                 'id'       => $id,
                 'section'  => (string)($it['section'] ?? $section),
@@ -294,9 +324,35 @@ final class SectionCardGenerator
         Log::info('[CARDS] selected', [
             'section' => $section,
             'ids'     => array_map(fn($x) => $x['id'] ?? null, $out),
+            'legacy_dir' => $legacyContentPackageDir,
         ]);
 
         return $out;
+    }
+
+    /**
+     * ✅ 从 store 直接生成（你已有；保留）
+     */
+    public function generateFromStore(
+        string $section,
+        ContentStore $store,
+        array $userTags,
+        array $axisInfo,
+        ?string $legacyContentPackageDir = null
+    ): array {
+        $doc = $store->loadCardsDoc($section);
+
+        $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
+        $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
+
+        return $this->generateFromItems(
+            $section,
+            $items,
+            $userTags,
+            $axisInfo,
+            $legacyContentPackageDir,
+            $rules
+        );
     }
 
     /**
@@ -310,68 +366,6 @@ final class SectionCardGenerator
 
         // 兼容：不再读取旧路径，直接兜底卡，避免你以为“还在用旧体系”
         return $this->fallbackCards($section, 2);
-    }
-
-    private function loadJsonDocFromPackChain(array $chain, string $assetKey, string $wantedBasename): array
-    {
-        foreach ($chain as $p) {
-            if (!$p instanceof ContentPack) continue;
-
-            $paths = $this->flattenAssetPaths($p->assets()[$assetKey] ?? null);
-
-            foreach ($paths as $rel) {
-                if (!is_string($rel) || trim($rel) === '') continue;
-                if (basename($rel) !== $wantedBasename) continue;
-
-                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
-                if (!is_file($abs)) continue;
-
-                $json = json_decode((string)file_get_contents($abs), true);
-                if (is_array($json)) {
-                    Log::info('[PACK] json_loaded', [
-                        'asset'  => $assetKey,
-                        'file'   => $wantedBasename,
-                        'pack_id' => $p->packId(),
-                        'version' => $p->version(),
-                        'path'   => $abs,
-                        'schema' => $json['schema'] ?? null,
-                    ]);
-                    return $json;
-                }
-            }
-        }
-
-        Log::warning('[PACK] json_not_found', [
-            'asset' => $assetKey,
-            'file'  => $wantedBasename,
-        ]);
-
-        return [];
-    }
-
-    private function flattenAssetPaths($assetVal): array
-    {
-        if (!is_array($assetVal)) return [];
-
-        if ($this->isListArray($assetVal)) {
-            return array_values(array_filter($assetVal, fn($x) => is_string($x) && trim($x) !== ''));
-        }
-
-        $out = [];
-        foreach ($assetVal as $k => $v) {
-            if ($k === 'order') continue;
-            $list = is_array($v) ? $v : [$v];
-            foreach ($list as $x) {
-                if (is_string($x) && trim($x) !== '') $out[] = $x;
-            }
-        }
-        return array_values(array_unique($out));
-    }
-
-    private function isListArray(array $a): bool
-    {
-        if ($a === []) return true;
-        return array_keys($a) === range(0, count($a) - 1);
     }
 
     private function passesAxisMatch(array $card, array $userSet, array $axisInfo): bool
@@ -476,8 +470,15 @@ final class SectionCardGenerator
                 'section'  => $section,
                 'title'    => 'General Tip',
                 'desc'     => 'Content pack did not provide enough matched cards. Showing a safe fallback tip.',
-                'bullets'  => ['Turn strengths into a repeatable template', 'Add one counter-check in key moments', 'Weekly review: keep what works, remove what doesn’t'],
-                'tips'     => ['Write your first instinct, then add one alternative', 'Use checklists to reduce cognitive load'],
+                'bullets'  => [
+                    'Turn strengths into a repeatable template',
+                    'Add one counter-check in key moments',
+                    'Weekly review: keep what works, remove what doesn’t'
+                ],
+                'tips'     => [
+                    'Write your first instinct, then add one alternative',
+                    'Use checklists to reduce cognitive load'
+                ],
                 'tags'     => ['fallback'],
                 'priority' => 0,
                 'match'    => null,

@@ -2,6 +2,7 @@
 
 namespace App\Services\Report;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\Attempt;
@@ -14,8 +15,10 @@ use App\Services\Report\IdentityLayerBuilder;
 use App\Services\Report\HighlightBuilder;
 use App\Services\Overrides\ReportOverridesApplier;
 
-use App\Services\Content\ContentPackResolver;
+use App\Services\ContentPackResolver;
 use App\Services\Content\ContentPack;
+use App\Services\Content\ContentStore;
+use App\DTO\ResolvedPack;
 
 use App\Domain\Score\AxisScore;
 
@@ -71,18 +74,23 @@ class ReportComposer
 
         $requestedVersion = $this->normalizeRequestedVersion($requested);
 
-        // ✅ 新体系：resolver + fallback chain
-        $chain = $this->resolver->resolveWithFallbackChain($scaleCode, $region, $locale, $requestedVersion);
-        /** @var ContentPack $pack */
-        $pack = $chain[0];
+        $rp = $this->resolver->resolve($scaleCode, $region, $locale, $requestedVersion);
 
-        $contentPackageVersion = (string)$pack->version(); // e.g. v0.2.1-TEST
-        $contentPackId         = (string)$pack->packId();
+// ✅ 适配：ResolvedPack -> ContentPack chain（让后续 loadJsonDocFromPackChain/overrides 等逻辑不动）
+$chain = $this->toContentPackChain($rp);
+
+/** @var ContentPack $pack */
+$pack = $chain[0];
+
+$contentPackageVersion = (string)$pack->version(); // e.g. v0.2.1-TEST
+$contentPackId         = (string)$pack->packId();
 
         // ✅ 旧 loader 兼容：旧目录名（你已做 symlink/兼容层）
         $contentPackageDir = 'MBTI-CN-' . $contentPackageVersion;
 
         $typeCode = (string)($result->type_code ?? '');
+
+        $store = new ContentStore($chain, $ctx, $contentPackageDir);
 
         // =========================
         // 2) Score（复用 results.scores_pct/axis_states）
@@ -107,6 +115,12 @@ class ReportComposer
         // scores（稳定结构：pct/state/side/delta）
         $scores = $this->buildScoresValueObject($scoresPct, $dims);
 
+        // ✅ 统一 state 来源：axis_states 永远从 scores 派生，避免两套枚举打架
+$axisStates = [];
+foreach ($dims as $d) {
+    $axisStates[$d] = (string)($scores[$d]['state'] ?? 'moderate');
+}
+
         // =========================
         // 3) Load Profile / IdentityCard（保留 ctx 注入 loader 兜底）
         // =========================
@@ -123,6 +137,7 @@ $strategyCard = $this->loadStrategyCardFromPackChain($chain, $typeCode, $ctx, $c
         // 5) Build Tags（依赖 role/strategy）
         // =========================
         $tags = $this->tagBuilder->build($scores, [
+            'type_code'     => $typeCode,
             'role_card'     => $roleCard,
             'strategy_card' => $strategyCard,
         ]);
@@ -138,16 +153,17 @@ $strategyCard = $this->loadStrategyCardFromPackChain($chain, $typeCode, $ctx, $c
         ];
 
         // ✅ 不再拼路径：从 pack.assets(highlights) 在 chain 里找 report_highlights_templates.json
-        $hlTemplatesDoc = $this->loadJsonDocFromPackChain(
-            $chain,
-            'highlights',
-            'report_highlights_templates.json',
-            $ctx,
-            $contentPackageDir
-        );
+        $hlTemplatesDoc = $store->loadHighlights();
 
         $builder = new HighlightBuilder();
         $baseHighlights = $builder->buildFromTemplatesDoc($reportForHL, $hlTemplatesDoc, 3, 10);
+
+Log::info('[HL] generated', [
+    'stage' => 'base_from_templates_doc',
+    'schema' => $hlTemplatesDoc['schema'] ?? null,
+    'count' => is_array($baseHighlights) ? count($baseHighlights) : -1,
+    'sample' => array_slice($baseHighlights ?? [], 0, 2),
+]);
 
         Log::info('[HL] base_highlights', [
             'pack_id' => $contentPackId,
@@ -184,30 +200,24 @@ if (!is_array($borderlineNote['items'] ?? null)) {
         // 9) Build Sections Cards
         // =========================
         $sections = [
-            'traits' => [
-                'cards' => $this->cardGen->generateFromPackChain('traits', $chain, $tags, $scores, $contentPackageDir),
-            ],
-            'career' => [
-                'cards' => $this->cardGen->generateFromPackChain('career', $chain, $tags, $scores, $contentPackageDir),
-            ],
-            'growth' => [
-                'cards' => $this->cardGen->generateFromPackChain('growth', $chain, $tags, $scores, $contentPackageDir),
-            ],
-            'relationships' => [
-                'cards' => $this->cardGen->generateFromPackChain('relationships', $chain, $tags, $scores, $contentPackageDir),
-            ],
-        ];
+    'traits' => [
+        'cards' => $this->cardGen->generateFromStore('traits', $store, $tags, $scores, $contentPackageDir),
+    ],
+    'career' => [
+        'cards' => $this->cardGen->generateFromStore('career', $store, $tags, $scores, $contentPackageDir),
+    ],
+    'growth' => [
+        'cards' => $this->cardGen->generateFromStore('growth', $store, $tags, $scores, $contentPackageDir),
+    ],
+    'relationships' => [
+        'cards' => $this->cardGen->generateFromStore('relationships', $store, $tags, $scores, $contentPackageDir),
+    ],
+];
 
         // =========================
         // 10) recommended_reads（放最后）
         // =========================
-        $readsDoc = $this->loadJsonDocFromPackChain(
-    $chain,
-    'reads',
-    'report_recommended_reads.json',
-    $ctx,
-    $contentPackageDir
-);
+        $readsDoc = $store->loadReads();
 
 $recommendedReads = $this->buildRecommendedReadsFromDoc(
     $readsDoc,
@@ -223,10 +233,8 @@ $recommendedReads = $this->buildRecommendedReadsFromDoc(
         // ✅ 不再拼路径：从 pack.assets(overrides) 在 chain 里找 report_overrides.json
         // ✅ 按 manifest.assets.overrides 的 order 定死顺序加载（支持多文件）
 // 并给每条 override 注入 __src（pack_id/file/idx），用于 rule_applied 可追溯
-$overridesDocs = $this->loadOverridesDocsFromPackChain($chain, $ctx, $contentPackageDir);
-// 合并成一个 doc（overrides 顺序 = docs 顺序；每条 rule 自带 __src，不丢来源）
-$overridesDoc = $this->mergeOverridesDocs($overridesDocs);
-$overridesOrderBuckets = $this->getOverridesOrderBucketsFromPackChain($chain);
+$overridesDoc = $store->loadOverrides();
+$overridesOrderBuckets = $store->overridesOrderBuckets();
 
         // =========================
         // 11) ✅ Overrides 统一入口
@@ -249,17 +257,34 @@ $overridesOrderBuckets = $this->getOverridesOrderBucketsFromPackChain($chain);
             'ids'   => array_slice(array_map(fn($x) => $x['id'] ?? null, $highlights), 0, 10),
         ]);
 
+        Log::info('[HL] generated', [
+    'stage' => 'after_overrides_unified',
+    'count' => is_array($highlights) ? count($highlights) : -1,
+    'sample' => array_slice($highlights ?? [], 0, 2),
+]);
+
         // =========================
         // 最终 report payload（schema 不变）
         // =========================
+        // $contentPackageDir 目前其实是 legacy dir：MBTI-CN-v0.2.1-TEST
+$legacyContentPackageDir = $contentPackageDir;
+
+// ✅ 真实目录：从 pack_id 推导成 MBTI/GLOBAL/en/v0.2.1-TEST
+$realContentPackageDir = $this->packIdToDir($contentPackId);
+        
         $reportPayload = [
             'versions' => [
-                'engine'                  => 'v1.2',
-                'profile_version'         => $profileVersion,
-                'content_package_version' => $contentPackageVersion,
-                'content_pack_id'         => $contentPackId,
-                'content_package_dir'     => $contentPackageDir,
-            ],
+    'engine'                  => 'v1.2',
+    'profile_version'         => $profileVersion,
+    'content_package_version' => $contentPackageVersion,
+    'content_pack_id'         => $contentPackId,
+
+    // ✅ 对外返回真实目录（新体系）
+    'content_package_dir'     => $realContentPackageDir,
+
+    // ✅ 保留旧体系目录，便于兼容/排查
+    'legacy_dir'              => $legacyContentPackageDir,
+],
 
             'scores'      => $scores,
             'scores_pct'  => $scoresPct,
@@ -293,6 +318,9 @@ $overridesOrderBuckets = $this->getOverridesOrderBucketsFromPackChain($chain);
             'warnings' => $warnings,
         ];
 
+        $this->persistReportJson($attemptId, $reportPayload);
+
+
         return [
             'ok' => true,
             'attempt_id' => $attemptId,
@@ -317,6 +345,42 @@ $overridesOrderBuckets = $this->getOverridesOrderBucketsFromPackChain($chain);
 
         return $requested;
     }
+
+/**
+ * ✅ Adapter：把 App\Services\ContentPackResolver::resolve() 返回的 ResolvedPack
+ * 转成你现有 ReportComposer 期望的 ContentPack chain（primary + manifest.fallback 链）
+ */
+private function toContentPackChain(ResolvedPack $rp): array
+{
+    $make = function (array $manifest, string $baseDir): ContentPack {
+        return new ContentPack(
+            packId:  (string)($manifest['pack_id'] ?? ''),
+            scaleCode: (string)($manifest['scale_code'] ?? ''),
+            region: (string)($manifest['region'] ?? ''),
+            locale: (string)($manifest['locale'] ?? ''),
+            version: (string)($manifest['content_package_version'] ?? ''),
+            basePath: $baseDir,
+            manifest: $manifest,
+        );
+    };
+
+    $out = [];
+    // primary
+    $out[] = $make($rp->manifest ?? [], (string)($rp->baseDir ?? ''));
+
+    // fallback chain：ContentPackResolver.php 里 buildFallbackChain() 的结构
+    $fbs = $rp->fallbackChain ?? [];
+    if (is_array($fbs)) {
+        foreach ($fbs as $fb) {
+            if (!is_array($fb)) continue;
+            $m = is_array($fb['manifest'] ?? null) ? $fb['manifest'] : [];
+            $d = (string)($fb['base_dir'] ?? '');
+            if ($m && $d !== '') $out[] = $make($m, $d);
+        }
+    }
+
+    return $out;
+}
 
     /**
      * ✅ 从 pack chain 里按 manifest.assets 声明的文件列表加载指定 basename 的 JSON
@@ -1056,5 +1120,81 @@ foreach ($docs as $d) {
 }
 
     return $base;
+}
+
+private function packIdToDir(string $packId): string
+{
+    $s = trim($packId);
+    if ($s === '') return '';
+
+    // 例：MBTI.global.en.v0.2.1-TEST
+    if (substr_count($s, '.') >= 3) {
+        $parts  = explode('.', $s);
+        $scale  = $parts[0] ?? 'MBTI';
+        $region = strtoupper($parts[1] ?? 'GLOBAL');
+        $locale = $parts[2] ?? 'en';
+        $ver    = implode('.', array_slice($parts, 3)); // v0.2.1-TEST（含点）
+        return "{$scale}/{$region}/{$locale}/{$ver}";
+    }
+
+    // 如果传进来已经是路径形式，就原样返回
+    if (str_contains($s, '/')) return trim($s, "/");
+
+    // 兜底：给个可读值
+    return $s;
+}
+
+/**
+ * 把最终 report payload 落盘成 JSON，方便排障/复现
+ * 路径：storage/app/private/reports/{attemptId}/report.json
+ * 同时写一份带时间戳的快照，便于对比多次生成差异：
+ * storage/app/private/reports/{attemptId}/report.{Ymd_His}.json
+ */
+private function persistReportJson(string $attemptId, array $reportPayload): void
+{
+    try {
+        // 你的 local disk root 已经是 storage/app/private
+        $disk = Storage::disk('local');
+
+        // ✅ 关键：不要再多拼一个 private/
+        $baseDir = "reports/{$attemptId}";
+        $disk->makeDirectory($baseDir);
+
+        $json = json_encode(
+            $reportPayload,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
+        );
+
+        if ($json === false) {
+            Log::warning('[REPORT] persist_report_json_encode_failed', [
+                'attempt_id' => $attemptId,
+                'json_error' => json_last_error_msg(),
+            ]);
+            return;
+        }
+
+        $pathLatest = "{$baseDir}/report.json";
+        $disk->put($pathLatest, $json);
+
+        $ts = now()->format('Ymd_His');
+        $pathSnapshot = "{$baseDir}/report.{$ts}.json";
+        $disk->put($pathSnapshot, $json);
+
+        Log::info('[REPORT] persisted', [
+            'attempt_id' => $attemptId,
+            'disk' => 'local',
+            'root' => (string) config('filesystems.disks.local.root'),
+            'latest' => $pathLatest,
+            'snapshot' => $pathSnapshot,
+            'latest_exists' => $disk->exists($pathLatest),
+            // 如果有 path() 方法就顺便打绝对路径
+            'latest_abs' => method_exists($disk, 'path') ? $disk->path($pathLatest) : null,
+        ]);
+    } catch (\Throwable $e) {
+        Log::warning('[REPORT] persist_report_failed', [
+            'attempt_id' => $attemptId,
+            'error' => $e->getMessage(),
+        ]);
+    }
 }
 }

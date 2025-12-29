@@ -26,8 +26,20 @@ Log::info('[HL] builder_recv', [
             'schema'  => is_array($doc) ? ($doc['schema'] ?? null) : null,
         ]);
 
-        // 如果 doc 不符合 schema，直接走兜底生成
-        if (!$doc || !is_array($doc) || ($doc['schema'] ?? '') !== 'fap.report.highlights.templates.v1') {
+                // 如果 doc 不符合 schema / templates 结构不对：允许 fallback，但若开了爆炸开关则直接炸
+        $schema = is_array($doc) ? (string)($doc['schema'] ?? '') : '';
+        $okSchema = in_array($schema, [
+            'fap.report.highlights.templates.v1',
+            'fap.report.highlights_templates.v1', // 容错：有些包会用下划线命名
+        ], true);
+
+        if (!$doc || !is_array($doc) || !$okSchema) {
+            $this->forbidHighlightsFallback("bad_or_missing_doc_schema={$schema}");
+            return array_slice($this->fallbackGenerated($report), 0, $max);
+        }
+
+        if (!is_array($doc['templates'] ?? null) || ($doc['templates'] ?? []) === []) {
+            $this->forbidHighlightsFallback('missing_templates');
             return array_slice($this->fallbackGenerated($report), 0, $max);
         }
 
@@ -165,6 +177,7 @@ $strength = $selectedPool;
         if ($action)    $out[] = $action;
 
         if (count($out) < $min) {
+            $this->forbidHighlightsFallback('out_lt_min out=' . count($out) . " min={$min}");
             $out = array_merge($out, $this->fallbackGenerated($report));
         }
 
@@ -302,8 +315,17 @@ return array_slice($out, 0, $max);
         ];
     }
 
+    private function forbidHighlightsFallback(string $reason): void
+    {
+        if ((bool) env('FAP_FORBID_HIGHLIGHTS_FALLBACK', false)) {
+            throw new \RuntimeException('HIGHLIGHTS_FALLBACK_USED: ' . $reason);
+        }
+    }
+
     private function fallbackGenerated(array $report): array
     {
+        $this->forbidHighlightsFallback('fallbackGenerated');
+
         $typeCode = $report['profile']['type_code'] ?? '';
         return [
             [
@@ -370,26 +392,31 @@ return array_slice($out, 0, $max);
 }
 
 private function normalizeHighlightItem(array $h, string $typeCode): array
-{
-    // kind/id/text：保证是 string
-    $h['kind'] = is_string($h['kind'] ?? null) && $h['kind'] !== '' ? $h['kind'] : 'highlight';
-    $h['id']   = is_string($h['id'] ?? null)   && $h['id'] !== ''   ? $h['id']   : ('hl.generated.'.uniqid());
-    $h['text'] = is_string($h['text'] ?? null) && $h['text'] !== '' ? $h['text'] : '';
+    {
+        // kind/id/text：保证是 string
+        $h['kind'] = is_string($h['kind'] ?? null) && $h['kind'] !== '' ? $h['kind'] : 'highlight';
+        $h['id']   = is_string($h['id'] ?? null)   && $h['id'] !== ''   ? $h['id']   : ('hl.generated.'.uniqid());
+        $h['text'] = is_string($h['text'] ?? null) && $h['text'] !== '' ? $h['text'] : '';
 
-    // title：你现在 blindspot/action 是 null，这里兜底
-    if (!is_string($h['title'] ?? null) || trim($h['title']) === '') {
-        $h['title'] =
-            $h['kind'] === 'blindspot' ? '盲点提醒' :
-            ($h['kind'] === 'action'   ? '行动建议' : '要点');
+        // title：blindspot/action 兜底
+        if (!is_string($h['title'] ?? null) || trim($h['title']) === '') {
+            $h['title'] =
+                $h['kind'] === 'blindspot' ? '盲点提醒' :
+                ($h['kind'] === 'action'   ? '行动建议' : '要点');
+        }
+
+        // tips/tags：先统一成数组
+        if (!is_array($h['tips'] ?? null)) $h['tips'] = [];
+        if (!is_array($h['tags'] ?? null)) $h['tags'] = [];
+
+        // ✅ 这里就是你问的：统一补默认 tips 的唯一注入点
+        $h = ReportContentNormalizer::fillTipsIfMissing($h);
+
+        // tags：可选兜底
+        if (count($h['tags']) < 1) {
+            $h['tags'] = ['generated', $h['kind'], $typeCode];
+        }
+
+        return $h;
     }
-
-    // tips/tags：把 null 统一变成数组（你后续 jq 要求 array 且 len>=1 就给默认值）
-    if (!is_array($h['tips'] ?? null)) $h['tips'] = [];
-    if (!is_array($h['tags'] ?? null)) $h['tags'] = [];
-
-    if (count($h['tips']) < 1) $h['tips'] = ['先做一小步，再迭代优化'];
-    if (count($h['tags']) < 1) $h['tags'] = ['generated', $h['kind'], $typeCode];
-
-    return $h;
-}
 }
