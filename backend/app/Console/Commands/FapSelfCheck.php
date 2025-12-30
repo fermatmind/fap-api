@@ -186,6 +186,18 @@ $runIfDeclared(
             fn () => $this->checkReportOverrides($this->pathOf($baseDir, 'report_overrides.json'), $manifest, $packId)
         );
 
+        // 10) report_rules.json (rules schema validation)
+$runIfDeclared(
+    'report_rules.json',
+    'report_rules.json',
+    fn () => $this->checkReportRules(
+        $this->pathOf($baseDir, 'report_rules.json'),
+        $manifest,
+        $packId,
+        $this->expectedSchemaFor($manifest, 'rules', 'report_rules.json')
+    )
+);
+
         $this->line(str_repeat('-', 72));
         if ($ok) {
             $this->info('✅ SELF-CHECK PASSED');
@@ -490,8 +502,7 @@ $errs[] = "pack={$packId} file={$abs} path=$.schema :: missing schema field (ass
         // 与 expectedSchemaFor 保持同样的分类口径（只收集 schemaKey，不做值判断）
         $file = (string)$file;
 
-        if (in_array($assetKey, ['questions','type_profiles','cards','highlights','reads'], true)) {
-            $used[$assetKey] = true;
+if (in_array($assetKey, ['questions','type_profiles','cards','highlights','reads','rules'], true)) {            $used[$assetKey] = true;
             return;
         }
 
@@ -700,6 +711,203 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
     }
 
     return [true, ["OK (unified overrides rules valid; rules_count=" . count($rules) . ")"]];
+}
+
+// -------------------------
+// Report rules validation (v1)
+// -------------------------
+
+private function checkReportRules(string $path, array $manifest, string $packId, ?string $expectedSchema = null): array
+{
+    if (!is_file($path)) {
+        return [false, ["pack={$packId} file={$path} :: File not found"]];
+    }
+
+    $doc = $this->readJsonFile($path);
+    if (!is_array($doc)) {
+        return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+    }
+
+    // ✅ 0) schema field check
+    if ($errs = $this->checkSchemaField($doc, $expectedSchema, $packId, $path, 'rules')) {
+        return [false, $errs];
+    }
+
+    $errors = [];
+
+    // ✅ 1) must have rules:[]
+    $rules = $doc['rules'] ?? null;
+    if (!is_array($rules)) {
+        return [false, ["pack={$packId} file={$path} path=$.rules :: missing/invalid rules (expect array(list))"]];
+    }
+    // list vs map check: must be list (not assoc)
+    if ($this->isAssocArray($rules)) {
+        return [false, ["pack={$packId} file={$path} path=$.rules :: rules must be array(list), not object(map)"]];
+    }
+
+    $allowedTargets = ['cards', 'highlights', 'reads'];
+    $allowedMode    = ['filter'];
+    $allowedAction  = ['keep', 'drop'];
+
+    $seenIds = [];
+
+    // helpers (local)
+    $isList = function ($v): bool {
+        return is_array($v) && array_keys($v) === range(0, count($v) - 1);
+    };
+
+    $isIntLike = function ($v): bool {
+        if (is_int($v)) return true;
+        if (is_string($v) && trim($v) !== '' && preg_match('/^-?\d+$/', $v)) return true;
+        if (is_numeric($v) && (int)$v == $v) return true;
+        return false;
+    };
+
+    $checkListOfNonEmptyString = function ($v, string $where) use (&$errors, $packId, $path, $isList): void {
+        if (!is_array($v) || !$isList($v)) {
+            $errors[] = "pack={$packId} file={$path} {$where} :: must be array(list of non-empty strings)";
+            return;
+        }
+        foreach ($v as $i => $s) {
+            if (!is_string($s) || trim($s) === '') {
+                $errors[] = "pack={$packId} file={$path} {$where}[{$i}] :: must be non-empty string";
+            }
+        }
+    };
+
+    foreach ($rules as $i => $r) {
+        $base = "$.rules[{$i}]";
+
+        if (!is_array($r) || !$this->isAssocArray($r)) {
+            $errors[] = "pack={$packId} file={$path} path={$base} :: rule must be object(map)";
+            continue;
+        }
+
+        // id: non-empty + unique
+        $rid = $r['id'] ?? null;
+        if (!is_string($rid) || trim($rid) === '') {
+            $errors[] = "pack={$packId} file={$path} path={$base}.id :: missing/invalid id (non-empty string required)";
+            $rid = ""; // keep running to collect more errors
+        } else {
+            $rid = trim($rid);
+            if (isset($seenIds[$rid])) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.id :: duplicate id (first at {$seenIds[$rid]})";
+            } else {
+                $seenIds[$rid] = $base;
+            }
+        }
+
+        // target: enum
+        $target = $r['target'] ?? null;
+        if (!is_string($target) || !in_array($target, $allowedTargets, true)) {
+            $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.target :: invalid target (allowed: " . implode(',', $allowedTargets) . ")";
+        }
+
+        // priority: optional int
+        if (array_key_exists('priority', $r)) {
+            if (!$isIntLike($r['priority'])) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.priority :: must be integer if present";
+            }
+        }
+
+        // weight: optional number
+        if (array_key_exists('weight', $r)) {
+            if (!is_numeric($r['weight'])) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.weight :: must be number if present";
+            }
+        }
+
+        // mode: must be "filter"
+        $mode = $r['mode'] ?? null;
+        if (!is_string($mode) || !in_array($mode, $allowedMode, true)) {
+            $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.mode :: invalid mode (allowed: filter)";
+        }
+
+        // match: optional object; allow keys section/type_code/item, each must be list[str]
+        if (array_key_exists('match', $r)) {
+            $match = $r['match'];
+
+            if (!is_array($match) || !$this->isAssocArray($match)) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.match :: match must be object(map)";
+            } else {
+                $allowedMatchKeys = ['section', 'type_code', 'item'];
+
+                foreach ($match as $k => $_) {
+                    if (!in_array((string)$k, $allowedMatchKeys, true)) {
+                        $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.match.{$k} :: unknown match key (allowed: " . implode(',', $allowedMatchKeys) . ")";
+                    }
+                }
+
+                foreach (['section','type_code','item'] as $k) {
+                    if (array_key_exists($k, $match)) {
+                        $checkListOfNonEmptyString($match[$k], "path={$base}.match.{$k}");
+                    }
+                }
+            }
+        }
+
+        // require_all / require_any / forbid: optional list[str], non-empty elements
+        foreach (['require_all','require_any','forbid'] as $k) {
+            if (array_key_exists($k, $r)) {
+                $checkListOfNonEmptyString($r[$k], "path={$base}.{$k}");
+            }
+        }
+
+        // min_match: optional int + constraint with require_any
+        if (array_key_exists('min_match', $r)) {
+            if (!$isIntLike($r['min_match'])) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.min_match :: must be integer if present";
+            } else {
+                $mm = (int)$r['min_match'];
+                if ($mm < 1) {
+                    $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.min_match :: must be >= 1";
+                } else {
+                    $ra = $r['require_any'] ?? null;
+                    if (!is_array($ra) || !$isList($ra) || count($ra) === 0) {
+                        $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.min_match :: require_any must be non-empty array(list) when min_match is set";
+                    } else {
+                        $n = count($ra);
+                        if ($mm > $n) {
+                            $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.min_match :: must be <= count(require_any) (= {$n})";
+                        }
+                    }
+                }
+            }
+        }
+
+        // effect.action OR action (top-level): enum keep/drop
+        $action = null;
+
+        if (array_key_exists('effect', $r)) {
+            $eff = $r['effect'];
+            if (!is_array($eff) || !$this->isAssocArray($eff)) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.effect :: must be object(map) if present";
+            } else {
+                $action = $eff['action'] ?? null;
+                if ($action === null) {
+                    $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.effect.action :: missing action (allowed: keep/drop)";
+                } elseif (!is_string($action) || !in_array($action, $allowedAction, true)) {
+                    $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.effect.action :: invalid action (allowed: keep/drop)";
+                }
+            }
+        } elseif (array_key_exists('action', $r)) {
+            $action = $r['action'];
+            if (!is_string($action) || !in_array($action, $allowedAction, true)) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.action :: invalid action (allowed: keep/drop)";
+            }
+        } else {
+            // v1: allow missing (default keep), so no error
+        }
+    }
+
+    if (!empty($errors)) {
+        return [false, array_merge(
+            ["Report rules invalid: " . count($errors)],
+            array_slice($errors, 0, 160)
+        )];
+    }
+
+    return [true, ["OK (rules valid; count=" . count($rules) . ")"]];
 }
 
     // -------------------------
@@ -1555,6 +1763,7 @@ private function checkIdentityLayers(string $path, string $packId, ?string $expe
         'cards'          => 'cards',
         'highlights'     => 'highlights',
         'reads'          => 'reads',
+        'rules'          => 'rules', // ✅ 新增：rules -> schemas.rules
     ];
     if (isset($direct[$assetKey])) {
         return $schemas[$direct[$assetKey]] ?? null;
