@@ -902,7 +902,7 @@ public function getReport(Request $request, string $attemptId)
                 $cached = json_decode($cachedJson, true);
 
                 if (is_array($cached)) {
-                    // 可选：缓存命中也记录一次 view 事件（如果你不想重复记，就把这段删掉）
+                    // 缓存命中也记一次 view（如不想重复可删）
                     $this->logEvent('report_view', $request, [
                         'anon_id'       => $attempt?->anon_id,
                         'scale_code'    => $result->scale_code,
@@ -919,13 +919,13 @@ public function getReport(Request $request, string $attemptId)
                         ],
                     ]);
 
-                    // 轻量兜底（可选）：确保 highlights 结构不炸前端
+                    // 轻量兜底：确保 highlights 结构不炸前端
                     if (isset($cached['highlights']) && is_array($cached['highlights'])) {
-                        $typeCodeForFix = (string)($cached['profile']['type_code'] ?? $result->type_code ?? '');
+                        $typeCodeForFix = (string) ($cached['profile']['type_code'] ?? $result->type_code ?? '');
                         $cached['highlights'] = $this->finalizeHighlightsSchema($cached['highlights'], $typeCodeForFix);
                     }
 
-                    // 保证 report.tags 存在（有些旧文件可能没有）
+                    // 保证 report.tags 存在（旧缓存可能没有）
                     if (!array_key_exists('tags', $cached) || !is_array($cached['tags'])) {
                         $cached['tags'] = [];
                     }
@@ -933,7 +933,7 @@ public function getReport(Request $request, string $attemptId)
                     return response()->json([
                         'ok'         => true,
                         'attempt_id' => $attemptId,
-                        'type_code'  => (string)($cached['profile']['type_code'] ?? $result->type_code),
+                        'type_code'  => (string) ($cached['profile']['type_code'] ?? $result->type_code),
                         'report'     => $cached,
                     ]);
                 }
@@ -954,7 +954,6 @@ public function getReport(Request $request, string $attemptId)
 
     /**
      * ✅ 2) 缓存未命中 / refresh=1：走 compose
-     *    事件仍然由 Controller 负责（因为它需要 $request）
      */
     $this->logEvent('report_view', $request, [
         'anon_id'       => $attempt?->anon_id,
@@ -976,12 +975,10 @@ public function getReport(Request $request, string $attemptId)
     $composer = app(ReportComposer::class);
 
     $res = $composer->compose($attemptId, [
-        // composer 里要用到的默认/上下文
         'defaultProfileVersion'        => config('fap.profile_version', 'mbti32-v2.5'),
         'defaultContentPackageVersion' => $this->currentContentPackageVersion(),
         'currentContentPackageVersion' => fn () => $this->currentContentPackageVersion(),
 
-        // 把 Controller 私有 loader/helper 用闭包注入
         'loadTypeProfile' => fn (string $pkg, string $type)
             => $this->loadTypeProfile($pkg, $type),
 
@@ -1012,9 +1009,9 @@ public function getReport(Request $request, string $attemptId)
     $reportPayload = $res['report'] ?? [];
     if (!is_array($reportPayload)) $reportPayload = [];
 
-    // ✅ 强制 highlights 满足契约（kind/id/title/text + tips/tags）
+    // ✅ 强制 highlights 满足契约
     if (isset($reportPayload['highlights']) && is_array($reportPayload['highlights'])) {
-        $type = (string)($res['type_code'] ?? $result->type_code ?? '');
+        $type = (string) ($res['type_code'] ?? $result->type_code ?? '');
         $reportPayload['highlights'] = $this->finalizeHighlightsSchema($reportPayload['highlights'], $type);
     }
 
@@ -1024,7 +1021,6 @@ public function getReport(Request $request, string $attemptId)
 
     /**
      * ✅ 3) 写 report.json（latest）+ snapshot（可回溯）
-     *    注意：你的 local.root 已经是 storage/app/private，所以不要再多拼 private/
      */
     try {
         $json = json_encode($reportPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -1032,21 +1028,21 @@ public function getReport(Request $request, string $attemptId)
             throw new \RuntimeException('json_encode_failed: ' . json_last_error_msg());
         }
 
-        // 确保目录存在（有些 driver 下 put 会自动建，但保险）
         if (method_exists($disk, 'makeDirectory')) {
             $disk->makeDirectory("reports/{$attemptId}");
         }
 
         $disk->put($latestRelPath, $json);
 
-        // snapshot（建议保留）
         $ts = function_exists('now') ? now()->format('Ymd_His') : date('Ymd_His');
         $snapRelPath = "reports/{$attemptId}/report.{$ts}.json";
         $disk->put($snapRelPath, $json);
 
         Log::info('[REPORT] persisted', [
             'attempt_id'    => $attemptId,
-            'disk'          => array_key_exists('private', config('filesystems.disks', [])) ? 'private' : config('filesystems.default', 'local'),
+            'disk'          => array_key_exists('private', config('filesystems.disks', []))
+                ? 'private'
+                : config('filesystems.default', 'local'),
             'root'          => (string) config('filesystems.disks.local.root'),
             'latest'        => $latestRelPath,
             'snapshot'      => $snapRelPath,
@@ -1061,7 +1057,6 @@ public function getReport(Request $request, string $attemptId)
         ]);
     }
 
-    // ✅ 最终返回：固定契约
     return response()->json([
         'ok'         => true,
         'attempt_id' => $attemptId,
@@ -1070,9 +1065,9 @@ public function getReport(Request $request, string $attemptId)
     ]);
 }
 
-    // =========================
+    // ----------------------------
     // Private helpers
-    // =========================
+    // ----------------------------
 
 /**
  * M3-3: 从 templates + overrides 动态生成 highlights
@@ -1275,9 +1270,9 @@ private function buildHighlights(array $scoresPct, array $axisStates, string $ty
         $out = array_slice($norm, 0, $take);
     }
 
-    // =========================
+    // ----------------------------
     // ✅ M3 硬保证：至少 3 条（补齐：强项 / 风险 / 建议）
-    // =========================
+    // ----------------------------
 
     // 统一成 list + 去重（按 id）
     $out = array_values(array_filter($out ?? [], fn($x) => is_array($x)));
@@ -2042,9 +2037,9 @@ if (!is_array($requireAnyTags)) $requireAnyTags = [];
 $requireAllTags = $rules['require_all_tags'] ?? [];
 if (!is_array($requireAllTags)) $requireAllTags = [];
 
-// ============================
+// ----------------------------
 // ✅ RuleEngine (reads) setup
-// ============================
+// ----------------------------
 /** @var \App\Services\Rules\RuleEngine $re */
 $re = app(RuleEngine::class);
 
@@ -2185,9 +2180,9 @@ $reRejectedSamples = [];
         $bucketLists['by_top_axis'] = [];
     }
 
-    // ============================
+    // ----------------------------
 // ✅ 用 RuleEngine 统一：过滤 + 打分 + 稳定打散排序
-// ============================
+// ----------------------------
 $rankBucket = function (string $bucketName, array $list) use (
     $re, $userTagsSet, $globalRules, $seed, $ctx, $debugRE,$hasEvaluate,
     &$reRejectedSamples
