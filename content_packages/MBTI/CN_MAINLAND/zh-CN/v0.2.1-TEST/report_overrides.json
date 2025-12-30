@@ -7,9 +7,7 @@
       "target": "cards",
       "priority": 50,
       "match": {
-        "section": [
-          "traits"
-        ]
+        "section": ["traits"]
       },
       "mode": "append",
       "items": [
@@ -22,14 +20,10 @@
     },
     {
       "id": "reads_replace_one",
-      "target": "recommended_reads",
+      "target": "reads",
       "priority": 10,
       "match": {
-        "item": {
-          "id": [
-            "read.canary.rule_engine"
-          ]
-        }
+        "item": ["read.canary.rule_engine"]
       },
       "mode": "replace",
       "items": [
