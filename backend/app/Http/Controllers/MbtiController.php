@@ -850,6 +850,18 @@ $this->logEvent('share_generate', $request, [
  * 约定：
  * - 不让前端传阈值、不让前端算 Top2、不让前端判断 borderline
  * - 字段必须稳定存在（哪怕内容是占位）
+ *
+ * 返回契约（稳定）：
+ * {
+ *   ok: true,
+ *   attempt_id: "...",
+ *   type_code: "ESTJ-A",
+ *   report: { ... }   // 所有业务字段都只在 report 内
+ * }
+ *
+ * 缓存策略：
+ * - 默认优先读 storage/app/private/reports/{attemptId}/report.json
+ * - 需要强制重算：?refresh=1（或 true/yes）
  */
 public function getReport(Request $request, string $attemptId)
 {
@@ -867,7 +879,83 @@ public function getReport(Request $request, string $attemptId)
 
     $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
 
-    // ✅ 事件仍然由 Controller 负责（因为它需要 $request）
+    // refresh=1 / refresh=true 才会强制重算
+    $refreshRaw = $request->query('refresh', '0');
+    $refresh = in_array((string) $refreshRaw, ['1', 'true', 'TRUE', 'yes', 'YES'], true);
+
+    // 选择磁盘：优先 private，否则 fallback 到默认磁盘
+    // 注意：你现在的 local.root 指向 storage/app/private，所以用 local 也没问题
+    $disk = array_key_exists('private', config('filesystems.disks', []))
+        ? Storage::disk('private')
+        : Storage::disk(config('filesystems.default', 'local'));
+
+    $latestRelPath = "reports/{$attemptId}/report.json";
+
+    /**
+     * ✅ 1) 默认读缓存（避免每次 GET 都重新 compose + 写盘）
+     *    - refresh=1 时跳过缓存
+     */
+    if (!$refresh) {
+        try {
+            if ($disk->exists($latestRelPath)) {
+                $cachedJson = $disk->get($latestRelPath);
+                $cached = json_decode($cachedJson, true);
+
+                if (is_array($cached)) {
+                    // 可选：缓存命中也记录一次 view 事件（如果你不想重复记，就把这段删掉）
+                    $this->logEvent('report_view', $request, [
+                        'anon_id'       => $attempt?->anon_id,
+                        'scale_code'    => $result->scale_code,
+                        'scale_version' => $result->scale_version,
+                        'attempt_id'    => $attemptId,
+                        'region'        => $attempt?->region ?? 'CN_MAINLAND',
+                        'locale'        => $attempt?->locale ?? 'zh-CN',
+                        'meta_json'     => [
+                            'type_code' => $result->type_code,
+                            'engine'    => 'v1.2',
+                            'share_id'  => $shareId !== '' ? $shareId : null,
+                            'refresh'   => false,
+                            'cache'     => true,
+                        ],
+                    ]);
+
+                    // 轻量兜底（可选）：确保 highlights 结构不炸前端
+                    if (isset($cached['highlights']) && is_array($cached['highlights'])) {
+                        $typeCodeForFix = (string)($cached['profile']['type_code'] ?? $result->type_code ?? '');
+                        $cached['highlights'] = $this->finalizeHighlightsSchema($cached['highlights'], $typeCodeForFix);
+                    }
+
+                    // 保证 report.tags 存在（有些旧文件可能没有）
+                    if (!array_key_exists('tags', $cached) || !is_array($cached['tags'])) {
+                        $cached['tags'] = [];
+                    }
+
+                    return response()->json([
+                        'ok'         => true,
+                        'attempt_id' => $attemptId,
+                        'type_code'  => (string)($cached['profile']['type_code'] ?? $result->type_code),
+                        'report'     => $cached,
+                    ]);
+                }
+
+                Log::warning('[report] cache_decode_failed, fallback to compose', [
+                    'attempt_id' => $attemptId,
+                    'path'       => $latestRelPath,
+                ]);
+            }
+        } catch (\Throwable $e) {
+            Log::warning('[report] read cache failed, fallback to compose', [
+                'attempt_id' => $attemptId,
+                'path'       => $latestRelPath,
+                'err'        => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * ✅ 2) 缓存未命中 / refresh=1：走 compose
+     *    事件仍然由 Controller 负责（因为它需要 $request）
+     */
     $this->logEvent('report_view', $request, [
         'anon_id'       => $attempt?->anon_id,
         'scale_code'    => $result->scale_code,
@@ -879,6 +967,8 @@ public function getReport(Request $request, string $attemptId)
             'type_code' => $result->type_code,
             'engine'    => 'v1.2',
             'share_id'  => $shareId !== '' ? $shareId : null,
+            'refresh'   => $refresh,
+            'cache'     => false,
         ],
     ]);
 
@@ -920,41 +1010,63 @@ public function getReport(Request $request, string $attemptId)
     }
 
     $reportPayload = $res['report'] ?? [];
+    if (!is_array($reportPayload)) $reportPayload = [];
 
-    // ✅ 最终兜底：强制 highlights 满足契约（kind/id/title/text + tips/tags 非空）
-if (isset($reportPayload['highlights']) && is_array($reportPayload['highlights'])) {
-    $type = (string)($res['type_code'] ?? $result->type_code ?? '');
-    $reportPayload['highlights'] = $this->finalizeHighlightsSchema($reportPayload['highlights'], $type);
-}
+    // ✅ 强制 highlights 满足契约（kind/id/title/text + tips/tags）
+    if (isset($reportPayload['highlights']) && is_array($reportPayload['highlights'])) {
+        $type = (string)($res['type_code'] ?? $result->type_code ?? '');
+        $reportPayload['highlights'] = $this->finalizeHighlightsSchema($reportPayload['highlights'], $type);
+    }
 
-// (1) 把 tags 塞进 report（也可以塞到 report._debug.tags，看你契约）
-$reportPayload['tags'] = $res['tags'] ?? ($reportPayload['tags'] ?? []);
+    // ✅ 统一 tags 入口（保证 report.tags 存在）
+    $reportPayload['tags'] = $res['tags'] ?? ($reportPayload['tags'] ?? []);
+    if (!is_array($reportPayload['tags'])) $reportPayload['tags'] = [];
 
-// (2) 写 report.json 到 storage（private 优先）
-try {
-    $disk = array_key_exists('private', config('filesystems.disks', []))
-        ? Storage::disk('private')
-        : Storage::disk(config('filesystems.default', 'local'));
+    /**
+     * ✅ 3) 写 report.json（latest）+ snapshot（可回溯）
+     *    注意：你的 local.root 已经是 storage/app/private，所以不要再多拼 private/
+     */
+    try {
+        $json = json_encode($reportPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if ($json === false) {
+            throw new \RuntimeException('json_encode_failed: ' . json_last_error_msg());
+        }
 
-    $disk->put(
-        "reports/{$attemptId}/report.json",
-        json_encode($reportPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
-    );
-} catch (\Throwable $e) {
-    Log::warning('[report] persist report.json failed', [
-        'attempt_id' => $attemptId,
-        'err' => $e->getMessage(),
-    ]);
-}
+        // 确保目录存在（有些 driver 下 put 会自动建，但保险）
+        if (method_exists($disk, 'makeDirectory')) {
+            $disk->makeDirectory("reports/{$attemptId}");
+        }
 
+        $disk->put($latestRelPath, $json);
+
+        // snapshot（建议保留）
+        $ts = function_exists('now') ? now()->format('Ymd_His') : date('Ymd_His');
+        $snapRelPath = "reports/{$attemptId}/report.{$ts}.json";
+        $disk->put($snapRelPath, $json);
+
+        Log::info('[REPORT] persisted', [
+            'attempt_id'    => $attemptId,
+            'disk'          => array_key_exists('private', config('filesystems.disks', [])) ? 'private' : config('filesystems.default', 'local'),
+            'root'          => (string) config('filesystems.disks.local.root'),
+            'latest'        => $latestRelPath,
+            'snapshot'      => $snapRelPath,
+            'latest_exists' => $disk->exists($latestRelPath),
+            'latest_abs'    => method_exists($disk, 'path') ? $disk->path($latestRelPath) : null,
+        ]);
+    } catch (\Throwable $e) {
+        Log::warning('[report] persist report.json failed', [
+            'attempt_id' => $attemptId,
+            'path'       => $latestRelPath,
+            'err'        => $e->getMessage(),
+        ]);
+    }
+
+    // ✅ 最终返回：固定契约
     return response()->json([
         'ok'         => true,
         'attempt_id' => $attemptId,
         'type_code'  => $res['type_code'] ?? $result->type_code,
         'report'     => $reportPayload,
-
-        // 兼容旧返回（你之前做了 ...$reportPayload）
-        ...$reportPayload,
     ]);
 }
 
