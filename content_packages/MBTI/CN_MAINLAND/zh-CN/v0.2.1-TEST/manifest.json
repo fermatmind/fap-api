@@ -19,6 +19,7 @@
     "borderline": true,
     "identity": true,
     "overrides": true,
+    "rules": true,
     "disclaimers": false,
     "share_templates": false,
     "content_graph": false
@@ -36,7 +37,8 @@
     "roles": "fap.report.roles.v1",
     "strategies": "fap.report.strategies.v1",
     "overrides_unified": "fap.report.overrides.v1",
-    "overrides_highlights_legacy": "fap.report.highlights.overrides.v1"
+    "overrides_highlights_legacy": "fap.report.highlights.overrides.v1",
+    "rules": "fap.report.rules.v1"
   },
   "assets": {
     "questions": [
@@ -75,7 +77,10 @@
       "unified": [
         "report_overrides.json"
       ]
-    }
+    },
+    "rules": [
+      "report_rules.json"
+    ]
   },
   "overrides": {
     "apply_order": [

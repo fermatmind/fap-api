@@ -490,8 +490,7 @@ $errs[] = "pack={$packId} file={$abs} path=$.schema :: missing schema field (ass
         // 与 expectedSchemaFor 保持同样的分类口径（只收集 schemaKey，不做值判断）
         $file = (string)$file;
 
-        if (in_array($assetKey, ['questions','type_profiles','cards','highlights','reads'], true)) {
-            $used[$assetKey] = true;
+if (in_array($assetKey, ['questions','type_profiles','cards','highlights','reads','rules'], true)) {            $used[$assetKey] = true;
             return;
         }
 
@@ -1555,6 +1554,7 @@ private function checkIdentityLayers(string $path, string $packId, ?string $expe
         'cards'          => 'cards',
         'highlights'     => 'highlights',
         'reads'          => 'reads',
+        'rules'          => 'rules', // ✅ 新增：rules -> schemas.rules
     ];
     if (isset($direct[$assetKey])) {
         return $schemas[$direct[$assetKey]] ?? null;
