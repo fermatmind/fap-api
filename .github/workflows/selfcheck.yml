@@ -59,16 +59,26 @@ jobs:
           use App\Models\Result;
 
           $attemptId = (string) Str::uuid();
+          $anonId = "ci_" . Str::uuid();
 
           $a = new Attempt();
           $a->id = $attemptId;
+          $a->anon_id = $anonId;            
           $a->region = "CN_MAINLAND";
           $a->locale = "zh-CN";
+
+          // （建议）把这些也补上，避免 pack/规则解析不到导致 cards=0
+          if (property_exists($a, "scale_code")) $a->scale_code = "MBTI";
+          if (property_exists($a, "scale_version")) $a->scale_version = "v0.2.1-TEST";
+          if (property_exists($a, "question_count")) $a->question_count = 144;
+
           $a->save();
 
           $r = new Result();
           $r->attempt_id = $attemptId;
+          if (property_exists($r, "anon_id")) $r->anon_id = $anonId;
           $r->scale_code = "MBTI";
+          if (property_exists($r, "scale_version")) $r->scale_version = "v0.2.1-TEST";
           $r->type_code = "ESTJ-A";
           $r->profile_version = "mbti32-v2.5";
           $r->content_package_version = "v0.2.1-TEST";
@@ -82,10 +92,7 @@ jobs:
           echo "$OUT"
 
           ATTEMPT_ID="$(echo "$OUT" | tr -d '\r' | grep -Eo '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}' | head -n 1)"
-          if [ -z "$ATTEMPT_ID" ]; then
-            echo "ERROR: failed to extract attempt_id"
-            exit 1
-          fi
+          [ -n "$ATTEMPT_ID" ] || (echo "ERROR: failed to extract attempt_id" && exit 1)
 
           echo "FAP_VALIDATE_ATTEMPT_ID=$ATTEMPT_ID" >> "$GITHUB_ENV"
           echo "Seeded attempt_id=$ATTEMPT_ID"
