@@ -15,27 +15,26 @@ jobs:
         with:
           php-version: "8.4"
           tools: composer:v2
-          extensions: sqlite3
 
       - name: Install backend deps
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
 
-      # ✅ Laravel 通常需要 APP_KEY（不一定每次都用到，但 CI 里给一个最稳）
+      - name: Run selfcheck (default manifest)
+        working-directory: backend
+        run: php artisan fap:self-check --strict-assets
+
+      # ---------- CI runtime validate (SQLite) ----------
       - name: Prepare Laravel env (testing)
         working-directory: backend
         run: |
           cp -n .env.example .env || true
-          php -r 'file_put_contents(".env", preg_replace("/^APP_ENV=.*/m","APP_ENV=testing", file_get_contents(".env")));'
-          php -r 'file_put_contents(".env", preg_replace("/^APP_KEY=.*/m","APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", file_get_contents(".env")));'
-          php -r 'file_put_contents(".env", preg_replace("/^DB_CONNECTION=.*/m","DB_CONNECTION=sqlite", file_get_contents(".env")));'
-          php -r 'file_put_contents(".env", preg_replace("/^DB_DATABASE=.*/m","DB_DATABASE=".__DIR__."/database/database.sqlite", file_get_contents(".env")));'
+          php artisan key:generate --force
 
       - name: Prepare sqlite
-        working-directory: backend
         run: |
-          mkdir -p database
-          touch database/database.sqlite
+          mkdir -p backend/database
+          touch backend/database/database.sqlite
 
       - name: Migrate
         working-directory: backend
@@ -45,11 +44,6 @@ jobs:
           DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
         run: php artisan migrate --force
 
-      - name: Run selfcheck (default manifest)
-        working-directory: backend
-        run: php artisan fap:self-check --strict-assets
-
-      # ✅ 造一个 demo attempt/result（给 validate-report 用）
       - name: Seed demo attempt+result (for runtime validate)
         working-directory: backend
         env:
@@ -57,32 +51,34 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
         run: |
-          php artisan tinker --execute='
-          use Illuminate\Support\Str;
-          use App\Models\Attempt;
-          use App\Models\Result;
+          ATTEMPT_ID=$(php artisan tinker --execute='
+            use Illuminate\Support\Str;
+            use App\Models\Attempt;
+            use App\Models\Result;
 
-          $attemptId = (string) Str::uuid();
+            $attemptId = (string) Str::uuid();
 
-          $a = new Attempt();
-          $a->id = $attemptId;
-          $a->region = "CN_MAINLAND";
-          $a->locale = "zh-CN";
-          $a->save();
+            $a = new Attempt();
+            $a->id = $attemptId;
+            $a->region = "CN_MAINLAND";
+            $a->locale = "zh-CN";
+            $a->save();
 
-          $r = new Result();
-          $r->attempt_id = $attemptId;
-          $r->scale_code = "MBTI";
-          $r->type_code = "ESTJ-A";
-          $r->profile_version = "mbti32-v2.5";
-          $r->content_package_version = "v0.2.1-TEST";
-          $r->scores_pct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
-          $r->axis_states = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
-          $r->save();
+            $r = new Result();
+            $r->attempt_id = $attemptId;
+            $r->scale_code = "MBTI";
+            $r->type_code = "ESTJ-A";
+            $r->profile_version = "mbti32-v2.5";
+            $r->content_package_version = "v0.2.1-TEST";
+            $r->scores_pct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
+            $r->axis_states = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
+            $r->save();
 
-          file_put_contents(getenv("GITHUB_ENV"), "FAP_VALIDATE_ATTEMPT_ID={$attemptId}\n", FILE_APPEND);
-          echo "SEEDED_ATTEMPT={$attemptId}\n";
-          '
+            echo $attemptId;
+          ' | tail -n 1)
+
+          echo "FAP_VALIDATE_ATTEMPT_ID=$ATTEMPT_ID" >> $GITHUB_ENV
+          echo "Seeded attempt_id=$ATTEMPT_ID"
 
       - name: Runtime validate report
         working-directory: backend
@@ -90,4 +86,4 @@ jobs:
           APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
-        run: php artisan fap:validate-report --attempt=${FAP_VALIDATE_ATTEMPT_ID}
+        run: php artisan fap:validate-report --attempt="$FAP_VALIDATE_ATTEMPT_ID"
