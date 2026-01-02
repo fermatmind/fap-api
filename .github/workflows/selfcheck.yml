@@ -67,68 +67,85 @@ jobs:
           $anonId    = 'ci_' . Str::uuid();
           $now       = now();
 
+          $scoresPct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
+          $axisStates = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
+
           $setIfCol = function($model, string $table, string $col, $val) {
             if (Schema::hasColumn($table, $col)) {
               $model->setAttribute($col, $val);
             }
           };
 
-          // ---- Attempt ----
-          $a = new Attempt();
+          $setJsonIfCol = function($model, string $table, string $col, $val) use ($setIfCol) {
+            $setIfCol($model, $table, $col, json_encode($val, JSON_UNESCAPED_UNICODE));
+          };
 
-          $setIfCol($a, 'attempts', 'id', $attemptId);
-          $setIfCol($a, 'attempts', 'anon_id', $anonId);
-          $setIfCol($a, 'attempts', 'region', 'CN_MAINLAND');
-          $setIfCol($a, 'attempts', 'locale', 'zh-CN');
+          try {
+            // ================= Attempt =================
+            $a = new Attempt();
 
-          $setIfCol($a, 'attempts', 'scale_code', 'MBTI');
-          $setIfCol($a, 'attempts', 'scale_version', 'v0.2.1-TEST');
-          $setIfCol($a, 'attempts', 'question_count', 144);
+            $setIfCol($a, 'attempts', 'id', $attemptId);
+            $setIfCol($a, 'attempts', 'anon_id', $anonId);
+            $setIfCol($a, 'attempts', 'region', 'CN_MAINLAND');
+            $setIfCol($a, 'attempts', 'locale', 'zh-CN');
 
-          // often NOT NULL in your logs
-          $setIfCol($a, 'attempts', 'answers_summary_json', '{}');
-          $setIfCol($a, 'attempts', 'answers_json', '[]');
+            $setIfCol($a, 'attempts', 'scale_code', 'MBTI');
+            $setIfCol($a, 'attempts', 'scale_version', 'v0.2.1-TEST');
+            $setIfCol($a, 'attempts', 'question_count', 144);
 
-          // client fields sometimes NOT NULL
-          $setIfCol($a, 'attempts', 'client_platform', 'github-actions');
-          $setIfCol($a, 'attempts', 'client_version', '0');
-          $setIfCol($a, 'attempts', 'client_os', 'linux');
-          $setIfCol($a, 'attempts', 'client_os_version', 'ubuntu');
+            // common NOT NULLs in your CI logs
+            $setIfCol($a, 'attempts', 'answers_summary_json', '{}');
+            $setIfCol($a, 'attempts', 'answers_json', '[]');
 
-          $setIfCol($a, 'attempts', 'created_at', $now);
-          $setIfCol($a, 'attempts', 'updated_at', $now);
+            $setIfCol($a, 'attempts', 'client_platform', 'github-actions');
+            $setIfCol($a, 'attempts', 'client_version', '0');
+            $setIfCol($a, 'attempts', 'client_os', 'linux');
+            $setIfCol($a, 'attempts', 'client_os_version', 'ubuntu');
 
-          $a->save();
+            $setIfCol($a, 'attempts', 'created_at', $now);
+            $setIfCol($a, 'attempts', 'updated_at', $now);
 
-          // ---- Result ----
-          $r = new Result();
+            $a->save();
 
-          // FIX: results.id is NOT NULL in CI, so seed it
-          $setIfCol($r, 'results', 'id', $resultId);
+            // ================= Result =================
+            $r = new Result();
 
-          $setIfCol($r, 'results', 'attempt_id', $attemptId);
-          $setIfCol($r, 'results', 'anon_id', $anonId);
+            // results.id is NOT NULL in your CI
+            $setIfCol($r, 'results', 'id', $resultId);
 
-          $setIfCol($r, 'results', 'scale_code', 'MBTI');
-          $setIfCol($r, 'results', 'scale_version', 'v0.2.1-TEST');
+            $setIfCol($r, 'results', 'attempt_id', $attemptId);
+            $setIfCol($r, 'results', 'anon_id', $anonId);
 
-          $setIfCol($r, 'results', 'type_code', 'ESTJ-A');
-          $setIfCol($r, 'results', 'short_type', 'ESTJ');
-          $setIfCol($r, 'results', 'variant_code', 'A');
+            $setIfCol($r, 'results', 'scale_code', 'MBTI');
+            $setIfCol($r, 'results', 'scale_version', 'v0.2.1-TEST');
 
-          $setIfCol($r, 'results', 'profile_version', 'mbti32-v2.5');
-          $setIfCol($r, 'results', 'content_package_version', 'v0.2.1-TEST');
+            $setIfCol($r, 'results', 'type_code', 'ESTJ-A');
+            $setIfCol($r, 'results', 'short_type', 'ESTJ');
+            $setIfCol($r, 'results', 'variant_code', 'A');
 
-          // store as JSON string to avoid cast differences
-          $setIfCol($r, 'results', 'scores_pct', json_encode(["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58], JSON_UNESCAPED_UNICODE));
-          $setIfCol($r, 'results', 'axis_states', json_encode(["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"], JSON_UNESCAPED_UNICODE));
+            $setIfCol($r, 'results', 'profile_version', 'mbti32-v2.5');
+            $setIfCol($r, 'results', 'content_package_version', 'v0.2.1-TEST');
 
-          $setIfCol($r, 'results', 'created_at', $now);
-          $setIfCol($r, 'results', 'updated_at', $now);
+            // Your latest error: results.scores_json NOT NULL
+            $setJsonIfCol($r, 'results', 'scores_json', $scoresPct);
 
-          $r->save();
+            // Keep other possible schemas happy
+            $setJsonIfCol($r, 'results', 'scores_pct', $scoresPct);
+            $setJsonIfCol($r, 'results', 'scores', $scoresPct);
 
-          echo "ATTEMPT_ID=".$attemptId.PHP_EOL;
+            $setJsonIfCol($r, 'results', 'axis_states', $axisStates);
+            $setJsonIfCol($r, 'results', 'axis_states_json', $axisStates);
+
+            $setIfCol($r, 'results', 'created_at', $now);
+            $setIfCol($r, 'results', 'updated_at', $now);
+
+            $r->save();
+
+            echo "ATTEMPT_ID=".$attemptId.PHP_EOL;
+          } catch (\Throwable $e) {
+            echo "SEED_ERROR=".$e->getMessage().PHP_EOL;
+            throw $e;
+          }
           PHP
           )"
 
