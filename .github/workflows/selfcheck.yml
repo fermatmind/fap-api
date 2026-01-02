@@ -24,7 +24,6 @@ jobs:
         working-directory: backend
         run: php artisan fap:self-check --strict-assets
 
-      # ---------- CI runtime validate (SQLite) ----------
       - name: Prepare Laravel env (testing)
         working-directory: backend
         run: |
@@ -32,9 +31,10 @@ jobs:
           php artisan key:generate --force
 
       - name: Prepare sqlite
+        working-directory: backend
         run: |
-          mkdir -p backend/database
-          touch backend/database/database.sqlite
+          mkdir -p database
+          touch database/database.sqlite
 
       - name: Migrate
         working-directory: backend
@@ -51,33 +51,35 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
         run: |
-          ATTEMPT_ID=$(php artisan tinker --execute='
-            use Illuminate\Support\Str;
-            use App\Models\Attempt;
-            use App\Models\Result;
+          set -euo pipefail
 
-            $attemptId = (string) Str::uuid();
+          ATTEMPT_ID="$(php artisan tinker --execute='
+          use Illuminate\Support\Str;
+          use App\Models\Attempt;
+          use App\Models\Result;
 
-            $a = new Attempt();
-            $a->id = $attemptId;
-            $a->region = "CN_MAINLAND";
-            $a->locale = "zh-CN";
-            $a->save();
+          $attemptId = (string) Str::uuid();
 
-            $r = new Result();
-            $r->attempt_id = $attemptId;
-            $r->scale_code = "MBTI";
-            $r->type_code = "ESTJ-A";
-            $r->profile_version = "mbti32-v2.5";
-            $r->content_package_version = "v0.2.1-TEST";
-            $r->scores_pct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
-            $r->axis_states = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
-            $r->save();
+          $a = new Attempt();
+          $a->id = $attemptId;
+          $a->region = "CN_MAINLAND";
+          $a->locale = "zh-CN";
+          $a->save();
 
-            echo $attemptId;
-          ' | tail -n 1)
+          $r = new Result();
+          $r->attempt_id = $attemptId;
+          $r->scale_code = "MBTI";
+          $r->type_code = "ESTJ-A";
+          $r->profile_version = "mbti32-v2.5";
+          $r->content_package_version = "v0.2.1-TEST";
+          $r->scores_pct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
+          $r->axis_states = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
+          $r->save();
 
-          echo "FAP_VALIDATE_ATTEMPT_ID=$ATTEMPT_ID" >> $GITHUB_ENV
+          echo $attemptId;
+          ' | tail -n 1)"
+
+          echo "FAP_VALIDATE_ATTEMPT_ID=$ATTEMPT_ID" >> "$GITHUB_ENV"
           echo "Seeded attempt_id=$ATTEMPT_ID"
 
       - name: Runtime validate report
