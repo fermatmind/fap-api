@@ -7,6 +7,16 @@ on:
 jobs:
   selfcheck:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      APP_ENV: testing
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,10 +29,6 @@ jobs:
       - name: Install backend deps
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Run selfcheck (default manifest)
-        working-directory: backend
-        run: php artisan fap:self-check --strict-assets
 
       - name: Prepare Laravel env (testing)
         working-directory: backend
@@ -38,18 +44,14 @@ jobs:
 
       - name: Migrate
         working-directory: backend
-        env:
-          APP_ENV: testing
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
         run: php artisan migrate --force
+
+      - name: Run selfcheck (default manifest)
+        working-directory: backend
+        run: php artisan fap:self-check --strict-assets
 
       - name: Seed demo attempt+result (for runtime validate)
         working-directory: backend
-        env:
-          APP_ENV: testing
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
         run: |
           set -euo pipefail
 
@@ -59,35 +61,55 @@ jobs:
           use App\Models\Result;
 
           $attemptId = (string) Str::uuid();
-          $anonId = "ci_" . Str::uuid();
+          $anonId    = "ci_" . Str::uuid();
 
           $a = new Attempt();
           $a->id = $attemptId;
-          $a->anon_id = $anonId;            
+          $a->anon_id = $anonId;
           $a->region = "CN_MAINLAND";
           $a->locale = "zh-CN";
-          $a->scale_code = "MBTI";
-          $a->scale_version = "v0.2.1-TEST";
-          $a->question_count = 144;
-          $a->answers_summary_json = json_encode((object)[]);
 
-          // （建议）把这些也补上，避免 pack/规则解析不到导致 cards=0
-          if (property_exists($a, "scale_code")) $a->scale_code = "MBTI";
+          // required (your schema keeps adding NOT NULL fields, so guard with property_exists)
+          if (property_exists($a, "client_platform")) $a->client_platform = "github-actions";
+          if (property_exists($a, "client_version"))  $a->client_version  = "0";
+          if (property_exists($a, "client_os"))       $a->client_os       = "linux";
+          if (property_exists($a, "client_os_version")) $a->client_os_version = "ubuntu";
+
+          if (property_exists($a, "scale_code"))    $a->scale_code = "MBTI";
           if (property_exists($a, "scale_version")) $a->scale_version = "v0.2.1-TEST";
           if (property_exists($a, "question_count")) $a->question_count = 144;
+
+          // fix: NOT NULL constraint failed (answers_summary_json / answers_summary_json)
+          if (property_exists($a, "answers_summary_json"))     $a->answers_summary_json = json_encode((object)[]);
+          if (property_exists($a, "answers_summary_json"))     $a->answers_summary_json = json_encode((object)[]); // harmless if same
+          if (property_exists($a, "answers_summary_json"))     $a->answers_summary_json = "{}";
+
+          // some schemas use different field names
+          if (property_exists($a, "answers_summary_json")) $a->answers_summary_json = "{}";
+          if (property_exists($a, "answers_json"))         $a->answers_json = json_encode([]);
+          if (property_exists($a, "answers"))              $a->answers = [];
 
           $a->save();
 
           $r = new Result();
           $r->attempt_id = $attemptId;
           if (property_exists($r, "anon_id")) $r->anon_id = $anonId;
-          $r->scale_code = "MBTI";
+
+          if (property_exists($r, "scale_code")) $r->scale_code = "MBTI";
           if (property_exists($r, "scale_version")) $r->scale_version = "v0.2.1-TEST";
-          $r->type_code = "ESTJ-A";
-          $r->profile_version = "mbti32-v2.5";
-          $r->content_package_version = "v0.2.1-TEST";
-          $r->scores_pct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
-          $r->axis_states = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
+
+          // keep these aligned with your content_packages
+          if (property_exists($r, "type_code")) $r->type_code = "ESTJ-A";
+          if (property_exists($r, "profile_version")) $r->profile_version = "mbti32-v2.5";
+          if (property_exists($r, "content_package_version")) $r->content_package_version = "v0.2.1-TEST";
+
+          if (property_exists($r, "scores_pct")) {
+            $r->scores_pct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
+          }
+          if (property_exists($r, "axis_states")) {
+            $r->axis_states = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
+          }
+
           $r->save();
 
           echo "ATTEMPT_ID=".$attemptId.PHP_EOL;
@@ -95,16 +117,12 @@ jobs:
 
           echo "$OUT"
 
-          ATTEMPT_ID="$(echo "$OUT" | tr -d '\r' | grep -Eo '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}' | head -n 1)"
-          [ -n "$ATTEMPT_ID" ] || (echo "ERROR: failed to extract attempt_id" && exit 1)
+          ATTEMPT_ID="$(echo "$OUT" | tr -d '\r' | awk -F= '/^ATTEMPT_ID=/{print $2; exit}')"
+          [ -n "$ATTEMPT_ID" ] || (echo "ERROR: missing ATTEMPT_ID output" && exit 1)
 
           echo "FAP_VALIDATE_ATTEMPT_ID=$ATTEMPT_ID" >> "$GITHUB_ENV"
           echo "Seeded attempt_id=$ATTEMPT_ID"
 
       - name: Runtime validate report
         working-directory: backend
-        env:
-          APP_ENV: testing
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
         run: php artisan fap:validate-report --attempt="$FAP_VALIDATE_ATTEMPT_ID"
