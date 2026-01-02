@@ -66,6 +66,9 @@ jobs:
           $a->anon_id = $anonId;            
           $a->region = "CN_MAINLAND";
           $a->locale = "zh-CN";
+          $a->scale_code = "MBTI";
+          $a->scale_version = "v0.2.1-TEST";
+          $a->question_count = 144;
 
           // （建议）把这些也补上，避免 pack/规则解析不到导致 cards=0
           if (property_exists($a, "scale_code")) $a->scale_code = "MBTI";
