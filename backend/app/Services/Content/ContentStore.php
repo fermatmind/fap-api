@@ -48,103 +48,126 @@ final class ContentStore
         $doc = $this->loadJsonByBasenamePreferAssetKey('cards', $basename);
         $this->lightSchemaCheck($doc, $basename);
 
-        // items 兼容：items / cards
-        $items = $doc['items'] ?? ($doc['cards'] ?? null);
-        if (!is_array($items)) $items = [];
+         // ✅ 统一标准化（与 fallback cards 复用同一逻辑）
+        return $this->normalizeCardsDocFromRawDoc($doc, $basename, $section);
+    }
 
-        // ✅ 标准化 items（缺省补齐 + 类型稳定 + 默认 tips 注入）
-        $normItems = [];
-        foreach ($items as $idx => $it) {
-            if (!is_array($it)) {
-                Log::warning('[STORE][CARDS] item_not_array', ['file' => $basename, 'section' => $section, 'idx' => $idx]);
-                continue;
-            }
+    // =========================
+    // ✅ New: Section Policies + Fallback Cards loaders
+    // =========================
 
-            $id = $it['id'] ?? null;
-            $id = is_string($id) ? trim($id) : '';
-            if ($id === '') {
-                Log::warning('[STORE][CARDS] item_missing_id_skip', ['file' => $basename, 'section' => $section, 'idx' => $idx]);
-                continue;
-            }
-            $it['id'] = $id;
+    /**
+ * ✅ section policies doc：
+ * 文件名固定：report_section_policies.json
+ *
+ * 为了和 ReportComposer/Assembler 对齐，这里统一返回：
+ * [
+ *   'schema' => ...,
+ *   'items'  => [ 'traits'=>[...], 'career'=>[...], ... ]   // ✅ 注意是 items，不是 sections
+ * ]
+ *
+ * 兼容两种文件结构：
+ * A) { "sections": { ... } }
+ * B) { "items": { ... } }
+ */
+public function loadSectionPolicies(): array
+{
+    $basename = 'report_section_policies.json';
 
-            // section
-            if (!isset($it['section']) || !is_string($it['section']) || trim($it['section']) === '') {
-                $it['section'] = $section;
-            } else {
-                $it['section'] = trim((string)$it['section']);
-            }
+    // 优先用 policies 这个 assetKey；找不到会自动走 scan-any-asset + legacy ctx（取决于 env 开关）
+    $doc = $this->loadJsonByBasenamePreferAssetKey('policies', $basename);
+    $this->lightSchemaCheck($doc, $basename);
 
-            // title/desc
-            $it['title'] = is_string($it['title'] ?? null) ? (string)$it['title'] : '';
-            $it['desc']  = is_string($it['desc'] ?? null)  ? (string)$it['desc']  : '';
+    // 兼容：sections / items
+    $sections = $doc['sections'] ?? ($doc['items'] ?? null);
+    if (!is_array($sections)) $sections = [];
 
-            // bullets: array[string]
-            if (!is_array($it['bullets'] ?? null)) $it['bullets'] = [];
-            $it['bullets'] = array_values(array_filter(
-                $it['bullets'],
-                fn($x) => is_string($x) && trim($x) !== ''
-            ));
+    $out = [];
+    foreach ($sections as $sec => $pol) {
+        if (!is_string($sec) || trim($sec) === '') continue;
+        if (!is_array($pol)) $pol = [];
 
-            // tips: array[string]（先保证 array，再交给 normalizer 补默认）
-            if (!is_array($it['tips'] ?? null)) $it['tips'] = [];
-            $it['tips'] = array_values(array_filter(
-                $it['tips'],
-                fn($x) => is_string($x) && trim($x) !== ''
-            ));
+        $min = isset($pol['min_cards']) && is_numeric($pol['min_cards']) ? (int)$pol['min_cards'] : 2;
+        $min = max(1, $min);
 
-            // tags: array[string]（缺省补 []）
-            if (!isset($it['tags']) || !is_array($it['tags'])) $it['tags'] = [];
-            $it['tags'] = array_values(array_filter(
-                $it['tags'],
-                fn($x) => is_string($x) && trim($x) !== ''
-            ));
-
-            // rules: array（缺省补 []）
-            if (!isset($it['rules']) || !is_array($it['rules'])) $it['rules'] = [];
-
-            // priority: int（缺省补 0）
-            if (!isset($it['priority']) || !is_numeric($it['priority'])) $it['priority'] = 0;
-            $it['priority'] = (int)$it['priority'];
-
-            // match：保证键存在（generator 会读取）
-            if (!array_key_exists('match', $it)) $it['match'] = null;
-
-            // ✅ 默认 tips 的唯一注入点：统一交给 normalizer
-            $it = ReportContentNormalizer::fillTipsIfMissing($it);
-
-            $normItems[] = $it;
-        }
-
-        // ✅ rules 缺省补齐（让 generator 只消费）
-        $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
-
-        $min = isset($rules['min_cards']) && is_numeric($rules['min_cards']) ? (int)$rules['min_cards'] : 2;
-        $min = max(2, $min);
-
-        $target = isset($rules['target_cards']) && is_numeric($rules['target_cards']) ? (int)$rules['target_cards'] : 3;
+        $target = isset($pol['target_cards']) && is_numeric($pol['target_cards']) ? (int)$pol['target_cards'] : $min;
         if ($target < $min) $target = $min;
 
-        $max = isset($rules['max_cards']) && is_numeric($rules['max_cards']) ? (int)$rules['max_cards'] : 6;
+        $max = isset($pol['max_cards']) && is_numeric($pol['max_cards']) ? (int)$pol['max_cards'] : max($target, $min);
         if ($max < $target) $max = $target;
 
-        $fallbackTags = $rules['fallback_tags'] ?? ['fallback', 'kind:core'];
-        if (!is_array($fallbackTags)) $fallbackTags = ['fallback', 'kind:core'];
-        $fallbackTags = array_values(array_filter($fallbackTags, fn($x) => is_string($x) && trim($x) !== ''));
-        if ($fallbackTags === []) $fallbackTags = ['fallback', 'kind:core'];
+        // ✅ 可选字段：allow_fallback（默认 true）
+        $allowFallback = $pol['allow_fallback'] ?? true;
+        $allowFallback = is_bool($allowFallback) ? $allowFallback : (bool)$allowFallback;
 
-        $rules = [
+        $fallbackFile = $pol['fallback_file'] ?? null;
+        $fallbackFile = is_string($fallbackFile) ? trim($fallbackFile) : '';
+        if ($fallbackFile === '') {
+            $fallbackFile = "report_cards_fallback_{$sec}.json";
+        }
+
+        $out[$sec] = [
             'min_cards'     => $min,
             'target_cards'  => $target,
             'max_cards'     => $max,
-            'fallback_tags' => $fallbackTags,
-        ];
-
-        return [
-            'items' => $normItems,
-            'rules' => $rules,
+            'allow_fallback'=> $allowFallback,
+            'fallback_file' => $fallbackFile,
         ];
     }
+
+    return [
+        'schema' => is_string($doc['schema'] ?? null) ? (string)$doc['schema'] : null,
+        'items'  => $out, // ✅ 关键：统一成 items
+    ];
+}
+
+/**
+ * ✅ fallback cards（按 section 加载）
+ * - 优先 policies.items[section].fallback_file
+ * - 否则退化 report_cards_fallback_{section}.json
+ * - 返回：标准化后的 items(list)
+ */
+public function loadFallbackCards(string $section): array
+{
+    $polDoc = $this->loadSectionPolicies();
+    $policies = is_array($polDoc['items'] ?? null) ? $polDoc['items'] : [];
+
+    $fallbackFile = $policies[$section]['fallback_file'] ?? "report_cards_fallback_{$section}.json";
+    $basename = basename((string)$fallbackFile);
+
+    // 优先用 fallback_cards 这个 assetKey；找不到会 scan-any-asset + legacy ctx（取决于 env 开关）
+    $doc = $this->loadJsonByBasenamePreferAssetKey('fallback_cards', $basename);
+    $this->lightSchemaCheck($doc, $basename);
+
+    $norm = $this->normalizeCardsDocFromRawDoc($doc, $basename, $section);
+    return is_array($norm['items'] ?? null) ? $norm['items'] : [];
+}
+
+public function loadSelectRules(): array
+{
+    // 规则文件名固定
+    $filename = 'report_select_rules.json';
+
+    // pack chain：primary -> fallback，找到第一个存在的就用
+    foreach ($this->chain as $pack) {
+        if (!($pack instanceof ContentPack)) continue;
+
+        $path = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $filename;
+        if (is_string($path) && $path !== '' && is_file($path)) {
+            $raw = @file_get_contents($path);
+            if ($raw === false || trim($raw) === '') return [];
+
+            $json = json_decode($raw, true);
+            if (!is_array($json)) return [];
+
+            // 支持两种结构：{"rules":[...]} 或 直接就是 [...]
+            $rules = $json['rules'] ?? $json;
+            return is_array($rules) ? $rules : [];
+        }
+    }
+
+    return [];
+}
 
     /** highlights templates doc（给 HighlightBuilder 用） */
     public function loadHighlights(): array
@@ -261,6 +284,110 @@ final class ContentStore
     // =========================
     // Internal: read/locate/normalize
     // =========================
+
+    /**
+     * ✅ 复用：把任意 cards doc（含 fallback）标准化成固定结构：
+     * ['items'=>normItems, 'rules'=>rules]
+     */
+    private function normalizeCardsDocFromRawDoc(array $doc, string $basename, string $section): array
+    {
+        // items 兼容：items / cards
+        $items = $doc['items'] ?? ($doc['cards'] ?? null);
+        if (!is_array($items)) $items = [];
+
+        // ✅ 标准化 items（缺省补齐 + 类型稳定 + 默认 tips 注入）
+        $normItems = [];
+        foreach ($items as $idx => $it) {
+            if (!is_array($it)) {
+                Log::warning('[STORE][CARDS] item_not_array', ['file' => $basename, 'section' => $section, 'idx' => $idx]);
+                continue;
+            }
+
+            $id = $it['id'] ?? null;
+            $id = is_string($id) ? trim($id) : '';
+            if ($id === '') {
+                Log::warning('[STORE][CARDS] item_missing_id_skip', ['file' => $basename, 'section' => $section, 'idx' => $idx]);
+                continue;
+            }
+            $it['id'] = $id;
+
+            // section
+            if (!isset($it['section']) || !is_string($it['section']) || trim($it['section']) === '') {
+                $it['section'] = $section;
+            } else {
+                $it['section'] = trim((string)$it['section']);
+            }
+
+            // title/desc
+            $it['title'] = is_string($it['title'] ?? null) ? (string)$it['title'] : '';
+            $it['desc']  = is_string($it['desc'] ?? null)  ? (string)$it['desc']  : '';
+
+            // bullets: array[string]
+            if (!is_array($it['bullets'] ?? null)) $it['bullets'] = [];
+            $it['bullets'] = array_values(array_filter(
+                $it['bullets'],
+                fn($x) => is_string($x) && trim($x) !== ''
+            ));
+
+            // tips: array[string]
+            if (!is_array($it['tips'] ?? null)) $it['tips'] = [];
+            $it['tips'] = array_values(array_filter(
+                $it['tips'],
+                fn($x) => is_string($x) && trim($x) !== ''
+            ));
+
+            // tags: array[string]
+            if (!isset($it['tags']) || !is_array($it['tags'])) $it['tags'] = [];
+            $it['tags'] = array_values(array_filter(
+                $it['tags'],
+                fn($x) => is_string($x) && trim($x) !== ''
+            ));
+
+            // rules: array
+            if (!isset($it['rules']) || !is_array($it['rules'])) $it['rules'] = [];
+
+            // priority: int
+            if (!isset($it['priority']) || !is_numeric($it['priority'])) $it['priority'] = 0;
+            $it['priority'] = (int)$it['priority'];
+
+            // match：保证键存在（generator 会读取）
+            if (!array_key_exists('match', $it)) $it['match'] = null;
+
+            // ✅ 默认 tips 注入点
+            $it = ReportContentNormalizer::fillTipsIfMissing($it);
+
+            $normItems[] = $it;
+        }
+
+        // ✅ rules 缺省补齐（fallback 文件一般也允许带 rules；没带就用默认）
+        $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
+
+        $min = isset($rules['min_cards']) && is_numeric($rules['min_cards']) ? (int)$rules['min_cards'] : 2;
+        $min = max(2, $min);
+
+        $target = isset($rules['target_cards']) && is_numeric($rules['target_cards']) ? (int)$rules['target_cards'] : 3;
+        if ($target < $min) $target = $min;
+
+        $max = isset($rules['max_cards']) && is_numeric($rules['max_cards']) ? (int)$rules['max_cards'] : 6;
+        if ($max < $target) $max = $target;
+
+        $fallbackTags = $rules['fallback_tags'] ?? ['fallback', 'kind:core'];
+        if (!is_array($fallbackTags)) $fallbackTags = ['fallback', 'kind:core'];
+        $fallbackTags = array_values(array_filter($fallbackTags, fn($x) => is_string($x) && trim($x) !== ''));
+        if ($fallbackTags === []) $fallbackTags = ['fallback', 'kind:core'];
+
+        $rules = [
+            'min_cards'     => $min,
+            'target_cards'  => $target,
+            'max_cards'     => $max,
+            'fallback_tags' => $fallbackTags,
+        ];
+
+        return [
+            'items' => $normItems,
+            'rules' => $rules,
+        ];
+    }
 
     private function loadJsonByBasenamePreferAssetKey(string $assetKey, string $basename): array
     {

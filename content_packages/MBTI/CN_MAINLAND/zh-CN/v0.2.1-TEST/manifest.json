@@ -28,6 +28,7 @@
     "questions": "fap.questions.v1",
     "type_profiles": "fap.type_profiles.v1",
     "cards": "fap.report.cards.v1",
+    "fallback_cards": "fap.report.cards.fallback.v1",
     "highlights": "fap.report.highlights.v1",
     "reads": "fap.report.reads.v2",
     "borderline_templates": "fap.report.borderline_templates.v1",
@@ -38,7 +39,8 @@
     "strategies": "fap.report.strategies.v1",
     "overrides_unified": "fap.report.overrides.v1",
     "overrides_highlights_legacy": "fap.report.highlights.overrides.v1",
-    "rules": "fap.report.rules.v1"
+    "rules": "fap.report.rules.v1",
+    "section_policies": "fap.report.section_policies.v1"
   },
   "assets": {
     "questions": [
@@ -52,6 +54,12 @@
       "report_cards_career.json",
       "report_cards_growth.json",
       "report_cards_relationships.json"
+    ],
+    "fallback_cards": [
+      "report_cards_fallback_traits.json",
+      "report_cards_fallback_career.json",
+      "report_cards_fallback_growth.json",
+      "report_cards_fallback_relationships.json"
     ],
     "highlights": [
       "report_highlights.json",
@@ -80,6 +88,9 @@
     },
     "rules": [
       "report_rules.json"
+    ],
+    "section_policies": [
+      "report_section_policies.json"
     ]
   },
   "overrides": {

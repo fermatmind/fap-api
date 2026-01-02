@@ -155,7 +155,7 @@ public function startAttempt(Request $request)
     $payload = $request->validate([
         'anon_id'        => ['required', 'string', 'max:64'],
         'scale_code'     => ['required', 'string', 'in:MBTI'],
-        'scale_version'  => ['required', 'string', 'in:v0.2'],
+        'scale_version' => ['required', 'string', 'in:v0.2,v0.2.1,v0.2.1-TEST'],
 
         // ✅ 你的 attempts 表里是 NOT NULL：必须补齐
         'question_count'  => ['required', 'integer', 'in:24,93,144'],
@@ -211,7 +211,7 @@ public function storeAttempt(Request $request)
     $payload = $request->validate([
         'anon_id'       => ['required', 'string', 'max:64'],
         'scale_code'    => ['required', 'string', 'in:MBTI'],
-        'scale_version' => ['required', 'string', 'in:v0.2'],
+        'scale_version' => ['required', 'string', 'in:v0.2,v0.2.1,v0.2.1-TEST'],
 
         'answers' => ['required', 'array', 'min:1'],
         'answers.*.question_id' => ['required', 'string'],
@@ -865,6 +865,15 @@ $this->logEvent('share_generate', $request, [
  */
 public function getReport(Request $request, string $attemptId)
 {
+    if (app()->environment('local')) {
+    Log::debug('[RE] enter getReport', [
+        'APP_ENV' => app()->environment(),
+        'RE_TAGS' => env('RE_TAGS', null),
+        'refresh' => request()->query('refresh'),
+        'id'      => $id ?? null,
+    ]);
+}
+    
     $result = Result::where('attempt_id', $attemptId)->first();
 
     if (!$result) {
@@ -1991,6 +2000,12 @@ private function buildStrategyCard(string $contentPackageVersion, string $typeCo
 
 private function buildRecommendedReads(string $contentPackageVersion, string $typeCode, array $scoresPct, int $max = 8): array
 {
+    Log::debug('[reads] enter buildRecommendedReads', [
+    'pkg' => $contentPackageVersion,
+    'type' => $typeCode,
+    'env' => app()->environment(),
+]);
+
     $raw   = $this->loadReportAssetJson($contentPackageVersion, 'report_recommended_reads.json');
     $items = is_array($raw['items'] ?? null) ? $raw['items'] : [];
     $rules = is_array($raw['rules'] ?? null) ? $raw['rules'] : [];

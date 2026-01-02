@@ -7,7 +7,7 @@ use App\Services\Rules\RuleEngine;
 
 class HighlightBuilder
 {
-    public function buildFromTemplatesDoc(array $report, $doc, int $min = 3, int $max = 10): array
+    public function buildFromTemplatesDoc(array $report, $doc, int $min = 3, int $max = 10, array $selectRules = []): array
     {
         // 0) normalize: support wrapped + stdClass -> array
         $doc = $this->normalizeDoc($doc);
@@ -121,6 +121,17 @@ unset($it);
 /** @var RuleEngine $re */
 $re = app(RuleEngine::class);
 
+// explain 开关/收集器：ReportComposer 可以塞到 $report 里下传
+$debugRE = app()->environment('local', 'development') && (bool) env('FAP_RE_DEBUG', false);
+$captureExplain = (bool)($report['capture_explain'] ?? $report['_capture_explain'] ?? false);
+
+$explainCollector = null;
+if (isset($report['explain_collector']) && is_callable($report['explain_collector'])) {
+    $explainCollector = $report['explain_collector'];
+} elseif (isset($report['_explain_collector']) && is_callable($report['_explain_collector'])) {
+    $explainCollector = $report['_explain_collector'];
+}
+
 // userSet：用 report.tags 做集合（cards/reads 也是同口径）
 $userSet = [];
 $rtags = $report['tags'] ?? [];
@@ -134,34 +145,55 @@ if (is_array($rtags)) {
 $typeCode = (string)($report['profile']['type_code'] ?? '');
 if ($typeCode !== '') $userSet["type:{$typeCode}"] = true;
 
-// ✅ priority 兜底：模板没给 priority 时，用 delta 当 priority
-foreach ($pool as &$it) {
-    if (!is_array($it)) continue;
-    if (!isset($it['priority']) || (int)$it['priority'] === 0) {
-        $it['priority'] = (int)($it['_delta'] ?? 0);
-    }
-}
-unset($it);
-
 // take：保持你原意 topN/maxItems 取较小
 $take = max(0, min((int)$topN, (int)$maxItems));
 
 // seed：稳定（同一个 type_code 每次一致）
 $seed = (int)(sprintf('%u', crc32($typeCode)));
 
-[$selectedPool, $_evals] = $re->select(
+// ==== 用 RuleEngine::selectTargeted 统一三通（highlights）====
+
+// 1) 尝试从 templates doc 里拿 “规则列表”
+//    - selectTargeted 需要的是：list<ruleObject>，每条 rule 至少有 target/priority/match/require*/forbid/action
+//    - 你的 doc['rules'] 目前更多是“参数配置”(min_delta/top_n等)，不一定是规则列表
+//    - 所以这里做一个兼容：能拿到列表就用；拿不到就传空数组（先跑通统一入口）
+$ruleList = [];
+if (isset($doc['rules_engine']) && is_array($doc['rules_engine'])) {
+    $ruleList = $doc['rules_engine'];
+} elseif (isset($doc['engine_rules']) && is_array($doc['engine_rules'])) {
+    $ruleList = $doc['engine_rules'];
+} elseif (isset($doc['rules']['engine']) && is_array($doc['rules']['engine'])) {
+    $ruleList = $doc['rules']['engine'];
+} elseif (isset($doc['rules']) && is_array($doc['rules']) && array_is_list($doc['rules'])) {
+    // 极少数情况下 rules 本身就是 list
+    $ruleList = $doc['rules'];
+}
+
+// 2) 统一入口：selectTargeted
+[$selectedPool, $_evals] = $re->selectTargeted(
     $pool,
     $userSet,
     [
-        'ctx' => 'highlights:strength',
-        'seed' => $seed,
-        'max_items' => $take,
-        'rejected_samples' => 5,
-        'debug' => true, // ✅ 关键：强制出 [RE] explain（只要 APP_ENV=local）
+        'target' => 'highlights',
+        'rules'  => $selectRules,
+
+        'ctx'    => 'highlights:strength',
+        'seed'   => $seed,
+
+        'max_items'         => $take,
+        'rejected_samples'  => 5,
+
+        // explain
+        'debug'             => $debugRE,
+        'capture_explain'   => $captureExplain,
+        'explain_collector' => $explainCollector,
+
+        // highlights 不要 tags_debug（cards 才用）
+        'tags_debug_n'      => 0,
     ]
 );
 
-// select() 返回 item（可能带 _re），后续 stripPrivate 会删掉
+// selectTargeted 返回的仍然是 item 列表（你后面 stripPrivate 继续用）
 $strength = $selectedPool;
 
         // 3) blindspot

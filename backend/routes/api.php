@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MbtiController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\API\V0_2\ShareController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
 });
 
 Route::prefix("v0.2")->group(function () {
+
     // 1) 健康检查
     Route::get("/health", [MbtiController::class, "health"]);
 
@@ -32,14 +34,18 @@ Route::prefix("v0.2")->group(function () {
     // 4) 接收一次测评作答（创建 attempt + result）
     Route::post("/attempts", [MbtiController::class, "storeAttempt"]);
 
-    // 5) 查询某次测评的结果
+    // 5) 开始一次 attempt（你已有）
+    Route::post("/attempts/start", [MbtiController::class, "startAttempt"]);
+
+    // 6) 查询某次测评的结果 / 报告 / 分享信息
     Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
+    Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
+    Route::get("/attempts/{id}/share",  [MbtiController::class, "getShare"]);
 
-    // 6) 获取分享模板数据
-    Route::get("/attempts/{id}/share", [MbtiController::class, "getShare"]);
+    // ✅ 7) Share Click：你要的入口（命中 ShareController@click）
+    // 访问路径：POST /api/v0.2/shares/{shareId}/click
+    Route::post("/shares/{shareId}/click", [ShareController::class, "click"]);
 
-    Route::get('attempts/{id}/report', [\App\Http\Controllers\MbtiController::class, 'getReport']);
-    // 7) 事件上报（恢复 /api/v0.2/events）
+    // 8) 事件上报
     Route::post("/events", [EventController::class, "store"]);
-
-Route::post('attempts/start', [\App\Http\Controllers\MbtiController::class, 'startAttempt']);});
+});

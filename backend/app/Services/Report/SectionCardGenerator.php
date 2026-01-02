@@ -26,12 +26,12 @@ final class SectionCardGenerator
         array $axisInfo = [],
         ?string $legacyContentPackageDir = null
     ): array {
-        // ✅ 统一加载器：所有 items/rules 标准化都在 store 内完成
         $store = new ContentStore($chain);
 
-        $doc = $store->loadCardsDoc($section);
+        $doc   = $store->loadCardsDoc($section);
         $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
         $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
+        $selectRules = $store->loadSelectRules(); // ✅ 统一 rules（含 target）
 
         Log::info('[CARDS] loaded_from_store', [
             'section'    => $section,
@@ -42,29 +42,31 @@ final class SectionCardGenerator
         ]);
 
         return $this->generateFromItems(
-            $section,
-            $items,
-            $userTags,
-            $axisInfo,
-            $legacyContentPackageDir,
-            $rules
-        );
+    $section,
+    $items,
+    $userTags,
+    $axisInfo,
+    $legacyContentPackageDir,
+    $rules,
+    $selectRules
+);
     }
 
     /**
      * ✅ 从 “已标准化的 items(+rules)” 生成 cards
-     * 注意：这里不再做 rules/tags/priority/tips 的缺省补齐——这些都应由 ContentStore 负责。
+     * 关键变化：选卡逻辑全部迁移到 RuleEngine::selectConstrained()
      */
     private function generateFromItems(
-        string $section,
-        array $items,
-        array $userTags,
-        array $axisInfo = [],
-        ?string $legacyContentPackageDir = null,
-        array $rules = []
-    ): array {
+    string $section,
+    array $items,
+    array $userTags,
+    array $axisInfo = [],
+    ?string $legacyContentPackageDir = null,
+    array $rules = [],
+    array $selectRules = []
+): array {
         // ==========
-        // rules：强依赖 store 的标准输出（不在 generator 兜底）
+        // rules：强依赖 store 的标准输出
         // ==========
         $minCardsVal    = $rules['min_cards'] ?? null;
         $targetCardsVal = $rules['target_cards'] ?? null;
@@ -79,16 +81,12 @@ final class SectionCardGenerator
         $targetCards = (int)$targetCardsVal;
         $maxCards    = (int)$maxCardsVal;
 
-        // 体验目标：axis 最多 2，且至少 1 张 non-axis（当 target>=3 时）
-        $axisMax     = max(0, min(2, $targetCards - 1));
-        $nonAxisMin  = ($targetCards >= 3) ? 1 : 0;
-
         // assets 不存在：直接返回兜底
         if (empty($items)) {
             return $this->fallbackCards($section, $minCards);
         }
 
-        // normalize userTags set（这里仅做 userTags 的集合化，不涉及 content item 标准化）
+        // normalize userTags set（这里仅做 userTags 的集合化）
         $userSet = [];
         foreach ($userTags as $t) {
             if (!is_string($t)) continue;
@@ -96,234 +94,130 @@ final class SectionCardGenerator
             if ($t !== '') $userSet[$t] = true;
         }
 
-        // seed
+        // seed（用于 shuffle 稳定）
         $seed = $this->stableSeed($userSet, $axisInfo);
 
         // RuleEngine
-        $re = app(RuleEngine::class);
-        $ctx = "cards:{$section}";
-        $debugRE = app()->environment('local', 'development') && (bool) env('FAP_RE_DEBUG', false);
+/** @var RuleEngine $re */
+$re = app(RuleEngine::class);
+$ctx = "cards:{$section}";
 
-        $evalById = [];
-        $rejectedSamples = [];
+// explain 开关：
+// - debugRE：控制日志（local/dev 才建议开）
+// - captureExplain：控制“把 _explain 收集进 reportPayload”（可在 production 开，但建议按需开）
+$debugRE = app()->environment('local', 'development') && (
+    (bool) env('FAP_RE_DEBUG', false) ||
+    (bool) env('RE_EXPLAIN', false)   ||       // 开 explain 日志就等同 debug
+    (bool) env('RE_CTX_TAGS', false)          // 你要看 ctx tags 时也应该算 debug
+);
+$captureExplain = (bool)($axisInfo['capture_explain'] ?? $axisInfo['_capture_explain'] ?? false);
 
-        // evaluate + score (items 已由 store 标准化)
-        $cands = [];
-        foreach ($items as $it) {
-            if (!is_array($it)) continue;
+// explain 收集器：ReportComposer 可以塞到 $scores(axisInfo) 里下传
+$explainCollector = null;
+if (isset($axisInfo['explain_collector']) && is_callable($axisInfo['explain_collector'])) {
+    $explainCollector = $axisInfo['explain_collector'];
+} elseif (isset($axisInfo['_explain_collector']) && is_callable($axisInfo['_explain_collector'])) {
+    $explainCollector = $axisInfo['_explain_collector'];
+}
 
-            $id = (string)($it['id'] ?? '');
-            if ($id === '') continue;
+        // ========== 2.1 先按 rules 过滤（不截断，拿全量 kept）==========
 
-            // store 已保证 tags/rules/priority 存在且类型正确；这里不再补默认，只做最小安全读取
-            $tags = is_array($it['tags'] ?? null) ? $it['tags'] : [];
-            $prio = (int)($it['priority'] ?? 0);
-            $itRules = is_array($it['rules'] ?? null) ? $it['rules'] : [];
+// 这里的 $rules 是 cards 的“配额规则对象”（min_cards/target_cards/...），不是 rule list
+// rule list 需要你从 doc 里拿一个数组字段（例如 doc['rules_items'] / doc['select_rules'] / doc['filters'] 等）
+// 你现在的 doc 结构里没有展示这个字段，所以这里先安全兜底为空数组（等你把规则列表加进 doc 再接上）
 
-            $base = [
-                'id'       => $id,
-                'tags'     => $tags,
-                'priority' => $prio,
-                'rules'    => $itRules,
-            ];
+[$kept, $evals1] = $re->selectTargeted($items, $userSet, [
+    'target'    => 'cards',
+    'rules'     => $selectRules,
 
-            $ev = $re->evaluate($base, $userSet, [
-                'seed' => $seed,
-                'ctx'  => $ctx,
-                'debug' => $debugRE,
-                'global_rules' => [],
+    'ctx'       => $ctx,
+    'section'   => $section,
+    'seed'      => $seed,
+
+    // 关键：不截断（先拿全量 kept）
+    'max_items' => is_array($items) ? count($items) : 0,
+
+    // explain/采样
+    'rejected_samples' => 6,
+    'debug'            => $debugRE,
+    'capture_explain'  => $captureExplain,
+    'explain_collector'=> $explainCollector,
+
+    // 预留
+    'global_rules' => [],
+]);
+
+// ========== 2.2 再做你已有的 axis/non-axis/fallback 配额编排（这里才截断）==========
+
+[$selectedItems, $evals2] = $re->selectConstrained($kept, $userSet, [
+    'ctx'      => $ctx,
+    'section'  => $section,
+    'seed'     => $seed,
+
+    // explain/采样
+    'debug'            => $debugRE,
+    'capture_explain'  => $captureExplain,
+    'explain_collector'=> $explainCollector,
+    'rejected_samples' => 6,
+
+    // 配额规则
+    'min_cards'     => $minCards,
+    'target_cards'  => $targetCards,
+    'max_cards'     => $maxCards,
+    'fallback_tags' => $fallbackTags,
+
+    // axis match 需要
+    'axis_info'    => $axisInfo,
+
+    // 预留
+    'global_rules' => [],
+]);
+
+$evals = array_merge($evals1, $evals2);
+
+        // 如果引擎一个都没选出来，直接兜底
+        if (empty($selectedItems)) {
+            $out = $this->fallbackCards($section, $minCards);
+
+            Log::info('[CARDS] selected', [
+                'section'    => $section,
+                'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
+                'legacy_dir' => $legacyContentPackageDir,
             ]);
 
-            $evalById[$id] = $ev;
+            return $out;
+        }
 
-            if (!$ev['ok']) {
-                if ($debugRE && count($rejectedSamples) < 6) {
-                    $rejectedSamples[] = [
-                        'id' => $id,
-                        'reason' => $ev['reason'],
-                        'detail' => $ev['detail'] ?? null,
-                        'hit' => $ev['hit'],
-                        'priority' => $ev['priority'],
-                        'min_match' => $ev['min_match'],
-                        'score' => $ev['score'],
-                    ];
-                }
-                continue;
-            }
+        // ✅ 映射成最终输出 cards（保持你原先输出结构）
+        $out = array_map(function ($it) use ($section) {
+            if (!is_array($it)) return null;
 
-            // axis match 门槛
-            if (!$this->passesAxisMatch($it, $userSet, $axisInfo)) {
-                continue;
-            }
-
-            $isAxis = $this->isAxisCardId($id);
-
-            // store 已保证 bullets/tips 为 array 且 tips 已由 normalizer 补齐
-            $cands[] = [
-                'id'       => $id,
+            return [
+                'id'       => (string)($it['id'] ?? ''),
                 'section'  => (string)($it['section'] ?? $section),
                 'title'    => (string)($it['title'] ?? ''),
                 'desc'     => (string)($it['desc'] ?? ''),
                 'bullets'  => is_array($it['bullets'] ?? null) ? array_values($it['bullets']) : [],
                 'tips'     => is_array($it['tips'] ?? null) ? array_values($it['tips']) : [],
-                'tags'     => $tags,
-                'priority' => $prio,
+                'tags'     => is_array($it['tags'] ?? null) ? $it['tags'] : [],
+                'priority' => (int)($it['priority'] ?? 0),
                 'match'    => $it['match'] ?? null,
-
-                '_hit'     => (int)($ev['hit'] ?? 0),
-                '_score'   => (int)($ev['score'] ?? 0),
-                '_min'     => (int)($ev['min_match'] ?? 0),
-                '_is_axis' => $isAxis,
-                '_shuffle' => (int)($ev['shuffle'] ?? 0),
             ];
-        }
+        }, $selectedItems);
 
-        // sort
-        usort($cands, function ($a, $b) {
-            $sa = (int)($a['_score'] ?? 0);
-            $sb = (int)($b['_score'] ?? 0);
-            if ($sa !== $sb) return $sb <=> $sa;
+        $out = array_values(array_filter($out, fn($x) => is_array($x) && (string)($x['id'] ?? '') !== ''));
 
-            $sha = (int)($a['_shuffle'] ?? 0);
-            $shb = (int)($b['_shuffle'] ?? 0);
-            if ($sha !== $shb) return $sha <=> $shb;
-
-            return strcmp((string)($a['id'] ?? ''), (string)($b['id'] ?? ''));
-        });
-
-        $out  = [];
-        $seen = [];
-
-        $primary = array_slice($cands, 0, $targetCards);
-
-        // 先保证 non-axis >= 1（当 target>=3）
-        if ($nonAxisMin > 0) {
-            foreach ($primary as $c) {
-                if (count($out) >= $targetCards) break;
-                if ((int)($c['_hit'] ?? 0) <= 0) continue;
-                if ((bool)($c['_is_axis'] ?? false) === true) continue;
-
-                $id = (string)($c['id'] ?? '');
-                if ($id === '' || isset($seen[$id])) continue;
-                $seen[$id] = true;
-
-                unset($c['_hit'], $c['_is_axis'], $c['_shuffle']);
-                $out[] = $c;
-
-                if ($this->countNonAxis($out) >= $nonAxisMin) break;
-            }
-        }
-
-        // 再填 hit>0
-        foreach ($primary as $c) {
-            if (count($out) >= $targetCards) break;
-            if ((int)($c['_hit'] ?? 0) <= 0) continue;
-
-            $id = (string)($c['id'] ?? '');
-            if ($id === '' || isset($seen[$id])) continue;
-
-            if ((bool)($c['_is_axis'] ?? false) === true && $this->countAxis($out) >= $axisMax) continue;
-
-            $seen[$id] = true;
-            unset($c['_hit'], $c['_is_axis'], $c['_shuffle']);
-            $out[] = $c;
-        }
-
-        // 不足：补齐 non-axis
-        if ($nonAxisMin > 0 && $this->countNonAxis($out) < $nonAxisMin) {
-            foreach ($cands as $c) {
-                if (count($out) >= $targetCards) break;
-
-                $id = (string)($c['id'] ?? '');
-                if ($id === '' || isset($seen[$id])) continue;
-                if ((bool)($c['_is_axis'] ?? false) === true) continue;
-
-                $seen[$id] = true;
-                unset($c['_hit'], $c['_is_axis'], $c['_shuffle']);
-                $out[] = $c;
-
-                if ($this->countNonAxis($out) >= $nonAxisMin) break;
-            }
-        }
-
-        // 不足：补齐 axis
-        if ($this->countAxis($out) < $axisMax) {
-            foreach ($cands as $c) {
-                if (count($out) >= $targetCards) break;
-
-                $id = (string)($c['id'] ?? '');
-                if ($id === '' || isset($seen[$id])) continue;
-                if ((bool)($c['_is_axis'] ?? false) !== true) continue;
-
-                $seen[$id] = true;
-                unset($c['_hit'], $c['_is_axis'], $c['_shuffle']);
-                $out[] = $c;
-
-                if ($this->countAxis($out) >= $axisMax) break;
-            }
-        }
-
-        // fallback tags 补齐到 minCards
-        if (count($out) < $minCards) {
-            foreach ($cands as $c) {
-                if (count($out) >= $targetCards) break;
-
-                $id = (string)($c['id'] ?? '');
-                if ($id === '' || isset($seen[$id])) continue;
-
-                if (!$this->hasAnyTag($c['tags'] ?? [], $fallbackTags)) continue;
-                if ((bool)($c['_is_axis'] ?? false) === true && $this->countAxis($out) >= $axisMax) continue;
-
-                $seen[$id] = true;
-                unset($c['_hit'], $c['_is_axis'], $c['_shuffle']);
-                $out[] = $c;
-            }
-        }
-
-        // 仍不足：随便补到 minCards
-        if (count($out) < $minCards) {
-            foreach ($cands as $c) {
-                if (count($out) >= $minCards) break;
-
-                $id = (string)($c['id'] ?? '');
-                if ($id === '' || isset($seen[$id])) continue;
-
-                if ((bool)($c['_is_axis'] ?? false) === true && $this->countAxis($out) >= $axisMax) continue;
-
-                $seen[$id] = true;
-                unset($c['_hit'], $c['_is_axis'], $c['_shuffle']);
-                $out[] = $c;
-            }
-        }
-
+        // 仍不足：补齐到 minCards（保持你原来的 fallbackCards 行为）
         if (count($out) < $minCards) {
             $out = array_merge($out, $this->fallbackCards($section, $minCards - count($out)));
         }
 
+        // 最终硬切 max_cards
         $out = array_slice(array_values($out), 0, $maxCards);
 
-        // RE explain
-        $selectedExplains = [];
-        if ($debugRE) {
-            foreach ($out as $c) {
-                $id = (string)($c['id'] ?? '');
-                $ev = $evalById[$id] ?? null;
-                if (is_array($ev)) {
-                    $selectedExplains[] = [
-                        'id' => $id,
-                        'hit' => $ev['hit'],
-                        'priority' => $ev['priority'],
-                        'min_match' => $ev['min_match'],
-                        'score' => $ev['score'],
-                    ];
-                }
-            }
-        }
-        $re->explain($ctx, $selectedExplains, $rejectedSamples, ['debug' => $debugRE]);
-
         Log::info('[CARDS] selected', [
-            'section' => $section,
-            'ids'     => array_map(fn($x) => $x['id'] ?? null, $out),
+            'section'    => $section,
+            'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
             'legacy_dir' => $legacyContentPackageDir,
         ]);
 
@@ -331,7 +225,7 @@ final class SectionCardGenerator
     }
 
     /**
-     * ✅ 从 store 直接生成（你已有；保留）
+     * ✅ 从 store 直接生成（保留）
      */
     public function generateFromStore(
         string $section,
@@ -344,15 +238,17 @@ final class SectionCardGenerator
 
         $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
         $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
+        $selectRules = $store->loadSelectRules();
 
         return $this->generateFromItems(
-            $section,
-            $items,
-            $userTags,
-            $axisInfo,
-            $legacyContentPackageDir,
-            $rules
-        );
+    $section,
+    $items,
+    $userTags,
+    $axisInfo,
+    $legacyContentPackageDir,
+    $rules,
+    $selectRules
+);
     }
 
     /**
@@ -364,70 +260,13 @@ final class SectionCardGenerator
             throw new \RuntimeException('LEGACY_SECTION_CARD_GENERATOR_USED: generate(section, contentPackageVersion, ...)');
         }
 
-        // 兼容：不再读取旧路径，直接兜底卡，避免你以为“还在用旧体系”
+        // 兼容：不再读取旧路径，直接兜底卡
         return $this->fallbackCards($section, 2);
     }
 
-    private function passesAxisMatch(array $card, array $userSet, array $axisInfo): bool
-    {
-        $match = is_array($card['match'] ?? null) ? $card['match'] : null;
-        if (!$match) return true;
-
-        $ax = is_array($match['axis'] ?? null) ? $match['axis'] : null;
-        if (!$ax) return true;
-
-        $dim = (string)($ax['dim'] ?? '');
-        $side = (string)($ax['side'] ?? '');
-        $minDelta = (int)($ax['min_delta'] ?? 0);
-
-        if ($dim === '' || $side === '') return false;
-
-        if (!isset($userSet["axis:{$dim}:{$side}"])) return false;
-
-        $delta = 0;
-        if (isset($axisInfo[$dim]) && is_array($axisInfo[$dim])) {
-            $delta = (int)($axisInfo[$dim]['delta'] ?? 0);
-        }
-        if ($delta < $minDelta) return false;
-
-        return true;
-    }
-
-    private function isAxisCardId(string $id): bool
-    {
-        return str_contains($id, '_axis_');
-    }
-
-    private function countAxis(array $cards): int
-    {
-        $n = 0;
-        foreach ($cards as $c) {
-            if (!is_array($c)) continue;
-            $id = (string)($c['id'] ?? '');
-            if ($id !== '' && $this->isAxisCardId($id)) $n++;
-        }
-        return $n;
-    }
-
-    private function countNonAxis(array $cards): int
-    {
-        $n = 0;
-        foreach ($cards as $c) {
-            if (!is_array($c)) continue;
-            $id = (string)($c['id'] ?? '');
-            if ($id !== '' && !$this->isAxisCardId($id)) $n++;
-        }
-        return $n;
-    }
-
-    private function hasAnyTag(array $tags, array $needles): bool
-    {
-        if (!is_array($tags) || empty($tags)) return false;
-        foreach ($needles as $t) {
-            if (is_string($t) && $t !== '' && in_array($t, $tags, true)) return true;
-        }
-        return false;
-    }
+    // =========================
+    // helpers（seed + fallback）
+    // =========================
 
     private function stableSeed(array $userSet, array $axisInfo): int
     {

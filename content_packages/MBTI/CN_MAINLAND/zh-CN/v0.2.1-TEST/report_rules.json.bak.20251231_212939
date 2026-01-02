@@ -1,0 +1,52 @@
+{
+  "schema": "fap.report.rules.v1",
+  "engine": "rule_engine_v1",
+  "rules": [
+    {
+  "id": "cards_drop_forbid_type_estj",
+  "target": "cards",
+  "priority": 100,
+  "mode": "filter",
+  "match": { "section": ["traits"] },
+
+  "forbid": ["type:ESTJ-A"],
+  "selector": { "ids": ["traits_fallback_1"] },
+
+  "effect": { "action": "drop" }
+},
+    {
+  "id": "reads_keep_only_nt_or_nf",
+  "target": "reads",
+  "priority": 50,
+  "mode": "filter",
+  "match": {
+    "item": ["role:NT", "role:NF"]
+  },
+  "min_match": 1,
+  "effect": { "action": "keep" }
+},
+    {
+      "id": "highlights_drop_if_borderline_jp",
+      "target": "highlights",
+      "priority": 30,
+      "mode": "filter",
+      "forbid": ["borderline:JP"],
+      "effect": { "action": "drop" }
+    },
+    {
+      "id": "reads_drop_one_item_by_name",
+      "target": "reads",
+      "priority": 200,
+      "mode": "filter",
+      "match": { "item": ["type:ENTJ-A"] },
+      "effect": { "action": "drop" }
+    },
+    {
+  "id": "reads_drop_all_default",
+  "target": "reads",
+  "priority": -100,
+  "mode": "filter",
+  "effect": { "action": "drop" }
+}
+  ]
+}

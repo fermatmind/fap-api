@@ -7,6 +7,16 @@ on:
 jobs:
   selfcheck:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      APP_ENV: testing
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,6 +30,134 @@ jobs:
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Prepare Laravel env (testing)
+        working-directory: backend
+        run: |
+          cp -n .env.example .env || true
+          php artisan key:generate --force
+          php artisan config:clear || true
+
+      - name: Prepare sqlite
+        working-directory: backend
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+
+      - name: Migrate
+        working-directory: backend
+        run: php artisan migrate --force
+
       - name: Run selfcheck (default manifest)
         working-directory: backend
         run: php artisan fap:self-check --strict-assets
+
+      - name: Seed demo attempt+result (for runtime validate)
+        working-directory: backend
+        run: |
+          set -euo pipefail
+
+          SCRIPT="$(cat <<'PHP'
+          use Illuminate\Support\Str;
+          use Illuminate\Support\Facades\Schema;
+          use App\Models\Attempt;
+          use App\Models\Result;
+
+          $attemptId = (string) Str::uuid();
+          $resultId  = (string) Str::uuid();
+          $anonId    = 'ci_' . Str::uuid();
+          $now       = now();
+
+          $scoresPct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
+          $axisStates = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
+
+          $setIfCol = function($model, string $table, string $col, $val) {
+            if (Schema::hasColumn($table, $col)) {
+              $model->setAttribute($col, $val);
+            }
+          };
+
+          $setJsonIfCol = function($model, string $table, string $col, $val) use ($setIfCol) {
+            $setIfCol($model, $table, $col, json_encode($val, JSON_UNESCAPED_UNICODE));
+          };
+
+          // ============== Attempt ==============
+          $a = new Attempt();
+
+          $setIfCol($a, 'attempts', 'id', $attemptId);
+          $setIfCol($a, 'attempts', 'anon_id', $anonId);
+          $setIfCol($a, 'attempts', 'region', 'CN_MAINLAND');
+          $setIfCol($a, 'attempts', 'locale', 'zh-CN');
+
+          $setIfCol($a, 'attempts', 'scale_code', 'MBTI');
+          $setIfCol($a, 'attempts', 'scale_version', 'v0.2.1-TEST');
+          $setIfCol($a, 'attempts', 'question_count', 144);
+
+          // common NOT NULLs (safe even if absent)
+          $setIfCol($a, 'attempts', 'answers_summary_json', '{}');
+          $setIfCol($a, 'attempts', 'answers_json', '[]');
+
+          $setIfCol($a, 'attempts', 'client_platform', 'github-actions');
+          $setIfCol($a, 'attempts', 'client_version', '0');
+          $setIfCol($a, 'attempts', 'client_os', 'linux');
+          $setIfCol($a, 'attempts', 'client_os_version', 'ubuntu');
+
+          $setIfCol($a, 'attempts', 'created_at', $now);
+          $setIfCol($a, 'attempts', 'updated_at', $now);
+
+          $a->save();
+
+          // ============== Result ==============
+          $r = new Result();
+
+          $setIfCol($r, 'results', 'id', $resultId);
+          $setIfCol($r, 'results', 'attempt_id', $attemptId);
+          $setIfCol($r, 'results', 'anon_id', $anonId);
+
+          $setIfCol($r, 'results', 'scale_code', 'MBTI');
+          $setIfCol($r, 'results', 'scale_version', 'v0.2.1-TEST');
+
+          $setIfCol($r, 'results', 'type_code', 'ESTJ-A');
+          $setIfCol($r, 'results', 'short_type', 'ESTJ');
+          $setIfCol($r, 'results', 'variant_code', 'A');
+
+          $setIfCol($r, 'results', 'profile_version', 'mbti32-v2.5');
+          $setIfCol($r, 'results', 'content_package_version', 'v0.2.1-TEST');
+
+          // NOT NULLs observed in CI logs
+          $setJsonIfCol($r, 'results', 'scores_json', $scoresPct);
+
+          // optional / alternate schema fields (only if columns exist)
+          $setJsonIfCol($r, 'results', 'scores_pct', $scoresPct);
+          $setJsonIfCol($r, 'results', 'scores', $scoresPct);
+
+          $setJsonIfCol($r, 'results', 'axis_states', $axisStates);
+          $setJsonIfCol($r, 'results', 'axis_states_json', $axisStates);
+
+          // the current CI error: results.computed_at is NOT NULL
+          $setIfCol($r, 'results', 'computed_at', $now);
+          // extra safety for similarly-named NOT NULL timestamps
+          $setIfCol($r, 'results', 'completed_at', $now);
+          $setIfCol($r, 'results', 'generated_at', $now);
+          $setIfCol($r, 'results', 'finished_at', $now);
+
+          $setIfCol($r, 'results', 'created_at', $now);
+          $setIfCol($r, 'results', 'updated_at', $now);
+
+          $r->save();
+
+          echo "ATTEMPT_ID=".$attemptId.PHP_EOL;
+          PHP
+          )"
+
+          OUT="$(php artisan tinker --execute="$SCRIPT" 2>&1)"
+          echo "$OUT"
+
+          ATTEMPT_ID="$(echo "$OUT" | tr -d '\r' | awk -F= '/^ATTEMPT_ID=/{print $2; exit}')"
+          [ -n "$ATTEMPT_ID" ] || (echo "ERROR: missing ATTEMPT_ID output" && exit 1)
+
+          echo "FAP_VALIDATE_ATTEMPT_ID=$ATTEMPT_ID" >> "$GITHUB_ENV"
+          echo "Seeded attempt_id=$ATTEMPT_ID"
+
+      - name: Runtime validate report
+        working-directory: backend
+        run: php artisan fap:validate-report --attempt="$FAP_VALIDATE_ATTEMPT_ID"
