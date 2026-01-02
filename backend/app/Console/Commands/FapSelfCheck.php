@@ -125,17 +125,29 @@ $runIfDeclared(
     )
 );
 
-                // 2.5) report_cards_*.json (cards)
-        $cardFiles = $manifest['assets']['cards'] ?? null;
-        if (is_array($cardFiles) && !empty($cardFiles)) {
-            $expectedCardsSchema = $manifest['schemas']['cards'] ?? null;
+// 2.5) report_cards_*.json (cards) —— 只校验 manifest.assets.cards
+$cardFiles = $manifest['assets']['cards'] ?? null;
+if (is_array($cardFiles) && !empty($cardFiles)) {
+    $expectedCardsSchema = $manifest['schemas']['cards'] ?? null;
 
-            [$cOk, $cMsg] = $this->checkCards($baseDir, $cardFiles, $packId, $expectedCardsSchema);
-            $ok = $ok && $cOk;
-            $this->printSectionResult('report_cards_*.json', $cOk, $cMsg);
-        } else {
-            $this->printSectionResult('report_cards_*.json', true, ["SKIPPED (no manifest.assets.cards)"]);
-        }
+    [$cOk, $cMsg] = $this->checkCards($baseDir, $cardFiles, $packId, $expectedCardsSchema, 'cards');
+    $ok = $ok && $cOk;
+    $this->printSectionResult('report_cards_*.json', $cOk, $cMsg);
+} else {
+    $this->printSectionResult('report_cards_*.json', true, ["SKIPPED (no manifest.assets.cards)"]);
+}
+
+// 2.6) report_cards_fallback_*.json (fallback_cards) —— 单独校验 manifest.assets.fallback_cards
+$fallbackCardFiles = $manifest['assets']['fallback_cards'] ?? null;
+if (is_array($fallbackCardFiles) && !empty($fallbackCardFiles)) {
+    $expectedFallbackCardsSchema = $manifest['schemas']['fallback_cards'] ?? null;
+
+    [$fcOk, $fcMsg] = $this->checkCards($baseDir, $fallbackCardFiles, $packId, $expectedFallbackCardsSchema, 'fallback_cards');
+    $ok = $ok && $fcOk;
+    $this->printSectionResult('report_cards_fallback_*.json', $fcOk, $fcMsg);
+} else {
+    $this->printSectionResult('report_cards_fallback_*.json', true, ["SKIPPED (no manifest.assets.fallback_cards)"]);
+}
 
         // 3) report_highlights_templates.json
         $runIfDeclared(
@@ -178,6 +190,29 @@ $runIfDeclared(
             'report_recommended_reads.json',
             fn () => $this->checkRecommendedReads($this->pathOf($baseDir, 'report_recommended_reads.json'), $packId)
         );
+
+// 8.5) report_section_policies.json (section min_cards policies + fallback coverage)
+$runIfDeclared(
+    'report_section_policies.json',
+    'report_section_policies.json',
+    fn () => $this->checkSectionPolicies(
+        $this->pathOf($baseDir, 'report_section_policies.json'),
+        $manifest,
+        $packId,
+        $this->expectedSchemaFor($manifest, 'section_policies', 'report_section_policies.json')
+    )
+);
+
+// 8.6) fallback cards existence + coverage (by section policies)
+// - 要求：fallback 文件存在
+// - 数量：>= min_cards 通过；0 失败；(0, min_cards) 给 warning
+if (isset($declaredBasenames['report_section_policies.json'])) {
+    [$fOk, $fMsg] = $this->checkFallbackCardsAgainstSectionPolicies($manifest, $baseDir, $packId);
+    $ok = $ok && $fOk;
+    $this->printSectionResult('fallback-cards (coverage by section policies)', $fOk, $fMsg);
+} else {
+    $this->printSectionResult('fallback-cards (coverage by section policies)', true, ["SKIPPED (report_section_policies.json not declared)"]);
+}
 
         // 9) report_overrides.json (unified overrides rules validation)
         $runIfDeclared(
@@ -502,8 +537,9 @@ $errs[] = "pack={$packId} file={$abs} path=$.schema :: missing schema field (ass
         // 与 expectedSchemaFor 保持同样的分类口径（只收集 schemaKey，不做值判断）
         $file = (string)$file;
 
-if (in_array($assetKey, ['questions','type_profiles','cards','highlights','reads','rules'], true)) {            $used[$assetKey] = true;
-            return;
+        if (in_array($assetKey, ['questions','type_profiles','cards','fallback_cards','highlights','reads','rules'], true)) {
+           $used[$assetKey] = true;
+           return;
         }
 
         if ($assetKey === 'borderline') {
@@ -914,6 +950,253 @@ private function checkReportRules(string $path, array $manifest, string $packId,
     // File checks
     // -------------------------
 
+private function checkSectionPolicies(string $path, array $manifest, string $packId, ?string $expectedSchema = null): array
+{
+    if (!is_file($path)) {
+        return [false, ["pack={$packId} file={$path} :: File not found"]];
+    }
+
+    $doc = $this->readJsonFile($path);
+    if (!is_array($doc)) {
+        return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+    }
+
+    if ($errs = $this->checkSchemaField($doc, $expectedSchema, $packId, $path, 'section_policies')) {
+        return [false, $errs];
+    }
+
+    $items = null;
+    if (is_array($doc['items'] ?? null)) $items = $doc['items'];
+    else $items = $doc;
+
+    if (!is_array($items) || $items === [] || !$this->isAssocArray($items)) {
+        return [false, ["pack={$packId} file={$path} path=$.items :: must be object(map of section => policy)"]];
+    }
+
+    $requiredSections = ['traits', 'career', 'growth', 'relationships'];
+    $errors = [];
+
+    foreach ($requiredSections as $s) {
+        if (!array_key_exists($s, $items)) {
+            $errors[] = "pack={$packId} file={$path} path=$.items.{$s} :: missing required section policy";
+        }
+    }
+
+    foreach ($items as $sec => $pol) {
+        $base = "path=$.items.{$sec}";
+        if (!is_string($sec) || trim($sec) === '') {
+            $errors[] = "pack={$packId} file={$path} {$base} :: section key must be non-empty string";
+            continue;
+        }
+        if (!is_array($pol) || !$this->isAssocArray($pol)) {
+            $errors[] = "pack={$packId} file={$path} {$base} :: policy must be object(map)";
+            continue;
+        }
+
+        // min_cards: required int >= 0
+        if (!array_key_exists('min_cards', $pol)) {
+            $errors[] = "pack={$packId} file={$path} {$base}.min_cards :: missing required min_cards";
+        } else {
+            $v = $pol['min_cards'];
+            if (!is_int($v) && !(is_numeric($v) && (int)$v == $v)) {
+                $errors[] = "pack={$packId} file={$path} {$base}.min_cards :: must be integer >= 0";
+            } elseif ((int)$v < 0) {
+                $errors[] = "pack={$packId} file={$path} {$base}.min_cards :: must be >= 0";
+            }
+        }
+
+        // allow_fallback: optional bool
+        if (array_key_exists('allow_fallback', $pol) && !is_bool($pol['allow_fallback'])) {
+            $errors[] = "pack={$packId} file={$path} {$base}.allow_fallback :: must be boolean if present";
+        }
+
+        // fallback_file: optional string (relative path)
+        if (array_key_exists('fallback_file', $pol) && !(is_string($pol['fallback_file']) && trim($pol['fallback_file']) !== '')) {
+            $errors[] = "pack={$packId} file={$path} {$base}.fallback_file :: must be non-empty string if present";
+        }
+    }
+
+    if (!empty($errors)) {
+        return [false, array_merge(["Section policies invalid: " . count($errors)], array_slice($errors, 0, 120))];
+    }
+
+    return [true, ["OK (section policies valid; sections=" . count($items) . ")"]];
+}
+
+private function checkFallbackCardsAgainstSectionPolicies(array $manifest, string $baseDir, string $packId): array
+{
+    $polPath = $this->pathOf($baseDir, 'report_section_policies.json');
+    if (!is_file($polPath)) {
+        return [false, ["pack={$packId} file={$polPath} :: report_section_policies.json not found"]];
+    }
+
+    $polDoc = $this->readJsonFile($polPath);
+    if (!is_array($polDoc)) {
+        return [false, ["pack={$packId} file={$polPath} :: report_section_policies.json invalid JSON"]];
+    }
+
+    $items = is_array($polDoc['items'] ?? null) ? $polDoc['items'] : $polDoc;
+    if (!is_array($items) || !$this->isAssocArray($items)) {
+        return [false, ["pack={$packId} file={$polPath} path=$.items :: must be object(map)"]];
+    }
+
+    // flatten declared asset rel paths (excluding dirs)
+    $rels = $this->flattenDeclaredAssetRelPaths($manifest);
+
+    $errors = [];
+    $notes  = [];
+
+    foreach ($items as $secKey => $pol) {
+        if (!is_string($secKey) || trim($secKey) === '') continue;
+        if (!is_array($pol)) $pol = [];
+
+        $minCards = (int)($pol['min_cards'] ?? 0);
+        $allowFallback = array_key_exists('allow_fallback', $pol) ? (bool)$pol['allow_fallback'] : true;
+
+        // 如果不允许 fallback，就只做存在性提示（不强制）
+        if (!$allowFallback) {
+            $notes[] = "OK section={$secKey} allow_fallback=false (skip fallback coverage check)";
+            continue;
+        }
+
+        // 1) resolve fallback file
+        $rel = null;
+
+        // (a) policy 指定 fallback_file 优先
+        if (is_string($pol['fallback_file'] ?? null) && trim((string)$pol['fallback_file']) !== '') {
+            $rel = trim((string)$pol['fallback_file']);
+        } else {
+            // (b) 否则从 manifest.assets 里猜：文件名同时包含 fallback + sectionKey
+            $cands = [];
+            foreach ($rels as $r) {
+                $bn = strtolower(basename($r));
+                $sk = strtolower($secKey);
+
+                $hasFallback = str_contains($bn, 'fallback');
+                $hasSection  = str_contains($bn, $sk);
+
+                if ($hasFallback && $hasSection && str_ends_with($bn, '.json')) {
+                    $cands[] = $r;
+                }
+            }
+
+            // deterministic pick: prefer exact-ish names
+            $score = function (string $r) use ($secKey): int {
+                $bn = strtolower(basename($r));
+                $sk = strtolower($secKey);
+                $s = 0;
+                if ($bn === "fallback_cards_{$sk}.json") $s += 100;
+                if ($bn === "report_fallback_cards_{$sk}.json") $s += 95;
+                if ($bn === "report_cards_fallback_{$sk}.json") $s += 90;
+                if (str_contains($bn, "fallback_cards_{$sk}")) $s += 80;
+                if (str_contains($bn, "{$sk}_fallback")) $s += 60;
+                if (str_contains($bn, "fallback_{$sk}")) $s += 60;
+                // shorter filename slightly preferred
+                $s += max(0, 30 - strlen($bn));
+                return $s;
+            };
+
+            if (count($cands) === 1) {
+                $rel = $cands[0];
+            } elseif (count($cands) > 1) {
+                usort($cands, fn($a,$b) => $score($b) <=> $score($a));
+                $rel = $cands[0];
+            }
+        }
+
+        if (!$rel) {
+            $errors[] = "pack={$packId} section={$secKey} :: fallback file not found in manifest.assets (need a declared json containing 'fallback' + section name, or set policies.items.{$secKey}.fallback_file)";
+            continue;
+        }
+
+        $abs = $this->pathOf($baseDir, $rel);
+        if (!is_file($abs)) {
+            $errors[] = "pack={$packId} section={$secKey} file={$abs} :: fallback file not found on disk";
+            continue;
+        }
+
+        $doc = $this->readJsonFile($abs);
+        if (!is_array($doc)) {
+            $errors[] = "pack={$packId} section={$secKey} file={$abs} :: fallback invalid JSON";
+            continue;
+        }
+
+        // 2) extract items list
+        $list = null;
+        if (is_array($doc['items'] ?? null)) $list = $doc['items'];
+        else $list = $doc;
+
+        // normalize to list
+        if (!is_array($list)) $list = [];
+        if ($this->isAssocArray($list)) $list = array_values($list);
+
+        $cnt = 0;
+        foreach ($list as $i => $row) {
+            if (!is_array($row)) continue;
+            $cnt++;
+        }
+
+        // 3) coverage rule
+        if ($cnt <= 0) {
+            $errors[] = "pack={$packId} section={$secKey} file={$abs} :: fallback has 0 items (must be >0)";
+            continue;
+        }
+
+        if ($minCards > 0 && $cnt < $minCards) {
+            // ✅ 你要求：不足 min_cards 但 >0 -> warning
+            $notes[] = "WARN section={$secKey} fallback_count={$cnt} < min_cards={$minCards} (file=" . basename($abs) . ")";
+        } else {
+            $notes[] = "OK section={$secKey} fallback_count={$cnt} min_cards={$minCards} (file=" . basename($abs) . ")";
+        }
+    }
+
+    if (!empty($errors)) {
+        return [false, array_merge(["Fallback coverage invalid: " . count($errors)], array_slice($errors, 0, 120))];
+    }
+
+    return [true, $notes ?: ["OK (fallback coverage checked)"]];
+}
+
+/**
+ * 把 manifest.assets 全部 flatten 成 relpath 列表（排除 dir entries）
+ */
+private function flattenDeclaredAssetRelPaths(array $manifest): array
+{
+    $assets = $manifest['assets'] ?? null;
+    if (!is_array($assets)) return [];
+
+    $out = [];
+
+    foreach ($assets as $assetKey => $paths) {
+        // overrides: object(map) with buckets + order
+        if ($assetKey === 'overrides' && is_array($paths) && $this->isAssocArray($paths)) {
+            foreach ($paths as $bucket => $list) {
+                if ($bucket === 'order') continue;
+                $list = is_array($list) ? $list : [$list];
+                foreach ($list as $rel) {
+                    if (!is_string($rel) || trim($rel) === '') continue;
+                    if (str_ends_with($rel, '/')) continue;
+                    $out[] = $rel;
+                }
+            }
+            continue;
+        }
+
+        // normal list
+        if (!is_array($paths)) continue;
+
+        foreach ($paths as $rel) {
+            if (!is_string($rel) || trim($rel) === '') continue;
+            if (str_ends_with($rel, '/')) continue;
+            $out[] = $rel;
+        }
+    }
+
+    // unique
+    $out = array_values(array_unique($out));
+    return $out;
+}
+
     private function checkQuestions(string $path, string $packId, ?string $expectedSchema = null): array
 {
     if (!is_file($path)) {
@@ -1057,86 +1340,144 @@ private function checkReportRules(string $path, array $manifest, string $packId,
         return [true, ['OK (32 types, required fields present)']];
     }
 
-        private function checkCards(string $baseDir, array $cardFiles, string $packId, ?string $expectedSchema = null): array
-    {
-        $errors = [];
+private function checkCards(
+    string $baseDir,
+    array $cardFiles,
+    string $packId,
+    ?string $expectedSchema = null,
+    string $assetLabel = 'cards'
+): array {
+    $errors = [];
 
-        // id -> "file"
-        $seenIds = [];
+    // id -> "file"
+    $seenIds = [];
 
-        $countFiles = 0;
-        $countCards = 0;
+    $countFiles = 0;
+    $countCards = 0;
 
-        foreach ($cardFiles as $i => $rel) {
-            if (!is_string($rel) || trim($rel) === '') {
-                $errors[] = "pack={$packId} path=$.assets.cards[{$i}] :: must be non-empty string";
-                continue;
-            }
+    // fallback 文件名推断 section（traits/career/growth/relationships）
+    $inferSectionFromFilename = function (string $abs): ?string {
+        $bn = strtolower(basename($abs));
+        foreach (['traits', 'career', 'growth', 'relationships'] as $s) {
+            if (str_contains($bn, $s)) return $s;
+        }
+        return null;
+    };
 
-            $abs = $this->pathOf($baseDir, $rel);
-            if (!is_file($abs)) {
-                $errors[] = "pack={$packId} file={$abs} :: File not found (cards)";
-                continue;
-            }
-
-            $json = $this->readJsonFile($abs);
-            if (!is_array($json)) {
-                $errors[] = "pack={$packId} file={$abs} :: Invalid JSON (cards)";
-                continue;
-            }
-
-            // schema check (same schema for all cards)
-            if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $abs, 'cards')) {
-                $errors = array_merge($errors, $errs);
-                continue;
-            }
-
-            $items = $json['items'] ?? ($json['cards'] ?? null);
-            if (!is_array($items)) {
-                $errors[] = "pack={$packId} file={$abs} path=$.items :: Invalid items (expect {items:[...]})";
-                continue;
-            }
-
-            $countFiles++;
-
-            foreach ($items as $j => $it) {
-                if (!is_array($it) || !$this->isAssocArray($it)) {
-                    $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}] :: card must be object";
-                    continue;
-                }
-
-                $id = $it['id'] ?? null;
-                if (!is_string($id) || trim($id) === '') {
-                    $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].id :: missing/invalid id";
-                    continue;
-                }
-
-                // minimal required fields (你可以按需增减)
-                foreach (['section','title','desc'] as $f) {
-                    if (!isset($it[$f]) || !is_string($it[$f]) || trim($it[$f]) === '') {
-                        $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].{$f} :: missing/invalid {$f} (id={$id})";
-                    }
-                }
-
-                if (isset($seenIds[$id])) {
-                    $errors[] = "pack={$packId} :: Duplicate card id detected: {$id} (file={$abs}, prev={$seenIds[$id]})";
-                } else {
-                    $seenIds[$id] = $abs;
-                }
-
-                $countCards++;
+    // fallback 的正文字段兼容：desc/text/body
+    $pickDesc = function (array $it): ?string {
+        foreach (['desc', 'text', 'body'] as $k) {
+            if (isset($it[$k]) && is_string($it[$k]) && trim($it[$k]) !== '') {
+                return trim($it[$k]);
             }
         }
+        return null;
+    };
 
-        if (!empty($errors)) {
-            return [false, array_merge(
-                ["Cards invalid: " . count($errors)],
-                array_slice($errors, 0, 120)
-            )];
+    foreach ($cardFiles as $i => $rel) {
+        if (!is_string($rel) || trim($rel) === '') {
+            $errors[] = "pack={$packId} path=$.assets.{$assetLabel}[{$i}] :: must be non-empty string";
+            continue;
         }
 
-        return [true, ["OK ({$countFiles} card files, {$countCards} cards, ids unique)"]];
+        $abs = $this->pathOf($baseDir, $rel);
+        if (!is_file($abs)) {
+            $errors[] = "pack={$packId} file={$abs} :: File not found ({$assetLabel})";
+            continue;
+        }
+
+        $json = $this->readJsonFile($abs);
+        if (!is_array($json)) {
+            $errors[] = "pack={$packId} file={$abs} :: Invalid JSON ({$assetLabel})";
+            continue;
+        }
+
+        // ✅ schema check
+        if ($errs = $this->checkSchemaField($json, $expectedSchema, $packId, $abs, $assetLabel)) {
+            $errors = array_merge($errors, $errs);
+            continue;
+        }
+
+        $items = $json['items'] ?? ($json['cards'] ?? null);
+        if (!is_array($items)) {
+            $errors[] = "pack={$packId} file={$abs} path=$.items :: Invalid items (expect {items:[...]})";
+            continue;
+        }
+
+        $countFiles++;
+
+        // 仅对 fallback_cards：允许 section 缺失（从文件名推断）
+        $fallbackSection = ($assetLabel === 'fallback_cards') ? $inferSectionFromFilename($abs) : null;
+
+        foreach ($items as $j => $it) {
+            if (!is_array($it) || !$this->isAssocArray($it)) {
+                $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}] :: card must be object";
+                continue;
+            }
+
+            $id = $it['id'] ?? null;
+            if (!is_string($id) || trim($id) === '') {
+                $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].id :: missing/invalid id";
+                continue;
+            }
+            $id = trim($id);
+
+            // -------------------------
+            // ✅ required fields:
+            // - cards: section + title + desc
+            // - fallback_cards: title + (desc|text|body), section 可缺失（用文件名推断）
+            // -------------------------
+            $title = $it['title'] ?? null;
+            if (!is_string($title) || trim($title) === '') {
+                $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].title :: missing/invalid title (id={$id})";
+            }
+
+            if ($assetLabel === 'fallback_cards') {
+                // section: optional (fallbackSection)
+                $sec = $it['section'] ?? $fallbackSection;
+                if (!is_string($sec) || trim($sec) === '') {
+                    // 如果文件名也推不出来，就报错（避免默默吞错）
+                    $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].section :: missing/invalid section AND cannot infer from filename (id={$id})";
+                }
+
+                // desc: accept desc|text|body
+                $desc = $pickDesc($it);
+                if ($desc === null) {
+                    $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].desc :: missing/invalid desc (accept desc|text|body) (id={$id})";
+                }
+            } else {
+                // normal cards: strict
+                $sec = $it['section'] ?? null;
+                if (!is_string($sec) || trim($sec) === '') {
+                    $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].section :: missing/invalid section (id={$id})";
+                }
+
+                $desc = $it['desc'] ?? null;
+                if (!is_string($desc) || trim($desc) === '') {
+                    $errors[] = "pack={$packId} file={$abs} path=$.items[{$j}].desc :: missing/invalid desc (id={$id})";
+                }
+            }
+
+            // id uniqueness
+            if (isset($seenIds[$id])) {
+                $errors[] = "pack={$packId} :: Duplicate card id detected: {$id} (file={$abs}, prev={$seenIds[$id]})";
+            } else {
+                $seenIds[$id] = $abs;
+            }
+
+            $countCards++;
+        }
     }
+
+    if (!empty($errors)) {
+        return [false, array_merge(
+            [ucfirst($assetLabel) . " invalid: " . count($errors)],
+            array_slice($errors, 0, 120)
+        )];
+    }
+
+    return [true, ["OK ({$countFiles} {$assetLabel} files, {$countCards} items, ids unique)"]];
+}
 
     private function checkHighlightsTemplates(string $path, string $packId, ?string $expectedSchema = null): array
     {
@@ -1761,9 +2102,11 @@ private function checkIdentityLayers(string $path, string $packId, ?string $expe
         'questions'      => 'questions',
         'type_profiles'  => 'type_profiles',
         'cards'          => 'cards',
+        'fallback_cards' => 'fallback_cards',
         'highlights'     => 'highlights',
         'reads'          => 'reads',
         'rules'          => 'rules', // ✅ 新增：rules -> schemas.rules
+        'section_policies' => 'section_policies',
     ];
     if (isset($direct[$assetKey])) {
         return $schemas[$direct[$assetKey]] ?? null;

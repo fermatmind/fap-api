@@ -142,6 +142,22 @@ final class TagBuilder
         return array_values($out);
     }
 
+/**
+ * 工具：tags[] -> set['tag'=>true]
+ * 方便 RuleEngine / 其它选择器复用同口径输入
+ */
+public static function toSet(array $tags): array
+{
+    $set = [];
+    foreach ($tags as $t) {
+        if (!is_string($t)) continue;
+        $t = trim($t);
+        if ($t === '') continue;
+        $set[$t] = true;
+    }
+    return $set;
+}
+
     /**
      * 从 axis 反推 4 字母（尽量），AT 用 axis:AT: 反推 -A/-T
      * 注意：这只是兜底；强烈建议你传最终 typeCode 进来。
