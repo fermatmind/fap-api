@@ -35,6 +35,7 @@ jobs:
         run: |
           cp -n .env.example .env || true
           php artisan key:generate --force
+          php artisan config:clear || true
 
       - name: Prepare sqlite
         working-directory: backend
@@ -55,66 +56,82 @@ jobs:
         run: |
           set -euo pipefail
 
-          OUT="$(php artisan tinker --execute='
+          SCRIPT="$(cat <<'PHP'
           use Illuminate\Support\Str;
+          use Illuminate\Support\Facades\Schema;
           use App\Models\Attempt;
           use App\Models\Result;
 
           $attemptId = (string) Str::uuid();
-          $anonId    = "ci_" . Str::uuid();
+          $anonId    = 'ci_' . Str::uuid();
+          $now       = now();
 
+          $setIfCol = function($model, string $table, string $col, $val) {
+            if (Schema::hasColumn($table, $col)) {
+              $model->setAttribute($col, $val);
+            }
+          };
+
+          // ---- Attempt ----
           $a = new Attempt();
-          $a->id = $attemptId;
-          $a->anon_id = $anonId;
-          $a->region = "CN_MAINLAND";
-          $a->locale = "zh-CN";
 
-          // required (your schema keeps adding NOT NULL fields, so guard with property_exists)
-          if (property_exists($a, "client_platform")) $a->client_platform = "github-actions";
-          if (property_exists($a, "client_version"))  $a->client_version  = "0";
-          if (property_exists($a, "client_os"))       $a->client_os       = "linux";
-          if (property_exists($a, "client_os_version")) $a->client_os_version = "ubuntu";
+          // Always try the most likely required columns
+          $setIfCol($a, 'attempts', 'id', $attemptId);
+          $setIfCol($a, 'attempts', 'anon_id', $anonId);
+          $setIfCol($a, 'attempts', 'region', 'CN_MAINLAND');
+          $setIfCol($a, 'attempts', 'locale', 'zh-CN');
 
-          if (property_exists($a, "scale_code"))    $a->scale_code = "MBTI";
-          if (property_exists($a, "scale_version")) $a->scale_version = "v0.2.1-TEST";
-          if (property_exists($a, "question_count")) $a->question_count = 144;
+          $setIfCol($a, 'attempts', 'scale_code', 'MBTI');
+          $setIfCol($a, 'attempts', 'scale_version', 'v0.2.1-TEST');
+          $setIfCol($a, 'attempts', 'question_count', 144);
 
-          // fix: NOT NULL constraint failed (answers_summary_json / answers_summary_json)
-          if (property_exists($a, "answers_summary_json"))     $a->answers_summary_json = json_encode((object)[]);
-          if (property_exists($a, "answers_summary_json"))     $a->answers_summary_json = json_encode((object)[]); // harmless if same
-          if (property_exists($a, "answers_summary_json"))     $a->answers_summary_json = "{}";
+          // This one has been failing as NOT NULL in your logs
+          $setIfCol($a, 'attempts', 'answers_summary_json', '{}');
+          $setIfCol($a, 'attempts', 'answers_json', '[]');
 
-          // some schemas use different field names
-          if (property_exists($a, "answers_summary_json")) $a->answers_summary_json = "{}";
-          if (property_exists($a, "answers_json"))         $a->answers_json = json_encode([]);
-          if (property_exists($a, "answers"))              $a->answers = [];
+          // Client fields sometimes become NOT NULL (your logs showed client_platform)
+          $setIfCol($a, 'attempts', 'client_platform', 'github-actions');
+          $setIfCol($a, 'attempts', 'client_version', '0');
+          $setIfCol($a, 'attempts', 'client_os', 'linux');
+          $setIfCol($a, 'attempts', 'client_os_version', 'ubuntu');
+
+          // timestamps (only if table has them)
+          $setIfCol($a, 'attempts', 'created_at', $now);
+          $setIfCol($a, 'attempts', 'updated_at', $now);
 
           $a->save();
 
+          // ---- Result ----
           $r = new Result();
-          $r->attempt_id = $attemptId;
-          if (property_exists($r, "anon_id")) $r->anon_id = $anonId;
 
-          if (property_exists($r, "scale_code")) $r->scale_code = "MBTI";
-          if (property_exists($r, "scale_version")) $r->scale_version = "v0.2.1-TEST";
+          $setIfCol($r, 'results', 'attempt_id', $attemptId);
+          $setIfCol($r, 'results', 'anon_id', $anonId);
 
-          // keep these aligned with your content_packages
-          if (property_exists($r, "type_code")) $r->type_code = "ESTJ-A";
-          if (property_exists($r, "profile_version")) $r->profile_version = "mbti32-v2.5";
-          if (property_exists($r, "content_package_version")) $r->content_package_version = "v0.2.1-TEST";
+          $setIfCol($r, 'results', 'scale_code', 'MBTI');
+          $setIfCol($r, 'results', 'scale_version', 'v0.2.1-TEST');
 
-          if (property_exists($r, "scores_pct")) {
-            $r->scores_pct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
-          }
-          if (property_exists($r, "axis_states")) {
-            $r->axis_states = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
-          }
+          // keep both "ESTJ-A" and "ESTJ" where schema supports it
+          $setIfCol($r, 'results', 'type_code', 'ESTJ-A');
+          $setIfCol($r, 'results', 'short_type', 'ESTJ');
+          $setIfCol($r, 'results', 'variant_code', 'A');
+
+          $setIfCol($r, 'results', 'profile_version', 'mbti32-v2.5');
+          $setIfCol($r, 'results', 'content_package_version', 'v0.2.1-TEST');
+
+          // json-ish fields (store as JSON string to avoid array cast issues)
+          $setIfCol($r, 'results', 'scores_pct', json_encode(["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58], JSON_UNESCAPED_UNICODE));
+          $setIfCol($r, 'results', 'axis_states', json_encode(["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"], JSON_UNESCAPED_UNICODE));
+
+          $setIfCol($r, 'results', 'created_at', $now);
+          $setIfCol($r, 'results', 'updated_at', $now);
 
           $r->save();
 
           echo "ATTEMPT_ID=".$attemptId.PHP_EOL;
-          ' 2>&1)"
+          PHP
+          )"
 
+          OUT="$(php artisan tinker --execute="$SCRIPT" 2>&1)"
           echo "$OUT"
 
           ATTEMPT_ID="$(echo "$OUT" | tr -d '\r' | awk -F= '/^ATTEMPT_ID=/{print $2; exit}')"
