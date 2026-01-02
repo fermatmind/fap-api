@@ -53,7 +53,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          ATTEMPT_ID="$(php artisan tinker --execute='
+          OUT="$(php artisan tinker --execute='
           use Illuminate\Support\Str;
           use App\Models\Attempt;
           use App\Models\Result;
@@ -76,8 +76,16 @@ jobs:
           $r->axis_states = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
           $r->save();
 
-          echo $attemptId;
-          ' | tail -n 1)"
+          echo "ATTEMPT_ID=".$attemptId.PHP_EOL;
+          ' 2>&1)"
+
+          echo "$OUT"
+
+          ATTEMPT_ID="$(echo "$OUT" | tr -d '\r' | grep -Eo '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}' | head -n 1)"
+          if [ -z "$ATTEMPT_ID" ]; then
+            echo "ERROR: failed to extract attempt_id"
+            exit 1
+          fi
 
           echo "FAP_VALIDATE_ATTEMPT_ID=$ATTEMPT_ID" >> "$GITHUB_ENV"
           echo "Seeded attempt_id=$ATTEMPT_ID"
