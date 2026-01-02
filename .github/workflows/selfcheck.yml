@@ -63,6 +63,7 @@ jobs:
           use App\Models\Result;
 
           $attemptId = (string) Str::uuid();
+          $resultId  = (string) Str::uuid();
           $anonId    = 'ci_' . Str::uuid();
           $now       = now();
 
@@ -75,7 +76,6 @@ jobs:
           // ---- Attempt ----
           $a = new Attempt();
 
-          // Always try the most likely required columns
           $setIfCol($a, 'attempts', 'id', $attemptId);
           $setIfCol($a, 'attempts', 'anon_id', $anonId);
           $setIfCol($a, 'attempts', 'region', 'CN_MAINLAND');
@@ -85,17 +85,16 @@ jobs:
           $setIfCol($a, 'attempts', 'scale_version', 'v0.2.1-TEST');
           $setIfCol($a, 'attempts', 'question_count', 144);
 
-          // This one has been failing as NOT NULL in your logs
+          // often NOT NULL in your logs
           $setIfCol($a, 'attempts', 'answers_summary_json', '{}');
           $setIfCol($a, 'attempts', 'answers_json', '[]');
 
-          // Client fields sometimes become NOT NULL (your logs showed client_platform)
+          // client fields sometimes NOT NULL
           $setIfCol($a, 'attempts', 'client_platform', 'github-actions');
           $setIfCol($a, 'attempts', 'client_version', '0');
           $setIfCol($a, 'attempts', 'client_os', 'linux');
           $setIfCol($a, 'attempts', 'client_os_version', 'ubuntu');
 
-          // timestamps (only if table has them)
           $setIfCol($a, 'attempts', 'created_at', $now);
           $setIfCol($a, 'attempts', 'updated_at', $now);
 
@@ -104,13 +103,15 @@ jobs:
           // ---- Result ----
           $r = new Result();
 
+          // FIX: results.id is NOT NULL in CI, so seed it
+          $setIfCol($r, 'results', 'id', $resultId);
+
           $setIfCol($r, 'results', 'attempt_id', $attemptId);
           $setIfCol($r, 'results', 'anon_id', $anonId);
 
           $setIfCol($r, 'results', 'scale_code', 'MBTI');
           $setIfCol($r, 'results', 'scale_version', 'v0.2.1-TEST');
 
-          // keep both "ESTJ-A" and "ESTJ" where schema supports it
           $setIfCol($r, 'results', 'type_code', 'ESTJ-A');
           $setIfCol($r, 'results', 'short_type', 'ESTJ');
           $setIfCol($r, 'results', 'variant_code', 'A');
@@ -118,7 +119,7 @@ jobs:
           $setIfCol($r, 'results', 'profile_version', 'mbti32-v2.5');
           $setIfCol($r, 'results', 'content_package_version', 'v0.2.1-TEST');
 
-          // json-ish fields (store as JSON string to avoid array cast issues)
+          // store as JSON string to avoid cast differences
           $setIfCol($r, 'results', 'scores_pct', json_encode(["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58], JSON_UNESCAPED_UNICODE));
           $setIfCol($r, 'results', 'axis_states', json_encode(["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"], JSON_UNESCAPED_UNICODE));
 
