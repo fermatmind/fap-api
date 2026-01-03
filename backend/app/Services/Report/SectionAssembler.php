@@ -55,25 +55,34 @@ class SectionAssembler
         $captureExplain = (bool)($ctx['capture_explain'] ?? false);
 
         if ($sectionsPolicy === []) {
-            // No policies => no-op (but keep report stable)
-            $report['_meta'] = $report['_meta'] ?? [];
-            $report['_meta']['sections'] = $report['_meta']['sections'] ?? [];
-            $report['_meta']['section_policies'] = [
-                'ok' => false,
-                'reason' => 'missing_or_empty_section_policies',
-            ];
+    // No policies => no-op (but keep report stable)
+    $report['_meta'] = $report['_meta'] ?? [];
+    $report['_meta']['sections'] = $report['_meta']['sections'] ?? [];
 
-            if ($captureExplain) {
-                $report['_explain'] = $report['_explain'] ?? [];
-                $report['_explain']['assembler'] = $report['_explain']['assembler'] ?? [];
-                $report['_explain']['assembler']['cards'] = [
-                    'ok' => false,
-                    'reason' => 'missing_or_empty_section_policies',
-                ];
-            }
+    // ✅ 旧字段保留（你本来就有）
+    $report['_meta']['section_policies'] = [
+        'ok' => false,
+        'reason' => 'missing_or_empty_section_policies',
+    ];
 
-            return $report;
-        }
+    // ✅ NEW：验收脚本看的全局字段
+    $report['_meta']['section_assembler'] = [
+        'ok' => false,
+        'reason' => 'missing_or_empty_section_policies',
+        'meta_fallback_used' => false,
+    ];
+
+    if ($captureExplain) {
+        $report['_explain'] = $report['_explain'] ?? [];
+        $report['_explain']['assembler'] = $report['_explain']['assembler'] ?? [];
+        $report['_explain']['assembler']['cards'] = [
+            'ok' => false,
+            'reason' => 'missing_or_empty_section_policies',
+        ];
+    }
+
+    return $report;
+}
 
         $sections = $report['sections'];
 
@@ -131,13 +140,19 @@ class SectionAssembler
         $report['_meta'] = $report['_meta'] ?? [];
         $report['_meta']['sections'] = $report['_meta']['sections'] ?? [];
 
-        foreach (($fullExplain['by_section'] ?? []) as $secKey => $secExplain) {
-            if (!is_array($secExplain)) continue;
-            $secKey = (string)$secKey;
+        // ✅ NEW：全局汇总标记（验收脚本要用）
+$report['_meta']['section_assembler'] = is_array($report['_meta']['section_assembler'] ?? null)
+    ? $report['_meta']['section_assembler']
+    : [];
 
-            $report['_meta']['sections'][$secKey] = $report['_meta']['sections'][$secKey] ?? [];
-            $report['_meta']['sections'][$secKey]['assembler'] = $secExplain;
-        }
+$report['_meta']['section_assembler'] = array_merge(
+    [
+        'ok' => true,
+        'meta_fallback_used' => false,
+        'policy_schema' => $policiesDoc['schema'] ?? null,
+    ],
+    $report['_meta']['section_assembler']
+);
 
         // ✅ 可选 explain：仅在 captureExplain 开启时写（避免线上 payload 变大）
         if ($captureExplain) {

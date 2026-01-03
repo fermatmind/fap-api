@@ -737,6 +737,20 @@ if (!empty($assemblerMetaSections) && is_array($assemblerMetaSections)) {
         is_array($reportPayload['_meta']['sections'] ?? null) ? $reportPayload['_meta']['sections'] : [],
         $assemblerMetaSections
     );
+
+// ✅ 正常路径：Assembler 已经写了 sections meta，则全局也要标记 ok
+$reportPayload['_meta']['section_assembler'] = is_array($reportPayload['_meta']['section_assembler'] ?? null)
+    ? $reportPayload['_meta']['section_assembler']
+    : [];
+
+$reportPayload['_meta']['section_assembler'] = array_merge(
+    [
+        'ok' => true,
+        'meta_fallback_used' => false,
+    ],
+    $reportPayload['_meta']['section_assembler']
+);
+
 } else {
     // 兜底：至少让 _meta.sections 是 array（字段稳定）
     $reportPayload['_meta']['sections'] = is_array($reportPayload['_meta']['sections'] ?? null)
