@@ -24,46 +24,39 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Bind ContentStore so app(ContentStore::class) works (no "array $chain" DI error)
-        $this->app->singleton(ContentStore::class, function ($app) {
-            /** @var ContentPackResolver $resolver */
-            $resolver = $app->make(ContentPackResolver::class);
+$this->app->singleton(ContentStore::class, function ($app) {
+    /** @var ContentPackResolver $resolver */
+    $resolver = $app->make(ContentPackResolver::class);
 
-            // ---- Resolve args (按你的项目约定尽量多兼容几个配置名) ----
-            $scaleCode = (string) (
-                config('content.scale_code')
-                ?? config('content.scale')
-                ?? env('FAP_SCALE_CODE')
-                ?? env('FAP_SCALE')
-                ?? 'default'
-            );
+    // scale 固定用 default（你们 pack 的目录就是 default/...）
+    $scaleCode = (string)(
+        config('content.scale_code')
+        ?? config('content.scale')
+        ?? env('FAP_SCALE_CODE')
+        ?? env('FAP_SCALE')
+        ?? 'default'
+    );
 
-            $region = (string) (
-                config('content.region')
-                ?? env('FAP_REGION')
-                ?? 'CN'
-            );
+    // ✅ region / locale 以 content_packs 的默认值为准（来自 shared/.env）
+    $region = (string) config('content_packs.default_region', 'GLOBAL');
+    $locale = (string) config('content_packs.default_locale', 'en');
 
-            $locale = (string) (
-                config('content.locale')
-                ?? config('app.locale')
-                ?? env('APP_LOCALE')
-                ?? 'zh-CN'
-            );
+    // 防御：cn-mainland / cn_mainland 统一成 CN_MAINLAND
+    $region = strtoupper(str_replace('-', '_', $region));
 
-            $version = config('content.version') ?? env('FAP_CONTENT_VERSION');
-            $version = is_string($version) && trim($version) !== '' ? trim($version) : null;
+    // version：如果你传 null，就会落到 config('content.default_versions.<scaleCode>') 或 default_versions.default
+    $version = config('content.version') ?? env('FAP_CONTENT_VERSION');
+    $version = is_string($version) && trim($version) !== '' ? trim($version) : null;
 
-            // ✅ resolver->resolve() 是“单 pack”，ContentStore 需要“chain(list)”
-            // 所以这里包成数组。
-            $pack = $resolver->resolve($scaleCode, $region, $locale, $version);
-            $chain = [$pack];
+    // ✅ 关键：ContentStore 需要 chain(list)，用 fallbackChain
+    $chain = $resolver->resolveWithFallbackChain($scaleCode, $region, $locale, $version);
 
-            // ctx / legacyDir：先用最安全默认（不启用 legacy ctx loader）
-            $ctx = [];
-            $legacyDir = (string) (config('fap.content.legacy_dir') ?? '');
+    // ctx / legacyDir：保持你原来的
+    $ctx = [];
+    $legacyDir = (string) (config('fap.content.legacy_dir') ?? '');
 
-            return new ContentStore($chain, $ctx, $legacyDir);
-        });
+    return new ContentStore($chain, $ctx, $legacyDir);
+});
     }
 
     /**
