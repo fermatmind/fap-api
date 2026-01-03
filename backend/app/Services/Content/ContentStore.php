@@ -15,6 +15,14 @@ final class ContentStore
     private array $ctx;
     private string $legacyDir;
 
+    // =========================
+    // ✅ In-memory caches (per ContentStore instance)
+    // key = kind|pack_id|locale|version
+    // =========================
+    private array $cacheHighlightPools  = [];
+    private array $cacheHighlightRules  = [];
+    private array $cacheHighlightPolicy = [];
+
     public function __construct(array $chain, array $ctx = [], string $legacyDir = '')
     {
         $this->chain = $chain;
@@ -142,6 +150,109 @@ public function loadFallbackCards(string $section): array
     $norm = $this->normalizeCardsDocFromRawDoc($doc, $basename, $section);
     return is_array($norm['items'] ?? null) ? $norm['items'] : [];
 }
+
+    // =========================
+    // ✅ New: Highlights Strategy loaders (pools/rules/policy)
+    // =========================
+
+    /**
+     * ✅ highlight pools：
+     * 文件名固定：report_highlights_pools.json
+     *
+     * 统一返回：
+     * [
+     *   'schema' => ...,
+     *   'items'  => [
+     *      'strength' => [tmpl...],
+     *      'blindspot' => [tmpl...],
+     *      'action' => [tmpl...],
+     *   ]
+     * ]
+     */
+    public function loadHighlightPools(): array
+    {
+        $basename = 'report_highlights_pools.json';
+
+        $ck = $this->makePackCacheKey('highlight_pools');
+        if (isset($this->cacheHighlightPools[$ck])) {
+            return $this->cacheHighlightPools[$ck];
+        }
+
+        // 优先用 highlight_pools 这个 assetKey；找不到会 scan-any-asset + legacy ctx（取决于 env 开关）
+        $doc = $this->loadJsonByBasenamePreferAssetKey('highlight_pools', $basename);
+        $this->lightSchemaCheck($doc, $basename);
+
+        $norm = $this->normalizeHighlightPoolsDoc($doc);
+
+        $this->cacheHighlightPools[$ck] = $norm;
+        return $norm;
+    }
+
+    /**
+     * ✅ highlight rules：
+     * 文件名固定：report_highlights_rules.json
+     *
+     * 统一返回：
+     * [
+     *   'schema' => ...,
+     *   'rules'  => [ ... ]
+     * ]
+     *
+     * 兼容两种结构：
+     * A) { "rules": [ ... ] }
+     * B) [ ... ]
+     */
+    public function loadHighlightRules(): array
+    {
+        $basename = 'report_highlights_rules.json';
+
+        $ck = $this->makePackCacheKey('highlight_rules');
+        if (isset($this->cacheHighlightRules[$ck])) {
+            return $this->cacheHighlightRules[$ck];
+        }
+
+        // 优先用 highlight_rules 这个 assetKey；找不到会 scan-any-asset + legacy ctx（取决于 env 开关）
+        $doc = $this->loadJsonByBasenamePreferAssetKey('highlight_rules', $basename);
+        $this->lightSchemaCheck($doc, $basename);
+
+        $norm = $this->normalizeHighlightRulesDoc($doc);
+
+        $this->cacheHighlightRules[$ck] = $norm;
+        return $norm;
+    }
+
+    /**
+     * ✅ highlight policy（可选）：
+     * 文件名固定：report_highlights_policy.json
+     *
+     * 统一返回：
+     * [
+     *   'schema' => ...,
+     *   'items'  => [ ...policy... ]
+     * ]
+     *
+     * 兼容两种结构：
+     * A) { "items": { ... } }
+     * B) { ... }  // 直接就是 policy map
+     */
+    public function loadHighlightPolicy(): array
+    {
+        $basename = 'report_highlights_policy.json';
+
+        $ck = $this->makePackCacheKey('highlight_policy');
+        if (isset($this->cacheHighlightPolicy[$ck])) {
+            return $this->cacheHighlightPolicy[$ck];
+        }
+
+        // 优先用 highlight_policy 这个 assetKey；找不到会 scan-any-asset + legacy ctx（取决于 env 开关）
+        $doc = $this->loadJsonByBasenamePreferAssetKey('highlight_policy', $basename);
+        $this->lightSchemaCheck($doc, $basename);
+
+        $norm = $this->normalizeHighlightPolicyDoc($doc);
+
+        $this->cacheHighlightPolicy[$ck] = $norm;
+        return $norm;
+    }
 
 public function loadSelectRules(): array
 {
@@ -282,8 +393,192 @@ public function loadSelectRules(): array
     }
 
     // =========================
-    // Internal: read/locate/normalize
+    // Internal: highlights helpers
     // =========================
+
+    /**
+     * cache key = kind|pack_id|locale|version
+     * - pack_id / version：从 chain 里第一个 ContentPack 取（primary pack）
+     * - locale：尽量从 pack 上取；取不到就用 pack_id 兜底（pack_id 里通常已含 locale）
+     */
+    private function makePackCacheKey(string $kind): string
+    {
+        $packId = 'unknown_pack';
+        $ver    = 'unknown_ver';
+        $locale = 'unknown_locale';
+
+        foreach ($this->chain as $p) {
+            if (!$p instanceof ContentPack) continue;
+
+            $packId = is_string($p->packId()) ? $p->packId() : $packId;
+            $ver    = is_string($p->version()) ? $p->version() : $ver;
+
+            // 尽量从 pack 上拿 locale（不强依赖方法存在）
+            if (method_exists($p, 'locale')) {
+                $v = $p->locale();
+                if (is_string($v) && trim($v) !== '') {
+                    $locale = trim($v);
+                } else {
+                    $locale = $packId; // 兜底：pack_id 通常已包含 locale 信息
+                }
+            } else {
+                $locale = $packId; // 兜底
+            }
+
+            break; // primary pack only
+        }
+
+        return $kind . '|' . $packId . '|' . $locale . '|' . $ver;
+    }
+
+    private function normalizeHighlightPoolsDoc(array $doc): array
+    {
+        // 兼容：items / pools
+        $raw = $doc['items'] ?? ($doc['pools'] ?? null);
+
+        $out = [
+            'schema' => is_string($doc['schema'] ?? null) ? (string)$doc['schema'] : null,
+            'items'  => [
+                'strength' => [],
+                'blindspot' => [],
+                'action' => [],
+            ],
+        ];
+
+        if (!is_array($raw)) return $out;
+
+        // 结构 A：{strength:[...], blindspot:[...], action:[...]}
+        if (!$this->isListArray($raw)) {
+            foreach (['strength','blindspot','action'] as $pool) {
+                $list = $raw[$pool] ?? [];
+                if (!is_array($list)) $list = [];
+                $out['items'][$pool] = $this->normalizeHighlightTemplateList($list, $pool);
+            }
+            return $out;
+        }
+
+        // 结构 B：list[ {id,pool,title,body,tags,...}, ... ] -> regroup
+        foreach ($raw as $it) {
+            if (!is_array($it)) continue;
+
+            $pool = $it['pool'] ?? null;
+            $pool = is_string($pool) ? trim($pool) : '';
+            if (!in_array($pool, ['strength','blindspot','action'], true)) continue;
+
+            $norm = $this->normalizeHighlightTemplateItem($it, $pool);
+            if ($norm !== null) $out['items'][$pool][] = $norm;
+        }
+
+        return $out;
+    }
+
+    private function normalizeHighlightRulesDoc(array $doc): array
+    {
+        // 支持两种：{"rules":[...]} 或 直接 list
+        $rules = $doc['rules'] ?? $doc;
+        if (!is_array($rules)) $rules = [];
+
+        $out = [
+            'schema' => is_string($doc['schema'] ?? null) ? (string)$doc['schema'] : null,
+            'rules'  => [],
+        ];
+
+        foreach ($rules as $idx => $r) {
+            if (!is_array($r)) continue;
+
+            $pool = $r['pool'] ?? null;
+            $pool = is_string($pool) ? trim($pool) : '';
+            if (!in_array($pool, ['strength','blindspot','action'], true)) continue;
+
+            $pick = $r['pick_ids'] ?? ($r['pick'] ?? null);
+            if (!is_array($pick)) $pick = [];
+            $pick = array_values(array_filter($pick, fn($x) => is_string($x) && trim($x) !== ''));
+
+            if ($pick === []) continue;
+
+            $explain = $r['explain'] ?? null;
+            if (is_array($explain)) {
+                $explain = array_values(array_filter($explain, fn($x) => is_string($x) && trim($x) !== ''));
+                $explain = $explain ?: null;
+            } elseif (!is_string($explain)) {
+                $explain = null;
+            }
+
+            // tags / priority 可选，沿用你现有 rules 风格
+            $tags = $r['tags'] ?? [];
+            if (!is_array($tags)) $tags = [];
+            $tags = array_values(array_filter($tags, fn($x) => is_string($x) && trim($x) !== ''));
+
+            $priority = $r['priority'] ?? 0;
+            $priority = is_numeric($priority) ? (int)$priority : 0;
+
+            $out['rules'][] = [
+                'pool'     => $pool,
+                'pick_ids' => $pick,
+                'tags'     => $tags,
+                'priority' => $priority,
+                'explain'  => $explain,
+            ];
+        }
+
+        return $out;
+    }
+
+    private function normalizeHighlightPolicyDoc(array $doc): array
+    {
+        // 兼容：items / policy / root map
+        $items = $doc['items'] ?? ($doc['policy'] ?? null);
+        if (!is_array($items)) {
+            // root map 直接当 items
+            $items = $doc;
+            if (!is_array($items)) $items = [];
+        }
+
+        return [
+            'schema' => is_string($doc['schema'] ?? null) ? (string)$doc['schema'] : null,
+            'items'  => $items,
+        ];
+    }
+
+    private function normalizeHighlightTemplateList(array $list, string $pool): array
+    {
+        $out = [];
+        foreach ($list as $it) {
+            if (!is_array($it)) continue;
+            $norm = $this->normalizeHighlightTemplateItem($it, $pool);
+            if ($norm !== null) $out[] = $norm;
+        }
+        return $out;
+    }
+
+    private function normalizeHighlightTemplateItem(array $it, string $pool): ?array
+    {
+        $id = $it['id'] ?? null;
+        $id = is_string($id) ? trim($id) : '';
+        if ($id === '') return null;
+
+        $title = $it['title'] ?? '';
+        $title = is_string($title) ? (string)$title : '';
+
+        $body = $it['body'] ?? ($it['desc'] ?? '');
+        $body = is_string($body) ? (string)$body : '';
+
+        $tags = $it['tags'] ?? [];
+        if (!is_array($tags)) $tags = [];
+        $tags = array_values(array_filter($tags, fn($x) => is_string($x) && trim($x) !== ''));
+
+        $constraints = $it['constraints'] ?? [];
+        if (!is_array($constraints)) $constraints = [];
+
+        return [
+            'id'          => $id,
+            'pool'        => $pool,
+            'title'       => $title,
+            'body'        => $body,
+            'tags'        => $tags,
+            'constraints' => $constraints,
+        ];
+    }
 
     /**
      * ✅ 复用：把任意 cards doc（含 fallback）标准化成固定结构：

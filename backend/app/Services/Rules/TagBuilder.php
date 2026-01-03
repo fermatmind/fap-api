@@ -48,6 +48,8 @@ final class TagBuilder
      */
     public static function buildContextTags(array $ctx): array
     {
+        return self::toList(self::buildContextTags($ctx));
+
         $set = self::emptySet();
 
         // 1) type

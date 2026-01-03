@@ -22,4 +22,19 @@ return [
 
     // Optional: limit how many tag keys to print when debug is on (0 = unlimited)
     're_tags_debug_n' => (int) env('RE_TAGS_DEBUG_N', 0),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Self-check / strict-assets "known assets" (optional, for maintainability)
+    |--------------------------------------------------------------------------
+    | 说明：
+    | - 这块不会影响线上运行（除非你的 self-check 逻辑主动读取它）
+    | - 建议你后续把 self-check 的“known files 列表”改成读取这份配置，避免写死在命令里
+    | - 先把 highlights 三个资产名放进来，保证“已知文件”的定义集中管理
+    */
+    'selfcheck_known_assets' => [
+        'report_highlights_pools.json',
+        'report_highlights_rules.json',
+        'report_highlights_policy.json',
+    ],
 ];
