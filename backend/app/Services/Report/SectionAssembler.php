@@ -26,13 +26,29 @@ class SectionAssembler
             return $report;
         }
 
-        // ✅ 必须走 ContentStore loader（验收点 4）
+                // ✅ 必须走 ContentStore loader（验收点 4）
         $policiesDoc = $store->loadSectionPolicies();
 
-        // ContentStore::loadSectionPolicies() 已经统一返回 ['schema'=>..., 'items'=> <policies map>]
-        $sectionsPolicy = is_array($policiesDoc['items'] ?? null) ? $policiesDoc['items'] : [];
+        // ✅ policies 可能有多种形态：
+        // A) { items: { traits:{...}, career:{...} } }
+        // B) { items: { cards: { traits:{...} } } }   // 常见：按 target 分组
+        // C) { sections: { traits:{...} } }          // 兼容旧/未来扩展
+        $rawItems = is_array($policiesDoc['items'] ?? null) ? $policiesDoc['items'] : [];
 
-        // policies 文件里如果你还想放 defaults，这里也兼容（即使 ContentStore 未来扩展）
+        if (is_array($rawItems['cards'] ?? null)) {
+            // 形态 B：items.cards 是真正的 section map
+            $sectionsPolicy = $rawItems['cards'];
+        } elseif (is_array($policiesDoc['sections'] ?? null)) {
+            // 形态 C
+            $sectionsPolicy = $policiesDoc['sections'];
+        } else {
+            // 形态 A
+            $sectionsPolicy = $rawItems;
+        }
+
+        if (!is_array($sectionsPolicy)) $sectionsPolicy = [];
+
+        // policies 文件里如果你还想放 defaults，这里也兼容
         $defaults = is_array($policiesDoc['defaults'] ?? null) ? $policiesDoc['defaults'] : [];
 
         // ✅ explain 开关（建议仅本地/验收开）
@@ -144,14 +160,35 @@ class SectionAssembler
         array $defaults
     ): array {
         $policy = $sectionsPolicy[$sectionKey] ?? null;
+
+        // ✅ 即便没找到 policy，也不要 silent no-op（否则 meta 会空，composer 会造假 meta）
+        // 用 defaults 做“可诊断兜底”，并在 meta 里标记 policy_missing
+        $policyMissing = false;
         if (!is_array($policy)) {
-            // no policy for this section => no-op
-            return [$sec, null];
+            $policyMissing = true;
+            $policy = [];
         }
 
-        $target = (int)($policy['target_cards'] ?? 0);
-        $min = (int)($policy['min_cards'] ?? 0);
-        $max = (int)($policy['max_cards'] ?? 0);
+        // ✅ 兼容 key：min/min_cards, target/target_cards, max/max_cards
+        $target = (int)($policy['target_cards'] ?? $policy['target'] ?? 0);
+        $min    = (int)($policy['min_cards'] ?? $policy['min'] ?? 0);
+        $max    = (int)($policy['max_cards'] ?? $policy['max'] ?? 0);
+
+        $allowFallback = $policy['allow_fallback'] ?? true;
+        $allowFallback = is_bool($allowFallback) ? $allowFallback : (bool)$allowFallback;
+
+        // 防御性修正
+        if ($min < 0) $min = 0;
+        if ($target < 0) $target = 0;
+        if ($max < 0) $max = 0;
+
+        // cap by max
+        if ($max > 0 && $target > 0) $target = min($target, $max);
+        if ($max > 0 && $min > 0)    $min    = min($min, $max);
+
+        // ✅ want：补齐目标 = max(min, target)，并且不超过 max（若 max>0）
+        $want = max($min, $target);
+        if ($max > 0) $want = min($want, $max);
 
         $allowFallback = $policy['allow_fallback'] ?? true;
         $allowFallback = is_bool($allowFallback) ? $allowFallback : (bool)$allowFallback;
@@ -162,32 +199,43 @@ class SectionAssembler
         $cards = $sec['cards'] ?? [];
         if (!is_array($cards)) $cards = [];
 
-        $beforeN = count($cards);
+                $beforeN = count($cards);
 
-        // 1) cap max
+        // 1) cap max（先硬切 max，保证不会溢出）
         $trimmedToMax = false;
         if ($max > 0 && count($cards) > $max) {
             $cards = array_slice($cards, 0, $max);
             $trimmedToMax = true;
         }
 
-        // 2) pick target (stable output)
-        $trimmedToTarget = false;
-        if ($target > 0 && count($cards) > $target) {
-            $cards = array_slice($cards, 0, $target);
-            $trimmedToTarget = true;
+        // 2) pick want（稳定输出：超过 want 就截断到 want）
+        // ✅ 注意：这里不再只看 target，而是看 want=max(min,target)
+        $trimmedToWant = false;
+        if ($want > 0 && count($cards) > $want) {
+            $cards = array_slice($cards, 0, $want);
+            $trimmedToWant = true;
         }
 
         $afterTrimN = count($cards);
 
-        // 3) fallback fill to min
+        // 3) fallback fill to want（而不是 min）
         $added = [];
         $addedIds = [];
         $fallbackUsed = false;
+        $shortAfterFill = 0;
 
-        if ($min > 0 && $afterTrimN < $min && $allowFallback) {
+        if ($want > 0 && $afterTrimN < $want && $allowFallback) {
             // ✅ 这里必须走 ContentStore loader（验收点 4）
-            $fallbackPool = $store->loadFallbackCards($sectionKey);
+            $fallbackPoolRaw = $store->loadFallbackCards($sectionKey);
+
+            // ✅ 兼容：fallbackPool 可能是 list，也可能是 doc（含 items）
+            if (is_array($fallbackPoolRaw) && array_key_exists('items', $fallbackPoolRaw) && is_array($fallbackPoolRaw['items'])) {
+                $fallbackPool = $fallbackPoolRaw['items'];
+            } elseif (is_array($fallbackPoolRaw)) {
+                $fallbackPool = $fallbackPoolRaw;
+            } else {
+                $fallbackPool = [];
+            }
 
             // dedupe
             $dedupeKey = (string)($defaults['dedupe_by'] ?? 'id');
@@ -198,7 +246,6 @@ class SectionAssembler
 
                 $id = $item[$dedupeKey] ?? null;
 
-                // If has id, dedupe by id
                 if (is_string($id) && $id !== '') {
                     if (isset($existingIds[$id])) continue;
                     $existingIds[$id] = true;
@@ -207,16 +254,16 @@ class SectionAssembler
 
                 $added[] = $item;
 
-                if (($afterTrimN + count($added)) >= $min) {
+                if (($afterTrimN + count($added)) >= $want) {
                     break;
                 }
             }
 
             // optional repeat (default false)
             $allowRepeat = (bool)($defaults['allow_repeat_fallback'] ?? false);
-            if ($allowRepeat && ($afterTrimN + count($added)) < $min && count($fallbackPool) > 0) {
+            if ($allowRepeat && ($afterTrimN + count($added)) < $want && count($fallbackPool) > 0) {
                 $idx = 0;
-                while (($afterTrimN + count($added)) < $min && $idx < 2000) {
+                while (($afterTrimN + count($added)) < $want && $idx < 2000) {
                     $item = $fallbackPool[$idx % count($fallbackPool)];
                     if (is_array($item)) $added[] = $item;
                     $idx++;
@@ -231,13 +278,22 @@ class SectionAssembler
                 } else {
                     $cards = array_merge($cards, $added);
                 }
-            } else {
-                // 这条 log 仅辅助排查：缺卡但 fallbackPool 不够/为空
-                Log::warning('[SectionAssembler] fallback_pool_empty_or_insufficient', [
+            }
+
+            // 仍不足：记录短缺（不要静默）
+            if (count($cards) < $want) {
+                $shortAfterFill = $want - count($cards);
+                Log::warning('[SectionAssembler] still_short_after_fallback_fill', [
                     'section' => $sectionKey,
-                    'need_min' => $min,
+                    'want' => $want,
+                    'min' => $min,
+                    'target' => $target,
+                    'max' => $max,
                     'after_trim' => $afterTrimN,
+                    'final' => count($cards),
+                    'short' => $shortAfterFill,
                     'pool_count' => is_array($fallbackPool) ? count($fallbackPool) : -1,
+                    'allow_repeat_fallback' => (bool)($defaults['allow_repeat_fallback'] ?? false),
                 ]);
             }
         }
@@ -250,11 +306,15 @@ class SectionAssembler
 
         $sec['cards'] = $cards;
 
-        $secExplain = [
+                $secExplain = [
+            'ok' => !$policyMissing,
+            'policy_missing' => $policyMissing,
+
             'policy' => [
                 'target_cards'   => $target,
                 'min_cards'      => $min,
                 'max_cards'      => $max,
+                'want_cards'     => $want, // ✅ NEW：最终补齐目标
                 'allow_fallback' => $allowFallback,
                 'fallback_file'  => $policy['fallback_file'] ?? "report_cards_fallback_{$sectionKey}.json",
             ],
@@ -263,10 +323,11 @@ class SectionAssembler
                 'after_trim'     => $afterTrimN,
                 'fallback_added' => count($added),
                 'final'          => count($cards),
+                'short_after_fill' => $shortAfterFill, // ✅ NEW：仍短缺多少
             ],
             'actions' => [
                 'trimmed_to_max'    => $trimmedToMax,
-                'trimmed_to_target' => $trimmedToTarget,
+                'trimmed_to_want'   => $trimmedToWant, // ✅ NEW
                 'fallback_allowed'  => $allowFallback,
                 'fallback_used'     => $fallbackUsed,
             ],

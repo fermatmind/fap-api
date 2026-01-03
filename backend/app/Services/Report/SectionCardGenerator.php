@@ -17,6 +17,7 @@ final class SectionCardGenerator
      * @param array $userTags TagBuilder 输出
      * @param array $axisInfo 建议传 report.scores（含 delta/side/pct）；可选 axisInfo['attempt_id'] 用于稳定打散
      * @param string|null $legacyContentPackageDir 仅用于日志/兜底信息（不会读取旧路径）
+     * @param int|null $wantN ✅ NEW：外部按 policy 算出来的“希望生成数量”（通常 = max(min_cards,target)）
      * @return array[] cards
      */
     public function generateFromPackChain(
@@ -24,7 +25,8 @@ final class SectionCardGenerator
         array $chain,
         array $userTags,
         array $axisInfo = [],
-        ?string $legacyContentPackageDir = null
+        ?string $legacyContentPackageDir = null,
+        ?int $wantN = null
     ): array {
         $store = new ContentStore($chain);
 
@@ -38,33 +40,38 @@ final class SectionCardGenerator
             'file'       => "report_cards_{$section}.json",
             'items'      => count($items),
             'rules'      => $rules,
+            'wantN'      => $wantN,
             'legacy_dir' => $legacyContentPackageDir,
         ]);
 
         return $this->generateFromItems(
-    $section,
-    $items,
-    $userTags,
-    $axisInfo,
-    $legacyContentPackageDir,
-    $rules,
-    $selectRules
-);
+            $section,
+            $items,
+            $userTags,
+            $axisInfo,
+            $legacyContentPackageDir,
+            $rules,
+            $selectRules,
+            $wantN
+        );
     }
 
     /**
      * ✅ 从 “已标准化的 items(+rules)” 生成 cards
      * 关键变化：选卡逻辑全部迁移到 RuleEngine::selectConstrained()
+     *
+     * @param int|null $wantN ✅ NEW：外部传入的“希望生成数量”，会覆盖本次 target/min 的下限
      */
     private function generateFromItems(
-    string $section,
-    array $items,
-    array $userTags,
-    array $axisInfo = [],
-    ?string $legacyContentPackageDir = null,
-    array $rules = [],
-    array $selectRules = []
-): array {
+        string $section,
+        array $items,
+        array $userTags,
+        array $axisInfo = [],
+        ?string $legacyContentPackageDir = null,
+        array $rules = [],
+        array $selectRules = [],
+        ?int $wantN = null
+    ): array {
         // ==========
         // rules：强依赖 store 的标准输出
         // ==========
@@ -81,7 +88,42 @@ final class SectionCardGenerator
         $targetCards = (int)$targetCardsVal;
         $maxCards    = (int)$maxCardsVal;
 
-        // assets 不存在：直接返回兜底
+        // ==========
+        // ✅ NEW：外部 wantN 覆盖本次配额（通常来自 report_section_policies）
+        // - 目的：让 composer 按 policy 算出来的数量在“生成阶段”就生效
+        // - 同时保证不超过 max_cards
+        // ==========
+        $hardCap = $maxCards; // 最终硬上限仍然尊重 pack 的 max_cards（除非你未来要允许 policy 提升 max）
+        $want = null;
+
+        if (is_int($wantN)) {
+            $want = $wantN;
+        } elseif (is_numeric($wantN)) {
+            $want = (int)$wantN;
+        }
+
+        if ($want !== null) {
+            if ($want < 0) $want = 0;
+
+            // 不允许超过 hardCap
+            $want = min($want, $hardCap);
+
+            // 抬高 min/target 的下限到 want
+            $minCards    = min($hardCap, max($minCards, $want));
+            $targetCards = min($hardCap, max($targetCards, $want));
+
+            // 同时让本次最终输出最多 = want（否则可能跑到 max_cards）
+            $maxCards = min($hardCap, $want);
+
+            Log::info('[CARDS] quota_overridden_by_policy', [
+                'section' => $section,
+                'wantN'   => $want,
+                'quota'   => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
+                'legacy_dir' => $legacyContentPackageDir,
+            ]);
+        }
+
+        // assets 不存在：直接返回兜底（至少补齐 minCards）
         if (empty($items)) {
             return $this->fallbackCards($section, $minCards);
         }
@@ -97,83 +139,70 @@ final class SectionCardGenerator
         // seed（用于 shuffle 稳定）
         $seed = $this->stableSeed($userSet, $axisInfo);
 
-        // RuleEngine
-/** @var RuleEngine $re */
-$re = app(RuleEngine::class);
-$ctx = "cards:{$section}";
+        /** @var RuleEngine $re */
+        $re = app(RuleEngine::class);
+        $ctx = "cards:{$section}";
 
-// explain 开关：
-// - debugRE：控制日志（local/dev 才建议开）
-// - captureExplain：控制“把 _explain 收集进 reportPayload”（可在 production 开，但建议按需开）
-$debugRE = app()->environment('local', 'development') && (
-    (bool) env('FAP_RE_DEBUG', false) ||
-    (bool) env('RE_EXPLAIN', false)   ||       // 开 explain 日志就等同 debug
-    (bool) env('RE_CTX_TAGS', false)          // 你要看 ctx tags 时也应该算 debug
-);
-$captureExplain = (bool)($axisInfo['capture_explain'] ?? $axisInfo['_capture_explain'] ?? false);
+        // explain 开关
+        $debugRE = app()->environment('local', 'development') && (
+            (bool) env('FAP_RE_DEBUG', false) ||
+            (bool) env('RE_EXPLAIN', false)   ||
+            (bool) env('RE_CTX_TAGS', false)
+        );
+        $captureExplain = (bool)($axisInfo['capture_explain'] ?? $axisInfo['_capture_explain'] ?? false);
 
-// explain 收集器：ReportComposer 可以塞到 $scores(axisInfo) 里下传
-$explainCollector = null;
-if (isset($axisInfo['explain_collector']) && is_callable($axisInfo['explain_collector'])) {
-    $explainCollector = $axisInfo['explain_collector'];
-} elseif (isset($axisInfo['_explain_collector']) && is_callable($axisInfo['_explain_collector'])) {
-    $explainCollector = $axisInfo['_explain_collector'];
-}
+        // explain 收集器：ReportComposer 可以塞到 $scores(axisInfo) 里下传
+        $explainCollector = null;
+        if (isset($axisInfo['explain_collector']) && is_callable($axisInfo['explain_collector'])) {
+            $explainCollector = $axisInfo['explain_collector'];
+        } elseif (isset($axisInfo['_explain_collector']) && is_callable($axisInfo['_explain_collector'])) {
+            $explainCollector = $axisInfo['_explain_collector'];
+        }
 
         // ========== 2.1 先按 rules 过滤（不截断，拿全量 kept）==========
+        [$kept, $evals1] = $re->selectTargeted($items, $userSet, [
+            'target'    => 'cards',
+            'rules'     => $selectRules,
 
-// 这里的 $rules 是 cards 的“配额规则对象”（min_cards/target_cards/...），不是 rule list
-// rule list 需要你从 doc 里拿一个数组字段（例如 doc['rules_items'] / doc['select_rules'] / doc['filters'] 等）
-// 你现在的 doc 结构里没有展示这个字段，所以这里先安全兜底为空数组（等你把规则列表加进 doc 再接上）
+            'ctx'       => $ctx,
+            'section'   => $section,
+            'seed'      => $seed,
 
-[$kept, $evals1] = $re->selectTargeted($items, $userSet, [
-    'target'    => 'cards',
-    'rules'     => $selectRules,
+            // 不截断
+            'max_items' => is_array($items) ? count($items) : 0,
 
-    'ctx'       => $ctx,
-    'section'   => $section,
-    'seed'      => $seed,
+            'rejected_samples' => 6,
+            'debug'            => $debugRE,
+            'capture_explain'  => $captureExplain,
+            'explain_collector'=> $explainCollector,
 
-    // 关键：不截断（先拿全量 kept）
-    'max_items' => is_array($items) ? count($items) : 0,
+            'global_rules' => [],
+        ]);
 
-    // explain/采样
-    'rejected_samples' => 6,
-    'debug'            => $debugRE,
-    'capture_explain'  => $captureExplain,
-    'explain_collector'=> $explainCollector,
+        // ========== 2.2 再做 axis/non-axis/fallback 配额编排（这里才截断）==========
+        [$selectedItems, $evals2] = $re->selectConstrained($kept, $userSet, [
+            'ctx'      => $ctx,
+            'section'  => $section,
+            'seed'     => $seed,
 
-    // 预留
-    'global_rules' => [],
-]);
+            'debug'            => $debugRE,
+            'capture_explain'  => $captureExplain,
+            'explain_collector'=> $explainCollector,
+            'rejected_samples' => 6,
 
-// ========== 2.2 再做你已有的 axis/non-axis/fallback 配额编排（这里才截断）==========
+            // 配额规则（已被 wantN 覆盖过）
+            'min_cards'     => $minCards,
+            'target_cards'  => $targetCards,
+            'max_cards'     => $maxCards,
+            'fallback_tags' => $fallbackTags,
 
-[$selectedItems, $evals2] = $re->selectConstrained($kept, $userSet, [
-    'ctx'      => $ctx,
-    'section'  => $section,
-    'seed'     => $seed,
+            // axis match 需要
+            'axis_info'    => $axisInfo,
 
-    // explain/采样
-    'debug'            => $debugRE,
-    'capture_explain'  => $captureExplain,
-    'explain_collector'=> $explainCollector,
-    'rejected_samples' => 6,
+            'global_rules' => [],
+        ]);
 
-    // 配额规则
-    'min_cards'     => $minCards,
-    'target_cards'  => $targetCards,
-    'max_cards'     => $maxCards,
-    'fallback_tags' => $fallbackTags,
-
-    // axis match 需要
-    'axis_info'    => $axisInfo,
-
-    // 预留
-    'global_rules' => [],
-]);
-
-$evals = array_merge($evals1, $evals2);
+        $evals = array_merge($evals1, $evals2);
 
         // 如果引擎一个都没选出来，直接兜底
         if (empty($selectedItems)) {
@@ -182,6 +211,7 @@ $evals = array_merge($evals1, $evals2);
             Log::info('[CARDS] selected', [
                 'section'    => $section,
                 'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
+                'quota'      => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
                 'legacy_dir' => $legacyContentPackageDir,
             ]);
 
@@ -207,17 +237,19 @@ $evals = array_merge($evals1, $evals2);
 
         $out = array_values(array_filter($out, fn($x) => is_array($x) && (string)($x['id'] ?? '') !== ''));
 
-        // 仍不足：补齐到 minCards（保持你原来的 fallbackCards 行为）
+        // 仍不足：补齐到 minCards
         if (count($out) < $minCards) {
             $out = array_merge($out, $this->fallbackCards($section, $minCards - count($out)));
         }
 
-        // 最终硬切 max_cards
+        // ✅ 最终硬切 max_cards（max_cards 已在 wantN 时被限制为 wantN）
         $out = array_slice(array_values($out), 0, $maxCards);
 
         Log::info('[CARDS] selected', [
             'section'    => $section,
             'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
+            'count'      => count($out),
+            'quota'      => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
             'legacy_dir' => $legacyContentPackageDir,
         ]);
 
@@ -226,13 +258,16 @@ $evals = array_merge($evals1, $evals2);
 
     /**
      * ✅ 从 store 直接生成（保留）
+     *
+     * @param int|null $wantN ✅ NEW：外部按 policy 算出来的“希望生成数量”
      */
     public function generateFromStore(
         string $section,
         ContentStore $store,
         array $userTags,
         array $axisInfo,
-        ?string $legacyContentPackageDir = null
+        ?string $legacyContentPackageDir = null,
+        ?int $wantN = null
     ): array {
         $doc = $store->loadCardsDoc($section);
 
@@ -241,14 +276,15 @@ $evals = array_merge($evals1, $evals2);
         $selectRules = $store->loadSelectRules();
 
         return $this->generateFromItems(
-    $section,
-    $items,
-    $userTags,
-    $axisInfo,
-    $legacyContentPackageDir,
-    $rules,
-    $selectRules
-);
+            $section,
+            $items,
+            $userTags,
+            $axisInfo,
+            $legacyContentPackageDir,
+            $rules,
+            $selectRules,
+            $wantN
+        );
     }
 
     /**

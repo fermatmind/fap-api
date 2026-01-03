@@ -304,28 +304,103 @@ if (!is_array($borderlineNote['items'] ?? null)) {
         );
 
         // =========================
-        // 9) Build Sections Cards
-        // =========================
-        // 给 cards 的 axisInfo 塞 explain 控制/collector（不影响 EI/SN/... 的结构）
+// 9) Build Sections Cards（按 policy 决定要生成多少张）
+// =========================
+
+// 9.0) 读取 report_section_policies.json（从 pack chain）
+$sectionPoliciesDoc = $this->loadSectionPoliciesDocFromPackChain($chain);
+
+// 9.1) 根据 policy 计算该 section 的目标 cards 数（建议优先 target，至少满足 min，不超过 max）
+$wantCards = function (string $secKey) use ($sectionPoliciesDoc): int {
+    $defaults = [
+        'min_cards'       => 4,
+        'target'          => 5,
+        'max'             => 7,
+        'allow_fallback'  => true,
+    ];
+
+    $p = $this->pickSectionPolicy($sectionPoliciesDoc, $secKey, $defaults);
+
+    $min    = (int)($p['min_cards'] ?? $p['min'] ?? $defaults['min_cards']);
+    $target = (int)($p['target'] ?? $p['target_cards'] ?? $defaults['target']);
+    $max    = (int)($p['max'] ?? $p['max_cards'] ?? $defaults['max']);
+
+    // 防御性修正
+    if ($min < 0) $min = 0;
+    if ($target < 0) $target = 0;
+    if ($max <= 0) $max = $defaults['max'];
+    if ($max < $min) $max = $min;
+
+    // wantN：生成阶段就尽量按 target 生成，但至少满足 min，且不超过 max
+    $want = max($min, min($target, $max));
+    return $want;
+};
+
+// 9.2) 给 cards 的 axisInfo 塞 explain 控制/collector（不影响 EI/SN/... 的结构）
 $axisInfoForCards = $scores;
 $axisInfoForCards['attempt_id'] = $attemptId;
 $axisInfoForCards['capture_explain'] = (bool)$wantExplainPayload;
 $axisInfoForCards['explain_collector'] = $explainCollector; // 可能为 null
 
+// 9.3) 生成 sections（把 wantN 传给 generator）
 $sections = [
     'traits' => [
-        'cards' => $this->cardGen->generateFromStore('traits', $store, $tags, $axisInfoForCards, $contentPackageDir),
+        'cards' => $this->cardGen->generateFromStore(
+            'traits',
+            $store,
+            $tags,
+            $axisInfoForCards,
+            $contentPackageDir,
+            $wantCards('traits')
+        ),
     ],
     'career' => [
-        'cards' => $this->cardGen->generateFromStore('career', $store, $tags, $axisInfoForCards, $contentPackageDir),
+        'cards' => $this->cardGen->generateFromStore(
+            'career',
+            $store,
+            $tags,
+            $axisInfoForCards,
+            $contentPackageDir,
+            $wantCards('career')
+        ),
     ],
     'growth' => [
-        'cards' => $this->cardGen->generateFromStore('growth', $store, $tags, $axisInfoForCards, $contentPackageDir),
+        'cards' => $this->cardGen->generateFromStore(
+            'growth',
+            $store,
+            $tags,
+            $axisInfoForCards,
+            $contentPackageDir,
+            $wantCards('growth')
+        ),
     ],
     'relationships' => [
-        'cards' => $this->cardGen->generateFromStore('relationships', $store, $tags, $axisInfoForCards, $contentPackageDir),
+        'cards' => $this->cardGen->generateFromStore(
+            'relationships',
+            $store,
+            $tags,
+            $axisInfoForCards,
+            $contentPackageDir,
+            $wantCards('relationships')
+        ),
     ],
 ];
+
+// （可选但强烈建议）打个日志，确认 wantN 与实际 cards 数
+\Illuminate\Support\Facades\Log::info('[CARDS] generated_by_policy', [
+    'want' => [
+        'traits' => $wantCards('traits'),
+        'career' => $wantCards('career'),
+        'growth' => $wantCards('growth'),
+        'relationships' => $wantCards('relationships'),
+    ],
+    'got' => [
+        'traits' => is_array($sections['traits']['cards'] ?? null) ? count($sections['traits']['cards']) : null,
+        'career' => is_array($sections['career']['cards'] ?? null) ? count($sections['career']['cards']) : null,
+        'growth' => is_array($sections['growth']['cards'] ?? null) ? count($sections['growth']['cards']) : null,
+        'relationships' => is_array($sections['relationships']['cards'] ?? null) ? count($sections['relationships']['cards']) : null,
+    ],
+]);
 
         // =========================
         // 10) recommended_reads（放最后）
@@ -489,64 +564,84 @@ if ($force !== '') {
 
 // =========================
 // 12.5) ✅ SectionAssembler（RuleEngine 跑完后补齐 cards）
-// - 依据 report_section_policies.json 的 min_cards/target/max
-// - allow_fallback=false 时不补齐
-// - 统计写到 report['_meta']['sections'][sec]['assembler']
+// - 依据 report_section_policies.json 的 min/target/max
+// - 统计写到 report['_meta']['sections'][sec]['assembler']（Assembler 若有输出）
 // - 可选：capture_explain=true 时写到 report['_explain']['assembler']['cards']
 // =========================
+
+// ✅ NEW: 用临时变量承接“全局 assembler 状态”，避免此时访问未定义的 $reportPayload
+$assemblerGlobalMeta = null;
 
 // 用一个临时 report 承载 sections + meta（最终再合回 reportPayload）
 $tmpReport = [
     'sections' => $sections,
 ];
 
-// ✅ 关键：传 ContentStore，让 Assembler 真正走 loader（验收点 4）
+// ✅ 关键：传 ContentStore，让 Assembler 真正走 loader
 $tmpReport = app(\App\Services\Report\SectionAssembler::class)
-    ->apply($tmpReport, $store, ['capture_explain' => (bool)$wantExplainPayload]);
+    ->apply($tmpReport, $store, [
+        // explain 只是可选；meta 不能依赖这个开关
+        'capture_explain' => (bool)$wantExplainPayload,
+    ]);
 
-// 回写 sections
+// 回写 sections（Assembler 可能补齐了 cards）
 $sections = (is_array($tmpReport['sections'] ?? null)) ? $tmpReport['sections'] : $sections;
 
-// 把 assembler meta 取出来（用于最终 reportPayload['_meta'] & explainPayload）
-$assemblerMetaSections = (is_array($tmpReport['_meta']['sections'] ?? null))
+// --------- 12.5.a 取出 assembler meta（如果它有写）---------
+$rawMetaSections = (is_array($tmpReport['_meta']['sections'] ?? null))
     ? $tmpReport['_meta']['sections']
     : [];
 
-// explain：把每个 section 的 assembler meta 写进 explainPayload（可开关）
+// DEBUG：确认 assembler 是否真的写了 meta
+Log::info('[ASM] after_apply', [
+    'tmp_meta_keys' => is_array($tmpReport['_meta'] ?? null) ? array_keys($tmpReport['_meta']) : null,
+    'sections_meta_type' => gettype($tmpReport['_meta']['sections'] ?? null),
+    'sections_meta_count' => is_array($tmpReport['_meta']['sections'] ?? null) ? count($tmpReport['_meta']['sections']) : null,
+]);
+
+// --------- 12.5.b 规范化 meta 形状：list->map / map->map---------
+$assemblerMetaSections = $this->normalizeAssemblerMetaSections($rawMetaSections);
+
+// --------- 12.5.c 如果 assembler 没写 → 只做“诊断兜底 meta”，不要伪装成功---------
+if (empty($assemblerMetaSections)) {
+    $assemblerMetaSections = $this->buildFallbackAssemblerMetaSections(
+        $sections,
+        $chain,
+        $store,
+        $contentPackageDir
+    );
+
+    // ✅ 只写到临时变量：此时 $reportPayload 还没创建，不能引用它
+    $assemblerGlobalMeta = [
+        'ok' => false,
+        'reason' => 'assembler_did_not_emit_meta',
+        'meta_fallback_used' => true,
+    ];
+
+    Log::error('[ASM] meta_missing_diagnostic_fallback_used', [
+        'keys' => array_keys($assemblerMetaSections),
+    ]);
+} else {
+    // ✅ assembler 有写 meta：也给一个全局 ok，方便前端/验收侧读
+    $assemblerGlobalMeta = [
+        'ok' => true,
+        'meta_fallback_used' => false,
+    ];
+}
+
+// --------- 12.5.d explain：把每个 section 的 assembler meta 写进 explainPayload（可开关）---------
 if ($wantExplainPayload && is_array($explainPayload)) {
     foreach ($assemblerMetaSections as $secKey => $node) {
-        // node 形态：['assembler' => <secExplain>]
-        $explainPayload['assembler']['cards'][(string)$secKey] = is_array($node)
+        $secKey = (string)$secKey;
+        $explainPayload['assembler']['cards'][$secKey] = is_array($node)
             ? ($node['assembler'] ?? $node)
             : [];
     }
 }
 
-Log::info('[DBG] ovrExplain_shape', [
-    'ovr_keys' => is_array($ovrExplain) ? array_keys($ovrExplain) : null,
-    'ovr__explain_keys' => (is_array($ovrExplain) && is_array($ovrExplain['_explain'] ?? null))
-        ? array_keys($ovrExplain['_explain'])
-        : null,
-    'ovr_by_ctx_keys' => (is_array($ovrExplain) && is_array($ovrExplain['by_ctx'] ?? null))
-        ? array_keys($ovrExplain['by_ctx'])
-        : null,
-    'ovr_contexts_keys' => (is_array($ovrExplain) && is_array($ovrExplain['contexts'] ?? null))
-        ? array_keys($ovrExplain['contexts'])
-        : null,
-]);
-
-        Log::info('[HL] final_highlights', [
-            'pack_id' => $contentPackId,
-            'version' => $contentPackageVersion,
-            'count' => count($highlights),
-            'ids'   => array_slice(array_map(fn($x) => $x['id'] ?? null, $highlights), 0, 10),
-        ]);
-
-        Log::info('[HL] generated', [
-    'stage' => 'after_overrides_unified',
-    'count' => is_array($highlights) ? count($highlights) : -1,
-    'sample' => array_slice($highlights ?? [], 0, 2),
-]);
+// ✅ IMPORTANT：把这俩变量留着，后面“构造完 $reportPayload”后再合进去：
+// - $assemblerMetaSections  -> $reportPayload['_meta']['sections']
+// - $assemblerGlobalMeta   -> $reportPayload['_meta']['section_assembler']
 
         // =========================
         // 最终 report payload（schema 不变）
@@ -602,25 +697,67 @@ $realContentPackageDir = $this->packIdToDir($contentPackId);
 
             'warnings' => $warnings,
 
-    ];        
-    // ✅ 把 SectionAssembler 产出的 meta 合并进最终 reportPayload（用于 jq/接口验收）
-if (!empty($assemblerMetaSections)) {
-    $reportPayload['_meta'] = $reportPayload['_meta'] ?? [];
-    $reportPayload['_meta']['sections'] = $reportPayload['_meta']['sections'] ?? [];
+    ]; // $reportPayload end
 
-    foreach ($assemblerMetaSections as $secKey => $node) {
-        $secKey = (string)$secKey;
-        $reportPayload['_meta']['sections'][$secKey] = $reportPayload['_meta']['sections'][$secKey] ?? [];
+// =====================================================
+// ✅ _meta：保证 validate-report 需要的 sections.assembler 存在
+// 同时保留 highlights 的 base/finalize/explain meta
+// =====================================================
 
-        if (is_array($node)) {
-            // node 通常是 ['assembler' => <secExplain>]
-            $reportPayload['_meta']['sections'][$secKey] = array_merge(
-                $reportPayload['_meta']['sections'][$secKey],
-                $node
-            );
-        }
-    }
+// 0) _meta 必须是 array（防止被意外写成 null/string）
+$reportPayload['_meta'] = is_array($reportPayload['_meta'] ?? null) ? $reportPayload['_meta'] : [];
+if (is_array($assemblerGlobalMeta)) {
+    $reportPayload['_meta']['section_assembler'] = $assemblerGlobalMeta;
 }
+
+// -----------------------------------------------------
+// 1) highlights meta（长期可保留）
+// -----------------------------------------------------
+$reportPayload['_meta']['highlights'] = is_array($reportPayload['_meta']['highlights'] ?? null)
+    ? $reportPayload['_meta']['highlights']
+    : [];
+
+$reportPayload['_meta']['highlights']['base_meta'] = $hlMetaBase ?? [];
+$reportPayload['_meta']['highlights']['finalize_meta'] = $hlMetaFinal ?? [];
+
+// explain：调试开关打开时写真实 explain；否则保持稳定字段（null 占位）
+if ($wantExplainPayload && is_array($explainPayload)) {
+    $reportPayload['_meta']['highlights']['explain'] = $explainPayload['highlights'] ?? null;
+} else {
+    $reportPayload['_meta']['highlights']['explain'] = $reportPayload['_meta']['highlights']['explain'] ?? null;
+}
+
+// -----------------------------------------------------
+// 2) sections assembler meta（给 fap:validate-report 用）
+// 目标形态：_meta.sections.<sec>.assembler.policy.min_cards + counts.final
+// -----------------------------------------------------
+if (!empty($assemblerMetaSections) && is_array($assemblerMetaSections)) {
+    // ✅ 深合并，避免覆盖掉已有的 _meta 其它字段
+    $reportPayload['_meta']['sections'] = array_replace_recursive(
+        is_array($reportPayload['_meta']['sections'] ?? null) ? $reportPayload['_meta']['sections'] : [],
+        $assemblerMetaSections
+    );
+} else {
+    // 兜底：至少让 _meta.sections 是 array（字段稳定）
+    $reportPayload['_meta']['sections'] = is_array($reportPayload['_meta']['sections'] ?? null)
+        ? $reportPayload['_meta']['sections']
+        : [];
+}
+
+Log::info('[ASM] final_meta_sections', [
+    'type' => gettype($reportPayload['_meta']['sections'] ?? null),
+    'keys' => is_array($reportPayload['_meta']['sections'] ?? null) ? array_keys($reportPayload['_meta']['sections']) : null,
+    'traits_policy' => data_get($reportPayload, '_meta.sections.traits.assembler.policy'),
+    'traits_counts' => data_get($reportPayload, '_meta.sections.traits.assembler.counts'),
+]);
+
+// （可选但强烈建议）打个日志，下一步定位 assemblerMetaSections 是否为空
+Log::info('[ASM] meta_sections_merged', [
+    'sections_keys' => array_keys($reportPayload['_meta']['sections'] ?? []),
+    'traits_node_keys' => is_array($reportPayload['_meta']['sections']['traits'] ?? null)
+        ? array_keys($reportPayload['_meta']['sections']['traits'])
+        : null,
+]);
 
 // =========================
 // ✅ NEW: _meta.highlights（轻量可长期保存）
@@ -922,6 +1059,195 @@ private function loadReportRulesDocFromPackChain(array $chain): ?array
         }
         return array_values(array_unique($out));
     }
+
+/**
+ * Normalize SectionAssembler output:
+ * - validator expects: _meta.sections.<sec> = ['assembler' => ...]
+ * - but assembler might output:
+ *   A) map-shape: ['traits'=>['assembler'=>...], ...]
+ *   B) list-shape: [ ['section'=>'traits','assembler'=>...], ... ]
+ *   C) empty list: []
+ */
+private function normalizeAssemblerMetaSections($sectionsMeta): array
+{
+    if (!is_array($sectionsMeta) || $sectionsMeta === []) return [];
+
+    $isList = array_keys($sectionsMeta) === range(0, count($sectionsMeta) - 1);
+
+    // map-shape
+    if (!$isList) {
+        $out = [];
+        foreach ($sectionsMeta as $k => $v) {
+            if (!is_string($k) || $k === '') continue;
+            if (is_array($v)) $out[$k] = $v;
+        }
+        return $out;
+    }
+
+    // list-shape -> map-shape
+    $out = [];
+    foreach ($sectionsMeta as $node) {
+        if (!is_array($node)) continue;
+
+        $sec =
+            (string)($node['section'] ?? '') ?:
+            (string)($node['section_key'] ?? '') ?:
+            (string)($node['key'] ?? '') ?:
+            (string)($node['name'] ?? '');
+
+        $sec = trim($sec);
+        if ($sec === '') continue;
+
+        if (isset($node['assembler']) && is_array($node['assembler'])) {
+            $out[$sec] = $node;
+        } else {
+            $out[$sec] = ['assembler' => $node];
+        }
+    }
+
+    return $out;
+}
+
+/**
+ * When SectionAssembler didn't emit _meta.sections (your current situation),
+ * composer builds minimal assembler meta so validate-report can pass.
+ *
+ * Output shape:
+ *   [
+ *     'traits' => ['assembler' => ['policy'=>..., 'counts'=>...]],
+ *     ...
+ *   ]
+ */
+private function buildFallbackAssemblerMetaSections(
+    array $sections,
+    array $chain,
+    \App\Services\Content\ContentStore $store,
+    string $legacyContentPackageDir
+): array {
+    $policyDoc = $this->loadSectionPoliciesDocFromPackChain($chain);
+
+    $defaults = [
+        'min_cards' => 4,
+        'target'    => 5,
+        'max'       => 7,
+        'allow_fallback' => true,
+    ];
+
+    $out = [];
+
+    foreach ($sections as $secKey => $secNode) {
+        $secKey = (string)$secKey;
+        $cards = is_array($secNode['cards'] ?? null) ? $secNode['cards'] : [];
+        $final = count($cards);
+
+        $policy = $this->pickSectionPolicy($policyDoc, $secKey, $defaults);
+
+        // ✅ 同时给出 min 和 min_cards，避免 validator 取错 key
+        if (!isset($policy['min']) && isset($policy['min_cards'])) {
+            $policy['min'] = $policy['min_cards'];
+        }
+        if (!isset($policy['min_cards']) && isset($policy['min'])) {
+            $policy['min_cards'] = $policy['min'];
+        }
+
+                $want = max((int)($policy['min_cards'] ?? 0), (int)($policy['target'] ?? 0));
+        $max  = (int)($policy['max'] ?? 0);
+        if ($max > 0) $want = min($want, $max);
+
+        $out[$secKey] = [
+            'assembler' => [
+                // ✅ 关键：不要伪装成功
+                'ok' => false,
+                'reason' => 'composer_built_meta_fallback_because_assembler_meta_missing',
+                'meta_fallback' => true,
+
+                'policy' => array_merge($policy, [
+                    'want_cards' => $want,
+                ]),
+                'counts' => [
+                    'final' => $final,
+                    'final_count' => $final,
+                    'want' => $want,
+                    'shortfall' => max(0, $want - $final),
+                ],
+            ],
+        ];
+    }
+
+    return $out;
+}
+
+/**
+ * Try read report_section_policies.json from pack base dir.
+ * (We don't rely on ContentStore having a specific loader method.)
+ */
+private function loadSectionPoliciesDocFromPackChain(array $chain): ?array
+{
+    foreach ($chain as $p) {
+        if (!$p instanceof \App\Services\Content\ContentPack) continue;
+
+        $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'report_section_policies.json';
+        if (!is_file($abs)) continue;
+
+        $j = json_decode((string)file_get_contents($abs), true);
+        if (!is_array($j)) continue;
+
+        $j['__src'] = [
+            'pack_id' => $p->packId(),
+            'version' => $p->version(),
+            'file'    => 'report_section_policies.json',
+            'rel'     => 'report_section_policies.json',
+            'path'    => $abs,
+        ];
+        return $j;
+    }
+    return null;
+}
+
+/**
+ * Pick policy for a section from doc with tolerant schema.
+ * Accept common shapes:
+ * - {items:{traits:{...}}}
+ * - {policies:{traits:{...}}}
+ * - {sections:{traits:{...}}}
+ * - {traits:{...}}
+ */
+private function pickSectionPolicy(?array $doc, string $secKey, array $defaults): array
+{
+    if (!is_array($doc)) return $defaults;
+
+    $candidates = [
+        $doc['items'][$secKey]     ?? null,
+        $doc['policies'][$secKey]  ?? null,
+        $doc['sections'][$secKey]  ?? null,
+        $doc[$secKey]              ?? null,
+    ];
+
+    foreach ($candidates as $c) {
+        if (is_array($c)) {
+            // normalize common keys
+            $min = $c['min_cards'] ?? $c['min'] ?? null;
+            $target = $c['target'] ?? $c['target_cards'] ?? null;
+            $max = $c['max'] ?? $c['max_cards'] ?? null;
+
+            $out = $defaults;
+
+            if (is_numeric($min)) $out['min_cards'] = (int)$min;
+            if (is_numeric($target)) $out['target'] = (int)$target;
+            if (is_numeric($max)) $out['max'] = (int)$max;
+
+            if (array_key_exists('allow_fallback', $c)) {
+                $out['allow_fallback'] = (bool)$c['allow_fallback'];
+            }
+
+            // also provide alias min
+            $out['min'] = $out['min_cards'];
+            return $out;
+        }
+    }
+
+    return $defaults;
+}
 
     private function isListArray(array $a): bool
     {
