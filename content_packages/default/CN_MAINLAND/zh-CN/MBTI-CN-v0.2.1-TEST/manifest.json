@@ -29,7 +29,11 @@
     "type_profiles": "fap.type_profiles.v1",
     "cards": "fap.report.cards.v1",
     "fallback_cards": "fap.report.cards.fallback.v1",
+
     "highlights": "fap.report.highlights.v1",
+    "highlights_pools": "fap.report.highlights.pools.v1",
+    "highlights_rules": "fap.report.highlights.rules.v1",
+
     "reads": "fap.report.reads.v2",
     "borderline_templates": "fap.report.borderline_templates.v1",
     "borderline_notes": "fap.report.borderline_notes.v1",
@@ -63,7 +67,9 @@
     ],
     "highlights": [
       "report_highlights.json",
-      "report_highlights_templates.json"
+      "report_highlights_templates.json",
+      "report_highlights_pools.json",
+      "report_highlights_rules.json"
     ],
     "reads": [
       "report_recommended_reads.json"

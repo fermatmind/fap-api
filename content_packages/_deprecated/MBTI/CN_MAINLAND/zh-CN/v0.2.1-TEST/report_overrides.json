@@ -1,0 +1,22 @@
+{
+  "schema": "fap.report.overrides.v1",
+  "engine": "v1",
+  "rules": [
+    {
+      "id": "traits_add_card",
+      "target": "cards",
+      "priority": 50,
+      "match": {
+        "section": ["traits"]
+      },
+      "mode": "append",
+      "items": [
+        {
+          "id": "traits_extra_01",
+          "title": "你的小优势",
+          "text": "……"
+        }
+      ]
+    }
+  ]
+}

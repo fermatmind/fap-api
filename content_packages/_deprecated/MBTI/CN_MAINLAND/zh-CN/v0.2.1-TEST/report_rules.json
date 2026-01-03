@@ -3,6 +3,17 @@
   "engine": "rule_engine_v1",
   "rules": [
     {
+  "id": "highlights_drop_when_type_estj_a",
+  "target": "highlights",
+  "priority": 999999,
+  "mode": "filter",
+  "when": {
+    "require_any": ["type:ESTJ-A"],
+    "min_match": 1
+  },
+  "effect": { "action": "drop" }
+},
+    {
       "id": "cards_drop_forbid_type_estj",
       "target": "cards",
       "priority": 100,
@@ -25,19 +36,16 @@
       }
     },
     {
-      "id": "reads_keep_only_nt_or_nf",
-      "target": "reads",
-      "priority": 50,
-      "mode": "filter",
-      "min_match": 1,
-      "effect": {
-        "action": "keep"
-      },
-      "require_any": [
-        "role:NT",
-        "role:NF"
-      ]
-    },
+  "id": "reads_keep_only_nt_or_nf",
+  "target": "reads",
+  "priority": -99999,
+  "mode": "filter",
+  "effect": { "action": "keep" },
+  "when": {
+    "require_any": ["role:NT", "role:NF"],
+    "min_match": 1
+  }
+},
     {
       "id": "highlights_drop_if_borderline_jp",
       "target": "highlights",
