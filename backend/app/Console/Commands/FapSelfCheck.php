@@ -10,8 +10,8 @@ class FapSelfCheck extends Command
 {
     /**
      * Examples:
-     *  php artisan fap:self-check --pkg=MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST
-     *  php artisan fap:self-check --path=../content_packages/MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST/manifest.json
+     *  php artisan fap:self-check --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+     *  php artisan fap:self-check --path=../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json
      *  php artisan fap:self-check --pack_id=MBTI.cn-mainland.zh-CN.v0.2.1-TEST
      */
     protected $signature = 'fap:self-check
@@ -288,7 +288,7 @@ $runIfDeclared(
         }
 
         // default (keep your previous convention)
-        $defaultPkg = env('MBTI_CONTENT_PACKAGE', 'MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST');
+        $defaultPkg = env('MBTI_CONTENT_PACKAGE', 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST');
         return base_path("../content_packages/{$defaultPkg}/manifest.json");
     }
 
