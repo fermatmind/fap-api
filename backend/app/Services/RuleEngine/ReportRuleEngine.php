@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Log;
 
 class ReportRuleEngine
 {
+    /**
+     * 现有：用于 cards/reads 等 item list 的 keep/drop 规则
+     */
     public function apply(string $target, array $items, ?array $rulesDoc, array $ctx, string $explainCtx): array
     {
         $rules = $this->filterRulesByTarget($rulesDoc, $target);
@@ -20,7 +23,12 @@ class ReportRuleEngine
         usort($rules, fn($a,$b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
 
         $ctxTags = $ctx['tags'] ?? [];
-        if (!is_array($ctxTags)) $ctxTags = [];
+        if (is_array($ctxTags)) {
+            // 兼容 set/map
+            if (!$this->isListArray($ctxTags)) $ctxTags = array_keys($ctxTags);
+        } else {
+            $ctxTags = [];
+        }
         $ctxTags = array_values(array_filter($ctxTags, fn($x)=>is_string($x) && $x !== ''));
 
         $originIds = $this->idsOf($items);
@@ -175,6 +183,117 @@ class ReportRuleEngine
         return array_values($out);
     }
 
+    // ==========================================================
+    // ✅ 新增：highlights 选择规则入口（rules -> pick_ids + explain）
+    // ==========================================================
+    /**
+     * 输入：report_highlights_rules.json（或 ContentStore normalize 后的 doc）
+     *
+     * 输出：
+     * [
+     *   'selected' => [
+     *     'strength' => [ ['id'=>..., 'explain'=>..., 'rule'=>..., 'priority'=>...], ... ],
+     *     'blindspot' => [ ... ],
+     *     'action' => [ ... ],
+     *   ]
+     * ]
+     *
+     * 规则匹配：
+     * - 支持 match.type_code / match.type_codes
+     * - 支持 when.require_all / when.require_any / when.forbid / min_match
+     * - ✅ 兼容 rule.tags：若没有 when/require_*，则 tags 会被当作 require_all
+     */
+    public function runHighlightsRules(?array $rulesDoc, array $ctx, string $explainCtx = 'highlights_rules'): array
+    {
+        $rules = [];
+        if (is_array($rulesDoc)) {
+            $rules = $rulesDoc['rules'] ?? $rulesDoc;
+        }
+        if (!is_array($rules)) $rules = [];
+
+        $ctxTags = $this->normalizeCtxTags($ctx);
+
+        // priority desc
+        usort($rules, fn($a,$b) => (int)($b['priority'] ?? 0) <=> (int)($a['priority'] ?? 0));
+
+        $selected = [
+            'strength' => [],
+            'blindspot' => [],
+            'action' => [],
+        ];
+
+        $seen = [
+            'strength' => [],
+            'blindspot' => [],
+            'action' => [],
+        ];
+
+        // explain: 记录命中哪些规则（可用于验收）
+        $hitRules = [];
+
+        foreach ($rules as $idx => $r) {
+            if (!is_array($r)) continue;
+
+            $pool = is_string($r['pool'] ?? null) ? trim((string)$r['pool']) : '';
+            if (!in_array($pool, ['strength','blindspot','action'], true)) continue;
+
+            $rid = (string)($r['id'] ?? ('hl_rule_' . $idx));
+            $prio = is_numeric($r['priority'] ?? null) ? (int)$r['priority'] : 0;
+
+            // 兼容：tags -> require_all（如果没写 when/require_any/require_all/forbid）
+            $r = $this->normalizeHighlightRuleCompat($r);
+
+            // 1) match（type_code 等）
+            if (!$this->ruleMatchesContext($r, $ctx)) continue;
+
+            // 2) tags 条件（when / require_*）
+            if ($this->hasTagConditions($r)) {
+                if (!$this->tagConditionsMatch($r, $ctxTags)) continue;
+            }
+
+            $pick = $r['pick_ids'] ?? ($r['pick'] ?? null);
+            if (!is_array($pick)) $pick = [];
+            $pick = array_values(array_filter($pick, fn($x)=>is_string($x) && trim($x) !== ''));
+
+            if ($pick === []) continue;
+
+            $explain = $r['explain'] ?? null;
+            if (is_array($explain)) {
+                $explain = array_values(array_filter($explain, fn($x)=>is_string($x) && trim($x) !== ''));
+                $explain = $explain ?: null;
+            } elseif (!is_string($explain)) {
+                $explain = null;
+            }
+
+            $hitRules[] = [
+                'id'       => $rid,
+                'pool'     => $pool,
+                'priority' => $prio,
+                'pick_ids' => $pick,
+                'explain'  => $explain,
+            ];
+
+            foreach ($pick as $tid) {
+                if (isset($seen[$pool][$tid])) continue;
+                $seen[$pool][$tid] = true;
+
+                $selected[$pool][] = [
+                    'id'       => $tid,
+                    'explain'  => $explain,
+                    'rule'     => $rid,
+                    'priority' => $prio,
+                ];
+            }
+        }
+
+        // ✅ emit explain（走你已有 capture_explain 机制）
+        $this->emitHighlightsRulesExplain($explainCtx, $ctx, $ctxTags, $selected, $hitRules);
+
+        return [
+            'selected' => $selected,
+        ];
+    }
+
     private function emitExplain(string $target, string $ctxName, array $ctx, array $finalList, array $everIds, array $trace, array $originIds): void
     {
         $capture = (bool)($ctx['capture_explain'] ?? false);
@@ -182,7 +301,11 @@ class ReportRuleEngine
         if (!$capture || !is_callable($collector)) return;
 
         $ctxTags = $ctx['tags'] ?? [];
-        if (!is_array($ctxTags)) $ctxTags = [];
+        if (is_array($ctxTags)) {
+            if (!$this->isListArray($ctxTags)) $ctxTags = array_keys($ctxTags);
+        } else {
+            $ctxTags = [];
+        }
         $ctxTags = array_values(array_filter($ctxTags, fn($x)=>is_string($x) && $x !== ''));
 
         $finalIds = $this->idsOf($finalList);
@@ -212,6 +335,25 @@ class ReportRuleEngine
             'rejected_n'   => count($rejected),
             'selected'     => array_slice($selected, 0, (int)(env('RE_EXPLAIN_ITEMS_MAX', 60))),
             'rejected'     => array_slice($rejected, 0, (int)(env('RE_EXPLAIN_ITEMS_MAX', 60))),
+        ];
+
+        $collector($ctxName, $payload);
+    }
+
+    // ====== highlights explain（给验收） ======
+    private function emitHighlightsRulesExplain(string $ctxName, array $ctx, array $ctxTags, array $selected, array $hitRules): void
+    {
+        $capture = (bool)($ctx['capture_explain'] ?? false);
+        $collector = $ctx['explain_collector'] ?? null;
+        if (!$capture || !is_callable($collector)) return;
+
+        $payload = [
+            'target'       => 'highlights_rules',
+            'ctx'          => $ctxName,
+            'context_tags' => $ctxTags,
+            'matched_rules_n' => count($hitRules),
+            'matched_rules'   => array_slice($hitRules, 0, (int)(env('RE_EXPLAIN_ITEMS_MAX', 60))),
+            'selected'        => $selected,
         ];
 
         $collector($ctxName, $payload);
@@ -395,5 +537,46 @@ class ReportRuleEngine
         }
 
         return $detail;
+    }
+
+    // ===== internal helpers for highlights =====
+
+    private function normalizeCtxTags(array $ctx): array
+    {
+        $tags = $ctx['tags'] ?? [];
+        if (!is_array($tags)) return [];
+
+        // 兼容 set/map（TagBuilder 的 set）
+        if (!$this->isListArray($tags)) {
+            $tags = array_keys($tags);
+        }
+
+        return array_values(array_filter($tags, fn($x)=>is_string($x) && trim($x) !== ''));
+    }
+
+    private function normalizeHighlightRuleCompat(array $r): array
+    {
+        // 如果已经有 when/require_* 就不动
+        $hasWhen = isset($r['when']) && is_array($r['when']);
+        $hasTopCond = isset($r['require_all']) || isset($r['require_any']) || isset($r['forbid']);
+
+        if ($hasWhen || $hasTopCond) return $r;
+
+        // 兼容：tags -> require_all
+        $tags = $r['tags'] ?? null;
+        if (is_array($tags) && $tags !== []) {
+            $tags = array_values(array_filter($tags, fn($x)=>is_string($x) && trim($x) !== ''));
+            if ($tags !== []) {
+                $r['require_all'] = $tags;
+            }
+        }
+
+        return $r;
+    }
+
+    private function isListArray(array $a): bool
+    {
+        if ($a === []) return true;
+        return array_keys($a) === range(0, count($a) - 1);
     }
 }

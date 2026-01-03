@@ -10,8 +10,8 @@ class FapSelfCheck extends Command
 {
     /**
      * Examples:
-     *  php artisan fap:self-check --pkg=MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST
-     *  php artisan fap:self-check --path=../content_packages/MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST/manifest.json
+     *  php artisan fap:self-check --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+     *  php artisan fap:self-check --path=../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json
      *  php artisan fap:self-check --pack_id=MBTI.cn-mainland.zh-CN.v0.2.1-TEST
      */
     protected $signature = 'fap:self-check
@@ -156,6 +156,29 @@ if (is_array($fallbackCardFiles) && !empty($fallbackCardFiles)) {
             fn () => $this->checkHighlightsTemplates($this->pathOf($baseDir, 'report_highlights_templates.json'), $packId)
         );
 
+        // 3.5) report_highlights_pools.json  ✅ NEW
+$runIfDeclared(
+    'report_highlights_pools.json',
+    'report_highlights_pools.json',
+    fn () => $this->checkHighlightsPools(
+        $this->pathOf($baseDir, 'report_highlights_pools.json'),
+        $packId,
+        $this->expectedSchemaFor($manifest, 'highlights', 'report_highlights_pools.json')
+    )
+);
+
+// 3.6) report_highlights_rules.json  ✅ NEW（会校验引用的模板 id 必须存在 + policy + coverage）
+$runIfDeclared(
+    'report_highlights_rules.json',
+    'report_highlights_rules.json',
+    fn () => $this->checkHighlightsRules(
+        $this->pathOf($baseDir, 'report_highlights_rules.json'),
+        $baseDir,
+        $packId,
+        $this->expectedSchemaFor($manifest, 'highlights', 'report_highlights_rules.json')
+    )
+);
+
         // 4) report_highlights_overrides.json (legacy)
         $runIfDeclared(
             'report_highlights_overrides.json',
@@ -265,7 +288,7 @@ $runIfDeclared(
         }
 
         // default (keep your previous convention)
-        $defaultPkg = env('MBTI_CONTENT_PACKAGE', 'MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST');
+        $defaultPkg = env('MBTI_CONTENT_PACKAGE', 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST');
         return base_path("../content_packages/{$defaultPkg}/manifest.json");
     }
 
@@ -1542,6 +1565,362 @@ private function checkCards(
         return [true, ['OK (5 dims × 2 sides × 3 levels present & valid)']];
     }
 
+    // -------------------------
+// Highlights pools / rules  ✅ NEW
+// -------------------------
+
+private function checkHighlightsPools(string $path, string $packId, ?string $expectedSchema = null): array
+{
+    if (!is_file($path)) {
+        return [false, ["pack={$packId} file={$path} :: File not found"]];
+    }
+
+    $doc = $this->readJsonFile($path);
+    if (!is_array($doc)) {
+        return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+    }
+
+    if ($errs = $this->checkSchemaField($doc, $expectedSchema, $packId, $path, 'highlights_pools')) {
+        return [false, $errs];
+    }
+
+    $errors = [];
+    [$poolKeys, $countsByPool, $templateIds, $allIds] = $this->parseHighlightsPoolsDoc($doc, $packId, $path, $errors);
+
+    if (!empty($errors)) {
+        return [false, array_merge(["Highlights pools invalid: " . count($errors)], array_slice($errors, 0, 140))];
+    }
+
+    // ✅ 三池基本要求：strength + 另外两池都存在且非空（你可按产品收紧）
+    if (!in_array('strength', $poolKeys, true)) {
+        return [false, ["pack={$packId} file={$path} :: missing pool 'strength'"]];
+    }
+    if (count($poolKeys) < 3) {
+        return [false, ["pack={$packId} file={$path} :: pools must have at least 3 pools, got=" . count($poolKeys)]];
+    }
+
+    return [true, [
+        "OK (pools=" . count($poolKeys) . ", template_ids=" . count($templateIds) . ", ids=" . count($allIds) . ")",
+        "pool_keys=" . implode(',', $poolKeys),
+        "counts=" . json_encode($countsByPool, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
+    ]];
+}
+
+/**
+ * report_highlights_rules.json
+ * - 合法
+ * - 引用的模板 id 必须存在（来自 report_highlights_pools.json）
+ * - policy 合法（min/max 关系、总数约束合理）
+ * - 覆盖率基本校验（三池至少都有足够模板用于 fallback）
+ */
+private function checkHighlightsRules(string $path, string $baseDir, string $packId, ?string $expectedSchema = null): array
+{
+    if (!is_file($path)) {
+        return [false, ["pack={$packId} file={$path} :: File not found"]];
+    }
+
+    $doc = $this->readJsonFile($path);
+    if (!is_array($doc)) {
+        return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+    }
+
+    if ($errs = $this->checkSchemaField($doc, $expectedSchema, $packId, $path, 'highlights_rules')) {
+        return [false, $errs];
+    }
+
+    // ✅ 读取 pools（rules 必须能引用它）
+    $poolsPath = $this->pathOf($baseDir, 'report_highlights_pools.json');
+    if (!is_file($poolsPath)) {
+        return [false, ["pack={$packId} file={$path} :: report_highlights_pools.json not found (required for rules validation): {$poolsPath}"]];
+    }
+    $poolsDoc = $this->readJsonFile($poolsPath);
+    if (!is_array($poolsDoc)) {
+        return [false, ["pack={$packId} file={$poolsPath} :: report_highlights_pools.json invalid JSON"]];
+    }
+
+    $errors = [];
+
+    [$poolKeys, $countsByPool, $templateIds, $_allIds] = $this->parseHighlightsPoolsDoc($poolsDoc, $packId, $poolsPath, $errors);
+
+    // rules list
+    $rules = $doc['rules'] ?? ($doc['items'] ?? null);
+    if (!is_array($rules)) {
+        return [false, ["pack={$packId} file={$path} path=$.rules/$.items :: missing/invalid rules list (expect array(list))"]];
+    }
+    if ($this->isAssocArray($rules)) {
+        return [false, ["pack={$packId} file={$path} path=$.rules/$.items :: rules must be array(list), not object(map)"]];
+    }
+
+    // policy object（允许放在 root.policy 或 root._meta.policy）
+    $policy = $doc['policy'] ?? ($doc['_meta']['policy'] ?? null);
+    if (!is_array($policy) || !$this->isAssocArray($policy)) {
+        $errors[] = "pack={$packId} file={$path} path=$.policy :: missing/invalid policy object";
+        $policy = [];
+    }
+
+    // ✅ policy 合法性（min/max、总数约束）
+    $this->validateHighlightsPolicy($policy, $countsByPool, $packId, $path, $errors);
+
+    // ✅ rule.id 唯一 + pool key 合法 + 引用模板 id 必须存在
+    $seenRuleIds = [];
+    $refIds = [];
+
+    foreach ($rules as $i => $r) {
+        $base = "$.rules[$i]";
+
+        if (!is_array($r) || !$this->isAssocArray($r)) {
+            $errors[] = "pack={$packId} file={$path} path={$base} :: rule must be object(map)";
+            continue;
+        }
+
+        $rid = (string)($r['id'] ?? '');
+        if ($rid === '') {
+            $errors[] = "pack={$packId} file={$path} path={$base}.id :: missing rule id";
+        } else {
+            if (isset($seenRuleIds[$rid])) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.id :: duplicate rule.id (first at {$seenRuleIds[$rid]})";
+            } else {
+                $seenRuleIds[$rid] = $base;
+            }
+        }
+
+        // pool key (optional but recommended)
+        if (isset($r['pool'])) {
+            $pk = (string)$r['pool'];
+            if ($pk === '' || !in_array($pk, $poolKeys, true)) {
+                $errors[] = "pack={$packId} file={$path} rule_id={$rid} path={$base}.pool :: invalid pool '{$pk}' (known pools: " . implode(',', $poolKeys) . ")";
+            }
+        }
+
+        // collect referenced template ids
+        $this->collectTemplateRefsFromRules($r, $refIds);
+    }
+
+    // ✅ 引用模板 id 必须存在
+    $refIds = array_values(array_unique(array_filter($refIds, fn($x) => is_string($x) && trim($x) !== '')));
+    if (!empty($refIds)) {
+        $missing = [];
+        foreach ($refIds as $tid) {
+            if (!isset($templateIds[$tid])) $missing[] = $tid;
+        }
+        if (!empty($missing)) {
+            $errors[] = "pack={$packId} file={$path} :: referenced template ids not found in pools: " . count($missing)
+                . " (e.g. " . implode(', ', array_slice($missing, 0, 16)) . ")";
+        }
+    }
+
+    // ✅ 覆盖率基本校验：至少确保三池都有足够模板用来 fallback
+    // 默认：每池至少 1；且 max_total 不超过三池总模板数
+    $this->validateHighlightsCoverage($policy, $countsByPool, $packId, $path, $errors);
+
+    if (!empty($errors)) {
+        return [false, array_merge(["Highlights rules invalid: " . count($errors)], array_slice($errors, 0, 160))];
+    }
+
+    return [true, [
+        "OK (rules=" . count($rules) . ", pools=" . count($poolKeys) . ", template_ids=" . count($templateIds) . ")",
+        "policy=" . json_encode($policy, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE),
+    ]];
+}
+
+/**
+ * 解析 report_highlights_pools.json 的 pools 结构
+ * 兼容：
+ * - {schema, pools:{strength:[...], weakness:[...], growth:[...]}}
+ * - {schema, items:{strength:{items:[...]}, ...}}
+ * - {schema, items:{strength:[...], ...}}
+ */
+private function parseHighlightsPoolsDoc(array $doc, string $packId, string $path, array &$errors): array
+{
+    $root = null;
+
+    if (isset($doc['pools']) && is_array($doc['pools'])) $root = $doc['pools'];
+    elseif (isset($doc['items']) && is_array($doc['items'])) $root = $doc['items'];
+    else $root = $doc;
+
+    if (!is_array($root) || !$this->isAssocArray($root)) {
+        $errors[] = "pack={$packId} file={$path} path=$.pools/$.items :: pools must be object(map of pool_key => list/items)";
+        return [[], [], [], []];
+    }
+
+    $poolKeys = array_keys($root);
+
+    // normalize: pool_key => list[object]
+    $countsByPool = [];
+    $templateIds = []; // set
+    $allIds = [];      // set (id uniqueness across whole pools)
+    $seenIdAt = [];
+
+    $takeTplId = function(array $it): string {
+        foreach (['template_id','tpl_id','tpl','template','id'] as $k) {
+            if (isset($it[$k]) && is_string($it[$k]) && trim($it[$k]) !== '') return trim($it[$k]);
+        }
+        return '';
+    };
+
+    foreach ($root as $poolKey => $node) {
+        if (!is_string($poolKey) || trim($poolKey) === '') {
+            $errors[] = "pack={$packId} file={$path} path=$.pools :: pool key must be non-empty string";
+            continue;
+        }
+        $poolKey = trim($poolKey);
+
+        // allow {items:[...]} wrapper
+        $list = null;
+        if (is_array($node) && $this->isAssocArray($node) && isset($node['items']) && is_array($node['items'])) {
+            $list = $node['items'];
+        } else {
+            $list = $node;
+        }
+
+        if (!is_array($list)) {
+            $errors[] = "pack={$packId} file={$path} path=$.pools.{$poolKey} :: pool must be array(list) or {items:[...]}";
+            $countsByPool[$poolKey] = 0;
+            continue;
+        }
+        if ($this->isAssocArray($list)) {
+            // allow map -> take values
+            $list = array_values($list);
+        }
+
+        $cnt = 0;
+        foreach ($list as $i => $it) {
+            if (!is_array($it) || !$this->isAssocArray($it)) {
+                $errors[] = "pack={$packId} file={$path} path=$.pools.{$poolKey}[{$i}] :: item must be object(map)";
+                continue;
+            }
+
+            $id = $it['id'] ?? null;
+            if (!is_string($id) || trim($id) === '') {
+                $errors[] = "pack={$packId} file={$path} path=$.pools.{$poolKey}[{$i}].id :: missing/invalid id";
+                continue;
+            }
+            $id = trim($id);
+
+            if (isset($allIds[$id])) {
+                $errors[] = "pack={$packId} file={$path} :: duplicate highlight id '{$id}' (first at {$seenIdAt[$id]}, again at $.pools.{$poolKey}[{$i}])";
+            } else {
+                $allIds[$id] = true;
+                $seenIdAt[$id] = "$.pools.{$poolKey}[{$i}]";
+            }
+
+            $tplId = $takeTplId($it);
+            if ($tplId === '') {
+                $errors[] = "pack={$packId} file={$path} path=$.pools.{$poolKey}[{$i}] :: missing template_id (accept template_id/tpl_id/tpl/template/id)";
+            } else {
+                $templateIds[$tplId] = true;
+            }
+
+            $cnt++;
+        }
+
+        $countsByPool[$poolKey] = $cnt;
+    }
+
+    return [$poolKeys, $countsByPool, $templateIds, $allIds];
+}
+
+/**
+ * 从 rules 节点里递归收集模板引用 id
+ * 兼容字段：template_id / template_ids / templates / tpl_id / tpl_ids / tpl
+ */
+private function collectTemplateRefsFromRules($node, array &$out): void
+{
+    if (!is_array($node)) return;
+
+    foreach ($node as $k => $v) {
+        $key = is_string($k) ? strtolower($k) : '';
+
+        if (in_array($key, ['template_id','tpl_id','tpl','template'], true)) {
+            if (is_string($v) && trim($v) !== '') $out[] = trim($v);
+        } elseif (in_array($key, ['template_ids','templates','tpl_ids'], true)) {
+            if (is_array($v)) {
+                foreach ($v as $vv) {
+                    if (is_string($vv) && trim($vv) !== '') $out[] = trim($vv);
+                }
+            }
+        } else {
+            if (is_array($v)) $this->collectTemplateRefsFromRules($v, $out);
+        }
+    }
+}
+
+private function validateHighlightsPolicy(array $policy, array $countsByPool, string $packId, string $path, array &$errors): void
+{
+    $intVal = function($x): ?int {
+        if (is_int($x)) return $x;
+        if (is_numeric($x) && (int)$x == $x) return (int)$x;
+        return null;
+    };
+
+    $minTotal = $intVal($policy['min_total'] ?? null);
+    $maxTotal = $intVal($policy['max_total'] ?? null);
+    $maxStrength = $intVal($policy['max_strength'] ?? null);
+
+    if ($minTotal === null) $errors[] = "pack={$packId} file={$path} path=$.policy.min_total :: must be integer";
+    if ($maxTotal === null) $errors[] = "pack={$packId} file={$path} path=$.policy.max_total :: must be integer";
+    if ($maxStrength === null) $errors[] = "pack={$packId} file={$path} path=$.policy.max_strength :: must be integer";
+
+    if ($minTotal !== null && $minTotal < 0) $errors[] = "pack={$packId} file={$path} path=$.policy.min_total :: must be >= 0";
+    if ($maxTotal !== null && $maxTotal < 0) $errors[] = "pack={$packId} file={$path} path=$.policy.max_total :: must be >= 0";
+
+    if ($minTotal !== null && $maxTotal !== null && $minTotal > $maxTotal) {
+        $errors[] = "pack={$packId} file={$path} :: policy invalid: min_total({$minTotal}) > max_total({$maxTotal})";
+    }
+
+    if ($maxStrength !== null && $maxTotal !== null && $maxStrength > $maxTotal) {
+        $errors[] = "pack={$packId} file={$path} :: policy invalid: max_strength({$maxStrength}) > max_total({$maxTotal})";
+    }
+
+    // 可选：min_strength
+    if (array_key_exists('min_strength', $policy)) {
+        $minStrength = $intVal($policy['min_strength']);
+        if ($minStrength === null) {
+            $errors[] = "pack={$packId} file={$path} path=$.policy.min_strength :: must be integer if present";
+        } elseif ($maxStrength !== null && $minStrength > $maxStrength) {
+            $errors[] = "pack={$packId} file={$path} :: policy invalid: min_strength({$minStrength}) > max_strength({$maxStrength})";
+        }
+    }
+
+    // ✅ 总数约束合理：max_total 不应超过 pools 总模板数（粗校验）
+    $totalTemplates = 0;
+    foreach ($countsByPool as $k => $n) $totalTemplates += (int)$n;
+
+    if ($maxTotal !== null && $totalTemplates > 0 && $maxTotal > $totalTemplates) {
+        $errors[] = "pack={$packId} file={$path} :: policy invalid: max_total({$maxTotal}) > total_templates_in_pools({$totalTemplates})";
+    }
+}
+
+private function validateHighlightsCoverage(array $policy, array $countsByPool, string $packId, string $path, array &$errors): void
+{
+    // ✅ 三池至少有模板（fallback 基本保证）
+    $nonEmptyPools = 0;
+    foreach ($countsByPool as $k => $n) {
+        if ((int)$n > 0) $nonEmptyPools++;
+    }
+    if ($nonEmptyPools < 3) {
+        $errors[] = "pack={$packId} file={$path} :: coverage invalid: need >=3 non-empty pools for fallback, got={$nonEmptyPools}";
+    }
+
+    // ✅ strength pool 必须有模板（因为运行时有 strength.count 限制）
+    if (isset($countsByPool['strength']) && (int)$countsByPool['strength'] <= 0) {
+        $errors[] = "pack={$packId} file={$path} :: coverage invalid: pool 'strength' has 0 templates";
+    }
+
+    // ✅ 若 policy.max_total 存在：要求 pools 总模板数 >= max_total（更直观）
+    $maxTotal = null;
+    if (isset($policy['max_total']) && (is_int($policy['max_total']) || (is_numeric($policy['max_total']) && (int)$policy['max_total'] == $policy['max_total']))) {
+        $maxTotal = (int)$policy['max_total'];
+    }
+    if ($maxTotal !== null) {
+        $sum = 0;
+        foreach ($countsByPool as $k => $n) $sum += (int)$n;
+        if ($sum < $maxTotal) {
+            $errors[] = "pack={$packId} file={$path} :: coverage invalid: sum(pool_templates)={$sum} < policy.max_total={$maxTotal}";
+        }
+    }
+}
+
     private function checkHighlightsOverrides(string $path, string $packId, ?string $expectedSchema = null): array
     {
         if (!is_file($path)) return [false, ["pack={$packId} file={$path} :: File not found"]];
@@ -2096,16 +2475,25 @@ private function checkIdentityLayers(string $path, string $packId, ?string $expe
     private function expectedSchemaFor(array $manifest, string $assetKey, string $file): ?string
 {
     $schemas = $manifest['schemas'] ?? [];
+    $file = (string)$file;
+
+    // ✅ 0) filename-first mapping (so pools/rules won't be mistaken as "highlights")
+    if (str_contains($file, 'report_highlights_pools')) {
+        return $schemas['highlights_pools'] ?? null;
+    }
+    if (str_contains($file, 'report_highlights_rules')) {
+        return $schemas['highlights_rules'] ?? null;
+    }
 
     // 1) 绝大多数 asset：一类一个 schema
     $direct = [
-        'questions'      => 'questions',
-        'type_profiles'  => 'type_profiles',
-        'cards'          => 'cards',
-        'fallback_cards' => 'fallback_cards',
-        'highlights'     => 'highlights',
-        'reads'          => 'reads',
-        'rules'          => 'rules', // ✅ 新增：rules -> schemas.rules
+        'questions'        => 'questions',
+        'type_profiles'    => 'type_profiles',
+        'cards'            => 'cards',
+        'fallback_cards'   => 'fallback_cards',
+        'highlights'       => 'highlights',
+        'reads'            => 'reads',
+        'rules'            => 'rules',
         'section_policies' => 'section_policies',
     ];
     if (isset($direct[$assetKey])) {
@@ -2128,7 +2516,7 @@ private function checkIdentityLayers(string $path, string $packId, ?string $expe
         return null;
     }
 
-    // 4) overrides buckets（你在 checkAssetsSchemasAgainstManifest 里会把 bucket 转成这个 assetKey）
+    // 4) overrides buckets
     if ($assetKey === 'overrides_unified') {
         return $schemas['overrides_unified'] ?? null;
     }

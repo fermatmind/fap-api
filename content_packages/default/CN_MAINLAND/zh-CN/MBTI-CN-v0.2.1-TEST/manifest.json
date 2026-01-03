@@ -1,0 +1,113 @@
+{
+  "schema_version": "pack-manifest@v1",
+  "pack_type": "content_pack",
+  "scale_code": "MBTI",
+  "region": "CN_MAINLAND",
+  "locale": "zh-CN",
+  "content_package_version": "v0.2.1-TEST",
+  "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.1-TEST",
+  "fallback": [
+    "MBTI.cn-mainland.zh-CN.v0.2.1",
+    "MBTI.global.en.default"
+  ],
+  "capabilities": {
+    "questions": true,
+    "type_profiles": true,
+    "cards": true,
+    "highlights": true,
+    "reads": true,
+    "borderline": true,
+    "identity": true,
+    "overrides": true,
+    "rules": true,
+    "disclaimers": false,
+    "share_templates": false,
+    "content_graph": false
+  },
+  "schemas": {
+    "questions": "fap.questions.v1",
+    "type_profiles": "fap.type_profiles.v1",
+    "cards": "fap.report.cards.v1",
+    "fallback_cards": "fap.report.cards.fallback.v1",
+
+    "highlights": "fap.report.highlights.v1",
+    "highlights_pools": "fap.report.highlights.pools.v1",
+    "highlights_rules": "fap.report.highlights.rules.v1",
+
+    "reads": "fap.report.reads.v2",
+    "borderline_templates": "fap.report.borderline_templates.v1",
+    "borderline_notes": "fap.report.borderline_notes.v1",
+    "identity_cards": "fap.report.identity_cards.v1",
+    "identity_layers": "fap.report.identity_layers.v1",
+    "roles": "fap.report.roles.v1",
+    "strategies": "fap.report.strategies.v1",
+    "overrides_unified": "fap.report.overrides.v1",
+    "overrides_highlights_legacy": "fap.report.highlights.overrides.v1",
+    "rules": "fap.report.rules.v1",
+    "section_policies": "fap.report.section_policies.v1"
+  },
+  "assets": {
+    "questions": [
+      "questions.json"
+    ],
+    "type_profiles": [
+      "type_profiles.json"
+    ],
+    "cards": [
+      "report_cards_traits.json",
+      "report_cards_career.json",
+      "report_cards_growth.json",
+      "report_cards_relationships.json"
+    ],
+    "fallback_cards": [
+      "report_cards_fallback_traits.json",
+      "report_cards_fallback_career.json",
+      "report_cards_fallback_growth.json",
+      "report_cards_fallback_relationships.json"
+    ],
+    "highlights": [
+      "report_highlights.json",
+      "report_highlights_templates.json",
+      "report_highlights_pools.json",
+      "report_highlights_rules.json"
+    ],
+    "reads": [
+      "report_recommended_reads.json"
+    ],
+    "borderline": [
+      "report_borderline_templates.json",
+      "report_borderline_notes.json"
+    ],
+    "identity": [
+      "report_identity_cards.json",
+      "identity_layers.json",
+      "report_roles.json",
+      "report_strategies.json"
+    ],
+    "overrides": {
+      "order": [
+        "unified"
+      ],
+      "unified": [
+        "report_overrides.json"
+      ]
+    },
+    "rules": [
+      "report_rules.json"
+    ],
+    "section_policies": [
+      "report_section_policies.json"
+    ]
+  },
+  "overrides": {
+    "apply_order": [
+      "cards",
+      "highlights",
+      "reads"
+    ],
+    "merge_policy": {
+      "default": "merge",
+      "replace_fields_supported": true
+    }
+  }
+}

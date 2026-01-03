@@ -240,12 +240,35 @@ if ($wantExplainPayload) {
         $hlTemplatesDoc = $store->loadHighlights();
 
         $builder = new HighlightBuilder();
-        $selectRules = $store->loadSelectRules();
-        $baseHighlights = $builder->buildFromTemplatesDoc($reportForHL, $hlTemplatesDoc, 3, 10, $selectRules);
+$selectRules = $store->loadSelectRules();
+
+/**
+ * ✅ NEW: buildFromTemplatesDoc 返回：
+ *   - ['items' => [...], 'meta' => [...]]  （推荐）
+ * 兼容旧实现仍返回 list 的情况
+ */
+$hlBuild = $builder->buildFromTemplatesDoc($reportForHL, $hlTemplatesDoc, 3, 10, $selectRules);
+
+$baseHighlights = [];
+$hlMetaBase = [];
+
+if (is_array($hlBuild) && array_key_exists('items', $hlBuild)) {
+    $baseHighlights = is_array($hlBuild['items'] ?? null) ? $hlBuild['items'] : [];
+    // ✅ 注意：HighlightBuilder 返回的是 _meta，不是 meta
+    $hlMetaBase     = is_array($hlBuild['_meta'] ?? null) ? $hlBuild['_meta'] : [];
+} else {
+    // 兼容旧返回：直接是 list
+    $baseHighlights = is_array($hlBuild) ? $hlBuild : [];
+    $hlMetaBase = [
+        'compat' => true,
+        'note' => 'HighlightBuilder returned legacy list; consider returning items+_meta.',
+    ];
+}
+
 Log::info('[HL] generated', [
-    'stage' => 'base_from_templates_doc',
+    'stage'  => 'base_from_templates_doc',
     'schema' => $hlTemplatesDoc['schema'] ?? null,
-    'count' => is_array($baseHighlights) ? count($baseHighlights) : -1,
+    'count'  => is_array($baseHighlights) ? count($baseHighlights) : -1,
     'sample' => array_slice($baseHighlights ?? [], 0, 2),
 ]);
 
@@ -378,6 +401,54 @@ unset($sec);
 // reads
 $recommendedReads = app(\App\Services\RuleEngine\ReportRuleEngine::class)
     ->apply('reads', $recommendedReads, $rulesDoc, $reCtxBase, 'reads');
+
+// =========================
+// ✅ NEW: highlights finalize AFTER overrides + RuleEngine
+// - 永远保证产物约束成立（max2 strength / 总数 3~4 / 不足补齐）
+// - meta 写入 _meta.highlights.finalize_meta
+// =========================
+try {
+    /**
+     * ✅ HighlightBuilder::finalize 签名：
+     * finalize(array $highlights, array $report, ContentStore $store, int $min=3, int $max=4)
+     * 返回：['items'=>..., '_meta'=>...]
+     */
+
+    // ✅ 给 finalize 的 report 传“它需要的结构”
+    // - profile.type_code / scores_pct / axis_states 必须有
+    // - tags/capture_explain/explain_collector 可带上（不影响 finalize 但利于 debug）
+    $hlReportForFinalize = $reportForHL;
+    $hlReportForFinalize['tags'] = $tags;
+    $hlReportForFinalize['capture_explain'] = (bool)$wantExplainPayload;
+    $hlReportForFinalize['explain_collector'] = $explainCollector;
+
+    $hlFinal = $builder->finalize(
+        $highlights,            // 1) items list（可能为空）
+        $hlReportForFinalize,   // 2) report ctx
+        $store,                 // 3) ContentStore（✅ 必传）
+        3,                      // 4) min
+        4                       // 5) max
+    );
+
+    if (is_array($hlFinal) && array_key_exists('items', $hlFinal)) {
+        $highlights  = is_array($hlFinal['items'] ?? null) ? $hlFinal['items'] : $highlights;
+        // ✅ 注意：HighlightBuilder 返回的是 _meta
+        $hlMetaFinal = is_array($hlFinal['_meta'] ?? null) ? $hlFinal['_meta'] : [];
+    } else {
+        // 兼容：如果有人把 finalize 写成直接返回 list
+        $highlights = is_array($hlFinal) ? $hlFinal : $highlights;
+        $hlMetaFinal = [
+            'compat' => true,
+            'note' => 'HighlightBuilder::finalize returned legacy list; consider returning items+_meta.',
+        ];
+    }
+
+} catch (\Throwable $e) {
+    Log::warning('[HL] finalize_failed', ['error' => $e->getMessage()]);
+    $hlMetaFinal = [
+        'error' => $e->getMessage(),
+    ];
+}
 
 // =========================
 // ✅ 12.4) DEBUG: 强制制造缺卡（为了运行时验收 4/5/7）
@@ -549,6 +620,25 @@ if (!empty($assemblerMetaSections)) {
             );
         }
     }
+}
+
+// =========================
+// ✅ NEW: _meta.highlights（轻量可长期保存）
+// - base_meta：来自 HighlightBuilder::buildFromTemplatesDoc
+// - explain：优先写 highlights explain（即使 _explain 关闭，也至少保留 base_meta）
+// =========================
+$reportPayload['_meta'] = $reportPayload['_meta'] ?? [];
+$reportPayload['_meta']['highlights'] = $reportPayload['_meta']['highlights'] ?? [];
+
+$reportPayload['_meta']['highlights']['base_meta'] = $hlMetaBase ?? [];
+$reportPayload['_meta']['highlights']['finalize_meta'] = $hlMetaFinal ?? [];
+
+// 强烈建议：把 highlights explain 抄到 _meta（调试开关打开时更完整）
+if ($wantExplainPayload && is_array($explainPayload)) {
+    $reportPayload['_meta']['highlights']['explain'] = $explainPayload['highlights'] ?? null;
+} else {
+    // 非调试环境：也保留一个轻量占位，避免前端/验收侧“字段忽有忽无”
+    $reportPayload['_meta']['highlights']['explain'] = $reportPayload['_meta']['highlights']['explain'] ?? null;
 }
 
 // =========================
