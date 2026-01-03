@@ -18,6 +18,7 @@ class SectionAssembler
      *
      * Output:
      * - $report['_meta']['sections'][sec]['assembler'] = <secExplain>   // for jq/runtime acceptance
+     * - $report['_meta']['section_assembler'] = <globalMeta>           // composer acceptance
      * - (optional) $report['_explain']['assembler']['cards'] = <fullExplain>  // debug only
      */
     public function apply(array $report, ContentStore $store, array $ctx = []): array
@@ -26,7 +27,7 @@ class SectionAssembler
             return $report;
         }
 
-                // ✅ 必须走 ContentStore loader（验收点 4）
+        // ✅ 必须走 ContentStore loader（验收点 4）
         $policiesDoc = $store->loadSectionPolicies();
 
         // ✅ policies 可能有多种形态：
@@ -36,14 +37,11 @@ class SectionAssembler
         $rawItems = is_array($policiesDoc['items'] ?? null) ? $policiesDoc['items'] : [];
 
         if (is_array($rawItems['cards'] ?? null)) {
-            // 形态 B：items.cards 是真正的 section map
-            $sectionsPolicy = $rawItems['cards'];
+            $sectionsPolicy = $rawItems['cards'];          // 形态 B
         } elseif (is_array($policiesDoc['sections'] ?? null)) {
-            // 形态 C
-            $sectionsPolicy = $policiesDoc['sections'];
+            $sectionsPolicy = $policiesDoc['sections'];    // 形态 C
         } else {
-            // 形态 A
-            $sectionsPolicy = $rawItems;
+            $sectionsPolicy = $rawItems;                   // 形态 A
         }
 
         if (!is_array($sectionsPolicy)) $sectionsPolicy = [];
@@ -54,35 +52,37 @@ class SectionAssembler
         // ✅ explain 开关（建议仅本地/验收开）
         $captureExplain = (bool)($ctx['capture_explain'] ?? false);
 
+        /**
+         * policies 为空：必须显式发射全局 meta，否则 composer 会认为 “assembler_did_not_emit_meta”
+         */
         if ($sectionsPolicy === []) {
-    // No policies => no-op (but keep report stable)
-    $report['_meta'] = $report['_meta'] ?? [];
-    $report['_meta']['sections'] = $report['_meta']['sections'] ?? [];
+            $report['_meta'] = $report['_meta'] ?? [];
+            $report['_meta']['sections'] = $report['_meta']['sections'] ?? [];
 
-    // ✅ 旧字段保留（你本来就有）
-    $report['_meta']['section_policies'] = [
-        'ok' => false,
-        'reason' => 'missing_or_empty_section_policies',
-    ];
+            // 旧字段保留
+            $report['_meta']['section_policies'] = [
+                'ok' => false,
+                'reason' => 'missing_or_empty_section_policies',
+            ];
 
-    // ✅ NEW：验收脚本看的全局字段
-    $report['_meta']['section_assembler'] = [
-        'ok' => false,
-        'reason' => 'missing_or_empty_section_policies',
-        'meta_fallback_used' => false,
-    ];
+            // ✅ NEW：验收脚本看的全局字段（关键）
+            $report['_meta']['section_assembler'] = [
+                'ok' => false,
+                'reason' => 'missing_or_empty_section_policies',
+                'meta_fallback_used' => false,
+            ];
 
-    if ($captureExplain) {
-        $report['_explain'] = $report['_explain'] ?? [];
-        $report['_explain']['assembler'] = $report['_explain']['assembler'] ?? [];
-        $report['_explain']['assembler']['cards'] = [
-            'ok' => false,
-            'reason' => 'missing_or_empty_section_policies',
-        ];
-    }
+            if ($captureExplain) {
+                $report['_explain'] = $report['_explain'] ?? [];
+                $report['_explain']['assembler'] = $report['_explain']['assembler'] ?? [];
+                $report['_explain']['assembler']['cards'] = [
+                    'ok' => false,
+                    'reason' => 'missing_or_empty_section_policies',
+                ];
+            }
 
-    return $report;
-}
+            return $report;
+        }
 
         $sections = $report['sections'];
 
@@ -140,19 +140,27 @@ class SectionAssembler
         $report['_meta'] = $report['_meta'] ?? [];
         $report['_meta']['sections'] = $report['_meta']['sections'] ?? [];
 
-        // ✅ NEW：全局汇总标记（验收脚本要用）
-$report['_meta']['section_assembler'] = is_array($report['_meta']['section_assembler'] ?? null)
-    ? $report['_meta']['section_assembler']
-    : [];
+        // ✅ 逐 section 写入 assembler meta（这是 composer 验收用的核心字段）
+        foreach (($fullExplain['by_section'] ?? []) as $secKey => $secExplain) {
+            if (!is_array($secExplain)) continue;
+            $secKey = (string)$secKey;
 
-$report['_meta']['section_assembler'] = array_merge(
-    [
-        'ok' => true,
-        'meta_fallback_used' => false,
-        'policy_schema' => $policiesDoc['schema'] ?? null,
-    ],
-    $report['_meta']['section_assembler']
-);
+            $report['_meta']['sections'][$secKey] = $report['_meta']['sections'][$secKey] ?? [];
+            $report['_meta']['sections'][$secKey]['assembler'] = $secExplain;
+        }
+
+        // ✅ NEW：全局汇总标记（验收脚本要用）
+        $existingGlobal = $report['_meta']['section_assembler'] ?? null;
+        $report['_meta']['section_assembler'] = is_array($existingGlobal) ? $existingGlobal : [];
+
+        $report['_meta']['section_assembler'] = array_merge(
+            [
+                'ok' => true,
+                'meta_fallback_used' => false,
+                'policy_schema' => $policiesDoc['schema'] ?? null,
+            ],
+            $report['_meta']['section_assembler']
+        );
 
         // ✅ 可选 explain：仅在 captureExplain 开启时写（避免线上 payload 变大）
         if ($captureExplain) {
@@ -176,8 +184,6 @@ $report['_meta']['section_assembler'] = array_merge(
     ): array {
         $policy = $sectionsPolicy[$sectionKey] ?? null;
 
-        // ✅ 即便没找到 policy，也不要 silent no-op（否则 meta 会空，composer 会造假 meta）
-        // 用 defaults 做“可诊断兜底”，并在 meta 里标记 policy_missing
         $policyMissing = false;
         if (!is_array($policy)) {
             $policyMissing = true;
@@ -205,16 +211,10 @@ $report['_meta']['section_assembler'] = array_merge(
         $want = max($min, $target);
         if ($max > 0) $want = min($want, $max);
 
-        $allowFallback = $policy['allow_fallback'] ?? true;
-        $allowFallback = is_bool($allowFallback) ? $allowFallback : (bool)$allowFallback;
-
-        if ($max > 0 && $target > 0) $target = min($target, $max);
-        if ($max > 0 && $min > 0) $min = min($min, $max);
-
         $cards = $sec['cards'] ?? [];
         if (!is_array($cards)) $cards = [];
 
-                $beforeN = count($cards);
+        $beforeN = count($cards);
 
         // 1) cap max（先硬切 max，保证不会溢出）
         $trimmedToMax = false;
@@ -224,7 +224,6 @@ $report['_meta']['section_assembler'] = array_merge(
         }
 
         // 2) pick want（稳定输出：超过 want 就截断到 want）
-        // ✅ 注意：这里不再只看 target，而是看 want=max(min,target)
         $trimmedToWant = false;
         if ($want > 0 && count($cards) > $want) {
             $cards = array_slice($cards, 0, $want);
@@ -321,30 +320,29 @@ $report['_meta']['section_assembler'] = array_merge(
 
         $sec['cards'] = $cards;
 
-                $secExplain = [
+        $secExplain = [
             'ok' => !$policyMissing,
             'policy_missing' => $policyMissing,
-
             'policy' => [
                 'target_cards'   => $target,
                 'min_cards'      => $min,
                 'max_cards'      => $max,
-                'want_cards'     => $want, // ✅ NEW：最终补齐目标
+                'want_cards'     => $want,
                 'allow_fallback' => $allowFallback,
                 'fallback_file'  => $policy['fallback_file'] ?? "report_cards_fallback_{$sectionKey}.json",
             ],
             'counts' => [
-                'before'         => $beforeN,
-                'after_trim'     => $afterTrimN,
-                'fallback_added' => count($added),
-                'final'          => count($cards),
-                'short_after_fill' => $shortAfterFill, // ✅ NEW：仍短缺多少
+                'before'           => $beforeN,
+                'after_trim'       => $afterTrimN,
+                'fallback_added'   => count($added),
+                'final'            => count($cards),
+                'short_after_fill' => $shortAfterFill,
             ],
             'actions' => [
-                'trimmed_to_max'    => $trimmedToMax,
-                'trimmed_to_want'   => $trimmedToWant, // ✅ NEW
-                'fallback_allowed'  => $allowFallback,
-                'fallback_used'     => $fallbackUsed,
+                'trimmed_to_max'  => $trimmedToMax,
+                'trimmed_to_want' => $trimmedToWant,
+                'fallback_allowed'=> $allowFallback,
+                'fallback_used'   => $fallbackUsed,
             ],
             'fallback_added_ids' => $addedIds,
         ];
@@ -352,9 +350,6 @@ $report['_meta']['section_assembler'] = array_merge(
         return [$sec, $secExplain];
     }
 
-    /**
-     * Extract section key from a section object (if sections is a list).
-     */
     private function extractSectionKey(array $sec): ?string
     {
         foreach (['section_key', 'key', 'id', 'name'] as $k) {
@@ -366,8 +361,6 @@ $report['_meta']['section_assembler'] = array_merge(
     }
 
     /**
-     * Collect ids for dedupe.
-     *
      * @return array<string, bool>
      */
     private function collectIds(array $cards, string $dedupeKey): array
