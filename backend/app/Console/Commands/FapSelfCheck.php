@@ -238,11 +238,16 @@ if (isset($declaredBasenames['report_section_policies.json'])) {
 }
 
         // 9) report_overrides.json (unified overrides rules validation)
-        $runIfDeclared(
-            'report_overrides.json',
-            'report_overrides.json',
-            fn () => $this->checkReportOverrides($this->pathOf($baseDir, 'report_overrides.json'), $manifest, $packId)
-        );
+$runIfDeclared(
+    'report_overrides.json',
+    'report_overrides.json',
+    fn () => $this->checkReportOverrides(
+        $this->pathOf($baseDir, 'report_overrides.json'),
+        $manifest,
+        $packId,
+        $this->expectedSchemaFor($manifest, 'overrides_unified', 'report_overrides.json')
+    )
+);
 
         // 10) report_rules.json (rules schema validation)
 $runIfDeclared(
@@ -696,8 +701,22 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         return [false, ["pack={$packId} file={$path} path=$.overrides/$.rules :: missing overrides list (expect overrides:[] or rules:[])"]];
     }
 
-    $allowedTargets = ['highlights', 'cards', 'reads'];
+    // ✅ 更严格：仅允许这三种 target（防止拼错导致规则静默不生效）
+    $allowedTargets = ['cards', 'highlights', 'reads'];
     $allowedModes   = ['append', 'patch', 'replace', 'remove'];
+
+    // ✅ 更严格：rule 顶层字段白名单（字段拼错直接报错）
+    $allowedRuleKeys = [
+        'id', 'target', 'mode', 'match',
+        'item', 'items', 'patch', 'replace',
+        'replace_fields',
+        // optional meta fields (safe)
+        'priority', 'weight', 'enabled', 'note', '_meta',
+    ];
+
+    $isList = function ($v): bool {
+        return is_array($v) && array_keys($v) === range(0, count($v) - 1);
+    };
 
     $seenRuleIds = [];
     $errors = [];
@@ -706,10 +725,19 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
         $basePath = '$.' . $listKey . "[{$i}]";
 
         if (!is_array($r) || !$this->isAssocArray($r)) {
-            $errors[] = "ERR pack={$packId} file={$path} path={$basePath} :: rule must be object";
+            $errors[] = "ERR pack={$packId} file={$path} path={$basePath} :: rule must be object(map)";
             continue;
         }
 
+        // 1) unknown top-level fields
+        foreach (array_keys($r) as $k) {
+            $kk = (string)$k;
+            if (!in_array($kk, $allowedRuleKeys, true)) {
+                $errors[] = "ERR pack={$packId} file={$path} path={$basePath}.{$kk} :: unknown rule field (allowed: " . implode(',', $allowedRuleKeys) . ")";
+            }
+        }
+
+        // 2) id: required + unique
         $rid = (string)($r['id'] ?? '');
         if ($rid === '') {
             $errors[] = "ERR pack={$packId} file={$path} path={$basePath}.id :: rule.id missing";
@@ -721,41 +749,133 @@ private function checkReportOverrides(string $path, array $manifest, string $pac
             }
         }
 
+        // 3) target enum
         $target = (string)($r['target'] ?? '');
         if ($target === '' || !in_array($target, $allowedTargets, true)) {
             $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.target :: invalid target (allowed: " . implode(',', $allowedTargets) . ")";
         }
 
+        // 4) mode enum
         $mode = (string)($r['mode'] ?? '');
         if ($mode === '' || !in_array($mode, $allowedModes, true)) {
             $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.mode :: invalid mode (allowed: " . implode(',', $allowedModes) . ")";
         }
 
+        // 5) match shape (if present)
         if (array_key_exists('match', $r)) {
-    if (!is_array($r['match']) || !$this->isAssocArray($r['match'])) {
-        $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: match must be object(map)";
-    } else {
-        $this->validateOverrideMatch($r['match'], $packId, $path, $basePath, $rid, $errors);
-    }
-}
+            if (!is_array($r['match']) || !$this->isAssocArray($r['match'])) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.match :: match must be object(map)";
+            } else {
+                $this->validateOverrideMatch($r['match'], $packId, $path, $basePath, $rid, $errors);
+            }
+        }
 
-        // required payloads (compatible with your current applier behavior)
-        $hasItem    = array_key_exists('item', $r) && is_array($r['item']);
-        $hasItems   = array_key_exists('items', $r) && is_array($r['items']);
-        $hasPatch   = array_key_exists('patch', $r) && is_array($r['patch']);
-        $hasReplace = array_key_exists('replace', $r) && (is_array($r['replace']) || is_string($r['replace']));
+        // 6) payload shape validation
+        $hasItem    = array_key_exists('item', $r);
+        $hasItems   = array_key_exists('items', $r);
+        $hasPatch   = array_key_exists('patch', $r);
+        $hasReplace = array_key_exists('replace', $r);
+
+        // item must be object(map)
+        if ($hasItem) {
+            if (!is_array($r['item']) || !$this->isAssocArray($r['item'])) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.item :: item must be object(map)";
+            }
+        }
+
+        // items must be list of objects
+        if ($hasItems) {
+            if (!is_array($r['items']) || !$isList($r['items'])) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.items :: items must be array(list)";
+            } else {
+                foreach ($r['items'] as $ii => $it) {
+                    if (!is_array($it) || !$this->isAssocArray($it)) {
+                        $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.items[{$ii}] :: each item must be object(map)";
+                    }
+                }
+            }
+        }
+
+        // patch must be object(map)
+        if ($hasPatch) {
+            if (!is_array($r['patch']) || !$this->isAssocArray($r['patch'])) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.patch :: patch must be object(map)";
+            }
+        }
+
+        // replace must be string(non-empty) OR array(non-empty)
+        if ($hasReplace) {
+            $rv = $r['replace'];
+            if (is_string($rv)) {
+                if (trim($rv) === '') {
+                    $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace :: replace string must be non-empty";
+                }
+            } elseif (is_array($rv)) {
+                if ($rv === []) {
+                    $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace :: replace array must be non-empty";
+                }
+            } else {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace :: replace must be string or array";
+            }
+        }
+
+        // 7) replace_fields validation
+        if (array_key_exists('replace_fields', $r)) {
+            $rf = $r['replace_fields'];
+
+            if (!is_array($rf) || !$isList($rf) || count($rf) === 0) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace_fields :: must be non-empty array(list of strings)";
+            } else {
+                $seen = [];
+                foreach ($rf as $fi => $f) {
+                    if (!is_string($f) || trim($f) === '') {
+                        $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace_fields[{$fi}] :: must be non-empty string";
+                        continue;
+                    }
+                    $ff = trim($f);
+                    if (isset($seen[$ff])) {
+                        $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace_fields :: duplicate field '{$ff}'";
+                    }
+                    $seen[$ff] = true;
+                }
+            }
+
+            // only allowed in patch|replace mode
+            if ($mode !== '' && !in_array($mode, ['patch', 'replace'], true)) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace_fields :: only allowed in mode=patch|replace";
+            }
+
+            // if mode=replace and replace_fields exists, require patch:{} OR replace:{...}(array non-empty)
+            if ($mode === 'replace') {
+                $okCarrier = false;
+                if ($hasPatch) $okCarrier = true;
+                if ($hasReplace && is_array($r['replace']) && $r['replace'] !== []) $okCarrier = true;
+
+                if (!$okCarrier) {
+                    $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace_fields :: requires patch:{} or replace:{...} when mode=replace";
+                }
+            }
+        }
+
+        // 8) mode-required payloads (aligned with your applier behavior)
+        $hasItemArr    = $hasItem && is_array($r['item']);
+        $hasItemsArr   = $hasItems && is_array($r['items']);
+        $hasPatchArr   = $hasPatch && is_array($r['patch']);
+        $hasReplaceAny = $hasReplace && (is_array($r['replace']) || is_string($r['replace']));
 
         if ($mode === 'append') {
-            // ✅ append should be items/item/replace (NOT patch)
-            if (!$hasItems && !$hasItem && !$hasReplace) {
+            if (!$hasItemsArr && !$hasItemArr && !$hasReplaceAny) {
                 $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.items / {$basePath}.item / {$basePath}.replace :: append mode requires items/item/replace";
             }
+            if ($hasPatchArr) {
+                $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.patch :: append mode must not include patch";
+            }
         } elseif ($mode === 'patch') {
-            if (!$hasPatch) {
+            if (!$hasPatchArr) {
                 $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.patch :: patch mode requires patch:{}";
             }
         } elseif ($mode === 'replace') {
-            if (!$hasReplace && !$hasPatch && !$hasItems && !$hasItem) {
+            if (!$hasReplaceAny && !$hasPatchArr && !$hasItemsArr && !$hasItemArr) {
                 $errors[] = "ERR pack={$packId} file={$path} rule_id={$rid} path={$basePath}.replace / {$basePath}.patch / {$basePath}.items / {$basePath}.item :: replace mode requires replace/patch/items/item";
             }
         } elseif ($mode === 'remove') {

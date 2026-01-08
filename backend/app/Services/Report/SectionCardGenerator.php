@@ -208,9 +208,9 @@ final class SectionCardGenerator
         if (empty($selectedItems)) {
             $out = $this->fallbackCards($section, $minCards);
 
-            Log::info('[CARDS] selected', [
-                'section'    => $section,
-                'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
+            Log::info('[CARDS] selected (base)', [
+    'section'    => $section,
+    'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
                 'quota'      => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
                 'legacy_dir' => $legacyContentPackageDir,
             ]);
@@ -245,10 +245,10 @@ final class SectionCardGenerator
         // ✅ 最终硬切 max_cards（max_cards 已在 wantN 时被限制为 wantN）
         $out = array_slice(array_values($out), 0, $maxCards);
 
-        Log::info('[CARDS] selected', [
-            'section'    => $section,
-            'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
-            'count'      => count($out),
+        Log::info('[CARDS] selected (base)', [
+    'section'    => $section,
+    'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
+    'count'      => count($out),
             'quota'      => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
             'legacy_dir' => $legacyContentPackageDir,
         ]);

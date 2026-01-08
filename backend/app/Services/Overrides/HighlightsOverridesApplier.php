@@ -7,35 +7,39 @@ class HighlightsOverridesApplier
     /**
      * Apply highlight overrides.
      *
-     * ✅ New format (recommended):
-     *   {
-     *     "schema": "fap.report.overrides.v1",
-     *     "rules": [
-     *       {
-     *         "target": "highlights",
-     *         "match": {
-     *           "type_code": "ESTJ-A",
-     *           "tags_any": ["x","y"],
-     *           "item": { "kind": "strength", "id": ["EI_E_very_weak"] }
-     *         },
-     *         "mode": "patch",                  // patch | replace | remove | append | prepend | replace_all
-     *         "replace_fields": ["tags","tips"],// optional
-     *         "patch": { "text": "..." },       // for patch/replace
-     *         "items": [ {...}, {...} ]         // for append/prepend/replace_all
-     *       }
-     *     ]
-     *   }
+     * ✅ Supported call signatures:
+     *   1) apply($contentPackageVersion, $typeCode, $baseHighlights, $ctx = [])   // canonical
+     *   2) apply($baseHighlights, $ctx)                                          // compat (ctx must include content_package_version + type_code)
      *
-     * ✅ Legacy format (backward compatible):
-     *   { "rules": { "override_mode": "...", "replace_fields": [...] }, "items": { "<TYPE>": { ... } } }
-     *
-     * @param string $contentPackageVersion
-     * @param string $typeCode
-     * @param array  $baseHighlights
-     * @param array  $ctx Optional report ctx, e.g. ['tags'=> [...]]
+     * @param mixed $contentPackageVersionOrHighlights  string|array
+     * @param mixed $typeCodeOrCtx                      string|array|null
+     * @param mixed $baseHighlights                     array|null
+     * @param array $ctx                                Optional report ctx, e.g. ['tags'=> [...]]
      */
-    public function apply(string $contentPackageVersion, string $typeCode, array $baseHighlights, array $ctx = []): array
+    public function apply($contentPackageVersionOrHighlights, $typeCodeOrCtx = null, $baseHighlights = null, array $ctx = []): array
     {
+        // ----------------------------
+        // ✅ Compat: apply($highlights, $ctx)
+        // ctx 必须带 content_package_version / type_code
+        // ----------------------------
+        if (is_array($contentPackageVersionOrHighlights) && is_array($typeCodeOrCtx) && $baseHighlights === null) {
+            $baseHighlights = $contentPackageVersionOrHighlights;
+            $ctx            = $typeCodeOrCtx;
+
+            $contentPackageVersion = (string)($ctx['content_package_version'] ?? $ctx['contentPackageVersion'] ?? '');
+            $typeCode              = (string)($ctx['type_code'] ?? $ctx['typeCode'] ?? '');
+
+            // 缺关键字段就不应用 overrides，直接返回原列表（保证主链路稳定）
+            if ($contentPackageVersion === '' || $typeCode === '') {
+                return $this->normalizeHighlightsList($baseHighlights);
+            }
+        } else {
+            // canonical: apply($contentPackageVersion, $typeCode, $highlights, $ctx)
+            $contentPackageVersion = (string)$contentPackageVersionOrHighlights;
+            $typeCode              = is_string($typeCodeOrCtx) ? (string)$typeCodeOrCtx : '';
+            $baseHighlights         = is_array($baseHighlights) ? $baseHighlights : [];
+        }
+
         $ovr = $this->loadReportAssetJson($contentPackageVersion, 'report_highlights_overrides.json');
 
         // ---------- NEW FORMAT ----------
@@ -151,6 +155,15 @@ if (is_array($rule['items'] ?? null)) {
         }
 
         return $out;
+    }
+
+    /**
+     * Compat alias: applyHighlights($highlights, $ctx)
+     * ctx 必须包含 content_package_version + type_code
+     */
+    public function applyHighlights(array $baseHighlights, array $ctx = []): array
+    {
+        return $this->apply($baseHighlights, $ctx);
     }
 
     // =========================
