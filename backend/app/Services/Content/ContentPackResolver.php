@@ -13,7 +13,11 @@ class ContentPackResolver
 
     public static function make(): self
     {
-        return new self(config('content.packs_root'));
+        $root = config('content.packs_root');
+        if (!is_string($root) || trim($root) === '') {
+            throw new RuntimeException("Missing config: content.packs_root");
+        }
+        return new self($root);
     }
 
     /**

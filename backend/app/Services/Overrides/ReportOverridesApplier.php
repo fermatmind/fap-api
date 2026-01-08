@@ -64,15 +64,20 @@ return $this->applyRulesToList($highlights, $rules, $context);
         $doc = $this->loadOverridesDoc($contentPackageDir, $ctx);
         $rules = $this->filterRulesByTarget($doc, 'cards');
 
-        $context = [
-            'target' => 'cards',
-            'type_code' => $typeCode,
-            'content_package_dir' => $contentPackageDir,
-            'section_key' => $sectionKey,
-            'ctx' => $ctx,
-        ];
+        // ✅ 最小验证：cards 也输出 RE 的三类日志（context_tags/tags_debug/explain）
+$this->logReCtx("cards:{$sectionKey}:overrides", $ctx);
+$this->logReExplain("cards:{$sectionKey}:overrides", $rules, $ctx);
 
-        $context['explain_ctx'] = "cards:{$sectionKey}:overrides";
+$context = [
+    'target' => 'cards',
+    'type_code' => $typeCode,
+    'content_package_dir' => $contentPackageDir,
+    'section_key' => $sectionKey,
+    'ctx' => $ctx,
+
+    // ✅ 关键：给 applyRulesToList 的 payloadExplain 用
+    'explain_ctx' => "cards:{$sectionKey}:overrides",
+];
 
 // ✅ 先跑 overrides（会生成 $this->lastExplain['cards'][$sectionKey]）
 $out = $this->applyRulesToList($cards, $rules, $context);
@@ -317,6 +322,21 @@ if ($selector === null && isset($rule['match']['item']) && is_array($rule['match
     $selector = $this->selectorFromMatchItem($rule['match']['item']);
 }
 
+// ✅ 支持 match.id / match.ids（更符合 overrides schema 写法）
+if ($selector === null && isset($rule['match']) && is_array($rule['match'])) {
+    $m = $rule['match'];
+
+    $ids = null;
+    if (isset($m['id'])) $ids = $m['id'];
+    if (isset($m['ids'])) $ids = $m['ids'];
+
+    if (is_string($ids)) $ids = [$ids];
+    if (is_array($ids)) {
+        $ids = array_values(array_filter($ids, fn($x)=>is_string($x) && $x !== ''));
+        if (!empty($ids)) $selector = ['ids' => $ids];
+    }
+}
+
 $before = $list;
 $beforeIds = $this->idsOf($before);
 
@@ -399,21 +419,47 @@ if ($selector === null && in_array($mode, ['append', 'prepend', 'upsert'], true)
 
         // log
         $src = (isset($rule['__src']) && is_array($rule['__src'])) ? $rule['__src'] : null;
-        if ($debugPerRule || (bool) env('FAP_OVR_TRACE', false)) {
-            Log::info('[OVR] rule_applied', [
-                'id' => $rule['id'] ?? null,
-                'target' => $context['target'] ?? null,
-                'mode' => $mode,
-                'before' => $beforeCount,
-                'after' => count($list),
 
-                'src_idx'     => $src['idx'] ?? null,
-                'src_pack_id' => $src['pack_id'] ?? null,
-                'src_version' => $src['version'] ?? null,
-                'src_file'    => $src['file'] ?? null,
-                'src_rel'     => $src['rel'] ?? null,
-            ]);
-        }
+// ✅ matched_by：用于验收“为什么命中”
+$matchedBy = [];
+if ($selector !== null) $matchedBy[] = 'selector';
+if (isset($rule['match']) && is_array($rule['match']) && !empty($rule['match'])) $matchedBy[] = 'match';
+if (isset($rule['when']) && is_array($rule['when']) && !empty($rule['when'])) $matchedBy[] = 'when';
+if (empty($matchedBy)) $matchedBy[] = 'default';
+
+// ✅ affected_count：按 mode 计算影响条数
+$affectedCount = 0;
+if (!empty($matches)) {
+    $affectedCount = count($matches); // patch/remove/replace/upsert(matched)
+} else {
+    if (in_array($mode, ['append','prepend','upsert'], true)) {
+        $newItems = $this->ruleItems($rule, $context) ?? [];
+        $affectedCount = is_array($newItems) ? count($newItems) : 0; // append/prepend/upsert(insert)
+    }
+}
+
+if ($debugPerRule || (bool) env('FAP_OVR_TRACE', false)) {
+    Log::info('[OVR] rule_applied', [
+        'id' => $rule['id'] ?? null,
+        'target' => $context['target'] ?? null,
+        'section_key' => $context['section_key'] ?? null,
+        'type_code' => $context['type_code'] ?? null,
+
+        'mode' => $mode,
+        'matched_by' => $matchedBy,
+        'matched_n' => is_array($matches) ? count($matches) : 0,
+        'affected_count' => $affectedCount,
+
+        'before' => $beforeCount,
+        'after' => count($list),
+
+        'src_idx'     => $src['idx'] ?? null,
+        'src_pack_id' => $src['pack_id'] ?? null,
+        'src_version' => $src['version'] ?? null,
+        'src_file'    => $src['file'] ?? null,
+        'src_rel'     => $src['rel'] ?? null,
+    ]);
+}
     }
 
     // applied log（保留）
@@ -867,11 +913,42 @@ private function explainDetailsForRuleOnTags(array $rule, array $tags): array
 
     // ✅ B) match 字段（type_code/section/locale...）
     $match = $rule['match'] ?? [];
-    if ($match === null) return true;
-    if (!is_array($match)) return true;
+if ($match === null) return true;
+if (!is_array($match)) return true;
 
-    $typeCode   = (string)($context['type_code'] ?? '');
-    $sectionKey = (string)($context['section_key'] ?? '');
+$typeCode   = (string)($context['type_code'] ?? '');
+$sectionKey = (string)($context['section_key'] ?? '');
+
+// ✅ match.any_tags / match.all_tags：基于 ctx.tags
+$ctxTags = $context['ctx']['tags'] ?? [];
+if (!is_array($ctxTags)) $ctxTags = [];
+$ctxTags = array_values(array_filter($ctxTags, fn($x) => is_string($x) && $x !== ''));
+
+if (isset($match['any_tags'])) {
+    $any = $match['any_tags'];
+    if (is_string($any)) $any = [$any];
+    if (is_array($any)) {
+        $any = array_values(array_filter($any, fn($x)=>is_string($x) && $x !== ''));
+        if (!empty($any)) {
+            $hit = false;
+            foreach ($any as $t) {
+                if (in_array($t, $ctxTags, true)) { $hit = true; break; }
+            }
+            if (!$hit) return false;
+        }
+    }
+}
+
+if (isset($match['all_tags'])) {
+    $all = $match['all_tags'];
+    if (is_string($all)) $all = [$all];
+    if (is_array($all)) {
+        $all = array_values(array_filter($all, fn($x)=>is_string($x) && $x !== ''));
+        foreach ($all as $t) {
+            if (!in_array($t, $ctxTags, true)) return false;
+        }
+    }
+}
 
     if (array_key_exists('type_code', $match)) {
         $want = $match['type_code'];
@@ -954,12 +1031,16 @@ $list = match ($mode) {
     default   => $this->modePatch($list, $matches, $rule, $context),
 };
 
-    // ✅ 就加在这里：match 之后、return 之前（对 list 每个 item 统一补默认）
+    // ✅ 只对 cards 做 card normalize，避免 highlights/reads 被“卡片化”
+$target = (string)($context['target'] ?? '');
+if ($target === 'cards') {
     $list = array_map(
-    fn($it) => \App\Services\Report\ReportContentNormalizer::card(is_array($it) ? $it : []),
-    $list
-);
-    return $list;
+        fn($it) => \App\Services\Report\ReportContentNormalizer::card(is_array($it) ? $it : []),
+        $list
+    );
+}
+
+return $list;
 }
 
 private function selectorFromMatchItem($item): ?array
@@ -1267,17 +1348,57 @@ private function modeKeepOnly(array $list, array $matches): array
         if (!is_string($k) || $k === '') continue;
 
         if (is_string($v)) {
-            $v = $this->renderTemplateString($v, $context);
-        }
+    $v = $this->renderTemplateString($v, $context);
+}
 
-        // ✅ ignore null (do not overwrite)
-        if ($v === null) {
-            continue;
-        }
+// ✅ ignore null (do not overwrite)
+if ($v === null) {
+    continue;
+}
 
-        $this->setByDotPath($item, $k, $v);
+// ✅ tags/tips：支持 {"mode":"append","values":[...]} 这种 replace_fields 写法
+$leaf = $k;
+if (str_contains($leaf, '.')) {
+    $parts = explode('.', $leaf);
+    $leaf = (string)end($parts);
+}
+if (in_array($leaf, ['tags','tips'], true) && $this->isArrayFieldOp($v)) {
+    $cur = $this->getByDotPath($item, $k);
+    if (!is_array($cur)) $cur = [];
+    $new = $this->applyArrayFieldOp($cur, $v);
+    $this->setByDotPath($item, $k, $new);
+    continue;
+}
+
+$this->setByDotPath($item, $k, $v);
     }
     return $item;
+}
+
+private function isArrayFieldOp($v): bool
+{
+    return is_array($v)
+        && isset($v['mode'])
+        && is_string($v['mode'])
+        && in_array($v['mode'], ['append','prepend','replace','unique_append'], true);
+}
+
+private function applyArrayFieldOp(array $cur, array $spec): array
+{
+    $mode = (string)($spec['mode'] ?? 'replace');
+    $vals = $spec['values'] ?? ($spec['value'] ?? []);
+    if (is_string($vals)) $vals = [$vals];
+    if (!is_array($vals)) $vals = [];
+    $vals = array_values(array_filter($vals, fn($x)=>is_string($x) && trim($x) !== ''));
+
+    $cur = array_values(array_filter($cur, fn($x)=>is_string($x) && trim($x) !== ''));
+
+    return match ($mode) {
+        'append' => array_values(array_merge($cur, $vals)),
+        'prepend' => array_values(array_merge($vals, $cur)),
+        'unique_append' => array_values(array_unique(array_merge($cur, $vals))),
+        default => $vals, // replace
+    };
 }
 
     private function renderTemplateString(string $s, array $context): string

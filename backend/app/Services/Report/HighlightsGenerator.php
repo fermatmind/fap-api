@@ -2,6 +2,8 @@
 
 namespace App\Services\Report;
 
+use App\Services\Overrides\HighlightsOverridesApplier;
+
 class HighlightsGenerator
 {
     /**
@@ -160,10 +162,34 @@ class HighlightsGenerator
         // 6) 体验组装：strength / risk / action / axis（必要时才 fallback）
         $out = $this->composeHighlightsForUX($candidates, $typeCode, $scores, $minItems);
 
-        // 7) normalize + UX sort
+                // 7) normalize + UX sort
         $out = $this->dedupeById($out);
         $out = $this->normalizeHighlightKinds($out);
         $out = $this->sortHighlightsForUX($out);
+
+        // 8) ✅ overrides（finalize 后、return 前）
+        try {
+            /** @var HighlightsOverridesApplier $applier */
+            $applier = app(HighlightsOverridesApplier::class);
+
+            $ctx = [
+                'content_package_version' => $contentPackageVersion,
+                'type_code'               => $typeCode,
+                'scores'                  => $scores,
+                'context'                 => $context,
+                'engine'                  => 'm3',
+                'source'                  => 'HighlightsGenerator',
+            ];
+
+            // 兼容：applyHighlights(...) 或 apply(...)
+            if (method_exists($applier, 'applyHighlights')) {
+                $out = $applier->applyHighlights($out, $ctx);
+            } elseif (method_exists($applier, 'apply')) {
+                $out = $applier->apply($out, $ctx);
+            }
+        } catch (\Throwable $e) {
+            // swallow: overrides 不可用时不影响主链路
+        }
 
         return array_slice($out, 0, 8);
     }

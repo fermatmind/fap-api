@@ -318,6 +318,98 @@ public function loadSelectRules(): array
         return $doc;
     }
 
+/**
+ * ✅ report_overrides.json（统一覆写器入口用）
+ * - 必须走当前 pack chain（含 fallback chain）
+ * - 与 self-check/manifest.assets 对齐（固定 basename：report_overrides.json）
+ * - 若不存在：返回空规则（不抛错，避免影响线上）
+ *
+ * 返回固定结构：
+ * [
+ *   'schema' => 'fap.report.overrides.v1',
+ *   'rules' => [...],
+ *   '__src_chain' => [...],
+ * ]
+ */
+public function loadReportOverrides(): array
+{
+    $basename = 'report_overrides.json';
+
+    // ✅ 复用 overrides 的“按 chain + order bucket”加载（能保留 __src / rule.__src）
+    $docs = $this->loadOverridesDocsOrderedFromChain();
+
+    // 只取 basename = report_overrides.json 的 doc（manifest.assets 一致）
+    $picked = [];
+    foreach ($docs as $d) {
+        if (!is_array($d)) continue;
+
+        $src = $d['__src'] ?? null;
+        $file = is_array($src) ? (string)($src['file'] ?? '') : '';
+        if ($file !== '' && basename($file) === $basename) {
+            $picked[] = $d;
+            continue;
+        }
+
+        // 兜底：有些 doc 可能没 __src.file，但 rules 里有 __src.file
+        $rs = $d['rules'] ?? ($d['overrides'] ?? null);
+        if (is_array($rs)) {
+            foreach ($rs as $r) {
+                if (!is_array($r)) continue;
+                $rsrc = $r['__src'] ?? null;
+                $rfile = is_array($rsrc) ? (string)($rsrc['file'] ?? '') : '';
+                if ($rfile !== '' && basename($rfile) === $basename) {
+                    $picked[] = $d;
+                    break;
+                }
+            }
+        }
+    }
+
+    // ✅ 不存在：返回空规则（不抛错）
+    if (empty($picked)) {
+        return [
+            'schema' => 'fap.report.overrides.v1',
+            'rules' => [],
+            '__src_chain' => [],
+        ];
+    }
+
+    // 合并（沿用你 loadOverrides() 的 merge 口径，但只合并 report_overrides.json）
+    $merged = [
+        'schema' => 'fap.report.overrides.v1',
+        'rules' => [],
+        '__src_chain' => [],
+    ];
+
+    foreach ($picked as $d) {
+        if (!is_array($d)) continue;
+
+        // 归一化：overrides -> rules
+        if (!is_array($d['rules'] ?? null) && is_array($d['overrides'] ?? null)) {
+            $d['rules'] = $d['overrides'];
+        }
+
+        if (is_array($d['rules'] ?? null)) {
+            foreach ($d['rules'] as $r) {
+                if (!is_array($r)) continue;
+
+                // defaults
+                if (!isset($r['tags']) || !is_array($r['tags'])) $r['tags'] = [];
+                if (!isset($r['priority']) || !is_numeric($r['priority'])) $r['priority'] = 0;
+                if (!isset($r['rules']) || !is_array($r['rules'])) $r['rules'] = []; // 某些 target 用得到
+
+                $merged['rules'][] = $r;
+            }
+        }
+
+        if (is_array($d['__src'] ?? null)) {
+            $merged['__src_chain'][] = $d['__src'];
+        }
+    }
+
+    return $merged;
+}
+
     /** overrides（返回合并后的统一 doc：{schema,rules,__src_chain}，并补默认字段） */
     public function loadOverrides(): ?array
     {

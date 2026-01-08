@@ -294,16 +294,45 @@ if (!is_array($borderlineNote['items'] ?? null)) {
 }
 
         // =========================
-        // 8) Build layers.identity
-        // =========================
-        $identityLayer = $this->identityLayerBuilder->build(
-            $contentPackageDir,
-            $typeCode,
-            $scoresPct,
-            $borderlineNote
-        );
+// 8) Build layers.identity
+// =========================
+$identityLayer = $this->identityLayerBuilder->build(
+    $contentPackageDir,
+    $typeCode,
+    $scoresPct,
+    $borderlineNote
+);
 
-        // =========================
+// =========================
+// 8.8) ✅ preload unified overrides (for cards pipeline)
+// - 目的：让 cards 生成后立刻 applyCards，保证日志顺序：base selected -> rule_applied
+// - 同时把 resetExplain 提前，避免后面覆盖掉 cards 的 overrides explain
+// =========================
+$overridesDoc = $store->loadOverrides();
+$overridesOrderBuckets = $store->overridesOrderBuckets();
+
+// ✅ reset overrides explain（本次 report 一次性收集）
+// NOTE：必须在任何 applyCards/applyHighlights/applyReads 之前调用
+$this->reportOverridesApplier->resetExplain();
+
+// ✅ build unified doc once
+$unifiedOverridesDoc = $this->buildUnifiedOverridesDocForApplierFromPackChain($chain, $overridesDoc);
+
+$ovrCaptureExplain = app()->environment('local') && (
+    (bool) env('RE_EXPLAIN_PAYLOAD', false) || (bool) env('RE_EXPLAIN', false)
+);
+
+$ovrCtx = [
+    'report_overrides_doc' => $unifiedOverridesDoc,
+    'overrides_debug'      => (bool) env('FAP_OVR_DEBUG', false),
+    'tags'                 => $tags,
+
+    // explain 透传给 overrides applier -> RuleEngine
+    'capture_explain'      => (bool) $ovrCaptureExplain,
+    'explain_collector'    => $ovrCaptureExplain ? ($GLOBALS['__re_explain_collector__'] ?? null) : null,
+];
+
+// =========================
 // 9) Build Sections Cards（按 policy 决定要生成多少张）
 // =========================
 
@@ -342,49 +371,44 @@ $axisInfoForCards['attempt_id'] = $attemptId;
 $axisInfoForCards['capture_explain'] = (bool)$wantExplainPayload;
 $axisInfoForCards['explain_collector'] = $explainCollector; // 可能为 null
 
-// 9.3) 生成 sections（把 wantN 传给 generator）
-$sections = [
-    'traits' => [
-        'cards' => $this->cardGen->generateFromStore(
-            'traits',
-            $store,
-            $tags,
-            $axisInfoForCards,
-            $contentPackageDir,
-            $wantCards('traits')
-        ),
-    ],
-    'career' => [
-        'cards' => $this->cardGen->generateFromStore(
-            'career',
-            $store,
-            $tags,
-            $axisInfoForCards,
-            $contentPackageDir,
-            $wantCards('career')
-        ),
-    ],
-    'growth' => [
-        'cards' => $this->cardGen->generateFromStore(
-            'growth',
-            $store,
-            $tags,
-            $axisInfoForCards,
-            $contentPackageDir,
-            $wantCards('growth')
-        ),
-    ],
-    'relationships' => [
-        'cards' => $this->cardGen->generateFromStore(
-            'relationships',
-            $store,
-            $tags,
-            $axisInfoForCards,
-            $contentPackageDir,
-            $wantCards('relationships')
-        ),
-    ],
-];
+// 9.3) 生成 sections（先 base selected，再 apply overrides，再写入 report.sections）
+$sections = [];
+
+foreach (['traits', 'career', 'growth', 'relationships'] as $sectionKey) {
+
+    // 1) base selected
+    $baseCards = $this->cardGen->generateFromStore(
+        $sectionKey,
+        $store,
+        $tags,
+        $axisInfoForCards,
+        $contentPackageDir,
+        $wantCards($sectionKey)
+    );
+
+    // ✅ 先打 base selected 日志（必须在 applyCards 之前）
+    \Illuminate\Support\Facades\Log::info('[CARDS] selected (base)', [
+        'section' => $sectionKey,
+        'count'   => is_array($baseCards) ? count($baseCards) : -1,
+        'ids'     => is_array($baseCards)
+            ? array_slice(array_map(fn($x) => $x['id'] ?? null, $baseCards), 0, 12)
+            : null,
+    ]);
+
+    // 2) overrides applied（applier 内部会打 [OVR] rule_applied）
+    $finalCards = $this->reportOverridesApplier->applyCards(
+        $contentPackageDir,
+        $typeCode,
+        (string)$sectionKey,
+        is_array($baseCards) ? $baseCards : [],
+        $ovrCtx
+    );
+
+    // 3) write into sections
+    $sections[$sectionKey] = [
+        'cards' => $finalCards,
+    ];
+}
 
 // （可选但强烈建议）打个日志，确认 wantN 与实际 cards 数
 \Illuminate\Support\Facades\Log::info('[CARDS] generated_by_policy', [
@@ -422,14 +446,9 @@ $recommendedReads = $this->buildRecommendedReadsFromDoc(
     $strategyCard
 );
 
-        // =========================
-        // 10.5) load unified overrides doc
-        // =========================
-        // ✅ 不再拼路径：从 pack.assets(overrides) 在 chain 里找 report_overrides.json
-        // ✅ 按 manifest.assets.overrides 的 order 定死顺序加载（支持多文件）
-// 并给每条 override 注入 __src（pack_id/file/idx），用于 rule_applied 可追溯
-$overridesDoc = $store->loadOverrides();
-$overridesOrderBuckets = $store->overridesOrderBuckets();
+// =========================
+// 10.5) overrides 已在 Step 8.8 preload（给 cards pipeline 用）
+// =========================
 
         // =========================
         // 11) ✅ Overrides 统一入口
@@ -1288,9 +1307,6 @@ private function applyOverridesUnified(
     // 统一 overrides：把已加载的 doc 直接塞给 applier
     $unifiedDoc = $this->buildUnifiedOverridesDocForApplierFromPackChain($chain, $overridesDoc);
 
-// ✅ reset overrides explain（本次 report 一次性收集）
-$this->reportOverridesApplier->resetExplain();
-
 $ovrCtx = [
     'report_overrides_doc' => $unifiedDoc,
     'overrides_debug'      => (bool) env('FAP_OVR_DEBUG', false),
@@ -1326,19 +1342,6 @@ $ovrCtx = [
         }
         // 其他 bucket 暂不处理（但 file_loaded 仍会被审计）
     }
-
-    // 2) cards（逐 section）只跑 unified
-    foreach ($sections as $sectionKey => &$sec) {
-        $cards = is_array($sec['cards'] ?? null) ? $sec['cards'] : [];
-        $sec['cards'] = $this->reportOverridesApplier->applyCards(
-            $contentPackageDir,
-            $typeCode,
-            (string)$sectionKey,
-            $cards,
-            $ovrCtx
-        );
-    }
-    unset($sec);
 
     Log::debug('[reads] before applyReads', [
   'count' => is_array($recommendedReads) ? count($recommendedReads) : -1,

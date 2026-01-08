@@ -1439,6 +1439,28 @@ $out = $this->normalizeHighlightKinds($out);
 // ✅ UX 排序：strength / risk / action 优先，其次 axis；同类再按 delta 降序
 $out = $this->sortHighlightsForUX($out);
 
+// ✅ overrides（finalize 后、return 前）
+try {
+    $applier = app(\App\Services\Overrides\HighlightsOverridesApplier::class);
+
+    $ctx = [
+        'content_package_version' => $contentPackageVersion,
+        'type_code'               => $typeCode,
+        'scores_pct'              => $scoresPct,
+        'axis_states'             => $axisStates,
+        'engine'                  => 'm3',
+        'source'                  => 'MbtiController::buildHighlights',
+    ];
+
+    if (method_exists($applier, 'applyHighlights')) {
+        $out = $applier->applyHighlights($out, $ctx);
+    } elseif (method_exists($applier, 'apply')) {
+        $out = $applier->apply($out, $ctx);
+    }
+} catch (\Throwable $e) {
+    // swallow
+}
+
 return array_slice($out, 0, 8);
 }
 
