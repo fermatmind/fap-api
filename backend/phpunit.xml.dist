@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+  bootstrap="vendor/autoload.php"
+  colors="true"
+  failOnWarning="true"
+  failOnRisky="true"
+>
+  <testsuites>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Feature">
+      <directory suffix="Test.php">tests/Feature</directory>
+    </testsuite>
+  </testsuites>
+
+  <php>
+    <!-- Laravel -->
+    <env name="APP_ENV" value="testing"/>
+    <env name="APP_DEBUG" value="true"/>
+    <env name="CACHE_STORE" value="array"/>
+    <env name="QUEUE_CONNECTION" value="sync"/>
+    <env name="SESSION_DRIVER" value="array"/>
+
+    <!-- ✅ FAP content pack defaults (CI hard defaults) -->
+    <env name="FAP_PACKS_ROOT" value="../content_packages"/>
+    <env name="MBTI_CONTENT_PACKAGE" value="default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"/>
+
+    <!-- 如果你代码里有这些维度配置，也一起钉死 -->
+    <env name="FAP_REGION" value="CN_MAINLAND"/>
+    <env name="FAP_LOCALE" value="zh-CN"/>
+  </php>
+</phpunit>
