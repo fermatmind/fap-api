@@ -1,0 +1,84 @@
+# file: .github/workflows/ci_verify_mbti.yml
+name: CI Verify MBTI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  verify-mbti:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+          tools: composer:v2
+          extensions: >
+            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: |
+            backend/vendor
+            ~/.composer/cache/files
+          key: ${{ runner.os }}-php83-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php83-
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: |
+          composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare Laravel env
+        working-directory: backend
+        run: |
+          # Ensure .env exists (avoid interactive prompts)
+          if [ ! -f .env ]; then
+            if [ -f .env.example ]; then cp .env.example .env; else touch .env; fi
+          fi
+
+          # Generate key (safe even if APP_KEY already exists)
+          php artisan key:generate --force || true
+
+          # Ensure writable dirs exist
+          mkdir -p storage/framework/{cache,views,sessions} bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+
+          # Make scripts executable (some repos lose +x on Windows)
+          chmod +x scripts/*.sh || true
+
+      - name: Run ci_verify_mbti
+        working-directory: backend
+        env:
+          # Hard defaults to avoid GLOBAL/en fallbacks in CI
+          APP_ENV: ci
+          APP_DEBUG: "true"
+          MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+          FAP_DEFAULT_REGION: CN_MAINLAND
+          FAP_DEFAULT_LOCALE: zh-CN
+          FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+
+          # Keep E2E strict
+          STRICT: "1"
+          MODE: ci
+        run: |
+          bash scripts/ci_verify_mbti.sh
+
+      - name: Upload verify_mbti artifacts (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify_mbti_artifacts
+          path: backend/artifacts/verify_mbti
+          if-no-files-found: ignore
+          retention-days: 7
