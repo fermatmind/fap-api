@@ -1,161 +1,147 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ==========================================
-# ci_verify_mbti.sh
-# One-command CI/server E2E verification:
-#   - enforce non-fallback defaults (CN_MAINLAND / zh-CN / pack_id)
-#   - boot API server (artisan serve)
-#   - run verify_mbti.sh
-#   - always stop server
-#
-# Usage:
-#   bash ./scripts/ci_verify_mbti.sh
-#   PORT=8010 bash ./scripts/ci_verify_mbti.sh
-#   API=http://127.0.0.1:8010 bash ./scripts/ci_verify_mbti.sh
-#   RUN_DIR=/tmp/verify_mbti bash ./scripts/ci_verify_mbti.sh
-# ==========================================
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-
 cd "$BACKEND_DIR"
 
-# -----------------------------
-# Defaults (safe for CI)
-# -----------------------------
-HOST="${HOST:-127.0.0.1}"
-PORT="${PORT:-8000}"
-API="${API:-http://${HOST}:${PORT}}"
-
-# Content defaults (prevent GLOBAL/en fallback)
-export FAP_DEFAULT_REGION="${FAP_DEFAULT_REGION:-CN_MAINLAND}"
-export FAP_DEFAULT_LOCALE="${FAP_DEFAULT_LOCALE:-zh-CN}"
-export FAP_DEFAULT_PACK_ID="${FAP_DEFAULT_PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.1-TEST}"
-
-# If your app resolves manifests by this env (you used it in FapSelfCheck), keep it aligned:
-export MBTI_CONTENT_PACKAGE="${MBTI_CONTENT_PACKAGE:-default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST}"
-
-# verify_mbti.sh inputs (you can override in CI)
-export REGION="${REGION:-CN_MAINLAND}"
-export LOCALE="${LOCALE:-zh-CN}"
-export EXPECT_PACK_PREFIX="${EXPECT_PACK_PREFIX:-MBTI.cn-mainland.zh-CN.}"
-export STRICT="${STRICT:-1}"     # forbid deprecated/GLOBAL/en signals
-export VERIFY_MODE="${VERIFY_MODE:-ci}"  # informational only (avoid clashing with accept_overrides_D.sh MODE)
-export API="$API"                # verify_mbti.sh reads API var
-
-# Artifacts dir
-RUN_DIR="${RUN_DIR:-$BACKEND_DIR/artifacts/verify_mbti}"
-mkdir -p "$RUN_DIR" "$RUN_DIR/logs"
-
-# -----------------------------
-# Helpers
-# -----------------------------
-need_cmd() {
-  command -v "$1" >/dev/null 2>&1 || { echo "[FAIL] missing command: $1" >&2; exit 2; }
-}
+need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[CI][FAIL] missing command: $1" >&2; exit 2; }; }
 need_cmd php
 need_cmd curl
 need_cmd jq
-need_cmd python3
-
-SERVER_PID=""
-SERVER_LOG="$RUN_DIR/logs/artisan_serve.log"
-
-cleanup() {
-  local ec=$?
-  if [[ -n "${SERVER_PID:-}" ]]; then
-    if kill -0 "$SERVER_PID" >/dev/null 2>&1; then
-      kill "$SERVER_PID" >/dev/null 2>&1 || true
-      for _ in 1 2 3 4 5; do
-        kill -0 "$SERVER_PID" >/dev/null 2>&1 || break
-        sleep 0.2
-      done
-      kill -9 "$SERVER_PID" >/dev/null 2>&1 || true
-    fi
-  fi
-
-  if [[ $ec -ne 0 ]]; then
-    echo "[FAIL] ci_verify_mbti exited with code=$ec" >&2
-
-    if [[ -f "$SERVER_LOG" ]]; then
-      echo "---- artisan serve log (tail 120 lines) ----" >&2
-      tail -n 120 "$SERVER_LOG" >&2 || true
-      echo >&2
-    fi
-
-    if [[ -f "$RUN_DIR/logs/self_check.log" ]]; then
-      echo "---- self-check log (tail 200 lines) ----" >&2
-      tail -n 200 "$RUN_DIR/logs/self_check.log" >&2 || true
-      echo >&2
-    fi
-
-    if [[ -f "$RUN_DIR/logs/overrides_accept_D.log" ]]; then
-      echo "---- overrides_accept_D.log (tail 200 lines) ----" >&2
-      tail -n 200 "$RUN_DIR/logs/overrides_accept_D.log" >&2 || true
-      echo >&2
-    fi
-
-    echo "[ARTIFACTS] $RUN_DIR" >&2
-  fi
-  exit $ec
-}
-trap cleanup EXIT INT TERM
-
-wait_health() {
-  local url="$1"
-  local tries="${2:-60}"    # 60 * 0.25s = 15s
-  local sleep_s="${3:-0.25}"
-
-  for ((i=1; i<=tries; i++)); do
-    if curl -fsS "$url" >/dev/null 2>&1; then
-      return 0
-    fi
-    sleep "$sleep_s"
-  done
-  return 1
-}
 
 # -----------------------------
-# Boot server (artisan serve)
+# CI-hard defaults (NO GLOBAL/en fallback)
 # -----------------------------
+API_HOST="${API_HOST:-127.0.0.1}"
+API_PORT="${API_PORT:-8000}"
+API="http://${API_HOST}:${API_PORT}"
+
+FAP_DEFAULT_REGION="${FAP_DEFAULT_REGION:-CN_MAINLAND}"
+FAP_DEFAULT_LOCALE="${FAP_DEFAULT_LOCALE:-zh-CN}"
+FAP_DEFAULT_PACK_ID="${FAP_DEFAULT_PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.1-TEST}"
+MBTI_CONTENT_PACKAGE="${MBTI_CONTENT_PACKAGE:-default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST}"
+
+APP_ENV="${APP_ENV:-testing}"
+APP_DEBUG="${APP_DEBUG:-false}"
+LOG_CHANNEL="${LOG_CHANNEL:-stderr}"
+
+# Optional: if your code has "forbid legacy/scan/deprecated" switches, hard-enable here.
+# (Replace names to your actual env keys if they exist)
+FAP_FORBID_DEPRECATED="${FAP_FORBID_DEPRECATED:-1}"
+FAP_FORBID_LEGACY="${FAP_FORBID_LEGACY:-1}"
+FAP_FORBID_SCAN="${FAP_FORBID_SCAN:-1}"
+
+# -----------------------------
+# Artifacts
+# -----------------------------
+RUN_DIR="${RUN_DIR:-$BACKEND_DIR/artifacts/verify_mbti}"
+LOG_DIR="$RUN_DIR/logs"
+mkdir -p "$LOG_DIR"
+
+SERVE_LOG="$LOG_DIR/artisan_serve.log"
+SELF_LOG="$LOG_DIR/self_check.log"
+SMOKE_LOG="$LOG_DIR/smoke_questions.log"
+
 echo "[CI] backend_dir=$BACKEND_DIR"
 echo "[CI] API=$API"
 echo "[CI] defaults: region=$FAP_DEFAULT_REGION locale=$FAP_DEFAULT_LOCALE pack_id=$FAP_DEFAULT_PACK_ID"
 echo "[CI] MBTI_CONTENT_PACKAGE=$MBTI_CONTENT_PACKAGE"
 echo "[CI] artifacts=$RUN_DIR"
-echo "[CI] verify_mode=$VERIFY_MODE"
 
-# Clean cached config for deterministic env behavior
-php artisan config:clear >/dev/null 2>&1 || true
+# -----------------------------
+# Clean Laravel config cache (important in CI)
+# -----------------------------
+rm -f bootstrap/cache/config.php bootstrap/cache/services.php bootstrap/cache/packages.php 2>/dev/null || true
 
-echo "[CI] starting server: php artisan serve --host=$HOST --port=$PORT"
-php artisan serve --host="$HOST" --port="$PORT" >"$SERVER_LOG" 2>&1 &
-SERVER_PID=$!
+# -----------------------------
+# Start server (HARD bind env to this process)
+# -----------------------------
+echo "[CI] starting server: php artisan serve --host=${API_HOST} --port=${API_PORT}"
 
+APP_ENV="$APP_ENV" \
+APP_DEBUG="$APP_DEBUG" \
+LOG_CHANNEL="$LOG_CHANNEL" \
+FAP_DEFAULT_REGION="$FAP_DEFAULT_REGION" \
+FAP_DEFAULT_LOCALE="$FAP_DEFAULT_LOCALE" \
+FAP_DEFAULT_PACK_ID="$FAP_DEFAULT_PACK_ID" \
+MBTI_CONTENT_PACKAGE="$MBTI_CONTENT_PACKAGE" \
+FAP_FORBID_DEPRECATED="$FAP_FORBID_DEPRECATED" \
+FAP_FORBID_LEGACY="$FAP_FORBID_LEGACY" \
+FAP_FORBID_SCAN="$FAP_FORBID_SCAN" \
+php artisan serve --host="${API_HOST}" --port="${API_PORT}" >"$SERVE_LOG" 2>&1 &
+SERVE_PID=$!
+
+cleanup() {
+  local ec=$?
+  if kill -0 "$SERVE_PID" >/dev/null 2>&1; then
+    kill "$SERVE_PID" >/dev/null 2>&1 || true
+  fi
+  exit $ec
+}
+trap cleanup EXIT
+
+# Wait for health
 echo "[CI] waiting for health: $API/api/v0.2/health"
-if ! wait_health "$API/api/v0.2/health" 80 0.25; then
-  echo "[FAIL] server health not ready: $API/api/v0.2/health" >&2
+for i in {1..60}; do
+  if curl -fsS "$API/api/v0.2/health" >/dev/null 2>&1; then
+    echo "[CI] server ready (pid=$SERVE_PID)"
+    break
+  fi
+  sleep 0.5
+done
+
+if ! curl -fsS "$API/api/v0.2/health" >/dev/null 2>&1; then
+  echo "[CI][FAIL] server not ready. tail artisan_serve.log:" >&2
+  tail -n 120 "$SERVE_LOG" >&2 || true
   exit 10
 fi
-echo "[CI] server ready (pid=$SERVER_PID)"
 
-# Optional: self-check content pack fast (recommended in CI)
-# If you want to skip: export SKIP_SELF_CHECK=1
-if [[ "${SKIP_SELF_CHECK:-0}" != "1" ]]; then
-  echo "[CI] fap:self-check (manifest/assets/schema)"
-  php artisan fap:self-check --pkg="$MBTI_CONTENT_PACKAGE" >"$RUN_DIR/logs/self_check.log" 2>&1 || {
-    echo "---- self-check log (tail 200 lines) ----" >&2
-    tail -n 200 "$RUN_DIR/logs/self_check.log" >&2 || true
-    exit 11
-  }
-  echo "[CI] self-check OK"
+# -----------------------------
+# Self-check (manifest/assets/schema)
+# -----------------------------
+echo "[CI] fap:self-check (manifest/assets/schema)"
+set +e
+php artisan fap:self-check --pkg="$MBTI_CONTENT_PACKAGE" >"$SELF_LOG" 2>&1
+sc_ec=$?
+set -e
+if [[ "$sc_ec" != "0" ]]; then
+  echo "[CI][FAIL] self-check failed (exit=$sc_ec). tail self_check.log:" >&2
+  tail -n 200 "$SELF_LOG" >&2 || true
+  exit 11
+fi
+echo "[CI] self-check OK"
+
+# -----------------------------
+# Smoke: questions endpoint MUST be OK before verify_mbti
+# -----------------------------
+echo "[CI] smoke: /api/v0.2/scales/MBTI/questions"
+set +e
+curl -sS "$API/api/v0.2/scales/MBTI/questions" >"$RUN_DIR/questions.smoke.json" 2>"$SMOKE_LOG"
+sm_ec=$?
+set -e
+
+if [[ "$sm_ec" != "0" ]]; then
+  echo "[CI][FAIL] smoke curl failed (exit=$sm_ec)." >&2
+  tail -n 80 "$SMOKE_LOG" >&2 || true
+  echo "[CI] tail artisan_serve.log:" >&2
+  tail -n 200 "$SERVE_LOG" >&2 || true
+  exit 12
 fi
 
+if ! jq -e '.ok==true' "$RUN_DIR/questions.smoke.json" >/dev/null 2>&1; then
+  echo "[CI][FAIL] smoke returned ok=false. body:" >&2
+  head -c 800 "$RUN_DIR/questions.smoke.json" >&2 || true
+  echo >&2
+  echo "[CI] tail artisan_serve.log:" >&2
+  tail -n 200 "$SERVE_LOG" >&2 || true
+  exit 13
+fi
+echo "[CI] smoke questions OK"
+
 # -----------------------------
-# Run verify_mbti
+# Run verify_mbti.sh
 # -----------------------------
 echo "[CI] running: bash ./scripts/verify_mbti.sh"
-RUN_DIR="$RUN_DIR" API="$API" VERIFY_MODE="$VERIFY_MODE" bash "$SCRIPT_DIR/verify_mbti.sh"
-
-echo "[CI] DONE ✅"
+API="$API" BASE="$API" STRICT=1 MODE=ci RUN_DIR="$RUN_DIR" bash ./scripts/verify_mbti.sh
+echo "[CI] verify_mbti OK ✅"
