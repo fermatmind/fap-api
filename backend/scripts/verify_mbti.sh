@@ -273,6 +273,39 @@ python3 "$SCRIPT_DIR/assert_report.py" \
   --expect-pack-prefix "$EXPECT_PACK_PREFIX" \
   --expect-locale "$LOCALE"
 
+# -------------------------
+# REGION positive assertion
+# -------------------------
+# Expect REGION like: CN_MAINLAND  -> report dir uses: CN-MAINLAND
+_expect_region="${REGION:-CN_MAINLAND}"
+_expect_region_dir="${_expect_region//_/-}"                 # CN_MAINLAND -> CN-MAINLAND
+_expect_region_slug="$(echo "$_expect_region" | tr '[:upper:]' '[:lower:]' | tr '_' '-')"  # cn-mainland
+
+_actual_dir="$(jq -r '.report.versions.content_package_dir // ""' "$REPORT_JSON")"
+_actual_pack_id="$(jq -r '.report.versions.content_pack_id // ""' "$REPORT_JSON")"
+
+if [[ -z "$_actual_dir" ]]; then
+  echo "[ASSERT][FAIL] report.versions.content_package_dir missing"
+  exit 2
+fi
+
+# dir must include CN-MAINLAND (or the expected region dir)
+if [[ "$_actual_dir" != *"/${_expect_region_dir}/"* && "$_actual_dir" != *"${_expect_region_dir}/"* ]]; then
+  echo "[ASSERT][FAIL] content_package_dir unexpected: ${_actual_dir} (expect contains ${_expect_region_dir})"
+  exit 2
+fi
+
+# pack_id must include cn-mainland
+if [[ -z "$_actual_pack_id" ]]; then
+  echo "[ASSERT][FAIL] report.versions.content_pack_id missing"
+  exit 2
+fi
+
+if [[ "$_actual_pack_id" != *".${_expect_region_slug}."* && "$_actual_pack_id" != *"${_expect_region_slug}"* ]]; then
+  echo "[ASSERT][FAIL] content_pack_id unexpected: ${_actual_pack_id} (expect contains ${_expect_region_slug})"
+  exit 2
+fi
+
 # 2) STRICT 负断言：禁止 deprecated/GLOBAL/en 信号出现在 report/share（足够抓到很多 silent fallback）
 strict_negative_signals "$REPORT_JSON" "Content(report)"
 strict_negative_signals "$SHARE_JSON" "Content(share)"
