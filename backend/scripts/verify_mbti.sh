@@ -51,15 +51,22 @@ OVR_LOG="$LOG_DIR/overrides_accept_D.log"
 echo "[ARTIFACTS] $RUN_DIR"
 
 # -----------------------------
+# Assertions lib (shared helpers)
+# -----------------------------
+ASSERT_LIB="$SCRIPT_DIR/verify_mbti_assert.sh"
+if [[ ! -f "$ASSERT_LIB" ]]; then
+  echo "[FAIL] missing assertion lib: $ASSERT_LIB" >&2
+  exit 2
+fi
+# shellcheck disable=SC1090
+source "$ASSERT_LIB"
+
+# -----------------------------
 # Preconditions
 # -----------------------------
-need_cmd() {
-  local c="$1"
-  command -v "$c" >/dev/null 2>&1 || { echo "[FAIL] missing command: $c" >&2; exit 2; }
-}
-need_cmd curl
-need_cmd python3
-need_cmd jq
+require_cmd curl
+require_cmd python3
+require_cmd jq
 
 # -----------------------------
 # Exit trap
@@ -360,7 +367,7 @@ if [[ -f "$ACCEPT_OVR" ]]; then
   }
 
   # ✅ 额外硬断言：必须包含 ALL DONE（防止脚本误 exit 0 但没跑完）
-  assert_file_contains "$OVR_LOG" "✅ ALL DONE: D-1 / D-2 / D-3 passed" "Overrides"
+  assert_contains "$OVR_LOG" "✅ ALL DONE: D-1 / D-2 / D-3 passed" "Overrides"
 
   # ✅ STRICT 负断言：禁止 deprecated/GLOBAL/en 信号
   strict_negative_signals "$OVR_LOG" "Overrides(log)"
