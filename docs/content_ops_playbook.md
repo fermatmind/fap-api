@@ -39,7 +39,7 @@
 **职责：** 纯内容库（卡片/reads/identity 等），不涉及选择逻辑。  
 **文件举例：**
 - `report_cards_*.json`
-- `reads_*.json`
+- `report_recommended_reads.json`（reads：同文件包含 rules + items）
 - `identity_layers.json`
 **允许改动：** ✅（运营改 JSON）
 **风险等级：** 中（可通过自检 + verify_mbti 拦截）
@@ -49,8 +49,7 @@
 **文件举例：**
 - `report_highlights_pools.json`
 - `report_highlights_rules.json`
-- `reads_pools.json`
-- `reads_rules.json`
+- `report_recommended_reads.json`（reads：同文件包含 rules + items）
 **允许改动：** ✅（运营改 JSON，但必须过验收）
 **风险等级：** 高（容易导致缺卡、随机兜底、回退风险）
 
@@ -97,15 +96,189 @@
 ### 3.2 映射表（请按你的实际文件名填写）
 | section | 内容来源（L1） | 选择规则（L2） | overrides（L3）允许？ | overrides 范围 |
 |---|---|---|---|---|
-| identity_card | `identity_layers.json` | （通常无） | ✅/❌ | 只允许改文案/排序，不改 id |
-| strengths | `report_cards_strength.json`（示例） | `report_highlights_rules.json` | ✅ | 允许替换卡 id / 禁用某卡 |
-| blindspots | `report_cards_blindspot.json`（示例） | `report_highlights_rules.json` | ✅ | 同上 |
-| actions | `report_cards_action.json`（示例） | `report_highlights_rules.json` | ✅ | 同上 |
-| relationships | `report_cards_relationships.json`（示例） | `section_rules_relationships.json`（示例） | ✅ | 只允许替换推荐卡，不改结构 |
-| career | `report_cards_career.json`（示例） | `section_rules_career.json`（示例） | ✅ | 同上 |
-| stress_recovery | `report_cards_stress.json`（示例） | `section_rules_stress.json`（示例） | ✅ | 同上 |
-| growth_plan | `report_cards_growth.json`（示例） | `section_rules_growth.json`（示例） | ✅ | 同上 |
-| reads | `reads_cards.json`（示例） | `reads_rules.json`（示例） | ✅ | 允许调序/替换/禁用 |
+| identity_card | `report_identity_cards.json`（identity 卡片库）, `identity_layers.json`（层级/展示结构） | （通常无） | ✅ | 只允许改文案/展示字段/排序；禁止改 id 与结构契约字段 |
+| strengths | `report_highlights_templates.json`（模板/物料）, `report_highlights_pools.json`（池配置） | `report_highlights_rules.json`, `report_highlights_policy.json` | ✅ | 允许替换/禁用 highlight 目标 id；禁止改 schema/contract |
+| blindspots | `report_highlights_templates.json`（模板/物料）, `report_highlights_pools.json`（池配置） | `report_highlights_rules.json`, `report_highlights_policy.json` | ✅ | 同上 |
+| actions | `report_highlights_templates.json`（模板/物料）, `report_highlights_pools.json`（池配置） | `report_highlights_rules.json`, `report_highlights_policy.json` | ✅ | 同上 |
+| relationships | `report_cards_relationships.json`, `report_cards_fallback_relationships.json` | `report_rules.json`, `report_section_policies.json`, `report_select_rules.json` | ✅ | 只允许替换推荐卡/禁用卡；不改 section 结构字段 |
+| career | `report_cards_career.json`, `report_cards_fallback_career.json` | `report_rules.json`, `report_section_policies.json`, `report_select_rules.json` | ✅ | 同上 |
+| stress_recovery | `report_cards_growth.json`, `report_cards_fallback_growth.json` | `report_rules.json`, `report_section_policies.json`, `report_select_rules.json` | ✅ | 同上（当前内容包里通常归在 growth 章节里做“压力与恢复”相关卡） |
+| growth_plan | `report_cards_growth.json`, `report_cards_fallback_growth.json` | `report_rules.json`, `report_section_policies.json`, `report_select_rules.json` | ✅ | 同上 |
+| reads | `report_recommended_reads.json` | `report_recommended_reads.json`（同文件内包含 rules + items） | ✅ | 允许调序/替换/禁用（在同一文件内改 rules/items） |
+
+> 注：
+> 1) reads 使用单文件 `report_recommended_reads.json`，**同一份 JSON 同时包含选择规则（rules）+ 物料（items）**；不像 highlights 会拆成 rules/pools/templates。  
+> 2) 你当前内容包的“章节卡片库”实际是 4 份：traits / relationships / career / growth（对应 `report_cards_traits.json`、`report_cards_relationships.json`、`report_cards_career.json`、`report_cards_growth.json`），其章节选择逻辑主要落在 `report_rules.json` + `report_section_policies.json` + `report_select_rules.json`。
+
+---
+
+## Step 2 库存量规范（Inventory Spec）
+
+> 目的：把“每个 section 需要多少卡、按哪些维度分层、最低库存（MVP）是多少”写成**可验收**的规范，让内容同学只改 JSON 也能稳定迭代。
+
+本 Step 的输出建议沉淀为独立文档：`docs/content_inventory_spec.md`（后续会补）。
+
+本 Step 会做三件事：
+1. 把目标量按 **section × kind × 维度**拆成清单（先写规则，不急着填满内容）
+2. 定义“最小可用库存（MVP）”：先保证 `strength/blindspot/action/read` 在 `CN_MAINLAND/zh-CN` 下**无回退跑通**
+3. 给运营一个可执行的补库节奏：先补通用/兜底，再补 role/axis，最后做精细化扩容
+
+（下一步你会在这里补：库存量表格模板 + MVP 门槛 + 补库优先级。）
+
+### 2.1 目标量拆分规则（只写规则，不要求一次填满）
+
+> 核心：库存按 **section × kind × 维度**拆分。先保证“每个格子都有最低可用数量”，再逐步扩容。
+
+#### 维度定义（固定用这些维度来分库存）
+- 通用（generic）：不依赖角色/轴，适合多数人群
+- Role（role）：按 MBTI 16 型（或你的 role 分组）定向
+- Axis（axis）：按轴向（EI/SN/TF/JP/AT）及其 state/delta 分层（由 rules 决定怎么用）
+- Strategy（strategy，仅 reads）：按阅读策略/主题路径分层（例如：沟通策略/情绪调节策略/成长策略）
+- Fallback（fallback）：兜底卡（必须可用、可控、可验收；兜底不是随机凑数）
+
+---
+
+### 2.2 目标量清单（按 section × kind × 维度）
+
+> 说明：下面是“库存目标”的**规则表**，先落规范，后续内容同学只要按表补卡即可。
+> - 数量是“每个 section 的目标库存”
+> - kind 若不适用可写 N/A（例如 identity_card 不一定有 highlight kind）
+> - Axis“每轴若干”先给一个最低值（建议 3），后续按数据反馈扩容
+
+#### A) Highlights 三类（strength / blindspot / action）
+适用 section：`strengths / blindspots / actions`
+
+| section | kind | 通用（generic） | role | axis（每轴） | fallback |
+|---|---|---:|---:|---:|---:|
+| strengths | strength | 10 | 4 | 3 | 5 |
+| blindspots | blindspot | 10 | 4 | 3 | 5 |
+| actions | action | 10 | 4 | 3 | 5 |
+
+**补充说明（Highlights）**
+- “role=4”不是指覆盖 16 型，而是指**每个 section 至少准备 4 张 role 定向卡**（先覆盖高频/关键类型）。后续扩容到 16 型全覆盖时，另开“扩容计划”。
+- “axis=每轴 3”表示 EI/SN/TF/JP/AT 各至少 3 张可用卡（先保证能按规则挑到，不触发兜底）。
+- fallback=5 必须是“可解释兜底”：写明兜底触发条件与使用范围（避免成为随机垃圾桶）。
+
+---
+
+#### B) Reads（阅读/建议内容）
+适用 section：`reads`
+
+| section | kind | 通用（generic） | role | strategy | axis | fallback |
+|---|---|---:|---:|---:|---:|---:|
+| reads | read | 10 | 4 | 6 | 3 | 5 |
+
+**补充说明（Reads）**
+- strategy=6：先按你最常用的 6 个策略主题分组（例如：沟通/情绪/关系/职业/压力/成长），每组至少 1 张。
+- axis=3：同样每轴至少 3 张（或按你 reads 规则实际需要调整）。
+- fallback=5：reads 的兜底必须“无敏感建议、无医疗承诺、无夸张结论”，且可以长期使用。
+
+##### Strategy 六主题（固定字典，不随意加减）
+
+> 目的：让 reads 的 strategy 维度“可写、可补库、可验收”。  
+> 运营/内容新增 read 卡时必须选择其中一个 strategy_key；不得自创新 key（需要扩展时走工程评审）。
+
+固定六主题（strategy_key → 含义 → 典型适用场景）：
+
+1) `strategy.communication`（沟通协作）
+- 适用：表达/倾听/冲突沟通/边界沟通/说服与对齐
+
+2) `strategy.emotion`（情绪调节）
+- 适用：焦虑/愤怒/低落/自责/情绪复盘/情绪急救
+
+3) `strategy.relationship`（关系经营）
+- 适用：亲密关系/朋友/同事/家庭关系/信任修复/依恋与安全感
+
+4) `strategy.career`（职业发展）
+- 适用：职业选择/成长路径/晋升与影响力/决策/领导力/工作习惯
+
+5) `strategy.stress`（压力与恢复）
+- 适用：压力识别/恢复节律/能量管理/睡眠与作息/过载预警
+
+6) `strategy.growth`（成长与习惯）
+- 适用：目标拆解/行动计划/自控力/复盘/长期习惯与系统搭建
+
+规则约束（必须遵守）：
+- 每张 read 必须且只能选 1 个 `strategy_key`
+- MVP 阶段：六主题每个至少 1 张通用 read（generic）
+- 扩容阶段：每个主题逐步补齐 role/axis 定向 read（按优先级）
+
+---
+
+#### C) 其他 sections（relationships / career / stress_recovery / growth_plan / identity_card）
+> 这些 section 可能不走 highlights 规则，也可能是“章节卡片库 + 章节规则”。
+> 先把“库存拆分法”写死：通用 / role / axis / fallback 四类仍然适用（kind 可能是 section-specific card）。
+
+建议先统一成 **section_card**（或你实际的 card kind），后续再细化到多 kind。
+
+| section | kind（建议） | 通用（generic） | role | axis（每轴） | fallback |
+|---|---|---:|---:|---:|---:|
+| relationships | section_card | 10 | 4 | 3 | 5 |
+| career | section_card | 10 | 4 | 3 | 5 |
+| stress_recovery | section_card | 10 | 4 | 3 | 5 |
+| growth_plan | section_card | 10 | 4 | 3 | 5 |
+| identity_card | identity_layer（或 N/A） | N/A | N/A | N/A | N/A |
+
+> identity_card 通常不是“库存概念”，而是固定结构 + 多层文案（L1），因此不纳入库存表；只做“字段完整/多语言完整/不回退”验收。
+
+---
+
+### 2.3 最小可用库存（MVP）定义（先保证不回退跑通）
+
+> MVP 目标：先保证 **CN_MAINLAND / zh-CN** 下，`strength + blindspot + action + read` 这四类在 E2E 验收里**绝不回退 GLOBAL/en、且不靠随机兜底凑数**。
+
+#### MVP 覆盖范围（必须做到）
+- 环境：`REGION=CN_MAINLAND` + `LOCALE=zh-CN`
+- kinds：`strength / blindspot / action / read`
+- 验收：`ci_verify_mbti.sh` 和 `verify_mbti.sh` 运行必须全绿
+
+#### MVP 最低库存门槛（每类最少）
+- strength：通用 ≥ 5，fallback ≥ 2（role/axis 可以先不全，但建议至少有 1）
+- blindspot：通用 ≥ 5，fallback ≥ 2
+- action：通用 ≥ 5，fallback ≥ 2
+- read：通用 ≥ 5，fallback ≥ 2，strategy ≥ 2
+
+> 说明：这是“能跑通且不回退”的最低门槛。达到 MVP 后，再按 2.2 的目标量扩容。
+
+#### MVP 的“禁止情况”（出现即视为不达标）
+- verify_mbti / CI 日志出现 `GLOBAL/en`、`fallback to GLOBAL`、`content_packages/_deprecated`
+- highlights/read 因缺卡而出现“随机生成/不可解释兜底”（你现有规则里如果有 generated_ 前缀，就必须被禁止或显式标注并验收）
+- rules/pools 中出现空池、或 min/max 无法满足导致兜底吞掉错误
+
+---
+
+### 2.4 补库优先级（固定补库节奏：先救命，再变强）
+
+> 原则：任何补库都必须以“verify_mbti/CI 全绿”为前提。  
+> 先补“不会回退/不会随机兜底”的库存，再补“更精准的定向内容”。
+
+#### P0（必须先做，缺任何一个都不允许上线）
+目标：保证 `CN_MAINLAND/zh-CN` 下，strength/blindspot/action/read 全链路可选到内容，不触发 GLOBAL/en，不依赖随机生成。
+- Highlights 三类：先补 `generic + fallback`
+  - strength/blindspot/action：generic ≥ 5，fallback ≥ 2
+- Reads：先补 `generic + fallback + strategy`
+  - read：generic ≥ 5，fallback ≥ 2，strategy ≥ 2（至少覆盖 2 个主题）
+- 验收：跑 `ci_verify_mbti.sh` 必须 EXIT=0
+
+#### P1（强烈建议，开始提升“选择质量”）
+目标：减少 fallback 触发频率，让规则命中更稳定、更可控。
+- Highlights：补 axis（每轴至少 1~2 张）
+  - EI/SN/TF/JP/AT：每轴 ≥ 1（优先补你最常见 state）
+- Reads：补齐 strategy 六主题的通用 read
+  - 六主题每个 ≥ 1 张（generic）
+
+#### P2（运营化扩容：开始做“人群定向”）
+目标：让内容更像 123test 那种“长期可迭代的内容供给”。
+- Highlights：补 role 定向
+  - 每个 kind 先做到 role ≥ 4（先覆盖高频类型/关键分组）
+- Reads：补 role 定向 + axis 定向
+  - role ≥ 4；axis 每轴 ≥ 1
+
+#### P3（精细化：数据驱动补库）
+目标：按线上数据（点击/完读/转化/投诉/收藏）做增量迭代。
+- 把低表现卡下线到 fallback 或通过 overrides 临时替换
+- 对高表现主题做“同主题多版本 vN”扩容（保持 id 规则不变，只增版本）
+- 每次内容迭代必须产出：变更清单 + 验收截图/日志 + 回滚方案（如涉及 overrides）
 
 ---
 
