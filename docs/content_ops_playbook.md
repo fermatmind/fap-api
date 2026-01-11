@@ -399,6 +399,60 @@
 - ✅ 一票否决：C 未命中（可贴 grep 结果）
 - ✅ verify_mbti / CI：EXIT=0
 
+##### 可复制命令（MVP Check Snippet）
+
+> 目的：下一次只要复制粘贴这段命令，就能复现 PR comment 里的 MVP 统计输出。
+> 环境默认按当前内容包：`CN_MAINLAND/zh-CN`。
+
+```bash
+PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+
+# 1) Highlights templates 覆盖检查（dim×side：level≥clear 是否至少命中一个）
+jq -r '
+  .templates
+  | to_entries[]
+  | .key as $dim
+  | .value
+  | to_entries[]
+  | .key as $side
+  | [(.value.clear?!=null),(.value.strong?!=null),(.value.very_strong?!=null)]
+  | any
+  | "\($dim).\($side)=\(.)"
+' "$PACK_DIR/report_highlights_templates.json" | sort
+
+# 2) Reads 基本盘点（total_unique / fallback / 非空 strategy 桶）
+jq -r '
+  def arr_or_empty:
+    if . == null then []
+    elif (type=="array") then .
+    else []
+    end;
+
+  def all_items:
+    (
+      (.items.by_type     | to_entries | map(.value | arr_or_empty) | add // []) +
+      (.items.by_role     | to_entries | map(.value | arr_or_empty) | add // []) +
+      (.items.by_strategy | to_entries | map(.value | arr_or_empty) | add // []) +
+      (.items.by_top_axis | to_entries | map(.value | arr_or_empty) | add // []) +
+      (.items.fallback    | arr_or_empty)
+    )
+    | map(select(type=="object"));
+
+  def uniq_by_id: unique_by(.id);
+
+  (all_items | uniq_by_id) as $U
+  | "reads.total_unique=" + ($U|length|tostring),
+    "reads.fallback=" + ((.items.fallback|arr_or_empty|length) | tostring),
+    "reads.non_empty_strategy_buckets=" + (
+      (.items.by_strategy
+        | to_entries
+        | map(select((.value|arr_or_empty|length) > 0))
+        | map(.key)
+      ) as $keys
+      | ($keys|length|tostring) + " => " + ($keys|join(","))
+    )
+' "$PACK_DIR/report_recommended_reads.json"
+
 ---
 
 ### 2.4 补库优先级（固定补库节奏：先救命，再变强）
