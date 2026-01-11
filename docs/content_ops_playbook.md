@@ -28,7 +28,7 @@
 ### 1.2 四层模型（谁能改、改什么）
 
 #### Layer 0：Contract / Schema（工程固定，运营只读）
-**职责：** 定义内容包合同（manifest contract）、schema 校验、加载顺序、能力开关。  
+**职责：** 定义内容包合同（manifest contract）、schema 校验、加载顺序、能力开关。
 **文件举例：**
 - `manifest.json`
 - `schemas/*.json`（如有）
@@ -36,7 +36,7 @@
 **风险等级：** 极高（改错会影响全链路加载）
 
 #### Layer 1：Content（运营可改：卡片内容、文案、图片引用）
-**职责：** 纯内容库（卡片/reads/identity 等），不涉及选择逻辑。  
+**职责：** 纯内容库（卡片/reads/identity 等），不涉及选择逻辑。
 **文件举例：**
 - `report_cards_*.json`
 - `report_recommended_reads.json`（reads：同文件包含 rules + items）
@@ -45,7 +45,7 @@
 **风险等级：** 中（可通过自检 + verify_mbti 拦截）
 
 #### Layer 2：Selection（运营可改但必须可验证：池/规则/优先级）
-**职责：** 定义“选哪些卡、怎么选、选多少、兜底策略”。  
+**职责：** 定义“选哪些卡、怎么选、选多少、兜底策略”。
 **文件举例：**
 - `report_highlights_pools.json`
 - `report_highlights_rules.json`
@@ -54,7 +54,7 @@
 **风险等级：** 高（容易导致缺卡、随机兜底、回退风险）
 
 #### Layer 3：Overrides（运营可改但必须有刹车：线上热修）
-**职责：** 热修替换/禁用某些卡或规则，快速止血；必须可追踪、可回滚。  
+**职责：** 热修替换/禁用某些卡或规则，快速止血；必须可追踪、可回滚。
 **文件举例：**
 - `report_overrides.json` 或 `overrides/*.json`
 **允许改动：** ✅（运营改 JSON，但需审批/记录）
@@ -79,7 +79,7 @@
 
 ## 3. Section → 内容来源 → 规则来源（必须写清楚）
 
-> 固定 section 列表见 `docs/content_immutable.md`  
+> 固定 section 列表见 `docs/content_immutable.md`
 > 这里把每个 section 的“内容来源文件 + 选择规则文件 + 是否允许 overrides”写死。
 
 ### 3.1 Sections（固定）
@@ -107,7 +107,7 @@
 | reads | `report_recommended_reads.json` | `report_recommended_reads.json`（同文件内包含 rules + items） | ✅ | 允许调序/替换/禁用（在同一文件内改 rules/items） |
 
 > 注：
-> 1) reads 使用单文件 `report_recommended_reads.json`，**同一份 JSON 同时包含选择规则（rules）+ 物料（items）**；不像 highlights 会拆成 rules/pools/templates。  
+> 1) reads 使用单文件 `report_recommended_reads.json`，**同一份 JSON 同时包含选择规则（rules）+ 物料（items）**；不像 highlights 会拆成 rules/pools/templates。
 > 2) 你当前内容包的“章节卡片库”实际是 4 份：traits / relationships / career / growth（对应 `report_cards_traits.json`、`report_cards_relationships.json`、`report_cards_career.json`、`report_cards_growth.json`），其章节选择逻辑主要落在 `report_rules.json` + `report_section_policies.json` + `report_select_rules.json`。
 
 ---
@@ -120,7 +120,7 @@
 
 本 Step 会做三件事：
 1. 把目标量按 **section × kind × 维度**拆成清单（先写规则，不急着填满内容）
-2. 定义“最小可用库存（MVP）”：先保证 `strength/blindspot/action/read` 在 `CN_MAINLAND/zh-CN` 下**无回退跑通**
+2. 定义“最小可用库存（MVP）”：先保证 **highlights templates + reads** 在 `CN_MAINLAND/zh-CN` 下**无回退跑通**
 3. 给运营一个可执行的补库节奏：先补通用/兜底，再补 role/axis，最后做精细化扩容
 
 （下一步你会在这里补：库存量表格模板 + MVP 门槛 + 补库优先级。）
@@ -138,31 +138,27 @@
 
 ---
 
-### 2.2 目标量清单（按 section × kind × 维度）
+### 2.2 目标量清单（按“真实文件维度”拆分）
 
-> 说明：下面是“库存目标”的**规则表**，先落规范，后续内容同学只要按表补卡即可。
-> - 数量是“每个 section 的目标库存”
-> - kind 若不适用可写 N/A（例如 identity_card 不一定有 highlight kind）
-> - Axis“每轴若干”先给一个最低值（建议 3），后续按数据反馈扩容
+> 说明：下面是“库存目标”的**规则表**，先落规范，后续内容同学只要按表补库即可。
+> 本 Step 以“真实资产维度”为准：templates（dim×side×level）、reads（items+rules）、章节 cards（cards+fallback）。
+> 「strength/blindspot/action」属于 **report.highlights 的结果分类层**，不在 templates 库存口径里混算，统一挪到 Step 3（未来阶段）。
 
-#### A) Highlights 三类（strength / blindspot / action）
-适用 section：`strengths / blindspots / actions`
+#### A) Highlights Templates（templates 维度：dim × side × level）
 
-| section | kind | 通用（generic） | role | axis（每轴） | fallback |
-|---|---|---:|---:|---:|---:|
-| strengths | strength | 10 | 4 | 3 | 5 |
-| blindspots | blindspot | 10 | 4 | 3 | 5 |
-| actions | action | 10 | 4 | 3 | 5 |
+适用文件：`report_highlights_templates.json`
 
-**补充说明（Highlights）**
-- “role=4”不是指覆盖 16 型，而是指**每个 section 至少准备 4 张 role 定向卡**（先覆盖高频/关键类型）。后续扩容到 16 型全覆盖时，另开“扩容计划”。
-- “axis=每轴 3”表示 EI/SN/TF/JP/AT 各至少 3 张可用卡（先保证能按规则挑到，不触发兜底）。
-- fallback=5 必须是“可解释兜底”：写明兜底触发条件与使用范围（避免成为随机垃圾桶）。
+**目标量（建议值，可迭代）：**
+- 对每个 dim（EI/SN/TF/JP/AT）
+- 对每个 side（E/I, S/N, T/F, J/P, A/T）
+- 对 level≥clear 的三档（clear / strong / very_strong）：建议每档至少 1 条模板
+  - 也就是：每个 dim×side：clear≥1、strong≥1、very_strong≥1（目标量）
+- 低等级（very_weak/weak/moderate）可作为“安全占位”，不计入 MVP 门槛，但可作为未来扩容提升体验。
 
----
+> 为什么这样拆：你的 templates rules 已声明 `min_level=clear`，运营化必须把“缺模板”当成 FAIL（即使引擎 allow_empty）。
 
 #### B) Reads（阅读/建议内容）
-适用 section：`reads`
+适用文件：`report_recommended_reads.json`（同文件包含 rules + items）
 
 | section | kind | 通用（generic） | role | strategy | axis | fallback |
 |---|---|---:|---:|---:|---:|---:|
@@ -175,7 +171,7 @@
 
 ##### Strategy 六主题（固定字典，不随意加减）
 
-> 目的：让 reads 的 strategy 维度“可写、可补库、可验收”。  
+> 目的：让 reads 的 strategy 维度“可写、可补库、可验收”。
 > 运营/内容新增 read 卡时必须选择其中一个 strategy_key；不得自创新 key（需要扩展时走工程评审）。
 
 固定六主题（strategy_key → 含义 → 典型适用场景）：
@@ -200,14 +196,13 @@
 
 规则约束（必须遵守）：
 - 每张 read 必须且只能选 1 个 `strategy_key`
-- MVP 阶段：六主题每个至少 1 张通用 read（generic）
-- 扩容阶段：每个主题逐步补齐 role/axis 定向 read（按优先级）
+- MVP 阶段：至少覆盖 2 个不同主题（不要求六主题全覆盖）
+- 扩容阶段：六主题逐步补齐 role/axis 定向 read（按优先级）
 
 ---
 
 #### C) 其他 sections（traits / relationships / career / stress_recovery / growth_plan / identity_card）
-> 这些 section 不走 highlights（strength/blindspot/action）那套规则，而是“章节卡片库 + 章节选择规则”。
-> 这里不再用抽象的 section_card，而是按你内容包里真实存在的文件做库存规范，避免内容同学填错库。
+> 这些 section 不走 templates 维度，而是“章节卡片库 + 章节选择规则”。
 
 统一约束（适用于本段所有 section）：
 - 维度仍按：generic / role / axis / fallback
@@ -248,60 +243,205 @@
 
 ### 2.3 最小可用库存（MVP）定义（先保证不回退跑通）
 
-> MVP 目标：先保证 **CN_MAINLAND / zh-CN** 下，`strength + blindspot + action + read` 这四类在 E2E 验收里**绝不回退 GLOBAL/en、且不靠随机兜底凑数**。
+> MVP 目标：先保证 **CN_MAINLAND / zh-CN** 下，内容包可以稳定生成报告、并且**绝不回退 GLOBAL/en**、不 silent fallback。
+> 注意：本阶段的 “Highlights 库存”口径以 **templates 的真实维度（dim×side×level）** 为准，而不是 strength/blindspot/action 这类结果分类。
 
 #### MVP 覆盖范围（必须做到）
 - 环境：`REGION=CN_MAINLAND` + `LOCALE=zh-CN`
-- kinds：`strength / blindspot / action / read`
-- 验收：`ci_verify_mbti.sh` 和 `verify_mbti.sh` 运行必须全绿
+- 必需资产（至少）：
+  - highlights：`report_highlights_templates.json` + `report_highlights_pools.json` + `report_highlights_rules.json` + `report_highlights_policy.json`
+  - reads：`report_recommended_reads.json`（同文件包含 `rules + items`）
+  - overrides：`report_overrides.json`（允许为空，但必须存在且可解析）
+- 验收：`ci_verify_mbti.sh` 和 `verify_mbti.sh` 运行必须全绿（EXIT=0）
 
-#### MVP 最低库存门槛（每类最少）
-- strength：通用 ≥ 5，fallback ≥ 2（role/axis 可以先不全，但建议至少有 1）
-- blindspot：通用 ≥ 5，fallback ≥ 2
-- action：通用 ≥ 5，fallback ≥ 2
-- read：通用 ≥ 5，fallback ≥ 2，strategy ≥ 2
+#### MVP 最低库存门槛（达不到 = FAIL）
 
-> 说明：这是“能跑通且不回退”的最低门槛。达到 MVP 后，再按 2.2 的目标量扩容。
+##### A) Highlights Templates（templates 口径：dim × side × level≥clear）
+以 `report_highlights_templates.json` 为准做库存盘点。
 
-#### MVP 的“禁止情况”（出现即视为不达标）
-- verify_mbti / CI 日志出现 `GLOBAL/en`、`fallback to GLOBAL`、`content_packages/_deprecated`
-- highlights/read 因缺卡而出现“随机生成/不可解释兜底”（你现有规则里如果有 generated_ 前缀，就必须被禁止或显式标注并验收）
-- rules/pools 中出现空池、或 min/max 无法满足导致兜底吞掉错误
+**固定口径（写死）：**
+- templates 实际结构是：`templates.<DIM>.<SIDE>.<LEVEL>`（例如 `templates.EI.E.clear`）
+- 你的 templates rules 已声明：
+  - `min_level = clear`
+  - `allowed_levels` 包含 `clear / strong / very_strong`（以及更低等级，但 MVP 只以 ≥clear 为准）
+- 且当前 `allow_empty: true` 代表“引擎可能允许空”；但运营化要加刹车：**缺模板 = FAIL**（即使引擎允许空）。
+
+**最低门槛：**
+- 对每个 `dim`（EI / SN / TF / JP / AT）
+- 对该 dim 的两个 `side`（固定映射如下）
+- 在 `level ∈ { clear, strong, very_strong }` 的集合里：**每个 side 至少命中 1 条模板**
+  - 也就是：`clear|strong|very_strong` 至少存在一个对象（并且包含最基本字段如 `id/title/text`）
+
+> side 映射（固定）：
+> - EI：E / I
+> - SN：S / N
+> - TF：T / F
+> - JP：J / P
+> - AT：A / T
+
+> 说明：templates 只解决“轴向文案物料库是否齐全”。
+> `report.highlights.kind`（例如 strength/blindspot/action）属于“生成结果分类”，由 pools/rules/引擎逻辑决定；它的数量范围与覆盖要求，继续由 `verify_mbti.sh` 的规则断言负责（不在这里混算）。
+
+##### B) Reads（read）
+以 `report_recommended_reads.json` 为准盘点：
+
+**最低门槛：**
+- items（总量）≥ 7
+- generic ≥ 5
+- fallback ≥ 2
+- strategy 覆盖 ≥ 2（至少覆盖 2 个不同的 `strategy_key`）
+
+##### C) 章节卡片库（traits/relationships/career/growth）
+> 这一项是“内容完整性”门槛：避免章节空、避免 fallback 被迫承担全部内容。
+
+**最低门槛（每个主库）：**
+- 主库（`report_cards_*.json`）items ≥ 5
+- fallback（`report_cards_fallback_*.json`）items ≥ 2
+
+#### MVP 的“一票否决”（出现任意一个 = FAIL）
+以下任意信号出现，直接判定“不达标”（与 verify_mbti 的硬断言一致）：
+
+- `GLOBAL/en`
+- `fallback to GLOBAL`
+- `content_packages/_deprecated`
+
+判定范围（至少覆盖）：
+- `verify_mbti` / `ci_verify_mbti` 的 stdout
+- `backend/artifacts/verify_mbti/` 下的 `report.json` / `share.json` / `logs/*.log`
+
+### 2.3.1 MVP Check（可执行清单）
+
+> 目标：把“库存是否达标”变成**可执行的 yes/no 检查**。
+> 环境固定为：`REGION=CN_MAINLAND` + `LOCALE=zh-CN`（不允许自动回退）。
+
+#### A. 必须存在的文件（缺任何一个 = FAIL）
+以下文件必须在当前内容包目录存在（例如：`content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/`）：
+
+**Highlights（必需）**
+- `report_highlights_templates.json`
+- `report_highlights_pools.json`
+- `report_highlights_rules.json`
+- `report_highlights_policy.json`
+
+**章节卡片库（建议也纳入内容自检，缺失会导致章节空/走兜底）**
+- `report_cards_traits.json` + `report_cards_fallback_traits.json`
+- `report_cards_relationships.json` + `report_cards_fallback_relationships.json`
+- `report_cards_career.json` + `report_cards_fallback_career.json`
+- `report_cards_growth.json` + `report_cards_fallback_growth.json`
+
+**Reads（必需）**
+- `report_recommended_reads.json`（同文件包含 `rules + items`）
+
+**Overrides（如果启用热修能力则必需）**
+- `report_overrides.json`（空文件也可以，但必须存在且可解析）
+
+---
+
+#### B. MVP 最低库存门槛（达不到 = FAIL）
+
+##### B-1) Highlights Templates（按 dim × side × level≥clear 盘点）
+**MVP 最低门槛（达不到 = FAIL）：**
+- 对每个 `dim`（EI / SN / TF / JP / AT）
+- 对该 dim 的两个 `side`（E/I, S/N, T/F, J/P, A/T）
+- 在 `level ∈ { clear, strong, very_strong }` 的集合里：每个 side 至少命中 1 条模板
+
+**失败判定（刹车）：**
+- 任一 dim 的任一 side 在 `clear|strong|very_strong` 里 **全都缺失** → 直接 FAIL
+
+##### B-2) Reads（read）
+**最低门槛：**
+- items（总量）≥ 7
+- generic ≥ 5
+- fallback ≥ 2
+- strategy 覆盖 ≥ 2（至少覆盖 2 个不同的 `strategy_key`）
+
+##### B-3) 章节卡片库（traits/relationships/career/growth）
+**最低门槛（每个主库）：**
+- 主库（`report_cards_*.json`）items ≥ 5
+- fallback（`report_cards_fallback_*.json`）items ≥ 2
+
+---
+
+#### C. 一票否决（出现任意一个 = FAIL）
+以下任意信号出现，直接判定“不达标”（与 verify_mbti 的硬断言一致）：
+
+- `GLOBAL/en`
+- `fallback to GLOBAL`
+- `content_packages/_deprecated`
+
+**判定范围（至少要覆盖）：**
+- `verify_mbti` / `ci_verify_mbti` 的 stdout 日志
+- `backend/artifacts/verify_mbti/` 下的 `report.json` / `share.json` / `logs/*.log`
+
+---
+
+#### D. MVP Check 的验收输出（建议写入每次 PR comment）
+每次内容变更 PR（仅改 JSON）至少给出：
+- ✅ 当前环境：`CN_MAINLAND/zh-CN`
+- ✅ 文件存在性检查：A 全通过
+- ✅ MVP 门槛：B 全通过（列出各类实际计数）
+- ✅ 一票否决：C 未命中（可贴 grep 结果）
+- ✅ verify_mbti / CI：EXIT=0
 
 ---
 
 ### 2.4 补库优先级（固定补库节奏：先救命，再变强）
 
-> 原则：任何补库都必须以“verify_mbti/CI 全绿”为前提。  
-> 先补“不会回退/不会随机兜底”的库存，再补“更精准的定向内容”。
+> 原则：任何补库都必须以“verify_mbti/CI 全绿”为前提。
+> Step 2 的补库节奏以 **templates + reads + 章节 cards/fallback** 为主；
+> strength/blindspot/action 属于“结果分类层”，统一放到 Step 3（未来阶段）做。
 
 #### P0（必须先做，缺任何一个都不允许上线）
-目标：保证 `CN_MAINLAND/zh-CN` 下，strength/blindspot/action/read 全链路可选到内容，不触发 GLOBAL/en，不依赖随机生成。
-- Highlights 三类：先补 `generic + fallback`
-  - strength/blindspot/action：generic ≥ 5，fallback ≥ 2
-- Reads：先补 `generic + fallback + strategy`
-  - read：generic ≥ 5，fallback ≥ 2，strategy ≥ 2（至少覆盖 2 个主题）
-- 验收：跑 `ci_verify_mbti.sh` 必须 EXIT=0
+目标：保证 `CN_MAINLAND/zh-CN` 下，**模板库不缺口 + reads 可推荐 + 章节不空**，并且不回退 GLOBAL/en。
 
-#### P1（强烈建议，开始提升“选择质量”）
-目标：减少 fallback 触发频率，让规则命中更稳定、更可控。
-- Highlights：补 axis（每轴至少 1~2 张）
-  - EI/SN/TF/JP/AT：每轴 ≥ 1（优先补你最常见 state）
-- Reads：补齐 strategy 六主题的通用 read
-  - 六主题每个 ≥ 1 张（generic）
+- Highlights Templates：先补齐 dim×side 在 `level≥clear` 的缺口
+  - 每个 dim 的每个 side：`clear|strong|very_strong` 至少命中 1 条（缺任何一个 = FAIL）
+- Reads：先保证 “不会只剩兜底”
+  - items≥7、generic≥5、fallback≥2、strategy 覆盖≥2
+- 章节卡片库：避免章节空
+  - 每个主库 items≥5、fallback items≥2
+- 验收：跑 `ci_verify_mbti.sh` / `verify_mbti.sh` 必须 EXIT=0；并且一票否决信号不出现
+
+#### P1（强烈建议：开始提升“稳定性与可解释性”）
+目标：让模板命中更稳定（减少空结果/低质量兜底），reads 更可运营（主题更全）。
+
+- Highlights Templates：把 “≥clear 仅 1 条” 扩成更稳定覆盖
+  - 建议每个 dim×side：clear≥1、strong≥1、very_strong≥1（至少做到“每档都有”）
+- Reads：补齐 strategy 六主题通用 read
+  - 六主题每个 ≥ 1（generic）
+- 章节卡片库：开始补 axis/role 的最小覆盖
+  - 每个主库：axis 每轴≥1（先补常见状态），role≥2（先覆盖高频类型/分组）
+- 验收：CI 全绿；并能在 PR comment 里给出“模板覆盖统计 + reads 策略覆盖统计”
 
 #### P2（运营化扩容：开始做“人群定向”）
-目标：让内容更像 123test 那种“长期可迭代的内容供给”。
-- Highlights：补 role 定向
-  - 每个 kind 先做到 role ≥ 4（先覆盖高频类型/关键分组）
-- Reads：补 role 定向 + axis 定向
-  - role ≥ 4；axis 每轴 ≥ 1
+目标：把内容供给做成可长期增长的“库存系统”，可按数据驱动扩容。
 
-#### P3（精细化：数据驱动补库）
-目标：按线上数据（点击/完读/转化/投诉/收藏）做增量迭代。
-- 把低表现卡下线到 fallback 或通过 overrides 临时替换
-- 对高表现主题做“同主题多版本 vN”扩容（保持 id 规则不变，只增版本）
-- 每次内容迭代必须产出：变更清单 + 验收截图/日志 + 回滚方案（如涉及 overrides）
+- Highlights Templates：按数据补齐更细颗粒度的模板版本
+  - 同一 dim×side×level：增加多版本 `vN`（不改旧 id，只增新版本）
+- Reads：补 role/axis 定向 read
+  - role ≥ 4；axis 每轴 ≥ 1（按优先级）
+- 章节卡片库：role 扩到 4；axis 每轴扩到 2~3（按数据反馈）
+- 验收：仍以 verify_mbti/CI 为硬闸；任何回退信号一票否决
+
+---
+
+## Step 3（未来阶段）：结果分类层库存（report.highlights.kind）
+
+> 这一段是“未来阶段/结果分类层”的库存规范：它描述的是 **report.highlights 结果里 kind=strength/blindspot/action** 的供给与定向。
+> 重要：这不是 templates 文件的维度（templates 只有 dim×side×level），而是由 `report_highlights_pools.json` / `report_highlights_rules.json` / 引擎生成逻辑决定的“结果分类层”。
+
+### 3.1 结果分类层目标量（未来阶段建议）
+> 当你把 highlights 的物料进一步拆成 “kind + generic/axis/role/fallback” 并可机器统计时，再启用这一段。
+
+| kind | 通用（generic） | role | axis（每轴） | fallback |
+|---|---:|---:|---:|---:|
+| strength | 10 | 4 | 3 | 5 |
+| blindspot | 10 | 4 | 3 | 5 |
+| action | 10 | 4 | 3 | 5 |
+
+**说明（结果分类层）**
+- 这张表的库存统计口径必须“可机器统计”（例如通过 id 规范、tag 规范或 pools 分组），否则运营会填错库。
+- 结果分类层的覆盖要求（例如必须包含 blindspot+action、数量范围 3~4、禁止 generated_ 等）继续由 `verify_mbti.sh` 的规则断言负责。
 
 ---
 
@@ -375,8 +515,8 @@
 ---
 
 ## 8. 下一步（你现在该做什么）
-1) 先把「3. Section → 来源 → 规则 → overrides」这张映射表补全（按你的真实文件名）  
-2) 然后再去写库存量规范（content_inventory_spec.md）  
+1) 先把「3. Section → 来源 → 规则 → overrides」这张映射表补全（按你的真实文件名）
+2) 然后再去写库存量规范（content_inventory_spec.md）
 3) 最后再写写卡规范 / 写规则规范 / overrides 规范（逐步迭代）
 
 > 原则：先把“结构和边界”写死，再谈“写作与库存”。
