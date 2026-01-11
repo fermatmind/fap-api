@@ -205,21 +205,44 @@
 
 ---
 
-#### C) 其他 sections（relationships / career / stress_recovery / growth_plan / identity_card）
-> 这些 section 可能不走 highlights 规则，也可能是“章节卡片库 + 章节规则”。
-> 先把“库存拆分法”写死：通用 / role / axis / fallback 四类仍然适用（kind 可能是 section-specific card）。
+#### C) 其他 sections（traits / relationships / career / stress_recovery / growth_plan / identity_card）
+> 这些 section 不走 highlights（strength/blindspot/action）那套规则，而是“章节卡片库 + 章节选择规则”。
+> 这里不再用抽象的 section_card，而是按你内容包里真实存在的文件做库存规范，避免内容同学填错库。
 
-建议先统一成 **section_card**（或你实际的 card kind），后续再细化到多 kind。
+统一约束（适用于本段所有 section）：
+- 维度仍按：generic / role / axis / fallback
+- fallback 必须来自对应的 `report_cards_fallback_*.json`（不得用随机生成兜底）
+- 章节选择逻辑的规则来源统一归到：`report_rules.json` + `report_section_policies.json` + `report_select_rules.json`
+  - （如果未来某 section 拆出专用 rules 文件，再在 3.2 映射表里单独标注）
 
-| section | kind（建议） | 通用（generic） | role | axis（每轴） | fallback |
-|---|---|---:|---:|---:|---:|
-| relationships | section_card | 10 | 4 | 3 | 5 |
-| career | section_card | 10 | 4 | 3 | 5 |
-| stress_recovery | section_card | 10 | 4 | 3 | 5 |
-| growth_plan | section_card | 10 | 4 | 3 | 5 |
-| identity_card | identity_layer（或 N/A） | N/A | N/A | N/A | N/A |
+##### C-1) Traits（对应 strengths/blindspots/actions 之外的“traits 章节卡片库”）
+| section | 内容来源（L1 真实文件） | fallback 物料（L1 真实文件） | 选择规则（L2 真实文件） | 通用（generic） | role | axis（每轴） | fallback |
+|---|---|---|---|---:|---:|---:|---:|
+| traits | `report_cards_traits.json` | `report_cards_fallback_traits.json` | `report_rules.json` + `report_section_policies.json` + `report_select_rules.json` | 10 | 4 | 3 | 5 |
 
-> identity_card 通常不是“库存概念”，而是固定结构 + 多层文案（L1），因此不纳入库存表；只做“字段完整/多语言完整/不回退”验收。
+##### C-2) Relationships
+| section | 内容来源（L1 真实文件） | fallback 物料（L1 真实文件） | 选择规则（L2 真实文件） | 通用（generic） | role | axis（每轴） | fallback |
+|---|---|---|---|---:|---:|---:|---:|
+| relationships | `report_cards_relationships.json` | `report_cards_fallback_relationships.json` | `report_rules.json` + `report_section_policies.json` + `report_select_rules.json` | 10 | 4 | 3 | 5 |
+
+##### C-3) Career
+| section | 内容来源（L1 真实文件） | fallback 物料（L1 真实文件） | 选择规则（L2 真实文件） | 通用（generic） | role | axis（每轴） | fallback |
+|---|---|---|---|---:|---:|---:|---:|
+| career | `report_cards_career.json` | `report_cards_fallback_career.json` | `report_rules.json` + `report_section_policies.json` + `report_select_rules.json` | 10 | 4 | 3 | 5 |
+
+##### C-4) Growth / Stress Recovery / Growth Plan（你当前都落在 growth 卡片库里）
+> 说明：你内容包里目前是用 `report_cards_growth.json` 承载 growth / stress_recovery / growth_plan 三类主题内容，
+> 未来如果拆库（例如 stress_recovery 单独文件），再把这里拆成独立行即可。
+
+| section | 内容来源（L1 真实文件） | fallback 物料（L1 真实文件） | 选择规则（L2 真实文件） | 通用（generic） | role | axis（每轴） | fallback |
+|---|---|---|---|---:|---:|---:|---:|
+| growth_plan | `report_cards_growth.json` | `report_cards_fallback_growth.json` | `report_rules.json` + `report_section_policies.json` + `report_select_rules.json` | 10 | 4 | 3 | 5 |
+| stress_recovery | `report_cards_growth.json` | `report_cards_fallback_growth.json` | `report_rules.json` + `report_section_policies.json` + `report_select_rules.json` | 10 | 4 | 3 | 5 |
+
+##### C-5) Identity Card（不纳入“库存量表”，但要纳入“完整性验收”）
+- 主物料：`report_identity_cards.json`（identity 卡片库）
+- 展示/层级：`identity_layers.json`
+- 不按 generic/role/axis/fallback 计数；改动目标是字段完整、多语言完整、结构不破坏，并且 verify_mbti 不回退。
 
 ---
 
