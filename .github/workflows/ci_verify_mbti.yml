@@ -2,6 +2,7 @@
 name: CI Verify MBTI
 
 on:
+  workflow_dispatch:
   push:
     branches: ["**"]
   pull_request:
