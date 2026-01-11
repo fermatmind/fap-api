@@ -133,7 +133,8 @@
 - 通用（generic）：不依赖角色/轴，适合多数人群
 - Role（role）：按 MBTI 16 型（或你的 role 分组）定向
 - Axis（axis）：按轴向（EI/SN/TF/JP/AT）及其 state/delta 分层（由 rules 决定怎么用）
-- Strategy（strategy，仅 reads）：按阅读策略/主题路径分层（例如：沟通策略/情绪调节策略/成长策略）
+- Strategy（strategy，仅 reads）：按 reads 的“策略象限”分层（来自 tags `strategy:<KEY>`；允许 KEY：EA/ET/IA/IT）
+- Topic（topic，仅 reads）：按内容主题分层（来自 tags `topic:<slug>`；以 `report_recommended_reads.json` 的 `catalog.topics` 为准）
 - Fallback（fallback）：兜底卡（必须可用、可控、可验收；兜底不是随机凑数）
 
 ---
@@ -160,45 +161,62 @@
 #### B) Reads（阅读/建议内容）
 适用文件：`report_recommended_reads.json`（同文件包含 rules + items）
 
-| section | kind | 通用（generic） | role | strategy | axis | fallback |
-|---|---|---:|---:|---:|---:|---:|
-| reads | read | 10 | 4 | 6 | 3 | 5 |
+> 重要：reads 的库存不是一个平铺数组，而是“按 bucket 分组”的内容库 + 策略配置。
+> 你当前的真实结构是：
+> - `.items.by_role.<KEY>[]`
+> - `.items.by_strategy.<KEY>[]`
+> - `.items.by_top_axis["axis:<DIM>:<SIDE>"][]`
+> - `.items.by_type.<TYPE>[]`（可选扩容）
+> - `.items.fallback[]`
+>
+> 因此运营侧的库存盘点口径必须写死：**跨 bucket 汇总后去重（按 id）**，再按 tags 前缀统计覆盖。
 
-**补充说明（Reads）**
-- strategy=6：先按你最常用的 6 个策略主题分组（例如：沟通/情绪/关系/职业/压力/成长），每组至少 1 张。
-- axis=3：同样每轴至少 3 张（或按你 reads 规则实际需要调整）。
-- fallback=5：reads 的兜底必须“无敏感建议、无医疗承诺、无夸张结论”，且可以长期使用。
+##### 目标量（建议值，可迭代）
 
-##### Strategy 六主题（固定字典，不随意加减）
+> 目标量分两层：
+> 1) **覆盖（coverage）**：确保每个允许的 key 都有内容，避免某个 bucket 永远选不到
+> 2) **供给（supply）**：确保每个 bucket 的配额（quota）能被稳定满足
+>
+> 以你当前 rules 为准：
+> - `bucket_quota.by_role = 2`
+> - `bucket_quota.by_strategy = 2`
+> - `bucket_quota.by_top_axis = 1`
+> - `bucket_quota.fallback = remaining`
 
-> 目的：让 reads 的 strategy 维度“可写、可补库、可验收”。
-> 运营/内容新增 read 卡时必须选择其中一个 strategy_key；不得自创新 key（需要扩展时走工程评审）。
+**覆盖（coverage）目标：**
+- strategy 覆盖：`strategy:EA / strategy:ET / strategy:IA / strategy:IT`（4/4）
+- role 覆盖：`role:NT / role:NF / role:SJ / role:SP`（4/4）
+- axis 覆盖：`axis:<DIM>:<SIDE>` 共 10 个（EI:E, EI:I, SN:S, SN:N, TF:T, TF:F, JP:J, JP:P, AT:A, AT:T）
+- topic 覆盖：以 `catalog.topics` 为准（当前至少 5 个：relationships / communication / career / growth / stress）
 
-固定六主题（strategy_key → 含义 → 典型适用场景）：
+**供给（supply）目标（与 quota 对齐）：**
+- 对每个 `role:<KEY>`：至少 2 条（保证 by_role 能填满配额）
+- 对每个 `strategy:<KEY>`：至少 2 条（保证 by_strategy 能填满配额）
+- 对每个 `axis:<DIM>:<SIDE>`：至少 1 条（保证 by_top_axis 能填满配额）
+- fallback：至少 5 条（保证 remaining 永远不会“兜底不够用”）
+- 全库（去重后）总量：建议 ≥ 50 条（可逐步扩容；先达成 MVP 门槛即可）
 
-1) `strategy.communication`（沟通协作）
-- 适用：表达/倾听/冲突沟通/边界沟通/说服与对齐
+##### Strategy / Topic 字典（按真实 JSON）
 
-2) `strategy.emotion`（情绪调节）
-- 适用：焦虑/愤怒/低落/自责/情绪复盘/情绪急救
+**Strategy（策略象限，固定允许值）：**
+- `strategy:EA`：外放笃定（更倾向外向表达 + 稳定推进）
+- `strategy:ET`：外放敏感（更倾向外向表达 + 对反馈更敏感）
+- `strategy:IA`：内收笃定（更倾向内向沉淀 + 稳定节奏）
+- `strategy:IT`：内收敏感（更倾向内向自省 + 对风险更敏感）
 
-3) `strategy.relationship`（关系经营）
-- 适用：亲密关系/朋友/同事/家庭关系/信任修复/依恋与安全感
+**Topic（主题，来自 `catalog.topics`）：**
+- `topic:relationships`
+- `topic:communication`
+- `topic:career`
+- `topic:growth`
+- `topic:stress`
 
-4) `strategy.career`（职业发展）
-- 适用：职业选择/成长路径/晋升与影响力/决策/领导力/工作习惯
-
-5) `strategy.stress`（压力与恢复）
-- 适用：压力识别/恢复节律/能量管理/睡眠与作息/过载预警
-
-6) `strategy.growth`（成长与习惯）
-- 适用：目标拆解/行动计划/自控力/复盘/长期习惯与系统搭建
-
-规则约束（必须遵守）：
-- 每张 read 必须且只能选 1 个 `strategy_key`
-- MVP 阶段：至少覆盖 2 个不同主题（不要求六主题全覆盖）
-- 扩容阶段：六主题逐步补齐 role/axis 定向 read（按优先级）
-
+##### 规则约束（运营必须遵守）
+- reads 的分组与统计以 tags 为准（前缀必须在 `rules.tag_prefixes_allowed` 里）
+- `by_role.<KEY>` 下的每条 item：必须带 `role:<KEY>`
+- `by_strategy.<KEY>` 下的每条 item：必须带 `strategy:<KEY>`
+- `by_top_axis["axis:<DIM>:<SIDE>"]` 下的每条 item：必须带同一个 `axis:<DIM>:<SIDE>`
+- fallback 下的 item：必须是“通用可用兜底”，不依赖 role/strategy/axis 才能成立
 ---
 
 #### C) 其他 sections（traits / relationships / career / stress_recovery / growth_plan / identity_card）
@@ -286,10 +304,9 @@
 以 `report_recommended_reads.json` 为准盘点：
 
 **最低门槛：**
-- items（总量）≥ 7
-- generic ≥ 5
-- fallback ≥ 2
-- strategy 覆盖 ≥ 2（至少覆盖 2 个不同的 `strategy_key`）
+- reads.total_unique ≥ 7（跨所有 bucket 汇总去重，按 `id` 计数）
+- fallback ≥ 2（`.items.fallback` 至少 2 条）
+- strategy 覆盖 ≥ 2（至少覆盖 2 个不同的 `strategy:<KEY>`）
 
 ##### C) 章节卡片库（traits/relationships/career/growth）
 > 这一项是“内容完整性”门槛：避免章节空、避免 fallback 被迫承担全部内容。
@@ -350,10 +367,9 @@
 
 ##### B-2) Reads（read）
 **最低门槛：**
-- items（总量）≥ 7
-- generic ≥ 5
-- fallback ≥ 2
-- strategy 覆盖 ≥ 2（至少覆盖 2 个不同的 `strategy_key`）
+- reads.total_unique ≥ 7（跨所有 bucket 汇总去重，按 `id` 计数）
+- fallback ≥ 2（`.items.fallback` 至少 2 条）
+- strategy 覆盖 ≥ 2（至少覆盖 2 个不同的 `strategy:<KEY>`）
 
 ##### B-3) 章节卡片库（traits/relationships/career/growth）
 **最低门槛（每个主库）：**
