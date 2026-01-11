@@ -192,3 +192,54 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## verify_mbti（E2E 验收脚本）
+
+这套验收用来确保：
+- 内容包（content pack）真的生效（不会 silent fallback 到 GLOBAL/en 或 deprecated）
+- highlights 规则按 contract 运行（数量 / kind / 禁用项）
+- overrides（D-1/D-2/D-3）命中与优先级可重复验证
+
+产物默认落在：
+- `backend/artifacts/verify_mbti/`
+  - `report.json` / `share.json` / `summary.txt`
+  - `logs/overrides_accept_D.log` 等
+
+### 服务器 / Staging 运行方式（Runbook）
+
+> 服务器通常已有 nginx + php-fpm 对外提供 API。此模式推荐用于「线上/预发」复验同一个 attempt。
+
+#### 0) 前置条件
+服务器需要具备：
+- `bash`, `curl`, `jq`, `python3`
+- 能访问 API（建议用内网域名或本机回环）
+- 已部署正确的 content_packages（且默认 region/locale/pack 不会掉回 GLOBAL/en）
+
+#### 1) 必要参数：ATTEMPT_ID 从哪来？
+有两种方式：
+
+**方式 A（推荐，复验已有 attempt）：**
+- 从日志/埋点/数据库/后台工具拿到某次真实请求的 `attempt_id`
+- 然后用该 `ATTEMPT_ID` 复验（不会创建新 attempt）
+
+**方式 B（在预发/测试环境造一个 attempt）：**
+- 直接运行 `verify_mbti.sh`（不传 ATTEMPT_ID），脚本会自动：
+  - 拉 questions
+  - POST `/api/v0.2/attempts` 创建 attempt
+  - 再拉 report/share 并做断言
+- 创建出的 attempt id 会写入：`backend/artifacts/verify_mbti/attempt_id.txt`
+
+> 注意：**生产环境不建议用方式 B**（会写库）。生产建议只用方式 A 复验已有 attempt。
+
+#### 2) 一键复验（已有 attempt，推荐）
+在服务器上进入 `backend/` 目录：
+
+```bash
+cd /var/www/fap-api/current/backend
+
+# 关键：指定 API（你的线上/预发地址），并传入要复验的 attempt id
+API="https://api.xxx.com" ATTEMPT_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" \
+  RUN_DIR="/tmp/verify_mbti_$(date +%Y%m%d_%H%M%S)" \
+  bash ./scripts/verify_mbti.sh
+
+echo "EXIT=$?"
