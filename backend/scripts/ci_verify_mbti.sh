@@ -180,15 +180,14 @@ if [[ -n "$PACK_DIR" ]]; then
   fi
 
   echo "[CI] MVP check -> $MVP_LOG"
+  set +e
   {
     echo "== MVP check (templates + reads) =="
     echo "PACK_DIR=$PACK_DIR"
     bash "$MVP_SH" "$PACK_DIR"
     echo "EXIT=$?"
-  } >"$MVP_LOG" 2>&1
-
-  # Mirror to stdout for CI readability
-  cat "$MVP_LOG"
+  } 2>&1 | tee "$MVP_LOG"
+  set -e
 
   if [[ "$MVP_STRICT" == "1" ]]; then
     # 1) templates coverage: any false => FAIL
