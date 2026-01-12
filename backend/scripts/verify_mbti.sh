@@ -380,6 +380,12 @@ fi
 # -----------------------------
 # Summary
 # -----------------------------
+MVP_CHECK_LOG="${MVP_CHECK_LOG:-$LOG_DIR/mvp_check.log}"
+MVP_CHECK_STATUS="(not generated)"
+if [[ -s "$MVP_CHECK_LOG" ]]; then
+  MVP_CHECK_STATUS="see $MVP_CHECK_LOG"
+fi
+
 cat >"$SUMMARY_TXT" <<EOF
 verify_mbti summary
   VERIFY_MODE=$VERIFY_MODE
@@ -390,6 +396,7 @@ verify_mbti summary
   STRICT=$STRICT
   highlights_path=$HL_PATH
   highlights_count=$HL_N
+  mvp_check=$MVP_CHECK_STATUS
   artifacts_dir=$RUN_DIR
   files:
     report=$REPORT_JSON
