@@ -25,18 +25,26 @@ LEGACY_DIR="${LEGACY_DIR:-MBTI-CN-v0.2.1-TEST}"
 
 # Artifacts
 RUN_DIR="${RUN_DIR:-$BACKEND_DIR/artifacts/verify_mbti}"
+ARTIFACT_DIR="$RUN_DIR"                    # alias (for docs/consistency)
 LOG_DIR="$RUN_DIR/logs"
 mkdir -p "$LOG_DIR"
 
 SERVE_LOG="$LOG_DIR/artisan_serve.log"
 SELF_CHECK_LOG="$LOG_DIR/self_check.log"
 SMOKE_Q_LOG="$LOG_DIR/smoke_questions.json"
+MVP_LOG="$LOG_DIR/mvp_check.log"
+
+# MVP hard gate toggle:
+# - MVP_STRICT=1 (default): fail CI if MVP thresholds not met
+# - MVP_STRICT=0: only log, do not fail
+MVP_STRICT="${MVP_STRICT:-1}"
 
 echo "[CI] backend_dir=$BACKEND_DIR"
 echo "[CI] repo_dir=$REPO_DIR"
 echo "[CI] API=$API"
 echo "[CI] defaults: region=$REGION locale=$LOCALE pack_id=$PACK_ID legacy_dir=$LEGACY_DIR"
 echo "[CI] artifacts=$RUN_DIR"
+echo "[CI] mvp_strict=$MVP_STRICT"
 
 # -----------------------------
 # Helpers
@@ -45,6 +53,9 @@ need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[CI][FAIL] missing cmd: 
 need_cmd curl
 need_cmd jq
 need_cmd php
+need_cmd grep
+need_cmd sed
+need_cmd lsof
 
 fail() { echo "[CI][FAIL] $*" >&2; exit 1; }
 
@@ -79,6 +90,20 @@ if [[ -d "$CANON_ABS" ]]; then
 else
   echo "[CI][WARN] canonical pack dir not found: $CANON_ABS"
   echo "[CI][WARN] CI may fail if app still tries to load legacy dir."
+fi
+
+# Prefer canonical pack dir; fall back to alias if needed
+PACK_DIR=""
+if [[ -d "$CANON_ABS" ]]; then
+  PACK_DIR="$CANON_ABS"
+elif [[ -d "$ALIAS_ABS" ]]; then
+  PACK_DIR="$ALIAS_ABS"
+fi
+
+if [[ -z "$PACK_DIR" ]]; then
+  echo "[CI][WARN] PACK_DIR not found (both canonical and legacy alias missing). MVP check will be skipped."
+else
+  echo "[CI] PACK_DIR=$PACK_DIR"
 fi
 
 # -----------------------------
@@ -141,6 +166,64 @@ php artisan fap:self-check >"$SELF_CHECK_LOG" 2>&1 || {
   exit 12
 }
 echo "[CI] self-check OK"
+
+# -----------------------------
+# MVP check (templates + reads)
+# - Always persist log to artifacts (for postmortem)
+# - Default is HARD GATE (MVP_STRICT=1)
+# -----------------------------
+if [[ -n "$PACK_DIR" ]]; then
+  MVP_SH="$SCRIPT_DIR/mvp_check.sh"
+  if [[ ! -x "$MVP_SH" ]]; then
+    echo "[CI][FAIL] missing or not executable: $MVP_SH" >&2
+    exit 14
+  fi
+
+  echo "[CI] MVP check -> $MVP_LOG"
+  {
+    echo "== MVP check (templates + reads) =="
+    echo "PACK_DIR=$PACK_DIR"
+    bash "$MVP_SH" "$PACK_DIR"
+    echo "EXIT=$?"
+  } >"$MVP_LOG" 2>&1
+
+  # Mirror to stdout for CI readability
+  cat "$MVP_LOG"
+
+  if [[ "$MVP_STRICT" == "1" ]]; then
+    # 1) templates coverage: any false => FAIL
+    if grep -qE '^[A-Z]{2}\.[A-Z]=false$' "$MVP_LOG"; then
+      echo "[CI][FAIL] MVP templates coverage has false (see $MVP_LOG)" >&2
+      exit 30
+    fi
+
+    # 2) reads thresholds
+    total_unique="$(grep -E '^reads\.total_unique=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.total_unique=//')"
+    fallback="$(grep -E '^reads\.fallback=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.fallback=//')"
+    non_empty="$(grep -E '^reads\.non_empty_strategy_buckets=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.non_empty_strategy_buckets=([0-9]+).*/\1/')"
+
+    if ! [[ "$total_unique" =~ ^[0-9]+$ && "$fallback" =~ ^[0-9]+$ && "$non_empty" =~ ^[0-9]+$ ]]; then
+      echo "[CI][FAIL] MVP reads stats missing/non-numeric (see $MVP_LOG)" >&2
+      exit 31
+    fi
+    if (( total_unique < 7 )); then
+      echo "[CI][FAIL] MVP reads.total_unique=$total_unique < 7 (see $MVP_LOG)" >&2
+      exit 32
+    fi
+    if (( fallback < 2 )); then
+      echo "[CI][FAIL] MVP reads.fallback=$fallback < 2 (see $MVP_LOG)" >&2
+      exit 33
+    fi
+    if (( non_empty < 2 )); then
+      echo "[CI][FAIL] MVP reads.non_empty_strategy_buckets=$non_empty < 2 (see $MVP_LOG)" >&2
+      exit 34
+    fi
+
+    echo "[CI] MVP check PASS ✅"
+  else
+    echo "[CI][WARN] MVP_STRICT=0; skip MVP hard gate (log only)."
+  fi
+fi
 
 # -----------------------------
 # Smoke: questions endpoint must be ok=true
