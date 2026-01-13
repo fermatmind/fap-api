@@ -91,14 +91,14 @@
 > - axis_total=tag 含 `axis:*`  
 > - axis_side_min_per_side=按 `axis:XX + side:Y` 分组后取最小值（min_per_side）  
 > - fallback=tag 含 `fallback`  
-> PR：#60（content: gapfill highlights strengths pools）
+> PR：#60（general/role/fallback 补库） + #73（axis/side 补到 ≥3/side）
 
 | bucket | Target | Current | Gap | Notes |
 |---|---:|---:|---:|---|
-| general | 10 | 15 | 0 | strengths.total=39 |
+| general | 10 | 15 | 0 | strengths.total=49 |
 | role | 4 | 4 | 0 | 已覆盖 NT/NF/SJ/SP |
-| axis_total (axis:*) | 3 | 20 | 0 | 覆盖 EI/SN/TF/JP/AT |
-| axis_side_min_per_side (axis+side) | 3 | 2 | 1 | strengths axis/side：min_per_side=2（下一轮补到 3） |
+| axis_total (axis:*) | 3 | 30 | 0 | 覆盖 EI/SN/TF/JP/AT |
+| axis_side_min_per_side (axis+side) | 3 | 3 | 0 | strengths axis/side：min_per_side=3 ✅（PR #73） |
 | fallback | 5 | 5 | 0 | tag:fallback |
 
 ### 2.3 blindspots 缺口（Done）
@@ -138,6 +138,5 @@
   - [x] blindspots（PR #63）
   - [x] actions（PR #65）  
 - [x] reads.fallback（通用池）补齐到 ≥10（PR #67；当前 10，缺口 0；reads.total_unique=153）  
-- [ ] strengths：补齐 axis/side 细粒度指标到 **min_per_side=3**（当前=2，缺口=1）  
-  - 建议：每轴每侧再补 1 张（共 10 张），完成后再回填/确认该行仍为 0 gap  
+- [x] strengths：axis/side 细粒度指标补齐到 **min_per_side=3**（PR #73；当前=3，缺口=0）
 - [ ] 将本表纳入内容同学的每周补库节奏（缺口优先级：fallback → general → axis/side → role）
