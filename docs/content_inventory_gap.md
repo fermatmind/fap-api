@@ -93,14 +93,18 @@
 | axis | 3 | 20 | 0 | 覆盖 EI/SN/TF/JP/AT（按侧拆分更佳） |
 | fallback | 5 | 5 | 0 | tag:fallback |
 
-### 2.3 blindspots 缺口（待回填）
+### 2.3 blindspots 缺口（Done）
+
+> 来源：`report_highlights_pools.json` → `pools.blindspot.items[]`  
+> 统计口径：general=tag 含 `universal`；role=tag 含 `role:*`；axis=tag 含 `axis:*`；fallback=tag 含 `fallback`  
+> PR：#63（content: gapfill highlights blindspots pools）
 
 | bucket | Target | Current | Gap | Notes |
 |---|---:|---:|---:|---|
-| general | 10 | TBD | TBD | 避免羞辱/绝对化表达 |
-| role | 4 | TBD | TBD | NT/NF/SJ/SP 至少各 1 |
-| axis | 3 | TBD | TBD | EI/SN/TF/JP/AT（按侧拆分更佳） |
-| fallback | 5 | TBD | TBD | 不命中时可见兜底 |
+| general | 10 | 10 | 0 | blindspots.total=29 |
+| role | 4 | 4 | 0 | 已覆盖 NT/NF/SJ/SP |
+| axis | 3 | 10 | 0 | 覆盖 EI/SN/TF/JP/AT（按侧拆分更佳） |
+| fallback | 5 | 5 | 0 | tag:fallback |
 
 ### 2.4 actions 缺口（待回填）
 
