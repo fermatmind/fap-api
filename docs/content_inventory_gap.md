@@ -17,12 +17,12 @@
 
 | bucket | Target | Current | Gap | Notes |
 |---|---:|---:|---:|---|
-| fallback（通用池） | 10 | 8 | 2 | 作为“通用 reads”使用；需补 2 条 |
+| fallback（通用池） | 10 | 10 | 0 | PR：#67（content: fill reads fallback to >=10，add 2 items）；reads.fallback=10 |
 | by_role（NT/NF/SJ/SP） | 4×7=28 | 29 | 0 | NT=7, NF=7, SJ=7, SP=8 |
 | by_strategy（EA/ET/IA/IT） | 4×6=24 | 30 | 0 | EA=9, ET=6, IA=7, IT=8 |
 | by_top_axis（10 keys） | 10×2=20 | 20 | 0 | 每个 axis key 2 条 |
 | by_type（32 types） | 32×2=64 | 64 | 0 | 每个 type 2 条 |
-| **TOTAL (unique)** | — | 151 | — | 以脚本输出 `reads.total_unique=151` 为准 |
+| **TOTAL (unique)** | — | 153 | — | 以脚本输出 `reads.total_unique=153` 为准 |
 
 ### 1.2 by_role（细分）
 
@@ -125,7 +125,7 @@
 
 - [ ] 为 highlights 增加统计口径（按 general/role/axis/fallback + section）并回填 Current/Gap  
   - [x] strengths 已回填（PR #60）
-  - [ ] blindspots 待回填
-  - [ ] actions 待回填  
-- [ ] reads.fallback（通用池）补齐到 ≥10（当前 8，缺口 2）  
+  - [x] blindspots 已回填（PR #63）
+  - [x] actions 已回填（PR #65）  
+- [x] reads.fallback（通用池）补齐到 ≥10（PR #67；当前 10，缺口 0）  
 - [ ] 将本表纳入内容同学的每周补库节奏（缺口优先级：fallback → general → axis → role）
