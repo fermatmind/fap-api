@@ -407,3 +407,162 @@ git branch --merged main | egrep 'content/|docs/' | xargs -n 1 git branch -d 2>/
 
 - 更新 `docs/content_inventory_gap.md`：把本周变更对应的行标记为 Done（写 PR 号 + 关键统计）
 - 把“库存总览统计输出”贴到当周日报/周报（作为里程碑收口）
+
+---
+
+## 14. 模板区（Templates）—— 直接复制粘贴使用
+
+> 目的：给内容同学“照抄即可改”的最小模板集合。  
+> 使用方式：复制模板 → 改 `id/owner/日期/文案/标签` → 走 SOP 校验（mvp_check + ci_verify_mbti）。
+
+---
+
+### 14.1 Highlight Card Template（strength）
+
+```json
+{
+  "id": "hl_s_ei_E_3",
+  "pool": "strength",
+  "group_id": "ei_energy",
+  "priority": 66,
+  "title": "（strength）标题：一句话优势",
+  "body": "（strength）正文：2–3 句，描述优势如何在实际场景里发挥作用；避免空话，尽量给具体表现。",
+  "tags": ["axis:EI", "side:E"]
+}
+```
+
+---
+
+### 14.2 Highlight Card Template（blindspot）
+
+```json
+{
+  "id": "hl_b_ei_E_3",
+  "pool": "blindspot",
+  "group_id": "ei_energy",
+  "priority": 66,
+  "title": "（blindspot）标题：一句话盲点",
+  "body": "（blindspot）正文：2–3 句；避免羞辱/绝对化表达；最好写出“在压力下更容易出现什么”，并暗含一个可调整方向。",
+  "tags": ["axis:EI", "side:E", "stress"]
+}
+```
+
+---
+
+### 14.3 Highlight Card Template（action）
+
+```json
+{
+  "id": "hl_a_ei_E_3",
+  "pool": "action",
+  "group_id": "ei_energy",
+  "priority": 66,
+  "title": "（action）标题：一句话可执行动作",
+  "body": "（action）正文：必须可执行（至少 1–2 个具体步骤）；建议用“下一步最小动作/清单/截止点/小实验”等结构写出来。",
+  "tags": ["axis:EI", "side:E", "habit"]
+}
+```
+
+---
+
+### 14.4 Rules Template ×1（规则层模板）
+
+> 说明：规则字段以你当前项目真实 schema 为准；这里给的是“运营可读 + 可落地”的最小结构模板（重点是 note/when/pick/constraints/priority）。
+
+```json
+{
+  "id": "rule.highlights.axis_side_pick.v1",
+  "scope": {
+    "region": "CN_MAINLAND",
+    "locale": "zh-CN",
+    "sections": ["strengths", "blindspots", "actions"]
+  },
+  "when": {
+    "any": [
+      { "axis": "EI", "side": "E", "min_level": "clear" },
+      { "axis": "EI", "side": "I", "min_level": "clear" }
+    ]
+  },
+  "pick": {
+    "order": ["axis", "role", "general", "fallback"],
+    "axis": { "tags": ["axis:EI", "side:E"], "count": 1 },
+    "role": { "tags_prefix": "role:", "count": 1 },
+    "general": { "tags": ["universal"], "count": 1 },
+    "fallback": { "tags": ["fallback"], "count": 0 }
+  },
+  "constraints": {
+    "dedupe_by": ["group_id"],
+    "must_include": ["strength", "blindspot", "action"],
+    "max_items": 3
+  },
+  "priority": 500,
+  "note": "示例：当 EI 轴侧向清晰时，从 axis/side 池优先取 1 张；再补 role/general；缺卡才考虑 fallback。"
+}
+```
+
+---
+
+### 14.5 Overrides Template ×3（热修层模板）
+
+#### 14.5.1 override：patch_field（字段级补丁，最常用）
+
+```json
+{
+  "id": "ovr.20260113.patch_wording.v1",
+  "reason": "合规/措辞优化：修正文案表述",
+  "scope": { "region": "CN_MAINLAND", "locale": "zh-CN" },
+  "match": { "card_id": "hl_b_ei_E_1" },
+  "action": {
+    "type": "patch_field",
+    "patch": {
+      "title": "（已修正）标题",
+      "body": "（已修正）正文：更温和、更可执行"
+    }
+  },
+  "priority": 900,
+  "expires_at": "2026-02-01",
+  "owner": "content_team"
+}
+```
+
+#### 14.5.2 override：replace（整卡替换，谨慎使用）
+
+```json
+{
+  "id": "ovr.20260113.replace_card.v1",
+  "reason": "事实/结构错误：整卡替换（保持同 id）",
+  "scope": { "region": "CN_MAINLAND", "locale": "zh-CN" },
+  "match": { "card_id": "hl_a_tf_T_2" },
+  "action": {
+    "type": "replace",
+    "card": {
+      "id": "hl_a_tf_T_2",
+      "pool": "action",
+      "group_id": "tf_decision",
+      "priority": 58,
+      "title": "（替换后）标题",
+      "body": "（替换后）正文：给出明确步骤与下一步动作。",
+      "tags": ["axis:TF", "side:T", "habit"]
+    }
+  },
+  "priority": 910,
+  "expires_at": "2026-02-01",
+  "owner": "content_team"
+}
+```
+
+#### 14.5.3 override：disable（禁用卡，需写替代/回滚）
+
+```json
+{
+  "id": "ovr.20260113.disable_card.v1",
+  "reason": "紧急下线：存在争议/敏感，先禁用；后续用新卡替换",
+  "scope": { "region": "CN_MAINLAND", "locale": "zh-CN" },
+  "match": { "card_id": "hl_s_core_strength_9" },
+  "action": { "type": "disable" },
+  "priority": 920,
+  "expires_at": "2026-01-20",
+  "owner": "content_team",
+  "rollback": "revert 本 override 或到期自动失效；替代方案：新增同主题更温和卡并在 pools 中补足"
+}
+```
