@@ -66,66 +66,78 @@
 
 ## 2) Highlights（report_highlights_*）
 
-> 说明：此处先落“缺口口径 + 目标线”，当前数量可在补统计脚本/命令后回填。  
 > 覆盖 sections：`strengths / blindspots / actions`
 
 ### 2.1 最低库存线（每个 section）
 
-| section | general Target | role Target | axis Target | fallback Target |
-|---|---:|---:|---:|---:|
-| strengths | 10 | 4 | 3 | 5 |
-| blindspots | 10 | 4 | 3 | 5 |
-| actions | 10 | 4 | 3 | 5 |
+| section | general Target | role Target | axis_total Target | axis_side_target_per_side Target | fallback Target |
+|---|---:|---:|---:|---:|---:|
+| strengths | 10 | 4 | 3 | 3 | 5 |
+| blindspots | 10 | 4 | 3 | 3 | 5 |
+| actions | 10 | 4 | 3 | 3 | 5 |
 
 > role：建议按 4 个 role（NT/NF/SJ/SP）“每 role ≥1”起步，逐步扩容。  
-> axis：建议按 5 轴（EI/SN/TF/JP/AT）“每轴每侧至少 1”，目标线按“每轴 ≥3”推进。
+> axis_total：按 `tags` 含 `axis:*` 的总数量（粗粒度统计，用于兜底）。  
+> axis_side_target_per_side：按 `tags` 同时含 `axis:XX` + `side:Y` 统计；对每个 axis（EI/SN/TF/JP/AT），分别看其两侧（E/I、N/S、T/F、J/P、A/T）的计数，取 **最小值**（min_per_side）作为细粒度指标。  
+
+---
 
 ### 2.2 strengths 缺口（Done）
 
 > 来源：`report_highlights_pools.json` → `pools.strength.items[]`  
-> 统计口径：general=tag 含 `universal`；role=tag 含 `role:*`；axis=tag 含 `axis:*`；fallback=tag 含 `fallback`  
+> 统计口径：  
+> - general=tag 含 `universal`  
+> - role=tag 含 `role:*`  
+> - axis_total=tag 含 `axis:*`  
+> - axis_side_min_per_side=按 `axis:XX + side:Y` 分组后取最小值（min_per_side）  
+> - fallback=tag 含 `fallback`  
 > PR：#60（content: gapfill highlights strengths pools）
 
 | bucket | Target | Current | Gap | Notes |
 |---|---:|---:|---:|---|
 | general | 10 | 15 | 0 | strengths.total=39 |
 | role | 4 | 4 | 0 | 已覆盖 NT/NF/SJ/SP |
-| axis | 3 | 20 | 0 | 覆盖 EI/SN/TF/JP/AT（按侧拆分更佳） |
+| axis_total (axis:*) | 3 | 20 | 0 | 覆盖 EI/SN/TF/JP/AT |
+| axis_side_min_per_side (axis+side) | 3 | 2 | 1 | strengths axis/side：min_per_side=2（下一轮补到 3） |
 | fallback | 5 | 5 | 0 | tag:fallback |
 
 ### 2.3 blindspots 缺口（Done）
 
 > 来源：`report_highlights_pools.json` → `pools.blindspot.items[]`  
-> 统计口径：general=tag 含 `universal`；role=tag 含 `role:*`；axis=tag 含 `axis:*`；fallback=tag 含 `fallback`  
-> PR：#63（content: gapfill highlights blindspots pools）
+> 统计口径同上  
+> PR：#63（general/role/fallback 补库） + #70（axis/side 补到 ≥3/side）
 
 | bucket | Target | Current | Gap | Notes |
 |---|---:|---:|---:|---|
-| general | 10 | 10 | 0 | blindspots.total=29 |
+| general | 10 | 10 | 0 | blindspots.total=49 |
 | role | 4 | 4 | 0 | 已覆盖 NT/NF/SJ/SP |
-| axis | 3 | 10 | 0 | 覆盖 EI/SN/TF/JP/AT（按侧拆分更佳） |
+| axis_total (axis:*) | 3 | 30 | 0 | 覆盖 EI/SN/TF/JP/AT |
+| axis_side_min_per_side (axis+side) | 3 | 3 | 0 | blindspots axis/side：min_per_side=3 ✅ |
 | fallback | 5 | 5 | 0 | tag:fallback |
 
 ### 2.4 actions 缺口（Done）
 
 > 来源：`report_highlights_pools.json` → `pools.action.items[]`  
-> 统计口径：general=tag 含 `universal`；role=tag 含 `role:*`；axis=tag 含 `axis:*`；fallback=tag 含 `fallback`  
-> PR：#65（content: gapfill highlights actions pools）
+> 统计口径同上  
+> PR：#65（general/role/fallback 补库） + #71（axis/side 补到 ≥3/side）
 
 | bucket | Target | Current | Gap | Notes |
 |---|---:|---:|---:|---|
-| general | 10 | 10 | 0 | actions.total=29 |
+| general | 10 | 10 | 0 | actions.total=49 |
 | role | 4 | 4 | 0 | 已覆盖 NT/NF/SJ/SP |
-| axis | 3 | 10 | 0 | 覆盖 EI/SN/TF/JP/AT（按侧拆分更佳） |
+| axis_total (axis:*) | 3 | 30 | 0 | 覆盖 EI/SN/TF/JP/AT |
+| axis_side_min_per_side (axis+side) | 3 | 3 | 0 | actions axis/side：min_per_side=3 ✅ |
 | fallback | 5 | 5 | 0 | tag:fallback |
 
 ---
 
-## 3) TODO（下一步把 TBD 变成数字）
+## 3) TODO（下一步）
 
-- [ ] 为 highlights 增加统计口径（按 general/role/axis/fallback + section）并回填 Current/Gap  
-  - [x] strengths 已回填（PR #60）
-  - [x] blindspots 已回填（PR #63）
-  - [x] actions 已回填（PR #65）  
-- [x] reads.fallback（通用池）补齐到 ≥10（PR #67；当前 10，缺口 0）  
-- [ ] 将本表纳入内容同学的每周补库节奏（缺口优先级：fallback → general → axis → role）
+- [x] 为 highlights 增加统计口径（按 general/role/axis_total/fallback + section）并回填 Current/Gap  
+  - [x] strengths（PR #60）
+  - [x] blindspots（PR #63）
+  - [x] actions（PR #65）  
+- [x] reads.fallback（通用池）补齐到 ≥10（PR #67；当前 10，缺口 0；reads.total_unique=153）  
+- [ ] strengths：补齐 axis/side 细粒度指标到 **min_per_side=3**（当前=2，缺口=1）  
+  - 建议：每轴每侧再补 1 张（共 10 张），完成后再回填/确认该行仍为 0 gap  
+- [ ] 将本表纳入内容同学的每周补库节奏（缺口优先级：fallback → general → axis/side → role）
