@@ -567,3 +567,64 @@ git branch --merged main | egrep 'content/|docs/' | xargs -n 1 git branch -d 2>/
   "rollback": "revert 本 override 或到期自动失效；替代方案：新增同主题更温和卡并在 pools 中补足"
 }
 ```
+
+---
+
+## 15. Phase 2：新增 section 的补库顺序（扩展路线图）
+
+> 目标：在不改代码/不发版的前提下，按“一个 section 一个节奏”把内容包从 MVP（strengths/blindspots/actions/reads）扩展到更多报告章节；每次扩展都能被 selfcheck + verify_mbti 验收，且可回滚。
+
+### 15.1 补库顺序（建议）
+
+按用户体感价值 + 风险可控性排序（从易到难）：
+
+1) relationships（关系）
+2) career（职业/学习）
+3) stress_recovery（压力/复原）
+4) growth_plan（成长路径）
+
+原则：
+- 一次只推进 **一个 section** 到达最低线并可上线（不要多线并行）。
+- 每个 section 都先做 **通用+fallback**，再补 **role**，最后补 **axis_side**（细粒度最耗内容产能）。
+
+### 15.2 Phase 2 最低库存线（P0：可上线最低线）
+
+对每个新增 section（relationships / career / stress_recovery / growth_plan），最低线统一为：
+
+| bucket | Target | 说明 |
+|---|---:|---|
+| general（通用） | ≥10 | tag: universal（覆盖不同场景/语气） |
+| role（四象限） | ≥4 | NT/NF/SJ/SP 每个 role ≥1 |
+| axis_side（细粒度） | min_per_side ≥2 | 按 axis:* + side:* 统计；EI/SN/TF/JP/AT 五轴两侧的最小值 ≥2 |
+| fallback（兜底） | ≥5 | tag: fallback；只在缺卡时触发且必须可见 |
+
+> 说明：P0 的 axis_side 先定为 min_per_side≥2（比≥3更容易起步）；等该 section 稳定后再把目标提升到 ≥3。
+
+### 15.3 Phase 2 升级线（P1：稳定运营线）
+
+当某 section 的 P0 连续 2 周无缺口（且文案抽检 OK）后，将该 section 提升到：
+
+- general ≥ 12
+- role：每 role ≥ 2（总 ≥ 8）
+- axis_side：min_per_side ≥ 3
+- fallback ≥ 6
+
+### 15.4 每个 section 的补库步骤（照单执行）
+
+以 relationships 为例（其它 section 同理）：
+
+1) 先补 general 10 张（universal）
+2) 再补 fallback 5 张（fallback）
+3) 再补 role 4 张（role:NT/NF/SJ/SP 各 1）
+4) 最后补 axis_side（把 min_per_side 拉到 2；下一阶段再拉到 3）
+5) 更新缺口表 `docs/content_inventory_gap.md`（把该 section 新增一块统计与 Target/Current/Gap）
+6) 按 Weekly SOP 粘贴“统计输出”到 PR comment/周报完成收口
+
+### 15.5 验收标准（Phase 2 上线门槛）
+
+每次新增/补库一个 section，必须满足：
+
+- selfcheck PASS（manifest/assets/schema）
+- verify_mbti PASS（不影响现有 strengths/blindspots/actions/reads）
+- 新 section 的库存达到 P0 最低线（general/role/axis_side/fallback）
+- 不允许 silent fallback：若触发 fallback，必须可在日志/summary 里定位原因（缺卡桶/规则未命中等）
