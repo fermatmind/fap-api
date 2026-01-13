@@ -156,6 +156,7 @@
 - 禁止人身攻击、歧视、羞辱
 - 建议必须可执行：给 1–2 个具体动作，不要空话
 - 同一 section 的通用卡不得“换同义词灌水”（重复度要控）
+- **禁止** `/reads/coming-soon` 入库；占位必须使用 `status: coming_soon` + 统一 landing（`url`/`canonical_url` 指向同一 landing）（PR #76）
 
 ### 6.3 卡片模板（内容同学复制填空）
 ```json
