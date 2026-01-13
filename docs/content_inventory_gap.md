@@ -106,14 +106,18 @@
 | axis | 3 | 10 | 0 | 覆盖 EI/SN/TF/JP/AT（按侧拆分更佳） |
 | fallback | 5 | 5 | 0 | tag:fallback |
 
-### 2.4 actions 缺口（待回填）
+### 2.4 actions 缺口（Done）
+
+> 来源：`report_highlights_pools.json` → `pools.action.items[]`  
+> 统计口径：general=tag 含 `universal`；role=tag 含 `role:*`；axis=tag 含 `axis:*`；fallback=tag 含 `fallback`  
+> PR：#65（content: gapfill highlights actions pools）
 
 | bucket | Target | Current | Gap | Notes |
 |---|---:|---:|---:|---|
-| general | 10 | TBD | TBD | 动作必须可执行（至少 1–2 个具体步骤） |
-| role | 4 | TBD | TBD | NT/NF/SJ/SP 至少各 1 |
-| axis | 3 | TBD | TBD | EI/SN/TF/JP/AT（按侧拆分更佳） |
-| fallback | 5 | TBD | TBD | 缺卡时才用，且日志可见 |
+| general | 10 | 10 | 0 | actions.total=29 |
+| role | 4 | 4 | 0 | 已覆盖 NT/NF/SJ/SP |
+| axis | 3 | 10 | 0 | 覆盖 EI/SN/TF/JP/AT（按侧拆分更佳） |
+| fallback | 5 | 5 | 0 | tag:fallback |
 
 ---
 
