@@ -137,6 +137,32 @@
   - [x] strengths（PR #60）
   - [x] blindspots（PR #63）
   - [x] actions（PR #65）  
-- [x] reads.fallback（通用池）补齐到 ≥10（PR #67；当前 10，缺口 0；reads.total_unique=153）  
+- [x] reads.fallback（通用池）补齐到 ≥10（PR #67；当前 10，缺口 0；reads.total_unique=153）
+- [x] reads placeholder：/reads/coming-soon => 0（PR #76）  
 - [x] strengths：axis/side 细粒度指标补齐到 **min_per_side=3**（PR #73；当前=3，缺口=0）
-- [ ] 将本表纳入内容同学的每周补库节奏（缺口优先级：fallback → general → axis/side → role）
+- [x] 将本表纳入内容同学的每周补库节奏（缺口优先级：fallback → general → axis/side → role；见 docs/content_ops_spec.md §13 Weekly SOP）
+- [x] 每周收口（每周必做）：更新 docs/content_inventory_gap.md，并粘贴“库存总览统计输出”到 PR comment / 周报
+
+---
+
+### 每周收口模板（复制粘贴到 PR comment / 周报）
+
+> 周期：每周固定一次（建议周一/周二）。  
+> 目标：用“统计输出”作为验收凭证；若有 gap，明确本周唯一补库目标与 PR。
+
+**A. 本周统计输出（原样粘贴，不要改字）**
+```text
+<把终端里 jq 输出整段粘贴到这里>
+```
+
+**B. 本周结论**
+- [ ] highlights：strengths/blindspots/actions 是否全部达标（general/role/axis_total/min_per_side/fallback）
+- [ ] reads：fallback 是否 ≥10；placeholder 是否为 0
+- [ ] 若存在缺口：本周唯一目标 = <fallback/general/axis-side/role>（说明哪一条有 gap）
+
+**C. 本周 PR 列表**
+- [ ] content: <PR #xx>（说明补了哪个 bucket / section）
+- [ ] docs: <PR #xx>（说明更新了哪条规范/缺口表）
+
+**D. 下周计划（只写 1 条）**
+- [ ] <下一周唯一目标：补哪个缺口 or 做哪类质量替换>
