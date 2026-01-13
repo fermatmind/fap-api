@@ -246,7 +246,24 @@
           "body": "你更擅长在安静中整合信息，先把问题想透，再给出更清晰的表达与更稳的判断。",
           "tags": ["axis:EI", "side:I"]
         },
-
+{
+  "id": "hl_s_ei_E_3",
+  "pool": "strength",
+  "group_id": "ei_energy",
+  "priority": 66,
+  "title": "你能用沟通把资源调动起来",
+  "body": "你更容易通过交流把信息、资源与人连接到一起。面对复杂推进，你擅长用清晰的表达让大家进入同一个节奏，进展更快发生。",
+  "tags": ["axis:EI", "side:E"]
+},
+{
+  "id": "hl_s_ei_I_3",
+  "pool": "strength",
+  "group_id": "ei_energy",
+  "priority": 66,
+  "title": "你能在独处中把问题想得更透",
+  "body": "你擅长在安静里整合信息，把复杂问题拆解、推演、归纳成更清晰的结论。先想透再表达，让你的输出更稳、更少走弯路。",
+  "tags": ["axis:EI", "side:I"]
+},
         {
           "id": "hl_s_sn_N_2",
           "pool": "strength",
@@ -265,6 +282,24 @@
           "body": "你能把“怎么做”说清楚，把细节与步骤落到位，让结果更可靠、更可执行。",
           "tags": ["axis:SN", "side:S"]
         },
+{
+  "id": "hl_s_sn_N_3",
+  "pool": "strength",
+  "group_id": "sn_info",
+  "priority": 61,
+  "title": "你能从不同线索里拼出新可能",
+  "body": "你善于把零散信息串联成新的路径与假设。即使局面卡住，你也能提出替代方案与新连接，让团队看到更多可能性。",
+  "tags": ["axis:SN", "side:N"]
+},
+{
+  "id": "hl_s_sn_S_3",
+  "pool": "strength",
+  "group_id": "sn_info",
+  "priority": 61,
+  "title": "你能把关键细节做实，减少返工",
+  "body": "你关注事实与落地细节，擅长把“怎么做、做成什么样”讲清楚。细节到位能显著减少误解与返工，让交付更稳定。",
+  "tags": ["axis:SN", "side:S"]
+},
 
         {
           "id": "hl_s_tf_T_2",
@@ -284,7 +319,24 @@
           "body": "你会把人的体验与关系纳入考量，善于用更柔和的方式推动共识，让合作更顺。",
           "tags": ["axis:TF", "side:F"]
         },
-
+{
+  "id": "hl_s_tf_T_3",
+  "pool": "strength",
+  "group_id": "tf_decision",
+  "priority": 56,
+  "title": "你能用结构化标准让决策更可靠",
+  "body": "你擅长把判断标准和因果关系说清楚：为什么选这个、风险在哪里、怎么验证。结构化表达让决策更一致、更可复盘。",
+  "tags": ["axis:TF", "side:T"]
+},
+{
+  "id": "hl_s_tf_F_3",
+  "pool": "strength",
+  "group_id": "tf_decision",
+  "priority": 56,
+  "title": "你能把人的体验纳入方案，让协作更顺",
+  "body": "你会自然地关注影响与感受，擅长用更温和但清晰的方式达成共识。把人放进方案里考虑，能显著降低协作摩擦。",
+  "tags": ["axis:TF", "side:F"]
+},
         {
           "id": "hl_s_jp_J_2",
           "pool": "strength",
@@ -303,7 +355,24 @@
           "body": "你不容易被固定方案束缚，能快速吸收新信息并调整策略，找到更顺的推进方式。",
           "tags": ["axis:JP", "side:P"]
         },
-
+{
+  "id": "hl_s_jp_J_3",
+  "pool": "strength",
+  "group_id": "jp_style",
+  "priority": 51,
+  "title": "你能把目标拆成里程碑并持续推进",
+  "body": "你擅长规划节奏，把大目标拆成可跟踪的里程碑，明确优先级与交付标准。节奏清晰时，团队更容易稳定向前。",
+  "tags": ["axis:JP", "side:J"]
+},
+{
+  "id": "hl_s_jp_P_3",
+  "pool": "strength",
+  "group_id": "jp_style",
+  "priority": 51,
+  "title": "你能在变化中快速调整打法",
+  "body": "你不容易被固定方案卡住，能快速吸收新信息、调整策略并找到更顺的路径。在不确定里保持弹性，是你的优势。",
+  "tags": ["axis:JP", "side:P"]
+},
         {
           "id": "hl_s_at_A_2",
           "pool": "strength",
@@ -322,7 +391,24 @@
           "body": "你对变化更敏锐，能更早发现潜在风险与张力，并提前做预案来降低损失。",
           "tags": ["axis:AT", "side:T"]
         },
-
+{
+  "id": "hl_s_at_A_3",
+  "pool": "strength",
+  "group_id": "at_stress",
+  "priority": 46,
+  "title": "你能在压力里稳住情绪与节奏",
+  "body": "面对波动与压力，你更容易保持稳定心态，不被短期起伏带走。你能把注意力拉回“下一步最关键的事”，让推进持续发生。",
+  "tags": ["axis:AT", "side:A"]
+},
+{
+  "id": "hl_s_at_T_3",
+  "pool": "strength",
+  "group_id": "at_stress",
+  "priority": 46,
+  "title": "你对风险更敏锐，能提前做预案",
+  "body": "你能更早察觉问题苗头与潜在风险，并提前准备替代方案。提前预案能减少突发带来的损失，让系统更可控。",
+  "tags": ["axis:AT", "side:T"]
+},
         {
           "id": "hl_s_fallback_1",
           "pool": "strength",
