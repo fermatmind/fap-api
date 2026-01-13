@@ -302,3 +302,108 @@
   - 影响的 buckets（by_type/by_role/by_strategy/by_top_axis/fallback）
   - 增量统计（例如：reads.total_unique: 135 -> 151）
   - 是否引入/修改 overrides（含 expires_at）
+
+---
+
+## 13. 每周内容运营节奏（Weekly SOP）
+
+> 目标：让内容同学每周按固定流程补库/修文案/热修，**只改 JSON**，并且每次都能被 CI 验收与回滚。
+
+### 13.1 每周固定流程（周一/周二任选一天）
+
+1) **拉最新 main**
+```bash
+git switch main
+git pull --ff-only
+git fetch -p
+```
+
+2) **跑一次总验收（确保基线干净）**
+```bash
+lsof -ti tcp:18000 | xargs kill -9 2>/dev/null || true
+bash backend/scripts/ci_verify_mbti.sh
+```
+
+3) **跑“库存总览统计”（用于周报/PR comment）**
+```bash
+PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+POOLS="$PACK_DIR/report_highlights_pools.json"
+READS="$PACK_DIR/report_recommended_reads.json"
+
+jq -r '
+  def items(pool): (.pools[pool].items // []);
+  def stat(pool):
+    {
+      total: (items(pool)|length),
+      general: (items(pool) | map(select((.tags//[])|index("universal"))) | length),
+      role: (items(pool) | map(select((.tags//[])|map(select(startswith("role:")))|length>0)) | length),
+      axis: (items(pool) | map(select((.tags//[])|map(select(startswith("axis:")))|length>0)) | length),
+      fallback: (items(pool) | map(select((.tags//[])|index("fallback"))) | length)
+    };
+  [
+    ("strengths  " + (stat("strength")  | "total=\(.total) general=\(.general) role=\(.role) axis=\(.axis) fallback=\(.fallback)")),
+    ("blindspots " + (stat("blindspot") | "total=\(.total) general=\(.general) role=\(.role) axis=\(.axis) fallback=\(.fallback)")),
+    ("actions    " + (stat("action")    | "total=\(.total) general=\(.general) role=\(.role) axis=\(.axis) fallback=\(.fallback)"))
+  ] | .[]
+' "$POOLS"
+
+jq -r '.items.fallback|length| "reads.fallback=" + tostring' "$READS"
+```
+
+4) **对照缺口表，选本周“唯一目标”**
+- 优先级建议：  
+  1) reads.fallback / highlights.fallback（兜底池）  
+  2) general（通用池）  
+  3) axis/side（细粒度补库）  
+  4) role（四象限补库）  
+- 如果“数量都达标”，本周就做 **质量替换**：  
+  - **只改文案字段**（title/desc/body 等），不改 id / canonical_id / type / 结构  
+  - 目标：减少重复表达、提升可读性、补充场景差异
+
+### 13.2 标准工作流（内容同学照单执行）
+
+1) **开分支**
+```bash
+BR="content/<topic>-$(date +%Y%m%d)"
+git switch -c "$BR"
+```
+
+2) **只改 JSON（禁止改 backend 代码）**
+- highlights：`report_highlights_pools.json` / `report_highlights_rules.json` / `overrides/*.json`
+- reads：`report_recommended_reads.json`
+
+3) **本机校验（必须全绿）**
+```bash
+PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+bash backend/scripts/mvp_check.sh "$PACK_DIR"
+bash backend/scripts/ci_verify_mbti.sh
+```
+
+4) **提交 / 推送 / PR**
+```bash
+git status
+git add <changed_files>
+git commit -m "content: <short summary>"
+git push -u origin HEAD
+```
+- PR 按 `.github/pull_request_template.md` 填完勾选项
+- 把 **“库存总览统计输出”** 粘到 PR comment / 描述里，作为验收凭证
+
+5) **merge 后 main 再验**
+```bash
+git switch main
+git pull --ff-only
+lsof -ti tcp:18000 | xargs kill -9 2>/dev/null || true
+bash backend/scripts/ci_verify_mbti.sh
+```
+
+6) **清理分支（可选）**
+```bash
+git fetch -p
+git branch --merged main | egrep 'content/|docs/' | xargs -n 1 git branch -d 2>/dev/null || true
+```
+
+### 13.3 每周收口（必须做）
+
+- 更新 `docs/content_inventory_gap.md`：把本周变更对应的行标记为 Done（写 PR 号 + 关键统计）
+- 把“库存总览统计输出”贴到当周日报/周报（作为里程碑收口）
