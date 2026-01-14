@@ -110,12 +110,27 @@ $gen = Event::where('event_code', 'share_generate')
             : (string) Str::uuid();
 
         $event->event_code  = 'share_click';
-        $event->anon_id     = $data['anon_id'] ?? null;
-        $event->attempt_id  = $attemptId;
-        $event->meta_json   = $meta;
-        $event->occurred_at = !empty($data['occurred_at'])
-            ? Carbon::parse($data['occurred_at'])
-            : now();
+
+// ✅ anon_id 归因：客户端优先，其次继承 share_generate 的 anon_id
+$clickAnonId = null;
+
+// 1) 客户端 body 传的 anon_id
+if (!empty($data['anon_id']) && is_string($data['anon_id'])) {
+    $clickAnonId = trim((string) $data['anon_id']);
+}
+
+// 2) 没传 / 为空：继承 share_generate 的 anon_id（$gen 是上面查到的那条事件）
+if (($clickAnonId === null || $clickAnonId === '') && !empty($gen->anon_id)) {
+    $clickAnonId = trim((string) $gen->anon_id);
+}
+
+$event->anon_id     = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId : null;
+
+$event->attempt_id  = $attemptId;
+$event->meta_json   = $meta;
+$event->occurred_at = !empty($data['occurred_at'])
+    ? Carbon::parse($data['occurred_at'])
+    : now();
 
         $event->save();
 
