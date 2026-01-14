@@ -866,14 +866,14 @@ $this->logEvent('share_generate', $request, [
 public function getReport(Request $request, string $attemptId)
 {
     if (app()->environment('local')) {
-    Log::debug('[RE] enter getReport', [
-        'APP_ENV' => app()->environment(),
-        'RE_TAGS' => env('RE_TAGS', null),
-        'refresh' => request()->query('refresh'),
-        'id'      => $id ?? null,
-    ]);
-}
-    
+        Log::debug('[RE] enter getReport', [
+            'APP_ENV'  => app()->environment(),
+            'RE_TAGS'  => env('RE_TAGS', null),
+            'refresh'  => $request->query('refresh'),
+            'id'       => $attemptId, // ✅ 修正：原来用 $id 未定义
+        ]);
+    }
+
     $result = Result::where('attempt_id', $attemptId)->first();
 
     if (!$result) {
@@ -891,6 +891,20 @@ public function getReport(Request $request, string $attemptId)
     // refresh=1 / refresh=true 才会强制重算
     $refreshRaw = $request->query('refresh', '0');
     $refresh = in_array((string) $refreshRaw, ['1', 'true', 'TRUE', 'yes', 'YES'], true);
+
+    // ✅ M3 事件字段（统一口径）
+    $engineVersion = 'v1.2';
+    $contentPackageVersion = (string) (
+        $result->content_package_version
+        ?? $this->currentContentPackageVersion()
+    );
+
+    // ✅ 去抖依赖：anon_id + attempt_id（WritesEvents 里 result_view 10s 去抖）
+    $anonId = (string) (
+        $attempt?->anon_id
+        ?? trim((string) ($request->header('X-Anon-Id') ?? $request->query('anon_id') ?? ''))
+    );
+    $anonId = $anonId !== '' ? $anonId : null;
 
     // 选择磁盘：优先 private，否则 fallback 到默认磁盘
     // 注意：你现在的 local.root 指向 storage/app/private，所以用 local 也没问题
@@ -911,17 +925,20 @@ public function getReport(Request $request, string $attemptId)
                 $cached = json_decode($cachedJson, true);
 
                 if (is_array($cached)) {
-                    // 缓存命中也记一次 view（如不想重复可删）
-                    $this->logEvent('report_view', $request, [
-                        'anon_id'       => $attempt?->anon_id,
+                    // ✅ M3：report 接口必须写 result_view（漏斗入口）
+                    $this->logEvent('result_view', $request, [
+                        'anon_id'       => $anonId,
                         'scale_code'    => $result->scale_code,
                         'scale_version' => $result->scale_version,
                         'attempt_id'    => $attemptId,
                         'region'        => $attempt?->region ?? 'CN_MAINLAND',
                         'locale'        => $attempt?->locale ?? 'zh-CN',
                         'meta_json'     => [
-                            'type_code' => $result->type_code,
-                            'engine'    => 'v1.2',
+                            'type_code'               => $result->type_code,
+                            'engine_version'          => $engineVersion,
+                            'content_package_version' => $contentPackageVersion,
+
+                            // 可选：便于调试/分析
                             'share_id'  => $shareId !== '' ? $shareId : null,
                             'refresh'   => false,
                             'cache'     => true,
@@ -964,16 +981,20 @@ public function getReport(Request $request, string $attemptId)
     /**
      * ✅ 2) 缓存未命中 / refresh=1：走 compose
      */
-    $this->logEvent('report_view', $request, [
-        'anon_id'       => $attempt?->anon_id,
+    // ✅ M3：report 接口必须写 result_view（漏斗入口）
+    $this->logEvent('result_view', $request, [
+        'anon_id'       => $anonId,
         'scale_code'    => $result->scale_code,
         'scale_version' => $result->scale_version,
         'attempt_id'    => $attemptId,
         'region'        => $attempt?->region ?? 'CN_MAINLAND',
         'locale'        => $attempt?->locale ?? 'zh-CN',
         'meta_json'     => [
-            'type_code' => $result->type_code,
-            'engine'    => 'v1.2',
+            'type_code'               => $result->type_code,
+            'engine_version'          => $engineVersion,
+            'content_package_version' => $contentPackageVersion,
+
+            // 可选：便于调试/分析
             'share_id'  => $shareId !== '' ? $shareId : null,
             'refresh'   => $refresh,
             'cache'     => false,
