@@ -131,6 +131,41 @@
 
 ---
 
+## 2.5 Phase 2 Sections（report_cards_*：relationships/career/stress_recovery/growth）
+
+> 口径（P0 先只看 general + fallback）  
+> - general：`report_cards_<section>.json` 的 items/cads 数量  
+> - fallback：`report_cards_fallback_<section>.json` 的 items/cads 数量  
+> - Target（暂定，P0）：general ≥10；fallback ≥10（与 growth fallback 对齐）  
+> - Current：以本机 jq 输出为准（可在 PR comment 贴统计输出作为验收凭证）
+
+来源文件（MBTI CN 主包）：
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_relationships.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_fallback_relationships.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_career.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_fallback_career.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_stress_recovery.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_fallback_stress_recovery.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_growth.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_fallback_growth.json`
+
+### 2.5.1 总览（P0：general + fallback）
+
+| section | general Target | general Current | general Gap | fallback Target | fallback Current | fallback Gap | Notes |
+|---|---:|---:|---:|---:|---:|---:|---|
+| relationships | 10 | 23 | 0 | 10 | 8 | 2 | fallback 需补到 ≥10 |
+| career | 10 | 25 | 0 | 10 | 8 | 2 | fallback 需补到 ≥10 |
+| stress_recovery | 10 | 22 | 0 | 10 | 8 | 2 | fallback 需补到 ≥10（已修正 section/tags，PR #80/#82） |
+| growth | 10 | 23 | 0 | 10 | 10 | 0 | fallback 已补齐到 ≥10（PR #81） |
+
+> 备注：Current 数字来自本机统计：  
+> - relationships.general.count=23 / relationships.fallback.count=8  
+> - career.general.count=25 / career.fallback.count=8  
+> - stress_recovery.general.count=22 / stress_recovery.fallback.count=8  
+> - growth.general.count=23 / growth.fallback.count=10
+
+---
+
 ## 3) TODO（下一步）
 
 - [x] 为 highlights 增加统计口径（按 general/role/axis_total/fallback + section）并回填 Current/Gap  
