@@ -695,7 +695,7 @@ return DB::transaction(function () use (
         ]);
     }
 
-    /**
+/**
  * GET /api/v0.2/attempts/{id}/share
  * ✅ 返回分享文案骨架
  * ✅ 用 events 表做“10分钟去重”，避免重复请求导致 share_generate 膨胀
@@ -725,13 +725,16 @@ public function getShare(Request $request, string $attemptId)
         ?? $this->currentContentPackageVersion()
     );
 
+    // ✅ 与 getReport/result_view 对齐：统一口径字段名
+    $engineVersion = 'v1.2';
+
     // ✅ 强并发幂等：Redis lock + cache + events
     $store = Cache::store(); // 你后面还要用 $store->get/$store->put，保留
     $lock  = Cache::lock($this->shareLockKey($attemptId), 8); // ✅ IDE/运行时都稳
 
     try {
         $locked = $lock->block(3, function () use (
-            $store, $attemptId, $ttlMinutes, $request, $attempt, $result, $typeCode, $contentPackageVersion
+            $store, $attemptId, $ttlMinutes, $request, $attempt, $result, $typeCode, $contentPackageVersion, $engineVersion
         ) {
             $cacheKey = $this->shareCacheKey($attemptId);
 
@@ -771,30 +774,35 @@ public function getShare(Request $request, string $attemptId)
                 $isNew = true;
 
                 // ✅ 从 header 里拿 experiment/version（跟 /events 一致）
-$experiment = (string) ($request->header('X-Experiment') ?? '');
-$version    = (string) ($request->header('X-App-Version') ?? '');
+                $experiment = (string) ($request->header('X-Experiment') ?? '');
+                $version    = (string) ($request->header('X-App-Version') ?? '');
 
-$this->logEvent('share_generate', $request, [
-    'anon_id'       => $attempt?->anon_id,
-    'scale_code'    => $result->scale_code,
-    'scale_version' => $result->scale_version,
-    'attempt_id'    => $attemptId,
-    'channel'       => $attempt?->channel,
-    'region'        => $attempt?->region ?? 'CN_MAINLAND',
-    'locale'        => $attempt?->locale ?? 'zh-CN',
-    'meta_json'     => [
-        'engine'                  => 'v1.2',
-        'type_code'               => $typeCode,
-        'share_id'                => $shareId,
-        'profile_version'         => $result->profile_version ?? config('fap.profile_version', 'mbti32-v2.5'),
-        'content_package_version' => $contentPackageVersion,
-        'share_id_ttl_minutes'    => $ttlMinutes,
+                $this->logEvent('share_generate', $request, [
+                    'anon_id'       => $attempt?->anon_id,
+                    'scale_code'    => $result->scale_code,
+                    'scale_version' => $result->scale_version,
+                    'attempt_id'    => $attemptId,
+                    'channel'       => $attempt?->channel,
+                    'region'        => $attempt?->region ?? 'CN_MAINLAND',
+                    'locale'        => $attempt?->locale ?? 'zh-CN',
+                    'meta_json'     => [
+                        // ✅ 新口径：M3 要求字段名
+                        'engine_version'          => $engineVersion,
+                        'content_package_version' => $contentPackageVersion,
+                        'type_code'               => $typeCode,
+                        'share_id'                => $shareId,
 
-        // ✅ AB 字段：share_generate 也要有（不然漏斗断）
-        'experiment'              => $experiment !== '' ? $experiment : null,
-        'version'                 => $version !== '' ? $version : null,
-    ],
-]);
+                        // ✅ 兼容字段：旧代码/老查询仍可能读 engine
+                        'engine'                  => $engineVersion,
+
+                        'profile_version'         => $result->profile_version ?? config('fap.profile_version', 'mbti32-v2.5'),
+                        'share_id_ttl_minutes'    => $ttlMinutes,
+
+                        // ✅ AB 字段：share_generate 也要有（不然漏斗断）
+                        'experiment'              => $experiment !== '' ? $experiment : null,
+                        'version'                 => $version !== '' ? $version : null,
+                    ],
+                ]);
             }
 
             // 4) 回写 cache（无论新旧，统一缓存到 TTL）
@@ -809,7 +817,7 @@ $this->logEvent('share_generate', $request, [
         // 拿不到锁/Redis 异常：给个可观测的错误（也可降级到“只查 recent 不写入”）
         Log::warning('[share] lock failed', [
             'attempt_id' => $attemptId,
-            'err' => $e->getMessage(),
+            'err'        => $e->getMessage(),
         ]);
 
         return response()->json([

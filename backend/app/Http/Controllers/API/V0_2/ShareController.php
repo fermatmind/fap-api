@@ -44,10 +44,11 @@ class ShareController extends Controller
         $data = $v->validated();
 
         // 2) 查 share_generate（用 share_id 关联）
-        $gen = Event::where('event_code', 'share_generate')
-            ->whereRaw('JSON_UNQUOTE(JSON_EXTRACT(meta_json, "$.share_id")) = ?', [$shareId])
-            ->orderByDesc('occurred_at')
-            ->first();
+// ✅ 用 Laravel JSON path：跨 DB（sqlite/mysql）兼容，避免 JSON_UNQUOTE 不存在导致 500
+$gen = Event::where('event_code', 'share_generate')
+    ->where('meta_json->share_id', $shareId)
+    ->orderByDesc('occurred_at')
+    ->first();
 
         if (!$gen) {
             return response()->json([
