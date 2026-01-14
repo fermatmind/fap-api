@@ -44,11 +44,11 @@ class ShareController extends Controller
         $data = $v->validated();
 
         // 2) 查 share_generate（用 share_id 关联）
-// ✅ 用 Laravel JSON path：跨 DB（sqlite/mysql）兼容，避免 JSON_UNQUOTE 不存在导致 500
-$gen = Event::where('event_code', 'share_generate')
-    ->where('meta_json->share_id', $shareId)
-    ->orderByDesc('occurred_at')
-    ->first();
+        // ✅ 用 Laravel JSON path：跨 DB（sqlite/mysql）兼容
+        $gen = Event::where('event_code', 'share_generate')
+            ->where('meta_json->share_id', $shareId)
+            ->orderByDesc('occurred_at')
+            ->first();
 
         if (!$gen) {
             return response()->json([
@@ -67,9 +67,9 @@ $gen = Event::where('event_code', 'share_generate')
         if (!is_array($genMeta)) $genMeta = [];
 
         // 4) attempt_id：优先 body，其次 share_generate.attempt_id
-        $attemptId = (string)($data['attempt_id'] ?? '');
+        $attemptId = (string) ($data['attempt_id'] ?? '');
         if ($attemptId === '') {
-            $attemptId = (string)($gen->attempt_id ?? '');
+            $attemptId = (string) ($gen->attempt_id ?? '');
         }
         if ($attemptId === '') {
             return response()->json([
@@ -80,27 +80,60 @@ $gen = Event::where('event_code', 'share_generate')
         }
 
         // 5) experiment/version：优先 header，其次 body，其次 share_generate.meta_json 继承
-        $experiment = (string)($request->header('X-Experiment') ?? ($data['experiment'] ?? ''));
-        $version    = (string)($request->header('X-App-Version') ?? ($data['version'] ?? ''));
+        $experiment = (string) ($request->header('X-Experiment') ?? ($data['experiment'] ?? ''));
+        $version    = (string) ($request->header('X-App-Version') ?? ($data['version'] ?? ''));
 
-        if ($experiment === '') $experiment = (string)($genMeta['experiment'] ?? '');
-        if ($version === '')    $version    = (string)($genMeta['version'] ?? '');
+        if ($experiment === '') $experiment = (string) ($genMeta['experiment'] ?? '');
+        if ($version === '')    $version    = (string) ($genMeta['version'] ?? '');
+
+        // ====== 从 share_generate 继承的关键信息（用于补齐 share_click meta）======
+        $typeCode  = (string) ($genMeta['type_code'] ?? '');
+        $packV     = (string) ($genMeta['content_package_version'] ?? '');
+        $engV      = (string) ($genMeta['engine_version'] ?? ($genMeta['engine'] ?? ''));
+        $profileV  = (string) ($genMeta['profile_version'] ?? '');
+
+        // 分享漏斗字段（header 优先，其次 genMeta 继承）
+        $channel        = (string) ($request->header('X-Channel') ?? ($genMeta['channel'] ?? ''));
+        $clientPlatform = (string) ($request->header('X-Client-Platform') ?? ($genMeta['client_platform'] ?? ''));
+        $entryPage      = (string) ($request->header('X-Entry-Page') ?? '');
 
         // 6) meta 合并（先拿客户端 meta_json）
         $meta = is_array($data['meta_json'] ?? null) ? $data['meta_json'] : [];
+
+        // ✅ share_click 最小字段（M3 漏斗串联）
         if (!isset($meta['share_id']))   $meta['share_id'] = $shareId;
         if (!isset($meta['attempt_id'])) $meta['attempt_id'] = $attemptId;
 
-        // 不覆盖客户端已有
+        // ✅ 把 share_generate 的关键字段补齐进来（不覆盖客户端已有）
+        if ($typeCode !== '' && !isset($meta['type_code'])) $meta['type_code'] = $typeCode;
+
+        if ($engV !== '' && !isset($meta['engine_version'])) $meta['engine_version'] = $engV;
+        if ($packV !== '' && !isset($meta['content_package_version'])) $meta['content_package_version'] = $packV;
+
+        // ✅ 兼容字段（老查询可能读 engine）
+        if ($engV !== '' && !isset($meta['engine'])) $meta['engine'] = $engV;
+
+        if ($profileV !== '' && !isset($meta['profile_version'])) $meta['profile_version'] = $profileV;
+
+        // ✅ AB 字段：header/body > genMeta（不覆盖客户端已有）
         if ($experiment !== '' && !isset($meta['experiment'])) $meta['experiment'] = $experiment;
         if ($version !== '' && !isset($meta['version']))       $meta['version'] = $version;
 
-        // 通用字段（不覆盖客户端 meta）
-        if (!isset($meta['ua']))  $meta['ua']  = (string)($request->userAgent() ?? '');
-        if (!isset($meta['ip']))  $meta['ip']  = (string)($request->ip() ?? '');
-        if (!isset($meta['ref'])) $meta['ref'] = (string)($request->header('Referer') ?? '');
+        // ✅ 分享来源/平台字段（不覆盖客户端已有）
+        if ($channel !== '' && !isset($meta['channel'])) $meta['channel'] = $channel;
+        if ($clientPlatform !== '' && !isset($meta['client_platform'])) $meta['client_platform'] = $clientPlatform;
+        if ($entryPage !== '' && !isset($meta['entry_page'])) $meta['entry_page'] = $entryPage;
 
-        // 清理空值
+        // ✅ 关联到 share_generate（便于排查/归因）
+        if (!isset($meta['share_generate_event_id'])) $meta['share_generate_event_id'] = (string) ($gen->id ?? '');
+        if (!isset($meta['share_generate_occurred_at'])) $meta['share_generate_occurred_at'] = (string) ($gen->occurred_at ?? '');
+
+        // 通用字段（不覆盖客户端 meta）
+        if (!isset($meta['ua']))  $meta['ua']  = (string) ($request->userAgent() ?? '');
+        if (!isset($meta['ip']))  $meta['ip']  = (string) ($request->ip() ?? '');
+        if (!isset($meta['ref'])) $meta['ref'] = (string) ($request->header('Referer') ?? '');
+
+        // 清理空值（保留 0/false）
         $meta = array_filter($meta, fn($v) => !($v === null || $v === ''));
 
         // 7) 写 share_click event
@@ -109,36 +142,29 @@ $gen = Event::where('event_code', 'share_generate')
             ? (string) Str::uuid7()
             : (string) Str::uuid();
 
-        $event->event_code  = 'share_click';
+        $event->event_code = 'share_click';
 
-// ✅ anon_id 归因：客户端优先，其次继承 share_generate 的 anon_id
-$clickAnonId = null;
+        // ✅ anon_id 归因：客户端优先，其次继承 share_generate 的 anon_id
+        $clickAnonId = null;
 
-// 1) 客户端 body 传的 anon_id
-if (!empty($data['anon_id']) && is_string($data['anon_id'])) {
-    $clickAnonId = trim((string) $data['anon_id']);
-}
+        if (!empty($data['anon_id']) && is_string($data['anon_id'])) {
+            $clickAnonId = trim((string) $data['anon_id']);
+        }
+        if (($clickAnonId === null || $clickAnonId === '') && !empty($gen->anon_id)) {
+            $clickAnonId = trim((string) $gen->anon_id);
+        }
 
-// 2) 没传 / 为空：继承 share_generate 的 anon_id（$gen 是上面查到的那条事件）
-if (($clickAnonId === null || $clickAnonId === '') && !empty($gen->anon_id)) {
-    $clickAnonId = trim((string) $gen->anon_id);
-}
-
-$event->anon_id     = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId : null;
-
-$event->attempt_id  = $attemptId;
-$event->meta_json   = $meta;
-$event->occurred_at = !empty($data['occurred_at'])
-    ? Carbon::parse($data['occurred_at'])
-    : now();
+        $event->anon_id     = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId : null;
+        $event->attempt_id  = $attemptId;
+        $event->meta_json   = $meta;
+        $event->occurred_at = !empty($data['occurred_at'])
+            ? Carbon::parse($data['occurred_at'])
+            : now();
 
         $event->save();
 
         // 8) 生成/拿到 report（你现在 share_generate.meta_json 没有 report，所以这里必须“现场生成”）
-        $typeCode  = (string)($genMeta['type_code'] ?? '');
-        $engine    = (string)($genMeta['engine'] ?? '');
-        $profileV  = (string)($genMeta['profile_version'] ?? '');
-        $packV     = (string)($genMeta['content_package_version'] ?? '');
+        $engine = (string) ($genMeta['engine'] ?? '');
 
         $report = null;
 
@@ -146,13 +172,13 @@ $event->occurred_at = !empty($data['occurred_at'])
             $composer = $this->resolveReportComposer();
             if ($composer) {
                 $ctx = [
-                    'share_id' => $shareId,
-                    'attempt_id' => $attemptId,
-                    'experiment' => $experiment,
-                    'version' => $version,
-                    'type_code' => $typeCode,
-                    'engine' => $engine,
-                    'profile_version' => $profileV,
+                    'share_id'                => $shareId,
+                    'attempt_id'              => $attemptId,
+                    'experiment'              => $experiment,
+                    'version'                 => $version,
+                    'type_code'               => $typeCode,
+                    'engine'                  => $engine,
+                    'profile_version'         => $profileV,
                     'content_package_version' => $packV,
                 ];
 
@@ -195,15 +221,15 @@ $event->occurred_at = !empty($data['occurred_at'])
 
         // 不覆盖 composer 已有的 _meta，只补缺失字段
         $metaFill = [
-            'share_id' => $shareId,
-            'attempt_id' => $attemptId,
-            'type_code' => $typeCode,
-            'engine' => $engine,
-            'profile_version' => $profileV,
+            'share_id'                => $shareId,
+            'attempt_id'              => $attemptId,
+            'type_code'               => $typeCode,
+            'engine'                  => $engine,
+            'profile_version'         => $profileV,
             'content_package_version' => $packV,
-            'experiment' => $experiment,
-            'version' => $version,
-            'generated_at' => now()->toISOString(),
+            'experiment'              => $experiment,
+            'version'                 => $version,
+            'generated_at'            => now()->toISOString(),
         ];
         foreach ($metaFill as $k => $v) {
             if ($v === '' || $v === null) continue;
@@ -228,10 +254,10 @@ $event->occurred_at = !empty($data['occurred_at'])
      * ✅ A 方案白名单：按你实际 click 响应 keys 收敛后的最小闭包（123test 风格）
      */
     private function allowedReportKeys(): array
-{
-    $keys = config('report.share_report_allowed_keys', []);
-    return is_array($keys) ? $keys : [];
-}
+    {
+        $keys = config('report.share_report_allowed_keys', []);
+        return is_array($keys) ? $keys : [];
+    }
 
     /**
      * explain 是否允许对外暴露（建议默认 false）
@@ -239,10 +265,10 @@ $event->occurred_at = !empty($data['occurred_at'])
      * - 线上按需开：RE_EXPLAIN_PAYLOAD=true
      */
     private function shouldExposeExplain(): bool
-{
-    if (app()->environment('local', 'development')) return true;
-    return (bool) config('report.expose_explain', false);
-}
+    {
+        if (app()->environment('local', 'development')) return true;
+        return (bool) config('report.expose_explain', false);
+    }
 
     private function filterReport(array $report): array
     {
@@ -271,7 +297,7 @@ $event->occurred_at = !empty($data['occurred_at'])
             'App\\Services\\ReportComposer',
             'App\\Services\\Reports\\ReportComposer',
             'App\\Domain\\Report\\ReportComposer',
-            'App\\Application\\Report\\ReportComposer',
+            'App\\Application\\Report\\Composer',
         ];
 
         foreach ($candidates as $cls) {

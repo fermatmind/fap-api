@@ -250,3 +250,25 @@ echo "[CI] smoke OK"
 echo "[CI] running verify_mbti.sh"
 API="$API" REGION="$REGION" LOCALE="$LOCALE" RUN_DIR="$RUN_DIR" bash "$SCRIPT_DIR/verify_mbti.sh"
 echo "[CI] verify_mbti OK ✅"
+
+# -----------------------------
+# Events acceptance (M3)
+# -----------------------------
+echo "[CI] events acceptance (M3)"
+
+# Ensure sqlite path is passed to acceptance scripts (keep consistent with CI env)
+SQLITE_DB_FOR_ACCEPT="${DB_DATABASE:-$BACKEND_DIR/database/database.sqlite}"
+
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+  "$SCRIPT_DIR/accept_events_C.sh" >/dev/null
+
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+  "$SCRIPT_DIR/accept_events_E_share_meta.sh"
+
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+  "$SCRIPT_DIR/accept_events_D_anon.sh"
+
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+  "$SCRIPT_DIR/accept_events_D_click_anon_override.sh"
+
+echo "[CI] events acceptance OK"
