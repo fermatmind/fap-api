@@ -11,13 +11,22 @@ set -euo pipefail
 # Assumptions:
 # - API is already running (default: http://127.0.0.1:18000)
 # - Using testing/sqlite db at backend/database/database.sqlite
-# - jq is installed (used in existing workflow)
+# - jq is installed
+#
+# Optional headers (pass via env vars):
+#   EXPERIMENT="E_accept" APPV="1.2.3" CHANNEL="miniapp" CLIENT_PLATFORM="wechat" ENTRY_PAGE="result_page"
 # ------------------------------------------------------------
+
+need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ERR] missing cmd: $1" >&2; exit 2; }; }
+need_cmd curl
+need_cmd jq
+need_cmd php
+need_cmd sed
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BACKEND_DIR="$REPO_DIR/backend"
-API="${API:-http://127.0.0.1:18000}"
 
+API="${API:-http://127.0.0.1:18000}"
 SQLITE_DB="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
 echo "[ACCEPT] repo=$REPO_DIR"
@@ -30,38 +39,58 @@ if [[ ! -f "$SQLITE_DB" ]]; then
   exit 1
 fi
 
+# ---- Optional header pass-through (from env; safe under set -u) ----
+HDRS=()
+[[ -n "${EXPERIMENT:-}" ]]      && HDRS+=(-H "X-Experiment: $EXPERIMENT")
+[[ -n "${APPV:-}" ]]            && HDRS+=(-H "X-App-Version: $APPV")
+[[ -n "${CHANNEL:-}" ]]         && HDRS+=(-H "X-Channel: $CHANNEL")
+[[ -n "${CLIENT_PLATFORM:-}" ]] && HDRS+=(-H "X-Client-Platform: $CLIENT_PLATFORM")
+[[ -n "${ENTRY_PAGE:-}" ]]      && HDRS+=(-H "X-Entry-Page: $ENTRY_PAGE")
+
 # ---- get attempt_id from verify artifacts (preferred), else run ci_verify_mbti ----
 ATT="$(jq -r '.attempt_id // .attemptId // empty' "$BACKEND_DIR/artifacts/verify_mbti/report.json" 2>/dev/null || true)"
-if [[ -z "${ATT:-}" ]]; then
+if [[ -z "$ATT" || "$ATT" == "null" ]]; then
   echo "[ACCEPT] attempt_id not found in artifacts; run ci_verify_mbti.sh to generate one"
   (cd "$REPO_DIR" && bash backend/scripts/ci_verify_mbti.sh >/dev/null)
-  ATT="$(jq -r '.attempt_id // .attemptId // empty' "$BACKEND_DIR/artifacts/verify_mbti/report.json")"
+  ATT="$(jq -r '.attempt_id // .attemptId // empty' "$BACKEND_DIR/artifacts/verify_mbti/report.json" 2>/dev/null || true)"
+fi
+if [[ -z "$ATT" || "$ATT" == "null" ]]; then
+  echo "[ERR] ATT empty after ci_verify_mbti.sh" >&2
+  exit 1
 fi
 echo "[ACCEPT] ATT=$ATT"
+export ATT
 
 # ---- 1) result_view: refresh=1 then cache hit ----
 curl -sS "$API/api/v0.2/attempts/$ATT/report?refresh=1" >/dev/null
 sleep 1
 curl -sS "$API/api/v0.2/attempts/$ATT/report" >/dev/null
 
-# ---- 2) share_generate ----
-SHARE_ID="$(curl -sS "$API/api/v0.2/attempts/$ATT/share" | sed -n '/^{/,$p' | jq -r '.share_id')"
+# ---- 2) share_generate (with optional headers) ----
+# Use set -u safe array expansion in case HDRS is empty.
+SHARE_RAW="$(
+  curl -sS "$API/api/v0.2/attempts/$ATT/share" \
+    ${HDRS[@]+"${HDRS[@]}"} \
+  || true
+)"
+SHARE_JSON="$(printf '%s\n' "$SHARE_RAW" | sed -n '/^{/,$p')"
+SHARE_ID="$(printf '%s\n' "$SHARE_JSON" | jq -r '.share_id // .shareId // empty' 2>/dev/null || true)"
+
 if [[ -z "$SHARE_ID" || "$SHARE_ID" == "null" ]]; then
-  echo "[ERR] share_id empty from /attempts/$ATT/share" >&2
+  echo "[ERR] share_id empty from /attempts/$ATT/share. Raw response:" >&2
+  printf '%s\n' "$SHARE_RAW" >&2
   exit 1
 fi
 echo "[ACCEPT] SHARE_ID=$SHARE_ID"
+export SHARE_ID
 
-# ---- 3) share_click ----
+# ---- 3) share_click (with optional headers) ----
 curl -sS -X POST "$API/api/v0.2/shares/$SHARE_ID/click" \
   -H "Content-Type: application/json" \
+  ${HDRS[@]+"${HDRS[@]}"} \
   -d '{}' >/dev/null
 
 # ---- 4) verify events in same testing/sqlite db ----
-# We validate:
-# - result_view latest has: type_code, engine_version, content_package_version, cache/refresh flags
-# - share_generate latest has: share_id, type_code, engine_version, content_package_version
-# - share_click latest has: share_id, attempt_id (and anon_id may be null for now)
 cd "$BACKEND_DIR"
 
 export APP_ENV=testing
@@ -69,15 +98,19 @@ export DB_CONNECTION=sqlite
 export DB_DATABASE="$SQLITE_DB"
 
 php artisan tinker --execute='
-$att = getenv("ATT") ?: "";
+$att     = getenv("ATT") ?: "";
 $shareId = getenv("SHARE_ID") ?: "";
 
 $must = function($cond, $msg) {
-  if (!$cond) { throw new \RuntimeException($msg); }
+  if (!$cond) throw new \RuntimeException($msg);
 };
 
 $fetch = function($code) use ($att) {
-  return \DB::table("events")->where("attempt_id",$att)->where("event_code",$code)->orderByDesc("occurred_at")->first();
+  return \DB::table("events")
+    ->where("attempt_id", $att)
+    ->where("event_code", $code)
+    ->orderByDesc("occurred_at")
+    ->first();
 };
 
 $rv = $fetch("result_view");
@@ -92,13 +125,14 @@ $must((bool)$rv, "missing result_view");
 $must(is_string($rvMeta["type_code"] ?? null) && $rvMeta["type_code"] !== "", "result_view.meta_json.type_code missing");
 $must(is_string($rvMeta["engine_version"] ?? null) && $rvMeta["engine_version"] !== "", "result_view.meta_json.engine_version missing");
 $must(is_string($rvMeta["content_package_version"] ?? null) && $rvMeta["content_package_version"] !== "", "result_view.meta_json.content_package_version missing");
-$must(array_key_exists("cache",$rvMeta), "result_view.meta_json.cache missing");
-$must(array_key_exists("refresh",$rvMeta), "result_view.meta_json.refresh missing");
+$must(array_key_exists("cache", $rvMeta), "result_view.meta_json.cache missing");
+$must(array_key_exists("refresh", $rvMeta), "result_view.meta_json.refresh missing");
 
 $must((bool)$sg, "missing share_generate");
 $must(($sgMeta["share_id"] ?? null) === $shareId, "share_generate.meta_json.share_id mismatch");
 $must(is_string($sgMeta["type_code"] ?? null) && $sgMeta["type_code"] !== "", "share_generate.meta_json.type_code missing");
-$must(is_string($sgMeta["engine_version"] ?? ($sgMeta["engine"] ?? null)) && ($sgMeta["engine_version"] ?? ($sgMeta["engine"] ?? "")) !== "", "share_generate engine_version/engine missing");
+$eng = $sgMeta["engine_version"] ?? ($sgMeta["engine"] ?? "");
+$must(is_string($eng) && $eng !== "", "share_generate engine_version/engine missing");
 $must(is_string($sgMeta["content_package_version"] ?? null) && $sgMeta["content_package_version"] !== "", "share_generate.meta_json.content_package_version missing");
 
 $must((bool)$sc, "missing share_click");
@@ -121,7 +155,7 @@ dump([
     "occurred_at" => $sg->occurred_at ?? null,
     "share_id" => $sgMeta["share_id"] ?? null,
     "type_code" => $sgMeta["type_code"] ?? null,
-    "engine_version_or_engine" => $sgMeta["engine_version"] ?? ($sgMeta["engine"] ?? null),
+    "engine_version_or_engine" => $eng,
     "content_package_version" => $sgMeta["content_package_version"] ?? null,
   ],
   "share_click" => [
@@ -131,6 +165,6 @@ dump([
     "attempt_id" => $scMeta["attempt_id"] ?? null,
   ],
 ]);
-'
 
-echo "[ACCEPT] PASS ✅"
+echo "[ACCEPT] PASS ✅\n";
+'

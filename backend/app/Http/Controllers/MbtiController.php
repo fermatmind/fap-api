@@ -740,12 +740,19 @@ public function getShare(Request $request, string $attemptId)
 
             // 1) 先走 cache（最快）
             $cachedShareId = $store->get($cacheKey);
-            if (is_string($cachedShareId) && trim($cachedShareId) !== '') {
-                return [
-                    'share_id' => trim($cachedShareId),
-                    'is_new'   => false,
-                ];
-            }
+if (is_string($cachedShareId) && trim($cachedShareId) !== '') {
+    $shareId = trim($cachedShareId);
+    $isNew = false;
+
+    // 尽量找到对应的 share_generate 事件用于回填（没有也不影响返回）
+    $recent = \App\Models\Event::where('event_code', 'share_generate')
+        ->where('attempt_id', $attemptId)
+        ->where('occurred_at', '>=', now()->subMinutes($ttlMinutes))
+        ->orderByDesc('occurred_at')
+        ->first();
+
+    // 继续走下面的“2.5 回填 + 4 cache put + return”
+} 
 
             // 2) 查 events：TTL 内是否已有 share_generate
             $recent = \App\Models\Event::where('event_code', 'share_generate')
@@ -754,7 +761,7 @@ public function getShare(Request $request, string $attemptId)
                 ->orderByDesc('occurred_at')
                 ->first();
 
-            $shareId = null;
+            $shareId = $shareId ?? null;
 
             if ($recent) {
                 $meta = $recent->meta_json ?? null;
@@ -767,22 +774,68 @@ public function getShare(Request $request, string $attemptId)
                 }
             }
 
+// 2.5) ✅ 回填 meta：如果复用 share_id（cache/events 命中），但这次请求带了 header，补齐旧 share_generate 的 meta
+if ($recent && is_string($shareId) && $shareId !== '') {
+    $experiment = (string) ($request->header('X-Experiment') ?? '');
+    $version    = (string) ($request->header('X-App-Version') ?? '');
+
+    $channel        = (string) ($request->header('X-Channel') ?? ($attempt?->channel ?? ''));
+    $clientPlatform = (string) ($request->header('X-Client-Platform') ?? '');
+    $entryPage      = (string) ($request->header('X-Entry-Page') ?? '');
+
+    // 归一化旧 meta
+    $old = $recent->meta_json ?? [];
+    if (is_string($old) && $old !== '') {
+        $decoded = json_decode($old, true);
+        $old = is_array($decoded) ? $decoded : [];
+    }
+    if (!is_array($old)) $old = [];
+
+    $changed = false;
+
+    // 只在旧值空、且新值非空时回填
+    $fill = function(string $k, string $v) use (&$old, &$changed) {
+        $oldEmpty = !isset($old[$k]) || $old[$k] === null || $old[$k] === '';
+        $newGood  = $v !== '';
+        if ($oldEmpty && $newGood) {
+            $old[$k] = $v;
+            $changed = true;
+        }
+    };
+
+    $fill('experiment', $experiment);
+    $fill('version', $version);
+    $fill('channel', $channel);
+    $fill('client_platform', $clientPlatform);
+    $fill('entry_page', $entryPage);
+
+    if ($changed) {
+        $recent->meta_json = $old;
+        $recent->save();
+    }
+}
+
             // 3) 仍没有：生成一次，并写 event（在 lock 内，只会发生一次）
             $isNew = false;
             if (!is_string($shareId) || $shareId === '') {
                 $shareId = (string) Str::uuid();
                 $isNew = true;
 
-                // ✅ 从 header 里拿 experiment/version（跟 /events 一致）
+                // ✅ AB 字段：header > attempt(可选) > 空
                 $experiment = (string) ($request->header('X-Experiment') ?? '');
                 $version    = (string) ($request->header('X-App-Version') ?? '');
+
+                // ✅ 分享漏斗字段：header 优先，其次 attempt（如果你 attempt 上有），最后留空
+                $channel        = (string) ($request->header('X-Channel') ?? ($attempt?->channel ?? ''));
+                $clientPlatform = (string) ($request->header('X-Client-Platform') ?? '');
+                $entryPage      = (string) ($request->header('X-Entry-Page') ?? '');
 
                 $this->logEvent('share_generate', $request, [
                     'anon_id'       => $attempt?->anon_id,
                     'scale_code'    => $result->scale_code,
                     'scale_version' => $result->scale_version,
                     'attempt_id'    => $attemptId,
-                    'channel'       => $attempt?->channel,
+                    'channel'       => $channel !== '' ? $channel : ($attempt?->channel ?? null),
                     'region'        => $attempt?->region ?? 'CN_MAINLAND',
                     'locale'        => $attempt?->locale ?? 'zh-CN',
                     'meta_json'     => [
@@ -794,6 +847,12 @@ public function getShare(Request $request, string $attemptId)
 
                         // ✅ 兼容字段：旧代码/老查询仍可能读 engine
                         'engine'                  => $engineVersion,
+
+                        // ✅ 分享链路收口字段（E 验收脚本会查）
+                        'channel'                 => $channel !== '' ? $channel : null,
+                        'client_platform'         => $clientPlatform !== '' ? $clientPlatform : null,
+                        'entry_page'              => $entryPage !== '' ? $entryPage : null,
+                        'generate_type'           => 'text',
 
                         'profile_version'         => $result->profile_version ?? config('fap.profile_version', 'mbti32-v2.5'),
                         'share_id_ttl_minutes'    => $ttlMinutes,
