@@ -259,26 +259,27 @@ echo "[CI] events acceptance (M3)"
 # Ensure sqlite path is passed to acceptance scripts (keep consistent with CI env)
 SQLITE_DB_FOR_ACCEPT="${DB_DATABASE:-$BACKEND_DIR/database/database.sqlite}"
 
-# 1) C（基础链路）
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
   "$SCRIPT_DIR/accept_events_C.sh" >/dev/null
 
-# 2) F（result_view meta 收口）
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
   "$SCRIPT_DIR/accept_events_F_result_view_meta.sh"
 
-# 3) E（share_generate/share_click meta）
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+  "$SCRIPT_DIR/accept_events_G_report_view_meta.sh"
+
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
   "$SCRIPT_DIR/accept_events_E_share_meta.sh"
 
-# 4) D / D2 / D3（anon 相关）
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+  "$SCRIPT_DIR/accept_events_H_share_view_meta.sh"
+
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
   "$SCRIPT_DIR/accept_events_D_anon.sh"
 
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
   "$SCRIPT_DIR/accept_events_D_click_anon_override.sh"
 
-# ✅ D3: placeholder anon_id must NOT leak into share_click.anon_id
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
   "$SCRIPT_DIR/accept_events_D_anon_block_placeholder_click.sh"
 
