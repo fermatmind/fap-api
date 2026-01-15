@@ -645,6 +645,12 @@ return DB::transaction(function () use (
 
         $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
 
+$experiment     = (string) ($request->header('X-Experiment') ?? '');
+$version        = (string) ($request->header('X-App-Version') ?? '');
+$channel        = (string) ($request->header('X-Channel') ?? ($attempt?->channel ?? ''));
+$clientPlatform = (string) ($request->header('X-Client-Platform') ?? '');
+$entryPage      = (string) ($request->header('X-Entry-Page') ?? '');
+
         $this->logEvent('result_view', $request, [
             'anon_id'       => $attempt?->anon_id,
             'scale_code'    => $result->scale_code,
@@ -652,10 +658,18 @@ return DB::transaction(function () use (
             'attempt_id'    => $attemptId,
             'region'        => $attempt?->region ?? 'CN_MAINLAND',
             'locale'        => $attempt?->locale ?? 'zh-CN',
-            'meta_json'     => [
-                'type_code' => $result->type_code,
-                'share_id'  => $shareId !== '' ? $shareId : null,
-            ],
+            'meta_json' => [
+    'type_code'               => $result->type_code,
+    'engine_version'          => 'v1.2',
+    'content_package_version' => (string)($result->content_package_version ?? $this->currentContentPackageVersion()),
+
+    'share_id'        => $shareId !== '' ? $shareId : null,
+    'experiment'      => $experiment !== '' ? $experiment : null,
+    'version'         => $version !== '' ? $version : null,
+    'channel'         => $channel !== '' ? $channel : null,
+    'client_platform' => $clientPlatform !== '' ? $clientPlatform : null,
+    'entry_page'      => $entryPage !== '' ? $entryPage : null,
+],
         ]);
 
         // ✅ 强制 5 轴全量输出
@@ -955,6 +969,12 @@ public function getReport(Request $request, string $attemptId)
 
     $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
 
+$experiment     = (string) ($request->header('X-Experiment') ?? '');
+$version        = (string) ($request->header('X-App-Version') ?? '');
+$channel        = (string) ($request->header('X-Channel') ?? ($attempt?->channel ?? ''));
+$clientPlatform = (string) ($request->header('X-Client-Platform') ?? '');
+$entryPage      = (string) ($request->header('X-Entry-Page') ?? '');
+
     // refresh=1 / refresh=true 才会强制重算
     $refreshRaw = $request->query('refresh', '0');
     $refresh = in_array((string) $refreshRaw, ['1', 'true', 'TRUE', 'yes', 'YES'], true);
@@ -1001,15 +1021,21 @@ public function getReport(Request $request, string $attemptId)
                         'region'        => $attempt?->region ?? 'CN_MAINLAND',
                         'locale'        => $attempt?->locale ?? 'zh-CN',
                         'meta_json'     => [
-                            'type_code'               => $result->type_code,
-                            'engine_version'          => $engineVersion,
-                            'content_package_version' => $contentPackageVersion,
+                             'type_code'               => $result->type_code,
+    'engine_version'          => $engineVersion,
+    'content_package_version' => $contentPackageVersion,
 
-                            // 可选：便于调试/分析
-                            'share_id'  => $shareId !== '' ? $shareId : null,
-                            'refresh'   => false,
-                            'cache'     => true,
-                        ],
+    'experiment'      => $experiment !== '' ? $experiment : null,
+    'version'         => $version !== '' ? $version : null,
+    'channel'         => $channel !== '' ? $channel : null,
+    'client_platform' => $clientPlatform !== '' ? $clientPlatform : null,
+    'entry_page'      => $entryPage !== '' ? $entryPage : null,
+
+    // 可选：便于调试/分析
+    'share_id'  => $shareId !== '' ? $shareId : null,
+    'refresh'   => false,
+'cache'     => true,
+],
                     ]);
 
                     // 轻量兜底：确保 highlights 结构不炸前端
@@ -1056,16 +1082,21 @@ public function getReport(Request $request, string $attemptId)
         'attempt_id'    => $attemptId,
         'region'        => $attempt?->region ?? 'CN_MAINLAND',
         'locale'        => $attempt?->locale ?? 'zh-CN',
-        'meta_json'     => [
-            'type_code'               => $result->type_code,
-            'engine_version'          => $engineVersion,
-            'content_package_version' => $contentPackageVersion,
+        'meta_json' => [
+    'type_code'               => $result->type_code,
+    'engine_version'          => $engineVersion,
+    'content_package_version' => $contentPackageVersion,
 
-            // 可选：便于调试/分析
-            'share_id'  => $shareId !== '' ? $shareId : null,
-            'refresh'   => $refresh,
-            'cache'     => false,
-        ],
+    'experiment'      => $experiment !== '' ? $experiment : null,
+    'version'         => $version !== '' ? $version : null,
+    'channel'         => $channel !== '' ? $channel : null,
+    'client_platform' => $clientPlatform !== '' ? $clientPlatform : null,
+    'entry_page'      => $entryPage !== '' ? $entryPage : null,
+
+    'share_id'  => $shareId !== '' ? $shareId : null,
+    'refresh'   => $refresh,
+    'cache'     => false,
+],
     ]);
 
     /** @var \App\Services\Report\ReportComposer $composer */
