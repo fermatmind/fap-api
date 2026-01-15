@@ -271,4 +271,8 @@ API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
   "$SCRIPT_DIR/accept_events_D_click_anon_override.sh"
 
+# ✅ D3: placeholder anon_id must NOT leak into share_click.anon_id
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+  "$SCRIPT_DIR/accept_events_D_anon_block_placeholder_click.sh"
+
 echo "[CI] events acceptance OK"

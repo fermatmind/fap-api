@@ -145,16 +145,52 @@ class ShareController extends Controller
         $event->event_code = 'share_click';
 
         // ✅ anon_id 归因：客户端优先，其次继承 share_generate 的 anon_id
-        $clickAnonId = null;
+// ✅ M3 hard：占位符/污染值不允许落库（命中黑名单就当作没传）
+$isBadAnon = function(?string $v): bool {
+    if ($v === null) return true;
+    $s = trim($v);
+    if ($s === '') return true;
 
-        if (!empty($data['anon_id']) && is_string($data['anon_id'])) {
-            $clickAnonId = trim((string) $data['anon_id']);
-        }
-        if (($clickAnonId === null || $clickAnonId === '') && !empty($gen->anon_id)) {
-            $clickAnonId = trim((string) $gen->anon_id);
-        }
+    $lower = mb_strtolower($s, 'UTF-8');
+    $blacklist = [
+        'todo',
+        'placeholder',
+        'fixme',
+        'tbd',
+        '把你查到的anon_id填这里',
+        '把你查到的 anon_id 填这里',
+        '填这里',
+    ];
 
-        $event->anon_id     = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId : null;
+    foreach ($blacklist as $bad) {
+        $b = trim((string) $bad);
+        if ($b === '') continue;
+        if (mb_strpos($lower, mb_strtolower($b, 'UTF-8')) !== false) {
+            return true;
+        }
+    }
+    return false;
+};
+
+$clickAnonId = null;
+
+// 1) 客户端 body anon_id（只有在非占位符时才采用）
+if (isset($data['anon_id']) && is_string($data['anon_id'])) {
+    $cand = trim((string) $data['anon_id']);
+    if (!$isBadAnon($cand)) {
+        $clickAnonId = $cand;
+    }
+}
+
+// 2) 否则继承 share_generate 的 anon_id（同样过滤占位符）
+if (($clickAnonId === null || $clickAnonId === '') && !empty($gen->anon_id)) {
+    $cand = trim((string) $gen->anon_id);
+    if (!$isBadAnon($cand)) {
+        $clickAnonId = $cand;
+    }
+}
+
+$event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId : null;
         $event->attempt_id  = $attemptId;
         $event->meta_json   = $meta;
         $event->occurred_at = !empty($data['occurred_at'])
