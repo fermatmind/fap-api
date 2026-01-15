@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ACCEPT_H][FAIL] missing cmd: $1" >&2; exit 2; }; }
+need_cmd curl
+need_cmd jq
+need_cmd php
+need_cmd python3
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 REPO_DIR="$(cd "$BACKEND_DIR/.." && pwd)"
@@ -45,6 +51,7 @@ SQLITE_DB_ABS="$(resolve_abs "$SQLITE_DB_IN")"
 # -----------------------------
 RUN_DIR="${RUN_DIR:-$BACKEND_DIR/artifacts/verify_mbti}"
 SHARE_JSON="$RUN_DIR/share.json"
+TMP_RESP="$RUN_DIR/_accept_H_share_resp.json"
 
 echo "[ACCEPT_H] repo=$REPO_DIR"
 echo "[ACCEPT_H] backend=$BACKEND_DIR"
@@ -66,20 +73,21 @@ if ! jq -e '.ok==true' "$SHARE_JSON" >/dev/null 2>&1; then
 fi
 
 ATT="$(jq -r '.attempt_id // empty' "$SHARE_JSON")"
-SHARE_ID="$(jq -r '.share_id // empty' "$SHARE_JSON")"
+SHARE_ID_OLD="$(jq -r '.share_id // empty' "$SHARE_JSON")"
 
-if [[ -z "$ATT" || -z "$SHARE_ID" ]]; then
-  echo "[ACCEPT_H][FAIL] missing attempt_id/share_id in $SHARE_JSON" >&2
+if [[ -z "$ATT" ]]; then
+  echo "[ACCEPT_H][FAIL] missing attempt_id in $SHARE_JSON" >&2
   echo "---- $SHARE_JSON ----" >&2
   cat "$SHARE_JSON" >&2 || true
   exit 2
 fi
 
 echo "[ACCEPT_H] ATT=$ATT"
-echo "[ACCEPT_H] SHARE_ID=$SHARE_ID"
+echo "[ACCEPT_H] share_id(from_artifacts)=$SHARE_ID_OLD"
 
 # -----------------------------
 # Trigger share_view (share page exposure)
+# IMPORTANT: Do NOT discard response; use share_id from THIS response
 # -----------------------------
 curl -fsS \
   -H "X-Experiment: H_accept" \
@@ -87,13 +95,28 @@ curl -fsS \
   -H "X-Channel: miniapp" \
   -H "X-Client-Platform: wechat" \
   -H "X-Entry-Page: share_page" \
-  "$API/api/v0.2/attempts/$ATT/share" >/dev/null
+  "$API/api/v0.2/attempts/$ATT/share" >"$TMP_RESP"
+
+if ! jq -e '.ok==true' "$TMP_RESP" >/dev/null 2>&1; then
+  echo "[ACCEPT_H][FAIL] /share response ok!=true. head:" >&2
+  head -n 60 "$TMP_RESP" >&2 || true
+  exit 2
+fi
+
+SHARE_ID_RESP="$(jq -r '.share_id // empty' "$TMP_RESP")"
+if [[ -z "$SHARE_ID_RESP" ]]; then
+  echo "[ACCEPT_H][FAIL] missing share_id in /share response: $TMP_RESP" >&2
+  cat "$TMP_RESP" >&2 || true
+  exit 2
+fi
+
+echo "[ACCEPT_H] share_id(from_api)=$SHARE_ID_RESP"
 
 # -----------------------------
 # Assert in DB (force same sqlite as server)
 # -----------------------------
 DB_CONNECTION=sqlite DB_DATABASE="$SQLITE_DB_ABS" \
-ATT="$ATT" SHARE_ID="$SHARE_ID" \
+ATT="$ATT" SHARE_ID="$SHARE_ID_RESP" \
 php artisan tinker --execute='
 use App\Models\Event;
 
