@@ -49,7 +49,7 @@ jobs:
 
       - name: Run selfcheck (default manifest)
         working-directory: backend
-        run: php artisan fap:self-check --strict-assets
+        run: php artisan fap:self-check --strict-assets --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
 
       - name: Seed demo attempt+result (for runtime validate)
         working-directory: backend
