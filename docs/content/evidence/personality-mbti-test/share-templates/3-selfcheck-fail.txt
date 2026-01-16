@@ -1,0 +1,57 @@
+== CHECK MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+   manifest: /Users/rainie/Desktop/GitHub/fap-api/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json
+------------------------------------------------------------------------
+✅ manifest.json (contract + assets + schema)
+  - OK (schema_version/required fields/assets exist/schema match)
+  - pack_id=MBTI.cn-mainland.zh-CN.v0.2.1-TEST version=v0.2.1-TEST
+✅ strict-assets (undeclared known files)
+  - OK (no undeclared known files found)
+❌ schema-alignment (declared JSON assets)
+  - Schema alignment invalid: 1
+  - pack=MBTI.cn-mainland.zh-CN.v0.2.1-TEST file=/Users/rainie/Desktop/GitHub/fap-api/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/share_templates/wechat_default.json path=$.schema :: schema mismatch got='fap.share_templates.v1_BROKEN' want='fap.share_templates.v1' (asset=share_templates)
+✅ meta/landing.json (landing meta gate)
+  - OK (landing meta gate passed)
+✅ questions.json
+  - OK (144 active questions, A~E options + scoring fields present)
+✅ type_profiles.json
+  - OK (32 types, required fields present)
+✅ identity_cards.json
+  - OK (identity_cards ids unique; count=32)
+✅ identity_layers.json
+  - OK (identity_layers ids unique; count=1)
+✅ report_cards_*.json
+  - OK (4 cards files, 97 items, ids unique)
+✅ report_cards_fallback_*.json
+  - OK (4 fallback_cards files, 34 items, ids unique)
+✅ report_highlights_templates.json
+  - OK (5 dims × 2 sides × 3 levels present & valid)
+✅ report_highlights_pools.json
+  - OK (pools=3, template_ids=147, ids=147)
+  - pool_keys=strength,blindspot,action
+  - counts={"strength":49,"blindspot":49,"action":49}
+✅ report_highlights_rules.json
+  - OK (rules=33, pools=3, template_ids=147)
+  - policy={"min_total":3,"max_total":4,"max_strength":2}
+✅ report_highlights_overrides.json
+  - SKIPPED (not declared in manifest.assets): report_highlights_overrides.json
+✅ report_borderline_templates.json
+  - OK (5 dims present & valid)
+✅ report_roles.json
+  - OK (NT/NF/SJ/SP present & valid)
+✅ report_strategies.json
+  - OK (EA/ET/IA/IT present & valid)
+✅ report_recommended_reads.json
+  - OK (structure valid, required fields present, ids unique)
+✅ report_section_policies.json
+  - OK (section policies valid; sections=4)
+✅ fallback-cards (coverage by section policies)
+  - OK section=traits fallback_count=8 min_cards=3 (file=report_cards_fallback_traits.json)
+  - OK section=career fallback_count=8 min_cards=3 (file=report_cards_fallback_career.json)
+  - OK section=growth fallback_count=10 min_cards=3 (file=report_cards_fallback_growth.json)
+  - OK section=relationships fallback_count=8 min_cards=2 (file=report_cards_fallback_relationships.json)
+✅ report_overrides.json
+  - OK (unified overrides rules valid; rules_count=0)
+✅ report_rules.json
+  - OK (rules valid; count=6)
+------------------------------------------------------------------------
+❌ SELF-CHECK FAILED (see errors above)

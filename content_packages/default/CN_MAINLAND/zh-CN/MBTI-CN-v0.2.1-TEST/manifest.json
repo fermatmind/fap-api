@@ -21,7 +21,7 @@
     "overrides": true,
     "rules": true,
     "disclaimers": false,
-    "share_templates": false,
+    "share_templates": true,
     "content_graph": false
   },
   "schemas": {
@@ -29,11 +29,10 @@
     "type_profiles": "fap.type_profiles.v1",
     "cards": "fap.report.cards.v1",
     "fallback_cards": "fap.report.cards.fallback.v1",
-
+    "share_templates": "fap.share_templates.v1",
     "highlights": "fap.report.highlights.v1",
     "highlights_pools": "fap.report.highlights.pools.v1",
     "highlights_rules": "fap.report.highlights.rules.v1",
-
     "reads": "fap.report.reads.v2",
     "borderline_templates": "fap.report.borderline_templates.v1",
     "borderline_notes": "fap.report.borderline_notes.v1",
@@ -97,6 +96,14 @@
     ],
     "section_policies": [
       "report_section_policies.json"
+    ],
+    "share_templates": [
+      "share_templates/wechat_default.json"
+    ],
+    "share_assets": [
+      "assets/share/mbti_wide_1200x630.png",
+      "assets/share/mbti_square_600x600.png",
+      "assets/share/mbti_cover_source.png"
     ]
   },
   "overrides": {

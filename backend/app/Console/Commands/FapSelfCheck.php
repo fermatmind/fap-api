@@ -73,6 +73,20 @@ $this->printSectionResult('schema-alignment (declared JSON assets)', $saOk, $saM
         $ok = $ok && $lmOk;
         $this->printSectionResult('meta/landing.json (landing meta gate)', $lmOk, $lmMsg);
 
+// ✅ NEW: share templates gate (Task 4)
+// Goal: share_templates=true -> templates must be usable for SEO/OG; warnings for GEO quality.
+$shareEnabled = (bool)(($manifest['capabilities']['share_templates'] ?? false) === true);
+
+if ($shareEnabled) {
+    [$stOk, $stMsg] = $this->checkShareTemplatesGate($manifest, $manifestPath, $packId);
+    $ok = $ok && $stOk;
+    $this->printSectionResult('share_templates (share templates gate)', $stOk, $stMsg);
+} else {
+    $this->printSectionResult('share_templates (share templates gate)', true, [
+        'SKIPPED (capabilities.share_templates=false)',
+    ]);
+}
+
 // 可选：如果你希望 schema 不对就直接中止（减少噪音），打开下面 4 行
 // if (!$saOk) {
 //     $this->line(str_repeat('-', 72));
@@ -857,6 +871,207 @@ private function landingMetaNode(array $doc): array
     $landing = $doc['landing'] ?? null;
     if (is_array($landing) && $this->isAssocArray($landing)) return $landing;
     return $doc;
+}
+
+// -------------------------
+// Share templates gate ✅ NEW (Task 4)
+// -------------------------
+private function checkShareTemplatesGate(array $manifest, string $manifestPath, string $packId): array
+{
+    $errors = [];
+    $warnings = [];
+
+    $baseDir = dirname($manifestPath);
+
+    // capability guard
+    $cap = $manifest['capabilities']['share_templates'] ?? false;
+    if ($cap !== true) {
+        return [true, ['SKIPPED (capabilities.share_templates=false)']];
+    }
+
+    // templates declared in manifest.assets.share_templates
+    $assets = $manifest['assets'] ?? null;
+    $tplList = is_array($assets) ? ($assets['share_templates'] ?? null) : null;
+
+    if (!is_array($tplList) || $tplList === []) {
+        return [false, [
+            "pack={$packId} file={$manifestPath} path=$.assets.share_templates :: capability enabled but no templates declared",
+        ]];
+    }
+
+    // optional: share_assets list for existence check (images)
+    $shareAssets = is_array($assets) ? ($assets['share_assets'] ?? []) : [];
+    $shareAssetSet = [];
+    if (is_array($shareAssets)) {
+        foreach ($shareAssets as $rel) {
+            if (is_string($rel) && trim($rel) !== '') $shareAssetSet[trim($rel)] = true;
+        }
+    }
+
+    // rules
+    $maxBytesWarn = 200 * 1024; // 200KB (currently WARN, not FAIL)
+
+    // tokens for "front 15 chars" strategy
+    $front15Tokens = [
+        '免费', '免费报告', '免费测评', '真免费', '{{is_free}}',
+        '深度报告', '专业版', '完整版',
+    ];
+
+    // minimal sensitive/overly-clickbait words (WARN/FAIL policy can be tuned)
+    // 本期先做 WARN（你也可以改成 FAIL）
+    $badWords = [
+        '震惊', '必看', '100%准确', '绝对准确', '最准', '封神', '暴富',
+    ];
+
+    $okCount = 0;
+
+    foreach ($tplList as $i => $rel) {
+        if (!is_string($rel) || trim($rel) === '') {
+            $errors[] = "pack={$packId} file={$manifestPath} path=$.assets.share_templates[{$i}] :: must be non-empty string path";
+            continue;
+        }
+
+        $rel = trim($rel);
+        $abs = $this->pathOf($baseDir, $rel);
+
+        if (!is_file($abs)) {
+            $errors[] = "pack={$packId} file={$abs} :: share template file not found (declared in manifest.assets.share_templates)";
+            continue;
+        }
+
+        $doc = $this->readJsonFile($abs);
+        if (!is_array($doc)) {
+            $errors[] = "pack={$packId} file={$abs} :: invalid JSON";
+            continue;
+        }
+
+        // Hard Fail 1: sync_to_meta=true requires title/abstract non-empty
+        $sync = $doc['sync_to_meta'] ?? null;
+        if (!is_bool($sync)) {
+            // spec里你写的是必填 boolean；这里先做 fail（更符合“协议固定”）
+            $errors[] = "pack={$packId} file={$abs} path=$.sync_to_meta :: must be boolean";
+        }
+
+        $title = $doc['title'] ?? null;
+        $abstract = $doc['abstract'] ?? null;
+
+        if ($sync === true) {
+            if (!is_string($title) || trim($title) === '') {
+                $errors[] = "pack={$packId} file={$abs} path=$.title :: required when sync_to_meta=true";
+            }
+            if (!is_string($abstract) || trim($abstract) === '') {
+                $errors[] = "pack={$packId} file={$abs} path=$.abstract :: required when sync_to_meta=true";
+            }
+        }
+
+        // Hard Fail 2: cover_image_wide must be relative + exist
+        $wide = $doc['cover_image_wide'] ?? null;
+        if (!is_string($wide) || trim($wide) === '') {
+            $errors[] = "pack={$packId} file={$abs} path=$.cover_image_wide :: missing/invalid (required)";
+        } else {
+            $wide = trim($wide);
+
+            if (!$this->isRelativeAssetPath($wide)) {
+                $errors[] = "pack={$packId} file={$abs} path=$.cover_image_wide :: must be relative path (no http/https), got=" . var_export($wide, true);
+            } else {
+                $wideAbs = $this->pathOf($baseDir, $wide);
+                if (!is_file($wideAbs)) {
+                    $errors[] = "pack={$packId} file={$abs} path=$.cover_image_wide :: file not found: {$wideAbs}";
+                }
+                // warn: size > 200KB
+                if (is_file($wideAbs)) {
+                    $sz = @filesize($wideAbs);
+                    if (is_int($sz) && $sz > $maxBytesWarn) {
+                        $warnings[] = "WARN pack={$packId} file={$abs} :: cover_image_wide > 200KB (bytes={$sz}) path={$wide}";
+                    }
+                }
+                // warn: ensure declared in manifest.assets.share_assets if that list exists
+                if (!empty($shareAssetSet) && !isset($shareAssetSet[$wide])) {
+                    $warnings[] = "WARN pack={$packId} file={$abs} :: cover_image_wide not listed in manifest.assets.share_assets: {$wide}";
+                }
+            }
+        }
+
+        // Warnings: cover_image_square missing
+        $square = $doc['cover_image_square'] ?? null;
+        if (!is_string($square) || trim($square) === '') {
+            $warnings[] = "WARN pack={$packId} file={$abs} path=$.cover_image_square :: missing (recommended)";
+        } else {
+            $square = trim($square);
+            if (!$this->isRelativeAssetPath($square)) {
+                $warnings[] = "WARN pack={$packId} file={$abs} path=$.cover_image_square :: should be relative path, got=" . var_export($square, true);
+            } else {
+                $squareAbs = $this->pathOf($baseDir, $square);
+                if (!is_file($squareAbs)) {
+                    $warnings[] = "WARN pack={$packId} file={$abs} path=$.cover_image_square :: file not found: {$squareAbs}";
+                }
+                if (is_file($squareAbs)) {
+                    $sz = @filesize($squareAbs);
+                    if (is_int($sz) && $sz > $maxBytesWarn) {
+                        $warnings[] = "WARN pack={$packId} file={$abs} :: cover_image_square > 200KB (bytes={$sz}) path={$square}";
+                    }
+                }
+                if (!empty($shareAssetSet) && !isset($shareAssetSet[$square])) {
+                    $warnings[] = "WARN pack={$packId} file={$abs} :: cover_image_square not listed in manifest.assets.share_assets: {$square}";
+                }
+            }
+        }
+
+        // Warnings: keywords length < 3
+        $keywords = $doc['keywords'] ?? null;
+        if (!is_array($keywords)) {
+            $warnings[] = "WARN pack={$packId} file={$abs} path=$.keywords :: keywords should be array(string[]) (recommended)";
+        } else {
+            $n = 0;
+            foreach ($keywords as $kw) {
+                if (is_string($kw) && trim($kw) !== '') $n++;
+            }
+            if ($n > 0 && $n < 3) {
+                $warnings[] = "WARN pack={$packId} file={$abs} path=$.keywords :: keywords count < 3 (count={$n})";
+            }
+        }
+
+        // Warnings: abstract front-15 chars strategy
+        if (is_string($abstract) && trim($abstract) !== '') {
+            $front15 = $this->firstNCharsUtf8(trim($abstract), 15);
+            if (!$this->containsAny($front15, $front15Tokens)) {
+                $warnings[] = "WARN pack={$packId} file={$abs} :: abstract front 15 chars miss strategy tokens (front15=" . var_export($front15, true) . ")";
+            }
+        }
+
+        // Warnings: social_count_template must include {{count}}
+        $sct = $doc['social_count_template'] ?? null;
+        if (is_string($sct) && trim($sct) !== '') {
+            if (!str_contains($sct, '{{count}}')) {
+                $warnings[] = "WARN pack={$packId} file={$abs} path=$.social_count_template :: should contain '{{count}}'";
+            }
+        }
+
+        // Warnings: title bad words (you can turn into FAIL later)
+        if (is_string($title) && trim($title) !== '') {
+            foreach ($badWords as $w) {
+                if ($w !== '' && str_contains($title, $w)) {
+                    $warnings[] = "WARN pack={$packId} file={$abs} :: title contains risky word '{$w}' (consider rewrite)";
+                    break;
+                }
+            }
+        }
+
+        $okCount++;
+    }
+
+    if (!empty($errors)) {
+        return [false, array_merge(
+            ["Share templates gate invalid: " . count($errors)],
+            array_slice($errors, 0, 120),
+            $warnings ? array_merge(["-- warnings --"], array_slice($warnings, 0, 120)) : []
+        )];
+    }
+
+    $notes = ["OK (share_templates checked; templates=" . count($tplList) . ")"];
+    if ($warnings) $notes = array_merge($notes, ["-- warnings --"], array_slice($warnings, 0, 120));
+
+    return [true, $notes];
 }
 
 // -------------------------
@@ -2677,6 +2892,40 @@ private function checkIdentityLayers(string $path, string $packId, ?string $expe
         return array_keys($a) !== range(0, count($a) - 1);
     }
 
+private function isRelativeAssetPath(string $p): bool
+{
+    $p = trim($p);
+    if ($p === '') return false;
+
+    // reject absolute URLs
+    if (preg_match('#^https?://#i', $p)) return false;
+
+    // allow relative paths like "assets/share/xxx.png" or "share_templates/xxx.json"
+    // reject protocol-relative or weird
+    if (str_starts_with($p, '//')) return false;
+
+    return true;
+}
+
+private function firstNCharsUtf8(string $s, int $n): string
+{
+    if ($n <= 0) return '';
+    if (function_exists('mb_substr')) {
+        return (string)mb_substr($s, 0, $n, 'UTF-8');
+    }
+    // fallback (may cut multi-byte, but acceptable for warning-only)
+    return substr($s, 0, $n);
+}
+
+private function containsAny(string $haystack, array $needles): bool
+{
+    foreach ($needles as $w) {
+        if (!is_string($w) || $w === '') continue;
+        if (str_contains($haystack, $w)) return true;
+    }
+    return false;
+}
+
     private function checkSchemaField(array $doc, ?string $expectedSchema, string $packId, string $path, string $assetLabel): ?array
 {
     if ($expectedSchema === null || trim($expectedSchema) === '') return null;
@@ -2835,6 +3084,9 @@ private function checkIdentityLayers(string $path, string $packId, ?string $expe
         'reads'            => 'reads',
         'rules'            => 'rules',
         'section_policies' => 'section_policies',
+
+        // ✅ Task 4: share templates
+        'share_templates'  => 'share_templates',
     ];
     if (isset($direct[$assetKey])) {
         return $schemas[$direct[$assetKey]] ?? null;
