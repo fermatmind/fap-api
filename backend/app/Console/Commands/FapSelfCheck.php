@@ -66,6 +66,13 @@ if ((bool)$this->option('strict-assets')) {
 $ok = $ok && $saOk;
 $this->printSectionResult('schema-alignment (declared JSON assets)', $saOk, $saMsg);
 
+        // ✅ NEW: landing meta gate (meta/landing.json) — NOT part of manifest.assets
+        // Goal: missing/invalid fields => FAIL (block publish); quality hints => WARNING only
+        $landingMetaPath = $this->pathOf($baseDir, 'meta/landing.json');
+        [$lmOk, $lmMsg] = $this->checkLandingMeta($landingMetaPath, $manifest, $packId, $baseDir);
+        $ok = $ok && $lmOk;
+        $this->printSectionResult('meta/landing.json (landing meta gate)', $lmOk, $lmMsg);
+
 // 可选：如果你希望 schema 不对就直接中止（减少噪音），打开下面 4 行
 // if (!$saOk) {
 //     $this->line(str_repeat('-', 72));
@@ -637,6 +644,219 @@ private function checkSchemaAlignment(array $manifest, string $manifestPath, str
     }
 
     return [true, ["OK (declared JSON assets schema aligned)"]];
+}
+
+// -------------------------
+// Landing meta gate ✅ NEW
+// -------------------------
+private function checkLandingMeta(string $path, array $manifest, string $packId, string $baseDir): array
+{
+    $errors = [];
+    $warnings = [];
+
+    // 0) file exists
+    if (!is_file($path)) {
+        return [false, ["pack={$packId} file={$path} :: landing meta not found (required): meta/landing.json"]];
+    }
+
+    $doc = $this->readJsonFile($path);
+    if (!is_array($doc)) {
+        return [false, ["pack={$packId} file={$path} :: Invalid JSON"]];
+    }
+
+    // 1) support both shapes:
+    // - root meta fields OR { landing: {...} }
+    $landing = $this->landingMetaNode($doc);
+
+    // 2) schema + schema_version (FAIL)
+    $schema = $landing['schema'] ?? ($doc['schema'] ?? null);
+    if ($schema !== 'fap.landing.meta.v1') {
+        $errors[] = "pack={$packId} file={$path} path=$.schema :: must be 'fap.landing.meta.v1', got=" . var_export($schema, true);
+    }
+
+    $sv = $landing['schema_version'] ?? ($doc['schema_version'] ?? null);
+    if (!is_int($sv) && !(is_numeric($sv) && (int)$sv == $sv)) {
+        $errors[] = "pack={$packId} file={$path} path=$.schema_version :: must be integer, got=" . var_export($sv, true);
+    }
+
+    // 3) required fields (FAIL)
+    $required = ['scale_code', 'pack_id', 'locale', 'region', 'slug', 'last_updated'];
+    foreach ($required as $k) {
+        $v = $landing[$k] ?? ($doc[$k] ?? null);
+        if ($v === null || (is_string($v) && trim($v) === '')) {
+            $errors[] = "pack={$packId} file={$path} path=$.{$k} :: missing required field";
+        }
+    }
+
+    // 4) pack_id must match directory name (FAIL)
+    $packDirName = basename($baseDir); // e.g. MBTI-CN-v0.2.1-TEST
+    $metaPackId = (string)($landing['pack_id'] ?? ($doc['pack_id'] ?? ''));
+    if ($metaPackId !== '' && $metaPackId !== $packDirName) {
+        $errors[] = "pack={$packId} file={$path} path=$.pack_id :: must equal pack directory '{$packDirName}', got=" . var_export($metaPackId, true);
+    }
+
+    // 5) canonical_path (FAIL)
+    $slug = (string)($landing['slug'] ?? ($doc['slug'] ?? ''));
+    $canonicalPath =
+        $landing['canonical_path']
+        ?? ($landing['canonical']['canonical_path'] ?? null)
+        ?? ($landing['canonical']['canonical_path'] ?? null)
+        ?? ($doc['canonical_path'] ?? null)
+        ?? ($doc['canonical']['canonical_path'] ?? null);
+
+    if (!is_string($canonicalPath) || trim($canonicalPath) === '') {
+        $errors[] = "pack={$packId} file={$path} path=$.canonical_path :: missing/invalid canonical_path";
+    } else {
+        $c = trim($canonicalPath);
+        if (!str_starts_with($c, '/')) {
+            $errors[] = "pack={$packId} file={$path} path=$.canonical_path :: must start with '/', got=" . var_export($c, true);
+        }
+        if (preg_match('#^https?://#i', $c) || str_contains($c, 'fermat') || str_contains($c, '.com') || str_contains($c, '.cn')) {
+            $errors[] = "pack={$packId} file={$path} path=$.canonical_path :: must be relative path only (no domain), got=" . var_export($c, true);
+        }
+        if ($slug !== '' && $c !== "/test/{$slug}") {
+            $errors[] = "pack={$packId} file={$path} path=$.canonical_path :: must equal '/test/{$slug}', got=" . var_export($c, true);
+        }
+    }
+
+    // 6) index_policy (FAIL for take/result/share index must be false)
+    $indexPolicy = $doc['index_policy'] ?? ($landing['index_policy'] ?? null);
+    if (!is_array($indexPolicy)) {
+        $errors[] = "pack={$packId} file={$path} path=$.index_policy :: missing/invalid index_policy";
+    } else {
+        foreach (['landing','take','result','share'] as $k) {
+            if (!isset($indexPolicy[$k]) || !is_array($indexPolicy[$k])) {
+                $errors[] = "pack={$packId} file={$path} path=$.index_policy.{$k} :: missing/invalid";
+            }
+        }
+        foreach (['take','result','share'] as $k) {
+            $idx = $indexPolicy[$k]['index'] ?? null;
+            if ($idx !== false) {
+                $errors[] = "pack={$packId} file={$path} path=$.index_policy.{$k}.index :: must be false (stage2 noindex), got=" . var_export($idx, true);
+            }
+        }
+    }
+
+    // 7) variants >= 1 (FAIL)
+    $variants = $landing['variants'] ?? ($doc['variants'] ?? null);
+    if (!is_array($variants) || $variants === [] || $this->isAssocArray($variants)) {
+        $errors[] = "pack={$packId} file={$path} path=$.variants :: variants must be non-empty array(list)";
+    } else {
+        $seen = [];
+        foreach ($variants as $i => $v) {
+            $bp = "$.variants[{$i}]";
+            if (!is_array($v) || !$this->isAssocArray($v)) {
+                $errors[] = "pack={$packId} file={$path} path={$bp} :: variant must be object(map)";
+                continue;
+            }
+            foreach (['variant_code','label_zh','question_count','test_time_minutes'] as $rk) {
+                if (!array_key_exists($rk, $v)) {
+                    $errors[] = "pack={$packId} file={$path} path={$bp}.{$rk} :: missing required field";
+                }
+            }
+            $code = (string)($v['variant_code'] ?? '');
+            if ($code === '') {
+                $errors[] = "pack={$packId} file={$path} path={$bp}.variant_code :: must be non-empty string";
+            } else {
+                if (isset($seen[$code])) {
+                    $errors[] = "pack={$packId} file={$path} path={$bp}.variant_code :: duplicate variant_code '{$code}'";
+                }
+                $seen[$code] = true;
+            }
+            $qc = $v['question_count'] ?? null;
+            if (!(is_int($qc) || (is_numeric($qc) && (int)$qc == $qc)) || (int)$qc <= 0) {
+                $errors[] = "pack={$packId} file={$path} path={$bp}.question_count :: must be positive int";
+            }
+            $tm = $v['test_time_minutes'] ?? null;
+            if (!is_string($tm) || trim($tm) === '') {
+                $errors[] = "pack={$packId} file={$path} path={$bp}.test_time_minutes :: must be non-empty string";
+            }
+        }
+    }
+
+    // 8) faq_list >= 3 (FAIL)
+    $faq = $landing['faq_list'] ?? ($doc['faq_list'] ?? null);
+    if (!is_array($faq) || $this->isAssocArray($faq)) {
+        $errors[] = "pack={$packId} file={$path} path=$.faq_list :: faq_list must be array(list)";
+    } else {
+        if (count($faq) < 3) {
+            $errors[] = "pack={$packId} file={$path} path=$.faq_list :: faq_list must have >= 3 items, got=" . count($faq);
+        }
+        foreach ($faq as $i => $it) {
+            $bp = "$.faq_list[{$i}]";
+            if (!is_array($it) || !$this->isAssocArray($it)) {
+                $errors[] = "pack={$packId} file={$path} path={$bp} :: faq item must be object(map)";
+                continue;
+            }
+            $q = $it['question'] ?? ($it['q'] ?? null);
+            $a = $it['answer'] ?? ($it['a'] ?? null);
+            if (!is_string($q) || trim($q) === '') $errors[] = "pack={$packId} file={$path} path={$bp}.question :: missing/invalid question";
+            if (!is_string($a) || trim($a) === '') $errors[] = "pack={$packId} file={$path} path={$bp}.answer :: missing/invalid answer";
+        }
+    }
+
+    // 9) data_snippet.table rows must include 题量（3档） and 预计用时（3档） (FAIL)
+    $rows =
+        $landing['data_snippet']['table']['rows'] ?? null;
+    if ($rows === null) {
+        // try root shape
+        $rows = $doc['data_snippet']['table']['rows'] ?? null;
+    }
+    if (!is_array($rows) || $this->isAssocArray($rows)) {
+        $errors[] = "pack={$packId} file={$path} path=$.data_snippet.table.rows :: missing/invalid rows(list)";
+    } else {
+        $needKeys = ['题量（3档）', '预计用时（3档）'];
+        $found = [];
+        foreach ($rows as $i => $r) {
+            if (!is_array($r) || count($r) < 2) continue;
+            $k = (string)($r[0] ?? '');
+            if ($k !== '') $found[$k] = true;
+        }
+        foreach ($needKeys as $nk) {
+            if (!isset($found[$nk])) {
+                $errors[] = "pack={$packId} file={$path} path=$.data_snippet.table.rows :: missing required row key '{$nk}'";
+            }
+        }
+    }
+
+    // 10) WARNING: FAQ interrogatives (non-blocking)
+    $interrogatives = ['什么', '为什么', '准吗', '如何', '多久', '免费', '隐私', '区别', '要不要'];
+    if (is_array($faq) && !$this->isAssocArray($faq) && count($faq) >= 3) {
+        $hits = 0;
+        $checkN = min(3, count($faq));
+        for ($i = 0; $i < $checkN; $i++) {
+            $q = $faq[$i]['question'] ?? ($faq[$i]['q'] ?? '');
+            if (!is_string($q)) $q = '';
+            foreach ($interrogatives as $w) {
+                if (str_contains($q, $w)) { $hits++; break; }
+            }
+        }
+        if ($hits === 0) {
+            $warnings[] = "WARN GEO: faq questions look non-interrogative (suggest include: " . implode(' / ', $interrogatives) . ")";
+        }
+    }
+
+    // output
+    if (!empty($errors)) {
+        return [false, array_merge(
+            ["Landing meta invalid: " . count($errors)],
+            array_slice($errors, 0, 160),
+            $warnings ? array_merge(["-- warnings --"], $warnings) : []
+        )];
+    }
+
+    return [true, array_merge(
+        ["OK (landing meta gate passed)"],
+        $warnings ? array_merge(["-- warnings --"], $warnings) : []
+    )];
+}
+
+private function landingMetaNode(array $doc): array
+{
+    // if {landing:{...}} exists, use it; else treat root as landing meta
+    $landing = $doc['landing'] ?? null;
+    if (is_array($landing) && $this->isAssocArray($landing)) return $landing;
+    return $doc;
 }
 
 // -------------------------
