@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MbtiController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\LookupController;
 use App\Http\Controllers\API\V0_2\ShareController;
 
 /*
@@ -41,6 +42,10 @@ Route::prefix("v0.2")->group(function () {
     Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
     Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
     Route::get("/attempts/{id}/share",  [MbtiController::class, "getShare"]);
+
+    // ✅ 6.5) Ticket Code Lookup（Phase A P0）
+    // GET /api/v0.2/lookup/ticket/FMT-XXXXXXXX
+    Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
 
     // ✅ 7) Share Click：你要的入口（命中 ShareController@click）
     // 访问路径：POST /api/v0.2/shares/{shareId}/click

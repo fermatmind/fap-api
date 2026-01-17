@@ -23,14 +23,39 @@ class Attempt extends Model
     protected $keyType = 'string';
 
     /**
-     * 创建时自动生成 UUID（避免 "Field 'id' doesn't have a default value"）
+     * 创建时自动生成 UUID + Ticket Code
+     *
+     * - UUID：避免 "Field 'id' doesn't have a default value"
+     * - ticket_code：FMT-XXXXXXXX（8位大写字母数字），用于跨设备找回
      */
     protected static function booted(): void
     {
         static::creating(function (self $m) {
+            // 1) UUID（外部未传则自动补）
             if (empty($m->id)) {
                 $m->id = (string) Str::uuid();
             }
+
+            // 2) Ticket Code（外部显式传入就不覆盖）
+            if (!empty($m->ticket_code)) {
+                return;
+            }
+
+            // 生成：FMT-XXXXXXXX（总长 12），列长度 varchar(20) 足够
+            // Phase A：做 5 次重试 + exists 检查，极小概率仍会被 DB unique 兜底拦截
+            $maxAttempts = 5;
+
+            for ($i = 0; $i < $maxAttempts; $i++) {
+                $code = 'FMT-' . Str::upper(Str::random(8));
+
+                // creating 阶段尚未写入 DB，需查库确认唯一（减少碰撞概率）
+                if (!static::where('ticket_code', $code)->exists()) {
+                    $m->ticket_code = $code;
+                    return;
+                }
+            }
+
+            throw new \RuntimeException("Failed to generate unique ticket_code after {$maxAttempts} attempts");
         });
     }
 
@@ -40,6 +65,9 @@ class Attempt extends Model
     protected $fillable = [
         // id 可以保留（允许外部显式传入），但一般不需要传
         'id',
+
+        // ✅ 找回凭证（跨设备匿名）
+        'ticket_code',
 
         'anon_id',
         'user_id',
