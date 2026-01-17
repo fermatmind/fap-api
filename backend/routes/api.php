@@ -47,6 +47,11 @@ Route::prefix("v0.2")->group(function () {
     // GET /api/v0.2/lookup/ticket/FMT-XXXXXXXX
     Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
 
+    // ✅ 6.6) Device Resume Lookup（Phase A P0）
+    // POST /api/v0.2/lookup/device
+    // Body: { "attempt_ids": ["uuid1","uuid2", ...] }
+    Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
+
     // ✅ 7) Share Click：你要的入口（命中 ShareController@click）
     // 访问路径：POST /api/v0.2/shares/{shareId}/click
     Route::post("/shares/{shareId}/click", [ShareController::class, "click"]);
