@@ -12,6 +12,8 @@ need_cmd curl
 need_cmd jq
 need_cmd php
 need_cmd sed
+need_cmd head
+need_cmd sleep
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BACKEND_DIR="$REPO_DIR/backend"
@@ -62,23 +64,67 @@ echo "[ACCEPT_F] ATT=$ATT"
 echo "[ACCEPT_F] SHARE_ID=$SHARE_ID"
 
 # --------------------------------------------
-# Call /report with headers + share_id (twice to trigger 10s dedup backfill safely)
+# Get fm_token for gated endpoints
+# - Prefer env FM_TOKEN
+# - Otherwise call /auth/wx_phone and extract the JSON line (avoid dev-server Notice noise)
 # --------------------------------------------
-curl -sS "$API/api/v0.2/attempts/$ATT/report?refresh=1&share_id=$SHARE_ID" \
-  -H "X-Experiment: $EXPERIMENT" \
-  -H "X-App-Version: $APPV" \
-  -H "X-Channel: $CHANNEL" \
-  -H "X-Client-Platform: $CLIENT_PLATFORM" \
-  -H "X-Entry-Page: $ENTRY_PAGE" >/dev/null
+FM_TOKEN="${FM_TOKEN:-}"
+if [[ -z "$FM_TOKEN" ]]; then
+  AUTH_RAW="$(
+    curl -sS -X POST "$API/api/v0.2/auth/wx_phone" \
+      -H "Content-Type: application/json" \
+      -d '{"wx_code":"dev","phone_code":"dev","anon_id":"ci_verify"}' \
+    || true
+  )"
 
+  # Pick the first line that looks like JSON
+  AUTH_JSON="$(printf '%s\n' "$AUTH_RAW" | sed -n '/^{/p' | head -n 1 || true)"
+  if [[ -z "$AUTH_JSON" ]]; then
+    echo "[ACCEPT_F][FAIL] cannot parse auth response as JSON. raw(first 400):" >&2
+    printf '%s' "$AUTH_RAW" | head -c 400 >&2 || true
+    echo >&2
+    exit 15
+  fi
+
+  FM_TOKEN="$(printf '%s' "$AUTH_JSON" | jq -r '.token // empty' 2>/dev/null || true)"
+fi
+
+if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then
+  echo "[ACCEPT_F][FAIL] FM_TOKEN missing; cannot call gated endpoints" >&2
+  exit 15
+fi
+
+CURL_AUTH=(-H "Authorization: Bearer $FM_TOKEN")
+
+# --------------------------------------------
+# Call /result with headers + share_id
+# IMPORTANT:
+#   result_view event should be emitted by GET /attempts/{id}/result
+#   so we must call /result (NOT /report)
+# --------------------------------------------
+call_result() {
+  local url="$1"
+  local http=""
+  http="$(curl -sS -L -o /dev/null -w "%{http_code}" \
+    "${CURL_AUTH[@]}" \
+    -H "Accept: application/json" \
+    -H "X-Experiment: $EXPERIMENT" \
+    -H "X-App-Version: $APPV" \
+    -H "X-Channel: $CHANNEL" \
+    -H "X-Client-Platform: $CLIENT_PLATFORM" \
+    -H "X-Entry-Page: $ENTRY_PAGE" \
+    "$url" || true)"
+
+  if [[ "$http" != "200" ]]; then
+    echo "[ACCEPT_F][FAIL] call_result HTTP=$http url=$url" >&2
+    exit 2
+  fi
+}
+
+# Call twice (dedup/backfill safe)
+call_result "$API/api/v0.2/attempts/$ATT/result?share_id=$SHARE_ID"
 sleep 1
-
-curl -sS "$API/api/v0.2/attempts/$ATT/report?share_id=$SHARE_ID" \
-  -H "X-Experiment: $EXPERIMENT" \
-  -H "X-App-Version: $APPV" \
-  -H "X-Channel: $CHANNEL" \
-  -H "X-Client-Platform: $CLIENT_PLATFORM" \
-  -H "X-Entry-Page: $ENTRY_PAGE" >/dev/null
+call_result "$API/api/v0.2/attempts/$ATT/result?share_id=$SHARE_ID"
 
 # --------------------------------------------
 # Verify in sqlite: result_view meta_json contains required fields & share_id backfilled
@@ -101,16 +147,29 @@ $fail = function($msg) use ($att, $shareId) {
   throw new \RuntimeException("FAIL: ".$msg." (ATT={$att}, SHARE_ID={$shareId})");
 };
 
-$fetch = function() use ($att, $shareId) {
-  // 优先用 JSON path 精确匹配 share_id
+$hasShareCol = \Schema::hasColumn("events", "share_id");
+
+$fetch = function() use ($att, $shareId, $hasShareCol) {
   $q = \DB::table("events")
+    ->where("event_code", "result_view")
+    ->where("attempt_id", $att)
+    ->orderByDesc("occurred_at");
+
+  if ($hasShareCol) {
+    $q->where("share_id", $shareId);
+    $row = $q->first();
+    if ($row) return $row;
+  }
+
+  // fallback: meta_json json path
+  $q2 = \DB::table("events")
     ->where("event_code", "result_view")
     ->where("attempt_id", $att)
     ->where("meta_json->share_id", $shareId)
     ->orderByDesc("occurred_at");
 
-  $row = $q->first();
-  if ($row) return $row;
+  $row2 = $q2->first();
+  if ($row2) return $row2;
 
   // fallback: like
   $like = "%\"share_id\":\"{$shareId}\"%";
@@ -127,20 +186,22 @@ if (!$rv) $fail("missing result_view for given share_id");
 
 $m = json_decode($rv->meta_json ?? "{}", true) ?: [];
 
+// share_id 必须被 backfill（允许来自 top-level 或 meta_json）
 if (($m["share_id"] ?? null) !== $shareId) $fail("result_view.share_id not backfilled");
 
+// baseline fields
 if (empty($m["type_code"])) $fail("result_view.type_code missing");
 if (empty($m["content_package_version"])) $fail("result_view.content_package_version missing");
 if (empty($m["engine_version"]) && empty($m["engine"])) $fail("result_view.engine_version missing");
 
-// ✅ 新增收口字段（与 share_* 对齐）
+// header passthrough fields (must exist)
 if (empty($m["experiment"])) $fail("result_view.experiment missing");
 if (empty($m["version"]))    $fail("result_view.version missing");
 if (empty($m["channel"]))    $fail("result_view.channel missing");
 if (empty($m["client_platform"])) $fail("result_view.client_platform missing");
 if (empty($m["entry_page"])) $fail("result_view.entry_page missing");
 
-// ✅ 校验值等于本次 headers（避免“有字段但不对”）
+// values must match headers
 if (($m["experiment"] ?? "") !== $exp) $fail("result_view.experiment mismatch");
 if (($m["version"] ?? "") !== $ver)    $fail("result_view.version mismatch");
 if (($m["channel"] ?? "") !== $ch)     $fail("result_view.channel mismatch");
@@ -149,7 +210,9 @@ if (($m["entry_page"] ?? "") !== $ep)  $fail("result_view.entry_page mismatch");
 
 dump([
   "driver" => config("database.default"),
+  "db" => config("database.connections.".config("database.default").".database"),
   "occurred_at" => $rv->occurred_at ?? null,
+  "share_id_col" => property_exists($rv, "share_id") ? ($rv->share_id ?? null) : null,
   "result_view" => [
     "share_id" => $m["share_id"] ?? null,
     "experiment" => $m["experiment"] ?? null,

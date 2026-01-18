@@ -2,6 +2,14 @@
 set -euo pipefail
 
 # -----------------------------
+# Auth (fm_token) for gated endpoints
+# -----------------------------
+CURL_AUTH=()
+if [[ -n "${FM_TOKEN:-}" ]]; then
+  CURL_AUTH=(-H "Authorization: Bearer ${FM_TOKEN}")
+fi
+
+# -----------------------------
 # Config / Defaults
 # -----------------------------
 API="${API:-http://127.0.0.1:8000}"
@@ -111,9 +119,14 @@ trap cleanup_on_exit EXIT
 fetch_json() {
   local url="$1"
   local out="$2"
+  local need_auth="${3:-0}"  # 0|1
 
   local http
-  http="$(curl -sS -L -o "$out" -w "%{http_code}" "$url" || true)"
+  if [[ "$need_auth" == "1" ]]; then
+    http="$(curl -sS -L -o "$out" -w "%{http_code}" "${CURL_AUTH[@]}" "$url" || true)"
+  else
+    http="$(curl -sS -L -o "$out" -w "%{http_code}" "$url" || true)"
+  fi
 
   if [[ -z "${http:-}" ]]; then
     echo "[CURL][FAIL] no http code (curl error). url=$url" >&2
@@ -264,8 +277,10 @@ echo "$ATTEMPT_ID" > "$ATTEMPT_ID_TXT"
 echo "[OK] attempt_id=$ATTEMPT_ID"
 
 echo "[5/8] fetch report & share"
-fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/report" "$REPORT_JSON"
-fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON"
+# ✅ report is gated by fm_token
+fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/report" "$REPORT_JSON" 1
+# share is public (not gated)
+fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON" 0
 echo "[OK] report=$REPORT_JSON"
 echo "[OK] share=$SHARE_JSON"
 
@@ -360,11 +375,11 @@ ACCEPT_OVR="$SCRIPT_DIR/accept_overrides_D.sh"
 if [[ -f "$ACCEPT_OVR" ]]; then
   # ✅ 严格模式：accept_overrides_D.sh 非 0 直接 FAIL
   # 同时把 stdout/stderr 全部落盘到 artifacts，方便回溯
-  BASE="$API" bash "$ACCEPT_OVR" "$ATTEMPT_ID" >"$OVR_LOG" 2>&1 || {
-    echo "---- overrides log (tail 200 lines) ----" >&2
-    tail -n 200 "$OVR_LOG" >&2 || true
-    fail "Overrides: accept_overrides_D.sh failed (see $OVR_LOG)"
-  }
+  BASE="$API" FM_TOKEN="${FM_TOKEN:-}" bash "$ACCEPT_OVR" "$ATTEMPT_ID" >"$OVR_LOG" 2>&1 || {
+  echo "---- overrides log (tail 200 lines) ----" >&2
+  tail -n 200 "$OVR_LOG" >&2 || true
+  fail "Overrides: accept_overrides_D.sh failed (see $OVR_LOG)"
+}
 
   # ✅ 额外硬断言：必须包含 ALL DONE（防止脚本误 exit 0 但没跑完）
   assert_contains "$OVR_LOG" "✅ ALL DONE: D-1 / D-2 / D-3 passed" "Overrides"

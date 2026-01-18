@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Models\Event;
 
 use App\Support\WritesEvents;
 
@@ -236,9 +237,7 @@ public function storeAttempt(Request $request)
     $unknown = [];
     foreach ($payload['answers'] as $a) {
         $qid = $a['question_id'];
-        if (!isset($index[$qid])) {
-            $unknown[] = $qid;
-        }
+        if (!isset($index[$qid])) $unknown[] = $qid;
     }
     if (!empty($unknown)) {
         return response()->json([
@@ -255,22 +254,20 @@ public function storeAttempt(Request $request)
 
     $unique = array_values(array_unique($qids));
     if (count($unique) !== $expectedQuestionCount) {
-    // 找重复
-    $freq = array_count_values($qids);
-    $dups = array_keys(array_filter($freq, fn($n) => $n > 1));
+        $freq = array_count_values($qids);
+        $dups = array_keys(array_filter($freq, fn($n) => $n > 1));
 
-    return response()->json([
-        'ok'      => false,
-        'error'   => 'VALIDATION_FAILED',
-        'message' => 'Answers must contain 144 unique question_id.',
-        'data'    => [
-            'unique_count' => count($unique),
-            'dup_question_ids' => array_values($dups),
-        ],
-    ], 422);
-}
+        return response()->json([
+            'ok'      => false,
+            'error'   => 'VALIDATION_FAILED',
+            'message' => 'Answers must contain 144 unique question_id.',
+            'data'    => [
+                'unique_count'     => count($unique),
+                'dup_question_ids' => array_values($dups),
+            ],
+        ], 422);
+    }
 
-    // 可选：强校验题数（建议你 debug/线上都开）
     if (count($payload['answers']) !== $expectedQuestionCount) {
         return response()->json([
             'ok'      => false,
@@ -283,19 +280,15 @@ public function storeAttempt(Request $request)
     // 维度：固定 5 轴
     $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
 
-    // 统计
     $dimN        = array_fill_keys($dims, 0);
     $sumTowardP1 = array_fill_keys($dims, 0);
 
-    // 额外归档：用于审计/可视化
     $countP1      = array_fill_keys($dims, 0);
     $countP2      = array_fill_keys($dims, 0);
     $countNeutral = array_fill_keys($dims, 0);
 
-    // ✅ 用于记录被跳过的题（invalid_dimension 等）
-$skipped = [];
+    $skipped = [];
 
-    // 默认 5 档（当 score_map 缺失/异常时兜底）
     $defaultScoreMap = ['A' => 2, 'B' => 1, 'C' => 0, 'D' => -1, 'E' => -2];
 
     foreach ($payload['answers'] as $a) {
@@ -306,35 +299,27 @@ $skipped = [];
         $dim  = $meta['dimension'] ?? null;
 
         if (!$dim || !isset($dimN[$dim])) {
-        $skipped[] = ['question_id' => $qid, 'reason' => 'invalid_dimension', 'dimension' => $dim];
-        continue;
+            $skipped[] = ['question_id' => $qid, 'reason' => 'invalid_dimension', 'dimension' => $dim];
+            continue;
         }
 
-        // 1) 取 score_map：若缺失/不含该 code/或整张表全 0 => fallback
         $scoreMap = $meta['score_map'] ?? null;
         if (!is_array($scoreMap) || empty($scoreMap)) {
             $scoreMap = $defaultScoreMap;
         } else {
-            // normalize keys to uppercase
             $norm = [];
-            foreach ($scoreMap as $k => $v) {
-                $norm[strtoupper((string)$k)] = (int)$v;
-            }
+            foreach ($scoreMap as $k => $v) $norm[strtoupper((string)$k)] = (int)$v;
             $scoreMap = $norm;
 
-            // 如果不包含当前 code，则 fallback
             if (!array_key_exists($code, $scoreMap)) {
                 $scoreMap = $defaultScoreMap;
             } else {
-                // 如果 score_map 全是 0（你现在的症状就是这个），也 fallback
                 $vals = array_values($scoreMap);
                 $allZero = true;
                 foreach ($vals as $v) {
                     if ((int)$v !== 0) { $allZero = false; break; }
                 }
-                if ($allZero) {
-                    $scoreMap = $defaultScoreMap;
-                }
+                if ($allZero) $scoreMap = $defaultScoreMap;
             }
         }
 
@@ -342,31 +327,21 @@ $skipped = [];
         $direction = (int) ($meta['direction'] ?? 1);
         $keyPole   = (string) ($meta['key_pole'] ?? '');
 
-        // direction=0 当作 1
         $signed = $rawScore * ($direction === 0 ? 1 : $direction);
 
-        // 2) 统一折算成 “toward P1 的 signed 分数”
         [$p1, $p2] = $this->getDimensionPoles($dim);
 
         $towardP1 = $signed;
-        // 如果 keyPole 指向 P2，则取反
-        if ($keyPole === $p2) {
-            $towardP1 = -$signed;
-        }
+        if ($keyPole === $p2) $towardP1 = -$signed;
 
         $dimN[$dim] += 1;
         $sumTowardP1[$dim] += $towardP1;
 
-        if ($towardP1 > 0) {
-            $countP1[$dim] += 1;
-        } elseif ($towardP1 < 0) {
-            $countP2[$dim] += 1;
-        } else {
-            $countNeutral[$dim] += 1;
-        }
+        if ($towardP1 > 0) $countP1[$dim] += 1;
+        elseif ($towardP1 < 0) $countP2[$dim] += 1;
+        else $countNeutral[$dim] += 1;
     }
 
-    // 防御：任何轴 n=0 直接判为题库 meta 不一致（不让悄悄变 50）
     foreach ($dims as $dim) {
         if ((int)$dimN[$dim] <= 0) {
             return response()->json([
@@ -378,7 +353,6 @@ $skipped = [];
         }
     }
 
-    // scores_pct：[-2n,+2n] -> [0,100]
     $scoresPct = [];
     foreach ($dims as $dim) {
         $n = (int) $dimN[$dim];
@@ -388,7 +362,6 @@ $skipped = [];
         $scoresPct[$dim] = $pct;
     }
 
-    // type_code：四字母 + -A/-T
     $letters = [
         'EI' => $scoresPct['EI'] >= 50 ? 'E' : 'I',
         'SN' => $scoresPct['SN'] >= 50 ? 'S' : 'N',
@@ -398,11 +371,9 @@ $skipped = [];
     $atSuffix = $scoresPct['AT'] >= 50 ? 'A' : 'T';
     $typeCode = implode('', $letters) . '-' . $atSuffix;
 
-    // axis_states：用“胜方 displayPct(>=50)”离散化 + borderline
     $axisStates = [];
     foreach ($scoresPct as $dim => $pctTowardP1) {
         $displayPct = $pctTowardP1 >= 50 ? $pctTowardP1 : (100 - $pctTowardP1);
-
         $state = match (true) {
             $displayPct >= 80 => 'very_strong',
             $displayPct >= 70 => 'strong',
@@ -410,11 +381,9 @@ $skipped = [];
             $displayPct >= 55 => 'weak',
             default           => 'very_weak',
         };
-
         $axisStates[$dim] = $state;
     }
 
-    // scores_json：可审计（保留你原结构）
     $scoresJson = [];
     foreach ($dims as $dim) {
         $scoresJson[$dim] = [
@@ -426,7 +395,6 @@ $skipped = [];
         ];
     }
 
-    // answers_summary_json：把关键审计信息也塞进去
     $answersSummary = [
         'answer_count' => count($payload['answers']),
         'dims_total'   => $dimN,
@@ -444,13 +412,9 @@ $skipped = [];
     $profileVersion        = config('fap.profile_version', 'mbti32-v2.5');
     $contentPackageVersion = $this->currentContentPackageVersion();
 
-    // ✅ 方案1：把 answers 持久化到 attempts（answers_json + hash + optional storage_path）
     $answers = $payload['answers'] ?? [];
-
-    // 稳定 hash：只看 question_id + code（内部会排序）
     $answersHash = $this->computeAnswersHash($answers);
 
-    // ✅ 修改点 2：env -> config（config-cache 安全）
     $answersStoragePath = null;
     $storeToStorage = (bool) config('fap.store_answers_to_storage', false);
 
@@ -461,277 +425,383 @@ $skipped = [];
             $answersHash
         );
     }
-    
+
     $canStoreJson = Schema::hasColumn('attempts', 'answers_json');
     $canStorePath = Schema::hasColumn('attempts', 'answers_storage_path');
 
     if (!$canStoreJson && (!$storeToStorage || !$canStorePath)) {
-    return response()->json([
-        'ok' => false,
-        'error' => 'PERSISTENCE_NOT_SUPPORTED',
-        'message' => 'Attempt answers persistence is required for audit, but attempts.answers_json / answers_storage_path is not available.',
-        'data' => [
-            'has_answers_json_column' => $canStoreJson,
-            'has_answers_storage_path_column' => $canStorePath,
-            'store_to_storage' => $storeToStorage,
-        ],
-    ], 500);
-}
+        return response()->json([
+            'ok' => false,
+            'error' => 'PERSISTENCE_NOT_SUPPORTED',
+            'message' => 'Attempt answers persistence is required for audit, but attempts.answers_json / answers_storage_path is not available.',
+            'data' => [
+                'has_answers_json_column' => $canStoreJson,
+                'has_answers_storage_path_column' => $canStorePath,
+                'store_to_storage' => $storeToStorage,
+            ],
+        ], 500);
+    }
 
-return DB::transaction(function () use (
-    $request,
-    $payload,
-    $expectedQuestionCount,
-    $answersSummary,
-    $typeCode,
-    $scoresJson,
-    $scoresPct,
-    $axisStates,
-    $profileVersion,
-    $contentPackageVersion,
-    $answers,
-    $answersHash,
-    $answersStoragePath
-) {
-    // ✅ 1) 优先复用 startAttempt 生成的 attempt_id
-    $attemptId = isset($payload['attempt_id']) && is_string($payload['attempt_id']) && trim($payload['attempt_id']) !== ''
-        ? trim($payload['attempt_id'])
-        : (string) Str::uuid();
+    return DB::transaction(function () use (
+        $request,
+        $payload,
+        $expectedQuestionCount,
+        $answersSummary,
+        $typeCode,
+        $scoresJson,
+        $scoresPct,
+        $axisStates,
+        $profileVersion,
+        $contentPackageVersion,
+        $answers,
+        $answersHash,
+        $answersStoragePath
+    ) {
+        // ✅ 1) 优先复用 startAttempt 生成的 attempt_id
+        $attemptId = isset($payload['attempt_id']) && is_string($payload['attempt_id']) && trim($payload['attempt_id']) !== ''
+            ? trim($payload['attempt_id'])
+            : (string) Str::uuid();
 
-    $resultId  = (string) Str::uuid();
+        $existingAttempt = Attempt::where('id', $attemptId)->first();
 
-    // ✅ 若 attempt_id 已存在：校验归属（anon_id / scale_code / version），并更新提交信息
-    $existingAttempt = Attempt::where('id', $attemptId)->first();
-
-    if ($existingAttempt) {
-        // 归属校验（防止串单）
-        if ((string)$existingAttempt->anon_id !== (string)$payload['anon_id']
-            || (string)$existingAttempt->scale_code !== (string)$payload['scale_code']
-            || (string)$existingAttempt->scale_version !== (string)$payload['scale_version']
-        ) {
-            return response()->json([
-                'ok'      => false,
-                'error'   => 'ATTEMPT_MISMATCH',
-                'message' => 'attempt_id does not match anon_id/scale.',
-            ], 409);
+        if ($existingAttempt) {
+            if ((string)$existingAttempt->anon_id !== (string)$payload['anon_id']
+                || (string)$existingAttempt->scale_code !== (string)$payload['scale_code']
+                || (string)$existingAttempt->scale_version !== (string)$payload['scale_version']
+            ) {
+                return response()->json([
+                    'ok'      => false,
+                    'error'   => 'ATTEMPT_MISMATCH',
+                    'message' => 'attempt_id does not match anon_id/scale.',
+                ], 409);
+            }
         }
-    }
 
-    // 2) attempts（create or update）
-    $attemptData = [
-        'id'                   => $attemptId,
-        'anon_id'              => $payload['anon_id'],
-        'user_id'              => null,
-        'scale_code'           => $payload['scale_code'],
-        'scale_version'        => $payload['scale_version'],
-        'question_count'       => $expectedQuestionCount,
-        'answers_summary_json' => $answersSummary,
+        // ✅ 2) 组装 attempts 更新字段（注意：不要覆盖 ticket_code）
+        $attemptData = [
+            'id'                   => $attemptId,
+            'anon_id'              => $payload['anon_id'],
+            'user_id'              => $existingAttempt?->user_id ?? null,
 
-        'client_platform'      => $payload['client_platform'] ?? ($existingAttempt?->client_platform ?? 'unknown'),
-        'client_version'       => $payload['client_version'] ?? ($existingAttempt?->client_version ?? 'unknown'),
-        'channel'              => $payload['channel'] ?? ($existingAttempt?->channel ?? 'direct'),
-        'referrer'             => $payload['referrer'] ?? ($existingAttempt?->referrer ?? ''),
+            'scale_code'           => $payload['scale_code'],
+            'scale_version'        => $payload['scale_version'],
+            'question_count'       => $expectedQuestionCount,
+            'answers_summary_json' => $answersSummary,
 
-        // ✅ started_at：复用已有；没有就 now
-        'started_at'           => $existingAttempt?->started_at ?? now(),
-        'submitted_at'         => now(),
-    ];
+            'client_platform'      => $payload['client_platform'] ?? ($existingAttempt?->client_platform ?? 'unknown'),
+            'client_version'       => $payload['client_version'] ?? ($existingAttempt?->client_version ?? 'unknown'),
+            'channel'              => $payload['channel'] ?? ($existingAttempt?->channel ?? 'direct'),
+            'referrer'             => $payload['referrer'] ?? ($existingAttempt?->referrer ?? ''),
 
-    if (Schema::hasColumn('attempts', 'answers_json')) {
-        $attemptData['answers_json'] = $answers;
-    }
-    if (Schema::hasColumn('attempts', 'answers_hash')) {
-        $attemptData['answers_hash'] = $answersHash;
-    }
-    if (Schema::hasColumn('attempts', 'answers_storage_path')) {
-        $attemptData['answers_storage_path'] = $answersStoragePath;
-    }
-    if (Schema::hasColumn('attempts', 'region')) {
-        $attemptData['region'] = $payload['region'] ?? ($existingAttempt?->region ?? 'CN_MAINLAND');
-    }
-    if (Schema::hasColumn('attempts', 'locale')) {
-        $attemptData['locale'] = $payload['locale'] ?? ($existingAttempt?->locale ?? 'zh-CN');
-    }
+            'started_at'           => $existingAttempt?->started_at ?? now(),
+            'submitted_at'         => now(),
+        ];
 
-    if ($existingAttempt) {
-        // update（避免重复 attempts）
-        $existingAttempt->fill($attemptData);
-        $existingAttempt->save();
-        $attempt = $existingAttempt;
-    } else {
-        $attempt = Attempt::create($attemptData);
-    }
+        if (Schema::hasColumn('attempts', 'answers_json')) {
+            $attemptData['answers_json'] = $answers;
+        }
+        if (Schema::hasColumn('attempts', 'answers_hash')) {
+            $attemptData['answers_hash'] = $answersHash;
+        }
+        if (Schema::hasColumn('attempts', 'answers_storage_path')) {
+            $attemptData['answers_storage_path'] = $answersStoragePath;
+        }
+        if (Schema::hasColumn('attempts', 'region')) {
+            $attemptData['region'] = $payload['region'] ?? ($existingAttempt?->region ?? 'CN_MAINLAND');
+        }
+        if (Schema::hasColumn('attempts', 'locale')) {
+            $attemptData['locale'] = $payload['locale'] ?? ($existingAttempt?->locale ?? 'zh-CN');
+        }
 
-    // 3) results（保持你原逻辑）
-    $resultData = [
-        'id'            => $resultId,
-        'attempt_id'    => $attemptId,
-        'scale_code'    => $payload['scale_code'],
-        'scale_version' => $payload['scale_version'],
-        'type_code'     => $typeCode,
-        'scores_json'   => $scoresJson,
-        'is_valid'      => true,
-        'computed_at'   => now(),
-    ];
+        // ✅✅✅ 关键：把“结果”写进 attempts（给 /attempts/{id}/result 主路径用）
+        if (Schema::hasColumn('attempts', 'type_code')) {
+            $attemptData['type_code'] = $typeCode;
+        }
+        if (Schema::hasColumn('attempts', 'result_json')) {
+            $attemptData['result_json'] = [
+                'attempt_id'              => $attemptId,
+                'scale_code'              => $payload['scale_code'],
+                'scale_version'           => $payload['scale_version'],
+                'type_code'               => $typeCode,
+                'scores'                  => $scoresJson,
+                'scores_pct'              => $scoresPct,
+                'axis_states'             => $axisStates,
+                'profile_version'         => $profileVersion,
+                'content_package_version' => $contentPackageVersion,
+                'computed_at'             => now()->toISOString(),
+            ];
+        }
 
-    if (Schema::hasColumn('results', 'scores_pct')) {
-        $resultData['scores_pct'] = $scoresPct;
-    }
-    if (Schema::hasColumn('results', 'axis_states')) {
-        $resultData['axis_states'] = $axisStates;
-    }
-    if (Schema::hasColumn('results', 'profile_version')) {
-        $resultData['profile_version'] = $profileVersion;
-    }
-    if (Schema::hasColumn('results', 'content_package_version')) {
-        $resultData['content_package_version'] = $contentPackageVersion;
-    }
+        if ($existingAttempt) {
+            $existingAttempt->fill($attemptData);
+            $existingAttempt->save();
+            $attempt = $existingAttempt;
+        } else {
+            $attempt = Attempt::create($attemptData);
+        }
 
-    $result = Result::create($resultData);
+        // ✅ 3) results 表：兼容旧逻辑（有则更新，无则创建）
+        $result = Result::where('attempt_id', $attemptId)->first();
+        $isNewResult = false;
 
-    // 4) test_submit event（保持你原逻辑）
-    $this->logEvent('test_submit', $request, [
-        'anon_id'       => $payload['anon_id'],
-        'scale_code'    => $attempt->scale_code,
-        'scale_version' => $attempt->scale_version,
-        'attempt_id'    => $attemptId,
-        'channel'       => $attempt->channel,
-        'region'        => $payload['region'] ?? 'CN_MAINLAND',
-        'locale'        => $payload['locale'] ?? 'zh-CN',
-        'meta_json'     => [
-            'answer_count'            => count($payload['answers']),
-            'question_count'          => $attempt->question_count,
-            'type_code'               => $result->type_code,
-            'scores_pct'              => $scoresPct,
-            'axis_states'             => $axisStates,
-            'profile_version'         => $profileVersion,
-            'content_package_version' => $contentPackageVersion,
-        ],
-    ]);
+        $resultBase = [
+            'attempt_id'    => $attemptId,
+            'scale_code'    => $payload['scale_code'],
+            'scale_version' => $payload['scale_version'],
+            'type_code'     => $typeCode,
+            'scores_json'   => $scoresJson,
+            'is_valid'      => true,
+            'computed_at'   => now(),
+        ];
 
-    return response()->json([
-        'ok'         => true,
-        'attempt_id' => $attemptId,
-        'result_id'  => $resultId,
-        'result'     => [
-            'type_code'               => $typeCode,
-            'scores'                  => $scoresJson,
-            'scores_pct'              => $scoresPct,
-            'axis_states'             => $axisStates,
-            'profile_version'         => $profileVersion,
-            'content_package_version' => $contentPackageVersion,
-        ],
-    ], 201);
-});
+        if (Schema::hasColumn('results', 'scores_pct')) {
+            $resultBase['scores_pct'] = $scoresPct;
+        }
+        if (Schema::hasColumn('results', 'axis_states')) {
+            $resultBase['axis_states'] = $axisStates;
+        }
+        if (Schema::hasColumn('results', 'profile_version')) {
+            $resultBase['profile_version'] = $profileVersion;
+        }
+        if (Schema::hasColumn('results', 'content_package_version')) {
+            $resultBase['content_package_version'] = $contentPackageVersion;
+        }
+
+        if ($result) {
+            $result->fill($resultBase);
+            $result->save();
+        } else {
+            $isNewResult = true;
+            $resultBase['id'] = (string) Str::uuid();
+            $result = Result::create($resultBase);
+        }
+
+        // ✅ 4) test_submit event（保持你原逻辑）
+        $this->logEvent('test_submit', $request, [
+            'anon_id'       => $payload['anon_id'],
+            'scale_code'    => $attempt->scale_code,
+            'scale_version' => $attempt->scale_version,
+            'attempt_id'    => $attemptId,
+            'channel'       => $attempt->channel,
+            'region'        => $payload['region'] ?? ($attempt->region ?? 'CN_MAINLAND'),
+            'locale'        => $payload['locale'] ?? ($attempt->locale ?? 'zh-CN'),
+            'meta_json'     => [
+                'answer_count'            => count($payload['answers']),
+                'question_count'          => $attempt->question_count,
+                'type_code'               => $typeCode,
+                'scores_pct'              => $scoresPct,
+                'axis_states'             => $axisStates,
+                'profile_version'         => $profileVersion,
+                'content_package_version' => $contentPackageVersion,
+            ],
+        ]);
+
+        return response()->json([
+            'ok'         => true,
+            'attempt_id' => $attemptId,
+            'result_id'  => $result->id,
+            'result'     => [
+                'type_code'               => $typeCode,
+                'scores'                  => $scoresJson,
+                'scores_pct'              => $scoresPct,
+                'axis_states'             => $axisStates,
+                'profile_version'         => $profileVersion,
+                'content_package_version' => $contentPackageVersion,
+            ],
+        ], $isNewResult ? 201 : 200);
+    });
 }
 
-    /**
-     * GET /api/v0.2/attempts/{id}/result
-     * 注意：这里会写 result_view（但会在 logEvent 内 10 秒去抖）
-     */
-    public function getResult(Request $request, string $attemptId)
-    {
-        $result = Result::where('attempt_id', $attemptId)->first();
+/**
+ * GET /api/v0.2/attempts/{id}/result
+ * 注意：这里会写 report_view（但会在 logEvent 内 10 秒去抖）
+ *
+ * ✅ 新逻辑：优先读 attempts.result_json（主路径）
+ * ✅ 兼容旧逻辑：attempts.result_json 为空时，再 fallback 到 results 表
+ */
+/**
+ * GET /api/v0.2/attempts/{id}/result
+ *
+ * ✅ 新逻辑：优先读 attempts.result_json（主路径）
+ * ✅ 兼容旧逻辑：attempts.result_json 为空时，再 fallback 到 results 表
+ *
+ * ✅ 埋点：写 result_view + share_view（并确保 share_id 入库：events.share_id + meta_json.share_id）
+ */
+public function getResult(Request $request, string $attemptId)
+{
+    // 0) attempt 必须存在（因为 anon_id/region/locale 在 attempts 上）
+    $attempt = Attempt::where('id', $attemptId)->first();
+    if (!$attempt) {
+        return response()->json([
+            'ok'      => false,
+            'error'   => 'ATTEMPT_NOT_FOUND',
+            'message' => 'Attempt not found for given attempt_id',
+        ], 404);
+    }
 
-        if (!$result) {
+    // 1) ✅ 主路径：attempts.result_json
+    $attemptResult = $attempt->result_json;
+
+    // 2) 旧兜底：results 表（兼容历史数据/未迁移数据）
+    $legacy = null;
+    if (empty($attemptResult)) {
+        $legacy = Result::where('attempt_id', $attemptId)->first();
+        if (!$legacy) {
             return response()->json([
                 'ok'      => false,
                 'error'   => 'RESULT_NOT_FOUND',
                 'message' => 'Result not found for given attempt_id',
             ], 404);
         }
+    }
 
-        $attempt = Attempt::where('id', $attemptId)->first();
+    // 3) 统一抽取字段（attempt.result_json 优先，否则 legacy）
+    $scaleCode  = (string) (
+        ($attemptResult['scale_code'] ?? null)
+        ?? ($legacy?->scale_code ?? 'MBTI')
+    );
 
-        $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
+    $scaleVersion = (string) (
+        ($attemptResult['scale_version'] ?? null)
+        ?? ($legacy?->scale_version ?? 'v0.2')
+    );
 
-$funnel = $this->readFunnelMetaFromHeaders($request, $attempt);
+    $typeCode = (string) (
+        ($attemptResult['type_code'] ?? null)
+        ?? ($attempt->type_code ?? null)
+        ?? ($legacy?->type_code ?? '')
+    );
 
-$engineVersion = 'v1.2';
-$contentPackageVersion = (string) (
-    $result->content_package_version
-    ?? $this->currentContentPackageVersion()
-);
+    $scoresJson = (
+        ($attemptResult['scores'] ?? null)              // 允许你把 response 里的 scores 原样存
+        ?? ($attemptResult['scores_json'] ?? null)      // 或者你存 scores_json
+        ?? ($legacy?->scores_json ?? [])
+    );
 
-$resultViewMeta = $this->mergeEventMeta([
-    'type_code'               => $result->type_code,
-    'engine_version'          => $engineVersion,
-    'content_package_version' => $contentPackageVersion,
-    'share_id'                => ($shareId !== '' ? $shareId : null),
-], $funnel);
+    $scoresPct = (
+        ($attemptResult['scores_pct'] ?? null)
+        ?? ($legacy?->scores_pct ?? [])
+    );
 
-// ✅ result_view
-$this->logEvent('report_view', $request, [
-    'anon_id'         => $attempt?->anon_id,
-    'scale_code'      => $result->scale_code,
-    'scale_version'   => $result->scale_version,
-    'attempt_id'      => $attemptId,
-    'channel'         => $funnel['channel'] ?? null,
-    'client_platform' => $funnel['client_platform'] ?? null,
-    // 你也可以把 version 写到 client_version 列（可选，但很有用）
-    'client_version'  => $funnel['version'] ?? null,
-    'region'          => $attempt?->region ?? 'CN_MAINLAND',
-    'locale'          => $attempt?->locale ?? 'zh-CN',
-    'meta_json'       => $resultViewMeta,
-]);
+    $axisStates = (
+        ($attemptResult['axis_states'] ?? null)
+        ?? ($legacy?->axis_states ?? [])
+    );
 
-// ✅ share_view：只有带 share_id 才记（代表“从分享进入/被分享查看”）
-if ($shareId !== '') {
-    $shareViewMeta = $this->mergeEventMeta([
-        'share_id' => $shareId,
-        'page'     => 'result_page', // ✅ 明确页面
+    $profileVersion = (string) (
+        ($attemptResult['profile_version'] ?? null)
+        ?? ($legacy?->profile_version ?? null)
+        ?? config('fap.profile_version', 'mbti32-v2.5')
+    );
+
+    $contentPackageVersion = (string) (
+        ($attemptResult['content_package_version'] ?? null)
+        ?? ($legacy?->content_package_version ?? null)
+        ?? $this->currentContentPackageVersion()
+    );
+
+    $computedAt = (
+        ($attemptResult['computed_at'] ?? null)
+        ?? ($legacy?->computed_at ?? null)
+    );
+
+    // 4) ✅ 埋点：result_view / share_view
+    // share_id：query 优先，其次 header（兼容大小写）
+    $shareId = trim((string) (
+        $request->query('share_id')
+        ?? $request->header('X-Share-Id')
+        ?? $request->header('X-Share-ID')
+        ?? ''
+    ));
+    if ($shareId === '') $shareId = null;
+
+    $funnel = $this->readFunnelMetaFromHeaders($request, $attempt);
+
+    $engineVersion = 'v1.2';
+
+    // ✅ result_view meta：必须包含 share_id（有的话）
+    $resultViewMeta = $this->mergeEventMeta([
+        'type_code'               => $typeCode,
+        'engine_version'          => $engineVersion,
+        'content_package_version' => $contentPackageVersion,
+        'share_id'                => $shareId, // ✅ 关键：让 ACCEPT_F 能按 share_id 找到 result_view
     ], $funnel);
 
-    $this->logEvent('share_view', $request, [
+    // ✅ 写 result_view（CI 的 ACCEPT_F 就查这个 event_code）
+    // ✅ 同时把 share_id 放在“顶层”让 EventController 写入 events.share_id 列
+    $this->logEvent('result_view', $request, [
         'anon_id'         => $attempt?->anon_id,
-        'scale_code'      => $result->scale_code,
-        'scale_version'   => $result->scale_version,
+        'scale_code'      => $scaleCode,
+        'scale_version'   => $scaleVersion,
         'attempt_id'      => $attemptId,
         'channel'         => $funnel['channel'] ?? null,
         'client_platform' => $funnel['client_platform'] ?? null,
         'client_version'  => $funnel['version'] ?? null,
         'region'          => $attempt?->region ?? 'CN_MAINLAND',
         'locale'          => $attempt?->locale ?? 'zh-CN',
-        'meta_json'       => $shareViewMeta,
+        'share_id'        => $shareId,      // ✅ 顶层 share_id（写 events.share_id 列）
+        'meta_json'       => $resultViewMeta,
     ]);
-}
 
-        // ✅ 强制 5 轴全量输出
-        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
+    // ✅ share_view：你原逻辑保留（依赖 share_id 时才写）
+    if ($shareId) {
+        $shareViewMeta = $this->mergeEventMeta([
+            'share_id' => $shareId,
+            'page'     => 'result_page',
+        ], $funnel);
 
-        $scoresJson = $result->scores_json ?? [];
-        $scoresPct  = $result->scores_pct ?? [];
-        $axisStates = $result->axis_states ?? [];
-
-        foreach ($dims as $d) {
-            if (!array_key_exists($d, $scoresJson)) {
-                $scoresJson[$d] = ['a' => 0, 'b' => 0, 'neutral' => 0, 'sum' => 0, 'total' => 0];
-            }
-            if (!array_key_exists($d, $scoresPct)) {
-                $scoresPct[$d] = 50;
-            }
-            if (!array_key_exists($d, $axisStates)) {
-                $axisStates[$d] = 'moderate';
-            }
-        }
-
-        return response()->json([
-            'ok'                      => true,
-            'attempt_id'              => $attemptId,
-            'scale_code'              => $result->scale_code,
-            'scale_version'           => $result->scale_version,
-
-            'type_code'               => $result->type_code,
-            'scores'                  => $scoresJson,
-
-            'scores_pct'              => $scoresPct,
-            'axis_states'             => $axisStates,
-            'profile_version'         => $result->profile_version ?? config('fap.profile_version', 'mbti32-v2.5'),
-            'content_package_version' => $result->content_package_version ?? $this->currentContentPackageVersion(),
-
-            'computed_at'             => $result->computed_at,
+        $this->logEvent('share_view', $request, [
+            'anon_id'         => $attempt?->anon_id,
+            'scale_code'      => $scaleCode,
+            'scale_version'   => $scaleVersion,
+            'attempt_id'      => $attemptId,
+            'channel'         => $funnel['channel'] ?? null,
+            'client_platform' => $funnel['client_platform'] ?? null,
+            'client_version'  => $funnel['version'] ?? null,
+            'region'          => $attempt?->region ?? 'CN_MAINLAND',
+            'locale'          => $attempt?->locale ?? 'zh-CN',
+            'share_id'        => $shareId,    // ✅ 顶层 share_id（写 events.share_id 列）
+            'meta_json'       => $shareViewMeta,
         ]);
     }
+
+    // 5) ✅ 强制 5 轴全量输出（你原逻辑保留）
+    $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
+
+    if (!is_array($scoresJson))  $scoresJson = [];
+    if (!is_array($scoresPct))   $scoresPct = [];
+    if (!is_array($axisStates))  $axisStates = [];
+
+    foreach ($dims as $d) {
+        if (!array_key_exists($d, $scoresJson)) {
+            $scoresJson[$d] = ['a' => 0, 'b' => 0, 'neutral' => 0, 'sum' => 0, 'total' => 0];
+        }
+        if (!array_key_exists($d, $scoresPct)) {
+            $scoresPct[$d] = 50;
+        }
+        if (!array_key_exists($d, $axisStates)) {
+            $axisStates[$d] = 'moderate';
+        }
+    }
+
+    // 6) 返回
+    return response()->json([
+        'ok'                      => true,
+        'attempt_id'              => $attemptId,
+        'scale_code'              => $scaleCode,
+        'scale_version'           => $scaleVersion,
+
+        'type_code'               => $typeCode,
+        'scores'                  => $scoresJson,
+        'scores_pct'              => $scoresPct,
+        'axis_states'             => $axisStates,
+
+        'profile_version'         => $profileVersion,
+        'content_package_version' => $contentPackageVersion,
+
+        'computed_at'             => $computedAt,
+    ]);
+}
 
 /**
  * GET /api/v0.2/attempts/{id}/share
@@ -1723,6 +1793,38 @@ try {
 }
 
 return array_slice($out, 0, 8);
+}
+
+private function extractShareId(Request $request): ?string
+{
+    $sid = trim((string) $request->query('share_id', ''));
+    if ($sid === '') {
+        $sid = trim((string) $request->input('share_id', ''));
+    }
+    if ($sid === '') {
+        $sid = trim((string) data_get($request->input('meta_json', []), 'share_id', ''));
+    }
+    if ($sid === '') return null;
+
+    // uuid sanity
+    if (!preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i', $sid)) {
+        return null;
+    }
+    return $sid;
+}
+
+private function headerMeta(Request $request): array
+{
+    $m = [
+        'experiment'       => trim((string) $request->header('X-Experiment', '')),
+        'version'          => trim((string) $request->header('X-App-Version', '')),
+        'channel'          => trim((string) $request->header('X-Channel', '')),
+        'client_platform'  => trim((string) $request->header('X-Client-Platform', '')),
+        'entry_page'       => trim((string) $request->header('X-Entry-Page', '')),
+    ];
+
+    // remove empty
+    return array_filter($m, fn($v) => $v !== '');
 }
 
 /**

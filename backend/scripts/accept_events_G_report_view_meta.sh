@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+CURL_AUTH=()
+if [[ -n "${FM_TOKEN:-}" ]]; then
+  CURL_AUTH=(-H "Authorization: Bearer ${FM_TOKEN}")
+fi
+
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ACCEPT_G][FAIL] missing cmd: $1" >&2; exit 2; }; }
 need_cmd curl
 need_cmd jq
@@ -62,7 +67,7 @@ curl -fsS \
   -H "X-Channel: miniapp" \
   -H "X-Client-Platform: wechat" \
   -H "X-Entry-Page: report_page" \
-  "$API/api/v0.2/attempts/$ATT/report?share_id=$SHARE_ID" >/dev/null
+  "${CURL_AUTH[@]}" "$API/api/v0.2/attempts/$ATT/report?share_id=$SHARE_ID" >/dev/null
 
 # ✅ 关键：强制 tinker 走同一个 sqlite 文件（避免“手跑连错库”）
 DB_CONNECTION=sqlite DB_DATABASE="$SQLITE_DB_ABS" ATT="$ATT" SHARE_ID="$SHARE_ID" php artisan tinker --execute='

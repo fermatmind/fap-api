@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# -----------------------------
+# Auth (fm_token) for gated endpoints
+# -----------------------------
+CURL_AUTH=()
+if [[ -n "${FM_TOKEN:-}" ]]; then
+  CURL_AUTH=(-H "Authorization: Bearer ${FM_TOKEN}")
+fi
+
 # =========================
 # Config
 # =========================
@@ -78,6 +86,7 @@ call_refresh() {
   local http=""
 
   http="$(curl -sS -L -o "$TMP_REPORT" -w "%{http_code}" \
+    "${CURL_AUTH[@]}" \
     -H 'Accept: application/json' \
     "$url" || true)"
 
