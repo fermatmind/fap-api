@@ -14,6 +14,7 @@ trait WritesEvents
      * 内部方法：写 events 表
      * - result_view / report_view / share_view：强制 10s 去抖（anon_id + attempt_id + event_code）
      *   ✅ 去抖命中时允许回填/覆盖漏斗关键 meta（share_id/experiment/version/channel/...）
+     *   ✅ 同步回填 events.share_id 列（验收脚本可能按列查）
      * - share_generate/share_click：轻量去重（anon_id + attempt_id + share_style + page_session_id）
      */
     protected function logEvent(string $eventCode, Request $request, array $extra = []): void
@@ -78,14 +79,31 @@ trait WritesEvents
             }
             if (!is_array($incoming)) $incoming = [];
 
-            // ✅ 把 share_id 也做一层兜底：query > header > incoming(已有)
+            // -----------------------------
+            // ✅ share_id unify (single source)
+            // Priority:
+            // 1) extra.share_id (顶层)
+            // 2) incoming.share_id (meta_json)
+            // 3) query share_id
+            // 4) header X-Share-Id
+            // -----------------------------
             $qShareId = trim((string) ($request->query('share_id') ?? ''));
             $hShareId = trim((string) ($request->header('X-Share-Id') ?? ''));
-            if ((!isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '') && $qShareId !== '') {
-                $incoming['share_id'] = $qShareId;
+
+            $resolvedShareId = null;
+            if (!empty($extra['share_id'])) {
+                $resolvedShareId = trim((string) $extra['share_id']);
+            } elseif (!empty($incoming['share_id'])) {
+                $resolvedShareId = trim((string) $incoming['share_id']);
+            } elseif ($qShareId !== '') {
+                $resolvedShareId = $qShareId;
+            } elseif ($hShareId !== '') {
+                $resolvedShareId = $hShareId;
             }
-            if ((!isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '') && $hShareId !== '') {
-                $incoming['share_id'] = $hShareId;
+
+            // 回填到 meta（不覆盖已有非空）
+            if ((!isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '') && is_string($resolvedShareId) && $resolvedShareId !== '') {
+                $incoming['share_id'] = $resolvedShareId;
             }
 
             // ✅ 确保 view 类事件 meta 也能拿到 header 值（如果 controller 没写）
@@ -102,93 +120,100 @@ trait WritesEvents
             $fillIncoming('entry_page', $hEntryPage);
 
             // -----------------------------
-// A) 10s debounce + backfill (result_view / report_view / share_view)
-// ✅ 注意：去抖只作用于“同 event_code”，不能让 result_view 吃掉 share_view/report_view
-// -----------------------------
-if (in_array($eventCode, ['result_view', 'report_view', 'share_view'], true) && $anonId && $attemptId) {
-    $existing = Event::query()
-        ->where('event_code', $eventCode) // ✅ 关键修复：用当前 eventCode
-        ->where('anon_id', $anonId)
-        ->where('attempt_id', $attemptId)
-        ->where('occurred_at', '>=', now()->subSeconds(10))
-        ->orderByDesc('occurred_at')
-        ->first();
+            // A) 10s debounce + backfill (result_view / report_view / share_view)
+            // ✅ 去抖只作用于“同 event_code”，不能让 result_view 吃掉 share_view/report_view
+            // -----------------------------
+            if (in_array($eventCode, ['result_view', 'report_view', 'share_view'], true) && $anonId && $attemptId) {
+                $existing = Event::query()
+                    ->where('event_code', $eventCode) // ✅ 关键：用当前 eventCode
+                    ->where('anon_id', $anonId)
+                    ->where('attempt_id', $attemptId)
+                    ->where('occurred_at', '>=', now()->subSeconds(10))
+                    ->orderByDesc('occurred_at')
+                    ->first();
 
-    if ($existing) {
-        // old meta normalize to array
-        $old = $existing->meta_json;
-        if (!is_array($old)) {
-            $old = json_decode((string) $old, true) ?: [];
-        }
-        if (!is_array($old)) $old = [];
+                if ($existing) {
+                    // old meta normalize to array
+                    $old = $existing->meta_json;
+                    if (!is_array($old)) {
+                        $old = json_decode((string) $old, true) ?: [];
+                    }
+                    if (!is_array($old)) $old = [];
 
-        $changed = false;
+                    $changed = false;
 
-        // ✅ 漏斗关键字段：incoming 非空就覆盖（允许更完整 header 回填）
-        $overwriteKeys = [
-            'share_id',
-            'experiment',
-            'version',
-            'channel',
-            'client_platform',
-            'entry_page',
-            'page',
-        ];
+                    // ✅ 漏斗关键字段：incoming 非空就覆盖（允许更完整 header 回填）
+                    $overwriteKeys = [
+                        'share_id',
+                        'experiment',
+                        'version',
+                        'channel',
+                        'client_platform',
+                        'entry_page',
+                        'page',
+                    ];
 
-        foreach ($overwriteKeys as $k) {
-            $newVal  = $incoming[$k] ?? null;
-            $newGood = $newVal !== null && $newVal !== '';
-            if ($newGood) {
-                if (!isset($old[$k]) || $old[$k] !== $newVal) {
-                    $old[$k] = $newVal;
-                    $changed = true;
+                    foreach ($overwriteKeys as $k) {
+                        $newVal  = $incoming[$k] ?? null;
+                        $newGood = $newVal !== null && $newVal !== '';
+                        if ($newGood) {
+                            if (!isset($old[$k]) || $old[$k] !== $newVal) {
+                                $old[$k] = $newVal;
+                                $changed = true;
+                            }
+                        }
+                    }
+
+                    // ✅ one-shot：只补空
+                    $oneShot = ['type_code', 'engine_version', 'engine', 'content_package_version'];
+                    foreach ($oneShot as $k) {
+                        $oldEmpty = !isset($old[$k]) || $old[$k] === null || $old[$k] === '';
+                        $newVal   = $incoming[$k] ?? null;
+                        $newGood  = $newVal !== null && $newVal !== '';
+                        if ($oldEmpty && $newGood) {
+                            $old[$k] = $newVal;
+                            $changed = true;
+                        }
+                    }
+
+                    // ✅ 同步覆盖 events 表列（脚本可能查列）
+                    $colChanged = false;
+
+                    $inChannel = (string)($incoming['channel'] ?? '');
+                    if ($inChannel !== '' && (string)($existing->channel ?? '') !== $inChannel) {
+                        $existing->channel = $inChannel;
+                        $colChanged = true;
+                    }
+
+                    $inPlatform = (string)($incoming['client_platform'] ?? '');
+                    if ($inPlatform !== '' && (string)($existing->client_platform ?? '') !== $inPlatform) {
+                        $existing->client_platform = $inPlatform;
+                        $colChanged = true;
+                    }
+
+                    $inVer = (string)($incoming['version'] ?? '');
+                    if ($inVer !== '' && (string)($existing->client_version ?? '') !== $inVer) {
+                        $existing->client_version = $inVer;
+                        $colChanged = true;
+                    }
+
+                    // ✅✅ 关键：同步回填 events.share_id 列
+                    $inShareId = (string)($incoming['share_id'] ?? '');
+                    if ($inShareId !== '' && (string)($existing->share_id ?? '') !== $inShareId) {
+                        $existing->share_id = $inShareId;
+                        $colChanged = true;
+                    }
+
+                    if ($changed) {
+                        $existing->meta_json = $old;
+                    }
+                    if ($changed || $colChanged) {
+                        $existing->save();
+                    }
+
+                    return; // ✅ 仍然去抖：不新增事件
                 }
             }
-        }
-
-        // ✅ one-shot：只补空
-        $oneShot = ['type_code', 'engine_version', 'engine', 'content_package_version'];
-        foreach ($oneShot as $k) {
-            $oldEmpty = !isset($old[$k]) || $old[$k] === null || $old[$k] === '';
-            $newVal   = $incoming[$k] ?? null;
-            $newGood  = $newVal !== null && $newVal !== '';
-            if ($oldEmpty && $newGood) {
-                $old[$k] = $newVal;
-                $changed = true;
-            }
-        }
-
-        // ✅ 同步覆盖 events 表列（脚本可能查列）
-        $colChanged = false;
-
-        $inChannel = (string)($incoming['channel'] ?? '');
-        if ($inChannel !== '' && (string)($existing->channel ?? '') !== $inChannel) {
-            $existing->channel = $inChannel;
-            $colChanged = true;
-        }
-
-        $inPlatform = (string)($incoming['client_platform'] ?? '');
-        if ($inPlatform !== '' && (string)($existing->client_platform ?? '') !== $inPlatform) {
-            $existing->client_platform = $inPlatform;
-            $colChanged = true;
-        }
-
-        $inVer = (string)($incoming['version'] ?? '');
-        if ($inVer !== '' && (string)($existing->client_version ?? '') !== $inVer) {
-            $existing->client_version = $inVer;
-            $colChanged = true;
-        }
-
-        if ($changed) {
-            $existing->meta_json = $old;
-        }
-        if ($changed || $colChanged) {
-            $existing->save();
-        }
-
-        return; // ✅ 仍然去抖：不新增事件
-    }
-}
 
             // -----------------------------
             // B) share_generate / share_click dedupe
@@ -225,6 +250,9 @@ if (in_array($eventCode, ['result_view', 'report_view', 'share_view'], true) && 
                 'scale_code'      => $extra['scale_code']    ?? null,
                 'scale_version'   => $extra['scale_version'] ?? null,
                 'attempt_id'      => $attemptId,
+
+                // ✅✅ 关键：写入 events.share_id 列（验收脚本可能按列查）
+                'share_id'        => (is_string($resolvedShareId) && $resolvedShareId !== '') ? $resolvedShareId : null,
 
                 // ✅ 列值：extra > header > input
                 'channel'         => $extra['channel']

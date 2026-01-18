@@ -2,6 +2,11 @@
 set -euo pipefail
 
 # -----------------------------
+# Auth header holder (must be defined under -u)
+# -----------------------------
+CURL_AUTH=()
+
+# -----------------------------
 # Paths
 # -----------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -58,6 +63,13 @@ need_cmd sed
 need_cmd lsof
 
 fail() { echo "[CI][FAIL] $*" >&2; exit 1; }
+
+set_curl_auth() {
+  CURL_AUTH=()
+  if [[ -n "${FM_TOKEN:-}" && "${FM_TOKEN}" != "null" ]]; then
+    CURL_AUTH=(-H "Authorization: Bearer ${FM_TOKEN}")
+  fi
+}
 
 wait_health() {
   local url="$1"
@@ -247,8 +259,24 @@ echo "[CI] smoke OK"
 # -----------------------------
 # Run E2E verify
 # -----------------------------
-echo "[CI] running verify_mbti.sh"
-API="$API" REGION="$REGION" LOCALE="$LOCALE" RUN_DIR="$RUN_DIR" bash "$SCRIPT_DIR/verify_mbti.sh"
+echo "[CI] get fm_token for gated endpoints"
+FM_TOKEN="$(
+  curl -sS -X POST "$API/api/v0.2/auth/wx_phone" \
+    -H "Content-Type: application/json" \
+    -d '{"wx_code":"dev","phone_code":"dev","anon_id":"ci_verify"}' \
+  | jq -r .token
+)"
+
+if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then
+  echo "[CI][FAIL] cannot get token from /api/v0.2/auth/wx_phone" >&2
+  exit 15
+fi
+
+set_curl_auth
+
+echo "[CI] running verify_mbti.sh (with FM_TOKEN)"
+API="$API" REGION="$REGION" LOCALE="$LOCALE" RUN_DIR="$RUN_DIR" FM_TOKEN="$FM_TOKEN" \
+  bash "$SCRIPT_DIR/verify_mbti.sh"
 echo "[CI] verify_mbti OK ✅"
 
 # -----------------------------
@@ -259,28 +287,28 @@ echo "[CI] events acceptance (M3)"
 # Ensure sqlite path is passed to acceptance scripts (keep consistent with CI env)
 SQLITE_DB_FOR_ACCEPT="${DB_DATABASE:-$BACKEND_DIR/database/database.sqlite}"
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_C.sh" >/dev/null
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_F_result_view_meta.sh"
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_G_report_view_meta.sh"
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_E_share_meta.sh"
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_H_share_view_meta.sh"
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_D_anon.sh"
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_D_click_anon_override.sh"
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_D_anon_block_placeholder_click.sh"
 
 echo "[CI] events acceptance OK"

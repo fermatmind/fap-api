@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Models\Event;
 
 use App\Support\WritesEvents;
 
@@ -618,6 +619,14 @@ public function storeAttempt(Request $request)
  * ✅ 新逻辑：优先读 attempts.result_json（主路径）
  * ✅ 兼容旧逻辑：attempts.result_json 为空时，再 fallback 到 results 表
  */
+/**
+ * GET /api/v0.2/attempts/{id}/result
+ *
+ * ✅ 新逻辑：优先读 attempts.result_json（主路径）
+ * ✅ 兼容旧逻辑：attempts.result_json 为空时，再 fallback 到 results 表
+ *
+ * ✅ 埋点：写 result_view + share_view（并确保 share_id 入库：events.share_id + meta_json.share_id）
+ */
 public function getResult(Request $request, string $attemptId)
 {
     // 0) attempt 必须存在（因为 anon_id/region/locale 在 attempts 上）
@@ -647,7 +656,6 @@ public function getResult(Request $request, string $attemptId)
     }
 
     // 3) 统一抽取字段（attempt.result_json 优先，否则 legacy）
-    //    你后续写入 result_json 时，建议按这些 key 写（最省事）
     $scaleCode  = (string) (
         ($attemptResult['scale_code'] ?? null)
         ?? ($legacy?->scale_code ?? 'MBTI')
@@ -697,22 +705,31 @@ public function getResult(Request $request, string $attemptId)
         ?? ($legacy?->computed_at ?? null)
     );
 
-    // 4) ✅ 埋点：report_view / share_view（你原逻辑保留）
-    $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
+    // 4) ✅ 埋点：result_view / share_view
+    // share_id：query 优先，其次 header（兼容大小写）
+    $shareId = trim((string) (
+        $request->query('share_id')
+        ?? $request->header('X-Share-Id')
+        ?? $request->header('X-Share-ID')
+        ?? ''
+    ));
+    if ($shareId === '') $shareId = null;
 
     $funnel = $this->readFunnelMetaFromHeaders($request, $attempt);
 
     $engineVersion = 'v1.2';
 
+    // ✅ result_view meta：必须包含 share_id（有的话）
     $resultViewMeta = $this->mergeEventMeta([
         'type_code'               => $typeCode,
         'engine_version'          => $engineVersion,
         'content_package_version' => $contentPackageVersion,
-        'share_id'                => ($shareId !== '' ? $shareId : null),
+        'share_id'                => $shareId, // ✅ 关键：让 ACCEPT_F 能按 share_id 找到 result_view
     ], $funnel);
 
-    // ✅ report_view（你原注释写 result_view，但实际是 report_view，这里不改事件名，保持一致）
-    $this->logEvent('report_view', $request, [
+    // ✅ 写 result_view（CI 的 ACCEPT_F 就查这个 event_code）
+    // ✅ 同时把 share_id 放在“顶层”让 EventController 写入 events.share_id 列
+    $this->logEvent('result_view', $request, [
         'anon_id'         => $attempt?->anon_id,
         'scale_code'      => $scaleCode,
         'scale_version'   => $scaleVersion,
@@ -722,10 +739,12 @@ public function getResult(Request $request, string $attemptId)
         'client_version'  => $funnel['version'] ?? null,
         'region'          => $attempt?->region ?? 'CN_MAINLAND',
         'locale'          => $attempt?->locale ?? 'zh-CN',
+        'share_id'        => $shareId,      // ✅ 顶层 share_id（写 events.share_id 列）
         'meta_json'       => $resultViewMeta,
     ]);
 
-    if ($shareId !== '') {
+    // ✅ share_view：你原逻辑保留（依赖 share_id 时才写）
+    if ($shareId) {
         $shareViewMeta = $this->mergeEventMeta([
             'share_id' => $shareId,
             'page'     => 'result_page',
@@ -741,6 +760,7 @@ public function getResult(Request $request, string $attemptId)
             'client_version'  => $funnel['version'] ?? null,
             'region'          => $attempt?->region ?? 'CN_MAINLAND',
             'locale'          => $attempt?->locale ?? 'zh-CN',
+            'share_id'        => $shareId,    // ✅ 顶层 share_id（写 events.share_id 列）
             'meta_json'       => $shareViewMeta,
         ]);
     }
@@ -1773,6 +1793,38 @@ try {
 }
 
 return array_slice($out, 0, 8);
+}
+
+private function extractShareId(Request $request): ?string
+{
+    $sid = trim((string) $request->query('share_id', ''));
+    if ($sid === '') {
+        $sid = trim((string) $request->input('share_id', ''));
+    }
+    if ($sid === '') {
+        $sid = trim((string) data_get($request->input('meta_json', []), 'share_id', ''));
+    }
+    if ($sid === '') return null;
+
+    // uuid sanity
+    if (!preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i', $sid)) {
+        return null;
+    }
+    return $sid;
+}
+
+private function headerMeta(Request $request): array
+{
+    $m = [
+        'experiment'       => trim((string) $request->header('X-Experiment', '')),
+        'version'          => trim((string) $request->header('X-App-Version', '')),
+        'channel'          => trim((string) $request->header('X-Channel', '')),
+        'client_platform'  => trim((string) $request->header('X-Client-Platform', '')),
+        'entry_page'       => trim((string) $request->header('X-Entry-Page', '')),
+    ];
+
+    // remove empty
+    return array_filter($m, fn($v) => $v !== '');
 }
 
 /**

@@ -13,11 +13,13 @@ class Event extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
+        'id',
         'event_code',
         'anon_id',
         'attempt_id',
         'meta_json',
         'occurred_at',
+        'share_id',
     ];
 
     protected $casts = [
