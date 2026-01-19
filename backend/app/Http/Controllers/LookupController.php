@@ -8,6 +8,8 @@ use App\Services\Abuse\RateLimiter;
 use App\Services\Audit\LookupEventLogger;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class LookupController extends Controller
 {
@@ -179,6 +181,147 @@ class LookupController extends Controller
             'ok' => true,
             'items' => $items,
         ]);
+    }
+
+    /**
+     * POST /api/v0.2/lookup/order
+     */
+    public function lookupOrder(Request $request): JsonResponse
+    {
+        $ip = (string) ($request->ip() ?? '');
+        $limiter = app(RateLimiter::class);
+        $logger = app(LookupEventLogger::class);
+
+        $limitIp = $limiter->limit('FAP_RATE_LOOKUP_IP', 60);
+        if ($ip !== '' && !$limiter->hit("lookup_order:ip:{$ip}", $limitIp, 60)) {
+            $logger->log('lookup_order', false, $request, null, [
+                'error' => 'RATE_LIMITED',
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'RATE_LIMITED',
+                'message' => 'Too many requests from this IP.',
+            ], 429);
+        }
+
+        if (!$this->lookupOrderEnabled()) {
+            $logger->log('lookup_order', false, $request, null, [
+                'error' => 'NOT_ENABLED',
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'NOT_ENABLED',
+                'message' => 'lookup/order disabled.',
+            ]);
+        }
+
+        $orderNo = trim((string) $request->input('order_no', $request->query('order_no', '')));
+        if ($orderNo === '') {
+            $logger->log('lookup_order', false, $request, null, [
+                'error' => 'INVALID_ORDER',
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'INVALID_ORDER',
+                'message' => 'order_no is required.',
+            ], 422);
+        }
+
+        $table = $this->resolveOrderTable();
+        if ($table === '') {
+            $logger->log('lookup_order', false, $request, null, [
+                'error' => 'NOT_SUPPORTED',
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'NOT_SUPPORTED',
+                'message' => 'order lookup not supported.',
+            ]);
+        }
+
+        $orderColumn = $this->resolveOrderColumn($table);
+        if ($orderColumn === null) {
+            $logger->log('lookup_order', false, $request, null, [
+                'error' => 'NOT_SUPPORTED',
+                'table' => $table,
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'NOT_SUPPORTED',
+                'message' => 'order lookup not supported.',
+            ]);
+        }
+
+        $row = DB::table($table)->where($orderColumn, $orderNo)->first();
+        if (!$row) {
+            $logger->log('lookup_order', false, $request, null, [
+                'error' => 'NOT_FOUND',
+                'order_no_hash' => hash('sha256', $orderNo),
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'NOT_FOUND',
+                'message' => 'order not found.',
+            ], 404);
+        }
+
+        $attemptId = $this->extractAttemptId($row);
+        $resp = [
+            'ok' => true,
+            'order_no' => $orderNo,
+            'attempt_id' => $attemptId !== '' ? $attemptId : null,
+        ];
+        if ($attemptId !== '') {
+            $resp['result_api'] = "/api/v0.2/attempts/{$attemptId}/result";
+            $resp['report_api'] = "/api/v0.2/attempts/{$attemptId}/report";
+        }
+
+        $logger->log('lookup_order', true, $request, null, [
+            'order_no_hash' => hash('sha256', $orderNo),
+            'attempt_id' => $attemptId !== '' ? $attemptId : null,
+            'table' => $table,
+            'order_column' => $orderColumn,
+        ]);
+
+        return response()->json($resp);
+    }
+
+    private function lookupOrderEnabled(): bool
+    {
+        $raw = env('LOOKUP_ORDER', '0');
+        return filter_var($raw, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    private function resolveOrderTable(): string
+    {
+        if (Schema::hasTable('orders')) return 'orders';
+        if (Schema::hasTable('payments')) return 'payments';
+        return '';
+    }
+
+    private function resolveOrderColumn(string $table): ?string
+    {
+        $candidates = ['order_no', 'order_id', 'order_number', 'order_sn'];
+        foreach ($candidates as $col) {
+            if (Schema::hasColumn($table, $col)) {
+                return $col;
+            }
+        }
+        return null;
+    }
+
+    private function extractAttemptId(object $row): string
+    {
+        $candidates = ['attempt_id', 'attempt_uuid', 'attempt'];
+        foreach ($candidates as $col) {
+            if (property_exists($row, $col)) {
+                $val = trim((string) ($row->{$col} ?? ''));
+                if ($val !== '') {
+                    return $val;
+                }
+            }
+        }
+        return '';
     }
 
     /**
