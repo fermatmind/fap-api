@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V0_2;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V0_2\BindEmailRequest;
 use App\Models\Attempt;
+use App\Services\Abuse\RateLimiter;
+use App\Services\Audit\LookupEventLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -73,8 +75,27 @@ class MeController extends Controller
      */
     public function bindEmail(BindEmailRequest $request)
     {
+        $ip = (string) ($request->ip() ?? '');
+        $limiter = app(RateLimiter::class);
+        $logger = app(LookupEventLogger::class);
+
+        $limitIp = $limiter->limit('FAP_RATE_EMAIL_BIND_IP', 60);
+        if ($ip !== '' && !$limiter->hit("email_bind:ip:{$ip}", $limitIp, 60)) {
+            $logger->log('email_bind', false, $request, null, [
+                'error' => 'RATE_LIMITED',
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'RATE_LIMITED',
+                'message' => 'Too many requests from this IP.',
+            ], 429);
+        }
+
         $userId = $this->resolveUserId($request);
         if (!$userId) {
+            $logger->log('email_bind', false, $request, null, [
+                'error' => 'UNAUTHORIZED',
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => 'UNAUTHORIZED',
@@ -83,6 +104,9 @@ class MeController extends Controller
         }
 
         if (!Schema::hasTable('users') || !Schema::hasColumn('users', 'email')) {
+            $logger->log('email_bind', false, $request, (string) $userId, [
+                'error' => 'INVALID_SCHEMA',
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => 'INVALID_SCHEMA',
@@ -91,6 +115,12 @@ class MeController extends Controller
         }
 
         $email = $request->emailValue();
+        $emailHash = hash('sha256', $email);
+        $emailDomain = null;
+        $atPos = strpos($email, '@');
+        if ($atPos !== false && $atPos < strlen($email) - 1) {
+            $emailDomain = substr($email, $atPos + 1);
+        }
 
         $pk = Schema::hasColumn('users', 'uid') ? 'uid' : 'id';
         $update = [
@@ -103,6 +133,11 @@ class MeController extends Controller
             ->exists();
 
         if ($exists) {
+            $logger->log('email_bind', false, $request, (string) $userId, [
+                'error' => 'EMAIL_IN_USE',
+                'email_hash' => $emailHash,
+                'email_domain' => $emailDomain,
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => 'EMAIL_IN_USE',
@@ -120,6 +155,11 @@ class MeController extends Controller
         try {
             $updated = DB::table('users')->where($pk, $userId)->update($update);
         } catch (\Throwable $e) {
+            $logger->log('email_bind', false, $request, (string) $userId, [
+                'error' => 'EMAIL_BIND_FAILED',
+                'email_hash' => $emailHash,
+                'email_domain' => $emailDomain,
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => 'EMAIL_BIND_FAILED',
@@ -128,12 +168,22 @@ class MeController extends Controller
         }
 
         if ($updated < 1) {
+            $logger->log('email_bind', false, $request, (string) $userId, [
+                'error' => 'USER_NOT_FOUND',
+                'email_hash' => $emailHash,
+                'email_domain' => $emailDomain,
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => 'USER_NOT_FOUND',
                 'message' => 'User not found for email bind.',
             ], 404);
         }
+
+        $logger->log('email_bind', true, $request, (string) $userId, [
+            'email_hash' => $emailHash,
+            'email_domain' => $emailDomain,
+        ]);
 
         return response()->json([
             'ok' => true,

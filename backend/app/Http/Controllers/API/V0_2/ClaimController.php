@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
+use App\Services\Abuse\RateLimiter;
+use App\Services\Audit\LookupEventLogger;
 use App\Services\Email\EmailOutboxService;
 use Illuminate\Http\Request;
 
@@ -13,9 +15,28 @@ class ClaimController extends Controller
      */
     public function report(Request $request)
     {
+        $ip = (string) ($request->ip() ?? '');
+        $limiter = app(RateLimiter::class);
+        $logger = app(LookupEventLogger::class);
+
+        $limitIp = $limiter->limit('FAP_RATE_CLAIM_REPORT_IP', 30);
+        if ($ip !== '' && !$limiter->hit("claim_report:ip:{$ip}", $limitIp, 60)) {
+            $logger->log('claim_report', false, $request, null, [
+                'error' => 'RATE_LIMITED',
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'RATE_LIMITED',
+                'message' => 'Too many requests from this IP.',
+            ], 429);
+        }
+
         $token = trim((string) $request->query('token', ''));
 
         if ($token === '') {
+            $logger->log('claim_report', false, $request, null, [
+                'error' => 'INVALID_TOKEN',
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => 'INVALID_TOKEN',
@@ -29,12 +50,21 @@ class ClaimController extends Controller
 
         if (!($res['ok'] ?? false)) {
             $status = (int) ($res['status'] ?? 422);
+            $logger->log('claim_report', false, $request, null, [
+                'error' => (string) ($res['error'] ?? 'INVALID_TOKEN'),
+                'token_hash' => hash('sha256', $token),
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => $res['error'] ?? 'INVALID_TOKEN',
                 'message' => $res['message'] ?? 'claim token invalid.',
             ], $status);
         }
+
+        $logger->log('claim_report', true, $request, null, [
+            'attempt_id' => (string) ($res['attempt_id'] ?? ''),
+            'token_hash' => hash('sha256', $token),
+        ]);
 
         return response()->json([
             'ok' => true,
