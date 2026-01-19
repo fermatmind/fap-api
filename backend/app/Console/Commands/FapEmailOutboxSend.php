@@ -14,7 +14,7 @@ class FapEmailOutboxSend extends Command
 
     public function handle(): int
     {
-        if (!$this->isEnabled()) {
+        if (!$this->outboxSendEnabled()) {
             $this->info('EMAIL_OUTBOX_SEND=0 (disabled)');
             return Command::SUCCESS;
         }
@@ -100,7 +100,7 @@ class FapEmailOutboxSend extends Command
         return is_array($decoded) ? $decoded : [];
     }
 
-    private function isEnabled(): bool
+    private function outboxSendEnabled(): bool
     {
         $raw = env('EMAIL_OUTBOX_SEND', '0');
         return filter_var($raw, FILTER_VALIDATE_BOOLEAN);
