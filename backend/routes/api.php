@@ -52,6 +52,7 @@ Route::prefix("v0.2")->group(function () {
 
     // ✅ 6.5) Ticket Code Lookup（你后续可以选择门禁或不门禁）
     Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
+    Route::post("/lookup/order", [LookupController::class, "lookupOrder"]);
 
     // ✅ 7) Share Click（保持公开）
     Route::post("/shares/{shareId}/click", [ShareController::class, "click"]);
