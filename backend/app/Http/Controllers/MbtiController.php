@@ -23,6 +23,8 @@ use App\Services\Overrides\HighlightsOverridesApplier;
 use App\Services\Report\IdentityLayerBuilder;
 use App\Services\Report\ReportComposer;
 use App\Services\Rules\RuleEngine;
+use App\Services\Auth\FmTokenService;
+use App\Services\Email\EmailOutboxService;
 
 class MbtiController extends Controller
 {
@@ -1220,6 +1222,8 @@ if ($shareId !== '') {
                         $cached['tags'] = [];
                     }
 
+                    $this->maybeQueueReportClaimEmail($request, $attempt);
+
                     return response()->json([
                         'ok'         => true,
                         'attempt_id' => $attemptId,
@@ -1396,6 +1400,8 @@ if ($shareId !== '') {
             'err'        => $e->getMessage(),
         ]);
     }
+
+    $this->maybeQueueReportClaimEmail($request, $attempt);
 
     return response()->json([
         'ok'         => true,
@@ -1793,6 +1799,49 @@ try {
 }
 
 return array_slice($out, 0, 8);
+}
+
+private function maybeQueueReportClaimEmail(Request $request, ?Attempt $attempt): void
+{
+    if (!$attempt) return;
+
+    $token = (string) $request->bearerToken();
+    if ($token === '') return;
+
+    /** @var FmTokenService $tokenSvc */
+    $tokenSvc = app(FmTokenService::class);
+    $valid = $tokenSvc->validateToken($token);
+    if (!($valid['ok'] ?? false)) return;
+
+    $userId = (string) ($valid['user_id'] ?? '');
+    if ($userId === '') return;
+
+    if (!Schema::hasTable('users') || !Schema::hasColumn('users', 'email')) {
+        return;
+    }
+
+    $pk = Schema::hasColumn('users', 'uid') ? 'uid' : 'id';
+    $user = DB::table('users')->where($pk, $userId)->first();
+    if (!$user) return;
+
+    $email = trim((string) ($user->email ?? ''));
+    if ($email === '') return;
+
+    if (Schema::hasColumn('users', 'email_verified_at') && empty($user->email_verified_at)) {
+        return;
+    }
+
+    try {
+        /** @var EmailOutboxService $svc */
+        $svc = app(EmailOutboxService::class);
+        $svc->queueReportClaim($userId, $email, (string) ($attempt->id ?? ''));
+    } catch (\Throwable $e) {
+        // best-effort: do not break report flow
+        Log::warning('[email_outbox] queue report claim failed', [
+            'attempt_id' => (string) ($attempt->id ?? ''),
+            'err' => $e->getMessage(),
+        ]);
+    }
 }
 
 private function extractShareId(Request $request): ?string

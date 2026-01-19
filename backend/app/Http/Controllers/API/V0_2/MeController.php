@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\V0_2\BindEmailRequest;
 use App\Models\Attempt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class MeController extends Controller
@@ -63,6 +65,79 @@ class MeController extends Controller
                 'total' => $p->total(),
                 'last_page' => $p->lastPage(),
             ],
+        ]);
+    }
+
+    /**
+     * POST /api/v0.2/me/email/bind
+     */
+    public function bindEmail(BindEmailRequest $request)
+    {
+        $userId = $this->resolveUserId($request);
+        if (!$userId) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'UNAUTHORIZED',
+                'message' => 'Missing or invalid fm_token.',
+            ], 401);
+        }
+
+        if (!Schema::hasTable('users') || !Schema::hasColumn('users', 'email')) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'INVALID_SCHEMA',
+                'message' => 'users.email column not found.',
+            ], 500);
+        }
+
+        $email = $request->emailValue();
+
+        $pk = Schema::hasColumn('users', 'uid') ? 'uid' : 'id';
+        $update = [
+            'email' => $email,
+        ];
+
+        $exists = DB::table('users')
+            ->where('email', $email)
+            ->where($pk, '!=', $userId)
+            ->exists();
+
+        if ($exists) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'EMAIL_IN_USE',
+                'message' => 'email already in use.',
+            ], 422);
+        }
+
+        if (Schema::hasColumn('users', 'email_verified_at')) {
+            $update['email_verified_at'] = now();
+        }
+        if (Schema::hasColumn('users', 'updated_at')) {
+            $update['updated_at'] = now();
+        }
+
+        try {
+            $updated = DB::table('users')->where($pk, $userId)->update($update);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'EMAIL_BIND_FAILED',
+                'message' => $e->getMessage(),
+            ], 422);
+        }
+
+        if ($updated < 1) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'USER_NOT_FOUND',
+                'message' => 'User not found for email bind.',
+            ], 404);
+        }
+
+        return response()->json([
+            'ok' => true,
+            'email' => $email,
         ]);
     }
 
