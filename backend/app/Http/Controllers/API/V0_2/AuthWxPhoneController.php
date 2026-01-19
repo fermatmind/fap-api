@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
+use App\Services\Auth\FmTokenService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class AuthWxPhoneController extends Controller
@@ -28,27 +28,21 @@ class AuthWxPhoneController extends Controller
             $anonId = 'anon_' . now()->timestamp . '_' . substr(sha1(Str::uuid()->toString()), 0, 10);
         }
 
-        // 发一个 token（你当前格式：fm_ + uuid）
-        $token = 'fm_' . Str::uuid()->toString();
+        $userId = 'u_' . substr(sha1($anonId), 0, 10);
 
-        // ✅ 写入 token ↔ anon_id 映射（Phase A+ 关键）
-        // 依赖表：fm_tokens(token PK, anon_id, timestamps, optional expires_at)
-        DB::table('fm_tokens')->updateOrInsert(
-            ['token' => $token],
-            [
-                'anon_id'     => $anonId,
-                'expires_at'  => null,     // 先不启用过期也行
-                'updated_at'  => now(),
-                'created_at'  => now(),
-            ]
-        );
+        /** @var FmTokenService $tokenSvc */
+        $tokenSvc = app(FmTokenService::class);
+        $issued = $tokenSvc->issueForUser($userId, [
+            'provider' => 'wx_phone',
+            'anon_id' => $anonId,
+        ]);
 
         return response()->json([
             'ok'    => true,
-            'token' => $token,
+            'token' => (string) ($issued['token'] ?? ''),
             'user'  => [
                 // Phase A：先给一个伪 uid（之后你接 phone SSOT 再换成真实 user_id）
-                'uid'    => 'u_' . substr(sha1($anonId), 0, 10),
+                'uid'    => $userId,
                 'bound'  => true,
                 'anon_id'=> $anonId,
             ],

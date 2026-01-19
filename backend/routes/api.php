@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MbtiController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LookupController;
+use App\Http\Controllers\API\V0_2\AuthPhoneController;
+use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\ShareController;
 
 /*
@@ -53,6 +55,8 @@ Route::prefix("v0.2")->group(function () {
 
     // ✅ 登录接口（必须公开，否则无法拿 token）
     Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
+    Route::post("/auth/phone/send_code", [AuthPhoneController::class, "sendCode"]);
+    Route::post("/auth/phone/verify", [AuthPhoneController::class, "verify"]);
 
     // 8) 事件上报（目前你前端已带 Authorization，但事件是否门禁你可后续决定）
     // 这里先保持公开（不影响主链路）
@@ -65,7 +69,7 @@ Route::prefix("v0.2")->group(function () {
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
 
     // ✅ GET /api/v0.2/me/attempts
-    Route::get("/me/attempts", [LookupController::class, "meAttempts"]);
+    Route::get("/me/attempts", [MeController::class, "attempts"]);
 
     Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
     Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
