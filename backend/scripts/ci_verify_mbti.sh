@@ -39,6 +39,19 @@ SELF_CHECK_LOG="$LOG_DIR/self_check.log"
 SMOKE_Q_LOG="$LOG_DIR/smoke_questions.json"
 MVP_LOG="$LOG_DIR/mvp_check.log"
 
+# ----------------------------
+# Phase B: phone OTP acceptance script
+# ----------------------------
+ACCEPT_PHONE_SH="$SCRIPT_DIR/accept_auth_phone.sh"
+ACCEPT_PHONE="${ACCEPT_PHONE:-1}"  # 1=run, 0=skip
+
+if [[ "$ACCEPT_PHONE" == "1" ]]; then
+  if [[ ! -x "$ACCEPT_PHONE_SH" ]]; then
+    echo "[CI][FAIL] missing or not executable: $ACCEPT_PHONE_SH" >&2
+    exit 14
+  fi
+fi
+
 # MVP hard gate toggle:
 # - MVP_STRICT=1 (default): fail CI if MVP thresholds not met
 # - MVP_STRICT=0: only log, do not fail
@@ -286,6 +299,15 @@ echo "[CI] events acceptance (M3)"
 
 # Ensure sqlite path is passed to acceptance scripts (keep consistent with CI env)
 SQLITE_DB_FOR_ACCEPT="${DB_DATABASE:-$BACKEND_DIR/database/database.sqlite}"
+
+# ----------------------------
+# Phase B: phone OTP acceptance (run before events so logs/order are clear)
+# ----------------------------
+if [[ "$ACCEPT_PHONE" == "1" ]]; then
+  echo "[CI] phone otp acceptance (Phase B)"
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_PHONE_SH"
+  echo "[CI] phone otp acceptance OK"
+fi
 
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_C.sh" >/dev/null
