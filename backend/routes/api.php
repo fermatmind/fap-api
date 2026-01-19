@@ -7,6 +7,7 @@ use App\Http\Controllers\MbtiController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LookupController;
 use App\Http\Controllers\API\V0_2\AuthPhoneController;
+use App\Http\Controllers\API\V0_2\ClaimController;
 use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\ShareController;
 
@@ -57,6 +58,7 @@ Route::prefix("v0.2")->group(function () {
     Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
     Route::post("/auth/phone/send_code", [AuthPhoneController::class, "sendCode"]);
     Route::post("/auth/phone/verify", [AuthPhoneController::class, "verify"]);
+    Route::get("/claim/report", [ClaimController::class, "report"]);
 
     // 8) 事件上报（目前你前端已带 Authorization，但事件是否门禁你可后续决定）
     // 这里先保持公开（不影响主链路）
@@ -70,6 +72,7 @@ Route::prefix("v0.2")->group(function () {
 
     // ✅ GET /api/v0.2/me/attempts
     Route::get("/me/attempts", [MeController::class, "attempts"]);
+    Route::post("/me/email/bind", [MeController::class, "bindEmail"]);
 
     Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
     Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
