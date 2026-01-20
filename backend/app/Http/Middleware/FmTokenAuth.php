@@ -64,16 +64,23 @@ class FmTokenAuth
         }
 
         $userId = $this->resolveUserId($row);
-        if ($userId === '') {
-            return $this->unauthorizedResponse();
+        if ($userId !== '') {
+            // basic sanity
+            if (strlen($userId) > 128) {
+                return $this->unauthorizedResponse();
+            }
+            $request->attributes->set('fm_user_id', $userId);
         }
 
-        // basic sanity
-        if (strlen($userId) > 128) {
-            return $this->unauthorizedResponse();
+        $anonId = $this->resolveAnonId($row);
+        if ($anonId !== '') {
+            if (strlen($anonId) > 128) {
+                return $this->unauthorizedResponse();
+            }
+            $request->attributes->set('anon_id', $anonId);
+        } else {
+            // TODO: fm_tokens.anon_id not available; keep behavior non-breaking.
         }
-
-        $request->attributes->set('fm_user_id', $userId);
 
         return $next($request);
     }
@@ -84,8 +91,10 @@ class FmTokenAuth
             return trim((string) ($row->user_id ?? ''));
         }
 
+        // ✅ fallback：当前 fm_tokens 只有 anon_id 列，但 /me/attempts 依赖 fm_user_id
         if (Schema::hasColumn('fm_tokens', 'anon_id')) {
-            return trim((string) ($row->anon_id ?? ''));
+            $v = trim((string) ($row->anon_id ?? ''));
+            if ($v !== '') return $v;
         }
 
         $candidates = ['uid', 'user_uid', 'user'];
@@ -94,6 +103,15 @@ class FmTokenAuth
                 $val = trim((string) ($row->{$c} ?? ''));
                 if ($val !== '') return $val;
             }
+        }
+
+        return '';
+    }
+
+    private function resolveAnonId(object $row): string
+    {
+        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
+            return trim((string) ($row->anon_id ?? ''));
         }
 
         return '';
