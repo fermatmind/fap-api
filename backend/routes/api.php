@@ -13,6 +13,7 @@ use App\Http\Controllers\API\V0_2\IdentityController;
 use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\NormsController;
 use App\Http\Controllers\API\V0_2\ShareController;
+use App\Http\Controllers\API\V0_2\ValidityFeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,7 @@ Route::prefix("v0.2")->group(function () {
 
     Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
     Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
+    Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
     Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
 });
 });
