@@ -11,6 +11,7 @@ use App\Http\Controllers\API\V0_2\AuthProviderController;
 use App\Http\Controllers\API\V0_2\ClaimController;
 use App\Http\Controllers\API\V0_2\IdentityController;
 use App\Http\Controllers\API\V0_2\MeController;
+use App\Http\Controllers\API\V0_2\NormsController;
 use App\Http\Controllers\API\V0_2\ShareController;
 
 /*
@@ -67,6 +68,9 @@ Route::prefix("v0.2")->group(function () {
     // 8) 事件上报（目前你前端已带 Authorization，但事件是否门禁你可后续决定）
     // 这里先保持公开（不影响主链路）
     Route::post("/events", [EventController::class, "store"]);
+
+    // 9) Norms percentile (stub controller, implemented later)
+    Route::get("/norms/percentile", [NormsController::class, "percentile"]);
 
     // =========================================================
     // ✅ Step 1：最小后端鉴权（只 gate 你指定的 3 个接口）
