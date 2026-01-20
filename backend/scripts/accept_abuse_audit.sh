@@ -15,75 +15,96 @@ echo "[ACCEPT_ABUSE] SQLITE_DB=${SQLITE_DB}"
 # 0) health
 curl -sS "${API}/api/v0.2/health" >/dev/null
 
-# 1) sanity: lookup_events table exists
-HAS_TABLE="$(cd "${BACKEND_DIR}" && php artisan tinker --execute='
-use Illuminate\Support\Facades\DB;
+# 0.5) ensure lookup_events exists
+HAS_EVENTS="$(cd "${BACKEND_DIR}" && php artisan tinker --execute='
+use Illuminate\Support\Facades\Schema;
+echo Schema::hasTable("lookup_events") ? "1" : "0";
+' 2>/dev/null | tail -n 1 | tr -d "\r\n")"
 
-try {
-  $has = DB::select("SELECT name FROM sqlite_master WHERE type=\"table\" AND name=\"lookup_events\" LIMIT 1");
-  echo $has ? "1" : "0";
-} catch (\Throwable $e) {
-  echo "0";
-}
-')"
-if [[ "${HAS_TABLE}" != "1" ]]; then
+if [[ "${HAS_EVENTS}" != "1" ]]; then
   echo "[ACCEPT_ABUSE][FAIL] lookup_events table missing"
   exit 1
 fi
 
-# 2) generate a success audit (provider login)
-curl -sS -X POST "${API}/api/v0.2/auth/provider" \
-  -H "Content-Type: application/json" -H "Accept: application/json" \
-  -d '{"provider":"web","provider_code":"dev","anon_id":"accept_abuse"}' >/dev/null
+# 1) provider login once (must write provider_login audit)
+PROV_RAW="$(curl -sS -X POST "${API}/api/v0.2/auth/provider" \
+  -H "Accept: application/json" -H "Content-Type: application/json" \
+  -d '{"provider":"web","provider_code":"dev","anon_id":"accept_abuse_probe"}' || true)"
+PROV_JSON="$(printf "%s\n" "${PROV_RAW}" | tail -n 1)"
 
-# 3) rate limit claim/report (expect 429 after ~30/min)
-HIT_429="0"
-for i in $(seq 1 40); do
-  status="$(curl -sS -o /dev/null -w "%{http_code}" \
-    "${API}/api/v0.2/claim/report?token=invalid")"
-  if [[ "${status}" == "429" ]]; then
-    HIT_429="1"
+if ! php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((int) !($j && (($j["ok"] ?? false) === true)));' <<<"${PROV_JSON}"; then
+  echo "[ACCEPT_ABUSE][FAIL] provider login failed: ${PROV_JSON}"
+  exit 1
+fi
+
+PROVIDER_UID="$(php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["provider_uid"] ?? "";' <<<"${PROV_JSON}")"
+echo "[ACCEPT_ABUSE] provider_login ok provider_uid=${PROVIDER_UID}"
+
+# 2) trigger rate limit on claim/report (invalid token)
+RATE_LIMITED=0
+for i in {1..45}; do
+  code="$(curl -s -o /dev/null -w "%{http_code}" \
+    -H "Accept: application/json" \
+    "${API}/api/v0.2/claim/report?token=claim_invalid_token_for_abuse_test" || true)"
+  if [[ "${code}" == "429" ]]; then
+    RATE_LIMITED=1
     break
   fi
 done
 
-if [[ "${HIT_429}" != "1" ]]; then
-  echo "[ACCEPT_ABUSE][FAIL] rate limit not triggered (expected 429)"
+if [[ "${RATE_LIMITED}" != "1" ]]; then
+  echo "[ACCEPT_ABUSE][FAIL] rate limit not triggered on claim/report (expected at least one 429)"
   exit 1
 fi
 echo "[ACCEPT_ABUSE] rate limit triggered"
 
-# 4) audit entries present
-AUDIT_OUT="$(cd "${BACKEND_DIR}" && php artisan tinker --execute='
+# 3) validate audits exist (provider_login + claim_report invalid token)
+CHECK_OUT="$(cd "${BACKEND_DIR}" && php artisan tinker --execute='
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+if (!Schema::hasTable("lookup_events")) {
+  echo "PROVIDER_COUNT=0\n";
+  echo "CLAIM_INVALID_COUNT=0\n";
+  return;
+}
+
+$providerCount = DB::table("lookup_events")->where("method", "provider_login")->count();
+$claimInvalidCount = DB::table("lookup_events")
+  ->where("method", "claim_report")
+  ->where("meta_json", "like", "%INVALID_TOKEN%")
+  ->count();
+
+echo "PROVIDER_COUNT={$providerCount}\n";
+echo "CLAIM_INVALID_COUNT={$claimInvalidCount}\n";
 
 $rows = DB::table("lookup_events")
+  ->whereIn("method", ["provider_login","claim_report"])
   ->orderByDesc("created_at")
-  ->limit(10)
+  ->limit(12)
   ->get(["method","success","ip","meta_json","created_at"]);
 
 foreach ($rows as $r) {
-  $m = (string) ($r->method ?? "");
-  $s = (string) ($r->success ?? "");
-  $ip = (string) ($r->ip ?? "");
-  $meta = (string) ($r->meta_json ?? "");
-  echo "METHOD={$m} SUCCESS={$s} IP={$ip} META={$meta}\n";
+  echo "METHOD={$r->method} SUCCESS={$r->success} IP={$r->ip} META={$r->meta_json}\n";
 }
-')"
+' 2>/dev/null)"
 
-echo "${AUDIT_OUT}"
+PROVIDER_COUNT="$(printf "%s" "${CHECK_OUT}" | sed -n 's/^PROVIDER_COUNT=//p' | tail -n 1 | tr -d "\r\n")"
+CLAIM_INVALID_COUNT="$(printf "%s" "${CHECK_OUT}" | sed -n 's/^CLAIM_INVALID_COUNT=//p' | tail -n 1 | tr -d "\r\n")"
 
-if ! echo "${AUDIT_OUT}" | grep -q "METHOD=claim_report"; then
-  echo "[ACCEPT_ABUSE][FAIL] missing claim_report audit"
-  exit 1
-fi
-if ! echo "${AUDIT_OUT}" | grep -q "METHOD=provider_login"; then
+if [[ -z "${PROVIDER_COUNT}" || "${PROVIDER_COUNT}" == "0" ]]; then
+  echo "${CHECK_OUT}"
   echo "[ACCEPT_ABUSE][FAIL] missing provider_login audit"
   exit 1
 fi
-if ! echo "${AUDIT_OUT}" | grep -q "META=.*error"; then
-  echo "[ACCEPT_ABUSE][FAIL] audit meta_json missing error"
+
+if [[ -z "${CLAIM_INVALID_COUNT}" || "${CLAIM_INVALID_COUNT}" == "0" ]]; then
+  echo "${CHECK_OUT}"
+  echo "[ACCEPT_ABUSE][FAIL] missing claim_report INVALID_TOKEN audit"
   exit 1
 fi
+
+# print the tail for debugging visibility
+printf "%s\n" "${CHECK_OUT}" | sed -n '3,999p'
 
 echo "[ACCEPT_ABUSE] DONE OK"
