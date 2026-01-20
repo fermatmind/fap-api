@@ -42,10 +42,45 @@ class EmailOutboxService
             'claim_expires_at' => $expiresAt->toIso8601String(),
         ];
 
+        $pending = null;
+        if (Schema::hasColumn('email_outbox', 'attempt_id')) {
+            $pending = DB::table('email_outbox')
+                ->where('user_id', $userId)
+                ->where('attempt_id', $attemptId)
+                ->where('template', 'report_claim')
+                ->where('status', 'pending')
+                ->where('claim_expires_at', '>', now())
+                ->orderByDesc('updated_at')
+                ->first();
+        }
+
+        if ($pending) {
+            $update = [
+                'email' => $email,
+                'attempt_id' => $attemptId,
+                'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'claim_token_hash' => $tokenHash,
+                'claim_expires_at' => $expiresAt,
+                'updated_at' => now(),
+            ];
+
+            DB::table('email_outbox')
+                ->where('id', $pending->id)
+                ->update($update);
+
+            return [
+                'ok' => true,
+                'claim_token' => $token,
+                'claim_url' => $claimUrl,
+                'expires_at' => $expiresAt->toIso8601String(),
+            ];
+        }
+
         $row = [
             'id' => (string) Str::uuid(),
             'user_id' => $userId,
             'email' => $email,
+            'attempt_id' => $attemptId,
             'template' => 'report_claim',
             'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'claim_token_hash' => $tokenHash,

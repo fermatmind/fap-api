@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V0_2\BindIdentityRequest;
+use App\Services\Abuse\RateLimiter;
 use App\Services\Auth\IdentityService;
+use App\Services\Audit\LookupEventLogger;
 use Illuminate\Http\Request;
 
 class IdentityController extends Controller
@@ -14,8 +16,27 @@ class IdentityController extends Controller
      */
     public function bind(BindIdentityRequest $request)
     {
+        $ip = (string) ($request->ip() ?? '');
+        $limiter = app(RateLimiter::class);
+        $logger = app(LookupEventLogger::class);
+
+        $limitIp = $limiter->limit('FAP_RATE_IDENTITIES_BIND_IP', 60);
+        if ($ip !== '' && !$limiter->hit("identities_bind:ip:{$ip}", $limitIp, 60)) {
+            $logger->log('identities_bind', false, $request, null, [
+                'error' => 'RATE_LIMITED',
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'RATE_LIMITED',
+                'message' => 'Too many requests from this IP.',
+            ], 429);
+        }
+
         $userId = (string) $request->attributes->get('fm_user_id', '');
         if ($userId === '') {
+            $logger->log('identities_bind', false, $request, null, [
+                'error' => 'UNAUTHORIZED',
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => 'UNAUTHORIZED',
@@ -34,12 +55,22 @@ class IdentityController extends Controller
 
         if (!($res['ok'] ?? false)) {
             $status = (int) ($res['status'] ?? 422);
+            $logger->log('identities_bind', false, $request, $userId, [
+                'error' => $res['error'] ?? 'IDENTITY_BIND_FAILED',
+                'provider' => $request->provider(),
+                'provider_uid_hash' => hash('sha256', $request->providerUid()),
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => $res['error'] ?? 'IDENTITY_BIND_FAILED',
                 'message' => $res['message'] ?? 'identity bind failed.',
             ], $status);
         }
+
+        $logger->log('identities_bind', true, $request, $userId, [
+            'provider' => $request->provider(),
+            'provider_uid_hash' => hash('sha256', $request->providerUid()),
+        ]);
 
         return response()->json([
             'ok' => true,

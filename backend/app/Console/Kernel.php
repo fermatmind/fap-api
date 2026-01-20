@@ -10,6 +10,7 @@ use App\Console\Commands\FapResolvePack;
 use App\Console\Commands\FapSelfCheck;
 use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
+use App\Console\Commands\FapEmailOutboxSend;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,6 +24,7 @@ class Kernel extends ConsoleKernel
      * @var array<int, class-string>
      */
     protected $commands = [
+        FapEmailOutboxSend::class,
         FapResolvePack::class,
         FapSelfCheck::class,
         FapValidateReport::class,

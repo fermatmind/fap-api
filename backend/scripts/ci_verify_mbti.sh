@@ -56,11 +56,16 @@ fi
 # Phase C-1: email claim acceptance (default off)
 # ----------------------------
 ACCEPT_EMAIL_SH="$SCRIPT_DIR/accept_email_claim.sh"
+ACCEPT_EMAIL_DEDUP_SH="$SCRIPT_DIR/accept_email_outbox_dedup.sh"
 ACCEPT_EMAIL="${ACCEPT_EMAIL:-0}"  # 1=run, 0=skip
 
 if [[ "$ACCEPT_EMAIL" == "1" ]]; then
   if [[ ! -f "$ACCEPT_EMAIL_SH" ]]; then
     echo "[CI][FAIL] missing: $ACCEPT_EMAIL_SH" >&2
+    exit 14
+  fi
+  if [[ ! -f "$ACCEPT_EMAIL_DEDUP_SH" ]]; then
+    echo "[CI][FAIL] missing: $ACCEPT_EMAIL_DEDUP_SH" >&2
     exit 14
   fi
 fi
@@ -74,6 +79,32 @@ ACCEPT_IDENTITIES="${ACCEPT_IDENTITIES:-0}"  # 1=run, 0=skip
 if [[ "$ACCEPT_IDENTITIES" == "1" ]]; then
   if [[ ! -f "$ACCEPT_IDENTITIES_SH" ]]; then
     echo "[CI][FAIL] missing: $ACCEPT_IDENTITIES_SH" >&2
+    exit 14
+  fi
+fi
+
+# ----------------------------
+# Phase C-3: abuse audit acceptance (default off)
+# ----------------------------
+ACCEPT_ABUSE_SH="$SCRIPT_DIR/accept_abuse_audit.sh"
+ACCEPT_ABUSE="${ACCEPT_ABUSE:-0}"  # 1=run, 0=skip
+
+if [[ "$ACCEPT_ABUSE" == "1" ]]; then
+  if [[ ! -f "$ACCEPT_ABUSE_SH" ]]; then
+    echo "[CI][FAIL] missing: $ACCEPT_ABUSE_SH" >&2
+    exit 14
+  fi
+fi
+
+# ----------------------------
+# Phase C-4: lookup/order acceptance (default off)
+# ----------------------------
+ACCEPT_ORDER_SH="$SCRIPT_DIR/accept_lookup_order.sh"
+ACCEPT_ORDER="${ACCEPT_ORDER:-0}"  # 1=run, 0=skip
+
+if [[ "$ACCEPT_ORDER" == "1" ]]; then
+  if [[ ! -f "$ACCEPT_ORDER_SH" ]]; then
+    echo "[CI][FAIL] missing: $ACCEPT_ORDER_SH" >&2
     exit 14
   fi
 fi
@@ -342,6 +373,10 @@ if [[ "$ACCEPT_EMAIL" == "1" ]]; then
   echo "[CI] email claim acceptance (Phase C-1)"
   API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_EMAIL_SH"
   echo "[CI] email claim acceptance OK"
+
+  echo "[CI] email outbox dedup acceptance (Phase C-1b)"
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_EMAIL_DEDUP_SH"
+  echo "[CI] email outbox dedup acceptance OK"
 fi
 
 # ----------------------------
@@ -351,6 +386,24 @@ if [[ "$ACCEPT_IDENTITIES" == "1" ]]; then
   echo "[CI] identities bind acceptance (Phase C-2)"
   API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_IDENTITIES_SH"
   echo "[CI] identities bind acceptance OK"
+fi
+
+# ----------------------------
+# Phase C-3: abuse audit acceptance (optional)
+# ----------------------------
+if [[ "$ACCEPT_ABUSE" == "1" ]]; then
+  echo "[CI] abuse audit acceptance (Phase C-3)"
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_ABUSE_SH"
+  echo "[CI] abuse audit acceptance OK"
+fi
+
+# ----------------------------
+# Phase C-4: lookup/order acceptance (optional)
+# ----------------------------
+if [[ "$ACCEPT_ORDER" == "1" ]]; then
+  echo "[CI] lookup order acceptance (Phase C-4)"
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_ORDER_SH"
+  echo "[CI] lookup order acceptance OK"
 fi
 
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \

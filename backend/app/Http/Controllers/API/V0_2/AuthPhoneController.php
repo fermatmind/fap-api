@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
 use App\Services\Account\AssetCollector;
+use App\Services\Abuse\RateLimiter;
 use App\Services\Auth\FmTokenService;
 use App\Services\Auth\PhoneOtpService;
+use App\Services\Audit\LookupEventLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
@@ -41,12 +43,49 @@ class AuthPhoneController extends Controller
 
         $ip = (string) ($request->ip() ?? '');
         $deviceKey = isset($data['device_key']) ? (string) $data['device_key'] : null;
+        $limiter = app(RateLimiter::class);
+        $logger = app(LookupEventLogger::class);
+
+        $limitPhone = $limiter->limit('FAP_RATE_SEND_CODE_PHONE', 5);
+        if ($phone !== '' && !$limiter->hit("phone_send_code:phone:{$phone}", $limitPhone, 60)) {
+            $logger->log('phone_send_code', false, $request, null, [
+                'error' => 'RATE_LIMITED',
+                'scope' => 'phone',
+                'scene' => $scene,
+                'phone_hash' => hash('sha256', $phone),
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'RATE_LIMITED',
+                'message' => 'Too many requests for this phone.',
+            ], 429);
+        }
+
+        $limitIp = $limiter->limit('FAP_RATE_SEND_CODE_IP', 20);
+        if ($ip !== '' && !$limiter->hit("phone_send_code:ip:{$ip}", $limitIp, 60)) {
+            $logger->log('phone_send_code', false, $request, null, [
+                'error' => 'RATE_LIMITED',
+                'scope' => 'ip',
+                'scene' => $scene,
+                'phone_hash' => hash('sha256', $phone),
+            ]);
+            return response()->json([
+                'ok' => false,
+                'error' => 'RATE_LIMITED',
+                'message' => 'Too many requests from this IP.',
+            ], 429);
+        }
 
         try {
             $res = $otp->send($phone, $scene, $ip, $deviceKey);
             // 约定：$res 至少包含 ttl_seconds；dev_mode 可包含 dev_code
         } catch (\Throwable $e) {
             // 这里统一按“限频/风控”处理
+            $logger->log('phone_send_code', false, $request, null, [
+                'error' => 'OTP_SEND_FAILED',
+                'scene' => $scene,
+                'phone_hash' => hash('sha256', $phone),
+            ]);
             return response()->json([
                 'ok' => false,
                 'error' => 'OTP_SEND_FAILED',
@@ -65,6 +104,11 @@ class AuthPhoneController extends Controller
         if (!empty($res['dev_code'])) {
             $out['dev_code'] = (string) $res['dev_code'];
         }
+
+        $logger->log('phone_send_code', true, $request, null, [
+            'scene' => $scene,
+            'phone_hash' => hash('sha256', $phone),
+        ]);
 
         return response()->json($out);
     }
@@ -99,6 +143,7 @@ class AuthPhoneController extends Controller
         $phone = $this->normalizePhone((string) $data['phone']);
         $code  = trim((string) $data['code']);
         $scene = (string) ($data['scene'] ?? 'login');
+        $logger = app(LookupEventLogger::class);
 
         /** @var PhoneOtpService $otp */
         $otp = app(PhoneOtpService::class);
@@ -114,6 +159,12 @@ if (!$isOk) {
     $status = 422;
     if ($error === 'OTP_MISSING') $status = 410;   // expired/not found
     if ($error === 'OTP_LOCKED')  $status = 429;   // too many fails
+
+    $logger->log('phone_verify', false, $request, null, [
+        'error' => $error,
+        'scene' => $scene,
+        'phone_hash' => hash('sha256', $phone),
+    ]);
 
     return response()->json([
         'ok' => false,
@@ -147,6 +198,16 @@ if (!$isOk) {
     'phone' => $phone,
     'anon_id' => $anonId,
 ]);
+
+        $via = is_array($res) ? (string) ($res['via'] ?? '') : '';
+        $meta = [
+            'scene' => $scene,
+            'phone_hash' => hash('sha256', $phone),
+        ];
+        if ($via !== '') {
+            $meta['via'] = $via;
+        }
+        $logger->log('phone_verify', true, $request, (string) $userId, $meta);
 
         return response()->json([
             'ok' => true,
