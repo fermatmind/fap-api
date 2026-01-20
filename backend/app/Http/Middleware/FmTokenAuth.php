@@ -91,6 +91,12 @@ class FmTokenAuth
             return trim((string) ($row->user_id ?? ''));
         }
 
+        // ✅ fallback：当前 fm_tokens 只有 anon_id 列，但 /me/attempts 依赖 fm_user_id
+        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
+            $v = trim((string) ($row->anon_id ?? ''));
+            if ($v !== '') return $v;
+        }
+
         $candidates = ['uid', 'user_uid', 'user'];
         foreach ($candidates as $c) {
             if (property_exists($row, $c)) {
