@@ -64,16 +64,23 @@ class FmTokenAuth
         }
 
         $userId = $this->resolveUserId($row);
-        if ($userId === '') {
-            return $this->unauthorizedResponse();
+        if ($userId !== '') {
+            // basic sanity
+            if (strlen($userId) > 128) {
+                return $this->unauthorizedResponse();
+            }
+            $request->attributes->set('fm_user_id', $userId);
         }
 
-        // basic sanity
-        if (strlen($userId) > 128) {
-            return $this->unauthorizedResponse();
+        $anonId = $this->resolveAnonId($row);
+        if ($anonId !== '') {
+            if (strlen($anonId) > 128) {
+                return $this->unauthorizedResponse();
+            }
+            $request->attributes->set('anon_id', $anonId);
+        } else {
+            // TODO: fm_tokens.anon_id not available; keep behavior non-breaking.
         }
-
-        $request->attributes->set('fm_user_id', $userId);
 
         return $next($request);
     }
@@ -84,16 +91,21 @@ class FmTokenAuth
             return trim((string) ($row->user_id ?? ''));
         }
 
-        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
-            return trim((string) ($row->anon_id ?? ''));
-        }
-
         $candidates = ['uid', 'user_uid', 'user'];
         foreach ($candidates as $c) {
             if (property_exists($row, $c)) {
                 $val = trim((string) ($row->{$c} ?? ''));
                 if ($val !== '') return $val;
             }
+        }
+
+        return '';
+    }
+
+    private function resolveAnonId(object $row): string
+    {
+        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
+            return trim((string) ($row->anon_id ?? ''));
         }
 
         return '';
