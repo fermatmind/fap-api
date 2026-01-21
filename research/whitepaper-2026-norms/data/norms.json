@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.1-TEST",
+    "norms_version": "whitepaper-2026-norms.v1",
+    "generated_at": "2026-01-21T15:08:19Z",
+    "window_start": "2026-01-20",
+    "window_end": "2026-01-21",
+    "n_total": 47,
+    "algorithm": "percentile rank definition (cumulative <= counts)",
+    "rank_definition": "P = count(score <= s) / N; percentile = P * 100"
+  },
+  "items": [
+    {
+      "metric_key": "AT",
+      "score": 50,
+      "percentile": 100.0,
+      "n": 47,
+      "window_start": "2026-01-20",
+      "window_end": "2026-01-21",
+      "norms_version": "whitepaper-2026-norms.v1"
+    },
+    {
+      "metric_key": "EI",
+      "score": 50,
+      "percentile": 100.0,
+      "n": 47,
+      "window_start": "2026-01-20",
+      "window_end": "2026-01-21",
+      "norms_version": "whitepaper-2026-norms.v1"
+    },
+    {
+      "metric_key": "JP",
+      "score": 50,
+      "percentile": 100.0,
+      "n": 47,
+      "window_start": "2026-01-20",
+      "window_end": "2026-01-21",
+      "norms_version": "whitepaper-2026-norms.v1"
+    },
+    {
+      "metric_key": "SN",
+      "score": 50,
+      "percentile": 100.0,
+      "n": 47,
+      "window_start": "2026-01-20",
+      "window_end": "2026-01-21",
+      "norms_version": "whitepaper-2026-norms.v1"
+    },
+    {
+      "metric_key": "TF",
+      "score": 50,
+      "percentile": 100.0,
+      "n": 47,
+      "window_start": "2026-01-20",
+      "window_end": "2026-01-21",
+      "norms_version": "whitepaper-2026-norms.v1"
+    }
+  ]
+}
