@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "pack_id": {
+      "type": "string",
+      "description": "Content pack id used for norms generation.",
+      "example": "MBTI.cn-mainland.zh-CN.v0.2.1-TEST",
+      "unit": null,
+      "nullable": false
+    },
+    "norms_version": {
+      "type": "string",
+      "description": "Norms dataset version label.",
+      "example": "whitepaper-2026-norms.v1",
+      "unit": null,
+      "nullable": false
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "Dataset generation timestamp in ISO 8601.",
+      "example": "2026-01-21T15:08:19Z",
+      "unit": null,
+      "nullable": false
+    },
+    "window_start": {
+      "type": "string",
+      "description": "Start date (YYYY-MM-DD) for the sampling window.",
+      "example": "2026-01-20",
+      "unit": null,
+      "nullable": false
+    },
+    "window_end": {
+      "type": "string",
+      "description": "End date (YYYY-MM-DD) for the sampling window.",
+      "example": "2026-01-21",
+      "unit": null,
+      "nullable": false
+    },
+    "n_total": {
+      "type": "integer",
+      "description": "Total sample size used for norms.",
+      "example": 47,
+      "unit": "count",
+      "nullable": false
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "Short description of the percentile algorithm.",
+      "example": "percentile rank definition (cumulative <= counts)",
+      "unit": null,
+      "nullable": false
+    },
+    "rank_definition": {
+      "type": "string",
+      "description": "Formal definition of the ranking rule.",
+      "example": "P = count(score <= s) / N; percentile = P * 100",
+      "unit": null,
+      "nullable": false
+    }
+  },
+  "items": {
+    "metric_key": {
+      "type": "string",
+      "description": "Metric axis key.",
+      "example": "EI",
+      "unit": null,
+      "nullable": false
+    },
+    "score": {
+      "type": "integer",
+      "description": "Rounded score (PHP round half-up).",
+      "example": 50,
+      "unit": "score",
+      "nullable": false
+    },
+    "percentile": {
+      "type": "number",
+      "description": "Percentile in 0-100 for the given score.",
+      "example": 50.0,
+      "unit": "percent",
+      "nullable": false
+    },
+    "n": {
+      "type": "integer",
+      "description": "Sample size used for the percentile.",
+      "example": 47,
+      "unit": "count",
+      "nullable": false
+    },
+    "window_start": {
+      "type": "string",
+      "description": "Start date (YYYY-MM-DD) for the sampling window.",
+      "example": "2026-01-20",
+      "unit": null,
+      "nullable": false
+    },
+    "window_end": {
+      "type": "string",
+      "description": "End date (YYYY-MM-DD) for the sampling window.",
+      "example": "2026-01-21",
+      "unit": null,
+      "nullable": false
+    },
+    "norms_version": {
+      "type": "string",
+      "description": "Norms dataset version label.",
+      "example": "whitepaper-2026-norms.v1",
+      "unit": null,
+      "nullable": false
+    }
+  }
+}
