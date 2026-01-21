@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MBTI 常模白皮书 2026（中国大陆，zh-CN）</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f5f0;
+        --ink: #1b1b1b;
+        --muted: #5a5a5a;
+        --accent: #1c4d5c;
+        --table-bg: #ffffff;
+        --rule: #d9d4c7;
+      }
+      body {
+        margin: 0;
+        font-family: "Source Serif 4", "Noto Serif SC", "Songti SC", serif;
+        color: var(--ink);
+        background: radial-gradient(circle at top, #ffffff 0%, var(--bg) 60%);
+      }
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 48px 24px 64px;
+      }
+      h1 {
+        font-size: 2.2rem;
+        margin: 0 0 8px;
+        color: var(--accent);
+      }
+      h2 {
+        margin-top: 36px;
+        font-size: 1.3rem;
+        border-bottom: 2px solid var(--rule);
+        padding-bottom: 6px;
+      }
+      p {
+        line-height: 1.6;
+      }
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px 24px;
+        background: var(--table-bg);
+        border: 1px solid var(--rule);
+        padding: 16px 20px;
+        margin: 20px 0 12px;
+      }
+      .meta dl {
+        margin: 0;
+      }
+      .meta dt {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .meta dd {
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--table-bg);
+        border: 1px solid var(--rule);
+      }
+      caption {
+        text-align: left;
+        font-weight: 600;
+        padding: 10px 12px;
+      }
+      th, td {
+        border-top: 1px solid var(--rule);
+        padding: 10px 12px;
+        text-align: left;
+        font-size: 0.95rem;
+      }
+      th {
+        background: #efe9dc;
+      }
+      .note {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .list {
+        margin: 8px 0 0;
+        padding-left: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>MBTI 常模白皮书 2026</h1>
+        <p>中国大陆（zh-CN）样本常模，静态 HTML 版本，Table-first。</p>
+      </header>
+
+      <section class="meta" aria-label="元信息块">
+        <dl>
+          <dt>pack_id</dt>
+          <dd>MBTI.cn-mainland.zh-CN.v0.2.1-TEST</dd>
+          <dt>norms_version</dt>
+          <dd>whitepaper-2026-norms.v1</dd>
+          <dt>generated_at</dt>
+          <dd>2026-01-21T15:08:19Z</dd>
+        </dl>
+        <dl>
+          <dt>window_start</dt>
+          <dd>2026-01-20</dd>
+          <dt>window_end</dt>
+          <dd>2026-01-21</dd>
+          <dt>n_total</dt>
+          <dd>47</dd>
+        </dl>
+        <dl>
+          <dt>algorithm</dt>
+          <dd>percentile rank definition (cumulative &lt;= counts)</dd>
+          <dt>rank_definition</dt>
+          <dd>P = count(score &lt;= s) / N; percentile = P * 100</dd>
+        </dl>
+      </section>
+
+      <h2>结论摘要</h2>
+      <p>
+        本白皮书基于样本量 N=47，时间窗 2026-01-20 至 2026-01-21，
+        版本 whitepaper-2026-norms.v1。核心指标（EI/SN/TF/JP/AT）在该样本中
+        score=50 对应 percentile=100.0（累计小于等于口径）。
+      </p>
+
+      <h2>样本与方法</h2>
+      <p>
+        数据来源：<code>research/whitepaper-2026-norms/data/norms.json</code>（生成时间 2026-01-21T15:08:19Z）。
+        纳入：在时间窗 2026-01-20~2026-01-21 内由数据管线计入 N 的样本；
+        排除：不满足完整性或重复的样本（以当期生成规则为准）。
+        percentile 口径：P = count(score &lt;= s) / N，percentile = P * 100。
+      </p>
+
+      <h2>核心表格</h2>
+      <table>
+        <caption>常模核心指标（从 norms.json 静态注入）</caption>
+        <thead>
+          <tr>
+            <th>metric_key</th>
+            <th>score</th>
+            <th>percentile</th>
+            <th>n</th>
+            <th>window_start</th>
+            <th>window_end</th>
+            <th>norms_version</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EI</td>
+            <td>50</td>
+            <td>100.0</td>
+            <td>47</td>
+            <td>2026-01-20</td>
+            <td>2026-01-21</td>
+            <td>whitepaper-2026-norms.v1</td>
+          </tr>
+          <tr>
+            <td>SN</td>
+            <td>50</td>
+            <td>100.0</td>
+            <td>47</td>
+            <td>2026-01-20</td>
+            <td>2026-01-21</td>
+            <td>whitepaper-2026-norms.v1</td>
+          </tr>
+          <tr>
+            <td>TF</td>
+            <td>50</td>
+            <td>100.0</td>
+            <td>47</td>
+            <td>2026-01-20</td>
+            <td>2026-01-21</td>
+            <td>whitepaper-2026-norms.v1</td>
+          </tr>
+          <tr>
+            <td>JP</td>
+            <td>50</td>
+            <td>100.0</td>
+            <td>47</td>
+            <td>2026-01-20</td>
+            <td>2026-01-21</td>
+            <td>whitepaper-2026-norms.v1</td>
+          </tr>
+          <tr>
+            <td>AT</td>
+            <td>50</td>
+            <td>100.0</td>
+            <td>47</td>
+            <td>2026-01-20</td>
+            <td>2026-01-21</td>
+            <td>whitepaper-2026-norms.v1</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">
+        字段回退策略：若 items 行缺少 n / window_start / window_end / norms_version，
+        则回退使用 meta 中对应字段。
+      </p>
+
+      <h2>限制与偏差</h2>
+      <ul class="list">
+        <li>自选择偏差：自愿参与样本可能与总体分布不同。</li>
+        <li>代表性限制：样本量与覆盖范围有限，难代表全部人群。</li>
+        <li>时间窗漂移：短窗口可能受季节、事件或渠道结构影响。</li>
+        <li>模型与量表限制：量表设计与算法假设可能引入系统偏差。</li>
+        <li>小样本波动：N=47 下 percentile 对单点变化更敏感。</li>
+      </ul>
+
+      <h2>更正渠道</h2>
+      <p>
+        可追踪更正渠道：GitHub Issues（fap-api 仓库）或邮箱 research@example.com。
+      </p>
+
+      <h2>引用方式</h2>
+      <p>
+        引用建议：MBTI 常模白皮书（whitepaper-2026-norms.v1），
+        时间窗 2026-01-20~2026-01-21，访问日期 2026-01-21。
+      </p>
+    </main>
+
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "MBTI 常模白皮书 2026（中国大陆，zh-CN）",
+          "datePublished": "2026-01-21T15:08:19Z",
+          "dateModified": "2026-01-21T15:08:19Z",
+          "author": {
+            "@type": "Organization",
+            "name": "FAP Research",
+            "affiliation": "FAP"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "FAP",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "corrections",
+              "email": "research@example.com"
+            }
+          },
+          "version": "whitepaper-2026-norms.v1",
+          "inLanguage": "zh-CN",
+          "correctionPolicy": "Corrections accepted via fap-api GitHub Issues or research@example.com.",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "./index.html"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Dataset",
+          "name": "MBTI 常模数据集（whitepaper-2026-norms.v1）",
+          "description": "MBTI 指标常模数据集（EI/SN/TF/JP/AT）。N=47，时间窗 2026-01-20 至 2026-01-21。",
+          "license": "NOASSERTION",
+          "creator": {
+            "@type": "Organization",
+            "name": "FAP Research",
+            "affiliation": "FAP"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "FAP"
+          },
+          "version": "whitepaper-2026-norms.v1",
+          "temporalCoverage": "2026-01-20/2026-01-21",
+          "distribution": [
+            {
+              "@type": "DataDownload",
+              "contentUrl": "./data/norms.json",
+              "encodingFormat": "application/json"
+            },
+            {
+              "@type": "DataDownload",
+              "contentUrl": "./data/schema.json",
+              "encodingFormat": "application/json"
+            }
+          ]
+        }
+      ]
+    </script>
+  </body>
+</html>
