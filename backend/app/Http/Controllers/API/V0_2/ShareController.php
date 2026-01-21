@@ -292,7 +292,16 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
     private function allowedReportKeys(): array
     {
         $keys = config('report.share_report_allowed_keys', []);
-        return is_array($keys) ? $keys : [];
+        $keys = is_array($keys) ? $keys : [];
+
+        // ✅ content_graph 打开时：share_click 响应允许透传 recommended_reads
+        if ((bool) env('CONTENT_GRAPH_ENABLED', false)) {
+            if (!in_array('recommended_reads', $keys, true)) {
+                $keys[] = 'recommended_reads';
+            }
+        }
+
+        return $keys;
     }
 
     /**
