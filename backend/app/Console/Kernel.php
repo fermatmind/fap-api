@@ -11,6 +11,7 @@ use App\Console\Commands\FapSelfCheck;
 use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
 use App\Console\Commands\FapEmailOutboxSend;
+use App\Console\Commands\MetricsWeeklyValidity;
 
 class Kernel extends ConsoleKernel
 {
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
         FapSelfCheck::class,
         FapValidateReport::class,
         FapWeeklyReport::class,
+        MetricsWeeklyValidity::class,
     ];
 
     /**
