@@ -131,6 +131,7 @@ need_cmd php
 need_cmd grep
 need_cmd sed
 need_cmd lsof
+need_cmd cmp
 
 fail() { echo "[CI][FAIL] $*" >&2; exit 1; }
 
@@ -151,6 +152,24 @@ wait_health() {
     sleep 0.2
   done
   return 1
+}
+
+fetch_authed_json() {
+  local url="$1"
+  local out="$2"
+  local http
+  http="$(curl -sS -L -o "$out" -w "%{http_code}" "${CURL_AUTH[@]}" "$url" || true)"
+  if [[ "$http" != "200" && "$http" != "201" ]]; then
+    echo "[CI][FAIL] fetch failed: HTTP=$http url=$url" >&2
+    echo "---- body (first 800 bytes) ----" >&2
+    head -c 800 "$out" 2>/dev/null || true
+    echo >&2
+    exit 16
+  fi
+  if [[ ! -s "$out" ]]; then
+    echo "[CI][FAIL] empty response body: $url" >&2
+    exit 16
+  fi
 }
 
 # -----------------------------
@@ -186,6 +205,133 @@ if [[ -z "$PACK_DIR" ]]; then
   echo "[CI][WARN] PACK_DIR not found (both canonical and legacy alias missing). MVP check will be skipped."
 else
   echo "[CI] PACK_DIR=$PACK_DIR"
+fi
+
+# -----------------------------
+# ContentGraph inventory (role_cards / strategy_cards / reads)
+# -----------------------------
+if [[ -z "${PACK_DIR:-}" ]]; then
+  echo "[CI][FAIL] PACK_DIR missing; cannot compute content graph inventory" >&2
+  exit 40
+fi
+
+INVENTORY_JSON="$RUN_DIR/content_graph_inventory.json"
+ROLE_DIR="$PACK_DIR/role_cards"
+STRATEGY_DIR="$PACK_DIR/strategy_cards"
+READS_DIR="$PACK_DIR/reads"
+
+for d in "$ROLE_DIR" "$STRATEGY_DIR" "$READS_DIR"; do
+  [[ -d "$d" ]] || fail "missing content dir: $d"
+done
+
+# counts（不使用 mapfile/数组，兼容 bash 3.x）
+role_count="$(find "$ROLE_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+strategy_count="$(find "$STRATEGY_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+reads_count="$(find "$READS_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+
+if [[ "$role_count" == "0" ]]; then fail "no role_cards json files found in $ROLE_DIR"; fi
+if [[ "$strategy_count" == "0" ]]; then fail "no strategy_cards json files found in $STRATEGY_DIR"; fi
+if [[ "$reads_count" == "0" ]]; then fail "no reads json files found in $READS_DIR"; fi
+
+# role_type_codes：兼容两种字段：type_code / type_codes[]
+role_type_codes="$(jq -r '(.type_code? // empty), (.type_codes[]? // empty)' "$ROLE_DIR"/*.json \
+  | sed '/^$/d' | sort -u)"
+
+expected_type_codes="$(
+  cat <<'EOF'
+INTJ-A
+INTJ-T
+INTP-A
+INTP-T
+ENTJ-A
+ENTJ-T
+ENTP-A
+ENTP-T
+INFJ-A
+INFJ-T
+INFP-A
+INFP-T
+ENFJ-A
+ENFJ-T
+ENFP-A
+ENFP-T
+ISTJ-A
+ISTJ-T
+ISFJ-A
+ISFJ-T
+ESTJ-A
+ESTJ-T
+ESFJ-A
+ESFJ-T
+ISTP-A
+ISTP-T
+ISFP-A
+ISFP-T
+ESTP-A
+ESTP-T
+ESFP-A
+ESFP-T
+EOF
+)"
+
+missing_lines=""
+while IFS= read -r code; do
+  [[ -z "$code" ]] && continue
+  if ! printf '%s\n' "$role_type_codes" | grep -Fxq "$code"; then
+    missing_lines+="${code}"$'\n'
+  fi
+done <<<"$expected_type_codes"
+
+# samples（固定排序取前 N；不使用数组变量）
+role_sample_json="$(jq -r '.id' "$ROLE_DIR"/*.json | sort | head -n 5 | jq -R . | jq -s .)"
+strategy_sample_json="$(jq -r '.id' "$STRATEGY_DIR"/*.json | sort | head -n 5 | jq -R . | jq -s .)"
+read_sample_json="$(jq -r '.id' "$READS_DIR"/*.json | sort | head -n 8 | jq -R . | jq -s .)"
+missing_json="$(printf '%s' "$missing_lines" | sed '/^$/d' | jq -R . | jq -s .)"
+
+jq -n \
+  --argjson role_count "$role_count" \
+  --argjson strategy_count "$strategy_count" \
+  --argjson reads_count "$reads_count" \
+  --argjson missing_role_codes "$missing_json" \
+  --argjson role_sample "$role_sample_json" \
+  --argjson strategy_sample "$strategy_sample_json" \
+  --argjson read_sample "$read_sample_json" \
+  '{
+    counts: {
+      role_cards: $role_count,
+      strategy_cards: $strategy_count,
+      reads: $reads_count
+    },
+    missing: {
+      role_cards: $missing_role_codes
+    },
+    sample: {
+      role_cards: $role_sample,
+      strategy_cards: $strategy_sample,
+      reads: $read_sample
+    }
+  }' >"$INVENTORY_JSON"
+
+echo "[CI] content graph inventory -> $INVENTORY_JSON"
+echo "[CI] counts: role_cards=$role_count strategy_cards=$strategy_count reads=$reads_count"
+
+missing_count="$(printf '%s' "$missing_lines" | sed '/^$/d' | wc -l | tr -d ' ')"
+if [[ "$missing_count" != "0" ]]; then
+  echo "[CI][FAIL] missing role_card type_codes:" >&2
+  printf '%s' "$missing_lines" >&2
+  exit 41
+fi
+if (( role_count != 32 )); then
+  echo "[CI][FAIL] role_cards count=$role_count (expect 32)" >&2
+  exit 42
+fi
+if (( strategy_count < 6 )); then
+  echo "[CI][FAIL] strategy_cards count=$strategy_count (expect >=6)" >&2
+  exit 43
+fi
+if (( reads_count < 60 )); then
+  echo "[CI][FAIL] reads count=$reads_count (expect >=60)" >&2
+  exit 44
 fi
 
 # -----------------------------
@@ -348,6 +494,87 @@ echo "[CI] running verify_mbti.sh (with FM_TOKEN)"
 API="$API" REGION="$REGION" LOCALE="$LOCALE" RUN_DIR="$RUN_DIR" FM_TOKEN="$FM_TOKEN" \
   bash "$SCRIPT_DIR/verify_mbti.sh"
 echo "[CI] verify_mbti OK ✅"
+
+# -----------------------------
+# ContentGraph: stability / rollback verification
+# -----------------------------
+RR_DIR="$RUN_DIR/content_graph"
+mkdir -p "$RR_DIR"
+ATTEMPT_ID_FILE="$RUN_DIR/attempt_id.txt"
+if [[ ! -s "$ATTEMPT_ID_FILE" ]]; then
+  fail "missing attempt_id file for content_graph checks: $ATTEMPT_ID_FILE"
+fi
+ATTEMPT_ID="$(cat "$ATTEMPT_ID_FILE")"
+REPORT_URL="$API/api/v0.2/attempts/$ATTEMPT_ID/report"
+
+RR_REPORT_1="$RR_DIR/report_rr_1.json"
+RR_REPORT_2="$RR_DIR/report_rr_2.json"
+RR_LIST_1="$RR_DIR/recommended_reads_1.json"
+RR_LIST_2="$RR_DIR/recommended_reads_2.json"
+RR_COMPARE="$RR_DIR/recommended_reads_compare.json"
+RR_ROLLBACK="$RR_DIR/recommended_reads_rollback.json"
+
+if [[ "${CONTENT_GRAPH_ENABLED:-0}" == "1" ]]; then
+  echo "[CI] content_graph stability: recommended_reads (CONTENT_GRAPH_ENABLED=1)"
+  fetch_authed_json "$REPORT_URL" "$RR_REPORT_1"
+  fetch_authed_json "$REPORT_URL" "$RR_REPORT_2"
+
+  for f in "$RR_REPORT_1" "$RR_REPORT_2"; do
+    if ! jq -e '.report.recommended_reads | type=="array"' "$f" >/dev/null 2>&1; then
+      fail "report.recommended_reads missing or not array (CONTENT_GRAPH_ENABLED=1). file=$f"
+    fi
+
+    rr_count="$(jq -r '.report.recommended_reads | length' "$f")"
+    if (( rr_count < 3 || rr_count > 6 )); then
+      fail "report.recommended_reads count out of range: $rr_count (expect 3-6). file=$f"
+    fi
+
+    if [[ "$f" == "$RR_REPORT_1" ]]; then
+      jq -c '[.report.recommended_reads[] | {id,type,slug,why,show_order}]' "$f" >"$RR_LIST_1"
+    else
+      jq -c '[.report.recommended_reads[] | {id,type,slug,why,show_order}]' "$f" >"$RR_LIST_2"
+    fi
+done
+
+  first_json="$(cat "$RR_LIST_1")"
+  second_json="$(cat "$RR_LIST_2")"
+  jq -n --argjson first "$first_json" --argjson second "$second_json" \
+      '{first:$first, second:$second}' >"$RR_COMPARE"
+
+    if ! cmp -s "$RR_LIST_1" "$RR_LIST_2"; then
+      fail "recommended_reads unstable across calls (see $RR_COMPARE)"
+    fi
+
+  echo "[CI] content_graph stability OK (recommended_reads count=$rr_count)"
+else
+  echo "[CI] content_graph rollback: recommended_reads disabled (CONTENT_GRAPH_ENABLED=0)"
+  REPORT_JSON="$RUN_DIR/report.json"
+  if [[ ! -s "$REPORT_JSON" ]]; then
+    fetch_authed_json "$REPORT_URL" "$RR_REPORT_1"
+    REPORT_JSON="$RR_REPORT_1"
+  fi
+
+  if jq -e '.report | has("recommended_reads") and (.recommended_reads | type!="array" and . != null)' "$REPORT_JSON" >/dev/null 2>&1; then
+    fail "report.recommended_reads present but not array (CONTENT_GRAPH_ENABLED=0). file=$REPORT_JSON"
+  fi
+  if jq -e '.report.recommended_reads? | type=="array" and length>0' "$REPORT_JSON" >/dev/null 2>&1; then
+    fail "report.recommended_reads should be empty or missing when CONTENT_GRAPH_ENABLED=0. file=$REPORT_JSON"
+  fi
+
+  rr_len="$(jq -r '.report.recommended_reads? | length // 0' "$REPORT_JSON")"
+  has_rr="false"
+  if jq -e '.report | has("recommended_reads")' "$REPORT_JSON" >/dev/null 2>&1; then
+    has_rr="true"
+  fi
+
+  jq -n \
+    --argjson has_rr "$has_rr" \
+    --argjson rr_len "$rr_len" \
+    '{has_recommended_reads: $has_rr, recommended_reads_length: $rr_len}' \
+    >"$RR_ROLLBACK"
+
+  echo "[CI] content_graph rollback OK (recommended_reads length=$rr_len)"
+fi
 
 # -----------------------------
 # Events acceptance (M3)
