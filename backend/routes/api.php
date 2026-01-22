@@ -12,6 +12,7 @@ use App\Http\Controllers\API\V0_2\ClaimController;
 use App\Http\Controllers\API\V0_2\IdentityController;
 use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\NormsController;
+use App\Http\Controllers\API\V0_2\PaymentsController;
 use App\Http\Controllers\API\V0_2\ShareController;
 use App\Http\Controllers\API\V0_2\ValidityFeedbackController;
 
@@ -89,5 +90,13 @@ Route::prefix("v0.2")->group(function () {
     Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
     Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
     Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
+
+    // ✅ Payments (v0.2)
+    Route::prefix("payments")->group(function () {
+        Route::post("/orders", [PaymentsController::class, "createOrder"]);
+        Route::post("/orders/{id}/mark_paid", [PaymentsController::class, "markPaid"]);
+        Route::post("/orders/{id}/fulfill", [PaymentsController::class, "fulfill"]);
+        Route::get("/me/benefits", [PaymentsController::class, "meBenefits"]);
+    });
 });
 });
