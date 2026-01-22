@@ -74,6 +74,9 @@ Route::prefix("v0.2")->group(function () {
     // 9) Norms percentile (stub controller, implemented later)
     Route::get("/norms/percentile", [NormsController::class, "percentile"]);
 
+    // ✅ Payments Webhook (mock provider, public)
+    Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
+
     // =========================================================
     // ✅ Step 1：最小后端鉴权（只 gate 你指定的 3 个接口）
     // 关键：Laravel 12 里你 alias 还没注册成功，所以这里直接用类名

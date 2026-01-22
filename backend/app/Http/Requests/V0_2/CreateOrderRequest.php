@@ -19,12 +19,16 @@ class CreateOrderRequest extends FormRequest
         }
 
         $currency = strtoupper(trim((string) $this->input('currency', 'CNY')));
+        $provider = strtolower(trim((string) $this->input('provider', '')));
+        $providerOrderId = trim((string) $this->input('provider_order_id', ''));
 
         $this->merge([
             'item_sku' => trim((string) $this->input('item_sku', '')),
             'currency' => $currency !== '' ? $currency : 'CNY',
             'amount_total' => $amount,
             'device_id' => $this->input('device_id', $this->header('X-Device-Id', null)),
+            'provider' => $provider !== '' ? $provider : null,
+            'provider_order_id' => $providerOrderId !== '' ? $providerOrderId : null,
         ]);
     }
 
@@ -35,6 +39,8 @@ class CreateOrderRequest extends FormRequest
             'currency' => ['required', 'string', 'max:8'],
             'amount_total' => ['required', 'integer', 'min:1'],
             'device_id' => ['nullable', 'string', 'max:128'],
+            'provider' => ['nullable', 'string', 'max:32'],
+            'provider_order_id' => ['nullable', 'string', 'max:128'],
         ];
     }
 
@@ -56,6 +62,20 @@ class CreateOrderRequest extends FormRequest
     public function deviceId(): ?string
     {
         $v = $this->validated()['device_id'] ?? null;
+        $v = is_string($v) ? trim($v) : null;
+        return $v !== '' ? $v : null;
+    }
+
+    public function provider(): ?string
+    {
+        $v = $this->validated()['provider'] ?? null;
+        $v = is_string($v) ? trim($v) : null;
+        return $v !== '' ? $v : null;
+    }
+
+    public function providerOrderId(): ?string
+    {
+        $v = $this->validated()['provider_order_id'] ?? null;
         $v = is_string($v) ? trim($v) : null;
         return $v !== '' ? $v : null;
     }

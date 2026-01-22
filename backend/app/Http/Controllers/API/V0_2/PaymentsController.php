@@ -26,6 +26,8 @@ class PaymentsController extends Controller
             'currency' => $request->currency(),
             'amount_total' => $request->amountTotal(),
             'device_id' => $request->deviceId(),
+            'provider' => $request->provider(),
+            'provider_order_id' => $request->providerOrderId(),
             'request_id' => $request->requestId(),
             'ip' => (string) ($request->ip() ?? ''),
         ], [
@@ -158,9 +160,93 @@ class PaymentsController extends Controller
         ]);
     }
 
+    public function webhookMock(Request $request)
+    {
+        if (!$this->paymentsEnabled()) {
+            return $this->paymentsDisabledResponse();
+        }
+
+        if (!$this->webhookEnabled()) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'WEBHOOK_DISABLED',
+                'message' => 'Webhook is disabled.',
+            ], 404);
+        }
+
+        $providerEventId = $this->trimString($request->input('provider_event_id', ''));
+        $providerOrderId = $this->trimString($request->input('provider_order_id', ''));
+        $eventType = $this->trimString($request->input('event_type', ''));
+        $currency = strtoupper($this->trimString($request->input('currency', 'CNY')));
+        $amountTotal = $request->input('amount_total', null);
+        $signature = $this->trimString($request->input('signature', ''));
+
+        $missing = [];
+        if ($providerEventId === '') {
+            $missing[] = 'provider_event_id';
+        }
+        if ($providerOrderId === '') {
+            $missing[] = 'provider_order_id';
+        }
+        if ($eventType === '') {
+            $missing[] = 'event_type';
+        }
+        if (!is_numeric($amountTotal)) {
+            $missing[] = 'amount_total';
+        }
+
+        if ($missing !== []) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'INVALID_PAYLOAD',
+                'message' => 'missing or invalid fields.',
+                'fields' => $missing,
+            ], 422);
+        }
+
+        $payload = [
+            'provider_event_id' => $providerEventId,
+            'provider_order_id' => $providerOrderId,
+            'event_type' => $eventType,
+            'currency' => $currency !== '' ? $currency : 'CNY',
+            'amount_total' => (int) $amountTotal,
+            'signature' => $signature,
+        ];
+
+        $service = app(PaymentService::class);
+        $result = $service->handleWebhookMock($payload, [
+            'signature_ok' => $signature === 'dev',
+            'request_id' => $this->requestId($request),
+            'ip' => (string) ($request->ip() ?? ''),
+            'headers_digest' => $this->headersDigest($request),
+        ]);
+
+        if (!$result['ok']) {
+            return response()->json([
+                'ok' => false,
+                'error' => $result['error'] ?? 'WEBHOOK_FAILED',
+                'message' => $result['message'] ?? 'webhook handling failed.',
+            ], (int) ($result['status'] ?? 500));
+        }
+
+        return response()->json([
+            'ok' => true,
+            'idempotent' => (bool) ($result['idempotent'] ?? false),
+            'signature_ok' => (bool) ($result['signature_ok'] ?? false),
+            'handle_status' => $result['handle_status'] ?? null,
+            'order_id' => $result['order_id'] ?? null,
+            'order_status' => $result['order_status'] ?? null,
+        ]);
+    }
+
     private function paymentsEnabled(): bool
     {
         return $this->boolish(env('PAYMENTS_ENABLED', '0'));
+    }
+
+    private function webhookEnabled(): bool
+    {
+        return $this->boolish(env('WEBHOOK_ENABLED', '0'));
     }
 
     private function devModeAllowed(): bool
@@ -243,6 +329,29 @@ class PaymentsController extends Controller
         $v = $request->header('X-Request-Id', $request->input('request_id', null));
         $v = is_string($v) ? trim($v) : null;
         return $v !== '' ? $v : null;
+    }
+
+    private function headersDigest(Request $request): ?string
+    {
+        $headers = $request->headers->all();
+        if (!$headers) {
+            return null;
+        }
+
+        $encoded = json_encode($headers, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (!is_string($encoded)) {
+            return null;
+        }
+
+        return hash('sha256', $encoded);
+    }
+
+    private function trimString($value): string
+    {
+        if (!is_string($value)) {
+            return '';
+        }
+        return trim($value);
     }
 
     private function boolish($v): bool
