@@ -25,8 +25,8 @@ class PaymentService
             'user_id' => $this->trimOrNull($actor['user_id'] ?? null),
             'anon_id' => $this->trimOrNull($actor['anon_id'] ?? null),
             'device_id' => $this->trimOrNull($data['device_id'] ?? null),
-            'provider' => 'internal',
-            'provider_order_id' => null,
+            'provider' => $this->trimOrNull($data['provider'] ?? null) ?: 'internal',
+            'provider_order_id' => $this->trimOrNull($data['provider_order_id'] ?? null),
             'status' => 'pending',
             'currency' => (string) ($data['currency'] ?? 'CNY'),
             'amount_total' => (int) ($data['amount_total'] ?? 0),
@@ -250,6 +250,157 @@ class PaymentService
         ];
     }
 
+    public function handleWebhookMock(array $payload, array $context = []): array
+    {
+        if (!Schema::hasTable('payment_events')) {
+            return $this->tableMissing('payment_events');
+        }
+        if (!Schema::hasTable('orders')) {
+            return $this->tableMissing('orders');
+        }
+
+        $providerEventId = $this->trimOrNull($payload['provider_event_id'] ?? null);
+        if (!$providerEventId) {
+            return $this->invalid('MISSING_EVENT_ID', 'provider_event_id missing.');
+        }
+
+        $providerOrderId = $this->trimOrNull($payload['provider_order_id'] ?? null);
+        if (!$providerOrderId) {
+            return $this->invalid('MISSING_ORDER_ID', 'provider_order_id missing.');
+        }
+
+        $eventType = $this->trimOrNull($payload['event_type'] ?? null);
+        if (!$eventType) {
+            return $this->invalid('MISSING_EVENT_TYPE', 'event_type missing.');
+        }
+
+        $signatureOk = (bool) ($context['signature_ok'] ?? false);
+        return DB::transaction(function () use ($providerEventId, $providerOrderId, $eventType, $signatureOk, $payload, $context) {
+            $order = DB::table('orders')
+                ->where('provider_order_id', $providerOrderId)
+                ->lockForUpdate()
+                ->first();
+
+            $now = now();
+            if (!$order) {
+                return [
+                    'ok' => false,
+                    'status' => 404,
+                    'error' => 'ORDER_NOT_FOUND',
+                    'message' => 'order not found.',
+                ];
+            }
+
+            $orderId = $order->id;
+            $handleStatus = 'ok';
+
+            $eventRow = [
+                'id' => (string) Str::uuid(),
+                'provider' => 'mock',
+                'provider_event_id' => $providerEventId,
+                'order_id' => $orderId,
+                'event_type' => $eventType,
+                'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'signature_ok' => $signatureOk,
+                'handled_at' => null,
+                'handle_status' => null,
+                'request_id' => $this->trimOrNull($context['request_id'] ?? null),
+                'ip' => $this->trimOrNull($context['ip'] ?? null),
+                'headers_digest' => $this->trimOrNull($context['headers_digest'] ?? null),
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
+            $inserted = DB::table('payment_events')->insertOrIgnore($eventRow);
+            if ((int) $inserted === 0) {
+                return [
+                    'ok' => true,
+                    'idempotent' => true,
+                    'signature_ok' => $signatureOk,
+                    'provider_event_id' => $providerEventId,
+                ];
+            }
+
+            if (!$signatureOk) {
+                DB::table('payment_events')
+                    ->where('provider_event_id', $providerEventId)
+                    ->update([
+                        'handled_at' => $now,
+                        'handle_status' => 'signature_invalid',
+                        'updated_at' => $now,
+                    ]);
+
+                return [
+                    'ok' => true,
+                    'idempotent' => false,
+                    'signature_ok' => false,
+                    'handle_status' => 'signature_invalid',
+                ];
+            }
+
+            if ($eventType === 'payment_succeeded') {
+                if ($order->status === 'pending') {
+                    DB::table('orders')
+                        ->where('id', $orderId)
+                        ->update([
+                            'status' => 'paid',
+                            'paid_at' => $now,
+                            'updated_at' => $now,
+                        ]);
+                }
+
+                if (in_array($order->status, ['pending', 'paid', 'fulfilled'], true)) {
+                    $actorUserId = $this->trimOrNull($order->user_id ?? null);
+                    $actorAnonId = $this->trimOrNull($order->anon_id ?? null);
+                    $actorId = $actorUserId ?? $actorAnonId ?? '';
+
+                    $fulfillResult = $this->fulfill($orderId, $actorId, $actorAnonId);
+                    if (!$fulfillResult['ok']) {
+                        $handleStatus = 'fulfill_failed';
+                    }
+                } else {
+                    $handleStatus = 'payment_ignored';
+                }
+            } elseif ($eventType === 'refund_succeeded') {
+                if (in_array($order->status, ['paid', 'fulfilled'], true)) {
+                    DB::table('orders')
+                        ->where('id', $orderId)
+                        ->update([
+                            'status' => 'refunded',
+                            'refunded_at' => $now,
+                            'updated_at' => $now,
+                        ]);
+                    $handleStatus = 'refunded';
+                } elseif ($order->status === 'refunded') {
+                    $handleStatus = 'already_refunded';
+                } else {
+                    $handleStatus = 'refund_ignored';
+                }
+            } else {
+                $handleStatus = 'event_type_ignored';
+            }
+
+            DB::table('payment_events')
+                ->where('provider_event_id', $providerEventId)
+                ->update([
+                    'handled_at' => $now,
+                    'handle_status' => $handleStatus,
+                    'updated_at' => $now,
+                ]);
+
+            $order = DB::table('orders')->where('id', $orderId)->first();
+
+            return [
+                'ok' => true,
+                'idempotent' => false,
+                'signature_ok' => $signatureOk,
+                'handle_status' => $handleStatus,
+                'order_id' => $orderId,
+                'order_status' => $order->status ?? null,
+            ];
+        });
+    }
+
     private function orderBelongsToActor(object $order, ?string $userId, ?string $anonId): bool
     {
         $userId = $this->trimOrNull($userId);
@@ -301,6 +452,16 @@ class PaymentService
         return [
             'ok' => false,
             'status' => 409,
+            'error' => $error,
+            'message' => $message,
+        ];
+    }
+
+    private function invalid(string $error, string $message): array
+    {
+        return [
+            'ok' => false,
+            'status' => 422,
             'error' => $error,
             'message' => $message,
         ];
