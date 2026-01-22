@@ -98,14 +98,19 @@ while IFS= read -r file; do
       collect_strings
     ' "$file")
 
-    if printf "%s" "$text_for_scan" | grep -Eq '100%准确|保证|绝对|一定会|完全正确'; then
+    # forbidden_absolutism: 不裸禁“绝对”，只匹配更具体的“绝对准确”等短语
+    if printf "%s" "$text_for_scan" | grep -Eq '100%准确|绝对准确|完全正确|保证有效|一定会成功'; then
       reasons+=("forbidden_absolutism")
       file_fail=1
     fi
-    if printf "%s" "$text_for_scan" | grep -Eq '抑郁症|焦虑症|诊断|治疗|处方|替代医生'; then
+
+    # forbidden_medical: 移除裸“诊断”匹配，改为更具体的“诊断结论/医疗动作”短语
+    # 这样 “不构成诊断” 不会被误判
+    if printf "%s" "$text_for_scan" | grep -Eq '抑郁症|焦虑症|确诊|诊断为|处方|替代医生|治疗方案'; then
       reasons+=("forbidden_medical")
       file_fail=1
     fi
+
     if printf "%s" "$text_for_scan" | grep -Eq '作为一个AI语言模型|我无法|很抱歉'; then
       reasons+=("forbidden_ai_phrases")
       file_fail=1
@@ -175,7 +180,6 @@ PY
     echo "FAIL $file - ${reasons[*]}"
     fail_count=$((fail_count + 1))
   fi
-
 
 done < <(find "$TARGET_DIR" -type f -name "*.json" | sort)
 
