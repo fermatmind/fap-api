@@ -1,0 +1,29 @@
+name: Deploy Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up SSH key
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # SSH test - connect to the server
+      - name: Test SSH connection
+        run: ssh -o StrictHostKeyChecking=no deploy@122.152.221.126 "echo 'Connection successful!'"
+
+      # Deploy: Pull code and restart services
+      - name: Pull code and deploy
+        run: |
+          ssh deploy@122.152.221.126 "cd /var/www/fap-api/current && git pull origin main && sudo systemctl restart php8.4-fpm"
