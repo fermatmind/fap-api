@@ -23,6 +23,14 @@ trait WritesEvents
             $attemptId = $extra['attempt_id'] ?? null;
 
             // -----------------------------
+            // ✅ fm_user_id from middleware (FmTokenAuth)
+            // -----------------------------
+            $fmUserId = trim((string) $request->attributes->get('fm_user_id', ''));
+            if ($fmUserId === '') {
+                $fmUserId = null;
+            }
+
+            // -----------------------------
             // Read headers (M3 funnel)
             // -----------------------------
             $hExperiment     = trim((string) ($request->header('X-Experiment') ?? ''));
@@ -179,6 +187,12 @@ trait WritesEvents
                     // ✅ 同步覆盖 events 表列（脚本可能查列）
                     $colChanged = false;
 
+                    // ✅✅ 关键：回填 events.user_id（/me/attempts 等依赖 fm_user_id 的链路）
+                    if ($fmUserId !== null && (string)($existing->user_id ?? '') !== (string)$fmUserId) {
+                        $existing->user_id = (string)$fmUserId;
+                        $colChanged = true;
+                    }
+
                     $inChannel = (string)($incoming['channel'] ?? '');
                     if ($inChannel !== '' && (string)($existing->channel ?? '') !== $inChannel) {
                         $existing->channel = $inChannel;
@@ -244,7 +258,7 @@ trait WritesEvents
             Event::create([
                 'id'              => (string) Str::uuid(),
                 'event_code'      => $eventCode,
-                'user_id'         => null,
+                'user_id'         => $fmUserId, // ✅✅ 写入 user_id（来自 FmTokenAuth）
                 'anon_id'         => $anonId,
 
                 'scale_code'      => $extra['scale_code']    ?? null,
