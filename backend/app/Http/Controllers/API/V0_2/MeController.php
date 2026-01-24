@@ -24,8 +24,7 @@ class MeController extends Controller
      * - reads fm_user_id (numeric) and/or anon_id from request attributes
      *
      * Behavior:
-     * - allow both user_id mode and anon_id mode
-     * - query with OR so CI accept_phone (user_id=NULL, anon_id=accept_phone_xxx) is returned
+     * - prefer user_id; fall back to anon_id when user_id is missing
      */
     public function attempts(Request $request)
     {
@@ -47,22 +46,21 @@ class MeController extends Controller
 
         $q = Attempt::query();
 
-        // ✅ 关键：用 OR 组合，兼容多种落库方式
-        $q->where(function ($w) use ($userId, $anonId) {
-            if ($userId !== null) {
-                $w->orWhere('user_id', $userId);
+        if ($userId !== null) {
+            $q->where('user_id', $userId);
+        } else {
+            // user_id 缺失时走 anon_id
+            if (Schema::hasColumn('attempts', 'anon_id')) {
+                $q->where('anon_id', $anonId);
+            } else {
+                // schema 不支持就直接 401（或返回空）
+                return response()->json([
+                    'ok' => false,
+                    'error' => 'INVALID_SCHEMA',
+                    'message' => 'attempts.anon_id column not found.',
+                ], 500);
             }
-
-            if ($anonId !== null) {
-                // 正常匿名链路：attempts.anon_id = anon_id
-                if (Schema::hasColumn('attempts', 'anon_id')) {
-                    $w->orWhere('anon_id', $anonId);
-                }
-
-                // 兼容历史：有人把 anon_id 写到 user_id 字段
-                $w->orWhere('user_id', $anonId);
-            }
-        });
+        }
 
         // order by submitted_at when exists, else created_at
         if (Schema::hasColumn('attempts', 'submitted_at')) {

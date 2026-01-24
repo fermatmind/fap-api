@@ -21,8 +21,8 @@ class FmTokenAuth
      *
      * CI accept_phone 关键点：
      * - token 可能没有 user_id
-     * - token 表里的 anon_id 有时会是数字占位（如 "1"），而真实 anon_id 在请求侧（header/query/body）
-     * - 本中间件会把“更可信的 anon_id”写入 attributes，保证 /me/attempts 能查到 attempt
+     * - anon_id 一律以 token 绑定值为准，避免伪造 request 造成越权
+     * - request 里的 anon_id 仅用于日志/事件 meta
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -77,7 +77,7 @@ class FmTokenAuth
             $request->attributes->set('user_id', $userId);
         }
 
-        // 2) anon_id: prefer token-bound anon_id; when it looks like numeric placeholder, prefer request-provided anon_id
+        // 2) anon_id: always trust token-bound anon_id
         $anonId = $this->resolveBestAnonId($row, $request);
         if ($anonId !== '') {
             if (strlen($anonId) > 128) {
@@ -112,54 +112,23 @@ class FmTokenAuth
 
     private function resolveBestAnonId(object $row, Request $request): string
     {
+        // ✅ 一律以 token 绑定的 anon_id 为准，避免 token + 伪造 anon_id 越权
         $fromToken = '';
         if (property_exists($row, 'anon_id')) {
             $fromToken = trim((string) ($row->anon_id ?? ''));
         }
 
-        // request-side anon_id candidates (CI accept_phone 会带这个)
-        $fromReq = '';
-        $candidates = [
-            (string) $request->header('X-Anon-Id', ''),
-            (string) $request->header('X-Fm-Anon-Id', ''),
-            (string) $request->query('anon_id', ''),
-            (string) $request->input('anon_id', ''),
-        ];
-        foreach ($candidates as $c) {
-            $c = trim($c);
-            if ($c !== '') {
-                $fromReq = $c;
-                break;
-            }
-        }
-
-        // 规则：
-        // - token anon_id 非空 且不是纯数字占位 -> 用 token
-        // - token anon_id 为空 -> 用 request
-        // - token anon_id 是纯数字占位（如 "1"）且 request 有值 -> 用 request
-        // - 其余 -> 用 token
-        $tokenIsNumericPlaceholder = ($fromToken !== '' && preg_match('/^\d+$/', $fromToken) === 1);
-
-        $chosen = '';
-        if ($fromToken !== '' && !$tokenIsNumericPlaceholder) {
-            $chosen = $fromToken;
-        } elseif ($fromToken === '') {
-            $chosen = $fromReq;
-        } elseif ($tokenIsNumericPlaceholder && $fromReq !== '') {
-            $chosen = $fromReq;
-        } else {
-            $chosen = $fromToken;
-        }
+        if ($fromToken === '') return '';
 
         // sanitize blacklist
-        $lower = mb_strtolower($chosen, 'UTF-8');
+        $lower = mb_strtolower($fromToken, 'UTF-8');
         foreach (['todo', 'placeholder', 'fixme', 'tbd', '填这里'] as $bad) {
             if ($bad !== '' && mb_strpos($lower, $bad) !== false) {
                 return '';
             }
         }
 
-        return $chosen;
+        return $fromToken;
     }
 
     private function unauthorizedResponse(): Response
