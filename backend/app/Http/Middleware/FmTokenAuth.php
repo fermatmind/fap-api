@@ -19,6 +19,10 @@ class FmTokenAuth
      * - validate fm_token format
      * - resolve user_id / anon_id from fm_tokens table
      * - attach fm_token / fm_user_id / user_id / anon_id to request attributes
+     *
+     * 关键约束：
+     * - fm_user_id 只允许真实 user_id（数字 bigint）
+     * - anon_id 只写入 anon_id / fm_anon_id
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -26,7 +30,9 @@ class FmTokenAuth
 
         // Accept: "Bearer <token>"
         $token = '';
+        $hasBearer = false;
         if (preg_match('/^\s*Bearer\s+(.+)\s*$/i', $header, $m)) {
+            $hasBearer = true;
             $token = trim((string) ($m[1] ?? ''));
         }
 
@@ -38,6 +44,12 @@ class FmTokenAuth
                 $token
             );
 
+        // 无 Bearer：直接 401（/me/attempts 等需要门禁）
+        if (!$hasBearer) {
+            return $this->unauthorizedResponse();
+        }
+
+        // 有 Bearer 但格式不对：401
         if (!$isOk) {
             return $this->unauthorizedResponse();
         }
@@ -46,15 +58,12 @@ class FmTokenAuth
         $request->attributes->set('fm_token', $token);
 
         // ✅ Resolve identity from DB: fm_tokens.token -> user_id / anon_id
-        $row = DB::table('fm_tokens')
-            ->where('token', $token)
-            ->first();
-
+        $row = DB::table('fm_tokens')->where('token', $token)->first();
         if (!$row) {
             return $this->unauthorizedResponse();
         }
 
-        // Optional: expires check
+        // expires check
         if (!empty($row->expires_at)) {
             $exp = strtotime((string) $row->expires_at);
             if ($exp !== false && $exp < time()) {
@@ -62,17 +71,7 @@ class FmTokenAuth
             }
         }
 
-        $userId = $this->resolveUserId($row);
-        if ($userId !== '') {
-            // basic sanity
-            if (strlen($userId) > 128) {
-                return $this->unauthorizedResponse();
-            }
-            // ✅✅ 统一挂两份，避免下游读不同 key
-            $request->attributes->set('fm_user_id', $userId);
-            $request->attributes->set('user_id', $userId);
-        }
-
+        // 1) anon_id：永远独立写入
         $anonId = $this->resolveAnonId($row);
         if ($anonId !== '') {
             if (strlen($anonId) > 128) {
@@ -80,6 +79,19 @@ class FmTokenAuth
             }
             $request->attributes->set('anon_id', $anonId);
             $request->attributes->set('fm_anon_id', $anonId);
+        }
+
+        // 2) user_id：只允许数字（bigint unsigned）
+        $userId = $this->resolveUserId($row);
+        if ($userId !== '') {
+            if (strlen($userId) > 32) {
+                return $this->unauthorizedResponse();
+            }
+            if (!ctype_digit($userId) || (int)$userId <= 0) {
+                return $this->unauthorizedResponse();
+            }
+            $request->attributes->set('fm_user_id', $userId);
+            $request->attributes->set('user_id', $userId);
         }
 
         return $next($request);
@@ -102,12 +114,7 @@ class FmTokenAuth
             }
         }
 
-        // 最后兜底：anon_id（仅在确实需要且结构如此时才会返回）
-        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
-            $v = trim((string) ($row->anon_id ?? ''));
-            if ($v !== '') return $v;
-        }
-
+        // ❌ 不再用 anon_id 兜底当 user_id
         return '';
     }
 
