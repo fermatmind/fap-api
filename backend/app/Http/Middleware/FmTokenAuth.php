@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Response;
 
 class FmTokenAuth
@@ -42,11 +41,12 @@ class FmTokenAuth
             return $this->unauthorizedResponse();
         }
 
-        // ✅ Always attach token for downstream use
+        // Always attach token for downstream use
         $request->attributes->set('fm_token', $token);
 
-        // ✅ Resolve identity from DB: fm_tokens.token -> user_id / anon_id
+        // Resolve identity from DB: fm_tokens.token -> user_id / anon_id
         $row = DB::table('fm_tokens')
+            ->select(['user_id', 'anon_id', 'expires_at'])
             ->where('token', $token)
             ->first();
 
@@ -62,61 +62,28 @@ class FmTokenAuth
             }
         }
 
-        $userId = $this->resolveUserId($row);
-        if ($userId !== '') {
-            // basic sanity
-            if (strlen($userId) > 128) {
-                return $this->unauthorizedResponse();
-            }
-            // ✅✅ 统一挂两份，避免下游读不同 key
-            $request->attributes->set('fm_user_id', $userId);
-            $request->attributes->set('user_id', $userId);
+        // user_id must be numeric and > 0 (events.user_id is bigint)
+        $uidRaw = trim((string) ($row->user_id ?? ''));
+        if ($uidRaw === '' || !ctype_digit($uidRaw)) {
+            return $this->unauthorizedResponse();
+        }
+        $uid = (int) $uidRaw;
+        if ($uid <= 0) {
+            return $this->unauthorizedResponse();
         }
 
-        $anonId = $this->resolveAnonId($row);
-        if ($anonId !== '') {
-            if (strlen($anonId) > 128) {
-                return $this->unauthorizedResponse();
-            }
+        // Attach both keys to avoid downstream mismatch
+        $request->attributes->set('fm_user_id', $uid);
+        $request->attributes->set('user_id', $uid);
+
+        // anon_id (optional)
+        $anonId = trim((string) ($row->anon_id ?? ''));
+        if ($anonId !== '' && strlen($anonId) <= 128) {
             $request->attributes->set('anon_id', $anonId);
             $request->attributes->set('fm_anon_id', $anonId);
         }
 
         return $next($request);
-    }
-
-    private function resolveUserId(object $row): string
-    {
-        // 优先：fm_tokens.user_id
-        if (Schema::hasColumn('fm_tokens', 'user_id')) {
-            $v = trim((string) ($row->user_id ?? ''));
-            if ($v !== '') return $v;
-        }
-
-        // 兼容字段（老数据）
-        $candidates = ['uid', 'user_uid', 'user'];
-        foreach ($candidates as $c) {
-            if (property_exists($row, $c)) {
-                $val = trim((string) ($row->{$c} ?? ''));
-                if ($val !== '') return $val;
-            }
-        }
-
-        // 最后兜底：anon_id（仅在确实需要且结构如此时才会返回）
-        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
-            $v = trim((string) ($row->anon_id ?? ''));
-            if ($v !== '') return $v;
-        }
-
-        return '';
-    }
-
-    private function resolveAnonId(object $row): string
-    {
-        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
-            return trim((string) ($row->anon_id ?? ''));
-        }
-        return '';
     }
 
     private function unauthorizedResponse(): Response
