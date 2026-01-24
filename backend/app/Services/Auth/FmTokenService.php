@@ -124,7 +124,7 @@ class FmTokenService
      */
     private function detectUserColumn(): ?string
     {
-        $candidates = ['user_id', 'uid', 'user_uid', 'user', 'anon_id'];
+        $candidates = ['user_id', 'uid', 'user_uid', 'user'];
         foreach ($candidates as $c) {
             if (Schema::hasColumn('fm_tokens', $c)) return $c;
         }
