@@ -48,10 +48,7 @@ Route::prefix("v0.2")->group(function () {
     Route::post("/attempts/start", [MbtiController::class, "startAttempt"]);
 
     // 6) 查询某次测评的分享信息（按你需求：可保持公开/或后续再门禁）
-    Route::get("/attempts/{id}/share",  [MbtiController::class, "getShare"]);
-
-    // ✅ 写入/更新 result（如果你用于内部写入，也可先不门禁；后续再收紧）
-    Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
+    Route::get("/attempts/{id}/share", [MbtiController::class, "getShare"]);
 
     // ✅ 6.5) Ticket Code Lookup（你后续可以选择门禁或不门禁）
     Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
@@ -78,28 +75,32 @@ Route::prefix("v0.2")->group(function () {
     Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
 
     // =========================================================
-    // ✅ Step 1：最小后端鉴权（只 gate 你指定的 3 个接口）
+    // ✅ Step 1：最小后端鉴权（gate 需要 user_id 的接口）
     // 关键：Laravel 12 里你 alias 还没注册成功，所以这里直接用类名
     // =========================================================
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
 
-    // ✅ GET /api/v0.2/me/attempts
-    Route::get("/me/attempts", [MeController::class, "attempts"]);
-    Route::post("/me/email/bind", [MeController::class, "bindEmail"]);
-    Route::post("/me/identities/bind", [IdentityController::class, "bind"]);
-    Route::get("/me/identities", [IdentityController::class, "index"]);
+        // ✅ GET /api/v0.2/me/attempts
+        Route::get("/me/attempts", [MeController::class, "attempts"]);
+        Route::post("/me/email/bind", [MeController::class, "bindEmail"]);
+        Route::post("/me/identities/bind", [IdentityController::class, "bind"]);
+        Route::get("/me/identities", [IdentityController::class, "index"]);
 
-    Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
-    Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
-    Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
-    Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
+        // ✅ 写入/更新 result（需要 fm_user_id 写 events.user_id）
+        Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
 
-    // ✅ Payments (v0.2)
-    Route::prefix("payments")->group(function () {
-        Route::post("/orders", [PaymentsController::class, "createOrder"]);
-        Route::post("/orders/{id}/mark_paid", [PaymentsController::class, "markPaid"]);
-        Route::post("/orders/{id}/fulfill", [PaymentsController::class, "fulfill"]);
-        Route::get("/me/benefits", [PaymentsController::class, "meBenefits"]);
+        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
+        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
+
+        Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
+        Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
+
+        // ✅ Payments (v0.2)
+        Route::prefix("payments")->group(function () {
+            Route::post("/orders", [PaymentsController::class, "createOrder"]);
+            Route::post("/orders/{id}/mark_paid", [PaymentsController::class, "markPaid"]);
+            Route::post("/orders/{id}/fulfill", [PaymentsController::class, "fulfill"]);
+            Route::get("/me/benefits", [PaymentsController::class, "meBenefits"]);
+        });
     });
-});
 });
