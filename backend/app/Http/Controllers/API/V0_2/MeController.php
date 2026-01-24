@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Services\Abuse\RateLimiter;
 use App\Services\Audit\LookupEventLogger;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -19,17 +20,19 @@ class MeController extends Controller
      *  - page (int) default 1
      *  - per_page (int) default 20, max 50
      *
-     * 依赖：FmTokenAuth 中间件
-     * - 期望从 request attributes 读到 fm_user_id / anon_id
-     * - 或者 auth()->id()
+     * Depends on FmTokenAuth middleware:
+     * - reads fm_user_id (numeric) and/or anon_id from request attributes
+     *
+     * Behavior:
+     * - allow both user_id mode and anon_id mode
+     * - query with OR so CI accept_phone (user_id=NULL, anon_id=accept_phone_xxx) is returned
      */
     public function attempts(Request $request)
     {
-        $userId = $this->resolveUserId($request);
-        $anonId = $this->resolveAnonId($request);
+        $userId = $this->resolveUserId($request);   // numeric string or null
+        $anonId = $this->resolveAnonId($request);   // string or null
 
-        // ✅ 允许 anon_id 模式（CI ACCEPT_PHONE 会出现 user_id=NULL 但有 anon_id）
-        if (!$userId && !$anonId) {
+        if ($userId === null && $anonId === null) {
             return response()->json([
                 'ok' => false,
                 'error' => 'unauthorized',
@@ -44,34 +47,24 @@ class MeController extends Controller
 
         $q = Attempt::query();
 
-        // ✅ 同时支持 user_id 与 anon_id
-        // - 有 user_id：where user_id = ...
-        // - 有 anon_id：or where anon_id = ...
-        // - 只有 anon_id：where anon_id = ...
-        $q->where(function ($qq) use ($userId, $anonId) {
-            $has = false;
-
-            if ($userId) {
-                $qq->where('user_id', (string) $userId);
-                $has = true;
+        // ✅ 关键：用 OR 组合，兼容多种落库方式
+        $q->where(function ($w) use ($userId, $anonId) {
+            if ($userId !== null) {
+                $w->orWhere('user_id', $userId);
             }
 
-            if ($anonId) {
-                if ($has) {
-                    $qq->orWhere('anon_id', (string) $anonId);
-                } else {
-                    $qq->where('anon_id', (string) $anonId);
+            if ($anonId !== null) {
+                // 正常匿名链路：attempts.anon_id = anon_id
+                if (Schema::hasColumn('attempts', 'anon_id')) {
+                    $w->orWhere('anon_id', $anonId);
                 }
-                $has = true;
-            }
 
-            // 双空兜底（理论不会走到这里）
-            if (!$has) {
-                $qq->whereRaw('1=0');
+                // 兼容历史：有人把 anon_id 写到 user_id 字段
+                $w->orWhere('user_id', $anonId);
             }
         });
 
-        // 优先按 submitted_at 排序（如果有），否则 created_at
+        // order by submitted_at when exists, else created_at
         if (Schema::hasColumn('attempts', 'submitted_at')) {
             $q->orderByDesc('submitted_at');
         } else {
@@ -89,10 +82,8 @@ class MeController extends Controller
 
         return response()->json([
             'ok' => true,
-            // ✅ 保持兼容：仍返回 user_id 字段（CI 也会打印它），没有就给空字符串
-            'user_id' => $userId ? (string) $userId : '',
-            // ✅ 额外返回 anon_id 便于排查/对齐（不影响旧前端）
-            'anon_id' => $anonId ? (string) $anonId : '',
+            'user_id' => $userId ?? '',
+            'anon_id' => $anonId ?? '',
             'items' => $items,
             'pagination' => [
                 'page' => $p->currentPage(),
@@ -125,7 +116,7 @@ class MeController extends Controller
         }
 
         $userId = $this->resolveUserId($request);
-        if (!$userId) {
+        if ($userId === null) {
             $logger->log('email_bind', false, $request, null, [
                 'error' => 'UNAUTHORIZED',
             ]);
@@ -226,28 +217,31 @@ class MeController extends Controller
 
     private function resolveUserId(Request $request): ?string
     {
-        // 1) middleware 写入 attributes（推荐）
+        // 1) middleware attributes
         $uid = $request->attributes->get('fm_user_id');
-        if (is_string($uid) && trim($uid) !== '') {
-            return trim($uid);
+        if (is_string($uid)) {
+            $uid = trim($uid);
+            if ($uid !== '' && preg_match('/^\d+$/', $uid)) return $uid;
         }
 
-        // 兼容：有些地方可能读 user_id
         $uid2 = $request->attributes->get('user_id');
-        if (is_string($uid2) && trim($uid2) !== '') {
-            return trim($uid2);
+        if (is_string($uid2)) {
+            $uid2 = trim($uid2);
+            if ($uid2 !== '' && preg_match('/^\d+$/', $uid2)) return $uid2;
         }
 
-        // 2) 或者 middleware 登录了 Laravel Auth
-        $authId = auth()->id();
-        if ($authId !== null && (string) $authId !== '') {
-            return (string) $authId;
+        // 2) Laravel Auth (safe fallback)
+        $authId = Auth::id();
+        if ($authId !== null) {
+            $s = trim((string) $authId);
+            if ($s !== '' && preg_match('/^\d+$/', $s)) return $s;
         }
 
-        // 3) 或者 request->user()
+        // 3) request->user()
         $u = $request->user();
         if ($u && isset($u->id)) {
-            return (string) $u->id;
+            $s = trim((string) $u->id);
+            if ($s !== '' && preg_match('/^\d+$/', $s)) return $s;
         }
 
         return null;
@@ -255,40 +249,39 @@ class MeController extends Controller
 
     private function resolveAnonId(Request $request): ?string
     {
-        // 1) middleware 写入 attributes（推荐）
         $anon = $request->attributes->get('anon_id');
-        if (is_string($anon) && trim($anon) !== '') {
-            return trim($anon);
+        if (is_string($anon)) {
+            $anon = trim($anon);
+            if ($anon !== '') return $anon;
         }
 
-        // 兼容：fm_anon_id
         $anon2 = $request->attributes->get('fm_anon_id');
-        if (is_string($anon2) && trim($anon2) !== '') {
-            return trim($anon2);
+        if (is_string($anon2)) {
+            $anon2 = trim($anon2);
+            if ($anon2 !== '') return $anon2;
         }
 
-        // 兼容：请求体/查询（少量场景）
-        $anon3 = $request->input('anon_id');
-        if (is_string($anon3) && trim($anon3) !== '') {
-            return trim($anon3);
-        }
+        // 再兜底：部分客户端会显式传 anon_id
+        $h = trim((string) $request->header('X-Anon-Id', ''));
+        if ($h !== '') return $h;
+
+        $q = trim((string) $request->query('anon_id', ''));
+        if ($q !== '') return $q;
 
         return null;
     }
 
     private function presentAttempt(Attempt $a): array
     {
-        // 只返回对外需要的字段，避免把 answers_json 等隐私字段带出去
         $out = [
-            'attempt_id' => (string) ($a->id ?? ''),
-            'scale_code' => (string) ($a->scale_code ?? 'MBTI'),
+            'attempt_id'    => (string) ($a->id ?? ''),
+            'scale_code'    => (string) ($a->scale_code ?? 'MBTI'),
             'scale_version' => (string) ($a->scale_version ?? 'v0.2'),
-            'type_code' => (string) ($a->type_code ?? ''),
-            'region' => (string) ($a->region ?? 'CN_MAINLAND'),
-            'locale' => (string) ($a->locale ?? 'zh-CN'),
+            'type_code'     => (string) ($a->type_code ?? ''),
+            'region'        => (string) ($a->region ?? 'CN_MAINLAND'),
+            'locale'        => (string) ($a->locale ?? 'zh-CN'),
         ];
 
-        // 可选字段（存在就带）
         if (isset($a->ticket_code)) {
             $out['ticket_code'] = (string) $a->ticket_code;
         }
@@ -301,7 +294,6 @@ class MeController extends Controller
             $out['submitted_at'] = null;
         }
 
-        // 轻量状态（前端可用来展示“简版/完整版/是否可打开”等）
         if (property_exists($a, 'ticket_code') && (string) ($a->ticket_code ?? '') !== '') {
             $out['lookup_key'] = (string) $a->ticket_code;
         } else {

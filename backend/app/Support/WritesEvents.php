@@ -10,32 +10,27 @@ use App\Models\Event;
 trait WritesEvents
 {
     /**
-     * 内部方法：写 events 表
+     * Write into events table
      *
-     * - result_view / report_view / share_view：10s 去抖（anon_id + attempt_id + event_code）
-     *   ✅ 去抖命中时允许回填/覆盖漏斗关键 meta（share_id/experiment/version/channel/...）
-     *   ✅ 同步回填 events.share_id 列
-     *   ✅ 同步回填 events.user_id（关键）
-     * - share_generate/share_click：轻量去重（anon_id + attempt_id + share_style + page_session_id）
+     * - result_view / report_view / share_view: 10s debounce (anon_id + attempt_id + event_code)
+     *   - allow backfill funnel meta (share_id/experiment/version/channel/...)
+     *   - backfill events.share_id column
+     *   - backfill events.user_id column
+     * - share_generate / share_click: light dedupe (anon_id + attempt_id + share_style + page_session_id)
      */
     protected function logEvent(string $eventCode, Request $request, array $extra = []): void
     {
         try {
             $attemptId = $extra['attempt_id'] ?? null;
 
-            // -----------------------------
-            // ✅ fm_user_id from middleware (FmTokenAuth)
-            // 兼容：fm_user_id / user_id 两种 key
-            // -----------------------------
+            // fm_user_id from middleware (FmTokenAuth): support fm_user_id / user_id
             $fmUserIdRaw = trim((string) $request->attributes->get('fm_user_id', ''));
             if ($fmUserIdRaw === '') {
                 $fmUserIdRaw = trim((string) $request->attributes->get('user_id', ''));
             }
             $fmUserId = ($fmUserIdRaw === '') ? null : $fmUserIdRaw;
 
-            // -----------------------------
-            // Read headers (M3 funnel)
-            // -----------------------------
+            // Headers (funnel)
             $hExperiment     = trim((string) ($request->header('X-Experiment') ?? ''));
             $hAppVersion     = trim((string) ($request->header('X-App-Version') ?? ''));
             $hChannel        = trim((string) ($request->header('X-Channel') ?? ''));
@@ -43,17 +38,13 @@ trait WritesEvents
             $hEntryPage      = trim((string) ($request->header('X-Entry-Page') ?? ''));
             $hShareId        = trim((string) ($request->header('X-Share-Id') ?? ''));
 
-            // -----------------------------
-            // anon_id source
-            // Priority: extra > request attr > input
-            // -----------------------------
+            // anon_id source: extra > request attrs > input
             $anonId = $extra['anon_id']
                 ?? $request->attributes->get('anon_id')
+                ?? $request->attributes->get('fm_anon_id')
                 ?? $request->input('anon_id');
 
-            // ------------------------------------------------------------
-            // ✅ anon_id sanitize（堵住占位符/污染源）
-            // ------------------------------------------------------------
+            // anon_id sanitize
             if (!is_string($anonId)) {
                 $anonId = null;
             } else {
@@ -82,23 +73,14 @@ trait WritesEvents
                 }
             }
 
-            // -----------------------------
-            // Build incoming meta (array)
-            // -----------------------------
+            // incoming meta
             $incoming = $extra['meta_json'] ?? [];
             if (!is_array($incoming)) {
                 $incoming = json_decode((string) $incoming, true) ?: [];
             }
             if (!is_array($incoming)) $incoming = [];
 
-            // -----------------------------
-            // ✅ share_id unify (single source)
-            // Priority:
-            // 1) extra.share_id (顶层)
-            // 2) incoming.share_id (meta_json)
-            // 3) query share_id
-            // 4) header X-Share-Id
-            // -----------------------------
+            // share_id unify
             $qShareId = trim((string) ($request->query('share_id') ?? ''));
 
             $resolvedShareId = null;
@@ -112,7 +94,6 @@ trait WritesEvents
                 $resolvedShareId = $hShareId;
             }
 
-            // 回填到 meta（不覆盖已有非空）
             if (
                 (!isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '')
                 && is_string($resolvedShareId) && $resolvedShareId !== ''
@@ -120,10 +101,10 @@ trait WritesEvents
                 $incoming['share_id'] = $resolvedShareId;
             }
 
-            // ✅ view 类事件 meta 兜底补 header（只补空，不强行覆盖）
+            // fill incoming meta by header (only when empty)
             $fillIncoming = function (string $k, string $v) use (&$incoming): void {
-                $oldEmpty = !isset($incoming[$k]) || $incoming[$k] === null || $incoming[$k] === '';
-                if ($oldEmpty && $v !== '') $incoming[$k] = $v;
+                $empty = !isset($incoming[$k]) || $incoming[$k] === null || $incoming[$k] === '';
+                if ($empty && $v !== '') $incoming[$k] = $v;
             };
 
             $fillIncoming('experiment', $hExperiment);
@@ -132,37 +113,23 @@ trait WritesEvents
             $fillIncoming('client_platform', $hClientPlatform);
             $fillIncoming('entry_page', $hEntryPage);
 
-            // -----------------------------
-            // ✅ 统一列字段取值（让 channel/client_* 不再 NULL）
-            // Priority: extra > request attr > incoming > header > input
-            // -----------------------------
-            $colChannel = $extra['channel']
-                ?? (string) $request->attributes->get('channel', '')
-                ?? '';
-
-            if ($colChannel === '') $colChannel = (string) ($incoming['channel'] ?? '');
+            // column values normalize: extra > attrs > incoming > header > input
+            $colChannel = $extra['channel'] ?? trim((string) $request->attributes->get('channel', ''));
+            if ($colChannel === '') $colChannel = trim((string) ($incoming['channel'] ?? ''));
             if ($colChannel === '') $colChannel = $hChannel;
-            if ($colChannel === '') $colChannel = (string) $request->input('channel', '');
+            if ($colChannel === '') $colChannel = trim((string) $request->input('channel', ''));
 
-            $colPlatform = $extra['client_platform']
-                ?? (string) $request->attributes->get('client_platform', '')
-                ?? '';
-
-            if ($colPlatform === '') $colPlatform = (string) ($incoming['client_platform'] ?? '');
+            $colPlatform = $extra['client_platform'] ?? trim((string) $request->attributes->get('client_platform', ''));
+            if ($colPlatform === '') $colPlatform = trim((string) ($incoming['client_platform'] ?? ''));
             if ($colPlatform === '') $colPlatform = $hClientPlatform;
-            if ($colPlatform === '') $colPlatform = (string) $request->input('client_platform', '');
+            if ($colPlatform === '') $colPlatform = trim((string) $request->input('client_platform', ''));
 
-            $colVersion = $extra['client_version']
-                ?? (string) $request->attributes->get('client_version', '')
-                ?? '';
-
-            if ($colVersion === '') $colVersion = (string) ($incoming['version'] ?? '');
+            $colVersion = $extra['client_version'] ?? trim((string) $request->attributes->get('client_version', ''));
+            if ($colVersion === '') $colVersion = trim((string) ($incoming['version'] ?? ''));
             if ($colVersion === '') $colVersion = $hAppVersion;
-            if ($colVersion === '') $colVersion = (string) $request->input('client_version', '');
+            if ($colVersion === '') $colVersion = trim((string) $request->input('client_version', ''));
 
-            // -----------------------------
-            // A) 10s debounce + backfill (result_view / report_view / share_view)
-            // -----------------------------
+            // A) 10s debounce + backfill
             if (in_array($eventCode, ['result_view', 'report_view', 'share_view'], true) && $anonId && $attemptId) {
                 $existing = Event::query()
                     ->where('event_code', $eventCode)
@@ -173,7 +140,6 @@ trait WritesEvents
                     ->first();
 
                 if ($existing) {
-                    // old meta normalize
                     $old = $existing->meta_json;
                     if (!is_array($old)) {
                         $old = json_decode((string) $old, true) ?: [];
@@ -182,7 +148,6 @@ trait WritesEvents
 
                     $changed = false;
 
-                    // ✅ 漏斗关键字段：incoming 非空就覆盖
                     $overwriteKeys = [
                         'share_id',
                         'experiment',
@@ -192,19 +157,15 @@ trait WritesEvents
                         'entry_page',
                         'page',
                     ];
-
                     foreach ($overwriteKeys as $k) {
                         $newVal  = $incoming[$k] ?? null;
                         $newGood = $newVal !== null && $newVal !== '';
-                        if ($newGood) {
-                            if (!isset($old[$k]) || $old[$k] !== $newVal) {
-                                $old[$k] = $newVal;
-                                $changed = true;
-                            }
+                        if ($newGood && (!isset($old[$k]) || $old[$k] !== $newVal)) {
+                            $old[$k] = $newVal;
+                            $changed = true;
                         }
                     }
 
-                    // ✅ one-shot：只补空
                     $oneShot = ['type_code', 'engine_version', 'engine', 'content_package_version'];
                     foreach ($oneShot as $k) {
                         $oldEmpty = !isset($old[$k]) || $old[$k] === null || $old[$k] === '';
@@ -216,11 +177,10 @@ trait WritesEvents
                         }
                     }
 
-                    // ✅ 同步覆盖 events 表列
                     $colChanged = false;
 
-                    // ✅✅ 关键：回填 user_id
-                    if ($fmUserId !== null) {
+                    // backfill user_id
+                    if ($fmUserId !== null && preg_match('/^\d+$/', (string) $fmUserId)) {
                         $existingUid = (string) ($existing->user_id ?? '');
                         if ($existingUid !== (string) $fmUserId) {
                             $existing->user_id = (int) $fmUserId;
@@ -243,8 +203,7 @@ trait WritesEvents
                         $colChanged = true;
                     }
 
-                    // ✅✅ 关键：同步回填 events.share_id 列
-                    $inShareId = (string) ($incoming['share_id'] ?? '');
+                    $inShareId = trim((string) ($incoming['share_id'] ?? ''));
                     if ($inShareId !== '' && (string) ($existing->share_id ?? '') !== $inShareId) {
                         $existing->share_id = $inShareId;
                         $colChanged = true;
@@ -257,13 +216,11 @@ trait WritesEvents
                         $existing->save();
                     }
 
-                    return; // 去抖：不新增事件
+                    return;
                 }
             }
 
-            // -----------------------------
             // B) share_generate / share_click dedupe
-            // -----------------------------
             if (in_array($eventCode, ['share_generate', 'share_click'], true) && $anonId && $attemptId) {
                 $shareStyle    = $incoming['share_style'] ?? null;
                 $pageSessionId = $incoming['page_session_id'] ?? null;
@@ -281,13 +238,15 @@ trait WritesEvents
                 }
             }
 
-            // -----------------------------
-            // Final: create event
-            // -----------------------------
+            // Final: create
             Event::create([
                 'id'              => (string) Str::uuid(),
                 'event_code'      => $eventCode,
-                'user_id'         => $fmUserId !== null ? (int) $fmUserId : null,
+
+                'user_id'         => ($fmUserId !== null && preg_match('/^\d+$/', (string) $fmUserId))
+                    ? (int) $fmUserId
+                    : null,
+
                 'anon_id'         => $anonId,
 
                 'scale_code'      => $extra['scale_code']    ?? null,
