@@ -113,17 +113,22 @@ class FmTokenService
         }
 
         $userCol = $this->detectUserColumn();
-        $uid = $userCol ? (string) ($row->{$userCol} ?? '') : '';
-        if ($uid === '') {
-            // 没有 user 字段也不算通过（否则 /me 无法知道是谁）
-            return ['ok' => false];
-        }
+$uid = $userCol ? (string) ($row->{$userCol} ?? '') : '';
 
-        return [
-            'ok' => true,
-            'user_id' => $uid,
-            'expires_at' => $expiresAt,
-        ];
+if ($uid === '') {
+    // 匿名 token 允许通过，但没有 user_id
+    return [
+        'ok' => true,
+        'user_id' => null,
+        'expires_at' => $expiresAt,
+    ];
+}
+
+return [
+    'ok' => true,
+    'user_id' => $uid,
+    'expires_at' => $expiresAt,
+];
     }
 
     /**
