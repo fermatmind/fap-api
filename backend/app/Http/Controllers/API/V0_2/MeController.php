@@ -20,13 +20,16 @@ class MeController extends Controller
      *  - per_page (int) default 20, max 50
      *
      * 依赖：FmTokenAuth 中间件
-     * - 期望从 request attributes 读到 fm_user_id
+     * - 期望从 request attributes 读到 fm_user_id / anon_id
      * - 或者 auth()->id()
      */
     public function attempts(Request $request)
     {
         $userId = $this->resolveUserId($request);
-        if (!$userId) {
+        $anonId = $this->resolveAnonId($request);
+
+        // ✅ 允许 anon_id 模式（CI ACCEPT_PHONE 会出现 user_id=NULL 但有 anon_id）
+        if (!$userId && !$anonId) {
             return response()->json([
                 'ok' => false,
                 'error' => 'unauthorized',
@@ -39,7 +42,34 @@ class MeController extends Controller
         if ($perPage <= 0) $perPage = 20;
         if ($perPage > 50) $perPage = 50;
 
-        $q = Attempt::query()->where('user_id', (string) $userId);
+        $q = Attempt::query();
+
+        // ✅ 同时支持 user_id 与 anon_id
+        // - 有 user_id：where user_id = ...
+        // - 有 anon_id：or where anon_id = ...
+        // - 只有 anon_id：where anon_id = ...
+        $q->where(function ($qq) use ($userId, $anonId) {
+            $has = false;
+
+            if ($userId) {
+                $qq->where('user_id', (string) $userId);
+                $has = true;
+            }
+
+            if ($anonId) {
+                if ($has) {
+                    $qq->orWhere('anon_id', (string) $anonId);
+                } else {
+                    $qq->where('anon_id', (string) $anonId);
+                }
+                $has = true;
+            }
+
+            // 双空兜底（理论不会走到这里）
+            if (!$has) {
+                $qq->whereRaw('1=0');
+            }
+        });
 
         // 优先按 submitted_at 排序（如果有），否则 created_at
         if (Schema::hasColumn('attempts', 'submitted_at')) {
@@ -59,7 +89,10 @@ class MeController extends Controller
 
         return response()->json([
             'ok' => true,
-            'user_id' => (string) $userId,
+            // ✅ 保持兼容：仍返回 user_id 字段（CI 也会打印它），没有就给空字符串
+            'user_id' => $userId ? (string) $userId : '',
+            // ✅ 额外返回 anon_id 便于排查/对齐（不影响旧前端）
+            'anon_id' => $anonId ? (string) $anonId : '',
             'items' => $items,
             'pagination' => [
                 'page' => $p->currentPage(),
@@ -199,9 +232,15 @@ class MeController extends Controller
             return trim($uid);
         }
 
+        // 兼容：有些地方可能读 user_id
+        $uid2 = $request->attributes->get('user_id');
+        if (is_string($uid2) && trim($uid2) !== '') {
+            return trim($uid2);
+        }
+
         // 2) 或者 middleware 登录了 Laravel Auth
         $authId = auth()->id();
-        if ($authId !== null && (string)$authId !== '') {
+        if ($authId !== null && (string) $authId !== '') {
             return (string) $authId;
         }
 
@@ -209,6 +248,29 @@ class MeController extends Controller
         $u = $request->user();
         if ($u && isset($u->id)) {
             return (string) $u->id;
+        }
+
+        return null;
+    }
+
+    private function resolveAnonId(Request $request): ?string
+    {
+        // 1) middleware 写入 attributes（推荐）
+        $anon = $request->attributes->get('anon_id');
+        if (is_string($anon) && trim($anon) !== '') {
+            return trim($anon);
+        }
+
+        // 兼容：fm_anon_id
+        $anon2 = $request->attributes->get('fm_anon_id');
+        if (is_string($anon2) && trim($anon2) !== '') {
+            return trim($anon2);
+        }
+
+        // 兼容：请求体/查询（少量场景）
+        $anon3 = $request->input('anon_id');
+        if (is_string($anon3) && trim($anon3) !== '') {
+            return trim($anon3);
         }
 
         return null;
@@ -240,7 +302,7 @@ class MeController extends Controller
         }
 
         // 轻量状态（前端可用来展示“简版/完整版/是否可打开”等）
-        if (property_exists($a, 'ticket_code') && (string)($a->ticket_code ?? '') !== '') {
+        if (property_exists($a, 'ticket_code') && (string) ($a->ticket_code ?? '') !== '') {
             $out['lookup_key'] = (string) $a->ticket_code;
         } else {
             $out['lookup_key'] = (string) ($a->id ?? '');
