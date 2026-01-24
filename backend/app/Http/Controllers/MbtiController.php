@@ -614,6 +614,16 @@ public function storeAttempt(Request $request)
     });
 }
 
+public function upsertResult(\Illuminate\Http\Request $request, string $attemptId)
+{
+    // 让 /attempts/{id}/result 走你现有的 storeAttempt 逻辑（写 attempts.result_json + results 表）
+    $request->merge([
+        'attempt_id' => $attemptId,
+    ]);
+
+    return $this->storeAttempt($request);
+}
+
 /**
  * GET /api/v0.2/attempts/{id}/result
  * 注意：这里会写 report_view（但会在 logEvent 内 10 秒去抖）
