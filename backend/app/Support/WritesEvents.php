@@ -5,16 +5,17 @@ namespace App\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
-
 use App\Models\Event;
 
 trait WritesEvents
 {
     /**
      * 内部方法：写 events 表
-     * - result_view / report_view / share_view：强制 10s 去抖（anon_id + attempt_id + event_code）
+     *
+     * - result_view / report_view / share_view：10s 去抖（anon_id + attempt_id + event_code）
      *   ✅ 去抖命中时允许回填/覆盖漏斗关键 meta（share_id/experiment/version/channel/...）
-     *   ✅ 同步回填 events.share_id 列（验收脚本可能按列查）
+     *   ✅ 同步回填 events.share_id 列
+     *   ✅ 同步回填 events.user_id（关键）
      * - share_generate/share_click：轻量去重（anon_id + attempt_id + share_style + page_session_id）
      */
     protected function logEvent(string $eventCode, Request $request, array $extra = []): void
@@ -24,11 +25,13 @@ trait WritesEvents
 
             // -----------------------------
             // ✅ fm_user_id from middleware (FmTokenAuth)
+            // 兼容：fm_user_id / user_id 两种 key
             // -----------------------------
-            $fmUserId = trim((string) $request->attributes->get('fm_user_id', ''));
-            if ($fmUserId === '') {
-                $fmUserId = null;
+            $fmUserIdRaw = trim((string) $request->attributes->get('fm_user_id', ''));
+            if ($fmUserIdRaw === '') {
+                $fmUserIdRaw = trim((string) $request->attributes->get('user_id', ''));
             }
+            $fmUserId = ($fmUserIdRaw === '') ? null : $fmUserIdRaw;
 
             // -----------------------------
             // Read headers (M3 funnel)
@@ -38,16 +41,18 @@ trait WritesEvents
             $hChannel        = trim((string) ($request->header('X-Channel') ?? ''));
             $hClientPlatform = trim((string) ($request->header('X-Client-Platform') ?? ''));
             $hEntryPage      = trim((string) ($request->header('X-Entry-Page') ?? ''));
+            $hShareId        = trim((string) ($request->header('X-Share-Id') ?? ''));
 
             // -----------------------------
             // anon_id source
+            // Priority: extra > request attr > input
             // -----------------------------
-            $anonId = $extra['anon_id'] ?? $request->input('anon_id');
+            $anonId = $extra['anon_id']
+                ?? $request->attributes->get('anon_id')
+                ?? $request->input('anon_id');
 
             // ------------------------------------------------------------
-            // ✅ M3 hard: anon_id sanitize（堵住占位符/污染源）
-            // - 空字符串 / 非字符串 => null
-            // - 命中黑名单（包含匹配，大小写不敏感）=> null
+            // ✅ anon_id sanitize（堵住占位符/污染源）
             // ------------------------------------------------------------
             if (!is_string($anonId)) {
                 $anonId = null;
@@ -66,7 +71,6 @@ trait WritesEvents
                         '把你查到的 anon_id 填这里',
                         '填这里',
                     ];
-
                     foreach ($blacklist as $bad) {
                         $b = trim((string) $bad);
                         if ($b === '') continue;
@@ -96,7 +100,6 @@ trait WritesEvents
             // 4) header X-Share-Id
             // -----------------------------
             $qShareId = trim((string) ($request->query('share_id') ?? ''));
-            $hShareId = trim((string) ($request->header('X-Share-Id') ?? ''));
 
             $resolvedShareId = null;
             if (!empty($extra['share_id'])) {
@@ -110,12 +113,14 @@ trait WritesEvents
             }
 
             // 回填到 meta（不覆盖已有非空）
-            if ((!isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '') && is_string($resolvedShareId) && $resolvedShareId !== '') {
+            if (
+                (!isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '')
+                && is_string($resolvedShareId) && $resolvedShareId !== ''
+            ) {
                 $incoming['share_id'] = $resolvedShareId;
             }
 
-            // ✅ 确保 view 类事件 meta 也能拿到 header 值（如果 controller 没写）
-            //（只补 incoming，不强行覆盖 controller 已写的）
+            // ✅ view 类事件 meta 兜底补 header（只补空，不强行覆盖）
             $fillIncoming = function (string $k, string $v) use (&$incoming): void {
                 $oldEmpty = !isset($incoming[$k]) || $incoming[$k] === null || $incoming[$k] === '';
                 if ($oldEmpty && $v !== '') $incoming[$k] = $v;
@@ -128,12 +133,39 @@ trait WritesEvents
             $fillIncoming('entry_page', $hEntryPage);
 
             // -----------------------------
+            // ✅ 统一列字段取值（让 channel/client_* 不再 NULL）
+            // Priority: extra > request attr > incoming > header > input
+            // -----------------------------
+            $colChannel = $extra['channel']
+                ?? (string) $request->attributes->get('channel', '')
+                ?? '';
+
+            if ($colChannel === '') $colChannel = (string) ($incoming['channel'] ?? '');
+            if ($colChannel === '') $colChannel = $hChannel;
+            if ($colChannel === '') $colChannel = (string) $request->input('channel', '');
+
+            $colPlatform = $extra['client_platform']
+                ?? (string) $request->attributes->get('client_platform', '')
+                ?? '';
+
+            if ($colPlatform === '') $colPlatform = (string) ($incoming['client_platform'] ?? '');
+            if ($colPlatform === '') $colPlatform = $hClientPlatform;
+            if ($colPlatform === '') $colPlatform = (string) $request->input('client_platform', '');
+
+            $colVersion = $extra['client_version']
+                ?? (string) $request->attributes->get('client_version', '')
+                ?? '';
+
+            if ($colVersion === '') $colVersion = (string) ($incoming['version'] ?? '');
+            if ($colVersion === '') $colVersion = $hAppVersion;
+            if ($colVersion === '') $colVersion = (string) $request->input('client_version', '');
+
+            // -----------------------------
             // A) 10s debounce + backfill (result_view / report_view / share_view)
-            // ✅ 去抖只作用于“同 event_code”，不能让 result_view 吃掉 share_view/report_view
             // -----------------------------
             if (in_array($eventCode, ['result_view', 'report_view', 'share_view'], true) && $anonId && $attemptId) {
                 $existing = Event::query()
-                    ->where('event_code', $eventCode) // ✅ 关键：用当前 eventCode
+                    ->where('event_code', $eventCode)
                     ->where('anon_id', $anonId)
                     ->where('attempt_id', $attemptId)
                     ->where('occurred_at', '>=', now()->subSeconds(10))
@@ -141,7 +173,7 @@ trait WritesEvents
                     ->first();
 
                 if ($existing) {
-                    // old meta normalize to array
+                    // old meta normalize
                     $old = $existing->meta_json;
                     if (!is_array($old)) {
                         $old = json_decode((string) $old, true) ?: [];
@@ -150,7 +182,7 @@ trait WritesEvents
 
                     $changed = false;
 
-                    // ✅ 漏斗关键字段：incoming 非空就覆盖（允许更完整 header 回填）
+                    // ✅ 漏斗关键字段：incoming 非空就覆盖
                     $overwriteKeys = [
                         'share_id',
                         'experiment',
@@ -184,36 +216,36 @@ trait WritesEvents
                         }
                     }
 
-                    // ✅ 同步覆盖 events 表列（脚本可能查列）
+                    // ✅ 同步覆盖 events 表列
                     $colChanged = false;
 
-                    // ✅✅ 关键：回填 events.user_id（/me/attempts 等依赖 fm_user_id 的链路）
-                    if ($fmUserId !== null && (string)($existing->user_id ?? '') !== (string)$fmUserId) {
-                        $existing->user_id = (string)$fmUserId;
+                    // ✅✅ 关键：回填 user_id
+                    if ($fmUserId !== null) {
+                        $existingUid = (string) ($existing->user_id ?? '');
+                        if ($existingUid !== (string) $fmUserId) {
+                            $existing->user_id = (int) $fmUserId;
+                            $colChanged = true;
+                        }
+                    }
+
+                    if ($colChannel !== '' && (string) ($existing->channel ?? '') !== $colChannel) {
+                        $existing->channel = $colChannel;
                         $colChanged = true;
                     }
 
-                    $inChannel = (string)($incoming['channel'] ?? '');
-                    if ($inChannel !== '' && (string)($existing->channel ?? '') !== $inChannel) {
-                        $existing->channel = $inChannel;
+                    if ($colPlatform !== '' && (string) ($existing->client_platform ?? '') !== $colPlatform) {
+                        $existing->client_platform = $colPlatform;
                         $colChanged = true;
                     }
 
-                    $inPlatform = (string)($incoming['client_platform'] ?? '');
-                    if ($inPlatform !== '' && (string)($existing->client_platform ?? '') !== $inPlatform) {
-                        $existing->client_platform = $inPlatform;
-                        $colChanged = true;
-                    }
-
-                    $inVer = (string)($incoming['version'] ?? '');
-                    if ($inVer !== '' && (string)($existing->client_version ?? '') !== $inVer) {
-                        $existing->client_version = $inVer;
+                    if ($colVersion !== '' && (string) ($existing->client_version ?? '') !== $colVersion) {
+                        $existing->client_version = $colVersion;
                         $colChanged = true;
                     }
 
                     // ✅✅ 关键：同步回填 events.share_id 列
-                    $inShareId = (string)($incoming['share_id'] ?? '');
-                    if ($inShareId !== '' && (string)($existing->share_id ?? '') !== $inShareId) {
+                    $inShareId = (string) ($incoming['share_id'] ?? '');
+                    if ($inShareId !== '' && (string) ($existing->share_id ?? '') !== $inShareId) {
                         $existing->share_id = $inShareId;
                         $colChanged = true;
                     }
@@ -225,7 +257,7 @@ trait WritesEvents
                         $existing->save();
                     }
 
-                    return; // ✅ 仍然去抖：不新增事件
+                    return; // 去抖：不新增事件
                 }
             }
 
@@ -233,9 +265,8 @@ trait WritesEvents
             // B) share_generate / share_click dedupe
             // -----------------------------
             if (in_array($eventCode, ['share_generate', 'share_click'], true) && $anonId && $attemptId) {
-                $meta          = $incoming;
-                $shareStyle    = $meta['share_style'] ?? null;
-                $pageSessionId = $meta['page_session_id'] ?? null;
+                $shareStyle    = $incoming['share_style'] ?? null;
+                $pageSessionId = $incoming['page_session_id'] ?? null;
 
                 if ($shareStyle && $pageSessionId) {
                     $dup = Event::query()
@@ -246,9 +277,7 @@ trait WritesEvents
                         ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(meta_json, '$.page_session_id')) = ?", [$pageSessionId])
                         ->exists();
 
-                    if ($dup) {
-                        return;
-                    }
+                    if ($dup) return;
                 }
             }
 
@@ -258,32 +287,24 @@ trait WritesEvents
             Event::create([
                 'id'              => (string) Str::uuid(),
                 'event_code'      => $eventCode,
-                'user_id'         => $fmUserId, // ✅✅ 写入 user_id（来自 FmTokenAuth）
+                'user_id'         => $fmUserId !== null ? (int) $fmUserId : null,
                 'anon_id'         => $anonId,
 
                 'scale_code'      => $extra['scale_code']    ?? null,
                 'scale_version'   => $extra['scale_version'] ?? null,
                 'attempt_id'      => $attemptId,
 
-                // ✅✅ 关键：写入 events.share_id 列（验收脚本可能按列查）
                 'share_id'        => (is_string($resolvedShareId) && $resolvedShareId !== '') ? $resolvedShareId : null,
 
-                // ✅ 列值：extra > header > input
-                'channel'         => $extra['channel']
-                    ?? ($hChannel !== '' ? $hChannel : $request->input('channel', null)),
+                'channel'         => $colChannel !== '' ? $colChannel : null,
+                'region'          => $extra['region'] ?? $request->input('region', 'CN_MAINLAND'),
+                'locale'          => $extra['locale'] ?? $request->input('locale', 'zh-CN'),
 
-                'region'          => $extra['region']         ?? $request->input('region', 'CN_MAINLAND'),
-                'locale'          => $extra['locale']         ?? $request->input('locale', 'zh-CN'),
-
-                'client_platform' => $extra['client_platform']
-                    ?? ($hClientPlatform !== '' ? $hClientPlatform : $request->input('client_platform', null)),
-
-                // ✅ client_version：extra > header(X-App-Version) > input
-                'client_version'  => $extra['client_version']
-                    ?? ($hAppVersion !== '' ? $hAppVersion : $request->input('client_version', null)),
+                'client_platform' => $colPlatform !== '' ? $colPlatform : null,
+                'client_version'  => $colVersion !== '' ? $colVersion : null,
 
                 'occurred_at'     => now(),
-                'meta_json'       => $incoming, // ✅ 用归一化 + header兜底后的 meta
+                'meta_json'       => $incoming,
             ]);
         } catch (\Throwable $e) {
             Log::warning('event_log_failed', [
