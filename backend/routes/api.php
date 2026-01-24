@@ -47,10 +47,10 @@ Route::prefix("v0.2")->group(function () {
     // 5) 开始一次 attempt（匿名允许）
     Route::post("/attempts/start", [MbtiController::class, "startAttempt"]);
 
-    // 6) 查询某次测评的分享信息（按你需求：可保持公开/或后续再门禁）
+    // 6) 查询某次测评的分享信息（可公开）
     Route::get("/attempts/{id}/share", [MbtiController::class, "getShare"]);
 
-    // ✅ 6.5) Ticket Code Lookup（你后续可以选择门禁或不门禁）
+    // ✅ 6.5) Ticket Code Lookup（可公开）
     Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
     Route::post("/lookup/order", [LookupController::class, "lookupOrder"]);
 
@@ -64,8 +64,7 @@ Route::prefix("v0.2")->group(function () {
     Route::post("/auth/provider", [AuthProviderController::class, "login"]);
     Route::get("/claim/report", [ClaimController::class, "report"]);
 
-    // 8) 事件上报（目前你前端已带 Authorization，但事件是否门禁你可后续决定）
-    // 这里先保持公开（不影响主链路）
+    // 8) 事件上报（保持公开；前端带 Authorization 也不影响）
     Route::post("/events", [EventController::class, "store"]);
 
     // 9) Norms percentile (stub controller, implemented later)
@@ -75,22 +74,26 @@ Route::prefix("v0.2")->group(function () {
     Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
 
     // =========================================================
-    // ✅ Step 1：最小后端鉴权（gate 需要 user_id 的接口）
-    // 关键：Laravel 12 里你 alias 还没注册成功，所以这里直接用类名
+    // ✅ Step A：attempts/{id}/result & report —— token 可选（CI verify-mbti 需要）
+    // - 不带 token：允许访问（但不会写入 events.user_id）
+    // - 带 token：middleware 会挂上 fm_user_id，events.user_id 可写入
     // =========================================================
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
+        Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
+        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
+        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
+    });
 
-        // ✅ GET /api/v0.2/me/attempts
+    // =========================================================
+    // ✅ Step B：需要 user_id 的接口 —— token 必须
+    // =========================================================
+    Route::middleware(\App\Http\Middleware\FmTokenAuth::class . ':required')->group(function () {
+
+        // ✅ /me/*
         Route::get("/me/attempts", [MeController::class, "attempts"]);
         Route::post("/me/email/bind", [MeController::class, "bindEmail"]);
         Route::post("/me/identities/bind", [IdentityController::class, "bind"]);
         Route::get("/me/identities", [IdentityController::class, "index"]);
-
-        // ✅ 写入/更新 result（需要 fm_user_id 写 events.user_id）
-        Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
-
-        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
-        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
 
         Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
         Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);

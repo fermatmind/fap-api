@@ -10,13 +10,12 @@ use App\Models\Event;
 trait WritesEvents
 {
     /**
-     * 内部方法：写 events 表
+     * Write into events table.
      *
-     * - result_view / report_view / share_view：10s 去抖（anon_id + attempt_id + event_code）
-     *   ✅ 去抖命中时允许回填/覆盖漏斗关键 meta（share_id/experiment/version/channel/...）
-     *   ✅ 同步回填 events.share_id 列
-     *   ✅ 同步回填 events.user_id（关键）
-     * - share_generate/share_click：轻量去重（anon_id + attempt_id + share_style + page_session_id）
+     * - result_view / report_view / share_view: 10s debounce (anon_id + attempt_id + event_code)
+     *   - allow backfill funnel meta (share_id/experiment/version/channel/...)
+     *   - backfill events.share_id + events.user_id + channel/client_platform/client_version columns
+     * - share_generate/share_click: light dedupe (anon_id + attempt_id + share_style + page_session_id)
      */
     protected function logEvent(string $eventCode, Request $request, array $extra = []): void
     {
@@ -24,36 +23,34 @@ trait WritesEvents
             $attemptId = $extra['attempt_id'] ?? null;
 
             // -----------------------------
-            // ✅ fm_user_id from middleware (FmTokenAuth)
-            // 兼容：fm_user_id / user_id 两种 key
+            // user_id from middleware
+            // supports: fm_user_id / user_id
+            // only accept numeric id
             // -----------------------------
-            $fmUserIdRaw = trim((string) $request->attributes->get('fm_user_id', ''));
-            if ($fmUserIdRaw === '') {
-                $fmUserIdRaw = trim((string) $request->attributes->get('user_id', ''));
+            $uidRaw = trim((string) $request->attributes->get('fm_user_id', ''));
+            if ($uidRaw === '') {
+                $uidRaw = trim((string) $request->attributes->get('user_id', ''));
             }
-            $fmUserId = ($fmUserIdRaw === '') ? null : $fmUserIdRaw;
+            $fmUserId = (ctype_digit($uidRaw) && (int) $uidRaw > 0) ? (int) $uidRaw : null;
 
             // -----------------------------
-            // Read headers (M3 funnel)
+            // headers (funnel)
             // -----------------------------
-            $hExperiment     = trim((string) ($request->header('X-Experiment') ?? ''));
-            $hAppVersion     = trim((string) ($request->header('X-App-Version') ?? ''));
-            $hChannel        = trim((string) ($request->header('X-Channel') ?? ''));
-            $hClientPlatform = trim((string) ($request->header('X-Client-Platform') ?? ''));
-            $hEntryPage      = trim((string) ($request->header('X-Entry-Page') ?? ''));
-            $hShareId        = trim((string) ($request->header('X-Share-Id') ?? ''));
+            $hExperiment     = trim((string) $request->header('X-Experiment', ''));
+            $hAppVersion     = trim((string) $request->header('X-App-Version', ''));
+            $hChannel        = trim((string) $request->header('X-Channel', ''));
+            $hClientPlatform = trim((string) $request->header('X-Client-Platform', ''));
+            $hEntryPage      = trim((string) $request->header('X-Entry-Page', ''));
+            $hShareId        = trim((string) $request->header('X-Share-Id', ''));
 
             // -----------------------------
-            // anon_id source
-            // Priority: extra > request attr > input
+            // anon_id source: extra > request attr > input
             // -----------------------------
             $anonId = $extra['anon_id']
                 ?? $request->attributes->get('anon_id')
                 ?? $request->input('anon_id');
 
-            // ------------------------------------------------------------
-            // ✅ anon_id sanitize（堵住占位符/污染源）
-            // ------------------------------------------------------------
+            // sanitize anon_id
             if (!is_string($anonId)) {
                 $anonId = null;
             } else {
@@ -83,7 +80,7 @@ trait WritesEvents
             }
 
             // -----------------------------
-            // Build incoming meta (array)
+            // incoming meta (array)
             // -----------------------------
             $incoming = $extra['meta_json'] ?? [];
             if (!is_array($incoming)) {
@@ -92,12 +89,7 @@ trait WritesEvents
             if (!is_array($incoming)) $incoming = [];
 
             // -----------------------------
-            // ✅ share_id unify (single source)
-            // Priority:
-            // 1) extra.share_id (顶层)
-            // 2) incoming.share_id (meta_json)
-            // 3) query share_id
-            // 4) header X-Share-Id
+            // share_id unify
             // -----------------------------
             $qShareId = trim((string) ($request->query('share_id') ?? ''));
 
@@ -112,7 +104,6 @@ trait WritesEvents
                 $resolvedShareId = $hShareId;
             }
 
-            // 回填到 meta（不覆盖已有非空）
             if (
                 (!isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '')
                 && is_string($resolvedShareId) && $resolvedShareId !== ''
@@ -120,12 +111,11 @@ trait WritesEvents
                 $incoming['share_id'] = $resolvedShareId;
             }
 
-            // ✅ view 类事件 meta 兜底补 header（只补空，不强行覆盖）
+            // fill meta from headers (only if empty)
             $fillIncoming = function (string $k, string $v) use (&$incoming): void {
                 $oldEmpty = !isset($incoming[$k]) || $incoming[$k] === null || $incoming[$k] === '';
                 if ($oldEmpty && $v !== '') $incoming[$k] = $v;
             };
-
             $fillIncoming('experiment', $hExperiment);
             $fillIncoming('version', $hAppVersion);
             $fillIncoming('channel', $hChannel);
@@ -133,35 +123,29 @@ trait WritesEvents
             $fillIncoming('entry_page', $hEntryPage);
 
             // -----------------------------
-            // ✅ 统一列字段取值（让 channel/client_* 不再 NULL）
-            // Priority: extra > request attr > incoming > header > input
+            // normalize columns (avoid NULL columns while meta has values)
+            // Priority: extra > attr > incoming > header > input
             // -----------------------------
-            $colChannel = $extra['channel']
-                ?? (string) $request->attributes->get('channel', '')
-                ?? '';
-
+            $colChannel = (string) ($extra['channel'] ?? '');
+            if ($colChannel === '') $colChannel = trim((string) $request->attributes->get('channel', ''));
             if ($colChannel === '') $colChannel = (string) ($incoming['channel'] ?? '');
             if ($colChannel === '') $colChannel = $hChannel;
-            if ($colChannel === '') $colChannel = (string) $request->input('channel', '');
+            if ($colChannel === '') $colChannel = trim((string) $request->input('channel', ''));
 
-            $colPlatform = $extra['client_platform']
-                ?? (string) $request->attributes->get('client_platform', '')
-                ?? '';
-
+            $colPlatform = (string) ($extra['client_platform'] ?? '');
+            if ($colPlatform === '') $colPlatform = trim((string) $request->attributes->get('client_platform', ''));
             if ($colPlatform === '') $colPlatform = (string) ($incoming['client_platform'] ?? '');
             if ($colPlatform === '') $colPlatform = $hClientPlatform;
-            if ($colPlatform === '') $colPlatform = (string) $request->input('client_platform', '');
+            if ($colPlatform === '') $colPlatform = trim((string) $request->input('client_platform', ''));
 
-            $colVersion = $extra['client_version']
-                ?? (string) $request->attributes->get('client_version', '')
-                ?? '';
-
+            $colVersion = (string) ($extra['client_version'] ?? '');
+            if ($colVersion === '') $colVersion = trim((string) $request->attributes->get('client_version', ''));
             if ($colVersion === '') $colVersion = (string) ($incoming['version'] ?? '');
             if ($colVersion === '') $colVersion = $hAppVersion;
-            if ($colVersion === '') $colVersion = (string) $request->input('client_version', '');
+            if ($colVersion === '') $colVersion = trim((string) $request->input('client_version', ''));
 
             // -----------------------------
-            // A) 10s debounce + backfill (result_view / report_view / share_view)
+            // A) debounce + backfill (view events)
             // -----------------------------
             if (in_array($eventCode, ['result_view', 'report_view', 'share_view'], true) && $anonId && $attemptId) {
                 $existing = Event::query()
@@ -173,7 +157,6 @@ trait WritesEvents
                     ->first();
 
                 if ($existing) {
-                    // old meta normalize
                     $old = $existing->meta_json;
                     if (!is_array($old)) {
                         $old = json_decode((string) $old, true) ?: [];
@@ -182,7 +165,7 @@ trait WritesEvents
 
                     $changed = false;
 
-                    // ✅ 漏斗关键字段：incoming 非空就覆盖
+                    // overwrite keys when incoming non-empty
                     $overwriteKeys = [
                         'share_id',
                         'experiment',
@@ -192,11 +175,9 @@ trait WritesEvents
                         'entry_page',
                         'page',
                     ];
-
                     foreach ($overwriteKeys as $k) {
-                        $newVal  = $incoming[$k] ?? null;
-                        $newGood = $newVal !== null && $newVal !== '';
-                        if ($newGood) {
+                        $newVal = $incoming[$k] ?? null;
+                        if ($newVal !== null && $newVal !== '') {
                             if (!isset($old[$k]) || $old[$k] !== $newVal) {
                                 $old[$k] = $newVal;
                                 $changed = true;
@@ -204,46 +185,40 @@ trait WritesEvents
                         }
                     }
 
-                    // ✅ one-shot：只补空
+                    // one-shot fill
                     $oneShot = ['type_code', 'engine_version', 'engine', 'content_package_version'];
                     foreach ($oneShot as $k) {
                         $oldEmpty = !isset($old[$k]) || $old[$k] === null || $old[$k] === '';
                         $newVal   = $incoming[$k] ?? null;
-                        $newGood  = $newVal !== null && $newVal !== '';
-                        if ($oldEmpty && $newGood) {
+                        if ($oldEmpty && $newVal !== null && $newVal !== '') {
                             $old[$k] = $newVal;
                             $changed = true;
                         }
                     }
 
-                    // ✅ 同步覆盖 events 表列
                     $colChanged = false;
 
-                    // ✅✅ 关键：回填 user_id
-                    if ($fmUserId !== null) {
-                        $existingUid = (string) ($existing->user_id ?? '');
-                        if ($existingUid !== (string) $fmUserId) {
-                            $existing->user_id = (int) $fmUserId;
-                            $colChanged = true;
-                        }
+                    // backfill user_id
+                    if ($fmUserId !== null && (int) ($existing->user_id ?? 0) !== $fmUserId) {
+                        $existing->user_id = $fmUserId;
+                        $colChanged = true;
                     }
 
+                    // backfill columns
                     if ($colChannel !== '' && (string) ($existing->channel ?? '') !== $colChannel) {
                         $existing->channel = $colChannel;
                         $colChanged = true;
                     }
-
                     if ($colPlatform !== '' && (string) ($existing->client_platform ?? '') !== $colPlatform) {
                         $existing->client_platform = $colPlatform;
                         $colChanged = true;
                     }
-
                     if ($colVersion !== '' && (string) ($existing->client_version ?? '') !== $colVersion) {
                         $existing->client_version = $colVersion;
                         $colChanged = true;
                     }
 
-                    // ✅✅ 关键：同步回填 events.share_id 列
+                    // backfill share_id column
                     $inShareId = (string) ($incoming['share_id'] ?? '');
                     if ($inShareId !== '' && (string) ($existing->share_id ?? '') !== $inShareId) {
                         $existing->share_id = $inShareId;
@@ -257,7 +232,7 @@ trait WritesEvents
                         $existing->save();
                     }
 
-                    return; // 去抖：不新增事件
+                    return;
                 }
             }
 
@@ -287,7 +262,7 @@ trait WritesEvents
             Event::create([
                 'id'              => (string) Str::uuid(),
                 'event_code'      => $eventCode,
-                'user_id'         => $fmUserId !== null ? (int) $fmUserId : null,
+                'user_id'         => $fmUserId,
                 'anon_id'         => $anonId,
 
                 'scale_code'      => $extra['scale_code']    ?? null,
