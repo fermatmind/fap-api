@@ -20,14 +20,15 @@ class MeController extends Controller
      *  - per_page (int) default 20, max 50
      *
      * 依赖：FmTokenAuth 中间件
-     * - 期望从 request attributes 读到 fm_user_id / anon_id
+     * - 优先从 request attributes 读到 fm_user_id
+     * - fm_user_id 不存在时，fallback 到 anon_id（accept_phone 场景）
      */
     public function attempts(Request $request)
     {
-        [$userId, $anonId] = $this->resolveIdentity($request);
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
 
-        // 两个都拿不到直接 401
-        if (($userId === null || $userId === '') && ($anonId === null || $anonId === '')) {
+        if (!$userId && !$anonId) {
             return response()->json([
                 'ok' => false,
                 'error' => 'UNAUTHORIZED',
@@ -40,35 +41,12 @@ class MeController extends Controller
         if ($perPage <= 0) $perPage = 20;
         if ($perPage > 50) $perPage = 50;
 
+        // ✅ 关键：user_id 有就按 user_id 查；否则按 anon_id 查
         $q = Attempt::query();
-
-        $hasUserIdCol = Schema::hasColumn('attempts', 'user_id');
-        $hasAnonIdCol = Schema::hasColumn('attempts', 'anon_id');
-
-        // 优先按 user_id 查
-        if ($userId !== null && $userId !== '' && $hasUserIdCol) {
+        if ($userId) {
             $q->where('user_id', (string) $userId);
         } else {
-            // user_id 缺失时按 anon_id 查（优先 attempts.anon_id；兼容旧表写在 attempts.user_id）
-            if ($anonId !== null && $anonId !== '' && $hasAnonIdCol) {
-                $q->where('anon_id', (string) $anonId);
-            } elseif ($anonId !== null && $anonId !== '' && $hasUserIdCol) {
-                $q->where('user_id', (string) $anonId);
-            } else {
-                // 没有可用列，直接返回空列表（保持 ok=true，CI 只检查接口 ok）
-                return response()->json([
-                    'ok' => true,
-                    'user_id' => $userId ? (string) $userId : '',
-                    'anon_id' => $anonId ? (string) $anonId : '',
-                    'items' => [],
-                    'pagination' => [
-                        'page' => 1,
-                        'per_page' => $perPage,
-                        'total' => 0,
-                        'last_page' => 1,
-                    ],
-                ]);
-            }
+            $q->where('anon_id', (string) $anonId);
         }
 
         // 优先按 submitted_at 排序（如果有），否则 created_at
@@ -122,12 +100,10 @@ class MeController extends Controller
             ], 429);
         }
 
-        [$userId, $anonId] = $this->resolveIdentity($request);
+        $userId = $this->resolveUserId($request);
         if (!$userId) {
-            // bindEmail 只允许真实 user_id
             $logger->log('email_bind', false, $request, null, [
                 'error' => 'UNAUTHORIZED',
-                'anon_id' => $anonId,
             ]);
             return response()->json([
                 'ok' => false,
@@ -224,39 +200,48 @@ class MeController extends Controller
         ]);
     }
 
-    /**
-     * @return array{0:?string,1:?string} [userId, anonId]
-     */
-    private function resolveIdentity(Request $request): array
+    private function resolveUserId(Request $request): ?string
     {
+        // 1) middleware 写入 attributes（推荐）
         $uid = $request->attributes->get('fm_user_id');
-        $userId = (is_string($uid) && trim($uid) !== '') ? trim($uid) : null;
-
-        $aid = $request->attributes->get('anon_id');
-        $anonId = (is_string($aid) && trim($aid) !== '') ? trim($aid) : null;
-
-        // 兼容：middleware 写入 user_id / fm_anon_id
-        if (!$userId) {
-            $uid2 = $request->attributes->get('user_id');
-            $userId = (is_string($uid2) && trim($uid2) !== '') ? trim($uid2) : null;
-        }
-        if (!$anonId) {
-            $aid2 = $request->attributes->get('fm_anon_id');
-            $anonId = (is_string($aid2) && trim($aid2) !== '') ? trim($aid2) : null;
+        if (is_string($uid) && trim($uid) !== '') {
+            return trim($uid);
         }
 
-        // Laravel Auth 作为补充（存在就用）
-        $authId = auth()->id();
-        if (!$userId && $authId !== null && (string)$authId !== '') {
-            $userId = (string) $authId;
-        }
+        // 2) 或者 middleware 登录了 Laravel Auth
+$guard = auth()->guard();
+$uAuth = $guard->user();
 
+if ($uAuth) {
+    // getAuthIdentifier() 是 Authenticatable 接口方法
+    $authId = $uAuth->getAuthIdentifier();
+    if ($authId !== null && (string) $authId !== '') {
+        return (string) $authId;
+    }
+}
+
+        // 3) 或者 request->user()
         $u = $request->user();
-        if (!$userId && $u && isset($u->id)) {
-            $userId = (string) $u->id;
+        if ($u && isset($u->id)) {
+            return (string) $u->id;
         }
 
-        return [$userId, $anonId];
+        return null;
+    }
+
+    private function resolveAnonId(Request $request): ?string
+    {
+        $anon = $request->attributes->get('anon_id');
+        if (is_string($anon) && trim($anon) !== '') {
+            return trim($anon);
+        }
+
+        $anon2 = $request->attributes->get('fm_anon_id');
+        if (is_string($anon2) && trim($anon2) !== '') {
+            return trim($anon2);
+        }
+
+        return null;
     }
 
     private function presentAttempt(Attempt $a): array
@@ -282,7 +267,7 @@ class MeController extends Controller
             $out['submitted_at'] = null;
         }
 
-        if (property_exists($a, 'ticket_code') && (string)($a->ticket_code ?? '') !== '') {
+        if (property_exists($a, 'ticket_code') && (string) ($a->ticket_code ?? '') !== '') {
             $out['lookup_key'] = (string) $a->ticket_code;
         } else {
             $out['lookup_key'] = (string) ($a->id ?? '');
