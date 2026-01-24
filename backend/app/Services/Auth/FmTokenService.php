@@ -34,10 +34,17 @@ class FmTokenService
             'token' => $token,
         ];
 
-        // 兼容不同 fm_tokens 表字段命名
-        $userCol = $this->detectUserColumn();
-        if ($userCol !== null) {
-            $row[$userCol] = $userId;
+        // ✅ 写入 user_id（长期稳定方案）
+        // - fm_tokens.user_id 存在时：写 user_id
+        // - 否则：兼容旧表字段（uid/user_uid/user）
+        // - 不允许把 anon_id 当 user id
+        if (Schema::hasColumn('fm_tokens', 'user_id')) {
+            $row['user_id'] = $userId;
+        } else {
+            $userCol = $this->detectUserColumn();
+            if ($userCol !== null) {
+                $row[$userCol] = $userId;
+            }
         }
 
         if (!array_key_exists('anon_id', $row) && Schema::hasColumn('fm_tokens', 'anon_id')) {
@@ -106,17 +113,22 @@ class FmTokenService
         }
 
         $userCol = $this->detectUserColumn();
-        $uid = $userCol ? (string) ($row->{$userCol} ?? '') : '';
-        if ($uid === '') {
-            // 没有 user 字段也不算通过（否则 /me 无法知道是谁）
-            return ['ok' => false];
-        }
+$uid = $userCol ? (string) ($row->{$userCol} ?? '') : '';
 
-        return [
-            'ok' => true,
-            'user_id' => $uid,
-            'expires_at' => $expiresAt,
-        ];
+if ($uid === '') {
+    // 匿名 token 允许通过，但没有 user_id
+    return [
+        'ok' => true,
+        'user_id' => null,
+        'expires_at' => $expiresAt,
+    ];
+}
+
+return [
+    'ok' => true,
+    'user_id' => $uid,
+    'expires_at' => $expiresAt,
+];
     }
 
     /**
