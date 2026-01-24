@@ -25,80 +25,78 @@ use App\Http\Controllers\API\V0_2\ValidityFeedbackController;
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v0.2')->group(function () {
+Route::prefix("v0.2")->group(function () {
 
     // 1) Health
-    Route::get('/health', [MbtiController::class, 'health']);
+    Route::get("/health", [MbtiController::class, "health"]);
 
     // 2) Scale meta
-    Route::get('/scales/MBTI', [MbtiController::class, 'scaleMeta']);
+    Route::get("/scales/MBTI", [MbtiController::class, "scaleMeta"]);
 
     // 3) Questions (demo)
-    Route::get('/scales/MBTI/questions', [MbtiController::class, 'questions']);
+    Route::get("/scales/MBTI/questions", [MbtiController::class, "questions"]);
 
     // 4) Submit attempt (anonymous allowed)
-    Route::post('/attempts', [MbtiController::class, 'storeAttempt']);
+    Route::post("/attempts", [MbtiController::class, "storeAttempt"]);
 
     // 5) Start attempt (anonymous allowed)
-    Route::post('/attempts/start', [MbtiController::class, 'startAttempt']);
+    Route::post("/attempts/start", [MbtiController::class, "startAttempt"]);
 
     // 6) Public share info
-    Route::get('/attempts/{id}/share', [MbtiController::class, 'getShare']);
-
-    // ✅ Public read endpoints (CI verify-mbti needs these WITHOUT token)
-    Route::get('/attempts/{id}/result', [MbtiController::class, 'getResult']);
-    Route::get('/attempts/{id}/report', [MbtiController::class, 'getReport']);
+    Route::get("/attempts/{id}/share", [MbtiController::class, "getShare"]);
 
     // 6.5) Lookups
-    Route::get('/lookup/ticket/{code}', [LookupController::class, 'lookupTicket']);
-    Route::post('/lookup/order', [LookupController::class, 'lookupOrder']);
+    Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
+    Route::post("/lookup/order", [LookupController::class, "lookupOrder"]);
 
     // 7) Share click (public)
-    Route::post('/shares/{shareId}/click', [ShareController::class, 'click']);
+    Route::post("/shares/{shareId}/click", [ShareController::class, "click"]);
 
     // Auth (public)
-    Route::post('/auth/wx_phone', \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
-    Route::post('/auth/phone/send_code', [AuthPhoneController::class, 'sendCode']);
-    Route::post('/auth/phone/verify', [AuthPhoneController::class, 'verify']);
-    Route::post('/auth/provider', [AuthProviderController::class, 'login']);
-    Route::get('/claim/report', [ClaimController::class, 'report']);
+    Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
+    Route::post("/auth/phone/send_code", [AuthPhoneController::class, "sendCode"]);
+    Route::post("/auth/phone/verify", [AuthPhoneController::class, "verify"]);
+    Route::post("/auth/provider", [AuthProviderController::class, "login"]);
+    Route::get("/claim/report", [ClaimController::class, "report"]);
 
     // Events ingestion (public for now)
-    Route::post('/events', [EventController::class, 'store']);
+    Route::post("/events", [EventController::class, "store"]);
 
     // Norms (stub)
-    Route::get('/norms/percentile', [NormsController::class, 'percentile']);
+    Route::get("/norms/percentile", [NormsController::class, "percentile"]);
 
     // Payments webhook (mock, public)
-    Route::post('/payments/webhook/mock', [PaymentsController::class, 'webhookMock']);
+    Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
 
     // =========================================================
-    // Token gate: endpoints needing identity / write operations
+    // Minimal token gate: endpoints needing identity
     // =========================================================
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
 
         // /me/*
-        Route::get('/me/attempts', [MeController::class, 'attempts']);
-        Route::post('/me/email/bind', [MeController::class, 'bindEmail']);
-        Route::post('/me/identities/bind', [IdentityController::class, 'bind']);
-        Route::get('/me/identities', [IdentityController::class, 'index']);
+        Route::get("/me/attempts", [MeController::class, "attempts"]);
+        Route::post("/me/email/bind", [MeController::class, "bindEmail"]);
+        Route::post("/me/identities/bind", [IdentityController::class, "bind"]);
+        Route::get("/me/identities", [IdentityController::class, "index"]);
 
-        // Attempts write (needs fm_user_id to backfill events.user_id)
-        Route::post('/attempts/{id}/result', [MbtiController::class, 'upsertResult']);
+        // Attempts gated endpoints
+        Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
+        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
+        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
 
-        Route::post('/attempts/{attempt_id}/feedback', [ValidityFeedbackController::class, 'store']);
-        Route::post('/lookup/device', [LookupController::class, 'lookupDevice']);
+        Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
+        Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
 
         // Payments (v0.2)
-        Route::prefix('payments')->group(function () {
-            Route::post('/orders', [PaymentsController::class, 'createOrder']);
-            Route::post('/orders/{id}/mark_paid', [PaymentsController::class, 'markPaid']);
-            Route::post('/orders/{id}/fulfill', [PaymentsController::class, 'fulfill']);
-            Route::get('/me/benefits', [PaymentsController::class, 'meBenefits']);
+        Route::prefix("payments")->group(function () {
+            Route::post("/orders", [PaymentsController::class, "createOrder"]);
+            Route::post("/orders/{id}/mark_paid", [PaymentsController::class, "markPaid"]);
+            Route::post("/orders/{id}/fulfill", [PaymentsController::class, "fulfill"]);
+            Route::get("/me/benefits", [PaymentsController::class, "meBenefits"]);
         });
     });
 });
