@@ -16,10 +16,9 @@ class FmTokenAuth
      * Expect:
      *   Authorization: Bearer fm_xxxxx
      *
-     * Phase B:
      * - validate fm_token format
-     * - resolve user_id from fm_tokens table
-     * - attach fm_token / fm_user_id to request attributes
+     * - resolve user_id / anon_id from fm_tokens table
+     * - attach fm_token / fm_user_id / user_id / anon_id to request attributes
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -28,7 +27,7 @@ class FmTokenAuth
         // Accept: "Bearer <token>"
         $token = '';
         if (preg_match('/^\s*Bearer\s+(.+)\s*$/i', $header, $m)) {
-            $token = trim((string)($m[1] ?? ''));
+            $token = trim((string) ($m[1] ?? ''));
         }
 
         // Minimal format check: "fm_" + UUID
@@ -46,7 +45,7 @@ class FmTokenAuth
         // ✅ Always attach token for downstream use
         $request->attributes->set('fm_token', $token);
 
-        // ✅ Resolve identity from DB: fm_tokens.token -> user_id
+        // ✅ Resolve identity from DB: fm_tokens.token -> user_id / anon_id
         $row = DB::table('fm_tokens')
             ->where('token', $token)
             ->first();
@@ -55,9 +54,9 @@ class FmTokenAuth
             return $this->unauthorizedResponse();
         }
 
-        // Optional: expires check (目前你是 null，不会触发)
-        if ($row && !empty($row->expires_at)) {
-            $exp = strtotime((string)$row->expires_at);
+        // Optional: expires check
+        if (!empty($row->expires_at)) {
+            $exp = strtotime((string) $row->expires_at);
             if ($exp !== false && $exp < time()) {
                 return $this->unauthorizedResponse();
             }
@@ -69,7 +68,9 @@ class FmTokenAuth
             if (strlen($userId) > 128) {
                 return $this->unauthorizedResponse();
             }
+            // ✅✅ 统一挂两份，避免下游读不同 key
             $request->attributes->set('fm_user_id', $userId);
+            $request->attributes->set('user_id', $userId);
         }
 
         $anonId = $this->resolveAnonId($row);
@@ -78,8 +79,7 @@ class FmTokenAuth
                 return $this->unauthorizedResponse();
             }
             $request->attributes->set('anon_id', $anonId);
-        } else {
-            // TODO: fm_tokens.anon_id not available; keep behavior non-breaking.
+            $request->attributes->set('fm_anon_id', $anonId);
         }
 
         return $next($request);
@@ -87,22 +87,25 @@ class FmTokenAuth
 
     private function resolveUserId(object $row): string
     {
+        // 优先：fm_tokens.user_id
         if (Schema::hasColumn('fm_tokens', 'user_id')) {
-            return trim((string) ($row->user_id ?? ''));
-        }
-
-        // ✅ fallback：当前 fm_tokens 只有 anon_id 列，但 /me/attempts 依赖 fm_user_id
-        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
-            $v = trim((string) ($row->anon_id ?? ''));
+            $v = trim((string) ($row->user_id ?? ''));
             if ($v !== '') return $v;
         }
 
+        // 兼容字段（老数据）
         $candidates = ['uid', 'user_uid', 'user'];
         foreach ($candidates as $c) {
             if (property_exists($row, $c)) {
                 $val = trim((string) ($row->{$c} ?? ''));
                 if ($val !== '') return $val;
             }
+        }
+
+        // 最后兜底：anon_id（仅在确实需要且结构如此时才会返回）
+        if (Schema::hasColumn('fm_tokens', 'anon_id')) {
+            $v = trim((string) ($row->anon_id ?? ''));
+            if ($v !== '') return $v;
         }
 
         return '';
@@ -113,7 +116,6 @@ class FmTokenAuth
         if (Schema::hasColumn('fm_tokens', 'anon_id')) {
             return trim((string) ($row->anon_id ?? ''));
         }
-
         return '';
     }
 
