@@ -24,9 +24,8 @@ class MeController extends Controller
      * - reads fm_user_id (numeric) and/or anon_id from request attributes
      *
      * Behavior:
-     * - If user_id exists: query attempts.user_id = user_id
-     * - Else if anon_id exists: query attempts.anon_id = anon_id
-     * - Return items + pagination
+     * - allow both user_id mode and anon_id mode
+     * - query with OR so CI accept_phone (user_id=NULL, anon_id=accept_phone_xxx) is returned
      */
     public function attempts(Request $request)
     {
@@ -48,12 +47,22 @@ class MeController extends Controller
 
         $q = Attempt::query();
 
-        // Prefer user_id; if missing, use anon_id fallback (CI accept_phone path)
-        if ($userId !== null) {
-            $q->where('user_id', $userId);
-        } else {
-            $q->where('anon_id', $anonId);
-        }
+        // ✅ 关键：用 OR 组合，兼容多种落库方式
+        $q->where(function ($w) use ($userId, $anonId) {
+            if ($userId !== null) {
+                $w->orWhere('user_id', $userId);
+            }
+
+            if ($anonId !== null) {
+                // 正常匿名链路：attempts.anon_id = anon_id
+                if (Schema::hasColumn('attempts', 'anon_id')) {
+                    $w->orWhere('anon_id', $anonId);
+                }
+
+                // 兼容历史：有人把 anon_id 写到 user_id 字段
+                $w->orWhere('user_id', $anonId);
+            }
+        });
 
         // order by submitted_at when exists, else created_at
         if (Schema::hasColumn('attempts', 'submitted_at')) {
@@ -221,7 +230,7 @@ class MeController extends Controller
             if ($uid2 !== '' && preg_match('/^\d+$/', $uid2)) return $uid2;
         }
 
-        // 2) Laravel Auth (not required, but safe fallback)
+        // 2) Laravel Auth (safe fallback)
         $authId = Auth::id();
         if ($authId !== null) {
             $s = trim((string) $authId);
@@ -252,12 +261,18 @@ class MeController extends Controller
             if ($anon2 !== '') return $anon2;
         }
 
+        // 再兜底：部分客户端会显式传 anon_id
+        $h = trim((string) $request->header('X-Anon-Id', ''));
+        if ($h !== '') return $h;
+
+        $q = trim((string) $request->query('anon_id', ''));
+        if ($q !== '') return $q;
+
         return null;
     }
 
     private function presentAttempt(Attempt $a): array
     {
-        // only expose minimal fields (avoid answers_json etc.)
         $out = [
             'attempt_id'    => (string) ($a->id ?? ''),
             'scale_code'    => (string) ($a->scale_code ?? 'MBTI'),
