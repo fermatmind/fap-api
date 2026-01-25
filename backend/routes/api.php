@@ -73,7 +73,15 @@ Route::prefix("v0.2")->group(function () {
     Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
 
     // =========================================================
-    // Minimal token gate: endpoints needing identity
+    // Optional token attach (no 401): allow anon access + enrich events.user_id when token exists
+    // =========================================================
+    Route::middleware(\App\Http\Middleware\FmTokenOptional::class)->group(function () {
+        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
+        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
+    });
+
+    // =========================================================
+    // Strict token gate: endpoints needing identity
     // =========================================================
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
 
@@ -85,8 +93,6 @@ Route::prefix("v0.2")->group(function () {
 
         // Attempts gated endpoints
         Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
-        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
-        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
 
         Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
         Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
