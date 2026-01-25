@@ -1,3 +1,4 @@
+# .github/workflows/rollback-production.yml
 name: Rollback Production
 
 on:
@@ -27,9 +28,9 @@ jobs:
           php-version: "8.4"
           coverage: none
 
-      - name: Install Deployer (PHAR)
+      - name: Install Deployer (PHAR v7.5.12)
         run: |
-          curl -sSLo dep.phar https://deployer.org/deployer.phar
+          curl -sSLo dep.phar https://github.com/deployphp/deployer/releases/download/v7.5.12/deployer.phar
           php dep.phar --version
 
       - name: Setup SSH Agent
@@ -49,7 +50,7 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
         run: |
-          php dep.phar rollback production -vvv
+          php dep.phar rollback production -f deploy.php -vvv
 
       - name: Post-rollback Health Check (public)
         run: |
