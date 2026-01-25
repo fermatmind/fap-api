@@ -76,6 +76,22 @@ task('artisan:view:cache', function () {
     writeln('<comment>Skip artisan:view:cache (no views)</comment>');
 });
 
+// ========= 安全门禁：禁止 destructive migration =========
+task('guard:forbid-destructive', function () {
+    // 明确禁止的 artisan 命令（生产底座门禁）
+    $blocked = [
+        'migrate:fresh',
+        'db:wipe',
+    ];
+
+    foreach ($blocked as $cmd) {
+        // 显式定义这些任务为“硬失败”，让误用直接中断并留下审计信息
+        task("artisan:{$cmd}", function () use ($cmd) {
+            throw new \RuntimeException("❌ FORBIDDEN on production: php artisan {$cmd}. Use php artisan migrate --force only.");
+        });
+    }
+});
+
 // ========= 服务重载 =========
 task('reload:php-fpm', function () {
     run('sudo -n /usr/bin/systemctl reload php8.4-fpm');
@@ -121,6 +137,8 @@ task('healthcheck', function () {
 });
 
 // ========= hooks =========
+before('deploy', 'guard:forbid-destructive');
+
 after('artisan:migrate', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck');
