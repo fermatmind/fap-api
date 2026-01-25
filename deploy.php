@@ -96,12 +96,13 @@ task('healthcheck', function () {
 
     $nginxSite = '/etc/nginx/sites-enabled/fap-api';
     $expectedRoot = 'root /var/www/fap-api/current/backend/public;';
+
     // Ensure nginx root points to current release (one-time drift-proof)
     run("test -f {$nginxSite}");
     $hasExpected = run("grep -F \"{$expectedRoot}\" {$nginxSite} >/dev/null 2>&1; echo $?");
     if (trim($hasExpected) !== '0') {
         // Replace any existing root directive inside this site file
-        run("sudo -n /usr/bin/sed -i -E 's#^\\s*root\\s+[^;]+;\\s*#    {$expectedRoot}\\n#' {$nginxSite}");
+        run("sudo -n /usr/bin/sed -i -E 's#^[[:space:]]*root[[:space:]]+[^;]+;[[:space:]]*$#    {$expectedRoot}#' {$nginxSite}");
         run("sudo -n /usr/sbin/nginx -t");
         run("sudo -n /usr/bin/systemctl reload nginx");
     }
