@@ -248,7 +248,11 @@ public function storeAttempt(Request $request)
     $expectedQuestionCount = 144;
 
     // 题库索引：question_id => meta
-    $index = $this->getQuestionsIndex();
+    $index = $this->getQuestionsIndex(
+        $payload['region'] ?? null,
+        $payload['locale'] ?? null,
+        $this->currentContentPackageVersion()
+    );
 
     // 校验 question_id 必须存在
     $unknown = [];
@@ -2244,13 +2248,16 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
      * 读取题库，并构建 question_id => meta 索引
      * meta: dimension, key_pole, direction, score_map
      */
-    private function getQuestionsIndex(): array
+    private function getQuestionsIndex(?string $region = null, ?string $locale = null, ?string $pkgVersion = null): array
     {
         if ($this->questionsIndex !== null) {
             return $this->questionsIndex;
         }
 
-        $pkg = $this->normalizeContentPackageDir($this->currentContentPackageVersion());
+        $ver = $pkgVersion ?: $this->currentContentPackageVersion();
+        $region = $region ?: 'CN_MAINLAND';
+        $locale = $locale ?: 'zh-CN';
+        $pkg = $this->normalizeContentPackageDir("default/{$region}/{$locale}/{$ver}");
         $path = $this->findPackageFile($pkg, 'questions.json');
 
         if (!$path || !is_file($path)) {
