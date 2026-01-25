@@ -94,6 +94,18 @@ task('healthcheck', function () {
     // - 用 --resolve 把 $host:443 固定指向 127.0.0.1，不依赖外网/公网回环
     // - 不再走 http://127.0.0.1 触发 301
 
+    $nginxSite = '/etc/nginx/sites-enabled/fap-api';
+    $expectedRoot = 'root /var/www/fap-api/current/backend/public;';
+    // Ensure nginx root points to current release (one-time drift-proof)
+    run("sudo test -f {$nginxSite}");
+    $hasExpected = run("sudo grep -F \"{$expectedRoot}\" {$nginxSite} >/dev/null 2>&1; echo $?");
+    if (trim($hasExpected) !== '0') {
+        // Replace any existing root directive inside this site file
+        run("sudo sed -i -E 's#^\\sroot\\s+[^;]+;\\s#    {$expectedRoot}\\n#' {$nginxSite}");
+        run("sudo nginx -t");
+        run("sudo /usr/bin/systemctl reload nginx");
+    }
+
     run('curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host . '/api/v0.2/health | grep -q "\"ok\":true"');
 
     run('curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host . '/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
