@@ -103,7 +103,7 @@ task('healthcheck', function () {
         'curl -fsS --resolve ' . $host . ':443:127.0.0.1 ' .
         '-X POST https://' . $host . '/api/v0.2/attempts/start ' .
         '-H "Content-Type: application/json" -H "Accept: application/json" ' .
-        '-d \'' . $payload . '\' | grep -q "\"ok\":true"'
+        '-d \'' . $payload . '\' | grep -q "\"ok\":trueX"'
     );
 });
 
