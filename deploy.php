@@ -12,17 +12,11 @@ set('keep_releases', 5);
 set('default_timeout', 900);
 
 // ========= 关键：Laravel 在 backend 子目录 =========
-// public_path 用相对 release_path 的路径
 set('public_path', 'backend/public');
 
-// artisan 文件实际在 backend/artisan
-set('artisan', '{{release_path}}/backend/artisan');
-
-// ⚠️ 最关键：所有 artisan:* 任务最终用的是 bin/artisan
-// 不把它改掉，Deployer 仍然会去跑 releases/X/artisan（根目录）=> 你现在的报错
+// 服务器执行命令用什么
 set('bin/php', 'php');
 set('bin/composer', 'composer');
-set('bin/artisan', '{{bin/php}} {{release_path}}/backend/artisan');
 
 // ========= Shared / Writable =========
 set('shared_files', [
@@ -40,7 +34,7 @@ set('writable_dirs', [
     'backend/bootstrap/cache',
 ]);
 
-// 你现在服务器 ACL/权限容易踩坑，直接用 chmod 最稳
+// 直接 chmod，避免 ACL/权限坑
 set('writable_mode', 'chmod');
 set('writable_chmod_mode', '0775');
 set('writable_use_sudo', false);
@@ -57,6 +51,31 @@ task('deploy:vendors', function () {
     run('cd {{release_path}}/backend && {{bin/composer}} install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
 });
 
+// ========= 强制覆盖 artisan:* 任务：永远走 backend/artisan =========
+// 你的报错就是这里：recipe 默认跑 releases/X/artisan（根目录）
+// 这里直接把任务重定义，彻底杜绝跑错路径
+
+task('artisan:storage:link', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan storage:link --ansi');
+});
+
+task('artisan:config:cache', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan config:cache --ansi');
+});
+
+task('artisan:route:cache', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan route:cache --ansi');
+});
+
+task('artisan:event:cache', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan event:cache --ansi');
+});
+
+// 你的项目没有 views，view:cache 会炸：View path not found.
+task('artisan:view:cache', function () {
+    writeln('<comment>Skip artisan:view:cache (no views)</comment>');
+});
+
 // ========= 服务重载 =========
 task('reload:php-fpm', function () {
     run('sudo /usr/bin/systemctl reload php8.4-fpm');
@@ -68,20 +87,13 @@ task('reload:nginx', function () {
 
 // ========= 健康检查（服务器本机 localhost，不依赖外网 DNS） =========
 task('healthcheck', function () {
-    // 1) questions
     run('curl -fsS http://127.0.0.1/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
 
-    // 2) attempts/start
     $payload = '{"anon_id":"dep-health-001","scale_code":"MBTI","scale_version":"v0.2","question_count":144,"client_platform":"web","region":"CN_MAINLAND","locale":"zh-CN"}';
     run('curl -fsS -X POST http://127.0.0.1/api/v0.2/attempts/start -H "Content-Type: application/json" -H "Accept: application/json" -d \'' . $payload . '\' | grep -q "\"ok\":true"');
 });
 
-// ========= 关键：跳过 view:cache（你的项目没有 views 会直接炸） =========
-task('artisan:view:cache', function () {
-    writeln('<comment>Skip artisan:view:cache (no views)</comment>');
-});
-
-// ========= 部署流的钩子（laravel.php 自带 deploy 流里已有 migrate 等） =========
+// ========= hooks =========
 after('artisan:migrate', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck');
