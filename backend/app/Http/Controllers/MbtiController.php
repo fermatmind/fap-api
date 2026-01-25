@@ -196,6 +196,13 @@ public function startAttempt(Request $request)
         ],
     ]);
 
+    Log::info('[attempt_start] created', [
+        'attempt_id'    => (string) $attempt->id,
+        'anon_id'       => (string) $attempt->anon_id,
+        'scale_code'    => (string) $attempt->scale_code,
+        'scale_version' => (string) $attempt->scale_version,
+    ]);
+
     return response()->json([
         'ok' => true,
         'id' => (string) $attempt->id,
@@ -228,6 +235,14 @@ public function storeAttempt(Request $request)
         'region'          => ['nullable', 'string', 'max:32'],
         'locale'          => ['nullable', 'string', 'max:16'],
         'attempt_id'      => ['nullable', 'string', 'max:64'],
+    ]);
+
+    $attemptId = isset($payload['attempt_id']) && is_string($payload['attempt_id']) && trim($payload['attempt_id']) !== ''
+        ? trim($payload['attempt_id'])
+        : (string) Str::uuid();
+
+    Log::info('[attempt_submit] received', [
+        'attempt_id' => $attemptId,
     ]);
 
     $expectedQuestionCount = 144;
@@ -447,6 +462,7 @@ public function storeAttempt(Request $request)
     return DB::transaction(function () use (
         $request,
         $payload,
+        $attemptId,
         $expectedQuestionCount,
         $answersSummary,
         $typeCode,
@@ -459,11 +475,6 @@ public function storeAttempt(Request $request)
         $answersHash,
         $answersStoragePath
     ) {
-        // ✅ 1) 优先复用 startAttempt 生成的 attempt_id
-        $attemptId = isset($payload['attempt_id']) && is_string($payload['attempt_id']) && trim($payload['attempt_id']) !== ''
-            ? trim($payload['attempt_id'])
-            : (string) Str::uuid();
-
         $existingAttempt = Attempt::where('id', $attemptId)->first();
 
         if ($existingAttempt) {
@@ -1086,6 +1097,10 @@ $this->logEvent('share_view', $request, [
  */
 public function getReport(Request $request, string $attemptId)
 {
+    Log::info('[attempt_report] received', [
+        'attempt_id' => $attemptId,
+    ]);
+
     if (app()->environment('local')) {
         Log::debug('[RE] enter getReport', [
             'APP_ENV'  => app()->environment(),

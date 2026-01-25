@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class FmTokenAuth
@@ -41,7 +42,7 @@ class FmTokenAuth
         );
 
         if (!$isOk) {
-            return $this->unauthorizedResponse();
+            return $this->unauthorizedResponse($request, 'token_missing_or_invalid');
         }
 
         // Always attach token for downstream use
@@ -50,14 +51,14 @@ class FmTokenAuth
         // Resolve identity from DB: fm_tokens.token -> user_id / anon_id
         $row = DB::table('fm_tokens')->where('token', $token)->first();
         if (!$row) {
-            return $this->unauthorizedResponse();
+            return $this->unauthorizedResponse($request, 'token_not_found');
         }
 
         // expires_at check (only when present)
         if (property_exists($row, 'expires_at') && !empty($row->expires_at)) {
             $exp = strtotime((string) $row->expires_at);
             if ($exp !== false && $exp < time()) {
-                return $this->unauthorizedResponse();
+                return $this->unauthorizedResponse($request, 'token_expired');
             }
         }
 
@@ -66,11 +67,11 @@ class FmTokenAuth
         if ($userId !== '') {
             // basic sanity
             if (strlen($userId) > 64) {
-                return $this->unauthorizedResponse();
+                return $this->unauthorizedResponse($request, 'user_id_too_long');
             }
             // numeric-only (events.user_id is bigint)
             if (!preg_match('/^\d+$/', $userId)) {
-                return $this->unauthorizedResponse();
+                return $this->unauthorizedResponse($request, 'user_id_not_numeric');
             }
 
             $request->attributes->set('fm_user_id', $userId);
@@ -81,12 +82,14 @@ class FmTokenAuth
         $anonId = $this->resolveBestAnonId($row, $request);
         if ($anonId !== '') {
             if (strlen($anonId) > 128) {
-                return $this->unauthorizedResponse();
+                return $this->unauthorizedResponse($request, 'anon_id_too_long');
             }
 
             $request->attributes->set('anon_id', $anonId);
             $request->attributes->set('fm_anon_id', $anonId);
         }
+
+        $this->logAuthResult($request, true);
 
         return $next($request);
     }
@@ -131,8 +134,10 @@ class FmTokenAuth
         return $fromToken;
     }
 
-    private function unauthorizedResponse(): Response
+    private function unauthorizedResponse(Request $request, string $reason): Response
     {
+        $this->logAuthResult($request, false, $reason);
+
         return response()->json([
             'ok'      => false,
             'error'   => 'UNAUTHORIZED',
@@ -140,5 +145,44 @@ class FmTokenAuth
         ], 401)->withHeaders([
             'WWW-Authenticate' => 'Bearer realm="Fermat API", error="invalid_token"',
         ]);
+    }
+
+    private function logAuthResult(Request $request, bool $ok, string $reason = ''): void
+    {
+        $context = [
+            'ok' => $ok,
+            'path' => $request->path(),
+            'method' => $request->method(),
+            'attempt_id' => $this->extractAttemptId($request),
+        ];
+
+        if ($reason !== '') {
+            $context['reason'] = $reason;
+        }
+
+        Log::info($ok ? '[fm_token_auth] passed' : '[fm_token_auth] failed', $context);
+    }
+
+    private function extractAttemptId(Request $request): ?string
+    {
+        $routeAttemptId = $request->route('attempt_id');
+        if (is_string($routeAttemptId) || is_numeric($routeAttemptId)) {
+            $val = trim((string) $routeAttemptId);
+            if ($val !== '') return $val;
+        }
+
+        $routeId = $request->route('id');
+        if (is_string($routeId) || is_numeric($routeId)) {
+            $val = trim((string) $routeId);
+            if ($val !== '') return $val;
+        }
+
+        $bodyAttemptId = $request->input('attempt_id');
+        if (is_string($bodyAttemptId) || is_numeric($bodyAttemptId)) {
+            $val = trim((string) $bodyAttemptId);
+            if ($val !== '') return $val;
+        }
+
+        return null;
     }
 }
