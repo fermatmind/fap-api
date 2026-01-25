@@ -112,4 +112,7 @@ after('artisan:migrate', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck');
 
+after('deploy:failed', 'rollback');
+after('rollback', 'reload:php-fpm');
+after('rollback', 'reload:nginx');
 after('deploy:failed', 'deploy:unlock');
