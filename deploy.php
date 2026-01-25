@@ -78,11 +78,11 @@ task('artisan:view:cache', function () {
 
 // ========= 服务重载 =========
 task('reload:php-fpm', function () {
-    run('sudo /usr/bin/systemctl reload php8.4-fpm');
+    run('sudo -n /usr/bin/systemctl reload php8.4-fpm');
 });
 
 task('reload:nginx', function () {
-    run('sudo /usr/bin/systemctl reload nginx');
+    run('sudo -n /usr/bin/systemctl reload nginx');
 });
 
 // ========= 健康检查（修复点：HTTP->HTTPS 301 + 命中正确 vhost） =========
@@ -97,13 +97,13 @@ task('healthcheck', function () {
     $nginxSite = '/etc/nginx/sites-enabled/fap-api';
     $expectedRoot = 'root /var/www/fap-api/current/backend/public;';
     // Ensure nginx root points to current release (one-time drift-proof)
-    run("sudo test -f {$nginxSite}");
-    $hasExpected = run("sudo grep -F \"{$expectedRoot}\" {$nginxSite} >/dev/null 2>&1; echo $?");
+    run("test -f {$nginxSite}");
+    $hasExpected = run("grep -F \"{$expectedRoot}\" {$nginxSite} >/dev/null 2>&1; echo $?");
     if (trim($hasExpected) !== '0') {
         // Replace any existing root directive inside this site file
-        run("sudo sed -i -E 's#^\\sroot\\s+[^;]+;\\s#    {$expectedRoot}\\n#' {$nginxSite}");
-        run("sudo nginx -t");
-        run("sudo /usr/bin/systemctl reload nginx");
+        run("sudo -n /usr/bin/sed -i -E 's#^\\s*root\\s+[^;]+;\\s*#    {$expectedRoot}\\n#' {$nginxSite}");
+        run("sudo -n /usr/sbin/nginx -t");
+        run("sudo -n /usr/bin/systemctl reload nginx");
     }
 
     run('curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host . '/api/v0.2/health | grep -q "\"ok\":true"');
