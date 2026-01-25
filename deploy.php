@@ -78,11 +78,11 @@ task('artisan:view:cache', function () {
 
 // ========= 服务重载 =========
 task('reload:php-fpm', function () {
-    run('sudo /usr/bin/systemctl reload php8.4-fpm');
+    run('sudo -n /usr/bin/systemctl reload php8.4-fpm');
 });
 
 task('reload:nginx', function () {
-    run('sudo /usr/bin/systemctl reload nginx');
+    run('sudo -n /usr/bin/systemctl reload nginx');
 });
 
 // ========= 健康检查（修复点：HTTP->HTTPS 301 + 命中正确 vhost） =========
@@ -101,7 +101,7 @@ task('healthcheck', function () {
     $hasExpected = run("grep -F \"{$expectedRoot}\" {$nginxSite} >/dev/null 2>&1; echo $?");
     if (trim($hasExpected) !== '0') {
         // Replace any existing root directive inside this site file
-        run("sudo -n /usr/bin/sed -i -E 's#^\\sroot\\s+[^;]+;\\s#    {$expectedRoot}\\n#' {$nginxSite}");
+        run("sudo -n /usr/bin/sed -i -E 's#^\\s*root\\s+[^;]+;\\s*#    {$expectedRoot}\\n#' {$nginxSite}");
         run("sudo -n /usr/sbin/nginx -t");
         run("sudo -n /usr/bin/systemctl reload nginx");
     }
