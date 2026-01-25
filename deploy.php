@@ -11,19 +11,19 @@ set('git_tty', false);
 set('keep_releases', 5);
 set('default_timeout', 900);
 
+// ========= 目录结构（Laravel 在 backend 子目录） =========
+set('public_path', 'backend/public');
+
+// 关键：统一 artisan 入口（强制指向 backend/artisan）
 set('bin/php', 'php');
+set('bin/artisan', function () {
+    return '{{bin/php}} {{release_path}}/backend/artisan';
+});
+
+//（可选）composer 在远端用系统 composer
 set('bin/composer', 'composer');
 
-// ========= Laravel 在 backend 子目录（全局默认） =========
-set('public_path', 'backend/public');
-set('artisan', '{{release_path}}/backend/artisan');
-
-// ========= writable 策略（避免 ACL/ setfacl 依赖） =========
-set('writable_mode', 'chmod');
-set('writable_recursive', true);
-set('writable_chmod_mode', '0775');
-
-// ========= 共享：.env + storage/cache + content_packages =========
+// ========= shared / writable =========
 set('shared_files', [
     'backend/.env',
 ]);
@@ -39,19 +39,52 @@ set('writable_dirs', [
     'backend/bootstrap/cache',
 ]);
 
+// 关键：不要用 ACL（GitHub Actions / deploy 用户常见会卡），用 chmod
+set('writable_mode', 'chmod');
+set('writable_chmod_mode', '0775');
+set('writable_recursive', true);
+
 // ========= 生产机 =========
 host('production')
     ->setHostname(getenv('DEPLOY_HOST') ?: '122.152.221.126')
     ->setRemoteUser(getenv('DEPLOY_USER') ?: 'deploy')
     ->setPort((int)(getenv('DEPLOY_PORT') ?: 22))
-    ->set('deploy_path', '/var/www/fap-api')
-    // 关键：在 host 级别再压一遍，确保 recipe 不会覆盖成 releases/<n>/artisan
-    ->set('public_path', 'backend/public')
-    ->set('artisan', '{{release_path}}/backend/artisan');
+    ->set('deploy_path', '/var/www/fap-api');
 
 // ========= 覆盖 vendors：在 backend 里 composer install =========
 task('deploy:vendors', function () {
     run('cd {{release_path}}/backend && {{bin/composer}} install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
+});
+
+// ========= 覆盖 laravel recipe 的 artisan 相关任务（全部走 backend/artisan） =========
+task('artisan:storage:link', function () {
+    run('{{bin/artisan}} storage:link');
+});
+
+task('artisan:config:cache', function () {
+    run('{{bin/artisan}} config:cache');
+});
+
+task('artisan:route:cache', function () {
+    run('{{bin/artisan}} route:cache');
+});
+
+task('artisan:view:cache', function () {
+    run('{{bin/artisan}} view:cache');
+});
+
+task('artisan:event:cache', function () {
+    run('{{bin/artisan}} event:cache');
+});
+
+task('artisan:migrate', function () {
+    run('{{bin/artisan}} migrate --force');
+});
+
+// 关键：laravel recipe 有时会先取版本号（默认去找 release_path/artisan）
+// 这里强制改成 backend/artisan
+set('laravel_version', function () {
+    return run('{{bin/artisan}} --version');
 });
 
 // ========= 服务重载 =========
@@ -65,19 +98,14 @@ task('reload:nginx', function () {
 
 // ========= 健康检查（服务器本机 localhost，不依赖外网 DNS） =========
 task('healthcheck', function () {
-    // 1) questions
     run('curl -fsS http://127.0.0.1/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
 
-    // 2) attempts/start（按接口必填字段）
     $payload = '{"anon_id":"dep-health-001","scale_code":"MBTI","scale_version":"v0.2","question_count":144,"client_platform":"web","region":"CN_MAINLAND","locale":"zh-CN"}';
     run('curl -fsS -X POST http://127.0.0.1/api/v0.2/attempts/start -H "Content-Type: application/json" -H "Accept: application/json" -d \'' . $payload . '\' | grep -q "\"ok\":true"');
 });
 
-// ========= Hook（laravel.php 自带 deploy 流） =========
-// laravel recipe 默认会跑 artisan:migrate；迁移后 reload php-fpm
+// ========= 部署流（laravel.php 自带 deploy 流） =========
 after('artisan:migrate', 'reload:php-fpm');
-
-// 切换 symlink 后 reload nginx + 健康检查
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck');
 
