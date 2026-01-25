@@ -41,9 +41,11 @@ class MbtiController extends Controller
      * ✅ config-cache 安全：业务代码只读 config（.env 由 config/fap.php 读取）
      */
     private function currentContentPackageVersion(): string
-    {
-        return (string) config('fap.content_package_version', 'MBTI-CN-v0.2.1-TEST');
-    }
+{
+    // 统一用“包名”（不带 default/region/locale 前缀）
+    // 当前线上默认指到 v0.2.1-TEST
+    return 'MBTI-CN-v0.2.1-TEST';
+}
 
     /**
      * 健康检查：确认 API 服务在线
@@ -4231,27 +4233,26 @@ private function persistAnswersToStorage(array $answers, string $pkg, string $an
  */
 private function normalizeContentPackageDir(string $pkgOrVersion): string
 {
-    $s = trim((string)$pkgOrVersion);
-    if ($s === '') return $this->currentContentPackageVersion();
+    $pkgOrVersion = trim(str_replace('\\', '/', $pkgOrVersion), "/ \t\n\r\0\x0B");
 
-    if (str_starts_with($s, 'MBTI-CN-')) {
-        return $s;
+    // 已经是 default/<region>/<locale>/... 这种完整路径，直接返回
+    if (preg_match('#^default/[^/]+/[^/]+/.+#', $pkgOrVersion)) {
+        return $pkgOrVersion;
     }
 
-    // pack_id: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
-    if (substr_count($s, '.') >= 3) {
-        $parts = explode('.', $s);
-        $ver = implode('.', array_slice($parts, 3)); // v0.2.1-TEST
-        return 'MBTI-CN-' . $ver;
+    // 允许直接传 <region>/<locale>/...（也补成 default 前缀）
+    if (preg_match('#^[A-Z_]+/[a-z]{2}(?:-[A-Z]{2}|-[A-Za-z0-9]+)?/.+#', $pkgOrVersion)) {
+        return 'default/' . $pkgOrVersion;
     }
 
-    // pure version: v0.2.1-TEST
-    if (str_starts_with($s, 'v')) {
-        return 'MBTI-CN-' . $s;
-    }
+    // 从请求里取 region/locale；没有传就用固定默认值
+    $region = (string) (request()->header('X-Region') ?: request()->input('region') ?: 'CN_MAINLAND');
+    $locale = (string) (request()->header('X-Locale') ?: request()->input('locale') ?: 'zh-CN');
 
-    // 兜底：当作目录名
-    return $s;
+    $region = trim(str_replace('\\', '/', $region), "/ \t\n\r\0\x0B");
+    $locale = trim(str_replace('\\', '/', $locale), "/ \t\n\r\0\x0B");
+
+    return "default/{$region}/{$locale}/{$pkgOrVersion}";
 }
 
 private function mergeNonNullRecursive(array $base, array $override): array
