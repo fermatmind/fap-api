@@ -11,19 +11,18 @@ set('git_tty', false);
 set('keep_releases', 5);
 set('default_timeout', 900);
 
-// ========= 目录结构（Laravel 在 backend 子目录） =========
+// ========= Laravel 在 backend 子目录 =========
 set('public_path', 'backend/public');
 
-// 关键：统一 artisan 入口（强制指向 backend/artisan）
+// artisan 路径（关键：指向 backend/artisan）
+set('artisan', '{{release_path}}/backend/artisan');
 set('bin/php', 'php');
-set('bin/artisan', function () {
-    return '{{bin/php}} {{release_path}}/backend/artisan';
-});
-
-//（可选）composer 在远端用系统 composer
 set('bin/composer', 'composer');
 
-// ========= shared / writable =========
+// 让 recipe 里所有 artisan:* 任务都走这个命令
+set('bin/artisan', '{{bin/php}} {{artisan}}');
+
+// ========= Shared / Writable =========
 set('shared_files', [
     'backend/.env',
 ]);
@@ -39,10 +38,10 @@ set('writable_dirs', [
     'backend/bootstrap/cache',
 ]);
 
-// 关键：不要用 ACL（GitHub Actions / deploy 用户常见会卡），用 chmod
+// 你已经切到 chmod 模式了，继续保持
 set('writable_mode', 'chmod');
 set('writable_chmod_mode', '0775');
-set('writable_recursive', true);
+set('writable_use_sudo', false);
 
 // ========= 生产机 =========
 host('production')
@@ -56,42 +55,18 @@ task('deploy:vendors', function () {
     run('cd {{release_path}}/backend && {{bin/composer}} install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
 });
 
-// ========= 覆盖 laravel recipe 的 artisan 相关任务（全部走 backend/artisan） =========
-task('artisan:storage:link', function () {
-    run('{{bin/artisan}} storage:link');
-});
-
-task('artisan:config:cache', function () {
-    run('{{bin/artisan}} config:cache');
-});
-
-task('artisan:route:cache', function () {
-    run('{{bin/artisan}} route:cache');
-});
-
+// ========= 关闭 view cache（API 项目不需要 views，避免 view path not found） =========
 task('artisan:view:cache', function () {
-    run('{{bin/artisan}} view:cache');
+    writeln('Skip artisan:view:cache (API project, no views)');
 });
-
-task('artisan:event:cache', function () {
-    run('{{bin/artisan}} event:cache');
-});
-
-task('artisan:migrate', function () {
-    run('{{bin/artisan}} migrate --force');
-});
-
-// 关键：laravel recipe 有时会先取版本号（默认去找 release_path/artisan）
-// 这里强制改成 backend/artisan
-set('laravel_version', function () {
-    return run('{{bin/artisan}} --version');
+task('artisan:view:clear', function () {
+    writeln('Skip artisan:view:clear (API project, no views)');
 });
 
 // ========= 服务重载 =========
 task('reload:php-fpm', function () {
     run('sudo /usr/bin/systemctl reload php8.4-fpm');
 });
-
 task('reload:nginx', function () {
     run('sudo /usr/bin/systemctl reload nginx');
 });
@@ -104,7 +79,18 @@ task('healthcheck', function () {
     run('curl -fsS -X POST http://127.0.0.1/api/v0.2/attempts/start -H "Content-Type: application/json" -H "Accept: application/json" -d \'' . $payload . '\' | grep -q "\"ok\":true"');
 });
 
-// ========= 部署流（laravel.php 自带 deploy 流） =========
+// ========= 自定义 deploy 流：不跑 view:cache =========
+task('deploy', [
+    'deploy:prepare',
+    'deploy:vendors',
+    'artisan:storage:link',
+    'artisan:config:cache',
+    'artisan:route:cache',
+    'artisan:event:cache',
+    'artisan:migrate',
+    'deploy:publish',
+]);
+
 after('artisan:migrate', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck');
