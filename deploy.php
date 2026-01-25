@@ -46,15 +46,15 @@ host('production')
     ->setPort((int)(getenv('DEPLOY_PORT') ?: 22))
     ->set('deploy_path', '/var/www/fap-api');
 
+// 你的线上域名（healthcheck 用）
+set('healthcheck_host', getenv('HEALTHCHECK_HOST') ?: 'fermatmind.com');
+
 // ========= 覆盖 vendors：在 backend 里 composer install =========
 task('deploy:vendors', function () {
     run('cd {{release_path}}/backend && {{bin/composer}} install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
 });
 
 // ========= 强制覆盖 artisan:* 任务：永远走 backend/artisan =========
-// 你的报错就是这里：recipe 默认跑 releases/X/artisan（根目录）
-// 这里直接把任务重定义，彻底杜绝跑错路径
-
 task('artisan:storage:link', function () {
     run('{{bin/php}} {{release_path}}/backend/artisan storage:link --ansi');
 });
@@ -85,12 +85,26 @@ task('reload:nginx', function () {
     run('sudo /usr/bin/systemctl reload nginx');
 });
 
-// ========= 健康检查（服务器本机 localhost，不依赖外网 DNS） =========
+// ========= 健康检查（修复点：HTTP->HTTPS 301 + 命中正确 vhost） =========
 task('healthcheck', function () {
-    run('curl -fsS http://127.0.0.1/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
+    $host = get('healthcheck_host');
+
+    // 说明：
+    // - 用 https://$host/... 走正确 vhost + 正常路由
+    // - 用 --resolve 把 $host:443 固定指向 127.0.0.1，不依赖外网/公网回环
+    // - 不再走 http://127.0.0.1 触发 301
+
+    run('curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host . '/api/v0.2/health | grep -q "\"ok\":true"');
+
+    run('curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host . '/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
 
     $payload = '{"anon_id":"dep-health-001","scale_code":"MBTI","scale_version":"v0.2","question_count":144,"client_platform":"web","region":"CN_MAINLAND","locale":"zh-CN"}';
-    run('curl -fsS -X POST http://127.0.0.1/api/v0.2/attempts/start -H "Content-Type: application/json" -H "Accept: application/json" -d \'' . $payload . '\' | grep -q "\"ok\":true"');
+    run(
+        'curl -fsS --resolve ' . $host . ':443:127.0.0.1 ' .
+        '-X POST https://' . $host . '/api/v0.2/attempts/start ' .
+        '-H "Content-Type: application/json" -H "Accept: application/json" ' .
+        '-d \'' . $payload . '\' | grep -q "\"ok\":true"'
+    );
 });
 
 // ========= hooks =========
