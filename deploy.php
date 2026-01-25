@@ -11,15 +11,19 @@ set('git_tty', false);
 set('keep_releases', 5);
 set('default_timeout', 900);
 
-// 你的 Laravel 在 backend 子目录
-set('artisan', '{{release_path}}/backend/artisan');
-set('public_path', 'backend/public');
 set('bin/php', 'php');
 set('bin/composer', 'composer');
 
-// 共享：.env + storage/cache + content_packages
-// 注意：content_packages 是仓库根目录下的目录名（你仓库里就叫 content_packages）
-// Deployer 会把它映射到 {{deploy_path}}/shared/content_packages
+// ========= Laravel 在 backend 子目录（全局默认） =========
+set('public_path', 'backend/public');
+set('artisan', '{{release_path}}/backend/artisan');
+
+// ========= writable 策略（避免 ACL/ setfacl 依赖） =========
+set('writable_mode', 'chmod');
+set('writable_recursive', true);
+set('writable_chmod_mode', '0775');
+
+// ========= 共享：.env + storage/cache + content_packages =========
 set('shared_files', [
     'backend/.env',
 ]);
@@ -40,7 +44,10 @@ host('production')
     ->setHostname(getenv('DEPLOY_HOST') ?: '122.152.221.126')
     ->setRemoteUser(getenv('DEPLOY_USER') ?: 'deploy')
     ->setPort((int)(getenv('DEPLOY_PORT') ?: 22))
-    ->set('deploy_path', '/var/www/fap-api');
+    ->set('deploy_path', '/var/www/fap-api')
+    // 关键：在 host 级别再压一遍，确保 recipe 不会覆盖成 releases/<n>/artisan
+    ->set('public_path', 'backend/public')
+    ->set('artisan', '{{release_path}}/backend/artisan');
 
 // ========= 覆盖 vendors：在 backend 里 composer install =========
 task('deploy:vendors', function () {
@@ -51,6 +58,7 @@ task('deploy:vendors', function () {
 task('reload:php-fpm', function () {
     run('sudo /usr/bin/systemctl reload php8.4-fpm');
 });
+
 task('reload:nginx', function () {
     run('sudo /usr/bin/systemctl reload nginx');
 });
@@ -60,13 +68,16 @@ task('healthcheck', function () {
     // 1) questions
     run('curl -fsS http://127.0.0.1/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
 
-    // 2) attempts/start（按你接口必填字段）
+    // 2) attempts/start（按接口必填字段）
     $payload = '{"anon_id":"dep-health-001","scale_code":"MBTI","scale_version":"v0.2","question_count":144,"client_platform":"web","region":"CN_MAINLAND","locale":"zh-CN"}';
     run('curl -fsS -X POST http://127.0.0.1/api/v0.2/attempts/start -H "Content-Type: application/json" -H "Accept: application/json" -d \'' . $payload . '\' | grep -q "\"ok\":true"');
 });
 
-// ========= 部署流（laravel.php 自带 deploy 流） =========
+// ========= Hook（laravel.php 自带 deploy 流） =========
+// laravel recipe 默认会跑 artisan:migrate；迁移后 reload php-fpm
 after('artisan:migrate', 'reload:php-fpm');
+
+// 切换 symlink 后 reload nginx + 健康检查
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck');
 
