@@ -50,7 +50,7 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
         run: |
-          php dep.phar rollback production -f deploy.php -vvv
+          php dep.phar -f deploy.php deploy production -vvv
 
       - name: Post-rollback Health Check (public)
         run: |
