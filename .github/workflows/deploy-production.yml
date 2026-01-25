@@ -1,0 +1,54 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: ["main"]
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+
+      - name: Install Deployer (PHAR)
+        run: |
+          curl -sSLo dep.phar https://deployer.org/deployer.phar
+          php dep.phar --version
+
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+
+      - name: Add known hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Deploy via Deployer
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          php dep.phar deploy production -vvv
+
+      - name: Post-deploy Health Check (public)
+        run: |
+          sleep 2
+          curl -fsS "https://fermatmind.com/api/v0.2/health" | grep -q '"ok":true'
+          curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions" | grep -q '"ok":true'
