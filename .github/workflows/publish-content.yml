@@ -1,0 +1,102 @@
+name: Publish Content
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: Target environment (production or staging)
+        required: true
+        default: production
+      region:
+        description: Content region
+        required: true
+        default: CN_MAINLAND
+      locale:
+        description: Content locale
+        required: true
+        default: zh-CN
+      dir_alias:
+        description: Default dir alias
+        required: true
+        default: MBTI-CN-v0.2.1-TEST
+      file_path:
+        description: Folder to zip and upload
+        required: true
+        default: content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+      probe:
+        description: Run probes (true/false)
+        required: true
+        default: "true"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Zip content pack
+        run: |
+          set -euo pipefail
+          SRC="${{ inputs.file_path }}"
+          if [ ! -d "$SRC" ]; then
+            echo "file_path not found: $SRC"
+            exit 1
+          fi
+          ZIP_PATH="/tmp/content_pack.zip"
+          rm -f "$ZIP_PATH"
+          (cd "$(dirname "$SRC")" && zip -r "$ZIP_PATH" "$(basename "$SRC")")
+          ls -lh "$ZIP_PATH"
+
+      - name: Upload pack
+        id: upload
+        env:
+          BASE_URL: ${{ secrets.CONTENT_PUBLISH_BASE_URL }}
+          ADMIN_TOKEN: ${{ secrets.FAP_ADMIN_TOKEN }}
+        run: |
+          set -euo pipefail
+          BASE_URL="${BASE_URL%/}"
+          RESP=$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/upload" \
+            -H "X-FAP-Admin-Token: $ADMIN_TOKEN" \
+            -F "file=@/tmp/content_pack.zip")
+          echo "$RESP" | jq .
+          VERSION_ID=$(echo "$RESP" | jq -r '.version_id')
+          if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
+            echo "version_id missing"
+            exit 1
+          fi
+          echo "version_id=$VERSION_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Publish pack
+        id: publish
+        env:
+          BASE_URL: ${{ secrets.CONTENT_PUBLISH_BASE_URL }}
+          ADMIN_TOKEN: ${{ secrets.FAP_ADMIN_TOKEN }}
+          VERSION_ID: ${{ steps.upload.outputs.version_id }}
+        run: |
+          set -euo pipefail
+          BASE_URL="${BASE_URL%/}"
+          PROBE_INPUT="${{ inputs.probe }}"
+          if [ "$PROBE_INPUT" = "true" ] || [ "$PROBE_INPUT" = "1" ]; then
+            PROBE_VALUE=true
+          else
+            PROBE_VALUE=false
+          fi
+          PAYLOAD=$(jq -n \
+            --arg version_id "$VERSION_ID" \
+            --arg region "${{ inputs.region }}" \
+            --arg locale "${{ inputs.locale }}" \
+            --arg dir_alias "${{ inputs.dir_alias }}" \
+            --argjson probe "$PROBE_VALUE" \
+            '{version_id:$version_id,region:$region,locale:$locale,dir_alias:$dir_alias,probe:$probe}')
+          RESP=$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/publish" \
+            -H "Content-Type: application/json" \
+            -H "X-FAP-Admin-Token: $ADMIN_TOKEN" \
+            -d "$PAYLOAD")
+          echo "$RESP" | jq .
+          RELEASE_ID=$(echo "$RESP" | jq -r '.release_id')
+          if [ -z "$RELEASE_ID" ] || [ "$RELEASE_ID" = "null" ]; then
+            echo "release_id missing"
+            exit 1
+          fi
+          echo "release_id=$RELEASE_ID" >> "$GITHUB_OUTPUT"

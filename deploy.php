@@ -136,12 +136,22 @@ task('healthcheck', function () {
     );
 });
 
+task('healthcheck:content-packs', function () {
+    $host = get('healthcheck_host');
+
+    run(
+        'curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host .
+        '/api/v0.2/content-packs | jq -e \'.ok==true and (.defaults.default_pack_id|length>0)\''
+    );
+});
+
 // ========= hooks =========
 before('deploy', 'guard:forbid-destructive');
 
 after('artisan:migrate', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck');
+after('healthcheck', 'healthcheck:content-packs');
 
 after('deploy:failed', 'rollback');
 after('rollback', 'reload:php-fpm');

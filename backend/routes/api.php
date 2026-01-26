@@ -40,6 +40,22 @@ Route::prefix("v0.2")->group(function () {
     Route::get("/content-packs/{pack_id}/{dir_version}/manifest", [ContentPacksController::class, "manifest"]);
     Route::get("/content-packs/{pack_id}/{dir_version}/questions", [ContentPacksController::class, "questions"]);
 
+    // 1.6) Admin content releases
+    Route::prefix("admin")->group(function () {
+        Route::post(
+            "/content-releases/upload",
+            [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "upload"]
+        );
+        Route::post(
+            "/content-releases/publish",
+            [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "publish"]
+        );
+        Route::post(
+            "/content-releases/rollback",
+            [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "rollback"]
+        );
+    });
+
     // 2) Scale meta
     Route::get("/scales/MBTI", [MbtiController::class, "scaleMeta"]);
 
