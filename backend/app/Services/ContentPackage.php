@@ -7,7 +7,7 @@ class ContentPackage
     public static function mbtiPackageVersion(): string
     {
         // 跟你 share 返回的 content_package_version 保持一致
-        return env('MBTI_CONTENT_PACKAGE', 'MBTI-CN-v0.2.1-TEST');
+        return (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
     }
 
     /**
@@ -17,7 +17,9 @@ class ContentPackage
      */
     private static function resolvePkgFile(string $pkg, string $file): string
     {
+        $packsRoot = rtrim((string) config('content_packs.root', base_path('../content_packages')), '/');
         $candidates = [
+            "{$packsRoot}/{$pkg}/{$file}",
             // ✅ 你当前真实存在的位置（repo 根目录）
             base_path("../content_packages/{$pkg}/{$file}"),
 

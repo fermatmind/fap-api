@@ -1,6 +1,7 @@
 <?php
 
 // file: backend/config/content.php
+// 本文件为 legacy/兼容桥接，内容包定位以 config/content_packs.php 为单一真相源。
 
 return [
     /**
@@ -12,7 +13,7 @@ return [
      *
      * 所以 packs_root 必须指向 base_path('../content_packages')
      */
-    'packs_root' => base_path('..' . DIRECTORY_SEPARATOR . 'content_packages'),
+    'packs_root' => env('FAP_PACKS_ROOT', base_path('../content_packages')),
 
     /**
      * 默认版本映射：没传 content_package_version 时用它
@@ -26,10 +27,10 @@ return [
      */
     'default_versions' => [
         // ✅ 线上默认 scale=default 时用这个
-        'default' => env('FAP_CONTENT_PACKAGE_VERSION', 'MBTI-CN-v0.2.1-TEST'),
+        'default' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.2.1-TEST'),
 
         // ✅ 可选：兼容旧路径/旧调用（如果历史上有人传 scale=MBTI）
-        'MBTI' => env('FAP_CONTENT_PACKAGE_VERSION', 'MBTI-CN-v0.2.1-TEST'),
+        'MBTI' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.2.1-TEST'),
     ],
 
     /**

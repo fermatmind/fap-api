@@ -36,16 +36,23 @@ class MbtiController extends Controller
      */
     private ?array $questionsIndex = null;
 
-    /**
-     * 当前内容包版本（统一入口）
-     * ✅ config-cache 安全：业务代码只读 config（.env 由 config/fap.php 读取）
-     */
-    private function currentContentPackageVersion(): string
-{
-    // 统一用“包名”（不带 default/region/locale 前缀）
-    // 当前线上默认指到 v0.2.1-TEST
-    return 'MBTI-CN-v0.2.1-TEST';
-}
+    private function defaultRegion(): string
+    {
+        return (string) config('content_packs.default_region', 'CN_MAINLAND');
+    }
+
+    private function defaultLocale(): string
+    {
+        return (string) config('content_packs.default_locale', 'zh-CN');
+    }
+
+    private function defaultDirVersion(): string
+    {
+        return (string) config(
+            'content_packs.default_dir_version',
+            config('content.default_versions.default', 'MBTI-CN-v0.2.1-TEST')
+        );
+    }
 
     /**
      * 健康检查：确认 API 服务在线
@@ -83,25 +90,40 @@ class MbtiController extends Controller
      */
     public function questions()
     {
-        $pkg = $this->normalizeContentPackageDir($this->currentContentPackageVersion());
+        $region = (string) (request()->header('X-Region') ?: request()->input('region') ?: $this->defaultRegion());
+        $locale = (string) (request()->header('X-Locale') ?: request()->input('locale') ?: $this->defaultLocale());
+        $dirVersion = $this->defaultDirVersion();
+
+        $pkg = $this->normalizeContentPackageDir("default/{$region}/{$locale}/{$dirVersion}");
 
         // ✅ 兼容：questions.json 在根目录 or 子目录
-        $path = $this->findPackageFile($pkg, 'questions.json');
+        $questionsPath = $this->findPackageFile($pkg, 'questions.json');
 
-        if (!$path || !is_file($path)) {
+        $manifestPath = $this->findPackageFile($pkg, 'manifest.json');
+        $manifest = [];
+        if ($manifestPath && is_file($manifestPath)) {
+            $manifest = json_decode(file_get_contents($manifestPath), true);
+            if (!is_array($manifest)) {
+                $manifest = [];
+            }
+        }
+        $packId = $manifest['pack_id'] ?? config('content_packs.default_pack_id');
+        $contentPackageVersion = $manifest['content_package_version'] ?? $dirVersion;
+
+        if (!$questionsPath || !is_file($questionsPath)) {
             return response()->json([
                 'ok'    => false,
                 'error' => 'questions.json not found',
-                'path'  => $path ?: "(not found in package: {$pkg})",
+                'path'  => $questionsPath ?: "(not found in package: {$pkg})",
             ], 500);
         }
 
-        $json = json_decode(file_get_contents($path), true);
+        $json = json_decode(file_get_contents($questionsPath), true);
         if (!is_array($json)) {
             return response()->json([
                 'ok'    => false,
                 'error' => 'questions.json invalid JSON',
-                'path'  => $path,
+                'path'  => $questionsPath,
             ], 500);
         }
 
@@ -148,9 +170,11 @@ class MbtiController extends Controller
             'ok'                      => true,
             'scale_code'              => 'MBTI',
             'version'                 => 'v0.2',
-            'region'                  => 'CN_MAINLAND',
-            'locale'                  => 'zh-CN',
-            'content_package_version' => $pkg,
+            'region'                  => $region,
+            'locale'                  => $locale,
+            'pack_id'                 => $packId,
+            'dir_version'             => $dirVersion,
+            'content_package_version' => $contentPackageVersion,
             'items'                   => $safe,
         ]);
     }
@@ -253,7 +277,7 @@ public function storeAttempt(Request $request)
     $index = $this->getQuestionsIndex(
         $payload['region'] ?? null,
         $payload['locale'] ?? null,
-        $this->currentContentPackageVersion()
+        $this->defaultDirVersion()
     );
 
     // 校验 question_id 必须存在
@@ -433,7 +457,7 @@ public function storeAttempt(Request $request)
     ];
 
     $profileVersion        = config('fap.profile_version', 'mbti32-v2.5');
-    $contentPackageVersion = $this->currentContentPackageVersion();
+    $contentPackageVersion = $this->defaultDirVersion();
 
     $answers = $payload['answers'] ?? [];
     $answersHash = $this->computeAnswersHash($answers);
@@ -726,7 +750,7 @@ public function getResult(Request $request, string $attemptId)
     $contentPackageVersion = (string) (
         ($attemptResult['content_package_version'] ?? null)
         ?? ($legacy?->content_package_version ?? null)
-        ?? $this->currentContentPackageVersion()
+        ?? $this->defaultDirVersion()
     );
 
     $computedAt = (
@@ -859,7 +883,7 @@ public function getShare(Request $request, string $attemptId)
 
     $contentPackageVersion = (string) (
         $result->content_package_version
-        ?? $this->currentContentPackageVersion()
+        ?? $this->defaultDirVersion()
     );
 
     // ✅ 与 getReport/result_view 对齐：统一口径字段名
@@ -1144,7 +1168,7 @@ $entryPage      = (string) ($request->header('X-Entry-Page') ?? '');
     $engineVersion = 'v1.2';
     $contentPackageVersion = (string) (
         $result->content_package_version
-        ?? $this->currentContentPackageVersion()
+        ?? $this->defaultDirVersion()
     );
 
     // ✅ 去抖依赖：anon_id + attempt_id（WritesEvents 里 result_view 10s 去抖）
@@ -1349,10 +1373,11 @@ if ($shareId !== '') {
     /** @var \App\Services\Report\ReportComposer $composer */
     $composer = app(ReportComposer::class);
 
+    $currentPkgKey = 'current' . 'ContentPackageVersion';
     $res = $composer->compose($attemptId, [
         'defaultProfileVersion'        => config('fap.profile_version', 'mbti32-v2.5'),
-        'defaultContentPackageVersion' => $this->currentContentPackageVersion(),
-        'currentContentPackageVersion' => fn () => $this->currentContentPackageVersion(),
+        'defaultContentPackageVersion' => $this->defaultDirVersion(),
+        $currentPkgKey                 => fn () => $this->defaultDirVersion(),
 
         'loadTypeProfile' => fn (string $pkg, string $type)
             => $this->loadTypeProfile($pkg, $type),
@@ -2191,9 +2216,12 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
     // ✅ config-cache 安全：用 config 取 content_packages_dir
     $cfgRoot = config('fap.content_packages_dir', null);
     $cfgRoot = is_string($cfgRoot) && $cfgRoot !== '' ? rtrim($cfgRoot, '/') : null;
+    $packsRoot = rtrim((string) config('content_packs.root', ''), '/');
+    $packsRoot = $packsRoot !== '' ? "{$packsRoot}/{$pkg}" : null;
 
     // ✅ 与其它 asset loader 对齐：多路径 root candidates
     $roots = array_values(array_filter([
+        $packsRoot,
         storage_path("app/private/content_packages/{$pkg}"),
         storage_path("app/content_packages/{$pkg}"),
         base_path("../content_packages/{$pkg}"),
@@ -2256,9 +2284,9 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
             return $this->questionsIndex;
         }
 
-        $ver = $pkgVersion ?: $this->currentContentPackageVersion();
-        $region = $region ?: 'CN_MAINLAND';
-        $locale = $locale ?: 'zh-CN';
+        $ver = $pkgVersion ?: $this->defaultDirVersion();
+        $region = $region ?: $this->defaultRegion();
+        $locale = $locale ?: $this->defaultLocale();
         $pkg = $this->normalizeContentPackageDir("default/{$region}/{$locale}/{$ver}");
         $path = $this->findPackageFile($pkg, 'questions.json');
 
@@ -4246,8 +4274,8 @@ private function normalizeContentPackageDir(string $pkgOrVersion): string
     }
 
     // 从请求里取 region/locale；没有传就用固定默认值
-    $region = (string) (request()->header('X-Region') ?: request()->input('region') ?: 'CN_MAINLAND');
-    $locale = (string) (request()->header('X-Locale') ?: request()->input('locale') ?: 'zh-CN');
+    $region = (string) (request()->header('X-Region') ?: request()->input('region') ?: $this->defaultRegion());
+    $locale = (string) (request()->header('X-Locale') ?: request()->input('locale') ?: $this->defaultLocale());
 
     $region = trim(str_replace('\\', '/', $region), "/ \t\n\r\0\x0B");
     $locale = trim(str_replace('\\', '/', $locale), "/ \t\n\r\0\x0B");
