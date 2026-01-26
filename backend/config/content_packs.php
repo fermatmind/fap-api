@@ -9,6 +9,13 @@ return [
     // - CI 建议：FAP_PACKS_ROOT=../content_packages（相对 backend/ 目录）
     'root' => env('FAP_PACKS_ROOT', base_path('../content_packages')),
 
+    // 内容源驱动：local|s3
+    // - local：root 指向 content_packages 根目录
+    // - s3：disk + prefix 组合定位内容包根
+    'driver' => env('FAP_PACKS_DRIVER', 'local'),
+    's3_disk' => env('FAP_S3_DISK', 's3'),
+    's3_prefix' => env('FAP_S3_PREFIX', ''),
+
     // ✅ CI/服务器建议强约束：默认 pack_id 明确指向你的主包，避免回退到 GLOBAL/en
     // default_pack_id 对应 manifest.json.pack_id（MBTI.cn-mainland.zh-CN.v0.2.1-TEST）
     'default_pack_id' => env('FAP_DEFAULT_PACK_ID', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST'),
