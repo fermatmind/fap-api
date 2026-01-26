@@ -1,0 +1,57 @@
+name: Deploy Staging
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          tools: composer
+
+      - name: Install Deployer (PHAR v7.5.12)
+        run: |
+          curl -sSLo dep.phar https://github.com/deployphp/deployer/releases/download/v7.5.12/deployer.phar
+          php dep.phar --version
+
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.STAGING_DEPLOY_SSH_PRIVATE_KEY }}
+
+      - name: Write known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.STAGING_DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Deploy via Deployer (staging)
+        env:
+          DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}
+          HEALTHCHECK_HOST: staging.fermatmind.com
+        run: |
+          php dep.phar -f deploy.php deploy staging -vvv
+
+      - name: Post-deploy Health Check (staging)
+        run: |
+          HOST=staging.fermatmind.com
+          curl -fsS http://${HOST}/api/v0.2/health | grep -q '"ok":true'
+          curl -fsS http://${HOST}/api/v0.2/scales/MBTI/questions | grep -q '"ok":true'
+          curl -fsS http://${HOST}/api/v0.2/content-packs | jq -e '.ok==true'
