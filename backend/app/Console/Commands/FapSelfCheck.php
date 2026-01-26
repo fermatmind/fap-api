@@ -54,8 +54,16 @@ class FapSelfCheck extends Command
 
         // build declared asset basenames set (for conditional checks)
         $declaredBasenames = $this->declaredAssetBasenames($manifest);
-        // (optional) strict-assets: if certain known files exist but are not declared in manifest.assets -> fail
+        // (optional) strict-assets: forbidden temp files + undeclared known files
 if ((bool)$this->option('strict-assets')) {
+    [$fOk, $fMsg] = $this->checkForbiddenTempFiles($baseDir, $packId);
+    $this->printSectionResult('strict-assets (forbidden files check)', $fOk, $fMsg);
+    if (!$fOk) {
+        $this->line(str_repeat('-', 72));
+        $this->error('❌ SELF-CHECK FAILED (see errors above)');
+        return 1;
+    }
+
     [$sOk, $sMsg] = $this->checkStrictAssets($baseDir, $declaredBasenames, $packId);
     $ok = $ok && $sOk;
     $this->printSectionResult('strict-assets (undeclared known files)', $sOk, $sMsg);
@@ -2979,26 +2987,85 @@ private function containsAny(string $haystack, array $needles): bool
         return $out;
     }
 
+    private function checkForbiddenTempFiles(string $baseDir, string $packId): array
+{
+    $badPatterns = ['*.bak*', '*.tmp', '*~', '.DS_Store'];
+
+    $it = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($baseDir, \FilesystemIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::LEAVES_ONLY
+    );
+
+    foreach ($it as $file) {
+        if (!$file->isFile()) continue;
+
+        $name = $file->getFilename();
+        foreach ($badPatterns as $pattern) {
+            if (!fnmatch($pattern, $name)) continue;
+
+            $rel = ltrim(str_replace($baseDir, '', $file->getPathname()), DIRECTORY_SEPARATOR);
+            $rel = str_replace('\\', '/', $rel);
+            return [false, ["[FAIL] forbidden temp files found: {$rel}"]];
+        }
+    }
+
+    return [true, ["OK (no forbidden temp files found)"]];
+}
+
     private function checkStrictAssets(string $baseDir, array $declaredBasenames, string $packId): array
 {
-    // files that, if present on disk, must be declared in manifest.assets (when strict-assets is enabled)
-    $known = [
-        'report_highlights_overrides.json',
-        'identity_cards.json',
-        'report_identity_layers.json',
-    ];
+    $known = config('fap.selfcheck_known_assets', []);
+    $known = is_array($known) ? $known : [];
+    if (empty($known)) {
+        // files that, if present on disk, must be declared in manifest.assets (legacy fallback)
+        $known = [
+            'report_highlights_overrides.json',
+            'identity_cards.json',
+            'report_identity_layers.json',
+        ];
+    }
 
+    $alwaysAllowed = ['manifest.json', 'version.json'];
     $errors = [];
     $notes  = [];
 
-    foreach ($known as $fname) {
-        $abs = $this->pathOf($baseDir, $fname);
+    foreach ($known as $entry) {
+        if (!is_string($entry) || trim($entry) === '') continue;
+        $entry = trim($entry);
+
+        if (substr($entry, -1) === '/') {
+            $dir = rtrim($entry, '/');
+            $absDir = $this->pathOf($baseDir, $dir);
+            if (!is_dir($absDir)) continue;
+
+            $it = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($absDir, \FilesystemIterator::SKIP_DOTS),
+                RecursiveIteratorIterator::LEAVES_ONLY
+            );
+
+            foreach ($it as $file) {
+                if (!$file->isFile()) continue;
+                $basename = $file->getFilename();
+                if (isset($declaredBasenames[$basename])) continue;
+
+                $errors[] = "pack={$packId} file={$file->getPathname()} :: exists under {$entry} but NOT declared in manifest.assets (strict-assets)";
+            }
+            if (empty($errors)) $notes[] = "OK declared: {$entry}";
+            continue;
+        }
+
+        $abs = $this->pathOf($baseDir, $entry);
         if (!is_file($abs)) continue;
 
-        if (!isset($declaredBasenames[$fname])) {
+        if (in_array($entry, $alwaysAllowed, true)) {
+            $notes[] = "OK allowed: {$entry}";
+            continue;
+        }
+
+        if (!isset($declaredBasenames[$entry])) {
             $errors[] = "pack={$packId} file={$abs} :: exists on disk but NOT declared in manifest.assets (strict-assets)";
         } else {
-            $notes[] = "OK declared: {$fname}";
+            $notes[] = "OK declared: {$entry}";
         }
     }
 

@@ -25,16 +25,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Self-check / strict-assets "known assets" (optional, for maintainability)
+    | Self-check known assets (publish-level gate)
     |--------------------------------------------------------------------------
-    | 说明：
-    | - 这块不会影响线上运行（除非你的 self-check 逻辑主动读取它）
-    | - 建议你后续把 self-check 的“known files 列表”改成读取这份配置，避免写死在命令里
-    | - 先把 highlights 三个资产名放进来，保证“已知文件”的定义集中管理
+    | 维护说明：
+    | - 这里是“发布级门禁”的白名单目录/文件前缀，用于允许自检接受的资产布局
+    | - 新增内容包字段/新资产时，要同步更新这里，并在 PR 描述里贴 self-check 通过证据
+    | - 只写目录/文件名（相对 pack 根），不要写绝对路径
     */
     'selfcheck_known_assets' => [
-        'report_highlights_pools.json',
-        'report_highlights_rules.json',
-        'report_highlights_policy.json',
+        'manifest.json',
+        'version.json',
+        'questions.json',
+        'report_cards_traits.json',
+        'report_cards_strengths.json',
+        'report_highlights_templates.json',
+        'report_overrides.json',
+        'report_rules.json',
+        'report_recommended_reads.json',
+        'report_share_templates.json',
+        'type_profiles.json',
+        'assets/',
     ],
 ];
