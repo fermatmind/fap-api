@@ -39,15 +39,35 @@ set('writable_mode', 'chmod');
 set('writable_chmod_mode', '0775');
 set('writable_use_sudo', false);
 
+// ========= 默认：healthcheck / nginx / php-fpm（可被 host 覆盖） =========
+set('healthcheck_scheme', 'https');          // production 用 https
+set('healthcheck_use_resolve', true);        // production 用 --resolve 走本机 127.0.0.1:443
+set('nginx_site', '/etc/nginx/sites-enabled/fap-api');
+set('php_fpm_service', 'php8.4-fpm');
+
 // ========= 生产机 =========
 host('production')
     ->setHostname(getenv('DEPLOY_HOST') ?: '122.152.221.126')
     ->setRemoteUser(getenv('DEPLOY_USER') ?: 'deploy')
     ->setPort((int)(getenv('DEPLOY_PORT') ?: 22))
-    ->set('deploy_path', '/var/www/fap-api');
+    ->set('deploy_path', '/var/www/fap-api')
+    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST') ?: 'fermatmind.com')
+    ->set('healthcheck_scheme', 'https')
+    ->set('healthcheck_use_resolve', true)
+    ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api')
+    ->set('php_fpm_service', 'php8.4-fpm');
 
-// 你的线上域名（healthcheck 用）
-set('healthcheck_host', getenv('HEALTHCHECK_HOST') ?: 'fermatmind.com');
+// ========= Staging 机 =========
+host('staging')
+    ->setHostname(getenv('DEPLOY_HOST') ?: 'staging.fermatmind.com')
+    ->setRemoteUser(getenv('DEPLOY_USER') ?: 'deploy')
+    ->setPort((int)(getenv('DEPLOY_PORT') ?: 22))
+    ->set('deploy_path', '/var/www/fap-api-staging')
+    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST') ?: 'staging.fermatmind.com')
+    ->set('healthcheck_scheme', 'http')      // 你现在 staging 只配了 80
+    ->set('healthcheck_use_resolve', false)  // staging 直接访问域名
+    ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
+    ->set('php_fpm_service', 'php8.3-fpm');
 
 // ========= 覆盖 vendors：在 backend 里 composer install =========
 task('deploy:vendors', function () {
@@ -78,14 +98,12 @@ task('artisan:view:cache', function () {
 
 // ========= 安全门禁：禁止 destructive migration =========
 task('guard:forbid-destructive', function () {
-    // 明确禁止的 artisan 命令（生产底座门禁）
     $blocked = [
         'migrate:fresh',
         'db:wipe',
     ];
 
     foreach ($blocked as $cmd) {
-        // 显式定义这些任务为“硬失败”，让误用直接中断并留下审计信息
         task("artisan:{$cmd}", function () use ($cmd) {
             throw new \RuntimeException("❌ FORBIDDEN on production: php artisan {$cmd}. Use php artisan migrate --force only.");
         });
@@ -94,43 +112,47 @@ task('guard:forbid-destructive', function () {
 
 // ========= 服务重载 =========
 task('reload:php-fpm', function () {
-    run('sudo -n /usr/bin/systemctl reload php8.4-fpm');
+    $svc = get('php_fpm_service');
+    run("sudo -n /usr/bin/systemctl reload {$svc}");
 });
 
 task('reload:nginx', function () {
     run('sudo -n /usr/bin/systemctl reload nginx');
 });
 
-// ========= 健康检查（修复点：HTTP->HTTPS 301 + 命中正确 vhost） =========
+// ========= 健康检查 =========
 task('healthcheck', function () {
     $host = get('healthcheck_host');
+    $scheme = get('healthcheck_scheme');
+    $useResolve = (bool) get('healthcheck_use_resolve');
 
-    // 说明：
-    // - 用 https://$host/... 走正确 vhost + 正常路由
-    // - 用 --resolve 把 $host:443 固定指向 127.0.0.1，不依赖外网/公网回环
-    // - 不再走 http://127.0.0.1 触发 301
+    $nginxSite = get('nginx_site');
+    $deployPath = get('deploy_path');
+    $expectedRoot = "root {$deployPath}/current/backend/public;";
 
-    $nginxSite = '/etc/nginx/sites-enabled/fap-api';
-    $expectedRoot = 'root /var/www/fap-api/current/backend/public;';
-
-    // Ensure nginx root points to current release (one-time drift-proof)
+    // Ensure nginx root points to current release (drift-proof)
     run("test -f {$nginxSite}");
     $hasExpected = run("grep -F \"{$expectedRoot}\" {$nginxSite} >/dev/null 2>&1; echo $?");
     if (trim($hasExpected) !== '0') {
-        // Replace any existing root directive inside this site file
         run("sudo -n /usr/bin/sed -i -E 's#^[[:space:]]*root[[:space:]]+[^;]+;[[:space:]]*$#    {$expectedRoot}#' {$nginxSite}");
         run("sudo -n /usr/sbin/nginx -t");
         run("sudo -n /usr/bin/systemctl reload nginx");
     }
 
-    run('curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host . '/api/v0.2/health | grep -q "\"ok\":true"');
+    $resolvePart = '';
+    if ($useResolve && $scheme === 'https') {
+        $resolvePart = '--resolve ' . $host . ':443:127.0.0.1 ';
+    }
 
-    run('curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host . '/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
+    $base = $scheme . '://' . $host;
+
+    run('curl -fsS ' . $resolvePart . $base . '/api/v0.2/health | grep -q "\"ok\":true"');
+    run('curl -fsS ' . $resolvePart . $base . '/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
 
     $payload = '{"anon_id":"dep-health-001","scale_code":"MBTI","scale_version":"v0.2","question_count":144,"client_platform":"web","region":"CN_MAINLAND","locale":"zh-CN"}';
     run(
-        'curl -fsS --resolve ' . $host . ':443:127.0.0.1 ' .
-        '-X POST https://' . $host . '/api/v0.2/attempts/start ' .
+        'curl -fsS ' . $resolvePart .
+        '-X POST ' . $base . '/api/v0.2/attempts/start ' .
         '-H "Content-Type: application/json" -H "Accept: application/json" ' .
         '-d \'' . $payload . '\' | grep -q "\"ok\":true"'
     );
@@ -138,9 +160,18 @@ task('healthcheck', function () {
 
 task('healthcheck:content-packs', function () {
     $host = get('healthcheck_host');
+    $scheme = get('healthcheck_scheme');
+    $useResolve = (bool) get('healthcheck_use_resolve');
+
+    $resolvePart = '';
+    if ($useResolve && $scheme === 'https') {
+        $resolvePart = '--resolve ' . $host . ':443:127.0.0.1 ';
+    }
+
+    $base = $scheme . '://' . $host;
 
     run(
-        'curl -fsS --resolve ' . $host . ':443:127.0.0.1 https://' . $host .
+        'curl -fsS ' . $resolvePart . $base .
         '/api/v0.2/content-packs | jq -e \'.ok==true and (.defaults.default_pack_id|length>0)\''
     );
 });
