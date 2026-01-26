@@ -67,7 +67,7 @@ host('staging')
     ->set('healthcheck_scheme', 'http')      // 你现在 staging 只配了 80
     ->set('healthcheck_use_resolve', false)  // staging 直接访问域名
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
-    ->set('php_fpm_service', 'php8.3-fpm');
+    ->set('php_fpm_service', 'php8.4-fpm');
 
 // ========= 覆盖 vendors：在 backend 里 composer install =========
 task('deploy:vendors', function () {
