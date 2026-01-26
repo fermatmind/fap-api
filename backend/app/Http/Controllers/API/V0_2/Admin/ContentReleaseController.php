@@ -9,20 +9,19 @@ use Illuminate\Http\Request;
 class ContentReleaseController extends Controller
 {
     private function requireAdmin(Request $request)
-{
-    $expect = (string) config('fap.admin_token');
-    $given  = (string) $request->header('X-FAP-Admin-Token', '');
+    {
+        // ✅ 新 header：X-Admin-Token（与 publish-content.yml 保持一致）
+        $expect = (string) config('fap.admin_token');
+        $given  = (string) $request->header('X-Admin-Token', '');
 
-    abort_unless($expect !== '' && hash_equals($expect, $given), 401, 'Unauthorized');
+        abort_unless($expect !== '' && hash_equals($expect, $given), 401, 'Unauthorized');
 
-    return null;
-}
+        return null;
+    }
 
     public function upload(Request $request, ContentPackPublisher $publisher)
     {
-        if ($resp = $this->requireAdmin($request)) {
-            return $resp;
-        }
+        $this->requireAdmin($request);
 
         $file = $request->file('file');
         $s3Key = (string) $request->input('s3_key', '');
@@ -57,9 +56,7 @@ class ContentReleaseController extends Controller
 
     public function publish(Request $request, ContentPackPublisher $publisher)
     {
-        if ($resp = $this->requireAdmin($request)) {
-            return $resp;
-        }
+        $this->requireAdmin($request);
 
         $versionId = (string) $request->input('version_id', '');
         $region = (string) $request->input('region', '');
@@ -93,9 +90,7 @@ class ContentReleaseController extends Controller
 
     public function rollback(Request $request, ContentPackPublisher $publisher)
     {
-        if ($resp = $this->requireAdmin($request)) {
-            return $resp;
-        }
+        $this->requireAdmin($request);
 
         $region = (string) $request->input('region', '');
         $locale = (string) $request->input('locale', '');
