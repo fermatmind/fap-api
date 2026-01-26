@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Models\Event;
+use App\Models\ReportJob;
+
+use App\Jobs\GenerateReportJob;
 
 use App\Support\WritesEvents;
 use App\Support\CacheKeys;
@@ -22,7 +25,6 @@ use App\Services\Report\SectionCardGenerator;
 use App\Services\Report\HighlightsGenerator;
 use App\Services\Overrides\HighlightsOverridesApplier;
 use App\Services\Report\IdentityLayerBuilder;
-use App\Services\Report\ReportComposer;
 use App\Services\Rules\RuleEngine;
 use App\Services\Auth\FmTokenService;
 use App\Services\Email\EmailOutboxService;
@@ -555,7 +557,7 @@ public function storeAttempt(Request $request)
         ], 500);
     }
 
-    return DB::transaction(function () use (
+    $tx = DB::transaction(function () use (
         $request,
         $payload,
         $attemptId,
@@ -705,20 +707,44 @@ public function storeAttempt(Request $request)
             ],
         ]);
 
-        return response()->json([
-            'ok'         => true,
+        $resultPayload = [
+            'type_code'               => $typeCode,
+            'scores'                  => $scoresJson,
+            'scores_pct'              => $scoresPct,
+            'axis_states'             => $axisStates,
+            'profile_version'         => $profileVersion,
+            'content_package_version' => $contentPackageVersion,
+        ];
+
+        $reportJob = $this->ensureReportJob($attemptId, true);
+
+        return [
             'attempt_id' => $attemptId,
-            'result_id'  => $result->id,
-            'result'     => [
-                'type_code'               => $typeCode,
-                'scores'                  => $scoresJson,
-                'scores_pct'              => $scoresPct,
-                'axis_states'             => $axisStates,
-                'profile_version'         => $profileVersion,
-                'content_package_version' => $contentPackageVersion,
-            ],
-        ], $isNewResult ? 201 : 200);
+            'result_id' => $result->id,
+            'result' => $resultPayload,
+            'status_code' => $isNewResult ? 201 : 200,
+            'report_job' => $reportJob,
+        ];
     });
+
+    if ($tx instanceof \Illuminate\Http\JsonResponse) {
+        return $tx;
+    }
+
+    if (isset($tx['report_job']) && $tx['report_job'] instanceof ReportJob) {
+        $this->dispatchReportJob($tx['report_job']);
+    }
+
+    return response()->json([
+        'ok'         => true,
+        'attempt_id' => $tx['attempt_id'],
+        'result_id'  => $tx['result_id'],
+        'result'     => $tx['result'],
+        'job'        => [
+            'job_id' => $tx['report_job']->id,
+            'status' => $tx['report_job']->status,
+        ],
+    ], $tx['status_code']);
 }
 
 public function upsertResult(\Illuminate\Http\Request $request, string $attemptId)
@@ -1244,34 +1270,119 @@ $entryPage      = (string) ($request->header('X-Entry-Page') ?? '');
     );
     $anonId = $anonId !== '' ? $anonId : null;
 
-    // 选择磁盘：优先 private，否则 fallback 到默认磁盘
-    // 注意：你现在的 local.root 指向 storage/app/private，所以用 local 也没问题
-    $disk = array_key_exists('private', config('filesystems.disks', []))
-        ? Storage::disk('private')
-        : Storage::disk(config('filesystems.default', 'local'));
+    $reportJob = $this->ensureReportJob($attemptId, $refresh);
 
-    $latestRelPath = "reports/{$attemptId}/report.json";
+    if ($refresh || $reportJob->wasRecentlyCreated) {
+        $this->dispatchReportJob($reportJob);
+    }
 
-    /**
-     * ✅ 1) 默认读缓存（避免每次 GET 都重新 compose + 写盘）
-     *    - refresh=1 时跳过缓存
-     */
-    if (!$refresh) {
+    if ($reportJob->status === 'failed') {
+        return response()->json([
+            'ok'      => false,
+            'status'  => 'failed',
+            'error'   => 'REPORT_FAILED',
+            'message' => $reportJob->last_error ?? 'Report generation failed',
+            'job_id'  => $reportJob->id,
+        ], 500);
+    }
+
+    $status = (string) ($reportJob->status ?? 'queued');
+    if (!in_array($status, ['success', 'queued', 'running', 'failed'], true)) {
+        $status = 'queued';
+    }
+
+    if (in_array($status, ['queued', 'running'], true)) {
+        $deadline = microtime(true) + 3.0;
+        $latest = $reportJob;
+
+        while (microtime(true) < $deadline) {
+            usleep(100000);
+            $latest = ReportJob::where('attempt_id', $attemptId)->first();
+            if (!$latest) break;
+
+            $status = (string) ($latest->status ?? 'queued');
+            if ($status === 'success' || $status === 'failed') {
+                break;
+            }
+        }
+
+        if ($status === 'failed') {
+            return response()->json([
+                'ok'      => false,
+                'status'  => 'failed',
+                'error'   => 'REPORT_FAILED',
+                'message' => $latest?->last_error ?? 'Report generation failed',
+                'job_id'  => $latest?->id,
+            ], 500);
+        }
+
+        if ($status !== 'success') {
+            return response()->json([
+                'ok'      => true,
+                'status'  => $status,
+                'job_id'  => $latest?->id ?? $reportJob->id,
+            ], 202);
+        }
+
+        $reportJob = $latest ?? $reportJob;
+    }
+
+    $reportPayload = is_array($reportJob->report_json ?? null)
+        ? $reportJob->report_json
+        : null;
+
+    if (!is_array($reportPayload)) {
+        $disk = array_key_exists('private', config('filesystems.disks', []))
+            ? Storage::disk('private')
+            : Storage::disk(config('filesystems.default', 'local'));
+        $latestRelPath = "reports/{$attemptId}/report.json";
+
         try {
             if ($disk->exists($latestRelPath)) {
                 $cachedJson = $disk->get($latestRelPath);
                 $cached = json_decode($cachedJson, true);
-
                 if (is_array($cached)) {
-                    $funnel = $this->readFunnelMetaFromHeaders($request, $attempt);
+                    $reportPayload = $cached;
+                }
+            }
+        } catch (\Throwable $e) {
+            Log::warning('[report] read cache failed', [
+                'attempt_id' => $attemptId,
+                'path'       => $latestRelPath,
+                'err'        => $e->getMessage(),
+            ]);
+        }
+    }
+
+    if (!is_array($reportPayload)) {
+        return response()->json([
+            'ok'      => false,
+            'status'  => 'failed',
+            'error'   => 'REPORT_MISSING',
+            'message' => 'Report payload is missing',
+            'job_id'  => $reportJob->id,
+        ], 500);
+    }
+
+    if (isset($reportPayload['highlights']) && is_array($reportPayload['highlights'])) {
+        $typeCodeForFix = (string) ($reportPayload['profile']['type_code'] ?? $result->type_code ?? '');
+        $reportPayload['highlights'] = $this->finalizeHighlightsSchema($reportPayload['highlights'], $typeCodeForFix);
+    }
+
+    if (!array_key_exists('tags', $reportPayload) || !is_array($reportPayload['tags'])) {
+        $reportPayload['tags'] = [];
+    }
+
+    $funnel = $this->readFunnelMetaFromHeaders($request, $attempt);
+    $cacheFlag = !$refresh;
 
 $resultViewMeta = $this->mergeEventMeta([
     'type_code'               => $result->type_code,
     'engine_version'          => $engineVersion,
     'content_package_version' => $contentPackageVersion,
     'share_id'                => ($shareId !== '' ? $shareId : null),
-    'refresh'                 => false,
-    'cache'                   => true,
+    'refresh'                 => $refresh,
+    'cache'                   => $cacheFlag,
 ], $funnel);
 
 // 1) ✅ 兼容：report 入口仍写 result_view（你现有 M3 逻辑）
@@ -1294,113 +1405,8 @@ $reportViewMeta = $this->mergeEventMeta([
     'engine_version'          => $engineVersion,
     'content_package_version' => $contentPackageVersion,
     'share_id'                => ($shareId !== '' ? $shareId : null),
-    'refresh'                 => false,
-    'cache'                   => true,
-], $funnel);
-
-$this->logEvent('report_view', $request, [
-    'anon_id'         => $anonId,
-    'scale_code'      => $result->scale_code,
-    'scale_version'   => $result->scale_version,
-    'attempt_id'      => $attemptId,
-    'channel'         => $funnel['channel'] ?? null,
-    'client_platform' => $funnel['client_platform'] ?? null,
-    'client_version'  => $funnel['version'] ?? null,
-    'region'          => $attempt?->region ?? 'CN_MAINLAND',
-    'locale'          => $attempt?->locale ?? 'zh-CN',
-    'meta_json'       => $reportViewMeta,
-]);
-
-// 3) ✅ share_view：带 share_id 才写，page=report_page
-if ($shareId !== '') {
-    $shareViewMeta = $this->mergeEventMeta([
-        'share_id' => $shareId,
-        'page'     => 'report_page',
-    ], $funnel);
-
-    $this->logEvent('share_view', $request, [
-        'anon_id'         => $anonId,
-        'scale_code'      => $result->scale_code,
-        'scale_version'   => $result->scale_version,
-        'attempt_id'      => $attemptId,
-        'channel'         => $funnel['channel'] ?? null,
-        'client_platform' => $funnel['client_platform'] ?? null,
-        'client_version'  => $funnel['version'] ?? null,
-        'region'          => $attempt?->region ?? 'CN_MAINLAND',
-        'locale'          => $attempt?->locale ?? 'zh-CN',
-        'meta_json'       => $shareViewMeta,
-    ]);
-}
-
-                    // 轻量兜底：确保 highlights 结构不炸前端
-                    if (isset($cached['highlights']) && is_array($cached['highlights'])) {
-                        $typeCodeForFix = (string) ($cached['profile']['type_code'] ?? $result->type_code ?? '');
-                        $cached['highlights'] = $this->finalizeHighlightsSchema($cached['highlights'], $typeCodeForFix);
-                    }
-
-                    // 保证 report.tags 存在（旧缓存可能没有）
-                    if (!array_key_exists('tags', $cached) || !is_array($cached['tags'])) {
-                        $cached['tags'] = [];
-                    }
-
-                    $this->maybeQueueReportClaimEmail($request, $attempt);
-
-                    return response()->json([
-                        'ok'         => true,
-                        'attempt_id' => $attemptId,
-                        'type_code'  => (string) ($cached['profile']['type_code'] ?? $result->type_code),
-                        'report'     => $cached,
-                    ]);
-                }
-
-                Log::warning('[report] cache_decode_failed, fallback to compose', [
-                    'attempt_id' => $attemptId,
-                    'path'       => $latestRelPath,
-                ]);
-            }
-        } catch (\Throwable $e) {
-            Log::warning('[report] read cache failed, fallback to compose', [
-                'attempt_id' => $attemptId,
-                'path'       => $latestRelPath,
-                'err'        => $e->getMessage(),
-            ]);
-        }
-    }
-
-    /**
-     * ✅ 2) 缓存未命中 / refresh=1：走 compose
-     */
-    $funnel = $this->readFunnelMetaFromHeaders($request, $attempt);
-
-$resultViewMeta = $this->mergeEventMeta([
-    'type_code'               => $result->type_code,
-    'engine_version'          => $engineVersion,
-    'content_package_version' => $contentPackageVersion,
-    'share_id'                => ($shareId !== '' ? $shareId : null),
     'refresh'                 => $refresh,
-    'cache'                   => false,
-], $funnel);
-
-$this->logEvent('result_view', $request, [
-    'anon_id'         => $anonId,
-    'scale_code'      => $result->scale_code,
-    'scale_version'   => $result->scale_version,
-    'attempt_id'      => $attemptId,
-    'channel'         => $funnel['channel'] ?? null,
-    'client_platform' => $funnel['client_platform'] ?? null,
-    'client_version'  => $funnel['version'] ?? null,
-    'region'          => $attempt?->region ?? 'CN_MAINLAND',
-    'locale'          => $attempt?->locale ?? 'zh-CN',
-    'meta_json'       => $resultViewMeta,
-]);
-
-$reportViewMeta = $this->mergeEventMeta([
-    'type_code'               => $result->type_code,
-    'engine_version'          => $engineVersion,
-    'content_package_version' => $contentPackageVersion,
-    'share_id'                => ($shareId !== '' ? $shareId : null),
-    'refresh'                 => $refresh,
-    'cache'                   => false,
+    'cache'                   => $cacheFlag,
 ], $funnel);
 
 $this->logEvent('report_view', $request, [
@@ -1435,100 +1441,13 @@ if ($shareId !== '') {
         'meta_json'       => $shareViewMeta,
     ]);
 }
-
-    /** @var \App\Services\Report\ReportComposer $composer */
-    $composer = app(ReportComposer::class);
-
-    $currentPkgKey = 'current' . 'ContentPackageVersion';
-    $res = $composer->compose($attemptId, [
-        'defaultProfileVersion'        => config('fap.profile_version', 'mbti32-v2.5'),
-        'defaultContentPackageVersion' => $this->defaultDirVersion(),
-        $currentPkgKey                 => fn () => $this->defaultDirVersion(),
-
-        'loadTypeProfile' => fn (string $pkg, string $type)
-            => $this->loadTypeProfile($pkg, $type),
-
-        'loadReportAssetItems' => fn (string $pkg, string $file, ?string $k = 'type_code')
-            => $this->loadReportAssetItems($pkg, $file, $k),
-
-        'buildRoleCard' => fn (string $pkg, string $type)
-            => $this->buildRoleCard($pkg, $type),
-
-        'buildStrategyCard' => fn (string $pkg, string $type)
-            => $this->buildStrategyCard($pkg, $type),
-
-        'buildBorderlineNote' => fn (array $scoresPct, string $pkg)
-            => $this->buildBorderlineNote($scoresPct, $pkg),
-
-        'buildRecommendedReads' => fn (string $pkg, string $type, array $scoresPct)
-            => $this->buildRecommendedReads($pkg, $type, $scoresPct),
-    ]);
-
-    if (!($res['ok'] ?? false)) {
-        return response()->json([
-            'ok'      => false,
-            'error'   => $res['error'] ?? 'REPORT_FAILED',
-            'message' => $res['message'] ?? 'Report compose failed',
-        ], (int) ($res['status'] ?? 500));
-    }
-
-    $reportPayload = $res['report'] ?? [];
-    if (!is_array($reportPayload)) $reportPayload = [];
-
-    // ✅ 强制 highlights 满足契约
-    if (isset($reportPayload['highlights']) && is_array($reportPayload['highlights'])) {
-        $type = (string) ($res['type_code'] ?? $result->type_code ?? '');
-        $reportPayload['highlights'] = $this->finalizeHighlightsSchema($reportPayload['highlights'], $type);
-    }
-
-    // ✅ 统一 tags 入口（保证 report.tags 存在）
-    $reportPayload['tags'] = $res['tags'] ?? ($reportPayload['tags'] ?? []);
-    if (!is_array($reportPayload['tags'])) $reportPayload['tags'] = [];
-
-    /**
-     * ✅ 3) 写 report.json（latest）+ snapshot（可回溯）
-     */
-    try {
-        $json = json_encode($reportPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if ($json === false) {
-            throw new \RuntimeException('json_encode_failed: ' . json_last_error_msg());
-        }
-
-        if (method_exists($disk, 'makeDirectory')) {
-            $disk->makeDirectory("reports/{$attemptId}");
-        }
-
-        $disk->put($latestRelPath, $json);
-
-        $ts = function_exists('now') ? now()->format('Ymd_His') : date('Ymd_His');
-        $snapRelPath = "reports/{$attemptId}/report.{$ts}.json";
-        $disk->put($snapRelPath, $json);
-
-        Log::info('[REPORT] persisted', [
-            'attempt_id'    => $attemptId,
-            'disk'          => array_key_exists('private', config('filesystems.disks', []))
-                ? 'private'
-                : config('filesystems.default', 'local'),
-            'root'          => (string) config('filesystems.disks.local.root'),
-            'latest'        => $latestRelPath,
-            'snapshot'      => $snapRelPath,
-            'latest_exists' => $disk->exists($latestRelPath),
-            'latest_abs'    => method_exists($disk, 'path') ? $disk->path($latestRelPath) : null,
-        ]);
-    } catch (\Throwable $e) {
-        Log::warning('[report] persist report.json failed', [
-            'attempt_id' => $attemptId,
-            'path'       => $latestRelPath,
-            'err'        => $e->getMessage(),
-        ]);
-    }
 
     $this->maybeQueueReportClaimEmail($request, $attempt);
 
     return response()->json([
         'ok'         => true,
         'attempt_id' => $attemptId,
-        'type_code'  => $res['type_code'] ?? $result->type_code,
+        'type_code'  => (string) ($reportPayload['profile']['type_code'] ?? $result->type_code),
         'report'     => $reportPayload,
     ]);
 }
@@ -1536,6 +1455,41 @@ if ($shareId !== '') {
     // ----------------------------
     // Private helpers
     // ----------------------------
+
+private function ensureReportJob(string $attemptId, bool $reset = false): ReportJob
+{
+    $job = ReportJob::where('attempt_id', $attemptId)->first();
+
+    if (!$job) {
+        $job = ReportJob::create([
+            'id' => (string) Str::uuid(),
+            'attempt_id' => $attemptId,
+            'status' => 'queued',
+            'tries' => 0,
+            'available_at' => now(),
+        ]);
+        return $job;
+    }
+
+    if ($reset) {
+        $job->status = 'queued';
+        $job->available_at = now();
+        $job->started_at = null;
+        $job->finished_at = null;
+        $job->failed_at = null;
+        $job->last_error = null;
+        $job->last_error_trace = null;
+        $job->report_json = null;
+        $job->save();
+    }
+
+    return $job;
+}
+
+private function dispatchReportJob(ReportJob $job): void
+{
+    GenerateReportJob::dispatch($job->attempt_id, $job->id)->onQueue('reports');
+}
 
 /**
  * M3-3: 从 templates + overrides 动态生成 highlights

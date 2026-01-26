@@ -16,6 +16,7 @@ jobs:
       APP_ENV: testing
       DB_CONNECTION: sqlite
       DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+      QUEUE_CONNECTION: sync
 
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +51,19 @@ jobs:
       - name: Run selfcheck (default manifest)
         working-directory: backend
         run: php artisan fap:self-check --strict-assets --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+
+      - name: PR6 queue (sync) smoke
+        working-directory: backend
+        run: |
+          set -euo pipefail
+          php artisan serve --host=127.0.0.1 --port=18080 >/tmp/pr6_srv.log 2>&1 &
+          SRV_PID=$!
+          trap "kill ${SRV_PID}" EXIT
+          for i in $(seq 1 30); do
+            curl -sS http://127.0.0.1:18080/api/v0.2/health >/dev/null && break
+            sleep 1
+          done
+          API="http://127.0.0.1:18080" bash scripts/verify_mbti.sh
 
       - name: Seed demo attempt+result (for runtime validate)
         working-directory: backend
