@@ -9,20 +9,14 @@ use Illuminate\Http\Request;
 class ContentReleaseController extends Controller
 {
     private function requireAdmin(Request $request)
-    {
-        $token = (string) $request->header('X-FAP-Admin-Token', '');
-        $expect = (string) env('FAP_ADMIN_TOKEN', '');
+{
+    $expect = (string) config('fap.admin_token');
+    $given  = (string) $request->header('X-FAP-Admin-Token', '');
 
-        if ($expect === '' || $token !== $expect) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'FORBIDDEN',
-                'message' => 'invalid admin token',
-            ], 403);
-        }
+    abort_unless($expect !== '' && hash_equals($expect, $given), 401, 'Unauthorized');
 
-        return null;
-    }
+    return null;
+}
 
     public function upload(Request $request, ContentPackPublisher $publisher)
     {
