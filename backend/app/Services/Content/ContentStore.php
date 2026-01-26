@@ -3,11 +3,15 @@
 
 namespace App\Services\Content;
 
+use App\Support\CacheKeys;
 use App\Services\Report\ReportContentNormalizer;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 final class ContentStore
 {
+    private const HOT_CACHE_TTL_SECONDS = 300;
+
     /** @var ContentPack[] */
     private array $chain;
 
@@ -28,6 +32,144 @@ final class ContentStore
         $this->chain = $chain;
         $this->ctx = $ctx;
         $this->legacyDir = $legacyDir;
+    }
+
+    private function hotCacheStore()
+    {
+        try {
+            return Cache::store('hot_redis');
+        } catch (\Throwable $e) {
+            return Cache::store();
+        }
+    }
+
+    private function shouldLogHotCache(): bool
+    {
+        return (bool) config('app.debug') || (bool) env('FAP_CACHE_LOG', true);
+    }
+
+    private function logHotCache(string $kind, string $key, bool $hit): void
+    {
+        if (!$this->shouldLogHotCache()) {
+            return;
+        }
+
+        $flagHit = $hit ? 1 : 0;
+        $flagMiss = $hit ? 0 : 1;
+
+        Log::info("[HOTCACHE] kind={$kind} key={$key} hit={$flagHit} miss={$flagMiss}");
+    }
+
+    private function packPathFor(ContentPack $pack): string
+    {
+        $basePath = str_replace(DIRECTORY_SEPARATOR, '/', $pack->basePath());
+
+        $root = (string) config('content_packs.root', '');
+        $root = rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $root), '/');
+        if ($root !== '' && str_starts_with($basePath, $root . '/')) {
+            return substr($basePath, strlen($root) + 1);
+        }
+
+        $cacheDir = (string) config('content_packs.cache_dir', '');
+        $cacheDir = rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $cacheDir), '/');
+        if ($cacheDir !== '' && str_starts_with($basePath, $cacheDir . '/')) {
+            return substr($basePath, strlen($cacheDir) + 1);
+        }
+
+        return ltrim($basePath, '/');
+    }
+
+    private function isHotJsonAsset(string $relPath): bool
+    {
+        $relPath = str_replace(DIRECTORY_SEPARATOR, '/', $relPath);
+        if (!str_ends_with($relPath, '.json')) {
+            return false;
+        }
+
+        $basename = basename($relPath);
+
+        // overrides 类文件会被验收脚本临时写入，不能缓存，否则会读到旧内容
+        if ($basename === 'report_overrides.json' || str_contains($basename, 'overrides')) {
+            return false;
+        }
+
+        $hotBasenames = [
+            'manifest.json',
+            'questions.json',
+            'type_profiles.json',
+            'identity_cards.json',
+            'identity_layers.json',
+        ];
+        if (in_array($basename, $hotBasenames, true)) {
+            return true;
+        }
+
+        if ($relPath === 'meta/landing.json' || str_ends_with($relPath, '/meta/landing.json')) {
+            return true;
+        }
+
+        if (str_starts_with($relPath, 'share_templates/')) {
+            return true;
+        }
+
+        return (bool) preg_match('/^report_.*\.json$/', $basename);
+    }
+
+    private function readJsonFromPath(ContentPack $pack, string $relPath, string $absPath): ?array
+    {
+        $relPath = str_replace(DIRECTORY_SEPARATOR, '/', $relPath);
+
+        $useHotCache = $this->isHotJsonAsset($relPath);
+        $cacheKey = '';
+        $cache = null;
+
+        if ($useHotCache) {
+            $cacheKey = CacheKeys::contentAsset($this->packPathFor($pack), $relPath);
+            $cache = $this->hotCacheStore();
+            try {
+                $cached = $cache->get($cacheKey);
+            } catch (\Throwable $e) {
+                try {
+                    $cache = Cache::store();
+                    $cached = $cache->get($cacheKey);
+                } catch (\Throwable $e2) {
+                    $cached = null;
+                }
+            }
+
+            if (is_array($cached)) {
+                $this->logHotCache('asset', $cacheKey, true);
+                return $cached;
+            }
+        }
+
+        $raw = @file_get_contents($absPath);
+        if ($raw === false) {
+            return null;
+        }
+
+        $json = json_decode((string) $raw, true);
+        if (!is_array($json)) {
+            return null;
+        }
+
+        if ($useHotCache && $cacheKey !== '') {
+            try {
+                if ($cache !== null) {
+                    $cache->put($cacheKey, $json, self::HOT_CACHE_TTL_SECONDS);
+                }
+            } catch (\Throwable $e) {
+                try {
+                    Cache::store()->put($cacheKey, $json, self::HOT_CACHE_TTL_SECONDS);
+                } catch (\Throwable $e2) {
+                    // ignore cache write failure
+                }
+            }
+
+            $this->logHotCache('asset', $cacheKey, false);
+        }
+
+        return $json;
     }
 
     // =========================
@@ -265,10 +407,7 @@ public function loadSelectRules(): array
 
         $path = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $filename;
         if (is_string($path) && $path !== '' && is_file($path)) {
-            $raw = @file_get_contents($path);
-            if ($raw === false || trim($raw) === '') return [];
-
-            $json = json_decode($raw, true);
+            $json = $this->readJsonFromPath($pack, $filename, $path);
             if (!is_array($json)) return [];
 
             // 支持两种结构：{"rules":[...]} 或 直接就是 [...]
@@ -825,7 +964,7 @@ public function loadReportOverrides(): array
                 $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
                 if (!is_file($abs)) continue;
 
-                $json = json_decode((string)file_get_contents($abs), true);
+                $json = $this->readJsonFromPath($p, $rel, $abs);
                 if (!is_array($json)) continue;
 
                 Log::info('[STORE] json_loaded', [
@@ -856,7 +995,7 @@ public function loadReportOverrides(): array
                     $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
                     if (!is_file($abs)) continue;
 
-                    $json = json_decode((string)file_get_contents($abs), true);
+                    $json = $this->readJsonFromPath($p, $rel, $abs);
                     if (!is_array($json)) continue;
 
                     Log::info('[STORE] json_loaded_scan', [
@@ -893,7 +1032,7 @@ public function loadReportOverrides(): array
                 $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
                 if (!is_file($abs)) continue;
 
-                $json = json_decode((string)file_get_contents($abs), true);
+                $json = $this->readJsonFromPath($p, $rel, $abs);
                 if (!is_array($json)) continue;
 
                 // 归一化：overrides -> rules
