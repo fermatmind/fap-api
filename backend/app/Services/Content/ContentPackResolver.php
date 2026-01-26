@@ -30,11 +30,23 @@ class ContentPackResolver
             throw new RuntimeException("No default content_package_version configured for scale=$scaleCode");
         }
 
-        $basePath = $this->packsRoot
-            . DIRECTORY_SEPARATOR . $scaleCode
-            . DIRECTORY_SEPARATOR . $region
-            . DIRECTORY_SEPARATOR . $locale
-            . DIRECTORY_SEPARATOR . $version;
+        $packPath = $scaleCode . '/' . $region . '/' . $locale . '/' . $version;
+        $driver = config('content_packs.driver', 'local');
+
+        if ($driver === 's3') {
+            app(PackCache::class)->ensureCached($packPath);
+            $cacheRoot = rtrim((string)config('content_packs.cache_dir', ''), '/');
+            if ($cacheRoot === '') {
+                throw new RuntimeException("Missing config: content_packs.cache_dir");
+            }
+            $basePath = str_replace('/', DIRECTORY_SEPARATOR, $cacheRoot . '/' . $packPath);
+        } else {
+            $basePath = $this->packsRoot
+                . DIRECTORY_SEPARATOR . $scaleCode
+                . DIRECTORY_SEPARATOR . $region
+                . DIRECTORY_SEPARATOR . $locale
+                . DIRECTORY_SEPARATOR . $version;
+        }
 
         $manifestPath = $basePath . DIRECTORY_SEPARATOR . 'manifest.json';
         if (!File::exists($manifestPath)) {

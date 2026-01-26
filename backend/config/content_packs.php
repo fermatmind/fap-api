@@ -16,6 +16,13 @@ return [
     's3_disk' => env('FAP_S3_DISK', 's3'),
     's3_prefix' => env('FAP_S3_PREFIX', ''),
 
+    // 缓存策略：
+    // - driver=local：读取 root
+    // - driver=s3：源来自 disk/prefix；实际读取落到 cache_dir（由 PackCache 保证目录存在/更新）
+    // - cache_ttl_seconds：到期触发一次 etag 校验与刷新
+    'cache_dir' => env('FAP_PACKS_CACHE_DIR', storage_path('app/private/content_packs_cache')),
+    'cache_ttl_seconds' => (int)env('FAP_PACKS_CACHE_TTL_SECONDS', 3600),
+
     // ✅ CI/服务器建议强约束：默认 pack_id 明确指向你的主包，避免回退到 GLOBAL/en
     // default_pack_id 对应 manifest.json.pack_id（MBTI.cn-mainland.zh-CN.v0.2.1-TEST）
     'default_pack_id' => env('FAP_DEFAULT_PACK_ID', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST'),
