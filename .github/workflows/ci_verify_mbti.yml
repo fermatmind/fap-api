@@ -58,6 +58,19 @@ jobs:
           # Make scripts executable (some repos lose +x on Windows)
           chmod +x scripts/*.sh || true
 
+      - name: Prepare SQLite DB + migrate
+        working-directory: backend
+        env:
+          APP_ENV: ci
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+          QUEUE_CONNECTION: sync
+        run: |
+          set -euo pipefail
+          mkdir -p database
+          touch database/database.sqlite
+          php artisan migrate --force
+
       - name: Check content packs index endpoint
         run: |
           set -euo pipefail
@@ -81,6 +94,11 @@ jobs:
           FAP_DEFAULT_REGION: CN_MAINLAND
           FAP_DEFAULT_LOCALE: zh-CN
           FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+
+          # DB + queue (PR6)
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+          QUEUE_CONNECTION: sync
 
           # Keep E2E strict
           STRICT: "1"
