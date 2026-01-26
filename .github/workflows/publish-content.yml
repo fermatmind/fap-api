@@ -57,7 +57,7 @@ jobs:
           set -euo pipefail
           BASE_URL="${BASE_URL%/}"
           RESP=$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/upload" \
-            -H "X-FAP-Admin-Token: $ADMIN_TOKEN" \
+            -H "X-Admin-Token: ${ADMIN_TOKEN}" \
             -F "file=@/tmp/content_pack.zip")
           echo "$RESP" | jq .
           VERSION_ID=$(echo "$RESP" | jq -r '.version_id')
@@ -91,7 +91,7 @@ jobs:
             '{version_id:$version_id,region:$region,locale:$locale,dir_alias:$dir_alias,probe:$probe}')
           RESP=$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/publish" \
             -H "Content-Type: application/json" \
-            -H "X-FAP-Admin-Token: $ADMIN_TOKEN" \
+            -H "X-Admin-Token: ${ADMIN_TOKEN}" \
             -d "$PAYLOAD")
           echo "$RESP" | jq .
           RELEASE_ID=$(echo "$RESP" | jq -r '.release_id')
