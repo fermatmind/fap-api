@@ -9,6 +9,7 @@ use App\Http\Controllers\LookupController;
 use App\Http\Controllers\API\V0_2\AuthPhoneController;
 use App\Http\Controllers\API\V0_2\AuthProviderController;
 use App\Http\Controllers\API\V0_2\ClaimController;
+use App\Http\Controllers\API\V0_2\ContentPacksController;
 use App\Http\Controllers\API\V0_2\IdentityController;
 use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\NormsController;
@@ -33,6 +34,11 @@ Route::prefix("v0.2")->group(function () {
 
     // 1) Health
     Route::get("/health", [MbtiController::class, "health"]);
+
+    // 1.5) Content packs
+    Route::get("/content-packs", [ContentPacksController::class, "index"]);
+    Route::get("/content-packs/{pack_id}/{dir_version}/manifest", [ContentPacksController::class, "manifest"]);
+    Route::get("/content-packs/{pack_id}/{dir_version}/questions", [ContentPacksController::class, "questions"]);
 
     // 2) Scale meta
     Route::get("/scales/MBTI", [MbtiController::class, "scaleMeta"]);
