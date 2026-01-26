@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
+use App\Support\CacheKeys;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 
 final class ContentPacksIndex
 {
-    public const CACHE_KEY = 'fap:content_packs_index:v0.2';
     public const CACHE_TTL_SECONDS = 30;
 
     public function getIndex(bool $refresh = false): array
@@ -24,13 +24,19 @@ final class ContentPacksIndex
         $packsRootFs = rtrim($packsRoot, "/\\");
         $defaults = $this->defaults();
 
+        $cacheKey = CacheKeys::packsIndex();
         $cache = $this->cacheStore();
 
         if (!$refresh) {
             try {
-                $cached = $cache->get(self::CACHE_KEY);
+                $cached = $cache->get($cacheKey);
             } catch (\Throwable $e) {
-                $cached = null;
+                try {
+                    $cache = Cache::store();
+                    $cached = $cache->get($cacheKey);
+                } catch (\Throwable $e2) {
+                    $cached = null;
+                }
             }
 
             if (is_array($cached)) {
@@ -62,9 +68,13 @@ final class ContentPacksIndex
         ];
 
         try {
-            $cache->put(self::CACHE_KEY, $index, self::CACHE_TTL_SECONDS);
+            $cache->put($cacheKey, $index, self::CACHE_TTL_SECONDS);
         } catch (\Throwable $e) {
-            // ignore cache write failure
+            try {
+                Cache::store()->put($cacheKey, $index, self::CACHE_TTL_SECONDS);
+            } catch (\Throwable $e2) {
+                // ignore cache write failure
+            }
         }
 
         return $index;
@@ -98,18 +108,11 @@ final class ContentPacksIndex
 
     private function cacheStore()
     {
-        $client = (string) config('database.redis.client', 'phpredis');
-        $redisUsable = $client === 'predis' || class_exists('Redis');
-
-        if ($redisUsable) {
-            try {
-                return Cache::store('redis');
-            } catch (\Throwable $e) {
-                // fall through
-            }
+        try {
+            return Cache::store('hot_redis');
+        } catch (\Throwable $e) {
+            return Cache::store();
         }
-
-        return Cache::store();
     }
 
     private function defaults(): array

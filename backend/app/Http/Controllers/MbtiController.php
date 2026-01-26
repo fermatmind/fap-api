@@ -15,6 +15,7 @@ use App\Models\Result;
 use App\Models\Event;
 
 use App\Support\WritesEvents;
+use App\Support\CacheKeys;
 
 use App\Services\Report\TagBuilder;
 use App\Services\Report\SectionCardGenerator;
@@ -29,6 +30,8 @@ use App\Services\Email\EmailOutboxService;
 class MbtiController extends Controller
 {
     use WritesEvents;
+
+    private const HOT_CACHE_TTL_SECONDS = 300;
 
     /**
      * 缓存：本次请求内复用题库索引
@@ -52,6 +55,33 @@ class MbtiController extends Controller
             'content_packs.default_dir_version',
             config('content.default_versions.default', 'MBTI-CN-v0.2.1-TEST')
         );
+    }
+
+    private function hotCacheStore()
+    {
+        try {
+            return Cache::store('hot_redis');
+        } catch (\Throwable $e) {
+            return Cache::store();
+        }
+    }
+
+    private function shouldLogHotCache(): bool
+    {
+        return (bool) config('app.debug') || (bool) env('FAP_CACHE_LOG', true);
+    }
+
+    private function logHotCacheQuestions(string $packId, string $dirVersion, bool $hit, float $startedAt): void
+    {
+        if (!$this->shouldLogHotCache()) {
+            return;
+        }
+
+        $ms = (int) round((microtime(true) - $startedAt) * 1000);
+        $flagHit = $hit ? 1 : 0;
+        $flagMiss = $hit ? 0 : 1;
+
+        Log::info("[HOTCACHE] kind=mbti_questions pack_id={$packId} dir={$dirVersion} ms={$ms} hit={$flagHit} miss={$flagMiss}");
     }
 
     /**
@@ -90,6 +120,7 @@ class MbtiController extends Controller
      */
     public function questions()
     {
+        $startedAt = microtime(true);
         $region = (string) (request()->header('X-Region') ?: request()->input('region') ?: $this->defaultRegion());
         $locale = (string) (request()->header('X-Locale') ?: request()->input('locale') ?: $this->defaultLocale());
         $dirVersion = $this->defaultDirVersion();
@@ -109,6 +140,27 @@ class MbtiController extends Controller
         }
         $packId = $manifest['pack_id'] ?? config('content_packs.default_pack_id');
         $contentPackageVersion = $manifest['content_package_version'] ?? $dirVersion;
+
+        $packId = is_string($packId) ? trim($packId) : '';
+        $contentPackageVersion = is_string($contentPackageVersion) ? $contentPackageVersion : $dirVersion;
+
+        $cacheKey = CacheKeys::mbtiQuestions($packId, $dirVersion);
+        $cache = $this->hotCacheStore();
+        try {
+            $cachedPayload = $cache->get($cacheKey);
+        } catch (\Throwable $e) {
+            try {
+                $cache = Cache::store();
+                $cachedPayload = $cache->get($cacheKey);
+            } catch (\Throwable $e2) {
+                $cachedPayload = null;
+            }
+        }
+
+        if (is_array($cachedPayload)) {
+            $this->logHotCacheQuestions($packId, $dirVersion, true, $startedAt);
+            return response()->json($cachedPayload);
+        }
 
         if (!$questionsPath || !is_file($questionsPath)) {
             return response()->json([
@@ -166,7 +218,7 @@ class MbtiController extends Controller
             ];
         }, $items);
 
-        return response()->json([
+        $payload = [
             'ok'                      => true,
             'scale_code'              => 'MBTI',
             'version'                 => 'v0.2',
@@ -176,7 +228,21 @@ class MbtiController extends Controller
             'dir_version'             => $dirVersion,
             'content_package_version' => $contentPackageVersion,
             'items'                   => $safe,
-        ]);
+        ];
+
+        try {
+            $cache->put($cacheKey, $payload, self::HOT_CACHE_TTL_SECONDS);
+        } catch (\Throwable $e) {
+            try {
+                Cache::store()->put($cacheKey, $payload, self::HOT_CACHE_TTL_SECONDS);
+            } catch (\Throwable $e2) {
+                // ignore cache write failure
+            }
+        }
+
+        $this->logHotCacheQuestions($packId, $dirVersion, false, $startedAt);
+
+        return response()->json($payload);
     }
 
 public function startAttempt(Request $request)
