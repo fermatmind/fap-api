@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Services\Analytics\EventNormalizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -45,6 +46,7 @@ class EventController extends Controller
         $this->requireFmToken($request);
 
         $data = $request->validate([
+            'event_name'  => ['nullable', 'string', 'max:64'],
             'event_code'  => ['required', 'string', 'max:64'],
             'anon_id'     => ['nullable', 'string', 'max:128'],
             'attempt_id'  => ['required', 'uuid'],
@@ -86,26 +88,42 @@ class EventController extends Controller
             $shareId = null;
         }
 
-        $event = new Event();
-        $event->id = method_exists(Str::class, 'uuid7')
+        $payload = [
+            'event_name' => $data['event_name'] ?? null,
+            'event_code' => $data['event_code'],
+            'anon_id' => $data['anon_id'] ?? null,
+            'attempt_id' => $data['attempt_id'],
+            'occurred_at' => $data['occurred_at'] ?? null,
+            'share_id' => $shareId,
+            'props' => $props,
+            'meta_json' => $meta,
+        ];
+
+        $context = [
+            'request_id' => $request->header('X-Request-Id') ?? $request->header('X-Request-ID'),
+            'session_id' => $request->header('X-Session-Id') ?? $request->header('X-Session-ID'),
+            'anon_id' => $request->attributes->get('anon_id'),
+            'user_id' => $request->attributes->get('fm_user_id'),
+        ];
+
+        $normalized = EventNormalizer::normalize($payload, $context);
+        $columns = $normalized['columns'];
+        $columns['id'] = method_exists(Str::class, 'uuid7')
             ? (string) Str::uuid7()
             : (string) Str::uuid();
-
-        $event->event_code  = $data['event_code'];
-        $event->anon_id     = $data['anon_id'] ?? null;
-        $event->attempt_id  = $data['attempt_id'];
-
-        // ✅ 写入 events.share_id 列（验收 F 的关键）
-        $event->share_id    = $shareId;
-
-        // 保留 meta_json（share_id 放里面也没关系）
-        $event->meta_json   = $mergedMeta;
-
-        $event->occurred_at = !empty($data['occurred_at'])
+        $columns['event_code'] = $data['event_code'];
+        if (!isset($columns['event_name']) || $columns['event_name'] === null || $columns['event_name'] === '') {
+            $columns['event_name'] = $data['event_name'] ?? $data['event_code'];
+        }
+        $columns['attempt_id'] = $columns['attempt_id'] ?? $data['attempt_id'];
+        $columns['anon_id'] = $columns['anon_id'] ?? ($data['anon_id'] ?? null);
+        $columns['share_id'] = $columns['share_id'] ?? $shareId;
+        $columns['meta_json'] = $normalized['props'];
+        $columns['occurred_at'] = $columns['occurred_at'] ?? (!empty($data['occurred_at'])
             ? Carbon::parse($data['occurred_at'])
-            : now();
+            : now());
 
-        $event->save();
+        $event = Event::create($columns);
 
         return response()->json([
             'ok' => true,
