@@ -2,28 +2,64 @@ name: Deploy Application
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "deploy target"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Checkout code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      # Set up SSH key
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # SSH test - connect to the server
-      - name: Test SSH connection
-        run: ssh -o StrictHostKeyChecking=no deploy@122.152.221.126 "echo 'Connection successful!'"
-
-      # Deploy: Pull code and restart services
-      - name: Pull code and deploy
+      - name: Add hosts to known_hosts
         run: |
-          ssh deploy@122.152.221.126 "cd /var/www/fap-api/current && git pull origin main && sudo systemctl restart php8.4-fpm"
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 122.152.221.126 >> ~/.ssh/known_hosts
+          ssh-keyscan -H fermatmind.com >> ~/.ssh/known_hosts
+          ssh-keyscan -H staging.fermatmind.com >> ~/.ssh/known_hosts
+          ssh-keyscan -H 49.234.55.28 >> ~/.ssh/known_hosts
+
+      - name: Install Deployer (phar)
+        run: |
+          curl -fsSL -o /tmp/dep.phar https://deployer.org/deployer.phar
+          php /tmp/dep.phar --version
+
+      - name: Deploy (Deployer)
+        run: |
+          set -euo pipefail
+
+          TARGET="${{ github.event.inputs.env }}"
+          if [ -z "${TARGET}" ]; then
+            TARGET="production"
+          fi
+
+          # ====== production env vars (only used by deploy.php production host) ======
+          export DEPLOY_USER_PROD="deploy"
+          export DEPLOY_PORT_PROD="22"
+          export DEPLOY_HOST_PROD="122.152.221.126"
+          export DEPLOY_PATH_PROD="/var/www/fap-api"
+          export HEALTHCHECK_HOST_PROD="fermatmind.com"
+
+          # ====== staging env vars (only used by deploy.php staging host) ======
+          export DEPLOY_USER_STG="deploy"
+          export DEPLOY_PORT_STG="22"
+          export DEPLOY_HOST_STG="staging.fermatmind.com"
+          export DEPLOY_PATH_STG="/var/www/fap-api-staging"
+          export HEALTHCHECK_HOST_STG="staging.fermatmind.com"
+
+          php /tmp/dep.phar deploy "${TARGET}" -f deploy.php -vvv

@@ -50,11 +50,11 @@ set('php_fpm_service', 'php8.4-fpm');
 
 // ========= 生产机 =========
 host('production')
-    ->setHostname(getenv('DEPLOY_HOST') ?: '122.152.221.126')
-    ->setRemoteUser(getenv('DEPLOY_USER') ?: 'deploy')
-    ->setPort((int)(getenv('DEPLOY_PORT') ?: 22))
-    ->set('deploy_path', '/var/www/fap-api')
-    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST') ?: 'fermatmind.com')
+    ->setHostname(getenv('DEPLOY_HOST_PROD') ?: '122.152.221.126')
+    ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: 'deploy')
+    ->setPort((int)(getenv('DEPLOY_PORT_PROD') ?: 22))
+    ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: '/var/www/fap-api')
+    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'fermatmind.com')
     ->set('healthcheck_scheme', 'https')
     ->set('healthcheck_use_resolve', true)
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api')
@@ -62,13 +62,13 @@ host('production')
 
 // ========= Staging 机 =========
 host('staging')
-    ->setHostname(getenv('DEPLOY_HOST') ?: 'staging.fermatmind.com')
-    ->setRemoteUser(getenv('DEPLOY_USER') ?: 'deploy')
-    ->setPort((int)(getenv('DEPLOY_PORT') ?: 22))
-    ->set('deploy_path', '/var/www/fap-api-staging')
-    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST') ?: 'staging.fermatmind.com')
-    ->set('healthcheck_scheme', 'http')      // 你现在 staging 只配了 80
-    ->set('healthcheck_use_resolve', false)  // staging 直接访问域名
+    ->setHostname(getenv('DEPLOY_HOST_STG') ?: 'staging.fermatmind.com')
+    ->setRemoteUser(getenv('DEPLOY_USER_STG') ?: 'deploy')
+    ->setPort((int)(getenv('DEPLOY_PORT_STG') ?: 22))
+    ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: '/var/www/fap-api-staging')
+    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging.fermatmind.com')
+    ->set('healthcheck_scheme', 'https')     // staging 已启用 https
+    ->set('healthcheck_use_resolve', true)   // 走本机 127.0.0.1:443，避免外网链路抖动
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', 'php8.4-fpm');
 
@@ -130,6 +130,20 @@ task('sentry:release', function () {
     run("grep -q '^SENTRY_RELEASE=' {{deploy_path}}/shared/backend/.env && sed -i 's/^SENTRY_RELEASE=.*/SENTRY_RELEASE={$rel}/' {{deploy_path}}/shared/backend/.env || echo 'SENTRY_RELEASE={$rel}' >> {{deploy_path}}/shared/backend/.env");
 });
 
+// ========= runtime dirs (healthz deps) =========
+task('ensure:healthz-deps', function () {
+    // storage 是 shared symlink：{{deploy_path}}/shared/backend/storage
+    $base = get('deploy_path') . '/shared/backend/storage';
+
+    // 1) content-packs dir (HealthzController 默认检查 storage/app/content-packs)
+    run("mkdir -p {$base}/app/content-packs");
+    run("chmod 2775 {$base}/app/content-packs");
+
+    // 2) cache dirs（HealthzController 也会检查这些可写目录）
+    run("mkdir -p {$base}/framework/cache {$base}/framework/sessions {$base}/framework/views {$base}/logs");
+    run("chmod 2775 {$base}/framework/cache {$base}/framework/sessions {$base}/framework/views {$base}/logs");
+});
+
 // ========= 健康检查 =========
 task('healthcheck:public', function () {
     $host = get('healthcheck_host');
@@ -183,6 +197,8 @@ task('healthcheck:content-packs', function () {
 
 // ========= hooks =========
 before('deploy', 'guard:forbid-destructive');
+
+after('deploy:shared', 'ensure:healthz-deps');
 
 after('artisan:migrate', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
