@@ -17,6 +17,10 @@ use App\Http\Controllers\API\V0_2\NormsController;
 use App\Http\Controllers\API\V0_2\PaymentsController;
 use App\Http\Controllers\API\V0_2\ShareController;
 use App\Http\Controllers\API\V0_2\ValidityFeedbackController;
+use App\Http\Controllers\API\V0_2\Admin\AdminOpsController;
+use App\Http\Controllers\API\V0_2\Admin\AdminAuditController;
+use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
+use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,21 +47,38 @@ Route::prefix("v0.2")->group(function () {
     Route::get("/content-packs/{pack_id}/{dir_version}/manifest", [ContentPacksController::class, "manifest"]);
     Route::get("/content-packs/{pack_id}/{dir_version}/questions", [ContentPacksController::class, "questions"]);
 
-    // 1.6) Admin content releases
-    Route::prefix("admin")->group(function () {
-        Route::post(
-            "/content-releases/upload",
-            [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "upload"]
-        );
-        Route::post(
-            "/content-releases/publish",
-            [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "publish"]
-        );
-        Route::post(
-            "/content-releases/rollback",
-            [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "rollback"]
-        );
-    });
+    // 1.6) Admin APIs (token or admin session)
+    Route::prefix("admin")
+        ->middleware(\App\Http\Middleware\AdminAuth::class)
+        ->group(function () {
+            // Ops snapshot
+            Route::get("/healthz/snapshot", [AdminOpsController::class, "healthzSnapshot"]);
+
+            // Audit logs (read-only)
+            Route::get("/audit-logs", [AdminAuditController::class, "index"]);
+
+            // Events (read-only)
+            Route::get("/events", [AdminEventsController::class, "index"]);
+
+            // Content releases (read-only + tools)
+            Route::get("/content-releases", [AdminContentController::class, "index"]);
+            Route::post("/content-releases/{id}/probe", [AdminContentController::class, "probe"]);
+            Route::post("/cache/invalidate", [AdminOpsController::class, "invalidateCache"]);
+
+            // Legacy admin content release ops
+            Route::post(
+                "/content-releases/upload",
+                [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "upload"]
+            );
+            Route::post(
+                "/content-releases/publish",
+                [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "publish"]
+            );
+            Route::post(
+                "/content-releases/rollback",
+                [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "rollback"]
+            );
+        });
 
     // 2) Scale meta
     Route::get("/scales/MBTI", [MbtiController::class, "scaleMeta"]);

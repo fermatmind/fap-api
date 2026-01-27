@@ -11,8 +11,11 @@ class ContentReleaseController extends Controller
     private function requireAdmin(Request $request)
     {
         // ✅ 新 header：X-Admin-Token（与 publish-content.yml 保持一致）
-        $expect = (string) config('fap.admin_token');
-        $given  = (string) $request->header('X-Admin-Token', '');
+        $expect = (string) config('admin.token', config('fap.admin_token'));
+        $given  = (string) $request->header('X-FAP-Admin-Token', '');
+        if ($given === '') {
+            $given = (string) $request->header('X-Admin-Token', '');
+        }
 
         abort_unless($expect !== '' && hash_equals($expect, $given), 401, 'Unauthorized');
 

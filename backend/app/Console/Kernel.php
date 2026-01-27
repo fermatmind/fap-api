@@ -12,6 +12,7 @@ use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
 use App\Console\Commands\FapEmailOutboxSend;
 use App\Console\Commands\MetricsWeeklyValidity;
+use App\Console\Commands\AdminBootstrapOwner;
 use App\Console\Commands\OpsDeployEvent;
 use App\Console\Commands\OpsHealthzSnapshot;
 
@@ -33,6 +34,7 @@ class Kernel extends ConsoleKernel
         FapValidateReport::class,
         FapWeeklyReport::class,
         MetricsWeeklyValidity::class,
+        AdminBootstrapOwner::class,
         OpsDeployEvent::class,
         OpsHealthzSnapshot::class,
     ];
