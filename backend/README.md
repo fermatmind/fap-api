@@ -212,8 +212,23 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 #### 0) 前置条件
 服务器需要具备：
 - `bash`, `curl`, `jq`, `python3`
+- PHP 必备扩展：`redis`（phpredis）
 - 能访问 API（建议用内网域名或本机回环）
 - 已部署正确的 content_packages（且默认 region/locale/pack 不会掉回 GLOBAL/en）
+
+安装与验证（Ubuntu + ondrej/php）：
+
+```bash
+# 安装当前 PHP 小版本对应的 redis 扩展（示例：php8.4-redis）
+sudo apt-get update
+sudo apt-get install -y php$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')-redis
+
+# 重启 php-fpm（示例：php8.4-fpm）
+sudo systemctl restart php$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')-fpm
+
+# 验证扩展已加载
+php -m | grep -i '^redis$'
+php --ri redis
 
 #### 1) 必要参数：ATTEMPT_ID 从哪来？
 有两种方式：

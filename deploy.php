@@ -10,6 +10,7 @@ set('repository', 'git@github.com:fermatmind/fap-api.git');
 set('git_tty', false);
 set('keep_releases', 5);
 set('default_timeout', 900);
+
 set('sentry_release', function () {
     return get('release_name');
 });
@@ -44,33 +45,35 @@ set('writable_use_sudo', false);
 
 // ========= 默认：healthcheck / nginx / php-fpm（可被 host 覆盖） =========
 set('healthcheck_scheme', 'https');          // production 用 https
-set('healthcheck_use_resolve', true);        // production 用 --resolve 走本机 127.0.0.1:443
+set('healthcheck_use_resolve', true);        // 用 --resolve 走本机 127.0.0.1:443
 set('nginx_site', '/etc/nginx/sites-enabled/fap-api');
 set('php_fpm_service', 'php8.4-fpm');
 
 // ========= 生产机 =========
+// 兼容 GitHub Actions 常见 env：DEPLOY_HOST/DEPLOY_USER/DEPLOY_PORT/DEPLOY_PATH/HEALTHCHECK_HOST
 host('production')
-    ->setHostname(getenv('DEPLOY_HOST_PROD') ?: '122.152.221.126')
-    ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: 'deploy')
-    ->setPort((int)(getenv('DEPLOY_PORT_PROD') ?: 22))
-    ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: '/var/www/fap-api')
-    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'fermatmind.com')
+    ->setHostname(getenv('DEPLOY_HOST_PROD') ?: (getenv('DEPLOY_HOST') ?: '122.152.221.126'))
+    ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: (getenv('DEPLOY_USER') ?: 'deploy'))
+    ->setPort((int)(getenv('DEPLOY_PORT_PROD') ?: (getenv('DEPLOY_PORT') ?: 22)))
+    ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: (getenv('DEPLOY_PATH') ?: '/var/www/fap-api'))
+    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: (getenv('HEALTHCHECK_HOST') ?: 'fermatmind.com'))
     ->set('healthcheck_scheme', 'https')
     ->set('healthcheck_use_resolve', true)
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api')
-    ->set('php_fpm_service', 'php8.4-fpm');
+    ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_PROD') ?: (getenv('PHP_FPM_SERVICE') ?: 'php8.4-fpm'));
 
 // ========= Staging 机 =========
+// 兼容 GitHub Actions 常见 env：DEPLOY_HOST/DEPLOY_USER/DEPLOY_PORT/DEPLOY_PATH/HEALTHCHECK_HOST
 host('staging')
-    ->setHostname(getenv('DEPLOY_HOST_STG') ?: 'staging.fermatmind.com')
-    ->setRemoteUser(getenv('DEPLOY_USER_STG') ?: 'deploy')
-    ->setPort((int)(getenv('DEPLOY_PORT_STG') ?: 22))
-    ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: '/var/www/fap-api-staging')
-    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging.fermatmind.com')
-    ->set('healthcheck_scheme', 'https')     // staging 已启用 https
-    ->set('healthcheck_use_resolve', true)   // 走本机 127.0.0.1:443，避免外网链路抖动
+    ->setHostname(getenv('DEPLOY_HOST_STG') ?: (getenv('DEPLOY_HOST') ?: 'staging.fermatmind.com'))
+    ->setRemoteUser(getenv('DEPLOY_USER_STG') ?: (getenv('DEPLOY_USER') ?: 'deploy'))
+    ->setPort((int)(getenv('DEPLOY_PORT_STG') ?: (getenv('DEPLOY_PORT') ?: 22)))
+    ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: (getenv('DEPLOY_PATH') ?: '/var/www/fap-api-staging'))
+    ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: (getenv('HEALTHCHECK_HOST') ?: 'staging.fermatmind.com'))
+    ->set('healthcheck_scheme', getenv('HEALTHCHECK_SCHEME_STG') ?: 'https')
+    ->set('healthcheck_use_resolve', true)
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
-    ->set('php_fpm_service', 'php8.4-fpm');
+    ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: (getenv('PHP_FPM_SERVICE') ?: 'php8.4-fpm'));
 
 // ========= 覆盖 vendors：在 backend 里 composer install =========
 task('deploy:vendors', function () {
@@ -94,7 +97,7 @@ task('artisan:event:cache', function () {
     run('{{bin/php}} {{release_path}}/backend/artisan event:cache --ansi');
 });
 
-// 你的项目没有 views，view:cache 会炸：View path not found.
+// 项目没有 views，view:cache 会炸：View path not found.
 task('artisan:view:cache', function () {
     writeln('<comment>Skip artisan:view:cache (no views)</comment>');
 });
@@ -119,6 +122,11 @@ task('reload:php-fpm', function () {
     run("sudo -n /usr/bin/systemctl reload {$svc}");
 });
 
+task('restart:php-fpm', function () {
+    $svc = get('php_fpm_service');
+    run("sudo -n /usr/bin/systemctl restart {$svc}");
+});
+
 task('reload:nginx', function () {
     run('sudo -n /usr/bin/systemctl reload nginx');
 });
@@ -132,16 +140,34 @@ task('sentry:release', function () {
 
 // ========= runtime dirs (healthz deps) =========
 task('ensure:healthz-deps', function () {
-    // storage 是 shared symlink：{{deploy_path}}/shared/backend/storage
     $base = get('deploy_path') . '/shared/backend/storage';
 
-    // 1) content-packs dir (HealthzController 默认检查 storage/app/content-packs)
+    // storage/app/content-packs
     run("mkdir -p {$base}/app/content-packs");
     run("chmod 2775 {$base}/app/content-packs");
 
-    // 2) cache dirs（HealthzController 也会检查这些可写目录）
+    // cache dirs
     run("mkdir -p {$base}/framework/cache {$base}/framework/sessions {$base}/framework/views {$base}/logs");
     run("chmod 2775 {$base}/framework/cache {$base}/framework/sessions {$base}/framework/views {$base}/logs");
+});
+
+// ========= 系统依赖：phpredis（Redis 扩展） =========
+task('ensure:phpredis', function () {
+    $php = get('bin/php');
+
+    // PHP 版本（8.4 / 8.3 等）
+    $ver = trim(run($php . " -r 'echo PHP_MAJOR_VERSION.\".\".PHP_MINOR_VERSION;'"));
+
+    // CLI 是否已加载 redis 扩展
+    $ok = trim(run($php . " -m | grep -i '^redis$' >/dev/null 2>&1; echo $?"));
+    if ($ok !== '0') {
+        writeln('<error>Missing PHP extension: redis (phpredis)</error>');
+        writeln("<comment>Install (Ubuntu + ondrej/php):</comment>");
+        writeln("sudo apt-get update");
+        writeln("sudo apt-get install -y php{$ver}-redis");
+        writeln("sudo systemctl restart php{$ver}-fpm");
+        throw new \RuntimeException("phpredis missing: install php{$ver}-redis and restart php{$ver}-fpm");
+    }
 });
 
 // ========= 健康检查 =========
@@ -197,6 +223,9 @@ task('healthcheck:content-packs', function () {
 
 // ========= hooks =========
 before('deploy', 'guard:forbid-destructive');
+
+// 系统依赖检查：尽早失败（防止部署到一半才 rollback）
+before('deploy:prepare', 'ensure:phpredis');
 
 after('deploy:shared', 'ensure:healthz-deps');
 
