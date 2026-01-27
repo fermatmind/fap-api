@@ -51,7 +51,18 @@ jobs:
 
       - name: Post-deploy Health Check (staging)
         run: |
+          set -euo pipefail
           HOST=staging.fermatmind.com
-          curl -fsS http://${HOST}/api/v0.2/health | grep -q '"ok":true'
-          curl -fsS http://${HOST}/api/v0.2/scales/MBTI/questions | grep -q '"ok":true'
-          curl -fsS http://${HOST}/api/v0.2/content-packs | jq -e '.ok==true'
+
+          curl -fsS "https://${HOST}/api/v0.2/healthz" | jq -e '
+            .ok==true and
+            (.deps.db.ok==true) and
+            (.deps.redis.ok==true) and
+            (.deps.queue.ok==true) and
+            (.deps.cache_dirs.ok==true) and
+            (.deps.content_source.ok==true)
+          ' > /dev/null
+
+          curl -fsS "https://${HOST}/api/v0.2/health" | jq -e '.ok==true' > /dev/null
+          curl -fsS "https://${HOST}/api/v0.2/scales/MBTI/questions" | jq -e '.ok==true' > /dev/null
+          curl -fsS "https://${HOST}/api/v0.2/content-packs" | jq -e '.ok==true' > /dev/null
