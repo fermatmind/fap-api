@@ -36,6 +36,7 @@ Route::prefix("v0.2")->group(function () {
     // 1) Health
     Route::get("/health", [MbtiController::class, "health"]);
     Route::get("/healthz", [HealthzController::class, "show"]);
+    Route::get("/v0.2/healthz", [HealthzController::class, "show"]); // ✅ 新增
 
     // 1.5) Content packs
     Route::get("/content-packs", [ContentPacksController::class, "index"]);
