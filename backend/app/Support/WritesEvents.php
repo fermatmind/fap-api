@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use App\Models\Event;
+use App\Services\Analytics\EventNormalizer;
 
 trait WritesEvents
 {
@@ -239,32 +240,51 @@ trait WritesEvents
             }
 
             // Final: create
-            Event::create([
-                'id'              => (string) Str::uuid(),
-                'event_code'      => $eventCode,
+            $payload = [
+                'event_name' => $eventCode,
+                'event_code' => $eventCode,
+                'attempt_id' => $attemptId,
+                'share_id' => (is_string($resolvedShareId) && $resolvedShareId !== '') ? $resolvedShareId : null,
+                'props' => $incoming,
+                'meta_json' => $incoming,
+            ];
 
-                'user_id'         => ($fmUserId !== null && preg_match('/^\d+$/', (string) $fmUserId))
-                    ? (int) $fmUserId
-                    : null,
+            $context = [
+                'user_id' => $fmUserId,
+                'anon_id' => $anonId,
+                'session_id' => $request->attributes->get('session_id') ?? $request->header('X-Session-Id'),
+                'request_id' => $request->attributes->get('request_id') ?? $request->header('X-Request-Id'),
+                'region' => $extra['region'] ?? $request->input('region'),
+                'locale' => $extra['locale'] ?? $request->input('locale'),
+                'scale_code' => $extra['scale_code'] ?? null,
+                'scale_version' => $extra['scale_version'] ?? null,
+            ];
 
-                'anon_id'         => $anonId,
+            $normalized = EventNormalizer::normalize($payload, $context);
+            $columns = $normalized['columns'];
+            $columns['id'] = (string) Str::uuid();
+            $columns['event_code'] = $eventCode;
+            if (!isset($columns['event_name']) || $columns['event_name'] === null || $columns['event_name'] === '') {
+                $columns['event_name'] = $eventCode;
+            }
+            $columns['attempt_id'] = $columns['attempt_id'] ?? $attemptId;
+            $columns['anon_id'] = $columns['anon_id'] ?? $anonId;
+            $columns['user_id'] = $columns['user_id']
+                ?? (($fmUserId !== null && preg_match('/^\d+$/', (string) $fmUserId)) ? (int) $fmUserId : null);
+            $columns['share_id'] = $columns['share_id']
+                ?? ((is_string($resolvedShareId) && $resolvedShareId !== '') ? $resolvedShareId : null);
 
-                'scale_code'      => $extra['scale_code']    ?? null,
-                'scale_version'   => $extra['scale_version'] ?? null,
-                'attempt_id'      => $attemptId,
+            $columns['scale_code'] = $extra['scale_code'] ?? $columns['scale_code'] ?? null;
+            $columns['scale_version'] = $extra['scale_version'] ?? $columns['scale_version'] ?? null;
+            $columns['channel'] = $colChannel !== '' ? $colChannel : null;
+            $columns['region'] = $columns['region'] ?? $extra['region'] ?? $request->input('region', 'CN_MAINLAND');
+            $columns['locale'] = $columns['locale'] ?? $extra['locale'] ?? $request->input('locale', 'zh-CN');
+            $columns['client_platform'] = $colPlatform !== '' ? $colPlatform : null;
+            $columns['client_version'] = $colVersion !== '' ? $colVersion : null;
+            $columns['meta_json'] = $normalized['props'];
+            $columns['occurred_at'] = $columns['occurred_at'] ?? now();
 
-                'share_id'        => (is_string($resolvedShareId) && $resolvedShareId !== '') ? $resolvedShareId : null,
-
-                'channel'         => $colChannel !== '' ? $colChannel : null,
-                'region'          => $extra['region'] ?? $request->input('region', 'CN_MAINLAND'),
-                'locale'          => $extra['locale'] ?? $request->input('locale', 'zh-CN'),
-
-                'client_platform' => $colPlatform !== '' ? $colPlatform : null,
-                'client_version'  => $colVersion !== '' ? $colVersion : null,
-
-                'occurred_at'     => now(),
-                'meta_json'       => $incoming,
-            ]);
+            Event::create($columns);
         } catch (\Throwable $e) {
             Log::warning('event_log_failed', [
                 'event_code' => $eventCode,

@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 0},
+      "id": 1,
+      "options": {"showHeader": true},
+      "targets": [
+        {
+          "format": "table",
+          "rawSql": "SELECT occurred_at, status, env, revision, actor FROM v_deploy_events WHERE $__timeFilter(occurred_at) ORDER BY occurred_at DESC",
+          "refId": "A"
+        }
+      ],
+      "title": "Deploy Events",
+      "type": "table"
+    }
+  ],
+  "refresh": "10m",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["pr9", "deploy"],
+  "templating": {"list": []},
+  "time": {"from": "now-30d", "to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "FAP Deploy Timeline",
+  "uid": "fap-deploy-timeline",
+  "version": 1
+}

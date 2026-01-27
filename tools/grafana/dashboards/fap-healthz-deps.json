@@ -1,0 +1,71 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "fieldConfig": {
+        "defaults": {"unit": "percentunit"},
+        "overrides": []
+      },
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 0},
+      "id": 1,
+      "options": {"legend": {"displayMode": "list", "placement": "bottom"}},
+      "targets": [
+        {
+          "format": "time_series",
+          "rawSql": "SELECT day as time, dep_name, red_rate FROM v_healthz_deps_daily WHERE $__timeFilter(day) ORDER BY day",
+          "refId": "A"
+        }
+      ],
+      "title": "Deps Red Rate (daily)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "fieldConfig": {
+        "defaults": {"unit": "short"},
+        "overrides": []
+      },
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 10},
+      "id": 2,
+      "options": {"showHeader": true},
+      "targets": [
+        {
+          "format": "table",
+          "rawSql": "SELECT day, dep_name, total_count, red_count, red_rate FROM v_healthz_deps_daily WHERE $__timeFilter(day) ORDER BY day DESC, dep_name",
+          "refId": "A"
+        }
+      ],
+      "title": "Deps Red Rate Table",
+      "type": "table"
+    }
+  ],
+  "refresh": "10m",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["pr9", "healthz"],
+  "templating": {"list": []},
+  "time": {"from": "now-30d", "to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "FAP Healthz Deps",
+  "uid": "fap-healthz-deps",
+  "version": 1
+}

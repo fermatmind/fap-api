@@ -352,6 +352,7 @@ touch database/database.sqlite
 export APP_ENV="${APP_ENV:-testing}"
 export DB_CONNECTION="${DB_CONNECTION:-sqlite}"
 export DB_DATABASE="${DB_DATABASE:-$BACKEND_DIR/database/database.sqlite}"
+export QUEUE_CONNECTION="${QUEUE_CONNECTION:-sync}"
 
 php artisan migrate --force >/dev/null
 

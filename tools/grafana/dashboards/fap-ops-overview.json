@@ -1,0 +1,148 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "red", "value": 0.2}
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 0},
+      "id": 1,
+      "options": {
+        "legend": {"displayMode": "list", "placement": "bottom"}
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "rawSql": "SELECT day as time, (1 - MAX(red_rate)) AS ok_rate FROM v_healthz_deps_daily WHERE $__timeFilter(day) GROUP BY day ORDER BY day",
+          "refId": "A"
+        }
+      ],
+      "title": "Healthz OK Rate (derived)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "fieldConfig": {
+        "defaults": {"unit": "percentunit"},
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 0},
+      "id": 2,
+      "options": {"legend": {"displayMode": "list", "placement": "bottom"}},
+      "targets": [
+        {
+          "format": "time_series",
+          "rawSql": "SELECT day as time, dep_name, red_rate FROM v_healthz_deps_daily WHERE $__timeFilter(day) ORDER BY day",
+          "refId": "A"
+        }
+      ],
+      "title": "Deps Red Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "fieldConfig": {
+        "defaults": {"unit": "percentunit"},
+        "overrides": []
+      },
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 0},
+      "id": 3,
+      "options": {"legend": {"displayMode": "list", "placement": "bottom"}},
+      "targets": [
+        {
+          "format": "time_series",
+          "rawSql": "SELECT day as time, red_rate FROM v_healthz_deps_daily WHERE dep_name='queue' AND $__timeFilter(day) ORDER BY day",
+          "refId": "A"
+        }
+      ],
+      "title": "Queue Red Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "id": 4,
+      "options": {"legend": {"displayMode": "list", "placement": "bottom"}},
+      "targets": [
+        {
+          "format": "time_series",
+          "rawSql": "SELECT day as time, event_name, events_count FROM v_funnel_daily WHERE $__timeFilter(day) ORDER BY day",
+          "refId": "A"
+        }
+      ],
+      "title": "Funnel Daily (events)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "id": 5,
+      "options": {"legend": {"displayMode": "list", "placement": "bottom"}},
+      "targets": [
+        {
+          "format": "time_series",
+          "rawSql": "SELECT day as time, generated_count, clicked_count, viewed_count FROM v_share_conversion WHERE $__timeFilter(day) ORDER BY day",
+          "refId": "A"
+        }
+      ],
+      "title": "Share Conversion",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "mysql", "uid": "fap-mysql"},
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 16},
+      "id": 6,
+      "options": {"showHeader": true},
+      "targets": [
+        {
+          "format": "table",
+          "rawSql": "SELECT occurred_at, status, revision, actor, env FROM v_deploy_events WHERE $__timeFilter(occurred_at) ORDER BY occurred_at DESC LIMIT 50",
+          "refId": "A"
+        }
+      ],
+      "title": "Deploy Timeline (latest 50)",
+      "type": "table"
+    }
+  ],
+  "refresh": "5m",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["pr9", "observability"],
+  "templating": {"list": []},
+  "time": {"from": "now-30d", "to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "FAP Ops Overview",
+  "uid": "fap-ops-overview",
+  "version": 1
+}

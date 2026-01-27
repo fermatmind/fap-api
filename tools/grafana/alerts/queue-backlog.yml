@@ -1,0 +1,39 @@
+apiVersion: 1
+
+# Placeholder: replace with real queue backlog metrics when available.
+
+groups:
+  - orgId: 1
+    name: queue-backlog
+    folder: FAP
+    interval: 5m
+    rules:
+      - uid: queue-backlog
+        title: Queue Backlog (placeholder)
+        condition: C
+        data:
+          - refId: A
+            datasourceUid: fap-mysql
+            model:
+              format: time_series
+              rawSql: "SELECT day as time, red_rate FROM v_healthz_deps_daily WHERE dep_name='queue' AND day >= CURDATE() - INTERVAL 7 DAY"
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              type: reduce
+              reducer: last
+              expression: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              type: threshold
+              expression: B
+              params:
+                - 0.2
+        for: 10m
+        noDataState: NoData
+        execErrState: Error
+        annotations:
+          summary: "Queue red rate above threshold (proxy for backlog)"
+        labels:
+          severity: warning

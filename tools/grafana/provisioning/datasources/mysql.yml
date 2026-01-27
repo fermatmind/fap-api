@@ -1,0 +1,18 @@
+apiVersion: 1
+
+datasources:
+  - name: MySQL
+    uid: fap-mysql
+    type: mysql
+    access: proxy
+    url: ${GF_MYSQL_HOST}:${GF_MYSQL_PORT}
+    user: ${GF_MYSQL_USER}
+    secureJsonData:
+      password: ${GF_MYSQL_PASSWORD}
+    jsonData:
+      database: ${GF_MYSQL_DB}
+      tlsSkipVerify: true
+      maxOpenConns: 20
+      maxIdleConns: 5
+      connMaxLifetime: 14400
+    isDefault: true

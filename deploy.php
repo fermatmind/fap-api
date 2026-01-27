@@ -233,6 +233,14 @@ after('artisan:migrate', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'sentry:release');
 after('deploy:symlink', 'healthcheck:public');
+after('deploy:symlink', function () {
+    try {
+        run('{{bin/php}} {{release_path}}/backend/artisan ops:deploy-event --status=success --ansi || true');
+        run('{{bin/php}} {{release_path}}/backend/artisan ops:healthz-snapshot --ansi || true');
+    } catch (\Throwable $e) {
+        writeln('<comment>[ops] deploy hooks failed: ' . $e->getMessage() . '</comment>');
+    }
+});
 after('healthcheck:public', 'healthcheck:content-packs');
 
 after('deploy:failed', 'rollback');
