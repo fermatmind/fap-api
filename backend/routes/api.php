@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HealthzController;
 use App\Http\Controllers\MbtiController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LookupController;
@@ -34,6 +35,7 @@ Route::prefix("v0.2")->group(function () {
 
     // 1) Health
     Route::get("/health", [MbtiController::class, "health"]);
+    Route::get("/healthz", [HealthzController::class, "show"]);
 
     // 1.5) Content packs
     Route::get("/content-packs", [ContentPacksController::class, "index"]);
