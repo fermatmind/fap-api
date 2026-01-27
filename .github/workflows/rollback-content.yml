@@ -6,9 +6,13 @@ on:
       target_env:
         description: "production or staging"
         required: true
-        default: "production"
+        type: choice
+        options:
+          - production
+          - staging
+        default: production
       release_id:
-        description: "release_id from publish step"
+        description: "release_id from Publish Content"
         required: true
       region:
         required: true
@@ -22,11 +26,21 @@ on:
       probe:
         description: "true/false"
         required: true
+        type: choice
+        options:
+          - "true"
+          - "false"
         default: "true"
+
+concurrency:
+  group: rollback-content-${{ inputs.target_env }}
+  cancel-in-progress: false
 
 jobs:
   rollback:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.target_env }}
+
     steps:
       - name: Rollback via API
         env:
@@ -37,18 +51,70 @@ jobs:
           LOCALE: ${{ inputs.locale }}
           DIR_ALIAS: ${{ inputs.dir_alias }}
           PROBE: ${{ inputs.probe }}
+        shell: bash
         run: |
           set -euo pipefail
-          PAYLOAD=$(jq -n \
+
+          trim() { echo -n "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'; }
+
+          BASE_URL="$(trim "$BASE_URL")"
+          RELEASE_ID="$(trim "$RELEASE_ID")"
+          REGION="$(trim "$REGION")"
+          LOCALE="$(trim "$LOCALE")"
+          DIR_ALIAS="$(trim "$DIR_ALIAS")"
+          PROBE="$(trim "$PROBE")"
+
+          case "$PROBE" in
+            true|false) ;;
+            *) echo "::error::probe must be true/false, got: $PROBE"; exit 1;;
+          esac
+
+          PAYLOAD="$(jq -n \
             --arg release_id "$RELEASE_ID" \
             --arg region "$REGION" \
             --arg locale "$LOCALE" \
             --arg dir_alias "$DIR_ALIAS" \
             --argjson probe "$PROBE" \
-            '{release_id:$release_id, region:$region, locale:$locale, dir_alias:$dir_alias, probe:$probe}')
+            '{release_id:$release_id, region:$region, locale:$locale, dir_alias:$dir_alias, probe:$probe}'
+          )"
+
           echo "Payload=$PAYLOAD"
-          curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/rollback" \
+
+          RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/rollback" \
             -H "Accept: application/json" \
             -H "Content-Type: application/json" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
-            -d "$PAYLOAD" | jq .
+            -d "$PAYLOAD")"
+
+          echo "$RESP" | jq .
+
+          OK="$(echo "$RESP" | jq -r '.ok // empty')"
+          STATUS="$(echo "$RESP" | jq -r '.status // empty')"
+          MSG="$(echo "$RESP" | jq -r '.message // empty')"
+          ERR="$(echo "$RESP" | jq -r '.error // empty')"
+
+          if [[ "$OK" != "true" ]]; then
+            echo "::error::rollback api call failed ok=$OK error=$ERR message=$MSG"
+            exit 1
+          fi
+
+          if [[ "$STATUS" != "success" ]]; then
+            echo "::error::rollback failed status=$STATUS error=$ERR message=$MSG"
+            exit 1
+          fi
+
+          NEW_RELEASE_ID="$(echo "$RESP" | jq -r '.release_id')"
+          RB_VERSION_ID="$(echo "$RESP" | jq -r '.rolled_back_to.version_id')"
+          RB_PACK_ID="$(echo "$RESP" | jq -r '.rolled_back_to.pack_id')"
+
+          echo "rolled_back_release_id=$NEW_RELEASE_ID" >> "$GITHUB_OUTPUT"
+          echo "rolled_back_version_id=$RB_VERSION_ID" >> "$GITHUB_OUTPUT"
+          echo "rolled_back_pack_id=$RB_PACK_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Post-rollback probes (public)
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS "https://fermatmind.com/api/v0.2/health" | jq -e '.ok==true' >/dev/null
+          curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions?region=CN_MAINLAND&locale=zh-CN" | jq -e '.ok==true' >/dev/null
+          curl -fsS "https://fermatmind.com/api/v0.2/content-packs" | jq -e '.ok==true' >/dev/null
