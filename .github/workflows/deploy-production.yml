@@ -49,7 +49,8 @@ jobs:
           php dep.phar -f deploy.php deploy production -vvv
 
       - name: Post-deploy Health Check (public)
+        shell: bash
         run: |
           sleep 2
-          curl -fsS "https://fermatmind.com/api/v0.2/health" | grep -q '"ok":true'
-          curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions" | grep -q '"ok":true'
+          set -euo pipefail
+          curl -fsS "https://fermatmind.com/api/v0.2/healthz" | jq -e '.ok==true and (.deps.db.ok==true) and (.deps.redis.ok==true) and (.deps.queue.ok==true) and (.deps.cache_dirs.ok==true) and (.deps.content_source.ok==true)' > /dev/null

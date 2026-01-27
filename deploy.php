@@ -10,6 +10,9 @@ set('repository', 'git@github.com:fermatmind/fap-api.git');
 set('git_tty', false);
 set('keep_releases', 5);
 set('default_timeout', 900);
+set('sentry_release', function () {
+    return get('release_name');
+});
 
 // ========= 关键：Laravel 在 backend 子目录 =========
 set('public_path', 'backend/public');
@@ -120,8 +123,15 @@ task('reload:nginx', function () {
     run('sudo -n /usr/bin/systemctl reload nginx');
 });
 
+// ========= Sentry release =========
+task('sentry:release', function () {
+    $rel = get('sentry_release');
+    run("cd {{deploy_path}} && test -f shared/backend/.env");
+    run("grep -q '^SENTRY_RELEASE=' {{deploy_path}}/shared/backend/.env && sed -i 's/^SENTRY_RELEASE=.*/SENTRY_RELEASE={$rel}/' {{deploy_path}}/shared/backend/.env || echo 'SENTRY_RELEASE={$rel}' >> {{deploy_path}}/shared/backend/.env");
+});
+
 // ========= 健康检查 =========
-task('healthcheck', function () {
+task('healthcheck:public', function () {
     $host = get('healthcheck_host');
     $scheme = get('healthcheck_scheme');
     $useResolve = (bool) get('healthcheck_use_resolve');
@@ -146,16 +156,11 @@ task('healthcheck', function () {
 
     $base = $scheme . '://' . $host;
 
-    run('curl -fsS ' . $resolvePart . $base . '/api/v0.2/health | grep -q "\"ok\":true"');
-    run('curl -fsS ' . $resolvePart . $base . '/api/v0.2/scales/MBTI/questions | grep -q "\"ok\":true"');
-
-    $payload = '{"anon_id":"dep-health-001","scale_code":"MBTI","scale_version":"v0.2","question_count":144,"client_platform":"web","region":"CN_MAINLAND","locale":"zh-CN"}';
     run(
-        'curl -fsS ' . $resolvePart .
-        '-X POST ' . $base . '/api/v0.2/attempts/start ' .
-        '-H "Content-Type: application/json" -H "Accept: application/json" ' .
-        '-d \'' . $payload . '\' | grep -q "\"ok\":true"'
+        'curl -fsS ' . $resolvePart . $base . '/api/v0.2/healthz | ' .
+        'jq -e \'.ok==true and (.deps.db.ok==true) and (.deps.redis.ok==true) and (.deps.queue.ok==true) and (.deps.cache_dirs.ok==true) and (.deps.content_source.ok==true)\' > /dev/null'
     );
+    run('curl -fsS ' . $resolvePart . $base . '/api/v0.2/health | jq -e \'.ok==true\' > /dev/null');
 });
 
 task('healthcheck:content-packs', function () {
@@ -181,8 +186,9 @@ before('deploy', 'guard:forbid-destructive');
 
 after('artisan:migrate', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
-after('deploy:symlink', 'healthcheck');
-after('healthcheck', 'healthcheck:content-packs');
+after('deploy:symlink', 'sentry:release');
+after('deploy:symlink', 'healthcheck:public');
+after('healthcheck:public', 'healthcheck:content-packs');
 
 after('deploy:failed', 'rollback');
 after('rollback', 'reload:php-fpm');
