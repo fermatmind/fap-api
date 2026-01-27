@@ -1,0 +1,54 @@
+name: Rollback Content
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_env:
+        description: "production or staging"
+        required: true
+        default: "production"
+      release_id:
+        description: "release_id from publish step"
+        required: true
+      region:
+        required: true
+        default: "CN_MAINLAND"
+      locale:
+        required: true
+        default: "zh-CN"
+      dir_alias:
+        required: true
+        default: "MBTI-CN-v0.2.1-TEST"
+      probe:
+        description: "true/false"
+        required: true
+        default: "true"
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rollback via API
+        env:
+          BASE_URL: ${{ secrets.CONTENT_PUBLISH_BASE_URL }}
+          ADMIN_TOKEN: ${{ secrets.FAP_ADMIN_TOKEN }}
+          RELEASE_ID: ${{ inputs.release_id }}
+          REGION: ${{ inputs.region }}
+          LOCALE: ${{ inputs.locale }}
+          DIR_ALIAS: ${{ inputs.dir_alias }}
+          PROBE: ${{ inputs.probe }}
+        run: |
+          set -euo pipefail
+          PAYLOAD=$(jq -n \
+            --arg release_id "$RELEASE_ID" \
+            --arg region "$REGION" \
+            --arg locale "$LOCALE" \
+            --arg dir_alias "$DIR_ALIAS" \
+            --argjson probe "$PROBE" \
+            '{release_id:$release_id, region:$region, locale:$locale, dir_alias:$dir_alias, probe:$probe}')
+          echo "Payload=$PAYLOAD"
+          curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/rollback" \
+            -H "Accept: application/json" \
+            -H "Content-Type: application/json" \
+            -H "X-Admin-Token: ${ADMIN_TOKEN}" \
+            -d "$PAYLOAD" | jq .
