@@ -3,6 +3,7 @@
 > Last Updated: 2026-01-12
 > Version: Docs Index v0.2.1
 > Related Docs:
+> - PROJECT_OVERVIEW.md
 > - docs/03-stage1/README.md
 > - docs/04-stage2/README.md
 
