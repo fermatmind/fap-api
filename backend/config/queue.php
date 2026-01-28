@@ -15,6 +15,9 @@ return [
 
     'default' => env('QUEUE_CONNECTION', 'sync'),
 
+    // Dedicated queue name for AI insights jobs (when using database/redis queues)
+    'insights_queue' => env('AI_INSIGHTS_QUEUE', 'insights'),
+
     /*
     |--------------------------------------------------------------------------
     | Queue Connections
