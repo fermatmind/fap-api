@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Response;
 
 class FmTokenAuth
@@ -49,6 +50,9 @@ class FmTokenAuth
         $request->attributes->set('fm_token', $token);
 
         // Resolve identity from DB: fm_tokens.token -> user_id / anon_id
+        if (!Schema::hasTable('fm_tokens')) {
+            return $this->unauthorizedResponse($request, 'token_table_missing');
+        }
         $row = DB::table('fm_tokens')->where('token', $token)->first();
         if (!$row) {
             return $this->unauthorizedResponse($request, 'token_not_found');
