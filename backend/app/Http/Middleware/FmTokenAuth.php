@@ -106,6 +106,12 @@ class FmTokenAuth
             if ($v !== '') return $v;
         }
 
+        // optional alias
+        if (property_exists($row, 'fm_user_id')) {
+            $v = trim((string) ($row->fm_user_id ?? ''));
+            if ($v !== '') return $v;
+        }
+
         // legacy candidates (keep numeric contract)
         foreach (['uid', 'user_uid', 'user'] as $c) {
             if (property_exists($row, $c)) {

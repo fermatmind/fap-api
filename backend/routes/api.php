@@ -22,6 +22,8 @@ use App\Http\Controllers\API\V0_2\Admin\AdminOpsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminAuditController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
+use App\Http\Controllers\Integrations\ProvidersController;
+use App\Http\Controllers\Webhooks\HandleProviderWebhook;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +123,22 @@ Route::prefix("v0.2")->group(function () {
     Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
 
     // =========================================================
+    // Integrations (mock OAuth + ingestion + replay)
+    // =========================================================
+    Route::prefix("integrations/{provider}")->group(function () {
+        Route::get("/oauth/start", [ProvidersController::class, "oauthStart"]);
+        Route::get("/oauth/callback", [ProvidersController::class, "oauthCallback"]);
+        Route::post("/revoke", [ProvidersController::class, "revoke"]);
+        Route::post("/ingest", [ProvidersController::class, "ingest"]);
+        Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"]);
+    });
+
+    // =========================================================
+    // Webhooks (provider push)
+    // =========================================================
+    Route::post("/webhooks/{provider}", [HandleProviderWebhook::class, "handle"]);
+
+    // =========================================================
     // AI Insights (async, budget guarded)
     // =========================================================
     Route::middleware('App\\Http\\Middleware\\CheckAiBudget')->group(function () {
@@ -149,6 +167,9 @@ Route::prefix("v0.2")->group(function () {
         Route::post("/me/email/bind", [MeController::class, "bindEmail"]);
         Route::post("/me/identities/bind", [IdentityController::class, "bind"]);
         Route::get("/me/identities", [IdentityController::class, "index"]);
+        Route::get("/me/data/sleep", [MeController::class, "sleepData"]);
+        Route::get("/me/data/mood", [MeController::class, "moodData"]);
+        Route::get("/me/data/screen-time", [MeController::class, "screenTimeData"]);
 
         // Attempts gated endpoints
         Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
