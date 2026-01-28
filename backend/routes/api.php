@@ -121,6 +121,15 @@ Route::prefix("v0.2")->group(function () {
     Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
 
     // =========================================================
+    // AI Insights (async, budget guarded)
+    // =========================================================
+    Route::middleware('App\\Http\\Middleware\\CheckAiBudget')->group(function () {
+        Route::post("/insights/generate", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@generate");
+    });
+    Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show");
+    Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback");
+
+    // =========================================================
     // Optional token attach (no 401): allow anon access + enrich events.user_id when token exists
     // =========================================================
     Route::middleware(\App\Http\Middleware\FmTokenOptional::class)->group(function () {
