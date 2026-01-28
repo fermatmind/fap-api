@@ -78,6 +78,7 @@ class FmTokenAuth
                 return $this->unauthorizedResponse($request, 'user_id_not_numeric');
             }
 
+            $userId = (string) $userId;
             $request->attributes->set('fm_user_id', $userId);
             $request->attributes->set('user_id', $userId);
         }
