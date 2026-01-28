@@ -3,6 +3,7 @@
 > Last Updated: 2025-12-16  
 > Version: Repo README v0.2.1  
 > Related Docs:
+> - docs/PROJECT_OVERVIEW.md
 > - docs/README.md
 > - docs/03-stage1/README.md
 > - docs/04-stage2/README.md
