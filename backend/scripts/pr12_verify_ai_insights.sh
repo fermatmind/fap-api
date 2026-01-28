@@ -125,6 +125,12 @@ stop_server() {
 cleanup() {
   local code=$?
   stop_server
+
+  if [[ -n "${SERVER_PID_BREAKER:-}" ]]; then
+    kill "$SERVER_PID_BREAKER" >/dev/null 2>&1 || true
+    unset SERVER_PID_BREAKER
+  fi
+
   exit $code
 }
 trap cleanup EXIT
@@ -162,6 +168,7 @@ http_request() {
   local body_file="$3"
   local out_file="$4"
   local extra_env="${5:-}"
+  local api_override="${6:-}"
   local req_path="$path"
 
   if [[ "$USE_INTERNAL" -eq 1 ]]; then
@@ -202,7 +209,12 @@ $kernel->terminate($request, $response);
     return 0
   fi
 
-  local url="$API$path"
+  local base_api="$API"
+  if [[ -n "$api_override" ]]; then
+    base_api="$api_override"
+  fi
+
+  local url="$base_api$path"
   if [[ -n "$body_file" ]]; then
     curl -sS -o "$out_file" -w "%{http_code}" \
       -H "Content-Type: application/json" \
@@ -356,11 +368,44 @@ fi
 BREAKER_CODE=""
 if [[ "$REDIS_SOCKET_OK" -eq 1 ]]; then
   if [[ "$USE_INTERNAL" -eq 0 ]]; then
-    stop_server
-    start_server "AI_DAILY_TOKENS=1 AI_BREAKER_ENABLED=true AI_INSIGHTS_ENABLED=true AI_ENABLED=true"
-  fi
+    # 用新端口跑 breaker，避免“同端口重启导致 env 没真正生效/请求打到旧服务”
+    PORT_BREAKER=$((PORT + 1))
+    API_BREAKER="http://127.0.0.1:${PORT_BREAKER}/api/v0.2"
+    SERVER_LOG_BREAKER="$LOG_DIR/server_breaker.log"
 
-  http_breaker=$(http_request "POST" "/insights/generate" "$INSIGHT_REQ_JSON" "$INSIGHT_CREATE_BREAKER_JSON" "AI_DAILY_TOKENS=1 AI_BREAKER_ENABLED=true AI_INSIGHTS_ENABLED=true AI_ENABLED=true" || true)
+    # 确保端口空闲
+    if port_in_use "$PORT_BREAKER"; then
+      echo "[FAIL] breaker port $PORT_BREAKER already in use. Stop it first." >&2
+      exit 32
+    fi
+
+    echo "[PR12] starting breaker server on :$PORT_BREAKER AI_DAILY_TOKENS=1 AI_BREAKER_ENABLED=true AI_INSIGHTS_ENABLED=true AI_ENABLED=true"
+    (
+      cd "$BACKEND_DIR"
+      env AI_DAILY_TOKENS=1 AI_BREAKER_ENABLED=true AI_INSIGHTS_ENABLED=true AI_ENABLED=true \
+        php artisan serve --host=127.0.0.1 --port=$PORT_BREAKER >"$SERVER_LOG_BREAKER" 2>&1
+    ) &
+    SERVER_PID_BREAKER=$!
+
+    # 等 health
+    for i in $(seq 1 20); do
+      if curl -fsS "$API_BREAKER/health" >/dev/null 2>&1; then
+        break
+      fi
+      sleep 0.4
+    done
+    if ! curl -fsS "$API_BREAKER/health" >/dev/null 2>&1; then
+      echo "[FAIL] breaker server not healthy on $API_BREAKER" >&2
+      exit 33
+    fi
+
+    # 直接打 breaker server（用 API override），期望 HTTP != 200/201 且 error_code=AI_BUDGET_EXCEEDED
+    http_breaker=$(http_request "POST" "/insights/generate" "$INSIGHT_REQ_JSON" "$INSIGHT_CREATE_BREAKER_JSON" "" "$API_BREAKER" || true)
+  else
+    # internal 模式：直接用 env 触发 breaker（不需要起新 server）
+    http_breaker=$(http_request "POST" "/insights/generate" "$INSIGHT_REQ_JSON" "$INSIGHT_CREATE_BREAKER_JSON" \
+      "AI_DAILY_TOKENS=1 AI_BREAKER_ENABLED=true AI_INSIGHTS_ENABLED=true AI_ENABLED=true" || true)
+  fi
 
   BREAKER_CODE=$(jq -r '.error_code // empty' "$INSIGHT_CREATE_BREAKER_JSON")
   if [[ "$http_breaker" == "200" || "$http_breaker" == "201" ]]; then
