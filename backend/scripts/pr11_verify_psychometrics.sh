@@ -82,7 +82,7 @@ if [[ ! -f "$QUESTIONS_JSON" ]]; then
   exit 4
 fi
 
-php -r '
+QUESTIONS_JSON="$QUESTIONS_JSON" PAYLOAD_JSON="$PAYLOAD_JSON" php -r '
 $path = getenv("QUESTIONS_JSON");
 $raw = file_get_contents($path);
 $doc = json_decode($raw, true);
@@ -101,8 +101,8 @@ $payload = [
   "region" => "CN_MAINLAND",
   "locale" => "zh-CN"
 ];
-file_put_contents(getenv("PAYLOAD_JSON"), json_encode($payload, JSON_UNESCAPED_SLASHES));
-' QUESTIONS_JSON="$QUESTIONS_JSON" PAYLOAD_JSON="$PAYLOAD_JSON"
+file_put_contents(getenv("PAYLOAD_JSON"), json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+'
 
 echo "[PR11] POST attempt A"
 http_a=$(curl -sS -o "$ATTEMPT_A_JSON" -w "%{http_code}" \
