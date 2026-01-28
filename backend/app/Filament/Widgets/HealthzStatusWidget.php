@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 
 class HealthzStatusWidget extends BaseWidget
 {
-    protected static ?string $heading = 'Healthz Status';
+    protected ?string $heading = 'Healthz Status';
 
     protected function getStats(): array
     {
@@ -29,6 +29,7 @@ class HealthzStatusWidget extends BaseWidget
         $ok = (int) ($row->ok ?? 0) === 1;
         $deps = (array) (json_decode((string) ($row->deps_json ?? '[]'), true) ?? []);
         $errorsRaw = (array) (json_decode((string) ($row->error_codes_json ?? '[]'), true) ?? []);
+
         $errorCodes = [];
         if (isset($errorsRaw['codes']) && is_array($errorsRaw['codes'])) {
             $errorCodes = $errorsRaw['codes'];

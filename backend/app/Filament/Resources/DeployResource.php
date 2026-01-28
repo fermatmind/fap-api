@@ -50,7 +50,7 @@ class DeployResource extends Resource
                         ->toArray()),
                 Tables\Filters\Filter::make('revision')
                     ->form([
-                        \\Filament\\Forms\\Components\\TextInput::make('revision')
+                        \Filament\Forms\Components\TextInput::make('revision')
                             ->label('Revision'),
                     ])
                     ->query(function ($query, array $data) {

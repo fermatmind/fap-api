@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 
 class FunnelWidget extends BaseWidget
 {
-    protected static ?string $heading = 'Funnel (7d)';
+    protected ?string $heading = 'Funnel (7d)';
 
     protected function getStats(): array
     {
