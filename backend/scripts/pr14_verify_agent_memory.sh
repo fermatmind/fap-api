@@ -5,6 +5,15 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ART_DIR="$ROOT_DIR/artifacts/pr14"
 LOG_DIR="$ART_DIR/logs"
 mkdir -p "$LOG_DIR"
+export XDG_CONFIG_HOME="$ART_DIR/.xdg"
+mkdir -p "$XDG_CONFIG_HOME"
+
+if [[ -z "${DB_CONNECTION:-}" ]]; then
+  export DB_CONNECTION=sqlite
+fi
+if [[ -z "${DB_DATABASE:-}" ]]; then
+  export DB_DATABASE="$ROOT_DIR/database/database.sqlite"
+fi
 
 PORT_BASE=${PORT:-18040}
 PORT="$PORT_BASE"
@@ -24,6 +33,15 @@ function pick_port() {
 pick_port
 
 SERVER_LOG="$LOG_DIR/server.log"
+
+export AGENT_ENABLED=true
+export MEMORY_ENABLED=true
+export VECTORSTORE_ENABLED=true
+export AI_FAIL_OPEN_WHEN_REDIS_DOWN=true
+export AGENT_FAIL_OPEN=true
+export AGENT_SUPPRESS_ON_BUDGET=false
+
+php artisan config:clear >/dev/null 2>&1 || true
 
 PHP_BIND_OK=1
 if ! php -r '$s=@stream_socket_server("tcp://127.0.0.1:0",$e,$s); if ($s){fclose($s); echo "OK";} else {echo "FAIL";}' | grep -q "OK"; then
@@ -137,6 +155,7 @@ SETTINGS_RESP=$(http_request "POST" "/me/agent/settings" '{"enabled":true,"quiet
 
 # 6) trigger AgentTick via job (sync)
 php artisan tinker --execute '\\App\\Jobs\\AgentTickJob::dispatchSync();' >/dev/null || true
+php -r 'require "vendor/autoload.php"; $app=require "bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $o=app("App\Services\Agent\AgentOrchestrator"); $o->runForUser(1, []);' >/dev/null || true
 
 # 7) get agent messages
 MSG_RESP=$(http_request "GET" "/me/agent/messages" "")

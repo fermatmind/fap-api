@@ -173,7 +173,7 @@ final class AgentOrchestrator
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-        } catch (\\Throwable $e) {
+        } catch (\Throwable $e) {
             $existing = DB::table('agent_triggers')->where('idempotency_key', $idempotencyKey)->first();
             if ($existing) {
                 return (string) ($existing->id ?? '');
@@ -208,7 +208,7 @@ final class AgentOrchestrator
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-        } catch (\\Throwable $e) {
+        } catch (\Throwable $e) {
             $existing = DB::table('agent_decisions')->where('idempotency_key', $idempotencyKey)->first();
             if ($existing) {
                 return (string) ($existing->id ?? '');
