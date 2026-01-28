@@ -213,6 +213,144 @@ class MeController extends Controller
         ]);
     }
 
+    /**
+     * GET /api/v0.2/me/data/sleep
+     * Returns last 30 days aggregated sleep samples by day.
+     */
+    public function sleepData(Request $request)
+    {
+        $identity = $this->resolveIdentity($request);
+        if (!$identity['ok']) {
+            return response()->json($identity['error'], 401);
+        }
+
+        if (!Schema::hasTable('sleep_samples')) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'INVALID_SCHEMA',
+                'message' => 'sleep_samples table not found.',
+            ], 500);
+        }
+
+        $userId = $identity['user_id'];
+        if ($userId === null) {
+            return response()->json([
+                'ok' => true,
+                'items' => [],
+                'note' => 'anon_id present but no user_id bound to samples.',
+            ]);
+        }
+
+        $rows = DB::table('sleep_samples')
+            ->where('user_id', (int) $userId)
+            ->where('recorded_at', '>=', now()->subDays(30))
+            ->orderByDesc('recorded_at')
+            ->get();
+
+        $items = $this->aggregateByDay($rows, function ($row) {
+            $value = $this->decodeValueJson($row->value_json ?? null);
+            $minutes = $this->extractNumeric($value, ['duration_minutes', 'duration_min', 'duration', 'total_minutes']);
+            return $minutes !== null ? $minutes : 0.0;
+        }, 'total_minutes');
+
+        return response()->json([
+            'ok' => true,
+            'items' => $items,
+        ]);
+    }
+
+    /**
+     * GET /api/v0.2/me/data/mood
+     * Uses health_samples domain=mood or returns empty array.
+     */
+    public function moodData(Request $request)
+    {
+        $identity = $this->resolveIdentity($request);
+        if (!$identity['ok']) {
+            return response()->json($identity['error'], 401);
+        }
+
+        if (!Schema::hasTable('health_samples')) {
+            return response()->json([
+                'ok' => true,
+                'items' => [],
+                'note' => 'health_samples table not found; mood data empty.',
+            ]);
+        }
+
+        $userId = $identity['user_id'];
+        if ($userId === null) {
+            return response()->json([
+                'ok' => true,
+                'items' => [],
+                'note' => 'anon_id present but no user_id bound to samples.',
+            ]);
+        }
+
+        $rows = DB::table('health_samples')
+            ->where('user_id', (int) $userId)
+            ->where('domain', 'mood')
+            ->where('recorded_at', '>=', now()->subDays(30))
+            ->orderByDesc('recorded_at')
+            ->get();
+
+        $items = $this->aggregateByDay($rows, function ($row) {
+            $value = $this->decodeValueJson($row->value_json ?? null);
+            $score = $this->extractNumeric($value, ['score', 'value', 'mood']);
+            return $score !== null ? $score : 0.0;
+        }, 'avg_score', true);
+
+        return response()->json([
+            'ok' => true,
+            'items' => $items,
+        ]);
+    }
+
+    /**
+     * GET /api/v0.2/me/data/screen-time
+     */
+    public function screenTimeData(Request $request)
+    {
+        $identity = $this->resolveIdentity($request);
+        if (!$identity['ok']) {
+            return response()->json($identity['error'], 401);
+        }
+
+        if (!Schema::hasTable('screen_time_samples')) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'INVALID_SCHEMA',
+                'message' => 'screen_time_samples table not found.',
+            ], 500);
+        }
+
+        $userId = $identity['user_id'];
+        if ($userId === null) {
+            return response()->json([
+                'ok' => true,
+                'items' => [],
+                'note' => 'anon_id present but no user_id bound to samples.',
+            ]);
+        }
+
+        $rows = DB::table('screen_time_samples')
+            ->where('user_id', (int) $userId)
+            ->where('recorded_at', '>=', now()->subDays(30))
+            ->orderByDesc('recorded_at')
+            ->get();
+
+        $items = $this->aggregateByDay($rows, function ($row) {
+            $value = $this->decodeValueJson($row->value_json ?? null);
+            $minutes = $this->extractNumeric($value, ['total_screen_minutes', 'screen_minutes', 'minutes']);
+            return $minutes !== null ? $minutes : 0.0;
+        }, 'total_minutes');
+
+        return response()->json([
+            'ok' => true,
+            'items' => $items,
+        ]);
+    }
+
     private function resolveUserId(Request $request): ?string
     {
         // 1) middleware attributes
@@ -266,6 +404,86 @@ class MeController extends Controller
         $q = trim((string) $request->query('anon_id', ''));
         if ($q !== '') return $q;
 
+        return null;
+    }
+
+    private function resolveIdentity(Request $request): array
+    {
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
+
+        if ($userId === null && $anonId === null) {
+            return [
+                'ok' => false,
+                'error' => [
+                    'ok' => false,
+                    'error' => 'unauthorized',
+                    'message' => 'Missing or invalid fm_token.',
+                ],
+            ];
+        }
+
+        return [
+            'ok' => true,
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+        ];
+    }
+
+    private function aggregateByDay($rows, callable $valueExtractor, string $metricKey, bool $average = false): array
+    {
+        $bucket = [];
+        foreach ($rows as $row) {
+            $day = substr((string) ($row->recorded_at ?? ''), 0, 10);
+            if ($day === '') {
+                continue;
+            }
+            if (!isset($bucket[$day])) {
+                $bucket[$day] = [
+                    'date' => $day,
+                    'count' => 0,
+                    $metricKey => 0.0,
+                ];
+            }
+            $bucket[$day]['count']++;
+            $bucket[$day][$metricKey] += (float) $valueExtractor($row);
+        }
+
+        $items = array_values($bucket);
+        usort($items, function ($a, $b) {
+            return strcmp((string) $b['date'], (string) $a['date']);
+        });
+
+        if ($average) {
+            foreach ($items as &$item) {
+                if ($item['count'] > 0) {
+                    $item[$metricKey] = $item[$metricKey] / $item['count'];
+                }
+            }
+        }
+
+        return $items;
+    }
+
+    private function decodeValueJson($value): array
+    {
+        if ($value === null) {
+            return [];
+        }
+        $decoded = json_decode((string) $value, true);
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    private function extractNumeric(array $value, array $keys): ?float
+    {
+        foreach ($keys as $k) {
+            if (array_key_exists($k, $value)) {
+                $v = $value[$k];
+                if (is_numeric($v)) {
+                    return (float) $v;
+                }
+            }
+        }
         return null;
     }
 
