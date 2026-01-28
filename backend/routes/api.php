@@ -12,14 +12,17 @@ use App\Http\Controllers\API\V0_2\AuthProviderController;
 use App\Http\Controllers\API\V0_2\ClaimController;
 use App\Http\Controllers\API\V0_2\ContentPacksController;
 use App\Http\Controllers\API\V0_2\IdentityController;
+use App\Http\Controllers\API\V0_2\MemoryController;
 use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\NormsController;
 use App\Http\Controllers\API\V0_2\PaymentsController;
 use App\Http\Controllers\API\V0_2\PsychometricsController;
 use App\Http\Controllers\API\V0_2\ShareController;
 use App\Http\Controllers\API\V0_2\ValidityFeedbackController;
+use App\Http\Controllers\API\V0_2\AgentController;
 use App\Http\Controllers\API\V0_2\Admin\AdminOpsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminAuditController;
+use App\Http\Controllers\API\V0_2\Admin\AdminAgentController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
 use App\Http\Controllers\Integrations\ProvidersController;
@@ -62,6 +65,10 @@ Route::prefix("v0.2")->group(function () {
 
             // Events (read-only)
             Route::get("/events", [AdminEventsController::class, "index"]);
+
+            // Agent controls (admin-only)
+            Route::post("/agent/disable-trigger", [AdminAgentController::class, "disableTrigger"]);
+            Route::post("/agent/replay/{user_id}", [AdminAgentController::class, "replay"]);
 
             // Content releases (read-only + tools)
             Route::get("/content-releases", [AdminContentController::class, "index"]);
@@ -170,6 +177,20 @@ Route::prefix("v0.2")->group(function () {
         Route::get("/me/data/sleep", [MeController::class, "sleepData"]);
         Route::get("/me/data/mood", [MeController::class, "moodData"]);
         Route::get("/me/data/screen-time", [MeController::class, "screenTimeData"]);
+
+        // Memory
+        Route::post("/memory/propose", [MemoryController::class, "propose"]);
+        Route::post("/memory/{id}/confirm", [MemoryController::class, "confirm"]);
+        Route::delete("/memory/{id}", [MemoryController::class, "delete"]);
+        Route::get("/memory/search", [MemoryController::class, "search"]);
+        Route::get("/memory/export", [MemoryController::class, "export"]);
+
+        // Agent (me)
+        Route::get("/me/agent/settings", [AgentController::class, "settings"]);
+        Route::post("/me/agent/settings", [AgentController::class, "updateSettings"]);
+        Route::get("/me/agent/messages", [AgentController::class, "messages"]);
+        Route::post("/me/agent/messages/{id}/feedback", [AgentController::class, "feedback"]);
+        Route::post("/me/agent/messages/{id}/ack", [AgentController::class, "ack"]);
 
         // Attempts gated endpoints
         Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
