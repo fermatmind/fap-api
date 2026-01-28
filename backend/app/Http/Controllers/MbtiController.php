@@ -28,6 +28,10 @@ use App\Services\Report\IdentityLayerBuilder;
 use App\Services\Rules\RuleEngine;
 use App\Services\Auth\FmTokenService;
 use App\Services\Email\EmailOutboxService;
+use App\Services\ContentPackResolver;
+use App\Services\Psychometrics\NormsRegistry;
+use App\Services\Psychometrics\ScoreNormalizer;
+use App\Services\Psychometrics\QualityChecker;
 
 class MbtiController extends Controller
 {
@@ -329,6 +333,7 @@ public function storeAttempt(Request $request)
         'region'          => ['nullable', 'string', 'max:32'],
         'locale'          => ['nullable', 'string', 'max:16'],
         'attempt_id'      => ['nullable', 'string', 'max:64'],
+        'demographics'    => ['sometimes', 'array'],
     ]);
 
     $attemptId = isset($payload['attempt_id']) && is_string($payload['attempt_id']) && trim($payload['attempt_id']) !== ''
@@ -524,10 +529,23 @@ public function storeAttempt(Request $request)
         ],
     ];
 
+    $answers = $payload['answers'] ?? [];
+
     $profileVersion        = config('fap.profile_version', 'mbti32-v2.5');
     $contentPackageVersion = $this->defaultDirVersion();
 
-    $answers = $payload['answers'] ?? [];
+    $region = $payload['region'] ?? $this->defaultRegion();
+    $locale = $payload['locale'] ?? $this->defaultLocale();
+
+    $psychometrics = $this->buildPsychometricsSnapshot(
+        $payload['scale_code'],
+        $region,
+        $locale,
+        $contentPackageVersion,
+        $scoresPct,
+        $answers,
+        $payload['demographics'] ?? null
+    );
     $answersHash = $this->computeAnswersHash($answers);
 
     $answersStoragePath = null;
@@ -569,6 +587,7 @@ public function storeAttempt(Request $request)
         $axisStates,
         $profileVersion,
         $contentPackageVersion,
+        $psychometrics,
         $answers,
         $answersHash,
         $answersStoragePath
@@ -623,6 +642,25 @@ public function storeAttempt(Request $request)
         if (Schema::hasColumn('attempts', 'locale')) {
             $attemptData['locale'] = $payload['locale'] ?? ($existingAttempt?->locale ?? 'zh-CN');
         }
+        if (Schema::hasColumn('attempts', 'pack_id')) {
+            $pack = $psychometrics['pack'] ?? null;
+            $attemptData['pack_id'] = is_array($pack) ? ($pack['pack_id'] ?? null) : null;
+        }
+        if (Schema::hasColumn('attempts', 'dir_version')) {
+            $pack = $psychometrics['pack'] ?? null;
+            $attemptData['dir_version'] = is_array($pack) ? ($pack['dir_version'] ?? null) : null;
+        }
+        if (Schema::hasColumn('attempts', 'scoring_spec_version')) {
+            $scoring = $psychometrics['scoring'] ?? null;
+            $attemptData['scoring_spec_version'] = is_array($scoring) ? ($scoring['spec_version'] ?? null) : null;
+        }
+        if (Schema::hasColumn('attempts', 'norm_version')) {
+            $norm = $psychometrics['norm'] ?? null;
+            $attemptData['norm_version'] = is_array($norm) ? ($norm['version'] ?? null) : null;
+        }
+        if (Schema::hasColumn('attempts', 'calculation_snapshot_json')) {
+            $attemptData['calculation_snapshot_json'] = $psychometrics;
+        }
 
         // ✅✅✅ 关键：把“结果”写进 attempts（给 /attempts/{id}/result 主路径用）
         if (Schema::hasColumn('attempts', 'type_code')) {
@@ -649,6 +687,23 @@ public function storeAttempt(Request $request)
             $attempt = $existingAttempt;
         } else {
             $attempt = Attempt::create($attemptData);
+        }
+
+        if (Schema::hasTable('attempt_quality')) {
+            $quality = $psychometrics['quality'] ?? null;
+            if (is_array($quality)) {
+                $checks = $quality['checks'] ?? null;
+                DB::table('attempt_quality')->updateOrInsert(
+                    ['attempt_id' => $attemptId],
+                    [
+                        'checks_json' => is_array($checks)
+                            ? json_encode($checks, JSON_UNESCAPED_SLASHES)
+                            : null,
+                        'grade' => (string) ($quality['grade'] ?? ''),
+                        'created_at' => now(),
+                    ]
+                );
+            }
         }
 
         // ✅ 3) results 表：兼容旧逻辑（有则更新，无则创建）
@@ -1245,6 +1300,9 @@ public function getReport(Request $request, string $attemptId)
     $attempt = Attempt::find($attemptId);
 
     $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
+    $includeRaw = (string) $request->query('include', '');
+    $include = array_values(array_filter(array_map('trim', explode(',', $includeRaw))));
+    $includePsychometrics = in_array('psychometrics', $include, true);
 
 $experiment     = (string) ($request->header('X-Experiment') ?? '');
 $version        = (string) ($request->header('X-App-Version') ?? '');
@@ -1443,6 +1501,16 @@ if ($shareId !== '') {
 }
 
     $this->maybeQueueReportClaimEmail($request, $attempt);
+
+    if ($includePsychometrics) {
+        $snapshot = $attempt?->calculation_snapshot_json;
+        if (is_string($snapshot)) {
+            $decoded = json_decode($snapshot, true);
+            $snapshot = is_array($decoded) ? $decoded : null;
+        }
+
+        $reportPayload['psychometrics'] = $snapshot;
+    }
 
     return response()->json([
         'ok'         => true,
@@ -4224,6 +4292,144 @@ private function buildTraitsCardsFixed4FromAssets(
     }
 
     return array_slice(array_values($out), 0, 4);
+}
+
+private function buildPsychometricsSnapshot(
+    string $scaleCode,
+    string $region,
+    string $locale,
+    string $dirVersion,
+    array $scoresPct,
+    array $answers,
+    ?array $demographics
+): array {
+    $snapshot = [
+        'norm' => null,
+        'scoring' => [
+            'spec_version' => null,
+            'rules_checksum' => null,
+        ],
+        'pack' => [
+            'pack_id' => null,
+            'dir_version' => $dirVersion,
+            'version_checksum' => null,
+        ],
+        'stats' => null,
+        'quality' => null,
+        'computed_at' => now()->toISOString(),
+    ];
+
+    $manifest = $this->loadPackManifest($region, $locale, $dirVersion);
+    $resolvedVersion = is_array($manifest)
+        ? (string) ($manifest['content_package_version'] ?? '')
+        : '';
+
+    if ($resolvedVersion === '') {
+        $resolvedVersion = $dirVersion;
+    }
+
+    $resolved = null;
+    try {
+        $resolved = app(ContentPackResolver::class)->resolve($scaleCode, $region, $locale, $resolvedVersion);
+    } catch (\Throwable $e) {
+        $resolved = null;
+    }
+
+    if ($resolved) {
+        $snapshot['pack']['pack_id'] = $resolved->packId ?? null;
+        $versionJson = $this->loadPackJson($resolved, 'version.json');
+        if (is_array($versionJson)) {
+            $snapshot['pack']['version_checksum'] = (string) (
+                $versionJson['checksum']
+                ?? $versionJson['checksum_sha256']
+                ?? ''
+            );
+        }
+    } elseif (is_array($manifest)) {
+        $snapshot['pack']['pack_id'] = (string) ($manifest['pack_id'] ?? '');
+    }
+
+    $scoringSpec = $this->loadPackJson($resolved, 'scoring_spec.json');
+    if (is_array($scoringSpec)) {
+        $snapshot['scoring']['spec_version'] = (string) ($scoringSpec['version'] ?? '');
+        $snapshot['scoring']['rules_checksum'] = $this->checksumJson($scoringSpec);
+    }
+
+    $qualitySpec = $this->loadPackJson($resolved, 'quality_checks.json');
+
+    $normsInfo = app(NormsRegistry::class)->resolve(
+        $scaleCode,
+        $region,
+        $locale,
+        $resolvedVersion,
+        $demographics,
+        null
+    );
+
+    $bucket = null;
+    if (is_array($normsInfo) && ($normsInfo['ok'] ?? false)) {
+        $bucket = $normsInfo['bucket'] ?? null;
+        $snapshot['norm'] = [
+            'norm_id' => $normsInfo['norm_id'] ?? '',
+            'version' => $normsInfo['version'] ?? '',
+            'checksum' => $normsInfo['checksum'] ?? '',
+            'bucket_keys' => $normsInfo['bucket_keys'] ?? [],
+            'bucket' => is_array($bucket) ? [
+                'id' => $bucket['id'] ?? null,
+                'keys' => $bucket['keys'] ?? null,
+            ] : null,
+        ];
+    }
+
+    if (is_array($bucket)) {
+        $stats = app(ScoreNormalizer::class)->normalize($scoresPct, $bucket, 0.95);
+        $snapshot['stats'] = $stats;
+    }
+
+    if (is_array($scoringSpec) && is_array($qualitySpec)) {
+        $quality = app(QualityChecker::class)->check($answers, $scoringSpec, $qualitySpec);
+        $snapshot['quality'] = $quality;
+    }
+
+    return $snapshot;
+}
+
+private function loadPackJson($resolved, string $filename): ?array
+{
+    if (!$resolved || !is_array($resolved->loaders ?? null)) {
+        return null;
+    }
+
+    $loader = $resolved->loaders['readJson'] ?? null;
+    if (!is_callable($loader)) {
+        return null;
+    }
+
+    $data = $loader($filename);
+    return is_array($data) ? $data : null;
+}
+
+private function loadPackManifest(string $region, string $locale, string $dirVersion): ?array
+{
+    $pkg = $this->normalizeContentPackageDir("default/{$region}/{$locale}/{$dirVersion}");
+    $path = $this->findPackageFile($pkg, 'manifest.json');
+
+    if (!$path || !is_file($path)) {
+        return null;
+    }
+
+    $raw = file_get_contents($path);
+    if ($raw === false || trim($raw) === '') {
+        return null;
+    }
+
+    $json = json_decode($raw, true);
+    return is_array($json) ? $json : null;
+}
+
+private function checksumJson(array $data): string
+{
+    return hash('sha256', json_encode($data, JSON_UNESCAPED_SLASHES));
 }
 
 /**
