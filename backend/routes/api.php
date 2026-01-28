@@ -15,6 +15,7 @@ use App\Http\Controllers\API\V0_2\IdentityController;
 use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\NormsController;
 use App\Http\Controllers\API\V0_2\PaymentsController;
+use App\Http\Controllers\API\V0_2\PsychometricsController;
 use App\Http\Controllers\API\V0_2\ShareController;
 use App\Http\Controllers\API\V0_2\ValidityFeedbackController;
 use App\Http\Controllers\API\V0_2\Admin\AdminOpsController;
@@ -82,6 +83,7 @@ Route::prefix("v0.2")->group(function () {
 
     // 2) Scale meta
     Route::get("/scales/MBTI", [MbtiController::class, "scaleMeta"]);
+    Route::get("/scales/{scale}/norms", [PsychometricsController::class, "listNorms"]);
 
     // 3) Questions (demo)
     Route::get("/scales/MBTI/questions", [MbtiController::class, "questions"]);
@@ -124,6 +126,8 @@ Route::prefix("v0.2")->group(function () {
     Route::middleware(\App\Http\Middleware\FmTokenOptional::class)->group(function () {
         Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
         Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
+        Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"]);
+        Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"]);
     });
 
     // =========================================================

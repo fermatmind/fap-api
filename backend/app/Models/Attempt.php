@@ -86,6 +86,17 @@ class Attempt extends Model
         'answers_json',
         'answers_hash',
         'answers_storage_path',
+
+        // ✅ psychometrics snapshot
+        'pack_id',
+        'dir_version',
+        'scoring_spec_version',
+        'norm_version',
+        'calculation_snapshot_json',
+
+        // ✅ result cache
+        'result_json',
+        'type_code',
     ];
 
     /**
@@ -97,6 +108,8 @@ class Attempt extends Model
     protected $casts = [
         'answers_summary_json' => 'array',
         'answers_json'         => 'array',
+        'calculation_snapshot_json' => 'array',
+        'result_json'          => 'array',
 
         'started_at'           => 'datetime',
         'submitted_at'         => 'datetime',
