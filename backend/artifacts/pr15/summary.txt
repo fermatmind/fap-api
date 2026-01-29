@@ -1,0 +1,24 @@
+PR15 Scale Registry verification summary
+
+Checks:
+- migrate --force: OK
+- fap:scales:seed-default: OK
+- fap:scales:sync-slugs: OK
+- curl /api/v0.3/scales: OK
+- curl /api/v0.3/scales/lookup?slug=mbti-test: OK
+- curl /api/v0.3/scales/MBTI: OK
+- php artisan test --filter=V0_3: OK
+- route:list export: OK
+
+Smoke URLs:
+- http://127.0.0.1:8000/api/v0.3/scales
+- http://127.0.0.1:8000/api/v0.3/scales/lookup?slug=mbti-test
+- http://127.0.0.1:8000/api/v0.3/scales/MBTI
+
+Key outputs:
+- scale_code: MBTI
+- dir_version: MBTI-CN-v0.2.1-TEST
+
+Schema changes:
+- scales_registry (unique org_id+primary_slug; indexes: org_id, driver_type, is_public, is_active)
+- scale_slugs (unique org_id+slug; indexes: scale_code, is_primary, org_id)
