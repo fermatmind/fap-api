@@ -32,7 +32,7 @@ jobs:
         working-directory: backend
         run: |
           php -v
-          php -m | rg 'pdo_mysql|mysql'
+          php -m | grep -E 'pdo_mysql|mysql'
 
       - name: Install backend deps
         working-directory: backend
