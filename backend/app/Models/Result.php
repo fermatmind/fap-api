@@ -25,30 +25,38 @@ class Result extends Model
      * 允许批量写入的字段
      */
     protected $fillable = [
-    'id',
-    'attempt_id',
-    'scale_code',
-    'scale_version',
-    'type_code',
-    'scores_json',
-    'scores_pct',
-    'axis_states',
-    'profile_version',
-    'content_package_version',
-    'is_valid',
-    'computed_at',
-];
+        'id',
+        'attempt_id',
+        'org_id',
+        'scale_code',
+        'scale_version',
+        'type_code',
+        'scores_json',
+        'scores_pct',
+        'axis_states',
+        'profile_version',
+        'content_package_version',
+        'result_json',
+        'pack_id',
+        'dir_version',
+        'scoring_spec_version',
+        'report_engine_version',
+        'is_valid',
+        'computed_at',
+    ];
 
     /**
      * 字段类型转换
      */
     protected $casts = [
-    'scores_json' => 'array',
-    'scores_pct'  => 'array',
-    'axis_states' => 'array',
-    'computed_at' => 'datetime',
-    'is_valid'    => 'boolean',
-];
+        'scores_json' => 'array',
+        'scores_pct'  => 'array',
+        'axis_states' => 'array',
+        'result_json' => 'array',
+        'computed_at' => 'datetime',
+        'is_valid'    => 'boolean',
+        'org_id'      => 'integer',
+    ];
 
     /**
      * 关联：Result 属于一个 Attempt

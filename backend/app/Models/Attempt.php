@@ -71,8 +71,11 @@ class Attempt extends Model
 
         'anon_id',
         'user_id',
+        'org_id',
         'scale_code',
         'scale_version',
+        'region',
+        'locale',
         'question_count',
         'answers_summary_json',
         'client_platform',
@@ -90,6 +93,7 @@ class Attempt extends Model
         // ✅ psychometrics snapshot
         'pack_id',
         'dir_version',
+        'content_package_version',
         'scoring_spec_version',
         'norm_version',
         'calculation_snapshot_json',
@@ -97,6 +101,10 @@ class Attempt extends Model
         // ✅ result cache
         'result_json',
         'type_code',
+
+        // ✅ v0.3 attempts submit lock
+        'duration_ms',
+        'answers_digest',
     ];
 
     /**
@@ -110,6 +118,8 @@ class Attempt extends Model
         'answers_json'         => 'array',
         'calculation_snapshot_json' => 'array',
         'result_json'          => 'array',
+        'duration_ms'          => 'integer',
+        'org_id'               => 'integer',
 
         'started_at'           => 'datetime',
         'submitted_at'         => 'datetime',
