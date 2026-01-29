@@ -214,5 +214,6 @@ Route::prefix("v0.3")->group(function () {
     // 1) Scale registry
     Route::get("/scales", [ScalesController::class, "index"]);
     Route::get("/scales/lookup", [ScalesLookupController::class, "lookup"]);
+    Route::get("/scales/{scale_code}/questions", [ScalesController::class, "questions"]);
     Route::get("/scales/{scale_code}", [ScalesController::class, "show"]);
 });

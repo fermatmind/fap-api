@@ -1,0 +1,57 @@
+== CHECK default
+   manifest: /Users/rainie/Desktop/GitHub/fap-api/content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/manifest.json
+------------------------------------------------------------------------
+✅ manifest.json (contract + assets + schema)
+  - OK (schema_version/required fields/assets exist/schema match)
+  - pack_id=default version=v0.3.0-DEMO
+✅ strict-assets (forbidden files check)
+  - OK (no forbidden temp files found)
+✅ strict-assets (undeclared known files)
+  - OK allowed: manifest.json
+  - OK allowed: version.json
+  - OK declared: questions.json
+  - OK declared: assets/
+✅ schema-alignment (declared JSON assets)
+  - OK (declared JSON assets schema aligned)
+✅ meta/landing.json (landing meta gate)
+  - OK (landing meta gate passed)
+✅ share_templates (share templates gate)
+  - SKIPPED (capabilities.share_templates=false)
+✅ questions.json
+  - OK (questions basic structure validated)
+✅ type_profiles.json
+  - SKIPPED (not declared in manifest.assets): type_profiles.json
+✅ identity_cards.json
+  - SKIPPED (not declared in manifest.assets): report_identity_cards.json
+✅ identity_layers.json
+  - SKIPPED (not declared in manifest.assets): identity_layers.json
+✅ report_cards_*.json
+  - SKIPPED (no manifest.assets.cards)
+✅ report_cards_fallback_*.json
+  - SKIPPED (no manifest.assets.fallback_cards)
+✅ report_highlights_templates.json
+  - SKIPPED (not declared in manifest.assets): report_highlights_templates.json
+✅ report_highlights_pools.json
+  - SKIPPED (not declared in manifest.assets): report_highlights_pools.json
+✅ report_highlights_rules.json
+  - SKIPPED (not declared in manifest.assets): report_highlights_rules.json
+✅ report_highlights_overrides.json
+  - SKIPPED (not declared in manifest.assets): report_highlights_overrides.json
+✅ report_borderline_templates.json
+  - SKIPPED (not declared in manifest.assets): report_borderline_templates.json
+✅ report_roles.json
+  - SKIPPED (not declared in manifest.assets): report_roles.json
+✅ report_strategies.json
+  - SKIPPED (not declared in manifest.assets): report_strategies.json
+✅ report_recommended_reads.json
+  - SKIPPED (not declared in manifest.assets): report_recommended_reads.json
+✅ report_section_policies.json
+  - SKIPPED (not declared in manifest.assets): report_section_policies.json
+✅ fallback-cards (coverage by section policies)
+  - SKIPPED (report_section_policies.json not declared)
+✅ report_overrides.json
+  - SKIPPED (not declared in manifest.assets): report_overrides.json
+✅ report_rules.json
+  - SKIPPED (not declared in manifest.assets): report_rules.json
+------------------------------------------------------------------------
+✅ SELF-CHECK PASSED

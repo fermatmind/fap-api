@@ -1,0 +1,51 @@
+{
+  "schema": "fap.landing.meta.v1",
+  "schema_version": 1,
+  "scale_code": "IQ_RAVEN",
+  "pack_id": "IQ-RAVEN-CN-v0.3.0-DEMO",
+  "locale": "zh-CN",
+  "region": "CN_MAINLAND",
+  "slug": "iq-raven-demo",
+  "last_updated": "2026-01-29",
+  "index_policy": {
+    "landing": { "index": true, "follow": true },
+    "take": { "index": false, "follow": false, "nocache": true },
+    "result": { "index": false, "follow": false, "nocache": true },
+    "share": { "index": false, "follow": false, "nocache": true }
+  },
+  "landing": {
+    "canonical_path": "/test/iq-raven-demo",
+    "canonical_slug": "iq-raven-demo",
+    "variants": [
+      {
+        "variant_code": "demo_1",
+        "label_zh": "演示版",
+        "question_count": 1,
+        "test_time_minutes": "1"
+      }
+    ],
+    "faq_list": [
+      {
+        "question": "这是什么测验？",
+        "answer": "这是用于演示 Raven 图形推理题的最小内容包。"
+      },
+      {
+        "question": "需要多久完成？",
+        "answer": "本演示仅包含 1 道题，约 1 分钟完成。"
+      },
+      {
+        "question": "结果如何使用？",
+        "answer": "演示包用于接口与资产链路验证，不代表正式量表结果。"
+      }
+    ],
+    "data_snippet": {
+      "table": {
+        "rows": [
+          ["题量（3档）", "1题（演示）"],
+          ["预计用时（3档）", "1分钟"],
+          ["输出内容", "图形推理能力参考"]
+        ]
+      }
+    }
+  }
+}

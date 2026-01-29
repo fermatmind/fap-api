@@ -1,0 +1,38 @@
+PR16 summary
+- seed: ok (sqlite /tmp/pr16.sqlite)
+- selfcheck: ok
+- verify: failed (artisan serve cannot bind to 127.0.0.1:18000)
+- ci_verify_mbti: failed (artisan serve cannot bind to 127.0.0.1:18000)
+- sample_asset_url: https://cdn.example.com/content/default/IQ-RAVEN-CN-v0.3.0-DEMO/assets/images/raven_opt_a.png
+- demo_pack_path: content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO
+- dir_version: IQ-RAVEN-CN-v0.3.0-DEMO
+- changed_files:
+  - backend/.gitignore
+  - backend/artifacts/pr16/ci_verify_mbti.log
+  - backend/artifacts/pr16/seed.log
+  - backend/artifacts/pr16/selfcheck.log
+  - backend/artifacts/pr16/server.log
+  - backend/artifacts/pr16/summary.txt
+  - backend/artifacts/pr16/verify.log
+  - backend/app/Console/Commands/FapSelfCheck.php
+  - backend/app/Http/Controllers/API/V0_3/ScalesController.php
+  - backend/app/Services/Assets/AssetUrlResolver.php
+  - backend/app/Services/Content/AssetsMapper.php
+  - backend/app/Services/Content/QuestionsService.php
+  - backend/database/seeders/Pr16IqRavenDemoSeeder.php
+  - backend/routes/api.php
+  - backend/scripts/pr16_verify_assets.sh
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/assets/images/raven_opt_a.png
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/assets/images/raven_opt_b.png
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/assets/images/raven_opt_c.png
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/assets/images/raven_opt_d.png
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/assets/images/raven_question_1.png
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/assets/images/raven_stem_1.png
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/manifest.json
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/meta/landing.json
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/questions.json
+  - content_packages/default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO/version.json
+  - docs/content/assets-and-cdn.md
+  - docs/content/universal-schema.md
+  - docs/verify/pr16_recon.md
+  - docs/verify/pr16_verify.md

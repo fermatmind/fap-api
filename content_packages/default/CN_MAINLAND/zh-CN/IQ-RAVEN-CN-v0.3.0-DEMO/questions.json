@@ -1,0 +1,46 @@
+{
+  "schema": "fap.questions.v1",
+  "schema_version": 1,
+  "items": [
+    {
+      "question_id": "RAVEN_DEMO_1",
+      "order": 1,
+      "type": "raven_single",
+      "assets": {
+        "image": "assets/images/raven_question_1.png"
+      },
+      "stem": {
+        "text": "请选择能够补全矩阵的图形。",
+        "assets": {
+          "image": "assets/images/raven_stem_1.png"
+        }
+      },
+      "options": [
+        {
+          "code": "A",
+          "assets": {
+            "image": "assets/images/raven_opt_a.png"
+          }
+        },
+        {
+          "code": "B",
+          "assets": {
+            "image": "assets/images/raven_opt_b.png"
+          }
+        },
+        {
+          "code": "C",
+          "assets": {
+            "image": "assets/images/raven_opt_c.png"
+          }
+        },
+        {
+          "code": "D",
+          "assets": {
+            "image": "assets/images/raven_opt_d.png"
+          }
+        }
+      ]
+    }
+  ]
+}
