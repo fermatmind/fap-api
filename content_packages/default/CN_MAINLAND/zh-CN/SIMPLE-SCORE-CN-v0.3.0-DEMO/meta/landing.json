@@ -1,0 +1,38 @@
+{
+  "schema": "fap.landing.meta.v1",
+  "schema_version": 1,
+  "scale_code": "SIMPLE_SCORE_DEMO",
+  "pack_id": "SIMPLE-SCORE-CN-v0.3.0-DEMO",
+  "locale": "zh-CN",
+  "region": "CN_MAINLAND",
+  "slug": "simple-score-demo",
+  "last_updated": "2026-01-29",
+  "index_policy": {
+    "landing": {"index": true, "follow": true},
+    "take": {"index": false, "follow": false, "nocache": true},
+    "result": {"index": false, "follow": false, "nocache": true},
+    "share": {"index": false, "follow": false, "nocache": true}
+  },
+  "landing": {
+    "canonical_path": "/test/simple-score-demo",
+    "canonical_slug": "simple-score-demo",
+    "variants": [
+      {
+        "variant_code": "demo_1",
+        "label_zh": "演示版",
+        "question_count": 5,
+        "test_time_minutes": "1"
+      }
+    ],
+    "faq_list": [
+      {
+        "question": "这是什么测评？",
+        "answer": "这是用于演示 v0.3 评分引擎的最小 simple_score 量表。"
+      },
+      {
+        "question": "需要多久完成？",
+        "answer": "演示包仅含 5 题，约 1 分钟完成。"
+      }
+    ]
+  }
+}

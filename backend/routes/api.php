@@ -25,6 +25,7 @@ use App\Http\Controllers\API\V0_2\Admin\AdminAuditController;
 use App\Http\Controllers\API\V0_2\Admin\AdminAgentController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
+use App\Http\Controllers\API\V0_3\AttemptsController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\Integrations\ProvidersController;
@@ -216,4 +217,10 @@ Route::prefix("v0.3")->group(function () {
     Route::get("/scales/lookup", [ScalesLookupController::class, "lookup"]);
     Route::get("/scales/{scale_code}/questions", [ScalesController::class, "questions"]);
     Route::get("/scales/{scale_code}", [ScalesController::class, "show"]);
+
+    // 2) Attempts lifecycle
+    Route::post("/attempts/start", [AttemptsController::class, "start"]);
+    Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
+    Route::get("/attempts/{id}/result", [AttemptsController::class, "result"]);
+    Route::get("/attempts/{id}/report", [AttemptsController::class, "report"]);
 });
