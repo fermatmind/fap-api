@@ -63,6 +63,25 @@ final class CacheKeys
         return self::base() . ':asset:' . $packPath . ':' . $relPath;
     }
 
+    public static function scaleRegistryActive(int $orgId): string
+    {
+        return self::base() . ':scale_registry:active:' . $orgId;
+    }
+
+    public static function scaleRegistryByCode(int $orgId, string $code): string
+    {
+        $code = trim($code);
+
+        return self::base() . ':scale_registry:code:' . $orgId . ':' . $code;
+    }
+
+    public static function scaleRegistryBySlug(int $orgId, string $slug): string
+    {
+        $slug = trim($slug);
+
+        return self::base() . ':scale_registry:slug:' . $orgId . ':' . $slug;
+    }
+
     private static function base(): string
     {
         return self::PREFIX . ':v=' . self::versionTag();

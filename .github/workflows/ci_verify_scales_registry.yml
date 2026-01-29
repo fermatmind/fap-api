@@ -1,0 +1,94 @@
+# file: .github/workflows/ci_verify_scales_registry.yml
+name: CI Verify Scales Registry
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  verify-scales-registry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+          tools: composer:v2
+          extensions: >
+            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: |
+            backend/vendor
+            ~/.composer/cache/files
+          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php84-
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: |
+          composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare Laravel env
+        working-directory: backend
+        run: |
+          if [ ! -f .env ]; then
+            if [ -f .env.example ]; then cp .env.example .env; else touch .env; fi
+          fi
+          php artisan key:generate --force || true
+          mkdir -p storage/framework/{cache,views,sessions} bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+          chmod +x scripts/*.sh || true
+
+      - name: Prepare SQLite DB + migrate
+        working-directory: backend
+        env:
+          APP_ENV: ci
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+          QUEUE_CONNECTION: sync
+        run: |
+          set -euo pipefail
+          mkdir -p database
+          touch database/database.sqlite
+          php artisan migrate --force
+
+      - name: Seed + Sync slugs
+        working-directory: backend
+        env:
+          APP_ENV: ci
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+        run: |
+          php artisan fap:scales:seed-default
+          php artisan fap:scales:sync-slugs
+
+      - name: Run V0_3 tests
+        working-directory: backend
+        env:
+          APP_ENV: ci
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+          QUEUE_CONNECTION: sync
+        run: |
+          php artisan test --filter=V0_3
+
+      - name: Upload artifacts (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr15_artifacts
+          path: backend/artifacts/pr15
+          if-no-files-found: ignore
+          retention-days: 7

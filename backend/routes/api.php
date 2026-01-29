@@ -25,6 +25,8 @@ use App\Http\Controllers\API\V0_2\Admin\AdminAuditController;
 use App\Http\Controllers\API\V0_2\Admin\AdminAgentController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
+use App\Http\Controllers\API\V0_3\ScalesController;
+use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\Integrations\ProvidersController;
 use App\Http\Controllers\Webhooks\HandleProviderWebhook;
 
@@ -206,4 +208,11 @@ Route::prefix("v0.2")->group(function () {
             Route::get("/me/benefits", [PaymentsController::class, "meBenefits"]);
         });
     });
+});
+
+Route::prefix("v0.3")->group(function () {
+    // 1) Scale registry
+    Route::get("/scales", [ScalesController::class, "index"]);
+    Route::get("/scales/lookup", [ScalesLookupController::class, "lookup"]);
+    Route::get("/scales/{scale_code}", [ScalesController::class, "show"]);
 });
