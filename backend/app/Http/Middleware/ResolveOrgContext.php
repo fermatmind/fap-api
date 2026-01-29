@@ -28,6 +28,7 @@ class ResolveOrgContext
         }
         $userId = $this->resolveUserId($request);
         $role = null;
+        $anonId = $this->resolveAnonId($request);
 
         if ($orgId > 0) {
             if ($userId === null) {
@@ -54,7 +55,7 @@ class ResolveOrgContext
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
 
-        $this->orgContext->set($orgId, $userId, $role);
+        $this->orgContext->set($orgId, $userId, $role, $anonId);
         app()->instance(OrgContext::class, $this->orgContext);
 
         return $next($request);
@@ -161,6 +162,19 @@ class ResolveOrgContext
         }
 
         return '';
+    }
+
+    private function resolveAnonId(Request $request): ?string
+    {
+        $raw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id') ?? '';
+        if (is_string($raw) || is_numeric($raw)) {
+            $val = trim((string) $raw);
+            if ($val !== '') {
+                return $val;
+            }
+        }
+
+        return null;
     }
 
     private function orgNotFoundResponse(): Response

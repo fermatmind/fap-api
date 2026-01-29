@@ -226,6 +226,15 @@ Route::prefix("v0.3")->group(function () {
         Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
         Route::get("/attempts/{id}/result", [AttemptsController::class, "result"]);
         Route::get("/attempts/{id}/report", [AttemptsController::class, "report"]);
+
+        // 3) Commerce v2 (public with org context)
+        Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
+        Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder");
+        Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
+        Route::post(
+            "/webhooks/payment/{provider}",
+            "App\\Http\\Controllers\\API\\V0_3\\Webhooks\\PaymentWebhookController@handle"
+        );
     });
 
     Route::middleware([\App\Http\Middleware\FmTokenAuth::class, \App\Http\Middleware\ResolveOrgContext::class])
@@ -234,5 +243,12 @@ Route::prefix("v0.3")->group(function () {
             Route::get("/orgs/me", [OrgsController::class, "me"]);
             Route::post("/orgs/{org_id}/invites", [OrgInvitesController::class, "store"]);
             Route::post("/orgs/invites/accept", [OrgInvitesController::class, "accept"]);
+
+            // Org wallets (admin/owner only)
+            Route::get("/orgs/{org_id}/wallets", "App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@wallets");
+            Route::get(
+                "/orgs/{org_id}/wallets/{benefit_code}/ledger",
+                "App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@ledger"
+            );
         });
 });

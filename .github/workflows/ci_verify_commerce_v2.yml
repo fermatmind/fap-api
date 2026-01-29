@@ -1,0 +1,49 @@
+name: ci-verify-commerce-v2
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - "content_packages/**"
+      - ".github/workflows/ci_verify_commerce_v2.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - "content_packages/**"
+      - ".github/workflows/ci_verify_commerce_v2.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, sqlite, pdo_sqlite
+
+      - name: Install backend deps
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Migrate
+        working-directory: backend
+        run: php artisan migrate --force
+
+      - name: Seed commerce
+        working-directory: backend
+        run: php artisan db:seed --class=Pr19CommerceSeeder
+
+      - name: V0.3 tests
+        working-directory: backend
+        run: php artisan test --filter=V0_3
+
+      - name: PR19 verify script
+        working-directory: backend
+        run: bash scripts/pr19_verify_commerce_v2.sh
