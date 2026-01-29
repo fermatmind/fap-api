@@ -1,12 +1,17 @@
 <?php
 
+use Database\Migrations\Concerns\HasIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
+require_once __DIR__ . '/Concerns/HasIndex.php';
+
 return new class extends Migration
 {
+    use HasIndex;
+
     public function up(): void
     {
         if (!Schema::hasTable('benefit_wallet_ledgers')) {
@@ -18,10 +23,11 @@ return new class extends Migration
                 $table->string('reason', 64);
                 $table->string('order_no', 64)->nullable();
                 $table->string('attempt_id', 64)->nullable();
-                $table->string('idempotency_key', 128)->unique();
+                $table->string('idempotency_key', 128);
                 $table->json('meta_json')->nullable();
                 $table->timestamps();
 
+                $table->unique('idempotency_key', 'benefit_wallet_ledgers_idempotency_key_unique');
                 $table->index(['org_id', 'benefit_code', 'created_at'], 'benefit_wallet_ledgers_org_benefit_created_idx');
             });
             return;
@@ -64,7 +70,10 @@ return new class extends Migration
             DB::table('benefit_wallet_ledgers')->whereNull('org_id')->update(['org_id' => 0]);
         }
 
-        if (!$this->indexExists('benefit_wallet_ledgers', 'benefit_wallet_ledgers_idempotency_unique')
+        $uniqueName = 'benefit_wallet_ledgers_idempotency_key_unique';
+        $legacyUniqueName = 'benefit_wallet_ledgers_idempotency_unique';
+        if (!$this->indexExists('benefit_wallet_ledgers', $uniqueName)
+            && !$this->indexExists('benefit_wallet_ledgers', $legacyUniqueName)
             && Schema::hasColumn('benefit_wallet_ledgers', 'idempotency_key')) {
             $duplicates = DB::table('benefit_wallet_ledgers')
                 ->select('idempotency_key')
@@ -75,7 +84,7 @@ return new class extends Migration
                 ->get();
             if ($duplicates->count() === 0) {
                 Schema::table('benefit_wallet_ledgers', function (Blueprint $table) {
-                    $table->unique('idempotency_key', 'benefit_wallet_ledgers_idempotency_unique');
+                    $table->unique('idempotency_key', 'benefit_wallet_ledgers_idempotency_key_unique');
                 });
             }
         }
@@ -93,42 +102,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('benefit_wallet_ledgers');
-    }
-
-    private function indexExists(string $table, string $indexName): bool
-    {
-        $driver = Schema::getConnection()->getDriverName();
-
-        if ($driver === 'sqlite') {
-            $rows = DB::select("PRAGMA index_list('{$table}')");
-            foreach ($rows as $row) {
-                if ((string) ($row->name ?? '') === $indexName) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        if ($driver === 'mysql') {
-            $rows = DB::select("SHOW INDEX FROM `{$table}`");
-            foreach ($rows as $row) {
-                if ((string) ($row->Key_name ?? '') === $indexName) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        if ($driver === 'pgsql') {
-            $rows = DB::select('SELECT indexname FROM pg_indexes WHERE tablename = ?', [$table]);
-            foreach ($rows as $row) {
-                if ((string) ($row->indexname ?? '') === $indexName) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        return false;
     }
 };

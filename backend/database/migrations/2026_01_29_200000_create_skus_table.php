@@ -1,12 +1,17 @@
 <?php
 
+use Database\Migrations\Concerns\HasIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
+require_once __DIR__ . '/Concerns/HasIndex.php';
+
 return new class extends Migration
 {
+    use HasIndex;
+
     public function up(): void
     {
         if (!Schema::hasTable('skus')) {
@@ -92,42 +97,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('skus');
-    }
-
-    private function indexExists(string $table, string $indexName): bool
-    {
-        $driver = Schema::getConnection()->getDriverName();
-
-        if ($driver === 'sqlite') {
-            $rows = DB::select("PRAGMA index_list('{$table}')");
-            foreach ($rows as $row) {
-                if ((string) ($row->name ?? '') === $indexName) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        if ($driver === 'mysql') {
-            $rows = DB::select("SHOW INDEX FROM `{$table}`");
-            foreach ($rows as $row) {
-                if ((string) ($row->Key_name ?? '') === $indexName) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        if ($driver === 'pgsql') {
-            $rows = DB::select('SELECT indexname FROM pg_indexes WHERE tablename = ?', [$table]);
-            foreach ($rows as $row) {
-                if ((string) ($row->indexname ?? '') === $indexName) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        return false;
     }
 };
