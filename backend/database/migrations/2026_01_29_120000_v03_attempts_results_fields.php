@@ -1,17 +1,12 @@
 <?php
 
-use Database\Migrations\Concerns\HasIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-require_once __DIR__ . '/Concerns/HasIndex.php';
-
 return new class extends Migration
 {
-    use HasIndex;
-
     public function up(): void
     {
         $driver = Schema::getConnection()->getDriverName();
@@ -192,6 +187,40 @@ return new class extends Migration
                 }
             });
         }
+    }
+
+    private function indexExists(string $table, string $indexName): bool
+    {
+        $driver = DB::connection()->getDriverName();
+
+        if ($driver === 'sqlite') {
+            $rows = DB::select("PRAGMA index_list('{$table}')");
+            foreach ($rows as $row) {
+                if ((string) ($row->name ?? '') === $indexName) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        if ($driver === 'pgsql') {
+            $rows = DB::select('SELECT indexname FROM pg_indexes WHERE tablename = ?', [$table]);
+            foreach ($rows as $row) {
+                if ((string) ($row->indexname ?? '') === $indexName) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        $db = DB::getDatabaseName();
+        $rows = DB::select(
+            "SELECT 1 FROM information_schema.statistics
+             WHERE table_schema = ? AND table_name = ? AND index_name = ?
+             LIMIT 1",
+            [$db, $table, $indexName]
+        );
+        return !empty($rows);
     }
 
 };
