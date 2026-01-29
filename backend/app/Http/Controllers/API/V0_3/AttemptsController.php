@@ -9,8 +9,11 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\AssessmentEngine;
 use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Commerce\BenefitWalletService;
+use App\Services\Commerce\EntitlementManager;
 use App\Services\Content\ContentPacksIndex;
+use App\Services\Report\ReportGatekeeper;
 use App\Services\Report\ReportComposer;
+use App\Services\Report\ReportSnapshotStore;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
@@ -27,6 +30,9 @@ class AttemptsController extends Controller
         private AssessmentEngine $engine,
         private GenericReportBuilder $genericReportBuilder,
         private ReportComposer $reportComposer,
+        private ReportGatekeeper $reportGatekeeper,
+        private ReportSnapshotStore $reportSnapshots,
+        private EntitlementManager $entitlements,
         private EventRecorder $eventRecorder,
         private OrgContext $orgContext,
         private BenefitWalletService $benefitWallets,
@@ -401,6 +407,43 @@ class AttemptsController extends Controller
                     'pack_id' => $packId,
                     'dir_version' => $dirVersion,
                 ]);
+
+                $entitlementBenefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
+                if ($entitlementBenefitCode === '') {
+                    $entitlementBenefitCode = $creditBenefitCode;
+                }
+
+                if ($entitlementBenefitCode !== '') {
+                    $userIdRaw = $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id');
+                    $anonIdRaw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id');
+
+                    $grant = $this->entitlements->grantAttemptUnlock(
+                        $orgId,
+                        $userIdRaw !== null ? (string) $userIdRaw : null,
+                        $anonIdRaw !== null ? (string) $anonIdRaw : null,
+                        $entitlementBenefitCode,
+                        $attemptId,
+                        null
+                    );
+
+                    if (!($grant['ok'] ?? false)) {
+                        $status = (int) ($grant['status'] ?? 500);
+                        $response = response()->json($grant, $status);
+                        return;
+                    }
+                }
+
+                $snapshot = $this->reportSnapshots->createSnapshotForAttempt([
+                    'org_id' => $orgId,
+                    'attempt_id' => $attemptId,
+                    'trigger_source' => 'credit_consume',
+                    'order_no' => null,
+                ]);
+                if (!($snapshot['ok'] ?? false)) {
+                    $status = (int) ($snapshot['status'] ?? 500);
+                    $response = response()->json($snapshot, $status);
+                    return;
+                }
             }
 
             $response = $this->buildSubmitResponse($locked, $result, true);
@@ -500,22 +543,16 @@ class AttemptsController extends Controller
             ], 404);
         }
 
-        $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
-        $report = null;
+        $gate = $this->reportGatekeeper->resolve(
+            $orgId,
+            $id,
+            $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id'),
+            $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id'),
+        );
 
-        if ($scaleCode === 'MBTI') {
-            $composed = $this->reportComposer->compose((string) $attempt->id, []);
-            if (!($composed['ok'] ?? false)) {
-                $status = (int) ($composed['status'] ?? 500);
-                return response()->json([
-                    'ok' => false,
-                    'error' => $composed['error'] ?? 'REPORT_FAILED',
-                    'message' => $composed['message'] ?? 'report failed.',
-                ], $status);
-            }
-            $report = $composed['report'] ?? null;
-        } else {
-            $report = $this->genericReportBuilder->build($attempt, $result);
+        if (!($gate['ok'] ?? false)) {
+            $status = (int) ($gate['status'] ?? 500);
+            return response()->json($gate, $status);
         }
 
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
@@ -524,12 +561,10 @@ class AttemptsController extends Controller
             'dir_version' => (string) ($attempt->dir_version ?? ''),
             'type_code' => (string) ($result->type_code ?? ''),
             'attempt_id' => (string) $attempt->id,
+            'locked' => (bool) ($gate['locked'] ?? false),
         ]);
 
-        return response()->json([
-            'ok' => true,
-            'locked' => false,
-            'report' => $report,
+        return response()->json(array_merge($gate, [
             'meta' => [
                 'scale_code' => (string) ($attempt->scale_code ?? ''),
                 'pack_id' => (string) ($attempt->pack_id ?? ''),
@@ -538,7 +573,7 @@ class AttemptsController extends Controller
                 'scoring_spec_version' => (string) ($attempt->scoring_spec_version ?? ''),
                 'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
             ],
-        ]);
+        ]));
     }
 
     private function resolveQuestionCount(string $packId, string $dirVersion): ?int

@@ -5,6 +5,7 @@ namespace App\Services\Commerce;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StubGateway;
+use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -18,6 +19,7 @@ class PaymentWebhookProcessor
         private OrderManager $orders,
         private BenefitWalletService $wallets,
         private EntitlementManager $entitlements,
+        private ReportSnapshotStore $reportSnapshots,
         private EventRecorder $events,
     ) {
         $stub = new StubGateway();
@@ -202,6 +204,16 @@ class PaymentWebhookProcessor
                 }
 
                 $this->events->record('entitlement_granted', $this->numericUserId($eventUserId), $eventBaseMeta, $eventContext);
+
+                $snapshot = $this->reportSnapshots->createSnapshotForAttempt([
+                    'org_id' => (int) $order->org_id,
+                    'attempt_id' => $attemptId,
+                    'trigger_source' => 'payment',
+                    'order_no' => $orderNo,
+                ]);
+                if (!($snapshot['ok'] ?? false)) {
+                    return $snapshot;
+                }
             }
 
             $this->orders->transition($orderNo, 'fulfilled', $orgId);

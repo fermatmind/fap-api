@@ -124,6 +124,19 @@ class FmTokenAuth
             if ($v !== '') return $v;
         }
 
+        // meta_json fallback (when tokens are issued by legacy services)
+        if (property_exists($row, 'meta_json')) {
+            $meta = $row->meta_json ?? null;
+            if (is_string($meta)) {
+                $decoded = json_decode($meta, true);
+                $meta = is_array($decoded) ? $decoded : null;
+            }
+            if (is_array($meta)) {
+                $v = trim((string) ($meta['user_id'] ?? $meta['fm_user_id'] ?? ''));
+                if ($v !== '') return $v;
+            }
+        }
+
         // legacy candidates (keep numeric contract)
         foreach (['uid', 'user_uid', 'user'] as $c) {
             if (property_exists($row, $c)) {

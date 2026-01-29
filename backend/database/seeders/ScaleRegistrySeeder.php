@@ -34,7 +34,10 @@ class ScaleRegistrySeeder extends Seeder
                 'content_graph' => true,
             ],
             'view_policy_json' => [
-                'report' => 'public',
+                'free_sections' => ['intro', 'score'],
+                'blur_others' => true,
+                'teaser_percent' => 0.3,
+                'upgrade_sku' => 'MBTI_REPORT_FULL',
             ],
             'commercial_json' => [
                 'price_tier' => 'FREE',

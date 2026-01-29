@@ -114,11 +114,22 @@ class EntitlementManager
         if (Schema::hasColumn('benefit_grants', 'benefit_type')) {
             $row['benefit_type'] = 'report_unlock';
         }
-        if (Schema::hasColumn('benefit_grants', 'source_order_id') && $orderNo) {
-            $orderNo = trim((string) $orderNo);
-            if ($orderNo !== '' && preg_match('/^[0-9a-f\\-]{36}$/i', $orderNo)) {
-                $row['source_order_id'] = $orderNo;
+        if (Schema::hasColumn('benefit_grants', 'source_order_id')) {
+            $sourceOrderId = null;
+            if ($orderNo) {
+                $orderNo = trim((string) $orderNo);
+                if ($orderNo !== '' && preg_match('/^[0-9a-f\\-]{36}$/i', $orderNo)) {
+                    $sourceOrderId = $orderNo;
+                }
             }
+            if ($sourceOrderId === null && preg_match('/^[0-9a-f\\-]{36}$/i', $attemptId)) {
+                $sourceOrderId = $attemptId;
+            }
+            if ($sourceOrderId === null) {
+                $sourceOrderId = (string) Str::uuid();
+            }
+
+            $row['source_order_id'] = $sourceOrderId;
         }
 
         DB::table('benefit_grants')->insert($row);

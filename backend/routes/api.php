@@ -225,7 +225,8 @@ Route::prefix("v0.3")->group(function () {
         Route::post("/attempts/start", [AttemptsController::class, "start"]);
         Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
         Route::get("/attempts/{id}/result", [AttemptsController::class, "result"]);
-        Route::get("/attempts/{id}/report", [AttemptsController::class, "report"]);
+        Route::get("/attempts/{id}/report", [AttemptsController::class, "report"])
+            ->name('v0.3.attempts.report');
 
         // 3) Commerce v2 (public with org context)
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
