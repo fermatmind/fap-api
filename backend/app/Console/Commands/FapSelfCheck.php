@@ -18,7 +18,7 @@ class FapSelfCheck extends Command
     {--pkg= : Relative folder under content_packages (e.g. MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST)}
     {--path= : Path to manifest.json}
     {--pack_id= : Resolve manifest.json by pack_id (scan content_packages)}
-    {--strict-assets : Fail if known files exist in package dir but are not declared in manifest.assets}';
+    {--strict-assets : Fail if known files exist in package dir but are not declared in manifest.assets; also validate questions assets paths}';
 
     protected $description = 'Self-check: manifest contract + assets existence/schema + key JSON validations + unified overrides rule validation';
 
@@ -119,7 +119,8 @@ if ($shareEnabled) {
     fn () => $this->checkQuestions(
         $this->pathOf($baseDir, 'questions.json'),
         $packId,
-        $this->expectedSchemaFor($manifest, 'questions', 'questions.json')
+        $this->expectedSchemaFor($manifest, 'questions', 'questions.json'),
+        (string) ($manifest['scale_code'] ?? '')
     )
 );
 
@@ -1783,7 +1784,7 @@ private function flattenDeclaredAssetRelPaths(array $manifest): array
     return $out;
 }
 
-    private function checkQuestions(string $path, string $packId, ?string $expectedSchema = null): array
+    private function checkQuestions(string $path, string $packId, ?string $expectedSchema = null, ?string $scaleCode = null): array
 {
     if (!is_file($path)) {
         return [false, ["pack={$packId} file={$path} :: File not found"]];
@@ -1813,8 +1814,15 @@ private function flattenDeclaredAssetRelPaths(array $manifest): array
     $items = array_values(array_filter($items, fn ($q) => ($q['is_active'] ?? true) === true));
     usort($items, fn ($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
 
-    if (count($items) !== 144) {
+    $scaleCode = strtoupper(trim((string) $scaleCode));
+    $isMbti = ($scaleCode === 'MBTI');
+
+    if ($isMbti && count($items) !== 144) {
         $errors[] = "pack={$packId} file={$path} :: Active questions must be 144, got " . count($items);
+    }
+
+    if (!$isMbti && count($items) === 0) {
+        $errors[] = "pack={$packId} file={$path} :: questions.items must have >= 1 item";
     }
 
     $validDims = ['EI', 'SN', 'TF', 'JP', 'AT'];
@@ -1822,63 +1830,92 @@ private function flattenDeclaredAssetRelPaths(array $manifest): array
     $orders = [];
 
     foreach ($items as $i => $q) {
-        $qid = $q['question_id'] ?? null;
+        if (!is_array($q) || !$this->isAssocArray($q)) {
+            $errors[] = "pack={$packId} file={$path} path=$.items[{$i}] :: item must be object";
+            continue;
+        }
 
-        if (!$qid) $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].question_id :: missing question_id";
-        if ($qid && isset($seenQid[$qid])) $errors[] = "pack={$packId} file={$path} :: duplicate question_id {$qid}";
-        if ($qid) $seenQid[$qid] = true;
+        $qid = $q['question_id'] ?? ($q['id'] ?? null);
+        $qidLabel = is_scalar($qid) ? (string) $qid : '';
+
+        if ($qid === null || $qid === '') $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].question_id :: missing question_id";
+        if ($qid !== null && $qid !== '' && isset($seenQid[$qidLabel])) $errors[] = "pack={$packId} file={$path} :: duplicate question_id {$qidLabel}";
+        if ($qid !== null && $qid !== '') $seenQid[$qidLabel] = true;
 
         $order = $q['order'] ?? null;
         if (!is_int($order) && !is_numeric($order)) $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].order :: invalid order";
         if (is_numeric($order)) $orders[] = (int)$order;
 
-        $dim = $q['dimension'] ?? null;
-        if (!in_array($dim, $validDims, true)) $errors[] = "pack={$packId} file={$path} :: invalid dimension {$dim} (qid={$qid})";
-
-        $text = $q['text'] ?? null;
-        if (!is_string($text) || trim($text) === '') $errors[] = "pack={$packId} file={$path} :: missing text (qid={$qid})";
-
-        $keyPole = $q['key_pole'] ?? null;
-        if (!is_string($keyPole) || $keyPole === '') $errors[] = "pack={$packId} file={$path} :: missing key_pole (qid={$qid})";
-
-        $direction = $q['direction'] ?? null;
-        if (!in_array((int)$direction, [1, -1], true)) $errors[] = "pack={$packId} file={$path} :: direction must be 1 or -1 (qid={$qid})";
-
         $opts = $q['options'] ?? null;
         if (!is_array($opts) || count($opts) < 2) {
-            $errors[] = "pack={$packId} file={$path} :: options invalid (qid={$qid})";
+            $errors[] = "pack={$packId} file={$path} :: options invalid (qid={$qidLabel})";
             continue;
         }
 
-        $needCodes = ['A','B','C','D','E'];
-        $optMap = [];
-        foreach ($opts as $o) {
-            $c = strtoupper((string)($o['code'] ?? ''));
-            if ($c !== '') $optMap[$c] = $o;
-        }
+        if ($isMbti) {
+            $dim = $q['dimension'] ?? null;
+            if (!in_array($dim, $validDims, true)) $errors[] = "pack={$packId} file={$path} :: invalid dimension {$dim} (qid={$qidLabel})";
 
-        foreach ($needCodes as $c) {
-            if (!isset($optMap[$c])) {
-                $errors[] = "pack={$packId} file={$path} :: missing option {$c} (qid={$qid})";
-                continue;
+            $text = $q['text'] ?? null;
+            if (!is_string($text) || trim($text) === '') $errors[] = "pack={$packId} file={$path} :: missing text (qid={$qidLabel})";
+
+            $keyPole = $q['key_pole'] ?? null;
+            if (!is_string($keyPole) || $keyPole === '') $errors[] = "pack={$packId} file={$path} :: missing key_pole (qid={$qidLabel})";
+
+            $direction = $q['direction'] ?? null;
+            if (!in_array((int)$direction, [1, -1], true)) $errors[] = "pack={$packId} file={$path} :: direction must be 1 or -1 (qid={$qidLabel})";
+
+            $needCodes = ['A','B','C','D','E'];
+            $optMap = [];
+            foreach ($opts as $o) {
+                if (!is_array($o)) continue;
+                $c = strtoupper((string)($o['code'] ?? ''));
+                if ($c !== '') $optMap[$c] = $o;
             }
-            $t = $optMap[$c]['text'] ?? null;
-            if (!is_string($t) || trim($t) === '') $errors[] = "pack={$packId} file={$path} :: option {$c} missing text (qid={$qid})";
-            if (!array_key_exists('score', $optMap[$c]) || !is_numeric($optMap[$c]['score'])) {
-                $errors[] = "pack={$packId} file={$path} :: option {$c} missing numeric score (qid={$qid})";
+
+            foreach ($needCodes as $c) {
+                if (!isset($optMap[$c])) {
+                    $errors[] = "pack={$packId} file={$path} :: missing option {$c} (qid={$qidLabel})";
+                    continue;
+                }
+                $t = $optMap[$c]['text'] ?? null;
+                if (!is_string($t) || trim($t) === '') $errors[] = "pack={$packId} file={$path} :: option {$c} missing text (qid={$qidLabel})";
+                if (!array_key_exists('score', $optMap[$c]) || !is_numeric($optMap[$c]['score'])) {
+                    $errors[] = "pack={$packId} file={$path} :: option {$c} missing numeric score (qid={$qidLabel})";
+                }
+            }
+        } else {
+            foreach ($opts as $j => $o) {
+                if (!is_array($o) || !$this->isAssocArray($o)) {
+                    $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].options[{$j}] :: option must be object";
+                    continue;
+                }
+                $code = $o['code'] ?? ($o['id'] ?? null);
+                if ($code === null || $code === '') {
+                    $errors[] = "pack={$packId} file={$path} path=$.items[{$i}].options[{$j}].code :: missing option code (qid={$qidLabel})";
+                }
             }
         }
     }
 
-    if (count($orders) > 0) {
+    if ($isMbti && count($orders) > 0) {
         $min = min($orders);
         $max = max($orders);
         if ($min !== 1 || $max !== 144) $errors[] = "pack={$packId} file={$path} :: order range should be 1..144, got {$min}..{$max}";
     }
 
+    if ((bool)$this->option('strict-assets')) {
+        $assetErrors = $this->checkQuestionsAssetsStrict($items, $packId, $path);
+        if (!empty($assetErrors)) $errors = array_merge($errors, $assetErrors);
+    }
+
     if (!empty($errors)) return [false, array_slice($errors, 0, 120)];
 
-    return [true, ['OK (144 active questions, A~E options + scoring fields present)']];
+    if ($isMbti) {
+        return [true, ['OK (144 active questions, A~E options + scoring fields present)']];
+    }
+
+    return [true, ['OK (questions basic structure validated)']];
 }
 
     private function checkTypeProfiles(string $path, string $packId, ?string $expectedSchema = null): array
@@ -2913,6 +2950,88 @@ private function isRelativeAssetPath(string $p): bool
     if (str_starts_with($p, '//')) return false;
 
     return true;
+}
+
+private function validateStrictAssetPath(string $p): ?string
+{
+    $p = trim($p);
+    if ($p === '') return 'empty path';
+
+    if (preg_match('#^https?://#i', $p)) return 'absolute URL not allowed';
+    if (str_starts_with($p, '//')) return 'protocol-relative URL not allowed';
+    if (str_starts_with($p, '/')) return 'absolute path not allowed';
+    if (str_contains($p, '..')) return 'path traversal not allowed';
+    if (!str_starts_with($p, 'assets/')) return 'must start with assets/';
+
+    return null;
+}
+
+private function collectQuestionAssetErrors($assets, string $jsonPath, string $packId, string $file, string $qid): array
+{
+    if ($assets === null) return [];
+
+    if (!is_array($assets)) {
+        return [
+            "pack={$packId} file={$file} qid={$qid} path={$jsonPath} :: assets must be object(map)",
+        ];
+    }
+
+    $errors = [];
+    foreach ($assets as $k => $v) {
+        $assetPath = "{$jsonPath}.{$k}";
+        if (!is_string($v)) {
+            $errors[] = "pack={$packId} file={$file} qid={$qid} path={$assetPath} :: asset value must be string";
+            continue;
+        }
+        $reason = $this->validateStrictAssetPath($v);
+        if ($reason !== null) {
+            $errors[] = "pack={$packId} file={$file} qid={$qid} path={$assetPath} :: invalid asset path ({$reason}) value={$v}";
+        }
+    }
+
+    return $errors;
+}
+
+private function checkQuestionsAssetsStrict(array $items, string $packId, string $path): array
+{
+    $errors = [];
+
+    foreach ($items as $i => $q) {
+        if (!is_array($q) || !$this->isAssocArray($q)) continue;
+
+        $qid = $q['question_id'] ?? ($q['id'] ?? $i);
+        $qidLabel = is_scalar($qid) ? (string) $qid : (string) $i;
+
+        if (array_key_exists('assets', $q)) {
+            $errors = array_merge(
+                $errors,
+                $this->collectQuestionAssetErrors($q['assets'], "$.items[{$i}].assets", $packId, $path, $qidLabel)
+            );
+        }
+
+        $stem = $q['stem'] ?? null;
+        if (is_array($stem) && $this->isAssocArray($stem) && array_key_exists('assets', $stem)) {
+            $errors = array_merge(
+                $errors,
+                $this->collectQuestionAssetErrors($stem['assets'], "$.items[{$i}].stem.assets", $packId, $path, $qidLabel)
+            );
+        }
+
+        $opts = $q['options'] ?? null;
+        if (is_array($opts)) {
+            foreach ($opts as $j => $opt) {
+                if (!is_array($opt) || !$this->isAssocArray($opt)) continue;
+                if (!array_key_exists('assets', $opt)) continue;
+
+                $errors = array_merge(
+                    $errors,
+                    $this->collectQuestionAssetErrors($opt['assets'], "$.items[{$i}].options[{$j}].assets", $packId, $path, $qidLabel)
+                );
+            }
+        }
+    }
+
+    return $errors;
 }
 
 private function firstNCharsUtf8(string $s, int $n): string
