@@ -11,6 +11,7 @@ use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Report\ReportComposer;
 use App\Services\Scale\ScaleRegistry;
+use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,7 @@ class AttemptsController extends Controller
         private GenericReportBuilder $genericReportBuilder,
         private ReportComposer $reportComposer,
         private EventRecorder $eventRecorder,
+        private OrgContext $orgContext,
     ) {
     }
 
@@ -46,7 +48,7 @@ class AttemptsController extends Controller
             'meta' => ['sometimes', 'array'],
         ]);
 
-        $orgId = 0;
+        $orgId = $this->orgContext->orgId();
         $scaleCode = strtoupper(trim((string) $payload['scale_code']));
         if ($scaleCode === '') {
             return response()->json([
@@ -102,6 +104,7 @@ class AttemptsController extends Controller
         $attempt = Attempt::create([
             'org_id' => $orgId,
             'anon_id' => $anonId,
+            'user_id' => $this->orgContext->userId(),
             'scale_code' => $scaleCode,
             'scale_version' => 'v0.3',
             'region' => $region,
@@ -159,7 +162,8 @@ class AttemptsController extends Controller
         $durationMs = (int) $payload['duration_ms'];
         $answersDigest = $this->computeAnswersDigest($answers);
 
-        $attempt = Attempt::where('id', $attemptId)->first();
+        $orgId = $this->orgContext->orgId();
+        $attempt = Attempt::where('id', $attemptId)->where('org_id', $orgId)->first();
         if (!$attempt) {
             return response()->json([
                 'ok' => false,
@@ -168,7 +172,6 @@ class AttemptsController extends Controller
             ], 404);
         }
 
-        $orgId = (int) ($attempt->org_id ?? 0);
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {
             return response()->json([
@@ -216,7 +219,10 @@ class AttemptsController extends Controller
             $locale,
             $request
         ) {
-            $locked = Attempt::where('id', $attemptId)->lockForUpdate()->first();
+            $locked = Attempt::where('id', $attemptId)
+                ->where('org_id', $orgId)
+                ->lockForUpdate()
+                ->first();
             if (!$locked) {
                 $response = response()->json([
                     'ok' => false,
@@ -381,7 +387,8 @@ class AttemptsController extends Controller
      */
     public function result(Request $request, string $id): JsonResponse
     {
-        $attempt = Attempt::where('id', $id)->first();
+        $orgId = $this->orgContext->orgId();
+        $attempt = Attempt::where('id', $id)->where('org_id', $orgId)->first();
         if (!$attempt) {
             return response()->json([
                 'ok' => false,
@@ -390,7 +397,7 @@ class AttemptsController extends Controller
             ], 404);
         }
 
-        $result = Result::where('attempt_id', $id)->first();
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
         if (!$result) {
             return response()->json([
                 'ok' => false,
@@ -432,7 +439,8 @@ class AttemptsController extends Controller
      */
     public function report(Request $request, string $id): JsonResponse
     {
-        $attempt = Attempt::where('id', $id)->first();
+        $orgId = $this->orgContext->orgId();
+        $attempt = Attempt::where('id', $id)->where('org_id', $orgId)->first();
         if (!$attempt) {
             return response()->json([
                 'ok' => false,
@@ -441,7 +449,7 @@ class AttemptsController extends Controller
             ], 404);
         }
 
-        $result = Result::where('attempt_id', $id)->first();
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
         if (!$result) {
             return response()->json([
                 'ok' => false,

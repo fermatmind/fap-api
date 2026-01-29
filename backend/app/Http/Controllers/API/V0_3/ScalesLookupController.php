@@ -4,12 +4,16 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Services\Scale\ScaleRegistry;
+use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ScalesLookupController extends Controller
 {
-    public function __construct(private ScaleRegistry $registry)
+    public function __construct(
+        private ScaleRegistry $registry,
+        private OrgContext $orgContext,
+    )
     {
     }
 
@@ -18,7 +22,7 @@ class ScalesLookupController extends Controller
      */
     public function lookup(Request $request): JsonResponse
     {
-        $orgId = 0;
+        $orgId = $this->orgContext->orgId();
         $slug = (string) $request->query('slug', '');
         $slug = trim(strtolower($slug));
         if ($slug === '') {

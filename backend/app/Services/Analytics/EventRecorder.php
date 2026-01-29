@@ -20,6 +20,7 @@ final class EventRecorder
             'id' => (string) Str::uuid(),
             'event_code' => $eventCode,
             'event_name' => $eventCode,
+            'org_id' => $context['org_id'] ?? 0,
             'user_id' => $userId,
             'anon_id' => $context['anon_id'] ?? null,
             'session_id' => $context['session_id'] ?? null,
@@ -54,8 +55,11 @@ final class EventRecorder
         $sessionId = trim((string) ($request->header('X-Session-Id') ?? $request->header('X-Session-ID')));
         $channel = trim((string) $request->header('X-Channel', ''));
         $attemptId = (string) $request->input('attempt_id', '');
+        $orgId = $request->attributes->get('org_id');
+        $orgId = is_numeric($orgId) ? (int) $orgId : 0;
 
         return [
+            'org_id' => $orgId,
             'request_id' => $requestId !== '' ? $requestId : null,
             'session_id' => $sessionId !== '' ? $sessionId : null,
             'anon_id' => $request->attributes->get('anon_id'),

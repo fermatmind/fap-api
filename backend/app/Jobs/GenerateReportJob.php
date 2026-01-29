@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Attempt;
 use App\Models\ReportJob;
 use App\Services\Report\ReportComposer;
 use Illuminate\Bus\Queueable;
@@ -31,13 +32,21 @@ class GenerateReportJob implements ShouldQueue
         $job = ReportJob::where('attempt_id', $this->attemptId)->first();
 
         if (!$job) {
+            $orgId = (int) (Attempt::where('id', $this->attemptId)->value('org_id') ?? 0);
             $job = ReportJob::create([
                 'id' => $this->jobId ?: (string) Str::uuid(),
+                'org_id' => $orgId,
                 'attempt_id' => $this->attemptId,
                 'status' => 'queued',
                 'tries' => 0,
                 'available_at' => now(),
             ]);
+        } elseif (empty($job->org_id)) {
+            $orgId = (int) (Attempt::where('id', $this->attemptId)->value('org_id') ?? 0);
+            if ($orgId > 0) {
+                $job->org_id = $orgId;
+                $job->save();
+            }
         }
 
         $job->tries = ((int) ($job->tries ?? 0)) + 1;

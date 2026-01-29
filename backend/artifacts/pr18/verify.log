@@ -1,0 +1,88 @@
+[PR18] repo=<REPO_PATH>
+[PR18] api=http://127.0.0.1:18000
+[PR18] migrate
+
+   INFO  Preparing database.  
+
+  Creating migration table ....................................... 2.38ms DONE
+
+   INFO  Running migrations.  
+
+  0001_01_01_000000_create_users_table ........................... 2.95ms DONE
+  0001_01_01_000001_create_cache_table ........................... 0.91ms DONE
+  0001_01_01_000002_create_jobs_table ............................ 1.91ms DONE
+  2025_12_13_231207_create_results_table ......................... 1.10ms DONE
+  2025_12_14_084436_create_attempts_table ........................ 1.37ms DONE
+  2025_12_14_091106_create_events_table .......................... 2.10ms DONE
+  2025_12_15_165419_add_v021_fields_to_results_table ............. 1.40ms DONE
+  2025_12_15_171546_create_shares_table .......................... 1.60ms DONE
+  2025_12_17_165938_create_events_table .......................... 0.05ms DONE
+  2025_12_21_101327_add_answers_fields_to_attempts_table ......... 2.72ms DONE
+  2025_12_28_064425_add_region_locale_to_attempts_table .......... 1.12ms DONE
+  2026_01_17_040640_add_ticket_code_to_attempts_table ............ 0.95ms DONE
+  2026_01_17_164755_add_result_json_to_attempts_table ............ 1.46ms DONE
+  2026_01_18_134019_create_fm_tokens_table ....................... 0.80ms DONE
+  2026_01_18_999999_add_share_id_to_events_table ................. 1.05ms DONE
+  2026_01_19_111914_add_phone_fields_to_users_table .............. 1.51ms DONE
+  2026_01_19_111915_add_user_id_to_attempts_table ................ 0.19ms DONE
+  2026_01_19_170606_add_email_fields_to_users_table .............. 0.20ms DONE
+  2026_01_19_170607_create_email_outbox_table .................... 1.74ms DONE
+  2026_01_19_180001_create_identities_table ...................... 1.93ms DONE
+  2026_01_20_090001_add_attempt_id_to_email_outbox_table ......... 1.27ms DONE
+  2026_01_20_090002_create_lookup_events_table ................... 0.61ms DONE
+  2026_01_21_090000_create_norms_tables .......................... 1.85ms DONE
+  2026_01_22_000001_create_validity_feedbacks_table .............. 4.29ms DONE
+  2026_01_22_090010_create_orders_table .......................... 1.70ms DONE
+  2026_01_22_090020_create_benefit_grants_table .................. 1.61ms DONE
+  2026_01_22_090030_create_payment_events_table .................. 1.28ms DONE
+  2026_01_24_162556_add_user_id_to_fm_tokens_table ............... 0.99ms DONE
+  2026_01_26_090000_create_report_jobs_table ..................... 3.64ms DONE
+  2026_01_26_110000_create_content_pack_versions_table ........... 2.40ms DONE
+  2026_01_26_110100_create_content_pack_releases_table ........... 3.14ms DONE
+  2026_01_27_210000_pr9_add_observability_columns_to_events ..... 12.22ms DONE
+  2026_01_27_210100_create_ops_deploy_events ..................... 0.81ms DONE
+  2026_01_27_210200_create_ops_healthz_snapshots ................. 1.14ms DONE
+  2026_01_27_210300_create_views_pr9 ............................. 0.02ms DONE
+  2026_01_27_210350_refresh_views_pr9 ............................ 0.02ms DONE
+  2026_01_28_090000_create_admin_users_table ..................... 0.76ms DONE
+  2026_01_28_090010_create_roles_table ........................... 0.77ms DONE
+  2026_01_28_090020_create_permissions_table ..................... 0.93ms DONE
+  2026_01_28_090030_create_role_user_table ....................... 1.61ms DONE
+  2026_01_28_090040_create_permission_role_table ................. 1.37ms DONE
+  2026_01_28_090050_create_audit_logs_table ...................... 1.70ms DONE
+  2026_01_28_110000_add_psychometrics_snapshot_to_attempts ....... 3.92ms DONE
+  2026_01_28_110100_create_scale_norms_versions_table ............ 2.42ms DONE
+  2026_01_28_110200_create_attempt_quality_table ................. 1.25ms DONE
+  2026_01_28_120000_create_ai_insights_table ..................... 2.77ms DONE
+  2026_01_28_120100_create_ai_insight_feedback_table ............. 0.73ms DONE
+  2026_01_28_130000_create_integrations_tables ................... 1.27ms DONE
+  2026_01_28_130100_create_ingest_batches_table .................. 1.12ms DONE
+  2026_01_28_130200_create_sleep_samples_table ................... 1.27ms DONE
+  2026_01_28_130300_create_health_samples_table .................. 1.70ms DONE
+  2026_01_28_130400_create_screen_time_samples_table ............. 1.27ms DONE
+  2026_01_28_130500_create_idempotency_keys_table ................ 2.17ms DONE
+  2026_01_28_140000_create_user_agent_settings ................... 1.13ms DONE
+  2026_01_28_140100_create_memories_table ........................ 3.02ms DONE
+  2026_01_28_140200_create_embeddings_index ...................... 2.13ms DONE
+  2026_01_28_140300_create_embeddings_table ...................... 2.69ms DONE
+  2026_01_28_140400_create_agent_triggers ........................ 2.40ms DONE
+  2026_01_28_140500_create_agent_decisions ....................... 2.20ms DONE
+  2026_01_28_140600_create_agent_messages ........................ 2.82ms DONE
+  2026_01_28_140700_create_agent_feedback ........................ 1.88ms DONE
+  2026_01_29_000001_create_organizations_table ................... 0.84ms DONE
+  2026_01_29_000002_create_organization_members_table ............ 1.44ms DONE
+  2026_01_29_000003_create_organization_invites_table ............ 1.34ms DONE
+  2026_01_29_000004_add_org_id_to_attempts_results_events_report_jobs  8.01ms DONE
+  2026_01_29_090000_create_scales_registry_table ................. 2.19ms DONE
+  2026_01_29_090010_create_scale_slugs_table ..................... 1.95ms DONE
+  2026_01_29_120000_v03_attempts_results_fields .................. 9.57ms DONE
+
+[PR18] seed scales
+Scale slugs sync complete.
+
+   INFO  Seeding database.  
+
+Pr17SimpleScoreDemoSeeder: SIMPLE_SCORE_DEMO scale upserted.
+[PR18] wait for server
+[PR18] org1_id=1 org2_id=2 attempt_id=9830d8ab-1759-46f3-a0e4-d2f756c800bc cross_error=ATTEMPT_NOT_FOUND
+[PR18] verify OK ✅
