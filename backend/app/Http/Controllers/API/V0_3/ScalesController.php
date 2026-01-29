@@ -5,12 +5,16 @@ namespace App\Http\Controllers\API\V0_3;
 use App\Http\Controllers\Controller;
 use App\Services\Content\QuestionsService;
 use App\Services\Scale\ScaleRegistry;
+use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ScalesController extends Controller
 {
-    public function __construct(private ScaleRegistry $registry)
+    public function __construct(
+        private ScaleRegistry $registry,
+        private OrgContext $orgContext,
+    )
     {
     }
 
@@ -19,8 +23,8 @@ class ScalesController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $orgId = 0;
-        $items = $this->registry->listActivePublic($orgId);
+        $orgId = $this->orgContext->orgId();
+        $items = $this->registry->listVisible($orgId);
 
         return response()->json([
             'ok' => true,
@@ -33,7 +37,7 @@ class ScalesController extends Controller
      */
     public function show(Request $request, string $scale_code): JsonResponse
     {
-        $orgId = 0;
+        $orgId = $this->orgContext->orgId();
         $code = strtoupper(trim($scale_code));
         if ($code === '') {
             return response()->json([
@@ -63,7 +67,7 @@ class ScalesController extends Controller
      */
     public function questions(Request $request, string $scale_code, QuestionsService $questionsService): JsonResponse
     {
-        $orgId = 0;
+        $orgId = $this->orgContext->orgId();
         $code = strtoupper(trim($scale_code));
         if ($code === '') {
             return response()->json([

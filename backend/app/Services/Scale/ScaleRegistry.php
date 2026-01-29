@@ -11,6 +11,35 @@ class ScaleRegistry
 {
     public const CACHE_TTL_SECONDS = 300;
 
+    public function listVisible(int $orgId = 0): array
+    {
+        if ($orgId <= 0) {
+            return $this->listActivePublic(0);
+        }
+
+        $cacheKey = CacheKeys::scaleRegistryActive($orgId);
+        $cached = Cache::get($cacheKey);
+        if (is_array($cached)) {
+            return $cached;
+        }
+
+        $rows = ScaleRegistryModel::query()
+            ->where('is_active', true)
+            ->where(function ($q) use ($orgId) {
+                $q->where('org_id', $orgId)
+                    ->orWhere(function ($q) {
+                        $q->where('org_id', 0)->where('is_public', true);
+                    });
+            })
+            ->orderBy('code')
+            ->get()
+            ->toArray();
+
+        Cache::put($cacheKey, $rows, self::CACHE_TTL_SECONDS);
+
+        return $rows;
+    }
+
     public function listActivePublic(int $orgId = 0): array
     {
         $cacheKey = CacheKeys::scaleRegistryActive($orgId);
@@ -45,10 +74,26 @@ class ScaleRegistry
             return $cached;
         }
 
-        $row = ScaleRegistryModel::query()
-            ->where('org_id', $orgId)
-            ->where('code', $code)
-            ->first();
+        $row = null;
+        if ($orgId <= 0) {
+            $row = ScaleRegistryModel::query()
+                ->where('org_id', 0)
+                ->where('code', $code)
+                ->where('is_public', true)
+                ->first();
+        } else {
+            $row = ScaleRegistryModel::query()
+                ->where('org_id', $orgId)
+                ->where('code', $code)
+                ->first();
+            if (!$row) {
+                $row = ScaleRegistryModel::query()
+                    ->where('org_id', 0)
+                    ->where('code', $code)
+                    ->where('is_public', true)
+                    ->first();
+            }
+        }
 
         if (!$row) {
             return null;
@@ -76,18 +121,35 @@ class ScaleRegistry
             return $cached;
         }
 
-        $slugRow = ScaleSlug::query()
-            ->where('org_id', $orgId)
-            ->where('slug', $slug)
-            ->first();
+        $slugRow = null;
+        if ($orgId <= 0) {
+            $slugRow = ScaleSlug::query()
+                ->where('org_id', 0)
+                ->where('slug', $slug)
+                ->first();
+        } else {
+            $slugRow = ScaleSlug::query()
+                ->where('org_id', $orgId)
+                ->where('slug', $slug)
+                ->first();
+            if (!$slugRow) {
+                $slugRow = ScaleSlug::query()
+                    ->where('org_id', 0)
+                    ->where('slug', $slug)
+                    ->first();
+            }
+        }
 
         if (!$slugRow) {
             return null;
         }
 
         $registry = ScaleRegistryModel::query()
-            ->where('org_id', $orgId)
+            ->where('org_id', (int) ($slugRow->org_id ?? $orgId))
             ->where('code', $slugRow->scale_code)
+            ->when((int) ($slugRow->org_id ?? $orgId) === 0, function ($q) {
+                $q->where('is_public', true);
+            })
             ->first();
 
         if (!$registry) {

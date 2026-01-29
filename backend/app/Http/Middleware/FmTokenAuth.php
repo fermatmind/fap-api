@@ -94,6 +94,11 @@ class FmTokenAuth
             $request->attributes->set('fm_anon_id', $anonId);
         }
 
+        $orgId = $this->resolveOrgId($row);
+        if ($orgId !== null) {
+            $request->attributes->set('fm_org_id', $orgId);
+        }
+
         $this->logAuthResult($request, true);
 
         return $next($request);
@@ -143,6 +148,32 @@ class FmTokenAuth
         }
 
         return $fromToken;
+    }
+
+    private function resolveOrgId(object $row): ?int
+    {
+        if (property_exists($row, 'org_id')) {
+            $raw = trim((string) ($row->org_id ?? ''));
+            if ($raw !== '' && preg_match('/^\d+$/', $raw)) {
+                return (int) $raw;
+            }
+        }
+
+        if (property_exists($row, 'meta_json')) {
+            $meta = $row->meta_json ?? null;
+            if (is_string($meta)) {
+                $decoded = json_decode($meta, true);
+                $meta = is_array($decoded) ? $decoded : null;
+            }
+            if (is_array($meta)) {
+                $raw = trim((string) ($meta['org_id'] ?? ''));
+                if ($raw !== '' && preg_match('/^\d+$/', $raw)) {
+                    return (int) $raw;
+                }
+            }
+        }
+
+        return null;
     }
 
     private function unauthorizedResponse(Request $request, string $reason): Response

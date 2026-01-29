@@ -26,6 +26,8 @@ use App\Http\Controllers\API\V0_2\Admin\AdminAgentController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
 use App\Http\Controllers\API\V0_3\AttemptsController;
+use App\Http\Controllers\API\V0_3\OrgsController;
+use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\Integrations\ProvidersController;
@@ -212,15 +214,25 @@ Route::prefix("v0.2")->group(function () {
 });
 
 Route::prefix("v0.3")->group(function () {
-    // 1) Scale registry
-    Route::get("/scales", [ScalesController::class, "index"]);
-    Route::get("/scales/lookup", [ScalesLookupController::class, "lookup"]);
-    Route::get("/scales/{scale_code}/questions", [ScalesController::class, "questions"]);
-    Route::get("/scales/{scale_code}", [ScalesController::class, "show"]);
+    Route::middleware(\App\Http\Middleware\ResolveOrgContext::class)->group(function () {
+        // 1) Scale registry
+        Route::get("/scales", [ScalesController::class, "index"]);
+        Route::get("/scales/lookup", [ScalesLookupController::class, "lookup"]);
+        Route::get("/scales/{scale_code}/questions", [ScalesController::class, "questions"]);
+        Route::get("/scales/{scale_code}", [ScalesController::class, "show"]);
 
-    // 2) Attempts lifecycle
-    Route::post("/attempts/start", [AttemptsController::class, "start"]);
-    Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
-    Route::get("/attempts/{id}/result", [AttemptsController::class, "result"]);
-    Route::get("/attempts/{id}/report", [AttemptsController::class, "report"]);
+        // 2) Attempts lifecycle
+        Route::post("/attempts/start", [AttemptsController::class, "start"]);
+        Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
+        Route::get("/attempts/{id}/result", [AttemptsController::class, "result"]);
+        Route::get("/attempts/{id}/report", [AttemptsController::class, "report"]);
+    });
+
+    Route::middleware([\App\Http\Middleware\FmTokenAuth::class, \App\Http\Middleware\ResolveOrgContext::class])
+        ->group(function () {
+            Route::post("/orgs", [OrgsController::class, "store"]);
+            Route::get("/orgs/me", [OrgsController::class, "me"]);
+            Route::post("/orgs/{org_id}/invites", [OrgInvitesController::class, "store"]);
+            Route::post("/orgs/invites/accept", [OrgInvitesController::class, "accept"]);
+        });
 });

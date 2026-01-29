@@ -1529,14 +1529,24 @@ private function ensureReportJob(string $attemptId, bool $reset = false): Report
     $job = ReportJob::where('attempt_id', $attemptId)->first();
 
     if (!$job) {
+        $orgId = (int) (Attempt::where('id', $attemptId)->value('org_id') ?? 0);
         $job = ReportJob::create([
             'id' => (string) Str::uuid(),
+            'org_id' => $orgId,
             'attempt_id' => $attemptId,
             'status' => 'queued',
             'tries' => 0,
             'available_at' => now(),
         ]);
         return $job;
+    }
+
+    if (empty($job->org_id)) {
+        $orgId = (int) (Attempt::where('id', $attemptId)->value('org_id') ?? 0);
+        if ($orgId > 0) {
+            $job->org_id = $orgId;
+            $job->save();
+        }
     }
 
     if ($reset) {

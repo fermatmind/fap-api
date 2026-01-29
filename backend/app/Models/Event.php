@@ -16,6 +16,7 @@ class Event extends Model
         'id',
         'event_code',
         'event_name',
+        'org_id',
         'user_id',
         'anon_id',
         'session_id',
@@ -51,6 +52,7 @@ class Event extends Model
     protected $casts = [
         'meta_json'   => 'array',
         'occurred_at' => 'datetime',
+        'org_id'      => 'integer',
         'user_id'     => 'integer',
         'question_index' => 'integer',
         'duration_ms' => 'integer',

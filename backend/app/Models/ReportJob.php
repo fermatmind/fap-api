@@ -17,6 +17,7 @@ class ReportJob extends Model
 
     protected $fillable = [
         'id',
+        'org_id',
         'attempt_id',
         'status',
         'tries',
@@ -33,6 +34,7 @@ class ReportJob extends Model
     protected $casts = [
         'tries' => 'integer',
         'available_at' => 'datetime',
+        'org_id' => 'integer',
         'started_at' => 'datetime',
         'finished_at' => 'datetime',
         'failed_at' => 'datetime',
