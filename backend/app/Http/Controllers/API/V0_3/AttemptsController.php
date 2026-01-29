@@ -8,6 +8,7 @@ use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\AssessmentEngine;
 use App\Services\Assessment\GenericReportBuilder;
+use App\Services\Commerce\BenefitWalletService;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Report\ReportComposer;
 use App\Services\Scale\ScaleRegistry;
@@ -28,6 +29,7 @@ class AttemptsController extends Controller
         private ReportComposer $reportComposer,
         private EventRecorder $eventRecorder,
         private OrgContext $orgContext,
+        private BenefitWalletService $benefitWallets,
     ) {
     }
 
@@ -217,6 +219,7 @@ class AttemptsController extends Controller
             $dirVersion,
             $region,
             $locale,
+            $row,
             $request
         ) {
             $locked = Attempt::where('id', $attemptId)
@@ -359,6 +362,45 @@ class AttemptsController extends Controller
             } else {
                 $resultData['id'] = (string) Str::uuid();
                 $result = Result::create($resultData);
+            }
+
+            $commercial = $row['commercial_json'] ?? null;
+            if (is_string($commercial)) {
+                $decoded = json_decode($commercial, true);
+                $commercial = is_array($decoded) ? $decoded : null;
+            }
+
+            $creditBenefitCode = '';
+            if (is_array($commercial)) {
+                $creditBenefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
+            }
+
+            if ($orgId > 0 && $creditBenefitCode !== '') {
+                $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
+                if (!($consume['ok'] ?? false)) {
+                    $status = (int) ($consume['status'] ?? 402);
+                    $response = response()->json([
+                        'ok' => false,
+                        'error' => $consume['error'] ?? 'INSUFFICIENT_CREDITS',
+                        'message' => $consume['message'] ?? 'insufficient credits.',
+                    ], $status);
+                    return;
+                }
+
+                $this->eventRecorder->record('wallet_consumed', $this->resolveUserId($request), [
+                    'scale_code' => $scaleCode,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'attempt_id' => $attemptId,
+                    'benefit_code' => $creditBenefitCode,
+                    'sku' => null,
+                ], [
+                    'org_id' => $orgId,
+                    'anon_id' => $this->orgContext->anonId(),
+                    'attempt_id' => $attemptId,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                ]);
             }
 
             $response = $this->buildSubmitResponse($locked, $result, true);

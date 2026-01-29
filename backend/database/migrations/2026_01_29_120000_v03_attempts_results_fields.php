@@ -103,8 +103,9 @@ return new class extends Migration
                 }
             });
 
-            $indexName = 'results_org_attempt_unique';
-            if (!$this->indexExists('results', $indexName)) {
+            $indexName = 'results_org_id_attempt_id_unique';
+            $legacyIndexName = 'results_org_attempt_unique';
+            if (!$this->indexExists('results', $indexName) && !$this->indexExists('results', $legacyIndexName)) {
                 Schema::table('results', function (Blueprint $table) use ($indexName) {
                     $table->unique(['org_id', 'attempt_id'], $indexName);
                 });
@@ -153,10 +154,15 @@ return new class extends Migration
         }
 
         if (Schema::hasTable('results')) {
-            $indexName = 'results_org_attempt_unique';
+            $indexName = 'results_org_id_attempt_id_unique';
+            $legacyIndexName = 'results_org_attempt_unique';
             if ($this->indexExists('results', $indexName)) {
                 Schema::table('results', function (Blueprint $table) use ($indexName) {
                     $table->dropUnique($indexName);
+                });
+            } elseif ($this->indexExists('results', $legacyIndexName)) {
+                Schema::table('results', function (Blueprint $table) use ($legacyIndexName) {
+                    $table->dropUnique($legacyIndexName);
                 });
             }
 
@@ -185,22 +191,12 @@ return new class extends Migration
 
     private function indexExists(string $table, string $indexName): bool
     {
-        $driver = Schema::getConnection()->getDriverName();
+        $driver = DB::connection()->getDriverName();
 
         if ($driver === 'sqlite') {
             $rows = DB::select("PRAGMA index_list('{$table}')");
             foreach ($rows as $row) {
                 if ((string) ($row->name ?? '') === $indexName) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        if ($driver === 'mysql') {
-            $rows = DB::select("SHOW INDEX FROM `{$table}`");
-            foreach ($rows as $row) {
-                if ((string) ($row->Key_name ?? '') === $indexName) {
                     return true;
                 }
             }
@@ -217,6 +213,14 @@ return new class extends Migration
             return false;
         }
 
-        return false;
+        $db = DB::getDatabaseName();
+        $rows = DB::select(
+            "SELECT 1 FROM information_schema.statistics
+             WHERE table_schema = ? AND table_name = ? AND index_name = ?
+             LIMIT 1",
+            [$db, $table, $indexName]
+        );
+        return !empty($rows);
     }
+
 };

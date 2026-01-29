@@ -53,7 +53,13 @@ class FmTokenAuth
         if (!Schema::hasTable('fm_tokens')) {
             return $this->unauthorizedResponse($request, 'token_table_missing');
         }
-        $row = DB::table('fm_tokens')->where('token', $token)->first();
+        $columns = ['token'];
+        foreach (['user_id', 'fm_user_id', 'anon_id', 'org_id', 'meta_json', 'expires_at'] as $col) {
+            if (Schema::hasColumn('fm_tokens', $col)) {
+                $columns[] = $col;
+            }
+        }
+        $row = DB::table('fm_tokens')->select($columns)->where('token', $token)->first();
         if (!$row) {
             return $this->unauthorizedResponse($request, 'token_not_found');
         }
