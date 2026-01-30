@@ -11,15 +11,21 @@ return new class extends Migration
         if (!Schema::hasTable('benefit_grants')) {
             Schema::create('benefit_grants', function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                $table->string('user_id', 64)->index();
-                $table->string('benefit_type', 64);
-                $table->string('benefit_ref', 128);
+
+                // ✅ 允许匿名购买/解锁
+                $table->string('user_id', 64)->nullable()->index();
+
+                // ✅ 允许为空（避免 NOT NULL 约束把 webhook 打死）
+                $table->string('benefit_type', 64)->nullable();
+                $table->string('benefit_ref', 128)->nullable();
+
                 $table->uuid('source_order_id');
                 $table->uuid('source_event_id')->nullable();
                 $table->string('status', 32)->default('active')->index();
                 $table->timestamp('expires_at')->nullable();
                 $table->timestamps();
 
+                // 保留唯一约束（由业务层保证 benefit_ref 非空且稳定）
                 $table->unique(['source_order_id', 'benefit_type', 'benefit_ref'], 'uq_benefit_grants_source');
             });
             return;
