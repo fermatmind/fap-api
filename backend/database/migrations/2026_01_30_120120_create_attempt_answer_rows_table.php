@@ -15,7 +15,11 @@ return new class extends Migration
 
         if (!Schema::hasTable('attempt_answer_rows')) {
             Schema::create('attempt_answer_rows', function (Blueprint $table) use ($isSqlite) {
-                $table->bigIncrements('id');
+                // 说明：
+                // - 为满足 MySQL 分区硬规则：PRIMARY KEY 必须包含分区键 submitted_at
+                // - 因此采用复合主键：attempt_id + question_id + submitted_at
+                // - 不使用自增 id（否则 primary key 不含 submitted_at 会触发 1503）
+
                 $table->uuid('attempt_id');
                 $table->unsignedBigInteger('org_id')->default(0);
                 $table->string('scale_code', 32);
@@ -31,14 +35,18 @@ return new class extends Migration
 
                 $table->integer('duration_ms')->default(0);
 
-                // MySQL 分区不接受 TIMESTAMP 作为 RANGE COLUMNS 的分区键：统一使用 DATETIME
-                // 同时为分区/唯一键提供稳定默认值，避免 NULL 影响分区与索引约束
-                $table->dateTime('submitted_at')->default('1970-01-01 00:00:00');
+                // 关键：用 DATETIME（避免某些 MySQL 对 TIMESTAMP 做 RANGE COLUMNS 的限制/差异）
+                // 且作为分区键必须可用：这里设为 nullable，允许极端情况下先写入后补齐；
+                // 分区执行前会校验主键包含该列，且分区键存在。
+                $table->dateTime('submitted_at')->nullable();
+
+                // 兼容：这里保留 created_at（你不需要 updated_at）
                 $table->dateTime('created_at')->nullable();
 
-                // MySQL 分区表要求所有 UNIQUE KEY 必须包含分区键 submitted_at
-                $table->unique(['attempt_id', 'question_id', 'submitted_at'], 'attempt_answer_rows_attempt_question_unique');
+                // 复合主键：满足 MySQL 分区 1503 硬规则 + 也满足“所有唯一键包含分区键”的要求
+                $table->primary(['attempt_id', 'question_id', 'submitted_at'], 'attempt_answer_rows_pk');
 
+                // 索引（非唯一，允许分区）
                 $table->index(['org_id'], 'attempt_answer_rows_org_idx');
                 $table->index(['scale_code'], 'attempt_answer_rows_scale_idx');
                 $table->index(['attempt_id'], 'attempt_answer_rows_attempt_idx');
@@ -49,6 +57,7 @@ return new class extends Migration
             return;
         }
 
+        // 表已存在：补列/补索引（不强行改历史表主键，避免生产破坏）
         Schema::table('attempt_answer_rows', function (Blueprint $table) use ($isSqlite) {
             if (!Schema::hasColumn('attempt_answer_rows', 'attempt_id')) {
                 $table->uuid('attempt_id');
@@ -79,16 +88,14 @@ return new class extends Migration
                 $table->integer('duration_ms')->default(0);
             }
             if (!Schema::hasColumn('attempt_answer_rows', 'submitted_at')) {
-                $table->dateTime('submitted_at')->default('1970-01-01 00:00:00');
+                $table->dateTime('submitted_at')->nullable();
             }
             if (!Schema::hasColumn('attempt_answer_rows', 'created_at')) {
                 $table->dateTime('created_at')->nullable();
             }
         });
 
-        // MySQL 分区兼容：submitted_at 类型 + UNIQUE KEY(含分区键) 统一修正
-        $this->ensureMysqlPartitionCompatibility();
-
+        // 索引补齐（不强行补 PRIMARY KEY：避免对已存在表做危险变更）
         if (!$this->indexExists('attempt_answer_rows', 'attempt_answer_rows_org_idx')) {
             Schema::table('attempt_answer_rows', function (Blueprint $table) {
                 $table->index(['org_id'], 'attempt_answer_rows_org_idx');
@@ -118,36 +125,6 @@ return new class extends Migration
         Schema::dropIfExists('attempt_answer_rows');
     }
 
-    /**
-     * MySQL 分区表硬约束：
-     * 1) RANGE COLUMNS 分区键使用 DATETIME/DATE 等；TIMESTAMP 在部分版本/配置会报 1659
-     * 2) 所有 UNIQUE KEY 必须包含分区键列
-     */
-    private function ensureMysqlPartitionCompatibility(): void
-    {
-        $driver = Schema::getConnection()->getDriverName();
-        if ($driver !== 'mysql') {
-            return;
-        }
-        if (!Schema::hasTable('attempt_answer_rows')) {
-            return;
-        }
-
-        // 1) 强制 submitted_at 为 DATETIME（非 TIMESTAMP）并提供非空默认值
-        DB::statement("ALTER TABLE attempt_answer_rows MODIFY submitted_at DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00'");
-
-        // 2) 唯一键必须包含 submitted_at（分区键）
-        //    为了幂等重跑，先尝试删除旧索引（存在就删，不存在忽略）
-        try {
-            DB::statement("ALTER TABLE attempt_answer_rows DROP INDEX attempt_answer_rows_attempt_question_unique");
-        } catch (\Throwable $e) {
-            // ignore
-        }
-
-        // 重新创建符合分区约束的 UNIQUE KEY
-        DB::statement("ALTER TABLE attempt_answer_rows ADD UNIQUE KEY attempt_answer_rows_attempt_question_unique (attempt_id, question_id, submitted_at)");
-    }
-
     private function ensureMysqlPartitions(): void
     {
         $driver = Schema::getConnection()->getDriverName();
@@ -157,14 +134,19 @@ return new class extends Migration
         if (!Schema::hasTable('attempt_answer_rows')) {
             return;
         }
+
+        // 已经有分区则不重复做
         if ($this->hasAnyPartition('attempt_answer_rows')) {
             return;
         }
 
-        // 分区前确保分区兼容（类型 + UNIQUE）
-        $this->ensureMysqlPartitionCompatibility();
+        // MySQL 分区硬规则：PRIMARY KEY 必须包含分区键 submitted_at
+        // 这里做安全检查：不满足就直接跳过分区（避免 migrate 直接炸）
+        if (!$this->primaryKeyIncludesColumn('attempt_answer_rows', 'submitted_at')) {
+            return;
+        }
 
-        $base = Carbon::now()->startOfMonth(); // 00:00:00
+        $base = Carbon::now()->startOfMonth();
         $parts = [];
         for ($i = 0; $i < 12; $i++) {
             $next = (clone $base)->addMonth();
@@ -184,6 +166,28 @@ return new class extends Migration
         $rows = DB::select(
             'SELECT partition_name FROM information_schema.partitions WHERE table_schema = ? AND table_name = ? AND partition_name IS NOT NULL LIMIT 1',
             [$db, $table]
+        );
+
+        return !empty($rows);
+    }
+
+    private function primaryKeyIncludesColumn(string $table, string $column): bool
+    {
+        $driver = DB::connection()->getDriverName();
+        if ($driver !== 'mysql') {
+            return true;
+        }
+
+        $db = DB::getDatabaseName();
+        $rows = DB::select(
+            'SELECT 1
+               FROM information_schema.key_column_usage
+              WHERE table_schema = ?
+                AND table_name = ?
+                AND constraint_name = "PRIMARY"
+                AND column_name = ?
+              LIMIT 1',
+            [$db, $table, $column]
         );
 
         return !empty($rows);
