@@ -1,0 +1,20 @@
+PR23 acceptance summary
+- status: ok
+- serve_port: 1823
+- db: sqlite
+- smoke_url: http://127.0.0.1:1823/api/v0.3/boot
+- scripts:
+  - backend/scripts/pr23_verify.sh
+- tables:
+  - feature_flags
+  - experiment_assignments
+  - events.experiments_json
+- artifacts:
+  - backend/artifacts/pr23/curl_boot_a.json
+  - backend/artifacts/pr23/curl_boot_b.json
+  - backend/artifacts/pr23/curl_boot_a_repeat.json
+  - backend/artifacts/pr23/curl_event.json
+  - backend/artifacts/pr23/db_assertions.json
+  - backend/artifacts/pr23/experiments_agg.json
+  - backend/artifacts/pr23/server.log
+  - backend/artifacts/pr23/verify.log

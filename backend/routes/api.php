@@ -27,6 +27,7 @@ use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
 use App\Http\Controllers\API\V0_3\AttemptsController;
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
+use App\Http\Controllers\API\V0_3\BootController as BootV0_3Controller;
 use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\ScalesController;
@@ -217,6 +218,11 @@ Route::prefix("v0.2")->group(function () {
 
 Route::prefix("v0.3")->group(function () {
     Route::middleware(\App\Http\Middleware\ResolveOrgContext::class)->group(function () {
+        // 0) Boot (flags + experiments)
+        Route::get("/boot", [BootV0_3Controller::class, "show"]);
+        Route::get("/flags", [BootV0_3Controller::class, "flags"]);
+        Route::get("/experiments", [BootV0_3Controller::class, "experiments"]);
+
         // 1) Scale registry
         Route::get("/scales", [ScalesController::class, "index"]);
         Route::get("/scales/lookup", [ScalesLookupController::class, "lookup"]);
