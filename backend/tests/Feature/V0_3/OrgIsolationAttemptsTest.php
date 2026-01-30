@@ -121,7 +121,7 @@ class OrgIsolationAttemptsTest extends TestCase
             'primary_slug' => 'private-scale',
             'slugs_json' => ['private-scale'],
             'driver_type' => 'simple_score',
-            'default_pack_id' => 'default',
+            'default_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
             'default_region' => 'CN_MAINLAND',
             'default_locale' => 'zh-CN',
             'default_dir_version' => 'MBTI-CN-v0.2.1-TEST',

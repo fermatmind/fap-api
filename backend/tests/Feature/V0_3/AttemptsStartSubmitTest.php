@@ -114,7 +114,7 @@ class AttemptsStartSubmitTest extends TestCase
             'answers_summary_json' => ['stage' => 'seed'],
             'started_at' => now(),
             'submitted_at' => now(),
-            'pack_id' => 'default',
+            'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => 'MBTI-CN-v0.2.1-TEST',
             'content_package_version' => 'v0.2.1-TEST',
         ]);
@@ -170,7 +170,7 @@ class AttemptsStartSubmitTest extends TestCase
                     ],
                 ],
             ],
-            'pack_id' => 'default',
+            'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => 'MBTI-CN-v0.2.1-TEST',
             'scoring_spec_version' => '2026.01',
             'report_engine_version' => 'v1.2',
