@@ -19,16 +19,62 @@ LOG_FILE="$ART_DIR/verify.log"
 : > "$LOG_FILE"
 
 PYTHON_BIN="python"
-if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
-  PYTHON_BIN="python3"
-fi
-if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
-  echo "python not found" >> "$LOG_FILE"
-  exit 1
-fi
+command -v "$PYTHON_BIN" >/dev/null 2>&1 || PYTHON_BIN="python3"
+command -v "$PYTHON_BIN" >/dev/null 2>&1 || { echo "python not found" >> "$LOG_FILE"; exit 1; }
 
 log() {
   echo "[$(date +'%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
+}
+
+# ---- 新增：通用 JSON 校验（避免 JSONDecodeError 直接爆栈）----
+assert_json_file() {
+  local path="$1"
+  local label="$2"
+  local raw
+  if [[ ! -f "$path" ]]; then
+    log "${label}: missing file: $path"
+    exit 1
+  fi
+  if [[ ! -s "$path" ]]; then
+    log "${label}: empty body: $path"
+    [[ -f "$ART_DIR/server.log" ]] && { log "server.log tail:"; tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE"; }
+    exit 1
+  fi
+  raw="$(LC_ALL=C sed -n '1,5p' "$path" | tr -d '\r' || true)"
+  # 允许 BOM/空白，后续 python 会做严格解析；这里做快速提示
+  if ! printf '%s' "$raw" | grep -Eq '^[[:space:]]*[{[]'; then
+    log "${label}: body not json (head): $(head -c 160 "$path" | tr '\n' ' ' | tr '\r' ' ')"
+    [[ -f "$ART_DIR/server.log" ]] && { log "server.log tail:"; tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE"; }
+    exit 1
+  fi
+}
+
+# ---- 新增：curl JSON helper（写 body + 拿 http_code）----
+curl_json() {
+  local method="$1"
+  local url="$2"
+  local out="$3"
+  local data="${4:-}"
+  local header_token="${5:-}" # 传 "X-Resume-Token: xxx" 或空
+
+  local code
+  if [[ -n "$header_token" ]]; then
+    code="$(curl -sS -X "$method" \
+      -H "Content-Type: application/json" \
+      -H "Accept: application/json" \
+      -H "$header_token" \
+      ${data:+--data "$data"} \
+      -o "$out" -w "%{http_code}" \
+      "$url" || true)"
+  else
+    code="$(curl -sS -X "$method" \
+      -H "Content-Type: application/json" \
+      -H "Accept: application/json" \
+      ${data:+--data "$data"} \
+      -o "$out" -w "%{http_code}" \
+      "$url" || true)"
+  fi
+  printf '%s' "$code"
 }
 
 ensure_demo_scale() {
@@ -93,23 +139,36 @@ foreach ($headers as $k => $v) {
     $server[$key] = $v;
 }
 
-$request = Illuminate\Http\Request::create($uri, $method, [], [], [], $server, $content);
-$request->headers->set('Content-Type', 'application/json');
-$request->headers->set('Accept', 'application/json');
-foreach ($headers as $k => $v) {
-    $request->headers->set($k, $v);
-}
+try {
+    $request = Illuminate\Http\Request::create($uri, $method, [], [], [], $server, $content);
+    $request->headers->set('Content-Type', 'application/json');
+    $request->headers->set('Accept', 'application/json');
+    foreach ($headers as $k => $v) {
+        $request->headers->set($k, $v);
+    }
 
-$response = $kernel->handle($request);
-echo $response->getContent();
-$kernel->terminate($request, $response);
+    $response = $kernel->handle($request);
+    $body = (string) $response->getContent();
+    if ($body === '') {
+        // 保底输出 JSON，避免脚本端 json.load 直接炸
+        $body = json_encode(['ok'=>false,'error'=>'empty_response','status'=>$response->getStatusCode()]);
+    }
+    echo $body;
+    $kernel->terminate($request, $response);
+} catch (\Throwable $e) {
+    echo json_encode(['ok'=>false,'error'=>'exception','message'=>$e->getMessage()]);
+    exit(1);
+}
 PHP
 fi
 
 cleanup() {
+  # 先按 PID 尝试
   if [[ -n "${SERVER_PID:-}" ]]; then
     kill "$SERVER_PID" >/dev/null 2>&1 || true
   fi
+  # 再按端口兜底杀（解决 artisan serve 子进程残留）
+  lsof -ti tcp:"$SERVE_PORT" | xargs -r kill -9 || true
 }
 trap cleanup EXIT
 
@@ -118,20 +177,19 @@ if [[ "$USE_EMBEDDED" == "0" ]]; then
   (
     cd "$BACKEND_DIR"
     php artisan serve --host=127.0.0.1 --port="$SERVE_PORT"
-  ) >> "$LOG_FILE" 2>&1 &
+  ) > "$ART_DIR/server.log" 2>&1 &
   SERVER_PID=$!
 
   log "Waiting for health"
   health_code=""
-  for i in $(seq 1 30); do
+  for _i in $(seq 1 30); do
     health_code=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:${SERVE_PORT}/api/v0.2/health" || true)
-    if [[ "$health_code" == "200" ]]; then
-      break
-    fi
+    [[ "$health_code" == "200" ]] && break
     sleep 0.5
   done
   if [[ "$health_code" != "200" ]]; then
     log "Health check failed: ${health_code}"
+    tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true
     exit 1
   fi
 fi
@@ -146,27 +204,35 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
   printf '%s' "$embedded_headers" > "$headers_file"
-  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/start" "$payload_file" "$headers_file" > "$ART_DIR/curl_start.json"
+  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/start" "$payload_file" "$headers_file" > "$ART_DIR/curl_start.json" 2>>"$LOG_FILE" || true
   rm -f "$payload_file" "$headers_file"
+  assert_json_file "$ART_DIR/curl_start.json" "start"
 else
-  curl -sS -X POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/start" \
-    -H "Content-Type: application/json" \
-    -d '{"scale_code":"DEMO_ANSWERS"}' \
-    > "$ART_DIR/curl_start.json"
+  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/start" "$ART_DIR/curl_start.json" '{"scale_code":"DEMO_ANSWERS"}')"
+  [[ "$code" == "200" ]] || { log "start http_code=${code}"; cat "$ART_DIR/curl_start.json" | tee -a "$LOG_FILE"; tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true; exit 1; }
+  assert_json_file "$ART_DIR/curl_start.json" "start"
 fi
 
 read -r ATTEMPT_ID RESUME_TOKEN < <(CURL_START_PATH="$ART_DIR/curl_start.json" "$PYTHON_BIN" - <<'PY'
-import json
-import os
-path = os.environ.get('CURL_START_PATH', '')
-with open(path,'r',encoding='utf-8') as f:
-    data=json.load(f)
+import json, os, sys
+path=os.environ.get('CURL_START_PATH','')
+raw=open(path,'r',encoding='utf-8',errors='replace').read()
+raws=raw.strip()
+if not raws:
+    print('', '')
+    sys.exit(0)
+try:
+    data=json.loads(raw)
+except Exception:
+    print('', '')
+    sys.exit(0)
 print(data.get('attempt_id',''), data.get('resume_token',''))
 PY
 )
 
 if [[ -z "$ATTEMPT_ID" || -z "$RESUME_TOKEN" ]]; then
   log "Failed to parse attempt_id/resume_token"
+  cat "$ART_DIR/curl_start.json" | tee -a "$LOG_FILE"
   exit 1
 fi
 
@@ -178,11 +244,12 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
   printf '%s' "$embedded_headers" > "$headers_file"
-  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php PUT "/api/v0.3/attempts/${ATTEMPT_ID}/progress" "$payload_file" "$headers_file" >> "$LOG_FILE" 2>&1
+  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php PUT "/api/v0.3/attempts/${ATTEMPT_ID}/progress" "$payload_file" "$headers_file" >> "$LOG_FILE" 2>&1 || true
   rm -f "$payload_file" "$headers_file"
 else
   curl -sS -X PUT "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/progress" \
     -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
     -H "X-Resume-Token: ${RESUME_TOKEN}" \
     -d '{
       "seq":1,
@@ -202,11 +269,12 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
   printf '%s' "$embedded_headers" > "$headers_file"
-  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php PUT "/api/v0.3/attempts/${ATTEMPT_ID}/progress" "$payload_file" "$headers_file" >> "$LOG_FILE" 2>&1
+  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php PUT "/api/v0.3/attempts/${ATTEMPT_ID}/progress" "$payload_file" "$headers_file" >> "$LOG_FILE" 2>&1 || true
   rm -f "$payload_file" "$headers_file"
 else
   curl -sS -X PUT "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/progress" \
     -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
     -H "X-Resume-Token: ${RESUME_TOKEN}" \
     -d '{
       "seq":2,
@@ -227,25 +295,36 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
   printf '%s' "$embedded_headers" > "$headers_file"
-  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php GET "/api/v0.3/attempts/${ATTEMPT_ID}/progress" "$payload_file" "$headers_file" > "$ART_DIR/curl_progress_get.json"
+  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php GET "/api/v0.3/attempts/${ATTEMPT_ID}/progress" "$payload_file" "$headers_file" > "$ART_DIR/curl_progress_get.json" 2>>"$LOG_FILE" || true
   rm -f "$payload_file" "$headers_file"
+  assert_json_file "$ART_DIR/curl_progress_get.json" "progress_get"
 else
-  curl -sS "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/progress" \
-    -H "X-Resume-Token: ${RESUME_TOKEN}" \
-    > "$ART_DIR/curl_progress_get.json"
+  code="$(curl -sS -o "$ART_DIR/curl_progress_get.json" -w "%{http_code}" \
+    "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/progress" \
+    -H "Accept: application/json" \
+    -H "X-Resume-Token: ${RESUME_TOKEN}" || true)"
+  [[ "$code" == "200" ]] || { log "progress_get http_code=${code}"; cat "$ART_DIR/curl_progress_get.json" | tee -a "$LOG_FILE"; tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true; exit 1; }
+  assert_json_file "$ART_DIR/curl_progress_get.json" "progress_get"
 fi
 
 CURL_PROGRESS_PATH="$ART_DIR/curl_progress_get.json" "$PYTHON_BIN" - <<'PY'
-import json, sys
-import os
-path = os.environ.get('CURL_PROGRESS_PATH', '')
-with open(path,'r',encoding='utf-8') as f:
-    data=json.load(f)
+import json, sys, os
+path=os.environ.get('CURL_PROGRESS_PATH','')
+raw=open(path,'r',encoding='utf-8',errors='replace').read()
+try:
+    data=json.loads(raw)
+except Exception as e:
+    print('progress json parse failed', str(e))
+    print('head:', raw[:200])
+    sys.exit(1)
 if data.get('answered_count') != 2 or data.get('cursor') != 'page-2':
     print('progress assertion failed', data)
     sys.exit(1)
 PY
 
+# =========================
+# 关键修改点 1：POST submit —— 记录 http_code + 校验 JSON + 打印日志
+# =========================
 log "POST submit"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload='{"attempt_id":"'"${ATTEMPT_ID}"'","duration_ms":3600,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"4","answer":{"value":4}},{"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},{"question_id":"DEMO-TEXT-1","question_type":"open_text","question_index":2,"code":"TEXT","answer":{"text":"demo"}}]}'
@@ -254,12 +333,11 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
   printf '%s' "$embedded_headers" > "$headers_file"
-  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/submit" "$payload_file" "$headers_file" > "$ART_DIR/curl_submit.json"
+  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/submit" "$payload_file" "$headers_file" > "$ART_DIR/curl_submit.json" 2>>"$LOG_FILE" || true
   rm -f "$payload_file" "$headers_file"
+  assert_json_file "$ART_DIR/curl_submit.json" "submit"
 else
-  curl -sS -X POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/submit" \
-    -H "Content-Type: application/json" \
-    -d '{
+  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/submit" "$ART_DIR/curl_submit.json" '{
       "attempt_id":"'"${ATTEMPT_ID}"'",
       "duration_ms":3600,
       "answers":[
@@ -267,21 +345,35 @@ else
         {"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},
         {"question_id":"DEMO-TEXT-1","question_type":"open_text","question_index":2,"code":"TEXT","answer":{"text":"demo"}}
       ]
-    }' \
-    > "$ART_DIR/curl_submit.json"
+    }')"
+  echo "$code" > "$ART_DIR/submit.http_code"
+  [[ "$code" == "200" ]] || {
+    log "submit http_code=${code}"
+    cat "$ART_DIR/curl_submit.json" | tee -a "$LOG_FILE"
+    tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true
+    exit 1
+  }
+  assert_json_file "$ART_DIR/curl_submit.json" "submit"
 fi
 
 CURL_SUBMIT_PATH="$ART_DIR/curl_submit.json" "$PYTHON_BIN" - <<'PY'
-import json, sys
-import os
-path = os.environ.get('CURL_SUBMIT_PATH', '')
-with open(path,'r',encoding='utf-8') as f:
-    data=json.load(f)
+import json, sys, os
+path=os.environ.get('CURL_SUBMIT_PATH','')
+raw=open(path,'r',encoding='utf-8',errors='replace').read()
+try:
+    data=json.loads(raw)
+except Exception as e:
+    print('submit json parse failed', str(e))
+    print('head:', raw[:200])
+    sys.exit(1)
 if not data.get('ok'):
     print('submit failed', data)
     sys.exit(1)
 PY
 
+# =========================
+# 关键修改点 2：POST submit (idempotent) —— 同样加 http_code/JSON 校验
+# =========================
 log "POST submit (idempotent)"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload='{"attempt_id":"'"${ATTEMPT_ID}"'","duration_ms":3600,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"4","answer":{"value":4}},{"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},{"question_id":"DEMO-TEXT-1","question_type":"open_text","question_index":2,"code":"TEXT","answer":{"text":"demo"}}]}'
@@ -290,12 +382,11 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
   printf '%s' "$embedded_headers" > "$headers_file"
-  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/submit" "$payload_file" "$headers_file" > "$ART_DIR/curl_submit_dup.json"
+  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/submit" "$payload_file" "$headers_file" > "$ART_DIR/curl_submit_dup.json" 2>>"$LOG_FILE" || true
   rm -f "$payload_file" "$headers_file"
+  assert_json_file "$ART_DIR/curl_submit_dup.json" "submit_dup"
 else
-  curl -sS -X POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/submit" \
-    -H "Content-Type: application/json" \
-    -d '{
+  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/submit" "$ART_DIR/curl_submit_dup.json" '{
       "attempt_id":"'"${ATTEMPT_ID}"'",
       "duration_ms":3600,
       "answers":[
@@ -303,16 +394,27 @@ else
         {"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},
         {"question_id":"DEMO-TEXT-1","question_type":"open_text","question_index":2,"code":"TEXT","answer":{"text":"demo"}}
       ]
-    }' \
-    > "$ART_DIR/curl_submit_dup.json"
+    }')"
+  echo "$code" > "$ART_DIR/submit_dup.http_code"
+  [[ "$code" == "200" ]] || {
+    log "submit_dup http_code=${code}"
+    cat "$ART_DIR/curl_submit_dup.json" | tee -a "$LOG_FILE"
+    tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true
+    exit 1
+  }
+  assert_json_file "$ART_DIR/curl_submit_dup.json" "submit_dup"
 fi
 
 CURL_SUBMIT_DUP_PATH="$ART_DIR/curl_submit_dup.json" "$PYTHON_BIN" - <<'PY'
-import json, sys
-import os
-path = os.environ.get('CURL_SUBMIT_DUP_PATH', '')
-with open(path,'r',encoding='utf-8') as f:
-    data=json.load(f)
+import json, sys, os
+path=os.environ.get('CURL_SUBMIT_DUP_PATH','')
+raw=open(path,'r',encoding='utf-8',errors='replace').read()
+try:
+    data=json.loads(raw)
+except Exception as e:
+    print('idempotent submit json parse failed', str(e))
+    print('head:', raw[:200])
+    sys.exit(1)
 if not data.get('ok') or data.get('idempotent') is not True:
     print('idempotent submit failed', data)
     sys.exit(1)
@@ -355,11 +457,15 @@ PHP
 REPO_DIR="$ROOT_DIR" ATTEMPT_ID="$ATTEMPT_ID" EXPECTED_ROWS=3 php /tmp/pr21_db_assert.php > "$ART_DIR/db_assertions.json"
 
 DB_ASSERT_PATH="$ART_DIR/db_assertions.json" "$PYTHON_BIN" - <<'PY'
-import json, sys
-import os
-path = os.environ.get('DB_ASSERT_PATH', '')
-with open(path,'r',encoding='utf-8') as f:
-    data=json.load(f)
+import json, sys, os
+path=os.environ.get('DB_ASSERT_PATH','')
+raw=open(path,'r',encoding='utf-8',errors='replace').read()
+try:
+    data=json.loads(raw)
+except Exception as e:
+    print('db_assertions json parse failed', str(e))
+    print('head:', raw[:200])
+    sys.exit(1)
 if data.get('answer_sets') != 1 or data.get('answer_rows') != 3 or data.get('archive_audits',0) < 1:
     print('db assertion failed', data)
     sys.exit(1)

@@ -53,7 +53,7 @@ class AnswerRowWriter
 
         DB::table('attempt_answer_rows')->upsert(
             $rows,
-            ['attempt_id', 'question_id'],
+            ['attempt_id', 'question_id', 'submitted_at'],
             ['org_id', 'scale_code', 'question_index', 'question_type', 'answer_json', 'duration_ms', 'submitted_at']
         );
 
