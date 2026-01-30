@@ -25,7 +25,7 @@ class ScaleRegistrySeeder extends Seeder
                 'mbti-personality-test',
             ],
             'driver_type' => 'mbti',
-            'default_pack_id' => 'default',
+            'default_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
             'default_region' => 'CN_MAINLAND',
             'default_locale' => 'zh-CN',
             'default_dir_version' => 'MBTI-CN-v0.2.1-TEST',
@@ -34,7 +34,10 @@ class ScaleRegistrySeeder extends Seeder
                 'content_graph' => true,
             ],
             'view_policy_json' => [
-                'report' => 'public',
+                'free_sections' => ['intro', 'score'],
+                'blur_others' => true,
+                'teaser_percent' => 0.3,
+                'upgrade_sku' => 'MBTI_REPORT_FULL',
             ],
             'commercial_json' => [
                 'price_tier' => 'FREE',

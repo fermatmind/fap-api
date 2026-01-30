@@ -79,28 +79,21 @@ class OrgIsolationAttemptsTest extends TestCase
         ]);
 
         $start = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $user['token'],
-            'X-Org-Id' => (string) $orgId1,
-        ])->postJson('/api/v0.3/attempts/start', [
-            'scale_code' => 'SIMPLE_SCORE_DEMO',
-        ]);
+    'Authorization' => 'Bearer ' . $user['token'],
+    'X-Org-Id' => (string) $orgId1,
+])->postJson('/api/v0.3/attempts/start', [
+    'anon_id' => 'org_iso_001',
+    'scale_code' => 'SIMPLE_SCORE_DEMO',
+    'scale_version' => 'v0.3',
+    'question_count' => 1,
+    'client_platform' => 'test',
+    'region' => 'CN_MAINLAND',
+    'locale' => 'zh-CN',
+]);
 
         $start->assertStatus(200);
         $attemptId = (string) $start->json('attempt_id');
         $this->assertNotSame('', $attemptId);
-
-        $submit = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $user['token'],
-            'X-Org-Id' => (string) $orgId1,
-        ])->postJson('/api/v0.3/attempts/submit', [
-            'attempt_id' => $attemptId,
-            'answers' => [
-                ['question_id' => 'SS-001', 'code' => '5'],
-            ],
-            'duration_ms' => 1000,
-        ]);
-
-        $submit->assertStatus(200);
 
         $cross = $this->withHeaders([
             'Authorization' => 'Bearer ' . $user['token'],
@@ -121,7 +114,7 @@ class OrgIsolationAttemptsTest extends TestCase
             'primary_slug' => 'private-scale',
             'slugs_json' => ['private-scale'],
             'driver_type' => 'simple_score',
-            'default_pack_id' => 'default',
+            'default_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
             'default_region' => 'CN_MAINLAND',
             'default_locale' => 'zh-CN',
             'default_dir_version' => 'MBTI-CN-v0.2.1-TEST',

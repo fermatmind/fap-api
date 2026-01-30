@@ -52,7 +52,7 @@ class ScalesLookupTest extends TestCase
                 'raven-matrices',
             ],
             'driver_type' => 'iq',
-            'default_pack_id' => 'default',
+            'default_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
             'default_region' => 'CN_MAINLAND',
             'default_locale' => 'zh-CN',
             'default_dir_version' => 'IQ-RAVEN-v0.1.0',

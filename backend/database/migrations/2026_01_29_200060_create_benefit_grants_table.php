@@ -14,6 +14,7 @@ return new class extends Migration
                 $table->uuid('id')->primary();
                 $table->unsignedBigInteger('org_id')->default(0);
                 $table->string('user_id', 64)->nullable();
+
                 $table->string('benefit_code', 64);
                 $table->string('scope', 32)->default('attempt');
                 $table->string('attempt_id', 64)->nullable();
@@ -47,6 +48,34 @@ return new class extends Migration
                 $table->string('attempt_id', 64)->nullable();
             }
         });
+
+        // ✅ 修复历史 NOT NULL（MySQL/PG）
+        if (Schema::hasTable('benefit_grants')) {
+            $driver = DB::connection()->getDriverName();
+
+            if ($driver === 'mysql') {
+                if (Schema::hasColumn('benefit_grants', 'user_id')) {
+                    DB::statement('ALTER TABLE benefit_grants MODIFY user_id varchar(64) NULL');
+                }
+                if (Schema::hasColumn('benefit_grants', 'benefit_ref')) {
+                    DB::statement('ALTER TABLE benefit_grants MODIFY benefit_ref varchar(128) NULL');
+                }
+                if (Schema::hasColumn('benefit_grants', 'benefit_type')) {
+                    DB::statement('ALTER TABLE benefit_grants MODIFY benefit_type varchar(64) NULL');
+                }
+            } elseif ($driver === 'pgsql') {
+                if (Schema::hasColumn('benefit_grants', 'user_id')) {
+                    DB::statement('ALTER TABLE benefit_grants ALTER COLUMN user_id DROP NOT NULL');
+                }
+                if (Schema::hasColumn('benefit_grants', 'benefit_ref')) {
+                    DB::statement('ALTER TABLE benefit_grants ALTER COLUMN benefit_ref DROP NOT NULL');
+                }
+                if (Schema::hasColumn('benefit_grants', 'benefit_type')) {
+                    DB::statement('ALTER TABLE benefit_grants ALTER COLUMN benefit_type DROP NOT NULL');
+                }
+            }
+            // sqlite 不做列改造：CI/新库由 2026_01_22_* 的创建分支直接生成 nullable
+        }
 
         if (Schema::hasTable('benefit_grants') && Schema::hasColumn('benefit_grants', 'org_id')) {
             DB::table('benefit_grants')->whereNull('org_id')->update(['org_id' => 0]);

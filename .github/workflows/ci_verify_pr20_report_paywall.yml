@@ -1,0 +1,84 @@
+name: ci-verify-pr20-report-paywall
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - ".github/workflows/ci_verify_pr20_report_paywall.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - ".github/workflows/ci_verify_pr20_report_paywall.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: fap_ci
+          MYSQL_USER: fap
+          MYSQL_PASSWORD: fap
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: fap_ci
+      DB_USERNAME: fap
+      DB_PASSWORD: fap
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: mbstring, xml, curl, zip, intl, sqlite, pdo_sqlite, mysql, pdo_mysql
+
+      - name: Wait for mysql
+        run: |
+          for i in $(seq 1 60); do
+            (echo > /dev/tcp/127.0.0.1/3306) >/dev/null 2>&1 && exit 0
+            sleep 1
+          done
+          exit 1
+
+      - name: Install backend deps
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Migrate
+        working-directory: backend
+        run: php artisan migrate --force -vvv
+
+      - name: Seed scales
+        working-directory: backend
+        run: |
+          php artisan fap:scales:seed-default
+          php artisan fap:scales:sync-slugs
+
+      - name: V0.3 tests
+        working-directory: backend
+        run: php artisan test --filter=V0_3
+
+      - name: PR20 verify script
+        working-directory: backend
+        run: bash scripts/pr20_verify_report_paywall.sh

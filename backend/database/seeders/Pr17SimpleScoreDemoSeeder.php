@@ -31,6 +31,17 @@ class Pr17SimpleScoreDemoSeeder extends Seeder
             'capabilities_json' => [
                 'assets' => false,
             ],
+            'view_policy_json' => [
+                'free_sections' => ['intro', 'score'],
+                'blur_others' => true,
+                'teaser_percent' => 0.3,
+                'upgrade_sku' => 'MBTI_REPORT_FULL',
+            ],
+            'commercial_json' => [
+                'report_benefit_code' => 'MBTI_REPORT_FULL',
+                'credit_benefit_code' => 'MBTI_CREDIT',
+                'report_unlock_sku' => 'MBTI_REPORT_FULL',
+            ],
             'is_public' => true,
             'is_active' => true,
         ]);
