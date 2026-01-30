@@ -20,10 +20,12 @@ class AnswerRowWriter
 
         $rows = [];
         $now = now();
+
         foreach ($answers as $answer) {
             if (!is_array($answer)) {
                 continue;
             }
+
             $qid = trim((string) ($answer['question_id'] ?? ''));
             if ($qid === '') {
                 continue;
@@ -51,9 +53,19 @@ class AnswerRowWriter
             return ['ok' => true, 'rows' => 0];
         }
 
+        $driver = DB::connection()->getDriverName();
+
+        // SQLite 的 ON CONFLICT 必须命中真实 UNIQUE/PK；当前表在 sqlite 口径下应使用 (attempt_id, question_id)
+        $uniqueBy = ['attempt_id', 'question_id'];
+
+        // MySQL 的 upsert 实际走 ON DUPLICATE KEY，不依赖 uniqueBy；保持与分区键口径一致即可
+        if ($driver === 'mysql') {
+            $uniqueBy = ['attempt_id', 'question_id', 'submitted_at'];
+        }
+
         DB::table('attempt_answer_rows')->upsert(
             $rows,
-            ['attempt_id', 'question_id', 'submitted_at'],
+            $uniqueBy,
             ['org_id', 'scale_code', 'question_index', 'question_type', 'answer_json', 'duration_ms', 'submitted_at']
         );
 
