@@ -1,0 +1,15 @@
+[2026-01-30 23:47:05] Cleaning ports 1822 and 18000
+[2026-01-30 23:47:05] Starting server on port 1822
+[2026-01-30 23:47:05] Waiting for health
+[2026-01-30 23:47:06] Checking pack/seed/config consistency
+config_default_pack_id=MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+db_default_pack_id=MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+pack_dir=<REPO>
+[2026-01-30 23:47:06] GET /api/v0.4/boot (CN_MAINLAND)
+[2026-01-30 23:47:06] GET /api/v0.4/boot (US)
+[2026-01-30 23:47:06] ETag 304 validation
+[2026-01-30 23:47:06] Validate boot payloads
+[2026-01-30 23:47:07] Ensure IQ_RAVEN scale seeded
+[2026-01-30 23:47:07] GET /api/v0.3/scales/IQ_RAVEN/questions (US)
+questions_count=1
+[2026-01-30 23:47:07] Verify complete

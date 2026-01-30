@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Services\Commerce\OrderManager;
+use App\Services\Payments\PaymentRouter;
 use App\Support\OrgContext;
+use App\Support\RegionContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +16,9 @@ class CommerceController extends Controller
 {
     public function __construct(
         private OrgContext $orgContext,
+        private RegionContext $regionContext,
         private OrderManager $orders,
+        private PaymentRouter $paymentRouter,
     ) {
     }
 
@@ -68,6 +72,11 @@ class CommerceController extends Controller
         $userId = $this->orgContext->userId();
         $anonId = $this->orgContext->anonId();
 
+        $provider = is_string($payload['provider'] ?? null) ? trim((string) $payload['provider']) : '';
+        if ($provider === '') {
+            $provider = $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
+        }
+
         $result = $this->orders->createOrder(
             $orgId,
             $userId !== null ? (string) $userId : null,
@@ -75,7 +84,7 @@ class CommerceController extends Controller
             (string) $payload['sku'],
             (int) ($payload['quantity'] ?? 1),
             $payload['target_attempt_id'] ?? null,
-            (string) ($payload['provider'] ?? 'stub')
+            $provider !== '' ? $provider : 'stub'
         );
 
         if (!($result['ok'] ?? false)) {

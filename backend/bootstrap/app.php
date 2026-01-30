@@ -16,12 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Console\Commands\FapResolvePack::class,
     ])
     ->withMiddleware(function (Middleware $middleware) {
-    $middleware->alias([
-        'fm_token' => \App\Http\Middleware\FmTokenAuth::class,
-    ]);
+        $middleware->alias([
+            'fm_token' => \App\Http\Middleware\FmTokenAuth::class,
+        ]);
 
-    // 你原来其他 middleware 配置保留
-   })
+        $middleware->appendToGroup('api', \App\Http\Middleware\DetectRegion::class);
+
+        // 你原来其他 middleware 配置保留
+    })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })

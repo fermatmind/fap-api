@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
         'api' => [
             // Laravel default: 'throttle:api' and bindings
             \App\Http\Middleware\AttachRequestId::class,
+            \App\Http\Middleware\DetectRegion::class,
             \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

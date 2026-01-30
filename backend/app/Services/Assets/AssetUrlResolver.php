@@ -3,11 +3,14 @@
 namespace App\Services\Assets;
 
 use App\Services\Content\ContentPacksIndex;
+use App\Support\RegionContext;
 
 final class AssetUrlResolver
 {
-    public function __construct(private ContentPacksIndex $index)
-    {
+    public function __construct(
+        private ContentPacksIndex $index,
+        private RegionContext $regionContext
+    ) {
     }
 
     public function resolve(
@@ -20,16 +23,27 @@ final class AssetUrlResolver
         $relativePath = trim($relativePath);
         $this->assertStrictAssetPath($relativePath);
 
-        $baseUrl = $this->pickAssetsBaseUrl($packId, $dirVersion, $assetsBaseUrlOverride);
+        $resolvedRegion = $this->resolveRegion($region);
+        $baseUrl = $this->pickAssetsBaseUrl($packId, $dirVersion, $assetsBaseUrlOverride, $resolvedRegion);
 
         return $this->joinUrl($baseUrl, $packId, $dirVersion, $relativePath);
     }
 
-    private function pickAssetsBaseUrl(string $packId, string $dirVersion, ?string $override): string
+    private function pickAssetsBaseUrl(
+        string $packId,
+        string $dirVersion,
+        ?string $override,
+        string $region
+    ): string
     {
         $override = is_string($override) ? trim($override) : '';
         if ($override !== '') {
             return $override;
+        }
+
+        $cdnBase = $this->resolveCdnBaseUrl($region);
+        if ($cdnBase !== '') {
+            return $cdnBase;
         }
 
         $versionBase = $this->readAssetsBaseUrlFromVersion($packId, $dirVersion);
@@ -46,6 +60,39 @@ final class AssetUrlResolver
         }
 
         return rtrim($appUrl, '/') . '/storage/content_assets';
+    }
+
+    private function resolveRegion(?string $region): string
+    {
+        $region = is_string($region) ? strtoupper(trim($region)) : '';
+        if ($region !== '') {
+            return $region;
+        }
+
+        $contextRegion = strtoupper(trim($this->regionContext->region()));
+        if ($contextRegion !== '') {
+            return $contextRegion;
+        }
+
+        $default = (string) (config('regions.default_region') ?? config('content_packs.default_region', 'CN_MAINLAND'));
+        $default = strtoupper(trim($default));
+        return $default !== '' ? $default : 'CN_MAINLAND';
+    }
+
+    private function resolveCdnBaseUrl(string $region): string
+    {
+        $map = config('cdn_map.map', []);
+        if (!is_array($map) || $region === '') {
+            return '';
+        }
+
+        $row = $map[$region] ?? null;
+        if (!is_array($row)) {
+            return '';
+        }
+
+        $base = trim((string) ($row['assets_base_url'] ?? ''));
+        return $base;
     }
 
     private function readAssetsBaseUrlFromVersion(string $packId, string $dirVersion): string
