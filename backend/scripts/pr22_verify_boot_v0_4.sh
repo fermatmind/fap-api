@@ -6,6 +6,7 @@ export FAP_NONINTERACTIVE=1
 export COMPOSER_NO_INTERACTION=1
 export GIT_TERMINAL_PROMPT=0
 export NO_COLOR=1
+
 export FAP_DEFAULT_PACK_ID="${FAP_DEFAULT_PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.1-TEST}"
 export FAP_DEFAULT_DIR_VERSION="${FAP_DEFAULT_DIR_VERSION:-MBTI-CN-v0.2.1-TEST}"
 export FAP_DEFAULT_REGION="${FAP_DEFAULT_REGION:-CN_MAINLAND}"
@@ -18,6 +19,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 BACKEND_DIR="$ROOT_DIR/backend"
 ART_DIR="$ROOT_DIR/backend/artifacts/pr22"
+
+# ✅ content packs root + explicit MBTI content package (new layout)
+export FAP_PACKS_ROOT="${FAP_PACKS_ROOT:-$ROOT_DIR/content_packages}"
+export MBTI_CONTENT_PACKAGE="${MBTI_CONTENT_PACKAGE:-default/${FAP_DEFAULT_REGION}/${FAP_DEFAULT_LOCALE}/${FAP_DEFAULT_DIR_VERSION}}"
 
 mkdir -p "$ART_DIR"
 LOG_FILE="$ART_DIR/verify.log"
@@ -83,12 +88,16 @@ $app = require $repo . '/backend/bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
-$cfgPackId = (string) config('content_packs.default_pack_id');
+$cfgPackId     = (string) config('content_packs.default_pack_id');
 $cfgDirVersion = (string) config('content_packs.default_dir_version');
+$cfgRegion     = (string) config('content_packs.default_region');
+$cfgLocale     = (string) config('content_packs.default_locale');
+
 $row = \Illuminate\Support\Facades\DB::table('scales_registry')
     ->where('org_id', 0)->where('code', 'MBTI')->first();
-$dbPackId = $row->default_pack_id ?? '';
-$dbDirVersion = $row->default_dir_version ?? '';
+
+$dbPackId     = (string) ($row->default_pack_id ?? '');
+$dbDirVersion = (string) ($row->default_dir_version ?? '');
 
 echo "config_default_pack_id={$cfgPackId}\n";
 echo "db_default_pack_id={$dbPackId}\n";
@@ -111,14 +120,31 @@ if ($dirVersion === '') {
 }
 
 $root = rtrim((string) config('content_packs.root'), '/');
-$packDir = $root . '/' . $dirVersion;
+if ($root === '') {
+    fail('missing content_packs.root');
+}
+
+$region = $cfgRegion !== '' ? $cfgRegion : (getenv('FAP_DEFAULT_REGION') ?: 'CN_MAINLAND');
+$locale = $cfgLocale !== '' ? $cfgLocale : (getenv('FAP_DEFAULT_LOCALE') ?: 'zh-CN');
+
+$mbtiContentPackage = trim((string) getenv('MBTI_CONTENT_PACKAGE'));
+if ($mbtiContentPackage === '') {
+    $mbtiContentPackage = "default/{$region}/{$locale}/{$dirVersion}";
+}
+
+$packDir = $root . '/' . ltrim($mbtiContentPackage, '/');
+
+echo "packs_root={$root}\n";
+echo "mbti_content_package={$mbtiContentPackage}\n";
+
 if (!is_dir($packDir)) {
     fail('pack dir missing: ' . $packDir);
 }
 
-$manifestPath = $packDir . '/manifest.json';
-$versionPath = $packDir . '/version.json';
-$questionsPath = $packDir . '/questions.json';
+$manifestPath   = $packDir . '/manifest.json';
+$versionPath    = $packDir . '/version.json';
+$questionsPath  = $packDir . '/questions.json';
+
 foreach ([$manifestPath, $versionPath, $questionsPath] as $p) {
     if (!is_file($p)) {
         fail('missing file: ' . $p);
@@ -141,6 +167,7 @@ if ($manifestPack !== $cfgPackId) {
 
 echo "pack_dir={$packDir}\n";
 PHP
+
 REPO_DIR="$ROOT_DIR" php /tmp/pr22_pack_check.php | tee -a "$LOG_FILE"
 
 curl_json() {
@@ -283,7 +310,7 @@ $count = (int) \Illuminate\Support\Facades\DB::table('scales_registry')
     ->where('org_id', 0)->where('code', 'IQ_RAVEN')->count();
 echo $count;
 PHP
-iq_count="$(REPO_DIR=\"$ROOT_DIR\" php /tmp/pr22_iq_raven_seed_check.php 2>/dev/null || echo \"0\")"
+iq_count="$(REPO_DIR=\"$ROOT_DIR\" php /tmp/pr22_iq_raven_seed_check.php 2>/dev/null || echo "0")"
 if [[ "$iq_count" == "0" ]]; then
   log "Seeding IQ_RAVEN demo scale"
   (
