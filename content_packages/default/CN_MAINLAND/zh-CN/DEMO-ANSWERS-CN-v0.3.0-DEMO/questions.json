@@ -1,0 +1,37 @@
+{
+  "schema": "fap.questions.v1",
+  "schema_version": 1,
+  "items": [
+    {
+      "question_id": "DEMO-SLIDER-1",
+      "order": 1,
+      "type": "slider",
+      "text": "（Demo）滑杆题：你现在的专注程度",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "labels": {"min": "很低", "max": "很高"},
+      "default": 3
+    },
+    {
+      "question_id": "DEMO-RANK-1",
+      "order": 2,
+      "type": "rank_order",
+      "text": "（Demo）请选择最重要的三个特质",
+      "options": [
+        {"code": "A", "text": "好奇"},
+        {"code": "B", "text": "耐心"},
+        {"code": "C", "text": "独立"}
+      ],
+      "max_rank": 3,
+      "assets": {"image": "assets/images/demo_rank_1.png"}
+    },
+    {
+      "question_id": "DEMO-TEXT-1",
+      "order": 3,
+      "type": "open_text",
+      "text": "（Demo）用一句话描述自己",
+      "placeholder": "例如：喜欢探索新鲜事物"
+    }
+  ]
+}

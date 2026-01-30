@@ -1,0 +1,65 @@
+name: ci-verify-pr21-answer-storage
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - "content_packages/**"
+      - ".github/workflows/ci_verify_pr21_answer_storage.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - "content_packages/**"
+      - ".github/workflows/ci_verify_pr21_answer_storage.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/pr21.sqlite
+      ANSWER_ROWS_WRITE_MODE: on
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: mbstring, xml, curl, zip, intl, sqlite, pdo_sqlite
+
+      - name: Prepare sqlite
+        run: |
+          rm -f /tmp/pr21.sqlite
+          touch /tmp/pr21.sqlite
+
+      - name: Install backend deps
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Migrate
+        working-directory: backend
+        run: php artisan migrate --force -vvv
+
+      - name: Seed scales
+        working-directory: backend
+        run: |
+          php artisan fap:scales:seed-default
+          php artisan fap:scales:sync-slugs
+          php artisan db:seed --class=Pr21AnswerDemoSeeder
+
+      - name: V0.3 tests
+        working-directory: backend
+        run: php artisan test --filter=V0_3
+
+      - name: PR21 verify script
+        working-directory: backend
+        run: bash scripts/pr21_verify_answer_storage.sh

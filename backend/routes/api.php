@@ -26,6 +26,7 @@ use App\Http\Controllers\API\V0_2\Admin\AdminAgentController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
 use App\Http\Controllers\API\V0_3\AttemptsController;
+use App\Http\Controllers\API\V0_3\AttemptProgressController;
 use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\ScalesController;
@@ -224,6 +225,8 @@ Route::prefix("v0.3")->group(function () {
         // 2) Attempts lifecycle
         Route::post("/attempts/start", [AttemptsController::class, "start"]);
         Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
+        Route::put("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "upsert"]);
+        Route::get("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "show"]);
         Route::get("/attempts/{id}/result", [AttemptsController::class, "result"]);
         Route::get("/attempts/{id}/report", [AttemptsController::class, "report"])
             ->name('v0.3.attempts.report');

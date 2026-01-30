@@ -15,6 +15,7 @@ use App\Console\Commands\MetricsWeeklyValidity;
 use App\Console\Commands\AdminBootstrapOwner;
 use App\Console\Commands\OpsDeployEvent;
 use App\Console\Commands\OpsHealthzSnapshot;
+use App\Console\Commands\ArchiveColdData;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SyncScaleSlugs;
 
@@ -39,6 +40,7 @@ class Kernel extends ConsoleKernel
         AdminBootstrapOwner::class,
         OpsDeployEvent::class,
         OpsHealthzSnapshot::class,
+        ArchiveColdData::class,
         SeedScaleRegistry::class,
         SyncScaleSlugs::class,
     ];
