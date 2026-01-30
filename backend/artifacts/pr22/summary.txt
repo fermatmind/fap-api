@@ -1,0 +1,18 @@
+PR22 acceptance summary
+- status: ok
+- serve_port: 1822
+- db: sqlite (/tmp/pr22.sqlite)
+- scripts:
+  - backend/scripts/pr22_verify_boot_v0_4.sh
+  - backend/scripts/ci_verify_mbti.sh
+- config files:
+  - backend/config/regions.php
+  - backend/config/payments.php
+  - backend/config/cdn_map.php
+- artifacts:
+  - backend/artifacts/pr22/boot_cn.json
+  - backend/artifacts/pr22/boot_us.json
+  - backend/artifacts/pr22/headers_cn.txt
+  - backend/artifacts/pr22/headers_us.txt
+  - backend/artifacts/pr22/verify.log
+  - backend/artifacts/pr22/server.log

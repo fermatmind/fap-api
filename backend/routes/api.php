@@ -31,6 +31,7 @@ use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
+use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\Integrations\ProvidersController;
 use App\Http\Controllers\Webhooks\HandleProviderWebhook;
 
@@ -255,4 +256,8 @@ Route::prefix("v0.3")->group(function () {
                 "App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@ledger"
             );
         });
+});
+
+Route::prefix("v0.4")->group(function () {
+    Route::get("/boot", [BootController::class, "show"]);
 });

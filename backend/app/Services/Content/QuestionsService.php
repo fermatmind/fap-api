@@ -40,7 +40,10 @@ final class QuestionsService
 
         $contentPackageVersion = (string) ($manifestData['content_package_version'] ?? ($item['content_package_version'] ?? ''));
 
-        $assetsBaseUrl = $this->pickAssetsBaseUrl($assetsBaseUrlOverride, $manifestPath);
+        $assetsBaseUrl = is_string($assetsBaseUrlOverride) ? trim($assetsBaseUrlOverride) : null;
+        if ($assetsBaseUrl === '') {
+            $assetsBaseUrl = null;
+        }
 
         $mapped = $this->assetsMapper->mapQuestionsDoc(
             $questions['data'],
@@ -55,38 +58,6 @@ final class QuestionsService
             'content_package_version' => $contentPackageVersion,
             'manifest' => $manifestData,
         ];
-    }
-
-    private function pickAssetsBaseUrl(?string $override, string $manifestPath): ?string
-    {
-        $override = is_string($override) ? trim($override) : '';
-        if ($override !== '') {
-            return $override;
-        }
-
-        if ($manifestPath === '') {
-            return null;
-        }
-
-        $baseDir = dirname($manifestPath);
-        $versionPath = rtrim($baseDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'version.json';
-        if (!File::isFile($versionPath)) {
-            return null;
-        }
-
-        try {
-            $raw = File::get($versionPath);
-        } catch (\Throwable $e) {
-            return null;
-        }
-
-        $decoded = json_decode($raw, true);
-        if (!is_array($decoded)) {
-            return null;
-        }
-
-        $assetsBaseUrl = trim((string) ($decoded['assets_base_url'] ?? ''));
-        return $assetsBaseUrl !== '' ? $assetsBaseUrl : null;
     }
 
     private function readJsonFile(string $path): array
