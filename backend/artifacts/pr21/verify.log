@@ -1,0 +1,18 @@
+[2026-01-30 16:04:12] Socket bind not permitted; using embedded HTTP kernel
+[2026-01-30 16:04:13] Seeding DEMO_ANSWERS scale
+
+   INFO  Seeding database.  
+
+Pr21AnswerDemoSeeder: DEMO_ANSWERS scale upserted.
+[2026-01-30 16:04:13] POST /api/v0.3/attempts/start
+[2026-01-30 16:04:13] PUT progress seq=1
+{"ok":true,"attempt_id":"1dda99b7-a712-42ec-8cd1-4e687f62be87","cursor":"page-1","duration_ms":1200,"answered_count":1,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"3","answer":{"value":3}}],"updated_at":"2026-01-30T08:04:13.943389Z"}[2026-01-30 16:04:13] PUT progress seq=2
+{"ok":true,"attempt_id":"1dda99b7-a712-42ec-8cd1-4e687f62be87","cursor":"page-2","duration_ms":2400,"answered_count":2,"answers":[{"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"4","answer":{"value":4}}],"updated_at":"2026-01-30T08:04:14.183330Z"}[2026-01-30 16:04:14] GET progress
+[2026-01-30 16:04:14] POST submit
+[2026-01-30 16:04:14] POST submit (idempotent)
+[2026-01-30 16:04:14] Archive command
+sqlite/other driver: skip partition drop for attempt_answer_rows
+sqlite/other driver: skip partition drop for events
+{"ok":true,"results":[{"table":"attempt_answer_rows","ok":true,"object_uri":"file://<REPO>","row_count":0,"checksum":"f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837"},{"table":"events","ok":true,"object_uri":"file://<REPO>","row_count":0,"checksum":"f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837"}]}
+[2026-01-30 16:04:15] DB assertions
+[2026-01-30 16:04:15] Done

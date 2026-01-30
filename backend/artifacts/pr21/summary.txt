@@ -1,0 +1,8 @@
+PR21 accept summary
+time: 2026-01-30 08:04:15 UTC
+passed: migrate, seed, tests(V0_3), pr21_verify_answer_storage
+api_smoke: attempt_id=1dda99b7-a712-42ec-8cd1-4e687f62be87
+api_smoke: answered_count=2
+db: answer_sets=1, answer_rows=3
+db: archive_audits=2
+tables: attempt_drafts, attempt_answer_sets, attempt_answer_rows, archive_audits, attempts.resume_expires_at

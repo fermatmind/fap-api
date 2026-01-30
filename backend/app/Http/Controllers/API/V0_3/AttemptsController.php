@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API\V0_3;
 use App\Http\Controllers\Controller;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Attempts\AnswerRowWriter;
+use App\Services\Attempts\AnswerSetStore;
+use App\Services\Attempts\AttemptProgressService;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\AssessmentEngine;
 use App\Services\Assessment\GenericReportBuilder;
@@ -36,6 +39,9 @@ class AttemptsController extends Controller
         private EventRecorder $eventRecorder,
         private OrgContext $orgContext,
         private BenefitWalletService $benefitWallets,
+        private AttemptProgressService $progressService,
+        private AnswerSetStore $answerSets,
+        private AnswerRowWriter $answerRowWriter,
     ) {
     }
 
@@ -133,6 +139,12 @@ class AttemptsController extends Controller
             ],
         ]);
 
+        $draft = $this->progressService->createDraftForAttempt($attempt);
+        if (!empty($draft['expires_at'])) {
+            $attempt->resume_expires_at = $draft['expires_at'];
+            $attempt->save();
+        }
+
         $this->eventRecorder->recordFromRequest($request, 'test_start', $this->resolveUserId($request), [
             'scale_code' => $scaleCode,
             'pack_id' => $packId,
@@ -149,6 +161,8 @@ class AttemptsController extends Controller
             'dir_version' => $dirVersion,
             'region' => $region,
             'locale' => $locale,
+            'resume_token' => (string) ($draft['token'] ?? ''),
+            'resume_expires_at' => !empty($draft['expires_at']) ? $draft['expires_at']->toISOString() : null,
         ]);
     }
 
@@ -159,16 +173,20 @@ class AttemptsController extends Controller
     {
         $payload = $request->validate([
             'attempt_id' => ['required', 'string', 'max:64'],
-            'answers' => ['required', 'array', 'min:1'],
-            'answers.*.question_id' => ['required', 'string'],
-            'answers.*.code' => ['required'],
+            'answers' => ['nullable', 'array'],
+            'answers.*.question_id' => ['required_with:answers', 'string', 'max:128'],
+            'answers.*.code' => ['nullable'],
+            'answers.*.question_type' => ['nullable', 'string', 'max:32'],
+            'answers.*.question_index' => ['nullable', 'integer', 'min:0'],
             'duration_ms' => ['required', 'integer', 'min:0'],
         ]);
 
         $attemptId = trim((string) $payload['attempt_id']);
-        $answers = $payload['answers'];
+        $answers = $payload['answers'] ?? [];
         $durationMs = (int) $payload['duration_ms'];
-        $answersDigest = $this->computeAnswersDigest($answers);
+        if (!is_array($answers)) {
+            $answers = [];
+        }
 
         $orgId = $this->orgContext->orgId();
         $attempt = Attempt::where('id', $attemptId)->where('org_id', $orgId)->first();
@@ -210,6 +228,19 @@ class AttemptsController extends Controller
 
         $region = (string) ($attempt->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
         $locale = (string) ($attempt->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
+
+        $draftAnswers = $this->progressService->loadDraftAnswers($attempt);
+        $mergedAnswers = $this->mergeAnswersForSubmit($answers, $draftAnswers);
+        if (empty($mergedAnswers)) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'ANSWERS_REQUIRED',
+                'message' => 'answers required.',
+            ], 422);
+        }
+
+        $answersDigest = $this->computeAnswersDigest($mergedAnswers, $scaleCode, $packId, $dirVersion);
+        $answers = $mergedAnswers;
 
         $response = null;
 
@@ -319,6 +350,26 @@ class AttemptsController extends Controller
                 $locked->started_at = now();
             }
             $locked->save();
+
+            $stored = $this->answerSets->storeFinalAnswers($locked, $answers, $durationMs, $scoringSpecVersion);
+            if (!($stored['ok'] ?? false)) {
+                $response = response()->json([
+                    'ok' => false,
+                    'error' => $stored['error'] ?? 'ANSWER_SET_STORE_FAILED',
+                    'message' => $stored['message'] ?? 'failed to store answer set.',
+                ], 500);
+                return;
+            }
+
+            $rowsWritten = $this->answerRowWriter->writeRows($locked, $answers, $durationMs);
+            if (!($rowsWritten['ok'] ?? false)) {
+                $response = response()->json([
+                    'ok' => false,
+                    'error' => $rowsWritten['error'] ?? 'ANSWER_ROWS_FAILED',
+                    'message' => $rowsWritten['message'] ?? 'failed to write answer rows.',
+                ], 500);
+                return;
+            }
 
             $axisScores = is_array($scoreResult->axisScoresJson ?? null)
                 ? $scoreResult->axisScoresJson
@@ -450,6 +501,7 @@ class AttemptsController extends Controller
         });
 
         if ($response instanceof JsonResponse && $response->getStatusCode() === 200) {
+            $this->progressService->clearProgress($attemptId);
             $this->eventRecorder->recordFromRequest($request, 'test_submit', $this->resolveUserId($request), [
                 'scale_code' => $scaleCode,
                 'pack_id' => $packId,
@@ -619,27 +671,42 @@ class AttemptsController extends Controller
         return (string) ($item['content_package_version'] ?? '');
     }
 
-    private function computeAnswersDigest(array $answers): string
+    private function computeAnswersDigest(array $answers, string $scaleCode, string $packId, string $dirVersion): string
     {
-        $norm = [];
+        $canonical = $this->answerSets->canonicalJson($answers);
+        $raw = strtoupper($scaleCode) . '|' . $packId . '|' . $dirVersion . '|' . $canonical;
+        return hash('sha256', $raw);
+    }
 
-        foreach ($answers as $answer) {
+    private function mergeAnswersForSubmit(array $requestAnswers, array $draftAnswers): array
+    {
+        $map = [];
+
+        foreach ($draftAnswers as $answer) {
             if (!is_array($answer)) {
                 continue;
             }
-
-            $qid = (string) ($answer['question_id'] ?? '');
-            $code = strtoupper((string) ($answer['code'] ?? ''));
-            if ($qid === '' || $code === '') {
+            $qid = trim((string) ($answer['question_id'] ?? ''));
+            if ($qid === '') {
                 continue;
             }
-
-            $norm[] = ['question_id' => $qid, 'code' => $code];
+            $map[$qid] = $answer;
         }
 
-        usort($norm, fn ($a, $b) => strcmp($a['question_id'], $b['question_id']));
+        foreach ($requestAnswers as $answer) {
+            if (!is_array($answer)) {
+                continue;
+            }
+            $qid = trim((string) ($answer['question_id'] ?? ''));
+            if ($qid === '') {
+                continue;
+            }
+            $map[$qid] = $answer;
+        }
 
-        return hash('sha256', json_encode($norm, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        ksort($map);
+
+        return array_values($map);
     }
 
     private function buildSubmitResponse(Attempt $attempt, Result $result, bool $fresh): JsonResponse
