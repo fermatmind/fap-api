@@ -23,6 +23,7 @@ class Event extends Model
         'request_id',
         'attempt_id',
         'meta_json',
+        'experiments_json',
         'occurred_at',
         'share_id',
         'share_channel',
@@ -51,6 +52,7 @@ class Event extends Model
 
     protected $casts = [
         'meta_json'   => 'array',
+        'experiments_json' => 'array',
         'occurred_at' => 'datetime',
         'org_id'      => 'integer',
         'user_id'     => 'integer',

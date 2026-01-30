@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Analytics\EventNormalizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class EventController extends Controller
@@ -58,6 +60,7 @@ class EventController extends Controller
             // ✅ 兼容两种入参：props / meta_json
             'props'       => ['nullable', 'array'],
             'meta_json'   => ['nullable', 'array'],
+            'experiments_json' => ['nullable'],
         ]);
 
         // ✅ meta_json：props + meta_json 合并（meta_json 覆盖同名字段）
@@ -123,11 +126,70 @@ class EventController extends Controller
             ? Carbon::parse($data['occurred_at'])
             : now());
 
+        if (Schema::hasColumn('events', 'experiments_json')) {
+            $orgId = $this->resolveOrgId($request);
+            $anonId = $columns['anon_id'] ?? $data['anon_id'] ?? null;
+            $anonId = is_string($anonId) || is_numeric($anonId) ? trim((string) $anonId) : null;
+            $userId = $request->attributes->get('fm_user_id');
+            if (!is_numeric($userId)) {
+                $userId = $request->attributes->get('user_id');
+            }
+            $userId = is_numeric($userId) ? (int) $userId : null;
+
+            $bootExperiments = $this->extractBootExperiments($request, $data);
+            $assigner = app(ExperimentAssigner::class);
+            $assignments = $assigner->assignActive($orgId, $anonId, $userId);
+            $columns['experiments_json'] = $assigner->mergeExperiments($bootExperiments, $assignments);
+        }
+
         $event = Event::create($columns);
 
         return response()->json([
             'ok' => true,
             'id' => $event->id,
         ]);
+    }
+
+    private function resolveOrgId(Request $request): int
+    {
+        $raw = trim((string) ($request->header('X-Org-Id') ?? ''));
+        if ($raw !== '' && preg_match('/^\\d+$/', $raw)) {
+            return (int) $raw;
+        }
+
+        return 0;
+    }
+
+    private function extractBootExperiments(Request $request, array $data): array
+    {
+        $parsed = $this->normalizeExperiments($data['experiments_json'] ?? null);
+        if ($parsed !== []) {
+            return $parsed;
+        }
+
+        $header = (string) $request->header('X-Experiments-Json', '');
+        $parsed = $this->normalizeExperiments($header);
+        if ($parsed !== []) {
+            return $parsed;
+        }
+
+        $header = (string) $request->header('X-Boot-Experiments', '');
+        return $this->normalizeExperiments($header);
+    }
+
+    private function normalizeExperiments($value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value) && $value !== '') {
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
     }
 }

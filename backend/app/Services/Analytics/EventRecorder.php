@@ -3,12 +3,18 @@
 namespace App\Services\Analytics;
 
 use App\Models\Event;
+use App\Services\Experiments\ExperimentAssigner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 final class EventRecorder
 {
+    public function __construct(
+        private ExperimentAssigner $experimentAssigner,
+    ) {
+    }
+
     public function record(string $eventCode, ?int $userId, array $meta = [], array $context = []): void
     {
         if (!Schema::hasTable('events')) {
@@ -36,6 +42,11 @@ final class EventRecorder
             'updated_at' => $now,
         ];
 
+        if (Schema::hasColumn('events', 'experiments_json')) {
+            $experiments = $context['experiments_json'] ?? [];
+            $payload['experiments_json'] = is_array($experiments) ? $experiments : [];
+        }
+
         try {
             Event::create($payload);
         } catch (\Throwable $e) {
@@ -46,6 +57,13 @@ final class EventRecorder
     public function recordFromRequest(Request $request, string $eventCode, ?int $userId, array $meta = []): void
     {
         $context = $this->contextFromRequest($request);
+        $bootExperiments = $this->extractBootExperiments($request);
+        $assignments = $this->experimentAssigner->assignActive(
+            $context['org_id'] ?? 0,
+            $context['anon_id'] ?? null,
+            $userId,
+        );
+        $context['experiments_json'] = $this->experimentAssigner->mergeExperiments($bootExperiments, $assignments);
         $this->record($eventCode, $userId, $meta, $context);
     }
 
@@ -57,14 +75,59 @@ final class EventRecorder
         $attemptId = (string) $request->input('attempt_id', '');
         $orgId = $request->attributes->get('org_id');
         $orgId = is_numeric($orgId) ? (int) $orgId : 0;
+        $anonId = $request->attributes->get('anon_id');
+        if (!is_string($anonId) && !is_numeric($anonId)) {
+            $anonId = $request->input('anon_id', $request->header('X-Anon-Id'));
+        }
+        $anonId = is_string($anonId) || is_numeric($anonId) ? trim((string) $anonId) : '';
 
         return [
             'org_id' => $orgId,
             'request_id' => $requestId !== '' ? $requestId : null,
             'session_id' => $sessionId !== '' ? $sessionId : null,
-            'anon_id' => $request->attributes->get('anon_id'),
+            'anon_id' => $anonId !== '' ? $anonId : null,
             'channel' => $channel !== '' ? $channel : null,
             'attempt_id' => $attemptId !== '' ? $attemptId : null,
         ];
+    }
+
+    private function extractBootExperiments(Request $request): array
+    {
+        $payload = $request->input('experiments_json');
+        $parsed = $this->normalizeExperiments($payload);
+        if ($parsed !== []) {
+            return $parsed;
+        }
+
+        $payload = $request->input('boot_experiments');
+        $parsed = $this->normalizeExperiments($payload);
+        if ($parsed !== []) {
+            return $parsed;
+        }
+
+        $header = (string) $request->header('X-Experiments-Json', '');
+        $parsed = $this->normalizeExperiments($header);
+        if ($parsed !== []) {
+            return $parsed;
+        }
+
+        $header = (string) $request->header('X-Boot-Experiments', '');
+        return $this->normalizeExperiments($header);
+    }
+
+    private function normalizeExperiments($value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value) && $value !== '') {
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
     }
 }

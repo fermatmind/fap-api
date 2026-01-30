@@ -75,6 +75,7 @@ class FmTokenAuth
         // 1) user_id: only trust explicit user_id-like columns, never fall back to anon_id
         $userId = $this->resolveUserId($row);
         if ($userId !== '') {
+            $userId = (string) $userId;
             // basic sanity
             if (strlen($userId) > 64) {
                 return $this->unauthorizedResponse($request, 'user_id_too_long');
@@ -84,7 +85,6 @@ class FmTokenAuth
                 return $this->unauthorizedResponse($request, 'user_id_not_numeric');
             }
 
-            $userId = (string) $userId;
             $request->attributes->set('fm_user_id', $userId);
             $request->attributes->set('user_id', $userId);
         }

@@ -1,0 +1,27 @@
+# PR23 Recon
+
+- 相关入口文件：
+  - `backend/app/Services/Analytics/EventRecorder.php`
+  - `backend/app/Http/Controllers/EventController.php`
+  - `backend/app/Http/Controllers/API/V0_3/BootController.php`
+  - `backend/app/Http/Middleware/ResolveOrgContext.php`
+  - `backend/app/Http/Middleware/FmTokenAuth.php`
+  - `backend/app/Support/OrgContext.php`
+- 相关路由：
+  - `POST /api/v0.2/events`
+  - `GET /api/v0.3/boot`
+  - `GET /api/v0.4/boot`
+- 相关 DB 表/迁移：
+  - `events`（已存在；新增 `experiments_json`）
+  - `organizations` / `users`（`org_id` / `user_id` / `anon_id` 口径）
+  - 新增 `feature_flags` / `experiment_assignments`
+- 需要新增/修改点：
+  - `experiment_assignments` 表 + 服务层分配
+  - `feature_flags` 表 + FlagManager 规则引擎
+  - EventRecorder / EventController 写入 `experiments_json`
+  - v0.3 boot/flags/experiments 输出口径
+- 风险点与规避：
+  - sqlite upsert/unique key 对齐
+  - 规则引擎与分桶 hash 稳定性
+  - 事件写入与聚合可用性（json 字段空值兼容）
+  - artifacts 脱敏（绝对路径、token、Authorization）
