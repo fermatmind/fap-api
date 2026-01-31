@@ -1,0 +1,14 @@
+PR24 acceptance summary
+- status: ok
+- serve_port: 1824
+- db: sqlite
+- slug_count: 100
+- etag: "848617bf1829771bc586f36f01bd263bc3fd32f1"
+- cache_control: max-age=3600, public, s-maxage=86400, stale-while-revalidate=604800
+- if_none_match_304: 304
+- artifacts:
+  - backend/artifacts/pr24/sitemap.xml
+  - backend/artifacts/pr24/headers_200.txt
+  - backend/artifacts/pr24/headers_304.txt
+  - backend/artifacts/pr24/server.log
+  - backend/artifacts/pr24/summary.txt
