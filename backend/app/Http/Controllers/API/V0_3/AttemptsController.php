@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V0_3;
 use App\Http\Controllers\Controller;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Assessments\AssessmentService;
 use App\Services\Attempts\AnswerRowWriter;
 use App\Services\Attempts\AnswerSetStore;
 use App\Services\Attempts\AttemptProgressService;
@@ -27,6 +28,8 @@ use Illuminate\Support\Str;
 
 class AttemptsController extends Controller
 {
+    private const B2B_CREDIT_BENEFIT_CODE = 'B2B_ASSESSMENT_ATTEMPT_SUBMIT';
+
     public function __construct(
         private ScaleRegistry $registry,
         private ContentPacksIndex $packsIndex,
@@ -42,6 +45,7 @@ class AttemptsController extends Controller
         private AttemptProgressService $progressService,
         private AnswerSetStore $answerSets,
         private AnswerRowWriter $answerRowWriter,
+        private AssessmentService $assessments,
     ) {
     }
 
@@ -179,11 +183,13 @@ class AttemptsController extends Controller
             'answers.*.question_type' => ['nullable', 'string', 'max:32'],
             'answers.*.question_index' => ['nullable', 'integer', 'min:0'],
             'duration_ms' => ['required', 'integer', 'min:0'],
+            'invite_token' => ['nullable', 'string', 'max:64'],
         ]);
 
         $attemptId = trim((string) $payload['attempt_id']);
         $answers = $payload['answers'] ?? [];
         $durationMs = (int) $payload['duration_ms'];
+        $inviteToken = trim((string) ($payload['invite_token'] ?? ''));
         if (!is_array($answers)) {
             $answers = [];
         }
@@ -243,6 +249,7 @@ class AttemptsController extends Controller
         $answers = $mergedAnswers;
 
         $response = null;
+        $consumeB2BCredit = false;
 
         DB::transaction(function () use (
             &$response,
@@ -257,7 +264,9 @@ class AttemptsController extends Controller
             $region,
             $locale,
             $row,
-            $request
+            $request,
+            $inviteToken,
+            &$consumeB2BCredit
         ) {
             $locked = Attempt::where('id', $attemptId)
                 ->where('org_id', $orgId)
@@ -421,6 +430,37 @@ class AttemptsController extends Controller
                 $result = Result::create($resultData);
             }
 
+            if ($inviteToken !== '' && $orgId > 0) {
+                $assignment = $this->assessments->attachAttemptByInviteToken($orgId, $inviteToken, $attemptId);
+                $consumeB2BCredit = $assignment !== null;
+            }
+
+            if ($consumeB2BCredit) {
+                $consume = $this->benefitWallets->consume($orgId, self::B2B_CREDIT_BENEFIT_CODE, $attemptId);
+                if (!($consume['ok'] ?? false)) {
+                    $status = (int) ($consume['status'] ?? 402);
+                    if (($consume['error'] ?? '') === 'INSUFFICIENT_CREDITS' || $status === 402) {
+                        $response = response()->json([
+                            'ok' => false,
+                            'error' => [
+                                'code' => 'CREDITS_INSUFFICIENT',
+                                'message' => 'credits insufficient',
+                                'benefit_code' => self::B2B_CREDIT_BENEFIT_CODE,
+                                'required' => 1,
+                            ],
+                        ], 402);
+                        return;
+                    }
+
+                    $response = response()->json([
+                        'ok' => false,
+                        'error' => $consume['error'] ?? 'CREDITS_CONSUME_FAILED',
+                        'message' => $consume['message'] ?? 'credits consume failed.',
+                    ], $status);
+                    return;
+                }
+            }
+
             $commercial = $row['commercial_json'] ?? null;
             if (is_string($commercial)) {
                 $decoded = json_decode($commercial, true);
@@ -534,6 +574,11 @@ class AttemptsController extends Controller
             ], 404);
         }
 
+        $guard = $this->guardMemberAccess($attempt);
+        if ($guard instanceof JsonResponse) {
+            return $guard;
+        }
+
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
         if (!$result) {
             return response()->json([
@@ -584,6 +629,11 @@ class AttemptsController extends Controller
                 'error' => 'ATTEMPT_NOT_FOUND',
                 'message' => 'attempt not found.',
             ], 404);
+        }
+
+        $guard = $this->guardMemberAccess($attempt);
+        if ($guard instanceof JsonResponse) {
+            return $guard;
         }
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
@@ -747,5 +797,25 @@ class AttemptsController extends Controller
         }
 
         return (int) $raw;
+    }
+
+    private function guardMemberAccess(Attempt $attempt): ?JsonResponse
+    {
+        $role = $this->orgContext->role();
+        if (!in_array($role, ['member', 'viewer'], true)) {
+            return null;
+        }
+
+        $userId = $this->orgContext->userId();
+        $attemptUserId = $attempt->user_id !== null ? (string) $attempt->user_id : '';
+        if ($userId === null || $attemptUserId === '' || $attemptUserId !== (string) $userId) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'NOT_FOUND',
+                'message' => 'attempt not found.',
+            ], 404);
+        }
+
+        return null;
     }
 }

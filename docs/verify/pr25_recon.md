@@ -1,0 +1,29 @@
+# PR25 Recon
+
+- 相关入口文件：
+  - backend/routes/api.php
+  - backend/app/Http/Controllers/API/V0_4/AssessmentController.php
+  - backend/app/Http/Controllers/API/V0_3/AttemptsController.php
+  - backend/app/Http/Middleware/RequireOrgRole.php
+- 相关路由：
+  - POST /api/v0.4/orgs/{org_id}/assessments
+  - POST /api/v0.4/orgs/{org_id}/assessments/{id}/invite
+  - GET /api/v0.4/orgs/{org_id}/assessments/{id}/progress
+  - GET /api/v0.4/orgs/{org_id}/assessments/{id}/summary
+  - POST /api/v0.3/attempts/submit (invite_token + credits)
+- 相关 DB 表/迁移：
+  - assessments
+  - assessment_assignments
+  - organization_members.role 扩展 (owner/admin/member/viewer)
+- 需要新增/修改点：
+  - v0.4 assessments create/invite/progress/summary
+  - attempt_submit 绑定 invite_token + credits 消耗
+  - RequireOrgRole 中间件 + member/viewer 只读自身结果
+  - 验收脚本/Workflow/测试覆盖
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 固定端口 1825，脚本强制清理端口 + 回收 PID
+  - CI/脚本禁止 rg/jq，使用 grep -E + php -r
+  - 校验 config/scales_registry/pack 目录一致性
+  - sqlite fresh migrate 可跑通（迁移幂等）
+  - RBAC/跨 org 一律 404
+  - artifacts 输出后统一 sanitize

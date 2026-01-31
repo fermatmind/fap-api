@@ -1,0 +1,54 @@
+name: ci-verify-pr25-b2b-assessments-progress-rbac
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - "content_packages/**"
+      - ".github/workflows/ci_verify_pr25_b2b_assessments_progress_rbac.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - "content_packages/**"
+      - ".github/workflows/ci_verify_pr25_b2b_assessments_progress_rbac.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      CI: true
+      FAP_NONINTERACTIVE: 1
+      COMPOSER_NO_INTERACTION: 1
+      GIT_TERMINAL_PROMPT: 0
+      NO_COLOR: 1
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/pr25.sqlite
+      CACHE_DRIVER: array
+      SERVE_PORT: 1825
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.5"
+          extensions: mbstring, xml, curl, zip, intl, sqlite, pdo_sqlite
+
+      - name: Prepare sqlite
+        run: |
+          rm -f /tmp/pr25.sqlite
+          touch /tmp/pr25.sqlite
+
+      - name: PR25 accept
+        run: bash backend/scripts/pr25_accept.sh
+
+      - name: CI verify mbti
+        run: bash backend/scripts/ci_verify_mbti.sh
