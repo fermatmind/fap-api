@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 final class MembershipService
 {
+    private const ALLOWED_ROLES = ['owner', 'admin', 'member', 'viewer'];
+
     public function getRole(int $orgId, int $userId): ?string
     {
         if (!Schema::hasTable('organization_members')) {
@@ -30,7 +32,7 @@ final class MembershipService
     public function addMember(int $orgId, int $userId, string $role): void
     {
         $role = trim($role);
-        if ($role === '') {
+        if ($role === '' || !in_array($role, self::ALLOWED_ROLES, true)) {
             $role = 'member';
         }
 
