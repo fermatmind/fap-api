@@ -15,11 +15,44 @@ class CreditsConsumeOnAttemptSubmitTest extends TestCase
 {
     use RefreshDatabase;
 
+    // 与 repo 内 content pack/seed/config 口径保持一致（PR21/22/23/24/25 的默认约定）
+    private const DEFAULT_PACK_ID = 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST';
+    private const DEFAULT_DIR_VERSION = 'MBTI-CN-v0.2.1-TEST';
+    private const DEFAULT_REGION = 'CN_MAINLAND';
+    private const DEFAULT_LOCALE = 'zh-CN';
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // 同时写 env + config，避免测试机环境变量覆盖导致 pack/registry 不一致 → questions 为空
+        putenv('FAP_DEFAULT_PACK_ID=' . self::DEFAULT_PACK_ID);
+        putenv('FAP_DEFAULT_DIR_VERSION=' . self::DEFAULT_DIR_VERSION);
+        putenv('FAP_DEFAULT_REGION=' . self::DEFAULT_REGION);
+        putenv('FAP_DEFAULT_LOCALE=' . self::DEFAULT_LOCALE);
+
+        config([
+            'content_packs.default_pack_id' => self::DEFAULT_PACK_ID,
+            'content_packs.default_dir_version' => self::DEFAULT_DIR_VERSION,
+            'content_packs.default_region' => self::DEFAULT_REGION,
+            'content_packs.default_locale' => self::DEFAULT_LOCALE,
+        ]);
+
+        // 某些实现会从 scales_registry.* 配置读默认 pack
+        config([
+            'scales_registry.default_pack_id' => self::DEFAULT_PACK_ID,
+            'scales_registry.default_dir_version' => self::DEFAULT_DIR_VERSION,
+            'scales_registry.default_region' => self::DEFAULT_REGION,
+            'scales_registry.default_locale' => self::DEFAULT_LOCALE,
+        ]);
+    }
+
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder())->run();
         (new Pr17SimpleScoreDemoSeeder())->run();
 
+        // 确保本测试走“企业 credits 写死 benefit_code”的逻辑，不被 scale 自己的 credit 配置干扰
         $row = DB::table('scales_registry')
             ->where('org_id', 0)
             ->where('code', 'SIMPLE_SCORE_DEMO')
@@ -36,7 +69,7 @@ class CreditsConsumeOnAttemptSubmitTest extends TestCase
             }
 
             unset($commercial['credit_benefit_code']);
-            $payload = json_encode($commercial, JSON_UNESCAPED_UNICODE);
+            $payload = json_encode($commercial, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
             DB::table('scales_registry')
                 ->where('org_id', 0)
@@ -129,36 +162,117 @@ class CreditsConsumeOnAttemptSubmitTest extends TestCase
 
     private function fetchAnswers(int $orgId, string $token): array
     {
-        $questions = $this->withHeaders([
+        $resp = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
             'X-Org-Id' => (string) $orgId,
+            'Accept' => 'application/json',
         ])->getJson('/api/v0.3/scales/SIMPLE_SCORE_DEMO/questions');
 
-        $questions->assertStatus(200);
-        $items = $questions->json('questions.items');
-        $this->assertIsArray($items);
+        $resp->assertStatus(200);
+
+        // 兼容多种结构：questions.items / items / questions
+        $items = $resp->json('questions.items');
+        if (!is_array($items)) {
+            $items = $resp->json('items');
+        }
+        if (!is_array($items)) {
+            $items = $resp->json('questions');
+        }
+        if (!is_array($items)) {
+            $items = [];
+        }
+
+        $this->assertNotEmpty(
+            $items,
+            'questions items empty; response=' . json_encode($resp->json(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
 
         $answers = [];
         foreach ($items as $item) {
             if (!is_array($item)) {
                 continue;
             }
-            $qid = (string) ($item['question_id'] ?? '');
-            $options = $item['options'] ?? [];
-            if ($qid === '' || !is_array($options) || $options === []) {
-                continue;
+            $answer = $this->buildAnswerFromQuestionItem($item);
+            if (is_array($answer)) {
+                $answers[] = $answer;
             }
-            $code = (string) ($options[0]['code'] ?? '');
-            if ($code === '') {
-                continue;
+        }
+
+        $this->assertNotEmpty(
+            $answers,
+            'failed to build answers; response=' . json_encode($resp->json(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+
+        return $answers;
+    }
+
+    private function buildAnswerFromQuestionItem(array $item): ?array
+    {
+        $qid = (string) ($item['question_id'] ?? $item['id'] ?? $item['qid'] ?? '');
+        if ($qid === '') {
+            return null;
+        }
+
+        $questionType = strtolower((string) ($item['question_type'] ?? $item['type'] ?? ''));
+
+        // options 兼容：options / answer_options / choices / options.items
+        $options = $item['options'] ?? $item['answer_options'] ?? $item['choices'] ?? [];
+        if (is_string($options)) {
+            $decoded = json_decode($options, true);
+            $options = is_array($decoded) ? $decoded : [];
+        }
+        if (is_array($options) && isset($options['items']) && is_array($options['items'])) {
+            $options = $options['items'];
+        }
+
+        // 多选判定
+        $allowMultiple = (bool) ($item['allow_multiple'] ?? false);
+        if (str_contains($questionType, 'multi')) {
+            $allowMultiple = true;
+        }
+        if (str_contains($questionType, 'multiple')) {
+            $allowMultiple = true;
+        }
+
+        if (is_array($options) && $options !== []) {
+            $codes = [];
+            foreach ($options as $opt) {
+                if (!is_array($opt)) {
+                    continue;
+                }
+                $code = (string) ($opt['code'] ?? $opt['value'] ?? $opt['id'] ?? '');
+                if ($code !== '') {
+                    $codes[] = $code;
+                }
             }
-            $answers[] = [
+
+            if ($codes !== []) {
+                if ($allowMultiple) {
+                    return [
+                        'question_id' => $qid,
+                        'codes' => [$codes[0]],
+                    ];
+                }
+
+                return [
+                    'question_id' => $qid,
+                    'code' => $codes[0],
+                ];
+            }
+        }
+
+        // 无 options 的题型：给最小可用值
+        if (str_contains($questionType, 'text')) {
+            return [
                 'question_id' => $qid,
-                'code' => $code,
+                'text' => 'ok',
             ];
         }
 
-        return $answers;
+        return [
+            'question_id' => $qid,
+            'value' => 1,
+        ];
     }
 
     public function test_consume_b2b_credits_and_insufficient_response(): void
