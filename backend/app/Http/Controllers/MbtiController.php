@@ -1205,9 +1205,34 @@ if ($recent && is_string($shareId) && $shareId !== '') {
         optional($lock)->release();
     }
 
+    
     $shareId = (string) ($locked['share_id'] ?? '');
 
-    // ====== lock 外：加载内容包文案（不影响幂等，避免占锁太久）======
+    // ✅ persist share to shares table (attempt_id -> share_id)
+    try {
+        $existing = DB::table('shares')->where('attempt_id', $attemptId)->first();
+        if (!$existing) {
+            DB::table('shares')->insert([
+                'id' => $shareId,
+                'attempt_id' => $attemptId,
+                'anon_id' => (string) ($attempt?->anon_id ?? ''),
+                'scale_code' => (string) ($result->scale_code ?? 'MBTI'),
+                'scale_version' => (string) ($result->scale_version ?? 'v0.2'),
+                'content_package_version' => (string) $contentPackageVersion,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        } else {
+            DB::table('shares')->where('attempt_id', $attemptId)->update([
+                'updated_at' => now(),
+                'content_package_version' => (string) $contentPackageVersion,
+            ]);
+        }
+    } catch (\Throwable $e) {
+        // do not break share response if DB insert fails
+        \Log::warning('[share] persist shares failed', ['attempt_id' => $attemptId, 'err' => $e->getMessage()]);
+    }
+// ====== lock 外：加载内容包文案（不影响幂等，避免占锁太久）======
     $snippet = $this->loadShareSnippet($contentPackageVersion, $typeCode);
     $profile = $this->loadTypeProfile($contentPackageVersion, $typeCode);
     $merged  = array_merge($profile ?: [], $snippet ?: []);
@@ -2440,8 +2465,23 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
      */
     private function loadTypeProfile(string $contentPackageVersion, string $typeCode): array
     {
+        $rawVersion = $contentPackageVersion;
         $contentPackageVersion = $this->normalizeContentPackageDir($contentPackageVersion); // ✅
         $path = $this->findPackageFile($contentPackageVersion, 'type_profiles.json');
+
+        if ((!$path || !is_file($path)) && is_string($rawVersion) && $rawVersion !== '') {
+            try {
+                $region = (string) (request()->header('X-Region') ?: $this->defaultRegion());
+                $locale = (string) (request()->header('X-Locale') ?: $this->defaultLocale());
+                $resolved = app(ContentPackResolver::class)->resolve('MBTI', $region, $locale, $rawVersion);
+                $candidate = rtrim((string) $resolved->baseDir, "/\\") . DIRECTORY_SEPARATOR . 'type_profiles.json';
+                if (is_file($candidate)) {
+                    $path = $candidate;
+                }
+            } catch (\Throwable $e) {
+                // ignore resolve failure
+            }
+        }
 
         if (!$path || !is_file($path)) {
             return [];
@@ -2457,7 +2497,7 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
             return [];
         }
 
-        $items = $data['items'] ?? null;
+        $items = $data['items'] ?? ($data['types'] ?? null);
         if (!is_array($items)) {
             return [];
         }
@@ -2465,6 +2505,7 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
         $profile = $items[$typeCode] ?? null;
         return is_array($profile) ? $profile : [];
     }
+
 
     /**
  * 读取 report assets（identity_cards / share_snippets / 其它 assets）
