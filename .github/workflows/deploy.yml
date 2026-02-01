@@ -49,14 +49,14 @@ jobs:
           fi
 
           # ====== production env vars (only used by deploy.php production host) ======
-          export DEPLOY_USER_PROD="deploy"
+          export DEPLOY_USER_PROD="ubuntu"
           export DEPLOY_PORT_PROD="22"
           export DEPLOY_HOST_PROD="122.152.221.126"
           export DEPLOY_PATH_PROD="/var/www/fap-api"
           export HEALTHCHECK_HOST_PROD="fermatmind.com"
 
           # ====== staging env vars (only used by deploy.php staging host) ======
-          export DEPLOY_USER_STG="deploy"
+          export DEPLOY_USER_STG="ubuntu"
           export DEPLOY_PORT_STG="22"
           export DEPLOY_HOST_STG="staging.fermatmind.com"
           export DEPLOY_PATH_STG="/var/www/fap-api-staging"
