@@ -1,0 +1,18 @@
+{
+  "version": "2026.01",
+  "scale_code": "MBTI",
+  "dimensions": {
+    "EI": {"poles": ["E", "I"], "score_range": [0, 100]},
+    "SN": {"poles": ["S", "N"], "score_range": [0, 100]},
+    "TF": {"poles": ["T", "F"], "score_range": [0, 100]},
+    "JP": {"poles": ["J", "P"], "score_range": [0, 100]},
+    "AT": {"poles": ["A", "T"], "score_range": [0, 100]}
+  },
+  "score_map": {"A": 2, "B": 1, "C": 0, "D": -1, "E": -2},
+  "reverse_pairs": [
+    {"a": "MBTI-001", "b": "MBTI-002"},
+    {"a": "MBTI-010", "b": "MBTI-011"},
+    {"a": "MBTI-050", "b": "MBTI-051"},
+    {"a": "MBTI-090", "b": "MBTI-091"}
+  ]
+}
