@@ -355,6 +355,8 @@ export DB_DATABASE="${DB_DATABASE:-$BACKEND_DIR/database/database.sqlite}"
 export QUEUE_CONNECTION="${QUEUE_CONNECTION:-sync}"
 
 php artisan migrate --force >/dev/null
+php artisan db:seed --class="Database\\Seeders\\CiScalesRegistrySeeder" --force >/dev/null 2>&1 || true
+php artisan fap:scales:sync-slugs >/dev/null 2>&1 || true
 
 # -----------------------------
 # Start server (fail fast if port in use)

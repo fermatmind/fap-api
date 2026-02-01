@@ -42,16 +42,58 @@ assert_not_contains() {
 }
 
 # -----------------------------
-# JSON helpers (jq required)
+# JSON helpers (php -r)
 # -----------------------------
 json_has_path() {
-  local file="$1" jq_path="$2"
-  jq -e "$jq_path | . != null" "$file" >/dev/null 2>&1
+  local file="$1" path="$2"
+  php -r '
+$file=getenv("FILE");
+$path=getenv("PATH");
+$data=json_decode(file_get_contents($file), true);
+if (!is_array($data)) { exit(1); }
+$cur=$data;
+foreach (explode(".", $path) as $seg) {
+  if ($seg === "") continue;
+  if (is_array($cur) && array_key_exists($seg, $cur)) {
+    $cur=$cur[$seg];
+    continue;
+  }
+  if (is_array($cur) && ctype_digit($seg)) {
+    $idx=(int)$seg;
+    if (array_key_exists($idx, $cur)) { $cur=$cur[$idx]; continue; }
+  }
+  exit(1);
+}
+exit(0);
+' FILE="$file" PATH="$path"
 }
 
 json_get_raw() {
-  local file="$1" jq_path="$2"
-  jq -r "$jq_path" "$file"
+  local file="$1" path="$2"
+  php -r '
+$file=getenv("FILE");
+$path=getenv("PATH");
+$data=json_decode(file_get_contents($file), true);
+if (!is_array($data)) { exit(1); }
+$cur=$data;
+foreach (explode(".", $path) as $seg) {
+  if ($seg === "") continue;
+  if (is_array($cur) && array_key_exists($seg, $cur)) {
+    $cur=$cur[$seg];
+    continue;
+  }
+  if (is_array($cur) && ctype_digit($seg)) {
+    $idx=(int)$seg;
+    if (array_key_exists($idx, $cur)) { $cur=$cur[$idx]; continue; }
+  }
+  exit(2);
+}
+if (is_array($cur)) { echo json_encode($cur, JSON_UNESCAPED_UNICODE); exit(0); }
+if (is_bool($cur)) { echo $cur ? "true" : "false"; exit(0); }
+if ($cur === null) { echo "null"; exit(0); }
+echo (string)$cur;
+exit(0);
+' FILE="$file" PATH="$path"
 }
 
 # Pick first existing JSON path from a list, print it, return 0; else return 1.
@@ -68,35 +110,83 @@ json_pick_first_path() {
 }
 
 assert_json_exists() {
-  local file="$1" jq_path="$2" ctx="${3:-}"
-  json_has_path "$file" "$jq_path" || fail "${ctx:+$ctx: }missing json path: $jq_path (file=$file)"
+  local file="$1" path="$2" ctx="${3:-}"
+  json_has_path "$file" "$path" || fail "${ctx:+$ctx: }missing json path: $path (file=$file)"
 }
 
 assert_json_eq() {
-  local file="$1" jq_path="$2" expected="$3" ctx="${4:-}"
+  local file="$1" path="$2" expected="$3" ctx="${4:-}"
   local got
-  got="$(json_get_raw "$file" "$jq_path")"
-  [[ "$got" == "$expected" ]] || fail "${ctx:+$ctx: }json mismatch at $jq_path: expected='$expected' got='$got' (file=$file)"
+  got="$(json_get_raw "$file" "$path" || true)"
+  [[ "$got" == "$expected" ]] || fail "${ctx:+$ctx: }json mismatch at $path: expected='$expected' got='$got' (file=$file)"
 }
 
 assert_json_len_between() {
-  local file="$1" jq_path="$2" min="$3" max="$4" ctx="${5:-}"
+  local file="$1" path="$2" min="$3" max="$4" ctx="${5:-}"
   local n
-  n="$(jq -r "$jq_path | length" "$file" 2>/dev/null || echo "null")"
-  [[ "$n" =~ ^[0-9]+$ ]] || fail "${ctx:+$ctx: }cannot read array length at $jq_path (file=$file)"
-  (( n >= min && n <= max )) || fail "${ctx:+$ctx: }length at $jq_path out of range: got=$n expected=[$min,$max]"
+  n="$(php -r '
+$file=getenv("FILE");
+$path=getenv("PATH");
+$min=(int)getenv("MIN");
+$max=(int)getenv("MAX");
+$data=json_decode(file_get_contents($file), true);
+if (!is_array($data)) { exit(2); }
+$cur=$data;
+foreach (explode(".", $path) as $seg) {
+  if ($seg === "") continue;
+  if (is_array($cur) && array_key_exists($seg, $cur)) { $cur=$cur[$seg]; continue; }
+  if (is_array($cur) && ctype_digit($seg)) { $idx=(int)$seg; if (array_key_exists($idx, $cur)) { $cur=$cur[$idx]; continue; } }
+  exit(3);
+}
+if (!is_array($cur)) { exit(4); }
+$n=count($cur);
+echo $n;
+exit(($n >= $min && $n <= $max) ? 0 : 5);
+' FILE="$file" PATH="$path" MIN="$min" MAX="$max" 2>/dev/null || true)"
+  [[ "$n" =~ ^[0-9]+$ ]] || fail "${ctx:+$ctx: }cannot read array length at $path (file=$file)"
+  (( n >= min && n <= max )) || fail "${ctx:+$ctx: }length at $path out of range: got=$n expected=[$min,$max]"
 }
 
 assert_json_array_includes() {
-  local file="$1" jq_path="$2" want="$3" ctx="${4:-}"
-  jq -e "$jq_path | index(\"$want\") != null" "$file" >/dev/null 2>&1 \
-    || fail "${ctx:+$ctx: }expected array $jq_path to include '$want' (file=$file)"
+  local file="$1" path="$2" want="$3" ctx="${4:-}"
+  php -r '
+$file=getenv("FILE");
+$path=getenv("PATH");
+$want=getenv("WANT");
+$data=json_decode(file_get_contents($file), true);
+if (!is_array($data)) { exit(1); }
+$cur=$data;
+foreach (explode(".", $path) as $seg) {
+  if ($seg === "") continue;
+  if (is_array($cur) && array_key_exists($seg, $cur)) { $cur=$cur[$seg]; continue; }
+  if (is_array($cur) && ctype_digit($seg)) { $idx=(int)$seg; if (array_key_exists($idx, $cur)) { $cur=$cur[$idx]; continue; } }
+  exit(2);
+}
+if (!is_array($cur)) { exit(3); }
+exit(in_array($want, $cur, true) ? 0 : 4);
+' FILE="$file" PATH="$path" WANT="$want" >/dev/null 2>&1 \
+    || fail "${ctx:+$ctx: }expected array $path to include '$want' (file=$file)"
 }
 
 assert_json_array_not_includes() {
-  local file="$1" jq_path="$2" bad="$3" ctx="${4:-}"
-  jq -e "$jq_path | index(\"$bad\") == null" "$file" >/dev/null 2>&1 \
-    || fail "${ctx:+$ctx: }expected array $jq_path NOT to include '$bad' (file=$file)"
+  local file="$1" path="$2" bad="$3" ctx="${4:-}"
+  php -r '
+$file=getenv("FILE");
+$path=getenv("PATH");
+$bad=getenv("BAD");
+$data=json_decode(file_get_contents($file), true);
+if (!is_array($data)) { exit(1); }
+$cur=$data;
+foreach (explode(".", $path) as $seg) {
+  if ($seg === "") continue;
+  if (is_array($cur) && array_key_exists($seg, $cur)) { $cur=$cur[$seg]; continue; }
+  if (is_array($cur) && ctype_digit($seg)) { $idx=(int)$seg; if (array_key_exists($idx, $cur)) { $cur=$cur[$idx]; continue; } }
+  exit(2);
+}
+if (!is_array($cur)) { exit(3); }
+exit(in_array($bad, $cur, true) ? 4 : 0);
+' FILE="$file" PATH="$path" BAD="$bad" >/dev/null 2>&1 \
+    || fail "${ctx:+$ctx: }expected array $path NOT to include '$bad' (file=$file)"
 }
 
 assert_file_exists() {
