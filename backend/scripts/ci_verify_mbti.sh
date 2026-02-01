@@ -1,18 +1,54 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# --- CI hard defaults (force deterministic env) ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKEND_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"
+
+export CI=true
+export FAP_NONINTERACTIVE=1
+export COMPOSER_NO_INTERACTION=1
+export GIT_TERMINAL_PROMPT=0
+export NO_COLOR=1
+
+# DB (force CI sqlite)
+export APP_ENV="${APP_ENV:-testing}"
+export DB_CONNECTION=sqlite
+export DB_DATABASE=/tmp/fap-ci.sqlite
+export QUEUE_CONNECTION=sync
+
+# Content packs (force local driver + repo path)
+export FAP_PACKS_DRIVER=local
+export FAP_PACKS_ROOT="${REPO_DIR}/content_packages"
+export FAP_PACKS_CACHE_DIR="${FAP_PACKS_CACHE_DIR:-storage/app/private/content_packs_cache}"
+export FAP_S3_PREFIX="${FAP_S3_PREFIX:-content_packages/}"
+
+# MBTI defaults (avoid resolver picking default)
+export FAP_DEFAULT_REGION=CN_MAINLAND
+export FAP_DEFAULT_LOCALE=zh-CN
+export FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+export FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.2.1-TEST
+
 # -----------------------------
 # Auth header holder (must be defined under -u)
 # -----------------------------
 CURL_AUTH=()
 
 # -----------------------------
-# Paths
+# Paths (set cwd to backend BEFORE running any artisan)
 # -----------------------------
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-REPO_DIR="$(cd "$BACKEND_DIR/.." && pwd)"
 cd "$BACKEND_DIR"
+
+# Ensure .env exists + key before any artisan
+if [[ ! -f ".env" ]]; then
+  cp -a .env.example .env
+fi
+php artisan key:generate --force >/dev/null 2>&1 || true
+
+# Prepare sqlite + seed scales registry/slugs
+bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+# --- end CI hard defaults ---
 
 # -----------------------------
 # Defaults (override via env)
@@ -335,30 +371,6 @@ if (( reads_count < 60 )); then
 fi
 
 # -----------------------------
-# Prepare Laravel env + DB
-# -----------------------------
-echo "[CI] prepare laravel env/db"
-
-if [[ ! -f ".env" ]]; then
-  cp -a .env.example .env
-fi
-
-php artisan key:generate --force >/dev/null 2>&1 || true
-
-mkdir -p database
-touch database/database.sqlite
-
-# Force sqlite (safe for CI)
-export APP_ENV="${APP_ENV:-testing}"
-export DB_CONNECTION="${DB_CONNECTION:-sqlite}"
-export DB_DATABASE="${DB_DATABASE:-$BACKEND_DIR/database/database.sqlite}"
-export QUEUE_CONNECTION="${QUEUE_CONNECTION:-sync}"
-
-php artisan migrate --force >/dev/null
-php artisan db:seed --class="Database\\Seeders\\CiScalesRegistrySeeder" --force >/dev/null 2>&1 || true
-php artisan fap:scales:sync-slugs >/dev/null 2>&1 || true
-
-# -----------------------------
 # Start server (fail fast if port in use)
 # -----------------------------
 if lsof -ti "tcp:${PORT}" >/dev/null 2>&1; then
@@ -585,7 +597,7 @@ fi
 echo "[CI] events acceptance (M3)"
 
 # Ensure sqlite path is passed to acceptance scripts (keep consistent with CI env)
-SQLITE_DB_FOR_ACCEPT="${DB_DATABASE:-$BACKEND_DIR/database/database.sqlite}"
+SQLITE_DB_FOR_ACCEPT="$DB_DATABASE"
 
 # ----------------------------
 # Phase B: phone OTP acceptance (run before events so logs/order are clear)
