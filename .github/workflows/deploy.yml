@@ -14,9 +14,38 @@ on:
           - staging
           - production
 
+# 同一环境同一时间只跑一个 deploy，避免 deploy.lock
+concurrency:
+  group: deploy-${{ github.repository }}-${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      # push(main) 走 staging；手动触发按 inputs.env
+      TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+
+      # 固定 deployer 版本
+      DEPLOYER_VERSION: "7.5.12"
+
+      # ====== production env vars (used by deploy.php production host) ======
+      DEPLOY_USER_PROD: "ubuntu"
+      DEPLOY_PORT_PROD: "22"
+      DEPLOY_HOST_PROD: "122.152.221.126"
+      DEPLOY_PATH_PROD: "/var/www/fap-api"
+      HEALTHCHECK_HOST_PROD: "fermatmind.com"
+
+      # ====== staging env vars (used by deploy.php staging host) ======
+      DEPLOY_USER_STG: "ubuntu"
+      DEPLOY_PORT_STG: "22"
+      DEPLOY_HOST_STG: "staging.fermatmind.com"
+      DEPLOY_PATH_STG: "/var/www/fap-api-staging"
+      HEALTHCHECK_HOST_STG: "staging.fermatmind.com"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,40 +55,56 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Debug SSH agent (fingerprints only)
+        run: |
+          set -euo pipefail
+          ssh -V
+          ssh-add -l
+
       - name: Add hosts to known_hosts
         run: |
+          set -euo pipefail
           mkdir -p ~/.ssh
           ssh-keyscan -H 122.152.221.126 >> ~/.ssh/known_hosts
           ssh-keyscan -H fermatmind.com >> ~/.ssh/known_hosts
           ssh-keyscan -H staging.fermatmind.com >> ~/.ssh/known_hosts
           ssh-keyscan -H 49.234.55.28 >> ~/.ssh/known_hosts
 
-      - name: Install Deployer (phar)
+      - name: Install Deployer (pinned)
         run: |
-          curl -fsSL -o /tmp/dep.phar https://deployer.org/deployer.phar
+          set -euo pipefail
+          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
           php /tmp/dep.phar --version
+
+      - name: Debug target
+        run: |
+          set -euo pipefail
+          echo "TARGET=$TARGET"
+
+      - name: SSH preflight (whoami)
+        run: |
+          set -euo pipefail
+
+          case "$TARGET" in
+            production)
+              H="$DEPLOY_HOST_PROD"
+              U="$DEPLOY_USER_PROD"
+              P="$DEPLOY_PORT_PROD"
+              ;;
+            staging)
+              H="$DEPLOY_HOST_STG"
+              U="$DEPLOY_USER_STG"
+              P="$DEPLOY_PORT_STG"
+              ;;
+            *)
+              echo "invalid TARGET=$TARGET"
+              exit 2
+              ;;
+          esac
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$P" "$U@$H" 'whoami; hostname; id'
 
       - name: Deploy (Deployer)
         run: |
           set -euo pipefail
-
-          TARGET="${{ github.event.inputs.env }}"
-          if [ -z "${TARGET}" ]; then
-            TARGET="production"
-          fi
-
-          # ====== production env vars (only used by deploy.php production host) ======
-          export DEPLOY_USER_PROD="ubuntu"
-          export DEPLOY_PORT_PROD="22"
-          export DEPLOY_HOST_PROD="122.152.221.126"
-          export DEPLOY_PATH_PROD="/var/www/fap-api"
-          export HEALTHCHECK_HOST_PROD="fermatmind.com"
-
-          # ====== staging env vars (only used by deploy.php staging host) ======
-          export DEPLOY_USER_STG="ubuntu"
-          export DEPLOY_PORT_STG="22"
-          export DEPLOY_HOST_STG="staging.fermatmind.com"
-          export DEPLOY_PATH_STG="/var/www/fap-api-staging"
-          export HEALTHCHECK_HOST_STG="staging.fermatmind.com"
-
-          php /tmp/dep.phar deploy "${TARGET}" -f deploy.php -vvv
+          php /tmp/dep.phar deploy "$TARGET" -f deploy.php -vvv
