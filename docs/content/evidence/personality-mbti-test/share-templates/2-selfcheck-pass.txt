@@ -1,5 +1,5 @@
 == CHECK MBTI.cn-mainland.zh-CN.v0.2.1-TEST
-   manifest: /Users/rainie/Desktop/GitHub/fap-api/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json
+   manifest: <REPO>/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json
 ------------------------------------------------------------------------
 ✅ manifest.json (contract + assets + schema)
   - OK (schema_version/required fields/assets exist/schema match)
@@ -13,8 +13,8 @@
 ✅ share_templates (share templates gate)
   - OK (share_templates checked; templates=1)
   - -- warnings --
-  - WARN pack=MBTI.cn-mainland.zh-CN.v0.2.1-TEST file=/Users/rainie/Desktop/GitHub/fap-api/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/share_templates/wechat_default.json :: cover_image_wide > 200KB (bytes=469539) path=assets/share/mbti_wide_1200x630.png
-  - WARN pack=MBTI.cn-mainland.zh-CN.v0.2.1-TEST file=/Users/rainie/Desktop/GitHub/fap-api/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/share_templates/wechat_default.json :: cover_image_square > 200KB (bytes=469539) path=assets/share/mbti_square_600x600.png
+  - WARN pack=MBTI.cn-mainland.zh-CN.v0.2.1-TEST file=<REPO>/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/share_templates/wechat_default.json :: cover_image_wide > 200KB (bytes=469539) path=assets/share/mbti_wide_1200x630.png
+  - WARN pack=MBTI.cn-mainland.zh-CN.v0.2.1-TEST file=<REPO>/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/share_templates/wechat_default.json :: cover_image_square > 200KB (bytes=469539) path=assets/share/mbti_square_600x600.png
 ✅ questions.json
   - OK (144 active questions, A~E options + scoring fields present)
 ✅ type_profiles.json

@@ -12,6 +12,26 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
+    env:
+      APP_ENV: ci
+      APP_DEBUG: "true"
+
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/fap-ci.sqlite
+      QUEUE_CONNECTION: sync
+
+      # content packs (keep CI deterministic)
+      FAP_PACKS_DRIVER: local
+      FAP_PACKS_ROOT: ${{ github.workspace }}/content_packages
+      FAP_PACKS_CACHE_DIR: storage/app/private/content_packs_cache
+      FAP_S3_PREFIX: content_packages/
+
+      # MBTI defaults (needed by some flows)
+      FAP_DEFAULT_REGION: CN_MAINLAND
+      FAP_DEFAULT_LOCALE: zh-CN
+      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.2.1-TEST
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,54 +63,38 @@ jobs:
       - name: Prepare Laravel env
         working-directory: backend
         run: |
+          set -euo pipefail
+
           if [ ! -f .env ]; then
             if [ -f .env.example ]; then cp .env.example .env; else touch .env; fi
           fi
           php artisan key:generate --force || true
-          mkdir -p storage/framework/{cache,views,sessions} bootstrap/cache
-          chmod -R ug+rwX storage bootstrap/cache || true
-          chmod +x scripts/*.sh || true
 
-      - name: Prepare SQLite DB + migrate
+          mkdir -p storage/framework/{cache,views,sessions} bootstrap/cache storage/app/private
+          chmod -R ug+rwX storage bootstrap/cache || true
+          find scripts -type f -name "*.sh" -exec chmod +x {} + || true
+
+      - name: Prepare CI sqlite (file + migrate + seed)
         working-directory: backend
         env:
-          APP_ENV: ci
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
-          QUEUE_CONNECTION: sync
+          DB_DATABASE: /tmp/fap-ci.sqlite
         run: |
-          set -euo pipefail
-          mkdir -p database
-          touch database/database.sqlite
-          php artisan migrate --force
+          bash scripts/ci/prepare_sqlite.sh
 
       - name: Seed demo scales
         working-directory: backend
-        env:
-          APP_ENV: ci
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
         run: |
           php artisan db:seed --class=Pr16IqRavenDemoSeeder
           php artisan db:seed --class=Pr17SimpleScoreDemoSeeder
 
       - name: Run V0_3 tests
         working-directory: backend
-        env:
-          APP_ENV: ci
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
-          QUEUE_CONNECTION: sync
         run: |
           php artisan test --filter=V0_3
 
       - name: Run PR17 verification script
         working-directory: backend
         env:
-          APP_ENV: ci
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
-          QUEUE_CONNECTION: sync
           SERVE_PORT: 18002
         run: |
           bash scripts/pr17_verify_assessment_engine.sh

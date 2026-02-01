@@ -1,0 +1,54 @@
+{
+  "schema": "fap.report.highlights.rules.v1",
+  "schema_version": "report-highlights-rules@v1",
+  "policy": {
+    "min_total": 3,
+    "max_total": 4,
+    "max_strength": 2
+  },
+  "rules": [
+    { "id": "r_strength_core_always", "pool": "strength", "priority": 1000, "when": { "all": [] }, "pick_ids": ["hl_s_core_strength_1", "hl_s_core_strength_2"], "explain": "全局兜底：保证强项池至少有候选可选。" },
+    { "id": "r_blindspot_core_always", "pool": "blindspot", "priority": 1000, "when": { "all": [] }, "pick_ids": ["hl_b_core_blindspot_1"], "explain": "全局兜底：保证盲点池至少有候选可选。" },
+    { "id": "r_action_core_always", "pool": "action", "priority": 1000, "when": { "all": [] }, "pick_ids": ["hl_a_core_action_1"], "explain": "全局兜底：保证行动建议池至少有候选可选。" },
+
+    { "id": "r_EI_E", "pool": "strength", "priority": 900, "when": { "any": ["tag:side:E", "axis:EI=E"] }, "pick_ids": ["hl_s_ei_E_1"], "explain": "EI 倾向外向（E）：优先选择与互动驱动相关的强项模板。" },
+    { "id": "r_EI_E_blindspot", "pool": "blindspot", "priority": 900, "when": { "any": ["tag:side:E", "axis:EI=E"] }, "pick_ids": ["hl_b_ei_E_1"], "explain": "EI 倾向外向（E）：常见盲点是过度回应外界、透支精力。" },
+    { "id": "r_EI_E_action", "pool": "action", "priority": 900, "when": { "any": ["tag:side:E", "axis:EI=E"] }, "pick_ids": ["hl_a_ei_E_1"], "explain": "EI 倾向外向（E）：用‘提前预约’减少临时打断，提升掌控感。" },
+
+    { "id": "r_EI_I", "pool": "strength", "priority": 900, "when": { "any": ["tag:side:I", "axis:EI=I"] }, "pick_ids": ["hl_s_ei_I_1"], "explain": "EI 倾向内向（I）：优先选择深度思考与稳定输出相关的强项模板。" },
+    { "id": "r_EI_I_blindspot", "pool": "blindspot", "priority": 900, "when": { "any": ["tag:side:I", "axis:EI=I"] }, "pick_ids": ["hl_b_ei_I_1"], "explain": "EI 倾向内向（I）：常见盲点是‘没准备好就不开始’，错过窗口期。" },
+    { "id": "r_EI_I_action", "pool": "action", "priority": 900, "when": { "any": ["tag:side:I", "axis:EI=I"] }, "pick_ids": ["hl_a_ei_I_1"], "explain": "EI 倾向内向（I）：用半成品先对齐方向，再迭代完善。" },
+
+    { "id": "r_SN_N", "pool": "strength", "priority": 850, "when": { "any": ["tag:side:N", "axis:SN=N"] }, "pick_ids": ["hl_s_sn_N_1"], "explain": "SN 倾向直觉（N）：强调趋势洞察与创新方案能力。" },
+    { "id": "r_SN_N_blindspot", "pool": "blindspot", "priority": 850, "when": { "any": ["tag:side:N", "axis:SN=N"] }, "pick_ids": ["hl_b_sn_N_1"], "explain": "SN 倾向直觉（N）：常见盲点是跳得快、落地细节跟不上。" },
+    { "id": "r_SN_N_action", "pool": "action", "priority": 850, "when": { "any": ["tag:side:N", "axis:SN=N"] }, "pick_ids": ["hl_a_sn_N_1"], "explain": "SN 倾向直觉（N）：每个新想法都补一句‘怎么做’，降低推进阻力。" },
+
+    { "id": "r_SN_S", "pool": "strength", "priority": 850, "when": { "any": ["tag:side:S", "axis:SN=S"] }, "pick_ids": ["hl_s_sn_S_1"], "explain": "SN 倾向实感（S）：强调流程与细节、稳定落地能力。" },
+    { "id": "r_SN_S_blindspot", "pool": "blindspot", "priority": 850, "when": { "any": ["tag:side:S", "axis:SN=S"] }, "pick_ids": ["hl_b_sn_S_1"], "explain": "SN 倾向实感（S）：常见盲点是低估‘换一种方式’带来的收益。" },
+    { "id": "r_SN_S_action", "pool": "action", "priority": 850, "when": { "any": ["tag:side:S", "axis:SN=S"] }, "pick_ids": ["hl_a_sn_S_1"], "explain": "SN 倾向实感（S）：用小实验窗口让改进变轻量、持续发生。" },
+
+    { "id": "r_TF_T", "pool": "strength", "priority": 800, "when": { "any": ["tag:side:T", "axis:TF=T"] }, "pick_ids": ["hl_s_tf_T_1"], "explain": "TF 倾向思考（T）：强调逻辑一致性与可复盘决策。" },
+    { "id": "r_TF_T_blindspot", "pool": "blindspot", "priority": 800, "when": { "any": ["tag:side:T", "axis:TF=T"] }, "pick_ids": ["hl_b_tf_T_1"], "explain": "TF 倾向思考（T）：常见盲点是忽略情绪与关系信号。" },
+    { "id": "r_TF_T_action", "pool": "action", "priority": 800, "when": { "any": ["tag:side:T", "axis:TF=T"] }, "pick_ids": ["hl_a_tf_T_1"], "explain": "TF 倾向思考（T）：先共情再给方案，能显著降低对抗感。" },
+
+    { "id": "r_TF_F", "pool": "strength", "priority": 800, "when": { "any": ["tag:side:F", "axis:TF=F"] }, "pick_ids": ["hl_s_tf_F_1"], "explain": "TF 倾向情感（F）：强调共情、关系与团队粘合能力。" },
+    { "id": "r_TF_F_blindspot", "pool": "blindspot", "priority": 800, "when": { "any": ["tag:side:F", "axis:TF=F"] }, "pick_ids": ["hl_b_tf_F_1"], "explain": "TF 倾向情感（F）：常见盲点是为了避免冲突而延后表达。" },
+    { "id": "r_TF_F_action", "pool": "action", "priority": 800, "when": { "any": ["tag:side:F", "axis:TF=F"] }, "pick_ids": ["hl_a_tf_F_1"], "explain": "TF 倾向情感（F）：用‘事实-感受-请求’表达边界，温和但清晰。" },
+
+    { "id": "r_JP_J", "pool": "strength", "priority": 750, "when": { "any": ["tag:side:J", "axis:JP=J"] }, "pick_ids": ["hl_s_jp_J_1"], "explain": "JP 倾向判断（J）：强调规划、推进与里程碑驱动。" },
+    { "id": "r_JP_J_blindspot", "pool": "blindspot", "priority": 750, "when": { "any": ["tag:side:J", "axis:JP=J"] }, "pick_ids": ["hl_b_jp_J_1"], "explain": "JP 倾向判断（J）：常见盲点是对不确定更敏感，容易紧绷。" },
+    { "id": "r_JP_J_action", "pool": "action", "priority": 750, "when": { "any": ["tag:side:J", "axis:JP=J"] }, "pick_ids": ["hl_a_jp_J_1"], "explain": "JP 倾向判断（J）：给计划留缓冲区，提高对变化的韧性。" },
+
+    { "id": "r_JP_P", "pool": "strength", "priority": 750, "when": { "any": ["tag:side:P", "axis:JP=P"] }, "pick_ids": ["hl_s_jp_P_1"], "explain": "JP 倾向知觉（P）：强调灵活调整与机会捕捉。" },
+    { "id": "r_JP_P_blindspot", "pool": "blindspot", "priority": 750, "when": { "any": ["tag:side:P", "axis:JP=P"] }, "pick_ids": ["hl_b_jp_P_1"], "explain": "JP 倾向知觉（P）：常见盲点是过度开放导致迟迟不收敛。" },
+    { "id": "r_JP_P_action", "pool": "action", "priority": 750, "when": { "any": ["tag:side:P", "axis:JP=P"] }, "pick_ids": ["hl_a_jp_P_1"], "explain": "JP 倾向知觉（P）：设定‘决定时刻’，用小闭环替代无限开放。" },
+
+    { "id": "r_AT_A", "pool": "strength", "priority": 700, "when": { "any": ["tag:side:A", "axis:AT=A"] }, "pick_ids": ["hl_s_at_A_1"], "explain": "A/T 倾向坚定（A）：强调稳定与抗压，适合做节奏稳定器。" },
+    { "id": "r_AT_A_blindspot", "pool": "blindspot", "priority": 700, "when": { "any": ["tag:side:A", "axis:AT=A"] }, "pick_ids": ["hl_b_at_A_1"], "explain": "A/T 倾向坚定（A）：常见盲点是低估他人的紧张感与情绪成本。" },
+    { "id": "r_AT_A_action", "pool": "action", "priority": 700, "when": { "any": ["tag:side:A", "axis:AT=A"] }, "pick_ids": ["hl_a_at_A_1"], "explain": "A/T 倾向坚定（A）：多问担忧点，减少误解与反弹。" },
+
+    { "id": "r_AT_T", "pool": "strength", "priority": 700, "when": { "any": ["tag:side:T", "axis:AT=T"] }, "pick_ids": ["hl_s_at_T_1"], "explain": "A/T 倾向谨慎（T）：强调风险敏感度与预案意识。" },
+    { "id": "r_AT_T_blindspot", "pool": "blindspot", "priority": 700, "when": { "any": ["tag:side:T", "axis:AT=T"] }, "pick_ids": ["hl_b_at_T_1"], "explain": "A/T 倾向谨慎（T）：常见盲点是反复担心与自我怀疑带来的内耗。" },
+    { "id": "r_AT_T_action", "pool": "action", "priority": 700, "when": { "any": ["tag:side:T", "axis:AT=T"] }, "pick_ids": ["hl_a_at_T_1"], "explain": "A/T 倾向谨慎（T）：把担心写成可操作清单，让焦虑落地成行动。" }
+  ]
+}

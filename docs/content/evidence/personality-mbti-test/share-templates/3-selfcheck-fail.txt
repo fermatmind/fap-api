@@ -1,5 +1,5 @@
 == CHECK MBTI.cn-mainland.zh-CN.v0.2.1-TEST
-   manifest: /Users/rainie/Desktop/GitHub/fap-api/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json
+   manifest: <REPO>/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json
 ------------------------------------------------------------------------
 ✅ manifest.json (contract + assets + schema)
   - OK (schema_version/required fields/assets exist/schema match)
@@ -8,7 +8,7 @@
   - OK (no undeclared known files found)
 ❌ schema-alignment (declared JSON assets)
   - Schema alignment invalid: 1
-  - pack=MBTI.cn-mainland.zh-CN.v0.2.1-TEST file=/Users/rainie/Desktop/GitHub/fap-api/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/share_templates/wechat_default.json path=$.schema :: schema mismatch got='fap.share_templates.v1_BROKEN' want='fap.share_templates.v1' (asset=share_templates)
+  - pack=MBTI.cn-mainland.zh-CN.v0.2.1-TEST file=<REPO>/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/share_templates/wechat_default.json path=$.schema :: schema mismatch got='fap.share_templates.v1_BROKEN' want='fap.share_templates.v1' (asset=share_templates)
 ✅ meta/landing.json (landing meta gate)
   - OK (landing meta gate passed)
 ✅ questions.json
