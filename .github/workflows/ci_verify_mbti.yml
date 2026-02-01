@@ -85,13 +85,15 @@ jobs:
 
       - name: Prepare CI sqlite (file + migrate + seed)
         working-directory: backend
+        env:
+          DB_DATABASE: /tmp/fap-ci.sqlite
         run: |
           bash scripts/ci/prepare_sqlite.sh
 
       - name: Check content packs index endpoint
+        working-directory: backend
         run: |
           set -euo pipefail
-          cd backend
           php artisan serve --host=127.0.0.1 --port=18000 >/tmp/pr4_srv.log 2>&1 &
           SRV_PID=$!
           trap "kill ${SRV_PID}" EXIT

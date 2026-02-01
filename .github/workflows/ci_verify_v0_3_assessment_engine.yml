@@ -76,6 +76,8 @@ jobs:
 
       - name: Prepare CI sqlite (file + migrate + seed)
         working-directory: backend
+        env:
+          DB_DATABASE: /tmp/fap-ci.sqlite
         run: |
           bash scripts/ci/prepare_sqlite.sh
 
