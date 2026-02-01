@@ -53,7 +53,7 @@ set('php_fpm_service', 'php8.4-fpm');
 // 兼容 GitHub Actions 常见 env：DEPLOY_HOST/DEPLOY_USER/DEPLOY_PORT/DEPLOY_PATH/HEALTHCHECK_HOST
 host('production')
     ->setHostname(getenv('DEPLOY_HOST_PROD') ?: (getenv('DEPLOY_HOST') ?: '122.152.221.126'))
-    ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: (getenv('DEPLOY_USER') ?: 'deploy'))
+    ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: (getenv('DEPLOY_USER') ?: 'ubuntu'))
     ->setPort((int)(getenv('DEPLOY_PORT_PROD') ?: (getenv('DEPLOY_PORT') ?: 22)))
     ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: (getenv('DEPLOY_PATH') ?: '/var/www/fap-api'))
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: (getenv('HEALTHCHECK_HOST') ?: 'fermatmind.com'))
@@ -66,7 +66,7 @@ host('production')
 // 兼容 GitHub Actions 常见 env：DEPLOY_HOST/DEPLOY_USER/DEPLOY_PORT/DEPLOY_PATH/HEALTHCHECK_HOST
 host('staging')
     ->setHostname(getenv('DEPLOY_HOST_STG') ?: (getenv('DEPLOY_HOST') ?: 'staging.fermatmind.com'))
-    ->setRemoteUser(getenv('DEPLOY_USER_STG') ?: (getenv('DEPLOY_USER') ?: 'deploy'))
+    ->setRemoteUser(getenv('DEPLOY_USER_STG') ?: (getenv('DEPLOY_USER') ?: 'ubuntu'))
     ->setPort((int)(getenv('DEPLOY_PORT_STG') ?: (getenv('DEPLOY_PORT') ?: 22)))
     ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: (getenv('DEPLOY_PATH') ?: '/var/www/fap-api-staging'))
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: (getenv('HEALTHCHECK_HOST') ?: 'staging.fermatmind.com'))
