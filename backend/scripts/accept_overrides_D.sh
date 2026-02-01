@@ -23,7 +23,7 @@ fi
 
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "❌ missing command: $1"; exit 1; }; }
 need_cmd curl
-need_cmd jq
+need_cmd php
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -32,7 +32,15 @@ CONTENT_ROOT="${CONTENT_ROOT:-$REPO_DIR/content_packages}"
 
 PKG_REL="${MBTI_CONTENT_PACKAGE:-default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST}"
 PKG_DIR="${PKG_DIR:-$CONTENT_ROOT/$PKG_REL}"
-OVR_FILE="${OVR_FILE:-$PKG_DIR/report_overrides.json}"
+
+RESOLVED_OVR=""
+RESOLVE_OUT="$(cd "$BACKEND_DIR" && php artisan fap:resolve-pack MBTI CN_MAINLAND zh-CN MBTI-CN-v0.2.1-TEST -vvv 2>/dev/null || true)"
+BASE_DIR="$(printf '%s' "$RESOLVE_OUT" | tr -d '\r' | awk -F= '/^base_dir=/{print $2; exit}')"
+if [[ -n "${BASE_DIR}" ]]; then
+  RESOLVED_OVR="${BASE_DIR%/}/report_overrides.json"
+fi
+
+OVR_FILE="${OVR_FILE:-${RESOLVED_OVR:-$PKG_DIR/report_overrides.json}}"
 
 # MODE:
 #   - full: verbose output (default)
@@ -58,9 +66,35 @@ if [[ ! -f "$OVR_FILE" ]]; then
   exit 1
 fi
 
+if [[ -z "${EXPIRES_AT:-}" ]]; then
+  if date -u -d "+7 days" "+%Y-%m-%dT%H:%M:%SZ" >/dev/null 2>&1; then
+    EXPIRES_AT="$(date -u -d "+7 days" "+%Y-%m-%dT%H:%M:%SZ")"
+  else
+    EXPIRES_AT="$(date -u -v +7d "+%Y-%m-%dT%H:%M:%SZ")"
+  fi
+fi
+
 log_full() { [[ "$MODE" == "full" ]] && echo "$@"; }
 log_key()  { [[ "$MODE" != "json" ]] && echo "$@"; }
-emit_json(){ [[ "$MODE" == "json" ]] && printf '%s\n' "$1" || true; }
+emit_json(){
+  [[ "$MODE" == "json" ]] || return 0
+  BASE="$BASE" ATT="$ATT" OVR_FILE="$OVR_FILE" TMP_REPORT="$TMP_REPORT" OUT_DIR="${OUT_DIR:-}" \
+  php -r '
+$payload = [
+  "ok" => true,
+  "base" => getenv("BASE") ?: "",
+  "attempt_id" => getenv("ATT") ?: "",
+  "ovr_file" => getenv("OVR_FILE") ?: "",
+  "tmp_report" => getenv("TMP_REPORT") ?: "",
+  "out_dir" => getenv("OUT_DIR") ?: "",
+  "d0" => "pass",
+  "d1" => "pass",
+  "d2" => "pass",
+  "d3" => "pass",
+];
+echo json_encode($payload, JSON_UNESCAPED_UNICODE) . PHP_EOL;
+'
+}
 
 # =========================
 # Backup/Restore (single backup, always restore)
@@ -98,32 +132,86 @@ call_refresh() {
     exit 2
   fi
 
-  jq -e '.ok==true and (.report.versions.engine!=null)' "$TMP_REPORT" >/dev/null
+  if ! FILE="$TMP_REPORT" php -r '
+$f=getenv("FILE");
+$j=json_decode(file_get_contents($f), true);
+if (!is_array($j)) { exit(2); }
+if (($j["ok"] ?? false) !== true) { exit(3); }
+$engine = $j["report"]["versions"]["engine"] ?? null;
+if ($engine === null || $engine === "") { exit(4); }
+'; then
+    echo "❌ call_refresh invalid report schema" >&2
+    exit 2
+  fi
 
   if [[ "${SAVE_REPORTS}" == "1" && -n "${OUT_DIR}" ]]; then
     cp -a "$TMP_REPORT" "$OUT_DIR/report.${label}.json" 2>/dev/null || true
   fi
 }
 
-jq_absent() { jq -e "$@" "$TMP_REPORT" >/dev/null 2>&1 && return 1 || return 0; }
-jq_present(){ jq -e "$@" "$TMP_REPORT" >/dev/null 2>&1; }
+report_has_traits_card_id() {
+  local id="$1"
+  FILE="$TMP_REPORT" ID="$id" php -r '
+$f=getenv("FILE");
+$id=getenv("ID");
+$j=json_decode(file_get_contents($f), true);
+$cards=$j["report"]["sections"]["traits"]["cards"] ?? [];
+if (!is_array($cards)) { exit(1); }
+foreach ($cards as $c) {
+  if (($c["id"] ?? "") === $id) { exit(0); }
+}
+exit(1);
+'
+}
 
 # Write a test overrides doc that contains BOTH keys: overrides + rules
 # so no matter which key your engine reads, it will work.
 write_doc_with_list() {
   local list_json="$1"
-  cat > "$OVR_FILE" <<JSON
-{"schema":"fap.report.overrides.v1","engine":"v1","overrides":$list_json,"rules":$list_json}
-JSON
+  LIST_JSON="$list_json" OVR_FILE="$OVR_FILE" php -r '
+$list=json_decode(getenv("LIST_JSON"), true);
+if (!is_array($list)) {
+  fwrite(STDERR, "invalid overrides list json" . PHP_EOL);
+  exit(2);
+}
+$doc=[
+  "schema" => "fap.report.overrides.v1",
+  "engine" => "v1",
+  "overrides" => $list,
+  "rules" => $list,
+];
+file_put_contents(getenv("OVR_FILE"), json_encode($doc, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+'
 }
 
 # Pick a stable traits card id from the current report (for D3 conflict)
 pick_traits_card_id() {
-  jq -r '.report.sections.traits.cards[]?.id' "$TMP_REPORT" 2>/dev/null | head -n 1
+  FILE="$TMP_REPORT" php -r '
+$f=getenv("FILE");
+$j=json_decode(file_get_contents($f), true);
+$cards=$j["report"]["sections"]["traits"]["cards"] ?? [];
+if (!is_array($cards)) { exit(1); }
+foreach ($cards as $c) {
+  $id=$c["id"] ?? "";
+  if ($id !== "") { echo $id; exit(0); }
 }
+exit(1);
+'
+}
+
 get_traits_card_title_by_id() {
   local cid="$1"
-  jq -r --arg cid "$cid" '.report.sections.traits.cards[]? | select(.id==$cid) | (.title // "")' "$TMP_REPORT" 2>/dev/null
+  FILE="$TMP_REPORT" CID="$cid" php -r '
+$f=getenv("FILE");
+$cid=getenv("CID");
+$j=json_decode(file_get_contents($f), true);
+$cards=$j["report"]["sections"]["traits"]["cards"] ?? [];
+if (!is_array($cards)) { exit(0); }
+foreach ($cards as $c) {
+  if (($c["id"] ?? "") === $cid) { echo (string)($c["title"] ?? ""); exit(0); }
+}
+exit(0);
+'
 }
 
 # =========================
@@ -137,23 +225,30 @@ run_D0() {
 
   local test_id="zz_ci_test_card_01"
 
-  write_doc_with_list "$(jq -cn --arg tid "$test_id" '
-    [
-      {
-        id:"zz_d0_append",
-        target:"cards",
-        priority:10,
-        match:{section:["traits"]},
-        mode:"append",
-        items:[{id:$tid, section:"traits", title:"（OVR验收）D0 append ok", desc:"D0 baseline proof"}]
-      }
-    ]
-  ')"
+  local list_json
+  list_json="$(cat <<JSON
+[
+  {
+    "id": "zz_d0_append",
+    "target": "cards",
+    "priority": 10,
+    "match": {"section": ["traits"]},
+    "mode": "append",
+    "items": [
+      {"id": "$test_id", "section": "traits", "title": "（OVR验收）D0 append ok", "desc": "D0 baseline proof"}
+    ],
+    "expires_at": "$EXPIRES_AT"
+  }
+]
+JSON
+)"
+
+  write_doc_with_list "$list_json"
 
   call_refresh "D0_BASELINE"
   log_key "✅ report generated"
 
-  if jq_present --arg tid "$test_id" '.report.sections.traits.cards[]? | select(.id==$tid)' ; then
+  if report_has_traits_card_id "$test_id"; then
     log_key "✅ D0 OK: test card appended => overrides loader works"
   else
     log_key "❌ D0 FAIL: test card NOT appended => engine did not load overrides doc"
@@ -176,11 +271,11 @@ run_D1() {
   call_refresh "D1_EMPTY"
   log_key "✅ report generated"
 
-  if jq_absent --arg tid "$test_id" '.report.sections.traits.cards[]? | select(.id==$tid)' ; then
-    log_key "✅ D1 OK: test card absent under empty overrides"
-  else
+  if report_has_traits_card_id "$test_id"; then
     log_key "❌ D1 FAIL: test card still present under empty overrides"
     exit 1
+  else
+    log_key "✅ D1 OK: test card absent under empty overrides"
   fi
 }
 
@@ -195,27 +290,33 @@ run_D2() {
 
   local test_id="zz_ci_test_card_02"
 
-  write_doc_with_list "$(jq -cn --arg tid "$test_id" '
-    [
-      {
-        id:"zz_d2_no_hit",
-        target:"cards",
-        priority:10,
-        match:{section:["__no_such_section__"]},
-        mode:"append",
-        items:[{id:$tid, section:"traits", title:"（OVR验收）D2 should NOT hit", desc:""}]
-      }
-    ]
-  ')"
+  local list_json
+  list_json="$(cat <<JSON
+[
+  {
+    "id": "zz_d2_no_hit",
+    "target": "cards",
+    "priority": 10,
+    "match": {"section": ["__no_such_section__"]},
+    "mode": "append",
+    "items": [
+      {"id": "$test_id", "section": "traits", "title": "（OVR验收）D2 should NOT hit", "desc": ""}
+    ],
+    "expires_at": "$EXPIRES_AT"
+  }
+]
+JSON
+)"
 
+  write_doc_with_list "$list_json"
   call_refresh "D2_NO_MATCH"
   log_key "✅ report generated"
 
-  if jq_absent --arg tid "$test_id" '.report.sections.traits.cards[]? | select(.id==$tid)' ; then
-    log_key "✅ D2 OK: no-hit append did not apply"
-  else
+  if report_has_traits_card_id "$test_id"; then
     log_key "❌ D2 FAIL: no-hit append applied unexpectedly"
     exit 1
+  else
+    log_key "✅ D2 OK: no-hit append did not apply"
   fi
 }
 
@@ -241,29 +342,34 @@ run_D3() {
   log_key "✅ D3 picked card id=$cid"
 
   # Now write conflicting patch rules on the same card title
-  write_doc_with_list "$(jq -cn --arg cid "$cid" '
-    [
-      {
-        id:"zz_d3_conflict_low",
-        target:"cards",
-        priority:60,
-        match:{item:[$cid]},
-        mode:"patch",
-        replace_fields:["title"],
-        patch:{title:"（OVR验收）冲突规则-PRIO60"}
-      },
-      {
-        id:"zz_d3_conflict_high",
-        target:"cards",
-        priority:70,
-        match:{item:[$cid]},
-        mode:"patch",
-        replace_fields:["title"],
-        patch:{title:"（OVR验收）冲突规则生效-PRIO70"}
-      }
-    ]
-  ')"
+  local list_json
+  list_json="$(cat <<JSON
+[
+  {
+    "id": "zz_d3_conflict_low",
+    "target": "cards",
+    "priority": 60,
+    "match": {"item": ["$cid"]},
+    "mode": "patch",
+    "replace_fields": ["title"],
+    "patch": {"title": "（OVR验收）冲突规则-PRIO60"},
+    "expires_at": "$EXPIRES_AT"
+  },
+  {
+    "id": "zz_d3_conflict_high",
+    "target": "cards",
+    "priority": 70,
+    "match": {"item": ["$cid"]},
+    "mode": "patch",
+    "replace_fields": ["title"],
+    "patch": {"title": "（OVR验收）冲突规则生效-PRIO70"},
+    "expires_at": "$EXPIRES_AT"
+  }
+]
+JSON
+)"
 
+  write_doc_with_list "$list_json"
   call_refresh "D3_CONFLICT"
   log_key "✅ report generated"
 
@@ -288,6 +394,7 @@ log_key "ATT=$ATT"
 log_key "PKG_DIR=$PKG_DIR"
 log_key "OVR_FILE=$OVR_FILE"
 log_key "TMP_REPORT=$TMP_REPORT"
+log_key "EXPIRES_AT=$EXPIRES_AT"
 
 run_D0
 run_D1
@@ -297,14 +404,6 @@ run_D3
 log_key ""
 log_key "✅ ALL DONE: D-1 / D-2 / D-3 passed"
 
-emit_json "$(jq -cn \
-  --arg ok "true" \
-  --arg base "$BASE" \
-  --arg att "$ATT" \
-  --arg ovr_file "$OVR_FILE" \
-  --arg tmp_report "$TMP_REPORT" \
-  --arg out_dir "${OUT_DIR:-}" \
-  '{ok:($ok=="true"), base:$base, attempt_id:$att, ovr_file:$ovr_file, tmp_report:$tmp_report, out_dir:$out_dir, d0:"pass", d1:"pass", d2:"pass", d3:"pass"}'
-)"
+emit_json
 
 exit 0

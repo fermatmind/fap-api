@@ -35,6 +35,7 @@ return [
 
     // region 降级链（按顺序尝试）
     'region_fallbacks' => [
+        'US' => ['CN_MAINLAND', 'GLOBAL'],
         // 例子：港澳台先落 CN_MAINLAND，再落 GLOBAL
         'HK' => ['CN_MAINLAND', 'GLOBAL'],
         'MO' => ['CN_MAINLAND', 'GLOBAL'],
