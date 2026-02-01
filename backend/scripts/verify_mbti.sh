@@ -73,8 +73,7 @@ source "$ASSERT_LIB"
 # Preconditions
 # -----------------------------
 require_cmd curl
-require_cmd python3
-require_cmd jq
+require_cmd php
 
 # -----------------------------
 # Exit trap
@@ -175,28 +174,39 @@ strict_negative_signals() {
   assert_file_not_contains "$file" "fallback to GLOBAL" "$ctx"
 }
 
-# jq: find highlights array path (兼容不同 report schema)
+# find highlights array path (兼容不同 report schema)
 pick_highlights_path() {
   local f="$1"
-  local candidates=(
-    '.highlights.items'
-    '.highlights'
-    '.report.highlights.items'
-    '.report.highlights'
-    '.data.highlights.items'
-    '.data.highlights'
-  )
-  local p
-  for p in "${candidates[@]}"; do
-    if jq -e "$p | . != null" "$f" >/dev/null 2>&1; then
-      # ensure it's array
-      if jq -e "$p | type == \"array\"" "$f" >/dev/null 2>&1; then
-        echo "$p"
-        return 0
-      fi
-    fi
-  done
-  return 1
+  FILE="$f" php -r '
+$file=getenv("FILE");
+$data=json_decode(file_get_contents($file), true);
+if (!is_array($data)) { exit(1); }
+$candidates = [
+  ["highlights","items"],
+  ["highlights"],
+  ["report","highlights","items"],
+  ["report","highlights"],
+  ["data","highlights","items"],
+  ["data","highlights"],
+];
+foreach ($candidates as $path) {
+  $cur=$data;
+  $ok=true;
+  foreach ($path as $seg) {
+    if (is_array($cur) && array_key_exists($seg, $cur)) {
+      $cur=$cur[$seg];
+      continue;
+    }
+    $ok=false;
+    break;
+  }
+  if ($ok && is_array($cur)) {
+    echo implode(".", $path);
+    exit(0);
+  }
+}
+exit(1);
+'
 }
 
 # -----------------------------
@@ -204,45 +214,57 @@ pick_highlights_path() {
 # -----------------------------
 echo "[1/8] health: $API"
 fetch_json "$API/api/v0.2/health" "$HEALTH_JSON"
-python3 - <<PY
-import json
-j=json.load(open("$HEALTH_JSON","r",encoding="utf-8"))
-assert j.get("ok") is True, j
-print("[OK] health:", j.get("service"), j.get("version"), j.get("time"))
-PY
+HEALTH_JSON="$HEALTH_JSON" php -r '
+$j=json_decode(file_get_contents(getenv("HEALTH_JSON")), true);
+if (!is_array($j) || ($j["ok"] ?? false) !== true) {
+  fwrite(STDERR, "[FAIL] health not ok\n");
+  exit(1);
+}
+echo "[OK] health: " . ($j["service"] ?? "") . " " . ($j["version"] ?? "") . " " . ($j["time"] ?? "") . PHP_EOL;
+'
 
 echo "[2/8] fetch questions"
 fetch_json "$API/api/v0.2/scales/$SCALE_CODE/questions" "$QUESTIONS_JSON"
-python3 - <<PY
-import json
-j=json.load(open("$QUESTIONS_JSON","r",encoding="utf-8"))
-assert j.get("ok") is True, j
-cnt=len(j.get("items",[]))
-assert cnt>0, "no items"
-print("[OK] questions count=", cnt)
-PY
+QUESTIONS_JSON="$QUESTIONS_JSON" php -r '
+$j=json_decode(file_get_contents(getenv("QUESTIONS_JSON")), true);
+if (!is_array($j) || ($j["ok"] ?? false) !== true) {
+  fwrite(STDERR, "[FAIL] questions not ok\n");
+  exit(1);
+}
+$items=$j["items"] ?? [];
+$cnt=is_array($items) ? count($items) : 0;
+if ($cnt <= 0) { fwrite(STDERR, "[FAIL] no items\n"); exit(1); }
+echo "[OK] questions count=" . $cnt . PHP_EOL;
+'
 
 echo "[3/8] build payload ($ANSWER_CODE for all)"
-python3 - <<PY
-import json,uuid
-j=json.load(open("$QUESTIONS_JSON","r",encoding="utf-8"))
-items=j.get("items",[])
-answers=[{"question_id":q["question_id"],"code":"$ANSWER_CODE"} for q in items]
-payload={
-  "anon_id":"local_verify_"+uuid.uuid4().hex[:8],
-  "scale_code":"$SCALE_CODE",
-  "scale_version":"$SCALE_VERSION",
-  "answers":answers,
-  "client_platform":"cli",
-  "client_version":"verify-1",
-  "channel":"direct",
-  "referrer":"cli",
-  "region":"$REGION",
-  "locale":"$LOCALE"
+QUESTIONS_JSON="$QUESTIONS_JSON" PAYLOAD_JSON="$PAYLOAD_JSON" ANSWER_CODE="$ANSWER_CODE" SCALE_CODE="$SCALE_CODE" SCALE_VERSION="$SCALE_VERSION" REGION="$REGION" LOCALE="$LOCALE" php -r '
+$j=json_decode(file_get_contents(getenv("QUESTIONS_JSON")), true);
+$items=$j["items"] ?? [];
+$answers=[];
+if (is_array($items)) {
+  foreach ($items as $q) {
+    if (!is_array($q)) { continue; }
+    $qid=$q["question_id"] ?? "";
+    if ($qid === "") { continue; }
+    $answers[]=["question_id"=>$qid, "code"=>getenv("ANSWER_CODE")];
+  }
 }
-open("$PAYLOAD_JSON","w",encoding="utf-8").write(json.dumps(payload,ensure_ascii=False))
-print("[OK] payload written:", "$PAYLOAD_JSON", "answers=", len(answers))
-PY
+$payload=[
+  "anon_id"=>"local_verify_" . substr(bin2hex(random_bytes(8)), 0, 8),
+  "scale_code"=>getenv("SCALE_CODE"),
+  "scale_version"=>getenv("SCALE_VERSION"),
+  "answers"=>$answers,
+  "client_platform"=>"cli",
+  "client_version"=>"verify-1",
+  "channel"=>"direct",
+  "referrer"=>"cli",
+  "region"=>getenv("REGION"),
+  "locale"=>getenv("LOCALE"),
+];
+file_put_contents(getenv("PAYLOAD_JSON"), json_encode($payload, JSON_UNESCAPED_UNICODE));
+echo "[OK] payload written: " . getenv("PAYLOAD_JSON") . " answers=" . count($answers) . PHP_EOL;
+'
 
 # 4) create attempt OR reuse attempt
 if [[ -n "${ATTEMPT_ID:-}" ]]; then
@@ -259,18 +281,22 @@ else
     echo "---- body (first 800 bytes) ----" >&2
     head -c 800 "$ATTEMPT_RESP_JSON" 2>/dev/null || true
     echo >&2
+    echo "---- server log tail (/tmp/pr4_srv.log) ----" >&2
+    tail -n 200 /tmp/pr4_srv.log 2>/dev/null || true
+    echo "---- laravel log tail ($BACKEND_DIR/storage/logs/laravel.log) ----" >&2
+    tail -n 200 "$BACKEND_DIR/storage/logs/laravel.log" 2>/dev/null || true
+    echo "---- laravel log tail (storage/logs/laravel.log) ----" >&2
+    tail -n 200 storage/logs/laravel.log 2>/dev/null || true
     exit 5
   fi
 
-  ATTEMPT_ID="$(python3 - <<PY
-import json
-j=json.load(open("$ATTEMPT_RESP_JSON","r",encoding="utf-8"))
-assert j.get("ok") is True, j
-aid=j.get("attempt_id")
-assert aid, "attempt_id missing"
-print(aid)
-PY
-)"
+  ATTEMPT_ID="$(ATTEMPT_RESP_JSON="$ATTEMPT_RESP_JSON" php -r '
+$j=json_decode(file_get_contents(getenv("ATTEMPT_RESP_JSON")), true);
+if (!is_array($j) || ($j["ok"] ?? false) !== true) { exit(2); }
+$aid=$j["attempt_id"] ?? "";
+if ($aid === "") { exit(3); }
+echo $aid;
+')"
 fi
 
 echo "$ATTEMPT_ID" > "$ATTEMPT_ID_TXT"
@@ -288,12 +314,49 @@ echo "[OK] share=$SHARE_JSON"
 # Phase A: Content verification
 # -----------------------------
 echo "[6/8] content verify (no fallback)"
-# 1) 你原有的 pack prefix / locale 断言（继续用你已存在的 assert_report.py）
-python3 "$SCRIPT_DIR/assert_report.py" \
-  --report "$REPORT_JSON" \
-  --share "$SHARE_JSON" \
-  --expect-pack-prefix "$EXPECT_PACK_PREFIX" \
-  --expect-locale "$LOCALE"
+# 1) pack prefix / locale assertions (php -r)
+REPORT_JSON="$REPORT_JSON" SHARE_JSON="$SHARE_JSON" EXPECT_PACK_PREFIX="$EXPECT_PACK_PREFIX" EXPECT_LOCALE="$LOCALE" php -r '
+function die_msg($msg) { fwrite(STDERR, "[ASSERT][FAIL] " . $msg . PHP_EOL); exit(2); }
+$reportPath=getenv("REPORT_JSON");
+$sharePath=getenv("SHARE_JSON");
+$expectPackPrefix=getenv("EXPECT_PACK_PREFIX") ?: "";
+$expectLocale=getenv("EXPECT_LOCALE") ?: "zh-CN";
+$reportRoot=json_decode(file_get_contents($reportPath), true);
+if (!is_array($reportRoot) || ($reportRoot["ok"] ?? false) !== true) { die_msg("report.ok != true"); }
+$shareRoot=json_decode(file_get_contents($sharePath), true);
+if (!is_array($shareRoot) || ($shareRoot["ok"] ?? false) !== true) { die_msg("share.ok != true"); }
+$report=$reportRoot["report"] ?? [];
+$versions=$report["versions"] ?? [];
+$contentPackId=$versions["content_pack_id"] ?? $versions["content_pack"] ?? $report["content_pack_id"] ?? $reportRoot["content_pack_id"] ?? "";
+if ($contentPackId === "") { die_msg("report.versions.content_pack_id missing"); }
+$cards=$report["sections"]["traits"]["cards"] ?? [];
+if (!is_array($cards) || count($cards) <= 0) { die_msg("report.sections.traits.cards empty or missing"); }
+$shareId=$shareRoot["share_id"] ?? "";
+if ($shareId === "") { die_msg("share.share_id missing"); }
+$attemptReport=$reportRoot["attempt_id"] ?? "";
+$attemptShare=$shareRoot["attempt_id"] ?? "";
+$attemptId=$attemptShare ?: $attemptReport;
+if ($attemptId === "") { die_msg("attempt_id missing in share/report root"); }
+if ($attemptReport && $attemptShare && $attemptReport !== $attemptShare) { die_msg("attempt_id mismatch: share={$attemptShare} report={$attemptReport}"); }
+$profile=$report["profile"] ?? [];
+$reportType=$profile["type_code"] ?? ($reportRoot["type_code"] ?? "");
+$shareType=$shareRoot["type_code"] ?? "";
+if ($shareType && $reportType && $shareType !== $reportType) { die_msg("type_code mismatch: share={$shareType} report={$reportType}"); }
+$idcard=$report["identity_card"] ?? [];
+$locale=$idcard["locale"] ?? "";
+$expectLocaleAlt=str_replace("-", "_", $expectLocale);
+if ($locale !== $expectLocale && $locale !== $expectLocaleAlt) { die_msg("identity_card.locale unexpected: {$locale} (expect {$expectLocale})"); }
+if ($expectPackPrefix !== "" && strpos((string)$contentPackId, $expectPackPrefix) === false) {
+  die_msg("content_pack_id does not contain expected prefix: {$expectPackPrefix} (got {$contentPackId})");
+}
+echo "[ASSERT][OK] report/share assertions passed" . PHP_EOL;
+echo "  attempt_id={$attemptId}" . PHP_EOL;
+echo "  type_code=" . ($shareType ?: $reportType) . PHP_EOL;
+echo "  content_pack_id={$contentPackId}" . PHP_EOL;
+echo "  share_id={$shareId}" . PHP_EOL;
+echo "  report_path={$reportPath}" . PHP_EOL;
+echo "  share_path={$sharePath}" . PHP_EOL;
+'
 
 # -------------------------
 # REGION positive assertion
@@ -303,8 +366,8 @@ _expect_region="${REGION:-CN_MAINLAND}"
 _expect_region_dir="${_expect_region//_/-}"                 # CN_MAINLAND -> CN-MAINLAND
 _expect_region_slug="$(echo "$_expect_region" | tr '[:upper:]' '[:lower:]' | tr '_' '-')"  # cn-mainland
 
-_actual_dir="$(jq -r '.report.versions.content_package_dir // ""' "$REPORT_JSON")"
-_actual_pack_id="$(jq -r '.report.versions.content_pack_id // ""' "$REPORT_JSON")"
+_actual_dir="$(REPORT_JSON="$REPORT_JSON" php -r '$j=json_decode(file_get_contents(getenv("REPORT_JSON")), true); echo (string)($j["report"]["versions"]["content_package_dir"] ?? "");')"
+_actual_pack_id="$(REPORT_JSON="$REPORT_JSON" php -r '$j=json_decode(file_get_contents(getenv("REPORT_JSON")), true); echo (string)($j["report"]["versions"]["content_pack_id"] ?? "");')"
 
 if [[ -z "$_actual_dir" ]]; then
   echo "[ASSERT][FAIL] report.versions.content_package_dir missing"
@@ -341,28 +404,46 @@ echo "[7/8] rules verify (highlights contract)"
 HL_PATH="$(pick_highlights_path "$REPORT_JSON" || true)"
 [[ -n "${HL_PATH:-}" ]] || fail "Rules: cannot find highlights array path in report.json"
 
-# items 数量在 [MIN_HL, MAX_HL]
-HL_N="$(jq -r "$HL_PATH | length" "$REPORT_JSON")"
-[[ "$HL_N" =~ ^[0-9]+$ ]] || fail "Rules: invalid highlights length"
-if (( HL_N < MIN_HL || HL_N > MAX_HL )); then
-  fail "Rules: highlights count out of range: got=$HL_N expect=[$MIN_HL,$MAX_HL] path=$HL_PATH"
-fi
-
-# kinds 必须包含 blindspot & action
-jq -e "$HL_PATH | map(.kind) | index(\"blindspot\") != null" "$REPORT_JSON" >/dev/null \
-  || fail "Rules: highlights.kind must include 'blindspot'"
-jq -e "$HL_PATH | map(.kind) | index(\"action\") != null" "$REPORT_JSON" >/dev/null \
-  || fail "Rules: highlights.kind must include 'action'"
-
-# 防双前缀：任何 id 不得包含 hl.blindspot.hl.
-jq -e "$HL_PATH | map(.id // \"\") | any(contains(\"hl.blindspot.hl.\")) | not" "$REPORT_JSON" >/dev/null \
-  || fail "Rules: found forbidden id prefix 'hl.blindspot.hl.'"
-
-# 禁止 borderline（id 或 tags 中出现 borderline 都算）
-jq -e "$HL_PATH
-  | map((.id // \"\") + \" \" + ((.tags // []) | join(\",\")))
-  | any(test(\"borderline\"; \"i\")) | not" "$REPORT_JSON" >/dev/null \
-  || fail "Rules: found forbidden 'borderline' in highlight id/tags"
+HL_N="$(REPORT_JSON="$REPORT_JSON" HL_PATH="$HL_PATH" MIN_HL="$MIN_HL" MAX_HL="$MAX_HL" php -r '
+function die_msg($msg) { fwrite(STDERR, "[FAIL] " . $msg . PHP_EOL); exit(1); }
+$file=getenv("REPORT_JSON");
+$path=getenv("HL_PATH");
+$min=(int)getenv("MIN_HL");
+$max=(int)getenv("MAX_HL");
+$data=json_decode(file_get_contents($file), true);
+if (!is_array($data)) { die_msg("Rules: invalid json"); }
+function get_path($data, $path) {
+  $cur=$data;
+  foreach (explode(".", $path) as $seg) {
+    if ($seg === "") { continue; }
+    if (is_array($cur) && array_key_exists($seg, $cur)) { $cur=$cur[$seg]; continue; }
+    return null;
+  }
+  return $cur;
+}
+$hl=get_path($data, $path);
+if (!is_array($hl)) { die_msg("Rules: invalid highlights path"); }
+$len=count($hl);
+if ($len < $min || $len > $max) { die_msg("Rules: highlights count out of range: got={$len} expect=[{$min},{$max}] path={$path}"); }
+$kinds=[];
+foreach ($hl as $item) {
+  if (!is_array($item)) { continue; }
+  $kinds[] = (string)($item["kind"] ?? "");
+  $id = (string)($item["id"] ?? "");
+  if ($id !== "" && str_contains($id, "hl.blindspot.hl.")) {
+    die_msg("Rules: found forbidden id prefix 'hl.blindspot.hl.'");
+  }
+  $tags = $item["tags"] ?? [];
+  $tags_str = is_array($tags) ? implode(",", $tags) : "";
+  $combined = strtolower(trim($id . " " . $tags_str));
+  if ($combined !== "" && str_contains($combined, "borderline")) {
+    die_msg("Rules: found forbidden 'borderline' in highlight id/tags");
+  }
+}
+if (!in_array("blindspot", $kinds, true)) { die_msg("Rules: highlights.kind must include 'blindspot'"); }
+if (!in_array("action", $kinds, true)) { die_msg("Rules: highlights.kind must include 'action'"); }
+echo $len;
+')"
 
 echo "[OK] rules verification passed (path=$HL_PATH count=$HL_N)"
 

@@ -1,0 +1,25 @@
+# PR215 Recon
+
+- Related entry files:
+  - backend/scripts/** (verify_mbti.sh, ci_verify_mbti.sh, overrides accept script)
+  - backend/database/seeders/CiScalesRegistrySeeder.php
+  - backend/scripts/ci/prepare_sqlite.sh
+  - backend/config/content_packs.php
+- Related routes:
+  - /api/v0.2/content-packs
+  - /api/v0.3/attempts/start
+  - /api/v0.3/attempts/submit
+  - /api/v0.3/scales/{code}/questions
+- Related DB tables:
+  - scales_registry, scale_slugs
+- Needed changes:
+  - overrides script: resolve-pack base_dir -> report_overrides.json + expires_at
+  - create-attempt failure logs: tail server log + laravel.log
+  - CI sqlite seed: add DEMO_ANSWERS/SIMPLE_SCORE_DEMO/IQ_RAVEN + sync slugs
+  - region_fallbacks: add US => [CN_MAINLAND, GLOBAL]
+- Risks and mitigations:
+  - CI tool deps: avoid rg/jq in scripts, use grep/sed/awk/php -r
+  - sqlite fresh migrate: ensure /tmp/fap-ci.sqlite rebuild
+  - pack/seed/config alignment: config default_pack_id + seeder default_pack_id + pack dir
+  - 404 scope: keep cross-org/unauth 404 unchanged
+  - artifacts: avoid absolute paths or tokens
