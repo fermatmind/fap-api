@@ -12,6 +12,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
+    env:
+      APP_ENV: ci
+      APP_DEBUG: "true"
+
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/fap-ci.sqlite
+      QUEUE_CONNECTION: sync
+
+      # content packs (make CI deterministic)
+      FAP_PACKS_DRIVER: local
+      FAP_PACKS_ROOT: ${{ github.workspace }}/content_packages
+      FAP_PACKS_CACHE_DIR: storage/app/private/content_packs_cache
+      FAP_S3_PREFIX: content_packages/
+
+      # hard defaults (avoid resolver picking "default")
+      FAP_DEFAULT_REGION: CN_MAINLAND
+      FAP_DEFAULT_LOCALE: zh-CN
+      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.2.1-TEST
+
+      MODE: ci
+      STRICT: "1"
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,9 +54,9 @@ jobs:
           path: |
             backend/vendor
             ~/.composer/cache/files
-          key: ${{ runner.os }}-php83-${{ hashFiles('backend/composer.lock') }}
+          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-php83-
+            ${{ runner.os }}-php84-
 
       - name: Install backend dependencies
         working-directory: backend
@@ -43,33 +66,27 @@ jobs:
       - name: Prepare Laravel env
         working-directory: backend
         run: |
-          # Ensure .env exists (avoid interactive prompts)
+          set -euo pipefail
+
+          # Ensure .env exists
           if [ ! -f .env ]; then
             if [ -f .env.example ]; then cp .env.example .env; else touch .env; fi
           fi
 
-          # Generate key (safe even if APP_KEY already exists)
+          # Generate key
           php artisan key:generate --force || true
 
           # Ensure writable dirs exist
-          mkdir -p storage/framework/{cache,views,sessions} bootstrap/cache
+          mkdir -p storage/framework/{cache,views,sessions} bootstrap/cache storage/app/private
           chmod -R ug+rwX storage bootstrap/cache || true
 
-          # Make scripts executable (some repos lose +x on Windows)
-          chmod +x scripts/*.sh || true
+          # Ensure scripts executable
+          find scripts -type f -name "*.sh" -exec chmod +x {} + || true
 
-      - name: Prepare SQLite DB + migrate
+      - name: Prepare CI sqlite (file + migrate + seed)
         working-directory: backend
-        env:
-          APP_ENV: ci
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
-          QUEUE_CONNECTION: sync
         run: |
-          set -euo pipefail
-          mkdir -p database
-          touch database/database.sqlite
-          php artisan migrate --force
+          bash scripts/ci/prepare_sqlite.sh
 
       - name: Check content packs index endpoint
         run: |
@@ -87,22 +104,7 @@ jobs:
       - name: Run ci_verify_mbti
         working-directory: backend
         env:
-          # Hard defaults to avoid GLOBAL/en fallbacks in CI
-          APP_ENV: ci
-          APP_DEBUG: "true"
           MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
-          FAP_DEFAULT_REGION: CN_MAINLAND
-          FAP_DEFAULT_LOCALE: zh-CN
-          FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
-
-          # DB + queue (PR6)
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
-          QUEUE_CONNECTION: sync
-
-          # Keep E2E strict
-          STRICT: "1"
-          MODE: ci
         run: |
           bash scripts/ci_verify_mbti.sh
 

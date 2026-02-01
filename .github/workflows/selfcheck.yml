@@ -1,3 +1,4 @@
+# file: .github/workflows/selfcheck.yml
 name: selfcheck
 
 on:
@@ -14,9 +15,23 @@ jobs:
 
     env:
       APP_ENV: testing
+      APP_DEBUG: "true"
+
       DB_CONNECTION: sqlite
-      DB_DATABASE: ${{ github.workspace }}/backend/database/database.sqlite
+      DB_DATABASE: /tmp/fap-ci.sqlite
       QUEUE_CONNECTION: sync
+
+      # content packs (local driver in CI)
+      FAP_PACKS_DRIVER: local
+      FAP_PACKS_ROOT: ${{ github.workspace }}/content_packages
+      FAP_PACKS_CACHE_DIR: storage/app/private/content_packs_cache
+      FAP_S3_PREFIX: content_packages/
+
+      # MBTI defaults (avoid selecting "default")
+      FAP_DEFAULT_REGION: CN_MAINLAND
+      FAP_DEFAULT_LOCALE: zh-CN
+      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.2.1-TEST
 
     steps:
       - uses: actions/checkout@v4
@@ -34,19 +49,19 @@ jobs:
       - name: Prepare Laravel env (testing)
         working-directory: backend
         run: |
+          set -euo pipefail
           cp -n .env.example .env || true
-          php artisan key:generate --force
+          php artisan key:generate --force || true
           php artisan config:clear || true
 
-      - name: Prepare sqlite
+          mkdir -p storage/framework/{cache,views,sessions} bootstrap/cache storage/app/private
+          chmod -R ug+rwX storage bootstrap/cache || true
+          find scripts -type f -name "*.sh" -exec chmod +x {} + || true
+
+      - name: Prepare CI sqlite (file + migrate + seed)
         working-directory: backend
         run: |
-          mkdir -p database
-          touch database/database.sqlite
-
-      - name: Migrate
-        working-directory: backend
-        run: php artisan migrate --force
+          bash scripts/ci/prepare_sqlite.sh
 
       - name: Run selfcheck (default manifest)
         working-directory: backend
@@ -106,7 +121,6 @@ jobs:
           $setIfCol($a, 'attempts', 'scale_version', 'v0.2.1-TEST');
           $setIfCol($a, 'attempts', 'question_count', 144);
 
-          // common NOT NULLs (safe even if absent)
           $setIfCol($a, 'attempts', 'answers_summary_json', '{}');
           $setIfCol($a, 'attempts', 'answers_json', '[]');
 
@@ -137,19 +151,14 @@ jobs:
           $setIfCol($r, 'results', 'profile_version', 'mbti32-v2.5');
           $setIfCol($r, 'results', 'content_package_version', 'v0.2.1-TEST');
 
-          // NOT NULLs observed in CI logs
           $setJsonIfCol($r, 'results', 'scores_json', $scoresPct);
-
-          // optional / alternate schema fields (only if columns exist)
           $setJsonIfCol($r, 'results', 'scores_pct', $scoresPct);
           $setJsonIfCol($r, 'results', 'scores', $scoresPct);
 
           $setJsonIfCol($r, 'results', 'axis_states', $axisStates);
           $setJsonIfCol($r, 'results', 'axis_states_json', $axisStates);
 
-          // the current CI error: results.computed_at is NOT NULL
           $setIfCol($r, 'results', 'computed_at', $now);
-          // extra safety for similarly-named NOT NULL timestamps
           $setIfCol($r, 'results', 'completed_at', $now);
           $setIfCol($r, 'results', 'generated_at', $now);
           $setIfCol($r, 'results', 'finished_at', $now);
