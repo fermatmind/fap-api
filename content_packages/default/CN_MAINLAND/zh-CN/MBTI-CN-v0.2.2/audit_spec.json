@@ -39,6 +39,6 @@
   },
   "redaction_rules": {
     "strip_fields": ["Authorization", "token", "secret", "password"],
-    "strip_paths": ["/Users/", "/home/", "C:\\\\"]
+    "strip_paths": ["<HOME>/", "C:\\\\Users\\\\"]
   }
 }
