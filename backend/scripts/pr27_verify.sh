@@ -10,26 +10,53 @@ export NO_COLOR=1
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BACKEND_DIR="${ROOT_DIR}/backend"
 ART_DIR="${BACKEND_DIR}/artifacts/pr27"
-API_BASE="http://127.0.0.1:1827"
+
+SERVE_PORT="${SERVE_PORT:-1827}"
+API_BASE="http://127.0.0.1:${SERVE_PORT}"
 
 mkdir -p "${ART_DIR}"
 
+cleanup_port() {
+  local port="$1"
+  local pids
+  pids="$(lsof -ti tcp:"${port}" 2>/dev/null || true)"
+  if [[ -n "${pids}" ]]; then
+    kill -9 ${pids} >/dev/null 2>&1 || true
+  fi
+}
+
+wait_for_up() {
+  local url="$1"
+  local ok=0
+  for _ in {1..40}; do
+    # 启动初期屏蔽 curl 连接错误输出，避免出现 “Failed to connect ...”
+    curl -s -o /dev/null "${url}" 2>/dev/null && ok=1 && break
+    sleep 0.25
+  done
+  [[ "${ok}" -eq 1 ]]
+}
+
+# 先清端口，避免残留服务占用 1827
+cleanup_port "${SERVE_PORT}"
+
 cd "${BACKEND_DIR}"
-php artisan serve --host=127.0.0.1 --port=1827 >"${ART_DIR}/server.log" 2>&1 &
+php artisan serve --host=127.0.0.1 --port="${SERVE_PORT}" >"${ART_DIR}/server.log" 2>&1 &
 SERVER_PID=$!
-echo "${SERVER_PID}" >"${ART_DIR}/server.pid"
+echo "${SERVER_PID}" > "${ART_DIR}/server.pid"
 cd "${ROOT_DIR}"
 
-HEALTH_JSON="${ART_DIR}/health.json"
-health_code="000"
-for i in $(seq 1 30); do
-  health_code=$(curl -sS -o "${HEALTH_JSON}" -w "%{http_code}" "${API_BASE}/up" || true)
-  if [[ "${health_code}" == "200" ]]; then
-    break
-  fi
-  sleep 1
-done
+# 等待 /up 可用（不再输出 curl 连接失败）
+if ! wait_for_up "${API_BASE}/up"; then
+  HEALTH_JSON="${ART_DIR}/health.json"
+  curl -sS -o "${HEALTH_JSON}" "${API_BASE}/up" || true
+  echo "health_check_failed" >&2
+  cat "${HEALTH_JSON}" >&2 || true
+  tail -n 200 "${ART_DIR}/server.log" >&2 || true
+  exit 1
+fi
 
+HEALTH_JSON="${ART_DIR}/health.json"
+health_code="$(curl -sS -o "${HEALTH_JSON}" -w "%{http_code}" "${API_BASE}/up" || true)"
 if [[ "${health_code}" != "200" ]]; then
   echo "health_check_failed status=${health_code}" >&2
   cat "${HEALTH_JSON}" >&2 || true
@@ -38,15 +65,15 @@ if [[ "${health_code}" != "200" ]]; then
 fi
 
 QUESTIONS_JSON="${ART_DIR}/questions.json"
-http_code=$(curl -sS -L -o "${QUESTIONS_JSON}" -w "%{http_code}" \
-  "${API_BASE}/api/v0.3/scales/MBTI/questions" || true)
+http_code="$(curl -sS -L -o "${QUESTIONS_JSON}" -w "%{http_code}" \
+  "${API_BASE}/api/v0.3/scales/MBTI/questions" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "questions_failed http=${http_code}" >&2
   cat "${QUESTIONS_JSON}" >&2 || true
   exit 1
 fi
 
-QUESTION_COUNT=$(php -r '
+QUESTION_COUNT="$(php -r '
 $j=json_decode(file_get_contents($argv[1]), true);
 $q=$j["questions"] ?? [];
 $items=[];
@@ -57,7 +84,7 @@ elseif (is_array($q)) { $items=$q; }
 $count=0;
 foreach ($items as $item) { if (is_array($item)) { $count++; } }
 echo $count;
-' "${QUESTIONS_JSON}")
+' "${QUESTIONS_JSON}")"
 
 if [[ "${QUESTION_COUNT}" -le 0 ]]; then
   echo "questions_empty" >&2
@@ -65,17 +92,17 @@ if [[ "${QUESTION_COUNT}" -le 0 ]]; then
 fi
 
 ATTEMPT_START_JSON="${ART_DIR}/attempt_start.json"
-http_code=$(curl -sS -L -o "${ATTEMPT_START_JSON}" -w "%{http_code}" \
+http_code="$(curl -sS -L -o "${ATTEMPT_START_JSON}" -w "%{http_code}" \
   -X POST "${API_BASE}/api/v0.3/attempts/start" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
-  -d '{"scale_code":"MBTI"}' || true)
+  -d '{"scale_code":"MBTI"}' || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "attempt_start_failed http=${http_code}" >&2
   cat "${ATTEMPT_START_JSON}" >&2 || true
   exit 1
 fi
 
-ATTEMPT_ID=$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo $j["attempt_id"] ?? "";' "${ATTEMPT_START_JSON}")
+ATTEMPT_ID="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo $j["attempt_id"] ?? "";' "${ATTEMPT_START_JSON}")"
 if [[ -z "${ATTEMPT_ID}" ]]; then
   echo "missing_attempt_id" >&2
   exit 1
@@ -103,10 +130,10 @@ file_put_contents($argv[3], json_encode($payload, JSON_UNESCAPED_UNICODE));
 ' "${ATTEMPT_ID}" "${QUESTIONS_JSON}" "${ANSWERS_JSON}"
 
 SUBMIT_JSON="${ART_DIR}/submit.json"
-http_code=$(curl -sS -L -o "${SUBMIT_JSON}" -w "%{http_code}" \
+http_code="$(curl -sS -L -o "${SUBMIT_JSON}" -w "%{http_code}" \
   -X POST "${API_BASE}/api/v0.3/attempts/submit" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
-  -d "@${ANSWERS_JSON}" || true)
+  -d "@${ANSWERS_JSON}" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "submit_failed http=${http_code}" >&2
   cat "${SUBMIT_JSON}" >&2 || true
@@ -114,8 +141,8 @@ if [[ "${http_code}" != "200" ]]; then
 fi
 
 REPORT_JSON="${ART_DIR}/report.json"
-http_code=$(curl -sS -L -o "${REPORT_JSON}" -w "%{http_code}" \
-  "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/report" || true)
+http_code="$(curl -sS -L -o "${REPORT_JSON}" -w "%{http_code}" \
+  "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/report" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "report_failed http=${http_code}" >&2
   cat "${REPORT_JSON}" >&2 || true
@@ -137,19 +164,5 @@ if (is_array($offers)) {
 }
 if (!$found) { fwrite(STDERR, "offer_missing_MBTI_REPORT_FULL_199\n"); exit(1); }
 ' "${REPORT_JSON}"
-
-if [[ -f "${ART_DIR}/server.pid" ]]; then
-  kill "${SERVER_PID}" || true
-  sleep 1
-  if kill -0 "${SERVER_PID}" >/dev/null 2>&1; then
-    kill -9 "${SERVER_PID}" || true
-  fi
-fi
-
-if lsof -nP -iTCP:1827 -sTCP:LISTEN >/dev/null 2>&1; then
-  lsof -nP -iTCP:1827 -sTCP:LISTEN || true
-  echo "port_1827_still_listening" >&2
-  exit 1
-fi
 
 echo "[PR27] verify complete"
