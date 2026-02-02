@@ -43,6 +43,13 @@ class EntitlementManager
                   ->orWhere('scope', 'org');
             });
 
+        if (Schema::hasColumn('benefit_grants', 'expires_at')) {
+            $query->where(function ($q) {
+                $q->whereNull('expires_at')
+                  ->orWhere('expires_at', '>', now());
+            });
+        }
+
         if ($userId !== '') {
             $query->where(function ($q) use ($userId, $anonId) {
                 $q->where('user_id', $userId);
@@ -70,7 +77,9 @@ class EntitlementManager
         ?string $anonId,
         string $benefitCode,
         string $attemptId,
-        ?string $orderNo
+        ?string $orderNo,
+        ?string $scopeOverride = null,
+        ?string $expiresAt = null
     ): array {
         if (!Schema::hasTable('benefit_grants')) {
             return $this->tableMissing('benefit_grants');
@@ -83,7 +92,10 @@ class EntitlementManager
             return $this->badRequest('BENEFIT_REQUIRED', 'benefit_code and attempt_id are required.');
         }
 
-        $scope = 'attempt';
+        $scope = trim((string) ($scopeOverride ?? ''));
+        if ($scope === '') {
+            $scope = 'attempt';
+        }
 
         $userId = $userId !== null ? trim($userId) : '';
         $anonId = $anonId !== null ? trim($anonId) : '';
@@ -124,6 +136,13 @@ class EntitlementManager
             'created_at' => $now,
             'updated_at' => $now,
         ];
+
+        if ($expiresAt !== null && Schema::hasColumn('benefit_grants', 'expires_at')) {
+            $expiresAt = trim((string) $expiresAt);
+            if ($expiresAt !== '') {
+                $row['expires_at'] = $expiresAt;
+            }
+        }
 
         if (Schema::hasColumn('benefit_grants', 'benefit_ref')) {
             $row['benefit_ref'] = $benefitRef;
