@@ -19,6 +19,7 @@ class Pr19CommerceSeeder extends Seeder
         $now = now();
 
         $skus = [
+            // legacy skus
             [
                 'sku' => 'MBTI_REPORT_FULL',
                 'scale_code' => 'MBTI',
@@ -31,6 +32,22 @@ class Pr19CommerceSeeder extends Seeder
                 'is_active' => true,
                 'meta_json' => [
                     'label' => 'MBTI full report',
+                    'legacy' => true,
+                ],
+            ],
+            [
+                'sku' => 'MBTI_EXTRA_TIPS',
+                'scale_code' => 'MBTI',
+                'kind' => 'report_unlock',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_REPORT_FULL',
+                'scope' => 'attempt',
+                'price_cents' => 0,
+                'currency' => 'USD',
+                'is_active' => false,
+                'meta_json' => [
+                    'label' => 'MBTI extra tips (legacy)',
+                    'legacy' => true,
                 ],
             ],
             [
@@ -45,6 +62,67 @@ class Pr19CommerceSeeder extends Seeder
                 'is_active' => true,
                 'meta_json' => [
                     'label' => 'MBTI credits pack',
+                ],
+            ],
+
+            // v0.2.2 skus (CNY)
+            [
+                'sku' => 'MBTI_REPORT_FULL_199',
+                'scale_code' => 'MBTI',
+                'kind' => 'report_unlock',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_REPORT_FULL',
+                'scope' => 'attempt',
+                'price_cents' => 199,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => [
+                    'label' => 'MBTI full report (single)',
+                ],
+            ],
+            [
+                'sku' => 'MBTI_PRO_MONTH_599',
+                'scale_code' => 'MBTI',
+                'kind' => 'report_unlock',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_REPORT_FULL',
+                'scope' => 'org',
+                'price_cents' => 599,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => [
+                    'label' => 'MBTI pro month',
+                    'duration_days' => 30,
+                ],
+            ],
+            [
+                'sku' => 'MBTI_PRO_YEAR_1999',
+                'scale_code' => 'MBTI',
+                'kind' => 'report_unlock',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_REPORT_FULL',
+                'scope' => 'org',
+                'price_cents' => 1999,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => [
+                    'label' => 'MBTI pro year',
+                    'duration_days' => 365,
+                ],
+            ],
+            [
+                'sku' => 'MBTI_GIFT_BOGO_2990',
+                'scale_code' => 'MBTI',
+                'kind' => 'report_unlock',
+                'unit_qty' => 2,
+                'benefit_code' => 'MBTI_REPORT_FULL',
+                'scope' => 'attempt',
+                'price_cents' => 2990,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => [
+                    'label' => 'MBTI gift bogo',
+                    'gift_units' => 2,
                 ],
             ],
         ];
@@ -80,7 +158,12 @@ class Pr19CommerceSeeder extends Seeder
 
                 $commercial['report_benefit_code'] = 'MBTI_REPORT_FULL';
                 $commercial['credit_benefit_code'] = 'MBTI_CREDIT';
-                $commercial['report_unlock_sku'] = 'MBTI_REPORT_FULL';
+                $commercial['report_unlock_sku'] = 'MBTI_REPORT_FULL_199';
+                $commercial['subscription_skus'] = [
+                    'MBTI_PRO_MONTH_599',
+                    'MBTI_PRO_YEAR_1999',
+                ];
+                $commercial['gift_sku'] = 'MBTI_GIFT_BOGO_2990';
 
                 $payload = $commercial;
                 if (is_array($payload)) {

@@ -1,0 +1,6197 @@
+{
+    "schema": "fap.questions.v1",
+    "items": [
+        {
+            "question_id": "MBTI-001",
+            "order": 1,
+            "dimension": "EI",
+            "text": "在聚会交流时，你更倾向于主动开启话题。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q1",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-002",
+            "order": 2,
+            "dimension": "SN",
+            "text": "在处理任务时，你更倾向于关注整体趋势。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q2",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-003",
+            "order": 3,
+            "dimension": "TF",
+            "text": "在做选择时，你更倾向于强调逻辑一致性。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q3",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-004",
+            "order": 4,
+            "dimension": "JP",
+            "text": "在安排出行时，你更倾向于提前制定计划。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q4",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-005",
+            "order": 5,
+            "dimension": "AT",
+            "text": "在面对压力时，你更倾向于保持稳定。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q5",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-006",
+            "order": 6,
+            "dimension": "EI",
+            "text": "在聚会交流时，你更倾向于先开口表达想法。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q6",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-007",
+            "order": 7,
+            "dimension": "JP",
+            "text": "在安排出行时，你更倾向于按步骤推进。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q7",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-008",
+            "order": 8,
+            "dimension": "TF",
+            "text": "在做选择时，你更倾向于优先客观标准。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q8",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-009",
+            "order": 9,
+            "dimension": "JP",
+            "text": "在安排出行时，你更倾向于明确截止时间。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q9",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-010",
+            "order": 10,
+            "dimension": "AT",
+            "text": "在面对压力时，你更倾向于对自己有把握。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q10",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-011",
+            "order": 11,
+            "dimension": "EI",
+            "text": "在聚会交流时，你更倾向于主动介绍自己。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q11",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-012",
+            "order": 12,
+            "dimension": "SN",
+            "text": "在处理任务时，你更倾向于思考潜在可能性。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q12",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-013",
+            "order": 13,
+            "dimension": "TF",
+            "text": "在做选择时，你更倾向于关注利弊比较。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q13",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-014",
+            "order": 14,
+            "dimension": "JP",
+            "text": "在安排出行时，你更倾向于尽量提前完成。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q14",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-015",
+            "order": 15,
+            "dimension": "AT",
+            "text": "在面对压力时，你更倾向于不容易紧张。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q15",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-016",
+            "order": 16,
+            "dimension": "EI",
+            "text": "在聚会交流时，你更倾向于和陌生人交流。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q16",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-017",
+            "order": 17,
+            "dimension": "SN",
+            "text": "在处理任务时，你更倾向于关注未来方向。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q17",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1.4,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-018",
+            "order": 18,
+            "dimension": "TF",
+            "text": "在做选择时，你更倾向于强调规则与原则。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q18",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-019",
+            "order": 19,
+            "dimension": "SN",
+            "text": "在处理任务时，你更倾向于偏好概念框架。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q19",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-020",
+            "order": 20,
+            "dimension": "AT",
+            "text": "在面对压力时，你更倾向于较快恢复状态。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q20",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-021",
+            "order": 21,
+            "dimension": "EI",
+            "text": "在聚会交流时，你更倾向于把观点当面说清楚。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q21",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-022",
+            "order": 22,
+            "dimension": "SN",
+            "text": "在处理任务时，你更倾向于寻找隐含含义。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q22",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-023",
+            "order": 23,
+            "dimension": "TF",
+            "text": "在做选择时，你更倾向于用事实说服他人。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q23",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-024",
+            "order": 24,
+            "dimension": "JP",
+            "text": "在安排出行时，你更倾向于保持秩序与节奏。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q24",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-025",
+            "order": 25,
+            "dimension": "TF",
+            "text": "在做选择时，你更倾向于偏向理性分析。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q25",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-026",
+            "order": 26,
+            "dimension": "EI",
+            "text": "在聚会交流时，你更倾向于带动现场气氛。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q26",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-027",
+            "order": 27,
+            "dimension": "AT",
+            "text": "在面对压力时，你更倾向于相信自己能处理。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q27",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-028",
+            "order": 28,
+            "dimension": "TF",
+            "text": "在讨论分歧时，你更倾向于强调逻辑一致性。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q28",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-029",
+            "order": 29,
+            "dimension": "JP",
+            "text": "在安排出行时，你更倾向于先安排后行动。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q29",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-030",
+            "order": 30,
+            "dimension": "TF",
+            "text": "在讨论分歧时，你更倾向于优先客观标准。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q30",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-031",
+            "order": 31,
+            "dimension": "EI",
+            "text": "在新同事见面时，你更倾向于主动开启话题。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q31",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-032",
+            "order": 32,
+            "dimension": "SN",
+            "text": "在处理任务时，你更倾向于联想更大的图景。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q32",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-033",
+            "order": 33,
+            "dimension": "TF",
+            "text": "在讨论分歧时，你更倾向于关注利弊比较。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q33",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-034",
+            "order": 34,
+            "dimension": "JP",
+            "text": "在推进项目时，你更倾向于提前制定计划。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q34",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1.4,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-035",
+            "order": 35,
+            "dimension": "AT",
+            "text": "在面对压力时，你更倾向于保持平和。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q35",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-036",
+            "order": 36,
+            "dimension": "EI",
+            "text": "在新同事见面时，你更倾向于先开口表达想法。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q36",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-037",
+            "order": 37,
+            "dimension": "SN",
+            "text": "在学习新技能时，你更倾向于关注整体趋势。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q37",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-038",
+            "order": 38,
+            "dimension": "TF",
+            "text": "在讨论分歧时，你更倾向于强调规则与原则。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q38",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-039",
+            "order": 39,
+            "dimension": "JP",
+            "text": "在推进项目时，你更倾向于按步骤推进。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q39",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-040",
+            "order": 40,
+            "dimension": "AT",
+            "text": "在收到反馈时，你更倾向于保持稳定。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q40",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-041",
+            "order": 41,
+            "dimension": "EI",
+            "text": "在新同事见面时，你更倾向于主动介绍自己。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q41",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-042",
+            "order": 42,
+            "dimension": "SN",
+            "text": "在学习新技能时，你更倾向于思考潜在可能性。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q42",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-043",
+            "order": 43,
+            "dimension": "EI",
+            "text": "在新同事见面时，你更倾向于和陌生人交流。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q43",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-044",
+            "order": 44,
+            "dimension": "JP",
+            "text": "在推进项目时，你更倾向于明确截止时间。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q44",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-045",
+            "order": 45,
+            "dimension": "AT",
+            "text": "在收到反馈时，你更倾向于对自己有把握。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q45",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-046",
+            "order": 46,
+            "dimension": "SN",
+            "text": "在学习新技能时，你更倾向于关注未来方向。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q46",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-047",
+            "order": 47,
+            "dimension": "AT",
+            "text": "在收到反馈时，你更倾向于不容易紧张。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q47",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-048",
+            "order": 48,
+            "dimension": "TF",
+            "text": "在讨论分歧时，你更倾向于用事实说服他人。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q48",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-049",
+            "order": 49,
+            "dimension": "JP",
+            "text": "在推进项目时，你更倾向于尽量提前完成。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q49",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-050",
+            "order": 50,
+            "dimension": "AT",
+            "text": "在收到反馈时，你更倾向于较快恢复状态。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q50",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-051",
+            "order": 51,
+            "dimension": "EI",
+            "text": "在新同事见面时，你更倾向于把观点当面说清楚。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q51",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1.4,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-052",
+            "order": 52,
+            "dimension": "SN",
+            "text": "在学习新技能时，你更倾向于偏好概念框架。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q52",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-053",
+            "order": 53,
+            "dimension": "EI",
+            "text": "在新同事见面时，你更倾向于带动现场气氛。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q53",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-054",
+            "order": 54,
+            "dimension": "AT",
+            "text": "在收到反馈时，你更倾向于相信自己能处理。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q54",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-055",
+            "order": 55,
+            "dimension": "AT",
+            "text": "在收到反馈时，你更倾向于保持平和。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q55",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-056",
+            "order": 56,
+            "dimension": "JP",
+            "text": "在推进项目时，你更倾向于保持秩序与节奏。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q56",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-057",
+            "order": 57,
+            "dimension": "SN",
+            "text": "在学习新技能时，你更倾向于寻找隐含含义。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q57",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-058",
+            "order": 58,
+            "dimension": "TF",
+            "text": "在讨论分歧时，你更倾向于偏向理性分析。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q58",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-059",
+            "order": 59,
+            "dimension": "JP",
+            "text": "在推进项目时，你更倾向于先安排后行动。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q59",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-060",
+            "order": 60,
+            "dimension": "AT",
+            "text": "在遇到变化时，你更倾向于保持稳定。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q60",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-061",
+            "order": 61,
+            "dimension": "EI",
+            "text": "在小组讨论时，你更倾向于主动开启话题。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q61",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-062",
+            "order": 62,
+            "dimension": "EI",
+            "text": "在小组讨论时，你更倾向于先开口表达想法。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q62",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-063",
+            "order": 63,
+            "dimension": "EI",
+            "text": "在小组讨论时，你更倾向于主动介绍自己。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q63",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-064",
+            "order": 64,
+            "dimension": "EI",
+            "text": "在小组讨论时，你更倾向于和陌生人交流。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q64",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-065",
+            "order": 65,
+            "dimension": "EI",
+            "text": "在小组讨论时，你更倾向于把观点当面说清楚。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q65",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-066",
+            "order": 66,
+            "dimension": "EI",
+            "text": "在小组讨论时，你更倾向于带动现场气氛。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q66",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-067",
+            "order": 67,
+            "dimension": "EI",
+            "text": "在社区活动时，你更倾向于主动开启话题。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q67",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-068",
+            "order": 68,
+            "dimension": "EI",
+            "text": "在社区活动时，你更倾向于先开口表达想法。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q68",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1.4,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-069",
+            "order": 69,
+            "dimension": "EI",
+            "text": "在社区活动时，你更倾向于主动介绍自己。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q69",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-070",
+            "order": 70,
+            "dimension": "EI",
+            "text": "在社区活动时，你更倾向于和陌生人交流。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q70",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-071",
+            "order": 71,
+            "dimension": "EI",
+            "text": "在社区活动时，你更倾向于把观点当面说清楚。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q71",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-072",
+            "order": 72,
+            "dimension": "EI",
+            "text": "在社区活动时，你更倾向于带动现场气氛。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q72",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-073",
+            "order": 73,
+            "dimension": "EI",
+            "text": "在工作会议时，你更倾向于主动开启话题。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q73",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-074",
+            "order": 74,
+            "dimension": "EI",
+            "text": "在工作会议时，你更倾向于先开口表达想法。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q74",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-075",
+            "order": 75,
+            "dimension": "EI",
+            "text": "在工作会议时，你更倾向于主动介绍自己。",
+            "key_pole": "E",
+            "direction": 1,
+            "code": "Q75",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-076",
+            "order": 76,
+            "dimension": "EI",
+            "text": "在工作会议时，你更倾向于和陌生人交流。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q76",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-077",
+            "order": 77,
+            "dimension": "EI",
+            "text": "在工作会议时，你更倾向于把观点当面说清楚。",
+            "key_pole": "I",
+            "direction": -1,
+            "code": "Q77",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-078",
+            "order": 78,
+            "dimension": "SN",
+            "text": "在学习新技能时，你更倾向于联想更大的图景。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q78",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-079",
+            "order": 79,
+            "dimension": "SN",
+            "text": "在讨论方案时，你更倾向于关注整体趋势。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q79",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-080",
+            "order": 80,
+            "dimension": "SN",
+            "text": "在讨论方案时，你更倾向于思考潜在可能性。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q80",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-081",
+            "order": 81,
+            "dimension": "SN",
+            "text": "在讨论方案时，你更倾向于关注未来方向。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q81",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-082",
+            "order": 82,
+            "dimension": "SN",
+            "text": "在讨论方案时，你更倾向于偏好概念框架。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q82",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-083",
+            "order": 83,
+            "dimension": "SN",
+            "text": "在讨论方案时，你更倾向于寻找隐含含义。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q83",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-084",
+            "order": 84,
+            "dimension": "SN",
+            "text": "在讨论方案时，你更倾向于联想更大的图景。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q84",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-085",
+            "order": 85,
+            "dimension": "SN",
+            "text": "在分析问题时，你更倾向于关注整体趋势。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q85",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1.4,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-086",
+            "order": 86,
+            "dimension": "SN",
+            "text": "在分析问题时，你更倾向于思考潜在可能性。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q86",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-087",
+            "order": 87,
+            "dimension": "SN",
+            "text": "在分析问题时，你更倾向于关注未来方向。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q87",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-088",
+            "order": 88,
+            "dimension": "SN",
+            "text": "在分析问题时，你更倾向于偏好概念框架。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q88",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-089",
+            "order": 89,
+            "dimension": "SN",
+            "text": "在分析问题时，你更倾向于寻找隐含含义。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q89",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-090",
+            "order": 90,
+            "dimension": "SN",
+            "text": "在分析问题时，你更倾向于联想更大的图景。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q90",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-091",
+            "order": 91,
+            "dimension": "SN",
+            "text": "在做决定时，你更倾向于关注整体趋势。",
+            "key_pole": "S",
+            "direction": -1,
+            "code": "Q91",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-092",
+            "order": 92,
+            "dimension": "SN",
+            "text": "在做决定时，你更倾向于思考潜在可能性。",
+            "key_pole": "N",
+            "direction": 1,
+            "code": "Q92",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-093",
+            "order": 93,
+            "dimension": "TF",
+            "text": "在评价方案时，你更倾向于强调逻辑一致性。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q93",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-094",
+            "order": 94,
+            "dimension": "TF",
+            "text": "在评价方案时，你更倾向于优先客观标准。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q94",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-095",
+            "order": 95,
+            "dimension": "TF",
+            "text": "在评价方案时，你更倾向于关注利弊比较。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q95",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-096",
+            "order": 96,
+            "dimension": "TF",
+            "text": "在评价方案时，你更倾向于强调规则与原则。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q96",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-097",
+            "order": 97,
+            "dimension": "TF",
+            "text": "在评价方案时，你更倾向于用事实说服他人。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q97",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-098",
+            "order": 98,
+            "dimension": "TF",
+            "text": "在评价方案时，你更倾向于偏向理性分析。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q98",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-099",
+            "order": 99,
+            "dimension": "TF",
+            "text": "在处理冲突时，你更倾向于强调逻辑一致性。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q99",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-100",
+            "order": 100,
+            "dimension": "TF",
+            "text": "在处理冲突时，你更倾向于优先客观标准。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q100",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-101",
+            "order": 101,
+            "dimension": "TF",
+            "text": "在处理冲突时，你更倾向于关注利弊比较。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q101",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-102",
+            "order": 102,
+            "dimension": "TF",
+            "text": "在处理冲突时，你更倾向于强调规则与原则。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q102",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1.4,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-103",
+            "order": 103,
+            "dimension": "TF",
+            "text": "在处理冲突时，你更倾向于用事实说服他人。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q103",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-104",
+            "order": 104,
+            "dimension": "TF",
+            "text": "在处理冲突时，你更倾向于偏向理性分析。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q104",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-105",
+            "order": 105,
+            "dimension": "TF",
+            "text": "在复盘问题时，你更倾向于强调逻辑一致性。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q105",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-106",
+            "order": 106,
+            "dimension": "TF",
+            "text": "在复盘问题时，你更倾向于优先客观标准。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q106",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-107",
+            "order": 107,
+            "dimension": "TF",
+            "text": "在复盘问题时，你更倾向于关注利弊比较。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q107",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-108",
+            "order": 108,
+            "dimension": "TF",
+            "text": "在复盘问题时，你更倾向于强调规则与原则。",
+            "key_pole": "F",
+            "direction": -1,
+            "code": "Q108",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-109",
+            "order": 109,
+            "dimension": "TF",
+            "text": "在复盘问题时，你更倾向于用事实说服他人。",
+            "key_pole": "T",
+            "direction": 1,
+            "code": "Q109",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-110",
+            "order": 110,
+            "dimension": "JP",
+            "text": "在规划周末时，你更倾向于提前制定计划。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q110",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-111",
+            "order": 111,
+            "dimension": "JP",
+            "text": "在规划周末时，你更倾向于按步骤推进。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q111",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-112",
+            "order": 112,
+            "dimension": "JP",
+            "text": "在规划周末时，你更倾向于明确截止时间。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q112",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-113",
+            "order": 113,
+            "dimension": "JP",
+            "text": "在规划周末时，你更倾向于尽量提前完成。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q113",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-114",
+            "order": 114,
+            "dimension": "JP",
+            "text": "在规划周末时，你更倾向于保持秩序与节奏。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q114",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-115",
+            "order": 115,
+            "dimension": "JP",
+            "text": "在规划周末时，你更倾向于先安排后行动。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q115",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-116",
+            "order": 116,
+            "dimension": "JP",
+            "text": "在处理待办时，你更倾向于提前制定计划。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q116",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-117",
+            "order": 117,
+            "dimension": "JP",
+            "text": "在处理待办时，你更倾向于按步骤推进。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q117",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-118",
+            "order": 118,
+            "dimension": "JP",
+            "text": "在处理待办时，你更倾向于明确截止时间。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q118",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-119",
+            "order": 119,
+            "dimension": "JP",
+            "text": "在处理待办时，你更倾向于尽量提前完成。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q119",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1.4,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-120",
+            "order": 120,
+            "dimension": "JP",
+            "text": "在处理待办时，你更倾向于保持秩序与节奏。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q120",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-121",
+            "order": 121,
+            "dimension": "JP",
+            "text": "在处理待办时，你更倾向于先安排后行动。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q121",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-122",
+            "order": 122,
+            "dimension": "JP",
+            "text": "在准备会议时，你更倾向于提前制定计划。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q122",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-123",
+            "order": 123,
+            "dimension": "JP",
+            "text": "在准备会议时，你更倾向于按步骤推进。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q123",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-124",
+            "order": 124,
+            "dimension": "JP",
+            "text": "在准备会议时，你更倾向于明确截止时间。",
+            "key_pole": "P",
+            "direction": -1,
+            "code": "Q124",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-125",
+            "order": 125,
+            "dimension": "JP",
+            "text": "在准备会议时，你更倾向于尽量提前完成。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q125",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-126",
+            "order": 126,
+            "dimension": "JP",
+            "text": "在准备会议时，你更倾向于保持秩序与节奏。",
+            "key_pole": "J",
+            "direction": 1,
+            "code": "Q126",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-127",
+            "order": 127,
+            "dimension": "AT",
+            "text": "在遇到变化时，你更倾向于对自己有把握。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q127",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-128",
+            "order": 128,
+            "dimension": "AT",
+            "text": "在遇到变化时，你更倾向于不容易紧张。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q128",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-129",
+            "order": 129,
+            "dimension": "AT",
+            "text": "在遇到变化时，你更倾向于较快恢复状态。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q129",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-130",
+            "order": 130,
+            "dimension": "AT",
+            "text": "在遇到变化时，你更倾向于相信自己能处理。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q130",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-131",
+            "order": 131,
+            "dimension": "AT",
+            "text": "在遇到变化时，你更倾向于保持平和。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q131",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-132",
+            "order": 132,
+            "dimension": "AT",
+            "text": "在处理突发时，你更倾向于保持稳定。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q132",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-133",
+            "order": 133,
+            "dimension": "AT",
+            "text": "在处理突发时，你更倾向于对自己有把握。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q133",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-134",
+            "order": 134,
+            "dimension": "AT",
+            "text": "在处理突发时，你更倾向于不容易紧张。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q134",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-135",
+            "order": 135,
+            "dimension": "AT",
+            "text": "在处理突发时，你更倾向于较快恢复状态。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q135",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-136",
+            "order": 136,
+            "dimension": "AT",
+            "text": "在处理突发时，你更倾向于相信自己能处理。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q136",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1.4,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-137",
+            "order": 137,
+            "dimension": "AT",
+            "text": "在处理突发时，你更倾向于保持平和。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q137",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-138",
+            "order": 138,
+            "dimension": "AT",
+            "text": "在遇到难题时，你更倾向于保持稳定。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q138",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-139",
+            "order": 139,
+            "dimension": "AT",
+            "text": "在遇到难题时，你更倾向于对自己有把握。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q139",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-140",
+            "order": 140,
+            "dimension": "AT",
+            "text": "在遇到难题时，你更倾向于不容易紧张。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q140",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-141",
+            "order": 141,
+            "dimension": "AT",
+            "text": "在遇到难题时，你更倾向于较快恢复状态。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q141",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-142",
+            "order": 142,
+            "dimension": "AT",
+            "text": "在遇到难题时，你更倾向于相信自己能处理。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q142",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-143",
+            "order": 143,
+            "dimension": "AT",
+            "text": "在遇到难题时，你更倾向于保持平和。",
+            "key_pole": "A",
+            "direction": 1,
+            "code": "Q143",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 0.8,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        },
+        {
+            "question_id": "MBTI-144",
+            "order": 144,
+            "dimension": "AT",
+            "text": "在出现波动时时，你更倾向于保持稳定。",
+            "key_pole": "T",
+            "direction": -1,
+            "code": "Q144",
+            "ver": "2025",
+            "version": "v2025",
+            "irt": {
+                "a": 1,
+                "b": 0
+            },
+            "is_active": true,
+            "options": [
+                {
+                    "code": "A",
+                    "text": "非常认同",
+                    "score": 2
+                },
+                {
+                    "code": "B",
+                    "text": "认同",
+                    "score": 1
+                },
+                {
+                    "code": "C",
+                    "text": "不确定",
+                    "score": 0
+                },
+                {
+                    "code": "D",
+                    "text": "不认同",
+                    "score": -1
+                },
+                {
+                    "code": "E",
+                    "text": "非常不认同",
+                    "score": -2
+                }
+            ]
+        }
+    ]
+}

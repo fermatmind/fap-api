@@ -1,0 +1,44 @@
+{
+  "schema": "fap.audit_spec.v1",
+  "scale_code": "MBTI",
+  "version": "0.2.2",
+  "release_controls": {
+    "primary_switches": [
+      "content_packs.default_pack_id",
+      "content_packs.default_dir_version",
+      "fap.content_package_version"
+    ],
+    "rollback_targets": [
+      { "dir_version": "MBTI-CN-v0.2.1-TEST", "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.1-TEST" }
+    ]
+  },
+  "replay_fields": {
+    "attempt_snapshot_required": [
+      "pack_id",
+      "dir_version",
+      "content_pack_version",
+      "scoring_spec_version",
+      "norm_version",
+      "manifest_sha256",
+      "scoring_spec_sha256",
+      "questions_sha256",
+      "engine_version",
+      "answers_hash",
+      "quality_flags",
+      "experiment_assignments"
+    ],
+    "result_snapshot_required": [
+      "type_code",
+      "dimension_scores",
+      "pci",
+      "facet_scores",
+      "norm_percentiles",
+      "entitlement_state",
+      "variant_id"
+    ]
+  },
+  "redaction_rules": {
+    "strip_fields": ["Authorization", "token", "secret", "password"],
+    "strip_paths": ["/Users/", "/home/", "C:\\\\"]
+  }
+}

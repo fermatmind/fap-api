@@ -1,0 +1,28 @@
+# PR27 Recon
+
+- 相关入口文件：
+  - `backend/routes/api.php`
+  - `backend/app/Http/Controllers/MbtiController.php`
+  - `backend/app/Services/Score/MbtiAttemptScorer.php`
+  - `backend/app/Services/Assessment/Drivers/MbtiDriver.php`
+- 相关路由：
+  - `GET /api/v0.2/scales/MBTI`
+  - `GET /api/v0.2/scales/MBTI/questions`
+  - `POST /api/v0.2/attempts`
+  - `GET /api/v0.2/attempts/{id}/result`
+  - `GET /api/v0.2/content-packs/*`
+- 相关 DB 表/迁移：
+  - `attempts`, `results`, `skus`, `scales_registry`, `benefit_grants`
+- 需要新增/修改点：
+  - 新内容包 MBTI-CN-v0.2.2（manifest/version/scoring/questions + 4 spec 文件）
+  - 计分模型 v0.2.2（weighted + PCI + tie-break + facets）
+  - 默认配置/seed 指向 v0.2.2
+  - 新 SKU 4 个（CNY）并保持旧 SKU
+  - 新增 pack 校验脚本与 PR27 验收脚本
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口占用：验收脚本先清理 1827/18000
+  - CI 工具依赖：脚本仅用 grep/sed/awk/php，不用 rg/jq
+  - pack/seed/config 一致：默认 pack_id/dir_version/目录三方对齐
+  - sqlite 迁移一致性：使用临时 sqlite fresh migrate
+  - 404 口径：跨 org 资源保持 404
+  - artifacts 脱敏：跑 sanitize_artifacts

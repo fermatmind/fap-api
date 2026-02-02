@@ -1,0 +1,1059 @@
+{
+  "schema": "fap.report.highlights.pools.v1",
+  "schema_version": "report-highlights-pools@v1",
+  "pools": {
+    "strength": {
+      "items": [
+        {
+          "id": "hl_s_core_strength_1",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 100,
+          "title": "你能把事情推进到“有结果”",
+          "body": "你擅长把想法落到行动上，并在关键节点推动进展。遇到阻力时，你更愿意寻找可行路径，而不是停在解释里。",
+          "tags": ["core", "universal"]
+        },
+        {
+          "id": "hl_s_core_strength_2",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 90,
+          "title": "你对信息很敏锐，能快速抓重点",
+          "body": "你能在嘈杂的信息里识别主线与关键变量，减少无效讨论，把注意力放在真正重要的那几件事上。",
+          "tags": ["core", "universal"]
+        },
+
+        {
+          "id": "hl_s_ei_E_1",
+          "pool": "strength",
+          "group_id": "ei_energy",
+          "priority": 70,
+          "title": "你能在互动中激活团队气氛",
+          "body": "你更容易在交流与协作中获得能量，擅长把人连接起来，让信息流动起来，推动共识形成。",
+          "tags": ["axis:EI", "side:E"]
+        },
+        {
+          "id": "hl_s_ei_I_1",
+          "pool": "strength",
+          "group_id": "ei_energy",
+          "priority": 70,
+          "title": "你能在安静中沉淀出高质量思考",
+          "body": "你更擅长独立处理信息，把复杂问题拆开、想透，再用更清晰的方式表达出来，稳定可靠。",
+          "tags": ["axis:EI", "side:I"]
+        },
+
+        {
+          "id": "hl_s_sn_N_1",
+          "pool": "strength",
+          "group_id": "sn_info",
+          "priority": 65,
+          "title": "你擅长从细节中看到更大的趋势",
+          "body": "你会自然地把信息串联成“可能的未来”，善于提出新方案、新框架，让局面出现更多可能性。",
+          "tags": ["axis:SN", "side:N"]
+        },
+        {
+          "id": "hl_s_sn_S_1",
+          "pool": "strength",
+          "group_id": "sn_info",
+          "priority": 65,
+          "title": "你能把事情做得扎实且可复制",
+          "body": "你关注事实与可操作细节，擅长把流程做顺、把标准做清，让团队更稳定、更高效。",
+          "tags": ["axis:SN", "side:S"]
+        },
+
+        {
+          "id": "hl_s_tf_T_1",
+          "pool": "strength",
+          "group_id": "tf_decision",
+          "priority": 60,
+          "title": "你能用清晰逻辑做判断",
+          "body": "你会优先对齐标准与因果关系，重视公平与一致性，让决策更可解释、更可复盘。",
+          "tags": ["axis:TF", "side:T"]
+        },
+        {
+          "id": "hl_s_tf_F_1",
+          "pool": "strength",
+          "group_id": "tf_decision",
+          "priority": 60,
+          "title": "你能照顾到人的感受与关系",
+          "body": "你会自然地在意影响与体验，善于建立信任与共识，让团队更愿意跟你走。",
+          "tags": ["axis:TF", "side:F"]
+        },
+
+        {
+          "id": "hl_s_jp_J_1",
+          "pool": "strength",
+          "group_id": "jp_style",
+          "priority": 55,
+          "title": "你擅长规划与推进",
+          "body": "你喜欢清晰的节奏与里程碑，能把任务拆解、排优先级，让事情按计划向前走。",
+          "tags": ["axis:JP", "side:J"]
+        },
+        {
+          "id": "hl_s_jp_P_1",
+          "pool": "strength",
+          "group_id": "jp_style",
+          "priority": 55,
+          "title": "你很灵活，能在变化中找到机会",
+          "body": "你不容易被固定方案限制，愿意快速调整策略，适应新信息并找到更顺的路径。",
+          "tags": ["axis:JP", "side:P"]
+        },
+
+        {
+          "id": "hl_s_at_A_1",
+          "pool": "strength",
+          "group_id": "at_stress",
+          "priority": 50,
+          "title": "你更稳定，遇事不容易乱",
+          "body": "你更能维持节奏与信心，不容易被短期波动带走，适合在压力场景里做稳定器。",
+          "tags": ["axis:AT", "side:A"]
+        },
+        {
+          "id": "hl_s_at_T_1",
+          "pool": "strength",
+          "group_id": "at_stress",
+          "priority": 50,
+          "title": "你更敏感，能提前察觉风险",
+          "body": "你对变化与问题更敏锐，容易提前识别潜在风险与关系张力，从而更早做预案。",
+          "tags": ["axis:AT", "side:T"]
+        },
+
+        {
+          "id": "hl_s_core_strength_3",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 88,
+          "title": "你能把复杂问题拆成清晰步骤",
+          "body": "你不怕复杂，反而擅长把问题拆成可执行的步骤：先澄清目标，再分解任务，再逐一推进。",
+          "tags": ["core", "universal"]
+        },
+        {
+          "id": "hl_s_core_strength_4",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 86,
+          "title": "你能在关键时刻稳住节奏",
+          "body": "当局面混乱或压力变大时，你更容易抓住“下一步最重要的事”，把节奏拉回可控范围。",
+          "tags": ["core", "universal"]
+        },
+        {
+          "id": "hl_s_core_strength_5",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 84,
+          "title": "你善于把目标讲清楚并对齐共识",
+          "body": "你能把“我们要做什么、为什么做、做到什么算好”说清楚，让团队更少内耗、更快对齐。",
+          "tags": ["core", "universal"]
+        },
+        {
+          "id": "hl_s_core_strength_6",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 82,
+          "title": "你能在信息不全时做出够用决策",
+          "body": "你不会等到“万事俱备”才行动，而是会用当前信息做出够用决策，并在过程中快速校准方向。",
+          "tags": ["core", "universal"]
+        },
+        {
+          "id": "hl_s_core_strength_7",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 80,
+          "title": "你能把资源用在最关键处",
+          "body": "你对优先级很敏感，能识别真正影响结果的那 20%，把时间与注意力投在最值的地方。",
+          "tags": ["core", "universal"]
+        },
+        {
+          "id": "hl_s_core_strength_8",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 78,
+          "title": "你善于复盘，把经验变成可复用方法",
+          "body": "你不会只把事情做完，而是会总结“哪些有效、哪些浪费”，把经验沉淀成下次可复用的方法。",
+          "tags": ["core", "universal"]
+        },
+        {
+          "id": "hl_s_core_strength_9",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 76,
+          "title": "你能在冲突中抓住问题本质",
+          "body": "当观点不一致时，你更关注“问题到底是什么、约束是什么”，用更理性的方式把讨论拉回可解决的范围。",
+          "tags": ["core", "universal"]
+        },
+        {
+          "id": "hl_s_core_strength_10",
+          "pool": "strength",
+          "group_id": "core_strength",
+          "priority": 74,
+          "title": "你能把分工与边界讲清，协作更顺",
+          "body": "你愿意把边界、责任与交付标准讲清楚，减少“默认期待”，让协作更顺畅。",
+          "tags": ["core", "universal"]
+        },
+
+        {
+          "id": "hl_s_role_NT_1",
+          "pool": "strength",
+          "group_id": "role_nt",
+          "priority": 72,
+          "title": "你擅长搭框架：把问题抽象成模型",
+          "body": "你能快速抓住结构与关键变量，用框架把问题讲清楚，让讨论更高效、更聚焦。",
+          "tags": ["role:NT"]
+        },
+        {
+          "id": "hl_s_role_NF_1",
+          "pool": "strength",
+          "group_id": "role_nf",
+          "priority": 72,
+          "title": "你擅长建立信任：让人愿意合作",
+          "body": "你能敏锐感知他人需求与情绪，善于用温和而清晰的方式建立信任，让协作更愿意推进。",
+          "tags": ["role:NF"]
+        },
+        {
+          "id": "hl_s_role_SJ_1",
+          "pool": "strength",
+          "group_id": "role_sj",
+          "priority": 72,
+          "title": "你擅长把质量做稳：流程与标准清晰",
+          "body": "你更愿意把流程做顺、标准做清，让结果可复制、风险可控，是团队的稳定器。",
+          "tags": ["role:SJ"]
+        },
+        {
+          "id": "hl_s_role_SP_1",
+          "pool": "strength",
+          "group_id": "role_sp",
+          "priority": 72,
+          "title": "你擅长边做边调：用行动带来进展",
+          "body": "你更倾向先行动再优化，能在变化中快速调整策略，用小步试验推动局面向前。",
+          "tags": ["role:SP"]
+        },
+
+        {
+          "id": "hl_s_ei_E_2",
+          "pool": "strength",
+          "group_id": "ei_energy",
+          "priority": 68,
+          "title": "你能用互动把事情推起来",
+          "body": "你更容易通过交流获得信息与资源，擅长把人拉进同一个节奏里，让推进更快发生。",
+          "tags": ["axis:EI", "side:E"]
+        },
+        {
+          "id": "hl_s_ei_I_2",
+          "pool": "strength",
+          "group_id": "ei_energy",
+          "priority": 68,
+          "title": "你能用独立思考把问题想透",
+          "body": "你更擅长在安静中整合信息，先把问题想透，再给出更清晰的表达与更稳的判断。",
+          "tags": ["axis:EI", "side:I"]
+        },
+{
+  "id": "hl_s_ei_E_3",
+  "pool": "strength",
+  "group_id": "ei_energy",
+  "priority": 66,
+  "title": "你能用沟通把资源调动起来",
+  "body": "你更容易通过交流把信息、资源与人连接到一起。面对复杂推进，你擅长用清晰的表达让大家进入同一个节奏，进展更快发生。",
+  "tags": ["axis:EI", "side:E"]
+},
+{
+  "id": "hl_s_ei_I_3",
+  "pool": "strength",
+  "group_id": "ei_energy",
+  "priority": 66,
+  "title": "你能在独处中把问题想得更透",
+  "body": "你擅长在安静里整合信息，把复杂问题拆解、推演、归纳成更清晰的结论。先想透再表达，让你的输出更稳、更少走弯路。",
+  "tags": ["axis:EI", "side:I"]
+},
+        {
+          "id": "hl_s_sn_N_2",
+          "pool": "strength",
+          "group_id": "sn_info",
+          "priority": 63,
+          "title": "你能从模式中提出新路径",
+          "body": "你善于看到“背后的模式”，并提出新的连接与方案，让团队更容易突破原有路径。",
+          "tags": ["axis:SN", "side:N"]
+        },
+        {
+          "id": "hl_s_sn_S_2",
+          "pool": "strength",
+          "group_id": "sn_info",
+          "priority": 63,
+          "title": "你能把关键细节落到位",
+          "body": "你能把“怎么做”说清楚，把细节与步骤落到位，让结果更可靠、更可执行。",
+          "tags": ["axis:SN", "side:S"]
+        },
+{
+  "id": "hl_s_sn_N_3",
+  "pool": "strength",
+  "group_id": "sn_info",
+  "priority": 61,
+  "title": "你能从不同线索里拼出新可能",
+  "body": "你善于把零散信息串联成新的路径与假设。即使局面卡住，你也能提出替代方案与新连接，让团队看到更多可能性。",
+  "tags": ["axis:SN", "side:N"]
+},
+{
+  "id": "hl_s_sn_S_3",
+  "pool": "strength",
+  "group_id": "sn_info",
+  "priority": 61,
+  "title": "你能把关键细节做实，减少返工",
+  "body": "你关注事实与落地细节，擅长把“怎么做、做成什么样”讲清楚。细节到位能显著减少误解与返工，让交付更稳定。",
+  "tags": ["axis:SN", "side:S"]
+},
+
+        {
+          "id": "hl_s_tf_T_2",
+          "pool": "strength",
+          "group_id": "tf_decision",
+          "priority": 58,
+          "title": "你能用标准让决策一致",
+          "body": "你擅长把判断标准说清楚，并用一致的原则推动决策，减少反复与扯皮。",
+          "tags": ["axis:TF", "side:T"]
+        },
+        {
+          "id": "hl_s_tf_F_2",
+          "pool": "strength",
+          "group_id": "tf_decision",
+          "priority": 58,
+          "title": "你能把人放进方案里一起考虑",
+          "body": "你会把人的体验与关系纳入考量，善于用更柔和的方式推动共识，让合作更顺。",
+          "tags": ["axis:TF", "side:F"]
+        },
+{
+  "id": "hl_s_tf_T_3",
+  "pool": "strength",
+  "group_id": "tf_decision",
+  "priority": 56,
+  "title": "你能用结构化标准让决策更可靠",
+  "body": "你擅长把判断标准和因果关系说清楚：为什么选这个、风险在哪里、怎么验证。结构化表达让决策更一致、更可复盘。",
+  "tags": ["axis:TF", "side:T"]
+},
+{
+  "id": "hl_s_tf_F_3",
+  "pool": "strength",
+  "group_id": "tf_decision",
+  "priority": 56,
+  "title": "你能把人的体验纳入方案，让协作更顺",
+  "body": "你会自然地关注影响与感受，擅长用更温和但清晰的方式达成共识。把人放进方案里考虑，能显著降低协作摩擦。",
+  "tags": ["axis:TF", "side:F"]
+},
+        {
+          "id": "hl_s_jp_J_2",
+          "pool": "strength",
+          "group_id": "jp_style",
+          "priority": 53,
+          "title": "你能把任务变成清晰里程碑",
+          "body": "你擅长拆解、排期与推进，把事情变成可跟踪的里程碑，减少不确定带来的混乱。",
+          "tags": ["axis:JP", "side:J"]
+        },
+        {
+          "id": "hl_s_jp_P_2",
+          "pool": "strength",
+          "group_id": "jp_style",
+          "priority": 53,
+          "title": "你能在变化中快速切换策略",
+          "body": "你不容易被固定方案束缚，能快速吸收新信息并调整策略，找到更顺的推进方式。",
+          "tags": ["axis:JP", "side:P"]
+        },
+{
+  "id": "hl_s_jp_J_3",
+  "pool": "strength",
+  "group_id": "jp_style",
+  "priority": 51,
+  "title": "你能把目标拆成里程碑并持续推进",
+  "body": "你擅长规划节奏，把大目标拆成可跟踪的里程碑，明确优先级与交付标准。节奏清晰时，团队更容易稳定向前。",
+  "tags": ["axis:JP", "side:J"]
+},
+{
+  "id": "hl_s_jp_P_3",
+  "pool": "strength",
+  "group_id": "jp_style",
+  "priority": 51,
+  "title": "你能在变化中快速调整打法",
+  "body": "你不容易被固定方案卡住，能快速吸收新信息、调整策略并找到更顺的路径。在不确定里保持弹性，是你的优势。",
+  "tags": ["axis:JP", "side:P"]
+},
+        {
+          "id": "hl_s_at_A_2",
+          "pool": "strength",
+          "group_id": "at_stress",
+          "priority": 48,
+          "title": "你更能扛住波动，保持稳定输出",
+          "body": "面对压力与波动，你更容易保持节奏，不被短期起伏带走，从而持续稳定产出。",
+          "tags": ["axis:AT", "side:A"]
+        },
+        {
+          "id": "hl_s_at_T_2",
+          "pool": "strength",
+          "group_id": "at_stress",
+          "priority": 48,
+          "title": "你能提前察觉微小风险并做预案",
+          "body": "你对变化更敏锐，能更早发现潜在风险与张力，并提前做预案来降低损失。",
+          "tags": ["axis:AT", "side:T"]
+        },
+{
+  "id": "hl_s_at_A_3",
+  "pool": "strength",
+  "group_id": "at_stress",
+  "priority": 46,
+  "title": "你能在压力里稳住情绪与节奏",
+  "body": "面对波动与压力，你更容易保持稳定心态，不被短期起伏带走。你能把注意力拉回“下一步最关键的事”，让推进持续发生。",
+  "tags": ["axis:AT", "side:A"]
+},
+{
+  "id": "hl_s_at_T_3",
+  "pool": "strength",
+  "group_id": "at_stress",
+  "priority": 46,
+  "title": "你对风险更敏锐，能提前做预案",
+  "body": "你能更早察觉问题苗头与潜在风险，并提前准备替代方案。提前预案能减少突发带来的损失，让系统更可控。",
+  "tags": ["axis:AT", "side:T"]
+},
+        {
+          "id": "hl_s_fallback_1",
+          "pool": "strength",
+          "group_id": "fallback",
+          "priority": 40,
+          "title": "你有把事情做成的韧性",
+          "body": "你不轻易放弃，遇到阻力也会寻找下一步可行路径，把目标继续往前推。",
+          "tags": ["fallback", "universal"]
+        },
+        {
+          "id": "hl_s_fallback_2",
+          "pool": "strength",
+          "group_id": "fallback",
+          "priority": 39,
+          "title": "你能在混乱里找到重点",
+          "body": "当信息很多时，你会抓住主线与关键变量，把注意力从噪音里拉回有效行动。",
+          "tags": ["fallback", "universal"]
+        },
+        {
+          "id": "hl_s_fallback_3",
+          "pool": "strength",
+          "group_id": "fallback",
+          "priority": 38,
+          "title": "你能在关键时刻推动一次小进展",
+          "body": "你愿意先做出一个小成果，让信息与反馈更早出现，帮助系统进入“可迭代”的状态。",
+          "tags": ["fallback", "universal"]
+        },
+        {
+          "id": "hl_s_fallback_4",
+          "pool": "strength",
+          "group_id": "fallback",
+          "priority": 37,
+          "title": "你擅长用复盘让下一次更顺",
+          "body": "你会总结经验与教训，把“这次发生了什么”转成“下次怎么更好”，让成长更持续。",
+          "tags": ["fallback", "universal"]
+        },
+        {
+          "id": "hl_s_fallback_5",
+          "pool": "strength",
+          "group_id": "fallback",
+          "priority": 36,
+          "title": "你愿意承担责任并把事情收尾",
+          "body": "你愿意把事情推进到收尾，不把问题丢在中间，让结果更完整、更可交付。",
+          "tags": ["fallback", "universal"]
+        }
+      ]
+    },
+    "blindspot": {
+      "items": [
+        {
+          "id": "hl_b_core_blindspot_1",
+          "pool": "blindspot",
+          "group_id": "core_blindspot",
+          "priority": 100,
+          "title": "你可能对自己要求过高",
+          "body": "当压力上来时，你容易把“做得更好”变成“必须完美”。这会让你更难感受到进步，也更难及时停下来休息。",
+          "tags": ["core", "universal", "stress"]
+        },
+
+        {
+          "id": "hl_b_ei_E_1",
+          "pool": "blindspot",
+          "group_id": "ei_energy",
+          "priority": 70,
+          "title": "你可能在“忙社交”里透支自己",
+          "body": "你会本能地回应外界期待，但忽略了内在电量。长期下来容易疲惫、情绪变钝，效率反而下降。",
+          "tags": ["axis:EI", "side:E", "stress"]
+        },
+        {
+          "id": "hl_b_ei_I_1",
+          "pool": "blindspot",
+          "group_id": "ei_energy",
+          "priority": 70,
+          "title": "你可能把“没准备好”当作不开始",
+          "body": "你习惯把事情在脑中打磨到更完善才输出，但这也可能错过窗口期，让别人以为你不关心或不参与。",
+          "tags": ["axis:EI", "side:I", "stress"]
+        },
+
+        {
+          "id": "hl_b_sn_N_1",
+          "pool": "blindspot",
+          "group_id": "sn_info",
+          "priority": 65,
+          "title": "你可能跳得太快，细节跟不上",
+          "body": "当你被灵感驱动时，容易忽略资源、边界与落地成本，导致别人跟不上你的节奏或误解你的意图。",
+          "tags": ["axis:SN", "side:N", "stress"]
+        },
+        {
+          "id": "hl_b_sn_S_1",
+          "pool": "blindspot",
+          "group_id": "sn_info",
+          "priority": 65,
+          "title": "你可能低估了“换一种方式”的价值",
+          "body": "当你看到风险时，会更倾向沿用熟悉路径。久而久之可能错过更优解或新机会。",
+          "tags": ["axis:SN", "side:S", "stress"]
+        },
+
+        {
+          "id": "hl_b_tf_T_1",
+          "pool": "blindspot",
+          "group_id": "tf_decision",
+          "priority": 60,
+          "title": "你可能忽略了情绪也是信息",
+          "body": "当你只盯结论时，容易错过关系张力与隐含需求，导致沟通成本变高、协作摩擦变大。",
+          "tags": ["axis:TF", "side:T", "stress"]
+        },
+        {
+          "id": "hl_b_tf_F_1",
+          "pool": "blindspot",
+          "group_id": "tf_decision",
+          "priority": 60,
+          "title": "你可能因为不想伤人而犹豫",
+          "body": "当你担心冲突时，可能把‘该说的’变成‘先忍忍’，结果问题积累得更难处理。",
+          "tags": ["axis:TF", "side:F", "stress"]
+        },
+
+        {
+          "id": "hl_b_jp_J_1",
+          "pool": "blindspot",
+          "group_id": "jp_style",
+          "priority": 55,
+          "title": "你可能对变化更敏感、更焦虑",
+          "body": "当计划被打乱时，你容易紧绷，甚至把‘不确定’理解为‘失控’，导致沟通变硬或情绪内耗。",
+          "tags": ["axis:JP", "side:J", "stress"]
+        },
+        {
+          "id": "hl_b_jp_P_1",
+          "pool": "blindspot",
+          "group_id": "jp_style",
+          "priority": 55,
+          "title": "你可能把‘再看看’拖成‘没结论’",
+          "body": "当选项很多时，你容易持续开放、持续比较，结果错过截止点，或让他人感到不确定。",
+          "tags": ["axis:JP", "side:P", "stress"]
+        },
+
+        {
+          "id": "hl_b_at_A_1",
+          "pool": "blindspot",
+          "group_id": "at_stress",
+          "priority": 50,
+          "title": "你可能低估了问题的情绪成本",
+          "body": "你能扛住压力，但也可能忽略了他人的紧张感，导致对方觉得你‘不在意’或‘太强势’。",
+          "tags": ["axis:AT", "side:A", "stress"]
+        },
+        {
+          "id": "hl_b_at_T_1",
+          "pool": "blindspot",
+          "group_id": "at_stress",
+          "priority": 50,
+          "title": "你可能陷入反复担心与自我怀疑",
+          "body": "压力大时，你会把小波动放大成对自我的否定，导致效率下降、情绪内耗加重。",
+          "tags": ["axis:AT", "side:T", "stress"]
+        },
+{ "id": "hl_b_ei_E_2", "pool": "blindspot", "group_id": "ei_energy", "priority": 68, "title": "你可能把热情当成“必须回应”", "body": "压力下你更容易立刻接住外界需求，担心不回应就会让关系变差。结果你把自己的电量透支在“随叫随到”上，反而更容易疲惫和烦躁。", "tags": ["axis:EI", "side:E", "stress"] },
+{ "id": "hl_b_ei_E_3", "pool": "blindspot", "group_id": "ei_energy", "priority": 66, "title": "你可能在“热闹里”忽略了恢复", "body": "当事情多、压力大时，你可能用更多互动来缓解焦虑，但这也会挤占真正的恢复时间。久而久之，你会更难安静下来，效率也更容易波动。", "tags": ["axis:EI", "side:E", "stress"] },
+
+{ "id": "hl_b_ei_I_2", "pool": "blindspot", "group_id": "ei_energy", "priority": 68, "title": "你可能把“再想想”拖成“没行动”", "body": "压力下你更想把方案想得更稳再输出，但这会让推进窗口悄悄溜走。别人可能以为你不在意，而你其实是在默默承担不确定带来的压力。", "tags": ["axis:EI", "side:I", "stress"] },
+{ "id": "hl_b_ei_I_3", "pool": "blindspot", "group_id": "ei_energy", "priority": 66, "title": "你可能把沟通成本都留给自己", "body": "当局面复杂时，你容易选择“我先消化完再说”。但如果长期不把进度/风险说出来，反而会让你一个人扛更多误解与返工压力。", "tags": ["axis:EI", "side:I", "stress"] },
+
+{ "id": "hl_b_sn_N_2", "pool": "blindspot", "group_id": "sn_info", "priority": 63, "title": "你可能在压力下“想太远”，忽略当下约束", "body": "压力会让你更想快速找到突破口，于是你跳到更远的可能性与路线图。但如果当下资源/边界没对齐，团队会跟不上，推进反而更难。", "tags": ["axis:SN", "side:N", "stress"] },
+{ "id": "hl_b_sn_N_3", "pool": "blindspot", "group_id": "sn_info", "priority": 61, "title": "你可能用“新想法”逃离不确定", "body": "当现实阻力变大时，你更容易被新方案吸引，期待用更大的改变解决焦虑。但有时问题不在方案，而在执行节奏与协作成本。", "tags": ["axis:SN", "side:N", "stress"] },
+
+{ "id": "hl_b_sn_S_2", "pool": "blindspot", "group_id": "sn_info", "priority": 63, "title": "你可能在压力下更保守，错过窗口期", "body": "压力下你更想用“验证过的做法”降低风险，这很稳，但也可能让你错过更优解或更快的路径。越想稳，越容易慢下来。", "tags": ["axis:SN", "side:S", "stress"] },
+{ "id": "hl_b_sn_S_3", "pool": "blindspot", "group_id": "sn_info", "priority": 61, "title": "你可能把细节抓得太紧，自己更累", "body": "当你担心出错时，会更想把细节都抓在手里。短期能控风险，但长期会让你更疲惫，也让协作对象不敢担责。", "tags": ["axis:SN", "side:S", "stress"] },
+
+{ "id": "hl_b_tf_T_2", "pool": "blindspot", "group_id": "tf_decision", "priority": 58, "title": "你可能只对齐结论，却没对齐感受", "body": "压力下你更强调结论与标准，沟通会更“直”。对你是效率，对对方可能是被否定，于是协作摩擦变大，你也更费力。", "tags": ["axis:TF", "side:T", "stress"] },
+{ "id": "hl_b_tf_T_3", "pool": "blindspot", "group_id": "tf_decision", "priority": 56, "title": "你可能把问题讲得太硬，关系成本上升", "body": "当你想把事做成时，你会把问题讲清楚、讲到位。但如果语气过硬，别人会先进入防御模式，反而更难推进。", "tags": ["axis:TF", "side:T", "stress"] },
+
+{ "id": "hl_b_tf_F_2", "pool": "blindspot", "group_id": "tf_decision", "priority": 58, "title": "你可能为了不伤人而延后决策", "body": "压力下你更在意影响与关系，于是你会想“再等等更合适的说法”。但该做的决定被推迟，问题会累积得更难处理。", "tags": ["axis:TF", "side:F", "stress"] },
+{ "id": "hl_b_tf_F_3", "pool": "blindspot", "group_id": "tf_decision", "priority": 56, "title": "你可能把边界说得太委婉，别人听不懂", "body": "你想温柔地表达不满或拒绝，但在压力场景里，过于委婉会让对方误以为“没事”。结果你的负担更重，情绪更容易积累。", "tags": ["axis:TF", "side:F", "stress"] },
+
+{ "id": "hl_b_jp_J_2", "pool": "blindspot", "group_id": "jp_style", "priority": 53, "title": "你可能把不确定当成“必须立刻消灭”", "body": "压力下你会更想把计划定死、把路径定死，以换取安全感。但如果环境在变，过早定死会带来更多返工与挫败。", "tags": ["axis:JP", "side:J", "stress"] },
+{ "id": "hl_b_jp_J_3", "pool": "blindspot", "group_id": "jp_style", "priority": 51, "title": "你可能因为追求可控而把节奏拉太紧", "body": "当你想稳住局面时，会把节奏拉得很紧：更频繁检查、更高标准验收。短期有效，长期会让你和团队都更紧绷。", "tags": ["axis:JP", "side:J", "stress"] },
+
+{ "id": "hl_b_jp_P_2", "pool": "blindspot", "group_id": "jp_style", "priority": 53, "title": "你可能把选择留太久，错过最佳时机", "body": "压力下你更想保留选项，避免做错决定。但如果没有一个“决定时刻”，开放会变成拖延，最终成本更高。", "tags": ["axis:JP", "side:P", "stress"] },
+{ "id": "hl_b_jp_P_3", "pool": "blindspot", "group_id": "jp_style", "priority": 51, "title": "你可能用“再看看”缓解焦虑，却更焦虑", "body": "当你不想承担错误时，会倾向继续收集信息。但信息越多越难选，焦虑反而会上升，推进也更难发生。", "tags": ["axis:JP", "side:P", "stress"] },
+
+{ "id": "hl_b_at_A_2", "pool": "blindspot", "group_id": "at_stress", "priority": 48, "title": "你可能太能扛，直到身体先报警", "body": "你能在压力里维持输出，但也容易忽略疲惫信号。长期硬扛会让恢复越来越慢，最后用更大代价“被迫停下”。", "tags": ["axis:AT", "side:A", "stress"] },
+{ "id": "hl_b_at_A_3", "pool": "blindspot", "group_id": "at_stress", "priority": 46, "title": "你可能把恢复当成奖励，而不是必需", "body": "压力下你会把恢复推迟：忙完再休息、做完再喘口气。但没有恢复，稳定输出会越来越靠意志硬撑，效率会下降。", "tags": ["axis:AT", "side:A", "stress"] },
+
+{ "id": "hl_b_at_T_2", "pool": "blindspot", "group_id": "at_stress", "priority": 48, "title": "你可能把小波动放大成“要出事了”", "body": "压力下你对风险更敏感，这能帮助预警，但也可能让你陷入反复担心。越担心越想控制，结果更累、更难专注。", "tags": ["axis:AT", "side:T", "stress"] },
+{ "id": "hl_b_at_T_3", "pool": "blindspot", "group_id": "at_stress", "priority": 46, "title": "你可能在脑内预演太多，行动变慢", "body": "你会在脑内预演各种失败场景来降低风险，但预演过多会占用行动时间。你需要的是一次小验证，而不是无限担心。", "tags": ["axis:AT", "side:T", "stress"] },
+        {
+  "id": "hl_b_core_blindspot_2",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 95,
+  "title": "你可能把“做得更好”变成“必须更快”",
+  "body": "一旦进入压力模式，你容易用速度证明价值：更快回消息、更快拍板、更快推进。短期有效，但长期会累积疲惫与焦躁，让你更难保持稳定输出。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_core_blindspot_3",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 90,
+  "title": "你可能在关键时刻变得更强硬",
+  "body": "当你担心失控或结果不达标时，你的表达会更直接、更强调标准。对你来说是“把事做成”，但对他人可能像“被否定/被压住”。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_core_blindspot_4",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 85,
+  "title": "你可能高估了“别人已经懂了”",
+  "body": "你脑中形成结论很快，于是默认他人也能跟上你的信息量。结果沟通会出现断层：你觉得在对齐，对方觉得被跳过，误会与返工随之增加。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_core_blindspot_5",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 80,
+  "title": "你可能在压力下忽略自己的感受",
+  "body": "你更习惯先把问题解决，把情绪往后放。可情绪并不会消失，只会换一种方式出现：睡眠变差、耐心变低、对小事更敏感。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_core_blindspot_6",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 75,
+  "title": "你可能把一次失误放大成“我不够好”",
+  "body": "你对自己标准很高，所以更容易把波动当作能力问题。于是你会更用力、更紧绷，反而更难恢复到平常水平。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_core_blindspot_7",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 70,
+  "title": "你可能把求助当成“麻烦别人”",
+  "body": "当你不确定是否会被支持时，你更倾向自己扛着。短期看是独立，长期看会让你错过协作资源，也更容易陷入孤军奋战。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_core_blindspot_8",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 65,
+  "title": "你可能在压力下变得更“非黑即白”",
+  "body": "为了快速做决定，你会更倾向用二选一框架看问题：对/错、行/不行。这样能提速，但也可能错过中间地带的更优解。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_core_blindspot_9",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 60,
+  "title": "你可能把“控制风险”变成“控制一切”",
+  "body": "当你担心出错时，你会更想把细节捏在手里。可过度掌控会抬高协作门槛，让他人不敢试、不敢担责。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_core_blindspot_10",
+  "pool": "blindspot",
+  "group_id": "core_blindspot",
+  "priority": 55,
+  "title": "你可能忘了给自己留“缓冲与恢复”",
+  "body": "你能扛住压力，也容易因此忽略恢复窗口。没有恢复，持续输出会越来越靠意志硬撑，最后变成效率下降与情绪透支。",
+  "tags": ["core", "universal", "stress"]
+},
+{
+  "id": "hl_b_role_NT_1",
+  "pool": "blindspot",
+  "group_id": "role_nt",
+  "priority": 82,
+  "title": "你可能只对齐逻辑，却没对齐情绪成本",
+  "body": "你更重视论证与结论，但在压力场景里，对方可能更在意“我被怎么对待”。如果忽略这层，沟通会变成拉扯，协作成本上升。",
+  "tags": ["role:NT", "stress"]
+},
+{
+  "id": "hl_b_role_NF_1",
+  "pool": "blindspot",
+  "group_id": "role_nf",
+  "priority": 82,
+  "title": "你可能为了和谐而把问题留到更难的时候",
+  "body": "你很在意关系与感受，所以更容易先忍一下、缓一下。可长期不说清边界，问题会积累到需要更大代价才能处理。",
+  "tags": ["role:NF", "stress"]
+},
+{
+  "id": "hl_b_role_SJ_1",
+  "pool": "blindspot",
+  "group_id": "role_sj",
+  "priority": 82,
+  "title": "你可能过度依赖“熟悉路径”来获得安全感",
+  "body": "在不确定里，你会更倾向沿用验证过的做法。但如果环境变了，旧流程可能不再适配，反而会让你更焦虑、更费力。",
+  "tags": ["role:SJ", "stress"]
+},
+{
+  "id": "hl_b_role_SP_1",
+  "pool": "blindspot",
+  "group_id": "role_sp",
+  "priority": 82,
+  "title": "你可能在压力下更想“马上解决”，忽略后续影响",
+  "body": "你擅长当下应对，但在压力下容易先把眼前问题压住。可如果没同步后续安排与边界，问题会以别的形式反弹回来。",
+  "tags": ["role:SP", "stress"]
+},
+{
+  "id": "hl_b_fallback_1",
+  "pool": "blindspot",
+  "group_id": "fallback_blindspot",
+  "priority": 45,
+  "title": "你可能在压力下更容易紧绷",
+  "body": "当事情不确定时，你会本能提高警觉。提醒自己：紧绷不等于更有效，适度放松反而能让判断更清晰。",
+  "tags": ["fallback", "stress"]
+},
+{
+  "id": "hl_b_fallback_2",
+  "pool": "blindspot",
+  "group_id": "fallback_blindspot",
+  "priority": 44,
+  "title": "你可能把注意力全放在问题上",
+  "body": "压力会让你更关注风险与缺口。别忘了同时确认：哪些是可控的？下一步最小动作是什么？把焦虑转成行动更有用。",
+  "tags": ["fallback", "stress"]
+},
+{
+  "id": "hl_b_fallback_3",
+  "pool": "blindspot",
+  "group_id": "fallback_blindspot",
+  "priority": 43,
+  "title": "你可能忽略了恢复也是“任务的一部分”",
+  "body": "当你持续输出时，恢复不是奖励，而是维持稳定表现的必要条件。给自己留一点恢复窗口，效率会更稳。",
+  "tags": ["fallback", "stress"]
+},
+{
+  "id": "hl_b_fallback_4",
+  "pool": "blindspot",
+  "group_id": "fallback_blindspot",
+  "priority": 42,
+  "title": "你可能对自己更苛刻，对别人更宽容",
+  "body": "你能理解他人的难处，却容易对自己只看不足。试着用同样的宽容对待自己，才能更快恢复状态。",
+  "tags": ["fallback", "stress"]
+},
+{
+  "id": "hl_b_fallback_5",
+  "pool": "blindspot",
+  "group_id": "fallback_blindspot",
+  "priority": 41,
+  "title": "你可能把一次波动当成长期趋势",
+  "body": "压力下，大脑更容易放大负面信号。提醒自己：这可能只是短期波动。先用一个小动作验证，再决定要不要加码担心。",
+  "tags": ["fallback", "stress"]
+}
+      ]
+    },
+    "action": {
+      "items": [
+        {
+          "id": "hl_a_core_action_1",
+          "pool": "action",
+          "group_id": "core_action",
+          "priority": 100,
+          "title": "给自己一个“最小可行步骤”",
+          "body": "把下一步缩小到 10 分钟能完成的动作：发一条消息、列 3 个要点、写 5 行草稿。先动起来，后面自然会更顺。",
+          "tags": ["core", "universal", "habit"]
+        },
+
+        {
+          "id": "hl_a_ei_E_1",
+          "pool": "action",
+          "group_id": "ei_energy",
+          "priority": 70,
+          "title": "把重要沟通提前 24 小时预约",
+          "body": "把关键讨论从临时打断变成可预期的安排：提前给议题、给时长、给结论格式，让你更省力也更有掌控感。",
+          "tags": ["axis:EI", "side:E", "habit"]
+        },
+        {
+          "id": "hl_a_ei_I_1",
+          "pool": "action",
+          "group_id": "ei_energy",
+          "priority": 70,
+          "title": "先给“半成品”再迭代",
+          "body": "用一个轻量版本先对齐方向：一句结论 + 三个依据 + 一个风险。让反馈更早发生，你会更省时间。",
+          "tags": ["axis:EI", "side:I", "habit"]
+        },
+
+        {
+          "id": "hl_a_sn_N_1",
+          "pool": "action",
+          "group_id": "sn_info",
+          "priority": 65,
+          "title": "每个新想法都补一句“怎么做”",
+          "body": "输出时加一句落地锚点：第一步做什么、需要谁、预计多久。你会发现推进阻力明显变小。",
+          "tags": ["axis:SN", "side:N", "habit"]
+        },
+        {
+          "id": "hl_a_sn_S_1",
+          "pool": "action",
+          "group_id": "sn_info",
+          "priority": 65,
+          "title": "给自己设一个“小实验”窗口",
+          "body": "每周留 30 分钟做一次低成本试错：换一个工具、改一个流程、做一个 AB 对比。让改进变得轻量且持续。",
+          "tags": ["axis:SN", "side:S", "habit"]
+        },
+
+        {
+          "id": "hl_a_tf_T_1",
+          "pool": "action",
+          "group_id": "tf_decision",
+          "priority": 60,
+          "title": "先共情，再给方案",
+          "body": "在给建议前先用一句话确认对方感受或诉求：‘我理解你更担心的是…’ 这会显著降低对抗感。",
+          "tags": ["axis:TF", "side:T", "habit"]
+        },
+        {
+          "id": "hl_a_tf_F_1",
+          "pool": "action",
+          "group_id": "tf_decision",
+          "priority": 60,
+          "title": "用“事实 + 感受 + 请求”表达边界",
+          "body": "用三段式说清楚：发生了什么、我感受如何、我希望你怎么做。既温和又不会含糊。",
+          "tags": ["axis:TF", "side:F", "habit"]
+        },
+
+        {
+          "id": "hl_a_jp_J_1",
+          "pool": "action",
+          "group_id": "jp_style",
+          "priority": 55,
+          "title": "给计划留一个“缓冲区”",
+          "body": "每个关键任务预留 20% 缓冲时间，并设置一个‘可变更窗口’。你会更从容，也更能应对变化。",
+          "tags": ["axis:JP", "side:J", "habit"]
+        },
+        {
+          "id": "hl_a_jp_P_1",
+          "pool": "action",
+          "group_id": "jp_style",
+          "priority": 55,
+          "title": "设一个“决定时刻”",
+          "body": "给每个决策设截止：到点就按当前信息做最优选择，并允许后续迭代。用小闭环替代无限开放。",
+          "tags": ["axis:JP", "side:P", "habit"]
+        },
+
+        {
+          "id": "hl_a_at_A_1",
+          "pool": "action",
+          "group_id": "at_stress",
+          "priority": 50,
+          "title": "多问一句“你现在最担心什么？”",
+          "body": "在推进任务前先把担忧说出来。你会更容易获得配合，也能减少误解与情绪反弹。",
+          "tags": ["axis:AT", "side:A", "habit"]
+        },
+        { "id": "hl_a_ei_E_2", "pool": "action", "group_id": "ei_energy", "priority": 68, "title": "把推进变成一次“当面确认”", "body": "当你能量在外放时，别用来刷消息。把关键推进改成一次短对话：5 分钟确认目标、边界和下一步，让协作立刻进入同一节奏。", "tags": ["axis:EI", "side:E", "habit"] },
+{ "id": "hl_a_ei_E_3", "pool": "action", "group_id": "ei_energy", "priority": 66, "title": "用一句话把人拉进同一个目标", "body": "行动前先说一句“我们要一起把什么做成”。这能快速降低分歧，把沟通从观点争论拉回结果对齐。", "tags": ["axis:EI", "side:E", "habit"] },
+
+{ "id": "hl_a_ei_I_2", "pool": "action", "group_id": "ei_energy", "priority": 68, "title": "先写 5 行“半成品结论”", "body": "你更适合先在安静里把结论写出来：一句结论 + 三个依据 + 一个风险。然后再发出去要反馈，推进会更快。", "tags": ["axis:EI", "side:I", "habit"] },
+{ "id": "hl_a_ei_I_3", "pool": "action", "group_id": "ei_energy", "priority": 66, "title": "把沟通改成“先同步再讨论”", "body": "先发一条同步：现状/选项/我倾向。给对方一个可回应的结构，而不是等到完全想好才开口。", "tags": ["axis:EI", "side:I", "habit"] },
+
+{ "id": "hl_a_sn_N_2", "pool": "action", "group_id": "sn_info", "priority": 63, "title": "每个想法都补一句“第一步怎么做”", "body": "把灵感落地：第一步做什么、需要谁、预计多久。你会发现推进阻力立刻下降。", "tags": ["axis:SN", "side:N", "habit"] },
+{ "id": "hl_a_sn_N_3", "pool": "action", "group_id": "sn_info", "priority": 61, "title": "给创意加一个“可验证指标”", "body": "把想法写成小实验：要验证什么？成功/失败怎么看？指标一清晰，行动会更稳。", "tags": ["axis:SN", "side:N", "habit"] },
+
+{ "id": "hl_a_sn_S_2", "pool": "action", "group_id": "sn_info", "priority": 63, "title": "把步骤写成一页清单", "body": "把行动拆成清单：步骤、验收点、负责人、截止时间。清单一出来，协作成本会明显下降。", "tags": ["axis:SN", "side:S", "habit"] },
+{ "id": "hl_a_sn_S_3", "pool": "action", "group_id": "sn_info", "priority": 61, "title": "先把最关键细节落到位", "body": "行动时只抓一个关键细节：哪个细节最影响结果？把它先落稳，其余再迭代。", "tags": ["axis:SN", "side:S", "habit"] },
+
+{ "id": "hl_a_tf_T_2", "pool": "action", "group_id": "tf_decision", "priority": 58, "title": "用“标准一句话”减少争论", "body": "先把判断标准说清楚：我们按什么算好？按什么算完成？标准先对齐，讨论会更快收敛。", "tags": ["axis:TF", "side:T", "habit"] },
+{ "id": "hl_a_tf_T_3", "pool": "action", "group_id": "tf_decision", "priority": 56, "title": "把决策写成“选项 + 风险 + 下一步”", "body": "用三段式做决定：选项是什么、风险是什么、下一步做什么。让决策可解释、可复盘。", "tags": ["axis:TF", "side:T", "habit"] },
+
+{ "id": "hl_a_tf_F_2", "pool": "action", "group_id": "tf_decision", "priority": 58, "title": "先确认对方在意点再给建议", "body": "行动前先问：你现在最在意什么/最担心什么？对齐“人”的需求后再推进“事”，阻力会更小。", "tags": ["axis:TF", "side:F", "habit"] },
+{ "id": "hl_a_tf_F_3", "pool": "action", "group_id": "tf_decision", "priority": 56, "title": "用“事实+感受+请求”说清边界", "body": "把边界说清楚：发生了什么、我感受如何、我希望你怎么做。温和但不含糊。", "tags": ["axis:TF", "side:F", "habit"] },
+
+{ "id": "hl_a_jp_J_2", "pool": "action", "group_id": "jp_style", "priority": 53, "title": "给计划加 20% 缓冲", "body": "把关键任务预留 20% 缓冲，并把变更窗口写清楚。你会更从容，也更能抗波动。", "tags": ["axis:JP", "side:J", "habit"] },
+{ "id": "hl_a_jp_J_3", "pool": "action", "group_id": "jp_style", "priority": 51, "title": "先定里程碑，再定细节", "body": "先把里程碑定清楚：到什么时候交付什么。细节可以迭代，但里程碑让推进可跟踪。", "tags": ["axis:JP", "side:J", "habit"] },
+
+{ "id": "hl_a_jp_P_2", "pool": "action", "group_id": "jp_style", "priority": 53, "title": "设一个“决定时刻”防止拖延", "body": "给选择设截止：到点就按当前信息做最优选择，并允许后续迭代。", "tags": ["axis:JP", "side:P", "habit"] },
+{ "id": "hl_a_jp_P_3", "pool": "action", "group_id": "jp_style", "priority": 51, "title": "把选择缩小到 2 个可执行选项", "body": "当选项太多时，先删到 2 个“现在就能做”的选项，再开始行动。用小闭环替代无限开放。", "tags": ["axis:JP", "side:P", "habit"] },
+
+{ "id": "hl_a_at_A_2", "pool": "action", "group_id": "at_stress", "priority": 48, "title": "先稳住节奏：一次只推进一件事", "body": "当压力上来时，把任务收敛到“下一步唯一动作”。一次只推进一件事，节奏会立刻变稳。", "tags": ["axis:AT", "side:A", "habit"] },
+{ "id": "hl_a_at_A_3", "pool": "action", "group_id": "at_stress", "priority": 46, "title": "把恢复当成任务的一部分", "body": "给自己留一个恢复窗口：短走 5 分钟/喝水/伸展。恢复不是奖励，是维持稳定输出的必要条件。", "tags": ["axis:AT", "side:A", "habit"] },
+
+{ "id": "hl_a_at_T_2", "pool": "action", "group_id": "at_stress", "priority": 48, "title": "把担心写成“可控项清单”", "body": "写下担心→标出可控项→选一个最小动作去验证。把焦虑变成行动，你会更快稳下来。", "tags": ["axis:AT", "side:T", "habit"] },
+{ "id": "hl_a_at_T_3", "pool": "action", "group_id": "at_stress", "priority": 46, "title": "先做一次小验证再决定要不要加码", "body": "当你担心风险时，不要脑内循环。先做一次小验证：问一个人、查一个数据、跑一个小实验，再决定是否需要担心。", "tags": ["axis:AT", "side:T", "habit"] },
+        {
+          "id": "hl_a_at_T_1",
+          "pool": "action",
+          "group_id": "at_stress",
+          "priority": 50,
+          "title": "把担心写成“可操作清单”",
+          "body": "把焦虑从脑内循环搬到纸面：我担心什么？可控项是什么？下一步动作是什么？你会明显稳下来。",
+          "tags": ["axis:AT", "side:T", "habit"]
+        },
+        {
+  "id": "hl_a_core_action_2",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 95,
+  "title": "先写清“下一步一件事”",
+  "body": "当任务变复杂时，最容易卡在“同时想做很多”。把注意力收敛到下一步唯一动作：能在 10–20 分钟内完成、能带来新信息的那一件事。写下来并立刻开始，你会更快进入状态。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_core_action_3",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 92,
+  "title": "把目标改写成“可观察结果”",
+  "body": "如果目标太抽象（比如“更努力/更自律”），很难推进。把它改写成可观察的结果：完成什么、交付什么、对方能看到什么。结果一清晰，行动会自然变简单。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_core_action_4",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 90,
+  "title": "用 2 分钟做一次“开始仪式”",
+  "body": "当你想拖延时，不要逼自己立刻高效。先做一个 2 分钟的开始仪式：打开材料、写下三行要点、把第一步摆到桌面上。让系统进入“已开始”，动力会随后跟上。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_core_action_5",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 88,
+  "title": "把“担心”翻译成清单",
+  "body": "当焦虑上来时，先把它翻译成清单：我在担心什么？哪些是可控的？我能做的最小动作是什么？把情绪变成可操作项，你会更快恢复掌控感。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_core_action_6",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 86,
+  "title": "先做一个“半成品”给反馈",
+  "body": "不要等到完美才输出。先做一个半成品：一句结论 + 三个依据 + 一个风险点。让反馈尽早出现，你会少走弯路，也更快迭代到正确方向。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_core_action_7",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 84,
+  "title": "给任务设一个“截止点”",
+  "body": "开放式任务最容易无限延伸。给它设一个截止点：到点就交付当前版本，然后再迭代。用小闭环替代无限打磨，效率会明显提升。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_core_action_8",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 82,
+  "title": "把大任务拆成“三步法”",
+  "body": "遇到大任务别一口气扛。用三步法拆解：先写目标、再列 3 个关键动作、最后标出第一个可执行步骤。只要第一步清楚，后续会越来越顺。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_core_action_9",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 80,
+  "title": "先做“可控 20%”",
+  "body": "当你觉得事情太多时，先找出最可控的 20%：你能立刻做、能立刻验证、能立刻推进的部分。先把可控项推进，系统会回到可运转状态。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_core_action_10",
+  "pool": "action",
+  "group_id": "core_action",
+  "priority": 78,
+  "title": "用复盘让下一次更省力",
+  "body": "做完一件事后，用 3 句复盘：哪些有效？哪些是浪费？下次我只保留哪一条？让经验沉淀成方法，你会越来越省力。",
+  "tags": ["core", "universal", "habit"]
+},
+{
+  "id": "hl_a_role_NT_1",
+  "pool": "action",
+  "group_id": "role_nt",
+  "priority": 72,
+  "title": "把行动变成“可验证假设”",
+  "body": "你更擅长用模型与逻辑推进。把下一步写成可验证假设：我预计会发生什么？用什么指标判断？需要哪些输入？当验证点清晰，行动会更稳、更少走弯路。",
+  "tags": ["role:NT", "habit"]
+},
+{
+  "id": "hl_a_role_NF_1",
+  "pool": "action",
+  "group_id": "role_nf",
+  "priority": 72,
+  "title": "先对齐“人”，再推进“事”",
+  "body": "你更擅长在关系里推动协作。行动前先做一次对齐：对方在意什么？最担心什么？我希望对方怎么配合？把感受与诉求说清楚，推进会更顺、更少摩擦。",
+  "tags": ["role:NF", "habit"]
+},
+{
+  "id": "hl_a_role_SJ_1",
+  "pool": "action",
+  "group_id": "role_sj",
+  "priority": 72,
+  "title": "用清单把质量做稳",
+  "body": "你更擅长把流程与标准落到位。把行动写成一页清单：步骤、验收点、负责人、截止时间。清单一出来，协作成本会明显下降，交付也更可控。",
+  "tags": ["role:SJ", "habit"]
+},
+{
+  "id": "hl_a_role_SP_1",
+  "pool": "action",
+  "group_id": "role_sp",
+  "priority": 72,
+  "title": "先做一个小实验再优化",
+  "body": "你更擅长边做边调。把行动变成小实验：用最小成本做一次尝试，快速拿到反馈，再决定要不要加码。用小步试验替代长时间犹豫，效率会更高。",
+  "tags": ["role:SP", "habit"]
+},
+
+{
+  "id": "hl_a_fallback_1",
+  "pool": "action",
+  "group_id": "fallback_action",
+  "priority": 45,
+  "title": "先做一个 10 分钟动作",
+  "body": "当你不知道从哪开始，就把下一步压到 10 分钟内能完成的一件事：写三行要点、发一条确认消息、整理一个文件夹。先动起来，后面会更顺。",
+  "tags": ["fallback"]
+},
+{
+  "id": "hl_a_fallback_2",
+  "pool": "action",
+  "group_id": "fallback_action",
+  "priority": 44,
+  "title": "把目标缩小到“今天能完成”",
+  "body": "如果目标太大，先把它缩小到今天能完成的版本：完成一小段、推进一个节点、拿到一个确认。用小闭环把系统跑起来，焦虑会下降。",
+  "tags": ["fallback"]
+},
+{
+  "id": "hl_a_fallback_3",
+  "pool": "action",
+  "group_id": "fallback_action",
+  "priority": 43,
+  "title": "写下三件最重要的事",
+  "body": "把注意力从噪音里拉回来：写下今天最重要的三件事，然后只选其中第一件开始做。先完成最重要的那一件，剩下的会更好安排。",
+  "tags": ["fallback"]
+},
+{
+  "id": "hl_a_fallback_4",
+  "pool": "action",
+  "group_id": "fallback_action",
+  "priority": 42,
+  "title": "先确认一个“下一步结论”",
+  "body": "如果信息不全，先确认一个可执行的结论：我现在要做什么？做到什么算完成？谁需要被同步？结论一落地，推进会更轻。",
+  "tags": ["fallback"]
+},
+{
+  "id": "hl_a_fallback_5",
+  "pool": "action",
+  "group_id": "fallback_action",
+  "priority": 41,
+  "title": "做完就复盘一句",
+  "body": "每完成一个动作，就复盘一句：这一步带来了什么新信息？下一步更清楚了吗？用“行动→反馈→下一步”循环，让节奏稳定下来。",
+  "tags": ["fallback"]
+}
+      ]
+    }
+  }
+}

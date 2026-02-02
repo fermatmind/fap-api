@@ -1,0 +1,80 @@
+{
+  "schema": "fap.commercial_spec.v1",
+  "scale_code": "MBTI",
+  "version": "0.2.2",
+  "currency": "CNY",
+  "sku_hint": {
+    "single": { "code": "MBTI_REPORT_FULL_199", "price_cents": 199, "title": "完整报告解锁（单次）" },
+    "month": { "code": "MBTI_PRO_MONTH_599", "price_cents": 599, "title": "会员月卡（不限次数）" },
+    "year": { "code": "MBTI_PRO_YEAR_1999", "price_cents": 1999, "title": "会员年卡（不限次数）" },
+    "gift": { "code": "MBTI_GIFT_BOGO_2990", "price_cents": 2990, "title": "赠送包（两次解锁）" }
+  },
+  "entitlements": {
+    "report_free": {
+      "id": "report_free",
+      "label": "免费可见",
+      "sections": ["overview", "type_snapshot", "dimension_summary", "highlights_free"]
+    },
+    "report_full": {
+      "id": "report_full",
+      "label": "完整报告",
+      "sections": ["overview", "type_snapshot", "dimension_summary", "highlights_full", "traits", "growth", "relationships", "stress_recovery", "career", "recommended_reads", "borderline_notes"]
+    }
+  },
+  "unlock_paths": [
+    {
+      "id": "first_attempt_promo",
+      "scope": "attempt",
+      "priority": 10,
+      "rules": [
+        { "method": "rewarded_ad", "max_uses_per_account": 1, "grants": ["report_full"] },
+        { "method": "invite", "min_accepted": 1, "grants": ["report_full"] }
+      ],
+      "notes": "首测促销解锁路径"
+    },
+    {
+      "id": "standard_paid",
+      "scope": "attempt",
+      "priority": 20,
+      "rules": [
+        { "method": "purchase", "sku_codes": ["MBTI_REPORT_FULL_199"], "grants": ["report_full"] },
+        { "method": "subscription_active", "sku_codes": ["MBTI_PRO_MONTH_599", "MBTI_PRO_YEAR_1999"], "grants": ["report_full"] },
+        { "method": "gift_redeem", "sku_codes": ["MBTI_GIFT_BOGO_2990"], "grants": ["report_full"] }
+      ],
+      "notes": "常规付费解锁路径"
+    }
+  ],
+  "variants": [
+    {
+      "id": "paywall_v1",
+      "experiment_key": "mbti_paywall_variant",
+      "traffic": 0.5,
+      "offer_order": ["MBTI_REPORT_FULL_199", "MBTI_PRO_MONTH_599", "MBTI_PRO_YEAR_1999", "MBTI_GIFT_BOGO_2990"],
+      "default_highlight": "MBTI_PRO_MONTH_599",
+      "copy": {
+        "title": "解锁完整报告",
+        "subtitle": "一次解锁，查看更完整的性格画像与建议"
+      }
+    },
+    {
+      "id": "paywall_v2",
+      "experiment_key": "mbti_paywall_variant",
+      "traffic": 0.5,
+      "offer_order": ["MBTI_PRO_YEAR_1999", "MBTI_PRO_MONTH_599", "MBTI_REPORT_FULL_199", "MBTI_GIFT_BOGO_2990"],
+      "default_highlight": "MBTI_PRO_YEAR_1999",
+      "copy": {
+        "title": "解锁完整报告",
+        "subtitle": "会员可不限次数查看完整报告"
+      }
+    }
+  ],
+  "unlock_contract": {
+    "response_fields": [
+      "entitlement_state",
+      "locked_sections",
+      "sku_hint",
+      "variant_id",
+      "unlock_methods_available"
+    ]
+  }
+}
