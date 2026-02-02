@@ -472,70 +472,73 @@ class AttemptsController extends Controller
                 $creditBenefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
             }
 
-            if ($orgId > 0 && $creditBenefitCode !== '') {
-                $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
-                if (!($consume['ok'] ?? false)) {
-                    $status = (int) ($consume['status'] ?? 402);
-                    $response = response()->json([
-                        'ok' => false,
-                        'error' => $consume['error'] ?? 'INSUFFICIENT_CREDITS',
-                        'message' => $consume['message'] ?? 'insufficient credits.',
-                    ], $status);
-                    return;
-                }
+            $entitlementBenefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
+if ($entitlementBenefitCode === '') {
+    $entitlementBenefitCode = $creditBenefitCode;
+}
 
-                $this->eventRecorder->record('wallet_consumed', $this->resolveUserId($request), [
-                    'scale_code' => $scaleCode,
-                    'pack_id' => $packId,
-                    'dir_version' => $dirVersion,
-                    'attempt_id' => $attemptId,
-                    'benefit_code' => $creditBenefitCode,
-                    'sku' => null,
-                ], [
-                    'org_id' => $orgId,
-                    'anon_id' => $this->orgContext->anonId(),
-                    'attempt_id' => $attemptId,
-                    'pack_id' => $packId,
-                    'dir_version' => $dirVersion,
-                ]);
+// B2B 已扣费（consumeB2BCredit=true）时，跳过第二次 creditBenefitCode 的扣费，避免双扣
+if ($orgId > 0 && $creditBenefitCode !== '' && !$consumeB2BCredit) {
+    $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
+    if (!($consume['ok'] ?? false)) {
+        $status = (int) ($consume['status'] ?? 402);
+        $response = response()->json([
+            'ok' => false,
+            'error' => $consume['error'] ?? 'INSUFFICIENT_CREDITS',
+            'message' => $consume['message'] ?? 'insufficient credits.',
+        ], $status);
+        return;
+    }
 
-                $entitlementBenefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
-                if ($entitlementBenefitCode === '') {
-                    $entitlementBenefitCode = $creditBenefitCode;
-                }
+    $this->eventRecorder->record('wallet_consumed', $this->resolveUserId($request), [
+        'scale_code' => $scaleCode,
+        'pack_id' => $packId,
+        'dir_version' => $dirVersion,
+        'attempt_id' => $attemptId,
+        'benefit_code' => $creditBenefitCode,
+        'sku' => null,
+    ], [
+        'org_id' => $orgId,
+        'anon_id' => $this->orgContext->anonId(),
+        'attempt_id' => $attemptId,
+        'pack_id' => $packId,
+        'dir_version' => $dirVersion,
+    ]);
+}
 
-                if ($entitlementBenefitCode !== '') {
-                    $userIdRaw = $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id');
-                    $anonIdRaw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id');
+// entitlement 解锁：B2B 链路与 commercial 链路都需要
+if ($orgId > 0 && $entitlementBenefitCode !== '') {
+    $userIdRaw = $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id');
+    $anonIdRaw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id');
 
-                    $grant = $this->entitlements->grantAttemptUnlock(
-                        $orgId,
-                        $userIdRaw !== null ? (string) $userIdRaw : null,
-                        $anonIdRaw !== null ? (string) $anonIdRaw : null,
-                        $entitlementBenefitCode,
-                        $attemptId,
-                        null
-                    );
+    $grant = $this->entitlements->grantAttemptUnlock(
+        $orgId,
+        $userIdRaw !== null ? (string) $userIdRaw : null,
+        $anonIdRaw !== null ? (string) $anonIdRaw : null,
+        $entitlementBenefitCode,
+        $attemptId,
+        null
+    );
 
-                    if (!($grant['ok'] ?? false)) {
-                        $status = (int) ($grant['status'] ?? 500);
-                        $response = response()->json($grant, $status);
-                        return;
-                    }
-                }
+    if (!($grant['ok'] ?? false)) {
+        $status = (int) ($grant['status'] ?? 500);
+        $response = response()->json($grant, $status);
+        return;
+    }
 
-                $snapshot = $this->reportSnapshots->createSnapshotForAttempt([
-                    'org_id' => $orgId,
-                    'attempt_id' => $attemptId,
-                    'trigger_source' => 'credit_consume',
-                    'order_no' => null,
-                ]);
-                if (!($snapshot['ok'] ?? false)) {
-                    $status = (int) ($snapshot['status'] ?? 500);
-                    $response = response()->json($snapshot, $status);
-                    return;
-                }
-            }
+    // snapshot：保持原行为（成功解锁后写快照）
+    $snapshot = $this->reportSnapshots->createSnapshotForAttempt([
+        'org_id' => $orgId,
+        'attempt_id' => $attemptId,
+        'trigger_source' => 'credit_consume',
+        'order_no' => null,
+    ]);
+    if (!($snapshot['ok'] ?? false)) {
+        $status = (int) ($snapshot['status'] ?? 500);
+        $response = response()->json($snapshot, $status);
+        return;
+    }
+}
 
             $response = $this->buildSubmitResponse($locked, $result, true);
         });

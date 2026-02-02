@@ -26,6 +26,8 @@ return [
     // ✅ CI/服务器建议强约束：默认 pack_id 明确指向你的主包，避免回退到 GLOBAL/en
     // default_pack_id 对应 manifest.json.pack_id（MBTI.cn-mainland.zh-CN.v0.2.1-TEST）
     'default_pack_id' => env('FAP_DEFAULT_PACK_ID', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST'),
+    // demo_pack_id 对应 demo manifest.json.pack_id（default）
+    'demo_pack_id' => env('FAP_DEMO_PACK_ID', 'default'),
     // default_dir_version 对应目录名（MBTI-CN-v0.2.1-TEST）
     'default_dir_version' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.2.1-TEST'),
 

@@ -8,6 +8,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Scale\ScaleRegistry;
+use App\Support\Commerce\SkuContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -69,6 +70,8 @@ class ReportGatekeeper
 
         $viewPolicy = $this->normalizeViewPolicy($registry['view_policy_json'] ?? null);
         $commercial = $this->normalizeCommercial($registry['commercial_json'] ?? null);
+        $paywall = $this->buildPaywall($viewPolicy, $commercial);
+        $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
         $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
         if ($benefitCode === '') {
             $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
@@ -104,7 +107,7 @@ class ReportGatekeeper
 
             $report = $this->decodeReportJson($snapshotRow->report_json ?? null);
 
-            return $this->responsePayload(false, 'full', $viewPolicy, $report);
+            return $this->responsePayload(false, 'full', $viewPolicy, $report, $paywall);
         }
 
         $report = $this->buildReport($scaleCode, $attempt, $result);
@@ -114,7 +117,7 @@ class ReportGatekeeper
 
         $teaser = $this->applyTeaser($report, $viewPolicy);
 
-        return $this->responsePayload(true, 'free', $viewPolicy, $teaser);
+        return $this->responsePayload(true, 'free', $viewPolicy, $teaser, $paywall);
     }
 
     private function normalizeViewPolicy(mixed $raw): array
@@ -150,6 +153,88 @@ class ReportGatekeeper
             $raw = is_array($decoded) ? $decoded : null;
         }
         return is_array($raw) ? $raw : [];
+    }
+
+    private function buildPaywall(array $viewPolicy, array $commercial): array
+    {
+        $effectiveSku = strtoupper(trim((string) ($viewPolicy['upgrade_sku'] ?? '')));
+        if ($effectiveSku === '' || $effectiveSku === SkuContract::UPGRADE_SKU_ANCHOR) {
+            $effectiveSku = SkuContract::defaultEffectiveSku();
+        }
+
+        $viewPolicy['upgrade_sku'] = $effectiveSku !== '' ? $effectiveSku : null;
+
+        $anchorSku = SkuContract::anchorForSku($effectiveSku) ?? SkuContract::anchorUpgradeSku();
+        $offers = $this->normalizeOffers($commercial['offers'] ?? null);
+        if (count($offers) === 0) {
+            $offers = SkuContract::offers();
+        }
+
+        return [
+            'upgrade_sku' => $anchorSku,
+            'upgrade_sku_effective' => $effectiveSku !== '' ? $effectiveSku : null,
+            'offers' => $offers,
+            'view_policy' => $viewPolicy,
+        ];
+    }
+
+    private function normalizeOffers(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $raw = is_array($decoded) ? $decoded : null;
+        }
+        if (!is_array($raw)) {
+            return [];
+        }
+
+        $offers = [];
+        foreach ($raw as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $sku = strtoupper(trim((string) ($item['sku'] ?? '')));
+            if ($sku === '') {
+                continue;
+            }
+
+            $grant = $this->normalizeGrant($item['grant'] ?? null);
+            $entitlementId = trim((string) ($item['entitlement_id'] ?? ''));
+            if ($entitlementId === '') {
+                $entitlementId = (string) (SkuContract::entitlementIdForSku($sku) ?? '');
+            }
+
+            $offers[] = [
+                'sku' => $sku,
+                'price_cents' => (int) ($item['price_cents'] ?? 0),
+                'currency' => (string) ($item['currency'] ?? 'CNY'),
+                'title' => (string) ($item['title'] ?? ''),
+                'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
+                'grant' => $grant,
+            ];
+        }
+
+        return $offers;
+    }
+
+    private function normalizeGrant(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $raw = is_array($decoded) ? $decoded : null;
+        }
+        $raw = is_array($raw) ? $raw : [];
+
+        $type = trim((string) ($raw['type'] ?? ''));
+        $qty = isset($raw['qty']) ? (int) $raw['qty'] : null;
+        $periodDays = isset($raw['period_days']) ? (int) $raw['period_days'] : null;
+
+        return [
+            'type' => $type !== '' ? $type : null,
+            'qty' => $qty,
+            'period_days' => $periodDays,
+        ];
     }
 
     private function buildReport(string $scaleCode, Attempt $attempt, Result $result): ?array
@@ -262,13 +347,15 @@ class ReportGatekeeper
         return [];
     }
 
-    private function responsePayload(bool $locked, string $accessLevel, array $viewPolicy, array $report): array
+    private function responsePayload(bool $locked, string $accessLevel, array $viewPolicy, array $report, array $paywall = []): array
     {
         return [
             'ok' => true,
             'locked' => $locked,
             'access_level' => $accessLevel,
-            'upgrade_sku' => $viewPolicy['upgrade_sku'] ?? null,
+            'upgrade_sku' => $paywall['upgrade_sku'] ?? ($viewPolicy['upgrade_sku'] ?? null),
+            'upgrade_sku_effective' => $paywall['upgrade_sku_effective'] ?? ($viewPolicy['upgrade_sku'] ?? null),
+            'offers' => $paywall['offers'] ?? [],
             'view_policy' => $viewPolicy,
             'report' => $report,
         ];

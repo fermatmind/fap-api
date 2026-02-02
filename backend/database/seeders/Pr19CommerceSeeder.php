@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Support\Commerce\SkuContract;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -20,17 +21,78 @@ class Pr19CommerceSeeder extends Seeder
 
         $skus = [
             [
-                'sku' => 'MBTI_REPORT_FULL',
+                'sku' => SkuContract::UPGRADE_SKU_ANCHOR,
                 'scale_code' => 'MBTI',
                 'kind' => 'report_unlock',
                 'unit_qty' => 1,
                 'benefit_code' => 'MBTI_REPORT_FULL',
                 'scope' => 'attempt',
-                'price_cents' => 990,
-                'currency' => 'USD',
+                'price_cents' => 199,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => [
+                    'label' => 'MBTI full report (anchor)',
+                    'deprecated' => true,
+                    'anchor' => true,
+                ],
+            ],
+            [
+                'sku' => SkuContract::SKU_REPORT_FULL_199,
+                'scale_code' => 'MBTI',
+                'kind' => 'report_unlock',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_REPORT_FULL',
+                'scope' => 'attempt',
+                'price_cents' => 199,
+                'currency' => 'CNY',
                 'is_active' => true,
                 'meta_json' => [
                     'label' => 'MBTI full report',
+                    'anchor_sku' => SkuContract::UPGRADE_SKU_ANCHOR,
+                ],
+            ],
+            [
+                'sku' => SkuContract::SKU_PRO_MONTH_599,
+                'scale_code' => 'MBTI',
+                'kind' => 'credit_pack',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_PRO',
+                'scope' => 'org',
+                'price_cents' => 599,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => [
+                    'label' => 'MBTI Pro Month',
+                    'period_days' => 30,
+                ],
+            ],
+            [
+                'sku' => SkuContract::SKU_PRO_YEAR_1999,
+                'scale_code' => 'MBTI',
+                'kind' => 'credit_pack',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_PRO',
+                'scope' => 'org',
+                'price_cents' => 1999,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => [
+                    'label' => 'MBTI Pro Year',
+                    'period_days' => 365,
+                ],
+            ],
+            [
+                'sku' => SkuContract::SKU_GIFT_PACK_2990,
+                'scale_code' => 'MBTI',
+                'kind' => 'credit_pack',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_GIFT_CREDITS',
+                'scope' => 'org',
+                'price_cents' => 2990,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => [
+                    'label' => 'MBTI Gift Pack',
                 ],
             ],
             [
@@ -80,7 +142,9 @@ class Pr19CommerceSeeder extends Seeder
 
                 $commercial['report_benefit_code'] = 'MBTI_REPORT_FULL';
                 $commercial['credit_benefit_code'] = 'MBTI_CREDIT';
-                $commercial['report_unlock_sku'] = 'MBTI_REPORT_FULL';
+                $commercial['report_unlock_sku'] = SkuContract::SKU_REPORT_FULL_199;
+                $commercial['upgrade_sku_anchor'] = SkuContract::UPGRADE_SKU_ANCHOR;
+                $commercial['offers'] = SkuContract::offers();
 
                 $payload = $commercial;
                 if (is_array($payload)) {

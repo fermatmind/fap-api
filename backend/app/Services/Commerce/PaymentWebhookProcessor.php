@@ -6,6 +6,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StubGateway;
 use App\Services\Report\ReportSnapshotStore;
+use App\Support\Commerce\SkuContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -54,6 +55,7 @@ class PaymentWebhookProcessor
 
         $receivedAt = now();
         $orderMeta = $this->resolveOrderMeta($orgId, $orderNo);
+        $normalizedSkuMeta = $this->normalizeOrderSkuMeta($orderMeta);
         $eventMeta = $this->buildEventMeta($orderMeta, [
             'provider' => $provider,
             'provider_event_id' => $providerEventId,
@@ -98,6 +100,15 @@ class PaymentWebhookProcessor
         if (Schema::hasColumn('payment_events', 'headers_digest')) {
             $eventRow['headers_digest'] = null;
         }
+        if (Schema::hasColumn('payment_events', 'requested_sku')) {
+            $eventRow['requested_sku'] = $normalizedSkuMeta['requested_sku'] ?? null;
+        }
+        if (Schema::hasColumn('payment_events', 'effective_sku')) {
+            $eventRow['effective_sku'] = $normalizedSkuMeta['effective_sku'] ?? null;
+        }
+        if (Schema::hasColumn('payment_events', 'entitlement_id')) {
+            $eventRow['entitlement_id'] = $normalizedSkuMeta['entitlement_id'] ?? null;
+        }
 
         $inserted = DB::table('payment_events')->insertOrIgnore($eventRow);
 
@@ -118,7 +129,7 @@ class PaymentWebhookProcessor
             }
 
             $order = $orderResult['order'];
-            $sku = strtoupper((string) ($order->sku ?? $order->item_sku ?? ''));
+            $sku = strtoupper((string) ($order->effective_sku ?? $order->sku ?? $order->item_sku ?? ''));
             if ($sku === '') {
                 return $this->badRequest('SKU_NOT_FOUND', 'sku missing on order.');
             }
@@ -133,16 +144,29 @@ class PaymentWebhookProcessor
                 return $orderTransition;
             }
 
+            $updateRow = [
+                'updated_at' => now(),
+            ];
             if (Schema::hasColumn('orders', 'external_trade_no')) {
                 $externalTradeNo = $normalized['external_trade_no'] ?? null;
                 if ($externalTradeNo) {
-                    DB::table('orders')
-                        ->where('order_no', $orderNo)
-                        ->update([
-                            'external_trade_no' => $externalTradeNo,
-                            'updated_at' => now(),
-                        ]);
+                    $updateRow['external_trade_no'] = $externalTradeNo;
                 }
+            }
+            if (Schema::hasColumn('orders', 'requested_sku')) {
+                $updateRow['requested_sku'] = $normalizedSkuMeta['requested_sku'] ?? ($order->requested_sku ?? null);
+            }
+            if (Schema::hasColumn('orders', 'effective_sku')) {
+                $updateRow['effective_sku'] = $normalizedSkuMeta['effective_sku'] ?? ($order->effective_sku ?? null);
+            }
+            if (Schema::hasColumn('orders', 'entitlement_id')) {
+                $updateRow['entitlement_id'] = $normalizedSkuMeta['entitlement_id'] ?? ($order->entitlement_id ?? null);
+            }
+
+            if (count($updateRow) > 1) {
+                DB::table('orders')
+                    ->where('order_no', $orderNo)
+                    ->update($updateRow);
             }
 
             $quantity = (int) ($order->quantity ?? 1);
@@ -300,6 +324,36 @@ class PaymentWebhookProcessor
             'sku' => $sku,
             'benefit_code' => $benefitCode,
             'attempt' => $attempt,
+        ];
+    }
+
+    private function normalizeOrderSkuMeta(array $orderMeta): array
+    {
+        $order = $orderMeta['order'] ?? null;
+        $requestedSku = '';
+        $effectiveSku = '';
+
+        if ($order) {
+            $requestedSku = strtoupper((string) ($order->requested_sku ?? ''));
+            if ($requestedSku === '') {
+                $requestedSku = strtoupper((string) ($order->sku ?? $order->item_sku ?? ''));
+            }
+
+            $effectiveSku = strtoupper((string) ($order->effective_sku ?? ''));
+            if ($effectiveSku === '') {
+                $effectiveSku = strtoupper((string) ($order->sku ?? $order->item_sku ?? ''));
+            }
+        }
+
+        $normalized = SkuContract::normalizeRequestedSku($requestedSku !== '' ? $requestedSku : $effectiveSku);
+        if ($effectiveSku === '' && ($normalized['effective_sku'] ?? null)) {
+            $effectiveSku = strtoupper((string) $normalized['effective_sku']);
+        }
+
+        return [
+            'requested_sku' => $normalized['requested_sku'] ?? ($requestedSku !== '' ? $requestedSku : null),
+            'effective_sku' => $normalized['effective_sku'] ?? ($effectiveSku !== '' ? $effectiveSku : null),
+            'entitlement_id' => $normalized['entitlement_id'] ?? ($order?->entitlement_id ?? null),
         ];
     }
 

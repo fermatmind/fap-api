@@ -16,6 +16,7 @@ class Pr16IqRavenDemoSeeder extends Seeder
         }
 
         $writer = app(ScaleRegistryWriter::class);
+        $defaultPackId = (string) config('content_packs.demo_pack_id', '');
         $scale = $writer->upsertScale([
             'code' => 'IQ_RAVEN',
             'org_id' => 0,
@@ -24,7 +25,7 @@ class Pr16IqRavenDemoSeeder extends Seeder
                 'iq-test',
             ],
             'driver_type' => 'iq_test',
-            'default_pack_id' => 'default',
+            'default_pack_id' => $defaultPackId,
             'default_region' => 'CN_MAINLAND',
             'default_locale' => 'zh-CN',
             'default_dir_version' => 'IQ-RAVEN-CN-v0.3.0-DEMO',
