@@ -1,0 +1,66 @@
+{
+  "schema_version": "v1",
+  "content_package_version": "v0.2.2",
+  "sku_hint": {
+    "anchor": "MBTI_REPORT_FULL",
+    "effective_default": "MBTI_REPORT_FULL_199"
+  },
+  "variants": [
+    {
+      "code": "report_full",
+      "title": "MBTI Full Report",
+      "unlock_sku": "MBTI_REPORT_FULL_199"
+    }
+  ],
+  "offers": [
+    {
+      "sku": "MBTI_REPORT_FULL_199",
+      "price_cents": 199,
+      "currency": "CNY",
+      "title": "MBTI Full Report",
+      "entitlement_id": "report_full",
+      "grant": {
+        "type": "report_unlock",
+        "qty": 1,
+        "period_days": null
+      }
+    },
+    {
+      "sku": "MBTI_PRO_MONTH_599",
+      "price_cents": 599,
+      "currency": "CNY",
+      "title": "MBTI Pro Month",
+      "entitlement_id": "mbti_pro",
+      "grant": {
+        "type": "pro_access",
+        "qty": 1,
+        "period_days": 30
+      }
+    },
+    {
+      "sku": "MBTI_PRO_YEAR_1999",
+      "price_cents": 1999,
+      "currency": "CNY",
+      "title": "MBTI Pro Year",
+      "entitlement_id": "mbti_pro",
+      "grant": {
+        "type": "pro_access",
+        "qty": 1,
+        "period_days": 365
+      }
+    },
+    {
+      "sku": "MBTI_GIFT_PACK_2990",
+      "price_cents": 2990,
+      "currency": "CNY",
+      "title": "MBTI Gift Pack",
+      "entitlement_id": "mbti_gift_credits",
+      "grant": {
+        "type": "gift_credits",
+        "qty": 1,
+        "period_days": null
+      }
+    }
+  ],
+  "updated_at": "2026-02-02"
+}

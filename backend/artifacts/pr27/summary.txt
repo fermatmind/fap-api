@@ -1,0 +1,10 @@
+PR27 Acceptance Summary
+api=http://127.0.0.1:1827
+checks=health,questions,attempt_start,attempt_submit,report_paywall
+attempt_id=b80bda2f-ca38-473b-9d13-0a88a4b60ccc
+question_count=144
+upgrade_sku=MBTI_REPORT_FULL
+upgrade_sku_effective=MBTI_REPORT_FULL_199
+view_policy_upgrade_sku=MBTI_REPORT_FULL_199
+offers_skus=MBTI_REPORT_FULL_199,MBTI_PRO_MONTH_599,MBTI_PRO_YEAR_1999,MBTI_GIFT_PACK_2990
+smoke_url=/api/v0.3/attempts/b80bda2f-ca38-473b-9d13-0a88a4b60ccc/report

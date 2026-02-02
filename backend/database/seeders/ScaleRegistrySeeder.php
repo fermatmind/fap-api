@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Support\Commerce\SkuContract;
 use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -37,10 +38,15 @@ class ScaleRegistrySeeder extends Seeder
                 'free_sections' => ['intro', 'score'],
                 'blur_others' => true,
                 'teaser_percent' => 0.3,
-                'upgrade_sku' => 'MBTI_REPORT_FULL',
+                'upgrade_sku' => SkuContract::SKU_REPORT_FULL_199,
             ],
             'commercial_json' => [
                 'price_tier' => 'FREE',
+                'report_benefit_code' => 'MBTI_REPORT_FULL',
+                'credit_benefit_code' => 'MBTI_CREDIT',
+                'report_unlock_sku' => SkuContract::SKU_REPORT_FULL_199,
+                'upgrade_sku_anchor' => SkuContract::UPGRADE_SKU_ANCHOR,
+                'offers' => SkuContract::offers(),
             ],
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',

@@ -26,6 +26,8 @@ class ReportPaywallTeaserTest extends TestCase
     private function createMbtiAttemptWithResult(): string
     {
         $attemptId = (string) Str::uuid();
+        $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
+        $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
 
         Attempt::create([
             'id' => $attemptId,
@@ -40,8 +42,8 @@ class ReportPaywallTeaserTest extends TestCase
             'answers_summary_json' => ['stage' => 'seed'],
             'started_at' => now(),
             'submitted_at' => now(),
-            'pack_id' => 'default',
-            'dir_version' => 'MBTI-CN-v0.2.1-TEST',
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
             'content_package_version' => 'v0.2.1-TEST',
             'scoring_spec_version' => '2026.01',
         ]);
@@ -97,8 +99,8 @@ class ReportPaywallTeaserTest extends TestCase
                     ],
                 ],
             ],
-            'pack_id' => 'default',
-            'dir_version' => 'MBTI-CN-v0.2.1-TEST',
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
             'scoring_spec_version' => '2026.01',
             'report_engine_version' => 'v1.2',
             'is_valid' => true,
@@ -121,9 +123,14 @@ class ReportPaywallTeaserTest extends TestCase
             'locked' => true,
             'access_level' => 'free',
             'upgrade_sku' => 'MBTI_REPORT_FULL',
+            'upgrade_sku_effective' => 'MBTI_REPORT_FULL_199',
         ]);
 
         $this->assertNotNull($report->json('view_policy'));
+        $this->assertSame('MBTI_REPORT_FULL_199', $report->json('view_policy.upgrade_sku'));
+        $this->assertNotEmpty($report->json('offers'));
+        $offerSkus = array_map(fn ($item) => $item['sku'] ?? null, (array) $report->json('offers'));
+        $this->assertContains('MBTI_REPORT_FULL_199', $offerSkus);
         $this->assertNotNull($report->json('report'));
         $this->assertSame(0, DB::table('report_snapshots')->count());
     }

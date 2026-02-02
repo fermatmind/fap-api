@@ -2,6 +2,7 @@
 
 namespace App\Services\Commerce;
 
+use App\Support\Commerce\SkuContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -26,14 +27,19 @@ class OrderManager
             return $this->tableMissing('skus');
         }
 
-        $sku = strtoupper(trim($sku));
-        if ($sku === '') {
+        $requestedSku = strtoupper(trim($sku));
+        if ($requestedSku === '') {
             return $this->badRequest('SKU_REQUIRED', 'sku is required.');
         }
 
+        $normalized = SkuContract::normalizeRequestedSku($requestedSku);
+        $effectiveSku = strtoupper(trim((string) ($normalized['effective_sku'] ?? '')));
+        $entitlementId = $normalized['entitlement_id'] ?? null;
+
         $quantity = max(1, (int) $quantity);
 
-        $skuRow = DB::table('skus')->where('sku', $sku)->first();
+        $skuToLookup = $effectiveSku !== '' ? $effectiveSku : $requestedSku;
+        $skuRow = DB::table('skus')->where('sku', $skuToLookup)->first();
         if (!$skuRow) {
             return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
         }
@@ -47,7 +53,7 @@ class OrderManager
             'org_id' => $orgId,
             'user_id' => $this->trimOrNull($userId),
             'anon_id' => $this->trimOrNull($anonId),
-            'sku' => $sku,
+            'sku' => $skuToLookup,
             'quantity' => $quantity,
             'target_attempt_id' => $this->trimOrNull($targetAttemptId),
             'amount_cents' => (int) ($skuRow->price_cents ?? 0) * $quantity,
@@ -59,6 +65,16 @@ class OrderManager
             'created_at' => $now,
             'updated_at' => $now,
         ];
+
+        if (Schema::hasColumn('orders', 'requested_sku')) {
+            $row['requested_sku'] = $requestedSku;
+        }
+        if (Schema::hasColumn('orders', 'effective_sku')) {
+            $row['effective_sku'] = $effectiveSku !== '' ? $effectiveSku : $skuToLookup;
+        }
+        if (Schema::hasColumn('orders', 'entitlement_id')) {
+            $row['entitlement_id'] = $entitlementId;
+        }
 
         $row = $this->applyLegacyColumns($row, $skuRow);
 
