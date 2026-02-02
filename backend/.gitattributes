@@ -9,3 +9,10 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+
+# ------------------------------------------------------------
+# Release artifact integrity guard (backend)
+# Ensure API controllers/routes are included in git archive
+# ------------------------------------------------------------
+app/Http/Controllers/** -export-ignore
+routes/** -export-ignore

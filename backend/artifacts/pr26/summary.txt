@@ -1,0 +1,13 @@
+PR26 ACCEPT SUMMARY
+
+- guard_release_integrity: PASS
+- deploy.php hooks: PASS
+- selfcheck workflow guard step: PASS
+
+Verify:
+- bash backend/scripts/pr26_accept.sh
+- bash backend/scripts/ci_verify_mbti.sh
+
+Artifacts:
+- backend/artifacts/pr26/accept.log
+- backend/artifacts/pr26/verify.log

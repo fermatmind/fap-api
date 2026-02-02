@@ -247,3 +247,23 @@ after('deploy:failed', 'rollback');
 after('rollback', 'reload:php-fpm');
 after('rollback', 'reload:nginx');
 after('deploy:failed', 'deploy:unlock');
+
+/**
+ * PR26: Seed shared content_packages from release (git archive artifact),
+ * to avoid empty shared symlink on first deploy.
+ */
+task('fap:seed_shared_content_packages', function () {
+    run('mkdir -p {{deploy_path}}/shared/content_packages');
+    // Copy without overwriting existing files
+    run('cp -an {{release_path}}/content_packages/. {{deploy_path}}/shared/content_packages/ || true');
+});
+before('deploy:shared', 'fap:seed_shared_content_packages');
+
+/**
+ * PR26: Preflight guard before switching symlink.
+ */
+task('fap:preflight', function () {
+    run('cd {{release_path}} && bash backend/scripts/guard_release_integrity.sh');
+});
+before('deploy:symlink', 'fap:preflight');
+

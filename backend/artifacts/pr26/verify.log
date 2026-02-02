@@ -1,0 +1,18 @@
+[PR26_VERIFY] repo=fap-api
+[PR26_VERIFY] start=2026-02-02T04:44:50Z
+[PR26_VERIFY] git_sha=08b6474
+[GUARD] repo=fap-api
+[GUARD] backend=backend
+[GUARD] pack_rel=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+[GUARD] controllers php count=33
+[GUARD] content pack json OK
+[GUARD] artisan route:list OK
+[GUARD] archive check begin
+[GUARD] archive check OK
+[GUARD] ALL OK
+255:task('fap:seed_shared_content_packages', function () {
+260:before('deploy:shared', 'fap:seed_shared_content_packages');
+265:task('fap:preflight', function () {
+268:before('deploy:symlink', 'fap:preflight');
+49:      - name: Guard release integrity (controllers + content pack + archive)
+[PR26_VERIFY] OK
