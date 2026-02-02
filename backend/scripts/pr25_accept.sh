@@ -13,7 +13,7 @@ export FAP_DEFAULT_REGION="${FAP_DEFAULT_REGION:-CN_MAINLAND}"
 export FAP_DEFAULT_LOCALE="${FAP_DEFAULT_LOCALE:-zh-CN}"
 
 export DB_CONNECTION=sqlite
-export DB_DATABASE="${DB_DATABASE:-/tmp/pr25.sqlite}"
+export DB_DATABASE="${DB_DATABASE:-/tmp/pr25_${GITHUB_RUN_ID:-local}_${GITHUB_RUN_ATTEMPT:-0}.sqlite}"
 export SERVE_PORT="${SERVE_PORT:-1825}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
