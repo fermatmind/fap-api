@@ -14,14 +14,14 @@ SERVE_PORT="${SERVE_PORT:-1826}"
 
 mkdir -p "${ART_DIR}"
 
-# 端口清理（1826 + 18000）
+# Port cleanup (1826 + 18000)
 for p in "${SERVE_PORT}" 18000; do
   lsof -nP -iTCP:${p} -sTCP:LISTEN || true
   lsof -ti tcp:${p} | xargs -r kill -9 || true
   lsof -nP -iTCP:${p} -sTCP:LISTEN || true
 done
 
-# sqlite 临时库
+# SQLite temp DB
 export APP_ENV=testing
 export DB_CONNECTION=sqlite
 export DB_DATABASE="/tmp/pr26.sqlite"
@@ -31,16 +31,16 @@ export QUEUE_CONNECTION=sync
 rm -f "${DB_DATABASE}"
 touch "${DB_DATABASE}"
 
-# 安装依赖 + 迁移
+# Install deps + migrate
 cd "${BACKEND_DIR}"
 composer install --no-interaction --no-progress >> "${ART_DIR}/accept.log" 2>&1
 php artisan migrate:fresh --force >> "${ART_DIR}/accept.log" 2>&1
 
-# 运行本 PR 核心验收
+# Run PR26 core verification
 cd "${REPO_DIR}"
 bash backend/scripts/pr26_verify.sh >> "${ART_DIR}/accept.log" 2>&1
 
-# summary（避免泄漏绝对路径/敏感信息：只写相对信息）
+# Summary (avoid absolute paths/sensitive info)
 cat > "${ART_DIR}/summary.txt" <<'TXT'
 PR26 ACCEPT SUMMARY
 
@@ -57,12 +57,12 @@ Artifacts:
 - backend/artifacts/pr26/verify.log
 TXT
 
-# artifacts 脱敏（仓库内已有 sanitize 脚本则执行）
+# Artifacts sanitize (if repo script exists)
 if test -x "${BACKEND_DIR}/scripts/sanitize_artifacts.sh"; then
   bash "${BACKEND_DIR}/scripts/sanitize_artifacts.sh" 26 >> "${ART_DIR}/accept.log" 2>&1 || true
 fi
 
-# 兜底脱敏（避免绝对路径/token/私钥）
+# Fallback sanitize (paths/tokens/keys)
 for f in "${ART_DIR}"/*.log; do
   test -f "${f}" || continue
   php -r '
@@ -77,5 +77,5 @@ for f in "${ART_DIR}"/*.log; do
   ' "${f}"
 done
 
-# 清理临时库
+# Cleanup temp DB
 rm -f "${DB_DATABASE}"

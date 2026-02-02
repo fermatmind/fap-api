@@ -18,11 +18,11 @@ mkdir -p "${ART_DIR}"
   echo "[PR26_VERIFY] git_sha=$(git rev-parse --short HEAD 2>/dev/null || true)"
 } > "${ART_DIR}/verify.log"
 
-# 门禁脚本（同时做 archive 校验）
+# Guard script (includes archive checks)
 ( cd "${REPO_DIR}" && bash backend/scripts/guard_release_integrity.sh ) \
   >> "${ART_DIR}/verify.log" 2>&1
 
-# CI / deploy 文件存在性与关键内容检查
+# CI / deploy files existence and key content checks
 cd "${REPO_DIR}"
 test -f deploy.php
 grep -n "fap:seed_shared_content_packages" deploy.php >> "${ART_DIR}/verify.log"
@@ -32,4 +32,4 @@ SELFCHK_REL="$(find . -maxdepth 4 -path '*/.github/workflows/*' -name 'selfcheck
 test -n "${SELFCHK_REL}"
 grep -n "Guard release integrity (controllers + content pack + archive)" "${SELFCHK_REL}" >> "${ART_DIR}/verify.log"
 
-echo "[PR26_VERIFY] OK ✅" >> "${ART_DIR}/verify.log"
+echo "[PR26_VERIFY] OK" >> "${ART_DIR}/verify.log"

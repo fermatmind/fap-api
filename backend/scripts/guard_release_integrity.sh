@@ -13,7 +13,7 @@ REPO_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"
 
 REPO_NAME="$(basename "${REPO_DIR}")"
 
-# 主内容包路径可由外部传入；未传入使用当前主链默认目录
+# Pack path can be overridden via PACK_REL; default is mainline pack.
 PACK_REL="${PACK_REL:-default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST}"
 PACK_DIR="${REPO_DIR}/content_packages/${PACK_REL}"
 
@@ -22,7 +22,7 @@ echo "[GUARD] backend=backend"
 echo "[GUARD] pack_rel=${PACK_REL}"
 
 # -------------------------------
-# 1) API Controllers 必须存在且非空
+# 1) API controllers must exist and be non-empty
 # -------------------------------
 test -d "${BACKEND_DIR}/app/Http/Controllers/API"
 CTRL_COUNT="$(find "${BACKEND_DIR}/app/Http/Controllers/API" -type f -name '*.php' | wc -l | tr -d ' ')"
@@ -30,7 +30,7 @@ echo "[GUARD] controllers php count=${CTRL_COUNT}"
 test "${CTRL_COUNT}" -gt 0
 
 # -------------------------------
-# 2) 主内容包必须存在 + 关键文件必须为合法 JSON
+# 2) Content pack must exist and key JSON must be valid
 # -------------------------------
 for f in manifest.json questions.json scoring_spec.json version.json; do
   test -s "${PACK_DIR}/${f}"
@@ -39,7 +39,7 @@ done
 echo "[GUARD] content pack json OK"
 
 # -------------------------------
-# 3) route:list 必须可跑通（控制器可实例化）
+# 3) route:list must run (controllers instantiable)
 # -------------------------------
 cd "${BACKEND_DIR}"
 php artisan route:clear >/dev/null 2>&1 || true
@@ -47,7 +47,7 @@ php artisan route:list >/dev/null
 echo "[GUARD] artisan route:list OK"
 
 # -------------------------------
-# 4) git archive 产物必须包含关键文件（本地/CI 有 git 时执行）
+# 4) git archive must include key files (when git available)
 # -------------------------------
 cd "${REPO_DIR}"
 if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
@@ -64,4 +64,4 @@ if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/n
   echo "[GUARD] archive check OK"
 fi
 
-echo "[GUARD] ALL OK ✅"
+echo "[GUARD] ALL OK"
