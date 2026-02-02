@@ -46,6 +46,9 @@ jobs:
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Guard release integrity (controllers + content pack + archive)
+        run: bash backend/scripts/guard_release_integrity.sh
+
       - name: Prepare Laravel env (testing)
         working-directory: backend
         run: |

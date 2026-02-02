@@ -1,0 +1,9 @@
+
+# ------------------------------------------------------------
+# Release artifact integrity guard
+# Deployer default strategy uses: git archive
+# These paths MUST be shipped in archives
+# ------------------------------------------------------------
+backend/app/Http/Controllers/** -export-ignore
+backend/routes/** -export-ignore
+content_packages/** -export-ignore
