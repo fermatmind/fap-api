@@ -50,6 +50,10 @@ cleanup_port 18000
 
 rm -f "${DB_DATABASE}"
 
+# ✅ 新增：确保 package:discover 有合法 cache path
+log "prepare laravel cache dirs"
+bash "$BACKEND_DIR/scripts/ci/prepare_laravel_cache_dirs.sh"
+
 log "composer install"
 (
   cd "${BACKEND_DIR}"
