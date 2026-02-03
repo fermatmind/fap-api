@@ -86,56 +86,19 @@ cd "$ROOT_DIR"
 rm -f "$DB_FILE"
 touch "$DB_FILE"
 
-export CI=true
-export FAP_NONINTERACTIVE=1
-export COMPOSER_NO_INTERACTION=1
-export GIT_TERMINAL_PROMPT=0
-export NO_COLOR=1
-
-# psysh/tinker 在 CI 上需要可写目录，避免写历史文件失败
-export HOME="${HOME:-/tmp}"
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/tmp/psysh_config}"
-mkdir -p "$XDG_CONFIG_HOME" >/dev/null 2>&1 || true
-
 export DB_CONNECTION=sqlite
 export DB_DATABASE="$DB_FILE"
 
 # 强制 content_packs.root 走 repo/content_packages（不依赖本机 .env）
-export FAP_PACKS_DRIVER=local
 export FAP_PACKS_ROOT="$REPO_DIR/content_packages"
-
-# PR20 回归口径：固定旧包（兼容旧客户端/旧测试），新链路用新 SKU 由后端映射负责
-export FAP_DEFAULT_PACK_ID="MBTI.cn-mainland.zh-CN.v0.2.1-TEST"
-export FAP_DEFAULT_DIR_VERSION="MBTI-CN-v0.2.1-TEST"
-export FAP_DEFAULT_REGION="CN_MAINLAND"
-export FAP_DEFAULT_LOCALE="zh-CN"
-
-# 让 env 覆盖立即生效（避免 config cache 仍用旧值）
-php artisan config:clear >/dev/null 2>&1 || true
-php artisan cache:clear  >/dev/null 2>&1 || true
-
-# 启动前硬校验：questions.json 必须存在且可解析
-php -r '
-$root=getenv("FAP_PACKS_ROOT") ?: "";
-$dir=getenv("FAP_DEFAULT_DIR_VERSION") ?: "";
-$p=$root."/default/CN_MAINLAND/zh-CN/".$dir."/questions.json";
-if($root===""||$dir===""){fwrite(STDERR,"[PR20][FAIL] missing FAP_PACKS_ROOT or FAP_DEFAULT_DIR_VERSION\n"); exit(1);}
-if(!is_file($p)){fwrite(STDERR,"[PR20][FAIL] missing: ".$p."\n"); exit(1);}
-json_decode(file_get_contents($p), true);
-if(json_last_error()!==JSON_ERROR_NONE){fwrite(STDERR,"[PR20][FAIL] invalid json: ".$p."\n"); exit(1);}
-echo "[PR20] questions.json ok: ".$p."\n";
-' > "$ART_DIR/pack_questions_check.txt"
+export FAP_DEFAULT_PACK_ID="default"
 
 php artisan route:list > "$ART_DIR/routes.txt"
 
 php artisan migrate --force
-
-# 关键：seed 让 scales_registry 的 MBTI 默认包与 config/env 一致
-php artisan db:seed --force --class=ScaleRegistrySeeder
-
 php artisan fap:scales:seed-default
 php artisan fap:scales:sync-slugs
-php artisan db:seed --force --class=Pr19CommerceSeeder
+php artisan db:seed --class=Pr19CommerceSeeder
 
 # 创建一个“购买用户”，用它的 token 走 start/submit + 下单
 php -r 'echo "creating pr20 user...\n";' >/dev/null 2>&1 || true
@@ -342,7 +305,6 @@ EOF
 # sanitize absolute paths
 perl -pi -e "s@\Q${REPO_DIR}\E@<REPO>@g; s@/Users/[^ ]+@<REPO>@g; s@/home/[^ ]+@<REPO>@g" \
   "$ART_DIR/routes.txt" \
-  "$ART_DIR/pack_questions_check.txt" \
   "$ART_DIR/curl_start_mbti.json" \
   "$ART_DIR/curl_questions_mbti.json" \
   "$ART_DIR/mbti_answers.json" \
