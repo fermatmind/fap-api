@@ -61,6 +61,16 @@ jobs:
           done
           exit 1
 
+      - name: Prepare Laravel cache dirs (for package:discover)
+        working-directory: backend
+        run: |
+          mkdir -p storage/framework/cache/data
+          mkdir -p storage/framework/views
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/logs
+          mkdir -p bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+
       - name: Install backend deps
         working-directory: backend
         run: composer install --no-interaction --prefer-dist

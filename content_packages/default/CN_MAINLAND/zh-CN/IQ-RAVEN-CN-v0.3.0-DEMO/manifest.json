@@ -1,31 +1,39 @@
 {
-  "schema_version": "pack-manifest@v1",
-  "pack_type": "content_pack",
-  "scale_code": "IQ_RAVEN",
-  "region": "CN_MAINLAND",
-  "locale": "zh-CN",
-  "content_package_version": "v0.3.0-DEMO",
-  "pack_id": "default",
-  "fallback": [],
-  "capabilities": {
-    "questions": true,
-    "assets": true,
-    "share_templates": false
-  },
-  "schemas": {
-    "questions": "fap.questions.v1"
-  },
-  "assets": {
-    "questions": [
-      "questions.json"
-    ],
-    "question_assets": [
-      "assets/images/raven_question_1.png",
-      "assets/images/raven_stem_1.png",
-      "assets/images/raven_opt_a.png",
-      "assets/images/raven_opt_b.png",
-      "assets/images/raven_opt_c.png",
-      "assets/images/raven_opt_d.png"
-    ]
-  }
+    "schema_version": "pack-manifest@v1",
+    "pack_type": "content_pack",
+    "scale_code": "IQ_RAVEN",
+    "region": "CN_MAINLAND",
+    "locale": "zh-CN",
+    "content_package_version": "v0.3.0-DEMO",
+    "pack_id": "default",
+    "fallback": [],
+    "capabilities": {
+        "questions": true,
+        "assets": true,
+        "share_templates": false
+    },
+    "schemas": {
+        "questions": "fap.questions.v1",
+        "rules": "fap.report.rules.v1",
+        "meta": "fap.landing.meta.v1"
+    },
+    "assets": {
+        "questions": [
+            "questions.json"
+        ],
+        "question_assets": [
+            "assets\/images\/raven_opt_a.png",
+            "assets\/images\/raven_opt_b.png",
+            "assets\/images\/raven_opt_c.png",
+            "assets\/images\/raven_opt_d.png",
+            "assets\/images\/raven_question_1.png",
+            "assets\/images\/raven_stem_1.png"
+        ],
+        "rules": [
+            "scoring_spec.json"
+        ],
+        "meta": [
+            "meta\/landing.json"
+        ]
+    }
 }

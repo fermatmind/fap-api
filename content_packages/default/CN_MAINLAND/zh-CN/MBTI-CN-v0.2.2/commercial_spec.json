@@ -1,146 +1,164 @@
 {
-  "schema": "fap.commercial_spec.v1",
-  "schema_version": "v1",
-  "version": "v0.2.2",
-  "scale_code": "MBTI",
-  "currency": "CNY",
-  "sku_hint": {
-    "upgrade_sku_anchor": "MBTI_REPORT_FULL",
-    "effective_default": "MBTI_REPORT_FULL_199",
-    "legacy_to_effective": {
-      "MBTI_REPORT_FULL": "MBTI_REPORT_FULL_199"
+    "schema": "fap.report.rules.v1",
+    "schema_version": "v1",
+    "version": "v0.2.2",
+    "scale_code": "MBTI",
+    "currency": "CNY",
+    "sku_hint": {
+        "upgrade_sku_anchor": "MBTI_REPORT_FULL",
+        "effective_default": "MBTI_REPORT_FULL_199",
+        "legacy_to_effective": {
+            "MBTI_REPORT_FULL": "MBTI_REPORT_FULL_199"
+        },
+        "effective_to_legacy": {
+            "MBTI_REPORT_FULL_199": "MBTI_REPORT_FULL"
+        }
     },
-    "effective_to_legacy": {
-      "MBTI_REPORT_FULL_199": "MBTI_REPORT_FULL"
-    }
-  },
-  "offer_order": [
-    "MBTI_REPORT_FULL_199",
-    "MBTI_PRO_MONTH_599",
-    "MBTI_PRO_YEAR_1999",
-    "MBTI_GIFT_PACK_2990"
-  ],
-  "offers": [
-    {
-      "sku": "MBTI_REPORT_FULL_199",
-      "title": "MBTI 完整报告（单次解锁）",
-      "price_cents": 199,
-      "currency": "CNY",
-      "entitlement_id": "MBTI_REPORT_FULL_ACCESS",
-      "grant": {
-        "type": "report_full",
-        "qty": 1,
-        "period_days": null
-      },
-      "meta": {
-        "kind": "one_time",
-        "scope": "mbti_report",
-        "tags": ["b2c", "report"]
-      }
-    },
-    {
-      "sku": "MBTI_PRO_MONTH_599",
-      "title": "MBTI Pro 月卡（不限次数）",
-      "price_cents": 599,
-      "currency": "CNY",
-      "entitlement_id": "MBTI_PRO_ACCESS",
-      "grant": {
-        "type": "pro_membership",
-        "qty": 1,
-        "period_days": 30
-      },
-      "meta": {
-        "kind": "subscription",
-        "scope": "mbti",
-        "tags": ["b2c", "subscription", "pro"]
-      }
-    },
-    {
-      "sku": "MBTI_PRO_YEAR_1999",
-      "title": "MBTI Pro 年卡（不限次数）",
-      "price_cents": 1999,
-      "currency": "CNY",
-      "entitlement_id": "MBTI_PRO_ACCESS",
-      "grant": {
-        "type": "pro_membership",
-        "qty": 1,
-        "period_days": 365
-      },
-      "meta": {
-        "kind": "subscription",
-        "scope": "mbti",
-        "tags": ["b2c", "subscription", "pro"]
-      }
-    },
-    {
-      "sku": "MBTI_GIFT_PACK_2990",
-      "title": "MBTI 赠送包（2 次解锁）",
-      "price_cents": 2990,
-      "currency": "CNY",
-      "entitlement_id": "MBTI_GIFT_CREDITS",
-      "grant": {
-        "type": "report_full_credits",
-        "qty": 2,
-        "period_days": null
-      },
-      "meta": {
-        "kind": "consumable",
-        "scope": "mbti_report",
-        "tags": ["b2c", "gift", "credits"]
-      }
-    }
-  ],
-  "variants": [
-    {
-      "variant_id": "mbti_report_paywall_default_v1",
-      "default": true,
-      "upgrade_sku_anchor": "MBTI_REPORT_FULL",
-      "upgrade_sku": "MBTI_REPORT_FULL_199",
-      "offer_order": [
+    "offer_order": [
         "MBTI_REPORT_FULL_199",
         "MBTI_PRO_MONTH_599",
         "MBTI_PRO_YEAR_1999",
         "MBTI_GIFT_PACK_2990"
-      ],
-      "view_policy": {
-        "free_sections": [
-          "overview",
-          "type_snapshot",
-          "dimension_summary",
-          "highlights_free"
-        ],
-        "full_sections": [
-          "overview",
-          "type_snapshot",
-          "dimension_summary",
-          "highlights_full",
-          "traits",
-          "growth",
-          "relationships",
-          "stress_recovery",
-          "career",
-          "recommended_reads",
-          "borderline_notes"
-        ],
-        "blur_others": true,
-        "teaser_percent": 0.3,
-        "upgrade_sku": "MBTI_REPORT_FULL_199"
-      },
-      "unlock_paths": [
+    ],
+    "offers": [
         {
-          "access_level": "full",
-          "entitlements_any": ["MBTI_REPORT_FULL_ACCESS", "MBTI_PRO_ACCESS"]
+            "sku": "MBTI_REPORT_FULL_199",
+            "title": "MBTI 完整报告（单次解锁）",
+            "price_cents": 199,
+            "currency": "CNY",
+            "entitlement_id": "MBTI_REPORT_FULL_ACCESS",
+            "grant": {
+                "type": "report_full",
+                "qty": 1,
+                "period_days": null
+            },
+            "meta": {
+                "kind": "one_time",
+                "scope": "mbti_report",
+                "tags": [
+                    "b2c",
+                    "report"
+                ]
+            }
         },
         {
-          "access_level": "free",
-          "entitlements_any": []
+            "sku": "MBTI_PRO_MONTH_599",
+            "title": "MBTI Pro 月卡（不限次数）",
+            "price_cents": 599,
+            "currency": "CNY",
+            "entitlement_id": "MBTI_PRO_ACCESS",
+            "grant": {
+                "type": "pro_membership",
+                "qty": 1,
+                "period_days": 30
+            },
+            "meta": {
+                "kind": "subscription",
+                "scope": "mbti",
+                "tags": [
+                    "b2c",
+                    "subscription",
+                    "pro"
+                ]
+            }
+        },
+        {
+            "sku": "MBTI_PRO_YEAR_1999",
+            "title": "MBTI Pro 年卡（不限次数）",
+            "price_cents": 1999,
+            "currency": "CNY",
+            "entitlement_id": "MBTI_PRO_ACCESS",
+            "grant": {
+                "type": "pro_membership",
+                "qty": 1,
+                "period_days": 365
+            },
+            "meta": {
+                "kind": "subscription",
+                "scope": "mbti",
+                "tags": [
+                    "b2c",
+                    "subscription",
+                    "pro"
+                ]
+            }
+        },
+        {
+            "sku": "MBTI_GIFT_PACK_2990",
+            "title": "MBTI 赠送包（2 次解锁）",
+            "price_cents": 2990,
+            "currency": "CNY",
+            "entitlement_id": "MBTI_GIFT_CREDITS",
+            "grant": {
+                "type": "report_full_credits",
+                "qty": 2,
+                "period_days": null
+            },
+            "meta": {
+                "kind": "consumable",
+                "scope": "mbti_report",
+                "tags": [
+                    "b2c",
+                    "gift",
+                    "credits"
+                ]
+            }
         }
-      ],
-      "analytics": {
-        "paywall_variant": "mbti_report_paywall_default_v1",
-        "sku_anchor": "MBTI_REPORT_FULL",
-        "sku_effective_default": "MBTI_REPORT_FULL_199"
-      }
-    }
-  ]
+    ],
+    "variants": [
+        {
+            "variant_id": "mbti_report_paywall_default_v1",
+            "default": true,
+            "upgrade_sku_anchor": "MBTI_REPORT_FULL",
+            "upgrade_sku": "MBTI_REPORT_FULL_199",
+            "offer_order": [
+                "MBTI_REPORT_FULL_199",
+                "MBTI_PRO_MONTH_599",
+                "MBTI_PRO_YEAR_1999",
+                "MBTI_GIFT_PACK_2990"
+            ],
+            "view_policy": {
+                "free_sections": [
+                    "overview",
+                    "type_snapshot",
+                    "dimension_summary",
+                    "highlights_free"
+                ],
+                "full_sections": [
+                    "overview",
+                    "type_snapshot",
+                    "dimension_summary",
+                    "highlights_full",
+                    "traits",
+                    "growth",
+                    "relationships",
+                    "stress_recovery",
+                    "career",
+                    "recommended_reads",
+                    "borderline_notes"
+                ],
+                "blur_others": true,
+                "teaser_percent": 0.3,
+                "upgrade_sku": "MBTI_REPORT_FULL_199"
+            },
+            "unlock_paths": [
+                {
+                    "access_level": "full",
+                    "entitlements_any": [
+                        "MBTI_REPORT_FULL_ACCESS",
+                        "MBTI_PRO_ACCESS"
+                    ]
+                },
+                {
+                    "access_level": "free",
+                    "entitlements_any": []
+                }
+            ],
+            "analytics": {
+                "paywall_variant": "mbti_report_paywall_default_v1",
+                "sku_anchor": "MBTI_REPORT_FULL",
+                "sku_effective_default": "MBTI_REPORT_FULL_199"
+            }
+        }
+    ]
 }

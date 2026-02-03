@@ -1,20 +1,33 @@
 {
-  "version": "2026.01",
-  "scale_code": "IQ_RAVEN",
-  "driver_type": "iq_test",
-  "answer_key": {
-    "RAVEN_DEMO_1": "B"
-  },
-  "score": {
-    "correct": 1,
-    "wrong": 0
-  },
-  "time_bonus": {
-    "rules": [
-      {"max_ms": 30000, "bonus": 3},
-      {"max_ms": 60000, "bonus": 2},
-      {"max_ms": 120000, "bonus": 1},
-      {"max_ms": 99999999, "bonus": 0}
-    ]
-  }
+    "version": "2026.01",
+    "scale_code": "IQ_RAVEN",
+    "driver_type": "iq_test",
+    "answer_key": {
+        "RAVEN_DEMO_1": "B"
+    },
+    "score": {
+        "correct": 1,
+        "wrong": 0
+    },
+    "time_bonus": {
+        "rules": [
+            {
+                "max_ms": 30000,
+                "bonus": 3
+            },
+            {
+                "max_ms": 60000,
+                "bonus": 2
+            },
+            {
+                "max_ms": 120000,
+                "bonus": 1
+            },
+            {
+                "max_ms": 99999999,
+                "bonus": 0
+            }
+        ]
+    },
+    "schema": "fap.report.rules.v1"
 }

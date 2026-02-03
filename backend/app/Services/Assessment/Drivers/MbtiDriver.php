@@ -70,26 +70,35 @@ class MbtiDriver implements DriverInterface
                 'key_pole' => $item['key_pole'] ?? null,
                 'direction' => $item['direction'] ?? 1,
                 'score_map' => $scoreMap,
+                'code' => isset($item['code']) ? strtoupper((string) $item['code']) : null,
+                'weight' => $item['irt']['a'] ?? null,
             ];
         }
 
-        $scored = $this->scorer->score($answers, $index);
+        $scored = $this->scorer->score($answers, $index, $spec);
         $scoresPct = $scored['scoresPct'] ?? [];
         $axisStates = $scored['axisStates'] ?? [];
         $scoresJson = $scored['scoresJson'] ?? [];
         $typeCode = $scored['typeCode'] ?? null;
+        $facetScores = $scored['facetScores'] ?? null;
+        $pci = $scored['pci'] ?? null;
+        $engineVersion = $scored['engineVersion'] ?? null;
 
         $answerCount = count($answers);
         $breakdown = [
             'score_method' => 'mbti_axes',
             'answer_count' => $answerCount,
             'time_bonus' => 0,
+            'engine_version' => $engineVersion,
         ];
 
         $axisScores = [
             'scores_pct' => $scoresPct,
             'axis_states' => $axisStates,
             'scores_json' => $scoresJson,
+            'facet_scores' => $facetScores,
+            'pci' => $pci,
+            'engine_version' => $engineVersion,
         ];
 
         return new ScoreResult(

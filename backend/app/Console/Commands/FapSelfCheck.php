@@ -595,7 +595,7 @@ $errs[] = "pack={$packId} file={$abs} path=$.schema :: missing schema field (ass
         // 与 expectedSchemaFor 保持同样的分类口径（只收集 schemaKey，不做值判断）
         $file = (string)$file;
 
-        if (in_array($assetKey, ['questions','type_profiles','cards','fallback_cards','highlights','reads','rules'], true)) {
+        if (in_array($assetKey, ['questions','type_profiles','cards','role_cards','strategy_cards','fallback_cards','highlights','reads','rules','section_policies','share_templates','meta'], true)) {
            $used[$assetKey] = true;
            return;
         }
@@ -3265,11 +3265,14 @@ private function containsAny(string $haystack, array $needles): bool
         'questions'        => 'questions',
         'type_profiles'    => 'type_profiles',
         'cards'            => 'cards',
+        'role_cards'       => 'role_cards',
+        'strategy_cards'   => 'strategy_cards',
         'fallback_cards'   => 'fallback_cards',
         'highlights'       => 'highlights',
         'reads'            => 'reads',
         'rules'            => 'rules',
         'section_policies' => 'section_policies',
+        'meta'             => 'meta',
 
         // ✅ Task 4: share templates
         'share_templates'  => 'share_templates',

@@ -256,7 +256,7 @@ public function startAttempt(Request $request)
     $payload = $request->validate([
         'anon_id'        => ['required', 'string', 'max:64'],
         'scale_code'     => ['required', 'string', 'in:MBTI'],
-        'scale_version' => ['required', 'string', 'in:v0.2,v0.2.1,v0.2.1-TEST'],
+        'scale_version' => ['required', 'string', 'in:v0.2,v0.2.1,v0.2.1-TEST,v0.2.2'],
 
         // ✅ 你的 attempts 表里是 NOT NULL：必须补齐
         'question_count'  => ['required', 'integer', 'in:24,93,144'],
@@ -319,7 +319,7 @@ public function storeAttempt(Request $request)
     $payload = $request->validate([
         'anon_id'       => ['required', 'string', 'max:64'],
         'scale_code'    => ['required', 'string', 'in:MBTI'],
-        'scale_version' => ['required', 'string', 'in:v0.2,v0.2.1,v0.2.1-TEST'],
+        'scale_version' => ['required', 'string', 'in:v0.2,v0.2.1,v0.2.1-TEST,v0.2.2'],
 
         'answers' => ['required', 'array', 'min:1'],
         'answers.*.question_id' => ['required', 'string'],
@@ -344,14 +344,20 @@ public function storeAttempt(Request $request)
         'attempt_id' => $attemptId,
     ]);
 
-    $expectedQuestionCount = 144;
-
     // 题库索引：question_id => meta
     $index = $this->getQuestionsIndex(
         $payload['region'] ?? null,
         $payload['locale'] ?? null,
         $this->defaultDirVersion()
     );
+    $expectedQuestionCount = count($index);
+    if ($expectedQuestionCount <= 0) {
+        return response()->json([
+            'ok'      => false,
+            'error'   => 'QUESTIONS_NOT_READY',
+            'message' => 'Questions index is empty.',
+        ], 500);
+    }
 
     // 校验 question_id 必须存在
     $unknown = [];
@@ -368,7 +374,7 @@ public function storeAttempt(Request $request)
         ], 422);
     }
 
-    // ✅ 强校验：question_id 不能重复，且必须覆盖 144 个唯一题
+    // ✅ 强校验：question_id 不能重复，且必须覆盖完整题目
     $qids = array_map(fn($a) => (string)($a['question_id'] ?? ''), $payload['answers']);
     $qids = array_values(array_filter($qids, fn($x) => $x !== ''));
 
@@ -380,7 +386,7 @@ public function storeAttempt(Request $request)
         return response()->json([
             'ok'      => false,
             'error'   => 'VALIDATION_FAILED',
-            'message' => 'Answers must contain 144 unique question_id.',
+            'message' => "Answers must contain {$expectedQuestionCount} unique question_id.",
             'data'    => [
                 'unique_count'     => count($unique),
                 'dup_question_ids' => array_values($dups),
@@ -397,145 +403,63 @@ public function storeAttempt(Request $request)
         ], 422);
     }
 
-    // 维度：固定 5 轴
-    $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
+    $answers = $payload['answers'] ?? [];
+    $region = $payload['region'] ?? $this->defaultRegion();
+    $locale = $payload['locale'] ?? $this->defaultLocale();
+    $contentPackageVersion = $this->defaultDirVersion();
 
-    $dimN        = array_fill_keys($dims, 0);
-    $sumTowardP1 = array_fill_keys($dims, 0);
-
-    $countP1      = array_fill_keys($dims, 0);
-    $countP2      = array_fill_keys($dims, 0);
-    $countNeutral = array_fill_keys($dims, 0);
-
-    $skipped = [];
-
-    $defaultScoreMap = ['A' => 2, 'B' => 1, 'C' => 0, 'D' => -1, 'E' => -2];
-
-    foreach ($payload['answers'] as $a) {
-        $qid  = $a['question_id'];
-        $code = strtoupper($a['code'] ?? '');
-
-        $meta = $index[$qid];
-        $dim  = $meta['dimension'] ?? null;
-
-        if (!$dim || !isset($dimN[$dim])) {
-            $skipped[] = ['question_id' => $qid, 'reason' => 'invalid_dimension', 'dimension' => $dim];
-            continue;
-        }
-
-        $scoreMap = $meta['score_map'] ?? null;
-        if (!is_array($scoreMap) || empty($scoreMap)) {
-            $scoreMap = $defaultScoreMap;
-        } else {
-            $norm = [];
-            foreach ($scoreMap as $k => $v) $norm[strtoupper((string)$k)] = (int)$v;
-            $scoreMap = $norm;
-
-            if (!array_key_exists($code, $scoreMap)) {
-                $scoreMap = $defaultScoreMap;
-            } else {
-                $vals = array_values($scoreMap);
-                $allZero = true;
-                foreach ($vals as $v) {
-                    if ((int)$v !== 0) { $allZero = false; break; }
-                }
-                if ($allZero) $scoreMap = $defaultScoreMap;
-            }
-        }
-
-        $rawScore  = (int) ($scoreMap[$code] ?? 0);
-        $direction = (int) ($meta['direction'] ?? 1);
-        $keyPole   = (string) ($meta['key_pole'] ?? '');
-
-        $signed = $rawScore * ($direction === 0 ? 1 : $direction);
-
-        [$p1, $p2] = $this->getDimensionPoles($dim);
-
-        $towardP1 = $signed;
-        if ($keyPole === $p2) $towardP1 = -$signed;
-
-        $dimN[$dim] += 1;
-        $sumTowardP1[$dim] += $towardP1;
-
-        if ($towardP1 > 0) $countP1[$dim] += 1;
-        elseif ($towardP1 < 0) $countP2[$dim] += 1;
-        else $countNeutral[$dim] += 1;
+    $scoringSpec = null;
+    try {
+        $resolved = app(ContentPackResolver::class)->resolve('MBTI', $region, $locale, $contentPackageVersion);
+        $scoringSpec = $this->loadPackJson($resolved, 'scoring_spec.json');
+    } catch (\Throwable $e) {
+        $scoringSpec = null;
     }
 
-    foreach ($dims as $dim) {
-        if ((int)$dimN[$dim] <= 0) {
-            return response()->json([
-                'ok'      => false,
-                'error'   => 'SCORING_FAILED',
-                'message' => "No scored answers for dim={$dim}. Check questions meta(score_map/dimension).",
-                'data'    => ['dims_total' => $dimN],
-            ], 500);
-        }
+    try {
+        $scored = app(\App\Services\Score\MbtiAttemptScorer::class)->score($answers, $index, $scoringSpec);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'ok'      => false,
+            'error'   => 'SCORING_FAILED',
+            'message' => $e->getMessage(),
+        ], 500);
     }
 
-    $scoresPct = [];
-    foreach ($dims as $dim) {
-        $n = (int) $dimN[$dim];
-        $pct = (int) round((($sumTowardP1[$dim] + 2 * $n) / (4 * $n)) * 100);
-        if ($pct < 0) $pct = 0;
-        if ($pct > 100) $pct = 100;
-        $scoresPct[$dim] = $pct;
-    }
+    $scoresPct = is_array($scored['scoresPct'] ?? null) ? $scored['scoresPct'] : [];
+    $scoresJson = is_array($scored['scoresJson'] ?? null) ? $scored['scoresJson'] : [];
+    $axisStates = is_array($scored['axisStates'] ?? null) ? $scored['axisStates'] : [];
+    $typeCode = (string) ($scored['typeCode'] ?? '');
+    $skipped = is_array($scored['skipped'] ?? null) ? $scored['skipped'] : [];
+    $dimN = is_array($scored['dimTotals'] ?? null) ? $scored['dimTotals'] : [];
+    $sumTowardP1 = is_array($scored['sumTowardP1'] ?? null) ? $scored['sumTowardP1'] : [];
+    $counts = is_array($scored['counts'] ?? null) ? $scored['counts'] : [];
+    $facetScores = $scored['facetScores'] ?? null;
+    $pci = $scored['pci'] ?? null;
+    $engineVersion = (string) ($scored['engineVersion'] ?? '');
 
-    $letters = [
-        'EI' => $scoresPct['EI'] >= 50 ? 'E' : 'I',
-        'SN' => $scoresPct['SN'] >= 50 ? 'S' : 'N',
-        'TF' => $scoresPct['TF'] >= 50 ? 'T' : 'F',
-        'JP' => $scoresPct['JP'] >= 50 ? 'J' : 'P',
-    ];
-    $atSuffix = $scoresPct['AT'] >= 50 ? 'A' : 'T';
-    $typeCode = implode('', $letters) . '-' . $atSuffix;
-
-    $axisStates = [];
-    foreach ($scoresPct as $dim => $pctTowardP1) {
-        $displayPct = $pctTowardP1 >= 50 ? $pctTowardP1 : (100 - $pctTowardP1);
-        $state = match (true) {
-            $displayPct >= 80 => 'very_strong',
-            $displayPct >= 70 => 'strong',
-            $displayPct >= 60 => 'clear',
-            $displayPct >= 55 => 'weak',
-            default           => 'very_weak',
-        };
-        $axisStates[$dim] = $state;
-    }
-
-    $scoresJson = [];
-    foreach ($dims as $dim) {
-        $scoresJson[$dim] = [
-            'a'       => $countP1[$dim],
-            'b'       => $countP2[$dim],
-            'neutral' => $countNeutral[$dim],
-            'sum'     => $sumTowardP1[$dim],
-            'total'   => $dimN[$dim],
-        ];
+    if ($typeCode === '' || empty($scoresPct)) {
+        return response()->json([
+            'ok'      => false,
+            'error'   => 'SCORING_FAILED',
+            'message' => 'Scoring output incomplete.',
+        ], 500);
     }
 
     $answersSummary = [
-        'answer_count' => count($payload['answers']),
+        'answer_count' => count($answers),
         'dims_total'   => $dimN,
         'dims_sum_p1'  => $sumTowardP1,
         'scores_pct'   => $scoresPct,
         'type_code'    => $typeCode,
         'skipped'      => $skipped,
-        'counts'       => [
-            'p1'      => $countP1,
-            'p2'      => $countP2,
-            'neutral' => $countNeutral,
-        ],
+        'counts'       => $counts,
+        'engine_version' => $engineVersion,
+        'pci' => $pci,
+        'facet_scores' => $facetScores,
     ];
 
-    $answers = $payload['answers'] ?? [];
-
     $profileVersion        = config('fap.profile_version', 'mbti32-v2.5');
-    $contentPackageVersion = $this->defaultDirVersion();
-
-    $region = $payload['region'] ?? $this->defaultRegion();
-    $locale = $payload['locale'] ?? $this->defaultLocale();
 
     $psychometrics = $this->buildPsychometricsSnapshot(
         $payload['scale_code'],
@@ -585,6 +509,9 @@ public function storeAttempt(Request $request)
         $scoresJson,
         $scoresPct,
         $axisStates,
+        $facetScores,
+        $pci,
+        $engineVersion,
         $profileVersion,
         $contentPackageVersion,
         $psychometrics,
@@ -675,6 +602,9 @@ public function storeAttempt(Request $request)
                 'scores'                  => $scoresJson,
                 'scores_pct'              => $scoresPct,
                 'axis_states'             => $axisStates,
+                'facet_scores'            => $facetScores,
+                'pci'                     => $pci,
+                'engine_version'          => $engineVersion,
                 'profile_version'         => $profileVersion,
                 'content_package_version' => $contentPackageVersion,
                 'computed_at'             => now()->toISOString(),
@@ -732,6 +662,10 @@ public function storeAttempt(Request $request)
         if (Schema::hasColumn('results', 'content_package_version')) {
             $resultBase['content_package_version'] = $contentPackageVersion;
         }
+        if (Schema::hasColumn('results', 'scoring_spec_version')) {
+            $scoring = $psychometrics['scoring'] ?? null;
+            $resultBase['scoring_spec_version'] = is_array($scoring) ? ($scoring['spec_version'] ?? null) : null;
+        }
 
         if ($result) {
             $result->fill($resultBase);
@@ -757,6 +691,8 @@ public function storeAttempt(Request $request)
                 'type_code'               => $typeCode,
                 'scores_pct'              => $scoresPct,
                 'axis_states'             => $axisStates,
+                'engine_version'          => $engineVersion,
+                'pci'                     => $pci,
                 'profile_version'         => $profileVersion,
                 'content_package_version' => $contentPackageVersion,
             ],
@@ -767,6 +703,9 @@ public function storeAttempt(Request $request)
             'scores'                  => $scoresJson,
             'scores_pct'              => $scoresPct,
             'axis_states'             => $axisStates,
+            'facet_scores'            => $facetScores,
+            'pci'                     => $pci,
+            'engine_version'          => $engineVersion,
             'profile_version'         => $profileVersion,
             'content_package_version' => $contentPackageVersion,
         ];
@@ -888,6 +827,23 @@ public function getResult(Request $request, string $attemptId)
         ?? ($legacy?->axis_states ?? [])
     );
 
+    $facetScores = (
+        ($attemptResult['facet_scores'] ?? null)
+        ?? ($attemptResult['facetScores'] ?? null)
+        ?? []
+    );
+
+    $pci = (
+        ($attemptResult['pci'] ?? null)
+        ?? []
+    );
+
+    $scoringEngineVersion = (string) (
+        ($attemptResult['engine_version'] ?? null)
+        ?? ($attemptResult['scoring_engine_version'] ?? null)
+        ?? ''
+    );
+
     $profileVersion = (string) (
         ($attemptResult['profile_version'] ?? null)
         ?? ($legacy?->profile_version ?? null)
@@ -971,6 +927,8 @@ public function getResult(Request $request, string $attemptId)
     if (!is_array($scoresJson))  $scoresJson = [];
     if (!is_array($scoresPct))   $scoresPct = [];
     if (!is_array($axisStates))  $axisStates = [];
+    if (!is_array($facetScores)) $facetScores = [];
+    if (!is_array($pci))         $pci = [];
 
     foreach ($dims as $d) {
         if (!array_key_exists($d, $scoresJson)) {
@@ -995,6 +953,9 @@ public function getResult(Request $request, string $attemptId)
         'scores'                  => $scoresJson,
         'scores_pct'              => $scoresPct,
         'axis_states'             => $axisStates,
+        'facet_scores'            => $facetScores,
+        'pci'                     => $pci,
+        'engine_version'          => $scoringEngineVersion,
 
         'profile_version'         => $profileVersion,
         'content_package_version' => $contentPackageVersion,
@@ -2399,7 +2360,7 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
 
     /**
      * 读取题库，并构建 question_id => meta 索引
-     * meta: dimension, key_pole, direction, score_map
+     * meta: dimension, key_pole, direction, score_map, code, weight
      */
     private function getQuestionsIndex(?string $region = null, ?string $locale = null, ?string $pkgVersion = null): array
     {
@@ -2452,6 +2413,8 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
                 'key_pole'  => $q['key_pole'] ?? null,
                 'direction' => $q['direction'] ?? 1,
                 'score_map' => $scoreMap,
+                'code'      => isset($q['code']) ? strtoupper((string) $q['code']) : null,
+                'weight'    => $q['irt']['a'] ?? null,
             ];
         }
 

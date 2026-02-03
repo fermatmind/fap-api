@@ -28,26 +28,98 @@
         "questions": "fap.questions.v1",
         "type_profiles": "fap.type_profiles.v1",
         "cards": "fap.report.cards.v1",
-        "fallback_cards": "fap.report.cards.fallback.v1",
-        "share_templates": "fap.share_templates.v1",
+        "role_cards": "fap.report.cards.v1",
+        "strategy_cards": "fap.report.cards.v1",
+        "fallback_cards": "fap.report.cards.v1",
         "highlights": "fap.report.highlights.v1",
         "highlights_pools": "fap.report.highlights.pools.v1",
         "highlights_rules": "fap.report.highlights.rules.v1",
         "reads": "fap.report.reads.v2",
-        "borderline_templates": "fap.report.borderline_templates.v1",
-        "borderline_notes": "fap.report.borderline_notes.v1",
+        "share_templates": "fap.share.templates.v1",
         "identity_cards": "fap.report.identity_cards.v1",
         "identity_layers": "fap.report.identity_layers.v1",
         "roles": "fap.report.roles.v1",
         "strategies": "fap.report.strategies.v1",
-        "overrides_unified": "fap.report.overrides.v1",
-        "overrides_highlights_legacy": "fap.report.highlights.overrides.v1",
         "rules": "fap.report.rules.v1",
-        "section_policies": "fap.report.section_policies.v1"
+        "section_policies": "fap.report.section_policies.v1",
+        "overrides_unified": "fap.report.overrides.v1",
+        "meta": "fap.landing.meta.v1"
     },
     "assets": {
         "questions": [
             "questions.json"
+        ],
+        "type_profiles": [
+            "type_profiles.json"
+        ],
+        "identity": [
+            "identity_layers.json",
+            "report_identity_cards.json",
+            "report_roles.json",
+            "report_strategies.json"
+        ],
+        "cards": [
+            "report_cards_career.json",
+            "report_cards_growth.json",
+            "report_cards_relationships.json",
+            "report_cards_stress_recovery.json",
+            "report_cards_traits.json"
+        ],
+        "role_cards": [
+            "role_cards/rc_enfj_a.json",
+            "role_cards/rc_enfj_t.json",
+            "role_cards/rc_enfp_a.json",
+            "role_cards/rc_enfp_t.json",
+            "role_cards/rc_entj_a.json",
+            "role_cards/rc_entj_t.json",
+            "role_cards/rc_entp_a.json",
+            "role_cards/rc_entp_t.json",
+            "role_cards/rc_esfj_a.json",
+            "role_cards/rc_esfj_t.json",
+            "role_cards/rc_esfp_a.json",
+            "role_cards/rc_esfp_t.json",
+            "role_cards/rc_estj_a.json",
+            "role_cards/rc_estj_t.json",
+            "role_cards/rc_estp_a.json",
+            "role_cards/rc_estp_t.json",
+            "role_cards/rc_infj_a.json",
+            "role_cards/rc_infj_t.json",
+            "role_cards/rc_infp_a.json",
+            "role_cards/rc_infp_t.json",
+            "role_cards/rc_intj_a.json",
+            "role_cards/rc_intj_t.json",
+            "role_cards/rc_intp_a.json",
+            "role_cards/rc_intp_t.json",
+            "role_cards/rc_isfj_a.json",
+            "role_cards/rc_isfj_t.json",
+            "role_cards/rc_isfp_a.json",
+            "role_cards/rc_isfp_t.json",
+            "role_cards/rc_istj_a.json",
+            "role_cards/rc_istj_t.json",
+            "role_cards/rc_istp_a.json",
+            "role_cards/rc_istp_t.json"
+        ],
+        "strategy_cards": [
+            "strategy_cards/sc_empathy_listen.json",
+            "strategy_cards/sc_focus_execute.json",
+            "strategy_cards/sc_perspective_shift.json",
+            "strategy_cards/sc_plan_small.json",
+            "strategy_cards/sc_recovery_routine.json",
+            "strategy_cards/sc_resilience_bounce.json"
+        ],
+        "fallback_cards": [
+            "report_cards_fallback_career.json",
+            "report_cards_fallback_growth.json",
+            "report_cards_fallback_relationships.json",
+            "report_cards_fallback_stress_recovery.json",
+            "report_cards_fallback_traits.json"
+        ],
+        "highlights": [
+            "report_highlights.json",
+            "report_highlights_policy.json",
+            "report_highlights_pools.json",
+            "report_highlights_rules.json",
+            "report_highlights_templates.json"
         ],
         "reads": [
             "reads/read_enfj_a_01.json",
@@ -113,59 +185,48 @@
             "reads/read_istp_a_01.json",
             "reads/read_istp_a_02.json",
             "reads/read_istp_t_01.json",
-            "reads/read_istp_t_02.json",
-            "report_recommended_reads.json"
-        ],
-        "highlights": [
-            "report_highlights.json",
-            "report_highlights_policy.json",
-            "report_highlights_pools.json",
-            "report_highlights_rules.json",
-            "report_highlights_templates.json"
-        ],
-        "identity": [
-            "identity_layers.json",
-            "report_identity_cards.json",
-            "report_roles.json",
-            "report_strategies.json"
-        ],
-        "rules": [
-            "report_rules.json"
+            "reads/read_istp_t_02.json"
         ],
         "share_templates": [
             "share_templates/wechat_default.json"
+        ],
+        "section_policies": [
+            "report_section_policies.json"
+        ],
+        "overrides_unified": [
+            "report_overrides.json"
+        ],
+        "rules": [
+            "ai_spec.json",
+            "audit_spec.json",
+            "commercial_spec.json",
+            "content_graph.json",
+            "interpretation_spec.json",
+            "norms.json",
+            "quality_checks.json",
+            "report_borderline_notes.json",
+            "report_borderline_templates.json",
+            "report_recommended_reads.json",
+            "report_rules.json",
+            "report_select_rules.json",
+            "scoring_spec.json",
+            "telemetry_spec.json",
+            "version.json"
+        ],
+        "meta": [
+            "meta/landing.json"
         ],
         "assets": [
             "assets/share/mbti_cover_source.png",
             "assets/share/mbti_square_600x600.png",
             "assets/share/mbti_wide_1200x630.png"
         ],
-        "fallback_cards": [
-            "report_cards_fallback_career.json",
-            "report_cards_fallback_growth.json",
-            "report_cards_fallback_relationships.json",
-            "report_cards_fallback_stress_recovery.json",
-            "report_cards_fallback_traits.json"
-        ],
-        "cards": [
-            "report_cards_career.json",
-            "report_cards_growth.json",
-            "report_cards_relationships.json",
-            "report_cards_stress_recovery.json",
-            "report_cards_traits.json"
-        ],
-        "type_profiles": [
-            "type_profiles.json"
-        ],
-        "section_policies": [
-            "report_section_policies.json"
-        ],
         "overrides": {
-            "order": [
-                "unified"
-            ],
             "unified": [
                 "report_overrides.json"
+            ],
+            "order": [
+                "unified"
             ]
         }
     },

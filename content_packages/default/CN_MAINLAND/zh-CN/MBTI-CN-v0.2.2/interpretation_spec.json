@@ -1,20 +1,21 @@
 {
-  "version": "2026.01",
-  "thresholds": {
-    "axis_state": {
-      "very_strong": 80,
-      "strong": 70,
-      "clear": 60,
-      "weak": 55
+    "version": "2026.01",
+    "thresholds": {
+        "axis_state": {
+            "very_strong": 80,
+            "strong": 70,
+            "clear": 60,
+            "weak": 55
+        },
+        "percentile_band": {
+            "very_low": 10,
+            "low": 25,
+            "mid": 75,
+            "high": 90
+        }
     },
-    "percentile_band": {
-      "very_low": 10,
-      "low": 25,
-      "mid": 75,
-      "high": 90
-    }
-  },
-  "notes": {
-    "confidence": "CI is based on SD and sample size of the bucket."
-  }
+    "notes": {
+        "confidence": "CI is based on SD and sample size of the bucket."
+    },
+    "schema": "fap.report.rules.v1"
 }

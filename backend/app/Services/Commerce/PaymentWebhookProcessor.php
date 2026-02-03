@@ -214,13 +214,33 @@ class PaymentWebhookProcessor
                     return $this->badRequest('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
                 }
 
+                $scopeOverride = trim((string) ($skuRow->scope ?? ''));
+                if ($scopeOverride === '') {
+                    $scopeOverride = 'attempt';
+                }
+
+                $expiresAt = null;
+                $skuMeta = $skuRow->meta_json ?? null;
+                if (is_string($skuMeta)) {
+                    $decoded = json_decode($skuMeta, true);
+                    $skuMeta = is_array($decoded) ? $decoded : null;
+                }
+                if (is_array($skuMeta)) {
+                    $durationDays = isset($skuMeta['duration_days']) ? (int) $skuMeta['duration_days'] : 0;
+                    if ($durationDays > 0) {
+                        $expiresAt = now()->addDays($durationDays)->toISOString();
+                    }
+                }
+
                 $grant = $this->entitlements->grantAttemptUnlock(
                     (int) $order->org_id,
                     $order->user_id ? (string) $order->user_id : $userId,
                     $order->anon_id ? (string) $order->anon_id : $anonId,
                     $benefitCode,
                     $attemptId,
-                    $orderNo
+                    $orderNo,
+                    $scopeOverride,
+                    $expiresAt
                 );
 
                 if (!($grant['ok'] ?? false)) {

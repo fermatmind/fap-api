@@ -1,19 +1,15 @@
-PR27 Acceptance Summary
-- selfcheck: backend/scripts/ci_selfcheck_packs.sh
-- verify: backend/scripts/pr27_verify.sh
-- serve_port: 1827
-- default_pack_id: MBTI.cn-mainland.zh-CN.v0.2.2
-- scales_registry_default_pack_id: MBTI.cn-mainland.zh-CN.v0.2.2
-- pack_dir: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2
-- attempt_id: f0ba2ce5-672c-43f2-b37b-840bd3f633bb
-- question_count: 144
+PR27 summary
+- Target pack: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2
+- Fixes:
+  - manifest.assets: explicit file lists; no directory placeholders
+  - strict-assets: declare meta/landing.json and assets/share pngs; list overrides in overrides_unified
+  - schema-alignment: assets grouped per expectedSchemaFor; rules schema is a single string
+  - patch schemas: report_roles/report_strategies/report_overrides/report_section_policies/identity_layers/share_templates/meta/landing
+  - self-check: add meta/role_cards/strategy_cards schema mapping
+  - ci_selfcheck_packs: fix demo packs scoring_spec + meta declarations
+- Verify:
+  - php artisan fap:self-check --strict-assets --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2
+  - bash backend/scripts/ci_selfcheck_packs.sh
 Artifacts:
-- backend/artifacts/pr27/health.json
-- backend/artifacts/pr27/default_pack_id.txt
-- backend/artifacts/pr27/scales_registry_default_pack_id.txt
-- backend/artifacts/pr27/pack_dir.txt
-- backend/artifacts/pr27/questions.json
-- backend/artifacts/pr27/answers.json
-- backend/artifacts/pr27/attempt_start.json
-- backend/artifacts/pr27/submit.json
-- backend/artifacts/pr27/report.json
+  - backend/artifacts/pr27/after_selfcheck.txt
+  - backend/artifacts/pr27/after_ci_selfcheck_packs.txt
