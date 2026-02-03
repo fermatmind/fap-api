@@ -19,13 +19,13 @@ final class CiScalesRegistrySeeder extends Seeder
 
         $now = now();
 
-        // ✅ CI 单一真源：跟随 config/content_packs.php（保持和 PR 脚本的“config==db”断言一致）
-        $defaultPackId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
-        $defaultDirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
+        // CI 也以 content_packs.* 为真源（env 覆盖生效）
+        $defaultPackId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.2');
+        $defaultDirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.2');
         $defaultRegion = (string) config('content_packs.default_region', 'CN_MAINLAND');
         $defaultLocale = (string) config('content_packs.default_locale', 'zh-CN');
 
-        // demo pack id：沿用仓库既有口径（空则回退 default）
+        // demo pack id：没配时按仓库约定走 default
         $demoPackId = (string) config('content_packs.demo_pack_id', 'default');
 
         $rows = [
@@ -91,10 +91,9 @@ final class CiScalesRegistrySeeder extends Seeder
             ],
         ];
 
-        // ✅ 以 (org_id, code) 为键，避免 CI/多 org 场景产生脏行
         DB::table('scales_registry')->upsert(
             $rows,
-            ['org_id', 'code'],
+            ['code'],
             [
                 'primary_slug',
                 'slugs_json',

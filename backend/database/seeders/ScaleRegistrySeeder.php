@@ -18,27 +18,41 @@ final class ScaleRegistrySeeder extends Seeder
             return;
         }
 
-        // ✅ 单一真源：跟随 config/content_packs.php（CI/本机/线上保持一致）
-        $defaultPackId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
-        $defaultDirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
+        // 单一真源：全部从 content_packs.* 读取（CI/本地/生产统一，允许 env 覆盖）
+        $defaultPackId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.2');
+        $defaultDirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.2');
         $defaultRegion = (string) config('content_packs.default_region', 'CN_MAINLAND');
         $defaultLocale = (string) config('content_packs.default_locale', 'zh-CN');
+
+        // Paywall sections：与 v0.3 paywall teaser 合约对齐
+        $freeSections = ['overview', 'type_snapshot', 'dimension_summary', 'highlights_free'];
+        $fullSections = [
+            'overview',
+            'type_snapshot',
+            'dimension_summary',
+            'highlights_full',
+            'traits',
+            'growth',
+            'relationships',
+            'stress_recovery',
+            'career',
+            'recommended_reads',
+            'borderline_notes',
+        ];
 
         $writer = app(ScaleRegistryWriter::class);
 
         $scale = $writer->upsertScale([
             'code' => 'MBTI',
             'org_id' => 0,
-
-            'primary_slug' => 'mbti-test',
+            'primary_slug' => 'mbti',
             'slugs_json' => [
+                'mbti',
                 'mbti-test',
                 'mbti-personality-test',
             ],
-
             'driver_type' => 'mbti',
 
-            // ✅ pack/dir/region/locale：跟随 config
             'default_pack_id' => $defaultPackId,
             'default_region' => $defaultRegion,
             'default_locale' => $defaultLocale,
@@ -49,45 +63,23 @@ final class ScaleRegistrySeeder extends Seeder
                 'content_graph' => true,
             ],
 
-            // ✅ view_policy：保持“新 SKU 在 view_policy 内”，由服务层输出时做锚点兼容（top-level）
+            // view_policy_json：用于 report/paywall 组装
             'view_policy_json' => [
-                'free_sections' => [
-                    'overview',
-                    'type_snapshot',
-                    'dimension_summary',
-                    'highlights_free',
-                ],
-                'full_sections' => [
-                    'overview',
-                    'type_snapshot',
-                    'dimension_summary',
-                    'highlights_full',
-                    'traits',
-                    'growth',
-                    'relationships',
-                    'stress_recovery',
-                    'career',
-                    'recommended_reads',
-                    'borderline_notes',
-                ],
+                'free_sections' => $freeSections,
+                'full_sections' => $fullSections,
                 'blur_others' => true,
                 'teaser_percent' => 0.3,
+                // view_policy 内保持新 SKU（有效 SKU）
                 'upgrade_sku' => SkuContract::SKU_REPORT_FULL_199,
             ],
 
-            // ✅ commercial 合约：锚点(旧) + effective(新) + offers（长期可运营）
+            // commercial_json：长期运营合约（锚点 SKU + 有效 SKU + offers）
             'commercial_json' => [
                 'price_tier' => 'FREE',
                 'report_benefit_code' => 'MBTI_REPORT_FULL',
                 'credit_benefit_code' => 'MBTI_CREDIT',
-
-                // 真实可购买 SKU（新）
                 'report_unlock_sku' => SkuContract::SKU_REPORT_FULL_199,
-
-                // 兼容锚点（旧端/旧测试断言）
                 'upgrade_sku_anchor' => SkuContract::UPGRADE_SKU_ANCHOR,
-
-                // 前端/运营用 offers
                 'offers' => SkuContract::offers(),
             ],
 
@@ -95,7 +87,7 @@ final class ScaleRegistrySeeder extends Seeder
                 '@context' => 'https://schema.org',
                 '@type' => 'Quiz',
                 'name' => 'MBTI Personality Test',
-                'description' => 'MBTI personality test (demo).',
+                'description' => 'MBTI personality test.',
             ],
 
             'is_public' => true,
