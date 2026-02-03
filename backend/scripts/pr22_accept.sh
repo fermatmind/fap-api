@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# CI: pin legacy MBTI pack for PR22/PR25 acceptance (do not follow repo defaults)
+export FAP_PACKS_ROOT="${FAP_PACKS_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)/content_packages}"
+export FAP_DEFAULT_REGION="${FAP_DEFAULT_REGION:-CN_MAINLAND}"
+export FAP_DEFAULT_LOCALE="${FAP_DEFAULT_LOCALE:-zh-CN}"
+export FAP_DEFAULT_PACK_ID="${FAP_DEFAULT_PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.1-TEST}"
+export FAP_DEFAULT_DIR_VERSION="${FAP_DEFAULT_DIR_VERSION:-MBTI-CN-v0.2.1-TEST}"
+export FAP_CONTENT_PACKAGE_VERSION="${FAP_CONTENT_PACKAGE_VERSION:-MBTI-CN-v0.2.1-TEST}"
+
 export CI=true
 export FAP_NONINTERACTIVE=1
 export COMPOSER_NO_INTERACTION=1

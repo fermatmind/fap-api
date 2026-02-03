@@ -1,727 +1,183 @@
 {
-    "schema": "fap.content_pack_manifest.v1",
-    "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.2",
+    "schema_version": "pack-manifest@v1",
+    "pack_type": "content_pack",
     "scale_code": "MBTI",
     "region": "CN_MAINLAND",
     "locale": "zh-CN",
-    "content_package_version": "0.2.2",
-    "assets": [
-        "ai_spec.json",
-        "audit_spec.json",
-        "commercial_spec.json",
-        "content_graph.json",
-        "identity_layers.json",
-        "interpretation_spec.json",
-        "manifest.json",
-        "meta\/landing.json",
-        "norms.json",
-        "quality_checks.json",
-        "questions.json",
-        "reads\/read_enfj_a_01.json",
-        "reads\/read_enfj_a_02.json",
-        "reads\/read_enfj_t_01.json",
-        "reads\/read_enfj_t_02.json",
-        "reads\/read_enfp_a_01.json",
-        "reads\/read_enfp_a_02.json",
-        "reads\/read_enfp_t_01.json",
-        "reads\/read_enfp_t_02.json",
-        "reads\/read_entj_a_01.json",
-        "reads\/read_entj_a_02.json",
-        "reads\/read_entj_t_01.json",
-        "reads\/read_entj_t_02.json",
-        "reads\/read_entp_a_01.json",
-        "reads\/read_entp_a_02.json",
-        "reads\/read_entp_t_01.json",
-        "reads\/read_entp_t_02.json",
-        "reads\/read_esfj_a_01.json",
-        "reads\/read_esfj_a_02.json",
-        "reads\/read_esfj_t_01.json",
-        "reads\/read_esfj_t_02.json",
-        "reads\/read_esfp_a_01.json",
-        "reads\/read_esfp_a_02.json",
-        "reads\/read_esfp_t_01.json",
-        "reads\/read_esfp_t_02.json",
-        "reads\/read_estj_a_01.json",
-        "reads\/read_estj_a_02.json",
-        "reads\/read_estj_t_01.json",
-        "reads\/read_estj_t_02.json",
-        "reads\/read_estp_a_01.json",
-        "reads\/read_estp_a_02.json",
-        "reads\/read_estp_t_01.json",
-        "reads\/read_estp_t_02.json",
-        "reads\/read_infj_a_01.json",
-        "reads\/read_infj_a_02.json",
-        "reads\/read_infj_t_01.json",
-        "reads\/read_infj_t_02.json",
-        "reads\/read_infp_a_01.json",
-        "reads\/read_infp_a_02.json",
-        "reads\/read_infp_t_01.json",
-        "reads\/read_infp_t_02.json",
-        "reads\/read_intj_a_01.json",
-        "reads\/read_intj_a_02.json",
-        "reads\/read_intj_t_01.json",
-        "reads\/read_intj_t_02.json",
-        "reads\/read_intp_a_01.json",
-        "reads\/read_intp_a_02.json",
-        "reads\/read_intp_t_01.json",
-        "reads\/read_intp_t_02.json",
-        "reads\/read_isfj_a_01.json",
-        "reads\/read_isfj_a_02.json",
-        "reads\/read_isfj_t_01.json",
-        "reads\/read_isfj_t_02.json",
-        "reads\/read_isfp_a_01.json",
-        "reads\/read_isfp_a_02.json",
-        "reads\/read_isfp_t_01.json",
-        "reads\/read_isfp_t_02.json",
-        "reads\/read_istj_a_01.json",
-        "reads\/read_istj_a_02.json",
-        "reads\/read_istj_t_01.json",
-        "reads\/read_istj_t_02.json",
-        "reads\/read_istp_a_01.json",
-        "reads\/read_istp_a_02.json",
-        "reads\/read_istp_t_01.json",
-        "reads\/read_istp_t_02.json",
-        "report_borderline_notes.json",
-        "report_borderline_templates.json",
-        "report_cards_career.json",
-        "report_cards_fallback_career.json",
-        "report_cards_fallback_growth.json",
-        "report_cards_fallback_relationships.json",
-        "report_cards_fallback_stress_recovery.json",
-        "report_cards_fallback_traits.json",
-        "report_cards_growth.json",
-        "report_cards_relationships.json",
-        "report_cards_stress_recovery.json",
-        "report_cards_traits.json",
-        "report_highlights.json",
-        "report_highlights_policy.json",
-        "report_highlights_pools.json",
-        "report_highlights_rules.json",
-        "report_highlights_templates.json",
-        "report_identity_cards.json",
-        "report_overrides.json",
-        "report_recommended_reads.json",
-        "report_roles.json",
-        "report_rules.json",
-        "report_section_policies.json",
-        "report_select_rules.json",
-        "report_strategies.json",
-        "role_cards\/rc_enfj_a.json",
-        "role_cards\/rc_enfj_t.json",
-        "role_cards\/rc_enfp_a.json",
-        "role_cards\/rc_enfp_t.json",
-        "role_cards\/rc_entj_a.json",
-        "role_cards\/rc_entj_t.json",
-        "role_cards\/rc_entp_a.json",
-        "role_cards\/rc_entp_t.json",
-        "role_cards\/rc_esfj_a.json",
-        "role_cards\/rc_esfj_t.json",
-        "role_cards\/rc_esfp_a.json",
-        "role_cards\/rc_esfp_t.json",
-        "role_cards\/rc_estj_a.json",
-        "role_cards\/rc_estj_t.json",
-        "role_cards\/rc_estp_a.json",
-        "role_cards\/rc_estp_t.json",
-        "role_cards\/rc_infj_a.json",
-        "role_cards\/rc_infj_t.json",
-        "role_cards\/rc_infp_a.json",
-        "role_cards\/rc_infp_t.json",
-        "role_cards\/rc_intj_a.json",
-        "role_cards\/rc_intj_t.json",
-        "role_cards\/rc_intp_a.json",
-        "role_cards\/rc_intp_t.json",
-        "role_cards\/rc_isfj_a.json",
-        "role_cards\/rc_isfj_t.json",
-        "role_cards\/rc_isfp_a.json",
-        "role_cards\/rc_isfp_t.json",
-        "role_cards\/rc_istj_a.json",
-        "role_cards\/rc_istj_t.json",
-        "role_cards\/rc_istp_a.json",
-        "role_cards\/rc_istp_t.json",
-        "scoring_spec.json",
-        "share_templates\/wechat_default.json",
-        "strategy_cards\/sc_empathy_listen.json",
-        "strategy_cards\/sc_focus_execute.json",
-        "strategy_cards\/sc_perspective_shift.json",
-        "strategy_cards\/sc_plan_small.json",
-        "strategy_cards\/sc_recovery_routine.json",
-        "strategy_cards\/sc_resilience_bounce.json",
-        "telemetry_spec.json",
-        "type_profiles.json",
-        "version.json"
+    "content_package_version": "v0.2.2",
+    "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.2",
+    "fallback": [
+        "MBTI.cn-mainland.zh-CN.v0.2.1",
+        "MBTI.global.en.default"
     ],
-    "assets_meta": {
-        "norms.json": {
-            "sha256": "cfde4f54bc2adb825834a1dd959d35a3bcd280279abca16683b2b52d7184e75a",
-            "bytes": 3731
-        },
-        "commercial_spec.json": {
-            "sha256": "069b183c3c44a69e012c1610375b86b39de3adeda01774945598515852662303",
-            "bytes": 2905
-        },
-        "version.json": {
-            "sha256": "183fd782a533d4d1c6317cf05703c0130b22af306dd9e18337520ad175c5c20a",
-            "bytes": 266
-        },
-        "report_cards_relationships.json": {
-            "sha256": "7b0da84e5bfc1e7a60bc014aea63eee1ceb0d01f9a82f20767c83f02bb0b9233",
-            "bytes": 17774
-        },
-        "share_templates\/wechat_default.json": {
-            "sha256": "62657cccf45d6fa2995e575ed010a2c8f56e7db18e3e40cb401fa4ca0ab7a78d",
-            "bytes": 1185
-        },
-        "report_rules.json": {
-            "sha256": "8c1a460b841e9a8751ab02ccfe65059f9972e24a5dcb30168e49898c3ec8412a",
-            "bytes": 1592
-        },
-        "report_overrides.json": {
-            "sha256": "6caa3a65127263cad7d42f19e4a9c29538b9e6e469ce25b191155d7f16670bf8",
-            "bytes": 62
-        },
-        "report_identity_cards.json": {
-            "sha256": "d8cfd1c88c2ae9d492168ead8cc72c58a9b765698c41cd490262d9ad2292a912",
-            "bytes": 35694
-        },
-        "report_section_policies.json": {
-            "sha256": "6f0df48af902b57904de46dc77689bc3a492925d0477ce6325e21fd2acc55404",
-            "bytes": 1155
-        },
-        "report_cards_traits.json": {
-            "sha256": "58e8dc32021903e3b12ee8696f864e22360f7b442d8f947d51358e07929a3ce7",
-            "bytes": 18706
-        },
-        "role_cards\/rc_entp_a.json": {
-            "sha256": "df06a4a1be6682df55aff1f92ad0d38d5ec6561eb4c48263ff3ee654615e66f4",
-            "bytes": 214
-        },
-        "role_cards\/rc_entp_t.json": {
-            "sha256": "b4790ab669244de8c698a74145d7859178b8826d62ba33fa4419fef8fdc59519",
-            "bytes": 214
-        },
-        "role_cards\/rc_esfp_a.json": {
-            "sha256": "b9f7d4e4313c122c742acc19ec00139061690a065183bcb6995ea15ae6c7406b",
-            "bytes": 214
-        },
-        "role_cards\/rc_esfp_t.json": {
-            "sha256": "c1c4f0ff407e364139d87676f5a0cf99e0d60eff68cf51ae882f36ea897d3972",
-            "bytes": 214
-        },
-        "role_cards\/rc_esfj_t.json": {
-            "sha256": "ab3528e762fdab90e89c4ff03cb9830744a91b5d4739225ee8f4c0d3a185d1ac",
-            "bytes": 214
-        },
-        "role_cards\/rc_esfj_a.json": {
-            "sha256": "6f7709efed64ec3bbbce3764f470a99f68a0120a80725ac7901270b857f9858e",
-            "bytes": 214
-        },
-        "role_cards\/rc_entj_t.json": {
-            "sha256": "dbcd4d0ebe6329601e1c2f808de7f256b11c351cdecf91671cd0cc95c1771f1b",
-            "bytes": 214
-        },
-        "role_cards\/rc_entj_a.json": {
-            "sha256": "5700b7300d9df57952432aad84551ef07e64d51e4ee2e6e3919164228862f2ce",
-            "bytes": 214
-        },
-        "role_cards\/rc_isfp_a.json": {
-            "sha256": "f014890e2d8bf66108cd6d5a67b922cf2d264cfe533c3ecbc8a938f18a9697e5",
-            "bytes": 214
-        },
-        "role_cards\/rc_isfp_t.json": {
-            "sha256": "1787a6a819c6da3ca5df1323572c951a34b8527b83cdd6d04f19c2ae3ace584b",
-            "bytes": 214
-        },
-        "role_cards\/rc_intp_a.json": {
-            "sha256": "c7da0d1e681337a0936b11378ed80ca19f3b9de2d897a3bc762e7f65641fb8d8",
-            "bytes": 214
-        },
-        "role_cards\/rc_intp_t.json": {
-            "sha256": "d70a8b33e94b9658040fa7a2ea2f093a53462531f09185c5d61eeb47ce15b6ec",
-            "bytes": 214
-        },
-        "role_cards\/rc_intj_t.json": {
-            "sha256": "20877b511ba3772c1254b51cac17be345b12fefb1dda8d06d505256ab3cc63b6",
-            "bytes": 214
-        },
-        "role_cards\/rc_intj_a.json": {
-            "sha256": "e04948d2b58d4bc7934f726612b886c463642ba34c209da6f99daa76d9dda3e1",
-            "bytes": 214
-        },
-        "role_cards\/rc_isfj_t.json": {
-            "sha256": "2f4082bbd98f3c81822d93790915466b61ba0c3227fd960fc44124cca4804dcd",
-            "bytes": 214
-        },
-        "role_cards\/rc_isfj_a.json": {
-            "sha256": "5e7c9706054cae231e567039c2a6a49bba74e8300ab7d8cc644252c72f04ccb8",
-            "bytes": 214
-        },
-        "role_cards\/rc_estp_t.json": {
-            "sha256": "dfe4c0b4fa3c9bbfd6879cf271d143b97c37694f3728ab046315107095f0caf3",
-            "bytes": 214
-        },
-        "role_cards\/rc_estp_a.json": {
-            "sha256": "8a58fba222f9e620329e2f0b49dbd6cdfb87f2701cc2e4492ad6af7b116c0b0f",
-            "bytes": 214
-        },
-        "role_cards\/rc_enfp_t.json": {
-            "sha256": "ff5d22b0a5d10b250154e6411052ebffdb43ccb81a080dcb27f4ea478f69a98f",
-            "bytes": 214
-        },
-        "role_cards\/rc_enfp_a.json": {
-            "sha256": "9aa5fe83716f67322def69aa3c4cc4d061ec1664ca2a670069f2f0bef8b5c489",
-            "bytes": 214
-        },
-        "role_cards\/rc_enfj_a.json": {
-            "sha256": "97106fa578bfccdc0555cc0a5d12ac109d48ecd9a66da09bc1794a98a98782b8",
-            "bytes": 214
-        },
-        "role_cards\/rc_enfj_t.json": {
-            "sha256": "95824d69952d2e80416207a5d1bf63452205ced0ce206357b386c80559d3f3ce",
-            "bytes": 214
-        },
-        "role_cards\/rc_estj_a.json": {
-            "sha256": "37af9c8a18ad4f1d8aa3a1654873a6ec99c45b1d220f21bb3b55984cbf061ff9",
-            "bytes": 214
-        },
-        "role_cards\/rc_estj_t.json": {
-            "sha256": "47923d9351d444ae1920e54925b422cf53a6e9010cfa0042af9137264c61a7ad",
-            "bytes": 214
-        },
-        "role_cards\/rc_infp_t.json": {
-            "sha256": "1e8384d61bb9d53c128645a5f9f8c9bd8b31ab3b68700bde74a49a1665344db4",
-            "bytes": 214
-        },
-        "role_cards\/rc_infp_a.json": {
-            "sha256": "5a089ce55a744c9c004d78c5d998d1a90a2cbf742b033f12ee679040cc52af5b",
-            "bytes": 214
-        },
-        "role_cards\/rc_istp_t.json": {
-            "sha256": "c67d54b7acaaa3428251acd8e79bf101c2f875886825b7501f22e377c109aea2",
-            "bytes": 214
-        },
-        "role_cards\/rc_istp_a.json": {
-            "sha256": "bad8372757f86b05e66f1f66dfdef8451bc00964d5f96b607c1ac757c5b86b5c",
-            "bytes": 214
-        },
-        "role_cards\/rc_istj_a.json": {
-            "sha256": "feb7ca42573966e20fdbb57131e5fcf7bb70c404bb27aa0beb539c01d02ce93b",
-            "bytes": 214
-        },
-        "role_cards\/rc_istj_t.json": {
-            "sha256": "e2d5b568e0adf43ac8ca808961d93bbc9b5bf46eb23ea4c80f5d9786c55a59bd",
-            "bytes": 214
-        },
-        "role_cards\/rc_infj_a.json": {
-            "sha256": "fc2379fa3bc3801f99589471e92ebd87d5a1e22a60e36e3337caa67764f79fdd",
-            "bytes": 214
-        },
-        "role_cards\/rc_infj_t.json": {
-            "sha256": "2523def06c2b1b37d1349ba2a4c485abff5d2424aa1230f80763d061c828b1f2",
-            "bytes": 214
-        },
-        "report_borderline_templates.json": {
-            "sha256": "5396b16c93be051dc1012e561903a30702bbee1c10230f130f45ac5e8a8ec691",
-            "bytes": 2764
-        },
-        "report_cards_fallback_traits.json": {
-            "sha256": "97703d209a553e9c928f3d4c34dfc611ad1c2c1e6c63ba657aa99a5096303f86",
-            "bytes": 2392
-        },
-        "report_cards_fallback_relationships.json": {
-            "sha256": "cf5e34dccea42beba20896537cb589a7e1e6d6aae1f6943307af415e125bcfd9",
-            "bytes": 2524
-        },
-        "report_highlights_policy.json": {
-            "sha256": "c1e8f088ff657b408c48500392058349775b9b70cd72bb1f548d5b23462c6fe3",
-            "bytes": 887
-        },
-        "report_cards_fallback_growth.json": {
-            "sha256": "fd85ecc68317180086f68cfb0ccb0d369d043e0f34ebad589b2708e6c88a861e",
-            "bytes": 3180
-        },
-        "content_graph.json": {
-            "sha256": "28e996498c0df552e9468e5117a94c2c071414dc4e9ab7b62a921848bad8628d",
-            "bytes": 9057
-        },
-        "report_cards_fallback_stress_recovery.json": {
-            "sha256": "e2dfe9b349d4815ff9c19a1c8e5586d88abdb04ae0da9364b5c74efbfec90e8e",
-            "bytes": 2826
-        },
-        "meta\/landing.json": {
-            "sha256": "b90771347033ad5e63ef019787fd23e4e0d5fe3b2f23b6140377fd2b0d38b9db",
-            "bytes": 7884
-        },
-        "report_cards_growth.json": {
-            "sha256": "6d4472aa0cc2d13e9b3638fc13b3f696f0e334cc538174a0a08fa1e936b69183",
-            "bytes": 17906
-        },
-        "scoring_spec.json": {
-            "sha256": "a2ebddc190cf8c9bfc90ac06f7e78fc1ace1bbac36fc535b5d45be569999e2d9",
-            "bytes": 12454
-        },
-        "report_select_rules.json": {
-            "sha256": "0f813881fec25919b95626f5dab34eb5ecbab20d2cccb4197bb3fb0efd8e99dd",
-            "bytes": 610
-        },
-        "questions.json": {
-            "sha256": "147f36a9726513be1e52f3a952d42ef501fb467ea360c16887ff1344c7deb357",
-            "bytes": 174543
-        },
-        "report_cards_stress_recovery.json": {
-            "sha256": "f96e47f5e4636074926943385ede474657b31027701f322b565391866a948500",
-            "bytes": 17503
-        },
-        "reads\/read_estj_a_02.json": {
-            "sha256": "fa1747d81a783674bbc605b0fea8621183976bf81711948c3be45ecc2c8638a1",
-            "bytes": 160
-        },
-        "reads\/read_estj_t_02.json": {
-            "sha256": "bfecea81c823ccdc892c8d6836be335068d04f21e72f0d698508704583f8de6c",
-            "bytes": 160
-        },
-        "reads\/read_intp_t_02.json": {
-            "sha256": "ed8a547866fd408f9df45fd961b8f608818e3b1c848d680bce7971227bc660d0",
-            "bytes": 160
-        },
-        "reads\/read_intp_a_02.json": {
-            "sha256": "5eeef24b707cdfc4e0d2f9189e5516d7777ea8564099a7a144e052fa1af25121",
-            "bytes": 160
-        },
-        "reads\/read_enfp_a_01.json": {
-            "sha256": "5b936a50c71ff777dd6123a5b1b0e07167859d49b20892e019cf95c036d41c61",
-            "bytes": 160
-        },
-        "reads\/read_enfp_t_01.json": {
-            "sha256": "266bc45d7b81fd8ef29bdfea03a8675b20cb5cf0c9f3e7f355a75356c1d52e6b",
-            "bytes": 160
-        },
-        "reads\/read_isfj_t_01.json": {
-            "sha256": "14e7a8a5a04a87725fba004363bef42c0f77ee0d87ad82316dcfa7bc38ce40b9",
-            "bytes": 160
-        },
-        "reads\/read_isfj_a_01.json": {
-            "sha256": "720ffe8d85997fd1fee707487fb5731cc70fd0cb9d8c698db243a3c7d8cdfa4d",
-            "bytes": 160
-        },
-        "reads\/read_infj_a_02.json": {
-            "sha256": "e4ef5920b4dfada2a91a8ace15f9d5f74f15edd7723053bc09acd8e81f63b181",
-            "bytes": 160
-        },
-        "reads\/read_infj_t_02.json": {
-            "sha256": "73762587c75d84454cb1f62075df262bbb1749105818be94811586f80f642313",
-            "bytes": 160
-        },
-        "reads\/read_esfp_t_02.json": {
-            "sha256": "edad9fee807f1d06dfceae5a8d91a427dc6990644a24f07e15a1b2f7cfecf14b",
-            "bytes": 160
-        },
-        "reads\/read_esfp_a_02.json": {
-            "sha256": "6eb9e631b3cb476f30c281d5d23810f6b61f95216b7a9c91c33956c019b8db3e",
-            "bytes": 160
-        },
-        "reads\/read_istp_a_01.json": {
-            "sha256": "533e8ccefa36345cac08c07533e4bf2904a4aa610135499a1c7a9e76e8c2c8a8",
-            "bytes": 160
-        },
-        "reads\/read_istp_t_01.json": {
-            "sha256": "c7160a96a8743fbd45296d9ccb288299667a6799096bd5d307cacdef741a2b55",
-            "bytes": 160
-        },
-        "reads\/read_entj_t_01.json": {
-            "sha256": "2a1a5d5487dd96c77c4aca7496471c2fc9547d3d8b173731f08d169707d38999",
-            "bytes": 160
-        },
-        "reads\/read_entj_a_01.json": {
-            "sha256": "1790f189e43d25c435a6a25a12ed4f7d739f1e36035e2a0e102f5d099215d4c1",
-            "bytes": 160
-        },
-        "reads\/read_infp_a_01.json": {
-            "sha256": "22b3c1aa3544814d23d5d4f88954c2ee5956a804c9b68e82bee55e386e89b5cd",
-            "bytes": 160
-        },
-        "reads\/read_infp_t_01.json": {
-            "sha256": "76b9eaa85ed754e8519b07749aff1dfccd017ada1b0c8eac8e7c08875a759ea7",
-            "bytes": 160
-        },
-        "reads\/read_esfj_t_01.json": {
-            "sha256": "43d2c55d5fbd15a69e85bccd13e40f770ef5e78fc52eee4ce615b9f499bad95a",
-            "bytes": 160
-        },
-        "reads\/read_esfj_a_01.json": {
-            "sha256": "7def9c8f5bcd95f31642b2c1fe640108beb46f59c8d7a0c2f9dabd43ef5ba53e",
-            "bytes": 160
-        },
-        "reads\/read_istj_a_02.json": {
-            "sha256": "523bcf08460b48784043365b82775a349b57865f3c3abf1fc0b534ec68d00aa7",
-            "bytes": 160
-        },
-        "reads\/read_istj_t_02.json": {
-            "sha256": "47da514e85bc8412e61863ed0349017fc7bdeac90d8d7635c6a694c2441c7e30",
-            "bytes": 160
-        },
-        "reads\/read_entp_t_02.json": {
-            "sha256": "b09c7c68561ea65a34ee4e30b65cc18439b1eddf629387435b561e31281805be",
-            "bytes": 160
-        },
-        "reads\/read_entp_a_02.json": {
-            "sha256": "a2e6ccb39889d08164eab6ee0062c520726a01e9f8153934a1b55204fd3819be",
-            "bytes": 160
-        },
-        "reads\/read_estp_a_01.json": {
-            "sha256": "8f15f6a6199c034f885b6588df46759efccbaa4c901f2142ff3df8db78d2de01",
-            "bytes": 160
-        },
-        "reads\/read_estp_t_01.json": {
-            "sha256": "20df49977f1787ca81d350385aec3e15ff8c3d894d20b0d5bfc2265a95c83ced",
-            "bytes": 160
-        },
-        "reads\/read_intj_t_01.json": {
-            "sha256": "80d842867120b0d763a42ca5e17c8610f70fd373319b36cbf23b787745d82383",
-            "bytes": 160
-        },
-        "reads\/read_intj_a_01.json": {
-            "sha256": "945a5aecb5de6dd4ad66672acdbd68e2df0e7412a68a1ad11eb63c932e02682c",
-            "bytes": 160
-        },
-        "reads\/read_enfj_a_02.json": {
-            "sha256": "0368a6dc893d9bcdd27f5ebfc89780cef9ec6246180ec70b0b00481ef2344b20",
-            "bytes": 160
-        },
-        "reads\/read_enfj_t_02.json": {
-            "sha256": "9a53c1691efabe16f0b35373a52d6777b2b3e6435be83549ad8691f630936016",
-            "bytes": 160
-        },
-        "reads\/read_isfp_t_02.json": {
-            "sha256": "fe8398821e5aac3e1aedd736c421ca16129d8373232ca35e81483321db40d596",
-            "bytes": 160
-        },
-        "reads\/read_isfp_a_02.json": {
-            "sha256": "1f7f102d5dff7e37da485c6cc0cbf7c4e1e28651ebb5b68d18edf6abfd94d471",
-            "bytes": 160
-        },
-        "reads\/read_enfj_a_01.json": {
-            "sha256": "4b3732ec913c63eb42ddeaad55d00366d4e523e53d82c47349d7b52ab48f7eb2",
-            "bytes": 160
-        },
-        "reads\/read_enfj_t_01.json": {
-            "sha256": "b989dacf70e5fd8187cf22742ca8dacab9ece757f287f52903cac4e595147c66",
-            "bytes": 160
-        },
-        "reads\/read_isfp_t_01.json": {
-            "sha256": "d932085f95b5c451c986a53be282193a6d5906c0d59742ea79fb3efcd1c90679",
-            "bytes": 160
-        },
-        "reads\/read_isfp_a_01.json": {
-            "sha256": "91f07039fe54ac32b2bb88e83c6fdc42273413dc05da5a6e8f1a837f9ca43539",
-            "bytes": 160
-        },
-        "reads\/read_estp_a_02.json": {
-            "sha256": "3865bcdb4283564167367d9ee76a8dfb2f8a776132a038272f8e433acdeabf84",
-            "bytes": 160
-        },
-        "reads\/read_estp_t_02.json": {
-            "sha256": "0be4b1f586ea4f0e0b6b5a19e35ac700aab1101f2969bfba64fc910be04b9dd8",
-            "bytes": 160
-        },
-        "reads\/read_intj_t_02.json": {
-            "sha256": "c657cd2a2e95aeca264faf635a4c9679d5ce1c9aa382716227aff9d720428dcf",
-            "bytes": 160
-        },
-        "reads\/read_intj_a_02.json": {
-            "sha256": "c1fbfcc98bccbd0d0e98e640cff6da5c6d850894465055fa3791f54ba99fde47",
-            "bytes": 160
-        },
-        "reads\/read_istj_a_01.json": {
-            "sha256": "c2d0a38b16df35b2bd167fe28b283e9ab71bfd984d75323c45ed83224314230c",
-            "bytes": 160
-        },
-        "reads\/read_istj_t_01.json": {
-            "sha256": "abb373d5c0fd95802eddc0b8a3c8b59544370ea8537e289d772814f0c9600ee1",
-            "bytes": 160
-        },
-        "reads\/read_entp_t_01.json": {
-            "sha256": "5db899917d3eabed0efae9f03651b934fc5dacba42aa33a228c3ff35e5869ed6",
-            "bytes": 160
-        },
-        "reads\/read_entp_a_01.json": {
-            "sha256": "670b306d3ad2b1291d7e87da16d29b5087cba8ffc5474c499437c7a14876e3b3",
-            "bytes": 160
-        },
-        "reads\/read_infp_a_02.json": {
-            "sha256": "259007de28bf70e036f8bafdcdf31c37ef6cc2ffca14b6d46ff2a23152085bc5",
-            "bytes": 160
-        },
-        "reads\/read_infp_t_02.json": {
-            "sha256": "1ed6931e4cd3e3ea878160568ba5ba3d5949c8eb554605d291b527569b6ee37e",
-            "bytes": 160
-        },
-        "reads\/read_esfj_t_02.json": {
-            "sha256": "d7d9c16a3e681efe62838428169af039db5450d0306161c28ced5c3bb18576be",
-            "bytes": 160
-        },
-        "reads\/read_esfj_a_02.json": {
-            "sha256": "14b85fecddc20c3796ba59187575e70033367318fe35ecf7d7231289b6485a57",
-            "bytes": 160
-        },
-        "reads\/read_istp_a_02.json": {
-            "sha256": "e3502116f93c01ab0cbf2ac3757675d60fa8a99638aaf405674831eba4ebe781",
-            "bytes": 160
-        },
-        "reads\/read_istp_t_02.json": {
-            "sha256": "30604690c08fd0e427c48b1f973aee7b4f60e7b3ed6678ce656c4a3af9fa0931",
-            "bytes": 160
-        },
-        "reads\/read_entj_t_02.json": {
-            "sha256": "9f228249e15a0f105610681db87a0ebe7153880fe0ff6ee90cfc402f56a95d5c",
-            "bytes": 160
-        },
-        "reads\/read_entj_a_02.json": {
-            "sha256": "6cb10c1382c031ca16e78161bcbfb044557faac7df6cdd33aba7b71fa1e9a11b",
-            "bytes": 160
-        },
-        "reads\/read_infj_a_01.json": {
-            "sha256": "8965406d84f897740f08a3eaa591ec7a32665598279ae8f965ab074594cc4863",
-            "bytes": 160
-        },
-        "reads\/read_infj_t_01.json": {
-            "sha256": "06dadf3ac485e36ca2752b7795383cf7620b5572568028ec44636f92a297bd8b",
-            "bytes": 160
-        },
-        "reads\/read_esfp_t_01.json": {
-            "sha256": "61de74de775543ad2dd57941fdb4714cb1c5ddc3d1eebff5cf0a86fb5fffcfaa",
-            "bytes": 160
-        },
-        "reads\/read_esfp_a_01.json": {
-            "sha256": "849d77e7ac0344773eedd213d81b5c7994a0b5a5441bcb16bc360b908fa1a3da",
-            "bytes": 160
-        },
-        "reads\/read_enfp_a_02.json": {
-            "sha256": "6743ad306b11317399cf35ed7e0074f471ad93779329daa3ce8f6c1d6b5c830b",
-            "bytes": 160
-        },
-        "reads\/read_enfp_t_02.json": {
-            "sha256": "704b5d49b55a05f2842f060544d119572f17c2d448bcad8afb08f2965bc77ecf",
-            "bytes": 160
-        },
-        "reads\/read_isfj_t_02.json": {
-            "sha256": "f799f1b0b6968435184e7dd48814a03950c538d98e6af6ff4931d03ac022a35c",
-            "bytes": 160
-        },
-        "reads\/read_isfj_a_02.json": {
-            "sha256": "0f4560a957b60240321ceea14a2d15dbb0893c442e27667cccbe46403277fdd1",
-            "bytes": 160
-        },
-        "reads\/read_estj_a_01.json": {
-            "sha256": "b0be477fb0523a25bc395c37e3db86d32dc81370db499b45ddeb1c7d5419f414",
-            "bytes": 160
-        },
-        "reads\/read_estj_t_01.json": {
-            "sha256": "b8ed83993897aa5b91c72d75c739484174eb331411131fe8b749e53b480f52a1",
-            "bytes": 160
-        },
-        "reads\/read_intp_t_01.json": {
-            "sha256": "00f880e4a72ed00d1a1b280b33cce0b9d60fe4eb8133e5d0e41e68b3ab8a3b5b",
-            "bytes": 160
-        },
-        "reads\/read_intp_a_01.json": {
-            "sha256": "9104a0c5cbf714be9a5f4003085a75e0abb1953b5585a396d673938926c3fdfd",
-            "bytes": 160
-        },
-        "report_highlights_pools.json": {
-            "sha256": "c44345b3ef62923eb10724739eefd9450913c017a114ef935295514da680e2fc",
-            "bytes": 54387
-        },
-        "ai_spec.json": {
-            "sha256": "0972a0d145e0a5f41ac7dfe6b6d422ddc385e9465342a0a2782bfc20dfe86439",
-            "bytes": 1119
-        },
-        "report_roles.json": {
-            "sha256": "db38cbf28034706797b91d86b26ef6438c7e67d2943ece0edd3406546d7ca1f7",
-            "bytes": 1477
-        },
-        "telemetry_spec.json": {
-            "sha256": "7a48857bb06cdb657a4bef9931c7326bcf99ff678dff028f7a588e3c8ee1c6ca",
-            "bytes": 1354
-        },
-        "report_highlights_rules.json": {
-            "sha256": "5440e0d33e4e10fcccd7340cc62fe44ffd0102b632986bb31b56a93a09b4d332",
-            "bytes": 7919
-        },
-        "type_profiles.json": {
-            "sha256": "71e3c5253ce404e26537c11032dce6fcdc7b43490699cd269942880cc8d1461b",
-            "bytes": 15950
-        },
-        "manifest.json": {
-            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-            "bytes": 0
-        },
-        "report_recommended_reads.json": {
-            "sha256": "8c59e4e67ae99996924aa64e73f8604b1ee45450aba8d43328ec8f252b253b67",
-            "bytes": 136674
-        },
-        "report_strategies.json": {
-            "sha256": "9a5755e98ab6f7020405d92b2bed232d40c11c361f058a5b9ef0a759a80eeb15",
-            "bytes": 1416
-        },
-        "quality_checks.json": {
-            "sha256": "711cf4457754374dbdee647a7758d51da68e07d02a70dc361e55bf87d04c71f2",
-            "bytes": 693
-        },
-        "interpretation_spec.json": {
-            "sha256": "570fd7b8ecdbdf896b5820eb6b94ff0e5010a112e2581f9067465f8cdc6dfd82",
-            "bytes": 349
-        },
-        "report_cards_fallback_career.json": {
-            "sha256": "ea3d12da09687d01e87e4fe15a7a671bcd96e3a86186b4cc26c47dff2c4ac8c3",
-            "bytes": 2475
-        },
-        "identity_layers.json": {
-            "sha256": "c7096725c2bbecf7eb6f0d2ca94aef190860b980e23c39e6afdf1123d3e8754c",
-            "bytes": 575
-        },
-        "report_cards_career.json": {
-            "sha256": "61b80e42eae03b71d775adb31211cf6129a2bbd5dafd11e6865553a5c3659728",
-            "bytes": 20427
-        },
-        "report_highlights_templates.json": {
-            "sha256": "26f6d38f90197e30e8458d40965ecec33fd1141a29ab19a4cfa5464cdc991a3e",
-            "bytes": 32879
-        },
-        "audit_spec.json": {
-            "sha256": "e7366858e9b41459e564afd519658ce2a33e4b823b7ad732c1971ef4cdf18c87",
-            "bytes": 1099
-        },
-        "report_borderline_notes.json": {
-            "sha256": "e508d36bf2f8e14bd8d915243a8cf817df87805da1c0120b4a8f313919a62967",
-            "bytes": 9017
-        },
-        "strategy_cards\/sc_empathy_listen.json": {
-            "sha256": "b6df407bebc83833dcee0dede8ed0841d6ffb499d84d8b2215cf3a85de1a410b",
-            "bytes": 195
-        },
-        "strategy_cards\/sc_resilience_bounce.json": {
-            "sha256": "3768e06ea3e4e1c54ba8a0af8c859533fa3c5ea2f47e65d9207ac826cedefebc",
-            "bytes": 209
-        },
-        "strategy_cards\/sc_focus_execute.json": {
-            "sha256": "8259ebf4f978ce7bbeebffa10f98caf6ba7071a6e069ed2ee16c859dcdb792aa",
-            "bytes": 203
-        },
-        "strategy_cards\/sc_recovery_routine.json": {
-            "sha256": "6533b9d8109cdcac835670315120b81eb1a9726615181405a5e8fe7497b4745f",
-            "bytes": 200
-        },
-        "strategy_cards\/sc_perspective_shift.json": {
-            "sha256": "123e4a121785660fbb743199bdfe7b6d9382ac0c71c78da676722804f125d111",
-            "bytes": 200
-        },
-        "strategy_cards\/sc_plan_small.json": {
-            "sha256": "ebcc2eb02e007206091699b3cb82e060293f9f43bda92092fe8ed26b4ba77d07",
-            "bytes": 198
-        },
-        "report_highlights.json": {
-            "sha256": "0382bea119b037cf3cc2b4a44a4194d0b9d1096ff0595395217c8be47f5591ec",
-            "bytes": 882
+    "capabilities": {
+        "questions": true,
+        "type_profiles": true,
+        "cards": true,
+        "highlights": true,
+        "reads": true,
+        "borderline": true,
+        "identity": true,
+        "overrides": true,
+        "rules": true,
+        "disclaimers": false,
+        "share_templates": true,
+        "content_graph": true
+    },
+    "schemas": {
+        "questions": "fap.questions.v1",
+        "type_profiles": "fap.type_profiles.v1",
+        "cards": "fap.report.cards.v1",
+        "fallback_cards": "fap.report.cards.fallback.v1",
+        "share_templates": "fap.share_templates.v1",
+        "highlights": "fap.report.highlights.v1",
+        "highlights_pools": "fap.report.highlights.pools.v1",
+        "highlights_rules": "fap.report.highlights.rules.v1",
+        "reads": "fap.report.reads.v2",
+        "borderline_templates": "fap.report.borderline_templates.v1",
+        "borderline_notes": "fap.report.borderline_notes.v1",
+        "identity_cards": "fap.report.identity_cards.v1",
+        "identity_layers": "fap.report.identity_layers.v1",
+        "roles": "fap.report.roles.v1",
+        "strategies": "fap.report.strategies.v1",
+        "overrides_unified": "fap.report.overrides.v1",
+        "overrides_highlights_legacy": "fap.report.highlights.overrides.v1",
+        "rules": "fap.report.rules.v1",
+        "section_policies": "fap.report.section_policies.v1"
+    },
+    "assets": {
+        "questions": [
+            "questions.json"
+        ],
+        "reads": [
+            "reads/read_enfj_a_01.json",
+            "reads/read_enfj_a_02.json",
+            "reads/read_enfj_t_01.json",
+            "reads/read_enfj_t_02.json",
+            "reads/read_enfp_a_01.json",
+            "reads/read_enfp_a_02.json",
+            "reads/read_enfp_t_01.json",
+            "reads/read_enfp_t_02.json",
+            "reads/read_entj_a_01.json",
+            "reads/read_entj_a_02.json",
+            "reads/read_entj_t_01.json",
+            "reads/read_entj_t_02.json",
+            "reads/read_entp_a_01.json",
+            "reads/read_entp_a_02.json",
+            "reads/read_entp_t_01.json",
+            "reads/read_entp_t_02.json",
+            "reads/read_esfj_a_01.json",
+            "reads/read_esfj_a_02.json",
+            "reads/read_esfj_t_01.json",
+            "reads/read_esfj_t_02.json",
+            "reads/read_esfp_a_01.json",
+            "reads/read_esfp_a_02.json",
+            "reads/read_esfp_t_01.json",
+            "reads/read_esfp_t_02.json",
+            "reads/read_estj_a_01.json",
+            "reads/read_estj_a_02.json",
+            "reads/read_estj_t_01.json",
+            "reads/read_estj_t_02.json",
+            "reads/read_estp_a_01.json",
+            "reads/read_estp_a_02.json",
+            "reads/read_estp_t_01.json",
+            "reads/read_estp_t_02.json",
+            "reads/read_infj_a_01.json",
+            "reads/read_infj_a_02.json",
+            "reads/read_infj_t_01.json",
+            "reads/read_infj_t_02.json",
+            "reads/read_infp_a_01.json",
+            "reads/read_infp_a_02.json",
+            "reads/read_infp_t_01.json",
+            "reads/read_infp_t_02.json",
+            "reads/read_intj_a_01.json",
+            "reads/read_intj_a_02.json",
+            "reads/read_intj_t_01.json",
+            "reads/read_intj_t_02.json",
+            "reads/read_intp_a_01.json",
+            "reads/read_intp_a_02.json",
+            "reads/read_intp_t_01.json",
+            "reads/read_intp_t_02.json",
+            "reads/read_isfj_a_01.json",
+            "reads/read_isfj_a_02.json",
+            "reads/read_isfj_t_01.json",
+            "reads/read_isfj_t_02.json",
+            "reads/read_isfp_a_01.json",
+            "reads/read_isfp_a_02.json",
+            "reads/read_isfp_t_01.json",
+            "reads/read_isfp_t_02.json",
+            "reads/read_istj_a_01.json",
+            "reads/read_istj_a_02.json",
+            "reads/read_istj_t_01.json",
+            "reads/read_istj_t_02.json",
+            "reads/read_istp_a_01.json",
+            "reads/read_istp_a_02.json",
+            "reads/read_istp_t_01.json",
+            "reads/read_istp_t_02.json",
+            "report_recommended_reads.json"
+        ],
+        "highlights": [
+            "report_highlights.json",
+            "report_highlights_policy.json",
+            "report_highlights_pools.json",
+            "report_highlights_rules.json",
+            "report_highlights_templates.json"
+        ],
+        "identity": [
+            "identity_layers.json",
+            "report_identity_cards.json",
+            "report_roles.json",
+            "report_strategies.json"
+        ],
+        "rules": [
+            "report_rules.json"
+        ],
+        "share_templates": [
+            "share_templates/wechat_default.json"
+        ],
+        "assets": [
+            "assets/share/mbti_cover_source.png",
+            "assets/share/mbti_square_600x600.png",
+            "assets/share/mbti_wide_1200x630.png"
+        ],
+        "fallback_cards": [
+            "report_cards_fallback_career.json",
+            "report_cards_fallback_growth.json",
+            "report_cards_fallback_relationships.json",
+            "report_cards_fallback_stress_recovery.json",
+            "report_cards_fallback_traits.json"
+        ],
+        "cards": [
+            "report_cards_career.json",
+            "report_cards_growth.json",
+            "report_cards_relationships.json",
+            "report_cards_stress_recovery.json",
+            "report_cards_traits.json"
+        ],
+        "type_profiles": [
+            "type_profiles.json"
+        ],
+        "section_policies": [
+            "report_section_policies.json"
+        ],
+        "overrides": {
+            "order": [
+                "unified"
+            ],
+            "unified": [
+                "report_overrides.json"
+            ]
+        }
+    },
+    "overrides": {
+        "apply_order": [
+            "cards",
+            "highlights",
+            "reads"
+        ],
+        "merge_policy": {
+            "default": "merge",
+            "replace_fields_supported": true
         }
     }
 }

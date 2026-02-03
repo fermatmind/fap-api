@@ -1,14 +1,21 @@
 # PR27 Verify
 
-- Date: 2026-02-02
+- Date: 2026-02-03
 - Env: local
 - Commands:
+  - bash backend/scripts/ci_selfcheck_packs.sh
   - bash backend/scripts/pr27_accept.sh
   - bash backend/scripts/ci_verify_mbti.sh
-  - php artisan test --filter=V0_3
 - Results:
+  - ci_selfcheck_packs: PASS
   - pr27_accept: PASS
   - ci_verify_mbti: PASS
-  - test --filter=V0_3: PASS
+- Active packs (selfcheck gate):
+  - default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2
+  - default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO
+  - default/CN_MAINLAND/zh-CN/SIMPLE-SCORE-CN-v0.3.0-DEMO
+  - default/CN_MAINLAND/zh-CN/DEMO-ANSWERS-CN-v0.3.0-DEMO
+- Deprecated handling:
+  - Deprecated packs (e.g. MBTI-CN-v0.2.1-TEST) are excluded from strict-assets gate.
 - Artifacts:
   - backend/artifacts/pr27/summary.txt

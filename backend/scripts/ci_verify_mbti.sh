@@ -11,6 +11,8 @@ export FAP_NONINTERACTIVE=1
 export COMPOSER_NO_INTERACTION=1
 export GIT_TERMINAL_PROMPT=0
 export NO_COLOR=1
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/tmp/psysh_config}"
+mkdir -p "$XDG_CONFIG_HOME" || true
 
 # DB (force CI sqlite)
 export APP_ENV="${APP_ENV:-testing}"
@@ -27,8 +29,8 @@ export FAP_S3_PREFIX="${FAP_S3_PREFIX:-content_packages/}"
 # MBTI defaults (avoid resolver picking default)
 export FAP_DEFAULT_REGION=CN_MAINLAND
 export FAP_DEFAULT_LOCALE=zh-CN
-export FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.2.1-TEST
-export FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.2.1-TEST
+export FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.2.2
+export FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.2.2
 
 # -----------------------------
 # Auth header holder (must be defined under -u)
@@ -54,15 +56,15 @@ bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
 # Defaults (override via env)
 # -----------------------------
 HOST="${HOST:-127.0.0.1}"
-PORT="${PORT:-18000}"                      # ✅ avoid 8000 collisions by default
+PORT="${PORT:-1827}"                       # ✅ avoid 8000 collisions by default
 API="http://${HOST}:${PORT}"
 
 REGION="${REGION:-CN_MAINLAND}"
 LOCALE="${LOCALE:-zh-CN}"
 
 # Your stable pack identifiers
-PACK_ID="${PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.1-TEST}"
-LEGACY_DIR="${LEGACY_DIR:-MBTI-CN-v0.2.1-TEST}"
+PACK_ID="${PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.2}"
+LEGACY_DIR="${LEGACY_DIR:-MBTI-CN-v0.2.2}"
 
 # Artifacts
 RUN_DIR="${RUN_DIR:-$BACKEND_DIR/artifacts/verify_mbti}"
@@ -162,7 +164,6 @@ echo "[CI] mvp_strict=$MVP_STRICT"
 # -----------------------------
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[CI][FAIL] missing cmd: $1" >&2; exit 2; }; }
 need_cmd curl
-need_cmd jq
 need_cmd php
 need_cmd grep
 need_cmd sed
@@ -210,7 +211,7 @@ fetch_authed_json() {
 
 # -----------------------------
 # Ensure legacy alias exists (CI runner usually doesn't have it)
-#   ../content_packages/MBTI-CN-v0.2.1-TEST -> default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+#   ../content_packages/MBTI-CN-v0.2.2 -> default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2
 # -----------------------------
 CONTENT_ROOT="$REPO_DIR/content_packages"
 CANON_REL="default/${REGION}/${LOCALE}/${LEGACY_DIR}"
@@ -270,8 +271,24 @@ if [[ "$strategy_count" == "0" ]]; then fail "no strategy_cards json files found
 if [[ "$reads_count" == "0" ]]; then fail "no reads json files found in $READS_DIR"; fi
 
 # role_type_codes：兼容两种字段：type_code / type_codes[]
-role_type_codes="$(jq -r '(.type_code? // empty), (.type_codes[]? // empty)' "$ROLE_DIR"/*.json \
-  | sed '/^$/d' | sort -u)"
+role_type_codes="$(php -r '
+$codes = [];
+foreach (glob($argv[1]."/*.json") as $f) {
+  $j = json_decode(file_get_contents($f), true);
+  if (!is_array($j)) { continue; }
+  $tc = $j["type_code"] ?? null;
+  if (is_string($tc) && $tc !== "") { $codes[] = $tc; }
+  $tcs = $j["type_codes"] ?? null;
+  if (is_array($tcs)) {
+    foreach ($tcs as $c) {
+      if (is_string($c) && $c !== "") { $codes[] = $c; }
+    }
+  }
+}
+$codes = array_values(array_unique($codes));
+sort($codes, SORT_STRING);
+echo implode("\n", $codes);
+' "$ROLE_DIR")"
 
 expected_type_codes="$(
   cat <<'EOF'
@@ -319,34 +336,80 @@ while IFS= read -r code; do
 done <<<"$expected_type_codes"
 
 # samples（固定排序取前 N；不使用数组变量）
-role_sample_json="$(jq -r '.id' "$ROLE_DIR"/*.json | sort | head -n 5 | jq -R . | jq -s .)"
-strategy_sample_json="$(jq -r '.id' "$STRATEGY_DIR"/*.json | sort | head -n 5 | jq -R . | jq -s .)"
-read_sample_json="$(jq -r '.id' "$READS_DIR"/*.json | sort | head -n 8 | jq -R . | jq -s .)"
-missing_json="$(printf '%s' "$missing_lines" | sed '/^$/d' | jq -R . | jq -s .)"
+role_sample_json="$(php -r '
+$ids = [];
+foreach (glob($argv[1]."/*.json") as $f) {
+  $j = json_decode(file_get_contents($f), true);
+  if (!is_array($j)) { continue; }
+  $id = $j["id"] ?? null;
+  if (is_string($id) && $id !== "") { $ids[] = $id; }
+}
+$ids = array_values(array_unique($ids));
+sort($ids, SORT_STRING);
+$ids = array_slice($ids, 0, 5);
+echo json_encode($ids, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+' "$ROLE_DIR")"
+strategy_sample_json="$(php -r '
+$ids = [];
+foreach (glob($argv[1]."/*.json") as $f) {
+  $j = json_decode(file_get_contents($f), true);
+  if (!is_array($j)) { continue; }
+  $id = $j["id"] ?? null;
+  if (is_string($id) && $id !== "") { $ids[] = $id; }
+}
+$ids = array_values(array_unique($ids));
+sort($ids, SORT_STRING);
+$ids = array_slice($ids, 0, 5);
+echo json_encode($ids, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+' "$STRATEGY_DIR")"
+read_sample_json="$(php -r '
+$ids = [];
+foreach (glob($argv[1]."/*.json") as $f) {
+  $j = json_decode(file_get_contents($f), true);
+  if (!is_array($j)) { continue; }
+  $id = $j["id"] ?? null;
+  if (is_string($id) && $id !== "") { $ids[] = $id; }
+}
+$ids = array_values(array_unique($ids));
+sort($ids, SORT_STRING);
+$ids = array_slice($ids, 0, 8);
+echo json_encode($ids, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+' "$READS_DIR")"
+missing_json="$(printf '%s' "$missing_lines" | php -r '
+$lines = file("php://stdin", FILE_IGNORE_NEW_LINES);
+$lines = array_values(array_filter($lines, "strlen"));
+echo json_encode($lines, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+')"
 
-jq -n \
-  --argjson role_count "$role_count" \
-  --argjson strategy_count "$strategy_count" \
-  --argjson reads_count "$reads_count" \
-  --argjson missing_role_codes "$missing_json" \
-  --argjson role_sample "$role_sample_json" \
-  --argjson strategy_sample "$strategy_sample_json" \
-  --argjson read_sample "$read_sample_json" \
-  '{
-    counts: {
-      role_cards: $role_count,
-      strategy_cards: $strategy_count,
-      reads: $reads_count
-    },
-    missing: {
-      role_cards: $missing_role_codes
-    },
-    sample: {
-      role_cards: $role_sample,
-      strategy_cards: $strategy_sample,
-      reads: $read_sample
-    }
-  }' >"$INVENTORY_JSON"
+php -r '
+$role_count = (int) $argv[1];
+$strategy_count = (int) $argv[2];
+$reads_count = (int) $argv[3];
+$missing = json_decode($argv[4], true);
+$role_sample = json_decode($argv[5], true);
+$strategy_sample = json_decode($argv[6], true);
+$read_sample = json_decode($argv[7], true);
+if (!is_array($missing)) { $missing = []; }
+if (!is_array($role_sample)) { $role_sample = []; }
+if (!is_array($strategy_sample)) { $strategy_sample = []; }
+if (!is_array($read_sample)) { $read_sample = []; }
+$out = [
+  "counts" => [
+    "role_cards" => $role_count,
+    "strategy_cards" => $strategy_count,
+    "reads" => $reads_count,
+  ],
+  "missing" => [
+    "role_cards" => $missing,
+  ],
+  "sample" => [
+    "role_cards" => $role_sample,
+    "strategy_cards" => $strategy_sample,
+    "reads" => $read_sample,
+  ],
+];
+echo json_encode($out, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+' "$role_count" "$strategy_count" "$reads_count" "$missing_json" "$role_sample_json" "$strategy_sample_json" "$read_sample_json" >"$INVENTORY_JSON"
 
 echo "[CI] content graph inventory -> $INVENTORY_JSON"
 echo "[CI] counts: role_cards=$role_count strategy_cards=$strategy_count reads=$reads_count"
@@ -371,8 +434,9 @@ if (( reads_count < 60 )); then
 fi
 
 # -----------------------------
-# Start server (fail fast if port in use)
+# Start server (force clean port first)
 # -----------------------------
+lsof -ti "tcp:${PORT}" | xargs -r kill -9 || true
 if lsof -ti "tcp:${PORT}" >/dev/null 2>&1; then
   fail "port already in use: ${PORT}. Stop your local server or set PORT=18xxx"
 fi
@@ -402,8 +466,9 @@ echo "[CI] server ready (pid=$SERVE_PID)"
 # -----------------------------
 # Self-check: manifest/assets/schema
 # -----------------------------
-echo "[CI] fap:self-check (manifest/assets/schema)"
-php artisan fap:self-check >"$SELF_CHECK_LOG" 2>&1 || {
+SELF_CHECK_PKG="${SELF_CHECK_PKG:-$CANON_REL}"
+echo "[CI] fap:self-check (manifest/assets/schema) pkg=$SELF_CHECK_PKG"
+php artisan fap:self-check --pkg="$SELF_CHECK_PKG" >"$SELF_CHECK_LOG" 2>&1 || {
   echo "[CI][FAIL] self-check failed"
   tail -n 220 "$SELF_CHECK_LOG" >&2 || true
   exit 12
@@ -477,7 +542,7 @@ curl -fsS "$API/api/v0.2/scales/MBTI/questions" >"$SMOKE_Q_LOG" || {
   exit 13
 }
 
-if ! jq -e '.ok==true' "$SMOKE_Q_LOG" >/dev/null 2>&1; then
+if ! php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$SMOKE_Q_LOG" >/dev/null 2>&1; then
   echo "[CI][FAIL] smoke returned ok=false. body:"
   head -c 1200 "$SMOKE_Q_LOG" || true
   echo
@@ -495,7 +560,7 @@ FM_TOKEN="$(
   curl -sS -X POST "$API/api/v0.2/auth/wx_phone" \
     -H "Content-Type: application/json" \
     -d '{"wx_code":"dev","phone_code":"dev","anon_id":"ci_verify"}' \
-  | jq -r .token
+  | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["token"] ?? "";'
 )"
 
 if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then
@@ -534,31 +599,61 @@ if [[ "${CONTENT_GRAPH_ENABLED:-0}" == "1" ]]; then
   fetch_authed_json "$REPORT_URL" "$RR_REPORT_1"
   fetch_authed_json "$REPORT_URL" "$RR_REPORT_2"
 
+  rr_count=""
   for f in "$RR_REPORT_1" "$RR_REPORT_2"; do
-    if ! jq -e '.report.recommended_reads | type=="array"' "$f" >/dev/null 2>&1; then
-      fail "report.recommended_reads missing or not array (CONTENT_GRAPH_ENABLED=1). file=$f"
-    fi
-
-    rr_count="$(jq -r '.report.recommended_reads | length' "$f")"
-    if (( rr_count < 3 || rr_count > 6 )); then
-      fail "report.recommended_reads count out of range: $rr_count (expect 3-6). file=$f"
-    fi
-
+    out="$RR_LIST_2"
     if [[ "$f" == "$RR_REPORT_1" ]]; then
-      jq -c '[.report.recommended_reads[] | {id,type,slug,why,show_order}]' "$f" >"$RR_LIST_1"
-    else
-      jq -c '[.report.recommended_reads[] | {id,type,slug,why,show_order}]' "$f" >"$RR_LIST_2"
+      out="$RR_LIST_1"
     fi
-done
-
-  first_json="$(cat "$RR_LIST_1")"
-  second_json="$(cat "$RR_LIST_2")"
-  jq -n --argjson first "$first_json" --argjson second "$second_json" \
-      '{first:$first, second:$second}' >"$RR_COMPARE"
-
-    if ! cmp -s "$RR_LIST_1" "$RR_LIST_2"; then
-      fail "recommended_reads unstable across calls (see $RR_COMPARE)"
+    set +e
+    rr_out="$(php -r '
+$path = $argv[1];
+$out = $argv[2];
+$j = json_decode(file_get_contents($path), true);
+if (!is_array($j)) { exit(2); }
+$rr = $j["report"]["recommended_reads"] ?? null;
+if (!is_array($rr)) { exit(3); }
+$len = count($rr);
+if ($len < 3 || $len > 6) { echo $len; exit(4); }
+$list = [];
+foreach ($rr as $item) {
+  if (!is_array($item)) { continue; }
+  $list[] = [
+    "id" => $item["id"] ?? null,
+    "type" => $item["type"] ?? null,
+    "slug" => $item["slug"] ?? null,
+    "why" => $item["why"] ?? null,
+    "show_order" => $item["show_order"] ?? null,
+  ];
+}
+file_put_contents($out, json_encode($list, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+echo $len;
+' "$f" "$out")"
+    php_ec=$?
+    set -e
+    if [[ "$php_ec" -ne 0 ]]; then
+      if [[ "$php_ec" -eq 3 ]]; then
+        fail "report.recommended_reads missing or not array (CONTENT_GRAPH_ENABLED=1). file=$f"
+      fi
+      if [[ "$php_ec" -eq 4 ]]; then
+        fail "report.recommended_reads count out of range: $rr_out (expect 3-6). file=$f"
+      fi
+      fail "report.recommended_reads parse failed (CONTENT_GRAPH_ENABLED=1). file=$f"
     fi
+    rr_count="$rr_out"
+  done
+
+  php -r '
+$a = json_decode(file_get_contents($argv[1]), true);
+$b = json_decode(file_get_contents($argv[2]), true);
+if (!is_array($a)) { $a = []; }
+if (!is_array($b)) { $b = []; }
+echo json_encode(["first" => $a, "second" => $b], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+' "$RR_LIST_1" "$RR_LIST_2" >"$RR_COMPARE"
+
+  if ! cmp -s "$RR_LIST_1" "$RR_LIST_2"; then
+    fail "recommended_reads unstable across calls (see $RR_COMPARE)"
+  fi
 
   echo "[CI] content_graph stability OK (recommended_reads count=$rr_count)"
 else
@@ -569,25 +664,35 @@ else
     REPORT_JSON="$RR_REPORT_1"
   fi
 
-  if jq -e '.report | has("recommended_reads") and (.recommended_reads | type!="array" and . != null)' "$REPORT_JSON" >/dev/null 2>&1; then
-    fail "report.recommended_reads present but not array (CONTENT_GRAPH_ENABLED=0). file=$REPORT_JSON"
-  fi
-  if jq -e '.report.recommended_reads? | type=="array" and length>0' "$REPORT_JSON" >/dev/null 2>&1; then
-    fail "report.recommended_reads should be empty or missing when CONTENT_GRAPH_ENABLED=0. file=$REPORT_JSON"
+  set +e
+  rr_meta="$(php -r '
+$path = $argv[1];
+$out = $argv[2];
+$j = json_decode(file_get_contents($path), true);
+if (!is_array($j)) { exit(2); }
+$report = $j["report"] ?? [];
+$has = is_array($report) && array_key_exists("recommended_reads", $report);
+$rr = is_array($report) ? ($report["recommended_reads"] ?? null) : null;
+if ($rr !== null && !is_array($rr)) { exit(3); }
+if (is_array($rr) && count($rr) > 0) { exit(4); }
+$len = is_array($rr) ? count($rr) : 0;
+$payload = ["has_recommended_reads" => $has, "recommended_reads_length" => $len];
+file_put_contents($out, json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+echo ($has ? "1" : "0") . ":" . $len;
+' "$REPORT_JSON" "$RR_ROLLBACK")"
+  php_ec=$?
+  set -e
+  if [[ "$php_ec" -ne 0 ]]; then
+    if [[ "$php_ec" -eq 3 ]]; then
+      fail "report.recommended_reads present but not array (CONTENT_GRAPH_ENABLED=0). file=$REPORT_JSON"
+    fi
+    if [[ "$php_ec" -eq 4 ]]; then
+      fail "report.recommended_reads should be empty or missing when CONTENT_GRAPH_ENABLED=0. file=$REPORT_JSON"
+    fi
+    fail "report.recommended_reads parse failed (CONTENT_GRAPH_ENABLED=0). file=$REPORT_JSON"
   fi
 
-  rr_len="$(jq -r '.report.recommended_reads? | length // 0' "$REPORT_JSON")"
-  has_rr="false"
-  if jq -e '.report | has("recommended_reads")' "$REPORT_JSON" >/dev/null 2>&1; then
-    has_rr="true"
-  fi
-
-  jq -n \
-    --argjson has_rr "$has_rr" \
-    --argjson rr_len "$rr_len" \
-    '{has_recommended_reads: $has_rr, recommended_reads_length: $rr_len}' \
-    >"$RR_ROLLBACK"
-
+  rr_len="${rr_meta#*:}"
   echo "[CI] content_graph rollback OK (recommended_reads length=$rr_len)"
 fi
 
