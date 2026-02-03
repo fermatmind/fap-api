@@ -91,7 +91,13 @@ export DB_DATABASE="$DB_FILE"
 
 # 强制 content_packs.root 走 repo/content_packages（不依赖本机 .env）
 export FAP_PACKS_ROOT="$REPO_DIR/content_packages"
-export FAP_DEFAULT_PACK_ID="default"
+export FAP_DEFAULT_REGION="CN_MAINLAND"
+export FAP_DEFAULT_LOCALE="zh-CN"
+
+# ✅ PR20（老验收）固定跑 v0.2.1-TEST 的 MBTI 包（避免被 v0.2.2 默认值影响）
+export FAP_DEFAULT_PACK_ID="MBTI.cn-mainland.zh-CN.v0.2.1-TEST"
+export FAP_DEFAULT_DIR_VERSION="MBTI-CN-v0.2.1-TEST"
+export FAP_CONTENT_PACKAGE_VERSION="MBTI-CN-v0.2.1-TEST"
 
 php artisan route:list > "$ART_DIR/routes.txt"
 
@@ -101,7 +107,6 @@ php artisan fap:scales:sync-slugs
 php artisan db:seed --class=Pr19CommerceSeeder
 
 # 创建一个“购买用户”，用它的 token 走 start/submit + 下单
-php -r 'echo "creating pr20 user...\n";' >/dev/null 2>&1 || true
 USER_TOKEN="$(php -r '
 require __DIR__ . "/vendor/autoload.php";
 $app = require __DIR__ . "/bootstrap/app.php";
@@ -147,104 +152,107 @@ curl -sS "$API/api/v0.2/health" >/dev/null 2>&1 || fail "server not ready on $AP
 # ------------------------
 ANON_ID="pr20_local_anon_001"
 
-START_PAYLOAD='{"anon_id":"'"$ANON_ID"'","scale_code":"MBTI","scale_version":"v0.3","question_count":144,"client_platform":"verify","region":"CN_MAINLAND","locale":"zh-CN","duration_ms":1000}'
-curl_json POST "$API/api/v0.3/attempts/start" "$START_PAYLOAD" "$ART_DIR/curl_start_mbti.json" "$USER_TOKEN" || fail "attempts/start failed"
-
-attempt_id="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1],"r",encoding="utf-8")).get("attempt_id",""))' "$ART_DIR/curl_start_mbti.json")"
-[ -n "$attempt_id" ] || fail "attempt_id missing (start_resp=$(cat "$ART_DIR/curl_start_mbti.json" | head -c 600))"
-
+# ✅ 先拉 questions，拿到动态题量（避免写死 144）
 curl_json GET "$API/api/v0.3/scales/MBTI/questions?region=CN_MAINLAND&locale=zh-CN" "" "$ART_DIR/curl_questions_mbti.json" "" || fail "scales/MBTI/questions failed"
 
-# build answers by recursively finding questions list
-python3 - "$ART_DIR/curl_questions_mbti.json" "$ART_DIR/mbti_answers.json" <<'PY'
-import json,sys
-src=sys.argv[1]; out=sys.argv[2]
-data=json.load(open(src,'r',encoding='utf-8'))
+question_count="$(php -r '
+$j=json_decode(file_get_contents($argv[1]), true);
+if (!is_array($j)) { echo "0"; exit; }
+$q=$j["questions"]["items"] ?? $j["questions"] ?? $j["data"] ?? $j;
+echo is_array($q) ? count($q) : 0;
+' "$ART_DIR/curl_questions_mbti.json")"
+[ "${question_count}" != "0" ] || fail "questions count is 0 (bad payload)"
 
-def find_questions(node):
-  if isinstance(node, list):
-    if node and all(isinstance(x, dict) for x in node):
-      ok=True
-      for x in node[:12]:
-        if ('id' not in x and 'question_id' not in x) or ('options' not in x):
-          ok=False
-          break
-      if ok:
-        return node
-    for x in node:
-      r=find_questions(x)
-      if r is not None:
-        return r
-  if isinstance(node, dict):
-    for k in ('questions','items','data','payload','result'):
-      if k in node:
-        r=find_questions(node[k])
-        if r is not None:
-          return r
-    for v in node.values():
-      r=find_questions(v)
-      if r is not None:
-        return r
-  return None
+START_PAYLOAD='{"anon_id":"'"$ANON_ID"'","scale_code":"MBTI","scale_version":"v0.3","question_count":'"$question_count"',"client_platform":"verify","region":"CN_MAINLAND","locale":"zh-CN","duration_ms":1000}'
+curl_json POST "$API/api/v0.3/attempts/start" "$START_PAYLOAD" "$ART_DIR/curl_start_mbti.json" "$USER_TOKEN" || fail "attempts/start failed"
 
-qs=find_questions(data) or []
+attempt_id="$(php -r '
+$j=json_decode(file_get_contents($argv[1]), true);
+echo (string)($j["attempt_id"] ?? "");
+' "$ART_DIR/curl_start_mbti.json")"
+[ -n "$attempt_id" ] || fail "attempt_id missing (start_resp=$(cat "$ART_DIR/curl_start_mbti.json" | head -c 600))"
 
-answer_key=None
-for q in qs:
-  opts=q.get('options') or []
-  if not opts:
-    continue
-  o=opts[0]
-  if 'code' in o:
-    answer_key='code'
-    break
-  if 'option_id' in o or 'id' in o:
-    answer_key='option_id'
-    break
-if answer_key is None:
-  answer_key='code'
+# build answers by recursively finding questions list (php only)
+php -r '
+$src=$argv[1]; $out=$argv[2];
+$data=json_decode(file_get_contents($src), true);
 
-answers=[]
-for q in qs:
-  qid=q.get('id') or q.get('question_id')
-  if not qid:
-    continue
-  opts=q.get('options') or []
-  if not opts:
-    continue
-  o=opts[0]
-  if answer_key=='code':
-    v=o.get('code')
-  else:
-    v=o.get('option_id') or o.get('id')
-  if v is None:
-    continue
-  answers.append({'question_id': qid, answer_key: v})
-
-json.dump({'answer_key':answer_key,'answers':answers}, open(out,'w',encoding='utf-8'), ensure_ascii=False)
-print(len(answers))
-PY
-
-answers_count="$(python3 -c 'import json; print(len(json.load(open("'"$ART_DIR"'/mbti_answers.json","r",encoding="utf-8")).get("answers",[])))')"
-[ "$answers_count" = "144" ] || fail "MBTI answers_count != 144 (got=$answers_count)"
-
-python3 - "$attempt_id" "$ART_DIR/mbti_answers.json" "$ART_DIR/curl_submit_payload_mbti.json" <<'PY'
-import json,sys
-attempt_id=sys.argv[1]
-doc=json.load(open(sys.argv[2],'r',encoding='utf-8'))
-answers=doc.get('answers',[])
-payload={
-  "attempt_id": attempt_id,
-  "answers": answers,
-  "duration_ms": 120000,
-  "client_platform": "verify",
-  "region": "CN_MAINLAND",
-  "locale": "zh-CN",
+function find_questions($node) {
+  if (is_array($node)) {
+    $isList = array_keys($node) === range(0, count($node)-1);
+    if ($isList && count($node) > 0 && is_array($node[0])) {
+      $ok=true;
+      foreach (array_slice($node, 0, min(12, count($node))) as $x) {
+        if (!is_array($x)) { $ok=false; break; }
+        $hasId = array_key_exists("id",$x) || array_key_exists("question_id",$x);
+        $hasOpts = array_key_exists("options",$x);
+        if (!$hasId || !$hasOpts) { $ok=false; break; }
+      }
+      if ($ok) return $node;
+    }
+    foreach ($node as $x) {
+      $r=find_questions($x);
+      if ($r !== null) return $r;
+    }
+  }
+  if (is_array($node) && array_keys($node) !== range(0, count($node)-1)) {
+    foreach (["questions","items","data","payload","result"] as $k) {
+      if (array_key_exists($k,$node)) {
+        $r=find_questions($node[$k]);
+        if ($r !== null) return $r;
+      }
+    }
+    foreach ($node as $v) {
+      $r=find_questions($v);
+      if ($r !== null) return $r;
+    }
+  }
+  return null;
 }
-json.dump(payload, open(sys.argv[3],'w',encoding='utf-8'), ensure_ascii=False)
-PY
 
-# submit（带登录 token，确保链路上的 user_id 一致）
+$qs=find_questions($data) ?? [];
+$answerKey="code";
+foreach ($qs as $q) {
+  $opts=$q["options"] ?? [];
+  if (!is_array($opts) || count($opts)===0) continue;
+  $o=$opts[0];
+  if (is_array($o) && array_key_exists("code",$o)) { $answerKey="code"; break; }
+  if (is_array($o) && (array_key_exists("option_id",$o) || array_key_exists("id",$o))) { $answerKey="option_id"; break; }
+}
+
+$answers=[];
+foreach ($qs as $q) {
+  $qid=$q["id"] ?? ($q["question_id"] ?? null);
+  $opts=$q["options"] ?? [];
+  if (!$qid || !is_array($opts) || count($opts)===0) continue;
+  $o=$opts[0];
+  $v = ($answerKey==="code") ? ($o["code"] ?? null) : ($o["option_id"] ?? ($o["id"] ?? null));
+  if ($v===null) continue;
+  $answers[]=["question_id"=>$qid, $answerKey=>$v];
+}
+
+file_put_contents($out, json_encode(["answer_key"=>$answerKey,"answers"=>$answers], JSON_UNESCAPED_UNICODE));
+echo count($answers);
+' "$ART_DIR/curl_questions_mbti.json" "$ART_DIR/mbti_answers.json" > "$ART_DIR/answers_count.txt"
+
+answers_count="$(cat "$ART_DIR/answers_count.txt" 2>/dev/null || echo "0")"
+[ "$answers_count" = "$question_count" ] || fail "MBTI answers_count != question_count (got=$answers_count expected=$question_count)"
+
+php -r '
+$attemptId=$argv[1];
+$doc=json_decode(file_get_contents($argv[2]), true);
+$answers=$doc["answers"] ?? [];
+$payload=[
+  "attempt_id"=>$attemptId,
+  "answers"=>$answers,
+  "duration_ms"=>120000,
+  "client_platform"=>"verify",
+  "region"=>"CN_MAINLAND",
+  "locale"=>"zh-CN",
+];
+file_put_contents($argv[3], json_encode($payload, JSON_UNESCAPED_UNICODE));
+' "$attempt_id" "$ART_DIR/mbti_answers.json" "$ART_DIR/curl_submit_payload_mbti.json"
+
 http_code="$(curl -sS -o "$ART_DIR/curl_submit_mbti.json" -w "%{http_code}" -X POST "$API/api/v0.3/attempts/submit" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
@@ -261,12 +269,15 @@ fi
 curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_unpaid.json" "" || fail "fetch unpaid report failed"
 
 # ------------------------
-# order + webhook -> entitlement + snapshot（order 用登录 token 创建，webhook 发权益 user_id 不为空）
+# order + webhook -> entitlement + snapshot
 # ------------------------
 ORDER_PAYLOAD='{"sku":"MBTI_REPORT_FULL","quantity":1,"target_attempt_id":"'"$attempt_id"'","provider":"stub","anon_id":"'"$ANON_ID"'"}'
 curl_json POST "$API/api/v0.3/orders" "$ORDER_PAYLOAD" "$ART_DIR/curl_order.json" "$USER_TOKEN" || fail "orders create failed"
 
-order_no="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1],"r",encoding="utf-8")).get("order_no",""))' "$ART_DIR/curl_order.json")"
+order_no="$(php -r '
+$j=json_decode(file_get_contents($argv[1]), true);
+echo (string)($j["order_no"] ?? "");
+' "$ART_DIR/curl_order.json")"
 [ -n "$order_no" ] || fail "order_no missing (order_resp=$(cat "$ART_DIR/curl_order.json" | head -c 600))"
 
 WEBHOOK_PAYLOAD='{"provider_event_id":"evt_pr20_1","order_no":"'"$order_no"'","external_trade_no":"trade_pr20_1","amount_cents":990,"currency":"USD"}'
@@ -285,9 +296,9 @@ if ! diff -q "$ART_DIR/curl_report_paid.json" "$ART_DIR/curl_report_paid_after_u
   diff_result="diff=1"
 fi
 
-unpaid_locked="$(python3 -c 'import json; print(json.load(open("'"$ART_DIR"'/curl_report_unpaid.json","r",encoding="utf-8")).get("locked"))')"
-paid_locked="$(python3 -c 'import json; print(json.load(open("'"$ART_DIR"'/curl_report_paid.json","r",encoding="utf-8")).get("locked"))')"
-paid_after_locked="$(python3 -c 'import json; print(json.load(open("'"$ART_DIR"'/curl_report_paid_after_update.json","r",encoding="utf-8")).get("locked"))')"
+unpaid_locked="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo json_encode($j["locked"] ?? null);' "$ART_DIR/curl_report_unpaid.json")"
+paid_locked="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo json_encode($j["locked"] ?? null);' "$ART_DIR/curl_report_paid.json")"
+paid_after_locked="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo json_encode($j["locked"] ?? null);' "$ART_DIR/curl_report_paid_after_update.json")"
 
 cat > "$SUMMARY_FILE" <<EOF
 pr20_verify_report_paywall
