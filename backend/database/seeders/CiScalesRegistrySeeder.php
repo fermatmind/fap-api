@@ -18,9 +18,15 @@ final class CiScalesRegistrySeeder extends Seeder
         }
 
         $now = now();
-        $defaultPackId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.2');
-        $defaultDirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.2');
-        $demoPackId = (string) config('content_packs.demo_pack_id', '');
+
+        // ✅ 与 ScaleRegistrySeeder 同口径：默认值统一成 v0.2.1-TEST（CI 缺 config 时也不漂移）
+        $defaultPackId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
+        $defaultDirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
+        $defaultRegion = (string) config('content_packs.default_region', 'CN_MAINLAND');
+        $defaultLocale = (string) config('content_packs.default_locale', 'zh-CN');
+
+        // demo pack 维持走 config（仓库里通常是 'default'）
+        $demoPackId = (string) config('content_packs.demo_pack_id', 'default');
 
         $rows = [
             [
@@ -30,8 +36,8 @@ final class CiScalesRegistrySeeder extends Seeder
                 'slugs_json' => json_encode(['mbti'], JSON_UNESCAPED_UNICODE),
                 'driver_type' => 'mbti',
                 'default_pack_id' => $defaultPackId,
-                'default_region' => 'CN_MAINLAND',
-                'default_locale' => 'zh-CN',
+                'default_region' => $defaultRegion,
+                'default_locale' => $defaultLocale,
                 'default_dir_version' => $defaultDirVersion,
                 'is_public' => 1,
                 'is_active' => 1,
@@ -45,8 +51,8 @@ final class CiScalesRegistrySeeder extends Seeder
                 'slugs_json' => json_encode(['demo_answers'], JSON_UNESCAPED_UNICODE),
                 'driver_type' => 'demo_answers',
                 'default_pack_id' => $demoPackId,
-                'default_region' => 'CN_MAINLAND',
-                'default_locale' => 'zh-CN',
+                'default_region' => $defaultRegion,
+                'default_locale' => $defaultLocale,
                 'default_dir_version' => 'DEMO-ANSWERS-CN-v0.3.0-DEMO',
                 'is_public' => 1,
                 'is_active' => 1,
@@ -60,8 +66,8 @@ final class CiScalesRegistrySeeder extends Seeder
                 'slugs_json' => json_encode(['simple_score_demo'], JSON_UNESCAPED_UNICODE),
                 'driver_type' => 'simple_score_demo',
                 'default_pack_id' => $demoPackId,
-                'default_region' => 'CN_MAINLAND',
-                'default_locale' => 'zh-CN',
+                'default_region' => $defaultRegion,
+                'default_locale' => $defaultLocale,
                 'default_dir_version' => 'SIMPLE-SCORE-CN-v0.3.0-DEMO',
                 'is_public' => 1,
                 'is_active' => 1,
@@ -75,8 +81,8 @@ final class CiScalesRegistrySeeder extends Seeder
                 'slugs_json' => json_encode(['iq_raven'], JSON_UNESCAPED_UNICODE),
                 'driver_type' => 'iq_raven',
                 'default_pack_id' => $demoPackId,
-                'default_region' => 'CN_MAINLAND',
-                'default_locale' => 'zh-CN',
+                'default_region' => $defaultRegion,
+                'default_locale' => $defaultLocale,
                 'default_dir_version' => 'IQ-RAVEN-CN-v0.3.0-DEMO',
                 'is_public' => 1,
                 'is_active' => 1,
