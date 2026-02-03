@@ -1,15 +1,38 @@
 {
-  "version": "2026.01",
-  "scale_code": "DEMO_ANSWERS",
-  "driver_type": "simple_score",
-  "answer_scores": {
-    "DEMO-SLIDER-1": {"1": 1, "2": 2, "3": 3, "4": 4, "5": 5},
-    "DEMO-RANK-1": {"A>B>C": 3},
-    "DEMO-TEXT-1": {"TEXT": 0}
-  },
-  "severity_levels": [
-    {"min": 0, "max": 2, "label": "low"},
-    {"min": 3, "max": 4, "label": "medium"},
-    {"min": 5, "max": 8, "label": "high"}
-  ]
+    "version": "2026.01",
+    "scale_code": "DEMO_ANSWERS",
+    "driver_type": "simple_score",
+    "answer_scores": {
+        "DEMO-SLIDER-1": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5
+        },
+        "DEMO-RANK-1": {
+            "A>B>C": 3
+        },
+        "DEMO-TEXT-1": {
+            "TEXT": 0
+        }
+    },
+    "severity_levels": [
+        {
+            "min": 0,
+            "max": 2,
+            "label": "low"
+        },
+        {
+            "min": 3,
+            "max": 4,
+            "label": "medium"
+        },
+        {
+            "min": 5,
+            "max": 8,
+            "label": "high"
+        }
+    ],
+    "schema": "fap.report.rules.v1"
 }

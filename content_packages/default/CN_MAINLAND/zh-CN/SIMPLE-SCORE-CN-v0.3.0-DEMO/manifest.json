@@ -1,23 +1,31 @@
 {
-  "schema_version": "pack-manifest@v1",
-  "pack_type": "content_pack",
-  "scale_code": "SIMPLE_SCORE_DEMO",
-  "region": "CN_MAINLAND",
-  "locale": "zh-CN",
-  "content_package_version": "v0.3.0-DEMO",
-  "pack_id": "default",
-  "fallback": [],
-  "capabilities": {
-    "questions": true,
-    "assets": false,
-    "share_templates": false
-  },
-  "schemas": {
-    "questions": "fap.questions.v1"
-  },
-  "assets": {
-    "questions": [
-      "questions.json"
-    ]
-  }
+    "schema_version": "pack-manifest@v1",
+    "pack_type": "content_pack",
+    "scale_code": "SIMPLE_SCORE_DEMO",
+    "region": "CN_MAINLAND",
+    "locale": "zh-CN",
+    "content_package_version": "v0.3.0-DEMO",
+    "pack_id": "default",
+    "fallback": [],
+    "capabilities": {
+        "questions": true,
+        "assets": false,
+        "share_templates": false
+    },
+    "schemas": {
+        "questions": "fap.questions.v1",
+        "rules": "fap.report.rules.v1",
+        "meta": "fap.landing.meta.v1"
+    },
+    "assets": {
+        "questions": [
+            "questions.json"
+        ],
+        "rules": [
+            "scoring_spec.json"
+        ],
+        "meta": [
+            "meta\/landing.json"
+        ]
+    }
 }
