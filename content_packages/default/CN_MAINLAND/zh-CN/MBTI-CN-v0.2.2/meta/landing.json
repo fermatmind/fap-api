@@ -1,0 +1,150 @@
+{
+  "schema": "fap.landing.meta.v1",
+  "schema_version": 1,
+
+  "scale_code": "MBTI",
+  "pack_id": "MBTI-CN-v0.2.2",
+  "locale": "zh-CN",
+  "region": "CN_MAINLAND",
+  "slug": "personality-mbti-test",
+  "last_updated": "2026-01-16",
+
+  "index_policy": {
+    "landing": { "index": true, "follow": true },
+    "take": { "index": false, "follow": false, "nocache": true },
+    "result": { "index": false, "follow": false, "nocache": true },
+    "share": { "index": false, "follow": false, "nocache": true }
+  },
+
+  "landing": {
+    "canonical_path": "/test/personality-mbti-test",
+    "canonical_slug": "personality-mbti-test",
+
+    "placeholders": {
+      "brand_zh": "费马测试",
+      "free_pledge": "基础结果与基础报告免费提供；不设置“做完才收费”的强制支付解锁。",
+      "variants_summary": "24题（2–3分钟）/93题（8–12分钟）/144题（15–20分钟）三档可选"
+    },
+
+    "variants": [
+      {
+        "variant_code": "quick_24",
+        "label_zh": "24题简易版",
+        "question_count": 24,
+        "test_time_minutes": "2–3",
+        "seo_hook": "2–3分钟快速测评，适合碎片时间先获得方向感。",
+        "notes": "适合快速了解自己的类型"
+      },
+      {
+        "variant_code": "standard_93",
+        "label_zh": "93题标准版",
+        "question_count": 93,
+        "test_time_minutes": "8–12",
+        "seo_hook": "8–12分钟更稳定的标准版解读，兼顾效率与细节。",
+        "notes": "准确度与时长更平衡"
+      },
+      {
+        "variant_code": "pro_144",
+        "label_zh": "144题专业版",
+        "question_count": 144,
+        "test_time_minutes": "15–20",
+        "seo_hook": "15–20分钟更完整的题量覆盖，适合想要更细的自我剖析。",
+        "notes": "题量更完整、结果更稳定"
+      }
+    ],
+
+    "seo_title": "MBTI测试：16型人格专业版(24/93/144题)免费测评与职业性格分析 - 费马测试",
+    "seo_description": "【2026更新】{{brand_zh}}提供在线 MBTI 16型人格测试，{{variants_summary}}。提交后生成类型结论 + 五轴强度百分比解读（含弱特质情境化提示）+ A/T 身份层建议，帮助你用于职业选择、沟通协作与自我成长。{{free_pledge}}",
+    "seo_keywords": [
+      "MBTI测试",
+      "MBTI性格测试",
+      "MBTI在线测试",
+      "16型人格测试",
+      "16人格免费测试",
+      "职业性格测试",
+      "性格分析",
+      "费马测试"
+    ],
+
+    "search_engine_overrides": {
+      "baidu": {
+        "seo_title": "MBTI测试：16型人格在线专业版(免费/24/93/144题) - 费马测试",
+        "seo_description": "【2026更新】MBTI测试真·免费入口：{{variants_summary}}三档可选。输出类型结论 + 五轴强度百分比 + 弱特质提示 + A/T 身份层建议。{{free_pledge}}"
+      },
+      "google": {
+        "seo_title": "MBTI 16型人格测试：职业性格分析与五轴强度解读 - 费马测试",
+        "seo_description": "Free online MBTI-style personality test in Chinese. Choose from 24/93/144 questions and get type + strength insights and practical suggestions. Base results and base report are provided for free."
+      }
+    },
+
+    "executive_summary": "{{brand_zh}}的 MBTI 16型人格测评，{{variants_summary}}。报告结构包含类型结论、五轴强度百分比与弱特质情境化解释，并给出可操作建议，帮助你把结果用于职业选择、沟通协作与自我成长。{{free_pledge}}",
+
+    "data_snippet": {
+      "h1_title": "MBTI 16型人格测试（职业与性格分析）",
+      "intro": "MBTI 用四个维度（E/I、S/N、T/F、J/P）描述你的信息获取、决策方式与生活节奏偏好。{{brand_zh}}采用“类型骨架 + 强度解读 + 情境化建议”的动态结构：当某条轴接近 50% 时，给出更允许切换的解释；当强度更高时，给出更具体的优势、盲点与行动建议，便于实际应用。",
+      "table": {
+        "caption": "MBTI 测试信息一览",
+        "columns": ["项目", "说明"],
+        "rows": [
+          ["测评名称", "MBTI 16型人格测试（动态报告版）"],
+          ["题量（3档）", "24题（简易版） / 93题（标准版） / 144题（专业版）"],
+          ["预计用时（3档）", "2–3分钟 / 8–12分钟 / 15–20分钟"],
+          ["输出内容", "类型结论 + 五轴强度百分比 + 情境化解释 + 行动建议"],
+          ["免费说明", "{{free_pledge}}"],
+          ["弱特质规则", "当某条轴接近 50%（例如 <55%）时，提供“可切换/双栖”解释，避免过度下结论"],
+          ["隐私与收录", "结果默认不对外公开；答题页/结果页/分享页默认 noindex"],
+          ["版本策略", "URL 永久不变；内容版本由内容包控制，可灰度与回滚"]
+        ]
+      },
+      "cta": {
+        "primary": { "text": "开始 MBTI 测试", "href": "/test/personality-mbti-test/take" },
+        "secondary": { "text": "了解隐私与数据说明", "href": "/privacy" }
+      }
+    },
+
+    "faq_list": [
+      {
+        "question": "MBTI性格测试准吗？",
+        "answer": "MBTI 是一种基于心理偏好的人格自我探索工具，并非医学诊断或临床量表。它在职业规划、团队沟通与自我认知中具有参考价值；更建议结合“维度强度（百分比）”与具体情境来理解结果，而不是把类型当作固定标签。"
+      },
+      {
+        "question": "费马测试与 16personalities 有什么区别？",
+        "answer": "费马测试对齐“类型骨架 + 强度解释”的公开框架：除了类型（如 INTJ），还提供五轴强度百分比与情境化解释，尤其在弱特质（接近 50%）时避免过度下结论；并补充 A/T 身份层叙事与可操作建议，更适合用于职业选择与沟通协作。"
+      },
+      {
+        "question": "测试需要多久？题量是多少？",
+        "answer": "本测评提供三档版本：24题（2–3分钟）/93题（8–12分钟）/144题（15–20分钟）。你可以按时间与精细度选择；系统会根据作答计算类型与强度，并生成可读性强的报告结构（结论、强度解读、关键建议与提醒）。"
+      },
+      {
+        "question": "这个测试是免费的吗？会不会做完才收费？",
+        "answer": "{{free_pledge}}后续如果上线更深度的专题解读（例如职业匹配、关系沟通、个人成长路径），将以“可选解锁”的方式呈现，不影响你获取基础报告。"
+      },
+      {
+        "question": "我的测试结果会被公开吗？隐私如何保证？",
+        "answer": "结果默认仅对你可见，不会被搜索引擎收录。我们遵循最小必要原则记录数据：用于生成你的报告、进行系统质量优化与脱敏统计分析。你可以通过用户权益通道申请删除或导出（以网站说明页为准）。"
+      }
+    ],
+
+    "faq_quality_hints": {
+      "warning_if_no_interrogatives": true,
+      "interrogatives_cn": ["什么", "为什么", "准吗", "如何", "多久", "多少", "免费", "区别", "公开", "隐私"]
+    },
+
+    "open_graph": {
+      "og_title": "我做完 MBTI 16型人格测试，结果太准了…你也来试试",
+      "og_description": "三档版本可选：24题/93题/144题，测出你的 MBTI 类型与五轴强度解读（基础报告免费）",
+      "og_image": "/og/mbti-1200x630.png",
+      "og_type": "website",
+      "twitter_card": "summary_large_image"
+    },
+
+    "share_abstract": "三档版本可选：24/93/144题，测出你的 MBTI 类型与五轴强度解读（基础报告免费）",
+
+    "schema_outputs": {
+      "faqpage_jsonld": true,
+      "quiz_jsonld": true,
+      "breadcrumbs_jsonld": false,
+      "dataset_jsonld": false
+    }
+  }
+}

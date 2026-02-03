@@ -7,6 +7,10 @@
       "order": 1,
       "type": "slider",
       "text": "（Demo）滑杆题：你现在的专注程度",
+      "options": [
+        {"code": "1", "text": "1"},
+        {"code": "5", "text": "5"}
+      ],
       "min": 1,
       "max": 5,
       "step": 1,
@@ -31,6 +35,10 @@
       "order": 3,
       "type": "open_text",
       "text": "（Demo）用一句话描述自己",
+      "options": [
+        {"code": "A", "text": "OK"},
+        {"code": "B", "text": "OK"}
+      ],
       "placeholder": "例如：喜欢探索新鲜事物"
     }
   ]

@@ -26,10 +26,10 @@ class ScaleRegistrySeeder extends Seeder
                 'mbti-personality-test',
             ],
             'driver_type' => 'mbti',
-            'default_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
+            'default_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.2',
             'default_region' => 'CN_MAINLAND',
             'default_locale' => 'zh-CN',
-            'default_dir_version' => 'MBTI-CN-v0.2.1-TEST',
+            'default_dir_version' => 'MBTI-CN-v0.2.2',
             'capabilities_json' => [
                 'share_templates' => true,
                 'content_graph' => true,

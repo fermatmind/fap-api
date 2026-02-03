@@ -1,0 +1,50 @@
+{
+  "schema": "fap.landing.meta.v1",
+  "schema_version": 1,
+  "scale_code": "DEMO_ANSWERS",
+  "pack_id": "DEMO-ANSWERS-CN-v0.3.0-DEMO",
+  "locale": "zh-CN",
+  "region": "CN_MAINLAND",
+  "slug": "demo-answers",
+  "last_updated": "2026-02-03",
+  "index_policy": {
+    "landing": {"index": true, "follow": true},
+    "take": {"index": false, "follow": false, "nocache": true},
+    "result": {"index": false, "follow": false, "nocache": true},
+    "share": {"index": false, "follow": false, "nocache": true}
+  },
+  "landing": {
+    "canonical_path": "/test/demo-answers",
+    "canonical_slug": "demo-answers",
+    "variants": [
+      {
+        "variant_code": "demo_1",
+        "label_zh": "演示版",
+        "question_count": 3,
+        "test_time_minutes": "1"
+      }
+    ],
+    "faq_list": [
+      {
+        "question": "这是什么测评？",
+        "answer": "这是用于演示答案格式的最小 DEMO 量表。"
+      },
+      {
+        "question": "需要多久完成？",
+        "answer": "演示包仅含 3 题，约 1 分钟完成。"
+      },
+      {
+        "question": "适合谁使用？",
+        "answer": "适合作为 API 与答案结构联调的演示样例。"
+      }
+    ],
+    "data_snippet": {
+      "table": {
+        "rows": [
+          ["题量（3档）", "3题 / 6题 / 9题"],
+          ["预计用时（3档）", "1分钟 / 2分钟 / 3分钟"]
+        ]
+      }
+    }
+  }
+}

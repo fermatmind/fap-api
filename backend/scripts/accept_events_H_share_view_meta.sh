@@ -3,16 +3,14 @@ set -euo pipefail
 
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ACCEPT_H][FAIL] missing cmd: $1" >&2; exit 2; }; }
 need_cmd curl
-need_cmd jq
 need_cmd php
-need_cmd python3
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 REPO_DIR="$(cd "$BACKEND_DIR/.." && pwd)"
 cd "$BACKEND_DIR"
 
-API="${API:-http://127.0.0.1:18000}"
+API="${API:-http://127.0.0.1:1827}"
 
 # -----------------------------
 # Resolve SQLITE_DB to ABS path
@@ -21,27 +19,19 @@ SQLITE_DB_IN="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
 resolve_abs() {
   local p="$1"
-  if [[ "$p" = /* ]]; then
-    echo "$p"
-    return 0
-  fi
-
-  # repo-root relative
-  if [[ -f "$REPO_DIR/$p" ]]; then
-    python3 -c 'import os,sys; print(os.path.abspath(os.path.join(sys.argv[1], sys.argv[2])))' \
-      "$REPO_DIR" "$p"
-    return 0
-  fi
-
-  # backend-dir relative
-  if [[ -f "$BACKEND_DIR/$p" ]]; then
-    python3 -c 'import os,sys; print(os.path.abspath(os.path.join(sys.argv[1], sys.argv[2])))' \
-      "$BACKEND_DIR" "$p"
-    return 0
-  fi
-
-  # last resort: cwd absolute
-  python3 -c 'import os,sys; print(os.path.abspath(sys.argv[1]))' "$p"
+  php -r '
+$repo = $argv[2];
+$backend = $argv[3];
+$p = $argv[1];
+if ($p === "") { echo ""; exit(0); }
+if ($p[0] === "/") { echo $p; exit(0); }
+$repoPath = $repo ? ($repo . "/" . $p) : $p;
+if ($repo && file_exists($repoPath)) { echo realpath($repoPath); exit(0); }
+$backendPath = $backend ? ($backend . "/" . $p) : $p;
+if ($backend && file_exists($backendPath)) { echo realpath($backendPath); exit(0); }
+$rp = realpath($p);
+echo $rp ? $rp : $p;
+' "$p" "$REPO_DIR" "$BACKEND_DIR"
 }
 
 SQLITE_DB_ABS="$(resolve_abs "$SQLITE_DB_IN")"
@@ -66,14 +56,14 @@ if [[ ! -f "$SHARE_JSON" ]]; then
 fi
 
 # share.json must be valid JSON with ok=true
-if ! jq -e '.ok==true' "$SHARE_JSON" >/dev/null 2>&1; then
+if ! php -r '$j=json_decode(@file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$SHARE_JSON" >/dev/null 2>&1; then
   echo "[ACCEPT_H][FAIL] share.json is not ok=true (maybe HTML/500). head:" >&2
   head -n 40 "$SHARE_JSON" >&2 || true
   exit 2
 fi
 
-ATT="$(jq -r '.attempt_id // empty' "$SHARE_JSON")"
-SHARE_ID_OLD="$(jq -r '.share_id // empty' "$SHARE_JSON")"
+ATT="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["attempt_id"] ?? "";' "$SHARE_JSON" 2>/dev/null || true)"
+SHARE_ID_OLD="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["share_id"] ?? "";' "$SHARE_JSON" 2>/dev/null || true)"
 
 if [[ -z "$ATT" ]]; then
   echo "[ACCEPT_H][FAIL] missing attempt_id in $SHARE_JSON" >&2
@@ -97,13 +87,13 @@ curl -fsS \
   -H "X-Entry-Page: share_page" \
   "$API/api/v0.2/attempts/$ATT/share" >"$TMP_RESP"
 
-if ! jq -e '.ok==true' "$TMP_RESP" >/dev/null 2>&1; then
+if ! php -r '$j=json_decode(@file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$TMP_RESP" >/dev/null 2>&1; then
   echo "[ACCEPT_H][FAIL] /share response ok!=true. head:" >&2
   head -n 60 "$TMP_RESP" >&2 || true
   exit 2
 fi
 
-SHARE_ID_RESP="$(jq -r '.share_id // empty' "$TMP_RESP")"
+SHARE_ID_RESP="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["share_id"] ?? "";' "$TMP_RESP" 2>/dev/null || true)"
 if [[ -z "$SHARE_ID_RESP" ]]; then
   echo "[ACCEPT_H][FAIL] missing share_id in /share response: $TMP_RESP" >&2
   cat "$TMP_RESP" >&2 || true

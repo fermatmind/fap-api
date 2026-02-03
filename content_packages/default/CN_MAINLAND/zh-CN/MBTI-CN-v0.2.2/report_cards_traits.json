@@ -1,0 +1,678 @@
+{
+  "schema": "fap.report.cards.v1",
+  "engine": "v1.2",
+  "section": "traits",
+  "meta": {
+    "package": "MBTI-CN-v0.2.2",
+    "updated_at": "2025-12-21",
+    "change_id": "LAUNCH-V1-REPORT-CARDS-TRAITS",
+    "notes": "Launch v1.0: traits cards production pool (23). 10 axis directional strong-only (min_delta=12), 6 axis intro guardrail-friendly (min_delta=0, AT split into A/T), 7 core cards fallback-safe. Designed for 'Top3 strongest + guardrail(EI else JP)'."
+  },
+  "rules": {
+    "min_cards": 2,
+    "target_cards": 3,
+    "max_cards": 6,
+    "fallback_tags": [
+      "kind:core"
+    ],
+    "sort": [
+      "priority_desc"
+    ]
+  },
+  "items": [
+    {
+      "id": "traits_axis_EI_E_strong",
+      "section": "traits",
+      "title": "E 偏好较强：把互动当发动机",
+      "desc": "你在交流与现场碰撞中更快进入状态，信息会在互动里收敛。",
+      "bullets": [
+        "开口能想得更清楚",
+        "更容易主动连接与推进",
+        "协作能显著提升你的效率"
+      ],
+      "tips": [
+        "关键议题用 15 分钟快会/白板收敛",
+        "留出发言空间，别把节奏拉太满"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:E",
+        "state:strong"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_EI_I_strong",
+      "section": "traits",
+      "title": "I 偏好较强：深度思考是主战场",
+      "desc": "你在安静与专注里输出更高质量判断，边界感对你很重要。",
+      "bullets": [
+        "独立思考质量更高",
+        "更擅长深挖复杂问题",
+        "不喜欢被频繁打断"
+      ],
+      "tips": [
+        "把深度时间写进日程并标注“不可打断”",
+        "先写后聊：会议前发 3 行观点"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:I",
+        "state:strong"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_SN_S_strong",
+      "section": "traits",
+      "title": "S 偏好较强：你信“验证过的路”",
+      "desc": "你更相信事实、经验与可重复流程，细节会让你更安心。",
+      "bullets": [
+        "对资源与风险更敏感",
+        "更擅长把事情做成标准件",
+        "耐心把细节做到位"
+      ],
+      "tips": [
+        "把可落地写成 checklist，提高团队一致性",
+        "每次推进前问一句：最终指标是什么？"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:S",
+        "state:strong"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "S",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_SN_N_strong",
+      "section": "traits",
+      "title": "N 偏好较强：你擅长从混沌里抓方向",
+      "desc": "你更关注模式、趋势与可能性，能快速提炼关键变量。",
+      "bullets": [
+        "对变化更敏感",
+        "善于提出新框架",
+        "能把零散信息连成图景"
+      ],
+      "tips": [
+        "把灵感落成 3 条 next step，避免停在想象里",
+        "找一位 S 偏好伙伴做“落地翻译”"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:N",
+        "state:strong"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "N",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_TF_T_strong",
+      "section": "traits",
+      "title": "T（理性）偏好较强：你用标准给世界对齐",
+      "desc": "你更倾向用逻辑、原则与标准做取舍，压力下也能保持清醒。",
+      "bullets": [
+        "更敢做艰难取舍",
+        "善于建立规则体系",
+        "不易被情绪带偏"
+      ],
+      "tips": [
+        "对人际场景补一句“我理解你的在意点”",
+        "避免把所有讨论都拉回对错，先对齐目标"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:T",
+        "state:strong"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "T",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_TF_F_strong",
+      "section": "traits",
+      "title": "F（感受）偏好较强：你把“人”放在决策中心",
+      "desc": "你更在意关系长期性与决策温度，能敏锐察觉隐含需求。",
+      "bullets": [
+        "更擅长照顾团队氛围",
+        "更敏感于他人需求",
+        "愿意为关系投入"
+      ],
+      "tips": [
+        "把善意制度化：边界清楚才能走得更久",
+        "决策前列一个事实清单，减少情绪拉扯"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:F",
+        "state:strong"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "F",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_JP_J_strong",
+      "section": "traits",
+      "title": "J 偏好较强：你靠计划把不确定变可控",
+      "desc": "你更愿意尽快定方向、定标准、定节奏，推进闭环能力强。",
+      "bullets": [
+        "对进度与节点更敏感",
+        "更擅长形成闭环",
+        "持续推进到收尾"
+      ],
+      "tips": [
+        "给计划留 15% 缓冲，减少突发挫败感",
+        "在拍板前做一次反向提问：还有什么没考虑？"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:J",
+        "state:strong"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_JP_P_strong",
+      "section": "traits",
+      "title": "P 偏好较强：你把灵活当成优势武器",
+      "desc": "你更能在变化中抓机会，边试边修正，适应速度快。",
+      "bullets": [
+        "反应快、调整快",
+        "更擅长试错迭代",
+        "在不确定中保持弹性"
+      ],
+      "tips": [
+        "给探索设置收束时刻：到点必须定一个版本",
+        "用看板/清单管理注意力，避免发散"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:P",
+        "state:strong"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_AT_A_strong",
+      "section": "traits",
+      "title": "A（自信型）偏好较强：压力下更像“定海针”",
+      "desc": "你更能在不确定里保持笃定，决策更快、波动更小。",
+      "bullets": [
+        "更少内耗",
+        "更敢推进关键决策",
+        "能稳住团队节奏"
+      ],
+      "tips": [
+        "重大判断加一道反证清单，避免过度自信",
+        "把“确定”和“假设”分开表达"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:A",
+        "state:strong"
+      ],
+      "priority": 93,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_AT_T_strong",
+      "section": "traits",
+      "title": "T（敏感型）偏好较强：压力下更像“校准器”",
+      "desc": "你更谨慎地检查与修正，风险嗅觉强，愿意迭代自己。",
+      "bullets": [
+        "风险意识更强",
+        "更愿意反思与修正",
+        "更在意质量与正确性"
+      ],
+      "tips": [
+        "把担心写成清单并排序，只解决最重要的 1 条",
+        "设置完成线：到线就交付，再迭代"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:T",
+        "state:strong"
+      ],
+      "priority": 93,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 12
+        }
+      }
+    },
+    {
+      "id": "traits_axis_EI_E_intro",
+      "section": "traits",
+      "title": "E 轻解释：互动能帮你更快“启动”",
+      "desc": "即便不是强外向，你也会在适度交流中更快进入状态。",
+      "bullets": [
+        "讨论能帮助你理清思路",
+        "更愿意通过协作推进",
+        "在人群中更容易被点亮"
+      ],
+      "tips": [
+        "把交流做短：用快会代替长拉扯",
+        "给自己留一段安静收尾时间"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:E",
+        "state:clear"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 0
+        }
+      }
+    },
+    {
+      "id": "traits_axis_EI_I_intro",
+      "section": "traits",
+      "title": "I 轻解释：独处能帮你更快“充电”",
+      "desc": "即便不是强内向，你也会在安静思考中更快恢复与校准。",
+      "bullets": [
+        "独处能让你恢复专注",
+        "更偏好深度而非频繁互动",
+        "更喜欢先想清楚再表达"
+      ],
+      "tips": [
+        "把重要观点先写成 3 行，再进入讨论",
+        "给自己留一个不被打断的固定时段"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:I",
+        "state:clear"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 0
+        }
+      }
+    },
+    {
+      "id": "traits_axis_JP_J_intro",
+      "section": "traits",
+      "title": "J 轻解释：你喜欢“有个计划”",
+      "desc": "即便不算强 J，你也更舒服在有节奏、有闭环的推进方式里。",
+      "bullets": [
+        "更愿意先定关键节点",
+        "更喜欢明确的优先级",
+        "收尾会让你更安心"
+      ],
+      "tips": [
+        "计划做轻一点：只定 3 个关键节点",
+        "给变化留口子，不必一次定死所有细节"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:J",
+        "state:clear"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 0
+        }
+      }
+    },
+    {
+      "id": "traits_axis_JP_P_intro",
+      "section": "traits",
+      "title": "P 轻解释：你喜欢“先试试看”",
+      "desc": "即便不算强 P，你也更舒服在先探索、后收束的节奏里。",
+      "bullets": [
+        "更愿意先试出可行性",
+        "更能适应变化",
+        "更喜欢保留选择空间"
+      ],
+      "tips": [
+        "探索也要有收束点，避免无限延展",
+        "把灵感记成清单，再按优先级推进"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:P",
+        "state:clear"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 0
+        }
+      }
+    },
+    {
+      "id": "traits_axis_AT_A_intro",
+      "section": "traits",
+      "title": "A（自信型）轻解释：更快拍板、更稳推进",
+      "desc": "即便不是强 A，你也可能在关键时刻更倾向快速定方向、先推进再校准。",
+      "bullets": [
+        "更敢推进决定",
+        "波动更小、更少内耗",
+        "能稳定团队节奏"
+      ],
+      "tips": [
+        "重大判断加一次反证检查，避免过度自信",
+        "把“确定”和“假设”分开说更清晰"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:AT:A",
+        "state:clear"
+      ],
+      "priority": 56,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 0
+        }
+      }
+    },
+    {
+      "id": "traits_axis_AT_T_intro",
+      "section": "traits",
+      "title": "T（敏感型）轻解释：更谨慎校准、更在意做对",
+      "desc": "即便不是强 T，你也可能在压力下更倾向复查修正，让结果更可靠。",
+      "bullets": [
+        "风险嗅觉更强",
+        "更愿意自省与修正",
+        "更在意质量与正确性"
+      ],
+      "tips": [
+        "把担心写成清单并排序，先解决最重要的一条",
+        "设定完成线：到线就交付，再迭代"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:AT:T",
+        "state:clear"
+      ],
+      "priority": 56,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 0
+        }
+      }
+    },
+    {
+      "id": "traits_core_01",
+      "section": "traits",
+      "title": "你的底色：把事情推进到“有结果”",
+      "desc": "你更容易把注意力放在目标与行动上：先推进，再优化。",
+      "bullets": [
+        "先行动再迭代",
+        "偏好可衡量的结果",
+        "对拖延与低效更敏感"
+      ],
+      "tips": [
+        "给自己留一个“复盘窗口”，避免只顾推进忽略校准",
+        "把关键目标写成 1 句话，协作会更顺"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "scope:general"
+      ],
+      "priority": 100
+    },
+    {
+      "id": "traits_core_02",
+      "section": "traits",
+      "title": "你更像“结构型推进者”",
+      "desc": "遇到问题时，你会自然地把它拆成可执行步骤：先搭系统，再持续优化。",
+      "bullets": [
+        "把模糊变清晰",
+        "把复杂变流程",
+        "把目标变里程碑"
+      ],
+      "tips": [
+        "把最重要的 1 个指标放在显眼位置，避免忙但跑偏",
+        "每周做一次“减法”，删掉 1 个低价值任务"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:execution"
+      ],
+      "priority": 97
+    },
+    {
+      "id": "traits_core_03",
+      "section": "traits",
+      "title": "你对“质量线”很敏感",
+      "desc": "你不太能忍受“差不多就行”，更倾向把标准说清楚、把结果做扎实。",
+      "bullets": [
+        "对瑕疵更敏感",
+        "更愿意做长期积累",
+        "更在意一致性与可复制"
+      ],
+      "tips": [
+        "把“我想要”改写成“验收标准”，沟通会轻很多",
+        "允许自己有一个 60 分交付线，再迭代到 90 分"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:quality"
+      ],
+      "priority": 95
+    },
+    {
+      "id": "traits_core_04",
+      "section": "traits",
+      "title": "你擅长把分歧变共识",
+      "desc": "你不喜欢无效争论，更愿意对齐目标、拆清选项，让讨论回到可行动上。",
+      "bullets": [
+        "善于抓住共同目标",
+        "能把讨论压缩成决策点",
+        "更关注解决问题而非赢辩论"
+      ],
+      "tips": [
+        "冲突场景先复述对方目标，再给方案",
+        "把选择写成 A/B/C 三个选项，决策更快"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:collaboration"
+      ],
+      "priority": 93
+    },
+    {
+      "id": "traits_core_05",
+      "section": "traits",
+      "title": "你有“长期主义”的一面",
+      "desc": "你更愿意做能复利的事：系统、习惯、关系、能力。",
+      "bullets": [
+        "更看重积累与复利",
+        "不爱走捷径",
+        "愿意为未来投入"
+      ],
+      "tips": [
+        "把长期目标拆成 4 周一个小里程碑",
+        "给自己一个“可持续强度”，别把热情一次烧完"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:longterm"
+      ],
+      "priority": 92
+    },
+    {
+      "id": "traits_core_06",
+      "section": "traits",
+      "title": "你对风险有天然嗅觉",
+      "desc": "你会下意识寻找潜在问题与不确定点，这让你更稳，但也可能更紧绷。",
+      "bullets": [
+        "能提前看到坑",
+        "更擅长做预案",
+        "关键节点更谨慎"
+      ],
+      "tips": [
+        "把风险写成 3 条：发生概率/影响/应对",
+        "只为‘高影响’风险投入精力，别被小概率消耗"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:risk"
+      ],
+      "priority": 90
+    },
+    {
+      "id": "traits_core_07",
+      "section": "traits",
+      "title": "你需要“节奏感”而不是一直拼",
+      "desc": "你更适合用节奏驱动：推进—休整—复盘—再推进，输出会更稳定。",
+      "bullets": [
+        "有节奏时更高效",
+        "复盘能快速升级",
+        "过度消耗会明显降质"
+      ],
+      "tips": [
+        "给自己设一个固定收尾仪式（5 分钟复盘）",
+        "把休息也写进计划：休息是续航，不是浪费"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:energy"
+      ],
+      "priority": 88
+    },
+    {
+      "id": "card.canary.rules_on",
+      "section": "traits",
+      "title": "CANARY_RULES_ON",
+      "desc": "如果你看到这张卡，说明 item.rules(require_all) 已生效",
+      "bullets": [],
+      "tips": [],
+      "tags": [
+        "role:SJ",
+        "topic:canary"
+      ],
+      "priority": 9999
+    },
+    {
+      "id": "card.canary.rules_off",
+      "section": "traits",
+      "title": "CANARY_RULES_OFF",
+      "desc": "如果你看到这张卡，说明 rules 没生效（它应该被过滤掉）",
+      "bullets": [],
+      "tips": [],
+      "tags": [
+        "role:SJ",
+        "topic:canary"
+      ],
+      "rules": {
+        "require_all": [
+          "role:__NOT_EXIST__"
+        ]
+      },
+      "priority": 9998
+    },
+    {
+      "id": "card.canary.rule_engine",
+      "section": "traits",
+      "title": "CANARY_CARD_SELECTED",
+      "desc": "如果你看到这张卡，说明 cards 走了 templates + rules 选择器",
+      "bullets": [],
+      "tips": [],
+      "tags": [
+        "canary:card",
+        "role:SJ"
+      ],
+      "rules": {
+        "require_any": [],
+        "require_all": [],
+        "forbid": [
+          "role:SJ"
+        ],
+        "min_match": 0
+      },
+      "priority": 999,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 0
+        }
+      }
+    }
+  ]
+}

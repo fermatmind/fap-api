@@ -11,7 +11,7 @@ set -euo pipefail
 # Assumptions:
 # - API is already running (default: http://127.0.0.1:18000)
 # - Using testing/sqlite db at backend/database/database.sqlite
-# - jq is installed
+# - json parsing via php
 #
 # Optional headers (pass via env vars):
 #   EXPERIMENT="E_accept" APPV="1.2.3" CHANNEL="miniapp" CLIENT_PLATFORM="wechat" ENTRY_PAGE="result_page"
@@ -19,14 +19,13 @@ set -euo pipefail
 
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ERR] missing cmd: $1" >&2; exit 2; }; }
 need_cmd curl
-need_cmd jq
 need_cmd php
 need_cmd sed
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BACKEND_DIR="$REPO_DIR/backend"
 
-API="${API:-http://127.0.0.1:18000}"
+API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
 echo "[ACCEPT] repo=$REPO_DIR"
@@ -48,11 +47,11 @@ HDRS=()
 [[ -n "${ENTRY_PAGE:-}" ]]      && HDRS+=(-H "X-Entry-Page: $ENTRY_PAGE")
 
 # ---- get attempt_id from verify artifacts (preferred), else run ci_verify_mbti ----
-ATT="$(jq -r '.attempt_id // .attemptId // empty' "$BACKEND_DIR/artifacts/verify_mbti/report.json" 2>/dev/null || true)"
+ATT="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["attempt_id"] ?? ($j["attemptId"] ?? "");' "$BACKEND_DIR/artifacts/verify_mbti/report.json" 2>/dev/null || true)"
 if [[ -z "$ATT" || "$ATT" == "null" ]]; then
   echo "[ACCEPT] attempt_id not found in artifacts; run ci_verify_mbti.sh to generate one"
   (cd "$REPO_DIR" && bash backend/scripts/ci_verify_mbti.sh >/dev/null)
-  ATT="$(jq -r '.attempt_id // .attemptId // empty' "$BACKEND_DIR/artifacts/verify_mbti/report.json" 2>/dev/null || true)"
+  ATT="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["attempt_id"] ?? ($j["attemptId"] ?? "");' "$BACKEND_DIR/artifacts/verify_mbti/report.json" 2>/dev/null || true)"
 fi
 if [[ -z "$ATT" || "$ATT" == "null" ]]; then
   echo "[ERR] ATT empty after ci_verify_mbti.sh" >&2
@@ -74,7 +73,7 @@ SHARE_RAW="$(
   || true
 )"
 SHARE_JSON="$(printf '%s\n' "$SHARE_RAW" | sed -n '/^{/,$p')"
-SHARE_ID="$(printf '%s\n' "$SHARE_JSON" | jq -r '.share_id // .shareId // empty' 2>/dev/null || true)"
+SHARE_ID="$(printf '%s\n' "$SHARE_JSON" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["share_id"] ?? ($j["shareId"] ?? "");' 2>/dev/null || true)"
 
 if [[ -z "$SHARE_ID" || "$SHARE_ID" == "null" ]]; then
   echo "[ERR] share_id empty from /attempts/$ATT/share. Raw response:" >&2
