@@ -12,7 +12,7 @@ fi
 # -----------------------------
 # Config / Defaults
 # -----------------------------
-API="${API:-http://127.0.0.1:8000}"
+API="${API:-http://127.0.0.1:1827}"
 SCALE_CODE="${SCALE_CODE:-MBTI}"
 SCALE_VERSION="${SCALE_VERSION:-v0.2}"
 ANSWER_CODE="${ANSWER_CODE:-C}"

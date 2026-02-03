@@ -68,9 +68,8 @@ jobs:
         run: |
           bash scripts/ci/prepare_sqlite.sh
 
-      - name: Run selfcheck (default manifest)
-        working-directory: backend
-        run: php artisan fap:self-check --strict-assets --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+      - name: Run selfcheck (active packs)
+        run: bash backend/scripts/ci_selfcheck_packs.sh
 
       - name: PR6 queue (sync) smoke
         working-directory: backend

@@ -10,13 +10,12 @@ require_cmd() {
 }
 
 require_cmd curl
-require_cmd jq
 require_cmd php
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BACKEND_DIR="$REPO_DIR/backend"
 
-API="${API:-http://127.0.0.1:18000}"
+API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
 echo "[ACCEPT_E] repo=$REPO_DIR"
@@ -55,7 +54,7 @@ ATT="${ATT:-}"
 if [[ -z "$ATT" ]]; then
   REPORT_JSON="$BACKEND_DIR/artifacts/verify_mbti/report.json"
   if [[ -f "$REPORT_JSON" ]]; then
-    ATT="$(jq -r '.attempt_id // .attemptId // empty' "$REPORT_JSON" 2>/dev/null || true)"
+    ATT="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["attempt_id"] ?? ($j["attemptId"] ?? "");' "$REPORT_JSON" 2>/dev/null || true)"
   fi
 fi
 if [[ -z "$ATT" ]]; then
@@ -78,7 +77,7 @@ SHARE_RAW="$(curl -sS "$API/api/v0.2/attempts/$ATT/share" \
 
 # Some endpoints may print non-JSON prefix; keep from first '{'
 SHARE_JSON="$(printf '%s\n' "$SHARE_RAW" | sed -n '/^{/,$p')"
-SHARE_ID="$(printf '%s\n' "$SHARE_JSON" | jq -r '.share_id // .shareId // empty' 2>/dev/null || true)"
+SHARE_ID="$(printf '%s\n' "$SHARE_JSON" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["share_id"] ?? ($j["shareId"] ?? "");' 2>/dev/null || true)"
 
 if [[ -z "$SHARE_ID" || "$SHARE_ID" == "null" ]]; then
   echo "[ERR] SHARE_ID empty. Raw response:" >&2

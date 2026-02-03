@@ -9,7 +9,6 @@ set -euo pipefail
 
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ERR] missing cmd: $1" >&2; exit 2; }; }
 need_cmd curl
-need_cmd jq
 need_cmd php
 need_cmd sed
 need_cmd head
@@ -18,7 +17,7 @@ need_cmd sleep
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BACKEND_DIR="$REPO_DIR/backend"
 
-API="${API:-http://127.0.0.1:18000}"
+API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
 echo "[ACCEPT_F] repo=$REPO_DIR"
@@ -48,13 +47,13 @@ if [[ ! -f "$REPORT_JSON" || ! -f "$SHARE_JSON" ]]; then
   (cd "$REPO_DIR" && bash backend/scripts/ci_verify_mbti.sh >/dev/null)
 fi
 
-ATT="$(jq -r '.attempt_id // .attemptId // empty' "$REPORT_JSON" 2>/dev/null || true)"
+ATT="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["attempt_id"] ?? ($j["attemptId"] ?? "");' "$REPORT_JSON" 2>/dev/null || true)"
 if [[ -z "$ATT" || "$ATT" == "null" ]]; then
   echo "[ERR] cannot read ATT from $REPORT_JSON" >&2
   exit 1
 fi
 
-SHARE_ID="$(jq -r '.share_id // .shareId // empty' "$SHARE_JSON" 2>/dev/null || true)"
+SHARE_ID="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["share_id"] ?? ($j["shareId"] ?? "");' "$SHARE_JSON" 2>/dev/null || true)"
 if [[ -z "$SHARE_ID" || "$SHARE_ID" == "null" ]]; then
   echo "[ERR] cannot read SHARE_ID from $SHARE_JSON" >&2
   exit 1
@@ -86,7 +85,7 @@ if [[ -z "$FM_TOKEN" ]]; then
     exit 15
   fi
 
-  FM_TOKEN="$(printf '%s' "$AUTH_JSON" | jq -r '.token // empty' 2>/dev/null || true)"
+  FM_TOKEN="$(printf '%s' "$AUTH_JSON" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["token"] ?? "";' 2>/dev/null || true)"
 fi
 
 if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then

@@ -4,7 +4,7 @@ set -euo pipefail
 BACKEND_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 REPO_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"
 
-API="${API:-http://127.0.0.1:18000}"
+API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-${BACKEND_DIR}/database/database.sqlite}"
 
 PHONE="${PHONE:-+8613800138000}"

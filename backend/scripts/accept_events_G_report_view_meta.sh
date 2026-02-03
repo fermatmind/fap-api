@@ -8,7 +8,6 @@ fi
 
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ACCEPT_G][FAIL] missing cmd: $1" >&2; exit 2; }; }
 need_cmd curl
-need_cmd jq
 need_cmd php
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -16,7 +15,7 @@ BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 REPO_DIR="$(cd "$BACKEND_DIR/.." && pwd)"
 cd "$BACKEND_DIR"
 
-API="${API:-http://127.0.0.1:18000}"
+API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB_IN="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
 RUN_DIR="${RUN_DIR:-$BACKEND_DIR/artifacts/verify_mbti}"
@@ -47,8 +46,8 @@ if [[ ! -f "$SHARE_JSON" ]]; then
   exit 2
 fi
 
-ATT="$(jq -r '.attempt_id // empty' "$SHARE_JSON")"
-SHARE_ID="$(jq -r '.share_id // empty' "$SHARE_JSON")"
+ATT="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["attempt_id"] ?? "";' "$SHARE_JSON" 2>/dev/null || true)"
+SHARE_ID="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["share_id"] ?? "";' "$SHARE_JSON" 2>/dev/null || true)"
 
 if [[ -z "$ATT" || -z "$SHARE_ID" ]]; then
   echo "[ACCEPT_G][FAIL] missing attempt_id/share_id in $SHARE_JSON" >&2
