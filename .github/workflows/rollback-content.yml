@@ -1,4 +1,3 @@
-cat > .github/workflows/rollback-content.yml <<'YAML'
 name: Rollback Content
 
 on:
@@ -129,4 +128,3 @@ jobs:
           curl -fsS "https://fermatmind.com/api/v0.2/health" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
           curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions?region=CN_MAINLAND&locale=zh-CN" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
           curl -fsS "https://fermatmind.com/api/v0.2/content-packs" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
-YAML
