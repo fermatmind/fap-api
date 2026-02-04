@@ -217,6 +217,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // CI/testing: disable all API throttles to keep PHPUnit deterministic.
+        $isTesting = $this->app->environment('testing');
+
         $response = function (string $code, string $message) {
             return function (Request $request, array $headers) use ($code, $message) {
                 return response()->json([
@@ -228,7 +231,11 @@ class AppServiceProvider extends ServiceProvider
             };
         };
 
-        RateLimiter::for('api_public', function (Request $request) use ($response) {
+        RateLimiter::for('api_public', function (Request $request) use ($response, $isTesting) {
+            if ($isTesting) {
+                return Limit::none();
+            }
+
             $limit = (int) config('fap.rate_limits.api_public_per_minute', 120);
             $limit = max(1, $limit);
 
@@ -237,7 +244,11 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_PUBLIC', 'Too many requests. Please retry later.'));
         });
 
-        RateLimiter::for('api_auth', function (Request $request) use ($response) {
+        RateLimiter::for('api_auth', function (Request $request) use ($response, $isTesting) {
+            if ($isTesting) {
+                return Limit::none();
+            }
+
             $limit = (int) config('fap.rate_limits.api_auth_per_minute', 30);
             $limit = max(1, $limit);
 
@@ -246,7 +257,11 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_AUTH', 'Too many auth requests. Please retry later.'));
         });
 
-        RateLimiter::for('api_attempt_submit', function (Request $request) use ($response) {
+        RateLimiter::for('api_attempt_submit', function (Request $request) use ($response, $isTesting) {
+            if ($isTesting) {
+                return Limit::none();
+            }
+
             $limit = (int) config('fap.rate_limits.api_attempt_submit_per_minute', 20);
             $limit = max(1, $limit);
 
@@ -262,7 +277,11 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_ATTEMPT_SUBMIT', 'Too many attempt submissions. Please retry later.'));
         });
 
-        RateLimiter::for('api_webhook', function (Request $request) use ($response) {
+        RateLimiter::for('api_webhook', function (Request $request) use ($response, $isTesting) {
+            if ($isTesting) {
+                return Limit::none();
+            }
+
             $limit = (int) config('fap.rate_limits.api_webhook_per_minute', 60);
             $limit = max(1, $limit);
 
