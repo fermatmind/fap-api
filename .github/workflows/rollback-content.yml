@@ -1,3 +1,4 @@
+cat > .github/workflows/rollback-content.yml <<'YAML'
 name: Rollback Content
 
 on:
@@ -14,14 +15,21 @@ on:
       release_id:
         description: "release_id from Publish Content"
         required: true
+        type: string
       region:
+        description: "Content region"
         required: true
+        type: string
         default: "CN_MAINLAND"
       locale:
+        description: "Content locale"
         required: true
+        type: string
         default: "zh-CN"
       dir_alias:
+        description: "Dir alias to rollback"
         required: true
+        type: string
         default: "MBTI-CN-v0.2.1-TEST"
       probe:
         description: "true/false"
@@ -33,7 +41,7 @@ on:
         default: "true"
 
 concurrency:
-  group: rollback-content-${{ inputs.target_env }}
+  group: "rollback-content-${{ inputs.target_env }}"
   cancel-in-progress: false
 
 jobs:
@@ -43,6 +51,7 @@ jobs:
 
     steps:
       - name: Rollback via API
+        id: rollback
         env:
           BASE_URL: ${{ secrets.CONTENT_PUBLISH_BASE_URL }}
           ADMIN_TOKEN: ${{ secrets.FAP_ADMIN_TOKEN }}
@@ -57,29 +66,28 @@ jobs:
 
           trim() { echo -n "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'; }
 
-          BASE_URL="$(trim "$BASE_URL")"
-          RELEASE_ID="$(trim "$RELEASE_ID")"
-          REGION="$(trim "$REGION")"
-          LOCALE="$(trim "$LOCALE")"
-          DIR_ALIAS="$(trim "$DIR_ALIAS")"
-          PROBE="$(trim "$PROBE")"
+          BASE_URL="$(trim "${BASE_URL:-}")"
+          ADMIN_TOKEN="$(trim "${ADMIN_TOKEN:-}")"
+          RELEASE_ID="$(trim "${RELEASE_ID:-}")"
+          REGION="$(trim "${REGION:-}")"
+          LOCALE="$(trim "${LOCALE:-}")"
+          DIR_ALIAS="$(trim "${DIR_ALIAS:-}")"
+          PROBE="$(trim "${PROBE:-}")"
+
+          BASE_URL="${BASE_URL%/}"
 
           case "$PROBE" in
             true|false) ;;
             *) echo "::error::probe must be true/false, got: $PROBE"; exit 1;;
           esac
 
-          PAYLOAD="$(RELEASE_ID="$RELEASE_ID" REGION="$REGION" LOCALE="$LOCALE" DIR_ALIAS="$DIR_ALIAS" PROBE="$PROBE" php -r '
-$payload = [
-  "release_id" => getenv("RELEASE_ID") ?: "",
-  "region" => getenv("REGION") ?: "",
-  "locale" => getenv("LOCALE") ?: "",
-  "dir_alias" => getenv("DIR_ALIAS") ?: "",
-  "probe" => (getenv("PROBE") === "true"),
-];
-echo json_encode($payload, JSON_UNESCAPED_UNICODE);
-'
-          )"
+          PAYLOAD="$(php -r 'echo json_encode([
+            "release_id" => getenv("RELEASE_ID") ?: "",
+            "region" => getenv("REGION") ?: "",
+            "locale" => getenv("LOCALE") ?: "",
+            "dir_alias" => getenv("DIR_ALIAS") ?: "",
+            "probe" => (getenv("PROBE") === "true"),
+          ], JSON_UNESCAPED_UNICODE);')"
 
           echo "Payload=$PAYLOAD"
 
@@ -89,12 +97,12 @@ echo json_encode($payload, JSON_UNESCAPED_UNICODE);
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
             -d "$PAYLOAD")"
 
-          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES).PHP_EOL;'
+          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE).PHP_EOL;'
 
-          OK="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); if (!is_array($j) || !array_key_exists("ok", $j)) { echo ""; exit; } echo $j["ok"] ? "true" : "false";')"
-          STATUS="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["status"] ?? "";')"
-          MSG="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["message"] ?? "";')"
-          ERR="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["error"] ?? "";')"
+          OK="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo (is_array($j) && (($j["ok"] ?? false) === true)) ? "true" : "false";')"
+          STATUS="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo is_array($j) ? ($j["status"] ?? "") : "";')"
+          MSG="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo is_array($j) ? ($j["message"] ?? "") : "";')"
+          ERR="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo is_array($j) ? ($j["error"] ?? "") : "";')"
 
           if [[ "$OK" != "true" ]]; then
             echo "::error::rollback api call failed ok=$OK error=$ERR message=$MSG"
@@ -118,6 +126,7 @@ echo json_encode($payload, JSON_UNESCAPED_UNICODE);
         shell: bash
         run: |
           set -euo pipefail
-          curl -fsS "https://fermatmind.com/api/v0.2/health" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);' >/dev/null
-          curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions?region=CN_MAINLAND&locale=zh-CN" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);' >/dev/null
-          curl -fsS "https://fermatmind.com/api/v0.2/content-packs" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);' >/dev/null
+          curl -fsS "https://fermatmind.com/api/v0.2/health" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
+          curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions?region=CN_MAINLAND&locale=zh-CN" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
+          curl -fsS "https://fermatmind.com/api/v0.2/content-packs" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
+YAML

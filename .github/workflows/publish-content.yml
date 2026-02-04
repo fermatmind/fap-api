@@ -1,46 +1,66 @@
+cat > .github/workflows/publish-content.yml <<'YAML'
 name: Publish Content
 
 on:
   workflow_dispatch:
     inputs:
       env:
-        description: Target environment (production or staging)
+        description: "Target environment (production or staging)"
         required: true
+        type: choice
+        options:
+          - production
+          - staging
         default: production
       region:
-        description: Content region
+        description: "Content region"
         required: true
-        default: CN_MAINLAND
+        type: string
+        default: "CN_MAINLAND"
       locale:
-        description: Content locale
+        description: "Content locale"
         required: true
-        default: zh-CN
+        type: string
+        default: "zh-CN"
       dir_alias:
-        description: Default dir alias
+        description: "Default dir alias"
         required: true
-        default: MBTI-CN-v0.2.1-TEST
+        type: string
+        default: "MBTI-CN-v0.2.1-TEST"
       file_path:
-        description: Folder to zip and upload
+        description: "Folder to zip and upload"
         required: true
-        default: content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+        type: string
+        default: "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
       probe:
-        description: Run probes (true/false)
+        description: "true/false"
         required: true
+        type: choice
+        options:
+          - "true"
+          - "false"
         default: "true"
+
+concurrency:
+  group: "publish-content-${{ inputs.env }}"
+  cancel-in-progress: false
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.env }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Zip content pack
+        shell: bash
         run: |
           set -euo pipefail
           SRC="${{ inputs.file_path }}"
           if [ ! -d "$SRC" ]; then
-            echo "file_path not found: $SRC"
+            echo "::error::file_path not found: $SRC"
             exit 1
           fi
           ZIP_PATH="/tmp/content_pack.zip"
@@ -53,18 +73,23 @@ jobs:
         env:
           BASE_URL: ${{ secrets.CONTENT_PUBLISH_BASE_URL }}
           ADMIN_TOKEN: ${{ secrets.FAP_ADMIN_TOKEN }}
+        shell: bash
         run: |
           set -euo pipefail
           BASE_URL="${BASE_URL%/}"
-          RESP=$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/upload" \
+
+          RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/upload" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
-            -F "file=@/tmp/content_pack.zip")
-          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES).PHP_EOL;'
-          VERSION_ID=$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["version_id"] ?? "";')
+            -F "file=@/tmp/content_pack.zip")"
+
+          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE).PHP_EOL;'
+
+          VERSION_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["version_id"] ?? "";')"
           if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
-            echo "version_id missing"
+            echo "::error::version_id missing"
             exit 1
           fi
+
           echo "version_id=$VERSION_ID" >> "$GITHUB_OUTPUT"
 
       - name: Publish pack
@@ -73,33 +98,43 @@ jobs:
           BASE_URL: ${{ secrets.CONTENT_PUBLISH_BASE_URL }}
           ADMIN_TOKEN: ${{ secrets.FAP_ADMIN_TOKEN }}
           VERSION_ID: ${{ steps.upload.outputs.version_id }}
+          REGION: ${{ inputs.region }}
+          LOCALE: ${{ inputs.locale }}
+          DIR_ALIAS: ${{ inputs.dir_alias }}
+          PROBE: ${{ inputs.probe }}
+        shell: bash
         run: |
           set -euo pipefail
           BASE_URL="${BASE_URL%/}"
-          PROBE_INPUT="${{ inputs.probe }}"
-          if [ "$PROBE_INPUT" = "true" ] || [ "$PROBE_INPUT" = "1" ]; then
-            PROBE_VALUE=true
-          else
-            PROBE_VALUE=false
-          fi
-          PAYLOAD=$(VERSION_ID="$VERSION_ID" REGION="${{ inputs.region }}" LOCALE="${{ inputs.locale }}" DIR_ALIAS="${{ inputs.dir_alias }}" PROBE_VALUE="$PROBE_VALUE" php -r '
-$payload = [
-  "version_id" => getenv("VERSION_ID") ?: "",
-  "region" => getenv("REGION") ?: "",
-  "locale" => getenv("LOCALE") ?: "",
-  "dir_alias" => getenv("DIR_ALIAS") ?: "",
-  "probe" => (getenv("PROBE_VALUE") === "true"),
-];
-echo json_encode($payload, JSON_UNESCAPED_UNICODE);
-')
-          RESP=$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/publish" \
+
+          case "$PROBE" in
+            true|false) ;;
+            *) echo "::error::probe must be true/false, got: $PROBE"; exit 1;;
+          esac
+
+          PAYLOAD="$(php -r 'echo json_encode([
+            "version_id" => getenv("VERSION_ID") ?: "",
+            "region" => getenv("REGION") ?: "",
+            "locale" => getenv("LOCALE") ?: "",
+            "dir_alias" => getenv("DIR_ALIAS") ?: "",
+            "probe" => (getenv("PROBE") === "true"),
+          ], JSON_UNESCAPED_UNICODE);')"
+
+          echo "Payload=$PAYLOAD"
+
+          RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/publish" \
+            -H "Accept: application/json" \
             -H "Content-Type: application/json" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
-            -d "$PAYLOAD")
-          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES).PHP_EOL;'
-          RELEASE_ID=$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["release_id"] ?? "";')
+            -d "$PAYLOAD")"
+
+          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE).PHP_EOL;'
+
+          RELEASE_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["release_id"] ?? "";')"
           if [ -z "$RELEASE_ID" ] || [ "$RELEASE_ID" = "null" ]; then
-            echo "release_id missing"
+            echo "::error::release_id missing"
             exit 1
           fi
+
           echo "release_id=$RELEASE_ID" >> "$GITHUB_OUTPUT"
+YAML
