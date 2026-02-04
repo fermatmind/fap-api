@@ -18,7 +18,8 @@ class OrderManager
         string $sku,
         int $quantity,
         ?string $targetAttemptId,
-        string $provider
+        string $provider,
+        ?string $idempotencyKey = null
     ): array {
         if (!Schema::hasTable('orders')) {
             return $this->tableMissing('orders');
@@ -44,46 +45,109 @@ class OrderManager
             return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
         }
 
-        $orderNo = 'ord_' . Str::uuid();
-        $now = now();
+        $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
+        $useIdempotency = $idempotencyKey !== '' && Schema::hasColumn('orders', 'idempotency_key');
 
-        $row = [
-            'id' => (string) Str::uuid(),
-            'order_no' => $orderNo,
-            'org_id' => $orgId,
-            'user_id' => $this->trimOrNull($userId),
-            'anon_id' => $this->trimOrNull($anonId),
-            'sku' => $skuToLookup,
-            'quantity' => $quantity,
-            'target_attempt_id' => $this->trimOrNull($targetAttemptId),
-            'amount_cents' => (int) ($skuRow->price_cents ?? 0) * $quantity,
-            'currency' => (string) ($skuRow->currency ?? 'USD'),
-            'status' => 'created',
-            'provider' => $provider !== '' ? $provider : 'stub',
-            'external_trade_no' => null,
-            'paid_at' => null,
-            'created_at' => $now,
-            'updated_at' => $now,
-        ];
+        $createRow = function () use (
+            $orgId,
+            $userId,
+            $anonId,
+            $skuToLookup,
+            $quantity,
+            $targetAttemptId,
+            $provider,
+            $skuRow,
+            $requestedSku,
+            $effectiveSku,
+            $entitlementId,
+            $idempotencyKey,
+            $useIdempotency
+        ): array {
+            $orderNo = 'ord_' . Str::uuid();
+            $now = now();
 
-        if (Schema::hasColumn('orders', 'requested_sku')) {
-            $row['requested_sku'] = $requestedSku;
+            $row = [
+                'id' => (string) Str::uuid(),
+                'order_no' => $orderNo,
+                'org_id' => $orgId,
+                'user_id' => $this->trimOrNull($userId),
+                'anon_id' => $this->trimOrNull($anonId),
+                'sku' => $skuToLookup,
+                'quantity' => $quantity,
+                'target_attempt_id' => $this->trimOrNull($targetAttemptId),
+                'amount_cents' => (int) ($skuRow->price_cents ?? 0) * $quantity,
+                'currency' => (string) ($skuRow->currency ?? 'USD'),
+                'status' => 'created',
+                'provider' => $provider !== '' ? $provider : 'stub',
+                'external_trade_no' => null,
+                'paid_at' => null,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
+            if ($useIdempotency) {
+                $row['idempotency_key'] = $idempotencyKey;
+            }
+            if (Schema::hasColumn('orders', 'requested_sku')) {
+                $row['requested_sku'] = $requestedSku;
+            }
+            if (Schema::hasColumn('orders', 'effective_sku')) {
+                $row['effective_sku'] = $effectiveSku !== '' ? $effectiveSku : $skuToLookup;
+            }
+            if (Schema::hasColumn('orders', 'entitlement_id')) {
+                $row['entitlement_id'] = $entitlementId;
+            }
+
+            $row = $this->applyLegacyColumns($row, $skuRow);
+
+            return $row;
+        };
+
+        if ($useIdempotency) {
+            return DB::transaction(function () use ($orgId, $idempotencyKey, $createRow) {
+                $existing = $this->findIdempotentOrder($orgId, $idempotencyKey, true);
+                if ($existing) {
+                    return [
+                        'ok' => true,
+                        'order_no' => $existing->order_no ?? null,
+                        'order' => $existing,
+                        'idempotent' => true,
+                    ];
+                }
+
+                $row = $createRow();
+                $inserted = DB::table('orders')->insertOrIgnore($row);
+                if ((int) $inserted === 0) {
+                    $existing = $this->findIdempotentOrder($orgId, $idempotencyKey, true);
+                    if ($existing) {
+                        return [
+                            'ok' => true,
+                            'order_no' => $existing->order_no ?? null,
+                            'order' => $existing,
+                            'idempotent' => true,
+                        ];
+                    }
+                }
+
+                $order = DB::table('orders')->where('order_no', $row['order_no'])->first();
+
+                return [
+                    'ok' => true,
+                    'order_no' => $order->order_no ?? $row['order_no'],
+                    'order' => $order ?? $row,
+                    'idempotent' => false,
+                ];
+            });
         }
-        if (Schema::hasColumn('orders', 'effective_sku')) {
-            $row['effective_sku'] = $effectiveSku !== '' ? $effectiveSku : $skuToLookup;
-        }
-        if (Schema::hasColumn('orders', 'entitlement_id')) {
-            $row['entitlement_id'] = $entitlementId;
-        }
 
-        $row = $this->applyLegacyColumns($row, $skuRow);
-
+        $row = $createRow();
         DB::table('orders')->insert($row);
+        $order = DB::table('orders')->where('order_no', $row['order_no'])->first();
 
         return [
             'ok' => true,
-            'order_no' => $orderNo,
-            'order' => $row,
+            'order_no' => $order->order_no ?? $row['order_no'],
+            'order' => $order ?? $row,
         ];
     }
 
@@ -194,6 +258,9 @@ class OrderManager
         if ($fromStatus === 'paid' && $toStatus === 'fulfilled') {
             return true;
         }
+        if ($fromStatus === 'fulfilled' && $toStatus === 'refunded') {
+            return true;
+        }
 
         return false;
     }
@@ -226,6 +293,12 @@ class OrderManager
         }
         if (Schema::hasColumn('orders', 'refunded_at')) {
             $row['refunded_at'] = null;
+        }
+        if (Schema::hasColumn('orders', 'refund_amount_cents')) {
+            $row['refund_amount_cents'] = null;
+        }
+        if (Schema::hasColumn('orders', 'refund_reason')) {
+            $row['refund_reason'] = null;
         }
 
         return $row;
@@ -271,5 +344,30 @@ class OrderManager
     {
         $value = $value !== null ? trim($value) : '';
         return $value !== '' ? $value : null;
+    }
+
+    private function normalizeIdempotencyKey(?string $key): string
+    {
+        $key = $key !== null ? trim($key) : '';
+        if ($key === '') {
+            return '';
+        }
+        if (strlen($key) > 128) {
+            $key = substr($key, 0, 128);
+        }
+        return $key;
+    }
+
+    private function findIdempotentOrder(int $orgId, string $idempotencyKey, bool $lockForUpdate = false): ?object
+    {
+        $query = DB::table('orders')->where('idempotency_key', $idempotencyKey);
+        if (Schema::hasColumn('orders', 'org_id')) {
+            $query->where('org_id', $orgId);
+        }
+        if ($lockForUpdate) {
+            $query->lockForUpdate();
+        }
+
+        return $query->first();
     }
 }

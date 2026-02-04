@@ -66,6 +66,7 @@ class CommerceController extends Controller
             'quantity' => ['nullable', 'integer', 'min:1'],
             'target_attempt_id' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
+            'idempotency_key' => ['nullable', 'string', 'max:128'],
         ]);
 
         $orgId = $this->orgContext->orgId();
@@ -77,6 +78,8 @@ class CommerceController extends Controller
             $provider = $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
         }
 
+        $idempotencyKey = $this->resolveIdempotencyKey($request, $payload);
+
         $result = $this->orders->createOrder(
             $orgId,
             $userId !== null ? (string) $userId : null,
@@ -84,7 +87,8 @@ class CommerceController extends Controller
             (string) $payload['sku'],
             (int) ($payload['quantity'] ?? 1),
             $payload['target_attempt_id'] ?? null,
-            $provider !== '' ? $provider : 'stub'
+            $provider !== '' ? $provider : 'stub',
+            $idempotencyKey
         );
 
         if (!($result['ok'] ?? false)) {
@@ -123,5 +127,16 @@ class CommerceController extends Controller
             'TABLE_MISSING' => 500,
             default => 400,
         };
+    }
+
+    private function resolveIdempotencyKey(Request $request, array $payload): ?string
+    {
+        $header = trim((string) $request->header('Idempotency-Key', ''));
+        if ($header !== '') {
+            return $header;
+        }
+
+        $body = trim((string) ($payload['idempotency_key'] ?? ''));
+        return $body !== '' ? $body : null;
     }
 }

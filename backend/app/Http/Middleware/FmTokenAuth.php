@@ -115,13 +115,13 @@ class FmTokenAuth
         // prefer: fm_tokens.user_id
         if (property_exists($row, 'user_id')) {
             $v = trim((string) ($row->user_id ?? ''));
-            if ($v !== '') return $v;
+            if ($v !== '' && preg_match('/^\d+$/', $v)) return $v;
         }
 
         // optional alias
         if (property_exists($row, 'fm_user_id')) {
             $v = trim((string) ($row->fm_user_id ?? ''));
-            if ($v !== '') return $v;
+            if ($v !== '' && preg_match('/^\d+$/', $v)) return $v;
         }
 
         // meta_json fallback (when tokens are issued by legacy services)
@@ -133,7 +133,7 @@ class FmTokenAuth
             }
             if (is_array($meta)) {
                 $v = trim((string) ($meta['user_id'] ?? $meta['fm_user_id'] ?? ''));
-                if ($v !== '') return $v;
+                if ($v !== '' && preg_match('/^\d+$/', $v)) return $v;
             }
         }
 
@@ -141,7 +141,7 @@ class FmTokenAuth
         foreach (['uid', 'user_uid', 'user'] as $c) {
             if (property_exists($row, $c)) {
                 $v = trim((string) ($row->{$c} ?? ''));
-                if ($v !== '') return $v;
+                if ($v !== '' && preg_match('/^\d+$/', $v)) return $v;
             }
         }
 

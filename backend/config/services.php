@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'billing' => [
+        'webhook_secret' => env('BILLING_WEBHOOK_SECRET'),
+    ],
+
 ];

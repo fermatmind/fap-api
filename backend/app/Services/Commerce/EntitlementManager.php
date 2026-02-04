@@ -189,6 +189,85 @@ class EntitlementManager
         ];
     }
 
+    public function revokeByOrderNo(int $orgId, string $orderNo): array
+    {
+        if (!Schema::hasTable('orders')) {
+            return $this->tableMissing('orders');
+        }
+        if (!Schema::hasTable('benefit_grants')) {
+            return $this->tableMissing('benefit_grants');
+        }
+
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
+        }
+
+        $query = DB::table('orders')->where('order_no', $orderNo);
+        if (Schema::hasColumn('orders', 'org_id')) {
+            $query->where('org_id', $orgId);
+        }
+        $order = $query->first();
+        if (!$order) {
+            return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+        }
+
+        $orderOrgId = Schema::hasColumn('orders', 'org_id') ? (int) ($order->org_id ?? $orgId) : $orgId;
+        $sku = strtoupper((string) ($order->effective_sku ?? $order->sku ?? $order->item_sku ?? ''));
+        if ($sku === '') {
+            return [
+                'ok' => true,
+                'revoked' => 0,
+            ];
+        }
+
+        $benefitCode = '';
+        if (Schema::hasTable('skus')) {
+            $skuRow = DB::table('skus')->where('sku', $sku)->first();
+            if ($skuRow) {
+                $benefitCode = strtoupper((string) ($skuRow->benefit_code ?? ''));
+            }
+        }
+
+        if ($benefitCode === '') {
+            return [
+                'ok' => true,
+                'revoked' => 0,
+            ];
+        }
+
+        $attemptId = trim((string) ($order->target_attempt_id ?? ''));
+        if ($attemptId === '') {
+            return [
+                'ok' => true,
+                'revoked' => 0,
+            ];
+        }
+
+        $now = now();
+        $updates = [
+            'status' => 'revoked',
+            'updated_at' => $now,
+        ];
+        if (Schema::hasColumn('benefit_grants', 'revoked_at')) {
+            $updates['revoked_at'] = $now;
+        }
+
+        $revoked = DB::table('benefit_grants')
+            ->where('org_id', $orderOrgId)
+            ->where('benefit_code', $benefitCode)
+            ->where('attempt_id', $attemptId)
+            ->where('status', 'active')
+            ->update($updates);
+
+        return [
+            'ok' => true,
+            'revoked' => $revoked,
+            'benefit_code' => $benefitCode,
+            'attempt_id' => $attemptId,
+        ];
+    }
+
     private function tableMissing(string $table): array
     {
         return [
@@ -199,6 +278,15 @@ class EntitlementManager
     }
 
     private function badRequest(string $code, string $message): array
+    {
+        return [
+            'ok' => false,
+            'error' => $code,
+            'message' => $message,
+        ];
+    }
+
+    private function notFound(string $code, string $message): array
     {
         return [
             'ok' => false,

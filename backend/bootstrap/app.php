@@ -4,6 +4,20 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
+$runtimeDirs = [
+    __DIR__ . '/../storage/framework/cache',
+    __DIR__ . '/../storage/framework/sessions',
+    __DIR__ . '/../storage/framework/views',
+    __DIR__ . '/../storage/framework/testing',
+    __DIR__ . '/../bootstrap/cache',
+];
+
+foreach ($runtimeDirs as $dir) {
+    if (!is_dir($dir)) {
+        @mkdir($dir, 0775, true);
+    }
+}
+
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__ . '/../routes/web.php',

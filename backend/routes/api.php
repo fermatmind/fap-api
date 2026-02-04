@@ -248,7 +248,7 @@ Route::prefix("v0.3")->group(function () {
         Route::post(
             "/webhooks/payment/{provider}",
             "App\\Http\\Controllers\\API\\V0_3\\Webhooks\\PaymentWebhookController@handle"
-        );
+        )->whereIn('provider', ['stripe', 'billing', 'stub']);
     });
 
     Route::middleware([\App\Http\Middleware\FmTokenAuth::class, \App\Http\Middleware\ResolveOrgContext::class])

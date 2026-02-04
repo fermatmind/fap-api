@@ -3,7 +3,9 @@
 namespace App\Services\Commerce;
 
 use App\Services\Analytics\EventRecorder;
+use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
+use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\PaymentGateway\StubGateway;
 use App\Services\Report\ReportSnapshotStore;
 use App\Support\Commerce\SkuContract;
@@ -25,6 +27,10 @@ class PaymentWebhookProcessor
     ) {
         $stub = new StubGateway();
         $this->gateways[$stub->provider()] = $stub;
+        $stripe = new StripeGateway();
+        $this->gateways[$stripe->provider()] = $stripe;
+        $billing = new BillingGateway();
+        $this->gateways[$billing->provider()] = $billing;
     }
 
     public function handle(string $provider, array $payload, int $orgId = 0, ?string $userId = null, ?string $anonId = null): array
@@ -48,6 +54,7 @@ class PaymentWebhookProcessor
         $normalized = $gateway->normalizePayload($payload);
         $providerEventId = trim((string) ($normalized['provider_event_id'] ?? ''));
         $orderNo = trim((string) ($normalized['order_no'] ?? ''));
+        $eventType = $this->normalizeEventType($normalized);
 
         if ($providerEventId === '' || $orderNo === '') {
             return $this->badRequest('PAYLOAD_INVALID', 'provider_event_id and order_no are required.');
@@ -80,7 +87,7 @@ class PaymentWebhookProcessor
             $eventRow['order_id'] = $orderId ?: (string) Str::uuid();
         }
         if (Schema::hasColumn('payment_events', 'event_type')) {
-            $eventRow['event_type'] = 'payment_webhook';
+            $eventRow['event_type'] = $eventType;
         }
         if (Schema::hasColumn('payment_events', 'signature_ok')) {
             $eventRow['signature_ok'] = true;
@@ -122,13 +129,17 @@ class PaymentWebhookProcessor
             ];
         }
 
-        return DB::transaction(function () use ($orderNo, $normalized, $providerEventId, $provider, $orgId, $userId, $anonId) {
+        return DB::transaction(function () use ($orderNo, $normalized, $providerEventId, $provider, $orgId, $userId, $anonId, $eventType) {
             $orderResult = $this->orders->getOrder($orgId, $orderNo);
             if (!($orderResult['ok'] ?? false)) {
                 return $orderResult;
             }
 
             $order = $orderResult['order'];
+            if ($this->isRefundEvent($eventType, $normalized)) {
+                return $this->handleRefund($orderNo, $order, $normalized, $providerEventId, $orgId);
+            }
+
             $sku = strtoupper((string) ($order->effective_sku ?? $order->sku ?? $order->item_sku ?? ''));
             if ($sku === '') {
                 return $this->badRequest('SKU_NOT_FOUND', 'sku missing on order.');
@@ -436,6 +447,72 @@ class PaymentWebhookProcessor
             'ok' => false,
             'error' => $code,
             'message' => $message,
+            'status' => 404,
+        ];
+    }
+
+    private function normalizeEventType(array $normalized): string
+    {
+        $eventType = strtolower(trim((string) ($normalized['event_type'] ?? '')));
+        return $eventType !== '' ? $eventType : 'payment_succeeded';
+    }
+
+    private function isRefundEvent(string $eventType, array $normalized): bool
+    {
+        if ($eventType !== '' && str_contains($eventType, 'refund')) {
+            return true;
+        }
+
+        $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
+        return $refundAmount > 0;
+    }
+
+    private function handleRefund(
+        string $orderNo,
+        object $order,
+        array $normalized,
+        string $providerEventId,
+        int $orgId
+    ): array {
+        $now = now();
+        $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
+        $refundReason = trim((string) ($normalized['refund_reason'] ?? ''));
+
+        $updates = [
+            'updated_at' => $now,
+        ];
+        if (Schema::hasColumn('orders', 'refunded_at') && empty($order->refunded_at)) {
+            $updates['refunded_at'] = $now;
+        }
+        if (Schema::hasColumn('orders', 'refund_amount_cents')) {
+            $updates['refund_amount_cents'] = $refundAmount > 0 ? $refundAmount : ($order->refund_amount_cents ?? null);
+        }
+        if (Schema::hasColumn('orders', 'refund_reason') && $refundReason !== '') {
+            $updates['refund_reason'] = $refundReason;
+        }
+
+        if (count($updates) > 1) {
+            DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->update($updates);
+        }
+
+        $transition = $this->orders->transition($orderNo, 'refunded', $orgId);
+        if (!($transition['ok'] ?? false)) {
+            return $transition;
+        }
+
+        $revoked = $this->entitlements->revokeByOrderNo($orgId, $orderNo);
+        if (!($revoked['ok'] ?? false)) {
+            return $revoked;
+        }
+
+        return [
+            'ok' => true,
+            'order_no' => $orderNo,
+            'provider_event_id' => $providerEventId,
+            'refunded' => true,
+            'revoked' => $revoked['revoked'] ?? 0,
         ];
     }
 }
