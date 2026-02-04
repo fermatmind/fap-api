@@ -218,6 +218,14 @@ CANON_REL="default/${REGION}/${LOCALE}/${LEGACY_DIR}"
 CANON_ABS="$CONTENT_ROOT/$CANON_REL"
 ALIAS_ABS="$CONTENT_ROOT/$LEGACY_DIR"
 
+cleanup_legacy_alias() {
+  if [[ -L "$ALIAS_ABS" ]]; then
+    echo "[CI] cleanup legacy alias: $ALIAS_ABS"
+    rm -f "$ALIAS_ABS"
+  fi
+}
+trap cleanup_legacy_alias EXIT INT TERM
+
 if [[ -d "$CANON_ABS" ]]; then
   if [[ ! -e "$ALIAS_ABS" ]]; then
     echo "[CI] create legacy alias: $ALIAS_ABS -> $CANON_REL"

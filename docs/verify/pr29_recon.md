@@ -1,0 +1,47 @@
+# PR29 Recon
+
+- Keywords: orders|benefit_grants|webhooks
+- 相关入口文件（必须列出完整路径）：
+- backend/routes/api.php
+- backend/app/Http/Controllers/API/V0_3/CommerceController.php
+- backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php
+- backend/app/Services/Commerce/OrderManager.php
+- backend/app/Services/Commerce/PaymentWebhookProcessor.php
+- backend/app/Services/Commerce/EntitlementManager.php
+- backend/app/Services/Commerce/PaymentGateway/StubGateway.php
+- backend/app/Services/Commerce/PaymentGateway/BillingGateway.php
+- backend/app/Services/Commerce/PaymentGateway/StripeGateway.php
+- backend/app/Http/Middleware/FmTokenAuth.php
+- backend/bootstrap/app.php
+- backend/config/view.php
+- 相关路由（必须列出 path + controller@method）：
+- POST /api/v0.3/orders -> API\V0_3\CommerceController@createOrder
+- GET /api/v0.3/orders/{order_no} -> API\V0_3\CommerceController@getOrder
+- POST /api/v0.3/webhooks/payment/{provider} -> API\V0_3\Webhooks\PaymentWebhookController@handle
+- 相关 DB 表/迁移（必须列出完整路径）：
+- backend/database/migrations/2026_01_29_200010_create_orders_table.php
+- backend/database/migrations/2026_01_29_200020_create_payment_events_table.php
+- backend/database/migrations/2026_01_29_200060_create_benefit_grants_table.php
+- backend/database/migrations/2026_02_04_090000_add_idempotency_refunds_to_orders_benefit_grants.php
+- 需要新增/修改点（按文件路径列点）：
+- backend/routes/api.php: restrict webhook provider names
+- backend/app/Services/Commerce/OrderManager.php: idempotency key + refund transition
+- backend/app/Services/Commerce/PaymentWebhookProcessor.php: refund flow + entitlement revoke
+- backend/app/Services/Commerce/EntitlementManager.php: revokeByOrderNo
+- backend/app/Http/Controllers/API/V0_3/CommerceController.php: accept Idempotency-Key
+- backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php: billing signature + stub guard
+- backend/config/view.php: compiled path fallback
+- backend/bootstrap/app.php: runtime dirs creation
+- backend/tests/Feature/V0_3/CommerceOrderIdempotencyTest.php: idempotent create + cross-org 404
+- backend/tests/Feature/V0_3/CommerceRefundWebhookTest.php: refund -> revoke -> report locked
+- backend/tests/Feature/V0_3/BillingWebhookSignatureTest.php: signature 404 policy
+- backend/tests/Feature/ViewCompiledPathTest.php: compiled path non-empty + dir exists
+- backend/scripts/pr29_verify.sh: commerce + refund E2E
+- backend/scripts/pr29_accept.sh: sqlite + verify + ci_verify_mbti + artifacts
+- docs/verify/pr29_verify.md: verification record
+- 风险点与规避（幂等/并发回调/退款撤权/签名校验/404 口径/脱敏）：
+- 幂等/并发回调: orders idempotency_key + payment_events insertOrIgnore
+- 退款撤权: refund webhook updates orders + revoke active grants
+- 签名校验: billing HMAC failures return 404
+- 404 口径: cross-org lookup returns ORDER_NOT_FOUND (404)
+- 脱敏: sanitize_artifacts.sh invoked in accept script
