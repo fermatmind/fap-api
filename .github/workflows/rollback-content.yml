@@ -69,13 +69,16 @@ jobs:
             *) echo "::error::probe must be true/false, got: $PROBE"; exit 1;;
           esac
 
-          PAYLOAD="$(jq -n \
-            --arg release_id "$RELEASE_ID" \
-            --arg region "$REGION" \
-            --arg locale "$LOCALE" \
-            --arg dir_alias "$DIR_ALIAS" \
-            --argjson probe "$PROBE" \
-            '{release_id:$release_id, region:$region, locale:$locale, dir_alias:$dir_alias, probe:$probe}'
+          PAYLOAD="$(RELEASE_ID="$RELEASE_ID" REGION="$REGION" LOCALE="$LOCALE" DIR_ALIAS="$DIR_ALIAS" PROBE="$PROBE" php -r '
+$payload = [
+  "release_id" => getenv("RELEASE_ID") ?: "",
+  "region" => getenv("REGION") ?: "",
+  "locale" => getenv("LOCALE") ?: "",
+  "dir_alias" => getenv("DIR_ALIAS") ?: "",
+  "probe" => (getenv("PROBE") === "true"),
+];
+echo json_encode($payload, JSON_UNESCAPED_UNICODE);
+'
           )"
 
           echo "Payload=$PAYLOAD"
@@ -86,12 +89,12 @@ jobs:
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
             -d "$PAYLOAD")"
 
-          echo "$RESP" | jq .
+          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES).PHP_EOL;'
 
-          OK="$(echo "$RESP" | jq -r '.ok // empty')"
-          STATUS="$(echo "$RESP" | jq -r '.status // empty')"
-          MSG="$(echo "$RESP" | jq -r '.message // empty')"
-          ERR="$(echo "$RESP" | jq -r '.error // empty')"
+          OK="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); if (!is_array($j) || !array_key_exists("ok", $j)) { echo ""; exit; } echo $j["ok"] ? "true" : "false";')"
+          STATUS="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["status"] ?? "";')"
+          MSG="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["message"] ?? "";')"
+          ERR="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["error"] ?? "";')"
 
           if [[ "$OK" != "true" ]]; then
             echo "::error::rollback api call failed ok=$OK error=$ERR message=$MSG"
@@ -103,9 +106,9 @@ jobs:
             exit 1
           fi
 
-          NEW_RELEASE_ID="$(echo "$RESP" | jq -r '.release_id')"
-          RB_VERSION_ID="$(echo "$RESP" | jq -r '.rolled_back_to.version_id')"
-          RB_PACK_ID="$(echo "$RESP" | jq -r '.rolled_back_to.pack_id')"
+          NEW_RELEASE_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["release_id"] ?? "";')"
+          RB_VERSION_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["rolled_back_to"]["version_id"] ?? "";')"
+          RB_PACK_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["rolled_back_to"]["pack_id"] ?? "";')"
 
           echo "rolled_back_release_id=$NEW_RELEASE_ID" >> "$GITHUB_OUTPUT"
           echo "rolled_back_version_id=$RB_VERSION_ID" >> "$GITHUB_OUTPUT"
@@ -115,6 +118,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -fsS "https://fermatmind.com/api/v0.2/health" | jq -e '.ok==true' >/dev/null
-          curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions?region=CN_MAINLAND&locale=zh-CN" | jq -e '.ok==true' >/dev/null
-          curl -fsS "https://fermatmind.com/api/v0.2/content-packs" | jq -e '.ok==true' >/dev/null
+          curl -fsS "https://fermatmind.com/api/v0.2/health" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);' >/dev/null
+          curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions?region=CN_MAINLAND&locale=zh-CN" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);' >/dev/null
+          curl -fsS "https://fermatmind.com/api/v0.2/content-packs" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);' >/dev/null

@@ -111,7 +111,7 @@ jobs:
             curl -sS http://127.0.0.1:18000/api/v0.2/health >/dev/null && break
             sleep 1
           done
-          curl -sS http://127.0.0.1:18000/api/v0.2/content-packs | jq -e '.ok==true'
+          curl -sS http://127.0.0.1:18000/api/v0.2/content-packs | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);'
 
       - name: Run ci_verify_mbti
         working-directory: backend

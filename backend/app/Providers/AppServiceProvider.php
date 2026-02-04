@@ -7,7 +7,9 @@ use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -215,6 +217,85 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $response = function (string $code, string $message) {
+            return function (Request $request, array $headers) use ($code, $message) {
+                return response()->json([
+                    'error' => [
+                        'code' => $code,
+                        'message' => $message,
+                    ],
+                ], 429)->withHeaders($headers);
+            };
+        };
+
+        // Disable throttles in test-like environments to prevent cross-test 429 flakiness.
+        // GitHub Actions uses APP_ENV=ci; local PHPUnit commonly uses APP_ENV=testing.
+        $bypassRateLimits = $this->app->environment(['testing', 'ci']);
+
+        RateLimiter::for('api_public', function (Request $request) use ($response, $bypassRateLimits) {
+            if ($bypassRateLimits) {
+                return Limit::none();
+            }
+
+            $limit = (int) config('fap.rate_limits.api_public_per_minute', 120);
+            $limit = max(1, $limit);
+
+            return Limit::perMinute($limit)
+                ->by('ip:' . $request->ip())
+                ->response($response('RATE_LIMIT_PUBLIC', 'Too many requests. Please retry later.'));
+        });
+
+        RateLimiter::for('api_auth', function (Request $request) use ($response, $bypassRateLimits) {
+            if ($bypassRateLimits) {
+                return Limit::none();
+            }
+
+            $limit = (int) config('fap.rate_limits.api_auth_per_minute', 30);
+            $limit = max(1, $limit);
+
+            return Limit::perMinute($limit)
+                ->by('ip:' . $request->ip())
+                ->response($response('RATE_LIMIT_AUTH', 'Too many auth requests. Please retry later.'));
+        });
+
+        RateLimiter::for('api_attempt_submit', function (Request $request) use ($response, $bypassRateLimits) {
+            if ($bypassRateLimits) {
+                return Limit::none();
+            }
+
+            $limit = (int) config('fap.rate_limits.api_attempt_submit_per_minute', 20);
+            $limit = max(1, $limit);
+
+            $userId = (string) ($request->attributes->get('fm_user_id') ?? '');
+            if ($userId === '' && $request->user()) {
+                $userId = (string) $request->user()->getAuthIdentifier();
+            }
+
+            $key = $userId !== '' ? ('user:' . $userId) : ('ip:' . $request->ip());
+
+            return Limit::perMinute($limit)
+                ->by($key)
+                ->response($response('RATE_LIMIT_ATTEMPT_SUBMIT', 'Too many attempt submissions. Please retry later.'));
+        });
+
+        RateLimiter::for('api_webhook', function (Request $request) use ($response, $bypassRateLimits) {
+            if ($bypassRateLimits) {
+                return Limit::none();
+            }
+
+            $limit = (int) config('fap.rate_limits.api_webhook_per_minute', 60);
+            $limit = max(1, $limit);
+
+            $provider = (string) $request->route('provider', '');
+            if ($provider === '') {
+                $provider = (string) $request->route('provider_code', '');
+            }
+
+            $key = $provider !== '' ? ('provider:' . $provider) : ('ip:' . $request->ip());
+
+            return Limit::perMinute($limit)
+                ->by($key)
+                ->response($response('RATE_LIMIT_WEBHOOK', 'Too many webhook requests. Please retry later.'));
+        });
     }
 }

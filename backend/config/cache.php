@@ -13,7 +13,20 @@ return [
     |
     */
 
-    'default' => env('CACHE_STORE', 'database'),
+    // Default: production -> redis, local/testing -> array
+    'default' => env('CACHE_STORE', env('APP_ENV', 'production') === 'production' ? 'redis' : 'array'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rate Limiter Store
+    |--------------------------------------------------------------------------
+    |
+    | The rate limiter requires a persistent store. Use file locally and
+    | redis in production unless explicitly overridden.
+    |
+    */
+
+    'limiter' => env('CACHE_LIMITER', env('APP_ENV', 'production') === 'production' ? 'redis' : 'file'),
 
     /*
     |--------------------------------------------------------------------------
@@ -72,6 +85,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
+            // cache connection: REDIS_CACHE_CONNECTION=cache
             'connection' => env('REDIS_CACHE_CONNECTION', 'cache'),
             'lock_connection' => env('REDIS_CACHE_LOCK_CONNECTION', 'default'),
         ],

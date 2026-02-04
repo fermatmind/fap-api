@@ -59,8 +59,8 @@ jobs:
           RESP=$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/upload" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
             -F "file=@/tmp/content_pack.zip")
-          echo "$RESP" | jq .
-          VERSION_ID=$(echo "$RESP" | jq -r '.version_id')
+          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES).PHP_EOL;'
+          VERSION_ID=$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["version_id"] ?? "";')
           if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
             echo "version_id missing"
             exit 1
@@ -82,19 +82,22 @@ jobs:
           else
             PROBE_VALUE=false
           fi
-          PAYLOAD=$(jq -n \
-            --arg version_id "$VERSION_ID" \
-            --arg region "${{ inputs.region }}" \
-            --arg locale "${{ inputs.locale }}" \
-            --arg dir_alias "${{ inputs.dir_alias }}" \
-            --argjson probe "$PROBE_VALUE" \
-            '{version_id:$version_id,region:$region,locale:$locale,dir_alias:$dir_alias,probe:$probe}')
+          PAYLOAD=$(VERSION_ID="$VERSION_ID" REGION="${{ inputs.region }}" LOCALE="${{ inputs.locale }}" DIR_ALIAS="${{ inputs.dir_alias }}" PROBE_VALUE="$PROBE_VALUE" php -r '
+$payload = [
+  "version_id" => getenv("VERSION_ID") ?: "",
+  "region" => getenv("REGION") ?: "",
+  "locale" => getenv("LOCALE") ?: "",
+  "dir_alias" => getenv("DIR_ALIAS") ?: "",
+  "probe" => (getenv("PROBE_VALUE") === "true"),
+];
+echo json_encode($payload, JSON_UNESCAPED_UNICODE);
+')
           RESP=$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/publish" \
             -H "Content-Type: application/json" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
             -d "$PAYLOAD")
-          echo "$RESP" | jq .
-          RELEASE_ID=$(echo "$RESP" | jq -r '.release_id')
+          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES).PHP_EOL;'
+          RELEASE_ID=$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["release_id"] ?? "";')
           if [ -z "$RELEASE_ID" ] || [ "$RELEASE_ID" = "null" ]; then
             echo "release_id missing"
             exit 1

@@ -25,6 +25,13 @@ return [
 
     're_tags_debug_n' => (int) env('RE_TAGS_DEBUG_N', 0),
 
+    'rate_limits' => [
+        'api_public_per_minute' => (int) env('FAP_RATE_LIMIT_PUBLIC_PER_MINUTE', 120),
+        'api_auth_per_minute' => (int) env('FAP_RATE_LIMIT_AUTH_PER_MINUTE', 30),
+        'api_attempt_submit_per_minute' => (int) env('FAP_RATE_LIMIT_ATTEMPT_SUBMIT_PER_MINUTE', 20),
+        'api_webhook_per_minute' => (int) env('FAP_RATE_LIMIT_WEBHOOK_PER_MINUTE', 60),
+    ],
+
     'selfcheck_known_assets' => [
         'manifest.json',
         'version.json',

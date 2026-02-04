@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class HealthzController extends Controller
 {
@@ -20,6 +22,7 @@ class HealthzController extends Controller
 
         $deps = [];
         $deps['db'] = $this->checkDb();
+        $deps['cache_store'] = $this->checkCacheStore();
         $deps['redis'] = $this->checkRedis();
         $deps['queue'] = $this->checkQueue();
         $deps['cache_dirs'] = $this->checkCacheDirs();
@@ -69,6 +72,20 @@ class HealthzController extends Controller
 
     private function checkRedis(): array
     {
+        $cacheStore = (string) config('cache.default', 'array');
+        $cacheDriver = (string) config("cache.stores.{$cacheStore}.driver", $cacheStore);
+        $queueDriver = (string) config('queue.default', 'sync');
+
+        $needsRedis = ($cacheDriver === 'redis' || $queueDriver === 'redis');
+        if (!$needsRedis) {
+            return [
+                'ok' => true,
+                'skipped' => true,
+                'reason' => 'redis_not_in_use',
+                'client' => (string) config('database.redis.client', 'redis'),
+            ];
+        }
+
         $t0 = microtime(true);
         try {
             $client = (string) config('database.redis.client', 'redis');
@@ -93,11 +110,60 @@ class HealthzController extends Controller
         }
     }
 
+    private function checkCacheStore(): array
+    {
+        $storeName = (string) config('cache.default', 'array');
+        $driver = (string) config("cache.stores.{$storeName}.driver", $storeName);
+
+        $t0 = microtime(true);
+        try {
+            $store = Cache::store($storeName);
+            $key = 'healthz:cache:' . Str::uuid()->toString();
+            $value = 'ok:' . (string) time();
+            $store->put($key, $value, 30);
+            $read = $store->get($key);
+            $store->forget($key);
+            $ms = (int) round((microtime(true) - $t0) * 1000);
+
+            $ok = ($read === $value);
+
+            return [
+                'ok' => $ok,
+                'store' => $storeName,
+                'driver' => $driver,
+                'latency_ms' => $ms,
+                'error_code' => $ok ? '' : 'CACHE_STORE_MISMATCH',
+                'message' => $ok ? '' : 'cache read/write mismatch',
+            ];
+        } catch (\Throwable $e) {
+            $ms = (int) round((microtime(true) - $t0) * 1000);
+
+            return [
+                'ok' => false,
+                'store' => $storeName,
+                'driver' => $driver,
+                'latency_ms' => $ms,
+                'error_code' => 'CACHE_STORE_UNAVAILABLE',
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
     private function checkQueue(): array
     {
         $driver = (string) config('queue.default', 'sync');
+        $connection = config("queue.connections.{$driver}");
 
         try {
+            if (!is_array($connection)) {
+                return [
+                    'ok' => false,
+                    'driver' => $driver,
+                    'error_code' => 'QUEUE_CONFIG_MISSING',
+                    'message' => 'queue connection config missing',
+                ];
+            }
+
             if ($driver === 'database') {
                 $hasJobs = Schema::hasTable('jobs');
                 $hasFailed = Schema::hasTable('failed_jobs');
@@ -116,6 +182,7 @@ class HealthzController extends Controller
                 return [
                     'ok' => true,
                     'driver' => $driver,
+                    'connection' => (string) ($connection['connection'] ?? ''),
                     'tables' => [
                         'jobs' => $hasJobs,
                         'failed_jobs' => $hasFailed,
@@ -124,18 +191,21 @@ class HealthzController extends Controller
             }
 
             if ($driver === 'redis') {
-                $pong = Redis::connection()->ping();
+                $redisConnection = (string) ($connection['connection'] ?? 'default');
+                $pong = Redis::connection($redisConnection)->ping();
                 $ok = ((string) $pong === 'PONG' || $pong === true);
 
                 return [
                     'ok' => $ok,
                     'driver' => $driver,
+                    'connection' => $redisConnection,
                 ];
             }
 
             return [
                 'ok' => true,
                 'driver' => $driver,
+                'connection' => (string) ($connection['connection'] ?? ''),
             ];
         } catch (\Throwable $e) {
             return [

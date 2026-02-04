@@ -51,9 +51,9 @@ Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
     return $request->user();
 });
 
-Route::get("/healthz", [HealthzController::class, "show"]);
+Route::middleware('throttle:api_public')->get("/healthz", [HealthzController::class, "show"]);
 
-Route::prefix("v0.2")->group(function () {
+Route::prefix("v0.2")->middleware('throttle:api_public')->group(function () {
 
     // 1) Health
     Route::get("/health", [MbtiController::class, "health"]);
@@ -109,11 +109,13 @@ Route::prefix("v0.2")->group(function () {
     // 3) Questions (demo)
     Route::get("/scales/MBTI/questions", [MbtiController::class, "questions"]);
 
-    // 4) Submit attempt (anonymous allowed)
-    Route::post("/attempts", [MbtiController::class, "storeAttempt"]);
+    Route::middleware('throttle:api_attempt_submit')->group(function () {
+        // 4) Submit attempt (anonymous allowed)
+        Route::post("/attempts", [MbtiController::class, "storeAttempt"]);
 
-    // 5) Start attempt (anonymous allowed)
-    Route::post("/attempts/start", [MbtiController::class, "startAttempt"]);
+        // 5) Start attempt (anonymous allowed)
+        Route::post("/attempts/start", [MbtiController::class, "startAttempt"]);
+    });
 
     // 6) Public share info
     Route::get("/attempts/{id}/share", [MbtiController::class, "getShare"]);
@@ -125,12 +127,14 @@ Route::prefix("v0.2")->group(function () {
     // 7) Share click (public)
     Route::post("/shares/{shareId}/click", [ShareController::class, "click"]);
 
-    // Auth (public)
-    Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
-    Route::post("/auth/phone/send_code", [AuthPhoneController::class, "sendCode"]);
-    Route::post("/auth/phone/verify", [AuthPhoneController::class, "verify"]);
-    Route::post("/auth/provider", [AuthProviderController::class, "login"]);
-    Route::get("/claim/report", [ClaimController::class, "report"]);
+    Route::middleware('throttle:api_auth')->group(function () {
+        // Auth (public)
+        Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
+        Route::post("/auth/phone/send_code", [AuthPhoneController::class, "sendCode"]);
+        Route::post("/auth/phone/verify", [AuthPhoneController::class, "verify"]);
+        Route::post("/auth/provider", [AuthProviderController::class, "login"]);
+        Route::get("/claim/report", [ClaimController::class, "report"]);
+    });
 
     // Events ingestion (public for now)
     Route::post("/events", [EventController::class, "store"]);
@@ -138,24 +142,26 @@ Route::prefix("v0.2")->group(function () {
     // Norms (stub)
     Route::get("/norms/percentile", [NormsController::class, "percentile"]);
 
-    // Payments webhook (mock, public)
-    Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
+    Route::middleware('throttle:api_webhook')->group(function () {
+        // Payments webhook (mock, public)
+        Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
 
-    // =========================================================
-    // Integrations (mock OAuth + ingestion + replay)
-    // =========================================================
-    Route::prefix("integrations/{provider}")->group(function () {
-        Route::get("/oauth/start", [ProvidersController::class, "oauthStart"]);
-        Route::get("/oauth/callback", [ProvidersController::class, "oauthCallback"]);
-        Route::post("/revoke", [ProvidersController::class, "revoke"]);
-        Route::post("/ingest", [ProvidersController::class, "ingest"]);
-        Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"]);
+        // =========================================================
+        // Integrations (mock OAuth + ingestion + replay)
+        // =========================================================
+        Route::prefix("integrations/{provider}")->group(function () {
+            Route::get("/oauth/start", [ProvidersController::class, "oauthStart"]);
+            Route::get("/oauth/callback", [ProvidersController::class, "oauthCallback"]);
+            Route::post("/revoke", [ProvidersController::class, "revoke"]);
+            Route::post("/ingest", [ProvidersController::class, "ingest"]);
+            Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"]);
+        });
+
+        // =========================================================
+        // Webhooks (provider push)
+        // =========================================================
+        Route::post("/webhooks/{provider}", [HandleProviderWebhook::class, "handle"]);
     });
-
-    // =========================================================
-    // Webhooks (provider push)
-    // =========================================================
-    Route::post("/webhooks/{provider}", [HandleProviderWebhook::class, "handle"]);
 
     // =========================================================
     // AI Insights (async, budget guarded)
@@ -220,13 +226,14 @@ Route::prefix("v0.2")->group(function () {
     });
 });
 
-Route::prefix("v0.3")->group(function () {
+Route::prefix("v0.3")->middleware('throttle:api_public')->group(function () {
 
     // ✅ 关键修复：payment webhook 必须是“公共入口”，不能依赖 ResolveOrgContext / token
     Route::post(
         "/webhooks/payment/{provider}",
         [PaymentWebhookController::class, "handle"]
-    )->whereIn('provider', ['stripe', 'billing', 'stub']);
+    )->middleware('throttle:api_webhook')
+        ->whereIn('provider', ['stripe', 'billing', 'stub']);
 
     Route::middleware(\App\Http\Middleware\ResolveOrgContext::class)->group(function () {
         // 0) Boot (flags + experiments)
@@ -241,8 +248,10 @@ Route::prefix("v0.3")->group(function () {
         Route::get("/scales/{scale_code}", [ScalesController::class, "show"]);
 
         // 2) Attempts lifecycle
-        Route::post("/attempts/start", [AttemptsController::class, "start"]);
-        Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
+        Route::middleware('throttle:api_attempt_submit')->group(function () {
+            Route::post("/attempts/start", [AttemptsController::class, "start"]);
+            Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
+        });
         Route::put("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "upsert"]);
         Route::get("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "show"]);
         Route::get("/attempts/{id}/result", [AttemptsController::class, "result"]);
@@ -272,7 +281,8 @@ Route::prefix("v0.3")->group(function () {
 });
 
 Route::prefix("v0.4")->group(function () {
-    Route::get("/boot", [BootController::class, "show"]);
+    Route::get("/boot", [BootController::class, "show"])
+        ->middleware('throttle:api_public');
 
     Route::middleware([
         \App\Http\Middleware\FmTokenAuth::class,
