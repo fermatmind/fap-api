@@ -32,6 +32,7 @@ use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
+use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController; // ✅ 新增：显式引入 v0.3 webhook controller
 use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
 use App\Http\Controllers\Integrations\ProvidersController;
@@ -220,6 +221,13 @@ Route::prefix("v0.2")->group(function () {
 });
 
 Route::prefix("v0.3")->group(function () {
+
+    // ✅ 关键修复：payment webhook 必须是“公共入口”，不能依赖 ResolveOrgContext / token
+    Route::post(
+        "/webhooks/payment/{provider}",
+        [PaymentWebhookController::class, "handle"]
+    )->whereIn('provider', ['stripe', 'billing', 'stub']);
+
     Route::middleware(\App\Http\Middleware\ResolveOrgContext::class)->group(function () {
         // 0) Boot (flags + experiments)
         Route::get("/boot", [BootV0_3Controller::class, "show"]);
@@ -245,10 +253,6 @@ Route::prefix("v0.3")->group(function () {
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
         Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder");
         Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
-        Route::post(
-            "/webhooks/payment/{provider}",
-            "App\\Http\\Controllers\\API\\V0_3\\Webhooks\\PaymentWebhookController@handle"
-        )->whereIn('provider', ['stripe', 'billing', 'stub']);
     });
 
     Route::middleware([\App\Http\Middleware\FmTokenAuth::class, \App\Http\Middleware\ResolveOrgContext::class])

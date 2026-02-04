@@ -7,6 +7,7 @@ use App\Services\Commerce\PaymentWebhookProcessor;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaymentWebhookController extends Controller
 {
@@ -22,22 +23,30 @@ class PaymentWebhookController extends Controller
     public function handle(Request $request, string $provider): JsonResponse
     {
         $provider = strtolower(trim($provider));
-        if ($provider === 'stub' && !app()->environment(['local', 'testing'])) {
+
+        // ✅ 关键修复：CI 跑 stub webhook；production 才隐藏 stub
+        if ($provider === 'stub' && !app()->environment(['local', 'testing', 'ci'])) {
             return $this->notFoundResponse();
         }
 
+        // billing 需要签名（secret 为空时按原逻辑：local/testing 允许；其余环境拒绝）
         if ($provider === 'billing' && !$this->verifyBillingSignature($request)) {
             return $this->notFoundResponse();
         }
 
         $payload = $request->all();
-        $orgId = $this->orgContext->orgId();
-        $userId = $this->orgContext->userId();
-        $anonId = $this->orgContext->anonId();
+        if (!is_array($payload)) {
+            $payload = [];
+        }
+
+        $ctx = $this->resolveContext($request, $payload);
+        $orgId = (int) $ctx['org_id'];
+        $userId = $ctx['user_id'];
+        $anonId = $ctx['anon_id'];
 
         $result = $this->processor->handle(
             $provider,
-            is_array($payload) ? $payload : [],
+            $payload,
             $orgId,
             $userId !== null ? (string) $userId : null,
             $anonId !== null ? (string) $anonId : null,
@@ -54,6 +63,73 @@ class PaymentWebhookController extends Controller
             'order_no' => $result['order_no'] ?? null,
             'provider_event_id' => $result['provider_event_id'] ?? null,
         ]);
+    }
+
+    /**
+     * webhook 不走 ResolveOrgContext 中间件：这里必须自己兜底 org_id / user_id
+     */
+    private function resolveContext(Request $request, array $payload): array
+    {
+        // OrgContext 在没跑中间件时也能工作（通常会给出 null/0）；这里做强兜底
+        $orgId = $this->orgContext->orgId();
+        $userId = $this->orgContext->userId();
+        $anonId = $this->orgContext->anonId();
+
+        // 1) Header: X-Org-Id
+        $headerOrg = (string) $request->header('X-Org-Id', '');
+        if ($headerOrg !== '' && ctype_digit($headerOrg)) {
+            $orgId = (int) $headerOrg;
+        }
+
+        // 2) Payload: org_id / orgId
+        $payloadOrg = $payload['org_id'] ?? ($payload['orgId'] ?? null);
+        if (is_int($payloadOrg)) {
+            $orgId = $payloadOrg;
+        } elseif (is_string($payloadOrg) && $payloadOrg !== '' && ctype_digit($payloadOrg)) {
+            $orgId = (int) $payloadOrg;
+        }
+
+        // 3) Payload: user_id / userId
+        $payloadUser = $payload['user_id'] ?? ($payload['userId'] ?? null);
+        if ($userId === null) {
+            if (is_int($payloadUser)) {
+                $userId = $payloadUser;
+            } elseif (is_string($payloadUser) && $payloadUser !== '' && ctype_digit($payloadUser)) {
+                $userId = (int) $payloadUser;
+            }
+        }
+
+        // 4) Payload: anon_id / anonId
+        $payloadAnon = $payload['anon_id'] ?? ($payload['anonId'] ?? null);
+        if ($anonId === null && is_string($payloadAnon) && $payloadAnon !== '') {
+            $anonId = $payloadAnon;
+        }
+
+        // 5) order_no 反查 orders 表（支持 webhook 不带 X-Org-Id 场景）
+        $orderNo = $payload['order_no'] ?? ($payload['orderNo'] ?? null);
+        if (is_string($orderNo) && $orderNo !== '') {
+            $orderRow = DB::table('orders')
+                ->select(['org_id', 'user_id'])
+                ->where('order_no', $orderNo)
+                ->first();
+
+            if ($orderRow) {
+                $orderOrg = (int) ($orderRow->org_id ?? 0);
+                if ((int) ($orgId ?? 0) === 0 && $orderOrg > 0) {
+                    $orgId = $orderOrg;
+                }
+
+                if ($userId === null && isset($orderRow->user_id) && is_numeric($orderRow->user_id)) {
+                    $userId = (int) $orderRow->user_id;
+                }
+            }
+        }
+
+        return [
+            'org_id' => (int) ($orgId ?? 0),
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+        ];
     }
 
     private function verifyBillingSignature(Request $request): bool
