@@ -59,15 +59,8 @@ class GenerateReportJob implements ShouldQueue
         $job->save();
 
         try {
-            $defaultDirVersion = (string) config(
-                'content_packs.default_dir_version',
-                config('content.default_versions.default', 'MBTI-CN-v0.2.1-TEST')
-            );
-
             $res = $composer->compose($this->attemptId, [
                 'defaultProfileVersion' => config('fap.profile_version', 'mbti32-v2.5'),
-                'defaultContentPackageVersion' => $defaultDirVersion,
-                'currentContentPackageVersion' => fn () => $defaultDirVersion,
             ]);
 
             if (!($res['ok'] ?? false)) {

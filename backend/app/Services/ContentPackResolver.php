@@ -9,11 +9,17 @@ use RecursiveIteratorIterator;
 
 final class ContentPackResolver
 {
-    private array $indexByKey = [];   // key => ['pack_id'=>..., 'manifest_path'=>..., 'base_dir'=>..., 'manifest'=>...]
+    private array $indexByKey = [];   // key => list[payload]
     private array $byPackId   = [];   // pack_id => same payload
     private bool  $built      = false;
 
-    public function resolve(string $scale, string $region, string $locale, string $version): ResolvedPack
+    public function resolve(
+        string $scale,
+        string $region,
+        string $locale,
+        string $version,
+        ?string $dirVersion = null
+    ): ResolvedPack
     {
         $this->buildIndexOnce();
 
@@ -21,9 +27,16 @@ final class ContentPackResolver
         $region = $this->normRegion($region);
         $locale = $this->normLocale($locale);
         $version = trim($version);
+        $dirVersion = is_string($dirVersion) ? trim($dirVersion) : null;
 
         $trace = [
-            'input' => compact('scale','region','locale','version'),
+            'input' => [
+                'scale' => $scale,
+                'region' => $region,
+                'locale' => $locale,
+                'version' => $version,
+                'dir_version' => $dirVersion,
+            ],
             'candidates' => [],
             'picked' => null,
             'fallback_chain' => [],
@@ -35,11 +48,36 @@ final class ContentPackResolver
         $picked = null;
         foreach ($candidates as $cand) {
             $key = $this->makeKey($cand['scale'], $cand['region'], $cand['locale'], $cand['version']);
-            if (isset($this->indexByKey[$key])) {
-                $picked = $this->indexByKey[$key];
-                $trace['picked'] = ['reason' => $cand['reason'], 'key' => $key, 'pack_id' => $picked['pack_id']];
-                break;
+            if (!isset($this->indexByKey[$key])) {
+                continue;
             }
+
+            $matches = $this->indexByKey[$key];
+            if (!is_array($matches) || $matches === []) {
+                continue;
+            }
+
+            if (is_string($dirVersion) && $dirVersion !== '') {
+                foreach ($matches as $payload) {
+                    if (!is_array($payload)) {
+                        continue;
+                    }
+                    if ((string) ($payload['dir_version'] ?? '') === $dirVersion) {
+                        $picked = $payload;
+                        $trace['picked'] = [
+                            'reason' => $cand['reason'] . ':dir_version',
+                            'key' => $key,
+                            'pack_id' => $picked['pack_id'],
+                            'dir_version' => $dirVersion,
+                        ];
+                        break 2;
+                    }
+                }
+            }
+
+            $picked = $matches[count($matches) - 1];
+            $trace['picked'] = ['reason' => $cand['reason'], 'key' => $key, 'pack_id' => $picked['pack_id']];
+            break;
         }
 
         // 最终兜底：default_pack_id（最稳定）
@@ -107,11 +145,13 @@ final class ContentPackResolver
             }
 
             $baseDir = dirname($manifestPath);
+            $dirVersion = basename($baseDir);
 
             $payload = [
                 'pack_id' => $packId,
                 'manifest_path' => $manifestPath,
                 'base_dir' => $baseDir,
+                'dir_version' => $dirVersion,
                 'manifest' => $manifest,
                 'scale' => $scale,
                 'region' => $region,
@@ -120,7 +160,10 @@ final class ContentPackResolver
             ];
 
             $key = $this->makeKey($scale, $region, $locale, $version);
-            $this->indexByKey[$key] = $payload;
+            if (!isset($this->indexByKey[$key])) {
+                $this->indexByKey[$key] = [];
+            }
+            $this->indexByKey[$key][] = $payload;
             $this->byPackId[$packId] = $payload;
         }
 

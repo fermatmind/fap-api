@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
-use App\Services\Content\ContentPackResolver;
+use App\Models\Attempt;
+use App\Services\Content\ContentPack;
+use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
+use App\Services\ContentPackResolver;
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,50 +17,197 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Bind ContentPackResolver so app(ContentPackResolver::class) works everywhere
+        // Bind ContentPackResolver so app(ContentPackResolver::class) works everywhere.
         $this->app->singleton(ContentPackResolver::class, function () {
-            $packsRoot = config('content.packs_root');
-            if (!is_string($packsRoot) || trim($packsRoot) === '') {
-                // Fail fast with a clear error if config is missing
-                $packsRoot = base_path('../content_packages');
-            }
-            return new ContentPackResolver($packsRoot);
+            return new ContentPackResolver();
         });
 
-        // Bind ContentStore so app(ContentStore::class) works (no "array $chain" DI error)
-$this->app->singleton(ContentStore::class, function ($app) {
-    /** @var ContentPackResolver $resolver */
-    $resolver = $app->make(ContentPackResolver::class);
+        // Bind ContentStore so app(ContentStore::class) works without hardcoded default scale.
+        $this->app->singleton(ContentStore::class, function ($app) {
+            /** @var ContentPackResolver $resolver */
+            $resolver = $app->make(ContentPackResolver::class);
+            /** @var ContentPacksIndex $packsIndex */
+            $packsIndex = $app->make(ContentPacksIndex::class);
 
-    // scale 固定用 default（你们 pack 的目录就是 default/...）
-    $scaleCode = (string)(
-        config('content.scale_code')
-        ?? config('content.scale')
-        ?? env('FAP_SCALE_CODE')
-        ?? env('FAP_SCALE')
-        ?? 'default'
-    );
+            $request = $app->bound('request') ? $app->make('request') : null;
 
-    // ✅ region / locale 以 content_packs 的默认值为准（来自 shared/.env）
-    $region = (string) config('content_packs.default_region', 'GLOBAL');
-    $locale = (string) config('content_packs.default_locale', 'en');
+            $attempt = null;
+            $attemptId = '';
+            $packId = '';
+            $dirVersion = '';
+            $contentPackageVersion = '';
+            $scaleCode = '';
+            $region = '';
+            $locale = '';
 
-    // 防御：cn-mainland / cn_mainland 统一成 CN_MAINLAND
-    $region = strtoupper(str_replace('-', '_', $region));
+            if ($request instanceof Request) {
+                $attemptId = (string) (
+                    $request->route('attempt_id')
+                    ?? $request->route('id')
+                    ?? $request->input('attempt_id')
+                    ?? $request->header('X-Attempt-Id')
+                    ?? ''
+                );
 
-    // version：如果你传 null，就会落到 config('content.default_versions.<scaleCode>') 或 default_versions.default
-    $version = config('content.version') ?? env('FAP_CONTENT_VERSION');
-    $version = is_string($version) && trim($version) !== '' ? trim($version) : null;
+                $packId = (string) (
+                    $request->route('pack_id')
+                    ?? $request->query('pack_id')
+                    ?? $request->input('pack_id')
+                    ?? $request->header('X-Pack-Id')
+                    ?? ''
+                );
 
-    // ✅ 关键：ContentStore 需要 chain(list)，用 fallbackChain
-    $chain = $resolver->resolveWithFallbackChain($scaleCode, $region, $locale, $version);
+                $dirVersion = (string) (
+                    $request->route('dir_version')
+                    ?? $request->query('dir_version')
+                    ?? $request->input('dir_version')
+                    ?? $request->header('X-Dir-Version')
+                    ?? ''
+                );
 
-    // ctx / legacyDir：保持你原来的
-    $ctx = [];
-    $legacyDir = (string) (config('fap.content.legacy_dir') ?? '');
+                $scaleCode = (string) (
+                    $request->query('scale_code')
+                    ?? $request->input('scale_code')
+                    ?? $request->header('X-Scale-Code')
+                    ?? ''
+                );
 
-    return new ContentStore($chain, $ctx, $legacyDir);
-});
+                $region = (string) (
+                    $request->query('region')
+                    ?? $request->input('region')
+                    ?? $request->header('X-Region')
+                    ?? ''
+                );
+
+                $locale = (string) (
+                    $request->query('locale')
+                    ?? $request->input('locale')
+                    ?? $request->header('X-Locale')
+                    ?? ''
+                );
+            }
+
+            if ($attemptId !== '') {
+                $attempt = Attempt::where('id', $attemptId)->first();
+            }
+
+            if ($attempt) {
+                $packId = (string) ($attempt->pack_id ?? $packId);
+                $dirVersion = (string) ($attempt->dir_version ?? $dirVersion);
+                $contentPackageVersion = (string) ($attempt->content_package_version ?? '');
+                $scaleCode = (string) ($attempt->scale_code ?? $scaleCode);
+                $region = (string) ($attempt->region ?? $region);
+                $locale = (string) ($attempt->locale ?? $locale);
+            }
+
+            if ($packId === '') {
+                $packId = (string) config('content_packs.default_pack_id', '');
+            }
+            if ($dirVersion === '') {
+                $dirVersion = (string) config('content_packs.default_dir_version', '');
+            }
+
+            if ($packId !== '' && $dirVersion !== '') {
+                $found = $packsIndex->find($packId, $dirVersion);
+                if ($found['ok'] ?? false) {
+                    $item = $found['item'] ?? [];
+                    if ($contentPackageVersion === '') {
+                        $contentPackageVersion = (string) ($item['content_package_version'] ?? '');
+                    }
+                    if ($scaleCode === '') {
+                        $scaleCode = (string) ($item['scale_code'] ?? '');
+                    }
+                    if ($region === '') {
+                        $region = (string) ($item['region'] ?? '');
+                    }
+                    if ($locale === '') {
+                        $locale = (string) ($item['locale'] ?? '');
+                    }
+                }
+            }
+
+            $extractVersion = function (string $raw): string {
+                $raw = trim($raw);
+                if ($raw === '') {
+                    return '';
+                }
+
+                if (substr_count($raw, '.') >= 3) {
+                    $parts = explode('.', $raw);
+                    return (string) implode('.', array_slice($parts, 3));
+                }
+
+                $pos = strripos($raw, '-v');
+                if ($pos !== false) {
+                    return substr($raw, $pos + 1);
+                }
+
+                if (str_starts_with($raw, 'v')) {
+                    return $raw;
+                }
+
+                return '';
+            };
+
+            if ($contentPackageVersion === '') {
+                $contentPackageVersion = $extractVersion($dirVersion);
+            }
+            if ($contentPackageVersion === '') {
+                $contentPackageVersion = $extractVersion($packId);
+            }
+
+            if ($region === '') {
+                $region = (string) config('content_packs.default_region', 'GLOBAL');
+            }
+            if ($locale === '') {
+                $locale = (string) config('content_packs.default_locale', 'en');
+            }
+            if ($scaleCode === '' && $packId !== '') {
+                $scaleCode = (string) strtok($packId, '.');
+            }
+            if ($scaleCode === '') {
+                $scaleCode = 'MBTI';
+            }
+
+            $resolved = $resolver->resolve(
+                $scaleCode,
+                $region,
+                $locale,
+                (string) $contentPackageVersion,
+                $dirVersion
+            );
+
+            $makePack = function (array $manifest, string $baseDir): ContentPack {
+                return new ContentPack(
+                    packId: (string) ($manifest['pack_id'] ?? ''),
+                    scaleCode: (string) ($manifest['scale_code'] ?? ''),
+                    region: (string) ($manifest['region'] ?? ''),
+                    locale: (string) ($manifest['locale'] ?? ''),
+                    version: (string) ($manifest['content_package_version'] ?? ''),
+                    basePath: $baseDir,
+                    manifest: $manifest,
+                );
+            };
+
+            $chain = [];
+            $chain[] = $makePack($resolved->manifest ?? [], (string) ($resolved->baseDir ?? ''));
+
+            $fallbacks = is_array($resolved->fallbackChain ?? null) ? $resolved->fallbackChain : [];
+            foreach ($fallbacks as $fb) {
+                if (!is_array($fb)) {
+                    continue;
+                }
+                $manifest = is_array($fb['manifest'] ?? null) ? $fb['manifest'] : [];
+                $baseDir = (string) ($fb['base_dir'] ?? '');
+                if ($manifest && $baseDir !== '') {
+                    $chain[] = $makePack($manifest, $baseDir);
+                }
+            }
+
+            $legacyDir = $dirVersion !== '' ? $dirVersion : basename((string) ($resolved->baseDir ?? ''));
+
+            return new ContentStore($chain, [], $legacyDir);
+        });
     }
 
     /**
