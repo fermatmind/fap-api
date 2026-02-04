@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
+    // Default: production -> redis, local/testing -> sync
+    'default' => env('QUEUE_CONNECTION', env('APP_ENV', 'production') === 'production' ? 'redis' : 'sync'),
 
     // Dedicated queue name for AI insights jobs (when using database/redis queues)
     'insights_queue' => env('AI_INSIGHTS_QUEUE', 'insights'),
@@ -69,6 +70,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
+            // queue connection: REDIS_QUEUE_CONNECTION=default
             'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => (int) env('REDIS_QUEUE_RETRY_AFTER', 90),

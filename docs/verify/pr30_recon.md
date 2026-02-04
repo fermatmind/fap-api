@@ -1,0 +1,22 @@
+# PR30 Recon
+
+- Keywords: throttle|redis|sentry
+- 限流/缓存/可观测性/CI 相关入口文件：
+  - backend/routes/api.php
+  - backend/app/Providers/AppServiceProvider.php
+  - backend/app/Http/Controllers/HealthzController.php
+  - backend/config/cache.php
+  - backend/config/queue.php
+  - backend/config/fap.php
+  - .github/workflows/ci_verify_mbti.yml
+  - .github/workflows/publish-content.yml
+  - .github/workflows/rollback-content.yml
+  - .github/workflows/rollback-production.yml
+  - backend/scripts/pr30_accept.sh
+  - backend/scripts/pr30_verify.sh
+- 风险点与规避（429 语义/跨 org 404/redis 可切换/脚本去 jq/rg/脱敏）：
+  - 429 语义：RateLimiter 统一 JSON 错误体并保留 Retry-After header。
+  - 跨 org 404：ResolveOrgContext/FmTokenAuth 逻辑不变，仅新增 throttle middleware。
+  - redis 可切换：cache/queue 默认按 APP_ENV 选 array/sync，本地不依赖 redis；healthz 在 redis 未启用时跳过 ping。
+  - 脚本去 jq/rg：workflow 改用 php -r 解析 JSON；pr30 scripts 使用 grep/sed/awk。
+  - artifacts 脱敏：accept 脚本调用 sanitize_artifacts.sh。
