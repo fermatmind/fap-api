@@ -1,0 +1,44 @@
+# PR28 Recon
+
+- Keywords: content_packs|scales_registry|dir_version
+- 相关入口文件（必须列出完整路径）：
+- backend/routes/api.php
+- backend/app/Providers/AppServiceProvider.php
+- backend/app/Jobs/GenerateReportJob.php
+- backend/app/Services/ContentPackResolver.php
+- backend/app/Services/Report/ReportComposer.php
+- backend/app/Services/Content/ContentPacksIndex.php
+- backend/app/Http/Controllers/API/V0_3/AttemptsController.php
+- backend/app/Http/Controllers/API/V0_3/ScalesController.php
+- backend/app/Models/Attempt.php
+- backend/app/Models/Result.php
+- backend/app/Models/ReportJob.php
+- 相关路由（必须列出 path + controller@method）：
+- GET /api/healthz -> HealthzController@show
+- GET /api/v0.3/scales -> API\V0_3\ScalesController@index
+- GET /api/v0.3/scales/{scale_code}/questions -> API\V0_3\ScalesController@questions
+- POST /api/v0.3/attempts/start -> API\V0_3\AttemptsController@start
+- POST /api/v0.3/attempts/submit -> API\V0_3\AttemptsController@submit
+- GET /api/v0.3/attempts/{id}/report -> API\V0_3\AttemptsController@report
+- GET /api/v0.2/content-packs/{pack_id}/{dir_version}/questions -> API\V0_2\ContentPacksController@questions
+- 相关 DB 表/迁移（必须列出完整路径）：
+- backend/database/migrations/2026_01_26_090000_create_report_jobs_table.php
+- backend/database/migrations/2026_01_28_110000_add_psychometrics_snapshot_to_attempts.php
+- backend/database/migrations/2026_01_29_090000_create_scales_registry_table.php
+- backend/database/migrations/2026_01_29_120000_v03_attempts_results_fields.php
+- backend/database/migrations/2026_01_29_000004_add_org_id_to_attempts_results_events_report_jobs.php
+- 需要新增/修改点（按文件路径列点）：
+- backend/routes/api.php: add /api/healthz for acceptance probe
+- backend/app/Providers/AppServiceProvider.php: resolve ContentStore via content_packs config + request/attempt context
+- backend/app/Services/ContentPackResolver.php: support dir_version disambiguation in resolve
+- backend/app/Jobs/GenerateReportJob.php: remove default dir_version fallback from report compose
+- backend/app/Services/Report/ReportComposer.php: prefer Attempt pack_id/dir_version/content_package_version; pass dir_version to resolver; record dir_version in report meta
+- backend/tests/Feature/V0_3/ReportDirVersionTruthTest.php: assert report versions align with attempt dir_version
+- backend/scripts/pr28_verify.sh: pack/seed/config consistency checks and E2E flow
+- backend/scripts/pr28_accept.sh: sqlite migrate + verify + artifacts summary + sanitize
+- docs/verify/pr28_verify.md: verification record
+- 风险点与规避（pack-seed-config 一致性 / sqlite migrate / 404 口径 / 脱敏）：
+- pack/seed/config: verify script enforces config default pack_id == scales_registry default_pack_id and pack dir manifests
+- sqlite migrate: accept script runs migrate:fresh on sqlite before verify
+- 404 口径: no auth or org scope changes; existing 404 behavior preserved
+- 脱敏: sanitize_artifacts.sh invoked in accept script

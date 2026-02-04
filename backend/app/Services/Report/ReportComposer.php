@@ -19,6 +19,7 @@ use App\Services\Overrides\ReportOverridesApplier;
 
 use App\Services\ContentPackResolver;
 use App\Services\Content\ContentPack;
+use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\RuleEngine\ReportRuleEngine;
 use App\DTO\ResolvedPack;
@@ -34,6 +35,7 @@ class ReportComposer
         private IdentityLayerBuilder $identityLayerBuilder,
         private ReportOverridesApplier $reportOverridesApplier,
         private ContentPackResolver $resolver, // ✅ 改为 DI：不再 ContentPackResolver::make()
+        private ContentPacksIndex $packsIndex,
     ) {}
 
     public function compose(string $attemptId, array $ctx): array
@@ -61,35 +63,89 @@ class ReportComposer
         }
 
         // =========================
-        // 版本信息：从 Result/配置/Resolver 统一收敛
+        // 版本信息：以 Attempt 记录为真源
         // =========================
         $profileVersion = $result->profile_version
             ?? ($ctx['defaultProfileVersion'] ?? 'mbti32-v2.5');
 
-        $scaleCode = (string)($result->scale_code ?? 'MBTI');
-        $region    = (string)($attempt->region ?? 'CN_MAINLAND');
-        $locale    = (string)($attempt->locale ?? 'zh-CN');
+        $packId = (string) ($attempt->pack_id ?? $result->pack_id ?? '');
+        $dirVersion = (string) ($attempt->dir_version ?? $result->dir_version ?? '');
+        $contentPackageVersion = (string) ($attempt->content_package_version ?? $result->content_package_version ?? '');
+        $scaleCode = (string) ($attempt->scale_code ?? $result->scale_code ?? '');
+        $region = (string) ($attempt->region ?? '');
+        $locale = (string) ($attempt->locale ?? '');
 
-        $requested = $result->content_package_version
-            ?? (isset($ctx['currentContentPackageVersion']) && is_callable($ctx['currentContentPackageVersion'])
-                ? ($ctx['currentContentPackageVersion'])()
-                : null);
+        if ($packId === '') {
+            $packId = (string) config('content_packs.default_pack_id', '');
+        }
+        if ($dirVersion === '') {
+            $dirVersion = (string) config('content_packs.default_dir_version', '');
+        }
 
-        $requestedVersion = $this->normalizeRequestedVersion($requested);
+        if ($packId !== '' && $dirVersion !== '') {
+            $found = $this->packsIndex->find($packId, $dirVersion);
+            if ($found['ok'] ?? false) {
+                $item = $found['item'] ?? [];
+                if ($contentPackageVersion === '') {
+                    $contentPackageVersion = (string) ($item['content_package_version'] ?? '');
+                }
+                if ($scaleCode === '') {
+                    $scaleCode = (string) ($item['scale_code'] ?? '');
+                }
+                if ($region === '') {
+                    $region = (string) ($item['region'] ?? '');
+                }
+                if ($locale === '') {
+                    $locale = (string) ($item['locale'] ?? '');
+                }
+            }
+        }
 
-        $rp = $this->resolver->resolve($scaleCode, $region, $locale, $requestedVersion);
+        if ($contentPackageVersion === '') {
+            $contentPackageVersion = (string) ($ctx['content_package_version'] ?? '');
+        }
+        if ($contentPackageVersion === ''
+            && isset($ctx['currentContentPackageVersion'])
+            && is_callable($ctx['currentContentPackageVersion'])
+        ) {
+            $contentPackageVersion = (string) ($ctx['currentContentPackageVersion'])();
+        }
+        if ($contentPackageVersion === '') {
+            $contentPackageVersion = (string) ($this->normalizeRequestedVersion($dirVersion) ?? '');
+        }
+        if ($contentPackageVersion === '') {
+            $contentPackageVersion = (string) ($this->normalizeRequestedVersion($packId) ?? '');
+        }
 
-// ✅ 适配：ResolvedPack -> ContentPack chain（让后续 loadJsonDocFromPackChain/overrides 等逻辑不动）
-$chain = $this->toContentPackChain($rp);
+        if ($scaleCode === '' && $packId !== '') {
+            $scaleCode = (string) strtok($packId, '.');
+        }
+        if ($scaleCode === '') {
+            $scaleCode = 'MBTI';
+        }
+        if ($region === '') {
+            $region = (string) config('content_packs.default_region', 'CN_MAINLAND');
+        }
+        if ($locale === '') {
+            $locale = (string) config('content_packs.default_locale', 'zh-CN');
+        }
 
-/** @var ContentPack $pack */
-$pack = $chain[0];
+        $rp = $this->resolver->resolve($scaleCode, $region, $locale, $contentPackageVersion, $dirVersion);
 
-$contentPackageVersion = (string)$pack->version(); // e.g. v0.2.1-TEST
-$contentPackId         = (string)$pack->packId();
+        // ✅ 适配：ResolvedPack -> ContentPack chain（让后续 loadJsonDocFromPackChain/overrides 等逻辑不动）
+        $chain = $this->toContentPackChain($rp);
 
-        // ✅ 旧 loader 兼容：旧目录名（你已做 symlink/兼容层）
-        $contentPackageDir = 'MBTI-CN-' . $contentPackageVersion;
+        /** @var ContentPack $pack */
+        $pack = $chain[0];
+
+        $contentPackageVersion = (string) $pack->version(); // e.g. v0.2.1-TEST
+        $contentPackId = (string) $pack->packId();
+
+        // ✅ 旧 loader 兼容：优先 Attempt.dir_version
+        $contentPackageDir = $dirVersion !== '' ? $dirVersion : basename((string) ($rp->baseDir ?? ''));
+        if ($dirVersion === '') {
+            $dirVersion = $contentPackageDir;
+        }
 
         $typeCode = (string)($result->type_code ?? '');
 
@@ -668,10 +724,10 @@ if ($wantExplainPayload && is_array($explainPayload)) {
         // =========================
         // 最终 report payload（schema 不变）
         // =========================
-        // $contentPackageDir 目前其实是 legacy dir：MBTI-CN-v0.2.1-TEST
+        // $contentPackageDir 目前是 Attempt.dir_version（legacy loader 对齐）
 $legacyContentPackageDir = $contentPackageDir;
 
-// ✅ 真实目录：从 pack_id 推导成 MBTI/GLOBAL/en/v0.2.1-TEST
+// ✅ 逻辑目录：从 pack_id 推导成 scale/region/locale/version
 $realContentPackageDir = $this->packIdToDir($contentPackId);
         
         $reportPayload = [
@@ -680,6 +736,7 @@ $realContentPackageDir = $this->packIdToDir($contentPackId);
     'profile_version'         => $profileVersion,
     'content_package_version' => $contentPackageVersion,
     'content_pack_id'         => $contentPackId,
+    'dir_version'             => $legacyContentPackageDir,
 
     // ✅ 对外返回真实目录（新体系）
     'content_package_dir'     => $realContentPackageDir,
@@ -1018,14 +1075,16 @@ $explainPayload['overrides'] = $ovrRootArr;
     {
         if (!is_string($requested) || $requested === '') return null;
 
-        if (str_starts_with($requested, 'MBTI-CN-')) {
-            return substr($requested, strlen('MBTI-CN-')); // v0.2.1-TEST
-        }
-
         // pack_id like MBTI.cn-mainland.zh-CN.v0.2.1-TEST
         if (substr_count($requested, '.') >= 3) {
             $parts = explode('.', $requested);
             return implode('.', array_slice($parts, 3));   // v0.2.1-TEST
+        }
+
+        // dir_version like IQ-RAVEN-CN-v0.3.0-DEMO
+        $pos = strripos($requested, '-v');
+        if ($pos !== false) {
+            return substr($requested, $pos + 1);   // v0.3.0-DEMO
         }
 
         return $requested;

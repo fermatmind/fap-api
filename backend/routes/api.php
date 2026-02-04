@@ -50,6 +50,8 @@ Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
     return $request->user();
 });
 
+Route::get("/healthz", [HealthzController::class, "show"]);
+
 Route::prefix("v0.2")->group(function () {
 
     // 1) Health

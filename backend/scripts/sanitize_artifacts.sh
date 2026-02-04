@@ -27,8 +27,11 @@ import os, re, sys
 base = sys.argv[1]
 patterns = [
     (re.compile(r'/Users/[^\s"\']+'), '<REPO>'),
+    (re.compile(r'\\/Users\\/[^\s"\']+'), '<REPO>'),
     (re.compile(r'/home/[^\s"\']+'), '<REPO>'),
+    (re.compile(r'\\/home\\/[^\s"\']+'), '<REPO>'),
     (re.compile(r'C:\\Users\\[^\s"\']+'), '<REPO>'),
+    (re.compile(r'C:\\\\Users\\\\[^\s"\']+'), '<REPO>'),
     (re.compile(r'Authorization:\s*Bearer\s+[A-Za-z0-9._\-]+'), 'Authorization: Bearer <REDACTED>'),
     (re.compile(r'FAP_ADMIN_TOKEN=\S+'), 'FAP_ADMIN_TOKEN=<REDACTED>'),
     (re.compile(r'DB_PASSWORD=\S+'), 'DB_PASSWORD=<REDACTED>'),
