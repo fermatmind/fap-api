@@ -97,6 +97,12 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Debug SSH agent (fingerprints only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh-add -l
+
       - name: Add target host to known_hosts
         shell: bash
         run: |
