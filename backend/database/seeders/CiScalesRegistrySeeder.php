@@ -35,6 +35,7 @@ final class CiScalesRegistrySeeder extends Seeder
                 'primary_slug' => 'mbti',
                 'slugs_json' => json_encode(['mbti'], JSON_UNESCAPED_UNICODE),
                 'driver_type' => 'mbti',
+                'assessment_driver' => 'generic_scoring',
                 'default_pack_id' => $defaultPackId,
                 'default_region' => $defaultRegion,
                 'default_locale' => $defaultLocale,
@@ -50,6 +51,7 @@ final class CiScalesRegistrySeeder extends Seeder
                 'primary_slug' => 'demo_answers',
                 'slugs_json' => json_encode(['demo_answers'], JSON_UNESCAPED_UNICODE),
                 'driver_type' => 'demo_answers',
+                'assessment_driver' => 'demo_answers',
                 'default_pack_id' => $demoPackId,
                 'default_region' => $defaultRegion,
                 'default_locale' => $defaultLocale,
@@ -65,6 +67,7 @@ final class CiScalesRegistrySeeder extends Seeder
                 'primary_slug' => 'simple_score_demo',
                 'slugs_json' => json_encode(['simple_score_demo'], JSON_UNESCAPED_UNICODE),
                 'driver_type' => 'simple_score_demo',
+                'assessment_driver' => 'simple_score_demo',
                 'default_pack_id' => $demoPackId,
                 'default_region' => $defaultRegion,
                 'default_locale' => $defaultLocale,
@@ -80,12 +83,29 @@ final class CiScalesRegistrySeeder extends Seeder
                 'primary_slug' => 'iq_raven',
                 'slugs_json' => json_encode(['iq_raven'], JSON_UNESCAPED_UNICODE),
                 'driver_type' => 'iq_raven',
+                'assessment_driver' => 'iq_raven',
                 'default_pack_id' => $demoPackId,
                 'default_region' => $defaultRegion,
                 'default_locale' => $defaultLocale,
                 'default_dir_version' => 'IQ-RAVEN-CN-v0.3.0-DEMO',
                 'is_public' => 1,
                 'is_active' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'org_id' => 0,
+                'code' => 'BIG5',
+                'primary_slug' => 'big5',
+                'slugs_json' => json_encode(['big5'], JSON_UNESCAPED_UNICODE),
+                'driver_type' => 'big5',
+                'assessment_driver' => 'generic_scoring',
+                'default_pack_id' => 'BIG5.cn-mainland.zh-CN.v0.1.0-TEST',
+                'default_region' => $defaultRegion,
+                'default_locale' => $defaultLocale,
+                'default_dir_version' => 'BIG5-CN-v0.1.0-TEST',
+                'is_public' => 1,
+                'is_active' => 0,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
@@ -98,6 +118,7 @@ final class CiScalesRegistrySeeder extends Seeder
                 'primary_slug',
                 'slugs_json',
                 'driver_type',
+                'assessment_driver',
                 'default_pack_id',
                 'default_region',
                 'default_locale',
@@ -108,6 +129,6 @@ final class CiScalesRegistrySeeder extends Seeder
             ]
         );
 
-        $this->command?->info('CiScalesRegistrySeeder: upserted 4 scales.');
+        $this->command?->info('CiScalesRegistrySeeder: upserted 5 scales.');
     }
 }

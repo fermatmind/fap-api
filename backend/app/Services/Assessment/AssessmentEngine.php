@@ -3,10 +3,6 @@
 namespace App\Services\Assessment;
 
 use App\Services\Assessment\Drivers\DriverInterface;
-use App\Services\Assessment\Drivers\GenericLikertDriver;
-use App\Services\Assessment\Drivers\IqTestDriver;
-use App\Services\Assessment\Drivers\MbtiDriver;
-use App\Services\Assessment\Drivers\SimpleScoreDriver;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Scale\ScaleRegistry;
 use Illuminate\Support\Facades\File;
@@ -16,10 +12,6 @@ class AssessmentEngine
     public function __construct(
         private ContentPacksIndex $packsIndex,
         private ScaleRegistry $scaleRegistry,
-        private MbtiDriver $mbtiDriver,
-        private SimpleScoreDriver $simpleScoreDriver,
-        private GenericLikertDriver $genericLikertDriver,
-        private IqTestDriver $iqTestDriver,
     ) {
     }
 
@@ -42,9 +34,12 @@ class AssessmentEngine
             return $this->error('SCALE_NOT_FOUND', 'scale not found.');
         }
 
-        $driverType = strtolower((string) ($scaleRow['driver_type'] ?? ''));
+        $driverType = strtolower((string) ($scaleRow['assessment_driver'] ?? ''));
         if ($driverType === '') {
-            return $this->error('DRIVER_NOT_CONFIGURED', 'driver_type missing for scale.');
+            $driverType = strtolower((string) ($scaleRow['driver_type'] ?? ''));
+        }
+        if ($driverType === '') {
+            $driverType = 'generic_scoring';
         }
 
         $pack = $this->resolvePack($packId, $dirVersion);
@@ -67,25 +62,24 @@ class AssessmentEngine
             'dir_version' => $dirVersion,
             'content_package_version' => $contentPackageVersion,
             'scoring_spec_version' => $scoringSpecVersion,
+            'base_dir' => (string) ($pack['base_dir'] ?? ''),
+            'scoring_spec' => $scoringSpec,
         ]);
 
-        if ($driverType === 'mbti') {
-            $questions = $this->readJson($pack['base_dir'] ?? '', 'questions.json');
-            if (!is_array($questions)) {
-                return $this->error('QUESTIONS_NOT_FOUND', 'questions.json not found or invalid.');
-            }
+        $questions = $this->readJson($pack['base_dir'] ?? '', 'questions.json');
+        if (is_array($questions)) {
             $ctxMerged['questions'] = $questions;
         }
 
         $driver = $this->resolveDriver($driverType);
         if (!$driver) {
-            return $this->error('DRIVER_NOT_SUPPORTED', "unsupported driver_type={$driverType}");
+            return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$driverType}");
         }
 
         try {
             $result = $driver->score($answers, $scoringSpec, $ctxMerged);
         } catch (\Throwable $e) {
-            return $this->error('SCORING_FAILED', $e->getMessage());
+            return $this->error('SCORING_FAILED', $e->getMessage(), ['error' => $e->getMessage()]);
         }
 
         return [
@@ -146,21 +140,42 @@ class AssessmentEngine
 
     private function resolveDriver(string $driverType): ?DriverInterface
     {
-        return match ($driverType) {
-            'mbti' => $this->mbtiDriver,
-            'simple_score' => $this->simpleScoreDriver,
-            'generic_likert', 'likert' => $this->genericLikertDriver,
-            'iq_test' => $this->iqTestDriver,
-            default => null,
-        };
+        $driverType = strtolower(trim($driverType));
+        if ($driverType === '') {
+            return null;
+        }
+
+        $map = config('fap.assessment_drivers', []);
+        if (!is_array($map)) {
+            $map = [];
+        }
+
+        $class = $map[$driverType] ?? null;
+        if (!is_string($class) || $class === '') {
+            return null;
+        }
+
+        try {
+            $driver = app($class);
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        return $driver instanceof DriverInterface ? $driver : null;
     }
 
-    private function error(string $code, string $message): array
+    private function error(string $code, string $message, ?array $result = null): array
     {
-        return [
+        $payload = [
             'ok' => false,
             'error' => $code,
             'message' => $message,
         ];
+
+        if (is_array($result)) {
+            $payload['result'] = $result;
+        }
+
+        return $payload;
     }
 }

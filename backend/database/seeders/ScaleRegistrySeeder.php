@@ -35,6 +35,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'mbti-personality-test',
             ],
             'driver_type' => 'mbti',
+            'assessment_driver' => 'generic_scoring',
 
             // ✅ follow config
             'default_pack_id' => $defaultPackId,
@@ -77,5 +78,49 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer->syncSlugsForScale($scale);
         $this->command?->info('ScaleRegistrySeeder: MBTI scale upserted.');
+
+        $big5PackId = 'BIG5.cn-mainland.zh-CN.v0.1.0-TEST';
+        $big5DirVersion = 'BIG5-CN-v0.1.0-TEST';
+
+        $big5 = $writer->upsertScale([
+            'code' => 'BIG5',
+            'org_id' => 0,
+            'primary_slug' => 'big5',
+            'slugs_json' => [
+                'big5',
+                'big5-personality-test',
+            ],
+            'driver_type' => 'big5',
+            'assessment_driver' => 'generic_scoring',
+
+            'default_pack_id' => $big5PackId,
+            'default_region' => $defaultRegion,
+            'default_locale' => $defaultLocale,
+            'default_dir_version' => $big5DirVersion,
+
+            'capabilities_json' => [
+                'assets' => false,
+            ],
+            'view_policy_json' => [
+                'free_sections' => ['intro', 'score'],
+                'blur_others' => false,
+                'teaser_percent' => 0.0,
+            ],
+            'commercial_json' => [
+                'price_tier' => 'FREE',
+            ],
+            'seo_schema_json' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Quiz',
+                'name' => 'BIG5 Personality Test',
+                'description' => 'BIG5 personality test (demo).',
+            ],
+
+            'is_public' => true,
+            'is_active' => false,
+        ]);
+
+        $writer->syncSlugsForScale($big5);
+        $this->command?->info('ScaleRegistrySeeder: BIG5 scale upserted.');
     }
 }
