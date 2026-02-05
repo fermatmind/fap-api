@@ -41,12 +41,19 @@ on:
         default: "true"
 
 concurrency:
-  group: "publish-content-${{ inputs.env }}"
+  group: publish-content-${{ github.repository }}-${{ inputs.env }}
   cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   publish:
+    name: Publish Content (${{ inputs.env }})
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    # 关键：绑定 GitHub Environment，使 secrets.CONTENT_PUBLISH_BASE_URL / secrets.FAP_ADMIN_TOKEN 走对应环境的 Environment secrets
     environment: ${{ inputs.env }}
 
     steps:
@@ -58,14 +65,16 @@ jobs:
         run: |
           set -euo pipefail
           SRC="${{ inputs.file_path }}"
-          if [ ! -d "$SRC" ]; then
-            echo "::error::file_path not found: $SRC"
-            exit 1
-          fi
-          ZIP_PATH="/tmp/content_pack.zip"
+
+          [ -d "$SRC" ] || { echo "::error::file_path not found: $SRC"; exit 1; }
+
+          ZIP_PATH="$RUNNER_TEMP/content_pack.zip"
           rm -f "$ZIP_PATH"
+
           (cd "$(dirname "$SRC")" && zip -r "$ZIP_PATH" "$(basename "$SRC")")
+
           ls -lh "$ZIP_PATH"
+          echo "ZIP_PATH=$ZIP_PATH" >> "$GITHUB_ENV"
 
       - name: Upload pack
         id: upload
@@ -75,19 +84,40 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
+          trim() { echo -n "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'; }
+
+          BASE_URL="$(trim "${BASE_URL:-}")"
+          ADMIN_TOKEN="$(trim "${ADMIN_TOKEN:-}")"
           BASE_URL="${BASE_URL%/}"
 
-          RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/upload" \
+          [ -n "$BASE_URL" ] || { echo "::error::CONTENT_PUBLISH_BASE_URL is empty"; exit 1; }
+          [ -n "$ADMIN_TOKEN" ] || { echo "::error::FAP_ADMIN_TOKEN is empty"; exit 1; }
+          [ -n "${ZIP_PATH:-}" ] || { echo "::error::ZIP_PATH is empty"; exit 1; }
+          [ -f "$ZIP_PATH" ] || { echo "::error::zip not found at $ZIP_PATH"; exit 1; }
+
+          HTTP_RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/upload" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
-            -F "file=@/tmp/content_pack.zip")"
+            -F "file=@${ZIP_PATH}" \
+            -w '\n__HTTP_STATUS__:%{http_code}\n')"
 
-          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE).PHP_EOL;'
+          HTTP_STATUS="$(echo "$HTTP_RESP" | sed -n 's/^__HTTP_STATUS__://p')"
+          RESP="$(echo "$HTTP_RESP" | sed '/^__HTTP_STATUS__:/d')"
 
-          VERSION_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["version_id"] ?? "";')"
-          if [ -z "$VERSION_ID" ] || [ "$VERSION_ID" = "null" ]; then
-            echo "::error::version_id missing"
-            exit 1
-          fi
+          echo "$RESP" | php -r '
+            $raw = stream_get_contents(STDIN);
+            $j = json_decode($raw, true);
+            if (!is_array($j)) { echo $raw.PHP_EOL; exit(0); }
+            echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE).PHP_EOL;
+          '
+
+          case "$HTTP_STATUS" in
+            2*) ;;
+            *) echo "::error::upload http status=$HTTP_STATUS"; exit 1;;
+          esac
+
+          VERSION_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo is_array($j) ? ($j["version_id"] ?? "") : "";')"
+          [ -n "$VERSION_ID" ] || { echo "::error::version_id missing"; exit 1; }
 
           echo "version_id=$VERSION_ID" >> "$GITHUB_OUTPUT"
 
@@ -104,7 +134,25 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
+          trim() { echo -n "$1" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'; }
+
+          BASE_URL="$(trim "${BASE_URL:-}")"
+          ADMIN_TOKEN="$(trim "${ADMIN_TOKEN:-}")"
+          VERSION_ID="$(trim "${VERSION_ID:-}")"
+          REGION="$(trim "${REGION:-}")"
+          LOCALE="$(trim "${LOCALE:-}")"
+          DIR_ALIAS="$(trim "${DIR_ALIAS:-}")"
+          PROBE="$(trim "${PROBE:-}")"
+
           BASE_URL="${BASE_URL%/}"
+
+          [ -n "$BASE_URL" ] || { echo "::error::CONTENT_PUBLISH_BASE_URL is empty"; exit 1; }
+          [ -n "$ADMIN_TOKEN" ] || { echo "::error::FAP_ADMIN_TOKEN is empty"; exit 1; }
+          [ -n "$VERSION_ID" ] || { echo "::error::version_id is empty"; exit 1; }
+          [ -n "$REGION" ] || { echo "::error::region is empty"; exit 1; }
+          [ -n "$LOCALE" ] || { echo "::error::locale is empty"; exit 1; }
+          [ -n "$DIR_ALIAS" ] || { echo "::error::dir_alias is empty"; exit 1; }
 
           case "$PROBE" in
             true|false) ;;
@@ -117,22 +165,73 @@ jobs:
             "locale" => getenv("LOCALE") ?: "",
             "dir_alias" => getenv("DIR_ALIAS") ?: "",
             "probe" => (getenv("PROBE") === "true"),
-          ], JSON_UNESCAPED_UNICODE);')"
+          ], JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);')"
 
           echo "Payload=$PAYLOAD"
 
-          RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/publish" \
+          HTTP_RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/publish" \
             -H "Accept: application/json" \
             -H "Content-Type: application/json" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
-            -d "$PAYLOAD")"
+            -d "$PAYLOAD" \
+            -w '\n__HTTP_STATUS__:%{http_code}\n')"
 
-          echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE).PHP_EOL;'
+          HTTP_STATUS="$(echo "$HTTP_RESP" | sed -n 's/^__HTTP_STATUS__://p')"
+          RESP="$(echo "$HTTP_RESP" | sed '/^__HTTP_STATUS__:/d')"
 
-          RELEASE_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["release_id"] ?? "";')"
-          if [ -z "$RELEASE_ID" ] || [ "$RELEASE_ID" = "null" ]; then
-            echo "::error::release_id missing"
-            exit 1
-          fi
+          echo "$RESP" | php -r '
+            $raw = stream_get_contents(STDIN);
+            $j = json_decode($raw, true);
+            if (!is_array($j)) { echo $raw.PHP_EOL; exit(0); }
+            echo json_encode($j, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE).PHP_EOL;
+          '
+
+          case "$HTTP_STATUS" in
+            2*) ;;
+            *) echo "::error::publish http status=$HTTP_STATUS"; exit 1;;
+          esac
+
+          RELEASE_ID="$(echo "$RESP" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo is_array($j) ? ($j["release_id"] ?? "") : "";')"
+          [ -n "$RELEASE_ID" ] || { echo "::error::release_id missing"; exit 1; }
 
           echo "release_id=$RELEASE_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "### Publish Content Result"
+            echo "- env: ${{ inputs.env }}"
+            echo "- version_id: ${{ steps.upload.outputs.version_id }}"
+            echo "- release_id: ${{ steps.publish.outputs.release_id }}"
+            echo "- region: ${{ inputs.region }}"
+            echo "- locale: ${{ inputs.locale }}"
+            echo "- dir_alias: ${{ inputs.dir_alias }}"
+            echo "- probe: ${{ inputs.probe }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Post-publish probes (public)
+        if: ${{ inputs.probe == 'true' }}
+        env:
+          TARGET_ENV: ${{ inputs.env }}
+          REGION: ${{ inputs.region }}
+          LOCALE: ${{ inputs.locale }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "$TARGET_ENV" in
+            production) PUBLIC_BASE="https://fermatmind.com" ;;
+            staging) PUBLIC_BASE="https://staging.fermatmind.com" ;;
+            *) echo "::error::invalid env=$TARGET_ENV"; exit 2;;
+          esac
+
+          curl -fsS "$PUBLIC_BASE/api/v0.2/healthz" \
+            | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
+
+          curl -fsS "$PUBLIC_BASE/api/v0.2/scales/MBTI/questions?region=${REGION}&locale=${LOCALE}" \
+            | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
+
+          curl -fsS "$PUBLIC_BASE/api/v0.2/content-packs" \
+            | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null

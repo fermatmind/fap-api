@@ -1,60 +1,99 @@
-# .github/workflows/rollback-production.yml
 name: Rollback Production
 
 on:
   workflow_dispatch:
-    inputs:
-      reason:
-        description: "Rollback reason"
-        required: true
-        default: "Rollback requested"
 
 concurrency:
-  group: deploy-production
+  group: rollback-production-${{ github.repository }}
   cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   rollback:
+    name: Rollback (production)
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    # 关键：绑定 production Environment，读取 Environment secret: SSH_PRIVATE_KEY
     environment: production
 
+    env:
+      DEPLOYER_VERSION: "7.5.12"
+
+      # 生产固定参数
+      DEPLOY_HOST: "122.152.221.126"
+      DEPLOY_USER: "ubuntu"
+      DEPLOY_PORT: "22"
+
+      DEPLOY_PATH: "/var/www/fap-api"
+      HEALTHCHECK_URL: "https://fermatmind.com/api/v0.2/healthz"
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.4"
-          coverage: none
-
-      - name: Install Deployer (PHAR v7.5.12)
-        run: |
-          curl -sSLo dep.phar https://github.com/deployphp/deployer/releases/download/v7.5.12/deployer.phar
-          php dep.phar --version
-
-      - name: Setup SSH Agent
+      - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          log-public-key: true
 
-      - name: Add known hosts
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
-
-      - name: Rollback via Deployer
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
-        run: |
-          php dep.phar -f deploy.php rollback production -vvv
-
-      - name: Post-rollback Health Check (public)
+      - name: Debug SSH agent (fingerprints only)
+        shell: bash
         run: |
           set -euo pipefail
-          sleep 2
-          curl -fsS "https://fermatmind.com/api/v0.2/health" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);' > /dev/null
-          curl -fsS "https://fermatmind.com/api/v0.2/scales/MBTI/questions" | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);' > /dev/null
+          ssh-add -l
+
+      - name: Add production host to known_hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "$DEPLOY_PORT" -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: SSH preflight (whoami)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            'whoami; hostname; id; test -d "'"$DEPLOY_PATH"'" && echo deploy_path_ok'
+
+      - name: Install Deployer (pinned)
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
+          php /tmp/dep.phar --version
+
+      - name: Rollback (Deployer)
+        shell: bash
+        env:
+          DEPLOYER_NO_INTERACTION: "1"
+        run: |
+          set -euo pipefail
+          php /tmp/dep.phar rollback production -f deploy.php -vvv --no-interaction
+
+      - name: Verify current release (server)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            'set -e; echo "current ->"; readlink -f /var/www/fap-api/current; echo "latest releases:"; ls -1 /var/www/fap-api/releases | tail -n 10'
+
+      - name: Healthcheck (post rollback)
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Healthcheck: $HEALTHCHECK_URL"
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            OUT="$(curl -fsS --max-time 10 "$HEALTHCHECK_URL" || true)"
+            echo "$OUT" | grep -q '"ok":true' && exit 0
+            sleep 3
+          done
+          echo "Healthcheck failed"
+          exit 1
