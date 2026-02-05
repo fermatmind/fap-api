@@ -28,7 +28,8 @@ jobs:
     timeout-minutes: 30
 
     # 关键：绑定 GitHub Environment，使 secrets.SSH_PRIVATE_KEY 读取到对应环境的 Environment Secret
-    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+    environment:
+      name: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
 
     env:
       TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
@@ -52,7 +53,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 修复点：本 step 内先赋值 DEPLOY_USER/DEPLOY_HOST/...，再 echo；避免 set -u 报 unbound variable
       - name: Resolve target vars
         shell: bash
         run: |
@@ -115,11 +115,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ssh -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+
+          # ✅ 已删除 -o IdentitiesOnly=yes，确保使用 ssh-agent 中的 key
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             'whoami; hostname; id'
 
-          ssh -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
 
