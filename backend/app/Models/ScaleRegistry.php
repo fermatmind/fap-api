@@ -21,6 +21,7 @@ class ScaleRegistry extends Model
         'primary_slug',
         'slugs_json',
         'driver_type',
+        'assessment_driver',
         'default_pack_id',
         'default_region',
         'default_locale',

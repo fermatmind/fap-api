@@ -11,6 +11,21 @@ return [
     // Profile / scoring
     'profile_version' => env('FAP_PROFILE_VERSION', 'mbti32-v2.5'),
 
+    // Assessment driver registry (scales_registry.assessment_driver)
+    'assessment_drivers' => [
+        'mbti' => App\Services\Assessment\Drivers\MbtiDriver::class,
+        'simple_score' => App\Services\Assessment\Drivers\SimpleScoreDriver::class,
+        'simple_score_demo' => App\Services\Assessment\Drivers\SimpleScoreDriver::class,
+        'demo_answers' => App\Services\Assessment\Drivers\SimpleScoreDriver::class,
+        'generic_likert' => App\Services\Assessment\Drivers\GenericLikertDriver::class,
+        'likert' => App\Services\Assessment\Drivers\GenericLikertDriver::class,
+        'iq_test' => App\Services\Assessment\Drivers\IqTestDriver::class,
+        'iq_raven' => App\Services\Assessment\Drivers\IqTestDriver::class,
+        'iq' => App\Services\Assessment\Drivers\IqTestDriver::class,
+        'generic_scoring' => App\Services\Assessment\Drivers\GenericScoringDriver::class,
+        'big5' => App\Services\Assessment\Drivers\GenericScoringDriver::class,
+    ],
+
     // Persist raw answers (audit)
     'store_answers_to_storage' => (bool) env('FAP_STORE_ANSWERS_TO_STORAGE', false),
 
