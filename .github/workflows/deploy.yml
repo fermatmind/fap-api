@@ -16,19 +16,19 @@ on:
 
 concurrency:
   group: deploy-${{ github.repository }}-${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
-  cancel-in-progress: ${{ github.event_name == 'push' }} # push(main) 只保留最新一次 staging
+  cancel-in-progress: ${{ github.event_name == 'push' }}  # push(main) 只跑最新一次 staging
 
 permissions:
   contents: read
 
 jobs:
   deploy:
-    # ⭐⭐⭐ 关键：绑定 GitHub Environment（触发审批 & 使用环境 secrets）
-    environment:
-      name: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
-
+    name: Deploy (${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
+
+    # 关键：绑定 GitHub Environment，使 secrets.SSH_PRIVATE_KEY 读取到对应环境的 Environment Secret
+    environment: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
 
     env:
       TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
@@ -52,40 +52,53 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 修复点：本 step 内先赋值 DEPLOY_USER/DEPLOY_HOST/...，再 echo；避免 set -u 报 unbound variable
       - name: Resolve target vars
+        shell: bash
         run: |
           set -euo pipefail
+
           case "$TARGET" in
             production)
-              echo "DEPLOY_HOST=$DEPLOY_HOST_PROD" >> $GITHUB_ENV
-              echo "DEPLOY_USER=$DEPLOY_USER_PROD" >> $GITHUB_ENV
-              echo "DEPLOY_PORT=$DEPLOY_PORT_PROD" >> $GITHUB_ENV
-              echo "DEPLOY_PATH=$DEPLOY_PATH_PROD" >> $GITHUB_ENV
-              echo "HEALTHCHECK_URL=$HEALTHCHECK_URL_PROD" >> $GITHUB_ENV
+              DEPLOY_HOST="$DEPLOY_HOST_PROD"
+              DEPLOY_USER="$DEPLOY_USER_PROD"
+              DEPLOY_PORT="$DEPLOY_PORT_PROD"
+              DEPLOY_PATH="$DEPLOY_PATH_PROD"
+              HEALTHCHECK_URL="$HEALTHCHECK_URL_PROD"
               ;;
             staging)
-              echo "DEPLOY_HOST=$DEPLOY_HOST_STG" >> $GITHUB_ENV
-              echo "DEPLOY_USER=$DEPLOY_USER_STG" >> $GITHUB_ENV
-              echo "DEPLOY_PORT=$DEPLOY_PORT_STG" >> $GITHUB_ENV
-              echo "DEPLOY_PATH=$DEPLOY_PATH_STG" >> $GITHUB_ENV
-              echo "HEALTHCHECK_URL=$HEALTHCHECK_URL_STG" >> $GITHUB_ENV
+              DEPLOY_HOST="$DEPLOY_HOST_STG"
+              DEPLOY_USER="$DEPLOY_USER_STG"
+              DEPLOY_PORT="$DEPLOY_PORT_STG"
+              DEPLOY_PATH="$DEPLOY_PATH_STG"
+              HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
               ;;
             *)
               echo "invalid TARGET=$TARGET"
               exit 2
               ;;
           esac
+
+          {
+            echo "DEPLOY_HOST=$DEPLOY_HOST"
+            echo "DEPLOY_USER=$DEPLOY_USER"
+            echo "DEPLOY_PORT=$DEPLOY_PORT"
+            echo "DEPLOY_PATH=$DEPLOY_PATH"
+            echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
+          } >> "$GITHUB_ENV"
+
           echo "TARGET=$TARGET"
           echo "SSH=$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT"
-          echo "PATH=$DEPLOY_PATH"
+          echo "DEPLOY_PATH=$DEPLOY_PATH"
           echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
 
-      - name: Set up SSH agent
+      - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Add target host to known_hosts
+        shell: bash
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
@@ -93,20 +106,26 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
 
       - name: SSH preflight (whoami)
+        shell: bash
         run: |
           set -euo pipefail
           ssh -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            'whoami; hostname; id; test -d '"$DEPLOY_PATH"' && echo "deploy_path ok"'
+            'whoami; hostname; id'
+
+          ssh -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
 
       - name: Install Deployer (pinned)
+        shell: bash
         run: |
           set -euo pipefail
-          curl -fsSL -o /tmp/dep.phar \
-            "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
+          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
           php /tmp/dep.phar --version
 
       - name: Deploy (Deployer)
+        shell: bash
         env:
           DEPLOYER_NO_INTERACTION: "1"
         run: |
@@ -114,6 +133,7 @@ jobs:
           php /tmp/dep.phar deploy "$TARGET" -f deploy.php -vvv --no-interaction
 
       - name: Healthcheck (post deploy)
+        shell: bash
         run: |
           set -euo pipefail
           echo "Healthcheck: $HEALTHCHECK_URL"
