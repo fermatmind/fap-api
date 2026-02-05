@@ -14,97 +14,113 @@ on:
           - staging
           - production
 
-# 同一环境同一时间只跑一个 deploy，避免 deploy.lock
 concurrency:
   group: deploy-${{ github.repository }}-${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'push' }} # push(main) 只保留最新一次 staging
 
 permissions:
   contents: read
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    env:
-      # push(main) 走 staging；手动触发按 inputs.env
-      TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
+    # ⭐⭐⭐ 关键：绑定 GitHub Environment（触发审批 & 使用环境 secrets）
+    environment:
+      name: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
 
-      # 固定 deployer 版本
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
       DEPLOYER_VERSION: "7.5.12"
 
-      # ====== production env vars (used by deploy.php production host) ======
+      # ====== production ======
       DEPLOY_USER_PROD: "ubuntu"
       DEPLOY_PORT_PROD: "22"
       DEPLOY_HOST_PROD: "122.152.221.126"
       DEPLOY_PATH_PROD: "/var/www/fap-api"
-      HEALTHCHECK_HOST_PROD: "fermatmind.com"
+      HEALTHCHECK_URL_PROD: "https://fermatmind.com/api/v0.2/healthz"
 
-      # ====== staging env vars (used by deploy.php staging host) ======
+      # ====== staging ======
       DEPLOY_USER_STG: "ubuntu"
       DEPLOY_PORT_STG: "22"
-      DEPLOY_HOST_STG: "staging.fermatmind.com"
+      DEPLOY_HOST_STG: "49.234.55.28"
       DEPLOY_PATH_STG: "/var/www/fap-api-staging"
-      HEALTHCHECK_HOST_STG: "staging.fermatmind.com"
+      HEALTHCHECK_URL_STG: "https://staging.fermatmind.com/api/v0.2/healthz"
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Debug SSH agent (fingerprints only)
+      - name: Resolve target vars
         run: |
           set -euo pipefail
-          ssh -V
-          ssh-add -l
-
-      - name: Add hosts to known_hosts
-        run: |
-          set -euo pipefail
-          mkdir -p ~/.ssh
-          ssh-keyscan -H 122.152.221.126 >> ~/.ssh/known_hosts
-          ssh-keyscan -H fermatmind.com >> ~/.ssh/known_hosts
-          ssh-keyscan -H staging.fermatmind.com >> ~/.ssh/known_hosts
-          ssh-keyscan -H 49.234.55.28 >> ~/.ssh/known_hosts
-
-      - name: Install Deployer (pinned)
-        run: |
-          set -euo pipefail
-          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
-          php /tmp/dep.phar --version
-
-      - name: Debug target
-        run: |
-          set -euo pipefail
-          echo "TARGET=$TARGET"
-
-      - name: SSH preflight (whoami)
-        run: |
-          set -euo pipefail
-
           case "$TARGET" in
             production)
-              H="$DEPLOY_HOST_PROD"
-              U="$DEPLOY_USER_PROD"
-              P="$DEPLOY_PORT_PROD"
+              echo "DEPLOY_HOST=$DEPLOY_HOST_PROD" >> $GITHUB_ENV
+              echo "DEPLOY_USER=$DEPLOY_USER_PROD" >> $GITHUB_ENV
+              echo "DEPLOY_PORT=$DEPLOY_PORT_PROD" >> $GITHUB_ENV
+              echo "DEPLOY_PATH=$DEPLOY_PATH_PROD" >> $GITHUB_ENV
+              echo "HEALTHCHECK_URL=$HEALTHCHECK_URL_PROD" >> $GITHUB_ENV
               ;;
             staging)
-              H="$DEPLOY_HOST_STG"
-              U="$DEPLOY_USER_STG"
-              P="$DEPLOY_PORT_STG"
+              echo "DEPLOY_HOST=$DEPLOY_HOST_STG" >> $GITHUB_ENV
+              echo "DEPLOY_USER=$DEPLOY_USER_STG" >> $GITHUB_ENV
+              echo "DEPLOY_PORT=$DEPLOY_PORT_STG" >> $GITHUB_ENV
+              echo "DEPLOY_PATH=$DEPLOY_PATH_STG" >> $GITHUB_ENV
+              echo "HEALTHCHECK_URL=$HEALTHCHECK_URL_STG" >> $GITHUB_ENV
               ;;
             *)
               echo "invalid TARGET=$TARGET"
               exit 2
               ;;
           esac
+          echo "TARGET=$TARGET"
+          echo "SSH=$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT"
+          echo "PATH=$DEPLOY_PATH"
+          echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
 
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$P" "$U@$H" 'whoami; hostname; id'
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Deploy (Deployer)
+      - name: Add target host to known_hosts
         run: |
           set -euo pipefail
-          php /tmp/dep.phar deploy "$TARGET" -f deploy.php -vvv
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "$DEPLOY_PORT" -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: SSH preflight (whoami)
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            'whoami; hostname; id; test -d '"$DEPLOY_PATH"' && echo "deploy_path ok"'
+
+      - name: Install Deployer (pinned)
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/dep.phar \
+            "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
+          php /tmp/dep.phar --version
+
+      - name: Deploy (Deployer)
+        env:
+          DEPLOYER_NO_INTERACTION: "1"
+        run: |
+          set -euo pipefail
+          php /tmp/dep.phar deploy "$TARGET" -f deploy.php -vvv --no-interaction
+
+      - name: Healthcheck (post deploy)
+        run: |
+          set -euo pipefail
+          echo "Healthcheck: $HEALTHCHECK_URL"
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            OUT="$(curl -fsS --max-time 10 "$HEALTHCHECK_URL" || true)"
+            echo "$OUT" | grep -q '"ok":true' && exit 0
+            sleep 3
+          done
+          echo "Healthcheck failed"
+          exit 1
