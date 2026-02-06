@@ -973,7 +973,6 @@ public function getResult(Request $request, string $attemptId)
 public function getShare(Request $request, string $attemptId)
 {
     $result = Result::where('attempt_id', $attemptId)->first();
-
     if (!$result) {
         return response()->json([
             'ok'      => false,
@@ -1273,17 +1272,19 @@ public function getReport(Request $request, string $attemptId)
         ]);
     }
 
-    $result = Result::where('attempt_id', $attemptId)->first();
-
-    if (!$result) {
-        return response()->json([
-            'ok'      => false,
-            'error'   => 'RESULT_NOT_FOUND',
-            'message' => 'Result not found for given attempt_id',
-        ], 404);
+    $attempt = Attempt::find($attemptId);
+    if (!$attempt) {
+        return $this->reportNotFoundResponse();
     }
 
-    $attempt = Attempt::find($attemptId);
+    if (!$this->canAccessAttemptReport($request, $attempt)) {
+        return $this->reportNotFoundResponse();
+    }
+
+    $result = Result::where('attempt_id', $attemptId)->first();
+    if (!$result) {
+        return $this->reportNotFoundResponse();
+    }
 
     $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
     $includeRaw = (string) $request->query('include', '');
@@ -1509,6 +1510,60 @@ if ($shareId !== '') {
     // ----------------------------
     // Private helpers
     // ----------------------------
+
+private function canAccessAttemptReport(Request $request, Attempt $attempt): bool
+{
+    $owner = $this->resolveReportOwner($request);
+    $ownerAnonId = trim((string) ($owner['anon_id'] ?? ''));
+    $ownerUserId = trim((string) ($owner['user_id'] ?? ''));
+
+    if ($ownerAnonId === '' && $ownerUserId === '') {
+        return false;
+    }
+
+    $attemptAnonId = trim((string) ($attempt->anon_id ?? ''));
+    $attemptUserId = trim((string) ($attempt->user_id ?? ''));
+
+    if ($ownerUserId !== '' && $attemptUserId !== '' && hash_equals($attemptUserId, $ownerUserId)) {
+        return true;
+    }
+
+    if ($ownerAnonId !== '' && $attemptAnonId !== '' && hash_equals($attemptAnonId, $ownerAnonId)) {
+        return true;
+    }
+
+    return false;
+}
+
+private function resolveReportOwner(Request $request): array
+{
+    $attrAnonId = trim((string) ($request->attributes->get('fm_anon_id')
+        ?? $request->attributes->get('anon_id')
+        ?? ''));
+    $attrUserId = trim((string) ($request->attributes->get('fm_user_id')
+        ?? $request->attributes->get('user_id')
+        ?? ''));
+    $headerAnonId = trim((string) $request->header('X-Anon-Id', ''));
+    $queryAnonId = trim((string) $request->query('anon_id', ''));
+
+    $resolvedAnonId = $attrAnonId !== ''
+        ? $attrAnonId
+        : ($headerAnonId !== '' ? $headerAnonId : $queryAnonId);
+
+    return [
+        'anon_id' => $resolvedAnonId,
+        'user_id' => $attrUserId,
+    ];
+}
+
+private function reportNotFoundResponse()
+{
+    return response()->json([
+        'ok'      => false,
+        'error'   => 'RESULT_NOT_FOUND',
+        'message' => 'Result not found for given attempt_id',
+    ], 404);
+}
 
 private function ensureReportJob(string $attemptId, bool $reset = false): ReportJob
 {

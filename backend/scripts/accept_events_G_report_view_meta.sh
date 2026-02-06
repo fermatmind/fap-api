@@ -59,14 +59,52 @@ fi
 echo "[ACCEPT_G] ATT=$ATT"
 echo "[ACCEPT_G] SHARE_ID=$SHARE_ID"
 
+ANON_ID="${ANON_ID:-}"
+if [[ -z "$ANON_ID" && -n "$SQLITE_DB_ABS" ]]; then
+  ANON_ID="$(ATT="$ATT" SQLITE_DB="$SQLITE_DB_ABS" php -r '
+$att = (string) getenv("ATT");
+$db = (string) getenv("SQLITE_DB");
+if ($att === "" || $db === "" || !is_file($db)) {
+  exit(0);
+}
+try {
+  $pdo = new PDO("sqlite:" . $db);
+  $stmt = $pdo->prepare("select anon_id from attempts where id = :id limit 1");
+  $stmt->execute([":id" => $att]);
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  if (is_array($row)) {
+    echo (string) ($row["anon_id"] ?? "");
+  }
+} catch (Throwable $e) {
+  exit(0);
+}
+')"
+fi
+if [[ -n "$ANON_ID" ]]; then
+  CURL_AUTH=()
+fi
+echo "[ACCEPT_G] ANON_ID=${ANON_ID:-<empty>}"
+
 # 触发 report_view（并携带 share_id + headers）
+REPORT_HEADERS=(
+  -H "X-Experiment: G_accept"
+  -H "X-App-Version: 1.2.3-accept"
+  -H "X-Channel: miniapp"
+  -H "X-Client-Platform: wechat"
+  -H "X-Entry-Page: report_page"
+)
+if [[ -n "$ANON_ID" ]]; then
+  REPORT_HEADERS+=(-H "X-Anon-Id: $ANON_ID")
+fi
+REPORT_URL="$API/api/v0.2/attempts/$ATT/report?share_id=$SHARE_ID"
+if [[ -n "$ANON_ID" ]]; then
+  REPORT_URL="${REPORT_URL}&anon_id=${ANON_ID}"
+fi
+
 curl -fsS \
-  -H "X-Experiment: G_accept" \
-  -H "X-App-Version: 1.2.3-accept" \
-  -H "X-Channel: miniapp" \
-  -H "X-Client-Platform: wechat" \
-  -H "X-Entry-Page: report_page" \
-  "${CURL_AUTH[@]}" "$API/api/v0.2/attempts/$ATT/report?share_id=$SHARE_ID" >/dev/null
+  "${REPORT_HEADERS[@]}" \
+  ${CURL_AUTH[@]+"${CURL_AUTH[@]}"} \
+  "$REPORT_URL" >/dev/null
 
 # ✅ 关键：强制 tinker 走同一个 sqlite 文件（避免“手跑连错库”）
 DB_CONNECTION=sqlite DB_DATABASE="$SQLITE_DB_ABS" ATT="$ATT" SHARE_ID="$SHARE_ID" php artisan tinker --execute='

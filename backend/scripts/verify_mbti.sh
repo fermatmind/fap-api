@@ -18,6 +18,8 @@ SCALE_VERSION="${SCALE_VERSION:-v0.2}"
 ANSWER_CODE="${ANSWER_CODE:-C}"
 REGION="${REGION:-CN_MAINLAND}"
 LOCALE="${LOCALE:-zh-CN}"
+ATTEMPT_ANON_ID="${ATTEMPT_ANON_ID:-}"
+ANON_ID="${ANON_ID:-}"
 
 # 你原本用 pack prefix 断言；保留
 EXPECT_PACK_PREFIX="${EXPECT_PACK_PREFIX:-MBTI.cn-mainland.zh-CN.}"
@@ -52,6 +54,7 @@ ATTEMPT_RESP_JSON="$RUN_DIR/attempt.json"
 REPORT_JSON="$RUN_DIR/report.json"
 SHARE_JSON="$RUN_DIR/share.json"
 ATTEMPT_ID_TXT="$RUN_DIR/attempt_id.txt"
+ANON_ID_TXT="$RUN_DIR/anon_id.txt"
 SUMMARY_TXT="$RUN_DIR/summary.txt"
 
 OVR_LOG="$LOG_DIR/overrides_accept_D.log"
@@ -238,7 +241,7 @@ echo "[OK] questions count=" . $cnt . PHP_EOL;
 '
 
 echo "[3/8] build payload ($ANSWER_CODE for all)"
-QUESTIONS_JSON="$QUESTIONS_JSON" PAYLOAD_JSON="$PAYLOAD_JSON" ANSWER_CODE="$ANSWER_CODE" SCALE_CODE="$SCALE_CODE" SCALE_VERSION="$SCALE_VERSION" REGION="$REGION" LOCALE="$LOCALE" php -r '
+QUESTIONS_JSON="$QUESTIONS_JSON" PAYLOAD_JSON="$PAYLOAD_JSON" ANSWER_CODE="$ANSWER_CODE" SCALE_CODE="$SCALE_CODE" SCALE_VERSION="$SCALE_VERSION" REGION="$REGION" LOCALE="$LOCALE" ANON_ID="$ANON_ID" php -r '
 $j=json_decode(file_get_contents(getenv("QUESTIONS_JSON")), true);
 $items=$j["items"] ?? [];
 $answers=[];
@@ -250,8 +253,12 @@ if (is_array($items)) {
     $answers[]=["question_id"=>$qid, "code"=>getenv("ANSWER_CODE")];
   }
 }
+$anonId = trim((string) getenv("ANON_ID"));
+if ($anonId === "") {
+  $anonId = "local_verify_" . substr(bin2hex(random_bytes(8)), 0, 8);
+}
 $payload=[
-  "anon_id"=>"local_verify_" . substr(bin2hex(random_bytes(8)), 0, 8),
+  "anon_id"=>$anonId,
   "scale_code"=>getenv("SCALE_CODE"),
   "scale_version"=>getenv("SCALE_VERSION"),
   "answers"=>$answers,
@@ -265,6 +272,14 @@ $payload=[
 file_put_contents(getenv("PAYLOAD_JSON"), json_encode($payload, JSON_UNESCAPED_UNICODE));
 echo "[OK] payload written: " . getenv("PAYLOAD_JSON") . " answers=" . count($answers) . PHP_EOL;
 '
+
+if [[ -z "${ATTEMPT_ANON_ID}" ]]; then
+  ATTEMPT_ANON_ID="$(PAYLOAD_JSON="$PAYLOAD_JSON" php -r '
+  $j=json_decode(file_get_contents(getenv("PAYLOAD_JSON")), true);
+  if (!is_array($j)) { exit(1); }
+  echo (string)($j["anon_id"] ?? "");
+  ' || true)"
+fi
 
 # 4) create attempt OR reuse attempt
 if [[ -n "${ATTEMPT_ID:-}" ]]; then
@@ -300,11 +315,14 @@ echo $aid;
 fi
 
 echo "$ATTEMPT_ID" > "$ATTEMPT_ID_TXT"
+echo "$ATTEMPT_ANON_ID" > "$ANON_ID_TXT"
 echo "[OK] attempt_id=$ATTEMPT_ID"
 
 echo "[5/8] fetch report & share"
-# ✅ report is gated by fm_token
-fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/report" "$REPORT_JSON" 1
+[[ -n "${ATTEMPT_ANON_ID}" ]] || fail "missing ATTEMPT_ANON_ID for report ownership guard"
+REPORT_URL="$API/api/v0.2/attempts/$ATTEMPT_ID/report?anon_id=$ATTEMPT_ANON_ID"
+# ✅ report uses owner anon_id guard; avoid mismatched fm_token owner overriding anon_id
+fetch_json "$REPORT_URL" "$REPORT_JSON" 0
 # share is public (not gated)
 fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON" 0
 echo "[OK] report=$REPORT_JSON"

@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\DTO\ResolvedPack;
+use App\Services\Content\ContentLoaderService;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -97,7 +98,12 @@ final class ContentPackResolver
         $fallbackChain = $this->buildFallbackChain($picked['manifest'], $trace);
 
         // loaders: read asset with fallback
-        $loaders = $this->makeLoaders($picked['base_dir'], $fallbackChain);
+        $loaders = $this->makeLoaders(
+            (string) $picked['pack_id'],
+            (string) $picked['dir_version'],
+            (string) $picked['base_dir'],
+            $fallbackChain
+        );
 
         return new ResolvedPack(
             packId: $picked['pack_id'],
@@ -259,6 +265,7 @@ final class ContentPackResolver
             $p = $this->byPackId[$packId];
             $chain[] = [
                 'pack_id' => $p['pack_id'],
+                'dir_version' => $p['dir_version'],
                 'base_dir' => $p['base_dir'],
                 'manifest' => $p['manifest'],
             ];
@@ -268,28 +275,84 @@ final class ContentPackResolver
         return $chain;
     }
 
-    private function makeLoaders(string $baseDir, array $fallbackChain): array
+    private function makeLoaders(string $packId, string $dirVersion, string $baseDir, array $fallbackChain): array
     {
-        $dirs = [$baseDir];
-        foreach ($fallbackChain as $f) $dirs[] = $f['base_dir'];
+        /** @var ContentLoaderService $loader */
+        $loader = app(ContentLoaderService::class);
 
-        $readFile = function (string $rel) use ($dirs): ?string {
+        $sources = [[
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
+            'base_dir' => $baseDir,
+        ]];
+        foreach ($fallbackChain as $f) {
+            $sources[] = [
+                'pack_id' => (string) ($f['pack_id'] ?? ''),
+                'dir_version' => (string) ($f['dir_version'] ?? ''),
+                'base_dir' => (string) ($f['base_dir'] ?? ''),
+            ];
+        }
+
+        $readFile = function (string $rel) use ($loader, $sources): ?string {
             $rel = ltrim($rel, "/\\");
-            foreach ($dirs as $dir) {
-                $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
-                if (is_file($abs)) {
-                    $raw = @file_get_contents($abs);
-                    if ($raw !== false) return $raw;
+            foreach ($sources as $source) {
+                $raw = $loader->readText(
+                    (string) $source['pack_id'],
+                    (string) $source['dir_version'],
+                    $rel,
+                    function () use ($source, $rel): ?string {
+                        $dir = (string) ($source['base_dir'] ?? '');
+                        if ($dir === '') {
+                            return null;
+                        }
+
+                        $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
+                        if (!is_file($abs)) {
+                            return null;
+                        }
+
+                        $read = @file_get_contents($abs);
+                        return $read === false ? null : $read;
+                    }
+                );
+
+                if (is_string($raw)) {
+                    return $raw;
                 }
             }
+
             return null;
         };
 
-        $readJson = function (string $rel) use ($readFile): ?array {
-            $raw = $readFile($rel);
-            if ($raw === null) return null;
-            $j = json_decode($raw, true);
-            return is_array($j) ? $j : null;
+        $readJson = function (string $rel) use ($loader, $sources): ?array {
+            $rel = ltrim($rel, "/\\");
+            foreach ($sources as $source) {
+                $json = $loader->readJson(
+                    (string) $source['pack_id'],
+                    (string) $source['dir_version'],
+                    $rel,
+                    function () use ($source, $rel): ?string {
+                        $dir = (string) ($source['base_dir'] ?? '');
+                        if ($dir === '') {
+                            return null;
+                        }
+
+                        $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
+                        if (!is_file($abs)) {
+                            return null;
+                        }
+
+                        $read = @file_get_contents($abs);
+                        return $read === false ? null : $read;
+                    }
+                );
+
+                if (is_array($json)) {
+                    return $json;
+                }
+            }
+
+            return null;
         };
 
         return [

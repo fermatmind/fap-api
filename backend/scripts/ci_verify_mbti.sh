@@ -61,6 +61,7 @@ API="http://${HOST}:${PORT}"
 
 REGION="${REGION:-CN_MAINLAND}"
 LOCALE="${LOCALE:-zh-CN}"
+VERIFY_ANON_ID="${VERIFY_ANON_ID:-ci_verify}"
 
 # Your stable pack identifiers
 PACK_ID="${PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.2}"
@@ -564,10 +565,11 @@ echo "[CI] smoke OK"
 # Run E2E verify
 # -----------------------------
 echo "[CI] get fm_token for gated endpoints"
+echo "[CI] verify anon_id=$VERIFY_ANON_ID"
 FM_TOKEN="$(
   curl -sS -X POST "$API/api/v0.2/auth/wx_phone" \
     -H "Content-Type: application/json" \
-    -d '{"wx_code":"dev","phone_code":"dev","anon_id":"ci_verify"}' \
+    -d "{\"wx_code\":\"dev\",\"phone_code\":\"dev\",\"anon_id\":\"${VERIFY_ANON_ID}\"}" \
   | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["token"] ?? "";'
 )"
 
@@ -579,7 +581,7 @@ fi
 set_curl_auth
 
 echo "[CI] running verify_mbti.sh (with FM_TOKEN)"
-API="$API" REGION="$REGION" LOCALE="$LOCALE" RUN_DIR="$RUN_DIR" FM_TOKEN="$FM_TOKEN" \
+API="$API" REGION="$REGION" LOCALE="$LOCALE" RUN_DIR="$RUN_DIR" ANON_ID="$VERIFY_ANON_ID" FM_TOKEN="$FM_TOKEN" \
   bash "$SCRIPT_DIR/verify_mbti.sh"
 echo "[CI] verify_mbti OK ✅"
 
@@ -761,7 +763,7 @@ if [[ "$ACCEPT_ORDER" == "1" ]]; then
   echo "[CI] lookup order acceptance OK"
 fi
 
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
+API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" ANON_ID="$VERIFY_ANON_ID" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_C.sh" >/dev/null
 
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
