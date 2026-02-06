@@ -168,12 +168,14 @@ class PaymentWebhookController extends Controller
         return hash_equals($expected, $signature);
     }
 
-    private function verifyStripeSignature(Request $request, string $rawBody): bool
+    private function verifyStripeSignature(Request $request, ?string $rawBody = null): bool
     {
         $secret = (string) (config('services.stripe.webhook_secret') ?? env('STRIPE_WEBHOOK_SECRET', ''));
         if ($secret === '') {
             return app()->environment(['local', 'testing', 'ci']);
         }
+
+        $rawBody = $rawBody ?? (string) $request->getContent();
 
         $header = (string) $request->header('Stripe-Signature', '');
         if ($header === '') {
@@ -201,7 +203,7 @@ class PaymentWebhookController extends Controller
             return false;
         }
 
-        $tolerance = (int) (config('services.stripe.webhook_tolerance') ?? 300);
+        $tolerance = (int) (config('services.stripe.webhook_tolerance_seconds', config('services.stripe.webhook_tolerance', 300)) ?? 300);
         if ($tolerance <= 0) {
             $tolerance = 300;
         }

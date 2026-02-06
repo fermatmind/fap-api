@@ -9,7 +9,8 @@ use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\PaymentGateway\StubGateway;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Report\ReportSnapshotStore;
-use Illuminate\Database\QueryException;
+use Illuminate\Contracts\Cache\LockTimeoutException;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -70,89 +71,87 @@ class PaymentWebhookProcessor
 
         $receivedAt = now();
         $payloadJson = is_array($payload) ? json_encode($payload, JSON_UNESCAPED_UNICODE) : $payload;
+        $lockKey = "payment_webhook:{$provider}:{$providerEventId}";
 
-        return DB::transaction(function () use (
-            $orderNo,
-            $normalized,
-            $providerEventId,
-            $provider,
-            $orgId,
-            $userId,
-            $anonId,
-            $eventType,
-            $receivedAt,
-            $payloadJson,
-            $signatureOk
-        ) {
-            $eventRow = DB::table('payment_events')
-                ->where('provider_event_id', $providerEventId)
-                ->lockForUpdate()
-                ->first();
+        try {
+            return Cache::lock($lockKey, 180)->block(10, function () use (
+                $orderNo,
+                $normalized,
+                $providerEventId,
+                $provider,
+                $orgId,
+                $userId,
+                $anonId,
+                $eventType,
+                $receivedAt,
+                $payloadJson,
+                $signatureOk
+            ) {
+                return DB::transaction(function () use (
+                    $orderNo,
+                    $normalized,
+                    $providerEventId,
+                    $provider,
+                    $orgId,
+                    $userId,
+                    $anonId,
+                    $eventType,
+                    $receivedAt,
+                    $payloadJson,
+                    $signatureOk
+                ) {
+                    $insertSeed = [
+                        'id' => (string) Str::uuid(),
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_no' => $orderNo,
+                        'payload_json' => $payloadJson,
+                        'received_at' => $receivedAt,
+                        'created_at' => $receivedAt,
+                        'updated_at' => $receivedAt,
+                    ];
+                    if (Schema::hasColumn('payment_events', 'event_type')) {
+                        $insertSeed['event_type'] = $eventType;
+                    }
+                    if (Schema::hasColumn('payment_events', 'signature_ok')) {
+                        $insertSeed['signature_ok'] = $signatureOk;
+                    }
+                    if (Schema::hasColumn('payment_events', 'status')) {
+                        $insertSeed['status'] = 'received';
+                    }
+                    if (Schema::hasColumn('payment_events', 'attempts')) {
+                        $insertSeed['attempts'] = 0;
+                    }
+                    if (Schema::hasColumn('payment_events', 'last_error_code')) {
+                        $insertSeed['last_error_code'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'last_error_message')) {
+                        $insertSeed['last_error_message'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'processed_at')) {
+                        $insertSeed['processed_at'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'handled_at')) {
+                        $insertSeed['handled_at'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'handle_status')) {
+                        $insertSeed['handle_status'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'order_id')) {
+                        $insertSeed['order_id'] = (string) Str::uuid();
+                    }
 
-            if ($eventRow && $this->isEventProcessed($eventRow)) {
-                return [
-                    'ok' => true,
-                    'duplicate' => true,
-                    'order_no' => $orderNo,
-                    'provider_event_id' => $providerEventId,
-                ];
-            }
+                    DB::table('payment_events')->insertOrIgnore($insertSeed);
 
-            $attempts = (int) ($eventRow->attempts ?? 0);
-            $attempts = $attempts > 0 ? $attempts + 1 : 1;
-
-            $baseRow = [
-                'provider' => $provider,
-                'provider_event_id' => $providerEventId,
-                'order_no' => $orderNo,
-                'payload_json' => $payloadJson,
-                'received_at' => $receivedAt,
-                'updated_at' => $receivedAt,
-            ];
-            if (Schema::hasColumn('payment_events', 'event_type')) {
-                $baseRow['event_type'] = $eventType;
-            }
-            if (Schema::hasColumn('payment_events', 'signature_ok')) {
-                $baseRow['signature_ok'] = $signatureOk;
-            }
-            if (Schema::hasColumn('payment_events', 'status')) {
-                $baseRow['status'] = 'received';
-            }
-            if (Schema::hasColumn('payment_events', 'attempts')) {
-                $baseRow['attempts'] = $attempts;
-            }
-            if (Schema::hasColumn('payment_events', 'last_error_code')) {
-                $baseRow['last_error_code'] = null;
-            }
-            if (Schema::hasColumn('payment_events', 'last_error_message')) {
-                $baseRow['last_error_message'] = null;
-            }
-            if (Schema::hasColumn('payment_events', 'processed_at')) {
-                $baseRow['processed_at'] = null;
-            }
-            if (Schema::hasColumn('payment_events', 'handled_at')) {
-                $baseRow['handled_at'] = null;
-            }
-            if (Schema::hasColumn('payment_events', 'handle_status')) {
-                $baseRow['handle_status'] = null;
-            }
-            if (Schema::hasColumn('payment_events', 'order_id')) {
-                $baseRow['order_id'] = $eventRow->order_id ?? (string) Str::uuid();
-            }
-
-            if ($eventRow) {
-                DB::table('payment_events')->where('provider_event_id', $providerEventId)->update($baseRow);
-            } else {
-                $baseRow['id'] = (string) Str::uuid();
-                $baseRow['created_at'] = $receivedAt;
-                try {
-                    DB::table('payment_events')->insert($baseRow);
-                } catch (QueryException $e) {
                     $eventRow = DB::table('payment_events')
                         ->where('provider_event_id', $providerEventId)
                         ->lockForUpdate()
                         ->first();
-                    if ($eventRow && $this->isEventProcessed($eventRow)) {
+                    if (!$eventRow) {
+                        return $this->serverError('EVENT_INIT_FAILED', 'payment event init failed.');
+                    }
+
+                    if ($this->isEventProcessed($eventRow)) {
                         return [
                             'ok' => true,
                             'duplicate' => true,
@@ -160,25 +159,64 @@ class PaymentWebhookProcessor
                             'provider_event_id' => $providerEventId,
                         ];
                     }
-                    if ($eventRow) {
-                        DB::table('payment_events')->where('provider_event_id', $providerEventId)->update($baseRow);
+
+                    $attempts = (int) ($eventRow->attempts ?? 0);
+                    $attempts = $attempts > 0 ? $attempts + 1 : 1;
+
+                    $baseRow = [
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_no' => $orderNo,
+                        'payload_json' => $payloadJson,
+                        'received_at' => $receivedAt,
+                        'updated_at' => $receivedAt,
+                    ];
+                    if (Schema::hasColumn('payment_events', 'event_type')) {
+                        $baseRow['event_type'] = $eventType;
                     }
-                }
-            }
+                    if (Schema::hasColumn('payment_events', 'signature_ok')) {
+                        $baseRow['signature_ok'] = $signatureOk;
+                    }
+                    if (Schema::hasColumn('payment_events', 'status')) {
+                        $baseRow['status'] = 'received';
+                    }
+                    if (Schema::hasColumn('payment_events', 'attempts')) {
+                        $baseRow['attempts'] = $attempts;
+                    }
+                    if (Schema::hasColumn('payment_events', 'last_error_code')) {
+                        $baseRow['last_error_code'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'last_error_message')) {
+                        $baseRow['last_error_message'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'processed_at')) {
+                        $baseRow['processed_at'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'handled_at')) {
+                        $baseRow['handled_at'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'handle_status')) {
+                        $baseRow['handle_status'] = null;
+                    }
+                    if (Schema::hasColumn('payment_events', 'order_id')) {
+                        $baseRow['order_id'] = $eventRow->order_id ?? ($insertSeed['order_id'] ?? (string) Str::uuid());
+                    }
 
-            $orderQuery = DB::table('orders')->where('order_no', $orderNo);
-            if (Schema::hasColumn('orders', 'org_id')) {
-                $orderQuery->where('org_id', $orgId);
-            } elseif ($orgId !== 0) {
-                $this->markEventError($providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
-                return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
-            }
+                    DB::table('payment_events')->where('provider_event_id', $providerEventId)->update($baseRow);
 
-            $order = $orderQuery->lockForUpdate()->first();
-            if (!$order) {
-                $this->markEventError($providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
-                return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
-            }
+                    $orderQuery = DB::table('orders')->where('order_no', $orderNo);
+                    if (Schema::hasColumn('orders', 'org_id')) {
+                        $orderQuery->where('org_id', $orgId);
+                    } elseif ($orgId !== 0) {
+                        $this->markEventError($providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
+                        return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
+                    }
+
+                    $order = $orderQuery->lockForUpdate()->first();
+                    if (!$order) {
+                        $this->markEventError($providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
+                        return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
+                    }
 
             $orderMeta = $this->resolveOrderMeta($orgId, $orderNo, $order);
             $normalizedSkuMeta = $this->normalizeOrderSkuMeta($order);
@@ -401,12 +439,16 @@ class PaymentWebhookProcessor
 
             $this->markEventProcessed($providerEventId);
 
-            return [
-                'ok' => true,
-                'order_no' => $orderNo,
-                'provider_event_id' => $providerEventId,
-            ];
-        });
+                    return [
+                        'ok' => true,
+                        'order_no' => $orderNo,
+                        'provider_event_id' => $providerEventId,
+                    ];
+                });
+            });
+        } catch (LockTimeoutException $e) {
+            return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
+        }
     }
 
     private function numericUserId(?string $userId): ?int

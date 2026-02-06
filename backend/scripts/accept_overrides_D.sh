@@ -4,8 +4,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 ARTIFACTS="${ARTIFACTS:-${BACKEND_DIR}/artifacts/verify_mbti}"
-ANON_ID=""
-if [[ -f "${ARTIFACTS}/anon_id.txt" ]]; then
+ANON_ID="${ANON_ID:-}"
+if [[ -z "${ANON_ID}" && -f "${ARTIFACTS}/anon_id.txt" ]]; then
   ANON_ID="$(tr -d '\r\n' < "${ARTIFACTS}/anon_id.txt")"
 fi
 OWNER_HDR=()
@@ -128,10 +128,17 @@ call_refresh() {
   local label="$1"
   local url="$BASE/api/v0.2/attempts/$ATT/report?refresh=1"
   local http=""
+  local curl_args=()
+
+  if [[ ${#CURL_AUTH[@]} -gt 0 ]]; then
+    curl_args+=("${CURL_AUTH[@]}")
+  fi
+  if [[ ${#OWNER_HDR[@]} -gt 0 ]]; then
+    curl_args+=("${OWNER_HDR[@]}")
+  fi
 
   http="$(curl -sS -L -o "$TMP_REPORT" -w "%{http_code}" \
-    "${CURL_AUTH[@]}" \
-    "${OWNER_HDR[@]}" \
+    "${curl_args[@]}" \
     -H 'Accept: application/json' \
     "$url" || true)"
 

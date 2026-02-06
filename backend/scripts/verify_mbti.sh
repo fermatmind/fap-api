@@ -44,6 +44,14 @@ if [[ -z "$RUN_DIR" ]]; then
   fi
 fi
 
+if [[ -z "${ANON_ID}" ]]; then
+  ANON_ID="local_verify_$(date +%s)"
+fi
+if [[ -z "${ATTEMPT_ANON_ID}" ]]; then
+  ATTEMPT_ANON_ID="${ANON_ID}"
+fi
+CURL_OWNER=(-H "X-Anon-Id: ${ANON_ID}")
+
 LOG_DIR="$RUN_DIR/logs"
 mkdir -p "$LOG_DIR"
 
@@ -125,9 +133,9 @@ fetch_json() {
 
   local http
   if [[ "$need_auth" == "1" ]]; then
-    http="$(curl -sS -L -o "$out" -w "%{http_code}" "${CURL_AUTH[@]}" "$url" || true)"
+    http="$(curl -sS -L -o "$out" -w "%{http_code}" "${CURL_AUTH[@]}" "${CURL_OWNER[@]}" "$url" || true)"
   else
-    http="$(curl -sS -L -o "$out" -w "%{http_code}" "$url" || true)"
+    http="$(curl -sS -L -o "$out" -w "%{http_code}" "${CURL_OWNER[@]}" "$url" || true)"
   fi
 
   if [[ -z "${http:-}" ]]; then
@@ -289,6 +297,7 @@ else
   http="$(curl -sS -L -o "$ATTEMPT_RESP_JSON" -w "%{http_code}" \
     -X POST "$API/api/v0.2/attempts" \
     -H 'Content-Type: application/json' \
+    "${CURL_OWNER[@]}" \
     -d @"$PAYLOAD_JSON" || true)"
 
   if [[ "$http" != "200" && "$http" != "201" ]]; then

@@ -3,9 +3,6 @@
 
 declare(strict_types=1);
 
-$appEnv = env('APP_ENV', 'production');
-$defaultLoaderStore = in_array($appEnv, ['local', 'testing', 'ci'], true) ? 'array' : 'hot_redis';
-
 return [
     // content_packages 根目录（本机/服务器/CI 都建议通过 env 固定）
     // - 本机默认：base_path('../content_packages')
@@ -25,7 +22,7 @@ return [
     // - cache_ttl_seconds：到期触发一次 etag 校验与刷新
     'cache_dir' => env('FAP_PACKS_CACHE_DIR', storage_path('app/private/content_packs_cache')),
     'cache_ttl_seconds' => (int)env('FAP_PACKS_CACHE_TTL_SECONDS', 3600),
-    'loader_cache_store' => env('CONTENT_LOADER_CACHE_STORE', $defaultLoaderStore),
+    'loader_cache_store' => env('CONTENT_LOADER_CACHE_STORE', 'array'),
     'loader_cache_ttl_seconds' => (int) env('CONTENT_LOADER_CACHE_TTL_SECONDS', 300),
 
     // ✅ CI/服务器建议强约束：默认 pack_id 明确指向你的主包，避免回退到 GLOBAL/en

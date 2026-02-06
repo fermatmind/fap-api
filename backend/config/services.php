@@ -37,7 +37,8 @@ return [
 
     'stripe' => [
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
-        'webhook_tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
+        'webhook_tolerance_seconds' => (int) env('STRIPE_WEBHOOK_TOLERANCE_SECONDS', env('STRIPE_WEBHOOK_TOLERANCE', 300)),
+        'webhook_tolerance' => (int) env('STRIPE_WEBHOOK_TOLERANCE', 300),
     ],
 
     'billing' => [
