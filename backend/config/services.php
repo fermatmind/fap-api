@@ -35,6 +35,11 @@ return [
         ],
     ],
 
+    'stripe' => [
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'webhook_tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
+    ],
+
     'billing' => [
         'webhook_secret' => env('BILLING_WEBHOOK_SECRET'),
     ],

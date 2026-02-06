@@ -23,6 +23,7 @@ class PaymentWebhookController extends Controller
     public function handle(Request $request, string $provider): JsonResponse
     {
         $provider = strtolower(trim($provider));
+        $rawBody = (string) $request->getContent();
 
         // ✅ 关键修复：CI 跑 stub webhook；production 才隐藏 stub
         if ($provider === 'stub' && !app()->environment(['local', 'testing', 'ci'])) {
@@ -30,11 +31,25 @@ class PaymentWebhookController extends Controller
         }
 
         // billing 需要签名（secret 为空时按原逻辑：local/testing 允许；其余环境拒绝）
-        if ($provider === 'billing' && !$this->verifyBillingSignature($request)) {
-            return $this->notFoundResponse();
+        $signatureOk = true;
+        if ($provider === 'billing') {
+            $signatureOk = $this->verifyBillingSignature($request, $rawBody);
+            if (!$signatureOk) {
+                return $this->notFoundResponse();
+            }
         }
 
-        $payload = $request->all();
+        if ($provider === 'stripe') {
+            $signatureOk = $this->verifyStripeSignature($request, $rawBody);
+            if (!$signatureOk) {
+                return $this->notFoundResponse();
+            }
+        }
+
+        $payload = json_decode($rawBody, true);
+        if (!is_array($payload)) {
+            $payload = $request->all();
+        }
         if (!is_array($payload)) {
             $payload = [];
         }
@@ -50,6 +65,7 @@ class PaymentWebhookController extends Controller
             $orgId,
             $userId !== null ? (string) $userId : null,
             $anonId !== null ? (string) $anonId : null,
+            $signatureOk,
         );
 
         if (!($result['ok'] ?? false)) {
@@ -132,11 +148,11 @@ class PaymentWebhookController extends Controller
         ];
     }
 
-    private function verifyBillingSignature(Request $request): bool
+    private function verifyBillingSignature(Request $request, string $rawBody): bool
     {
         $secret = (string) (config('services.billing.webhook_secret') ?? env('BILLING_WEBHOOK_SECRET', ''));
         if ($secret === '') {
-            return app()->environment(['local', 'testing']);
+            return app()->environment(['local', 'testing', 'ci']);
         }
 
         $signature = (string) $request->header('X-Billing-Signature', '');
@@ -147,10 +163,61 @@ class PaymentWebhookController extends Controller
             return false;
         }
 
-        $payload = (string) $request->getContent();
-        $expected = hash_hmac('sha256', $payload, $secret);
+        $expected = hash_hmac('sha256', $rawBody, $secret);
 
         return hash_equals($expected, $signature);
+    }
+
+    private function verifyStripeSignature(Request $request, string $rawBody): bool
+    {
+        $secret = (string) (config('services.stripe.webhook_secret') ?? env('STRIPE_WEBHOOK_SECRET', ''));
+        if ($secret === '') {
+            return app()->environment(['local', 'testing', 'ci']);
+        }
+
+        $header = (string) $request->header('Stripe-Signature', '');
+        if ($header === '') {
+            return false;
+        }
+
+        $timestamp = null;
+        $signatures = [];
+        foreach (explode(',', $header) as $chunk) {
+            $chunk = trim($chunk);
+            if ($chunk === '' || !str_contains($chunk, '=')) {
+                continue;
+            }
+            [$key, $value] = array_map('trim', explode('=', $chunk, 2));
+            if ($key === 't' && $value !== '' && ctype_digit($value)) {
+                $timestamp = (int) $value;
+                continue;
+            }
+            if ($key === 'v1' && $value !== '') {
+                $signatures[] = $value;
+            }
+        }
+
+        if ($timestamp === null || count($signatures) === 0) {
+            return false;
+        }
+
+        $tolerance = (int) (config('services.stripe.webhook_tolerance') ?? 300);
+        if ($tolerance <= 0) {
+            $tolerance = 300;
+        }
+        if (abs(time() - $timestamp) > $tolerance) {
+            return false;
+        }
+
+        $signed = $timestamp . '.' . $rawBody;
+        $expected = hash_hmac('sha256', $signed, $secret);
+        foreach ($signatures as $signature) {
+            if (hash_equals($expected, $signature)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function notFoundResponse(): JsonResponse

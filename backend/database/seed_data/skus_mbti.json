@@ -1,0 +1,124 @@
+[
+  {
+    "sku": "MBTI_REPORT_FULL",
+    "anchor_sku": "MBTI_REPORT_FULL",
+    "scale_code": "MBTI",
+    "benefit_type": "report_unlock",
+    "benefit_code": "MBTI_REPORT_FULL",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 199,
+    "currency": "CNY",
+    "title": "MBTI full report (anchor)",
+    "is_active": true,
+    "metadata_json": {
+      "label": "MBTI full report (anchor)",
+      "anchor": true,
+      "deprecated": true,
+      "effective_sku": "MBTI_REPORT_FULL_199",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "report_full",
+      "offer": false
+    }
+  },
+  {
+    "sku": "MBTI_REPORT_FULL_199",
+    "anchor_sku": "MBTI_REPORT_FULL",
+    "scale_code": "MBTI",
+    "benefit_type": "report_unlock",
+    "benefit_code": "MBTI_REPORT_FULL",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 199,
+    "currency": "CNY",
+    "title": "MBTI Full Report",
+    "is_active": true,
+    "metadata_json": {
+      "label": "MBTI full report",
+      "anchor_sku": "MBTI_REPORT_FULL",
+      "effective_default": true,
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "report_full"
+    }
+  },
+  {
+    "sku": "MBTI_PRO_MONTH_599",
+    "anchor_sku": "",
+    "scale_code": "MBTI",
+    "benefit_type": "credit_pack",
+    "benefit_code": "MBTI_PRO",
+    "benefit_qty": 1,
+    "scope": "org",
+    "price_cents": 599,
+    "currency": "CNY",
+    "title": "MBTI Pro Month",
+    "is_active": true,
+    "metadata_json": {
+      "label": "MBTI Pro Month",
+      "period_days": 30,
+      "grant_type": "pro_access",
+      "grant_qty": 1,
+      "entitlement_id": "mbti_pro"
+    }
+  },
+  {
+    "sku": "MBTI_PRO_YEAR_1999",
+    "anchor_sku": "",
+    "scale_code": "MBTI",
+    "benefit_type": "credit_pack",
+    "benefit_code": "MBTI_PRO",
+    "benefit_qty": 1,
+    "scope": "org",
+    "price_cents": 1999,
+    "currency": "CNY",
+    "title": "MBTI Pro Year",
+    "is_active": true,
+    "metadata_json": {
+      "label": "MBTI Pro Year",
+      "period_days": 365,
+      "grant_type": "pro_access",
+      "grant_qty": 1,
+      "entitlement_id": "mbti_pro"
+    }
+  },
+  {
+    "sku": "MBTI_GIFT_PACK_2990",
+    "anchor_sku": "",
+    "scale_code": "MBTI",
+    "benefit_type": "credit_pack",
+    "benefit_code": "MBTI_GIFT_CREDITS",
+    "benefit_qty": 1,
+    "scope": "org",
+    "price_cents": 2990,
+    "currency": "CNY",
+    "title": "MBTI Gift Pack",
+    "is_active": true,
+    "metadata_json": {
+      "label": "MBTI Gift Pack",
+      "grant_type": "gift_credits",
+      "grant_qty": 1,
+      "entitlement_id": "mbti_gift_credits"
+    }
+  },
+  {
+    "sku": "MBTI_CREDIT",
+    "anchor_sku": "",
+    "scale_code": "MBTI",
+    "benefit_type": "credit_pack",
+    "benefit_code": "MBTI_CREDIT",
+    "benefit_qty": 100,
+    "scope": "org",
+    "price_cents": 4990,
+    "currency": "USD",
+    "title": "MBTI credits pack",
+    "is_active": true,
+    "metadata_json": {
+      "label": "MBTI credits pack",
+      "grant_type": "credit_pack",
+      "grant_qty": 1,
+      "offer": false
+    }
+  }
+]

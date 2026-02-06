@@ -1,0 +1,27 @@
+# PR33 Recon
+
+- Keywords: PaymentWebhook|payment_events|SkuContract
+- 相关入口文件：
+  - backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php
+  - backend/app/Services/Commerce/PaymentWebhookProcessor.php
+  - backend/app/Services/Commerce/OrderManager.php
+  - backend/app/Services/Report/ReportGatekeeper.php
+  - backend/app/Support/Commerce/SkuContract.php
+  - backend/database/migrations/*payment_events* / *skus*
+  - backend/database/seeders/Pr19CommerceSeeder.php
+- 相关路由：
+  - POST /api/v0.3/webhooks/payment/{provider}
+  - POST /api/v0.3/orders
+  - GET  /api/v0.3/skus
+- 相关 DB 表/迁移：
+  - payment_events
+  - orders
+  - skus
+- 需要新增/修改点：
+  - Stripe webhook 验签（防伪造支付成功）
+  - payment_events 幂等状态机（修复 ORDER_NOT_FOUND 掉单：事件提前写入导致永远不再处理）
+  - 并发订单状态流转加锁（同一 order_no 只允许单线程处理 webhook）
+  - SKU 去硬编码：以 skus 表为唯一来源，替换 SkuContract 静态数组
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - webhook 返回码仅用于触发 provider retry；越权/无效签名统一 404
+  - sqlite fresh migrate 全绿；新增字段全 nullable 或 default，避免旧数据撞 NOT NULL
