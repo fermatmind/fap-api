@@ -10,10 +10,7 @@ class GenericLikertDriver implements DriverInterface
 {
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
-        $optionScores = $spec['options_score_map'] ?? ($spec['option_scores'] ?? []);
-        if (!is_array($optionScores)) {
-            $optionScores = [];
-        }
+        $optionScores = $this->normalizeOptionScores($spec['options_score_map'] ?? ($spec['option_scores'] ?? []));
 
         $defaultValue = isset($spec['default_value']) && is_numeric($spec['default_value'])
             ? (float) $spec['default_value']
@@ -45,23 +42,19 @@ class GenericLikertDriver implements DriverInterface
                 continue;
             }
 
-            $rawValue = $optionScores[$code] ?? null;
-            if (!is_numeric($rawValue)) {
-                continue;
-            }
-            $rawValue = (float) $rawValue;
+            $rawValue = $this->resolveRawValue($optionScores, $code, $defaultValue);
 
             foreach ($dimensions as $dim => $conf) {
                 if (!is_array($conf)) {
                     continue;
                 }
 
-                $itemsMap = $conf['items'] ?? [];
-                if (!is_array($itemsMap) || !array_key_exists($qid, $itemsMap)) {
+                [$itemsMap, $legacySignedWeight] = $this->resolveDimensionItemsMap($conf);
+                if (!array_key_exists($qid, $itemsMap)) {
                     continue;
                 }
 
-                [$weight, $reverse] = $this->resolveItemRule($itemsMap[$qid]);
+                [$weight, $reverse] = $this->resolveItemRule($itemsMap[$qid], $legacySignedWeight);
 
                 $effectiveValue = $reverse
                     ? (($minScore + $maxScore) - $rawValue)
@@ -87,9 +80,11 @@ class GenericLikertDriver implements DriverInterface
 
         $total = 0.0;
         $dimsOut = [];
+        $dimScoresOut = [];
         foreach ($dimScores as $dim => $score) {
             $score = (float) $score;
             $total += $score;
+            $dimScoresOut[$dim] = $score;
             $dimsOut[$dim] = [
                 'score' => $score,
                 'count' => (int) ($dimCounts[$dim] ?? 0),
@@ -98,8 +93,14 @@ class GenericLikertDriver implements DriverInterface
 
         $breakdown = [
             'score_method' => 'dimension_sum',
+            'dim_scores' => $dimScoresOut,
             'dimensions' => $dimsOut,
             'total_score' => $total,
+            'score_bounds' => [
+                'min' => $minScore,
+                'max' => $maxScore,
+                'default' => $defaultValue,
+            ],
             'items' => $items,
             'time_bonus' => 0,
         ];
@@ -111,11 +112,11 @@ class GenericLikertDriver implements DriverInterface
      * @param mixed $itemConf
      * @return array{0:float,1:bool}
      */
-    private function resolveItemRule($itemConf): array
+    private function resolveItemRule($itemConf, bool $legacySignedWeight = false): array
     {
         if (is_numeric($itemConf)) {
             $weight = (float) $itemConf;
-            if ($weight < 0) {
+            if ($legacySignedWeight && $weight < 0) {
                 return [abs($weight), true];
             }
 
@@ -131,7 +132,7 @@ class GenericLikertDriver implements DriverInterface
             : 1.0;
 
         $reverse = $this->toBool($itemConf['reverse'] ?? false);
-        if ($weight < 0) {
+        if ($legacySignedWeight && $weight < 0) {
             $weight = abs($weight);
             $reverse = true;
         }
@@ -178,5 +179,58 @@ class GenericLikertDriver implements DriverInterface
         }
 
         return in_array(strtolower(trim($value)), ['1', 'true', 'yes', 'on'], true);
+    }
+
+    /**
+     * @param mixed $rawOptionScores
+     * @return array<string,float>
+     */
+    private function normalizeOptionScores($rawOptionScores): array
+    {
+        if (!is_array($rawOptionScores)) {
+            return [];
+        }
+
+        $normalized = [];
+        foreach ($rawOptionScores as $code => $score) {
+            if (!is_numeric($score)) {
+                continue;
+            }
+
+            $normalized[strtoupper(trim((string) $code))] = (float) $score;
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * @param array<string,float> $optionScores
+     */
+    private function resolveRawValue(array $optionScores, string $code, float $defaultValue): float
+    {
+        if (array_key_exists($code, $optionScores)) {
+            return (float) $optionScores[$code];
+        }
+
+        return $defaultValue;
+    }
+
+    /**
+     * @param array<string,mixed> $dimensionConf
+     * @return array{0:array<string,mixed>,1:bool}
+     */
+    private function resolveDimensionItemsMap(array $dimensionConf): array
+    {
+        $itemsMap = $dimensionConf['items_map'] ?? null;
+        if (is_array($itemsMap)) {
+            return [$itemsMap, false];
+        }
+
+        $legacyItems = $dimensionConf['items'] ?? null;
+        if (is_array($legacyItems)) {
+            return [$legacyItems, true];
+        }
+
+        return [[], false];
     }
 }
