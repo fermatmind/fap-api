@@ -60,10 +60,24 @@ fi
 echo "[ACCEPT] ATT=$ATT"
 export ATT
 
+ANON_ID="${ANON_ID:-}"
+ANON_ID_FILE="$BACKEND_DIR/artifacts/verify_mbti/anon_id.txt"
+if [[ -z "$ANON_ID" && -s "$ANON_ID_FILE" ]]; then
+  ANON_ID="$(cat "$ANON_ID_FILE")"
+fi
+if [[ -z "$ANON_ID" ]]; then
+  echo "[ERR] missing anon_id; set ANON_ID=... or ensure $ANON_ID_FILE exists" >&2
+  exit 1
+fi
+echo "[ACCEPT] ANON_ID=$ANON_ID"
+export ANON_ID
+
 # ---- 1) result_view: refresh=1 then cache hit ----
-curl -sS "$API/api/v0.2/attempts/$ATT/report?refresh=1" >/dev/null
+curl -sS -H "X-Anon-Id: $ANON_ID" \
+  "$API/api/v0.2/attempts/$ATT/report?refresh=1&anon_id=$ANON_ID" >/dev/null
 sleep 1
-curl -sS "$API/api/v0.2/attempts/$ATT/report" >/dev/null
+curl -sS -H "X-Anon-Id: $ANON_ID" \
+  "$API/api/v0.2/attempts/$ATT/report?anon_id=$ANON_ID" >/dev/null
 
 # ---- 2) share_generate (with optional headers) ----
 # Use set -u safe array expansion in case HDRS is empty.
