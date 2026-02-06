@@ -233,7 +233,8 @@ Route::prefix("v0.3")->middleware('throttle:api_public')->group(function () {
         "/webhooks/payment/{provider}",
         [PaymentWebhookController::class, "handle"]
     )->middleware('throttle:api_webhook')
-        ->whereIn('provider', ['stripe', 'billing', 'stub']);
+        ->whereIn('provider', ['stripe', 'billing', 'stub'])
+        ->name('v0.3.webhooks.payment');
 
     Route::middleware(\App\Http\Middleware\ResolveOrgContext::class)->group(function () {
         // 0) Boot (flags + experiments)

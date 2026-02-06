@@ -4,12 +4,12 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Services\Commerce\OrderManager;
+use App\Services\Commerce\SkuCatalog;
 use App\Services\Payments\PaymentRouter;
 use App\Support\OrgContext;
 use App\Support\RegionContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CommerceController extends Controller
@@ -18,6 +18,7 @@ class CommerceController extends Controller
         private OrgContext $orgContext,
         private RegionContext $regionContext,
         private OrderManager $orders,
+        private SkuCatalog $skus,
         private PaymentRouter $paymentRouter,
     ) {
     }
@@ -44,11 +45,7 @@ class CommerceController extends Controller
             ], 400);
         }
 
-        $items = DB::table('skus')
-            ->where('scale_code', $scale)
-            ->where('is_active', true)
-            ->orderBy('sku')
-            ->get();
+        $items = $this->skus->listActiveSkus($scale);
 
         return response()->json([
             'ok' => true,

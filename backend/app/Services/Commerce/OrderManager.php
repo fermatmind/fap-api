@@ -2,14 +2,19 @@
 
 namespace App\Services\Commerce;
 
-use App\Support\Commerce\SkuContract;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use App\Services\Commerce\SkuCatalog;
 
 class OrderManager
 {
     private const FINAL_STATUSES = ['fulfilled', 'failed', 'canceled', 'refunded'];
+
+    public function __construct(
+        private SkuCatalog $skus,
+    ) {
+    }
 
     public function createOrder(
         int $orgId,
@@ -28,22 +33,23 @@ class OrderManager
             return $this->tableMissing('skus');
         }
 
-        $requestedSku = strtoupper(trim($sku));
+        $requestedSku = $this->skus->normalizeSku($sku);
         if ($requestedSku === '') {
             return $this->badRequest('SKU_REQUIRED', 'sku is required.');
         }
-
-        $normalized = SkuContract::normalizeRequestedSku($requestedSku);
-        $effectiveSku = strtoupper(trim((string) ($normalized['effective_sku'] ?? '')));
-        $entitlementId = $normalized['entitlement_id'] ?? null;
+        $resolved = $this->skus->resolveSkuMeta($requestedSku);
+        $effectiveSku = strtoupper(trim((string) ($resolved['effective_sku'] ?? '')));
+        $entitlementId = $resolved['entitlement_id'] ?? null;
+        $requestedSku = strtoupper(trim((string) ($resolved['requested_sku'] ?? $requestedSku)));
 
         $quantity = max(1, (int) $quantity);
 
-        $skuToLookup = $effectiveSku !== '' ? $effectiveSku : $requestedSku;
-        $skuRow = DB::table('skus')->where('sku', $skuToLookup)->first();
+        $skuRow = $resolved['sku_row'] ?? null;
         if (!$skuRow) {
             return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
         }
+
+        $skuToLookup = $effectiveSku !== '' ? $effectiveSku : $requestedSku;
 
         $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
         $useIdempotency = $idempotencyKey !== '' && Schema::hasColumn('orders', 'idempotency_key');
@@ -180,6 +186,102 @@ class OrderManager
         ];
     }
 
+    public function transitionToPaidAtomic(
+        string $orderNo,
+        int $orgId,
+        string $provider,
+        ?string $externalTradeNo = null,
+        ?string $paidAt = null
+    ): array {
+        if (!Schema::hasTable('orders')) {
+            return $this->tableMissing('orders');
+        }
+
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
+        }
+
+        $query = DB::table('orders')->where('order_no', $orderNo);
+        if (Schema::hasColumn('orders', 'org_id')) {
+            $query->where('org_id', $orgId);
+        } elseif ($orgId !== 0) {
+            return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+        }
+
+        $order = $query->lockForUpdate()->first();
+        if (!$order) {
+            return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+        }
+
+        $fromStatus = strtolower((string) ($order->status ?? ''));
+        if ($fromStatus === '') {
+            $fromStatus = 'created';
+        }
+
+        if (in_array($fromStatus, ['paid', 'fulfilled'], true)) {
+            return [
+                'ok' => true,
+                'order' => $order,
+                'already_paid' => true,
+            ];
+        }
+
+        if (!$this->isTransitionAllowed($fromStatus, 'paid')) {
+            return $this->conflict('ORDER_STATUS_INVALID', 'invalid order status transition.');
+        }
+
+        $now = now();
+        $updates = [
+            'status' => 'paid',
+            'updated_at' => $now,
+        ];
+
+        if (Schema::hasColumn('orders', 'paid_at') && empty($order->paid_at)) {
+            $updates['paid_at'] = ($paidAt !== null && $paidAt !== '') ? $paidAt : $now;
+        }
+
+        if ($provider !== '' && Schema::hasColumn('orders', 'provider')) {
+            $updates['provider'] = $provider;
+        }
+
+        if ($externalTradeNo && Schema::hasColumn('orders', 'external_trade_no')) {
+            $updates['external_trade_no'] = $externalTradeNo;
+        }
+
+        $updateQuery = DB::table('orders')->where('order_no', $orderNo);
+        if (Schema::hasColumn('orders', 'org_id')) {
+            $updateQuery->where('org_id', $orgId);
+        }
+        $updateQuery->where('status', $fromStatus);
+
+        $updated = $updateQuery->update($updates);
+        if ($updated === 0) {
+            $current = DB::table('orders')->where('order_no', $orderNo)->first();
+            if (!$current) {
+                return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+            }
+            $currentStatus = strtolower((string) ($current->status ?? ''));
+            if (in_array($currentStatus, ['paid', 'fulfilled'], true)) {
+                return [
+                    'ok' => true,
+                    'order' => $current,
+                    'already_paid' => true,
+                ];
+            }
+
+            return $this->conflict('ORDER_STATUS_CHANGED', 'order status changed.');
+        }
+
+        $order = DB::table('orders')->where('order_no', $orderNo)->first();
+
+        return [
+            'ok' => true,
+            'order' => $order,
+            'changed' => true,
+        ];
+    }
+
     public function transition(string $orderNo, string $toStatus, ?int $orgId = null): array
     {
         if (!Schema::hasTable('orders')) {
@@ -235,9 +337,29 @@ class OrderManager
             $updates['refunded_at'] = $updates['updated_at'];
         }
 
-        DB::table('orders')
-            ->where('order_no', $orderNo)
-            ->update($updates);
+        $updateQuery = DB::table('orders')->where('order_no', $orderNo);
+        if ($orgId !== null && Schema::hasColumn('orders', 'org_id')) {
+            $updateQuery->where('org_id', $orgId);
+        }
+        $updateQuery->where('status', $fromStatus);
+
+        $updated = $updateQuery->update($updates);
+        if ($updated === 0) {
+            $current = DB::table('orders')->where('order_no', $orderNo)->first();
+            if (!$current) {
+                return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+            }
+
+            $currentStatus = strtolower((string) ($current->status ?? ''));
+            if ($currentStatus === $toStatus) {
+                return [
+                    'ok' => true,
+                    'order' => $current,
+                ];
+            }
+
+            return $this->conflict('ORDER_STATUS_CHANGED', 'order status changed.');
+        }
 
         $order = DB::table('orders')->where('order_no', $orderNo)->first();
 
