@@ -4,52 +4,35 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
-use Closure;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 final class ContentLoaderService
 {
-    public function readText(
-        string $packId,
-        string $dirVersion,
-        string $relativePath,
-        callable $reader
-    ): ?string {
-        $key = $this->makeCacheKey($packId, $dirVersion, $relativePath);
-        $ttl = $this->cacheTtlSeconds();
-
-        $value = $this->rememberSafe($key, $ttl, function () use ($reader): array {
-            $raw = $reader();
-            if (!is_string($raw)) {
-                return [
-                    'found' => false,
-                    'raw' => null,
-                ];
-            }
-
-            return [
-                'found' => true,
-                'raw' => $raw,
-            ];
-        });
-
-        if (!is_array($value) || !($value['found'] ?? false)) {
+    /**
+     * @param callable(): (string|null) $resolveAbsPath
+     */
+    public function readText(string $packId, string $dirVersion, string $relPath, callable $resolveAbsPath): ?string
+    {
+        $absPath = $this->resolvePath($packId, $dirVersion, $relPath, $resolveAbsPath);
+        if ($absPath === null) {
             return null;
         }
 
-        $raw = $value['raw'] ?? null;
-        return is_string($raw) ? $raw : null;
+        $mtime = $this->safeFileMtime($absPath);
+        $key = $this->cacheKey('text', $packId, $dirVersion, $relPath, $mtime);
+
+        return $this->cacheRemember($key, fn () => file_get_contents($absPath) ?: null);
     }
 
-    public function readJson(
-        string $packId,
-        string $dirVersion,
-        string $relativePath,
-        callable $reader
-    ): ?array {
-        $raw = $this->readText($packId, $dirVersion, $relativePath, $reader);
-        if ($raw === null || trim($raw) === '') {
+    /**
+     * @return array<string,mixed>|null
+     * @param callable(): (string|null) $resolveAbsPath
+     */
+    public function readJson(string $packId, string $dirVersion, string $relPath, callable $resolveAbsPath): ?array
+    {
+        $raw = $this->readText($packId, $dirVersion, $relPath, $resolveAbsPath);
+        if ($raw === null || $raw === '') {
             return null;
         }
 
@@ -58,55 +41,124 @@ final class ContentLoaderService
         return is_array($decoded) ? $decoded : null;
     }
 
-    public function makeCacheKey(string $packId, string $dirVersion, string $relativePath): string
+    /**
+     * @param callable(): (string|null) $resolveAbsPath
+     */
+    private function resolvePath(string $packId, string $dirVersion, string $relPath, callable $resolveAbsPath): ?string
     {
-        $path = ltrim(str_replace('\\', '/', trim($relativePath)), '/');
-        $seed = $packId . '|' . $dirVersion . '|' . $path;
+        $ttl = $this->ttlSeconds();
+        $pathKey = $this->cacheKey('path', $packId, $dirVersion, $relPath, 0);
+        $sentinelMiss = '__MISS__';
 
-        return 'content_loader:' . sha1($seed);
+        $absPath = $this->cacheRemember($pathKey, function () use ($resolveAbsPath, $sentinelMiss) {
+            $p = $resolveAbsPath();
+            if (!is_string($p) || $p === '') {
+                return $sentinelMiss;
+            }
+
+            return $p;
+        }, $ttl);
+
+        if ($absPath === $sentinelMiss) {
+            return null;
+        }
+        if (!is_string($absPath) || $absPath === '') {
+            return null;
+        }
+
+        if (!is_file($absPath)) {
+            $this->cacheForget($pathKey);
+
+            $fresh = $resolveAbsPath();
+            if (!is_string($fresh) || $fresh === '' || !is_file($fresh)) {
+                return null;
+            }
+
+            $this->cachePut($pathKey, $fresh, $ttl);
+
+            return $fresh;
+        }
+
+        return $absPath;
     }
 
-    private function resolvedStore(): string
+    private function safeFileMtime(string $absPath): int
     {
-        $appEnv = strtolower((string) config('app.env', 'production'));
-        if (in_array($appEnv, ['ci', 'testing', 'local'], true)) {
-            return 'array';
-        }
-
-        $defaultStore = (string) config('cache.default', 'array');
-        $store = trim((string) config('content_packs.loader_cache_store', $defaultStore));
-        if ($store === '' || strtolower($store) === 'default') {
-            return $defaultStore;
-        }
-
-        return $store;
+        $mt = @filemtime($absPath);
+        return is_int($mt) ? $mt : 0;
     }
 
-    private function rememberSafe(string $key, int $ttlSeconds, Closure $callback)
+    private function cacheKey(string $kind, string $packId, string $dirVersion, string $relPath, int $mtime): string
     {
-        $store = $this->resolvedStore();
+        $base = implode('|', [
+            'content_loader',
+            $kind,
+            $packId,
+            $dirVersion,
+            ltrim($relPath, '/'),
+            (string) $mtime,
+        ]);
 
-        try {
-            return Cache::store($store)->remember($key, $ttlSeconds, $callback);
-        } catch (\Throwable $e) {
-            Log::warning('Content loader cache store failed, using array fallback.', [
-                'cache_store' => $store,
-                'env' => (string) config('app.env', 'production'),
-                'error_class' => $e::class,
-            ]);
-        }
-
-        try {
-            return Cache::store('array')->remember($key, $ttlSeconds, $callback);
-        } catch (\Throwable $e) {
-            return $callback();
-        }
+        return 'fap:' . hash('sha256', $base);
     }
 
-    private function cacheTtlSeconds(): int
+    private function ttlSeconds(): int
     {
         $ttl = (int) config('content_packs.loader_cache_ttl_seconds', 300);
 
         return $ttl > 0 ? $ttl : 300;
+    }
+
+    private function cacheStoreName(): string
+    {
+        $store = (string) config('content_packs.loader_cache_store', 'array');
+
+        return $store !== '' ? $store : 'array';
+    }
+
+    /**
+     * @template T
+     * @param callable():T $callback
+     * @return T
+     */
+    private function cacheRemember(string $key, callable $callback, ?int $ttlSeconds = null)
+    {
+        $ttl = $ttlSeconds ?? $this->ttlSeconds();
+        $store = $this->cacheStoreName();
+
+        try {
+            return Cache::store($store)->remember($key, $ttl, $callback);
+        } catch (\Throwable $e) {
+            Log::warning('ContentLoader cache store failed, falling back to default cache store', [
+                'store' => $store,
+                'key_prefix' => substr($key, 0, 16),
+                'error' => $e->getMessage(),
+                'exception_class' => get_class($e),
+            ]);
+
+            return Cache::remember($key, $ttl, $callback);
+        }
+    }
+
+    private function cacheForget(string $key): void
+    {
+        $store = $this->cacheStoreName();
+
+        try {
+            Cache::store($store)->forget($key);
+        } catch (\Throwable $e) {
+            Cache::forget($key);
+        }
+    }
+
+    private function cachePut(string $key, string $value, int $ttlSeconds): void
+    {
+        $store = $this->cacheStoreName();
+
+        try {
+            Cache::store($store)->put($key, $value, $ttlSeconds);
+        } catch (\Throwable $e) {
+            Cache::put($key, $value, $ttlSeconds);
+        }
     }
 }

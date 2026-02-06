@@ -307,12 +307,7 @@ final class ContentPackResolver
                         }
 
                         $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
-                        if (!is_file($abs)) {
-                            return null;
-                        }
-
-                        $read = @file_get_contents($abs);
-                        return $read === false ? null : $read;
+                        return is_file($abs) ? $abs : null;
                     }
                 );
 
@@ -338,12 +333,7 @@ final class ContentPackResolver
                         }
 
                         $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
-                        if (!is_file($abs)) {
-                            return null;
-                        }
-
-                        $read = @file_get_contents($abs);
-                        return $read === false ? null : $read;
+                        return is_file($abs) ? $abs : null;
                     }
                 );
 

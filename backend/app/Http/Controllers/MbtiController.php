@@ -1517,10 +1517,6 @@ private function canAccessAttemptReport(Request $request, Attempt $attempt): boo
     $ownerAnonId = trim((string) ($owner['anon_id'] ?? ''));
     $ownerUserId = trim((string) ($owner['user_id'] ?? ''));
 
-    if ($ownerAnonId === '' && $ownerUserId === '') {
-        return false;
-    }
-
     $attemptAnonId = trim((string) ($attempt->anon_id ?? ''));
     $attemptUserId = trim((string) ($attempt->user_id ?? ''));
 
@@ -1532,7 +1528,19 @@ private function canAccessAttemptReport(Request $request, Attempt $attempt): boo
         return true;
     }
 
-    return false;
+    $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
+    if ($shareId === '' || !Schema::hasTable('shares')) {
+        return false;
+    }
+
+    try {
+        return DB::table('shares')
+            ->where('id', $shareId)
+            ->where('attempt_id', (string) $attempt->id)
+            ->exists();
+    } catch (\Throwable $e) {
+        return false;
+    }
 }
 
 private function resolveReportOwner(Request $request): array
