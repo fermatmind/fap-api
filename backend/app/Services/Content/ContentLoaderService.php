@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
-use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Closure;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 final class ContentLoaderService
 {
@@ -15,11 +16,10 @@ final class ContentLoaderService
         string $relativePath,
         callable $reader
     ): ?string {
-        $cache = $this->cacheStore();
         $key = $this->makeCacheKey($packId, $dirVersion, $relativePath);
         $ttl = $this->cacheTtlSeconds();
 
-        $value = $cache->remember($key, $ttl, function () use ($reader): array {
+        $value = $this->rememberSafe($key, $ttl, function () use ($reader): array {
             $raw = $reader();
             if (!is_string($raw)) {
                 return [
@@ -66,21 +66,40 @@ final class ContentLoaderService
         return 'content_loader:' . sha1($seed);
     }
 
-    private function cacheStore(): CacheRepository
+    private function resolvedStore(): string
     {
-        if (app()->environment('testing')) {
-            return Cache::store();
+        $appEnv = strtolower((string) config('app.env', 'production'));
+        if (in_array($appEnv, ['ci', 'testing', 'local'], true)) {
+            return 'array';
         }
 
-        $store = trim((string) config('content_packs.loader_cache_store', ''));
+        $defaultStore = (string) config('cache.default', 'array');
+        $store = trim((string) config('content_packs.loader_cache_store', $defaultStore));
         if ($store === '' || strtolower($store) === 'default') {
-            return Cache::store();
+            return $defaultStore;
+        }
+
+        return $store;
+    }
+
+    private function rememberSafe(string $key, int $ttlSeconds, Closure $callback)
+    {
+        $store = $this->resolvedStore();
+
+        try {
+            return Cache::store($store)->remember($key, $ttlSeconds, $callback);
+        } catch (\Throwable $e) {
+            Log::warning('Content loader cache store failed, using array fallback.', [
+                'cache_store' => $store,
+                'env' => (string) config('app.env', 'production'),
+                'error_class' => $e::class,
+            ]);
         }
 
         try {
-            return Cache::store($store);
+            return Cache::store('array')->remember($key, $ttlSeconds, $callback);
         } catch (\Throwable $e) {
-            return Cache::store();
+            return $callback();
         }
     }
 

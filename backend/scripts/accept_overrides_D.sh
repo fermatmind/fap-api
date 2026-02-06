@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+ARTIFACTS="${ARTIFACTS:-${BACKEND_DIR}/artifacts/verify_mbti}"
+ANON_ID=""
+if [[ -f "${ARTIFACTS}/anon_id.txt" ]]; then
+  ANON_ID="$(tr -d '\r\n' < "${ARTIFACTS}/anon_id.txt")"
+fi
+OWNER_HDR=()
+if [[ -n "${ANON_ID}" ]]; then
+  OWNER_HDR=(-H "X-Anon-Id: ${ANON_ID}")
+fi
+
 # -----------------------------
 # Auth (fm_token) for gated endpoints
 # -----------------------------
@@ -25,8 +37,6 @@ need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "❌ missing command: $1"
 need_cmd curl
 need_cmd php
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 REPO_DIR="$(cd "$BACKEND_DIR/.." && pwd)"
 CONTENT_ROOT="${CONTENT_ROOT:-$REPO_DIR/content_packages}"
 
@@ -121,6 +131,7 @@ call_refresh() {
 
   http="$(curl -sS -L -o "$TMP_REPORT" -w "%{http_code}" \
     "${CURL_AUTH[@]}" \
+    "${OWNER_HDR[@]}" \
     -H 'Accept: application/json' \
     "$url" || true)"
 
