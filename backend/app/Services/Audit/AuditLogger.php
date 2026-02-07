@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Audit;
 
 use App\Models\AuditLog;
+use App\Support\SensitiveDataRedactor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
 class AuditLogger
 {
+    public function __construct(
+        private readonly SensitiveDataRedactor $redactor
+    ) {
+    }
+
     public function log(
         Request $request,
         string $action,
@@ -55,16 +63,25 @@ class AuditLogger
      */
     private function sanitizeParams(array $params): array
     {
-        $deny = ['password', 'token', 'authorization', 'secret'];
+        $redacted = $this->redactor->redact($params);
         $sanitized = [];
 
-        foreach ($params as $key => $value) {
-            $lower = strtolower((string) $key);
-            if (in_array($lower, $deny, true)) {
-                $sanitized[$key] = '***';
-                continue;
-            }
-            $sanitized[$key] = $value;
+        foreach ($redacted as $key => $value) {
+            $sanitized[$key] = $this->sanitizeScalar($value);
+        }
+
+        return $sanitized;
+    }
+
+    private function sanitizeScalar(mixed $value): mixed
+    {
+        if (!is_array($value)) {
+            return $value;
+        }
+
+        $sanitized = [];
+        foreach ($value as $key => $item) {
+            $sanitized[$key] = $this->sanitizeScalar($item);
         }
 
         return $sanitized;
