@@ -56,7 +56,7 @@ class CommerceController extends Controller
     /**
      * POST /api/v0.3/orders
      */
-    public function createOrder(Request $request): JsonResponse
+    public function createOrder(Request $request, ?string $providerFromRoute = null): JsonResponse
     {
         $payload = $request->validate([
             'sku' => ['required', 'string', 'max:64'],
@@ -70,10 +70,7 @@ class CommerceController extends Controller
         $userId = $this->orgContext->userId();
         $anonId = $this->orgContext->anonId();
 
-        $provider = is_string($payload['provider'] ?? null) ? trim((string) $payload['provider']) : '';
-        if ($provider === '') {
-            $provider = $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
-        }
+        $provider = $this->resolveProvider($payload, $providerFromRoute);
 
         $idempotencyKey = $this->resolveIdempotencyKey($request, $payload);
 
@@ -84,7 +81,7 @@ class CommerceController extends Controller
             (string) $payload['sku'],
             (int) ($payload['quantity'] ?? 1),
             $payload['target_attempt_id'] ?? null,
-            $provider !== '' ? $provider : 'stub',
+            $provider,
             $idempotencyKey
         );
 
@@ -135,5 +132,19 @@ class CommerceController extends Controller
 
         $body = trim((string) ($payload['idempotency_key'] ?? ''));
         return $body !== '' ? $body : null;
+    }
+
+    private function resolveProvider(array $payload, ?string $providerFromRoute): string
+    {
+        $provider = trim((string) ($providerFromRoute ?? ''));
+        if ($provider === '') {
+            $provider = trim((string) ($payload['provider'] ?? ''));
+        }
+        if ($provider === '') {
+            $provider = (string) $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
+        }
+
+        $provider = strtolower(trim($provider));
+        return $provider !== '' ? $provider : 'stub';
     }
 }
