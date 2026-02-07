@@ -10,7 +10,8 @@
 ### Webhook
 - `POST /api/v0.2/webhooks/{provider}`
 - Headers:
-  - `X-Webhook-Signature`（可选；若配置 services.integrations.{provider}.webhook_secret 即校验）
+  - `X-Webhook-Timestamp`（Unix 秒级时间戳；若配置 secret 则必填）
+  - `X-Webhook-Signature`（HMAC-SHA256；签名串为 `"{timestamp}.{raw_body}"`）
 
 ### Ingest
 - `POST /api/v0.2/integrations/{provider}/ingest`

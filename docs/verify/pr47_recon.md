@@ -1,0 +1,26 @@
+# PR47 Recon
+
+- Keywords: HandleProviderWebhook|INTEGRATIONS_WEBHOOK|timestamp
+- 相关入口文件：
+  - backend/routes/api.php
+  - backend/app/Http/Controllers/Webhooks/HandleProviderWebhook.php
+  - backend/config/services.php
+  - backend/.env.example
+- 相关路由：
+  - POST /api/v0.2/webhooks/{provider}
+- 相关 DB 表/迁移：
+  - integrations（新增 webhook_last_event_id / webhook_last_timestamp / webhook_last_received_at）
+  - idempotency_keys（保持现有幂等语义）
+- 需要新增/修改点：
+  - provider webhook 验签从 `HMAC(raw_body)` 升级为 `HMAC("{timestamp}.{raw_body}")`
+  - 增加 timestamp 容忍窗口校验（INTEGRATIONS_WEBHOOK_TOLERANCE_SECONDS）
+  - secret 配置入口标准化到 services.integrations.providers.*
+  - 验签失败统一 404（避免暴露 webhook 路由存在性）
+  - 增加 Feature 测试覆盖：有效签名、缺失 timestamp、过期 timestamp
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：accept/verify 脚本统一清理 1847 和 18000
+  - CI 工具依赖：脚本仅用 grep -E / sed / awk / php -r，不依赖 jq/rg
+  - pack/seed/config 一致性：verify 脚本显式校验 config + scales_registry + pack 文件可解析
+  - sqlite 迁移一致性：迁移字段全为 nullable，避免 fresh migrate 被 NOT NULL 硬撞
+  - 安全口径：验签失败全部返回 404 JSON
+  - artifacts 脱敏：统一执行 backend/scripts/sanitize_artifacts.sh 47

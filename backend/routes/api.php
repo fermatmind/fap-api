@@ -161,7 +161,8 @@ Route::prefix("v0.2")->middleware('throttle:api_public')->group(function () {
         // =========================================================
         // Webhooks (provider push)
         // =========================================================
-        Route::post("/webhooks/{provider}", [HandleProviderWebhook::class, "handle"]);
+        Route::post("/webhooks/{provider}", [HandleProviderWebhook::class, "handle"])
+            ->whereIn('provider', ['mock', 'apple_health', 'google_fit', 'calendar', 'screen_time']);
     });
 
     // =========================================================

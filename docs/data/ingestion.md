@@ -55,7 +55,10 @@ POST /api/v0.2/integrations/mock/ingest
 ## Webhook（可选）
 - `POST /api/v0.2/webhooks/{provider}`
 - body: `{event_id, external_user_id, recorded_at, samples:[] }`
-- 若配置 `services.integrations.{provider}.webhook_secret`，则必须发送 `X-Webhook-Signature`（HMAC-SHA256）。
+- 若配置 `services.integrations.providers.{provider}.webhook_secret`，则必须发送：
+  - `X-Webhook-Timestamp`（Unix 秒级时间戳）
+  - `X-Webhook-Signature`（`hash_hmac('sha256', "{timestamp}.{raw_body}", secret)`）
+- 校验失败统一返回 404（避免泄漏 webhook 路由存在性）。
 
 ### Webhook 示例
 ```
