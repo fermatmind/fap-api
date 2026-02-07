@@ -1,0 +1,85 @@
+name: ci-pr56-workflow-composer-php84
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - "content_packages/**"
+      - ".github/workflows/ci_pr56_workflow_composer_php84.yml"
+      - ".github/workflows/ci_verify_pr22_boot_v0_4.yml"
+      - ".github/workflows/ci_verify_pr23_feature_flags_sticky_experiments.yml"
+      - ".github/workflows/ci_verify_pr24_sitemap.yml"
+      - ".github/workflows/ci_verify_pr25_b2b_assessments_progress_rbac.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "docs/**"
+      - "content_packages/**"
+      - ".github/workflows/ci_pr56_workflow_composer_php84.yml"
+      - ".github/workflows/ci_verify_pr22_boot_v0_4.yml"
+      - ".github/workflows/ci_verify_pr23_feature_flags_sticky_experiments.yml"
+      - ".github/workflows/ci_verify_pr24_sitemap.yml"
+      - ".github/workflows/ci_verify_pr25_b2b_assessments_progress_rbac.yml"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      CI: true
+      FAP_NONINTERACTIVE: 1
+      COMPOSER_NO_INTERACTION: 1
+      GIT_TERMINAL_PROMPT: 0
+      NO_COLOR: 1
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/pr56.sqlite
+      CACHE_DRIVER: array
+      SERVE_PORT: 1856
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          tools: composer:v2
+          extensions: mbstring, xml, curl, zip, intl, sqlite, pdo_sqlite
+
+      - name: Verify workflow PHP84 + composer security checks
+        run: |
+          set -euo pipefail
+          for wf in \
+            ".github/workflows/ci_verify_pr22_boot_v0_4.yml" \
+            ".github/workflows/ci_verify_pr23_feature_flags_sticky_experiments.yml" \
+            ".github/workflows/ci_verify_pr24_sitemap.yml" \
+            ".github/workflows/ci_verify_pr25_b2b_assessments_progress_rbac.yml" \
+            ".github/workflows/ci_pr56_workflow_composer_php84.yml"; do
+            grep -E 'php-version:[[:space:]]*"8.4"' "${wf}" >/dev/null
+            grep -E 'composer audit --locked --no-interaction' "${wf}" >/dev/null
+            if grep -E 'php-version:[[:space:]]*"8.5"' "${wf}" >/dev/null; then
+              echo "unexpected php-version 8.5 in ${wf}" >&2
+              exit 1
+            fi
+          done
+
+      - name: Composer security audit
+        run: |
+          cd backend
+          composer audit --locked --no-interaction
+
+      - name: Prepare sqlite
+        run: |
+          rm -f /tmp/pr56.sqlite
+          touch /tmp/pr56.sqlite
+
+      - name: PR56 accept
+        run: bash backend/scripts/pr56_accept.sh
+
+      - name: CI verify mbti
+        run: bash backend/scripts/ci_verify_mbti.sh
