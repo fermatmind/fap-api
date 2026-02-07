@@ -45,4 +45,31 @@ return [
         'webhook_secret' => env('BILLING_WEBHOOK_SECRET'),
     ],
 
+    'integrations' => [
+        'webhook_tolerance_seconds' => (int) env('INTEGRATIONS_WEBHOOK_TOLERANCE_SECONDS', 300),
+        'allow_unsigned_without_secret' => (bool) env('INTEGRATIONS_WEBHOOK_ALLOW_UNSIGNED', false),
+        'allow_legacy_signature' => (bool) env('INTEGRATIONS_WEBHOOK_ALLOW_LEGACY_SIGNATURE', false),
+        'providers' => [
+            'mock' => [
+                'webhook_secret' => env('INTEGRATIONS_WEBHOOK_MOCK_SECRET'),
+                'webhook_tolerance_seconds' => (int) env(
+                    'INTEGRATIONS_WEBHOOK_MOCK_TOLERANCE_SECONDS',
+                    env('INTEGRATIONS_WEBHOOK_TOLERANCE_SECONDS', 300)
+                ),
+            ],
+            'apple_health' => [
+                'webhook_secret' => env('INTEGRATIONS_WEBHOOK_APPLE_HEALTH_SECRET'),
+            ],
+            'google_fit' => [
+                'webhook_secret' => env('INTEGRATIONS_WEBHOOK_GOOGLE_FIT_SECRET'),
+            ],
+            'calendar' => [
+                'webhook_secret' => env('INTEGRATIONS_WEBHOOK_CALENDAR_SECRET'),
+            ],
+            'screen_time' => [
+                'webhook_secret' => env('INTEGRATIONS_WEBHOOK_SCREEN_TIME_SECRET'),
+            ],
+        ],
+    ],
+
 ];
