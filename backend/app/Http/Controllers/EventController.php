@@ -8,6 +8,7 @@ use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Analytics\EventNormalizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -45,6 +46,28 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        $maxPayloadBytes = max(0, (int) config('fap.events.max_payload_bytes', 131072));
+        if ($maxPayloadBytes > 0) {
+            $contentLengthHeader = $request->server('CONTENT_LENGTH');
+            $contentLength = is_numeric($contentLengthHeader) ? (int) $contentLengthHeader : null;
+            $rawContent = (string) $request->getContent();
+            $rawBytes = strlen($rawContent);
+
+            if (($contentLength !== null && $contentLength > $maxPayloadBytes) || $rawBytes > $maxPayloadBytes) {
+                Log::warning('EVENT_INGEST_PAYLOAD_TOO_LARGE', [
+                    'path' => $request->path(),
+                    'content_length' => $contentLength,
+                    'raw_bytes' => $rawBytes,
+                    'max_payload_bytes' => $maxPayloadBytes,
+                ]);
+
+                return response()->json([
+                    'ok' => false,
+                    'error' => 'payload_too_large',
+                ], 413);
+            }
+        }
+
         // ✅ 先鉴权（没有 token 直接 401）
         $this->requireFmToken($request);
 

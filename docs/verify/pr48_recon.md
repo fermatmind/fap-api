@@ -1,0 +1,30 @@
+# PR48 Recon
+
+- Keywords: events|payload|redaction
+- 相关入口文件：
+  - backend/routes/api.php
+  - backend/app/Http/Controllers/EventController.php
+  - backend/app/Support/SensitiveDataRedactor.php
+  - backend/app/Services/Audit/AuditLogger.php
+  - backend/config/fap.php
+  - backend/.env.example
+- 相关路由：
+  - POST /api/v0.2/events
+  - GET /api/v0.2/admin/audit-logs
+- 相关 DB 表/迁移：
+  - events（本次不改表结构，仅新增入口字节上限守卫）
+  - audit_logs（本次不改表结构，仅增强 meta_json 脱敏与指标）
+  - fm_tokens（用于 events 鉴权 token 解析）
+- 需要新增/修改点：
+  - 新增 fap.events.max_payload_bytes / FAP_EVENTS_MAX_PAYLOAD_BYTES
+  - /api/v0.2/events 在鉴权前执行 raw payload bytes 限制，超限返回 413 payload_too_large
+  - SensitiveDataRedactor 增强心理隐私递归脱敏 + 计数/version
+  - AuditLogger 对整段 meta 进行 redactor+sanitize，并记录 _redaction 指标与 AUDIT_LOG_REDACTED
+  - 新增 PR48 accept/verify 脚本和 verify 文档
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：accept/verify 统一清理 1848 与 18000
+  - CI 工具依赖：PR48 脚本仅使用 grep -E/sed/awk/php -r，不使用 jq/rg
+  - pack/seed/config 一致性：verify 脚本校验 config + scales_registry + pack 文件解析
+  - sqlite 迁移一致性：沿用 migrate:fresh，且本 PR 不新增迁移/不引入更严约束
+  - 安全口径：越权/不存在资源口径保持既有 404，events 超限仅返回 413 通用错误
+  - artifacts 脱敏：统一执行 sanitize_artifacts.sh 48

@@ -58,4 +58,50 @@ final class EventPayloadLimitsTest extends TestCase
         $this->assertIsArray($meta);
         $this->assertSame(10, strlen((string) data_get($meta, 'props.long')));
     }
+
+    public function test_event_raw_payload_bytes_too_large_returns_413_and_not_store(): void
+    {
+        config()->set('fap.events.max_payload_bytes', 256);
+
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'anon_id' => 'pr48-event-bytes-anon',
+            'user_id' => 2001,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $rawBody = json_encode([
+            'event_code' => 'pr48_payload_too_large',
+            'attempt_id' => (string) Str::uuid(),
+            'anon_id' => 'pr48-event-bytes-anon',
+            'meta_json' => [
+                'blob' => str_repeat('x', 2000),
+            ],
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        self::assertIsString($rawBody);
+        self::assertGreaterThan(256, strlen($rawBody));
+
+        $response = $this->call(
+            'POST',
+            '/api/v0.2/events',
+            [],
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/json',
+                'HTTP_AUTHORIZATION' => "Bearer {$token}",
+            ],
+            $rawBody
+        );
+
+        $response->assertStatus(413)->assertJson([
+            'ok' => false,
+            'error' => 'payload_too_large',
+        ]);
+
+        $this->assertSame(0, DB::table('events')->where('event_code', 'pr48_payload_too_large')->count());
+    }
 }
