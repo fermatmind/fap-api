@@ -74,6 +74,7 @@ class FmTokenAuth
 
         // 1) user_id: only trust explicit user_id-like columns, never fall back to anon_id
         $userId = $this->resolveUserId($row);
+        $userId = $this->resolveExistingUserId($userId);
         if ($userId !== '') {
             $userId = (string) $userId;
             // basic sanity
@@ -146,6 +147,21 @@ class FmTokenAuth
         }
 
         return '';
+    }
+
+    private function resolveExistingUserId(string $userId): string
+    {
+        $candidate = trim($userId);
+        if ($candidate === '' || !preg_match('/^\d+$/', $candidate)) {
+            return '';
+        }
+
+        if (!Schema::hasTable('users')) {
+            return $candidate;
+        }
+
+        $exists = DB::table('users')->where('id', (int) $candidate)->exists();
+        return $exists ? $candidate : '';
     }
 
     private function resolveBestAnonId(object $row, Request $request): string

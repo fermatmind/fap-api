@@ -88,7 +88,73 @@ class CommerceOrderIdempotencyTest extends TestCase
         $second->assertJson(['ok' => true]);
         $this->assertSame($orderNo, (string) $second->json('order_no'));
 
-        $this->assertSame(1, DB::table('orders')->where('org_id', $orgId)->where('idempotency_key', $idempotencyKey)->count());
+        $this->assertSame(
+            1,
+            DB::table('orders')
+                ->where('org_id', $orgId)
+                ->where('provider', 'stub')
+                ->where('idempotency_key', $idempotencyKey)
+                ->count()
+        );
+    }
+
+    public function test_order_create_idempotency_key_scoped_by_provider(): void
+    {
+        (new ScaleRegistrySeeder())->run();
+        (new Pr19CommerceSeeder())->run();
+
+        [$orgId, $userId, $token] = $this->seedOrgWithToken(9102, 9102);
+        $this->assertIsInt($userId);
+
+        $payload = [
+            'sku' => 'MBTI_CREDIT',
+            'quantity' => 1,
+        ];
+        $idempotencyKey = 'idem_scope_provider_1';
+
+        $stubResp = $this->postJson('/api/v0.3/orders/stub', $payload, [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer ' . $token,
+            'Idempotency-Key' => $idempotencyKey,
+        ]);
+        $stubResp->assertStatus(200);
+        $stubOrderNo = (string) $stubResp->json('order_no');
+        $this->assertNotSame('', $stubOrderNo);
+
+        $billingResp = $this->postJson('/api/v0.3/orders/billing', $payload, [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer ' . $token,
+            'Idempotency-Key' => $idempotencyKey,
+        ]);
+        $billingResp->assertStatus(200);
+        $billingOrderNo = (string) $billingResp->json('order_no');
+        $this->assertNotSame('', $billingOrderNo);
+        $this->assertNotSame($stubOrderNo, $billingOrderNo);
+
+        $billingSecondResp = $this->postJson('/api/v0.3/orders/billing', $payload, [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer ' . $token,
+            'Idempotency-Key' => $idempotencyKey,
+        ]);
+        $billingSecondResp->assertStatus(200);
+        $this->assertSame($billingOrderNo, (string) $billingSecondResp->json('order_no'));
+
+        $this->assertSame(
+            1,
+            DB::table('orders')
+                ->where('org_id', $orgId)
+                ->where('provider', 'stub')
+                ->where('idempotency_key', $idempotencyKey)
+                ->count()
+        );
+        $this->assertSame(
+            1,
+            DB::table('orders')
+                ->where('org_id', $orgId)
+                ->where('provider', 'billing')
+                ->where('idempotency_key', $idempotencyKey)
+                ->count()
+        );
     }
 
     public function test_cross_org_order_lookup_returns_404(): void

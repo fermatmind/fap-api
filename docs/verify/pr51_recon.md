@@ -1,0 +1,26 @@
+# PR51 Recon
+
+- Keywords: idempotency|provider|unique
+- 相关入口文件：
+  - `backend/app/Http/Controllers/API/V0_3/CommerceController.php`
+  - `backend/app/Services/Commerce/OrderManager.php`
+  - `backend/app/Http/Middleware/FmTokenAuth.php`
+- 相关路由：
+  - `POST /api/v0.3/orders`
+  - `POST /api/v0.3/orders/{provider}`（本 PR 新增）
+- 相关 DB 表/迁移：
+  - `orders`（旧唯一索引 `orders_org_idempotency_key_unique`）
+  - `backend/database/migrations/2026_02_07_190000_scope_order_idempotency_key_by_provider.php`（本 PR 新增）
+- 需要新增/修改点：
+  - 幂等查询与唯一索引统一按 `org_id + provider + idempotency_key` 作用域
+  - `CommerceController` 支持路由 provider，并统一 provider 归一化（lowercase）
+  - `OrderManager` 幂等读取按 provider 限定
+  - `CommerceOrderIdempotencyTest` 新增“同 key 不同 provider”用例
+  - 新增 `backend/scripts/pr51_accept.sh` 与 `backend/scripts/pr51_verify.sh`
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：验收脚本前后均清理 `1851/18000`，并在退出时回收 PID
+  - CI 依赖：新脚本只用 `grep -E/sed/awk/php -r`，不依赖 `rg/jq`
+  - pack/seed/config：verify 脚本执行 `config ↔ scales_registry ↔ pack 目录` 三方一致性校验
+  - sqlite 迁移：新增迁移在 sqlite/mysql/pgsql 均使用 indexExists 守卫，避免重复建索引
+  - 越权口径：不改动现有 cross-org 查询逻辑，保持 404
+  - 脱敏：accept 脚本末尾强制执行 `backend/scripts/sanitize_artifacts.sh 51`

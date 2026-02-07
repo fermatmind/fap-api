@@ -50,6 +50,10 @@ class OrderManager
         }
 
         $skuToLookup = $effectiveSku !== '' ? $effectiveSku : $requestedSku;
+        $provider = strtolower(trim($provider));
+        if ($provider === '') {
+            $provider = 'stub';
+        }
 
         $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
         $useIdempotency = $idempotencyKey !== '' && Schema::hasColumn('orders', 'idempotency_key');
@@ -110,8 +114,8 @@ class OrderManager
         };
 
         if ($useIdempotency) {
-            return DB::transaction(function () use ($orgId, $idempotencyKey, $createRow) {
-                $existing = $this->findIdempotentOrder($orgId, $idempotencyKey, true);
+            return DB::transaction(function () use ($orgId, $provider, $idempotencyKey, $createRow) {
+                $existing = $this->findIdempotentOrder($orgId, $provider, $idempotencyKey, true);
                 if ($existing) {
                     return [
                         'ok' => true,
@@ -124,7 +128,7 @@ class OrderManager
                 $row = $createRow();
                 $inserted = DB::table('orders')->insertOrIgnore($row);
                 if ((int) $inserted === 0) {
-                    $existing = $this->findIdempotentOrder($orgId, $idempotencyKey, true);
+                    $existing = $this->findIdempotentOrder($orgId, $provider, $idempotencyKey, true);
                     if ($existing) {
                         return [
                             'ok' => true,
@@ -480,11 +484,19 @@ class OrderManager
         return $key;
     }
 
-    private function findIdempotentOrder(int $orgId, string $idempotencyKey, bool $lockForUpdate = false): ?object
+    private function findIdempotentOrder(
+        int $orgId,
+        string $provider,
+        string $idempotencyKey,
+        bool $lockForUpdate = false
+    ): ?object
     {
         $query = DB::table('orders')->where('idempotency_key', $idempotencyKey);
         if (Schema::hasColumn('orders', 'org_id')) {
             $query->where('org_id', $orgId);
+        }
+        if (Schema::hasColumn('orders', 'provider')) {
+            $query->where('provider', $provider);
         }
         if ($lockForUpdate) {
             $query->lockForUpdate();
