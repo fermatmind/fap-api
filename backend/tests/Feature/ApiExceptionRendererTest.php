@@ -29,6 +29,7 @@ class ApiExceptionRendererTest extends TestCase
         $response->assertJson([
             'ok' => false,
             'error' => 'INTERNAL_ERROR',
+            'error_code' => 'INTERNAL_ERROR',
             'message' => 'Internal Server Error',
         ]);
     }
@@ -45,6 +46,7 @@ class ApiExceptionRendererTest extends TestCase
         $response->assertJson([
             'ok' => false,
             'error' => 'NOT_FOUND',
+            'error_code' => 'NOT_FOUND',
             'message' => 'Not Found',
         ]);
     }

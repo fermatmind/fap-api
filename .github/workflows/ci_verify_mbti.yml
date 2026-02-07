@@ -100,6 +100,15 @@ jobs:
         run: |
           bash scripts/ci/prepare_sqlite.sh
 
+      - name: Run API error contract regression tests
+        working-directory: backend
+        run: |
+          php artisan test --filter ApiExceptionRendererTest
+          php artisan test --filter UuidRouteParamsMiddlewareTest
+          php artisan test --filter OrgContextMiddlewareTest
+          php artisan test --filter MeAttemptsAuthContractTest
+          php artisan test --filter ApiErrorContractMiddlewareTest
+
       - name: Check content packs index endpoint
         working-directory: backend
         run: |
