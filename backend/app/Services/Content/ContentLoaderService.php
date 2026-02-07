@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 final class ContentLoaderService
 {
     /**
-     * @param callable(): (string|null) $resolveAbsPath
+     * @param  callable(): (string|null)  $resolveAbsPath
      */
     public function readText(string $packId, string $dirVersion, string $relPath, callable $resolveAbsPath): ?string
     {
@@ -26,8 +26,8 @@ final class ContentLoaderService
     }
 
     /**
+     * @param  callable(): (string|null)  $resolveAbsPath
      * @return array<string,mixed>|null
-     * @param callable(): (string|null) $resolveAbsPath
      */
     public function readJson(string $packId, string $dirVersion, string $relPath, callable $resolveAbsPath): ?array
     {
@@ -42,7 +42,7 @@ final class ContentLoaderService
     }
 
     /**
-     * @param callable(): (string|null) $resolveAbsPath
+     * @param  callable(): (string|null)  $resolveAbsPath
      */
     private function resolvePath(string $packId, string $dirVersion, string $relPath, callable $resolveAbsPath): ?string
     {
@@ -52,7 +52,7 @@ final class ContentLoaderService
 
         $absPath = $this->cacheRemember($pathKey, function () use ($resolveAbsPath, $sentinelMiss) {
             $p = $resolveAbsPath();
-            if (!is_string($p) || $p === '') {
+            if (! is_string($p) || $p === '') {
                 return $sentinelMiss;
             }
 
@@ -62,15 +62,15 @@ final class ContentLoaderService
         if ($absPath === $sentinelMiss) {
             return null;
         }
-        if (!is_string($absPath) || $absPath === '') {
+        if (! is_string($absPath) || $absPath === '') {
             return null;
         }
 
-        if (!is_file($absPath)) {
+        if (! is_file($absPath)) {
             $this->cacheForget($pathKey);
 
             $fresh = $resolveAbsPath();
-            if (!is_string($fresh) || $fresh === '' || !is_file($fresh)) {
+            if (! is_string($fresh) || $fresh === '' || ! is_file($fresh)) {
                 return null;
             }
 
@@ -85,6 +85,7 @@ final class ContentLoaderService
     private function safeFileMtime(string $absPath): int
     {
         $mt = @filemtime($absPath);
+
         return is_int($mt) ? $mt : 0;
     }
 
@@ -99,7 +100,7 @@ final class ContentLoaderService
             (string) $mtime,
         ]);
 
-        return 'fap:' . hash('sha256', $base);
+        return 'fap:'.hash('sha256', $base);
     }
 
     private function ttlSeconds(): int
@@ -111,6 +112,10 @@ final class ContentLoaderService
 
     private function cacheStoreName(): string
     {
+        if (app()->environment('testing') || $this->isCiEnvironment()) {
+            return 'array';
+        }
+
         $store = (string) config('content_packs.loader_cache_store', 'array');
 
         return $store !== '' ? $store : 'array';
@@ -118,7 +123,8 @@ final class ContentLoaderService
 
     /**
      * @template T
-     * @param callable():T $callback
+     *
+     * @param  callable():T  $callback
      * @return T
      */
     private function cacheRemember(string $key, callable $callback, ?int $ttlSeconds = null)
@@ -129,14 +135,14 @@ final class ContentLoaderService
         try {
             return Cache::store($store)->remember($key, $ttl, $callback);
         } catch (\Throwable $e) {
-            Log::warning('ContentLoader cache store failed, falling back to default cache store', [
+            Log::warning('ContentLoader cache store failed, falling back to direct read', [
                 'store' => $store,
                 'key_prefix' => substr($key, 0, 16),
                 'error' => $e->getMessage(),
                 'exception_class' => get_class($e),
             ]);
 
-            return Cache::remember($key, $ttl, $callback);
+            return $callback();
         }
     }
 
@@ -147,7 +153,16 @@ final class ContentLoaderService
         try {
             Cache::store($store)->forget($key);
         } catch (\Throwable $e) {
-            Cache::forget($key);
+            try {
+                Cache::forget($key);
+            } catch (\Throwable $fallback) {
+                Log::warning('ContentLoader cache forget failed', [
+                    'store' => $store,
+                    'key_prefix' => substr($key, 0, 16),
+                    'error' => $fallback->getMessage(),
+                    'exception_class' => get_class($fallback),
+                ]);
+            }
         }
     }
 
@@ -158,7 +173,26 @@ final class ContentLoaderService
         try {
             Cache::store($store)->put($key, $value, $ttlSeconds);
         } catch (\Throwable $e) {
-            Cache::put($key, $value, $ttlSeconds);
+            try {
+                Cache::put($key, $value, $ttlSeconds);
+            } catch (\Throwable $fallback) {
+                Log::warning('ContentLoader cache put failed', [
+                    'store' => $store,
+                    'key_prefix' => substr($key, 0, 16),
+                    'error' => $fallback->getMessage(),
+                    'exception_class' => get_class($fallback),
+                ]);
+            }
         }
+    }
+
+    private function isCiEnvironment(): bool
+    {
+        $ci = env('CI', false);
+        if (is_bool($ci)) {
+            return $ci;
+        }
+
+        return in_array(strtolower((string) $ci), ['1', 'true', 'yes', 'on'], true);
     }
 }

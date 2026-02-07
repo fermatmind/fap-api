@@ -49,7 +49,7 @@ final class AttemptReportOwnershipTest extends TestCase
     public function test_report_returns_200_for_fm_token_owner(): void
     {
         $attemptId = $this->seedReportFixture();
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
@@ -62,6 +62,30 @@ final class AttemptReportOwnershipTest extends TestCase
 
         $this->withHeader('Authorization', "Bearer {$token}")
             ->getJson("/api/v0.2/attempts/{$attemptId}/report")
+            ->assertStatus(200)
+            ->assertJson([
+                'ok' => true,
+                'attempt_id' => $attemptId,
+            ]);
+    }
+
+    public function test_report_returns_200_for_share_id_without_owner_identity(): void
+    {
+        $attemptId = $this->seedReportFixture();
+        $shareId = (string) Str::uuid();
+
+        DB::table('shares')->insert([
+            'id' => $shareId,
+            'attempt_id' => $attemptId,
+            'anon_id' => null,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.2',
+            'content_package_version' => 'v0.2.2',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->getJson("/api/v0.2/attempts/{$attemptId}/report?share_id={$shareId}")
             ->assertStatus(200)
             ->assertJson([
                 'ok' => true,
