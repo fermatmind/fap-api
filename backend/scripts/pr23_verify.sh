@@ -255,7 +255,7 @@ code_event=$(curl_json "$API_BASE/api/v0.2/events" "$EVENT_RESP" \
   -H "Authorization: Bearer $AUTH_TOKEN" \
   -H "X-Org-Id: $ORG_ID" \
   --data-binary "@$EVENT_PAYLOAD")
-if [[ "$code_event" != "200" ]]; then
+if [[ ! "$code_event" =~ ^2[0-9][0-9]$ ]]; then
   log "event ingest failed: HTTP=$code_event"
   tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true
   exit 1
