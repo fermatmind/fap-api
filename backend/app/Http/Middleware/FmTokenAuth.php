@@ -64,6 +64,10 @@ class FmTokenAuth
             return $this->unauthorizedResponse($request, 'token_not_found');
         }
 
+        // Always expose identity keys after DB lookup; values remain null when unresolved.
+        $request->attributes->set('fm_user_id', null);
+        $request->attributes->set('user_id', null);
+
         // expires_at check (only when present)
         if (property_exists($row, 'expires_at') && !empty($row->expires_at)) {
             $exp = strtotime((string) $row->expires_at);

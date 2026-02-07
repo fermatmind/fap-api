@@ -7,7 +7,8 @@ REPO_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"
 API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-${BACKEND_DIR}/database/database.sqlite}"
 
-PHONE="${PHONE:-+8613800138000}"
+DEFAULT_PHONE="$(php -r 'echo "+86139".(string) random_int(10000000, 99999999);')"
+PHONE="${PHONE:-${DEFAULT_PHONE}}"
 SCENE="${SCENE:-login}"
 
 # 每次验收用一个固定但不容易撞的 anon_id

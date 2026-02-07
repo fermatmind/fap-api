@@ -1,0 +1,30 @@
+# PR54 Recon
+
+- Keywords: dlq|retry|replay
+- 相关入口文件：
+  - `backend/routes/api.php`
+  - `backend/app/Http/Middleware/FmTokenAuth.php`
+  - `backend/app/Http/Controllers/API/V0_2/Admin/AdminQueueController.php`
+  - `backend/app/Services/Queue/QueueDlqService.php`
+  - `backend/database/migrations/2026_02_08_030000_create_queue_dlq_replays_table.php`
+- 相关路由：
+  - `GET /api/v0.2/admin/queue/dlq/metrics`
+  - `POST /api/v0.2/admin/queue/dlq/replay/{failed_job_id}`
+- 相关 DB 表/迁移：
+  - `failed_jobs`（DLQ 来源）
+  - `jobs`（replay 重投目标）
+  - `queue_dlq_replays`（本 PR 新增，记录 replay 执行与状态）
+- 需要新增/修改点：
+  - admin 路由新增 DLQ 指标与回放入口
+  - 新增 `QueueDlqService`：failed job 查询、重投、删除原 DLQ、回放日志与指标聚合
+  - 新增 `AdminQueueController`：admin token/session 鉴权下的 metrics/replay API
+  - 新增 `AdminQueueDlqReplayTest`：覆盖 metrics、replay 成功、not_found 404
+  - 新增 `pr54_accept.sh` / `pr54_verify.sh`：本机一键验收 + 动态答题 + DLQ smoke
+  - 新增 `ci_dlq_replay_metrics.yml`：CI 回归 DLQ replay 与指标
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：accept/verify 统一清理 `1854/18000`
+  - CI 工具依赖：脚本/workflow 仅使用 `grep -E/sed/awk/php -r`（不依赖 `rg/jq`）
+  - pack/seed/config 一致性：verify 强校验 `config ↔ scales_registry ↔ pack(version/questions)`
+  - sqlite 一致性：accept 固定 `migrate:fresh --force` + `fap:scales:seed-default`
+  - 404 口径：DLQ replay 对缺失 failed job 统一返回 `404`
+  - 脱敏：accept 结束统一执行 `bash backend/scripts/sanitize_artifacts.sh 54`
