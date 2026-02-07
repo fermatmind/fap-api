@@ -175,7 +175,9 @@ class PaymentWebhookController extends Controller
             return app()->environment(['local', 'testing', 'ci']);
         }
 
-        $rawBody = $rawBody ?? (string) $request->getContent();
+        if ($rawBody === null || $rawBody === '') {
+            $rawBody = (string) $request->getContent();
+        }
 
         $header = (string) $request->header('Stripe-Signature', '');
         if ($header === '') {

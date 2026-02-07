@@ -672,6 +672,7 @@ class PaymentWebhookProcessor
         return [
             'ok' => false,
             'error' => $code,
+            'error_code' => $code,
             'message' => $message,
             'status' => 500,
         ];
