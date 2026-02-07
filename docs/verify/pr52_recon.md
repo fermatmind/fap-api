@@ -1,0 +1,30 @@
+# PR52 Recon
+
+- Keywords: error_code|json|renderer
+- 相关入口文件：
+  - backend/routes/api.php
+  - backend/app/Http/Middleware/FmTokenAuth.php
+  - backend/app/Http/Middleware/EnsureUuidRouteParams.php
+  - backend/app/Http/Middleware/NormalizeApiErrorContract.php
+  - backend/app/Support/ApiExceptionRenderer.php
+- 相关路由：
+  - GET /api/v0.2/me/attempts
+  - POST /api/v0.2/shares/{shareId}/click
+  - GET|PUT /api/v0.3/attempts/{attempt_id}/progress
+  - GET /api/v0.3/attempts/{id}/result
+  - GET /api/v0.3/attempts/{id}/report
+- 相关 DB 表/迁移：
+  - 本 PR 不新增迁移；需验证 sqlite migrate:fresh 可通过
+- 需要新增/修改点：
+  - 统一 API 错误响应包含 `error_code`
+  - `FmTokenAuth` 未授权响应补齐 `error_code=UNAUTHORIZED`
+  - UUID 参数错误返回 404 时补齐 `error_code=NOT_FOUND`
+  - v0.3 attempt 读取类路由补 UUID 守卫
+  - 新增 PR52 accept/verify 脚本并固化错误契约回归
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：统一清理 1852/18000
+  - 脚本工具依赖：仅使用 grep -E/sed/awk/php -r/curl/lsof
+  - pack/seed/config：verify 脚本检查 config + scales_registry + pack 文件可解析
+  - sqlite 一致性：accept 脚本固定 sqlite fresh migrate + seed
+  - 404 口径：跨 org 与 UUID 错误均为 404 且输出 error_code
+  - artifacts 脱敏：统一执行 backend/scripts/sanitize_artifacts.sh 52

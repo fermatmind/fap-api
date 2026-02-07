@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Middleware\NormalizeApiErrorContract;
 use App\Http\Controllers\HealthzController;
 use App\Http\Controllers\MbtiController;
 use App\Http\Controllers\EventController;
@@ -53,7 +54,10 @@ Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
 
 Route::middleware('throttle:api_public')->get("/healthz", [HealthzController::class, "show"]);
 
-Route::prefix("v0.2")->middleware('throttle:api_public')->group(function () {
+Route::prefix("v0.2")->middleware([
+    'throttle:api_public',
+    NormalizeApiErrorContract::class,
+])->group(function () {
 
     // 1) Health
     Route::get("/health", [MbtiController::class, "health"]);
@@ -232,7 +236,10 @@ Route::prefix("v0.2")->middleware('throttle:api_public')->group(function () {
     });
 });
 
-Route::prefix("v0.3")->middleware('throttle:api_public')->group(function () {
+Route::prefix("v0.3")->middleware([
+    'throttle:api_public',
+    NormalizeApiErrorContract::class,
+])->group(function () {
 
     // ✅ 关键修复：payment webhook 必须是“公共入口”，不能依赖 ResolveOrgContext / token
     Route::post(
@@ -259,10 +266,14 @@ Route::prefix("v0.3")->middleware('throttle:api_public')->group(function () {
             Route::post("/attempts/start", [AttemptsController::class, "start"]);
             Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
         });
-        Route::put("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "upsert"]);
-        Route::get("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "show"]);
-        Route::get("/attempts/{id}/result", [AttemptsController::class, "result"]);
+        Route::put("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "upsert"])
+            ->middleware('uuid:attempt_id');
+        Route::get("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "show"])
+            ->middleware('uuid:attempt_id');
+        Route::get("/attempts/{id}/result", [AttemptsController::class, "result"])
+            ->middleware('uuid:id');
         Route::get("/attempts/{id}/report", [AttemptsController::class, "report"])
+            ->middleware('uuid:id')
             ->name('v0.3.attempts.report');
 
         // 3) Commerce v2 (public with org context)
@@ -289,7 +300,7 @@ Route::prefix("v0.3")->middleware('throttle:api_public')->group(function () {
         });
 });
 
-Route::prefix("v0.4")->group(function () {
+Route::prefix("v0.4")->middleware(NormalizeApiErrorContract::class)->group(function () {
     Route::get("/boot", [BootController::class, "show"])
         ->middleware('throttle:api_public');
 

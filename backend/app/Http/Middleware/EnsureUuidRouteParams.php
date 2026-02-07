@@ -21,6 +21,7 @@ class EnsureUuidRouteParams
                 return response()->json([
                     'ok' => false,
                     'error' => 'NOT_FOUND',
+                    'error_code' => 'NOT_FOUND',
                     'message' => 'Not Found',
                 ], 404);
             }

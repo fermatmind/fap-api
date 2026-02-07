@@ -216,8 +216,9 @@ class FmTokenAuth
         $this->logAuthResult($request, false, $reason);
 
         return response()->json([
-            'ok'      => false,
-            'error'   => 'UNAUTHORIZED',
+            'ok' => false,
+            'error' => 'UNAUTHORIZED',
+            'error_code' => 'UNAUTHORIZED',
             'message' => 'Missing or invalid fm_token. Please login.',
         ], 401)->withHeaders([
             'WWW-Authenticate' => 'Bearer realm="Fermat API", error="invalid_token"',

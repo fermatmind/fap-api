@@ -27,6 +27,7 @@ final class ApiExceptionRenderer
         $payload = [
             'ok' => false,
             'error' => 'INTERNAL_ERROR',
+            'error_code' => 'INTERNAL_ERROR',
             'message' => 'Internal Server Error',
         ];
 
@@ -35,6 +36,7 @@ final class ApiExceptionRenderer
             $payload = [
                 'ok' => false,
                 'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'Not Found',
             ];
         }
