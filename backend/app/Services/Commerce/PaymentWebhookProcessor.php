@@ -17,6 +17,9 @@ use Illuminate\Support\Str;
 
 class PaymentWebhookProcessor
 {
+    private const WEBHOOK_LOCK_TTL_SECONDS = 180;
+    private const WEBHOOK_LOCK_WAIT_SECONDS = 10;
+
     /** @var array<string, PaymentGatewayInterface> */
     private array $gateways = [];
 
@@ -74,7 +77,7 @@ class PaymentWebhookProcessor
         $lockKey = "payment_webhook:{$provider}:{$providerEventId}";
 
         try {
-            return Cache::lock($lockKey, 180)->block(10, function () use (
+            return Cache::lock($lockKey, self::WEBHOOK_LOCK_TTL_SECONDS)->block(self::WEBHOOK_LOCK_WAIT_SECONDS, function () use (
                 $orderNo,
                 $normalized,
                 $providerEventId,
