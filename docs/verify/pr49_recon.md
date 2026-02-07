@@ -1,0 +1,22 @@
+# PR49 Recon
+
+- Keywords: Throwable|migrations|index
+- 相关入口文件：
+  - backend/database/migrations/*
+  - backend/app/Support/Database/SchemaIndex.php
+- 相关路由：
+  - 本 PR 不新增路由
+- 相关 DB 表/迁移：
+  - 扫描所有 migrations 的 catch 块并移除 silent catch
+  - 重点修复 index create/drop 的吞异常点
+- 需要新增/修改点：
+  - 迁移仅允许可判定场景忽略（index 已存在/不存在）
+  - 非可判定异常必须 rethrow
+  - 增加 SchemaIndex 工具类（sqlite/mysql/pgsql index exists + exception classifier + safe logs）
+  - 增加防回归测试与 PR49 accept/verify 脚本
+- 风险点与规避：
+  - sqlite 与 mysql/pgsql 的 index introspection 差异：统一走 SchemaIndex
+  - sqlite fresh migrate/rollback 路径：纳入 PR49 accept 脚本
+  - pack/seed/config 一致性：verify 脚本内做 config + scales_registry + pack 文件闭环检查
+  - API 验收题量：由 /questions 动态生成 answers，禁止写死题量
+  - artifacts 脱敏：统一执行 backend/scripts/sanitize_artifacts.sh 49

@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Support\Database\SchemaIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,8 +11,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('events', function (Blueprint $table) {
-            // core identifiers
+        Schema::table('events', function (Blueprint $table): void {
             if (!Schema::hasColumn('events', 'event_name')) {
                 $table->string('event_name', 64)->nullable()->after('event_code');
             }
@@ -29,7 +31,6 @@ return new class extends Migration
                 $table->string('request_id', 128)->nullable();
             }
 
-            // funnel
             if (!Schema::hasColumn('events', 'scale_code')) {
                 $table->string('scale_code', 32)->nullable();
             }
@@ -52,7 +53,6 @@ return new class extends Migration
                 $table->unsignedTinyInteger('is_dropoff')->nullable();
             }
 
-            // content + version
             if (!Schema::hasColumn('events', 'pack_id')) {
                 $table->string('pack_id', 64)->nullable();
             }
@@ -69,7 +69,6 @@ return new class extends Migration
                 $table->string('locale', 32)->nullable();
             }
 
-            // acquisition
             if (!Schema::hasColumn('events', 'utm_source')) {
                 $table->string('utm_source', 128)->nullable();
             }
@@ -83,33 +82,30 @@ return new class extends Migration
                 $table->string('referrer', 128)->nullable();
             }
 
-            // share
             if (!Schema::hasColumn('events', 'share_channel')) {
                 $table->string('share_channel', 64)->nullable();
             }
             if (!Schema::hasColumn('events', 'share_click_id')) {
                 $table->string('share_click_id', 64)->nullable();
             }
-
-            // indexes (best-effort, tolerate existing)
-            try { $table->index(['event_name', 'occurred_at'], 'idx_events_event_time'); } catch (\Throwable $e) {}
-            try { $table->index(['attempt_id'], 'idx_events_attempt'); } catch (\Throwable $e) {}
-            try { $table->index(['share_id'], 'idx_events_share'); } catch (\Throwable $e) {}
-            try { $table->index(['event_name', 'question_index'], 'idx_events_question'); } catch (\Throwable $e) {}
-            try { $table->index(['pack_id', 'dir_version', 'region', 'locale'], 'idx_events_pack'); } catch (\Throwable $e) {}
         });
+
+        $this->ensureIndex('events', ['event_name', 'occurred_at'], 'idx_events_event_time');
+        $this->ensureIndex('events', ['attempt_id'], 'idx_events_attempt');
+        $this->ensureIndex('events', ['share_id'], 'idx_events_share');
+        $this->ensureIndex('events', ['event_name', 'question_index'], 'idx_events_question');
+        $this->ensureIndex('events', ['pack_id', 'dir_version', 'region', 'locale'], 'idx_events_pack');
     }
 
     public function down(): void
     {
-        Schema::table('events', function (Blueprint $table) {
-            // drop indexes first (best-effort)
-            try { $table->dropIndex('idx_events_event_time'); } catch (\Throwable $e) {}
-            try { $table->dropIndex('idx_events_attempt'); } catch (\Throwable $e) {}
-            try { $table->dropIndex('idx_events_share'); } catch (\Throwable $e) {}
-            try { $table->dropIndex('idx_events_question'); } catch (\Throwable $e) {}
-            try { $table->dropIndex('idx_events_pack'); } catch (\Throwable $e) {}
+        $this->dropIndexIfExists('events', 'idx_events_event_time');
+        $this->dropIndexIfExists('events', 'idx_events_attempt');
+        $this->dropIndexIfExists('events', 'idx_events_share');
+        $this->dropIndexIfExists('events', 'idx_events_question');
+        $this->dropIndexIfExists('events', 'idx_events_pack');
 
+        Schema::table('events', function (Blueprint $table): void {
             if (Schema::hasColumn('events', 'session_id')) {
                 $table->dropColumn('session_id');
             }
@@ -159,5 +155,53 @@ return new class extends Migration
                 $table->dropColumn('event_name');
             }
         });
+    }
+
+    private function ensureIndex(string $tableName, array $columns, string $indexName): void
+    {
+        $driver = Schema::getConnection()->getDriverName();
+
+        if (SchemaIndex::indexExists($tableName, $indexName)) {
+            SchemaIndex::logIndexAction('create_index_skip_exists', $tableName, $indexName, $driver, ['phase' => 'up']);
+            return;
+        }
+
+        try {
+            Schema::table($tableName, function (Blueprint $table) use ($columns, $indexName): void {
+                $table->index($columns, $indexName);
+            });
+            SchemaIndex::logIndexAction('create_index', $tableName, $indexName, $driver, ['phase' => 'up']);
+        } catch (\Throwable $e) {
+            if (SchemaIndex::isDuplicateIndexException($e, $indexName)) {
+                SchemaIndex::logIndexAction('create_index_skip_duplicate', $tableName, $indexName, $driver, ['phase' => 'up']);
+                return;
+            }
+
+            throw $e;
+        }
+    }
+
+    private function dropIndexIfExists(string $tableName, string $indexName): void
+    {
+        $driver = Schema::getConnection()->getDriverName();
+
+        if (!SchemaIndex::indexExists($tableName, $indexName)) {
+            SchemaIndex::logIndexAction('drop_index_skip_absent', $tableName, $indexName, $driver, ['phase' => 'down']);
+            return;
+        }
+
+        try {
+            Schema::table($tableName, function (Blueprint $table) use ($indexName): void {
+                $table->dropIndex($indexName);
+            });
+            SchemaIndex::logIndexAction('drop_index', $tableName, $indexName, $driver, ['phase' => 'down']);
+        } catch (\Throwable $e) {
+            if (SchemaIndex::isMissingIndexException($e, $indexName)) {
+                SchemaIndex::logIndexAction('drop_index_skip_missing', $tableName, $indexName, $driver, ['phase' => 'down']);
+                return;
+            }
+
+            throw $e;
+        }
     }
 };
