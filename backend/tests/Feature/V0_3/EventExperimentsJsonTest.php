@@ -41,7 +41,7 @@ class EventExperimentsJsonTest extends TestCase
             'X-Org-Id' => (string) $orgId,
         ])->postJson('/api/v0.2/events', $payload);
 
-        $resp->assertStatus(200)->assertJson(['ok' => true]);
+        $resp->assertStatus(201)->assertJson(['ok' => true]);
 
         $row = DB::table('events')->where('event_code', 'pr23_event')->first();
         $this->assertNotNull($row);

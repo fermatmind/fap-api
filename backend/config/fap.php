@@ -47,6 +47,13 @@ return [
         'api_webhook_per_minute' => (int) env('FAP_RATE_LIMIT_WEBHOOK_PER_MINUTE', 60),
     ],
 
+    'events' => [
+        'max_top_keys' => (int) env('FAP_EVENTS_MAX_TOP_KEYS', 200),
+        'max_depth' => (int) env('FAP_EVENTS_MAX_DEPTH', 4),
+        'max_list_length' => (int) env('FAP_EVENTS_MAX_LIST_LENGTH', 50),
+        'max_string_length' => (int) env('FAP_EVENTS_MAX_STRING_LENGTH', 2048),
+    ],
+
     'selfcheck_known_assets' => [
         'manifest.json',
         'version.json',
