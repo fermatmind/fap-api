@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ShareController extends Controller
 {
@@ -51,11 +52,7 @@ class ShareController extends Controller
             ->first();
 
         if (!$gen) {
-            return response()->json([
-                'ok'      => false,
-                'error'   => 'SHARE_NOT_FOUND',
-                'message' => 'No share_generate found for this share_id.',
-            ], 404);
+            throw new NotFoundHttpException('Not Found');
         }
 
         // 3) 归一化 gen.meta_json（你的项目里通常 cast 成 array，但这里做兜底）
