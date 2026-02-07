@@ -1,8 +1,10 @@
 <?php
 
+use App\Support\ApiExceptionRenderer;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 $runtimeDirs = [
     __DIR__ . '/../storage/framework/cache',
@@ -40,6 +42,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // 你原来其他 middleware 配置保留
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(
+            fn (\Throwable $e, Request $request) => ApiExceptionRenderer::render($request, $e)
+        );
     })
     ->create();
