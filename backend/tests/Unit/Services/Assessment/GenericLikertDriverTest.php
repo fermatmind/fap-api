@@ -9,6 +9,40 @@ use Tests\TestCase;
 
 final class GenericLikertDriverTest extends TestCase
 {
+    public function testReverseWeightObjectRuleUsesLikertReverseMapping(): void
+    {
+        $driver = new GenericLikertDriver();
+
+        $answers = [
+            'q1' => 'A',
+        ];
+
+        $spec = [
+            'items_map' => [
+                'q1' => ['weight' => 2, 'reverse' => true],
+            ],
+            'options_score_map' => [
+                'A' => 1,
+                'B' => 2,
+                'C' => 3,
+                'D' => 4,
+            ],
+            'dimensions_map' => [
+                'D1' => ['q1'],
+            ],
+        ];
+
+        $out = $driver->compute($answers, $spec);
+
+        self::assertSame(8.0, $out['score_total']);
+        self::assertSame(8.0, $out['dimensions']['D1']);
+
+        self::assertSame(true, $out['debug']['items']['q1']['reverse']);
+        self::assertSame(2.0, $out['debug']['items']['q1']['weight']);
+        self::assertSame(4.0, $out['debug']['items']['q1']['effective']);
+        self::assertSame(8.0, $out['debug']['items']['q1']['weighted']);
+    }
+
     public function test_items_map_supports_reverse_and_weight_object_rule(): void
     {
         $driver = new GenericLikertDriver();

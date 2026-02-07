@@ -8,6 +8,69 @@ use App\Services\Assessment\ScoreResult;
 
 class GenericLikertDriver implements DriverInterface
 {
+    /**
+     * Backward-compatible compute API used by legacy tests/specs.
+     *
+     * @param array<int|string,mixed> $answers
+     * @param array<string,mixed> $spec
+     * @return array<string,mixed>
+     */
+    public function compute(array $answers, array $spec): array
+    {
+        $optionScores = $this->normalizeOptionScores($spec['options_score_map'] ?? ($spec['option_scores'] ?? []));
+        $defaultValue = isset($spec['default_value']) && is_numeric($spec['default_value'])
+            ? (float) $spec['default_value']
+            : 0.0;
+
+        [$minScore, $maxScore] = $this->resolveScoreBounds($optionScores, $defaultValue);
+
+        $itemsMap = is_array($spec['items_map'] ?? null) ? $spec['items_map'] : [];
+        $dimensionsMap = is_array($spec['dimensions_map'] ?? null) ? $spec['dimensions_map'] : [];
+
+        $dimensionScores = [];
+        $debugItems = [];
+
+        foreach ($this->normalizeComputeAnswers($answers) as $qid => $code) {
+            if (!array_key_exists($qid, $itemsMap)) {
+                continue;
+            }
+
+            $rawValue = $this->resolveRawValue($optionScores, $code, $defaultValue);
+            [$weight, $reverse] = $this->resolveItemRule($itemsMap[$qid], false);
+            $effective = $reverse ? (($minScore + $maxScore) - $rawValue) : $rawValue;
+            $weighted = $effective * $weight;
+
+            foreach ($dimensionsMap as $dimension => $questionIds) {
+                if (!$this->dimensionContainsQuestion($questionIds, $qid)) {
+                    continue;
+                }
+
+                $dimension = (string) $dimension;
+                $dimensionScores[$dimension] = ($dimensionScores[$dimension] ?? 0.0) + $weighted;
+            }
+
+            $debugItems[$qid] = [
+                'reverse' => $reverse,
+                'weight' => $weight,
+                'effective' => $effective,
+                'weighted' => $weighted,
+            ];
+        }
+
+        $total = 0.0;
+        foreach ($dimensionScores as $score) {
+            $total += (float) $score;
+        }
+
+        return [
+            'score_total' => $total,
+            'dimensions' => $dimensionScores,
+            'debug' => [
+                'items' => $debugItems,
+            ],
+        ];
+    }
+
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
         $optionScores = $this->normalizeOptionScores($spec['options_score_map'] ?? ($spec['option_scores'] ?? []));
@@ -232,5 +295,57 @@ class GenericLikertDriver implements DriverInterface
         }
 
         return [[], false];
+    }
+
+    /**
+     * @param array<int|string,mixed> $answers
+     * @return array<string,string>
+     */
+    private function normalizeComputeAnswers(array $answers): array
+    {
+        $normalized = [];
+        foreach ($answers as $key => $value) {
+            if (is_array($value)) {
+                $qid = trim((string) ($value['question_id'] ?? $value['qid'] ?? ''));
+                $code = strtoupper(trim((string) ($value['code'] ?? '')));
+                if ($qid === '' || $code === '') {
+                    continue;
+                }
+                $normalized[$qid] = $code;
+                continue;
+            }
+
+            $qid = trim((string) $key);
+            $code = strtoupper(trim((string) $value));
+            if ($qid === '' || $code === '') {
+                continue;
+            }
+
+            $normalized[$qid] = $code;
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * @param mixed $questionIds
+     */
+    private function dimensionContainsQuestion($questionIds, string $qid): bool
+    {
+        if (!is_array($questionIds)) {
+            return false;
+        }
+
+        if (array_key_exists($qid, $questionIds)) {
+            return true;
+        }
+
+        foreach ($questionIds as $candidate) {
+            if ($qid === (string) $candidate) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
