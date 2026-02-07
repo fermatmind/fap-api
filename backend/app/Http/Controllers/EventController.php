@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Analytics\EventNormalizer;
+use App\Services\Analytics\EventPayloadLimiter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
@@ -46,6 +47,7 @@ class EventController extends Controller
     {
         // ✅ 先鉴权（没有 token 直接 401）
         $this->requireFmToken($request);
+        $maxTopKeys = max(0, (int) config('fap.events.max_top_keys', 200));
 
         $data = $request->validate([
             'event_name'  => ['nullable', 'string', 'max:64'],
@@ -58,14 +60,17 @@ class EventController extends Controller
             'share_id'    => ['nullable', 'uuid'],
 
             // ✅ 兼容两种入参：props / meta_json
-            'props'       => ['nullable', 'array'],
-            'meta_json'   => ['nullable', 'array'],
+            'props'       => ['nullable', 'array', 'max:' . $maxTopKeys],
+            'meta_json'   => ['nullable', 'array', 'max:' . $maxTopKeys],
             'experiments_json' => ['nullable'],
         ]);
 
+        /** @var EventPayloadLimiter $payloadLimiter */
+        $payloadLimiter = app(EventPayloadLimiter::class);
+
         // ✅ meta_json：props + meta_json 合并（meta_json 覆盖同名字段）
-        $props = $data['props'] ?? [];
-        $meta  = $data['meta_json'] ?? [];
+        $props = $payloadLimiter->limit(is_array($data['props'] ?? null) ? $data['props'] : []);
+        $meta  = $payloadLimiter->limit(is_array($data['meta_json'] ?? null) ? $data['meta_json'] : []);
         $mergedMeta = array_merge($props, $meta);
         if (empty($mergedMeta)) {
             $mergedMeta = null;
@@ -147,7 +152,7 @@ class EventController extends Controller
         return response()->json([
             'ok' => true,
             'id' => $event->id,
-        ]);
+        ], 201);
     }
 
     private function resolveOrgId(Request $request): int
