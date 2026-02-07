@@ -1,0 +1,33 @@
+# PR53 Recon
+
+- Keywords: content_pack|manifest|cache
+- 相关入口文件：
+  - `backend/routes/api.php`
+  - `backend/app/Http/Middleware/FmTokenAuth.php`
+  - `backend/app/Services/Content/ContentPacksIndex.php`
+  - `backend/database/seeders/ScaleRegistrySeeder.php`
+  - `backend/database/seeders/CiScalesRegistrySeeder.php`
+- 相关路由：
+  - `GET /api/v0.2/content-packs`
+  - `GET /api/v0.2/content-packs/{pack_id}/{dir_version}/manifest`
+  - `GET /api/v0.3/scales/{scale_code}/questions`
+  - `POST /api/v0.3/attempts/start`
+  - `POST /api/v0.3/attempts/submit`
+- 相关 DB 表/迁移：
+  - `scales_registry`（seed 与 config 一致性校验）
+  - 本 PR 不新增迁移，要求 `migrate` / `migrate:fresh` 可通过
+- 需要新增/修改点：
+  - `ContentPacksIndex::find()` 增加缓存命中后 freshness 校验，不一致强制 refresh
+  - `ContentPacksIndex::scanItems()` 增加 `manifest.json` + `version.json` + `questions.json` 一致性过滤
+  - 修复 `ContentPackResolverCacheTest`（移除失效 `makeCacheKey()` 调用，改为 mtime 驱动刷新）
+  - 新增 `ContentPacksIndexManifestConsistencyTest`
+  - seed 口径统一改为严格读取 `content_packs.*`，去除硬编码 fallback
+  - 新增 `pr53_accept.sh` / `pr53_verify.sh`
+  - `ci_verify_mbti.yml` 增加 PR53 manifest consistency 回归测试步骤
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：accept/verify 统一清理 `1853/18000`
+  - CI 工具依赖：脚本与 workflow 仅使用 `grep -E/sed/awk/php -r`（无 `rg/jq` 依赖）
+  - pack/seed/config 一致性：verify 强校验 `config ↔ scales_registry ↔ manifest/version/questions`
+  - sqlite 一致性：accept 固定 `migrate:fresh --force` + `fap:scales:seed-default`
+  - 404 口径：本 PR 不改鉴权与 org 隔离逻辑，保持现有 404 策略
+  - 脱敏：accept 结束统一执行 `bash backend/scripts/sanitize_artifacts.sh 53`

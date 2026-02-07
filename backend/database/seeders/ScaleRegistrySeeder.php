@@ -17,11 +17,17 @@ final class ScaleRegistrySeeder extends Seeder
             return;
         }
 
-        // 关键：默认包/目录完全跟随 config，保证 CI 中 pr22/pr25 的一致性校验通过
-        $defaultPackId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
-        $defaultDirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
-        $defaultRegion = (string) config('content_packs.default_region', 'CN_MAINLAND');
-        $defaultLocale = (string) config('content_packs.default_locale', 'zh-CN');
+        // Defaults must come from content_packs config to keep seed/config/pack contract consistent.
+        $defaultPackId = trim((string) config('content_packs.default_pack_id', ''));
+        $defaultDirVersion = trim((string) config('content_packs.default_dir_version', ''));
+        $defaultRegion = trim((string) config('content_packs.default_region', ''));
+        $defaultLocale = trim((string) config('content_packs.default_locale', ''));
+        if ($defaultPackId === '' || $defaultDirVersion === '' || $defaultRegion === '' || $defaultLocale === '') {
+            throw new \RuntimeException(
+                'ScaleRegistrySeeder requires non-empty content_packs defaults: '
+                . 'default_pack_id/default_dir_version/default_region/default_locale'
+            );
+        }
 
         $skuDefaults = $this->resolveSkuDefaults();
 

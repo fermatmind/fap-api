@@ -19,14 +19,22 @@ final class CiScalesRegistrySeeder extends Seeder
 
         $now = now();
 
-        // ✅ 与 ScaleRegistrySeeder 同口径：默认值统一成 v0.2.1-TEST（CI 缺 config 时也不漂移）
-        $defaultPackId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
-        $defaultDirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
-        $defaultRegion = (string) config('content_packs.default_region', 'CN_MAINLAND');
-        $defaultLocale = (string) config('content_packs.default_locale', 'zh-CN');
+        // Keep CI seeding aligned with content_packs config (no hardcoded default pack ids).
+        $defaultPackId = trim((string) config('content_packs.default_pack_id', ''));
+        $defaultDirVersion = trim((string) config('content_packs.default_dir_version', ''));
+        $defaultRegion = trim((string) config('content_packs.default_region', ''));
+        $defaultLocale = trim((string) config('content_packs.default_locale', ''));
+        if ($defaultPackId === '' || $defaultDirVersion === '' || $defaultRegion === '' || $defaultLocale === '') {
+            throw new \RuntimeException(
+                'CiScalesRegistrySeeder requires non-empty content_packs defaults: '
+                . 'default_pack_id/default_dir_version/default_region/default_locale'
+            );
+        }
 
-        // demo pack 维持走 config（仓库里通常是 'default'）
-        $demoPackId = (string) config('content_packs.demo_pack_id', 'default');
+        $demoPackId = trim((string) config('content_packs.demo_pack_id', ''));
+        if ($demoPackId === '') {
+            $demoPackId = $defaultPackId;
+        }
 
         $rows = [
             [
