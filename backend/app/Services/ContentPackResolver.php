@@ -293,22 +293,25 @@ final class ContentPackResolver
             ];
         }
 
-        $readFile = function (string $rel) use ($loader, $sources): ?string {
+        $resolveAbsPath = static function (array $source, string $rel): ?string {
+            $dir = (string) ($source['base_dir'] ?? '');
+            if ($dir === '') {
+                return null;
+            }
+
+            $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
+
+            return is_file($abs) ? $abs : null;
+        };
+
+        $readFile = function (string $rel) use ($loader, $sources, $resolveAbsPath): ?string {
             $rel = ltrim($rel, "/\\");
             foreach ($sources as $source) {
                 $raw = $loader->readText(
                     (string) $source['pack_id'],
                     (string) $source['dir_version'],
                     $rel,
-                    function () use ($source, $rel): ?string {
-                        $dir = (string) ($source['base_dir'] ?? '');
-                        if ($dir === '') {
-                            return null;
-                        }
-
-                        $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
-                        return is_file($abs) ? $abs : null;
-                    }
+                    fn (): ?string => $resolveAbsPath($source, $rel)
                 );
 
                 if (is_string($raw)) {
@@ -319,22 +322,14 @@ final class ContentPackResolver
             return null;
         };
 
-        $readJson = function (string $rel) use ($loader, $sources): ?array {
+        $readJson = function (string $rel) use ($loader, $sources, $resolveAbsPath): ?array {
             $rel = ltrim($rel, "/\\");
             foreach ($sources as $source) {
                 $json = $loader->readJson(
                     (string) $source['pack_id'],
                     (string) $source['dir_version'],
                     $rel,
-                    function () use ($source, $rel): ?string {
-                        $dir = (string) ($source['base_dir'] ?? '');
-                        if ($dir === '') {
-                            return null;
-                        }
-
-                        $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
-                        return is_file($abs) ? $abs : null;
-                    }
+                    fn (): ?string => $resolveAbsPath($source, $rel)
                 );
 
                 if (is_array($json)) {

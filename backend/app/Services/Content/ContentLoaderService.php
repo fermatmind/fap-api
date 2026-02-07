@@ -22,7 +22,7 @@ final class ContentLoaderService
         $mtime = $this->safeFileMtime($absPath);
         $key = $this->cacheKey('text', $packId, $dirVersion, $relPath, $mtime);
 
-        return $this->cacheRemember($key, fn () => file_get_contents($absPath) ?: null);
+        return $this->cacheRemember($key, fn () => $this->safeReadText($absPath));
     }
 
     /**
@@ -84,38 +84,51 @@ final class ContentLoaderService
 
     private function safeFileMtime(string $absPath): int
     {
-        $mt = @filemtime($absPath);
+        try {
+            $mt = @filemtime($absPath);
+        } catch (\Throwable) {
+            return 0;
+        }
 
-        return is_int($mt) ? $mt : 0;
+        if (is_int($mt)) {
+            return $mt;
+        }
+
+        if (is_numeric($mt)) {
+            return (int) $mt;
+        }
+
+        return 0;
+    }
+
+    private function safeReadText(string $absPath): ?string
+    {
+        try {
+            $raw = @file_get_contents($absPath);
+        } catch (\Throwable) {
+            return null;
+        }
+
+        return is_string($raw) ? $raw : null;
     }
 
     private function cacheKey(string $kind, string $packId, string $dirVersion, string $relPath, int $mtime): string
     {
-        $base = implode('|', [
-            'content_loader',
-            $kind,
-            $packId,
-            $dirVersion,
-            ltrim($relPath, '/'),
-            (string) $mtime,
-        ]);
+        $normalizedRelPath = ltrim(str_replace('\\', '/', $relPath), '/');
+        $base = sha1($packId.'|'.$dirVersion.'|'.$normalizedRelPath);
 
-        return 'fap:'.hash('sha256', $base);
+        return "content_loader:{$kind}:{$base}:{$mtime}";
     }
 
     private function ttlSeconds(): int
     {
         $ttl = (int) config('content_packs.loader_cache_ttl_seconds', 300);
 
-        return $ttl > 0 ? $ttl : 300;
+        return max(1, $ttl);
     }
 
     private function cacheStoreName(): string
     {
-        if (app()->environment('testing') || $this->isCiEnvironment()) {
-            return 'array';
-        }
-
         $store = (string) config('content_packs.loader_cache_store', 'array');
 
         return $store !== '' ? $store : 'array';
@@ -135,11 +148,22 @@ final class ContentLoaderService
         try {
             return Cache::store($store)->remember($key, $ttl, $callback);
         } catch (\Throwable $e) {
-            Log::warning('ContentLoader cache store failed, falling back to direct read', [
+            Log::warning('ContentLoader cache store failed, falling back to array store', [
                 'store' => $store,
                 'key_prefix' => substr($key, 0, 16),
                 'error' => $e->getMessage(),
                 'exception_class' => get_class($e),
+            ]);
+        }
+
+        try {
+            return Cache::store('array')->remember($key, $ttl, $callback);
+        } catch (\Throwable $fallback) {
+            Log::warning('ContentLoader array cache fallback failed, falling back to direct read', [
+                'store' => $store,
+                'key_prefix' => substr($key, 0, 16),
+                'error' => $fallback->getMessage(),
+                'exception_class' => get_class($fallback),
             ]);
 
             return $callback();
@@ -186,13 +210,4 @@ final class ContentLoaderService
         }
     }
 
-    private function isCiEnvironment(): bool
-    {
-        $ci = env('CI', false);
-        if (is_bool($ci)) {
-            return $ci;
-        }
-
-        return in_array(strtolower((string) $ci), ['1', 'true', 'yes', 'on'], true);
-    }
 }
