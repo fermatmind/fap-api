@@ -109,6 +109,8 @@ $now = date("Y-m-d H:i:s");
 $orgId = 2500;
 $adminId = 9001;
 $memberId = 9002;
+$pdo->exec("INSERT OR IGNORE INTO users (id, name, email, password, created_at, updated_at) VALUES (" . (int)$adminId . ", " . $pdo->quote("PR25 Admin") . ", " . $pdo->quote("pr25_admin@example.com") . ", " . $pdo->quote("secret") . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
+$pdo->exec("INSERT OR IGNORE INTO users (id, name, email, password, created_at, updated_at) VALUES (" . (int)$memberId . ", " . $pdo->quote("PR25 Member") . ", " . $pdo->quote("pr25_member@example.com") . ", " . $pdo->quote("secret") . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
 $pdo->exec("INSERT INTO organizations (id, name, owner_user_id, created_at, updated_at) VALUES (" . (int)$orgId . ", " . $pdo->quote("PR25 Org") . ", " . (int)$adminId . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
 $pdo->exec("INSERT INTO organization_members (org_id, user_id, role, joined_at, created_at, updated_at) VALUES (" . (int)$orgId . ", " . (int)$adminId . ", " . $pdo->quote("admin") . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
 $pdo->exec("INSERT INTO organization_members (org_id, user_id, role, joined_at, created_at, updated_at) VALUES (" . (int)$orgId . ", " . (int)$memberId . ", " . $pdo->quote("member") . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
