@@ -192,7 +192,10 @@ class PaymentWebhookController extends Controller
                 continue;
             }
             [$key, $value] = array_map('trim', explode('=', $chunk, 2));
-            if ($key === 't' && $value !== '' && ctype_digit($value)) {
+            if ($key === 't') {
+                if ($value === '' || !ctype_digit($value)) {
+                    return false;
+                }
                 $timestamp = (int) $value;
                 continue;
             }
@@ -213,8 +216,7 @@ class PaymentWebhookController extends Controller
             return false;
         }
 
-        $signed = $timestamp . '.' . $rawBody;
-        $expected = hash_hmac('sha256', $signed, $secret);
+        $expected = hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);
         foreach ($signatures as $signature) {
             if (hash_equals($expected, $signature)) {
                 return true;
