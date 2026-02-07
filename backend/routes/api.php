@@ -125,7 +125,8 @@ Route::prefix("v0.2")->middleware('throttle:api_public')->group(function () {
     Route::post("/lookup/order", [LookupController::class, "lookupOrder"]);
 
     // 7) Share click (public)
-    Route::post("/shares/{shareId}/click", [ShareController::class, "click"]);
+    Route::post("/shares/{shareId}/click", [ShareController::class, "click"])
+        ->middleware('uuid:shareId');
 
     Route::middleware('throttle:api_auth')->group(function () {
         // Auth (public)
@@ -176,10 +177,14 @@ Route::prefix("v0.2")->middleware('throttle:api_public')->group(function () {
     // Optional token attach (no 401): allow anon access + enrich events.user_id when token exists
     // =========================================================
     Route::middleware(\App\Http\Middleware\FmTokenOptional::class)->group(function () {
-        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"]);
-        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"]);
-        Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"]);
-        Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"]);
+        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"])
+            ->middleware('uuid:id');
+        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"])
+            ->middleware('uuid:id');
+        Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
+            ->middleware('uuid:id');
+        Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"])
+            ->middleware('uuid:id');
     });
 
     // =========================================================

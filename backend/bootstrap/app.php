@@ -32,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'fm_token' => \App\Http\Middleware\FmTokenAuth::class,
+            'uuid' => \App\Http\Middleware\EnsureUuidRouteParams::class,
         ]);
 
         $middleware->appendToGroup('api', \App\Http\Middleware\DetectRegion::class);
