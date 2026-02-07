@@ -109,6 +109,12 @@ jobs:
           php artisan test --filter MeAttemptsAuthContractTest
           php artisan test --filter ApiErrorContractMiddlewareTest
 
+      - name: Run content pack manifest consistency tests
+        working-directory: backend
+        run: |
+          php artisan test --filter ContentPacksIndexManifestConsistencyTest
+          php artisan test --filter ContentPackResolverCacheTest
+
       - name: Check content packs index endpoint
         working-directory: backend
         run: |

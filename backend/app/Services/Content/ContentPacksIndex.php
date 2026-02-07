@@ -82,17 +82,31 @@ final class ContentPacksIndex
 
     public function find(string $packId, string $dirVersion): array
     {
-        $index = $this->getIndex(false);
-        if (!($index['ok'] ?? false)) {
+        $packId = trim($packId);
+        $dirVersion = trim($dirVersion);
+        if ($packId === '' || $dirVersion === '') {
             return [
                 'ok' => false,
                 'error' => 'NOT_FOUND',
             ];
         }
 
-        $items = $index['items'] ?? [];
-        foreach ($items as $item) {
-            if (($item['pack_id'] ?? '') === $packId && ($item['dir_version'] ?? '') === $dirVersion) {
+        $index = $this->getIndex(false);
+        if ($index['ok'] ?? false) {
+            $item = $this->findInItems((array) ($index['items'] ?? []), $packId, $dirVersion);
+            if (is_array($item) && $this->isItemFresh($item)) {
+                return [
+                    'ok' => true,
+                    'item' => $item,
+                ];
+            }
+        }
+
+        // Miss or stale hit -> force refresh once.
+        $index = $this->getIndex(true);
+        if ($index['ok'] ?? false) {
+            $item = $this->findInItems((array) ($index['items'] ?? []), $packId, $dirVersion);
+            if (is_array($item) && $this->isItemFresh($item)) {
                 return [
                     'ok' => true,
                     'item' => $item,
@@ -155,18 +169,38 @@ final class ContentPacksIndex
                 continue;
             }
 
-            $packId = $manifest['pack_id'] ?? null;
-            if (!is_string($packId) || trim($packId) === '') {
+            $packId = trim((string) ($manifest['pack_id'] ?? ''));
+            if ($packId === '') {
                 continue;
             }
 
             $packDir = dirname($manifestPath);
+            $dirVersion = basename($packDir);
+            if (!$this->isManifestConsistent($manifest, $dirVersion, $packId)) {
+                continue;
+            }
+
+            $versionPath = $packDir . DIRECTORY_SEPARATOR . 'version.json';
+            $version = $this->readJsonFile($versionPath);
+            if (!is_array($version)) {
+                continue;
+            }
+            if (!$this->isVersionConsistent(
+                $version,
+                $packId,
+                (string) ($manifest['content_package_version'] ?? ''),
+                $dirVersion
+            )) {
+                continue;
+            }
+
             $questionsPath = $packDir . DIRECTORY_SEPARATOR . 'questions.json';
             if (!File::exists($questionsPath)) {
                 continue;
             }
-
-            $dirVersion = basename($packDir);
+            if (!is_array($this->readJsonFile($questionsPath))) {
+                continue;
+            }
 
             $key = $packId . '|' . $dirVersion;
             if (isset($seen[$key])) {
@@ -271,5 +305,124 @@ final class ContentPacksIndex
         }
 
         return ltrim($pathNorm, '/');
+    }
+
+    private function findInItems(array $items, string $packId, string $dirVersion): ?array
+    {
+        foreach ($items as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            if ((string) ($item['pack_id'] ?? '') !== $packId) {
+                continue;
+            }
+            if ((string) ($item['dir_version'] ?? '') !== $dirVersion) {
+                continue;
+            }
+
+            return $item;
+        }
+
+        return null;
+    }
+
+    private function isItemFresh(array $item): bool
+    {
+        $manifestPath = (string) ($item['manifest_path'] ?? '');
+        $questionsPath = (string) ($item['questions_path'] ?? '');
+        $packId = trim((string) ($item['pack_id'] ?? ''));
+        $dirVersion = trim((string) ($item['dir_version'] ?? ''));
+        $contentVersion = trim((string) ($item['content_package_version'] ?? ''));
+
+        if ($manifestPath === '' || $questionsPath === '' || $packId === '' || $dirVersion === '' || $contentVersion === '') {
+            return false;
+        }
+
+        $manifest = $this->readJsonFile($manifestPath);
+        if (!is_array($manifest) || !$this->isManifestConsistent($manifest, $dirVersion, $packId)) {
+            return false;
+        }
+        if ((string) ($manifest['content_package_version'] ?? '') !== $contentVersion) {
+            return false;
+        }
+
+        $packDir = dirname($manifestPath);
+        $versionPath = $packDir . DIRECTORY_SEPARATOR . 'version.json';
+        $version = $this->readJsonFile($versionPath);
+        if (!is_array($version) || !$this->isVersionConsistent($version, $packId, $contentVersion, $dirVersion)) {
+            return false;
+        }
+
+        return is_array($this->readJsonFile($questionsPath));
+    }
+
+    private function readJsonFile(string $path): ?array
+    {
+        if ($path === '' || !File::isFile($path)) {
+            return null;
+        }
+
+        try {
+            $raw = File::get($path);
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        $decoded = json_decode($raw, true);
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    private function isManifestConsistent(array $manifest, string $dirVersion, string $packId): bool
+    {
+        $schemaVersion = (string) ($manifest['schema_version'] ?? '');
+        if ($schemaVersion !== 'pack-manifest@v1') {
+            return false;
+        }
+
+        if ((string) ($manifest['pack_id'] ?? '') !== $packId) {
+            return false;
+        }
+        if ((string) ($manifest['content_package_version'] ?? '') === '') {
+            return false;
+        }
+
+        foreach (['scale_code', 'region', 'locale'] as $required) {
+            if (trim((string) ($manifest[$required] ?? '')) === '') {
+                return false;
+            }
+        }
+
+        if ($dirVersion === '') {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function isVersionConsistent(
+        array $version,
+        string $manifestPackId,
+        string $manifestContentVersion,
+        string $dirVersion
+    ): bool {
+        $versionPackId = trim((string) ($version['pack_id'] ?? ''));
+        $versionContentVersion = trim((string) ($version['content_package_version'] ?? ''));
+        $versionDir = trim((string) ($version['dir_version'] ?? ''));
+
+        if ($versionPackId === '' || $versionContentVersion === '' || $versionDir === '') {
+            return false;
+        }
+
+        if ($versionPackId !== $manifestPackId) {
+            return false;
+        }
+        if ($versionContentVersion !== $manifestContentVersion) {
+            return false;
+        }
+        if ($versionDir !== $dirVersion) {
+            return false;
+        }
+
+        return true;
     }
 }
