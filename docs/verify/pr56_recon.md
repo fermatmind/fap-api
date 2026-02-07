@@ -1,0 +1,30 @@
+# PR56 Recon
+
+- Keywords: workflow|composer|php84
+- 相关入口文件：
+  - `.github/workflows/ci_verify_pr22_boot_v0_4.yml`
+  - `.github/workflows/ci_verify_pr23_feature_flags_sticky_experiments.yml`
+  - `.github/workflows/ci_verify_pr24_sitemap.yml`
+  - `.github/workflows/ci_verify_pr25_b2b_assessments_progress_rbac.yml`
+  - `backend/scripts/pr56_accept.sh`（新增）
+  - `backend/scripts/pr56_verify.sh`（新增）
+- 相关路由：
+  - `/api/v0.2/healthz`
+  - `/api/v0.3/scales/{code}/questions`
+  - `/api/v0.3/attempts/start`
+  - `/api/v0.3/attempts/submit`
+- 相关 DB 表/迁移：
+  - 无新增迁移；验收使用 `migrate:fresh` + `fap:scales:seed-default` + `fap:scales:sync-slugs`
+  - 读表校验：`scales_registry`（`default_pack_id/default_dir_version`）
+- 需要新增/修改点：
+  - 将 4 个 CI workflow 的 PHP 版本统一为 8.4
+  - 为 4 个 workflow 增加 Composer 安全审计（`composer audit --locked`）
+  - 新增 PR56 本机验收脚本（accept + verify）与 artifacts 输出
+  - 新增 PR56 CI workflow（统一性断言 + 验收闭环）
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：脚本启动前强制清理 `1856/18000`，退出时 kill PID 并复查
+  - CI 工具依赖：脚本/workflow 禁用 `rg/jq`，统一 `grep -E/sed/awk/php -r`
+  - pack/seed/config 一致性：`php -r` 校验 `config(content_packs)`、`scales_registry`、pack 目录与 JSON 可解析
+  - sqlite 一致性：使用 `/tmp/pr56.sqlite` 执行 `migrate:fresh --force`
+  - 404 口径：本 PR 不新增权限路由/中间件逻辑，不改变既有 404 策略
+  - 脱敏：验收后统一执行 `backend/scripts/sanitize_artifacts.sh 56`
