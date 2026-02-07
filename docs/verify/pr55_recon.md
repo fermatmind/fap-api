@@ -1,0 +1,31 @@
+# PR55 Recon
+
+- Keywords: migration|rollback|index
+- 相关入口文件：
+  - `backend/routes/api.php`
+  - `backend/app/Http/Middleware/FmTokenAuth.php`
+  - `backend/app/Http/Controllers/API/V0_2/Admin/AdminMigrationController.php`
+  - `backend/app/Services/Database/MigrationObservabilityService.php`
+  - `backend/app/Support/Database/SchemaIndex.php`
+  - `backend/database/migrations/2026_02_08_040000_create_migration_index_audits_table.php`
+- 相关路由：
+  - `GET /api/v0.2/admin/migrations/observability`
+  - `GET /api/v0.2/admin/migrations/rollback-preview`
+- 相关 DB 表/迁移：
+  - `migrations`（回滚预览来源）
+  - `migration_index_audits`（本 PR 新增，记录 index 动作）
+- 需要新增/修改点：
+  - admin 路由新增 migration observability 与 rollback preview
+  - 新增 `AdminMigrationController` + `MigrationObservabilityService`
+  - `SchemaIndex::logIndexAction` 在日志之外落库到 `migration_index_audits`
+  - `FmTokenAuth` 强化：DB lookup 后始终注入 `fm_user_id`（`user_id` 仍走存在性校验）
+  - 新增 `AdminMigrationObservabilityTest` 与 `SchemaIndexTest` 覆盖
+  - 新增 `pr55_accept.sh` / `pr55_verify.sh` 一键验收脚本
+  - 新增 `ci_pr55_migration_observability.yml` workflow
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：accept/verify 统一清理 `1855/18000`
+  - CI 工具依赖：脚本/workflow 仅使用 `grep -E/sed/awk/php -r`
+  - pack/seed/config 一致性：verify 强校验 `config ↔ scales_registry ↔ pack(version/questions)`
+  - sqlite 一致性：accept 固定 `migrate:fresh --force` + `rollback --step=1` + `migrate --force`
+  - 404 口径：admin migration 接口仅只读，不引入跨 org/越权状态泄漏分支
+  - 脱敏：accept 结束统一执行 `bash backend/scripts/sanitize_artifacts.sh 55`

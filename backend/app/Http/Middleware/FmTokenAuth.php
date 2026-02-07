@@ -77,21 +77,25 @@ class FmTokenAuth
         }
 
         // 1) user_id: only trust explicit user_id-like columns, never fall back to anon_id
-        $userId = $this->resolveUserId($row);
-        $userId = $this->resolveExistingUserId($userId);
-        if ($userId !== '') {
-            $userId = (string) $userId;
+        $resolvedUserId = $this->resolveUserId($row);
+        if ($resolvedUserId !== '') {
+            $resolvedUserId = (string) $resolvedUserId;
             // basic sanity
-            if (strlen($userId) > 64) {
+            if (strlen($resolvedUserId) > 64) {
                 return $this->unauthorizedResponse($request, 'user_id_too_long');
             }
             // numeric-only (events.user_id is bigint)
-            if (!preg_match('/^\d+$/', $userId)) {
+            if (!preg_match('/^\d+$/', $resolvedUserId)) {
                 return $this->unauthorizedResponse($request, 'user_id_not_numeric');
             }
 
-            $request->attributes->set('fm_user_id', $userId);
-            $request->attributes->set('user_id', $userId);
+            // Always inject fm_user_id once DB lookup provides a valid numeric identity.
+            $request->attributes->set('fm_user_id', $resolvedUserId);
+        }
+
+        $existingUserId = $this->resolveExistingUserId($resolvedUserId);
+        if ($existingUserId !== '') {
+            $request->attributes->set('user_id', $existingUserId);
         }
 
         // 2) anon_id: always trust token-bound anon_id

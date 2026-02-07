@@ -18,6 +18,8 @@ final class SchemaIndex
         'status',
     ];
 
+    private const AUDIT_TABLE = 'migration_index_audits';
+
     public static function indexExists(string $table, string $indexName, ?string $connection = null): bool
     {
         if (!self::isSafeIdentifier($table) || !self::isSafeIdentifier($indexName)) {
@@ -88,6 +90,7 @@ final class SchemaIndex
         }
 
         Log::info('[schema_index] action', $context);
+        self::persistAuditRecord($action, $table, $indexName, $driver, $extra);
     }
 
     private static function indexExistsSqlite(ConnectionInterface $conn, string $table, string $indexName): bool
@@ -168,6 +171,60 @@ final class SchemaIndex
         return false;
     }
 
+    private static function persistAuditRecord(
+        string $action,
+        string $table,
+        string $indexName,
+        ?string $driver,
+        array $extra
+    ): void {
+        try {
+            $conn = self::connection(self::safeString($extra['connection'] ?? null, 32));
+            if (!$conn->getSchemaBuilder()->hasTable(self::AUDIT_TABLE)) {
+                return;
+            }
+
+            $now = now();
+            $auditDriver = $driver;
+            if ($auditDriver === null || $auditDriver === '') {
+                $auditDriver = $conn->getDriverName();
+            }
+
+            $meta = [];
+            foreach ($extra as $key => $value) {
+                if (in_array($key, self::SAFE_EXTRA_KEYS, true)) {
+                    continue;
+                }
+                if (!is_scalar($value) && $value !== null) {
+                    continue;
+                }
+                $meta[(string) $key] = self::truncate((string) $value);
+            }
+
+            $conn->table(self::AUDIT_TABLE)->insert([
+                'migration_name' => self::detectMigrationName(),
+                'table_name' => self::truncate($table, 128),
+                'index_name' => self::truncate($indexName, 128),
+                'action' => self::truncate($action, 64),
+                'phase' => self::safeString($extra['phase'] ?? null, 32),
+                'driver' => self::truncate((string) $auditDriver, 32),
+                'status' => self::safeString($extra['status'] ?? null, 32) ?? 'logged',
+                'reason' => self::safeString($extra['reason'] ?? null, 191),
+                'meta_json' => empty($meta) ? null : json_encode($meta, JSON_UNESCAPED_UNICODE),
+                'recorded_at' => $now,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        } catch (Throwable $e) {
+            Log::warning('[schema_index] audit_persist_skipped', [
+                'table' => $table,
+                'index' => $indexName,
+                'action' => $action,
+                'reason' => self::truncate((string) $e->getMessage(), 128),
+            ]);
+        }
+    }
+
     private static function connection(?string $connection = null): ConnectionInterface
     {
         if ($connection !== null && $connection !== '') {
@@ -175,6 +232,29 @@ final class SchemaIndex
         }
 
         return DB::connection();
+    }
+
+    private static function detectMigrationName(): ?string
+    {
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        foreach ($trace as $frame) {
+            $file = (string) ($frame['file'] ?? '');
+            if ($file === '') {
+                continue;
+            }
+            if (strpos($file, DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR) === false) {
+                continue;
+            }
+
+            $name = pathinfo($file, PATHINFO_FILENAME);
+            if ($name === '') {
+                continue;
+            }
+
+            return self::truncate($name, 191);
+        }
+
+        return null;
     }
 
     private static function isSafeIdentifier(string $value): bool
@@ -189,5 +269,19 @@ final class SchemaIndex
         }
 
         return substr($value, 0, $maxLength);
+    }
+
+    private static function safeString(mixed $value, int $maxLength): ?string
+    {
+        if (!is_scalar($value) && $value !== null) {
+            return null;
+        }
+
+        $text = trim((string) $value);
+        if ($text === '') {
+            return null;
+        }
+
+        return self::truncate($text, $maxLength);
     }
 }

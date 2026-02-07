@@ -24,6 +24,7 @@ use App\Http\Controllers\API\V0_2\AgentController;
 use App\Http\Controllers\API\V0_2\Admin\AdminOpsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminAuditController;
 use App\Http\Controllers\API\V0_2\Admin\AdminAgentController;
+use App\Http\Controllers\API\V0_2\Admin\AdminMigrationController;
 use App\Http\Controllers\API\V0_2\Admin\AdminQueueController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
@@ -76,6 +77,8 @@ Route::prefix("v0.2")->middleware([
         ->group(function () {
             // Ops snapshot
             Route::get("/healthz/snapshot", [AdminOpsController::class, "healthzSnapshot"]);
+            Route::get("/migrations/observability", [AdminMigrationController::class, "observability"]);
+            Route::get("/migrations/rollback-preview", [AdminMigrationController::class, "rollbackPreview"]);
             Route::get("/queue/dlq/metrics", [AdminQueueController::class, "metrics"]);
             Route::post("/queue/dlq/replay/{failed_job_id}", [AdminQueueController::class, "replay"])
                 ->whereNumber('failed_job_id');
