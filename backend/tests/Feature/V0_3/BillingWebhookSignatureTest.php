@@ -12,11 +12,15 @@ class BillingWebhookSignatureTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_billing_signature_required_and_valid(): void
+    public function test_billing_signature_requires_timestamp_and_within_tolerance(): void
     {
         (new Pr19CommerceSeeder())->run();
 
-        config(['services.billing.webhook_secret' => 'billing_secret']);
+        config([
+            'services.billing.webhook_secret' => 'billing_secret',
+            'services.billing.webhook_tolerance_seconds' => 300,
+            'services.billing.allow_legacy_signature' => false,
+        ]);
 
         $orderNo = 'ord_billing_1';
         DB::table('orders')->insert([
@@ -53,28 +57,64 @@ class BillingWebhookSignatureTest extends TestCase
             'amount_cents' => 4990,
             'currency' => 'USD',
         ];
+        $raw = $this->encodePayload($payload);
 
-        $missing = $this->postJson('/api/v0.3/webhooks/payment/billing', $payload, [
-            'X-Org-Id' => '0',
-        ]);
-        $missing->assertStatus(404);
+        $missingTimestampSignature = hash_hmac('sha256', $raw, 'billing_secret');
+        $missingTimestamp = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_X_ORG_ID' => '0',
+            'HTTP_X_BILLING_SIGNATURE' => $missingTimestampSignature,
+        ], $raw);
+        $missingTimestamp->assertStatus(404);
 
-        $bad = $this->postJson('/api/v0.3/webhooks/payment/billing', $payload, [
-            'X-Org-Id' => '0',
-            'X-Billing-Signature' => 'bad',
-        ]);
+        $expiredTs = time() - 301;
+        $expiredSig = $this->buildSignature('billing_secret', $raw, $expiredTs);
+        $expired = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_X_ORG_ID' => '0',
+            'HTTP_X_BILLING_TIMESTAMP' => (string) $expiredTs,
+            'HTTP_X_BILLING_SIGNATURE' => $expiredSig,
+        ], $raw);
+        $expired->assertStatus(404);
+
+        $nowTs = time();
+        $bad = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_X_ORG_ID' => '0',
+            'HTTP_X_BILLING_TIMESTAMP' => (string) $nowTs,
+            'HTTP_X_BILLING_SIGNATURE' => 'bad',
+        ], $raw);
         $bad->assertStatus(404);
 
-        $raw = json_encode($payload);
-        $signature = hash_hmac('sha256', $raw ?: '', 'billing_secret');
+        $okSig = $this->buildSignature('billing_secret', $raw, $nowTs);
+        $ok = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_X_ORG_ID' => '0',
+            'HTTP_X_BILLING_TIMESTAMP' => (string) $nowTs,
+            'HTTP_X_BILLING_SIGNATURE' => $okSig,
+        ], $raw);
 
-        $ok = $this->postJson('/api/v0.3/webhooks/payment/billing', $payload, [
-            'X-Org-Id' => '0',
-            'X-Billing-Signature' => $signature,
-        ]);
         $ok->assertStatus(200);
-        $ok->assertJson([
-            'ok' => true,
-        ]);
+        $ok->assertJson(['ok' => true]);
+        $this->assertSame(1, DB::table('payment_events')->where('provider_event_id', 'evt_bill_1')->count());
+    }
+
+    private function buildSignature(string $secret, string $rawBody, int $timestamp): string
+    {
+        return hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);
+    }
+
+    private function encodePayload(array $payload): string
+    {
+        $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (!is_string($raw)) {
+            self::fail('json_encode payload failed.');
+        }
+
+        return $raw;
     }
 }

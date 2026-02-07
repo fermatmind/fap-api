@@ -1,0 +1,27 @@
+# PR50 Recon
+
+- Keywords: billing|webhook|tolerance
+- 相关入口文件：
+  - backend/routes/api.php
+  - backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php
+  - backend/config/services.php
+  - backend/.env.example
+- 相关路由：
+  - POST /api/v0.3/webhooks/payment/{provider}
+- 相关 DB 表/迁移：
+  - payment_events（沿用现有幂等字段与唯一键）
+  - orders/skus/benefit_wallet_*（billing 成功路径依赖）
+  - 迁移条目：本 PR 不新增迁移，仅验证 migrate / migrate:fresh
+- 需要新增/修改点：
+  - billing 验签升级为 `HMAC("{timestamp}.{raw_body}")`
+  - 增加 billing 容忍窗口配置：`BILLING_WEBHOOK_TOLERANCE_SECONDS`
+  - 缺失 timestamp / 过期 timestamp / 错签统一返回 404
+  - 保留 `BILLING_WEBHOOK_ALLOW_LEGACY_SIGNATURE` 兼容开关（默认 false）
+  - 增加 PR50 accept/verify 脚本与 artifacts 输出
+- 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
+  - 端口冲突：accept/verify 统一清理 1850 与 18000
+  - CI 工具依赖：脚本仅使用 grep -E/sed/awk/php -r/curl/lsof
+  - pack/seed/config 一致性：verify 脚本强校验 config + scales_registry + pack 文件可解析
+  - sqlite fresh migrate 一致性：`migrate:fresh --force` 全量验证，不引入更严格旧迁移约束
+  - 安全口径：billing 验签失败统一 404，避免侧信道泄露
+  - artifacts 脱敏：统一执行 `bash backend/scripts/sanitize_artifacts.sh 50`

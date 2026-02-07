@@ -163,9 +163,37 @@ class PaymentWebhookController extends Controller
             return false;
         }
 
-        $expected = hash_hmac('sha256', $rawBody, $secret);
+        $timestamp = $this->extractWebhookTimestampFromHeaders($request, [
+            'X-Billing-Timestamp',
+            'X-Webhook-Timestamp',
+            'X-Timestamp',
+        ]);
+        if ($timestamp === null) {
+            return false;
+        }
 
-        return hash_equals($expected, $signature);
+        $tolerance = (int) (config('services.billing.webhook_tolerance_seconds', config('services.billing.webhook_tolerance', 300)) ?? 300);
+        if ($tolerance <= 0) {
+            $tolerance = 300;
+        }
+        if (abs(time() - $timestamp) > $tolerance) {
+            return false;
+        }
+
+        $expected = hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);
+        if (hash_equals($expected, $signature)) {
+            return true;
+        }
+
+        $allowLegacy = (bool) config('services.billing.allow_legacy_signature', false);
+        if ($allowLegacy) {
+            $legacyExpected = hash_hmac('sha256', $rawBody, $secret);
+            if (hash_equals($legacyExpected, $signature)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function verifyStripeSignature(Request $request, ?string $rawBody = null): bool
@@ -224,6 +252,29 @@ class PaymentWebhookController extends Controller
         }
 
         return false;
+    }
+
+    private function extractWebhookTimestampFromHeaders(Request $request, array $headerNames): ?int
+    {
+        foreach ($headerNames as $headerName) {
+            $raw = trim((string) $request->header($headerName, ''));
+            if ($raw === '') {
+                continue;
+            }
+
+            if (!preg_match('/^\d{10,13}$/', $raw)) {
+                return null;
+            }
+
+            $timestamp = (int) $raw;
+            if (strlen($raw) === 13) {
+                $timestamp = (int) floor($timestamp / 1000);
+            }
+
+            return $timestamp > 0 ? $timestamp : null;
+        }
+
+        return null;
     }
 
     private function notFoundResponse(): JsonResponse
