@@ -43,6 +43,9 @@ return [
 
     'billing' => [
         'webhook_secret' => env('BILLING_WEBHOOK_SECRET'),
+        'webhook_tolerance_seconds' => (int) env('BILLING_WEBHOOK_TOLERANCE_SECONDS', env('BILLING_WEBHOOK_TOLERANCE', 300)),
+        'webhook_tolerance' => (int) env('BILLING_WEBHOOK_TOLERANCE', 300),
+        'allow_legacy_signature' => (bool) env('BILLING_WEBHOOK_ALLOW_LEGACY_SIGNATURE', false),
     ],
 
     'integrations' => [
