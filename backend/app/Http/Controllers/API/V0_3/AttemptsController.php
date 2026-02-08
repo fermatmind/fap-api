@@ -195,14 +195,9 @@ class AttemptsController extends Controller
         }
 
         $orgId = $this->orgContext->orgId();
-        $attempt = Attempt::where('id', $attemptId)->where('org_id', $orgId)->first();
-        if (!$attempt) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'ATTEMPT_NOT_FOUND',
-                'message' => 'attempt not found.',
-            ], 404);
-        }
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
+        $attempt = $this->ownedAttemptQuery($attemptId, $orgId, $userId, $anonId)->firstOrFail();
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {
@@ -266,20 +261,13 @@ class AttemptsController extends Controller
             $row,
             $request,
             $inviteToken,
+            $userId,
+            $anonId,
             &$consumeB2BCredit
         ) {
-            $locked = Attempt::where('id', $attemptId)
-                ->where('org_id', $orgId)
+            $locked = $this->ownedAttemptQuery($attemptId, $orgId, $userId, $anonId)
                 ->lockForUpdate()
-                ->first();
-            if (!$locked) {
-                $response = response()->json([
-                    'ok' => false,
-                    'error' => 'ATTEMPT_NOT_FOUND',
-                    'message' => 'attempt not found.',
-                ], 404);
-                return;
-            }
+                ->firstOrFail();
 
             $existingDigest = trim((string) ($locked->answers_digest ?? ''));
             if ($locked->submitted_at && $existingDigest !== '') {
@@ -568,28 +556,16 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
     public function result(Request $request, string $id): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $attempt = Attempt::where('id', $id)->where('org_id', $orgId)->first();
-        if (!$attempt) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'ATTEMPT_NOT_FOUND',
-                'message' => 'attempt not found.',
-            ], 404);
-        }
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
+        $attempt = $this->ownedAttemptQuery($id, $orgId, $userId, $anonId)->firstOrFail();
 
         $guard = $this->guardMemberAccess($attempt);
         if ($guard instanceof JsonResponse) {
             return $guard;
         }
 
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
-        if (!$result) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'RESULT_NOT_FOUND',
-                'message' => 'result not found.',
-            ], 404);
-        }
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
 
         $payload = $result->result_json;
         if (!is_array($payload)) {
@@ -625,39 +601,26 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
     public function report(Request $request, string $id): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $attempt = Attempt::where('id', $id)->where('org_id', $orgId)->first();
-        if (!$attempt) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'ATTEMPT_NOT_FOUND',
-                'message' => 'attempt not found.',
-            ], 404);
-        }
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
+        $attempt = $this->ownedAttemptQuery($id, $orgId, $userId, $anonId)->firstOrFail();
 
         $guard = $this->guardMemberAccess($attempt);
         if ($guard instanceof JsonResponse) {
             return $guard;
         }
 
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
-        if (!$result) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'RESULT_NOT_FOUND',
-                'message' => 'result not found.',
-            ], 404);
-        }
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
 
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
             $id,
-            $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id'),
-            $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id'),
+            $userId !== null ? (string) $userId : null,
+            $anonId,
         );
 
         if (!($gate['ok'] ?? false)) {
-            $status = (int) ($gate['status'] ?? 500);
-            return response()->json($gate, $status);
+            abort(404);
         }
 
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
@@ -790,6 +753,66 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
         return Result::where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
             ->first();
+    }
+
+    private function resolveAnonId(Request $request): ?string
+    {
+        $candidates = [
+            $this->orgContext->anonId(),
+            $request->attributes->get('anon_id'),
+            $request->attributes->get('fm_anon_id'),
+            $request->query('anon_id'),
+            $request->header('X-Anon-Id'),
+            $request->header('X-Fm-Anon-Id'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (is_string($candidate) || is_numeric($candidate)) {
+                $value = trim((string) $candidate);
+                if ($value !== '') {
+                    return $value;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private function ownedAttemptQuery(
+        string $attemptId,
+        int $orgId,
+        ?int $userId,
+        ?string $anonId
+    ): \Illuminate\Database\Eloquent\Builder {
+        $query = Attempt::query()
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId);
+
+        $user = $userId !== null ? (string) $userId : '';
+        $anon = $anonId !== null ? trim($anonId) : '';
+
+        if ($user === '' && $anon === '') {
+            return $query->whereRaw('1=0');
+        }
+
+        return $query->where(function ($q) use ($user, $anon) {
+            $applied = false;
+            if ($user !== '') {
+                $q->where('user_id', $user);
+                $applied = true;
+            }
+            if ($anon !== '') {
+                if ($applied) {
+                    $q->orWhere('anon_id', $anon);
+                } else {
+                    $q->where('anon_id', $anon);
+                    $applied = true;
+                }
+            }
+            if (!$applied) {
+                $q->whereRaw('1=0');
+            }
+        });
     }
 
     private function resolveUserId(Request $request): ?int

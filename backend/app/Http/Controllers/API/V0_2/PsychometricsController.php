@@ -57,12 +57,42 @@ class PsychometricsController extends Controller
             ], 404);
         }
 
-        $row = DB::table('attempt_quality')->where('attempt_id', $id)->first();
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
+        $user = $userId !== null ? trim($userId) : '';
+        $anon = $anonId !== null ? trim($anonId) : '';
+
+        $query = DB::table('attempt_quality')
+            ->join('attempts', 'attempts.id', '=', 'attempt_quality.attempt_id')
+            ->where('attempt_quality.attempt_id', $id)
+            ->select('attempt_quality.*');
+
+        if ($user === '' && $anon === '') {
+            $query->whereRaw('1=0');
+        } else {
+            $query->where(function ($q) use ($user, $anon) {
+                $applied = false;
+                if ($user !== '') {
+                    $q->where('attempts.user_id', $user);
+                    $applied = true;
+                }
+                if ($anon !== '') {
+                    if ($applied) {
+                        $q->orWhere('attempts.anon_id', $anon);
+                    } else {
+                        $q->where('attempts.anon_id', $anon);
+                        $applied = true;
+                    }
+                }
+                if (!$applied) {
+                    $q->whereRaw('1=0');
+                }
+            });
+        }
+
+        $row = $query->first();
         if (!$row) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'QUALITY_NOT_FOUND',
-            ], 404);
+            abort(404);
         }
 
         $checks = $row->checks_json ?? null;
@@ -81,13 +111,9 @@ class PsychometricsController extends Controller
 
     public function stats(Request $request, string $id): JsonResponse
     {
-        $attempt = Attempt::find($id);
-        if (!$attempt) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'ATTEMPT_NOT_FOUND',
-            ], 404);
-        }
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
+        $attempt = $this->ownedAttemptQuery($id, $userId, $anonId)->firstOrFail();
 
         $snapshot = $attempt->calculation_snapshot_json;
         if (is_string($snapshot)) {
@@ -110,5 +136,82 @@ class PsychometricsController extends Controller
             'stats' => $stats,
             'norm' => $snapshot['norm'] ?? null,
         ]);
+    }
+
+    private function resolveUserId(Request $request): ?string
+    {
+        $uid = $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id');
+        if (is_string($uid) || is_numeric($uid)) {
+            $value = trim((string) $uid);
+            if ($value !== '' && preg_match('/^\d+$/', $value)) {
+                return $value;
+            }
+        }
+
+        $user = $request->user();
+        if ($user && isset($user->id)) {
+            $value = trim((string) $user->id);
+            if ($value !== '' && preg_match('/^\d+$/', $value)) {
+                return $value;
+            }
+        }
+
+        return null;
+    }
+
+    private function resolveAnonId(Request $request): ?string
+    {
+        $candidates = [
+            $request->attributes->get('anon_id'),
+            $request->attributes->get('fm_anon_id'),
+            $request->header('X-Anon-Id'),
+            $request->header('X-Fm-Anon-Id'),
+            $request->query('anon_id'),
+            $request->input('anon_id'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (is_string($candidate) || is_numeric($candidate)) {
+                $value = trim((string) $candidate);
+                if ($value !== '') {
+                    return $value;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private function ownedAttemptQuery(
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId
+    ): \Illuminate\Database\Eloquent\Builder {
+        $query = Attempt::query()->where('id', $attemptId);
+        $user = $userId !== null ? trim($userId) : '';
+        $anon = $anonId !== null ? trim($anonId) : '';
+
+        if ($user === '' && $anon === '') {
+            return $query->whereRaw('1=0');
+        }
+
+        return $query->where(function ($q) use ($user, $anon) {
+            $applied = false;
+            if ($user !== '') {
+                $q->where('user_id', $user);
+                $applied = true;
+            }
+            if ($anon !== '') {
+                if ($applied) {
+                    $q->orWhere('anon_id', $anon);
+                } else {
+                    $q->where('anon_id', $anon);
+                    $applied = true;
+                }
+            }
+            if (!$applied) {
+                $q->whereRaw('1=0');
+            }
+        });
     }
 }
