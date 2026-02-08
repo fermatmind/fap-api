@@ -240,8 +240,9 @@ class PaymentWebhookProcessor
                         return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
                     }
 
+                    $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
                     $orderStatus = strtolower((string) ($order->status ?? ''));
-                    if (in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true)) {
+                    if (!$isRefundEvent && in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true)) {
                         Log::info('payment_webhook_skip_already_processed', [
                             'provider' => $provider,
                             'provider_event_id' => $providerEventId,
@@ -278,7 +279,7 @@ class PaymentWebhookProcessor
                     $eventContext = $this->buildEventContext($orderMeta, $anonId);
                     $this->events->record('payment_webhook_received', $this->numericUserId($eventUserId), $eventMeta, $eventContext);
 
-                    if ($this->isRefundEvent($eventType, $normalized)) {
+                    if ($isRefundEvent) {
                         $refund = $this->handleRefund($orderNo, $order, $normalized, $providerEventId, $orgId);
                         if (!($refund['ok'] ?? false)) {
                             $this->markEventError(

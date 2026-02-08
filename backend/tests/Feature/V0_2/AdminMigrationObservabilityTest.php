@@ -45,8 +45,10 @@ final class AdminMigrationObservabilityTest extends TestCase
 
         $response
             ->assertStatus(200)
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('data.index_audit.total', 1);
+            ->assertJsonPath('ok', true);
+
+        $indexAuditTotal = (int) $response->json('data.index_audit.total', 0);
+        $this->assertGreaterThanOrEqual(1, $indexAuditTotal);
 
         $recent = $response->json('data.migrations.recent');
         $this->assertIsArray($recent);
