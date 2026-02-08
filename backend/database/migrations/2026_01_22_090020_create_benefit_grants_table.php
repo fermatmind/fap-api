@@ -67,6 +67,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('benefit_grants');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('benefit_grants');
     }
 };

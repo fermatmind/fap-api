@@ -93,7 +93,8 @@ return new class extends Migration
             });
         }
 
-        Schema::dropIfExists('integrations');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('integrations');
     }
 
     private function indexExists(string $table, string $indexName): bool

@@ -106,7 +106,8 @@ return new class extends Migration
             });
         }
 
-        Schema::dropIfExists('idempotency_keys');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('idempotency_keys');
     }
 
     private function indexExists(string $table, string $indexName): bool
