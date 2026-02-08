@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Assessment\Drivers;
 
 use App\Services\Assessment\ScoreResult;
+use Illuminate\Support\Facades\Log;
 
 class GenericLikertDriver implements DriverInterface
 {
@@ -30,23 +31,40 @@ class GenericLikertDriver implements DriverInterface
         $dimensionScores = [];
         $debugItems = [];
 
+        $scaleCode = $this->resolveScaleCode($spec, []);
+
         foreach ($this->normalizeComputeAnswers($answers) as $qid => $code) {
             if (!array_key_exists($qid, $itemsMap)) {
                 continue;
             }
 
-            $rawValue = $this->resolveRawValue($optionScores, $code, $defaultValue);
+            [$rawValue, $isValidRaw] = $this->resolveRawValue($optionScores, $code);
             [$weight, $reverse] = $this->resolveItemRule($itemsMap[$qid], false);
-            $effective = $reverse ? (($minScore + $maxScore) - $rawValue) : $rawValue;
-            $weighted = $effective * $weight;
+
+            $effective = 0.0;
+            $weighted = 0.0;
+            $matchedDimension = false;
 
             foreach ($dimensionsMap as $dimension => $questionIds) {
                 if (!$this->dimensionContainsQuestion($questionIds, $qid)) {
                     continue;
                 }
 
+                $matchedDimension = true;
                 $dimension = (string) $dimension;
+
+                if (!$isValidRaw) {
+                    $this->logInvalidAnswer($scaleCode, $qid, $dimension);
+                    continue;
+                }
+
+                $effective = $reverse ? (($minScore + $maxScore) - $rawValue) : $rawValue;
+                $weighted = $effective * $weight;
                 $dimensionScores[$dimension] = ($dimensionScores[$dimension] ?? 0.0) + $weighted;
+            }
+
+            if (!$isValidRaw && !$matchedDimension) {
+                $this->logInvalidAnswer($scaleCode, $qid, null);
             }
 
             $debugItems[$qid] = [
@@ -90,6 +108,8 @@ class GenericLikertDriver implements DriverInterface
         $dimCounts = [];
         $items = [];
 
+        $scaleCode = $this->resolveScaleCode($spec, $ctx);
+
         foreach ($answers as $answer) {
             if (!is_array($answer)) {
                 continue;
@@ -105,7 +125,8 @@ class GenericLikertDriver implements DriverInterface
                 continue;
             }
 
-            $rawValue = $this->resolveRawValue($optionScores, $code, $defaultValue);
+            [$rawValue, $isValidRaw] = $this->resolveRawValue($optionScores, $code);
+            $matchedDimension = false;
 
             foreach ($dimensions as $dim => $conf) {
                 if (!is_array($conf)) {
@@ -117,11 +138,17 @@ class GenericLikertDriver implements DriverInterface
                     continue;
                 }
 
+                $matchedDimension = true;
                 [$weight, $reverse] = $this->resolveItemRule($itemsMap[$qid], $legacySignedWeight);
 
-                $effectiveValue = $reverse
-                    ? (($minScore + $maxScore) - $rawValue)
-                    : $rawValue;
+                $effectiveValue = 0.0;
+                if ($isValidRaw) {
+                    $effectiveValue = $reverse
+                        ? (($minScore + $maxScore) - $rawValue)
+                        : $rawValue;
+                } else {
+                    $this->logInvalidAnswer($scaleCode, $qid, (string) $dim);
+                }
 
                 $weighted = $effectiveValue * $weight;
 
@@ -138,6 +165,10 @@ class GenericLikertDriver implements DriverInterface
                     'weight' => $weight,
                     'weighted_value' => $weighted,
                 ];
+            }
+
+            if (!$isValidRaw && !$matchedDimension) {
+                $this->logInvalidAnswer($scaleCode, $qid, null);
             }
         }
 
@@ -267,15 +298,63 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param array<string,float> $optionScores
+     * @param array<string,mixed> $spec
+     * @param array<string,mixed> $ctx
      */
-    private function resolveRawValue(array $optionScores, string $code, float $defaultValue): float
+    private function resolveScaleCode(array $spec, array $ctx): ?string
     {
-        if (array_key_exists($code, $optionScores)) {
-            return (float) $optionScores[$code];
+        foreach ([$spec['scale_code'] ?? null, $spec['code'] ?? null, $ctx['scale_code'] ?? null] as $candidate) {
+            if (!is_string($candidate) && !is_numeric($candidate)) {
+                continue;
+            }
+
+            $value = trim((string) $candidate);
+            if ($value !== '') {
+                return $value;
+            }
         }
 
-        return $defaultValue;
+        return null;
+    }
+
+    private function logInvalidAnswer(?string $scaleCode, string $itemId, ?string $dimension): void
+    {
+        $context = [
+            'event' => 'scoring_invalid_answer',
+        ];
+
+        $itemId = trim($itemId);
+        $dimension = $dimension === null ? null : trim($dimension);
+
+        if ($scaleCode !== null && $scaleCode !== '') {
+            $context['scale_code'] = $scaleCode;
+        }
+        if ($itemId !== '') {
+            $context['item_id'] = $itemId;
+        }
+        if ($dimension !== null && $dimension !== '') {
+            $context['dimension'] = $dimension;
+        }
+
+        Log::warning('scoring_invalid_answer', $context);
+    }
+
+    /**
+     * @param array<string,float> $optionScores
+     * @return array{0:float,1:bool}
+     */
+    private function resolveRawValue(array $optionScores, string $code): array
+    {
+        if (!array_key_exists($code, $optionScores)) {
+            return [0.0, false];
+        }
+
+        $raw = $optionScores[$code];
+        if (!is_numeric($raw)) {
+            return [0.0, false];
+        }
+
+        return [(float) $raw, true];
     }
 
     /**
