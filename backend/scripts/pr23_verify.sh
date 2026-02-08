@@ -248,6 +248,42 @@ file_put_contents($argv[2], json_encode($payload, JSON_UNESCAPED_SLASHES));
 ' "$BOOT_A" "$EVENT_PAYLOAD"
 
 AUTH_TOKEN="fm_$(php -r 'function uuidv4(){ $data=random_bytes(16); $data[6]=chr((ord($data[6]) & 0x0f) | 0x40); $data[8]=chr((ord($data[8]) & 0x3f) | 0x80); echo vsprintf("%s%s-%s-%s-%s-%s%s%s", str_split(bin2hex($data), 4)); } uuidv4();')"
+export AUTH_TOKEN
+php -r '
+$dbFile = getenv("DB_DATABASE") ?: "/tmp/pr23.sqlite";
+$token = getenv("AUTH_TOKEN") ?: "";
+$anon = getenv("ANON_A") ?: "";
+if ($token === "" || $anon === "") {
+    fwrite(STDERR, "missing token or anon\n");
+    exit(1);
+}
+$db = new PDO("sqlite:" . $dbFile);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$columns = [];
+foreach ($db->query("PRAGMA table_info(fm_tokens)") as $row) {
+    $name = (string) ($row["name"] ?? "");
+    if ($name !== "") {
+        $columns[$name] = true;
+    }
+}
+$data = [
+    "token" => $token,
+    "anon_id" => $anon,
+    "created_at" => date("Y-m-d H:i:s"),
+    "updated_at" => date("Y-m-d H:i:s"),
+];
+if (isset($columns["user_id"])) {
+    $data["user_id"] = 0;
+}
+$keys = array_keys($data);
+$placeholders = implode(",", array_fill(0, count($keys), "?"));
+$sql = "INSERT INTO fm_tokens (" . implode(",", $keys) . ") VALUES (" . $placeholders . ")";
+$stmt = $db->prepare($sql);
+$stmt->execute(array_values($data));
+' || {
+  log "failed to seed fm_tokens for event ingest"
+  exit 1
+}
 EVENT_RESP="$ART_DIR/curl_event.json"
 code_event=$(curl_json "$API_BASE/api/v0.2/events" "$EVENT_RESP" \
   -H "Accept: application/json" \

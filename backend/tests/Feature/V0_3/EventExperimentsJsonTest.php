@@ -36,8 +36,17 @@ class EventExperimentsJsonTest extends TestCase
             ],
         ];
 
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'anon_id' => $anonId,
+            'user_id' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $resp = $this->withHeaders([
-            'Authorization' => 'Bearer fm_' . (string) Str::uuid(),
+            'Authorization' => "Bearer {$token}",
             'X-Org-Id' => (string) $orgId,
         ])->postJson('/api/v0.2/events', $payload);
 

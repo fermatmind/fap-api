@@ -7,12 +7,13 @@ use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
-use App\Support\Logging\RedactProcessor;
+use App\Support\SensitiveDataRedactor;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Monolog\LogRecord;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -222,14 +223,26 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (!self::$redactProcessorRegistered) {
-            Log::getLogger()->pushProcessor(new RedactProcessor([
-                'password',
-                'password_confirmation',
-                'token',
-                'authorization',
-                'secret',
-                'credit_card',
-            ]));
+            $redactor = new SensitiveDataRedactor();
+
+            Log::getLogger()->pushProcessor(function (array|LogRecord $record) use ($redactor): array|LogRecord {
+                if ($record instanceof LogRecord) {
+                    $context = is_array($record->context) ? $redactor->redact($record->context) : $record->context;
+                    $extra = is_array($record->extra) ? $redactor->redact($record->extra) : $record->extra;
+
+                    return $record->with(context: $context, extra: $extra);
+                }
+
+                if (isset($record['context']) && is_array($record['context'])) {
+                    $record['context'] = $redactor->redact($record['context']);
+                }
+
+                if (isset($record['extra']) && is_array($record['extra'])) {
+                    $record['extra'] = $redactor->redact($record['extra']);
+                }
+
+                return $record;
+            });
 
             self::$redactProcessorRegistered = true;
         }

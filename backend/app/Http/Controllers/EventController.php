@@ -8,19 +8,16 @@ use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Analytics\EventNormalizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
-    /**
-     * ✅ C-2：events 开始校验 fm_token（Authorization: Bearer fm_xxx）
-     * 先做最小版：有 Bearer token 且格式合法才允许写入。
-     */
     private function requireFmToken(Request $request): string
     {
-        $token = (string) $request->bearerToken();
+        $token = trim((string) $request->bearerToken());
 
         if ($token === '') {
             abort(response()->json([
@@ -30,14 +27,34 @@ class EventController extends Controller
             ], 401));
         }
 
-        if (!preg_match(
-            '/^fm_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/',
-            $token
-        )) {
+        $ingestToken = trim((string) config('fap.events.ingest_token', ''));
+
+        if ($ingestToken !== '') {
+            if (!hash_equals($ingestToken, $token)) {
+                abort(response()->json([
+                    'ok' => false,
+                    'error' => 'unauthorized',
+                    'message' => 'Invalid ingest token.',
+                ], 401));
+            }
+
+            return $token;
+        }
+
+        if (!Schema::hasTable('fm_tokens') || !Schema::hasColumn('fm_tokens', 'token')) {
             abort(response()->json([
                 'ok' => false,
                 'error' => 'unauthorized',
-                'message' => 'Invalid token format.',
+                'message' => 'Token store unavailable.',
+            ], 401));
+        }
+
+        $exists = DB::table('fm_tokens')->where('token', $token)->exists();
+        if (!$exists) {
+            abort(response()->json([
+                'ok' => false,
+                'error' => 'unauthorized',
+                'message' => 'Token not found.',
             ], 401));
         }
 
