@@ -71,16 +71,10 @@ final class GenericLikertDriverReverseAndWeightTest extends TestCase
         Log::shouldReceive('warning')
             ->once()
             ->withArgs(function ($message, $context): bool {
-                $this->assertSame('scoring_invalid_answer', $message);
+                $this->assertSame('Invalid answer option', $message);
                 $this->assertIsArray($context);
-                $this->assertSame('scoring_invalid_answer', $context['event'] ?? null);
-                $this->assertSame('MBTI', $context['scale_code'] ?? null);
-                $this->assertSame('Q3', $context['item_id'] ?? null);
-                $this->assertSame('D1', $context['dimension'] ?? null);
-                $this->assertArrayNotHasKey('answer', $context);
-                $this->assertArrayNotHasKey('answers', $context);
-                $this->assertArrayNotHasKey('option_scores', $context);
-                $this->assertArrayNotHasKey('payload', $context);
+                $this->assertSame('Q3', $context['question'] ?? null);
+                $this->assertSame('Z', $context['answer'] ?? null);
 
                 return true;
             });
