@@ -54,7 +54,7 @@ jobs:
       - name: Verify workflow PHP84 + composer security checks
         run: |
           set -euo pipefail
-          for wf in $(find .github/workflows -type f \( -name "*.yml" -o -name "*.yaml" \)); do
+          for wf in $(grep -R -l -E 'shivammathur/setup-php@v2' .github/workflows); do
             grep -E 'php-version:[[:space:]]*"8.4"' "${wf}" >/dev/null
           done
 
