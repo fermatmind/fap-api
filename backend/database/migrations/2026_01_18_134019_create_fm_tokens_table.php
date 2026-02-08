@@ -18,6 +18,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('fm_tokens');
+        // Safety: Down is a no-op to prevent accidental data loss.
+        // Schema::dropIfExists('fm_tokens');
     }
 };

@@ -47,6 +47,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('results');
+        // Safety: Down is a no-op to prevent accidental data loss.
+        // Schema::dropIfExists('results');
     }
 };

@@ -30,7 +30,9 @@ return new class extends Migration
                 });
                 SchemaIndex::logIndexAction('drop_unique', self::TABLE, self::OLD_UNIQUE, $driver, ['phase' => 'up']);
             } catch (\Throwable $e) {
-                if (!SchemaIndex::isMissingIndexException($e, self::OLD_UNIQUE)) {
+                if (SchemaIndex::isMissingIndexException($e, self::OLD_UNIQUE)) {
+                    SchemaIndex::logIndexAction('drop_unique_skip_missing', self::TABLE, self::OLD_UNIQUE, $driver, ['phase' => 'up']);
+                } else {
                     throw $e;
                 }
             }
@@ -62,7 +64,9 @@ return new class extends Migration
                 });
                 SchemaIndex::logIndexAction('drop_unique', self::TABLE, self::NEW_UNIQUE, $driver, ['phase' => 'down']);
             } catch (\Throwable $e) {
-                if (!SchemaIndex::isMissingIndexException($e, self::NEW_UNIQUE)) {
+                if (SchemaIndex::isMissingIndexException($e, self::NEW_UNIQUE)) {
+                    SchemaIndex::logIndexAction('drop_unique_skip_missing', self::TABLE, self::NEW_UNIQUE, $driver, ['phase' => 'down']);
+                } else {
                     throw $e;
                 }
             }
