@@ -31,7 +31,60 @@ require_cmd() {
 }
 
 require_cmd curl
-require_cmd jq
+require_cmd php
+
+json_get() {
+  local file_path="$1"
+  local dot_path="$2"
+
+  php -r '
+    $filePath = $argv[1];
+    $dotPath = $argv[2];
+
+    if (!is_file($filePath)) {
+        exit(1);
+    }
+
+    $raw = file_get_contents($filePath);
+    if ($raw === false) {
+        exit(1);
+    }
+
+    $payload = json_decode($raw, true);
+    if (!is_array($payload)) {
+        exit(1);
+    }
+
+    $value = $payload;
+    foreach (explode(".", $dotPath) as $segment) {
+        if ($segment === "") {
+            continue;
+        }
+
+        if (!is_array($value) || !array_key_exists($segment, $value)) {
+            exit(1);
+        }
+
+        $value = $value[$segment];
+    }
+
+    if ($value === null) {
+        exit(1);
+    }
+
+    if (is_bool($value)) {
+        echo $value ? "true" : "false";
+        exit(0);
+    }
+
+    if (is_scalar($value)) {
+        echo (string) $value;
+        exit(0);
+    }
+
+    echo json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+  ' "$file_path" "$dot_path"
+}
 
 cleanup_port() {
   local port="$1"
@@ -92,7 +145,7 @@ http_code=$(curl -sS -L -o "$simple_start" -w "%{http_code}" -X POST \
   "$API/api/v0.3/attempts/start" || true)
 [[ "$http_code" == "200" ]] || fail "simple start failed (http=$http_code)"
 
-simple_attempt_id=$(jq -r '.attempt_id // empty' "$simple_start")
+simple_attempt_id="$(json_get "$simple_start" "attempt_id" || true)"
 [[ -n "$simple_attempt_id" ]] || fail "simple start missing attempt_id"
 
 echo "[PR17] simple_score_demo submit" | tee -a "$LOG_FILE"
@@ -117,8 +170,8 @@ http_code=$(curl -sS -L -o "$simple_submit" -w "%{http_code}" -X POST \
   "$API/api/v0.3/attempts/submit" || true)
 [[ "$http_code" == "200" ]] || fail "simple submit failed (http=$http_code)"
 
-simple_raw=$(jq -r '.result.raw_score // empty' "$simple_submit")
-simple_final=$(jq -r '.result.final_score // empty' "$simple_submit")
+simple_raw="$(json_get "$simple_submit" "result.raw_score" || true)"
+simple_final="$(json_get "$simple_submit" "result.final_score" || true)"
 [[ -n "$simple_raw" && -n "$simple_final" ]] || fail "simple submit missing scores"
 
 echo "[PR17] simple_score_demo result" | tee -a "$LOG_FILE"
@@ -133,7 +186,7 @@ http_code=$(curl -sS -L -o "$simple_report" -w "%{http_code}" \
   "$API/api/v0.3/attempts/$simple_attempt_id/report" || true)
 [[ "$http_code" == "200" ]] || fail "simple report failed (http=$http_code)"
 
-simple_locked=$(jq -r '.locked // empty' "$simple_report")
+simple_locked="$(json_get "$simple_report" "locked" || true)"
 
 # IQ Raven flow
 raven_start="$RUN_DIR/curl_raven_start.json"
@@ -152,7 +205,7 @@ http_code=$(curl -sS -L -o "$raven_start" -w "%{http_code}" -X POST \
   "$API/api/v0.3/attempts/start" || true)
 [[ "$http_code" == "200" ]] || fail "raven start failed (http=$http_code)"
 
-raven_attempt_id=$(jq -r '.attempt_id // empty' "$raven_start")
+raven_attempt_id="$(json_get "$raven_start" "attempt_id" || true)"
 [[ -n "$raven_attempt_id" ]] || fail "raven start missing attempt_id"
 
 echo "[PR17] iq_raven submit" | tee -a "$LOG_FILE"
@@ -172,8 +225,8 @@ http_code=$(curl -sS -L -o "$raven_submit" -w "%{http_code}" -X POST \
   "$API/api/v0.3/attempts/submit" || true)
 [[ "$http_code" == "200" ]] || fail "raven submit failed (http=$http_code)"
 
-raven_time_bonus=$(jq -r '.result.breakdown_json.time_bonus // empty' "$raven_submit")
-raven_final=$(jq -r '.result.final_score // empty' "$raven_submit")
+raven_time_bonus="$(json_get "$raven_submit" "result.breakdown_json.time_bonus" || true)"
+raven_final="$(json_get "$raven_submit" "result.final_score" || true)"
 [[ -n "$raven_time_bonus" && -n "$raven_final" ]] || fail "raven submit missing fields"
 
 echo "[PR17] iq_raven result" | tee -a "$LOG_FILE"
