@@ -73,6 +73,12 @@ jobs:
         run: |
           composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Composer validate & audit
+        working-directory: backend
+        run: |
+          composer validate --strict
+          composer audit --no-interaction
+
       - name: Prepare Laravel env
         working-directory: backend
         run: |

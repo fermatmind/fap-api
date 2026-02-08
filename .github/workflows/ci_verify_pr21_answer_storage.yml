@@ -55,6 +55,12 @@ jobs:
         working-directory: backend
         run: composer install --no-interaction --prefer-dist
 
+      - name: Composer validate & audit
+        working-directory: backend
+        run: |
+          composer validate --strict
+          composer audit --no-interaction
+
       - name: Migrate
         working-directory: backend
         run: php artisan migrate --force -vvv
