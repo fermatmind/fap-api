@@ -35,8 +35,9 @@ COMPOSER_PLATFORM_FILE="${ART_DIR}/composer_platform_php.txt"
 
 find "${REPO_DIR}/.github/workflows" -type f \( -name "*.yml" -o -name "*.yaml" \) | sort >"${WORKFLOW_LIST}"
 
-# Check 1: all workflow php-version lines must be 8.4.
-grep -R -n -E 'php-version:' "${REPO_DIR}/.github/workflows" >"${WORKFLOW_PHP_VERSION_LINES}" || true
+# Check 1: all workflow php-version config lines must be 8.4.
+# Restrict to YAML key lines to avoid matching shell grep commands in workflow scripts.
+grep -R -n -E '^[[:space:]]*php-version:' "${REPO_DIR}/.github/workflows" >"${WORKFLOW_PHP_VERSION_LINES}" || true
 if [ ! -s "${WORKFLOW_PHP_VERSION_LINES}" ]; then
   fail "no php-version lines found in workflows"
 fi

@@ -47,15 +47,19 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.4"
+          php-version: '8.4'
           tools: composer:v2
           extensions: mbstring, xml, curl, zip, intl, sqlite, pdo_sqlite
+
+      - name: Install dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Verify workflow PHP84 + composer security checks
         run: |
           set -euo pipefail
           for wf in $(grep -R -l -E 'shivammathur/setup-php@v2' .github/workflows); do
-            grep -E 'php-version:[[:space:]]*"8.4"' "${wf}" >/dev/null
+            grep -E "^[[:space:]]*php-version:[[:space:]]*['\"]?8\\.4" "${wf}" >/dev/null
           done
 
           for wf in $(grep -R -l -E 'composer[[:space:]]+install' .github/workflows); do
@@ -63,11 +67,13 @@ jobs:
             grep -E 'composer[[:space:]]+audit[[:space:]]+--no-interaction' "${wf}" >/dev/null
           done
 
-      - name: Composer validate & audit
+      - name: Composer validate (strict)
         working-directory: backend
-        run: |
-          composer validate --strict
-          composer audit --no-interaction
+        run: composer validate --strict
+
+      - name: Composer audit (CVE scan)
+        working-directory: backend
+        run: composer audit --no-interaction
 
       - name: Prepare sqlite
         run: |
