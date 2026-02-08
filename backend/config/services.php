@@ -42,7 +42,11 @@ return [
     ],
 
     'billing' => [
-        'webhook_secret' => env('BILLING_WEBHOOK_SECRET'),
+        'webhook_secret' => env('BILLING_WEBHOOK_SECRET', ''),
+        'webhook_secret_optional_envs' => array_values(array_filter(array_map(
+            'trim',
+            explode(',', (string) env('BILLING_WEBHOOK_SECRET_OPTIONAL_ENVS', 'local,testing,ci'))
+        ))),
         'webhook_tolerance_seconds' => (int) env('BILLING_WEBHOOK_TOLERANCE_SECONDS', env('BILLING_WEBHOOK_TOLERANCE', 300)),
         'webhook_tolerance' => (int) env('BILLING_WEBHOOK_TOLERANCE', 300),
         'allow_legacy_signature' => (bool) env('BILLING_WEBHOOK_ALLOW_LEGACY_SIGNATURE', false),

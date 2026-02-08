@@ -8,6 +8,8 @@ use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PaymentWebhookController extends Controller
 {
@@ -30,9 +32,13 @@ class PaymentWebhookController extends Controller
             return $this->notFoundResponse();
         }
 
-        // billing 需要签名（secret 为空时按原逻辑：local/testing 允许；其余环境拒绝）
         $signatureOk = true;
         if ($provider === 'billing') {
+            $misconfigured = $this->billingSecretMisconfiguredResponse($request, $provider);
+            if ($misconfigured instanceof JsonResponse) {
+                return $misconfigured;
+            }
+
             $signatureOk = $this->verifyBillingSignature($request, $rawBody);
             if (!$signatureOk) {
                 return $this->notFoundResponse();
@@ -275,6 +281,75 @@ class PaymentWebhookController extends Controller
         }
 
         return null;
+    }
+
+    private function billingSecretMisconfiguredResponse(Request $request, string $provider): ?JsonResponse
+    {
+        $secret = trim((string) config('services.billing.webhook_secret', ''));
+        if ($secret !== '') {
+            return null;
+        }
+
+        if (app()->environment($this->billingSecretOptionalEnvs())) {
+            return null;
+        }
+
+        $requestId = $this->resolveRequestId($request);
+
+        Log::error('billing_webhook_secret_missing', [
+            'request_id' => $requestId,
+            'provider' => $provider,
+        ]);
+
+        return response()->json([
+            'ok' => false,
+            'error' => 'SERVICE_UNAVAILABLE',
+            'message' => 'service unavailable.',
+            'request_id' => $requestId,
+        ], 503);
+    }
+
+    private function billingSecretOptionalEnvs(): array
+    {
+        $envs = config('services.billing.webhook_secret_optional_envs', ['local', 'testing', 'ci']);
+        if (!is_array($envs)) {
+            return ['local', 'testing', 'ci'];
+        }
+
+        $normalized = [];
+        foreach ($envs as $env) {
+            if (!is_string($env)) {
+                continue;
+            }
+
+            $value = trim($env);
+            if ($value !== '') {
+                $normalized[] = $value;
+            }
+        }
+
+        return $normalized !== [] ? $normalized : ['local', 'testing', 'ci'];
+    }
+
+    private function resolveRequestId(Request $request): string
+    {
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->header('X-Request-Id', ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->header('X-Request-ID', ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->input('request_id', ''));
+        return $requestId !== '' ? $requestId : (string) Str::uuid();
     }
 
     private function notFoundResponse(): JsonResponse

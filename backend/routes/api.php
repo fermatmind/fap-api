@@ -35,7 +35,7 @@ use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
-use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController; // ✅ 新增：显式引入 v0.3 webhook controller
+use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
 use App\Http\Controllers\Integrations\ProvidersController;
