@@ -15,6 +15,7 @@ final class SensitiveDataRedactor
         'token',
         'secret',
         'password',
+        'credit_card',
         'authorization',
         'cookie',
         'stripe-signature',

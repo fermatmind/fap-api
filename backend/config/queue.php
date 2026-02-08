@@ -44,7 +44,7 @@ return [
             'connection' => env('DB_QUEUE_CONNECTION'),
             'table' => env('DB_QUEUE_TABLE', 'jobs'),
             'queue' => env('DB_QUEUE', 'default'),
-            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90),
+            'retry_after' => 90,
             'after_commit' => false,
         ],
 
@@ -52,7 +52,7 @@ return [
             'driver' => 'beanstalkd',
             'host' => env('BEANSTALKD_QUEUE_HOST', 'localhost'),
             'queue' => env('BEANSTALKD_QUEUE', 'default'),
-            'retry_after' => (int) env('BEANSTALKD_QUEUE_RETRY_AFTER', 90),
+            'retry_after' => 90,
             'block_for' => 0,
             'after_commit' => false,
         ],
@@ -73,7 +73,7 @@ return [
             // queue connection: REDIS_QUEUE_CONNECTION=default
             'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
             'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => (int) env('REDIS_QUEUE_RETRY_AFTER', 90),
+            'retry_after' => 90,
             'block_for' => (int) env('REDIS_QUEUE_BLOCK_FOR', 5),
             'after_commit' => false,
         ],
@@ -126,9 +126,9 @@ return [
     */
 
     'failed' => [
-        'driver' => env('QUEUE_FAILED_DRIVER', 'database'),
+        'driver' => 'database-uuids',
         'database' => env('DB_CONNECTION', 'sqlite'),
-        'table' => env('DB_FAILED_JOBS_TABLE', 'failed_jobs'),
+        'table' => 'failed_jobs',
     ],
 
 ];

@@ -53,6 +53,7 @@ return [
         'max_list_length' => (int) env('FAP_EVENTS_MAX_LIST_LENGTH', 50),
         'max_string_length' => (int) env('FAP_EVENTS_MAX_STRING_LENGTH', 2048),
         'max_payload_bytes' => (int) env('FAP_EVENTS_MAX_PAYLOAD_BYTES', 131072),
+        'ingest_token' => env('EVENT_INGEST_TOKEN', ''),
     ],
 
     'selfcheck_known_assets' => [
