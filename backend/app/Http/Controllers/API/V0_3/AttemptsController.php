@@ -20,6 +20,7 @@ use App\Services\Report\ReportComposer;
 use App\Services\Report\ReportSnapshotStore;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -560,11 +561,6 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
         $anonId = $this->resolveAnonId($request);
         $attempt = $this->ownedAttemptQuery($id, $orgId, $userId, $anonId)->firstOrFail();
 
-        $guard = $this->guardMemberAccess($attempt);
-        if ($guard instanceof JsonResponse) {
-            return $guard;
-        }
-
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
 
         $payload = $result->result_json;
@@ -605,11 +601,6 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
         $anonId = $this->resolveAnonId($request);
         $attempt = $this->ownedAttemptQuery($id, $orgId, $userId, $anonId)->firstOrFail();
 
-        $guard = $this->guardMemberAccess($attempt);
-        if ($guard instanceof JsonResponse) {
-            return $guard;
-        }
-
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
 
         $gate = $this->reportGatekeeper->resolve(
@@ -620,7 +611,7 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
         );
 
         if (!($gate['ok'] ?? false)) {
-            abort(404);
+            $this->throwAttemptNotFound($id);
         }
 
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
@@ -788,6 +779,19 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
             ->where('id', $attemptId)
             ->where('org_id', $orgId);
 
+        $role = $this->orgContext->role();
+        if ($this->isPrivilegedRole($role)) {
+            return $query;
+        }
+
+        if ($this->isMemberLikeRole($role)) {
+            if ($userId === null) {
+                return $query->whereRaw('1=0');
+            }
+
+            return $query->where('user_id', $userId);
+        }
+
         $user = $userId !== null ? (string) $userId : '';
         $anon = $anonId !== null ? trim($anonId) : '';
 
@@ -815,6 +819,16 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
         });
     }
 
+    private function isPrivilegedRole(?string $role): bool
+    {
+        return in_array($role, ['owner', 'admin'], true);
+    }
+
+    private function isMemberLikeRole(?string $role): bool
+    {
+        return in_array($role, ['member', 'viewer'], true);
+    }
+
     private function resolveUserId(Request $request): ?int
     {
         $raw = (string) ($request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id') ?? '');
@@ -825,23 +839,11 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
         return (int) $raw;
     }
 
-    private function guardMemberAccess(Attempt $attempt): ?JsonResponse
+    private function throwAttemptNotFound(string $attemptId): never
     {
-        $role = $this->orgContext->role();
-        if (!in_array($role, ['member', 'viewer'], true)) {
-            return null;
-        }
+        $exception = new ModelNotFoundException();
+        $exception->setModel(Attempt::class, [$attemptId]);
 
-        $userId = $this->orgContext->userId();
-        $attemptUserId = $attempt->user_id !== null ? (string) $attempt->user_id : '';
-        if ($userId === null || $attemptUserId === '' || $attemptUserId !== (string) $userId) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'NOT_FOUND',
-                'message' => 'attempt not found.',
-            ], 404);
-        }
-
-        return null;
+        throw $exception;
     }
 }
