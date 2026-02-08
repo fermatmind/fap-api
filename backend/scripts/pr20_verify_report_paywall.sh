@@ -60,6 +60,9 @@ curl_json() {
     -H "Accept: application/json"
     -H "Content-Type: application/json"
   )
+  if [ -n "${ANON_ID:-}" ]; then
+    args+=(-H "X-Anon-Id: ${ANON_ID}")
+  fi
   if [ -n "$token" ]; then
     args+=(-H "Authorization: Bearer ${token}")
   fi
@@ -256,6 +259,7 @@ file_put_contents($argv[3], json_encode($payload, JSON_UNESCAPED_UNICODE));
 http_code="$(curl -sS -o "$ART_DIR/curl_submit_mbti.json" -w "%{http_code}" -X POST "$API/api/v0.3/attempts/submit" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
+  -H "X-Anon-Id: ${ANON_ID}" \
   -H "Authorization: Bearer ${USER_TOKEN}" \
   --data-binary @"$ART_DIR/curl_submit_payload_mbti.json" || true)"
 if [ "${http_code:-000}" != "200" ]; then

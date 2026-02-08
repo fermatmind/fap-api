@@ -116,7 +116,9 @@ class ReportPaywallTeaserTest extends TestCase
 
         $attemptId = $this->createMbtiAttemptWithResult();
 
-        $report = $this->getJson("/api/v0.3/attempts/{$attemptId}/report");
+        $report = $this->withHeaders([
+            'X-Anon-Id' => 'anon_test',
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
         $report->assertJson([
             'ok' => true,

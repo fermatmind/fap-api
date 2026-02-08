@@ -64,13 +64,14 @@ class CommerceRefundWebhookTest extends TestCase
         return [$orgId, $userId, $token];
     }
 
-    private function createMbtiAttemptWithResult(int $orgId): string
+    private function createMbtiAttemptWithResult(int $orgId, int $userId): string
     {
         $attemptId = (string) Str::uuid();
 
         Attempt::create([
             'id' => $attemptId,
             'org_id' => $orgId,
+            'user_id' => $userId,
             'anon_id' => 'anon_refund',
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.3',
@@ -154,7 +155,7 @@ class CommerceRefundWebhookTest extends TestCase
         $this->seedScales();
         [$orgId, $userId, $token] = $this->seedOrgWithToken();
 
-        $attemptId = $this->createMbtiAttemptWithResult($orgId);
+        $attemptId = $this->createMbtiAttemptWithResult($orgId, $userId);
 
         $orderNo = 'ord_refund_1';
         DB::table('orders')->insert([

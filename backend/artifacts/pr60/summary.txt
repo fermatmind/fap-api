@@ -1,0 +1,23 @@
+PR60 Acceptance Summary
+- pass_items:
+  - migrate_fresh_sqlite: OK
+  - scales_seed_and_slug_sync: OK
+  - verify_script_idor_404: PASS
+  - phpunit_high_idor_ownership_404: PASS
+  - phpunit_org_isolation_attempts: PASS
+  - phpunit_commerce_order_idempotency: PASS
+  - abort_403_assertion: PASS
+- key_outputs:
+  - serve_port: 1860
+  - attempt_id: 9ddb69d3-8a20-463b-8cb1-0516a55e05c5
+  - order_no: ord_pr60_1770527458
+  - answer_count=144
+  - verify_log: <REPO>
+  - server_log: <REPO>
+- smoke_urls:
+  - http://127.0.0.1:1860/api/v0.2/healthz
+  - http://127.0.0.1:1860/api/v0.3/attempts/9ddb69d3-8a20-463b-8cb1-0516a55e05c5/result
+  - http://127.0.0.1:1860/api/v0.3/orders/ord_pr60_1770527458
+  - http://127.0.0.1:1860/api/v0.2/attempts/9ddb69d3-8a20-463b-8cb1-0516a55e05c5/stats
+- schema_changes:
+  - none (no migration added in PR60)

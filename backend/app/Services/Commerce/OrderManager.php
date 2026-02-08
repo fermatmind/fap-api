@@ -161,7 +161,7 @@ class OrderManager
         ];
     }
 
-    public function getOrder(int $orgId, string $orderNo): array
+    public function getOrder(int $orgId, ?string $userId, ?string $anonId, string $orderNo): array
     {
         if (!Schema::hasTable('orders')) {
             return $this->tableMissing('orders');
@@ -177,6 +177,35 @@ class OrderManager
             $query->where('org_id', $orgId);
         } elseif ($orgId !== 0) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+        }
+
+        $uid = $this->trimOrNull($userId);
+        $aid = $this->trimOrNull($anonId);
+        $hasUserCol = Schema::hasColumn('orders', 'user_id');
+        $hasAnonCol = Schema::hasColumn('orders', 'anon_id');
+
+        if ($uid === null && $aid === null) {
+            $query->whereRaw('1=0');
+        } else {
+            $query->where(function ($q) use ($uid, $aid, $hasUserCol, $hasAnonCol) {
+                $applied = false;
+
+                if ($uid !== null && $hasUserCol) {
+                    $q->where('user_id', $uid);
+                    $applied = true;
+                }
+                if ($aid !== null && $hasAnonCol) {
+                    if ($applied) {
+                        $q->orWhere('anon_id', $aid);
+                    } else {
+                        $q->where('anon_id', $aid);
+                        $applied = true;
+                    }
+                }
+                if (!$applied) {
+                    $q->whereRaw('1=0');
+                }
+            });
         }
 
         $order = $query->first();

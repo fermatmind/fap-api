@@ -68,7 +68,7 @@ class CommerceController extends Controller
 
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
-        $anonId = $this->orgContext->anonId();
+        $anonId = $this->resolveAnonId($request);
 
         $provider = $this->resolveProvider($payload, $providerFromRoute);
 
@@ -102,7 +102,9 @@ class CommerceController extends Controller
     public function getOrder(Request $request, string $order_no): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $result = $this->orders->getOrder($orgId, $order_no);
+        $userId = $this->orgContext->userId();
+        $anonId = $this->resolveAnonId($request);
+        $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
         if (!($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) ($result['error'] ?? ''));
             return response()->json($result, $status);
@@ -121,6 +123,29 @@ class CommerceController extends Controller
             'TABLE_MISSING' => 500,
             default => 400,
         };
+    }
+
+    private function resolveAnonId(Request $request): ?string
+    {
+        $candidates = [
+            $this->orgContext->anonId(),
+            $request->attributes->get('anon_id'),
+            $request->attributes->get('fm_anon_id'),
+            $request->query('anon_id'),
+            $request->header('X-Anon-Id'),
+            $request->header('X-Fm-Anon-Id'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (is_string($candidate) || is_numeric($candidate)) {
+                $value = trim((string) $candidate);
+                if ($value !== '') {
+                    return $value;
+                }
+            }
+        }
+
+        return null;
     }
 
     private function resolveIdempotencyKey(Request $request, array $payload): ?string

@@ -24,9 +24,13 @@ class AttemptsStartSubmitTest extends TestCase
     public function test_simple_score_start_submit_result(): void
     {
         $this->seedScales();
+        $anonId = 'v03_simple_score_owner';
 
-        $start = $this->postJson('/api/v0.3/attempts/start', [
+        $start = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'SIMPLE_SCORE_DEMO',
+            'anon_id' => $anonId,
         ]);
         $start->assertStatus(200);
         $attemptId = (string) $start->json('attempt_id');
@@ -40,7 +44,9 @@ class AttemptsStartSubmitTest extends TestCase
             ['question_id' => 'SS-005', 'code' => '1'],
         ];
 
-        $submit = $this->postJson('/api/v0.3/attempts/submit', [
+        $submit = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
             'duration_ms' => 120000,
@@ -55,11 +61,15 @@ class AttemptsStartSubmitTest extends TestCase
         $this->assertSame(15, (int) $submit->json('result.raw_score'));
         $this->assertSame(15, (int) $submit->json('result.final_score'));
 
-        $result = $this->getJson("/api/v0.3/attempts/{$attemptId}/result");
+        $result = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
         $result->assertStatus(200);
         $this->assertSame(15, (int) $result->json('result.raw_score'));
 
-        $dup = $this->postJson('/api/v0.3/attempts/submit', [
+        $dup = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
             'duration_ms' => 120000,
@@ -77,14 +87,20 @@ class AttemptsStartSubmitTest extends TestCase
     public function test_iq_raven_time_bonus(): void
     {
         $this->seedScales();
+        $anonId = 'v03_iq_owner';
 
-        $start = $this->postJson('/api/v0.3/attempts/start', [
+        $start = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'IQ_RAVEN',
+            'anon_id' => $anonId,
         ]);
         $start->assertStatus(200);
         $attemptId = (string) $start->json('attempt_id');
 
-        $submit = $this->postJson('/api/v0.3/attempts/submit', [
+        $submit = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => [
                 ['question_id' => 'RAVEN_DEMO_1', 'code' => 'B'],
@@ -178,7 +194,9 @@ class AttemptsStartSubmitTest extends TestCase
             'computed_at' => now(),
         ]);
 
-        $report = $this->getJson("/api/v0.3/attempts/{$attemptId}/report");
+        $report = $this->withHeaders([
+            'X-Anon-Id' => 'anon_test',
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
         $report->assertJson([
             'ok' => true,
