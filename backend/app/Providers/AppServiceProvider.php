@@ -7,13 +7,17 @@ use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
+use App\Support\Logging\RedactProcessor;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    private static bool $redactProcessorRegistered = false;
+
     /**
      * Register any application services.
      */
@@ -217,6 +221,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (!self::$redactProcessorRegistered) {
+            Log::getLogger()->pushProcessor(new RedactProcessor([
+                'password',
+                'password_confirmation',
+                'token',
+                'authorization',
+                'secret',
+                'credit_card',
+            ]));
+
+            self::$redactProcessorRegistered = true;
+        }
+
         $response = function (string $code, string $message) {
             return function (Request $request, array $headers) use ($code, $message) {
                 return response()->json([
