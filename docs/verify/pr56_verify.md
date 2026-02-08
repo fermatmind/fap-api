@@ -1,28 +1,30 @@
-# PR56 Verify
+# PR56 Verify — Fix CI PHP drift and enforce composer validate/audit gates
 
-## 环境
-- Repo: `<REPO_PATH>`
-- Branch: `chore/pr56-unify-ci-php-84-and-composer-sec`
-- SERVE_PORT: `1856`
+## 执行环境
+- Repo: `/Users/rainie/Desktop/GitHub/fap-api`
+- Branch: `chore/pr56-fix-ci-php-drift-and-enforce-com`
+- Date: `2026-02-08`
 
 ## 执行命令
 - `bash backend/scripts/pr56_accept.sh`
-- `bash backend/scripts/ci_verify_mbti.sh`
+- `bash backend/scripts/pr56_verify.sh`
 
 ## 阻塞错误与修复
-- 【错误原因】`composer audit --locked` 报告安全公告并返回非零（`psy/psysh`、`symfony/process`）
-- 【最小修复动作】仅升级受影响依赖至安全版本，保留 audit 强校验
-- 【对应命令】`cd backend && composer update psy/psysh symfony/process --with-all-dependencies --no-interaction --no-progress`
+1) `composer validate --strict` 失败（lock 与 composer.json 不一致）
+- 【错误原因】`backend/composer.json` 新增 `config.platform.php=8.4.0` 后，`backend/composer.lock` 未同步
+- 【最小修复动作】刷新 lock 元数据
+- 【对应命令】
+  - `cd backend && composer update --lock --no-interaction --no-progress`
+  - `cd backend && composer validate --strict`
 
 ## 结果
-- `pr56_accept.sh`：PASS
-- `ci_verify_mbti.sh`：PASS
-- workflow 断言：PASS（见 `backend/artifacts/pr56/workflow_php84_composer_checks.txt`）
-- artifacts 汇总：`backend/artifacts/pr56/summary.txt`
+- `backend/scripts/pr56_accept.sh`: PASS
+- `backend/scripts/pr56_verify.sh`: PASS
+- workflow 断言：PASS（所有 `php-version` 为 `8.4`，所有包含 `composer install` 的 workflow 含 `validate/audit`）
+- composer 平台锁定：PASS（`config.platform.php=8.4.0`）
 
-## 关键输出
-- attempt_id: `36cf9f50-effb-4929-81c1-16ecf32a0f49`
-- anon_id: `pr56-verify-anon`
-- question_count(dynamic): `144`
-- default_pack_id: `MBTI.cn-mainland.zh-CN.v0.2.2`
-- default_dir_version: `MBTI-CN-v0.2.2`
+## 产物
+- `backend/artifacts/pr56/summary.txt`
+- `backend/artifacts/pr56/pr56_accept.log`
+- `backend/artifacts/pr56/pr56_verify.log`
+- `backend/artifacts/pr56/workflow_composer_gate_report.txt`

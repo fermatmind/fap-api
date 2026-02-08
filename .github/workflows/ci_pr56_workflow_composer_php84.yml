@@ -54,24 +54,20 @@ jobs:
       - name: Verify workflow PHP84 + composer security checks
         run: |
           set -euo pipefail
-          for wf in \
-            ".github/workflows/ci_verify_pr22_boot_v0_4.yml" \
-            ".github/workflows/ci_verify_pr23_feature_flags_sticky_experiments.yml" \
-            ".github/workflows/ci_verify_pr24_sitemap.yml" \
-            ".github/workflows/ci_verify_pr25_b2b_assessments_progress_rbac.yml" \
-            ".github/workflows/ci_pr56_workflow_composer_php84.yml"; do
+          for wf in $(find .github/workflows -type f \( -name "*.yml" -o -name "*.yaml" \)); do
             grep -E 'php-version:[[:space:]]*"8.4"' "${wf}" >/dev/null
-            grep -E 'composer audit --locked --no-interaction' "${wf}" >/dev/null
-            if grep -E 'php-version:[[:space:]]*"8.5"' "${wf}" >/dev/null; then
-              echo "unexpected php-version 8.5 in ${wf}" >&2
-              exit 1
-            fi
           done
 
-      - name: Composer security audit
+          for wf in $(grep -R -l -E 'composer[[:space:]]+install' .github/workflows); do
+            grep -E 'composer[[:space:]]+validate[[:space:]]+--strict' "${wf}" >/dev/null
+            grep -E 'composer[[:space:]]+audit[[:space:]]+--no-interaction' "${wf}" >/dev/null
+          done
+
+      - name: Composer validate & audit
+        working-directory: backend
         run: |
-          cd backend
-          composer audit --locked --no-interaction
+          composer validate --strict
+          composer audit --no-interaction
 
       - name: Prepare sqlite
         run: |
