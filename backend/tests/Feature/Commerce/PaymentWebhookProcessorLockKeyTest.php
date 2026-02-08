@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Commerce;
+namespace Tests\Feature\Commerce;
 
 use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\BenefitWalletService;
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Schema;
 use Mockery;
 use Tests\TestCase;
 
-final class PaymentWebhookLockBusyTest extends TestCase
+final class PaymentWebhookProcessorLockKeyTest extends TestCase
 {
     protected function tearDown(): void
     {
@@ -26,14 +26,24 @@ final class PaymentWebhookLockBusyTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_handle_returns_webhook_busy_when_lock_is_busy(): void
+    public function test_handle_uses_provider_scoped_lock_key_and_configured_timing(): void
     {
+        config()->set('services.payment_webhook.lock_ttl_seconds', 10);
+        config()->set('services.payment_webhook.lock_block_seconds', 5);
+
         Schema::shouldReceive('hasTable')->andReturn(true);
+
+        $lock = Mockery::mock();
+        $lock
+            ->shouldReceive('block')
+            ->once()
+            ->with(5, Mockery::type('callable'))
+            ->andThrow(new LockTimeoutException('lock timeout'));
 
         Cache::shouldReceive('lock')
             ->once()
-            ->with('webhook_pay:stub:evt_busy', 10)
-            ->andThrow(new LockTimeoutException('lock timeout'));
+            ->with('webhook_pay:stub:evt_lock_key', 10)
+            ->andReturn($lock);
 
         $processor = new PaymentWebhookProcessor(
             Mockery::mock(OrderManager::class),
@@ -45,12 +55,12 @@ final class PaymentWebhookLockBusyTest extends TestCase
         );
 
         $result = $processor->handle('stub', [
-            'provider_event_id' => 'evt_busy',
-            'order_no' => 'ORD-BUSY',
-        ], 0);
+            'provider_event_id' => 'evt_lock_key',
+            'order_no' => 'ORD-LOCK-KEY',
+        ]);
 
         $this->assertFalse($result['ok']);
-        $this->assertSame('WEBHOOK_BUSY', $result['error']);
         $this->assertSame(500, $result['status']);
+        $this->assertSame('WEBHOOK_BUSY', $result['error']);
     }
 }
