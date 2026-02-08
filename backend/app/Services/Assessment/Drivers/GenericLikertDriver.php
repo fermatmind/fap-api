@@ -31,8 +31,6 @@ class GenericLikertDriver implements DriverInterface
         $dimensionScores = [];
         $debugItems = [];
 
-        $scaleCode = $this->resolveScaleCode($spec, []);
-
         foreach ($this->normalizeComputeAnswers($answers) as $qid => $code) {
             if (!array_key_exists($qid, $itemsMap)) {
                 continue;
@@ -54,7 +52,7 @@ class GenericLikertDriver implements DriverInterface
                 $dimension = (string) $dimension;
 
                 if (!$isValidRaw) {
-                    $this->logInvalidAnswer($scaleCode, $qid, $dimension);
+                    $this->logInvalidAnswer($qid, $code);
                     continue;
                 }
 
@@ -64,7 +62,7 @@ class GenericLikertDriver implements DriverInterface
             }
 
             if (!$isValidRaw && !$matchedDimension) {
-                $this->logInvalidAnswer($scaleCode, $qid, null);
+                $this->logInvalidAnswer($qid, $code);
             }
 
             $debugItems[$qid] = [
@@ -108,8 +106,6 @@ class GenericLikertDriver implements DriverInterface
         $dimCounts = [];
         $items = [];
 
-        $scaleCode = $this->resolveScaleCode($spec, $ctx);
-
         foreach ($answers as $answer) {
             if (!is_array($answer)) {
                 continue;
@@ -147,7 +143,7 @@ class GenericLikertDriver implements DriverInterface
                         ? (($minScore + $maxScore) - $rawValue)
                         : $rawValue;
                 } else {
-                    $this->logInvalidAnswer($scaleCode, $qid, (string) $dim);
+                    $this->logInvalidAnswer($qid, $code);
                 }
 
                 $weighted = $effectiveValue * $weight;
@@ -168,7 +164,7 @@ class GenericLikertDriver implements DriverInterface
             }
 
             if (!$isValidRaw && !$matchedDimension) {
-                $this->logInvalidAnswer($scaleCode, $qid, null);
+                $this->logInvalidAnswer($qid, $code);
             }
         }
 
@@ -221,11 +217,17 @@ class GenericLikertDriver implements DriverInterface
             return [1.0, false];
         }
 
-        $weight = isset($itemConf['weight']) && is_numeric($itemConf['weight'])
-            ? (float) $itemConf['weight']
+        $ruleConf = $itemConf;
+        if (is_array($itemConf['rule'] ?? null)) {
+            /** @var array<string,mixed> $ruleConf */
+            $ruleConf = array_merge($itemConf, $itemConf['rule']);
+        }
+
+        $weight = isset($ruleConf['weight']) && is_numeric($ruleConf['weight'])
+            ? (float) $ruleConf['weight']
             : 1.0;
 
-        $reverse = $this->toBool($itemConf['reverse'] ?? false);
+        $reverse = $this->toBool($ruleConf['reverse'] ?? false);
         if ($legacySignedWeight && $weight < 0) {
             $weight = abs($weight);
             $reverse = true;
@@ -317,26 +319,12 @@ class GenericLikertDriver implements DriverInterface
         return null;
     }
 
-    private function logInvalidAnswer(?string $scaleCode, string $itemId, ?string $dimension): void
+    private function logInvalidAnswer(string $qId, string $answer): void
     {
-        $context = [
-            'event' => 'scoring_invalid_answer',
-        ];
-
-        $itemId = trim($itemId);
-        $dimension = $dimension === null ? null : trim($dimension);
-
-        if ($scaleCode !== null && $scaleCode !== '') {
-            $context['scale_code'] = $scaleCode;
-        }
-        if ($itemId !== '') {
-            $context['item_id'] = $itemId;
-        }
-        if ($dimension !== null && $dimension !== '') {
-            $context['dimension'] = $dimension;
-        }
-
-        Log::warning('scoring_invalid_answer', $context);
+        Log::warning('Invalid answer option', [
+            'question' => $qId,
+            'answer' => $answer,
+        ]);
     }
 
     /**
