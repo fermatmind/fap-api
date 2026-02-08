@@ -52,6 +52,11 @@ return [
         'allow_legacy_signature' => (bool) env('BILLING_WEBHOOK_ALLOW_LEGACY_SIGNATURE', false),
     ],
 
+    'payment_webhook' => [
+        'lock_ttl_seconds' => (int) env('PAYMENT_WEBHOOK_LOCK_TTL_SECONDS', 10),
+        'lock_block_seconds' => (int) env('PAYMENT_WEBHOOK_LOCK_BLOCK_SECONDS', 5),
+    ],
+
     'integrations' => [
         'webhook_tolerance_seconds' => (int) env('INTEGRATIONS_WEBHOOK_TOLERANCE_SECONDS', 300),
         'allow_unsigned_without_secret' => (bool) env('INTEGRATIONS_WEBHOOK_ALLOW_UNSIGNED', false),
