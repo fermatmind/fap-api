@@ -11,7 +11,7 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_missing_billing_secret_in_production_logs_error_and_returns_503_with_request_id(): void
+    public function test_missing_billing_secret_logs_critical_anchor_and_returns_404(): void
     {
         /** @var Application $app */
         $app = $this->app;
@@ -21,13 +21,12 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
         config([
             'app.env' => 'production',
             'services.billing.webhook_secret' => '',
-            'services.billing.webhook_secret_optional_envs' => ['local', 'testing', 'ci'],
         ]);
 
         Log::shouldReceive('error')
             ->once()
             ->withArgs(function ($message, $context): bool {
-                $this->assertSame('billing_webhook_secret_missing', $message);
+                $this->assertSame('CRITICAL: BILLING_WEBHOOK_SECRET_MISSING', $message);
                 $this->assertIsArray($context);
                 $this->assertSame('billing', $context['provider'] ?? null);
                 $this->assertSame('req-pr57-misconfigured', $context['request_id'] ?? null);
@@ -51,10 +50,10 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
             ]
         );
 
-        $response->assertStatus(503);
-        $response->assertJsonStructure(['ok', 'error', 'message', 'request_id']);
+        $response->assertStatus(404);
+        $response->assertJsonStructure(['ok', 'error', 'message']);
         $response->assertJsonPath('ok', false);
-        $response->assertJsonPath('error', 'SERVICE_UNAVAILABLE');
-        $response->assertJsonPath('request_id', 'req-pr57-misconfigured');
+        $response->assertJsonPath('error', 'NOT_FOUND');
+        $response->assertJsonPath('message', 'not found.');
     }
 }
