@@ -67,7 +67,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        // Prevent accidental data loss. This table might have existed before.
+        // Safety: Down is a no-op to prevent accidental data loss.
         // Schema::dropIfExists('benefit_grants');
     }
 };

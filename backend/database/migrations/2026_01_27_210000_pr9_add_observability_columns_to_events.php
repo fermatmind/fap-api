@@ -166,19 +166,10 @@ return new class extends Migration
             return;
         }
 
-        try {
-            Schema::table($tableName, function (Blueprint $table) use ($columns, $indexName): void {
-                $table->index($columns, $indexName);
-            });
-            SchemaIndex::logIndexAction('create_index', $tableName, $indexName, $driver, ['phase' => 'up']);
-        } catch (\Throwable $e) {
-            if (SchemaIndex::isDuplicateIndexException($e, $indexName)) {
-                SchemaIndex::logIndexAction('create_index_skip_duplicate', $tableName, $indexName, $driver, ['phase' => 'up']);
-                return;
-            }
-
-            throw $e;
-        }
+        Schema::table($tableName, function (Blueprint $table) use ($columns, $indexName): void {
+            $table->index($columns, $indexName);
+        });
+        SchemaIndex::logIndexAction('create_index', $tableName, $indexName, $driver, ['phase' => 'up']);
     }
 
     private function dropIndexIfExists(string $tableName, string $indexName): void
@@ -190,18 +181,9 @@ return new class extends Migration
             return;
         }
 
-        try {
-            Schema::table($tableName, function (Blueprint $table) use ($indexName): void {
-                $table->dropIndex($indexName);
-            });
-            SchemaIndex::logIndexAction('drop_index', $tableName, $indexName, $driver, ['phase' => 'down']);
-        } catch (\Throwable $e) {
-            if (SchemaIndex::isMissingIndexException($e, $indexName)) {
-                SchemaIndex::logIndexAction('drop_index_skip_missing', $tableName, $indexName, $driver, ['phase' => 'down']);
-                return;
-            }
-
-            throw $e;
-        }
+        Schema::table($tableName, function (Blueprint $table) use ($indexName): void {
+            $table->dropIndex($indexName);
+        });
+        SchemaIndex::logIndexAction('drop_index', $tableName, $indexName, $driver, ['phase' => 'down']);
     }
 };
