@@ -8,10 +8,15 @@ export GIT_TERMINAL_PROMPT=0
 export NO_COLOR=1
 export SERVE_PORT="${SERVE_PORT:-1821}"
 export ANSWER_ROWS_WRITE_MODE=on
+export ANON_ID="${ANON_ID:-pr21-verify-anon}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 BACKEND_DIR="$ROOT_DIR/backend"
+export FAP_PACKS_DRIVER="${FAP_PACKS_DRIVER:-local}"
+export FAP_PACKS_ROOT="${FAP_PACKS_ROOT:-$ROOT_DIR/content_packages}"
+export FAP_DEFAULT_REGION="${FAP_DEFAULT_REGION:-CN_MAINLAND}"
+export FAP_DEFAULT_LOCALE="${FAP_DEFAULT_LOCALE:-zh-CN}"
 
 ART_DIR="$ROOT_DIR/backend/artifacts/pr21"
 mkdir -p "$ART_DIR"
@@ -62,6 +67,7 @@ curl_json() {
     code="$(curl -sS -X "$method" \
       -H "Content-Type: application/json" \
       -H "Accept: application/json" \
+      -H "X-Anon-Id: ${ANON_ID}" \
       -H "$header_token" \
       ${data:+--data "$data"} \
       -o "$out" -w "%{http_code}" \
@@ -70,6 +76,7 @@ curl_json() {
     code="$(curl -sS -X "$method" \
       -H "Content-Type: application/json" \
       -H "Accept: application/json" \
+      -H "X-Anon-Id: ${ANON_ID}" \
       ${data:+--data "$data"} \
       -o "$out" -w "%{http_code}" \
       "$url" || true)"
@@ -198,8 +205,8 @@ ensure_demo_scale
 
 log "POST /api/v0.3/attempts/start"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
-  embedded_payload='{"scale_code":"DEMO_ANSWERS"}'
-  embedded_headers='{}'
+  embedded_payload='{"scale_code":"DEMO_ANSWERS","anon_id":"'"${ANON_ID}"'"}'
+  embedded_headers='{"X-Anon-Id":"'"${ANON_ID}"'"}'
   payload_file=$(mktemp)
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
@@ -208,7 +215,7 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   rm -f "$payload_file" "$headers_file"
   assert_json_file "$ART_DIR/curl_start.json" "start"
 else
-  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/start" "$ART_DIR/curl_start.json" '{"scale_code":"DEMO_ANSWERS"}')"
+  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/start" "$ART_DIR/curl_start.json" '{"scale_code":"DEMO_ANSWERS","anon_id":"'"${ANON_ID}"'"}')"
   [[ "$code" == "200" ]] || { log "start http_code=${code}"; cat "$ART_DIR/curl_start.json" | tee -a "$LOG_FILE"; tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true; exit 1; }
   assert_json_file "$ART_DIR/curl_start.json" "start"
 fi
@@ -239,7 +246,7 @@ fi
 log "PUT progress seq=1"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload='{"seq":1,"cursor":"page-1","duration_ms":1200,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"3","answer":{"value":3}}]}'
-  embedded_headers=$(printf '{"X-Resume-Token":"%s"}' "$RESUME_TOKEN")
+  embedded_headers=$(printf '{"X-Resume-Token":"%s","X-Anon-Id":"%s"}' "$RESUME_TOKEN" "$ANON_ID")
   payload_file=$(mktemp)
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
@@ -250,6 +257,7 @@ else
   curl -sS -X PUT "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/progress" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+    -H "X-Anon-Id: ${ANON_ID}" \
     -H "X-Resume-Token: ${RESUME_TOKEN}" \
     -d '{
       "seq":1,
@@ -264,7 +272,7 @@ fi
 log "PUT progress seq=2"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload='{"seq":2,"cursor":"page-2","duration_ms":2400,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"4","answer":{"value":4}},{"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}}]}'
-  embedded_headers=$(printf '{"X-Resume-Token":"%s"}' "$RESUME_TOKEN")
+  embedded_headers=$(printf '{"X-Resume-Token":"%s","X-Anon-Id":"%s"}' "$RESUME_TOKEN" "$ANON_ID")
   payload_file=$(mktemp)
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
@@ -275,6 +283,7 @@ else
   curl -sS -X PUT "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/progress" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
+    -H "X-Anon-Id: ${ANON_ID}" \
     -H "X-Resume-Token: ${RESUME_TOKEN}" \
     -d '{
       "seq":2,
@@ -290,7 +299,7 @@ fi
 log "GET progress"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload=''
-  embedded_headers=$(printf '{"X-Resume-Token":"%s"}' "$RESUME_TOKEN")
+  embedded_headers=$(printf '{"X-Resume-Token":"%s","X-Anon-Id":"%s"}' "$RESUME_TOKEN" "$ANON_ID")
   payload_file=$(mktemp)
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
@@ -302,6 +311,7 @@ else
   code="$(curl -sS -o "$ART_DIR/curl_progress_get.json" -w "%{http_code}" \
     "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/progress" \
     -H "Accept: application/json" \
+    -H "X-Anon-Id: ${ANON_ID}" \
     -H "X-Resume-Token: ${RESUME_TOKEN}" || true)"
   [[ "$code" == "200" ]] || { log "progress_get http_code=${code}"; cat "$ART_DIR/curl_progress_get.json" | tee -a "$LOG_FILE"; tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true; exit 1; }
   assert_json_file "$ART_DIR/curl_progress_get.json" "progress_get"
@@ -328,7 +338,7 @@ PY
 log "POST submit"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload='{"attempt_id":"'"${ATTEMPT_ID}"'","duration_ms":3600,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"4","answer":{"value":4}},{"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},{"question_id":"DEMO-TEXT-1","question_type":"open_text","question_index":2,"code":"TEXT","answer":{"text":"demo"}}]}'
-  embedded_headers='{}'
+  embedded_headers='{"X-Anon-Id":"'"${ANON_ID}"'"}'
   payload_file=$(mktemp)
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
@@ -377,7 +387,7 @@ PY
 log "POST submit (idempotent)"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload='{"attempt_id":"'"${ATTEMPT_ID}"'","duration_ms":3600,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"4","answer":{"value":4}},{"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},{"question_id":"DEMO-TEXT-1","question_type":"open_text","question_index":2,"code":"TEXT","answer":{"text":"demo"}}]}'
-  embedded_headers='{}'
+  embedded_headers='{"X-Anon-Id":"'"${ANON_ID}"'"}'
   payload_file=$(mktemp)
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"

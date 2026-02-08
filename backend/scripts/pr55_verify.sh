@@ -272,7 +272,7 @@ $payload = [
 echo json_encode($payload, JSON_UNESCAPED_UNICODE);
 ')"
 http_code="$(curl -sS -o "${ATTEMPT_START_JSON}" -w "%{http_code}" \
-  -X POST -H "Content-Type: application/json" -H "Accept: application/json" \
+  -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "X-Anon-Id: ${ANON_ID}" \
   --data "${ATTEMPT_START_BODY}" \
   "${API_BASE}/api/v0.3/attempts/start" || true)"
 if [[ "${http_code}" != "200" ]]; then
@@ -306,7 +306,7 @@ echo json_encode($payload, JSON_UNESCAPED_UNICODE);
 
 ATTEMPT_SUBMIT_JSON="${ART_DIR}/attempt_submit.json"
 http_code="$(curl -sS -o "${ATTEMPT_SUBMIT_JSON}" -w "%{http_code}" \
-  -X POST -H "Content-Type: application/json" -H "Accept: application/json" \
+  -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "X-Anon-Id: ${ANON_ID}" \
   --data @"${SUBMIT_PAYLOAD}" \
   "${API_BASE}/api/v0.3/attempts/submit" || true)"
 if [[ "${http_code}" != "200" ]]; then
