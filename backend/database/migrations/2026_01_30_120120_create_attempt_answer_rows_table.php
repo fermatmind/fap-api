@@ -156,7 +156,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('attempt_answer_rows');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('attempt_answer_rows');
     }
 
     private function ensureMysqlPartitions(): void

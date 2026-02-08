@@ -88,7 +88,8 @@ return new class extends Migration
             }
         }
 
-        Schema::dropIfExists('agent_feedback');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('agent_feedback');
     }
 
     private function indexExists(string $table, string $indexName): bool

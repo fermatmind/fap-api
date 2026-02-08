@@ -65,7 +65,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('archive_audits');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('archive_audits');
     }
 
     private function indexExists(string $table, string $indexName): bool

@@ -106,7 +106,8 @@ return new class extends Migration
             });
         }
 
-        Schema::dropIfExists('user_agent_settings');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('user_agent_settings');
     }
 
     private function indexExists(string $table, string $indexName): bool

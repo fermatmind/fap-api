@@ -160,7 +160,8 @@ return new class extends Migration
             }
         }
 
-        Schema::dropIfExists('agent_messages');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('agent_messages');
     }
 
     private function indexExists(string $table, string $indexName): bool

@@ -28,6 +28,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('organization_invites');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('organization_invites');
     }
 };

@@ -103,7 +103,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('scale_norms_versions');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('scale_norms_versions');
     }
 
     private function indexExists(string $table, string $indexName): bool

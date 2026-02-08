@@ -62,7 +62,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('admin_users');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('admin_users');
     }
 
     private function ensureUniqueIndex(string $tableName, array $columns, string $indexName, array $alternateNames = []): void

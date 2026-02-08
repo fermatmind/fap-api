@@ -99,7 +99,9 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('norms_table');
-        Schema::dropIfExists('norms_versions');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('norms_table');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('norms_versions');
     }
 };

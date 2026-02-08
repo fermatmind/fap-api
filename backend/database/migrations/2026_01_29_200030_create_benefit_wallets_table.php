@@ -74,7 +74,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('benefit_wallets');
+        // Prevent accidental data loss. This table might have existed before.
+        // Schema::dropIfExists('benefit_wallets');
     }
 
     private function indexExists(string $table, string $indexName): bool
