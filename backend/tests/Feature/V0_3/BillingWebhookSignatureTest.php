@@ -18,6 +18,7 @@ class BillingWebhookSignatureTest extends TestCase
 
         config([
             'services.billing.webhook_secret' => 'billing_secret',
+            'services.billing.webhook_secret_optional_envs' => ['local', 'testing', 'ci'],
             'services.billing.webhook_tolerance_seconds' => 300,
             'services.billing.allow_legacy_signature' => false,
         ]);
