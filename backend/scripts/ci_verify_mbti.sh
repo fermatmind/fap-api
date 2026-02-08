@@ -789,3 +789,10 @@ API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_D_anon_block_placeholder_click.sh"
 
 echo "[CI] events acceptance OK"
+
+echo "[CI] migration safety gates"
+php artisan test --filter MigrationSafetyTest
+php artisan test --filter MigrationRollbackSafetyTest
+php artisan test --filter MigrationsNoSilentCatchTest
+php artisan test --filter MigrationProtectedTablesNoDropTest
+echo "[CI] migration safety gates OK"
