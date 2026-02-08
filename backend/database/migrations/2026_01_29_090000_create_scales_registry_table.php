@@ -178,9 +178,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (Schema::hasTable('scales_registry')) {
-            Schema::drop('scales_registry');
-        }
+        // Safety: Down is a no-op to prevent accidental data loss.
+        // Schema::drop('scales_registry');
     }
 
     private function indexExists(string $table, string $indexName): bool

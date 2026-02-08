@@ -77,9 +77,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (Schema::hasTable(self::TABLE)) {
-            Schema::drop(self::TABLE);
-        }
+        // Safety: Down is a no-op to prevent accidental data loss.
+        // Schema::drop(self::TABLE);
     }
 
     /**

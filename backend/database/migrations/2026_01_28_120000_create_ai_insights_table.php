@@ -39,10 +39,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('ai_insights')) {
-            return;
-        }
-
-        Schema::drop('ai_insights');
+        // Safety: Down is a no-op to prevent accidental data loss.
+        // Schema::drop('ai_insights');
     }
 };
