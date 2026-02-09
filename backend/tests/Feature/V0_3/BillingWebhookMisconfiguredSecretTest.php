@@ -11,7 +11,7 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_missing_billing_secret_logs_critical_anchor_and_returns_404(): void
+    public function test_missing_billing_secret_returns_503_and_logs_anchor_without_sensitive_context(): void
     {
         /** @var Application $app */
         $app = $this->app;
@@ -21,14 +21,18 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
         config([
             'app.env' => 'production',
             'services.billing.webhook_secret' => '',
+            'services.billing.webhook_secret_optional_envs' => ['local', 'testing', 'ci'],
+            'services.billing.allow_legacy_signature' => false,
+            'services.billing.webhook_tolerance_seconds' => 300,
         ]);
 
         Log::shouldReceive('error')
             ->once()
             ->withArgs(function ($message, $context): bool {
-                $this->assertSame('CRITICAL: BILLING_WEBHOOK_SECRET_MISSING', $message);
+                $this->assertSame('billing_webhook_secret_missing', $message);
                 $this->assertIsArray($context);
                 $this->assertSame('billing', $context['provider'] ?? null);
+                $this->assertSame('production', $context['environment'] ?? null);
                 $this->assertSame('req-pr57-misconfigured', $context['request_id'] ?? null);
                 $this->assertArrayNotHasKey('body', $context);
                 $this->assertArrayNotHasKey('signature', $context);
@@ -37,23 +41,26 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
                 return true;
             });
 
-        $response = $this->postJson(
-            '/api/v0.3/webhooks/payment/billing',
-            [
-                'provider_event_id' => 'evt_pr57_missing_secret',
-                'order_no' => 'ord_pr57_missing_secret',
-            ],
-            [
-                'X-Billing-Timestamp' => (string) time(),
-                'X-Billing-Signature' => 'invalid',
-                'X-Request-Id' => 'req-pr57-misconfigured',
-            ]
-        );
+        $raw = json_encode([
+            'provider_event_id' => 'evt_pr57_missing_secret',
+            'order_no' => 'ord_pr57_missing_secret',
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (!is_string($raw)) {
+            self::fail('json_encode payload failed.');
+        }
 
-        $response->assertStatus(404);
-        $response->assertJsonStructure(['ok', 'error', 'message']);
+        $response = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_X_BILLING_TIMESTAMP' => (string) time(),
+            'HTTP_X_BILLING_SIGNATURE' => 'invalid',
+            'HTTP_X_REQUEST_ID' => 'req-pr57-misconfigured',
+        ], $raw);
+
+        $response->assertStatus(503);
         $response->assertJsonPath('ok', false);
-        $response->assertJsonPath('error', 'NOT_FOUND');
-        $response->assertJsonPath('message', 'not found.');
+        $response->assertJsonPath('error', 'SERVICE_UNAVAILABLE');
+        $response->assertJsonPath('message', 'service unavailable.');
+        $response->assertJsonPath('request_id', 'req-pr57-misconfigured');
     }
 }
