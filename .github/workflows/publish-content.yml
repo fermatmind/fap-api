@@ -60,6 +60,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: CAE gate (config + artifact safety)
+        run: bash backend/scripts/cae_gate.sh
+
       - name: Zip content pack
         shell: bash
         run: |
@@ -67,11 +70,20 @@ jobs:
           SRC="${{ inputs.file_path }}"
 
           [ -d "$SRC" ] || { echo "::error::file_path not found: $SRC"; exit 1; }
+          case "$SRC" in
+            content_packages/*) ;;
+            *) echo "::error::file_path must stay under content_packages/: $SRC"; exit 1 ;;
+          esac
 
           ZIP_PATH="$RUNNER_TEMP/content_pack.zip"
           rm -f "$ZIP_PATH"
 
-          (cd "$(dirname "$SRC")" && zip -r "$ZIP_PATH" "$(basename "$SRC")")
+          (cd "$(dirname "$SRC")" && zip -r "$ZIP_PATH" "$(basename "$SRC")" \
+            -x '*/.env' '*/.env.*' \
+               '*/storage/logs/*' \
+               '*/storage/framework/cache/*' \
+               '*/storage/framework/sessions/*' \
+               '*/storage/framework/views/*')
 
           ls -lh "$ZIP_PATH"
           echo "ZIP_PATH=$ZIP_PATH" >> "$GITHUB_ENV"
