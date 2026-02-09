@@ -521,6 +521,9 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
         'attempt_id' => $attemptId,
         'trigger_source' => 'credit_consume',
         'order_no' => null,
+        'user_id' => $userId !== null ? (string) $userId : null,
+        'anon_id' => $anonId,
+        'org_role' => $this->orgContext->role(),
     ]);
     if (!($snapshot['ok'] ?? false)) {
         $status = (int) ($snapshot['status'] ?? 500);
@@ -608,6 +611,7 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
             $id,
             $userId !== null ? (string) $userId : null,
             $anonId,
+            $this->orgContext->role(),
         );
 
         if (!($gate['ok'] ?? false)) {

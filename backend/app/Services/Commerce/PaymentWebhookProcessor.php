@@ -454,6 +454,9 @@ class PaymentWebhookProcessor
                             'attempt_id' => $attemptId,
                             'trigger_source' => 'payment',
                             'order_no' => $orderNo,
+                            'user_id' => $order->user_id ? (string) $order->user_id : null,
+                            'anon_id' => $order->anon_id ? (string) $order->anon_id : null,
+                            'org_role' => 'system',
                         ]);
                         if (!($snapshot['ok'] ?? false)) {
                             $this->markEventError(
