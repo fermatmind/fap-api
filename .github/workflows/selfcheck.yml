@@ -282,6 +282,12 @@ jobs:
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Composer validate & audit
+        working-directory: backend
+        run: |
+          composer validate --strict
+          composer audit --no-interaction
+
       - name: Prepare CI mysql (migrate + seed + sync-slugs)
         working-directory: backend
         run: bash scripts/ci/prepare_mysql.sh
