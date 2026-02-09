@@ -221,3 +221,75 @@ jobs:
       - name: Runtime validate report
         working-directory: backend
         run: php artisan fap:validate-report --attempt="$FAP_VALIDATE_ATTEMPT_ID"
+
+      - name: Smoke v0.3 (sqlite lane)
+        run: bash backend/scripts/ci_smoke_v0_3.sh
+
+  selfcheck-mysql:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+
+    defaults:
+      run:
+        shell: bash
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: fap_ci
+          MYSQL_ROOT_PASSWORD: root
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
+    env:
+      APP_ENV: ci
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: fap_ci
+      DB_USERNAME: root
+      DB_PASSWORD: root
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+          extensions: mbstring, dom, xml, curl, pdo_mysql
+
+      - name: Wait for mysql
+        run: |
+          for i in $(seq 1 60); do
+            (echo > /dev/tcp/127.0.0.1/3306) >/dev/null 2>&1 && exit 0
+            sleep 1
+          done
+          echo "mysql not ready in 60s"
+          exit 1
+
+      - name: Prepare Laravel cache dirs (for package:discover)
+        working-directory: backend
+        run: bash scripts/ci/prepare_laravel_cache_dirs.sh
+
+      - name: Install backend deps
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare CI mysql (migrate + seed + sync-slugs)
+        working-directory: backend
+        run: bash scripts/ci/prepare_mysql.sh
+
+      - name: Run tests with MySQL
+        working-directory: backend
+        run: php artisan test --configuration phpunit.mysql.xml
+
+      - name: Smoke v0.3 (mysql lane)
+        working-directory: backend
+        run: bash scripts/ci_smoke_v0_3.sh
