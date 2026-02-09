@@ -22,7 +22,7 @@ class ReportSnapshotStore
     }
 
     /**
-     * @param array $ctx {org_id:int, attempt_id:string, trigger_source:string, order_no?:string}
+     * @param array $ctx {org_id:int, attempt_id:string, trigger_source:string, order_no?:string, user_id?:string, anon_id?:string, org_role?:string}
      */
     public function createSnapshotForAttempt(array $ctx): array
     {
@@ -30,6 +30,9 @@ class ReportSnapshotStore
         $attemptId = trim((string) ($ctx['attempt_id'] ?? ''));
         $trigger = trim((string) ($ctx['trigger_source'] ?? ''));
         $orderNo = trim((string) ($ctx['order_no'] ?? ''));
+        $userId = $this->normalizeActor($ctx['user_id'] ?? null);
+        $anonId = $this->normalizeActor($ctx['anon_id'] ?? null);
+        $role = $this->normalizeRole($ctx['org_role'] ?? ($ctx['role'] ?? null), $userId, $anonId);
 
         if ($attemptId === '') {
             return $this->badRequest('ATTEMPT_REQUIRED', 'attempt_id is required.');
@@ -54,7 +57,7 @@ class ReportSnapshotStore
             ];
         }
 
-        $attempt = Attempt::where('id', $attemptId)->where('org_id', $orgId)->first();
+        $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
         if (!$attempt) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
@@ -126,6 +129,88 @@ class ReportSnapshotStore
             'snapshot' => $snapshot ? $this->normalizeSnapshot($snapshot) : null,
             'idempotent' => false,
         ];
+    }
+
+    private function ownedAttemptQuery(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        string $role
+    ): \Illuminate\Database\Eloquent\Builder {
+        $query = Attempt::query()
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId);
+
+        if ($this->isSystemRole($role) || $this->isPrivilegedRole($role)) {
+            return $query;
+        }
+
+        if ($this->isMemberLikeRole($role)) {
+            if ($userId === null) {
+                return $query->whereRaw('1=0');
+            }
+
+            return $query->where('user_id', $userId);
+        }
+
+        if ($userId === null && $anonId === null) {
+            return $query->whereRaw('1=0');
+        }
+
+        return $query->where(function ($q) use ($userId, $anonId) {
+            if ($userId !== null) {
+                $q->where('user_id', $userId);
+            }
+            if ($anonId !== null) {
+                if ($userId !== null) {
+                    $q->orWhere('anon_id', $anonId);
+                } else {
+                    $q->where('anon_id', $anonId);
+                }
+            }
+        });
+    }
+
+    private function normalizeActor(mixed $raw): ?string
+    {
+        if (!is_string($raw) && !is_numeric($raw)) {
+            return null;
+        }
+
+        $value = trim((string) $raw);
+        return $value !== '' ? $value : null;
+    }
+
+    private function normalizeRole(mixed $raw, ?string $userId, ?string $anonId): string
+    {
+        if (is_string($raw) || is_numeric($raw)) {
+            $candidate = strtolower(trim((string) $raw));
+            if ($candidate !== '') {
+                return $candidate;
+            }
+        }
+
+        if ($userId === null && $anonId === null) {
+            return 'system';
+        }
+
+        return 'public';
+    }
+
+    private function isSystemRole(string $role): bool
+    {
+        return $role === 'system';
+    }
+
+    private function isPrivilegedRole(string $role): bool
+    {
+        return in_array($role, ['owner', 'admin'], true);
+    }
+
+    private function isMemberLikeRole(string $role): bool
+    {
+        return in_array($role, ['member', 'viewer'], true);
     }
 
     private function buildReport(string $scaleCode, Attempt $attempt, Result $result): ?array

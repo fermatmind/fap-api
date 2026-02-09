@@ -35,7 +35,8 @@ class ReportGatekeeper
         int $orgId,
         string $attemptId,
         ?string $userId,
-        ?string $anonId
+        ?string $anonId,
+        ?string $role = null
     ): array {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
@@ -49,7 +50,7 @@ class ReportGatekeeper
             return $this->tableMissing('results');
         }
 
-        $attempt = Attempt::where('id', $attemptId)->where('org_id', $orgId)->first();
+        $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
         if (!$attempt) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
@@ -119,6 +120,62 @@ class ReportGatekeeper
         $teaser = $this->applyTeaser($report, $viewPolicy);
 
         return $this->responsePayload(true, 'free', $viewPolicy, $teaser, $paywall);
+    }
+
+    private function ownedAttemptQuery(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $role
+    ): \Illuminate\Database\Eloquent\Builder {
+        $query = Attempt::query()
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId);
+
+        $normalizedRole = $role !== null ? strtolower(trim($role)) : null;
+        $user = $userId !== null ? trim($userId) : '';
+        $anon = $anonId !== null ? trim($anonId) : '';
+
+        if ($normalizedRole !== null && $this->isPrivilegedRole($normalizedRole)) {
+            return $query;
+        }
+
+        if ($normalizedRole !== null && $this->isMemberLikeRole($normalizedRole)) {
+            if ($user === '') {
+                return $query->whereRaw('1=0');
+            }
+
+            return $query->where('user_id', $user);
+        }
+
+        if ($user === '' && $anon === '') {
+            // system/background callers may resolve by attempt_id + org_id only.
+            return $query;
+        }
+
+        return $query->where(function ($q) use ($user, $anon) {
+            if ($user !== '') {
+                $q->where('user_id', $user);
+            }
+            if ($anon !== '') {
+                if ($user !== '') {
+                    $q->orWhere('anon_id', $anon);
+                } else {
+                    $q->where('anon_id', $anon);
+                }
+            }
+        });
+    }
+
+    private function isPrivilegedRole(string $role): bool
+    {
+        return in_array($role, ['owner', 'admin'], true);
+    }
+
+    private function isMemberLikeRole(string $role): bool
+    {
+        return in_array($role, ['member', 'viewer'], true);
     }
 
     private function normalizeViewPolicy(mixed $raw): array

@@ -35,28 +35,29 @@ class AttemptProgressController extends Controller
         ]);
 
         $orgId = $this->orgContext->orgId();
-        $attempt = Attempt::where('id', $attempt_id)->where('org_id', $orgId)->first();
-        if (!$attempt) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'ATTEMPT_NOT_FOUND',
-                'message' => 'attempt not found.',
-            ], 404);
+        $userId = $this->orgContext->userId();
+        $token = trim((string) $request->header('X-Resume-Token', ''));
+
+        if ($token === '' && $userId === null) {
+            abort(404);
         }
 
-        $token = trim((string) $request->header('X-Resume-Token', ''));
-        $userId = $this->orgContext->userId();
-        if ($token === '' && $userId === null) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'RESUME_TOKEN_REQUIRED',
-                'message' => 'resume token required.',
-            ], 401);
+        $attemptQuery = Attempt::query()
+            ->where('id', $attempt_id)
+            ->where('org_id', $orgId);
+
+        if ($userId !== null) {
+            $attemptQuery->where('user_id', (string) $userId);
         }
+
+        $attempt = $attemptQuery->firstOrFail();
 
         $result = $this->progressService->saveProgress($attempt, $token !== '' ? $token : null, $userId, $payload);
         if (!($result['ok'] ?? false)) {
             $status = (int) ($result['status'] ?? 400);
+            if (in_array($status, [401, 403], true)) {
+                abort(404);
+            }
             return response()->json($result, $status);
         }
 
@@ -71,28 +72,29 @@ class AttemptProgressController extends Controller
     public function show(Request $request, string $attempt_id): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $attempt = Attempt::where('id', $attempt_id)->where('org_id', $orgId)->first();
-        if (!$attempt) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'ATTEMPT_NOT_FOUND',
-                'message' => 'attempt not found.',
-            ], 404);
+        $userId = $this->orgContext->userId();
+        $token = trim((string) $request->header('X-Resume-Token', ''));
+
+        if ($token === '' && $userId === null) {
+            abort(404);
         }
 
-        $token = trim((string) $request->header('X-Resume-Token', ''));
-        $userId = $this->orgContext->userId();
-        if ($token === '' && $userId === null) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'RESUME_TOKEN_REQUIRED',
-                'message' => 'resume token required.',
-            ], 401);
+        $attemptQuery = Attempt::query()
+            ->where('id', $attempt_id)
+            ->where('org_id', $orgId);
+
+        if ($userId !== null) {
+            $attemptQuery->where('user_id', (string) $userId);
         }
+
+        $attempt = $attemptQuery->firstOrFail();
 
         $result = $this->progressService->getProgress($attempt, $token !== '' ? $token : null, $userId);
         if (!($result['ok'] ?? false)) {
             $status = (int) ($result['status'] ?? 400);
+            if (in_array($status, [401, 403], true)) {
+                abort(404);
+            }
             return response()->json($result, $status);
         }
 

@@ -63,12 +63,21 @@ class AttemptProgressService
             ];
         }
 
+        if (($token === null || trim($token) === '') && $userId !== null && !$this->matchesAttemptOwner($attempt, $userId)) {
+            return [
+                'ok' => false,
+                'status' => 404,
+                'error' => 'DRAFT_NOT_FOUND',
+                'message' => 'draft not found.',
+            ];
+        }
+
         if (!$this->canAccessDraft($draft, $token, $userId)) {
             return [
                 'ok' => false,
-                'status' => 401,
-                'error' => 'RESUME_TOKEN_INVALID',
-                'message' => 'resume token invalid.',
+                'status' => 404,
+                'error' => 'DRAFT_NOT_FOUND',
+                'message' => 'draft not found.',
             ];
         }
 
@@ -152,12 +161,21 @@ class AttemptProgressService
             ];
         }
 
+        if (($token === null || trim($token) === '') && $userId !== null && !$this->matchesAttemptOwner($attempt, $userId)) {
+            return [
+                'ok' => false,
+                'status' => 404,
+                'error' => 'DRAFT_NOT_FOUND',
+                'message' => 'draft not found.',
+            ];
+        }
+
         if (!$this->canAccessDraft($draft, $token, $userId)) {
             return [
                 'ok' => false,
-                'status' => 401,
-                'error' => 'RESUME_TOKEN_INVALID',
-                'message' => 'resume token invalid.',
+                'status' => 404,
+                'error' => 'DRAFT_NOT_FOUND',
+                'message' => 'draft not found.',
             ];
         }
 
@@ -332,6 +350,16 @@ class AttemptProgressService
     {
         $salt = (string) config('app.key', '');
         return hash('sha256', $token . '|' . $salt);
+    }
+
+    private function matchesAttemptOwner(Attempt $attempt, int $userId): bool
+    {
+        $attemptOwnerId = trim((string) ($attempt->user_id ?? ''));
+        if ($attemptOwnerId === '') {
+            return false;
+        }
+
+        return $attemptOwnerId === (string) $userId;
     }
 
     private function canAccessDraft(array $draft, ?string $token, ?int $userId): bool
