@@ -10,20 +10,34 @@ return new class extends Migration
 {
     private const TABLE = 'payment_events';
     private const OLD_UNIQUE = 'payment_events_provider_event_id_unique';
-    private const NEW_UNIQUE = 'payment_events_provider_provider_event_unique';
+    private const NEW_UNIQUE = 'payment_events_provider_provider_event_id_unique';
+    private const LEGACY_UNIQUE = 'payment_events_provider_provider_event_unique';
 
     public function up(): void
     {
         if (!Schema::hasTable(self::TABLE)) {
             return;
         }
-        if (!Schema::hasColumn(self::TABLE, 'provider') || !Schema::hasColumn(self::TABLE, 'provider_event_id')) {
+
+        if (!Schema::hasColumn(self::TABLE, 'provider')) {
+            Schema::table(self::TABLE, function (Blueprint $table) {
+                $table->string('provider', 50)->default('billing');
+            });
+        }
+
+        if (!Schema::hasColumn(self::TABLE, 'provider_event_id')) {
             return;
         }
 
         if (SchemaIndex::indexExists(self::TABLE, self::OLD_UNIQUE)) {
             Schema::table(self::TABLE, function (Blueprint $table) {
                 $table->dropUnique(self::OLD_UNIQUE);
+            });
+        }
+
+        if (SchemaIndex::indexExists(self::TABLE, self::LEGACY_UNIQUE)) {
+            Schema::table(self::TABLE, function (Blueprint $table) {
+                $table->dropUnique(self::LEGACY_UNIQUE);
             });
         }
 
@@ -39,6 +53,7 @@ return new class extends Migration
         if (!Schema::hasTable(self::TABLE)) {
             return;
         }
+
         if (!Schema::hasColumn(self::TABLE, 'provider_event_id')) {
             return;
         }

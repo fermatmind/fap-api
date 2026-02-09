@@ -10,6 +10,8 @@ class PaymentService
 {
     public const BENEFIT_TYPE = 'report_unlock';
     public const BENEFIT_REF = 'mbti_report_v1';
+    private const PAYMENT_PROVIDER_INTERNAL = 'internal';
+    private const PAYMENT_PROVIDER_MOCK = 'mock';
 
     public function createOrder(array $data, array $actor): array
     {
@@ -78,8 +80,9 @@ class PaymentService
         $now = now();
 
         if (Schema::hasTable('payment_events')) {
+            $provider = self::PAYMENT_PROVIDER_INTERNAL;
             $providerEventId = 'dev_mark_paid:' . $orderId;
-            $existing = DB::table('payment_events')->where('provider_event_id', $providerEventId)->first();
+            $existing = $this->paymentEventQuery($provider, $providerEventId)->first();
 
             if (!$existing) {
                 $payload = [
@@ -90,7 +93,7 @@ class PaymentService
 
                 DB::table('payment_events')->insert([
                     'id' => (string) Str::uuid(),
-                    'provider' => 'internal',
+                    'provider' => $provider,
                     'provider_event_id' => $providerEventId,
                     'order_id' => $orderId,
                     'event_type' => 'mark_paid',
@@ -259,6 +262,7 @@ class PaymentService
             return $this->tableMissing('orders');
         }
 
+        $provider = self::PAYMENT_PROVIDER_MOCK;
         $providerEventId = $this->trimOrNull($payload['provider_event_id'] ?? null);
         if (!$providerEventId) {
             return $this->invalid('MISSING_EVENT_ID', 'provider_event_id missing.');
@@ -275,7 +279,15 @@ class PaymentService
         }
 
         $signatureOk = (bool) ($context['signature_ok'] ?? false);
-        return DB::transaction(function () use ($providerEventId, $providerOrderId, $eventType, $signatureOk, $payload, $context) {
+        return DB::transaction(function () use (
+            $provider,
+            $providerEventId,
+            $providerOrderId,
+            $eventType,
+            $signatureOk,
+            $payload,
+            $context
+        ) {
             $order = DB::table('orders')
                 ->where('provider_order_id', $providerOrderId)
                 ->lockForUpdate()
@@ -296,7 +308,7 @@ class PaymentService
 
             $eventRow = [
                 'id' => (string) Str::uuid(),
-                'provider' => 'mock',
+                'provider' => $provider,
                 'provider_event_id' => $providerEventId,
                 'order_id' => $orderId,
                 'event_type' => $eventType,
@@ -313,22 +325,27 @@ class PaymentService
 
             $inserted = DB::table('payment_events')->insertOrIgnore($eventRow);
             if ((int) $inserted === 0) {
+                $this->paymentEventQuery($provider, $providerEventId)->update([
+                    'handled_at' => $now,
+                    'handle_status' => 'already_processed',
+                    'updated_at' => $now,
+                ]);
+
                 return [
                     'ok' => true,
                     'idempotent' => true,
                     'signature_ok' => $signatureOk,
                     'provider_event_id' => $providerEventId,
+                    'handle_status' => 'already_processed',
                 ];
             }
 
             if (!$signatureOk) {
-                DB::table('payment_events')
-                    ->where('provider_event_id', $providerEventId)
-                    ->update([
-                        'handled_at' => $now,
-                        'handle_status' => 'signature_invalid',
-                        'updated_at' => $now,
-                    ]);
+                $this->paymentEventQuery($provider, $providerEventId)->update([
+                    'handled_at' => $now,
+                    'handle_status' => 'signature_invalid',
+                    'updated_at' => $now,
+                ]);
 
                 return [
                     'ok' => true,
@@ -380,13 +397,11 @@ class PaymentService
                 $handleStatus = 'event_type_ignored';
             }
 
-            DB::table('payment_events')
-                ->where('provider_event_id', $providerEventId)
-                ->update([
-                    'handled_at' => $now,
-                    'handle_status' => $handleStatus,
-                    'updated_at' => $now,
-                ]);
+            $this->paymentEventQuery($provider, $providerEventId)->update([
+                'handled_at' => $now,
+                'handle_status' => $handleStatus,
+                'updated_at' => $now,
+            ]);
 
             $order = DB::table('orders')->where('id', $orderId)->first();
 
@@ -399,6 +414,13 @@ class PaymentService
                 'order_status' => $order->status ?? null,
             ];
         });
+    }
+
+    private function paymentEventQuery(string $provider, string $providerEventId)
+    {
+        return DB::table('payment_events')
+            ->where('provider', $provider)
+            ->where('provider_event_id', $providerEventId);
     }
 
     private function orderBelongsToActor(object $order, ?string $userId, ?string $anonId): bool
