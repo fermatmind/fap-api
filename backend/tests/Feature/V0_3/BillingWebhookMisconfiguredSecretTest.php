@@ -11,7 +11,7 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_missing_billing_secret_returns_503_and_logs_anchor_without_sensitive_context(): void
+    public function test_missing_billing_secret_returns_500_and_logs_anchor_without_sensitive_context(): void
     {
         /** @var Application $app */
         $app = $this->app;
@@ -29,7 +29,7 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
         Log::shouldReceive('error')
             ->once()
             ->withArgs(function ($message, $context): bool {
-                $this->assertSame('billing_webhook_secret_missing', $message);
+                $this->assertSame('CRITICAL: BILLING_WEBHOOK_SECRET_MISSING', $message);
                 $this->assertIsArray($context);
                 $this->assertSame('billing', $context['provider'] ?? null);
                 $this->assertSame('production', $context['environment'] ?? null);
@@ -57,10 +57,10 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
             'HTTP_X_REQUEST_ID' => 'req-pr57-misconfigured',
         ], $raw);
 
-        $response->assertStatus(503);
+        $response->assertStatus(500);
         $response->assertJsonPath('ok', false);
-        $response->assertJsonPath('error', 'SERVICE_UNAVAILABLE');
-        $response->assertJsonPath('message', 'service unavailable.');
+        $response->assertJsonPath('error', 'INTERNAL_SERVER_ERROR');
+        $response->assertJsonPath('message', 'internal server error.');
         $response->assertJsonPath('request_id', 'req-pr57-misconfigured');
     }
 }

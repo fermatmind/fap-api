@@ -16,7 +16,6 @@ use App\Http\Controllers\API\V0_2\IdentityController;
 use App\Http\Controllers\API\V0_2\MemoryController;
 use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\NormsController;
-use App\Http\Controllers\API\V0_2\PaymentsController;
 use App\Http\Controllers\API\V0_2\PsychometricsController;
 use App\Http\Controllers\API\V0_2\ShareController;
 use App\Http\Controllers\API\V0_2\ValidityFeedbackController;
@@ -155,9 +154,6 @@ Route::prefix("v0.2")->middleware([
     Route::get("/norms/percentile", [NormsController::class, "percentile"]);
 
     Route::middleware('throttle:api_webhook')->group(function () {
-        // Payments webhook (mock, public)
-        Route::post("/payments/webhook/mock", [PaymentsController::class, "webhookMock"]);
-
         // =========================================================
         // Integrations (mock OAuth + ingestion + replay)
         // =========================================================
@@ -233,13 +229,6 @@ Route::prefix("v0.2")->middleware([
         Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
         Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
 
-        // Payments (v0.2)
-        Route::prefix("payments")->group(function () {
-            Route::post("/orders", [PaymentsController::class, "createOrder"]);
-            Route::post("/orders/{id}/mark_paid", [PaymentsController::class, "markPaid"]);
-            Route::post("/orders/{id}/fulfill", [PaymentsController::class, "fulfill"]);
-            Route::get("/me/benefits", [PaymentsController::class, "meBenefits"]);
-        });
     });
 });
 
@@ -253,7 +242,6 @@ Route::prefix("v0.3")->middleware([
         "/webhooks/payment/{provider}",
         [PaymentWebhookController::class, "handle"]
     )->middleware('throttle:api_webhook')
-        ->whereIn('provider', ['stripe', 'billing', 'stub'])
         ->name('v0.3.webhooks.payment');
 
     Route::middleware(\App\Http\Middleware\ResolveOrgContext::class)->group(function () {

@@ -25,6 +25,15 @@ class PaymentWebhookController extends Controller
     public function handle(Request $request, string $provider): JsonResponse
     {
         $provider = strtolower(trim($provider));
+
+        if (!in_array($provider, ['stripe', 'billing', 'stub'], true)) {
+            Log::warning('PAYMENT_WEBHOOK_PROVIDER_UNSUPPORTED', [
+                'provider' => $provider,
+                'request_id' => $this->resolveRequestId($request),
+            ]);
+            return $this->notFoundResponse();
+        }
+
         $rawBody = (string) $request->getContent();
 
         // ✅ 关键修复：CI 跑 stub webhook；production 才隐藏 stub
@@ -32,32 +41,29 @@ class PaymentWebhookController extends Controller
             return $this->notFoundResponse();
         }
 
-        $signatureOk = true;
         if ($provider === 'billing') {
             $misconfigured = $this->billingSecretMisconfiguredResponse($request, $provider);
             if ($misconfigured instanceof JsonResponse) {
                 return $misconfigured;
             }
-
-            $signatureOk = $this->verifyBillingSignature($request, $rawBody);
-            if (!$signatureOk) {
-                return $this->notFoundResponse();
-            }
-        }
-
-        if ($provider === 'stripe') {
-            $signatureOk = $this->verifyStripeSignature($request, $rawBody);
-            if (!$signatureOk) {
-                return $this->notFoundResponse();
-            }
         }
 
         $payload = json_decode($rawBody, true);
         if (!is_array($payload)) {
-            $payload = $request->all();
+            return $this->notFoundResponse();
         }
-        if (!is_array($payload)) {
-            $payload = [];
+
+        $signatureOk = true;
+        if ($provider === 'billing') {
+            $signatureOk = $this->verifyBillingSignature($request, $rawBody);
+            if (!$signatureOk) {
+                return $this->notFoundResponse();
+            }
+        } elseif ($provider === 'stripe') {
+            $signatureOk = $this->verifyStripeSignature($request, $rawBody);
+            if (!$signatureOk) {
+                return $this->notFoundResponse();
+            }
         }
 
         $ctx = $this->resolveContext($request, $payload);
@@ -161,50 +167,56 @@ class PaymentWebhookController extends Controller
             return false;
         }
 
-        $signature = trim((string) $request->header('X-Billing-Signature', ''));
-        if ($signature === '') {
-            $signature = trim((string) $request->header('X-Webhook-Signature', ''));
-        }
-        if ($signature === '') {
+        $requestId = $this->resolveRequestId($request);
+
+        $provided = trim((string) $request->header('X-Billing-Signature', ''));
+        if ($provided === '') {
+            Log::warning('BILLING_WEBHOOK_SIG_MISSING', [
+                'provider' => 'billing',
+                'request_id' => $requestId,
+            ]);
             return false;
         }
 
-        $allowLegacy = (bool) config('services.billing.allow_legacy_signature', false);
-
-        $timestamp = $this->extractWebhookTimestampFromHeaders($request, [
-            'X-Billing-Timestamp',
-            'X-Webhook-Timestamp',
-            'X-Timestamp',
-        ]);
-
-        if ($timestamp === null) {
-            if (!$allowLegacy) {
-                return false;
-            }
-
-            $legacyExpected = hash_hmac('sha256', $rawBody, $secret);
-            return hash_equals($legacyExpected, $signature);
+        $rawTs = trim((string) $request->header('X-Billing-Timestamp', ''));
+        if ($rawTs === '' || !preg_match('/^\d{10,13}$/', $rawTs)) {
+            Log::warning('BILLING_WEBHOOK_TS_MISSING', [
+                'provider' => 'billing',
+                'request_id' => $requestId,
+            ]);
+            return false;
         }
 
-        $tolerance = (int) (config('services.billing.webhook_tolerance_seconds', config('services.billing.webhook_tolerance', 300)) ?? 300);
+        $timestamp = (int) $rawTs;
+        if (strlen($rawTs) === 13) {
+            $timestamp = (int) floor($timestamp / 1000);
+        }
+
+        $tolerance = (int) (config('services.billing.webhook_tolerance_seconds', 300) ?? 300);
         if ($tolerance <= 0) {
             $tolerance = 300;
         }
-        if (abs(time() - $timestamp) > $tolerance) {
+        $drift = abs(now()->timestamp - $timestamp);
+        if ($drift > $tolerance) {
+            Log::warning('BILLING_WEBHOOK_TS_OUT_OF_WINDOW', [
+                'provider' => 'billing',
+                'request_id' => $requestId,
+                'drift_seconds' => $drift,
+                'tolerance_seconds' => $tolerance,
+            ]);
             return false;
         }
 
         $expected = hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);
-        if (hash_equals($expected, $signature)) {
-            return true;
+        if (!hash_equals($expected, $provided)) {
+            Log::warning('BILLING_WEBHOOK_SIG_MISMATCH', [
+                'provider' => 'billing',
+                'request_id' => $requestId,
+            ]);
+            return false;
         }
 
-        if ($allowLegacy) {
-            $legacyExpected = hash_hmac('sha256', $rawBody, $secret);
-            return hash_equals($legacyExpected, $signature);
-        }
-
-        return false;
+        return true;
     }
 
     private function verifyStripeSignature(Request $request, ?string $rawBody = null): bool
@@ -295,44 +307,19 @@ class PaymentWebhookController extends Controller
             return null;
         }
 
-        $currentEnv = strtolower((string) config('app.env', app()->environment()));
-        if (in_array($currentEnv, $this->billingSecretOptionalEnvs(), true)) {
-            return null;
-        }
-
         $requestId = $this->resolveRequestId($request);
-        Log::error('billing_webhook_secret_missing', [
+        Log::error('CRITICAL: BILLING_WEBHOOK_SECRET_MISSING', [
             'request_id' => $requestId,
             'provider' => $provider,
-            'environment' => $currentEnv,
+            'environment' => strtolower((string) config('app.env', app()->environment())),
         ]);
 
         return response()->json([
             'ok' => false,
-            'error' => 'SERVICE_UNAVAILABLE',
-            'message' => 'service unavailable.',
+            'error' => 'INTERNAL_SERVER_ERROR',
+            'message' => 'internal server error.',
             'request_id' => $requestId,
-        ], 503);
-    }
-
-    private function billingSecretOptionalEnvs(): array
-    {
-        $configured = config('services.billing.webhook_secret_optional_envs', ['local', 'testing', 'ci']);
-
-        if (is_string($configured)) {
-            $configured = explode(',', $configured);
-        }
-
-        if (!is_array($configured)) {
-            return ['local', 'testing', 'ci'];
-        }
-
-        $optionalEnvs = array_values(array_filter(array_map(
-            static fn ($value): string => strtolower(trim((string) $value)),
-            $configured
-        ), static fn (string $value): bool => $value !== ''));
-
-        return $optionalEnvs === [] ? ['local', 'testing', 'ci'] : $optionalEnvs;
+        ], 500);
     }
 
     private function resolveBillingWebhookSecret(): string
