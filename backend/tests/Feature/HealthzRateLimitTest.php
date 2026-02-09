@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Cache\RateLimiter;
+use Illuminate\Http\Request;
 use Tests\TestCase;
 
 class HealthzRateLimitTest extends TestCase
@@ -20,12 +22,19 @@ class HealthzRateLimitTest extends TestCase
 
     public function test_public_rate_limit_returns_retry_after(): void
     {
-        config(['fap.rate_limits.api_public_per_minute' => 2]);
+        config([
+            'fap.rate_limits.api_public_per_minute' => 2,
+            'fap.rate_limits.bypass_in_test_env' => false,
+        ]);
 
-        $this->getJson('/api/v0.2/health')->assertStatus(200);
-        $this->getJson('/api/v0.2/health')->assertStatus(200);
+        $server = ['REMOTE_ADDR' => '198.51.100.23'];
+        $ip = Request::create('/api/v0.2/health', 'GET', [], [], [], $server)->ip();
+        app(RateLimiter::class)->clear(md5('api_public' . 'ip:' . $ip));
 
-        $response = $this->getJson('/api/v0.2/health');
+        $this->withServerVariables($server)->getJson('/api/v0.2/health')->assertStatus(200);
+        $this->withServerVariables($server)->getJson('/api/v0.2/health')->assertStatus(200);
+
+        $response = $this->withServerVariables($server)->getJson('/api/v0.2/health');
 
         $response->assertStatus(429);
         $response->assertJsonStructure([

@@ -45,6 +45,7 @@ return [
         'api_auth_per_minute' => (int) env('FAP_RATE_LIMIT_AUTH_PER_MINUTE', 30),
         'api_attempt_submit_per_minute' => (int) env('FAP_RATE_LIMIT_ATTEMPT_SUBMIT_PER_MINUTE', 20),
         'api_webhook_per_minute' => (int) env('FAP_RATE_LIMIT_WEBHOOK_PER_MINUTE', 60),
+        'bypass_in_test_env' => (bool) env('FAP_RATE_LIMIT_BYPASS_IN_TEST_ENV', true),
     ],
 
     'events' => [

@@ -922,7 +922,7 @@ public function loadReportOverrides(): array
         if ($doc !== null) return $doc;
 
         // 🔥 爆炸验证 1：禁止“扫描所有 assets”兜底
-        if ((bool) env('FAP_FORBID_STORE_ASSET_SCAN', false)) {
+        if ($this->isRuntimeEnvFlagEnabled('FAP_FORBID_STORE_ASSET_SCAN')) {
             throw new \RuntimeException("STORE_ASSET_SCAN_FORBIDDEN: asset={$assetKey} file={$basename}");
         }
 
@@ -932,7 +932,7 @@ public function loadReportOverrides(): array
 
         // 🔥 爆炸验证 2：禁止 legacy ctx loader 兜底
         if (is_callable($this->ctx['loadReportAssetJson'] ?? null) && $this->legacyDir !== '') {
-            if ((bool) env('FAP_FORBID_LEGACY_CTX_LOADER', false)) {
+            if ($this->isRuntimeEnvFlagEnabled('FAP_FORBID_LEGACY_CTX_LOADER')) {
                 throw new \RuntimeException("LEGACY_CTX_LOADER_FORBIDDEN: asset={$assetKey} file={$basename}");
             }
 
@@ -946,6 +946,25 @@ public function loadReportOverrides(): array
 
         Log::warning('[STORE] json_not_found', ['asset' => $assetKey, 'file' => $basename]);
         return [];
+    }
+
+    private function isRuntimeEnvFlagEnabled(string $name): bool
+    {
+        $value = getenv($name);
+        if ($value === false) {
+            $value = $_ENV[$name] ?? $_SERVER[$name] ?? null;
+        }
+        if ($value === null) {
+            $value = env($name, false);
+        }
+
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        $normalized = strtolower(trim((string) $value));
+
+        return in_array($normalized, ['1', 'true', 'yes', 'on'], true);
     }
 
     private function loadJsonFromChainByAssetKeyAndBasename(string $assetKey, string $basename): ?array

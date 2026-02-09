@@ -258,12 +258,18 @@ class AppServiceProvider extends ServiceProvider
             };
         };
 
-        // Disable throttles in test-like environments to prevent cross-test 429 flakiness.
-        // GitHub Actions uses APP_ENV=ci; local PHPUnit commonly uses APP_ENV=testing.
-        $bypassRateLimits = $this->app->environment(['testing', 'ci']);
+        // Disable throttles in test-like environments by default to prevent cross-test 429 flakiness.
+        // Dedicated rate-limit tests can opt in by setting fap.rate_limits.bypass_in_test_env=false.
+        $shouldBypassRateLimits = function (): bool {
+            if (!$this->app->environment(['testing', 'ci'])) {
+                return false;
+            }
 
-        RateLimiter::for('api_public', function (Request $request) use ($response, $bypassRateLimits) {
-            if ($bypassRateLimits) {
+            return (bool) config('fap.rate_limits.bypass_in_test_env', true);
+        };
+
+        RateLimiter::for('api_public', function (Request $request) use ($response, $shouldBypassRateLimits) {
+            if ($shouldBypassRateLimits()) {
                 return Limit::none();
             }
 
@@ -275,8 +281,8 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_PUBLIC', 'Too many requests. Please retry later.'));
         });
 
-        RateLimiter::for('api_auth', function (Request $request) use ($response, $bypassRateLimits) {
-            if ($bypassRateLimits) {
+        RateLimiter::for('api_auth', function (Request $request) use ($response, $shouldBypassRateLimits) {
+            if ($shouldBypassRateLimits()) {
                 return Limit::none();
             }
 
@@ -288,8 +294,8 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_AUTH', 'Too many auth requests. Please retry later.'));
         });
 
-        RateLimiter::for('api_attempt_submit', function (Request $request) use ($response, $bypassRateLimits) {
-            if ($bypassRateLimits) {
+        RateLimiter::for('api_attempt_submit', function (Request $request) use ($response, $shouldBypassRateLimits) {
+            if ($shouldBypassRateLimits()) {
                 return Limit::none();
             }
 
@@ -308,8 +314,8 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_ATTEMPT_SUBMIT', 'Too many attempt submissions. Please retry later.'));
         });
 
-        RateLimiter::for('api_webhook', function (Request $request) use ($response, $bypassRateLimits) {
-            if ($bypassRateLimits) {
+        RateLimiter::for('api_webhook', function (Request $request) use ($response, $shouldBypassRateLimits) {
+            if ($shouldBypassRateLimits()) {
                 return Limit::none();
             }
 

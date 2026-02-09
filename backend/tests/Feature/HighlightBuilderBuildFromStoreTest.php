@@ -213,6 +213,8 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         $this->breakOneAssetPathInManifest($dstPackDir . DIRECTORY_SEPARATOR . 'manifest.json');
 
         config()->set('content.packs_root', $tmpRoot);
+        config()->set('content_packs.root', $tmpRoot);
+        config()->set('content_packs.default_dir_version', $version);
         $this->app->forgetInstance(ContentStore::class);
         $this->app->forgetInstance(ContentPackResolver::class);
 
@@ -318,17 +320,52 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
             throw new \RuntimeException("manifest.assets.highlights is not array/list or object/map: {$manifestPath}");
         }
 
+        $targetBasename = 'report_highlights_templates.json';
+        $brokeTarget = false;
+
         if (array_is_list($h)) {
             if (empty($h)) {
                 throw new \RuntimeException("manifest.assets.highlights list is empty: {$manifestPath}");
             }
-            $h[0] = $this->breakAssetEntry($h[0]);
+
+            foreach ($h as $i => $entry) {
+                if (!$this->assetEntryMatchesBasename($entry, $targetBasename)) {
+                    continue;
+                }
+
+                $h[$i] = $this->breakAssetEntry($entry);
+                $brokeTarget = true;
+                break;
+            }
+
+            if (!$brokeTarget) {
+                $h[0] = $this->breakAssetEntry($h[0]);
+                $brokeTarget = true;
+            }
         } else {
             $k = array_key_first($h);
             if ($k === null) {
                 throw new \RuntimeException("manifest.assets.highlights map is empty: {$manifestPath}");
             }
-            $h[$k] = $this->breakAssetEntry($h[$k]);
+
+            foreach ($h as $key => $entry) {
+                if (!$this->assetEntryMatchesBasename($entry, $targetBasename)) {
+                    continue;
+                }
+
+                $h[$key] = $this->breakAssetEntry($entry);
+                $brokeTarget = true;
+                break;
+            }
+
+            if (!$brokeTarget) {
+                $h[$k] = $this->breakAssetEntry($h[$k]);
+                $brokeTarget = true;
+            }
+        }
+
+        if (!$brokeTarget) {
+            throw new \RuntimeException("failed to break highlights asset entry: {$manifestPath}");
         }
 
         $json['assets']['highlights'] = $h;
@@ -371,5 +408,34 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         }
 
         return $entry;
+    }
+
+    private function assetEntryMatchesBasename(mixed $entry, string $basename): bool
+    {
+        if (is_string($entry)) {
+            return basename($entry) === $basename;
+        }
+
+        if (!is_array($entry)) {
+            return false;
+        }
+
+        foreach (['path', 'file'] as $key) {
+            if (!array_key_exists($key, $entry) || !is_string($entry[$key])) {
+                continue;
+            }
+
+            if (basename($entry[$key]) === $basename) {
+                return true;
+            }
+        }
+
+        foreach ($entry as $value) {
+            if ($this->assetEntryMatchesBasename($value, $basename)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
