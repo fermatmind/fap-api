@@ -74,7 +74,7 @@ class HighIdorOwnership404Test extends TestCase
             'amount_cents' => 1990,
             'currency' => 'USD',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => $now,
@@ -180,4 +180,3 @@ class HighIdorOwnership404Test extends TestCase
             ->assertStatus(404);
     }
 }
-

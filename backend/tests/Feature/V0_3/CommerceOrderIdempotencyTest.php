@@ -64,7 +64,7 @@ class CommerceOrderIdempotencyTest extends TestCase
         $payload = [
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
-            'provider' => 'stub',
+            'provider' => 'billing',
         ];
 
         $idempotencyKey = 'idem_order_1';
@@ -92,7 +92,7 @@ class CommerceOrderIdempotencyTest extends TestCase
             1,
             DB::table('orders')
                 ->where('org_id', $orgId)
-                ->where('provider', 'stub')
+                ->where('provider', 'billing')
                 ->where('idempotency_key', $idempotencyKey)
                 ->count()
         );
@@ -112,14 +112,14 @@ class CommerceOrderIdempotencyTest extends TestCase
         ];
         $idempotencyKey = 'idem_scope_provider_1';
 
-        $stubResp = $this->postJson('/api/v0.3/orders/stub', $payload, [
+        $stripeResp = $this->postJson('/api/v0.3/orders/stripe', $payload, [
             'X-Org-Id' => (string) $orgId,
             'Authorization' => 'Bearer ' . $token,
             'Idempotency-Key' => $idempotencyKey,
         ]);
-        $stubResp->assertStatus(200);
-        $stubOrderNo = (string) $stubResp->json('order_no');
-        $this->assertNotSame('', $stubOrderNo);
+        $stripeResp->assertStatus(200);
+        $stripeOrderNo = (string) $stripeResp->json('order_no');
+        $this->assertNotSame('', $stripeOrderNo);
 
         $billingResp = $this->postJson('/api/v0.3/orders/billing', $payload, [
             'X-Org-Id' => (string) $orgId,
@@ -129,7 +129,7 @@ class CommerceOrderIdempotencyTest extends TestCase
         $billingResp->assertStatus(200);
         $billingOrderNo = (string) $billingResp->json('order_no');
         $this->assertNotSame('', $billingOrderNo);
-        $this->assertNotSame($stubOrderNo, $billingOrderNo);
+        $this->assertNotSame($stripeOrderNo, $billingOrderNo);
 
         $billingSecondResp = $this->postJson('/api/v0.3/orders/billing', $payload, [
             'X-Org-Id' => (string) $orgId,
@@ -143,7 +143,7 @@ class CommerceOrderIdempotencyTest extends TestCase
             1,
             DB::table('orders')
                 ->where('org_id', $orgId)
-                ->where('provider', 'stub')
+                ->where('provider', 'stripe')
                 ->where('idempotency_key', $idempotencyKey)
                 ->count()
         );
@@ -177,7 +177,7 @@ class CommerceOrderIdempotencyTest extends TestCase
             'amount_cents' => 4990,
             'currency' => 'USD',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
@@ -203,5 +203,39 @@ class CommerceOrderIdempotencyTest extends TestCase
             'ok' => false,
             'error' => 'ORDER_NOT_FOUND',
         ]);
+    }
+
+    public function test_stub_order_entrypoints_are_rejected(): void
+    {
+        (new ScaleRegistrySeeder())->run();
+        (new Pr19CommerceSeeder())->run();
+
+        [$orgId, $userId, $token] = $this->seedOrgWithToken(9301, 9301);
+        $this->assertIsInt($userId);
+
+        $payload = [
+            'sku' => 'MBTI_CREDIT',
+            'quantity' => 1,
+            'provider' => 'stub',
+        ];
+
+        $bodyProvider = $this->postJson('/api/v0.3/orders', $payload, [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $bodyProvider->assertStatus(404);
+        $bodyProvider->assertJson([
+            'ok' => false,
+            'error' => 'NOT_FOUND',
+        ]);
+
+        $routeProvider = $this->postJson('/api/v0.3/orders/stub', [
+            'sku' => 'MBTI_CREDIT',
+            'quantity' => 1,
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+        $routeProvider->assertStatus(404);
     }
 }

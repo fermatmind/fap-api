@@ -10,7 +10,7 @@ class PaymentWebhookRouteWiringTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_payment_webhook_route_points_to_controller_and_stub_post_is_not_500(): void
+    public function test_payment_webhook_route_points_to_controller_and_unsupported_provider_returns_404(): void
     {
         $this->assertTrue(class_exists(PaymentWebhookController::class));
 
@@ -20,6 +20,6 @@ class PaymentWebhookRouteWiringTest extends TestCase
 
         $response = $this->postJson('/api/v0.3/webhooks/payment/stub', []);
         $this->assertNotSame(500, $response->getStatusCode());
-        $response->assertStatus(400);
+        $response->assertStatus(404);
     }
 }

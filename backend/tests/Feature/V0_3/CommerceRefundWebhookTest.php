@@ -9,11 +9,13 @@ use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
 
 class CommerceRefundWebhookTest extends TestCase
 {
     use RefreshDatabase;
+    use SignedBillingWebhook;
 
     private function seedScales(): void
     {
@@ -170,7 +172,7 @@ class CommerceRefundWebhookTest extends TestCase
             'amount_cents' => 990,
             'currency' => 'USD',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
@@ -194,7 +196,7 @@ class CommerceRefundWebhookTest extends TestCase
             'currency' => 'USD',
         ];
 
-        $paid = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload, [
+        $paid = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => (string) $orgId,
             'Authorization' => 'Bearer ' . $token,
         ]);
@@ -219,7 +221,7 @@ class CommerceRefundWebhookTest extends TestCase
             'refund_reason' => 'requested_by_customer',
         ];
 
-        $refund = $this->postJson('/api/v0.3/webhooks/payment/stub', $refundPayload, [
+        $refund = $this->postSignedBillingWebhook($refundPayload, [
             'X-Org-Id' => (string) $orgId,
             'Authorization' => 'Bearer ' . $token,
         ]);

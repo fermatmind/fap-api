@@ -40,7 +40,7 @@ final class PaymentWebhookProcessorLockTest extends TestCase
 
         Cache::shouldReceive('lock')
             ->once()
-            ->with('webhook_pay:stub:evt_lock', 10)
+            ->with('webhook_pay:billing:evt_lock', 10)
             ->andReturn($lock);
 
         $processor = new PaymentWebhookProcessor(
@@ -52,7 +52,7 @@ final class PaymentWebhookProcessorLockTest extends TestCase
             new EventRecorder(new ExperimentAssigner()),
         );
 
-        $result = $processor->handle('stub', [
+        $result = $processor->handle('billing', [
             'provider_event_id' => 'evt_lock',
             'order_no' => 'ORD-LOCK',
         ]);

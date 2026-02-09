@@ -32,7 +32,7 @@ final class PaymentWebhookLockBusyTest extends TestCase
 
         Cache::shouldReceive('lock')
             ->once()
-            ->with('webhook_pay:stub:evt_busy', 10)
+            ->with('webhook_pay:billing:evt_busy', 10)
             ->andThrow(new LockTimeoutException('lock timeout'));
 
         $processor = new PaymentWebhookProcessor(
@@ -44,7 +44,7 @@ final class PaymentWebhookLockBusyTest extends TestCase
             new EventRecorder(new ExperimentAssigner()),
         );
 
-        $result = $processor->handle('stub', [
+        $result = $processor->handle('billing', [
             'provider_event_id' => 'evt_busy',
             'order_no' => 'ORD-BUSY',
         ], 0);

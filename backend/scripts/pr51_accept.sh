@@ -81,7 +81,7 @@ ATTEMPT_ID="$(cat "${ART_DIR}/attempt_id.txt" 2>/dev/null || true)"
 ANON_ID="$(cat "${ART_DIR}/anon_id.txt" 2>/dev/null || true)"
 QUESTION_COUNT="$(cat "${ART_DIR}/question_count.txt" 2>/dev/null || true)"
 DEFAULT_PACK_ID="$(cat "${ART_DIR}/config_default_pack_id.txt" 2>/dev/null || true)"
-STUB_ORDER_NO="$(cat "${ART_DIR}/order_stub_no.txt" 2>/dev/null || true)"
+STRIPE_ORDER_NO="$(cat "${ART_DIR}/order_stripe_no.txt" 2>/dev/null || true)"
 BILLING_ORDER_NO="$(cat "${ART_DIR}/order_billing_no.txt" 2>/dev/null || true)"
 
 cat > "${ART_DIR}/summary.txt" <<TXT
@@ -96,11 +96,11 @@ PR51 Acceptance Summary
   - anon_id: ${ANON_ID}
   - question_count(dynamic): ${QUESTION_COUNT}
   - default_pack_id: ${DEFAULT_PACK_ID}
-  - order_stub: ${STUB_ORDER_NO}
+  - order_stripe: ${STRIPE_ORDER_NO}
   - order_billing: ${BILLING_ORDER_NO}
 - smoke_urls:
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/scales/MBTI/questions
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/orders/stub
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/orders/stripe
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/orders/billing
 - schema_changes:
   - add unique index: orders(org_id, provider, idempotency_key)

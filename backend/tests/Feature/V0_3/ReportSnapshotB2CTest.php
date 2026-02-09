@@ -9,11 +9,13 @@ use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
 
 class ReportSnapshotB2CTest extends TestCase
 {
     use RefreshDatabase;
+    use SignedBillingWebhook;
 
     private function seedScales(): void
     {
@@ -170,7 +172,7 @@ class ReportSnapshotB2CTest extends TestCase
             'amount_cents' => 990,
             'currency' => 'USD',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
@@ -194,7 +196,7 @@ class ReportSnapshotB2CTest extends TestCase
             'currency' => 'USD',
         ];
 
-        $webhook = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload, [
+        $webhook = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => (string) $orgId,
             'Authorization' => 'Bearer ' . $token,
         ]);

@@ -10,7 +10,8 @@ export PAGER=cat
 export GIT_PAGER=cat
 export TERM=dumb
 export XDEBUG_MODE=off
-export FAP_PAYMENT_FALLBACK_PROVIDER=stub
+export FAP_PAYMENT_FALLBACK_PROVIDER=billing
+export BILLING_WEBHOOK_SECRET="${BILLING_WEBHOOK_SECRET:-billing_secret}"
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BACKEND_DIR="${REPO_DIR}/backend"
@@ -44,6 +45,27 @@ wait_health() {
     sleep 0.2
   done
   return 1
+}
+
+billing_sig() {
+  local ts="$1"
+  local body="$2"
+  printf "%s.%s" "$ts" "$body" | openssl dgst -sha256 -hmac "$BILLING_WEBHOOK_SECRET" | awk '{print $2}'
+}
+
+post_billing_webhook() {
+  local body="$1"
+  local out="$2"
+  local ts
+  ts="$(date +%s)"
+  local sig
+  sig="$(billing_sig "$ts" "$body")"
+  curl -sS -L -o "$out" -w "%{http_code}" \
+    -X POST "${API}/api/v0.3/webhooks/payment/billing" \
+    -H "Content-Type: application/json" -H "Accept: application/json" \
+    -H "X-Billing-Timestamp: ${ts}" \
+    -H "X-Billing-Signature: ${sig}" \
+    --data-binary "$body"
 }
 
 cleanup() {
@@ -320,7 +342,7 @@ http_code=$(curl -sS -L -o "${ORDER_JSON}" -w "%{http_code}" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "X-Org-Id: ${ORG_ID}" \
   -H "Idempotency-Key: ${IDEMPOTENCY_KEY}" \
-  -d '{"sku":"MBTI_REPORT_FULL_199","quantity":1,"provider":"stub","target_attempt_id":"'"${ATTEMPT_ID}"'"}' || true)
+  -d '{"sku":"MBTI_REPORT_FULL_199","quantity":1,"provider":"billing","target_attempt_id":"'"${ATTEMPT_ID}"'"}' || true)
 [[ "${http_code}" == "200" ]] || fail "create order failed (http=${http_code})"
 ORDER_NO="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo $j["order_no"] ?? "";' "${ORDER_JSON}")"
 [[ -n "${ORDER_NO}" ]] || fail "missing order_no"
@@ -333,18 +355,14 @@ http_code=$(curl -sS -L -o "${ORDER_JSON_2}" -w "%{http_code}" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "X-Org-Id: ${ORG_ID}" \
   -H "Idempotency-Key: ${IDEMPOTENCY_KEY}" \
-  -d '{"sku":"MBTI_REPORT_FULL_199","quantity":1,"provider":"stub","target_attempt_id":"'"${ATTEMPT_ID}"'"}' || true)
+  -d '{"sku":"MBTI_REPORT_FULL_199","quantity":1,"provider":"billing","target_attempt_id":"'"${ATTEMPT_ID}"'"}' || true)
 [[ "${http_code}" == "200" ]] || fail "create order idempotent failed (http=${http_code})"
 ORDER_NO_2="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo $j["order_no"] ?? "";' "${ORDER_JSON_2}")"
 [[ "${ORDER_NO_2}" == "${ORDER_NO}" ]] || fail "idempotency_key mismatch"
 
 WEBHOOK_PAID_JSON="${ART_DIR}/webhook_paid.json"
-http_code=$(curl -sS -L -o "${WEBHOOK_PAID_JSON}" -w "%{http_code}" \
-  -X POST "${API}/api/v0.3/webhooks/payment/stub" \
-  -H "Content-Type: application/json" -H "Accept: application/json" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "X-Org-Id: ${ORG_ID}" \
-  -d '{"provider_event_id":"evt_pr29_paid","order_no":"'"${ORDER_NO}"'","external_trade_no":"trade_pr29","amount_cents":199,"currency":"CNY"}' || true)
+WEBHOOK_PAID_BODY='{"provider_event_id":"evt_pr29_paid","order_no":"'"${ORDER_NO}"'","external_trade_no":"trade_pr29","amount_cents":199,"currency":"CNY","event_type":"payment_succeeded"}'
+http_code="$(post_billing_webhook "${WEBHOOK_PAID_BODY}" "${WEBHOOK_PAID_JSON}")"
 [[ "${http_code}" == "200" ]] || fail "webhook paid failed (http=${http_code})"
 
 REPORT_AFTER_PAID_JSON="${ART_DIR}/report_after_paid.json"
@@ -359,12 +377,8 @@ LOCKED_AFTER_PAID="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); 
 echo "${LOCKED_AFTER_PAID}" > "${ART_DIR}/locked_after_paid.txt"
 
 WEBHOOK_REFUND_JSON="${ART_DIR}/webhook_refund.json"
-http_code=$(curl -sS -L -o "${WEBHOOK_REFUND_JSON}" -w "%{http_code}" \
-  -X POST "${API}/api/v0.3/webhooks/payment/stub" \
-  -H "Content-Type: application/json" -H "Accept: application/json" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "X-Org-Id: ${ORG_ID}" \
-  -d '{"provider_event_id":"evt_pr29_refund","order_no":"'"${ORDER_NO}"'","event_type":"refund_succeeded","refund_amount_cents":199,"refund_reason":"requested_by_customer"}' || true)
+WEBHOOK_REFUND_BODY='{"provider_event_id":"evt_pr29_refund","order_no":"'"${ORDER_NO}"'","event_type":"refund_succeeded","refund_amount_cents":199,"refund_reason":"requested_by_customer"}'
+http_code="$(post_billing_webhook "${WEBHOOK_REFUND_BODY}" "${WEBHOOK_REFUND_JSON}")"
 [[ "${http_code}" == "200" ]] || fail "webhook refund failed (http=${http_code})"
 
 REPORT_AFTER_REFUND_JSON="${ART_DIR}/report_after_refund.json"

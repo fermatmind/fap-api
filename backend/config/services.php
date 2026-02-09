@@ -55,6 +55,22 @@ return [
     'payment_webhook' => [
         'lock_ttl_seconds' => (int) env('PAYMENT_WEBHOOK_LOCK_TTL_SECONDS', 10),
         'lock_block_seconds' => (int) env('PAYMENT_WEBHOOK_LOCK_BLOCK_SECONDS', 5),
+        'success_event_types' => [
+            'stripe' => array_values(array_filter(array_map(
+                static fn ($v) => strtolower(trim((string) $v)),
+                explode(',', (string) env(
+                    'PAYMENT_WEBHOOK_STRIPE_SUCCESS_EVENTS',
+                    'payment_succeeded,payment_intent.succeeded,charge.succeeded,checkout.session.completed,invoice.payment_succeeded'
+                ))
+            ))),
+            'billing' => array_values(array_filter(array_map(
+                static fn ($v) => strtolower(trim((string) $v)),
+                explode(',', (string) env(
+                    'PAYMENT_WEBHOOK_BILLING_SUCCESS_EVENTS',
+                    'payment_succeeded,payment.success,payment_completed,paid'
+                ))
+            ))),
+        ],
     ],
 
     'integrations' => [

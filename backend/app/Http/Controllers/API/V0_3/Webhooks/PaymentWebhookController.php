@@ -26,7 +26,7 @@ class PaymentWebhookController extends Controller
     {
         $provider = strtolower(trim($provider));
 
-        if (!in_array($provider, ['stripe', 'billing', 'stub'], true)) {
+        if (!in_array($provider, ['stripe', 'billing'], true)) {
             Log::warning('PAYMENT_WEBHOOK_PROVIDER_UNSUPPORTED', [
                 'provider' => $provider,
                 'request_id' => $this->resolveRequestId($request),
@@ -35,11 +35,6 @@ class PaymentWebhookController extends Controller
         }
 
         $rawBody = (string) $request->getContent();
-
-        // ✅ 关键修复：CI 跑 stub webhook；production 才隐藏 stub
-        if ($provider === 'stub' && !app()->environment(['local', 'testing', 'ci'])) {
-            return $this->notFoundResponse();
-        }
 
         if ($provider === 'billing') {
             $misconfigured = $this->billingSecretMisconfiguredResponse($request, $provider);

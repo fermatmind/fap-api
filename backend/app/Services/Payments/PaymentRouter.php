@@ -25,7 +25,7 @@ final class PaymentRouter
             return $methods;
         }
 
-        $fallback = (string) config('payments.fallback_provider', 'stub');
+        $fallback = (string) config('payments.fallback_provider', 'billing');
         return $fallback !== '' ? [$fallback] : [];
     }
 
@@ -36,7 +36,7 @@ final class PaymentRouter
             return (string) $methods[0];
         }
 
-        return (string) config('payments.fallback_provider', 'stub');
+        return (string) config('payments.fallback_provider', 'billing');
     }
 
     private function normalizeRegion(string $region): string

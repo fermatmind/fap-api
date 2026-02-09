@@ -138,17 +138,17 @@ cd "${REPO_DIR}"
 grep -E "^config_default_pack_id=" "${ART_DIR}/pack_seed_config.txt" | sed "s/^config_default_pack_id=//" > "${ART_DIR}/config_default_pack_id.txt"
 grep -E "^config_default_dir_version=" "${ART_DIR}/pack_seed_config.txt" | sed "s/^config_default_dir_version=//" > "${ART_DIR}/config_default_dir_version.txt"
 
-STUB_JSON="${ART_DIR}/webhook_stub_minimal.json"
-stub_code="$(curl -sS -o "${STUB_JSON}" -w "%{http_code}" \
+BILLING_MIN_JSON="${ART_DIR}/webhook_billing_minimal.json"
+billing_min_code="$(curl -sS -o "${BILLING_MIN_JSON}" -w "%{http_code}" \
   -X POST -H "Content-Type: application/json" -H "Accept: application/json" \
   --data '{}' \
-  "${API_BASE}/api/v0.3/webhooks/payment/stub" || true)"
-echo "${stub_code}" > "${ART_DIR}/stub_status.txt"
-if echo "${stub_code}" | grep -E '^5' >/dev/null 2>&1; then
-  echo "stub_post_failed http=${stub_code}" >&2
-  cat "${STUB_JSON}" >&2 || true
+  "${API_BASE}/api/v0.3/webhooks/payment/billing" || true)"
+echo "${billing_min_code}" > "${ART_DIR}/billing_min_status.txt"
+if [[ "${billing_min_code}" != "404" ]]; then
+  echo "billing_minimal_post_unexpected_status http=${billing_min_code}" >&2
+  cat "${BILLING_MIN_JSON}" >&2 || true
   tail -n 120 "${ART_DIR}/server.log" >&2 || true
-  fail "stub webhook minimal post returned 5xx"
+  fail "billing webhook minimal post expected 404"
 fi
 
 QUESTIONS_JSON="${ART_DIR}/questions.json"

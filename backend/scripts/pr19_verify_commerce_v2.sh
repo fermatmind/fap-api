@@ -14,6 +14,7 @@ export FAP_PACKS_DRIVER="${FAP_PACKS_DRIVER:-local}"
 export FAP_PACKS_ROOT="${FAP_PACKS_ROOT:-${ROOT_DIR}/content_packages}"
 export FAP_DEFAULT_REGION="${FAP_DEFAULT_REGION:-CN_MAINLAND}"
 export FAP_DEFAULT_LOCALE="${FAP_DEFAULT_LOCALE:-zh-CN}"
+export BILLING_WEBHOOK_SECRET="${BILLING_WEBHOOK_SECRET:-billing_secret}"
 
 HOST="127.0.0.1"
 PORT_BASE=18000
@@ -65,6 +66,31 @@ wait_health() {
     sleep 0.25
   done
   return 1
+}
+
+billing_sig() {
+  local ts="$1"
+  local body="$2"
+  local secret="${BILLING_WEBHOOK_SECRET:-billing_secret}"
+  printf "%s.%s" "$ts" "$body" | openssl dgst -sha256 -hmac "$secret" | awk '{print $2}'
+}
+
+post_billing_webhook() {
+  local body="$1"
+  local out="$2"
+  local ts
+  ts="$(date +%s)"
+  local sig
+  sig="$(billing_sig "$ts" "$body")"
+
+  curl -sS -L -o "$out" -w "%{http_code}" \
+    -X POST "${API}/api/v0.3/webhooks/payment/billing" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "X-Org-Id: ${ORG_ID}" \
+    -H "X-Billing-Timestamp: ${ts}" \
+    -H "X-Billing-Signature: ${sig}" \
+    --data-binary "$body" || true
 }
 
 cleanup_port() {
@@ -193,7 +219,7 @@ http_code=$(curl -sS -L -o "${CURL_ORDER}" -w "%{http_code}" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "X-Org-Id: ${ORG_ID}" \
-  -d '{"sku":"MBTI_CREDIT","quantity":1,"provider":"stub"}' || true)
+  -d '{"sku":"MBTI_CREDIT","quantity":1,"provider":"billing"}' || true)
 [[ "${http_code}" == "200" ]] || fail "create order failed (http=${http_code})"
 ORDER_NO="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo $j["order_no"] ?? "";' "${CURL_ORDER}")"
 [[ -n "${ORDER_NO}" ]] || fail "missing order_no"
@@ -203,12 +229,7 @@ echo "order_no=${ORDER_NO}" >>"${ENV_TXT}"
 PROVIDER_EVENT_ID="evt_pr19_1"
 for i in $(seq 1 10); do
   OUT="${RUN_DIR}/curl_webhook_${i}.json"
-  http_code=$(curl -sS -L -o "${OUT}" -w "%{http_code}" \
-    -X POST "${API}/api/v0.3/webhooks/payment/stub" \
-    -H "Content-Type: application/json" -H "Accept: application/json" \
-    -H "Authorization: Bearer ${TOKEN}" \
-    -H "X-Org-Id: ${ORG_ID}" \
-    -d "{\"provider_event_id\":\"${PROVIDER_EVENT_ID}\",\"order_no\":\"${ORDER_NO}\",\"external_trade_no\":\"trade_pr19\",\"amount_cents\":4990,\"currency\":\"USD\"}" || true)
+  http_code="$(post_billing_webhook "{\"provider_event_id\":\"${PROVIDER_EVENT_ID}\",\"order_no\":\"${ORDER_NO}\",\"external_trade_no\":\"trade_pr19\",\"amount_cents\":4990,\"currency\":\"USD\"}" "${OUT}")"
   [[ "${http_code}" == "200" ]] || fail "webhook ${i} failed (http=${http_code})"
   sleep 0.1
   if [[ "${i}" -ne 1 && "${i}" -ne 10 ]]; then

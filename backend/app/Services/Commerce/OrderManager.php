@@ -52,7 +52,7 @@ class OrderManager
         $skuToLookup = $effectiveSku !== '' ? $effectiveSku : $requestedSku;
         $provider = strtolower(trim($provider));
         if ($provider === '') {
-            $provider = 'stub';
+            $provider = 'billing';
         }
 
         $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
@@ -88,7 +88,7 @@ class OrderManager
                 'amount_cents' => (int) ($skuRow->price_cents ?? 0) * $quantity,
                 'currency' => (string) ($skuRow->currency ?? 'USD'),
                 'status' => 'created',
-                'provider' => $provider !== '' ? $provider : 'stub',
+                'provider' => $provider !== '' ? $provider : 'billing',
                 'external_trade_no' => null,
                 'paid_at' => null,
                 'created_at' => $now,

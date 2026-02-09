@@ -300,17 +300,17 @@ cat > "${ORDER_PAYLOAD}" <<'JSON'
 {"sku":"MBTI_CREDIT","quantity":1}
 JSON
 
-ORDER_STUB_1_JSON="${ART_DIR}/order_stub_1.json"
-http_code="$(curl -sS -o "${ORDER_STUB_1_JSON}" -w "%{http_code}" \
+ORDER_STRIPE_1_JSON="${ART_DIR}/order_stripe_1.json"
+http_code="$(curl -sS -o "${ORDER_STRIPE_1_JSON}" -w "%{http_code}" \
   -X POST -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "X-Org-Id: 0" -H "Idempotency-Key: ${IDEMPOTENCY_KEY}" \
   --data @"${ORDER_PAYLOAD}" \
-  "${API_BASE}/api/v0.3/orders/stub" || true)"
+  "${API_BASE}/api/v0.3/orders/stripe" || true)"
 if [[ "${http_code}" != "200" ]]; then
-  echo "order_stub_failed http=${http_code}" >&2
-  cat "${ORDER_STUB_1_JSON}" >&2 || true
+  echo "order_stripe_failed http=${http_code}" >&2
+  cat "${ORDER_STRIPE_1_JSON}" >&2 || true
   tail -n 120 "${ART_DIR}/server.log" >&2 || true
-  fail "stub order create failed"
+  fail "stripe order create failed"
 fi
 
 ORDER_BILLING_1_JSON="${ART_DIR}/order_billing_1.json"
@@ -339,21 +339,21 @@ if [[ "${http_code}" != "200" ]]; then
   fail "billing repeat order create failed"
 fi
 
-STUB_ORDER_NO="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string)($j["order_no"] ?? "");' "${ORDER_STUB_1_JSON}")"
+STRIPE_ORDER_NO="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string)($j["order_no"] ?? "");' "${ORDER_STRIPE_1_JSON}")"
 BILLING_ORDER_NO_1="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string)($j["order_no"] ?? "");' "${ORDER_BILLING_1_JSON}")"
 BILLING_ORDER_NO_2="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string)($j["order_no"] ?? "");' "${ORDER_BILLING_2_JSON}")"
 
-if [[ -z "${STUB_ORDER_NO}" || -z "${BILLING_ORDER_NO_1}" || -z "${BILLING_ORDER_NO_2}" ]]; then
+if [[ -z "${STRIPE_ORDER_NO}" || -z "${BILLING_ORDER_NO_1}" || -z "${BILLING_ORDER_NO_2}" ]]; then
   fail "missing order_no in idempotency responses"
 fi
-if [[ "${STUB_ORDER_NO}" == "${BILLING_ORDER_NO_1}" ]]; then
+if [[ "${STRIPE_ORDER_NO}" == "${BILLING_ORDER_NO_1}" ]]; then
   fail "idempotency key not scoped by provider"
 fi
 if [[ "${BILLING_ORDER_NO_1}" != "${BILLING_ORDER_NO_2}" ]]; then
   fail "same provider idempotency replay returned different order_no"
 fi
 
-echo "${STUB_ORDER_NO}" > "${ART_DIR}/order_stub_no.txt"
+echo "${STRIPE_ORDER_NO}" > "${ART_DIR}/order_stripe_no.txt"
 echo "${BILLING_ORDER_NO_1}" > "${ART_DIR}/order_billing_no.txt"
 
 cd "${BACKEND_DIR}"
@@ -362,9 +362,9 @@ require "vendor/autoload.php";
 $app = require "bootstrap/app.php";
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 $key = (string) getenv("IDEMPOTENCY_KEY");
-$stubCount = Illuminate\Support\Facades\DB::table("orders")
+$stripeCount = Illuminate\Support\Facades\DB::table("orders")
     ->where("org_id", 0)
-    ->where("provider", "stub")
+    ->where("provider", "stripe")
     ->where("idempotency_key", $key)
     ->count();
 $billingCount = Illuminate\Support\Facades\DB::table("orders")
@@ -372,9 +372,9 @@ $billingCount = Illuminate\Support\Facades\DB::table("orders")
     ->where("provider", "billing")
     ->where("idempotency_key", $key)
     ->count();
-echo "stub_count=".$stubCount.PHP_EOL;
+echo "stripe_count=".$stripeCount.PHP_EOL;
 echo "billing_count=".$billingCount.PHP_EOL;
-if ((int) $stubCount !== 1 || (int) $billingCount !== 1) {
+if ((int) $stripeCount !== 1 || (int) $billingCount !== 1) {
     fwrite(STDERR, "idempotency_scope_db_assertion_failed\n");
     exit(1);
 }

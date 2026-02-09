@@ -9,6 +9,7 @@ DB_FILE="/tmp/pr20_verify.sqlite"
 PID_FILE="$ART_DIR/server.pid"
 SERVER_LOG="$ART_DIR/server.log"
 SUMMARY_FILE="$ART_DIR/summary.txt"
+export BILLING_WEBHOOK_SECRET="${BILLING_WEBHOOK_SECRET:-billing_secret}"
 
 mkdir -p "$ART_DIR"
 
@@ -82,6 +83,30 @@ curl_json() {
     return 1
   fi
   return 0
+}
+
+billing_sig() {
+  local ts="$1"
+  local body="$2"
+  local secret="${BILLING_WEBHOOK_SECRET:-billing_secret}"
+  printf "%s.%s" "$ts" "$body" | openssl dgst -sha256 -hmac "$secret" | awk '{print $2}'
+}
+
+post_billing_webhook() {
+  local body="$1"
+  local out="$2"
+  local ts
+  ts="$(date +%s)"
+  local sig
+  sig="$(billing_sig "$ts" "$body")"
+
+  curl -sS -o "$out" -w "%{http_code}" \
+    -X POST "$API/api/v0.3/webhooks/payment/billing" \
+    -H "Accept: application/json" \
+    -H "Content-Type: application/json" \
+    -H "X-Billing-Timestamp: ${ts}" \
+    -H "X-Billing-Signature: ${sig}" \
+    --data-binary "$body" || true
 }
 
 cd "$ROOT_DIR"
@@ -275,7 +300,7 @@ curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_re
 # ------------------------
 # order + webhook -> entitlement + snapshot
 # ------------------------
-ORDER_PAYLOAD='{"sku":"MBTI_REPORT_FULL","quantity":1,"target_attempt_id":"'"$attempt_id"'","provider":"stub","anon_id":"'"$ANON_ID"'"}'
+ORDER_PAYLOAD='{"sku":"MBTI_REPORT_FULL","quantity":1,"target_attempt_id":"'"$attempt_id"'","provider":"billing","anon_id":"'"$ANON_ID"'"}'
 curl_json POST "$API/api/v0.3/orders" "$ORDER_PAYLOAD" "$ART_DIR/curl_order.json" "$USER_TOKEN" || fail "orders create failed"
 
 order_no="$(php -r '
@@ -285,7 +310,8 @@ echo (string)($j["order_no"] ?? "");
 [ -n "$order_no" ] || fail "order_no missing (order_resp=$(cat "$ART_DIR/curl_order.json" | head -c 600))"
 
 WEBHOOK_PAYLOAD='{"provider_event_id":"evt_pr20_1","order_no":"'"$order_no"'","external_trade_no":"trade_pr20_1","amount_cents":990,"currency":"USD"}'
-curl_json POST "$API/api/v0.3/webhooks/payment/stub" "$WEBHOOK_PAYLOAD" "$ART_DIR/curl_webhook.json" "" || fail "webhook failed"
+http_code="$(post_billing_webhook "$WEBHOOK_PAYLOAD" "$ART_DIR/curl_webhook.json")"
+[ "${http_code:-000}" = "200" ] || fail "webhook failed (http=${http_code:-000})"
 
 # 已购 report（读 snapshot）
 curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_paid.json" "" || fail "fetch paid report failed"

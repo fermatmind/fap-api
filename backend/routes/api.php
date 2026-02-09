@@ -150,7 +150,7 @@ Route::prefix("v0.2")->middleware([
     // Events ingestion (public for now)
     Route::post("/events", [EventController::class, "store"]);
 
-    // Norms (stub)
+    // Norms
     Route::get("/norms/percentile", [NormsController::class, "percentile"]);
 
     Route::middleware('throttle:api_webhook')->group(function () {
@@ -275,7 +275,7 @@ Route::prefix("v0.3")->middleware([
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
         Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder");
         Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
-            ->whereIn('provider', ['stripe', 'billing', 'stub']);
+            ->whereIn('provider', ['stripe', 'billing']);
         Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
     });
 
