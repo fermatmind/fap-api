@@ -117,20 +117,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('embeddings')) {
-            return;
-        }
-
-        foreach (['embeddings_owner_idx', 'embeddings_namespace_idx', 'embeddings_content_hash_idx'] as $indexName) {
-            if ($this->indexExists('embeddings', $indexName)) {
-                Schema::table('embeddings', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-        }
-
         // Prevent accidental data loss. This table might have existed before.
-        // Schema::dropIfExists('embeddings');
+        // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
     }
 
     private function indexExists(string $table, string $indexName): bool

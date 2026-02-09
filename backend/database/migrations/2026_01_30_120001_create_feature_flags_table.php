@@ -24,6 +24,6 @@ return new class extends Migration
     public function down(): void
     {
         // Prevent accidental data loss. This table might have existed before.
-        // Schema::dropIfExists('feature_flags');
+        // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
     }
 };

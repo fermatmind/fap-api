@@ -25,7 +25,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        // Safety: Down is a no-op to prevent accidental data loss.
-        // Schema::dropIfExists('events');
+        // Prevent accidental data loss. This table might have existed before.
+        // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
     }
 };

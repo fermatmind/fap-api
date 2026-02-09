@@ -88,26 +88,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('idempotency_keys')) {
-            return;
-        }
-
-        $uniqueName = 'idempotency_keys_unique';
-        if ($this->indexExists('idempotency_keys', $uniqueName)) {
-            Schema::table('idempotency_keys', function (Blueprint $table) use ($uniqueName) {
-                $table->dropUnique($uniqueName);
-            });
-        }
-
-        $lookupName = 'idempotency_keys_lookup_idx';
-        if ($this->indexExists('idempotency_keys', $lookupName)) {
-            Schema::table('idempotency_keys', function (Blueprint $table) use ($lookupName) {
-                $table->dropIndex($lookupName);
-            });
-        }
-
         // Prevent accidental data loss. This table might have existed before.
-        // Schema::dropIfExists('idempotency_keys');
+        // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
     }
 
     private function indexExists(string $table, string $indexName): bool
