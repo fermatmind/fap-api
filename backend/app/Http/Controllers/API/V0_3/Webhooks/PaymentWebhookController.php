@@ -34,8 +34,9 @@ class PaymentWebhookController extends Controller
 
         $signatureOk = true;
         if ($provider === 'billing') {
-            if (!$this->ensureBillingSecretConfigured($request, $provider)) {
-                return $this->notFoundResponse();
+            $misconfigured = $this->billingSecretMisconfiguredResponse($request, $provider);
+            if ($misconfigured instanceof JsonResponse) {
+                return $misconfigured;
             }
 
             $signatureOk = $this->verifyBillingSignature($request, $rawBody);
@@ -155,26 +156,34 @@ class PaymentWebhookController extends Controller
 
     private function verifyBillingSignature(Request $request, string $rawBody): bool
     {
-        $secret = (string) (config('services.billing.webhook_secret') ?? env('BILLING_WEBHOOK_SECRET', ''));
+        $secret = $this->resolveBillingWebhookSecret();
         if ($secret === '') {
             return false;
         }
 
-        $signature = (string) $request->header('X-Billing-Signature', '');
+        $signature = trim((string) $request->header('X-Billing-Signature', ''));
         if ($signature === '') {
-            $signature = (string) $request->header('X-Webhook-Signature', '');
+            $signature = trim((string) $request->header('X-Webhook-Signature', ''));
         }
         if ($signature === '') {
             return false;
         }
+
+        $allowLegacy = (bool) config('services.billing.allow_legacy_signature', false);
 
         $timestamp = $this->extractWebhookTimestampFromHeaders($request, [
             'X-Billing-Timestamp',
             'X-Webhook-Timestamp',
             'X-Timestamp',
         ]);
+
         if ($timestamp === null) {
-            return false;
+            if (!$allowLegacy) {
+                return false;
+            }
+
+            $legacyExpected = hash_hmac('sha256', $rawBody, $secret);
+            return hash_equals($legacyExpected, $signature);
         }
 
         $tolerance = (int) (config('services.billing.webhook_tolerance_seconds', config('services.billing.webhook_tolerance', 300)) ?? 300);
@@ -190,12 +199,9 @@ class PaymentWebhookController extends Controller
             return true;
         }
 
-        $allowLegacy = (bool) config('services.billing.allow_legacy_signature', false);
         if ($allowLegacy) {
             $legacyExpected = hash_hmac('sha256', $rawBody, $secret);
-            if (hash_equals($legacyExpected, $signature)) {
-                return true;
-            }
+            return hash_equals($legacyExpected, $signature);
         }
 
         return false;
@@ -282,19 +288,66 @@ class PaymentWebhookController extends Controller
         return null;
     }
 
-    private function ensureBillingSecretConfigured(Request $request, string $provider): bool
+    private function billingSecretMisconfiguredResponse(Request $request, string $provider): ?JsonResponse
     {
-        $secret = trim((string) config('services.billing.webhook_secret', ''));
+        $secret = $this->resolveBillingWebhookSecret();
         if ($secret !== '') {
-            return true;
+            return null;
         }
 
-        Log::error('CRITICAL: BILLING_WEBHOOK_SECRET_MISSING', [
-            'request_id' => $this->resolveRequestId($request),
+        $currentEnv = strtolower((string) config('app.env', app()->environment()));
+        if (in_array($currentEnv, $this->billingSecretOptionalEnvs(), true)) {
+            return null;
+        }
+
+        $requestId = $this->resolveRequestId($request);
+        Log::error('billing_webhook_secret_missing', [
+            'request_id' => $requestId,
             'provider' => $provider,
+            'environment' => $currentEnv,
         ]);
 
-        return false;
+        return response()->json([
+            'ok' => false,
+            'error' => 'SERVICE_UNAVAILABLE',
+            'message' => 'service unavailable.',
+            'request_id' => $requestId,
+        ], 503);
+    }
+
+    private function billingSecretOptionalEnvs(): array
+    {
+        $configured = config('services.billing.webhook_secret_optional_envs', ['local', 'testing', 'ci']);
+
+        if (is_string($configured)) {
+            $configured = explode(',', $configured);
+        }
+
+        if (!is_array($configured)) {
+            return ['local', 'testing', 'ci'];
+        }
+
+        $optionalEnvs = array_values(array_filter(array_map(
+            static fn ($value): string => strtolower(trim((string) $value)),
+            $configured
+        ), static fn (string $value): bool => $value !== ''));
+
+        return $optionalEnvs === [] ? ['local', 'testing', 'ci'] : $optionalEnvs;
+    }
+
+    private function resolveBillingWebhookSecret(): string
+    {
+        $secret = trim((string) config('services.billing.webhook_secret', ''));
+        if ($secret === '') {
+            $secret = trim((string) env('BILLING_WEBHOOK_SECRET', ''));
+        }
+
+        $normalized = strtolower($secret);
+        if ($normalized === '(production_value_required)' || $normalized === 'production_value_required') {
+            return '';
+        }
+
+        return $secret;
     }
 
     private function resolveRequestId(Request $request): string
