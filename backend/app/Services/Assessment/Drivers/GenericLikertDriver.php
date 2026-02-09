@@ -321,7 +321,7 @@ class GenericLikertDriver implements DriverInterface
 
     private function logInvalidAnswer(string $qId, string $answer): void
     {
-        Log::warning('Invalid answer option', [
+        Log::warning('LIKERT_ANSWER_UNKNOWN', [
             'question' => $qId,
             'answer' => $answer,
         ]);

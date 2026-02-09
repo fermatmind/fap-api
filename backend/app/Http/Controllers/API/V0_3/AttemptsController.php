@@ -615,7 +615,21 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
         );
 
         if (!($gate['ok'] ?? false)) {
-            $this->throwAttemptNotFound($id);
+            $status = (int) ($gate['status'] ?? 0);
+            if ($status <= 0) {
+                $error = strtoupper((string) ($gate['error'] ?? 'REPORT_FAILED'));
+                $status = match ($error) {
+                    'ATTEMPT_REQUIRED', 'SCALE_REQUIRED' => 400,
+                    'ATTEMPT_NOT_FOUND', 'RESULT_NOT_FOUND', 'SCALE_NOT_FOUND' => 404,
+                    default => 500,
+                };
+            }
+
+            return response()->json([
+                'ok' => false,
+                'error' => (string) ($gate['error'] ?? 'REPORT_FAILED'),
+                'message' => (string) ($gate['message'] ?? 'report generation failed.'),
+            ], $status);
         }
 
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [

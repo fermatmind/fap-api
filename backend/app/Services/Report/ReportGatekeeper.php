@@ -112,7 +112,12 @@ class ReportGatekeeper
             return $this->responsePayload(false, 'full', $viewPolicy, $report, $paywall);
         }
 
-        $report = $this->buildReport($scaleCode, $attempt, $result);
+        $built = $this->buildReport($scaleCode, $attempt, $result);
+        if (!($built['ok'] ?? false)) {
+            return $built;
+        }
+
+        $report = $built['report'] ?? [];
         if (!is_array($report)) {
             return $this->serverError('REPORT_FAILED', 'report generation failed.');
         }
@@ -348,19 +353,50 @@ class ReportGatekeeper
         ];
     }
 
-    private function buildReport(string $scaleCode, Attempt $attempt, Result $result): ?array
+    private function buildReport(string $scaleCode, Attempt $attempt, Result $result): array
     {
-        if ($scaleCode === 'MBTI') {
-            $composed = $this->reportComposer->compose((string) $attempt->id, []);
-            if (!($composed['ok'] ?? false)) {
-                return null;
-            }
-            $report = $composed['report'] ?? null;
-            return is_array($report) ? $report : null;
-        }
+        try {
+            if ($scaleCode === 'MBTI') {
+                $composed = $this->reportComposer->compose((string) $attempt->id, []);
+                if (!($composed['ok'] ?? false)) {
+                    return [
+                        'ok' => false,
+                        'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
+                        'message' => (string) ($composed['message'] ?? 'report generation failed.'),
+                        'status' => (int) ($composed['status'] ?? 500),
+                    ];
+                }
 
-        $report = $this->genericReportBuilder->build($attempt, $result);
-        return is_array($report) ? $report : null;
+                $report = $composed['report'] ?? null;
+
+                return is_array($report)
+                    ? ['ok' => true, 'report' => $report]
+                    : [
+                        'ok' => false,
+                        'error' => 'REPORT_FAILED',
+                        'message' => 'report generation failed.',
+                        'status' => 500,
+                    ];
+            }
+
+            $report = $this->genericReportBuilder->build($attempt, $result);
+
+            return is_array($report)
+                ? ['ok' => true, 'report' => $report]
+                : [
+                    'ok' => false,
+                    'error' => 'REPORT_FAILED',
+                    'message' => 'report generation failed.',
+                    'status' => 500,
+                ];
+        } catch (\Throwable $e) {
+            return [
+                'ok' => false,
+                'error' => 'REPORT_FAILED',
+                'message' => 'report generation failed.',
+                'status' => 500,
+            ];
+        }
     }
 
     private function applyTeaser(array $report, array $policy): array

@@ -38,6 +38,35 @@ final class GenericLikertDriverReverseAndWeightTest extends TestCase
         $this->assertSame(1.0, (float) ($result->breakdownJson['items'][0]['effective_value'] ?? 0.0));
     }
 
+    public function test_reverse_uses_min_plus_max_minus_raw_on_non_linear_scale(): void
+    {
+        $driver = new GenericLikertDriver();
+
+        $spec = [
+            'scale_code' => 'MBTI',
+            'options_score_map' => ['A' => -2, 'B' => 0, 'C' => 7],
+            'dimensions' => [
+                'D1' => [
+                    'items_map' => [
+                        'QX' => ['weight' => 1.0, 'reverse' => true],
+                    ],
+                ],
+            ],
+        ];
+
+        $answers = [
+            ['question_id' => 'QX', 'code' => 'C'],
+        ];
+
+        $result = $driver->score($answers, $spec, []);
+
+        // min=-2, max=7, raw=7 => reverse=(-2+7)-7=-2
+        $this->assertSame(-2.0, $result->rawScore);
+        $this->assertSame(-2.0, $result->finalScore);
+        $this->assertSame(-2.0, (float) ($result->breakdownJson['dim_scores']['D1'] ?? 0.0));
+        $this->assertSame(-2.0, (float) ($result->breakdownJson['items'][0]['effective_value'] ?? 0.0));
+    }
+
     public function test_weighting_multiplies_dimension_score(): void
     {
         $driver = new GenericLikertDriver();
@@ -71,7 +100,7 @@ final class GenericLikertDriverReverseAndWeightTest extends TestCase
         Log::shouldReceive('warning')
             ->once()
             ->withArgs(function ($message, $context): bool {
-                $this->assertSame('Invalid answer option', $message);
+                $this->assertSame('LIKERT_ANSWER_UNKNOWN', $message);
                 $this->assertIsArray($context);
                 $this->assertSame('Q3', $context['question'] ?? null);
                 $this->assertSame('Z', $context['answer'] ?? null);

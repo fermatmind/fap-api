@@ -75,11 +75,13 @@ class ReportComposer
         $region = (string) ($attempt->region ?? '');
         $locale = (string) ($attempt->locale ?? '');
 
-        if ($packId === '') {
-            $packId = (string) config('content_packs.default_pack_id', '');
-        }
-        if ($dirVersion === '') {
-            $dirVersion = (string) config('content_packs.default_dir_version', '');
+        if ($packId === '' || $dirVersion === '') {
+            return [
+                'ok' => false,
+                'error' => 'REPORT_CONTEXT_MISSING',
+                'message' => 'attempt pack context missing.',
+                'status' => 500,
+            ];
         }
 
         if ($packId !== '' && $dirVersion !== '') {
