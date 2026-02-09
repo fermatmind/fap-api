@@ -61,6 +61,8 @@ final class SchemaIndex
             'does not exist',
             'unknown key name',
             'cannot drop index',
+            "can't drop",
+            'check that column/key exists',
         ]);
     }
 
