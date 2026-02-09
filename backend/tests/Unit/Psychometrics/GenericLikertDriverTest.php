@@ -72,7 +72,7 @@ final class GenericLikertDriverTest extends TestCase
 
         Log::shouldHaveReceived('warning')
             ->once()
-            ->with('Invalid answer option', \Mockery::on(function ($context): bool {
+            ->with('LIKERT_ANSWER_UNKNOWN', \Mockery::on(function ($context): bool {
                 return is_array($context)
                     && ($context['question'] ?? null) === 'Q2'
                     && ($context['answer'] ?? null) === 'Z';

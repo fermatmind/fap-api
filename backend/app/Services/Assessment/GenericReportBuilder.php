@@ -34,13 +34,11 @@ class GenericReportBuilder
             'scale_code' => (string) ($attempt->scale_code ?? ''),
             'summary' => [
                 'title' => (string) ($attempt->scale_code ?? 'Assessment Report'),
-                'raw_score' => $rawScore,
                 'final_score' => $finalScore,
                 'severity' => $severity,
                 'type_code' => $typeCode,
             ],
             'scores' => $resultJson['axis_scores_json'] ?? null,
-            'breakdown' => $breakdown,
             'generated_at' => now()->toISOString(),
         ];
     }
