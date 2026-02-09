@@ -165,7 +165,7 @@ class PaymentWebhookProcessor
                     }
 
                     if ($inserted === 0 && $this->isEventProcessed($eventRow)) {
-                        Log::info('payment_webhook_duplicate_event', [
+                        Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
                             'provider' => $provider,
                             'provider_event_id' => $providerEventId,
                             'order_id' => $eventRow->order_id ?? null,
@@ -243,7 +243,7 @@ class PaymentWebhookProcessor
                     $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
                     $orderStatus = strtolower((string) ($order->status ?? ''));
                     if (!$isRefundEvent && in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true)) {
-                        Log::info('payment_webhook_skip_already_processed', [
+                        Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
                             'provider' => $provider,
                             'provider_event_id' => $providerEventId,
                             'order_id' => $order->id ?? null,

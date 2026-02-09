@@ -5,6 +5,7 @@ namespace Tests\Feature\V0_3;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -15,10 +16,10 @@ class BillingWebhookSignatureTest extends TestCase
     public function test_billing_signature_requires_timestamp_and_within_tolerance(): void
     {
         (new Pr19CommerceSeeder())->run();
+        Log::spy();
 
         config([
             'services.billing.webhook_secret' => 'billing_secret',
-            'services.billing.webhook_secret_optional_envs' => ['local', 'testing', 'ci'],
             'services.billing.webhook_tolerance_seconds' => 300,
             'services.billing.allow_legacy_signature' => false,
         ]);
@@ -68,6 +69,7 @@ class BillingWebhookSignatureTest extends TestCase
             'HTTP_X_BILLING_SIGNATURE' => $missingTimestampSignature,
         ], $raw);
         $missingTimestamp->assertStatus(404);
+        $this->assertSame(0, DB::table('payment_events')->count());
 
         $expiredTs = time() - 301;
         $expiredSig = $this->buildSignature('billing_secret', $raw, $expiredTs);
@@ -79,6 +81,7 @@ class BillingWebhookSignatureTest extends TestCase
             'HTTP_X_BILLING_SIGNATURE' => $expiredSig,
         ], $raw);
         $expired->assertStatus(404);
+        $this->assertSame(0, DB::table('payment_events')->count());
 
         $nowTs = time();
         $bad = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
@@ -89,6 +92,7 @@ class BillingWebhookSignatureTest extends TestCase
             'HTTP_X_BILLING_SIGNATURE' => 'bad',
         ], $raw);
         $bad->assertStatus(404);
+        $this->assertSame(0, DB::table('payment_events')->count());
 
         $okSig = $this->buildSignature('billing_secret', $raw, $nowTs);
         $ok = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
@@ -102,6 +106,19 @@ class BillingWebhookSignatureTest extends TestCase
         $ok->assertStatus(200);
         $ok->assertJson(['ok' => true]);
         $this->assertSame(1, DB::table('payment_events')->where('provider_event_id', 'evt_bill_1')->count());
+
+        Log::shouldHaveReceived('warning')
+            ->withArgs(fn (string $message): bool => $message === 'BILLING_WEBHOOK_TS_MISSING')
+            ->atLeast()
+            ->once();
+        Log::shouldHaveReceived('warning')
+            ->withArgs(fn (string $message): bool => $message === 'BILLING_WEBHOOK_TS_OUT_OF_WINDOW')
+            ->atLeast()
+            ->once();
+        Log::shouldHaveReceived('warning')
+            ->withArgs(fn (string $message): bool => $message === 'BILLING_WEBHOOK_SIG_MISMATCH')
+            ->atLeast()
+            ->once();
     }
 
     private function buildSignature(string $secret, string $rawBody, int $timestamp): string
