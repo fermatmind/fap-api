@@ -247,6 +247,12 @@ class AppServiceProvider extends ServiceProvider
             self::$redactProcessorRegistered = true;
         }
 
+        $isDebugEnabledByEnv = filter_var(env('APP_DEBUG', false), FILTER_VALIDATE_BOOL);
+
+        if ($this->app->environment('production') && $isDebugEnabledByEnv) {
+            Log::emergency('CRITICAL: PRODUCTION_APP_DEBUG_TRUE');
+        }
+
         $response = function (string $code, string $message) {
             return function (Request $request, array $headers) use ($code, $message) {
                 return response()->json([
