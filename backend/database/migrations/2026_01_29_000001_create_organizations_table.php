@@ -1,5 +1,6 @@
 <?php
 
+use App\Support\Database\SchemaIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,18 +9,43 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (Schema::hasTable('organizations')) {
-            return;
+        $tableName = 'organizations';
+
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table): void {
+                $table->bigIncrements('id');
+                $table->string('name', 255);
+                $table->unsignedBigInteger('owner_user_id');
+                $table->timestamps();
+
+                $table->index('owner_user_id', 'organizations_owner_user_id_idx');
+            });
         }
 
-        Schema::create('organizations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name', 255);
-            $table->unsignedBigInteger('owner_user_id');
-            $table->timestamps();
-
-            $table->index('owner_user_id', 'organizations_owner_user_id_idx');
+        Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
+            if (!Schema::hasColumn($tableName, 'id')) {
+                $table->unsignedBigInteger('id')->nullable();
+            }
+            if (!Schema::hasColumn($tableName, 'name')) {
+                $table->string('name', 255)->nullable();
+            }
+            if (!Schema::hasColumn($tableName, 'owner_user_id')) {
+                $table->unsignedBigInteger('owner_user_id')->nullable();
+            }
+            if (!Schema::hasColumn($tableName, 'created_at')) {
+                $table->timestamp('created_at')->nullable();
+            }
+            if (!Schema::hasColumn($tableName, 'updated_at')) {
+                $table->timestamp('updated_at')->nullable();
+            }
         });
+
+        if (Schema::hasColumn($tableName, 'owner_user_id')
+            && !SchemaIndex::indexExists($tableName, 'organizations_owner_user_id_idx')) {
+            Schema::table($tableName, function (Blueprint $table): void {
+                $table->index('owner_user_id', 'organizations_owner_user_id_idx');
+            });
+        }
     }
 
     public function down(): void
