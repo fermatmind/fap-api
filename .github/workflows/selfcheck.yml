@@ -47,6 +47,9 @@ jobs:
       - name: Guard no committed secrets (H-02)
         run: bash backend/scripts/ci/guard_no_committed_secrets.sh
 
+      - name: CAE gate (config + artifact safety)
+        run: bash backend/scripts/cae_gate.sh
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -268,6 +271,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: CAE gate (config + artifact safety)
+        run: bash backend/scripts/cae_gate.sh
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
