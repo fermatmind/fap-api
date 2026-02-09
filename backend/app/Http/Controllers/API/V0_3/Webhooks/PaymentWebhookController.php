@@ -156,10 +156,7 @@ class PaymentWebhookController extends Controller
 
     private function verifyBillingSignature(Request $request, string $rawBody): bool
     {
-        $secret = trim((string) config('services.billing.webhook_secret', ''));
-        if ($secret === '') {
-            $secret = trim((string) env('BILLING_WEBHOOK_SECRET', ''));
-        }
+        $secret = $this->resolveBillingWebhookSecret();
         if ($secret === '') {
             return false;
         }
@@ -293,11 +290,7 @@ class PaymentWebhookController extends Controller
 
     private function billingSecretMisconfiguredResponse(Request $request, string $provider): ?JsonResponse
     {
-        $secret = trim((string) config('services.billing.webhook_secret', ''));
-        if ($secret === '') {
-            $secret = trim((string) env('BILLING_WEBHOOK_SECRET', ''));
-        }
-
+        $secret = $this->resolveBillingWebhookSecret();
         if ($secret !== '') {
             return null;
         }
@@ -340,6 +333,21 @@ class PaymentWebhookController extends Controller
         ), static fn (string $value): bool => $value !== ''));
 
         return $optionalEnvs === [] ? ['local', 'testing', 'ci'] : $optionalEnvs;
+    }
+
+    private function resolveBillingWebhookSecret(): string
+    {
+        $secret = trim((string) config('services.billing.webhook_secret', ''));
+        if ($secret === '') {
+            $secret = trim((string) env('BILLING_WEBHOOK_SECRET', ''));
+        }
+
+        $normalized = strtolower($secret);
+        if ($normalized === '(production_value_required)' || $normalized === 'production_value_required') {
+            return '';
+        }
+
+        return $secret;
     }
 
     private function resolveRequestId(Request $request): string
