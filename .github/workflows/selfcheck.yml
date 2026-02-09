@@ -38,8 +38,8 @@ jobs:
       # MBTI defaults (avoid selecting "default")
       FAP_DEFAULT_REGION: CN_MAINLAND
       FAP_DEFAULT_LOCALE: zh-CN
-      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
-      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.2.1-TEST
+      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.2
+      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.2.2
 
     steps:
       - uses: actions/checkout@v4
@@ -135,6 +135,9 @@ jobs:
           $resultId  = (string) Str::uuid();
           $anonId    = 'ci_' . Str::uuid();
           $now       = now();
+          $packId    = 'MBTI.cn-mainland.zh-CN.v0.2.2';
+          $dirVer    = 'MBTI-CN-v0.2.2';
+          $cpVer     = 'v0.2.2';
 
           $scoresPct = ["EI"=>55,"SN"=>45,"TF"=>60,"JP"=>52,"AT"=>58];
           $axisStates = ["EI"=>"moderate","SN"=>"moderate","TF"=>"moderate","JP"=>"moderate","AT"=>"moderate"];
@@ -158,7 +161,10 @@ jobs:
           $setIfCol($a, 'attempts', 'locale', 'zh-CN');
 
           $setIfCol($a, 'attempts', 'scale_code', 'MBTI');
-          $setIfCol($a, 'attempts', 'scale_version', 'v0.2.1-TEST');
+          $setIfCol($a, 'attempts', 'scale_version', 'v0.2.2');
+          $setIfCol($a, 'attempts', 'pack_id', $packId);
+          $setIfCol($a, 'attempts', 'dir_version', $dirVer);
+          $setIfCol($a, 'attempts', 'content_package_version', $cpVer);
           $setIfCol($a, 'attempts', 'question_count', 144);
 
           $setIfCol($a, 'attempts', 'answers_summary_json', '{}');
@@ -182,14 +188,16 @@ jobs:
           $setIfCol($r, 'results', 'anon_id', $anonId);
 
           $setIfCol($r, 'results', 'scale_code', 'MBTI');
-          $setIfCol($r, 'results', 'scale_version', 'v0.2.1-TEST');
+          $setIfCol($r, 'results', 'scale_version', 'v0.2.2');
+          $setIfCol($r, 'results', 'pack_id', $packId);
+          $setIfCol($r, 'results', 'dir_version', $dirVer);
 
           $setIfCol($r, 'results', 'type_code', 'ESTJ-A');
           $setIfCol($r, 'results', 'short_type', 'ESTJ');
           $setIfCol($r, 'results', 'variant_code', 'A');
 
           $setIfCol($r, 'results', 'profile_version', 'mbti32-v2.5');
-          $setIfCol($r, 'results', 'content_package_version', 'v0.2.1-TEST');
+          $setIfCol($r, 'results', 'content_package_version', $cpVer);
 
           $setJsonIfCol($r, 'results', 'scores_json', $scoresPct);
           $setJsonIfCol($r, 'results', 'scores_pct', $scoresPct);
