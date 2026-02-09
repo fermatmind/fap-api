@@ -302,7 +302,7 @@ class PaymentWebhookController extends Controller
             return null;
         }
 
-        $currentEnv = strtolower((string) app()->environment());
+        $currentEnv = strtolower((string) config('app.env', app()->environment()));
         if (in_array($currentEnv, $this->billingSecretOptionalEnvs(), true)) {
             return null;
         }
