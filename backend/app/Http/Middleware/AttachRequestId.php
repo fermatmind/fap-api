@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,14 @@ class AttachRequestId
 
         $request->attributes->set('request_id', $requestId);
 
-        $response = $next($request);
+        try {
+            $response = $next($request);
+        } catch (HttpResponseException $e) {
+            $response = $e->getResponse();
+            $response->headers->set('X-Request-Id', $requestId);
+
+            throw $e;
+        }
         $response->headers->set('X-Request-Id', $requestId);
 
         return $response;

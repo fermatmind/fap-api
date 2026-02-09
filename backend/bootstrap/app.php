@@ -37,6 +37,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'uuid' => \App\Http\Middleware\EnsureUuidRouteParams::class,
         ]);
 
+        // Ensure every API response (including throttled responses) gets a request id header.
+        $middleware->prependToGroup('api', \App\Http\Middleware\AttachRequestId::class);
         $middleware->appendToGroup('api', \App\Http\Middleware\DetectRegion::class);
 
         // 你原来其他 middleware 配置保留

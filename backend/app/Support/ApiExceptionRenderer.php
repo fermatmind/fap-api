@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -19,7 +20,7 @@ final class ApiExceptionRenderer
             return null;
         }
 
-        if ($e instanceof ValidationException) {
+        if ($e instanceof ValidationException || $e instanceof HttpResponseException) {
             return null;
         }
 
