@@ -163,7 +163,7 @@ class QueueDlqService
                 ->connection($connection)
                 ->pushRaw($payload, $queue);
 
-            $this->forgetFailedJob($failedJobId);
+            $this->forgetFailedJob($failedJobId, $failedJob);
             $replayLogId = $this->insertReplayLog(
                 $failedJobId,
                 $this->failedJobUuid($failedJob),
@@ -231,12 +231,24 @@ class QueueDlqService
         return is_object($row) ? $row : null;
     }
 
-    private function forgetFailedJob(int $failedJobId): void
+    private function forgetFailedJob(int $failedJobId, ?object $failedJob = null): void
     {
         $failer = app('queue.failer');
         if (is_object($failer) && method_exists($failer, 'forget')) {
-            $failer->forget((string) $failedJobId);
-            $failer->forget($failedJobId);
+            $candidates = [];
+            $uuid = $failedJob !== null ? $this->failedJobUuid($failedJob) : null;
+            if ($uuid !== null) {
+                $candidates[] = $uuid;
+            }
+            $candidates[] = (string) $failedJobId;
+
+            foreach (array_unique($candidates) as $candidate) {
+                try {
+                    $failer->forget($candidate);
+                } catch (\Throwable) {
+                    // Fallback delete below is authoritative in this service.
+                }
+            }
         }
 
         if (Schema::hasTable('failed_jobs')) {

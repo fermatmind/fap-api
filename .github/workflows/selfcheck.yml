@@ -288,7 +288,7 @@ jobs:
 
       - name: Run tests with MySQL
         working-directory: backend
-        run: php artisan test --configuration phpunit.mysql.xml
+        run: php vendor/phpunit/phpunit/phpunit --configuration phpunit.mysql.xml
 
       - name: Smoke v0.3 (mysql lane)
         working-directory: backend
