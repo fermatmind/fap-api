@@ -51,7 +51,7 @@ class PaymentWebhookFailSafeTest extends TestCase
 
         $response = $this->call(
             'POST',
-            '/api/v0.3/webhooks/payment/billing',
+            '/api/v0.3/webhooks/payment/stripe',
             [],
             [],
             [],
