@@ -790,6 +790,10 @@ API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
 
 echo "[CI] events acceptance OK"
 
+echo "[CI] payment event provider uniqueness gate"
+php artisan test --filter PaymentEventUniquenessAcrossProvidersTest
+echo "[CI] payment event provider uniqueness gate OK"
+
 echo "[CI] migration safety gates"
 php artisan test --filter MigrationSafetyTest
 php artisan test --filter MigrationRollbackSafetyTest
