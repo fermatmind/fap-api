@@ -12,7 +12,7 @@ return new class extends Migration
             Schema::create('payment_events', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->string('provider', 32);
-                $table->string('provider_event_id', 128)->unique();
+                $table->string('provider_event_id', 128);
                 $table->uuid('order_id');
                 $table->string('event_type', 64);
                 $table->json('payload_json');
@@ -24,6 +24,7 @@ return new class extends Migration
                 $table->string('headers_digest', 64)->nullable();
                 $table->timestamps();
 
+                $table->unique(['provider', 'provider_event_id'], 'payment_events_provider_provider_event_id_unique');
                 $table->index('order_id');
             });
             return;
