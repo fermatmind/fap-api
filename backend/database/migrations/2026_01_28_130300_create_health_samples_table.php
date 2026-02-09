@@ -86,19 +86,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('health_samples')) {
-            return;
-        }
-
-        $indexName = 'health_samples_user_recorded_idx';
-        if ($this->indexExists('health_samples', $indexName)) {
-            Schema::table('health_samples', function (Blueprint $table) use ($indexName) {
-                $table->dropIndex($indexName);
-            });
-        }
-
         // Prevent accidental data loss. This table might have existed before.
-        // Schema::dropIfExists('health_samples');
+        // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
     }
 
     private function indexExists(string $table, string $indexName): bool

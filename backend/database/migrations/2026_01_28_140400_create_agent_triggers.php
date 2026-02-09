@@ -105,20 +105,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('agent_triggers')) {
-            return;
-        }
-
-        foreach (['agent_triggers_user_type_fired_idx', 'agent_triggers_idempotency_uq', 'agent_triggers_status_idx'] as $indexName) {
-            if ($this->indexExists('agent_triggers', $indexName)) {
-                Schema::table('agent_triggers', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-        }
-
         // Prevent accidental data loss. This table might have existed before.
-        // Schema::dropIfExists('agent_triggers');
+        // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
     }
 
     private function indexExists(string $table, string $indexName): bool

@@ -95,19 +95,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('user_agent_settings')) {
-            return;
-        }
-
-        $uniqueIndex = 'user_agent_settings_user_id_uq';
-        if ($this->indexExists('user_agent_settings', $uniqueIndex)) {
-            Schema::table('user_agent_settings', function (Blueprint $table) use ($uniqueIndex) {
-                $table->dropUnique($uniqueIndex);
-            });
-        }
-
         // Prevent accidental data loss. This table might have existed before.
-        // Schema::dropIfExists('user_agent_settings');
+        // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
     }
 
     private function indexExists(string $table, string $indexName): bool
