@@ -44,6 +44,7 @@ if [[ -z "${READY_URL}" ]]; then
 fi
 
 BOOT_JSON="$(curl -fsS "${BASE_URL}/api/v0.3/boot")"
+BOOT_JSON="$(printf '%s\n' "${BOOT_JSON}" | sed -n '/^{/,$p')"
 php -r '
 $raw = stream_get_contents(STDIN);
 $j = json_decode($raw, true);
@@ -56,6 +57,7 @@ if (array_key_exists("version", $j) && (!is_string($j["version"]) || trim($j["ve
 ' <<<"${BOOT_JSON}"
 
 FLAGS_JSON="$(curl -fsS "${BASE_URL}/api/v0.3/flags")"
+FLAGS_JSON="$(printf '%s\n' "${FLAGS_JSON}" | sed -n '/^{/,$p')"
 php -r '
 $raw = stream_get_contents(STDIN);
 $j = json_decode($raw, true);

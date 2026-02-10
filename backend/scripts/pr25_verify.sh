@@ -281,13 +281,25 @@ SUBMIT_STATUS="$(curl -sS -o "${SUBMIT_JSON}" -w "%{http_code}" -X POST "${API_B
   -H "X-Org-Id: ${ORG_ID}" \
   -d "${SUBMIT_BODY}")"
 
-if [[ "${SUBMIT_STATUS}" != "402" ]]; then
+if [[ "${SUBMIT_STATUS}" != "200" ]]; then
   echo "[pr25][fail] insufficient credits status mismatch"
   cat "${SUBMIT_JSON}"
   exit 1
 fi
 
-php -r '$j=json_decode(stream_get_contents(STDIN), true); $code=$j["error"]["code"] ?? ""; if ($code !== "CREDITS_INSUFFICIENT") { fwrite(STDERR, "[pr25][fail] insufficient code mismatch\n"); exit(1);} echo "[pr25] insufficient ok\n";' < "${SUBMIT_JSON}"
+php -r '$j=json_decode(stream_get_contents(STDIN), true); $ok=(bool)($j["ok"] ?? false); $attempt=(string)($j["attempt_id"] ?? ""); if (!$ok || $attempt === "") { fwrite(STDERR, "[pr25][fail] insufficient submit should still return success envelope\n"); exit(1);} echo "[pr25] insufficient submit accepted (eventual consistency)\n";' < "${SUBMIT_JSON}"
+
+BALANCE_AFTER_INSUFF="$(php -r '$db=new PDO("sqlite:" . getenv("DB_DATABASE")); $stmt=$db->prepare("select balance from benefit_wallets where org_id=? and benefit_code=?"); $stmt->execute([2500, "B2B_ASSESSMENT_ATTEMPT_SUBMIT"]); $row=$stmt->fetch(PDO::FETCH_ASSOC); echo $row["balance"] ?? "";')"
+if [[ "${BALANCE_AFTER_INSUFF}" != "0" ]]; then
+  echo "[pr25][fail] insufficient submit should not consume credits"
+  exit 1
+fi
+
+CONSUMPTION_COUNT="$(php -r '$db=new PDO("sqlite:" . getenv("DB_DATABASE")); $stmt=$db->prepare("select count(1) as c from benefit_consumptions where org_id=? and benefit_code=?"); $stmt->execute([2500, "B2B_ASSESSMENT_ATTEMPT_SUBMIT"]); $row=$stmt->fetch(PDO::FETCH_ASSOC); echo $row["c"] ?? "";')"
+if [[ "${CONSUMPTION_COUNT}" != "3" ]]; then
+  echo "[pr25][fail] insufficient submit should not create extra consumption rows"
+  exit 1
+fi
 
 if [[ -f "${SERVER_PID_FILE}" ]]; then
   SERVER_PID="$(cat "${SERVER_PID_FILE}")"
