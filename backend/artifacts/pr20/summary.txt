@@ -1,10 +1,10 @@
 pr20_verify_report_paywall
 - api=http://127.0.0.1:18000
-- attempt_id=64bda439-a36b-437f-ac06-f2300f4a1192
-- order_no=ord_ea080d96-5a86-4ca5-bdc1-ca8709fa0dcb
-- unpaid_locked=True
-- paid_locked=True
-- paid_after_update_locked=True
+- attempt_id=631a66bd-9ad9-4d48-92a0-e507bf64f346
+- order_no=ord_64f5f59b-84bf-447c-a226-a6010982f6a9
+- unpaid_locked=true
+- paid_locked=false
+- paid_after_update_locked=false
 - diff=0
-- smoke_url=http://127.0.0.1:18000/api/v0.3/attempts/64bda439-a36b-437f-ac06-f2300f4a1192/report
+- smoke_url=http://127.0.0.1:18000/api/v0.3/attempts/631a66bd-9ad9-4d48-92a0-e507bf64f346/report
 - tables=report_snapshots,benefit_grants,benefit_consumptions,payment_events,orders
