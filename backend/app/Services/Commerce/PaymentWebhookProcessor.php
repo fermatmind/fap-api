@@ -2,6 +2,7 @@
 
 namespace App\Services\Commerce;
 
+use App\Jobs\GenerateReportSnapshotJob;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
@@ -95,9 +96,10 @@ class PaymentWebhookProcessor
             'services.payment_webhook.lock_block_seconds',
             self::DEFAULT_WEBHOOK_LOCK_BLOCK_SECONDS
         ));
+        $snapshotJobCtx = null;
 
         try {
-            return Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
+            $result = Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
                 $orderNo,
                 $normalized,
                 $providerEventId,
@@ -110,7 +112,8 @@ class PaymentWebhookProcessor
                 $payloadSummaryJson,
                 $payloadExcerpt,
                 $resolvedPayloadMeta,
-                $signatureOk
+                $signatureOk,
+                &$snapshotJobCtx
             ) {
                 return DB::transaction(function () use (
                     $orderNo,
@@ -125,7 +128,8 @@ class PaymentWebhookProcessor
                     $payloadSummaryJson,
                     $payloadExcerpt,
                     $resolvedPayloadMeta,
-                    $signatureOk
+                    $signatureOk,
+                    &$snapshotJobCtx
                 ) {
                     $insertSeed = [
                         'id' => (string) Str::uuid(),
@@ -533,25 +537,18 @@ class PaymentWebhookProcessor
 
                         $this->events->record('entitlement_granted', $this->numericUserId($eventUserId), $eventBaseMeta, $eventContext);
 
-                        $snapshot = $this->reportSnapshots->createSnapshotForAttempt([
+                        $this->reportSnapshots->seedPendingSnapshot((int) $order->org_id, $attemptId, $orderNo, [
+                            'scale_code' => (string) ($attemptMeta['scale_code'] ?? ''),
+                            'pack_id' => (string) ($attemptMeta['pack_id'] ?? ''),
+                            'dir_version' => (string) ($attemptMeta['dir_version'] ?? ''),
+                            'scoring_spec_version' => (string) ($attemptMeta['scoring_spec_version'] ?? ''),
+                        ]);
+                        $snapshotJobCtx = [
                             'org_id' => (int) $order->org_id,
                             'attempt_id' => $attemptId,
                             'trigger_source' => 'payment',
                             'order_no' => $orderNo,
-                            'user_id' => $order->user_id ? (string) $order->user_id : null,
-                            'anon_id' => $order->anon_id ? (string) $order->anon_id : null,
-                            'org_role' => 'system',
-                        ]);
-                        if (!($snapshot['ok'] ?? false)) {
-                            $this->markEventError(
-                                $provider,
-                                $providerEventId,
-                                'failed',
-                                (string) ($snapshot['error'] ?? 'SNAPSHOT_FAILED'),
-                                (string) ($snapshot['message'] ?? 'report snapshot failed.')
-                            );
-                            return $snapshot;
-                        }
+                        ];
                     } else {
                         $this->markEventError($provider, $providerEventId, 'failed', 'SKU_KIND_INVALID', 'unsupported sku kind.');
                         return $this->badRequest('SKU_KIND_INVALID', 'unsupported sku kind.');
@@ -580,6 +577,17 @@ class PaymentWebhookProcessor
                     ];
                 });
             });
+
+            if (is_array($snapshotJobCtx) && ($result['ok'] ?? false)) {
+                GenerateReportSnapshotJob::dispatch(
+                    (int) $snapshotJobCtx['org_id'],
+                    (string) $snapshotJobCtx['attempt_id'],
+                    (string) $snapshotJobCtx['trigger_source'],
+                    $snapshotJobCtx['order_no'] !== null ? (string) $snapshotJobCtx['order_no'] : null,
+                )->afterCommit();
+            }
+
+            return $result;
         } catch (LockTimeoutException $e) {
             return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
         }
