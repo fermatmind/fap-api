@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\V0_3;
 
+use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Report\ReportSnapshotStore;
 use Database\Seeders\Pr17SimpleScoreDemoSeeder;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
@@ -188,6 +190,13 @@ class ReportSnapshotB2BTest extends TestCase
         $this->assertSame(1, DB::table('report_snapshots')->count());
         $this->assertSame(1, DB::table('benefit_consumptions')->count());
         $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'consume')->count());
+
+        $pending = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
+        $this->assertNotNull($pending);
+        $this->assertSame('pending', (string) ($pending->status ?? ''));
+
+        $job = new GenerateReportSnapshotJob($orgId, $attemptId, 'submit', null);
+        $job->handle(app(ReportSnapshotStore::class));
 
         $dupSubmit = $this->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,

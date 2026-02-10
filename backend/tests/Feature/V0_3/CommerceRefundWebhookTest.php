@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\V0_3;
 
+use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Report\ReportSnapshotStore;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -202,6 +204,13 @@ class CommerceRefundWebhookTest extends TestCase
         ]);
         $paid->assertStatus(200);
         $paid->assertJson(['ok' => true]);
+
+        $pending = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
+        $this->assertNotNull($pending);
+        $this->assertSame('pending', (string) ($pending->status ?? ''));
+
+        $job = new GenerateReportSnapshotJob($orgId, $attemptId, 'payment', $orderNo);
+        $job->handle(app(ReportSnapshotStore::class));
 
         $report = $this->getJson("/api/v0.3/attempts/{$attemptId}/report", [
             'X-Org-Id' => (string) $orgId,

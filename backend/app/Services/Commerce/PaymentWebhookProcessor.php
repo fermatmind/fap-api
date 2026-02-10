@@ -97,6 +97,7 @@ class PaymentWebhookProcessor
             self::DEFAULT_WEBHOOK_LOCK_BLOCK_SECONDS
         ));
         $snapshotJobCtx = null;
+        $postCommitCtx = null;
 
         try {
             $result = Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
@@ -113,7 +114,7 @@ class PaymentWebhookProcessor
                 $payloadExcerpt,
                 $resolvedPayloadMeta,
                 $signatureOk,
-                &$snapshotJobCtx
+                &$postCommitCtx
             ) {
                 return DB::transaction(function () use (
                     $orderNo,
@@ -129,7 +130,7 @@ class PaymentWebhookProcessor
                     $payloadExcerpt,
                     $resolvedPayloadMeta,
                     $signatureOk,
-                    &$snapshotJobCtx
+                    &$postCommitCtx
                 ) {
                     $insertSeed = [
                         'id' => (string) Str::uuid(),
@@ -354,7 +355,6 @@ class PaymentWebhookProcessor
                         'order_no' => $orderNo,
                     ]);
                     $eventContext = $this->buildEventContext($orderMeta, $anonId);
-                    $this->events->record('payment_webhook_received', $this->numericUserId($eventUserId), $eventMeta, $eventContext);
 
                     if ($isRefundEvent) {
                         $refund = $this->handleRefund($orderNo, $order, $normalized, $providerEventId, $orgId);
@@ -463,31 +463,20 @@ class PaymentWebhookProcessor
                     $eventUserId = $order->user_id ? (string) $order->user_id : $userId;
 
                     if ($kind === 'credit_pack') {
-                        $topupKey = "TOPUP:{$provider}:{$providerEventId}";
-                        $wallet = $this->wallets->topUp(
-                            (int) $order->org_id,
-                            $benefitCode,
-                            (int) ($skuRow->unit_qty ?? 0) * $quantity,
-                            $topupKey,
-                            [
-                                'order_no' => $orderNo,
-                                'provider_event_id' => $providerEventId,
-                                'provider' => $provider,
-                            ]
-                        );
-
-                        if (!($wallet['ok'] ?? false)) {
-                            $this->markEventError(
-                                $provider,
-                                $providerEventId,
-                                'failed',
-                                (string) ($wallet['error'] ?? 'WALLET_TOPUP_FAILED'),
-                                (string) ($wallet['message'] ?? 'wallet topup failed.')
-                            );
-                            return $wallet;
-                        }
-
-                        $this->events->record('wallet_topped_up', $this->numericUserId($eventUserId), $eventBaseMeta, $eventContext);
+                        $postCommitCtx = [
+                            'kind' => 'credit_pack',
+                            'org_id' => (int) $order->org_id,
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'benefit_code' => $benefitCode,
+                            'topup_delta' => (int) ($skuRow->unit_qty ?? 0) * $quantity,
+                            'event_user_id' => $eventUserId,
+                            'event_meta' => $eventBaseMeta,
+                            'event_context' => $eventContext,
+                            'received_event_meta' => $eventMeta,
+                            'received_event_context' => $eventContext,
+                        ];
                     } elseif ($kind === 'report_unlock') {
                         $attemptId = (string) ($order->target_attempt_id ?? '');
                         if ($attemptId === '') {
@@ -535,19 +524,24 @@ class PaymentWebhookProcessor
                             return $grant;
                         }
 
-                        $this->events->record('entitlement_granted', $this->numericUserId($eventUserId), $eventBaseMeta, $eventContext);
-
-                        $this->reportSnapshots->seedPendingSnapshot((int) $order->org_id, $attemptId, $orderNo, [
-                            'scale_code' => (string) ($attemptMeta['scale_code'] ?? ''),
-                            'pack_id' => (string) ($attemptMeta['pack_id'] ?? ''),
-                            'dir_version' => (string) ($attemptMeta['dir_version'] ?? ''),
-                            'scoring_spec_version' => (string) ($attemptMeta['scoring_spec_version'] ?? ''),
-                        ]);
-                        $snapshotJobCtx = [
+                        $postCommitCtx = [
+                            'kind' => 'report_unlock',
                             'org_id' => (int) $order->org_id,
-                            'attempt_id' => $attemptId,
-                            'trigger_source' => 'payment',
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
                             'order_no' => $orderNo,
+                            'attempt_id' => $attemptId,
+                            'event_user_id' => $eventUserId,
+                            'event_meta' => $eventBaseMeta,
+                            'event_context' => $eventContext,
+                            'received_event_meta' => $eventMeta,
+                            'received_event_context' => $eventContext,
+                            'snapshot_meta' => [
+                                'scale_code' => (string) ($attemptMeta['scale_code'] ?? ''),
+                                'pack_id' => (string) ($attemptMeta['pack_id'] ?? ''),
+                                'dir_version' => (string) ($attemptMeta['dir_version'] ?? ''),
+                                'scoring_spec_version' => (string) ($attemptMeta['scoring_spec_version'] ?? ''),
+                            ],
                         ];
                     } else {
                         $this->markEventError($provider, $providerEventId, 'failed', 'SKU_KIND_INVALID', 'unsupported sku kind.');
@@ -563,10 +557,8 @@ class PaymentWebhookProcessor
                             (string) ($fulfilled['error'] ?? 'ORDER_STATUS_INVALID'),
                             (string) ($fulfilled['message'] ?? 'order transition failed.')
                         );
-                        return $fulfilled;
+                            return $fulfilled;
                     }
-
-                    $this->events->record('purchase_success', $this->numericUserId($eventUserId), $eventBaseMeta, $eventContext);
 
                     $this->markEventProcessed($provider, $providerEventId);
 
@@ -577,6 +569,10 @@ class PaymentWebhookProcessor
                     ];
                 });
             });
+
+            if (($result['ok'] ?? false) && is_array($postCommitCtx)) {
+                $snapshotJobCtx = $this->runWebhookPostCommitSideEffects($postCommitCtx);
+            }
 
             if (is_array($snapshotJobCtx) && ($result['ok'] ?? false)) {
                 GenerateReportSnapshotJob::dispatch(
@@ -591,6 +587,138 @@ class PaymentWebhookProcessor
         } catch (LockTimeoutException $e) {
             return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
         }
+    }
+
+    private function runWebhookPostCommitSideEffects(array $ctx): ?array
+    {
+        $kind = strtolower(trim((string) ($ctx['kind'] ?? '')));
+        $orgId = (int) ($ctx['org_id'] ?? 0);
+        $provider = strtolower(trim((string) ($ctx['provider'] ?? '')));
+        $providerEventId = trim((string) ($ctx['provider_event_id'] ?? ''));
+        $orderNo = trim((string) ($ctx['order_no'] ?? ''));
+        $eventUserId = $this->numericUserId(
+            is_string($ctx['event_user_id'] ?? null) ? (string) $ctx['event_user_id'] : null
+        );
+        $eventMeta = is_array($ctx['event_meta'] ?? null) ? $ctx['event_meta'] : [];
+        $eventContext = is_array($ctx['event_context'] ?? null) ? $ctx['event_context'] : [];
+        $receivedEventMeta = is_array($ctx['received_event_meta'] ?? null) ? $ctx['received_event_meta'] : [];
+        $receivedEventContext = is_array($ctx['received_event_context'] ?? null) ? $ctx['received_event_context'] : [];
+
+        if ($receivedEventMeta !== [] || $receivedEventContext !== []) {
+            try {
+                $this->events->record('payment_webhook_received', $eventUserId, $receivedEventMeta, $receivedEventContext);
+            } catch (\Throwable $e) {
+                Log::error('PAYMENT_WEBHOOK_POST_COMMIT_EVENT_FAILED', [
+                    'event' => 'payment_webhook_received',
+                    'provider' => $provider,
+                    'provider_event_id' => $providerEventId,
+                    'order_no' => $orderNo,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        $snapshotJobCtx = null;
+        if ($kind === 'credit_pack') {
+            $benefitCode = strtoupper(trim((string) ($ctx['benefit_code'] ?? '')));
+            $topupDelta = (int) ($ctx['topup_delta'] ?? 0);
+            if ($benefitCode !== '' && $topupDelta > 0) {
+                try {
+                    $topupKey = "TOPUP:{$provider}:{$providerEventId}";
+                    $wallet = $this->wallets->topUp(
+                        $orgId,
+                        $benefitCode,
+                        $topupDelta,
+                        $topupKey,
+                        [
+                            'order_no' => $orderNo,
+                            'provider_event_id' => $providerEventId,
+                            'provider' => $provider,
+                        ]
+                    );
+
+                    if (!($wallet['ok'] ?? false)) {
+                        Log::warning('PAYMENT_WEBHOOK_POST_COMMIT_TOPUP_FAILED', [
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'org_id' => $orgId,
+                            'benefit_code' => $benefitCode,
+                            'error' => $wallet['error'] ?? 'WALLET_TOPUP_FAILED',
+                            'message' => $wallet['message'] ?? 'wallet topup failed.',
+                        ]);
+                    } else {
+                        $this->events->record('wallet_topped_up', $eventUserId, $eventMeta, $eventContext);
+                    }
+                } catch (\Throwable $e) {
+                    Log::error('PAYMENT_WEBHOOK_POST_COMMIT_TOPUP_EXCEPTION', [
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_no' => $orderNo,
+                        'org_id' => $orgId,
+                        'benefit_code' => $benefitCode,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+        } elseif ($kind === 'report_unlock') {
+            try {
+                $this->events->record('entitlement_granted', $eventUserId, $eventMeta, $eventContext);
+            } catch (\Throwable $e) {
+                Log::error('PAYMENT_WEBHOOK_POST_COMMIT_EVENT_FAILED', [
+                    'event' => 'entitlement_granted',
+                    'provider' => $provider,
+                    'provider_event_id' => $providerEventId,
+                    'order_no' => $orderNo,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+
+            $attemptId = trim((string) ($ctx['attempt_id'] ?? ''));
+            $snapshotMeta = is_array($ctx['snapshot_meta'] ?? null) ? $ctx['snapshot_meta'] : [];
+            if ($attemptId !== '') {
+                try {
+                    $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, $orderNo !== '' ? $orderNo : null, [
+                        'scale_code' => (string) ($snapshotMeta['scale_code'] ?? ''),
+                        'pack_id' => (string) ($snapshotMeta['pack_id'] ?? ''),
+                        'dir_version' => (string) ($snapshotMeta['dir_version'] ?? ''),
+                        'scoring_spec_version' => (string) ($snapshotMeta['scoring_spec_version'] ?? ''),
+                    ]);
+
+                    $snapshotJobCtx = [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'trigger_source' => 'payment',
+                        'order_no' => $orderNo !== '' ? $orderNo : null,
+                    ];
+                } catch (\Throwable $e) {
+                    Log::error('PAYMENT_WEBHOOK_POST_COMMIT_SEED_SNAPSHOT_FAILED', [
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_no' => $orderNo,
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+        }
+
+        if ($eventMeta !== [] || $eventContext !== []) {
+            try {
+                $this->events->record('purchase_success', $eventUserId, $eventMeta, $eventContext);
+            } catch (\Throwable $e) {
+                Log::error('PAYMENT_WEBHOOK_POST_COMMIT_EVENT_FAILED', [
+                    'event' => 'purchase_success',
+                    'provider' => $provider,
+                    'provider_event_id' => $providerEventId,
+                    'order_no' => $orderNo,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        return $snapshotJobCtx;
     }
 
     private function numericUserId(?string $userId): ?int
