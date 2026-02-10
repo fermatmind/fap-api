@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Integrations;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Integrations\IngestRequest;
 use App\Services\Ingestion\ConsentService;
 use App\Services\Ingestion\IngestionService;
+use App\Services\Ingestion\IntegrationUserResolver;
 use App\Services\Ingestion\ReplayService;
 use App\Support\Idempotency\IdempotencyKey;
 use Illuminate\Http\Request;
@@ -66,6 +68,19 @@ class ProvidersController extends Controller
                     'updated_at' => now(),
                 ]);
         }
+        if (($consent['ok'] ?? false) && Schema::hasTable('integration_user_bindings') && $userId !== null) {
+            DB::table('integration_user_bindings')->updateOrInsert(
+                [
+                    'provider' => $provider,
+                    'external_user_id' => $externalUserId,
+                ],
+                [
+                    'user_id' => (int) $userId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
+        }
 
         return response()->json([
             'ok' => true,
@@ -88,20 +103,51 @@ class ProvidersController extends Controller
         ]);
     }
 
-    public function ingest(Request $request, string $provider)
+    public function ingest(IngestRequest $request, string $provider)
     {
-        $userId = $this->resolveUserId($request);
-        $payload = $request->all();
-        if ($userId === null) {
-            $payloadUserId = (string) ($payload['user_id'] ?? '');
-            if ($payloadUserId !== '' && preg_match('/^\d+$/', $payloadUserId)) {
-                $userId = $payloadUserId;
+        $provider = strtolower(trim($provider));
+        $payload = $request->validated();
+
+        $authMode = (string) $request->attributes->get('integration_auth_mode', '');
+        $signatureOk = (bool) $request->attributes->get('integration_signature_ok', false);
+
+        $userId = null;
+        if ($authMode === 'sanctum') {
+            $authId = auth()->id();
+            if (is_numeric($authId)) {
+                $userId = (string) ((int) $authId);
             }
+        } elseif ($authMode === 'signature') {
+            $externalUserId = trim((string) ($payload['external_user_id'] ?? ''));
+            $resolvedUserId = app(IntegrationUserResolver::class)->resolveInternalUserId($provider, $externalUserId);
+            if ($resolvedUserId === null) {
+                return response()->json([
+                    'ok' => false,
+                    'error' => 'INVALID_PAYLOAD',
+                    'error_code' => 'INVALID_PAYLOAD',
+                    'message' => 'external_user_id binding not found',
+                ], 422);
+            }
+            $userId = (string) $resolvedUserId;
+        }
+
+        if ($userId === null) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
+                'message' => 'Missing authenticated user.',
+            ], 401);
+        }
+
+        $meta = $payload['meta'] ?? [];
+        if (!is_array($meta)) {
+            $meta = [];
         }
 
         $batchMeta = [
-            'range_start' => $payload['range_start'] ?? null,
-            'range_end' => $payload['range_end'] ?? null,
+            'range_start' => $meta['range_start'] ?? null,
+            'range_end' => $meta['range_end'] ?? null,
             'raw_payload_hash' => IdempotencyKey::hashPayload($payload),
         ];
 
@@ -110,7 +156,20 @@ class ProvidersController extends Controller
             $samples = [];
         }
 
-        $result = app(IngestionService::class)->ingestSamples($provider, $userId, $batchMeta, $samples);
+        $result = app(IngestionService::class)->ingestSamples(
+            $provider,
+            $userId,
+            $batchMeta,
+            $samples,
+            [
+                'actor_user_id' => $authMode === 'sanctum'
+                    ? (int) ($request->attributes->get('integration_actor_user_id') ?? $userId)
+                    : null,
+                'auth_mode' => $authMode,
+                'signature_ok' => $signatureOk,
+                'source_ip' => (string) $request->ip(),
+            ]
+        );
 
         return response()->json($result);
     }

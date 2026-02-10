@@ -161,7 +161,8 @@ Route::prefix("v0.2")->middleware([
             Route::get("/oauth/start", [ProvidersController::class, "oauthStart"]);
             Route::get("/oauth/callback", [ProvidersController::class, "oauthCallback"]);
             Route::post("/revoke", [ProvidersController::class, "revoke"]);
-            Route::post("/ingest", [ProvidersController::class, "ingest"]);
+            Route::post("/ingest", [ProvidersController::class, "ingest"])
+                ->middleware(\App\Http\Middleware\VerifyIntegrationSignature::class);
             Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"]);
         });
 

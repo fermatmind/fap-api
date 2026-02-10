@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
 
         // ✅ our fm token gate
         'fm_token'   => \App\Http\Middleware\FmTokenAuth::class,
+        'integration.signature' => \App\Http\Middleware\VerifyIntegrationSignature::class,
     ];
 
     /**
@@ -89,5 +90,6 @@ class Kernel extends HttpKernel
 
         // ✅ our fm token gate
         'fm_token'   => \App\Http\Middleware\FmTokenAuth::class,
+        'integration.signature' => \App\Http\Middleware\VerifyIntegrationSignature::class,
     ];
 }
