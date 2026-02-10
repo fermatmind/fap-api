@@ -60,23 +60,10 @@ return new class extends Migration
             }
         });
 
-        if (Schema::hasTable('orders') && Schema::hasColumn('orders', 'org_id')) {
-            DB::table('orders')->whereNull('org_id')->update(['org_id' => 0]);
-        }
-
         if (!$this->indexExists('orders', 'orders_order_no_unique') && Schema::hasColumn('orders', 'order_no')) {
-            $duplicates = DB::table('orders')
-                ->select('order_no')
-                ->whereNotNull('order_no')
-                ->groupBy('order_no')
-                ->havingRaw('count(*) > 1')
-                ->limit(1)
-                ->get();
-            if ($duplicates->count() === 0) {
-                Schema::table('orders', function (Blueprint $table) {
-                    $table->unique('order_no', 'orders_order_no_unique');
-                });
-            }
+            Schema::table('orders', function (Blueprint $table) {
+                $table->unique('order_no', 'orders_order_no_unique');
+            });
         }
 
         if (!$this->indexExists('orders', 'orders_org_created_idx')

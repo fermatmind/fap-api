@@ -22,14 +22,6 @@ return new class extends Migration
             return;
         }
 
-        DB::table('orders')
-            ->whereNotNull('idempotency_key')
-            ->where('idempotency_key', '!=', '')
-            ->where(function ($query) {
-                $query->whereNull('provider')->orWhere('provider', '');
-            })
-            ->update(['provider' => 'stub']);
-
         if ($this->indexExists('orders', self::OLD_UNIQUE)) {
             Schema::table('orders', function (Blueprint $table) {
                 $table->dropUnique(self::OLD_UNIQUE);
@@ -40,20 +32,9 @@ return new class extends Migration
             return;
         }
 
-        $duplicates = DB::table('orders')
-            ->select('org_id', 'provider', 'idempotency_key')
-            ->whereNotNull('idempotency_key')
-            ->where('idempotency_key', '!=', '')
-            ->groupBy('org_id', 'provider', 'idempotency_key')
-            ->havingRaw('count(*) > 1')
-            ->limit(1)
-            ->get();
-
-        if ($duplicates->count() === 0) {
-            Schema::table('orders', function (Blueprint $table) {
-                $table->unique(['org_id', 'provider', 'idempotency_key'], self::NEW_UNIQUE);
-            });
-        }
+        Schema::table('orders', function (Blueprint $table) {
+            $table->unique(['org_id', 'provider', 'idempotency_key'], self::NEW_UNIQUE);
+        });
     }
 
     public function down(): void
@@ -76,20 +57,9 @@ return new class extends Migration
             return;
         }
 
-        $duplicates = DB::table('orders')
-            ->select('org_id', 'idempotency_key')
-            ->whereNotNull('idempotency_key')
-            ->where('idempotency_key', '!=', '')
-            ->groupBy('org_id', 'idempotency_key')
-            ->havingRaw('count(*) > 1')
-            ->limit(1)
-            ->get();
-
-        if ($duplicates->count() === 0) {
-            Schema::table('orders', function (Blueprint $table) {
-                $table->unique(['org_id', 'idempotency_key'], self::OLD_UNIQUE);
-            });
-        }
+        Schema::table('orders', function (Blueprint $table) {
+            $table->unique(['org_id', 'idempotency_key'], self::OLD_UNIQUE);
+        });
     }
 
     private function indexExists(string $table, string $indexName): bool

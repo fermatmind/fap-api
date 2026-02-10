@@ -49,38 +49,6 @@ return new class extends Migration
             }
         });
 
-        // ✅ 修复历史 NOT NULL（MySQL/PG）
-        if (Schema::hasTable('benefit_grants')) {
-            $driver = DB::connection()->getDriverName();
-
-            if ($driver === 'mysql') {
-                if (Schema::hasColumn('benefit_grants', 'user_id')) {
-                    DB::statement('ALTER TABLE benefit_grants MODIFY user_id varchar(64) NULL');
-                }
-                if (Schema::hasColumn('benefit_grants', 'benefit_ref')) {
-                    DB::statement('ALTER TABLE benefit_grants MODIFY benefit_ref varchar(128) NULL');
-                }
-                if (Schema::hasColumn('benefit_grants', 'benefit_type')) {
-                    DB::statement('ALTER TABLE benefit_grants MODIFY benefit_type varchar(64) NULL');
-                }
-            } elseif ($driver === 'pgsql') {
-                if (Schema::hasColumn('benefit_grants', 'user_id')) {
-                    DB::statement('ALTER TABLE benefit_grants ALTER COLUMN user_id DROP NOT NULL');
-                }
-                if (Schema::hasColumn('benefit_grants', 'benefit_ref')) {
-                    DB::statement('ALTER TABLE benefit_grants ALTER COLUMN benefit_ref DROP NOT NULL');
-                }
-                if (Schema::hasColumn('benefit_grants', 'benefit_type')) {
-                    DB::statement('ALTER TABLE benefit_grants ALTER COLUMN benefit_type DROP NOT NULL');
-                }
-            }
-            // sqlite 不做列改造：CI/新库由 2026_01_22_* 的创建分支直接生成 nullable
-        }
-
-        if (Schema::hasTable('benefit_grants') && Schema::hasColumn('benefit_grants', 'org_id')) {
-            DB::table('benefit_grants')->whereNull('org_id')->update(['org_id' => 0]);
-        }
-
         if (!$this->indexExists('benefit_grants', 'benefit_grants_org_user_benefit_idx')
             && Schema::hasColumn('benefit_grants', 'org_id')
             && Schema::hasColumn('benefit_grants', 'user_id')
@@ -102,20 +70,9 @@ return new class extends Migration
             && Schema::hasColumn('benefit_grants', 'source_order_id')
             && Schema::hasColumn('benefit_grants', 'benefit_type')
             && Schema::hasColumn('benefit_grants', 'benefit_ref')) {
-            $duplicates = DB::table('benefit_grants')
-                ->select('source_order_id', 'benefit_type', 'benefit_ref')
-                ->whereNotNull('source_order_id')
-                ->whereNotNull('benefit_type')
-                ->whereNotNull('benefit_ref')
-                ->groupBy('source_order_id', 'benefit_type', 'benefit_ref')
-                ->havingRaw('count(*) > 1')
-                ->limit(1)
-                ->get();
-            if ($duplicates->count() === 0) {
-                Schema::table('benefit_grants', function (Blueprint $table) {
-                    $table->unique(['source_order_id', 'benefit_type', 'benefit_ref'], 'uq_benefit_grants_source');
-                });
-            }
+            Schema::table('benefit_grants', function (Blueprint $table) {
+                $table->unique(['source_order_id', 'benefit_type', 'benefit_ref'], 'uq_benefit_grants_source');
+            });
         }
     }
 
