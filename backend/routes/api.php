@@ -279,8 +279,7 @@ Route::prefix("v0.3")->middleware([
         // 3) Commerce v2 (public with org context)
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
         Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder");
-        Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
-            ->whereIn('provider', ['stripe', 'billing']);
+        Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder");
         Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
     });
 
