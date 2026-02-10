@@ -252,6 +252,35 @@ class PaymentWebhookProcessor
                         return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
                     }
 
+                    $orderProvider = (string) ($order->provider ?? '');
+                    if ($orderProvider !== $provider) {
+                        Log::warning('PAYMENT_EVENT_PROVIDER_MISMATCH', [
+                            'provider' => $provider,
+                            'order_provider' => $orderProvider !== '' ? $orderProvider : null,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'order_id' => $order->id ?? null,
+                        ]);
+
+                        $rejectedAt = now();
+                        $this->updatePaymentEvent($provider, $providerEventId, [
+                            'status' => 'rejected',
+                            'reason' => 'PROVIDER_MISMATCH',
+                            'handled_at' => $rejectedAt,
+                            'handle_status' => 'rejected',
+                            'last_error_code' => 'PROVIDER_MISMATCH',
+                            'last_error_message' => 'provider mismatch.',
+                            'updated_at' => $rejectedAt,
+                        ]);
+
+                        return [
+                            'ok' => true,
+                            'ignored' => true,
+                            'order_no' => $orderNo,
+                            'provider_event_id' => $providerEventId,
+                        ];
+                    }
+
                     $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
                     $orderStatus = strtolower((string) ($order->status ?? ''));
                     if (!$isRefundEvent && in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true)) {
@@ -338,7 +367,6 @@ class PaymentWebhookProcessor
                     $orderTransition = $this->orders->transitionToPaidAtomic(
                         $orderNo,
                         $orgId,
-                        $provider,
                         $normalized['external_trade_no'] ?? null,
                         $normalized['paid_at'] ?? null
                     );
