@@ -10,7 +10,9 @@ use App\Support\OrgContext;
 use App\Support\RegionContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class CommerceController extends Controller
 {
@@ -65,6 +67,9 @@ class CommerceController extends Controller
             'provider' => ['nullable', 'string', 'max:32'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
         ]);
+
+        $requestedProvider = $this->resolveRequestedProvider($payload, $providerFromRoute);
+        $this->guardStubProvider($request, $requestedProvider);
 
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
@@ -168,6 +173,16 @@ class CommerceController extends Controller
 
     private function resolveProvider(array $payload, ?string $providerFromRoute): string
     {
+        $provider = $this->resolveRequestedProvider($payload, $providerFromRoute);
+        if (!in_array($provider, ['stripe', 'billing'], true)) {
+            return '';
+        }
+
+        return $provider;
+    }
+
+    private function resolveRequestedProvider(array $payload, ?string $providerFromRoute): string
+    {
         $provider = trim((string) ($providerFromRoute ?? ''));
         if ($provider === '') {
             $provider = trim((string) ($payload['provider'] ?? ''));
@@ -176,11 +191,42 @@ class CommerceController extends Controller
             $provider = (string) $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
         }
 
-        $provider = strtolower(trim($provider));
-        if (!in_array($provider, ['stripe', 'billing'], true)) {
-            return '';
+        return strtolower(trim($provider));
+    }
+
+    private function guardStubProvider(Request $request, string $provider): void
+    {
+        if ($provider !== 'stub' || config('payments.allow_stub') === true) {
+            return;
         }
 
-        return $provider;
+        Log::warning('SECURITY_STUB_PROVIDER_BLOCKED', [
+            'request_id' => $this->resolveRequestId($request),
+            'provider' => $provider,
+            'ip' => $request->ip(),
+        ]);
+
+        abort(404);
+    }
+
+    private function resolveRequestId(Request $request): string
+    {
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->header('X-Request-Id', ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->header('X-Request-ID', ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->input('request_id', ''));
+        return $requestId !== '' ? $requestId : (string) Str::uuid();
     }
 }
