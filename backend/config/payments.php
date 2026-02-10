@@ -23,4 +23,5 @@ return [
 
     'fallback_provider' => env('FAP_PAYMENT_FALLBACK_PROVIDER', 'billing'),
     'allow_stub' => env('PAYMENTS_ALLOW_STUB', false),
+    'webhook_max_payload_bytes' => (int) env('PAYMENTS_WEBHOOK_MAX_BYTES', 65536),
 ];

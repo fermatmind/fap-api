@@ -53,7 +53,8 @@ class PaymentWebhookProcessor
         int $orgId = 0,
         ?string $userId = null,
         ?string $anonId = null,
-        bool $signatureOk = true
+        bool $signatureOk = true,
+        array $payloadMeta = []
     ): array {
         if (!Schema::hasTable('payment_events')) {
             return $this->tableMissing('payment_events');
@@ -81,7 +82,10 @@ class PaymentWebhookProcessor
         }
 
         $receivedAt = now();
-        $payloadJson = is_array($payload) ? json_encode($payload, JSON_UNESCAPED_UNICODE) : $payload;
+        $payloadSummary = $this->buildPayloadSummary($normalized, $eventType);
+        $payloadSummaryJson = $this->encodePayloadSummary($payloadSummary);
+        $payloadExcerpt = $this->buildPayloadExcerpt($payloadSummaryJson);
+        $resolvedPayloadMeta = $this->resolvePayloadMeta($payload, $payloadMeta);
         $lockKey = "webhook_pay:{$provider}:{$providerEventId}";
         $lockTtl = max(1, (int) config(
             'services.payment_webhook.lock_ttl_seconds',
@@ -103,7 +107,9 @@ class PaymentWebhookProcessor
                 $anonId,
                 $eventType,
                 $receivedAt,
-                $payloadJson,
+                $payloadSummaryJson,
+                $payloadExcerpt,
+                $resolvedPayloadMeta,
                 $signatureOk
             ) {
                 return DB::transaction(function () use (
@@ -116,7 +122,9 @@ class PaymentWebhookProcessor
                     $anonId,
                     $eventType,
                     $receivedAt,
-                    $payloadJson,
+                    $payloadSummaryJson,
+                    $payloadExcerpt,
+                    $resolvedPayloadMeta,
                     $signatureOk
                 ) {
                     $insertSeed = [
@@ -124,11 +132,23 @@ class PaymentWebhookProcessor
                         'provider' => $provider,
                         'provider_event_id' => $providerEventId,
                         'order_no' => $orderNo,
-                        'payload_json' => $payloadJson,
+                        'payload_json' => $payloadSummaryJson,
                         'received_at' => $receivedAt,
                         'created_at' => $receivedAt,
                         'updated_at' => $receivedAt,
                     ];
+                    if (Schema::hasColumn('payment_events', 'payload_size_bytes')) {
+                        $insertSeed['payload_size_bytes'] = $resolvedPayloadMeta['size_bytes'];
+                    }
+                    if (Schema::hasColumn('payment_events', 'payload_sha256')) {
+                        $insertSeed['payload_sha256'] = $resolvedPayloadMeta['sha256'];
+                    }
+                    if (Schema::hasColumn('payment_events', 'payload_s3_key')) {
+                        $insertSeed['payload_s3_key'] = $resolvedPayloadMeta['s3_key'];
+                    }
+                    if (Schema::hasColumn('payment_events', 'payload_excerpt')) {
+                        $insertSeed['payload_excerpt'] = $payloadExcerpt;
+                    }
                     if (Schema::hasColumn('payment_events', 'event_type')) {
                         $insertSeed['event_type'] = $eventType;
                     }
@@ -193,10 +213,22 @@ class PaymentWebhookProcessor
                         'provider' => $provider,
                         'provider_event_id' => $providerEventId,
                         'order_no' => $orderNo,
-                        'payload_json' => $payloadJson,
+                        'payload_json' => $payloadSummaryJson,
                         'received_at' => $receivedAt,
                         'updated_at' => $receivedAt,
                     ];
+                    if (Schema::hasColumn('payment_events', 'payload_size_bytes')) {
+                        $baseRow['payload_size_bytes'] = $resolvedPayloadMeta['size_bytes'];
+                    }
+                    if (Schema::hasColumn('payment_events', 'payload_sha256')) {
+                        $baseRow['payload_sha256'] = $resolvedPayloadMeta['sha256'];
+                    }
+                    if (Schema::hasColumn('payment_events', 'payload_s3_key')) {
+                        $baseRow['payload_s3_key'] = $resolvedPayloadMeta['s3_key'];
+                    }
+                    if (Schema::hasColumn('payment_events', 'payload_excerpt')) {
+                        $baseRow['payload_excerpt'] = $payloadExcerpt;
+                    }
                     if (Schema::hasColumn('payment_events', 'event_type')) {
                         $baseRow['event_type'] = $eventType;
                     }
@@ -655,6 +687,103 @@ class PaymentWebhookProcessor
             'effective_sku' => $resolvedEffective ?? ($effectiveSku !== '' ? $effectiveSku : null),
             'entitlement_id' => $resolved['entitlement_id'] ?? ($order?->entitlement_id ?? null),
         ];
+    }
+
+    private function buildPayloadSummary(array $normalized, string $eventType): array
+    {
+        $eventId = trim((string) ($normalized['provider_event_id'] ?? ''));
+        $orderNo = trim((string) ($normalized['order_no'] ?? ''));
+
+        $amount = $normalized['amount_cents'] ?? null;
+        if (!is_numeric($amount)) {
+            $amount = null;
+        } else {
+            $amount = (int) $amount;
+        }
+
+        $currency = strtoupper(trim((string) ($normalized['currency'] ?? '')));
+        if ($currency === '') {
+            $currency = null;
+        }
+
+        $paidAt = $normalized['paid_at'] ?? null;
+        if ($paidAt !== null) {
+            $paidAt = trim((string) $paidAt);
+            if ($paidAt === '') {
+                $paidAt = null;
+            }
+        }
+
+        return [
+            'event_id' => $eventId !== '' ? $eventId : null,
+            'order_no' => $orderNo !== '' ? $orderNo : null,
+            'amount' => $amount,
+            'currency' => $currency,
+            'type' => $eventType !== '' ? $eventType : null,
+            'paid_at' => $paidAt,
+        ];
+    }
+
+    private function encodePayloadSummary(array $summary): string
+    {
+        $encoded = json_encode($summary, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (!is_string($encoded) || $encoded === '') {
+            return '{}';
+        }
+
+        return $encoded;
+    }
+
+    private function buildPayloadExcerpt(string $payloadSummaryJson, int $maxBytes = 8192): string
+    {
+        if ($maxBytes <= 0) {
+            return '';
+        }
+
+        if (strlen($payloadSummaryJson) <= $maxBytes) {
+            return $payloadSummaryJson;
+        }
+
+        return substr($payloadSummaryJson, 0, $maxBytes);
+    }
+
+    private function resolvePayloadMeta(array $payload, array $payloadMeta): array
+    {
+        $rawFallback = $this->resolvePayloadRawFallback($payload);
+
+        $size = $payloadMeta['size_bytes'] ?? null;
+        if (!is_numeric($size)) {
+            $size = strlen($rawFallback);
+        }
+        $size = max(0, (int) $size);
+
+        $sha = strtolower(trim((string) ($payloadMeta['sha256'] ?? '')));
+        if (!preg_match('/^[a-f0-9]{64}$/', $sha)) {
+            $sha = hash('sha256', $rawFallback);
+        }
+
+        $s3Key = trim((string) ($payloadMeta['s3_key'] ?? ''));
+        if ($s3Key === '') {
+            $s3Key = null;
+        } else {
+            $s3Key = substr($s3Key, 0, 255);
+        }
+
+        return [
+            'size_bytes' => $size,
+            'sha256' => $sha,
+            's3_key' => $s3Key,
+        ];
+    }
+
+    private function resolvePayloadRawFallback(array $payload): string
+    {
+        $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (!is_string($raw)) {
+            return '';
+        }
+
+        return $raw;
     }
 
     private function isEventProcessed(object $eventRow): bool

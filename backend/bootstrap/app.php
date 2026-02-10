@@ -1,6 +1,7 @@
 <?php
 
 use App\Support\ApiExceptionRenderer;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -31,6 +32,9 @@ return Application::configure(basePath: dirname(__DIR__))
         __DIR__ . '/../app/Console/Commands',
         \App\Console\Commands\FapResolvePack::class,
     ])
+    ->withSchedule(function (Schedule $schedule): void {
+        $schedule->command('payments:prune-events --days=90')->daily()->withoutOverlapping();
+    })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'fm_token' => \App\Http\Middleware\FmTokenAuth::class,

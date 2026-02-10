@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PaymentWebhookController extends Controller
@@ -36,6 +37,8 @@ class PaymentWebhookController extends Controller
         }
 
         $rawBody = (string) $request->getContent();
+        $size = strlen($rawBody);
+        $sha = hash('sha256', $rawBody);
 
         if ($provider === 'billing') {
             $misconfigured = $this->billingSecretMisconfiguredResponse($request, $provider);
@@ -67,6 +70,14 @@ class PaymentWebhookController extends Controller
         $userId = $ctx['user_id'];
         $anonId = $ctx['anon_id'];
 
+        $requestId = $this->resolveRequestId($request);
+        $s3Key = $this->storePayloadForensics($request, $provider, $payload, $rawBody, $sha, $size, $requestId);
+        $payloadMeta = [
+            'size_bytes' => $size,
+            'sha256' => $sha,
+            's3_key' => $s3Key,
+        ];
+
         $result = $this->processor->handle(
             $provider,
             $payload,
@@ -74,6 +85,7 @@ class PaymentWebhookController extends Controller
             $userId !== null ? (string) $userId : null,
             $anonId !== null ? (string) $anonId : null,
             $signatureOk,
+            $payloadMeta,
         );
 
         if (!($result['ok'] ?? false)) {
@@ -373,6 +385,101 @@ class PaymentWebhookController extends Controller
 
         $requestId = trim((string) $request->input('request_id', ''));
         return $requestId !== '' ? $requestId : (string) Str::uuid();
+    }
+
+    private function storePayloadForensics(
+        Request $request,
+        string $provider,
+        array $payload,
+        string $rawBody,
+        string $sha,
+        int $size,
+        string $requestId
+    ): ?string {
+        $providerEventId = $this->resolveStorageProviderEventId($payload);
+        if ($providerEventId === '') {
+            $providerEventId = 'unknown-' . substr($sha, 0, 16);
+        }
+
+        $safeProviderEventId = $this->sanitizeStoragePathToken($providerEventId);
+        if ($safeProviderEventId === '') {
+            $safeProviderEventId = 'unknown-' . substr($sha, 0, 16);
+        }
+
+        $key = "payment-events/{$provider}/{$safeProviderEventId}.json";
+
+        try {
+            $stored = Storage::disk('s3')->put($key, $rawBody);
+            if ($stored === true) {
+                return $key;
+            }
+
+            Log::warning('PAYMENT_WEBHOOK_PAYLOAD_S3_STORE_FAILED', [
+                'provider' => $provider,
+                'provider_event_id' => $providerEventId,
+                'request_id' => $requestId,
+                'ip' => $request->ip(),
+                'sha256' => $sha,
+                'len' => $size,
+                's3_key' => $key,
+                'reason' => 'put_returned_false',
+            ]);
+
+            return null;
+        } catch (\Throwable $e) {
+            Log::warning('PAYMENT_WEBHOOK_PAYLOAD_S3_STORE_FAILED', [
+                'provider' => $provider,
+                'provider_event_id' => $providerEventId,
+                'request_id' => $requestId,
+                'ip' => $request->ip(),
+                'sha256' => $sha,
+                'len' => $size,
+                's3_key' => $key,
+                'reason' => $e->getMessage(),
+            ]);
+
+            return null;
+        }
+    }
+
+    private function resolveStorageProviderEventId(array $payload): string
+    {
+        foreach (['provider_event_id', 'event_id', 'id'] as $key) {
+            if (!array_key_exists($key, $payload)) {
+                continue;
+            }
+
+            $value = trim((string) ($payload[$key] ?? ''));
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        $dataObject = $payload['data']['object'] ?? null;
+        if (is_array($dataObject)) {
+            $value = trim((string) ($dataObject['id'] ?? ''));
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        return '';
+    }
+
+    private function sanitizeStoragePathToken(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return '';
+        }
+
+        $value = preg_replace('/[^A-Za-z0-9._-]+/', '_', $value) ?? '';
+        $value = trim($value, '._-');
+        if ($value === '') {
+            return '';
+        }
+
+        return substr($value, 0, 128);
     }
 
     private function notFoundResponse(): JsonResponse
