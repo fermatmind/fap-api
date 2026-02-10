@@ -81,12 +81,18 @@ class PaymentWebhookController extends Controller
             return response()->json($result, $status);
         }
 
-        return response()->json([
+        $response = [
             'ok' => true,
             'duplicate' => (bool) ($result['duplicate'] ?? false),
             'order_no' => $result['order_no'] ?? null,
             'provider_event_id' => $result['provider_event_id'] ?? null,
-        ]);
+        ];
+
+        if (array_key_exists('ignored', $result)) {
+            $response['ignored'] = (bool) $result['ignored'];
+        }
+
+        return response()->json($response);
     }
 
     /**

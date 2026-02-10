@@ -222,7 +222,6 @@ class OrderManager
     public function transitionToPaidAtomic(
         string $orderNo,
         int $orgId,
-        string $provider,
         ?string $externalTradeNo = null,
         ?string $paidAt = null
     ): array {
@@ -272,10 +271,6 @@ class OrderManager
 
         if (Schema::hasColumn('orders', 'paid_at') && empty($order->paid_at)) {
             $updates['paid_at'] = ($paidAt !== null && $paidAt !== '') ? $paidAt : $now;
-        }
-
-        if ($provider !== '' && Schema::hasColumn('orders', 'provider')) {
-            $updates['provider'] = $provider;
         }
 
         if ($externalTradeNo && Schema::hasColumn('orders', 'external_trade_no')) {
