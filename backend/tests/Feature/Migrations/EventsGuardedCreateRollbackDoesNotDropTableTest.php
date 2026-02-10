@@ -25,6 +25,7 @@ final class EventsGuardedCreateRollbackDoesNotDropTableTest extends TestCase
         ]);
 
         Artisan::call('migrate:rollback', [
+            '--path' => 'database/migrations/2025_12_17_165938_create_events_table.php',
             '--step' => 1,
             '--force' => true,
         ]);
