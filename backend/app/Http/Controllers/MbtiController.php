@@ -155,10 +155,18 @@ class MbtiController extends Controller
         try {
             $cachedPayload = $cache->get($cacheKey);
         } catch (\Throwable $e) {
+            Log::warning('MBTI_CACHE_READ_FAILED', [
+                'key' => $cacheKey,
+                'message' => $e->getMessage(),
+            ]);
             try {
                 $cache = Cache::store();
                 $cachedPayload = $cache->get($cacheKey);
             } catch (\Throwable $e2) {
+                Log::warning('MBTI_CACHE_READ_FAILED', [
+                    'key' => $cacheKey,
+                    'message' => $e2->getMessage(),
+                ]);
                 $cachedPayload = null;
             }
         }
@@ -239,10 +247,17 @@ class MbtiController extends Controller
         try {
             $cache->put($cacheKey, $payload, self::HOT_CACHE_TTL_SECONDS);
         } catch (\Throwable $e) {
+            Log::warning('MBTI_CACHE_WRITE_FAILED', [
+                'key' => $cacheKey,
+                'message' => $e->getMessage(),
+            ]);
             try {
                 Cache::store()->put($cacheKey, $payload, self::HOT_CACHE_TTL_SECONDS);
             } catch (\Throwable $e2) {
-                // ignore cache write failure
+                Log::warning('MBTI_CACHE_WRITE_FAILED', [
+                    'key' => $cacheKey,
+                    'message' => $e2->getMessage(),
+                ]);
             }
         }
 
@@ -1998,7 +2013,11 @@ try {
         $out = $applier->apply($out, $ctx);
     }
 } catch (\Throwable $e) {
-    // swallow
+    Log::error('MBTI_HIGHLIGHTS_BUILD_FAILED', [
+        'attempt_id' => (string) (request()->route('id') ?? request()->route('attempt_id') ?? request()->input('attempt_id', '')),
+        'type_code' => $typeCode,
+        'message' => $e->getMessage(),
+    ]);
 }
 
 return array_slice($out, 0, 8);
@@ -2413,7 +2432,10 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
                 }
             }
         } catch (\Throwable $e) {
-            // ignore this root and continue
+            Log::warning('MBTI_PACKAGE_FILE_PROBE_FAILED', [
+                'path' => $root,
+                'message' => $e->getMessage(),
+            ]);
             continue;
         }
     }
@@ -2505,7 +2527,11 @@ private function findPackageFile(string $pkg, string $filename, int $maxDepth = 
                     $path = $candidate;
                 }
             } catch (\Throwable $e) {
-                // ignore resolve failure
+                Log::error('MBTI_TYPE_PROFILE_LOAD_FAILED', [
+                    'package_id' => $contentPackageVersion,
+                    'type_code' => $typeCode,
+                    'message' => $e->getMessage(),
+                ]);
             }
         }
 
