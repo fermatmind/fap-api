@@ -24,6 +24,7 @@ use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class AttemptWriteController extends Controller
@@ -88,13 +89,6 @@ class AttemptWriteController extends Controller
         $locale = (string) ($payload['locale'] ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
 
         $questionCount = $this->resolveQuestionCount($packId, $dirVersion);
-        if ($questionCount === null) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'QUESTIONS_NOT_FOUND',
-                'message' => 'questions.json not found or invalid.',
-            ], 500);
-        }
 
         $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
 
@@ -537,33 +531,70 @@ class AttemptWriteController extends Controller
             ], 500);
     }
 
-    private function resolveQuestionCount(string $packId, string $dirVersion): ?int
+    private function resolveQuestionCount(string $packId, string $dirVersion): int
     {
+        $questionsPath = '';
+
         $found = $this->packsIndex->find($packId, $dirVersion);
         if (!($found['ok'] ?? false)) {
-            return null;
+            Log::error('QUESTIONS_INDEX_FIND_FAILED', [
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'questions_path' => $questionsPath,
+                'message' => 'QUESTIONS_INDEX_FIND_FAILED',
+                'json_error' => json_last_error_msg(),
+            ]);
+            throw new \RuntimeException('QUESTIONS_INDEX_FIND_FAILED');
         }
 
         $item = $found['item'] ?? [];
         $questionsPath = (string) ($item['questions_path'] ?? '');
-        if ($questionsPath === '' || !File::isFile($questionsPath)) {
-            return null;
+        if ($questionsPath === '' || !File::exists($questionsPath)) {
+            Log::error('QUESTIONS_FILE_MISSING', [
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'questions_path' => $questionsPath,
+                'message' => 'QUESTIONS_FILE_MISSING',
+                'json_error' => json_last_error_msg(),
+            ]);
+            throw new \RuntimeException('QUESTIONS_FILE_MISSING');
         }
 
         try {
             $raw = File::get($questionsPath);
         } catch (\Throwable $e) {
-            return null;
+            Log::error('QUESTIONS_FILE_READ_FAILED', [
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'questions_path' => $questionsPath,
+                'message' => $e->getMessage(),
+                'json_error' => json_last_error_msg(),
+            ]);
+            throw $e;
         }
 
         $decoded = json_decode($raw, true);
         if (!is_array($decoded)) {
-            return null;
+            Log::error('QUESTIONS_JSON_DECODE_FAILED', [
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'questions_path' => $questionsPath,
+                'message' => 'QUESTIONS_JSON_DECODE_FAILED',
+                'json_error' => json_last_error_msg(),
+            ]);
+            throw new \RuntimeException('QUESTIONS_JSON_DECODE_FAILED');
         }
 
         $items = $decoded['items'] ?? null;
         if (!is_array($items)) {
-            return null;
+            Log::error('QUESTIONS_JSON_INVALID_SHAPE', [
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'questions_path' => $questionsPath,
+                'message' => 'QUESTIONS_JSON_INVALID_SHAPE',
+                'json_error' => json_last_error_msg(),
+            ]);
+            throw new \RuntimeException('QUESTIONS_JSON_INVALID_SHAPE');
         }
 
         return count($items);
