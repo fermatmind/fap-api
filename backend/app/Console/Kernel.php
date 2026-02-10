@@ -16,6 +16,7 @@ use App\Console\Commands\AdminBootstrapOwner;
 use App\Console\Commands\OpsDeployEvent;
 use App\Console\Commands\OpsHealthzSnapshot;
 use App\Console\Commands\ArchiveColdData;
+use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SyncScaleSlugs;
 
@@ -41,6 +42,7 @@ class Kernel extends ConsoleKernel
         OpsDeployEvent::class,
         OpsHealthzSnapshot::class,
         ArchiveColdData::class,
+        PaymentsPruneEvents::class,
         SeedScaleRegistry::class,
         SyncScaleSlugs::class,
     ];
@@ -53,6 +55,7 @@ class Kernel extends ConsoleKernel
         // 示例（需要就开）：
         // $schedule->command('fap:self-check')->dailyAt('03:10');
         // $schedule->command('fap:validate-report --attempt=...')->hourly();
+        $schedule->command('payments:prune-events --days=90')->daily()->withoutOverlapping();
     }
 
     /**

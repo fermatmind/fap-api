@@ -31,7 +31,25 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
         $processor->shouldReceive('handle')
             ->once()
-            ->with('stripe', $payload, 0, null, null, true)
+            ->withArgs(function (
+                string $provider,
+                array $incomingPayload,
+                int $orgId,
+                ?string $userId,
+                ?string $anonId,
+                bool $signatureOk,
+                array $payloadMeta
+            ) use ($payload, $rawBody): bool {
+                return $provider === 'stripe'
+                    && $incomingPayload === $payload
+                    && $orgId === 0
+                    && $userId === null
+                    && $anonId === null
+                    && $signatureOk === true
+                    && ($payloadMeta['size_bytes'] ?? null) === strlen($rawBody)
+                    && ($payloadMeta['sha256'] ?? null) === hash('sha256', $rawBody)
+                    && array_key_exists('s3_key', $payloadMeta);
+            })
             ->andReturn([
                 'ok' => true,
                 'duplicate' => false,
