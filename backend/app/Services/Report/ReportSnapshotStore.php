@@ -22,6 +22,89 @@ class ReportSnapshotStore
     }
 
     /**
+     * @param array $meta {scale_code?:string, pack_id?:string, dir_version?:string, scoring_spec_version?:string}
+     */
+    public function seedPendingSnapshot(int $orgId, string $attemptId, ?string $orderNo, array $meta): void
+    {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return;
+        }
+        if (!Schema::hasTable('report_snapshots')) {
+            return;
+        }
+
+        $existing = $this->findSnapshotRow($orgId, $attemptId);
+        if ($existing && $this->snapshotStatus($existing) === 'ready') {
+            return;
+        }
+
+        $now = now();
+        $resolvedOrderNo = trim((string) ($orderNo ?? ''));
+        $scoringSpecVersion = $meta['scoring_spec_version'] ?? null;
+        if (is_string($scoringSpecVersion)) {
+            $scoringSpecVersion = trim($scoringSpecVersion) !== '' ? trim($scoringSpecVersion) : null;
+        } elseif (!is_numeric($scoringSpecVersion)) {
+            $scoringSpecVersion = null;
+        }
+
+        $row = [
+            'org_id' => $orgId,
+            'attempt_id' => $attemptId,
+            'order_no' => $resolvedOrderNo !== '' ? $resolvedOrderNo : null,
+            'scale_code' => strtoupper(trim((string) ($meta['scale_code'] ?? ''))),
+            'pack_id' => trim((string) ($meta['pack_id'] ?? '')),
+            'dir_version' => trim((string) ($meta['dir_version'] ?? '')),
+            'scoring_spec_version' => $scoringSpecVersion,
+            'report_engine_version' => self::REPORT_ENGINE_VERSION,
+            'snapshot_version' => self::SNAPSHOT_VERSION,
+            'report_json' => '{}',
+            'created_at' => $now,
+        ];
+        if (Schema::hasColumn('report_snapshots', 'status')) {
+            $row['status'] = 'pending';
+        }
+        if (Schema::hasColumn('report_snapshots', 'last_error')) {
+            $row['last_error'] = null;
+        }
+        if (Schema::hasColumn('report_snapshots', 'updated_at')) {
+            $row['updated_at'] = $now;
+        }
+
+        DB::table('report_snapshots')->insertOrIgnore($row);
+
+        $updates = [
+            'report_json' => '{}',
+            'report_engine_version' => self::REPORT_ENGINE_VERSION,
+            'snapshot_version' => self::SNAPSHOT_VERSION,
+            'scoring_spec_version' => $scoringSpecVersion,
+        ];
+        if ($resolvedOrderNo !== '') {
+            $updates['order_no'] = $resolvedOrderNo;
+        }
+        if ($row['scale_code'] !== '') {
+            $updates['scale_code'] = $row['scale_code'];
+        }
+        if ($row['pack_id'] !== '') {
+            $updates['pack_id'] = $row['pack_id'];
+        }
+        if ($row['dir_version'] !== '') {
+            $updates['dir_version'] = $row['dir_version'];
+        }
+        if (Schema::hasColumn('report_snapshots', 'status')) {
+            $updates['status'] = 'pending';
+        }
+        if (Schema::hasColumn('report_snapshots', 'last_error')) {
+            $updates['last_error'] = null;
+        }
+        if (Schema::hasColumn('report_snapshots', 'updated_at')) {
+            $updates['updated_at'] = $now;
+        }
+
+        $this->snapshotWriteQuery($orgId, $attemptId)->update($updates);
+    }
+
+    /**
      * @param array $ctx {org_id:int, attempt_id:string, trigger_source:string, order_no?:string, user_id?:string, anon_id?:string, org_role?:string}
      */
     public function createSnapshotForAttempt(array $ctx): array
@@ -48,8 +131,8 @@ class ReportSnapshotStore
             return $this->tableMissing('results');
         }
 
-        $existing = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
-        if ($existing) {
+        $existing = $this->findSnapshotRow($orgId, $attemptId);
+        if ($existing && $this->snapshotStatus($existing) === 'ready') {
             return [
                 'ok' => true,
                 'snapshot' => $this->normalizeSnapshot($existing),
@@ -97,16 +180,21 @@ class ReportSnapshotStore
             'report_json' => $reportJson,
             'created_at' => $now,
         ];
-
-        $inserted = DB::table('report_snapshots')->insertOrIgnore($row);
-        if (!$inserted) {
-            $existing = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
-            return [
-                'ok' => true,
-                'snapshot' => $existing ? $this->normalizeSnapshot($existing) : null,
-                'idempotent' => true,
-            ];
+        if (Schema::hasColumn('report_snapshots', 'status')) {
+            $row['status'] = 'ready';
         }
+        if (Schema::hasColumn('report_snapshots', 'last_error')) {
+            $row['last_error'] = null;
+        }
+        if (Schema::hasColumn('report_snapshots', 'updated_at')) {
+            $row['updated_at'] = $now;
+        }
+
+        DB::table('report_snapshots')->insertOrIgnore($row);
+
+        $updateRow = $row;
+        unset($updateRow['created_at']);
+        $this->snapshotWriteQuery($orgId, $attemptId)->update($updateRow);
 
         $this->eventRecorder->record('report_snapshot_created', null, [
             'scale_code' => $scaleCode,
@@ -122,7 +210,7 @@ class ReportSnapshotStore
             'dir_version' => $dirVersion,
         ]);
 
-        $snapshot = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
+        $snapshot = $this->findSnapshotRow($orgId, $attemptId);
 
         return [
             'ok' => true,
@@ -240,7 +328,10 @@ class ReportSnapshotStore
             'scoring_spec_version' => $row->scoring_spec_version ?? null,
             'report_engine_version' => (string) ($row->report_engine_version ?? self::REPORT_ENGINE_VERSION),
             'snapshot_version' => (string) ($row->snapshot_version ?? self::SNAPSHOT_VERSION),
+            'status' => $this->snapshotStatus($row),
+            'last_error' => $row->last_error ?? null,
             'created_at' => (string) ($row->created_at ?? ''),
+            'updated_at' => isset($row->updated_at) && $row->updated_at !== null ? (string) $row->updated_at : null,
         ];
 
         $reportJson = $row->report_json ?? null;
@@ -254,6 +345,47 @@ class ReportSnapshotStore
         }
 
         return $payload;
+    }
+
+    private function snapshotWriteQuery(int $orgId, string $attemptId): \Illuminate\Database\Query\Builder
+    {
+        $base = DB::table('report_snapshots')->where('attempt_id', $attemptId);
+        if (!Schema::hasColumn('report_snapshots', 'org_id')) {
+            return $base;
+        }
+
+        $byOrg = DB::table('report_snapshots')
+            ->where('attempt_id', $attemptId)
+            ->where('org_id', $orgId);
+        if ($byOrg->exists()) {
+            return $byOrg;
+        }
+
+        return $base;
+    }
+
+    private function findSnapshotRow(int $orgId, string $attemptId): ?object
+    {
+        if (!Schema::hasTable('report_snapshots')) {
+            return null;
+        }
+
+        $query = DB::table('report_snapshots')->where('attempt_id', $attemptId);
+        if (Schema::hasColumn('report_snapshots', 'org_id')) {
+            $row = (clone $query)->where('org_id', $orgId)->first();
+            if ($row) {
+                return $row;
+            }
+        }
+
+        $row = $query->first();
+        return $row ?: null;
+    }
+
+    private function snapshotStatus(?object $row): string
+    {
+        $status = strtolower(trim((string) ($row->status ?? 'ready')));
+        return in_array($status, ['pending', 'ready', 'failed'], true) ? $status : 'ready';
     }
 
     private function tableMissing(string $table): array

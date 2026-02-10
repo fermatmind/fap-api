@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Schema;
 
 class ReportGatekeeper
 {
+    private const SNAPSHOT_RETRY_AFTER_SECONDS = 3;
+
     private const DEFAULT_VIEW_POLICY = [
         'free_sections' => ['intro', 'score'],
         'blur_others' => true,
@@ -105,6 +107,37 @@ class ReportGatekeeper
                 ]);
 
                 return $this->serverError('REPORT_SNAPSHOT_MISSING', 'report snapshot missing.');
+            }
+
+            $snapshotStatus = strtolower(trim((string) ($snapshotRow->status ?? 'ready')));
+            if ($snapshotStatus === 'pending') {
+                return $this->responsePayload(
+                    true,
+                    'full',
+                    $viewPolicy,
+                    [],
+                    $paywall,
+                    [
+                        'generating' => true,
+                        'snapshot_error' => false,
+                        'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                    ]
+                );
+            }
+
+            if ($snapshotStatus === 'failed') {
+                return $this->responsePayload(
+                    true,
+                    'full',
+                    $viewPolicy,
+                    [],
+                    $paywall,
+                    [
+                        'generating' => false,
+                        'snapshot_error' => true,
+                        'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                    ]
+                );
             }
 
             $report = $this->decodeReportJson($snapshotRow->report_json ?? null);
@@ -494,7 +527,14 @@ class ReportGatekeeper
         return [];
     }
 
-    private function responsePayload(bool $locked, string $accessLevel, array $viewPolicy, array $report, array $paywall = []): array
+    private function responsePayload(
+        bool $locked,
+        string $accessLevel,
+        array $viewPolicy,
+        array $report,
+        array $paywall = [],
+        array $meta = []
+    ): array
     {
         return [
             'ok' => true,
@@ -504,6 +544,7 @@ class ReportGatekeeper
             'upgrade_sku_effective' => $paywall['upgrade_sku_effective'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'offers' => $paywall['offers'] ?? [],
             'view_policy' => $viewPolicy,
+            'meta' => $meta,
             'report' => $report,
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessments\AssessmentService;
@@ -246,6 +247,36 @@ class AttemptsController extends Controller
 
         $response = null;
         $consumeB2BCredit = false;
+        $snapshotJobCtx = null;
+
+        $engineAttempt = [
+            'org_id' => $orgId,
+            'scale_code' => $scaleCode,
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
+        ];
+        $scoreContext = [
+            'duration_ms' => $durationMs,
+            'started_at' => $attempt->started_at,
+            'submitted_at' => now(),
+            'region' => $region,
+            'locale' => $locale,
+            'org_id' => $orgId,
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
+        ];
+        $scored = $this->engine->score($engineAttempt, $answers, $scoreContext);
+        if (!($scored['ok'] ?? false)) {
+            return response()->json([
+                'ok' => false,
+                'error' => $scored['error'] ?? 'SCORING_FAILED',
+                'message' => $scored['message'] ?? 'scoring failed.',
+            ], 500);
+        }
+
+        $scoreResult = $scored['result'];
+        $contentPackageVersion = (string) ($scored['pack']['content_package_version'] ?? '');
+        $scoringSpecVersion = (string) ($scored['scoring_spec_version'] ?? '');
 
         DB::transaction(function () use (
             &$response,
@@ -264,7 +295,11 @@ class AttemptsController extends Controller
             $inviteToken,
             $userId,
             $anonId,
-            &$consumeB2BCredit
+            $scoreResult,
+            $contentPackageVersion,
+            $scoringSpecVersion,
+            &$consumeB2BCredit,
+            &$snapshotJobCtx
         ) {
             $locked = $this->ownedAttemptQuery($attemptId, $orgId, $userId, $anonId)
                 ->lockForUpdate()
@@ -300,38 +335,6 @@ class AttemptsController extends Controller
                     return;
                 }
             }
-
-            $engineAttempt = [
-                'org_id' => $orgId,
-                'scale_code' => $scaleCode,
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-            ];
-
-            $ctx = [
-                'duration_ms' => $durationMs,
-                'started_at' => $locked->started_at,
-                'submitted_at' => now(),
-                'region' => $region,
-                'locale' => $locale,
-                'org_id' => $orgId,
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-            ];
-
-            $scored = $this->engine->score($engineAttempt, $answers, $ctx);
-            if (!($scored['ok'] ?? false)) {
-                $response = response()->json([
-                    'ok' => false,
-                    'error' => $scored['error'] ?? 'SCORING_FAILED',
-                    'message' => $scored['message'] ?? 'scoring failed.',
-                ], 500);
-                return;
-            }
-
-            $scoreResult = $scored['result'];
-            $contentPackageVersion = (string) ($scored['pack']['content_package_version'] ?? '');
-            $scoringSpecVersion = (string) ($scored['scoring_spec_version'] ?? '');
 
             $locked->fill([
                 'pack_id' => $packId,
@@ -462,78 +465,84 @@ class AttemptsController extends Controller
             }
 
             $entitlementBenefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
-if ($entitlementBenefitCode === '') {
-    $entitlementBenefitCode = $creditBenefitCode;
-}
+            if ($entitlementBenefitCode === '') {
+                $entitlementBenefitCode = $creditBenefitCode;
+            }
 
-// B2B 已扣费（consumeB2BCredit=true）时，跳过第二次 creditBenefitCode 的扣费，避免双扣
-if ($orgId > 0 && $creditBenefitCode !== '' && !$consumeB2BCredit) {
-    $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
-    if (!($consume['ok'] ?? false)) {
-        $status = (int) ($consume['status'] ?? 402);
-        $response = response()->json([
-            'ok' => false,
-            'error' => $consume['error'] ?? 'INSUFFICIENT_CREDITS',
-            'message' => $consume['message'] ?? 'insufficient credits.',
-        ], $status);
-        return;
-    }
+            // B2B 已扣费（consumeB2BCredit=true）时，跳过第二次 creditBenefitCode 的扣费，避免双扣
+            if ($orgId > 0 && $creditBenefitCode !== '' && !$consumeB2BCredit) {
+                $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
+                if (!($consume['ok'] ?? false)) {
+                    $status = (int) ($consume['status'] ?? 402);
+                    $response = response()->json([
+                        'ok' => false,
+                        'error' => $consume['error'] ?? 'INSUFFICIENT_CREDITS',
+                        'message' => $consume['message'] ?? 'insufficient credits.',
+                    ], $status);
+                    return;
+                }
 
-    $this->eventRecorder->record('wallet_consumed', $this->resolveUserId($request), [
-        'scale_code' => $scaleCode,
-        'pack_id' => $packId,
-        'dir_version' => $dirVersion,
-        'attempt_id' => $attemptId,
-        'benefit_code' => $creditBenefitCode,
-        'sku' => null,
-    ], [
-        'org_id' => $orgId,
-        'anon_id' => $this->orgContext->anonId(),
-        'attempt_id' => $attemptId,
-        'pack_id' => $packId,
-        'dir_version' => $dirVersion,
-    ]);
-}
+                $this->eventRecorder->record('wallet_consumed', $this->resolveUserId($request), [
+                    'scale_code' => $scaleCode,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'attempt_id' => $attemptId,
+                    'benefit_code' => $creditBenefitCode,
+                    'sku' => null,
+                ], [
+                    'org_id' => $orgId,
+                    'anon_id' => $this->orgContext->anonId(),
+                    'attempt_id' => $attemptId,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                ]);
+            }
 
-// entitlement 解锁：B2B 链路与 commercial 链路都需要
-if ($orgId > 0 && $entitlementBenefitCode !== '') {
-    $userIdRaw = $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id');
-    $anonIdRaw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id');
+            // entitlement 解锁：B2B 链路与 commercial 链路都需要
+            if ($orgId > 0 && $entitlementBenefitCode !== '') {
+                $userIdRaw = $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id');
+                $anonIdRaw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id');
 
-    $grant = $this->entitlements->grantAttemptUnlock(
-        $orgId,
-        $userIdRaw !== null ? (string) $userIdRaw : null,
-        $anonIdRaw !== null ? (string) $anonIdRaw : null,
-        $entitlementBenefitCode,
-        $attemptId,
-        null
-    );
+                $grant = $this->entitlements->grantAttemptUnlock(
+                    $orgId,
+                    $userIdRaw !== null ? (string) $userIdRaw : null,
+                    $anonIdRaw !== null ? (string) $anonIdRaw : null,
+                    $entitlementBenefitCode,
+                    $attemptId,
+                    null
+                );
 
-    if (!($grant['ok'] ?? false)) {
-        $status = (int) ($grant['status'] ?? 500);
-        $response = response()->json($grant, $status);
-        return;
-    }
+                if (!($grant['ok'] ?? false)) {
+                    $status = (int) ($grant['status'] ?? 500);
+                    $response = response()->json($grant, $status);
+                    return;
+                }
+            }
 
-    // snapshot：保持原行为（成功解锁后写快照）
-    $snapshot = $this->reportSnapshots->createSnapshotForAttempt([
-        'org_id' => $orgId,
-        'attempt_id' => $attemptId,
-        'trigger_source' => 'credit_consume',
-        'order_no' => null,
-        'user_id' => $userId !== null ? (string) $userId : null,
-        'anon_id' => $anonId,
-        'org_role' => $this->orgContext->role(),
-    ]);
-    if (!($snapshot['ok'] ?? false)) {
-        $status = (int) ($snapshot['status'] ?? 500);
-        $response = response()->json($snapshot, $status);
-        return;
-    }
-}
+            $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, null, [
+                'scale_code' => $scaleCode,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'scoring_spec_version' => $scoringSpecVersion,
+            ]);
+            $snapshotJobCtx = [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'trigger_source' => 'submit',
+                'order_no' => null,
+            ];
 
             $response = $this->buildSubmitResponse($locked, $result, true);
         });
+
+        if (is_array($snapshotJobCtx)) {
+            GenerateReportSnapshotJob::dispatch(
+                (int) $snapshotJobCtx['org_id'],
+                (string) $snapshotJobCtx['attempt_id'],
+                (string) $snapshotJobCtx['trigger_source'],
+                $snapshotJobCtx['order_no'] !== null ? (string) $snapshotJobCtx['order_no'] : null,
+            )->afterCommit();
+        }
 
         if ($response instanceof JsonResponse && $response->getStatusCode() === 200) {
             $this->progressService->clearProgress($attemptId);
@@ -641,15 +650,20 @@ if ($orgId > 0 && $entitlementBenefitCode !== '') {
             'locked' => (bool) ($gate['locked'] ?? false),
         ]);
 
+        $gateMeta = [];
+        if (isset($gate['meta']) && is_array($gate['meta'])) {
+            $gateMeta = $gate['meta'];
+        }
+
         return response()->json(array_merge($gate, [
-            'meta' => [
+            'meta' => array_merge($gateMeta, [
                 'scale_code' => (string) ($attempt->scale_code ?? ''),
                 'pack_id' => (string) ($attempt->pack_id ?? ''),
                 'dir_version' => (string) ($attempt->dir_version ?? ''),
                 'content_package_version' => (string) ($attempt->content_package_version ?? ''),
                 'scoring_spec_version' => (string) ($attempt->scoring_spec_version ?? ''),
                 'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
-            ],
+            ]),
         ]));
     }
 
