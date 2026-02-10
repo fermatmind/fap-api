@@ -21,6 +21,11 @@ API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 BAD_ANON="${BAD_ANON:-把你查到的anon_id填这里}"
 
+AUTH_HDRS=()
+if [[ -n "${FM_TOKEN:-}" && "${FM_TOKEN}" != "null" ]]; then
+  AUTH_HDRS=(-H "Authorization: Bearer ${FM_TOKEN}")
+fi
+
 echo "[ACCEPT_D3] repo=$REPO_DIR"
 echo "[ACCEPT_D3] backend=$BACKEND_DIR"
 echo "[ACCEPT_D3] API=$API"
@@ -41,7 +46,7 @@ fi
 echo "[ACCEPT_D3] ATT=$ATT"
 
 # /share
-SHARE_RAW="$(curl -sS "$API/api/v0.2/attempts/$ATT/share" || true)"
+SHARE_RAW="$(curl -sS ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} "$API/api/v0.2/attempts/$ATT/share" || true)"
 SHARE_JSON="$(printf '%s\n' "$SHARE_RAW" | sed -n '/^{/,$p')"
 SHARE_ID="$(printf '%s\n' "$SHARE_JSON" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["share_id"] ?? ($j["shareId"] ?? "");' 2>/dev/null || true)"
 if [[ -z "$SHARE_ID" || "$SHARE_ID" == "null" ]]; then

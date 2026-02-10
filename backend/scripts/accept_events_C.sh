@@ -28,6 +28,11 @@ BACKEND_DIR="$REPO_DIR/backend"
 API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
+AUTH_HDRS=()
+if [[ -n "${FM_TOKEN:-}" && "${FM_TOKEN}" != "null" ]]; then
+  AUTH_HDRS=(-H "Authorization: Bearer ${FM_TOKEN}")
+fi
+
 echo "[ACCEPT] repo=$REPO_DIR"
 echo "[ACCEPT] backend=$BACKEND_DIR"
 echo "[ACCEPT] API=$API"
@@ -82,7 +87,9 @@ curl -sS -H "X-Anon-Id: $ANON_ID" \
 # ---- 2) share_generate (with optional headers) ----
 # Use set -u safe array expansion in case HDRS is empty.
 SHARE_RAW="$(
-  curl -sS "$API/api/v0.2/attempts/$ATT/share" \
+  curl -sS \
+    ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} \
+    "$API/api/v0.2/attempts/$ATT/share" \
     ${HDRS[@]+"${HDRS[@]}"} \
   || true
 )"

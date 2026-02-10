@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Services\Legacy\LegacyShareService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -46,10 +47,14 @@ class ShareController extends Controller
 
         // 2) 查 share_generate（用 share_id 关联）
         // ✅ 用 Laravel JSON path：跨 DB（sqlite/mysql）兼容
-        $gen = Event::where('event_code', 'share_generate')
-            ->where('meta_json->share_id', $shareId)
-            ->orderByDesc('occurred_at')
-            ->first();
+        try {
+            $gen = Event::where('event_code', 'share_generate')
+                ->where('meta_json->share_id', $shareId)
+                ->orderByDesc('occurred_at')
+                ->first();
+        } catch (\Throwable $e) {
+            throw new NotFoundHttpException('Not Found');
+        }
 
         if (!$gen) {
             throw new NotFoundHttpException('Not Found');
@@ -281,6 +286,121 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
             'attempt_id' => $attemptId,
             'report'     => $report,
         ]);
+    }
+
+    /**
+     * Legacy: generate/fetch share id for attempt
+     * GET /api/v0.2/attempts/{id}/share
+     */
+    public function getShare(Request $request, string $id, LegacyShareService $service)
+    {
+        $orgId = $this->resolveLegacyOrgId($request);
+        $userId = $this->resolveLegacyUserId($request);
+        $anonId = $this->resolveLegacyAnonId($request);
+
+        $data = $service->getOrCreateAttemptShare($id, $orgId, $userId, $anonId);
+
+        // Keep legacy funnel green: share_generate + share_view side-effects.
+        $this->emitLegacyShareEvents($request, $data, $anonId);
+
+        return response()->json(array_merge(['ok' => true], $data), 200);
+    }
+
+    /**
+     * Legacy: view share payload
+     * GET /api/v0.2/share/{shareId}
+     */
+    public function getShareView(Request $request, string $shareId, LegacyShareService $service)
+    {
+        $data = $service->getShareView($shareId);
+        return response()->json(array_merge(['ok' => true], $data), 200);
+    }
+
+    private function resolveLegacyOrgId(Request $request): int
+    {
+        $fromToken = $request->attributes->get('fm_org_id');
+        if (is_numeric($fromToken)) {
+            return (int) $fromToken;
+        }
+
+        $fromHeader = $request->header('X-Org-Id');
+        if (is_numeric($fromHeader)) {
+            return (int) $fromHeader;
+        }
+
+        return 0;
+    }
+
+    private function resolveLegacyUserId(Request $request): ?int
+    {
+        $v = $request->attributes->get('fm_user_id');
+        if ($v === null || $v === '' || !is_numeric($v)) {
+            return null;
+        }
+        return (int) $v;
+    }
+
+    private function resolveLegacyAnonId(Request $request): ?string
+    {
+        $v = trim((string) ($request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id') ?? ''));
+        return $v === '' ? null : $v;
+    }
+
+    private function emitLegacyShareEvents(Request $request, array $data, ?string $anonId): void
+    {
+        $shareId = (string) ($data['share_id'] ?? '');
+        $attemptId = (string) ($data['attempt_id'] ?? '');
+        if ($shareId === '' || $attemptId === '') {
+            return;
+        }
+
+        $experiment = (string) ($request->header('X-Experiment') ?? '');
+        $version = (string) ($request->header('X-App-Version') ?? '');
+        $channel = (string) ($request->header('X-Channel') ?? '');
+        $clientPlatform = (string) ($request->header('X-Client-Platform') ?? '');
+        $entryPage = (string) ($request->header('X-Entry-Page') ?? '');
+
+        $metaBase = [
+            'share_id' => $shareId,
+            'type_code' => (string) ($data['type_code'] ?? ''),
+            'content_package_version' => (string) ($data['content_package_version'] ?? ''),
+            'engine_version' => 'v1.2',
+            'engine' => 'v1.2',
+            'experiment' => $experiment !== '' ? $experiment : null,
+            'version' => $version !== '' ? $version : null,
+            'channel' => $channel !== '' ? $channel : null,
+            'client_platform' => $clientPlatform !== '' ? $clientPlatform : null,
+            'entry_page' => $entryPage !== '' ? $entryPage : null,
+        ];
+
+        $this->createLegacyEvent('share_generate', $attemptId, (int) ($data['org_id'] ?? 0), $anonId, $metaBase + [
+            'generate_type' => 'text',
+        ]);
+
+        $this->createLegacyEvent('share_view', $attemptId, (int) ($data['org_id'] ?? 0), $anonId, $metaBase + [
+            'view_type' => 'share_sheet',
+        ]);
+    }
+
+    private function createLegacyEvent(string $eventCode, string $attemptId, int $orgId, ?string $anonId, array $meta): void
+    {
+        try {
+            Event::query()->create([
+                'id' => (string) Str::uuid(),
+                'event_code' => $eventCode,
+                'attempt_id' => $attemptId,
+                'org_id' => $orgId,
+                'anon_id' => $anonId,
+                'channel' => $meta['channel'] ?? null,
+                'client_platform' => $meta['client_platform'] ?? null,
+                'meta_json' => $meta,
+                'occurred_at' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        } catch (\Throwable $e) {
+            // Keep endpoint non-blocking for legacy compatibility.
+        }
     }
 
     /**

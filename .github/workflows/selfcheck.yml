@@ -121,7 +121,23 @@ jobs:
             curl -sS http://127.0.0.1:18080/api/v0.2/health >/dev/null && break
             sleep 1
           done
-          API="http://127.0.0.1:18080" bash scripts/verify_mbti.sh
+          ANON_ID="ci_selfcheck"
+          AUTH_RAW="$(
+            curl -sS -X POST "http://127.0.0.1:18080/api/v0.2/auth/wx_phone" \
+              -H "Content-Type: application/json" \
+              -d "{\"wx_code\":\"dev\",\"phone_code\":\"dev\",\"anon_id\":\"${ANON_ID}\"}" \
+            || true
+          )"
+          AUTH_JSON="$(printf '%s\n' "$AUTH_RAW" | sed -n '/^{/,$p')"
+          FM_TOKEN="$(
+            printf '%s\n' "$AUTH_JSON" \
+              | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["token"] ?? "";'
+          )"
+          if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then
+            echo "[selfcheck][FAIL] cannot get token from /api/v0.2/auth/wx_phone" >&2
+            exit 1
+          fi
+          API="http://127.0.0.1:18080" ANON_ID="$ANON_ID" FM_TOKEN="$FM_TOKEN" bash scripts/verify_mbti.sh
 
       - name: Seed demo attempt+result (for runtime validate)
         working-directory: backend

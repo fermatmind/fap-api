@@ -128,16 +128,16 @@ Route::prefix("v0.2")->middleware([
         Route::post("/attempts/start", [MbtiController::class, "startAttempt"]);
     });
 
-    // 6) Public share info
-    Route::get("/attempts/{id}/share", [MbtiController::class, "getShare"]);
+    // 6) Public share view (legacy)
+    Route::get("/share/{shareId}", [ShareController::class, "getShareView"]);
 
     // 6.5) Lookups
     Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
     Route::post("/lookup/order", [LookupController::class, "lookupOrder"]);
 
     // 7) Share click (public)
-    Route::post("/shares/{shareId}/click", [ShareController::class, "click"])
-        ->middleware('uuid:shareId');
+    // share_id now supports 32-hex legacy ids, so remove uuid middleware.
+    Route::post("/shares/{shareId}/click", [ShareController::class, "click"]);
 
     Route::middleware('throttle:api_auth')->group(function () {
         // Auth (public)
@@ -227,6 +227,7 @@ Route::prefix("v0.2")->middleware([
 
         // Attempts gated endpoints
         Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
+        Route::get("/attempts/{id}/share", [ShareController::class, "getShare"]);
 
         Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
         Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);

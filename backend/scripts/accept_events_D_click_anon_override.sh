@@ -22,6 +22,11 @@ BACKEND_DIR="$REPO_DIR/backend"
 API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
+AUTH_HDRS=()
+if [[ -n "${FM_TOKEN:-}" && "${FM_TOKEN}" != "null" ]]; then
+  AUTH_HDRS=(-H "Authorization: Bearer ${FM_TOKEN}")
+fi
+
 echo "[ACCEPT_D2] repo=$REPO_DIR"
 echo "[ACCEPT_D2] backend=$BACKEND_DIR"
 echo "[ACCEPT_D2] API=$API"
@@ -43,7 +48,7 @@ echo "[ACCEPT_D2] ATT=$ATT"
 export ATT
 
 # --- Call /share to get SHARE_ID
-SHARE_RAW="$(curl -sS "$API/api/v0.2/attempts/$ATT/share" || true)"
+SHARE_RAW="$(curl -sS ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} "$API/api/v0.2/attempts/$ATT/share" || true)"
 SHARE_JSON="$(printf '%s\n' "$SHARE_RAW" | sed -n '/^{/,$p')"
 SHARE_ID="$(printf '%s\n' "$SHARE_JSON" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["share_id"] ?? ($j["shareId"] ?? "");' 2>/dev/null || true)"
 

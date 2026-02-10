@@ -20,6 +20,11 @@ BACKEND_DIR="$REPO_DIR/backend"
 API="${API:-http://127.0.0.1:1827}"
 SQLITE_DB="${SQLITE_DB:-$BACKEND_DIR/database/database.sqlite}"
 
+AUTH_HDRS=()
+if [[ -n "${FM_TOKEN:-}" && "${FM_TOKEN}" != "null" ]]; then
+  AUTH_HDRS=(-H "Authorization: Bearer ${FM_TOKEN}")
+fi
+
 echo "[ACCEPT_D] repo=$REPO_DIR"
 echo "[ACCEPT_D] backend=$BACKEND_DIR"
 echo "[ACCEPT_D] API=$API"
@@ -67,7 +72,9 @@ export ATT
 # 1) If accept_events_C.sh exported SHARE_ID in current shell (unlikely), use it
 # 2) Else: call /share ourselves with headers, so we get a deterministic SHARE_ID and
 #    the share_generate event should have same anon_id as attempt-side (if implemented).
-SHARE_RAW="$(curl -sS "$API/api/v0.2/attempts/$ATT/share" \
+SHARE_RAW="$(curl -sS \
+  ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} \
+  "$API/api/v0.2/attempts/$ATT/share" \
   -H "X-Experiment: $EXPERIMENT" \
   -H "X-App-Version: $APPV" \
   -H "X-Channel: $CHANNEL" \

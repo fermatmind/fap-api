@@ -12,6 +12,11 @@ cd "$BACKEND_DIR"
 
 API="${API:-http://127.0.0.1:1827}"
 
+AUTH_HDRS=()
+if [[ -n "${FM_TOKEN:-}" && "${FM_TOKEN}" != "null" ]]; then
+  AUTH_HDRS=(-H "Authorization: Bearer ${FM_TOKEN}")
+fi
+
 # -----------------------------
 # Resolve SQLITE_DB to ABS path
 # -----------------------------
@@ -80,6 +85,7 @@ echo "[ACCEPT_H] share_id(from_artifacts)=$SHARE_ID_OLD"
 # IMPORTANT: Do NOT discard response; use share_id from THIS response
 # -----------------------------
 curl -fsS \
+  ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} \
   -H "X-Experiment: H_accept" \
   -H "X-App-Version: 1.2.3-accept" \
   -H "X-Channel: miniapp" \

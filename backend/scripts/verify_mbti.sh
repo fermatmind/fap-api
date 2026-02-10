@@ -332,8 +332,8 @@ echo "[5/8] fetch report & share"
 REPORT_URL="$API/api/v0.2/attempts/$ATTEMPT_ID/report?anon_id=$ATTEMPT_ANON_ID"
 # ✅ report uses owner anon_id guard; avoid mismatched fm_token owner overriding anon_id
 fetch_json "$REPORT_URL" "$REPORT_JSON" 0
-# share is public (not gated)
-fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON" 0
+# share is now gated by fm_token
+fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON" 1
 echo "[OK] report=$REPORT_JSON"
 echo "[OK] share=$SHARE_JSON"
 
