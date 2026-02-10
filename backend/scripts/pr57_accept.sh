@@ -76,7 +76,7 @@ SERVE_PORT="${SERVE_PORT}" ART_DIR="${ART_DIR}" bash "${BACKEND_DIR}/scripts/pr5
 ATTEMPT_ID="$(cat "${ART_DIR}/attempt_id.txt" 2>/dev/null || true)"
 ANON_ID="$(cat "${ART_DIR}/anon_id.txt" 2>/dev/null || true)"
 QUESTION_COUNT="$(cat "${ART_DIR}/question_count.txt" 2>/dev/null || true)"
-STUB_STATUS="$(cat "${ART_DIR}/stub_status.txt" 2>/dev/null || true)"
+BILLING_MIN_STATUS="$(cat "${ART_DIR}/billing_min_status.txt" 2>/dev/null || true)"
 DEFAULT_PACK_ID="$(cat "${ART_DIR}/config_default_pack_id.txt" 2>/dev/null || true)"
 DEFAULT_DIR_VERSION="$(cat "${ART_DIR}/config_default_dir_version.txt" 2>/dev/null || true)"
 
@@ -95,12 +95,12 @@ PR57 Acceptance Summary
   - attempt_id: ${ATTEMPT_ID}
   - anon_id: ${ANON_ID}
   - question_count(dynamic): ${QUESTION_COUNT}
-  - stub_minimal_status: ${STUB_STATUS}
+  - billing_minimal_status: ${BILLING_MIN_STATUS}
   - default_pack_id: ${DEFAULT_PACK_ID}
   - default_dir_version: ${DEFAULT_DIR_VERSION}
 - smoke_urls:
   - http://127.0.0.1:${SERVE_PORT}/api/v0.2/healthz
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/webhooks/payment/stub
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/webhooks/payment/billing
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/scales/MBTI/questions
 - schema_changes:
   - none (no migration added in PR57)

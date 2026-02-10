@@ -5,11 +5,13 @@ namespace Tests\Feature\V0_3;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
 
 class CommerceWebhookIdempotencyTest extends TestCase
 {
     use RefreshDatabase;
+    use SignedBillingWebhook;
 
     public function test_webhook_idempotent_topup(): void
     {
@@ -30,7 +32,7 @@ class CommerceWebhookIdempotencyTest extends TestCase
             'amount_cents' => 4990,
             'currency' => 'USD',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
@@ -55,7 +57,7 @@ class CommerceWebhookIdempotencyTest extends TestCase
         ];
 
         for ($i = 0; $i < 10; $i++) {
-            $res = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload);
+            $res = $this->postSignedBillingWebhook($payload);
             $res->assertStatus(200);
             $res->assertJson([
                 'ok' => true,

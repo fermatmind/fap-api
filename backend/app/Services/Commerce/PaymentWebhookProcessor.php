@@ -6,7 +6,6 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
-use App\Services\Commerce\PaymentGateway\StubGateway;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Contracts\Cache\LockTimeoutException;
@@ -32,8 +31,6 @@ class PaymentWebhookProcessor
         private ReportSnapshotStore $reportSnapshots,
         private EventRecorder $events,
     ) {
-        $stub = new StubGateway();
-        $this->gateways[$stub->provider()] = $stub;
         $stripe = new StripeGateway();
         $this->gateways[$stripe->provider()] = $stripe;
         $billing = new BillingGateway();
@@ -226,6 +223,11 @@ class PaymentWebhookProcessor
                         ->where('provider_event_id', $providerEventId)
                         ->update($baseRow);
 
+                    if ($signatureOk !== true) {
+                        $this->markEventError($provider, $providerEventId, 'rejected', 'SIGNATURE_INVALID', 'signature invalid.');
+                        return $this->notFound('NOT_FOUND', 'not found.');
+                    }
+
                     $orderQuery = DB::table('orders')->where('order_no', $orderNo);
                     if (Schema::hasColumn('orders', 'org_id')) {
                         $orderQuery->where('org_id', $orgId);
@@ -309,6 +311,18 @@ class PaymentWebhookProcessor
                     if (!$skuRow) {
                         $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku not found.');
                         return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
+                    }
+
+                    $guard = $this->validatePaidEventGuard($provider, $eventType, $normalized, $order);
+                    if (!($guard['ok'] ?? false)) {
+                        $this->markEventError(
+                            $provider,
+                            $providerEventId,
+                            'rejected',
+                            (string) ($guard['code'] ?? 'WEBHOOK_REJECTED'),
+                            (string) ($guard['message'] ?? 'webhook rejected.')
+                        );
+                        return $this->notFound('NOT_FOUND', 'not found.');
                     }
 
                     $orderTransition = $this->orders->transitionToPaidAtomic(
@@ -753,6 +767,92 @@ class PaymentWebhookProcessor
 
         $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
         return $refundAmount > 0;
+    }
+
+    private function validatePaidEventGuard(string $provider, string $eventType, array $normalized, object $order): array
+    {
+        if (!$this->isAllowedSuccessEventType($provider, $eventType)) {
+            return [
+                'ok' => false,
+                'code' => 'EVENT_TYPE_NOT_ALLOWED',
+                'message' => 'event type not allowed.',
+            ];
+        }
+
+        $normalizedAmount = (int) ($normalized['amount_cents'] ?? 0);
+        $orderAmount = (int) ($order->amount_cents ?? 0);
+        if ($normalizedAmount !== $orderAmount) {
+            return [
+                'ok' => false,
+                'code' => 'AMOUNT_MISMATCH',
+                'message' => 'amount mismatch.',
+            ];
+        }
+
+        $normalizedCurrency = $this->normalizeCurrency($normalized['currency'] ?? null);
+        $orderCurrency = $this->normalizeCurrency($order->currency ?? null);
+        if ($normalizedCurrency === '' || $orderCurrency === '' || $normalizedCurrency !== $orderCurrency) {
+            return [
+                'ok' => false,
+                'code' => 'CURRENCY_MISMATCH',
+                'message' => 'currency mismatch.',
+            ];
+        }
+
+        return ['ok' => true];
+    }
+
+    private function normalizeCurrency(mixed $currency): string
+    {
+        return strtoupper(trim((string) $currency));
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function allowedSuccessEventTypes(string $provider): array
+    {
+        $provider = strtolower(trim($provider));
+        $configured = config("services.payment_webhook.success_event_types.{$provider}");
+        $types = is_array($configured) ? $configured : [];
+        if (count($types) === 0) {
+            $types = match ($provider) {
+                'stripe' => [
+                    'payment_succeeded',
+                    'payment_intent.succeeded',
+                    'charge.succeeded',
+                    'checkout.session.completed',
+                    'invoice.payment_succeeded',
+                ],
+                'billing' => [
+                    'payment_succeeded',
+                    'payment.success',
+                    'payment_completed',
+                    'paid',
+                ],
+                default => ['payment_succeeded'],
+            };
+        }
+
+        $normalized = [];
+        foreach ($types as $type) {
+            $value = strtolower(trim((string) $type));
+            if ($value !== '') {
+                $normalized[] = $value;
+            }
+        }
+
+        return array_values(array_unique($normalized));
+    }
+
+    private function isAllowedSuccessEventType(string $provider, string $eventType): bool
+    {
+        $eventType = strtolower(trim($eventType));
+        if ($eventType === '') {
+            return false;
+        }
+
+        return in_array($eventType, $this->allowedSuccessEventTypes($provider), true);
     }
 
     private function handleRefund(

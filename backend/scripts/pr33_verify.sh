@@ -11,6 +11,7 @@ export GIT_PAGER=cat
 export TERM=dumb
 export XDEBUG_MODE=off
 export LANG=en_US.UTF-8
+export BILLING_WEBHOOK_SECRET="${BILLING_WEBHOOK_SECRET:-billing_secret}"
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BACKEND_DIR="${REPO_DIR}/backend"
@@ -174,6 +175,27 @@ fetch_json() {
   fi
 }
 
+billing_sig() {
+  local ts="$1"
+  local body="$2"
+  printf "%s.%s" "$ts" "$body" | openssl dgst -sha256 -hmac "$BILLING_WEBHOOK_SECRET" | awk '{print $2}'
+}
+
+post_billing_webhook() {
+  local body="$1"
+  local out="$2"
+  local ts
+  ts="$(date +%s)"
+  local sig
+  sig="$(billing_sig "$ts" "$body")"
+  curl -sS -o "${out}" -w "%{http_code}" -X POST \
+    -H "Content-Type: application/json" -H "Accept: application/json" -H "X-Org-Id: 0" \
+    -H "X-Billing-Timestamp: ${ts}" \
+    -H "X-Billing-Signature: ${sig}" \
+    --data-binary "${body}" \
+    "${API_BASE}/api/v0.3/webhooks/payment/billing" || true
+}
+
 # 2) Create attempt -> order -> webhook
 QUESTIONS_JSON="${ART_DIR}/questions.json"
 http_code="$(fetch_json GET "/api/v0.3/scales/MBTI/questions" "${QUESTIONS_JSON}")"
@@ -253,7 +275,7 @@ $payload = [
   "sku" => "MBTI_REPORT_FULL",
   "quantity" => 1,
   "target_attempt_id" => getenv("ATTEMPT_ID"),
-  "provider" => "stub",
+  "provider" => "billing",
 ];
 file_put_contents("php://stdout", json_encode($payload, JSON_UNESCAPED_UNICODE));
 ' > "${ORDER_PAYLOAD}"
@@ -288,7 +310,7 @@ file_put_contents("php://stdout", json_encode($payload, JSON_UNESCAPED_UNICODE))
 
 WEBHOOK_JSON="${ART_DIR}/webhook.json"
 WEBHOOK_BODY="$(cat "${WEBHOOK_PAYLOAD}")"
-http_code="$(fetch_json POST "/api/v0.3/webhooks/payment/stub" "${WEBHOOK_JSON}" "${WEBHOOK_BODY}")"
+http_code="$(post_billing_webhook "${WEBHOOK_BODY}" "${WEBHOOK_JSON}")"
 if [[ "${http_code}" != "200" ]]; then
   echo "webhook_failed http=${http_code}" >&2
   cat "${WEBHOOK_JSON}" >&2 || true
@@ -337,7 +359,7 @@ file_put_contents("php://stdout", json_encode($payload, JSON_UNESCAPED_UNICODE))
 
 ORPHAN_JSON="${ART_DIR}/webhook_orphan.json"
 ORPHAN_BODY="$(cat "${ORPHAN_PAYLOAD}")"
-http_code="$(fetch_json POST "/api/v0.3/webhooks/payment/stub" "${ORPHAN_JSON}" "${ORPHAN_BODY}")"
+http_code="$(post_billing_webhook "${ORPHAN_BODY}" "${ORPHAN_JSON}")"
 if [[ "${http_code}" == "200" ]]; then
   echo "orphan_webhook_unexpected_200" >&2
   cat "${ORPHAN_JSON}" >&2 || true
@@ -363,7 +385,7 @@ Illuminate\Support\Facades\DB::table("orders")->insert([
   "amount_cents" => 199,
   "currency" => "CNY",
   "status" => "created",
-  "provider" => "stub",
+  "provider" => "billing",
   "external_trade_no" => null,
   "paid_at" => null,
   "created_at" => $now,
@@ -380,7 +402,7 @@ Illuminate\Support\Facades\DB::table("orders")->insert([
 ]);
 '
 
-http_code="$(fetch_json POST "/api/v0.3/webhooks/payment/stub" "${ORPHAN_JSON}" "${ORPHAN_BODY}")"
+http_code="$(post_billing_webhook "${ORPHAN_BODY}" "${ORPHAN_JSON}")"
 if [[ "${http_code}" != "200" ]]; then
   echo "orphan_retry_failed http=${http_code}" >&2
   cat "${ORPHAN_JSON}" >&2 || true

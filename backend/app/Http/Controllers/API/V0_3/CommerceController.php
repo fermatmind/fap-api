@@ -71,6 +71,13 @@ class CommerceController extends Controller
         $anonId = $this->resolveAnonId($request);
 
         $provider = $this->resolveProvider($payload, $providerFromRoute);
+        if ($provider === '') {
+            return response()->json([
+                'ok' => false,
+                'error' => 'NOT_FOUND',
+                'message' => 'not found.',
+            ], 404);
+        }
 
         $idempotencyKey = $this->resolveIdempotencyKey($request, $payload);
 
@@ -170,6 +177,10 @@ class CommerceController extends Controller
         }
 
         $provider = strtolower(trim($provider));
-        return $provider !== '' ? $provider : 'stub';
+        if (!in_array($provider, ['stripe', 'billing'], true)) {
+            return '';
+        }
+
+        return $provider;
     }
 }

@@ -10,11 +10,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Mockery;
+use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
 
 final class PaymentWebhookProcessorAtomicityTest extends TestCase
 {
     use RefreshDatabase;
+    use SignedBillingWebhook;
 
     protected function tearDown(): void
     {
@@ -39,7 +41,7 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
             'amount_cents' => 4990,
             'currency' => 'USD',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
@@ -85,17 +87,17 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
             });
         $this->app->instance(BenefitWalletService::class, $walletService);
 
-        $first = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload, [
+        $first = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
         $first->assertStatus(500);
 
         $this->assertSame(0, DB::table('payment_events')
-            ->where('provider', 'stub')
+            ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_atomic_1')
             ->count());
 
-        $second = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload, [
+        $second = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
         $second->assertStatus(200);
@@ -105,7 +107,7 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
         ]);
 
         $this->assertSame(1, DB::table('payment_events')
-            ->where('provider', 'stub')
+            ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_atomic_1')
             ->count());
         $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'topup')->count());

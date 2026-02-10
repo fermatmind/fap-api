@@ -7,11 +7,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
 
 class PaymentEventUniquenessAcrossProvidersTest extends TestCase
 {
     use RefreshDatabase;
+    use SignedBillingWebhook;
 
     public function test_same_provider_event_id_can_exist_across_providers_and_duplicate_path_stays_provider_scoped(): void
     {
@@ -20,6 +22,7 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
 
         config([
             'services.stripe.webhook_secret' => '',
+            'services.billing.webhook_secret' => 'billing_secret_pr65',
         ]);
 
         $sharedEventId = 'evt_pr65_shared';
@@ -36,7 +39,7 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
             'amount_cents' => 4990,
             'currency' => 'USD',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
@@ -80,7 +83,7 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
             'refunded_at' => null,
         ]);
 
-        $stubFirst = $this->postJson('/api/v0.3/webhooks/payment/stub', [
+        $billingFirst = $this->postSignedBillingWebhook([
             'provider_event_id' => $sharedEventId,
             'order_no' => 'ord_pr65_stub',
             'external_trade_no' => 'trade_pr65_stub',
@@ -89,8 +92,8 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
         ], [
             'X-Org-Id' => '0',
         ]);
-        $stubFirst->assertStatus(200);
-        $stubFirst->assertJson(['ok' => true]);
+        $billingFirst->assertStatus(200);
+        $billingFirst->assertJson(['ok' => true]);
 
         $stripeFirst = $this->postJson('/api/v0.3/webhooks/payment/stripe', [
             'id' => $sharedEventId,
@@ -112,7 +115,7 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
         $stripeFirst->assertStatus(200);
         $stripeFirst->assertJson(['ok' => true]);
 
-        $stubDuplicate = $this->postJson('/api/v0.3/webhooks/payment/stub', [
+        $billingDuplicate = $this->postSignedBillingWebhook([
             'provider_event_id' => $sharedEventId,
             'order_no' => 'ord_pr65_stub',
             'external_trade_no' => 'trade_pr65_stub',
@@ -121,8 +124,8 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
         ], [
             'X-Org-Id' => '0',
         ]);
-        $stubDuplicate->assertStatus(200);
-        $stubDuplicate->assertJson([
+        $billingDuplicate->assertStatus(200);
+        $billingDuplicate->assertJson([
             'ok' => true,
             'duplicate' => true,
         ]);
@@ -131,7 +134,7 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
             ->where('provider_event_id', $sharedEventId)
             ->count());
         $this->assertSame(1, DB::table('payment_events')
-            ->where('provider', 'stub')
+            ->where('provider', 'billing')
             ->where('provider_event_id', $sharedEventId)
             ->count());
         $this->assertSame(1, DB::table('payment_events')

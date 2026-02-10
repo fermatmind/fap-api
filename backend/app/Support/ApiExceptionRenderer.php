@@ -9,6 +9,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -32,7 +33,11 @@ final class ApiExceptionRenderer
             'message' => 'Internal Server Error',
         ];
 
-        if ($e instanceof ModelNotFoundException || $e instanceof NotFoundHttpException) {
+        if (
+            $e instanceof ModelNotFoundException
+            || $e instanceof NotFoundHttpException
+            || $e instanceof MethodNotAllowedHttpException
+        ) {
             $status = 404;
             $payload = [
                 'ok' => false,

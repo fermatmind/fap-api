@@ -7,11 +7,13 @@ use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
 
 final class AttemptReportPaymentUnlockFlowTest extends TestCase
 {
     use RefreshDatabase;
+    use SignedBillingWebhook;
 
     private function seedScales(): void
     {
@@ -81,7 +83,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
             'X-Anon-Id' => $anonId,
         ])->postJson('/api/v0.3/orders', [
             'sku' => 'MBTI_REPORT_FULL_199',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'target_attempt_id' => $attemptId,
         ]);
         $order->assertStatus(200);
@@ -89,7 +91,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
         $orderNo = (string) $order->json('order_no');
         $this->assertNotSame('', $orderNo);
 
-        $webhook = $this->postJson('/api/v0.3/webhooks/payment/stub', [
+        $webhook = $this->postSignedBillingWebhook([
             'provider_event_id' => 'evt_pr2_flow_1',
             'order_no' => $orderNo,
             'external_trade_no' => 'trade_pr2_flow_1',

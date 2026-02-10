@@ -8,11 +8,13 @@ use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
 
 class PaymentWebhookIdempotencyTest extends TestCase
 {
     use RefreshDatabase;
+    use SignedBillingWebhook;
 
     private function seedCommerce(): void
     {
@@ -100,7 +102,7 @@ class PaymentWebhookIdempotencyTest extends TestCase
             'amount_cents' => 4990,
             'currency' => 'USD',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
@@ -124,13 +126,13 @@ class PaymentWebhookIdempotencyTest extends TestCase
             'currency' => 'USD',
         ];
 
-        $first = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload, [
+        $first = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
         $first->assertStatus(200);
         $first->assertJson(['ok' => true]);
 
-        $second = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload, [
+        $second = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
         $second->assertStatus(200);
@@ -156,7 +158,7 @@ class PaymentWebhookIdempotencyTest extends TestCase
             'currency' => 'CNY',
         ];
 
-        $first = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload, [
+        $first = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
         $first->assertStatus(500);
@@ -183,7 +185,7 @@ class PaymentWebhookIdempotencyTest extends TestCase
             'amount_cents' => 199,
             'currency' => 'CNY',
             'status' => 'created',
-            'provider' => 'stub',
+            'provider' => 'billing',
             'external_trade_no' => null,
             'paid_at' => null,
             'created_at' => now(),
@@ -199,7 +201,7 @@ class PaymentWebhookIdempotencyTest extends TestCase
             'refunded_at' => null,
         ]);
 
-        $second = $this->postJson('/api/v0.3/webhooks/payment/stub', $payload, [
+        $second = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
         $second->assertStatus(200);
