@@ -41,19 +41,6 @@ return new class extends Migration
             });
         }
 
-        if (Schema::hasTable('attempts') && Schema::hasColumn('attempts', 'org_id')) {
-            DB::table('attempts')->whereNull('org_id')->update(['org_id' => 0]);
-        }
-        if (Schema::hasTable('results') && Schema::hasColumn('results', 'org_id')) {
-            DB::table('results')->whereNull('org_id')->update(['org_id' => 0]);
-        }
-        if (Schema::hasTable('events') && Schema::hasColumn('events', 'org_id')) {
-            DB::table('events')->whereNull('org_id')->update(['org_id' => 0]);
-        }
-        if (Schema::hasTable('report_jobs') && Schema::hasColumn('report_jobs', 'org_id')) {
-            DB::table('report_jobs')->whereNull('org_id')->update(['org_id' => 0]);
-        }
-
         $indexName = 'attempts_org_id_idx';
         if (Schema::hasTable('attempts') && Schema::hasColumn('attempts', 'org_id') && !$this->indexExists('attempts', $indexName)) {
             Schema::table('attempts', function (Blueprint $table) use ($indexName) {
