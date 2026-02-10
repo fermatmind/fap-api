@@ -10,7 +10,13 @@ use Illuminate\Support\Str;
 
 class IngestionService
 {
-    public function ingestSamples(string $provider, ?string $userId, array $batchMeta, array $samples): array
+    public function ingestSamples(
+        string $provider,
+        ?string $userId,
+        array $batchMeta,
+        array $samples,
+        array $audit = []
+    ): array
     {
         if (!Schema::hasTable('ingest_batches')) {
             return [
@@ -40,7 +46,7 @@ class IngestionService
         $rawPayloadHash = $batchMeta['raw_payload_hash'] ?? null;
 
         $now = now();
-        DB::table('ingest_batches')->insert([
+        $insert = [
             'id' => $batchId,
             'provider' => $provider,
             'user_id' => $userId !== null ? (int) $userId : null,
@@ -49,7 +55,25 @@ class IngestionService
             'raw_payload_hash' => $rawPayloadHash,
             'status' => 'received',
             'created_at' => $now,
-        ]);
+        ];
+
+        if (Schema::hasColumn('ingest_batches', 'actor_user_id')) {
+            $actor = $audit['actor_user_id'] ?? null;
+            $insert['actor_user_id'] = is_numeric($actor) ? (int) $actor : null;
+        }
+        if (Schema::hasColumn('ingest_batches', 'auth_mode')) {
+            $mode = (string) ($audit['auth_mode'] ?? '');
+            $insert['auth_mode'] = in_array($mode, ['sanctum', 'signature'], true) ? $mode : null;
+        }
+        if (Schema::hasColumn('ingest_batches', 'signature_ok')) {
+            $insert['signature_ok'] = (bool) ($audit['signature_ok'] ?? false);
+        }
+        if (Schema::hasColumn('ingest_batches', 'source_ip')) {
+            $ip = trim((string) ($audit['source_ip'] ?? ''));
+            $insert['source_ip'] = $ip !== '' ? substr($ip, 0, 64) : null;
+        }
+
+        DB::table('ingest_batches')->insert($insert);
 
         $inserted = 0;
         $skipped = 0;
