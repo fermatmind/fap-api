@@ -35,6 +35,16 @@ class PaymentWebhookProcessor
         $this->gateways[$stripe->provider()] = $stripe;
         $billing = new BillingGateway();
         $this->gateways[$billing->provider()] = $billing;
+
+        if (app()->environment(['local', 'testing']) && config('payments.allow_stub') === true) {
+            $stubGatewayClass = \App\Services\Commerce\PaymentGateway\StubGateway::class;
+            if (class_exists($stubGatewayClass)) {
+                $stub = new $stubGatewayClass();
+                if ($stub instanceof PaymentGatewayInterface) {
+                    $this->gateways[$stub->provider()] = $stub;
+                }
+            }
+        }
     }
 
     public function handle(

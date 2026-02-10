@@ -25,6 +25,7 @@ class PaymentWebhookController extends Controller
     public function handle(Request $request, string $provider): JsonResponse
     {
         $provider = strtolower(trim($provider));
+        $this->guardStubProvider($request, $provider);
 
         if (!in_array($provider, ['stripe', 'billing'], true)) {
             Log::warning('PAYMENT_WEBHOOK_PROVIDER_UNSUPPORTED', [
@@ -330,6 +331,21 @@ class PaymentWebhookController extends Controller
         }
 
         return $secret;
+    }
+
+    private function guardStubProvider(Request $request, string $provider): void
+    {
+        if ($provider !== 'stub' || config('payments.allow_stub') === true) {
+            return;
+        }
+
+        Log::warning('SECURITY_STUB_PROVIDER_BLOCKED', [
+            'request_id' => $this->resolveRequestId($request),
+            'provider' => $provider,
+            'ip' => $request->ip(),
+        ]);
+
+        abort(404);
     }
 
     private function resolveRequestId(Request $request): string

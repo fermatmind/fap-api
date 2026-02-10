@@ -3,7 +3,6 @@
 namespace Tests\Feature\V0_3;
 
 use App\Services\Commerce\PaymentWebhookProcessor;
-use Illuminate\Support\Facades\Log;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Tests\TestCase;
@@ -12,24 +11,11 @@ class PaymentWebhookFailSafeTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    public function test_unsupported_provider_returns_404_and_logs_stable_keyword(): void
+    public function test_unknown_provider_route_returns_404_and_does_not_call_processor(): void
     {
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
         $processor->shouldReceive('handle')->never();
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
-
-        Log::shouldReceive('warning')
-            ->once()
-            ->withArgs(function ($message, $context): bool {
-                $this->assertSame('PAYMENT_WEBHOOK_PROVIDER_UNSUPPORTED', $message);
-                $this->assertIsArray($context);
-                $this->assertSame('unknown', $context['provider'] ?? null);
-                $this->assertIsString($context['request_id'] ?? null);
-                $this->assertNotSame('', (string) ($context['request_id'] ?? ''));
-                $this->assertArrayNotHasKey('payload', $context);
-
-                return true;
-            });
 
         $response = $this->postJson('/api/v0.3/webhooks/payment/unknown', [
             'provider_event_id' => 'evt_unknown_provider',
