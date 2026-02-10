@@ -22,6 +22,7 @@ use App\Services\Report\ReportSnapshotStore;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -216,8 +217,7 @@ class AttemptWriteController extends Controller
         $answers = $mergedAnswers;
 
         $response = null;
-        $consumeB2BCredit = false;
-        $snapshotJobCtx = null;
+        $postCommitCtx = null;
 
         $engineAttempt = [
             'org_id' => $orgId,
@@ -247,6 +247,21 @@ class AttemptWriteController extends Controller
         $scoreResult = $scored['result'];
         $contentPackageVersion = (string) ($scored['pack']['content_package_version'] ?? '');
         $scoringSpecVersion = (string) ($scored['scoring_spec_version'] ?? '');
+        $commercial = $row['commercial_json'] ?? null;
+        if (is_string($commercial)) {
+            $decoded = json_decode($commercial, true);
+            $commercial = is_array($decoded) ? $decoded : null;
+        }
+
+        $creditBenefitCode = '';
+        if (is_array($commercial)) {
+            $creditBenefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
+        }
+
+        $entitlementBenefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
+        if ($entitlementBenefitCode === '') {
+            $entitlementBenefitCode = $creditBenefitCode;
+        }
 
         DB::transaction(function () use (
             &$response,
@@ -260,14 +275,13 @@ class AttemptWriteController extends Controller
             $dirVersion,
             $region,
             $locale,
-            $row,
-            $request,
             $inviteToken,
+            $creditBenefitCode,
+            $entitlementBenefitCode,
             $scoreResult,
             $contentPackageVersion,
             $scoringSpecVersion,
-            &$consumeB2BCredit,
-            &$snapshotJobCtx
+            &$postCommitCtx
         ) {
             $locked = $this->ownedAttemptQuery($attemptId)
                 ->lockForUpdate()
@@ -279,6 +293,17 @@ class AttemptWriteController extends Controller
                     $existingResult = $this->findResult($orgId, $attemptId);
                     if ($existingResult) {
                         $response = $this->buildSubmitResponse($locked, $existingResult, false);
+                        $postCommitCtx = [
+                            'org_id' => $orgId,
+                            'attempt_id' => $attemptId,
+                            'scale_code' => $scaleCode,
+                            'pack_id' => (string) ($locked->pack_id ?? $packId),
+                            'dir_version' => (string) ($locked->dir_version ?? $dirVersion),
+                            'scoring_spec_version' => (string) ($locked->scoring_spec_version ?? $scoringSpecVersion),
+                            'invite_token' => $inviteToken,
+                            'credit_benefit_code' => $creditBenefitCode,
+                            'entitlement_benefit_code' => $entitlementBenefitCode,
+                        ];
                         return;
                     }
                 }
@@ -300,6 +325,17 @@ class AttemptWriteController extends Controller
                 $existingResult = $this->findResult($orgId, $attemptId);
                 if ($existingResult) {
                     $response = $this->buildSubmitResponse($locked, $existingResult, false);
+                    $postCommitCtx = [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'scale_code' => $scaleCode,
+                        'pack_id' => (string) ($locked->pack_id ?? $packId),
+                        'dir_version' => (string) ($locked->dir_version ?? $dirVersion),
+                        'scoring_spec_version' => (string) ($locked->scoring_spec_version ?? $scoringSpecVersion),
+                        'invite_token' => $inviteToken,
+                        'credit_benefit_code' => $creditBenefitCode,
+                        'entitlement_benefit_code' => $entitlementBenefitCode,
+                    ];
                     return;
                 }
             }
@@ -390,118 +426,24 @@ class AttemptWriteController extends Controller
                 $result = Result::create($resultData);
             }
 
-            if ($inviteToken !== '' && $orgId > 0) {
-                $assignment = $this->assessments->attachAttemptByInviteToken($orgId, $inviteToken, $attemptId);
-                $consumeB2BCredit = $assignment !== null;
-            }
-
-            if ($consumeB2BCredit) {
-                $consume = $this->benefitWallets->consume($orgId, self::B2B_CREDIT_BENEFIT_CODE, $attemptId);
-                if (!($consume['ok'] ?? false)) {
-                    $status = (int) ($consume['status'] ?? 402);
-                    if (($consume['error'] ?? '') === 'INSUFFICIENT_CREDITS' || $status === 402) {
-                        $response = response()->json([
-                            'ok' => false,
-                            'error' => [
-                                'code' => 'CREDITS_INSUFFICIENT',
-                                'message' => 'credits insufficient',
-                                'benefit_code' => self::B2B_CREDIT_BENEFIT_CODE,
-                                'required' => 1,
-                            ],
-                        ], 402);
-                        return;
-                    }
-
-                    $response = response()->json([
-                        'ok' => false,
-                        'error' => $consume['error'] ?? 'CREDITS_CONSUME_FAILED',
-                        'message' => $consume['message'] ?? 'credits consume failed.',
-                    ], $status);
-                    return;
-                }
-            }
-
-            $commercial = $row['commercial_json'] ?? null;
-            if (is_string($commercial)) {
-                $decoded = json_decode($commercial, true);
-                $commercial = is_array($decoded) ? $decoded : null;
-            }
-
-            $creditBenefitCode = '';
-            if (is_array($commercial)) {
-                $creditBenefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
-            }
-
-            $entitlementBenefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
-            if ($entitlementBenefitCode === '') {
-                $entitlementBenefitCode = $creditBenefitCode;
-            }
-
-            // B2B 已扣费（consumeB2BCredit=true）时，跳过第二次 creditBenefitCode 的扣费，避免双扣
-            if ($orgId > 0 && $creditBenefitCode !== '' && !$consumeB2BCredit) {
-                $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
-                if (!($consume['ok'] ?? false)) {
-                    $status = (int) ($consume['status'] ?? 402);
-                    $response = response()->json([
-                        'ok' => false,
-                        'error' => $consume['error'] ?? 'INSUFFICIENT_CREDITS',
-                        'message' => $consume['message'] ?? 'insufficient credits.',
-                    ], $status);
-                    return;
-                }
-
-                $this->eventRecorder->record('wallet_consumed', $this->resolveUserId($request), [
-                    'scale_code' => $scaleCode,
-                    'pack_id' => $packId,
-                    'dir_version' => $dirVersion,
-                    'attempt_id' => $attemptId,
-                    'benefit_code' => $creditBenefitCode,
-                    'sku' => null,
-                ], [
-                    'org_id' => $orgId,
-                    'anon_id' => $this->orgContext->anonId(),
-                    'attempt_id' => $attemptId,
-                    'pack_id' => $packId,
-                    'dir_version' => $dirVersion,
-                ]);
-            }
-
-            // entitlement 解锁：B2B 链路与 commercial 链路都需要
-            if ($orgId > 0 && $entitlementBenefitCode !== '') {
-                $userIdRaw = $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id');
-                $anonIdRaw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id');
-
-                $grant = $this->entitlements->grantAttemptUnlock(
-                    $orgId,
-                    $userIdRaw !== null ? (string) $userIdRaw : null,
-                    $anonIdRaw !== null ? (string) $anonIdRaw : null,
-                    $entitlementBenefitCode,
-                    $attemptId,
-                    null
-                );
-
-                if (!($grant['ok'] ?? false)) {
-                    $status = (int) ($grant['status'] ?? 500);
-                    $response = response()->json($grant, $status);
-                    return;
-                }
-            }
-
-            $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, null, [
+            $response = $this->buildSubmitResponse($locked, $result, true);
+            $postCommitCtx = [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
                 'scale_code' => $scaleCode,
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'scoring_spec_version' => $scoringSpecVersion,
-            ]);
-            $snapshotJobCtx = [
-                'org_id' => $orgId,
-                'attempt_id' => $attemptId,
-                'trigger_source' => 'submit',
-                'order_no' => null,
+                'invite_token' => $inviteToken,
+                'credit_benefit_code' => $creditBenefitCode,
+                'entitlement_benefit_code' => $entitlementBenefitCode,
             ];
-
-            $response = $this->buildSubmitResponse($locked, $result, true);
         });
+
+        $snapshotJobCtx = null;
+        if ($response instanceof JsonResponse && $response->getStatusCode() === 200 && is_array($postCommitCtx)) {
+            $snapshotJobCtx = $this->runSubmitPostCommitSideEffects($request, $postCommitCtx);
+        }
 
         if (is_array($snapshotJobCtx)) {
             GenerateReportSnapshotJob::dispatch(
@@ -529,6 +471,156 @@ class AttemptWriteController extends Controller
                 'error' => 'SUBMIT_FAILED',
                 'message' => 'unexpected submit state.',
             ], 500);
+    }
+
+    private function runSubmitPostCommitSideEffects(Request $request, array $ctx): ?array
+    {
+        $orgId = (int) ($ctx['org_id'] ?? 0);
+        $attemptId = trim((string) ($ctx['attempt_id'] ?? ''));
+        if ($attemptId === '') {
+            return null;
+        }
+
+        $scaleCode = strtoupper(trim((string) ($ctx['scale_code'] ?? '')));
+        $packId = trim((string) ($ctx['pack_id'] ?? ''));
+        $dirVersion = trim((string) ($ctx['dir_version'] ?? ''));
+        $scoringSpecVersion = trim((string) ($ctx['scoring_spec_version'] ?? ''));
+        $inviteToken = trim((string) ($ctx['invite_token'] ?? ''));
+        $creditBenefitCode = strtoupper(trim((string) ($ctx['credit_benefit_code'] ?? '')));
+        $entitlementBenefitCode = strtoupper(trim((string) ($ctx['entitlement_benefit_code'] ?? '')));
+
+        $consumeB2BCredit = false;
+        if ($inviteToken !== '' && $orgId > 0) {
+            try {
+                $assignment = $this->assessments->attachAttemptByInviteToken($orgId, $inviteToken, $attemptId);
+                $consumeB2BCredit = $assignment !== null;
+            } catch (\Throwable $e) {
+                Log::error('SUBMIT_POST_COMMIT_ATTACH_INVITE_FAILED', [
+                    'org_id' => $orgId,
+                    'attempt_id' => $attemptId,
+                    'invite_token' => $inviteToken,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        $creditOk = true;
+        if ($consumeB2BCredit) {
+            try {
+                $consume = $this->benefitWallets->consume($orgId, self::B2B_CREDIT_BENEFIT_CODE, $attemptId);
+                $creditOk = (bool) ($consume['ok'] ?? false);
+                if (!$creditOk) {
+                    Log::warning('SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_FAILED', [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'error' => $consume['error'] ?? 'CREDITS_CONSUME_FAILED',
+                        'message' => $consume['message'] ?? 'credits consume failed.',
+                    ]);
+                }
+            } catch (\Throwable $e) {
+                $creditOk = false;
+                Log::error('SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_EXCEPTION', [
+                    'org_id' => $orgId,
+                    'attempt_id' => $attemptId,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        if ($orgId > 0 && $creditBenefitCode !== '' && !$consumeB2BCredit) {
+            try {
+                $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
+                $creditOk = (bool) ($consume['ok'] ?? false);
+                if ($creditOk) {
+                    $this->eventRecorder->record('wallet_consumed', $this->resolveUserId($request), [
+                        'scale_code' => $scaleCode,
+                        'pack_id' => $packId,
+                        'dir_version' => $dirVersion,
+                        'attempt_id' => $attemptId,
+                        'benefit_code' => $creditBenefitCode,
+                        'sku' => null,
+                    ], [
+                        'org_id' => $orgId,
+                        'anon_id' => $this->orgContext->anonId(),
+                        'attempt_id' => $attemptId,
+                        'pack_id' => $packId,
+                        'dir_version' => $dirVersion,
+                    ]);
+                } else {
+                    Log::warning('SUBMIT_POST_COMMIT_CREDIT_CONSUME_FAILED', [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'benefit_code' => $creditBenefitCode,
+                        'error' => $consume['error'] ?? 'INSUFFICIENT_CREDITS',
+                        'message' => $consume['message'] ?? 'insufficient credits.',
+                    ]);
+                }
+            } catch (\Throwable $e) {
+                $creditOk = false;
+                Log::error('SUBMIT_POST_COMMIT_CREDIT_CONSUME_EXCEPTION', [
+                    'org_id' => $orgId,
+                    'attempt_id' => $attemptId,
+                    'benefit_code' => $creditBenefitCode,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        if ($creditOk && $orgId > 0 && $entitlementBenefitCode !== '') {
+            $userIdRaw = $request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id');
+            $anonIdRaw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id');
+
+            try {
+                $grant = $this->entitlements->grantAttemptUnlock(
+                    $orgId,
+                    $userIdRaw !== null ? (string) $userIdRaw : null,
+                    $anonIdRaw !== null ? (string) $anonIdRaw : null,
+                    $entitlementBenefitCode,
+                    $attemptId,
+                    null
+                );
+
+                if (!($grant['ok'] ?? false)) {
+                    Log::warning('SUBMIT_POST_COMMIT_GRANT_FAILED', [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'benefit_code' => $entitlementBenefitCode,
+                        'error' => $grant['error'] ?? 'ENTITLEMENT_GRANT_FAILED',
+                        'message' => $grant['message'] ?? 'entitlement grant failed.',
+                    ]);
+                }
+            } catch (\Throwable $e) {
+                Log::error('SUBMIT_POST_COMMIT_GRANT_EXCEPTION', [
+                    'org_id' => $orgId,
+                    'attempt_id' => $attemptId,
+                    'benefit_code' => $entitlementBenefitCode,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        try {
+            $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, null, [
+                'scale_code' => $scaleCode,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'scoring_spec_version' => $scoringSpecVersion,
+            ]);
+        } catch (\Throwable $e) {
+            Log::error('SUBMIT_POST_COMMIT_SEED_SNAPSHOT_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'error' => $e->getMessage(),
+            ]);
+            return null;
+        }
+
+        return [
+            'org_id' => $orgId,
+            'attempt_id' => $attemptId,
+            'trigger_source' => 'submit',
+            'order_no' => null,
+        ];
     }
 
     private function resolveQuestionCount(string $packId, string $dirVersion): int

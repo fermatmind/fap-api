@@ -342,14 +342,20 @@ class CreditsConsumeOnAttemptSubmitTest extends TestCase
             'invite_token' => $inviteTokens[3],
         ]);
 
-        $submit->assertStatus(402);
+        $submit->assertStatus(200);
         $submit->assertJson([
-            'ok' => false,
-            'error' => [
-                'code' => 'CREDITS_INSUFFICIENT',
-                'benefit_code' => 'B2B_ASSESSMENT_ATTEMPT_SUBMIT',
-                'required' => 1,
-            ],
+            'ok' => true,
+            'attempt_id' => $attemptId,
         ]);
+
+        $wallet = DB::table('benefit_wallets')
+            ->where('org_id', $orgId)
+            ->where('benefit_code', 'B2B_ASSESSMENT_ATTEMPT_SUBMIT')
+            ->first();
+        $this->assertSame(0, (int) ($wallet->balance ?? -1));
+        $this->assertSame(3, DB::table('benefit_consumptions')
+            ->where('org_id', $orgId)
+            ->where('benefit_code', 'B2B_ASSESSMENT_ATTEMPT_SUBMIT')
+            ->count());
     }
 }

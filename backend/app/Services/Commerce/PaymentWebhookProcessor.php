@@ -96,7 +96,8 @@ class PaymentWebhookProcessor
             'services.payment_webhook.lock_block_seconds',
             self::DEFAULT_WEBHOOK_LOCK_BLOCK_SECONDS
         ));
-        $snapshotJobCtx = null;
+        $postCommitOutcome = null;
+        $postCommitCtx = null;
 
         try {
             $result = Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
@@ -113,7 +114,7 @@ class PaymentWebhookProcessor
                 $payloadExcerpt,
                 $resolvedPayloadMeta,
                 $signatureOk,
-                &$snapshotJobCtx
+                &$postCommitCtx
             ) {
                 return DB::transaction(function () use (
                     $orderNo,
@@ -129,7 +130,7 @@ class PaymentWebhookProcessor
                     $payloadExcerpt,
                     $resolvedPayloadMeta,
                     $signatureOk,
-                    &$snapshotJobCtx
+                    &$postCommitCtx
                 ) {
                     $insertSeed = [
                         'id' => (string) Str::uuid(),
@@ -319,22 +320,8 @@ class PaymentWebhookProcessor
 
                     $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
                     $orderStatus = strtolower((string) ($order->status ?? ''));
-                    if (!$isRefundEvent && in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true)) {
-                        Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
-                            'provider' => $provider,
-                            'provider_event_id' => $providerEventId,
-                            'order_id' => $order->id ?? null,
-                        ]);
-
-                        $this->markEventProcessed($provider, $providerEventId);
-
-                        return [
-                            'ok' => true,
-                            'duplicate' => true,
-                            'order_no' => $orderNo,
-                            'provider_event_id' => $providerEventId,
-                        ];
-                    }
+                    $orderAlreadySettled = !$isRefundEvent
+                        && in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true);
 
                     $orderMeta = $this->resolveOrderMeta($orgId, $orderNo, $order);
                     $normalizedSkuMeta = $this->normalizeOrderSkuMeta($order);
@@ -354,7 +341,6 @@ class PaymentWebhookProcessor
                         'order_no' => $orderNo,
                     ]);
                     $eventContext = $this->buildEventContext($orderMeta, $anonId);
-                    $this->events->record('payment_webhook_received', $this->numericUserId($eventUserId), $eventMeta, $eventContext);
 
                     if ($isRefundEvent) {
                         $refund = $this->handleRefund($orderNo, $order, $normalized, $providerEventId, $orgId);
@@ -400,21 +386,23 @@ class PaymentWebhookProcessor
                         return $this->notFound('NOT_FOUND', 'not found.');
                     }
 
-                    $orderTransition = $this->orders->transitionToPaidAtomic(
-                        $orderNo,
-                        $orgId,
-                        $normalized['external_trade_no'] ?? null,
-                        $normalized['paid_at'] ?? null
-                    );
-                    if (!($orderTransition['ok'] ?? false)) {
-                        $this->markEventError(
-                            $provider,
-                            $providerEventId,
-                            'failed',
-                            (string) ($orderTransition['error'] ?? 'ORDER_STATUS_INVALID'),
-                            (string) ($orderTransition['message'] ?? 'order transition failed.')
+                    if (!$orderAlreadySettled) {
+                        $orderTransition = $this->orders->transitionToPaidAtomic(
+                            $orderNo,
+                            $orgId,
+                            $normalized['external_trade_no'] ?? null,
+                            $normalized['paid_at'] ?? null
                         );
-                        return $orderTransition;
+                        if (!($orderTransition['ok'] ?? false)) {
+                            $this->markEventError(
+                                $provider,
+                                $providerEventId,
+                                'failed',
+                                (string) ($orderTransition['error'] ?? 'ORDER_STATUS_INVALID'),
+                                (string) ($orderTransition['message'] ?? 'order transition failed.')
+                            );
+                            return $orderTransition;
+                        }
                     }
 
                     $updateRow = [
@@ -462,32 +450,25 @@ class PaymentWebhookProcessor
                     ], $anonId);
                     $eventUserId = $order->user_id ? (string) $order->user_id : $userId;
 
+                    $retryingPostCommitOnly = $inserted === 0
+                        && !$this->isEventProcessed($eventRow)
+                        && $orderAlreadySettled;
+
                     if ($kind === 'credit_pack') {
-                        $topupKey = "TOPUP:{$provider}:{$providerEventId}";
-                        $wallet = $this->wallets->topUp(
-                            (int) $order->org_id,
-                            $benefitCode,
-                            (int) ($skuRow->unit_qty ?? 0) * $quantity,
-                            $topupKey,
-                            [
-                                'order_no' => $orderNo,
-                                'provider_event_id' => $providerEventId,
-                                'provider' => $provider,
-                            ]
-                        );
-
-                        if (!($wallet['ok'] ?? false)) {
-                            $this->markEventError(
-                                $provider,
-                                $providerEventId,
-                                'failed',
-                                (string) ($wallet['error'] ?? 'WALLET_TOPUP_FAILED'),
-                                (string) ($wallet['message'] ?? 'wallet topup failed.')
-                            );
-                            return $wallet;
-                        }
-
-                        $this->events->record('wallet_topped_up', $this->numericUserId($eventUserId), $eventBaseMeta, $eventContext);
+                        $postCommitCtx = [
+                            'kind' => 'credit_pack',
+                            'org_id' => (int) $order->org_id,
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'benefit_code' => $benefitCode,
+                            'topup_delta' => (int) ($skuRow->unit_qty ?? 0) * $quantity,
+                            'event_user_id' => $eventUserId,
+                            'event_meta' => $eventBaseMeta,
+                            'event_context' => $eventContext,
+                            'received_event_meta' => $eventMeta,
+                            'received_event_context' => $eventContext,
+                        ];
                     } elseif ($kind === 'report_unlock') {
                         $attemptId = (string) ($order->target_attempt_id ?? '');
                         if ($attemptId === '') {
@@ -495,63 +476,96 @@ class PaymentWebhookProcessor
                             return $this->badRequest('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
                         }
 
-                        $scopeOverride = trim((string) ($skuRow->scope ?? ''));
-                        if ($scopeOverride === '') {
-                            $scopeOverride = 'attempt';
-                        }
+                        if (!$retryingPostCommitOnly) {
+                            $scopeOverride = trim((string) ($skuRow->scope ?? ''));
+                            if ($scopeOverride === '') {
+                                $scopeOverride = 'attempt';
+                            }
 
-                        $expiresAt = null;
-                        $skuMeta = $skuRow->meta_json ?? null;
-                        if (is_string($skuMeta)) {
-                            $decoded = json_decode($skuMeta, true);
-                            $skuMeta = is_array($decoded) ? $decoded : null;
-                        }
-                        if (is_array($skuMeta)) {
-                            $durationDays = isset($skuMeta['duration_days']) ? (int) $skuMeta['duration_days'] : 0;
-                            if ($durationDays > 0) {
-                                $expiresAt = now()->addDays($durationDays)->toISOString();
+                            $expiresAt = null;
+                            $skuMeta = $skuRow->meta_json ?? null;
+                            if (is_string($skuMeta)) {
+                                $decoded = json_decode($skuMeta, true);
+                                $skuMeta = is_array($decoded) ? $decoded : null;
+                            }
+                            if (is_array($skuMeta)) {
+                                $durationDays = isset($skuMeta['duration_days']) ? (int) $skuMeta['duration_days'] : 0;
+                                if ($durationDays > 0) {
+                                    $expiresAt = now()->addDays($durationDays)->toISOString();
+                                }
+                            }
+
+                            $grant = $this->entitlements->grantAttemptUnlock(
+                                (int) $order->org_id,
+                                $order->user_id ? (string) $order->user_id : $userId,
+                                $order->anon_id ? (string) $order->anon_id : $anonId,
+                                $benefitCode,
+                                $attemptId,
+                                $orderNo,
+                                $scopeOverride,
+                                $expiresAt
+                            );
+
+                            if (!($grant['ok'] ?? false)) {
+                                $this->markEventError(
+                                    $provider,
+                                    $providerEventId,
+                                    'failed',
+                                    (string) ($grant['error'] ?? 'ENTITLEMENT_FAILED'),
+                                    (string) ($grant['message'] ?? 'entitlement grant failed.')
+                                );
+                                return $grant;
                             }
                         }
 
-                        $grant = $this->entitlements->grantAttemptUnlock(
-                            (int) $order->org_id,
-                            $order->user_id ? (string) $order->user_id : $userId,
-                            $order->anon_id ? (string) $order->anon_id : $anonId,
-                            $benefitCode,
-                            $attemptId,
-                            $orderNo,
-                            $scopeOverride,
-                            $expiresAt
-                        );
-
-                        if (!($grant['ok'] ?? false)) {
-                            $this->markEventError(
-                                $provider,
-                                $providerEventId,
-                                'failed',
-                                (string) ($grant['error'] ?? 'ENTITLEMENT_FAILED'),
-                                (string) ($grant['message'] ?? 'entitlement grant failed.')
-                            );
-                            return $grant;
-                        }
-
-                        $this->events->record('entitlement_granted', $this->numericUserId($eventUserId), $eventBaseMeta, $eventContext);
-
-                        $this->reportSnapshots->seedPendingSnapshot((int) $order->org_id, $attemptId, $orderNo, [
-                            'scale_code' => (string) ($attemptMeta['scale_code'] ?? ''),
-                            'pack_id' => (string) ($attemptMeta['pack_id'] ?? ''),
-                            'dir_version' => (string) ($attemptMeta['dir_version'] ?? ''),
-                            'scoring_spec_version' => (string) ($attemptMeta['scoring_spec_version'] ?? ''),
-                        ]);
-                        $snapshotJobCtx = [
+                        $postCommitCtx = [
+                            'kind' => 'report_unlock',
                             'org_id' => (int) $order->org_id,
-                            'attempt_id' => $attemptId,
-                            'trigger_source' => 'payment',
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
                             'order_no' => $orderNo,
+                            'attempt_id' => $attemptId,
+                            'event_user_id' => $eventUserId,
+                            'event_meta' => $eventBaseMeta,
+                            'event_context' => $eventContext,
+                            'received_event_meta' => $eventMeta,
+                            'received_event_context' => $eventContext,
+                            'snapshot_meta' => [
+                                'scale_code' => (string) ($attemptMeta['scale_code'] ?? ''),
+                                'pack_id' => (string) ($attemptMeta['pack_id'] ?? ''),
+                                'dir_version' => (string) ($attemptMeta['dir_version'] ?? ''),
+                                'scoring_spec_version' => (string) ($attemptMeta['scoring_spec_version'] ?? ''),
+                            ],
                         ];
                     } else {
                         $this->markEventError($provider, $providerEventId, 'failed', 'SKU_KIND_INVALID', 'unsupported sku kind.');
                         return $this->badRequest('SKU_KIND_INVALID', 'unsupported sku kind.');
+                    }
+
+                    if ($orderAlreadySettled) {
+                        if ($retryingPostCommitOnly) {
+                            return [
+                                'ok' => true,
+                                'duplicate' => false,
+                                'order_no' => $orderNo,
+                                'provider_event_id' => $providerEventId,
+                            ];
+                        }
+
+                        Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_id' => $order->id ?? null,
+                        ]);
+
+                        $this->markEventProcessed($provider, $providerEventId);
+
+                        return [
+                            'ok' => true,
+                            'duplicate' => true,
+                            'order_no' => $orderNo,
+                            'provider_event_id' => $providerEventId,
+                        ];
                     }
 
                     $fulfilled = $this->orders->transition($orderNo, 'fulfilled', $orgId);
@@ -566,10 +580,6 @@ class PaymentWebhookProcessor
                         return $fulfilled;
                     }
 
-                    $this->events->record('purchase_success', $this->numericUserId($eventUserId), $eventBaseMeta, $eventContext);
-
-                    $this->markEventProcessed($provider, $providerEventId);
-
                     return [
                         'ok' => true,
                         'order_no' => $orderNo,
@@ -578,6 +588,27 @@ class PaymentWebhookProcessor
                 });
             });
 
+            if (($result['ok'] ?? false) && is_array($postCommitCtx)) {
+                $postCommitOutcome = $this->runWebhookPostCommitSideEffects($postCommitCtx);
+
+                if (($postCommitOutcome['ok'] ?? false) === true) {
+                    $this->markEventProcessed($provider, $providerEventId);
+                } else {
+                    $this->markEventError(
+                        $provider,
+                        $providerEventId,
+                        'post_commit_failed',
+                        (string) ($postCommitOutcome['error_code'] ?? 'POST_COMMIT_FAILED'),
+                        (string) ($postCommitOutcome['error_message'] ?? 'post commit side effects failed.')
+                    );
+                }
+            } elseif (($result['ok'] ?? false) && !($result['duplicate'] ?? false) && !($result['ignored'] ?? false)) {
+                $this->markEventProcessed($provider, $providerEventId);
+            }
+
+            $snapshotJobCtx = is_array($postCommitOutcome['snapshot_job_ctx'] ?? null)
+                ? $postCommitOutcome['snapshot_job_ctx']
+                : null;
             if (is_array($snapshotJobCtx) && ($result['ok'] ?? false)) {
                 GenerateReportSnapshotJob::dispatch(
                     (int) $snapshotJobCtx['org_id'],
@@ -591,6 +622,174 @@ class PaymentWebhookProcessor
         } catch (LockTimeoutException $e) {
             return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
         }
+    }
+
+    private function runWebhookPostCommitSideEffects(array $ctx): array
+    {
+        $kind = strtolower(trim((string) ($ctx['kind'] ?? '')));
+        $orgId = (int) ($ctx['org_id'] ?? 0);
+        $provider = strtolower(trim((string) ($ctx['provider'] ?? '')));
+        $providerEventId = trim((string) ($ctx['provider_event_id'] ?? ''));
+        $orderNo = trim((string) ($ctx['order_no'] ?? ''));
+        $eventUserId = $this->numericUserId(
+            is_string($ctx['event_user_id'] ?? null) ? (string) $ctx['event_user_id'] : null
+        );
+        $eventMeta = is_array($ctx['event_meta'] ?? null) ? $ctx['event_meta'] : [];
+        $eventContext = is_array($ctx['event_context'] ?? null) ? $ctx['event_context'] : [];
+        $receivedEventMeta = is_array($ctx['received_event_meta'] ?? null) ? $ctx['received_event_meta'] : [];
+        $receivedEventContext = is_array($ctx['received_event_context'] ?? null) ? $ctx['received_event_context'] : [];
+        $outcome = [
+            'ok' => true,
+            'snapshot_job_ctx' => null,
+            'error_code' => null,
+            'error_message' => null,
+        ];
+
+        if ($receivedEventMeta !== [] || $receivedEventContext !== []) {
+            try {
+                $this->events->record('payment_webhook_received', $eventUserId, $receivedEventMeta, $receivedEventContext);
+            } catch (\Throwable $e) {
+                Log::error('PAYMENT_WEBHOOK_POST_COMMIT_EVENT_FAILED', [
+                    'event' => 'payment_webhook_received',
+                    'provider' => $provider,
+                    'provider_event_id' => $providerEventId,
+                    'order_no' => $orderNo,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        if ($kind === 'credit_pack') {
+            $benefitCode = strtoupper(trim((string) ($ctx['benefit_code'] ?? '')));
+            $topupDelta = (int) ($ctx['topup_delta'] ?? 0);
+            if ($benefitCode === '' || $topupDelta <= 0) {
+                $outcome['ok'] = false;
+                $outcome['error_code'] = 'TOPUP_CONTEXT_INVALID';
+                $outcome['error_message'] = 'topup context invalid.';
+            } else {
+                try {
+                    $topupKey = "TOPUP:{$provider}:{$providerEventId}";
+                    $wallet = $this->wallets->topUp(
+                        $orgId,
+                        $benefitCode,
+                        $topupDelta,
+                        $topupKey,
+                        [
+                            'order_no' => $orderNo,
+                            'provider_event_id' => $providerEventId,
+                            'provider' => $provider,
+                        ]
+                    );
+
+                    if (!($wallet['ok'] ?? false)) {
+                        Log::warning('PAYMENT_WEBHOOK_POST_COMMIT_TOPUP_FAILED', [
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'org_id' => $orgId,
+                            'benefit_code' => $benefitCode,
+                            'error' => $wallet['error'] ?? 'WALLET_TOPUP_FAILED',
+                            'message' => $wallet['message'] ?? 'wallet topup failed.',
+                        ]);
+                        $outcome['ok'] = false;
+                        $outcome['error_code'] = (string) ($wallet['error'] ?? 'WALLET_TOPUP_FAILED');
+                        $outcome['error_message'] = (string) ($wallet['message'] ?? 'wallet topup failed.');
+                    } else {
+                        try {
+                            $this->events->record('wallet_topped_up', $eventUserId, $eventMeta, $eventContext);
+                        } catch (\Throwable $e) {
+                            Log::error('PAYMENT_WEBHOOK_POST_COMMIT_EVENT_FAILED', [
+                                'event' => 'wallet_topped_up',
+                                'provider' => $provider,
+                                'provider_event_id' => $providerEventId,
+                                'order_no' => $orderNo,
+                                'error' => $e->getMessage(),
+                            ]);
+                        }
+                    }
+                } catch (\Throwable $e) {
+                    Log::error('PAYMENT_WEBHOOK_POST_COMMIT_TOPUP_EXCEPTION', [
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_no' => $orderNo,
+                        'org_id' => $orgId,
+                        'benefit_code' => $benefitCode,
+                        'error' => $e->getMessage(),
+                    ]);
+                    $outcome['ok'] = false;
+                    $outcome['error_code'] = 'WALLET_TOPUP_EXCEPTION';
+                    $outcome['error_message'] = $e->getMessage();
+                }
+            }
+        } elseif ($kind === 'report_unlock') {
+            try {
+                $this->events->record('entitlement_granted', $eventUserId, $eventMeta, $eventContext);
+            } catch (\Throwable $e) {
+                Log::error('PAYMENT_WEBHOOK_POST_COMMIT_EVENT_FAILED', [
+                    'event' => 'entitlement_granted',
+                    'provider' => $provider,
+                    'provider_event_id' => $providerEventId,
+                    'order_no' => $orderNo,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+
+            $attemptId = trim((string) ($ctx['attempt_id'] ?? ''));
+            if ($attemptId === '') {
+                $outcome['ok'] = false;
+                $outcome['error_code'] = 'ATTEMPT_REQUIRED';
+                $outcome['error_message'] = 'target_attempt_id is required for report_unlock.';
+            } else {
+                $snapshotMeta = is_array($ctx['snapshot_meta'] ?? null) ? $ctx['snapshot_meta'] : [];
+                try {
+                    $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, $orderNo !== '' ? $orderNo : null, [
+                        'scale_code' => (string) ($snapshotMeta['scale_code'] ?? ''),
+                        'pack_id' => (string) ($snapshotMeta['pack_id'] ?? ''),
+                        'dir_version' => (string) ($snapshotMeta['dir_version'] ?? ''),
+                        'scoring_spec_version' => (string) ($snapshotMeta['scoring_spec_version'] ?? ''),
+                    ]);
+
+                    $outcome['snapshot_job_ctx'] = [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'trigger_source' => 'payment',
+                        'order_no' => $orderNo !== '' ? $orderNo : null,
+                    ];
+                } catch (\Throwable $e) {
+                    Log::error('PAYMENT_WEBHOOK_POST_COMMIT_SEED_SNAPSHOT_FAILED', [
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_no' => $orderNo,
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'error' => $e->getMessage(),
+                    ]);
+                    $outcome['ok'] = false;
+                    $outcome['error_code'] = 'SEED_SNAPSHOT_FAILED';
+                    $outcome['error_message'] = $e->getMessage();
+                }
+            }
+        } else {
+            $outcome['ok'] = false;
+            $outcome['error_code'] = 'POST_COMMIT_KIND_INVALID';
+            $outcome['error_message'] = 'unsupported post commit kind.';
+        }
+
+        if ($eventMeta !== [] || $eventContext !== []) {
+            try {
+                $this->events->record('purchase_success', $eventUserId, $eventMeta, $eventContext);
+            } catch (\Throwable $e) {
+                Log::error('PAYMENT_WEBHOOK_POST_COMMIT_EVENT_FAILED', [
+                    'event' => 'purchase_success',
+                    'provider' => $provider,
+                    'provider_event_id' => $providerEventId,
+                    'order_no' => $orderNo,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        return $outcome;
     }
 
     private function numericUserId(?string $userId): ?int

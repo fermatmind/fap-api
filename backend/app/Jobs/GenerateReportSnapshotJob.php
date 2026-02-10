@@ -28,6 +28,8 @@ class GenerateReportSnapshotJob implements ShouldQueue
         public string $triggerSource,
         public ?string $orderNo = null,
     ) {
+        $this->onConnection('database');
+        $this->onQueue('reports');
     }
 
     public function handle(ReportSnapshotStore $store): void

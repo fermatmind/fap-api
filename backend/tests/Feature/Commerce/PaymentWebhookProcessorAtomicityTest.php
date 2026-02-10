@@ -90,12 +90,23 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
         $first = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
-        $first->assertStatus(500);
+        $first->assertStatus(200);
+        $first->assertJson([
+            'ok' => true,
+            'duplicate' => false,
+        ]);
 
-        $this->assertSame(0, DB::table('payment_events')
+        $this->assertSame(1, DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_atomic_1')
             ->count());
+        $this->assertSame(
+            'post_commit_failed',
+            (string) (DB::table('payment_events')
+                ->where('provider', 'billing')
+                ->where('provider_event_id', 'evt_atomic_1')
+                ->value('status') ?? '')
+        );
 
         $second = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
@@ -110,6 +121,13 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_atomic_1')
             ->count());
+        $this->assertSame(
+            'processed',
+            (string) (DB::table('payment_events')
+                ->where('provider', 'billing')
+                ->where('provider_event_id', 'evt_atomic_1')
+                ->value('status') ?? '')
+        );
         $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'topup')->count());
     }
 }
