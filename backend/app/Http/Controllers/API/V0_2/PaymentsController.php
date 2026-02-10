@@ -20,20 +20,14 @@ class PaymentsController extends Controller
             return $this->unauthorizedResponse();
         }
 
-        $service = app(PaymentService::class);
-        $result = $service->createOrder([
-            'item_sku' => $request->itemSku(),
-            'currency' => $request->currency(),
-            'amount_total' => $request->amountTotal(),
-            'device_id' => $request->deviceId(),
-            'provider' => $request->provider(),
-            'provider_order_id' => $request->providerOrderId(),
-            'request_id' => $request->requestId(),
-            'ip' => (string) ($request->ip() ?? ''),
-        ], [
+        $request->merge([
             'user_id' => $userId ?? $anonId,
             'anon_id' => $anonId,
+            'ip' => (string) ($request->ip() ?? ''),
         ]);
+
+        $service = app(PaymentService::class);
+        $result = $service->createOrder($request->orderData());
 
         if (!$result['ok']) {
             return response()->json([
@@ -44,14 +38,19 @@ class PaymentsController extends Controller
         }
 
         $order = $result['order'];
+        $orderId = is_array($order) ? ($order['id'] ?? null) : ($order->id ?? null);
+        $status = is_array($order) ? ($order['status'] ?? null) : ($order->status ?? null);
+        $currency = is_array($order) ? ($order['currency'] ?? null) : ($order->currency ?? null);
+        $amountTotal = is_array($order) ? ($order['amount_total'] ?? null) : ($order->amount_total ?? null);
+        $itemSku = is_array($order) ? ($order['item_sku'] ?? null) : ($order->item_sku ?? null);
 
         return response()->json([
             'ok' => true,
-            'order_id' => $order['id'],
-            'status' => $order['status'],
-            'currency' => $order['currency'],
-            'amount_total' => $order['amount_total'],
-            'item_sku' => $order['item_sku'],
+            'order_id' => $orderId,
+            'status' => $status,
+            'currency' => $currency,
+            'amount_total' => $amountTotal,
+            'item_sku' => $itemSku,
         ]);
     }
 

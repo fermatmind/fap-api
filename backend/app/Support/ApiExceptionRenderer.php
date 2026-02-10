@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use App\Exceptions\InvalidSkuException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
@@ -32,6 +33,16 @@ final class ApiExceptionRenderer
             'error_code' => 'INTERNAL_ERROR',
             'message' => 'Internal Server Error',
         ];
+
+        if ($e instanceof InvalidSkuException) {
+            $status = 422;
+            $payload = [
+                'ok' => false,
+                'error' => 'INVALID_SKU',
+                'error_code' => 'INVALID_SKU',
+                'message' => 'invalid sku.',
+            ];
+        }
 
         if (
             $e instanceof ModelNotFoundException

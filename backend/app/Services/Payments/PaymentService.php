@@ -2,6 +2,7 @@
 
 namespace App\Services\Payments;
 
+use App\Services\Commerce\SkuPriceService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -13,27 +14,39 @@ class PaymentService
     private const PAYMENT_PROVIDER_INTERNAL = 'internal';
     private const PAYMENT_PROVIDER_MOCK = 'mock';
 
-    public function createOrder(array $data, array $actor): array
+    public function __construct(
+        private PaymentRouter $router,
+        private SkuPriceService $skuPriceService,
+    ) {
+    }
+
+    public function createOrder(array $data, array $actor = []): array
     {
         if (!Schema::hasTable('orders')) {
             return $this->tableMissing('orders');
         }
+
+        $itemSku = strtoupper(trim((string) ($data['item_sku'] ?? '')));
+        $currency = strtoupper(trim((string) ($data['currency'] ?? 'CNY')));
+        $orgIdRaw = $data['org_id'] ?? 1;
+        $orgId = is_numeric($orgIdRaw) ? max(1, (int) $orgIdRaw) : 1;
+        $priceCents = $this->skuPriceService->getPrice($itemSku, $currency, $orgId);
 
         $orderId = (string) Str::uuid();
         $now = now();
 
         $row = [
             'id' => $orderId,
-            'user_id' => $this->trimOrNull($actor['user_id'] ?? null),
-            'anon_id' => $this->trimOrNull($actor['anon_id'] ?? null),
+            'user_id' => $this->trimOrNull($data['user_id'] ?? ($actor['user_id'] ?? null)),
+            'anon_id' => $this->trimOrNull($data['anon_id'] ?? ($actor['anon_id'] ?? null)),
             'device_id' => $this->trimOrNull($data['device_id'] ?? null),
             'provider' => $this->trimOrNull($data['provider'] ?? null) ?: 'internal',
             'provider_order_id' => $this->trimOrNull($data['provider_order_id'] ?? null),
             'status' => 'pending',
-            'currency' => (string) ($data['currency'] ?? 'CNY'),
-            'amount_total' => (int) ($data['amount_total'] ?? 0),
+            'currency' => $currency,
+            'amount_total' => $priceCents,
             'amount_refunded' => 0,
-            'item_sku' => (string) ($data['item_sku'] ?? ''),
+            'item_sku' => $itemSku,
             'request_id' => $this->trimOrNull($data['request_id'] ?? null),
             'created_ip' => $this->trimOrNull($data['ip'] ?? null),
             'paid_at' => null,
@@ -43,11 +56,22 @@ class PaymentService
             'updated_at' => $now,
         ];
 
+        if (Schema::hasColumn('orders', 'amount_cents')) {
+            $row['amount_cents'] = $priceCents;
+        }
+        if (Schema::hasColumn('orders', 'org_id')) {
+            $row['org_id'] = $orgId;
+        }
+        if (Schema::hasColumn('orders', 'sku')) {
+            $row['sku'] = $itemSku;
+        }
+
         DB::table('orders')->insert($row);
+        $order = DB::table('orders')->where('id', $orderId)->first();
 
         return [
             'ok' => true,
-            'order' => $row,
+            'order' => $order ?: (object) $row,
         ];
     }
 

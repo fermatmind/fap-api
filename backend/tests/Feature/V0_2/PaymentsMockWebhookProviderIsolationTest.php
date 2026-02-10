@@ -71,7 +71,7 @@ final class PaymentsMockWebhookProviderIsolationTest extends TestCase
             ->where('provider_event_id', 'evt_shared')
             ->first();
 
-        $result = (new PaymentService())->handleWebhookMock(
+        $result = app(PaymentService::class)->handleWebhookMock(
             [
                 'provider_event_id' => 'evt_shared',
                 'provider_order_id' => $providerOrderId,
