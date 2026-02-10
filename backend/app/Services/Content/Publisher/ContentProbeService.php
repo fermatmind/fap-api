@@ -2,7 +2,7 @@
 
 namespace App\Services\Content\Publisher;
 
-use Illuminate\Support\Facades\Http;
+use App\Support\Http\ResilientClient;
 
 class ContentProbeService
 {
@@ -72,7 +72,7 @@ class ContentProbeService
         }
 
         try {
-            $resp = Http::timeout(8)->get($url);
+            $resp = ResilientClient::get($url);
         } catch (\Throwable $e) {
             return [
                 'ok' => false,

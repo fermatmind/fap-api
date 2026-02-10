@@ -3,7 +3,7 @@
 namespace App\Services\VectorStore\Drivers;
 
 use App\Services\VectorStore\VectorStoreInterface;
-use Illuminate\Support\Facades\Http;
+use App\Support\Http\ResilientClient;
 
 final class QdrantDriver implements VectorStoreInterface
 {
@@ -23,8 +23,7 @@ final class QdrantDriver implements VectorStoreInterface
         }
 
         try {
-            $timeout = (int) config('vectorstore.timeouts.request_seconds', 8);
-            $resp = Http::timeout($timeout)->get($endpoint . '/healthz');
+            $resp = ResilientClient::get($endpoint . '/healthz');
             if ($resp->ok()) {
                 return [
                     'ok' => true,

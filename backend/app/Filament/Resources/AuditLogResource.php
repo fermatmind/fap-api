@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class AuditLogResource extends Resource
@@ -64,10 +65,12 @@ class AuditLogResource extends Resource
                     ])
                     ->query(function ($query, array $data) {
                         if (!empty($data['date_from'])) {
-                            $query->whereDate('created_at', '>=', $data['date_from']);
+                            $from = Carbon::parse((string) $data['date_from'])->startOfDay();
+                            $query->where('created_at', '>=', $from);
                         }
                         if (!empty($data['date_to'])) {
-                            $query->whereDate('created_at', '<=', $data['date_to']);
+                            $toExclusive = Carbon::parse((string) $data['date_to'])->addDay()->startOfDay();
+                            $query->where('created_at', '<', $toExclusive);
                         }
                     }),
             ])

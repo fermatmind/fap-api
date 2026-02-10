@@ -3,12 +3,12 @@
 namespace App\Services\Content\Publisher;
 
 use App\Support\CacheKeys;
+use App\Support\Http\ResilientClient;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use RuntimeException;
 use ZipArchive;
@@ -711,7 +711,7 @@ final class ContentPackPublisher
         }
 
         try {
-            $resp = Http::timeout(8)->get($url);
+            $resp = ResilientClient::get($url);
         } catch (\Throwable $e) {
             return [
                 'ok' => false,
