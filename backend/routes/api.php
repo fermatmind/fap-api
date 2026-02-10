@@ -27,8 +27,9 @@ use App\Http\Controllers\API\V0_2\Admin\AdminMigrationController;
 use App\Http\Controllers\API\V0_2\Admin\AdminQueueController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
-use App\Http\Controllers\API\V0_3\AttemptsController;
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
+use App\Http\Controllers\API\V0_3\AttemptReadController;
+use App\Http\Controllers\API\V0_3\AttemptWriteController;
 use App\Http\Controllers\API\V0_3\BootController as BootV0_3Controller;
 use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
@@ -262,16 +263,16 @@ Route::prefix("v0.3")->middleware([
 
         // 2) Attempts lifecycle
         Route::middleware('throttle:api_attempt_submit')->group(function () {
-            Route::post("/attempts/start", [AttemptsController::class, "start"]);
-            Route::post("/attempts/submit", [AttemptsController::class, "submit"]);
+            Route::post("/attempts/start", [AttemptWriteController::class, "start"]);
+            Route::post("/attempts/submit", [AttemptWriteController::class, "submit"]);
         });
         Route::put("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "upsert"])
             ->middleware('uuid:attempt_id');
         Route::get("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "show"])
             ->middleware('uuid:attempt_id');
-        Route::get("/attempts/{id}/result", [AttemptsController::class, "result"])
+        Route::get("/attempts/{id}/result", [AttemptReadController::class, "result"])
             ->middleware('uuid:id');
-        Route::get("/attempts/{id}/report", [AttemptsController::class, "report"])
+        Route::get("/attempts/{id}/report", [AttemptReadController::class, "report"])
             ->middleware('uuid:id')
             ->name('v0.3.attempts.report');
 
