@@ -309,7 +309,29 @@ echo (string)($j["order_no"] ?? "");
 ' "$ART_DIR/curl_order.json")"
 [ -n "$order_no" ] || fail "order_no missing (order_resp=$(cat "$ART_DIR/curl_order.json" | head -c 600))"
 
-WEBHOOK_PAYLOAD='{"provider_event_id":"evt_pr20_1","order_no":"'"$order_no"'","external_trade_no":"trade_pr20_1","amount_cents":990,"currency":"USD"}'
+order_amount_cents="$(php -r '
+require __DIR__ . "/vendor/autoload.php";
+$app = require __DIR__ . "/bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+use Illuminate\Support\Facades\DB;
+$row = DB::table("orders")->where("order_no", $argv[1])->first();
+echo (string) ((int) ($row->amount_cents ?? 0));
+' "$order_no")"
+[ -n "$order_amount_cents" ] || fail "order amount missing"
+
+order_currency="$(php -r '
+require __DIR__ . "/vendor/autoload.php";
+$app = require __DIR__ . "/bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+use Illuminate\Support\Facades\DB;
+$row = DB::table("orders")->where("order_no", $argv[1])->first();
+echo strtoupper(trim((string) ($row->currency ?? "")));
+' "$order_no")"
+[ -n "$order_currency" ] || fail "order currency missing"
+
+WEBHOOK_PAYLOAD='{"provider_event_id":"evt_pr20_1","order_no":"'"$order_no"'","event_type":"payment_succeeded","external_trade_no":"trade_pr20_1","amount_cents":'"$order_amount_cents"',"currency":"'"$order_currency"'"}'
 http_code="$(post_billing_webhook "$WEBHOOK_PAYLOAD" "$ART_DIR/curl_webhook.json")"
 [ "${http_code:-000}" = "200" ] || fail "webhook failed (http=${http_code:-000})"
 
