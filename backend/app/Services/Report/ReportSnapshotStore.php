@@ -304,7 +304,7 @@ class ReportSnapshotStore
     private function buildReport(string $scaleCode, Attempt $attempt, Result $result): ?array
     {
         if ($scaleCode === 'MBTI') {
-            $composed = $this->reportComposer->compose((string) $attempt->id, []);
+            $composed = $this->reportComposer->compose($attempt, [], $result);
             if (!($composed['ok'] ?? false)) {
                 return null;
             }

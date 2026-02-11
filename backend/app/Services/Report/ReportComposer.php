@@ -38,28 +38,15 @@ class ReportComposer
         private ContentPacksIndex $packsIndex,
     ) {}
 
-    public function compose(string $attemptId, array $ctx): array
+    public function compose(Attempt $attempt, array $ctx = [], ?Result $result = null): array
     {
-        // 1) Load Attempt + Result
-        $attempt = Attempt::where('id', $attemptId)->first();
-        $result  = Result::where('attempt_id', $attemptId)->first();
-
-        if (!$attempt) {
-            return [
-                'ok' => false,
-                'error' => 'ATTEMPT_NOT_FOUND',
-                'message' => 'Attempt not found for given attempt_id',
-                'status' => 404,
-            ];
-        }
-
-        if (!$result) {
-            return [
-                'ok' => false,
-                'error' => 'RESULT_NOT_FOUND',
-                'message' => 'Result not found for given attempt_id',
-                'status' => 404,
-            ];
+        // 1) Use pre-authorized Attempt + org-scoped Result
+        $attemptId = (string) $attempt->id;
+        if ($result === null) {
+            $result = Result::query()
+                ->where('org_id', (int) $attempt->org_id)
+                ->where('attempt_id', $attempt->id)
+                ->firstOrFail();
         }
 
         // =========================

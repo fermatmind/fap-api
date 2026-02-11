@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V0_2;
 use App\Http\Controllers\Controller;
 use App\Models\Attempt;
 use App\Models\Event;
+use App\Models\Result;
+use App\Models\Share;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Legacy\LegacyShareService;
 use App\Support\OrgContext;
@@ -35,7 +37,6 @@ class ShareController extends Controller
     {
         // 1) 手动 Validator：确保永远 JSON 返回（避免 ValidationException 走 302）
         $v = Validator::make($request->all(), [
-            'attempt_id'  => ['nullable', 'string', 'max:64'],
             'anon_id'     => ['nullable', 'string', 'max:128'],
             'occurred_at' => ['nullable', 'date'],
             'meta_json'   => ['nullable', 'array'],
@@ -54,6 +55,24 @@ class ShareController extends Controller
         }
 
         $data = $v->validated();
+
+        try {
+            $share = Share::query()->where('id', $shareId)->first();
+        } catch (\Throwable $e) {
+            throw new NotFoundHttpException('Not Found');
+        }
+        if (!$share) {
+            throw new NotFoundHttpException('Not Found');
+        }
+
+        $attemptId = (string) ($share->attempt_id ?? '');
+        if ($attemptId === '') {
+            return response()->json([
+                'ok'      => false,
+                'error'   => 'ATTEMPT_NOT_FOUND',
+                'message' => 'share exists but attempt_id cannot be resolved.',
+            ], 404);
+        }
 
         // 2) 查 share_generate（用 share_id 关联）
         // ✅ 用 Laravel JSON path：跨 DB（sqlite/mysql）兼容
@@ -78,19 +97,6 @@ class ShareController extends Controller
         }
         if (!is_array($genMeta)) $genMeta = [];
 
-        // 4) attempt_id：优先 body，其次 share_generate.attempt_id
-        $attemptId = (string) ($data['attempt_id'] ?? '');
-        if ($attemptId === '') {
-            $attemptId = (string) ($gen->attempt_id ?? '');
-        }
-        if ($attemptId === '') {
-            return response()->json([
-                'ok'      => false,
-                'error'   => 'ATTEMPT_NOT_FOUND',
-                'message' => 'share_generate exists but attempt_id cannot be resolved.',
-            ], 404);
-        }
-
         // 5) experiment/version：优先 header，其次 body，其次 share_generate.meta_json 继承
         $experiment = (string) ($request->header('X-Experiment') ?? ($data['experiment'] ?? ''));
         $version    = (string) ($request->header('X-App-Version') ?? ($data['version'] ?? ''));
@@ -114,7 +120,7 @@ class ShareController extends Controller
 
         // ✅ share_click 最小字段（M3 漏斗串联）
         if (!isset($meta['share_id']))   $meta['share_id'] = $shareId;
-        if (!isset($meta['attempt_id'])) $meta['attempt_id'] = $attemptId;
+        $meta['attempt_id'] = $attemptId;
 
         // ✅ 把 share_generate 的关键字段补齐进来（不覆盖客户端已有）
         if ($typeCode !== '' && !isset($meta['type_code'])) $meta['type_code'] = $typeCode;
@@ -230,8 +236,14 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
                     'content_package_version' => $packV,
                 ];
 
+                $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+                $result = Result::query()
+                    ->where('org_id', (int) $attempt->org_id)
+                    ->where('attempt_id', $attempt->id)
+                    ->firstOrFail();
+
                 if (method_exists($composer, 'compose')) {
-                    $report = $composer->compose($attemptId, $ctx);
+                    $report = $composer->compose($attempt, $ctx, $result);
                 } elseif (method_exists($composer, 'composeReport')) {
                     $report = $composer->composeReport($attemptId, $ctx);
                 } elseif (method_exists($composer, 'build')) {
