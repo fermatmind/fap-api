@@ -23,6 +23,7 @@ final class ValidationErrorContractTest extends TestCase
         );
         $response->assertJsonPath('error_code', 'VALIDATION_FAILED');
         $response->assertJsonPath('message', 'The given data was invalid.');
+        $response->assertJsonMissingPath('error');
 
         $details = $response->json('details.scale_code');
         $this->assertIsArray($details);
@@ -48,7 +49,7 @@ final class ValidationErrorContractTest extends TestCase
             ['/api/v0.3/__contract_abort_401', 401, 'UNAUTHORIZED'],
             ['/api/v0.3/__contract_abort_403', 403, 'FORBIDDEN'],
             ['/api/v0.3/__contract_abort_404', 404, 'NOT_FOUND'],
-            ['/api/v0.3/__contract_abort_500', 500, 'SERVER_ERROR'],
+            ['/api/v0.3/__contract_abort_500', 500, 'INTERNAL_ERROR'],
         ];
 
         foreach ($cases as [$uri, $status, $errorCode]) {
@@ -60,6 +61,7 @@ final class ValidationErrorContractTest extends TestCase
                 strtolower((string) $response->headers->get('Content-Type', ''))
             );
             $response->assertJsonPath('error_code', (string) $errorCode);
+            $response->assertJsonMissingPath('error');
         }
     }
 }
