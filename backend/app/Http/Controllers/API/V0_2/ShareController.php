@@ -9,6 +9,7 @@ use App\Support\OrgContext;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -252,7 +253,16 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
                 }
             }
         } catch (\Throwable $e) {
-            $report = null;
+            Log::error('[share] report compose failed', [
+                'share_id' => $shareId,
+                'attempt_id' => $attemptId,
+                'type_code' => $typeCode,
+                'engine' => $engine,
+                'content_package_version' => $packV,
+                'exception' => get_class($e),
+                'message' => $e->getMessage(),
+            ]);
+            throw $e;
         }
 
         if (!is_array($report)) $report = [];

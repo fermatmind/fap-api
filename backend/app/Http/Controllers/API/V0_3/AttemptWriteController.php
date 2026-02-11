@@ -629,67 +629,76 @@ class AttemptWriteController extends Controller
 
         $found = $this->packsIndex->find($packId, $dirVersion);
         if (!($found['ok'] ?? false)) {
-            Log::error('QUESTIONS_INDEX_FIND_FAILED', [
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'questions_path' => $questionsPath,
-                'message' => 'QUESTIONS_INDEX_FIND_FAILED',
-                'json_error' => json_last_error_msg(),
-            ]);
-            throw new \RuntimeException('QUESTIONS_INDEX_FIND_FAILED');
+            $this->logAndThrowContentPackError(
+                'QUESTIONS_INDEX_FIND_FAILED',
+                $packId,
+                $dirVersion,
+                $questionsPath
+            );
         }
 
         $item = $found['item'] ?? [];
         $questionsPath = (string) ($item['questions_path'] ?? '');
         if ($questionsPath === '' || !File::exists($questionsPath)) {
-            Log::error('QUESTIONS_FILE_MISSING', [
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'questions_path' => $questionsPath,
-                'message' => 'QUESTIONS_FILE_MISSING',
-                'json_error' => json_last_error_msg(),
-            ]);
-            throw new \RuntimeException('QUESTIONS_FILE_MISSING');
+            $this->logAndThrowContentPackError(
+                'QUESTIONS_FILE_MISSING',
+                $packId,
+                $dirVersion,
+                $questionsPath
+            );
         }
 
         try {
             $raw = File::get($questionsPath);
         } catch (\Throwable $e) {
-            Log::error('QUESTIONS_FILE_READ_FAILED', [
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'questions_path' => $questionsPath,
-                'message' => $e->getMessage(),
-                'json_error' => json_last_error_msg(),
-            ]);
-            throw $e;
+            $this->logAndThrowContentPackError(
+                'QUESTIONS_FILE_READ_FAILED',
+                $packId,
+                $dirVersion,
+                $questionsPath,
+                $e
+            );
         }
 
         $decoded = json_decode($raw, true);
         if (!is_array($decoded)) {
-            Log::error('QUESTIONS_JSON_DECODE_FAILED', [
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'questions_path' => $questionsPath,
-                'message' => 'QUESTIONS_JSON_DECODE_FAILED',
-                'json_error' => json_last_error_msg(),
-            ]);
-            throw new \RuntimeException('QUESTIONS_JSON_DECODE_FAILED');
+            $this->logAndThrowContentPackError(
+                'QUESTIONS_JSON_DECODE_FAILED',
+                $packId,
+                $dirVersion,
+                $questionsPath
+            );
         }
 
         $items = $decoded['items'] ?? null;
         if (!is_array($items)) {
-            Log::error('QUESTIONS_JSON_INVALID_SHAPE', [
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'questions_path' => $questionsPath,
-                'message' => 'QUESTIONS_JSON_INVALID_SHAPE',
-                'json_error' => json_last_error_msg(),
-            ]);
-            throw new \RuntimeException('QUESTIONS_JSON_INVALID_SHAPE');
+            $this->logAndThrowContentPackError(
+                'QUESTIONS_JSON_INVALID_SHAPE',
+                $packId,
+                $dirVersion,
+                $questionsPath
+            );
         }
 
         return count($items);
+    }
+
+    private function logAndThrowContentPackError(
+        string $reason,
+        string $packId,
+        string $dirVersion,
+        string $questionsPath,
+        ?\Throwable $e = null
+    ): never {
+        Log::error($reason, [
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
+            'questions_path' => $questionsPath,
+            'exception_message' => $e?->getMessage() ?? $reason,
+            'json_error' => json_last_error_msg(),
+        ]);
+
+        throw new \RuntimeException('CONTENT_PACK_ERROR', 0, $e);
     }
 
     private function resolveContentPackageVersion(string $packId, string $dirVersion): string

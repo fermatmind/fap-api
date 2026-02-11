@@ -64,6 +64,24 @@ final class ApiExceptionRenderer
             );
         }
 
+        if ($e instanceof \RuntimeException && trim($e->getMessage()) === 'CONTENT_PACK_ERROR') {
+            $reason = trim((string) ($e->getPrevious()?->getMessage() ?? ''));
+            $payload = [
+                'ok' => false,
+                'error' => 'CONTENT_PACK_ERROR',
+                'error_code' => 'CONTENT_PACK_ERROR',
+                'message' => 'content pack resolve failed.',
+            ];
+            if ($reason !== '') {
+                $payload['details'] = ['reason' => $reason];
+            }
+
+            return response()->json(
+                self::withRequestId($payload, $requestId),
+                500
+            );
+        }
+
         if ($e instanceof HttpExceptionInterface) {
             $status = $e->getStatusCode();
             $errorCode = self::mapHttpExceptionErrorCode($status);
@@ -102,6 +120,7 @@ final class ApiExceptionRenderer
             403 => 'FORBIDDEN',
             404 => 'NOT_FOUND',
             429 => 'TOO_MANY_REQUESTS',
+            500 => 'SERVER_ERROR',
             default => 'HTTP_ERROR',
         };
     }
