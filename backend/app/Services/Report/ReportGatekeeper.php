@@ -33,6 +33,61 @@ class ReportGatekeeper
     ) {
     }
 
+    public function ensureAccess(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $role = null
+    ): array {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return $this->badRequest('ATTEMPT_REQUIRED', 'attempt_id is required.');
+        }
+
+        if (!Schema::hasTable('attempts')) {
+            return $this->tableMissing('attempts');
+        }
+        if (!Schema::hasTable('results')) {
+            return $this->tableMissing('results');
+        }
+
+        $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
+        if (!$attempt) {
+            return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
+        }
+
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
+        if (!$result) {
+            return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
+        }
+
+        $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
+        if ($scaleCode === '') {
+            return $this->badRequest('SCALE_REQUIRED', 'scale_code missing on attempt.');
+        }
+
+        $registry = $this->registry->getByCode($scaleCode, $orgId);
+        if (!$registry) {
+            return $this->notFound('SCALE_NOT_FOUND', 'scale not found.');
+        }
+
+        $commercial = $this->normalizeCommercial($registry['commercial_json'] ?? null);
+        $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
+        if ($benefitCode === '') {
+            $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
+        }
+
+        $hasAccess = $benefitCode !== ''
+            ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
+            : false;
+
+        return [
+            'ok' => true,
+            'locked' => !$hasAccess,
+        ];
+    }
+
     public function resolve(
         int $orgId,
         string $attemptId,

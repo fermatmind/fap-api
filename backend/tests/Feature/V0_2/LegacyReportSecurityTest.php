@@ -22,6 +22,8 @@ final class LegacyReportSecurityTest extends TestCase
         $ownerAnonId = 'anon_owner_result';
 
         $this->seedAttemptAndResult($attemptId, 0, $ownerAnonId, null, 'INTJ-A');
+        $this->seedScaleRegistry(0, 'MBTI');
+        $this->seedBenefitGrant(0, $attemptId, $ownerAnonId, $ownerAnonId);
 
         $this->withHeader('X-Anon-Id', $ownerAnonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/result")
