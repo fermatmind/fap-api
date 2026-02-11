@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Support\Database\SchemaIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -18,7 +19,8 @@ return new class extends Migration
             || !Schema::hasColumn(self::TABLE, 'provider')
             || !Schema::hasColumn(self::TABLE, 'recorded_at')
             || !Schema::hasColumn(self::TABLE, 'hash')
-            || SchemaIndex::indexExists(self::TABLE, self::INDEX)) {
+            || SchemaIndex::indexExists(self::TABLE, self::INDEX)
+            || $this->hasAnyIndexOnColumns(self::TABLE, ['provider', 'recorded_at', 'hash'])) {
             return;
         }
 
@@ -36,5 +38,40 @@ return new class extends Migration
         Schema::table(self::TABLE, function (Blueprint $table): void {
             $table->dropIndex(self::INDEX);
         });
+    }
+
+    /**
+     * @param list<string> $columns
+     */
+    private function hasAnyIndexOnColumns(string $table, array $columns): bool
+    {
+        if (DB::connection()->getDriverName() !== 'mysql') {
+            return false;
+        }
+
+        $database = DB::getDatabaseName();
+        if (!is_string($database) || $database === '') {
+            return false;
+        }
+
+        $expectedSequence = implode(',', $columns);
+
+        $rows = DB::select(
+            "SELECT index_name,
+                    GROUP_CONCAT(column_name ORDER BY seq_in_index SEPARATOR ',') AS column_sequence
+             FROM information_schema.statistics
+             WHERE table_schema = ? AND table_name = ?
+             GROUP BY index_name",
+            [$database, $table]
+        );
+
+        foreach ($rows as $row) {
+            $columnSequence = (string) ($row->column_sequence ?? $row->COLUMN_SEQUENCE ?? '');
+            if ($columnSequence === $expectedSequence) {
+                return true;
+            }
+        }
+
+        return false;
     }
 };
