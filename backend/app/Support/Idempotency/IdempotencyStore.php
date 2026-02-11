@@ -96,4 +96,37 @@ class IdempotencyStore
 
         return ['inserted' => true, 'existing' => false];
     }
+
+    public function recordFast(array $payload): array
+    {
+        if (!Schema::hasTable('idempotency_keys')) {
+            return ['inserted' => false, 'existing' => false];
+        }
+
+        $provider = (string) ($payload['provider'] ?? '');
+        $externalId = (string) ($payload['external_id'] ?? '');
+        $recordedAt = (string) ($payload['recorded_at'] ?? '');
+        $hash = (string) ($payload['hash'] ?? '');
+        $ingestBatchId = $payload['ingest_batch_id'] ?? null;
+
+        $now = now();
+        $affected = DB::table('idempotency_keys')->insertOrIgnore([
+            'provider' => $provider,
+            'external_id' => $externalId,
+            'recorded_at' => $recordedAt,
+            'hash' => $hash,
+            'first_seen_at' => $now,
+            'last_seen_at' => $now,
+            'ingest_batch_id' => $ingestBatchId,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        $inserted = $affected > 0;
+
+        return [
+            'inserted' => $inserted,
+            'existing' => !$inserted,
+        ];
+    }
 }

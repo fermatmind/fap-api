@@ -104,14 +104,7 @@ class ReplayService
                     $value = $sample['value'] ?? [];
 
                     $idKey = IdempotencyKey::build($provider, $externalId !== '' ? $externalId : $recordedAt, $recordedAt, $value);
-                    $existing = $store->findByPayload($idKey['provider'], $idKey['recorded_at'], $idKey['hash']);
-                    if ($existing) {
-                        $store->touch($idKey['provider'], $idKey['external_id'], $idKey['recorded_at'], $idKey['hash']);
-                        $skipped++;
-                        continue;
-                    }
-
-                    $record = $store->record([
+                    $record = $store->recordFast([
                         'provider' => $idKey['provider'],
                         'external_id' => $idKey['external_id'],
                         'recorded_at' => $idKey['recorded_at'],
