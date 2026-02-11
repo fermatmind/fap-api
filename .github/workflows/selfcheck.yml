@@ -24,6 +24,7 @@ jobs:
     env:
       APP_ENV: testing
       APP_DEBUG: "true"
+      FEATURE_ENABLE_V0_2_REPORT: "true"
 
       DB_CONNECTION: sqlite
       DB_DATABASE: /tmp/fap-ci.sqlite
@@ -278,6 +279,7 @@ jobs:
 
     env:
       APP_ENV: ci
+      FEATURE_ENABLE_V0_2_REPORT: "true"
       DB_CONNECTION: mysql
       DB_HOST: 127.0.0.1
       DB_PORT: 3306

@@ -216,6 +216,9 @@ $benefitCode = strtoupper(trim((string) ($commercial["report_benefit_code"] ?? "
 if ($benefitCode === "") {
     $benefitCode = strtoupper(trim((string) ($commercial["credit_benefit_code"] ?? "")));
 }
+if ($benefitCode === "" && strtoupper($scaleCode) === "MBTI") {
+    $benefitCode = "MBTI_REPORT_FULL";
+}
 if ($benefitCode === "") {
     exit(0);
 }
