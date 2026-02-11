@@ -5,6 +5,7 @@ namespace App\Services\Assessment;
 use App\Services\Assessment\Drivers\DriverInterface;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Scale\ScaleRegistry;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 
 class AssessmentEngine
@@ -47,7 +48,12 @@ class AssessmentEngine
             return $this->error('PACK_NOT_FOUND', 'content pack not found.');
         }
 
-        $scoringSpec = $this->readJson($pack['base_dir'] ?? '', 'scoring_spec.json');
+        $scoringSpec = $this->readJsonCached(
+            $packId,
+            $dirVersion,
+            (string) ($pack['base_dir'] ?? ''),
+            'scoring_spec.json'
+        );
         if (!is_array($scoringSpec)) {
             return $this->error('SCORING_SPEC_NOT_FOUND', 'scoring_spec.json not found or invalid.');
         }
@@ -66,7 +72,12 @@ class AssessmentEngine
             'scoring_spec' => $scoringSpec,
         ]);
 
-        $questions = $this->readJson($pack['base_dir'] ?? '', 'questions.json');
+        $questions = $this->readJsonCached(
+            $packId,
+            $dirVersion,
+            (string) ($pack['base_dir'] ?? ''),
+            'questions.json'
+        );
         if (is_array($questions)) {
             $ctxMerged['questions'] = $questions;
         }
@@ -115,6 +126,15 @@ class AssessmentEngine
             'base_dir' => $baseDir,
             'content_package_version' => (string) ($item['content_package_version'] ?? ''),
         ];
+    }
+
+    private function readJsonCached(string $packId, string $dirVersion, string $baseDir, string $filename): ?array
+    {
+        $key = sprintf('fap:pack_json:%s:%s:%s', $packId, $dirVersion, $filename);
+
+        return Cache::remember($key, 3600, function () use ($baseDir, $filename): ?array {
+            return $this->readJson($baseDir, $filename);
+        });
     }
 
     private function readJson(string $baseDir, string $filename): ?array

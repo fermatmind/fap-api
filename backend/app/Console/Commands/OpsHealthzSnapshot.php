@@ -34,7 +34,7 @@ class OpsHealthzSnapshot extends Command
         try {
             $data = null;
             try {
-                $response = Http::acceptJson()->timeout(5)->get($url);
+                $response = Http::acceptJson()->retry(3, 100)->timeout(5)->get($url);
                 if ($response->ok()) {
                     $json = $response->json();
                     if (is_array($json)) {
