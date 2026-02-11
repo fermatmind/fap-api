@@ -18,16 +18,20 @@ class StubProviderDisabledTest extends TestCase
         $this->postJson('/api/v0.3/webhooks/payment/stub', [])->assertStatus(404);
     }
 
-    public function test_stub_webhook_route_is_exposed_when_allow_stub_enabled_in_testing(): void
+    public function test_stub_webhook_route_exposure_depends_on_environment_even_when_enabled(): void
     {
-        $this->assertTrue(app()->environment(['testing', 'local']));
         config(['payments.allow_stub' => true]);
 
         $route = app('router')->getRoutes()->getByName('v0.3.webhooks.payment');
         $this->assertNotNull($route);
-        $this->assertStringContainsString('stub', (string) ($route->wheres['provider'] ?? ''));
 
         $response = $this->postJson('/api/v0.3/webhooks/payment/stub', []);
-        $this->assertNotSame(404, $response->getStatusCode());
+        if (app()->environment(['local', 'testing'])) {
+            $this->assertStringContainsString('stub', (string) ($route->wheres['provider'] ?? ''));
+            $this->assertNotSame(404, $response->getStatusCode());
+        } else {
+            $this->assertStringNotContainsString('stub', (string) ($route->wheres['provider'] ?? ''));
+            $response->assertStatus(404);
+        }
     }
 }
