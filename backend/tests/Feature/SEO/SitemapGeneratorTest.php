@@ -13,7 +13,7 @@ class SitemapGeneratorTest extends TestCase
 
     public function test_generate_only_includes_public_global_scales(): void
     {
-        config(['app.url' => 'https://fermatmind.com']);
+        config(['services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/']);
 
         $now = now();
 
@@ -85,12 +85,12 @@ class SitemapGeneratorTest extends TestCase
         $this->assertSame(['public-global', 'public-global-alt'], $slugList);
 
         $xml = (string) ($payload['xml'] ?? '');
-        $baseUrl = rtrim((string) config('app.url'), '/');
-        $this->assertStringContainsString($baseUrl . '/tests/public-global', $xml);
-        $this->assertStringContainsString($baseUrl . '/tests/public-global-alt', $xml);
-        $this->assertStringNotContainsString($baseUrl . '/tests/private-global', $xml);
-        $this->assertStringNotContainsString($baseUrl . '/tests/private-global-alt', $xml);
-        $this->assertStringNotContainsString($baseUrl . '/tests/tenant-public', $xml);
-        $this->assertStringNotContainsString($baseUrl . '/tests/tenant-public-alt', $xml);
+        $prefix = rtrim((string) config('services.seo.tests_url_prefix'), '/') . '/';
+        $this->assertStringContainsString($prefix . 'public-global', $xml);
+        $this->assertStringContainsString($prefix . 'public-global-alt', $xml);
+        $this->assertStringNotContainsString($prefix . 'private-global', $xml);
+        $this->assertStringNotContainsString($prefix . 'private-global-alt', $xml);
+        $this->assertStringNotContainsString($prefix . 'tenant-public', $xml);
+        $this->assertStringNotContainsString($prefix . 'tenant-public-alt', $xml);
     }
 }

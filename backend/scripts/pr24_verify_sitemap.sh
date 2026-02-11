@@ -9,8 +9,9 @@ export NO_COLOR=1
 
 SERVE_PORT="${SERVE_PORT:-1824}"
 API_BASE="http://127.0.0.1:${SERVE_PORT}"
-APP_URL_BASE="${APP_URL:-http://localhost}"
-APP_URL_BASE="${APP_URL_BASE%/}"
+URL_PREFIX="${SEO_TESTS_URL_PREFIX:-https://fermatmind.com/tests/}"
+URL_PREFIX="${URL_PREFIX%/}/"
+export SEO_TESTS_URL_PREFIX="${URL_PREFIX}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
@@ -37,6 +38,12 @@ cleanup_port() {
 log "Cleaning ports ${SERVE_PORT} and 18000"
 cleanup_port "$SERVE_PORT"
 cleanup_port 18000
+
+log "Clearing application cache"
+(
+  cd "$BACKEND_DIR"
+  php artisan cache:clear >/dev/null 2>&1 || true
+)
 
 SERVER_PID=""
 cleanup() {
@@ -151,9 +158,9 @@ if grep -i -E '^Set-Cookie:' "$headers_200" >/dev/null 2>&1; then
   exit 1
 fi
 
-loc_count="$(grep -F "<loc>${APP_URL_BASE}/tests/pr24-" "$body_200" | wc -l | tr -d ' ')"
+loc_count="$(grep -F "<loc>${URL_PREFIX}pr24-" "$body_200" | wc -l | tr -d ' ' || true)"
 if [[ "$loc_count" != "100" ]]; then
-  log "Expected 100 loc entries for base ${APP_URL_BASE}, got $loc_count"
+  log "Expected 100 loc entries for prefix ${URL_PREFIX}, got $loc_count"
   exit 1
 fi
 

@@ -73,6 +73,13 @@ return [
         ],
     ],
 
+    'seo' => [
+        'tests_url_prefix' => env(
+            'SEO_TESTS_URL_PREFIX',
+            rtrim((string) env('APP_URL', 'http://localhost'), '/') . '/tests/'
+        ),
+    ],
+
     'integrations' => [
         'webhook_tolerance_seconds' => (int) env('INTEGRATIONS_WEBHOOK_TOLERANCE_SECONDS', 300),
         'allow_unsigned_without_secret' => (bool) env('INTEGRATIONS_WEBHOOK_ALLOW_UNSIGNED', false),

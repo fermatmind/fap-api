@@ -52,7 +52,20 @@ jobs:
 
       - name: Composer audit (CVE scan)
         working-directory: backend
-        run: composer audit --no-interaction
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if composer audit --no-interaction; then
+              break
+            fi
+
+            if [[ "$attempt" -eq 3 ]]; then
+              echo "::error::composer audit failed after 3 attempts"
+              exit 1
+            fi
+
+            sleep $((attempt * 5))
+          done
 
       - name: Prepare sqlite
         run: |
