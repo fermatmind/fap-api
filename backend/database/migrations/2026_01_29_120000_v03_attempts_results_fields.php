@@ -18,10 +18,10 @@ return new class extends Migration
                     $table->unsignedBigInteger('org_id')->default(0);
                 }
                 if (!Schema::hasColumn('attempts', 'scale_code')) {
-                    $table->string('scale_code', 32);
+                    $table->string('scale_code', 32)->nullable();
                 }
                 if (!Schema::hasColumn('attempts', 'scale_version')) {
-                    $table->string('scale_version', 16);
+                    $table->string('scale_version', 16)->nullable();
                 }
                 if (!Schema::hasColumn('attempts', 'pack_id')) {
                     $table->string('pack_id', 128)->nullable();
@@ -77,10 +77,10 @@ return new class extends Migration
                     $table->unsignedBigInteger('org_id')->default(0);
                 }
                 if (!Schema::hasColumn('results', 'attempt_id')) {
-                    $table->uuid('attempt_id');
+                    $table->uuid('attempt_id')->nullable();
                 }
                 if (!Schema::hasColumn('results', 'scale_code')) {
-                    $table->string('scale_code', 32);
+                    $table->string('scale_code', 32)->nullable();
                 }
                 if (!Schema::hasColumn('results', 'result_json')) {
                     if ($isSqlite) {
@@ -139,16 +139,16 @@ return new class extends Migration
 
             Schema::table('attempts', function (Blueprint $table) {
                 if (Schema::hasColumn('attempts', 'answers_digest')) {
-                    $table->dropColumn('answers_digest');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
                 if (Schema::hasColumn('attempts', 'duration_ms')) {
-                    $table->dropColumn('duration_ms');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
                 if (Schema::hasColumn('attempts', 'content_package_version')) {
-                    $table->dropColumn('content_package_version');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
                 if (Schema::hasColumn('attempts', 'org_id')) {
-                    $table->dropColumn('org_id');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
             });
         }
@@ -168,22 +168,22 @@ return new class extends Migration
 
             Schema::table('results', function (Blueprint $table) {
                 if (Schema::hasColumn('results', 'report_engine_version')) {
-                    $table->dropColumn('report_engine_version');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
                 if (Schema::hasColumn('results', 'scoring_spec_version')) {
-                    $table->dropColumn('scoring_spec_version');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
                 if (Schema::hasColumn('results', 'dir_version')) {
-                    $table->dropColumn('dir_version');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
                 if (Schema::hasColumn('results', 'pack_id')) {
-                    $table->dropColumn('pack_id');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
                 if (Schema::hasColumn('results', 'result_json')) {
-                    $table->dropColumn('result_json');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
                 if (Schema::hasColumn('results', 'org_id')) {
-                    $table->dropColumn('org_id');
+                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
                 }
             });
         }
