@@ -43,6 +43,7 @@ class PaymentsController extends Controller
         $currency = is_array($order) ? ($order['currency'] ?? null) : ($order->currency ?? null);
         $amountTotal = is_array($order) ? ($order['amount_total'] ?? null) : ($order->amount_total ?? null);
         $itemSku = is_array($order) ? ($order['item_sku'] ?? null) : ($order->item_sku ?? null);
+        $quantity = is_array($order) ? ($order['quantity'] ?? null) : ($order->quantity ?? null);
 
         return response()->json([
             'ok' => true,
@@ -51,6 +52,7 @@ class PaymentsController extends Controller
             'currency' => $currency,
             'amount_total' => $amountTotal,
             'item_sku' => $itemSku,
+            'quantity' => $quantity,
         ]);
     }
 

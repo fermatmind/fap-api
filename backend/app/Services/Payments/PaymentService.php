@@ -28,9 +28,12 @@ class PaymentService
 
         $itemSku = strtoupper(trim((string) ($data['item_sku'] ?? '')));
         $currency = strtoupper(trim((string) ($data['currency'] ?? 'CNY')));
+        $qtyRaw = $data['quantity'] ?? 1;
+        $qty = is_numeric($qtyRaw) ? max(1, (int) $qtyRaw) : 1;
         $orgIdRaw = $data['org_id'] ?? 1;
         $orgId = is_numeric($orgIdRaw) ? max(1, (int) $orgIdRaw) : 1;
-        $priceCents = $this->skuPriceService->getPrice($itemSku, $currency, $orgId);
+        $unitPriceCents = $this->skuPriceService->getPrice($itemSku, $currency);
+        $amountCents = $unitPriceCents * $qty;
 
         $orderId = (string) Str::uuid();
         $now = now();
@@ -44,9 +47,12 @@ class PaymentService
             'provider_order_id' => $this->trimOrNull($data['provider_order_id'] ?? null),
             'status' => 'pending',
             'currency' => $currency,
-            'amount_total' => $priceCents,
+            'amount_total' => $amountCents,
+            'amount_cents' => $amountCents,
             'amount_refunded' => 0,
             'item_sku' => $itemSku,
+            'sku' => $itemSku,
+            'quantity' => $qty,
             'request_id' => $this->trimOrNull($data['request_id'] ?? null),
             'created_ip' => $this->trimOrNull($data['ip'] ?? null),
             'paid_at' => null,
@@ -56,14 +62,17 @@ class PaymentService
             'updated_at' => $now,
         ];
 
-        if (Schema::hasColumn('orders', 'amount_cents')) {
-            $row['amount_cents'] = $priceCents;
-        }
         if (Schema::hasColumn('orders', 'org_id')) {
             $row['org_id'] = $orgId;
         }
-        if (Schema::hasColumn('orders', 'sku')) {
-            $row['sku'] = $itemSku;
+        if (!Schema::hasColumn('orders', 'amount_cents')) {
+            unset($row['amount_cents']);
+        }
+        if (!Schema::hasColumn('orders', 'sku')) {
+            unset($row['sku']);
+        }
+        if (!Schema::hasColumn('orders', 'quantity')) {
+            unset($row['quantity']);
         }
 
         DB::table('orders')->insert($row);
