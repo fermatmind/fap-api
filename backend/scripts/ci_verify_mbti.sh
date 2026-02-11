@@ -19,6 +19,7 @@ export APP_ENV="${APP_ENV:-testing}"
 export DB_CONNECTION=sqlite
 export DB_DATABASE=/tmp/fap-ci.sqlite
 export QUEUE_CONNECTION=sync
+export FEATURE_ENABLE_V0_2_REPORT="${FEATURE_ENABLE_V0_2_REPORT:-1}"
 
 # Content packs (force local driver + repo path)
 export FAP_PACKS_DRIVER=local
@@ -50,6 +51,52 @@ php artisan key:generate --force >/dev/null 2>&1 || true
 
 # Prepare sqlite + seed scales registry/slugs
 bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+
+# Ensure MBTI commercial benefit codes exist for v0.2 report/share entitlement gate.
+BACKEND_DIR="$BACKEND_DIR" php -r '
+$backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
+require $backendDir . "/vendor/autoload.php";
+$app = require $backendDir . "/bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+
+if (!Illuminate\Support\Facades\Schema::hasTable("scales_registry")) {
+    exit(0);
+}
+
+$row = Illuminate\Support\Facades\DB::table("scales_registry")
+    ->where("org_id", 0)
+    ->where("code", "MBTI")
+    ->first();
+
+if (!$row) {
+    exit(0);
+}
+
+$commercial = $row->commercial_json ?? null;
+if (is_string($commercial)) {
+    $decoded = json_decode($commercial, true);
+    $commercial = is_array($decoded) ? $decoded : [];
+}
+if (!is_array($commercial)) {
+    $commercial = [];
+}
+
+if (trim((string) ($commercial["report_benefit_code"] ?? "")) === "") {
+    $commercial["report_benefit_code"] = "MBTI_REPORT_FULL";
+}
+if (trim((string) ($commercial["credit_benefit_code"] ?? "")) === "") {
+    $commercial["credit_benefit_code"] = "MBTI_CREDIT";
+}
+
+Illuminate\Support\Facades\DB::table("scales_registry")
+    ->where("org_id", 0)
+    ->where("code", "MBTI")
+    ->update([
+        "commercial_json" => json_encode($commercial, JSON_UNESCAPED_UNICODE),
+        "updated_at" => now(),
+    ]);
+'
 # --- end CI hard defaults ---
 
 # -----------------------------

@@ -159,6 +159,98 @@ fetch_json() {
   return 0
 }
 
+grant_attempt_entitlement() {
+  local attempt_id="$1"
+  local owner_anon_id="$2"
+
+  ATTEMPT_ID_FOR_GRANT="$attempt_id" OWNER_ANON_ID_FOR_GRANT="$owner_anon_id" BACKEND_DIR="$BACKEND_DIR" \
+    php -r '
+$backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
+require $backendDir . "/vendor/autoload.php";
+$app = require $backendDir . "/bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+
+$attemptId = trim((string) getenv("ATTEMPT_ID_FOR_GRANT"));
+$ownerAnonId = trim((string) getenv("OWNER_ANON_ID_FOR_GRANT"));
+if ($attemptId === "" || $ownerAnonId === "") {
+    exit(0);
+}
+
+if (
+    !Illuminate\Support\Facades\Schema::hasTable("attempts")
+    || !Illuminate\Support\Facades\Schema::hasTable("benefit_grants")
+    || !Illuminate\Support\Facades\Schema::hasTable("scales_registry")
+) {
+    exit(0);
+}
+
+$attempt = Illuminate\Support\Facades\DB::table("attempts")->where("id", $attemptId)->first();
+if (!$attempt) {
+    exit(0);
+}
+
+$scaleCode = trim((string) ($attempt->scale_code ?? ""));
+if ($scaleCode === "") {
+    exit(0);
+}
+
+$row = Illuminate\Support\Facades\DB::table("scales_registry")
+    ->where("org_id", (int) ($attempt->org_id ?? 0))
+    ->where("code", $scaleCode)
+    ->first();
+if (!$row) {
+    exit(0);
+}
+
+$commercial = $row->commercial_json ?? null;
+if (is_string($commercial)) {
+    $decoded = json_decode($commercial, true);
+    $commercial = is_array($decoded) ? $decoded : [];
+}
+if (!is_array($commercial)) {
+    $commercial = [];
+}
+
+$benefitCode = strtoupper(trim((string) ($commercial["report_benefit_code"] ?? "")));
+if ($benefitCode === "") {
+    $benefitCode = strtoupper(trim((string) ($commercial["credit_benefit_code"] ?? "")));
+}
+if ($benefitCode === "") {
+    exit(0);
+}
+
+$exists = Illuminate\Support\Facades\DB::table("benefit_grants")
+    ->where("org_id", (int) ($attempt->org_id ?? 0))
+    ->where("benefit_code", $benefitCode)
+    ->where("status", "active")
+    ->where(function ($q) use ($attemptId) {
+        $q->where("attempt_id", $attemptId)->orWhere("scope", "org");
+    })
+    ->where("benefit_ref", $ownerAnonId)
+    ->exists();
+
+if (!$exists) {
+    Illuminate\Support\Facades\DB::table("benefit_grants")->insert([
+        "id" => (string) Illuminate\Support\Str::uuid(),
+        "org_id" => (int) ($attempt->org_id ?? 0),
+        "user_id" => $ownerAnonId,
+        "benefit_code" => $benefitCode,
+        "scope" => "attempt",
+        "attempt_id" => $attemptId,
+        "status" => "active",
+        "benefit_type" => "report_unlock",
+        "benefit_ref" => $ownerAnonId,
+        "source_order_id" => (string) Illuminate\Support\Str::uuid(),
+        "source_event_id" => null,
+        "expires_at" => now()->addDay(),
+        "created_at" => now(),
+        "updated_at" => now(),
+    ]);
+}
+' >/dev/null 2>&1
+}
+
 fail() { echo "[FAIL] $*" >&2; exit 1; }
 
 assert_file_not_contains() {
@@ -326,6 +418,9 @@ fi
 echo "$ATTEMPT_ID" > "$ATTEMPT_ID_TXT"
 echo "$ATTEMPT_ANON_ID" > "$ANON_ID_TXT"
 echo "[OK] attempt_id=$ATTEMPT_ID"
+
+echo "[4.5/8] grant report entitlement for verify owner"
+grant_attempt_entitlement "$ATTEMPT_ID" "$ATTEMPT_ANON_ID" || fail "failed to grant report entitlement"
 
 echo "[5/8] fetch report & share"
 [[ -n "${ATTEMPT_ANON_ID}" ]] || fail "missing ATTEMPT_ANON_ID for report ownership guard"

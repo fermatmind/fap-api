@@ -27,6 +27,7 @@ use App\Services\Overrides\HighlightsOverridesApplier;
 use App\Services\Report\IdentityLayerBuilder;
 use App\Services\Rules\RuleEngine;
 use App\Services\Auth\FmTokenService;
+use App\Services\Commerce\EntitlementManager;
 use App\Services\Email\EmailOutboxService;
 use App\Services\ContentPackResolver;
 use App\Services\Psychometrics\NormsRegistry;
@@ -1014,13 +1015,34 @@ public function getReport(Request $request, string $attemptId)
         ]);
     }
 
+    if (!config('features.enable_v0_2_report', false)) {
+        return $this->reportNotFoundResponse();
+    }
+
     $attempt = Attempt::find($attemptId);
     if (!$attempt) {
         return $this->reportNotFoundResponse();
     }
 
+    $owner = $this->resolveReportOwner($request);
+
     if (!$this->canAccessAttemptReport($request, $attempt)) {
         return $this->reportNotFoundResponse();
+    }
+
+    $userId = trim((string) ($owner['user_id'] ?? ''));
+    $anonId = trim((string) ($owner['anon_id'] ?? ''));
+    $benefitCode = $this->resolveReportBenefitCode($attempt);
+    $hasFullAccess = app(EntitlementManager::class)->hasFullAccess(
+        (int) ($attempt->org_id ?? 0),
+        $userId !== '' ? $userId : null,
+        $anonId !== '' ? $anonId : null,
+        (string) $attempt->id,
+        $benefitCode
+    );
+
+    if (!$hasFullAccess) {
+        return $this->reportPaymentRequiredResponse();
     }
 
     $result = Result::where('attempt_id', $attemptId)->first();
@@ -1270,19 +1292,7 @@ private function canAccessAttemptReport(Request $request, Attempt $attempt): boo
         return true;
     }
 
-    $shareId = trim((string) ($request->query('share_id') ?? $request->header('X-Share-Id') ?? ''));
-    if ($shareId === '' || !Schema::hasTable('shares')) {
-        return false;
-    }
-
-    try {
-        return DB::table('shares')
-            ->where('id', $shareId)
-            ->where('attempt_id', (string) $attempt->id)
-            ->exists();
-    } catch (\Throwable $e) {
-        return false;
-    }
+    return false;
 }
 
 private function resolveReportOwner(Request $request): array
@@ -1304,6 +1314,56 @@ private function resolveReportOwner(Request $request): array
         'anon_id' => $resolvedAnonId,
         'user_id' => $attrUserId,
     ];
+}
+
+private function resolveReportBenefitCode(Attempt $attempt): string
+{
+    if (!Schema::hasTable('scales_registry')) {
+        return '';
+    }
+
+    $scaleCode = trim((string) ($attempt->scale_code ?? ''));
+    if ($scaleCode === '') {
+        return '';
+    }
+
+    try {
+        $row = DB::table('scales_registry')
+            ->where('org_id', (int) ($attempt->org_id ?? 0))
+            ->where('code', $scaleCode)
+            ->first();
+    } catch (\Throwable $e) {
+        return '';
+    }
+
+    if (!$row) {
+        return '';
+    }
+
+    $commercial = $row->commercial_json ?? null;
+    if (is_string($commercial)) {
+        $decoded = json_decode($commercial, true);
+        $commercial = is_array($decoded) ? $decoded : null;
+    }
+    if (!is_array($commercial)) {
+        return '';
+    }
+
+    $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
+    if ($benefitCode === '') {
+        $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
+    }
+
+    return $benefitCode;
+}
+
+private function reportPaymentRequiredResponse()
+{
+    return response()->json([
+        'ok' => false,
+        'error' => 'PAYMENT_REQUIRED',
+        'message' => 'report locked',
+    ], 402);
 }
 
 private function reportNotFoundResponse()

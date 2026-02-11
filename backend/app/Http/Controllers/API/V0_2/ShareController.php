@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attempt;
 use App\Models\Event;
+use App\Services\Commerce\EntitlementManager;
 use App\Services\Legacy\LegacyShareService;
 use App\Support\OrgContext;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -309,6 +313,10 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
      */
     public function getShare(Request $request, string $id, OrgContext $ctx)
     {
+        if (!config('features.enable_v0_2_report', false)) {
+            return $this->reportNotFoundResponse();
+        }
+
         $v = Validator::make(['id' => $id], [
             'id' => ['required', 'string', 'max:64'],
         ]);
@@ -319,6 +327,31 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
                 'error' => 'VALIDATION_FAILED',
                 'errors' => $v->errors(),
             ], 422);
+        }
+
+        $attempt = Attempt::query()
+            ->where('id', $id)
+            ->where('org_id', $ctx->orgId())
+            ->first();
+
+        if (!$attempt || !$this->canAccessAttemptShare($attempt, $ctx)) {
+            return $this->reportNotFoundResponse();
+        }
+
+        $benefitCode = $this->resolveReportBenefitCode($attempt);
+        $userId = $ctx->userId();
+        $anonId = $ctx->anonId();
+
+        $hasFullAccess = app(EntitlementManager::class)->hasFullAccess(
+            (int) ($attempt->org_id ?? 0),
+            $userId !== null ? (string) $userId : null,
+            $anonId !== null ? (string) $anonId : null,
+            (string) $attempt->id,
+            $benefitCode
+        );
+
+        if (!$hasFullAccess) {
+            return $this->reportPaymentRequiredResponse();
         }
 
         $data = $this->legacyShareService->getOrCreateShare($id, $ctx);
@@ -406,6 +439,86 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
         } catch (\Throwable $e) {
             // Keep endpoint non-blocking for legacy compatibility.
         }
+    }
+
+    private function canAccessAttemptShare(Attempt $attempt, OrgContext $ctx): bool
+    {
+        if (strtolower((string) ($ctx->role() ?? '')) === 'admin') {
+            return true;
+        }
+
+        $ownerUserId = $ctx->userId();
+        $attemptUserId = trim((string) ($attempt->user_id ?? ''));
+        if ($ownerUserId !== null && $attemptUserId !== '' && hash_equals($attemptUserId, (string) $ownerUserId)) {
+            return true;
+        }
+
+        $ownerAnonId = trim((string) ($ctx->anonId() ?? ''));
+        $attemptAnonId = trim((string) ($attempt->anon_id ?? ''));
+        if ($ownerAnonId !== '' && $attemptAnonId !== '' && hash_equals($attemptAnonId, $ownerAnonId)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function resolveReportBenefitCode(Attempt $attempt): string
+    {
+        if (!Schema::hasTable('scales_registry')) {
+            return '';
+        }
+
+        $scaleCode = trim((string) ($attempt->scale_code ?? ''));
+        if ($scaleCode === '') {
+            return '';
+        }
+
+        try {
+            $row = DB::table('scales_registry')
+                ->where('org_id', (int) ($attempt->org_id ?? 0))
+                ->where('code', $scaleCode)
+                ->first();
+        } catch (\Throwable $e) {
+            return '';
+        }
+
+        if (!$row) {
+            return '';
+        }
+
+        $commercial = $row->commercial_json ?? null;
+        if (is_string($commercial)) {
+            $decoded = json_decode($commercial, true);
+            $commercial = is_array($decoded) ? $decoded : null;
+        }
+        if (!is_array($commercial)) {
+            return '';
+        }
+
+        $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
+        if ($benefitCode === '') {
+            $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
+        }
+
+        return $benefitCode;
+    }
+
+    private function reportNotFoundResponse()
+    {
+        return response()->json([
+            'ok' => false,
+            'error' => 'RESULT_NOT_FOUND',
+            'message' => 'Result not found for given attempt_id',
+        ], 404);
+    }
+
+    private function reportPaymentRequiredResponse()
+    {
+        return response()->json([
+            'ok' => false,
+            'error' => 'PAYMENT_REQUIRED',
+            'message' => 'report locked',
+        ], 402);
     }
 
     /**
