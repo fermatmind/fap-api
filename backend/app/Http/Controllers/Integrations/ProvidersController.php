@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Integrations;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Integrations\IngestRequest;
 use App\Services\Ingestion\ConsentService;
 use App\Services\Ingestion\IngestionService;
-use App\Services\Ingestion\IntegrationUserResolver;
 use App\Services\Ingestion\ReplayService;
 use App\Support\Idempotency\IdempotencyKey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ProvidersController extends Controller
@@ -52,7 +51,7 @@ class ProvidersController extends Controller
         $code = (string) $request->query('code', '');
         $userId = $this->resolveUserId($request);
 
-        $externalUserId = 'mock_' . substr(sha1($provider . '|' . $state . '|' . $code), 0, 12);
+        $externalUserId = 'mock_'.substr(sha1($provider.'|'.$state.'|'.$code), 0, 12);
         $scopes = ['mock_scope'];
         $consentVersion = 'v0.1';
 
@@ -103,45 +102,90 @@ class ProvidersController extends Controller
         ]);
     }
 
-    public function ingest(IngestRequest $request, string $provider)
+    public function ingest(Request $request, string $provider)
     {
+        $rawBody = (string) $request->getContent();
+        if (strlen($rawBody) > 256 * 1024) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'payload_too_large',
+                'message' => 'payload_too_large',
+            ], 413);
+        }
+
         $provider = strtolower(trim($provider));
-        $payload = $request->validated();
+        if (! $this->isAllowedProvider($provider)) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'NOT_FOUND',
+                'message' => 'not found.',
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'meta' => ['nullable', 'array'],
+            'meta.range_start' => ['nullable', 'date'],
+            'meta.range_end' => ['nullable', 'date'],
+            'samples' => ['required', 'array', 'max:100'],
+            'samples.*' => ['required', 'array'],
+            'samples.*.recorded_at' => ['required', 'string', 'max:64'],
+            'samples.*.domain' => ['nullable', 'string', 'max:32'],
+            'samples.*.value' => ['required'],
+            'samples.*.external_id' => ['nullable', 'string', 'max:128'],
+            'samples.*.source' => ['nullable', 'string', 'max:64'],
+            'samples.*.confidence' => ['nullable', 'numeric'],
+        ]);
+
+        $validator->after(function ($validator) use ($request): void {
+            $samples = $request->input('samples', []);
+            if (! is_array($samples)) {
+                return;
+            }
+
+            foreach ($samples as $i => $sample) {
+                if (! is_array($sample) || ! array_key_exists('value', $sample)) {
+                    continue;
+                }
+
+                $value = $sample['value'];
+                $encoded = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $bytes = is_string($encoded) ? strlen($encoded) : 0;
+
+                if ($bytes > 8192) {
+                    $validator->errors()->add("samples.{$i}.value", 'value_json_too_large');
+                }
+
+                if ($this->depth($value, 8) > 8) {
+                    $validator->errors()->add("samples.{$i}.value", 'value_json_too_deep');
+                }
+            }
+        });
+
+        if ($validator->fails()) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'validation_failed',
+                'message' => 'validation_failed',
+                'details' => $validator->errors()->toArray(),
+            ], 422);
+        }
+
+        $payload = $validator->validated();
 
         $authMode = (string) $request->attributes->get('integration_auth_mode', '');
         $signatureOk = (bool) $request->attributes->get('integration_signature_ok', false);
-
-        $userId = null;
-        if ($authMode === 'sanctum') {
-            $authId = auth()->id();
-            if (is_numeric($authId)) {
-                $userId = (string) ((int) $authId);
-            }
-        } elseif ($authMode === 'signature') {
-            $externalUserId = trim((string) ($payload['external_user_id'] ?? ''));
-            $resolvedUserId = app(IntegrationUserResolver::class)->resolveInternalUserId($provider, $externalUserId);
-            if ($resolvedUserId === null) {
-                return response()->json([
-                    'ok' => false,
-                    'error' => 'INVALID_PAYLOAD',
-                    'error_code' => 'INVALID_PAYLOAD',
-                    'message' => 'external_user_id binding not found',
-                ], 422);
-            }
-            $userId = (string) $resolvedUserId;
-        }
+        $userId = $this->resolveUserId($request);
 
         if ($userId === null) {
             return response()->json([
                 'ok' => false,
                 'error' => 'UNAUTHORIZED',
-                'error_code' => 'UNAUTHORIZED',
-                'message' => 'Missing authenticated user.',
+                'message' => 'missing_identity',
             ], 401);
         }
 
         $meta = $payload['meta'] ?? [];
-        if (!is_array($meta)) {
+        if (! is_array($meta)) {
             $meta = [];
         }
 
@@ -152,7 +196,7 @@ class ProvidersController extends Controller
         ];
 
         $samples = $payload['samples'] ?? [];
-        if (!is_array($samples)) {
+        if (! is_array($samples)) {
             $samples = [];
         }
 
@@ -177,7 +221,47 @@ class ProvidersController extends Controller
     public function replay(Request $request, string $provider, string $batch_id)
     {
         $result = app(ReplayService::class)->replay($provider, $batch_id);
+
         return response()->json($result);
+    }
+
+    private function isAllowedProvider(string $provider): bool
+    {
+        $allowed = (array) config('integrations.allowed_providers', [
+            'mock',
+            'apple_health',
+            'google_fit',
+            'calendar',
+            'screen_time',
+        ]);
+
+        $allowed = array_values(array_filter(array_map(
+            static fn ($v) => strtolower(trim((string) $v)),
+            $allowed
+        )));
+
+        return $provider !== '' && in_array($provider, $allowed, true);
+    }
+
+    private function depth($value, int $limit, int $level = 0): int
+    {
+        if (! is_array($value)) {
+            return $level;
+        }
+
+        if ($level > $limit) {
+            return $level;
+        }
+
+        $max = $level;
+        foreach ($value as $child) {
+            $max = max($max, $this->depth($child, $limit, $level + 1));
+            if ($max > $limit) {
+                return $max;
+            }
+        }
+
+        return $max;
     }
 
     private function resolveUserId(Request $request): ?string
@@ -185,13 +269,17 @@ class ProvidersController extends Controller
         $uid = $request->attributes->get('fm_user_id');
         if (is_string($uid)) {
             $uid = trim($uid);
-            if ($uid !== '' && preg_match('/^\d+$/', $uid)) return $uid;
+            if ($uid !== '' && preg_match('/^\d+$/', $uid)) {
+                return $uid;
+            }
         }
 
         $uid2 = $request->attributes->get('user_id');
         if (is_string($uid2)) {
             $uid2 = trim($uid2);
-            if ($uid2 !== '' && preg_match('/^\d+$/', $uid2)) return $uid2;
+            if ($uid2 !== '' && preg_match('/^\d+$/', $uid2)) {
+                return $uid2;
+            }
         }
 
         return null;
