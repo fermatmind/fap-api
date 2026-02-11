@@ -13,6 +13,7 @@ use App\Http\Controllers\API\V0_2\AuthProviderController;
 use App\Http\Controllers\API\V0_2\ClaimController;
 use App\Http\Controllers\API\V0_2\ContentPacksController;
 use App\Http\Controllers\API\V0_2\IdentityController;
+use App\Http\Controllers\API\V0_2\LegacyReportController;
 use App\Http\Controllers\API\V0_2\MemoryController;
 use App\Http\Controllers\API\V0_2\MeController;
 use App\Http\Controllers\API\V0_2\NormsController;
@@ -188,10 +189,10 @@ Route::prefix("v0.2")->middleware([
     // Optional token attach (no 401): allow anon access + enrich events.user_id when token exists
     // =========================================================
     Route::middleware(\App\Http\Middleware\FmTokenOptional::class)->group(function () {
-        Route::get("/attempts/{id}/result", [MbtiController::class, "getResult"])
-            ->middleware('uuid:id');
-        Route::get("/attempts/{id}/report", [MbtiController::class, "getReport"])
-            ->middleware('uuid:id');
+        Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
+            ->middleware('uuid:attemptId');
+        Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
+            ->middleware('uuid:attemptId');
         Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
             ->middleware('uuid:id');
         Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"])
