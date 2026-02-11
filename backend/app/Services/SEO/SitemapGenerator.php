@@ -14,6 +14,8 @@ class SitemapGenerator
         $rows = DB::table('scales_registry')
             ->select('primary_slug', 'slugs_json', 'updated_at')
             ->where('is_active', 1)
+            ->where('is_public', 1)
+            ->where('org_id', 0)
             ->get();
 
         $slugDates = [];

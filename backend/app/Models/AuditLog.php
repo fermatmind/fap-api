@@ -11,6 +11,7 @@ class AuditLog extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'org_id',
         'actor_admin_id',
         'action',
         'target_type',
@@ -23,6 +24,7 @@ class AuditLog extends Model
     ];
 
     protected $casts = [
+        'org_id' => 'integer',
         'meta_json' => 'array',
         'created_at' => 'datetime',
     ];

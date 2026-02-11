@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AuditLogResource\Pages;
 use App\Models\AuditLog;
+use App\Support\OrgContext;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -20,9 +21,14 @@ class AuditLogResource extends Resource
     protected static ?string $navigationGroup = 'Observability';
     protected static ?string $navigationLabel = 'Audit Logs';
 
+    private static function orgContext(): OrgContext
+    {
+        return app(OrgContext::class);
+    }
+
     private static function orgId(): int
     {
-        return (int) app(\App\Support\OrgContext::class)->orgId();
+        return (int) self::orgContext()->orgId();
     }
 
     private static function scopedQuery(): Builder

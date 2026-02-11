@@ -112,7 +112,13 @@ class FmTokenAuth
 
         $orgId = $this->resolveOrgId($row);
         if ($orgId === null) {
-            $headerOrgId = trim((string) $request->header('X-Org-Id', ''));
+            $headerOrgId = trim((string) $request->header('X-FM-Org-Id', ''));
+            if ($headerOrgId === '') {
+                $headerOrgId = trim((string) $request->header('X-Org-Id', ''));
+            }
+            if ($headerOrgId === '') {
+                $headerOrgId = trim((string) $request->query('org_id', ''));
+            }
             if ($headerOrgId !== '' && preg_match('/^\d+$/', $headerOrgId)) {
                 $orgId = (int) $headerOrgId;
             }
