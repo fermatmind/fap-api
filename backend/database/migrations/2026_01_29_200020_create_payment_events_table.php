@@ -37,20 +37,9 @@ return new class extends Migration
         if (!$this->indexExists('payment_events', 'payment_events_provider_provider_event_id_unique')
             && Schema::hasColumn('payment_events', 'provider')
             && Schema::hasColumn('payment_events', 'provider_event_id')) {
-            $duplicates = DB::table('payment_events')
-                ->select('provider', 'provider_event_id')
-                ->whereNotNull('provider')
-                ->whereNotNull('provider_event_id')
-                ->groupBy('provider', 'provider_event_id')
-                ->havingRaw('count(*) > 1')
-                ->limit(1)
-                ->get();
-
-            if ($duplicates->count() === 0) {
-                Schema::table('payment_events', function (Blueprint $table) {
-                    $table->unique(['provider', 'provider_event_id'], 'payment_events_provider_provider_event_id_unique');
-                });
-            }
+            Schema::table('payment_events', function (Blueprint $table) {
+                $table->unique(['provider', 'provider_event_id'], 'payment_events_provider_provider_event_id_unique');
+            });
         }
 
         if (!$this->indexExists('payment_events', 'payment_events_order_received_idx')

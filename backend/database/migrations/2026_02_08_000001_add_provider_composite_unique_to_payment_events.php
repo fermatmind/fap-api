@@ -3,7 +3,6 @@
 use App\Support\Database\SchemaIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -65,19 +64,9 @@ return new class extends Migration
         }
 
         if (!SchemaIndex::indexExists(self::TABLE, self::OLD_UNIQUE)) {
-            $hasCrossProviderDuplicates = DB::table(self::TABLE)
-                ->select('provider_event_id')
-                ->whereNotNull('provider_event_id')
-                ->groupBy('provider_event_id')
-                ->havingRaw('count(*) > 1')
-                ->limit(1)
-                ->exists();
-
-            if (!$hasCrossProviderDuplicates) {
-                Schema::table(self::TABLE, function (Blueprint $table) {
-                    $table->unique('provider_event_id', self::OLD_UNIQUE);
-                });
-            }
+            Schema::table(self::TABLE, function (Blueprint $table) {
+                $table->unique('provider_event_id', self::OLD_UNIQUE);
+            });
         }
     }
 };

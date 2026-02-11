@@ -48,9 +48,7 @@ return new class extends Migration
             }
         });
 
-        if (Schema::hasTable('benefit_consumptions') && Schema::hasColumn('benefit_consumptions', 'org_id')) {
-            DB::table('benefit_consumptions')->whereNull('org_id')->update(['org_id' => 0]);
-        }
+        // Data backfill moved to ops job to keep migration schema-only.
 
         $uniqueName = 'benefit_consumptions_org_id_benefit_code_attempt_id_unique';
         $legacyUniqueName = 'benefit_consumptions_org_benefit_attempt_unique';
@@ -59,22 +57,12 @@ return new class extends Migration
             && Schema::hasColumn('benefit_consumptions', 'org_id')
             && Schema::hasColumn('benefit_consumptions', 'benefit_code')
             && Schema::hasColumn('benefit_consumptions', 'attempt_id')) {
-            $duplicates = DB::table('benefit_consumptions')
-                ->select('org_id', 'benefit_code', 'attempt_id')
-                ->whereNotNull('benefit_code')
-                ->whereNotNull('attempt_id')
-                ->groupBy('org_id', 'benefit_code', 'attempt_id')
-                ->havingRaw('count(*) > 1')
-                ->limit(1)
-                ->get();
-            if ($duplicates->count() === 0) {
-                Schema::table('benefit_consumptions', function (Blueprint $table) {
-                    $table->unique(
-                        ['org_id', 'benefit_code', 'attempt_id'],
-                        'benefit_consumptions_org_id_benefit_code_attempt_id_unique'
-                    );
-                });
-            }
+            Schema::table('benefit_consumptions', function (Blueprint $table) {
+                $table->unique(
+                    ['org_id', 'benefit_code', 'attempt_id'],
+                    'benefit_consumptions_org_id_benefit_code_attempt_id_unique'
+                );
+            });
         }
 
         if (!$this->indexExists('benefit_consumptions', 'benefit_consumptions_org_idx')
