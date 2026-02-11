@@ -48,6 +48,9 @@ jobs:
       - name: Guard no committed secrets (H-02)
         run: bash backend/scripts/ci/guard_no_committed_secrets.sh
 
+      - name: Guard error contract (no hand-written controller error field)
+        run: bash backend/scripts/ci/guard_error_contract.sh
+
       - name: CAE gate (config + artifact safety)
         run: bash backend/scripts/cae_gate.sh
 
