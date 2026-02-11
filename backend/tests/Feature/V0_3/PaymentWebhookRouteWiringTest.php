@@ -22,10 +22,19 @@ class PaymentWebhookRouteWiringTest extends TestCase
         $this->assertNotSame('', $providerWhere);
         $this->assertStringContainsString('stripe', $providerWhere);
         $this->assertStringContainsString('billing', $providerWhere);
-        $this->assertStringNotContainsString('stub', $providerWhere);
+        $stubEnabled = app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
+        if ($stubEnabled) {
+            $this->assertStringContainsString('stub', $providerWhere);
+        } else {
+            $this->assertStringNotContainsString('stub', $providerWhere);
+        }
 
         $response = $this->postJson('/api/v0.3/webhooks/payment/stub', []);
         $this->assertNotSame(500, $response->getStatusCode());
-        $response->assertStatus(404);
+        if ($stubEnabled) {
+            $this->assertNotSame(404, $response->getStatusCode());
+        } else {
+            $response->assertStatus(404);
+        }
     }
 }

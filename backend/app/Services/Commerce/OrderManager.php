@@ -51,8 +51,8 @@ class OrderManager
 
         $skuToLookup = $effectiveSku !== '' ? $effectiveSku : $requestedSku;
         $provider = strtolower(trim($provider));
-        if ($provider === '') {
-            $provider = 'billing';
+        if ($provider === '' || !in_array($provider, $this->allowedProviders(), true)) {
+            return $this->badRequest('PROVIDER_NOT_SUPPORTED', 'provider not supported.');
         }
 
         $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
@@ -88,7 +88,7 @@ class OrderManager
                 'amount_cents' => (int) ($skuRow->price_cents ?? 0) * $quantity,
                 'currency' => (string) ($skuRow->currency ?? 'USD'),
                 'status' => 'created',
-                'provider' => $provider !== '' ? $provider : 'billing',
+                'provider' => $provider,
                 'external_trade_no' => null,
                 'paid_at' => null,
                 'created_at' => $now,
@@ -452,6 +452,21 @@ class OrderManager
         }
 
         return $row;
+    }
+
+    private function allowedProviders(): array
+    {
+        $providers = ['stripe', 'billing'];
+        if ($this->isStubEnabled()) {
+            $providers[] = 'stub';
+        }
+
+        return $providers;
+    }
+
+    private function isStubEnabled(): bool
+    {
+        return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
     }
 
     private function tableMissing(string $table): array

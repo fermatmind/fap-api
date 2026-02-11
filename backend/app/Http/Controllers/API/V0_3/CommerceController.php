@@ -79,9 +79,9 @@ class CommerceController extends Controller
         if ($provider === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
-                'message' => 'not found.',
-            ], 404);
+                'error' => 'PROVIDER_UNAVAILABLE',
+                'message' => 'provider unavailable.',
+            ], 422);
         }
 
         $idempotencyKey = $this->resolveIdempotencyKey($request, $payload);
@@ -174,11 +174,7 @@ class CommerceController extends Controller
     private function resolveProvider(array $payload, ?string $providerFromRoute): string
     {
         $provider = $this->resolveRequestedProvider($payload, $providerFromRoute);
-        if (!in_array($provider, ['stripe', 'billing'], true)) {
-            return '';
-        }
-
-        return $provider;
+        return in_array($provider, $this->allowedProviders(), true) ? $provider : '';
     }
 
     private function resolveRequestedProvider(array $payload, ?string $providerFromRoute): string
@@ -196,7 +192,7 @@ class CommerceController extends Controller
 
     private function guardStubProvider(Request $request, string $provider): void
     {
-        if ($provider !== 'stub' || config('payments.allow_stub') === true) {
+        if ($provider !== 'stub' || $this->isStubEnabled()) {
             return;
         }
 
@@ -207,6 +203,21 @@ class CommerceController extends Controller
         ]);
 
         abort(404);
+    }
+
+    private function allowedProviders(): array
+    {
+        $providers = ['stripe', 'billing'];
+        if ($this->isStubEnabled()) {
+            $providers[] = 'stub';
+        }
+
+        return $providers;
+    }
+
+    private function isStubEnabled(): bool
+    {
+        return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
     }
 
     private function resolveRequestId(Request $request): string

@@ -28,7 +28,7 @@ class PaymentWebhookController extends Controller
         $provider = strtolower(trim($provider));
         $this->guardStubProvider($request, $provider);
 
-        if (!in_array($provider, ['stripe', 'billing'], true)) {
+        if (!in_array($provider, $this->allowedProviders(), true)) {
             Log::warning('PAYMENT_WEBHOOK_PROVIDER_UNSUPPORTED', [
                 'provider' => $provider,
                 'request_id' => $this->resolveRequestId($request),
@@ -351,9 +351,24 @@ class PaymentWebhookController extends Controller
         return $secret;
     }
 
+    private function allowedProviders(): array
+    {
+        $providers = ['stripe', 'billing'];
+        if ($this->isStubEnabled()) {
+            $providers[] = 'stub';
+        }
+
+        return $providers;
+    }
+
+    private function isStubEnabled(): bool
+    {
+        return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
+    }
+
     private function guardStubProvider(Request $request, string $provider): void
     {
-        if ($provider !== 'stub' || config('payments.allow_stub') === true) {
+        if ($provider !== 'stub' || $this->isStubEnabled()) {
             return;
         }
 
