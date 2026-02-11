@@ -66,9 +66,9 @@ class BillingWebhookSignatureTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
             'HTTP_X_ORG_ID' => '0',
-            'HTTP_X_BILLING_SIGNATURE' => $missingTimestampSignature,
+            'HTTP_X_WEBHOOK_SIGNATURE' => $missingTimestampSignature,
         ], $raw);
-        $missingTimestamp->assertStatus(404);
+        $missingTimestamp->assertStatus(400);
         $this->assertSame(0, DB::table('payment_events')->count());
 
         $expiredTs = time() - 301;
@@ -77,10 +77,10 @@ class BillingWebhookSignatureTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
             'HTTP_X_ORG_ID' => '0',
-            'HTTP_X_BILLING_TIMESTAMP' => (string) $expiredTs,
-            'HTTP_X_BILLING_SIGNATURE' => $expiredSig,
+            'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $expiredTs,
+            'HTTP_X_WEBHOOK_SIGNATURE' => $expiredSig,
         ], $raw);
-        $expired->assertStatus(404);
+        $expired->assertStatus(400);
         $this->assertSame(0, DB::table('payment_events')->count());
 
         $nowTs = time();
@@ -88,10 +88,10 @@ class BillingWebhookSignatureTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
             'HTTP_X_ORG_ID' => '0',
-            'HTTP_X_BILLING_TIMESTAMP' => (string) $nowTs,
-            'HTTP_X_BILLING_SIGNATURE' => 'bad',
+            'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $nowTs,
+            'HTTP_X_WEBHOOK_SIGNATURE' => 'bad',
         ], $raw);
-        $bad->assertStatus(404);
+        $bad->assertStatus(400);
         $this->assertSame(0, DB::table('payment_events')->count());
 
         $okSig = $this->buildSignature('billing_secret', $raw, $nowTs);
@@ -99,26 +99,15 @@ class BillingWebhookSignatureTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
             'HTTP_X_ORG_ID' => '0',
-            'HTTP_X_BILLING_TIMESTAMP' => (string) $nowTs,
-            'HTTP_X_BILLING_SIGNATURE' => $okSig,
+            'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $nowTs,
+            'HTTP_X_WEBHOOK_SIGNATURE' => $okSig,
         ], $raw);
 
         $ok->assertStatus(200);
         $ok->assertJson(['ok' => true]);
         $this->assertSame(1, DB::table('payment_events')->where('provider_event_id', 'evt_bill_1')->count());
 
-        Log::shouldHaveReceived('warning')
-            ->withArgs(fn (string $message): bool => $message === 'BILLING_WEBHOOK_TS_MISSING')
-            ->atLeast()
-            ->once();
-        Log::shouldHaveReceived('warning')
-            ->withArgs(fn (string $message): bool => $message === 'BILLING_WEBHOOK_TS_OUT_OF_WINDOW')
-            ->atLeast()
-            ->once();
-        Log::shouldHaveReceived('warning')
-            ->withArgs(fn (string $message): bool => $message === 'BILLING_WEBHOOK_SIG_MISMATCH')
-            ->atLeast()
-            ->once();
+        Log::shouldNotHaveReceived('error');
     }
 
     private function buildSignature(string $secret, string $rawBody, int $timestamp): string

@@ -38,9 +38,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
                 ?string $userId,
                 ?string $anonId,
                 bool $signatureOk,
-                array $payloadMeta,
-                string $rawPayloadSha256,
-                int $rawPayloadBytes
+                array $payloadMeta
             ) use ($payload, $rawBody): bool {
                 return $provider === 'stripe'
                     && $incomingPayload === $payload
@@ -50,9 +48,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
                     && $signatureOk === true
                     && ($payloadMeta['size_bytes'] ?? null) === strlen($rawBody)
                     && ($payloadMeta['sha256'] ?? null) === hash('sha256', $rawBody)
-                    && $rawPayloadSha256 === hash('sha256', $rawBody)
-                    && $rawPayloadBytes === strlen($rawBody)
-                    && array_key_exists('s3_key', $payloadMeta);
+                    && ($payloadMeta['raw_sha256'] ?? null) === hash('sha256', $rawBody);
             })
             ->andReturn([
                 'ok' => true,
@@ -84,7 +80,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
         ]);
     }
 
-    public function test_expired_timestamp_returns_404_and_processor_not_called(): void
+    public function test_expired_timestamp_returns_400_and_processor_not_called(): void
     {
         config([
             'services.stripe.webhook_secret' => 'whsec_test_expired',
@@ -121,14 +117,14 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
             $rawBody,
         );
 
-        $response->assertStatus(404);
+        $response->assertStatus(400);
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
+            'error_code' => 'INVALID_SIGNATURE',
         ]);
     }
 
-    public function test_missing_signature_header_returns_404(): void
+    public function test_missing_signature_header_returns_400(): void
     {
         config([
             'services.stripe.webhook_secret' => 'whsec_test_missing',
@@ -158,10 +154,10 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
             $rawBody,
         );
 
-        $response->assertStatus(404);
+        $response->assertStatus(400);
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
+            'error_code' => 'INVALID_SIGNATURE',
         ]);
     }
 

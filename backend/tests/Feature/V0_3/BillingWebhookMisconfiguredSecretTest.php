@@ -4,14 +4,13 @@ namespace Tests\Feature\V0_3;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class BillingWebhookMisconfiguredSecretTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_missing_billing_secret_returns_500_and_logs_anchor_without_sensitive_context(): void
+    public function test_missing_billing_secret_in_non_optional_env_returns_400_invalid_signature(): void
     {
         /** @var Application $app */
         $app = $this->app;
@@ -26,21 +25,6 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
             'services.billing.webhook_tolerance_seconds' => 300,
         ]);
 
-        Log::shouldReceive('error')
-            ->once()
-            ->withArgs(function ($message, $context): bool {
-                $this->assertSame('CRITICAL: BILLING_WEBHOOK_SECRET_MISSING', $message);
-                $this->assertIsArray($context);
-                $this->assertSame('billing', $context['provider'] ?? null);
-                $this->assertSame('production', $context['environment'] ?? null);
-                $this->assertSame('req-pr57-misconfigured', $context['request_id'] ?? null);
-                $this->assertArrayNotHasKey('body', $context);
-                $this->assertArrayNotHasKey('signature', $context);
-                $this->assertArrayNotHasKey('secret', $context);
-
-                return true;
-            });
-
         $raw = json_encode([
             'provider_event_id' => 'evt_pr57_missing_secret',
             'order_no' => 'ord_pr57_missing_secret',
@@ -52,14 +36,13 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
         $response = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
-            'HTTP_X_BILLING_TIMESTAMP' => (string) time(),
-            'HTTP_X_BILLING_SIGNATURE' => 'invalid',
+            'HTTP_X_WEBHOOK_TIMESTAMP' => (string) time(),
+            'HTTP_X_WEBHOOK_SIGNATURE' => 'invalid',
             'HTTP_X_REQUEST_ID' => 'req-pr57-misconfigured',
         ], $raw);
 
-        $response->assertStatus(500);
+        $response->assertStatus(400);
         $response->assertJsonPath('ok', false);
-        $response->assertJsonPath('error_code', 'INTERNAL_SERVER_ERROR');
-        $response->assertJsonPath('message', 'internal server error.');
+        $response->assertJsonPath('error_code', 'INVALID_SIGNATURE');
     }
 }

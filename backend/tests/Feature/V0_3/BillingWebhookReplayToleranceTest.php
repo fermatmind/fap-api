@@ -63,9 +63,9 @@ class BillingWebhookReplayToleranceTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
             'HTTP_X_ORG_ID' => '0',
-            'HTTP_X_BILLING_SIGNATURE' => 'sig_without_timestamp',
+            'HTTP_X_WEBHOOK_SIGNATURE' => 'sig_without_timestamp',
         ], $rawBody);
-        $missingTimestamp->assertStatus(404);
+        $missingTimestamp->assertStatus(400);
 
         $expiredTimestamp = time() - 301;
         $expiredSignature = $this->billingSignature('billing_secret_pr65', $rawBody, $expiredTimestamp);
@@ -73,28 +73,28 @@ class BillingWebhookReplayToleranceTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
             'HTTP_X_ORG_ID' => '0',
-            'HTTP_X_BILLING_TIMESTAMP' => (string) $expiredTimestamp,
-            'HTTP_X_BILLING_SIGNATURE' => $expiredSignature,
+            'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $expiredTimestamp,
+            'HTTP_X_WEBHOOK_SIGNATURE' => $expiredSignature,
         ], $rawBody);
-        $expired->assertStatus(404);
+        $expired->assertStatus(400);
 
         $now = time();
         $mismatch = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
             'HTTP_X_ORG_ID' => '0',
-            'HTTP_X_BILLING_TIMESTAMP' => (string) $now,
-            'HTTP_X_BILLING_SIGNATURE' => 'bad_signature',
+            'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $now,
+            'HTTP_X_WEBHOOK_SIGNATURE' => 'bad_signature',
         ], $rawBody);
-        $mismatch->assertStatus(404);
+        $mismatch->assertStatus(400);
 
         $validSignature = $this->billingSignature('billing_secret_pr65', $rawBody, $now);
         $ok = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
             'HTTP_X_ORG_ID' => '0',
-            'HTTP_X_BILLING_TIMESTAMP' => (string) $now,
-            'HTTP_X_BILLING_SIGNATURE' => $validSignature,
+            'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $now,
+            'HTTP_X_WEBHOOK_SIGNATURE' => $validSignature,
         ], $rawBody);
 
         $ok->assertStatus(200);

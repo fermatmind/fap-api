@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\API\V0_3\Webhooks;
 
-use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
+use App\Services\Commerce\PaymentGateway\StripeGateway;
 use Illuminate\Http\Request;
-use ReflectionMethod;
 use Tests\TestCase;
 
 final class PaymentWebhookStripeSignatureTest extends TestCase
@@ -25,11 +24,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
         ], $payload);
 
-        $controller = app(PaymentWebhookController::class);
-        $method = new ReflectionMethod($controller, 'verifyStripeSignature');
-        $method->setAccessible(true);
-
-        $ok = (bool) $method->invoke($controller, $request, '');
+        $ok = (new StripeGateway())->verifySignature($request);
 
         $this->assertTrue($ok);
     }
@@ -48,11 +43,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
         ], $payload);
 
-        $controller = app(PaymentWebhookController::class);
-        $method = new ReflectionMethod($controller, 'verifyStripeSignature');
-        $method->setAccessible(true);
-
-        $ok = (bool) $method->invoke($controller, $request, null);
+        $ok = (new StripeGateway())->verifySignature($request);
 
         $this->assertFalse($ok);
     }

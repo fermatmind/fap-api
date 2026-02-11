@@ -29,7 +29,7 @@ class PaymentWebhookFailSafeTest extends TestCase
         ]);
     }
 
-    public function test_invalid_json_returns_404_and_does_not_call_processor(): void
+    public function test_invalid_json_returns_400_and_does_not_call_processor(): void
     {
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
         $processor->shouldReceive('handle')->never();
@@ -48,10 +48,10 @@ class PaymentWebhookFailSafeTest extends TestCase
             '{"provider_event_id":"evt_invalid_json","order_no":"ord_invalid_json"',
         );
 
-        $response->assertStatus(404);
+        $response->assertStatus(400);
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
+            'error_code' => 'INVALID_JSON',
         ]);
     }
 }

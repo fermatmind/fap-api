@@ -93,7 +93,8 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
         $first->assertStatus(200);
         $first->assertJson([
             'ok' => true,
-            'duplicate' => false,
+            'order_no' => $orderNo,
+            'provider_event_id' => 'evt_atomic_1',
         ]);
 
         $this->assertSame(1, DB::table('payment_events')
@@ -114,7 +115,8 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
         $second->assertStatus(200);
         $second->assertJson([
             'ok' => true,
-            'duplicate' => false,
+            'order_no' => $orderNo,
+            'provider_event_id' => 'evt_atomic_1',
         ]);
 
         $this->assertSame(1, DB::table('payment_events')

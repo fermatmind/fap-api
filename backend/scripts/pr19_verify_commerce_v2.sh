@@ -88,8 +88,8 @@ post_billing_webhook() {
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "X-Org-Id: ${ORG_ID}" \
-    -H "X-Billing-Timestamp: ${ts}" \
-    -H "X-Billing-Signature: ${sig}" \
+    -H "X-Webhook-Timestamp: ${ts}" \
+    -H "X-Webhook-Signature: ${sig}" \
     --data-binary "$body" || true
 }
 

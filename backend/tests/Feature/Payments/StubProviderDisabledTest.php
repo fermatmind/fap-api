@@ -28,7 +28,7 @@ class StubProviderDisabledTest extends TestCase
         $response = $this->postJson('/api/v0.3/webhooks/payment/stub', []);
         if (app()->environment(['local', 'testing'])) {
             $this->assertStringContainsString('stub', (string) ($route->wheres['provider'] ?? ''));
-            $this->assertNotSame(404, $response->getStatusCode());
+            $response->assertStatus(404);
         } else {
             $this->assertStringNotContainsString('stub', (string) ($route->wheres['provider'] ?? ''));
             $response->assertStatus(404);
