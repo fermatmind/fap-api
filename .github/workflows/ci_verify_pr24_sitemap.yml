@@ -33,6 +33,7 @@ jobs:
       DB_DATABASE: /tmp/pr24.sqlite
       CACHE_DRIVER: array
       SERVE_PORT: 1824
+      SEO_TESTS_URL_PREFIX: https://fermatmind.com/tests/
 
     steps:
       - name: Checkout
