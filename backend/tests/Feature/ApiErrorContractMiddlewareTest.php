@@ -37,8 +37,13 @@ final class ApiErrorContractMiddlewareTest extends TestCase
         $response = $this->getJson('/api/__pr52/error-string');
 
         $response->assertStatus(404);
-        $response->assertJsonPath('error', 'not_found');
+        $response->assertJsonPath('ok', false);
         $response->assertJsonPath('error_code', 'NOT_FOUND');
+        $response->assertJsonPath('message', 'missing');
+
+        $decoded = json_decode((string) $response->getContent());
+        $this->assertIsObject($decoded);
+        $this->assertEquals((object) [], $decoded->details ?? null);
     }
 
     public function test_object_error_gets_top_level_error_code(): void
@@ -46,7 +51,12 @@ final class ApiErrorContractMiddlewareTest extends TestCase
         $response = $this->getJson('/api/__pr52/error-object');
 
         $response->assertStatus(429);
-        $response->assertJsonPath('error.code', 'rate_limit_public');
+        $response->assertJsonPath('ok', false);
         $response->assertJsonPath('error_code', 'RATE_LIMIT_PUBLIC');
+        $response->assertJsonPath('message', 'request failed.');
+
+        $decoded = json_decode((string) $response->getContent());
+        $this->assertIsObject($decoded);
+        $this->assertEquals((object) [], $decoded->details ?? null);
     }
 }
