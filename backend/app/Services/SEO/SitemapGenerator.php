@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class SitemapGenerator
 {
-    private const URL_PREFIX = 'https://fermatmind.com/tests/';
-
     public function generate(): array
     {
+        $baseUrl = rtrim((string) config('app.url'), '/');
+
         $rows = DB::table('scales_registry')
             ->select('primary_slug', 'slugs_json', 'updated_at')
             ->where('is_active', 1)
@@ -48,7 +48,7 @@ class SitemapGenerator
         $slugList = array_keys($slugDates);
         sort($slugList, SORT_STRING);
 
-        $xml = $this->buildXml($slugList, $slugDates);
+        $xml = $this->buildXml($slugList, $slugDates, $baseUrl);
 
         return [
             'xml' => $xml,
@@ -104,7 +104,7 @@ class SitemapGenerator
         }
     }
 
-    private function buildXml(array $slugList, array $slugDates): string
+    private function buildXml(array $slugList, array $slugDates, string $baseUrl): string
     {
         $lines = [];
         $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -116,7 +116,7 @@ class SitemapGenerator
                 continue;
             }
 
-            $loc = self::URL_PREFIX . rawurlencode($slug);
+            $loc = $baseUrl . '/tests/' . rawurlencode($slug);
             $lastmod = $this->formatLastmod($slugDates[$slug] ?? null);
 
             $lines[] = '  <url>';

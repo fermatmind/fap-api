@@ -13,6 +13,8 @@ class SitemapXmlTest extends TestCase
 
     public function test_sitemap_xml_is_cached_and_filtered(): void
     {
+        config(['app.url' => 'https://fermatmind.com']);
+
         $nowA = Carbon::create(2026, 1, 30, 10, 0, 0);
         $nowB = Carbon::create(2026, 1, 31, 12, 0, 0);
 
@@ -92,17 +94,18 @@ class SitemapXmlTest extends TestCase
         $response->assertHeaderMissing('Set-Cookie');
 
         $body = (string) $response->getContent();
-        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/alpha</loc>', $body);
-        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/beta</loc>', $body);
-        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/gamma</loc>', $body);
-        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/delta</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/hidden</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/hidden-alt</loc>', $body);
+        $baseUrl = rtrim((string) config('app.url'), '/');
+        $this->assertStringContainsString('<loc>' . $baseUrl . '/tests/alpha</loc>', $body);
+        $this->assertStringContainsString('<loc>' . $baseUrl . '/tests/beta</loc>', $body);
+        $this->assertStringContainsString('<loc>' . $baseUrl . '/tests/gamma</loc>', $body);
+        $this->assertStringContainsString('<loc>' . $baseUrl . '/tests/delta</loc>', $body);
+        $this->assertStringNotContainsString('<loc>' . $baseUrl . '/tests/hidden</loc>', $body);
+        $this->assertStringNotContainsString('<loc>' . $baseUrl . '/tests/hidden-alt</loc>', $body);
         $this->assertStringContainsString('<changefreq>weekly</changefreq>', $body);
         $this->assertStringContainsString('<priority>0.7</priority>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-30</lastmod>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-31</lastmod>', $body);
-        $this->assertSame(1, substr_count($body, '<loc>https://fermatmind.com/tests/alpha</loc>'));
+        $this->assertSame(1, substr_count($body, '<loc>' . $baseUrl . '/tests/alpha</loc>'));
 
         $second = $this->withHeaders(['If-None-Match' => $etag])->get('/sitemap.xml');
         $second->assertStatus(304);
