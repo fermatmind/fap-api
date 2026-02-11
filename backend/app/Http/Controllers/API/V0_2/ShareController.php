@@ -230,6 +230,7 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
                 ];
 
                 $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+                $ctx['org_id'] = (int) ($attempt->org_id ?? 0);
                 $result = Result::query()
                     ->where('org_id', (int) $attempt->org_id)
                     ->where('attempt_id', $attempt->id)

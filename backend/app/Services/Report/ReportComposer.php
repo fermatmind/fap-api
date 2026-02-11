@@ -25,6 +25,7 @@ use App\Services\RuleEngine\ReportRuleEngine;
 use App\DTO\ResolvedPack;
 
 use App\Domain\Score\AxisScore;
+use App\Support\OrgContext;
 
 class ReportComposer
 {
@@ -40,13 +41,36 @@ class ReportComposer
 
     public function compose(Attempt $attempt, array $ctx = [], ?Result $result = null): array
     {
-        // 1) Use pre-authorized Attempt + org-scoped Result
+        // 1) Resolve org from server-side context only and enforce tenant scope
         $attemptId = (string) $attempt->id;
-        if ($result === null) {
-            $result = Result::query()
-                ->where('org_id', (int) $attempt->org_id)
-                ->where('attempt_id', $attempt->id)
-                ->firstOrFail();
+        $orgId = $this->resolveServerOrgId($ctx);
+
+        $attempt = Attempt::query()
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->first();
+
+        if (!$attempt) {
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_NOT_FOUND',
+                'message' => 'attempt not found.',
+                'status' => 404,
+            ];
+        }
+
+        $result = Result::query()
+            ->where('attempt_id', $attemptId)
+            ->where('org_id', $orgId)
+            ->first();
+
+        if (!$result) {
+            return [
+                'ok' => false,
+                'error' => 'RESULT_NOT_FOUND',
+                'message' => 'result not found.',
+                'status' => 404,
+            ];
         }
 
         // =========================
@@ -981,6 +1005,15 @@ $explainPayload['overrides'] = $ovrRootArr;
             'type_code'  => $typeCode,
             'report'     => $reportPayload,
         ];
+    }
+
+    private function resolveServerOrgId(array $ctx): int
+    {
+        if (array_key_exists('org_id', $ctx) && is_numeric($ctx['org_id'])) {
+            return max(0, (int) $ctx['org_id']);
+        }
+
+        return max(0, (int) app(OrgContext::class)->orgId());
     }
 
     private function buildNormsPayload(string $packId, array $scoresPct): ?array

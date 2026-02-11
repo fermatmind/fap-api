@@ -7,6 +7,7 @@ use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
+use App\Support\OrgContext;
 use App\Support\SensitiveDataRedactor;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -46,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
             $scaleCode = '';
             $region = '';
             $locale = '';
+            $orgId = 0;
 
             if ($request instanceof Request) {
                 $attemptId = (string) (
@@ -92,10 +94,23 @@ class AppServiceProvider extends ServiceProvider
                     ?? $request->header('X-Locale')
                     ?? ''
                 );
+
+                $orgId = (int) ($request->attributes->get(
+                    'org_id',
+                    $request->attributes->get('fm_org_id', 0)
+                ) ?? 0);
             }
 
+            if ($orgId <= 0) {
+                $orgId = (int) $app->make(OrgContext::class)->orgId();
+            }
+            $orgId = max(0, $orgId);
+
             if ($attemptId !== '') {
-                $attempt = Attempt::where('id', $attemptId)->first();
+                $attempt = Attempt::query()
+                    ->where('id', $attemptId)
+                    ->where('org_id', $orgId)
+                    ->first();
             }
 
             if ($attempt) {
