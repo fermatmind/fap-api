@@ -79,26 +79,15 @@ return new class extends Migration
             }
         });
 
-        if (Schema::hasTable('report_snapshots') && Schema::hasColumn('report_snapshots', 'org_id')) {
-            DB::table('report_snapshots')->whereNull('org_id')->update(['org_id' => 0]);
-        }
+        // Data backfill moved to ops job to keep migration schema-only.
 
         $uniqueName = 'report_snapshots_attempt_id_unique';
         if (Schema::hasTable('report_snapshots')
             && Schema::hasColumn('report_snapshots', 'attempt_id')
             && !$this->indexExists('report_snapshots', $uniqueName)) {
-            $duplicates = DB::table('report_snapshots')
-                ->select('attempt_id')
-                ->whereNotNull('attempt_id')
-                ->groupBy('attempt_id')
-                ->havingRaw('count(*) > 1')
-                ->limit(1)
-                ->get();
-            if ($duplicates->count() === 0) {
-                Schema::table('report_snapshots', function (Blueprint $table) use ($uniqueName) {
-                    $table->unique(['attempt_id'], $uniqueName);
-                });
-            }
+            Schema::table('report_snapshots', function (Blueprint $table) use ($uniqueName) {
+                $table->unique(['attempt_id'], $uniqueName);
+            });
         }
 
         if (!$this->indexExists('report_snapshots', 'report_snapshots_org_id_idx')

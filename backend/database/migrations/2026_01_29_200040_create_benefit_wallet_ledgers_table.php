@@ -61,27 +61,16 @@ return new class extends Migration
             }
         });
 
-        if (Schema::hasTable('benefit_wallet_ledgers') && Schema::hasColumn('benefit_wallet_ledgers', 'org_id')) {
-            DB::table('benefit_wallet_ledgers')->whereNull('org_id')->update(['org_id' => 0]);
-        }
+        // Data backfill moved to ops job to keep migration schema-only.
 
         $uniqueName = 'benefit_wallet_ledgers_idempotency_key_unique';
         $legacyUniqueName = 'benefit_wallet_ledgers_idempotency_unique';
         if (!$this->indexExists('benefit_wallet_ledgers', $uniqueName)
             && !$this->indexExists('benefit_wallet_ledgers', $legacyUniqueName)
             && Schema::hasColumn('benefit_wallet_ledgers', 'idempotency_key')) {
-            $duplicates = DB::table('benefit_wallet_ledgers')
-                ->select('idempotency_key')
-                ->whereNotNull('idempotency_key')
-                ->groupBy('idempotency_key')
-                ->havingRaw('count(*) > 1')
-                ->limit(1)
-                ->get();
-            if ($duplicates->count() === 0) {
-                Schema::table('benefit_wallet_ledgers', function (Blueprint $table) {
-                    $table->unique('idempotency_key', 'benefit_wallet_ledgers_idempotency_key_unique');
-                });
-            }
+            Schema::table('benefit_wallet_ledgers', function (Blueprint $table) {
+                $table->unique('idempotency_key', 'benefit_wallet_ledgers_idempotency_key_unique');
+            });
         }
 
         if (!$this->indexExists('benefit_wallet_ledgers', 'benefit_wallet_ledgers_org_benefit_created_idx')

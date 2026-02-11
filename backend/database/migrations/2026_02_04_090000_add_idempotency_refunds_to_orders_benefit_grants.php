@@ -28,19 +28,9 @@ return new class extends Migration
             if (!$this->indexExists('orders', 'orders_org_idempotency_key_unique')
                 && Schema::hasColumn('orders', 'org_id')
                 && Schema::hasColumn('orders', 'idempotency_key')) {
-                $duplicates = DB::table('orders')
-                    ->select('org_id', 'idempotency_key')
-                    ->whereNotNull('idempotency_key')
-                    ->where('idempotency_key', '!=', '')
-                    ->groupBy('org_id', 'idempotency_key')
-                    ->havingRaw('count(*) > 1')
-                    ->limit(1)
-                    ->get();
-                if ($duplicates->count() === 0) {
-                    Schema::table('orders', function (Blueprint $table) {
-                        $table->unique(['org_id', 'idempotency_key'], 'orders_org_idempotency_key_unique');
-                    });
-                }
+                Schema::table('orders', function (Blueprint $table) {
+                    $table->unique(['org_id', 'idempotency_key'], 'orders_org_idempotency_key_unique');
+                });
             }
         }
 

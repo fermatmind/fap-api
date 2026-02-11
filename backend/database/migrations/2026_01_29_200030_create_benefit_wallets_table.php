@@ -41,9 +41,7 @@ return new class extends Migration
             }
         });
 
-        if (Schema::hasTable('benefit_wallets') && Schema::hasColumn('benefit_wallets', 'org_id')) {
-            DB::table('benefit_wallets')->whereNull('org_id')->update(['org_id' => 0]);
-        }
+        // Data backfill moved to ops job to keep migration schema-only.
 
         $uniqueName = 'benefit_wallets_org_id_benefit_code_unique';
         $legacyUniqueName = 'benefit_wallets_org_benefit_unique';
@@ -51,18 +49,9 @@ return new class extends Migration
             && !$this->indexExists('benefit_wallets', $legacyUniqueName)
             && Schema::hasColumn('benefit_wallets', 'org_id')
             && Schema::hasColumn('benefit_wallets', 'benefit_code')) {
-            $duplicates = DB::table('benefit_wallets')
-                ->select('org_id', 'benefit_code')
-                ->whereNotNull('benefit_code')
-                ->groupBy('org_id', 'benefit_code')
-                ->havingRaw('count(*) > 1')
-                ->limit(1)
-                ->get();
-            if ($duplicates->count() === 0) {
-                Schema::table('benefit_wallets', function (Blueprint $table) {
-                    $table->unique(['org_id', 'benefit_code'], 'benefit_wallets_org_id_benefit_code_unique');
-                });
-            }
+            Schema::table('benefit_wallets', function (Blueprint $table) {
+                $table->unique(['org_id', 'benefit_code'], 'benefit_wallets_org_id_benefit_code_unique');
+            });
         }
 
         if (!$this->indexExists('benefit_wallets', 'benefit_wallets_org_idx') && Schema::hasColumn('benefit_wallets', 'org_id')) {
