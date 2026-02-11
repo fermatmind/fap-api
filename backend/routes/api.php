@@ -39,6 +39,7 @@ use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
 use App\Http\Middleware\LimitWebhookPayloadSize;
+use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Controllers\Integrations\ProvidersController;
 use App\Http\Controllers\Webhooks\HandleProviderWebhook;
 
@@ -249,7 +250,7 @@ Route::prefix("v0.3")->middleware([
         ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
         ->name('v0.3.webhooks.payment');
 
-    Route::middleware(\App\Http\Middleware\ResolveOrgContext::class)->group(function () {
+    Route::middleware(ResolveOrgContext::class)->group(function () {
         // 0) Boot (flags + experiments)
         Route::get("/boot", [BootV0_3Controller::class, "show"]);
         Route::get("/flags", [BootV0_3Controller::class, "flags"]);
@@ -283,7 +284,7 @@ Route::prefix("v0.3")->middleware([
         Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
     });
 
-    Route::middleware([\App\Http\Middleware\FmTokenAuth::class, \App\Http\Middleware\ResolveOrgContext::class])
+    Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])
         ->group(function () {
             Route::post("/orgs", [OrgsController::class, "store"]);
             Route::get("/orgs/me", [OrgsController::class, "me"]);

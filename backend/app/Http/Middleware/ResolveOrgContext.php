@@ -31,21 +31,25 @@ class ResolveOrgContext
         $anonId = $this->resolveAnonId($request);
 
         if ($orgId > 0) {
-            if ($userId === null) {
-                $userId = $this->resolveUserIdFromToken($request);
-                if ($userId !== null) {
-                    $request->attributes->set('fm_user_id', (string) $userId);
-                    $request->attributes->set('user_id', (string) $userId);
+            if ($this->isAdminGuardAuthenticated()) {
+                $role = 'admin';
+            } else {
+                if ($userId === null) {
+                    $userId = $this->resolveUserIdFromToken($request);
+                    if ($userId !== null) {
+                        $request->attributes->set('fm_user_id', (string) $userId);
+                        $request->attributes->set('user_id', (string) $userId);
+                    }
                 }
-            }
 
-            if ($userId === null) {
-                return $this->orgNotFoundResponse();
-            }
+                if ($userId === null) {
+                    return $this->orgNotFoundResponse();
+                }
 
-            $role = $this->membershipService->getRole($orgId, $userId);
-            if ($role === null) {
-                return $this->orgNotFoundResponse();
+                $role = $this->membershipService->getRole($orgId, $userId);
+                if ($role === null) {
+                    return $this->orgNotFoundResponse();
+                }
             }
         } else {
             $orgId = 0;
@@ -61,9 +65,22 @@ class ResolveOrgContext
         return $next($request);
     }
 
+    private function isAdminGuardAuthenticated(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+
+        return auth($guard)->check();
+    }
+
     private function resolveOrgId(Request $request): int
     {
-        $header = trim((string) $request->header('X-Org-Id', ''));
+        $header = trim((string) $request->header('X-FM-Org-Id', ''));
+        if ($header === '') {
+            $header = trim((string) $request->header('X-Org-Id', ''));
+        }
+        if ($header === '') {
+            $header = trim((string) $request->query('org_id', ''));
+        }
         if ($header !== '') {
             if (!preg_match('/^\d+$/', $header)) {
                 return -1;

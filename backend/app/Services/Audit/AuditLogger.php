@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Audit;
 
 use App\Models\AuditLog;
+use App\Support\OrgContext;
 use App\Support\SensitiveDataRedactor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -60,7 +61,16 @@ class AuditLogger
             $meta['actor'] = $meta['actor'] ?? 'admin_token';
         }
 
+        $orgId = (int) app(OrgContext::class)->orgId();
+        if ($orgId <= 0) {
+            $rawOrgId = $request->attributes->get('org_id', $request->attributes->get('fm_org_id', 0));
+            if (is_numeric($rawOrgId)) {
+                $orgId = max(0, (int) $rawOrgId);
+            }
+        }
+
         AuditLog::create([
+            'org_id' => $orgId,
             'actor_admin_id' => $actorAdminId,
             'action' => $action,
             'target_type' => $targetType,

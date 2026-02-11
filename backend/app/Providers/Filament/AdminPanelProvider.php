@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use App\Http\Middleware\VerifyCsrfToken;
+use App\Http\Middleware\ResolveOrgContext;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -49,6 +50,7 @@ class AdminPanelProvider extends PanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
+                ResolveOrgContext::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
