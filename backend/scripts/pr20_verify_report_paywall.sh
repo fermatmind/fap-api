@@ -104,8 +104,8 @@ post_billing_webhook() {
     -X POST "$API/api/v0.3/webhooks/payment/billing" \
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \
-    -H "X-Billing-Timestamp: ${ts}" \
-    -H "X-Billing-Signature: ${sig}" \
+    -H "X-Webhook-Timestamp: ${ts}" \
+    -H "X-Webhook-Signature: ${sig}" \
     --data-binary "$body" || true
 }
 

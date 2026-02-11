@@ -25,8 +25,8 @@ trait SignedBillingWebhook
         $server = [
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json',
-            'HTTP_X_BILLING_TIMESTAMP' => (string) $timestamp,
-            'HTTP_X_BILLING_SIGNATURE' => $signature,
+            'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $timestamp,
+            'HTTP_X_WEBHOOK_SIGNATURE' => $signature,
         ];
 
         foreach ($headers as $name => $value) {
