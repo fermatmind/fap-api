@@ -13,7 +13,7 @@ class WebhookProviderMismatchTest extends TestCase
     use RefreshDatabase;
     use SignedBillingWebhook;
 
-    public function test_billing_webhook_is_ignored_when_order_provider_is_stripe(): void
+    public function test_billing_webhook_is_rejected_when_order_provider_is_stripe(): void
     {
         $orderNo = 'ord_provider_mismatch_1';
 
@@ -56,12 +56,11 @@ class WebhookProviderMismatchTest extends TestCase
             'X-Org-Id' => '0',
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(400);
         $response->assertJson([
-            'ok' => true,
-            'ignored' => true,
-            'order_no' => $orderNo,
-            'provider_event_id' => 'evt_provider_mismatch_1',
+            'ok' => false,
+            'error' => 'PROVIDER_MISMATCH',
+            'message' => 'provider mismatch',
         ]);
 
         $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
@@ -69,11 +68,11 @@ class WebhookProviderMismatchTest extends TestCase
         $this->assertSame('rejected', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_provider_mismatch_1')
-            ->value('status'));
-        $this->assertSame('PROVIDER_MISMATCH', (string) DB::table('payment_events')
+            ->value('handle_status'));
+        $this->assertSame('rejected_provider_mismatch', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_provider_mismatch_1')
-            ->value('reason'));
+            ->value('last_error_code'));
         $this->assertSame(0, DB::table('benefit_grants')->count());
         $this->assertSame(0, DB::table('report_snapshots')->count());
     }

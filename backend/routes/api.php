@@ -241,16 +241,20 @@ Route::prefix("v0.3")->middleware([
     'throttle:api_public',
     NormalizeApiErrorContract::class,
 ])->group(function () {
+    $payProviders = ['stripe', 'billing'];
+    if (app()->environment(['local', 'testing']) && config('payments.allow_stub') === true) {
+        $payProviders[] = 'stub';
+    }
 
     // ✅ 关键修复：payment webhook 必须是“公共入口”，不能依赖 ResolveOrgContext / token
     Route::post(
         "/webhooks/payment/{provider}",
         [PaymentWebhookController::class, "handle"]
-    )->whereIn('provider', ['stripe', 'billing'])
+    )->whereIn('provider', $payProviders)
         ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
         ->name('v0.3.webhooks.payment');
 
-    Route::middleware(ResolveOrgContext::class)->group(function () {
+    Route::middleware(ResolveOrgContext::class)->group(function () use ($payProviders) {
         // 0) Boot (flags + experiments)
         Route::get("/boot", [BootV0_3Controller::class, "show"]);
         Route::get("/flags", [BootV0_3Controller::class, "flags"]);
@@ -280,7 +284,13 @@ Route::prefix("v0.3")->middleware([
         // 3) Commerce v2 (public with org context)
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
         Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder");
-        Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder");
+        if (!in_array('stub', $payProviders, true)) {
+            Route::post("/orders/stub", static function () {
+                abort(404);
+            });
+        }
+        Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
+            ->whereIn('provider', $payProviders);
         Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
     });
 

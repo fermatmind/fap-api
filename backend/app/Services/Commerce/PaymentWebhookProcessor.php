@@ -37,7 +37,7 @@ class PaymentWebhookProcessor
         $billing = new BillingGateway();
         $this->gateways[$billing->provider()] = $billing;
 
-        if (app()->environment(['local', 'testing']) && config('payments.allow_stub') === true) {
+        if ($this->isStubEnabled()) {
             $stubGatewayClass = \App\Services\Commerce\PaymentGateway\StubGateway::class;
             if (class_exists($stubGatewayClass)) {
                 $stub = new $stubGatewayClass();
@@ -68,6 +68,10 @@ class PaymentWebhookProcessor
         }
 
         $provider = strtolower(trim($provider));
+        if ($provider === 'stub' && !$this->isStubEnabled()) {
+            return $this->notFound('PROVIDER_DISABLED', 'not found.');
+        }
+
         $gateway = $this->gateways[$provider] ?? null;
         if (!$gateway) {
             return $this->badRequest('PROVIDER_NOT_SUPPORTED', 'provider not supported.');
@@ -289,8 +293,11 @@ class PaymentWebhookProcessor
                         return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
                     }
 
-                    $orderProvider = (string) ($order->provider ?? '');
-                    if ($orderProvider !== $provider) {
+                    $orderProvider = strtolower(trim((string) ($order->provider ?? '')));
+                    $webhookProvider = strtolower(trim((string) $provider));
+                    if ($orderProvider !== $webhookProvider) {
+                        $detail = "order.provider={$orderProvider}; webhook.provider={$webhookProvider}";
+
                         Log::warning('PAYMENT_EVENT_PROVIDER_MISMATCH', [
                             'provider' => $provider,
                             'order_provider' => $orderProvider !== '' ? $orderProvider : null,
@@ -299,22 +306,19 @@ class PaymentWebhookProcessor
                             'order_id' => $order->id ?? null,
                         ]);
 
-                        $rejectedAt = now();
-                        $this->updatePaymentEvent($provider, $providerEventId, [
-                            'status' => 'rejected',
-                            'reason' => 'PROVIDER_MISMATCH',
-                            'handled_at' => $rejectedAt,
-                            'handle_status' => 'rejected',
-                            'last_error_code' => 'PROVIDER_MISMATCH',
-                            'last_error_message' => 'provider mismatch.',
-                            'updated_at' => $rejectedAt,
-                        ]);
+                        $this->markEventError(
+                            $provider,
+                            $providerEventId,
+                            'rejected',
+                            'rejected_provider_mismatch',
+                            $detail
+                        );
 
                         return [
-                            'ok' => true,
-                            'ignored' => true,
-                            'order_no' => $orderNo,
-                            'provider_event_id' => $providerEventId,
+                            'ok' => false,
+                            'error' => 'PROVIDER_MISMATCH',
+                            'message' => 'provider mismatch',
+                            'status' => 400,
                         ];
                     }
 
@@ -1086,6 +1090,11 @@ class PaymentWebhookProcessor
             'pack_id' => (string) ($row->pack_id ?? ''),
             'dir_version' => (string) ($row->dir_version ?? ''),
         ];
+    }
+
+    private function isStubEnabled(): bool
+    {
+        return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
     }
 
     private function tableMissing(string $table): array

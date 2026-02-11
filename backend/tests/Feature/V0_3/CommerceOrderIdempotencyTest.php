@@ -157,6 +157,28 @@ class CommerceOrderIdempotencyTest extends TestCase
         );
     }
 
+    public function test_order_without_provider_uses_region_primary_provider(): void
+    {
+        (new ScaleRegistrySeeder())->run();
+        (new Pr19CommerceSeeder())->run();
+
+        [$orgId, $userId, $token] = $this->seedOrgWithToken(9103, 9103);
+        $this->assertIsInt($userId);
+
+        $response = $this->postJson('/api/v0.3/orders', [
+            'sku' => 'MBTI_CREDIT',
+            'quantity' => 1,
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer ' . $token,
+        ]);
+
+        $response->assertStatus(200);
+        $orderNo = (string) $response->json('order_no');
+        $this->assertNotSame('', $orderNo);
+        $this->assertSame('billing', (string) DB::table('orders')->where('order_no', $orderNo)->value('provider'));
+    }
+
     public function test_cross_org_order_lookup_returns_404(): void
     {
         (new Pr19CommerceSeeder())->run();
@@ -218,15 +240,11 @@ class CommerceOrderIdempotencyTest extends TestCase
             'quantity' => 1,
             'provider' => 'stub',
         ];
+        $stubEnabled = app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
 
         $bodyProvider = $this->postJson('/api/v0.3/orders', $payload, [
             'X-Org-Id' => (string) $orgId,
             'Authorization' => 'Bearer ' . $token,
-        ]);
-        $bodyProvider->assertStatus(404);
-        $bodyProvider->assertJson([
-            'ok' => false,
-            'error' => 'NOT_FOUND',
         ]);
 
         $routeProvider = $this->postJson('/api/v0.3/orders/stub', [
@@ -236,6 +254,13 @@ class CommerceOrderIdempotencyTest extends TestCase
             'X-Org-Id' => (string) $orgId,
             'Authorization' => 'Bearer ' . $token,
         ]);
-        $routeProvider->assertStatus(404);
+
+        if ($stubEnabled) {
+            $bodyProvider->assertStatus(200);
+            $routeProvider->assertStatus(200);
+        } else {
+            $bodyProvider->assertStatus(404);
+            $routeProvider->assertStatus(404);
+        }
     }
 }

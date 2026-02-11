@@ -6,8 +6,10 @@ use Tests\TestCase;
 
 class StubProviderDisabledTest extends TestCase
 {
-    public function test_stub_routes_return_404_by_default(): void
+    public function test_stub_routes_return_404_when_allow_stub_disabled(): void
     {
+        config(['payments.allow_stub' => false]);
+
         $this->postJson('/api/v0.3/orders/stub', [
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
@@ -16,16 +18,20 @@ class StubProviderDisabledTest extends TestCase
         $this->postJson('/api/v0.3/webhooks/payment/stub', [])->assertStatus(404);
     }
 
-    public function test_stub_routes_still_return_404_when_allow_stub_enabled_in_testing(): void
+    public function test_stub_webhook_route_exposure_depends_on_environment_even_when_enabled(): void
     {
-        $this->assertTrue(app()->environment(['testing', 'ci']));
         config(['payments.allow_stub' => true]);
 
-        $this->postJson('/api/v0.3/orders/stub', [
-            'sku' => 'MBTI_CREDIT',
-            'quantity' => 1,
-        ])->assertStatus(404);
+        $route = app('router')->getRoutes()->getByName('v0.3.webhooks.payment');
+        $this->assertNotNull($route);
 
-        $this->postJson('/api/v0.3/webhooks/payment/stub', [])->assertStatus(404);
+        $response = $this->postJson('/api/v0.3/webhooks/payment/stub', []);
+        if (app()->environment(['local', 'testing'])) {
+            $this->assertStringContainsString('stub', (string) ($route->wheres['provider'] ?? ''));
+            $this->assertNotSame(404, $response->getStatusCode());
+        } else {
+            $this->assertStringNotContainsString('stub', (string) ($route->wheres['provider'] ?? ''));
+            $response->assertStatus(404);
+        }
     }
 }
