@@ -194,6 +194,16 @@ class AttemptsStartSubmitTest extends TestCase
             'computed_at' => now(),
         ]);
 
+        $resultResp = $this->withHeaders([
+            'X-Anon-Id' => 'anon_test',
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
+
+        $resultResp->assertStatus(200);
+        $resultResp->assertJsonPath('type_code', 'INTJ-A');
+        $this->assertIsArray($resultResp->json('scores'));
+        $this->assertSame(50, (int) $resultResp->json('scores_pct.EI'));
+        $this->assertSame('INTJ-A', (string) $resultResp->json('result.type_code'));
+
         $report = $this->withHeaders([
             'X-Anon-Id' => 'anon_test',
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");

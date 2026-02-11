@@ -39,6 +39,24 @@ class AttemptReadController extends Controller
             $payload = [];
         }
 
+        $compatTypeCode = (string) (($payload['type_code'] ?? null) ?? ($result->type_code ?? ''));
+
+        $compatScores = $result->scores_json;
+        if (!is_array($compatScores)) {
+            $compatScores = $payload['scores_json'] ?? $payload['scores'] ?? [];
+        }
+        if (!is_array($compatScores)) {
+            $compatScores = [];
+        }
+
+        $compatScoresPct = $result->scores_pct;
+        if (!is_array($compatScoresPct)) {
+            $compatScoresPct = $payload['scores_pct'] ?? ($payload['axis_scores_json']['scores_pct'] ?? null);
+        }
+        if (!is_array($compatScoresPct)) {
+            $compatScoresPct = [];
+        }
+
         $this->eventRecorder->recordFromRequest($request, 'result_view', $this->resolveUserId($request), [
             'scale_code' => (string) ($attempt->scale_code ?? ''),
             'pack_id' => (string) ($attempt->pack_id ?? ''),
@@ -50,6 +68,9 @@ class AttemptReadController extends Controller
         return response()->json([
             'ok' => true,
             'attempt_id' => (string) $attempt->id,
+            'type_code' => $compatTypeCode,
+            'scores' => $compatScores,
+            'scores_pct' => $compatScoresPct,
             'result' => $payload,
             'meta' => [
                 'scale_code' => (string) ($attempt->scale_code ?? ''),
