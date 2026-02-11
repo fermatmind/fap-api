@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class PaymentWebhookController extends Controller
+final class PaymentWebhookController extends Controller
 {
     public function __construct(
         private PaymentWebhookProcessor $processor,
