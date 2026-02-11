@@ -26,6 +26,19 @@ class PaymentWebhookController extends Controller
     public function handle(Request $request, string $provider): JsonResponse
     {
         $provider = strtolower(trim($provider));
+        $rawBody = (string) $request->getContent();
+        $bytes = strlen($rawBody);
+        $max = 262144;
+
+        if ($bytes > $max) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'payload_too_large',
+                'message' => 'payload too large',
+            ], 413);
+        }
+
+        $payloadSha256 = hash('sha256', $rawBody);
         $this->guardStubProvider($request, $provider);
 
         if (!in_array($provider, $this->allowedProviders(), true)) {
@@ -35,10 +48,6 @@ class PaymentWebhookController extends Controller
             ]);
             return $this->notFoundResponse();
         }
-
-        $rawBody = (string) $request->getContent();
-        $size = strlen($rawBody);
-        $sha = hash('sha256', $rawBody);
 
         if ($provider === 'billing') {
             $misconfigured = $this->billingSecretMisconfiguredResponse($request, $provider);
@@ -71,10 +80,10 @@ class PaymentWebhookController extends Controller
         $anonId = $ctx['anon_id'];
 
         $requestId = $this->resolveRequestId($request);
-        $s3Key = $this->storePayloadForensics($request, $provider, $payload, $rawBody, $sha, $size, $requestId);
+        $s3Key = $this->storePayloadForensics($request, $provider, $payload, $rawBody, $payloadSha256, $bytes, $requestId);
         $payloadMeta = [
-            'size_bytes' => $size,
-            'sha256' => $sha,
+            'size_bytes' => $bytes,
+            'sha256' => $payloadSha256,
             's3_key' => $s3Key,
         ];
 
@@ -86,6 +95,8 @@ class PaymentWebhookController extends Controller
             $anonId !== null ? (string) $anonId : null,
             $signatureOk,
             $payloadMeta,
+            $payloadSha256,
+            $bytes,
         );
 
         if (!($result['ok'] ?? false)) {

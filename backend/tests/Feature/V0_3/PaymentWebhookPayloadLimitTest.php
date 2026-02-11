@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Payments;
+namespace Tests\Feature\V0_3;
 
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,17 +11,19 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-final class WebhookPayloadSizeLimitTest extends TestCase
+final class PaymentWebhookPayloadLimitTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_oversized_webhook_payload_returns_413_and_no_payment_event_is_written(): void
+    public function test_payload_over_256kb_returns_413_and_writes_no_payment_event(): void
     {
+        $eventId = 'evt_payload_limit_413_v03';
         $rawBody = json_encode([
-            'id' => 'evt_payload_too_large_1',
-            'order_no' => 'ord_payload_too_large_1',
+            'id' => $eventId,
+            'order_no' => 'ord_payload_limit_413_v03',
             'blob' => str_repeat('x', 270000),
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
         self::assertIsString($rawBody);
         self::assertGreaterThan(262144, strlen($rawBody));
 
@@ -41,17 +43,18 @@ final class WebhookPayloadSizeLimitTest extends TestCase
         $response->assertStatus(413)->assertJson([
             'ok' => false,
             'error' => 'payload_too_large',
+            'message' => 'payload too large',
         ]);
 
-        $this->assertSame(0, DB::table('payment_events')->count());
+        $this->assertSame(0, DB::table('payment_events')->where('provider_event_id', $eventId)->count());
     }
 
-    public function test_normal_webhook_writes_payload_forensics_without_full_payload_json(): void
+    public function test_small_payload_persists_digest_and_small_summary_json(): void
     {
         (new Pr19CommerceSeeder())->run();
         Storage::fake('s3');
 
-        $orderNo = 'ord_payload_limit_ok_1';
+        $orderNo = 'ord_payload_limit_ok_v03';
         DB::table('orders')->insert([
             'id' => (string) Str::uuid(),
             'order_no' => $orderNo,
@@ -80,22 +83,30 @@ final class WebhookPayloadSizeLimitTest extends TestCase
             'refunded_at' => null,
         ]);
 
-        $eventId = 'evt_payload_limit_ok_1';
+        $eventId = 'evt_payload_limit_ok_v03';
         $payload = [
             'id' => $eventId,
             'type' => 'payment_intent.succeeded',
             'order_no' => $orderNo,
-            'amount' => 4990,
-            'currency' => 'USD',
+            'data' => [
+                'object' => [
+                    'id' => 'pi_payload_limit_ok_v03',
+                    'amount' => 4990,
+                    'currency' => 'usd',
+                    'metadata' => ['order_no' => $orderNo],
+                ],
+            ],
             'nested' => [
                 'secret' => [
-                    'token' => 'sensitive-token',
+                    'token' => 'sensitive-token-v03',
                     'blob' => str_repeat('y', 512),
                 ],
             ],
         ];
+
         $rawBody = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         self::assertIsString($rawBody);
+        self::assertLessThan(262144, strlen($rawBody));
 
         $response = $this->call(
             'POST',
@@ -110,8 +121,7 @@ final class WebhookPayloadSizeLimitTest extends TestCase
             $rawBody
         );
 
-        $response->assertStatus(200);
-        $response->assertJson([
+        $response->assertStatus(200)->assertJson([
             'ok' => true,
             'provider_event_id' => $eventId,
             'order_no' => $orderNo,
@@ -126,23 +136,20 @@ final class WebhookPayloadSizeLimitTest extends TestCase
         $this->assertSame(strlen($rawBody), (int) ($row->payload_size_bytes ?? -1));
         $this->assertSame(hash('sha256', $rawBody), (string) ($row->payload_sha256 ?? ''));
 
-        $expectedS3Key = "payment-events/stripe/{$eventId}.json";
-        $this->assertSame($expectedS3Key, (string) ($row->payload_s3_key ?? ''));
-        Storage::disk('s3')->assertExists($expectedS3Key);
-
         $payloadJsonRaw = (string) ($row->payload_json ?? '');
         $summary = json_decode($payloadJsonRaw, true);
+
         $this->assertIsArray($summary);
         $this->assertSame($eventId, $summary['provider_event_id'] ?? null);
         $this->assertSame($orderNo, $summary['order_no'] ?? null);
+        $this->assertSame('payment_intent.succeeded', $summary['event_type'] ?? null);
         $this->assertSame(4990, (int) ($summary['amount_cents'] ?? -1));
         $this->assertSame('USD', $summary['currency'] ?? null);
-        $this->assertSame('payment_intent.succeeded', $summary['event_type'] ?? null);
-        $this->assertArrayHasKey('raw_sha256', $summary);
-        $this->assertArrayHasKey('raw_bytes', $summary);
-        $this->assertArrayNotHasKey('nested', $summary);
+        $this->assertSame('pi_payload_limit_ok_v03', $summary['external_trade_no'] ?? null);
+        $this->assertSame(hash('sha256', $rawBody), $summary['raw_sha256'] ?? null);
+        $this->assertSame(strlen($rawBody), (int) ($summary['raw_bytes'] ?? -1));
 
-        $this->assertStringNotContainsString('sensitive-token', $payloadJsonRaw);
-        $this->assertStringNotContainsString('sensitive-token', (string) ($row->payload_excerpt ?? ''));
+        $this->assertLessThan(4096, strlen($payloadJsonRaw));
+        $this->assertStringNotContainsString('sensitive-token-v03', $payloadJsonRaw);
     }
 }

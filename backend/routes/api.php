@@ -38,7 +38,6 @@ use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
-use App\Http\Middleware\LimitWebhookPayloadSize;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Controllers\Integrations\ProvidersController;
 use App\Http\Controllers\Webhooks\HandleProviderWebhook;
@@ -251,7 +250,7 @@ Route::prefix("v0.3")->middleware([
         "/webhooks/payment/{provider}",
         [PaymentWebhookController::class, "handle"]
     )->whereIn('provider', $payProviders)
-        ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
+        ->middleware(['throttle:api_webhook'])
         ->name('v0.3.webhooks.payment');
 
     Route::middleware(ResolveOrgContext::class)->group(function () use ($payProviders) {

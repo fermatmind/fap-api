@@ -38,7 +38,9 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
                 ?string $userId,
                 ?string $anonId,
                 bool $signatureOk,
-                array $payloadMeta
+                array $payloadMeta,
+                string $rawPayloadSha256,
+                int $rawPayloadBytes
             ) use ($payload, $rawBody): bool {
                 return $provider === 'stripe'
                     && $incomingPayload === $payload
@@ -48,6 +50,8 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
                     && $signatureOk === true
                     && ($payloadMeta['size_bytes'] ?? null) === strlen($rawBody)
                     && ($payloadMeta['sha256'] ?? null) === hash('sha256', $rawBody)
+                    && $rawPayloadSha256 === hash('sha256', $rawBody)
+                    && $rawPayloadBytes === strlen($rawBody)
                     && array_key_exists('s3_key', $payloadMeta);
             })
             ->andReturn([
