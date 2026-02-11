@@ -126,7 +126,7 @@ class OrgIsolationAttemptsTest extends TestCase
         $resp->assertStatus(404);
         $resp->assertJson([
             'ok' => false,
-            'error' => 'NOT_FOUND',
+            'error_code' => 'NOT_FOUND',
         ]);
     }
 }

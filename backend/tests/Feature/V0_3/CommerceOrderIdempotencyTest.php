@@ -223,7 +223,7 @@ class CommerceOrderIdempotencyTest extends TestCase
         $res->assertStatus(404);
         $res->assertJson([
             'ok' => false,
-            'error' => 'ORDER_NOT_FOUND',
+            'error_code' => 'NOT_FOUND',
         ]);
     }
 

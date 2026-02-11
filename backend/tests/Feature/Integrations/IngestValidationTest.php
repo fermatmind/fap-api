@@ -33,7 +33,7 @@ final class IngestValidationTest extends TestCase
 
         $response->assertStatus(422)->assertJson([
             'ok' => false,
-            'error' => 'validation_failed',
+            'error_code' => 'VALIDATION_FAILED',
         ]);
         $this->assertSame(0, DB::table('ingest_batches')->count());
     }
@@ -56,7 +56,7 @@ final class IngestValidationTest extends TestCase
 
         $response->assertStatus(422)->assertJson([
             'ok' => false,
-            'error' => 'validation_failed',
+            'error_code' => 'VALIDATION_FAILED',
         ]);
         $this->assertSame(0, DB::table('ingest_batches')->count());
     }
@@ -95,7 +95,7 @@ final class IngestValidationTest extends TestCase
 
         $response->assertStatus(413)->assertJson([
             'ok' => false,
-            'error' => 'payload_too_large',
+            'error_code' => 'PAYLOAD_TOO_LARGE',
         ]);
         $this->assertSame(0, DB::table('ingest_batches')->count());
     }

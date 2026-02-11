@@ -53,7 +53,6 @@ class OrgContextMiddlewareTest extends TestCase
         $resp->assertStatus(404);
         $resp->assertJson([
             'ok' => false,
-            'error' => 'ORG_NOT_FOUND',
             'error_code' => 'ORG_NOT_FOUND',
         ]);
     }

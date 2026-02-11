@@ -164,7 +164,7 @@ class PaymentWebhookIdempotencyTest extends TestCase
         $first->assertStatus(500);
         $first->assertJson([
             'ok' => false,
-            'error' => 'ORDER_NOT_FOUND',
+            'error_code' => 'ORDER_NOT_FOUND',
         ]);
 
         $this->assertSame('orphan', (string) DB::table('payment_events')

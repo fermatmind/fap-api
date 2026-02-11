@@ -85,7 +85,7 @@ final class AdminMigrationObservabilityTest extends TestCase
         $response
             ->assertStatus(401)
             ->assertJsonPath('ok', false)
-            ->assertJsonPath('error', 'UNAUTHORIZED');
+            ->assertJsonPath('error_code', 'UNAUTHORIZED');
     }
 
     /**

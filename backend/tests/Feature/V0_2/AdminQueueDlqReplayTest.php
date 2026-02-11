@@ -99,7 +99,7 @@ final class AdminQueueDlqReplayTest extends TestCase
         $response
             ->assertStatus(404)
             ->assertJsonPath('ok', false)
-            ->assertJsonPath('error', 'NOT_FOUND');
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
     /**

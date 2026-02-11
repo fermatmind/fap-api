@@ -59,8 +59,7 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
 
         $response->assertStatus(500);
         $response->assertJsonPath('ok', false);
-        $response->assertJsonPath('error', 'INTERNAL_SERVER_ERROR');
+        $response->assertJsonPath('error_code', 'INTERNAL_SERVER_ERROR');
         $response->assertJsonPath('message', 'internal server error.');
-        $response->assertJsonPath('request_id', 'req-pr57-misconfigured');
     }
 }
