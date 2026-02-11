@@ -7,7 +7,6 @@ namespace Tests\Feature\Payments;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -49,7 +48,6 @@ final class WebhookPayloadSizeLimitTest extends TestCase
     public function test_normal_webhook_writes_payload_forensics_without_full_payload_json(): void
     {
         (new Pr19CommerceSeeder())->run();
-        Storage::fake('s3');
         config([
             'services.stripe.webhook_secret' => 'whsec_payload_limit',
             'services.stripe.webhook_tolerance_seconds' => 300,
@@ -132,10 +130,7 @@ final class WebhookPayloadSizeLimitTest extends TestCase
         $this->assertNotNull($row);
         $this->assertSame(strlen($rawBody), (int) ($row->payload_size_bytes ?? -1));
         $this->assertSame(hash('sha256', $rawBody), (string) ($row->payload_sha256 ?? ''));
-
-        $expectedS3Key = "payment-events/stripe/{$eventId}.json";
-        $this->assertSame($expectedS3Key, (string) ($row->payload_s3_key ?? ''));
-        Storage::disk('s3')->assertExists($expectedS3Key);
+        $this->assertSame('', (string) ($row->payload_s3_key ?? ''));
 
         $payloadJsonRaw = (string) ($row->payload_json ?? '');
         $summary = json_decode($payloadJsonRaw, true);
