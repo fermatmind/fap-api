@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\V0_2;
+namespace Tests\Feature;
 
 use App\Models\Attempt;
 use App\Models\ReportJob;
@@ -12,95 +12,88 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-final class AttemptReportPaywallGateTest extends TestCase
+final class LegacyV02GatekeeperTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_report_returns_402_when_owner_has_no_benefit_grant(): void
+    public function test_flag_off_returns_404_for_v02_report_and_result(): void
     {
-        [$attemptId, $anonId] = $this->seedReportFixture();
+        config(['features.enable_v0_2_report' => false]);
+
+        [$attemptId, $anonId] = $this->seedFixture(withGrant: true);
 
         $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/report")
-            ->assertStatus(402)
-            ->assertJson([
-                'ok' => false,
-                'error_code' => 'PAYMENT_REQUIRED',
-            ]);
+            ->assertStatus(404);
+
+        $this->withHeader('X-Anon-Id', $anonId)
+            ->getJson("/api/v0.2/attempts/{$attemptId}/result")
+            ->assertStatus(404);
     }
 
-    public function test_report_returns_200_when_owner_has_benefit_grant(): void
+    public function test_flag_on_locked_returns_402_without_sensitive_fields(): void
     {
-        [$attemptId, $anonId] = $this->seedReportFixture();
-        $this->seedBenefitGrant(0, $attemptId, $anonId);
+        config(['features.enable_v0_2_report' => true]);
+
+        [$attemptId, $anonId] = $this->seedFixture(withGrant: false);
+
+        $report = $this->withHeader('X-Anon-Id', $anonId)
+            ->getJson("/api/v0.2/attempts/{$attemptId}/report");
+        $report->assertStatus(402)
+            ->assertJsonPath('error_code', 'PAYMENT_REQUIRED')
+            ->assertJsonMissingPath('report');
+
+        $result = $this->withHeader('X-Anon-Id', $anonId)
+            ->getJson("/api/v0.2/attempts/{$attemptId}/result");
+        $result->assertStatus(402)
+            ->assertJsonPath('error_code', 'PAYMENT_REQUIRED')
+            ->assertJsonMissingPath('type_code')
+            ->assertJsonMissingPath('scores')
+            ->assertJsonMissingPath('scores_pct');
+    }
+
+    public function test_flag_on_unlocked_returns_200_with_legacy_shapes(): void
+    {
+        config(['features.enable_v0_2_report' => true]);
+
+        [$attemptId, $anonId] = $this->seedFixture(withGrant: true);
 
         $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/report")
             ->assertStatus(200)
-            ->assertJson([
-                'ok' => true,
-                'attempt_id' => $attemptId,
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonStructure([
+                'ok',
+                'attempt_id',
+                'type_code',
+                'report',
+            ]);
+
+        $this->withHeader('X-Anon-Id', $anonId)
+            ->getJson("/api/v0.2/attempts/{$attemptId}/result")
+            ->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonStructure([
+                'ok',
+                'attempt_id',
+                'type_code',
+                'scores',
+                'scores_pct',
             ]);
     }
 
-    public function test_report_with_share_id_without_owner_identity_returns_404(): void
-    {
-        [$attemptId, $anonId] = $this->seedReportFixture();
-        $shareId = (string) Str::uuid();
-
-        DB::table('shares')->insert([
-            'id' => $shareId,
-            'attempt_id' => $attemptId,
-            'anon_id' => $anonId,
-            'scale_code' => 'MBTI',
-            'scale_version' => 'v0.2',
-            'content_package_version' => 'v0.2.2',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        $this->getJson("/api/v0.2/attempts/{$attemptId}/report?share_id={$shareId}")
-            ->assertStatus(404);
-    }
-
-    public function test_report_returns_404_when_feature_flag_disabled(): void
-    {
-        config(['features.enable_v0_2_report' => false]);
-
-        [$attemptId, $anonId] = $this->seedReportFixture();
-        $this->seedBenefitGrant(0, $attemptId, $anonId);
-
-        $this->withHeader('X-Anon-Id', $anonId)
-            ->getJson("/api/v0.2/attempts/{$attemptId}/report")
-            ->assertStatus(404);
-    }
-
-    public function test_share_returns_404_when_feature_flag_disabled(): void
-    {
-        config(['features.enable_v0_2_report' => false]);
-
-        [$attemptId, $anonId] = $this->seedReportFixture();
-        $token = $this->seedFmToken($anonId, '1001', 0);
-        $this->seedBenefitGrant(0, $attemptId, $anonId);
-
-        $this->withHeaders([
-            'Authorization' => "Bearer {$token}",
-            'X-Org-Id' => '0',
-        ])->getJson("/api/v0.2/attempts/{$attemptId}/share")
-            ->assertStatus(404);
-    }
-
-    private function seedReportFixture(): array
+    private function seedFixture(bool $withGrant): array
     {
         $attemptId = (string) Str::uuid();
-        $anonId = 'anon_paywall_owner';
-        $userId = '1001';
+        $anonId = 'anon_legacy_gatekeeper_owner';
 
         Attempt::create([
             'id' => $attemptId,
             'org_id' => 0,
             'anon_id' => $anonId,
-            'user_id' => $userId,
+            'user_id' => '1001',
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.2',
             'region' => 'CN_MAINLAND',
@@ -173,20 +166,24 @@ final class AttemptReportPaywallGateTest extends TestCase
                 'tags' => [],
             ],
             'meta' => [
-                'seed' => 'paywall',
+                'seed' => 'legacy-gatekeeper',
             ],
         ]);
 
-        $this->seedScaleRegistry(0, 'MBTI');
+        $this->seedScaleRegistry();
 
-        return [$attemptId, $anonId, $userId];
+        if ($withGrant) {
+            $this->seedBenefitGrant($attemptId, $anonId);
+        }
+
+        return [$attemptId, $anonId];
     }
 
-    private function seedScaleRegistry(int $orgId, string $scaleCode): void
+    private function seedScaleRegistry(): void
     {
         DB::table('scales_registry')->insert([
-            'code' => $scaleCode,
-            'org_id' => $orgId,
+            'code' => 'MBTI',
+            'org_id' => 0,
             'primary_slug' => 'mbti-test',
             'slugs_json' => json_encode(['mbti-test'], JSON_UNESCAPED_UNICODE),
             'driver_type' => 'mbti',
@@ -201,11 +198,11 @@ final class AttemptReportPaywallGateTest extends TestCase
         ]);
     }
 
-    private function seedBenefitGrant(int $orgId, string $attemptId, string $anonId): void
+    private function seedBenefitGrant(string $attemptId, string $anonId): void
     {
         DB::table('benefit_grants')->insert([
             'id' => (string) Str::uuid(),
-            'org_id' => $orgId,
+            'org_id' => 0,
             'user_id' => $anonId,
             'benefit_code' => 'MBTI_REPORT_FULL',
             'scope' => 'attempt',
@@ -219,21 +216,5 @@ final class AttemptReportPaywallGateTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-    }
-
-    private function seedFmToken(string $anonId, string $userId, int $orgId): string
-    {
-        $token = 'fm_'.(string) Str::uuid();
-
-        DB::table('fm_tokens')->insert([
-            'token' => $token,
-            'anon_id' => $anonId,
-            'user_id' => $userId,
-            'expires_at' => now()->addHour(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        return $token;
     }
 }

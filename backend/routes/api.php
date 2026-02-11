@@ -39,6 +39,7 @@ use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
+use App\Http\Middleware\DisableLegacyV02Report;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Controllers\Integrations\ProvidersController;
 use App\Http\Controllers\Webhooks\HandleProviderWebhook;
@@ -190,9 +191,9 @@ Route::prefix("v0.2")->middleware([
     // =========================================================
     Route::middleware(\App\Http\Middleware\FmTokenOptional::class)->group(function () {
         Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
-            ->middleware('uuid:attemptId');
+            ->middleware(['uuid:attemptId', DisableLegacyV02Report::class]);
         Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
-            ->middleware('uuid:attemptId');
+            ->middleware(['uuid:attemptId', DisableLegacyV02Report::class]);
         Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
             ->middleware('uuid:id');
         Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"])
