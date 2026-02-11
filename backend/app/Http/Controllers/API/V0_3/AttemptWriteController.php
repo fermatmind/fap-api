@@ -60,30 +60,18 @@ class AttemptWriteController extends Controller
         $orgId = $this->orgContext->orgId();
         $scaleCode = strtoupper(trim((string) $payload['scale_code']));
         if ($scaleCode === '') {
-            return response()->json([
-                'ok' => false,
-                'error' => 'SCALE_REQUIRED',
-                'message' => 'scale_code is required.',
-            ], 400);
+            abort(400, 'scale_code is required.');
         }
 
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (!$row) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'NOT_FOUND',
-                'message' => 'scale not found.',
-            ], 404);
+            abort(404, 'scale not found.');
         }
 
         $packId = (string) ($row['default_pack_id'] ?? '');
         $dirVersion = (string) ($row['default_dir_version'] ?? '');
         if ($packId === '' || $dirVersion === '') {
-            return response()->json([
-                'ok' => false,
-                'error' => 'PACK_NOT_CONFIGURED',
-                'message' => 'scale pack not configured.',
-            ], 500);
+            abort(500, 'scale pack not configured.');
         }
 
         $region = (string) ($payload['region'] ?? $row['default_region'] ?? config('content_packs.default_region', ''));
@@ -174,30 +162,18 @@ class AttemptWriteController extends Controller
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {
-            return response()->json([
-                'ok' => false,
-                'error' => 'SCALE_REQUIRED',
-                'message' => 'scale_code missing on attempt.',
-            ], 400);
+            abort(400, 'scale_code missing on attempt.');
         }
 
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (!$row) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'NOT_FOUND',
-                'message' => 'scale not found.',
-            ], 404);
+            abort(404, 'scale not found.');
         }
 
         $packId = (string) ($attempt->pack_id ?? $row['default_pack_id'] ?? '');
         $dirVersion = (string) ($attempt->dir_version ?? $row['default_dir_version'] ?? '');
         if ($packId === '' || $dirVersion === '') {
-            return response()->json([
-                'ok' => false,
-                'error' => 'PACK_NOT_CONFIGURED',
-                'message' => 'scale pack not configured.',
-            ], 500);
+            abort(500, 'scale pack not configured.');
         }
 
         $region = (string) ($attempt->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
@@ -206,11 +182,7 @@ class AttemptWriteController extends Controller
         $draftAnswers = $this->progressService->loadDraftAnswers($attempt);
         $mergedAnswers = $this->mergeAnswersForSubmit($answers, $draftAnswers);
         if (empty($mergedAnswers)) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'ANSWERS_REQUIRED',
-                'message' => 'answers required.',
-            ], 422);
+            abort(422, 'answers required.');
         }
 
         $answersDigest = $this->computeAnswersDigest($mergedAnswers, $scaleCode, $packId, $dirVersion);
@@ -237,11 +209,7 @@ class AttemptWriteController extends Controller
         ];
         $scored = $this->engine->score($engineAttempt, $answers, $scoreContext);
         if (!($scored['ok'] ?? false)) {
-            return response()->json([
-                'ok' => false,
-                'error' => $scored['error'] ?? 'SCORING_FAILED',
-                'message' => $scored['message'] ?? 'scoring failed.',
-            ], 500);
+            abort(500, (string) ($scored['message'] ?? 'scoring failed.'));
         }
 
         $scoreResult = $scored['result'];
@@ -308,17 +276,7 @@ class AttemptWriteController extends Controller
                     }
                 }
 
-                $response = response()->json([
-                    'ok' => false,
-                    'error' => 'ATTEMPT_ALREADY_SUBMITTED',
-                    'message' => 'attempt already submitted with different answers.',
-                    'data' => [
-                        'attempt_id' => $attemptId,
-                        'answers_digest' => $existingDigest,
-                        'incoming_digest' => $answersDigest,
-                    ],
-                ], 409);
-                return;
+                abort(409, 'attempt already submitted with different answers.');
             }
 
             if ($locked->submitted_at && $existingDigest === '') {
@@ -358,22 +316,12 @@ class AttemptWriteController extends Controller
 
             $stored = $this->answerSets->storeFinalAnswers($locked, $answers, $durationMs, $scoringSpecVersion);
             if (!($stored['ok'] ?? false)) {
-                $response = response()->json([
-                    'ok' => false,
-                    'error' => $stored['error'] ?? 'ANSWER_SET_STORE_FAILED',
-                    'message' => $stored['message'] ?? 'failed to store answer set.',
-                ], 500);
-                return;
+                abort(500, (string) ($stored['message'] ?? 'failed to store answer set.'));
             }
 
             $rowsWritten = $this->answerRowWriter->writeRows($locked, $answers, $durationMs);
             if (!($rowsWritten['ok'] ?? false)) {
-                $response = response()->json([
-                    'ok' => false,
-                    'error' => $rowsWritten['error'] ?? 'ANSWER_ROWS_FAILED',
-                    'message' => $rowsWritten['message'] ?? 'failed to write answer rows.',
-                ], 500);
-                return;
+                abort(500, (string) ($rowsWritten['message'] ?? 'failed to write answer rows.'));
             }
 
             $axisScores = is_array($scoreResult->axisScoresJson ?? null)
@@ -466,11 +414,7 @@ class AttemptWriteController extends Controller
 
         return $response instanceof JsonResponse
             ? $response
-            : response()->json([
-                'ok' => false,
-                'error' => 'SUBMIT_FAILED',
-                'message' => 'unexpected submit state.',
-            ], 500);
+            : abort(500, 'unexpected submit state.');
     }
 
     private function runSubmitPostCommitSideEffects(Request $request, array $ctx): ?array

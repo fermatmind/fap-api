@@ -40,7 +40,7 @@ final class WebhookPayloadSizeLimitTest extends TestCase
 
         $response->assertStatus(413)->assertJson([
             'ok' => false,
-            'error' => 'payload_too_large',
+            'error_code' => 'PAYLOAD_TOO_LARGE',
         ]);
 
         $this->assertSame(0, DB::table('payment_events')->count());

@@ -114,11 +114,7 @@ class AttemptReadController extends Controller
                 };
             }
 
-            return response()->json([
-                'ok' => false,
-                'error' => (string) ($gate['error'] ?? 'REPORT_FAILED'),
-                'message' => (string) ($gate['message'] ?? 'report generation failed.'),
-            ], $status);
+            abort($status, (string) ($gate['message'] ?? 'report generation failed.'));
         }
 
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [

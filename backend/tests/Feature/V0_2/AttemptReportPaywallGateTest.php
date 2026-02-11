@@ -25,7 +25,7 @@ final class AttemptReportPaywallGateTest extends TestCase
             ->assertStatus(402)
             ->assertJson([
                 'ok' => false,
-                'error' => 'PAYMENT_REQUIRED',
+                'error_code' => 'PAYMENT_REQUIRED',
                 'message' => 'report locked',
             ]);
     }

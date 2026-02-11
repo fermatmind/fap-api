@@ -25,7 +25,7 @@ class PaymentWebhookFailSafeTest extends TestCase
         $response->assertStatus(404);
         $response->assertJson([
             'ok' => false,
-            'error' => 'NOT_FOUND',
+            'error_code' => 'NOT_FOUND',
         ]);
     }
 
@@ -51,7 +51,7 @@ class PaymentWebhookFailSafeTest extends TestCase
         $response->assertStatus(404);
         $response->assertJson([
             'ok' => false,
-            'error' => 'NOT_FOUND',
+            'error_code' => 'NOT_FOUND',
         ]);
     }
 }

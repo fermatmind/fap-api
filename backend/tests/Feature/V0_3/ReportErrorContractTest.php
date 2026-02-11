@@ -113,11 +113,9 @@ final class ReportErrorContractTest extends TestCase
         $response->assertStatus(500);
         $response->assertJsonPath('ok', false);
 
-        $error = (string) $response->json('error');
-        $this->assertContains($error, ['REPORT_CONTEXT_MISSING', 'REPORT_FAILED']);
-
         $errorCode = (string) $response->json('error_code');
-        $this->assertNotSame('', $errorCode);
-        $this->assertSame(strtoupper($errorCode), $errorCode);
+        $this->assertSame('SERVER_ERROR', $errorCode);
+        $this->assertNotSame('', (string) $response->json('message'));
+        $this->assertSame([], (array) $response->json('details', []));
     }
 }

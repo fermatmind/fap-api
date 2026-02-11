@@ -15,7 +15,6 @@ final class UuidRouteParamsMiddlewareTest extends TestCase
         $response->assertStatus(404);
         $response->assertJson([
             'ok' => false,
-            'error' => 'NOT_FOUND',
             'error_code' => 'NOT_FOUND',
             'message' => 'Not Found',
         ]);
@@ -28,7 +27,6 @@ final class UuidRouteParamsMiddlewareTest extends TestCase
         $response->assertStatus(404);
         $response->assertJson([
             'ok' => false,
-            'error' => 'NOT_FOUND',
             'error_code' => 'NOT_FOUND',
             'message' => 'Not Found',
         ]);
@@ -41,7 +39,6 @@ final class UuidRouteParamsMiddlewareTest extends TestCase
         $response->assertStatus(404);
         $response->assertJson([
             'ok' => false,
-            'error' => 'NOT_FOUND',
             'error_code' => 'NOT_FOUND',
         ]);
     }

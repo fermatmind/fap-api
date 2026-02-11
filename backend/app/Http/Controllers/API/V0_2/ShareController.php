@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ShareController extends Controller
@@ -47,11 +48,7 @@ class ShareController extends Controller
         ]);
 
         if ($v->fails()) {
-            return response()->json([
-                'ok'     => false,
-                'error'  => 'VALIDATION_FAILED',
-                'errors' => $v->errors(),
-            ], 422);
+            throw ValidationException::withMessages($v->errors()->toArray());
         }
 
         $data = $v->validated();
@@ -67,11 +64,7 @@ class ShareController extends Controller
 
         $attemptId = (string) ($share->attempt_id ?? '');
         if ($attemptId === '') {
-            return response()->json([
-                'ok'      => false,
-                'error'   => 'ATTEMPT_NOT_FOUND',
-                'message' => 'share exists but attempt_id cannot be resolved.',
-            ], 404);
+            abort(404, 'share exists but attempt_id cannot be resolved.');
         }
 
         // 2) 查 share_generate（用 share_id 关联）
@@ -326,7 +319,7 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
     public function getShare(Request $request, string $id, OrgContext $ctx)
     {
         if (!config('features.enable_v0_2_report', false)) {
-            return $this->reportNotFoundResponse();
+            $this->throwReportNotFound();
         }
 
         $v = Validator::make(['id' => $id], [
@@ -334,11 +327,7 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
         ]);
 
         if ($v->fails()) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'VALIDATION_FAILED',
-                'errors' => $v->errors(),
-            ], 422);
+            throw ValidationException::withMessages($v->errors()->toArray());
         }
 
         $attempt = Attempt::query()
@@ -347,7 +336,7 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
             ->first();
 
         if (!$attempt || !$this->canAccessAttemptShare($attempt, $ctx)) {
-            return $this->reportNotFoundResponse();
+            $this->throwReportNotFound();
         }
 
         $benefitCode = $this->resolveReportBenefitCode($attempt);
@@ -363,7 +352,7 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
         );
 
         if (!$hasFullAccess) {
-            return $this->reportPaymentRequiredResponse();
+            $this->throwReportPaymentRequired();
         }
 
         $data = $this->legacyShareService->getOrCreateShare($id, $ctx);
@@ -385,11 +374,7 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
         ]);
 
         if ($v->fails()) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'VALIDATION_FAILED',
-                'errors' => $v->errors(),
-            ], 422);
+            throw ValidationException::withMessages($v->errors()->toArray());
         }
 
         $data = $this->legacyShareService->getShareView($id);
@@ -515,22 +500,14 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
         return $benefitCode;
     }
 
-    private function reportNotFoundResponse()
+    private function throwReportNotFound(): never
     {
-        return response()->json([
-            'ok' => false,
-            'error' => 'RESULT_NOT_FOUND',
-            'message' => 'Result not found for given attempt_id',
-        ], 404);
+        abort(404, 'Result not found for given attempt_id');
     }
 
-    private function reportPaymentRequiredResponse()
+    private function throwReportPaymentRequired(): never
     {
-        return response()->json([
-            'ok' => false,
-            'error' => 'PAYMENT_REQUIRED',
-            'message' => 'report locked',
-        ], 402);
+        abort(402, 'report locked');
     }
 
     /**

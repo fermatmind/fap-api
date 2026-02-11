@@ -31,20 +31,12 @@ class CommerceController extends Controller
     public function listSkus(Request $request): JsonResponse
     {
         if (!Schema::hasTable('skus')) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'TABLE_MISSING',
-                'message' => 'skus table missing.',
-            ], 500);
+            abort(500, 'skus table missing.');
         }
 
         $scale = strtoupper(trim((string) $request->query('scale', '')));
         if ($scale === '') {
-            return response()->json([
-                'ok' => false,
-                'error' => 'SCALE_REQUIRED',
-                'message' => 'scale is required.',
-            ], 400);
+            abort(400, 'scale is required.');
         }
 
         $items = $this->skus->listActiveSkus($scale);
@@ -77,11 +69,7 @@ class CommerceController extends Controller
 
         $provider = $this->resolveProvider($payload, $providerFromRoute);
         if ($provider === '') {
-            return response()->json([
-                'ok' => false,
-                'error' => 'PROVIDER_UNAVAILABLE',
-                'message' => 'provider unavailable.',
-            ], 422);
+            abort(422, 'provider unavailable.');
         }
 
         $idempotencyKey = $this->resolveIdempotencyKey($request, $payload);
@@ -99,7 +87,8 @@ class CommerceController extends Controller
 
         if (!($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) ($result['error'] ?? ''));
-            return response()->json($result, $status);
+            $message = trim((string) ($result['message'] ?? ''));
+            abort($status, $message !== '' ? $message : 'request failed.');
         }
 
         return response()->json([
@@ -119,7 +108,8 @@ class CommerceController extends Controller
         $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
         if (!($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) ($result['error'] ?? ''));
-            return response()->json($result, $status);
+            $message = trim((string) ($result['message'] ?? ''));
+            abort($status, $message !== '' ? $message : 'request failed.');
         }
 
         return response()->json([

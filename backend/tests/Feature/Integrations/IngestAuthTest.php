@@ -19,7 +19,7 @@ final class IngestAuthTest extends TestCase
 
         $response->assertStatus(401)->assertJson([
             'ok' => false,
-            'error' => 'UNAUTHORIZED',
+            'error_code' => 'UNAUTHORIZED',
         ]);
     }
 
@@ -170,7 +170,7 @@ final class IngestAuthTest extends TestCase
 
         $response->assertStatus(401)->assertJson([
             'ok' => false,
-            'error' => 'UNAUTHORIZED',
+            'error_code' => 'UNAUTHORIZED',
         ]);
         $this->assertSame(0, DB::table('ingest_batches')->count());
     }

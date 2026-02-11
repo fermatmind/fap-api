@@ -29,13 +29,12 @@ final class NormalizeApiErrorContract
             return $response;
         }
 
-        $errorCode = $this->resolveErrorCode($payload);
-        if ($errorCode === '') {
-            return $response;
-        }
-
-        $payload['error_code'] = $errorCode;
-        $response->setData($payload);
+        $response->setData([
+            'ok' => false,
+            'error_code' => $this->resolveErrorCode($payload),
+            'message' => $this->resolveMessage($payload),
+            'details' => $this->resolveDetails($payload),
+        ]);
 
         return $response;
     }
@@ -57,7 +56,36 @@ final class NormalizeApiErrorContract
             $raw = $payload['error']['code'];
         }
 
-        return $this->normalizeCode($raw);
+        $normalized = $this->normalizeCode($raw);
+        return $normalized !== '' ? $normalized : 'GENERIC_ERROR';
+    }
+
+    private function resolveMessage(array $payload): string
+    {
+        $message = $payload['message'] ?? null;
+        if (is_string($message) && trim($message) !== '') {
+            return trim($message);
+        }
+
+        return 'request failed.';
+    }
+
+    private function resolveDetails(array $payload): array|object
+    {
+        if (isset($payload['details']) && is_array($payload['details'])) {
+            return $this->normalizeDetails($payload['details']);
+        }
+
+        if (isset($payload['errors']) && is_array($payload['errors'])) {
+            return $this->normalizeDetails($payload['errors']);
+        }
+
+        return (object) [];
+    }
+
+    private function normalizeDetails(array $details): array|object
+    {
+        return $details === [] ? (object) [] : $details;
     }
 
     private function normalizeCode(string $raw): string

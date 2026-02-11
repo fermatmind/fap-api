@@ -45,7 +45,7 @@ final class ValidationErrorContractTest extends TestCase
         });
 
         $cases = [
-            ['/api/v0.3/__contract_abort_401', 401, 'UNAUTHENTICATED'],
+            ['/api/v0.3/__contract_abort_401', 401, 'UNAUTHORIZED'],
             ['/api/v0.3/__contract_abort_403', 403, 'FORBIDDEN'],
             ['/api/v0.3/__contract_abort_404', 404, 'NOT_FOUND'],
             ['/api/v0.3/__contract_abort_500', 500, 'SERVER_ERROR'],

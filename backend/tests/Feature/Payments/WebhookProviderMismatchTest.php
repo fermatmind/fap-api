@@ -59,7 +59,7 @@ class WebhookProviderMismatchTest extends TestCase
         $response->assertStatus(400);
         $response->assertJson([
             'ok' => false,
-            'error' => 'PROVIDER_MISMATCH',
+            'error_code' => 'PROVIDER_MISMATCH',
             'message' => 'provider mismatch',
         ]);
 
