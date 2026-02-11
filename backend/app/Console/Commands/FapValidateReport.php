@@ -26,7 +26,9 @@ class FapValidateReport extends Command
             ->where('attempt_id', $attempt->id)
             ->firstOrFail();
 
-        $out = app(ReportComposer::class)->compose($attempt, [], $result);
+        $out = app(ReportComposer::class)->compose($attempt, [
+            'org_id' => (int) ($attempt->org_id ?? 0),
+        ], $result);
         $report = is_array($out) ? ($out['report'] ?? $out) : [];
 
         if (!is_array($report) || $report === []) {

@@ -68,6 +68,7 @@ class GenerateReportJob implements ShouldQueue
 
         try {
             $res = $composer->compose($attempt, [
+                'org_id' => $orgId,
                 'defaultProfileVersion' => config('fap.profile_version', 'mbti32-v2.5'),
             ], $result);
 

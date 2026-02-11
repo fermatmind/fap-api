@@ -452,7 +452,9 @@ class ReportGatekeeper
     {
         try {
             if ($scaleCode === 'MBTI') {
-                $composed = $this->reportComposer->compose($attempt, [], $result);
+                $composed = $this->reportComposer->compose($attempt, [
+                    'org_id' => (int) ($attempt->org_id ?? 0),
+                ], $result);
                 if (!($composed['ok'] ?? false)) {
                     return [
                         'ok' => false,
