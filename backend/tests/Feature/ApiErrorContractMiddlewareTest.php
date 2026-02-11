@@ -40,6 +40,10 @@ final class ApiErrorContractMiddlewareTest extends TestCase
         $response->assertJsonPath('ok', false);
         $response->assertJsonPath('error_code', 'NOT_FOUND');
         $response->assertJsonPath('message', 'missing');
+        $response->assertJsonMissingPath('error');
+
+        $requestId = (string) $response->json('request_id', '');
+        $this->assertNotSame('', $requestId);
 
         $decoded = json_decode((string) $response->getContent());
         $this->assertIsObject($decoded);
@@ -53,7 +57,11 @@ final class ApiErrorContractMiddlewareTest extends TestCase
         $response->assertStatus(429);
         $response->assertJsonPath('ok', false);
         $response->assertJsonPath('error_code', 'RATE_LIMIT_PUBLIC');
-        $response->assertJsonPath('message', 'request failed.');
+        $response->assertJsonPath('message', 'too many requests');
+        $response->assertJsonMissingPath('error');
+
+        $requestId = (string) $response->json('request_id', '');
+        $this->assertNotSame('', $requestId);
 
         $decoded = json_decode((string) $response->getContent());
         $this->assertIsObject($decoded);

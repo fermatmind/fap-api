@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\NormalizeApiErrorContract;
 use App\Http\Controllers\HealthzController;
-use App\Http\Controllers\MbtiController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LookupController;
+use App\Http\Controllers\API\V0_2\LegacyAttemptController;
 use App\Http\Controllers\API\V0_2\AuthPhoneController;
 use App\Http\Controllers\API\V0_2\AuthProviderController;
 use App\Http\Controllers\API\V0_2\ClaimController;
@@ -65,7 +65,7 @@ Route::prefix("v0.2")->middleware([
 ])->group(function () {
 
     // 1) Health
-    Route::get("/health", [MbtiController::class, "health"]);
+    Route::get("/health", [LegacyAttemptController::class, "health"]);
     Route::get("/healthz", [HealthzController::class, "show"]);
     Route::get("/v0.2/healthz", [HealthzController::class, "show"]); // ✅ 新增
 
@@ -117,18 +117,21 @@ Route::prefix("v0.2")->middleware([
         });
 
     // 2) Scale meta
-    Route::get("/scales/MBTI", [MbtiController::class, "scaleMeta"]);
+    Route::get("/scales/MBTI", [LegacyAttemptController::class, "scaleMeta"]);
+    Route::get("/scale_meta", [LegacyAttemptController::class, "scaleMeta"]);
     Route::get("/scales/{scale}/norms", [PsychometricsController::class, "listNorms"]);
 
     // 3) Questions (demo)
-    Route::get("/scales/MBTI/questions", [MbtiController::class, "questions"]);
+    Route::get("/scales/MBTI/questions", [LegacyAttemptController::class, "questions"]);
+    Route::get("/questions", [LegacyAttemptController::class, "questions"]);
 
     Route::middleware('throttle:api_attempt_submit')->group(function () {
         // 4) Submit attempt (anonymous allowed)
-        Route::post("/attempts", [MbtiController::class, "storeAttempt"]);
+        Route::post("/attempts", [LegacyAttemptController::class, "storeAttempt"]);
 
         // 5) Start attempt (anonymous allowed)
-        Route::post("/attempts/start", [MbtiController::class, "startAttempt"]);
+        Route::post("/attempts/start", [LegacyAttemptController::class, "startAttempt"]);
+        Route::post("/attempts/{id}/start", [LegacyAttemptController::class, "startAttempt"]);
     });
 
     // 6) Public share view (legacy)
@@ -229,7 +232,7 @@ Route::prefix("v0.2")->middleware([
         Route::post("/me/agent/messages/{id}/ack", [AgentController::class, "ack"]);
 
         // Attempts gated endpoints
-        Route::post("/attempts/{id}/result", [MbtiController::class, "upsertResult"]);
+        Route::post("/attempts/{id}/result", [LegacyAttemptController::class, "upsertResult"]);
         Route::get("/attempts/{id}/share", [ShareController::class, "getShare"]);
 
         Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);

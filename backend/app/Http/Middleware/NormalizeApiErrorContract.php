@@ -7,6 +7,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 final class NormalizeApiErrorContract
@@ -24,22 +25,27 @@ final class NormalizeApiErrorContract
             return $response;
         }
 
-        $isError = $response->getStatusCode() >= 400 || (($payload['ok'] ?? null) === false);
+        $status = $response->getStatusCode();
+        $hasError = array_key_exists('error', $payload) || array_key_exists('error_code', $payload);
+        $isError = $status >= 400 || $hasError || (($payload['ok'] ?? null) === false);
         if (!$isError) {
             return $response;
         }
 
-        $response->setData([
+        $normalized = [
             'ok' => false,
-            'error_code' => $this->resolveErrorCode($payload),
-            'message' => $this->resolveMessage($payload),
+            'error_code' => $this->resolveErrorCode($payload, $status),
+            'message' => $this->resolveMessage($payload, $status),
             'details' => $this->resolveDetails($payload),
-        ]);
+            'request_id' => $this->resolveRequestId($request, $payload),
+        ];
+
+        $response->setData($normalized);
 
         return $response;
     }
 
-    private function resolveErrorCode(array $payload): string
+    private function resolveErrorCode(array $payload, int $status): string
     {
         $raw = '';
 
@@ -57,17 +63,39 @@ final class NormalizeApiErrorContract
         }
 
         $normalized = $this->normalizeCode($raw);
-        return $normalized !== '' ? $normalized : 'GENERIC_ERROR';
+        if ($normalized !== '') {
+            return $normalized;
+        }
+
+        return $this->statusErrorCode($status);
     }
 
-    private function resolveMessage(array $payload): string
+    private function resolveMessage(array $payload, int $status): string
     {
         $message = $payload['message'] ?? null;
         if (is_string($message) && trim($message) !== '') {
             return trim($message);
         }
 
-        return 'request failed.';
+        if (isset($payload['error']) && is_string($payload['error']) && trim($payload['error']) !== '') {
+            return trim($payload['error']);
+        }
+
+        if (
+            isset($payload['error'])
+            && is_array($payload['error'])
+            && isset($payload['error']['message'])
+            && is_string($payload['error']['message'])
+            && trim($payload['error']['message']) !== ''
+        ) {
+            return trim($payload['error']['message']);
+        }
+
+        if (isset($payload['error_code']) && is_string($payload['error_code']) && trim($payload['error_code']) !== '') {
+            return trim($payload['error_code']);
+        }
+
+        return Response::$statusTexts[$status] ?? 'Request failed.';
     }
 
     private function resolveDetails(array $payload): array|object
@@ -76,16 +104,53 @@ final class NormalizeApiErrorContract
             return $this->normalizeDetails($payload['details']);
         }
 
-        if (isset($payload['errors']) && is_array($payload['errors'])) {
-            return $this->normalizeDetails($payload['errors']);
+        return (object) [];
+    }
+
+    private function resolveRequestId(Request $request, array $payload): string
+    {
+        $bodyRequestId = trim((string) ($payload['request_id'] ?? ''));
+        if ($bodyRequestId !== '') {
+            return $bodyRequestId;
         }
 
-        return (object) [];
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->header('X-Request-Id', ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->header('X-Request-ID', ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        return (string) Str::uuid();
     }
 
     private function normalizeDetails(array $details): array|object
     {
         return $details === [] ? (object) [] : $details;
+    }
+
+    private function statusErrorCode(int $status): string
+    {
+        return match ($status) {
+            400 => 'BAD_REQUEST',
+            401 => 'UNAUTHORIZED',
+            402 => 'PAYMENT_REQUIRED',
+            403 => 'FORBIDDEN',
+            404 => 'NOT_FOUND',
+            409 => 'CONFLICT',
+            422 => 'VALIDATION_FAILED',
+            429 => 'RATE_LIMITED',
+            500 => 'INTERNAL_ERROR',
+            default => 'HTTP_' . $status,
+        };
     }
 
     private function normalizeCode(string $raw): string

@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
@@ -21,7 +23,7 @@ final class ApiExceptionRenderer
             return null;
         }
 
-        $requestId = (string) $request->attributes->get('request_id', '');
+        $requestId = self::resolveRequestId($request);
 
         if ($e instanceof ValidationException) {
             return self::errorResponse(
@@ -42,7 +44,7 @@ final class ApiExceptionRenderer
         }
 
         if ($e instanceof ModelNotFoundException) {
-            return self::errorResponse(404, 'NOT_FOUND', 'not found.', [], $requestId);
+            return self::errorResponse(404, 'NOT_FOUND', 'Not found.', [], $requestId);
         }
 
         if ($e instanceof \RuntimeException && trim($e->getMessage()) === 'CONTENT_PACK_ERROR') {
@@ -73,7 +75,7 @@ final class ApiExceptionRenderer
             return self::errorResponse($status, $errorCode, $message, [], $requestId);
         }
 
-        return self::errorResponse(500, 'SERVER_ERROR', 'server error.', [], $requestId);
+        return self::errorResponse(500, 'INTERNAL_ERROR', 'Internal error.', [], $requestId);
     }
 
     private static function mapHttpExceptionErrorCode(int $status): string
@@ -84,21 +86,14 @@ final class ApiExceptionRenderer
             403 => 'FORBIDDEN',
             404 => 'NOT_FOUND',
             429 => 'RATE_LIMITED',
-            500 => 'SERVER_ERROR',
+            500 => 'INTERNAL_ERROR',
             default => 'GENERIC_ERROR',
         };
     }
 
     private static function defaultMessageForStatus(int $status): string
     {
-        return match ($status) {
-            401 => 'unauthorized.',
-            403 => 'forbidden.',
-            404 => 'not found.',
-            429 => 'rate limited.',
-            500 => 'server error.',
-            default => 'request failed.',
-        };
+        return SymfonyResponse::$statusTexts[$status] ?? 'Request failed.';
     }
 
     private static function errorResponse(
@@ -125,10 +120,28 @@ final class ApiExceptionRenderer
 
     private static function withRequestId(array $payload, string $requestId): array
     {
-        if ($requestId !== '') {
-            $payload['request_id'] = $requestId;
-        }
+        $payload['request_id'] = $requestId;
 
         return $payload;
+    }
+
+    private static function resolveRequestId(Request $request): string
+    {
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->header('X-Request-Id', ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        $requestId = trim((string) $request->header('X-Request-ID', ''));
+        if ($requestId !== '') {
+            return $requestId;
+        }
+
+        return (string) Str::uuid();
     }
 }

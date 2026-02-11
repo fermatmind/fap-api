@@ -29,12 +29,13 @@ class ApiExceptionRendererTest extends TestCase
         );
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'SERVER_ERROR',
-            'message' => 'server error.',
+            'error_code' => 'INTERNAL_ERROR',
+            'message' => 'Internal error.',
         ]);
         $decoded = json_decode((string) $response->getContent());
         $this->assertIsObject($decoded);
         $this->assertEquals((object) [], $decoded->details ?? null);
+        $response->assertJsonMissingPath('error');
     }
 
     public function test_share_click_not_found_returns_json_without_accept_header(): void
@@ -74,6 +75,7 @@ class ApiExceptionRendererTest extends TestCase
             strtolower((string) $response->headers->get('Content-Type', ''))
         );
         $response->assertJsonPath('error_code', 'VALIDATION_FAILED');
+        $response->assertJsonMissingPath('error');
 
         $emailDetails = $response->json('details.email');
         $this->assertIsArray($emailDetails);
@@ -98,6 +100,7 @@ class ApiExceptionRendererTest extends TestCase
         );
         $response->assertJsonPath('error_code', 'UNAUTHORIZED');
         $response->assertJsonPath('message', 'nope');
+        $response->assertJsonMissingPath('error');
 
         $requestId = (string) $response->json('request_id', '');
         $this->assertNotSame('', $requestId);

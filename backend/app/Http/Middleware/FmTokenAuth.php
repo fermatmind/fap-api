@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class FmTokenAuth
@@ -246,11 +247,26 @@ class FmTokenAuth
     {
         $this->logAuthResult($request, false, $reason);
 
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+        if ($requestId === '') {
+            $requestId = trim((string) $request->header('X-Request-Id', ''));
+        }
+        if ($requestId === '') {
+            $requestId = trim((string) $request->header('X-Request-ID', ''));
+        }
+        if ($requestId === '') {
+            $requestId = trim((string) $request->input('request_id', ''));
+        }
+        if ($requestId === '') {
+            $requestId = (string) Str::uuid();
+        }
+
         return response()->json([
             'ok' => false,
-            'error' => 'UNAUTHORIZED',
             'error_code' => 'UNAUTHORIZED',
             'message' => 'Missing or invalid fm_token. Please login.',
+            'details' => (object) [],
+            'request_id' => $requestId,
         ], 401)->withHeaders([
             'WWW-Authenticate' => 'Bearer realm="Fermat API", error="invalid_token"',
         ]);

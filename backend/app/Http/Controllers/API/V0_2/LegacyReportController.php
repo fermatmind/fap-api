@@ -7,7 +7,7 @@ namespace App\Http\Controllers\API\V0_2;
 use App\Exceptions\PaymentRequiredException;
 use App\Http\Controllers\Controller;
 use App\Models\Attempt;
-use App\Services\Legacy\LegacyReportService;
+use App\Services\Legacy\LegacyMbtiReportService;
 use App\Services\Report\ReportGatekeeper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class LegacyReportController extends Controller
 {
     public function __construct(
-        private LegacyReportService $service,
+        private LegacyMbtiReportService $service,
         private ReportGatekeeper $gatekeeper,
     ) {
     }
