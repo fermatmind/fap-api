@@ -45,41 +45,58 @@ class AssessmentService
     public function invite(Assessment $assessment, array $subjects): array
     {
         $invites = [];
+        $rows = [];
         $now = now();
 
-        DB::transaction(function () use ($assessment, $subjects, $now, &$invites) {
-            foreach ($subjects as $subject) {
-                if (!is_array($subject)) {
-                    continue;
-                }
-
-                $type = strtolower(trim((string) ($subject['subject_type'] ?? '')));
-                $value = trim((string) ($subject['subject_value'] ?? ''));
-                if ($type === '' || $value === '') {
-                    continue;
-                }
-
-                $token = $this->generateInviteToken();
-
-                AssessmentAssignment::create([
-                    'org_id' => (int) $assessment->org_id,
-                    'assessment_id' => (int) $assessment->id,
-                    'subject_type' => $type,
-                    'subject_value' => $value,
-                    'invite_token' => $token,
-                    'started_at' => null,
-                    'completed_at' => null,
-                    'attempt_id' => null,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ]);
-
-                $invites[] = [
-                    'subject_type' => $type,
-                    'subject_value' => $value,
-                    'invite_token' => $token,
-                ];
+        foreach ($subjects as $subject) {
+            if (!is_array($subject)) {
+                continue;
             }
+
+            $type = strtolower(trim((string) ($subject['subject_type'] ?? '')));
+            $value = trim((string) ($subject['subject_value'] ?? ''));
+
+            if ($type === '' || $value === '') {
+                continue;
+            }
+            if (!in_array($type, ['user', 'email'], true)) {
+                continue;
+            }
+            if ($type === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                continue;
+            }
+            if ($type === 'user' && !preg_match('/^\d+$/', $value)) {
+                continue;
+            }
+
+            $token = $this->generateInviteToken();
+
+            $rows[] = [
+                'org_id' => (int) $assessment->org_id,
+                'assessment_id' => (int) $assessment->id,
+                'subject_type' => $type,
+                'subject_value' => $value,
+                'invite_token' => $token,
+                'started_at' => null,
+                'completed_at' => null,
+                'attempt_id' => null,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
+            $invites[] = [
+                'subject_type' => $type,
+                'subject_value' => $value,
+                'invite_token' => $token,
+            ];
+        }
+
+        if ($rows === []) {
+            return [];
+        }
+
+        DB::transaction(function () use ($rows): void {
+            DB::table('assessment_assignments')->insert($rows);
         });
 
         return $invites;
@@ -87,37 +104,42 @@ class AssessmentService
 
     public function progress(Assessment $assessment): array
     {
-        $rows = AssessmentAssignment::query()
+        $baseQuery = AssessmentAssignment::query()
             ->where('org_id', (int) $assessment->org_id)
-            ->where('assessment_id', (int) $assessment->id)
+            ->where('assessment_id', (int) $assessment->id);
+
+        $total = (clone $baseQuery)->count();
+        $completed = (clone $baseQuery)->whereNotNull('completed_at')->count();
+        $pending = $total - $completed;
+        $listLimit = 50;
+
+        $completedList = (clone $baseQuery)
+            ->whereNotNull('completed_at')
             ->orderBy('id')
-            ->get();
-
-        $total = $rows->count();
-        $completedList = [];
-        $pendingList = [];
-
-        foreach ($rows as $row) {
-            $payload = [
+            ->limit($listLimit)
+            ->get()
+            ->map(fn (AssessmentAssignment $row): array => [
                 'subject_type' => (string) $row->subject_type,
                 'subject_value' => (string) $row->subject_value,
-            ];
+                'attempt_id' => $row->attempt_id !== null ? (string) $row->attempt_id : null,
+                'completed_at' => $row->completed_at?->toISOString(),
+            ])
+            ->values()
+            ->all();
 
-            if ($row->completed_at !== null) {
-                $completedList[] = array_merge($payload, [
-                    'attempt_id' => $row->attempt_id !== null ? (string) $row->attempt_id : null,
-                    'completed_at' => $row->completed_at?->toISOString(),
-                ]);
-            } else {
-                $pendingList[] = array_merge($payload, [
-                    'invite_token' => (string) $row->invite_token,
-                    'started_at' => $row->started_at?->toISOString(),
-                ]);
-            }
-        }
-
-        $completed = count($completedList);
-        $pending = $total - $completed;
+        $pendingList = (clone $baseQuery)
+            ->whereNull('completed_at')
+            ->orderBy('id')
+            ->limit($listLimit)
+            ->get()
+            ->map(fn (AssessmentAssignment $row): array => [
+                'subject_type' => (string) $row->subject_type,
+                'subject_value' => (string) $row->subject_value,
+                'invite_token' => (string) $row->invite_token,
+                'started_at' => $row->started_at?->toISOString(),
+            ])
+            ->values()
+            ->all();
 
         return [
             'total' => $total,
@@ -125,6 +147,10 @@ class AssessmentService
             'pending' => $pending,
             'completed_list' => $completedList,
             'pending_list' => $pendingList,
+            'completed_list_limit' => $listLimit,
+            'pending_list_limit' => $listLimit,
+            'completed_list_truncated' => $completed > $listLimit,
+            'pending_list_truncated' => $pending > $listLimit,
         ];
     }
 
@@ -176,16 +202,6 @@ class AssessmentService
 
     private function generateInviteToken(): string
     {
-        for ($i = 0; $i < 5; $i++) {
-            $token = Str::random(40);
-            $exists = AssessmentAssignment::query()
-                ->where('invite_token', $token)
-                ->exists();
-            if (!$exists) {
-                return $token;
-            }
-        }
-
-        return Str::uuid()->toString();
+        return Str::uuid()->toString() . Str::random(28);
     }
 }
