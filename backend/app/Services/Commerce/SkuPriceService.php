@@ -5,36 +5,26 @@ declare(strict_types=1);
 namespace App\Services\Commerce;
 
 use App\Exceptions\InvalidSkuException;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use App\Models\Sku;
 
 final class SkuPriceService
 {
-    public function getPrice(string $sku, string $currency, int $orgId = 1): int
+    public function getPrice(string $sku, string $currency): int
     {
-        if (!Schema::hasTable('skus')) {
-            throw new InvalidSkuException();
-        }
-
         $sku = strtoupper(trim($sku));
         $currency = strtoupper(trim($currency));
 
         if ($sku === '' || $currency === '') {
-            throw new InvalidSkuException();
+            throw new InvalidSkuException($sku, $currency);
         }
 
-        $query = DB::table('skus')
+        $row = Sku::query()
             ->where('sku', $sku)
             ->where('currency', $currency)
-            ->where('is_active', 1);
-
-        if (Schema::hasColumn('skus', 'org_id')) {
-            $query->where('org_id', $orgId);
-        }
-
-        $row = $query->first();
+            ->where('is_active', 1)
+            ->first();
         if (!$row) {
-            throw new InvalidSkuException();
+            throw new InvalidSkuException($sku, $currency);
         }
 
         return (int) ($row->price_cents ?? 0);

@@ -36,6 +36,7 @@ class CreateOrderRequest extends FormRequest
     {
         return [
             'item_sku' => ['required', 'string', 'max:64', $this->skuExistsRule()],
+            'quantity' => ['nullable', 'integer', 'min:1'],
             'currency' => ['required', 'string', 'max:8'],
             'device_id' => ['nullable', 'string', 'max:128'],
             'provider' => ['nullable', 'string', 'max:32'],
@@ -59,6 +60,11 @@ class CreateOrderRequest extends FormRequest
     public function currency(): string
     {
         return (string) $this->validated()['currency'];
+    }
+
+    public function quantity(): int
+    {
+        return (int) ($this->validated()['quantity'] ?? 1);
     }
 
     public function deviceId(): ?string
@@ -99,6 +105,7 @@ class CreateOrderRequest extends FormRequest
             'platform' => $this->stringOrNull($this->input('platform', null)),
             'pay_source' => $this->stringOrNull($this->input('pay_source', null)),
             'item_sku' => $this->itemSku(),
+            'quantity' => $this->quantity(),
             'currency' => $this->currency(),
             'provider' => $this->provider(),
             'provider_order_id' => $this->providerOrderId(),
