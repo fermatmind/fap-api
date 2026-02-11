@@ -55,7 +55,9 @@ class PaymentWebhookProcessor
         ?string $userId = null,
         ?string $anonId = null,
         bool $signatureOk = true,
-        array $payloadMeta = []
+        array $payloadMeta = [],
+        string $rawPayloadSha256 = '',
+        int $rawPayloadBytes = -1
     ): array {
         if (!Schema::hasTable('payment_events')) {
             return $this->tableMissing('payment_events');
@@ -87,10 +89,15 @@ class PaymentWebhookProcessor
         }
 
         $receivedAt = now();
-        $payloadSummary = $this->buildPayloadSummary($normalized, $eventType);
+        $resolvedPayloadMeta = $this->resolvePayloadMeta($payload, $payloadMeta, $rawPayloadSha256, $rawPayloadBytes);
+        $payloadSummary = $this->buildPayloadSummary(
+            $normalized,
+            $eventType,
+            $resolvedPayloadMeta['sha256'],
+            $resolvedPayloadMeta['size_bytes']
+        );
         $payloadSummaryJson = $this->encodePayloadSummary($payloadSummary);
         $payloadExcerpt = $this->buildPayloadExcerpt($payloadSummaryJson);
-        $resolvedPayloadMeta = $this->resolvePayloadMeta($payload, $payloadMeta);
         $lockKey = "webhook_pay:{$provider}:{$providerEventId}";
         $lockTtl = max(1, (int) config(
             'services.payment_webhook.lock_ttl_seconds',
@@ -900,10 +907,11 @@ class PaymentWebhookProcessor
         ];
     }
 
-    private function buildPayloadSummary(array $normalized, string $eventType): array
+    private function buildPayloadSummary(array $normalized, string $eventType, string $rawSha256, int $rawBytes): array
     {
-        $eventId = trim((string) ($normalized['provider_event_id'] ?? ''));
+        $providerEventId = trim((string) ($normalized['provider_event_id'] ?? ''));
         $orderNo = trim((string) ($normalized['order_no'] ?? ''));
+        $externalTradeNo = trim((string) ($normalized['external_trade_no'] ?? ''));
 
         $amount = $normalized['amount_cents'] ?? null;
         if (!is_numeric($amount)) {
@@ -917,21 +925,15 @@ class PaymentWebhookProcessor
             $currency = null;
         }
 
-        $paidAt = $normalized['paid_at'] ?? null;
-        if ($paidAt !== null) {
-            $paidAt = trim((string) $paidAt);
-            if ($paidAt === '') {
-                $paidAt = null;
-            }
-        }
-
         return [
-            'event_id' => $eventId !== '' ? $eventId : null,
+            'provider_event_id' => $providerEventId !== '' ? $providerEventId : null,
             'order_no' => $orderNo !== '' ? $orderNo : null,
-            'amount' => $amount,
+            'event_type' => $eventType !== '' ? $eventType : null,
+            'amount_cents' => $amount,
             'currency' => $currency,
-            'type' => $eventType !== '' ? $eventType : null,
-            'paid_at' => $paidAt,
+            'external_trade_no' => $externalTradeNo !== '' ? $externalTradeNo : null,
+            'raw_sha256' => $rawSha256,
+            'raw_bytes' => $rawBytes,
         ];
     }
 
@@ -958,17 +960,25 @@ class PaymentWebhookProcessor
         return substr($payloadSummaryJson, 0, $maxBytes);
     }
 
-    private function resolvePayloadMeta(array $payload, array $payloadMeta): array
+    private function resolvePayloadMeta(
+        array $payload,
+        array $payloadMeta,
+        string $rawPayloadSha256,
+        int $rawPayloadBytes
+    ): array
     {
         $rawFallback = $this->resolvePayloadRawFallback($payload);
 
-        $size = $payloadMeta['size_bytes'] ?? null;
+        $size = $rawPayloadBytes >= 0 ? $rawPayloadBytes : ($payloadMeta['size_bytes'] ?? null);
         if (!is_numeric($size)) {
             $size = strlen($rawFallback);
         }
         $size = max(0, (int) $size);
 
-        $sha = strtolower(trim((string) ($payloadMeta['sha256'] ?? '')));
+        $sha = strtolower(trim($rawPayloadSha256));
+        if (!preg_match('/^[a-f0-9]{64}$/', $sha)) {
+            $sha = strtolower(trim((string) ($payloadMeta['sha256'] ?? '')));
+        }
         if (!preg_match('/^[a-f0-9]{64}$/', $sha)) {
             $sha = hash('sha256', $rawFallback);
         }
