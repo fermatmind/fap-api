@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\OrgContext;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -110,9 +111,25 @@ class FmTokenAuth
         }
 
         $orgId = $this->resolveOrgId($row);
+        if ($orgId === null) {
+            $headerOrgId = trim((string) $request->header('X-Org-Id', ''));
+            if ($headerOrgId !== '' && preg_match('/^\d+$/', $headerOrgId)) {
+                $orgId = (int) $headerOrgId;
+            }
+        }
+
         if ($orgId !== null) {
             $request->attributes->set('fm_org_id', $orgId);
         }
+
+        $ctx = new OrgContext();
+        $ctx->set(
+            $orgId ?? 0,
+            $existingUserId !== '' ? (int) $existingUserId : null,
+            null,
+            $anonId !== '' ? $anonId : null
+        );
+        app()->instance(OrgContext::class, $ctx);
 
         $this->logAuthResult($request, true);
 

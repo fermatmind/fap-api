@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_2;
 
+use App\Services\Auth\FmTokenService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -13,90 +14,109 @@ final class ShareSecurityTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_user_can_access_own_attempt_share_returns_200(): void
+    public function test_user_a_access_own_attempt_returns_200(): void
     {
         $orgId = 1;
-        $ownerAnon = 'anon_owner_' . Str::random(8);
-
+        $userA = $this->seedUser('share-a@example.com');
         $attemptId = (string) Str::uuid();
-        $this->seedAttemptAndResult($attemptId, $orgId, $ownerAnon, null);
+        $anonA = 'anon_a_' . Str::random(8);
+        $existingShareId = bin2hex(random_bytes(16));
 
-        $token = $this->seedFmToken($ownerAnon);
+        $this->seedAttemptAndResult($attemptId, $orgId, $anonA, $userA);
+        $this->seedShare($existingShareId, $attemptId, $anonA);
 
-        $resp = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.2/attempts/' . $attemptId . '/share');
+        $tokenA = $this->issueTokenForUser($userA);
+
+        $resp = $this->withHeaders($this->authHeaders($tokenA, $orgId))
+            ->getJson('/api/v0.2/attempts/' . $attemptId . '/share');
 
         $resp->assertStatus(200);
-        $resp->assertJson([
-            'ok' => true,
-            'attempt_id' => $attemptId,
-            'org_id' => $orgId,
-        ]);
-
-        $shareId = $resp->json('share_id');
-        $this->assertIsString($shareId);
-        $this->assertSame(32, strlen($shareId));
-        $this->assertTrue(ctype_xdigit($shareId));
+        $resp->assertJsonPath('ok', true);
+        $resp->assertJsonPath('attempt_id', $attemptId);
+        $resp->assertJsonPath('org_id', $orgId);
+        $resp->assertJsonPath('share_id', $existingShareId);
     }
 
-    public function test_user_cannot_access_other_members_attempt_in_same_org_returns_404(): void
+    public function test_user_a_access_same_org_user_b_attempt_returns_404(): void
     {
         $orgId = 2;
-        $ownerAnon = 'anon_owner_' . Str::random(8);
-        $attackerAnon = 'anon_attacker_' . Str::random(8);
+        $userA = $this->seedUser('share-org-a@example.com');
+        $userB = $this->seedUser('share-org-b@example.com');
 
         $attemptId = (string) Str::uuid();
-        $this->seedAttemptAndResult($attemptId, $orgId, $ownerAnon, null);
+        $this->seedAttemptAndResult($attemptId, $orgId, 'anon_b_' . Str::random(8), $userB);
 
-        $token = $this->seedFmToken($attackerAnon);
+        $tokenA = $this->issueTokenForUser($userA);
 
-        $resp = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.2/attempts/' . $attemptId . '/share');
+        $resp = $this->withHeaders($this->authHeaders($tokenA, $orgId))
+            ->getJson('/api/v0.2/attempts/' . $attemptId . '/share');
 
         $resp->assertStatus(404);
     }
 
-    public function test_cross_org_access_returns_404(): void
+    public function test_user_a_access_cross_org_attempt_returns_404(): void
     {
         $orgA = 10;
         $orgB = 11;
-
-        $anonA = 'anon_a_' . Str::random(8);
+        $userA = $this->seedUser('share-cross-a@example.com');
+        $userB = $this->seedUser('share-cross-b@example.com');
 
         $attemptIdB = (string) Str::uuid();
-        $this->seedAttemptAndResult($attemptIdB, $orgB, 'anon_b_' . Str::random(8), null);
+        $this->seedAttemptAndResult($attemptIdB, $orgB, 'anon_cross_b_' . Str::random(8), $userB);
 
-        $token = $this->seedFmToken($anonA);
+        $tokenA = $this->issueTokenForUser($userA);
 
-        $resp = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'X-Org-Id' => (string) $orgA,
-        ])->getJson('/api/v0.2/attempts/' . $attemptIdB . '/share');
+        $resp = $this->withHeaders($this->authHeaders($tokenA, $orgA))
+            ->getJson('/api/v0.2/attempts/' . $attemptIdB . '/share');
 
         $resp->assertStatus(404);
     }
 
-    private function seedFmToken(string $anonId, ?int $userId = null): string
+    public function test_share_endpoint_without_token_returns_401(): void
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $orgId = 20;
+        $userA = $this->seedUser('share-no-token@example.com');
+        $attemptId = (string) Str::uuid();
+        $this->seedAttemptAndResult($attemptId, $orgId, 'anon_no_token_' . Str::random(8), $userA);
 
-        DB::table('fm_tokens')->insert([
-            'token' => $token,
-            'anon_id' => $anonId,
-            'user_id' => $userId,
-            'expires_at' => now()->addHour(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $resp = $this->withHeaders([
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.2/attempts/' . $attemptId . '/share');
 
-        return $token;
+        $resp->assertStatus(401);
+        $resp->assertJsonPath('error_code', 'UNAUTHORIZED');
     }
 
-    private function seedAttemptAndResult(string $attemptId, int $orgId, string $anonId, ?int $userId): void
+    private function authHeaders(string $token, int $orgId): array
+    {
+        return [
+            'Authorization' => 'Bearer ' . $token,
+            'X-FM-TOKEN' => $token,
+            'X-Org-Id' => (string) $orgId,
+        ];
+    }
+
+    private function issueTokenForUser(int $userId): string
+    {
+        $issued = app(FmTokenService::class)->issueForUser((string) $userId);
+
+        return (string) ($issued['token'] ?? '');
+    }
+
+    private function seedUser(string $email): int
+    {
+        $now = now();
+
+        return (int) DB::table('users')->insertGetId([
+            'name' => 'User ' . $email,
+            'email' => $email,
+            'password' => bcrypt('secret'),
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+    }
+
+    private function seedAttemptAndResult(string $attemptId, int $orgId, string $anonId, int $userId): void
     {
         $now = now();
 
@@ -104,7 +124,7 @@ final class ShareSecurityTest extends TestCase
             'id' => $attemptId,
             'org_id' => $orgId,
             'anon_id' => $anonId,
-            'user_id' => $userId ? (string) $userId : null,
+            'user_id' => (string) $userId,
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.2',
             'question_count' => 10,
@@ -133,6 +153,22 @@ final class ShareSecurityTest extends TestCase
                 'type_name' => 'Architect',
             ], JSON_UNESCAPED_UNICODE),
             'computed_at' => $now,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+    }
+
+    private function seedShare(string $shareId, string $attemptId, string $anonId): void
+    {
+        $now = now();
+
+        DB::table('shares')->insert([
+            'id' => $shareId,
+            'attempt_id' => $attemptId,
+            'anon_id' => $anonId,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.2',
+            'content_package_version' => 'cp_v1',
             'created_at' => $now,
             'updated_at' => $now,
         ]);

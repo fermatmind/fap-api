@@ -5,59 +5,49 @@ namespace App\Services\Legacy;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Models\Share;
+use App\Support\OrgContext;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 
 class LegacyShareService
 {
-    /**
-     * Generate or fetch a share id for an attempt (v0.2 legacy).
-     *
-     * Security:
-     * - Strict tenant/ownership filtering at SQL layer (org_id + user_id/anon_id).
-     * - Unauthorized access yields ModelNotFoundException (404).
-     * - share_id uses bin2hex(random_bytes(16)).
-     */
-    public function getOrCreateAttemptShare(string $attemptId, int $orgId, ?int $userId, ?string $anonId): array
+    public function getOrCreateShare(string $attemptId, OrgContext $ctx): array
     {
-        $attempt = $this->findAccessibleAttempt($attemptId, $orgId, $userId, $anonId);
+        $attempt = $this->findAccessibleAttempt($attemptId, $ctx);
 
         $result = Result::query()
-            ->where('attempt_id', $attempt->id)
-            ->when($this->hasColumn('results', 'org_id'), fn (Builder $q) => $q->where('org_id', $orgId))
-            ->first();
-
-        if (!$result) {
-            throw (new ModelNotFoundException())->setModel(Result::class, [$attempt->id]);
-        }
+            ->where('attempt_id', $attemptId)
+            ->where('org_id', $ctx->orgId())
+            ->firstOrFail();
 
         $share = Share::query()
-            ->where('attempt_id', $attempt->id)
+            ->where('attempt_id', $attemptId)
             ->first();
 
         if (!$share) {
-            $share = $this->createShare($attempt, $anonId);
+            $share = $this->createShare($attempt, $ctx->anonId());
         }
 
         $typeCode = (string) ($result->type_code ?? '');
         $resultJson = is_array($result->result_json ?? null) ? $result->result_json : [];
         $typeName = (string) ($resultJson['type_name'] ?? $resultJson['type'] ?? $typeCode);
 
+        $shareId = (string) $share->id;
+        $shareUrl = rtrim((string) env('FRONTEND_URL', 'http://localhost:3000'), '/') . '/share/' . $shareId;
+
         return [
+            'share_id' => $shareId,
+            'share_url' => $shareUrl,
             'attempt_id' => (string) $attempt->id,
-            'share_id' => (string) $share->id,
-            'org_id' => (int) $orgId,
+            'created_at' => $share->created_at?->toISOString(),
+            'org_id' => (int) $ctx->orgId(),
             'content_package_version' => (string) ($attempt->content_package_version ?? $result->content_package_version ?? ''),
             'type_code' => $typeCode,
             'type_name' => $typeName,
-            'created_at' => $share->created_at?->toISOString(),
         ];
     }
 
-    /**
-     * Resolve share view payload by share_id (v0.2 legacy).
-     */
     public function getShareView(string $shareId): array
     {
         $share = Share::query()->where('id', $shareId)->firstOrFail();
@@ -70,8 +60,8 @@ class LegacyShareService
 
         $result = Result::query()
             ->where('attempt_id', $attempt->id)
-            ->when($this->hasColumn('results', 'org_id'), fn (Builder $q) => $q->where('org_id', $orgId))
-            ->first();
+            ->where('org_id', $orgId)
+            ->firstOrFail();
 
         $typeCode = (string) ($result->type_code ?? '');
         $resultJson = is_array($result->result_json ?? null) ? $result->result_json : [];
@@ -87,57 +77,55 @@ class LegacyShareService
         ];
     }
 
-    /**
-     * Strict ownership + org_id filtering at SQL layer.
-     * Unauthorized access is expressed as ModelNotFoundException (404).
-     */
-    private function findAccessibleAttempt(string $attemptId, int $orgId, ?int $userId, ?string $anonId): Attempt
+    private function findAccessibleAttempt(string $attemptId, OrgContext $ctx): Attempt
     {
-        $q = Attempt::query()
+        $query = Attempt::query()
             ->where('id', $attemptId)
-            ->where('org_id', $orgId);
+            ->where('org_id', $ctx->orgId());
 
-        if ($userId === null && ($anonId === null || $anonId === '')) {
-            throw (new ModelNotFoundException())->setModel(Attempt::class, [$attemptId]);
+        if (!$this->isAdmin($ctx)) {
+            $userId = $ctx->userId();
+            $anonId = $ctx->anonId();
+
+            if ($userId === null && ($anonId === null || $anonId === '')) {
+                throw (new ModelNotFoundException())->setModel(Attempt::class, [$attemptId]);
+            }
+
+            $query->where(function (Builder $sub) use ($userId, $anonId): void {
+                if ($userId !== null) {
+                    $sub->orWhere('user_id', (string) $userId);
+                }
+                if ($anonId !== null && $anonId !== '') {
+                    $sub->orWhere('anon_id', $anonId);
+                }
+            });
         }
 
-        $q->where(function (Builder $sub) use ($userId, $anonId) {
-            if ($userId !== null) {
-                $sub->orWhere('user_id', (string) $userId);
-            }
-            if ($anonId !== null && $anonId !== '') {
-                $sub->orWhere('anon_id', $anonId);
-            }
-        });
+        return $query->firstOrFail();
+    }
 
-        return $q->firstOrFail();
+    private function isAdmin(OrgContext $ctx): bool
+    {
+        return strtolower((string) ($ctx->role() ?? '')) === 'admin';
     }
 
     private function createShare(Attempt $attempt, ?string $anonId): Share
     {
-        $id = bin2hex(random_bytes(16));
+        $share = new Share();
+        $share->id = bin2hex(random_bytes(16));
+        $share->attempt_id = (string) $attempt->id;
+        $share->anon_id = $anonId;
+        $share->scale_code = (string) ($attempt->scale_code ?? '');
+        $share->scale_version = (string) ($attempt->scale_version ?? '');
+        $share->content_package_version = (string) ($attempt->content_package_version ?? '');
 
         try {
-            return Share::query()->create([
-                'id' => $id,
-                'attempt_id' => (string) $attempt->id,
-                'anon_id' => $anonId,
-                'scale_code' => (string) ($attempt->scale_code ?? ''),
-                'scale_version' => (string) ($attempt->scale_version ?? ''),
-                'content_package_version' => (string) ($attempt->content_package_version ?? ''),
-            ]);
+            $share->save();
+            return $share;
         } catch (QueryException $e) {
-            // Unique(attempt_id) race: fetch the existing row
-            return Share::query()->where('attempt_id', (string) $attempt->id)->firstOrFail();
-        }
-    }
-
-    private function hasColumn(string $table, string $column): bool
-    {
-        try {
-            return \Illuminate\Support\Facades\Schema::hasColumn($table, $column);
-        } catch (\Throwable $e) {
-            return false;
+            return Share::query()
+                ->where('attempt_id', (string) $attempt->id)
+                ->firstOrFail();
         }
     }
 }
