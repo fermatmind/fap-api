@@ -24,15 +24,12 @@ final class ApiExceptionRenderer
         $requestId = (string) $request->attributes->get('request_id', '');
 
         if ($e instanceof ValidationException) {
-            return response()->json(
-                self::withRequestId([
-                    'ok' => false,
-                    'error' => 'VALIDATION_FAILED',
-                    'error_code' => 'VALIDATION_FAILED',
-                    'message' => 'The given data was invalid.',
-                    'details' => $e->errors(),
-                ], $requestId),
-                422
+            return self::errorResponse(
+                422,
+                'VALIDATION_FAILED',
+                'The given data was invalid.',
+                $e->errors(),
+                $requestId
             );
         }
 
@@ -41,44 +38,26 @@ final class ApiExceptionRenderer
         }
 
         if ($e instanceof InvalidSkuException) {
-            return response()->json(
-                self::withRequestId([
-                    'ok' => false,
-                    'error' => 'INVALID_SKU',
-                    'error_code' => 'INVALID_SKU',
-                    'message' => 'invalid sku.',
-                ], $requestId),
-                422
-            );
+            return self::errorResponse(422, 'INVALID_SKU', 'invalid sku.', [], $requestId);
         }
 
         if ($e instanceof ModelNotFoundException) {
-            return response()->json(
-                self::withRequestId([
-                    'ok' => false,
-                    'error' => 'NOT_FOUND',
-                    'error_code' => 'NOT_FOUND',
-                    'message' => 'Not Found',
-                ], $requestId),
-                404
-            );
+            return self::errorResponse(404, 'NOT_FOUND', 'not found.', [], $requestId);
         }
 
         if ($e instanceof \RuntimeException && trim($e->getMessage()) === 'CONTENT_PACK_ERROR') {
             $reason = trim((string) ($e->getPrevious()?->getMessage() ?? ''));
-            $payload = [
-                'ok' => false,
-                'error' => 'CONTENT_PACK_ERROR',
-                'error_code' => 'CONTENT_PACK_ERROR',
-                'message' => 'content pack resolve failed.',
-            ];
+            $payload = [];
             if ($reason !== '') {
                 $payload['details'] = ['reason' => $reason];
             }
 
-            return response()->json(
-                self::withRequestId($payload, $requestId),
-                500
+            return self::errorResponse(
+                500,
+                'CONTENT_PACK_ERROR',
+                'content pack resolve failed.',
+                (array) ($payload['details'] ?? []),
+                $requestId
             );
         }
 
@@ -88,41 +67,60 @@ final class ApiExceptionRenderer
 
             $message = trim($e->getMessage());
             if ($message === '') {
-                $message = 'Request failed.';
+                $message = self::defaultMessageForStatus($status);
             }
 
-            return response()->json(
-                self::withRequestId([
-                    'ok' => false,
-                    'error' => $errorCode,
-                    'error_code' => $errorCode,
-                    'message' => $message,
-                ], $requestId),
-                $status
-            );
+            return self::errorResponse($status, $errorCode, $message, [], $requestId);
         }
 
-        return response()->json(
-            self::withRequestId([
-                'ok' => false,
-                'error' => 'INTERNAL_ERROR',
-                'error_code' => 'INTERNAL_ERROR',
-                'message' => 'Internal Server Error',
-            ], $requestId),
-            500
-        );
+        return self::errorResponse(500, 'SERVER_ERROR', 'server error.', [], $requestId);
     }
 
     private static function mapHttpExceptionErrorCode(int $status): string
     {
         return match ($status) {
-            401 => 'UNAUTHENTICATED',
+            401 => 'UNAUTHORIZED',
+            402 => 'PAYMENT_REQUIRED',
             403 => 'FORBIDDEN',
             404 => 'NOT_FOUND',
-            429 => 'TOO_MANY_REQUESTS',
+            429 => 'RATE_LIMITED',
             500 => 'SERVER_ERROR',
-            default => 'HTTP_ERROR',
+            default => 'GENERIC_ERROR',
         };
+    }
+
+    private static function defaultMessageForStatus(int $status): string
+    {
+        return match ($status) {
+            401 => 'unauthorized.',
+            403 => 'forbidden.',
+            404 => 'not found.',
+            429 => 'rate limited.',
+            500 => 'server error.',
+            default => 'request failed.',
+        };
+    }
+
+    private static function errorResponse(
+        int $status,
+        string $errorCode,
+        string $message,
+        array $details,
+        string $requestId
+    ): JsonResponse {
+        $payload = [
+            'ok' => false,
+            'error_code' => $errorCode,
+            'message' => $message,
+            'details' => self::normalizeDetails($details),
+        ];
+
+        return response()->json(self::withRequestId($payload, $requestId), $status);
+    }
+
+    private static function normalizeDetails(array $details): array|object
+    {
+        return $details === [] ? (object) [] : $details;
     }
 
     private static function withRequestId(array $payload, string $requestId): array
