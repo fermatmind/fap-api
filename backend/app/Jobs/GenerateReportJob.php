@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Attempt;
 use App\Models\ReportJob;
+use App\Models\Result;
 use App\Services\Report\ReportComposer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -29,20 +30,27 @@ class GenerateReportJob implements ShouldQueue
 
     public function handle(ReportComposer $composer): void
     {
-        $job = ReportJob::where('attempt_id', $this->attemptId)->first();
+        $attempt = Attempt::query()->where('id', $this->attemptId)->firstOrFail();
+        $attemptId = (string) $attempt->id;
+        $orgId = (int) ($attempt->org_id ?? 0);
+
+        $result = Result::query()
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->firstOrFail();
+
+        $job = ReportJob::where('attempt_id', $attemptId)->first();
 
         if (!$job) {
-            $orgId = (int) (Attempt::where('id', $this->attemptId)->value('org_id') ?? 0);
             $job = ReportJob::create([
                 'id' => $this->jobId ?: (string) Str::uuid(),
                 'org_id' => $orgId,
-                'attempt_id' => $this->attemptId,
+                'attempt_id' => $attemptId,
                 'status' => 'queued',
                 'tries' => 0,
                 'available_at' => now(),
             ]);
         } elseif (empty($job->org_id)) {
-            $orgId = (int) (Attempt::where('id', $this->attemptId)->value('org_id') ?? 0);
             if ($orgId > 0) {
                 $job->org_id = $orgId;
                 $job->save();
@@ -59,9 +67,9 @@ class GenerateReportJob implements ShouldQueue
         $job->save();
 
         try {
-            $res = $composer->compose($this->attemptId, [
+            $res = $composer->compose($attempt, [
                 'defaultProfileVersion' => config('fap.profile_version', 'mbti32-v2.5'),
-            ]);
+            ], $result);
 
             if (!($res['ok'] ?? false)) {
                 $msg = $res['message'] ?? 'Report compose failed';
@@ -80,7 +88,7 @@ class GenerateReportJob implements ShouldQueue
             $job->report_json = $reportPayload;
             $job->save();
 
-            $this->persistReportJson($this->attemptId, $reportPayload);
+            $this->persistReportJson($attemptId, $reportPayload);
         } catch (\Throwable $e) {
             $job->status = 'failed';
             $job->failed_at = now();

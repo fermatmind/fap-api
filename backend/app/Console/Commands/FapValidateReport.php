@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Attempt;
+use App\Models\Result;
 use Illuminate\Console\Command;
 use App\Services\Report\ReportComposer;
 
@@ -18,7 +20,13 @@ class FapValidateReport extends Command
             return self::FAILURE;
         }
 
-        $out = app(ReportComposer::class)->compose($attemptId, []);
+        $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+        $result = Result::query()
+            ->where('org_id', (int) $attempt->org_id)
+            ->where('attempt_id', $attempt->id)
+            ->firstOrFail();
+
+        $out = app(ReportComposer::class)->compose($attempt, [], $result);
         $report = is_array($out) ? ($out['report'] ?? $out) : [];
 
         if (!is_array($report) || $report === []) {
