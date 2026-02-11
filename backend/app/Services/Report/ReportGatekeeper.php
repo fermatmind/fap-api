@@ -93,7 +93,8 @@ class ReportGatekeeper
         string $attemptId,
         ?string $userId,
         ?string $anonId,
-        ?string $role = null
+        ?string $role = null,
+        bool $forceSystemAccess = false
     ): array {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
@@ -107,7 +108,7 @@ class ReportGatekeeper
             return $this->tableMissing('results');
         }
 
-        $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
+        $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role, $forceSystemAccess)->first();
         if (!$attempt) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
@@ -220,7 +221,8 @@ class ReportGatekeeper
         string $attemptId,
         ?string $userId,
         ?string $anonId,
-        ?string $role
+        ?string $role,
+        bool $forceSystemAccess = false
     ): \Illuminate\Database\Eloquent\Builder {
         $query = Attempt::query()
             ->where('id', $attemptId)
@@ -229,30 +231,35 @@ class ReportGatekeeper
         $normalizedRole = $role !== null ? strtolower(trim($role)) : null;
         $user = $userId !== null ? trim($userId) : '';
         $anon = $anonId !== null ? trim($anonId) : '';
+        $user = $user !== '' ? $user : null;
+        $anon = $anon !== '' ? $anon : null;
+
+        if ($forceSystemAccess === true) {
+            return $query;
+        }
 
         if ($normalizedRole !== null && $this->isPrivilegedRole($normalizedRole)) {
             return $query;
         }
 
         if ($normalizedRole !== null && $this->isMemberLikeRole($normalizedRole)) {
-            if ($user === '') {
+            if ($user === null) {
                 return $query->whereRaw('1=0');
             }
 
             return $query->where('user_id', $user);
         }
 
-        if ($user === '' && $anon === '') {
-            // system/background callers may resolve by attempt_id + org_id only.
-            return $query;
+        if ($user === null && $anon === null) {
+            return $query->whereRaw('1=0');
         }
 
         return $query->where(function ($q) use ($user, $anon) {
-            if ($user !== '') {
+            if ($user !== null) {
                 $q->where('user_id', $user);
             }
-            if ($anon !== '') {
-                if ($user !== '') {
+            if ($anon !== null) {
+                if ($user !== null) {
                     $q->orWhere('anon_id', $anon);
                 } else {
                     $q->where('anon_id', $anon);
