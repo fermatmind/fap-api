@@ -56,8 +56,20 @@ jobs:
       - name: Composer validate & audit
         working-directory: backend
         run: |
+          set -euo pipefail
           composer validate --strict
-          composer audit --no-interaction
+          for attempt in 1 2 3; do
+            if composer audit --no-interaction; then
+              break
+            fi
+
+            if [[ "$attempt" -eq 3 ]]; then
+              echo "::error::composer audit failed after 3 attempts"
+              exit 1
+            fi
+
+            sleep $((attempt * 5))
+          done
 
       - name: Prepare sqlite and seed defaults
         working-directory: backend
