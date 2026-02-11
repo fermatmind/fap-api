@@ -2,11 +2,61 @@
 
 namespace App\Services\Commerce\PaymentGateway;
 
+use Illuminate\Http\Request;
+
 class BillingGateway implements PaymentGatewayInterface
 {
     public function provider(): string
     {
         return 'billing';
+    }
+
+    public function verifySignature(Request $request): bool
+    {
+        $secret = trim((string) config('services.billing.webhook_secret', ''));
+        if ($secret === '') {
+            $optionalEnvs = array_map(
+                static fn ($v) => strtolower(trim((string) $v)),
+                (array) config('services.billing.webhook_secret_optional_envs', [])
+            );
+
+            return in_array(strtolower((string) app()->environment()), $optionalEnvs, true);
+        }
+
+        $rawBody = (string) $request->getContent();
+        $rawTimestamp = trim((string) $request->header('X-Webhook-Timestamp', ''));
+        $providedSignature = trim((string) $request->header('X-Webhook-Signature', ''));
+
+        if ($rawTimestamp !== '' && $providedSignature !== '' && preg_match('/^\d{10,13}$/', $rawTimestamp)) {
+            $timestamp = (int) $rawTimestamp;
+            if (strlen($rawTimestamp) === 13) {
+                $timestamp = (int) floor($timestamp / 1000);
+            }
+
+            $tolerance = (int) config(
+                'services.billing.webhook_tolerance_seconds',
+                config('services.billing.webhook_tolerance', 300)
+            );
+            if ($tolerance <= 0) {
+                $tolerance = 300;
+            }
+
+            if (abs(time() - $timestamp) <= $tolerance) {
+                $expected = hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);
+                if (hash_equals($expected, $providedSignature)) {
+                    return true;
+                }
+            }
+        }
+
+        if ((bool) config('services.billing.allow_legacy_signature', false) === true && $providedSignature !== '') {
+            $legacy = hash_hmac('sha256', $rawBody, $secret);
+            if (hash_equals($legacy, $providedSignature)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function normalizePayload(array $payload): array

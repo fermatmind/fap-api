@@ -2,9 +2,13 @@
 
 namespace App\Services\Commerce\PaymentGateway;
 
+use Illuminate\Http\Request;
+
 interface PaymentGatewayInterface
 {
     public function provider(): string;
+
+    public function verifySignature(Request $request): bool;
 
     /**
      * Normalize provider payload into internal shape.

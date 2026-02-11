@@ -21,7 +21,7 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
         Log::spy();
 
         config([
-            'services.stripe.webhook_secret' => '',
+            'services.stripe.webhook_secret' => 'whsec_pr65',
             'services.billing.webhook_secret' => 'billing_secret_pr65',
         ]);
 
@@ -95,7 +95,7 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
         $billingFirst->assertStatus(200);
         $billingFirst->assertJson(['ok' => true]);
 
-        $stripeFirst = $this->postJson('/api/v0.3/webhooks/payment/stripe', [
+        $stripePayload = [
             'id' => $sharedEventId,
             'type' => 'payment_intent.succeeded',
             'data' => [
@@ -109,9 +109,18 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
                     ],
                 ],
             ],
-        ], [
-            'X-Org-Id' => '0',
-        ]);
+        ];
+        $stripeRaw = json_encode($stripePayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        self::assertIsString($stripeRaw);
+        $stripeTs = time();
+        $stripeSig = hash_hmac('sha256', "{$stripeTs}.{$stripeRaw}", 'whsec_pr65');
+
+        $stripeFirst = $this->call('POST', '/api/v0.3/webhooks/payment/stripe', [], [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_X_ORG_ID' => '0',
+            'HTTP_STRIPE_SIGNATURE' => "t={$stripeTs},v1={$stripeSig}",
+        ], $stripeRaw);
         $stripeFirst->assertStatus(200);
         $stripeFirst->assertJson(['ok' => true]);
 

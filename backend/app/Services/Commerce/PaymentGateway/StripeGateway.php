@@ -2,11 +2,76 @@
 
 namespace App\Services\Commerce\PaymentGateway;
 
+use Illuminate\Http\Request;
+
 class StripeGateway implements PaymentGatewayInterface
 {
     public function provider(): string
     {
         return 'stripe';
+    }
+
+    public function verifySignature(Request $request): bool
+    {
+        $secret = trim((string) config('services.stripe.webhook_secret', ''));
+        if ($secret === '') {
+            return false;
+        }
+
+        $header = trim((string) $request->header('Stripe-Signature', ''));
+        if ($header === '') {
+            return false;
+        }
+
+        $timestamp = null;
+        $signatures = [];
+
+        foreach (explode(',', $header) as $chunk) {
+            $chunk = trim($chunk);
+            if ($chunk === '' || !str_contains($chunk, '=')) {
+                continue;
+            }
+
+            [$key, $value] = array_map('trim', explode('=', $chunk, 2));
+            if ($key === 't') {
+                if ($value === '' || !ctype_digit($value)) {
+                    return false;
+                }
+                $timestamp = (int) $value;
+                continue;
+            }
+
+            if ($key === 'v1' && $value !== '') {
+                $signatures[] = $value;
+            }
+        }
+
+        if ($timestamp === null || $signatures === []) {
+            return false;
+        }
+
+        $tolerance = (int) config(
+            'services.stripe.webhook_tolerance_seconds',
+            config('services.stripe.webhook_tolerance', 300)
+        );
+        if ($tolerance <= 0) {
+            $tolerance = 300;
+        }
+
+        if (abs(time() - $timestamp) > $tolerance) {
+            return false;
+        }
+
+        $rawBody = (string) $request->getContent();
+        $expected = hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);
+
+        foreach ($signatures as $signature) {
+            if (hash_equals($expected, $signature)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function normalizePayload(array $payload): array
