@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V0_2;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Services\Legacy\LegacyShareService;
+use App\Support\OrgContext;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -13,6 +14,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ShareController extends Controller
 {
+    public function __construct(private LegacyShareService $legacyShareService)
+    {
+    }
+
     /**
      * POST /api/v0.2/shares/{shareId}/click
      *
@@ -292,16 +297,24 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
      * Legacy: generate/fetch share id for attempt
      * GET /api/v0.2/attempts/{id}/share
      */
-    public function getShare(Request $request, string $id, LegacyShareService $service)
+    public function getShare(Request $request, string $id, OrgContext $ctx)
     {
-        $orgId = $this->resolveLegacyOrgId($request);
-        $userId = $this->resolveLegacyUserId($request);
-        $anonId = $this->resolveLegacyAnonId($request);
+        $v = Validator::make(['id' => $id], [
+            'id' => ['required', 'string', 'max:64'],
+        ]);
 
-        $data = $service->getOrCreateAttemptShare($id, $orgId, $userId, $anonId);
+        if ($v->fails()) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'VALIDATION_FAILED',
+                'errors' => $v->errors(),
+            ], 422);
+        }
+
+        $data = $this->legacyShareService->getOrCreateShare($id, $ctx);
 
         // Keep legacy funnel green: share_generate + share_view side-effects.
-        $this->emitLegacyShareEvents($request, $data, $anonId);
+        $this->emitLegacyShareEvents($request, $data, $ctx->anonId());
 
         return response()->json(array_merge(['ok' => true], $data), 200);
     }
@@ -310,40 +323,22 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
      * Legacy: view share payload
      * GET /api/v0.2/share/{shareId}
      */
-    public function getShareView(Request $request, string $shareId, LegacyShareService $service)
+    public function getShareView(Request $request, string $id)
     {
-        $data = $service->getShareView($shareId);
+        $v = Validator::make(['id' => $id], [
+            'id' => ['required', 'string', 'max:64'],
+        ]);
+
+        if ($v->fails()) {
+            return response()->json([
+                'ok' => false,
+                'error' => 'VALIDATION_FAILED',
+                'errors' => $v->errors(),
+            ], 422);
+        }
+
+        $data = $this->legacyShareService->getShareView($id);
         return response()->json(array_merge(['ok' => true], $data), 200);
-    }
-
-    private function resolveLegacyOrgId(Request $request): int
-    {
-        $fromToken = $request->attributes->get('fm_org_id');
-        if (is_numeric($fromToken)) {
-            return (int) $fromToken;
-        }
-
-        $fromHeader = $request->header('X-Org-Id');
-        if (is_numeric($fromHeader)) {
-            return (int) $fromHeader;
-        }
-
-        return 0;
-    }
-
-    private function resolveLegacyUserId(Request $request): ?int
-    {
-        $v = $request->attributes->get('fm_user_id');
-        if ($v === null || $v === '' || !is_numeric($v)) {
-            return null;
-        }
-        return (int) $v;
-    }
-
-    private function resolveLegacyAnonId(Request $request): ?string
-    {
-        $v = trim((string) ($request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id') ?? ''));
-        return $v === '' ? null : $v;
     }
 
     private function emitLegacyShareEvents(Request $request, array $data, ?string $anonId): void

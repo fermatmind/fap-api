@@ -130,7 +130,7 @@ Route::prefix("v0.2")->middleware([
     });
 
     // 6) Public share view (legacy)
-    Route::get("/share/{shareId}", [ShareController::class, "getShareView"]);
+    Route::get("/share/{id}", [ShareController::class, "getShareView"]);
 
     // 6.5) Lookups
     Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
