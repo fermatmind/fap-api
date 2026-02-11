@@ -24,6 +24,8 @@ final class ShareSecurityTest extends TestCase
 
         $this->seedAttemptAndResult($attemptId, $orgId, $anonA, $userA);
         $this->seedShare($existingShareId, $attemptId, $anonA);
+        $this->seedScaleRegistry($orgId, 'MBTI');
+        $this->seedBenefitGrant($orgId, $attemptId, (string) $userA, $anonA);
 
         $tokenA = $this->issueTokenForUser($userA);
 
@@ -171,6 +173,45 @@ final class ShareSecurityTest extends TestCase
             'content_package_version' => 'cp_v1',
             'created_at' => $now,
             'updated_at' => $now,
+        ]);
+    }
+
+    private function seedScaleRegistry(int $orgId, string $scaleCode): void
+    {
+        DB::table('scales_registry')->insert([
+            'code' => $scaleCode,
+            'org_id' => $orgId,
+            'primary_slug' => 'mbti-test',
+            'slugs_json' => json_encode(['mbti-test'], JSON_UNESCAPED_UNICODE),
+            'driver_type' => 'mbti',
+            'commercial_json' => json_encode([
+                'report_benefit_code' => 'MBTI_REPORT_FULL',
+                'credit_benefit_code' => 'MBTI_CREDIT',
+            ], JSON_UNESCAPED_UNICODE),
+            'is_public' => 1,
+            'is_active' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function seedBenefitGrant(int $orgId, string $attemptId, string $userId, string $benefitRef): void
+    {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => $orgId,
+            'user_id' => $userId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'status' => 'active',
+            'benefit_type' => 'report_unlock',
+            'benefit_ref' => $benefitRef,
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

@@ -24,6 +24,7 @@ jobs:
     env:
       APP_ENV: testing
       APP_DEBUG: "true"
+      FEATURE_ENABLE_V0_2_REPORT: "true"
 
       DB_CONNECTION: sqlite
       DB_DATABASE: /tmp/fap-ci.sqlite
@@ -82,8 +83,19 @@ jobs:
       - name: Composer validate & audit
         working-directory: backend
         run: |
+          set -euo pipefail
           composer validate --strict
-          composer audit --no-interaction
+          for i in 1 2 3; do
+            if composer audit --no-interaction; then
+              break
+            fi
+            if [ "$i" -eq 3 ]; then
+              echo "composer audit failed after ${i} attempts"
+              exit 1
+            fi
+            echo "composer audit failed (attempt ${i}); retrying in 5s..."
+            sleep 5
+          done
 
       - name: Guard release integrity (controllers + content pack + archive)
         run: bash backend/scripts/guard_release_integrity.sh
@@ -278,6 +290,7 @@ jobs:
 
     env:
       APP_ENV: ci
+      FEATURE_ENABLE_V0_2_REPORT: "true"
       DB_CONNECTION: mysql
       DB_HOST: 127.0.0.1
       DB_PORT: 3306
@@ -318,8 +331,19 @@ jobs:
       - name: Composer validate & audit
         working-directory: backend
         run: |
+          set -euo pipefail
           composer validate --strict
-          composer audit --no-interaction
+          for i in 1 2 3; do
+            if composer audit --no-interaction; then
+              break
+            fi
+            if [ "$i" -eq 3 ]; then
+              echo "composer audit failed after ${i} attempts"
+              exit 1
+            fi
+            echo "composer audit failed (attempt ${i}); retrying in 5s..."
+            sleep 5
+          done
 
       - name: Prepare CI mysql (migrate + seed + sync-slugs)
         working-directory: backend

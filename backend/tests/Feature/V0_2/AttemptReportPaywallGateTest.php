@@ -12,72 +12,47 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-final class AttemptReportOwnershipTest extends TestCase
+final class AttemptReportPaywallGateTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_report_requires_owner_when_no_token_and_no_anon_id(): void
+    public function test_report_returns_402_when_owner_has_no_benefit_grant(): void
     {
-        $attemptId = $this->seedReportFixture();
+        [$attemptId, $anonId] = $this->seedReportFixture();
 
-        $this->getJson("/api/v0.2/attempts/{$attemptId}/report")
-            ->assertStatus(404);
-    }
-
-    public function test_report_returns_404_for_wrong_anon_id(): void
-    {
-        $attemptId = $this->seedReportFixture();
-
-        $this->withHeader('X-Anon-Id', 'anon_wrong_owner')
-            ->getJson("/api/v0.2/attempts/{$attemptId}/report")
-            ->assertStatus(404);
-    }
-
-    public function test_report_returns_402_for_correct_anon_id_without_entitlement(): void
-    {
-        $attemptId = $this->seedReportFixture();
-
-        $this->withHeader('X-Anon-Id', 'anon_pr34_owner')
+        $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/report")
             ->assertStatus(402)
             ->assertJson([
                 'ok' => false,
                 'error' => 'PAYMENT_REQUIRED',
+                'message' => 'report locked',
             ]);
     }
 
-    public function test_report_returns_402_for_fm_token_owner_without_entitlement(): void
+    public function test_report_returns_200_when_owner_has_benefit_grant(): void
     {
-        $attemptId = $this->seedReportFixture();
-        $token = 'fm_'.(string) Str::uuid();
+        [$attemptId, $anonId] = $this->seedReportFixture();
+        $this->seedBenefitGrant(0, $attemptId, $anonId);
 
-        DB::table('fm_tokens')->insert([
-            'token' => $token,
-            'anon_id' => 'anon_bound_from_token',
-            'user_id' => 1001,
-            'expires_at' => now()->addHour(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        $this->withHeader('Authorization', "Bearer {$token}")
+        $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/report")
-            ->assertStatus(402)
+            ->assertStatus(200)
             ->assertJson([
-                'ok' => false,
-                'error' => 'PAYMENT_REQUIRED',
+                'ok' => true,
+                'attempt_id' => $attemptId,
             ]);
     }
 
-    public function test_report_returns_404_for_share_id_without_owner_identity(): void
+    public function test_report_with_share_id_without_owner_identity_returns_404(): void
     {
-        $attemptId = $this->seedReportFixture();
+        [$attemptId, $anonId] = $this->seedReportFixture();
         $shareId = (string) Str::uuid();
 
         DB::table('shares')->insert([
             'id' => $shareId,
             'attempt_id' => $attemptId,
-            'anon_id' => null,
+            'anon_id' => $anonId,
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.2',
             'content_package_version' => 'v0.2.2',
@@ -89,10 +64,37 @@ final class AttemptReportOwnershipTest extends TestCase
             ->assertStatus(404);
     }
 
-    private function seedReportFixture(): string
+    public function test_report_returns_404_when_feature_flag_disabled(): void
+    {
+        config(['features.enable_v0_2_report' => false]);
+
+        [$attemptId, $anonId] = $this->seedReportFixture();
+        $this->seedBenefitGrant(0, $attemptId, $anonId);
+
+        $this->withHeader('X-Anon-Id', $anonId)
+            ->getJson("/api/v0.2/attempts/{$attemptId}/report")
+            ->assertStatus(404);
+    }
+
+    public function test_share_returns_404_when_feature_flag_disabled(): void
+    {
+        config(['features.enable_v0_2_report' => false]);
+
+        [$attemptId, $anonId] = $this->seedReportFixture();
+        $token = $this->seedFmToken($anonId, '1001', 0);
+        $this->seedBenefitGrant(0, $attemptId, $anonId);
+
+        $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+            'X-Org-Id' => '0',
+        ])->getJson("/api/v0.2/attempts/{$attemptId}/share")
+            ->assertStatus(404);
+    }
+
+    private function seedReportFixture(): array
     {
         $attemptId = (string) Str::uuid();
-        $anonId = 'anon_pr34_owner';
+        $anonId = 'anon_paywall_owner';
         $userId = '1001';
 
         Attempt::create([
@@ -172,13 +174,13 @@ final class AttemptReportOwnershipTest extends TestCase
                 'tags' => [],
             ],
             'meta' => [
-                'seed' => 'pr34',
+                'seed' => 'paywall',
             ],
         ]);
 
         $this->seedScaleRegistry(0, 'MBTI');
 
-        return $attemptId;
+        return [$attemptId, $anonId, $userId];
     }
 
     private function seedScaleRegistry(int $orgId, string $scaleCode): void
@@ -198,5 +200,41 @@ final class AttemptReportOwnershipTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+
+    private function seedBenefitGrant(int $orgId, string $attemptId, string $anonId): void
+    {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => $orgId,
+            'user_id' => $anonId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'status' => 'active',
+            'benefit_type' => 'report_unlock',
+            'benefit_ref' => $anonId,
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function seedFmToken(string $anonId, string $userId, int $orgId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'anon_id' => $anonId,
+            'user_id' => $userId,
+            'expires_at' => now()->addHour(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
     }
 }
