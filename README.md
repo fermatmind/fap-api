@@ -24,6 +24,12 @@
 如果你只做一件事：  
 **先按 Stage 1 的规范把接口/术语/事件口径对齐，再按 Stage 2 跑通“测评→报告→分享→增长”的闭环。**
 
+## Release Packaging Policy
+
+- 发布产物只允许来自 `git archive`（例如 `bash scripts/package_release.sh`）或 CI 产物。
+- 禁止直接压缩本地工作目录（例如 Finder/Explorer 手工 zip 工作区）。
+- 原因：工作区可能包含未跟踪文件（如 `backend/.env`），会造成密钥泄露与误部署风险。
+
 ---
 
 ## 1. 当前阶段（Stage 2 · Skeleton-level）

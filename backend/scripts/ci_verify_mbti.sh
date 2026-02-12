@@ -43,9 +43,13 @@ CURL_AUTH=()
 # -----------------------------
 cd "$BACKEND_DIR"
 
+ENV_CREATED=0
+SERVE_PID=""
+
 # Ensure .env exists + key before any artisan
 if [[ ! -f ".env" ]]; then
   cp -a .env.example .env
+  ENV_CREATED=1
 fi
 php artisan key:generate --force >/dev/null 2>&1 || true
 
@@ -273,7 +277,27 @@ cleanup_legacy_alias() {
     rm -f "$ALIAS_ABS"
   fi
 }
-trap cleanup_legacy_alias EXIT INT TERM
+
+cleanup_env_file() {
+  if [[ "${ENV_CREATED:-0}" == "1" && -f ".env" ]]; then
+    echo "[CI] cleanup temp env: $BACKEND_DIR/.env"
+    rm -f ".env"
+  fi
+}
+
+cleanup() {
+  local ec=$?
+  trap - EXIT INT TERM
+
+  if [[ -n "${SERVE_PID:-}" ]]; then
+    kill "$SERVE_PID" >/dev/null 2>&1 || true
+  fi
+
+  cleanup_legacy_alias
+  cleanup_env_file
+  exit "$ec"
+}
+trap cleanup EXIT INT TERM
 
 if [[ -d "$CANON_ABS" ]]; then
   if [[ ! -e "$ALIAS_ABS" ]]; then
@@ -501,15 +525,6 @@ fi
 echo "[CI] starting server: php artisan serve --host=$HOST --port=$PORT"
 php artisan serve --host="$HOST" --port="$PORT" >"$SERVE_LOG" 2>&1 &
 SERVE_PID=$!
-
-cleanup() {
-  local ec=$?
-  if [[ -n "${SERVE_PID:-}" ]]; then
-    kill "$SERVE_PID" >/dev/null 2>&1 || true
-  fi
-  exit $ec
-}
-trap cleanup EXIT
 
 echo "[CI] waiting for health: $API/api/v0.2/health"
 wait_health "$API/api/v0.2/health" 100 || {
