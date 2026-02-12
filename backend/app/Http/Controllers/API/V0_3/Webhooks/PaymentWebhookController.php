@@ -65,6 +65,9 @@ final class PaymentWebhookController extends Controller
         ];
 
         try {
+            $useV2 = config('features.payment_webhook_v2', false) === true;
+            $shadow = config('features.payment_webhook_v2_shadow', false) === true;
+
             $result = $this->processor->handle(
                 $provider,
                 $payload,
@@ -74,6 +77,30 @@ final class PaymentWebhookController extends Controller
                 true,
                 $payloadMeta
             );
+
+            if (!$useV2 && $shadow) {
+                $shadowResult = $this->processor->evaluateDryRun($provider, $payload, true);
+                $legacyShape = [
+                    'ok' => (bool) ($result['ok'] ?? false),
+                    'status' => (int) ($result['status'] ?? 200),
+                    'error' => (string) ($result['error'] ?? ''),
+                ];
+                $shadowShape = [
+                    'ok' => (bool) ($shadowResult['ok'] ?? false),
+                    'status' => (int) ($shadowResult['status'] ?? 200),
+                    'error' => (string) ($shadowResult['error'] ?? ''),
+                ];
+
+                if ($legacyShape !== $shadowShape) {
+                    Log::warning('PAYMENT_WEBHOOK_V2_SHADOW_DIFF', [
+                        'request_id' => $payloadMeta['request_id'],
+                        'provider' => $provider,
+                        'provider_event_id' => $eventId,
+                        'legacy' => $legacyShape,
+                        'shadow' => $shadowShape,
+                    ]);
+                }
+            }
         } catch (\Throwable $e) {
             Log::error('PAYMENT_WEBHOOK_INTERNAL_ERROR', [
                 'request_id' => $payloadMeta['request_id'],

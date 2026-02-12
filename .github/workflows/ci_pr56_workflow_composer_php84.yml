@@ -25,7 +25,22 @@ on:
 
 jobs:
   verify:
+    name: verify-${{ matrix.mode }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - mode: legacy
+            FEATURE_SELFCHECK_V2: "false"
+            FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: "false"
+            FEATURE_PAYMENT_WEBHOOK_V2: "false"
+            FEATURE_CONTENT_STORE_V2: "false"
+          - mode: v2
+            FEATURE_SELFCHECK_V2: "true"
+            FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: "true"
+            FEATURE_PAYMENT_WEBHOOK_V2: "true"
+            FEATURE_CONTENT_STORE_V2: "true"
 
     env:
       APP_ENV: testing
@@ -39,6 +54,10 @@ jobs:
       DB_DATABASE: /tmp/pr56.sqlite
       CACHE_DRIVER: array
       SERVE_PORT: 1856
+      FEATURE_SELFCHECK_V2: ${{ matrix.FEATURE_SELFCHECK_V2 }}
+      FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: ${{ matrix.FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2 }}
+      FEATURE_PAYMENT_WEBHOOK_V2: ${{ matrix.FEATURE_PAYMENT_WEBHOOK_V2 }}
+      FEATURE_CONTENT_STORE_V2: ${{ matrix.FEATURE_CONTENT_STORE_V2 }}
 
     steps:
       - name: Checkout
@@ -61,6 +80,10 @@ jobs:
       - name: Install dependencies
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Quality line guard
+        working-directory: backend
+        run: composer run quality:lines
 
       - name: Verify workflow PHP84 + composer security checks
         run: |
