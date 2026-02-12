@@ -2,11 +2,17 @@
 
 namespace App\Services\Account;
 
+use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AssetCollector
 {
+    public function __construct(
+        private readonly OrgContext $orgContext,
+    ) {
+    }
+
     /**
      * MVP：APPEND 归集（anon_id -> user_id）
      * 规则：
@@ -34,8 +40,17 @@ class AssetCollector
         if (!Schema::hasColumn('attempts', 'anon_id')) {
             return ['updated' => 0];
         }
+        if (!Schema::hasColumn('attempts', 'org_id')) {
+            return [
+                'ok' => true,
+                'collected' => 0,
+                'updated' => 0,
+                'reason' => 'attempts_org_id_column_missing',
+            ];
+        }
 
         $q = DB::table('attempts')
+            ->where('org_id', $this->orgContext->orgId())
             ->whereNull('user_id')
             ->where('anon_id', $anonId);
 
@@ -67,6 +82,14 @@ class AssetCollector
 
         if (!Schema::hasTable('attempts')) return ['updated' => 0];
         if (!Schema::hasColumn('attempts', 'user_id')) return ['updated' => 0];
+        if (!Schema::hasColumn('attempts', 'org_id')) {
+            return [
+                'ok' => true,
+                'collected' => 0,
+                'updated' => 0,
+                'reason' => 'attempts_org_id_column_missing',
+            ];
+        }
 
         // 兼容字段名
         $col = null;
@@ -79,6 +102,7 @@ class AssetCollector
         if ($col === null) return ['updated' => 0];
 
         $q = DB::table('attempts')
+            ->where('org_id', $this->orgContext->orgId())
             ->whereNull('user_id')
             ->where($col, $deviceKeyHash);
 
