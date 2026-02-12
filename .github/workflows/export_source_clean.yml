@@ -1,0 +1,29 @@
+name: Export Source Clean
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-source-clean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Artifact hygiene gate
+        run: bash scripts/security/assert_artifact_clean.sh --mode repo --target "$GITHUB_WORKSPACE"
+
+      - name: Export clean source package
+        run: bash scripts/release/export_source_clean.sh
+
+      - name: Upload clean source package
+        uses: actions/upload-artifact@v4
+        with:
+          name: fap-api-source-clean
+          path: dist/fap-api.zip
+          if-no-files-found: error
+          retention-days: 7
