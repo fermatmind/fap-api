@@ -85,7 +85,15 @@ final class PaymentWebhookController extends Controller
             return $this->errorResponse(500, 'WEBHOOK_INTERNAL_ERROR', 'webhook internal error');
         }
 
-        return response()->json($result, 200);
+        $status = 200;
+        if (is_array($result) && array_key_exists('status', $result)) {
+            $candidate = (int) $result['status'];
+            if ($candidate >= 100 && $candidate <= 599) {
+                $status = $candidate;
+            }
+        }
+
+        return response()->json($result, $status);
     }
 
     private function resolveGateway(string $provider): ?PaymentGatewayInterface

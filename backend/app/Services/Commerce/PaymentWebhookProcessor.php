@@ -629,7 +629,7 @@ class PaymentWebhookProcessor
                 )->afterCommit();
             }
 
-            return $result;
+            return $this->normalizeResultStatus($result);
         } catch (LockTimeoutException $e) {
             return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
         }
@@ -1107,12 +1107,27 @@ class PaymentWebhookProcessor
         return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
     }
 
+    private function normalizeResultStatus(array $result): array
+    {
+        if (array_key_exists('status', $result)) {
+            $candidate = (int) $result['status'];
+            if ($candidate >= 100 && $candidate <= 599) {
+                $result['status'] = $candidate;
+                return $result;
+            }
+        }
+
+        $result['status'] = ($result['ok'] ?? false) === true ? 200 : 500;
+        return $result;
+    }
+
     private function tableMissing(string $table): array
     {
         return [
             'ok' => false,
             'error' => 'TABLE_MISSING',
             'message' => "{$table} table missing.",
+            'status' => 500,
         ];
     }
 
@@ -1122,6 +1137,7 @@ class PaymentWebhookProcessor
             'ok' => false,
             'error' => $code,
             'message' => $message,
+            'status' => 400,
         ];
     }
 
