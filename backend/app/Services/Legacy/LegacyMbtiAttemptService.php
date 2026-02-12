@@ -19,6 +19,7 @@ use App\Jobs\GenerateReportJob;
 
 use App\Support\WritesEvents;
 use App\Support\CacheKeys;
+use App\Support\OrgContext;
 
 use App\Services\Report\TagBuilder;
 use App\Services\Report\SectionCardGenerator;
@@ -42,6 +43,30 @@ class LegacyMbtiAttemptService
      * @var array|null
      */
     private ?array $questionsIndex = null;
+
+    public function __construct(
+        private readonly OrgContext $orgContext,
+    ) {
+    }
+
+    private function orgId(): int
+    {
+        return max(0, (int) $this->orgContext->orgId());
+    }
+
+    private function attemptQuery(string $attemptId)
+    {
+        return Attempt::query()
+            ->where('id', $attemptId)
+            ->where('org_id', $this->orgId());
+    }
+
+    private function resultQuery(string $attemptId)
+    {
+        return Result::query()
+            ->where('attempt_id', $attemptId)
+            ->where('org_id', $this->orgId());
+    }
 
     private function defaultRegion(): string
     {
@@ -370,6 +395,7 @@ public function storeAttempt(Request $request)
     $attemptId = isset($payload['attempt_id']) && is_string($payload['attempt_id']) && trim($payload['attempt_id']) !== ''
         ? trim($payload['attempt_id'])
         : (string) Str::uuid();
+    $isResultUpsertRoute = trim((string) ($request->route('id') ?? '')) !== '';
 
     Log::info('[attempt_submit] received', [
         'attempt_id' => $attemptId,
@@ -559,9 +585,18 @@ public function storeAttempt(Request $request)
         $psychometrics,
         $answers,
         $answersHash,
-        $answersStoragePath
+        $answersStoragePath,
+        $isResultUpsertRoute
     ) {
-        $existingAttempt = Attempt::where('id', $attemptId)->first();
+        $existingAttempt = $this->attemptQuery($attemptId)->first();
+
+        if ($isResultUpsertRoute && !$existingAttempt) {
+            return response()->json([
+                'ok'      => false,
+                'error'   => 'NOT_FOUND',
+                'message' => 'attempt not found.',
+            ], 404);
+        }
 
         if ($existingAttempt) {
             if ((string)$existingAttempt->anon_id !== (string)$payload['anon_id']
@@ -595,6 +630,9 @@ public function storeAttempt(Request $request)
             'started_at'           => $existingAttempt?->started_at ?? now(),
             'submitted_at'         => now(),
         ];
+        if (Schema::hasColumn('attempts', 'org_id')) {
+            $attemptData['org_id'] = $existingAttempt?->org_id ?? $this->orgId();
+        }
 
         if (Schema::hasColumn('attempts', 'answers_json')) {
             $attemptData['answers_json'] = $answers;
@@ -679,7 +717,7 @@ public function storeAttempt(Request $request)
         }
 
         // ✅ 3) results 表：兼容旧逻辑（有则更新，无则创建）
-        $result = Result::where('attempt_id', $attemptId)->first();
+        $result = $this->resultQuery($attemptId)->first();
         $isNewResult = false;
 
         $resultBase = [
@@ -694,6 +732,9 @@ public function storeAttempt(Request $request)
 
         if (Schema::hasColumn('results', 'scores_pct')) {
             $resultBase['scores_pct'] = $scoresPct;
+        }
+        if (Schema::hasColumn('results', 'org_id')) {
+            $resultBase['org_id'] = $this->orgId();
         }
         if (Schema::hasColumn('results', 'axis_states')) {
             $resultBase['axis_states'] = $axisStates;
@@ -753,6 +794,9 @@ public function storeAttempt(Request $request)
         ];
 
         $reportJob = $this->ensureReportJob($attemptId, true);
+        if ($reportJob instanceof \Illuminate\Http\JsonResponse) {
+            return $reportJob;
+        }
 
         return [
             'attempt_id' => $attemptId,
@@ -793,15 +837,22 @@ public function upsertResult(\Illuminate\Http\Request $request, string $attemptI
     return $this->storeAttempt($request);
 }
 
-private function ensureReportJob(string $attemptId, bool $reset = false): ReportJob
+private function ensureReportJob(string $attemptId, bool $reset = false): ReportJob|\Illuminate\Http\JsonResponse
 {
+    if (!$this->attemptQuery($attemptId)->exists()) {
+        return response()->json([
+            'ok'      => false,
+            'error'   => 'NOT_FOUND',
+            'message' => 'attempt not found.',
+        ], 404);
+    }
+
     $job = ReportJob::where('attempt_id', $attemptId)->first();
 
     if (!$job) {
-        $orgId = (int) (Attempt::where('id', $attemptId)->value('org_id') ?? 0);
         $job = ReportJob::create([
             'id' => (string) Str::uuid(),
-            'org_id' => $orgId,
+            'org_id' => $this->orgId(),
             'attempt_id' => $attemptId,
             'status' => 'queued',
             'tries' => 0,
@@ -810,12 +861,9 @@ private function ensureReportJob(string $attemptId, bool $reset = false): Report
         return $job;
     }
 
-    if (empty($job->org_id)) {
-        $orgId = (int) (Attempt::where('id', $attemptId)->value('org_id') ?? 0);
-        if ($orgId > 0) {
-            $job->org_id = $orgId;
-            $job->save();
-        }
+    if ((int) ($job->org_id ?? 0) !== $this->orgId()) {
+        $job->org_id = $this->orgId();
+        $job->save();
     }
 
     if ($reset) {
