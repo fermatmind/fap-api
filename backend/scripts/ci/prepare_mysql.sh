@@ -22,10 +22,12 @@ php artisan config:clear || true
 php artisan migrate:fresh --force --no-interaction
 php artisan db:seed --class=CiScalesRegistrySeeder --force --no-interaction
 
-if php artisan fap:sync-slugs --no-interaction; then
-  :
-else
+if php artisan list --raw | grep -q '^fap:sync-slugs$'; then
+  php artisan fap:sync-slugs --no-interaction
+elif php artisan list --raw | grep -q '^fap:scales:sync-slugs$'; then
   php artisan fap:scales:sync-slugs --no-interaction
+else
+  echo "[prepare_mysql] skip slug sync: no supported command found"
 fi
 
 echo "PASS: prepare_mysql"
