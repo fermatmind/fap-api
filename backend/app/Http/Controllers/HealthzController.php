@@ -21,7 +21,7 @@ class HealthzController extends Controller
         $service = 'Fermat Assessment Platform API';
         $version = config('app.version', env('APP_VERSION', 'unknown'));
         $nowIso = now()->toIso8601String();
-        $verbose = (bool) config('healthz.verbose', false) && app()->environment(['local', 'testing']);
+        $verbose = (bool) config('healthz.verbose', false) && app()->environment(['local', 'testing', 'ci']);
 
         $region = (string) $request->query('region', 'CN_MAINLAND');
         $locale = (string) $request->query('locale', 'zh-CN');
