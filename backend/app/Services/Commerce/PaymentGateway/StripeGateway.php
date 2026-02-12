@@ -78,7 +78,7 @@ class StripeGateway implements PaymentGatewayInterface
     {
         $object = $this->resolveObject($payload);
 
-        $providerEventId = $this->resolveString($payload, ['id']);
+        $providerEventId = $this->resolveString($payload, ['provider_event_id', 'event_id', 'id']);
         if ($providerEventId === '') {
             $providerEventId = $this->resolveString($object, ['id', 'charge', 'payment_intent']);
         }

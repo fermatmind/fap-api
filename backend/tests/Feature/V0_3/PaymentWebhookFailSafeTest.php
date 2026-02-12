@@ -51,7 +51,7 @@ class PaymentWebhookFailSafeTest extends TestCase
         $response->assertStatus(400);
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'INVALID_PAYLOAD',
+            'error_code' => 'INVALID_JSON',
         ]);
     }
 }
