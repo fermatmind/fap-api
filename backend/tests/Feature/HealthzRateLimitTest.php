@@ -8,15 +8,19 @@ use Tests\TestCase;
 
 class HealthzRateLimitTest extends TestCase
 {
-    public function test_healthz_reports_cache_queue_and_request_id(): void
+    public function test_healthz_returns_minimal_payload_and_request_id(): void
     {
         $response = $this->getJson('/api/healthz');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('deps.cache_store.ok', true);
-        $response->assertJsonPath('deps.queue.ok', true);
-        $response->assertJsonPath('deps.queue.driver', 'sync');
+        $response->assertJsonStructure(['ok', 'service', 'version', 'time']);
+        $response->assertJsonMissingPath('deps');
+        $response->assertJsonMissingPath('path');
+        $response->assertJsonMissingPath('base_path');
+        $response->assertJsonMissingPath('default_path');
+        $response->assertJsonMissingPath('driver');
+        $response->assertJsonMissingPath('message');
         $this->assertTrue($response->headers->has('X-Request-Id'));
     }
 

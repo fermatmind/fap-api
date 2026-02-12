@@ -177,7 +177,7 @@ jobs:
             *) echo "::error::invalid target_env=$TARGET_ENV"; exit 2;;
           esac
 
-          curl -fsS "$PUBLIC_BASE/api/v0.2/healthz" \
+          curl -fsS "$PUBLIC_BASE/api/v0.2/health" \
             | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
 
           curl -fsS "$PUBLIC_BASE/api/v0.2/scales/MBTI/questions?region=${REGION}&locale=${LOCALE}" \

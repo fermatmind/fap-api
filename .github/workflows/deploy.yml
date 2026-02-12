@@ -40,14 +40,14 @@ jobs:
       DEPLOY_PORT_PROD: "22"
       DEPLOY_HOST_PROD: "122.152.221.126"
       DEPLOY_PATH_PROD: "/var/www/fap-api"
-      HEALTHCHECK_URL_PROD: "https://fermatmind.com/api/v0.2/healthz"
+      HEALTHCHECK_URL_PROD: "https://fermatmind.com/api/v0.2/health"
 
       # ====== staging ======
       DEPLOY_USER_STG: "ubuntu"
       DEPLOY_PORT_STG: "22"
       DEPLOY_HOST_STG: "49.234.55.28"
       DEPLOY_PATH_STG: "/var/www/fap-api-staging"
-      HEALTHCHECK_URL_STG: "https://staging.fermatmind.com/api/v0.2/healthz"
+      HEALTHCHECK_URL_STG: "https://staging.fermatmind.com/api/v0.2/health"
 
     steps:
       - name: Checkout code
