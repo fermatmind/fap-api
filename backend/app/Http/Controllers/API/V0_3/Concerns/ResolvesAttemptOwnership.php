@@ -3,89 +3,40 @@
 namespace App\Http\Controllers\API\V0_3\Concerns;
 
 use App\Models\Attempt;
+use App\Support\OrgContext;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 trait ResolvesAttemptOwnership
 {
-    protected function ownedAttemptQuery(string $id): Builder
+    protected function resolveUserId(Request $request): ?string
     {
-        $query = Attempt::query()
-            ->where('id', $id)
-            ->where('org_id', $this->orgContext->orgId());
+        $orgContext = app(OrgContext::class);
 
-        $role = (string) ($this->orgContext->role() ?? '');
-        if ($this->isPrivilegedRole($role)) {
-            return $query;
-        }
+        $candidates = [
+            $orgContext->userId(),
+            $request->attributes->get('fm_user_id'),
+            $request->attributes->get('user_id'),
+        ];
 
-        if ($this->isMemberLikeRole($role)) {
-            $memberUserId = $this->orgContext->userId();
-            if ($memberUserId === null) {
-                $this->throwAttemptNotFound($id);
-            }
-
-            return $query->where('user_id', $memberUserId);
-        }
-
-        $request = request();
-        $userId = $request instanceof Request
-            ? $this->resolveUserId($request)
-            : $this->orgContext->userId();
-        $anonId = $request instanceof Request
-            ? $this->resolveAnonId($request)
-            : $this->orgContext->anonId();
-
-        $user = $userId !== null ? (string) $userId : '';
-        $anon = $anonId !== null ? trim($anonId) : '';
-
-        if ($user === '' && $anon === '') {
-            $this->throwAttemptNotFound($id);
-        }
-
-        return $query->where(function ($q) use ($user, $anon) {
-            $applied = false;
-            if ($user !== '') {
-                $q->where('user_id', $user);
-                $applied = true;
-            }
-            if ($anon !== '') {
-                if ($applied) {
-                    $q->orWhere('anon_id', $anon);
-                } else {
-                    $q->where('anon_id', $anon);
-                    $applied = true;
+        foreach ($candidates as $candidate) {
+            if (is_string($candidate) || is_numeric($candidate)) {
+                $value = trim((string) $candidate);
+                if ($value !== '' && preg_match('/^\d+$/', $value)) {
+                    return $value;
                 }
             }
-            if (!$applied) {
-                $q->whereRaw('1=0');
-            }
-        });
-    }
+        }
 
-    protected function throwAttemptNotFound(string $id): never
-    {
-        $exception = new ModelNotFoundException();
-        $exception->setModel(Attempt::class, [$id]);
-
-        throw $exception;
-    }
-
-    protected function isPrivilegedRole(string $role): bool
-    {
-        return in_array($role, ['owner', 'admin'], true);
-    }
-
-    protected function isMemberLikeRole(string $role): bool
-    {
-        return in_array($role, ['member', 'viewer'], true);
+        return null;
     }
 
     protected function resolveAnonId(Request $request): ?string
     {
+        $orgContext = app(OrgContext::class);
+
         $candidates = [
-            $this->orgContext->anonId(),
+            $orgContext->anonId(),
             $request->attributes->get('anon_id'),
             $request->attributes->get('fm_anon_id'),
             $request->query('anon_id'),
@@ -105,13 +56,60 @@ trait ResolvesAttemptOwnership
         return null;
     }
 
-    protected function resolveUserId(Request $request): ?int
+    protected function ownedAttemptQuery(string $attemptId): Builder
     {
-        $raw = (string) ($request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id') ?? '');
-        if ($raw === '' || !preg_match('/^\d+$/', $raw)) {
-            return null;
+        $orgContext = app(OrgContext::class);
+
+        $query = Attempt::query()
+            ->where('id', $attemptId)
+            ->where('org_id', $orgContext->orgId());
+
+        $role = (string) ($orgContext->role() ?? '');
+        if (in_array($role, ['owner', 'admin'], true)) {
+            return $query;
         }
 
-        return (int) $raw;
+        $request = request();
+        $userId = null;
+        $anonId = null;
+
+        if ($request instanceof Request) {
+            $userId = $this->resolveUserId($request);
+            $anonId = $this->resolveAnonId($request);
+        } else {
+            $ctxUserId = $orgContext->userId();
+            if ($ctxUserId !== null) {
+                $candidate = trim((string) $ctxUserId);
+                $userId = $candidate !== '' ? $candidate : null;
+            }
+
+            $ctxAnonId = $orgContext->anonId();
+            if (is_string($ctxAnonId)) {
+                $candidate = trim($ctxAnonId);
+                $anonId = $candidate !== '' ? $candidate : null;
+            }
+        }
+
+        if (in_array($role, ['member', 'viewer'], true)) {
+            if ($userId !== null) {
+                return $query->where('user_id', $userId);
+            }
+
+            if ($anonId !== null) {
+                return $query->where('anon_id', $anonId);
+            }
+
+            return $query->whereRaw('1=0');
+        }
+
+        if ($userId !== null) {
+            return $query->where('user_id', $userId);
+        }
+
+        if ($anonId !== null) {
+            return $query->where('anon_id', $anonId);
+        }
+
+        return $query->whereRaw('1=0');
     }
 }
