@@ -1,0 +1,81 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Support\Database\SchemaIndex;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    private const TABLE = 'idempotency_keys';
+    private const INDEX = 'idx_idempo_provider_run_external';
+
+    public function up(): void
+    {
+        if (!Schema::hasTable(self::TABLE)) {
+            return;
+        }
+
+        if (!Schema::hasColumn(self::TABLE, 'run_id')) {
+            Schema::table(self::TABLE, function (Blueprint $table): void {
+                $table->string('run_id', 36)->nullable();
+            });
+        }
+
+        if (!Schema::hasColumn(self::TABLE, 'provider')
+            || !Schema::hasColumn(self::TABLE, 'run_id')
+            || !Schema::hasColumn(self::TABLE, 'external_id')
+            || SchemaIndex::indexExists(self::TABLE, self::INDEX)
+            || $this->hasAnyIndexOnColumns(self::TABLE, ['provider', 'run_id', 'external_id'])) {
+            return;
+        }
+
+        Schema::table(self::TABLE, function (Blueprint $table): void {
+            $table->index(['provider', 'run_id', 'external_id'], self::INDEX);
+        });
+    }
+
+    public function down(): void
+    {
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
+    }
+
+    /**
+     * @param list<string> $columns
+     */
+    private function hasAnyIndexOnColumns(string $table, array $columns): bool
+    {
+        if (DB::connection()->getDriverName() !== 'mysql') {
+            return false;
+        }
+
+        $database = DB::getDatabaseName();
+        if (!is_string($database) || $database === '') {
+            return false;
+        }
+
+        $expectedSequence = implode(',', $columns);
+
+        $rows = DB::select(
+            "SELECT index_name,
+                    GROUP_CONCAT(column_name ORDER BY seq_in_index SEPARATOR ',') AS column_sequence
+             FROM information_schema.statistics
+             WHERE table_schema = ? AND table_name = ?
+             GROUP BY index_name",
+            [$database, $table]
+        );
+
+        foreach ($rows as $row) {
+            $columnSequence = (string) ($row->column_sequence ?? $row->COLUMN_SEQUENCE ?? '');
+            if ($columnSequence === $expectedSequence) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+};
