@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\NormalizeApiErrorContract;
+use App\Http\Middleware\LimitWebhookPayloadSize;
 use App\Http\Controllers\HealthzController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LookupController;
@@ -255,7 +256,7 @@ Route::prefix("v0.3")->middleware([
         "/webhooks/payment/{provider}",
         [PaymentWebhookController::class, "handle"]
     )->whereIn('provider', $payProviders)
-        ->middleware(['throttle:api_webhook'])
+        ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
         ->name('v0.3.webhooks.payment');
 
     Route::middleware(ResolveOrgContext::class)->group(function () use ($payProviders) {

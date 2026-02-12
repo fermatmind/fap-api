@@ -16,7 +16,7 @@ class LimitWebhookPayloadSize
     {
         $raw = (string) $request->getContent();
         $len = strlen($raw);
-        $max = max(0, (int) config('payments.webhook_max_payload_bytes', 65536));
+        $max = max(0, (int) config('payments.webhook_max_payload_bytes', 262144));
 
         if ($max > 0 && $len > $max) {
             Log::warning('SECURITY_PAYMENT_WEBHOOK_PAYLOAD_TOO_LARGE', [
@@ -29,7 +29,9 @@ class LimitWebhookPayloadSize
 
             return response()->json([
                 'ok' => false,
-                'error' => 'payload_too_large',
+                'error_code' => 'PAYLOAD_TOO_LARGE',
+                'message' => 'payload too large',
+                'details' => (object) [],
             ], 413);
         }
 
