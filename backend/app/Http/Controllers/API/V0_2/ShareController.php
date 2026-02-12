@@ -36,8 +36,44 @@ class ShareController extends Controller
      */
     public function click(Request $request, string $shareId)
     {
-        // 1) 手动 Validator：确保永远 JSON 返回（避免 ValidationException 走 302）
-        $v = Validator::make($request->all(), [
+        $shareIdFromRoute = (string) $request->route('shareId', '');
+        if ($shareIdFromRoute !== '') {
+            $shareId = $shareIdFromRoute;
+        }
+
+        // 二次包体检查：防止未来路由漏挂中间件时失守。
+        $raw = (string) $request->getContent();
+        $len = strlen($raw);
+        $max = (int) config('security_limits.public_event_max_payload_bytes', 16384);
+        if ($max > 0 && $len > $max) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'PAYLOAD_TOO_LARGE',
+                'message' => 'payload too large',
+                'details' => [
+                    'max_bytes' => $max,
+                    'len_bytes' => $len,
+                ],
+            ], 413);
+        }
+
+        try {
+            $share = Share::query()->where('id', $shareId)->first();
+        } catch (\Throwable $e) {
+            throw new NotFoundHttpException('Not Found');
+        }
+        if (!$share) {
+            throw new NotFoundHttpException('Not Found');
+        }
+
+        $attemptId = (string) ($share->attempt_id ?? '');
+        if ($attemptId === '') {
+            abort(404, 'share exists but attempt_id cannot be resolved.');
+        }
+
+        // 仅对白名单字段做验证，避免 $request->all() 带来的解析开销。
+        $input = $request->only(['anon_id', 'occurred_at', 'meta_json', 'ref', 'ua', 'ip', 'utm', 'experiment', 'version']);
+        $v = Validator::make($input, [
             'anon_id'     => ['nullable', 'string', 'max:128'],
             'occurred_at' => ['nullable', 'date'],
             'meta_json'   => ['nullable', 'array'],
@@ -52,19 +88,19 @@ class ShareController extends Controller
         }
 
         $data = $v->validated();
+        $meta = is_array($data['meta_json'] ?? null) ? $data['meta_json'] : [];
+        $metaMaxKeys = (int) config('security_limits.public_event_meta_max_keys', 50);
+        $metaMaxBytes = (int) config('security_limits.public_event_meta_max_bytes', 4096);
+        $keysCount = count($meta);
+        $metaJson = json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $metaBytes = is_string($metaJson) ? strlen($metaJson) : PHP_INT_MAX;
 
-        try {
-            $share = Share::query()->where('id', $shareId)->first();
-        } catch (\Throwable $e) {
-            throw new NotFoundHttpException('Not Found');
-        }
-        if (!$share) {
-            throw new NotFoundHttpException('Not Found');
-        }
-
-        $attemptId = (string) ($share->attempt_id ?? '');
-        if ($attemptId === '') {
-            abort(404, 'share exists but attempt_id cannot be resolved.');
+        if (($metaMaxKeys > 0 && $keysCount > $metaMaxKeys) || ($metaMaxBytes > 0 && $metaBytes > $metaMaxBytes)) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'META_TOO_LARGE',
+                'message' => 'meta too large',
+            ], 413);
         }
 
         // 2) 查 share_generate（用 share_id 关联）
@@ -108,8 +144,7 @@ class ShareController extends Controller
         $clientPlatform = (string) ($request->header('X-Client-Platform') ?? ($genMeta['client_platform'] ?? ''));
         $entryPage      = (string) ($request->header('X-Entry-Page') ?? '');
 
-        // 6) meta 合并（先拿客户端 meta_json）
-        $meta = is_array($data['meta_json'] ?? null) ? $data['meta_json'] : [];
+        // 6) meta 合并（先拿客户端 meta_json，已在前面完成限额校验）
 
         // ✅ share_click 最小字段（M3 漏斗串联）
         if (!isset($meta['share_id']))   $meta['share_id'] = $shareId;
