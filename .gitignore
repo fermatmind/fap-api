@@ -19,3 +19,21 @@ tools/compose/.env
 # local logs
 coscli.log
 coscli_output/
+
+# SEC-001 artifact hygiene denylist
+.env
+.env.*
+backend/.env
+backend/.env.*
+.git/
+node_modules/
+backend/node_modules/
+vendor/
+backend/vendor/
+
+backend/storage/logs/**
+!backend/storage/logs/.gitkeep
+backend/storage/framework/**
+!backend/storage/framework/.gitkeep
+backend/storage/app/private/reports/**
+!backend/storage/app/private/reports/.gitkeep

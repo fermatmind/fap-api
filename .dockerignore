@@ -12,3 +12,17 @@ backend/storage/framework/views
 backend/storage/framework/views/**
 backend/bootstrap/cache
 backend/bootstrap/cache/**
+
+# SEC-001 artifact hygiene denylist
+.git/
+.env
+.env.*
+backend/.env
+backend/.env.*
+node_modules/
+backend/node_modules/
+vendor/
+backend/vendor/
+backend/storage/logs/
+backend/storage/framework/
+backend/storage/app/private/reports/

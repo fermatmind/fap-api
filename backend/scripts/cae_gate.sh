@@ -12,6 +12,12 @@ fail() {
 
 echo "[CAE_GATE] start"
 
+SEC_ASSERT_SCRIPT="${REPO_DIR}/scripts/security/assert_artifact_clean.sh"
+if [ ! -x "${SEC_ASSERT_SCRIPT}" ]; then
+  fail "missing executable: scripts/security/assert_artifact_clean.sh"
+fi
+bash "${SEC_ASSERT_SCRIPT}" --mode repo --target "${REPO_DIR}"
+
 if [ -f "backend/.env" ]; then
   fail "backend/.env exists in workspace"
 fi
