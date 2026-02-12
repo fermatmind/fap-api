@@ -197,11 +197,52 @@ class MemoryController extends Controller
         }
 
         $service = app(MemoryService::class);
-        $result = $service->exportConfirmed($userId);
+        $download = filter_var($request->query('download', false), FILTER_VALIDATE_BOOL);
+        $limit = (int) $request->query('limit', 200);
+        $cursor = $request->query('cursor');
+        $cursor = is_string($cursor) ? $cursor : null;
+
+        if ($download) {
+            $probe = $service->exportConfirmedPage($userId, 1, null);
+            if (!($probe['ok'] ?? false)) {
+                return response()->json([
+                    'ok' => false,
+                    'error' => $probe['error'] ?? 'MEMORY_EXPORT_FAILED',
+                ], 500);
+            }
+
+            $filename = sprintf('memory_export_user_%d_%s.ndjson', $userId, now()->format('Ymd_His'));
+
+            return response()->streamDownload(function () use ($service, $userId): void {
+                foreach ($service->exportConfirmedCursor($userId) as $row) {
+                    $json = json_encode($row, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                    if ($json === false) {
+                        continue;
+                    }
+
+                    echo $json . "\n";
+                }
+            }, $filename, [
+                'Content-Type' => 'application/x-ndjson; charset=UTF-8',
+            ]);
+        }
+
+        $result = $service->exportConfirmedPage($userId, $limit, $cursor);
+        if (!($result['ok'] ?? false)) {
+            $error = (string) ($result['error'] ?? 'MEMORY_EXPORT_FAILED');
+            $status = $error === 'invalid_cursor' ? 422 : 500;
+
+            return response()->json([
+                'ok' => false,
+                'error' => $error,
+            ], $status);
+        }
 
         return response()->json([
-            'ok' => (bool) ($result['ok'] ?? false),
+            'ok' => true,
             'items' => $result['items'] ?? [],
+            'next_cursor' => $result['next_cursor'] ?? null,
+            'truncated' => (bool) ($result['truncated'] ?? false),
         ]);
     }
 
