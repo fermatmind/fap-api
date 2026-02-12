@@ -30,6 +30,13 @@ final class ApiErrorContractMiddlewareTest extends TestCase
                 ],
             ], 429);
         });
+
+        Route::middleware(NormalizeApiErrorContract::class)->get('/api/__pr52/error200', static function () {
+            return response()->json([
+                'error' => 'SOME_LEGACY_ERROR',
+                'message' => 'x',
+            ], 200);
+        });
     }
 
     public function test_string_error_gets_top_level_error_code(): void
@@ -58,6 +65,24 @@ final class ApiErrorContractMiddlewareTest extends TestCase
         $response->assertJsonPath('ok', false);
         $response->assertJsonPath('error_code', 'RATE_LIMIT_PUBLIC');
         $response->assertJsonPath('message', 'too many requests');
+        $response->assertJsonMissingPath('error');
+
+        $requestId = (string) $response->json('request_id', '');
+        $this->assertNotSame('', $requestId);
+
+        $decoded = json_decode((string) $response->getContent());
+        $this->assertIsObject($decoded);
+        $this->assertEquals((object) [], $decoded->details ?? null);
+    }
+
+    public function test_legacy_error_in_200_response_is_normalized(): void
+    {
+        $response = $this->getJson('/api/__pr52/error200');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', false);
+        $response->assertJsonPath('error_code', 'SOME_LEGACY_ERROR');
+        $response->assertJsonPath('message', 'x');
         $response->assertJsonMissingPath('error');
 
         $requestId = (string) $response->json('request_id', '');
