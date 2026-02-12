@@ -18,7 +18,7 @@ final class LimitApiPublicPayloadSize
         if ($max > 0 && $len > $max) {
             return response()->json([
                 'ok' => false,
-                'error' => 'payload_too_large',
+                'error_code' => 'PAYLOAD_TOO_LARGE',
                 'message' => 'payload too large',
                 'details' => [
                     'max_bytes' => $max,

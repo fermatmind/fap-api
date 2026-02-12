@@ -48,7 +48,7 @@ class ShareController extends Controller
         if ($max > 0 && $len > $max) {
             return response()->json([
                 'ok' => false,
-                'error' => 'payload_too_large',
+                'error_code' => 'PAYLOAD_TOO_LARGE',
                 'message' => 'payload too large',
                 'details' => [
                     'max_bytes' => $max,
@@ -98,7 +98,7 @@ class ShareController extends Controller
         if (($metaMaxKeys > 0 && $keysCount > $metaMaxKeys) || ($metaMaxBytes > 0 && $metaBytes > $metaMaxBytes)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'meta_too_large',
+                'error_code' => 'META_TOO_LARGE',
                 'message' => 'meta too large',
             ], 413);
         }
