@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Artifact hygiene gate
-        run: bash scripts/security/assert_artifact_clean.sh --mode repo --target "$GITHUB_WORKSPACE"
+        run: bash scripts/security/assert_no_tracked_sensitive_files.sh
 
       - name: Export source zip
         run: bash scripts/release/export_source_zip.sh
