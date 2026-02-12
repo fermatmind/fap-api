@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V0_2;
 
+use App\Http\Controllers\Concerns\ResolvesOrgId;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V0_2\BindEmailRequest;
 use App\Models\Attempt;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Schema;
 
 class MeController extends Controller
 {
+    use ResolvesOrgId;
+
     /**
      * GET /api/v0.2/me/attempts
      * Query:
@@ -43,8 +46,9 @@ class MeController extends Controller
         $perPage = (int) $request->query('per_page', 20);
         if ($perPage <= 0) $perPage = 20;
         if ($perPage > 50) $perPage = 50;
+        $orgId = $this->resolveOrgId($request);
 
-        $q = Attempt::query();
+        $q = Attempt::query()->where('org_id', $orgId);
 
         if ($userId !== null) {
             $q->where('user_id', $userId);

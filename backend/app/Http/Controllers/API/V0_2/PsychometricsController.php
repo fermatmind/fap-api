@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Concerns\ResolvesOrgId;
 use App\Models\Attempt;
 use App\Services\Psychometrics\NormsRegistry;
 use Illuminate\Http\JsonResponse;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Schema;
 
 class PsychometricsController extends Controller
 {
+    use ResolvesOrgId;
+
     public function __construct(private NormsRegistry $normsRegistry)
     {
     }
@@ -59,12 +62,14 @@ class PsychometricsController extends Controller
 
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
+        $orgId = $this->resolveOrgId($request);
         $user = $userId !== null ? trim($userId) : '';
         $anon = $anonId !== null ? trim($anonId) : '';
 
         $query = DB::table('attempt_quality')
             ->join('attempts', 'attempts.id', '=', 'attempt_quality.attempt_id')
             ->where('attempt_quality.attempt_id', $id)
+            ->where('attempts.org_id', $orgId)
             ->select('attempt_quality.*');
 
         if ($user === '' && $anon === '') {
@@ -113,7 +118,8 @@ class PsychometricsController extends Controller
     {
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
-        $attempt = $this->ownedAttemptQuery($id, $userId, $anonId)->firstOrFail();
+        $orgId = $this->resolveOrgId($request);
+        $attempt = $this->ownedAttemptQuery($id, $orgId, $userId, $anonId)->firstOrFail();
 
         $snapshot = $attempt->calculation_snapshot_json;
         if (is_string($snapshot)) {
@@ -184,10 +190,13 @@ class PsychometricsController extends Controller
 
     private function ownedAttemptQuery(
         string $attemptId,
+        int $orgId,
         ?string $userId,
         ?string $anonId
     ): \Illuminate\Database\Eloquent\Builder {
-        $query = Attempt::query()->where('id', $attemptId);
+        $query = Attempt::query()
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId);
         $user = $userId !== null ? trim($userId) : '';
         $anon = $anonId !== null ? trim($anonId) : '';
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\ResolvesOrgId;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Abuse\RateLimiter;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Schema;
 
 class LookupController extends Controller
 {
+    use ResolvesOrgId;
+
     /**
      * GET /api/v0.2/lookup/ticket/{code}
      */
@@ -49,8 +52,11 @@ class LookupController extends Controller
             ], 422);
         }
 
+        $orgId = $this->resolveOrgId($request);
+
         $attempt = Attempt::query()
             ->where('ticket_code', $normalized)
+            ->where('org_id', $orgId)
             ->first();
 
         if (!$attempt) {
@@ -153,11 +159,35 @@ class LookupController extends Controller
             }
         }
 
+        $orgId = $this->resolveOrgId($request);
+
         $rows = Attempt::query()
             ->select(['id', 'ticket_code'])
             ->whereIn('id', $attemptIds)
+            ->where('org_id', $orgId)
             ->get()
             ->keyBy('id');
+
+        $missing = [];
+        foreach ($attemptIds as $id) {
+            if (!$rows->has($id)) {
+                $missing[] = $id;
+            }
+        }
+
+        if ($missing !== []) {
+            $logger->log('lookup_device', false, $request, null, [
+                'error' => 'NOT_FOUND',
+                'attempt_id_count' => count($attemptIds),
+                'missing_count' => count($missing),
+            ]);
+
+            return response()->json([
+                'ok' => false,
+                'error' => 'not_found',
+                'message' => 'attempt not found.',
+            ], 404);
+        }
 
         $items = [];
         foreach ($attemptIds as $id) {

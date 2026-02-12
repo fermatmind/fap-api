@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_2;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Concerns\ResolvesOrgId;
 use App\Models\Attempt;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ValidityFeedbackController extends Controller
 {
+    use ResolvesOrgId;
+
     /**
      * POST /api/v0.2/attempts/{attempt_id}/feedback
      */
@@ -33,8 +36,12 @@ class ValidityFeedbackController extends Controller
             'free_text' => ['sometimes', 'string', 'max:200'],
         ]);
 
+        $orgId = $this->resolveOrgId($request);
+
         /** @var Attempt|null $attempt */
-        $attempt = Attempt::where('id', $attemptId)->first();
+        $attempt = Attempt::where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->first();
         if (!$attempt) {
             return response()->json([
                 'ok' => false,
