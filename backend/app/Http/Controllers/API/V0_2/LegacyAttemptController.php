@@ -11,37 +11,51 @@ use Illuminate\Http\Request;
 
 class LegacyAttemptController extends Controller
 {
-    public function __construct(private LegacyMbtiAttemptService $service)
-    {
-    }
+    public function __construct(private LegacyMbtiAttemptService $service) {}
 
     public function health(Request $request): JsonResponse
     {
-        return $this->service->health();
+        return response()->json($this->service->health());
     }
 
     public function scaleMeta(Request $request): JsonResponse
     {
-        return $this->service->scaleMeta();
+        return response()->json($this->service->scaleMeta());
     }
 
     public function questions(Request $request): JsonResponse
     {
-        return $this->service->questions();
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? $request->header('X-Request-Id', $request->header('X-Request-ID', ''))));
+
+        $payload = $this->service->questions(
+            (string) ($request->header('X-Region') ?: $request->input('region') ?: ''),
+            (string) ($request->header('X-Locale') ?: $request->input('locale') ?: ''),
+            $requestId !== '' ? $requestId : null,
+        );
+
+        return response()->json($payload);
     }
 
     public function storeAttempt(Request $request): JsonResponse
     {
-        return $this->service->storeAttempt($request);
+        return $this->toJson($this->service->storeAttempt($request));
     }
 
     public function startAttempt(Request $request, ?string $id = null): JsonResponse
     {
-        return $this->service->startAttempt($request, $id);
+        return $this->toJson($this->service->startAttempt($request, $id));
     }
 
     public function upsertResult(Request $request, string $id): JsonResponse
     {
-        return $this->service->upsertResult($request, $id);
+        return $this->toJson($this->service->upsertResult($request, $id));
+    }
+
+    private function toJson(array $payload): JsonResponse
+    {
+        $status = (int) ($payload['status_code'] ?? 200);
+        unset($payload['status_code']);
+
+        return response()->json($payload, $status);
     }
 }

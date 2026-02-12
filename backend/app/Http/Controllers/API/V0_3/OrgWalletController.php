@@ -7,7 +7,6 @@ use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class OrgWalletController extends Controller
 {
@@ -26,14 +25,6 @@ class OrgWalletController extends Controller
 
         if ((int) $org_id !== $orgId || $orgId <= 0 || !$this->isAdminRole($role)) {
             return $this->orgNotFound();
-        }
-
-        if (!Schema::hasTable('benefit_wallets')) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'TABLE_MISSING',
-                'message' => 'benefit_wallets table missing.',
-            ], 500);
         }
 
         $items = DB::table('benefit_wallets')
@@ -59,19 +50,11 @@ class OrgWalletController extends Controller
             return $this->orgNotFound();
         }
 
-        if (!Schema::hasTable('benefit_wallet_ledgers')) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'TABLE_MISSING',
-                'message' => 'benefit_wallet_ledgers table missing.',
-            ], 500);
-        }
-
         $benefitCode = strtoupper(trim($benefit_code));
         if ($benefitCode === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'BENEFIT_REQUIRED',
+                'error_code' => 'BENEFIT_REQUIRED',
                 'message' => 'benefit_code is required.',
             ], 400);
         }
@@ -106,7 +89,7 @@ class OrgWalletController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'ORG_NOT_FOUND',
+            'error_code' => 'ORG_NOT_FOUND',
             'message' => 'org not found.',
         ], 404);
     }

@@ -42,7 +42,7 @@ final class InviteService
         if ($token === '') {
             return [
                 'ok' => false,
-                'error' => 'INVITE_TOKEN_REQUIRED',
+                'error_code' => 'INVITE_TOKEN_REQUIRED',
                 'message' => 'invite token required.',
             ];
         }
@@ -51,7 +51,7 @@ final class InviteService
         if (!$invite) {
             return [
                 'ok' => false,
-                'error' => 'INVITE_NOT_FOUND',
+                'error_code' => 'INVITE_NOT_FOUND',
                 'message' => 'invite not found.',
             ];
         }
@@ -59,7 +59,7 @@ final class InviteService
         if (!empty($invite->accepted_at)) {
             return [
                 'ok' => false,
-                'error' => 'INVITE_ALREADY_ACCEPTED',
+                'error_code' => 'INVITE_ALREADY_ACCEPTED',
                 'message' => 'invite already accepted.',
             ];
         }
@@ -69,14 +69,14 @@ final class InviteService
                 if (now()->greaterThan(\Illuminate\Support\Carbon::parse($invite->expires_at))) {
                     return [
                         'ok' => false,
-                        'error' => 'INVITE_EXPIRED',
+                        'error_code' => 'INVITE_EXPIRED',
                         'message' => 'invite expired.',
                     ];
                 }
             } catch (\Throwable $e) {
                 return [
                     'ok' => false,
-                    'error' => 'INVITE_INVALID',
+                    'error_code' => 'INVITE_INVALID',
                     'message' => 'invite invalid.',
                 ];
             }

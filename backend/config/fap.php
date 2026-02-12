@@ -10,6 +10,7 @@ return [
 
     // Profile / scoring
     'profile_version' => env('FAP_PROFILE_VERSION', 'mbti32-v2.5'),
+    'legacy_org_id' => (int) env('FAP_LEGACY_ORG_ID', 1),
 
     // Assessment driver registry (scales_registry.assessment_driver)
     'assessment_drivers' => [

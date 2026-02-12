@@ -42,7 +42,7 @@ class ScalesController extends Controller
         if ($code === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'SCALE_REQUIRED',
+                'error_code' => 'SCALE_REQUIRED',
                 'message' => 'scale_code is required.',
             ], 400);
         }
@@ -51,7 +51,7 @@ class ScalesController extends Controller
         if (!$row) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'scale not found.',
             ], 404);
         }
@@ -72,7 +72,7 @@ class ScalesController extends Controller
         if ($code === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'SCALE_REQUIRED',
+                'error_code' => 'SCALE_REQUIRED',
                 'message' => 'scale_code is required.',
             ], 400);
         }
@@ -81,7 +81,7 @@ class ScalesController extends Controller
         if (!$row) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'scale not found.',
             ], 404);
         }
@@ -91,7 +91,7 @@ class ScalesController extends Controller
         if ($packId === '' || $dirVersion === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'PACK_NOT_CONFIGURED',
+                'error_code' => 'PACK_NOT_CONFIGURED',
                 'message' => 'scale pack not configured.',
             ], 500);
         }
@@ -104,11 +104,11 @@ class ScalesController extends Controller
 
         $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
         if (!($loaded['ok'] ?? false)) {
-            $error = (string) ($loaded['error'] ?? 'READ_FAILED');
+            $error = (string) ($loaded['error_code'] ?? $loaded['error'] ?? 'READ_FAILED');
             $status = $error === 'NOT_FOUND' ? 404 : 500;
             return response()->json([
                 'ok' => false,
-                'error' => $error,
+                'error_code' => $error,
                 'message' => (string) ($loaded['message'] ?? 'failed to load questions'),
             ], $status);
         }

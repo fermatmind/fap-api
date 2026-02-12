@@ -3,7 +3,6 @@
 namespace App\Services\Commerce;
 
 use App\Models\Sku;
-use Illuminate\Support\Facades\Schema;
 
 class SkuCatalog
 {
@@ -15,10 +14,6 @@ class SkuCatalog
 
     public function getActiveSku(string $sku, ?string $scaleCode = null): ?Sku
     {
-        if (!Schema::hasTable('skus')) {
-            return null;
-        }
-
         $sku = $this->normalizeSku($sku);
         if ($sku === '') {
             return null;
@@ -40,10 +35,6 @@ class SkuCatalog
 
     public function listActiveSkus(?string $scaleCode = null): array
     {
-        if (!Schema::hasTable('skus')) {
-            return [];
-        }
-
         $items = [];
         $rows = $this->baseQuery($scaleCode, true)
             ->orderBy('sku')
@@ -79,16 +70,6 @@ class SkuCatalog
             return [
                 'requested_sku' => null,
                 'effective_sku' => null,
-                'anchor_sku' => null,
-                'entitlement_id' => null,
-                'sku_row' => null,
-            ];
-        }
-
-        if (!Schema::hasTable('skus')) {
-            return [
-                'requested_sku' => $requestedSku,
-                'effective_sku' => $requestedSku,
                 'anchor_sku' => null,
                 'entitlement_id' => null,
                 'sku_row' => null,
@@ -147,7 +128,7 @@ class SkuCatalog
     public function isAnchorSku(string $sku, ?string $scaleCode = null): bool
     {
         $sku = $this->normalizeSku($sku);
-        if ($sku === '' || !Schema::hasTable('skus')) {
+        if ($sku === '') {
             return false;
         }
 
@@ -162,7 +143,7 @@ class SkuCatalog
     public function anchorForSku(string $sku, ?string $scaleCode = null): ?string
     {
         $sku = $this->normalizeSku($sku);
-        if ($sku === '' || !Schema::hasTable('skus')) {
+        if ($sku === '') {
             return null;
         }
 
@@ -186,10 +167,6 @@ class SkuCatalog
 
     public function defaultAnchorSku(?string $scaleCode = null): ?string
     {
-        if (!Schema::hasTable('skus')) {
-            return null;
-        }
-
         $rows = $this->baseQuery($scaleCode, false)->orderBy('sku')->get();
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row);
@@ -264,20 +241,12 @@ class SkuCatalog
 
     private function findSkuRow(string $sku, ?string $scaleCode = null): ?Sku
     {
-        if (!Schema::hasTable('skus')) {
-            return null;
-        }
-
         $query = $this->baseQuery($scaleCode, false)->where('sku', $sku);
         return $query->first();
     }
 
     private function resolveEffectiveSkuFromAnchor(string $anchorSku, ?string $scaleCode = null): ?string
     {
-        if (!Schema::hasTable('skus')) {
-            return null;
-        }
-
         $rows = $this->baseQuery($scaleCode, true)->orderBy('sku')->get();
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row);
@@ -292,10 +261,6 @@ class SkuCatalog
 
     private function resolveAnchorSkuForEffective(string $effectiveSku, ?string $scaleCode = null): ?string
     {
-        if (!Schema::hasTable('skus')) {
-            return null;
-        }
-
         $rows = $this->baseQuery($scaleCode, false)->orderBy('sku')->get();
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row);

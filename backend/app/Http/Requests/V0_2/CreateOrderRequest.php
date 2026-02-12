@@ -28,7 +28,6 @@ class CreateOrderRequest extends FormRequest
             'provider' => $provider !== '' ? $provider : null,
             'provider_order_id' => $providerOrderId !== '' ? $providerOrderId : null,
             'request_id' => $this->header('X-Request-Id', $this->input('request_id', null)),
-            'org_id' => $this->input('org_id', 1),
         ]);
     }
 
@@ -47,7 +46,6 @@ class CreateOrderRequest extends FormRequest
             'attempt_id' => ['nullable', 'string', 'max:64'],
             'platform' => ['nullable', 'string', 'max:32'],
             'pay_source' => ['nullable', 'string', 'max:64'],
-            'org_id' => ['nullable', 'integer', 'min:1'],
             'ip' => ['nullable', 'string', 'max:45'],
         ];
     }
@@ -110,7 +108,7 @@ class CreateOrderRequest extends FormRequest
             'provider' => $this->provider(),
             'provider_order_id' => $this->providerOrderId(),
             'request_id' => $this->requestId(),
-            'org_id' => (int) ($this->validated()['org_id'] ?? 1),
+            'org_id' => $this->legacyOrgId(),
             'ip' => $this->stringOrNull($this->input('ip', null)),
         ];
     }
@@ -138,5 +136,12 @@ class CreateOrderRequest extends FormRequest
 
         $v = trim((string) $value);
         return $v !== '' ? $v : null;
+    }
+
+    private function legacyOrgId(): int
+    {
+        $orgId = (int) config('fap.legacy_org_id', 1);
+
+        return $orgId > 0 ? $orgId : 1;
     }
 }

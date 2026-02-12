@@ -3,9 +3,7 @@
 namespace App\Services\Commerce;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use App\Services\Commerce\SkuCatalog;
 
 class OrderManager
 {
@@ -13,8 +11,7 @@ class OrderManager
 
     public function __construct(
         private SkuCatalog $skus,
-    ) {
-    }
+    ) {}
 
     public function createOrder(
         int $orgId,
@@ -26,17 +23,11 @@ class OrderManager
         string $provider,
         ?string $idempotencyKey = null
     ): array {
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-        if (!Schema::hasTable('skus')) {
-            return $this->tableMissing('skus');
-        }
-
         $requestedSku = $this->skus->normalizeSku($sku);
         if ($requestedSku === '') {
             return $this->badRequest('SKU_REQUIRED', 'sku is required.');
         }
+
         $resolved = $this->skus->resolveSkuMeta($requestedSku);
         $effectiveSku = strtoupper(trim((string) ($resolved['effective_sku'] ?? '')));
         $entitlementId = $resolved['entitlement_id'] ?? null;
@@ -56,7 +47,7 @@ class OrderManager
         }
 
         $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
-        $useIdempotency = $idempotencyKey !== '' && Schema::hasColumn('orders', 'idempotency_key');
+        $useIdempotency = $idempotencyKey !== '';
 
         $createRow = function () use (
             $orgId,
@@ -93,24 +84,16 @@ class OrderManager
                 'paid_at' => null,
                 'created_at' => $now,
                 'updated_at' => $now,
+                'requested_sku' => $requestedSku,
+                'effective_sku' => $effectiveSku !== '' ? $effectiveSku : $skuToLookup,
+                'entitlement_id' => $entitlementId,
             ];
 
             if ($useIdempotency) {
                 $row['idempotency_key'] = $idempotencyKey;
             }
-            if (Schema::hasColumn('orders', 'requested_sku')) {
-                $row['requested_sku'] = $requestedSku;
-            }
-            if (Schema::hasColumn('orders', 'effective_sku')) {
-                $row['effective_sku'] = $effectiveSku !== '' ? $effectiveSku : $skuToLookup;
-            }
-            if (Schema::hasColumn('orders', 'entitlement_id')) {
-                $row['entitlement_id'] = $entitlementId;
-            }
 
-            $row = $this->applyLegacyColumns($row, $skuRow);
-
-            return $row;
+            return $this->applyLegacyColumns($row);
         };
 
         if ($useIdempotency) {
@@ -163,38 +146,29 @@ class OrderManager
 
     public function getOrder(int $orgId, ?string $userId, ?string $anonId, string $orderNo): array
     {
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-
         $orderNo = trim($orderNo);
         if ($orderNo === '') {
             return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
         }
 
-        $query = DB::table('orders')->where('order_no', $orderNo);
-        if (Schema::hasColumn('orders', 'org_id')) {
-            $query->where('org_id', $orgId);
-        } elseif ($orgId !== 0) {
-            return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
-        }
+        $query = DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId);
 
         $uid = $this->trimOrNull($userId);
         $aid = $this->trimOrNull($anonId);
-        $hasUserCol = Schema::hasColumn('orders', 'user_id');
-        $hasAnonCol = Schema::hasColumn('orders', 'anon_id');
 
         if ($uid === null && $aid === null) {
             $query->whereRaw('1=0');
         } else {
-            $query->where(function ($q) use ($uid, $aid, $hasUserCol, $hasAnonCol) {
+            $query->where(function ($q) use ($uid, $aid) {
                 $applied = false;
 
-                if ($uid !== null && $hasUserCol) {
+                if ($uid !== null) {
                     $q->where('user_id', $uid);
                     $applied = true;
                 }
-                if ($aid !== null && $hasAnonCol) {
+                if ($aid !== null) {
                     if ($applied) {
                         $q->orWhere('anon_id', $aid);
                     } else {
@@ -225,23 +199,16 @@ class OrderManager
         ?string $externalTradeNo = null,
         ?string $paidAt = null
     ): array {
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-
         $orderNo = trim($orderNo);
         if ($orderNo === '') {
             return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
         }
 
-        $query = DB::table('orders')->where('order_no', $orderNo);
-        if (Schema::hasColumn('orders', 'org_id')) {
-            $query->where('org_id', $orgId);
-        } elseif ($orgId !== 0) {
-            return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
-        }
-
-        $order = $query->lockForUpdate()->first();
+        $order = DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->lockForUpdate()
+            ->first();
         if (!$order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
@@ -269,23 +236,22 @@ class OrderManager
             'updated_at' => $now,
         ];
 
-        if (Schema::hasColumn('orders', 'paid_at') && empty($order->paid_at)) {
+        if (empty($order->paid_at)) {
             $updates['paid_at'] = ($paidAt !== null && $paidAt !== '') ? $paidAt : $now;
         }
 
-        if ($externalTradeNo && Schema::hasColumn('orders', 'external_trade_no')) {
+        if ($externalTradeNo) {
             $updates['external_trade_no'] = $externalTradeNo;
         }
 
-        $updateQuery = DB::table('orders')->where('order_no', $orderNo);
-        if (Schema::hasColumn('orders', 'org_id')) {
-            $updateQuery->where('org_id', $orgId);
-        }
-        $updateQuery->where('status', $fromStatus);
+        $updated = DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->where('status', $fromStatus)
+            ->update($updates);
 
-        $updated = $updateQuery->update($updates);
         if ($updated === 0) {
-            $current = DB::table('orders')->where('order_no', $orderNo)->first();
+            $current = DB::table('orders')->where('order_no', $orderNo)->where('org_id', $orgId)->first();
             if (!$current) {
                 return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
             }
@@ -301,7 +267,7 @@ class OrderManager
             return $this->conflict('ORDER_STATUS_CHANGED', 'order status changed.');
         }
 
-        $order = DB::table('orders')->where('order_no', $orderNo)->first();
+        $order = DB::table('orders')->where('order_no', $orderNo)->where('org_id', $orgId)->first();
 
         return [
             'ok' => true,
@@ -312,10 +278,6 @@ class OrderManager
 
     public function transition(string $orderNo, string $toStatus, ?int $orgId = null): array
     {
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-
         $orderNo = trim($orderNo);
         $toStatus = strtolower(trim($toStatus));
         if ($orderNo === '' || $toStatus === '') {
@@ -323,7 +285,7 @@ class OrderManager
         }
 
         $query = DB::table('orders')->where('order_no', $orderNo);
-        if ($orgId !== null && Schema::hasColumn('orders', 'org_id')) {
+        if ($orgId !== null) {
             $query->where('org_id', $orgId);
         }
 
@@ -353,20 +315,20 @@ class OrderManager
             'updated_at' => now(),
         ];
 
-        if ($toStatus === 'paid' && Schema::hasColumn('orders', 'paid_at')) {
+        if ($toStatus === 'paid') {
             $updates['paid_at'] = $updates['updated_at'];
         }
 
-        if ($toStatus === 'fulfilled' && Schema::hasColumn('orders', 'fulfilled_at')) {
+        if ($toStatus === 'fulfilled') {
             $updates['fulfilled_at'] = $updates['updated_at'];
         }
 
-        if ($toStatus === 'refunded' && Schema::hasColumn('orders', 'refunded_at')) {
+        if ($toStatus === 'refunded') {
             $updates['refunded_at'] = $updates['updated_at'];
         }
 
         $updateQuery = DB::table('orders')->where('order_no', $orderNo);
-        if ($orgId !== null && Schema::hasColumn('orders', 'org_id')) {
+        if ($orgId !== null) {
             $updateQuery->where('org_id', $orgId);
         }
         $updateQuery->where('status', $fromStatus);
@@ -415,41 +377,19 @@ class OrderManager
         return false;
     }
 
-    private function applyLegacyColumns(array $row, object $skuRow): array
+    private function applyLegacyColumns(array $row): array
     {
-        if (Schema::hasColumn('orders', 'amount_total')) {
-            $row['amount_total'] = $row['amount_cents'];
-        }
-        if (Schema::hasColumn('orders', 'amount_refunded')) {
-            $row['amount_refunded'] = 0;
-        }
-        if (Schema::hasColumn('orders', 'item_sku')) {
-            $row['item_sku'] = $row['sku'];
-        }
-        if (Schema::hasColumn('orders', 'provider_order_id')) {
-            $row['provider_order_id'] = null;
-        }
-        if (Schema::hasColumn('orders', 'device_id')) {
-            $row['device_id'] = null;
-        }
-        if (Schema::hasColumn('orders', 'request_id')) {
-            $row['request_id'] = null;
-        }
-        if (Schema::hasColumn('orders', 'created_ip')) {
-            $row['created_ip'] = null;
-        }
-        if (Schema::hasColumn('orders', 'fulfilled_at')) {
-            $row['fulfilled_at'] = null;
-        }
-        if (Schema::hasColumn('orders', 'refunded_at')) {
-            $row['refunded_at'] = null;
-        }
-        if (Schema::hasColumn('orders', 'refund_amount_cents')) {
-            $row['refund_amount_cents'] = null;
-        }
-        if (Schema::hasColumn('orders', 'refund_reason')) {
-            $row['refund_reason'] = null;
-        }
+        $row['amount_total'] = $row['amount_cents'];
+        $row['amount_refunded'] = 0;
+        $row['item_sku'] = $row['sku'];
+        $row['provider_order_id'] = null;
+        $row['device_id'] = null;
+        $row['request_id'] = null;
+        $row['created_ip'] = null;
+        $row['fulfilled_at'] = null;
+        $row['refunded_at'] = null;
+        $row['refund_amount_cents'] = null;
+        $row['refund_reason'] = null;
 
         return $row;
     }
@@ -467,15 +407,6 @@ class OrderManager
     private function isStubEnabled(): bool
     {
         return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
-    }
-
-    private function tableMissing(string $table): array
-    {
-        return [
-            'ok' => false,
-            'error' => 'TABLE_MISSING',
-            'message' => "{$table} table missing.",
-        ];
     }
 
     private function notFound(string $code, string $message): array
@@ -508,6 +439,7 @@ class OrderManager
     private function trimOrNull(?string $value): ?string
     {
         $value = $value !== null ? trim($value) : '';
+
         return $value !== '' ? $value : null;
     }
 
@@ -517,9 +449,11 @@ class OrderManager
         if ($key === '') {
             return '';
         }
+
         if (strlen($key) > 128) {
             $key = substr($key, 0, 128);
         }
+
         return $key;
     }
 
@@ -528,15 +462,12 @@ class OrderManager
         string $provider,
         string $idempotencyKey,
         bool $lockForUpdate = false
-    ): ?object
-    {
-        $query = DB::table('orders')->where('idempotency_key', $idempotencyKey);
-        if (Schema::hasColumn('orders', 'org_id')) {
-            $query->where('org_id', $orgId);
-        }
-        if (Schema::hasColumn('orders', 'provider')) {
-            $query->where('provider', $provider);
-        }
+    ): ?object {
+        $query = DB::table('orders')
+            ->where('idempotency_key', $idempotencyKey)
+            ->where('org_id', $orgId)
+            ->where('provider', $provider);
+
         if ($lockForUpdate) {
             $query->lockForUpdate();
         }

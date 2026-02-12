@@ -2,23 +2,17 @@
 
 namespace App\Services\Org;
 
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Exceptions\Api\ApiProblemException;
 
 final class Rbac
 {
-    public function __construct(private MembershipService $memberships)
-    {
-    }
+    public function __construct(private MembershipService $memberships) {}
 
     public function assertRoleIn(int $orgId, int $userId, array $roles): string
     {
         $role = $this->memberships->getRole($orgId, $userId);
-        if ($role === null || !in_array($role, $roles, true)) {
-            throw new HttpResponseException(response()->json([
-                'ok' => false,
-                'error' => 'ORG_NOT_FOUND',
-                'message' => 'org not found.',
-            ], 404));
+        if ($role === null || ! in_array($role, $roles, true)) {
+            throw new ApiProblemException(404, 'ORG_NOT_FOUND', 'org not found.');
         }
 
         return $role;

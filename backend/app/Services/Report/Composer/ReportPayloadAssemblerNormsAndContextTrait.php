@@ -4,7 +4,6 @@ namespace App\Services\Report\Composer;
 
 use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 trait ReportPayloadAssemblerNormsAndContextTrait
 {
@@ -20,9 +19,6 @@ trait ReportPayloadAssemblerNormsAndContextTrait
     private function buildNormsPayload(string $packId, array $scoresPct): ?array
     {
         if (!$this->isNormsEnabled()) {
-            return null;
-        }
-        if (!Schema::hasTable('norms_versions') || !Schema::hasTable('norms_table')) {
             return null;
         }
 

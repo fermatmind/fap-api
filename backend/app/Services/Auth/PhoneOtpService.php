@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Exceptions\Api\ApiProblemException;
 use Illuminate\Support\Facades\Cache;
 
 class PhoneOtpService
@@ -10,8 +11,11 @@ class PhoneOtpService
      * MVP defaults (可后续移到 config/fap.php)
      */
     private int $ttlSeconds = 300;      // 5 min
+
     private int $maxSendPerIp = 20;     // per hour
+
     private int $maxSendPerPhone = 10;  // per hour
+
     private int $maxFail = 8;           // per ttl window
 
     /**
@@ -31,9 +35,9 @@ class PhoneOtpService
         Cache::put($this->failKey($p, $scene), 0, $this->ttlSeconds);
 
         $res = [
-            'ok'          => true,
-            'phone'       => $p,
-            'scene'       => $scene,
+            'ok' => true,
+            'phone' => $p,
+            'scene' => $scene,
             'ttl_seconds' => $this->ttlSeconds,
         ];
 
@@ -65,26 +69,27 @@ class PhoneOtpService
             if (is_string($dev) && $dev !== '' && hash_equals($dev, $code)) {
                 Cache::forget($this->otpKey($p, $scene));
                 Cache::forget($this->failKey($p, $scene));
+
                 return ['ok' => true, 'phone' => $p, 'scene' => $scene, 'via' => 'dev_code'];
             }
         }
 
         $expected = Cache::get($this->otpKey($p, $scene));
-        if (!is_string($expected) || $expected === '') {
-            return ['ok' => false, 'error' => 'OTP_MISSING', 'message' => 'OTP expired or not found.'];
+        if (! is_string($expected) || $expected === '') {
+            throw new ApiProblemException(400, 'OTP_INVALID', 'OTP expired or not found.');
         }
 
-        if (!hash_equals($expected, $code)) {
+        if (! hash_equals($expected, $code)) {
             $fails = (int) Cache::get($this->failKey($p, $scene), 0);
             $fails++;
             Cache::put($this->failKey($p, $scene), $fails, $this->ttlSeconds);
 
             if ($fails >= $this->maxFail) {
                 Cache::forget($this->otpKey($p, $scene));
-                return ['ok' => false, 'error' => 'OTP_LOCKED', 'message' => 'Too many failed attempts.'];
+                throw new ApiProblemException(429, 'RATE_LIMITED', 'Too many failed attempts.');
             }
 
-            return ['ok' => false, 'error' => 'OTP_INVALID', 'message' => 'Invalid code.'];
+            throw new ApiProblemException(400, 'OTP_INVALID', 'Invalid code.');
         }
 
         Cache::forget($this->otpKey($p, $scene));
@@ -100,6 +105,7 @@ class PhoneOtpService
     private function normalizeScene(string $scene): string
     {
         $s = strtolower(trim($scene));
+
         return $s !== '' ? $s : 'login';
     }
 
@@ -116,11 +122,13 @@ class PhoneOtpService
         $raw = preg_replace('/[^\d\+]/', '', $raw) ?? '';
         $raw = trim($raw);
 
-        if ($raw === '') return '';
+        if ($raw === '') {
+            return '';
+        }
 
         if ($raw[0] !== '+') {
             // MVP：默认中国区
-            $raw = '+86' . ltrim($raw, '0');
+            $raw = '+86'.ltrim($raw, '0');
         }
 
         return $raw;
@@ -153,11 +161,7 @@ class PhoneOtpService
             $k = $this->rateKeyIp($ip);
             $n = (int) Cache::get($k, 0);
             if ($n >= $this->maxSendPerIp) {
-                abort(response()->json([
-                    'ok' => false,
-                    'error' => 'RATE_LIMITED',
-                    'message' => 'Too many requests from this IP.',
-                ], 429));
+                throw new ApiProblemException(429, 'RATE_LIMITED', 'Too many requests from this IP.');
             }
             Cache::put($k, $n + 1, 3600);
         }
@@ -167,11 +171,7 @@ class PhoneOtpService
             $k = $this->rateKeyPhone($phone);
             $n = (int) Cache::get($k, 0);
             if ($n >= $this->maxSendPerPhone) {
-                abort(response()->json([
-                    'ok' => false,
-                    'error' => 'RATE_LIMITED',
-                    'message' => 'Too many OTP requests for this phone.',
-                ], 429));
+                throw new ApiProblemException(429, 'RATE_LIMITED', 'Too many OTP requests for this phone.');
             }
             Cache::put($k, $n + 1, 3600);
         }
@@ -180,6 +180,7 @@ class PhoneOtpService
     private function generateCode(): string
     {
         $n = random_int(0, 999999);
+
         return str_pad((string) $n, 6, '0', STR_PAD_LEFT);
     }
 
@@ -195,7 +196,10 @@ class PhoneOtpService
     {
         $v = (string) env('FAP_OTP_DEV_CODE', '');
         $v = trim($v);
-        if ($v === '') return null;
+        if ($v === '') {
+            return null;
+        }
+
         return preg_match('/^\d{6}$/', $v) ? $v : null;
     }
 }

@@ -11,7 +11,6 @@ use App\Support\RegionContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class CommerceController extends Controller
@@ -30,10 +29,6 @@ class CommerceController extends Controller
      */
     public function listSkus(Request $request): JsonResponse
     {
-        if (!Schema::hasTable('skus')) {
-            abort(500, 'skus table missing.');
-        }
-
         $scale = strtoupper(trim((string) $request->query('scale', '')));
         if ($scale === '') {
             abort(400, 'scale is required.');
@@ -58,6 +53,9 @@ class CommerceController extends Controller
             'target_attempt_id' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
+            'org_id' => ['prohibited'],
+            'user_id' => ['prohibited'],
+            'anon_id' => ['prohibited'],
         ]);
 
         $requestedProvider = $this->resolveRequestedProvider($payload, $providerFromRoute);

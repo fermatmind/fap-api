@@ -6,7 +6,6 @@ use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class BenefitWalletService
 {
@@ -20,13 +19,6 @@ class BenefitWalletService
 
     public function topUp(int $orgId, string $benefitCode, int $delta, string $idempotencyKey, array $meta = []): array
     {
-        if (!Schema::hasTable('benefit_wallets')) {
-            return $this->tableMissing('benefit_wallets');
-        }
-        if (!Schema::hasTable('benefit_wallet_ledgers')) {
-            return $this->tableMissing('benefit_wallet_ledgers');
-        }
-
         $benefitCode = strtoupper(trim($benefitCode));
         if ($benefitCode === '') {
             return $this->badRequest('BENEFIT_REQUIRED', 'benefit_code is required.');
@@ -116,16 +108,6 @@ class BenefitWalletService
 
     public function consume(int $orgId, string $benefitCode, string $attemptId): array
     {
-        if (!Schema::hasTable('benefit_wallets')) {
-            return $this->tableMissing('benefit_wallets');
-        }
-        if (!Schema::hasTable('benefit_wallet_ledgers')) {
-            return $this->tableMissing('benefit_wallet_ledgers');
-        }
-        if (!Schema::hasTable('benefit_consumptions')) {
-            return $this->tableMissing('benefit_consumptions');
-        }
-
         $benefitCode = strtoupper(trim($benefitCode));
         if ($benefitCode === '') {
             return $this->badRequest('BENEFIT_REQUIRED', 'benefit_code is required.');
@@ -334,15 +316,6 @@ class BenefitWalletService
             ->where('org_id', $orgId)
             ->where('benefit_code', $benefitCode)
             ->first();
-    }
-
-    private function tableMissing(string $table): array
-    {
-        return [
-            'ok' => false,
-            'error' => 'TABLE_MISSING',
-            'message' => "{$table} table missing.",
-        ];
     }
 
     private function badRequest(string $code, string $message): array

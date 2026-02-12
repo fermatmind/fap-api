@@ -15,7 +15,7 @@ final class ApiPagination
      *     links: array{first:?string, last:?string, prev:?string, next:?string}
      * }
      */
-    public static function fromLengthAwarePaginator(LengthAwarePaginator $paginator): array
+    public static function fromPaginator(LengthAwarePaginator $paginator): array
     {
         $lastPage = max(1, (int) $paginator->lastPage());
 
@@ -34,5 +34,10 @@ final class ApiPagination
                 'next' => $paginator->nextPageUrl(),
             ],
         ];
+    }
+
+    public static function fromLengthAwarePaginator(LengthAwarePaginator $paginator): array
+    {
+        return self::fromPaginator($paginator);
     }
 }

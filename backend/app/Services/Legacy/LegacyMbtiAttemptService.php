@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services\Legacy;
 
+use App\Exceptions\Api\ApiProblemException;
 use App\Services\Legacy\Mbti\Attempt\LegacyMbtiAttemptLifecycleService;
 use App\Services\Legacy\Mbti\Content\LegacyMbtiPackRepository;
 use App\Services\Legacy\Mbti\Report\LegacyMbtiReportPayloadBuilder;
 use App\Support\CacheKeys;
 use App\Support\OrgContext;
+use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -22,79 +24,21 @@ class LegacyMbtiAttemptService
         private readonly LegacyMbtiPackRepository $packRepo,
         private readonly LegacyMbtiReportPayloadBuilder $reportBuilder,
         private readonly LegacyMbtiAttemptLifecycleService $attemptLifecycle,
-    ) {
-    }
+    ) {}
 
-    private function defaultRegion(): string
+    public function health(): array
     {
-        return (string) config('content_packs.default_region', 'CN_MAINLAND');
-    }
-
-    private function defaultLocale(): string
-    {
-        return (string) config('content_packs.default_locale', 'zh-CN');
-    }
-
-    private function defaultDirVersion(): string
-    {
-        return (string) config(
-            'content_packs.default_dir_version',
-            config('content.default_versions.default', 'MBTI-CN-v0.2.1-TEST')
-        );
-    }
-
-    private function hotCacheStore()
-    {
-        try {
-            return Cache::store('hot_redis');
-        } catch (\Throwable $e) {
-            Log::warning('LEGACY_MBTI_HOT_CACHE_STORE_FALLBACK', [
-                'store' => 'hot_redis',
-                'request_id' => $this->requestId(),
-                'exception' => $e,
-            ]);
-
-            return Cache::store();
-        }
-    }
-
-    private function shouldLogHotCache(): bool
-    {
-        return (bool) config('app.debug') || (bool) env('FAP_CACHE_LOG', true);
-    }
-
-    private function logHotCacheQuestions(string $packId, string $dirVersion, bool $hit, float $startedAt): void
-    {
-        if (!$this->shouldLogHotCache()) {
-            return;
-        }
-
-        $ms = (int) round((microtime(true) - $startedAt) * 1000);
-        $flagHit = $hit ? 1 : 0;
-        $flagMiss = $hit ? 0 : 1;
-
-        Log::info("[HOTCACHE] kind=mbti_questions pack_id={$packId} dir={$dirVersion} ms={$ms} hit={$flagHit} miss={$flagMiss}");
-    }
-
-    /**
-     * 健康检查：确认 API 服务在线
-     */
-    public function health()
-    {
-        return response()->json([
+        return [
             'ok' => true,
             'service' => 'Fermat Assessment Platform API',
             'version' => 'v0.2-skeleton',
             'time' => now()->toIso8601String(),
-        ]);
+        ];
     }
 
-    /**
-     * 返回 MBTI 量表元信息
-     */
-    public function scaleMeta()
+    public function scaleMeta(): array
     {
-        return response()->json([
+        return [
             'scale_code' => 'MBTI',
             'title' => 'MBTI v2.5 · FermatMind',
             'question_count' => 144,
@@ -102,19 +46,14 @@ class LegacyMbtiAttemptService
             'locale' => 'zh-CN',
             'version' => 'v0.2',
             'price_tier' => 'FREE',
-        ]);
+        ];
     }
 
-    /**
-     * GET /api/v0.2/scales/MBTI/questions
-     * ✅ 读 content_packages/<pkg>/questions.json
-     * ✅ 对外脱敏：不返回 score / key_pole / direction / irt / is_active
-     */
-    public function questions()
+    public function questions(?string $region = null, ?string $locale = null, ?string $requestId = null): array
     {
         $startedAt = microtime(true);
-        $region = (string) (request()->header('X-Region') ?: request()->input('region') ?: $this->defaultRegion());
-        $locale = (string) (request()->header('X-Locale') ?: request()->input('locale') ?: $this->defaultLocale());
+        $region = $this->normalizeRegion($region);
+        $locale = $this->normalizeLocale($locale);
         $dirVersion = $this->defaultDirVersion();
 
         $contentDir = $this->packRepo->resolveContentDir(null, $dirVersion, $region, $locale);
@@ -127,16 +66,18 @@ class LegacyMbtiAttemptService
         $contentPackageVersion = is_string($contentPackageVersion) ? $contentPackageVersion : $dirVersion;
 
         $cacheKey = CacheKeys::mbtiQuestions($packId, $dirVersion);
-        $cache = $this->hotCacheStore();
+        $cache = $this->hotCacheStore($requestId);
+
         try {
             $cachedPayload = $cache->get($cacheKey);
         } catch (\Throwable $e) {
             Log::warning('LEGACY_MBTI_CACHE_READ_FAILED', [
                 'key' => $cacheKey,
                 'store' => 'hot_redis',
-                'request_id' => $this->requestId(),
+                'request_id' => $requestId,
                 'exception' => $e,
             ]);
+
             try {
                 $cache = Cache::store();
                 $cachedPayload = $cache->get($cacheKey);
@@ -144,7 +85,7 @@ class LegacyMbtiAttemptService
                 Log::warning('LEGACY_MBTI_CACHE_READ_DEGRADED', [
                     'key' => $cacheKey,
                     'store' => (string) config('cache.default', 'default'),
-                    'request_id' => $this->requestId(),
+                    'request_id' => $requestId,
                     'exception' => $e2,
                 ]);
                 $cachedPayload = null;
@@ -153,39 +94,36 @@ class LegacyMbtiAttemptService
 
         if (is_array($cachedPayload)) {
             $this->logHotCacheQuestions($packId, $dirVersion, true, $startedAt);
-            return response()->json($cachedPayload);
+
+            return $cachedPayload;
         }
 
         $json = $this->packRepo->loadQuestionsDoc($contentDir);
-        if (!is_array($json)) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'questions.json not found',
-                'path' => "(not found in package: {$contentDir})",
-            ], 500);
+        if (! is_array($json)) {
+            throw new ApiProblemException(
+                500,
+                'CONTENT_PACK_ERROR',
+                'questions.json not found.',
+                ['path' => "(not found in package: {$contentDir})"]
+            );
         }
 
-        $items = isset($json['items']) ? $json['items'] : $json;
-        if (!is_array($items)) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'questions.json items invalid',
-            ], 500);
+        $items = $json['items'] ?? $json;
+        if (! is_array($items)) {
+            throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'questions.json items invalid.');
         }
 
-        $items = array_values(array_filter($items, fn ($q) => ($q['is_active'] ?? true) === true));
-        usort($items, fn ($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
+        $items = array_values(array_filter($items, static fn ($q) => ($q['is_active'] ?? true) === true));
+        usort($items, static fn ($a, $b) => ($a['order'] ?? 0) <=> ($b['order'] ?? 0));
 
         if (count($items) !== 144) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'MBTI questions must be 144',
+            throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'MBTI questions must be 144.', [
                 'count' => count($items),
-            ], 500);
+            ]);
         }
 
-        $safe = array_map(function ($q) {
-            $opts = array_map(function ($o) {
+        $safe = array_map(static function ($q): array {
+            $opts = array_map(static function ($o): array {
                 return [
                     'code' => $o['code'],
                     'text' => $o['text'],
@@ -219,16 +157,17 @@ class LegacyMbtiAttemptService
             Log::warning('LEGACY_MBTI_CACHE_WRITE_FAILED', [
                 'key' => $cacheKey,
                 'store' => 'hot_redis',
-                'request_id' => $this->requestId(),
+                'request_id' => $requestId,
                 'exception' => $e,
             ]);
+
             try {
                 Cache::store()->put($cacheKey, $payload, self::HOT_CACHE_TTL_SECONDS);
             } catch (\Throwable $e2) {
                 Log::warning('LEGACY_MBTI_CACHE_WRITE_DEGRADED', [
                     'key' => $cacheKey,
                     'store' => (string) config('cache.default', 'default'),
-                    'request_id' => $this->requestId(),
+                    'request_id' => $requestId,
                     'exception' => $e2,
                 ]);
             }
@@ -236,41 +175,86 @@ class LegacyMbtiAttemptService
 
         $this->logHotCacheQuestions($packId, $dirVersion, false, $startedAt);
 
-        return response()->json($payload);
+        return $payload;
     }
 
-    public function startAttempt(Request $request, ?string $id = null)
+    public function startAttempt(Request $request, ?string $id = null): array
     {
         return $this->attemptLifecycle->startAttempt($request, $id);
     }
 
-    public function storeAttempt(Request $request)
+    public function storeAttempt(Request $request): array
     {
         return $this->attemptLifecycle->storeAttempt($request);
     }
 
-    public function upsertResult(Request $request, string $attemptId)
+    public function upsertResult(Request $request, string $attemptId): array
     {
         return $this->attemptLifecycle->upsertResult($request, $attemptId);
     }
 
-    private function requestId(): string
+    private function defaultRegion(): string
     {
-        $request = request();
-        if (!$request instanceof Request) {
-            return '';
+        return (string) config('content_packs.default_region', 'CN_MAINLAND');
+    }
+
+    private function defaultLocale(): string
+    {
+        return (string) config('content_packs.default_locale', 'zh-CN');
+    }
+
+    private function defaultDirVersion(): string
+    {
+        return (string) config(
+            'content_packs.default_dir_version',
+            config('content.default_versions.default', 'MBTI-CN-v0.2.1-TEST')
+        );
+    }
+
+    private function normalizeRegion(?string $region): string
+    {
+        $region = trim((string) ($region ?? ''));
+
+        return $region !== '' ? $region : $this->defaultRegion();
+    }
+
+    private function normalizeLocale(?string $locale): string
+    {
+        $locale = trim((string) ($locale ?? ''));
+
+        return $locale !== '' ? $locale : $this->defaultLocale();
+    }
+
+    private function hotCacheStore(?string $requestId): CacheRepository
+    {
+        try {
+            return Cache::store('hot_redis');
+        } catch (\Throwable $e) {
+            Log::warning('LEGACY_MBTI_HOT_CACHE_STORE_FALLBACK', [
+                'store' => 'hot_redis',
+                'request_id' => $requestId,
+                'exception' => $e,
+            ]);
+
+            return Cache::store();
+        }
+    }
+
+    private function shouldLogHotCache(): bool
+    {
+        return (bool) config('app.debug') || (bool) env('FAP_CACHE_LOG', true);
+    }
+
+    private function logHotCacheQuestions(string $packId, string $dirVersion, bool $hit, float $startedAt): void
+    {
+        if (! $this->shouldLogHotCache()) {
+            return;
         }
 
-        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
-        if ($requestId !== '') {
-            return $requestId;
-        }
+        $ms = (int) round((microtime(true) - $startedAt) * 1000);
+        $flagHit = $hit ? 1 : 0;
+        $flagMiss = $hit ? 0 : 1;
 
-        $requestId = trim((string) $request->header('X-Request-Id', ''));
-        if ($requestId !== '') {
-            return $requestId;
-        }
-
-        return trim((string) $request->header('X-Request-ID', ''));
+        Log::info("[HOTCACHE] kind=mbti_questions pack_id={$packId} dir={$dirVersion} ms={$ms} hit={$flagHit} miss={$flagMiss}");
     }
 }

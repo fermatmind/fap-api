@@ -83,12 +83,12 @@ final class PaymentWebhookController extends Controller
                 $legacyShape = [
                     'ok' => (bool) ($result['ok'] ?? false),
                     'status' => (int) ($result['status'] ?? 200),
-                    'error' => (string) ($result['error'] ?? ''),
+                    'error_code' => (string) ($result['error_code'] ?? $result['error'] ?? ''),
                 ];
                 $shadowShape = [
                     'ok' => (bool) ($shadowResult['ok'] ?? false),
                     'status' => (int) ($shadowResult['status'] ?? 200),
-                    'error' => (string) ($shadowResult['error'] ?? ''),
+                    'error_code' => (string) ($shadowResult['error_code'] ?? $shadowResult['error'] ?? ''),
                 ];
 
                 if ($legacyShape !== $shadowShape) {

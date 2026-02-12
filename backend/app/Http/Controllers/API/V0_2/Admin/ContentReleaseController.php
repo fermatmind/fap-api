@@ -12,7 +12,7 @@ class ContentReleaseController extends Controller
     {
         // ✅ 新 header：X-Admin-Token（与 publish-content.yml 保持一致）
         $expect = (string) config('admin.token', config('fap.admin_token'));
-        $given  = (string) $request->header('X-FAP-Admin-Token', '');
+        $given = (string) $request->header('X-FAP-Admin-Token', '');
         if ($given === '') {
             $given = (string) $request->header('X-Admin-Token', '');
         }
@@ -50,7 +50,7 @@ class ContentReleaseController extends Controller
             ]
         );
 
-        if (!($result['ok'] ?? false)) {
+        if (! ($result['ok'] ?? false)) {
             return response()->json($result, 422);
         }
 
@@ -81,10 +81,10 @@ class ContentReleaseController extends Controller
             $locale,
             $dirAlias,
             $probe,
-            $request->getSchemeAndHttpHost()
+            $this->resolveBaseUrl()
         );
 
-        if (!($result['ok'] ?? false)) {
+        if (! ($result['ok'] ?? false)) {
             return response()->json($result, 422);
         }
 
@@ -113,13 +113,23 @@ class ContentReleaseController extends Controller
             $locale,
             $dirAlias,
             $probe,
-            $request->getSchemeAndHttpHost()
+            $this->resolveBaseUrl()
         );
 
-        if (!($result['ok'] ?? false)) {
+        if (! ($result['ok'] ?? false)) {
             return response()->json($result, 422);
         }
 
         return response()->json($result);
+    }
+
+    private function resolveBaseUrl(): string
+    {
+        $configured = trim((string) config('app.url', ''));
+        if ($configured !== '') {
+            return rtrim($configured, '/');
+        }
+
+        return rtrim((string) url('/'), '/');
     }
 }

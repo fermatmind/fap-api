@@ -40,7 +40,7 @@ class OrgInvitesController extends Controller
         if ($userId === null) {
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Missing or invalid fm_token.',
             ], 401);
         }
@@ -69,14 +69,14 @@ class OrgInvitesController extends Controller
         if ($userId === null) {
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Missing or invalid fm_token.',
             ], 401);
         }
 
         $res = $this->invites->acceptInvite((string) $payload['token'], $userId);
         if (!($res['ok'] ?? false)) {
-            $error = (string) ($res['error'] ?? 'INVITE_INVALID');
+            $error = (string) ($res['error_code'] ?? $res['error'] ?? 'INVITE_INVALID');
             $status = match ($error) {
                 'INVITE_NOT_FOUND' => 404,
                 'INVITE_EXPIRED' => 410,
@@ -104,7 +104,7 @@ class OrgInvitesController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'ORG_NOT_FOUND',
+            'error_code' => 'ORG_NOT_FOUND',
             'message' => 'org not found.',
         ], 404);
     }

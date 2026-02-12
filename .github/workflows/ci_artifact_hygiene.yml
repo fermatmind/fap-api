@@ -1,0 +1,20 @@
+name: CI Artifact Hygiene
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  artifact-hygiene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assert artifact hygiene (repo mode)
+        run: bash scripts/security/assert_artifact_clean.sh repo

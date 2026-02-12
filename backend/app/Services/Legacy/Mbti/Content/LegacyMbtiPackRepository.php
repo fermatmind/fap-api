@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Legacy\Mbti\Content;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class LegacyMbtiPackRepository
@@ -31,7 +30,7 @@ class LegacyMbtiPackRepository
             );
         }
 
-        return $this->normalizeContentPackageDir("default/{$region}/{$locale}/{$dirVersion}");
+        return $this->normalizeContentPackageDir("default/{$region}/{$locale}/{$dirVersion}", $region, $locale);
     }
 
     public function loadJsonFromPack(string $contentDir, string $relPath): ?array
@@ -42,7 +41,7 @@ class LegacyMbtiPackRepository
             return null;
         }
 
-        $contentDirTrimmed = trim($contentDir, "/\\");
+        $contentDirTrimmed = trim($contentDir, '/\\');
 
         $cfgRoot = config('fap.content_packages_dir', null);
         $cfgRoot = is_string($cfgRoot) && $cfgRoot !== '' ? rtrim($cfgRoot, '/') : null;
@@ -59,7 +58,7 @@ class LegacyMbtiPackRepository
         ], fn ($p) => is_string($p) && $p !== ''));
 
         foreach ($roots as $root) {
-            $direct = rtrim($root, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $relPath);
+            $direct = rtrim($root, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $relPath);
             if (is_file($direct)) {
                 $raw = @file_get_contents($direct);
                 if ($raw === false || trim($raw) === '') {
@@ -67,13 +66,14 @@ class LegacyMbtiPackRepository
                 }
 
                 $json = json_decode($raw, true);
+
                 return is_array($json) ? $json : null;
             }
         }
 
         $basename = basename($relPath);
         $found = $this->findPackageFile($contentDir, $basename);
-        if (!$found || !is_file($found)) {
+        if (! $found || ! is_file($found)) {
             return null;
         }
 
@@ -105,12 +105,12 @@ class LegacyMbtiPackRepository
 
     public function loadPackJson($resolved, string $filename): ?array
     {
-        if (!$resolved || !is_array($resolved->loaders ?? null)) {
+        if (! $resolved || ! is_array($resolved->loaders ?? null)) {
             return null;
         }
 
         $loader = $resolved->loaders['readJson'] ?? null;
-        if (!is_callable($loader)) {
+        if (! is_callable($loader)) {
             return null;
         }
 
@@ -143,7 +143,7 @@ class LegacyMbtiPackRepository
         return $base;
     }
 
-    public function normalizeContentPackageDir(string $pkgOrVersion): string
+    public function normalizeContentPackageDir(string $pkgOrVersion, ?string $region = null, ?string $locale = null): string
     {
         $pkgOrVersion = trim(str_replace('\\', '/', $pkgOrVersion), "/ \t\n\r\0\x0B");
 
@@ -152,7 +152,7 @@ class LegacyMbtiPackRepository
         }
 
         if (preg_match('#^[A-Z_]+/[a-z]{2}(?:-[A-Z]{2}|-[A-Za-z0-9]+)?/.+#', $pkgOrVersion)) {
-            return 'default/' . $pkgOrVersion;
+            return 'default/'.$pkgOrVersion;
         }
 
         if (substr_count($pkgOrVersion, '.') >= 3) {
@@ -161,13 +161,17 @@ class LegacyMbtiPackRepository
                 $region = strtoupper((string) ($parts[1] ?? 'GLOBAL'));
                 $locale = (string) ($parts[2] ?? 'en');
                 $version = implode('.', array_slice($parts, 3));
+
                 return "default/{$region}/{$locale}/{$version}";
             }
         }
 
-        $request = request();
-        $region = (string) ($request->header('X-Region') ?: $request->input('region') ?: config('content_packs.default_region', 'CN_MAINLAND'));
-        $locale = (string) ($request->header('X-Locale') ?: $request->input('locale') ?: config('content_packs.default_locale', 'zh-CN'));
+        $region = is_string($region) && trim($region) !== ''
+            ? trim($region)
+            : (string) config('content_packs.default_region', 'CN_MAINLAND');
+        $locale = is_string($locale) && trim($locale) !== ''
+            ? trim($locale)
+            : (string) config('content_packs.default_locale', 'zh-CN');
 
         $region = trim(str_replace('\\', '/', $region), "/ \t\n\r\0\x0B");
         $locale = trim(str_replace('\\', '/', $locale), "/ \t\n\r\0\x0B");
@@ -179,6 +183,7 @@ class LegacyMbtiPackRepository
     {
         if (substr_count($packId, '.') >= 3) {
             $parts = explode('.', $packId);
+
             return implode('.', array_slice($parts, 3));
         }
 
@@ -188,8 +193,8 @@ class LegacyMbtiPackRepository
     private function findPackageFile(string $pkg, string $filename, int $maxDepth = 3): ?string
     {
         $pkg = $this->normalizeContentPackageDir($pkg);
-        $pkg = trim($pkg, "/\\");
-        $filename = trim($filename, "/\\");
+        $pkg = trim($pkg, '/\\');
+        $filename = trim($filename, '/\\');
 
         $cfgRoot = config('fap.content_packages_dir', null);
         $cfgRoot = is_string($cfgRoot) && $cfgRoot !== '' ? rtrim($cfgRoot, '/') : null;
@@ -210,7 +215,7 @@ class LegacyMbtiPackRepository
         }
 
         foreach ($roots as $root) {
-            $direct = $root . DIRECTORY_SEPARATOR . $filename;
+            $direct = $root.DIRECTORY_SEPARATOR.$filename;
             if (is_file($direct)) {
                 return $direct;
             }
@@ -224,7 +229,7 @@ class LegacyMbtiPackRepository
                 $iter->setMaxDepth($maxDepth);
 
                 foreach ($iter as $fileInfo) {
-                    if (!$fileInfo->isFile()) {
+                    if (! $fileInfo->isFile()) {
                         continue;
                     }
                     if ($fileInfo->getFilename() !== $filename) {
@@ -242,33 +247,13 @@ class LegacyMbtiPackRepository
             } catch (\Throwable $e) {
                 Log::warning('LEGACY_MBTI_PACKAGE_FILE_PROBE_DEGRADED', [
                     'path' => $root,
-                    'request_id' => $this->requestId(),
                     'exception' => $e,
                 ]);
+
                 continue;
             }
         }
 
         return null;
-    }
-
-    private function requestId(): string
-    {
-        $request = request();
-        if (!$request instanceof Request) {
-            return '';
-        }
-
-        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
-        if ($requestId !== '') {
-            return $requestId;
-        }
-
-        $requestId = trim((string) $request->header('X-Request-Id', ''));
-        if ($requestId !== '') {
-            return $requestId;
-        }
-
-        return trim((string) $request->header('X-Request-ID', ''));
     }
 }

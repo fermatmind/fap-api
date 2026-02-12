@@ -300,7 +300,7 @@ curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_re
 # ------------------------
 # order + webhook -> entitlement + snapshot
 # ------------------------
-ORDER_PAYLOAD='{"sku":"MBTI_REPORT_FULL","quantity":1,"target_attempt_id":"'"$attempt_id"'","provider":"billing","anon_id":"'"$ANON_ID"'"}'
+ORDER_PAYLOAD='{"sku":"MBTI_REPORT_FULL","quantity":1,"target_attempt_id":"'"$attempt_id"'","provider":"billing"}'
 curl_json POST "$API/api/v0.3/orders" "$ORDER_PAYLOAD" "$ART_DIR/curl_order.json" "$USER_TOKEN" || fail "orders create failed"
 
 order_no="$(php -r '

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\API\V0_2;
 
+use App\Exceptions\Api\ApiProblemException;
 use App\Http\Controllers\Controller;
-use App\Services\Account\AssetCollector;
 use App\Services\Abuse\RateLimiter;
+use App\Services\Account\AssetCollector;
+use App\Services\Audit\LookupEventLogger;
 use App\Services\Auth\FmTokenService;
 use App\Services\Auth\PhoneOtpService;
-use App\Services\Audit\LookupEventLogger;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 
 class AuthPhoneController extends Controller
 {
@@ -29,11 +30,11 @@ class AuthPhoneController extends Controller
         $this->mergeConsent($request);
 
         $data = $request->validate([
-            'phone'    => ['required', 'string', 'max:32'],
-            'scene'    => ['nullable', 'string', 'max:32'],
-            'anon_id'  => ['nullable', 'string', 'max:128'],
+            'phone' => ['required', 'string', 'max:32'],
+            'scene' => ['nullable', 'string', 'max:32'],
+            'anon_id' => ['nullable', 'string', 'max:128'],
             'device_key' => ['nullable', 'string', 'max:256'],
-            'consent'  => ['accepted'], // ✅ 强制勾选
+            'consent' => ['accepted'], // ✅ 强制勾选
         ]);
 
         $phone = $this->normalizePhone((string) $data['phone']);
@@ -48,50 +49,49 @@ class AuthPhoneController extends Controller
         $logger = app(LookupEventLogger::class);
 
         $limitPhone = $limiter->limit('FAP_RATE_SEND_CODE_PHONE', 5);
-        if ($phone !== '' && !$limiter->hit("phone_send_code:phone:{$phone}", $limitPhone, 60)) {
+        if ($phone !== '' && ! $limiter->hit("phone_send_code:phone:{$phone}", $limitPhone, 60)) {
             $logger->log('phone_send_code', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'scope' => 'phone',
                 'scene' => $scene,
                 'phone_hash' => hash('sha256', $phone),
             ]);
-            return response()->json([
-                'ok' => false,
-                'error' => 'RATE_LIMITED',
-                'message' => 'Too many requests for this phone.',
-            ], 429);
+
+            throw new ApiProblemException(429, 'RATE_LIMITED', 'Too many requests for this phone.');
         }
 
         $limitIp = $limiter->limit('FAP_RATE_SEND_CODE_IP', 20);
-        if ($ip !== '' && !$limiter->hit("phone_send_code:ip:{$ip}", $limitIp, 60)) {
+        if ($ip !== '' && ! $limiter->hit("phone_send_code:ip:{$ip}", $limitIp, 60)) {
             $logger->log('phone_send_code', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'scope' => 'ip',
                 'scene' => $scene,
                 'phone_hash' => hash('sha256', $phone),
             ]);
-            return response()->json([
-                'ok' => false,
-                'error' => 'RATE_LIMITED',
-                'message' => 'Too many requests from this IP.',
-            ], 429);
+
+            throw new ApiProblemException(429, 'RATE_LIMITED', 'Too many requests from this IP.');
         }
 
         try {
             $res = $otp->send($phone, $scene, $ip, $deviceKey);
             // 约定：$res 至少包含 ttl_seconds；dev_mode 可包含 dev_code
-        } catch (\Throwable $e) {
-            // 这里统一按“限频/风控”处理
+        } catch (ApiProblemException $e) {
             $logger->log('phone_send_code', false, $request, null, [
-                'error' => 'OTP_SEND_FAILED',
+                'error_code' => $e->errorCode(),
                 'scene' => $scene,
                 'phone_hash' => hash('sha256', $phone),
             ]);
-            return response()->json([
-                'ok' => false,
-                'error' => 'OTP_SEND_FAILED',
-                'message' => $e->getMessage(),
-            ], 429);
+
+            throw $e;
+        } catch (\Throwable $e) {
+            // 这里统一按“限频/风控”处理
+            $logger->log('phone_send_code', false, $request, null, [
+                'error_code' => 'OTP_SEND_FAILED',
+                'scene' => $scene,
+                'phone_hash' => hash('sha256', $phone),
+            ]);
+
+            throw new ApiProblemException(429, 'OTP_SEND_FAILED', $e->getMessage(), [], $e);
         }
 
         $out = [
@@ -102,7 +102,7 @@ class AuthPhoneController extends Controller
         ];
 
         // ✅ DEV 可回传验证码（生产不要回传）
-        if (!empty($res['dev_code'])) {
+        if (! empty($res['dev_code'])) {
             $out['dev_code'] = (string) $res['dev_code'];
         }
 
@@ -133,46 +133,33 @@ class AuthPhoneController extends Controller
         $this->mergeConsent($request);
 
         $data = $request->validate([
-            'phone'     => ['required', 'string', 'max:32'],
-            'code'      => ['required', 'string', 'max:16'],
-            'scene'     => ['nullable', 'string', 'max:32'],
-            'anon_id'   => ['nullable', 'string', 'max:128'],
-            'device_key'=> ['nullable', 'string', 'max:256'],
-            'consent'   => ['accepted'], // ✅ 强制勾选
+            'phone' => ['required', 'string', 'max:32'],
+            'code' => ['required', 'string', 'max:16'],
+            'scene' => ['nullable', 'string', 'max:32'],
+            'anon_id' => ['nullable', 'string', 'max:128'],
+            'device_key' => ['nullable', 'string', 'max:256'],
+            'consent' => ['accepted'], // ✅ 强制勾选
         ]);
 
         $phone = $this->normalizePhone((string) $data['phone']);
-        $code  = trim((string) $data['code']);
+        $code = trim((string) $data['code']);
         $scene = (string) ($data['scene'] ?? 'login');
         $logger = app(LookupEventLogger::class);
 
         /** @var PhoneOtpService $otp */
         $otp = app(PhoneOtpService::class);
 
-        $res = $otp->verify($phone, $code, $scene);
+        try {
+            $res = $otp->verify($phone, $code, $scene);
+        } catch (ApiProblemException $e) {
+            $logger->log('phone_verify', false, $request, null, [
+                'error_code' => $e->errorCode(),
+                'scene' => $scene,
+                'phone_hash' => hash('sha256', $phone),
+            ]);
 
-$isOk = is_array($res) && (($res['ok'] ?? false) === true);
-if (!$isOk) {
-    $error = is_array($res) ? (string)($res['error'] ?? 'OTP_INVALID') : 'OTP_INVALID';
-    $msg   = is_array($res) ? (string)($res['message'] ?? 'Invalid code.') : 'Invalid code.';
-
-    // MVP：状态码简单映射
-    $status = 422;
-    if ($error === 'OTP_MISSING') $status = 410;   // expired/not found
-    if ($error === 'OTP_LOCKED')  $status = 429;   // too many fails
-
-    $logger->log('phone_verify', false, $request, null, [
-        'error' => $error,
-        'scene' => $scene,
-        'phone_hash' => hash('sha256', $phone),
-    ]);
-
-    return response()->json([
-        'ok' => false,
-        'error' => $error,
-        'message' => $msg,
-    ], $status);
-}
+            throw $e;
+        }
 
         $anonId = isset($data['anon_id']) ? $this->sanitizeAnonId((string) $data['anon_id']) : null;
 
@@ -202,10 +189,10 @@ if (!$isOk) {
         /** @var FmTokenService $tokenSvc */
         $tokenSvc = app(FmTokenService::class);
         $issued = $tokenSvc->issueForUser((string) $userId, [
-    'provider' => 'phone',
-    'phone' => $phone,
-    'anon_id' => $anonId,
-]);
+            'provider' => 'phone',
+            'phone' => $phone,
+            'anon_id' => $anonId,
+        ]);
 
         $via = is_array($res) ? (string) ($res['via'] ?? '') : '';
         $meta = [
@@ -240,7 +227,9 @@ if (!$isOk) {
         $s = trim($raw);
         $s = str_replace([' ', '-', '(', ')'], '', $s);
 
-        if ($s === '') return $s;
+        if ($s === '') {
+            return $s;
+        }
 
         if ($s[0] === '+') {
             return $s;
@@ -248,7 +237,7 @@ if (!$isOk) {
 
         // CN 11-digit
         if (preg_match('/^1\d{10}$/', $s)) {
-            return '+86' . $s;
+            return '+86'.$s;
         }
 
         return $s;
@@ -268,9 +257,14 @@ if (!$isOk) {
 
     private function boolish($v): bool
     {
-        if (is_bool($v)) return $v;
-        if ($v === null) return false;
+        if (is_bool($v)) {
+            return $v;
+        }
+        if ($v === null) {
+            return false;
+        }
         $s = strtolower(trim((string) $v));
+
         return in_array($s, ['1', 'true', 'yes', 'on'], true);
     }
 
@@ -280,7 +274,9 @@ if (!$isOk) {
     private function sanitizeAnonId(string $anonId): ?string
     {
         $s = trim($anonId);
-        if ($s === '') return null;
+        if ($s === '') {
+            return null;
+        }
 
         $lower = mb_strtolower($s, 'UTF-8');
         $badWords = [
@@ -313,10 +309,10 @@ if (!$isOk) {
     private function findOrCreateUserByPhone(string $phoneE164, ?string $anonId): array
     {
         $hasUid = Schema::hasColumn('users', 'uid');
-        $pk     = $hasUid ? 'uid' : 'id';
+        $pk = $hasUid ? 'uid' : 'id';
 
         $hasPhoneE164 = Schema::hasColumn('users', 'phone_e164');
-        $hasPhone     = Schema::hasColumn('users', 'phone');
+        $hasPhone = Schema::hasColumn('users', 'phone');
 
         $phoneCol = $hasPhoneE164 ? 'phone_e164' : ($hasPhone ? 'phone' : null);
 
@@ -332,6 +328,7 @@ if (!$isOk) {
 
         if ($row) {
             $userId = (string) ($row->{$pk} ?? '');
+
             return [$userId, $this->buildUserPayloadFromRow($row, $pk, $phoneCol)];
         }
 
@@ -339,7 +336,7 @@ if (!$isOk) {
         $insert = [];
 
         if ($hasUid) {
-            $insert['uid'] = 'u_' . bin2hex(random_bytes(5));
+            $insert['uid'] = 'u_'.bin2hex(random_bytes(5));
         }
 
         if ($phoneCol) {
@@ -356,19 +353,23 @@ if (!$isOk) {
             $insert['verified_at'] = now();
         }
 
-        if (Schema::hasColumn('users', 'created_at')) $insert['created_at'] = now();
-        if (Schema::hasColumn('users', 'updated_at')) $insert['updated_at'] = now();
+        if (Schema::hasColumn('users', 'created_at')) {
+            $insert['created_at'] = now();
+        }
+        if (Schema::hasColumn('users', 'updated_at')) {
+            $insert['updated_at'] = now();
+        }
 
         // 如果是默认 Laravel users 表，可能有 name/email/password NOT NULL
         // 这里尽量做兜底（不会覆盖你自定义结构）
-        if (Schema::hasColumn('users', 'name') && !array_key_exists('name', $insert)) {
+        if (Schema::hasColumn('users', 'name') && ! array_key_exists('name', $insert)) {
             $insert['name'] = 'user';
         }
-        if (Schema::hasColumn('users', 'email') && !array_key_exists('email', $insert)) {
+        if (Schema::hasColumn('users', 'email') && ! array_key_exists('email', $insert)) {
             // 避免 unique 冲突
-            $insert['email'] = 'phone_' . md5($phoneE164) . '@example.local';
+            $insert['email'] = 'phone_'.md5($phoneE164).'@example.local';
         }
-        if (Schema::hasColumn('users', 'password') && !array_key_exists('password', $insert)) {
+        if (Schema::hasColumn('users', 'password') && ! array_key_exists('password', $insert)) {
             $insert['password'] = bcrypt(bin2hex(random_bytes(8)));
         }
 
@@ -376,7 +377,7 @@ if (!$isOk) {
 
         // re-fetch
         $row2 = DB::table('users')
-            ->when($phoneCol !== null, fn($q) => $q->where($phoneCol, $phoneE164))
+            ->when($phoneCol !== null, fn ($q) => $q->where($phoneCol, $phoneE164))
             ->orderByDesc($hasUid ? 'created_at' : 'id')
             ->first();
 
@@ -391,7 +392,9 @@ if (!$isOk) {
         $phone = $phoneCol ? (string) ($row->{$phoneCol} ?? '') : null;
 
         $anonId = property_exists($row, 'anon_id') ? (string) ($row->anon_id ?? '') : null;
-        if ($anonId === '') $anonId = null;
+        if ($anonId === '') {
+            $anonId = null;
+        }
 
         return [
             'uid' => $uid,                // ✅ 统一对外叫 uid（即使底层 pk 是 id）

@@ -16,7 +16,6 @@ use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class PaymentWebhookHandlerCore
@@ -62,16 +61,6 @@ class PaymentWebhookHandlerCore
         string $rawPayloadSha256 = '',
         int $rawPayloadBytes = -1
     ): array {
-        if (!Schema::hasTable('payment_events')) {
-            return $this->tableMissing('payment_events');
-        }
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-        if (!Schema::hasTable('skus')) {
-            return $this->tableMissing('skus');
-        }
-
         $provider = strtolower(trim($provider));
         if ($provider === 'stub' && !$this->isStubEnabled()) {
             return $this->notFound('PROVIDER_DISABLED', 'not found.');
@@ -150,54 +139,26 @@ class PaymentWebhookHandlerCore
                         'id' => (string) Str::uuid(),
                         'provider' => $provider,
                         'provider_event_id' => $providerEventId,
+                        'order_id' => (string) Str::uuid(),
+                        'event_type' => $eventType,
                         'order_no' => $orderNo,
                         'payload_json' => $payloadSummaryJson,
+                        'signature_ok' => $signatureOk,
+                        'status' => 'received',
+                        'attempts' => 0,
+                        'last_error_code' => null,
+                        'last_error_message' => null,
+                        'processed_at' => null,
+                        'handled_at' => null,
+                        'handle_status' => null,
+                        'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
+                        'payload_sha256' => $resolvedPayloadMeta['sha256'],
+                        'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
+                        'payload_excerpt' => $payloadExcerpt,
                         'received_at' => $receivedAt,
                         'created_at' => $receivedAt,
                         'updated_at' => $receivedAt,
                     ];
-                    if (Schema::hasColumn('payment_events', 'payload_size_bytes')) {
-                        $insertSeed['payload_size_bytes'] = $resolvedPayloadMeta['size_bytes'];
-                    }
-                    if (Schema::hasColumn('payment_events', 'payload_sha256')) {
-                        $insertSeed['payload_sha256'] = $resolvedPayloadMeta['sha256'];
-                    }
-                    if (Schema::hasColumn('payment_events', 'payload_s3_key')) {
-                        $insertSeed['payload_s3_key'] = $resolvedPayloadMeta['s3_key'];
-                    }
-                    if (Schema::hasColumn('payment_events', 'payload_excerpt')) {
-                        $insertSeed['payload_excerpt'] = $payloadExcerpt;
-                    }
-                    if (Schema::hasColumn('payment_events', 'event_type')) {
-                        $insertSeed['event_type'] = $eventType;
-                    }
-                    if (Schema::hasColumn('payment_events', 'signature_ok')) {
-                        $insertSeed['signature_ok'] = $signatureOk;
-                    }
-                    if (Schema::hasColumn('payment_events', 'status')) {
-                        $insertSeed['status'] = 'received';
-                    }
-                    if (Schema::hasColumn('payment_events', 'attempts')) {
-                        $insertSeed['attempts'] = 0;
-                    }
-                    if (Schema::hasColumn('payment_events', 'last_error_code')) {
-                        $insertSeed['last_error_code'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'last_error_message')) {
-                        $insertSeed['last_error_message'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'processed_at')) {
-                        $insertSeed['processed_at'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'handled_at')) {
-                        $insertSeed['handled_at'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'handle_status')) {
-                        $insertSeed['handle_status'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'order_id')) {
-                        $insertSeed['order_id'] = (string) Str::uuid();
-                    }
 
                     $inserted = (int) DB::table('payment_events')->insertOrIgnore($insertSeed);
 
@@ -231,53 +192,25 @@ class PaymentWebhookHandlerCore
                     $baseRow = [
                         'provider' => $provider,
                         'provider_event_id' => $providerEventId,
+                        'order_id' => $eventRow->order_id ?? ($insertSeed['order_id'] ?? (string) Str::uuid()),
+                        'event_type' => $eventType,
                         'order_no' => $orderNo,
                         'payload_json' => $payloadSummaryJson,
+                        'signature_ok' => $signatureOk,
+                        'status' => 'received',
+                        'attempts' => $attempts,
+                        'last_error_code' => null,
+                        'last_error_message' => null,
+                        'processed_at' => null,
+                        'handled_at' => null,
+                        'handle_status' => null,
+                        'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
+                        'payload_sha256' => $resolvedPayloadMeta['sha256'],
+                        'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
+                        'payload_excerpt' => $payloadExcerpt,
                         'received_at' => $receivedAt,
                         'updated_at' => $receivedAt,
                     ];
-                    if (Schema::hasColumn('payment_events', 'payload_size_bytes')) {
-                        $baseRow['payload_size_bytes'] = $resolvedPayloadMeta['size_bytes'];
-                    }
-                    if (Schema::hasColumn('payment_events', 'payload_sha256')) {
-                        $baseRow['payload_sha256'] = $resolvedPayloadMeta['sha256'];
-                    }
-                    if (Schema::hasColumn('payment_events', 'payload_s3_key')) {
-                        $baseRow['payload_s3_key'] = $resolvedPayloadMeta['s3_key'];
-                    }
-                    if (Schema::hasColumn('payment_events', 'payload_excerpt')) {
-                        $baseRow['payload_excerpt'] = $payloadExcerpt;
-                    }
-                    if (Schema::hasColumn('payment_events', 'event_type')) {
-                        $baseRow['event_type'] = $eventType;
-                    }
-                    if (Schema::hasColumn('payment_events', 'signature_ok')) {
-                        $baseRow['signature_ok'] = $signatureOk;
-                    }
-                    if (Schema::hasColumn('payment_events', 'status')) {
-                        $baseRow['status'] = 'received';
-                    }
-                    if (Schema::hasColumn('payment_events', 'attempts')) {
-                        $baseRow['attempts'] = $attempts;
-                    }
-                    if (Schema::hasColumn('payment_events', 'last_error_code')) {
-                        $baseRow['last_error_code'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'last_error_message')) {
-                        $baseRow['last_error_message'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'processed_at')) {
-                        $baseRow['processed_at'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'handled_at')) {
-                        $baseRow['handled_at'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'handle_status')) {
-                        $baseRow['handle_status'] = null;
-                    }
-                    if (Schema::hasColumn('payment_events', 'order_id')) {
-                        $baseRow['order_id'] = $eventRow->order_id ?? ($insertSeed['order_id'] ?? (string) Str::uuid());
-                    }
 
                     DB::table('payment_events')
                         ->where('provider', $provider)
@@ -289,13 +222,9 @@ class PaymentWebhookHandlerCore
                         return $this->notFound('NOT_FOUND', 'not found.');
                     }
 
-                    $orderQuery = DB::table('orders')->where('order_no', $orderNo);
-                    if (Schema::hasColumn('orders', 'org_id')) {
-                        $orderQuery->where('org_id', $orgId);
-                    } elseif ($orgId !== 0) {
-                        $this->markEventError($provider, $providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
-                        return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
-                    }
+                    $orderQuery = DB::table('orders')
+                        ->where('order_no', $orderNo)
+                        ->where('org_id', $orgId);
 
                     $order = $orderQuery->lockForUpdate()->first();
                     if (!$order) {
@@ -421,21 +350,13 @@ class PaymentWebhookHandlerCore
 
                     $updateRow = [
                         'updated_at' => now(),
+                        'requested_sku' => $normalizedSkuMeta['requested_sku'] ?? ($order->requested_sku ?? null),
+                        'effective_sku' => $normalizedSkuMeta['effective_sku'] ?? ($order->effective_sku ?? null),
+                        'entitlement_id' => $normalizedSkuMeta['entitlement_id'] ?? ($order->entitlement_id ?? null),
                     ];
-                    if (Schema::hasColumn('orders', 'external_trade_no')) {
-                        $externalTradeNo = $normalized['external_trade_no'] ?? null;
-                        if ($externalTradeNo) {
-                            $updateRow['external_trade_no'] = $externalTradeNo;
-                        }
-                    }
-                    if (Schema::hasColumn('orders', 'requested_sku')) {
-                        $updateRow['requested_sku'] = $normalizedSkuMeta['requested_sku'] ?? ($order->requested_sku ?? null);
-                    }
-                    if (Schema::hasColumn('orders', 'effective_sku')) {
-                        $updateRow['effective_sku'] = $normalizedSkuMeta['effective_sku'] ?? ($order->effective_sku ?? null);
-                    }
-                    if (Schema::hasColumn('orders', 'entitlement_id')) {
-                        $updateRow['entitlement_id'] = $normalizedSkuMeta['entitlement_id'] ?? ($order->entitlement_id ?? null);
+                    $externalTradeNo = $normalized['external_trade_no'] ?? null;
+                    if ($externalTradeNo) {
+                        $updateRow['external_trade_no'] = $externalTradeNo;
                     }
 
                     if (count($updateRow) > 1) {
@@ -916,19 +837,18 @@ class PaymentWebhookHandlerCore
         $orderOrgId = $orgId;
         $attempt = [];
 
-        if (!$order && Schema::hasTable('orders')) {
-            $query = DB::table('orders')->where('order_no', $orderNo);
-            if (Schema::hasColumn('orders', 'org_id')) {
-                $query->where('org_id', $orgId);
-            }
-            $order = $query->first();
+        if (!$order) {
+            $order = DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->first();
         }
 
         if ($order) {
             $orderOrgId = (int) ($order->org_id ?? $orgId);
             $orderUserId = $order->user_id ? (string) $order->user_id : null;
             $sku = strtoupper((string) ($order->sku ?? $order->item_sku ?? ''));
-            if ($sku !== '' && Schema::hasTable('skus')) {
+            if ($sku !== '') {
                 $skuRow = DB::table('skus')->where('sku', $sku)->first();
                 if ($skuRow) {
                     $benefitCode = strtoupper((string) ($skuRow->benefit_code ?? ''));
@@ -1089,25 +1009,14 @@ class PaymentWebhookHandlerCore
 
     private function updatePaymentEvent(string $provider, string $providerEventId, array $updates): void
     {
-        if ($provider === '' || $providerEventId === '' || !Schema::hasTable('payment_events')) {
-            return;
-        }
-
-        $filtered = [];
-        foreach ($updates as $column => $value) {
-            if (Schema::hasColumn('payment_events', $column)) {
-                $filtered[$column] = $value;
-            }
-        }
-
-        if (count($filtered) === 0) {
+        if ($provider === '' || $providerEventId === '') {
             return;
         }
 
         DB::table('payment_events')
             ->where('provider', $provider)
             ->where('provider_event_id', $providerEventId)
-            ->update($filtered);
+            ->update($updates);
     }
 
     private function markEventProcessed(string $provider, string $providerEventId): void
@@ -1140,7 +1049,7 @@ class PaymentWebhookHandlerCore
     private function resolveAttemptMeta(int $orgId, ?string $attemptId): array
     {
         $attemptId = $attemptId !== null ? trim($attemptId) : '';
-        if ($attemptId === '' || !Schema::hasTable('attempts')) {
+        if ($attemptId === '') {
             return [
                 'attempt_id' => null,
                 'scale_code' => null,
@@ -1149,12 +1058,10 @@ class PaymentWebhookHandlerCore
             ];
         }
 
-        $query = DB::table('attempts')->where('id', $attemptId);
-        if (Schema::hasColumn('attempts', 'org_id')) {
-            $query->where('org_id', $orgId);
-        }
-
-        $row = $query->first();
+        $row = DB::table('attempts')
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->first();
         if (!$row) {
             return [
                 'attempt_id' => null,
@@ -1189,16 +1096,6 @@ class PaymentWebhookHandlerCore
 
         $result['status'] = ($result['ok'] ?? false) === true ? 200 : 500;
         return $result;
-    }
-
-    private function tableMissing(string $table): array
-    {
-        return [
-            'ok' => false,
-            'error' => 'TABLE_MISSING',
-            'message' => "{$table} table missing.",
-            'status' => 500,
-        ];
     }
 
     private function badRequest(string $code, string $message): array
@@ -1347,14 +1244,12 @@ class PaymentWebhookHandlerCore
 
         $updates = [
             'updated_at' => $now,
+            'refund_amount_cents' => $refundAmount > 0 ? $refundAmount : ($order->refund_amount_cents ?? null),
         ];
-        if (Schema::hasColumn('orders', 'refunded_at') && empty($order->refunded_at)) {
+        if (empty($order->refunded_at)) {
             $updates['refunded_at'] = $now;
         }
-        if (Schema::hasColumn('orders', 'refund_amount_cents')) {
-            $updates['refund_amount_cents'] = $refundAmount > 0 ? $refundAmount : ($order->refund_amount_cents ?? null);
-        }
-        if (Schema::hasColumn('orders', 'refund_reason') && $refundReason !== '') {
+        if ($refundReason !== '') {
             $updates['refund_reason'] = $refundReason;
         }
 

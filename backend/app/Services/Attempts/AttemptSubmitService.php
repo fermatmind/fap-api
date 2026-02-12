@@ -2,6 +2,8 @@
 
 namespace App\Services\Attempts;
 
+use App\DTO\Attempts\SubmitAttemptDTO;
+use App\Exceptions\Api\ApiProblemException;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
@@ -15,7 +17,6 @@ use App\Services\Report\ReportSnapshotStore;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -38,38 +39,36 @@ class AttemptSubmitService
         private ReportGatekeeper $reportGatekeeper,
     ) {}
 
-    public function submit(OrgContext $ctx, string $attemptId, array $validated): array
+    public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
     {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
-            abort(400, 'attempt_id is required.');
+            throw new ApiProblemException(400, 'VALIDATION_FAILED', 'attempt_id is required.');
         }
 
-        $answers = $validated['answers'] ?? [];
-        if (! is_array($answers)) {
-            $answers = [];
-        }
-
-        $durationMs = (int) ($validated['duration_ms'] ?? 0);
-        $inviteToken = trim((string) ($validated['invite_token'] ?? ''));
+        $answers = $dto->answers;
+        $durationMs = $dto->durationMs;
+        $inviteToken = $dto->inviteToken;
+        $actorUserId = $this->resolveUserId($ctx, $dto->userId);
+        $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
 
         $orgId = $ctx->orgId();
-        $attempt = $this->ownedAttemptQuery($ctx, $attemptId)->firstOrFail();
+        $attempt = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)->firstOrFail();
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {
-            abort(400, 'scale_code missing on attempt.');
+            throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code missing on attempt.');
         }
 
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (! $row) {
-            abort(404, 'scale not found.');
+            throw new ApiProblemException(404, 'NOT_FOUND', 'scale not found.');
         }
 
         $packId = (string) ($attempt->pack_id ?? $row['default_pack_id'] ?? '');
         $dirVersion = (string) ($attempt->dir_version ?? $row['default_dir_version'] ?? '');
         if ($packId === '' || $dirVersion === '') {
-            abort(500, 'scale pack not configured.');
+            throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
         }
 
         $region = (string) ($attempt->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
@@ -78,7 +77,7 @@ class AttemptSubmitService
         $draftAnswers = $this->progressService->loadDraftAnswers($attempt);
         $mergedAnswers = $this->mergeAnswersForSubmit($answers, $draftAnswers);
         if (empty($mergedAnswers)) {
-            abort(422, 'answers required.');
+            throw new ApiProblemException(422, 'VALIDATION_FAILED', 'answers required.');
         }
 
         $answersDigest = $this->computeAnswersDigest($mergedAnswers, $scaleCode, $packId, $dirVersion);
@@ -102,7 +101,7 @@ class AttemptSubmitService
 
         $scored = $this->engine->score($engineAttempt, $mergedAnswers, $scoreContext);
         if (! ($scored['ok'] ?? false)) {
-            abort(500, (string) ($scored['message'] ?? 'scoring failed.'));
+            throw new ApiProblemException(500, 'SCORING_FAILED', (string) ($scored['message'] ?? 'scoring failed.'));
         }
 
         $scoreResult = $scored['result'];
@@ -147,9 +146,11 @@ class AttemptSubmitService
             $entitlementBenefitCode,
             $scoreResult,
             $contentPackageVersion,
-            $scoringSpecVersion
+            $scoringSpecVersion,
+            $actorUserId,
+            $actorAnonId
         ) {
-            $locked = $this->ownedAttemptQuery($ctx, $attemptId)
+            $locked = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)
                 ->lockForUpdate()
                 ->firstOrFail();
 
@@ -175,7 +176,7 @@ class AttemptSubmitService
                     }
                 }
 
-                abort(409, 'attempt already submitted with different answers.');
+                throw new ApiProblemException(409, 'CONFLICT', 'attempt already submitted with different answers.');
             }
 
             if ($locked->submitted_at && $existingDigest === '') {
@@ -216,12 +217,12 @@ class AttemptSubmitService
 
             $stored = $this->answerSets->storeFinalAnswers($locked, $mergedAnswers, $durationMs, $scoringSpecVersion);
             if (! ($stored['ok'] ?? false)) {
-                abort(500, (string) ($stored['message'] ?? 'failed to store answer set.'));
+                throw new ApiProblemException(500, 'INTERNAL_ERROR', (string) ($stored['message'] ?? 'failed to store answer set.'));
             }
 
             $rowsWritten = $this->answerRowWriter->writeRows($locked, $mergedAnswers, $durationMs);
             if (! ($rowsWritten['ok'] ?? false)) {
-                abort(500, (string) ($rowsWritten['message'] ?? 'failed to write answer rows.'));
+                throw new ApiProblemException(500, 'INTERNAL_ERROR', (string) ($rowsWritten['message'] ?? 'failed to write answer rows.'));
             }
 
             $axisScores = is_array($scoreResult->axisScoresJson ?? null)
@@ -289,12 +290,12 @@ class AttemptSubmitService
         });
 
         if (! is_array($responsePayload)) {
-            abort(500, 'unexpected submit state.');
+            throw new ApiProblemException(500, 'INTERNAL_ERROR', 'unexpected submit state.');
         }
 
         $snapshotJobCtx = null;
         if (($responsePayload['ok'] ?? false) === true && is_array($postCommitCtx)) {
-            $snapshotJobCtx = $this->runSubmitPostCommitSideEffects($ctx, $postCommitCtx);
+            $snapshotJobCtx = $this->runSubmitPostCommitSideEffects($ctx, $postCommitCtx, $actorUserId, $actorAnonId);
         }
 
         if (is_array($snapshotJobCtx)) {
@@ -308,27 +309,31 @@ class AttemptSubmitService
 
         if (($responsePayload['ok'] ?? false) === true) {
             $this->progressService->clearProgress($attemptId);
-            $this->eventRecorder->record('test_submit', $this->resolveUserIdInt($ctx), [
+            $this->eventRecorder->record('test_submit', $this->resolveUserIdInt($ctx, $actorUserId), [
                 'scale_code' => (string) ($postCommitCtx['scale_code'] ?? ''),
                 'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
                 'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
                 'attempt_id' => $attemptId,
             ], [
                 'org_id' => $orgId,
-                'anon_id' => $this->resolveAnonId($ctx, request()),
+                'anon_id' => $actorAnonId,
                 'attempt_id' => $attemptId,
                 'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
                 'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
             ]);
         }
 
-        $this->appendReportPayload($ctx, $attemptId, $responsePayload);
+        $this->appendReportPayload($ctx, $attemptId, $actorUserId, $actorAnonId, $responsePayload);
 
         return $responsePayload;
     }
 
-    private function runSubmitPostCommitSideEffects(OrgContext $ctx, array $payload): ?array
-    {
+    private function runSubmitPostCommitSideEffects(
+        OrgContext $ctx,
+        array $payload,
+        ?string $actorUserId,
+        ?string $actorAnonId
+    ): ?array {
         $orgId = (int) ($payload['org_id'] ?? 0);
         $attemptId = trim((string) ($payload['attempt_id'] ?? ''));
         if ($attemptId === '') {
@@ -386,7 +391,7 @@ class AttemptSubmitService
                 $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
                 $creditOk = (bool) ($consume['ok'] ?? false);
                 if ($creditOk) {
-                    $this->eventRecorder->record('wallet_consumed', $this->resolveUserIdInt($ctx), [
+                    $this->eventRecorder->record('wallet_consumed', $this->resolveUserIdInt($ctx, $actorUserId), [
                         'scale_code' => $scaleCode,
                         'pack_id' => $packId,
                         'dir_version' => $dirVersion,
@@ -395,7 +400,7 @@ class AttemptSubmitService
                         'sku' => null,
                     ], [
                         'org_id' => $orgId,
-                        'anon_id' => $this->resolveAnonId($ctx, request()),
+                        'anon_id' => $actorAnonId,
                         'attempt_id' => $attemptId,
                         'pack_id' => $packId,
                         'dir_version' => $dirVersion,
@@ -421,8 +426,8 @@ class AttemptSubmitService
         }
 
         if ($creditOk && $orgId > 0 && $entitlementBenefitCode !== '') {
-            $userIdRaw = $this->resolveUserId($ctx, request());
-            $anonIdRaw = $this->resolveAnonId($ctx, request());
+            $userIdRaw = $this->resolveUserId($ctx, $actorUserId);
+            $anonIdRaw = $this->resolveAnonId($ctx, $actorAnonId);
 
             try {
                 $grant = $this->entitlements->grantAttemptUnlock(
@@ -478,10 +483,15 @@ class AttemptSubmitService
         ];
     }
 
-    private function appendReportPayload(OrgContext $ctx, string $attemptId, array &$responsePayload): void
-    {
-        $userId = $this->resolveUserId($ctx, request());
-        $anonId = $this->resolveAnonId($ctx, request());
+    private function appendReportPayload(
+        OrgContext $ctx,
+        string $attemptId,
+        ?string $actorUserId,
+        ?string $actorAnonId,
+        array &$responsePayload
+    ): void {
+        $userId = $this->resolveUserId($ctx, $actorUserId);
+        $anonId = $this->resolveAnonId($ctx, $actorAnonId);
 
         try {
             $gate = $this->reportGatekeeper->resolve(
@@ -527,8 +537,12 @@ class AttemptSubmitService
         $responsePayload['report'] = $gate;
     }
 
-    private function ownedAttemptQuery(OrgContext $ctx, string $attemptId): Builder
-    {
+    private function ownedAttemptQuery(
+        OrgContext $ctx,
+        string $attemptId,
+        ?string $actorUserId,
+        ?string $actorAnonId
+    ): Builder {
         $query = Attempt::query()
             ->where('id', $attemptId)
             ->where('org_id', $ctx->orgId());
@@ -538,26 +552,8 @@ class AttemptSubmitService
             return $query;
         }
 
-        $request = request();
-        $userId = null;
-        $anonId = null;
-
-        if ($request instanceof Request) {
-            $userId = $this->resolveUserId($ctx, $request);
-            $anonId = $this->resolveAnonId($ctx, $request);
-        } else {
-            $ctxUserId = $ctx->userId();
-            if ($ctxUserId !== null) {
-                $candidate = trim((string) $ctxUserId);
-                $userId = $candidate !== '' ? $candidate : null;
-            }
-
-            $ctxAnonId = $ctx->anonId();
-            if (is_string($ctxAnonId)) {
-                $candidate = trim($ctxAnonId);
-                $anonId = $candidate !== '' ? $candidate : null;
-            }
-        }
+        $userId = $this->resolveUserId($ctx, $actorUserId);
+        $anonId = $this->resolveAnonId($ctx, $actorAnonId);
 
         if (in_array($role, ['member', 'viewer'], true)) {
             if ($userId !== null) {
@@ -582,12 +578,11 @@ class AttemptSubmitService
         return $query->whereRaw('1=0');
     }
 
-    private function resolveUserId(OrgContext $ctx, ?Request $request): ?string
+    private function resolveUserId(OrgContext $ctx, ?string $actorUserId): ?string
     {
         $candidates = [
+            $actorUserId,
             $ctx->userId(),
-            $request?->attributes->get('fm_user_id'),
-            $request?->attributes->get('user_id'),
         ];
 
         foreach ($candidates as $candidate) {
@@ -602,15 +597,11 @@ class AttemptSubmitService
         return null;
     }
 
-    private function resolveAnonId(OrgContext $ctx, ?Request $request): ?string
+    private function resolveAnonId(OrgContext $ctx, ?string $actorAnonId): ?string
     {
         $candidates = [
+            $actorAnonId,
             $ctx->anonId(),
-            $request?->attributes->get('anon_id'),
-            $request?->attributes->get('fm_anon_id'),
-            $request?->query('anon_id'),
-            $request?->header('X-Anon-Id'),
-            $request?->header('X-Fm-Anon-Id'),
         ];
 
         foreach ($candidates as $candidate) {
@@ -625,9 +616,9 @@ class AttemptSubmitService
         return null;
     }
 
-    private function resolveUserIdInt(OrgContext $ctx): ?int
+    private function resolveUserIdInt(OrgContext $ctx, ?string $actorUserId): ?int
     {
-        $value = $this->resolveUserId($ctx, request());
+        $value = $this->resolveUserId($ctx, $actorUserId);
         if ($value === null) {
             return null;
         }
