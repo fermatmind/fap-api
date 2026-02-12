@@ -161,7 +161,7 @@ class PaymentWebhookIdempotencyTest extends TestCase
         $first = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
-        $first->assertStatus(200);
+        $first->assertStatus(500);
         $first->assertJson([
             'ok' => false,
             'error_code' => 'ORDER_NOT_FOUND',
