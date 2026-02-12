@@ -53,6 +53,9 @@ class CommerceController extends Controller
             'target_attempt_id' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
+            'org_id' => ['prohibited'],
+            'user_id' => ['prohibited'],
+            'anon_id' => ['prohibited'],
         ]);
 
         $requestedProvider = $this->resolveRequestedProvider($payload, $providerFromRoute);

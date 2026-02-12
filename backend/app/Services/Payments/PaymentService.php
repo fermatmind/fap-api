@@ -30,8 +30,10 @@ class PaymentService
         $currency = strtoupper(trim((string) ($data['currency'] ?? 'CNY')));
         $qtyRaw = $data['quantity'] ?? 1;
         $qty = is_numeric($qtyRaw) ? max(1, (int) $qtyRaw) : 1;
-        $orgIdRaw = $data['org_id'] ?? 1;
-        $orgId = is_numeric($orgIdRaw) ? max(1, (int) $orgIdRaw) : 1;
+        $legacyOrgId = (int) config('fap.legacy_org_id', 1);
+        if ($legacyOrgId <= 0) {
+            $legacyOrgId = 1;
+        }
         $unitPriceCents = $this->skuPriceService->getPrice($itemSku, $currency);
         $amountCents = $unitPriceCents * $qty;
 
@@ -63,7 +65,7 @@ class PaymentService
         ];
 
         if (Schema::hasColumn('orders', 'org_id')) {
-            $row['org_id'] = $orgId;
+            $row['org_id'] = $legacyOrgId;
         }
         if (!Schema::hasColumn('orders', 'amount_cents')) {
             unset($row['amount_cents']);
