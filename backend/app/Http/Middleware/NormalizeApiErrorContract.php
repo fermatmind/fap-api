@@ -26,9 +26,7 @@ final class NormalizeApiErrorContract
         }
 
         $status = $response->getStatusCode();
-        $hasError = array_key_exists('error', $payload) || array_key_exists('error_code', $payload);
-        $isError = $status >= 400 || $hasError || (($payload['ok'] ?? null) === false);
-        if (!$isError) {
+        if (!$this->shouldNormalize($payload, $status)) {
             return $response;
         }
 
@@ -68,6 +66,38 @@ final class NormalizeApiErrorContract
         }
 
         return $this->statusErrorCode($status);
+    }
+
+    private function shouldNormalize(array $payload, int $status): bool
+    {
+        if (($payload['ok'] ?? null) === false) {
+            return true;
+        }
+
+        if ($status < 400) {
+            return false;
+        }
+
+        return $this->hasErrorCode($payload) || $this->hasLegacyError($payload) || $this->hasMessage($payload);
+    }
+
+    private function hasErrorCode(array $payload): bool
+    {
+        return isset($payload['error_code']) && is_string($payload['error_code']) && trim($payload['error_code']) !== '';
+    }
+
+    private function hasLegacyError(array $payload): bool
+    {
+        if (isset($payload['error']) && is_string($payload['error']) && trim($payload['error']) !== '') {
+            return true;
+        }
+
+        return isset($payload['error']) && is_array($payload['error']);
+    }
+
+    private function hasMessage(array $payload): bool
+    {
+        return isset($payload['message']) && is_string($payload['message']) && trim($payload['message']) !== '';
     }
 
     private function resolveMessage(array $payload, int $status): string

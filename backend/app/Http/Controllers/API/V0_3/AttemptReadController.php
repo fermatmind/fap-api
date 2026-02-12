@@ -106,7 +106,7 @@ class AttemptReadController extends Controller
         if (!($gate['ok'] ?? false)) {
             $status = (int) ($gate['status'] ?? 0);
             if ($status <= 0) {
-                $error = strtoupper((string) ($gate['error'] ?? 'REPORT_FAILED'));
+                $error = strtoupper((string) data_get($gate, 'error_code', data_get($gate, 'error', 'REPORT_FAILED')));
                 $status = match ($error) {
                     'ATTEMPT_REQUIRED', 'SCALE_REQUIRED' => 400,
                     'ATTEMPT_NOT_FOUND', 'RESULT_NOT_FOUND', 'SCALE_NOT_FOUND' => 404,
