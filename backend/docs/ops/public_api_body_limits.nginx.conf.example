@@ -1,0 +1,7 @@
+# Global safeguard for public API
+client_max_body_size 256k;
+
+# Dedicated hard limit for share click
+location ~ ^/api/v0\.2/shares/[A-Za-z0-9_-]{6,128}/click$ {
+    client_max_body_size 16k;
+}
