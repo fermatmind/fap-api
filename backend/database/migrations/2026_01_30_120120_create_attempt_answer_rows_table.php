@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -69,7 +68,6 @@ return new class extends Migration
                 }
             });
 
-            $this->ensureMysqlPartitions();
             return;
         }
 
@@ -104,7 +102,7 @@ return new class extends Migration
                 $table->integer('duration_ms')->default(0);
             }
             if (!Schema::hasColumn('attempt_answer_rows', 'submitted_at')) {
-                // 旧表存在时，不强行改 NOT NULL，避免生产/历史数据被打爆；分区会在 ensureMysqlPartitions 内做“可分区才做”
+                // 旧表存在时，不强行改 NOT NULL，避免生产/历史数据被打爆。
                 if ($isMysql) {
                     $table->dateTime('submitted_at')->nullable();
                 } else {
@@ -151,89 +149,12 @@ return new class extends Migration
             });
         }
 
-        $this->ensureMysqlPartitions();
     }
 
     public function down(): void
     {
         // Prevent accidental data loss. This table might have existed before.
         // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
-    }
-
-    private function ensureMysqlPartitions(): void
-    {
-        $driver = Schema::getConnection()->getDriverName();
-        if ($driver !== 'mysql') {
-            return;
-        }
-        if (!Schema::hasTable('attempt_answer_rows')) {
-            return;
-        }
-        if ($this->hasAnyPartition('attempt_answer_rows')) {
-            return;
-        }
-
-        // MySQL 分区前置校验：主键必须包含 submitted_at 且 submitted_at 不能为 NULL
-        if (!$this->mysqlPartitionable('attempt_answer_rows')) {
-            // 直接跳过分区，避免 migrate fail（CI 走 fresh create 会满足条件）
-            return;
-        }
-
-        $base = Carbon::now()->startOfMonth();
-        $parts = [];
-        for ($i = 0; $i < 12; $i++) {
-            $next = (clone $base)->addMonth();
-            $name = 'p' . $base->format('Ym');
-            // DATETIME 分区：使用 'YYYY-MM-DD 00:00:00'
-            $parts[] = "PARTITION {$name} VALUES LESS THAN ('{$next->format('Y-m-d')} 00:00:00')";
-            $base = $next;
-        }
-        $parts[] = 'PARTITION pmax VALUES LESS THAN (MAXVALUE)';
-
-        $sql = 'ALTER TABLE attempt_answer_rows PARTITION BY RANGE COLUMNS(submitted_at) (' . implode(', ', $parts) . ')';
-        DB::statement($sql);
-    }
-
-    private function mysqlPartitionable(string $table): bool
-    {
-        // 1) submitted_at 必须 NOT NULL
-        $col = DB::selectOne(
-            "SELECT IS_NULLABLE, DATA_TYPE
-             FROM information_schema.COLUMNS
-             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND COLUMN_NAME = 'submitted_at'
-             LIMIT 1",
-            [$table]
-        );
-        if (!$col) {
-            return false;
-        }
-        if (strtoupper((string)($col->IS_NULLABLE ?? 'YES')) !== 'NO') {
-            return false;
-        }
-
-        // 2) PRIMARY KEY 必须包含 submitted_at
-        $pkCols = DB::select(
-            "SELECT COLUMN_NAME
-             FROM information_schema.KEY_COLUMN_USAGE
-             WHERE TABLE_SCHEMA = DATABASE()
-               AND TABLE_NAME = ?
-               AND CONSTRAINT_NAME = 'PRIMARY'
-             ORDER BY ORDINAL_POSITION",
-            [$table]
-        );
-        $names = array_map(fn ($r) => (string)($r->COLUMN_NAME ?? ''), $pkCols);
-        return in_array('submitted_at', $names, true);
-    }
-
-    private function hasAnyPartition(string $table): bool
-    {
-        $db = DB::getDatabaseName();
-        $rows = DB::select(
-            'SELECT partition_name FROM information_schema.partitions WHERE table_schema = ? AND table_name = ? AND partition_name IS NOT NULL LIMIT 1',
-            [$db, $table]
-        );
-
-        return !empty($rows);
     }
 
     private function indexExists(string $table, string $indexName): bool
