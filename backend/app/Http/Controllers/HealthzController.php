@@ -16,6 +16,7 @@ class HealthzController extends Controller
         $service = 'Fermat Assessment Platform API';
         $version = config('app.version', env('APP_VERSION', 'unknown'));
         $nowIso = now()->toIso8601String();
+        $verbose = (bool) config('healthz.verbose', false) && app()->environment(['local', 'testing']);
 
         $region = (string) $request->query('region', 'CN_MAINLAND');
         $locale = (string) $request->query('locale', 'zh-CN');
@@ -36,13 +37,41 @@ class HealthzController extends Controller
             }
         }
 
+        if (!$verbose) {
+            return response()->json([
+                'ok' => $allOk,
+                'service' => $service,
+                'version' => $version,
+                'time' => $nowIso,
+            ]);
+        }
+
         return response()->json([
             'ok' => $allOk,
             'service' => $service,
             'version' => $version,
             'time' => $nowIso,
-            'deps' => $deps,
+            'deps' => $this->sanitizeDeps($deps),
         ]);
+    }
+
+    private function sanitizeDeps(array $deps): array
+    {
+        $out = [];
+
+        foreach ($deps as $name => $dep) {
+            if (!is_array($dep)) {
+                $out[$name] = ['ok' => false, 'error_code' => 'INVALID_DEP_SHAPE'];
+                continue;
+            }
+
+            $out[$name] = [
+                'ok' => (bool) ($dep['ok'] ?? false),
+                'error_code' => (string) ($dep['error_code'] ?? ''),
+            ];
+        }
+
+        return $out;
     }
 
     private function checkDb(): array

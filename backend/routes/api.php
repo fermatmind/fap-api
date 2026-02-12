@@ -43,6 +43,7 @@ use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
 use App\Http\Middleware\DisableLegacyV02Report;
 use App\Http\Middleware\ResolveOrgContext;
+use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Controllers\Integrations\ProvidersController;
 use App\Http\Controllers\Webhooks\HandleProviderWebhook;
 
@@ -59,7 +60,13 @@ Route::middleware("auth:sanctum")->get("/user", function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('throttle:api_public')->get("/healthz", [HealthzController::class, "show"]);
+Route::middleware([HealthzAccessControl::class, 'throttle:api_public'])
+    ->get('/healthz', [HealthzController::class, 'show'])
+    ->name('healthz');
+
+Route::middleware([HealthzAccessControl::class, 'throttle:api_public'])
+    ->get('/v0.2/healthz', [HealthzController::class, 'show'])
+    ->name('healthz.v0_2');
 
 Route::prefix("v0.2")->middleware([
     'throttle:api_public',
@@ -68,8 +75,6 @@ Route::prefix("v0.2")->middleware([
 
     // 1) Health
     Route::get("/health", [LegacyAttemptController::class, "health"]);
-    Route::get("/healthz", [HealthzController::class, "show"]);
-    Route::get("/v0.2/healthz", [HealthzController::class, "show"]); // ✅ 新增
 
     // 1.5) Content packs
     Route::get("/content-packs", [ContentPacksController::class, "index"]);
