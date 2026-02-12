@@ -19,6 +19,13 @@ class HandleProviderWebhook extends Controller
             return $this->notFoundResponse();
         }
 
+        $raw = (string) $request->getContent();
+        $len = strlen($raw);
+        $max = (int) config('integrations.webhook_max_payload_bytes', 262144);
+        if ($len > $max) {
+            return $this->payloadTooLargeResponse($max, $len);
+        }
+
         $payload = $request->all();
         $eventId = (string) ($payload['event_id'] ?? '');
         $externalUserId = (string) ($payload['external_user_id'] ?? '');
@@ -216,6 +223,19 @@ class HandleProviderWebhook extends Controller
             ->where('provider', $provider)
             ->where('external_user_id', $externalUserId)
             ->update($updates);
+    }
+
+    private function payloadTooLargeResponse(int $maxBytes, int $lenBytes)
+    {
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'PAYLOAD_TOO_LARGE',
+            'message' => 'payload too large',
+            'details' => [
+                'max_bytes' => $maxBytes,
+                'len_bytes' => $lenBytes,
+            ],
+        ], 413);
     }
 
     private function notFoundResponse()

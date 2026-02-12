@@ -2,6 +2,7 @@
 
 return [
     'signature_tolerance_seconds' => (int) env('INTEGRATIONS_SIGNATURE_TOLERANCE_SECONDS', 300),
+    'webhook_max_payload_bytes' => (int) env('INTEGRATIONS_WEBHOOK_MAX_BYTES', 262144),
 
     'allowed_providers' => array_values(array_filter(array_map(
         static fn ($v) => strtolower(trim((string) $v)),
