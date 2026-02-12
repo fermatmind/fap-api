@@ -17,13 +17,16 @@ jobs:
       - name: Artifact hygiene gate
         run: bash scripts/security/assert_artifact_clean.sh --mode repo --target "$GITHUB_WORKSPACE"
 
-      - name: Export clean source package
-        run: bash scripts/release/export_source_clean.sh
+      - name: Export source zip
+        run: bash scripts/release/export_source_zip.sh
 
-      - name: Upload clean source package
+      - name: Verify source zip clean
+        run: bash scripts/release/verify_source_zip_clean.sh dist/fap-api-source.zip
+
+      - name: Upload source zip
         uses: actions/upload-artifact@v4
         with:
-          name: fap-api-source-clean
-          path: dist/fap-api.zip
+          name: fap-api-source
+          path: dist/fap-api-source.zip
           if-no-files-found: error
           retention-days: 7
