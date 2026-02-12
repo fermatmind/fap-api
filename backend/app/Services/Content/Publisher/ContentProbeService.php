@@ -3,6 +3,7 @@
 namespace App\Services\Content\Publisher;
 
 use App\Support\Http\ResilientClient;
+use Illuminate\Support\Facades\Log;
 
 class ContentProbeService
 {
@@ -86,6 +87,11 @@ class ContentProbeService
         try {
             $json = $resp->json();
         } catch (\Throwable $e) {
+            Log::warning('CONTENT_PROBE_JSON_PARSE_FAILED', [
+                'url' => $url,
+                'status' => $status,
+                'exception' => $e,
+            ]);
         }
 
         return [

@@ -162,7 +162,12 @@ final class ContentStore
                 try {
                     Cache::store()->put($cacheKey, $json, self::HOT_CACHE_TTL_SECONDS);
                 } catch (\Throwable $e2) {
-                    // ignore cache write failure
+                    Log::warning('CONTENT_STORE_CACHE_WRITE_FAILED', [
+                        'cache_key' => $cacheKey,
+                        'store' => 'default',
+                        'ttl' => self::HOT_CACHE_TTL_SECONDS,
+                        'exception' => $e2,
+                    ]);
                 }
             }
 

@@ -11,6 +11,7 @@ use App\Services\Audit\LookupEventLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AuthPhoneController extends Controller
 {
@@ -186,8 +187,15 @@ if (!$isOk) {
                 $collector->appendByAnonId((string) $userId, (string) $anonId);
             }
         } catch (\Throwable $e) {
-            // 归集失败不挡登录，但要可观测
-            // 你可以在 AssetCollector 里打日志，这里不强行 Log 依赖
+            $requestId = trim((string) $request->header('X-Request-Id', $request->header('X-Request-ID', '')));
+
+            Log::warning('AUTH_PHONE_ASSET_COLLECTOR_APPEND_FAILED', [
+                'user_id' => (string) $userId,
+                'anon_id' => $anonId,
+                'scene' => $scene,
+                'request_id' => $requestId !== '' ? $requestId : null,
+                'exception' => $e,
+            ]);
         }
 
         // ✅ 统一签发 token

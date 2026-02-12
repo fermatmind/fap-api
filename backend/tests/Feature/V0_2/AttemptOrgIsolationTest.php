@@ -46,6 +46,23 @@ final class AttemptOrgIsolationTest extends TestCase
 
         $resp->assertStatus(200);
         $resp->assertJsonPath('ok', true);
+        $resp->assertJsonMissingPath('pagination');
+
+        $payload = (array) $resp->json();
+        $this->assertArrayHasKey('meta', $payload);
+        $this->assertArrayHasKey('links', $payload);
+        $this->assertIsArray($payload['meta']);
+        $this->assertIsArray($payload['links']);
+
+        $this->assertArrayHasKey('current_page', $payload['meta']);
+        $this->assertArrayHasKey('per_page', $payload['meta']);
+        $this->assertArrayHasKey('total', $payload['meta']);
+        $this->assertArrayHasKey('last_page', $payload['meta']);
+
+        $this->assertArrayHasKey('first', $payload['links']);
+        $this->assertArrayHasKey('last', $payload['links']);
+        $this->assertArrayHasKey('prev', $payload['links']);
+        $this->assertArrayHasKey('next', $payload['links']);
 
         $ids = array_map(static fn (array $row): string => (string) ($row['attempt_id'] ?? ''), (array) $resp->json('items', []));
 

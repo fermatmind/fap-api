@@ -74,11 +74,15 @@ final class NormalizeApiErrorContract
             return true;
         }
 
+        if ($this->hasLegacyError($payload)) {
+            return true;
+        }
+
         if ($status < 400) {
             return false;
         }
 
-        return $this->hasErrorCode($payload) || $this->hasLegacyError($payload) || $this->hasMessage($payload);
+        return $this->hasErrorCode($payload) || $this->hasMessage($payload);
     }
 
     private function hasErrorCode(array $payload): bool

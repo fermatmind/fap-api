@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use RuntimeException;
 use ZipArchive;
@@ -623,25 +624,39 @@ final class ContentPackPublisher
         try {
             Artisan::call('cache:clear');
         } catch (\Throwable $e) {
-            // ignore cache clear failures
+            Log::warning('CONTENT_PACK_PUBLISHER_CACHE_CLEAR_FAILED', [
+                'action' => 'cache:clear',
+                'exception' => $e,
+            ]);
         }
 
         try {
             Cache::store('hot_redis')->flush();
         } catch (\Throwable $e) {
-            // ignore hot_redis failures
+            Log::warning('CONTENT_PACK_PUBLISHER_CACHE_CLEAR_FAILED', [
+                'action' => 'hot_redis.flush',
+                'exception' => $e,
+            ]);
         }
 
         try {
             Cache::forget(CacheKeys::packsIndex());
         } catch (\Throwable $e) {
-            // ignore cache forget failures
+            Log::warning('CONTENT_PACK_PUBLISHER_CACHE_CLEAR_FAILED', [
+                'action' => 'default.forget',
+                'cache_key' => CacheKeys::packsIndex(),
+                'exception' => $e,
+            ]);
         }
 
         try {
             Cache::store('hot_redis')->forget(CacheKeys::packsIndex());
         } catch (\Throwable $e) {
-            // ignore hot_redis failures
+            Log::warning('CONTENT_PACK_PUBLISHER_CACHE_CLEAR_FAILED', [
+                'action' => 'hot_redis.forget',
+                'cache_key' => CacheKeys::packsIndex(),
+                'exception' => $e,
+            ]);
         }
     }
 

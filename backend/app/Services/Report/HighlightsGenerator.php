@@ -3,6 +3,7 @@
 namespace App\Services\Report;
 
 use App\Services\Overrides\HighlightsOverridesApplier;
+use Illuminate\Support\Facades\Log;
 
 class HighlightsGenerator
 {
@@ -188,7 +189,11 @@ class HighlightsGenerator
                 $out = $applier->apply($out, $ctx);
             }
         } catch (\Throwable $e) {
-            // swallow: overrides 不可用时不影响主链路
+            Log::warning('HIGHLIGHTS_OVERRIDES_APPLY_FAILED', [
+                'type_code' => $typeCode,
+                'content_package_version' => $contentPackageVersion,
+                'exception' => $e,
+            ]);
         }
 
         return array_slice($out, 0, 8);

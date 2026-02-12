@@ -8,6 +8,7 @@ use App\Http\Requests\V0_2\BindEmailRequest;
 use App\Models\Attempt;
 use App\Services\Abuse\RateLimiter;
 use App\Services\Audit\LookupEventLogger;
+use App\Support\ApiPagination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -82,17 +83,16 @@ class MeController extends Controller
             $items[] = $this->presentAttempt($a);
         }
 
+        $p->setCollection(collect($items));
+        $pagination = ApiPagination::fromLengthAwarePaginator($p);
+
         return response()->json([
             'ok' => true,
             'user_id' => $userId ?? '',
             'anon_id' => $anonId ?? '',
-            'items' => $items,
-            'pagination' => [
-                'page' => $p->currentPage(),
-                'per_page' => $p->perPage(),
-                'total' => $p->total(),
-                'last_page' => $p->lastPage(),
-            ],
+            'items' => $pagination['items'],
+            'meta' => $pagination['meta'],
+            'links' => $pagination['links'],
         ]);
     }
 
