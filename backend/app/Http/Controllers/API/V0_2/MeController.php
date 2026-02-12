@@ -38,7 +38,7 @@ class MeController extends Controller
         if ($userId === null && $anonId === null) {
             return response()->json([
                 'ok' => false,
-                'error' => 'unauthorized',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Missing or invalid fm_token.',
             ], 401);
         }
@@ -61,7 +61,7 @@ class MeController extends Controller
                 // schema 不支持就直接 401（或返回空）
                 return response()->json([
                     'ok' => false,
-                    'error' => 'INVALID_SCHEMA',
+                    'error_code' => 'INVALID_SCHEMA',
                     'message' => 'attempts.anon_id column not found.',
                 ], 500);
             }
@@ -84,7 +84,7 @@ class MeController extends Controller
         }
 
         $p->setCollection(collect($items));
-        $pagination = ApiPagination::fromLengthAwarePaginator($p);
+        $pagination = ApiPagination::fromPaginator($p);
 
         return response()->json([
             'ok' => true,
@@ -108,11 +108,11 @@ class MeController extends Controller
         $limitIp = $limiter->limit('FAP_RATE_EMAIL_BIND_IP', 60);
         if ($ip !== '' && !$limiter->hit("email_bind:ip:{$ip}", $limitIp, 60)) {
             $logger->log('email_bind', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'message' => 'Too many requests from this IP.',
             ], 429);
         }
@@ -120,22 +120,22 @@ class MeController extends Controller
         $userId = $this->resolveUserId($request);
         if ($userId === null) {
             $logger->log('email_bind', false, $request, null, [
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Missing or invalid fm_token.',
             ], 401);
         }
 
         if (!Schema::hasTable('users') || !Schema::hasColumn('users', 'email')) {
             $logger->log('email_bind', false, $request, (string) $userId, [
-                'error' => 'INVALID_SCHEMA',
+                'error_code' => 'INVALID_SCHEMA',
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_SCHEMA',
+                'error_code' => 'INVALID_SCHEMA',
                 'message' => 'users.email column not found.',
             ], 500);
         }
@@ -160,13 +160,13 @@ class MeController extends Controller
 
         if ($exists) {
             $logger->log('email_bind', false, $request, (string) $userId, [
-                'error' => 'EMAIL_IN_USE',
+                'error_code' => 'EMAIL_IN_USE',
                 'email_hash' => $emailHash,
                 'email_domain' => $emailDomain,
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'EMAIL_IN_USE',
+                'error_code' => 'EMAIL_IN_USE',
                 'message' => 'email already in use.',
             ], 422);
         }
@@ -182,26 +182,26 @@ class MeController extends Controller
             $updated = DB::table('users')->where($pk, $userId)->update($update);
         } catch (\Throwable $e) {
             $logger->log('email_bind', false, $request, (string) $userId, [
-                'error' => 'EMAIL_BIND_FAILED',
+                'error_code' => 'EMAIL_BIND_FAILED',
                 'email_hash' => $emailHash,
                 'email_domain' => $emailDomain,
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'EMAIL_BIND_FAILED',
+                'error_code' => 'EMAIL_BIND_FAILED',
                 'message' => $e->getMessage(),
             ], 422);
         }
 
         if ($updated < 1) {
             $logger->log('email_bind', false, $request, (string) $userId, [
-                'error' => 'USER_NOT_FOUND',
+                'error_code' => 'USER_NOT_FOUND',
                 'email_hash' => $emailHash,
                 'email_domain' => $emailDomain,
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'USER_NOT_FOUND',
+                'error_code' => 'USER_NOT_FOUND',
                 'message' => 'User not found for email bind.',
             ], 404);
         }
@@ -225,13 +225,13 @@ class MeController extends Controller
     {
         $identity = $this->resolveIdentity($request);
         if (!$identity['ok']) {
-            return response()->json($identity['error'], 401);
+            return response()->json($identity['error_payload'], 401);
         }
 
         if (!Schema::hasTable('sleep_samples')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_SCHEMA',
+                'error_code' => 'INVALID_SCHEMA',
                 'message' => 'sleep_samples table not found.',
             ], 500);
         }
@@ -271,7 +271,7 @@ class MeController extends Controller
     {
         $identity = $this->resolveIdentity($request);
         if (!$identity['ok']) {
-            return response()->json($identity['error'], 401);
+            return response()->json($identity['error_payload'], 401);
         }
 
         if (!Schema::hasTable('health_samples')) {
@@ -317,13 +317,13 @@ class MeController extends Controller
     {
         $identity = $this->resolveIdentity($request);
         if (!$identity['ok']) {
-            return response()->json($identity['error'], 401);
+            return response()->json($identity['error_payload'], 401);
         }
 
         if (!Schema::hasTable('screen_time_samples')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_SCHEMA',
+                'error_code' => 'INVALID_SCHEMA',
                 'message' => 'screen_time_samples table not found.',
             ], 500);
         }
@@ -419,9 +419,9 @@ class MeController extends Controller
         if ($userId === null && $anonId === null) {
             return [
                 'ok' => false,
-                'error' => [
+                'error_payload' => [
                     'ok' => false,
-                    'error' => 'unauthorized',
+                    'error_code' => 'UNAUTHORIZED',
                     'message' => 'Missing or invalid fm_token.',
                 ],
             ];

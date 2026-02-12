@@ -27,7 +27,7 @@ class OrgsController extends Controller
         if ($userId === null) {
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Missing or invalid fm_token.',
             ], 401);
         }
@@ -55,7 +55,7 @@ class OrgsController extends Controller
         if ($userId === null) {
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Missing or invalid fm_token.',
             ], 401);
         }

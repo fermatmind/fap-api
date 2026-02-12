@@ -28,14 +28,14 @@ class ScalesLookupController extends Controller
         if ($slug === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'SLUG_REQUIRED',
+                'error_code' => 'SLUG_REQUIRED',
                 'message' => 'slug is required.',
             ], 400);
         }
         if (!preg_match('/^[a-z0-9-]{0,127}$/', $slug)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'scale not found.',
             ], 404);
         }
@@ -44,7 +44,7 @@ class ScalesLookupController extends Controller
         if (!$row) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'scale not found.',
             ], 404);
         }

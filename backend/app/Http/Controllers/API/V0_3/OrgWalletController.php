@@ -54,7 +54,7 @@ class OrgWalletController extends Controller
         if ($benefitCode === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'BENEFIT_REQUIRED',
+                'error_code' => 'BENEFIT_REQUIRED',
                 'message' => 'benefit_code is required.',
             ], 400);
         }
@@ -89,7 +89,7 @@ class OrgWalletController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'ORG_NOT_FOUND',
+            'error_code' => 'ORG_NOT_FOUND',
             'message' => 'org not found.',
         ], 404);
     }
