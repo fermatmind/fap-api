@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\NormalizeApiErrorContract;
 use App\Http\Middleware\LimitWebhookPayloadSize;
+use App\Http\Middleware\LimitIntegrationsWebhookPayloadSize;
 use App\Http\Controllers\HealthzController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LookupController;
@@ -173,13 +174,14 @@ Route::prefix("v0.2")->middleware([
                 ->middleware(\App\Http\Middleware\IntegrationsIngestAuth::class);
             Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"]);
         });
-
-        // =========================================================
-        // Webhooks (provider push)
-        // =========================================================
-        Route::post("/webhooks/{provider}", [HandleProviderWebhook::class, "handle"])
-            ->whereIn('provider', ['mock', 'apple_health', 'google_fit', 'calendar', 'screen_time']);
     });
+
+    // =========================================================
+    // Webhooks (provider push)
+    // =========================================================
+    Route::post("/webhooks/{provider}", [HandleProviderWebhook::class, "handle"])
+        ->whereIn('provider', ['mock', 'apple_health', 'google_fit', 'calendar', 'screen_time'])
+        ->middleware([LimitIntegrationsWebhookPayloadSize::class, 'throttle:api_webhook']);
 
     // =========================================================
     // AI Insights (async, budget guarded)
