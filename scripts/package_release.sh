@@ -4,7 +4,8 @@ set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
 
-OUT="release.zip"
-git archive --format=zip --output "$OUT" HEAD
-
-echo "[package_release] created $ROOT/$OUT"
+echo "[deprecated] scripts/package_release.sh delegates to SEC-001 flow"
+bash scripts/security/assert_no_tracked_sensitive_files.sh
+bash scripts/release/export_source_zip.sh
+bash scripts/release/verify_source_zip_clean.sh dist/fap-api-source.zip
+echo "[package_release] dist/fap-api-source.zip"

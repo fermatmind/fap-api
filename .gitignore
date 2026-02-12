@@ -20,55 +20,6 @@ tools/compose/.env
 coscli.log
 coscli_output/
 
-# SEC-001 artifact hygiene denylist
-.env
-.env.*
-backend/.env
-backend/.env.*
-.git/
-node_modules/
-backend/node_modules/
-vendor/
-backend/vendor/
-
-backend/storage/logs/**
-!backend/storage/logs/.gitkeep
-backend/storage/framework/**
-!backend/storage/framework/.gitkeep
-backend/storage/app/private/reports/**
-
-# SEC-001 source export hardening
-.env
-.env.*
-backend/.env
-backend/.env.*
-backend/vendor/
-vendor/
-node_modules/
-backend/node_modules/
-backend/artifacts/
-backend/database/*.sqlite
-backend/storage/logs/**
-backend/storage/framework/**
-backend/storage/app/private/reports/**
-backend/storage/app/archives/**
-
-# keep placeholders tracked
-!backend/storage/logs/
-!backend/storage/framework/
-!backend/storage/framework/cache/
-!backend/storage/framework/sessions/
-!backend/storage/framework/views/
-!backend/storage/app/private/
-!backend/storage/app/archives/
-!backend/storage/logs/.gitkeep
-!backend/storage/framework/.gitkeep
-!backend/storage/framework/cache/.gitkeep
-!backend/storage/framework/sessions/.gitkeep
-!backend/storage/framework/views/.gitkeep
-!backend/storage/app/private/.gitkeep
-!backend/storage/app/archives/.gitkeep
-
 # SEC-001 canonical denylist
 .env
 .env.*

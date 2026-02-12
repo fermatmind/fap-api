@@ -1,0 +1,20 @@
+name: artifact-hygiene
+
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Assert no tracked sensitive files
+        run: bash scripts/security/assert_no_tracked_sensitive_files.sh
+      - name: Export source zip
+        run: bash scripts/release/export_source_zip.sh
+      - name: Verify source zip clean
+        run: bash scripts/release/verify_source_zip_clean.sh dist/fap-api-source.zip
