@@ -86,7 +86,7 @@ class CommerceController extends Controller
         );
 
         if (!($result['ok'] ?? false)) {
-            $status = $this->mapErrorStatus((string) ($result['error'] ?? ''));
+            $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
             $message = trim((string) ($result['message'] ?? ''));
             abort($status, $message !== '' ? $message : 'request failed.');
         }
@@ -107,7 +107,7 @@ class CommerceController extends Controller
         $anonId = $this->resolveAnonId($request);
         $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
         if (!($result['ok'] ?? false)) {
-            $status = $this->mapErrorStatus((string) ($result['error'] ?? ''));
+            $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
             $message = trim((string) ($result['message'] ?? ''));
             abort($status, $message !== '' ? $message : 'request failed.');
         }

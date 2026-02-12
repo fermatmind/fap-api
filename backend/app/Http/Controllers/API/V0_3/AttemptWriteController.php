@@ -457,7 +457,7 @@ class AttemptWriteController extends Controller
                     Log::warning('SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_FAILED', [
                         'org_id' => $orgId,
                         'attempt_id' => $attemptId,
-                        'error' => $consume['error'] ?? 'CREDITS_CONSUME_FAILED',
+                        'error_code' => (string) data_get($consume, 'error_code', data_get($consume, 'error', 'CREDITS_CONSUME_FAILED')),
                         'message' => $consume['message'] ?? 'credits consume failed.',
                     ]);
                 }
@@ -495,7 +495,7 @@ class AttemptWriteController extends Controller
                         'org_id' => $orgId,
                         'attempt_id' => $attemptId,
                         'benefit_code' => $creditBenefitCode,
-                        'error' => $consume['error'] ?? 'INSUFFICIENT_CREDITS',
+                        'error_code' => (string) data_get($consume, 'error_code', data_get($consume, 'error', 'INSUFFICIENT_CREDITS')),
                         'message' => $consume['message'] ?? 'insufficient credits.',
                     ]);
                 }
@@ -529,7 +529,7 @@ class AttemptWriteController extends Controller
                         'org_id' => $orgId,
                         'attempt_id' => $attemptId,
                         'benefit_code' => $entitlementBenefitCode,
-                        'error' => $grant['error'] ?? 'ENTITLEMENT_GRANT_FAILED',
+                        'error_code' => (string) data_get($grant, 'error_code', data_get($grant, 'error', 'ENTITLEMENT_GRANT_FAILED')),
                         'message' => $grant['message'] ?? 'entitlement grant failed.',
                     ]);
                 }

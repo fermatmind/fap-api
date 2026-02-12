@@ -32,7 +32,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'message' => 'Too many requests from this IP.',
             ], 429);
         }
@@ -47,7 +47,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'invalid_format',
+                'error_code' => 'INVALID_FORMAT',
                 'message' => 'ticket_code format invalid (expected FMT-XXXXXXXX).',
             ], 422);
         }
@@ -66,7 +66,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'not_found',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'ticket_code not found.',
             ], 404);
         }
@@ -105,7 +105,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'message' => 'Too many requests from this IP.',
             ], 429);
         }
@@ -118,7 +118,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'invalid_payload',
+                'error_code' => 'INVALID_PAYLOAD',
                 'message' => 'attempt_ids must be an array.',
             ], 422);
         }
@@ -153,7 +153,7 @@ class LookupController extends Controller
                 ]);
                 return response()->json([
                     'ok' => false,
-                    'error' => 'invalid_id',
+                    'error_code' => 'INVALID_ID',
                     'message' => 'attempt_ids contains invalid uuid.',
                 ], 422);
             }
@@ -184,7 +184,7 @@ class LookupController extends Controller
 
             return response()->json([
                 'ok' => false,
-                'error' => 'not_found',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'attempt not found.',
             ], 404);
         }
@@ -229,7 +229,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'message' => 'Too many requests from this IP.',
             ], 429);
         }
@@ -240,7 +240,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_ENABLED',
+                'error_code' => 'NOT_ENABLED',
                 'message' => 'lookup/order disabled.',
             ]);
         }
@@ -252,7 +252,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_ORDER',
+                'error_code' => 'INVALID_ORDER',
                 'message' => 'order_no is required.',
             ], 422);
         }
@@ -264,7 +264,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_SUPPORTED',
+                'error_code' => 'NOT_SUPPORTED',
                 'message' => 'order lookup not supported.',
             ]);
         }
@@ -277,7 +277,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_SUPPORTED',
+                'error_code' => 'NOT_SUPPORTED',
                 'message' => 'order lookup not supported.',
             ]);
         }
@@ -290,7 +290,7 @@ class LookupController extends Controller
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'order not found.',
             ], 404);
         }
@@ -386,7 +386,7 @@ class LookupController extends Controller
         if (!$userId && !$anonId) {
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'missing identity on request (user_id/anon_id).',
             ], 401);
         }

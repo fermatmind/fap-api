@@ -25,7 +25,8 @@ class ValidityFeedbackController extends Controller
         if (!$enabled) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_ENABLED',
+                'error_code' => 'NOT_ENABLED',
+                'message' => 'feedback is disabled.',
             ], 200);
         }
 
@@ -45,7 +46,8 @@ class ValidityFeedbackController extends Controller
         if (!$attempt) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
+                'message' => 'attempt not found.',
             ], 404);
         }
 
@@ -146,7 +148,8 @@ class ValidityFeedbackController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'FORBIDDEN',
+            'error_code' => 'FORBIDDEN',
+            'message' => 'forbidden.',
         ], 403);
     }
 

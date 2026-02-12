@@ -30,11 +30,11 @@ class PaymentsController extends Controller
         $result = $service->createOrder($request->orderData());
 
         if (!$result['ok']) {
-            return response()->json([
-                'ok' => false,
-                'error' => $result['error'] ?? 'CREATE_FAILED',
-                'message' => $result['message'] ?? 'create order failed.',
-            ], (int) ($result['status'] ?? 500));
+            return $this->apiError(
+                (int) ($result['status'] ?? 500),
+                $this->resolveResultErrorCode($result, 'CREATE_FAILED'),
+                (string) ($result['message'] ?? 'create order failed.')
+            );
         }
 
         $order = $result['order'];
@@ -63,11 +63,7 @@ class PaymentsController extends Controller
         }
 
         if (!$this->devModeAllowed()) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'DEV_ONLY',
-                'message' => 'mark_paid is only available in dev mode.',
-            ], 403);
+            return $this->apiError(403, 'DEV_ONLY', 'mark_paid is only available in dev mode.');
         }
 
         [$userId, $anonId] = $this->resolveActor($request);
@@ -82,11 +78,11 @@ class PaymentsController extends Controller
         ]);
 
         if (!$result['ok']) {
-            return response()->json([
-                'ok' => false,
-                'error' => $result['error'] ?? 'MARK_PAID_FAILED',
-                'message' => $result['message'] ?? 'mark paid failed.',
-            ], (int) ($result['status'] ?? 500));
+            return $this->apiError(
+                (int) ($result['status'] ?? 500),
+                $this->resolveResultErrorCode($result, 'MARK_PAID_FAILED'),
+                (string) ($result['message'] ?? 'mark paid failed.')
+            );
         }
 
         $order = $result['order'];
@@ -114,11 +110,11 @@ class PaymentsController extends Controller
         $result = $service->fulfill($id, (string) ($userId ?? $anonId), $anonId);
 
         if (!$result['ok']) {
-            return response()->json([
-                'ok' => false,
-                'error' => $result['error'] ?? 'FULFILL_FAILED',
-                'message' => $result['message'] ?? 'fulfill failed.',
-            ], (int) ($result['status'] ?? 500));
+            return $this->apiError(
+                (int) ($result['status'] ?? 500),
+                $this->resolveResultErrorCode($result, 'FULFILL_FAILED'),
+                (string) ($result['message'] ?? 'fulfill failed.')
+            );
         }
 
         $order = $result['order'];
@@ -147,11 +143,11 @@ class PaymentsController extends Controller
         $result = $service->listBenefits((string) ($userId ?? $anonId));
 
         if (!$result['ok']) {
-            return response()->json([
-                'ok' => false,
-                'error' => $result['error'] ?? 'BENEFITS_FAILED',
-                'message' => $result['message'] ?? 'benefits query failed.',
-            ], (int) ($result['status'] ?? 500));
+            return $this->apiError(
+                (int) ($result['status'] ?? 500),
+                $this->resolveResultErrorCode($result, 'BENEFITS_FAILED'),
+                (string) ($result['message'] ?? 'benefits query failed.')
+            );
         }
 
         return response()->json([
@@ -168,11 +164,7 @@ class PaymentsController extends Controller
         }
 
         if (!$this->webhookEnabled()) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'WEBHOOK_DISABLED',
-                'message' => 'Webhook is disabled.',
-            ], 404);
+            return $this->apiError(404, 'WEBHOOK_DISABLED', 'Webhook is disabled.');
         }
 
         $providerEventId = $this->trimString($request->input('provider_event_id', ''));
@@ -197,12 +189,9 @@ class PaymentsController extends Controller
         }
 
         if ($missing !== []) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'INVALID_PAYLOAD',
-                'message' => 'missing or invalid fields.',
+            return $this->apiError(422, 'INVALID_PAYLOAD', 'missing or invalid fields.', [
                 'fields' => $missing,
-            ], 422);
+            ]);
         }
 
         $payload = [
@@ -223,11 +212,11 @@ class PaymentsController extends Controller
         ]);
 
         if (!$result['ok']) {
-            return response()->json([
-                'ok' => false,
-                'error' => $result['error'] ?? 'WEBHOOK_FAILED',
-                'message' => $result['message'] ?? 'webhook handling failed.',
-            ], (int) ($result['status'] ?? 500));
+            return $this->apiError(
+                (int) ($result['status'] ?? 500),
+                $this->resolveResultErrorCode($result, 'WEBHOOK_FAILED'),
+                (string) ($result['message'] ?? 'webhook handling failed.')
+            );
         }
 
         return response()->json([
@@ -265,20 +254,32 @@ class PaymentsController extends Controller
 
     private function paymentsDisabledResponse()
     {
-        return response()->json([
-            'ok' => false,
-            'error' => 'PAYMENTS_DISABLED',
-            'message' => 'Payments API is disabled.',
-        ], 404);
+        return $this->apiError(404, 'PAYMENTS_DISABLED', 'Payments API is disabled.');
     }
 
     private function unauthorizedResponse()
     {
-        return response()->json([
+        return $this->apiError(401, 'UNAUTHORIZED', 'Missing or invalid fm_token.');
+    }
+
+    private function resolveResultErrorCode(array $result, string $fallback): string
+    {
+        $raw = trim((string) data_get($result, 'error_code', data_get($result, 'error', $fallback)));
+        return $raw !== '' ? strtoupper($raw) : $fallback;
+    }
+
+    private function apiError(int $status, string $errorCode, string $message, array $details = []): \Illuminate\Http\JsonResponse
+    {
+        $payload = [
             'ok' => false,
-            'error' => 'UNAUTHORIZED',
-            'message' => 'Missing or invalid fm_token.',
-        ], 401);
+            'error_code' => strtoupper(trim($errorCode)),
+            'message' => $message,
+        ];
+        if ($details !== []) {
+            $payload['details'] = $details;
+        }
+
+        return response()->json($payload, $status);
     }
 
     private function resolveActor(Request $request): array

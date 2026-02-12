@@ -190,7 +190,7 @@ class PaymentService
             return [
                 'ok' => false,
                 'status' => 422,
-                'error' => 'MISSING_USER',
+                'error_code' => 'MISSING_USER',
                 'message' => 'missing user id for benefit grant.',
             ];
         }
@@ -249,7 +249,7 @@ class PaymentService
             return [
                 'ok' => false,
                 'status' => 422,
-                'error' => 'INVALID_USER',
+                'error_code' => 'INVALID_USER',
                 'message' => 'user id missing.',
             ];
         }
@@ -331,7 +331,7 @@ class PaymentService
                 return [
                     'ok' => false,
                     'status' => 404,
-                    'error' => 'ORDER_NOT_FOUND',
+                    'error_code' => 'ORDER_NOT_FOUND',
                     'message' => 'order not found.',
                 ];
             }
@@ -477,47 +477,47 @@ class PaymentService
         return [
             'ok' => false,
             'status' => 500,
-            'error' => 'TABLE_MISSING',
+            'error_code' => 'TABLE_MISSING',
             'message' => "{$table} table missing.",
         ];
     }
 
-    private function notFound(string $error, string $message): array
+    private function notFound(string $errorCode, string $message): array
     {
         return [
             'ok' => false,
             'status' => 404,
-            'error' => $error,
+            'error_code' => $errorCode,
             'message' => $message,
         ];
     }
 
-    private function forbidden(string $error, string $message): array
+    private function forbidden(string $errorCode, string $message): array
     {
         return [
             'ok' => false,
             'status' => 403,
-            'error' => $error,
+            'error_code' => $errorCode,
             'message' => $message,
         ];
     }
 
-    private function conflict(string $error, string $message): array
+    private function conflict(string $errorCode, string $message): array
     {
         return [
             'ok' => false,
             'status' => 409,
-            'error' => $error,
+            'error_code' => $errorCode,
             'message' => $message,
         ];
     }
 
-    private function invalid(string $error, string $message): array
+    private function invalid(string $errorCode, string $message): array
     {
         return [
             'ok' => false,
             'status' => 422,
-            'error' => $error,
+            'error_code' => $errorCode,
             'message' => $message,
         ];
     }
