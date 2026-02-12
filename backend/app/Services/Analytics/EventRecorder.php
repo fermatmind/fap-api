@@ -5,6 +5,7 @@ namespace App\Services\Analytics;
 use App\Models\Event;
 use App\Services\Experiments\ExperimentAssigner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -50,7 +51,13 @@ final class EventRecorder
         try {
             Event::create($payload);
         } catch (\Throwable $e) {
-            // best-effort
+            Log::warning('EVENT_RECORDER_WRITE_FAILED', [
+                'event_code' => $eventCode,
+                'org_id' => (int) ($payload['org_id'] ?? 0),
+                'request_id' => $payload['request_id'] ?? null,
+                'user_id' => $userId,
+                'exception' => $e,
+            ]);
         }
     }
 

@@ -4,6 +4,7 @@ namespace App\Services\Audit;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -26,6 +27,8 @@ class LookupEventLogger
         if ($requestId === '') {
             $requestId = trim((string) $request->header('X-Request-ID', ''));
         }
+        $orgId = $request->attributes->get('org_id');
+        $orgId = is_numeric($orgId) ? (int) $orgId : (is_numeric($meta['org_id'] ?? null) ? (int) $meta['org_id'] : 0);
 
         try {
             DB::table('lookup_events')->insert([
@@ -39,7 +42,14 @@ class LookupEventLogger
                 'created_at' => now(),
             ]);
         } catch (\Throwable $e) {
-            // best-effort: do not block request flow
+            Log::error('LOOKUP_EVENT_LOG_WRITE_FAILED', [
+                'method' => $method,
+                'success' => $success,
+                'org_id' => $orgId,
+                'request_id' => $requestId !== '' ? $requestId : null,
+                'user_id' => $uid !== '' ? $uid : null,
+                'exception' => $e,
+            ]);
         }
     }
 }

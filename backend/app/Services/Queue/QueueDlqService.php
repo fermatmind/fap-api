@@ -245,8 +245,12 @@ class QueueDlqService
             foreach (array_unique($candidates) as $candidate) {
                 try {
                     $failer->forget($candidate);
-                } catch (\Throwable) {
-                    // Fallback delete below is authoritative in this service.
+                } catch (\Throwable $e) {
+                    Log::warning('QUEUE_DLQ_FORGET_FAILED', [
+                        'candidate_id' => (string) $candidate,
+                        'failed_job_id' => $failedJobId,
+                        'exception' => $e,
+                    ]);
                 }
             }
         }

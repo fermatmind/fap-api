@@ -7,6 +7,7 @@ namespace App\Services\Content;
 use App\Support\CacheKeys;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 final class ContentPacksIndex
 {
@@ -73,7 +74,12 @@ final class ContentPacksIndex
             try {
                 Cache::store()->put($cacheKey, $index, self::CACHE_TTL_SECONDS);
             } catch (\Throwable $e2) {
-                // ignore cache write failure
+                Log::warning('CONTENT_PACKS_INDEX_CACHE_WRITE_FAILED', [
+                    'cache_key' => $cacheKey,
+                    'store' => 'default',
+                    'ttl' => self::CACHE_TTL_SECONDS,
+                    'exception' => $e2,
+                ]);
             }
         }
 

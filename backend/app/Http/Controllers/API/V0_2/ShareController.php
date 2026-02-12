@@ -435,7 +435,15 @@ $event->anon_id = ($clickAnonId !== null && $clickAnonId !== '') ? $clickAnonId 
                 'updated_at' => Carbon::now(),
             ]);
         } catch (\Throwable $e) {
-            // Keep endpoint non-blocking for legacy compatibility.
+            $requestId = trim((string) request()->header('X-Request-Id', request()->header('X-Request-ID', '')));
+
+            Log::warning('SHARE_LEGACY_EVENT_CREATE_FAILED', [
+                'event_code' => $eventCode,
+                'attempt_id' => $attemptId,
+                'org_id' => $orgId,
+                'request_id' => $requestId !== '' ? $requestId : null,
+                'exception' => $e,
+            ]);
         }
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class VerifyIntegrationSignature
@@ -75,7 +76,13 @@ class VerifyIntegrationSignature
                 }
             }
         } catch (\Throwable $e) {
-            // no-op: guard missing / not available
+            $request = request();
+            $requestId = trim((string) $request->header('X-Request-Id', $request->header('X-Request-ID', '')));
+
+            Log::debug('VERIFY_INTEGRATION_SIGNATURE_GUARD_RESOLVE_FAILED', [
+                'request_id' => $requestId !== '' ? $requestId : null,
+                'exception' => $e,
+            ]);
         }
 
         return null;
