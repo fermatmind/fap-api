@@ -48,6 +48,9 @@ jobs:
         run: |
           test ! -f backend/.env || (echo "::error::backend/.env must not exist in the repository"; exit 1)
 
+      - name: CAE gate (config + artifact safety)
+        run: bash backend/scripts/cae_gate.sh
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:

@@ -54,6 +54,12 @@ jobs:
     environment: ${{ inputs.target_env }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: CAE gate (config + artifact safety)
+        run: bash backend/scripts/cae_gate.sh
+
       - name: Rollback via API
         id: rollback
         env:
