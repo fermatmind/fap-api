@@ -18,7 +18,7 @@ selfcheck-mysql:
 	export DB_PORT="$${DB_PORT:-3306}" && \
 	export DB_DATABASE="$${DB_DATABASE:-fap_ci}" && \
 	export DB_USERNAME="$${DB_USERNAME:-root}" && \
-	export DB_PASSWORD="$${DB_PASSWORD:-root}" && \
+	export DB_PASSWORD="$${DB_PASSWORD-root}" && \
 	bash scripts/ci/prepare_mysql.sh && \
 	APP_ENV=testing php artisan test && \
 	APP_ENV=testing bash scripts/ci_smoke_v0_3.sh

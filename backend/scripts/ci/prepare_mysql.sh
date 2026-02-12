@@ -15,9 +15,10 @@ export DB_HOST="${DB_HOST:-127.0.0.1}"
 export DB_PORT="${DB_PORT:-3306}"
 export DB_DATABASE="${DB_DATABASE:-fap_ci}"
 export DB_USERNAME="${DB_USERNAME:-root}"
-export DB_PASSWORD="${DB_PASSWORD:-root}"
+export DB_PASSWORD="${DB_PASSWORD-root}"
 
 php artisan key:generate --force
+php artisan config:clear || true
 php artisan migrate:fresh --force --no-interaction
 php artisan db:seed --class=CiScalesRegistrySeeder --force --no-interaction
 
