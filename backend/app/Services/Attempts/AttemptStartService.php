@@ -2,6 +2,8 @@
 
 namespace App\Services\Attempts;
 
+use App\DTO\Attempts\StartAttemptDTO;
+use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Content\ContentPacksIndex;
@@ -20,41 +22,41 @@ class AttemptStartService
         private EventRecorder $eventRecorder,
     ) {}
 
-    public function start(OrgContext $ctx, array $validated): array
+    public function start(OrgContext $ctx, StartAttemptDTO $dto): array
     {
         $orgId = $ctx->orgId();
 
-        $scaleCode = strtoupper(trim((string) ($validated['scale_code'] ?? '')));
+        $scaleCode = $dto->scaleCode;
         if ($scaleCode === '') {
-            abort(400, 'scale_code is required.');
+            throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code is required.');
         }
 
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (! $row) {
-            abort(404, 'scale not found.');
+            throw new ApiProblemException(404, 'NOT_FOUND', 'scale not found.');
         }
 
         $packId = (string) ($row['default_pack_id'] ?? '');
         $dirVersion = (string) ($row['default_dir_version'] ?? '');
         if ($packId === '' || $dirVersion === '') {
-            abort(500, 'scale pack not configured.');
+            throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
         }
 
-        $region = (string) ($validated['region'] ?? $row['default_region'] ?? config('content_packs.default_region', ''));
-        $locale = (string) ($validated['locale'] ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
+        $region = (string) ($dto->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
+        $locale = (string) ($dto->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
 
         $questionCount = $this->resolveQuestionCount($packId, $dirVersion);
         $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
 
-        $anonId = trim((string) ($validated['anon_id'] ?? ''));
+        $anonId = trim((string) ($dto->anonId ?? ''));
         if ($anonId === '') {
             $anonId = 'anon_'.Str::uuid();
         }
 
-        $clientPlatform = (string) ($validated['client_platform'] ?? 'unknown');
-        $clientVersion = (string) ($validated['client_version'] ?? '');
-        $channel = (string) ($validated['channel'] ?? '');
-        $referrer = (string) ($validated['referrer'] ?? '');
+        $clientPlatform = (string) ($dto->clientPlatform ?? 'unknown');
+        $clientVersion = (string) ($dto->clientVersion ?? '');
+        $channel = (string) ($dto->channel ?? '');
+        $referrer = (string) ($dto->referrer ?? '');
 
         $attempt = Attempt::create([
             'org_id' => $orgId,
@@ -76,7 +78,7 @@ class AttemptStartService
             'answers_summary_json' => [
                 'stage' => 'start',
                 'created_at_ms' => (int) round(microtime(true) * 1000),
-                'meta' => $validated['meta'] ?? null,
+                'meta' => $dto->meta,
             ],
         ]);
 

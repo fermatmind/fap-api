@@ -17,6 +17,7 @@ use ZipArchive;
 final class ContentPackPublisher
 {
     private const SOURCE_UPLOAD = 'upload';
+
     private const SOURCE_S3 = 's3';
 
     public function ingest(?UploadedFile $file, ?string $s3Key, array $options = []): array
@@ -49,12 +50,12 @@ final class ContentPackPublisher
         $extractedRelPath = '';
 
         if ($file !== null) {
-            $zipPath = $releaseRoot . DIRECTORY_SEPARATOR . 'pack.zip';
+            $zipPath = $releaseRoot.DIRECTORY_SEPARATOR.'pack.zip';
             $file->move($releaseRoot, 'pack.zip');
             $sourceRef = $this->relativeToPrivate($zipPath);
             $sha256 = (string) hash_file('sha256', $zipPath);
 
-            $extractRoot = $releaseRoot . DIRECTORY_SEPARATOR . 'extracted';
+            $extractRoot = $releaseRoot.DIRECTORY_SEPARATOR.'extracted';
             $this->ensureDirectory($extractRoot);
 
             try {
@@ -68,7 +69,7 @@ final class ContentPackPublisher
             }
 
             $found = $this->findPackRoot($extractRoot);
-            if (!($found['ok'] ?? false)) {
+            if (! ($found['ok'] ?? false)) {
                 return [
                     'ok' => false,
                     'error' => (string) ($found['error'] ?? 'PACK_ROOT_NOT_FOUND'),
@@ -80,7 +81,7 @@ final class ContentPackPublisher
             $manifestPath = (string) $found['manifest_path'];
 
             $manifestRead = $this->readManifest($manifestPath);
-            if (!($manifestRead['ok'] ?? false)) {
+            if (! ($manifestRead['ok'] ?? false)) {
                 return [
                     'ok' => false,
                     'error' => (string) ($manifestRead['error'] ?? 'MANIFEST_INVALID'),
@@ -104,8 +105,8 @@ final class ContentPackPublisher
                 ];
             }
 
-            $questionsPath = $packRoot . DIRECTORY_SEPARATOR . 'questions.json';
-            if (!File::exists($questionsPath)) {
+            $questionsPath = $packRoot.DIRECTORY_SEPARATOR.'questions.json';
+            if (! File::exists($questionsPath)) {
                 return [
                     'ok' => false,
                     'error' => 'QUESTIONS_MISSING',
@@ -121,7 +122,7 @@ final class ContentPackPublisher
 
             if ($selfCheck) {
                 $check = $this->runSelfCheck($manifestPath);
-                if (!($check['ok'] ?? false)) {
+                if (! ($check['ok'] ?? false)) {
                     return [
                         'ok' => false,
                         'error' => 'SELF_CHECK_FAILED',
@@ -188,7 +189,7 @@ final class ContentPackPublisher
 
         try {
             $version = DB::table('content_pack_versions')->where('id', $versionId)->first();
-            if (!$version) {
+            if (! $version) {
                 throw new RuntimeException('VERSION_NOT_FOUND');
             }
 
@@ -207,7 +208,7 @@ final class ContentPackPublisher
             }
 
             $sourcePath = $this->absoluteFromPrivate($sourceRel);
-            if ($sourcePath === '' || !File::isDirectory($sourcePath)) {
+            if ($sourcePath === '' || ! File::isDirectory($sourcePath)) {
                 throw new RuntimeException('SOURCE_PACK_NOT_FOUND');
             }
 
@@ -221,20 +222,20 @@ final class ContentPackPublisher
 
             $packsRoot = $this->packsRoot();
             $targetDir = $this->targetPackDir($packsRoot, $region, $locale, $dirAlias);
-            $tmpDir = $targetDir . '.tmp.' . Str::uuid();
+            $tmpDir = $targetDir.'.tmp.'.Str::uuid();
 
             $this->ensureDirectory(dirname($targetDir));
 
-            if (!File::copyDirectory($sourcePath, $tmpDir)) {
+            if (! File::copyDirectory($sourcePath, $tmpDir)) {
                 throw new RuntimeException('COPY_TO_TMP_FAILED');
             }
 
             $backupRoot = $this->backupsRoot($releaseId);
             $this->ensureDirectory($backupRoot);
-            $previousPackPath = $backupRoot . DIRECTORY_SEPARATOR . 'previous_pack';
+            $previousPackPath = $backupRoot.DIRECTORY_SEPARATOR.'previous_pack';
 
             if (File::isDirectory($targetDir)) {
-                if (!File::moveDirectory($targetDir, $previousPackPath)) {
+                if (! File::moveDirectory($targetDir, $previousPackPath)) {
                     throw new RuntimeException('BACKUP_MOVE_FAILED');
                 }
 
@@ -248,7 +249,7 @@ final class ContentPackPublisher
                 );
             }
 
-            if (!File::moveDirectory($tmpDir, $targetDir)) {
+            if (! File::moveDirectory($tmpDir, $targetDir)) {
                 throw new RuntimeException('SWAP_FAILED');
             }
 
@@ -266,7 +267,7 @@ final class ContentPackPublisher
             if ($probe) {
                 $probeResult = $this->probe($baseUrl, $region, $locale, $expectedPackId);
                 $probes = $probeResult['probes'];
-                if (!($probeResult['ok'] ?? false)) {
+                if (! ($probeResult['ok'] ?? false)) {
                     $status = 'failed';
                     $message = (string) ($probeResult['message'] ?? 'probe_failed');
                 }
@@ -337,36 +338,36 @@ final class ContentPackPublisher
                 ->orderByDesc('created_at')
                 ->first();
 
-            if (!$last) {
+            if (! $last) {
                 throw new RuntimeException('NO_PUBLISH_TO_ROLLBACK');
             }
 
             $fromVersionId = $last->to_version_id ?? null;
             $fromPackId = (string) ($last->to_pack_id ?? '');
 
-            $backupPath = $this->backupsRoot((string) $last->id) . DIRECTORY_SEPARATOR . 'previous_pack';
-            if (!File::isDirectory($backupPath)) {
+            $backupPath = $this->backupsRoot((string) $last->id).DIRECTORY_SEPARATOR.'previous_pack';
+            if (! File::isDirectory($backupPath)) {
                 throw new RuntimeException('BACKUP_NOT_FOUND');
             }
 
             $packsRoot = $this->packsRoot();
             $targetDir = $this->targetPackDir($packsRoot, $region, $locale, $dirAlias);
-            $tmpDir = $targetDir . '.tmp.' . Str::uuid();
+            $tmpDir = $targetDir.'.tmp.'.Str::uuid();
 
             $this->ensureDirectory(dirname($targetDir));
 
-            if (!File::copyDirectory($backupPath, $tmpDir)) {
+            if (! File::copyDirectory($backupPath, $tmpDir)) {
                 throw new RuntimeException('COPY_TO_TMP_FAILED');
             }
 
             $rollbackBackupRoot = $this->backupsRoot($releaseId);
             $this->ensureDirectory($rollbackBackupRoot);
             if (File::isDirectory($targetDir)) {
-                $currentBackup = $rollbackBackupRoot . DIRECTORY_SEPARATOR . 'current_pack';
+                $currentBackup = $rollbackBackupRoot.DIRECTORY_SEPARATOR.'current_pack';
                 File::moveDirectory($targetDir, $currentBackup);
             }
 
-            if (!File::moveDirectory($tmpDir, $targetDir)) {
+            if (! File::moveDirectory($tmpDir, $targetDir)) {
                 throw new RuntimeException('SWAP_FAILED');
             }
 
@@ -397,7 +398,7 @@ final class ContentPackPublisher
             if ($probe) {
                 $probeResult = $this->probe($baseUrl, $region, $locale, $toPackId);
                 $probes = $probeResult['probes'];
-                if (!($probeResult['ok'] ?? false)) {
+                if (! ($probeResult['ok'] ?? false)) {
                     $status = 'failed';
                     $message = (string) ($probeResult['message'] ?? 'probe_failed');
                 }
@@ -442,7 +443,7 @@ final class ContentPackPublisher
             ? (string) config('content_packs.cache_dir', '')
             : (string) config('content_packs.root', '');
 
-        $packsRoot = rtrim($packsRoot, "/\\");
+        $packsRoot = rtrim($packsRoot, '/\\');
         if ($packsRoot === '') {
             throw new RuntimeException('PACKS_ROOT_MISSING');
         }
@@ -453,42 +454,42 @@ final class ContentPackPublisher
     private function targetPackDir(string $packsRoot, string $region, string $locale, string $dirAlias): string
     {
         return $packsRoot
-            . DIRECTORY_SEPARATOR . 'default'
-            . DIRECTORY_SEPARATOR . $region
-            . DIRECTORY_SEPARATOR . $locale
-            . DIRECTORY_SEPARATOR . $dirAlias;
+            .DIRECTORY_SEPARATOR.'default'
+            .DIRECTORY_SEPARATOR.$region
+            .DIRECTORY_SEPARATOR.$locale
+            .DIRECTORY_SEPARATOR.$dirAlias;
     }
 
     private function releaseRoot(string $versionId): string
     {
         return $this->privateRoot()
-            . DIRECTORY_SEPARATOR . 'content_releases'
-            . DIRECTORY_SEPARATOR . $versionId;
+            .DIRECTORY_SEPARATOR.'content_releases'
+            .DIRECTORY_SEPARATOR.$versionId;
     }
 
     private function backupsRoot(string $releaseId): string
     {
         return $this->privateRoot()
-            . DIRECTORY_SEPARATOR . 'content_releases'
-            . DIRECTORY_SEPARATOR . 'backups'
-            . DIRECTORY_SEPARATOR . $releaseId;
+            .DIRECTORY_SEPARATOR.'content_releases'
+            .DIRECTORY_SEPARATOR.'backups'
+            .DIRECTORY_SEPARATOR.$releaseId;
     }
 
     private function privateRoot(): string
     {
-        return rtrim(storage_path('app/private'), "/\\");
+        return rtrim(storage_path('app/private'), '/\\');
     }
 
     private function ensureDirectory(string $path): void
     {
-        if (!File::isDirectory($path)) {
+        if (! File::isDirectory($path)) {
             File::makeDirectory($path, 0775, true);
         }
     }
 
     private function extractZip(string $zipPath, string $extractRoot): void
     {
-        $zip = new ZipArchive();
+        $zip = new ZipArchive;
         $opened = $zip->open($zipPath);
         if ($opened !== true) {
             throw new RuntimeException('ZIP_OPEN_FAILED');
@@ -497,7 +498,7 @@ final class ContentPackPublisher
         $ok = $zip->extractTo($extractRoot);
         $zip->close();
 
-        if (!$ok) {
+        if (! $ok) {
             throw new RuntimeException('ZIP_EXTRACT_FAILED');
         }
     }
@@ -512,8 +513,8 @@ final class ContentPackPublisher
             }
 
             $dir = $file->getPath();
-            $questionsPath = $dir . DIRECTORY_SEPARATOR . 'questions.json';
-            if (!File::exists($questionsPath)) {
+            $questionsPath = $dir.DIRECTORY_SEPARATOR.'questions.json';
+            if (! File::exists($questionsPath)) {
                 continue;
             }
 
@@ -546,7 +547,7 @@ final class ContentPackPublisher
 
     private function readManifest(string $manifestPath): array
     {
-        if ($manifestPath === '' || !File::exists($manifestPath)) {
+        if ($manifestPath === '' || ! File::exists($manifestPath)) {
             return [
                 'ok' => false,
                 'error' => 'MANIFEST_NOT_FOUND',
@@ -565,7 +566,7 @@ final class ContentPackPublisher
         }
 
         $decoded = json_decode($raw, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return [
                 'ok' => false,
                 'error' => 'MANIFEST_INVALID_JSON',
@@ -582,9 +583,9 @@ final class ContentPackPublisher
 
     private function manifestFieldsFromDir(string $packDir): array
     {
-        $manifestPath = $packDir . DIRECTORY_SEPARATOR . 'manifest.json';
+        $manifestPath = $packDir.DIRECTORY_SEPARATOR.'manifest.json';
         $read = $this->readManifest($manifestPath);
-        if (!($read['ok'] ?? false)) {
+        if (! ($read['ok'] ?? false)) {
             return [
                 'pack_id' => '',
                 'content_package_version' => '',
@@ -679,24 +680,24 @@ final class ContentPackPublisher
 
         $errors = [];
 
-        $health = $this->fetchJson($baseUrl . '/api/v0.2/health');
+        $health = $this->fetchJson($baseUrl.'/api/v0.2/health', $baseUrl);
         if ($health['ok'] ?? false) {
             $probes['health'] = (bool) (($health['json']['ok'] ?? false) === true);
         }
-        if (!$probes['health']) {
+        if (! $probes['health']) {
             $errors[] = 'health_failed';
         }
 
-        $questionsUrl = $baseUrl . '/api/v0.2/scales/MBTI/questions?region=' . urlencode($region) . '&locale=' . urlencode($locale);
-        $questions = $this->fetchJson($questionsUrl);
+        $questionsUrl = $baseUrl.'/api/v0.2/scales/MBTI/questions?region='.urlencode($region).'&locale='.urlencode($locale);
+        $questions = $this->fetchJson($questionsUrl, $baseUrl);
         if ($questions['ok'] ?? false) {
             $probes['questions'] = (bool) (($questions['json']['ok'] ?? false) === true);
         }
-        if (!$probes['questions']) {
+        if (! $probes['questions']) {
             $errors[] = 'questions_failed';
         }
 
-        $packs = $this->fetchJson($baseUrl . '/api/v0.2/content-packs');
+        $packs = $this->fetchJson($baseUrl.'/api/v0.2/content-packs', $baseUrl);
         if ($packs['ok'] ?? false) {
             $ok = (bool) (($packs['json']['ok'] ?? false) === true);
             $defaults = (array) ($packs['json']['defaults'] ?? []);
@@ -707,7 +708,7 @@ final class ContentPackPublisher
             }
             $probes['content_packs'] = $ok && $hasPackId;
         }
-        if (!$probes['content_packs']) {
+        if (! $probes['content_packs']) {
             $errors[] = 'content_packs_failed';
         }
 
@@ -718,9 +719,9 @@ final class ContentPackPublisher
         ];
     }
 
-    private function fetchJson(string $url): array
+    private function fetchJson(string $url, string $baseUrl): array
     {
-        $local = $this->tryLocalRequest($url);
+        $local = $this->tryLocalRequest($url, $baseUrl);
         if ($local !== null) {
             return $local;
         }
@@ -735,16 +736,16 @@ final class ContentPackPublisher
             ];
         }
 
-        if (!$resp->ok()) {
+        if (! $resp->ok()) {
             return [
                 'ok' => false,
-                'error' => 'HTTP_' . $resp->status(),
-                'message' => 'http_status_' . $resp->status(),
+                'error' => 'HTTP_'.$resp->status(),
+                'message' => 'http_status_'.$resp->status(),
             ];
         }
 
         $json = $resp->json();
-        if (!is_array($json)) {
+        if (! is_array($json)) {
             return [
                 'ok' => false,
                 'error' => 'INVALID_JSON',
@@ -758,24 +759,22 @@ final class ContentPackPublisher
         ];
     }
 
-    private function tryLocalRequest(string $url): ?array
+    private function tryLocalRequest(string $url, string $baseUrl): ?array
     {
         if (PHP_SAPI !== 'cli-server') {
             return null;
         }
 
-        try {
-            $current = request();
-        } catch (\Throwable $e) {
+        $normalizedBaseUrl = rtrim(trim($baseUrl), '/');
+        if ($normalizedBaseUrl === '') {
             return null;
         }
 
-        $base = $current->getSchemeAndHttpHost();
-        if ($base === '' || !str_starts_with($url, $base)) {
+        if (! str_starts_with($url, $normalizedBaseUrl)) {
             return null;
         }
 
-        $path = substr($url, strlen($base));
+        $path = substr($url, strlen($normalizedBaseUrl));
         if ($path === '') {
             $path = '/';
         }
@@ -785,7 +784,7 @@ final class ContentPackPublisher
         $content = $response->getContent();
 
         $decoded = json_decode((string) $content, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return [
                 'ok' => false,
                 'error' => 'INVALID_JSON',
@@ -807,13 +806,6 @@ final class ContentPackPublisher
         }
         if ($baseUrl === '') {
             $baseUrl = trim((string) env('APP_URL', ''));
-        }
-        if ($baseUrl === '') {
-            try {
-                $baseUrl = request()->getSchemeAndHttpHost();
-            } catch (\Throwable $e) {
-                $baseUrl = '';
-            }
         }
 
         return rtrim($baseUrl, '/');
@@ -840,6 +832,7 @@ final class ContentPackPublisher
         }
 
         $row = $query->orderByDesc('created_at')->first();
+
         return $row ? (string) $row->id : null;
     }
 
@@ -849,7 +842,7 @@ final class ContentPackPublisher
         $pathNorm = str_replace(DIRECTORY_SEPARATOR, '/', $path);
         $rootNorm = str_replace(DIRECTORY_SEPARATOR, '/', $privateRoot);
 
-        if ($rootNorm !== '' && str_starts_with($pathNorm, $rootNorm . '/')) {
+        if ($rootNorm !== '' && str_starts_with($pathNorm, $rootNorm.'/')) {
             return substr($pathNorm, strlen($rootNorm) + 1);
         }
 
@@ -863,20 +856,22 @@ final class ContentPackPublisher
             return '';
         }
 
-        return $this->privateRoot() . DIRECTORY_SEPARATOR . ltrim($relPath, "/\\");
+        return $this->privateRoot().DIRECTORY_SEPARATOR.ltrim($relPath, '/\\');
     }
 
     private function trimOrEmpty($value): string
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             $value = (string) $value;
         }
+
         return trim($value);
     }
 
     private function trimOrDefault($value, string $default): string
     {
         $value = $this->trimOrEmpty($value);
+
         return $value === '' ? $default : $value;
     }
 }

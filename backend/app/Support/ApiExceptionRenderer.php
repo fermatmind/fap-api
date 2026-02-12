@@ -19,7 +19,7 @@ final class ApiExceptionRenderer
 {
     public static function render(Request $request, Throwable $e): ?JsonResponse
     {
-        if (!$request->is('api/*')) {
+        if (! $request->is('api/*')) {
             return null;
         }
 
@@ -65,14 +65,14 @@ final class ApiExceptionRenderer
 
         if ($e instanceof HttpExceptionInterface) {
             $status = $e->getStatusCode();
-            $errorCode = self::mapHttpExceptionErrorCode($status);
+            $errorCode = self::resolveErrorCode($e, $status);
 
             $message = trim($e->getMessage());
             if ($message === '') {
                 $message = self::defaultMessageForStatus($status);
             }
 
-            return self::errorResponse($status, $errorCode, $message, [], $requestId);
+            return self::errorResponse($status, $errorCode, $message, self::resolveDetails($e), $requestId);
         }
 
         return self::errorResponse(500, 'INTERNAL_ERROR', 'Internal error.', [], $requestId);
@@ -94,6 +94,29 @@ final class ApiExceptionRenderer
     private static function defaultMessageForStatus(int $status): string
     {
         return SymfonyResponse::$statusTexts[$status] ?? 'Request failed.';
+    }
+
+    private static function resolveErrorCode(Throwable $e, int $status): string
+    {
+        if (method_exists($e, 'errorCode')) {
+            $value = trim((string) $e->errorCode());
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        return self::mapHttpExceptionErrorCode($status);
+    }
+
+    private static function resolveDetails(Throwable $e): array
+    {
+        if (! method_exists($e, 'details')) {
+            return [];
+        }
+
+        $details = $e->details();
+
+        return is_array($details) ? $details : [];
     }
 
     private static function errorResponse(

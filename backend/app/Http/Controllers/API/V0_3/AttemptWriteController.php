@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API\V0_3;
 
+use App\DTO\Attempts\StartAttemptDTO;
+use App\DTO\Attempts\SubmitAttemptDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V0_3\StartAttemptRequest;
 use App\Http\Requests\V0_3\SubmitAttemptRequest;
@@ -50,7 +52,7 @@ class AttemptWriteController extends Controller
             $payload['referrer'] = $referrer;
         }
 
-        $result = $this->startService->start($this->orgContext, $payload);
+        $result = $this->startService->start($this->orgContext, StartAttemptDTO::fromArray($payload));
 
         return response()->json($result);
     }
@@ -63,7 +65,16 @@ class AttemptWriteController extends Controller
         $payload = $request->validated();
         $attemptId = trim((string) ($payload['attempt_id'] ?? ''));
 
-        $result = $this->submitService->submit($this->orgContext, $attemptId, $payload);
+        $payload['user_id'] = $request->attributes->get('fm_user_id')
+            ?? $request->attributes->get('user_id')
+            ?? $this->orgContext->userId();
+        $payload['anon_id'] = $request->attributes->get('anon_id')
+            ?? $request->attributes->get('fm_anon_id')
+            ?? $request->header('X-Anon-Id')
+            ?? $request->header('X-Fm-Anon-Id')
+            ?? $this->orgContext->anonId();
+
+        $result = $this->submitService->submit($this->orgContext, $attemptId, SubmitAttemptDTO::fromArray($payload));
 
         return response()->json($result);
     }
