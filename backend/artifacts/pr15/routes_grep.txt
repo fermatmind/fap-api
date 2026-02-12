@@ -1,9 +1,0 @@
-58:  POST       api/v0.2/lookup/device ............ LookupController@lookupDevice
-59:  POST       api/v0.2/lookup/order .............. LookupController@lookupOrder
-60:  GET|HEAD   api/v0.2/lookup/ticket/{code} ..... LookupController@lookupTicket
-84:  GET|HEAD   api/v0.2/scales/MBTI ................... MbtiController@scaleMeta
-85:  GET|HEAD   api/v0.2/scales/MBTI/questions ......... MbtiController@questions
-86:  GET|HEAD   api/v0.2/scales/{scale}/norms API\V0_2\PsychometricsController@l…
-90:  GET|HEAD   api/v0.3/scales ................. API\V0_3\ScalesController@index
-91:  GET|HEAD   api/v0.3/scales/lookup ... API\V0_3\ScalesLookupController@lookup
-92:  GET|HEAD   api/v0.3/scales/{scale_code} ..... API\V0_3\ScalesController@show

@@ -26,3 +26,16 @@ backend/vendor/
 backend/storage/logs/
 backend/storage/framework/
 backend/storage/app/private/reports/
+
+# SEC-001 source export hardening
+.git
+**/.env
+**/.env.*
+**/vendor
+**/node_modules
+backend/storage/logs
+backend/storage/framework
+backend/storage/app/private
+backend/storage/app/archives
+backend/artifacts
+backend/database/*.sqlite
