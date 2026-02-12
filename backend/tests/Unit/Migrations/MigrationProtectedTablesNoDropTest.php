@@ -29,7 +29,10 @@ final class MigrationProtectedTablesNoDropTest extends TestCase
     #[Test]
     public function protected_business_tables_must_not_be_dropped_in_any_down_method(): void
     {
-        foreach ($this->migrationFiles() as $filePath) {
+        $files = $this->migrationFiles();
+        $this->assertNotEmpty($files, 'database/migrations must not be empty');
+
+        foreach ($files as $filePath) {
             $source = (string) file_get_contents($filePath);
             $downBody = $this->methodBody($source, 'down');
 
