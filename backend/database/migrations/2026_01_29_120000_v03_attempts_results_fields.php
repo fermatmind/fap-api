@@ -115,78 +115,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (Schema::hasTable('attempts')) {
-            $indexName = 'attempts_org_scale_pack_dir_idx';
-            if ($this->indexExists('attempts', $indexName)) {
-                Schema::table('attempts', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-
-            $indexName = 'attempts_org_anon_idx';
-            if ($this->indexExists('attempts', $indexName)) {
-                Schema::table('attempts', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-
-            $indexName = 'attempts_org_user_idx';
-            if ($this->indexExists('attempts', $indexName)) {
-                Schema::table('attempts', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-
-            Schema::table('attempts', function (Blueprint $table) {
-                if (Schema::hasColumn('attempts', 'answers_digest')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-                if (Schema::hasColumn('attempts', 'duration_ms')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-                if (Schema::hasColumn('attempts', 'content_package_version')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-                if (Schema::hasColumn('attempts', 'org_id')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-            });
-        }
-
-        if (Schema::hasTable('results')) {
-            $indexName = 'results_org_id_attempt_id_unique';
-            $legacyIndexName = 'results_org_attempt_unique';
-            if ($this->indexExists('results', $indexName)) {
-                Schema::table('results', function (Blueprint $table) use ($indexName) {
-                    $table->dropUnique($indexName);
-                });
-            } elseif ($this->indexExists('results', $legacyIndexName)) {
-                Schema::table('results', function (Blueprint $table) use ($legacyIndexName) {
-                    $table->dropUnique($legacyIndexName);
-                });
-            }
-
-            Schema::table('results', function (Blueprint $table) {
-                if (Schema::hasColumn('results', 'report_engine_version')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-                if (Schema::hasColumn('results', 'scoring_spec_version')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-                if (Schema::hasColumn('results', 'dir_version')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-                if (Schema::hasColumn('results', 'pack_id')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-                if (Schema::hasColumn('results', 'result_json')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-                if (Schema::hasColumn('results', 'org_id')) {
-                    // Irreversible operation: Column dropped manually if needed (rollback disabled to prevent data loss).
-                }
-            });
-        }
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

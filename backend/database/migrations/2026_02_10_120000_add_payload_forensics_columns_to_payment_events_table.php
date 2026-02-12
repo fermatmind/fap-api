@@ -30,23 +30,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('payment_events')) {
-            return;
-        }
-
-        Schema::table('payment_events', function (Blueprint $table) {
-            if (Schema::hasColumn('payment_events', 'payload_size_bytes')) {
-                $table->dropColumn('payload_size_bytes');
-            }
-            if (Schema::hasColumn('payment_events', 'payload_sha256')) {
-                $table->dropColumn('payload_sha256');
-            }
-            if (Schema::hasColumn('payment_events', 'payload_s3_key')) {
-                $table->dropColumn('payload_s3_key');
-            }
-            if (Schema::hasColumn('payment_events', 'payload_excerpt')) {
-                $table->dropColumn('payload_excerpt');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

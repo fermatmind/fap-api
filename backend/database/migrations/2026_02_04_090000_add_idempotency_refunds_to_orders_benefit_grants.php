@@ -58,42 +58,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (Schema::hasTable('orders')) {
-            if ($this->indexExists('orders', 'orders_org_idempotency_key_unique')) {
-                Schema::table('orders', function (Blueprint $table) {
-                    $table->dropUnique('orders_org_idempotency_key_unique');
-                });
-            }
-
-            Schema::table('orders', function (Blueprint $table) {
-                if (Schema::hasColumn('orders', 'idempotency_key')) {
-                    $table->dropColumn('idempotency_key');
-                }
-                if (Schema::hasColumn('orders', 'refunded_at')) {
-                    $table->dropColumn('refunded_at');
-                }
-                if (Schema::hasColumn('orders', 'refund_amount_cents')) {
-                    $table->dropColumn('refund_amount_cents');
-                }
-                if (Schema::hasColumn('orders', 'refund_reason')) {
-                    $table->dropColumn('refund_reason');
-                }
-            });
-        }
-
-        if (Schema::hasTable('benefit_grants')) {
-            if ($this->indexExists('benefit_grants', 'benefit_grants_org_benefit_attempt_status_idx')) {
-                Schema::table('benefit_grants', function (Blueprint $table) {
-                    $table->dropIndex('benefit_grants_org_benefit_attempt_status_idx');
-                });
-            }
-
-            Schema::table('benefit_grants', function (Blueprint $table) {
-                if (Schema::hasColumn('benefit_grants', 'revoked_at')) {
-                    $table->dropColumn('revoked_at');
-                }
-            });
-        }
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

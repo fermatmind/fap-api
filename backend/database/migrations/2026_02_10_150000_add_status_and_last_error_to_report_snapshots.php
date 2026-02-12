@@ -37,29 +37,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('report_snapshots')) {
-            return;
-        }
-
-        if ($this->indexExists(self::STATUS_INDEX)) {
-            Schema::table('report_snapshots', function (Blueprint $table): void {
-                $table->dropIndex(self::STATUS_INDEX);
-            });
-        }
-
-        Schema::table('report_snapshots', function (Blueprint $table): void {
-            if (Schema::hasColumn('report_snapshots', 'updated_at')) {
-                $table->dropColumn('updated_at');
-            }
-
-            if (Schema::hasColumn('report_snapshots', 'last_error')) {
-                $table->dropColumn('last_error');
-            }
-
-            if (Schema::hasColumn('report_snapshots', 'status')) {
-                $table->dropColumn('status');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $indexName): bool

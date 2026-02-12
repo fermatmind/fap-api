@@ -28,6 +28,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('queue_dlq_replays');
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

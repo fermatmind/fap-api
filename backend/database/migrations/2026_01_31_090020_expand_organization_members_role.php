@@ -12,6 +12,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        // no-op (data backfill only)
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

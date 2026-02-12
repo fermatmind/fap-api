@@ -17,8 +17,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::table('results', function (Blueprint $table) {
-            $table->dropColumn(['scores_pct', 'axis_states', 'content_package_version']);
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

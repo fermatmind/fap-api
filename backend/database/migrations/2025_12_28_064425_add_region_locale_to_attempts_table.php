@@ -22,9 +22,7 @@ return new class extends Migration
 
 public function down(): void
 {
-    Schema::table('attempts', function (Blueprint $table) {
-        $table->dropIndex('attempts_scale_region_locale_idx');
-        $table->dropColumn(['region', 'locale']);
-    });
-}
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
+    }
 };

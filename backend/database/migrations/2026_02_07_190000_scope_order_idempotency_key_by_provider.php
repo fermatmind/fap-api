@@ -39,27 +39,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('orders')) {
-            return;
-        }
-
-        if ($this->indexExists('orders', self::NEW_UNIQUE)) {
-            Schema::table('orders', function (Blueprint $table) {
-                $table->dropUnique(self::NEW_UNIQUE);
-            });
-        }
-
-        if (!Schema::hasColumn('orders', 'org_id') || !Schema::hasColumn('orders', 'idempotency_key')) {
-            return;
-        }
-
-        if ($this->indexExists('orders', self::OLD_UNIQUE)) {
-            return;
-        }
-
-        Schema::table('orders', function (Blueprint $table) {
-            $table->unique(['org_id', 'idempotency_key'], self::OLD_UNIQUE);
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

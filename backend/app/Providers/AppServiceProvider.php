@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Monolog\LogRecord;
+use RuntimeException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -237,6 +238,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->runningInConsole() && $this->app->environment('production')) {
+            $argv = $_SERVER['argv'] ?? [];
+            $command = is_array($argv) ? trim((string) ($argv[1] ?? '')) : '';
+            $blockedCommands = ['migrate:rollback', 'migrate:reset', 'migrate:refresh'];
+            if (in_array($command, $blockedCommands, true)) {
+                throw new RuntimeException('rollback disabled in production: ' . $command);
+            }
+        }
+
         if (!self::$redactProcessorRegistered) {
             $redactor = new SensitiveDataRedactor();
 

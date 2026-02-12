@@ -22,9 +22,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('attempts', function (Blueprint $table) {
-            $table->dropUnique('attempts_ticket_code_unique');
-            $table->dropColumn('ticket_code');
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

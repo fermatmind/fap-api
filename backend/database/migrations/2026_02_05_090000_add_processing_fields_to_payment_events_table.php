@@ -49,39 +49,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('payment_events')) {
-            return;
-        }
-
-        if ($this->indexExists('payment_events', 'payment_events_provider_order_idx')) {
-            Schema::table('payment_events', function (Blueprint $table) {
-                $table->dropIndex('payment_events_provider_order_idx');
-            });
-        }
-
-        if ($this->indexExists('payment_events', 'payment_events_status_idx')) {
-            Schema::table('payment_events', function (Blueprint $table) {
-                $table->dropIndex('payment_events_status_idx');
-            });
-        }
-
-        Schema::table('payment_events', function (Blueprint $table) {
-            if (Schema::hasColumn('payment_events', 'status')) {
-                $table->dropColumn('status');
-            }
-            if (Schema::hasColumn('payment_events', 'processed_at')) {
-                $table->dropColumn('processed_at');
-            }
-            if (Schema::hasColumn('payment_events', 'attempts')) {
-                $table->dropColumn('attempts');
-            }
-            if (Schema::hasColumn('payment_events', 'last_error_code')) {
-                $table->dropColumn('last_error_code');
-            }
-            if (Schema::hasColumn('payment_events', 'last_error_message')) {
-                $table->dropColumn('last_error_message');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

@@ -28,21 +28,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('attempts')) {
-            return;
-        }
-
-        if ($this->indexExists('attempts', 'attempts_resume_expires_idx')) {
-            Schema::table('attempts', function (Blueprint $table) {
-                $table->dropIndex('attempts_resume_expires_idx');
-            });
-        }
-
-        Schema::table('attempts', function (Blueprint $table) {
-            if (Schema::hasColumn('attempts', 'resume_expires_at')) {
-                $table->dropColumn('resume_expires_at');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

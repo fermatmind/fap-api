@@ -29,6 +29,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        // no-op (views are managed by create_views_pr9 migration)
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

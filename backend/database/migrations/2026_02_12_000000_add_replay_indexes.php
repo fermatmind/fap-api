@@ -18,7 +18,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        // forward-only: do not drop replay indexes on rollback.
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function addReplayIndex(string $table, string $indexName): void

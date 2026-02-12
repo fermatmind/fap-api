@@ -21,6 +21,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        // no-op: reverting to NOT NULL can break on existing NULL rows
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

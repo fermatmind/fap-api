@@ -36,13 +36,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
-            return;
-        }
-
-        $this->dropIndex(self::IDX_USER);
-        $this->dropIndex(self::IDX_ANON);
-        $this->dropIndex(self::IDX_SCOPE);
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     /**
