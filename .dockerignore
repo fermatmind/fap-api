@@ -39,3 +39,16 @@ backend/storage/app/private
 backend/storage/app/archives
 backend/artifacts
 backend/database/*.sqlite
+
+# SEC-001 canonical denylist
+.git
+**/.env
+**/.env.*
+**/vendor
+**/node_modules
+backend/artifacts
+backend/database/*.sqlite
+backend/storage/logs
+backend/storage/framework
+backend/storage/app/private
+backend/storage/app/archives
