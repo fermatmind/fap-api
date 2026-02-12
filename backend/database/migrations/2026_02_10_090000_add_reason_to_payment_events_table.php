@@ -21,16 +21,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('payment_events')) {
-            return;
-        }
-
-        if (!Schema::hasColumn('payment_events', 'reason')) {
-            return;
-        }
-
-        Schema::table('payment_events', function (Blueprint $table) {
-            $table->dropColumn('reason');
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

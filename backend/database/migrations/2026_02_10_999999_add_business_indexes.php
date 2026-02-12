@@ -64,25 +64,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (Schema::hasTable(self::BENEFIT_GRANTS)
-            && SchemaIndex::indexExists(self::BENEFIT_GRANTS, self::IDX_GRANT_USER)) {
-            Schema::table(self::BENEFIT_GRANTS, function (Blueprint $table): void {
-                $table->dropIndex(self::IDX_GRANT_USER);
-            });
-        }
-
-        if (Schema::hasTable(self::BENEFIT_GRANTS)
-            && SchemaIndex::indexExists(self::BENEFIT_GRANTS, self::IDX_GRANT_ATTEMPT)) {
-            Schema::table(self::BENEFIT_GRANTS, function (Blueprint $table): void {
-                $table->dropIndex(self::IDX_GRANT_ATTEMPT);
-            });
-        }
-
-        if (Schema::hasTable(self::PAYMENT_EVENTS)
-            && SchemaIndex::indexExists(self::PAYMENT_EVENTS, self::IDX_PAYMENT)) {
-            Schema::table(self::PAYMENT_EVENTS, function (Blueprint $table): void {
-                $table->dropIndex(self::IDX_PAYMENT);
-            });
-        }
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

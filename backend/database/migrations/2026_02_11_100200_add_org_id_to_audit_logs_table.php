@@ -25,18 +25,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable(self::TABLE) || !Schema::hasColumn(self::TABLE, 'org_id')) {
-            return;
-        }
-
-        if (SchemaIndex::indexExists(self::TABLE, self::INDEX)) {
-            Schema::table(self::TABLE, function (Blueprint $table): void {
-                $table->dropIndex(self::INDEX);
-            });
-        }
-
-        Schema::table(self::TABLE, function (Blueprint $table): void {
-            $table->dropColumn('org_id');
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

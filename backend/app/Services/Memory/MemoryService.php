@@ -4,12 +4,17 @@ namespace App\Services\Memory;
 
 use App\Services\AI\Embeddings\EmbeddingClient;
 use App\Services\VectorStore\VectorStoreManager;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\LazyCollection;
 use Illuminate\Support\Str;
 
 final class MemoryService
 {
+    private const DEFAULT_EXPORT_LIMIT = 200;
+    private const MAX_EXPORT_LIMIT = 500;
+
     public function propose(int $userId, array $payload): array
     {
         if (!Schema::hasTable('memories')) {
@@ -96,19 +101,134 @@ final class MemoryService
         return ['ok' => $updated > 0, 'deleted' => $updated];
     }
 
-    public function exportConfirmed(int $userId): array
+    public function exportConfirmedPage(int $userId, int $limit, ?string $cursor): array
     {
         if (!Schema::hasTable('memories')) {
-            return ['ok' => false, 'error' => 'memories_table_missing', 'items' => []];
+            return [
+                'ok' => false,
+                'error' => 'memories_table_missing',
+                'items' => [],
+                'next_cursor' => null,
+                'truncated' => false,
+            ];
         }
 
-        $rows = DB::table('memories')
-            ->where('user_id', $userId)
-            ->where('status', 'confirmed')
-            ->orderByDesc('confirmed_at')
+        $safeLimit = min(self::MAX_EXPORT_LIMIT, max(1, $limit > 0 ? $limit : self::DEFAULT_EXPORT_LIMIT));
+        $cursorPayload = $this->decodeExportCursor($cursor);
+        if ($cursorPayload === null && $cursor !== null && trim($cursor) !== '') {
+            return [
+                'ok' => false,
+                'error' => 'invalid_cursor',
+                'items' => [],
+                'next_cursor' => null,
+                'truncated' => false,
+            ];
+        }
+
+        $query = $this->confirmedQuery($userId);
+
+        if ($cursorPayload !== null) {
+            $query->where(function (Builder $builder) use ($cursorPayload): void {
+                $builder
+                    ->where('confirmed_at', '<', $cursorPayload['confirmed_at'])
+                    ->orWhere(function (Builder $nested) use ($cursorPayload): void {
+                        $nested
+                            ->where('confirmed_at', '=', $cursorPayload['confirmed_at'])
+                            ->where('id', '<', $cursorPayload['id']);
+                    });
+            });
+        }
+
+        $rows = $query
+            ->limit($safeLimit + 1)
             ->get();
 
-        return ['ok' => true, 'items' => $rows];
+        $hasMore = $rows->count() > $safeLimit;
+        $items = $hasMore ? $rows->slice(0, $safeLimit)->values() : $rows->values();
+
+        $nextCursor = null;
+        if ($hasMore && $items->isNotEmpty()) {
+            $tail = $items->last();
+            $nextCursor = $this->encodeExportCursor((string) ($tail->confirmed_at ?? ''), (string) ($tail->id ?? ''));
+        }
+
+        return [
+            'ok' => true,
+            'items' => $items,
+            'next_cursor' => $nextCursor,
+            'truncated' => $hasMore,
+        ];
+    }
+
+    public function exportConfirmedCursor(int $userId): LazyCollection
+    {
+        if (!Schema::hasTable('memories')) {
+            return LazyCollection::make([]);
+        }
+
+        return $this->confirmedQuery($userId)->cursor();
+    }
+
+    private function confirmedQuery(int $userId): Builder
+    {
+        return DB::table('memories')
+            ->where('user_id', $userId)
+            ->where('status', 'confirmed')
+            ->whereNotNull('confirmed_at')
+            ->orderByDesc('confirmed_at')
+            ->orderByDesc('id');
+    }
+
+    private function encodeExportCursor(string $confirmedAt, string $id): ?string
+    {
+        $confirmedAt = trim($confirmedAt);
+        $id = trim($id);
+        if ($confirmedAt === '' || $id === '') {
+            return null;
+        }
+
+        $json = json_encode([
+            'confirmed_at' => $confirmedAt,
+            'id' => $id,
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        if (!is_string($json)) {
+            return null;
+        }
+
+        return base64_encode($json);
+    }
+
+    /**
+     * @return array{confirmed_at:string,id:string}|null
+     */
+    private function decodeExportCursor(?string $cursor): ?array
+    {
+        $cursor = trim((string) $cursor);
+        if ($cursor === '') {
+            return null;
+        }
+
+        $decoded = base64_decode($cursor, true);
+        if (!is_string($decoded) || $decoded === '') {
+            return null;
+        }
+
+        $payload = json_decode($decoded, true);
+        if (!is_array($payload)) {
+            return null;
+        }
+
+        $confirmedAt = trim((string) ($payload['confirmed_at'] ?? ''));
+        $id = trim((string) ($payload['id'] ?? ''));
+        if ($confirmedAt === '' || $id === '') {
+            return null;
+        }
+
+        return [
+            'confirmed_at' => $confirmedAt,
+            'id' => $id,
+        ];
     }
 
     private function embedMemory(object $row): array

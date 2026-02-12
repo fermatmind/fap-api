@@ -38,27 +38,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('integrations')) {
-            return;
-        }
-
-        if ($this->indexExists('integrations', 'integrations_provider_external_user_idx')) {
-            Schema::table('integrations', function (Blueprint $table) {
-                $table->dropIndex('integrations_provider_external_user_idx');
-            });
-        }
-
-        Schema::table('integrations', function (Blueprint $table) {
-            if (Schema::hasColumn('integrations', 'webhook_last_event_id')) {
-                $table->dropColumn('webhook_last_event_id');
-            }
-            if (Schema::hasColumn('integrations', 'webhook_last_timestamp')) {
-                $table->dropColumn('webhook_last_timestamp');
-            }
-            if (Schema::hasColumn('integrations', 'webhook_last_received_at')) {
-                $table->dropColumn('webhook_last_received_at');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

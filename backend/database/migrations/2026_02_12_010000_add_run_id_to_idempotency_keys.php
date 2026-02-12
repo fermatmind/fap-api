@@ -11,23 +11,30 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'idempotency_keys';
-    private const INDEX = 'idx_idempo_provider_recorded_hash';
-    private const ALT_INDEX = 'idx_idempo_payload';
+    private const INDEX = 'idx_idempo_provider_run_external';
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)
-            || !Schema::hasColumn(self::TABLE, 'provider')
-            || !Schema::hasColumn(self::TABLE, 'recorded_at')
-            || !Schema::hasColumn(self::TABLE, 'hash')
+        if (!Schema::hasTable(self::TABLE)) {
+            return;
+        }
+
+        if (!Schema::hasColumn(self::TABLE, 'run_id')) {
+            Schema::table(self::TABLE, function (Blueprint $table): void {
+                $table->string('run_id', 36)->nullable();
+            });
+        }
+
+        if (!Schema::hasColumn(self::TABLE, 'provider')
+            || !Schema::hasColumn(self::TABLE, 'run_id')
+            || !Schema::hasColumn(self::TABLE, 'external_id')
             || SchemaIndex::indexExists(self::TABLE, self::INDEX)
-            || SchemaIndex::indexExists(self::TABLE, self::ALT_INDEX)
-            || $this->hasAnyIndexOnColumns(self::TABLE, ['provider', 'recorded_at', 'hash'])) {
+            || $this->hasAnyIndexOnColumns(self::TABLE, ['provider', 'run_id', 'external_id'])) {
             return;
         }
 
         Schema::table(self::TABLE, function (Blueprint $table): void {
-            $table->index(['provider', 'recorded_at', 'hash'], self::INDEX);
+            $table->index(['provider', 'run_id', 'external_id'], self::INDEX);
         });
     }
 

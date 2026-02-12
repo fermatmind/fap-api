@@ -20,13 +20,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            if (Schema::hasColumn('users', 'email_verified_at')) {
-                $table->dropColumn('email_verified_at');
-            }
-            if (Schema::hasColumn('users', 'email')) {
-                $table->dropColumn('email');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

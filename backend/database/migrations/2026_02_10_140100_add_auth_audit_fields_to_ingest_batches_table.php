@@ -30,23 +30,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('ingest_batches')) {
-            return;
-        }
-
-        Schema::table('ingest_batches', function (Blueprint $table) {
-            if (Schema::hasColumn('ingest_batches', 'source_ip')) {
-                $table->dropColumn('source_ip');
-            }
-            if (Schema::hasColumn('ingest_batches', 'signature_ok')) {
-                $table->dropColumn('signature_ok');
-            }
-            if (Schema::hasColumn('ingest_batches', 'auth_mode')) {
-                $table->dropColumn('auth_mode');
-            }
-            if (Schema::hasColumn('ingest_batches', 'actor_user_id')) {
-                $table->dropColumn('actor_user_id');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

@@ -5,7 +5,9 @@ namespace App\Services\Ingestion;
 use App\Support\Idempotency\IdempotencyKey;
 use App\Support\Idempotency\IdempotencyStore;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class ReplayService
 {
@@ -30,6 +32,7 @@ class ReplayService
 
         $inserted = 0;
         $skipped = 0;
+        $runId = (string) Str::uuid();
         $store = new IdempotencyStore();
         $tables = [
             'sleep_samples' => Schema::hasTable('sleep_samples'),
@@ -37,9 +40,9 @@ class ReplayService
             'health_samples' => Schema::hasTable('health_samples'),
         ];
 
-        $this->streamSamplesFromTable('sleep_samples', $batchId, 'sleep', $provider, $store, $tables, $inserted, $skipped);
-        $this->streamSamplesFromTable('screen_time_samples', $batchId, 'screen_time', $provider, $store, $tables, $inserted, $skipped);
-        $this->streamSamplesFromTable('health_samples', $batchId, 'health', $provider, $store, $tables, $inserted, $skipped);
+        $this->streamSamplesFromTable('sleep_samples', $batchId, 'sleep', $provider, $runId, $store, $tables, $inserted, $skipped);
+        $this->streamSamplesFromTable('screen_time_samples', $batchId, 'screen_time', $provider, $runId, $store, $tables, $inserted, $skipped);
+        $this->streamSamplesFromTable('health_samples', $batchId, 'health', $provider, $runId, $store, $tables, $inserted, $skipped);
 
         DB::table('ingest_batches')
             ->where('id', $batchId)
@@ -60,6 +63,7 @@ class ReplayService
         string $batchId,
         string $defaultDomain,
         string $provider,
+        string $runId,
         IdempotencyStore $store,
         array $tables,
         int &$inserted,
@@ -78,6 +82,10 @@ class ReplayService
             return;
         }
 
+        $sourceInserted = 0;
+        $sourceSkipped = 0;
+        $sourceChunks = 0;
+
         DB::table($sourceTable)
             ->where('ingest_batch_id', $batchId)
             ->where('id', '<=', $maxId)
@@ -87,13 +95,21 @@ class ReplayService
                 $defaultDomain,
                 &$inserted,
                 $provider,
+                $runId,
                 &$skipped,
                 $store,
-                $tables
+                $tables,
+                &$sourceInserted,
+                &$sourceSkipped,
+                &$sourceChunks
             ): void {
+                $sourceChunks++;
                 $sleepInserts = [];
                 $screenTimeInserts = [];
                 $healthInserts = [];
+                $idempotencyRows = [];
+                $samplePayloadsByExternalId = [];
+                $externalIdsThisChunk = [];
                 $now = now();
 
                 foreach ($rows as $row) {
@@ -104,17 +120,20 @@ class ReplayService
                     $value = $sample['value'] ?? [];
 
                     $idKey = IdempotencyKey::build($provider, $externalId !== '' ? $externalId : $recordedAt, $recordedAt, $value);
-                    $record = $store->recordFast([
+                    $resolvedExternalId = (string) ($idKey['external_id'] ?? '');
+                    $idempotencyRows[] = [
                         'provider' => $idKey['provider'],
-                        'external_id' => $idKey['external_id'],
+                        'external_id' => $resolvedExternalId,
                         'recorded_at' => $idKey['recorded_at'],
                         'hash' => $idKey['hash'],
+                        'run_id' => $runId,
+                        'first_seen_at' => $now,
+                        'last_seen_at' => $now,
                         'ingest_batch_id' => $batchId,
-                    ]);
-                    if (($record['inserted'] ?? false) === false) {
-                        $skipped++;
-                        continue;
-                    }
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                    $externalIdsThisChunk[] = $resolvedExternalId;
 
                     $payloadHash = IdempotencyKey::hashPayload($value);
                     $confidence = (float) ($sample['confidence'] ?? 1.0);
@@ -132,6 +151,29 @@ class ReplayService
                         'created_at' => $now,
                         'updated_at' => $now,
                     ];
+                    $samplePayloadsByExternalId[$resolvedExternalId] = [
+                        'domain' => $domain,
+                        'payload' => $payload,
+                    ];
+                }
+
+                if ($idempotencyRows === []) {
+                    return;
+                }
+
+                $store->recordFastBatch($idempotencyRows);
+                $insertedExternalIds = $store->pluckInsertedExternalIds($provider, $runId, $externalIdsThisChunk);
+                $insertedLookup = array_fill_keys($insertedExternalIds, true);
+
+                foreach ($samplePayloadsByExternalId as $sampleExternalId => $samplePayload) {
+                    if (!isset($insertedLookup[$sampleExternalId])) {
+                        $skipped++;
+                        $sourceSkipped++;
+                        continue;
+                    }
+
+                    $domain = (string) ($samplePayload['domain'] ?? '');
+                    $payload = $samplePayload['payload'] ?? [];
 
                     if ($domain === 'sleep' && ($tables['sleep_samples'] ?? false)) {
                         $sleepInserts[] = $payload;
@@ -151,12 +193,25 @@ class ReplayService
                     }
 
                     $skipped++;
+                    $sourceSkipped++;
                 }
 
-                $inserted += $this->flushInserts('sleep_samples', $sleepInserts);
-                $inserted += $this->flushInserts('screen_time_samples', $screenTimeInserts);
-                $inserted += $this->flushInserts('health_samples', $healthInserts);
+                $chunkInserted = 0;
+                $chunkInserted += $this->flushInserts('sleep_samples', $sleepInserts);
+                $chunkInserted += $this->flushInserts('screen_time_samples', $screenTimeInserts);
+                $chunkInserted += $this->flushInserts('health_samples', $healthInserts);
+
+                $inserted += $chunkInserted;
+                $sourceInserted += $chunkInserted;
             }, 'id');
+
+        Log::info('replay source processed', [
+            'source_table' => $sourceTable,
+            'batch_id' => $batchId,
+            'inserted' => $sourceInserted,
+            'skipped' => $sourceSkipped,
+            'chunks' => $sourceChunks,
+        ]);
     }
 
     private function normalizeSample(object $row, string $domain): array

@@ -129,4 +129,40 @@ class IdempotencyStore
             'existing' => !$inserted,
         ];
     }
+
+    public function recordFastBatch(array $rows): int
+    {
+        if (!Schema::hasTable('idempotency_keys') || $rows === []) {
+            return 0;
+        }
+
+        return (int) DB::table('idempotency_keys')->insertOrIgnore($rows);
+    }
+
+    /**
+     * @param array<int, string> $externalIds
+     * @return array<int, string>
+     */
+    public function pluckInsertedExternalIds(string $provider, string $runId, array $externalIds): array
+    {
+        if (!Schema::hasTable('idempotency_keys') || $externalIds === []) {
+            return [];
+        }
+
+        $uniqueIds = array_values(array_unique(array_map(static fn ($id) => trim((string) $id), $externalIds)));
+        $uniqueIds = array_values(array_filter($uniqueIds, static fn (string $id): bool => $id !== ''));
+        if ($uniqueIds === []) {
+            return [];
+        }
+
+        return DB::table('idempotency_keys')
+            ->where('provider', $provider)
+            ->where('run_id', $runId)
+            ->whereIn('external_id', $uniqueIds)
+            ->pluck('external_id')
+            ->map(static fn ($id): string => (string) $id)
+            ->unique()
+            ->values()
+            ->all();
+    }
 }

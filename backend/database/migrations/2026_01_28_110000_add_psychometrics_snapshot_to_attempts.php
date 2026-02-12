@@ -48,34 +48,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('attempts')) {
-            return;
-        }
-
-        $indexName = 'attempts_pack_norm_idx';
-        if ($this->indexExists('attempts', $indexName)) {
-            Schema::table('attempts', function (Blueprint $table) use ($indexName) {
-                $table->dropIndex($indexName);
-            });
-        }
-
-        Schema::table('attempts', function (Blueprint $table) {
-            if (Schema::hasColumn('attempts', 'calculation_snapshot_json')) {
-                $table->dropColumn('calculation_snapshot_json');
-            }
-            if (Schema::hasColumn('attempts', 'norm_version')) {
-                $table->dropColumn('norm_version');
-            }
-            if (Schema::hasColumn('attempts', 'scoring_spec_version')) {
-                $table->dropColumn('scoring_spec_version');
-            }
-            if (Schema::hasColumn('attempts', 'dir_version')) {
-                $table->dropColumn('dir_version');
-            }
-            if (Schema::hasColumn('attempts', 'pack_id')) {
-                $table->dropColumn('pack_id');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

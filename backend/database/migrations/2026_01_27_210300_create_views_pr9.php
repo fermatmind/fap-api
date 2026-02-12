@@ -30,19 +30,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (config('database.default') === 'sqlite') {
-            return;
-        }
-
-        $viewDir = base_path('tools/sql/views');
-        if (!is_dir($viewDir)) {
-            $viewDir = base_path('../tools/sql/views');
-        }
-        $files = glob($viewDir . '/v_*.sql') ?: [];
-
-        foreach ($files as $file) {
-            $viewName = pathinfo($file, PATHINFO_FILENAME);
-            DB::unprepared("DROP VIEW IF EXISTS {$viewName}");
-        }
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

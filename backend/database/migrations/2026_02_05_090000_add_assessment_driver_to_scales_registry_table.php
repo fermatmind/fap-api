@@ -21,14 +21,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!Schema::hasTable('scales_registry')) {
-            return;
-        }
-
-        if (Schema::hasColumn('scales_registry', 'assessment_driver')) {
-            Schema::table('scales_registry', function (Blueprint $table) {
-                $table->dropColumn('assessment_driver');
-            });
-        }
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

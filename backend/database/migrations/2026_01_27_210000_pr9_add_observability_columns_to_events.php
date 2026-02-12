@@ -99,62 +99,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        $this->dropIndexIfExists('events', 'idx_events_event_time');
-        $this->dropIndexIfExists('events', 'idx_events_attempt');
-        $this->dropIndexIfExists('events', 'idx_events_share');
-        $this->dropIndexIfExists('events', 'idx_events_question');
-        $this->dropIndexIfExists('events', 'idx_events_pack');
-
-        Schema::table('events', function (Blueprint $table): void {
-            if (Schema::hasColumn('events', 'session_id')) {
-                $table->dropColumn('session_id');
-            }
-            if (Schema::hasColumn('events', 'request_id')) {
-                $table->dropColumn('request_id');
-            }
-            if (Schema::hasColumn('events', 'question_id')) {
-                $table->dropColumn('question_id');
-            }
-            if (Schema::hasColumn('events', 'question_index')) {
-                $table->dropColumn('question_index');
-            }
-            if (Schema::hasColumn('events', 'duration_ms')) {
-                $table->dropColumn('duration_ms');
-            }
-            if (Schema::hasColumn('events', 'is_dropoff')) {
-                $table->dropColumn('is_dropoff');
-            }
-            if (Schema::hasColumn('events', 'pack_id')) {
-                $table->dropColumn('pack_id');
-            }
-            if (Schema::hasColumn('events', 'dir_version')) {
-                $table->dropColumn('dir_version');
-            }
-            if (Schema::hasColumn('events', 'pack_semver')) {
-                $table->dropColumn('pack_semver');
-            }
-            if (Schema::hasColumn('events', 'utm_source')) {
-                $table->dropColumn('utm_source');
-            }
-            if (Schema::hasColumn('events', 'utm_medium')) {
-                $table->dropColumn('utm_medium');
-            }
-            if (Schema::hasColumn('events', 'utm_campaign')) {
-                $table->dropColumn('utm_campaign');
-            }
-            if (Schema::hasColumn('events', 'referrer')) {
-                $table->dropColumn('referrer');
-            }
-            if (Schema::hasColumn('events', 'share_channel')) {
-                $table->dropColumn('share_channel');
-            }
-            if (Schema::hasColumn('events', 'share_click_id')) {
-                $table->dropColumn('share_click_id');
-            }
-            if (Schema::hasColumn('events', 'event_name')) {
-                $table->dropColumn('event_name');
-            }
-        });
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function ensureIndex(string $tableName, array $columns, string $indexName): void

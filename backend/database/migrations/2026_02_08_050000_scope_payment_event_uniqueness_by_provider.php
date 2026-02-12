@@ -14,7 +14,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        // Intentionally no-op: rollback behavior is owned by 2026_02_08_000001 migration.
-        return;
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };

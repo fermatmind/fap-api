@@ -82,74 +82,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (Schema::hasTable('attempts')) {
-            $indexName = 'attempts_org_id_idx';
-            if ($this->indexExists('attempts', $indexName)) {
-                Schema::table('attempts', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-            Schema::table('attempts', function (Blueprint $table) {
-                if (Schema::hasColumn('attempts', 'org_id')) {
-                    $table->dropColumn('org_id');
-                }
-            });
-        }
-
-        if (Schema::hasTable('results')) {
-            $uniqueName = 'results_org_id_attempt_id_unique';
-            $legacyUniqueName = 'results_org_attempt_unique';
-            if ($this->indexExists('results', $uniqueName)) {
-                Schema::table('results', function (Blueprint $table) use ($uniqueName) {
-                    $table->dropUnique($uniqueName);
-                });
-            } elseif ($this->indexExists('results', $legacyUniqueName)) {
-                Schema::table('results', function (Blueprint $table) use ($legacyUniqueName) {
-                    $table->dropUnique($legacyUniqueName);
-                });
-            }
-
-            $indexName = 'results_org_id_idx';
-            if ($this->indexExists('results', $indexName)) {
-                Schema::table('results', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-
-            Schema::table('results', function (Blueprint $table) {
-                if (Schema::hasColumn('results', 'org_id')) {
-                    $table->dropColumn('org_id');
-                }
-            });
-        }
-
-        if (Schema::hasTable('events')) {
-            $indexName = 'events_org_id_idx';
-            if ($this->indexExists('events', $indexName)) {
-                Schema::table('events', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-            Schema::table('events', function (Blueprint $table) {
-                if (Schema::hasColumn('events', 'org_id')) {
-                    $table->dropColumn('org_id');
-                }
-            });
-        }
-
-        if (Schema::hasTable('report_jobs')) {
-            $indexName = 'report_jobs_org_id_idx';
-            if ($this->indexExists('report_jobs', $indexName)) {
-                Schema::table('report_jobs', function (Blueprint $table) use ($indexName) {
-                    $table->dropIndex($indexName);
-                });
-            }
-            Schema::table('report_jobs', function (Blueprint $table) {
-                if (Schema::hasColumn('report_jobs', 'org_id')) {
-                    $table->dropColumn('org_id');
-                }
-            });
-        }
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

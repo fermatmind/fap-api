@@ -86,8 +86,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        // Safety: Down is a no-op to prevent accidental data loss.
-        // Schema::drop('scale_slugs');
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 
     private function indexExists(string $table, string $indexName): bool

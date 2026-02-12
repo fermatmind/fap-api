@@ -100,7 +100,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        // Prevent accidental data loss. This table might have existed before.
-        // This migration is guarded by Schema::hasTable(...) in up(), so rollback must never drop the table.
+        // forward-only migration: rollback disabled to prevent data loss in production.
+        // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };
