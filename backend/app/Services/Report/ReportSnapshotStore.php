@@ -7,7 +7,6 @@ use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\GenericReportBuilder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class ReportSnapshotStore
 {
@@ -18,8 +17,7 @@ class ReportSnapshotStore
         private ReportComposer $reportComposer,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array $meta {scale_code?:string, pack_id?:string, dir_version?:string, scoring_spec_version?:string}
@@ -28,9 +26,6 @@ class ReportSnapshotStore
     {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
-            return;
-        }
-        if (!Schema::hasTable('report_snapshots')) {
             return;
         }
 
@@ -59,17 +54,11 @@ class ReportSnapshotStore
             'report_engine_version' => self::REPORT_ENGINE_VERSION,
             'snapshot_version' => self::SNAPSHOT_VERSION,
             'report_json' => '{}',
+            'status' => 'pending',
+            'last_error' => null,
             'created_at' => $now,
+            'updated_at' => $now,
         ];
-        if (Schema::hasColumn('report_snapshots', 'status')) {
-            $row['status'] = 'pending';
-        }
-        if (Schema::hasColumn('report_snapshots', 'last_error')) {
-            $row['last_error'] = null;
-        }
-        if (Schema::hasColumn('report_snapshots', 'updated_at')) {
-            $row['updated_at'] = $now;
-        }
 
         DB::table('report_snapshots')->insertOrIgnore($row);
 
@@ -78,6 +67,9 @@ class ReportSnapshotStore
             'report_engine_version' => self::REPORT_ENGINE_VERSION,
             'snapshot_version' => self::SNAPSHOT_VERSION,
             'scoring_spec_version' => $scoringSpecVersion,
+            'status' => 'pending',
+            'last_error' => null,
+            'updated_at' => $now,
         ];
         if ($resolvedOrderNo !== '') {
             $updates['order_no'] = $resolvedOrderNo;
@@ -90,15 +82,6 @@ class ReportSnapshotStore
         }
         if ($row['dir_version'] !== '') {
             $updates['dir_version'] = $row['dir_version'];
-        }
-        if (Schema::hasColumn('report_snapshots', 'status')) {
-            $updates['status'] = 'pending';
-        }
-        if (Schema::hasColumn('report_snapshots', 'last_error')) {
-            $updates['last_error'] = null;
-        }
-        if (Schema::hasColumn('report_snapshots', 'updated_at')) {
-            $updates['updated_at'] = $now;
         }
 
         $this->snapshotWriteQuery($orgId, $attemptId)->update($updates);
@@ -119,16 +102,6 @@ class ReportSnapshotStore
 
         if ($attemptId === '') {
             return $this->badRequest('ATTEMPT_REQUIRED', 'attempt_id is required.');
-        }
-
-        if (!Schema::hasTable('report_snapshots')) {
-            return $this->tableMissing('report_snapshots');
-        }
-        if (!Schema::hasTable('attempts')) {
-            return $this->tableMissing('attempts');
-        }
-        if (!Schema::hasTable('results')) {
-            return $this->tableMissing('results');
         }
 
         $existing = $this->findSnapshotRow($orgId, $attemptId);
@@ -178,17 +151,11 @@ class ReportSnapshotStore
             'report_engine_version' => self::REPORT_ENGINE_VERSION,
             'snapshot_version' => self::SNAPSHOT_VERSION,
             'report_json' => $reportJson,
+            'status' => 'ready',
+            'last_error' => null,
             'created_at' => $now,
+            'updated_at' => $now,
         ];
-        if (Schema::hasColumn('report_snapshots', 'status')) {
-            $row['status'] = 'ready';
-        }
-        if (Schema::hasColumn('report_snapshots', 'last_error')) {
-            $row['last_error'] = null;
-        }
-        if (Schema::hasColumn('report_snapshots', 'updated_at')) {
-            $row['updated_at'] = $now;
-        }
 
         DB::table('report_snapshots')->insertOrIgnore($row);
 
@@ -267,6 +234,7 @@ class ReportSnapshotStore
         }
 
         $value = trim((string) $raw);
+
         return $value !== '' ? $value : null;
     }
 
@@ -311,10 +279,12 @@ class ReportSnapshotStore
                 return null;
             }
             $report = $composed['report'] ?? null;
+
             return is_array($report) ? $report : null;
         }
 
         $report = $this->genericReportBuilder->build($attempt, $result);
+
         return is_array($report) ? $report : null;
     }
 
@@ -351,52 +321,26 @@ class ReportSnapshotStore
 
     private function snapshotWriteQuery(int $orgId, string $attemptId): \Illuminate\Database\Query\Builder
     {
-        $base = DB::table('report_snapshots')->where('attempt_id', $attemptId);
-        if (!Schema::hasColumn('report_snapshots', 'org_id')) {
-            return $base;
-        }
-
-        $byOrg = DB::table('report_snapshots')
+        return DB::table('report_snapshots')
             ->where('attempt_id', $attemptId)
             ->where('org_id', $orgId);
-        if ($byOrg->exists()) {
-            return $byOrg;
-        }
-
-        return $base;
     }
 
     private function findSnapshotRow(int $orgId, string $attemptId): ?object
     {
-        if (!Schema::hasTable('report_snapshots')) {
-            return null;
-        }
+        $row = DB::table('report_snapshots')
+            ->where('attempt_id', $attemptId)
+            ->where('org_id', $orgId)
+            ->first();
 
-        $query = DB::table('report_snapshots')->where('attempt_id', $attemptId);
-        if (Schema::hasColumn('report_snapshots', 'org_id')) {
-            $row = (clone $query)->where('org_id', $orgId)->first();
-            if ($row) {
-                return $row;
-            }
-        }
-
-        $row = $query->first();
         return $row ?: null;
     }
 
     private function snapshotStatus(?object $row): string
     {
         $status = strtolower(trim((string) ($row->status ?? 'ready')));
-        return in_array($status, ['pending', 'ready', 'failed'], true) ? $status : 'ready';
-    }
 
-    private function tableMissing(string $table): array
-    {
-        return [
-            'ok' => false,
-            'error' => 'TABLE_MISSING',
-            'message' => "{$table} table missing.",
-        ];
+        return in_array($status, ['pending', 'ready', 'failed'], true) ? $status : 'ready';
     }
 
     private function badRequest(string $code, string $message): array

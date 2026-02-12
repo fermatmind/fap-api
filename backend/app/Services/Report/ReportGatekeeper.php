@@ -10,7 +10,6 @@ use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Scale\ScaleRegistry;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class ReportGatekeeper
 {
@@ -43,13 +42,6 @@ class ReportGatekeeper
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
             return $this->badRequest('ATTEMPT_REQUIRED', 'attempt_id is required.');
-        }
-
-        if (!Schema::hasTable('attempts')) {
-            return $this->tableMissing('attempts');
-        }
-        if (!Schema::hasTable('results')) {
-            return $this->tableMissing('results');
         }
 
         $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
@@ -101,13 +93,6 @@ class ReportGatekeeper
             return $this->badRequest('ATTEMPT_REQUIRED', 'attempt_id is required.');
         }
 
-        if (!Schema::hasTable('attempts')) {
-            return $this->tableMissing('attempts');
-        }
-        if (!Schema::hasTable('results')) {
-            return $this->tableMissing('results');
-        }
-
         $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role, $forceSystemAccess)->first();
         if (!$attempt) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
@@ -142,10 +127,6 @@ class ReportGatekeeper
             : false;
 
         if ($hasAccess) {
-            if (!Schema::hasTable('report_snapshots')) {
-                return $this->tableMissing('report_snapshots');
-            }
-
             $snapshotRow = DB::table('report_snapshots')
                 ->where('org_id', $orgId)
                 ->where('attempt_id', $attemptId)
@@ -621,15 +602,6 @@ class ReportGatekeeper
         }
 
         return (int) $userId;
-    }
-
-    private function tableMissing(string $table): array
-    {
-        return [
-            'ok' => false,
-            'error' => 'TABLE_MISSING',
-            'message' => "{$table} table missing.",
-        ];
     }
 
     private function badRequest(string $code, string $message): array
