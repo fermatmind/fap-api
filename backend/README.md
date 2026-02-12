@@ -127,6 +127,32 @@ echo "EXIT=$?"
 
 ---
 
+## F. 本地 pre-commit 安全门禁（阻断 backend/.env）
+
+在仓库根目录执行：
+
+```bash
+cd /Users/rainie/Desktop/GitHub/fap-api
+chmod +x backend/scripts/pre_commit_env_guard.sh
+cat > .git/hooks/pre-commit <<'HOOK'
+#!/usr/bin/env bash
+set -euo pipefail
+bash backend/scripts/pre_commit_env_guard.sh
+HOOK
+chmod +x .git/hooks/pre-commit
+```
+
+手工验证：
+
+```bash
+cd /Users/rainie/Desktop/GitHub/fap-api
+bash backend/scripts/pre_commit_env_guard.sh
+```
+
+说明：执行 `bash backend/scripts/ci_verify_mbti.sh` 或部分本地 artisan 命令后，可能生成 `backend/.env`；提交前执行 `rm -f backend/.env`。
+
+---
+
 ## 常见问题
 
 ### 1) `Usage: ./scripts/accept_overrides_D.sh <ATTEMPT_ID>`
