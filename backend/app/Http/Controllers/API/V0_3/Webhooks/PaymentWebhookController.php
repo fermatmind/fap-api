@@ -9,7 +9,6 @@ use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\PaymentWebhookProcessor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 final class PaymentWebhookController extends Controller
@@ -26,79 +25,59 @@ final class PaymentWebhookController extends Controller
         $sizeBytes = strlen($raw);
 
         if ($sizeBytes > 262144) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'PAYLOAD_TOO_LARGE',
-                'message' => 'payload too large',
-            ], 413);
+            return $this->errorResponse(413, 'PAYLOAD_TOO_LARGE', 'payload too large');
         }
 
-        $rawSha = hash('sha256', $raw);
+        $payload = json_decode($raw, true);
+        if (!is_array($payload)) {
+            return $this->errorResponse(400, 'INVALID_PAYLOAD', 'invalid payload');
+        }
+
+        $gateway = $this->resolveGateway($provider);
+        if (!$gateway) {
+            return $this->errorResponse(404, 'NOT_FOUND', 'not found.');
+        }
+
+        if ($gateway->verifySignature($request) !== true) {
+            return $this->errorResponse(400, 'INVALID_SIGNATURE', 'invalid signature');
+        }
+
+        $sha256 = hash('sha256', $raw);
         $payloadMeta = [
             'size_bytes' => $sizeBytes,
-            'raw_sha256' => $rawSha,
-            'sha256' => $rawSha,
+            'sha256' => $sha256,
+            'raw_sha256' => $sha256,
+            'headers' => $request->headers->all(),
             'request_id' => (string) $request->attributes->get('request_id', ''),
             'ip' => (string) $request->ip(),
             'user_agent' => (string) $request->userAgent(),
         ];
 
-        $payload = json_decode($raw, true);
-        if (!is_array($payload)) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'INVALID_JSON',
-                'message' => 'invalid json payload',
-            ], 400);
-        }
-
-        $gateway = $this->resolveGateway($provider);
-        if (!$gateway) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'NOT_FOUND',
-                'message' => 'not found.',
-            ], 404);
-        }
-
-        if ($gateway->verifySignature($request) !== true) {
-            return response()->json([
-                'ok' => false,
-                'error' => 'INVALID_SIGNATURE',
-                'message' => 'invalid signature',
-            ], 400);
-        }
-
-        $normalized = $gateway->normalizePayload($payload);
-        $orderNo = trim((string) ($normalized['order_no'] ?? ''));
-        [$orgId, $userId, $anonId] = $this->resolveOrderContext($orderNo);
+        $orgId = $this->resolveOrgId($request);
 
         try {
-            $res = $this->processor->handle(
+            $result = $this->processor->handle(
                 $provider,
                 $payload,
                 $orgId,
-                $userId,
-                $anonId,
+                null,
+                null,
                 true,
                 $payloadMeta
             );
-
-            return response()->json($res, 200);
         } catch (\Throwable $e) {
             Log::error('PAYMENT_WEBHOOK_INTERNAL_ERROR', [
                 'provider' => $provider,
-                'order_no' => $orderNo !== '' ? $orderNo : null,
                 'request_id' => $payloadMeta['request_id'],
                 'exception' => $e->getMessage(),
             ]);
 
-            return response()->json([
-                'ok' => false,
-                'error' => 'WEBHOOK_INTERNAL_ERROR',
-                'message' => 'webhook internal error',
-            ], 500);
+            return $this->errorResponse(500, 'WEBHOOK_INTERNAL_ERROR', 'webhook internal error');
         }
+
+        $status = $this->resolveProcessorResponseStatus($result);
+
+        return response()->json($result, $status);
     }
 
     private function resolveGateway(string $provider): ?PaymentGatewayInterface
@@ -110,31 +89,38 @@ final class PaymentWebhookController extends Controller
         };
     }
 
-    private function resolveOrderContext(string $orderNo): array
+    private function resolveOrgId(Request $request): int
     {
-        if ($orderNo === '') {
-            return [0, null, null];
+        $raw = trim((string) $request->header('X-Org-Id', ''));
+        if ($raw === '') {
+            return 0;
         }
 
-        $row = DB::table('orders')
-            ->select(['org_id', 'user_id', 'anon_id'])
-            ->where('order_no', $orderNo)
-            ->first();
-
-        if (!$row) {
-            return [0, null, null];
+        $parsed = filter_var($raw, FILTER_VALIDATE_INT);
+        if ($parsed === false) {
+            return 0;
         }
 
-        $orgId = (int) ($row->org_id ?? 0);
-        $userId = $this->stringOrNull($row->user_id ?? null);
-        $anonId = $this->stringOrNull($row->anon_id ?? null);
-
-        return [$orgId, $userId, $anonId];
+        return (int) $parsed;
     }
 
-    private function stringOrNull(mixed $value): ?string
+    private function resolveProcessorResponseStatus(array $result): int
     {
-        $v = trim((string) ($value ?? ''));
-        return $v !== '' ? $v : null;
+        $status = $result['status'] ?? null;
+        if (is_int($status) && $status >= 100 && $status <= 599 && ($result['ok'] ?? null) === true) {
+            return $status;
+        }
+
+        return 200;
+    }
+
+    private function errorResponse(int $status, string $errorCode, string $message, array $details = []): JsonResponse
+    {
+        return response()->json([
+            'ok' => false,
+            'error_code' => $errorCode,
+            'message' => $message,
+            'details' => $details === [] ? (object) [] : $details,
+        ], $status);
     }
 }
