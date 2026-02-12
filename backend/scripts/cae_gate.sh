@@ -46,7 +46,7 @@ function is_sensitive(k) {
   return (k ~ /(_SECRET|_TOKEN|_PASSWORD)$/ || k == "APP_KEY" || k == "AWS_SECRET_ACCESS_KEY")
 }
 function is_placeholder(v) {
-  return (v == "" || v == "null" || v == "NULL" || v == "(production_value_required)" || v == "<required>" || v == "<placeholder>" || v == "CHANGE_ME" || v == "changeme")
+  return (v == "" || v == "null" || v == "NULL" || v == "(production_value_required)" || v == "<required>" || v == "<placeholder>" || v == "CHANGE_ME" || v == "changeme" || v == "CHANGEME" || v == "base64:CHANGEME")
 }
 {
   raw = $0
