@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\SelfCheck\V2\SelfCheckIoV2;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -11,23 +12,32 @@ use Illuminate\Support\Str;
 
 class HealthzController extends Controller
 {
+    public function __construct(private readonly ?SelfCheckIoV2 $selfCheckIoV2 = null)
+    {
+    }
+
     public function show(Request $request)
     {
         $service = 'Fermat Assessment Platform API';
         $version = config('app.version', env('APP_VERSION', 'unknown'));
         $nowIso = now()->toIso8601String();
-        $verbose = (bool) config('healthz.verbose', false) && app()->environment(['local', 'testing']);
+        $verbose = (bool) config('healthz.verbose', false) && app()->environment(['local', 'testing', 'ci']);
 
         $region = (string) $request->query('region', 'CN_MAINLAND');
         $locale = (string) $request->query('locale', 'zh-CN');
 
-        $deps = [];
-        $deps['db'] = $this->checkDb();
-        $deps['cache_store'] = $this->checkCacheStore();
-        $deps['redis'] = $this->checkRedis();
-        $deps['queue'] = $this->checkQueue();
-        $deps['cache_dirs'] = $this->checkCacheDirs();
-        $deps['content_source'] = $this->checkContentSource($region, $locale);
+        if (config('features.selfcheck_v2', false) === true) {
+            $runner = $this->selfCheckIoV2 ?? app(SelfCheckIoV2::class);
+            $deps = $runner->collectDeps($region, $locale, $verbose);
+        } else {
+            $deps = [];
+            $deps['db'] = $this->checkDb();
+            $deps['cache_store'] = $this->checkCacheStore();
+            $deps['redis'] = $this->checkRedis();
+            $deps['queue'] = $this->checkQueue();
+            $deps['cache_dirs'] = $this->checkCacheDirs();
+            $deps['content_source'] = $this->checkContentSource($region, $locale);
+        }
 
         $allOk = true;
         foreach ($deps as $value) {

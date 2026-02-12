@@ -1,0 +1,307 @@
+{
+    "highlights": [
+        {
+            "id": "hl.seed.1",
+            "dim": "EI",
+            "side": "I",
+            "level": "clear",
+            "pct": 60,
+            "delta": 10,
+            "title": "Seed",
+            "text": "Seed text",
+            "tips": [
+                "tip"
+            ],
+            "tags": [
+                "kind:strength",
+                "axis:EI:I"
+            ],
+            "kind": "strength"
+        },
+        {
+            "id": "hl_fallback_risk_INTJ-A_AT_A",
+            "dim": "AT",
+            "side": "A",
+            "level": "borderline",
+            "pct": 52,
+            "delta": 2,
+            "title": "盲点：压力姿态容易出现“惯性误判”",
+            "text": "在「压力姿态」上，你更偏 A（强度 52%）。优势用过头时可能变成惯性：建议你在关键场景加入一次“反向校验”，避免单一路径误判。",
+            "tips": [
+                "重要决定前写一个“反方理由”",
+                "找一个互补型的人做 2 分钟校验"
+            ],
+            "tags": [
+                "kind:risk",
+                "axis:AT:A",
+                "fallback:true"
+            ],
+            "kind": "risk"
+        },
+        {
+            "id": "hl_fallback_action_INTJ-A_AT_A",
+            "dim": "AT",
+            "side": "A",
+            "level": "borderline",
+            "pct": 52,
+            "delta": 2,
+            "title": "建议：把压力姿态优势用对地方",
+            "text": "你在「压力姿态」更偏 A（强度 52%）。给自己加一个小流程：先写下第一反应，再补一个反向备选，然后再做决定/表达，效果会更稳。",
+            "tips": [
+                "第一反应写下来，再补一个反向备选",
+                "给重要决定加 10 分钟冷却/复盘"
+            ],
+            "tags": [
+                "kind:action",
+                "axis:AT:A",
+                "fallback:true"
+            ],
+            "kind": "action"
+        }
+    ],
+    "cards": {
+        "traits": [
+            {
+                "id": "traits_strength_SN_01",
+                "title": "你的强项更集中在 SN",
+                "desc": "从分数来看，你在 SN 轴上偏好更明显，这会直接影响你在「traits」里的行为选择。",
+                "bullets": [
+                    "当你做决策时更容易沿着“S”这条路径推进",
+                    "强项用得好会变成效率；用过头可能变成惯性"
+                ],
+                "tags": [
+                    "axis:SN",
+                    "state:clear"
+                ],
+                "priority": 120
+            },
+            {
+                "id": "traits_blindspot_AT_01",
+                "title": "一个容易被忽略的点：AT",
+                "desc": "你在 AT 轴上的偏好相对不强，更多取决于情境。优势是灵活，但也更容易“用着用着就累”。",
+                "bullets": [
+                    "重要场景先明确：这次更需要 AT 的哪一端？",
+                    "用清单/模板把临场消耗降下来"
+                ],
+                "tags": [
+                    "axis:AT",
+                    "state:borderline"
+                ],
+                "priority": 110
+            },
+            {
+                "id": "traits_core_01",
+                "title": "你的核心气质画像",
+                "desc": "你更像是“把事情推进到结果”的类型：直面问题、偏行动、要可落地。",
+                "bullets": [
+                    "喜欢清晰规则与预期",
+                    "对低效/含糊更敏感",
+                    "愿意承担并带节奏"
+                ],
+                "tags": [
+                    "topic:traits"
+                ],
+                "priority": 100
+            }
+        ],
+        "career": [
+            {
+                "id": "career_strength_SN_01",
+                "title": "你的强项更集中在 SN",
+                "desc": "从分数来看，你在 SN 轴上偏好更明显，这会直接影响你在「career」里的行为选择。",
+                "bullets": [
+                    "当你做决策时更容易沿着“S”这条路径推进",
+                    "强项用得好会变成效率；用过头可能变成惯性"
+                ],
+                "tags": [
+                    "axis:SN",
+                    "state:clear"
+                ],
+                "priority": 120
+            },
+            {
+                "id": "career_blindspot_AT_01",
+                "title": "一个容易被忽略的点：AT",
+                "desc": "你在 AT 轴上的偏好相对不强，更多取决于情境。优势是灵活，但也更容易“用着用着就累”。",
+                "bullets": [
+                    "重要场景先明确：这次更需要 AT 的哪一端？",
+                    "用清单/模板把临场消耗降下来"
+                ],
+                "tags": [
+                    "axis:AT",
+                    "state:borderline"
+                ],
+                "priority": 110
+            },
+            {
+                "id": "career_style_01",
+                "title": "你更适合的工作方式",
+                "desc": "INTJ-A（Architect）通常在“目标清晰、边界明确、能推进交付”的环境里发挥更好。",
+                "bullets": [
+                    "给你明确目标与权限",
+                    "配合可复用流程/模板",
+                    "用里程碑驱动协作"
+                ],
+                "tags": [
+                    "topic:career"
+                ],
+                "priority": 100
+            }
+        ],
+        "growth": [
+            {
+                "id": "growth_strength_SN_01",
+                "title": "你的强项更集中在 SN",
+                "desc": "从分数来看，你在 SN 轴上偏好更明显，这会直接影响你在「growth」里的行为选择。",
+                "bullets": [
+                    "当你做决策时更容易沿着“S”这条路径推进",
+                    "强项用得好会变成效率；用过头可能变成惯性"
+                ],
+                "tags": [
+                    "axis:SN",
+                    "state:clear"
+                ],
+                "priority": 120
+            },
+            {
+                "id": "growth_blindspot_AT_01",
+                "title": "一个容易被忽略的点：AT",
+                "desc": "你在 AT 轴上的偏好相对不强，更多取决于情境。优势是灵活，但也更容易“用着用着就累”。",
+                "bullets": [
+                    "重要场景先明确：这次更需要 AT 的哪一端？",
+                    "用清单/模板把临场消耗降下来"
+                ],
+                "tags": [
+                    "axis:AT",
+                    "state:borderline"
+                ],
+                "priority": 110
+            },
+            {
+                "id": "growth_nextstep_01",
+                "title": "一个你立刻能做的下一步",
+                "desc": "把你最强项变成系统，把最弱项变成工具：这是最快的成长路径。",
+                "bullets": [
+                    "强项：沉淀成模板/流程",
+                    "弱项：用提醒/仪式降低消耗",
+                    "每周一次复盘：保留有效、删掉无效"
+                ],
+                "tags": [
+                    "topic:growth"
+                ],
+                "priority": 100
+            }
+        ],
+        "relationships": [
+            {
+                "id": "relationships_strength_SN_01",
+                "title": "你的强项更集中在 SN",
+                "desc": "从分数来看，你在 SN 轴上偏好更明显，这会直接影响你在「relationships」里的行为选择。",
+                "bullets": [
+                    "当你做决策时更容易沿着“S”这条路径推进",
+                    "强项用得好会变成效率；用过头可能变成惯性"
+                ],
+                "tags": [
+                    "axis:SN",
+                    "state:clear"
+                ],
+                "priority": 120
+            },
+            {
+                "id": "relationships_blindspot_AT_01",
+                "title": "一个容易被忽略的点：AT",
+                "desc": "你在 AT 轴上的偏好相对不强，更多取决于情境。优势是灵活，但也更容易“用着用着就累”。",
+                "bullets": [
+                    "重要场景先明确：这次更需要 AT 的哪一端？",
+                    "用清单/模板把临场消耗降下来"
+                ],
+                "tags": [
+                    "axis:AT",
+                    "state:borderline"
+                ],
+                "priority": 110
+            },
+            {
+                "id": "relationships_script_01",
+                "title": "更顺的一种沟通句式",
+                "desc": "把分歧从“对错”拉回“协商”：先对齐目标，再讲事实和请求。",
+                "bullets": [
+                    "目标：我们都想……",
+                    "事实：现在发生的是……",
+                    "请求：我希望我们可以……"
+                ],
+                "tags": [
+                    "topic:relationships"
+                ],
+                "priority": 100
+            }
+        ]
+    },
+    "recommended_reads": [
+        {
+            "id": "read.1",
+            "canonical_id": null,
+            "canonical_url": null,
+            "type": "article",
+            "title": "Read 1",
+            "desc": "",
+            "url": "https://example.com/1",
+            "cover": "",
+            "priority": 10,
+            "tags": []
+        }
+    ],
+    "borderline": {
+        "items": [
+            {
+                "dim": "AT",
+                "title": "AT",
+                "text": "at",
+                "examples": [],
+                "suggestions": []
+            },
+            {
+                "dim": "EI",
+                "title": "EI",
+                "text": "ei",
+                "examples": [],
+                "suggestions": []
+            }
+        ]
+    },
+    "roles": {
+        "code": "NT",
+        "title": "Role NT",
+        "subtitle": "",
+        "theme": {
+            "color": ""
+        },
+        "desc": "",
+        "tags": []
+    },
+    "strategies": {
+        "code": "IA",
+        "title": "Strategy IA",
+        "subtitle": "",
+        "desc": "",
+        "tags": []
+    },
+    "identity_layer": {
+        "id": "identity_INTJ-A",
+        "type_code": "INTJ-A",
+        "title": "INTJ-A",
+        "subtitle": "Architect · 更偏直觉/趋势推演",
+        "tags": [
+            "logic",
+            "strategy",
+            "focus"
+        ],
+        "desc": "你在「INTJ-A」的表现更像一个Architect：更偏直觉/趋势推演。你更愿意把目标说清、把规则定好，然后推动事情发生。在压力下，你可能会更快进入“推进/收束”的模式；给自己留一点复盘与缓冲，会让输出更稳。",
+        "meta": {
+            "top_dims": [
+                "SN",
+                "JP"
+            ]
+        }
+    }
+}

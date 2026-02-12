@@ -35,6 +35,7 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="PAYMENTS_ALLOW_STUB" value="true"/>
         <env name="FEATURE_ENABLE_V0_2_REPORT" value="true"/>
     </php>
 </phpunit>

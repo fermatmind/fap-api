@@ -76,7 +76,8 @@
   "bash scripts/check_content_packages.sh",
   "php artisan test --filter HighlightBuilderBuildFromStoreTest"
 ],
-    "selfcheck": "bash scripts/selfcheck.sh"
+    "selfcheck": "bash scripts/selfcheck.sh",
+    "quality:lines": "php ../scripts/quality/guard_max_lines.php"
   },
   "extra": {
     "laravel": {
