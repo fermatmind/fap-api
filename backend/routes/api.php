@@ -266,7 +266,7 @@ Route::prefix("v0.3")->middleware([
         [PaymentWebhookController::class, "handle"]
     )->whereIn('provider', $payProviders)
         ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
-        ->name('v0.3.webhooks.payment');
+        ->name('api.v0_3.webhooks.payment');
 
     Route::middleware(ResolveOrgContext::class)->group(function () use ($payProviders) {
         // 0) Boot (flags + experiments)

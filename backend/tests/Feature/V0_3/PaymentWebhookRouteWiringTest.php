@@ -14,7 +14,7 @@ class PaymentWebhookRouteWiringTest extends TestCase
     {
         $this->assertTrue(class_exists(PaymentWebhookController::class));
 
-        $route = app('router')->getRoutes()->getByName('v0.3.webhooks.payment');
+        $route = app('router')->getRoutes()->getByName('api.v0_3.webhooks.payment');
         $this->assertNotNull($route);
         $this->assertSame(PaymentWebhookController::class . '@handle', $route->getActionName());
 

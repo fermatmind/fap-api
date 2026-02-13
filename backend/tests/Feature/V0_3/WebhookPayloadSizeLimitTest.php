@@ -19,7 +19,7 @@ final class WebhookPayloadSizeLimitTest extends TestCase
 
     public function test_v03_payment_webhook_route_contains_payload_limit_middleware(): void
     {
-        $route = app('router')->getRoutes()->getByName('v0.3.webhooks.payment');
+        $route = app('router')->getRoutes()->getByName('api.v0_3.webhooks.payment');
 
         $this->assertNotNull($route);
         $this->assertContains(LimitWebhookPayloadSize::class, $route->gatherMiddleware());

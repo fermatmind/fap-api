@@ -19,6 +19,17 @@ final class PaymentWebhookControllerTest extends TestCase
     use RefreshDatabase;
     use MockeryPHPUnitIntegration;
 
+    public function test_unsigned_webhook_request_is_rejected_without_500(): void
+    {
+        $response = $this->postJson(
+            route('api.v0_3.webhooks.payment', ['provider' => 'stripe']),
+            []
+        );
+
+        $this->assertNotSame(500, $response->getStatusCode());
+        $this->assertTrue($response->getStatusCode() >= 400 && $response->getStatusCode() < 500);
+    }
+
     public function test_invalid_json_returns_400_and_processor_not_called(): void
     {
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
