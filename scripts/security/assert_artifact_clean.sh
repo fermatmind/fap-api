@@ -53,12 +53,20 @@ check_repo_mode() {
   fi
 
   local p hits
-  for p in node_modules backend/node_modules vendor backend/vendor; do
+  for p in node_modules backend/node_modules vendor backend/vendor backend/artifacts; do
     hits="$(contains_path "^${p}(/|$)" "$tracked")"
     if [[ -n "$hits" ]]; then
-      fail "forbidden tracked path exists: $p ; fix: remove dependencies output from repository."
+      fail "forbidden tracked path exists: $p ; fix: remove dependencies/runtime output from repository."
     fi
   done
+
+  hits="$(contains_path '^backend/database/.*\.sqlite$' "$tracked")"
+  if [[ -n "$hits" ]]; then
+    while IFS= read -r f; do
+      [[ -n "$f" ]] || continue
+      fail "forbidden tracked sqlite artifact: $f ; fix: remove sqlite db from repository."
+    done <<< "$hits"
+  fi
 
   hits="$(contains_path '^backend/storage/logs/' "$tracked" | grep -Ev '/\.gitkeep$' || true)"
   if [[ -n "$hits" ]]; then
@@ -84,9 +92,18 @@ check_repo_mode() {
     done <<< "$hits"
   fi
 
+  hits="$(contains_path '^backend/storage/app/archives/' "$tracked" | grep -Ev '/\.gitkeep$' || true)"
+  if [[ -n "$hits" ]]; then
+    while IFS= read -r f; do
+      [[ -n "$f" ]] || continue
+      fail "forbidden tracked runtime artifact: $f ; fix: keep only .gitkeep in backend/storage/app/archives."
+    done <<< "$hits"
+  fi
+
   for p in \
     backend/storage/app/private/.gitkeep \
     backend/storage/app/private/reports/.gitkeep \
+    backend/storage/app/archives/.gitkeep \
     backend/storage/logs/.gitkeep \
     backend/storage/framework/.gitkeep
   do
@@ -97,12 +114,10 @@ check_repo_mode() {
 }
 
 check_artifact_mode() {
-  # 1) .git only forbidden in artifact mode
   if [[ -e "$TARGET/.git" ]]; then
     fail "forbidden path exists: .git ; fix: remove git metadata from delivery package."
   fi
 
-  # 2) env files
   while IFS= read -r -d '' f; do
     base="$(basename "$f")"
     if [[ "$base" == ".env.example" ]]; then
@@ -111,15 +126,17 @@ check_artifact_mode() {
     fail "forbidden env file: $(rel "$f") ; fix: remove real env files from package/workspace."
   done < <(find "$TARGET" -type f \( -name '.env' -o -name '.env.*' \) -print0)
 
-  # 3) explicit denylist dirs
   local p
-  for p in node_modules backend/node_modules vendor backend/vendor; do
+  for p in node_modules backend/node_modules vendor backend/vendor backend/artifacts; do
     if [[ -e "$TARGET/$p" ]]; then
-      fail "forbidden path exists: $p ; fix: delete dependencies output before delivery."
+      fail "forbidden path exists: $p ; fix: delete dependencies/runtime output before delivery."
     fi
   done
 
-  # 4) runtime dirs: only .gitkeep files allowed
+  while IFS= read -r -d '' f; do
+    fail "forbidden sqlite file: $(rel "$f") ; fix: remove sqlite runtime db from package/workspace."
+  done < <(find "$TARGET/backend/database" -type f -name '*.sqlite' -print0 2>/dev/null)
+
   check_only_gitkeep_files() {
     local dir="$1"
     local abs="$TARGET/$dir"
@@ -134,11 +151,12 @@ check_artifact_mode() {
   check_only_gitkeep_files "backend/storage/logs"
   check_only_gitkeep_files "backend/storage/framework"
   check_only_gitkeep_files "backend/storage/app/private/reports"
+  check_only_gitkeep_files "backend/storage/app/archives"
 
-  # 5) required placeholders (only when parent directory is included in artifact)
   for p in \
     backend/storage/app/private/.gitkeep \
     backend/storage/app/private/reports/.gitkeep \
+    backend/storage/app/archives/.gitkeep \
     backend/storage/logs/.gitkeep \
     backend/storage/framework/.gitkeep
   do

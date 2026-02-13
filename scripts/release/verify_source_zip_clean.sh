@@ -21,6 +21,19 @@ PATTERN_PATH='(^fap-api/\.git/|^fap-api/backend/\.env($|[./])|^fap-api/\.env($|[
 HITS_PATH="$(echo "$LIST_FILTERED" | grep -E "$PATTERN_PATH" || true)"
 [ -z "$HITS_PATH" ] || { echo "[verify][FAIL] forbidden paths found:"; echo "$HITS_PATH"; exit 1; }
 
+# 1.5) 关键运行文件必须存在（防止 controller/trait 在发布包中缺失）
+REQUIRED_FILES=(
+  "fap-api/backend/routes/api.php"
+  "fap-api/backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php"
+  "fap-api/backend/app/Http/Controllers/API/V0_3/Concerns/ResolvesAttemptOwnership.php"
+)
+for rf in "${REQUIRED_FILES[@]}"; do
+  echo "$LIST" | grep -Fx "$rf" >/dev/null || {
+    echo "[verify][FAIL] required file missing: $rf"
+    exit 1
+  }
+done
+
 # 2) 内容敏感模式（命中直接失败；扫描常见文本类型）
 # 仅扫描体量可控的文本文件扩展名，避免二进制与超大文件拖慢校验
 SCAN_FILES="$(echo "$LIST_FILTERED" | grep -E '\.(env|php|json|yml|yaml|md|txt|sh)$' || true)"
