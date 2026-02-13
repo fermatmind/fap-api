@@ -47,7 +47,7 @@ final class ApiExceptionRenderer
         if ($e instanceof ModelNotFoundException) {
             return self::errorResponse(
                 404,
-                self::resolveModelNotFoundErrorCode($e),
+                self::resolveModelNotFoundErrorCode($request, $e),
                 'Not found.',
                 [],
                 $requestId
@@ -72,9 +72,12 @@ final class ApiExceptionRenderer
 
         if ($e instanceof HttpExceptionInterface) {
             $status = $e->getStatusCode();
-            $errorCode = self::resolveErrorCode($e, $status);
+            $errorCode = self::resolveErrorCode($request, $e, $status);
 
             $message = trim($e->getMessage());
+            if ($status === 404 && self::isFrameworkRouteMissingMessage($message)) {
+                $message = self::defaultMessageForStatus($status);
+            }
             if ($message === '') {
                 $message = self::defaultMessageForStatus($status);
             }
@@ -103,12 +106,12 @@ final class ApiExceptionRenderer
         return SymfonyResponse::$statusTexts[$status] ?? 'Request failed.';
     }
 
-    private static function resolveErrorCode(Throwable $e, int $status): string
+    private static function resolveErrorCode(Request $request, Throwable $e, int $status): string
     {
         if ($status === 404) {
             $modelNotFound = self::extractModelNotFoundException($e);
             if ($modelNotFound !== null) {
-                return self::resolveModelNotFoundErrorCode($modelNotFound);
+                return self::resolveModelNotFoundErrorCode($request, $modelNotFound);
             }
         }
 
@@ -133,10 +136,10 @@ final class ApiExceptionRenderer
         return is_array($details) ? $details : [];
     }
 
-    private static function resolveModelNotFoundErrorCode(ModelNotFoundException $e): string
+    private static function resolveModelNotFoundErrorCode(Request $request, ModelNotFoundException $e): string
     {
         $model = ltrim((string) $e->getModel(), '\\');
-        if ($model === Attempt::class) {
+        if ($model === Attempt::class && $request->is('api/v0.3/attempts/*')) {
             return 'RESOURCE_NOT_FOUND';
         }
 
@@ -184,6 +187,17 @@ final class ApiExceptionRenderer
         $payload['request_id'] = $requestId;
 
         return $payload;
+    }
+
+    private static function isFrameworkRouteMissingMessage(string $message): bool
+    {
+        $normalized = strtolower(trim($message));
+        if ($normalized === '') {
+            return false;
+        }
+
+        return str_contains($normalized, 'route')
+            && str_contains($normalized, 'could not be found');
     }
 
     private static function resolveRequestId(Request $request): string

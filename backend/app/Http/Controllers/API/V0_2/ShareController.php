@@ -9,7 +9,9 @@ use App\Http\Requests\V0_2\ShareViewRequest;
 use App\Services\Legacy\LegacyShareFlowService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class ShareController extends Controller
@@ -21,6 +23,7 @@ class ShareController extends Controller
     public function click(ShareClickRequest $request, string $shareId): JsonResponse
     {
         $routeShareId = (string) $request->route('shareId', $shareId);
+        $this->ensureSupportedShareId($routeShareId);
         try {
             $result = $this->shareFlow->clickAndComposeReport(
                 $routeShareId,
@@ -118,5 +121,27 @@ class ShareController extends Controller
         }
 
         return (string) \Illuminate\Support\Str::uuid();
+    }
+
+    private function ensureSupportedShareId(string $shareId): void
+    {
+        $normalized = trim($shareId);
+        if ($normalized === '') {
+            throw new NotFoundHttpException('Not Found');
+        }
+
+        if (Str::isUuid($normalized)) {
+            return;
+        }
+
+        if (preg_match('/^[0-9a-fA-F]{32}$/', $normalized) === 1) {
+            return;
+        }
+
+        if (preg_match('/^[A-Za-z0-9_]{6,128}$/', $normalized) === 1) {
+            return;
+        }
+
+        throw new NotFoundHttpException('Not Found');
     }
 }

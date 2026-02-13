@@ -71,7 +71,11 @@ class PaymentWebhookProcessor
 
     public function process(string $provider, array $payload, bool $signatureOk = true): array
     {
-        if ($signatureOk !== true) {
+        $providerKey = strtolower(trim($provider));
+
+        // Billing webhooks are rejected at the transport boundary when signature is invalid.
+        // Stripe keeps handler-level forensics rows for invalid signatures.
+        if ($signatureOk !== true && $providerKey === 'billing') {
             return [
                 'ok' => false,
                 'error_code' => 'INVALID_SIGNATURE',
