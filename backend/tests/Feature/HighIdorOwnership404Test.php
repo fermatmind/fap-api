@@ -34,8 +34,28 @@ class HighIdorOwnership404Test extends TestCase
         ];
     }
 
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
     private function createSubmittedAttemptForAnonA(): string
     {
+        $anonToken = $this->issueAnonToken(self::ANON_A);
+
         $start = $this->withHeaders([
             'X-Anon-Id' => self::ANON_A,
         ])->postJson('/api/v0.3/attempts/start', [
@@ -49,12 +69,14 @@ class HighIdorOwnership404Test extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => self::ANON_A,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->defaultAnswers(),
             'duration_ms' => 120000,
         ]);
         $submit->assertStatus(200);
+        $this->flushHeaders();
 
         return $attemptId;
     }
@@ -122,6 +144,7 @@ class HighIdorOwnership404Test extends TestCase
     {
         $this->seedScales();
         $attemptId = $this->createSubmittedAttemptForAnonA();
+        $anonBToken = $this->issueAnonToken(self::ANON_B);
 
         $this->withHeaders(['X-Anon-Id' => self::ANON_B])
             ->getJson("/api/v0.3/attempts/{$attemptId}/result")
@@ -131,7 +154,10 @@ class HighIdorOwnership404Test extends TestCase
             ->getJson("/api/v0.3/attempts/{$attemptId}/report")
             ->assertStatus(404);
 
-        $this->withHeaders(['X-Anon-Id' => self::ANON_B])
+        $this->withHeaders([
+            'X-Anon-Id' => self::ANON_B,
+            'Authorization' => 'Bearer ' . $anonBToken,
+        ])
             ->postJson('/api/v0.3/attempts/submit', [
                 'attempt_id' => $attemptId,
                 'answers' => $this->defaultAnswers(),

@@ -182,7 +182,8 @@ Route::prefix("v0.2")->middleware([
         Route::prefix("integrations/{provider}")->group(function () {
             Route::get("/oauth/start", [ProvidersController::class, "oauthStart"]);
             Route::get("/oauth/callback", [ProvidersController::class, "oauthCallback"]);
-            Route::post("/revoke", [ProvidersController::class, "revoke"]);
+            Route::post("/revoke", [ProvidersController::class, "revoke"])
+                ->middleware(\App\Http\Middleware\FmTokenAuth::class);
             Route::post("/ingest", [ProvidersController::class, "ingest"])
                 ->middleware(\App\Http\Middleware\IntegrationsIngestAuth::class);
             Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"])
@@ -200,11 +201,20 @@ Route::prefix("v0.2")->middleware([
     // =========================================================
     // AI Insights (async, budget guarded)
     // =========================================================
-    Route::middleware(['fap_feature:insights', 'App\\Http\\Middleware\\CheckAiBudget'])->group(function () {
+    Route::middleware([
+        \App\Http\Middleware\FmTokenAuth::class,
+        'fap_feature:insights',
+        'App\\Http\\Middleware\\CheckAiBudget',
+    ])->group(function () {
         Route::post("/insights/generate", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@generate");
     });
     Route::middleware('fap_feature:insights')->group(function () {
         Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show");
+    });
+    Route::middleware([
+        \App\Http\Middleware\FmTokenAuth::class,
+        'fap_feature:insights',
+    ])->group(function () {
         Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback");
     });
 
@@ -299,7 +309,8 @@ Route::prefix("v0.3")->middleware([
         // 2) Attempts lifecycle
         Route::middleware('throttle:api_attempt_submit')->group(function () {
             Route::post("/attempts/start", [AttemptWriteController::class, "start"]);
-            Route::post("/attempts/submit", [AttemptWriteController::class, "submit"]);
+            Route::post("/attempts/submit", [AttemptWriteController::class, "submit"])
+                ->middleware(\App\Http\Middleware\FmTokenAuth::class);
         });
         Route::put("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "upsert"])
             ->middleware('uuid:attempt_id');
@@ -317,13 +328,15 @@ Route::prefix("v0.3")->middleware([
 
         // 3) Commerce v2 (public with org context)
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
-        Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder");
+        Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
+            ->middleware(\App\Http\Middleware\FmTokenAuth::class);
         if (!in_array('stub', $payProviders, true)) {
             Route::post("/orders/stub", static function () {
                 abort(404);
             });
         }
         Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
+            ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);
         Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
     });

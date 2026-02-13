@@ -9,11 +9,31 @@ use App\Models\Result;
 use Database\Seeders\Pr17SimpleScoreDemoSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class AttemptSubmitRefactorParityTest extends TestCase
 {
     use RefreshDatabase;
+
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
 
     public function test_submit_flow_keeps_result_and_attempt_state_consistent(): void
     {
@@ -21,6 +41,7 @@ final class AttemptSubmitRefactorParityTest extends TestCase
         (new Pr17SimpleScoreDemoSeeder())->run();
 
         $anonId = 'refactor-parity-anon';
+        $anonToken = $this->issueAnonToken($anonId);
 
         $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'SIMPLE_SCORE_DEMO',
@@ -31,7 +52,10 @@ final class AttemptSubmitRefactorParityTest extends TestCase
         $attemptId = (string) $start->json('attempt_id');
         $this->assertNotSame('', $attemptId);
 
-        $submit = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/submit', [
+        $submit = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
+        ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => [
                 ['question_id' => 'SS-001', 'code' => '5'],

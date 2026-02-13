@@ -86,6 +86,52 @@ json_get() {
   ' "$file_path" "$dot_path"
 }
 
+issue_anon_token() {
+  local anon_id="$1"
+  local raw token
+
+  raw="$(
+    ANON_ID="$anon_id" php -r '
+      require "vendor/autoload.php";
+      $app = require "bootstrap/app.php";
+      $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+      use Illuminate\Support\Facades\DB;
+      use Illuminate\Support\Str;
+
+      $anonId = trim((string) getenv("ANON_ID"));
+      if ($anonId === "") {
+          fwrite(STDERR, "anon_id_missing\n");
+          exit(1);
+      }
+
+      $token = "fm_" . (string) Str::uuid();
+      DB::table("fm_tokens")->insert([
+          "token" => $token,
+          "token_hash" => hash("sha256", $token),
+          "user_id" => null,
+          "anon_id" => $anonId,
+          "org_id" => 0,
+          "role" => "public",
+          "expires_at" => now()->addDay(),
+          "created_at" => now(),
+          "updated_at" => now(),
+      ]);
+
+      echo $token;
+    ' 2>>"$LOG_FILE" || true
+  )"
+
+  token="$(printf '%s' "$raw" | tr -d '\r' | awk 'NF{last=$0} END{gsub(/[[:space:]]/, "", last); print last}')"
+  if [[ "$token" =~ ^fm_[0-9a-fA-F-]{36}$ ]]; then
+    printf '%s' "$token"
+    return 0
+  fi
+
+  echo "[PR17] invalid token output for anon_id=${anon_id}: $(printf '%s' "$raw" | head -c 240 | tr '\n' ' ')" | tee -a "$LOG_FILE" >&2
+  return 1
+}
+
 cleanup_port() {
   local port="$1"
   local pid
@@ -148,6 +194,9 @@ http_code=$(curl -sS -L -o "$simple_start" -w "%{http_code}" -X POST \
 simple_attempt_id="$(json_get "$simple_start" "attempt_id" || true)"
 [[ -n "$simple_attempt_id" ]] || fail "simple start missing attempt_id"
 
+simple_token="$(issue_anon_token "$SIMPLE_ANON_ID" || true)"
+[[ "$simple_token" =~ ^fm_[0-9a-fA-F-]{36}$ ]] || fail "issue simple anon token failed"
+
 echo "[PR17] simple_score_demo submit" | tee -a "$LOG_FILE"
 cat <<JSON > "$RUN_DIR/simple_submit_payload.json"
 {
@@ -166,6 +215,7 @@ JSON
 http_code=$(curl -sS -L -o "$simple_submit" -w "%{http_code}" -X POST \
   -H 'Content-Type: application/json' \
   -H "X-Anon-Id: ${SIMPLE_ANON_ID}" \
+  -H "Authorization: Bearer ${simple_token}" \
   -d @"$RUN_DIR/simple_submit_payload.json" \
   "$API/api/v0.3/attempts/submit" || true)
 [[ "$http_code" == "200" ]] || fail "simple submit failed (http=$http_code)"
@@ -208,6 +258,9 @@ http_code=$(curl -sS -L -o "$raven_start" -w "%{http_code}" -X POST \
 raven_attempt_id="$(json_get "$raven_start" "attempt_id" || true)"
 [[ -n "$raven_attempt_id" ]] || fail "raven start missing attempt_id"
 
+raven_token="$(issue_anon_token "$RAVEN_ANON_ID" || true)"
+[[ "$raven_token" =~ ^fm_[0-9a-fA-F-]{36}$ ]] || fail "issue raven anon token failed"
+
 echo "[PR17] iq_raven submit" | tee -a "$LOG_FILE"
 cat <<JSON > "$RUN_DIR/raven_submit_payload.json"
 {
@@ -221,6 +274,7 @@ JSON
 http_code=$(curl -sS -L -o "$raven_submit" -w "%{http_code}" -X POST \
   -H 'Content-Type: application/json' \
   -H "X-Anon-Id: ${RAVEN_ANON_ID}" \
+  -H "Authorization: Bearer ${raven_token}" \
   -d @"$RUN_DIR/raven_submit_payload.json" \
   "$API/api/v0.3/attempts/submit" || true)
 [[ "$http_code" == "200" ]] || fail "raven submit failed (http=$http_code)"

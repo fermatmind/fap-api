@@ -7,12 +7,31 @@ use Database\Seeders\Pr16IqRavenDemoSeeder;
 use Database\Seeders\Pr17SimpleScoreDemoSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class AttemptsStartSubmitTest extends TestCase
 {
     use RefreshDatabase;
+
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
 
     private function seedScales(): void
     {
@@ -25,6 +44,7 @@ class AttemptsStartSubmitTest extends TestCase
     {
         $this->seedScales();
         $anonId = 'v03_simple_score_owner';
+        $anonToken = $this->issueAnonToken($anonId);
 
         $start = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -46,6 +66,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
@@ -69,6 +90,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $dup = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
@@ -88,6 +110,7 @@ class AttemptsStartSubmitTest extends TestCase
     {
         $this->seedScales();
         $anonId = 'v03_iq_owner';
+        $anonToken = $this->issueAnonToken($anonId);
 
         $start = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -100,6 +123,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => [

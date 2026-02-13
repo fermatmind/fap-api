@@ -134,31 +134,6 @@ php artisan fap:scales:seed-default
 php artisan fap:scales:sync-slugs
 php artisan db:seed --class=Pr19CommerceSeeder
 
-# 创建一个“购买用户”，用它的 token 走 start/submit + 下单
-USER_TOKEN="$(php -r '
-require __DIR__ . "/vendor/autoload.php";
-$app = require __DIR__ . "/bootstrap/app.php";
-$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
-$kernel->bootstrap();
-
-use Illuminate\Support\Facades\DB;
-
-$now = date("Y-m-d H:i:s");
-$email = "pr20_b2c_user@example.com";
-
-$id = DB::table("users")->insertGetId([
-  "name" => "PR20 User",
-  "email" => $email,
-  "password" => password_hash("secret", PASSWORD_BCRYPT),
-  "created_at" => $now,
-  "updated_at" => $now,
-]);
-
-$issued = app(App\Services\Auth\FmTokenService::class)->issueForUser((string)$id);
-echo (string)($issued["token"] ?? "");
-')"
-[ -n "$USER_TOKEN" ] || fail "failed to create user token"
-
 PORT="$(pick_port)" || fail "no free port in 18000..18010"
 API="http://127.0.0.1:${PORT}"
 
@@ -179,6 +154,40 @@ curl -sS "$API/api/v0.2/health" >/dev/null 2>&1 || fail "server not ready on $AP
 # MBTI: start -> questions -> submit（带登录 token，确保 attempt.user_id 有值）
 # ------------------------
 ANON_ID="pr20_local_anon_001"
+ANON_TOKEN_RAW="$(php -r '
+require __DIR__ . "/vendor/autoload.php";
+$app = require __DIR__ . "/bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+$anonId = trim((string) getenv("ANON_ID"));
+if ($anonId === "") {
+  $anonId = "pr20_local_anon_001";
+}
+
+$token = "fm_" . (string) Str::uuid();
+DB::table("fm_tokens")->insert([
+  "token" => $token,
+  "token_hash" => hash("sha256", $token),
+  "user_id" => null,
+  "anon_id" => $anonId,
+  "org_id" => 0,
+  "role" => "public",
+  "expires_at" => now()->addDay(),
+  "created_at" => now(),
+  "updated_at" => now(),
+]);
+
+echo $token;
+' 2>>"$SERVER_LOG" || true)"
+ANON_TOKEN="$(printf '%s' "$ANON_TOKEN_RAW" | tr -d '\r' | awk 'NF{last=$0} END{gsub(/[[:space:]]/, "", last); print last}')"
+if [[ ! "$ANON_TOKEN" =~ ^fm_[0-9a-fA-F-]{36}$ ]]; then
+  echo "[PR20][FAIL] invalid anon token output: $(printf '%s' "$ANON_TOKEN_RAW" | head -c 240 | tr '\n' ' ')" >&2
+  fail "failed to create anon token"
+fi
 
 # ✅ 先拉 questions，拿到动态题量（避免写死 144）
 curl_json GET "$API/api/v0.3/scales/MBTI/questions?region=CN_MAINLAND&locale=zh-CN" "" "$ART_DIR/curl_questions_mbti.json" "" || fail "scales/MBTI/questions failed"
@@ -192,7 +201,7 @@ echo is_array($q) ? count($q) : 0;
 [ "${question_count}" != "0" ] || fail "questions count is 0 (bad payload)"
 
 START_PAYLOAD='{"anon_id":"'"$ANON_ID"'","scale_code":"MBTI","scale_version":"v0.3","question_count":'"$question_count"',"client_platform":"verify","region":"CN_MAINLAND","locale":"zh-CN","duration_ms":1000}'
-curl_json POST "$API/api/v0.3/attempts/start" "$START_PAYLOAD" "$ART_DIR/curl_start_mbti.json" "$USER_TOKEN" || fail "attempts/start failed"
+curl_json POST "$API/api/v0.3/attempts/start" "$START_PAYLOAD" "$ART_DIR/curl_start_mbti.json" "$ANON_TOKEN" || fail "attempts/start failed"
 
 attempt_id="$(php -r '
 $j=json_decode(file_get_contents($argv[1]), true);
@@ -285,7 +294,7 @@ http_code="$(curl -sS -o "$ART_DIR/curl_submit_mbti.json" -w "%{http_code}" -X P
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "X-Anon-Id: ${ANON_ID}" \
-  -H "Authorization: Bearer ${USER_TOKEN}" \
+  -H "Authorization: Bearer ${ANON_TOKEN}" \
   --data-binary @"$ART_DIR/curl_submit_payload_mbti.json" || true)"
 if [ "${http_code:-000}" != "200" ]; then
   echo "[PR20][FAIL] submit status=${http_code:-000}" >&2
@@ -301,7 +310,7 @@ curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_re
 # order + webhook -> entitlement + snapshot
 # ------------------------
 ORDER_PAYLOAD='{"sku":"MBTI_REPORT_FULL","quantity":1,"target_attempt_id":"'"$attempt_id"'","provider":"billing"}'
-curl_json POST "$API/api/v0.3/orders" "$ORDER_PAYLOAD" "$ART_DIR/curl_order.json" "$USER_TOKEN" || fail "orders create failed"
+curl_json POST "$API/api/v0.3/orders" "$ORDER_PAYLOAD" "$ART_DIR/curl_order.json" "$ANON_TOKEN" || fail "orders create failed"
 
 order_no="$(php -r '
 $j=json_decode(file_get_contents($argv[1]), true);

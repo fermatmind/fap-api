@@ -289,6 +289,40 @@ fi
 echo "${ATTEMPT_ID}" > "${ART_DIR}/attempt_id.txt"
 echo "${ANON_ID}" > "${ART_DIR}/anon_id.txt"
 
+ANON_TOKEN_RAW="$(cd "${BACKEND_DIR}" && ANON_ID="${ANON_ID}" php -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+$anonId = trim((string) getenv("ANON_ID"));
+if ($anonId === "") {
+    $anonId = "pr55-verify-anon";
+}
+
+$token = "fm_" . (string) Str::uuid();
+DB::table("fm_tokens")->insert([
+    "token" => $token,
+    "token_hash" => hash("sha256", $token),
+    "user_id" => null,
+    "anon_id" => $anonId,
+    "org_id" => 0,
+    "role" => "public",
+    "expires_at" => now()->addDay(),
+    "created_at" => now(),
+    "updated_at" => now(),
+]);
+
+echo $token;
+' 2>> "${ART_DIR}/verify.log" || true)"
+ANON_TOKEN="$(printf '%s' "${ANON_TOKEN_RAW}" | tr -d '\r' | awk 'NF{last=$0} END{gsub(/[[:space:]]/, "", last); print last}')"
+if [[ ! "${ANON_TOKEN}" =~ ^fm_[0-9a-fA-F-]{36}$ ]]; then
+  echo "invalid anon token output: $(printf '%s' "${ANON_TOKEN_RAW}" | head -c 240 | tr '\n' ' ')" >&2
+  fail "failed to issue anon token"
+fi
+
 SUBMIT_PAYLOAD="${ART_DIR}/submit_payload.json"
 ATTEMPT_ID="${ATTEMPT_ID}" ANSWERS_PATH="${ANSWERS_JSON}" php -r '
 $answers = json_decode(file_get_contents(getenv("ANSWERS_PATH")), true);
@@ -306,7 +340,7 @@ echo json_encode($payload, JSON_UNESCAPED_UNICODE);
 
 ATTEMPT_SUBMIT_JSON="${ART_DIR}/attempt_submit.json"
 http_code="$(curl -sS -o "${ATTEMPT_SUBMIT_JSON}" -w "%{http_code}" \
-  -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "X-Anon-Id: ${ANON_ID}" \
+  -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "X-Anon-Id: ${ANON_ID}" -H "Authorization: Bearer ${ANON_TOKEN}" \
   --data @"${SUBMIT_PAYLOAD}" \
   "${API_BASE}/api/v0.3/attempts/submit" || true)"
 if [[ "${http_code}" != "200" ]]; then

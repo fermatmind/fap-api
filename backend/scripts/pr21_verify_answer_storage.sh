@@ -68,6 +68,7 @@ curl_json() {
       -H "Content-Type: application/json" \
       -H "Accept: application/json" \
       -H "X-Anon-Id: ${ANON_ID}" \
+      ${FM_TOKEN:+-H "Authorization: Bearer ${FM_TOKEN}"} \
       -H "$header_token" \
       ${data:+--data "$data"} \
       -o "$out" -w "%{http_code}" \
@@ -77,11 +78,55 @@ curl_json() {
       -H "Content-Type: application/json" \
       -H "Accept: application/json" \
       -H "X-Anon-Id: ${ANON_ID}" \
+      ${FM_TOKEN:+-H "Authorization: Bearer ${FM_TOKEN}"} \
       ${data:+--data "$data"} \
       -o "$out" -w "%{http_code}" \
       "$url" || true)"
   fi
   printf '%s' "$code"
+}
+
+issue_anon_token() {
+  cat <<'PHP' > /tmp/pr21_issue_anon_token.php
+<?php
+$repo = getenv('REPO_DIR') ?: getcwd();
+$anonId = getenv('ANON_ID') ?: 'pr21-verify-anon';
+require $repo . '/backend/vendor/autoload.php';
+$app = require $repo . '/backend/bootstrap/app.php';
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+$token = 'fm_' . (string) Str::uuid();
+DB::table('fm_tokens')->insert([
+    'token' => $token,
+    'token_hash' => hash('sha256', $token),
+    'user_id' => null,
+    'anon_id' => $anonId,
+    'org_id' => 0,
+    'role' => 'public',
+    'expires_at' => now()->addDay(),
+    'created_at' => now(),
+    'updated_at' => now(),
+]);
+
+echo $token;
+PHP
+  local raw token
+  raw="$(REPO_DIR="$ROOT_DIR" ANON_ID="$ANON_ID" php /tmp/pr21_issue_anon_token.php 2>>"$LOG_FILE" || true)"
+  token="$(printf '%s' "$raw" | tr -d '\r' | awk 'NF{last=$0} END{gsub(/[[:space:]]/, "", last); print last}')"
+  if [[ "$token" =~ ^fm_[0-9a-fA-F-]{36}$ ]]; then
+    printf '%s' "$token"
+    return 0
+  fi
+  if [[ -n "$raw" ]]; then
+    log "issue_anon_token invalid output: $(printf '%s' "$raw" | head -c 240 | tr '\n' ' ')"
+  else
+    log "issue_anon_token produced empty output"
+  fi
+  return 1
 }
 
 ensure_demo_scale() {
@@ -202,6 +247,13 @@ if [[ "$USE_EMBEDDED" == "0" ]]; then
 fi
 
 ensure_demo_scale
+
+FM_TOKEN="$(issue_anon_token || true)"
+if [[ ! "$FM_TOKEN" =~ ^fm_[0-9a-fA-F-]{36}$ ]]; then
+  log "failed to issue anon fm token"
+  exit 1
+fi
+log "issued fm token for anon submit flow"
 
 log "POST /api/v0.3/attempts/start"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
@@ -338,7 +390,7 @@ PY
 log "POST submit"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload='{"attempt_id":"'"${ATTEMPT_ID}"'","duration_ms":3600,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"4","answer":{"value":4}},{"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},{"question_id":"DEMO-TEXT-1","question_type":"open_text","question_index":2,"code":"TEXT","answer":{"text":"demo"}}]}'
-  embedded_headers='{"X-Anon-Id":"'"${ANON_ID}"'"}'
+  embedded_headers='{"X-Anon-Id":"'"${ANON_ID}"'","Authorization":"Bearer '"${FM_TOKEN}"'"}'
   payload_file=$(mktemp)
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
@@ -387,7 +439,7 @@ PY
 log "POST submit (idempotent)"
 if [[ "$USE_EMBEDDED" == "1" ]]; then
   embedded_payload='{"attempt_id":"'"${ATTEMPT_ID}"'","duration_ms":3600,"answers":[{"question_id":"DEMO-SLIDER-1","question_type":"slider","question_index":0,"code":"4","answer":{"value":4}},{"question_id":"DEMO-RANK-1","question_type":"rank_order","question_index":1,"code":"A>B>C","answer":{"order":["A","B","C"]}},{"question_id":"DEMO-TEXT-1","question_type":"open_text","question_index":2,"code":"TEXT","answer":{"text":"demo"}}]}'
-  embedded_headers='{"X-Anon-Id":"'"${ANON_ID}"'"}'
+  embedded_headers='{"X-Anon-Id":"'"${ANON_ID}"'","Authorization":"Bearer '"${FM_TOKEN}"'"}'
   payload_file=$(mktemp)
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"

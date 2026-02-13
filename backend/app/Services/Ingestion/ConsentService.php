@@ -53,9 +53,20 @@ class ConsentService
 
     public function revoke(?string $userId, string $provider): array
     {
+        $userId = is_string($userId) ? trim($userId) : null;
+        if ($userId === null || $userId === '') {
+            return [
+                'ok' => false,
+                'status' => 401,
+                'error' => 'UNAUTHORIZED',
+                'message' => 'missing_identity',
+            ];
+        }
+
         if (!\App\Support\SchemaBaseline::hasTable('integrations')) {
             return [
                 'ok' => false,
+                'status' => 500,
                 'error' => 'MISSING_TABLE',
                 'message' => 'integrations table not found',
             ];
@@ -73,6 +84,7 @@ class ConsentService
 
         return [
             'ok' => true,
+            'status' => 200,
             'user_id' => $userId !== null ? (int) $userId : null,
             'provider' => $provider,
         ];

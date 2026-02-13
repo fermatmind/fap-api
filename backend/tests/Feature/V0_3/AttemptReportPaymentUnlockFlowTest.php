@@ -9,6 +9,7 @@ use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
 
@@ -22,6 +23,24 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
         (new ScaleRegistrySeeder())->run();
         (new Pr17SimpleScoreDemoSeeder())->run();
         (new Pr19CommerceSeeder())->run();
+    }
+
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
     }
 
     /**
@@ -43,6 +62,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
         $this->seedScales();
 
         $anonId = 'anon_pr2_flow';
+        $anonToken = $this->issueAnonToken($anonId);
         $start = $this->withHeaders([
             'X-Anon-Id' => $anonId,
         ])->postJson('/api/v0.3/attempts/start', [
@@ -55,6 +75,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->simpleScoreAnswers(),
@@ -83,6 +104,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
 
         $order = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/orders', [
             'sku' => 'MBTI_REPORT_FULL_199',
             'provider' => 'billing',
