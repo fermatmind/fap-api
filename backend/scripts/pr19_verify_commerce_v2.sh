@@ -178,6 +178,7 @@ if (!DB::table("users")->where("id", $uid)->exists()) {
 $token = "fm_" . (string) Str::uuid();
 DB::table("fm_tokens")->insert([
   "token" => $token,
+  "token_hash" => hash("sha256", $token),
   "anon_id" => "anon_pr19",
   "user_id" => $uid,
   "expires_at" => now()->addDays(1),

@@ -135,14 +135,15 @@ check_artifact_mode() {
   check_only_gitkeep_files "backend/storage/framework"
   check_only_gitkeep_files "backend/storage/app/private/reports"
 
-  # 5) required placeholders
+  # 5) required placeholders (only when parent directory is included in artifact)
   for p in \
     backend/storage/app/private/.gitkeep \
     backend/storage/app/private/reports/.gitkeep \
     backend/storage/logs/.gitkeep \
     backend/storage/framework/.gitkeep
   do
-    if [[ ! -f "$TARGET/$p" ]]; then
+    parent_dir="$(dirname "$TARGET/$p")"
+    if [[ -d "$parent_dir" && ! -f "$TARGET/$p" ]]; then
       fail "missing placeholder: $p ; fix: create .gitkeep."
     fi
   done

@@ -116,8 +116,11 @@ $pdo->exec("INSERT INTO organization_members (org_id, user_id, role, joined_at, 
 $pdo->exec("INSERT INTO organization_members (org_id, user_id, role, joined_at, created_at, updated_at) VALUES (" . (int)$orgId . ", " . (int)$memberId . ", " . $pdo->quote("member") . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
 $adminToken = "fm_00000000-0000-4000-8000-000000000001";
 $memberToken = "fm_11111111-1111-4111-8111-111111111111";
-$pdo->exec("INSERT INTO fm_tokens (token, user_id, anon_id, expires_at, created_at, updated_at) VALUES (" . $pdo->quote($adminToken) . ", " . $pdo->quote((string)$adminId) . ", " . $pdo->quote("anon_admin") . ", " . $pdo->quote(date("Y-m-d H:i:s", strtotime("+1 day"))) . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
-$pdo->exec("INSERT INTO fm_tokens (token, user_id, anon_id, expires_at, created_at, updated_at) VALUES (" . $pdo->quote($memberToken) . ", " . $pdo->quote((string)$memberId) . ", " . $pdo->quote("anon_member") . ", " . $pdo->quote(date("Y-m-d H:i:s", strtotime("+1 day"))) . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
+$adminTokenHash = hash("sha256", $adminToken);
+$memberTokenHash = hash("sha256", $memberToken);
+$expiresAt = date("Y-m-d H:i:s", strtotime("+1 day"));
+$pdo->exec("INSERT INTO fm_tokens (token, token_hash, user_id, anon_id, org_id, role, expires_at, created_at, updated_at) VALUES (" . $pdo->quote($adminToken) . ", " . $pdo->quote($adminTokenHash) . ", " . $pdo->quote((string)$adminId) . ", " . $pdo->quote("anon_admin") . ", " . (int) $orgId . ", " . $pdo->quote("admin") . ", " . $pdo->quote($expiresAt) . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
+$pdo->exec("INSERT INTO fm_tokens (token, token_hash, user_id, anon_id, org_id, role, expires_at, created_at, updated_at) VALUES (" . $pdo->quote($memberToken) . ", " . $pdo->quote($memberTokenHash) . ", " . $pdo->quote((string)$memberId) . ", " . $pdo->quote("anon_member") . ", " . (int) $orgId . ", " . $pdo->quote("member") . ", " . $pdo->quote($expiresAt) . ", " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
 $pdo->exec("INSERT INTO benefit_wallets (org_id, benefit_code, balance, created_at, updated_at) VALUES (" . (int)$orgId . ", " . $pdo->quote("B2B_ASSESSMENT_ATTEMPT_SUBMIT") . ", 10, " . $pdo->quote($now) . ", " . $pdo->quote($now) . ")");
 '
 

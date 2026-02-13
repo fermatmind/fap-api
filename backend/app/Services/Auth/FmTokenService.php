@@ -15,10 +15,11 @@ class FmTokenService
      */
     public function issueForUser(string $userId, array $meta = []): array
     {
-        $userId = trim($userId);
-        if ($userId === '' || preg_match('/^\d+$/', $userId) !== 1) {
-            throw new \InvalidArgumentException('userId is required and must be numeric');
+        $rawUserId = trim($userId);
+        if ($rawUserId === '') {
+            throw new \InvalidArgumentException('userId is required');
         }
+        $persistedUserId = preg_match('/^\d+$/', $rawUserId) === 1 ? $rawUserId : null;
 
         $token = 'fm_' . (string) Str::uuid();
         $tokenHash = hash('sha256', $token);
@@ -43,7 +44,7 @@ class FmTokenService
             }
         }
 
-        $anonId = $userId;
+        $anonId = $rawUserId;
         if (isset($meta['anon_id']) && is_string($meta['anon_id'])) {
             $candidateAnonId = trim($meta['anon_id']);
             if ($candidateAnonId !== '') {
@@ -51,16 +52,22 @@ class FmTokenService
             }
         }
 
+        $metaJson = null;
+        if ($meta !== []) {
+            $encoded = json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $metaJson = is_string($encoded) ? $encoded : '{}';
+        }
+
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => $tokenHash,
-            'user_id' => $userId,
+            'user_id' => $persistedUserId,
             'anon_id' => $anonId,
             'org_id' => $orgId,
             'role' => $role,
             'expires_at' => $expiresAt,
             'revoked_at' => null,
-            'meta_json' => $meta,
+            'meta_json' => $metaJson,
             'last_used_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
@@ -69,7 +76,7 @@ class FmTokenService
         return [
             'token' => $token,
             'expires_at' => $expiresAt->toIso8601String(),
-            'user_id' => $userId,
+            'user_id' => $rawUserId,
             'org_id' => $orgId,
             'role' => $role,
         ];

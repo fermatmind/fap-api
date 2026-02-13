@@ -272,6 +272,9 @@ $data = [
     "created_at" => date("Y-m-d H:i:s"),
     "updated_at" => date("Y-m-d H:i:s"),
 ];
+if (isset($columns["token_hash"])) {
+    $data["token_hash"] = hash("sha256", $token);
+}
 if (isset($columns["user_id"])) {
     $data["user_id"] = 0;
 }
