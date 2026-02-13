@@ -25,7 +25,7 @@ class PsychometricsController extends Controller
         if ($scale === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'SCALE_REQUIRED',
+                'error_code' => 'SCALE_REQUIRED',
             ], 400);
         }
 
@@ -56,7 +56,7 @@ class PsychometricsController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('attempt_quality')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'QUALITY_NOT_AVAILABLE',
+                'error_code' => 'QUALITY_NOT_AVAILABLE',
             ], 404);
         }
 
@@ -132,7 +132,7 @@ class PsychometricsController extends Controller
         if (!is_array($stats)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'STATS_NOT_FOUND',
+                'error_code' => 'STATS_NOT_FOUND',
             ], 404);
         }
 

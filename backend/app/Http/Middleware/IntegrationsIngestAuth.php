@@ -187,7 +187,7 @@ final class IntegrationsIngestAuth
     {
         return response()->json([
             'ok' => false,
-            'error' => 'UNAUTHORIZED',
+            'error_code' => 'UNAUTHORIZED',
             'message' => $message,
         ], 401);
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Exceptions\InvalidSkuException;
+use App\Models\Attempt;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
@@ -44,7 +45,13 @@ final class ApiExceptionRenderer
         }
 
         if ($e instanceof ModelNotFoundException) {
-            return self::errorResponse(404, 'NOT_FOUND', 'Not found.', [], $requestId);
+            return self::errorResponse(
+                404,
+                self::resolveModelNotFoundErrorCode($e),
+                'Not found.',
+                [],
+                $requestId
+            );
         }
 
         if ($e instanceof \RuntimeException && trim($e->getMessage()) === 'CONTENT_PACK_ERROR') {
@@ -98,6 +105,13 @@ final class ApiExceptionRenderer
 
     private static function resolveErrorCode(Throwable $e, int $status): string
     {
+        if ($status === 404) {
+            $modelNotFound = self::extractModelNotFoundException($e);
+            if ($modelNotFound !== null) {
+                return self::resolveModelNotFoundErrorCode($modelNotFound);
+            }
+        }
+
         if (method_exists($e, 'errorCode')) {
             $value = trim((string) $e->errorCode());
             if ($value !== '') {
@@ -117,6 +131,30 @@ final class ApiExceptionRenderer
         $details = $e->details();
 
         return is_array($details) ? $details : [];
+    }
+
+    private static function resolveModelNotFoundErrorCode(ModelNotFoundException $e): string
+    {
+        $model = ltrim((string) $e->getModel(), '\\');
+        if ($model === Attempt::class) {
+            return 'RESOURCE_NOT_FOUND';
+        }
+
+        return 'NOT_FOUND';
+    }
+
+    private static function extractModelNotFoundException(Throwable $e): ?ModelNotFoundException
+    {
+        if ($e instanceof ModelNotFoundException) {
+            return $e;
+        }
+
+        $previous = $e->getPrevious();
+        if ($previous instanceof ModelNotFoundException) {
+            return $previous;
+        }
+
+        return null;
     }
 
     private static function errorResponse(

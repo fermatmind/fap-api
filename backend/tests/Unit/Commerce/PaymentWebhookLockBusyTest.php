@@ -50,7 +50,8 @@ final class PaymentWebhookLockBusyTest extends TestCase
         ], 0);
 
         $this->assertFalse($result['ok']);
-        $this->assertSame('WEBHOOK_BUSY', $result['error']);
+        $this->assertSame('WEBHOOK_BUSY', $result['error_code']);
         $this->assertSame(500, $result['status']);
+        $this->assertArrayNotHasKey('error', $result);
     }
 }

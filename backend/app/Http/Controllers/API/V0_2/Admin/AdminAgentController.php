@@ -18,11 +18,11 @@ class AdminAgentController extends Controller
     {
         $triggerType = trim((string) $request->input('trigger_type', ''));
         if ($triggerType === '') {
-            return response()->json(['ok' => false, 'error' => 'trigger_type_required'], 422);
+            return response()->json(['ok' => false, 'error_code' => 'trigger_type_required'], 422);
         }
 
         if (!\App\Support\SchemaBaseline::hasTable('agent_triggers')) {
-            return response()->json(['ok' => false, 'error' => 'agent_triggers_missing'], 500);
+            return response()->json(['ok' => false, 'error_code' => 'agent_triggers_missing'], 500);
         }
 
         DB::table('agent_triggers')

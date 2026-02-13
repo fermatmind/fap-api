@@ -31,7 +31,7 @@ class ContentReleaseController extends Controller
         if ($file === null && $s3Key === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'MISSING_SOURCE',
+                'error_code' => 'MISSING_SOURCE',
                 'message' => 'file or s3_key is required.',
             ], 422);
         }
@@ -70,7 +70,7 @@ class ContentReleaseController extends Controller
         if ($versionId === '' || $region === '' || $locale === '' || $dirAlias === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_PARAMS',
+                'error_code' => 'INVALID_PARAMS',
                 'message' => 'version_id, region, locale, dir_alias are required.',
             ], 422);
         }
@@ -103,7 +103,7 @@ class ContentReleaseController extends Controller
         if ($region === '' || $locale === '' || $dirAlias === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_PARAMS',
+                'error_code' => 'INVALID_PARAMS',
                 'message' => 'region, locale, dir_alias are required.',
             ], 422);
         }

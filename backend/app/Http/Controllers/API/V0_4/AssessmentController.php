@@ -45,7 +45,7 @@ class AssessmentController extends Controller
         if ($scaleCode === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'SCALE_REQUIRED',
+                'error_code' => 'SCALE_REQUIRED',
                 'message' => 'scale_code is required.',
             ], 400);
         }
@@ -54,7 +54,7 @@ class AssessmentController extends Controller
         if (!$row) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'scale not found.',
             ], 404);
         }
@@ -66,7 +66,7 @@ class AssessmentController extends Controller
             } catch (\Throwable $e) {
                 return response()->json([
                     'ok' => false,
-                    'error' => 'DUE_AT_INVALID',
+                    'error_code' => 'DUE_AT_INVALID',
                     'message' => 'due_at invalid.',
                 ], 422);
             }
@@ -112,7 +112,7 @@ class AssessmentController extends Controller
         if ($subjects === []) {
             return response()->json([
                 'ok' => false,
-                'error' => 'SUBJECTS_INVALID',
+                'error_code' => 'SUBJECTS_INVALID',
                 'message' => 'subjects invalid.',
             ], 422);
         }
@@ -238,7 +238,7 @@ class AssessmentController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'ORG_NOT_FOUND',
+            'error_code' => 'ORG_NOT_FOUND',
             'message' => 'org not found.',
         ], 404);
     }

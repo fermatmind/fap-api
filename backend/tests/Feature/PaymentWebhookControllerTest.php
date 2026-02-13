@@ -23,7 +23,15 @@ final class PaymentWebhookControllerTest extends TestCase
         ]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
+        $processor->shouldReceive('process')
+            ->once()
+            ->with('stripe', Mockery::type('array'), false)
+            ->andReturn([
+                'ok' => false,
+                'error_code' => 'INVALID_SIGNATURE',
+                'message' => 'invalid signature',
+                'status' => 400,
+            ]);
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
 
         $raw = $this->encode([
@@ -54,6 +62,7 @@ final class PaymentWebhookControllerTest extends TestCase
 
         $response->assertStatus(400);
         $response->assertJsonPath('error_code', 'INVALID_SIGNATURE');
+        $response->assertJsonMissingPath('error');
     }
 
     public function test_valid_signature_returns_200(): void
@@ -64,7 +73,7 @@ final class PaymentWebhookControllerTest extends TestCase
         ]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')
+        $processor->shouldReceive('process')
             ->once()
             ->andReturn([
                 'ok' => true,
@@ -105,6 +114,7 @@ final class PaymentWebhookControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
+        $response->assertJsonMissingPath('error');
     }
 
     private function encode(array $payload): string

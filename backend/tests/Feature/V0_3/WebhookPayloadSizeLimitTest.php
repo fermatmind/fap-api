@@ -30,7 +30,7 @@ final class WebhookPayloadSizeLimitTest extends TestCase
         config(['payments.webhook_max_payload_bytes' => 1024]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
+        $processor->shouldReceive('process')->never();
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
 
         $rawBody = json_encode([

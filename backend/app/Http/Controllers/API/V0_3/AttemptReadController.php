@@ -36,9 +36,7 @@ class AttemptReadController extends Controller
     public function result(Request $request, string $id): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $userId = $this->resolveUserId($request);
-        $anonId = $this->resolveAnonId($request);
-        $attempt = $this->ownedAttemptQuery($id)->firstOrFail();
+        $attempt = $this->ownedAttemptQuery($request, $id)->firstOrFail();
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
 
@@ -99,7 +97,7 @@ class AttemptReadController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
-        $attempt = $this->ownedAttemptQuery($id)->firstOrFail();
+        $attempt = $this->ownedAttemptQuery($request, $id)->firstOrFail();
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
 

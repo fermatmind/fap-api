@@ -35,7 +35,7 @@ class HandleProviderWebhook extends Controller
         if ($eventId === '' || $recordedAt === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_PAYLOAD',
+                'error_code' => 'INVALID_PAYLOAD',
                 'message' => 'event_id and recorded_at are required',
             ], 422);
         }
@@ -242,7 +242,7 @@ class HandleProviderWebhook extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'NOT_FOUND',
+            'error_code' => 'NOT_FOUND',
             'message' => 'not found.',
         ], 404);
     }

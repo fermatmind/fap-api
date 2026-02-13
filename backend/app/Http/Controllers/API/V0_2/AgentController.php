@@ -23,7 +23,7 @@ class AgentController extends Controller
         }
 
         if (!\App\Support\SchemaBaseline::hasTable('user_agent_settings')) {
-            return response()->json(['ok' => false, 'error' => 'settings_table_missing'], 500);
+            return response()->json(['ok' => false, 'error_code' => 'settings_table_missing'], 500);
         }
 
         $row = DB::table('user_agent_settings')->where('user_id', $userId)->first();
@@ -45,7 +45,7 @@ class AgentController extends Controller
         }
 
         if (!\App\Support\SchemaBaseline::hasTable('user_agent_settings')) {
-            return response()->json(['ok' => false, 'error' => 'settings_table_missing'], 500);
+            return response()->json(['ok' => false, 'error_code' => 'settings_table_missing'], 500);
         }
 
         $enabled = (bool) $request->input('enabled', false);
@@ -92,7 +92,7 @@ class AgentController extends Controller
         }
 
         if (!\App\Support\SchemaBaseline::hasTable('agent_messages')) {
-            return response()->json(['ok' => false, 'error' => 'agent_messages_missing'], 500);
+            return response()->json(['ok' => false, 'error_code' => 'agent_messages_missing'], 500);
         }
 
         $rows = DB::table('agent_messages')
@@ -118,17 +118,17 @@ class AgentController extends Controller
         }
 
         if (!\App\Support\SchemaBaseline::hasTable('agent_feedback') || !\App\Support\SchemaBaseline::hasTable('agent_messages')) {
-            return response()->json(['ok' => false, 'error' => 'agent_feedback_missing'], 500);
+            return response()->json(['ok' => false, 'error_code' => 'agent_feedback_missing'], 500);
         }
 
         $message = DB::table('agent_messages')->where('id', $id)->where('user_id', $userId)->first();
         if (!$message) {
-            return response()->json(['ok' => false, 'error' => 'message_not_found'], 404);
+            return response()->json(['ok' => false, 'error_code' => 'message_not_found'], 404);
         }
 
         $rating = trim((string) $request->input('rating', ''));
         if ($rating === '') {
-            return response()->json(['ok' => false, 'error' => 'rating_required'], 422);
+            return response()->json(['ok' => false, 'error_code' => 'rating_required'], 422);
         }
 
         $feedbackId = (string) Str::uuid();
@@ -168,12 +168,12 @@ class AgentController extends Controller
         }
 
         if (!\App\Support\SchemaBaseline::hasTable('agent_messages')) {
-            return response()->json(['ok' => false, 'error' => 'agent_messages_missing'], 500);
+            return response()->json(['ok' => false, 'error_code' => 'agent_messages_missing'], 500);
         }
 
         $message = DB::table('agent_messages')->where('id', $id)->where('user_id', $userId)->first();
         if (!$message) {
-            return response()->json(['ok' => false, 'error' => 'message_not_found'], 404);
+            return response()->json(['ok' => false, 'error_code' => 'message_not_found'], 404);
         }
 
         DB::table('agent_messages')->where('id', $id)->update([
@@ -202,7 +202,7 @@ class AgentController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'USER_ID_REQUIRED',
+            'error_code' => 'USER_ID_REQUIRED',
         ], 401);
     }
 }

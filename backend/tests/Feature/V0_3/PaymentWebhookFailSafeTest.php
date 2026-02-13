@@ -14,7 +14,7 @@ class PaymentWebhookFailSafeTest extends TestCase
     public function test_unknown_provider_route_returns_404_and_does_not_call_processor(): void
     {
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
+        $processor->shouldReceive('process')->never();
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
 
         $response = $this->postJson('/api/v0.3/webhooks/payment/unknown', [
@@ -29,10 +29,18 @@ class PaymentWebhookFailSafeTest extends TestCase
         ]);
     }
 
-    public function test_invalid_json_returns_400_and_does_not_call_processor(): void
+    public function test_invalid_json_returns_400_with_payload_invalid_contract(): void
     {
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
+        $processor->shouldReceive('process')
+            ->once()
+            ->with('stripe', [], false)
+            ->andReturn([
+                'ok' => false,
+                'error_code' => 'PAYLOAD_INVALID',
+                'message' => 'provider_event_id and order_no are required.',
+                'status' => 400,
+            ]);
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
 
         $response = $this->call(
@@ -51,7 +59,7 @@ class PaymentWebhookFailSafeTest extends TestCase
         $response->assertStatus(400);
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'INVALID_JSON',
+            'error_code' => 'PAYLOAD_INVALID',
         ]);
     }
 }

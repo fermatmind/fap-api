@@ -23,11 +23,11 @@ class IdentityController extends Controller
         $limitIp = $limiter->limit('FAP_RATE_IDENTITIES_BIND_IP', 60);
         if ($ip !== '' && !$limiter->hit("identities_bind:ip:{$ip}", $limitIp, 60)) {
             $logger->log('identities_bind', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'message' => 'Too many requests from this IP.',
             ], 429);
         }
@@ -35,11 +35,11 @@ class IdentityController extends Controller
         $userId = (string) $request->attributes->get('fm_user_id', '');
         if ($userId === '') {
             $logger->log('identities_bind', false, $request, null, [
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Missing or invalid fm_token.',
             ], 401);
         }
@@ -56,13 +56,13 @@ class IdentityController extends Controller
         if (!($res['ok'] ?? false)) {
             $status = (int) ($res['status'] ?? 422);
             $logger->log('identities_bind', false, $request, $userId, [
-                'error' => $res['error'] ?? 'IDENTITY_BIND_FAILED',
+                'error_code' => $res['error'] ?? 'IDENTITY_BIND_FAILED',
                 'provider' => $request->provider(),
                 'provider_uid_hash' => hash('sha256', $request->providerUid()),
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => $res['error'] ?? 'IDENTITY_BIND_FAILED',
+                'error_code' => $res['error'] ?? 'IDENTITY_BIND_FAILED',
                 'message' => $res['message'] ?? 'identity bind failed.',
             ], $status);
         }
@@ -87,7 +87,7 @@ class IdentityController extends Controller
         if ($userId === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Missing or invalid fm_token.',
             ], 401);
         }

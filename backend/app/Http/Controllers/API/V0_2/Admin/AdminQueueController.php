@@ -34,7 +34,7 @@ class AdminQueueController extends Controller
         if (!preg_match('/^\d+$/', $failed_job_id)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'failed job not found.',
             ], 404);
         }
@@ -61,7 +61,7 @@ class AdminQueueController extends Controller
         if ($status === 'not_found') {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'failed job not found.',
             ], 404);
         }
@@ -69,7 +69,7 @@ class AdminQueueController extends Controller
         if ($status === 'invalid_payload') {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_PAYLOAD',
+                'error_code' => 'INVALID_PAYLOAD',
                 'message' => 'failed job payload invalid.',
                 'data' => $result,
             ], 422);
@@ -78,7 +78,7 @@ class AdminQueueController extends Controller
         if ($status === 'push_failed') {
             return response()->json([
                 'ok' => false,
-                'error' => 'REPLAY_FAILED',
+                'error_code' => 'REPLAY_FAILED',
                 'message' => 'failed job replay failed.',
                 'data' => $result,
             ], 500);

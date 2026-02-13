@@ -113,10 +113,36 @@ final class ErrorContractConsistencyTest extends TestCase
         $this->assertUnifiedErrorContract($response);
     }
 
+    public function test_v03_attempt_not_found_returns_resource_not_found_contract(): void
+    {
+        $attemptId = (string) Str::uuid();
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => 'anon_contract_attempt_missing',
+        ])->getJson("/api/v0.3/attempts/{$attemptId}");
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'RESOURCE_NOT_FOUND');
+        $this->assertUnifiedErrorContract($response);
+    }
+
+    public function test_v02_me_profile_unauthenticated_returns_unified_error_contract(): void
+    {
+        $response = $this->getJson('/api/v0.2/me/profile');
+
+        $response->assertStatus(401);
+        $response->assertJsonPath('error_code', 'UNAUTHENTICATED');
+        $this->assertUnifiedErrorContract($response);
+    }
+
     private function assertUnifiedErrorContract(TestResponse $response): void
     {
         $response->assertJsonPath('ok', false);
         $response->assertJsonMissingPath('error');
+
+        $json = $response->json();
+        $this->assertIsArray($json);
+        $this->assertArrayNotHasKey('error', $json);
 
         $errorCode = (string) $response->json('error_code', '');
         $message = (string) $response->json('message', '');

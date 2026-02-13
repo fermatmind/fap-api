@@ -68,14 +68,9 @@ class LegacyShareFlowService
 
     public function clickAndComposeReport(string $shareId, array $input, array $requestMeta): array
     {
-        try {
-            $share = Share::query()->where('id', $shareId)->first();
-        } catch (\Throwable) {
-            throw new NotFoundHttpException('Not Found');
-        }
-
+        $share = Share::query()->where('id', $shareId)->first();
         if (!$share) {
-            throw new NotFoundHttpException('Not Found');
+            throw new NotFoundHttpException('share not found');
         }
 
         $attemptId = trim((string) ($share->attempt_id ?? ''));
@@ -83,18 +78,13 @@ class LegacyShareFlowService
             throw (new ModelNotFoundException())->setModel(Share::class, [$shareId]);
         }
 
-        try {
-            $gen = Event::query()
-                ->where('event_code', 'share_generate')
-                ->where('share_id', $shareId)
-                ->orderByDesc('occurred_at')
-                ->first();
-        } catch (\Throwable) {
-            throw new NotFoundHttpException('Not Found');
-        }
-
+        $gen = Event::query()
+            ->where('event_code', 'share_generate')
+            ->where('share_id', $shareId)
+            ->orderByDesc('occurred_at')
+            ->first();
         if (!$gen) {
-            throw new NotFoundHttpException('Not Found');
+            throw new NotFoundHttpException('share generate event not found');
         }
 
         $genMeta = $this->normalizeMeta($gen->meta_json ?? null);

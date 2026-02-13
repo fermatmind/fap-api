@@ -111,7 +111,7 @@ class VerifyIntegrationSignature
     {
         return response()->json([
             'ok' => false,
-            'error' => 'UNAUTHORIZED',
+            'error_code' => 'UNAUTHORIZED',
             'error_code' => 'UNAUTHORIZED',
             'message' => 'Missing authentication or invalid integration signature.',
         ], 401);

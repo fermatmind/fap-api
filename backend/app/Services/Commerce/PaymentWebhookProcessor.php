@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Services\Commerce;
 
 use App\Services\Analytics\EventRecorder;
+use App\Services\Commerce\PaymentGateway\BillingGateway;
+use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\Webhook\PaymentWebhookHandler;
 use App\Services\Report\ReportSnapshotStore;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Thin facade kept for backwards compatibility.
@@ -64,5 +67,63 @@ class PaymentWebhookProcessor
     public function evaluateDryRun(string $provider, array $payload, bool $signatureOk = true): array
     {
         return $this->handler->evaluateDryRun($provider, $payload, $signatureOk);
+    }
+
+    public function process(string $provider, array $payload, bool $signatureOk = true): array
+    {
+        [$orgId, $userId, $anonId] = $this->resolveOrderContext($provider, $payload);
+
+        return $this->handle(
+            $provider,
+            $payload,
+            $orgId,
+            $userId,
+            $anonId,
+            $signatureOk
+        );
+    }
+
+    /**
+     * @return array{0:int, 1:?string, 2:?string}
+     */
+    private function resolveOrderContext(string $provider, array $payload): array
+    {
+        $orderNo = $this->resolveOrderNo($provider, $payload);
+        if ($orderNo === '') {
+            return [0, null, null];
+        }
+
+        $order = DB::table('orders')->where('order_no', $orderNo)->first();
+        if (!$order) {
+            return [0, null, null];
+        }
+
+        $orgId = (int) ($order->org_id ?? 0);
+        $userId = isset($order->user_id) && $order->user_id !== null ? trim((string) $order->user_id) : '';
+        $anonId = isset($order->anon_id) && $order->anon_id !== null ? trim((string) $order->anon_id) : '';
+
+        return [
+            $orgId,
+            $userId !== '' ? $userId : null,
+            $anonId !== '' ? $anonId : null,
+        ];
+    }
+
+    private function resolveOrderNo(string $provider, array $payload): string
+    {
+        $provider = strtolower(trim($provider));
+
+        $normalized = match ($provider) {
+            'stripe' => (new StripeGateway())->normalizePayload($payload),
+            'billing' => (new BillingGateway())->normalizePayload($payload),
+            default => $payload,
+        };
+
+        $orderNo = trim((string) ($normalized['order_no'] ?? ''));
+        if ($orderNo !== '') {
+            return $orderNo;
+        }
+
+        return trim((string) ($payload['order_no'] ?? $payload['orderNo'] ?? $payload['order'] ?? ''));
     }
 }

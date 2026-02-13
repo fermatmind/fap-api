@@ -21,7 +21,7 @@ class EventController extends Controller
         if ($token === '') {
             abort(response()->json([
                 'ok' => false,
-                'error' => 'unauthorized',
+                'error_code' => 'unauthorized',
                 'message' => 'Missing Authorization Bearer token.',
             ], 401));
         }
@@ -32,7 +32,7 @@ class EventController extends Controller
             if (!hash_equals($ingestToken, $token)) {
                 abort(response()->json([
                     'ok' => false,
-                    'error' => 'unauthorized',
+                    'error_code' => 'unauthorized',
                     'message' => 'Invalid ingest token.',
                 ], 401));
             }
@@ -44,7 +44,7 @@ class EventController extends Controller
         if (!$exists) {
             abort(response()->json([
                 'ok' => false,
-                'error' => 'unauthorized',
+                'error_code' => 'unauthorized',
                 'message' => 'Token not found.',
             ], 401));
         }
@@ -71,7 +71,7 @@ class EventController extends Controller
 
                 return response()->json([
                     'ok' => false,
-                    'error' => 'payload_too_large',
+                    'error_code' => 'payload_too_large',
                 ], 413);
             }
         }

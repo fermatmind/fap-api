@@ -25,7 +25,7 @@ final class WebhookStatusPropagationTest extends TestCase
         ]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')
+        $processor->shouldReceive('process')
             ->once()
             ->andReturn([
                 'ok' => false,
@@ -80,7 +80,7 @@ final class WebhookStatusPropagationTest extends TestCase
         ]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')
+        $processor->shouldReceive('process')
             ->once()
             ->andReturn([
                 'ok' => false,

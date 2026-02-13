@@ -20,20 +20,20 @@ final class NormalizeApiErrorContract
             return $response;
         }
 
-        $payload = $response->getData(true);
-        if (!is_array($payload)) {
+        $status = $response->getStatusCode();
+        if ($status < 400) {
             return $response;
         }
 
-        $status = $response->getStatusCode();
-        if (!$this->shouldNormalize($payload, $status)) {
-            return $response;
+        $payload = $response->getData(true);
+        if (!is_array($payload)) {
+            $payload = [];
         }
 
         $normalized = [
             'ok' => false,
-            'error_code' => $this->resolveErrorCode($payload, $status),
-            'message' => $this->resolveMessage($payload, $status),
+            'error_code' => $this->resolveErrorCode($payload),
+            'message' => $this->resolveMessage($payload),
             'details' => $this->resolveDetails($payload),
             'request_id' => $this->resolveRequestId($request, $payload),
         ];
@@ -43,102 +43,44 @@ final class NormalizeApiErrorContract
         return $response;
     }
 
-    private function resolveErrorCode(array $payload, int $status): string
+    private function resolveErrorCode(array $payload): string
     {
-        $raw = '';
-
-        if (isset($payload['error_code']) && is_string($payload['error_code'])) {
-            $raw = $payload['error_code'];
-        } elseif (isset($payload['error']) && is_string($payload['error'])) {
-            $raw = $payload['error'];
-        } elseif (
-            isset($payload['error'])
-            && is_array($payload['error'])
-            && isset($payload['error']['code'])
-            && is_string($payload['error']['code'])
-        ) {
-            $raw = $payload['error']['code'];
-        }
-
+        $raw = $this->firstNonEmptyString([
+            $payload['error_code'] ?? null,
+            is_string($payload['error'] ?? null) ? $payload['error'] : null,
+            is_array($payload['error'] ?? null) ? ($payload['error']['code'] ?? null) : null,
+            $payload['message'] ?? null,
+        ]);
         $normalized = $this->normalizeCode($raw);
         if ($normalized !== '') {
             return $normalized;
         }
 
-        return $this->statusErrorCode($status);
+        return 'HTTP_ERROR';
     }
 
-    private function shouldNormalize(array $payload, int $status): bool
+    private function resolveMessage(array $payload): string
     {
-        if (($payload['ok'] ?? null) === false) {
-            return true;
-        }
+        $message = $this->firstNonEmptyString([
+            $payload['message'] ?? null,
+            is_string($payload['error'] ?? null) ? $payload['error'] : null,
+            is_array($payload['error'] ?? null) ? ($payload['error']['message'] ?? null) : null,
+        ]);
 
-        if ($this->hasLegacyError($payload)) {
-            return true;
-        }
-
-        if ($status < 400) {
-            return false;
-        }
-
-        return $this->hasErrorCode($payload) || $this->hasMessage($payload);
+        return $message !== '' ? $message : 'request failed';
     }
 
-    private function hasErrorCode(array $payload): bool
+    private function resolveDetails(array $payload): mixed
     {
-        return isset($payload['error_code']) && is_string($payload['error_code']) && trim($payload['error_code']) !== '';
-    }
-
-    private function hasLegacyError(array $payload): bool
-    {
-        if (isset($payload['error']) && is_string($payload['error']) && trim($payload['error']) !== '') {
-            return true;
+        if (array_key_exists('details', $payload)) {
+            return $this->normalizeDetailsValue($payload['details']);
         }
 
-        return isset($payload['error']) && is_array($payload['error']);
-    }
-
-    private function hasMessage(array $payload): bool
-    {
-        return isset($payload['message']) && is_string($payload['message']) && trim($payload['message']) !== '';
-    }
-
-    private function resolveMessage(array $payload, int $status): string
-    {
-        $message = $payload['message'] ?? null;
-        if (is_string($message) && trim($message) !== '') {
-            return trim($message);
+        if (array_key_exists('errors', $payload)) {
+            return $this->normalizeDetailsValue($payload['errors']);
         }
 
-        if (isset($payload['error']) && is_string($payload['error']) && trim($payload['error']) !== '') {
-            return trim($payload['error']);
-        }
-
-        if (
-            isset($payload['error'])
-            && is_array($payload['error'])
-            && isset($payload['error']['message'])
-            && is_string($payload['error']['message'])
-            && trim($payload['error']['message']) !== ''
-        ) {
-            return trim($payload['error']['message']);
-        }
-
-        if (isset($payload['error_code']) && is_string($payload['error_code']) && trim($payload['error_code']) !== '') {
-            return trim($payload['error_code']);
-        }
-
-        return Response::$statusTexts[$status] ?? 'Request failed.';
-    }
-
-    private function resolveDetails(array $payload): array|object
-    {
-        if (isset($payload['details']) && is_array($payload['details'])) {
-            return $this->normalizeDetails($payload['details']);
-        }
-
-        return (object) [];
+        return null;
     }
 
     private function resolveRequestId(Request $request, array $payload): string
@@ -166,25 +108,17 @@ final class NormalizeApiErrorContract
         return (string) Str::uuid();
     }
 
-    private function normalizeDetails(array $details): array|object
+    private function normalizeDetailsValue(mixed $details): mixed
     {
-        return $details === [] ? (object) [] : $details;
-    }
+        if (is_array($details) && $details === []) {
+            return null;
+        }
 
-    private function statusErrorCode(int $status): string
-    {
-        return match ($status) {
-            400 => 'BAD_REQUEST',
-            401 => 'UNAUTHORIZED',
-            402 => 'PAYMENT_REQUIRED',
-            403 => 'FORBIDDEN',
-            404 => 'NOT_FOUND',
-            409 => 'CONFLICT',
-            422 => 'VALIDATION_FAILED',
-            429 => 'RATE_LIMITED',
-            500 => 'INTERNAL_ERROR',
-            default => 'HTTP_' . $status,
-        };
+        if (is_object($details) && count((array) $details) === 0) {
+            return null;
+        }
+
+        return $details;
     }
 
     private function normalizeCode(string $raw): string
@@ -199,5 +133,24 @@ final class NormalizeApiErrorContract
         $code = trim($code, '_');
 
         return strtoupper($code);
+    }
+
+    /**
+     * @param array<int, mixed> $candidates
+     */
+    private function firstNonEmptyString(array $candidates): string
+    {
+        foreach ($candidates as $candidate) {
+            if (!is_string($candidate) && !is_numeric($candidate)) {
+                continue;
+            }
+
+            $value = trim((string) $candidate);
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        return '';
     }
 }

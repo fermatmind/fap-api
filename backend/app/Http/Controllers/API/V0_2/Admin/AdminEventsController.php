@@ -18,7 +18,7 @@ class AdminEventsController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('events')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'TABLE_MISSING',
+                'error_code' => 'TABLE_MISSING',
                 'message' => 'events missing',
             ], 500);
         }

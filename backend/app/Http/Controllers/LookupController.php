@@ -28,7 +28,7 @@ class LookupController extends Controller
         $limitIp = $limiter->limit('FAP_RATE_LOOKUP_IP', 60);
         if ($ip !== '' && !$limiter->hit("lookup_ticket:ip:{$ip}", $limitIp, 60)) {
             $logger->log('lookup_ticket', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
             ]);
             return response()->json([
                 'ok' => false,
@@ -42,7 +42,7 @@ class LookupController extends Controller
 
         if (!preg_match('/^FMT-[A-Z0-9]{8}$/', $normalized)) {
             $logger->log('lookup_ticket', false, $request, null, [
-                'error' => 'INVALID_FORMAT',
+                'error_code' => 'INVALID_FORMAT',
                 'ticket_code' => $normalized,
             ]);
             return response()->json([
@@ -61,7 +61,7 @@ class LookupController extends Controller
 
         if (!$attempt) {
             $logger->log('lookup_ticket', false, $request, null, [
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'ticket_code' => $normalized,
             ]);
             return response()->json([
@@ -101,7 +101,7 @@ class LookupController extends Controller
         $limitIp = $limiter->limit('FAP_RATE_LOOKUP_IP', 60);
         if ($ip !== '' && !$limiter->hit("lookup_device:ip:{$ip}", $limitIp, 60)) {
             $logger->log('lookup_device', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
             ]);
             return response()->json([
                 'ok' => false,
@@ -114,7 +114,7 @@ class LookupController extends Controller
 
         if (!is_array($attemptIds)) {
             $logger->log('lookup_device', false, $request, null, [
-                'error' => 'INVALID_PAYLOAD',
+                'error_code' => 'INVALID_PAYLOAD',
             ]);
             return response()->json([
                 'ok' => false,
@@ -149,7 +149,7 @@ class LookupController extends Controller
         foreach ($attemptIds as $id) {
             if (!preg_match($uuidRe, $id)) {
                 $logger->log('lookup_device', false, $request, null, [
-                    'error' => 'INVALID_ID',
+                    'error_code' => 'INVALID_ID',
                 ]);
                 return response()->json([
                     'ok' => false,
@@ -177,7 +177,7 @@ class LookupController extends Controller
 
         if ($missing !== []) {
             $logger->log('lookup_device', false, $request, null, [
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'attempt_id_count' => count($attemptIds),
                 'missing_count' => count($missing),
             ]);
@@ -225,7 +225,7 @@ class LookupController extends Controller
         $limitIp = $limiter->limit('FAP_RATE_LOOKUP_IP', 60);
         if ($ip !== '' && !$limiter->hit("lookup_order:ip:{$ip}", $limitIp, 60)) {
             $logger->log('lookup_order', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
             ]);
             return response()->json([
                 'ok' => false,
@@ -236,7 +236,7 @@ class LookupController extends Controller
 
         if (!$this->lookupOrderEnabled()) {
             $logger->log('lookup_order', false, $request, null, [
-                'error' => 'NOT_ENABLED',
+                'error_code' => 'NOT_ENABLED',
             ]);
             return response()->json([
                 'ok' => false,
@@ -248,7 +248,7 @@ class LookupController extends Controller
         $orderNo = trim((string) $request->input('order_no', $request->query('order_no', '')));
         if ($orderNo === '') {
             $logger->log('lookup_order', false, $request, null, [
-                'error' => 'INVALID_ORDER',
+                'error_code' => 'INVALID_ORDER',
             ]);
             return response()->json([
                 'ok' => false,
@@ -260,7 +260,7 @@ class LookupController extends Controller
         $table = $this->resolveOrderTable();
         if ($table === '') {
             $logger->log('lookup_order', false, $request, null, [
-                'error' => 'NOT_SUPPORTED',
+                'error_code' => 'NOT_SUPPORTED',
             ]);
             return response()->json([
                 'ok' => false,
@@ -272,7 +272,7 @@ class LookupController extends Controller
         $orderColumn = $this->resolveOrderColumn($table);
         if ($orderColumn === null) {
             $logger->log('lookup_order', false, $request, null, [
-                'error' => 'NOT_SUPPORTED',
+                'error_code' => 'NOT_SUPPORTED',
                 'table' => $table,
             ]);
             return response()->json([
@@ -285,7 +285,7 @@ class LookupController extends Controller
         $row = DB::table($table)->where($orderColumn, $orderNo)->first();
         if (!$row) {
             $logger->log('lookup_order', false, $request, null, [
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'order_no_hash' => hash('sha256', $orderNo),
             ]);
             return response()->json([

@@ -17,7 +17,7 @@ class CheckAiBudget
         if (!(bool) config('ai.enabled', true) || !(bool) config('ai.insights_enabled', true)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'AI_DISABLED',
+                'error_code' => 'AI_DISABLED',
                 'error_code' => 'AI_DISABLED',
                 'message' => 'AI insights are currently disabled.',
             ], 503);
@@ -45,7 +45,7 @@ class CheckAiBudget
 
             return response()->json([
                 'ok' => false,
-                'error' => $code,
+                'error_code' => $code,
                 'error_code' => $code,
                 'message' => $code === 'AI_BUDGET_EXCEEDED'
                     ? 'AI budget exceeded. Try again later.'

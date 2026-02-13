@@ -20,7 +20,7 @@ class InsightsController extends Controller
         if (!(bool) config('ai.enabled', true) || !(bool) config('ai.insights_enabled', true)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'AI_DISABLED',
+                'error_code' => 'AI_DISABLED',
                 'error_code' => 'AI_DISABLED',
                 'message' => 'AI insights are currently disabled.',
             ], 503);
@@ -29,7 +29,7 @@ class InsightsController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('ai_insights')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'TABLE_MISSING',
+                'error_code' => 'TABLE_MISSING',
                 'error_code' => 'AI_TABLE_MISSING',
                 'message' => 'AI insights table not found.',
             ], 500);
@@ -39,7 +39,7 @@ class InsightsController extends Controller
         if (!in_array($periodType, ['week', 'month'], true)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_PERIOD_TYPE',
+                'error_code' => 'INVALID_PERIOD_TYPE',
                 'message' => 'period_type must be week or month.',
             ], 422);
         }
@@ -50,7 +50,7 @@ class InsightsController extends Controller
         if (!$periodStart || !$periodEnd) {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_PERIOD_RANGE',
+                'error_code' => 'INVALID_PERIOD_RANGE',
                 'message' => 'period_start and period_end must be valid dates.',
             ], 422);
         }
@@ -106,7 +106,7 @@ class InsightsController extends Controller
 
             return response()->json([
                 'ok' => false,
-                'error' => 'AI_DISPATCH_FAILED',
+                'error_code' => 'AI_DISPATCH_FAILED',
                 'message' => 'Failed to dispatch insight generation.',
             ], 500);
         }
@@ -134,7 +134,7 @@ class InsightsController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('ai_insights')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'TABLE_MISSING',
+                'error_code' => 'TABLE_MISSING',
             ], 500);
         }
 
@@ -142,7 +142,7 @@ class InsightsController extends Controller
         if (!$row) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
             ], 404);
         }
 
@@ -178,7 +178,7 @@ class InsightsController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('ai_insights') || !\App\Support\SchemaBaseline::hasTable('ai_insight_feedback')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'TABLE_MISSING',
+                'error_code' => 'TABLE_MISSING',
             ], 500);
         }
 
@@ -186,7 +186,7 @@ class InsightsController extends Controller
         if (!$row) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
             ], 404);
         }
 
@@ -199,7 +199,7 @@ class InsightsController extends Controller
         if ($rating < 1 || $rating > 5) {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_RATING',
+                'error_code' => 'INVALID_RATING',
                 'message' => 'rating must be between 1 and 5.',
             ], 422);
         }
@@ -240,7 +240,7 @@ class InsightsController extends Controller
             if ($reqUserId === '' || $reqUserId !== $rowUserId) {
                 return response()->json([
                     'ok' => false,
-                    'error' => 'FORBIDDEN',
+                    'error_code' => 'FORBIDDEN',
                 ], 403);
             }
         } elseif ($rowAnonId !== '') {
@@ -252,13 +252,13 @@ class InsightsController extends Controller
                 }
                 return response()->json([
                     'ok' => false,
-                    'error' => 'FORBIDDEN',
+                    'error_code' => 'FORBIDDEN',
                 ], 403);
             }
             if ($headerAnon !== $rowAnonId && !$allowDev) {
                 return response()->json([
                     'ok' => false,
-                    'error' => 'FORBIDDEN',
+                    'error_code' => 'FORBIDDEN',
                 ], 403);
             }
         }
