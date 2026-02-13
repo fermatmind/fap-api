@@ -385,6 +385,16 @@ class PaymentWebhookHandlerCore
                         && $orderAlreadySettled;
 
                     if ($kind === 'credit_pack') {
+                        $unitQty = (int) ($skuRow->unit_qty ?? 0);
+                        if (
+                            $unitQty <= 0
+                            || $quantity <= 0
+                            || $quantity > intdiv(2147483647, $unitQty)
+                        ) {
+                            $this->markEventError($provider, $providerEventId, 'failed', 'TOPUP_DELTA_INVALID', 'topup delta invalid.');
+                            return $this->badRequest('TOPUP_DELTA_INVALID', 'topup delta invalid.');
+                        }
+
                         $postCommitCtx = [
                             'kind' => 'credit_pack',
                             'org_id' => (int) $order->org_id,
@@ -392,7 +402,7 @@ class PaymentWebhookHandlerCore
                             'provider_event_id' => $providerEventId,
                             'order_no' => $orderNo,
                             'benefit_code' => $benefitCode,
-                            'topup_delta' => (int) ($skuRow->unit_qty ?? 0) * $quantity,
+                            'topup_delta' => $unitQty * $quantity,
                             'event_user_id' => $eventUserId,
                             'event_meta' => $eventBaseMeta,
                             'event_context' => $eventContext,

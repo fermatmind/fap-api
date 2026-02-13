@@ -23,6 +23,17 @@ final class SensitiveDataRedactor
         'api_key',
         'private_key',
         'signature',
+        'exception',
+        'error_message',
+        'email',
+        'phone',
+    ];
+
+    /** @var list<string> */
+    private const SENSITIVE_EXACT_KEYS = [
+        'error',
+        'err',
+        'message',
     ];
 
     /** @var list<string> */
@@ -64,6 +75,10 @@ final class SensitiveDataRedactor
     private function isSensitiveKey(int|string $key): bool
     {
         $lowerKey = strtolower((string) $key);
+
+        if (in_array($lowerKey, self::SENSITIVE_EXACT_KEYS, true)) {
+            return true;
+        }
 
         foreach (self::SENSITIVE_KEY_PARTS as $part) {
             if ($part !== '' && str_contains($lowerKey, $part)) {

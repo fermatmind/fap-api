@@ -84,10 +84,9 @@ class LegacyMeFacadeService
             $this->logger->warning('ME_BIND_EMAIL_UPDATE_FAILED', [
                 'user_id' => (string) $userId,
                 'exception' => $e::class,
-                'message' => $e->getMessage(),
             ]);
 
-            throw new ApiProblemException(422, 'EMAIL_BIND_FAILED', $e->getMessage());
+            throw new ApiProblemException(422, 'EMAIL_BIND_FAILED', 'email bind failed.');
         }
 
         if ($updated < 1) {

@@ -148,9 +148,9 @@ class ValidityFeedbackController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error_code' => 'FORBIDDEN',
-            'message' => 'forbidden.',
-        ], 403);
+            'error_code' => 'NOT_FOUND',
+            'message' => 'attempt not found.',
+        ], 404);
     }
 
     private function normalizeId(mixed $value): ?string
@@ -201,12 +201,10 @@ class ValidityFeedbackController extends Controller
     private function checkAnonOwnership(string $attemptId, string $anonId): bool
     {
         if (!\App\Support\SchemaBaseline::hasTable('identities')) {
-            // TODO: identities table missing; allow anon-bound write for now.
-            return true;
+            return $this->matchAttemptAnonId($attemptId, $anonId);
         }
         if (!\App\Support\SchemaBaseline::hasColumn('identities', 'attempt_id') || !\App\Support\SchemaBaseline::hasColumn('identities', 'anon_id')) {
-            // TODO: identities schema missing attempt_id/anon_id; allow anon-bound write for now.
-            return true;
+            return $this->matchAttemptAnonId($attemptId, $anonId);
         }
 
         $row = DB::table('identities')
@@ -214,11 +212,28 @@ class ValidityFeedbackController extends Controller
             ->first();
 
         if (!$row) {
-            // TODO: identities row missing for attempt; allow anon-bound write for now.
-            return true;
+            return $this->matchAttemptAnonId($attemptId, $anonId);
         }
 
         return trim((string) ($row->anon_id ?? '')) === $anonId;
+    }
+
+    private function matchAttemptAnonId(string $attemptId, string $anonId): bool
+    {
+        if (!\App\Support\SchemaBaseline::hasColumn('attempts', 'anon_id')) {
+            return false;
+        }
+
+        $attemptAnonId = DB::table('attempts')
+            ->where('id', $attemptId)
+            ->value('anon_id');
+        $attemptAnonId = trim((string) $attemptAnonId);
+
+        if ($attemptAnonId === '' || $anonId === '') {
+            return false;
+        }
+
+        return hash_equals($attemptAnonId, $anonId);
     }
 
     private function resolvePackId(Attempt $attempt): string

@@ -103,6 +103,23 @@ final class SelfCheckContractTest extends TestCase
         );
     }
 
+    public function test_verbose_deps_do_not_expose_probe_message_text(): void
+    {
+        $deps = $this->okDeps();
+        $deps['db'] = [
+            'ok' => false,
+            'error_code' => 'DB_UNAVAILABLE',
+            'message' => 'SQLSTATE token=secret path=/var/app',
+        ];
+        $this->mockDeps($deps);
+
+        $response = $this->getJson('/api/healthz');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('deps.db.error_code', 'DB_UNAVAILABLE');
+        $response->assertJsonMissingPath('deps.db.message');
+    }
+
     public function test_v2_healthz_response_is_fast_enough_for_probe_timeout_guard(): void
     {
         $this->mockDeps($this->okDeps());

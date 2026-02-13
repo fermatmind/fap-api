@@ -90,7 +90,7 @@ class AssessmentEngine
         try {
             $result = $driver->score($answers, $scoringSpec, $ctxMerged);
         } catch (\Throwable $e) {
-            return $this->error('SCORING_FAILED', $e->getMessage(), ['error' => $e->getMessage()]);
+            return $this->error('SCORING_FAILED', 'scoring failed.');
         }
 
         return [

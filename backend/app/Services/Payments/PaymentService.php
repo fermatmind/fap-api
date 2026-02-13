@@ -12,6 +12,8 @@ class PaymentService
     public const BENEFIT_REF = 'mbti_report_v1';
     private const PAYMENT_PROVIDER_INTERNAL = 'internal';
     private const PAYMENT_PROVIDER_MOCK = 'mock';
+    private const MAX_ORDER_QUANTITY = 1000;
+    private const MAX_INT32 = 2147483647;
 
     public function __construct(
         private PaymentRouter $router,
@@ -24,12 +26,21 @@ class PaymentService
         $itemSku = strtoupper(trim((string) ($data['item_sku'] ?? '')));
         $currency = strtoupper(trim((string) ($data['currency'] ?? 'CNY')));
         $qtyRaw = $data['quantity'] ?? 1;
-        $qty = is_numeric($qtyRaw) ? max(1, (int) $qtyRaw) : 1;
+        $qty = is_numeric($qtyRaw) ? (int) $qtyRaw : 1;
+        if ($qty < 1 || $qty > self::MAX_ORDER_QUANTITY) {
+            return $this->invalid('QUANTITY_INVALID', 'quantity out of range.');
+        }
         $legacyOrgId = (int) config('fap.legacy_org_id', 1);
         if ($legacyOrgId <= 0) {
             $legacyOrgId = 1;
         }
         $unitPriceCents = $this->skuPriceService->getPrice($itemSku, $currency);
+        if ($unitPriceCents < 0) {
+            return $this->invalid('PRICE_INVALID', 'price invalid.');
+        }
+        if ($unitPriceCents > 0 && $qty > intdiv(self::MAX_INT32, $unitPriceCents)) {
+            return $this->invalid('AMOUNT_TOO_LARGE', 'amount too large.');
+        }
         $amountCents = $unitPriceCents * $qty;
 
         $orderId = (string) Str::uuid();

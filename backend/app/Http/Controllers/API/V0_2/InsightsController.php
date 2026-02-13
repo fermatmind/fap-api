@@ -240,8 +240,8 @@ class InsightsController extends Controller
             if ($reqUserId === '' || $reqUserId !== $rowUserId) {
                 return response()->json([
                     'ok' => false,
-                    'error_code' => 'FORBIDDEN',
-                ], 403);
+                    'error_code' => 'NOT_FOUND',
+                ], 404);
             }
         } elseif ($rowAnonId !== '') {
             $requestAnonId = trim((string) $request->header('X-FAP-Anon-Id', ''));
@@ -256,8 +256,8 @@ class InsightsController extends Controller
             if ($requestAnonId === '' || !hash_equals($rowAnonId, $requestAnonId)) {
                 return response()->json([
                     'ok' => false,
-                    'error_code' => 'FORBIDDEN',
-                ], 403);
+                    'error_code' => 'NOT_FOUND',
+                ], 404);
             }
         }
 

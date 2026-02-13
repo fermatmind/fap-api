@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 class OrderManager
 {
     private const FINAL_STATUSES = ['fulfilled', 'failed', 'canceled', 'refunded'];
+    private const MAX_ORDER_QUANTITY = 1000;
+    private const MAX_INT32 = 2147483647;
 
     public function __construct(
         private SkuCatalog $skus,
@@ -33,11 +35,21 @@ class OrderManager
         $entitlementId = $resolved['entitlement_id'] ?? null;
         $requestedSku = strtoupper(trim((string) ($resolved['requested_sku'] ?? $requestedSku)));
 
-        $quantity = max(1, (int) $quantity);
+        $quantity = (int) $quantity;
+        if ($quantity < 1 || $quantity > self::MAX_ORDER_QUANTITY) {
+            return $this->badRequest('QUANTITY_INVALID', 'quantity out of range.');
+        }
 
         $skuRow = $resolved['sku_row'] ?? null;
         if (!$skuRow) {
             return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
+        }
+        $unitPriceCents = (int) ($skuRow->price_cents ?? 0);
+        if ($unitPriceCents < 0) {
+            return $this->badRequest('PRICE_INVALID', 'price invalid.');
+        }
+        if ($unitPriceCents > 0 && $quantity > intdiv(self::MAX_INT32, $unitPriceCents)) {
+            return $this->badRequest('AMOUNT_TOO_LARGE', 'amount too large.');
         }
 
         $skuToLookup = $effectiveSku !== '' ? $effectiveSku : $requestedSku;
@@ -58,6 +70,7 @@ class OrderManager
             $targetAttemptId,
             $provider,
             $skuRow,
+            $unitPriceCents,
             $requestedSku,
             $effectiveSku,
             $entitlementId,
@@ -76,7 +89,7 @@ class OrderManager
                 'sku' => $skuToLookup,
                 'quantity' => $quantity,
                 'target_attempt_id' => $this->trimOrNull($targetAttemptId),
-                'amount_cents' => (int) ($skuRow->price_cents ?? 0) * $quantity,
+                'amount_cents' => $unitPriceCents * $quantity,
                 'currency' => (string) ($skuRow->currency ?? 'USD'),
                 'status' => 'created',
                 'provider' => $provider,
