@@ -97,13 +97,27 @@ class ProvidersController extends Controller
     public function revoke(Request $request, string $provider)
     {
         $userId = $this->resolveUserId($request);
+        if ($userId === null) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'UNAUTHORIZED',
+                'message' => 'missing_identity',
+            ], 401);
+        }
+
         $result = app(ConsentService::class)->revoke($userId, $provider);
+        $status = (int) ($result['status'] ?? (($result['ok'] ?? false) ? 200 : 400));
+        if ($status < 100 || $status > 599) {
+            $status = ($result['ok'] ?? false) ? 200 : 400;
+        }
 
         return response()->json([
             'ok' => $result['ok'] ?? false,
+            'error_code' => $result['error'] ?? null,
+            'message' => $result['message'] ?? null,
             'provider' => $provider,
             'user_id' => $userId,
-        ]);
+        ], $status);
     }
 
     public function ingest(Request $request, string $provider)

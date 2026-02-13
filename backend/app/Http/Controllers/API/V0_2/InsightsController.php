@@ -244,8 +244,16 @@ class InsightsController extends Controller
                 ], 403);
             }
         } elseif ($rowAnonId !== '') {
-            $headerAnon = trim((string) $request->header('X-FAP-Anon-Id', ''));
-            if ($headerAnon === '' || !hash_equals($rowAnonId, $headerAnon)) {
+            $requestAnonId = trim((string) $request->header('X-FAP-Anon-Id', ''));
+            if ($requestAnonId === '') {
+                $requestAnonId = trim((string) (
+                    $request->attributes->get('fm_anon_id')
+                    ?? $request->attributes->get('anon_id')
+                    ?? ''
+                ));
+            }
+
+            if ($requestAnonId === '' || !hash_equals($rowAnonId, $requestAnonId)) {
                 return response()->json([
                     'ok' => false,
                     'error_code' => 'FORBIDDEN',
