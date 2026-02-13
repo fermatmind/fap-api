@@ -46,7 +46,7 @@ final class PaymentWebhookController extends Controller
 
         $status = (int) ($result['status'] ?? 200);
         if ($status < 100 || $status > 599) {
-            $status = ($result['ok'] ?? false) === true ? 200 : 500;
+            $status = 200;
         }
 
         unset($result['status']);

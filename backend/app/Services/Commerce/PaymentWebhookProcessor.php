@@ -71,6 +71,16 @@ class PaymentWebhookProcessor
 
     public function process(string $provider, array $payload, bool $signatureOk = true): array
     {
+        if ($signatureOk !== true) {
+            return [
+                'ok' => false,
+                'error_code' => 'INVALID_SIGNATURE',
+                'message' => 'invalid signature.',
+                'details' => null,
+                'status' => 400,
+            ];
+        }
+
         [$orgId, $userId, $anonId] = $this->resolveOrderContext($provider, $payload);
 
         return $this->handle(

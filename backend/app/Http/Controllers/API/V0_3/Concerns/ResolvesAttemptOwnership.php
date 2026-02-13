@@ -32,9 +32,21 @@ trait ResolvesAttemptOwnership
 
     protected function resolveUserId(Request $request): ?string
     {
-        $userId = $request->user()?->id;
+        $candidates = [
+            $request->user()?->id,
+            $request->attributes->get('fm_user_id'),
+            $request->attributes->get('user_id'),
+            app(OrgContext::class)->userId(),
+        ];
 
-        return $this->normalizeString($userId);
+        foreach ($candidates as $candidate) {
+            $normalized = $this->normalizeString($candidate);
+            if ($normalized !== null) {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 
     protected function resolveAnonId(Request $request): ?string
