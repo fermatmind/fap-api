@@ -150,32 +150,17 @@ class ValidityFeedbackController extends Controller
         $hasUser = \App\Support\SchemaBaseline::hasColumn('attempts', 'user_id');
         $hasAnon = \App\Support\SchemaBaseline::hasColumn('attempts', 'anon_id');
 
-        if (($uid === '' || !$hasUser) && ($aid === '' || !$hasAnon)) {
-            $query->whereRaw('1=0');
+        if ($uid !== '' && $hasUser) {
+            $query->where('user_id', $uid);
             return;
         }
 
-        $query->where(function ($q) use ($uid, $aid, $hasUser, $hasAnon): void {
-            $applied = false;
+        if ($aid !== '' && $hasAnon) {
+            $query->where('anon_id', $aid);
+            return;
+        }
 
-            if ($uid !== '' && $hasUser) {
-                $q->where('user_id', $uid);
-                $applied = true;
-            }
-
-            if ($aid !== '' && $hasAnon) {
-                if ($applied) {
-                    $q->orWhere('anon_id', $aid);
-                } else {
-                    $q->where('anon_id', $aid);
-                    $applied = true;
-                }
-            }
-
-            if (!$applied) {
-                $q->whereRaw('1=0');
-            }
-        });
+        $query->whereRaw('1=0');
     }
 
     private function normalizeReasonTags(array $tags): array
