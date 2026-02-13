@@ -15,7 +15,7 @@ final class MeAttemptsAuthContractTest extends TestCase
         $response->assertStatus(401);
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'UNAUTHORIZED',
+            'error_code' => 'UNAUTHENTICATED',
         ]);
     }
 }

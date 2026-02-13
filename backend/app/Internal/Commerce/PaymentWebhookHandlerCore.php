@@ -218,8 +218,8 @@ class PaymentWebhookHandlerCore
                         ->update($baseRow);
 
                     if ($signatureOk !== true) {
-                        $this->markEventError($provider, $providerEventId, 'rejected', 'SIGNATURE_INVALID', 'signature invalid.');
-                        return $this->notFound('NOT_FOUND', 'not found.');
+                        $this->markEventError($provider, $providerEventId, 'rejected', 'INVALID_SIGNATURE', 'signature invalid.');
+                        return $this->badRequest('INVALID_SIGNATURE', 'invalid signature.');
                     }
 
                     $orderQuery = DB::table('orders')
@@ -229,7 +229,7 @@ class PaymentWebhookHandlerCore
                     $order = $orderQuery->lockForUpdate()->first();
                     if (!$order) {
                         $this->markEventError($provider, $providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
-                        return $this->serverError('ORDER_NOT_FOUND', 'order not found.');
+                        return $this->notFound('ORDER_NOT_FOUND', 'not found.');
                     }
 
                     $orderProvider = strtolower(trim((string) ($order->provider ?? '')));
@@ -253,12 +253,7 @@ class PaymentWebhookHandlerCore
                             $detail
                         );
 
-                        return [
-                            'ok' => false,
-                            'error' => 'PROVIDER_MISMATCH',
-                            'message' => 'provider mismatch',
-                            'status' => 400,
-                        ];
+                        return $this->badRequest('PROVIDER_MISMATCH', 'provider mismatch');
                     }
 
                     $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
@@ -568,11 +563,9 @@ class PaymentWebhookHandlerCore
         $gateway = $this->gateways[$provider] ?? null;
 
         if (!$gateway) {
-            return [
-                'ok' => false,
-                'error' => 'PROVIDER_NOT_SUPPORTED',
-                'status' => 400,
-            ];
+            return $this->errorResult(400, 'PROVIDER_NOT_SUPPORTED', 'provider not supported.', null, [
+                'dry_run' => true,
+            ]);
         }
 
         $normalized = $gateway->normalizePayload($payload);
@@ -581,38 +574,29 @@ class PaymentWebhookHandlerCore
         $orderNo = trim((string) ($normalized['order_no'] ?? ''));
 
         if ($providerEventId === '' || $orderNo === '') {
-            return [
-                'ok' => false,
-                'error' => 'PAYLOAD_INVALID',
-                'status' => 400,
+            return $this->errorResult(400, 'PAYLOAD_INVALID', 'provider_event_id and order_no are required.', $normalized, [
                 'dry_run' => true,
                 'normalized' => $normalized,
-            ];
+            ]);
         }
 
         if ($signatureOk !== true) {
-            return [
-                'ok' => false,
-                'error' => 'SIGNATURE_INVALID',
-                'status' => 404,
+            return $this->errorResult(400, 'INVALID_SIGNATURE', 'invalid signature.', null, [
                 'dry_run' => true,
                 'provider_event_id' => $providerEventId,
                 'order_no' => $orderNo,
                 'event_type' => $eventType,
-            ];
+            ]);
         }
 
         $isRefund = $this->isRefundEvent($eventType, $normalized);
         if (!$isRefund && !$this->isAllowedSuccessEventType($provider, $eventType)) {
-            return [
-                'ok' => false,
-                'error' => 'EVENT_TYPE_NOT_ALLOWED',
-                'status' => 404,
+            return $this->errorResult(404, 'EVENT_TYPE_NOT_ALLOWED', 'event type not allowed.', null, [
                 'dry_run' => true,
                 'provider_event_id' => $providerEventId,
                 'order_no' => $orderNo,
                 'event_type' => $eventType,
-            ];
+            ]);
         }
 
         return [
@@ -656,7 +640,7 @@ class PaymentWebhookHandlerCore
                     'provider' => $provider,
                     'provider_event_id' => $providerEventId,
                     'order_no' => $orderNo,
-                    'error' => $e->getMessage(),
+                    'error_message' => $e->getMessage(),
                 ]);
             }
         }
@@ -690,7 +674,7 @@ class PaymentWebhookHandlerCore
                             'order_no' => $orderNo,
                             'org_id' => $orgId,
                             'benefit_code' => $benefitCode,
-                            'error' => $wallet['error'] ?? 'WALLET_TOPUP_FAILED',
+                            'wallet_error_code' => $wallet['error'] ?? 'WALLET_TOPUP_FAILED',
                             'message' => $wallet['message'] ?? 'wallet topup failed.',
                         ]);
                         $outcome['ok'] = false;
@@ -705,7 +689,7 @@ class PaymentWebhookHandlerCore
                                 'provider' => $provider,
                                 'provider_event_id' => $providerEventId,
                                 'order_no' => $orderNo,
-                                'error' => $e->getMessage(),
+                                'error_message' => $e->getMessage(),
                             ]);
                         }
                     }
@@ -716,7 +700,7 @@ class PaymentWebhookHandlerCore
                         'order_no' => $orderNo,
                         'org_id' => $orgId,
                         'benefit_code' => $benefitCode,
-                        'error' => $e->getMessage(),
+                        'error_message' => $e->getMessage(),
                     ]);
                     $outcome['ok'] = false;
                     $outcome['error_code'] = 'WALLET_TOPUP_EXCEPTION';
@@ -732,7 +716,7 @@ class PaymentWebhookHandlerCore
                     'provider' => $provider,
                     'provider_event_id' => $providerEventId,
                     'order_no' => $orderNo,
-                    'error' => $e->getMessage(),
+                    'error_message' => $e->getMessage(),
                 ]);
             }
 
@@ -764,7 +748,7 @@ class PaymentWebhookHandlerCore
                         'order_no' => $orderNo,
                         'org_id' => $orgId,
                         'attempt_id' => $attemptId,
-                        'error' => $e->getMessage(),
+                        'error_message' => $e->getMessage(),
                     ]);
                     $outcome['ok'] = false;
                     $outcome['error_code'] = 'SEED_SNAPSHOT_FAILED';
@@ -786,7 +770,7 @@ class PaymentWebhookHandlerCore
                     'provider' => $provider,
                     'provider_event_id' => $providerEventId,
                     'order_no' => $orderNo,
-                    'error' => $e->getMessage(),
+                    'error_message' => $e->getMessage(),
                 ]);
             }
         }
@@ -1086,6 +1070,11 @@ class PaymentWebhookHandlerCore
 
     private function normalizeResultStatus(array $result): array
     {
+        $isOk = ($result['ok'] ?? false) === true;
+        if (!$isOk) {
+            $result = $this->canonicalizeErrorResult($result);
+        }
+
         if (array_key_exists('status', $result)) {
             $candidate = (int) $result['status'];
             if ($candidate >= 100 && $candidate <= 599) {
@@ -1094,39 +1083,110 @@ class PaymentWebhookHandlerCore
             }
         }
 
-        $result['status'] = ($result['ok'] ?? false) === true ? 200 : 500;
+        $result['status'] = $isOk ? 200 : 500;
         return $result;
     }
 
     private function badRequest(string $code, string $message): array
     {
-        return [
-            'ok' => false,
-            'error' => $code,
-            'message' => $message,
-            'status' => 400,
-        ];
+        return $this->errorResult(400, $code, $message);
     }
 
     private function serverError(string $code, string $message): array
     {
-        return [
-            'ok' => false,
-            'error' => $code,
-            'error_code' => $code,
-            'message' => $message,
-            'status' => 500,
-        ];
+        return $this->errorResult(500, $code, $message);
     }
 
     private function notFound(string $code, string $message): array
     {
-        return [
+        return $this->errorResult(404, $code, $message);
+    }
+
+    private function errorResult(
+        int $status,
+        string $errorCode,
+        string $message,
+        mixed $details = null,
+        array $extra = []
+    ): array {
+        $base = [
             'ok' => false,
-            'error' => $code,
-            'message' => $message,
-            'status' => 404,
+            'error_code' => $this->normalizeErrorCode($errorCode),
+            'message' => trim($message) !== '' ? trim($message) : 'request failed',
+            'details' => $this->normalizeDetailsValue($details),
+            'status' => $status,
         ];
+
+        return array_merge($base, $extra);
+    }
+
+    private function canonicalizeErrorResult(array $result): array
+    {
+        $errorCode = $this->firstNonEmptyString([
+            $result['error_code'] ?? null,
+            $result['error'] ?? null,
+            $result['message'] ?? null,
+        ]);
+        $message = $this->firstNonEmptyString([
+            $result['message'] ?? null,
+            $result['error'] ?? null,
+        ]);
+
+        $result['ok'] = false;
+        $result['error_code'] = $this->normalizeErrorCode($errorCode);
+        $result['message'] = $message !== '' ? $message : 'request failed';
+        $details = array_key_exists('details', $result) ? $result['details'] : ($result['errors'] ?? null);
+        $result['details'] = $this->normalizeDetailsValue($details);
+
+        unset($result['error'], $result['errors']);
+
+        return $result;
+    }
+
+    private function normalizeErrorCode(string $raw): string
+    {
+        $code = trim($raw);
+        if ($code === '') {
+            return 'HTTP_ERROR';
+        }
+
+        $code = str_replace(['-', ' '], '_', $code);
+        $code = (string) preg_replace('/[^A-Za-z0-9_]+/', '_', $code);
+        $code = trim($code, '_');
+
+        return $code !== '' ? strtoupper($code) : 'HTTP_ERROR';
+    }
+
+    private function normalizeDetailsValue(mixed $details): mixed
+    {
+        if (is_array($details) && $details === []) {
+            return null;
+        }
+
+        if (is_object($details) && count((array) $details) === 0) {
+            return null;
+        }
+
+        return $details;
+    }
+
+    /**
+     * @param array<int, mixed> $candidates
+     */
+    private function firstNonEmptyString(array $candidates): string
+    {
+        foreach ($candidates as $candidate) {
+            if (!is_string($candidate) && !is_numeric($candidate)) {
+                continue;
+            }
+
+            $value = trim((string) $candidate);
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        return '';
     }
 
     private function normalizeEventType(array $normalized): string

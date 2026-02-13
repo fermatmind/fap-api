@@ -20,7 +20,7 @@ class AdminContentController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('content_pack_releases')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'TABLE_MISSING',
+                'error_code' => 'TABLE_MISSING',
                 'message' => 'content_pack_releases missing',
             ], 500);
         }
@@ -45,7 +45,7 @@ class AdminContentController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('content_pack_releases')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'TABLE_MISSING',
+                'error_code' => 'TABLE_MISSING',
                 'message' => 'content_pack_releases missing',
             ], 500);
         }
@@ -55,7 +55,7 @@ class AdminContentController extends Controller
         if (!$release) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'release not found',
             ], 404);
         }

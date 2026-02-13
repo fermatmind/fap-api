@@ -87,7 +87,7 @@ class RequireOrgRole
     {
         return response()->json([
             'ok' => false,
-            'error' => 'ORG_NOT_FOUND',
+            'error_code' => 'ORG_NOT_FOUND',
             'message' => 'org not found.',
         ], 404);
     }

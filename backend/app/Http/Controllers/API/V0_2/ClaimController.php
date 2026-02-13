@@ -22,11 +22,11 @@ class ClaimController extends Controller
         $limitIp = $limiter->limit('FAP_RATE_CLAIM_REPORT_IP', 30);
         if ($ip !== '' && !$limiter->hit("claim_report:ip:{$ip}", $limitIp, 60)) {
             $logger->log('claim_report', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'message' => 'Too many requests from this IP.',
             ], 429);
         }
@@ -35,11 +35,11 @@ class ClaimController extends Controller
 
         if ($token === '') {
             $logger->log('claim_report', false, $request, null, [
-                'error' => 'INVALID_TOKEN',
+                'error_code' => 'INVALID_TOKEN',
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_TOKEN',
+                'error_code' => 'INVALID_TOKEN',
                 'message' => 'token is required.',
             ], 422);
         }
@@ -51,12 +51,12 @@ class ClaimController extends Controller
         if (!($res['ok'] ?? false)) {
             $status = (int) ($res['status'] ?? 422);
             $logger->log('claim_report', false, $request, null, [
-                'error' => (string) ($res['error'] ?? 'INVALID_TOKEN'),
+                'error_code' => (string) ($res['error'] ?? 'INVALID_TOKEN'),
                 'token_hash' => hash('sha256', $token),
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => $res['error'] ?? 'INVALID_TOKEN',
+                'error_code' => $res['error'] ?? 'INVALID_TOKEN',
                 'message' => $res['message'] ?? 'claim token invalid.',
             ], $status);
         }

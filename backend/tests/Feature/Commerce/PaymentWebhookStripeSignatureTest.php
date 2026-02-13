@@ -29,26 +29,12 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
         $signatureHeader = $this->buildStripeSignatureHeader('whsec_test_valid', $rawBody, time());
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')
+        $processor->shouldReceive('process')
             ->once()
-            ->withArgs(function (
-                string $provider,
-                array $incomingPayload,
-                int $orgId,
-                ?string $userId,
-                ?string $anonId,
-                bool $signatureOk,
-                array $payloadMeta
-            ) use ($payload, $rawBody): bool {
+            ->withArgs(function (string $provider, array $incomingPayload, bool $signatureOk) use ($payload): bool {
                 return $provider === 'stripe'
                     && $incomingPayload === $payload
-                    && $orgId === 0
-                    && $userId === null
-                    && $anonId === null
-                    && $signatureOk === true
-                    && ($payloadMeta['size_bytes'] ?? null) === strlen($rawBody)
-                    && ($payloadMeta['sha256'] ?? null) === hash('sha256', $rawBody)
-                    && ($payloadMeta['raw_sha256'] ?? null) === hash('sha256', $rawBody);
+                    && $signatureOk === true;
             })
             ->andReturn([
                 'ok' => true,
@@ -100,7 +86,15 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
         );
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
+        $processor->shouldReceive('process')
+            ->once()
+            ->with('stripe', $payload, false)
+            ->andReturn([
+                'ok' => false,
+                'error_code' => 'INVALID_SIGNATURE',
+                'message' => 'invalid signature',
+                'status' => 400,
+            ]);
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
 
         $response = $this->call(
@@ -131,15 +125,24 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
             'services.stripe.webhook_tolerance_seconds' => 300,
         ]);
 
-        $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
-        $this->app->instance(PaymentWebhookProcessor::class, $processor);
-
-        $rawBody = $this->encodePayload([
+        $payload = [
             'provider_event_id' => 'evt_missing_header',
             'amount_cents' => 399,
             'currency' => 'USD',
-        ]);
+        ];
+        $processor = Mockery::mock(PaymentWebhookProcessor::class);
+        $processor->shouldReceive('process')
+            ->once()
+            ->with('stripe', $payload, false)
+            ->andReturn([
+                'ok' => false,
+                'error_code' => 'INVALID_SIGNATURE',
+                'message' => 'invalid signature',
+                'status' => 400,
+            ]);
+        $this->app->instance(PaymentWebhookProcessor::class, $processor);
+
+        $rawBody = $this->encodePayload($payload);
 
         $response = $this->call(
             'POST',

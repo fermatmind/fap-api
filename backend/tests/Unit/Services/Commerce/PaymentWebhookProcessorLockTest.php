@@ -59,7 +59,7 @@ final class PaymentWebhookProcessorLockTest extends TestCase
 
         $this->assertFalse($result['ok']);
         $this->assertSame(500, $result['status']);
-        $this->assertSame('WEBHOOK_BUSY', $result['error']);
         $this->assertSame('WEBHOOK_BUSY', $result['error_code']);
+        $this->assertArrayNotHasKey('error', $result);
     }
 }

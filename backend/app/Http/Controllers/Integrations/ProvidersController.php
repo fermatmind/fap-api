@@ -112,7 +112,7 @@ class ProvidersController extends Controller
         if (strlen($rawBody) > 256 * 1024) {
             return response()->json([
                 'ok' => false,
-                'error' => 'payload_too_large',
+                'error_code' => 'payload_too_large',
                 'message' => 'payload_too_large',
             ], 413);
         }
@@ -121,7 +121,7 @@ class ProvidersController extends Controller
         if (! $this->isAllowedProvider($provider)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'NOT_FOUND',
+                'error_code' => 'NOT_FOUND',
                 'message' => 'not found.',
             ], 404);
         }
@@ -168,7 +168,7 @@ class ProvidersController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'ok' => false,
-                'error' => 'validation_failed',
+                'error_code' => 'validation_failed',
                 'message' => 'validation_failed',
                 'details' => $validator->errors()->toArray(),
             ], 422);
@@ -183,7 +183,7 @@ class ProvidersController extends Controller
         if ($userId === null) {
             return response()->json([
                 'ok' => false,
-                'error' => 'UNAUTHORIZED',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'missing_identity',
             ], 401);
         }

@@ -45,7 +45,7 @@ class AdminAuth
     {
         return response()->json([
             'ok' => false,
-            'error' => 'UNAUTHORIZED',
+            'error_code' => 'UNAUTHORIZED',
             'message' => $reason,
         ], 401);
     }
@@ -54,7 +54,7 @@ class AdminAuth
     {
         return response()->json([
             'ok' => false,
-            'error' => 'FORBIDDEN',
+            'error_code' => 'FORBIDDEN',
             'message' => $reason,
         ], 403);
     }

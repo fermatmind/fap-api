@@ -18,7 +18,7 @@ class AdminAuditController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('audit_logs')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'TABLE_MISSING',
+                'error_code' => 'TABLE_MISSING',
                 'message' => 'audit_logs missing',
             ], 500);
         }

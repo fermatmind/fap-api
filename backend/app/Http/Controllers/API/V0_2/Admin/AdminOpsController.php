@@ -21,7 +21,7 @@ class AdminOpsController extends Controller
         if (!\App\Support\SchemaBaseline::hasTable('ops_healthz_snapshots')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'TABLE_MISSING',
+                'error_code' => 'TABLE_MISSING',
                 'message' => 'ops_healthz_snapshots missing',
             ], 500);
         }
@@ -54,7 +54,7 @@ class AdminOpsController extends Controller
         if (($scope === 'pack' || $scope === 'all') && ($packId === '' || $dirVersion === '')) {
             return response()->json([
                 'ok' => false,
-                'error' => 'INVALID_PARAMS',
+                'error_code' => 'INVALID_PARAMS',
                 'message' => 'pack_id and dir_version required for scope=pack|all',
             ], 422);
         }

@@ -31,7 +31,11 @@ class PaymentWebhookRouteWiringTest extends TestCase
 
         $stubResponse = $this->postJson('/api/v0.3/webhooks/payment/stub', []);
         $this->assertNotSame(500, $stubResponse->getStatusCode());
-        $stubResponse->assertStatus(404);
+        if ($stubEnabled) {
+            $stubResponse->assertStatus(400);
+        } else {
+            $stubResponse->assertStatus(404);
+        }
 
         $stripeResponse = $this->postJson('/api/v0.3/webhooks/payment/stripe', []);
         $this->assertNotSame(500, $stripeResponse->getStatusCode());

@@ -24,3 +24,19 @@ selfcheck-mysql:
 	bash scripts/ci/prepare_mysql.sh && \
 	APP_ENV=testing php vendor/phpunit/phpunit/phpunit --configuration phpunit.mysql.xml && \
 	APP_ENV=testing bash scripts/ci_smoke_v0_3.sh
+
+.PHONY: release release\:source-clean release\:verify
+
+release\:source-clean:
+	bash scripts/release/export_source_clean.sh
+
+release\:verify:
+	bash scripts/release/verify_source_zip_clean.sh dist/source_clean.zip
+
+release:
+	@$(MAKE) release:source-clean
+	@$(MAKE) release:verify
+	@echo "[release] artifact=dist/source_clean.zip"
+	@echo "[release] commit_sha=$$(git rev-parse --short=12 HEAD)"
+	@echo "[release] generated_at_utc=$$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+	@echo "[release] build_host=$$(uname -srm)"

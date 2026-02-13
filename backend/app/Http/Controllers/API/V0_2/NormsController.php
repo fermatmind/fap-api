@@ -28,7 +28,7 @@ class NormsController extends Controller
         if ($v->fails()) {
             return response()->json([
                 'ok'     => false,
-                'error'  => 'VALIDATION_FAILED',
+                'error_code'  => 'VALIDATION_FAILED',
                 'errors' => $v->errors(),
             ], 422);
         }
@@ -96,7 +96,7 @@ class NormsController extends Controller
     {
         return response()->json([
             'ok'    => false,
-            'error' => 'NOT_ENABLED',
+            'error_code' => 'NOT_ENABLED',
         ]);
     }
 
@@ -104,7 +104,7 @@ class NormsController extends Controller
     {
         return response()->json([
             'ok'    => false,
-            'error' => 'NOT_FOUND',
+            'error_code' => 'NOT_FOUND',
         ]);
     }
 }

@@ -1,0 +1,42 @@
+name: Release Artifact
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    tags: ["v*", "release-*"]
+
+permissions:
+  contents: read
+
+jobs:
+  artifact-hygiene-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Export clean source zip
+        run: bash scripts/release/export_source_clean.sh
+
+      - name: Verify canonical source zip
+        run: bash scripts/release/verify_source_zip_clean.sh dist/source_clean.zip
+
+      - name: Reject dirty zip candidates
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          zips=(dist/*.zip)
+          test ${#zips[@]} -gt 0
+          for z in "${zips[@]}"; do
+            bash scripts/release/verify_source_zip_clean.sh "$z"
+          done
+
+      - name: Upload trusted artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: source_clean
+          path: dist/source_clean.zip
+          if-no-files-found: error
+          retention-days: 7

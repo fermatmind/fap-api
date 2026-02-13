@@ -224,7 +224,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
             'event_type' => 'payment_succeeded',
         ], ['X-Org-Id' => '0']);
 
-        $res->assertStatus(500)->assertJson([
+        $res->assertStatus(404)->assertJson([
             'ok' => false,
             'error_code' => 'ORDER_NOT_FOUND',
         ]);
@@ -315,7 +315,8 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
         $this->assertFalse((bool) ($result['ok'] ?? true));
         $this->assertSame(500, (int) ($result['status'] ?? 0));
-        $this->assertSame('WEBHOOK_BUSY', (string) ($result['error'] ?? ''));
+        $this->assertSame('WEBHOOK_BUSY', (string) ($result['error_code'] ?? ''));
+        $this->assertArrayNotHasKey('error', $result);
     }
 
     public function test_oversized_payload_is_rejected_by_controller_with_413(): void
@@ -341,14 +342,13 @@ final class PaymentWebhookProcessorContractTest extends TestCase
         (new Pr19CommerceSeeder())->run();
 
         $mock = Mockery::mock(PaymentWebhookProcessor::class);
-        $mock->shouldReceive('handle')
+        $mock->shouldReceive('process')
             ->once()
             ->andReturn([
                 'ok' => false,
-                'error' => 'X',
+                'error_code' => 'X',
                 'status' => 404,
             ]);
-        $mock->shouldReceive('evaluateDryRun')->never();
         $this->app->instance(PaymentWebhookProcessor::class, $mock);
 
         $res = $this->postSignedBillingWebhook([

@@ -19,7 +19,7 @@ class MemoryController extends Controller
         if (!(bool) config('memory.enabled', true)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'MEMORY_DISABLED',
+                'error_code' => 'MEMORY_DISABLED',
                 'message' => 'Memory is currently disabled.',
             ], 503);
         }
@@ -33,7 +33,7 @@ class MemoryController extends Controller
         if ($content === '') {
             return response()->json([
                 'ok' => false,
-                'error' => 'CONTENT_REQUIRED',
+                'error_code' => 'CONTENT_REQUIRED',
                 'message' => 'content is required.',
             ], 422);
         }
@@ -44,7 +44,7 @@ class MemoryController extends Controller
             if (!empty($redacted['flags'])) {
                 return response()->json([
                     'ok' => false,
-                    'error' => 'CONTENT_REDACTED',
+                    'error_code' => 'CONTENT_REDACTED',
                     'message' => 'Memory content contains sensitive data.',
                 ], 422);
             }
@@ -65,7 +65,7 @@ class MemoryController extends Controller
         if (!($result['ok'] ?? false)) {
             return response()->json([
                 'ok' => false,
-                'error' => $result['error'] ?? 'MEMORY_PROPOSE_FAILED',
+                'error_code' => $result['error'] ?? 'MEMORY_PROPOSE_FAILED',
             ], 500);
         }
 
@@ -88,7 +88,7 @@ class MemoryController extends Controller
         if (!(bool) config('memory.enabled', true)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'MEMORY_DISABLED',
+                'error_code' => 'MEMORY_DISABLED',
             ], 503);
         }
 
@@ -103,7 +103,7 @@ class MemoryController extends Controller
         if (!($result['ok'] ?? false)) {
             return response()->json([
                 'ok' => false,
-                'error' => $result['error'] ?? 'MEMORY_CONFIRM_FAILED',
+                'error_code' => $result['error'] ?? 'MEMORY_CONFIRM_FAILED',
             ], 404);
         }
 
@@ -127,7 +127,7 @@ class MemoryController extends Controller
         if (!(bool) config('memory.enabled', true)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'MEMORY_DISABLED',
+                'error_code' => 'MEMORY_DISABLED',
             ], 503);
         }
 
@@ -159,7 +159,7 @@ class MemoryController extends Controller
         if (!(bool) config('memory.enabled', true)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'MEMORY_DISABLED',
+                'error_code' => 'MEMORY_DISABLED',
             ], 503);
         }
 
@@ -187,7 +187,7 @@ class MemoryController extends Controller
         if (!(bool) config('memory.enabled', true)) {
             return response()->json([
                 'ok' => false,
-                'error' => 'MEMORY_DISABLED',
+                'error_code' => 'MEMORY_DISABLED',
             ], 503);
         }
 
@@ -207,7 +207,7 @@ class MemoryController extends Controller
             if (!($probe['ok'] ?? false)) {
                 return response()->json([
                     'ok' => false,
-                    'error' => $probe['error'] ?? 'MEMORY_EXPORT_FAILED',
+                    'error_code' => $probe['error'] ?? 'MEMORY_EXPORT_FAILED',
                 ], 500);
             }
 
@@ -234,7 +234,7 @@ class MemoryController extends Controller
 
             return response()->json([
                 'ok' => false,
-                'error' => $error,
+                'error_code' => $error,
             ], $status);
         }
 
@@ -260,7 +260,7 @@ class MemoryController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'USER_ID_REQUIRED',
+            'error_code' => 'USER_ID_REQUIRED',
             'message' => 'user_id is required for memory operations.',
         ], 401);
     }

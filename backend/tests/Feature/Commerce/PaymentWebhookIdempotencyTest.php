@@ -161,7 +161,7 @@ class PaymentWebhookIdempotencyTest extends TestCase
         $first = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
-        $first->assertStatus(500);
+        $first->assertStatus(404);
         $first->assertJson([
             'ok' => false,
             'error_code' => 'ORDER_NOT_FOUND',
@@ -230,7 +230,12 @@ class PaymentWebhookIdempotencyTest extends TestCase
 
         $res = $this->postJson('/api/v0.3/webhooks/payment/stripe', $payload);
         $res->assertStatus(400);
+        $res->assertJsonPath('error_code', 'INVALID_SIGNATURE');
 
-        $this->assertSame(0, DB::table('payment_events')->count());
+        $this->assertSame(1, DB::table('payment_events')->count());
+        $this->assertSame('INVALID_SIGNATURE', (string) DB::table('payment_events')
+            ->where('provider', 'stripe')
+            ->where('provider_event_id', 'evt_sig_1')
+            ->value('last_error_code'));
     }
 }

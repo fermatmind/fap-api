@@ -9,7 +9,6 @@ use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\PaymentWebhookProcessor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 final class PaymentWebhookController extends Controller
@@ -25,133 +24,166 @@ final class PaymentWebhookController extends Controller
     {
         $provider = strtolower(trim($provider));
         $raw = (string) $request->getContent();
-        $sizeBytes = strlen($raw);
-
-        if ($sizeBytes > self::MAX_PAYLOAD_BYTES) {
+        if (strlen($raw) > self::MAX_PAYLOAD_BYTES) {
             return $this->errorResponse(413, 'PAYLOAD_TOO_LARGE', 'payload too large');
         }
 
-        $payload = json_decode($raw, true);
-        if (!is_array($payload)) {
-            return $this->errorResponse(400, 'INVALID_JSON', 'invalid json payload');
-        }
-
-        $gateway = $this->resolveGateway($provider);
-        if (!$gateway) {
-            return $this->errorResponse(404, 'NOT_FOUND', 'not found.');
-        }
-
-        if ($gateway->verifySignature($request) !== true) {
-            return $this->errorResponse(400, 'INVALID_SIGNATURE', 'invalid signature');
-        }
-
-        $normalized = $gateway->normalizePayload($payload);
-        $orderNo = trim((string) ($normalized['order_no'] ?? ''));
-        $eventId = trim((string) ($normalized['provider_event_id'] ?? $normalized['event_id'] ?? ''));
-        if ($eventId === '') {
-            return $this->errorResponse(400, 'MISSING_EVENT_ID', 'provider event id missing');
-        }
-
-        [$orgId, $userId, $anonId] = $this->resolveOrderContext($orderNo);
-
-        $sha256 = hash('sha256', $raw);
-        $payloadMeta = [
-            'size_bytes' => $sizeBytes,
-            'sha256' => $sha256,
-            'raw_sha256' => $sha256,
-            'request_id' => $this->resolveRequestId($request),
-            'ip' => (string) $request->ip(),
-            'user_agent' => (string) $request->userAgent(),
-        ];
+        $decoded = json_decode($raw, true);
+        $payload = is_array($decoded) ? $decoded : [];
+        $signatureOk = $this->resolveSignatureOk($request, $provider);
 
         try {
-            $useV2 = config('features.payment_webhook_v2', false) === true;
-            $shadow = config('features.payment_webhook_v2_shadow', false) === true;
-
-            $result = $this->processor->handle(
-                $provider,
-                $payload,
-                $orgId,
-                $userId,
-                $anonId,
-                true,
-                $payloadMeta
-            );
-
-            if (!$useV2 && $shadow) {
-                $shadowResult = $this->processor->evaluateDryRun($provider, $payload, true);
-                $legacyShape = [
-                    'ok' => (bool) ($result['ok'] ?? false),
-                    'status' => (int) ($result['status'] ?? 200),
-                    'error_code' => (string) ($result['error_code'] ?? $result['error'] ?? ''),
-                ];
-                $shadowShape = [
-                    'ok' => (bool) ($shadowResult['ok'] ?? false),
-                    'status' => (int) ($shadowResult['status'] ?? 200),
-                    'error_code' => (string) ($shadowResult['error_code'] ?? $shadowResult['error'] ?? ''),
-                ];
-
-                if ($legacyShape !== $shadowShape) {
-                    Log::warning('PAYMENT_WEBHOOK_V2_SHADOW_DIFF', [
-                        'request_id' => $payloadMeta['request_id'],
-                        'provider' => $provider,
-                        'provider_event_id' => $eventId,
-                        'legacy' => $legacyShape,
-                        'shadow' => $shadowShape,
-                    ]);
-                }
-            }
+            $result = $this->processor->process($provider, $payload, $signatureOk);
         } catch (\Throwable $e) {
             Log::error('PAYMENT_WEBHOOK_INTERNAL_ERROR', [
-                'request_id' => $payloadMeta['request_id'],
+                'request_id' => $this->resolveRequestId($request),
                 'provider' => $provider,
-                'event_id' => $eventId,
                 'exception' => $e->getMessage(),
             ]);
 
             return $this->errorResponse(500, 'WEBHOOK_INTERNAL_ERROR', 'webhook internal error');
         }
 
-        $status = 200;
-        if (is_array($result) && array_key_exists('status', $result)) {
-            $candidate = (int) $result['status'];
-            if ($candidate >= 100 && $candidate <= 599) {
-                $status = $candidate;
-            }
+        $status = (int) ($result['status'] ?? 200);
+        if ($status < 100 || $status > 599) {
+            $status = 200;
         }
+
+        unset($result['status']);
 
         return response()->json($result, $status);
     }
 
-    private function resolveGateway(string $provider): ?PaymentGatewayInterface
+    private function resolveSignatureOk(Request $request, string $provider): bool
     {
         return match ($provider) {
-            'stripe' => new StripeGateway(),
-            'billing' => new BillingGateway(),
-            default => null,
+            'stripe' => $this->verifyStripeSignature($request),
+            'billing' => $this->verifyBillingSignature($request),
+            default => false,
         };
     }
 
-    private function resolveOrderContext(string $orderNo): array
+    private function verifyStripeSignature(Request $request): bool
     {
-        if ($orderNo === '') {
-            return [0, null, null];
+        $secret = $this->resolveStripeSecret();
+        $legacySecret = $this->resolveStripeLegacySecret();
+        $gateway = new StripeGateway();
+        $tolerance = $this->resolveTolerance();
+
+        if ($this->verifyWithScopedConfig($request, $gateway, [
+            'services.stripe.webhook_secret' => $secret,
+            'services.stripe.webhook_tolerance_seconds' => $tolerance,
+            'services.stripe.webhook_tolerance' => $tolerance,
+        ])) {
+            return true;
         }
 
-        $order = DB::table('orders')->where('order_no', $orderNo)->first();
-        if (!$order) {
-            return [0, null, null];
+        if ($legacySecret !== '' && $legacySecret !== $secret) {
+            return $this->verifyWithScopedConfig($request, $gateway, [
+                'services.stripe.webhook_secret' => $legacySecret,
+                'services.stripe.webhook_tolerance_seconds' => $tolerance,
+                'services.stripe.webhook_tolerance' => $tolerance,
+            ]);
         }
 
-        $orgId = (int) ($order->org_id ?? 0);
-        $userId = isset($order->user_id) && $order->user_id !== null ? trim((string) $order->user_id) : '';
-        $anonId = isset($order->anon_id) && $order->anon_id !== null ? trim((string) $order->anon_id) : '';
+        return false;
+    }
 
-        return [
-            $orgId,
-            $userId !== '' ? $userId : null,
-            $anonId !== '' ? $anonId : null,
-        ];
+    private function verifyBillingSignature(Request $request): bool
+    {
+        $secret = $this->resolveBillingSecret();
+        $legacySecret = $this->resolveBillingLegacySecret();
+        $gateway = new BillingGateway();
+        $tolerance = $this->resolveTolerance();
+
+        if ($this->verifyWithScopedConfig($request, $gateway, [
+            'services.billing.webhook_secret' => $secret,
+            'services.billing.webhook_tolerance_seconds' => $tolerance,
+            'services.billing.webhook_tolerance' => $tolerance,
+        ])) {
+            return true;
+        }
+
+        if ($legacySecret !== '' && $legacySecret !== $secret) {
+            return $this->verifyWithScopedConfig($request, $gateway, [
+                'services.billing.webhook_secret' => $legacySecret,
+                'services.billing.webhook_tolerance_seconds' => $tolerance,
+                'services.billing.webhook_tolerance' => $tolerance,
+            ]);
+        }
+
+        return false;
+    }
+
+    private function verifyWithScopedConfig(Request $request, PaymentGatewayInterface $gateway, array $overrides): bool
+    {
+        $originals = [];
+        foreach ($overrides as $key => $value) {
+            $originals[$key] = config($key);
+            config([$key => $value]);
+        }
+
+        try {
+            return $gateway->verifySignature($request) === true;
+        } finally {
+            foreach ($originals as $key => $value) {
+                config([$key => $value]);
+            }
+        }
+    }
+
+    private function resolveStripeSecret(): string
+    {
+        return $this->firstNonEmpty([
+            (string) config('payments.stripe.webhook_secret', ''),
+            (string) config('services.stripe.webhook_secret', ''),
+        ]);
+    }
+
+    private function resolveStripeLegacySecret(): string
+    {
+        return $this->firstNonEmpty([
+            (string) config('payments.stripe.legacy_webhook_secret', ''),
+            (string) config('services.stripe.legacy_webhook_secret', ''),
+        ]);
+    }
+
+    private function resolveBillingSecret(): string
+    {
+        return $this->firstNonEmpty([
+            (string) config('payments.billing.webhook_secret', ''),
+            (string) config('services.billing.webhook_secret', ''),
+        ]);
+    }
+
+    private function resolveBillingLegacySecret(): string
+    {
+        return $this->firstNonEmpty([
+            (string) config('payments.billing.legacy_webhook_secret', ''),
+            (string) config('services.billing.legacy_webhook_secret', ''),
+        ]);
+    }
+
+    private function resolveTolerance(): int
+    {
+        $tolerance = (int) config('payments.signature_tolerance_seconds', 300);
+
+        return $tolerance > 0 ? $tolerance : 300;
+    }
+
+    /**
+     * @param array<int, string> $candidates
+     */
+    private function firstNonEmpty(array $candidates): string
+    {
+        foreach ($candidates as $candidate) {
+            $value = trim($candidate);
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        return '';
     }
 
     private function resolveRequestId(Request $request): string

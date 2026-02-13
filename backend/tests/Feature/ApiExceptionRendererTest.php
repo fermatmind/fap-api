@@ -50,11 +50,11 @@ class ApiExceptionRendererTest extends TestCase
         $response->assertJson([
             'ok' => false,
             'error_code' => 'NOT_FOUND',
-            'message' => 'Not Found',
+            'message' => 'share not found',
         ]);
         $decoded = json_decode((string) $response->getContent());
         $this->assertIsObject($decoded);
-        $this->assertEquals((object) [], $decoded->details ?? null);
+        $this->assertNull($decoded->details ?? null);
     }
 
     public function test_validation_exception_is_standardized(): void

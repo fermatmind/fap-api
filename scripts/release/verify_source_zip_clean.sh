@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ZIP="${1:-dist/fap-api-source.zip}"
+ZIP="${1:-dist/source_clean.zip}"
 test -f "$ZIP"
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"

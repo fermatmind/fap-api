@@ -278,7 +278,7 @@ class FmTokenAuth
 
         return response()->json([
             'ok' => false,
-            'error_code' => 'UNAUTHORIZED',
+            'error_code' => 'UNAUTHENTICATED',
             'message' => 'Missing or invalid fm_token. Please login.',
             'details' => (object) [],
             'request_id' => $requestId,

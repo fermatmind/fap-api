@@ -60,14 +60,15 @@ class PaymentWebhookTrustBoundaryTest extends TestCase
         ], 0, null, null, false);
 
         $this->assertFalse($result['ok']);
-        $this->assertSame(404, (int) ($result['status'] ?? 0));
-        $this->assertSame('NOT_FOUND', (string) ($result['error'] ?? ''));
+        $this->assertSame(400, (int) ($result['status'] ?? 0));
+        $this->assertSame('INVALID_SIGNATURE', (string) ($result['error_code'] ?? ''));
+        $this->assertArrayNotHasKey('error', $result);
         $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
         $this->assertSame('rejected', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_trust_sig_1')
             ->value('status'));
-        $this->assertSame('SIGNATURE_INVALID', (string) DB::table('payment_events')
+        $this->assertSame('INVALID_SIGNATURE', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_trust_sig_1')
             ->value('last_error_code'));

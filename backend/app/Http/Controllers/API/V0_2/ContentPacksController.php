@@ -73,7 +73,7 @@ class ContentPacksController extends Controller
         if ($path === '' || !File::exists($path) || !File::isFile($path)) {
             return [
                 'ok' => false,
-                'error' => 'READ_FAILED',
+                'error_code' => 'READ_FAILED',
                 'message' => $path === '' ? 'missing file path' : "file not found: {$path}",
             ];
         }
@@ -83,7 +83,7 @@ class ContentPacksController extends Controller
         } catch (\Throwable $e) {
             return [
                 'ok' => false,
-                'error' => 'READ_FAILED',
+                'error_code' => 'READ_FAILED',
                 'message' => "failed to read: {$path}",
             ];
         }
@@ -92,7 +92,7 @@ class ContentPacksController extends Controller
         if (!is_array($decoded)) {
             return [
                 'ok' => false,
-                'error' => 'INVALID_JSON',
+                'error_code' => 'INVALID_JSON',
                 'message' => "invalid json: {$path}",
             ];
         }
@@ -107,7 +107,7 @@ class ContentPacksController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => 'NOT_FOUND',
+            'error_code' => 'NOT_FOUND',
             'message' => 'pack not found',
         ], 404);
     }
@@ -116,7 +116,7 @@ class ContentPacksController extends Controller
     {
         return response()->json([
             'ok' => false,
-            'error' => $error,
+            'error_code' => $error,
             'message' => $message,
         ], 500);
     }

@@ -27,12 +27,12 @@ class AuthProviderController extends Controller
         $limitIp = $limiter->limit('FAP_RATE_PROVIDER_LOGIN_IP', 60);
         if ($ip !== '' && !$limiter->hit("provider_login:ip:{$ip}", $limitIp, 60)) {
             $logger->log('provider_login', false, $request, null, [
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'provider' => $provider,
             ]);
             return response()->json([
                 'ok' => false,
-                'error' => 'RATE_LIMITED',
+                'error_code' => 'RATE_LIMITED',
                 'message' => 'Too many requests from this IP.',
             ], 429);
         }

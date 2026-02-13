@@ -86,7 +86,7 @@ final class ShareSecurityTest extends TestCase
         ])->getJson('/api/v0.2/attempts/' . $attemptId . '/share');
 
         $resp->assertStatus(401);
-        $resp->assertJsonPath('error_code', 'UNAUTHORIZED');
+        $resp->assertJsonPath('error_code', 'UNAUTHENTICATED');
     }
 
     private function authHeaders(string $token, int $orgId): array

@@ -54,7 +54,7 @@ final class ApiErrorContractMiddlewareTest extends TestCase
 
         $decoded = json_decode((string) $response->getContent());
         $this->assertIsObject($decoded);
-        $this->assertEquals((object) [], $decoded->details ?? null);
+        $this->assertNull($decoded->details ?? null);
     }
 
     public function test_object_error_gets_top_level_error_code(): void
@@ -72,24 +72,19 @@ final class ApiErrorContractMiddlewareTest extends TestCase
 
         $decoded = json_decode((string) $response->getContent());
         $this->assertIsObject($decoded);
-        $this->assertEquals((object) [], $decoded->details ?? null);
+        $this->assertNull($decoded->details ?? null);
     }
 
-    public function test_legacy_error_in_200_response_is_normalized(): void
+    public function test_legacy_error_in_200_response_is_not_rewritten(): void
     {
         $response = $this->getJson('/api/__pr52/error200');
 
         $response->assertStatus(200);
-        $response->assertJsonPath('ok', false);
-        $response->assertJsonPath('error_code', 'SOME_LEGACY_ERROR');
+        $response->assertJsonMissingPath('ok');
+        $response->assertJsonPath('error', 'SOME_LEGACY_ERROR');
+        $response->assertJsonMissingPath('error_code');
         $response->assertJsonPath('message', 'x');
-        $response->assertJsonMissingPath('error');
-
-        $requestId = (string) $response->json('request_id', '');
-        $this->assertNotSame('', $requestId);
-
-        $decoded = json_decode((string) $response->getContent());
-        $this->assertIsObject($decoded);
-        $this->assertEquals((object) [], $decoded->details ?? null);
+        $response->assertJsonMissingPath('request_id');
+        $response->assertJsonMissingPath('details');
     }
 }

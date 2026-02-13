@@ -215,7 +215,7 @@ class AttemptOwnershipAnd404Test extends TestCase
         ], $headers));
     }
 
-    public function test_admin_and_owner_can_access_member_a_attempt_with_200(): void
+    public function test_admin_and_owner_without_identity_binding_get_uniform_404(): void
     {
         $this->seedScales();
 
@@ -239,10 +239,10 @@ class AttemptOwnershipAnd404Test extends TestCase
             'X-Org-Id' => (string) $orgId,
         ];
 
-        $this->getJson("/api/v0.3/attempts/{$attemptId}/result", $ownerHeaders)->assertStatus(200);
-        $this->getJson("/api/v0.3/attempts/{$attemptId}/report", $ownerHeaders)->assertStatus(200);
-        $this->getJson("/api/v0.3/attempts/{$attemptId}/result", $adminHeaders)->assertStatus(200);
-        $this->getJson("/api/v0.3/attempts/{$attemptId}/report", $adminHeaders)->assertStatus(200);
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", $ownerHeaders));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report", $ownerHeaders));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", $adminHeaders));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report", $adminHeaders));
     }
 
     public function test_missing_token_or_cross_org_access_returns_404(): void

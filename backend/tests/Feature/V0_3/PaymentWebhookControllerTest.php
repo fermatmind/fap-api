@@ -33,7 +33,15 @@ final class PaymentWebhookControllerTest extends TestCase
     public function test_invalid_json_returns_400_and_processor_not_called(): void
     {
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
+        $processor->shouldReceive('process')
+            ->once()
+            ->with('stripe', [], false)
+            ->andReturn([
+                'ok' => false,
+                'error_code' => 'PAYLOAD_INVALID',
+                'message' => 'provider_event_id and order_no are required.',
+                'status' => 400,
+            ]);
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
 
         $response = $this->call(
@@ -50,7 +58,9 @@ final class PaymentWebhookControllerTest extends TestCase
         );
 
         $response->assertStatus(400);
-        $response->assertJsonPath('error_code', 'INVALID_JSON');
+        $response->assertJsonPath('error_code', 'PAYLOAD_INVALID');
+        $response->assertJsonMissingPath('error');
+        $this->assertNoLegacyErrorKey($response);
     }
 
     public function test_invalid_signature_returns_400_and_processor_not_called(): void
@@ -61,7 +71,15 @@ final class PaymentWebhookControllerTest extends TestCase
         ]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
+        $processor->shouldReceive('process')
+            ->once()
+            ->with('stripe', Mockery::type('array'), false)
+            ->andReturn([
+                'ok' => false,
+                'error_code' => 'INVALID_SIGNATURE',
+                'message' => 'invalid signature',
+                'status' => 400,
+            ]);
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
 
         $raw = $this->encodePayload([
@@ -90,9 +108,11 @@ final class PaymentWebhookControllerTest extends TestCase
 
         $response->assertStatus(400);
         $response->assertJsonPath('error_code', 'INVALID_SIGNATURE');
+        $response->assertJsonMissingPath('error');
+        $this->assertNoLegacyErrorKey($response);
     }
 
-    public function test_missing_event_id_returns_400_and_processor_not_called(): void
+    public function test_missing_event_id_returns_400_from_processor_contract(): void
     {
         config([
             'services.stripe.webhook_secret' => 'whsec_sec002_missing_event',
@@ -100,7 +120,15 @@ final class PaymentWebhookControllerTest extends TestCase
         ]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')->never();
+        $processor->shouldReceive('process')
+            ->once()
+            ->with('stripe', Mockery::type('array'), true)
+            ->andReturn([
+                'ok' => false,
+                'error_code' => 'PAYLOAD_INVALID',
+                'message' => 'provider_event_id and order_no are required.',
+                'status' => 400,
+            ]);
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
 
         $raw = $this->encodePayload([
@@ -127,7 +155,9 @@ final class PaymentWebhookControllerTest extends TestCase
         );
 
         $response->assertStatus(400);
-        $response->assertJsonPath('error_code', 'MISSING_EVENT_ID');
+        $response->assertJsonPath('error_code', 'PAYLOAD_INVALID');
+        $response->assertJsonMissingPath('error');
+        $this->assertNoLegacyErrorKey($response);
     }
 
     public function test_processor_throwable_returns_500(): void
@@ -138,7 +168,7 @@ final class PaymentWebhookControllerTest extends TestCase
         ]);
 
         $processor = Mockery::mock(PaymentWebhookProcessor::class);
-        $processor->shouldReceive('handle')
+        $processor->shouldReceive('process')
             ->once()
             ->andThrow(new \RuntimeException('boom'));
         $this->app->instance(PaymentWebhookProcessor::class, $processor);
@@ -170,6 +200,8 @@ final class PaymentWebhookControllerTest extends TestCase
 
         $response->assertStatus(500);
         $response->assertJsonPath('error_code', 'WEBHOOK_INTERNAL_ERROR');
+        $response->assertJsonMissingPath('error');
+        $this->assertNoLegacyErrorKey($response);
     }
 
     public function test_valid_billing_signature_returns_200_and_writes_or_hits_idempotency(): void
@@ -222,10 +254,14 @@ final class PaymentWebhookControllerTest extends TestCase
         $first = $this->postSignedBilling($raw, 'billing_secret_sec002');
         $first->assertStatus(200);
         $first->assertJsonPath('ok', true);
+        $first->assertJsonMissingPath('error');
+        $this->assertNoLegacyErrorKey($first);
 
         $second = $this->postSignedBilling($raw, 'billing_secret_sec002');
         $second->assertStatus(200);
         $second->assertJsonPath('ok', true);
+        $second->assertJsonMissingPath('error');
+        $this->assertNoLegacyErrorKey($second);
 
         $this->assertSame(1, DB::table('payment_events')
             ->where('provider', 'billing')
@@ -270,5 +306,12 @@ final class PaymentWebhookControllerTest extends TestCase
         }
 
         return $raw;
+    }
+
+    private function assertNoLegacyErrorKey(TestResponse $response): void
+    {
+        $json = $response->json();
+        $this->assertIsArray($json);
+        $this->assertArrayNotHasKey('error', $json);
     }
 }
