@@ -98,7 +98,7 @@ class IngestionService
             $value = $sample['value'] ?? $sample;
             $recordedAtNormalized = IdempotencyKey::normalizeRecordedAt($recordedAt);
             $idKey = IdempotencyKey::build($provider, $externalId !== '' ? $externalId : $recordedAtNormalized, $recordedAtNormalized, $value);
-            $idRecord = $store->record([
+            $idRecord = $store->recordFast([
                 'provider' => $idKey['provider'],
                 'external_id' => $idKey['external_id'],
                 'recorded_at' => $idKey['recorded_at'],

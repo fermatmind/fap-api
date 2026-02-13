@@ -104,6 +104,10 @@ class FmTokenAuth
 
         $orgId = $this->resolveOrgId($request, $row);
         $role = $this->resolveRole($row->role ?? null, $row->meta_json ?? null);
+        $existingRole = trim((string) $request->attributes->get('org_role', ''));
+        if ($orgId > 0 && $existingRole !== '') {
+            $role = $existingRole;
+        }
 
         $request->attributes->set('fm_org_id', $orgId);
         $request->attributes->set('org_id', $orgId);
@@ -171,19 +175,6 @@ class FmTokenAuth
 
     private function resolveOrgId(Request $request, object $row): int
     {
-        $headerOrgId = trim((string) $request->header('X-FM-Org-Id', ''));
-        if ($headerOrgId === '') {
-            $headerOrgId = trim((string) $request->header('X-Org-Id', ''));
-        }
-        if ($headerOrgId === '') {
-            $headerOrgId = trim((string) $request->query('org_id', ''));
-        }
-
-        $headerOrg = $this->resolveNumeric($headerOrgId);
-        if ($headerOrg !== null) {
-            return $headerOrg;
-        }
-
         $fromToken = $this->resolveNumeric($row->org_id ?? null);
         if ($fromToken !== null && $fromToken > 0) {
             return $fromToken;
@@ -195,7 +186,32 @@ class FmTokenAuth
             return $metaOrgId;
         }
 
-        return $headerOrg ?? 0;
+        $attrOrgId = $this->resolveNumeric($request->attributes->get('org_id'));
+        if ($attrOrgId === null) {
+            $attrOrgId = $this->resolveNumeric($request->attributes->get('fm_org_id'));
+        }
+        if ($attrOrgId !== null && $attrOrgId > 0) {
+            return $attrOrgId;
+        }
+
+        $headerOrgId = trim((string) $request->header('X-FM-Org-Id', ''));
+        if ($headerOrgId === '') {
+            $headerOrgId = trim((string) $request->header('X-Org-Id', ''));
+        }
+        if ($headerOrgId === '') {
+            $headerOrgId = trim((string) $request->query('org_id', ''));
+        }
+
+        $headerOrg = $this->resolveNumeric($headerOrgId);
+        if ($headerOrg !== null && $headerOrg > 0) {
+            Log::warning('[SEC] fm_token_org_override_blocked', [
+                'token_org_id' => $fromToken ?? $metaOrgId ?? 0,
+                'requested_org_id' => $headerOrg,
+                'path' => $request->path(),
+            ]);
+        }
+
+        return 0;
     }
 
     /**

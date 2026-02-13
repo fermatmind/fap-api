@@ -37,6 +37,21 @@ class IdempotencyStore
         return (array) $row;
     }
 
+    public function findByIdentity(string $provider, string $externalId, string $recordedAt): ?array
+    {
+        $row = DB::table('idempotency_keys')
+            ->where('provider', $provider)
+            ->where('external_id', $externalId)
+            ->where('recorded_at', $recordedAt)
+            ->first();
+
+        if (!$row) {
+            return null;
+        }
+
+        return (array) $row;
+    }
+
     public function touch(string $provider, string $externalId, string $recordedAt, string $hash): void
     {
         DB::table('idempotency_keys')
@@ -44,6 +59,18 @@ class IdempotencyStore
             ->where('external_id', $externalId)
             ->where('recorded_at', $recordedAt)
             ->where('hash', $hash)
+            ->update([
+                'last_seen_at' => now(),
+                'updated_at' => now(),
+            ]);
+    }
+
+    public function touchByIdentity(string $provider, string $externalId, string $recordedAt): void
+    {
+        DB::table('idempotency_keys')
+            ->where('provider', $provider)
+            ->where('external_id', $externalId)
+            ->where('recorded_at', $recordedAt)
             ->update([
                 'last_seen_at' => now(),
                 'updated_at' => now(),
@@ -58,14 +85,19 @@ class IdempotencyStore
         $hash = (string) ($payload['hash'] ?? '');
         $ingestBatchId = $payload['ingest_batch_id'] ?? null;
 
-        $existing = $this->find($provider, $externalId, $recordedAt, $hash);
+        $existing = $this->findByIdentity($provider, $externalId, $recordedAt);
         if ($existing) {
-            $this->touch($provider, $externalId, $recordedAt, $hash);
-            return ['inserted' => false, 'existing' => true];
+            $this->touchByIdentity($provider, $externalId, $recordedAt);
+
+            return [
+                'inserted' => false,
+                'existing' => true,
+                'hash_mismatch' => trim((string) ($existing['hash'] ?? '')) !== $hash,
+            ];
         }
 
         $now = now();
-        DB::table('idempotency_keys')->insert([
+        $affected = DB::table('idempotency_keys')->insertOrIgnore([
             'provider' => $provider,
             'external_id' => $externalId,
             'recorded_at' => $recordedAt,
@@ -77,7 +109,18 @@ class IdempotencyStore
             'updated_at' => $now,
         ]);
 
-        return ['inserted' => true, 'existing' => false];
+        if ($affected > 0) {
+            return ['inserted' => true, 'existing' => false, 'hash_mismatch' => false];
+        }
+
+        $current = $this->findByIdentity($provider, $externalId, $recordedAt);
+        $this->touchByIdentity($provider, $externalId, $recordedAt);
+
+        return [
+            'inserted' => false,
+            'existing' => true,
+            'hash_mismatch' => trim((string) ($current['hash'] ?? '')) !== $hash,
+        ];
     }
 
     public function recordFast(array $payload): array
@@ -103,9 +146,17 @@ class IdempotencyStore
 
         $inserted = $affected > 0;
 
+        if (!$inserted) {
+            $current = $this->findByIdentity($provider, $externalId, $recordedAt);
+            $this->touchByIdentity($provider, $externalId, $recordedAt);
+        }
+
         return [
             'inserted' => $inserted,
             'existing' => !$inserted,
+            'hash_mismatch' => !$inserted
+                ? trim((string) ($current['hash'] ?? '')) !== $hash
+                : false,
         ];
     }
 

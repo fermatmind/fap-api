@@ -41,19 +41,19 @@ final class InsightsAnonHeaderAuthTest extends TestCase
         ]);
 
         $this->getJson("/api/v0.2/insights/{$insightId}")
-            ->assertStatus(403)
+            ->assertStatus(404)
             ->assertJson([
                 'ok' => false,
-                'error_code' => 'FORBIDDEN',
+                'error_code' => 'NOT_FOUND',
             ]);
 
         $this->withHeaders([
             'X-FAP-Anon-Id' => 'anon_wrong',
         ])->getJson("/api/v0.2/insights/{$insightId}")
-            ->assertStatus(403)
+            ->assertStatus(404)
             ->assertJson([
                 'ok' => false,
-                'error_code' => 'FORBIDDEN',
+                'error_code' => 'NOT_FOUND',
             ]);
 
         $this->withHeaders([

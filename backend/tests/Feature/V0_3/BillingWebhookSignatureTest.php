@@ -110,6 +110,66 @@ class BillingWebhookSignatureTest extends TestCase
         Log::shouldNotHaveReceived('error');
     }
 
+    public function test_legacy_payload_only_signature_is_rejected_even_when_flag_enabled(): void
+    {
+        (new Pr19CommerceSeeder())->run();
+
+        config([
+            'services.billing.webhook_secret' => 'billing_secret_legacy_blocked',
+            'services.billing.webhook_tolerance_seconds' => 300,
+            'services.billing.allow_legacy_signature' => true,
+        ]);
+
+        $orderNo = 'ord_billing_legacy_blocked';
+        DB::table('orders')->insert([
+            'id' => (string) Str::uuid(),
+            'order_no' => $orderNo,
+            'org_id' => 0,
+            'user_id' => null,
+            'anon_id' => null,
+            'sku' => 'MBTI_CREDIT',
+            'quantity' => 1,
+            'target_attempt_id' => null,
+            'amount_cents' => 4990,
+            'currency' => 'USD',
+            'status' => 'created',
+            'provider' => 'billing',
+            'external_trade_no' => null,
+            'paid_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'amount_total' => 4990,
+            'amount_refunded' => 0,
+            'item_sku' => 'MBTI_CREDIT',
+            'provider_order_id' => null,
+            'device_id' => null,
+            'request_id' => null,
+            'created_ip' => null,
+            'fulfilled_at' => null,
+            'refunded_at' => null,
+        ]);
+
+        $payload = [
+            'provider_event_id' => 'evt_bill_legacy_blocked',
+            'order_no' => $orderNo,
+            'amount_cents' => 4990,
+            'currency' => 'USD',
+        ];
+        $raw = $this->encodePayload($payload);
+
+        $legacySignature = hash_hmac('sha256', $raw, 'billing_secret_legacy_blocked');
+        $response = $this->call('POST', '/api/v0.3/webhooks/payment/billing', [], [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_X_ORG_ID' => '0',
+            'HTTP_X_WEBHOOK_SIGNATURE' => $legacySignature,
+        ], $raw);
+
+        $response->assertStatus(400);
+        $response->assertJsonPath('error_code', 'INVALID_SIGNATURE');
+        $this->assertSame(0, DB::table('payment_events')->count());
+    }
+
     private function buildSignature(string $secret, string $rawBody, int $timestamp): string
     {
         return hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);

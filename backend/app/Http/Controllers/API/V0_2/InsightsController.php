@@ -7,7 +7,6 @@ use App\Jobs\GenerateInsightJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class InsightsController extends Controller
@@ -55,9 +54,15 @@ class InsightsController extends Controller
             ], 422);
         }
 
-        $userId = trim((string) $request->attributes->get('fm_user_id', ''));
-        $anonIdInput = trim((string) $request->input('anon_id', ''));
-        $anonId = $userId === '' ? $anonIdInput : '';
+        $userId = $this->resolveRequestUserId($request);
+        $anonId = $userId === '' ? $this->resolveRequestAnonId($request) : '';
+        if ($userId === '' && $anonId === '') {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'UNAUTHENTICATED',
+                'message' => 'Missing or invalid fm_token. Please login.',
+            ], 401);
+        }
 
         $inputPayload = [
             'period_type' => $periodType,
@@ -138,17 +143,12 @@ class InsightsController extends Controller
             ], 500);
         }
 
-        $row = DB::table('ai_insights')->where('id', $id)->first();
+        $row = $this->ownedInsightRow($request, $id);
         if (!$row) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
             ], 404);
-        }
-
-        $auth = $this->authorizeInsight($request, $row);
-        if ($auth !== null) {
-            return $auth;
         }
 
         $outputJson = $this->decodeJson($row->output_json ?? null);
@@ -182,17 +182,12 @@ class InsightsController extends Controller
             ], 500);
         }
 
-        $row = DB::table('ai_insights')->where('id', $id)->first();
+        $row = $this->ownedInsightRow($request, $id);
         if (!$row) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
             ], 404);
-        }
-
-        $auth = $this->authorizeInsight($request, $row);
-        if ($auth !== null) {
-            return $auth;
         }
 
         $rating = (int) $request->input('rating', 0);
@@ -230,38 +225,62 @@ class InsightsController extends Controller
         ]);
     }
 
-    private function authorizeInsight(Request $request, object $row): ?\Illuminate\Http\JsonResponse
+    private function ownedInsightRow(Request $request, string $id): ?object
     {
-        $rowUserId = trim((string) ($row->user_id ?? ''));
-        $rowAnonId = trim((string) ($row->anon_id ?? ''));
+        $userId = $this->resolveRequestUserId($request);
+        $anonId = $this->resolveRequestAnonId($request);
 
-        if ($rowUserId !== '') {
-            $reqUserId = trim((string) $request->attributes->get('fm_user_id', ''));
-            if ($reqUserId === '' || $reqUserId !== $rowUserId) {
-                return response()->json([
-                    'ok' => false,
-                    'error_code' => 'FORBIDDEN',
-                ], 403);
-            }
-        } elseif ($rowAnonId !== '') {
-            $requestAnonId = trim((string) $request->header('X-FAP-Anon-Id', ''));
-            if ($requestAnonId === '') {
-                $requestAnonId = trim((string) (
-                    $request->attributes->get('fm_anon_id')
-                    ?? $request->attributes->get('anon_id')
-                    ?? ''
-                ));
-            }
-
-            if ($requestAnonId === '' || !hash_equals($rowAnonId, $requestAnonId)) {
-                return response()->json([
-                    'ok' => false,
-                    'error_code' => 'FORBIDDEN',
-                ], 403);
-            }
+        if ($userId === '' && $anonId === '') {
+            return null;
         }
 
-        return null;
+        return DB::table('ai_insights')
+            ->where('id', $id)
+            ->where(function ($q) use ($userId, $anonId): void {
+                $applied = false;
+
+                if ($userId !== '') {
+                    $q->where('user_id', $userId);
+                    $applied = true;
+                }
+
+                if ($anonId !== '') {
+                    if ($applied) {
+                        $q->orWhere('anon_id', $anonId);
+                    } else {
+                        $q->where('anon_id', $anonId);
+                        $applied = true;
+                    }
+                }
+
+                if (!$applied) {
+                    $q->whereRaw('1=0');
+                }
+            })
+            ->first();
+    }
+
+    private function resolveRequestUserId(Request $request): string
+    {
+        return trim((string) (
+            $request->attributes->get('fm_user_id')
+            ?? $request->attributes->get('user_id')
+            ?? ''
+        ));
+    }
+
+    private function resolveRequestAnonId(Request $request): string
+    {
+        $anonId = trim((string) $request->header('X-FAP-Anon-Id', ''));
+        if ($anonId !== '') {
+            return $anonId;
+        }
+
+        return trim((string) (
+            $request->attributes->get('fm_anon_id')
+            ?? $request->attributes->get('anon_id')
+            ?? ''
+        ));
     }
 
     private function parseDate(string $value): ?Carbon
