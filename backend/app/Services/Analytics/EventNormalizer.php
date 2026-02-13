@@ -34,9 +34,9 @@ class EventNormalizer
             'event_code' => $payload['event_code'] ?? null,
             'occurred_at' => $occurredAt,
             'user_id' => self::toInt(self::firstNonEmpty([
+                $context['user_id'] ?? null,
                 $payload['user_id'] ?? null,
                 $mergedProps['user_id'] ?? null,
-                $context['user_id'] ?? null,
             ])),
             'anon_id' => self::toString(self::firstNonEmpty([
                 $payload['anon_id'] ?? null,

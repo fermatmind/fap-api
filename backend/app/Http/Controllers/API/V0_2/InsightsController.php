@@ -244,18 +244,8 @@ class InsightsController extends Controller
                 ], 403);
             }
         } elseif ($rowAnonId !== '') {
-            $allowDev = (bool) config('ai.dev_allow_anon_header', true);
             $headerAnon = trim((string) $request->header('X-FAP-Anon-Id', ''));
-            if ($headerAnon === '') {
-                if ($allowDev) {
-                    return null;
-                }
-                return response()->json([
-                    'ok' => false,
-                    'error_code' => 'FORBIDDEN',
-                ], 403);
-            }
-            if ($headerAnon !== $rowAnonId && !$allowDev) {
+            if ($headerAnon === '' || !hash_equals($rowAnonId, $headerAnon)) {
                 return response()->json([
                     'ok' => false,
                     'error_code' => 'FORBIDDEN',

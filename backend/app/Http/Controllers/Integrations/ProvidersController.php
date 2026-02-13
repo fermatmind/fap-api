@@ -224,9 +224,29 @@ class ProvidersController extends Controller
 
     public function replay(Request $request, string $provider, string $batch_id)
     {
-        $result = app(ReplayService::class)->replay($provider, $batch_id);
+        $userId = $this->resolveUserId($request);
+        if ($userId === null) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'UNAUTHORIZED',
+                'message' => 'missing_identity',
+            ], 401);
+        }
 
-        return response()->json($result);
+        $result = app(ReplayService::class)->replay(
+            $provider,
+            $batch_id,
+            (int) $userId,
+            $this->resolveOrgRole($request)
+        );
+
+        $status = (int) ($result['status'] ?? 200);
+        if ($status < 100 || $status > 599) {
+            $status = 200;
+        }
+        unset($result['status']);
+
+        return response()->json($result, $status);
     }
 
     private function isAllowedProvider(string $provider): bool
@@ -287,5 +307,12 @@ class ProvidersController extends Controller
         }
 
         return null;
+    }
+
+    private function resolveOrgRole(Request $request): string
+    {
+        $role = trim((string) $request->attributes->get('org_role', ''));
+
+        return $role !== '' ? strtolower($role) : 'public';
     }
 }
