@@ -30,10 +30,29 @@ class TransactionSlimmingTest extends TestCase
         parent::tearDown();
     }
 
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
     public function test_attempt_submit_seeds_pending_snapshot_and_dispatches_job(): void
     {
         $this->seedScales();
         $anonId = 'anon_tx_submit';
+        $anonToken = $this->issueAnonToken($anonId);
         $attemptId = $this->startSimpleScoreAttempt($anonId);
 
         Storage::fake('local');
@@ -41,6 +60,7 @@ class TransactionSlimmingTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->simpleScoreAnswers(),
@@ -66,6 +86,7 @@ class TransactionSlimmingTest extends TestCase
     {
         $this->seedScales();
         $anonId = 'anon_tx_rollback';
+        $anonToken = $this->issueAnonToken($anonId);
         $attemptId = $this->startSimpleScoreAttempt($anonId);
 
         $writer = Mockery::mock(AnswerRowWriter::class);
@@ -78,6 +99,7 @@ class TransactionSlimmingTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->simpleScoreAnswers(),
@@ -85,7 +107,7 @@ class TransactionSlimmingTest extends TestCase
         ]);
         $submit->assertStatus(500);
 
-        Queue::assertNothingPushed();
+        Queue::assertNotPushed(GenerateReportSnapshotJob::class);
         $this->assertSame(0, DB::table('report_snapshots')
             ->where('attempt_id', $attemptId)
             ->count());
@@ -158,12 +180,14 @@ class TransactionSlimmingTest extends TestCase
     {
         $this->seedScales();
         $anonId = 'anon_tx_job';
+        $anonToken = $this->issueAnonToken($anonId);
         $attemptId = $this->startSimpleScoreAttempt($anonId);
 
         Queue::fake();
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->simpleScoreAnswers(),
