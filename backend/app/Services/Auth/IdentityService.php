@@ -2,8 +2,8 @@
 
 namespace App\Services\Auth;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class IdentityService
@@ -15,15 +15,6 @@ class IdentityService
      */
     public function bind(string $userId, string $provider, string $providerUid, array $meta = []): array
     {
-        if (!Schema::hasTable('identities')) {
-            return [
-                'ok' => false,
-                'status' => 500,
-                'error' => 'TABLE_MISSING',
-                'message' => 'identities table missing.',
-            ];
-        }
-
         $userId = trim($userId);
         $provider = strtolower(trim($provider));
         $providerUid = trim($providerUid);
@@ -37,10 +28,19 @@ class IdentityService
             ];
         }
 
-        $existing = DB::table('identities')
-            ->where('provider', $provider)
-            ->where('provider_uid', $providerUid)
-            ->first();
+        try {
+            $existing = DB::table('identities')
+                ->where('provider', $provider)
+                ->where('provider_uid', $providerUid)
+                ->first();
+        } catch (QueryException) {
+            return [
+                'ok' => false,
+                'status' => 500,
+                'error' => 'TABLE_MISSING',
+                'message' => 'identities table missing.',
+            ];
+        }
 
         if ($existing) {
             $existingUser = (string) ($existing->user_id ?? '');
@@ -110,16 +110,18 @@ class IdentityService
 
     public function resolveUserId(string $provider, string $providerUid): ?string
     {
-        if (!Schema::hasTable('identities')) return null;
-
         $provider = strtolower(trim($provider));
         $providerUid = trim($providerUid);
         if ($provider === '' || $providerUid === '') return null;
 
-        $row = DB::table('identities')
-            ->where('provider', $provider)
-            ->where('provider_uid', $providerUid)
-            ->first();
+        try {
+            $row = DB::table('identities')
+                ->where('provider', $provider)
+                ->where('provider_uid', $providerUid)
+                ->first();
+        } catch (QueryException) {
+            return null;
+        }
 
         if (!$row) return null;
 
@@ -132,15 +134,17 @@ class IdentityService
      */
     public function listByUserId(string $userId): array
     {
-        if (!Schema::hasTable('identities')) return [];
-
         $userId = trim($userId);
         if ($userId === '') return [];
 
-        $rows = DB::table('identities')
-            ->where('user_id', $userId)
-            ->orderByDesc('linked_at')
-            ->get();
+        try {
+            $rows = DB::table('identities')
+                ->where('user_id', $userId)
+                ->orderByDesc('linked_at')
+                ->get();
+        } catch (QueryException) {
+            return [];
+        }
 
         $items = [];
         foreach ($rows as $row) {

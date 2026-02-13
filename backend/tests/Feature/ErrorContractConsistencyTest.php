@@ -131,6 +131,7 @@ final class ErrorContractConsistencyTest extends TestCase
 
         $row = [
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => $anonId,
             'expires_at' => now()->addHour(),
             'created_at' => now(),

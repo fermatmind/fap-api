@@ -50,6 +50,8 @@ class ProvidersController extends Controller
         $state = (string) $request->query('state', '');
         $code = (string) $request->query('code', '');
         $userId = $this->resolveUserId($request);
+        $ingestKey = 'igk_' . Str::random(48);
+        $ingestKeyHash = hash('sha256', $ingestKey);
 
         $externalUserId = 'mock_'.substr(sha1($provider.'|'.$state.'|'.$code), 0, 12);
         $scopes = ['mock_scope'];
@@ -63,6 +65,7 @@ class ProvidersController extends Controller
                 ->update([
                     'external_user_id' => $externalUserId,
                     'status' => 'connected',
+                    'ingest_key_hash' => $ingestKeyHash,
                     'connected_at' => now(),
                     'updated_at' => now(),
                 ]);
@@ -87,6 +90,7 @@ class ProvidersController extends Controller
             'state' => $state,
             'code' => $code,
             'external_user_id' => $externalUserId,
+            'ingest_key' => $ingestKey,
         ]);
     }
 

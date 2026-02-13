@@ -53,6 +53,7 @@ final class AttemptReportOwnershipTest extends TestCase
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => 'anon_bound_from_token',
             'user_id' => 1001,
             'expires_at' => now()->addHour(),

@@ -15,10 +15,12 @@
 
 ### Ingest
 - `POST /api/v0.2/integrations/{provider}/ingest`
+- Headers:
+  - `X-Ingest-Key`（明文 key，服务端按 `sha256` 比对 `ingest_key_hash`）
+  - `X-Ingest-Event-Id`（事件唯一 ID，重复请求会被拒绝）
 - Body:
 ```
 {
-  "user_id": 1,
   "range_start": "2026-01-01T00:00:00Z",
   "range_end": "2026-01-02T00:00:00Z",
   "samples": [ ... ]

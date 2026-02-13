@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use App\Support\OrgContext;
@@ -7,134 +9,93 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class FmTokenAuth
 {
-    /**
-     * Minimal Bearer token gate + resolve identity.
-     *
-     * Expect:
-     *   Authorization: Bearer fm_xxxxx
-     *
-     * - validate fm_token format
-     * - resolve user_id / anon_id from fm_tokens table
-     * - attach fm_token / fm_user_id / user_id / anon_id / fm_anon_id to request attributes
-     *
-     * CI accept_phone 关键点：
-     * - token 可能没有 user_id
-     * - anon_id 一律以 token 绑定值为准，避免伪造 request 造成越权
-     * - request 里的 anon_id 仅用于日志/事件 meta
-     */
     public function handle(Request $request, Closure $next): Response
     {
         $header = (string) $request->header('Authorization', '');
 
-        // Accept: "Bearer <token>"
         $token = '';
-        if (preg_match('/^\s*Bearer\s+(.+)\s*$/i', $header, $m)) {
+        if (preg_match('/^\s*Bearer\s+(.+)\s*$/i', $header, $m) === 1) {
             $token = trim((string) ($m[1] ?? ''));
         }
 
-        // Minimal format check: "fm_" + UUID
-        $isOk = $token !== '' && preg_match(
-            '/^fm_[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i',
-            $token
-        );
-
-        if (!$isOk) {
+        if ($token === '' || preg_match('/^fm_[0-9a-fA-F-]{36}$/', $token) !== 1) {
             return $this->unauthorizedResponse($request, 'token_missing_or_invalid');
         }
 
-        // Always attach token for downstream use
         $request->attributes->set('fm_token', $token);
 
-        // Resolve identity from DB: fm_tokens.token -> user_id / anon_id
-        if (!Schema::hasTable('fm_tokens')) {
-            return $this->unauthorizedResponse($request, 'token_table_missing');
-        }
-        $columns = ['token'];
-        foreach (['user_id', 'fm_user_id', 'anon_id', 'org_id', 'meta_json', 'expires_at'] as $col) {
-            if (Schema::hasColumn('fm_tokens', $col)) {
-                $columns[] = $col;
-            }
-        }
-        $row = DB::table('fm_tokens')->select($columns)->where('token', $token)->first();
+        $row = DB::table('fm_tokens')
+            ->select([
+                'token_hash',
+                'user_id',
+                'anon_id',
+                'org_id',
+                'role',
+                'meta_json',
+                'expires_at',
+                'revoked_at',
+            ])
+            ->where('token_hash', hash('sha256', $token))
+            ->first();
+
         if (!$row) {
             return $this->unauthorizedResponse($request, 'token_not_found');
         }
 
-        // Always expose identity keys after DB lookup; values remain null when unresolved.
-        $request->attributes->set('fm_user_id', null);
-        $request->attributes->set('user_id', null);
+        if (!empty($row->revoked_at)) {
+            return $this->unauthorizedResponse($request, 'token_revoked');
+        }
 
-        // expires_at check (only when present)
-        if (property_exists($row, 'expires_at') && !empty($row->expires_at)) {
+        if (!empty($row->expires_at)) {
             $exp = strtotime((string) $row->expires_at);
             if ($exp !== false && $exp < time()) {
                 return $this->unauthorizedResponse($request, 'token_expired');
             }
         }
 
-        // 1) user_id: only trust explicit user_id-like columns, never fall back to anon_id
-        $resolvedUserId = $this->resolveUserId($row);
-        if ($resolvedUserId !== '') {
-            $resolvedUserId = (string) $resolvedUserId;
-            // basic sanity
-            if (strlen($resolvedUserId) > 64) {
-                return $this->unauthorizedResponse($request, 'user_id_too_long');
-            }
-            // numeric-only (events.user_id is bigint)
-            if (!preg_match('/^\d+$/', $resolvedUserId)) {
-                return $this->unauthorizedResponse($request, 'user_id_not_numeric');
-            }
+        $request->attributes->set('fm_user_id', null);
+        $request->attributes->set('user_id', null);
 
-            // Always inject fm_user_id once DB lookup provides a valid numeric identity.
-            $request->attributes->set('fm_user_id', $resolvedUserId);
+        $resolvedUserId = $this->resolveNumeric($row->user_id ?? null);
+        if ($resolvedUserId !== null) {
+            $request->attributes->set('fm_user_id', (string) $resolvedUserId);
+
+            if ($this->userExists($resolvedUserId)) {
+                $request->attributes->set('user_id', (string) $resolvedUserId);
+            }
         }
 
-        $existingUserId = $this->resolveExistingUserId($resolvedUserId);
-        if ($existingUserId !== '') {
-            $request->attributes->set('user_id', $existingUserId);
-        }
-
-        // 2) anon_id: always trust token-bound anon_id
-        $anonId = $this->resolveBestAnonId($row, $request);
-        if ($anonId !== '') {
-            if (strlen($anonId) > 128) {
-                return $this->unauthorizedResponse($request, 'anon_id_too_long');
-            }
-
+        $anonId = $this->resolveAnonId($row->anon_id ?? null);
+        if ($anonId !== null) {
             $request->attributes->set('anon_id', $anonId);
             $request->attributes->set('fm_anon_id', $anonId);
         }
 
-        $orgId = $this->resolveOrgId($row);
-        if ($orgId === null) {
-            $headerOrgId = trim((string) $request->header('X-FM-Org-Id', ''));
-            if ($headerOrgId === '') {
-                $headerOrgId = trim((string) $request->header('X-Org-Id', ''));
-            }
-            if ($headerOrgId === '') {
-                $headerOrgId = trim((string) $request->query('org_id', ''));
-            }
-            if ($headerOrgId !== '' && preg_match('/^\d+$/', $headerOrgId)) {
-                $orgId = (int) $headerOrgId;
-            }
-        }
+        $orgId = $this->resolveOrgId($request, $row);
+        $role = $this->resolveRole($row->role ?? null, $row->meta_json ?? null);
 
-        if ($orgId !== null) {
-            $request->attributes->set('fm_org_id', $orgId);
-        }
+        $request->attributes->set('fm_org_id', $orgId);
+        $request->attributes->set('org_id', $orgId);
+        $request->attributes->set('org_role', $role);
+
+        DB::table('fm_tokens')
+            ->where('token_hash', (string) ($row->token_hash ?? ''))
+            ->update([
+                'last_used_at' => now(),
+                'updated_at' => now(),
+            ]);
 
         $ctx = new OrgContext();
         $ctx->set(
-            $orgId ?? 0,
-            $existingUserId !== '' ? (int) $existingUserId : null,
-            null,
-            $anonId !== '' ? $anonId : null
+            $orgId,
+            $resolvedUserId,
+            $role,
+            $anonId
         );
         app()->instance(OrgContext::class, $ctx);
 
@@ -143,104 +104,105 @@ class FmTokenAuth
         return $next($request);
     }
 
-    private function resolveUserId(object $row): string
+    private function userExists(int $userId): bool
     {
-        // prefer: fm_tokens.user_id
-        if (property_exists($row, 'user_id')) {
-            $v = trim((string) ($row->user_id ?? ''));
-            if ($v !== '' && preg_match('/^\d+$/', $v)) return $v;
+        try {
+            return DB::table('users')->where('id', $userId)->exists();
+        } catch (\Throwable) {
+            return true;
         }
-
-        // optional alias
-        if (property_exists($row, 'fm_user_id')) {
-            $v = trim((string) ($row->fm_user_id ?? ''));
-            if ($v !== '' && preg_match('/^\d+$/', $v)) return $v;
-        }
-
-        // meta_json fallback (when tokens are issued by legacy services)
-        if (property_exists($row, 'meta_json')) {
-            $meta = $row->meta_json ?? null;
-            if (is_string($meta)) {
-                $decoded = json_decode($meta, true);
-                $meta = is_array($decoded) ? $decoded : null;
-            }
-            if (is_array($meta)) {
-                $v = trim((string) ($meta['user_id'] ?? $meta['fm_user_id'] ?? ''));
-                if ($v !== '' && preg_match('/^\d+$/', $v)) return $v;
-            }
-        }
-
-        // legacy candidates (keep numeric contract)
-        foreach (['uid', 'user_uid', 'user'] as $c) {
-            if (property_exists($row, $c)) {
-                $v = trim((string) ($row->{$c} ?? ''));
-                if ($v !== '' && preg_match('/^\d+$/', $v)) return $v;
-            }
-        }
-
-        return '';
     }
 
-    private function resolveExistingUserId(string $userId): string
+    private function resolveRole(mixed $roleCandidate, mixed $metaCandidate): string
     {
-        $candidate = trim($userId);
-        if ($candidate === '' || !preg_match('/^\d+$/', $candidate)) {
-            return '';
+        $role = trim((string) $roleCandidate);
+        if ($role !== '') {
+            return $role;
         }
 
-        if (!Schema::hasTable('users')) {
-            return $candidate;
+        $meta = $this->decodeMeta($metaCandidate);
+        $metaRole = trim((string) ($meta['role'] ?? ''));
+        if ($metaRole !== '') {
+            return $metaRole;
         }
 
-        $exists = DB::table('users')->where('id', (int) $candidate)->exists();
-        return $exists ? $candidate : '';
+        return 'public';
     }
 
-    private function resolveBestAnonId(object $row, Request $request): string
+    private function resolveOrgId(Request $request, object $row): int
     {
-        // ✅ 一律以 token 绑定的 anon_id 为准，避免 token + 伪造 anon_id 越权
-        $fromToken = '';
-        if (property_exists($row, 'anon_id')) {
-            $fromToken = trim((string) ($row->anon_id ?? ''));
+        $fromToken = $this->resolveNumeric($row->org_id ?? null);
+        if ($fromToken !== null) {
+            return $fromToken;
         }
 
-        if ($fromToken === '') return '';
+        $meta = $this->decodeMeta($row->meta_json ?? null);
+        $metaOrgId = $this->resolveNumeric($meta['org_id'] ?? null);
+        if ($metaOrgId !== null) {
+            return $metaOrgId;
+        }
 
-        // sanitize blacklist
-        $lower = mb_strtolower($fromToken, 'UTF-8');
+        $headerOrgId = trim((string) $request->header('X-FM-Org-Id', ''));
+        if ($headerOrgId === '') {
+            $headerOrgId = trim((string) $request->header('X-Org-Id', ''));
+        }
+        if ($headerOrgId === '') {
+            $headerOrgId = trim((string) $request->query('org_id', ''));
+        }
+
+        $headerOrg = $this->resolveNumeric($headerOrgId);
+
+        return $headerOrg ?? 0;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeMeta(mixed $meta): array
+    {
+        if (is_array($meta)) {
+            return $meta;
+        }
+
+        if (is_string($meta) && $meta !== '') {
+            $decoded = json_decode($meta, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    private function resolveNumeric(mixed $candidate): ?int
+    {
+        $raw = trim((string) $candidate);
+        if ($raw === '' || preg_match('/^\d+$/', $raw) !== 1) {
+            return null;
+        }
+
+        return (int) $raw;
+    }
+
+    private function resolveAnonId(mixed $candidate): ?string
+    {
+        $anonId = trim((string) $candidate);
+        if ($anonId === '') {
+            return null;
+        }
+
+        if (strlen($anonId) > 128) {
+            return null;
+        }
+
+        $lower = mb_strtolower($anonId, 'UTF-8');
         foreach (['todo', 'placeholder', 'fixme', 'tbd', '填这里'] as $bad) {
-            if ($bad !== '' && mb_strpos($lower, $bad) !== false) {
-                return '';
+            if (mb_strpos($lower, $bad) !== false) {
+                return null;
             }
         }
 
-        return $fromToken;
-    }
-
-    private function resolveOrgId(object $row): ?int
-    {
-        if (property_exists($row, 'org_id')) {
-            $raw = trim((string) ($row->org_id ?? ''));
-            if ($raw !== '' && preg_match('/^\d+$/', $raw)) {
-                return (int) $raw;
-            }
-        }
-
-        if (property_exists($row, 'meta_json')) {
-            $meta = $row->meta_json ?? null;
-            if (is_string($meta)) {
-                $decoded = json_decode($meta, true);
-                $meta = is_array($decoded) ? $decoded : null;
-            }
-            if (is_array($meta)) {
-                $raw = trim((string) ($meta['org_id'] ?? ''));
-                if ($raw !== '' && preg_match('/^\d+$/', $raw)) {
-                    return (int) $raw;
-                }
-            }
-        }
-
-        return null;
+        return $anonId;
     }
 
     private function unauthorizedResponse(Request $request, string $reason): Response
@@ -292,20 +254,26 @@ class FmTokenAuth
     {
         $routeAttemptId = $request->route('attempt_id');
         if (is_string($routeAttemptId) || is_numeric($routeAttemptId)) {
-            $val = trim((string) $routeAttemptId);
-            if ($val !== '') return $val;
+            $value = trim((string) $routeAttemptId);
+            if ($value !== '') {
+                return $value;
+            }
         }
 
         $routeId = $request->route('id');
         if (is_string($routeId) || is_numeric($routeId)) {
-            $val = trim((string) $routeId);
-            if ($val !== '') return $val;
+            $value = trim((string) $routeId);
+            if ($value !== '') {
+                return $value;
+            }
         }
 
         $bodyAttemptId = $request->input('attempt_id');
         if (is_string($bodyAttemptId) || is_numeric($bodyAttemptId)) {
-            $val = trim((string) $bodyAttemptId);
-            if ($val !== '') return $val;
+            $value = trim((string) $bodyAttemptId);
+            if ($value !== '') {
+                return $value;
+            }
         }
 
         return null;

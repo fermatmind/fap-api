@@ -63,7 +63,7 @@ class IngestionService
         }
         if (Schema::hasColumn('ingest_batches', 'auth_mode')) {
             $mode = (string) ($audit['auth_mode'] ?? '');
-            $insert['auth_mode'] = in_array($mode, ['sanctum', 'signature'], true) ? $mode : null;
+            $insert['auth_mode'] = in_array($mode, ['sanctum', 'signature', 'ingest_key'], true) ? $mode : null;
         }
         if (Schema::hasColumn('ingest_batches', 'signature_ok')) {
             $insert['signature_ok'] = (bool) ($audit['signature_ok'] ?? false);

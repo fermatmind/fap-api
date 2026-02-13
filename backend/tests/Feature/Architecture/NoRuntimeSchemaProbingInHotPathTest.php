@@ -13,10 +13,11 @@ final class NoRuntimeSchemaProbingInHotPathTest extends TestCase
     public function test_hot_path_has_no_runtime_schema_probing(): void
     {
         $scanRoots = [
-            app_path('Services/Commerce'),
-            app_path('Services/Report'),
-            app_path('Internal/Commerce'),
-            app_path('Http/Controllers/API/V0_3'),
+            app_path('Http/Middleware'),
+            app_path('Services/Auth'),
+            app_path('Services/Attempts'),
+            app_path('Services/Payments'),
+            app_path('Services/Account'),
         ];
 
         $forbiddenTokens = [

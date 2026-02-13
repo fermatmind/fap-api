@@ -7,7 +7,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Response;
 
 final class IntegrationsIngestAuth
@@ -15,7 +14,7 @@ final class IntegrationsIngestAuth
     public function handle(Request $request, Closure $next): Response
     {
         $provider = strtolower(trim((string) $request->route('provider', '')));
-        if (! $this->isAllowedProvider($provider)) {
+        if (!$this->isAllowedProvider($provider)) {
             return $this->unauthorized('unsupported_provider');
         }
 
@@ -23,7 +22,7 @@ final class IntegrationsIngestAuth
             return $this->handleBearer($request, $next);
         }
 
-        return $this->handleSignedWebhook($request, $next, $provider);
+        return $this->handleIngestKey($request, $next, $provider);
     }
 
     private function hasBearerAuthorization(Request $request): bool
@@ -57,60 +56,37 @@ final class IntegrationsIngestAuth
             }
         );
 
-        if (! $passed) {
+        if (!$passed) {
             return $this->unauthorized('token_missing_or_invalid');
         }
 
         return $response;
     }
 
-    private function handleSignedWebhook(Request $request, Closure $next, string $provider): Response
+    private function handleIngestKey(Request $request, Closure $next, string $provider): Response
     {
-        $timestamp = $this->extractTimestamp($request);
-        $signature = strtolower(trim((string) $request->header('X-Webhook-Signature', '')));
-        $eventId = trim((string) $request->header('X-Webhook-Event-Id', ''));
-
-        if ($timestamp === null || $signature === '' || $eventId === '') {
-            return $this->unauthorized('missing_signature_headers');
-        }
-        if (preg_match('/^[a-f0-9]{64}$/', $signature) !== 1) {
-            return $this->unauthorized('invalid_signature_format');
+        $ingestKey = trim((string) $request->header('X-Ingest-Key', ''));
+        if ($ingestKey === '') {
+            return $this->unauthorized('missing_ingest_key');
         }
 
-        $tolerance = $this->resolveWebhookTolerance($provider);
-        if (abs(time() - $timestamp) > $tolerance) {
-            return $this->unauthorized('timestamp_out_of_tolerance');
+        $eventId = trim((string) $request->header('X-Ingest-Event-Id', ''));
+        if ($eventId === '') {
+            return $this->unauthorized('missing_event_id');
         }
 
-        $secret = trim((string) config("services.integrations.providers.{$provider}.webhook_secret", ''));
-        if ($secret === '') {
-            return $this->unauthorized('webhook_secret_missing');
-        }
+        $timestamp = $this->resolveIngestTimestamp($request);
+        $keyHash = hash('sha256', $ingestKey);
 
-        $rawBody = (string) $request->getContent();
-        $expected = hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);
-        if (! hash_equals($expected, $signature)) {
-            return $this->unauthorized('invalid_signature');
-        }
-
-        $externalUserId = trim((string) data_get($request->all(), 'external_user_id', ''));
-        if ($externalUserId === '') {
-            return $this->unauthorized('unauthorized_identity_mapping');
-        }
-
-        if (! Schema::hasTable('integrations')) {
-            return $this->unauthorized('unauthorized_identity_mapping');
-        }
-
-        $resolved = DB::transaction(function () use ($provider, $externalUserId, $eventId, $timestamp): array {
+        $resolved = DB::transaction(function () use ($provider, $keyHash, $eventId, $timestamp): array {
             $row = DB::table('integrations')
                 ->where('provider', $provider)
-                ->where('external_user_id', $externalUserId)
+                ->where('ingest_key_hash', $keyHash)
                 ->lockForUpdate()
                 ->first();
 
-            if (! $row || ! is_numeric($row->user_id ?? null)) {
-                return ['ok' => false, 'reason' => 'unauthorized_identity_mapping'];
+            if (!$row || !is_numeric($row->user_id ?? null)) {
+                return ['ok' => false, 'reason' => 'invalid_ingest_key'];
             }
 
             $lastEventId = trim((string) ($row->webhook_last_event_id ?? ''));
@@ -125,37 +101,31 @@ final class IntegrationsIngestAuth
                 return ['ok' => false, 'reason' => 'replay_detected'];
             }
 
-            $updates = [];
-            if (Schema::hasColumn('integrations', 'webhook_last_event_id')) {
-                $updates['webhook_last_event_id'] = $eventId;
-            }
-            if (Schema::hasColumn('integrations', 'webhook_last_timestamp')) {
-                $updates['webhook_last_timestamp'] = $timestamp;
-            }
-            if (Schema::hasColumn('integrations', 'webhook_last_received_at')) {
-                $updates['webhook_last_received_at'] = now();
-            }
-            if (Schema::hasColumn('integrations', 'updated_at')) {
-                $updates['updated_at'] = now();
+            $updateQuery = DB::table('integrations')
+                ->where('provider', $provider)
+                ->where('ingest_key_hash', $keyHash);
+
+            if (is_numeric($row->user_id ?? null)) {
+                $updateQuery->where('user_id', (int) $row->user_id);
             }
 
-            if ($updates !== []) {
-                DB::table('integrations')
-                    ->where('provider', $provider)
-                    ->where('external_user_id', $externalUserId)
-                    ->update($updates);
-            }
+            $updateQuery->update([
+                'webhook_last_event_id' => $eventId,
+                'webhook_last_timestamp' => $timestamp,
+                'webhook_last_received_at' => now(),
+                'updated_at' => now(),
+            ]);
 
             return ['ok' => true, 'user_id' => (string) ((int) $row->user_id)];
         });
 
-        if (! (bool) ($resolved['ok'] ?? false)) {
-            return $this->unauthorized((string) ($resolved['reason'] ?? 'unauthorized_identity_mapping'));
+        if (!($resolved['ok'] ?? false)) {
+            return $this->unauthorized((string) ($resolved['reason'] ?? 'invalid_ingest_key'));
         }
 
         $userId = (string) ($resolved['user_id'] ?? '');
         if ($userId === '') {
-            return $this->unauthorized('unauthorized_identity_mapping');
+            return $this->unauthorized('invalid_ingest_key');
         }
 
         $request->attributes->set('fm_user_id', $userId);
@@ -165,6 +135,22 @@ final class IntegrationsIngestAuth
         $request->attributes->set('integration_actor_user_id', null);
 
         return $next($request);
+    }
+
+    private function resolveIngestTimestamp(Request $request): int
+    {
+        $raw = trim((string) $request->header('X-Ingest-Timestamp', ''));
+        if ($raw !== '' && preg_match('/^\d{10,13}$/', $raw) === 1) {
+            $timestamp = (int) $raw;
+            if (strlen($raw) === 13) {
+                $timestamp = (int) floor($timestamp / 1000);
+            }
+            if ($timestamp > 0) {
+                return $timestamp;
+            }
+        }
+
+        return time();
     }
 
     private function resolveRequestUserId(Request $request): ?string
@@ -179,36 +165,6 @@ final class IntegrationsIngestAuth
         return null;
     }
 
-    private function resolveWebhookTolerance(string $provider): int
-    {
-        $global = (int) config('services.integrations.webhook_tolerance_seconds', 300);
-        if ($global <= 0) {
-            $global = 300;
-        }
-
-        $providerTolerance = (int) config(
-            "services.integrations.providers.{$provider}.webhook_tolerance_seconds",
-            $global
-        );
-
-        return $providerTolerance > 0 ? $providerTolerance : $global;
-    }
-
-    private function extractTimestamp(Request $request): ?int
-    {
-        $raw = trim((string) $request->header('X-Webhook-Timestamp', ''));
-        if ($raw === '' || preg_match('/^\d{10,13}$/', $raw) !== 1) {
-            return null;
-        }
-
-        $timestamp = (int) $raw;
-        if (strlen($raw) === 13) {
-            $timestamp = (int) floor($timestamp / 1000);
-        }
-
-        return $timestamp > 0 ? $timestamp : null;
-    }
-
     private function isAllowedProvider(string $provider): bool
     {
         $allowed = (array) config('integrations.allowed_providers', [
@@ -220,7 +176,7 @@ final class IntegrationsIngestAuth
         ]);
 
         $allowed = array_values(array_filter(array_map(
-            static fn ($v) => strtolower(trim((string) $v)),
+            static fn ($value) => strtolower(trim((string) $value)),
             $allowed
         )));
 

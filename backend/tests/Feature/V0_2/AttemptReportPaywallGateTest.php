@@ -227,6 +227,7 @@ final class AttemptReportPaywallGateTest extends TestCase
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => $anonId,
             'user_id' => $userId,
             'expires_at' => now()->addHour(),

@@ -52,6 +52,7 @@ class AttemptSubmitIdempotencyTest extends TestCase
         $token = 'fm_' . (string) Str::uuid();
         $tokenRow = [
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => 'anon_' . $userId,
             'user_id' => $userId,
             'expires_at' => now()->addDays(1),

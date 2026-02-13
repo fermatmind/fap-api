@@ -81,4 +81,15 @@ while IFS= read -r line; do
   grep -Fx -- "${line}" .dockerignore >/dev/null || fail ".dockerignore missing: ${line}"
 done <<< "${required_dockerignore_lines}"
 
+schema_probe_hits="$(grep -R -nE 'Schema::hasTable|Schema::hasColumn' \
+  backend/app/Http/Middleware \
+  backend/app/Services/Auth \
+  backend/app/Services/Attempts \
+  backend/app/Services/Payments \
+  backend/app/Services/Account || true)"
+if [ -n "${schema_probe_hits}" ]; then
+  echo "${schema_probe_hits}" >&2
+  fail "runtime schema probing found in hot paths"
+fi
+
 echo "CAE_GATE_PASS"

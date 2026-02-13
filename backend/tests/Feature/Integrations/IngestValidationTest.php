@@ -105,6 +105,7 @@ final class IngestValidationTest extends TestCase
         $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'user_id' => $userId,
             'anon_id' => 'ingest-validation-anon-'.$userId,
             'created_at' => now(),
