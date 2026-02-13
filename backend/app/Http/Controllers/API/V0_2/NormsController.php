@@ -73,12 +73,12 @@ class NormsController extends Controller
 
     private function isNormsEnabled(): bool
     {
-        return (int) env('NORMS_ENABLED', 0) === 1;
+        return (int) \App\Support\RuntimeConfig::value('NORMS_ENABLED', 0) === 1;
     }
 
     private function resolveVersion(string $packId): ?object
     {
-        $pin = trim((string) env('NORMS_VERSION_PIN', ''));
+        $pin = trim((string) \App\Support\RuntimeConfig::value('NORMS_VERSION_PIN', ''));
         $query = DB::table('norms_versions')->where('pack_id', $packId);
 
         if ($pin !== '') {

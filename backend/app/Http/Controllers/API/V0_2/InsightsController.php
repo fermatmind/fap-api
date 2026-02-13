@@ -26,7 +26,7 @@ class InsightsController extends Controller
             ], 503);
         }
 
-        if (!Schema::hasTable('ai_insights')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ai_insights')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'TABLE_MISSING',
@@ -131,7 +131,7 @@ class InsightsController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        if (!Schema::hasTable('ai_insights')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ai_insights')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'TABLE_MISSING',
@@ -175,7 +175,7 @@ class InsightsController extends Controller
      */
     public function feedback(Request $request, string $id)
     {
-        if (!Schema::hasTable('ai_insights') || !Schema::hasTable('ai_insight_feedback')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ai_insights') || !\App\Support\SchemaBaseline::hasTable('ai_insight_feedback')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'TABLE_MISSING',

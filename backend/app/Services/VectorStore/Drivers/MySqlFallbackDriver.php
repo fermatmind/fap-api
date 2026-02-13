@@ -16,7 +16,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
 
     public function health(): array
     {
-        if (!Schema::hasTable('embeddings')) {
+        if (!\App\Support\SchemaBaseline::hasTable('embeddings')) {
             return [
                 'ok' => false,
                 'error' => 'embeddings_table_missing',
@@ -40,7 +40,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
 
     public function upsert(string $namespace, array $items): array
     {
-        if (!Schema::hasTable('embeddings')) {
+        if (!\App\Support\SchemaBaseline::hasTable('embeddings')) {
             return [
                 'ok' => false,
                 'error' => 'embeddings_table_missing',
@@ -85,7 +85,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
 
     public function query(string $namespace, array $vector, int $topK, array $filters = []): array
     {
-        if (!Schema::hasTable('embeddings')) {
+        if (!\App\Support\SchemaBaseline::hasTable('embeddings')) {
             return [
                 'ok' => false,
                 'error' => 'embeddings_table_missing',
@@ -147,7 +147,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
 
     public function delete(string $namespace, array $ids): array
     {
-        if (!Schema::hasTable('embeddings')) {
+        if (!\App\Support\SchemaBaseline::hasTable('embeddings')) {
             return [
                 'ok' => false,
                 'error' => 'embeddings_table_missing',

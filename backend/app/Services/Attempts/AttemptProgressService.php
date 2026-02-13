@@ -410,7 +410,7 @@ class AttemptProgressService
 
         try {
             return Carbon::parse($value);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return null;
         }
     }
@@ -422,7 +422,7 @@ class AttemptProgressService
         }
         try {
             return Carbon::parse($value)->toISOString();
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return null;
         }
     }

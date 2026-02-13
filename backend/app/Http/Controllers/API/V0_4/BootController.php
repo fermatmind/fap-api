@@ -50,7 +50,7 @@ class BootController extends Controller
             'experiments' => [
                 'boot_experiments' => [],
             ],
-            'feature_flags_version' => (string) env('FAP_FEATURE_FLAGS_VERSION', 'v0.4'),
+            'feature_flags_version' => (string) \App\Support\RuntimeConfig::value('FAP_FEATURE_FLAGS_VERSION', 'v0.4'),
             'policy_versions' => is_array($regionConfig['policy_versions'] ?? null) ? $regionConfig['policy_versions'] : [],
         ];
 
@@ -87,7 +87,7 @@ class BootController extends Controller
 
         $appUrl = trim((string) config('app.url', ''));
         if ($appUrl === '') {
-            $appUrl = trim((string) env('APP_URL', ''));
+            $appUrl = trim((string) \App\Support\RuntimeConfig::value('APP_URL', ''));
         }
         if ($appUrl === '') {
             $appUrl = 'http://localhost';

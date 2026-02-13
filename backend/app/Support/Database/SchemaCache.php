@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Support\Database;
 
-use Illuminate\Support\Facades\Schema;
-
 final class SchemaCache
 {
     /**
@@ -21,7 +19,7 @@ final class SchemaCache
     public static function hasTable(string $table): bool
     {
         if (!array_key_exists($table, self::$tableCache)) {
-            self::$tableCache[$table] = Schema::hasTable($table);
+            self::$tableCache[$table] = \App\Support\SchemaBaseline::hasTable($table);
         }
 
         return self::$tableCache[$table];
@@ -31,7 +29,7 @@ final class SchemaCache
     {
         $key = $table . '.' . $column;
         if (!array_key_exists($key, self::$columnCache)) {
-            self::$columnCache[$key] = Schema::hasColumn($table, $column);
+            self::$columnCache[$key] = \App\Support\SchemaBaseline::hasColumn($table, $column);
         }
 
         return self::$columnCache[$key];
@@ -43,4 +41,3 @@ final class SchemaCache
         self::$columnCache = [];
     }
 }
-

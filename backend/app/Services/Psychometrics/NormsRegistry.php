@@ -66,7 +66,7 @@ class NormsRegistry
 
         $items = [];
 
-        if (Schema::hasTable('scale_norms_versions')) {
+        if (\App\Support\SchemaBaseline::hasTable('scale_norms_versions')) {
             $query = DB::table('scale_norms_versions')->where('scale_code', $scaleCode);
             $rows = $query->orderBy('created_at', 'desc')->get();
 
@@ -196,7 +196,7 @@ class NormsRegistry
 
     private function resolveLatestDbVersion(string $scaleCode, string $region, string $locale, string $normId): ?string
     {
-        if (!Schema::hasTable('scale_norms_versions')) {
+        if (!\App\Support\SchemaBaseline::hasTable('scale_norms_versions')) {
             return null;
         }
 

@@ -18,7 +18,7 @@ class IngestionService
         array $audit = []
     ): array
     {
-        if (!Schema::hasTable('ingest_batches')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ingest_batches')) {
             return [
                 'ok' => false,
                 'error' => 'MISSING_TABLE',
@@ -57,18 +57,18 @@ class IngestionService
             'created_at' => $now,
         ];
 
-        if (Schema::hasColumn('ingest_batches', 'actor_user_id')) {
+        if (\App\Support\SchemaBaseline::hasColumn('ingest_batches', 'actor_user_id')) {
             $actor = $audit['actor_user_id'] ?? null;
             $insert['actor_user_id'] = is_numeric($actor) ? (int) $actor : null;
         }
-        if (Schema::hasColumn('ingest_batches', 'auth_mode')) {
+        if (\App\Support\SchemaBaseline::hasColumn('ingest_batches', 'auth_mode')) {
             $mode = (string) ($audit['auth_mode'] ?? '');
             $insert['auth_mode'] = in_array($mode, ['sanctum', 'signature', 'ingest_key'], true) ? $mode : null;
         }
-        if (Schema::hasColumn('ingest_batches', 'signature_ok')) {
+        if (\App\Support\SchemaBaseline::hasColumn('ingest_batches', 'signature_ok')) {
             $insert['signature_ok'] = (bool) ($audit['signature_ok'] ?? false);
         }
-        if (Schema::hasColumn('ingest_batches', 'source_ip')) {
+        if (\App\Support\SchemaBaseline::hasColumn('ingest_batches', 'source_ip')) {
             $ip = trim((string) ($audit['source_ip'] ?? ''));
             $insert['source_ip'] = $ip !== '' ? substr($ip, 0, 64) : null;
         }
@@ -114,7 +114,7 @@ class IngestionService
             $payloadHash = IdempotencyKey::hashPayload($value);
             $confidence = (float) ($sample['confidence'] ?? 1.0);
 
-            if ($domain === 'sleep' && Schema::hasTable('sleep_samples')) {
+            if ($domain === 'sleep' && \App\Support\SchemaBaseline::hasTable('sleep_samples')) {
                 DB::table('sleep_samples')->insert([
                     'user_id' => $userId !== null ? (int) $userId : null,
                     'source' => $source !== '' ? $source : 'ingestion',
@@ -130,7 +130,7 @@ class IngestionService
                 continue;
             }
 
-            if ($domain === 'screen_time' && Schema::hasTable('screen_time_samples')) {
+            if ($domain === 'screen_time' && \App\Support\SchemaBaseline::hasTable('screen_time_samples')) {
                 DB::table('screen_time_samples')->insert([
                     'user_id' => $userId !== null ? (int) $userId : null,
                     'source' => $source !== '' ? $source : 'ingestion',
@@ -146,7 +146,7 @@ class IngestionService
                 continue;
             }
 
-            if (Schema::hasTable('health_samples')) {
+            if (\App\Support\SchemaBaseline::hasTable('health_samples')) {
                 DB::table('health_samples')->insert([
                     'user_id' => $userId !== null ? (int) $userId : null,
                     'source' => $source !== '' ? $source : 'ingestion',

@@ -6,7 +6,6 @@ use App\Models\Event;
 use App\Services\Analytics\EventPayloadLimiter;
 use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Analytics\EventNormalizer;
-use App\Support\Database\SchemaCache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -39,14 +38,6 @@ class EventController extends Controller
             }
 
             return $token;
-        }
-
-        if (!SchemaCache::hasTable('fm_tokens') || !SchemaCache::hasColumn('fm_tokens', 'token')) {
-            abort(response()->json([
-                'ok' => false,
-                'error' => 'unauthorized',
-                'message' => 'Token store unavailable.',
-            ], 401));
         }
 
         $exists = DB::table('fm_tokens')->where('token', $token)->exists();
@@ -172,21 +163,19 @@ class EventController extends Controller
             ? Carbon::parse($data['occurred_at'])
             : now());
 
-        if (SchemaCache::hasColumn('events', 'experiments_json')) {
-            $orgId = $this->resolveOrgId($request);
-            $anonId = $columns['anon_id'] ?? $data['anon_id'] ?? null;
-            $anonId = is_string($anonId) || is_numeric($anonId) ? trim((string) $anonId) : null;
-            $userId = $request->attributes->get('fm_user_id');
-            if (!is_numeric($userId)) {
-                $userId = $request->attributes->get('user_id');
-            }
-            $userId = is_numeric($userId) ? (int) $userId : null;
-
-            $bootExperiments = $this->extractBootExperiments($request, $data);
-            $assigner = app(ExperimentAssigner::class);
-            $assignments = $assigner->assignActive($orgId, $anonId, $userId);
-            $columns['experiments_json'] = $assigner->mergeExperiments($bootExperiments, $assignments);
+        $orgId = $this->resolveOrgId($request);
+        $anonId = $columns['anon_id'] ?? $data['anon_id'] ?? null;
+        $anonId = is_string($anonId) || is_numeric($anonId) ? trim((string) $anonId) : null;
+        $userId = $request->attributes->get('fm_user_id');
+        if (!is_numeric($userId)) {
+            $userId = $request->attributes->get('user_id');
         }
+        $userId = is_numeric($userId) ? (int) $userId : null;
+
+        $bootExperiments = $this->extractBootExperiments($request, $data);
+        $assigner = app(ExperimentAssigner::class);
+        $assignments = $assigner->assignActive($orgId, $anonId, $userId);
+        $columns['experiments_json'] = $assigner->mergeExperiments($bootExperiments, $assignments);
 
         $event = Event::create($columns);
 

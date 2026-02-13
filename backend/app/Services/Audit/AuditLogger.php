@@ -25,7 +25,7 @@ class AuditLogger
         ?string $targetId = null,
         ?array $meta = null
     ): void {
-        if (!Schema::hasTable('audit_logs')) {
+        if (!\App\Support\SchemaBaseline::hasTable('audit_logs')) {
             return;
         }
 

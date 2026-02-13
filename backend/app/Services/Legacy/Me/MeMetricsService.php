@@ -22,9 +22,9 @@ class MeMetricsService
     {
         if (self::$tableCache === null) {
             self::$tableCache = [
-                'sleep_samples' => Schema::hasTable('sleep_samples'),
-                'health_samples' => Schema::hasTable('health_samples'),
-                'screen_time_samples' => Schema::hasTable('screen_time_samples'),
+                'sleep_samples' => \App\Support\SchemaBaseline::hasTable('sleep_samples'),
+                'health_samples' => \App\Support\SchemaBaseline::hasTable('health_samples'),
+                'screen_time_samples' => \App\Support\SchemaBaseline::hasTable('screen_time_samples'),
             ];
         }
 

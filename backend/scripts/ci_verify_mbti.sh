@@ -55,6 +55,7 @@ php artisan key:generate --force >/dev/null 2>&1 || true
 
 # Prepare sqlite + seed scales registry/slugs
 bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+php artisan fap:schema:verify
 
 # Ensure MBTI commercial benefit codes exist for v0.2 report/share entitlement gate.
 BACKEND_DIR="$BACKEND_DIR" php -r '

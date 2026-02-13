@@ -23,7 +23,7 @@ final class MigrationObservabilityService
     {
         $steps = max(1, min($steps, 20));
 
-        if (!Schema::hasTable('migrations')) {
+        if (!\App\Support\SchemaBaseline::hasTable('migrations')) {
             return [
                 'steps' => $steps,
                 'items' => [],
@@ -53,7 +53,7 @@ final class MigrationObservabilityService
 
     private function migrationSummary(int $limit): array
     {
-        if (!Schema::hasTable('migrations')) {
+        if (!\App\Support\SchemaBaseline::hasTable('migrations')) {
             return [
                 'current_batch' => 0,
                 'total' => 0,
@@ -87,7 +87,7 @@ final class MigrationObservabilityService
 
     private function indexAuditSummary(int $limit): array
     {
-        if (!Schema::hasTable('migration_index_audits')) {
+        if (!\App\Support\SchemaBaseline::hasTable('migration_index_audits')) {
             return [
                 'total' => 0,
                 'by_action' => [],

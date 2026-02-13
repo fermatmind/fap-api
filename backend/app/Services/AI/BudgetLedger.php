@@ -150,7 +150,7 @@ final class BudgetLedger
 
         $failOpen = (bool) config('ai.fail_open_when_redis_down', false);
         if (!$failOpen) {
-            $env = getenv('AI_FAIL_OPEN_WHEN_REDIS_DOWN');
+            $env = \App\Support\RuntimeConfig::raw('AI_FAIL_OPEN_WHEN_REDIS_DOWN');
             if ($env !== false && $env !== '') {
                 $failOpen = filter_var($env, FILTER_VALIDATE_BOOLEAN);
             }

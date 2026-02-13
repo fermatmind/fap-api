@@ -231,12 +231,12 @@ class PaymentsController extends Controller
 
     private function paymentsEnabled(): bool
     {
-        return $this->boolish(env('PAYMENTS_ENABLED', '0'));
+        return (bool) config('fap.payments.enabled', true) === true;
     }
 
     private function webhookEnabled(): bool
     {
-        return $this->boolish(env('WEBHOOK_ENABLED', '0'));
+        return (bool) config('fap.payments.webhooks_enabled', true) === true;
     }
 
     private function devModeAllowed(): bool
@@ -249,7 +249,7 @@ class PaymentsController extends Controller
             return true;
         }
 
-        return $this->boolish(env('PAYMENTS_DEV_MODE', '0'));
+        return $this->boolish(\App\Support\RuntimeConfig::value('PAYMENTS_DEV_MODE', '0'));
     }
 
     private function paymentsDisabledResponse()

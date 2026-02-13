@@ -194,7 +194,7 @@ class PhoneOtpService
      */
     private function devCode(): ?string
     {
-        $v = (string) env('FAP_OTP_DEV_CODE', '');
+        $v = (string) \App\Support\RuntimeConfig::value('FAP_OTP_DEV_CODE', '');
         $v = trim($v);
         if ($v === '') {
             return null;

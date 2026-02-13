@@ -513,7 +513,7 @@ class LegacyReportService
 
     private function resolveReportBenefitCode(Attempt $attempt, Request $request): string
     {
-        if (!Schema::hasTable('scales_registry')) {
+        if (!\App\Support\SchemaBaseline::hasTable('scales_registry')) {
             return '';
         }
 

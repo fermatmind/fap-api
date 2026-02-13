@@ -300,8 +300,8 @@ class LegacyMbtiAttemptLifecycleService
             );
         }
 
-        $canStoreJson = Schema::hasColumn('attempts', 'answers_json');
-        $canStorePath = Schema::hasColumn('attempts', 'answers_storage_path');
+        $canStoreJson = \App\Support\SchemaBaseline::hasColumn('attempts', 'answers_json');
+        $canStorePath = \App\Support\SchemaBaseline::hasColumn('attempts', 'answers_storage_path');
 
         if (! $canStoreJson && (! $storeToStorage || ! $canStorePath)) {
             throw new ApiProblemException(
@@ -371,50 +371,50 @@ class LegacyMbtiAttemptLifecycleService
                 'started_at' => $existingAttempt?->started_at ?? now(),
                 'submitted_at' => now(),
             ];
-            if (Schema::hasColumn('attempts', 'org_id')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'org_id')) {
                 $attemptData['org_id'] = $existingAttempt?->org_id ?? $this->orgId();
             }
 
-            if (Schema::hasColumn('attempts', 'answers_json')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'answers_json')) {
                 $attemptData['answers_json'] = $answers;
             }
-            if (Schema::hasColumn('attempts', 'answers_hash')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'answers_hash')) {
                 $attemptData['answers_hash'] = $answersHash;
             }
-            if (Schema::hasColumn('attempts', 'answers_storage_path')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'answers_storage_path')) {
                 $attemptData['answers_storage_path'] = $answersStoragePath;
             }
-            if (Schema::hasColumn('attempts', 'region')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'region')) {
                 $attemptData['region'] = $payload['region'] ?? ($existingAttempt?->region ?? 'CN_MAINLAND');
             }
-            if (Schema::hasColumn('attempts', 'locale')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'locale')) {
                 $attemptData['locale'] = $payload['locale'] ?? ($existingAttempt?->locale ?? 'zh-CN');
             }
-            if (Schema::hasColumn('attempts', 'pack_id')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'pack_id')) {
                 $pack = $psychometrics['pack'] ?? null;
                 $attemptData['pack_id'] = is_array($pack) ? ($pack['pack_id'] ?? null) : null;
             }
-            if (Schema::hasColumn('attempts', 'dir_version')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'dir_version')) {
                 $pack = $psychometrics['pack'] ?? null;
                 $attemptData['dir_version'] = is_array($pack) ? ($pack['dir_version'] ?? null) : null;
             }
-            if (Schema::hasColumn('attempts', 'scoring_spec_version')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'scoring_spec_version')) {
                 $scoring = $psychometrics['scoring'] ?? null;
                 $attemptData['scoring_spec_version'] = is_array($scoring) ? ($scoring['spec_version'] ?? null) : null;
             }
-            if (Schema::hasColumn('attempts', 'norm_version')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'norm_version')) {
                 $norm = $psychometrics['norm'] ?? null;
                 $attemptData['norm_version'] = is_array($norm) ? ($norm['version'] ?? null) : null;
             }
-            if (Schema::hasColumn('attempts', 'calculation_snapshot_json')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'calculation_snapshot_json')) {
                 $attemptData['calculation_snapshot_json'] = $psychometrics;
             }
 
             // ✅✅✅ 关键：把“结果”写进 attempts（给 /attempts/{id}/result 主路径用）
-            if (Schema::hasColumn('attempts', 'type_code')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'type_code')) {
                 $attemptData['type_code'] = $typeCode;
             }
-            if (Schema::hasColumn('attempts', 'result_json')) {
+            if (\App\Support\SchemaBaseline::hasColumn('attempts', 'result_json')) {
                 $attemptData['result_json'] = [
                     'attempt_id' => $attemptId,
                     'scale_code' => $payload['scale_code'],
@@ -440,7 +440,7 @@ class LegacyMbtiAttemptLifecycleService
                 $attempt = Attempt::create($attemptData);
             }
 
-            if (Schema::hasTable('attempt_quality')) {
+            if (\App\Support\SchemaBaseline::hasTable('attempt_quality')) {
                 $quality = $psychometrics['quality'] ?? null;
                 if (is_array($quality)) {
                     $checks = $quality['checks'] ?? null;
@@ -471,22 +471,22 @@ class LegacyMbtiAttemptLifecycleService
                 'computed_at' => now(),
             ];
 
-            if (Schema::hasColumn('results', 'scores_pct')) {
+            if (\App\Support\SchemaBaseline::hasColumn('results', 'scores_pct')) {
                 $resultBase['scores_pct'] = $scoresPct;
             }
-            if (Schema::hasColumn('results', 'org_id')) {
+            if (\App\Support\SchemaBaseline::hasColumn('results', 'org_id')) {
                 $resultBase['org_id'] = $this->orgId();
             }
-            if (Schema::hasColumn('results', 'axis_states')) {
+            if (\App\Support\SchemaBaseline::hasColumn('results', 'axis_states')) {
                 $resultBase['axis_states'] = $axisStates;
             }
-            if (Schema::hasColumn('results', 'profile_version')) {
+            if (\App\Support\SchemaBaseline::hasColumn('results', 'profile_version')) {
                 $resultBase['profile_version'] = $profileVersion;
             }
-            if (Schema::hasColumn('results', 'content_package_version')) {
+            if (\App\Support\SchemaBaseline::hasColumn('results', 'content_package_version')) {
                 $resultBase['content_package_version'] = $contentPackageVersion;
             }
-            if (Schema::hasColumn('results', 'scoring_spec_version')) {
+            if (\App\Support\SchemaBaseline::hasColumn('results', 'scoring_spec_version')) {
                 $scoring = $psychometrics['scoring'] ?? null;
                 $resultBase['scoring_spec_version'] = is_array($scoring) ? ($scoring['spec_version'] ?? null) : null;
             }

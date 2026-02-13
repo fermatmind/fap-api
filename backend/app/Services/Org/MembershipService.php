@@ -11,7 +11,7 @@ final class MembershipService
 
     public function getRole(int $orgId, int $userId): ?string
     {
-        if (!Schema::hasTable('organization_members')) {
+        if (!\App\Support\SchemaBaseline::hasTable('organization_members')) {
             return null;
         }
 

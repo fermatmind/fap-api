@@ -438,7 +438,7 @@ if (!empty($matches)) {
     }
 }
 
-if ($debugPerRule || (bool) env('FAP_OVR_TRACE', false)) {
+if ($debugPerRule || (bool) \App\Support\RuntimeConfig::value('FAP_OVR_TRACE', false)) {
     Log::info('[OVR] rule_applied', [
         'id' => $rule['id'] ?? null,
         'target' => $context['target'] ?? null,
@@ -501,7 +501,7 @@ foreach ($everIds as $id) {
     }
 }
 
-        $maxItems = (int) env('RE_EXPLAIN_ITEMS_MAX', 60);
+        $maxItems = (int) \App\Support\RuntimeConfig::value('RE_EXPLAIN_ITEMS_MAX', 60);
         if ($maxItems < 0) $maxItems = 0;
 
         $payloadExplain = [
@@ -1502,10 +1502,10 @@ private function deepMerge(array $base, array $patch): array
     if ((bool)($ctx['overrides_debug'] ?? false)) return true;
 
     // ✅ 你现在验证时已经在用 RE_EXPLAIN=1，就复用它
-    if ((bool) env('RE_EXPLAIN', false)) return true;
+    if ((bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false)) return true;
 
     // 也允许单独开关
-    if ((bool) env('OVR_EXPLAIN', false)) return true;
+    if ((bool) \App\Support\RuntimeConfig::value('OVR_EXPLAIN', false)) return true;
 
     return false;
 }

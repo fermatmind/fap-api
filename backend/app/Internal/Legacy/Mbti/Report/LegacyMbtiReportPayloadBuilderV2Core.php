@@ -592,7 +592,7 @@ private function buildBorderlineNote(array $scoresPct, string $contentPackageVer
  * - 走与你 loadReportAssetItems 同一套多路径兜底
  * - 返回整个 JSON array（不做 items 结构重建）
  *
- * ✅ config-cache 安全：不再直接读 env()
+ * ✅ config-cache 安全：不再直接读 \App\Support\RuntimeConfig::value()
  */
 private function loadReportAssetJson(string $contentPackageVersion, string $filename): array
 {

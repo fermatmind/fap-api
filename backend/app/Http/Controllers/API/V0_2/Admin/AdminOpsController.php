@@ -18,7 +18,7 @@ class AdminOpsController extends Controller
     {
         $this->assertPermission(PermissionNames::ADMIN_OPS_READ);
 
-        if (!Schema::hasTable('ops_healthz_snapshots')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ops_healthz_snapshots')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'TABLE_MISSING',

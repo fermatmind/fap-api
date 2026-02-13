@@ -220,6 +220,8 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
 
         putenv('FAP_FORBID_STORE_ASSET_SCAN=1');
         putenv('FAP_FORBID_LEGACY_CTX_LOADER=1');
+        config()->set('fap.runtime.FAP_FORBID_STORE_ASSET_SCAN', '1');
+        config()->set('fap.runtime.FAP_FORBID_LEGACY_CTX_LOADER', '1');
 
         try {
             $this->expectException(\RuntimeException::class);
@@ -230,6 +232,8 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         } finally {
             putenv('FAP_FORBID_STORE_ASSET_SCAN');
             putenv('FAP_FORBID_LEGACY_CTX_LOADER');
+            config()->set('fap.runtime.FAP_FORBID_STORE_ASSET_SCAN', null);
+            config()->set('fap.runtime.FAP_FORBID_LEGACY_CTX_LOADER', null);
             $this->rmDir($tmpRoot);
         }
     }

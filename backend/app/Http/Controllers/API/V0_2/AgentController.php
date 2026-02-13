@@ -22,7 +22,7 @@ class AgentController extends Controller
             return $this->userIdError();
         }
 
-        if (!Schema::hasTable('user_agent_settings')) {
+        if (!\App\Support\SchemaBaseline::hasTable('user_agent_settings')) {
             return response()->json(['ok' => false, 'error' => 'settings_table_missing'], 500);
         }
 
@@ -44,7 +44,7 @@ class AgentController extends Controller
             return $this->userIdError();
         }
 
-        if (!Schema::hasTable('user_agent_settings')) {
+        if (!\App\Support\SchemaBaseline::hasTable('user_agent_settings')) {
             return response()->json(['ok' => false, 'error' => 'settings_table_missing'], 500);
         }
 
@@ -91,7 +91,7 @@ class AgentController extends Controller
             return $this->userIdError();
         }
 
-        if (!Schema::hasTable('agent_messages')) {
+        if (!\App\Support\SchemaBaseline::hasTable('agent_messages')) {
             return response()->json(['ok' => false, 'error' => 'agent_messages_missing'], 500);
         }
 
@@ -117,7 +117,7 @@ class AgentController extends Controller
             return $this->userIdError();
         }
 
-        if (!Schema::hasTable('agent_feedback') || !Schema::hasTable('agent_messages')) {
+        if (!\App\Support\SchemaBaseline::hasTable('agent_feedback') || !\App\Support\SchemaBaseline::hasTable('agent_messages')) {
             return response()->json(['ok' => false, 'error' => 'agent_feedback_missing'], 500);
         }
 
@@ -167,7 +167,7 @@ class AgentController extends Controller
             return $this->userIdError();
         }
 
-        if (!Schema::hasTable('agent_messages')) {
+        if (!\App\Support\SchemaBaseline::hasTable('agent_messages')) {
             return response()->json(['ok' => false, 'error' => 'agent_messages_missing'], 500);
         }
 

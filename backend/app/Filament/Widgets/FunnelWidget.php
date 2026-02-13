@@ -20,7 +20,7 @@ class FunnelWidget extends BaseWidget
             'share_generate' => 'Share Generate',
         ];
 
-        if (!Schema::hasTable('v_funnel_daily')) {
+        if (!\App\Support\SchemaBaseline::hasTable('v_funnel_daily')) {
             return [
                 Stat::make('Funnel', 'no data')->color('gray'),
             ];

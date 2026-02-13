@@ -22,7 +22,7 @@ final class ThrottlePolicy
             ];
         }
 
-        if (!Schema::hasTable('agent_messages')) {
+        if (!\App\Support\SchemaBaseline::hasTable('agent_messages')) {
             return [
                 'ok' => false,
                 'allowed' => false,

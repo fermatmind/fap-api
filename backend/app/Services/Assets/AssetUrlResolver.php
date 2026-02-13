@@ -53,7 +53,7 @@ final class AssetUrlResolver
 
         $appUrl = trim((string) config('app.url', ''));
         if ($appUrl === '') {
-            $appUrl = trim((string) env('APP_URL', ''));
+            $appUrl = trim((string) \App\Support\RuntimeConfig::value('APP_URL', ''));
         }
         if ($appUrl === '') {
             $appUrl = 'http://localhost';

@@ -9,7 +9,7 @@ class ConsentService
 {
     public function recordConsent(?string $userId, string $provider, string $consentVersion, array $scopes): array
     {
-        if (!Schema::hasTable('integrations')) {
+        if (!\App\Support\SchemaBaseline::hasTable('integrations')) {
             return [
                 'ok' => false,
                 'error' => 'MISSING_TABLE',
@@ -53,7 +53,7 @@ class ConsentService
 
     public function revoke(?string $userId, string $provider): array
     {
-        if (!Schema::hasTable('integrations')) {
+        if (!\App\Support\SchemaBaseline::hasTable('integrations')) {
             return [
                 'ok' => false,
                 'error' => 'MISSING_TABLE',

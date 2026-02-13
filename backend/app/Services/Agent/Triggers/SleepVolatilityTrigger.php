@@ -9,7 +9,7 @@ final class SleepVolatilityTrigger
 {
     public function evaluate(int $userId, array $settings = []): array
     {
-        if (!Schema::hasTable('sleep_samples')) {
+        if (!\App\Support\SchemaBaseline::hasTable('sleep_samples')) {
             return ['ok' => false, 'fired' => false, 'reason' => 'sleep_samples_missing'];
         }
 

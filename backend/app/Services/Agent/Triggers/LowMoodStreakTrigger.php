@@ -62,7 +62,7 @@ final class LowMoodStreakTrigger
 
     private function fetchMoodSamples(int $userId, int $days): array
     {
-        if (!Schema::hasTable('health_samples')) {
+        if (!\App\Support\SchemaBaseline::hasTable('health_samples')) {
             return [];
         }
 

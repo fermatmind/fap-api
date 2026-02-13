@@ -13,7 +13,7 @@ class HealthzStatusWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        if (!Schema::hasTable('ops_healthz_snapshots')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ops_healthz_snapshots')) {
             return [
                 Stat::make('Healthz', 'no data')->color('gray'),
             ];

@@ -52,7 +52,7 @@ class ExperimentAssigner
 
     public function attachUserId(int $orgId, string $anonId, int $userId): int
     {
-        if (!Schema::hasTable('experiment_assignments')) {
+        if (!\App\Support\SchemaBaseline::hasTable('experiment_assignments')) {
             return 0;
         }
 
@@ -91,7 +91,7 @@ class ExperimentAssigner
             return null;
         }
 
-        if (Schema::hasTable('experiment_assignments')) {
+        if (\App\Support\SchemaBaseline::hasTable('experiment_assignments')) {
             $existing = $this->findExisting($experimentKey, $orgId, $userId, $anonId);
             if ($existing) {
                 if ($userId !== null && empty($existing->user_id)) {
@@ -118,7 +118,7 @@ class ExperimentAssigner
             return null;
         }
 
-        if (Schema::hasTable('experiment_assignments')) {
+        if (\App\Support\SchemaBaseline::hasTable('experiment_assignments')) {
             $now = now();
             DB::table('experiment_assignments')->updateOrInsert(
                 [

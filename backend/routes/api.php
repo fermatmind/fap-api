@@ -169,7 +169,8 @@ Route::prefix("v0.2")->middleware([
     });
 
     // Events ingestion (public for now)
-    Route::post("/events", [EventController::class, "store"]);
+    Route::post("/events", [EventController::class, "store"])
+        ->middleware('fap_feature:analytics');
 
     // Norms
     Route::get("/norms/percentile", [NormsController::class, "percentile"]);
@@ -198,11 +199,13 @@ Route::prefix("v0.2")->middleware([
     // =========================================================
     // AI Insights (async, budget guarded)
     // =========================================================
-    Route::middleware('App\\Http\\Middleware\\CheckAiBudget')->group(function () {
+    Route::middleware(['fap_feature:insights', 'App\\Http\\Middleware\\CheckAiBudget'])->group(function () {
         Route::post("/insights/generate", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@generate");
     });
-    Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show");
-    Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback");
+    Route::middleware('fap_feature:insights')->group(function () {
+        Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show");
+        Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback");
+    });
 
     // =========================================================
     // Optional token attach (no 401): allow anon access + enrich events.user_id when token exists
@@ -236,18 +239,22 @@ Route::prefix("v0.2")->middleware([
         Route::get("/me/data/screen-time", [MeController::class, "screenTimeData"]);
 
         // Memory
-        Route::post("/memory/propose", [MemoryController::class, "propose"]);
-        Route::post("/memory/{id}/confirm", [MemoryController::class, "confirm"]);
-        Route::delete("/memory/{id}", [MemoryController::class, "delete"]);
-        Route::get("/memory/search", [MemoryController::class, "search"]);
-        Route::get("/memory/export", [MemoryController::class, "export"]);
+        Route::middleware('fap_feature:insights')->group(function () {
+            Route::post("/memory/propose", [MemoryController::class, "propose"]);
+            Route::post("/memory/{id}/confirm", [MemoryController::class, "confirm"]);
+            Route::delete("/memory/{id}", [MemoryController::class, "delete"]);
+            Route::get("/memory/search", [MemoryController::class, "search"]);
+            Route::get("/memory/export", [MemoryController::class, "export"]);
+        });
 
         // Agent (me)
-        Route::get("/me/agent/settings", [AgentController::class, "settings"]);
-        Route::post("/me/agent/settings", [AgentController::class, "updateSettings"]);
-        Route::get("/me/agent/messages", [AgentController::class, "messages"]);
-        Route::post("/me/agent/messages/{id}/feedback", [AgentController::class, "feedback"]);
-        Route::post("/me/agent/messages/{id}/ack", [AgentController::class, "ack"]);
+        Route::middleware('fap_feature:agent')->group(function () {
+            Route::get("/me/agent/settings", [AgentController::class, "settings"]);
+            Route::post("/me/agent/settings", [AgentController::class, "updateSettings"]);
+            Route::get("/me/agent/messages", [AgentController::class, "messages"]);
+            Route::post("/me/agent/messages/{id}/feedback", [AgentController::class, "feedback"]);
+            Route::post("/me/agent/messages/{id}/ack", [AgentController::class, "ack"]);
+        });
 
         // Attempts gated endpoints
         Route::post("/attempts/{id}/result", [LegacyAttemptController::class, "upsertResult"]);

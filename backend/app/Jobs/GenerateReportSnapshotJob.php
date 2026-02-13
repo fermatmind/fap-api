@@ -35,7 +35,7 @@ class GenerateReportSnapshotJob implements ShouldQueue
     public function handle(ReportSnapshotStore $store): void
     {
         $attemptId = trim($this->attemptId);
-        if ($attemptId === '' || !Schema::hasTable('report_snapshots')) {
+        if ($attemptId === '' || !\App\Support\SchemaBaseline::hasTable('report_snapshots')) {
             return;
         }
 
@@ -88,18 +88,18 @@ class GenerateReportSnapshotJob implements ShouldQueue
 
     private function updateSnapshotState(string $attemptId, array $fields): void
     {
-        if (!Schema::hasTable('report_snapshots')) {
+        if (!\App\Support\SchemaBaseline::hasTable('report_snapshots')) {
             return;
         }
 
         $updates = [];
-        if (Schema::hasColumn('report_snapshots', 'status') && array_key_exists('status', $fields)) {
+        if (\App\Support\SchemaBaseline::hasColumn('report_snapshots', 'status') && array_key_exists('status', $fields)) {
             $updates['status'] = $fields['status'];
         }
-        if (Schema::hasColumn('report_snapshots', 'last_error') && array_key_exists('last_error', $fields)) {
+        if (\App\Support\SchemaBaseline::hasColumn('report_snapshots', 'last_error') && array_key_exists('last_error', $fields)) {
             $updates['last_error'] = $fields['last_error'];
         }
-        if (Schema::hasColumn('report_snapshots', 'updated_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('report_snapshots', 'updated_at')) {
             $updates['updated_at'] = now();
         }
 
@@ -111,7 +111,7 @@ class GenerateReportSnapshotJob implements ShouldQueue
     private function snapshotQuery(string $attemptId): Builder
     {
         $base = DB::table('report_snapshots')->where('attempt_id', $attemptId);
-        if (!Schema::hasColumn('report_snapshots', 'org_id')) {
+        if (!\App\Support\SchemaBaseline::hasColumn('report_snapshots', 'org_id')) {
             return $base;
         }
 

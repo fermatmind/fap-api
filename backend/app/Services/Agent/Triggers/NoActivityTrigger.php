@@ -11,7 +11,7 @@ final class NoActivityTrigger
     {
         $days = (int) ($settings['days'] ?? config('agent.triggers.no_activity.days', 5));
 
-        if (!Schema::hasTable('events')) {
+        if (!\App\Support\SchemaBaseline::hasTable('events')) {
             return ['ok' => false, 'fired' => false, 'reason' => 'events_missing'];
         }
 

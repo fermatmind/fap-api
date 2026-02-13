@@ -32,7 +32,7 @@ class GenerateInsightJob implements ShouldQueue
 
     public function handle(InsightGenerator $generator, EvidenceBuilder $evidenceBuilder, BudgetLedger $ledger): void
     {
-        if (!Schema::hasTable('ai_insights')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ai_insights')) {
             Log::warning('[ai_insights] table missing', ['id' => $this->insightId]);
             return;
         }
@@ -78,7 +78,7 @@ class GenerateInsightJob implements ShouldQueue
         } catch (BudgetLedgerException $e) {
             $failOpen = (bool) config('ai.fail_open_when_redis_down', false);
             if (!$failOpen) {
-                $env = getenv('AI_FAIL_OPEN_WHEN_REDIS_DOWN');
+                $env = \App\Support\RuntimeConfig::raw('AI_FAIL_OPEN_WHEN_REDIS_DOWN');
                 if ($env !== false && $env !== '') {
                     $failOpen = filter_var($env, FILTER_VALIDATE_BOOLEAN);
                 }
@@ -135,7 +135,7 @@ class GenerateInsightJob implements ShouldQueue
         $end = $this->parseDate((string) ($insight->period_end ?? ''));
 
         if ($start && $end) {
-            $column = Schema::hasColumn('attempts', 'submitted_at') ? 'submitted_at' : 'created_at';
+            $column = \App\Support\SchemaBaseline::hasColumn('attempts', 'submitted_at') ? 'submitted_at' : 'created_at';
             $query->whereBetween($column, [$start->startOfDay(), $end->endOfDay()]);
             $query->orderByDesc($column);
         } else {

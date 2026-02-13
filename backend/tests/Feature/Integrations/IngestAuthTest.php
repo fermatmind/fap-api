@@ -25,6 +25,15 @@ final class IngestAuthTest extends TestCase
 
     public function test_ingest_with_fm_token_uses_token_user_and_ignores_body_user_id(): void
     {
+        DB::table('users')->insert([
+            'id' => 1001,
+            'name' => 'ingest-auth-user-1001',
+            'email' => 'ingest-auth-1001@example.com',
+            'password' => bcrypt('secret'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,

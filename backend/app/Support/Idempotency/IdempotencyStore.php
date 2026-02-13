@@ -3,16 +3,11 @@
 namespace App\Support\Idempotency;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class IdempotencyStore
 {
     public function find(string $provider, string $externalId, string $recordedAt, string $hash): ?array
     {
-        if (!Schema::hasTable('idempotency_keys')) {
-            return null;
-        }
-
         $row = DB::table('idempotency_keys')
             ->where('provider', $provider)
             ->where('external_id', $externalId)
@@ -29,10 +24,6 @@ class IdempotencyStore
 
     public function findByPayload(string $provider, string $recordedAt, string $hash): ?array
     {
-        if (!Schema::hasTable('idempotency_keys')) {
-            return null;
-        }
-
         $row = DB::table('idempotency_keys')
             ->where('provider', $provider)
             ->where('recorded_at', $recordedAt)
@@ -48,10 +39,6 @@ class IdempotencyStore
 
     public function touch(string $provider, string $externalId, string $recordedAt, string $hash): void
     {
-        if (!Schema::hasTable('idempotency_keys')) {
-            return;
-        }
-
         DB::table('idempotency_keys')
             ->where('provider', $provider)
             ->where('external_id', $externalId)
@@ -65,10 +52,6 @@ class IdempotencyStore
 
     public function record(array $payload): array
     {
-        if (!Schema::hasTable('idempotency_keys')) {
-            return ['inserted' => false, 'existing' => false];
-        }
-
         $provider = (string) ($payload['provider'] ?? '');
         $externalId = (string) ($payload['external_id'] ?? '');
         $recordedAt = (string) ($payload['recorded_at'] ?? '');
@@ -99,10 +82,6 @@ class IdempotencyStore
 
     public function recordFast(array $payload): array
     {
-        if (!Schema::hasTable('idempotency_keys')) {
-            return ['inserted' => false, 'existing' => false];
-        }
-
         $provider = (string) ($payload['provider'] ?? '');
         $externalId = (string) ($payload['external_id'] ?? '');
         $recordedAt = (string) ($payload['recorded_at'] ?? '');
@@ -132,7 +111,7 @@ class IdempotencyStore
 
     public function recordFastBatch(array $rows): int
     {
-        if (!Schema::hasTable('idempotency_keys') || $rows === []) {
+        if ($rows === []) {
             return 0;
         }
 
@@ -145,7 +124,7 @@ class IdempotencyStore
      */
     public function pluckInsertedExternalIds(string $provider, string $runId, array $externalIds): array
     {
-        if (!Schema::hasTable('idempotency_keys') || $externalIds === []) {
+        if ($externalIds === []) {
             return [];
         }
 

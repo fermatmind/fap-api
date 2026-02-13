@@ -308,11 +308,11 @@ class AuthPhoneController extends Controller
      */
     private function findOrCreateUserByPhone(string $phoneE164, ?string $anonId): array
     {
-        $hasUid = Schema::hasColumn('users', 'uid');
+        $hasUid = \App\Support\SchemaBaseline::hasColumn('users', 'uid');
         $pk = $hasUid ? 'uid' : 'id';
 
-        $hasPhoneE164 = Schema::hasColumn('users', 'phone_e164');
-        $hasPhone = Schema::hasColumn('users', 'phone');
+        $hasPhoneE164 = \App\Support\SchemaBaseline::hasColumn('users', 'phone_e164');
+        $hasPhone = \App\Support\SchemaBaseline::hasColumn('users', 'phone');
 
         $phoneCol = $hasPhoneE164 ? 'phone_e164' : ($hasPhone ? 'phone' : null);
 
@@ -343,33 +343,33 @@ class AuthPhoneController extends Controller
             $insert[$phoneCol] = $phoneE164;
         }
 
-        if ($anonId && Schema::hasColumn('users', 'anon_id')) {
+        if ($anonId && \App\Support\SchemaBaseline::hasColumn('users', 'anon_id')) {
             $insert['anon_id'] = $anonId;
         }
 
-        if (Schema::hasColumn('users', 'phone_verified_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'phone_verified_at')) {
             $insert['phone_verified_at'] = now();
-        } elseif (Schema::hasColumn('users', 'verified_at')) {
+        } elseif (\App\Support\SchemaBaseline::hasColumn('users', 'verified_at')) {
             $insert['verified_at'] = now();
         }
 
-        if (Schema::hasColumn('users', 'created_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'created_at')) {
             $insert['created_at'] = now();
         }
-        if (Schema::hasColumn('users', 'updated_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'updated_at')) {
             $insert['updated_at'] = now();
         }
 
         // 如果是默认 Laravel users 表，可能有 name/email/password NOT NULL
         // 这里尽量做兜底（不会覆盖你自定义结构）
-        if (Schema::hasColumn('users', 'name') && ! array_key_exists('name', $insert)) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'name') && ! array_key_exists('name', $insert)) {
             $insert['name'] = 'user';
         }
-        if (Schema::hasColumn('users', 'email') && ! array_key_exists('email', $insert)) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email') && ! array_key_exists('email', $insert)) {
             // 避免 unique 冲突
             $insert['email'] = 'phone_'.md5($phoneE164).'@example.local';
         }
-        if (Schema::hasColumn('users', 'password') && ! array_key_exists('password', $insert)) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'password') && ! array_key_exists('password', $insert)) {
             $insert['password'] = bcrypt(bin2hex(random_bytes(8)));
         }
 

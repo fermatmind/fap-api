@@ -15,7 +15,7 @@ class EmailOutboxService
      */
     public function queueReportClaim(string $userId, string $email, string $attemptId): array
     {
-        if (!Schema::hasTable('email_outbox')) {
+        if (!\App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return ['ok' => false, 'error' => 'TABLE_MISSING'];
         }
 
@@ -43,7 +43,7 @@ class EmailOutboxService
         ];
 
         $pending = null;
-        if (Schema::hasColumn('email_outbox', 'attempt_id')) {
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
             $pending = DB::table('email_outbox')
                 ->where('user_id', $userId)
                 ->where('attempt_id', $attemptId)
@@ -119,7 +119,7 @@ class EmailOutboxService
             ];
         }
 
-        if (!Schema::hasTable('email_outbox')) {
+        if (!\App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return [
                 'ok' => false,
                 'status' => 410,
@@ -186,7 +186,7 @@ class EmailOutboxService
             'status' => 'consumed',
             'updated_at' => now(),
         ];
-        if (Schema::hasColumn('email_outbox', 'consumed_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'consumed_at')) {
             $update['consumed_at'] = now();
         }
 

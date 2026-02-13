@@ -12,7 +12,7 @@ class LookupEventLogger
 {
     public function log(string $method, bool $success, Request $request, ?string $userId = null, array $meta = []): void
     {
-        if (!Schema::hasTable('lookup_events')) {
+        if (!\App\Support\SchemaBaseline::hasTable('lookup_events')) {
             return;
         }
 

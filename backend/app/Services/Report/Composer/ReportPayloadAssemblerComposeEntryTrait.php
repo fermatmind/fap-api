@@ -162,7 +162,7 @@ trait ReportPayloadAssemblerComposeEntryTrait
         ]);
 
         $wantExplainPayload = app()->environment('local') && (
-            (bool) env('RE_EXPLAIN_PAYLOAD', false) || (bool) env('RE_EXPLAIN', false)
+            (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN_PAYLOAD', false) || (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false)
         );
 
         $explainPayload = null;
@@ -291,12 +291,12 @@ trait ReportPayloadAssemblerComposeEntryTrait
 
         $unifiedOverridesDoc = $this->buildUnifiedOverridesDocForApplierFromPackChain($chain, $overridesDoc);
         $ovrCaptureExplain = app()->environment('local') && (
-            (bool) env('RE_EXPLAIN_PAYLOAD', false) || (bool) env('RE_EXPLAIN', false)
+            (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN_PAYLOAD', false) || (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false)
         );
 
         $ovrCtx = [
             'report_overrides_doc' => $unifiedOverridesDoc,
-            'overrides_debug' => (bool) env('FAP_OVR_DEBUG', false),
+            'overrides_debug' => (bool) \App\Support\RuntimeConfig::value('FAP_OVR_DEBUG', false),
             'tags' => $tags,
             'capture_explain' => (bool) $ovrCaptureExplain,
             'explain_collector' => $ovrCaptureExplain ? ($GLOBALS['__re_explain_collector__'] ?? null) : null,

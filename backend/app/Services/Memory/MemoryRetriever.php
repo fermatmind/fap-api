@@ -11,7 +11,7 @@ final class MemoryRetriever
 {
     public function search(int $userId, string $query, array $filters = []): array
     {
-        if (!Schema::hasTable('memories')) {
+        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
             return ['ok' => false, 'error' => 'memories_table_missing', 'items' => []];
         }
 

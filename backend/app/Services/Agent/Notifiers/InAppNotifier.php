@@ -10,7 +10,7 @@ final class InAppNotifier
 {
     public function send(int $userId, array $payload): array
     {
-        if (!Schema::hasTable('agent_messages')) {
+        if (!\App\Support\SchemaBaseline::hasTable('agent_messages')) {
             return ['ok' => false, 'error' => 'agent_messages_missing'];
         }
 

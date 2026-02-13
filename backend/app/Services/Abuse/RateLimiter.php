@@ -8,7 +8,7 @@ class RateLimiter
 {
     public function limit(string $envKey, int $default): int
     {
-        $raw = env($envKey);
+        $raw = \App\Support\RuntimeConfig::value($envKey);
         if (is_numeric($raw)) {
             $val = (int) $raw;
             return $val >= 0 ? $val : $default;

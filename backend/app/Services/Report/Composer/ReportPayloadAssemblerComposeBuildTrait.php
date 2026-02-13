@@ -118,7 +118,7 @@ trait ReportPayloadAssemblerComposeBuildTrait
             ],
         ]);
 
-        $contentGraphEnabled = (bool) env('CONTENT_GRAPH_ENABLED', false);
+        $contentGraphEnabled = (bool) \App\Support\RuntimeConfig::value('CONTENT_GRAPH_ENABLED', false);
         $includeRecommendedReads = false;
         $recommendedReads = [];
 
@@ -202,7 +202,7 @@ trait ReportPayloadAssemblerComposeBuildTrait
             ];
         }
 
-        $force = trim((string) env('FAP_DEBUG_FORCE_SHORT_SECTION', ''));
+        $force = trim((string) \App\Support\RuntimeConfig::value('FAP_DEBUG_FORCE_SHORT_SECTION', ''));
 
         if ($force !== '') {
             $secName = $force;

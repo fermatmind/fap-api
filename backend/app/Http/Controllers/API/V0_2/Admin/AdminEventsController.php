@@ -15,7 +15,7 @@ class AdminEventsController extends Controller
     {
         $this->assertPermission(PermissionNames::ADMIN_EVENTS_READ);
 
-        if (!Schema::hasTable('events')) {
+        if (!\App\Support\SchemaBaseline::hasTable('events')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'TABLE_MISSING',

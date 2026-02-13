@@ -15,7 +15,7 @@ class IntegrationUserResolver
             return null;
         }
 
-        if (!Schema::hasTable('integration_user_bindings')) {
+        if (!\App\Support\SchemaBaseline::hasTable('integration_user_bindings')) {
             return null;
         }
 

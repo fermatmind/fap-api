@@ -55,11 +55,11 @@ class LegacyMeFacadeService
             throw new ApiProblemException(401, 'UNAUTHORIZED', 'Missing or invalid fm_token.');
         }
 
-        if (!Schema::hasTable('users') || !Schema::hasColumn('users', 'email')) {
+        if (!\App\Support\SchemaBaseline::hasTable('users') || !\App\Support\SchemaBaseline::hasColumn('users', 'email')) {
             throw new ApiProblemException(500, 'INVALID_SCHEMA', 'users.email column not found.');
         }
 
-        $pk = Schema::hasColumn('users', 'uid') ? 'uid' : 'id';
+        $pk = \App\Support\SchemaBaseline::hasColumn('users', 'uid') ? 'uid' : 'id';
 
         $exists = DB::table('users')
             ->where('email', $email)
@@ -71,10 +71,10 @@ class LegacyMeFacadeService
         }
 
         $update = ['email' => $email];
-        if (Schema::hasColumn('users', 'email_verified_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_verified_at')) {
             $update['email_verified_at'] = now();
         }
-        if (Schema::hasColumn('users', 'updated_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'updated_at')) {
             $update['updated_at'] = now();
         }
 
@@ -152,7 +152,7 @@ class LegacyMeFacadeService
         $email = trim((string) ($payload['email'] ?? ''));
         $userId = trim((string) ($payload['user_id'] ?? ''));
 
-        if ($email !== '' && $userId !== '' && Schema::hasTable('users') && Schema::hasColumn('users', 'email_verified_at')) {
+        if ($email !== '' && $userId !== '' && \App\Support\SchemaBaseline::hasTable('users') && \App\Support\SchemaBaseline::hasColumn('users', 'email_verified_at')) {
             DB::table('users')
                 ->where('id', $userId)
                 ->update([
