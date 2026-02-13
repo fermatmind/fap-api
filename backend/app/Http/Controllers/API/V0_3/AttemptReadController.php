@@ -23,6 +23,14 @@ class AttemptReadController extends Controller
     }
 
     /**
+     * GET /api/v0.3/attempts/{id}
+     */
+    public function show(Request $request, string $id): JsonResponse
+    {
+        return $this->result($request, $id);
+    }
+
+    /**
      * GET /api/v0.3/attempts/{id}/result
      */
     public function result(Request $request, string $id): JsonResponse

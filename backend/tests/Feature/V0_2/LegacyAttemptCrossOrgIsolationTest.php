@@ -136,6 +136,7 @@ final class LegacyAttemptCrossOrgIsolationTest extends TestCase
 
         $row = [
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => $anonId,
             'user_id' => $userId,
             'expires_at' => now()->addHour(),

@@ -58,6 +58,7 @@ class CommerceRefundWebhookTest extends TestCase
         $token = 'fm_' . (string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => 'anon_' . $userId,
             'user_id' => $userId,
             'expires_at' => now()->addDays(1),

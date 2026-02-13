@@ -266,7 +266,7 @@ Route::prefix("v0.3")->middleware([
         [PaymentWebhookController::class, "handle"]
     )->whereIn('provider', $payProviders)
         ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
-        ->name('v0.3.webhooks.payment');
+        ->name('api.v0_3.webhooks.payment');
 
     Route::middleware(ResolveOrgContext::class)->group(function () use ($payProviders) {
         // 0) Boot (flags + experiments)
@@ -289,11 +289,15 @@ Route::prefix("v0.3")->middleware([
             ->middleware('uuid:attempt_id');
         Route::get("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "show"])
             ->middleware('uuid:attempt_id');
+        Route::get("/attempts/{id}", [AttemptReadController::class, "show"])
+            ->middleware('uuid:id')
+            ->name('api.v0_3.attempts.show');
         Route::get("/attempts/{id}/result", [AttemptReadController::class, "result"])
-            ->middleware('uuid:id');
+            ->middleware('uuid:id')
+            ->name('api.v0_3.attempts.result');
         Route::get("/attempts/{id}/report", [AttemptReadController::class, "report"])
             ->middleware('uuid:id')
-            ->name('v0.3.attempts.report');
+            ->name('api.v0_3.attempts.report');
 
         // 3) Commerce v2 (public with org context)
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");

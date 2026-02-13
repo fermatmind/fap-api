@@ -13,7 +13,7 @@ final class IngestAuthTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_ingest_without_auth_and_without_signature_returns_401(): void
+    public function test_ingest_without_auth_and_without_ingest_key_returns_401(): void
     {
         $response = $this->postJson('/api/v0.2/integrations/mock/ingest', $this->payload());
 
@@ -28,6 +28,7 @@ final class IngestAuthTest extends TestCase
         $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'user_id' => 1001,
             'anon_id' => 'ingest-auth-anon-1001',
             'created_at' => now(),
@@ -56,14 +57,15 @@ final class IngestAuthTest extends TestCase
         $this->assertSame(1001, (int) $sleep->user_id);
     }
 
-    public function test_ingest_with_valid_signature_and_mapping_writes_mapped_user_id(): void
+    public function test_ingest_with_valid_ingest_key_writes_mapped_user_id(): void
     {
-        config()->set('services.integrations.providers.mock.webhook_secret', 'mock_ingest_secret');
+        $ingestKey = 'ingest_key_mock_001';
 
         DB::table('integrations')->insert([
             'user_id' => 1001,
             'provider' => 'mock',
             'external_user_id' => 'ext_001',
+            'ingest_key_hash' => hash('sha256', $ingestKey),
             'status' => 'connected',
             'scopes_json' => json_encode(['mock_scope'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'consent_version' => 'v0.1',
@@ -77,31 +79,13 @@ final class IngestAuthTest extends TestCase
         ]);
 
         $payload = $this->payload([
-            'external_user_id' => 'ext_001',
             'user_id' => '42',
         ]);
-        $rawBody = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        self::assertIsString($rawBody);
-
-        $timestamp = time();
-        $signature = hash_hmac('sha256', "{$timestamp}.{$rawBody}", 'mock_ingest_secret');
         $eventId = 'evt_ingest_001';
-
-        $response = $this->call(
-            'POST',
-            '/api/v0.2/integrations/mock/ingest',
-            [],
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/json',
-                'HTTP_ACCEPT' => 'application/json',
-                'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $timestamp,
-                'HTTP_X_WEBHOOK_SIGNATURE' => $signature,
-                'HTTP_X_WEBHOOK_EVENT_ID' => $eventId,
-            ],
-            $rawBody
-        );
+        $response = $this->withHeaders([
+            'X-Ingest-Key' => $ingestKey,
+            'X-Ingest-Event-Id' => $eventId,
+        ])->postJson('/api/v0.2/integrations/mock/ingest', $payload);
 
         $response->assertStatus(200)->assertJson(['ok' => true]);
 
@@ -116,21 +100,20 @@ final class IngestAuthTest extends TestCase
 
         $integration = DB::table('integrations')
             ->where('provider', 'mock')
-            ->where('external_user_id', 'ext_001')
+            ->where('ingest_key_hash', hash('sha256', $ingestKey))
             ->first();
         $this->assertNotNull($integration);
         $this->assertSame($eventId, (string) ($integration->webhook_last_event_id ?? ''));
-        $this->assertSame($timestamp, (int) ($integration->webhook_last_timestamp ?? 0));
+        $this->assertGreaterThan(0, (int) ($integration->webhook_last_timestamp ?? 0));
     }
 
-    public function test_ingest_with_invalid_signature_returns_401(): void
+    public function test_ingest_with_invalid_ingest_key_returns_401(): void
     {
-        config()->set('services.integrations.providers.mock.webhook_secret', 'mock_ingest_secret');
-
         DB::table('integrations')->insert([
             'user_id' => 1001,
             'provider' => 'mock',
             'external_user_id' => 'ext_001',
+            'ingest_key_hash' => hash('sha256', 'ingest_key_mock_001'),
             'status' => 'connected',
             'scopes_json' => json_encode(['mock_scope'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'consent_version' => 'v0.1',
@@ -143,30 +126,10 @@ final class IngestAuthTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $payload = $this->payload([
-            'external_user_id' => 'ext_001',
-        ]);
-        $rawBody = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        self::assertIsString($rawBody);
-
-        $timestamp = time();
-        $badSignature = hash_hmac('sha256', "{$timestamp}.{$rawBody}", 'wrong_secret');
-
-        $response = $this->call(
-            'POST',
-            '/api/v0.2/integrations/mock/ingest',
-            [],
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/json',
-                'HTTP_ACCEPT' => 'application/json',
-                'HTTP_X_WEBHOOK_TIMESTAMP' => (string) $timestamp,
-                'HTTP_X_WEBHOOK_SIGNATURE' => $badSignature,
-                'HTTP_X_WEBHOOK_EVENT_ID' => 'evt_bad_sig_001',
-            ],
-            $rawBody
-        );
+        $response = $this->withHeaders([
+            'X-Ingest-Key' => 'ingest_key_invalid',
+            'X-Ingest-Event-Id' => 'evt_bad_key_001',
+        ])->postJson('/api/v0.2/integrations/mock/ingest', $this->payload());
 
         $response->assertStatus(401)->assertJson([
             'ok' => false,

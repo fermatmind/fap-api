@@ -4,7 +4,6 @@ namespace App\Services\Attempts;
 
 use App\Models\Attempt;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class AnswerRowWriter
 {
@@ -12,10 +11,6 @@ class AnswerRowWriter
     {
         if (!$this->isEnabled()) {
             return ['ok' => true, 'skipped' => true, 'rows' => 0];
-        }
-
-        if (!Schema::hasTable('attempt_answer_rows')) {
-            return ['ok' => false, 'error' => 'TABLE_MISSING', 'message' => 'attempt_answer_rows missing.'];
         }
 
         $rows = [];

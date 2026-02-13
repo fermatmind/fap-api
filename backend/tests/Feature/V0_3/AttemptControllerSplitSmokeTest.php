@@ -16,12 +16,18 @@ class AttemptControllerSplitSmokeTest extends TestCase
 
         $start = $routes->match(Request::create('/api/v0.3/attempts/start', 'POST'));
         $submit = $routes->match(Request::create('/api/v0.3/attempts/submit', 'POST'));
+        $show = $routes->match(Request::create('/api/v0.3/attempts/00000000-0000-0000-0000-000000000000', 'GET'));
         $result = $routes->match(Request::create('/api/v0.3/attempts/00000000-0000-0000-0000-000000000000/result', 'GET'));
         $report = $routes->match(Request::create('/api/v0.3/attempts/00000000-0000-0000-0000-000000000000/report', 'GET'));
 
         $this->assertStringContainsString(AttemptWriteController::class . '@start', $start->getActionName());
         $this->assertStringContainsString(AttemptWriteController::class . '@submit', $submit->getActionName());
+        $this->assertStringContainsString(AttemptReadController::class . '@show', $show->getActionName());
         $this->assertStringContainsString(AttemptReadController::class . '@result', $result->getActionName());
         $this->assertStringContainsString(AttemptReadController::class . '@report', $report->getActionName());
+
+        $this->assertNotNull($routes->getByName('api.v0_3.attempts.show'));
+        $this->assertNotNull($routes->getByName('api.v0_3.attempts.result'));
+        $this->assertNotNull($routes->getByName('api.v0_3.attempts.report'));
     }
 }

@@ -22,7 +22,7 @@ class StubProviderDisabledTest extends TestCase
     {
         config(['payments.allow_stub' => true]);
 
-        $route = app('router')->getRoutes()->getByName('v0.3.webhooks.payment');
+        $route = app('router')->getRoutes()->getByName('api.v0_3.webhooks.payment');
         $this->assertNotNull($route);
 
         $response = $this->postJson('/api/v0.3/webhooks/payment/stub', []);

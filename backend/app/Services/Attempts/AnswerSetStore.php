@@ -4,20 +4,11 @@ namespace App\Services\Attempts;
 
 use App\Models\Attempt;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class AnswerSetStore
 {
     public function storeFinalAnswers(Attempt $attempt, array $answers, int $durationMs, string $scoringSpecVersion): array
     {
-        if (!Schema::hasTable('attempt_answer_sets')) {
-            return [
-                'ok' => false,
-                'error' => 'TABLE_MISSING',
-                'message' => 'attempt_answer_sets missing.',
-            ];
-        }
-
         $normalized = $this->canonicalizeAnswers($answers);
         $canonicalJson = $this->encodeJson($normalized);
         $answersHash = hash('sha256', $canonicalJson);

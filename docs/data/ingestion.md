@@ -38,11 +38,14 @@ Mock OAuth：
 
 Ingest 会写入 `ingest_batches` 并分发到 domain 表，Replay 重放依赖 `idempotency_keys` 保证不重复。
 
+### Ingest 鉴权（非 Bearer）
+- `X-Ingest-Key`：一次性下发的 ingest key（服务端仅存 `ingest_key_hash`）
+- `X-Ingest-Event-Id`：事件唯一 ID（用于 replay 检测）
+
 ### Ingest 示例
 ```
 POST /api/v0.2/integrations/mock/ingest
 {
-  "user_id": 1,
   "range_start": "2026-01-01T00:00:00Z",
   "range_end": "2026-01-02T00:00:00Z",
   "samples": [

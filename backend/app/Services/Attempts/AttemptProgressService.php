@@ -6,7 +6,6 @@ use App\Models\Attempt;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class AttemptProgressService
@@ -196,20 +195,11 @@ class AttemptProgressService
     public function clearProgress(string $attemptId): void
     {
         $this->forgetCache($attemptId);
-
-        if (!Schema::hasTable('attempt_drafts')) {
-            return;
-        }
-
         DB::table('attempt_drafts')->where('attempt_id', $attemptId)->delete();
     }
 
     public function loadDraftAnswers(Attempt $attempt): array
     {
-        if (!Schema::hasTable('attempt_drafts')) {
-            return [];
-        }
-
         $row = DB::table('attempt_drafts')->where('attempt_id', (string) $attempt->id)->first();
         if (!$row) {
             return [];
@@ -226,10 +216,6 @@ class AttemptProgressService
 
     private function persistDraft(array $draft, bool $isCreate): void
     {
-        if (!Schema::hasTable('attempt_drafts')) {
-            return;
-        }
-
         $now = Carbon::now();
         $payload = [
             'attempt_id' => $draft['attempt_id'],
@@ -259,10 +245,6 @@ class AttemptProgressService
         $cached = $this->loadCache($attemptId);
         if ($cached) {
             return $cached;
-        }
-
-        if (!Schema::hasTable('attempt_drafts')) {
-            return null;
         }
 
         $row = DB::table('attempt_drafts')->where('attempt_id', $attemptId)->first();

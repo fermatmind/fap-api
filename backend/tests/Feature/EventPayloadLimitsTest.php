@@ -23,6 +23,7 @@ final class EventPayloadLimitsTest extends TestCase
         $token = 'fm_' . (string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => 'pr44-event-limits-anon',
             'user_id' => 1001,
             'created_at' => now(),
@@ -66,6 +67,7 @@ final class EventPayloadLimitsTest extends TestCase
         $token = 'fm_' . (string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => 'pr48-event-bytes-anon',
             'user_id' => 2001,
             'created_at' => now(),

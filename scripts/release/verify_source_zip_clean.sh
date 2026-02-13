@@ -4,6 +4,13 @@ set -euo pipefail
 ZIP="${1:-dist/fap-api-source.zip}"
 test -f "$ZIP"
 
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+unzip -qq "$ZIP" -d "$TMP_DIR"
+bash "$ROOT/scripts/security/assert_artifact_clean.sh" --mode artifact --target "$TMP_DIR/fap-api"
+
 LIST="$(unzip -Z1 "$ZIP")"
 
 # 允许 env 示例文件存在

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use App\Services\Auth\FmTokenService;
@@ -7,8 +9,6 @@ use App\Services\Org\MembershipService;
 use App\Support\OrgContext;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Response;
 
 class ResolveOrgContext
@@ -26,9 +26,10 @@ class ResolveOrgContext
         if ($orgId < 0) {
             return $this->orgNotFoundResponse();
         }
+
         $userId = $this->resolveUserId($request);
-        $role = null;
         $anonId = $this->resolveAnonId($request);
+        $role = null;
 
         if ($orgId > 0) {
             if ($this->isAdminGuardAuthenticated()) {
@@ -53,7 +54,7 @@ class ResolveOrgContext
             }
         } else {
             $orgId = 0;
-            $role = 'public';
+            $role = $this->resolveTokenRole($request) ?? 'public';
         }
 
         $request->attributes->set('org_id', $orgId);
@@ -81,8 +82,9 @@ class ResolveOrgContext
         if ($header === '') {
             $header = trim((string) $request->query('org_id', ''));
         }
+
         if ($header !== '') {
-            if (!preg_match('/^\d+$/', $header)) {
+            if (preg_match('/^\d+$/', $header) !== 1) {
                 return -1;
             }
             return (int) $header;
@@ -93,9 +95,9 @@ class ResolveOrgContext
             return (int) $attr;
         }
 
-        $fromToken = $this->resolveOrgIdFromToken($request);
-        if ($fromToken !== null) {
-            return $fromToken;
+        $tokenOrgId = $this->resolveOrgIdFromToken($request);
+        if ($tokenOrgId !== null) {
+            return $tokenOrgId;
         }
 
         return 0;
@@ -108,43 +110,23 @@ class ResolveOrgContext
             return null;
         }
 
-        if (!Schema::hasTable('fm_tokens')) {
+        $res = $this->tokenService->validateToken($token);
+        if (!($res['ok'] ?? false)) {
             return null;
         }
 
-        $row = DB::table('fm_tokens')->where('token', $token)->first();
-        if (!$row) {
+        $orgId = $res['org_id'] ?? null;
+        if (!is_int($orgId)) {
             return null;
         }
 
-        if (property_exists($row, 'org_id')) {
-            $raw = trim((string) ($row->org_id ?? ''));
-            if ($raw !== '' && preg_match('/^\d+$/', $raw)) {
-                return (int) $raw;
-            }
-        }
-
-        if (property_exists($row, 'meta_json')) {
-            $meta = $row->meta_json ?? null;
-            if (is_string($meta)) {
-                $decoded = json_decode($meta, true);
-                $meta = is_array($decoded) ? $decoded : null;
-            }
-            if (is_array($meta)) {
-                $raw = trim((string) ($meta['org_id'] ?? ''));
-                if ($raw !== '' && preg_match('/^\d+$/', $raw)) {
-                    return (int) $raw;
-                }
-            }
-        }
-
-        return null;
+        return $orgId;
     }
 
     private function resolveUserId(Request $request): ?int
     {
         $raw = (string) ($request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id') ?? '');
-        if ($raw === '' || !preg_match('/^\d+$/', $raw)) {
+        if ($raw === '' || preg_match('/^\d+$/', $raw) !== 1) {
             return null;
         }
 
@@ -164,17 +146,34 @@ class ResolveOrgContext
         }
 
         $userId = (string) ($res['user_id'] ?? '');
-        if ($userId === '' || !preg_match('/^\d+$/', $userId)) {
+        if ($userId === '' || preg_match('/^\d+$/', $userId) !== 1) {
             return null;
         }
 
         return (int) $userId;
     }
 
+    private function resolveTokenRole(Request $request): ?string
+    {
+        $token = $this->extractBearerToken($request);
+        if ($token === '') {
+            return null;
+        }
+
+        $res = $this->tokenService->validateToken($token);
+        if (!($res['ok'] ?? false)) {
+            return null;
+        }
+
+        $role = trim((string) ($res['role'] ?? ''));
+
+        return $role !== '' ? $role : null;
+    }
+
     private function extractBearerToken(Request $request): string
     {
         $header = (string) $request->header('Authorization', '');
-        if (preg_match('/^\\s*Bearer\\s+(.+)\\s*$/i', $header, $m)) {
+        if (preg_match('/^\s*Bearer\s+(.+)\s*$/i', $header, $m) === 1) {
             return trim((string) ($m[1] ?? ''));
         }
 
@@ -185,9 +184,9 @@ class ResolveOrgContext
     {
         $raw = $request->attributes->get('anon_id') ?? $request->attributes->get('fm_anon_id') ?? '';
         if (is_string($raw) || is_numeric($raw)) {
-            $val = trim((string) $raw);
-            if ($val !== '') {
-                return $val;
+            $value = trim((string) $raw);
+            if ($value !== '') {
+                return $value;
             }
         }
 

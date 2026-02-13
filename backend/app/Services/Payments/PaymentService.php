@@ -4,7 +4,6 @@ namespace App\Services\Payments;
 
 use App\Services\Commerce\SkuPriceService;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class PaymentService
@@ -22,10 +21,6 @@ class PaymentService
 
     public function createOrder(array $data, array $actor = []): array
     {
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-
         $itemSku = strtoupper(trim((string) ($data['item_sku'] ?? '')));
         $currency = strtoupper(trim((string) ($data['currency'] ?? 'CNY')));
         $qtyRaw = $data['quantity'] ?? 1;
@@ -47,6 +42,7 @@ class PaymentService
             'device_id' => $this->trimOrNull($data['device_id'] ?? null),
             'provider' => $this->trimOrNull($data['provider'] ?? null) ?: 'internal',
             'provider_order_id' => $this->trimOrNull($data['provider_order_id'] ?? null),
+            'org_id' => $legacyOrgId,
             'status' => 'pending',
             'currency' => $currency,
             'amount_total' => $amountCents,
@@ -64,19 +60,6 @@ class PaymentService
             'updated_at' => $now,
         ];
 
-        if (Schema::hasColumn('orders', 'org_id')) {
-            $row['org_id'] = $legacyOrgId;
-        }
-        if (!Schema::hasColumn('orders', 'amount_cents')) {
-            unset($row['amount_cents']);
-        }
-        if (!Schema::hasColumn('orders', 'sku')) {
-            unset($row['sku']);
-        }
-        if (!Schema::hasColumn('orders', 'quantity')) {
-            unset($row['quantity']);
-        }
-
         DB::table('orders')->insert($row);
         $order = DB::table('orders')->where('id', $orderId)->first();
 
@@ -88,10 +71,6 @@ class PaymentService
 
     public function markPaid(string $orderId, string $userId, ?string $anonId, array $context = []): array
     {
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-
         $order = DB::table('orders')->where('id', $orderId)->first();
         if (!$order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
@@ -114,35 +93,33 @@ class PaymentService
 
         $now = now();
 
-        if (Schema::hasTable('payment_events')) {
-            $provider = self::PAYMENT_PROVIDER_INTERNAL;
-            $providerEventId = 'dev_mark_paid:' . $orderId;
-            $existing = $this->paymentEventQuery($provider, $providerEventId)->first();
+        $provider = self::PAYMENT_PROVIDER_INTERNAL;
+        $providerEventId = 'dev_mark_paid:' . $orderId;
+        $existing = $this->paymentEventQuery($provider, $providerEventId)->first();
 
-            if (!$existing) {
-                $payload = [
-                    'mode' => 'dev',
-                    'event' => 'mark_paid',
-                    'order_id' => $orderId,
-                ];
+        if (!$existing) {
+            $payload = [
+                'mode' => 'dev',
+                'event' => 'mark_paid',
+                'order_id' => $orderId,
+            ];
 
-                DB::table('payment_events')->insert([
-                    'id' => (string) Str::uuid(),
-                    'provider' => $provider,
-                    'provider_event_id' => $providerEventId,
-                    'order_id' => $orderId,
-                    'event_type' => 'mark_paid',
-                    'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                    'signature_ok' => true,
-                    'handled_at' => $now,
-                    'handle_status' => 'ok',
-                    'request_id' => $this->trimOrNull($context['request_id'] ?? null),
-                    'ip' => $this->trimOrNull($context['ip'] ?? null),
-                    'headers_digest' => null,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ]);
-            }
+            DB::table('payment_events')->insert([
+                'id' => (string) Str::uuid(),
+                'provider' => $provider,
+                'provider_event_id' => $providerEventId,
+                'order_id' => $orderId,
+                'event_type' => 'mark_paid',
+                'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'signature_ok' => true,
+                'handled_at' => $now,
+                'handle_status' => 'ok',
+                'request_id' => $this->trimOrNull($context['request_id'] ?? null),
+                'ip' => $this->trimOrNull($context['ip'] ?? null),
+                'headers_digest' => null,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
         }
 
         DB::table('orders')
@@ -163,13 +140,6 @@ class PaymentService
 
     public function fulfill(string $orderId, string $userId, ?string $anonId): array
     {
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-        if (!Schema::hasTable('benefit_grants')) {
-            return $this->tableMissing('benefit_grants');
-        }
-
         $order = DB::table('orders')->where('id', $orderId)->first();
         if (!$order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
@@ -242,10 +212,6 @@ class PaymentService
 
     public function listBenefits(string $userId): array
     {
-        if (!Schema::hasTable('benefit_grants')) {
-            return $this->tableMissing('benefit_grants');
-        }
-
         $userId = trim($userId);
         if ($userId === '') {
             return [
@@ -257,16 +223,10 @@ class PaymentService
         }
 
         $q = DB::table('benefit_grants')->where('user_id', $userId);
-
-        if (Schema::hasColumn('benefit_grants', 'status')) {
-            $q->where('status', 'active');
-        }
-
-        if (Schema::hasColumn('benefit_grants', 'expires_at')) {
-            $q->where(function ($sub) {
-                $sub->whereNull('expires_at')->orWhere('expires_at', '>', now());
-            });
-        }
+        $q->where('status', 'active');
+        $q->where(function ($sub) {
+            $sub->whereNull('expires_at')->orWhere('expires_at', '>', now());
+        });
 
         $rows = $q->orderByDesc('created_at')->limit(100)->get();
 
@@ -290,13 +250,6 @@ class PaymentService
 
     public function handleWebhookMock(array $payload, array $context = []): array
     {
-        if (!Schema::hasTable('payment_events')) {
-            return $this->tableMissing('payment_events');
-        }
-        if (!Schema::hasTable('orders')) {
-            return $this->tableMissing('orders');
-        }
-
         $provider = self::PAYMENT_PROVIDER_MOCK;
         $providerEventId = $this->trimOrNull($payload['provider_event_id'] ?? null);
         if (!$providerEventId) {

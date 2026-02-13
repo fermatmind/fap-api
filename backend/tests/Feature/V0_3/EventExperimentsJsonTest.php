@@ -39,6 +39,7 @@ class EventExperimentsJsonTest extends TestCase
         $token = 'fm_' . (string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
+            'token_hash' => hash('sha256', $token),
             'anon_id' => $anonId,
             'user_id' => 0,
             'created_at' => now(),
