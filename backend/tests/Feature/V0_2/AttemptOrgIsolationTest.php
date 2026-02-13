@@ -102,7 +102,8 @@ final class AttemptOrgIsolationTest extends TestCase
         $anonId = 'anon_lookup_owner';
 
         $this->seedUser((int) $userId);
-        $token = $this->seedFmToken($anonId, (int) $userId);
+        $tokenOrg0 = $this->seedFmToken($anonId, (int) $userId, 0);
+        $tokenOrg1 = $this->seedFmToken($anonId, (int) $userId, 1);
 
         $ticketCode = 'FMT-' . strtoupper(substr(str_replace('-', '', (string) Str::uuid()), 0, 8));
         $attemptId = $this->seedAttempt(
@@ -123,15 +124,22 @@ final class AttemptOrgIsolationTest extends TestCase
             ->assertJsonPath('attempt_id', $attemptId);
 
         $this->withHeaders([
-            'Authorization' => "Bearer {$token}",
+            'Authorization' => "Bearer {$tokenOrg0}",
             'X-Org-Id' => '0',
         ])->postJson('/api/v0.2/lookup/device', [
             'attempt_ids' => [$attemptId],
         ])->assertStatus(404);
 
         $this->withHeaders([
-            'Authorization' => "Bearer {$token}",
+            'Authorization' => "Bearer {$tokenOrg0}",
             'X-Org-Id' => '1',
+        ])->postJson('/api/v0.2/lookup/device', [
+            'attempt_ids' => [$attemptId],
+        ])->assertStatus(404);
+
+        $this->withHeaders([
+            'Authorization' => "Bearer {$tokenOrg1}",
+            'X-Org-Id' => '0',
         ])->postJson('/api/v0.2/lookup/device', [
             'attempt_ids' => [$attemptId],
         ])->assertStatus(200)
@@ -185,7 +193,7 @@ final class AttemptOrgIsolationTest extends TestCase
         ]);
     }
 
-    private function seedFmToken(string $anonId, int $userId): string
+    private function seedFmToken(string $anonId, int $userId, int $orgId = 0): string
     {
         $token = 'fm_' . (string) Str::uuid();
 
@@ -194,6 +202,7 @@ final class AttemptOrgIsolationTest extends TestCase
             'token_hash' => hash('sha256', $token),
             'anon_id' => $anonId,
             'user_id' => $userId,
+            'org_id' => $orgId,
             'expires_at' => now()->addHour(),
             'created_at' => now(),
             'updated_at' => now(),

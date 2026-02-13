@@ -176,6 +176,45 @@ class HighIdorOwnership404Test extends TestCase
             ->assertStatus(404);
     }
 
+    public function test_anon_b_cannot_lookup_anon_a_order_via_v02_lookup_order(): void
+    {
+        config(['fap.runtime.LOOKUP_ORDER' => '1']);
+        $orderColumns = (array) config('fap.schema_baseline.required_columns.orders', []);
+        config([
+            'fap.schema_baseline.required_columns.orders' => array_values(array_unique(array_merge(
+                $orderColumns,
+                ['order_no', 'org_id', 'user_id', 'anon_id']
+            ))),
+        ]);
+
+        $orderNo = 'ord_pr60_lookup_' . Str::lower(Str::random(8));
+        $this->insertOrderForAnonA($orderNo);
+        $anonBToken = $this->issueAnonToken(self::ANON_B);
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer ' . $anonBToken,
+        ])->postJson('/api/v0.2/lookup/order', [
+            'order_no' => $orderNo,
+        ])->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
+    public function test_anon_b_cannot_submit_feedback_for_anon_a_attempt(): void
+    {
+        config(['fap.runtime.FEEDBACK_ENABLED' => '1']);
+
+        $this->seedScales();
+        $attemptId = $this->createSubmittedAttemptForAnonA();
+        $anonBToken = $this->issueAnonToken(self::ANON_B);
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer ' . $anonBToken,
+        ])->postJson("/api/v0.2/attempts/{$attemptId}/feedback", [
+            'score' => 3,
+        ])->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
     public function test_anon_b_cannot_access_anon_a_psychometrics_stats_or_quality(): void
     {
         $this->seedScales();

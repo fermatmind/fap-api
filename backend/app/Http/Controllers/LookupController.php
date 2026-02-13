@@ -10,7 +10,6 @@ use App\Services\Audit\LookupEventLogger;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class LookupController extends Controller
 {
@@ -160,11 +159,17 @@ class LookupController extends Controller
         }
 
         $orgId = $this->resolveOrgId($request);
+        $userId = $this->resolveRequestUserId($request);
+        $anonId = $this->resolveRequestAnonId($request);
 
-        $rows = Attempt::query()
+        $query = Attempt::query()
             ->select(['id', 'ticket_code'])
             ->whereIn('id', $attemptIds)
-            ->where('org_id', $orgId)
+            ->where('org_id', $orgId);
+
+        $this->applyAttemptOwnershipConstraint($query, $userId, $anonId);
+
+        $rows = $query
             ->get()
             ->keyBy('id');
 
@@ -282,7 +287,13 @@ class LookupController extends Controller
             ]);
         }
 
-        $row = DB::table($table)->where($orderColumn, $orderNo)->first();
+        $orgId = $this->resolveOrgId($request);
+        $userId = $this->resolveRequestUserId($request);
+        $anonId = $this->resolveRequestAnonId($request);
+
+        $query = DB::table($table)->where($orderColumn, $orderNo);
+        $this->applyOrderOwnershipConstraint($query, $table, $orgId, $userId, $anonId);
+        $row = $query->first();
         if (!$row) {
             $logger->log('lookup_order', false, $request, null, [
                 'error_code' => 'NOT_FOUND',
@@ -352,6 +363,113 @@ class LookupController extends Controller
             }
         }
         return '';
+    }
+
+    private function resolveRequestUserId(Request $request): ?string
+    {
+        $value = trim((string) (
+            $request->attributes->get('fm_user_id')
+            ?? $request->attributes->get('user_id')
+            ?? ''
+        ));
+
+        return $value !== '' ? $value : null;
+    }
+
+    private function resolveRequestAnonId(Request $request): ?string
+    {
+        $value = trim((string) (
+            $request->attributes->get('fm_anon_id')
+            ?? $request->attributes->get('anon_id')
+            ?? ''
+        ));
+
+        return $value !== '' ? $value : null;
+    }
+
+    private function applyAttemptOwnershipConstraint(
+        \Illuminate\Database\Eloquent\Builder $query,
+        ?string $userId,
+        ?string $anonId
+    ): void {
+        $uid = trim((string) ($userId ?? ''));
+        $aid = trim((string) ($anonId ?? ''));
+        $hasUser = \App\Support\SchemaBaseline::hasColumn('attempts', 'user_id');
+        $hasAnon = \App\Support\SchemaBaseline::hasColumn('attempts', 'anon_id');
+
+        if (($uid === '' || !$hasUser) && ($aid === '' || !$hasAnon)) {
+            $query->whereRaw('1=0');
+            return;
+        }
+
+        $query->where(function ($q) use ($uid, $aid, $hasUser, $hasAnon) {
+            $applied = false;
+
+            if ($uid !== '' && $hasUser) {
+                $q->where('user_id', $uid);
+                $applied = true;
+            }
+
+            if ($aid !== '' && $hasAnon) {
+                if ($applied) {
+                    $q->orWhere('anon_id', $aid);
+                } else {
+                    $q->where('anon_id', $aid);
+                    $applied = true;
+                }
+            }
+
+            if (!$applied) {
+                $q->whereRaw('1=0');
+            }
+        });
+    }
+
+    private function applyOrderOwnershipConstraint(
+        \Illuminate\Database\Query\Builder $query,
+        string $table,
+        int $orgId,
+        ?string $userId,
+        ?string $anonId
+    ): void {
+        if (\App\Support\SchemaBaseline::hasColumn($table, 'org_id')) {
+            $query->where('org_id', $orgId);
+        } else {
+            $query->whereRaw('1=0');
+            return;
+        }
+
+        $uid = trim((string) ($userId ?? ''));
+        $aid = trim((string) ($anonId ?? ''));
+        $hasUser = \App\Support\SchemaBaseline::hasColumn($table, 'user_id');
+        $hasAnon = \App\Support\SchemaBaseline::hasColumn($table, 'anon_id');
+
+        if (($uid === '' || !$hasUser) && ($aid === '' || !$hasAnon)) {
+            $query->whereRaw('1=0');
+            return;
+        }
+
+        $query->where(function ($q) use ($uid, $aid, $hasUser, $hasAnon) {
+            $applied = false;
+
+            if ($uid !== '' && $hasUser) {
+                $q->where('user_id', $uid);
+                $applied = true;
+            }
+
+            if ($aid !== '' && $hasAnon) {
+                if ($applied) {
+                    $q->orWhere('anon_id', $aid);
+                } else {
+                    $q->where('anon_id', $aid);
+                    $applied = true;
+                }
+            }
+
+            if (!$applied) {
+                $q->whereRaw('1=0');
+            }
+        });
     }
 
     /**

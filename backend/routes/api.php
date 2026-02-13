@@ -147,7 +147,6 @@ Route::prefix("v0.2")->middleware([
 
     // 6.5) Lookups
     Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
-    Route::post("/lookup/order", [LookupController::class, "lookupOrder"]);
 
     // 7) Share click (public)
     // share_id now supports 32-hex legacy ids, so remove uuid middleware.
@@ -272,6 +271,7 @@ Route::prefix("v0.2")->middleware([
         Route::get("/attempts/{id}/share", [ShareController::class, "getShare"]);
 
         Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
+        Route::post("/lookup/order", [LookupController::class, "lookupOrder"]);
         Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
 
     });

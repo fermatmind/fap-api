@@ -47,8 +47,11 @@ final class ErrorContractConsistencyTest extends TestCase
     public function test_lookup_order_disabled_returns_unified_error_contract(): void
     {
         $this->setEnv('LOOKUP_ORDER', '0');
+        $token = $this->seedFmToken('anon_contract_lookup_order');
 
-        $response = $this->postJson('/api/v0.2/lookup/order', [
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->postJson('/api/v0.2/lookup/order', [
             'order_no' => 'ord_contract_disabled',
         ]);
 

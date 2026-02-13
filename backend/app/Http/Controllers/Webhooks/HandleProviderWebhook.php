@@ -8,7 +8,6 @@ use App\Support\Idempotency\IdempotencyKey;
 use App\Support\Idempotency\IdempotencyStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class HandleProviderWebhook extends Controller
 {
@@ -47,23 +46,29 @@ class HandleProviderWebhook extends Controller
 
         $idKey = IdempotencyKey::build($provider, $eventId, $recordedAt, $payload);
         $store = new IdempotencyStore();
-        $existing = $store->find($idKey['provider'], $idKey['external_id'], $idKey['recorded_at'], $idKey['hash']);
-        if ($existing) {
-            $store->touch($idKey['provider'], $idKey['external_id'], $idKey['recorded_at'], $idKey['hash']);
-            return response()->json([
-                'ok' => true,
-                'status' => 'duplicate',
-                'event_id' => $eventId,
-            ]);
-        }
-
-        $store->record([
+        $idRecord = $store->recordFast([
             'provider' => $idKey['provider'],
             'external_id' => $idKey['external_id'],
             'recorded_at' => $idKey['recorded_at'],
             'hash' => $idKey['hash'],
             'ingest_batch_id' => null,
         ]);
+
+        if (($idRecord['existing'] ?? false) === true) {
+            if (($idRecord['hash_mismatch'] ?? false) === true) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'IDEMPOTENCY_CONFLICT',
+                    'message' => 'payload mismatch for existing event identity',
+                ], 409);
+            }
+
+            return response()->json([
+                'ok' => true,
+                'status' => 'duplicate',
+                'event_id' => $eventId,
+            ]);
+        }
 
         $batchMeta = [
             'range_start' => $payload['range_start'] ?? null,
@@ -121,14 +126,6 @@ class HandleProviderWebhook extends Controller
         $expected = hash_hmac('sha256', "{$timestamp}.{$payload}", $secret);
         if (hash_equals($expected, $signature)) {
             return ['ok' => true, 'timestamp' => $timestamp];
-        }
-
-        $allowLegacySignature = (bool) config('services.integrations.allow_legacy_signature', false);
-        if ($allowLegacySignature) {
-            $legacyExpected = hash_hmac('sha256', $payload, $secret);
-            if (hash_equals($legacyExpected, $signature)) {
-                return ['ok' => true, 'timestamp' => $timestamp];
-            }
         }
 
         return ['ok' => false, 'timestamp' => $timestamp];
