@@ -9,7 +9,7 @@ final class ConsentPolicy
 {
     public function check(int $userId): array
     {
-        if (!Schema::hasTable('integrations')) {
+        if (!\App\Support\SchemaBaseline::hasTable('integrations')) {
             return [
                 'ok' => false,
                 'allowed' => false,

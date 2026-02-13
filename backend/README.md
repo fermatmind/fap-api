@@ -15,6 +15,16 @@
 
 ## 快速验收入口：verify_mbti（本机 / 服务器 / CI）
 
+## 上线前置校验（必须）
+
+```bash
+cd /path/to/fap-api/backend
+php artisan migrate --force
+php artisan fap:schema:verify
+```
+
+两步缺一不可：先迁移，再做 schema 基线校验。
+
 ### 0) 你需要先有一个可访问的 API 服务
 
 - 本机开发一般是：`http://127.0.0.1:8000`

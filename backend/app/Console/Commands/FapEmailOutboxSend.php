@@ -102,7 +102,7 @@ class FapEmailOutboxSend extends Command
 
     private function outboxSendEnabled(): bool
     {
-        $raw = env('EMAIL_OUTBOX_SEND', '0');
+        $raw = \App\Support\RuntimeConfig::value('EMAIL_OUTBOX_SEND', '0');
         return filter_var($raw, FILTER_VALIDATE_BOOLEAN);
     }
 }

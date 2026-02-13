@@ -17,7 +17,7 @@ class AdminContentController extends Controller
     {
         $this->assertPermission(PermissionNames::ADMIN_CONTENT_READ);
 
-        if (!Schema::hasTable('content_pack_releases')) {
+        if (!\App\Support\SchemaBaseline::hasTable('content_pack_releases')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'TABLE_MISSING',
@@ -42,7 +42,7 @@ class AdminContentController extends Controller
     {
         $this->assertPermission(PermissionNames::ADMIN_CONTENT_PROBE);
 
-        if (!Schema::hasTable('content_pack_releases')) {
+        if (!\App\Support\SchemaBaseline::hasTable('content_pack_releases')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'TABLE_MISSING',

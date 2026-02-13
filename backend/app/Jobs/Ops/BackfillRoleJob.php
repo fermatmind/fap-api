@@ -29,9 +29,9 @@ class BackfillRoleJob implements ShouldQueue
         $lastId = 0;
 
         try {
-            if (!Schema::hasTable('organization_members')
-                || !Schema::hasColumn('organization_members', 'id')
-                || !Schema::hasColumn('organization_members', 'role')) {
+            if (!\App\Support\SchemaBaseline::hasTable('organization_members')
+                || !\App\Support\SchemaBaseline::hasColumn('organization_members', 'id')
+                || !\App\Support\SchemaBaseline::hasColumn('organization_members', 'role')) {
                 Log::warning('[backfill_role] table/column missing');
                 return;
             }

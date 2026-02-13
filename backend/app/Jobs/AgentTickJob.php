@@ -21,7 +21,7 @@ class AgentTickJob implements ShouldQueue
             return;
         }
 
-        if (!Schema::hasTable('user_agent_settings')) {
+        if (!\App\Support\SchemaBaseline::hasTable('user_agent_settings')) {
             return;
         }
 

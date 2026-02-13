@@ -81,10 +81,10 @@ class RbacService
 
     private function tablesReady(): bool
     {
-        return Schema::hasTable('admin_users')
-            && Schema::hasTable('roles')
-            && Schema::hasTable('permissions')
-            && Schema::hasTable('role_user')
-            && Schema::hasTable('permission_role');
+        return \App\Support\SchemaBaseline::hasTable('admin_users')
+            && \App\Support\SchemaBaseline::hasTable('roles')
+            && \App\Support\SchemaBaseline::hasTable('permissions')
+            && \App\Support\SchemaBaseline::hasTable('role_user')
+            && \App\Support\SchemaBaseline::hasTable('permission_role');
     }
 }

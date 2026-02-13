@@ -19,7 +19,7 @@ class HealthzController extends Controller
     public function show(Request $request)
     {
         $service = 'Fermat Assessment Platform API';
-        $version = config('app.version', env('APP_VERSION', 'unknown'));
+        $version = config('app.version', \App\Support\RuntimeConfig::value('APP_VERSION', 'unknown'));
         $nowIso = now()->toIso8601String();
         $verbose = (bool) config('healthz.verbose', false) && app()->environment(['local', 'testing', 'ci']);
 
@@ -204,8 +204,8 @@ class HealthzController extends Controller
             }
 
             if ($driver === 'database') {
-                $hasJobs = Schema::hasTable('jobs');
-                $hasFailed = Schema::hasTable('failed_jobs');
+                $hasJobs = \App\Support\SchemaBaseline::hasTable('jobs');
+                $hasFailed = \App\Support\SchemaBaseline::hasTable('failed_jobs');
 
                 if (!$hasJobs) {
                     return [

@@ -20,7 +20,7 @@ class ProvidersController extends Controller
         $state = (string) Str::uuid();
         $userId = $this->resolveUserId($request);
 
-        if (Schema::hasTable('integrations')) {
+        if (\App\Support\SchemaBaseline::hasTable('integrations')) {
             DB::table('integrations')->updateOrInsert([
                 'user_id' => $userId !== null ? (int) $userId : null,
                 'provider' => $provider,
@@ -58,7 +58,7 @@ class ProvidersController extends Controller
         $consentVersion = 'v0.1';
 
         $consent = app(ConsentService::class)->recordConsent($userId, $provider, $consentVersion, $scopes);
-        if (($consent['ok'] ?? false) && Schema::hasTable('integrations')) {
+        if (($consent['ok'] ?? false) && \App\Support\SchemaBaseline::hasTable('integrations')) {
             DB::table('integrations')
                 ->where('user_id', $userId !== null ? (int) $userId : null)
                 ->where('provider', $provider)
@@ -70,7 +70,7 @@ class ProvidersController extends Controller
                     'updated_at' => now(),
                 ]);
         }
-        if (($consent['ok'] ?? false) && Schema::hasTable('integration_user_bindings') && $userId !== null) {
+        if (($consent['ok'] ?? false) && \App\Support\SchemaBaseline::hasTable('integration_user_bindings') && $userId !== null) {
             DB::table('integration_user_bindings')->updateOrInsert(
                 [
                     'provider' => $provider,

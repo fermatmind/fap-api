@@ -96,6 +96,17 @@ final class AttemptReportPaywallGateTest extends TestCase
         $anonId = 'anon_paywall_owner';
         $userId = '1001';
 
+        DB::table('users')->updateOrInsert(
+            ['id' => (int) $userId],
+            [
+                'name' => 'paywall-user-'.$userId,
+                'email' => 'paywall-'.$userId.'@example.com',
+                'password' => bcrypt('secret'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
         Attempt::create([
             'id' => $attemptId,
             'org_id' => 0,

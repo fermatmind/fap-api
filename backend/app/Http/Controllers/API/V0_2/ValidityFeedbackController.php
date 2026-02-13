@@ -21,7 +21,7 @@ class ValidityFeedbackController extends Controller
      */
     public function store(Request $request, string $attemptId): JsonResponse
     {
-        $enabled = filter_var(env('FEEDBACK_ENABLED', '0'), FILTER_VALIDATE_BOOLEAN);
+        $enabled = filter_var(\App\Support\RuntimeConfig::value('FEEDBACK_ENABLED', '0'), FILTER_VALIDATE_BOOLEAN);
         if (!$enabled) {
             return response()->json([
                 'ok' => false,
@@ -54,7 +54,7 @@ class ValidityFeedbackController extends Controller
         $fmUserId = $this->normalizeId($request->attributes->get('fm_user_id'));
         $anonId = $this->normalizeId($request->attributes->get('anon_id'));
 
-        if ($fmUserId !== null && Schema::hasColumn('attempts', 'user_id')) {
+        if ($fmUserId !== null && \App\Support\SchemaBaseline::hasColumn('attempts', 'user_id')) {
             if ((string) ($attempt->user_id ?? '') !== $fmUserId) {
                 return $this->forbiddenResponse();
             }
@@ -86,9 +86,9 @@ class ValidityFeedbackController extends Controller
 
         $packId = $this->resolvePackId($attempt);
         $packVersion = $this->parsePackVersion($packId);
-        $reportVersion = (string) env('REPORT_VERSION', (string) config('app.version', ''));
+        $reportVersion = (string) \App\Support\RuntimeConfig::value('REPORT_VERSION', (string) config('app.version', ''));
         $typeCode = '';
-        if (Schema::hasColumn('attempts', 'type_code')) {
+        if (\App\Support\SchemaBaseline::hasColumn('attempts', 'type_code')) {
             $typeCode = (string) ($attempt->type_code ?? '');
         }
 
@@ -100,7 +100,7 @@ class ValidityFeedbackController extends Controller
         }
 
         $ip = (string) ($request->ip() ?? '');
-        $salt = (string) env('IP_HASH_SALT', 'local_salt');
+        $salt = (string) \App\Support\RuntimeConfig::value('IP_HASH_SALT', 'local_salt');
         $ipHash = hash('sha256', $ip . $salt);
 
         $row = [
@@ -200,11 +200,11 @@ class ValidityFeedbackController extends Controller
 
     private function checkAnonOwnership(string $attemptId, string $anonId): bool
     {
-        if (!Schema::hasTable('identities')) {
+        if (!\App\Support\SchemaBaseline::hasTable('identities')) {
             // TODO: identities table missing; allow anon-bound write for now.
             return true;
         }
-        if (!Schema::hasColumn('identities', 'attempt_id') || !Schema::hasColumn('identities', 'anon_id')) {
+        if (!\App\Support\SchemaBaseline::hasColumn('identities', 'attempt_id') || !\App\Support\SchemaBaseline::hasColumn('identities', 'anon_id')) {
             // TODO: identities schema missing attempt_id/anon_id; allow anon-bound write for now.
             return true;
         }
@@ -223,7 +223,7 @@ class ValidityFeedbackController extends Controller
 
     private function resolvePackId(Attempt $attempt): string
     {
-        if (Schema::hasColumn('attempts', 'pack_id')) {
+        if (\App\Support\SchemaBaseline::hasColumn('attempts', 'pack_id')) {
             $packId = trim((string) ($attempt->pack_id ?? ''));
             if ($packId !== '') {
                 return $packId;
@@ -240,7 +240,7 @@ class ValidityFeedbackController extends Controller
 
     private function contentPackIdFromResult(Attempt $attempt): string
     {
-        if (!Schema::hasColumn('attempts', 'result_json')) {
+        if (!\App\Support\SchemaBaseline::hasColumn('attempts', 'result_json')) {
             return '';
         }
 

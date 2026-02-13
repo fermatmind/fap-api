@@ -102,6 +102,17 @@ final class IngestValidationTest extends TestCase
 
     private function issueToken(int $userId): string
     {
+        DB::table('users')->updateOrInsert(
+            ['id' => $userId],
+            [
+                'name' => 'ingest-validation-user-'.$userId,
+                'email' => 'ingest-validation-'.$userId.'@example.com',
+                'password' => bcrypt('secret'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
         $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,

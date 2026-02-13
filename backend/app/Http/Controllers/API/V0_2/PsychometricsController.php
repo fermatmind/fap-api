@@ -53,7 +53,7 @@ class PsychometricsController extends Controller
 
     public function quality(Request $request, string $id): JsonResponse
     {
-        if (!Schema::hasTable('attempt_quality')) {
+        if (!\App\Support\SchemaBaseline::hasTable('attempt_quality')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'QUALITY_NOT_AVAILABLE',

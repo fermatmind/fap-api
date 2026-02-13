@@ -32,7 +32,7 @@ class OpsDeployEvent extends Command
 
         $env = trim((string) $this->option('env'));
         if ($env === '') {
-            $env = (string) (getenv('FAP_ENV') ?: config('app.env') ?: 'local');
+            $env = (string) (\App\Support\RuntimeConfig::raw('FAP_ENV') ?: config('app.env') ?: 'local');
         }
 
         $revision = trim((string) $this->option('revision'));
@@ -42,7 +42,7 @@ class OpsDeployEvent extends Command
 
         $actor = trim((string) $this->option('actor'));
         if ($actor === '') {
-            $actor = (string) (getenv('GITHUB_ACTOR') ?: getenv('USER') ?: get_current_user());
+            $actor = (string) (\App\Support\RuntimeConfig::raw('GITHUB_ACTOR') ?: \App\Support\RuntimeConfig::raw('USER') ?: get_current_user());
             $actor = trim($actor);
         }
         if ($actor === '') {
@@ -75,7 +75,7 @@ class OpsDeployEvent extends Command
 
     private function resolveRevision(): string
     {
-        $envRev = getenv('SENTRY_RELEASE') ?: getenv('REVISION');
+        $envRev = \App\Support\RuntimeConfig::raw('SENTRY_RELEASE') ?: \App\Support\RuntimeConfig::raw('REVISION');
         if (is_string($envRev) && trim($envRev) !== '') {
             return trim($envRev);
         }

@@ -12,7 +12,7 @@ final class CacheKeys
     {
         $appVersion = trim((string) config('app.version', ''));
         if ($appVersion === '') {
-            $appVersion = trim((string) env('APP_VERSION', ''));
+            $appVersion = trim((string) \App\Support\RuntimeConfig::value('APP_VERSION', ''));
         }
         if ($appVersion === '') {
             $appVersion = 'dev';
@@ -20,7 +20,7 @@ final class CacheKeys
 
         $cachePrefix = trim((string) config('cache.prefix', ''));
         if ($cachePrefix === '') {
-            $cachePrefix = trim((string) env('CACHE_PREFIX', ''));
+            $cachePrefix = trim((string) \App\Support\RuntimeConfig::value('CACHE_PREFIX', ''));
         }
 
         return $cachePrefix === '' ? $appVersion : $appVersion . ':' . $cachePrefix;

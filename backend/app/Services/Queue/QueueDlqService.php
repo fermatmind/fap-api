@@ -18,8 +18,8 @@ class QueueDlqService
 
     public function metrics(): array
     {
-        $failedTableExists = Schema::hasTable('failed_jobs');
-        $replayTableExists = Schema::hasTable('queue_dlq_replays');
+        $failedTableExists = \App\Support\SchemaBaseline::hasTable('failed_jobs');
+        $replayTableExists = \App\Support\SchemaBaseline::hasTable('queue_dlq_replays');
 
         $failedTotal = 0;
         $failedByQueue = [];
@@ -97,7 +97,7 @@ class QueueDlqService
             ];
         }
 
-        if (!$force && Schema::hasTable('queue_dlq_replays')) {
+        if (!$force && \App\Support\SchemaBaseline::hasTable('queue_dlq_replays')) {
             $already = DB::table('queue_dlq_replays')
                 ->where('failed_job_id', $failedJobId)
                 ->where('replay_status', 'replayed')
@@ -223,7 +223,7 @@ class QueueDlqService
             }
         }
 
-        if (!Schema::hasTable('failed_jobs')) {
+        if (!\App\Support\SchemaBaseline::hasTable('failed_jobs')) {
             return null;
         }
 
@@ -255,7 +255,7 @@ class QueueDlqService
             }
         }
 
-        if (Schema::hasTable('failed_jobs')) {
+        if (\App\Support\SchemaBaseline::hasTable('failed_jobs')) {
             DB::table('failed_jobs')->where('id', $failedJobId)->delete();
         }
     }
@@ -270,7 +270,7 @@ class QueueDlqService
         string $requestedBy,
         ?string $notes
     ): int {
-        if (!Schema::hasTable('queue_dlq_replays')) {
+        if (!\App\Support\SchemaBaseline::hasTable('queue_dlq_replays')) {
             return 0;
         }
 

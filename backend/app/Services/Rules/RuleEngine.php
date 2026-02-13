@@ -108,7 +108,7 @@ foreach ($tags as $t) {
      */
     public function select(array $items, array $userSet, array $opt = []): array
     {
-        if (app()->environment('local') && (bool)env('RE_TAGS', false)) {
+        if (app()->environment('local') && (bool)\App\Support\RuntimeConfig::value('RE_TAGS', false)) {
     Log::debug('[RE] select_enter', [
         'ctx' => $opt['ctx'] ?? null,
         'items_n' => is_array($items) ? count($items) : null,
@@ -126,8 +126,8 @@ foreach ($tags as $t) {
 // --- DEBUG CONTEXT TAGS (local only) ---
 if (
     app()->environment('local') &&
-    (bool) env('RE_CTX_TAGS', false) &&
-    ((bool)($opt['debug'] ?? false) || (bool)env('RE_TAGS', false))
+    (bool) \App\Support\RuntimeConfig::value('RE_CTX_TAGS', false) &&
+    ((bool)($opt['debug'] ?? false) || (bool)\App\Support\RuntimeConfig::value('RE_TAGS', false))
 ) {
     Log::debug('[RE] context_tags', [
         'ctx'  => $ctx,
@@ -138,7 +138,7 @@ if (
 // ✅ tags_debug 抽样：默认只打前 3 条（可用 opt['tags_debug_n'] 调整）
 $tagsDebugN = array_key_exists('tags_debug_n', $opt)
     ? (int)$opt['tags_debug_n']
-    : (int) env('RE_TAGS_DEBUG_N', 3);
+    : (int) \App\Support\RuntimeConfig::value('RE_TAGS_DEBUG_N', 3);
 
 // 非 cards ctx：直接关掉 tags_debug
 if (!str_starts_with((string)($opt['ctx'] ?? ''), 'cards:')) {
@@ -163,7 +163,7 @@ $tagsDebugI = 0;
 if (
     $tagsDebugI < $tagsDebugN &&
     app()->environment('local') &&
-    ((bool)($opt['debug'] ?? false) || (bool)env('RE_TAGS', false))
+    ((bool)($opt['debug'] ?? false) || (bool)\App\Support\RuntimeConfig::value('RE_TAGS', false))
 ) {
     $section = null;
     if (isset($opt['section']) && is_string($opt['section'])) {
@@ -287,8 +287,8 @@ return [$selected, $evals];
 // --- DEBUG CONTEXT TAGS (local only) ---
 if (
     app()->environment('local') &&
-    (bool) env('RE_CTX_TAGS', false) &&
-    ($debug || (bool)env('RE_TAGS', false))
+    (bool) \App\Support\RuntimeConfig::value('RE_CTX_TAGS', false) &&
+    ($debug || (bool)\App\Support\RuntimeConfig::value('RE_TAGS', false))
 ) {
     Log::debug('[RE] context_tags', [
         'ctx'  => $ctx,
@@ -315,7 +315,7 @@ if (
     // tags_debug 抽样
 $tagsDebugN = array_key_exists('tags_debug_n', $opt)
     ? (int)$opt['tags_debug_n']
-    : (int) env('RE_TAGS_DEBUG_N', 3);
+    : (int) \App\Support\RuntimeConfig::value('RE_TAGS_DEBUG_N', 3);
 
 // 非 cards ctx：直接关掉 tags_debug
 if (!str_starts_with((string)($opt['ctx'] ?? ''), 'cards:')) {
@@ -330,8 +330,8 @@ $cands = [];
 // ✅ explain 是否会输出（local + (debug || RE_EXPLAIN)）
 $shouldExplain =
     (bool)($opt['capture_explain'] ?? false) ||
-    (bool) env('RE_EXPLAIN_PAYLOAD', false) ||
-    (app()->environment('local') && ($debug || (bool) env('RE_EXPLAIN', false)));
+    (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN_PAYLOAD', false) ||
+    (app()->environment('local') && ($debug || (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false)));
 
 $rejectedTotal = 0;      // ✅ rejected 总数（用于 rejected_n）
 $rejectedSamples = [];   // ✅ rejected 采样（用于 rejected 详情）
@@ -346,7 +346,7 @@ foreach ($items as $it) {
         if (
             $tagsDebugI < $tagsDebugN &&
             app()->environment('local') &&
-            ($debug || (bool)env('RE_TAGS', false))
+            ($debug || (bool)\App\Support\RuntimeConfig::value('RE_TAGS', false))
         ) {
             $section = null;
             if (isset($opt['section']) && is_string($opt['section'])) {
@@ -680,7 +680,7 @@ $this->explain($ctx, $selectedExplains, $rejectedExplains, [
         });
 
         // 可选：只打印一次 contextSet 的关键 keys（你已经实现过类似 context_tags）
-        if (app()->environment('local') && ($debug || (bool)env('RE_TAGS', false)) && (bool)env('RE_CONTEXT_KEYS', true)) {
+        if (app()->environment('local') && ($debug || (bool)\App\Support\RuntimeConfig::value('RE_TAGS', false)) && (bool)\App\Support\RuntimeConfig::value('RE_CONTEXT_KEYS', true)) {
             $keys = array_keys(is_array($contextSet) ? $contextSet : []);
             $keep = $this->pickContextKeys($keys);
             Log::debug('[RE] context_tags', ['ctx' => $ctx, 'keys' => $keep]);
@@ -968,7 +968,7 @@ private function passesAxisMatchForCard(array $card, array $userSet, array $axis
     $captureOn =
         (bool)($opt['capture_explain'] ?? false) ||
         (bool)($opt['captureExplain'] ?? false) ||
-        (bool) env('RE_EXPLAIN_PAYLOAD', false);
+        (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN_PAYLOAD', false);
 
     // collector 可以是：
     // - opt['explain_collector'] = callable(string $ctx, array $payload)
@@ -977,7 +977,7 @@ private function passesAxisMatchForCard(array $card, array $userSet, array $axis
 
     // ✅ log 开关：保持你原先逻辑（local + (debug || RE_EXPLAIN)）
     $debug = (bool)($opt['debug'] ?? false);
-    $envOn = (bool) env('RE_EXPLAIN', false);
+    $envOn = (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false);
     $logOn = app()->environment('local') && ($debug || $envOn);
 
     // 两个都没开就直接返回

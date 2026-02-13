@@ -42,10 +42,10 @@ class BackfillOrgIdJob implements ShouldQueue
             return;
         }
 
-        if (!Schema::hasTable('migration_backfills')
-            || !Schema::hasTable($this->table)
-            || !Schema::hasColumn($this->table, $this->idColumn)
-            || !Schema::hasColumn($this->table, $this->orgIdColumn)) {
+        if (!\App\Support\SchemaBaseline::hasTable('migration_backfills')
+            || !\App\Support\SchemaBaseline::hasTable($this->table)
+            || !\App\Support\SchemaBaseline::hasColumn($this->table, $this->idColumn)
+            || !\App\Support\SchemaBaseline::hasColumn($this->table, $this->orgIdColumn)) {
             Log::warning('[org_id_backfill] table/column missing', [
                 'table' => $this->table,
                 'id_column' => $this->idColumn,
@@ -212,7 +212,7 @@ class BackfillOrgIdJob implements ShouldQueue
      */
     private function loadState(): array
     {
-        $hasCursor = Schema::hasColumn('migration_backfills', 'last_cursor');
+        $hasCursor = \App\Support\SchemaBaseline::hasColumn('migration_backfills', 'last_cursor');
 
         DB::table('migration_backfills')->insertOrIgnore([
             'key' => (string) $this->progressKey,
@@ -242,7 +242,7 @@ class BackfillOrgIdJob implements ShouldQueue
             'updated_at' => now(),
         ];
 
-        if (Schema::hasColumn('migration_backfills', 'last_cursor')) {
+        if (\App\Support\SchemaBaseline::hasColumn('migration_backfills', 'last_cursor')) {
             $payload['last_cursor'] = $lastCursor;
         }
 

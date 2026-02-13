@@ -198,21 +198,21 @@ class HandleProviderWebhook extends Controller
         string $eventId,
         ?int $timestamp,
     ): void {
-        if ($externalUserId === '' || !Schema::hasTable('integrations')) {
+        if ($externalUserId === '' || !\App\Support\SchemaBaseline::hasTable('integrations')) {
             return;
         }
 
         $updates = [];
-        if (Schema::hasColumn('integrations', 'webhook_last_event_id')) {
+        if (\App\Support\SchemaBaseline::hasColumn('integrations', 'webhook_last_event_id')) {
             $updates['webhook_last_event_id'] = $eventId !== '' ? $eventId : null;
         }
-        if (Schema::hasColumn('integrations', 'webhook_last_timestamp')) {
+        if (\App\Support\SchemaBaseline::hasColumn('integrations', 'webhook_last_timestamp')) {
             $updates['webhook_last_timestamp'] = $timestamp;
         }
-        if (Schema::hasColumn('integrations', 'webhook_last_received_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('integrations', 'webhook_last_received_at')) {
             $updates['webhook_last_received_at'] = now();
         }
-        if (Schema::hasColumn('integrations', 'updated_at')) {
+        if (\App\Support\SchemaBaseline::hasColumn('integrations', 'updated_at')) {
             $updates['updated_at'] = now();
         }
         if (count($updates) === 0) {

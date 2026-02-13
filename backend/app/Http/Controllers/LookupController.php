@@ -318,14 +318,14 @@ class LookupController extends Controller
 
     private function lookupOrderEnabled(): bool
     {
-        $raw = env('LOOKUP_ORDER', '0');
+        $raw = \App\Support\RuntimeConfig::value('LOOKUP_ORDER', '0');
         return filter_var($raw, FILTER_VALIDATE_BOOLEAN);
     }
 
     private function resolveOrderTable(): string
     {
-        if (Schema::hasTable('orders')) return 'orders';
-        if (Schema::hasTable('payments')) return 'payments';
+        if (\App\Support\SchemaBaseline::hasTable('orders')) return 'orders';
+        if (\App\Support\SchemaBaseline::hasTable('payments')) return 'payments';
         return '';
     }
 
@@ -333,7 +333,7 @@ class LookupController extends Controller
     {
         $candidates = ['order_no', 'order_id', 'order_number', 'order_sn'];
         foreach ($candidates as $col) {
-            if (Schema::hasColumn($table, $col)) {
+            if (\App\Support\SchemaBaseline::hasColumn($table, $col)) {
                 return $col;
             }
         }

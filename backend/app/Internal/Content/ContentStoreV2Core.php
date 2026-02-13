@@ -49,7 +49,7 @@ final class ContentStoreV2Core
 
     private function shouldLogHotCache(): bool
     {
-        return (bool) config('app.debug') || (bool) env('FAP_CACHE_LOG', true);
+        return (bool) config('app.debug') || (bool) \App\Support\RuntimeConfig::value('FAP_CACHE_LOG', true);
     }
 
     private function logHotCache(string $kind, string $key, bool $hit): void
@@ -434,7 +434,7 @@ public function loadSelectRules(): array
         $doc = $this->loadJsonByBasenamePreferAssetKey('highlights', 'report_highlights_templates.json');
         $this->lightSchemaCheck($doc, 'report_highlights_templates.json');
 
-        if ((bool) env('FAP_FORBID_MISSING_HIGHLIGHTS', false) && empty($doc)) {
+        if ((bool) \App\Support\RuntimeConfig::value('FAP_FORBID_MISSING_HIGHLIGHTS', false) && empty($doc)) {
             throw new \RuntimeException('STORE_HIGHLIGHTS_MISSING: report_highlights_templates.json not found');
         }
 
@@ -447,7 +447,7 @@ public function loadSelectRules(): array
         $doc = $this->loadJsonByBasenamePreferAssetKey('reads', 'report_recommended_reads.json');
         $this->lightSchemaCheck($doc, 'report_recommended_reads.json');
 
-        if ((bool) env('FAP_FORBID_MISSING_READS', false) && empty($doc)) {
+        if ((bool) config('fap.content.forbid_missing_reads', false) && empty($doc)) {
             throw new \RuntimeException('STORE_READS_MISSING: report_recommended_reads.json not found');
         }
 
@@ -564,7 +564,7 @@ public function loadReportOverrides(): array
         $docs = $this->loadOverridesDocsOrderedFromChain();
 
         if (empty($docs)) {
-            if ((bool) env('FAP_FORBID_MISSING_OVERRIDES', false)) {
+            if ((bool) config('fap.content.forbid_missing_overrides', false)) {
                 throw new \RuntimeException('STORE_OVERRIDES_MISSING: no overrides docs loaded');
             }
             return null;
@@ -959,12 +959,12 @@ public function loadReportOverrides(): array
 
     private function isRuntimeEnvFlagEnabled(string $name): bool
     {
-        $value = getenv($name);
+        $value = \App\Support\RuntimeConfig::raw($name);
         if ($value === false) {
             $value = $_ENV[$name] ?? $_SERVER[$name] ?? null;
         }
         if ($value === null) {
-            $value = env($name, false);
+            $value = \App\Support\RuntimeConfig::value($name, false);
         }
 
         if (is_bool($value)) {

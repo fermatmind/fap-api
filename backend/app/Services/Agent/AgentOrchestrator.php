@@ -150,7 +150,7 @@ final class AgentOrchestrator
 
     private function recordTrigger(int $userId, array $trigger): ?string
     {
-        if (!Schema::hasTable('agent_triggers')) {
+        if (!\App\Support\SchemaBaseline::hasTable('agent_triggers')) {
             return null;
         }
 
@@ -185,7 +185,7 @@ final class AgentOrchestrator
 
     private function recordDecision(int $userId, ?string $triggerId, string $decision, string $reason): ?string
     {
-        if (!Schema::hasTable('agent_decisions')) {
+        if (!\App\Support\SchemaBaseline::hasTable('agent_decisions')) {
             return null;
         }
 

@@ -272,7 +272,7 @@ class AppServiceProvider extends ServiceProvider
             self::$redactProcessorRegistered = true;
         }
 
-        $isDebugEnabledByEnv = filter_var(env('APP_DEBUG', false), FILTER_VALIDATE_BOOL);
+        $isDebugEnabledByEnv = (bool) config('app.debug', false);
 
         if ($this->app->environment('production') && $isDebugEnabledByEnv) {
             Log::emergency('CRITICAL: PRODUCTION_APP_DEBUG_TRUE');
@@ -292,6 +292,10 @@ class AppServiceProvider extends ServiceProvider
         // Disable throttles in test-like environments by default to prevent cross-test 429 flakiness.
         // Dedicated rate-limit tests can opt in by setting fap.rate_limits.bypass_in_test_env=false.
         $shouldBypassRateLimits = function (): bool {
+            if ($this->app->runningUnitTests()) {
+                return (bool) config('fap.rate_limits.bypass_in_test_env', true);
+            }
+
             if (!$this->app->environment(['testing', 'ci'])) {
                 return false;
             }

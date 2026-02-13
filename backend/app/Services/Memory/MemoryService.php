@@ -17,7 +17,7 @@ final class MemoryService
 
     public function propose(int $userId, array $payload): array
     {
-        if (!Schema::hasTable('memories')) {
+        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
             return ['ok' => false, 'error' => 'memories_table_missing'];
         }
 
@@ -51,7 +51,7 @@ final class MemoryService
 
     public function confirm(int $userId, string $memoryId): array
     {
-        if (!Schema::hasTable('memories')) {
+        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
             return ['ok' => false, 'error' => 'memories_table_missing'];
         }
 
@@ -84,7 +84,7 @@ final class MemoryService
 
     public function delete(int $userId, string $memoryId): array
     {
-        if (!Schema::hasTable('memories')) {
+        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
             return ['ok' => false, 'error' => 'memories_table_missing'];
         }
 
@@ -103,7 +103,7 @@ final class MemoryService
 
     public function exportConfirmedPage(int $userId, int $limit, ?string $cursor): array
     {
-        if (!Schema::hasTable('memories')) {
+        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
             return [
                 'ok' => false,
                 'error' => 'memories_table_missing',
@@ -162,7 +162,7 @@ final class MemoryService
 
     public function exportConfirmedCursor(int $userId): LazyCollection
     {
-        if (!Schema::hasTable('memories')) {
+        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
             return LazyCollection::make([]);
         }
 

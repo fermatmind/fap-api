@@ -17,7 +17,7 @@ class MetricsWeeklyValidity extends Command
 
     public function handle(): int
     {
-        if ((int) env('WEEKLY_METRICS_ENABLED', 0) !== 1) {
+        if ((int) \App\Support\RuntimeConfig::value('WEEKLY_METRICS_ENABLED', 0) !== 1) {
             $this->line(json_encode(['ok' => false, 'error' => 'NOT_ENABLED']));
             return 2;
         }

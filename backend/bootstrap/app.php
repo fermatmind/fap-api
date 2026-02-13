@@ -39,6 +39,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'fm_token' => \App\Http\Middleware\FmTokenAuth::class,
             'uuid' => \App\Http\Middleware\EnsureUuidRouteParams::class,
+            'fap_feature' => \App\Http\Middleware\RequireFapFeatureEnabled::class,
         ]);
 
         // Ensure every API response (including throttled responses) gets a request id header.

@@ -23,13 +23,13 @@ trait ReportPayloadAssemblerOverridesTrait
 
         $ovrCtx = [
             'report_overrides_doc' => $unifiedDoc,
-            'overrides_debug' => (bool) env('FAP_OVR_DEBUG', false),
+            'overrides_debug' => (bool) \App\Support\RuntimeConfig::value('FAP_OVR_DEBUG', false),
             'tags' => $tags,
             'capture_explain' => app()->environment('local') && (
-                (bool) env('RE_EXPLAIN_PAYLOAD', false) || (bool) env('RE_EXPLAIN', false)
+                (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN_PAYLOAD', false) || (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false)
             ),
             'explain_collector' => (app()->environment('local') && (
-                (bool) env('RE_EXPLAIN_PAYLOAD', false) || (bool) env('RE_EXPLAIN', false)
+                (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN_PAYLOAD', false) || (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false)
             )) ? ($GLOBALS['__re_explain_collector__'] ?? null) : null,
         ];
 
@@ -133,7 +133,7 @@ trait ReportPayloadAssemblerOverridesTrait
 
     private function loadOverridesDocsFromPackChain(array $chain, array $ctx, string $legacyContentPackageDir): array
     {
-        $trace = (bool) env('FAP_OVR_TRACE', false);
+        $trace = (bool) \App\Support\RuntimeConfig::value('FAP_OVR_TRACE', false);
 
         $docs = [];
         $idx = 0;

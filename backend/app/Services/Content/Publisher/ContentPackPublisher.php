@@ -805,7 +805,7 @@ final class ContentPackPublisher
             $baseUrl = trim((string) config('app.url', ''));
         }
         if ($baseUrl === '') {
-            $baseUrl = trim((string) env('APP_URL', ''));
+            $baseUrl = trim((string) \App\Support\RuntimeConfig::value('APP_URL', ''));
         }
 
         return rtrim($baseUrl, '/');

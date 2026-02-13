@@ -36,7 +36,7 @@ class SelfCheckContentEngineCore
         }
 
         // default (keep your previous convention)
-        $defaultPkg = env('MBTI_CONTENT_PACKAGE', 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST');
+        $defaultPkg = \App\Support\RuntimeConfig::value('MBTI_CONTENT_PACKAGE', 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST');
         return base_path("../content_packages/{$defaultPkg}/manifest.json");
     }
 

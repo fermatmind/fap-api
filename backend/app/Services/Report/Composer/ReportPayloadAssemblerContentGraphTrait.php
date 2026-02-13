@@ -47,7 +47,7 @@ trait ReportPayloadAssemblerContentGraphTrait
             return null;
         }
 
-        $pin = trim((string) env('CONTENT_GRAPH_PACK_PIN', ''));
+        $pin = trim((string) \App\Support\RuntimeConfig::value('CONTENT_GRAPH_PACK_PIN', ''));
         if ($pin === '') {
             return $primary;
         }

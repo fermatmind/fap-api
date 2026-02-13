@@ -20,6 +20,15 @@ final class EventPayloadLimitsTest extends TestCase
         config()->set('fap.events.max_list_length', 50);
         config()->set('fap.events.max_string_length', 10);
 
+        DB::table('users')->insert([
+            'id' => 1001,
+            'name' => 'event-limits-user-1001',
+            'email' => 'event-limits-1001@example.com',
+            'password' => bcrypt('secret'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $token = 'fm_' . (string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
@@ -63,6 +72,15 @@ final class EventPayloadLimitsTest extends TestCase
     public function test_event_raw_payload_bytes_too_large_returns_413_and_not_store(): void
     {
         config()->set('fap.events.max_payload_bytes', 256);
+
+        DB::table('users')->insert([
+            'id' => 2001,
+            'name' => 'event-limits-user-2001',
+            'email' => 'event-limits-2001@example.com',
+            'password' => bcrypt('secret'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         $token = 'fm_' . (string) Str::uuid();
         DB::table('fm_tokens')->insert([

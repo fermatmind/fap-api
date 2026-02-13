@@ -711,7 +711,7 @@ class HighlightsGenerator
     {
         $pkg = trim($contentPackageVersion, "/\\");
 
-        $envRoot = env('FAP_CONTENT_PACKAGES_DIR');
+        $envRoot = \App\Support\RuntimeConfig::value('FAP_CONTENT_PACKAGES_DIR');
         $envRoot = is_string($envRoot) && $envRoot !== '' ? rtrim($envRoot, '/') : null;
 
         $candidates = array_values(array_filter([

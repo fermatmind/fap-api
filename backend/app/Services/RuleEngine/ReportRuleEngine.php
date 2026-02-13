@@ -333,8 +333,8 @@ class ReportRuleEngine
             'context_tags' => $ctxTags,
             'selected_n'   => count($selected),
             'rejected_n'   => count($rejected),
-            'selected'     => array_slice($selected, 0, (int)(env('RE_EXPLAIN_ITEMS_MAX', 60))),
-            'rejected'     => array_slice($rejected, 0, (int)(env('RE_EXPLAIN_ITEMS_MAX', 60))),
+            'selected'     => array_slice($selected, 0, (int)(\App\Support\RuntimeConfig::value('RE_EXPLAIN_ITEMS_MAX', 60))),
+            'rejected'     => array_slice($rejected, 0, (int)(\App\Support\RuntimeConfig::value('RE_EXPLAIN_ITEMS_MAX', 60))),
         ];
 
         $collector($ctxName, $payload);
@@ -352,7 +352,7 @@ class ReportRuleEngine
             'ctx'          => $ctxName,
             'context_tags' => $ctxTags,
             'matched_rules_n' => count($hitRules),
-            'matched_rules'   => array_slice($hitRules, 0, (int)(env('RE_EXPLAIN_ITEMS_MAX', 60))),
+            'matched_rules'   => array_slice($hitRules, 0, (int)(\App\Support\RuntimeConfig::value('RE_EXPLAIN_ITEMS_MAX', 60))),
             'selected'        => $selected,
         ];
 

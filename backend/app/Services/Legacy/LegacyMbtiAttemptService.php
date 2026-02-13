@@ -242,7 +242,7 @@ class LegacyMbtiAttemptService
 
     private function shouldLogHotCache(): bool
     {
-        return (bool) config('app.debug') || (bool) env('FAP_CACHE_LOG', true);
+        return (bool) config('app.debug') || (bool) \App\Support\RuntimeConfig::value('FAP_CACHE_LOG', true);
     }
 
     private function logHotCacheQuestions(string $packId, string $dirVersion, bool $hit, float $startedAt): void

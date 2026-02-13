@@ -85,13 +85,15 @@ class FmTokenAuth
         $request->attributes->set('fm_user_id', null);
         $request->attributes->set('user_id', null);
 
-        $resolvedUserId = $this->resolveNumeric($row->user_id ?? null);
+        $resolvedUserId = $this->resolvePositiveNumeric($row->user_id ?? null);
         if ($resolvedUserId !== null) {
             $request->attributes->set('fm_user_id', (string) $resolvedUserId);
 
-            if ($this->userExists($request, $resolvedUserId)) {
-                $request->attributes->set('user_id', (string) $resolvedUserId);
+            if (!$this->userExists($request, $resolvedUserId)) {
+                return $this->unauthorizedResponse($request, 'token_user_not_found');
             }
+
+            $request->attributes->set('user_id', (string) $resolvedUserId);
         }
 
         $anonId = $this->resolveAnonId($row->anon_id ?? null);
@@ -140,12 +142,11 @@ class FmTokenAuth
                 $requestId = trim((string) $request->header('X-Request-ID', ''));
             }
 
-            Log::error('fm_token_auth_user_exists_failed', [
+            Log::error('[SEC] fm_token_user_exists_failed', [
                 'user_id' => $userId,
                 'path' => $request->path(),
                 'request_id' => $requestId !== '' ? $requestId : null,
-                'exception' => $e::class,
-                'message' => $e->getMessage(),
+                'exception' => $e,
             ]);
 
             return false;
@@ -224,6 +225,16 @@ class FmTokenAuth
         }
 
         return (int) $raw;
+    }
+
+    private function resolvePositiveNumeric(mixed $candidate): ?int
+    {
+        $value = $this->resolveNumeric($candidate);
+        if ($value === null || $value <= 0) {
+            return null;
+        }
+
+        return $value;
     }
 
     private function resolveAnonId(mixed $candidate): ?string

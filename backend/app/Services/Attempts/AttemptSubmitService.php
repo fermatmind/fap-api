@@ -7,35 +7,22 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
-use App\Services\Analytics\EventRecorder;
-use App\Services\Assessment\AssessmentEngine;
-use App\Services\Assessments\AssessmentService;
-use App\Services\Commerce\BenefitWalletService;
-use App\Services\Commerce\EntitlementManager;
+use App\Services\Assessment\AssessmentRunner;
 use App\Services\Report\ReportGatekeeper;
-use App\Services\Report\ReportSnapshotStore;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class AttemptSubmitService
 {
-    private const B2B_CREDIT_BENEFIT_CODE = 'B2B_ASSESSMENT_ATTEMPT_SUBMIT';
-
     public function __construct(
         private ScaleRegistry $registry,
-        private AssessmentEngine $engine,
-        private ReportSnapshotStore $reportSnapshots,
-        private EntitlementManager $entitlements,
-        private EventRecorder $eventRecorder,
-        private BenefitWalletService $benefitWallets,
         private AttemptProgressService $progressService,
-        private AnswerSetStore $answerSets,
-        private AnswerRowWriter $answerRowWriter,
-        private AssessmentService $assessments,
+        private AttemptAnswerPersistence $answerPersistence,
+        private AssessmentRunner $assessmentRunner,
+        private AttemptSubmitSideEffects $sideEffects,
         private ReportGatekeeper $reportGatekeeper,
     ) {}
 
@@ -82,12 +69,6 @@ class AttemptSubmitService
 
         $answersDigest = $this->computeAnswersDigest($mergedAnswers, $scaleCode, $packId, $dirVersion);
 
-        $engineAttempt = [
-            'org_id' => $orgId,
-            'scale_code' => $scaleCode,
-            'pack_id' => $packId,
-            'dir_version' => $dirVersion,
-        ];
         $scoreContext = [
             'duration_ms' => $durationMs,
             'started_at' => $attempt->started_at,
@@ -99,7 +80,14 @@ class AttemptSubmitService
             'dir_version' => $dirVersion,
         ];
 
-        $scored = $this->engine->score($engineAttempt, $mergedAnswers, $scoreContext);
+        $scored = $this->assessmentRunner->run(
+            $scaleCode,
+            $orgId,
+            $packId,
+            $dirVersion,
+            $mergedAnswers,
+            $scoreContext
+        );
         if (! ($scored['ok'] ?? false)) {
             throw new ApiProblemException(500, 'SCORING_FAILED', (string) ($scored['message'] ?? 'scoring failed.'));
         }
@@ -215,15 +203,7 @@ class AttemptSubmitService
             }
             $locked->save();
 
-            $stored = $this->answerSets->storeFinalAnswers($locked, $mergedAnswers, $durationMs, $scoringSpecVersion);
-            if (! ($stored['ok'] ?? false)) {
-                throw new ApiProblemException(500, 'INTERNAL_ERROR', (string) ($stored['message'] ?? 'failed to store answer set.'));
-            }
-
-            $rowsWritten = $this->answerRowWriter->writeRows($locked, $mergedAnswers, $durationMs);
-            if (! ($rowsWritten['ok'] ?? false)) {
-                throw new ApiProblemException(500, 'INTERNAL_ERROR', (string) ($rowsWritten['message'] ?? 'failed to write answer rows.'));
-            }
+            $this->answerPersistence->persist($locked, $mergedAnswers, $durationMs, $scoringSpecVersion);
 
             $axisScores = is_array($scoreResult->axisScoresJson ?? null)
                 ? $scoreResult->axisScoresJson
@@ -295,7 +275,7 @@ class AttemptSubmitService
 
         $snapshotJobCtx = null;
         if (($responsePayload['ok'] ?? false) === true && is_array($postCommitCtx)) {
-            $snapshotJobCtx = $this->runSubmitPostCommitSideEffects($ctx, $postCommitCtx, $actorUserId, $actorAnonId);
+            $snapshotJobCtx = $this->sideEffects->runAfterSubmit($ctx, $postCommitCtx, $actorUserId, $actorAnonId);
         }
 
         if (is_array($snapshotJobCtx)) {
@@ -309,232 +289,18 @@ class AttemptSubmitService
 
         if (($responsePayload['ok'] ?? false) === true) {
             $this->progressService->clearProgress($attemptId);
-            $this->eventRecorder->record('test_submit', $this->resolveUserIdInt($ctx, $actorUserId), [
-                'scale_code' => (string) ($postCommitCtx['scale_code'] ?? ''),
-                'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
-                'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
-                'attempt_id' => $attemptId,
-            ], [
-                'org_id' => $orgId,
-                'anon_id' => $actorAnonId,
-                'attempt_id' => $attemptId,
-                'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
-                'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
-            ]);
+            $this->sideEffects->recordSubmitEvent(
+                $ctx,
+                $attemptId,
+                $actorUserId,
+                $actorAnonId,
+                is_array($postCommitCtx) ? $postCommitCtx : []
+            );
         }
 
-        $this->appendReportPayload($ctx, $attemptId, $actorUserId, $actorAnonId, $responsePayload);
+        $this->sideEffects->appendReportPayload($ctx, $attemptId, $actorUserId, $actorAnonId, $responsePayload);
 
         return $responsePayload;
-    }
-
-    private function runSubmitPostCommitSideEffects(
-        OrgContext $ctx,
-        array $payload,
-        ?string $actorUserId,
-        ?string $actorAnonId
-    ): ?array {
-        $orgId = (int) ($payload['org_id'] ?? 0);
-        $attemptId = trim((string) ($payload['attempt_id'] ?? ''));
-        if ($attemptId === '') {
-            return null;
-        }
-
-        $scaleCode = strtoupper(trim((string) ($payload['scale_code'] ?? '')));
-        $packId = trim((string) ($payload['pack_id'] ?? ''));
-        $dirVersion = trim((string) ($payload['dir_version'] ?? ''));
-        $scoringSpecVersion = trim((string) ($payload['scoring_spec_version'] ?? ''));
-        $inviteToken = trim((string) ($payload['invite_token'] ?? ''));
-        $creditBenefitCode = strtoupper(trim((string) ($payload['credit_benefit_code'] ?? '')));
-        $entitlementBenefitCode = strtoupper(trim((string) ($payload['entitlement_benefit_code'] ?? '')));
-
-        $consumeB2BCredit = false;
-        if ($inviteToken !== '' && $orgId > 0) {
-            try {
-                $assignment = $this->assessments->attachAttemptByInviteToken($orgId, $inviteToken, $attemptId);
-                $consumeB2BCredit = $assignment !== null;
-            } catch (\Throwable $e) {
-                Log::error('SUBMIT_POST_COMMIT_ATTACH_INVITE_FAILED', [
-                    'org_id' => $orgId,
-                    'attempt_id' => $attemptId,
-                    'invite_token' => $inviteToken,
-                    'error' => $e->getMessage(),
-                ]);
-            }
-        }
-
-        $creditOk = true;
-        if ($consumeB2BCredit) {
-            try {
-                $consume = $this->benefitWallets->consume($orgId, self::B2B_CREDIT_BENEFIT_CODE, $attemptId);
-                $creditOk = (bool) ($consume['ok'] ?? false);
-                if (! $creditOk) {
-                    Log::warning('SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_FAILED', [
-                        'org_id' => $orgId,
-                        'attempt_id' => $attemptId,
-                        'error_code' => (string) data_get($consume, 'error_code', data_get($consume, 'error', 'CREDITS_CONSUME_FAILED')),
-                        'message' => $consume['message'] ?? 'credits consume failed.',
-                    ]);
-                }
-            } catch (\Throwable $e) {
-                $creditOk = false;
-                Log::error('SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_EXCEPTION', [
-                    'org_id' => $orgId,
-                    'attempt_id' => $attemptId,
-                    'error' => $e->getMessage(),
-                ]);
-            }
-        }
-
-        if ($orgId > 0 && $creditBenefitCode !== '' && ! $consumeB2BCredit) {
-            try {
-                $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
-                $creditOk = (bool) ($consume['ok'] ?? false);
-                if ($creditOk) {
-                    $this->eventRecorder->record('wallet_consumed', $this->resolveUserIdInt($ctx, $actorUserId), [
-                        'scale_code' => $scaleCode,
-                        'pack_id' => $packId,
-                        'dir_version' => $dirVersion,
-                        'attempt_id' => $attemptId,
-                        'benefit_code' => $creditBenefitCode,
-                        'sku' => null,
-                    ], [
-                        'org_id' => $orgId,
-                        'anon_id' => $actorAnonId,
-                        'attempt_id' => $attemptId,
-                        'pack_id' => $packId,
-                        'dir_version' => $dirVersion,
-                    ]);
-                } else {
-                    Log::warning('SUBMIT_POST_COMMIT_CREDIT_CONSUME_FAILED', [
-                        'org_id' => $orgId,
-                        'attempt_id' => $attemptId,
-                        'benefit_code' => $creditBenefitCode,
-                        'error_code' => (string) data_get($consume, 'error_code', data_get($consume, 'error', 'INSUFFICIENT_CREDITS')),
-                        'message' => $consume['message'] ?? 'insufficient credits.',
-                    ]);
-                }
-            } catch (\Throwable $e) {
-                $creditOk = false;
-                Log::error('SUBMIT_POST_COMMIT_CREDIT_CONSUME_EXCEPTION', [
-                    'org_id' => $orgId,
-                    'attempt_id' => $attemptId,
-                    'benefit_code' => $creditBenefitCode,
-                    'error' => $e->getMessage(),
-                ]);
-            }
-        }
-
-        if ($creditOk && $orgId > 0 && $entitlementBenefitCode !== '') {
-            $userIdRaw = $this->resolveUserId($ctx, $actorUserId);
-            $anonIdRaw = $this->resolveAnonId($ctx, $actorAnonId);
-
-            try {
-                $grant = $this->entitlements->grantAttemptUnlock(
-                    $orgId,
-                    $userIdRaw,
-                    $anonIdRaw,
-                    $entitlementBenefitCode,
-                    $attemptId,
-                    null
-                );
-
-                if (! ($grant['ok'] ?? false)) {
-                    Log::warning('SUBMIT_POST_COMMIT_GRANT_FAILED', [
-                        'org_id' => $orgId,
-                        'attempt_id' => $attemptId,
-                        'benefit_code' => $entitlementBenefitCode,
-                        'error_code' => (string) data_get($grant, 'error_code', data_get($grant, 'error', 'ENTITLEMENT_GRANT_FAILED')),
-                        'message' => $grant['message'] ?? 'entitlement grant failed.',
-                    ]);
-                }
-            } catch (\Throwable $e) {
-                Log::error('SUBMIT_POST_COMMIT_GRANT_EXCEPTION', [
-                    'org_id' => $orgId,
-                    'attempt_id' => $attemptId,
-                    'benefit_code' => $entitlementBenefitCode,
-                    'error' => $e->getMessage(),
-                ]);
-            }
-        }
-
-        try {
-            $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, null, [
-                'scale_code' => $scaleCode,
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'scoring_spec_version' => $scoringSpecVersion,
-            ]);
-        } catch (\Throwable $e) {
-            Log::error('SUBMIT_POST_COMMIT_SEED_SNAPSHOT_FAILED', [
-                'org_id' => $orgId,
-                'attempt_id' => $attemptId,
-                'error' => $e->getMessage(),
-            ]);
-
-            return null;
-        }
-
-        return [
-            'org_id' => $orgId,
-            'attempt_id' => $attemptId,
-            'trigger_source' => 'submit',
-            'order_no' => null,
-        ];
-    }
-
-    private function appendReportPayload(
-        OrgContext $ctx,
-        string $attemptId,
-        ?string $actorUserId,
-        ?string $actorAnonId,
-        array &$responsePayload
-    ): void {
-        $userId = $this->resolveUserId($ctx, $actorUserId);
-        $anonId = $this->resolveAnonId($ctx, $actorAnonId);
-
-        try {
-            $gate = $this->reportGatekeeper->resolve(
-                $ctx->orgId(),
-                $attemptId,
-                $userId,
-                $anonId,
-                $ctx->role(),
-            );
-        } catch (\Throwable $e) {
-            Log::warning('SUBMIT_REPORT_GATE_EXCEPTION', [
-                'org_id' => $ctx->orgId(),
-                'attempt_id' => $attemptId,
-                'error' => $e->getMessage(),
-            ]);
-
-            $responsePayload['report'] = [
-                'ok' => false,
-                'locked' => true,
-                'access_level' => 'free',
-            ];
-
-            return;
-        }
-
-        if (! ($gate['ok'] ?? false)) {
-            Log::warning('SUBMIT_REPORT_GATE_FAILED', [
-                'org_id' => $ctx->orgId(),
-                'attempt_id' => $attemptId,
-                'error_code' => (string) data_get($gate, 'error_code', data_get($gate, 'error', 'REPORT_FAILED')),
-                'message' => (string) ($gate['message'] ?? 'report generation failed.'),
-            ]);
-
-            $responsePayload['report'] = [
-                'ok' => false,
-                'locked' => true,
-                'access_level' => 'free',
-            ];
-
-            return;
-        }
-
-        $responsePayload['report'] = $gate;
     }
 
     private function ownedAttemptQuery(
@@ -616,19 +382,9 @@ class AttemptSubmitService
         return null;
     }
 
-    private function resolveUserIdInt(OrgContext $ctx, ?string $actorUserId): ?int
-    {
-        $value = $this->resolveUserId($ctx, $actorUserId);
-        if ($value === null) {
-            return null;
-        }
-
-        return (int) $value;
-    }
-
     private function computeAnswersDigest(array $answers, string $scaleCode, string $packId, string $dirVersion): string
     {
-        $canonical = $this->answerSets->canonicalJson($answers);
+        $canonical = $this->answerPersistence->canonicalJson($answers);
         $raw = strtoupper($scaleCode).'|'.$packId.'|'.$dirVersion.'|'.$canonical;
 
         return hash('sha256', $raw);

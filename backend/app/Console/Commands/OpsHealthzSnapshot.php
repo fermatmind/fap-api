@@ -21,12 +21,12 @@ class OpsHealthzSnapshot extends Command
     {
         $env = trim((string) $this->option('env'));
         if ($env === '') {
-            $env = (string) (getenv('FAP_ENV') ?: config('app.env') ?: 'local');
+            $env = (string) (\App\Support\RuntimeConfig::raw('FAP_ENV') ?: config('app.env') ?: 'local');
         }
 
         $baseUrl = trim((string) $this->option('base-url'));
         if ($baseUrl === '') {
-            $baseUrl = (string) (getenv('FAP_BASE_URL') ?: 'http://127.0.0.1:8000');
+            $baseUrl = (string) (\App\Support\RuntimeConfig::raw('FAP_BASE_URL') ?: 'http://127.0.0.1:8000');
         }
 
         $url = rtrim($baseUrl, '/') . '/api/v0.2/healthz';
@@ -130,7 +130,7 @@ class OpsHealthzSnapshot extends Command
 
     private function resolveRevision(): string
     {
-        $envRev = getenv('SENTRY_RELEASE') ?: getenv('REVISION');
+        $envRev = \App\Support\RuntimeConfig::raw('SENTRY_RELEASE') ?: \App\Support\RuntimeConfig::raw('REVISION');
         if (is_string($envRev) && trim($envRev) !== '') {
             return trim($envRev);
         }

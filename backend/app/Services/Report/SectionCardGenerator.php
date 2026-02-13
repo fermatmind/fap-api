@@ -145,9 +145,9 @@ final class SectionCardGenerator
 
         // explain 开关
         $debugRE = app()->environment('local', 'development') && (
-            (bool) env('FAP_RE_DEBUG', false) ||
-            (bool) env('RE_EXPLAIN', false)   ||
-            (bool) env('RE_CTX_TAGS', false)
+            (bool) \App\Support\RuntimeConfig::value('FAP_RE_DEBUG', false) ||
+            (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false)   ||
+            (bool) \App\Support\RuntimeConfig::value('RE_CTX_TAGS', false)
         );
         $captureExplain = (bool)($axisInfo['capture_explain'] ?? $axisInfo['_capture_explain'] ?? false);
 
@@ -292,7 +292,7 @@ final class SectionCardGenerator
      */
     public function generate(string $section, string $contentPackageVersion, array $userTags, array $axisInfo = []): array
     {
-        if ((bool) env('FAP_FORBID_LEGACY_CARDS_LOADER', false)) {
+        if ((bool) \App\Support\RuntimeConfig::value('FAP_FORBID_LEGACY_CARDS_LOADER', false)) {
             throw new \RuntimeException('LEGACY_SECTION_CARD_GENERATOR_USED: generate(section, contentPackageVersion, ...)');
         }
 

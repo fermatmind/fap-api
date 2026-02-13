@@ -10,6 +10,7 @@ use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Scale\ScaleRegistry;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ReportGatekeeper
 {
@@ -468,12 +469,14 @@ class ReportGatekeeper
                     'status' => 500,
                 ];
         } catch (\Throwable $e) {
-            return [
-                'ok' => false,
-                'error' => 'REPORT_FAILED',
-                'message' => 'report generation failed.',
-                'status' => 500,
-            ];
+            Log::error('[KEY] report_gatekeeper_build_failed', [
+                'org_id' => (int) ($attempt->org_id ?? 0),
+                'attempt_id' => (string) ($attempt->id ?? ''),
+                'scale_code' => $scaleCode,
+                'exception' => $e,
+            ]);
+
+            throw $e;
         }
     }
 

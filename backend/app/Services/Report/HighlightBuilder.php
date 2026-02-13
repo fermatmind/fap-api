@@ -305,7 +305,7 @@ return ['items' => $items, '_meta' => $meta];
         /** @var RuleEngine $re */
         $re = app(RuleEngine::class);
 
-        $debugRE = app()->environment('local', 'development') && (bool) env('FAP_RE_DEBUG', false);
+        $debugRE = app()->environment('local', 'development') && (bool) \App\Support\RuntimeConfig::value('FAP_RE_DEBUG', false);
         $captureExplain = (bool)($report['capture_explain'] ?? $report['_capture_explain'] ?? false);
 
         $explainCollector = null;
@@ -591,7 +591,7 @@ if ($level === '' || $this->levelRank($level, $levelOrder) < 0) {
 
     private function forbidHighlightsFallback(string $reason): void
     {
-        if ((bool) env('FAP_FORBID_HIGHLIGHTS_FALLBACK', false)) {
+        if ((bool) \App\Support\RuntimeConfig::value('FAP_FORBID_HIGHLIGHTS_FALLBACK', false)) {
             throw new \RuntimeException('HIGHLIGHTS_FALLBACK_USED: ' . $reason);
         }
     }

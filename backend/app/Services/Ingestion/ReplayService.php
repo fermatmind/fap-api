@@ -13,7 +13,7 @@ class ReplayService
 {
     public function replay(string $provider, string $batchId): array
     {
-        if (!Schema::hasTable('ingest_batches')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ingest_batches')) {
             return [
                 'ok' => false,
                 'error' => 'MISSING_TABLE',
@@ -35,9 +35,9 @@ class ReplayService
         $runId = (string) Str::uuid();
         $store = new IdempotencyStore();
         $tables = [
-            'sleep_samples' => Schema::hasTable('sleep_samples'),
-            'screen_time_samples' => Schema::hasTable('screen_time_samples'),
-            'health_samples' => Schema::hasTable('health_samples'),
+            'sleep_samples' => \App\Support\SchemaBaseline::hasTable('sleep_samples'),
+            'screen_time_samples' => \App\Support\SchemaBaseline::hasTable('screen_time_samples'),
+            'health_samples' => \App\Support\SchemaBaseline::hasTable('health_samples'),
         ];
 
         $this->streamSamplesFromTable('sleep_samples', $batchId, 'sleep', $provider, $runId, $store, $tables, $inserted, $skipped);

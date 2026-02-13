@@ -18,7 +18,7 @@ final class EventRecorder
 
     public function record(string $eventCode, ?int $userId, array $meta = [], array $context = []): void
     {
-        if (!Schema::hasTable('events')) {
+        if (!\App\Support\SchemaBaseline::hasTable('events')) {
             return;
         }
 
@@ -43,7 +43,7 @@ final class EventRecorder
             'updated_at' => $now,
         ];
 
-        if (Schema::hasColumn('events', 'experiments_json')) {
+        if (\App\Support\SchemaBaseline::hasColumn('events', 'experiments_json')) {
             $experiments = $context['experiments_json'] ?? [];
             $payload['experiments_json'] = is_array($experiments) ? $experiments : [];
         }

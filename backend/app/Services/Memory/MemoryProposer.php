@@ -9,7 +9,7 @@ final class MemoryProposer
 {
     public function proposeFromInsights(int $userId): array
     {
-        if (!Schema::hasTable('ai_insights')) {
+        if (!\App\Support\SchemaBaseline::hasTable('ai_insights')) {
             return ['ok' => false, 'error' => 'ai_insights_missing', 'items' => []];
         }
 

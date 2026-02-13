@@ -17,7 +17,7 @@ class FlagManager
 
     public function resolve(int $orgId, ?int $userId, ?string $anonId): array
     {
-        if (!Schema::hasTable('feature_flags')) {
+        if (!\App\Support\SchemaBaseline::hasTable('feature_flags')) {
             return [];
         }
 

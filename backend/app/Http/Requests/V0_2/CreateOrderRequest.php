@@ -4,7 +4,6 @@ namespace App\Http\Requests\V0_2;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Exists;
 
@@ -120,11 +119,8 @@ class CreateOrderRequest extends FormRequest
 
         return Rule::exists('skus', 'sku')->where(function (Builder $query) use ($currency): void {
             $query->where('currency', $currency)
-                ->where('is_active', 1);
-
-            if (Schema::hasColumn('skus', 'org_id')) {
-                $query->where('org_id', 1);
-            }
+                ->where('is_active', 1)
+                ->where('org_id', $this->legacyOrgId());
         });
     }
 

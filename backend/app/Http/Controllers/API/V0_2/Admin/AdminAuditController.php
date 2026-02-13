@@ -15,7 +15,7 @@ class AdminAuditController extends Controller
     {
         $this->assertPermission(PermissionNames::ADMIN_AUDIT_READ);
 
-        if (!Schema::hasTable('audit_logs')) {
+        if (!\App\Support\SchemaBaseline::hasTable('audit_logs')) {
             return response()->json([
                 'ok' => false,
                 'error' => 'TABLE_MISSING',
