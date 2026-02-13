@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Jobs\Ops\TouchFmTokenLastUsedAtJob;
 use App\Support\OrgContext;
 use Closure;
 use Illuminate\Http\Request;
@@ -29,19 +30,42 @@ class FmTokenAuth
 
         $request->attributes->set('fm_token', $token);
 
+        $tokenHash = hash('sha256', $token);
+        $select = [
+            'token_hash',
+            'user_id',
+            'anon_id',
+            'org_id',
+            'role',
+            'meta_json',
+            'expires_at',
+            'revoked_at',
+        ];
+
         $row = DB::table('fm_tokens')
-            ->select([
-                'token_hash',
-                'user_id',
-                'anon_id',
-                'org_id',
-                'role',
-                'meta_json',
-                'expires_at',
-                'revoked_at',
-            ])
-            ->where('token_hash', hash('sha256', $token))
+            ->select($select)
+            ->where('token_hash', $tokenHash)
             ->first();
+
+        if (!$row) {
+            $row = DB::table('fm_tokens')
+                ->select($select)
+                ->where('token', $token)
+                ->first();
+
+            if ($row) {
+                $currentHash = trim((string) ($row->token_hash ?? ''));
+                if ($currentHash === '') {
+                    DB::table('fm_tokens')
+                        ->where('token', $token)
+                        ->update([
+                            'token_hash' => $tokenHash,
+                            'updated_at' => now(),
+                        ]);
+                    $row->token_hash = $tokenHash;
+                }
+            }
+        }
 
         if (!$row) {
             return $this->unauthorizedResponse($request, 'token_not_found');
@@ -65,7 +89,7 @@ class FmTokenAuth
         if ($resolvedUserId !== null) {
             $request->attributes->set('fm_user_id', (string) $resolvedUserId);
 
-            if ($this->userExists($resolvedUserId)) {
+            if ($this->userExists($request, $resolvedUserId)) {
                 $request->attributes->set('user_id', (string) $resolvedUserId);
             }
         }
@@ -83,12 +107,11 @@ class FmTokenAuth
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
 
-        DB::table('fm_tokens')
-            ->where('token_hash', (string) ($row->token_hash ?? ''))
-            ->update([
-                'last_used_at' => now(),
-                'updated_at' => now(),
-            ]);
+        $dispatchHash = trim((string) ($row->token_hash ?? ''));
+        if ($dispatchHash === '') {
+            $dispatchHash = $tokenHash;
+        }
+        TouchFmTokenLastUsedAtJob::dispatch($dispatchHash)->onQueue('ops');
 
         $ctx = new OrgContext();
         $ctx->set(
@@ -104,12 +127,28 @@ class FmTokenAuth
         return $next($request);
     }
 
-    private function userExists(int $userId): bool
+    private function userExists(Request $request, int $userId): bool
     {
         try {
             return DB::table('users')->where('id', $userId)->exists();
-        } catch (\Throwable) {
-            return true;
+        } catch (\Throwable $e) {
+            $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+            if ($requestId === '') {
+                $requestId = trim((string) $request->header('X-Request-Id', ''));
+            }
+            if ($requestId === '') {
+                $requestId = trim((string) $request->header('X-Request-ID', ''));
+            }
+
+            Log::error('fm_token_auth_user_exists_failed', [
+                'user_id' => $userId,
+                'path' => $request->path(),
+                'request_id' => $requestId !== '' ? $requestId : null,
+                'exception' => $e::class,
+                'message' => $e->getMessage(),
+            ]);
+
+            return false;
         }
     }
 

@@ -179,6 +179,7 @@ final class ShareClickSecurityTest extends TestCase
             'org_id' => $orgId,
             'anon_id' => $anonId,
             'attempt_id' => $attemptId,
+            'share_id' => $shareId,
             'meta_json' => json_encode([
                 'share_id' => $shareId,
                 'attempt_id' => $attemptId,

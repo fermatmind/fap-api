@@ -60,52 +60,6 @@ return new class extends Migration
             }
         });
 
-        if (Schema::hasColumn('integrations', 'ingest_key')) {
-            $hasId = Schema::hasColumn('integrations', 'id');
-            $hasProvider = Schema::hasColumn('integrations', 'provider');
-            $hasUserId = Schema::hasColumn('integrations', 'user_id');
-
-            $query = DB::table('integrations')->select('ingest_key', 'ingest_key_hash');
-            if ($hasId) {
-                $query->addSelect('id');
-            }
-            if ($hasProvider) {
-                $query->addSelect('provider');
-            }
-            if ($hasUserId) {
-                $query->addSelect('user_id');
-            }
-
-            $rows = $query->get();
-            foreach ($rows as $row) {
-                $ingestKey = trim((string) ($row->ingest_key ?? ''));
-                if ($ingestKey === '') {
-                    continue;
-                }
-                $hash = hash('sha256', $ingestKey);
-                $current = trim((string) ($row->ingest_key_hash ?? ''));
-                if ($current === $hash) {
-                    continue;
-                }
-                $update = DB::table('integrations');
-                if ($hasId && is_numeric($row->id ?? null)) {
-                    $update->where('id', (int) $row->id);
-                } elseif ($hasProvider && isset($row->provider) && $hasUserId && is_numeric($row->user_id ?? null)) {
-                    $update
-                        ->where('provider', (string) $row->provider)
-                        ->where('user_id', (int) $row->user_id);
-                } elseif ($hasProvider && isset($row->provider)) {
-                    $update->where('provider', (string) $row->provider);
-                } else {
-                    $update->where('ingest_key', $ingestKey);
-                }
-
-                $update->update([
-                    'ingest_key_hash' => $hash,
-                ]);
-            }
-        }
-
         if (!$this->indexExists('integrations', 'integrations_ingest_key_hash_unique')) {
             Schema::table('integrations', function (Blueprint $table): void {
                 $table->unique(['ingest_key_hash'], 'integrations_ingest_key_hash_unique');

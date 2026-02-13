@@ -43,18 +43,42 @@ class FmTokenOptional
         $request->attributes->set('fm_token', $token);
 
         $tokenHash = hash('sha256', $token);
+        $select = [
+            'token_hash',
+            'user_id',
+            'anon_id',
+            'org_id',
+            'role',
+            'meta_json',
+            'expires_at',
+            'revoked_at',
+        ];
+
         $row = DB::table('fm_tokens')
-            ->select([
-                'user_id',
-                'anon_id',
-                'org_id',
-                'role',
-                'meta_json',
-                'expires_at',
-                'revoked_at',
-            ])
+            ->select($select)
             ->where('token_hash', $tokenHash)
             ->first();
+
+        if (!$row) {
+            $row = DB::table('fm_tokens')
+                ->select($select)
+                ->where('token', $token)
+                ->first();
+
+            if ($row) {
+                $currentHash = trim((string) ($row->token_hash ?? ''));
+                if ($currentHash === '') {
+                    DB::table('fm_tokens')
+                        ->where('token', $token)
+                        ->update([
+                            'token_hash' => $tokenHash,
+                            'updated_at' => now(),
+                        ]);
+                    $row->token_hash = $tokenHash;
+                }
+            }
+        }
+
         if (!$row) {
             return $next($request);
         }

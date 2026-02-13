@@ -86,7 +86,7 @@ class LegacyShareFlowService
         try {
             $gen = Event::query()
                 ->where('event_code', 'share_generate')
-                ->where('meta_json->share_id', $shareId)
+                ->where('share_id', $shareId)
                 ->orderByDesc('occurred_at')
                 ->first();
         } catch (\Throwable) {
@@ -191,6 +191,7 @@ class LegacyShareFlowService
         $event->event_code = 'share_click';
         $event->org_id = (int) ($attempt->org_id ?? 0);
         $event->attempt_id = (string) $attempt->id;
+        $event->share_id = $shareId;
         $event->anon_id = $this->resolveClickAnonId($input, $gen);
         $event->meta_json = $meta;
         $event->occurred_at = !empty($input['occurred_at'])
@@ -316,6 +317,21 @@ class LegacyShareFlowService
     private function createLegacyEvent(string $eventCode, string $attemptId, int $orgId, ?string $anonId, array $meta): void
     {
         try {
+            $shareId = trim((string) ($meta['share_id'] ?? ''));
+            if ($shareId === '' || strlen($shareId) > 64) {
+                $shareId = null;
+            }
+
+            $shareChannel = trim((string) ($meta['share_channel'] ?? ($meta['channel'] ?? '')));
+            if ($shareChannel === '') {
+                $shareChannel = null;
+            }
+
+            $clientPlatform = trim((string) ($meta['client_platform'] ?? ''));
+            if ($clientPlatform === '') {
+                $clientPlatform = null;
+            }
+
             Event::query()->create([
                 'id' => (string) Str::uuid(),
                 'event_code' => $eventCode,
@@ -323,7 +339,9 @@ class LegacyShareFlowService
                 'org_id' => $orgId,
                 'anon_id' => $anonId,
                 'channel' => $meta['channel'] ?? null,
-                'client_platform' => $meta['client_platform'] ?? null,
+                'client_platform' => $clientPlatform,
+                'share_id' => $shareId,
+                'share_channel' => $shareChannel,
                 'meta_json' => $meta,
                 'occurred_at' => now(),
                 'created_at' => now(),

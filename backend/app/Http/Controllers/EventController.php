@@ -6,11 +6,11 @@ use App\Models\Event;
 use App\Services\Analytics\EventPayloadLimiter;
 use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Analytics\EventNormalizer;
+use App\Support\Database\SchemaCache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class EventController extends Controller
@@ -41,7 +41,7 @@ class EventController extends Controller
             return $token;
         }
 
-        if (!Schema::hasTable('fm_tokens') || !Schema::hasColumn('fm_tokens', 'token')) {
+        if (!SchemaCache::hasTable('fm_tokens') || !SchemaCache::hasColumn('fm_tokens', 'token')) {
             abort(response()->json([
                 'ok' => false,
                 'error' => 'unauthorized',
@@ -172,7 +172,7 @@ class EventController extends Controller
             ? Carbon::parse($data['occurred_at'])
             : now());
 
-        if (Schema::hasColumn('events', 'experiments_json')) {
+        if (SchemaCache::hasColumn('events', 'experiments_json')) {
             $orgId = $this->resolveOrgId($request);
             $anonId = $columns['anon_id'] ?? $data['anon_id'] ?? null;
             $anonId = is_string($anonId) || is_numeric($anonId) ? trim((string) $anonId) : null;
