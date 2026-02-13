@@ -862,3 +862,10 @@ php artisan test --filter MigrationRollbackSafetyTest
 php artisan test --filter MigrationsNoSilentCatchTest
 php artisan test --filter MigrationProtectedTablesNoDropTest
 echo "[CI] migration safety gates OK"
+
+echo "[CI] webhook/attempt regression gates"
+php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_3/PaymentWebhookControllerTest.php
+php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_3/AttemptOwnershipAnd404Test.php
+php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_3/PaymentWebhookRouteWiringTest.php
+php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/Architecture/V0_3TraitReferenceTest.php
+echo "[CI] webhook/attempt regression gates OK"
