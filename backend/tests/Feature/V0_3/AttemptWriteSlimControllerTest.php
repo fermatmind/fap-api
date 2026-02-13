@@ -5,11 +5,31 @@ namespace Tests\Feature\V0_3;
 use Database\Seeders\Pr17SimpleScoreDemoSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class AttemptWriteSlimControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
 
     private function seedScales(): void
     {
@@ -38,6 +58,7 @@ class AttemptWriteSlimControllerTest extends TestCase
         $this->seedScales();
 
         $anonId = 'slim-submit-anon';
+        $anonToken = $this->issueAnonToken($anonId);
 
         $start = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -52,6 +73,7 @@ class AttemptWriteSlimControllerTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => [
