@@ -94,7 +94,7 @@ final class AttemptOwnershipTraitTest extends TestCase
         $this->seedScales();
         $attemptId = $this->seedAttemptAndResult('sec003-owner-anon');
 
-        $this->getJson("/api/v0.3/attempts/{$attemptId}/report")
+        $this->getJson(route('api.v0_3.attempts.report', ['id' => $attemptId]))
             ->assertStatus(404);
     }
 
@@ -104,7 +104,7 @@ final class AttemptOwnershipTraitTest extends TestCase
         $attemptId = $this->seedAttemptAndResult('sec003-owner-anon');
 
         $this->withHeader('X-Anon-Id', 'sec003-other-anon')
-            ->getJson("/api/v0.3/attempts/{$attemptId}/report")
+            ->getJson(route('api.v0_3.attempts.report', ['id' => $attemptId]))
             ->assertStatus(404);
     }
 
@@ -114,7 +114,7 @@ final class AttemptOwnershipTraitTest extends TestCase
         $attemptId = $this->seedAttemptAndResult('sec003-owner-anon');
 
         $response = $this->withHeader('X-Anon-Id', 'sec003-owner-anon')
-            ->getJson("/api/v0.3/attempts/{$attemptId}/report");
+            ->getJson(route('api.v0_3.attempts.report', ['id' => $attemptId]));
 
         $this->assertContains($response->status(), [200, 402]);
 
