@@ -131,17 +131,6 @@ class FmTokenAuth
 
     private function resolveOrgId(Request $request, object $row): int
     {
-        $fromToken = $this->resolveNumeric($row->org_id ?? null);
-        if ($fromToken !== null) {
-            return $fromToken;
-        }
-
-        $meta = $this->decodeMeta($row->meta_json ?? null);
-        $metaOrgId = $this->resolveNumeric($meta['org_id'] ?? null);
-        if ($metaOrgId !== null) {
-            return $metaOrgId;
-        }
-
         $headerOrgId = trim((string) $request->header('X-FM-Org-Id', ''));
         if ($headerOrgId === '') {
             $headerOrgId = trim((string) $request->header('X-Org-Id', ''));
@@ -151,6 +140,20 @@ class FmTokenAuth
         }
 
         $headerOrg = $this->resolveNumeric($headerOrgId);
+        if ($headerOrg !== null) {
+            return $headerOrg;
+        }
+
+        $fromToken = $this->resolveNumeric($row->org_id ?? null);
+        if ($fromToken !== null && $fromToken > 0) {
+            return $fromToken;
+        }
+
+        $meta = $this->decodeMeta($row->meta_json ?? null);
+        $metaOrgId = $this->resolveNumeric($meta['org_id'] ?? null);
+        if ($metaOrgId !== null && $metaOrgId > 0) {
+            return $metaOrgId;
+        }
 
         return $headerOrg ?? 0;
     }
