@@ -105,17 +105,12 @@ class ResolveOrgContext
 
     private function resolveOrgIdFromToken(Request $request): ?int
     {
-        $token = $this->extractBearerToken($request);
-        if ($token === '') {
+        $payload = $this->resolveFmTokenPayload($request);
+        if (!($payload['ok'] ?? false)) {
             return null;
         }
 
-        $res = $this->tokenService->validateToken($token);
-        if (!($res['ok'] ?? false)) {
-            return null;
-        }
-
-        $orgId = $res['org_id'] ?? null;
+        $orgId = $payload['org_id'] ?? null;
         if (!is_int($orgId)) {
             return null;
         }
@@ -135,17 +130,12 @@ class ResolveOrgContext
 
     private function resolveUserIdFromToken(Request $request): ?int
     {
-        $token = $this->extractBearerToken($request);
-        if ($token === '') {
+        $payload = $this->resolveFmTokenPayload($request);
+        if (!($payload['ok'] ?? false)) {
             return null;
         }
 
-        $res = $this->tokenService->validateToken($token);
-        if (!($res['ok'] ?? false)) {
-            return null;
-        }
-
-        $userId = (string) ($res['user_id'] ?? '');
+        $userId = (string) ($payload['user_id'] ?? '');
         if ($userId === '' || preg_match('/^\d+$/', $userId) !== 1) {
             return null;
         }
@@ -155,19 +145,42 @@ class ResolveOrgContext
 
     private function resolveTokenRole(Request $request): ?string
     {
-        $token = $this->extractBearerToken($request);
-        if ($token === '') {
+        $payload = $this->resolveFmTokenPayload($request);
+        if (!($payload['ok'] ?? false)) {
             return null;
         }
 
-        $res = $this->tokenService->validateToken($token);
-        if (!($res['ok'] ?? false)) {
-            return null;
-        }
-
-        $role = trim((string) ($res['role'] ?? ''));
+        $role = trim((string) ($payload['role'] ?? ''));
 
         return $role !== '' ? $role : null;
+    }
+
+    /**
+     * @return array{ok:bool,user_id:?string,expires_at:?string,org_id:int,role:string,anon_id:?string}|array{ok:false}
+     */
+    private function resolveFmTokenPayload(Request $request): array
+    {
+        $cached = $request->attributes->get('fm_token_payload');
+        if (is_array($cached)) {
+            return $cached;
+        }
+
+        $token = $this->extractBearerToken($request);
+        if ($token === '') {
+            $payload = ['ok' => false];
+            $request->attributes->set('fm_token_payload', $payload);
+
+            return $payload;
+        }
+
+        $payload = $this->tokenService->validateToken($token);
+        if (!is_array($payload)) {
+            $payload = ['ok' => false];
+        }
+
+        $request->attributes->set('fm_token_payload', $payload);
+
+        return $payload;
     }
 
     private function extractBearerToken(Request $request): string

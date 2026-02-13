@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Auth;
 
+use App\Jobs\Ops\TouchFmTokenLastUsedAtJob;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -98,6 +99,25 @@ class FmTokenService
             ->first();
 
         if (!$row) {
+            $row = DB::table('fm_tokens')
+                ->where('token', $token)
+                ->first();
+
+            if ($row) {
+                $currentHash = trim((string) ($row->token_hash ?? ''));
+                if ($currentHash === '') {
+                    DB::table('fm_tokens')
+                        ->where('token', $token)
+                        ->update([
+                            'token_hash' => $tokenHash,
+                            'updated_at' => now(),
+                        ]);
+                    $row->token_hash = $tokenHash;
+                }
+            }
+        }
+
+        if (!$row) {
             return ['ok' => false];
         }
 
@@ -139,10 +159,12 @@ class FmTokenService
             $anonId = null;
         }
 
-        DB::table('fm_tokens')->where('token_hash', $tokenHash)->update([
-            'last_used_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $dispatchHash = trim((string) ($row->token_hash ?? ''));
+        if ($dispatchHash === '') {
+            $dispatchHash = $tokenHash;
+        }
+
+        TouchFmTokenLastUsedAtJob::dispatch($dispatchHash)->onQueue('ops');
 
         return [
             'ok' => true,

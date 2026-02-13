@@ -8,5 +8,7 @@ interface CacheAdapterInterface
 {
     public function get(string $key): mixed;
 
-    public function put(string $key, mixed $value, int $ttlSeconds): void;
+    public function put(string $key, mixed $value, int $ttlSeconds): bool;
+
+    public function forget(string $key): bool;
 }

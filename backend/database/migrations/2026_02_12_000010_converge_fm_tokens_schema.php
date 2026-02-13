@@ -57,23 +57,6 @@ return new class extends Migration
             }
         });
 
-        $rows = DB::table('fm_tokens')->select('token', 'token_hash')->get();
-        foreach ($rows as $row) {
-            $token = trim((string) ($row->token ?? ''));
-            if ($token === '') {
-                continue;
-            }
-            $tokenHash = hash('sha256', $token);
-            $current = trim((string) ($row->token_hash ?? ''));
-            if ($current === $tokenHash) {
-                continue;
-            }
-
-            DB::table('fm_tokens')->where('token', $token)->update([
-                'token_hash' => $tokenHash,
-            ]);
-        }
-
         if (!$this->indexExists('fm_tokens', 'fm_tokens_token_hash_unique')) {
             Schema::table('fm_tokens', function (Blueprint $table): void {
                 $table->unique(['token_hash'], 'fm_tokens_token_hash_unique');
