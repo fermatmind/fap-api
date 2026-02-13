@@ -1,4 +1,3 @@
-
 # ------------------------------------------------------------
 # Release artifact integrity guard
 # Deployer default strategy uses: git archive
@@ -9,34 +8,12 @@ backend/routes/** -export-ignore
 content_packages/** -export-ignore
 backend/.env export-ignore
 backend/.env.* export-ignore
-backend/vendor export-ignore
-backend/vendor/** export-ignore
-backend/storage/logs export-ignore
-backend/storage/logs/** export-ignore
-backend/storage/framework export-ignore
-backend/storage/framework/** export-ignore
-backend/storage/app/private/reports export-ignore
-backend/storage/app/private/reports/** export-ignore
-backend/storage/app/archives export-ignore
-backend/storage/app/archives/** export-ignore
-backend/artifacts export-ignore
-backend/artifacts/** export-ignore
-backend/database/*.sqlite export-ignore
-node_modules export-ignore
-node_modules/** export-ignore
-backend/node_modules export-ignore
-backend/node_modules/** export-ignore
-backend/.env export-ignore
-backend/.env.* export-ignore
 .env export-ignore
 .env.* export-ignore
 backend/vendor export-ignore
 backend/vendor/** export-ignore
 vendor export-ignore
 vendor/** export-ignore
-backend/artifacts export-ignore
-backend/artifacts/** export-ignore
-backend/database/*.sqlite export-ignore
 backend/storage/logs export-ignore
 backend/storage/logs/** export-ignore
 backend/storage/framework export-ignore
@@ -45,6 +22,9 @@ backend/storage/app/private/reports export-ignore
 backend/storage/app/private/reports/** export-ignore
 backend/storage/app/archives export-ignore
 backend/storage/app/archives/** export-ignore
+backend/artifacts export-ignore
+backend/artifacts/** export-ignore
+backend/database/*.sqlite export-ignore
 node_modules export-ignore
 node_modules/** export-ignore
 backend/node_modules export-ignore
