@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Services\Analytics\EventPayloadLimiter;
+use App\Services\Auth\FmTokenService;
 use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Analytics\EventNormalizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
-    private function requireFmToken(Request $request): string
+    /**
+     * @return array{auth_mode:string,user_id:?int,anon_id:?string}
+     */
+    private function requireFmToken(Request $request): array
     {
         $token = trim((string) $request->bearerToken());
 
@@ -37,11 +40,15 @@ class EventController extends Controller
                 ], 401));
             }
 
-            return $token;
+            return [
+                'auth_mode' => 'ingest_token',
+                'user_id' => null,
+                'anon_id' => null,
+            ];
         }
 
-        $exists = DB::table('fm_tokens')->where('token', $token)->exists();
-        if (!$exists) {
+        $validated = app(FmTokenService::class)->validateToken($token);
+        if (!($validated['ok'] ?? false)) {
             abort(response()->json([
                 'ok' => false,
                 'error_code' => 'unauthorized',
@@ -49,7 +56,27 @@ class EventController extends Controller
             ], 401));
         }
 
-        return $token;
+        $userId = null;
+        $rawUserId = trim((string) ($validated['user_id'] ?? ''));
+        if ($rawUserId !== '' && preg_match('/^\d+$/', $rawUserId) === 1) {
+            $userId = (int) $rawUserId;
+            $request->attributes->set('fm_user_id', $rawUserId);
+            $request->attributes->set('user_id', $rawUserId);
+        }
+
+        $anonId = trim((string) ($validated['anon_id'] ?? ''));
+        if ($anonId !== '') {
+            $request->attributes->set('anon_id', $anonId);
+            $request->attributes->set('fm_anon_id', $anonId);
+        } else {
+            $anonId = null;
+        }
+
+        return [
+            'auth_mode' => 'fm_token',
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+        ];
     }
 
     public function store(Request $request)
@@ -77,7 +104,7 @@ class EventController extends Controller
         }
 
         // ✅ 先鉴权（没有 token 直接 401）
-        $this->requireFmToken($request);
+        $auth = $this->requireFmToken($request);
 
         $maxTopKeys = max(0, (int) config('fap.events.max_top_keys', 200));
         $data = $request->validate([
@@ -142,8 +169,8 @@ class EventController extends Controller
         $context = [
             'request_id' => $request->header('X-Request-Id') ?? $request->header('X-Request-ID'),
             'session_id' => $request->header('X-Session-Id') ?? $request->header('X-Session-ID'),
-            'anon_id' => $request->attributes->get('anon_id'),
-            'user_id' => $request->attributes->get('fm_user_id'),
+            'anon_id' => $auth['anon_id'],
+            'user_id' => $auth['user_id'],
         ];
 
         $normalized = EventNormalizer::normalize($payload, $context);
@@ -159,6 +186,7 @@ class EventController extends Controller
         $columns['anon_id'] = $columns['anon_id'] ?? ($data['anon_id'] ?? null);
         $columns['share_id'] = $columns['share_id'] ?? $shareId;
         $columns['meta_json'] = $normalized['props'];
+        $columns['user_id'] = $auth['user_id'];
         $columns['occurred_at'] = $columns['occurred_at'] ?? (!empty($data['occurred_at'])
             ? Carbon::parse($data['occurred_at'])
             : now());
@@ -166,11 +194,7 @@ class EventController extends Controller
         $orgId = $this->resolveOrgId($request);
         $anonId = $columns['anon_id'] ?? $data['anon_id'] ?? null;
         $anonId = is_string($anonId) || is_numeric($anonId) ? trim((string) $anonId) : null;
-        $userId = $request->attributes->get('fm_user_id');
-        if (!is_numeric($userId)) {
-            $userId = $request->attributes->get('user_id');
-        }
-        $userId = is_numeric($userId) ? (int) $userId : null;
+        $userId = $auth['user_id'];
 
         $bootExperiments = $this->extractBootExperiments($request, $data);
         $assigner = app(ExperimentAssigner::class);

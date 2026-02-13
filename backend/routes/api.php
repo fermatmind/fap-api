@@ -185,7 +185,8 @@ Route::prefix("v0.2")->middleware([
             Route::post("/revoke", [ProvidersController::class, "revoke"]);
             Route::post("/ingest", [ProvidersController::class, "ingest"])
                 ->middleware(\App\Http\Middleware\IntegrationsIngestAuth::class);
-            Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"]);
+            Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"])
+                ->middleware(\App\Http\Middleware\FmTokenAuth::class);
         });
     });
 

@@ -25,5 +25,5 @@ return [
     'redis_prefix' => env('AI_REDIS_PREFIX', 'ai:budget'),
     'queue_name' => env('AI_INSIGHTS_QUEUE', 'insights'),
     'cost_per_1k_tokens_usd' => (float) env('AI_COST_PER_1K_TOKENS_USD', 0.002),
-    'dev_allow_anon_header' => env('AI_DEV_ALLOW_ANON_HEADER', true),
+    'dev_allow_anon_header' => env('AI_DEV_ALLOW_ANON_HEADER', false),
 ];

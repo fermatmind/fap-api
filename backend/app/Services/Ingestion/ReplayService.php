@@ -6,18 +6,33 @@ use App\Support\Idempotency\IdempotencyKey;
 use App\Support\Idempotency\IdempotencyStore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class ReplayService
 {
-    public function replay(string $provider, string $batchId): array
+    public function replay(
+        string $provider,
+        string $batchId,
+        ?int $actorUserId = null,
+        ?string $actorRole = null
+    ): array
     {
+        $requestedProvider = $this->normalizeProvider($provider);
+        if (!$this->isAllowedProvider($requestedProvider)) {
+            return [
+                'ok' => false,
+                'error' => 'NOT_FOUND',
+                'message' => 'ingest batch not found',
+                'status' => 404,
+            ];
+        }
+
         if (!\App\Support\SchemaBaseline::hasTable('ingest_batches')) {
             return [
                 'ok' => false,
                 'error' => 'MISSING_TABLE',
                 'message' => 'ingest_batches table not found',
+                'status' => 500,
             ];
         }
 
@@ -27,6 +42,26 @@ class ReplayService
                 'ok' => false,
                 'error' => 'NOT_FOUND',
                 'message' => 'ingest batch not found',
+                'status' => 404,
+            ];
+        }
+
+        $batchProvider = $this->normalizeProvider((string) ($batch->provider ?? ''));
+        if ($batchProvider === '' || !hash_equals($batchProvider, $requestedProvider)) {
+            return [
+                'ok' => false,
+                'error' => 'NOT_FOUND',
+                'message' => 'ingest batch not found',
+                'status' => 404,
+            ];
+        }
+
+        if (!$this->hasReplayAccess($batch, $actorUserId, $actorRole)) {
+            return [
+                'ok' => false,
+                'error' => 'NOT_FOUND',
+                'message' => 'ingest batch not found',
+                'status' => 404,
             ];
         }
 
@@ -40,9 +75,39 @@ class ReplayService
             'health_samples' => \App\Support\SchemaBaseline::hasTable('health_samples'),
         ];
 
-        $this->streamSamplesFromTable('sleep_samples', $batchId, 'sleep', $provider, $runId, $store, $tables, $inserted, $skipped);
-        $this->streamSamplesFromTable('screen_time_samples', $batchId, 'screen_time', $provider, $runId, $store, $tables, $inserted, $skipped);
-        $this->streamSamplesFromTable('health_samples', $batchId, 'health', $provider, $runId, $store, $tables, $inserted, $skipped);
+        $this->streamSamplesFromTable(
+            'sleep_samples',
+            $batchId,
+            'sleep',
+            $batchProvider,
+            $runId,
+            $store,
+            $tables,
+            $inserted,
+            $skipped
+        );
+        $this->streamSamplesFromTable(
+            'screen_time_samples',
+            $batchId,
+            'screen_time',
+            $batchProvider,
+            $runId,
+            $store,
+            $tables,
+            $inserted,
+            $skipped
+        );
+        $this->streamSamplesFromTable(
+            'health_samples',
+            $batchId,
+            'health',
+            $batchProvider,
+            $runId,
+            $store,
+            $tables,
+            $inserted,
+            $skipped
+        );
 
         DB::table('ingest_batches')
             ->where('id', $batchId)
@@ -55,6 +120,7 @@ class ReplayService
             'batch_id' => $batchId,
             'inserted' => $inserted,
             'skipped' => $skipped,
+            'status' => 200,
         ];
     }
 
@@ -244,5 +310,46 @@ class ReplayService
         DB::table($table)->insert($rows);
 
         return count($rows);
+    }
+
+    private function normalizeProvider(string $provider): string
+    {
+        return strtolower(trim($provider));
+    }
+
+    private function isAllowedProvider(string $provider): bool
+    {
+        $allowed = (array) config('integrations.allowed_providers', [
+            'mock',
+            'apple_health',
+            'google_fit',
+            'calendar',
+            'screen_time',
+        ]);
+
+        $allowed = array_values(array_filter(array_map(
+            static fn ($value) => strtolower(trim((string) $value)),
+            $allowed
+        )));
+
+        return $provider !== '' && in_array($provider, $allowed, true);
+    }
+
+    private function hasReplayAccess(object $batch, ?int $actorUserId, ?string $actorRole): bool
+    {
+        if ($actorUserId === null || $actorUserId <= 0) {
+            return false;
+        }
+
+        $role = strtolower(trim((string) $actorRole));
+        if (in_array($role, ['admin', 'owner', 'system'], true)) {
+            return true;
+        }
+
+        if (!is_numeric($batch->user_id ?? null)) {
+            return false;
+        }
+
+        return (int) $batch->user_id === $actorUserId;
     }
 }
