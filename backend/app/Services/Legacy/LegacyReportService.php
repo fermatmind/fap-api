@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\ReportJob;
 use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
+use App\Support\OrgContext;
 use App\Support\WritesEvents;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -23,25 +24,44 @@ class LegacyReportService
 {
     use WritesEvents;
 
+    public function __construct(
+        private OrgContext $orgContext
+    ) {
+    }
+
     public function ownedAttemptOrFail(string $attemptId, Request $request): Attempt
     {
+        $query = Attempt::query()
+            ->where('id', $attemptId)
+            ->where('org_id', $this->resolveScopedOrgId($request));
+
         $userId = $this->resolveUserId($request);
         if ($userId !== '') {
-            return Attempt::query()
-                ->where('id', $attemptId)
+            return (clone $query)
                 ->where('user_id', $userId)
                 ->firstOrFail();
         }
 
         $anonId = $this->resolveAnonId($request);
         if ($anonId !== '') {
-            return Attempt::query()
-                ->where('id', $attemptId)
+            return (clone $query)
                 ->where('anon_id', $anonId)
                 ->firstOrFail();
         }
 
         throw (new ModelNotFoundException())->setModel(Attempt::class, [$attemptId]);
+    }
+
+    private function resolveScopedOrgId(Request $request): int
+    {
+        $orgAttr = trim((string) ($request->attributes->get('org_id')
+            ?? $request->attributes->get('fm_org_id')
+            ?? ''));
+        if ($orgAttr !== '' && preg_match('/^\d+$/', $orgAttr) === 1) {
+            return (int) $orgAttr;
+        }
+
+        return max(0, (int) $this->orgContext->orgId());
     }
 
     public function getResultPayload(Attempt $attempt): array

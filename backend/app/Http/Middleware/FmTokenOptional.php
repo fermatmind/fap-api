@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\OrgContext;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,39 +42,115 @@ class FmTokenOptional
 
         $request->attributes->set('fm_token', $token);
 
-        $row = DB::table('fm_tokens')->where('token', $token)->first();
+        $tokenHash = hash('sha256', $token);
+        $row = DB::table('fm_tokens')
+            ->select([
+                'user_id',
+                'anon_id',
+                'org_id',
+                'role',
+                'meta_json',
+                'expires_at',
+                'revoked_at',
+            ])
+            ->where('token_hash', $tokenHash)
+            ->first();
         if (!$row) {
             return $next($request);
         }
 
-        // expires_at check (only when present)
-        if (property_exists($row, 'expires_at') && !empty($row->expires_at)) {
+        if (!empty($row->revoked_at)) {
+            return $next($request);
+        }
+
+        // expires_at check
+        if (!empty($row->expires_at)) {
             $exp = strtotime((string) $row->expires_at);
             if ($exp !== false && $exp < time()) {
                 return $next($request);
             }
         }
 
-        // user_id (numeric)
-        $userId = '';
-        if (property_exists($row, 'user_id')) {
-            $userId = trim((string) ($row->user_id ?? ''));
-        }
-        if ($userId !== '' && preg_match('/^\d+$/', $userId) === 1) {
-            $request->attributes->set('fm_user_id', $userId);
-            $request->attributes->set('user_id', $userId);
+        $resolvedUserId = $this->resolveNumeric($row->user_id ?? null);
+        if ($resolvedUserId !== null) {
+            $request->attributes->set('fm_user_id', (string) $resolvedUserId);
+            $request->attributes->set('user_id', (string) $resolvedUserId);
         }
 
-        // anon_id (string)
-        $anonId = '';
-        if (property_exists($row, 'anon_id')) {
-            $anonId = trim((string) ($row->anon_id ?? ''));
-        }
-        if ($anonId !== '') {
+        $anonId = $this->resolveAnonId($row->anon_id ?? null);
+        if ($anonId !== null) {
             $request->attributes->set('anon_id', $anonId);
             $request->attributes->set('fm_anon_id', $anonId);
         }
 
+        $meta = $this->decodeMeta($row->meta_json ?? null);
+        $orgId = $this->resolveNumeric($row->org_id ?? null)
+            ?? $this->resolveNumeric($meta['org_id'] ?? null)
+            ?? 0;
+        $role = $this->resolveRole($row->role ?? null, $meta['role'] ?? null);
+
+        $request->attributes->set('fm_org_id', $orgId);
+        $request->attributes->set('org_id', $orgId);
+        $request->attributes->set('org_role', $role);
+
+        $ctx = new OrgContext();
+        $ctx->set($orgId, $resolvedUserId, $role, $anonId);
+        app()->instance(OrgContext::class, $ctx);
+
         return $next($request);
+    }
+
+    private function resolveNumeric(mixed $candidate): ?int
+    {
+        $raw = trim((string) $candidate);
+        if ($raw === '' || preg_match('/^\d+$/', $raw) !== 1) {
+            return null;
+        }
+
+        return (int) $raw;
+    }
+
+    private function resolveAnonId(mixed $candidate): ?string
+    {
+        $anonId = trim((string) $candidate);
+        if ($anonId === '' || strlen($anonId) > 128) {
+            return null;
+        }
+
+        return $anonId;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeMeta(mixed $meta): array
+    {
+        if (is_array($meta)) {
+            return $meta;
+        }
+
+        if (is_string($meta) && trim($meta) !== '') {
+            $decoded = json_decode($meta, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    private function resolveRole(mixed $roleCandidate, mixed $metaRoleCandidate): string
+    {
+        $role = trim((string) $roleCandidate);
+        if ($role !== '') {
+            return $role;
+        }
+
+        $metaRole = trim((string) $metaRoleCandidate);
+        if ($metaRole !== '') {
+            return $metaRole;
+        }
+
+        return 'public';
     }
 }
