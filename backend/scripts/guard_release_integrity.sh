@@ -39,7 +39,7 @@ done
 echo "[GUARD] content pack json OK"
 
 # -------------------------------
-# 3) route:list must run (controllers instantiable)
+# 3) route:list must run (controllers resolvable by router)
 # -------------------------------
 cd "${BACKEND_DIR}"
 php artisan route:clear >/dev/null 2>&1 || true
@@ -47,21 +47,52 @@ php artisan route:list >/dev/null
 echo "[GUARD] artisan route:list OK"
 
 # -------------------------------
-# 4) git archive must include key files (when git available)
+# 3.5) critical v0.3 class/trait must be autoloadable
+# -------------------------------
+php -r '
+require "vendor/autoload.php";
+$classes = [
+  "App\\Http\\Controllers\\API\\V0_3\\Webhooks\\PaymentWebhookController",
+];
+$traits = [
+  "App\\Http\\Controllers\\API\\V0_3\\Concerns\\ResolvesAttemptOwnership",
+];
+foreach ($classes as $c) {
+  if (!class_exists($c)) {
+    fwrite(STDERR, "[GUARD][FAIL] missing loadable class: {$c}\n");
+    exit(1);
+  }
+}
+foreach ($traits as $t) {
+  if (!trait_exists($t)) {
+    fwrite(STDERR, "[GUARD][FAIL] missing loadable trait: {$t}\n");
+    exit(1);
+  }
+}
+'
+echo "[GUARD] v0.3 critical class/trait load OK"
+
+# -------------------------------
+# 4) git archive must include critical files (when git available)
 # -------------------------------
 cd "${REPO_DIR}"
 if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "[GUARD] archive check begin"
 
-  git archive HEAD backend/app/Http/Controllers/API \
-    | tar -tf - \
-    | grep -E '^backend/app/Http/Controllers/API/.*\.php$' >/dev/null
+  ARCHIVE_LIST="$(git archive HEAD | tar -tf -)"
+  for required in \
+    "backend/routes/api.php" \
+    "backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php" \
+    "backend/app/Http/Controllers/API/V0_3/Concerns/ResolvesAttemptOwnership.php" \
+    "content_packages/${PACK_REL}/manifest.json"
+  do
+    echo "$ARCHIVE_LIST" | grep -Fx "$required" >/dev/null || {
+      echo "[GUARD][FAIL] archive missing required file: $required" >&2
+      exit 1
+    }
+  done
 
-  git archive HEAD "content_packages/${PACK_REL}/manifest.json" \
-    | tar -tf - \
-    | grep -F "content_packages/${PACK_REL}/manifest.json" >/dev/null
-
-  echo "[GUARD] archive check OK"
+  echo "[GUARD] archive required-files check OK"
 fi
 
 echo "[GUARD] ALL OK"
