@@ -200,16 +200,20 @@ class ValidityFeedbackController extends Controller
 
     private function checkAnonOwnership(string $attemptId, string $anonId): bool
     {
-        if (!\App\Support\SchemaBaseline::hasTable('identities')) {
+        if (!Schema::hasTable('identities')) {
             return $this->matchAttemptAnonId($attemptId, $anonId);
         }
-        if (!\App\Support\SchemaBaseline::hasColumn('identities', 'attempt_id') || !\App\Support\SchemaBaseline::hasColumn('identities', 'anon_id')) {
+        if (!Schema::hasColumn('identities', 'attempt_id') || !Schema::hasColumn('identities', 'anon_id')) {
             return $this->matchAttemptAnonId($attemptId, $anonId);
         }
 
-        $row = DB::table('identities')
-            ->where('attempt_id', $attemptId)
-            ->first();
+        try {
+            $row = DB::table('identities')
+                ->where('attempt_id', $attemptId)
+                ->first();
+        } catch (QueryException) {
+            return $this->matchAttemptAnonId($attemptId, $anonId);
+        }
 
         if (!$row) {
             return $this->matchAttemptAnonId($attemptId, $anonId);
@@ -220,13 +224,17 @@ class ValidityFeedbackController extends Controller
 
     private function matchAttemptAnonId(string $attemptId, string $anonId): bool
     {
-        if (!\App\Support\SchemaBaseline::hasColumn('attempts', 'anon_id')) {
+        if (!Schema::hasTable('attempts') || !Schema::hasColumn('attempts', 'anon_id')) {
             return false;
         }
 
-        $attemptAnonId = DB::table('attempts')
-            ->where('id', $attemptId)
-            ->value('anon_id');
+        try {
+            $attemptAnonId = DB::table('attempts')
+                ->where('id', $attemptId)
+                ->value('anon_id');
+        } catch (QueryException) {
+            return false;
+        }
         $attemptAnonId = trim((string) $attemptAnonId);
 
         if ($attemptAnonId === '' || $anonId === '') {
