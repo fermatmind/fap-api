@@ -34,7 +34,7 @@ class LegacyShareService
         $typeName = (string) ($resultJson['type_name'] ?? $resultJson['type'] ?? $typeCode);
 
         $shareId = (string) $share->id;
-        $shareUrl = rtrim((string) env('FRONTEND_URL', 'http://localhost:3000'), '/') . '/share/' . $shareId;
+        $shareUrl = rtrim((string) config('app.frontend_url', 'http://localhost'), '/') . '/share/' . $shareId;
 
         return [
             'share_id' => $shareId,
@@ -57,6 +57,10 @@ class LegacyShareService
             ->firstOrFail();
 
         $orgId = (int) ($attempt->org_id ?? 0);
+        $ctxOrgId = max(0, (int) app(OrgContext::class)->orgId());
+        if ($ctxOrgId > 0 && $ctxOrgId !== $orgId) {
+            throw (new ModelNotFoundException())->setModel(Share::class, [$shareId]);
+        }
 
         $result = Result::query()
             ->where('attempt_id', $attempt->id)
@@ -75,6 +79,11 @@ class LegacyShareService
             'type_name' => $typeName,
             'created_at' => $share->created_at?->toISOString(),
         ];
+    }
+
+    public function resolveAttemptForAuth(string $attemptId, OrgContext $ctx): Attempt
+    {
+        return $this->findAccessibleAttempt($attemptId, $ctx);
     }
 
     private function findAccessibleAttempt(string $attemptId, OrgContext $ctx): Attempt

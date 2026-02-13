@@ -142,7 +142,8 @@ Route::prefix("v0.2")->middleware([
     });
 
     // 6) Public share view (legacy)
-    Route::get("/share/{id}", [ShareController::class, "getShareView"]);
+    Route::get("/share/{id}", [ShareController::class, "getShareView"])
+        ->middleware(\App\Http\Middleware\FmTokenOptional::class);
 
     // 6.5) Lookups
     Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
@@ -151,7 +152,11 @@ Route::prefix("v0.2")->middleware([
     // 7) Share click (public)
     // share_id now supports 32-hex legacy ids, so remove uuid middleware.
     Route::post('/shares/{shareId}/click', [ShareController::class, 'click'])
-        ->middleware([\App\Http\Middleware\LimitApiPublicPayloadSize::class, 'throttle:api_public'])
+        ->middleware([
+            \App\Http\Middleware\FmTokenOptional::class,
+            \App\Http\Middleware\LimitApiPublicPayloadSize::class,
+            'throttle:api_public',
+        ])
         ->where('shareId', '[A-Za-z0-9_-]{6,128}');
 
     Route::middleware('throttle:api_auth')->group(function () {
@@ -220,7 +225,10 @@ Route::prefix("v0.2")->middleware([
 
         // /me/*
         Route::get("/me/attempts", [MeController::class, "attempts"]);
+        Route::get("/me/profile", [MeController::class, "profile"]);
         Route::post("/me/email/bind", [MeController::class, "bindEmail"]);
+        Route::post("/me/bind-email", [MeController::class, "bindEmail"]);
+        Route::post("/me/email/verify-binding", [MeController::class, "verifyBinding"]);
         Route::post("/me/identities/bind", [IdentityController::class, "bind"]);
         Route::get("/me/identities", [IdentityController::class, "index"]);
         Route::get("/me/data/sleep", [MeController::class, "sleepData"]);
