@@ -70,8 +70,6 @@ class AttemptWriteController extends Controller
             ?? $this->orgContext->userId();
         $payload['anon_id'] = $request->attributes->get('anon_id')
             ?? $request->attributes->get('fm_anon_id')
-            ?? $request->header('X-Anon-Id')
-            ?? $request->header('X-Fm-Anon-Id')
             ?? $this->orgContext->anonId();
 
         $result = $this->submitService->submit($this->orgContext, $attemptId, SubmitAttemptDTO::fromArray($payload));

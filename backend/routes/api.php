@@ -160,7 +160,13 @@ Route::prefix("v0.2")->middleware([
 
     Route::middleware('throttle:api_auth')->group(function () {
         // Auth (public)
-        Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
+        if (app()->environment(['local', 'testing'])) {
+            Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
+        } else {
+            Route::post("/auth/wx_phone", static function () {
+                abort(404);
+            });
+        }
         Route::post("/auth/phone/send_code", [AuthPhoneController::class, "sendCode"]);
         Route::post("/auth/phone/verify", [AuthPhoneController::class, "verify"]);
         Route::post("/auth/provider", [AuthProviderController::class, "login"]);
@@ -207,20 +213,18 @@ Route::prefix("v0.2")->middleware([
     ])->group(function () {
         Route::post("/insights/generate", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@generate");
     });
-    Route::middleware('fap_feature:insights')->group(function () {
-        Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show");
-    });
     Route::middleware([
         \App\Http\Middleware\FmTokenAuth::class,
         'fap_feature:insights',
     ])->group(function () {
+        Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show");
         Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback");
     });
 
     // =========================================================
-    // Optional token attach (no 401): allow anon access + enrich events.user_id when token exists
+    // Strict token gate for attempt read endpoints
     // =========================================================
-    Route::middleware(\App\Http\Middleware\FmTokenOptional::class)->group(function () {
+    Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
         Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
             ->middleware(['uuid:attemptId', DisableLegacyV02Report::class]);
         Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
@@ -317,13 +321,13 @@ Route::prefix("v0.3")->middleware([
         Route::get("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "show"])
             ->middleware('uuid:attempt_id');
         Route::get("/attempts/{id}", [AttemptReadController::class, "show"])
-            ->middleware('uuid:id')
+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
             ->name('api.v0_3.attempts.show');
         Route::get("/attempts/{id}/result", [AttemptReadController::class, "result"])
-            ->middleware('uuid:id')
+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
             ->name('api.v0_3.attempts.result');
         Route::get("/attempts/{id}/report", [AttemptReadController::class, "report"])
-            ->middleware('uuid:id')
+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
             ->name('api.v0_3.attempts.report');
 
         // 3) Commerce v2 (public with org context)
@@ -338,7 +342,8 @@ Route::prefix("v0.3")->middleware([
         Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
             ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);
-        Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
+        Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder")
+            ->middleware(\App\Http\Middleware\FmTokenAuth::class);
     });
 
     Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])

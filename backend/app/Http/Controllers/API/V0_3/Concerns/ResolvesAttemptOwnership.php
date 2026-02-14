@@ -52,8 +52,8 @@ trait ResolvesAttemptOwnership
     protected function resolveAnonId(Request $request): ?string
     {
         $candidates = [
-            $request->header('X-Anon-Id'),
-            $request->cookie('fm_anon_id'),
+            $request->attributes->get('anon_id'),
+            $request->attributes->get('fm_anon_id'),
             app(OrgContext::class)->anonId(),
         ];
 

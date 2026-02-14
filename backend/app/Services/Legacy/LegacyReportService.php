@@ -498,17 +498,10 @@ class LegacyReportService
     {
         $anonId = trim((string) ($request->attributes->get('anon_id')
             ?? $request->attributes->get('fm_anon_id')
+            ?? $this->orgContext->anonId()
             ?? ''));
-        if ($anonId !== '') {
-            return $anonId;
-        }
 
-        $anonId = trim((string) $request->header('X-Anon-Id', ''));
-        if ($anonId !== '') {
-            return $anonId;
-        }
-
-        return trim((string) $request->query('anon_id', ''));
+        return $anonId;
     }
 
     private function resolveReportBenefitCode(Attempt $attempt, Request $request): string

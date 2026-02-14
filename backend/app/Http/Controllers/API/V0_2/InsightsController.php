@@ -257,11 +257,6 @@ class InsightsController extends Controller
 
     private function resolveRequestAnonId(Request $request): string
     {
-        $anonId = trim((string) $request->header('X-FAP-Anon-Id', ''));
-        if ($anonId !== '') {
-            return $anonId;
-        }
-
         return trim((string) (
             $request->attributes->get('fm_anon_id')
             ?? $request->attributes->get('anon_id')

@@ -24,6 +24,19 @@ class AuthProviderController extends Controller
         $limiter = app(RateLimiter::class);
         $logger = app(LookupEventLogger::class);
 
+        if ($providerCode === 'dev' && !app()->environment(['local', 'testing'])) {
+            $logger->log('provider_login', false, $request, null, [
+                'error_code' => 'INVALID_PROVIDER_CODE',
+                'provider' => $provider,
+            ]);
+
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'INVALID_PROVIDER_CODE',
+                'message' => 'provider_code invalid.',
+            ], 422);
+        }
+
         $limitIp = $limiter->limit('FAP_RATE_PROVIDER_LOGIN_IP', 60);
         if ($ip !== '' && !$limiter->hit("provider_login:ip:{$ip}", $limitIp, 60)) {
             $logger->log('provider_login', false, $request, null, [
