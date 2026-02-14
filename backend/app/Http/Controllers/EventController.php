@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Models\Event;
 use App\Services\Analytics\EventPayloadLimiter;
 use App\Services\Auth\FmTokenService;
@@ -9,13 +10,16 @@ use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Analytics\EventNormalizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
+    use RespondsWithNotFound;
+
     /**
-     * @return array{auth_mode:string,user_id:?int,anon_id:?string}
+     * @return array{auth_mode:string,user_id:?int,anon_id:?string,org_id:int,role:string}
      */
     private function requireFmToken(Request $request): array
     {
@@ -44,6 +48,8 @@ class EventController extends Controller
                 'auth_mode' => 'ingest_token',
                 'user_id' => null,
                 'anon_id' => null,
+                'org_id' => 0,
+                'role' => 'system',
             ];
         }
 
@@ -72,10 +78,24 @@ class EventController extends Controller
             $anonId = null;
         }
 
+        $orgId = is_numeric($validated['org_id'] ?? null) ? (int) $validated['org_id'] : 0;
+        if ($orgId > 0) {
+            $request->attributes->set('fm_org_id', $orgId);
+            $request->attributes->set('org_id', $orgId);
+        }
+
+        $role = trim((string) ($validated['role'] ?? 'public'));
+        if ($role === '') {
+            $role = 'public';
+        }
+        $request->attributes->set('org_role', $role);
+
         return [
             'auth_mode' => 'fm_token',
             'user_id' => $userId,
             'anon_id' => $anonId,
+            'org_id' => $orgId,
+            'role' => $role,
         ];
     }
 
@@ -166,6 +186,10 @@ class EventController extends Controller
             'meta_json' => $meta,
         ];
 
+        if (!$this->canWriteAttemptEvent($payload['attempt_id'], $auth, $request)) {
+            return $this->notFoundResponse('attempt not found.');
+        }
+
         $context = [
             'request_id' => $request->header('X-Request-Id') ?? $request->header('X-Request-ID'),
             'session_id' => $request->header('X-Session-Id') ?? $request->header('X-Session-ID'),
@@ -183,7 +207,11 @@ class EventController extends Controller
             $columns['event_name'] = $data['event_name'] ?? $data['event_code'];
         }
         $columns['attempt_id'] = $columns['attempt_id'] ?? $data['attempt_id'];
-        $columns['anon_id'] = $columns['anon_id'] ?? ($data['anon_id'] ?? null);
+        if (($auth['auth_mode'] ?? '') === 'fm_token') {
+            $columns['anon_id'] = $auth['anon_id'];
+        } else {
+            $columns['anon_id'] = $columns['anon_id'] ?? ($data['anon_id'] ?? null);
+        }
         $columns['share_id'] = $columns['share_id'] ?? $shareId;
         $columns['meta_json'] = $normalized['props'];
         $columns['user_id'] = $auth['user_id'];
@@ -191,7 +219,8 @@ class EventController extends Controller
             ? Carbon::parse($data['occurred_at'])
             : now());
 
-        $orgId = $this->resolveOrgId($request);
+        $orgId = $this->resolveOrgId($request, $auth);
+        $columns['org_id'] = $orgId;
         $anonId = $columns['anon_id'] ?? $data['anon_id'] ?? null;
         $anonId = is_string($anonId) || is_numeric($anonId) ? trim((string) $anonId) : null;
         $userId = $auth['user_id'];
@@ -209,14 +238,64 @@ class EventController extends Controller
         ], 201);
     }
 
-    private function resolveOrgId(Request $request): int
+    private function resolveOrgId(Request $request, array $auth): int
     {
+        $authMode = (string) ($auth['auth_mode'] ?? '');
+        $tokenOrgId = is_numeric($auth['org_id'] ?? null) ? (int) $auth['org_id'] : 0;
+        if ($authMode === 'fm_token' && $tokenOrgId > 0) {
+            return $tokenOrgId;
+        }
+
+        $attrOrgId = $request->attributes->get('org_id');
+        if (is_numeric($attrOrgId) && (int) $attrOrgId >= 0) {
+            return (int) $attrOrgId;
+        }
+
         $raw = trim((string) ($request->header('X-Org-Id') ?? ''));
         if ($raw !== '' && preg_match('/^\\d+$/', $raw)) {
             return (int) $raw;
         }
 
         return 0;
+    }
+
+    private function canWriteAttemptEvent(string $attemptId, array $auth, Request $request): bool
+    {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '' || !\App\Support\SchemaBaseline::hasTable('attempts')) {
+            return true;
+        }
+
+        if (!DB::table('attempts')->where('id', $attemptId)->exists()) {
+            return true;
+        }
+
+        $query = DB::table('attempts')->where('id', $attemptId);
+
+        if (\App\Support\SchemaBaseline::hasColumn('attempts', 'org_id')) {
+            $query->where('org_id', $this->resolveOrgId($request, $auth));
+        }
+
+        $authMode = (string) ($auth['auth_mode'] ?? '');
+        $userId = is_numeric($auth['user_id'] ?? null) ? (string) (int) $auth['user_id'] : '';
+        $anonId = is_string($auth['anon_id'] ?? null) ? trim((string) $auth['anon_id']) : '';
+        if ($authMode === 'fm_token') {
+            $hasIdentityConstraint = false;
+
+            if ($userId !== '' && \App\Support\SchemaBaseline::hasColumn('attempts', 'user_id')) {
+                $query->where('user_id', $userId);
+                $hasIdentityConstraint = true;
+            } elseif ($anonId !== '' && \App\Support\SchemaBaseline::hasColumn('attempts', 'anon_id')) {
+                $query->where('anon_id', $anonId);
+                $hasIdentityConstraint = true;
+            }
+
+            if (!$hasIdentityConstraint) {
+                $query->whereRaw('1=0');
+            }
+        }
+
+        return $query->exists();
     }
 
     private function extractBootExperiments(Request $request, array $data): array
