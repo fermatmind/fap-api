@@ -11,6 +11,10 @@ class AuthWxPhoneController extends Controller
 {
     public function __invoke(Request $request)
     {
+        if (!app()->environment(['local', 'testing', 'ci'])) {
+            abort(404);
+        }
+
         // 最小校验：小程序一定会传 wx_code；anon_id 建议必传（你现在的小程序已经有）
         $data = $request->validate([
             'wx_code'        => ['required', 'string'],

@@ -249,22 +249,20 @@ class InsightsController extends Controller
     private function resolveRequestUserId(Request $request): string
     {
         return trim((string) (
-            $request->attributes->get('fm_user_id')
+            $request->user()?->id
             ?? $request->attributes->get('user_id')
+            ?? $request->attributes->get('fm_user_id')
             ?? ''
         ));
     }
 
     private function resolveRequestAnonId(Request $request): string
     {
-        $anonId = trim((string) $request->header('X-FAP-Anon-Id', ''));
-        if ($anonId !== '') {
-            return $anonId;
-        }
-
         return trim((string) (
             $request->attributes->get('fm_anon_id')
             ?? $request->attributes->get('anon_id')
+            ?? $request->header('X-FAP-Anon-Id')
+            ?? $request->header('X-Anon-Id')
             ?? ''
         ));
     }

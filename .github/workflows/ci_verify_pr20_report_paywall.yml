@@ -81,8 +81,19 @@ jobs:
       - name: Composer validate & audit
         working-directory: backend
         run: |
+          set -euo pipefail
           composer validate --strict
-          composer audit --no-interaction
+          for attempt in 1 2 3; do
+            if composer audit --no-interaction; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "composer audit failed (attempt ${attempt}/3), retrying..."
+              sleep 5
+            fi
+          done
+          echo "::warning::composer audit endpoint unreachable after retries; fallback to --ignore-unreachable"
+          composer audit --ignore-unreachable --no-interaction
 
       - name: Migrate
         working-directory: backend

@@ -131,9 +131,6 @@ class CommerceController extends Controller
             $this->orgContext->anonId(),
             $request->attributes->get('anon_id'),
             $request->attributes->get('fm_anon_id'),
-            $request->query('anon_id'),
-            $request->header('X-Anon-Id'),
-            $request->header('X-Fm-Anon-Id'),
         ];
 
         foreach ($candidates as $candidate) {

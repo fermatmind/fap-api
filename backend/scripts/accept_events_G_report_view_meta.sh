@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CURL_AUTH=()
-if [[ -n "${FM_TOKEN:-}" ]]; then
-  CURL_AUTH=(-H "Authorization: Bearer ${FM_TOKEN}")
+if [[ -z "${FM_TOKEN:-}" ]]; then
+  echo "[ACCEPT_G][FAIL] FM_TOKEN is required for report endpoint auth." >&2
+  exit 2
 fi
+CURL_AUTH=(-H "Authorization: Bearer ${FM_TOKEN}")
 
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ACCEPT_G][FAIL] missing cmd: $1" >&2; exit 2; }; }
 need_cmd curl
@@ -80,9 +81,6 @@ try {
 }
 ')"
 fi
-if [[ -n "$ANON_ID" ]]; then
-  CURL_AUTH=()
-fi
 echo "[ACCEPT_G] ANON_ID=${ANON_ID:-<empty>}"
 
 # 触发 report_view（并携带 share_id + headers）
@@ -93,13 +91,7 @@ REPORT_HEADERS=(
   -H "X-Client-Platform: wechat"
   -H "X-Entry-Page: report_page"
 )
-if [[ -n "$ANON_ID" ]]; then
-  REPORT_HEADERS+=(-H "X-Anon-Id: $ANON_ID")
-fi
 REPORT_URL="$API/api/v0.2/attempts/$ATT/report?share_id=$SHARE_ID"
-if [[ -n "$ANON_ID" ]]; then
-  REPORT_URL="${REPORT_URL}&anon_id=${ANON_ID}"
-fi
 
 curl -fsS \
   "${REPORT_HEADERS[@]}" \

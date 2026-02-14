@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Concerns\ResolvesOrgId;
 use App\Models\Attempt;
 use App\Services\Psychometrics\NormsRegistry;
+use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -172,8 +173,7 @@ class PsychometricsController extends Controller
             $request->attributes->get('fm_anon_id'),
             $request->header('X-Anon-Id'),
             $request->header('X-Fm-Anon-Id'),
-            $request->query('anon_id'),
-            $request->input('anon_id'),
+            app(OrgContext::class)->anonId(),
         ];
 
         foreach ($candidates as $candidate) {

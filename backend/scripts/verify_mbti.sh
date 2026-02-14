@@ -428,8 +428,8 @@ grant_attempt_entitlement "$ATTEMPT_ID" "$ATTEMPT_ANON_ID" || fail "failed to gr
 echo "[5/8] fetch report & share"
 [[ -n "${ATTEMPT_ANON_ID}" ]] || fail "missing ATTEMPT_ANON_ID for report ownership guard"
 REPORT_URL="$API/api/v0.2/attempts/$ATTEMPT_ID/report?anon_id=$ATTEMPT_ANON_ID"
-# ✅ report uses owner anon_id guard; avoid mismatched fm_token owner overriding anon_id
-fetch_json "$REPORT_URL" "$REPORT_JSON" 0
+# ✅ report is now token-gated; send bearer token in CI/mainline verification.
+fetch_json "$REPORT_URL" "$REPORT_JSON" 1
 # share is now gated by fm_token
 fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON" 1
 echo "[OK] report=$REPORT_JSON"

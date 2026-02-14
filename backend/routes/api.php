@@ -160,7 +160,13 @@ Route::prefix("v0.2")->middleware([
 
     Route::middleware('throttle:api_auth')->group(function () {
         // Auth (public)
-        Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
+        if (app()->environment(['local', 'testing', 'ci'])) {
+            Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
+        } else {
+            Route::post("/auth/wx_phone", static function () {
+                abort(404);
+            });
+        }
         Route::post("/auth/phone/send_code", [AuthPhoneController::class, "sendCode"]);
         Route::post("/auth/phone/verify", [AuthPhoneController::class, "verify"]);
         Route::post("/auth/provider", [AuthProviderController::class, "login"]);
@@ -207,29 +213,36 @@ Route::prefix("v0.2")->middleware([
     ])->group(function () {
         Route::post("/insights/generate", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@generate");
     });
-    Route::middleware('fap_feature:insights')->group(function () {
-        Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show");
-    });
-    Route::middleware([
-        \App\Http\Middleware\FmTokenAuth::class,
-        'fap_feature:insights',
-    ])->group(function () {
-        Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback");
-    });
+    Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show")
+        ->middleware([
+            \App\Http\Middleware\FmTokenOptional::class,
+            'fap_feature:insights',
+        ]);
+    Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback")
+        ->middleware([
+            \App\Http\Middleware\FmTokenAuth::class,
+            'fap_feature:insights',
+        ]);
 
     // =========================================================
-    // Optional token attach (no 401): allow anon access + enrich events.user_id when token exists
+    // Attempt read endpoints: keep UUID contract before auth gate
     // =========================================================
-    Route::middleware(\App\Http\Middleware\FmTokenOptional::class)->group(function () {
-        Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
-            ->middleware(['uuid:attemptId', DisableLegacyV02Report::class]);
-        Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
-            ->middleware(['uuid:attemptId', DisableLegacyV02Report::class]);
-        Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
-            ->middleware('uuid:id');
-        Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"])
-            ->middleware('uuid:id');
-    });
+    Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
+        ->middleware([
+            'uuid:attemptId',
+            \App\Http\Middleware\FmTokenOptional::class,
+            DisableLegacyV02Report::class,
+        ]);
+    Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
+        ->middleware([
+            'uuid:attemptId',
+            \App\Http\Middleware\FmTokenOptional::class,
+            DisableLegacyV02Report::class,
+        ]);
+    Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
+        ->middleware('uuid:id');
+    Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"])
+        ->middleware('uuid:id');
 
     // =========================================================
     // Strict token gate: endpoints needing identity
