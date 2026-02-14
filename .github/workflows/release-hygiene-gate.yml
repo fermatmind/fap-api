@@ -1,16 +1,16 @@
-name: Release Artifact
+name: release-hygiene-gate
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches: ["main"]
   push:
     branches: ["main"]
-    tags: ["v*", "release-*"]
 
 permissions:
   contents: read
 
 jobs:
-  release-artifact:
+  release-hygiene-gate:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -20,7 +20,14 @@ jobs:
       - name: Build release package
         run: bash scripts/release_pack.sh
 
-      - name: Audit smoke evidence
+      - name: Unzip package to fixed audit path
+        run: |
+          set -euo pipefail
+          rm -rf ./_audit/fap-api-0212-5
+          mkdir -p ./_audit/fap-api-0212-5
+          unzip -q dist/fap-api-release.zip -d ./_audit/fap-api-0212-5
+
+      - name: Print audit evidence
         run: |
           set -euo pipefail
           mkdir -p ./_audit
@@ -29,10 +36,11 @@ jobs:
       - name: Enforce release hygiene gate
         run: bash scripts/release_hygiene_gate.sh ./_audit/fap-api-0212-5/
 
-      - name: Upload trusted artifact
+      - name: Upload release package and audit log
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: fap-api-release
+          name: release-hygiene-evidence
           path: |
             dist/fap-api-release.zip
             _audit/audit_smoke.log

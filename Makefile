@@ -28,15 +28,16 @@ selfcheck-mysql:
 .PHONY: release release\:source-clean release\:verify
 
 release\:source-clean:
-	bash scripts/release/export_source_clean.sh
+	bash scripts/release_pack.sh
 
 release\:verify:
-	bash scripts/release/verify_source_zip_clean.sh dist/source_clean.zip
+	bash scripts/audit_smoke.sh dist/fap-api-release.zip
+	bash scripts/release_hygiene_gate.sh ./_audit/fap-api-0212-5/
 
 release:
 	@$(MAKE) release:source-clean
 	@$(MAKE) release:verify
-	@echo "[release] artifact=dist/source_clean.zip"
+	@echo "[release] artifact=dist/fap-api-release.zip"
 	@echo "[release] commit_sha=$$(git rev-parse --short=12 HEAD)"
 	@echo "[release] generated_at_utc=$$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 	@echo "[release] build_host=$$(uname -srm)"
