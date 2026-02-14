@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V0_2;
 
+use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Jobs\GenerateInsightJob;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ use Illuminate\Support\Str;
 
 class InsightsController extends Controller
 {
+    use RespondsWithNotFound;
+
     /**
      * POST /api/v0.2/insights/generate
      */
@@ -145,10 +148,7 @@ class InsightsController extends Controller
 
         $row = $this->ownedInsightRow($request, $id);
         if (!$row) {
-            return response()->json([
-                'ok' => false,
-                'error_code' => 'NOT_FOUND',
-            ], 404);
+            return $this->notFoundResponse();
         }
 
         $outputJson = $this->decodeJson($row->output_json ?? null);
@@ -184,10 +184,7 @@ class InsightsController extends Controller
 
         $row = $this->ownedInsightRow($request, $id);
         if (!$row) {
-            return response()->json([
-                'ok' => false,
-                'error_code' => 'NOT_FOUND',
-            ], 404);
+            return $this->notFoundResponse();
         }
 
         $rating = (int) $request->input('rating', 0);
@@ -209,7 +206,26 @@ class InsightsController extends Controller
             $comment = substr($comment, 0, 2000);
         }
 
-        $feedbackId = (string) Str::uuid();
+        $idempotencyKey = $this->resolveIdempotencyKey($request);
+        $feedbackId = $this->buildFeedbackId(
+            (string) $row->id,
+            (string) ($row->user_id ?? ''),
+            (string) ($row->anon_id ?? ''),
+            $rating,
+            $reason,
+            $comment,
+            $idempotencyKey
+        );
+
+        $existing = DB::table('ai_insight_feedback')->where('id', $feedbackId)->first();
+        if ($existing) {
+            return response()->json([
+                'ok' => true,
+                'id' => $feedbackId,
+                'idempotent' => true,
+            ]);
+        }
+
         DB::table('ai_insight_feedback')->insert([
             'id' => $feedbackId,
             'insight_id' => $row->id,
@@ -222,6 +238,7 @@ class InsightsController extends Controller
         return response()->json([
             'ok' => true,
             'id' => $feedbackId,
+            'idempotent' => false,
         ]);
     }
 
@@ -248,23 +265,88 @@ class InsightsController extends Controller
 
     private function resolveRequestUserId(Request $request): string
     {
-        return trim((string) (
+        $candidate = trim((string) (
             $request->user()?->id
             ?? $request->attributes->get('user_id')
             ?? $request->attributes->get('fm_user_id')
             ?? ''
         ));
+
+        return preg_match('/^\d+$/', $candidate) === 1 ? $candidate : '';
     }
 
     private function resolveRequestAnonId(Request $request): string
     {
-        return trim((string) (
-            $request->attributes->get('fm_anon_id')
-            ?? $request->attributes->get('anon_id')
-            ?? $request->header('X-FAP-Anon-Id')
-            ?? $request->header('X-Anon-Id')
-            ?? ''
-        ));
+        $candidates = [
+            $request->attributes->get('fm_anon_id'),
+            $request->attributes->get('anon_id'),
+            $request->header('X-FAP-Anon-Id'),
+            $request->header('X-Anon-Id'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            $anonId = $this->normalizeAnonId($candidate);
+            if ($anonId !== '') {
+                return $anonId;
+            }
+        }
+
+        return '';
+    }
+
+    private function normalizeAnonId(mixed $candidate): string
+    {
+        if (!is_string($candidate) && !is_numeric($candidate)) {
+            return '';
+        }
+
+        $anonId = trim((string) $candidate);
+        if ($anonId === '' || strlen($anonId) > 128) {
+            return '';
+        }
+
+        return $anonId;
+    }
+
+    private function resolveIdempotencyKey(Request $request): string
+    {
+        $header = trim((string) $request->header('Idempotency-Key', ''));
+        if ($header !== '') {
+            return substr($header, 0, 128);
+        }
+
+        return '';
+    }
+
+    private function buildFeedbackId(
+        string $insightId,
+        string $userId,
+        string $anonId,
+        int $rating,
+        string $reason,
+        string $comment,
+        string $idempotencyKey
+    ): string {
+        $seed = implode('|', [
+            $insightId,
+            trim($userId),
+            trim($anonId),
+            (string) $rating,
+            $reason,
+            $comment,
+            $idempotencyKey,
+        ]);
+
+        $hash = hash('sha256', $seed);
+
+        return sprintf(
+            '%s-%s-%s-%s-%s',
+            substr($hash, 0, 8),
+            substr($hash, 8, 4),
+            substr($hash, 12, 4),
+            substr($hash, 16, 4),
+            substr($hash, 20, 12)
+        );
     }
 
     private function parseDate(string $value): ?Carbon

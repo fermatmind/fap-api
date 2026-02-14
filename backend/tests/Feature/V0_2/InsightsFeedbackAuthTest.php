@@ -87,6 +87,43 @@ final class InsightsFeedbackAuthTest extends TestCase
         ]);
     }
 
+    public function test_feedback_duplicate_submission_is_idempotent(): void
+    {
+        config()->set('fap.features.insights', true);
+
+        $insightId = $this->createAnonymousInsight('anon_feedback_owner');
+        $token = $this->seedAnonToken('anon_feedback_owner');
+
+        $first = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+            'Idempotency-Key' => 'feedback-idem-1',
+        ])->postJson("/api/v0.2/insights/{$insightId}/feedback", [
+            'rating' => 4,
+            'reason' => 'helpful',
+            'comment' => 'repeatable',
+        ]);
+
+        $first->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('idempotent', false);
+
+        $second = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+            'Idempotency-Key' => 'feedback-idem-1',
+        ])->postJson("/api/v0.2/insights/{$insightId}/feedback", [
+            'rating' => 4,
+            'reason' => 'helpful',
+            'comment' => 'repeatable',
+        ]);
+
+        $second->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('idempotent', true)
+            ->assertJsonPath('id', (string) $first->json('id'));
+
+        $this->assertSame(1, DB::table('ai_insight_feedback')->where('insight_id', $insightId)->count());
+    }
+
     private function createAnonymousInsight(string $anonId): string
     {
         $insightId = (string) Str::uuid();
