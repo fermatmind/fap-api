@@ -222,18 +222,24 @@ Route::prefix("v0.2")->middleware([
     });
 
     // =========================================================
-    // Strict token gate for attempt read endpoints
+    // Attempt read endpoints: keep UUID contract before auth gate
     // =========================================================
-    Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
-        Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
-            ->middleware(['uuid:attemptId', DisableLegacyV02Report::class]);
-        Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
-            ->middleware(['uuid:attemptId', DisableLegacyV02Report::class]);
-        Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
-            ->middleware('uuid:id');
-        Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"])
-            ->middleware('uuid:id');
-    });
+    Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
+        ->middleware([
+            'uuid:attemptId',
+            \App\Http\Middleware\FmTokenAuth::class,
+            DisableLegacyV02Report::class,
+        ]);
+    Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
+        ->middleware([
+            'uuid:attemptId',
+            \App\Http\Middleware\FmTokenAuth::class,
+            DisableLegacyV02Report::class,
+        ]);
+    Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
+        ->middleware('uuid:id');
+    Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"])
+        ->middleware('uuid:id');
 
     // =========================================================
     // Strict token gate: endpoints needing identity
@@ -321,13 +327,13 @@ Route::prefix("v0.3")->middleware([
         Route::get("/attempts/{attempt_id}/progress", [AttemptProgressController::class, "show"])
             ->middleware('uuid:attempt_id');
         Route::get("/attempts/{id}", [AttemptReadController::class, "show"])
-            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+            ->middleware('uuid:id')
             ->name('api.v0_3.attempts.show');
         Route::get("/attempts/{id}/result", [AttemptReadController::class, "result"])
-            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+            ->middleware('uuid:id')
             ->name('api.v0_3.attempts.result');
         Route::get("/attempts/{id}/report", [AttemptReadController::class, "report"])
-            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+            ->middleware('uuid:id')
             ->name('api.v0_3.attempts.report');
 
         // 3) Commerce v2 (public with org context)
@@ -342,8 +348,7 @@ Route::prefix("v0.3")->middleware([
         Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
             ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);
-        Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder")
-            ->middleware(\App\Http\Middleware\FmTokenAuth::class);
+        Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
     });
 
     Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])
