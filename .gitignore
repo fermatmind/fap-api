@@ -37,3 +37,12 @@ backend/storage/logs/
 backend/storage/framework/
 backend/storage/app/private/reports/
 backend/storage/app/archives/
+
+# SEC/SRE-000 release package hygiene
+dist/
+_audit/
+.release_staging/
+.env
+.env.*
+**/.DS_Store
+**/__MACOSX/

@@ -4,8 +4,6 @@ set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
 
-echo "[deprecated] scripts/package_release.sh delegates to SEC-001 flow"
-bash scripts/security/assert_no_tracked_sensitive_files.sh
-bash scripts/release/export_source_zip.sh
-bash scripts/release/verify_source_zip_clean.sh dist/fap-api-source.zip
-echo "[package_release] dist/fap-api-source.zip"
+echo "[compat] scripts/package_release.sh delegates to scripts/release_pack.sh"
+bash scripts/release_pack.sh
+echo "[package_release] dist/fap-api-release.zip"
