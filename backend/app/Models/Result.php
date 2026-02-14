@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Result extends Model
 {
-    use HasFactory;
+    use HasFactory, HasOrgScope;
 
     /**
      * 对应的表名
@@ -65,5 +66,10 @@ class Result extends Model
     public function attempt()
     {
         return $this->belongsTo(Attempt::class, 'attempt_id', 'id');
+    }
+
+    public static function allowOrgZeroContext(): bool
+    {
+        return true;
     }
 }

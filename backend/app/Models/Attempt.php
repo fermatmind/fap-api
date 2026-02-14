@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Attempt extends Model
 {
-    use HasFactory;
+    use HasFactory, HasOrgScope;
 
     /**
      * 对应的表名
@@ -49,7 +50,7 @@ class Attempt extends Model
                 $code = 'FMT-' . Str::upper(Str::random(8));
 
                 // creating 阶段尚未写入 DB，需查库确认唯一（减少碰撞概率）
-                if (!static::where('ticket_code', $code)->exists()) {
+                if (!static::withoutGlobalScopes()->where('ticket_code', $code)->exists()) {
                     $m->ticket_code = $code;
                     return;
                 }
@@ -189,5 +190,10 @@ class Attempt extends Model
     public function result()
     {
         return $this->hasOne(Result::class, 'attempt_id', 'id');
+    }
+
+    public static function allowOrgZeroContext(): bool
+    {
+        return true;
     }
 }

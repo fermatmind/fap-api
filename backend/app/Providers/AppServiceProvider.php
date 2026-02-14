@@ -3,6 +3,19 @@
 namespace App\Providers;
 
 use App\Models\Attempt;
+use App\Models\BenefitGrant;
+use App\Models\Order;
+use App\Models\ReportSnapshot;
+use App\Models\ScaleRegistry;
+use App\Models\ScaleSlug;
+use App\Models\Share;
+use App\Policies\AttemptPolicy;
+use App\Policies\BenefitGrantPolicy;
+use App\Policies\OrderPolicy;
+use App\Policies\ReportSnapshotPolicy;
+use App\Policies\ScaleRegistryPolicy;
+use App\Policies\ScaleSlugPolicy;
+use App\Policies\SharePolicy;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
@@ -11,6 +24,7 @@ use App\Support\OrgContext;
 use App\Support\SensitiveDataRedactor;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -238,6 +252,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(Attempt::class, AttemptPolicy::class);
+        Gate::policy(Order::class, OrderPolicy::class);
+        Gate::policy(BenefitGrant::class, BenefitGrantPolicy::class);
+        Gate::policy(ReportSnapshot::class, ReportSnapshotPolicy::class);
+        Gate::policy(Share::class, SharePolicy::class);
+        Gate::policy(ScaleRegistry::class, ScaleRegistryPolicy::class);
+        Gate::policy(ScaleSlug::class, ScaleSlugPolicy::class);
+
         if ($this->app->runningInConsole() && $this->app->environment('production')) {
             $argv = $_SERVER['argv'] ?? [];
             $command = is_array($argv) ? trim((string) ($argv[1] ?? '')) : '';

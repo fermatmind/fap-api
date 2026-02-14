@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Event extends Model
 {
-    use HasUuids;
+    use HasUuids, HasOrgScope;
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -60,4 +61,9 @@ class Event extends Model
         'duration_ms' => 'integer',
         'is_dropoff' => 'integer',
     ];
+
+    public static function allowOrgZeroContext(): bool
+    {
+        return true;
+    }
 }

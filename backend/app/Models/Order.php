@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    use HasOrgScope;
+
     protected $table = 'orders';
 
     public $incrementing = false;
@@ -52,4 +55,9 @@ class Order extends Model
         'fulfilled_at' => 'datetime',
         'refunded_at' => 'datetime',
     ];
+
+    public static function allowOrgZeroContext(): bool
+    {
+        return true;
+    }
 }

@@ -68,7 +68,7 @@ class LegacyShareFlowService
 
     public function clickAndComposeReport(string $shareId, array $input, array $requestMeta): array
     {
-        $share = Share::query()->where('id', $shareId)->first();
+        $share = Share::withoutGlobalScopes()->where('id', $shareId)->first();
         if (!$share) {
             throw new NotFoundHttpException('share not found');
         }
@@ -78,7 +78,7 @@ class LegacyShareFlowService
             throw (new ModelNotFoundException())->setModel(Share::class, [$shareId]);
         }
 
-        $gen = Event::query()
+        $gen = Event::withoutGlobalScopes()
             ->where('event_code', 'share_generate')
             ->where('share_id', $shareId)
             ->orderByDesc('occurred_at')
@@ -168,10 +168,10 @@ class LegacyShareFlowService
         $meta = array_filter($meta, static fn (mixed $v): bool => !($v === null || $v === ''));
         $meta = $this->eventPayloadLimiter->limit($meta);
 
-        $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+        $attempt = Attempt::withoutGlobalScopes()->where('id', $attemptId)->firstOrFail();
         $this->assertOrgIsolation($attempt);
 
-        $result = Result::query()
+        $result = Result::withoutGlobalScopes()
             ->where('org_id', (int) ($attempt->org_id ?? 0))
             ->where('attempt_id', (string) $attempt->id)
             ->firstOrFail();
@@ -258,7 +258,7 @@ class LegacyShareFlowService
 
         $attemptId = (string) ($data['attempt_id'] ?? '');
         if ($attemptId !== '') {
-            $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+            $attempt = Attempt::withoutGlobalScopes()->where('id', $attemptId)->firstOrFail();
             $this->assertOrgIsolation($attempt);
         }
 

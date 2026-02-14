@@ -18,4 +18,9 @@ class Share extends Model
         'scale_version',
         'content_package_version',
     ];
+
+    public function attempt()
+    {
+        return $this->belongsTo(Attempt::class, 'attempt_id', 'id');
+    }
 }

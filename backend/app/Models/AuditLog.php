@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Model;
 
 class AuditLog extends Model
 {
+    use HasOrgScope;
+
     protected $table = 'audit_logs';
 
     public $timestamps = false;
