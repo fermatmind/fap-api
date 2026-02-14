@@ -59,7 +59,19 @@ jobs:
 
       - name: Composer audit (CVE scan)
         working-directory: backend
-        run: composer audit --no-interaction
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if composer audit --no-interaction; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "composer audit failed (attempt ${attempt}/3), retrying..."
+              sleep 5
+            fi
+          done
+          echo "::warning::composer audit endpoint unreachable after retries; fallback to --ignore-unreachable"
+          composer audit --no-interaction --ignore-unreachable
 
       - name: Prepare sqlite
         run: |
