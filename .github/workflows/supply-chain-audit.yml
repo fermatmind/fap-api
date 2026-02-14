@@ -1,0 +1,65 @@
+name: supply-chain-audit
+
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  supply-chain-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+          tools: composer:v2
+
+      - name: Composer install (backend)
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Composer validate (backend)
+        working-directory: backend
+        run: composer validate --strict
+
+      - name: Composer audit (backend)
+        working-directory: backend
+        run: composer audit --no-interaction
+
+      - name: OSV scan composer.lock
+        run: |
+          set -euo pipefail
+          mkdir -p _audit
+          docker run --rm \
+            -v "${PWD}:/src" \
+            -w /src \
+            ghcr.io/google/osv-scanner:latest \
+            scan -L /src/backend/composer.lock --format json --output /src/_audit/osv-composer-lock.json
+
+          jq -e '.results | length == 0' _audit/osv-composer-lock.json >/dev/null || {
+            echo "[FAIL] osv-scanner found vulnerabilities in backend/composer.lock"
+            jq '.results' _audit/osv-composer-lock.json
+            exit 1
+          }
+
+      - name: Supply chain hard gate
+        run: bash scripts/supply_chain_gate.sh
+
+      - name: Upload supply-chain evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: supply-chain-evidence
+          path: _audit/osv-composer-lock.json
+          if-no-files-found: error
+          retention-days: 7

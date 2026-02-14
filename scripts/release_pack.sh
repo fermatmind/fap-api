@@ -30,9 +30,21 @@ cd "$ROOT"
 # 强入口存在性校验（硬失败）
 [[ -f "${ROOT}/backend/routes/api.php" ]] || fail "required entry missing: backend/routes/api.php"
 
+# 仓库源污染阻断：任意路径被跟踪的 .env/.env.*（排除 .env.example）直接失败
+while IFS= read -r tracked; do
+  base="$(basename "$tracked")"
+  case "$base" in
+    .env|.env.*)
+      [[ "$base" == ".env.example" ]] && continue
+      fail "forbidden tracked env file in repo: ${tracked}"
+      ;;
+  esac
+done < <(git -C "$ROOT" ls-files)
+
 # 白名单来源必须在 HEAD 中存在（禁止静默跳过）
 WHITELIST_PATHS=(backend scripts docs README_DEPLOY.md)
-for src in "${WHITELIST_PATHS[@]}" backend/.env.example; do
+REQUIRED_HEAD_FILES=(backend/.env.example backend/routes/api.php backend/composer.json backend/composer.lock)
+for src in "${WHITELIST_PATHS[@]}" "${REQUIRED_HEAD_FILES[@]}"; do
   git -C "$ROOT" cat-file -e "HEAD:${src}" 2>/dev/null || fail "whitelist source missing in HEAD: ${src}"
 done
 
@@ -76,9 +88,12 @@ while IFS= read -r entry; do
 done < <(find "$STAGING_DIR" -mindepth 1 -maxdepth 1 -print)
 
 # 关键文件存在性校验
-for rf in backend/routes/api.php backend/composer.lock backend/.env.example; do
+for rf in backend/routes/api.php backend/composer.json backend/composer.lock backend/.env.example; do
   [[ -f "${STAGING_DIR}/${rf}" ]] || fail "required file missing in staging: ${rf}"
 done
+
+# 打包前供应链硬闸门：staging 必须携带有效 composer 清单
+bash "${ROOT}/scripts/supply_chain_gate.sh" "${STAGING_DIR}"
 
 # 产物可追溯 manifest
 mkdir -p "$MANIFEST_DIR"
@@ -92,6 +107,7 @@ cat > "$MANIFEST_FILE" <<MANIFEST
   "build_time_utc": "${BUILD_TIME_UTC}",
   "required_files": [
     { "path": "backend/routes/api.php", "exists": true },
+    { "path": "backend/composer.json", "exists": true },
     { "path": "backend/composer.lock", "exists": true },
     { "path": "backend/.env.example", "exists": true }
   ]
