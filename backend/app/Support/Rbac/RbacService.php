@@ -75,7 +75,7 @@ class RbacService
     public function assertCan(AdminUser $user, string $permissionName): void
     {
         if (!$user->hasPermission($permissionName)) {
-            abort(403, 'Forbidden');
+            abort(404, 'Not Found');
         }
     }
 

@@ -49,7 +49,7 @@ class CommerceController extends Controller
     {
         $payload = $request->validate([
             'sku' => ['required', 'string', 'max:64'],
-            'quantity' => ['nullable', 'integer', 'min:1'],
+            'quantity' => ['nullable', 'integer', 'min:1', 'max:1000'],
             'target_attempt_id' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],

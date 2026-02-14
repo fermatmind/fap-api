@@ -91,7 +91,7 @@ class AuthPhoneController extends Controller
                 'phone_hash' => hash('sha256', $phone),
             ]);
 
-            throw new ApiProblemException(429, 'OTP_SEND_FAILED', $e->getMessage(), [], $e);
+            throw new ApiProblemException(429, 'OTP_SEND_FAILED', 'otp send failed.', [], $e);
         }
 
         $out = [

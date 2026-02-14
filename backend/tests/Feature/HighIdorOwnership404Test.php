@@ -305,4 +305,5 @@ class HighIdorOwnership404Test extends TestCase
             ->getJson("/api/v0.2/attempts/{$attemptId}/quality")
             ->assertStatus(404);
     }
+
 }

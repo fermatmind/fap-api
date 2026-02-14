@@ -108,4 +108,40 @@ final class SensitiveDataRedactorTest extends TestCase
         $this->assertSame('[REDACTED_PSYCH]', $result['data']['report_json']);
         $this->assertTrue((bool) ($result['data']['nested']['psychometrics']['__redacted__'] ?? false));
     }
+
+    public function test_exception_and_error_message_keys_are_redacted(): void
+    {
+        $redactor = new SensitiveDataRedactor();
+
+        $data = [
+            'exception' => 'SQLSTATE[HY000] ...',
+            'error_message' => 'token=abc',
+            'email' => 'alice@example.com',
+            'phone' => '+1234567890',
+        ];
+
+        $result = $redactor->redact($data);
+
+        $this->assertSame('[REDACTED]', $result['exception']);
+        $this->assertSame('[REDACTED]', $result['error_message']);
+        $this->assertSame('[REDACTED]', $result['email']);
+        $this->assertSame('[REDACTED]', $result['phone']);
+    }
+
+    public function test_error_message_and_err_keys_are_redacted(): void
+    {
+        $redactor = new SensitiveDataRedactor();
+
+        $data = [
+            'error' => 'sqlstate[hy000] token=abc',
+            'message' => '/var/www/app/storage/logs/laravel.log',
+            'err' => 'authorization: bearer xxx',
+        ];
+
+        $result = $redactor->redact($data);
+
+        $this->assertSame('[REDACTED]', $result['error']);
+        $this->assertSame('[REDACTED]', $result['message']);
+        $this->assertSame('[REDACTED]', $result['err']);
+    }
 }

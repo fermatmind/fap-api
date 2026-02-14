@@ -96,7 +96,7 @@ class HealthzController extends Controller
                 'driver' => (string) config('database.default'),
                 'latency_ms' => $ms,
             ];
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             $ms = (int) round((microtime(true) - $t0) * 1000);
 
             return [
@@ -104,7 +104,7 @@ class HealthzController extends Controller
                 'driver' => (string) config('database.default'),
                 'latency_ms' => $ms,
                 'error_code' => 'DB_UNAVAILABLE',
-                'message' => $e->getMessage(),
+                'message' => 'database unavailable.',
             ];
         }
     }
@@ -136,7 +136,7 @@ class HealthzController extends Controller
                 'client' => $client,
                 'latency_ms' => $ms,
             ];
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             $ms = (int) round((microtime(true) - $t0) * 1000);
 
             return [
@@ -144,7 +144,7 @@ class HealthzController extends Controller
                 'client' => (string) config('database.redis.client', 'redis'),
                 'latency_ms' => $ms,
                 'error_code' => 'REDIS_UNAVAILABLE',
-                'message' => $e->getMessage(),
+                'message' => 'redis unavailable.',
             ];
         }
     }
@@ -174,7 +174,7 @@ class HealthzController extends Controller
                 'error_code' => $ok ? '' : 'CACHE_STORE_MISMATCH',
                 'message' => $ok ? '' : 'cache read/write mismatch',
             ];
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             $ms = (int) round((microtime(true) - $t0) * 1000);
 
             return [
@@ -183,7 +183,7 @@ class HealthzController extends Controller
                 'driver' => $driver,
                 'latency_ms' => $ms,
                 'error_code' => 'CACHE_STORE_UNAVAILABLE',
-                'message' => $e->getMessage(),
+                'message' => 'cache store unavailable.',
             ];
         }
     }
@@ -246,12 +246,12 @@ class HealthzController extends Controller
                 'driver' => $driver,
                 'connection' => (string) ($connection['connection'] ?? ''),
             ];
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return [
                 'ok' => false,
                 'driver' => $driver,
                 'error_code' => 'QUEUE_UNAVAILABLE',
-                'message' => $e->getMessage(),
+                'message' => 'queue unavailable.',
             ];
         }
     }
@@ -285,9 +285,9 @@ class HealthzController extends Controller
                     @file_put_contents($probeFile, (string) time());
                     @unlink($probeFile);
                     $probeOk = true;
-                } catch (\Throwable $e) {
+                } catch (\Throwable) {
                     $probeOk = false;
-                    $probeErr = $e->getMessage();
+                    $probeErr = 'cache probe failed.';
                 }
             }
 

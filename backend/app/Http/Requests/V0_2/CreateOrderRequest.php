@@ -34,7 +34,7 @@ class CreateOrderRequest extends FormRequest
     {
         return [
             'item_sku' => ['required', 'string', 'max:64', $this->skuExistsRule()],
-            'quantity' => ['nullable', 'integer', 'min:1'],
+            'quantity' => ['nullable', 'integer', 'min:1', 'max:1000'],
             'currency' => ['required', 'string', 'max:8'],
             'device_id' => ['nullable', 'string', 'max:128'],
             'provider' => ['nullable', 'string', 'max:32'],

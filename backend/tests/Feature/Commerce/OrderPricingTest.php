@@ -57,6 +57,22 @@ final class OrderPricingTest extends TestCase
         }
     }
 
+    public function test_create_order_rejects_overflow_amount(): void
+    {
+        $this->seedSku('MBTI_FULL', 1990000000, 'CNY');
+
+        $result = app(PaymentService::class)->createOrder([
+            'user_id' => 'u_pricing_overflow',
+            'item_sku' => 'MBTI_FULL',
+            'quantity' => 2,
+            'currency' => 'CNY',
+        ]);
+
+        $this->assertFalse((bool) ($result['ok'] ?? true));
+        $this->assertSame('AMOUNT_TOO_LARGE', (string) ($result['error_code'] ?? ''));
+        $this->assertSame(422, (int) ($result['status'] ?? 0));
+    }
+
     private function seedSku(string $sku, int $priceCents, string $currency): void
     {
         $row = [
