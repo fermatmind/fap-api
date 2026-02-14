@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Filament\Resources\AuditLogResource;
+use App\Filament\Ops\Resources\AuditLogResource;
 use App\Support\OrgContext;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;

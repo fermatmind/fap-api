@@ -18,6 +18,7 @@ final class MembershipService
         $role = DB::table('organization_members')
             ->where('org_id', $orgId)
             ->where('user_id', $userId)
+            ->where('is_active', 1)
             ->value('role');
 
         $role = is_string($role) ? trim($role) : '';
@@ -48,6 +49,7 @@ final class MembershipService
                 ->where('user_id', $userId)
                 ->update([
                     'role' => $role,
+                    'is_active' => 1,
                     'updated_at' => $now,
                 ]);
             return;
@@ -57,6 +59,7 @@ final class MembershipService
             'org_id' => $orgId,
             'user_id' => $userId,
             'role' => $role,
+            'is_active' => 1,
             'joined_at' => $now,
             'created_at' => $now,
             'updated_at' => $now,
