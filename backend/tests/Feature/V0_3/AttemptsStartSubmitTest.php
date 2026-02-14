@@ -84,6 +84,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $result = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
         $result->assertStatus(200);
         $this->assertSame(15, (int) $result->json('result.raw_score'));
@@ -140,6 +141,7 @@ class AttemptsStartSubmitTest extends TestCase
     public function test_mbti_report_locked_true_without_entitlement(): void
     {
         $this->seedScales();
+        $anonToken = $this->issueAnonToken('anon_test');
         $attemptId = (string) Str::uuid();
         \App\Models\Attempt::create([
             'id' => $attemptId,
@@ -220,6 +222,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $resultResp = $this->withHeaders([
             'X-Anon-Id' => 'anon_test',
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
 
         $resultResp->assertStatus(200);
@@ -230,6 +233,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $report = $this->withHeaders([
             'X-Anon-Id' => 'anon_test',
+            'Authorization' => 'Bearer ' . $anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
         $report->assertJson([

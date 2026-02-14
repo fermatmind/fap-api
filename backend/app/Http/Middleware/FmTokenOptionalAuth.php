@@ -41,8 +41,45 @@ class FmTokenOptionalAuth
 
         $request->attributes->set('fm_token', $token);
 
-        $row = DB::table('fm_tokens')->where('token', $token)->first();
+        $tokenHash = hash('sha256', $token);
+        $select = [
+            'token_hash',
+            'token',
+            'user_id',
+            'anon_id',
+            'expires_at',
+            'revoked_at',
+        ];
+
+        $row = DB::table('fm_tokens')
+            ->select($select)
+            ->where('token_hash', $tokenHash)
+            ->first();
         if (!$row) {
+            $row = DB::table('fm_tokens')
+                ->select($select)
+                ->where('token', $token)
+                ->first();
+
+            if ($row) {
+                $currentHash = trim((string) ($row->token_hash ?? ''));
+                if ($currentHash === '') {
+                    DB::table('fm_tokens')
+                        ->where('token', $token)
+                        ->update([
+                            'token_hash' => $tokenHash,
+                            'updated_at' => now(),
+                        ]);
+                    $row->token_hash = $tokenHash;
+                }
+            }
+        }
+
+        if (!$row) {
+            return $this->unauthorizedResponse();
+        }
+
+        if (property_exists($row, 'revoked_at') && !empty($row->revoked_at)) {
             return $this->unauthorizedResponse();
         }
 

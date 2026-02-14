@@ -29,6 +29,13 @@ class ResolveOrgContext
 
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
+        if ($anonId === null) {
+            $anonId = $this->resolveAnonIdFromToken($request);
+            if ($anonId !== null) {
+                $request->attributes->set('anon_id', $anonId);
+                $request->attributes->set('fm_anon_id', $anonId);
+            }
+        }
         $role = null;
 
         if ($orgId > 0) {
@@ -153,6 +160,21 @@ class ResolveOrgContext
         $role = trim((string) ($payload['role'] ?? ''));
 
         return $role !== '' ? $role : null;
+    }
+
+    private function resolveAnonIdFromToken(Request $request): ?string
+    {
+        $payload = $this->resolveFmTokenPayload($request);
+        if (!($payload['ok'] ?? false)) {
+            return null;
+        }
+
+        $anonId = trim((string) ($payload['anon_id'] ?? ''));
+        if ($anonId === '') {
+            return null;
+        }
+
+        return strlen($anonId) <= 128 ? $anonId : null;
     }
 
     /**

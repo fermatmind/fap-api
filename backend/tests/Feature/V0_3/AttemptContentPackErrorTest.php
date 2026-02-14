@@ -39,6 +39,7 @@ final class AttemptContentPackErrorTest extends TestCase
 
         $response->assertStatus(500);
         $response->assertJsonPath('error_code', 'CONTENT_PACK_ERROR');
+        $response->assertJsonMissingPath('details.reason');
 
         Log::shouldHaveReceived('error')
             ->atLeast()

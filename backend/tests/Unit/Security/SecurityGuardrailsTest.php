@@ -58,6 +58,13 @@ final class SecurityGuardrailsTest extends TestCase
         'app/Services',
     ];
 
+    /** @var array<int, string> */
+    private const FM_TOKEN_MIDDLEWARE_PATHS = [
+        'app/Http/Middleware/FmTokenAuth.php',
+        'app/Http/Middleware/FmTokenOptional.php',
+        'app/Http/Middleware/FmTokenOptionalAuth.php',
+    ];
+
     public function test_state_changing_routes_require_auth_or_explicit_allowlist(): void
     {
         $violations = [];
@@ -209,6 +216,81 @@ final class SecurityGuardrailsTest extends TestCase
             $violations,
             "Ownership-sensitive paths should stay on unified 404 contract, not 403.\n".implode("\n", $violations)
         );
+    }
+
+    public function test_v03_attempt_ownership_resolver_does_not_trust_anon_headers(): void
+    {
+        $source = file_get_contents(base_path('app/Http/Controllers/API/V0_3/Concerns/ResolvesAttemptOwnership.php'));
+        $this->assertIsString($source);
+
+        $this->assertDoesNotMatchRegularExpression('/header\s*\(\s*[\'"]X-Anon-Id[\'"]/', $source);
+        $this->assertDoesNotMatchRegularExpression('/header\s*\(\s*[\'"]X-Fm-Anon-Id[\'"]/', $source);
+        $this->assertMatchesRegularExpression('/attributes->get\([\'"]anon_id[\'"]\)/', $source);
+        $this->assertMatchesRegularExpression('/attributes->get\([\'"]fm_anon_id[\'"]\)/', $source);
+    }
+
+    public function test_org_context_can_resolve_anon_id_from_token_payload(): void
+    {
+        $source = file_get_contents(base_path('app/Http/Middleware/ResolveOrgContext.php'));
+        $this->assertIsString($source);
+
+        $this->assertMatchesRegularExpression('/resolveAnonIdFromToken/', $source);
+        $this->assertMatchesRegularExpression('/fm_anon_id/', $source);
+        $this->assertMatchesRegularExpression('/anon_id/', $source);
+    }
+
+    public function test_webhook_signature_verifier_has_no_environment_fail_open(): void
+    {
+        $source = file_get_contents(base_path('app/Http/Controllers/Webhooks/HandleProviderWebhook.php'));
+        $this->assertIsString($source);
+
+        $this->assertDoesNotMatchRegularExpression('/app\(\)->environment\s*\(\s*\[[^\]]*testing[^\]]*\]\s*\)/', $source);
+        $this->assertMatchesRegularExpression('/allow_unsigned_without_secret/', $source);
+    }
+
+    public function test_fm_token_middlewares_check_revoked_and_expired_tokens(): void
+    {
+        $missing = [];
+
+        foreach (self::FM_TOKEN_MIDDLEWARE_PATHS as $relativePath) {
+            $source = file_get_contents(base_path($relativePath));
+            if (!is_string($source)) {
+                $missing[] = "{$relativePath}:unreadable";
+                continue;
+            }
+
+            if (!preg_match('/revoked_at/', $source)) {
+                $missing[] = "{$relativePath}:revoked_at_check";
+            }
+            if (!preg_match('/expires_at/', $source)) {
+                $missing[] = "{$relativePath}:expires_at_check";
+            }
+        }
+
+        $this->assertSame(
+            [],
+            $missing,
+            "fm token middlewares must enforce revoked/expired token checks.\n".implode("\n", $missing)
+        );
+    }
+
+    public function test_content_pack_error_contract_does_not_leak_internal_reason(): void
+    {
+        $source = file_get_contents(base_path('app/Support/ApiExceptionRenderer.php'));
+        $this->assertIsString($source);
+
+        $this->assertMatchesRegularExpression('/CONTENT_PACK_ERROR/', $source);
+        $this->assertDoesNotMatchRegularExpression('/getPrevious\s*\(\)\s*->\s*getMessage/', $source);
+        $this->assertDoesNotMatchRegularExpression('/[\'"]reason[\'"]\s*=>/', $source);
+    }
+
+    public function test_v02_attempt_submit_has_public_overwrite_guard(): void
+    {
+        $source = file_get_contents(base_path('app/Services/Legacy/Mbti/Attempt/LegacyMbtiAttemptLifecycleService.php'));
+        $this->assertIsString($source);
+
+        $this->assertMatchesRegularExpression('/if\s*\(\s*!\s*\$isResultUpsertRoute\s*\)\s*\{\s*throw new ApiProblemException\(\s*409\s*,\s*[\'"]ATTEMPT_ALREADY_EXISTS[\'"]/', $source);
+        $this->assertMatchesRegularExpression('/resolveActorUserId/', $source);
     }
 
     /**

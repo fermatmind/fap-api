@@ -196,6 +196,20 @@ class HighIdorOwnership404Test extends TestCase
             ->assertStatus(404);
     }
 
+    public function test_header_only_anon_identity_cannot_read_v03_attempt_without_token_binding(): void
+    {
+        $this->seedScales();
+        $attemptId = $this->createSubmittedAttemptForAnonA();
+
+        $this->withHeaders(['X-Anon-Id' => self::ANON_A])
+            ->getJson("/api/v0.3/attempts/{$attemptId}/result")
+            ->assertStatus(404);
+
+        $this->withHeaders(['X-Anon-Id' => self::ANON_A])
+            ->getJson("/api/v0.3/attempts/{$attemptId}/report")
+            ->assertStatus(404);
+    }
+
     public function test_anon_b_cannot_get_anon_a_order(): void
     {
         $orderNo = 'ord_pr60_' . Str::lower(Str::random(10));

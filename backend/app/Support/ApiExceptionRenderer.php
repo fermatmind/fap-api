@@ -55,17 +55,11 @@ final class ApiExceptionRenderer
         }
 
         if ($e instanceof \RuntimeException && trim($e->getMessage()) === 'CONTENT_PACK_ERROR') {
-            $reason = trim((string) ($e->getPrevious()?->getMessage() ?? ''));
-            $payload = [];
-            if ($reason !== '') {
-                $payload['details'] = ['reason' => $reason];
-            }
-
             return self::errorResponse(
                 500,
                 'CONTENT_PACK_ERROR',
                 'content pack resolve failed.',
-                (array) ($payload['details'] ?? []),
+                [],
                 $requestId
             );
         }
