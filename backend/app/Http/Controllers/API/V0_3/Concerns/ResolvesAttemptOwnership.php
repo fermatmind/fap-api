@@ -40,7 +40,7 @@ trait ResolvesAttemptOwnership
         ];
 
         foreach ($candidates as $candidate) {
-            $normalized = $this->normalizeString($candidate);
+            $normalized = $this->normalizeNumericString($candidate);
             if ($normalized !== null) {
                 return $normalized;
             }
@@ -54,8 +54,6 @@ trait ResolvesAttemptOwnership
         $candidates = [
             $request->attributes->get('anon_id'),
             $request->attributes->get('fm_anon_id'),
-            $request->header('X-Anon-Id'),
-            $request->header('X-Fm-Anon-Id'),
             app(OrgContext::class)->anonId(),
         ];
 
@@ -67,6 +65,20 @@ trait ResolvesAttemptOwnership
         }
 
         return null;
+    }
+
+    private function normalizeNumericString(mixed $candidate): ?string
+    {
+        if (!is_string($candidate) && !is_numeric($candidate)) {
+            return null;
+        }
+
+        $value = trim((string) $candidate);
+        if ($value === '' || preg_match('/^\d+$/', $value) !== 1) {
+            return null;
+        }
+
+        return $value;
     }
 
     private function normalizeString(mixed $candidate): ?string

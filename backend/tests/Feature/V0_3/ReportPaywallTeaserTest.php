@@ -16,6 +16,26 @@ class ReportPaywallTeaserTest extends TestCase
 {
     use RefreshDatabase;
 
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder())->run();
@@ -115,9 +135,11 @@ class ReportPaywallTeaserTest extends TestCase
         $this->seedScales();
 
         $attemptId = $this->createMbtiAttemptWithResult();
+        $token = $this->issueAnonToken('anon_test');
 
         $report = $this->withHeaders([
             'X-Anon-Id' => 'anon_test',
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
         $report->assertJson([

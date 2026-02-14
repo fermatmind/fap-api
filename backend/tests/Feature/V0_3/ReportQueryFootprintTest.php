@@ -103,12 +103,33 @@ final class ReportQueryFootprintTest extends TestCase
         return $attemptId;
     }
 
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
     public function test_report_path_does_not_query_answer_set_big_table(): void
     {
         $this->seedScales();
 
         $anonId = 'anon_report_query_footprint';
         $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $token = $this->issueAnonToken($anonId);
 
         $queries = [];
         DB::listen(static function (QueryExecuted $query) use (&$queries): void {
@@ -117,6 +138,7 @@ final class ReportQueryFootprintTest extends TestCase
 
         $report = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
         $report->assertJsonPath('ok', true);

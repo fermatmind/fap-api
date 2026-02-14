@@ -302,6 +302,8 @@ class LegacyMbtiAttemptLifecycleService
 
         $canStoreJson = \App\Support\SchemaBaseline::hasColumn('attempts', 'answers_json');
         $canStorePath = \App\Support\SchemaBaseline::hasColumn('attempts', 'answers_storage_path');
+        $actorUserId = $this->resolveActorUserId($request);
+        $actorAnonId = $this->resolveActorAnonId($request);
 
         if (! $canStoreJson && (! $storeToStorage || ! $canStorePath)) {
             throw new ApiProblemException(
@@ -335,7 +337,9 @@ class LegacyMbtiAttemptLifecycleService
             $answers,
             $answersHash,
             $answersStoragePath,
-            $isResultUpsertRoute
+            $isResultUpsertRoute,
+            $actorUserId,
+            $actorAnonId
         ) {
             $existingAttempt = $this->attemptQuery($attemptId)->first();
 
@@ -344,6 +348,32 @@ class LegacyMbtiAttemptLifecycleService
             }
 
             if ($existingAttempt) {
+                if (! $isResultUpsertRoute) {
+                    throw new ApiProblemException(
+                        409,
+                        'ATTEMPT_ALREADY_EXISTS',
+                        'attempt_id already exists. create a new attempt id for public submit.'
+                    );
+                }
+
+                if ($actorUserId === null) {
+                    throw new ApiProblemException(
+                        401,
+                        'UNAUTHORIZED',
+                        'authenticated user is required for result upsert.'
+                    );
+                }
+
+                $existingUserId = trim((string) ($existingAttempt->user_id ?? ''));
+                if ($existingUserId !== '' && $existingUserId !== $actorUserId) {
+                    throw new ApiProblemException(404, 'NOT_FOUND', 'attempt not found.');
+                }
+
+                $existingAnonId = trim((string) ($existingAttempt->anon_id ?? ''));
+                if ($existingAnonId !== '' && $actorAnonId !== null && $existingAnonId !== $actorAnonId) {
+                    throw new ApiProblemException(404, 'NOT_FOUND', 'attempt not found.');
+                }
+
                 if ((string) $existingAttempt->anon_id !== (string) $payload['anon_id']
                     || (string) $existingAttempt->scale_code !== (string) $payload['scale_code']
                     || (string) $existingAttempt->scale_version !== (string) $payload['scale_version']
@@ -356,7 +386,7 @@ class LegacyMbtiAttemptLifecycleService
             $attemptData = [
                 'id' => $attemptId,
                 'anon_id' => $payload['anon_id'],
-                'user_id' => $existingAttempt?->user_id ?? null,
+                'user_id' => $existingAttempt?->user_id ?? $actorUserId,
 
                 'scale_code' => $payload['scale_code'],
                 'scale_version' => $payload['scale_version'],
@@ -837,6 +867,48 @@ class LegacyMbtiAttemptLifecycleService
         usort($norm, fn ($x, $y) => strcmp($x['question_id'], $y['question_id']));
 
         return hash('sha256', json_encode($norm, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    private function resolveActorUserId(Request $request): ?string
+    {
+        $candidates = [
+            $request->attributes->get('fm_user_id'),
+            $request->attributes->get('user_id'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
+                continue;
+            }
+
+            $value = trim((string) $candidate);
+            if ($value !== '' && preg_match('/^\d+$/', $value) === 1) {
+                return $value;
+            }
+        }
+
+        return null;
+    }
+
+    private function resolveActorAnonId(Request $request): ?string
+    {
+        $candidates = [
+            $request->attributes->get('anon_id'),
+            $request->attributes->get('fm_anon_id'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
+                continue;
+            }
+
+            $value = trim((string) $candidate);
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        return null;
     }
 
     /**

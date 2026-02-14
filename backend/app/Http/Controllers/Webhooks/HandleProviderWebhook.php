@@ -102,7 +102,7 @@ class HandleProviderWebhook extends Controller
 
         if ($secret === '') {
             $allowUnsigned = (bool) config('services.integrations.allow_unsigned_without_secret', false);
-            if ($allowUnsigned || app()->environment(['local', 'testing', 'ci'])) {
+            if ($allowUnsigned) {
                 return ['ok' => true, 'timestamp' => $timestamp];
             }
 

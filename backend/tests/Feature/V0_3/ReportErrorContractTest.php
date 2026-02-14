@@ -7,6 +7,7 @@ use App\Models\Result;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -99,15 +100,37 @@ final class ReportErrorContractTest extends TestCase
         return $attemptId;
     }
 
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
     public function test_report_returns_stable_json_contract_when_context_missing(): void
     {
         $this->seedScales();
 
         $anonId = 'anon_report_error_contract';
         $attemptId = $this->createMbtiAttemptWithoutPackContext($anonId);
+        $token = $this->issueAnonToken($anonId);
 
         $response = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $response->assertStatus(500);

@@ -304,7 +304,7 @@ if [ "${http_code:-000}" != "200" ]; then
 fi
 
 # 未购 report
-curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_unpaid.json" "" || fail "fetch unpaid report failed"
+curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_unpaid.json" "$ANON_TOKEN" || fail "fetch unpaid report failed"
 
 # ------------------------
 # order + webhook -> entitlement + snapshot
@@ -345,12 +345,12 @@ http_code="$(post_billing_webhook "$WEBHOOK_PAYLOAD" "$ART_DIR/curl_webhook.json
 [ "${http_code:-000}" = "200" ] || fail "webhook failed (http=${http_code:-000})"
 
 # 已购 report（读 snapshot）
-curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_paid.json" "" || fail "fetch paid report failed"
+curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_paid.json" "$ANON_TOKEN" || fail "fetch paid report failed"
 
 # paid report must remain identical after registry update (snapshot)
 php artisan tinker --execute="\\Illuminate\\Support\\Facades\\DB::table('scales_registry')->where('org_id',0)->where('code','MBTI')->update(['default_dir_version'=>'MBTI-CN-v0.2.1-NOTEXIST','updated_at'=>now()]);" >/dev/null
 
-curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_paid_after_update.json" "" || fail "fetch paid report after update failed"
+curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_paid_after_update.json" "$ANON_TOKEN" || fail "fetch paid report after update failed"
 
 diff_result="diff=0"
 if ! diff -q "$ART_DIR/curl_report_paid.json" "$ART_DIR/curl_report_paid_after_update.json" >/dev/null 2>&1; then

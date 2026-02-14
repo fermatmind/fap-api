@@ -227,12 +227,14 @@ simple_final="$(json_get "$simple_submit" "result.final_score" || true)"
 echo "[PR17] simple_score_demo result" | tee -a "$LOG_FILE"
 http_code=$(curl -sS -L -o "$simple_result" -w "%{http_code}" \
   -H "X-Anon-Id: ${SIMPLE_ANON_ID}" \
+  -H "Authorization: Bearer ${simple_token}" \
   "$API/api/v0.3/attempts/$simple_attempt_id/result" || true)
 [[ "$http_code" == "200" ]] || fail "simple result failed (http=$http_code)"
 
 echo "[PR17] simple_score_demo report" | tee -a "$LOG_FILE"
 http_code=$(curl -sS -L -o "$simple_report" -w "%{http_code}" \
   -H "X-Anon-Id: ${SIMPLE_ANON_ID}" \
+  -H "Authorization: Bearer ${simple_token}" \
   "$API/api/v0.3/attempts/$simple_attempt_id/report" || true)
 [[ "$http_code" == "200" ]] || fail "simple report failed (http=$http_code)"
 
@@ -286,12 +288,14 @@ raven_final="$(json_get "$raven_submit" "result.final_score" || true)"
 echo "[PR17] iq_raven result" | tee -a "$LOG_FILE"
 http_code=$(curl -sS -L -o "$raven_result" -w "%{http_code}" \
   -H "X-Anon-Id: ${RAVEN_ANON_ID}" \
+  -H "Authorization: Bearer ${raven_token}" \
   "$API/api/v0.3/attempts/$raven_attempt_id/result" || true)
 [[ "$http_code" == "200" ]] || fail "raven result failed (http=$http_code)"
 
 echo "[PR17] iq_raven report" | tee -a "$LOG_FILE"
 http_code=$(curl -sS -L -o "$raven_report" -w "%{http_code}" \
   -H "X-Anon-Id: ${RAVEN_ANON_ID}" \
+  -H "Authorization: Bearer ${raven_token}" \
   "$API/api/v0.3/attempts/$raven_attempt_id/report" || true)
 [[ "$http_code" == "200" ]] || fail "raven report failed (http=$http_code)"
 

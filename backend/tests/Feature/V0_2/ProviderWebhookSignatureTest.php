@@ -189,6 +189,42 @@ final class ProviderWebhookSignatureTest extends TestCase
         ]);
     }
 
+    public function test_missing_secret_rejects_unsigned_payload_by_default_even_in_testing(): void
+    {
+        config([
+            'services.integrations.providers.mock.webhook_secret' => '',
+            'services.integrations.allow_unsigned_without_secret' => false,
+        ]);
+
+        $payload = [
+            'event_id' => 'evt_no_secret_unsigned',
+            'external_user_id' => 'ext_mock_unsigned',
+            'recorded_at' => '2026-02-07T00:00:00Z',
+            'samples' => [],
+        ];
+
+        $rawBody = $this->encodePayload($payload);
+
+        $response = $this->call(
+            'POST',
+            '/api/v0.2/webhooks/mock',
+            [],
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/json',
+                'HTTP_ACCEPT' => 'application/json',
+            ],
+            $rawBody,
+        );
+
+        $response->assertStatus(404);
+        $response->assertJson([
+            'ok' => false,
+            'error_code' => 'NOT_FOUND',
+        ]);
+    }
+
     private function buildTimestampSignature(string $secret, string $rawBody, int $timestamp): string
     {
         return hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);

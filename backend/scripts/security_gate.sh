@@ -25,7 +25,7 @@ trap cleanup EXIT
 
 echo "[SECURITY_GATE] start"
 
-echo "[SECURITY_GATE] check 1/4: critical route auth invariants"
+echo "[SECURITY_GATE] check 1/10: critical route auth invariants"
 php -r '
 $path = getcwd() . "/routes/api.php";
 $source = file_get_contents($path);
@@ -54,7 +54,7 @@ if ($missing !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 2/4: no request->all() mass assignment sinks"
+echo "[SECURITY_GATE] check 2/10: no request->all() mass assignment sinks"
 php -r '
 $roots = [
     getcwd() . "/routes",
@@ -145,7 +145,7 @@ if ($violations !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 3/4: ownership 404 contract (no 403 leaks)"
+echo "[SECURITY_GATE] check 3/10: ownership 404 contract (no 403 leaks)"
 php -r '
 $paths = [
     "app/Http/Controllers/API/V0_2/LegacyReportController.php",
@@ -228,7 +228,155 @@ if ($violations !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 4/4: unit guard test"
+echo "[SECURITY_GATE] check 4/10: v0.3 attempt ownership resolver must not trust anon headers"
+php -r '
+$path = getcwd() . "/app/Http/Controllers/API/V0_3/Concerns/ResolvesAttemptOwnership.php";
+$source = file_get_contents($path);
+if (!is_string($source)) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read {$path}\n");
+    exit(1);
+}
+
+$forbidden = [
+    "/header\\s*\\(\\s*[\\x27\\x22]X-Anon-Id[\\x27\\x22]/",
+    "/header\\s*\\(\\s*[\\x27\\x22]X-Fm-Anon-Id[\\x27\\x22]/",
+];
+
+foreach ($forbidden as $regex) {
+    if (preg_match($regex, $source) === 1) {
+        fwrite(STDERR, "[SECURITY_GATE][FAIL] header-based anon ownership detected in ResolvesAttemptOwnership\n");
+        exit(1);
+    }
+}
+'
+
+echo "[SECURITY_GATE] check 5/10: org context can hydrate anon identity from token payload"
+php -r '
+$path = getcwd() . "/app/Http/Middleware/ResolveOrgContext.php";
+$source = file_get_contents($path);
+if (!is_string($source)) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read {$path}\n");
+    exit(1);
+}
+
+$checks = [
+    "resolveAnonIdFromToken method" => "/resolveAnonIdFromToken\\s*\\(/",
+    "anon attr set" => "/attributes->set\\(\\s*[\\x27\\x22]anon_id[\\x27\\x22]/",
+    "fm_anon attr set" => "/attributes->set\\(\\s*[\\x27\\x22]fm_anon_id[\\x27\\x22]/",
+];
+
+$missing = [];
+foreach ($checks as $name => $regex) {
+    if (preg_match($regex, $source) !== 1) {
+        $missing[] = $name;
+    }
+}
+
+if ($missing !== []) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] resolve org context missing anon-from-token guards: " . implode(", ", $missing) . "\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 6/10: webhook signature verifier has no testing/local fail-open"
+php -r '
+$path = getcwd() . "/app/Http/Controllers/Webhooks/HandleProviderWebhook.php";
+$source = file_get_contents($path);
+if (!is_string($source)) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read {$path}\n");
+    exit(1);
+}
+
+if (preg_match("/app\\(\\)->environment\\s*\\(\\s*\\[[^\\]]*testing[^\\]]*\\]\\s*\\)/", $source) === 1) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] webhook verifier still allows environment-based unsigned bypass\n");
+    exit(1);
+}
+
+if (preg_match("/allow_unsigned_without_secret/", $source) !== 1) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] webhook verifier missing explicit allow_unsigned_without_secret flag gate\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 7/10: fm token middlewares enforce revoked/expired checks"
+php -r '
+$paths = [
+    "app/Http/Middleware/FmTokenAuth.php",
+    "app/Http/Middleware/FmTokenOptional.php",
+    "app/Http/Middleware/FmTokenOptionalAuth.php",
+];
+
+$missing = [];
+foreach ($paths as $relative) {
+    $absolute = getcwd() . "/" . $relative;
+    $source = file_get_contents($absolute);
+    if (!is_string($source)) {
+        $missing[] = "{$relative}:unreadable";
+        continue;
+    }
+
+    if (preg_match("/revoked_at/", $source) !== 1) {
+        $missing[] = "{$relative}:revoked_at_check";
+    }
+    if (preg_match("/expires_at/", $source) !== 1) {
+        $missing[] = "{$relative}:expires_at_check";
+    }
+}
+
+if ($missing !== []) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] fm token middleware missing revoked/expired checks: " . implode(", ", $missing) . "\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 8/10: content pack API errors must not leak internal reason"
+php -r '
+$path = getcwd() . "/app/Support/ApiExceptionRenderer.php";
+$source = file_get_contents($path);
+if (!is_string($source)) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read {$path}\n");
+    exit(1);
+}
+
+if (preg_match("/getPrevious\\s*\\(\\)\\s*->\\s*getMessage\\s*\\(/", $source) === 1) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] ApiExceptionRenderer leaks previous exception message for content pack errors\n");
+    exit(1);
+}
+
+if (preg_match("/[\\x27\\x22]reason[\\x27\\x22]\\s*=>/", $source) === 1) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] ApiExceptionRenderer leaks reason details for content pack errors\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 9/10: v0.2 public submit must not overwrite existing attempt id"
+php -r '
+$path = getcwd() . "/app/Services/Legacy/Mbti/Attempt/LegacyMbtiAttemptLifecycleService.php";
+$source = file_get_contents($path);
+if (!is_string($source)) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read {$path}\n");
+    exit(1);
+}
+
+$checks = [
+    "public overwrite guard" => "/if\\s*\\(\\s*!\\s*\\x24isResultUpsertRoute\\s*\\)\\s*\\{\\s*throw new ApiProblemException\\(\\s*409\\s*,\\s*[\\x27\\x22]ATTEMPT_ALREADY_EXISTS[\\x27\\x22]/s",
+    "actor user resolver" => "/resolveActorUserId\\s*\\(/",
+];
+
+$missing = [];
+foreach ($checks as $name => $regex) {
+    if (preg_match($regex, $source) !== 1) {
+        $missing[] = $name;
+    }
+}
+
+if ($missing !== []) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] missing v0.2 overwrite guard(s): " . implode(", ", $missing) . "\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 10/10: unit guard test"
 php artisan test --testsuite=Unit --filter=SecurityGuardrailsTest
 
 echo "[SECURITY_GATE] PASS"
