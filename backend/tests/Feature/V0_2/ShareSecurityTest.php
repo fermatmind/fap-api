@@ -27,7 +27,7 @@ final class ShareSecurityTest extends TestCase
         $this->seedScaleRegistry($orgId, 'MBTI');
         $this->seedBenefitGrant($orgId, $attemptId, (string) $userA, $anonA);
 
-        $tokenA = $this->issueTokenForUser($userA);
+        $tokenA = $this->issueTokenForUser($userA, $orgId);
 
         $resp = $this->withHeaders($this->authHeaders($tokenA, $orgId))
             ->getJson('/api/v0.2/attempts/' . $attemptId . '/share');
@@ -48,7 +48,7 @@ final class ShareSecurityTest extends TestCase
         $attemptId = (string) Str::uuid();
         $this->seedAttemptAndResult($attemptId, $orgId, 'anon_b_' . Str::random(8), $userB);
 
-        $tokenA = $this->issueTokenForUser($userA);
+        $tokenA = $this->issueTokenForUser($userA, $orgId);
 
         $resp = $this->withHeaders($this->authHeaders($tokenA, $orgId))
             ->getJson('/api/v0.2/attempts/' . $attemptId . '/share');
@@ -66,7 +66,7 @@ final class ShareSecurityTest extends TestCase
         $attemptIdB = (string) Str::uuid();
         $this->seedAttemptAndResult($attemptIdB, $orgB, 'anon_cross_b_' . Str::random(8), $userB);
 
-        $tokenA = $this->issueTokenForUser($userA);
+        $tokenA = $this->issueTokenForUser($userA, $orgA);
 
         $resp = $this->withHeaders($this->authHeaders($tokenA, $orgA))
             ->getJson('/api/v0.2/attempts/' . $attemptIdB . '/share');
@@ -98,9 +98,11 @@ final class ShareSecurityTest extends TestCase
         ];
     }
 
-    private function issueTokenForUser(int $userId): string
+    private function issueTokenForUser(int $userId, int $orgId = 0): string
     {
-        $issued = app(FmTokenService::class)->issueForUser((string) $userId);
+        $issued = app(FmTokenService::class)->issueForUser((string) $userId, [
+            'org_id' => $orgId,
+        ]);
 
         return (string) ($issued['token'] ?? '');
     }

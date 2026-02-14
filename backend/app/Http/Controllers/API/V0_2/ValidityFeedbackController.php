@@ -9,7 +9,6 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 class ValidityFeedbackController extends Controller
@@ -38,33 +37,21 @@ class ValidityFeedbackController extends Controller
         ]);
 
         $orgId = $this->resolveOrgId($request);
+        $fmUserId = $this->normalizeId($request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id'));
+        $anonId = $this->normalizeId($request->attributes->get('fm_anon_id') ?? $request->attributes->get('anon_id'));
+
+        $attemptQuery = Attempt::where('id', $attemptId)
+            ->where('org_id', $orgId);
+        $this->applyAttemptOwnershipScope($attemptQuery, $fmUserId, $anonId);
 
         /** @var Attempt|null $attempt */
-        $attempt = Attempt::where('id', $attemptId)
-            ->where('org_id', $orgId)
-            ->first();
+        $attempt = $attemptQuery->first();
         if (!$attempt) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
                 'message' => 'attempt not found.',
             ], 404);
-        }
-
-        $fmUserId = $this->normalizeId($request->attributes->get('fm_user_id'));
-        $anonId = $this->normalizeId($request->attributes->get('anon_id'));
-
-        if ($fmUserId !== null && \App\Support\SchemaBaseline::hasColumn('attempts', 'user_id')) {
-            if ((string) ($attempt->user_id ?? '') !== $fmUserId) {
-                return $this->forbiddenResponse();
-            }
-        } else {
-            if ($anonId === null) {
-                return $this->forbiddenResponse();
-            }
-            if (!$this->checkAnonOwnership($attemptId, $anonId)) {
-                return $this->forbiddenResponse();
-            }
         }
 
         $createdAt = now();
@@ -144,15 +131,6 @@ class ValidityFeedbackController extends Controller
         ], 200);
     }
 
-    private function forbiddenResponse(): JsonResponse
-    {
-        return response()->json([
-            'ok' => false,
-            'error_code' => 'NOT_FOUND',
-            'message' => 'attempt not found.',
-        ], 404);
-    }
-
     private function normalizeId(mixed $value): ?string
     {
         if (!is_string($value)) {
@@ -160,6 +138,29 @@ class ValidityFeedbackController extends Controller
         }
         $value = trim($value);
         return $value !== '' ? $value : null;
+    }
+
+    private function applyAttemptOwnershipScope(
+        \Illuminate\Database\Eloquent\Builder $query,
+        ?string $userId,
+        ?string $anonId
+    ): void {
+        $uid = trim((string) ($userId ?? ''));
+        $aid = trim((string) ($anonId ?? ''));
+        $hasUser = \App\Support\SchemaBaseline::hasColumn('attempts', 'user_id');
+        $hasAnon = \App\Support\SchemaBaseline::hasColumn('attempts', 'anon_id');
+
+        if ($uid !== '' && $hasUser) {
+            $query->where('user_id', $uid);
+            return;
+        }
+
+        if ($aid !== '' && $hasAnon) {
+            $query->where('anon_id', $aid);
+            return;
+        }
+
+        $query->whereRaw('1=0');
     }
 
     private function normalizeReasonTags(array $tags): array
@@ -196,52 +197,6 @@ class ValidityFeedbackController extends Controller
             return (string) mb_substr($clean, 0, 200, 'UTF-8');
         }
         return (string) substr($clean, 0, 200);
-    }
-
-    private function checkAnonOwnership(string $attemptId, string $anonId): bool
-    {
-        if (!Schema::hasTable('identities')) {
-            return $this->matchAttemptAnonId($attemptId, $anonId);
-        }
-        if (!Schema::hasColumn('identities', 'attempt_id') || !Schema::hasColumn('identities', 'anon_id')) {
-            return $this->matchAttemptAnonId($attemptId, $anonId);
-        }
-
-        try {
-            $row = DB::table('identities')
-                ->where('attempt_id', $attemptId)
-                ->first();
-        } catch (QueryException) {
-            return $this->matchAttemptAnonId($attemptId, $anonId);
-        }
-
-        if (!$row) {
-            return $this->matchAttemptAnonId($attemptId, $anonId);
-        }
-
-        return trim((string) ($row->anon_id ?? '')) === $anonId;
-    }
-
-    private function matchAttemptAnonId(string $attemptId, string $anonId): bool
-    {
-        if (!Schema::hasTable('attempts') || !Schema::hasColumn('attempts', 'anon_id')) {
-            return false;
-        }
-
-        try {
-            $attemptAnonId = DB::table('attempts')
-                ->where('id', $attemptId)
-                ->value('anon_id');
-        } catch (QueryException) {
-            return false;
-        }
-        $attemptAnonId = trim((string) $attemptAnonId);
-
-        if ($attemptAnonId === '' || $anonId === '') {
-            return false;
-        }
-
-        return hash_equals($attemptAnonId, $anonId);
     }
 
     private function resolvePackId(Attempt $attempt): string

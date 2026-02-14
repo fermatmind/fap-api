@@ -52,6 +52,36 @@ class HighIdorOwnership404Test extends TestCase
         return $token;
     }
 
+    private function issueUserAnonToken(int $userId, string $anonId): string
+    {
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
+    private function createUser(int $id): void
+    {
+        DB::table('users')->insert([
+            'id' => $id,
+            'name' => 'User ' . $id,
+            'email' => 'idor_' . $id . '_' . Str::lower(Str::random(8)) . '@example.test',
+            'password' => '$2y$12$5x7R5V8R7gUzKIiMzFxLDe0X58F3RDFo63eFUsVTNff7kwh28ykV6',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
     private function createSubmittedAttemptForAnonA(): string
     {
         $anonToken = $this->issueAnonToken(self::ANON_A);
@@ -174,6 +204,76 @@ class HighIdorOwnership404Test extends TestCase
         $this->withHeaders(['X-Anon-Id' => self::ANON_B])
             ->getJson("/api/v0.3/orders/{$orderNo}")
             ->assertStatus(404);
+    }
+
+    public function test_anon_b_cannot_lookup_anon_a_order_via_v02_lookup_order(): void
+    {
+        config(['fap.runtime.LOOKUP_ORDER' => '1']);
+        $orderColumns = (array) config('fap.schema_baseline.required_columns.orders', []);
+        config([
+            'fap.schema_baseline.required_columns.orders' => array_values(array_unique(array_merge(
+                $orderColumns,
+                ['order_no', 'org_id', 'user_id', 'anon_id']
+            ))),
+        ]);
+
+        $orderNo = 'ord_pr60_lookup_' . Str::lower(Str::random(8));
+        $this->insertOrderForAnonA($orderNo);
+        $anonBToken = $this->issueAnonToken(self::ANON_B);
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer ' . $anonBToken,
+        ])->postJson('/api/v0.2/lookup/order', [
+            'order_no' => $orderNo,
+        ])->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
+    public function test_anon_b_cannot_submit_feedback_for_anon_a_attempt(): void
+    {
+        config(['fap.runtime.FEEDBACK_ENABLED' => '1']);
+
+        $this->seedScales();
+        $attemptId = $this->createSubmittedAttemptForAnonA();
+        $anonBToken = $this->issueAnonToken(self::ANON_B);
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer ' . $anonBToken,
+        ])->postJson("/api/v0.2/attempts/{$attemptId}/feedback", [
+            'score' => 3,
+        ])->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
+    public function test_anon_b_cannot_post_feedback_to_anon_a_attempt(): void
+    {
+        config(['fap.runtime.FEEDBACK_ENABLED' => '1']);
+
+        $this->seedScales();
+        $attemptId = $this->createSubmittedAttemptForAnonA();
+
+        if (!Schema::hasColumn('attempts', 'user_id')) {
+            $this->markTestSkipped('attempts.user_id column is required for user ownership precedence test.');
+        }
+
+        $ownerUserId = 11001;
+        $attackerUserId = 11002;
+        $this->createUser($ownerUserId);
+        $this->createUser($attackerUserId);
+
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'user_id' => (string) $ownerUserId,
+            'anon_id' => self::ANON_A,
+        ]);
+
+        $attackerToken = $this->issueUserAnonToken($attackerUserId, self::ANON_A);
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer ' . $attackerToken,
+        ])->postJson("/api/v0.2/attempts/{$attemptId}/feedback", [
+            'score' => 4,
+        ])->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
     public function test_anon_b_cannot_access_anon_a_psychometrics_stats_or_quality(): void

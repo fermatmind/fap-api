@@ -112,6 +112,44 @@ final class ProviderWebhookSignatureTest extends TestCase
         ]);
     }
 
+    public function test_legacy_payload_only_signature_is_rejected_even_when_flag_is_enabled(): void
+    {
+        config([
+            'services.integrations.webhook_tolerance_seconds' => 300,
+            'services.integrations.providers.mock.webhook_secret' => 'mock_secret',
+            'services.integrations.allow_legacy_signature' => true,
+        ]);
+
+        $payload = [
+            'event_id' => 'evt_legacy_sig_rejected',
+            'external_user_id' => 'ext_mock_legacy',
+            'recorded_at' => '2026-02-07T00:00:00Z',
+            'samples' => [],
+        ];
+        $rawBody = $this->encodePayload($payload);
+        $legacySignature = hash_hmac('sha256', $rawBody, 'mock_secret');
+
+        $response = $this->call(
+            'POST',
+            '/api/v0.2/webhooks/mock',
+            [],
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/json',
+                'HTTP_ACCEPT' => 'application/json',
+                'HTTP_X_WEBHOOK_SIGNATURE' => $legacySignature,
+            ],
+            $rawBody,
+        );
+
+        $response->assertStatus(404);
+        $response->assertJson([
+            'ok' => false,
+            'error_code' => 'NOT_FOUND',
+        ]);
+    }
+
     public function test_expired_timestamp_returns_404_when_secret_is_configured(): void
     {
         config([

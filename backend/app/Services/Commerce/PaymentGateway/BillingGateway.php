@@ -49,13 +49,6 @@ class BillingGateway implements PaymentGatewayInterface
             }
         }
 
-        if ((bool) config('services.billing.allow_legacy_signature', false) === true && $providedSignature !== '') {
-            $legacy = hash_hmac('sha256', $rawBody, $secret);
-            if (hash_equals($legacy, $providedSignature)) {
-                return true;
-            }
-        }
-
         return false;
     }
 

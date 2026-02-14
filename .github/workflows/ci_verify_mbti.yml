@@ -138,6 +138,11 @@ jobs:
           # Ensure scripts executable
           find scripts -type f -name "*.sh" -exec chmod +x {} + || true
 
+      - name: Security Gate
+        working-directory: backend
+        run: |
+          bash scripts/security_gate.sh
+
       - name: Prepare CI sqlite (file + migrate + seed)
         working-directory: backend
         env:

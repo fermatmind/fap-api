@@ -82,13 +82,9 @@ class PaymentService
 
     public function markPaid(string $orderId, string $userId, ?string $anonId, array $context = []): array
     {
-        $order = DB::table('orders')->where('id', $orderId)->first();
+        $order = $this->ownedOrderQuery($orderId, $userId, $anonId)->first();
         if (!$order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
-        }
-
-        if (!$this->orderBelongsToActor($order, $userId, $anonId)) {
-            return $this->forbidden('ORDER_FORBIDDEN', 'order not owned.');
         }
 
         if (in_array($order->status, ['paid', 'fulfilled'], true)) {
@@ -151,13 +147,9 @@ class PaymentService
 
     public function fulfill(string $orderId, string $userId, ?string $anonId): array
     {
-        $order = DB::table('orders')->where('id', $orderId)->first();
+        $order = $this->ownedOrderQuery($orderId, $userId, $anonId)->first();
         if (!$order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
-        }
-
-        if (!$this->orderBelongsToActor($order, $userId, $anonId)) {
-            return $this->forbidden('ORDER_FORBIDDEN', 'order not owned.');
         }
 
         if (!in_array($order->status, ['paid', 'fulfilled'], true)) {
@@ -422,20 +414,39 @@ class PaymentService
             ->where('provider_event_id', $providerEventId);
     }
 
-    private function orderBelongsToActor(object $order, ?string $userId, ?string $anonId): bool
+    private function ownedOrderQuery(string $orderId, ?string $userId, ?string $anonId)
     {
         $userId = $this->trimOrNull($userId);
         $anonId = $this->trimOrNull($anonId);
 
-        if ($userId && isset($order->user_id) && $order->user_id === $userId) {
-            return true;
+        $query = DB::table('orders')->where('id', $orderId);
+        if (!$userId && !$anonId) {
+            return $query->whereRaw('1=0');
         }
 
-        if ($anonId && isset($order->anon_id) && $order->anon_id === $anonId) {
-            return true;
-        }
+        $query->where(function ($q) use ($userId, $anonId): void {
+            $applied = false;
 
-        return false;
+            if ($userId) {
+                $q->where('user_id', $userId);
+                $applied = true;
+            }
+
+            if ($anonId) {
+                if ($applied) {
+                    $q->orWhere('anon_id', $anonId);
+                } else {
+                    $q->where('anon_id', $anonId);
+                    $applied = true;
+                }
+            }
+
+            if (!$applied) {
+                $q->whereRaw('1=0');
+            }
+        });
+
+        return $query;
     }
 
     private function tableMissing(string $table): array
@@ -453,16 +464,6 @@ class PaymentService
         return [
             'ok' => false,
             'status' => 404,
-            'error_code' => $errorCode,
-            'message' => $message,
-        ];
-    }
-
-    private function forbidden(string $errorCode, string $message): array
-    {
-        return [
-            'ok' => false,
-            'status' => 403,
             'error_code' => $errorCode,
             'message' => $message,
         ];
