@@ -227,6 +227,39 @@ class InsightsController extends Controller
 
     private function ownedInsightRow(Request $request, string $id): ?object
     {
+        $userId = $this->resolveRequestUserId($request);
+        $anonId = $this->resolveRequestAnonId($request);
+
+        if ($userId === '' && $anonId === '') {
+            return null;
+        }
+
+        $query = DB::table('ai_insights')->where('id', $id);
+        if ($userId !== '') {
+            return $query
+                ->where('user_id', $userId)
+                ->first();
+        }
+
+        return $query
+            ->where('anon_id', $anonId)
+            ->first();
+    }
+
+    private function resolveRequestUserId(Request $request): string
+    {
+        return trim((string) (
+            $request->attributes->get('fm_user_id')
+            ?? $request->attributes->get('user_id')
+            ?? ''
+        ));
+    }
+
+    private function resolveRequestAnonId(Request $request): string
+    {
+        $anonId = trim((string) $request->header('X-FAP-Anon-Id', ''));
+        if ($anonId !== '') {
+            return $anonId;
         }
 
         return trim((string) (

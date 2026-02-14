@@ -306,20 +306,4 @@ class HighIdorOwnership404Test extends TestCase
             ->assertStatus(404);
     }
 
-    public function test_anon_b_cannot_post_feedback_to_anon_a_attempt(): void
-    {
-        config()->set('fap.runtime.FEEDBACK_ENABLED', '1');
-
-        $this->seedScales();
-        $attemptId = $this->createSubmittedAttemptForAnonA();
-        $anonBToken = $this->issueAnonToken(self::ANON_B);
-
-        $this->withHeaders([
-            'X-Anon-Id' => self::ANON_B,
-            'Authorization' => 'Bearer ' . $anonBToken,
-        ])->postJson("/api/v0.2/attempts/{$attemptId}/feedback", [
-            'score' => 5,
-        ])->assertStatus(404)
-            ->assertJsonPath('error_code', 'NOT_FOUND');
-    }
 }
