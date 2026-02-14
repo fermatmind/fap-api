@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Integrations;
 
+use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Services\Ingestion\ConsentService;
 use App\Services\Ingestion\IngestionService;
@@ -15,8 +16,15 @@ use Illuminate\Support\Str;
 
 class ProvidersController extends Controller
 {
+    use RespondsWithNotFound;
+
     public function oauthStart(Request $request, string $provider)
     {
+        $provider = strtolower(trim($provider));
+        if (! $this->isAllowedProvider($provider)) {
+            return $this->notFoundResponse();
+        }
+
         $state = (string) Str::uuid();
         $userId = $this->resolveUserId($request);
 
@@ -47,6 +55,11 @@ class ProvidersController extends Controller
 
     public function oauthCallback(Request $request, string $provider)
     {
+        $provider = strtolower(trim($provider));
+        if (! $this->isAllowedProvider($provider)) {
+            return $this->notFoundResponse();
+        }
+
         $state = (string) $request->query('state', '');
         $code = (string) $request->query('code', '');
         $userId = $this->resolveUserId($request);
@@ -96,6 +109,11 @@ class ProvidersController extends Controller
 
     public function revoke(Request $request, string $provider)
     {
+        $provider = strtolower(trim($provider));
+        if (! $this->isAllowedProvider($provider)) {
+            return $this->notFoundResponse();
+        }
+
         $userId = $this->resolveUserId($request);
         if ($userId === null) {
             return response()->json([
@@ -238,6 +256,11 @@ class ProvidersController extends Controller
 
     public function replay(Request $request, string $provider, string $batch_id)
     {
+        $provider = strtolower(trim($provider));
+        if (! $this->isAllowedProvider($provider)) {
+            return $this->notFoundResponse();
+        }
+
         $userId = $this->resolveUserId($request);
         if ($userId === null) {
             return response()->json([

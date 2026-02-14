@@ -290,10 +290,26 @@ class ReplayService
             }
         }
 
+        $recordedAt = (string) ($row->recorded_at ?? '');
+        $stableExternalId = '';
+        if ($recordedAt !== '') {
+            $stableExternalId = hash('sha256', json_encode([
+                'domain' => $domain === 'health' ? ((string) ($row->domain ?? $domain)) : $domain,
+                'recorded_at' => $recordedAt,
+                'value' => $value,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        }
+        if ($stableExternalId === '') {
+            $stableExternalId = trim((string) ($row->id ?? ''));
+        }
+        if (strlen($stableExternalId) > 128) {
+            $stableExternalId = substr($stableExternalId, 0, 128);
+        }
+
         return [
             'domain' => $domain === 'health' ? ((string) ($row->domain ?? $domain)) : $domain,
-            'recorded_at' => (string) ($row->recorded_at ?? ''),
-            'external_id' => (string) ($row->id ?? ''),
+            'recorded_at' => $recordedAt,
+            'external_id' => $stableExternalId,
             'value' => $value,
             'confidence' => (float) ($row->confidence ?? 1.0),
             'user_id' => $row->user_id ?? null,

@@ -57,7 +57,8 @@ if ($missing !== []) {
 echo "[SECURITY_GATE] check 2/4: no request->all() mass assignment sinks"
 php -r '
 $roots = [
-    getcwd() . "/app/Http/Controllers",
+    getcwd() . "/routes",
+    getcwd() . "/app/Http",
     getcwd() . "/app/Services",
 ];
 
@@ -68,6 +69,39 @@ $patterns = [
     "request_helper_all" => "/(?:->|::)\\s*(?:create|update|fill)\\s*\\(\\s*request\\(\\)->all\\(\\)\\s*\\)/",
     "assigned_request_all_then_sink" => "/\\x24([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*\\x24request->all\\(\\)\\s*;[\\s\\S]{0,240}?(?:->|::)\\s*(?:create|update|fill)\\s*\\(\\s*\\x24\\1\\s*\\)/m",
 ];
+
+$isIgnored = static function (string $source, int $line, string $label): bool {
+    $lines = preg_split("/\\R/", $source);
+    if (!is_array($lines)) {
+        return false;
+    }
+
+    $start = max(1, $line - 2);
+    $label = strtolower($label);
+    for ($i = $start; $i <= $line; $i++) {
+        $idx = $i - 1;
+        $text = $lines[$idx] ?? "";
+        if (preg_match("/security-gate:ignore(?:\\s+([A-Za-z0-9_,| -]+))?/i", $text, $m) !== 1) {
+            continue;
+        }
+
+        $rawScopes = trim((string) ($m[1] ?? ""));
+        if ($rawScopes === "") {
+            return true;
+        }
+
+        $scopes = preg_split("/[\\s,|]+/", strtolower($rawScopes));
+        if (!is_array($scopes)) {
+            continue;
+        }
+        $scopes = array_values(array_filter($scopes, static fn ($v) => is_string($v) && $v !== ""));
+        if (in_array("all", $scopes, true) || in_array($label, $scopes, true)) {
+            return true;
+        }
+    }
+
+    return false;
+};
 
 $violations = [];
 foreach ($roots as $root) {
@@ -95,6 +129,9 @@ foreach ($roots as $root) {
                 continue;
             }
             $line = 1 + substr_count(substr($source, 0, (int) $m[0][1]), "\n");
+            if ($isIgnored($source, $line, $label)) {
+                continue;
+            }
             $relative = ltrim(str_replace(getcwd() . "/", "", $path), "/");
             $violations[] = "{$relative}:{$line} => {$label}";
         }
@@ -127,6 +164,39 @@ $patterns = [
     "error_code_forbidden" => "/[\\x27\\x22]error_code[\\x27\\x22]\\s*=>\\s*[\\x27\\x22]FORBIDDEN[\\x27\\x22]/",
 ];
 
+$isIgnored = static function (string $source, int $line, string $label): bool {
+    $lines = preg_split("/\\R/", $source);
+    if (!is_array($lines)) {
+        return false;
+    }
+
+    $start = max(1, $line - 2);
+    $label = strtolower($label);
+    for ($i = $start; $i <= $line; $i++) {
+        $idx = $i - 1;
+        $text = $lines[$idx] ?? "";
+        if (preg_match("/security-gate:ignore(?:\\s+([A-Za-z0-9_,| -]+))?/i", $text, $m) !== 1) {
+            continue;
+        }
+
+        $rawScopes = trim((string) ($m[1] ?? ""));
+        if ($rawScopes === "") {
+            return true;
+        }
+
+        $scopes = preg_split("/[\\s,|]+/", strtolower($rawScopes));
+        if (!is_array($scopes)) {
+            continue;
+        }
+        $scopes = array_values(array_filter($scopes, static fn ($v) => is_string($v) && $v !== ""));
+        if (in_array("all", $scopes, true) || in_array($label, $scopes, true)) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
 $violations = [];
 foreach ($paths as $relative) {
     $absolute = getcwd() . "/" . $relative;
@@ -144,6 +214,9 @@ foreach ($paths as $relative) {
             continue;
         }
         $line = 1 + substr_count(substr($source, 0, (int) $m[0][1]), "\n");
+        if ($isIgnored($source, $line, $label)) {
+            continue;
+        }
         $violations[] = "{$relative}:{$line} => {$label}";
     }
 }

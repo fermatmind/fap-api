@@ -186,7 +186,7 @@ class PhoneOtpService
 
     private function allowDevCode(): bool
     {
-        return app()->environment(['local', 'development']);
+        return app()->environment(['local', 'development', 'testing', 'ci']);
     }
 
     /**
