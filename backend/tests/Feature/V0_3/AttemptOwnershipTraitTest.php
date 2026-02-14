@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -89,6 +90,26 @@ final class AttemptOwnershipTraitTest extends TestCase
         return $attemptId;
     }
 
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
     public function test_report_returns_404_without_auth_and_anon_header(): void
     {
         $this->seedScales();
@@ -111,9 +132,14 @@ final class AttemptOwnershipTraitTest extends TestCase
     public function test_report_with_matching_anon_header_never_500(): void
     {
         $this->seedScales();
-        $attemptId = $this->seedAttemptAndResult('sec003-owner-anon');
+        $anonId = 'sec003-owner-anon';
+        $attemptId = $this->seedAttemptAndResult($anonId);
+        $token = $this->issueAnonToken($anonId);
 
-        $response = $this->withHeader('X-Anon-Id', 'sec003-owner-anon')
+        $response = $this->withHeaders([
+                'X-Anon-Id' => $anonId,
+                'Authorization' => 'Bearer '.$token,
+            ])
             ->getJson(route('api.v0_3.attempts.report', ['id' => $attemptId]));
 
         $this->assertContains($response->status(), [200, 402]);
