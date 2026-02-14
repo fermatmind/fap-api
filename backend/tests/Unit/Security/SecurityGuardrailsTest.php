@@ -51,6 +51,13 @@ final class SecurityGuardrailsTest extends TestCase
         'app/Services/Report/ReportGatekeeper.php',
     ];
 
+    /** @var array<int, string> */
+    private const SECURITY_SCAN_ROOTS = [
+        'routes',
+        'app/Http',
+        'app/Services',
+    ];
+
     public function test_state_changing_routes_require_auth_or_explicit_allowlist(): void
     {
         $violations = [];
@@ -98,10 +105,10 @@ final class SecurityGuardrailsTest extends TestCase
 
     public function test_no_mass_assignment_from_request_all_in_controllers_or_services(): void
     {
-        $scanRoots = [
-            app_path('Http/Controllers'),
-            app_path('Services'),
-        ];
+        $scanRoots = array_map(
+            static fn (string $root): string => base_path($root),
+            self::SECURITY_SCAN_ROOTS
+        );
 
         $patterns = [
             'direct_create_request_all' => '/(?:->|::)\s*create\s*\(\s*\$request->all\(\)\s*\)/',
@@ -140,6 +147,10 @@ final class SecurityGuardrailsTest extends TestCase
                     }
 
                     $line = 1 + substr_count(substr($source, 0, (int) $match[0][1]), "\n");
+                    if ($this->isSecurityGateIgnored($source, $line, $label)) {
+                        continue;
+                    }
+
                     $relative = ltrim(str_replace(base_path(), '', $path), DIRECTORY_SEPARATOR);
                     $violations[] = sprintf('%s:%d => %s', $relative, $line, $label);
                 }
@@ -183,6 +194,10 @@ final class SecurityGuardrailsTest extends TestCase
                 }
 
                 $line = 1 + substr_count(substr($source, 0, (int) $match[0][1]), "\n");
+                if ($this->isSecurityGateIgnored($source, $line, $label)) {
+                    continue;
+                }
+
                 $violations[] = sprintf('%s:%d => %s', $relativePath, $line, $label);
             }
         }
@@ -223,5 +238,38 @@ final class SecurityGuardrailsTest extends TestCase
     private function isExplicitPublicMutatingRoute(string $uri): bool
     {
         return in_array($uri, self::EXPLICIT_PUBLIC_MUTATING_ROUTES, true);
+    }
+
+    private function isSecurityGateIgnored(string $source, int $line, string $label): bool
+    {
+        $lines = preg_split('/\R/', $source) ?: [];
+        $start = max(1, $line - 2);
+        $label = strtolower($label);
+
+        for ($i = $start; $i <= $line; $i++) {
+            $text = $lines[$i - 1] ?? '';
+            if ($this->lineHasSecurityGateIgnore($text, $label)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function lineHasSecurityGateIgnore(string $line, string $label): bool
+    {
+        if (preg_match('/security-gate:ignore(?:\s+([A-Za-z0-9_,| -]+))?/i', $line, $match) !== 1) {
+            return false;
+        }
+
+        $scopesRaw = trim((string) ($match[1] ?? ''));
+        if ($scopesRaw === '') {
+            return true;
+        }
+
+        $scopes = preg_split('/[\s,|]+/', strtolower($scopesRaw)) ?: [];
+        $scopes = array_values(array_filter($scopes, static fn (string $value): bool => $value !== ''));
+
+        return in_array('all', $scopes, true) || in_array($label, $scopes, true);
     }
 }
