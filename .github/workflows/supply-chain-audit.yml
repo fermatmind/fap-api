@@ -24,13 +24,13 @@ jobs:
           coverage: none
           tools: composer:v2
 
-      - name: Composer install (backend)
-        working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
-
       - name: Composer validate (backend)
         working-directory: backend
         run: composer validate --strict
+
+      - name: Composer install (backend)
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Composer audit (backend)
         working-directory: backend
