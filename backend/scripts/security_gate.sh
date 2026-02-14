@@ -1,0 +1,161 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKEND_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+cd "${BACKEND_DIR}"
+
+ENV_CREATED=0
+if [ ! -f ".env" ]; then
+  if [ -f ".env.example" ]; then
+    cp ".env.example" ".env"
+  else
+    : > ".env"
+  fi
+  ENV_CREATED=1
+fi
+
+cleanup() {
+  if [ "${ENV_CREATED}" -eq 1 ] && [ -f ".env" ]; then
+    rm -f ".env"
+  fi
+}
+trap cleanup EXIT
+
+echo "[SECURITY_GATE] start"
+
+echo "[SECURITY_GATE] check 1/4: critical route auth invariants"
+php -r '
+$path = getcwd() . "/routes/api.php";
+$source = file_get_contents($path);
+if (!is_string($source)) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read routes/api.php\n");
+    exit(1);
+}
+
+$checks = [
+    "v0.2 fm_token_auth_group" => "/Route::middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*->group\\s*\\(\\s*function\\s*\\(\\s*\\)\\s*\\{/s",
+    "v0.3 attempts_submit_auth" => "/Route::post\\(\\s*\"\\/attempts\\/submit\"\\s*,\\s*\\[\\s*AttemptWriteController::class\\s*,\\s*\"submit\"\\s*\\]\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*;/s",
+    "v0.3 auth_plus_ctx_group" => "/Route::middleware\\(\\s*\\[\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*,\\s*ResolveO[r]gContext::class\\s*\\]\\s*\\)\\s*->\\s*group\\s*\\(/s",
+    "v0.2 admin_auth_group" => "/Route::prefix\\(\\s*\"admin\"\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\AdminAuth::class\\s*\\)\\s*->group\\s*\\(/s",
+];
+
+$missing = [];
+foreach ($checks as $name => $regex) {
+    if (preg_match($regex, $source) !== 1) {
+        $missing[] = $name;
+    }
+}
+
+if ($missing !== []) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] missing route auth invariants: " . implode(", ", $missing) . "\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 2/4: no request->all() mass assignment sinks"
+php -r '
+$roots = [
+    getcwd() . "/app/Http/Controllers",
+    getcwd() . "/app/Services",
+];
+
+$patterns = [
+    "direct_create_request_all" => "/(?:->|::)\\s*create\\s*\\(\\s*\\x24request->all\\(\\)\\s*\\)/",
+    "direct_update_request_all" => "/(?:->|::)\\s*update\\s*\\(\\s*\\x24request->all\\(\\)\\s*\\)/",
+    "direct_fill_request_all" => "/(?:->|::)\\s*fill\\s*\\(\\s*\\x24request->all\\(\\)\\s*\\)/",
+    "request_helper_all" => "/(?:->|::)\\s*(?:create|update|fill)\\s*\\(\\s*request\\(\\)->all\\(\\)\\s*\\)/",
+    "assigned_request_all_then_sink" => "/\\x24([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*\\x24request->all\\(\\)\\s*;[\\s\\S]{0,240}?(?:->|::)\\s*(?:create|update|fill)\\s*\\(\\s*\\x24\\1\\s*\\)/m",
+];
+
+$violations = [];
+foreach ($roots as $root) {
+    if (!is_dir($root)) {
+        continue;
+    }
+
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($root, RecursiveDirectoryIterator::SKIP_DOTS)
+    );
+
+    foreach ($iterator as $file) {
+        if (!$file->isFile() || strtolower($file->getExtension()) !== "php") {
+            continue;
+        }
+
+        $path = $file->getPathname();
+        $source = file_get_contents($path);
+        if (!is_string($source)) {
+            continue;
+        }
+
+        foreach ($patterns as $label => $regex) {
+            if (preg_match($regex, $source, $m, PREG_OFFSET_CAPTURE) !== 1) {
+                continue;
+            }
+            $line = 1 + substr_count(substr($source, 0, (int) $m[0][1]), "\n");
+            $relative = ltrim(str_replace(getcwd() . "/", "", $path), "/");
+            $violations[] = "{$relative}:{$line} => {$label}";
+        }
+    }
+}
+
+sort($violations);
+if ($violations !== []) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] request->all() mass assignment sinks found:\n" . implode("\n", $violations) . "\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 3/4: ownership 404 contract (no 403 leaks)"
+php -r '
+$paths = [
+    "app/Http/Controllers/API/V0_2/LegacyReportController.php",
+    "app/Http/Controllers/API/V0_3/AttemptReadController.php",
+    "app/Http/Controllers/API/V0_3/AttemptProgressController.php",
+    "app/Http/Controllers/LookupController.php",
+    "app/Services/Legacy/LegacyReportService.php",
+    "app/Services/Legacy/LegacyShareService.php",
+    "app/Services/Report/ReportGatekeeper.php",
+];
+
+$patterns = [
+    "abort_403" => "/abort\\s*\\(\\s*403\\b/",
+    "response_json_403" => "/response\\s*\\(\\s*\\)\\s*->\\s*json\\s*\\([^;]*,\\s*403\\s*\\)/s",
+    "status_403" => "/[\\x27\\x22]status[\\x27\\x22]\\s*=>\\s*403\\b/",
+    "error_code_forbidden" => "/[\\x27\\x22]error_code[\\x27\\x22]\\s*=>\\s*[\\x27\\x22]FORBIDDEN[\\x27\\x22]/",
+];
+
+$violations = [];
+foreach ($paths as $relative) {
+    $absolute = getcwd() . "/" . $relative;
+    if (!is_file($absolute)) {
+        continue;
+    }
+
+    $source = file_get_contents($absolute);
+    if (!is_string($source)) {
+        continue;
+    }
+
+    foreach ($patterns as $label => $regex) {
+        if (preg_match($regex, $source, $m, PREG_OFFSET_CAPTURE) !== 1) {
+            continue;
+        }
+        $line = 1 + substr_count(substr($source, 0, (int) $m[0][1]), "\n");
+        $violations[] = "{$relative}:{$line} => {$label}";
+    }
+}
+
+sort($violations);
+if ($violations !== []) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] ownership paths returning/encoding 403:\n" . implode("\n", $violations) . "\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 4/4: unit guard test"
+php artisan test --testsuite=Unit --filter=SecurityGuardrailsTest
+
+echo "[SECURITY_GATE] PASS"
