@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET_RAW="${1:-./_audit/fap-api-0212-5/}"
 [[ -d "$TARGET_RAW" ]] || { echo "[FAIL] reason=target_not_found path=${TARGET_RAW}" >&2; exit 1; }
 
@@ -24,11 +25,29 @@ to_rel() {
   fi
 }
 
+echo "[PRECHECK] release audit prerequisites (non-blocking)"
+for p in \
+  backend/routes/api.php \
+  backend/app \
+  backend/config \
+  backend/database/migrations \
+  backend/composer.json \
+  backend/composer.lock
+do
+  if [[ -e "${TARGET}/${p}" ]]; then
+    echo "[PRECHECK] EXISTS path=./${p}"
+  else
+    echo "[PRECHECK] MISSING path=./${p}"
+  fi
+done
+
 # 必须存在
 [[ -f "${TARGET}/backend/routes/api.php" ]] || fail "missing_required" "./backend/routes/api.php"
 [[ -d "${TARGET}/backend/app" ]] || fail "missing_required" "./backend/app"
 [[ -d "${TARGET}/backend/config" ]] || fail "missing_required" "./backend/config"
 [[ -d "${TARGET}/backend/database/migrations" ]] || fail "missing_required" "./backend/database/migrations"
+[[ -f "${TARGET}/backend/composer.json" ]] || fail "missing_required" "./backend/composer.json"
+[[ -f "${TARGET}/backend/composer.lock" ]] || fail "missing_required" "./backend/composer.lock"
 
 # 根结构严格唯一：backend/ + scripts/ + docs/ + README_DEPLOY.md
 for req in backend scripts docs; do
@@ -87,6 +106,10 @@ done < <(find "$TARGET" -type d -name '__MACOSX' -print0)
 while IFS= read -r -d '' hit; do
   fail "forbidden_ds_store" "$(to_rel "$hit")"
 done < <(find "$TARGET" -type f -name '.DS_Store' -print0)
+
+if ! bash "${SCRIPT_DIR}/supply_chain_gate.sh" "${TARGET}"; then
+  fail "supply_chain_gate_failed" "./backend/composer.lock"
+fi
 
 if [[ "$FAIL_COUNT" -gt 0 ]]; then
   exit 1

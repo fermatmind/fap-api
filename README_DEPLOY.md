@@ -15,6 +15,7 @@ bash scripts/release_pack.sh
 ```bash
 bash scripts/audit_smoke.sh dist/fap-api-release.zip
 bash scripts/release_hygiene_gate.sh ./_audit/fap-api-0212-5/
+bash scripts/supply_chain_gate.sh ./_audit/fap-api-0212-5
 ```
 
 ## 2) 交付包内容边界
@@ -65,3 +66,17 @@ php artisan route:cache
 1. 使用上一个可用 `fap-api-release.zip`。
 2. 解压后按同样部署步骤执行。
 3. 通过包内 `docs/release/RELEASE_MANIFEST.json` 核对 `commit_sha` 与构建时间。
+
+## 5) 验收步骤（标准动作）
+
+```bash
+bash scripts/release_pack.sh
+bash scripts/audit_smoke.sh dist/fap-api-release.zip
+bash scripts/release_hygiene_gate.sh ./_audit/fap-api-0212-5/
+bash scripts/supply_chain_gate.sh ./_audit/fap-api-0212-5
+```
+
+`audit_smoke.sh` 输出必须包含固定标题与三段证据：
+1. `EVIDENCE-1: REQUIRED ENTRY`
+2. `EVIDENCE-2: REQUIRED STRUCTURE`
+3. `EVIDENCE-3: CONTAMINATION HITS`

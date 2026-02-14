@@ -61,16 +61,17 @@ else
   exit 2
 fi
 
+echo "========== AUDIT SMOKE REPORT =========="
 echo "[AUDIT] root=${AUDIT_ROOT_REL}/"
 
-# 证据 1：目录存在 + api.php 存在
+echo "========== EVIDENCE-1: REQUIRED ENTRY =========="
 if [[ -f "${AUDIT_ROOT_ABS}/backend/routes/api.php" ]]; then
   echo "[EVIDENCE-1] EXISTS path=${AUDIT_ROOT_REL}/backend/routes/api.php"
 else
   echo "[EVIDENCE-1] MISSING path=${AUDIT_ROOT_REL}/backend/routes/api.php"
 fi
 
-# 证据 2：核心目录存在性
+echo "========== EVIDENCE-2: REQUIRED STRUCTURE =========="
 for p in backend/app backend/routes backend/config backend/database/migrations; do
   if [[ -e "${AUDIT_ROOT_ABS}/${p}" ]]; then
     echo "[EVIDENCE-2] EXISTS path=${AUDIT_ROOT_REL}/${p}"
@@ -79,7 +80,7 @@ for p in backend/app backend/routes backend/config backend/database/migrations; 
   fi
 done
 
-# 证据 3：敏感/污染命中列表
+echo "========== EVIDENCE-3: CONTAMINATION HITS =========="
 HITS_FILE="$(mktemp)"
 trap 'rm -f "$HITS_FILE"' EXIT
 
