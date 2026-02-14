@@ -106,6 +106,42 @@ final class RevokeSecurityTest extends TestCase
         $this->assertNull($other->revoked_at);
     }
 
+    public function test_revoke_returns_404_for_unsupported_provider(): void
+    {
+        $this->seedUser(1101);
+
+        $token = 'fm_' . (string) Str::uuid();
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => 1101,
+            'anon_id' => 'revoke-anon-1101',
+            'org_id' => 0,
+            'role' => 'public',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->seedIntegrationRecord(1101, 'mock', 'connected');
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->postJson('/api/v0.2/integrations/not_supported/revoke');
+
+        $response->assertStatus(404)->assertJson([
+            'ok' => false,
+            'error_code' => 'NOT_FOUND',
+        ]);
+
+        $existing = DB::table('integrations')
+            ->where('user_id', 1101)
+            ->where('provider', 'mock')
+            ->first();
+
+        $this->assertNotNull($existing);
+        $this->assertSame('connected', (string) $existing->status);
+    }
+
     private function seedUser(int $userId): void
     {
         DB::table('users')->insert([
