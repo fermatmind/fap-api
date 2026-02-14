@@ -75,6 +75,8 @@ class LegacyReportController extends Controller
     {
         $anonId = trim((string) ($request->attributes->get('anon_id')
             ?? $request->attributes->get('fm_anon_id')
+            ?? $request->header('X-Anon-Id')
+            ?? $request->header('X-FAP-Anon-Id')
             ?? ''));
 
         return $anonId !== '' ? $anonId : null;

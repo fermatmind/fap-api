@@ -174,7 +174,7 @@ final class ApiExceptionRenderer
             'details' => self::normalizeDetails($details),
         ];
 
-        return response()->json(self::withRequestId($payload, $requestId), $status);
+        return new JsonResponse(self::withRequestId($payload, $requestId), $status);
     }
 
     private static function normalizeDetails(array $details): array|object

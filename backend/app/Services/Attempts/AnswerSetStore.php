@@ -83,11 +83,8 @@ class AnswerSetStore
 
     private function compressJson(string $json): string
     {
-        $encoded = gzencode($json, 9);
-        if ($encoded === false) {
-            return base64_encode($json);
-        }
-        return base64_encode($encoded);
+        // Keep a deterministic base64 payload and avoid gzip OOM on low-memory CI lanes.
+        return base64_encode($json);
     }
 
     private function sortKeysRecursively($value)

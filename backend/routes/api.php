@@ -213,13 +213,16 @@ Route::prefix("v0.2")->middleware([
     ])->group(function () {
         Route::post("/insights/generate", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@generate");
     });
-    Route::middleware([
-        \App\Http\Middleware\FmTokenAuth::class,
-        'fap_feature:insights',
-    ])->group(function () {
-        Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show");
-        Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback");
-    });
+    Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show")
+        ->middleware([
+            \App\Http\Middleware\FmTokenOptional::class,
+            'fap_feature:insights',
+        ]);
+    Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback")
+        ->middleware([
+            \App\Http\Middleware\FmTokenAuth::class,
+            'fap_feature:insights',
+        ]);
 
     // =========================================================
     // Attempt read endpoints: keep UUID contract before auth gate
@@ -227,13 +230,13 @@ Route::prefix("v0.2")->middleware([
     Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
         ->middleware([
             'uuid:attemptId',
-            \App\Http\Middleware\FmTokenAuth::class,
+            \App\Http\Middleware\FmTokenOptional::class,
             DisableLegacyV02Report::class,
         ]);
     Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
         ->middleware([
             'uuid:attemptId',
-            \App\Http\Middleware\FmTokenAuth::class,
+            \App\Http\Middleware\FmTokenOptional::class,
             DisableLegacyV02Report::class,
         ]);
     Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
