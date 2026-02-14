@@ -59,6 +59,34 @@ final class InsightsFeedbackAuthTest extends TestCase
         ]);
     }
 
+    public function test_feedback_rejects_mismatched_user_even_when_anon_matches(): void
+    {
+        config()->set('fap.features.insights', true);
+
+        $ownerUserId = 21001;
+        $attackerUserId = 21002;
+        $sharedAnonId = 'anon_feedback_shared';
+        $insightId = $this->createUserBoundInsight((string) $ownerUserId, $sharedAnonId);
+
+        $this->createUser($ownerUserId);
+        $this->createUser($attackerUserId);
+        $token = $this->seedUserAnonToken($attackerUserId, $sharedAnonId);
+
+        $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->postJson("/api/v0.2/insights/{$insightId}/feedback", [
+            'rating' => 3,
+            'reason' => 'helpful',
+        ])->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+
+        $this->assertDatabaseMissing('ai_insight_feedback', [
+            'insight_id' => $insightId,
+            'rating' => 3,
+            'reason' => 'helpful',
+        ]);
+    }
+
     private function createAnonymousInsight(string $anonId): string
     {
         $insightId = (string) Str::uuid();
@@ -71,6 +99,35 @@ final class InsightsFeedbackAuthTest extends TestCase
             'period_start' => '2026-01-01',
             'period_end' => '2026-01-07',
             'input_hash' => hash('sha256', 'feedback:' . $insightId),
+            'prompt_version' => 'v1.0.0',
+            'model' => 'mock-model',
+            'provider' => 'mock',
+            'tokens_in' => 0,
+            'tokens_out' => 0,
+            'cost_usd' => 0,
+            'status' => 'succeeded',
+            'output_json' => null,
+            'evidence_json' => null,
+            'error_code' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $insightId;
+    }
+
+    private function createUserBoundInsight(string $userId, string $anonId): string
+    {
+        $insightId = (string) Str::uuid();
+
+        DB::table('ai_insights')->insert([
+            'id' => $insightId,
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'period_type' => 'week',
+            'period_start' => '2026-01-01',
+            'period_end' => '2026-01-07',
+            'input_hash' => hash('sha256', 'feedback_user:' . $insightId),
             'prompt_version' => 'v1.0.0',
             'model' => 'mock-model',
             'provider' => 'mock',
@@ -102,5 +159,34 @@ final class InsightsFeedbackAuthTest extends TestCase
         ]);
 
         return $token;
+    }
+
+    private function seedUserAnonToken(int $userId, string $anonId): string
+    {
+        $token = 'fm_' . (string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'expires_at' => now()->addHour(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
+    private function createUser(int $id): void
+    {
+        DB::table('users')->insert([
+            'id' => $id,
+            'name' => 'User ' . $id,
+            'email' => 'insight_user_' . $id . '_' . Str::lower(Str::random(8)) . '@example.test',
+            'password' => '$2y$12$5x7R5V8R7gUzKIiMzFxLDe0X58F3RDFo63eFUsVTNff7kwh28ykV6',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

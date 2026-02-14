@@ -234,29 +234,15 @@ class InsightsController extends Controller
             return null;
         }
 
-        return DB::table('ai_insights')
-            ->where('id', $id)
-            ->where(function ($q) use ($userId, $anonId): void {
-                $applied = false;
+        $query = DB::table('ai_insights')->where('id', $id);
+        if ($userId !== '') {
+            return $query
+                ->where('user_id', $userId)
+                ->first();
+        }
 
-                if ($userId !== '') {
-                    $q->where('user_id', $userId);
-                    $applied = true;
-                }
-
-                if ($anonId !== '') {
-                    if ($applied) {
-                        $q->orWhere('anon_id', $anonId);
-                    } else {
-                        $q->where('anon_id', $anonId);
-                        $applied = true;
-                    }
-                }
-
-                if (!$applied) {
-                    $q->whereRaw('1=0');
-                }
-            })
+        return $query
+            ->where('anon_id', $anonId)
             ->first();
     }
 
