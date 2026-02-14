@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BenefitGrant extends Model
 {
@@ -26,6 +27,7 @@ class BenefitGrant extends Model
         'expires_at',
         'benefit_type',
         'benefit_ref',
+        'order_no',
         'source_order_id',
         'source_event_id',
     ];
@@ -38,5 +40,10 @@ class BenefitGrant extends Model
     public static function allowOrgZeroContext(): bool
     {
         return true;
+    }
+
+    public function attempt(): BelongsTo
+    {
+        return $this->belongsTo(Attempt::class, 'attempt_id', 'id');
     }
 }

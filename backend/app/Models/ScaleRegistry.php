@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ScaleRegistry extends Model
 {
@@ -13,7 +14,9 @@ class ScaleRegistry extends Model
     protected $table = 'scales_registry';
 
     protected $primaryKey = 'code';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [
@@ -49,5 +52,11 @@ class ScaleRegistry extends Model
     public static function bypassTenantScope(): bool
     {
         return true;
+    }
+
+    public function slugs(): HasMany
+    {
+        return $this->hasMany(ScaleSlug::class, 'scale_code', 'code')
+            ->where('org_id', (int) $this->org_id);
     }
 }

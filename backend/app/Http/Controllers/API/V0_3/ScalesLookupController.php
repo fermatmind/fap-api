@@ -13,9 +13,7 @@ class ScalesLookupController extends Controller
     public function __construct(
         private ScaleRegistry $registry,
         private OrgContext $orgContext,
-    )
-    {
-    }
+    ) {}
 
     /**
      * GET /api/v0.3/scales/lookup?slug=xxx
@@ -32,7 +30,7 @@ class ScalesLookupController extends Controller
                 'message' => 'slug is required.',
             ], 400);
         }
-        if (!preg_match('/^[a-z0-9-]{0,127}$/', $slug)) {
+        if (! preg_match('/^[a-z0-9-]{0,127}$/', $slug)) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -41,7 +39,7 @@ class ScalesLookupController extends Controller
         }
 
         $row = $this->registry->lookupBySlug($slug, $orgId);
-        if (!$row) {
+        if (! $row) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -61,6 +59,7 @@ class ScalesLookupController extends Controller
             'view_policy' => $row['view_policy_json'] ?? null,
             'capabilities' => $row['capabilities_json'] ?? null,
             'commercial' => $row['commercial_json'] ?? null,
+            'seo_schema_json' => $row['seo_schema_json'] ?? null,
             'seo_schema' => $row['seo_schema_json'] ?? null,
         ]);
     }

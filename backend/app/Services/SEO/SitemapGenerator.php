@@ -13,16 +13,16 @@ class SitemapGenerator
     {
         $configuredPrefix = trim((string) config('services.seo.tests_url_prefix', ''));
         if ($configuredPrefix === '') {
-            $configuredPrefix = rtrim((string) config('app.url', 'http://localhost'), '/') . '/tests/';
+            $configuredPrefix = rtrim((string) config('app.url', 'http://localhost'), '/').'/tests/';
         }
 
-        $this->urlPrefix = rtrim($configuredPrefix, '/') . '/';
+        $this->urlPrefix = rtrim($configuredPrefix, '/').'/';
     }
 
     public function generate(): array
     {
         $rows = DB::table('scales_registry')
-            ->select('primary_slug', 'slugs_json', 'updated_at')
+            ->select('primary_slug', 'slugs_json', 'view_policy_json', 'updated_at')
             ->where('is_active', 1)
             ->where('is_public', 1)
             ->where('org_id', 0)
@@ -32,6 +32,10 @@ class SitemapGenerator
         $maxUpdatedAt = null;
 
         foreach ($rows as $row) {
+            if (! $this->isIndexablePublic($row->view_policy_json ?? null)) {
+                continue;
+            }
+
             $updatedAt = $this->parseUpdatedAt($row->updated_at ?? null);
             if ($updatedAt && ($maxUpdatedAt === null || $updatedAt->gt($maxUpdatedAt))) {
                 $maxUpdatedAt = $updatedAt;
@@ -44,12 +48,13 @@ class SitemapGenerator
                     continue;
                 }
 
-                if (!array_key_exists($slug, $slugDates)) {
+                if (! array_key_exists($slug, $slugDates)) {
                     $slugDates[$slug] = $updatedAt;
+
                     continue;
                 }
 
-                if ($updatedAt && (!$slugDates[$slug] || $updatedAt->gt($slugDates[$slug]))) {
+                if ($updatedAt && (! $slugDates[$slug] || $updatedAt->gt($slugDates[$slug]))) {
                     $slugDates[$slug] = $updatedAt;
                 }
             }
@@ -89,12 +94,12 @@ class SitemapGenerator
             return $slugsJson;
         }
 
-        if (!is_string($slugsJson) || trim($slugsJson) === '') {
+        if (! is_string($slugsJson) || trim($slugsJson) === '') {
             return [];
         }
 
         $decoded = json_decode($slugsJson, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return [];
         }
 
@@ -114,6 +119,41 @@ class SitemapGenerator
         }
     }
 
+    private function isIndexablePublic(mixed $viewPolicyJson): bool
+    {
+        $policy = [];
+        if (is_array($viewPolicyJson)) {
+            $policy = $viewPolicyJson;
+        } elseif (is_string($viewPolicyJson) && trim($viewPolicyJson) !== '') {
+            $decoded = json_decode($viewPolicyJson, true);
+            if (is_array($decoded)) {
+                $policy = $decoded;
+            }
+        }
+
+        $isPublic = $policy['public'] ?? $policy['is_public'] ?? $policy['visibility'] ?? null;
+        if (is_string($isPublic)) {
+            $normalizedVisibility = strtolower(trim($isPublic));
+            if (in_array($normalizedVisibility, ['private', 'internal', 'hidden'], true)) {
+                return false;
+            }
+        } elseif (is_bool($isPublic) && $isPublic === false) {
+            return false;
+        }
+
+        $indexable = $policy['indexable'] ?? null;
+        if (is_bool($indexable) && $indexable === false) {
+            return false;
+        }
+
+        $robots = $policy['robots'] ?? null;
+        if (is_string($robots) && str_contains(strtolower($robots), 'noindex')) {
+            return false;
+        }
+
+        return true;
+    }
+
     private function buildXml(array $slugList, array $slugDates): string
     {
         $lines = [];
@@ -126,12 +166,12 @@ class SitemapGenerator
                 continue;
             }
 
-            $loc = $this->urlPrefix . rawurlencode($slug);
+            $loc = $this->urlPrefix.rawurlencode($slug);
             $lastmod = $this->formatLastmod($slugDates[$slug] ?? null);
 
             $lines[] = '  <url>';
-            $lines[] = '    <loc>' . htmlspecialchars($loc, ENT_XML1) . '</loc>';
-            $lines[] = '    <lastmod>' . $lastmod . '</lastmod>';
+            $lines[] = '    <loc>'.htmlspecialchars($loc, ENT_XML1).'</loc>';
+            $lines[] = '    <lastmod>'.$lastmod.'</lastmod>';
             $lines[] = '    <changefreq>weekly</changefreq>';
             $lines[] = '    <priority>0.7</priority>';
             $lines[] = '  </url>';
@@ -139,12 +179,12 @@ class SitemapGenerator
 
         $lines[] = '</urlset>';
 
-        return implode("\n", $lines) . "\n";
+        return implode("\n", $lines)."\n";
     }
 
     private function formatLastmod(?Carbon $updatedAt): string
     {
-        if (!$updatedAt) {
+        if (! $updatedAt) {
             return '1970-01-01';
         }
 

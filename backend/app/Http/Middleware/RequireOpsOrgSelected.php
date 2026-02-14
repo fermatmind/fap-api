@@ -15,7 +15,13 @@ class RequireOpsOrgSelected
      * @var list<string>
      */
     private array $orgScopedRoutePrefixes = [
-        'filament.ops.resources.audit-logs.',
+        'filament.ops.resources.',
+        'filament.ops.pages.order-lookup',
+        'filament.ops.pages.delivery-tools',
+        'filament.ops.pages.secure-link',
+        'filament.ops.pages.webhook-monitor',
+        'filament.ops.pages.queue-monitor',
+        'filament.ops.pages.health-checks',
     ];
 
     /**
@@ -32,7 +38,7 @@ class RequireOpsOrgSelected
     public function handle(Request $request, Closure $next): Response
     {
         $routeName = (string) optional($request->route())->getName();
-        if ($routeName === '' || !str_starts_with($routeName, 'filament.ops.')) {
+        if ($routeName === '' || ! str_starts_with($routeName, 'filament.ops.')) {
             return $next($request);
         }
 
@@ -48,7 +54,7 @@ class RequireOpsOrgSelected
             }
         }
 
-        if (!$isOrgScopedRoute) {
+        if (! $isOrgScopedRoute) {
             return $next($request);
         }
 
