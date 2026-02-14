@@ -23,25 +23,27 @@ need_cmd git
 need_cmd zip
 need_cmd unzip
 need_cmd find
+need_cmd tar
 
 cd "$ROOT"
 
 # 强入口存在性校验（硬失败）
 [[ -f "${ROOT}/backend/routes/api.php" ]] || fail "required entry missing: backend/routes/api.php"
 
-# 白名单来源必须存在（禁止静默跳过）
-for src in backend scripts docs README_DEPLOY.md backend/.env.example; do
-  [[ -e "${ROOT}/${src}" ]] || fail "whitelist source missing: ${src}"
+# 白名单来源必须在 HEAD 中存在（禁止静默跳过）
+WHITELIST_PATHS=(backend scripts docs README_DEPLOY.md)
+for src in "${WHITELIST_PATHS[@]}" backend/.env.example; do
+  git -C "$ROOT" cat-file -e "HEAD:${src}" 2>/dev/null || fail "whitelist source missing in HEAD: ${src}"
 done
 
 rm -rf "$STAGING_DIR"
 mkdir -p "$STAGING_DIR" "$DIST_DIR"
 
-# 白名单复制
-cp -a "${ROOT}/backend" "$STAGING_DIR/backend"
-cp -a "${ROOT}/scripts" "$STAGING_DIR/scripts"
-cp -a "${ROOT}/docs" "$STAGING_DIR/docs"
-cp -a "${ROOT}/README_DEPLOY.md" "$STAGING_DIR/README_DEPLOY.md"
+# 白名单导出（仅包含 Git 跟踪内容）
+git -C "$ROOT" archive --format=tar HEAD "${WHITELIST_PATHS[@]}" | tar -xf - -C "$STAGING_DIR"
+# .gitattributes 的 backend/.env.* export-ignore 会过滤掉 .env.example，这里从 HEAD 显式回填
+mkdir -p "${STAGING_DIR}/backend"
+git -C "$ROOT" show "HEAD:backend/.env.example" > "${STAGING_DIR}/backend/.env.example"
 
 # 黑名单二次清扫（允许 .env.example）
 while IFS= read -r -d '' f; do
