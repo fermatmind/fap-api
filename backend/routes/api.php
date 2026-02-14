@@ -160,7 +160,7 @@ Route::prefix("v0.2")->middleware([
 
     Route::middleware('throttle:api_auth')->group(function () {
         // Auth (public)
-        if (app()->environment(['local', 'testing'])) {
+        if (app()->environment(['local', 'testing', 'ci'])) {
             Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
         } else {
             Route::post("/auth/wx_phone", static function () {

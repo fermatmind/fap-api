@@ -11,7 +11,7 @@ class AuthWxPhoneController extends Controller
 {
     public function __invoke(Request $request)
     {
-        if (!app()->environment(['local', 'testing'])) {
+        if (!app()->environment(['local', 'testing', 'ci'])) {
             abort(404);
         }
 
