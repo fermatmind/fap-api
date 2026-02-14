@@ -71,7 +71,7 @@ jobs:
             fi
           done
           echo "::warning::composer audit endpoint unreachable after retries; fallback to --ignore-unreachable"
-          composer audit --no-interaction --ignore-unreachable
+          composer audit --ignore-unreachable --no-interaction
 
       - name: Prepare sqlite
         run: |
