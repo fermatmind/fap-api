@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ReportJob extends Model
 {
-    use HasFactory;
+    use HasFactory, HasOrgScope;
 
     protected $table = 'report_jobs';
 
@@ -41,4 +42,9 @@ class ReportJob extends Model
         'report_json' => 'array',
         'meta' => 'array',
     ];
+
+    public static function allowOrgZeroContext(): bool
+    {
+        return true;
+    }
 }

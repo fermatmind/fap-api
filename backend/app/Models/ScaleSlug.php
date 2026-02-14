@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ScaleSlug extends Model
 {
-    use HasFactory;
+    use HasFactory, HasOrgScope;
 
     protected $table = 'scale_slugs';
 
@@ -22,4 +23,9 @@ class ScaleSlug extends Model
         'org_id' => 'integer',
         'is_primary' => 'boolean',
     ];
+
+    public static function bypassTenantScope(): bool
+    {
+        return true;
+    }
 }

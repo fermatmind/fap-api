@@ -2,18 +2,17 @@
 
 namespace App\Filament\Ops\Resources;
 
+use App\Filament\Shared\BaseTenantResource;
 use App\Filament\Ops\Resources\AuditLogResource\Pages;
 use App\Models\AuditLog;
-use App\Support\OrgContext;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 
-class AuditLogResource extends Resource
+class AuditLogResource extends BaseTenantResource
 {
     protected static ?string $model = AuditLog::class;
 
@@ -21,24 +20,9 @@ class AuditLogResource extends Resource
     protected static ?string $navigationGroup = 'Observability';
     protected static ?string $navigationLabel = 'Audit Logs';
 
-    private static function orgContext(): OrgContext
-    {
-        return app(OrgContext::class);
-    }
-
-    private static function orgId(): int
-    {
-        return (int) self::orgContext()->orgId();
-    }
-
     private static function scopedQuery(): Builder
     {
-        return AuditLog::query()->where('org_id', self::orgId());
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('org_id', self::orgId());
+        return static::getEloquentQuery();
     }
 
     public static function form(Form $form): Form

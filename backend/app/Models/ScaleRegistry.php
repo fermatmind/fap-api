@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ScaleRegistry extends Model
 {
-    use HasFactory;
+    use HasFactory, HasOrgScope;
 
     protected $table = 'scales_registry';
 
@@ -44,4 +45,9 @@ class ScaleRegistry extends Model
         'is_public' => 'boolean',
         'is_active' => 'boolean',
     ];
+
+    public static function bypassTenantScope(): bool
+    {
+        return true;
+    }
 }

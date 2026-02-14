@@ -343,11 +343,18 @@ Route::prefix("v0.3")->middleware([
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
         Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
-        if (!in_array('stub', $payProviders, true)) {
-            Route::post("/orders/stub", static function () {
+        Route::post("/orders/stub", static function (
+            Request $request,
+            \App\Http\Controllers\API\V0_3\CommerceController $controller
+        ) {
+            $stubEnabled = app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
+            if (!$stubEnabled) {
                 abort(404);
-            });
-        }
+            }
+
+            return app(\App\Http\Middleware\FmTokenAuth::class)
+                ->handle($request, static fn (Request $authedRequest) => $controller->createOrder($authedRequest, 'stub'));
+        });
         Route::post("/orders/{provider}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
             ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);

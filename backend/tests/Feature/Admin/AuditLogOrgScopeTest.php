@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Exceptions\OrgContextMissingException;
 use App\Filament\Ops\Resources\AuditLogResource;
 use App\Support\OrgContext;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,17 +30,16 @@ class AuditLogOrgScopeTest extends TestCase
         $this->assertSame(1, (int) ($rows[0]['org_id'] ?? -1));
     }
 
-    public function test_get_eloquent_query_defaults_to_org_zero(): void
+    public function test_get_eloquent_query_throws_when_org_context_missing(): void
     {
         $this->insertAuditLogs();
 
-        $rows = AuditLogResource::getEloquentQuery()
-            ->orderBy('id')
-            ->get(['id', 'org_id'])
-            ->toArray();
+        $context = app(OrgContext::class);
+        $context->set(0, null, 'admin');
+        app()->instance(OrgContext::class, $context);
 
-        $this->assertCount(1, $rows);
-        $this->assertSame(0, (int) ($rows[0]['org_id'] ?? -1));
+        $this->expectException(OrgContextMissingException::class);
+        AuditLogResource::getEloquentQuery();
     }
 
     private function insertAuditLogs(): void
