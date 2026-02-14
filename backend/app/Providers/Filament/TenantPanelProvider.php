@@ -2,13 +2,11 @@
 
 namespace App\Providers\Filament;
 
-use App\Http\Middleware\RequireOpsOrgSelected;
 use App\Http\Middleware\ResolveOrgContext;
-use App\Http\Middleware\SetOpsRequestContext;
+use App\Http\Middleware\SetTenantRequestContext;
 use App\Http\Middleware\VerifyCsrfToken;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -17,22 +15,19 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class AdminPanelProvider extends PanelProvider
+class TenantPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('ops')
-            ->path('ops')
+            ->id('tenant')
+            ->path('tenant')
             ->login()
-            ->authGuard((string) config('admin.guard', 'admin'))
-            ->brandName('Fermat Ops')
-            ->discoverResources(in: app_path('Filament/Ops/Resources'), for: 'App\\Filament\\Ops\\Resources')
-            ->discoverPages(in: app_path('Filament/Ops/Pages'), for: 'App\\Filament\\Ops\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
-            ->discoverWidgets(in: app_path('Filament/Ops/Widgets'), for: 'App\\Filament\\Ops\\Widgets')
+            ->authGuard((string) config('tenant.guard', 'tenant'))
+            ->brandName('Fermat Tenant')
+            ->discoverResources(in: app_path('Filament/Tenant/Resources'), for: 'App\\Filament\\Tenant\\Resources')
+            ->discoverPages(in: app_path('Filament/Tenant/Pages'), for: 'App\\Filament\\Tenant\\Pages')
+            ->discoverWidgets(in: app_path('Filament/Tenant/Widgets'), for: 'App\\Filament\\Tenant\\Widgets')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -41,9 +36,8 @@ class AdminPanelProvider extends PanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
-                SetOpsRequestContext::class,
+                SetTenantRequestContext::class,
                 ResolveOrgContext::class,
-                RequireOpsOrgSelected::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

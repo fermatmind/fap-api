@@ -18,8 +18,15 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])
         \App\Http\Middleware\VerifyCsrfToken::class,
     ]);
 
-if (!config('admin.panel_enabled')) {
-    Route::get('/admin', function () {
-        abort(404);
-    });
+if (config('admin.panel_enabled')) {
+    Route::permanentRedirect('/admin', '/ops');
+    Route::get('/admin/{path}', fn (string $path) => redirect('/ops/' . $path, 301))
+        ->where('path', '.*');
+} else {
+    Route::get('/admin', fn () => abort(404));
+    Route::get('/ops', fn () => abort(404));
+}
+
+if (!config('tenant.panel_enabled')) {
+    Route::get('/tenant', fn () => abort(404));
 }
