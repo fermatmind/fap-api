@@ -11,6 +11,7 @@ use App\Models\Role;
 use App\Services\Approvals\ApprovalExecutor;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -169,6 +170,113 @@ class ApprovalFlowTest extends TestCase
             'target_type' => 'AdminApproval',
             'target_id' => (string) $approval->id,
         ]);
+    }
+
+    public function test_execute_approved_refund_with_non_zero_org_in_queue_context(): void
+    {
+        config(['queue.default' => 'sync']);
+        (new Pr19CommerceSeeder)->run();
+
+        $orderNo = 'ord_approval_flow_org_42';
+        DB::table('orders')->insert([
+            'id' => (string) Str::uuid(),
+            'order_no' => $orderNo,
+            'org_id' => 42,
+            'sku' => 'MBTI_REPORT_FULL',
+            'item_sku' => 'MBTI_REPORT_FULL',
+            'effective_sku' => 'MBTI_REPORT_FULL',
+            'quantity' => 1,
+            'amount_cents' => 199,
+            'amount_total' => 199,
+            'currency' => 'CNY',
+            'status' => 'fulfilled',
+            'provider' => 'billing',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $requester = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OPS_WRITE,
+            PermissionNames::ADMIN_FINANCE_WRITE,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+
+        $approval = AdminApproval::query()->create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 42,
+            'type' => AdminApproval::TYPE_REFUND,
+            'status' => AdminApproval::STATUS_APPROVED,
+            'requested_by_admin_user_id' => (int) $requester->id,
+            'approved_by_admin_user_id' => (int) $requester->id,
+            'approved_at' => now(),
+            'reason' => 'refund for org 42',
+            'payload_json' => ['order_no' => $orderNo],
+            'correlation_id' => (string) Str::uuid(),
+        ]);
+
+        // Simulate queue worker execution where no request org context is available.
+        app(OrgContext::class)->set(0, null, null);
+
+        $execution = app(ApprovalExecutor::class)->execute((string) $approval->id);
+        $this->assertTrue($execution->ok);
+
+        $approval->refresh();
+        $this->assertSame(AdminApproval::STATUS_EXECUTED, (string) $approval->status);
+
+        $this->assertDatabaseHas('audit_logs', [
+            'org_id' => 42,
+            'action' => 'approval_executed_success',
+            'target_type' => 'AdminApproval',
+            'target_id' => (string) $approval->id,
+        ]);
+    }
+
+    public function test_rollback_release_approval_writes_order_no_audit_meta(): void
+    {
+        config(['queue.default' => 'sync']);
+        (new Pr19CommerceSeeder)->run();
+
+        $actor = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OPS_WRITE,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+
+        $approval = AdminApproval::query()->create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 7,
+            'type' => AdminApproval::TYPE_ROLLBACK_RELEASE,
+            'status' => AdminApproval::STATUS_APPROVED,
+            'requested_by_admin_user_id' => (int) $actor->id,
+            'approved_by_admin_user_id' => (int) $actor->id,
+            'approved_at' => now(),
+            'reason' => 'rollback current release',
+            'payload_json' => [
+                'order_no' => 'ord_rb_1',
+                'region' => 'GLOBAL',
+                'locale' => 'en',
+                'dir_alias' => 'default',
+                'from_version_id' => (string) Str::uuid(),
+                'to_version_id' => (string) Str::uuid(),
+            ],
+            'correlation_id' => (string) Str::uuid(),
+        ]);
+
+        $result = app(ApprovalExecutor::class)->execute((string) $approval->id);
+        $this->assertTrue($result->ok);
+
+        $approval->refresh();
+        $this->assertSame(AdminApproval::STATUS_EXECUTED, (string) $approval->status);
+
+        $audit = DB::table('audit_logs')
+            ->where('target_type', 'AdminApproval')
+            ->where('target_id', (string) $approval->id)
+            ->where('action', 'content_release_rollback')
+            ->latest('created_at')
+            ->first();
+
+        $this->assertNotNull($audit);
+        $meta = json_decode((string) ($audit->meta_json ?? '{}'), true);
+        $this->assertSame('ord_rb_1', (string) ($meta['order_no'] ?? ''));
     }
 
     /**

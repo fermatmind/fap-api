@@ -11,6 +11,7 @@ use App\Actions\Commerce\ReprocessPaymentEventAction;
 use App\Actions\Commerce\RevokeBenefitAction;
 use App\Models\AdminApproval;
 use App\Models\AdminUser;
+use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
 
 final class ApprovalExecutor
@@ -73,10 +74,10 @@ final class ApprovalExecutor
         $approval = $payload['approval'];
         $correlationId = trim((string) $approval->correlation_id);
         $reason = trim((string) $approval->reason);
-        $orgId = (int) $approval->org_id;
+        $orgId = max(0, (int) $approval->org_id);
 
         try {
-            $actionResult = $this->dispatchByType($approval);
+            $actionResult = $this->dispatchByTypeWithOrgContext($approval, $orgId);
 
             if ($actionResult->ok) {
                 DB::transaction(function () use ($approval, $actionResult, $correlationId, $reason): void {
@@ -223,6 +224,34 @@ final class ApprovalExecutor
             AdminApproval::TYPE_ROLLBACK_RELEASE => $this->executeRollbackRelease($actor, $approval, $payload),
             default => ActionResult::failure('TYPE_NOT_SUPPORTED', 'approval type not supported.'),
         };
+    }
+
+    private function dispatchByTypeWithOrgContext(AdminApproval $approval, int $orgId): ActionResult
+    {
+        $container = app();
+        $hadContextBinding = $container->bound(OrgContext::class);
+
+        /** @var OrgContext $context */
+        $context = $hadContextBinding
+            ? $container->make(OrgContext::class)
+            : new OrgContext;
+
+        $previousOrgId = (int) $context->orgId();
+        $previousUserId = $context->userId();
+        $previousRole = $context->role();
+        $previousAnonId = $context->anonId();
+
+        $context->set($orgId, $previousUserId, $previousRole, $previousAnonId);
+        $container->instance(OrgContext::class, $context);
+
+        try {
+            return $this->dispatchByType($approval);
+        } finally {
+            $context->set($previousOrgId, $previousUserId, $previousRole, $previousAnonId);
+            if (! $hadContextBinding) {
+                $container->forgetInstance(OrgContext::class);
+            }
+        }
     }
 
     /**
