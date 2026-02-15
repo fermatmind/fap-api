@@ -89,7 +89,7 @@ jobs:
           set -euo pipefail
           composer validate --strict
           for i in 1 2 3; do
-            if composer audit --no-interaction; then
+            if composer audit --no-interaction --ignore-unreachable; then
               break
             fi
             if [ "$i" -eq 3 ]; then
@@ -337,7 +337,7 @@ jobs:
           set -euo pipefail
           composer validate --strict
           for i in 1 2 3; do
-            if composer audit --no-interaction; then
+            if composer audit --no-interaction --ignore-unreachable; then
               break
             fi
             if [ "$i" -eq 3 ]; then

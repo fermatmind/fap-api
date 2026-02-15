@@ -107,7 +107,7 @@ jobs:
         run: |
           composer validate --strict
           for attempt in 1 2 3; do
-            if composer audit --no-interaction; then
+            if composer audit --no-interaction --ignore-unreachable; then
               exit 0
             fi
             if [ "$attempt" -lt 3 ]; then

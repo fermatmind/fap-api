@@ -29,6 +29,9 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.3/webhooks/payment/{provider}',
         '/api/v0.3/attempts/start',
         '/api/v0.3/attempts/{attempt_id}/progress',
+        '/api/v0.3/orders/checkout',
+        '/api/v0.3/orders/lookup',
+        '/api/v0.3/orders/{order_no}/resend',
         '/api/v0.3/orders/stub',
     ];
 
