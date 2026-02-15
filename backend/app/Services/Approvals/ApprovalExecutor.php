@@ -231,8 +231,9 @@ final class ApprovalExecutor
     private function executeRollbackRelease(AdminUser $actor, AdminApproval $approval, array $payload): ActionResult
     {
         $orderNo = trim((string) ($payload['order_no'] ?? ''));
+        $httpMeta = $this->auditHttpMeta();
 
-        DB::transaction(function () use ($approval, $payload, $actor): void {
+        DB::transaction(function () use ($approval, $payload, $actor, $orderNo, $httpMeta): void {
             DB::table('content_pack_releases')->insert([
                 'id' => (string) \Illuminate\Support\Str::uuid(),
                 'action' => 'rollback',
@@ -268,9 +269,9 @@ final class ApprovalExecutor
                     'from_version_id' => $payload['from_version_id'] ?? null,
                     'to_version_id' => $payload['to_version_id'] ?? null,
                 ], JSON_UNESCAPED_UNICODE),
-                'ip' => request()?->ip(),
-                'user_agent' => (string) (request()?->userAgent() ?? ''),
-                'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
+                'ip' => $httpMeta['ip'],
+                'user_agent' => $httpMeta['user_agent'],
+                'request_id' => $httpMeta['request_id'],
                 'created_at' => now(),
             ]);
         });
@@ -323,6 +324,8 @@ final class ApprovalExecutor
         string $correlationId,
         array $extra = [],
     ): void {
+        $httpMeta = $this->auditHttpMeta();
+
         DB::table('audit_logs')->insert([
             'org_id' => $orgId,
             'actor_admin_id' => $actorAdminId,
@@ -335,10 +338,35 @@ final class ApprovalExecutor
                 'reason' => $reason,
                 'correlation_id' => $correlationId,
             ], $extra), JSON_UNESCAPED_UNICODE),
-            'ip' => request()?->ip(),
-            'user_agent' => (string) (request()?->userAgent() ?? ''),
-            'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
+            'ip' => $httpMeta['ip'],
+            'user_agent' => $httpMeta['user_agent'],
+            'request_id' => $httpMeta['request_id'],
             'created_at' => now(),
         ]);
+    }
+
+    /**
+     * @return array{ip:string|null,user_agent:string,request_id:string}
+     */
+    private function auditHttpMeta(): array
+    {
+        $ip = null;
+        $userAgent = '';
+        $requestId = '';
+
+        if (app()->bound('request')) {
+            $request = app()->make('request');
+            if ($request instanceof \Illuminate\Http\Request) {
+                $ip = $request->ip();
+                $userAgent = (string) ($request->userAgent() ?? '');
+                $requestId = (string) ($request->attributes->get('request_id') ?? '');
+            }
+        }
+
+        return [
+            'ip' => $ip,
+            'user_agent' => $userAgent,
+            'request_id' => $requestId,
+        ];
     }
 }
