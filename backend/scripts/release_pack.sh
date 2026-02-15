@@ -27,27 +27,20 @@ need_cmd find
 cd "${ROOT}"
 
 WHITELIST_PATHS=(
-  backend/app
-  backend/routes
-  backend/config
-  backend/database/migrations
-  backend/composer.json
-  backend/composer.lock
-  backend/scripts
+  backend
   README_DEPLOY.md
   scripts
   docs
 )
 
 REQUIRED_HEAD_FILES=(
+  backend
+  backend/artisan
+  backend/bootstrap/app.php
+  backend/bootstrap/providers.php
   backend/routes/api.php
-  backend/app
-  backend/routes
-  backend/config
-  backend/database/migrations
   backend/composer.json
   backend/composer.lock
-  backend/scripts
   README_DEPLOY.md
 )
 
@@ -98,7 +91,16 @@ if [[ -s "$HITS_FILE" ]]; then
   exit 1
 fi
 
-[[ -f "${STAGING_DIR}/backend/routes/api.php" ]] || fail "required file missing in package staging: backend/routes/api.php"
+PACKAGE_REQUIRED_FILES=(
+  backend/artisan
+  backend/bootstrap/app.php
+  backend/bootstrap/providers.php
+  backend/routes/api.php
+)
+
+for required in "${PACKAGE_REQUIRED_FILES[@]}"; do
+  [[ -f "${STAGING_DIR}/${required}" ]] || fail "required file missing in package staging: ${required}"
+done
 
 rm -f "${OUT_ZIP}"
 (
