@@ -44,9 +44,23 @@ bash -n "${BACKEND_DIR}/scripts/pr68_accept.sh"
 bash -n "${BACKEND_DIR}/scripts/pr68_verify.sh"
 
 cd "${BACKEND_DIR}"
+composer_audit_with_retry() {
+  local attempt
+  for attempt in 1 2 3; do
+    if composer audit --no-interaction --ignore-unreachable; then
+      return 0
+    fi
+    if [ "${attempt}" -lt 3 ]; then
+      echo "composer audit failed (attempt ${attempt}/3), retrying..."
+      sleep 5
+    fi
+  done
+  return 1
+}
+
 composer install --no-interaction --no-progress | tee "${ART_DIR}/composer_install.txt"
 composer validate --strict | tee "${ART_DIR}/composer_validate.txt"
-composer audit --no-interaction | tee "${ART_DIR}/composer_audit.txt"
+composer_audit_with_retry | tee "${ART_DIR}/composer_audit.txt"
 cd "${REPO_DIR}"
 
 ART_DIR="${ART_DIR}" bash "${BACKEND_DIR}/scripts/pr68_verify.sh"

@@ -23,9 +23,23 @@ echo "[PR56][ACCEPT] repo=${REPO_DIR}"
 echo "[PR56][ACCEPT] art_dir=${ART_DIR}"
 
 cd "${BACKEND_DIR}"
+composer_audit_with_retry() {
+  local attempt
+  for attempt in 1 2 3; do
+    if composer audit --no-interaction --ignore-unreachable; then
+      return 0
+    fi
+    if [ "${attempt}" -lt 3 ]; then
+      echo "composer audit failed (attempt ${attempt}/3), retrying..."
+      sleep 5
+    fi
+  done
+  return 1
+}
+
 composer install --no-interaction --no-progress
 composer validate --strict >"${ART_DIR}/composer_validate.txt"
-composer audit --no-interaction >"${ART_DIR}/composer_audit.txt"
+composer_audit_with_retry >"${ART_DIR}/composer_audit.txt"
 composer --version >"${ART_DIR}/composer_version.txt"
 cd "${REPO_DIR}"
 
