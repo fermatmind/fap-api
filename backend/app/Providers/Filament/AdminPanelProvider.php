@@ -2,15 +2,18 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Ops\Pages\OpsDashboard;
+use App\Http\Middleware\EnsureAdminTotpVerified;
+use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\RequireOpsOrgSelected;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Middleware\SetOpsRequestContext;
 use App\Http\Middleware\VerifyCsrfToken;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -30,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Ops/Resources'), for: 'App\\Filament\\Ops\\Resources')
             ->discoverPages(in: app_path('Filament/Ops/Pages'), for: 'App\\Filament\\Ops\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                OpsDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Ops/Widgets'), for: 'App\\Filament\\Ops\\Widgets')
             ->middleware([
@@ -43,8 +46,14 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 SetOpsRequestContext::class,
                 ResolveOrgContext::class,
+                EnsureAdminTotpVerified::class,
                 RequireOpsOrgSelected::class,
+                OpsAccessControl::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::TOPBAR_END,
+                fn () => view('filament.ops.livewire.current-org-switcher-hook')
+            )
             ->authMiddleware([
                 Authenticate::class,
             ]);

@@ -18,12 +18,18 @@ class AdminUser extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'totp_secret',
+        'totp_enabled_at',
+        'password_changed_at',
+        'failed_login_count',
+        'locked_until',
         'is_active',
         'last_login_at',
     ];
 
     protected $hidden = [
         'password',
+        'totp_secret',
         'remember_token',
     ];
 
@@ -32,7 +38,11 @@ class AdminUser extends Authenticatable implements FilamentUser
         return [
             'password' => 'hashed',
             'is_active' => 'integer',
+            'failed_login_count' => 'integer',
             'last_login_at' => 'datetime',
+            'totp_enabled_at' => 'datetime',
+            'password_changed_at' => 'datetime',
+            'locked_until' => 'datetime',
         ];
     }
 
@@ -57,6 +67,14 @@ class AdminUser extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return (int) $this->is_active === 1;
+        if ((int) $this->is_active !== 1) {
+            return false;
+        }
+
+        if ($this->locked_until !== null && $this->locked_until->isFuture()) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Services\Audit\AuditLogger;
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +24,35 @@ class QueueMonitor extends Page
     protected static ?string $slug = 'queue-monitor';
 
     protected static string $view = 'filament.ops.pages.queue-monitor';
+
+    public static function canAccess(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_SRE)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        if (! \App\Support\SchemaBaseline::hasTable('failed_jobs')) {
+            return null;
+        }
+
+        $count = (int) DB::table('failed_jobs')->count();
+
+        return $count > 0 ? (string) $count : null;
+    }
+
+    public static function getNavigationBadgeColor(): string | array | null
+    {
+        return 'danger';
+    }
 
     /** @var list<array<string,mixed>> */
     public array $failedJobs = [];
@@ -63,23 +94,19 @@ class QueueMonitor extends Page
         ]);
 
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
-        DB::table('audit_logs')->insert([
-            'org_id' => $orgId,
-            'actor_admin_id' => auth((string) config('admin.guard', 'admin'))->id(),
-            'action' => 'queue_failed_job_retry',
-            'target_type' => 'failed_jobs',
-            'target_id' => (string) $failedJobId,
-            'meta_json' => json_encode([
+        app(AuditLogger::class)->log(
+            request(),
+            'queue_failed_job_retry',
+            'failed_jobs',
+            (string) $failedJobId,
+            [
                 'org_id' => $orgId,
-                'reason' => 'ops_retry_failed_job',
                 'correlation_id' => (string) \Illuminate\Support\Str::uuid(),
                 'failed_job_id' => $failedJobId,
-            ], JSON_UNESCAPED_UNICODE),
-            'ip' => request()?->ip(),
-            'user_agent' => (string) (request()?->userAgent() ?? ''),
-            'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-            'created_at' => now(),
-        ]);
+            ],
+            'ops_retry_failed_job',
+            'requested',
+        );
 
         $this->statusMessage = 'Retry queued for failed job #'.$failedJobId;
         $this->refresh();

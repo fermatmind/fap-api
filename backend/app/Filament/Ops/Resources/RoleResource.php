@@ -4,6 +4,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\RoleResource\Pages;
 use App\Models\Role;
+use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,6 +18,18 @@ class RoleResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-shield-check';
     protected static ?string $navigationGroup = 'Admin';
     protected static ?string $navigationLabel = 'Roles';
+
+    public static function canViewAny(): bool
+    {
+        $user = auth((string) config('admin.guard', 'admin'))->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_OWNER)
+                || $user->hasPermission(PermissionNames::ADMIN_ORG_MANAGE)
+            );
+    }
 
     public static function form(Form $form): Form
     {

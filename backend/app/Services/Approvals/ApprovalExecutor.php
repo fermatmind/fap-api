@@ -301,6 +301,8 @@ final class ApprovalExecutor
                 'ip' => $httpMeta['ip'],
                 'user_agent' => $httpMeta['user_agent'],
                 'request_id' => $httpMeta['request_id'],
+                'reason' => (string) $approval->reason,
+                'result' => 'success',
                 'created_at' => now(),
             ]);
         });
@@ -370,6 +372,8 @@ final class ApprovalExecutor
             'ip' => $httpMeta['ip'],
             'user_agent' => $httpMeta['user_agent'],
             'request_id' => $httpMeta['request_id'],
+            'reason' => $reason,
+            'result' => str_contains($action, 'failed') ? 'failed' : 'success',
             'created_at' => now(),
         ]);
     }

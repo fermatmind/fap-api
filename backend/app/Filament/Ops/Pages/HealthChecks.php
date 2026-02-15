@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Support\Rbac\PermissionNames;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
@@ -21,6 +22,19 @@ class HealthChecks extends Page
     protected static ?string $slug = 'health-checks';
 
     protected static string $view = 'filament.ops.pages.health-checks';
+
+    public static function canAccess(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_SRE)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
 
     /** @var array<string,mixed> */
     public array $checks = [];

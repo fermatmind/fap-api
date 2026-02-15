@@ -123,6 +123,8 @@ final class RefundOrderAction
             'ip' => request()?->ip(),
             'user_agent' => (string) (request()?->userAgent() ?? ''),
             'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
+            'reason' => $reason,
+            'result' => 'requested',
             'created_at' => now(),
         ]);
     }

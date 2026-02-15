@@ -16,23 +16,30 @@ class FunnelWidget extends BaseWidget
         $events = [
             'attempt_start' => 'Attempt Start',
             'attempt_submit' => 'Attempt Submit',
-            'report_view' => 'Report View',
-            'share_generate' => 'Share Generate',
+            'paywall_view' => 'Paywall View',
+            'checkout' => 'Checkout',
+            'payment_success' => 'Paid',
+            'unlocked' => 'Unlocked',
         ];
 
-        if (!\App\Support\SchemaBaseline::hasTable('v_funnel_daily')) {
-            return [
-                Stat::make('Funnel', 'no data')->color('gray'),
-            ];
-        }
-
         $from = now()->subDays(7)->toDateString();
-        $rows = DB::table('v_funnel_daily')
-            ->where('day', '>=', $from)
-            ->whereIn('event_name', array_keys($events))
-            ->select('event_name', DB::raw('SUM(events_count) as total'))
-            ->groupBy('event_name')
-            ->get();
+
+        $rows = collect();
+        if (\App\Support\SchemaBaseline::hasTable('v_funnel_daily')) {
+            $rows = DB::table('v_funnel_daily')
+                ->where('day', '>=', $from)
+                ->whereIn('event_name', array_keys($events))
+                ->select('event_name', DB::raw('SUM(events_count) as total'))
+                ->groupBy('event_name')
+                ->get();
+        } elseif (\App\Support\SchemaBaseline::hasTable('events')) {
+            $rows = DB::table('events')
+                ->where('occurred_at', '>=', now()->subDays(7))
+                ->whereIn('event_name', array_keys($events))
+                ->select('event_name', DB::raw('COUNT(*) as total'))
+                ->groupBy('event_name')
+                ->get();
+        }
 
         if ($rows->isEmpty()) {
             return [

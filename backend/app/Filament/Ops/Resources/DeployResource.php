@@ -4,6 +4,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\DeployResource\Pages;
 use App\Models\OpsDeployEvent;
+use App\Support\Rbac\PermissionNames;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -16,6 +17,19 @@ class DeployResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
     protected static ?string $navigationGroup = 'Observability';
     protected static ?string $navigationLabel = 'Deploy Events';
+
+    public static function canViewAny(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_SRE)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
 
     public static function form(Form $form): Form
     {

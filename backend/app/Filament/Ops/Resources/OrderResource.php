@@ -10,6 +10,8 @@ use App\Filament\Ops\Resources\OrderResource\RelationManagers\PaymentEventsRelat
 use App\Filament\Shared\BaseTenantResource;
 use App\Models\AdminApproval;
 use App\Models\Order;
+use App\Services\Audit\AuditLogger;
+use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -31,6 +33,11 @@ class OrderResource extends BaseTenantResource
     public static function form(Form $form): Form
     {
         return $form->schema([]);
+    }
+
+    public static function canViewAny(): bool
+    {
+        return self::canCommerceAccess();
     }
 
     public static function table(Table $table): Table
@@ -133,6 +140,19 @@ class OrderResource extends BaseTenantResource
         ];
     }
 
+    private static function canCommerceAccess(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_COMMERCE)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
+
     private static function createApproval(Order $record, string $type, array $payload, string $reason): AdminApproval
     {
         $reason = trim($reason);
@@ -157,26 +177,22 @@ class OrderResource extends BaseTenantResource
             'correlation_id' => (string) Str::uuid(),
         ]);
 
-        DB::table('audit_logs')->insert([
-            'org_id' => (int) $record->org_id,
-            'actor_admin_id' => $adminId,
-            'action' => 'approval_requested',
-            'target_type' => 'AdminApproval',
-            'target_id' => (string) $approval->id,
-            'meta_json' => json_encode([
+        app(AuditLogger::class)->log(
+            request(),
+            'approval_requested',
+            'AdminApproval',
+            (string) $approval->id,
+            [
                 'actor' => $adminId,
                 'org_id' => (int) $record->org_id,
                 'order_no' => (string) $record->order_no,
-                'reason' => $reason,
                 'correlation_id' => (string) $approval->correlation_id,
                 'type' => $type,
                 'payload' => $payload,
-            ], JSON_UNESCAPED_UNICODE),
-            'ip' => request()?->ip(),
-            'user_agent' => (string) (request()?->userAgent() ?? ''),
-            'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-            'created_at' => now(),
-        ]);
+            ],
+            $reason,
+            'requested',
+        );
 
         return $approval;
     }

@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\ScaleRegistryResource\Pages;
 use App\Filament\Ops\Resources\ScaleRegistryResource\RelationManagers\ScaleSlugsRelationManager;
 use App\Models\ScaleRegistry;
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,6 +25,19 @@ class ScaleRegistryResource extends Resource
     protected static ?string $navigationGroup = 'Content';
 
     protected static ?string $navigationLabel = 'Scale Registry';
+
+    public static function canViewAny(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
 
     public static function form(Form $form): Form
     {

@@ -23,7 +23,9 @@ class AuditLogger
         string $action,
         ?string $targetType = null,
         ?string $targetId = null,
-        ?array $meta = null
+        ?array $meta = null,
+        string $reason = 'unspecified',
+        string $result = 'success',
     ): void {
         if (!\App\Support\SchemaBaseline::hasTable('audit_logs')) {
             return;
@@ -34,6 +36,16 @@ class AuditLogger
         $meta['path'] = $meta['path'] ?? $request->path();
         $meta['status_intended'] = $meta['status_intended'] ?? null;
         $meta['params_sanitized'] = $meta['params_sanitized'] ?? $request->all();
+
+        $reason = trim($reason);
+        if ($reason === '') {
+            $reason = 'unspecified';
+        }
+
+        $result = trim($result);
+        if ($result === '') {
+            $result = 'success';
+        }
 
         $metaRedacted = $this->redactor->redactWithMeta($meta);
         $meta = $this->sanitizeScalar($metaRedacted['data']);
@@ -79,6 +91,8 @@ class AuditLogger
             'ip' => $request->ip(),
             'user_agent' => (string) $request->userAgent(),
             'request_id' => (string) ($request->attributes->get('request_id') ?? ''),
+            'reason' => $reason,
+            'result' => $result,
             'created_at' => now(),
         ]);
     }

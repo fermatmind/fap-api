@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\AdminApprovalResource\Pages;
 use App\Filament\Shared\BaseTenantResource;
 use App\Jobs\ExecuteApprovalJob;
 use App\Models\AdminApproval;
+use App\Services\Audit\AuditLogger;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -25,6 +26,29 @@ class AdminApprovalResource extends BaseTenantResource
     protected static ?string $navigationGroup = 'Governance';
 
     protected static ?string $navigationLabel = 'Approvals';
+
+    public static function canViewAny(): bool
+    {
+        return static::canReview();
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        if (! static::canReview() || ! \App\Support\SchemaBaseline::hasTable('admin_approvals')) {
+            return null;
+        }
+
+        $count = (int) DB::table('admin_approvals')
+            ->where('status', AdminApproval::STATUS_PENDING)
+            ->count();
+
+        return $count > 0 ? (string) $count : null;
+    }
+
+    public static function getNavigationBadgeColor(): string | array | null
+    {
+        return 'warning';
+    }
 
     public static function form(Form $form): Form
     {
@@ -91,24 +115,20 @@ class AdminApprovalResource extends BaseTenantResource
                             $locked->approved_at = now();
                             $locked->save();
 
-                            DB::table('audit_logs')->insert([
-                                'org_id' => (int) $locked->org_id,
-                                'actor_admin_id' => $adminId,
-                                'action' => 'approval_approved',
-                                'target_type' => 'AdminApproval',
-                                'target_id' => (string) $locked->id,
-                                'meta_json' => json_encode([
+                            app(AuditLogger::class)->log(
+                                request(),
+                                'approval_approved',
+                                'AdminApproval',
+                                (string) $locked->id,
+                                [
                                     'actor' => $adminId,
                                     'org_id' => (int) $locked->org_id,
-                                    'reason' => (string) $locked->reason,
                                     'correlation_id' => (string) $locked->correlation_id,
                                     'type' => (string) $locked->type,
-                                ], JSON_UNESCAPED_UNICODE),
-                                'ip' => request()?->ip(),
-                                'user_agent' => (string) (request()?->userAgent() ?? ''),
-                                'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-                                'created_at' => now(),
-                            ]);
+                                ],
+                                (string) $locked->reason,
+                                'approved',
+                            );
                         });
 
                         ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
@@ -152,24 +172,20 @@ class AdminApprovalResource extends BaseTenantResource
                             }
                             $locked->save();
 
-                            DB::table('audit_logs')->insert([
-                                'org_id' => (int) $locked->org_id,
-                                'actor_admin_id' => $adminId,
-                                'action' => 'approval_rejected',
-                                'target_type' => 'AdminApproval',
-                                'target_id' => (string) $locked->id,
-                                'meta_json' => json_encode([
+                            app(AuditLogger::class)->log(
+                                request(),
+                                'approval_rejected',
+                                'AdminApproval',
+                                (string) $locked->id,
+                                [
                                     'actor' => $adminId,
                                     'org_id' => (int) $locked->org_id,
-                                    'reason' => (string) $locked->reason,
                                     'correlation_id' => (string) $locked->correlation_id,
                                     'type' => (string) $locked->type,
-                                ], JSON_UNESCAPED_UNICODE),
-                                'ip' => request()?->ip(),
-                                'user_agent' => (string) (request()?->userAgent() ?? ''),
-                                'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-                                'created_at' => now(),
-                            ]);
+                                ],
+                                (string) $locked->reason,
+                                'rejected',
+                            );
                         });
 
                         Notification::make()

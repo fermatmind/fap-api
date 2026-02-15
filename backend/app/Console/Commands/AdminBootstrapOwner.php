@@ -70,6 +70,7 @@ class AdminBootstrapOwner extends Command
                 $rbac->syncRolePermissions($roleName, $perms);
             }
 
+            $rbac->grantRole($user, PermissionNames::ROLE_OPS_ADMIN);
             $rbac->grantRole($user, PermissionNames::ROLE_OWNER);
         }
 

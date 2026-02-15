@@ -18,6 +18,15 @@ class AdminAuth
                 return $this->forbiddenResponse('admin_disabled');
             }
 
+            if (property_exists($user, 'locked_until') && $user->locked_until !== null) {
+                $lockedUntil = $user->locked_until instanceof \Illuminate\Support\Carbon
+                    ? $user->locked_until
+                    : \Illuminate\Support\Carbon::parse((string) $user->locked_until);
+                if ($lockedUntil->isFuture()) {
+                    return $this->forbiddenResponse('admin_locked');
+                }
+            }
+
             $request->attributes->set('admin_auth_mode', 'session');
             return $next($request);
         }
