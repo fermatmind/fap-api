@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Responses\Auth\OpsLoginResponse;
 use App\Models\AdminApproval;
 use App\Models\Attempt;
 use App\Models\BenefitGrant;
@@ -27,7 +26,6 @@ use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
 use App\Support\OrgContext;
 use App\Support\SensitiveDataRedactor;
-use Filament\Http\Responses\Auth\Contracts\LoginResponse as FilamentLoginResponse;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -257,9 +255,6 @@ class AppServiceProvider extends ServiceProvider
             return new ContentStore($chain, [], $legacyDir);
         });
 
-        if (interface_exists(FilamentLoginResponse::class)) {
-            $this->app->bind(FilamentLoginResponse::class, OpsLoginResponse::class);
-        }
     }
 
     /**

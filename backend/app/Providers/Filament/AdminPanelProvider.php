@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Ops\Pages\OpsDashboard;
+use App\Http\Middleware\BindOpsLoginResponse;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\RequireOpsOrgSelected;
@@ -44,6 +45,7 @@ class AdminPanelProvider extends PanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
+                BindOpsLoginResponse::class,
                 SetOpsRequestContext::class,
                 ResolveOrgContext::class,
                 EnsureAdminTotpVerified::class,
