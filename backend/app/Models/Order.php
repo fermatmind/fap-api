@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -55,6 +57,21 @@ class Order extends Model
         'fulfilled_at' => 'datetime',
         'refunded_at' => 'datetime',
     ];
+
+    public function paymentEvents(): HasMany
+    {
+        return $this->hasMany(PaymentEvent::class, 'order_no', 'order_no');
+    }
+
+    public function benefitGrants(): HasMany
+    {
+        return $this->hasMany(BenefitGrant::class, 'order_no', 'order_no');
+    }
+
+    public function attempt(): BelongsTo
+    {
+        return $this->belongsTo(Attempt::class, 'target_attempt_id', 'id');
+    }
 
     public static function allowOrgZeroContext(): bool
     {

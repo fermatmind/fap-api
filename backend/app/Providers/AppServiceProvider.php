@@ -2,16 +2,20 @@
 
 namespace App\Providers;
 
+use App\Models\AdminApproval;
 use App\Models\Attempt;
 use App\Models\BenefitGrant;
 use App\Models\Order;
+use App\Models\PaymentEvent;
 use App\Models\ReportSnapshot;
 use App\Models\ScaleRegistry;
 use App\Models\ScaleSlug;
 use App\Models\Share;
+use App\Policies\AdminApprovalPolicy;
 use App\Policies\AttemptPolicy;
 use App\Policies\BenefitGrantPolicy;
 use App\Policies\OrderPolicy;
+use App\Policies\PaymentEventPolicy;
 use App\Policies\ReportSnapshotPolicy;
 use App\Policies\ScaleRegistryPolicy;
 use App\Policies\ScaleSlugPolicy;
@@ -42,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Bind ContentPackResolver so app(ContentPackResolver::class) works everywhere.
         $this->app->singleton(ContentPackResolver::class, function () {
-            return new ContentPackResolver();
+            return new ContentPackResolver;
         });
 
         // Bind ContentStore so app(ContentStore::class) works without hardcoded default scale.
@@ -171,6 +175,7 @@ class AppServiceProvider extends ServiceProvider
 
                 if (substr_count($raw, '.') >= 3) {
                     $parts = explode('.', $raw);
+
                     return (string) implode('.', array_slice($parts, 3));
                 }
 
@@ -231,7 +236,7 @@ class AppServiceProvider extends ServiceProvider
 
             $fallbacks = is_array($resolved->fallbackChain ?? null) ? $resolved->fallbackChain : [];
             foreach ($fallbacks as $fb) {
-                if (!is_array($fb)) {
+                if (! is_array($fb)) {
                     continue;
                 }
                 $manifest = is_array($fb['manifest'] ?? null) ? $fb['manifest'] : [];
@@ -254,7 +259,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::policy(Attempt::class, AttemptPolicy::class);
         Gate::policy(Order::class, OrderPolicy::class);
+        Gate::policy(PaymentEvent::class, PaymentEventPolicy::class);
         Gate::policy(BenefitGrant::class, BenefitGrantPolicy::class);
+        Gate::policy(AdminApproval::class, AdminApprovalPolicy::class);
         Gate::policy(ReportSnapshot::class, ReportSnapshotPolicy::class);
         Gate::policy(Share::class, SharePolicy::class);
         Gate::policy(ScaleRegistry::class, ScaleRegistryPolicy::class);
@@ -265,12 +272,12 @@ class AppServiceProvider extends ServiceProvider
             $command = is_array($argv) ? trim((string) ($argv[1] ?? '')) : '';
             $blockedCommands = ['migrate:rollback', 'migrate:reset', 'migrate:refresh'];
             if (in_array($command, $blockedCommands, true)) {
-                throw new RuntimeException('rollback disabled in production: ' . $command);
+                throw new RuntimeException('rollback disabled in production: '.$command);
             }
         }
 
-        if (!self::$redactProcessorRegistered) {
-            $redactor = new SensitiveDataRedactor();
+        if (! self::$redactProcessorRegistered) {
+            $redactor = new SensitiveDataRedactor;
 
             Log::getLogger()->pushProcessor(function (array|LogRecord $record) use ($redactor): array|LogRecord {
                 if ($record instanceof LogRecord) {
@@ -318,7 +325,7 @@ class AppServiceProvider extends ServiceProvider
                 return (bool) config('fap.rate_limits.bypass_in_test_env', true);
             }
 
-            if (!$this->app->environment(['testing', 'ci'])) {
+            if (! $this->app->environment(['testing', 'ci'])) {
                 return false;
             }
 
@@ -334,7 +341,7 @@ class AppServiceProvider extends ServiceProvider
             $limit = max(1, $limit);
 
             return Limit::perMinute($limit)
-                ->by('ip:' . $request->ip())
+                ->by('ip:'.$request->ip())
                 ->response($response('RATE_LIMIT_PUBLIC', 'Too many requests. Please retry later.'));
         });
 
@@ -347,7 +354,7 @@ class AppServiceProvider extends ServiceProvider
             $limit = max(1, $limit);
 
             return Limit::perMinute($limit)
-                ->by('ip:' . $request->ip())
+                ->by('ip:'.$request->ip())
                 ->response($response('RATE_LIMIT_AUTH', 'Too many auth requests. Please retry later.'));
         });
 
@@ -364,7 +371,7 @@ class AppServiceProvider extends ServiceProvider
                 $userId = (string) $request->user()->getAuthIdentifier();
             }
 
-            $key = $userId !== '' ? ('user:' . $userId) : ('ip:' . $request->ip());
+            $key = $userId !== '' ? ('user:'.$userId) : ('ip:'.$request->ip());
 
             return Limit::perMinute($limit)
                 ->by($key)
@@ -384,7 +391,7 @@ class AppServiceProvider extends ServiceProvider
                 $provider = (string) $request->route('provider_code', '');
             }
 
-            $key = $provider !== '' ? ('provider:' . $provider) : ('ip:' . $request->ip());
+            $key = $provider !== '' ? ('provider:'.$provider) : ('ip:'.$request->ip());
 
             return Limit::perMinute($limit)
                 ->by($key)

@@ -25,6 +25,10 @@ class ScalesLookupTest extends TestCase
             'scale_code' => 'MBTI',
             'primary_slug' => 'mbti-test',
         ]);
+        $response->assertJsonStructure([
+            'seo_schema_json',
+            'seo_schema',
+        ]);
     }
 
     public function test_lookup_unknown_slug_returns_not_found(): void
@@ -82,12 +86,14 @@ class ScalesLookupTest extends TestCase
             'scale_code' => 'IQ_RAVEN',
             'primary_slug' => 'raven-iq-test',
         ]);
+        $response->assertJsonPath('seo_schema_json.@type', 'Quiz');
+        $response->assertJsonPath('seo_schema.@type', 'Quiz');
     }
 
     public function test_slug_unique_constraint_enforced(): void
     {
         $this->artisan('migrate', ['--force' => true]);
-        if (!Schema::hasTable('scale_slugs')) {
+        if (! Schema::hasTable('scale_slugs')) {
             $this->markTestSkipped('scale_slugs missing');
         }
 

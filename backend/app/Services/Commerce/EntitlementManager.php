@@ -81,8 +81,8 @@ class EntitlementManager
         $userId = $userId !== null ? trim($userId) : '';
         $anonId = $anonId !== null ? trim($anonId) : '';
 
-        $userIdToStore = $userId !== '' ? $userId : ($anonId !== '' ? $anonId : ('attempt:' . $attemptId));
-        $benefitRef = $anonId !== '' ? $anonId : ($userId !== '' ? $userId : ('attempt:' . $attemptId));
+        $userIdToStore = $userId !== '' ? $userId : ($anonId !== '' ? $anonId : ('attempt:'.$attemptId));
+        $benefitRef = $anonId !== '' ? $anonId : ($userId !== '' ? $userId : ('attempt:'.$attemptId));
 
         $existing = DB::table('benefit_grants')
             ->where('org_id', $orgId)
@@ -101,12 +101,11 @@ class EntitlementManager
 
         $now = now();
 
+        $normalizedOrderNo = trim((string) ($orderNo ?? ''));
+
         $sourceOrderId = null;
-        if ($orderNo !== null) {
-            $orderNo = trim((string) $orderNo);
-            if ($orderNo !== '' && preg_match('/^[0-9a-f\-]{36}$/i', $orderNo)) {
-                $sourceOrderId = $orderNo;
-            }
+        if ($normalizedOrderNo !== '' && preg_match('/^[0-9a-f\-]{36}$/i', $normalizedOrderNo)) {
+            $sourceOrderId = $normalizedOrderNo;
         }
 
         if ($sourceOrderId === null && preg_match('/^[0-9a-f\-]{36}$/i', $attemptId)) {
@@ -124,6 +123,7 @@ class EntitlementManager
             'benefit_code' => $benefitCode,
             'scope' => $scope,
             'attempt_id' => $attemptId,
+            'order_no' => $normalizedOrderNo !== '' ? $normalizedOrderNo : null,
             'status' => 'active',
             'expires_at' => null,
             'benefit_ref' => $benefitRef,
@@ -163,7 +163,7 @@ class EntitlementManager
             ->where('order_no', $orderNo)
             ->where('org_id', $orgId)
             ->first();
-        if (!$order) {
+        if (! $order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
@@ -195,6 +195,25 @@ class EntitlementManager
         }
 
         $now = now();
+        $byOrderNo = DB::table('benefit_grants')
+            ->where('org_id', $orderOrgId)
+            ->where('order_no', $orderNo)
+            ->where('status', 'active')
+            ->update([
+                'status' => 'revoked',
+                'updated_at' => $now,
+                'revoked_at' => $now,
+            ]);
+
+        if ($byOrderNo > 0) {
+            return [
+                'ok' => true,
+                'revoked' => $byOrderNo,
+                'benefit_code' => $benefitCode,
+                'attempt_id' => $attemptId,
+            ];
+        }
+
         $revoked = DB::table('benefit_grants')
             ->where('org_id', $orderOrgId)
             ->where('benefit_code', $benefitCode)
