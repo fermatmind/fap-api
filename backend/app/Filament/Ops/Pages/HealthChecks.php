@@ -50,6 +50,7 @@ class HealthChecks extends Page
             'db' => $this->checkDb(),
             'redis' => $this->checkRedis(),
             'queue' => $this->checkQueue(),
+            'mailer' => $this->checkMailer(),
         ];
     }
 
@@ -93,6 +94,41 @@ class HealthChecks extends Page
                 : 0;
 
             return ['ok' => true, 'message' => 'driver='.$driver.', failed_jobs='.$failed];
+        } catch (\Throwable $e) {
+            return ['ok' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    /** @return array<string,mixed> */
+    private function checkMailer(): array
+    {
+        try {
+            $mailer = trim((string) config('mail.default', ''));
+            $host = trim((string) config('mail.mailers.smtp.host', ''));
+            $port = trim((string) config('mail.mailers.smtp.port', ''));
+            $encryption = trim((string) config('mail.mailers.smtp.encryption', ''));
+            $fromAddress = trim((string) config('mail.from.address', ''));
+            $fromName = trim((string) config('mail.from.name', ''));
+            $usernameSet = trim((string) config('mail.mailers.smtp.username', '')) !== '';
+            $passwordSet = trim((string) config('mail.mailers.smtp.password', '')) !== '';
+
+            $summary = implode(', ', array_filter([
+                'mailer=' . ($mailer !== '' ? $mailer : 'unknown'),
+                'host=' . ($host !== '' ? $host : 'n/a'),
+                'port=' . ($port !== '' ? $port : 'n/a'),
+                'encryption=' . ($encryption !== '' ? $encryption : 'none'),
+                'from=' . ($fromAddress !== '' ? $fromAddress : 'n/a'),
+                'from_name=' . ($fromName !== '' ? $fromName : 'n/a'),
+                'smtp_username_set=' . ($usernameSet ? 'yes' : 'no'),
+                'smtp_password_set=' . ($passwordSet ? 'yes' : 'no'),
+            ]));
+
+            $ok = $mailer !== '';
+            if ($mailer === 'smtp') {
+                $ok = $ok && $host !== '' && $port !== '' && $fromAddress !== '';
+            }
+
+            return ['ok' => $ok, 'message' => $summary];
         } catch (\Throwable $e) {
             return ['ok' => false, 'message' => $e->getMessage()];
         }

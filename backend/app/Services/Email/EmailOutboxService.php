@@ -30,6 +30,8 @@ class EmailOutboxService
         $token = 'claim_' . (string) Str::uuid();
         $tokenHash = hash('sha256', $token);
         $expiresAt = now()->addMinutes(15);
+        $locale = $this->resolveAttemptLocale($attemptId);
+        $subject = $this->defaultSubjectForTemplate('report_claim', $locale);
 
         $reportUrl = "/api/v0.2/attempts/{$attemptId}/report";
         $claimUrl = "/api/v0.2/claim/report?token={$token}";
@@ -40,6 +42,10 @@ class EmailOutboxService
             'claim_token' => $token,
             'claim_url' => $claimUrl,
             'claim_expires_at' => $expiresAt->toIso8601String(),
+            'locale' => $locale,
+            'template_key' => 'report_claim',
+            'to_email' => $email,
+            'subject' => $subject,
         ];
 
         $pending = null;
@@ -63,6 +69,21 @@ class EmailOutboxService
                 'claim_expires_at' => $expiresAt,
                 'updated_at' => now(),
             ];
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+                $update['locale'] = $locale;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+                $update['template_key'] = 'report_claim';
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
+                $update['to_email'] = $email;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+                $update['subject'] = $subject;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+                $update['body_html'] = null;
+            }
 
             DB::table('email_outbox')
                 ->where('id', $pending->id)
@@ -91,6 +112,22 @@ class EmailOutboxService
             'created_at' => now(),
             'updated_at' => now(),
         ];
+
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+            $row['locale'] = $locale;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+            $row['template_key'] = 'report_claim';
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
+            $row['to_email'] = $email;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+            $row['subject'] = $subject;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+            $row['body_html'] = null;
+        }
 
         DB::table('email_outbox')->insert($row);
 
@@ -220,5 +257,33 @@ class EmailOutboxService
 
         $decoded = json_decode($raw, true);
         return is_array($decoded) ? $decoded : [];
+    }
+
+    private function resolveAttemptLocale(string $attemptId): string
+    {
+        if (!\App\Support\SchemaBaseline::hasTable('attempts')) {
+            return 'en';
+        }
+        if (!\App\Support\SchemaBaseline::hasColumn('attempts', 'locale')) {
+            return 'en';
+        }
+
+        $locale = trim((string) DB::table('attempts')->where('id', $attemptId)->value('locale'));
+        if ($locale === '') {
+            return 'en';
+        }
+
+        $lang = strtolower((string) explode('-', str_replace('_', '-', $locale))[0]);
+        return $lang === 'zh' ? 'zh-CN' : 'en';
+    }
+
+    private function defaultSubjectForTemplate(string $templateKey, string $locale): string
+    {
+        $lang = strtolower((string) explode('-', str_replace('_', '-', $locale))[0]);
+        if ($templateKey === 'report_claim') {
+            return $lang === 'zh' ? '你的报告链接已准备好' : 'Your report link is ready';
+        }
+
+        return $lang === 'zh' ? 'FermatMind 通知' : 'FermatMind notification';
     }
 }

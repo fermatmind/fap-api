@@ -59,6 +59,11 @@ class DetectRegion
 
     private function resolveLocale(Request $request, array $regionConfig): string
     {
+        $fromLocaleHeader = $this->parseLocaleHeader((string) $request->header('X-FAP-Locale', ''));
+        if ($fromLocaleHeader !== '') {
+            return $fromLocaleHeader;
+        }
+
         $fromHeader = $this->parseAcceptLanguage((string) $request->header('Accept-Language', ''));
         if ($fromHeader !== '') {
             return $fromHeader;
@@ -70,6 +75,26 @@ class DetectRegion
         }
 
         return $fallback;
+    }
+
+    private function parseLocaleHeader(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return '';
+        }
+
+        $normalized = $this->normalizeLocale($value);
+        if ($normalized === '') {
+            return '';
+        }
+
+        // Normalize short zh/en to deterministic downstream values.
+        return match (strtolower($normalized)) {
+            'zh' => 'zh-CN',
+            'en' => 'en',
+            default => $normalized,
+        };
     }
 
     private function parseAcceptLanguage(string $header): string

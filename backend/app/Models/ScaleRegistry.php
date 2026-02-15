@@ -34,8 +34,12 @@ class ScaleRegistry extends Model
         'view_policy_json',
         'commercial_json',
         'seo_schema_json',
+        'seo_i18n_json',
+        'content_i18n_json',
+        'report_summary_i18n_json',
         'is_public',
         'is_active',
+        'is_indexable',
     ];
 
     protected $casts = [
@@ -45,8 +49,12 @@ class ScaleRegistry extends Model
         'view_policy_json' => 'array',
         'commercial_json' => 'array',
         'seo_schema_json' => 'array',
+        'seo_i18n_json' => 'array',
+        'content_i18n_json' => 'array',
+        'report_summary_i18n_json' => 'array',
         'is_public' => 'boolean',
         'is_active' => 'boolean',
+        'is_indexable' => 'boolean',
     ];
 
     public static function bypassTenantScope(): bool

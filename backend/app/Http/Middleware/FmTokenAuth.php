@@ -105,6 +105,9 @@ class FmTokenAuth
             }
 
             $request->attributes->set('user_id', (string) $resolvedUserId);
+            if (!$this->assertInjectedUserIdentity($request, $resolvedUserId)) {
+                return $this->unauthorizedResponse($request, 'token_user_inject_mismatch');
+            }
         }
 
         $anonId = $this->resolveAnonId($row->anon_id ?? null);
@@ -262,6 +265,36 @@ class FmTokenAuth
         }
 
         return $value;
+    }
+
+    /**
+     * Explicit post-injection guard to prevent accidental mutation/regression.
+     */
+    private function assertInjectedUserIdentity(Request $request, int $userId): bool
+    {
+        $fmUserId = trim((string) $request->attributes->get('fm_user_id', ''));
+        $plainUserId = trim((string) $request->attributes->get('user_id', ''));
+
+        if ($fmUserId === '' || $plainUserId === '') {
+            Log::warning('[SEC] fm_token_user_inject_empty', [
+                'path' => $request->path(),
+                'fm_user_id' => $fmUserId !== '' ? $fmUserId : null,
+                'user_id' => $plainUserId !== '' ? $plainUserId : null,
+            ]);
+            return false;
+        }
+
+        if ($fmUserId !== (string) $userId || $plainUserId !== (string) $userId) {
+            Log::warning('[SEC] fm_token_user_inject_mismatch', [
+                'path' => $request->path(),
+                'expected_user_id' => (string) $userId,
+                'fm_user_id' => $fmUserId,
+                'user_id' => $plainUserId,
+            ]);
+            return false;
+        }
+
+        return true;
     }
 
     private function resolveAnonId(mixed $candidate): ?string

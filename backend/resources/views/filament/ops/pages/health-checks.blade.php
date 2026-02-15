@@ -1,8 +1,11 @@
 <x-filament-panels::page>
     <div class="space-y-4">
         <x-filament::button wire:click="refreshChecks">Refresh</x-filament::button>
+        <div class="text-xs text-gray-500">
+            Mailer card is a read-only summary. Credentials are never displayed.
+        </div>
 
-        <div class="grid gap-3 md:grid-cols-3">
+        <div class="grid gap-3 md:grid-cols-4">
             @foreach ($checks as $name => $check)
                 <div class="rounded-lg border p-4">
                     <div class="text-sm font-semibold">{{ strtoupper($name) }}</div>

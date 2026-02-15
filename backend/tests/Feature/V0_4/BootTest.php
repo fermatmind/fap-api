@@ -29,7 +29,7 @@ class BootTest extends TestCase
         $this->assertNotSame('', $cache);
         $this->assertStringContainsString('max-age=300', $cache);
         $this->assertStringContainsString('public', $cache);
-        $response->assertHeader('Vary', 'X-Region, Accept-Language');
+        $response->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale');
         $this->assertNotEmpty($response->headers->get('ETag'));
     }
 
@@ -55,7 +55,7 @@ class BootTest extends TestCase
         $this->assertNotSame('', $cache);
         $this->assertStringContainsString('max-age=300', $cache);
         $this->assertStringContainsString('public', $cache);
-        $second->assertHeader('Vary', 'X-Region, Accept-Language');
+        $second->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale');
     }
 
     public function test_boot_differs_by_region(): void
@@ -91,5 +91,18 @@ class BootTest extends TestCase
         ]);
 
         $this->assertNotSame($cn->json('cdn.assets_base_url'), $us->json('cdn.assets_base_url'));
+    }
+
+    public function test_boot_prefers_x_fap_locale_over_accept_language(): void
+    {
+        $response = $this->getJson('/api/v0.4/boot', [
+            'X-Region' => 'US',
+            'Accept-Language' => 'en-US,en;q=0.9',
+            'X-FAP-Locale' => 'zh-CN',
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('locale', 'zh-CN');
+        $response->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale');
     }
 }
