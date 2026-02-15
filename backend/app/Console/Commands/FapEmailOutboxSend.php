@@ -322,14 +322,14 @@ class FapEmailOutboxSend extends Command
     {
         $appUrl = rtrim((string) config('app.url', 'http://localhost'), '/');
         $global = [
-            'terms' => trim((string) env('FAP_GLOBAL_TERMS_URL', $appUrl . '/terms')),
-            'privacy' => trim((string) env('FAP_GLOBAL_PRIVACY_URL', $appUrl . '/privacy')),
-            'refund' => trim((string) env('FAP_GLOBAL_REFUND_URL', $appUrl . '/refund')),
+            'terms' => trim((string) config('regions.regions.US.legal_urls.terms', $appUrl . '/terms')),
+            'privacy' => trim((string) config('regions.regions.US.legal_urls.privacy', $appUrl . '/privacy')),
+            'refund' => trim((string) config('regions.regions.US.legal_urls.refund', $appUrl . '/refund')),
         ];
         $cn = [
-            'terms' => trim((string) env('FAP_CN_TERMS_URL', $appUrl . '/zh/terms')),
-            'privacy' => trim((string) env('FAP_CN_PRIVACY_URL', $appUrl . '/zh/privacy')),
-            'refund' => trim((string) env('FAP_CN_REFUND_URL', $appUrl . '/zh/refund')),
+            'terms' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.terms', $appUrl . '/zh/terms')),
+            'privacy' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.privacy', $appUrl . '/zh/privacy')),
+            'refund' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.refund', $appUrl . '/zh/refund')),
         ];
 
         $target = $this->languageFromLocale($locale) === 'zh' ? $cn : $global;
@@ -342,7 +342,7 @@ class FapEmailOutboxSend extends Command
 
     private function resolveSupportEmail(): string
     {
-        $support = trim((string) env('FAP_SUPPORT_EMAIL', env('SUPPORT_EMAIL', '')));
+        $support = trim((string) config('fap.support_email', ''));
         if ($support !== '') {
             return $support;
         }
