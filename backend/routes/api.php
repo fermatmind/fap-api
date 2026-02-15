@@ -41,6 +41,7 @@ use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
+use App\Http\Controllers\API\V0_3\ScalesSitemapSourceController;
 use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
@@ -325,6 +326,7 @@ Route::prefix("v0.3")->middleware([
         // 1) Scale registry
         Route::get("/scales", [ScalesController::class, "index"]);
         Route::get("/scales/lookup", [ScalesLookupController::class, "lookup"]);
+        Route::get("/scales/sitemap-source", [ScalesSitemapSourceController::class, "index"]);
         Route::get("/scales/{scale_code}/questions", [ScalesController::class, "questions"]);
         Route::get("/scales/{scale_code}", [ScalesController::class, "show"]);
 
@@ -350,6 +352,9 @@ Route::prefix("v0.3")->middleware([
 
         // 3) Commerce v2 (public with org context)
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
+        Route::post("/orders/checkout", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout");
+        Route::post("/orders/lookup", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@lookup");
+        Route::post("/orders/{order_no}/resend", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@resend");
         Route::post("/orders", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder")
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
         Route::post("/orders/stub", static function (
@@ -368,6 +373,7 @@ Route::prefix("v0.3")->middleware([
             ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);
         Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
+        Route::get("/shares/{id}", [ShareController::class, "getShareView"]);
     });
 
     Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])

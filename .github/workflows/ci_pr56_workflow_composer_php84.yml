@@ -103,7 +103,7 @@ jobs:
 
       - name: Composer audit (CVE scan)
         working-directory: backend
-        run: composer audit --no-interaction
+        run: composer audit --no-interaction --ignore-unreachable
 
       - name: Prepare sqlite
         run: |

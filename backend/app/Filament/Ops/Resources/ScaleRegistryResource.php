@@ -90,32 +90,91 @@ class ScaleRegistryResource extends Resource
                                 ->schema([
                                     Forms\Components\Toggle::make('is_public')->default(true),
                                     Forms\Components\Toggle::make('is_active')->default(true),
+                                    Forms\Components\Toggle::make('is_indexable')->default(true),
                                 ]),
                         ]),
-                    Forms\Components\Tabs\Tab::make('SEO & Growth')
+                    Forms\Components\Tabs\Tab::make('SEO (EN)')
                         ->schema([
                             Forms\Components\TextInput::make('primary_slug')
                                 ->label('Primary Slug')
                                 ->required()
                                 ->maxLength(127),
-                            Forms\Components\TextInput::make('seo_schema_json.title')
+                            Forms\Components\TextInput::make('seo_i18n_json.en.title')
                                 ->label('SEO Title')
                                 ->maxLength(60)
                                 ->helperText('Recommended <= 60 chars'),
-                            Forms\Components\Textarea::make('seo_schema_json.description')
+                            Forms\Components\Textarea::make('seo_i18n_json.en.description')
                                 ->label('SEO Description')
                                 ->rows(3)
                                 ->maxLength(160)
                                 ->helperText('Recommended <= 160 chars'),
+                            Forms\Components\TextInput::make('seo_i18n_json.en.og_image_url')
+                                ->label('OG Image URL')
+                                ->maxLength(255),
+                        ]),
+                    Forms\Components\Tabs\Tab::make('SEO (ZH)')
+                        ->schema([
+                            Forms\Components\TextInput::make('seo_i18n_json.zh.title')
+                                ->label('SEO 标题')
+                                ->maxLength(60)
+                                ->helperText('建议 <= 60 字'),
+                            Forms\Components\Textarea::make('seo_i18n_json.zh.description')
+                                ->label('SEO 描述')
+                                ->rows(3)
+                                ->maxLength(160)
+                                ->helperText('建议 <= 160 字'),
+                            Forms\Components\TextInput::make('seo_i18n_json.zh.og_image_url')
+                                ->label('OG 图片 URL')
+                                ->maxLength(255),
+                        ]),
+                    Forms\Components\Tabs\Tab::make('Content (EN)')
+                        ->schema([
+                            Forms\Components\Textarea::make('content_i18n_json.en.landing_copy')
+                                ->label('Landing Copy')
+                                ->rows(4),
+                            Forms\Components\Textarea::make('content_i18n_json.en.faq')
+                                ->label('FAQ (JSON/Text)')
+                                ->rows(4),
+                            Forms\Components\Textarea::make('content_i18n_json.en.disclaimer')
+                                ->label('Disclaimer')
+                                ->rows(3),
+                            Forms\Components\Textarea::make('report_summary_i18n_json.en.summary')
+                                ->label('Report Summary')
+                                ->rows(3),
+                        ]),
+                    Forms\Components\Tabs\Tab::make('Content (ZH)')
+                        ->schema([
+                            Forms\Components\Textarea::make('content_i18n_json.zh.landing_copy')
+                                ->label('落地页文案')
+                                ->rows(4),
+                            Forms\Components\Textarea::make('content_i18n_json.zh.faq')
+                                ->label('FAQ（JSON/文本）')
+                                ->rows(4),
+                            Forms\Components\Textarea::make('content_i18n_json.zh.disclaimer')
+                                ->label('免责声明')
+                                ->rows(3),
+                            Forms\Components\Textarea::make('report_summary_i18n_json.zh.summary')
+                                ->label('报告摘要')
+                                ->rows(3),
+                        ]),
+                    Forms\Components\Tabs\Tab::make('Legacy SEO')
+                        ->schema([
+                            Forms\Components\TextInput::make('seo_schema_json.title')
+                                ->label('Legacy SEO Title')
+                                ->maxLength(60),
+                            Forms\Components\Textarea::make('seo_schema_json.description')
+                                ->label('Legacy SEO Description')
+                                ->rows(3)
+                                ->maxLength(160),
                             Forms\Components\TextInput::make('seo_schema_json.og.title')
-                                ->label('OG Title')
+                                ->label('Legacy OG Title')
                                 ->maxLength(90),
                             Forms\Components\Textarea::make('seo_schema_json.og.description')
-                                ->label('OG Description')
+                                ->label('Legacy OG Description')
                                 ->rows(3)
                                 ->maxLength(200),
                             Forms\Components\TextInput::make('seo_schema_json.robots')
-                                ->label('Robots')
+                                ->label('Legacy Robots')
                                 ->placeholder('index,follow')
                                 ->maxLength(64),
                         ]),
@@ -135,7 +194,7 @@ class ScaleRegistryResource extends Resource
                 Tables\Columns\IconColumn::make('indexable')
                     ->label('Indexable')
                     ->boolean()
-                    ->state(fn (ScaleRegistry $record): bool => (bool) ($record->view_policy_json['indexable'] ?? true)),
+                    ->state(fn (ScaleRegistry $record): bool => (bool) ($record->is_indexable ?? ($record->view_policy_json['indexable'] ?? true))),
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
             ])
             ->defaultSort('updated_at', 'desc')

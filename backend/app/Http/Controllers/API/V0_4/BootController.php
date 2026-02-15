@@ -62,7 +62,7 @@ class BootController extends Controller
         $etag = '"' . sha1($body) . '"';
         $headers = [
             'Cache-Control' => 'public, max-age=300',
-            'Vary' => 'X-Region, Accept-Language',
+            'Vary' => 'X-Region, Accept-Language, X-FAP-Locale',
             'ETag' => $etag,
             'Content-Type' => 'application/json',
         ];
