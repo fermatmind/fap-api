@@ -50,6 +50,16 @@ class AdminApprovalResource extends BaseTenantResource
         return 'warning';
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.governance');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.approvals');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

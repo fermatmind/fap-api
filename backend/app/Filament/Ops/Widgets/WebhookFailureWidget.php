@@ -11,15 +11,18 @@ use Illuminate\Support\Facades\DB;
 
 class WebhookFailureWidget extends BaseWidget
 {
-    protected ?string $heading = 'Webhook Risk';
+    protected function getHeading(): ?string
+    {
+        return __('ops.widgets.webhook_risk');
+    }
 
     protected function getStats(): array
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
         if ($orgId <= 0) {
             return [
-                Stat::make('webhook_failures_15m', '0')->description('Select org to inspect failures'),
-                Stat::make('webhook_failures_all', '0')->description('No organization selected'),
+                Stat::make(__('ops.widgets.webhook_failures_15m'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
+                Stat::make(__('ops.widgets.webhook_failures_all'), '0')->description(__('ops.widgets.no_org_selected')),
             ];
         }
 
@@ -49,11 +52,11 @@ class WebhookFailureWidget extends BaseWidget
             ->count();
 
         return [
-            Stat::make('webhook_failures_15m', (string) $failures15m)
-                ->description('15 min rolling window')
+            Stat::make(__('ops.widgets.webhook_failures_15m'), (string) $failures15m)
+                ->description(__('ops.widgets.rolling_15m'))
                 ->color($failures15m > 0 ? 'danger' : 'success'),
-            Stat::make('webhook_failures_all', (string) ($signatureFailed + $processedFailed))
-                ->description('signature + processing failures')
+            Stat::make(__('ops.widgets.webhook_failures_all'), (string) ($signatureFailed + $processedFailed))
+                ->description(__('ops.widgets.signature_processing_failures'))
                 ->color(($signatureFailed + $processedFailed) > 0 ? 'danger' : 'success'),
         ];
     }

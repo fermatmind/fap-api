@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class QueueFailureWidget extends BaseWidget
 {
-    protected ?string $heading = 'Stability and Risk';
+    protected function getHeading(): ?string
+    {
+        return __('ops.widgets.stability_risk');
+    }
 
     protected function getStats(): array
     {
@@ -28,11 +31,11 @@ class QueueFailureWidget extends BaseWidget
         }
 
         return [
-            Stat::make('failed_jobs count', (string) $failedJobsCount)
-                ->description('Queue failure backlog')
+            Stat::make(__('ops.widgets.failed_jobs_count'), (string) $failedJobsCount)
+                ->description(__('ops.widgets.queue_failure_backlog'))
                 ->color($failedJobsCount > 0 ? 'danger' : 'success'),
-            Stat::make('pending approvals', (string) $pendingApprovals)
-                ->description('Risk badge: pending high-risk actions')
+            Stat::make(__('ops.widgets.pending_approvals'), (string) $pendingApprovals)
+                ->description(__('ops.widgets.risk_badge_pending_approvals'))
                 ->color($pendingApprovals > 0 ? 'warning' : 'success'),
         ];
     }

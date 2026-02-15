@@ -40,6 +40,16 @@ class AuditLogResource extends BaseTenantResource
             );
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.observability');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.audit_logs');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

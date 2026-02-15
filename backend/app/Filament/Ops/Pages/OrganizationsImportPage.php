@@ -21,6 +21,16 @@ class OrganizationsImportPage extends Page
 
     protected static string $view = 'filament.ops.pages.organizations-import-page';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.admin');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.import_organizations');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

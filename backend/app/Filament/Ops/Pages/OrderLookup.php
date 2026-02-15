@@ -23,6 +23,16 @@ class OrderLookup extends Page
 
     protected static string $view = 'filament.ops.pages.order-lookup';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.support');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.order_lookup');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

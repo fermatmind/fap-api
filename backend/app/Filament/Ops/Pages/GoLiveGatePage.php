@@ -40,6 +40,16 @@ class GoLiveGatePage extends Page
         $this->gate = $service->snapshot();
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.governance');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.go_live_gate');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

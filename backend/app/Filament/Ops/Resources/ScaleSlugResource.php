@@ -38,6 +38,16 @@ class ScaleSlugResource extends Resource
             );
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.content');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.scale_slugs');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

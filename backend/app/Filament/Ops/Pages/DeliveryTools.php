@@ -26,6 +26,16 @@ class DeliveryTools extends Page
 
     protected static string $view = 'filament.ops.pages.delivery-tools';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.support');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.delivery_tools');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

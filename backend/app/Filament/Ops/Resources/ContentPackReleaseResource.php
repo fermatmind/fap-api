@@ -43,6 +43,16 @@ class ContentPackReleaseResource extends Resource
             );
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.content');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.content_pack_releases');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

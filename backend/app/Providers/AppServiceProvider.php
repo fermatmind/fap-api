@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
+use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
 use App\Models\AdminApproval;
 use App\Models\Attempt;
 use App\Models\BenefitGrant;
@@ -274,6 +275,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(ScaleRegistry::class, ScaleRegistryPolicy::class);
         Gate::policy(ScaleSlug::class, ScaleSlugPolicy::class);
         Livewire::component('filament.ops.livewire.current-org-switcher', CurrentOrgSwitcher::class);
+        Livewire::component('filament.ops.livewire.locale-switcher', LocaleSwitcher::class);
 
         if ($this->app->runningInConsole() && $this->app->environment('production')) {
             $argv = $_SERVER['argv'] ?? [];

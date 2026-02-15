@@ -9,12 +9,18 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class ScaleSlugsRelationManager extends RelationManager
 {
     protected static string $relationship = 'slugs';
 
-    protected static ?string $title = 'Scale Slugs';
+    protected static ?string $title = null;
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('ops.nav.scale_slugs');
+    }
 
     public function form(Form $form): Form
     {

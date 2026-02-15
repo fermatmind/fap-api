@@ -13,13 +13,15 @@ final class CurrentOrgSwitcher extends Component
 {
     public ?int $orgId = null;
 
-    public string $orgName = '未选择企业';
+    public string $orgName = '';
 
     public function mount(): void
     {
         $this->orgId = $this->resolveOrgId();
 
         if ($this->orgId === null) {
+            $this->orgName = __('ops.topbar.no_org_selected');
+
             return;
         }
 
@@ -37,7 +39,7 @@ final class CurrentOrgSwitcher extends Component
         // org_id points to a missing organization; clear to avoid a bad loop.
         $this->clearOrgSelection();
         $this->orgId = null;
-        $this->orgName = '未选择企业';
+        $this->orgName = __('ops.topbar.no_org_selected');
     }
 
     public function goSelectOrg(): mixed

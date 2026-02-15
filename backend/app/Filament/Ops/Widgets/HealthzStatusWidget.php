@@ -9,20 +9,23 @@ use Illuminate\Support\Facades\Schema;
 
 class HealthzStatusWidget extends BaseWidget
 {
-    protected ?string $heading = 'Healthz Status';
+    protected function getHeading(): ?string
+    {
+        return __('ops.widgets.healthz_status');
+    }
 
     protected function getStats(): array
     {
         if (!\App\Support\SchemaBaseline::hasTable('ops_healthz_snapshots')) {
             return [
-                Stat::make('Healthz', 'no data')->color('gray'),
+                Stat::make(__('ops.widgets.healthz'), __('ops.widgets.no_data'))->color('gray'),
             ];
         }
 
         $row = DB::table('ops_healthz_snapshots')->orderByDesc('created_at')->first();
         if (!$row) {
             return [
-                Stat::make('Healthz', 'no data')->color('gray'),
+                Stat::make(__('ops.widgets.healthz'), __('ops.widgets.no_data'))->color('gray'),
             ];
         }
 
@@ -46,12 +49,12 @@ class HealthzStatusWidget extends BaseWidget
         }
 
         return [
-            Stat::make('Status', $ok ? 'OK' : 'FAIL')
+            Stat::make(__('ops.widgets.status'), $ok ? __('ops.widgets.ok') : __('ops.widgets.fail'))
                 ->color($ok ? 'success' : 'danger')
                 ->description((string) ($row->env ?? '')),
-            Stat::make('Failed Deps', (string) $failedDeps)
+            Stat::make(__('ops.widgets.failed_deps'), (string) $failedDeps)
                 ->color($failedDeps > 0 ? 'danger' : 'success'),
-            Stat::make('Error Codes', (string) count($errorCodes))
+            Stat::make(__('ops.widgets.error_codes'), (string) count($errorCodes))
                 ->color(count($errorCodes) > 0 ? 'warning' : 'success'),
         ];
     }
