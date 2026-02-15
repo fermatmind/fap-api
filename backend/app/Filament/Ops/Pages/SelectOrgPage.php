@@ -8,6 +8,7 @@ use App\Support\Rbac\PermissionNames;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 class SelectOrgPage extends Page
@@ -67,6 +68,17 @@ class SelectOrgPage extends Page
         }
 
         session(['ops_org_id' => $orgId]);
+        Cookie::queue(cookie(
+            name: 'ops_org_id',
+            value: (string) $orgId,
+            minutes: 60 * 24 * 30,
+            path: '/ops',
+            domain: null,
+            secure: (bool) config('session.secure'),
+            httpOnly: true,
+            raw: false,
+            sameSite: 'lax',
+        ));
 
         Notification::make()
             ->title('Organization selected')

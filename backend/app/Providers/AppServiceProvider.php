@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
 use App\Models\AdminApproval;
 use App\Models\Attempt;
 use App\Models\BenefitGrant;
@@ -36,6 +37,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 use Monolog\LogRecord;
 use RuntimeException;
 
@@ -271,6 +273,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Share::class, SharePolicy::class);
         Gate::policy(ScaleRegistry::class, ScaleRegistryPolicy::class);
         Gate::policy(ScaleSlug::class, ScaleSlugPolicy::class);
+        Livewire::component('filament.ops.livewire.current-org-switcher', CurrentOrgSwitcher::class);
 
         if ($this->app->runningInConsole() && $this->app->environment('production')) {
             $argv = $_SERVER['argv'] ?? [];
