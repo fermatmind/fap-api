@@ -14,7 +14,7 @@ use Filament\Pages\Dashboard;
 
 class OpsDashboard extends Dashboard
 {
-    protected static ?string $title = 'Ops Dashboard';
+    protected static ?string $title = null;
 
     protected static ?string $slug = 'dashboard';
 
@@ -22,7 +22,12 @@ class OpsDashboard extends Dashboard
 
     public static function getNavigationLabel(): string
     {
-        return 'Dashboard';
+        return __('ops.nav.dashboard');
+    }
+
+    public function getTitle(): string
+    {
+        return __('ops.dashboard.title');
     }
 
     public function getColumns(): int | string | array
@@ -45,19 +50,19 @@ class OpsDashboard extends Dashboard
     {
         return [
             Action::make('orderLookup')
-                ->label('Order Lookup')
+                ->label(__('ops.dashboard.actions.order_lookup'))
                 ->url('/ops/order-lookup'),
             Action::make('webhookFailures')
-                ->label('Webhook Failures')
+                ->label(__('ops.dashboard.actions.webhook_failures'))
                 ->url('/ops/webhook-monitor'),
             Action::make('failedJobs')
-                ->label('Failed Jobs')
+                ->label(__('ops.dashboard.actions.failed_jobs'))
                 ->url('/ops/queue-monitor'),
             Action::make('contentProbe')
-                ->label('Content Probe')
+                ->label(__('ops.dashboard.actions.content_probe'))
                 ->url('/ops/content-pack-releases'),
             Action::make('switchOrg')
-                ->label('Create/Switch Org')
+                ->label(__('ops.dashboard.actions.switch_org'))
                 ->url('/ops/select-org'),
         ];
     }

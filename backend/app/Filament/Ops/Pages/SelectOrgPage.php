@@ -32,6 +32,11 @@ class SelectOrgPage extends Page
      */
     public array $organizations = [];
 
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.select_org');
+    }
+
     public function mount(): void
     {
         $this->returnTo = trim((string) request()->query('return_to', ''));

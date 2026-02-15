@@ -31,6 +31,16 @@ class DeployResource extends Resource
             );
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.observability');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.deploy_events');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

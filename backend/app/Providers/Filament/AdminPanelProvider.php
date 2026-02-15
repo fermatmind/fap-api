@@ -8,6 +8,7 @@ use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\RequireOpsOrgSelected;
 use App\Http\Middleware\ResolveOrgContext;
+use App\Http\Middleware\SetOpsLocale;
 use App\Http\Middleware\SetOpsRequestContext;
 use App\Http\Middleware\VerifyCsrfToken;
 use Filament\Http\Middleware\Authenticate;
@@ -41,6 +42,7 @@ class AdminPanelProvider extends PanelProvider
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
+                SetOpsLocale::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
@@ -52,6 +54,10 @@ class AdminPanelProvider extends PanelProvider
                 RequireOpsOrgSelected::class,
                 OpsAccessControl::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::TOPBAR_END,
+                fn () => view('filament.ops.livewire.locale-switcher-hook')
+            )
             ->renderHook(
                 PanelsRenderHook::TOPBAR_END,
                 fn () => view('filament.ops.livewire.current-org-switcher-hook')

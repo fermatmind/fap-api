@@ -25,6 +25,16 @@ class SecureLink extends Page
 
     protected static string $view = 'filament.ops.pages.secure-link';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.support');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.secure_link');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

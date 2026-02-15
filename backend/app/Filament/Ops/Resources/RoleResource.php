@@ -31,6 +31,16 @@ class RoleResource extends Resource
             );
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.admin');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.roles');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

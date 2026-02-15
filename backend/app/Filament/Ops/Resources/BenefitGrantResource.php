@@ -28,6 +28,16 @@ class BenefitGrantResource extends BaseTenantResource
 
     protected static ?string $navigationLabel = 'Benefit Grants';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.commerce');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.benefit_grants');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

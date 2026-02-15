@@ -30,6 +30,16 @@ class OrderResource extends BaseTenantResource
 
     protected static ?string $navigationLabel = 'Orders';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.commerce');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.orders');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

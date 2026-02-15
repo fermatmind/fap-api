@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class CommerceKpiWidget extends BaseWidget
 {
-    protected ?string $heading = 'Today Business';
+    protected function getHeading(): ?string
+    {
+        return __('ops.widgets.today_business');
+    }
 
     protected function getStats(): array
     {
@@ -21,11 +24,11 @@ class CommerceKpiWidget extends BaseWidget
 
         if ($orgId <= 0) {
             return [
-                Stat::make('Paid Orders Today', '0')->description('Select org to view live metrics'),
-                Stat::make('Revenue Today', '0')->description('No organization selected'),
-                Stat::make('Unlock Rate', '0%')->description('No organization selected'),
-                Stat::make('Refund Count', '0')->description('No organization selected'),
-                Stat::make('Webhook Failures', '0')->description('No organization selected'),
+                Stat::make(__('ops.widgets.paid_orders_today'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
+                Stat::make(__('ops.widgets.revenue_today'), '0')->description(__('ops.widgets.no_org_selected')),
+                Stat::make(__('ops.widgets.unlock_rate'), '0%')->description(__('ops.widgets.no_org_selected')),
+                Stat::make(__('ops.widgets.refund_count'), '0')->description(__('ops.widgets.no_org_selected')),
+                Stat::make(__('ops.widgets.webhook_failures'), '0')->description(__('ops.widgets.no_org_selected')),
             ];
         }
 
@@ -73,12 +76,12 @@ class CommerceKpiWidget extends BaseWidget
             ->count();
 
         return [
-            Stat::make('Paid Orders Today', (string) $paidOrders),
-            Stat::make('Revenue Today', (string) $todayRevenue)->description('cents'),
-            Stat::make('Unlock Rate', (string) $unlockRate . '%'),
-            Stat::make('Refund Count', (string) $refundCount)
+            Stat::make(__('ops.widgets.paid_orders_today'), (string) $paidOrders),
+            Stat::make(__('ops.widgets.revenue_today'), (string) $todayRevenue)->description(__('ops.widgets.cents')),
+            Stat::make(__('ops.widgets.unlock_rate'), (string) $unlockRate . '%'),
+            Stat::make(__('ops.widgets.refund_count'), (string) $refundCount)
                 ->color($refundCount > 0 ? 'warning' : 'success'),
-            Stat::make('Webhook Failures', (string) $webhookFailures)
+            Stat::make(__('ops.widgets.webhook_failures'), (string) $webhookFailures)
                 ->color($webhookFailures > 0 ? 'danger' : 'success'),
         ];
     }

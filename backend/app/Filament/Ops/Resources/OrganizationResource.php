@@ -45,6 +45,16 @@ class OrganizationResource extends Resource
         return false;
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.admin');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.organizations');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

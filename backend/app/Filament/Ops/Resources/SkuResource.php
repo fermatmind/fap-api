@@ -27,6 +27,16 @@ class SkuResource extends Resource
 
     protected static ?string $navigationLabel = 'SKUs';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.commerce');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.skus');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

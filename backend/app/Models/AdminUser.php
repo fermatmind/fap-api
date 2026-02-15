@@ -20,6 +20,7 @@ class AdminUser extends Authenticatable implements FilamentUser
         'password',
         'totp_secret',
         'totp_enabled_at',
+        'preferred_locale',
         'password_changed_at',
         'failed_login_count',
         'locked_until',

@@ -42,6 +42,16 @@ class PermissionResource extends Resource
         return self::canViewAny();
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.admin');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.permissions');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

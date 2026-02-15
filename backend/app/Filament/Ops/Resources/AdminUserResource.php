@@ -28,6 +28,16 @@ class AdminUserResource extends Resource
             && $user->hasPermission(PermissionNames::ADMIN_OWNER);
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.admin');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.admin_users');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

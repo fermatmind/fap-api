@@ -28,6 +28,16 @@ class PaymentEventResource extends BaseTenantResource
 
     protected static ?string $navigationLabel = 'Payment Events';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.commerce');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.payment_events');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);

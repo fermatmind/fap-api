@@ -7,12 +7,18 @@ namespace App\Filament\Ops\Resources\OrderResource\RelationManagers;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class BenefitGrantsRelationManager extends RelationManager
 {
     protected static string $relationship = 'benefitGrants';
 
-    protected static ?string $title = 'Benefit Grants';
+    protected static ?string $title = null;
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('ops.nav.benefit_grants');
+    }
 
     public function table(Table $table): Table
     {

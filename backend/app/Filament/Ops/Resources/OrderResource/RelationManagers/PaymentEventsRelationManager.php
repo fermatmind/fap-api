@@ -7,12 +7,18 @@ namespace App\Filament\Ops\Resources\OrderResource\RelationManagers;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class PaymentEventsRelationManager extends RelationManager
 {
     protected static string $relationship = 'paymentEvents';
 
-    protected static ?string $title = 'Payment Events';
+    protected static ?string $title = null;
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('ops.nav.payment_events');
+    }
 
     public function table(Table $table): Table
     {

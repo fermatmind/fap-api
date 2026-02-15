@@ -9,17 +9,20 @@ use Illuminate\Support\Facades\Schema;
 
 class FunnelWidget extends BaseWidget
 {
-    protected ?string $heading = 'Funnel (7d)';
+    protected function getHeading(): ?string
+    {
+        return __('ops.widgets.funnel_7d');
+    }
 
     protected function getStats(): array
     {
         $events = [
-            'attempt_start' => 'Attempt Start',
-            'attempt_submit' => 'Attempt Submit',
-            'paywall_view' => 'Paywall View',
-            'checkout' => 'Checkout',
-            'payment_success' => 'Paid',
-            'unlocked' => 'Unlocked',
+            'attempt_start' => __('ops.widgets.attempt_start'),
+            'attempt_submit' => __('ops.widgets.attempt_submit'),
+            'paywall_view' => __('ops.widgets.paywall_view'),
+            'checkout' => __('ops.widgets.checkout'),
+            'payment_success' => __('ops.widgets.paid'),
+            'unlocked' => __('ops.widgets.unlocked'),
         ];
 
         $from = now()->subDays(7)->toDateString();
@@ -43,7 +46,7 @@ class FunnelWidget extends BaseWidget
 
         if ($rows->isEmpty()) {
             return [
-                Stat::make('Funnel', 'no data')->color('gray'),
+                Stat::make(__('ops.widgets.funnel'), __('ops.widgets.no_data'))->color('gray'),
             ];
         }
 

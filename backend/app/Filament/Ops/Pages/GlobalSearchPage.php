@@ -64,6 +64,16 @@ class GlobalSearchPage extends Page
         }
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.support');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.global_search');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

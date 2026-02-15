@@ -23,6 +23,16 @@ class HealthChecks extends Page
 
     protected static string $view = 'filament.ops.pages.health-checks';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.sre');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.health_checks');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');
