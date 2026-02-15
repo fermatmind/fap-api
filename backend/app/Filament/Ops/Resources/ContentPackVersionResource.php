@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ContentPackVersionResource\Pages;
 use App\Models\ContentPackVersion;
+use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -21,6 +22,19 @@ class ContentPackVersionResource extends Resource
     protected static ?string $navigationGroup = 'Content';
 
     protected static ?string $navigationLabel = 'Content Pack Versions';
+
+    public static function canViewAny(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
 
     public static function form(Form $form): Form
     {

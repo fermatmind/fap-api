@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\SkuResource\Pages;
 use App\Models\Sku;
+use App\Services\Audit\AuditLogger;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
@@ -31,6 +32,11 @@ class SkuResource extends Resource
         return $form->schema([]);
     }
 
+    public static function canViewAny(): bool
+    {
+        return self::canFinanceWrite();
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -47,7 +53,7 @@ class SkuResource extends Resource
             ->defaultSort('updated_at', 'desc')
             ->actions([
                 Tables\Actions\Action::make('adjustPrice')
-                    ->label('Adjust Price')
+                    ->label('Request Price Change')
                     ->icon('heroicon-o-banknotes')
                     ->visible(fn (): bool => static::canFinanceWrite())
                     ->form([
@@ -82,28 +88,25 @@ class SkuResource extends Resource
                                     'updated_at' => now(),
                                 ]);
 
-                            DB::table('audit_logs')->insert([
-                                'org_id' => (int) app(OrgContext::class)->orgId(),
-                                'actor_admin_id' => $adminId,
-                                'action' => 'sku_price_adjusted',
-                                'target_type' => 'Sku',
-                                'target_id' => (string) $record->sku,
-                                'meta_json' => json_encode([
+                            app(AuditLogger::class)->log(
+                                request(),
+                                'sku_price_adjusted',
+                                'Sku',
+                                (string) $record->sku,
+                                [
                                     'actor' => $adminId,
+                                    'org_id' => (int) app(OrgContext::class)->orgId(),
                                     'sku' => (string) $record->sku,
-                                    'reason' => $reason,
                                     'old_price_cents' => (int) $record->price_cents,
                                     'new_price_cents' => $priceCents,
-                                ], JSON_UNESCAPED_UNICODE),
-                                'ip' => request()?->ip(),
-                                'user_agent' => (string) (request()?->userAgent() ?? ''),
-                                'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-                                'created_at' => now(),
-                            ]);
+                                ],
+                                $reason,
+                                'success',
+                            );
                         });
 
                         Notification::make()
-                            ->title('SKU price updated')
+                            ->title('SKU price change requested and applied')
                             ->success()
                             ->send();
                     }),

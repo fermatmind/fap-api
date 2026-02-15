@@ -8,7 +8,9 @@ use App\Filament\Ops\Resources\ContentPackReleaseResource\Pages;
 use App\Jobs\Content\RunContentProbeJob;
 use App\Models\AdminApproval;
 use App\Models\ContentPackRelease;
+use App\Services\Audit\AuditLogger;
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -27,6 +29,19 @@ class ContentPackReleaseResource extends Resource
     protected static ?string $navigationGroup = 'Content';
 
     protected static ?string $navigationLabel = 'Content Pack Releases';
+
+    public static function canViewAny(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
 
     public static function form(Form $form): Form
     {
@@ -66,24 +81,20 @@ class ContentPackReleaseResource extends Resource
                             $correlationId,
                         )->afterCommit();
 
-                        DB::table('audit_logs')->insert([
-                            'org_id' => $orgId,
-                            'actor_admin_id' => auth((string) config('admin.guard', 'admin'))->id(),
-                            'action' => 'content_probe_requested',
-                            'target_type' => 'ContentPackRelease',
-                            'target_id' => (string) $record->id,
-                            'meta_json' => json_encode([
+                        app(AuditLogger::class)->log(
+                            request(),
+                            'content_probe_requested',
+                            'ContentPackRelease',
+                            (string) $record->id,
+                            [
                                 'org_id' => $orgId,
-                                'reason' => 'manual_probe',
                                 'correlation_id' => $correlationId,
                                 'from_version' => $record->from_version_id,
                                 'to_version' => $record->to_version_id,
-                            ], JSON_UNESCAPED_UNICODE),
-                            'ip' => request()?->ip(),
-                            'user_agent' => (string) (request()?->userAgent() ?? ''),
-                            'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-                            'created_at' => now(),
-                        ]);
+                            ],
+                            'manual_probe',
+                            'requested',
+                        );
 
                         Notification::make()
                             ->title('Probe queued')
@@ -120,24 +131,20 @@ class ContentPackReleaseResource extends Resource
                                     'updated_at' => now(),
                                 ]);
 
-                            DB::table('audit_logs')->insert([
-                                'org_id' => $orgId,
-                                'actor_admin_id' => auth((string) config('admin.guard', 'admin'))->id(),
-                                'action' => 'content_release_executed',
-                                'target_type' => 'ContentPackRelease',
-                                'target_id' => (string) $record->id,
-                                'meta_json' => json_encode([
+                            app(AuditLogger::class)->log(
+                                request(),
+                                'content_release_executed',
+                                'ContentPackRelease',
+                                (string) $record->id,
+                                [
                                     'org_id' => $orgId,
-                                    'reason' => $reason,
                                     'correlation_id' => $correlationId,
                                     'from_version' => $record->from_version_id,
                                     'to_version' => $record->to_version_id,
-                                ], JSON_UNESCAPED_UNICODE),
-                                'ip' => request()?->ip(),
-                                'user_agent' => (string) (request()?->userAgent() ?? ''),
-                                'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-                                'created_at' => now(),
-                            ]);
+                                ],
+                                $reason,
+                                'success',
+                            );
                         });
 
                         Notification::make()->title('Release marked as success')->success()->send();
@@ -180,25 +187,21 @@ class ContentPackReleaseResource extends Resource
                             'correlation_id' => (string) Str::uuid(),
                         ]);
 
-                        DB::table('audit_logs')->insert([
-                            'org_id' => $orgId,
-                            'actor_admin_id' => $adminId,
-                            'action' => 'approval_requested',
-                            'target_type' => 'AdminApproval',
-                            'target_id' => (string) $approval->id,
-                            'meta_json' => json_encode([
+                        app(AuditLogger::class)->log(
+                            request(),
+                            'approval_requested',
+                            'AdminApproval',
+                            (string) $approval->id,
+                            [
                                 'org_id' => $orgId,
-                                'reason' => $reason,
                                 'correlation_id' => (string) $approval->correlation_id,
                                 'type' => AdminApproval::TYPE_ROLLBACK_RELEASE,
                                 'from_version' => $record->from_version_id,
                                 'to_version' => $record->to_version_id,
-                            ], JSON_UNESCAPED_UNICODE),
-                            'ip' => request()?->ip(),
-                            'user_agent' => (string) (request()?->userAgent() ?? ''),
-                            'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-                            'created_at' => now(),
-                        ]);
+                            ],
+                            $reason,
+                            'requested',
+                        );
 
                         Notification::make()
                             ->title('Rollback request submitted')

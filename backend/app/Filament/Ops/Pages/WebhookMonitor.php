@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Pages;
 
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,48 @@ class WebhookMonitor extends Page
     protected static ?string $slug = 'webhook-monitor';
 
     protected static string $view = 'filament.ops.pages.webhook-monitor';
+
+    public static function canAccess(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_SRE)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        $rawOrgId = (string) session('ops_org_id', '');
+        if ($rawOrgId === '' || preg_match('/^\d+$/', $rawOrgId) !== 1) {
+            return null;
+        }
+
+        $orgId = (int) $rawOrgId;
+        if ($orgId <= 0) {
+            return null;
+        }
+
+        $count = (int) DB::table('payment_events')
+            ->where('org_id', $orgId)
+            ->where(function ($query): void {
+                $query->where('signature_ok', 0)
+                    ->orWhereIn('status', ['failed', 'rejected', 'post_commit_failed'])
+                    ->orWhereIn('handle_status', ['failed', 'reprocess_failed']);
+            })
+            ->count();
+
+        return $count > 0 ? (string) $count : null;
+    }
+
+    public static function getNavigationBadgeColor(): string | array | null
+    {
+        return 'danger';
+    }
 
     public int $limit = 50;
 

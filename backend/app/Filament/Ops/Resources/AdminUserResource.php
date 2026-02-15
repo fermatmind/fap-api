@@ -4,6 +4,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\AdminUserResource\Pages;
 use App\Models\AdminUser;
+use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,6 +18,15 @@ class AdminUserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationGroup = 'Admin';
     protected static ?string $navigationLabel = 'Admin Users';
+
+    public static function canViewAny(): bool
+    {
+        $user = auth((string) config('admin.guard', 'admin'))->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && $user->hasPermission(PermissionNames::ADMIN_OWNER);
+    }
 
     public static function form(Form $form): Form
     {
@@ -32,6 +42,7 @@ class AdminUserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->maxLength(255)
+                    ->rules(self::passwordRules())
                     ->dehydrateStateUsing(fn ($state) => filled($state) ? $state : null)
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create')
@@ -55,6 +66,7 @@ class AdminUserResource extends Resource
                     ->boolean()
                     ->label('Active'),
                 Tables\Columns\TextColumn::make('last_login_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('totp_enabled_at')->dateTime()->label('2FA')->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->actions([
@@ -104,5 +116,30 @@ class AdminUserResource extends Resource
             'create' => Pages\CreateAdminUser::route('/create'),
             'edit' => Pages\EditAdminUser::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function passwordRules(): array
+    {
+        $rules = [
+            'min:' . max(8, (int) config('admin.password_policy.min_length', 12)),
+        ];
+
+        if ((bool) config('admin.password_policy.require_uppercase', true)) {
+            $rules[] = 'regex:/[A-Z]/';
+        }
+        if ((bool) config('admin.password_policy.require_lowercase', true)) {
+            $rules[] = 'regex:/[a-z]/';
+        }
+        if ((bool) config('admin.password_policy.require_number', true)) {
+            $rules[] = 'regex:/[0-9]/';
+        }
+        if ((bool) config('admin.password_policy.require_symbol', true)) {
+            $rules[] = 'regex:/[^A-Za-z0-9]/';
+        }
+
+        return $rules;
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Pages;
 
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,19 @@ class OrderLookup extends Page
     protected static ?string $slug = 'order-lookup';
 
     protected static string $view = 'filament.ops.pages.order-lookup';
+
+    public static function canAccess(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_SUPPORT)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
 
     public string $orderNo = '';
 

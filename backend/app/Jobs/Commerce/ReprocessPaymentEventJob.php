@@ -152,6 +152,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
 
     private function writeAudit(string $action, string $targetType, string $targetId, string $orderNo, array $meta): void
     {
+        $reason = trim((string) ($meta['reason'] ?? 'reprocess_payment_event'));
         DB::table('audit_logs')->insert([
             'org_id' => $this->orgId,
             'actor_admin_id' => null,
@@ -167,6 +168,8 @@ class ReprocessPaymentEventJob implements ShouldQueue
             'ip' => null,
             'user_agent' => 'queue:commerce',
             'request_id' => '',
+            'reason' => $reason,
+            'result' => str_contains($action, 'failed') ? 'failed' : 'success',
             'created_at' => now(),
         ]);
     }

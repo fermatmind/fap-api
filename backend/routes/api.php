@@ -30,6 +30,9 @@ use App\Http\Controllers\API\V0_2\Admin\AdminMigrationController;
 use App\Http\Controllers\API\V0_2\Admin\AdminQueueController;
 use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
 use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
+use App\Http\Controllers\API\V0_2\Admin\AdminGlobalSearchController;
+use App\Http\Controllers\API\V0_2\Admin\AdminGoLiveGateController;
+use App\Http\Controllers\API\V0_2\Admin\AdminOrganizationController;
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
 use App\Http\Controllers\API\V0_3\AttemptReadController;
 use App\Http\Controllers\API\V0_3\AttemptWriteController;
@@ -107,6 +110,12 @@ Route::prefix("v0.2")->middleware([
             Route::get("/content-releases", [AdminContentController::class, "index"]);
             Route::post("/content-releases/{id}/probe", [AdminContentController::class, "probe"]);
             Route::post("/cache/invalidate", [AdminOpsController::class, "invalidateCache"]);
+            Route::get('/organizations', [AdminOrganizationController::class, 'index']);
+            Route::post('/organizations', [AdminOrganizationController::class, 'store']);
+            Route::post('/organizations/import-sync', [AdminOrganizationController::class, 'importSync']);
+            Route::get('/global-search', [AdminGlobalSearchController::class, 'search']);
+            Route::get('/go-live-gate', [AdminGoLiveGateController::class, 'show']);
+            Route::post('/go-live-gate/run', [AdminGoLiveGateController::class, 'run']);
 
             // Legacy admin content release ops
             Route::post(

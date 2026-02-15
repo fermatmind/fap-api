@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Pages;
 
 use App\Models\AdminApproval;
+use App\Services\Audit\AuditLogger;
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -23,6 +25,19 @@ class DeliveryTools extends Page
     protected static ?string $slug = 'delivery-tools';
 
     protected static string $view = 'filament.ops.pages.delivery-tools';
+
+    public static function canAccess(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_SUPPORT)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
 
     public string $orderNo = '';
 
@@ -76,26 +91,22 @@ class DeliveryTools extends Page
             'correlation_id' => (string) Str::uuid(),
         ]);
 
-        DB::table('audit_logs')->insert([
-            'org_id' => $orgId,
-            'actor_admin_id' => $adminId,
-            'action' => 'approval_requested',
-            'target_type' => 'AdminApproval',
-            'target_id' => (string) $approval->id,
-            'meta_json' => json_encode([
+        app(AuditLogger::class)->log(
+            request(),
+            'approval_requested',
+            'AdminApproval',
+            (string) $approval->id,
+            [
                 'actor' => $adminId,
                 'org_id' => $orgId,
                 'order_no' => $orderNo,
-                'reason' => $reason,
                 'correlation_id' => (string) $approval->correlation_id,
                 'type' => AdminApproval::TYPE_MANUAL_GRANT,
                 'tool' => $this->tool,
-            ], JSON_UNESCAPED_UNICODE),
-            'ip' => request()?->ip(),
-            'user_agent' => (string) (request()?->userAgent() ?? ''),
-            'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-            'created_at' => now(),
-        ]);
+            ],
+            $reason,
+            'requested',
+        );
 
         $this->statusMessage = 'Request submitted: '.$approval->id;
     }

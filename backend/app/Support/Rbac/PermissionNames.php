@@ -32,6 +32,20 @@ final class PermissionNames
 
     public const ADMIN_CACHE_INVALIDATE = 'admin.cache.invalidate';
 
+    public const ADMIN_ORG_MANAGE = 'admin.org.manage';
+
+    public const ADMIN_GLOBAL_SEARCH = 'admin.search.global';
+
+    public const ADMIN_GO_LIVE_GATE = 'admin.go_live_gate';
+
+    public const ADMIN_MENU_COMMERCE = 'admin.menu.commerce';
+
+    public const ADMIN_MENU_SUPPORT = 'admin.menu.support';
+
+    public const ADMIN_MENU_SRE = 'admin.menu.sre';
+
+    public const ADMIN_MENU_AUDIT = 'admin.menu.audit';
+
     public const ROLE_OWNER = 'Owner';
 
     public const ROLE_OPS = 'Ops';
@@ -39,6 +53,16 @@ final class PermissionNames
     public const ROLE_CONTENT = 'Content';
 
     public const ROLE_ANALYST = 'Analyst';
+
+    public const ROLE_OPS_FINANCE = 'OpsFinance';
+
+    public const ROLE_OPS_SUPPORT = 'OpsSupport';
+
+    public const ROLE_SRE = 'SRE';
+
+    public const ROLE_SECURITY_AUDITOR = 'SecurityAuditor';
+
+    public const ROLE_OPS_ADMIN = 'OpsAdmin';
 
     /**
      * @return list<string>
@@ -59,6 +83,13 @@ final class PermissionNames
             self::ADMIN_EVENTS_READ,
             self::ADMIN_FUNNEL_READ,
             self::ADMIN_CACHE_INVALIDATE,
+            self::ADMIN_ORG_MANAGE,
+            self::ADMIN_GLOBAL_SEARCH,
+            self::ADMIN_GO_LIVE_GATE,
+            self::ADMIN_MENU_COMMERCE,
+            self::ADMIN_MENU_SUPPORT,
+            self::ADMIN_MENU_SRE,
+            self::ADMIN_MENU_AUDIT,
         ];
     }
 
@@ -68,6 +99,34 @@ final class PermissionNames
     public static function defaultRolePermissions(): array
     {
         return [
+            self::ROLE_OPS_ADMIN => self::all(),
+            self::ROLE_OPS_FINANCE => [
+                self::ADMIN_OPS_READ,
+                self::ADMIN_FINANCE_WRITE,
+                self::ADMIN_APPROVAL_REVIEW,
+                self::ADMIN_MENU_COMMERCE,
+                self::ADMIN_GLOBAL_SEARCH,
+            ],
+            self::ROLE_OPS_SUPPORT => [
+                self::ADMIN_OPS_READ,
+                self::ADMIN_APPROVAL_REVIEW,
+                self::ADMIN_MENU_SUPPORT,
+                self::ADMIN_GLOBAL_SEARCH,
+            ],
+            self::ROLE_SRE => [
+                self::ADMIN_OPS_READ,
+                self::ADMIN_OPS_WRITE,
+                self::ADMIN_EVENTS_READ,
+                self::ADMIN_CACHE_INVALIDATE,
+                self::ADMIN_MENU_SRE,
+            ],
+            self::ROLE_SECURITY_AUDITOR => [
+                self::ADMIN_AUDIT_READ,
+                self::ADMIN_AUDIT_EXPORT,
+                self::ADMIN_MENU_AUDIT,
+            ],
+
+            // Legacy compatibility roles
             self::ROLE_OWNER => self::all(),
             self::ROLE_OPS => [
                 self::ADMIN_OPS_READ,
@@ -77,6 +136,10 @@ final class PermissionNames
                 self::ADMIN_FINANCE_WRITE,
                 self::ADMIN_AUDIT_READ,
                 self::ADMIN_EVENTS_READ,
+                self::ADMIN_MENU_COMMERCE,
+                self::ADMIN_MENU_SUPPORT,
+                self::ADMIN_MENU_SRE,
+                self::ADMIN_GLOBAL_SEARCH,
             ],
             self::ROLE_CONTENT => [
                 self::ADMIN_CONTENT_READ,

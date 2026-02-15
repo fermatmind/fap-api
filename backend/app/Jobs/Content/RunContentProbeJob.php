@@ -77,6 +77,8 @@ class RunContentProbeJob implements ShouldQueue
             'ip' => null,
             'user_agent' => 'queue:content',
             'request_id' => '',
+            'reason' => 'content_probe_job',
+            'result' => ($result['ok'] ?? false) ? 'success' : 'failed',
             'created_at' => now(),
         ]);
     }

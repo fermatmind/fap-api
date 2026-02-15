@@ -85,6 +85,8 @@ class RefundOrderJob implements ShouldQueue
                 'ip' => null,
                 'user_agent' => 'queue:commerce',
                 'request_id' => '',
+                'reason' => $this->reason,
+                'result' => 'success',
                 'created_at' => now(),
             ]);
         });

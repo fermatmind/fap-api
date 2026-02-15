@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Services\Audit\AuditLogger;
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -22,6 +24,19 @@ class SecureLink extends Page
     protected static ?string $slug = 'secure-link';
 
     protected static string $view = 'filament.ops.pages.secure-link';
+
+    public static function canAccess(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_SUPPORT)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
 
     public string $orderNo = '';
 
@@ -65,25 +80,21 @@ class SecureLink extends Page
         $base = rtrim((string) config('app.url', request()?->getSchemeAndHttpHost() ?? ''), '/');
         $this->generatedLink = $base.'/api/v0.2/claim/report?token='.urlencode($token);
 
-        DB::table('audit_logs')->insert([
-            'org_id' => $orgId,
-            'actor_admin_id' => auth((string) config('admin.guard', 'admin'))->id(),
-            'action' => 'secure_link_generated',
-            'target_type' => 'Order',
-            'target_id' => (string) ($order->id ?? ''),
-            'meta_json' => json_encode([
+        app(AuditLogger::class)->log(
+            request(),
+            'secure_link_generated',
+            'Order',
+            (string) ($order->id ?? ''),
+            [
                 'org_id' => $orgId,
                 'order_no' => $orderNo,
-                'reason' => 'support_secure_link',
                 'correlation_id' => (string) Str::uuid(),
                 'token_prefix' => substr($token, 0, 12),
                 'ttl_minutes' => $ttl,
-            ], JSON_UNESCAPED_UNICODE),
-            'ip' => request()?->ip(),
-            'user_agent' => (string) (request()?->userAgent() ?? ''),
-            'request_id' => (string) (request()?->attributes->get('request_id') ?? ''),
-            'created_at' => now(),
-        ]);
+            ],
+            'support_secure_link',
+            'success',
+        );
 
         $this->statusMessage = 'Secure link generated.';
     }

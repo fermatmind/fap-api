@@ -85,7 +85,18 @@ class FmTokenAuth
         $request->attributes->set('fm_user_id', null);
         $request->attributes->set('user_id', null);
 
-        $resolvedUserId = $this->resolvePositiveNumeric($row->user_id ?? null);
+        $rawUserId = $row->user_id ?? null;
+        $resolvedUserId = $this->resolvePositiveNumeric($rawUserId);
+        $rawUserIdString = trim((string) $rawUserId);
+        if ($rawUserIdString !== '' && $resolvedUserId === null) {
+            Log::warning('[SEC] fm_token_user_invalid', [
+                'path' => $request->path(),
+                'user_id_raw' => $rawUserIdString,
+            ]);
+
+            return $this->unauthorizedResponse($request, 'token_user_invalid');
+        }
+
         if ($resolvedUserId !== null) {
             $request->attributes->set('fm_user_id', (string) $resolvedUserId);
 

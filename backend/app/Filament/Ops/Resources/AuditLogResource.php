@@ -5,6 +5,7 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Shared\BaseTenantResource;
 use App\Filament\Ops\Resources\AuditLogResource\Pages;
 use App\Models\AuditLog;
+use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Tables;
@@ -25,6 +26,20 @@ class AuditLogResource extends BaseTenantResource
         return static::getEloquentQuery();
     }
 
+    public static function canViewAny(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_MENU_AUDIT)
+                || $user->hasPermission(PermissionNames::ADMIN_AUDIT_READ)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);
@@ -42,6 +57,8 @@ class AuditLogResource extends BaseTenantResource
                 Tables\Columns\TextColumn::make('target_id')->label('Target ID'),
                 Tables\Columns\TextColumn::make('ip')->toggleable(),
                 Tables\Columns\TextColumn::make('request_id')->toggleable(),
+                Tables\Columns\TextColumn::make('reason')->toggleable(),
+                Tables\Columns\TextColumn::make('result')->badge()->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
@@ -162,6 +179,8 @@ class AuditLogResource extends BaseTenantResource
                             'ip',
                             'user_agent',
                             'request_id',
+                            'reason',
+                            'result',
                             'created_at',
                         ];
 

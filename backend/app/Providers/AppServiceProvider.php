@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Responses\Auth\OpsLoginResponse;
 use App\Models\AdminApproval;
 use App\Models\Attempt;
 use App\Models\BenefitGrant;
@@ -26,11 +27,16 @@ use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
 use App\Support\OrgContext;
 use App\Support\SensitiveDataRedactor;
+use Filament\Http\Responses\Auth\Contracts\LoginResponse as FilamentLoginResponse;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Monolog\LogRecord;
 use RuntimeException;
@@ -250,6 +256,10 @@ class AppServiceProvider extends ServiceProvider
 
             return new ContentStore($chain, [], $legacyDir);
         });
+
+        if (interface_exists(FilamentLoginResponse::class)) {
+            $this->app->bind(FilamentLoginResponse::class, OpsLoginResponse::class);
+        }
     }
 
     /**
@@ -396,6 +406,60 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute($limit)
                 ->by($key)
                 ->response($response('RATE_LIMIT_WEBHOOK', 'Too many webhook requests. Please retry later.'));
+        });
+
+        Event::listen(Failed::class, function (Failed $event): void {
+            if ((string) $event->guard !== (string) config('admin.guard', 'admin')) {
+                return;
+            }
+
+            $ip = request()?->ip() ?? 'unknown';
+            $email = trim((string) (request()?->input('email') ?? ''));
+            $key = 'ops:admin-login:'.$ip;
+            $decay = max(60, (int) config('ops.security.admin_login_decay_seconds', 300));
+            $maxAttempts = max(1, (int) config('ops.security.admin_login_max_attempts', 5));
+            RateLimiter::hit($key, $decay);
+
+            if (\App\Support\SchemaBaseline::hasTable('admin_users') && $email !== '') {
+                $failedCount = ((int) DB::table('admin_users')->where('email', $email)->value('failed_login_count')) + 1;
+                $updates = [
+                    'failed_login_count' => $failedCount,
+                    'updated_at' => now(),
+                ];
+
+                if ($failedCount >= $maxAttempts) {
+                    $updates['locked_until'] = now()->addSeconds($decay);
+                }
+
+                DB::table('admin_users')
+                    ->where('email', $email)
+                    ->update($updates);
+            }
+
+            Log::warning('OPS_ADMIN_LOGIN_FAILED', [
+                'ip' => $ip,
+                'email' => $email !== '' ? $email : null,
+                'attempts' => RateLimiter::attempts($key),
+            ]);
+        });
+
+        Event::listen(Login::class, function (Login $event): void {
+            if ((string) $event->guard !== (string) config('admin.guard', 'admin')) {
+                return;
+            }
+
+            $ip = request()?->ip() ?? 'unknown';
+            $key = 'ops:admin-login:'.$ip;
+            RateLimiter::clear($key);
+
+            $user = $event->user;
+            if (is_object($user) && method_exists($user, 'forceFill') && method_exists($user, 'save')) {
+                $user->forceFill([
+                    'last_login_at' => now(),
+                    'failed_login_count' => 0,
+                    'locked_until' => null,
+                ])->save();
+            }
         });
     }
 }
