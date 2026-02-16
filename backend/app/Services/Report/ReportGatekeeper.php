@@ -243,6 +243,12 @@ class ReportGatekeeper
             return $this->serverError('REPORT_FAILED', 'report generation failed.');
         }
 
+        // Non-MBTI reports are still built by GenericReportBuilder. Re-apply teaser
+        // masking when locked to avoid exposing full payload to unpaid users.
+        if ($locked && strtoupper($scaleCode) !== 'MBTI') {
+            $report = $this->applyTeaser($report, $viewPolicy);
+        }
+
         if ($shouldUseSnapshot && $variant === ReportAccess::VARIANT_FULL) {
             $reportFreeBuilt = $this->buildReportVariant(
                 $scaleCode,

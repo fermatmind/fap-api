@@ -102,6 +102,9 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
         $this->assertIsArray($beforePayload);
         $this->assertArrayNotHasKey('breakdown', $beforePayload);
         $this->assertArrayNotHasKey('answers', $beforePayload);
+        $this->assertSame('[LOCKED]', (string) ($beforePayload['schema_version'] ?? null));
+        $this->assertSame('[LOCKED]', (string) data_get($beforePayload, 'summary.title'));
+        $this->assertNull(data_get($beforePayload, 'summary.final_score'));
 
         $order = $this->withHeaders([
             'X-Anon-Id' => $anonId,
