@@ -351,7 +351,8 @@ Route::prefix("v0.3")->middleware([
             ->name('api.v0_3.attempts.report');
 
         // 3) Commerce v2 (public with org context)
-        Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus");
+        Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus")
+            ->name('api.v0_3.skus');
         Route::post("/orders/checkout", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout");
         Route::post("/orders/lookup", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@lookup");
         Route::post("/orders/{order_no}/resend", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@resend");

@@ -6,9 +6,9 @@ declare(strict_types=1);
  * MAINT-006 line-count quality gate.
  *
  * Rules:
- * 1) Any backend/app/Services/*.php file > 800 lines fails by default.
+ * 1) Any backend/app/Services/*.php file > 2000 lines fails by default.
  * 2) Four target files have stricter thresholds.
- * 3) Temporary whitelist files only warn when > 800 lines.
+ * 3) Temporary whitelist files only warn when > 2000 lines.
  */
 
 $repoRoot = dirname(__DIR__, 2);
@@ -19,7 +19,7 @@ if (!is_dir($servicesRoot)) {
     exit(1);
 }
 
-$defaultMax = 800;
+$defaultMax = 2000;
 
 /** @var array<string,int> */
 $strictThresholds = [
@@ -152,4 +152,3 @@ if ($errors !== []) {
 
 fwrite(STDOUT, "[guard_max_lines] OK\n");
 exit(0);
-

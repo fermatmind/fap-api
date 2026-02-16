@@ -96,5 +96,6 @@ class AttemptWriteSlimControllerTest extends TestCase
         $this->assertIsArray($submit->json('report'));
         $this->assertIsBool($submit->json('report.locked'));
         $this->assertIsString($submit->json('report.access_level'));
+        $this->assertIsString($submit->json('report.variant'));
     }
 }

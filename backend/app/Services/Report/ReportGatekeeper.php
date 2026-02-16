@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Log;
 
 class ReportGatekeeper
 {
+    use ReportGatekeeperTeaserTrait;
+
     private const SNAPSHOT_RETRY_AFTER_SECONDS = 3;
 
     private const DEFAULT_VIEW_POLICY = [
@@ -123,67 +125,115 @@ class ReportGatekeeper
             $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
         }
 
-        $hasAccess = $benefitCode !== ''
+        $hasFullAccess = $benefitCode !== ''
             ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
             : false;
 
-        if ($hasAccess) {
+        $modulesOffered = $this->collectModulesFromOffers((array) ($paywall['offers'] ?? []));
+        if ($modulesOffered === []) {
+            $modulesOffered = ReportAccess::allDefaultModulesOffered();
+        }
+
+        $modulesAllowed = $this->entitlements->getAllowedModulesForAttempt($orgId, $attemptId);
+        if ($modulesAllowed === []) {
+            $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked();
+        }
+        if ($hasFullAccess) {
+            $modulesAllowed = ReportAccess::normalizeModules(array_merge(
+                $modulesAllowed,
+                $modulesOffered,
+                [ReportAccess::MODULE_CORE_FULL, ReportAccess::MODULE_CORE_FREE]
+            ));
+        }
+        if (!in_array(ReportAccess::MODULE_CORE_FREE, $modulesAllowed, true)) {
+            $modulesAllowed[] = ReportAccess::MODULE_CORE_FREE;
+            $modulesAllowed = ReportAccess::normalizeModules($modulesAllowed);
+        }
+
+        $modulesPreview = ReportAccess::normalizeModules($modulesOffered);
+        $hasPaidModuleAccess = count(array_diff($modulesAllowed, [ReportAccess::MODULE_CORE_FREE])) > 0;
+
+        $variant = $hasPaidModuleAccess ? ReportAccess::VARIANT_FULL : ReportAccess::VARIANT_FREE;
+        $reportAccessLevel = $variant === ReportAccess::VARIANT_FREE
+            ? ReportAccess::REPORT_ACCESS_FREE
+            : ReportAccess::REPORT_ACCESS_FULL;
+        $locked = $variant === ReportAccess::VARIANT_FREE;
+
+        $shouldUseSnapshot = $hasFullAccess && $this->modulesCoverOffered($modulesAllowed, $modulesOffered);
+        if ($shouldUseSnapshot) {
             $snapshotRow = DB::table('report_snapshots')
                 ->where('org_id', $orgId)
                 ->where('attempt_id', $attemptId)
                 ->first();
 
-            if (!$snapshotRow) {
-                $this->eventRecorder->record('report_snapshot_missing', $this->numericUserId($userId), [
-                    'scale_code' => $scaleCode,
-                    'attempt_id' => $attemptId,
-                ], [
-                    'org_id' => $orgId,
-                    'attempt_id' => $attemptId,
-                    'pack_id' => (string) ($attempt->pack_id ?? ''),
-                    'dir_version' => (string) ($attempt->dir_version ?? ''),
-                ]);
+            if ($snapshotRow) {
+                $snapshotStatus = strtolower(trim((string) ($snapshotRow->status ?? 'ready')));
+                if ($snapshotStatus === 'pending') {
+                    return $this->responsePayload(
+                        false,
+                        $reportAccessLevel,
+                        $variant,
+                        $viewPolicy,
+                        [],
+                        $paywall,
+                        [
+                            'generating' => true,
+                            'snapshot_error' => false,
+                            'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                        ],
+                        $modulesAllowed,
+                        $modulesOffered,
+                        $modulesPreview
+                    );
+                }
 
-                return $this->serverError('REPORT_SNAPSHOT_MISSING', 'report snapshot missing.');
-            }
+                if ($snapshotStatus === 'failed') {
+                    return $this->responsePayload(
+                        false,
+                        $reportAccessLevel,
+                        $variant,
+                        $viewPolicy,
+                        [],
+                        $paywall,
+                        [
+                            'generating' => false,
+                            'snapshot_error' => true,
+                            'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                        ],
+                        $modulesAllowed,
+                        $modulesOffered,
+                        $modulesPreview
+                    );
+                }
 
-            $snapshotStatus = strtolower(trim((string) ($snapshotRow->status ?? 'ready')));
-            if ($snapshotStatus === 'pending') {
+                $report = $this->decodeReportJson($snapshotRow->report_full_json ?? null);
+                if ($report === []) {
+                    $report = $this->decodeReportJson($snapshotRow->report_json ?? null);
+                }
+
                 return $this->responsePayload(
-                    true,
-                    'full',
+                    $locked,
+                    $reportAccessLevel,
+                    $variant,
                     $viewPolicy,
-                    [],
+                    $report,
                     $paywall,
-                    [
-                        'generating' => true,
-                        'snapshot_error' => false,
-                        'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
-                    ]
+                    [],
+                    $modulesAllowed,
+                    $modulesOffered,
+                    $modulesPreview
                 );
             }
-
-            if ($snapshotStatus === 'failed') {
-                return $this->responsePayload(
-                    true,
-                    'full',
-                    $viewPolicy,
-                    [],
-                    $paywall,
-                    [
-                        'generating' => false,
-                        'snapshot_error' => true,
-                        'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
-                    ]
-                );
-            }
-
-            $report = $this->decodeReportJson($snapshotRow->report_json ?? null);
-
-            return $this->responsePayload(false, 'full', $viewPolicy, $report, $paywall);
         }
 
-        $built = $this->buildReport($scaleCode, $attempt, $result);
+        $built = $this->buildReportVariant(
+            $scaleCode,
+            $attempt,
+            $result,
+            $variant,
+            $modulesAllowed,
+            $modulesPreview
+        );
         if (!($built['ok'] ?? false)) {
             return $built;
         }
@@ -193,9 +243,31 @@ class ReportGatekeeper
             return $this->serverError('REPORT_FAILED', 'report generation failed.');
         }
 
-        $teaser = $this->applyTeaser($report, $viewPolicy);
+        if ($shouldUseSnapshot && $variant === ReportAccess::VARIANT_FULL) {
+            $reportFreeBuilt = $this->buildReportVariant(
+                $scaleCode,
+                $attempt,
+                $result,
+                ReportAccess::VARIANT_FREE,
+                ReportAccess::defaultModulesAllowedForLocked(),
+                $modulesPreview
+            );
+            $reportFree = is_array($reportFreeBuilt['report'] ?? null) ? $reportFreeBuilt['report'] : [];
+            $this->upsertSnapshotVariants($orgId, $attempt, $result, $reportFree, $report);
+        }
 
-        return $this->responsePayload(true, 'free', $viewPolicy, $teaser, $paywall);
+        return $this->responsePayload(
+            $locked,
+            $reportAccessLevel,
+            $variant,
+            $viewPolicy,
+            $report,
+            $paywall,
+            [],
+            $modulesAllowed,
+            $modulesOffered,
+            $modulesPreview
+        );
     }
 
     private function ownedAttemptQuery(
@@ -356,6 +428,9 @@ class ReportGatekeeper
             $periodDays = isset($meta['period_days']) ? (int) $meta['period_days'] : null;
 
             $entitlementId = trim((string) ($meta['entitlement_id'] ?? ''));
+            $modulesIncluded = $this->normalizeModulesIncluded(
+                $item['modules_included'] ?? ($meta['modules_included'] ?? null)
+            );
 
             $offers[] = [
                 'sku' => $sku,
@@ -363,6 +438,7 @@ class ReportGatekeeper
                 'currency' => (string) ($item['currency'] ?? 'CNY'),
                 'title' => (string) ($meta['title'] ?? $meta['label'] ?? ''),
                 'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
+                'modules_included' => $modulesIncluded,
                 'grant' => [
                     'type' => $grantType !== '' ? $grantType : null,
                     'qty' => $grantQty,
@@ -397,6 +473,7 @@ class ReportGatekeeper
 
             $grant = $this->normalizeGrant($item['grant'] ?? null);
             $entitlementId = trim((string) ($item['entitlement_id'] ?? ''));
+            $modulesIncluded = $this->normalizeModulesIncluded($item['modules_included'] ?? null);
 
             $offers[] = [
                 'sku' => $sku,
@@ -404,6 +481,7 @@ class ReportGatekeeper
                 'currency' => (string) ($item['currency'] ?? 'CNY'),
                 'title' => (string) ($item['title'] ?? ''),
                 'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
+                'modules_included' => $modulesIncluded,
                 'grant' => $grant,
             ];
         }
@@ -430,12 +508,126 @@ class ReportGatekeeper
         ];
     }
 
-    private function buildReport(string $scaleCode, Attempt $attempt, Result $result): array
+    private function normalizeModulesIncluded(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $raw = is_array($decoded) ? $decoded : null;
+        }
+        if (!is_array($raw)) {
+            return [];
+        }
+
+        return ReportAccess::normalizeModules($raw);
+    }
+
+    private function collectModulesFromOffers(array $offers): array
+    {
+        $modules = [];
+        foreach ($offers as $offer) {
+            if (!is_array($offer)) {
+                continue;
+            }
+            $modules = array_merge(
+                $modules,
+                $this->normalizeModulesIncluded($offer['modules_included'] ?? null)
+            );
+        }
+
+        return ReportAccess::normalizeModules($modules);
+    }
+
+    private function modulesCoverOffered(array $modulesAllowed, array $modulesOffered): bool
+    {
+        if ($modulesOffered === []) {
+            return true;
+        }
+
+        $allowed = array_fill_keys(ReportAccess::normalizeModules($modulesAllowed), true);
+        foreach (ReportAccess::normalizeModules($modulesOffered) as $module) {
+            if (!isset($allowed[$module])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function upsertSnapshotVariants(
+        int $orgId,
+        Attempt $attempt,
+        Result $result,
+        array $reportFree,
+        array $reportFull
+    ): void {
+        try {
+            $reportFullJson = json_encode($reportFull, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $reportFreeJson = json_encode($reportFree, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            if ($reportFullJson === false || $reportFreeJson === false) {
+                return;
+            }
+
+            $attemptId = (string) ($attempt->id ?? '');
+            if ($attemptId === '') {
+                return;
+            }
+
+            $now = now();
+            $row = [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'order_no' => null,
+                'scale_code' => strtoupper((string) ($attempt->scale_code ?? $result->scale_code ?? 'MBTI')),
+                'pack_id' => (string) ($attempt->pack_id ?? $result->pack_id ?? ''),
+                'dir_version' => (string) ($attempt->dir_version ?? $result->dir_version ?? ''),
+                'scoring_spec_version' => $attempt->scoring_spec_version ?? $result->scoring_spec_version ?? null,
+                'report_engine_version' => 'v1.2',
+                'snapshot_version' => 'v1',
+                'report_json' => $reportFullJson,
+                'report_free_json' => $reportFreeJson,
+                'report_full_json' => $reportFullJson,
+                'status' => 'ready',
+                'last_error' => null,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
+            DB::table('report_snapshots')->insertOrIgnore($row);
+
+            $updates = $row;
+            unset($updates['created_at']);
+            DB::table('report_snapshots')
+                ->where('org_id', $orgId)
+                ->where('attempt_id', $attemptId)
+                ->update($updates);
+        } catch (\Throwable $e) {
+            Log::warning('[REPORT] snapshot_variant_upsert_failed', [
+                'org_id' => $orgId,
+                'attempt_id' => (string) ($attempt->id ?? ''),
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    private function buildReportVariant(
+        string $scaleCode,
+        Attempt $attempt,
+        Result $result,
+        string $variant,
+        array $modulesAllowed = [],
+        array $modulesPreview = []
+    ): array
     {
         try {
             if ($scaleCode === 'MBTI') {
-                $composed = $this->reportComposer->compose($attempt, [
+                $composed = $this->reportComposer->composeVariant($attempt, $variant, [
                     'org_id' => (int) ($attempt->org_id ?? 0),
+                    'variant' => $variant,
+                    'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                        ? ReportAccess::REPORT_ACCESS_FREE
+                        : ReportAccess::REPORT_ACCESS_FULL,
+                    'modules_allowed' => $modulesAllowed,
+                    'modules_preview' => $modulesPreview,
                 ], $result);
                 if (!($composed['ok'] ?? false)) {
                     return [
@@ -480,88 +672,6 @@ class ReportGatekeeper
         }
     }
 
-    private function applyTeaser(array $report, array $policy): array
-    {
-        $free = $policy['free_sections'] ?? [];
-        $blur = (bool) ($policy['blur_others'] ?? true);
-        $pct = (float) ($policy['teaser_percent'] ?? self::DEFAULT_VIEW_POLICY['teaser_percent']);
-
-        if (isset($report['sections']) && is_array($report['sections'])) {
-            $report['sections'] = $this->teaseSections($report['sections'], $free, $blur, $pct);
-            return $report;
-        }
-
-        return $this->teaseSections($report, $free, $blur, $pct);
-    }
-
-    private function teaseSections(array $sections, array $freeSections, bool $blurOthers, float $pct): array
-    {
-        $out = [];
-        $freeSet = [];
-        foreach ($freeSections as $sec) {
-            if (is_string($sec) && $sec !== '') {
-                $freeSet[$sec] = true;
-            }
-        }
-
-        foreach ($sections as $key => $value) {
-            if (isset($freeSet[$key])) {
-                $out[$key] = $value;
-                continue;
-            }
-
-            if (!$blurOthers) {
-                $out[$key] = null;
-                continue;
-            }
-
-            $out[$key] = $this->blurValue($value, $pct);
-        }
-
-        return $out;
-    }
-
-    private function blurValue(mixed $value, float $pct): mixed
-    {
-        if (is_string($value)) {
-            return '[LOCKED]';
-        }
-
-        if (is_array($value)) {
-            if (array_is_list($value)) {
-                $count = count($value);
-                $take = $this->teaserCount($count, $pct);
-                $slice = array_slice($value, 0, $take);
-                $out = [];
-                foreach ($slice as $item) {
-                    $out[] = $this->blurValue($item, $pct);
-                }
-                return $out;
-            }
-
-            $out = [];
-            foreach ($value as $key => $item) {
-                $out[$key] = $this->blurValue($item, $pct);
-            }
-            return $out;
-        }
-
-        return null;
-    }
-
-    private function teaserCount(int $count, float $pct): int
-    {
-        if ($count <= 0 || $pct <= 0) {
-            return 0;
-        }
-
-        $take = (int) ceil($count * $pct);
-        if ($take < 1) $take = 1;
-        if ($take > $count) $take = $count;
-
-        return $take;
-    }
-
     private function decodeReportJson(mixed $raw): array
     {
         if (is_array($raw)) {
@@ -578,19 +688,27 @@ class ReportGatekeeper
     private function responsePayload(
         bool $locked,
         string $accessLevel,
+        string $variant,
         array $viewPolicy,
         array $report,
         array $paywall = [],
-        array $meta = []
+        array $meta = [],
+        array $modulesAllowed = [],
+        array $modulesOffered = [],
+        array $modulesPreview = []
     ): array
     {
         return [
             'ok' => true,
             'locked' => $locked,
-            'access_level' => $accessLevel,
+            'access_level' => ReportAccess::normalizeReportAccessLevel($accessLevel),
+            'variant' => ReportAccess::normalizeVariant($variant),
             'upgrade_sku' => $paywall['upgrade_sku'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'upgrade_sku_effective' => $paywall['upgrade_sku_effective'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'offers' => $paywall['offers'] ?? [],
+            'modules_allowed' => ReportAccess::normalizeModules($modulesAllowed),
+            'modules_offered' => ReportAccess::normalizeModules($modulesOffered),
+            'modules_preview' => ReportAccess::normalizeModules($modulesPreview),
             'view_policy' => $viewPolicy,
             'meta' => $meta,
             'report' => $report,

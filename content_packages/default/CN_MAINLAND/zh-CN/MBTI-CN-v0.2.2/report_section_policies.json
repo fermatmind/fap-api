@@ -1,41 +1,50 @@
 {
-    "schema": "fap.report.section_policies.v1",
-    "items": {
-        "traits": {
-            "target_cards": 3,
-            "min_cards": 3,
-            "max_cards": 4,
-            "dedupe_by": "id",
-            "fallback_append_mode": "append_after_existing",
-            "allow_repeat_fallback": false,
-            "fallback_file": "report_cards_fallback_traits.json"
-        },
-        "career": {
-            "target_cards": 3,
-            "min_cards": 3,
-            "max_cards": 4,
-            "dedupe_by": "id",
-            "fallback_append_mode": "append_after_existing",
-            "allow_repeat_fallback": false,
-            "fallback_file": "report_cards_fallback_career.json"
-        },
-        "growth": {
-            "target_cards": 3,
-            "min_cards": 3,
-            "max_cards": 4,
-            "dedupe_by": "id",
-            "fallback_append_mode": "append_after_existing",
-            "allow_repeat_fallback": false,
-            "fallback_file": "report_cards_fallback_growth.json"
-        },
-        "relationships": {
-            "target_cards": 2,
-            "min_cards": 2,
-            "max_cards": 4,
-            "dedupe_by": "id",
-            "fallback_append_mode": "append_after_existing",
-            "allow_repeat_fallback": false,
-            "fallback_file": "report_cards_fallback_relationships.json"
-        }
+  "schema": "fap.report.section_policies.v1",
+  "items": {
+    "traits": {
+      "target_cards": 3,
+      "min_cards": 3,
+      "max_cards": 4,
+      "dedupe_by": "id",
+      "fallback_append_mode": "append_after_existing",
+      "allow_repeat_fallback": false,
+      "fallback_file": "report_cards_fallback_traits.json"
+    },
+    "career": {
+      "target_cards": 3,
+      "min_cards": 3,
+      "max_cards": 4,
+      "dedupe_by": "id",
+      "fallback_append_mode": "append_after_existing",
+      "allow_repeat_fallback": false,
+      "fallback_file": "report_cards_fallback_career.json"
+    },
+    "growth": {
+      "target_cards": 3,
+      "min_cards": 3,
+      "max_cards": 4,
+      "dedupe_by": "id",
+      "fallback_append_mode": "append_after_existing",
+      "allow_repeat_fallback": false,
+      "fallback_file": "report_cards_fallback_growth.json"
+    },
+    "relationships": {
+      "target_cards": 2,
+      "min_cards": 2,
+      "max_cards": 4,
+      "dedupe_by": "id",
+      "fallback_append_mode": "append_after_existing",
+      "allow_repeat_fallback": false,
+      "fallback_file": "report_cards_fallback_relationships.json"
+    },
+    "stress_recovery": {
+      "target_cards": 2,
+      "min_cards": 2,
+      "max_cards": 4,
+      "dedupe_by": "id",
+      "fallback_append_mode": "append_after_existing",
+      "allow_repeat_fallback": false,
+      "fallback_file": "report_cards_fallback_stress_recovery.json"
     }
+  }
 }

@@ -6,6 +6,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Content\ContentStore;
 use App\Services\Report\HighlightBuilder;
+use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\Log;
 
 trait ReportPayloadAssemblerComposeEntryTrait
@@ -109,6 +110,26 @@ trait ReportPayloadAssemblerComposeEntryTrait
         if ($locale === '') {
             $locale = (string) config('content_packs.default_locale', 'zh-CN');
         }
+
+        $variant = ReportAccess::normalizeVariant(
+            is_string($ctx['variant'] ?? null) ? (string) $ctx['variant'] : null
+        );
+
+        $reportAccessLevel = ReportAccess::normalizeReportAccessLevel(
+            is_string($ctx['report_access_level'] ?? null)
+                ? (string) $ctx['report_access_level']
+                : ($variant === ReportAccess::VARIANT_FREE
+                    ? ReportAccess::REPORT_ACCESS_FREE
+                    : ReportAccess::REPORT_ACCESS_FULL)
+        );
+
+        $modulesAllowed = ReportAccess::normalizeModules(
+            is_array($ctx['modules_allowed'] ?? null) ? (array) $ctx['modules_allowed'] : []
+        );
+
+        $modulesPreview = ReportAccess::normalizeModules(
+            is_array($ctx['modules_preview'] ?? null) ? (array) $ctx['modules_preview'] : []
+        );
 
         $rp = $this->resolver->resolve($scaleCode, $region, $locale, $contentPackageVersion, $dirVersion);
         $chain = $this->toContentPackChain($rp);
@@ -324,6 +345,10 @@ trait ReportPayloadAssemblerComposeEntryTrait
             'ctx' => $ctx,
             'explainPayload' => $explainPayload,
             'ovrCtx' => $ovrCtx,
+            'variant' => $variant,
+            'reportAccessLevel' => $reportAccessLevel,
+            'modulesAllowed' => $modulesAllowed,
+            'modulesPreview' => $modulesPreview,
         ]);
 
         $reportPayload = $this->composeBuildReportPayload([
@@ -354,6 +379,10 @@ trait ReportPayloadAssemblerComposeEntryTrait
             'ovrExplain' => $flow['ovrExplain'] ?? null,
             'assemblerMetaSections' => is_array($flow['assemblerMetaSections'] ?? null) ? $flow['assemblerMetaSections'] : [],
             'assemblerGlobalMeta' => $flow['assemblerGlobalMeta'] ?? null,
+            'variant' => $variant,
+            'reportAccessLevel' => $reportAccessLevel,
+            'modulesAllowed' => $modulesAllowed,
+            'modulesPreview' => $modulesPreview,
         ]);
 
         return [

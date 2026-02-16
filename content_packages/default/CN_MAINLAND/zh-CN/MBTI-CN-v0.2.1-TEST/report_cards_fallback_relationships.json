@@ -1,78 +1,118 @@
 {
-    "schema": "fap.report.cards.fallback.v1",
-    "section": "relationships",
-    "items": [
-        {
-            "id": "fb_rel_01",
-            "title": "关系优势：可靠与有担当",
-            "text": "你会用行动表达重视：兑现承诺、承担责任、把对方的事放在心上。对亲近的人而言，你是稳定感来源。",
-            "tags": [
-                "fallback",
-                "relationships"
-            ]
-        },
-        {
-            "id": "fb_rel_02",
-            "title": "沟通风格：直接但有效",
-            "text": "你更喜欢“说重点、谈解决方案”。这能提高效率，但有时也会让敏感的人感到压力。加一句“我理解你”会更柔和。",
-            "tags": [
-                "fallback",
-                "relationships"
-            ]
-        },
-        {
-            "id": "fb_rel_03",
-            "title": "冲突处理：先把规则说清楚",
-            "text": "你倾向于用边界和原则解决矛盾。建议先对齐共同目标，再讨论规则与分工，能避免把问题变成“谁对谁错”。",
-            "tags": [
-                "fallback",
-                "relationships"
-            ]
-        },
-        {
-            "id": "fb_rel_04",
-            "title": "亲密关系提醒：别把“照顾”当成“控制”",
-            "text": "你想让事情变好，可能会给出很多建议。对方有时需要的是被倾听而不是被修正：先听完，再问“你希望我怎么支持？”",
-            "tags": [
-                "fallback",
-                "relationships"
-            ]
-        },
-        {
-            "id": "fb_rel_05",
-            "title": "表达建议：把肯定说出口",
-            "text": "你心里认可对方，但不一定会说。偶尔把欣赏与感谢讲出来，会显著提升关系的温度与安全感。",
-            "tags": [
-                "fallback",
-                "relationships"
-            ]
-        },
-        {
-            "id": "fb_rel_06",
-            "title": "边界建议：学会“有限度地帮”",
-            "text": "你愿意扛事，容易把别人的责任也扛走。更健康的方式是：明确你能帮到哪一步，剩下的让对方自己完成。",
-            "tags": [
-                "fallback",
-                "relationships"
-            ]
-        },
-        {
-            "id": "fb_rel_07",
-            "title": "友情经营：稳定输出比偶尔爆发更重要",
-            "text": "你不一定高频社交，但你适合做“长期稳定维护”：固定时间问候、关键节点出现、在需要时提供实际支持。",
-            "tags": [
-                "fallback",
-                "relationships"
-            ]
-        },
-        {
-            "id": "fb_rel_08",
-            "title": "关系修复：把“问题”具体化",
-            "text": "当关系卡住时，把抽象的不满变成具体事件、具体感受、具体请求：发生了什么、我感受如何、我希望怎样做。",
-            "tags": [
-                "fallback",
-                "relationships"
-            ]
-        }
-    ]
+  "schema": "fap.report.cards.fallback.v1",
+  "section": "relationships",
+  "items": [
+    {
+      "id": "fb_rel_01",
+      "title": "关系优势：可靠与有担当",
+      "text": "你会用行动表达重视：兑现承诺、承担责任、把对方的事放在心上。对亲近的人而言，你是稳定感来源。",
+      "tags": [
+        "fallback",
+        "relationships"
+      ],
+      "access_level": "free",
+      "module_code": "core_free",
+      "section": "relationships",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_rel_02",
+      "title": "沟通风格：直接但有效",
+      "text": "你更喜欢“说重点、谈解决方案”。这能提高效率，但有时也会让敏感的人感到压力。加一句“我理解你”会更柔和。",
+      "tags": [
+        "fallback",
+        "relationships"
+      ],
+      "access_level": "free",
+      "module_code": "core_free",
+      "section": "relationships",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_rel_03",
+      "title": "冲突处理：先把规则说清楚",
+      "text": "你倾向于用边界和原则解决矛盾。建议先对齐共同目标，再讨论规则与分工，能避免把问题变成“谁对谁错”。",
+      "tags": [
+        "fallback",
+        "relationships"
+      ],
+      "access_level": "free",
+      "module_code": "core_free",
+      "section": "relationships",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_rel_04",
+      "title": "亲密关系提醒：别把“照顾”当成“控制”",
+      "text": "你想让事情变好，可能会给出很多建议。对方有时需要的是被倾听而不是被修正：先听完，再问“你希望我怎么支持？”",
+      "tags": [
+        "fallback",
+        "relationships"
+      ],
+      "access_level": "free",
+      "module_code": "core_free",
+      "section": "relationships",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_rel_05",
+      "title": "表达建议：把肯定说出口",
+      "text": "你心里认可对方，但不一定会说。偶尔把欣赏与感谢讲出来，会显著提升关系的温度与安全感。",
+      "tags": [
+        "fallback",
+        "relationships"
+      ],
+      "access_level": "free",
+      "module_code": "core_free",
+      "section": "relationships",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_rel_06",
+      "title": "边界建议：学会“有限度地帮”",
+      "text": "你愿意扛事，容易把别人的责任也扛走。更健康的方式是：明确你能帮到哪一步，剩下的让对方自己完成。",
+      "tags": [
+        "fallback",
+        "relationships"
+      ],
+      "access_level": "free",
+      "module_code": "core_free",
+      "section": "relationships",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_rel_07",
+      "title": "友情经营：稳定输出比偶尔爆发更重要",
+      "text": "你不一定高频社交，但你适合做“长期稳定维护”：固定时间问候、关键节点出现、在需要时提供实际支持。",
+      "tags": [
+        "fallback",
+        "relationships"
+      ],
+      "access_level": "free",
+      "module_code": "core_free",
+      "section": "relationships",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_rel_08",
+      "title": "关系修复：把“问题”具体化",
+      "text": "当关系卡住时，把抽象的不满变成具体事件、具体感受、具体请求：发生了什么、我感受如何、我希望怎样做。",
+      "tags": [
+        "fallback",
+        "relationships"
+      ],
+      "access_level": "free",
+      "module_code": "core_free",
+      "section": "relationships",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    }
+  ]
 }

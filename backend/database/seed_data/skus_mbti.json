@@ -19,7 +19,12 @@
       "grant_type": "report_unlock",
       "grant_qty": 1,
       "entitlement_id": "report_full",
-      "offer": false
+      "offer": false,
+      "modules_included": [
+        "core_full",
+        "career",
+        "relationships"
+      ]
     }
   },
   {
@@ -40,7 +45,56 @@
       "effective_default": true,
       "grant_type": "report_unlock",
       "grant_qty": 1,
-      "entitlement_id": "report_full"
+      "entitlement_id": "report_full",
+      "modules_included": [
+        "core_full",
+        "career",
+        "relationships"
+      ]
+    }
+  },
+  {
+    "sku": "MBTI_CAREER_99",
+    "anchor_sku": "",
+    "scale_code": "MBTI",
+    "benefit_type": "report_unlock",
+    "benefit_code": "MBTI_CAREER",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 99,
+    "currency": "CNY",
+    "title": "MBTI Career Module",
+    "is_active": true,
+    "metadata_json": {
+      "label": "MBTI career module",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "report_career",
+      "modules_included": [
+        "career"
+      ]
+    }
+  },
+  {
+    "sku": "MBTI_RELATIONSHIP_99",
+    "anchor_sku": "",
+    "scale_code": "MBTI",
+    "benefit_type": "report_unlock",
+    "benefit_code": "MBTI_RELATIONSHIP",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 99,
+    "currency": "CNY",
+    "title": "MBTI Relationship Module",
+    "is_active": true,
+    "metadata_json": {
+      "label": "MBTI relationship module",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "report_relationships",
+      "modules_included": [
+        "relationships"
+      ]
     }
   },
   {
@@ -60,7 +114,8 @@
       "period_days": 30,
       "grant_type": "pro_access",
       "grant_qty": 1,
-      "entitlement_id": "mbti_pro"
+      "entitlement_id": "mbti_pro",
+      "modules_included": []
     }
   },
   {
@@ -80,7 +135,8 @@
       "period_days": 365,
       "grant_type": "pro_access",
       "grant_qty": 1,
-      "entitlement_id": "mbti_pro"
+      "entitlement_id": "mbti_pro",
+      "modules_included": []
     }
   },
   {
@@ -99,7 +155,8 @@
       "label": "MBTI Gift Pack",
       "grant_type": "gift_credits",
       "grant_qty": 1,
-      "entitlement_id": "mbti_gift_credits"
+      "entitlement_id": "mbti_gift_credits",
+      "modules_included": []
     }
   },
   {
@@ -118,7 +175,8 @@
       "label": "MBTI credits pack",
       "grant_type": "credit_pack",
       "grant_qty": 1,
-      "offer": false
+      "offer": false,
+      "modules_included": []
     }
   }
 ]

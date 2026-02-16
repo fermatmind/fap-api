@@ -6,6 +6,7 @@ namespace App\Services\Report\Composer;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Report\ReportAccess;
 use App\Support\OrgContext;
 
 final class ReportComposeContext
@@ -20,6 +21,12 @@ final class ReportComposeContext
         public readonly string $attemptId,
         public readonly Attempt $attempt,
         public readonly ?Result $result,
+        public readonly string $variant,
+        public readonly string $reportAccessLevel,
+        /** @var list<string> */
+        public readonly array $modulesAllowed,
+        /** @var list<string> */
+        public readonly array $modulesPreview,
         public readonly bool $explain,
         public readonly bool $persist,
         public readonly bool $strict,
@@ -50,6 +57,22 @@ final class ReportComposeContext
             $locale = (string) config('content_packs.default_locale', 'zh-CN');
         }
 
+        $variant = ReportAccess::normalizeVariant(
+            is_string($opts['variant'] ?? null) ? (string) $opts['variant'] : null
+        );
+
+        $reportAccessLevel = ReportAccess::normalizeReportAccessLevel(
+            is_string($opts['report_access_level'] ?? null) ? (string) $opts['report_access_level'] : null
+        );
+
+        $modulesAllowed = ReportAccess::normalizeModules(
+            is_array($opts['modules_allowed'] ?? null) ? (array) $opts['modules_allowed'] : []
+        );
+
+        $modulesPreview = ReportAccess::normalizeModules(
+            is_array($opts['modules_preview'] ?? null) ? (array) $opts['modules_preview'] : []
+        );
+
         return new self(
             orgId: $orgId,
             scaleCode: $scaleCode,
@@ -60,6 +83,10 @@ final class ReportComposeContext
             attemptId: (string) $attempt->id,
             attempt: $attempt,
             result: $result,
+            variant: $variant,
+            reportAccessLevel: $reportAccessLevel,
+            modulesAllowed: $modulesAllowed,
+            modulesPreview: $modulesPreview,
             explain: (bool) ($opts['explain'] ?? false),
             persist: array_key_exists('persist', $opts) ? (bool) $opts['persist'] : true,
             strict: (bool) ($opts['strict'] ?? false),

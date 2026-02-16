@@ -224,6 +224,7 @@ class ReportSnapshotB2CTest extends TestCase
             'ok' => true,
             'locked' => false,
             'access_level' => 'full',
+            'variant' => 'full',
         ]);
 
         $reportPayload = $report->json('report');
@@ -245,6 +246,7 @@ class ReportSnapshotB2CTest extends TestCase
             'ok' => true,
             'locked' => false,
             'access_level' => 'full',
+            'variant' => 'full',
         ]);
 
         $this->assertEquals($reportPayload, $reportAfter->json('report'));

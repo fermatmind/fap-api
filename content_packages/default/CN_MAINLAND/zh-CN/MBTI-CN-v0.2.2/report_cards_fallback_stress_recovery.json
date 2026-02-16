@@ -1,86 +1,118 @@
 {
-    "schema": "fap.report.cards.v1",
-    "section": "stress_recovery",
-    "items": [
-        {
-            "id": "fb_sr_01",
-            "title": "压力信号：先识别再处理",
-            "text": "当你开始烦躁、走神、效率下降或更容易生气，这通常不是“你不行”，而是系统在提醒你过载。先承认压力存在，再决定下一步怎么减负。",
-            "tags": [
-                "fallback",
-                "stress_recovery"
-            ],
-            "section": "stress_recovery"
-        },
-        {
-            "id": "fb_sr_02",
-            "title": "快速止损：把问题缩到 10 分钟能做",
-            "text": "把“我好累\/我扛不住了”翻译成一个可执行动作：喝水、洗把脸、整理桌面、写下下一步最小动作（≤10分钟）。先让身体回到可用区，再谈优化。",
-            "tags": [
-                "fallback",
-                "stress_recovery"
-            ],
-            "section": "stress_recovery"
-        },
-        {
-            "id": "fb_sr_03",
-            "title": "呼吸复位：30秒把节奏稳回来",
-            "text": "当你心跳快、思绪乱时，先做 3 轮“慢呼气”：吸气 3 秒，呼气 6 秒。关键是把呼气拉长，让身体收到“安全”的信号。",
-            "tags": [
-                "fallback",
-                "stress_recovery"
-            ],
-            "section": "stress_recovery"
-        },
-        {
-            "id": "fb_sr_04",
-            "title": "情绪降噪：把“感受”写成“事实”",
-            "text": "压力会让你把推测当事实。写一句：发生了什么（事实）\/我感受如何（感受）\/我需要什么（需求）。这样你会更快从内耗回到可行动状态。",
-            "tags": [
-                "fallback",
-                "stress_recovery"
-            ],
-            "section": "stress_recovery"
-        },
-        {
-            "id": "fb_sr_05",
-            "title": "恢复不是躺平：要“可恢复”的休息",
-            "text": "真正恢复不是刷手机到更疲惫，而是让身体和注意力变轻：短走路、伸展、热水澡、安静听音乐、5分钟整理。休息要能让你“回来”。",
-            "tags": [
-                "fallback",
-                "stress_recovery"
-            ],
-            "section": "stress_recovery"
-        },
-        {
-            "id": "fb_sr_06",
-            "title": "边界建议：别把所有请求都当成必须",
-            "text": "压力常来自“全部都要我处理”。给自己一个护栏：我能接住到什么程度？哪些可以延后\/分配\/拒绝？边界不是冷漠，是为了可持续。",
-            "tags": [
-                "fallback",
-                "stress_recovery"
-            ],
-            "section": "stress_recovery"
-        },
-        {
-            "id": "fb_sr_07",
-            "title": "睡眠优先级：先保底再谈效率",
-            "text": "睡眠不足会放大一切问题。先做“保底策略”：固定起床时间、睡前 30 分钟不工作、把明天三件事写下来清空大脑。先稳住底盘。",
-            "tags": [
-                "fallback",
-                "stress_recovery"
-            ],
-            "section": "stress_recovery"
-        },
-        {
-            "id": "fb_sr_08",
-            "title": "求助不是失败：把支持变具体",
-            "text": "当压力持续超过一周，别只说“我很累”。把求助变具体：我需要你帮我做哪一件事\/陪我聊10分钟\/帮我确认一个决定。具体支持更有效。",
-            "tags": [
-                "fallback",
-                "stress_recovery"
-            ],
-            "section": "stress_recovery"
-        }
-    ]
+  "schema": "fap.report.cards.v1",
+  "section": "stress_recovery",
+  "items": [
+    {
+      "id": "fb_sr_01",
+      "title": "压力信号：先识别再处理",
+      "text": "当你开始烦躁、走神、效率下降或更容易生气，这通常不是“你不行”，而是系统在提醒你过载。先承认压力存在，再决定下一步怎么减负。",
+      "tags": [
+        "fallback",
+        "stress_recovery"
+      ],
+      "section": "stress_recovery",
+      "access_level": "free",
+      "module_code": "core_free",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_sr_02",
+      "title": "快速止损：把问题缩到 10 分钟能做",
+      "text": "把“我好累/我扛不住了”翻译成一个可执行动作：喝水、洗把脸、整理桌面、写下下一步最小动作（≤10分钟）。先让身体回到可用区，再谈优化。",
+      "tags": [
+        "fallback",
+        "stress_recovery"
+      ],
+      "section": "stress_recovery",
+      "access_level": "free",
+      "module_code": "core_free",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_sr_03",
+      "title": "呼吸复位：30秒把节奏稳回来",
+      "text": "当你心跳快、思绪乱时，先做 3 轮“慢呼气”：吸气 3 秒，呼气 6 秒。关键是把呼气拉长，让身体收到“安全”的信号。",
+      "tags": [
+        "fallback",
+        "stress_recovery"
+      ],
+      "section": "stress_recovery",
+      "access_level": "free",
+      "module_code": "core_free",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_sr_04",
+      "title": "情绪降噪：把“感受”写成“事实”",
+      "text": "压力会让你把推测当事实。写一句：发生了什么（事实）/我感受如何（感受）/我需要什么（需求）。这样你会更快从内耗回到可行动状态。",
+      "tags": [
+        "fallback",
+        "stress_recovery"
+      ],
+      "section": "stress_recovery",
+      "access_level": "free",
+      "module_code": "core_free",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_sr_05",
+      "title": "恢复不是躺平：要“可恢复”的休息",
+      "text": "真正恢复不是刷手机到更疲惫，而是让身体和注意力变轻：短走路、伸展、热水澡、安静听音乐、5分钟整理。休息要能让你“回来”。",
+      "tags": [
+        "fallback",
+        "stress_recovery"
+      ],
+      "section": "stress_recovery",
+      "access_level": "free",
+      "module_code": "core_free",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_sr_06",
+      "title": "边界建议：别把所有请求都当成必须",
+      "text": "压力常来自“全部都要我处理”。给自己一个护栏：我能接住到什么程度？哪些可以延后/分配/拒绝？边界不是冷漠，是为了可持续。",
+      "tags": [
+        "fallback",
+        "stress_recovery"
+      ],
+      "section": "stress_recovery",
+      "access_level": "free",
+      "module_code": "core_free",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_sr_07",
+      "title": "睡眠优先级：先保底再谈效率",
+      "text": "睡眠不足会放大一切问题。先做“保底策略”：固定起床时间、睡前 30 分钟不工作、把明天三件事写下来清空大脑。先稳住底盘。",
+      "tags": [
+        "fallback",
+        "stress_recovery"
+      ],
+      "section": "stress_recovery",
+      "access_level": "free",
+      "module_code": "core_free",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    },
+    {
+      "id": "fb_sr_08",
+      "title": "求助不是失败：把支持变具体",
+      "text": "当压力持续超过一周，别只说“我很累”。把求助变具体：我需要你帮我做哪一件事/陪我聊10分钟/帮我确认一个决定。具体支持更有效。",
+      "tags": [
+        "fallback",
+        "stress_recovery"
+      ],
+      "section": "stress_recovery",
+      "access_level": "free",
+      "module_code": "core_free",
+      "priority": 0,
+      "desc": "Content fallback guidance."
+    }
+  ]
 }

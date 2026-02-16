@@ -146,6 +146,7 @@ class ReportPaywallTeaserTest extends TestCase
             'ok' => true,
             'locked' => true,
             'access_level' => 'free',
+            'variant' => 'free',
             'upgrade_sku' => 'MBTI_REPORT_FULL',
             'upgrade_sku_effective' => 'MBTI_REPORT_FULL_199',
         ]);

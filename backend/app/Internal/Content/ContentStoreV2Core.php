@@ -4,6 +4,7 @@ namespace App\Internal\Content;
 
 use App\Support\CacheKeys;
 use App\Services\Report\ReportContentNormalizer;
+use App\Services\Report\ReportAccess;
 use App\Services\Content\ContentPack;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -203,6 +204,15 @@ final class ContentStoreV2Core
      */
     public function loadCardsDoc(string $section): array
     {
+        $compiled = $this->loadCompiledCardsDoc($section);
+        if (is_array($compiled)) {
+            return $this->normalizeCardsDocFromRawDoc(
+                $compiled,
+                "compiled/cards.normalized.json#{$section}",
+                $section
+            );
+        }
+
         $basename = "report_cards_{$section}.json";
         $doc = $this->loadJsonByBasenamePreferAssetKey('cards', $basename);
         $this->lightSchemaCheck($doc, $basename);
@@ -231,11 +241,16 @@ final class ContentStoreV2Core
  */
 public function loadSectionPolicies(): array
 {
+    $compiled = $this->loadCompiledSectionsSpec();
+    if (is_array($compiled)) {
+        $doc = $compiled;
+    } else {
     $basename = 'report_section_policies.json';
 
     // 优先用 policies 这个 assetKey；找不到会自动走 scan-any-asset + legacy ctx（取决于 env 开关）
-    $doc = $this->loadJsonByBasenamePreferAssetKey('policies', $basename);
-    $this->lightSchemaCheck($doc, $basename);
+        $doc = $this->loadJsonByBasenamePreferAssetKey('policies', $basename);
+        $this->lightSchemaCheck($doc, $basename);
+    }
 
     // 兼容：sections / items
     $sections = $doc['sections'] ?? ($doc['items'] ?? null);
@@ -407,6 +422,12 @@ public function loadFallbackCards(string $section): array
 
 public function loadSelectRules(): array
 {
+    $compiledRules = $this->loadCompiledRulesDoc();
+    if (is_array($compiledRules)) {
+        $rules = $compiledRules['rules'] ?? $compiledRules;
+        return is_array($rules) ? $rules : [];
+    }
+
     // 规则文件名固定
     $filename = 'report_select_rules.json';
 
@@ -853,6 +874,16 @@ public function loadReportOverrides(): array
                 $it['section'] = trim((string)$it['section']);
             }
 
+            $it['access_level'] = ReportAccess::normalizeCardAccessLevel(
+                is_string($it['access_level'] ?? null) ? (string) $it['access_level'] : null
+            );
+
+            $moduleCode = trim((string) ($it['module_code'] ?? ''));
+            if ($moduleCode === '') {
+                $moduleCode = ReportAccess::defaultModuleCodeForSection((string) $it['section']);
+            }
+            $it['module_code'] = strtolower($moduleCode);
+
             // title/desc
             $it['title'] = is_string($it['title'] ?? null) ? (string)$it['title'] : '';
             $it['desc']  = is_string($it['desc'] ?? null)  ? (string)$it['desc']  : '';
@@ -922,6 +953,107 @@ public function loadReportOverrides(): array
             'items' => $normItems,
             'rules' => $rules,
         ];
+    }
+
+    private function loadCompiledCardsDoc(string $section): ?array
+    {
+        foreach ($this->chain as $pack) {
+            if (!($pack instanceof ContentPack)) {
+                continue;
+            }
+
+            $relPath = 'compiled/cards.normalized.json';
+            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $relPath;
+            if (!is_file($abs)) {
+                continue;
+            }
+
+            $json = $this->readJsonFromPath($pack, $relPath, $abs);
+            if (!is_array($json)) {
+                continue;
+            }
+
+            $sections = $json['sections'] ?? null;
+            if (is_array($sections) && is_array($sections[$section] ?? null)) {
+                Log::info('[STORE] compiled_cards_hit', [
+                    'pack_id' => $pack->packId(),
+                    'version' => $pack->version(),
+                    'section' => $section,
+                ]);
+
+                return $sections[$section];
+            }
+
+            if (is_array($json['items'] ?? null) && is_array($json['rules'] ?? null)) {
+                Log::info('[STORE] compiled_cards_hit_legacy', [
+                    'pack_id' => $pack->packId(),
+                    'version' => $pack->version(),
+                    'section' => $section,
+                ]);
+
+                return $json;
+            }
+        }
+
+        return null;
+    }
+
+    private function loadCompiledRulesDoc(): ?array
+    {
+        foreach ($this->chain as $pack) {
+            if (!($pack instanceof ContentPack)) {
+                continue;
+            }
+
+            $relPath = 'compiled/rules.normalized.json';
+            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $relPath;
+            if (!is_file($abs)) {
+                continue;
+            }
+
+            $json = $this->readJsonFromPath($pack, $relPath, $abs);
+            if (!is_array($json)) {
+                continue;
+            }
+
+            Log::info('[STORE] compiled_rules_hit', [
+                'pack_id' => $pack->packId(),
+                'version' => $pack->version(),
+            ]);
+
+            return $json;
+        }
+
+        return null;
+    }
+
+    private function loadCompiledSectionsSpec(): ?array
+    {
+        foreach ($this->chain as $pack) {
+            if (!($pack instanceof ContentPack)) {
+                continue;
+            }
+
+            $relPath = 'compiled/sections.spec.json';
+            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $relPath;
+            if (!is_file($abs)) {
+                continue;
+            }
+
+            $json = $this->readJsonFromPath($pack, $relPath, $abs);
+            if (!is_array($json)) {
+                continue;
+            }
+
+            Log::info('[STORE] compiled_sections_hit', [
+                'pack_id' => $pack->packId(),
+                'version' => $pack->version(),
+            ]);
+
+            return $json;
+        }
+
+        return null;
     }
 
     private function loadJsonByBasenamePreferAssetKey(string $assetKey, string $basename): array
