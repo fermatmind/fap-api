@@ -240,6 +240,7 @@ class AttemptsStartSubmitTest extends TestCase
             'ok' => true,
             'locked' => true,
             'access_level' => 'free',
+            'variant' => 'free',
         ]);
 
         $this->assertNotNull($report->json('view_policy'));

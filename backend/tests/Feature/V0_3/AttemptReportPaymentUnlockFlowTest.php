@@ -95,6 +95,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
             'ok' => true,
             'locked' => true,
             'access_level' => 'free',
+            'variant' => 'free',
         ]);
 
         $beforePayload = $reportBefore->json('report');
@@ -140,6 +141,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
             'ok' => true,
             'locked' => false,
             'access_level' => 'full',
+            'variant' => 'full',
         ]);
 
         $afterPayload = $reportAfter->json('report');

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Overrides;
 use App\Services\Report\ReportContentNormalizer;
+use App\Services\Template\TemplateContext;
+use App\Services\Template\TemplateEngine;
 
 use Illuminate\Support\Facades\Log;
 
@@ -1348,7 +1350,24 @@ private function modeKeepOnly(array $list, array $matches): array
         if (!is_string($k) || $k === '') continue;
 
         if (is_string($v)) {
-    $v = $this->renderTemplateString($v, $context);
+    try {
+        $v = app(TemplateEngine::class)->renderString(
+            $v,
+            TemplateContext::fromArray([
+                'type_code' => (string)($context['type_code'] ?? ''),
+                'section_key' => (string)($context['section_key'] ?? ''),
+                'content_package_dir' => (string)($context['content_package_dir'] ?? ''),
+                'target' => (string)($context['target'] ?? ''),
+                'ctx' => is_array($context['ctx'] ?? null) ? $context['ctx'] : [],
+            ]),
+            'text'
+        );
+    } catch (\Throwable $e) {
+        Log::warning('[OVR] template_render_failed', [
+            'field' => $k,
+            'error' => $e->getMessage(),
+        ]);
+    }
 }
 
 // ✅ ignore null (do not overwrite)
@@ -1400,30 +1419,6 @@ private function applyArrayFieldOp(array $cur, array $spec): array
         default => $vals, // replace
     };
 }
-
-    private function renderTemplateString(string $s, array $context): string
-    {
-        $vars = [
-            'type_code' => (string)($context['type_code'] ?? ''),
-            'section_key' => (string)($context['section_key'] ?? ''),
-            'content_package_dir' => (string)($context['content_package_dir'] ?? ''),
-            'target' => (string)($context['target'] ?? ''),
-        ];
-
-        return preg_replace_callback('/\{\{\s*([a-zA-Z0-9_\.]+)\s*\}\}/', function ($m) use ($vars, $context) {
-            $key = $m[1] ?? '';
-            if ($key === '') return $m[0];
-
-            // allow ctx.<key>
-            if (str_starts_with($key, 'ctx.')) {
-                $dot = substr($key, 4);
-                $val = $this->getByDotPath((array)($context['ctx'] ?? []), $dot);
-                return is_scalar($val) ? (string)$val : '';
-            }
-
-            return array_key_exists($key, $vars) ? (string)$vars[$key] : $m[0];
-        }, $s) ?? $s;
-    }
 
 /**
  * Deep merge (NON-NULL):

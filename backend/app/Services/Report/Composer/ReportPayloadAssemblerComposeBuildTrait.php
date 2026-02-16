@@ -4,6 +4,7 @@ namespace App\Services\Report\Composer;
 
 use App\Services\Content\ContentStore;
 use App\Services\Report\HighlightBuilder;
+use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\Log;
 
 trait ReportPayloadAssemblerComposeBuildTrait
@@ -32,6 +33,15 @@ trait ReportPayloadAssemblerComposeBuildTrait
         $overridesOrderBuckets = is_array($input['overridesOrderBuckets'] ?? null) ? $input['overridesOrderBuckets'] : [];
         $explainPayload = $input['explainPayload'] ?? null;
         $ovrCtx = is_array($input['ovrCtx'] ?? null) ? $input['ovrCtx'] : [];
+        $variant = ReportAccess::normalizeVariant(
+            is_string($input['variant'] ?? null) ? (string) $input['variant'] : null
+        );
+        $modulesAllowed = ReportAccess::normalizeModules(
+            is_array($input['modulesAllowed'] ?? null) ? (array) $input['modulesAllowed'] : []
+        );
+        $modulesPreview = ReportAccess::normalizeModules(
+            is_array($input['modulesPreview'] ?? null) ? (array) $input['modulesPreview'] : []
+        );
 
         $sectionPoliciesDoc = $this->loadSectionPoliciesDocFromPackChain($chain);
 
@@ -79,7 +89,10 @@ trait ReportPayloadAssemblerComposeBuildTrait
                 $tags,
                 $axisInfoForCards,
                 $contentPackageDir,
-                $wantCards($sectionKey)
+                $wantCards($sectionKey),
+                $variant,
+                $modulesAllowed,
+                $modulesPreview
             );
 
             Log::info('[CARDS] selected (base)', [
@@ -98,8 +111,14 @@ trait ReportPayloadAssemblerComposeBuildTrait
                 $ovrCtx
             );
 
+            $sectionModuleCode = ReportAccess::defaultModuleCodeForSection((string) $sectionKey);
+            $sectionLocked = $sectionModuleCode !== ReportAccess::MODULE_CORE_FREE
+                && !in_array($sectionModuleCode, $modulesAllowed, true);
+
             $sections[$sectionKey] = [
                 'cards' => $finalCards,
+                'module_code' => $sectionModuleCode,
+                'locked' => $sectionLocked,
             ];
         }
 

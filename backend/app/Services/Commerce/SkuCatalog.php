@@ -3,6 +3,7 @@
 namespace App\Services\Commerce;
 
 use App\Models\Sku;
+use App\Services\Report\ReportAccess;
 
 class SkuCatalog
 {
@@ -57,6 +58,7 @@ class SkuCatalog
                 'currency' => (string) ($row->currency ?? ''),
                 'is_active' => (bool) ($row->is_active ?? false),
                 'meta_json' => $meta,
+                'modules_included' => $this->normalizeModulesIncluded($meta['modules_included'] ?? null),
             ];
         }
 
@@ -232,6 +234,22 @@ class SkuCatalog
         }
 
         return is_array($meta) ? $meta : [];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeModulesIncluded(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $raw = is_array($decoded) ? $decoded : null;
+        }
+        if (!is_array($raw)) {
+            return [];
+        }
+
+        return ReportAccess::normalizeModules($raw);
     }
 
     private function isAnchorMeta(array $meta): bool

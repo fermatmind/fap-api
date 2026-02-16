@@ -26,7 +26,10 @@ final class SectionCardGenerator
         array $userTags,
         array $axisInfo = [],
         ?string $legacyContentPackageDir = null,
-        ?int $wantN = null
+        ?int $wantN = null,
+        ?string $variant = null,
+        array $modulesAllowed = [],
+        array $modulesPreview = []
     ): array {
         $store = new ContentStore($chain);
 
@@ -52,7 +55,10 @@ final class SectionCardGenerator
             $legacyContentPackageDir,
             $rules,
             $selectRules,
-            $wantN
+            $wantN,
+            $variant,
+            $modulesAllowed,
+            $modulesPreview
         );
     }
 
@@ -70,7 +76,10 @@ final class SectionCardGenerator
         ?string $legacyContentPackageDir = null,
         array $rules = [],
         array $selectRules = [],
-        ?int $wantN = null
+        ?int $wantN = null,
+        ?string $variant = null,
+        array $modulesAllowed = [],
+        array $modulesPreview = []
     ): array {
         // ==========
         // rules：强依赖 store 的标准输出
@@ -138,6 +147,9 @@ final class SectionCardGenerator
 
         // seed（用于 shuffle 稳定）
         $seed = $this->stableSeed($userSet, $axisInfo);
+        $variant = ReportAccess::normalizeVariant($variant);
+        $modulesAllowed = ReportAccess::normalizeModules($modulesAllowed);
+        $modulesPreview = ReportAccess::normalizeModules($modulesPreview);
 
         /** @var RuleEngine $re */
         $re = app(RuleEngine::class);
@@ -204,6 +216,14 @@ final class SectionCardGenerator
 
         $evals = array_merge($evals1, $evals2);
 
+        $selectedItems = $this->filterItemsByVariantAndModule(
+            $section,
+            $selectedItems,
+            $variant,
+            $modulesAllowed,
+            $modulesPreview
+        );
+
         // 如果引擎一个都没选出来，直接兜底
         if (empty($selectedItems)) {
             $out = $this->fallbackCards($section, $minCards);
@@ -232,6 +252,8 @@ final class SectionCardGenerator
                 'tags'     => is_array($it['tags'] ?? null) ? $it['tags'] : [],
                 'priority' => (int)($it['priority'] ?? 0),
                 'match'    => $it['match'] ?? null,
+                'access_level' => ReportAccess::normalizeCardAccessLevel((string) ($it['access_level'] ?? '')),
+                'module_code' => trim((string) ($it['module_code'] ?? ReportAccess::defaultModuleCodeForSection($section))),
             ];
         }, $selectedItems);
 
@@ -267,7 +289,10 @@ final class SectionCardGenerator
         array $userTags,
         array $axisInfo,
         ?string $legacyContentPackageDir = null,
-        ?int $wantN = null
+        ?int $wantN = null,
+        ?string $variant = null,
+        array $modulesAllowed = [],
+        array $modulesPreview = []
     ): array {
         $doc = $store->loadCardsDoc($section);
 
@@ -283,7 +308,10 @@ final class SectionCardGenerator
             $legacyContentPackageDir,
             $rules,
             $selectRules,
-            $wantN
+            $wantN,
+            $variant,
+            $modulesAllowed,
+            $modulesPreview
         );
     }
 
@@ -357,8 +385,58 @@ final class SectionCardGenerator
                 'tags'     => ['fallback'],
                 'priority' => 0,
                 'match'    => null,
+                'access_level' => ReportAccess::CARD_ACCESS_FREE,
+                'module_code' => ReportAccess::MODULE_CORE_FREE,
             ];
         }
+        return $out;
+    }
+
+    private function filterItemsByVariantAndModule(
+        string $section,
+        array $items,
+        string $variant,
+        array $modulesAllowed,
+        array $modulesPreview
+    ): array {
+        $levels = array_fill_keys(ReportAccess::allowedCardLevelsForVariant($variant), true);
+        $allowedModules = array_fill_keys($modulesAllowed, true);
+        $previewModules = array_fill_keys($modulesPreview, true);
+
+        $out = [];
+        foreach ($items as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $accessLevel = ReportAccess::normalizeCardAccessLevel((string) ($item['access_level'] ?? ''));
+            if (!isset($levels[$accessLevel])) {
+                continue;
+            }
+
+            $moduleCode = trim((string) ($item['module_code'] ?? ''));
+            if ($moduleCode === '') {
+                $moduleCode = ReportAccess::defaultModuleCodeForSection($section);
+            }
+            $moduleCode = strtolower($moduleCode);
+
+            $isModuleUnlocked = isset($allowedModules[$moduleCode]) || $moduleCode === ReportAccess::MODULE_CORE_FREE;
+            if ($accessLevel === ReportAccess::CARD_ACCESS_PAID && !$isModuleUnlocked) {
+                continue;
+            }
+
+            if ($accessLevel === ReportAccess::CARD_ACCESS_PREVIEW && !$isModuleUnlocked) {
+                $previewEnabled = empty($previewModules) || isset($previewModules[$moduleCode]);
+                if (!$previewEnabled) {
+                    continue;
+                }
+            }
+
+            $item['access_level'] = $accessLevel;
+            $item['module_code'] = $moduleCode;
+            $out[] = $item;
+        }
+
         return $out;
     }
 }

@@ -54,6 +54,8 @@ class ReportSnapshotStore
             'report_engine_version' => self::REPORT_ENGINE_VERSION,
             'snapshot_version' => self::SNAPSHOT_VERSION,
             'report_json' => '{}',
+            'report_free_json' => '{}',
+            'report_full_json' => '{}',
             'status' => 'pending',
             'last_error' => null,
             'created_at' => $now,
@@ -64,6 +66,8 @@ class ReportSnapshotStore
 
         $updates = [
             'report_json' => '{}',
+            'report_free_json' => '{}',
+            'report_full_json' => '{}',
             'report_engine_version' => self::REPORT_ENGINE_VERSION,
             'snapshot_version' => self::SNAPSHOT_VERSION,
             'scoring_spec_version' => $scoringSpecVersion,
@@ -128,13 +132,39 @@ class ReportSnapshotStore
         $dirVersion = (string) ($attempt->dir_version ?? '');
         $scoringSpecVersion = $attempt->scoring_spec_version ?? $result->scoring_spec_version ?? null;
 
-        $report = $this->buildReport($scaleCode, $attempt, $result);
-        if (!is_array($report)) {
+        $modulesFull = ReportAccess::normalizeModules(array_merge(
+            [ReportAccess::MODULE_CORE_FREE],
+            ReportAccess::allDefaultModulesOffered()
+        ));
+        $modulesPreview = ReportAccess::allDefaultModulesOffered();
+
+        $reportFull = $this->buildVariantReport(
+            $scaleCode,
+            $attempt,
+            $result,
+            ReportAccess::VARIANT_FULL,
+            $modulesFull,
+            $modulesPreview
+        );
+        if (!is_array($reportFull)) {
             return $this->serverError('REPORT_FAILED', 'report generation failed.');
         }
 
-        $reportJson = json_encode($report, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if ($reportJson === false) {
+        $reportFree = $this->buildVariantReport(
+            $scaleCode,
+            $attempt,
+            $result,
+            ReportAccess::VARIANT_FREE,
+            ReportAccess::defaultModulesAllowedForLocked(),
+            $modulesPreview
+        );
+        if (!is_array($reportFree)) {
+            return $this->serverError('REPORT_FAILED', 'report generation failed.');
+        }
+
+        $reportFullJson = json_encode($reportFull, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $reportFreeJson = json_encode($reportFree, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if ($reportFullJson === false || $reportFreeJson === false) {
             return $this->serverError('REPORT_ENCODE_FAILED', 'report json encode failed.');
         }
 
@@ -150,7 +180,9 @@ class ReportSnapshotStore
             'scoring_spec_version' => $scoringSpecVersion,
             'report_engine_version' => self::REPORT_ENGINE_VERSION,
             'snapshot_version' => self::SNAPSHOT_VERSION,
-            'report_json' => $reportJson,
+            'report_json' => $reportFullJson,
+            'report_free_json' => $reportFreeJson,
+            'report_full_json' => $reportFullJson,
             'status' => 'ready',
             'last_error' => null,
             'created_at' => $now,
@@ -269,11 +301,24 @@ class ReportSnapshotStore
         return in_array($role, ['member', 'viewer'], true);
     }
 
-    private function buildReport(string $scaleCode, Attempt $attempt, Result $result): ?array
+    private function buildVariantReport(
+        string $scaleCode,
+        Attempt $attempt,
+        Result $result,
+        string $variant,
+        array $modulesAllowed = [],
+        array $modulesPreview = []
+    ): ?array
     {
         if ($scaleCode === 'MBTI') {
-            $composed = $this->reportComposer->compose($attempt, [
+            $composed = $this->reportComposer->composeVariant($attempt, $variant, [
                 'org_id' => (int) ($attempt->org_id ?? 0),
+                'variant' => $variant,
+                'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                    ? ReportAccess::REPORT_ACCESS_FREE
+                    : ReportAccess::REPORT_ACCESS_FULL,
+                'modules_allowed' => $modulesAllowed,
+                'modules_preview' => $modulesPreview,
             ], $result);
             if (!($composed['ok'] ?? false)) {
                 return null;
@@ -306,17 +351,35 @@ class ReportSnapshotStore
             'updated_at' => isset($row->updated_at) && $row->updated_at !== null ? (string) $row->updated_at : null,
         ];
 
-        $reportJson = $row->report_json ?? null;
-        if (is_string($reportJson)) {
-            $decoded = json_decode($reportJson, true);
-            $payload['report_json'] = is_array($decoded) ? $decoded : [];
-        } elseif (is_array($reportJson)) {
-            $payload['report_json'] = $reportJson;
-        } else {
-            $payload['report_json'] = [];
+        $reportJson = $this->decodeJsonColumn($row->report_json ?? null);
+        $reportFull = $this->decodeJsonColumn($row->report_full_json ?? null);
+        $reportFree = $this->decodeJsonColumn($row->report_free_json ?? null);
+
+        if ($reportFull === []) {
+            $reportFull = $reportJson;
+        }
+        if ($reportFree === []) {
+            $reportFree = $reportJson;
         }
 
+        $payload['report_json'] = $reportJson;
+        $payload['report_full_json'] = $reportFull;
+        $payload['report_free_json'] = $reportFree;
+
         return $payload;
+    }
+
+    private function decodeJsonColumn(mixed $raw): array
+    {
+        if (is_array($raw)) {
+            return $raw;
+        }
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            return is_array($decoded) ? $decoded : [];
+        }
+
+        return [];
     }
 
     private function snapshotWriteQuery(int $orgId, string $attemptId): \Illuminate\Database\Query\Builder

@@ -11,6 +11,7 @@ use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\SkuCatalog;
+use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
@@ -355,6 +356,14 @@ class PaymentWebhookHandlerCore
                     }
 
                     if (count($updateRow) > 1) {
+                        $skuMetaForOrder = $this->decodeMeta($skuRow->meta_json ?? null);
+                        $modulesIncludedForOrder = $this->normalizeModulesIncluded($skuMetaForOrder['modules_included'] ?? null);
+                        if ($modulesIncludedForOrder !== []) {
+                            $orderMeta = $this->decodeMeta($order->meta_json ?? null);
+                            $orderMeta['modules_included'] = $modulesIncludedForOrder;
+                            $updateRow['meta_json'] = json_encode($orderMeta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                        }
+
                         DB::table('orders')
                             ->where('order_no', $orderNo)
                             ->update($updateRow);
@@ -423,12 +432,9 @@ class PaymentWebhookHandlerCore
                             }
 
                             $expiresAt = null;
-                            $skuMeta = $skuRow->meta_json ?? null;
-                            if (is_string($skuMeta)) {
-                                $decoded = json_decode($skuMeta, true);
-                                $skuMeta = is_array($decoded) ? $decoded : null;
-                            }
-                            if (is_array($skuMeta)) {
+                            $skuMeta = $this->decodeMeta($skuRow->meta_json ?? null);
+                            $modulesIncluded = $this->normalizeModulesIncluded($skuMeta['modules_included'] ?? null);
+                            if ($skuMeta !== []) {
                                 $durationDays = isset($skuMeta['duration_days']) ? (int) $skuMeta['duration_days'] : 0;
                                 if ($durationDays > 0) {
                                     $expiresAt = now()->addDays($durationDays)->toISOString();
@@ -443,7 +449,8 @@ class PaymentWebhookHandlerCore
                                 $attemptId,
                                 $orderNo,
                                 $scopeOverride,
-                                $expiresAt
+                                $expiresAt,
+                                $modulesIncluded
                             );
 
                             if (!($grant['ok'] ?? false)) {
@@ -796,6 +803,41 @@ class PaymentWebhookHandlerCore
         }
 
         return (int) $userId;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeMeta(mixed $meta): array
+    {
+        if (is_array($meta)) {
+            return $meta;
+        }
+
+        if (is_string($meta) && $meta !== '') {
+            $decoded = json_decode($meta, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeModulesIncluded(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $raw = is_array($decoded) ? $decoded : null;
+        }
+        if (!is_array($raw)) {
+            return [];
+        }
+
+        return ReportAccess::normalizeModules($raw);
     }
 
     private function buildEventMeta(array $orderMeta, array $extra): array

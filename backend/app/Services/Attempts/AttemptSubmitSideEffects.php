@@ -228,6 +228,7 @@ final class AttemptSubmitSideEffects
                 'ok' => false,
                 'locked' => true,
                 'access_level' => 'free',
+                'variant' => 'free',
             ];
 
             return;
@@ -245,6 +246,7 @@ final class AttemptSubmitSideEffects
                 'ok' => false,
                 'locked' => true,
                 'access_level' => 'free',
+                'variant' => 'free',
             ];
 
             return;

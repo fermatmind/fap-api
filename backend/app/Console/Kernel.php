@@ -19,6 +19,8 @@ use App\Console\Commands\ArchiveColdData;
 use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SyncScaleSlugs;
+use App\Console\Commands\ContentLint;
+use App\Console\Commands\ContentCompile;
 use App\Console\Commands\Ops\PartitionAttemptAnswerRows;
 
 class Kernel extends ConsoleKernel
@@ -46,6 +48,8 @@ class Kernel extends ConsoleKernel
         PaymentsPruneEvents::class,
         SeedScaleRegistry::class,
         SyncScaleSlugs::class,
+        ContentLint::class,
+        ContentCompile::class,
         PartitionAttemptAnswerRows::class,
     ];
 

@@ -80,3 +80,18 @@ bash scripts/supply_chain_gate.sh ./_audit/fap-api-0212-5
 1. `EVIDENCE-1: REQUIRED ENTRY`
 2. `EVIDENCE-2: REQUIRED STRUCTURE`
 3. `EVIDENCE-3: CONTAMINATION HITS`
+
+## 6) 内容包闸门命令
+
+上线前必须执行：
+
+```bash
+cd backend
+php artisan content:lint --all
+php artisan content:compile --all
+```
+
+失败解释：
+
+- `content:lint` 失败：存在 JSON 结构错误、缺少必填字段、`access_level` 非法值、section 不在 policies、或模板变量不在白名单。
+- `content:compile` 失败：通常由 lint 未通过导致，或编译产物写入失败。修复后重跑可覆盖生成 `compiled/*` 文件。

@@ -34,6 +34,12 @@ class ReportPayloadAssembler
 
     public function assemble(ReportComposeContext $context): array
     {
-        return $this->composeInternal($context->attempt, $context->options, $context->result);
+        $options = $context->options;
+        $options['variant'] = $context->variant;
+        $options['report_access_level'] = $context->reportAccessLevel;
+        $options['modules_allowed'] = $context->modulesAllowed;
+        $options['modules_preview'] = $context->modulesPreview;
+
+        return $this->composeInternal($context->attempt, $options, $context->result);
     }
 }

@@ -28,6 +28,8 @@ class ReportSnapshot extends Model
         'report_engine_version',
         'snapshot_version',
         'report_json',
+        'report_free_json',
+        'report_full_json',
         'status',
         'last_error',
         'created_at',
@@ -37,6 +39,8 @@ class ReportSnapshot extends Model
     protected $casts = [
         'org_id' => 'integer',
         'report_json' => 'array',
+        'report_free_json' => 'array',
+        'report_full_json' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

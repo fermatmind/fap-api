@@ -47,7 +47,9 @@
           "side": "E",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_EI_I_strong",
@@ -76,7 +78,9 @@
           "side": "I",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_SN_S_strong",
@@ -105,7 +109,9 @@
           "side": "S",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_SN_N_strong",
@@ -134,7 +140,9 @@
           "side": "N",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_TF_T_strong",
@@ -163,7 +171,9 @@
           "side": "T",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_TF_F_strong",
@@ -192,7 +202,9 @@
           "side": "F",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_JP_J_strong",
@@ -221,7 +233,9 @@
           "side": "J",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_JP_P_strong",
@@ -250,7 +264,9 @@
           "side": "P",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_AT_A_strong",
@@ -279,7 +295,9 @@
           "side": "A",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_AT_T_strong",
@@ -308,7 +326,9 @@
           "side": "T",
           "min_delta": 12
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_EI_E_intro",
@@ -336,7 +356,9 @@
           "side": "E",
           "min_delta": 0
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_EI_I_intro",
@@ -364,7 +386,9 @@
           "side": "I",
           "min_delta": 0
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_JP_J_intro",
@@ -392,7 +416,9 @@
           "side": "J",
           "min_delta": 0
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_JP_P_intro",
@@ -420,7 +446,9 @@
           "side": "P",
           "min_delta": 0
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_AT_A_intro",
@@ -448,7 +476,9 @@
           "side": "A",
           "min_delta": 0
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_axis_AT_T_intro",
@@ -476,7 +506,9 @@
           "side": "T",
           "min_delta": 0
         }
-      }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
     },
     {
       "id": "sr_core_01",
@@ -497,7 +529,9 @@
         "tone:neutral",
         "topic:recovery"
       ],
-      "priority": 100
+      "priority": 100,
+      "access_level": "preview",
+      "module_code": "core_full"
     },
     {
       "id": "sr_core_02",
@@ -518,7 +552,9 @@
         "tone:warm",
         "topic:emotion"
       ],
-      "priority": 96
+      "priority": 96,
+      "access_level": "preview",
+      "module_code": "core_full"
     },
     {
       "id": "sr_core_03",
@@ -539,7 +575,9 @@
         "tone:neutral",
         "topic:boundary"
       ],
-      "priority": 94
+      "priority": 94,
+      "access_level": "preview",
+      "module_code": "core_full"
     },
     {
       "id": "sr_core_04",
@@ -560,7 +598,9 @@
         "tone:warm",
         "topic:rest"
       ],
-      "priority": 92
+      "priority": 92,
+      "access_level": "preview",
+      "module_code": "core_full"
     },
     {
       "id": "sr_core_05",
@@ -581,7 +621,9 @@
         "tone:neutral",
         "topic:sleep"
       ],
-      "priority": 90
+      "priority": 90,
+      "access_level": "preview",
+      "module_code": "core_full"
     },
     {
       "id": "sr_core_06",
@@ -602,7 +644,9 @@
         "tone:warm",
         "topic:support"
       ],
-      "priority": 88
+      "priority": 88,
+      "access_level": "preview",
+      "module_code": "core_full"
     }
   ]
 }

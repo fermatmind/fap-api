@@ -162,6 +162,7 @@ class Pr19CommerceSeeder extends Seeder
             $periodDays = isset($meta['period_days']) ? (int) $meta['period_days'] : null;
 
             $entitlementId = trim((string) ($meta['entitlement_id'] ?? ''));
+            $modulesIncluded = $this->normalizeModulesIncluded($meta['modules_included'] ?? null);
 
             $offers[] = [
                 'sku' => $sku,
@@ -169,6 +170,7 @@ class Pr19CommerceSeeder extends Seeder
                 'currency' => (string) ($item['currency'] ?? 'CNY'),
                 'title' => (string) ($meta['title'] ?? $meta['label'] ?? ''),
                 'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
+                'modules_included' => $modulesIncluded,
                 'grant' => [
                     'type' => $grantType !== '' ? $grantType : null,
                     'qty' => $grantQty,
@@ -178,5 +180,30 @@ class Pr19CommerceSeeder extends Seeder
         }
 
         return $offers;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeModulesIncluded(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $raw = is_array($decoded) ? $decoded : null;
+        }
+        if (!is_array($raw)) {
+            return [];
+        }
+
+        $out = [];
+        foreach ($raw as $module) {
+            $module = strtolower(trim((string) $module));
+            if ($module === '') {
+                continue;
+            }
+            $out[$module] = true;
+        }
+
+        return array_keys($out);
     }
 }

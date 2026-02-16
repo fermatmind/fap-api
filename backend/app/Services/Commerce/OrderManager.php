@@ -2,6 +2,7 @@
 
 namespace App\Services\Commerce;
 
+use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -44,6 +45,10 @@ class OrderManager
         if (!$skuRow) {
             return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
         }
+
+        $skuMeta = $this->decodeMeta($skuRow->meta_json ?? null);
+        $modulesIncluded = $this->normalizeModulesIncluded($skuMeta['modules_included'] ?? null);
+
         $unitPriceCents = (int) ($skuRow->price_cents ?? 0);
         if ($unitPriceCents < 0) {
             return $this->badRequest('PRICE_INVALID', 'price invalid.');
@@ -75,10 +80,16 @@ class OrderManager
             $effectiveSku,
             $entitlementId,
             $idempotencyKey,
-            $useIdempotency
+            $useIdempotency,
+            $modulesIncluded
         ): array {
             $orderNo = 'ord_' . Str::uuid();
             $now = now();
+
+            $orderMeta = [];
+            if ($modulesIncluded !== []) {
+                $orderMeta['modules_included'] = $modulesIncluded;
+            }
 
             $row = [
                 'id' => (string) Str::uuid(),
@@ -100,6 +111,9 @@ class OrderManager
                 'requested_sku' => $requestedSku,
                 'effective_sku' => $effectiveSku !== '' ? $effectiveSku : $skuToLookup,
                 'entitlement_id' => $entitlementId,
+                'meta_json' => $orderMeta !== []
+                    ? json_encode($orderMeta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                    : null,
             ];
 
             if ($useIdempotency) {
@@ -420,6 +434,41 @@ class OrderManager
     private function isStubEnabled(): bool
     {
         return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeMeta(mixed $meta): array
+    {
+        if (is_array($meta)) {
+            return $meta;
+        }
+
+        if (is_string($meta) && $meta !== '') {
+            $decoded = json_decode($meta, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeModulesIncluded(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $raw = is_array($decoded) ? $decoded : null;
+        }
+        if (!is_array($raw)) {
+            return [];
+        }
+
+        return ReportAccess::normalizeModules($raw);
     }
 
     private function notFound(string $code, string $message): array

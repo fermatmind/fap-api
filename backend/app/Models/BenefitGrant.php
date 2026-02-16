@@ -30,11 +30,13 @@ class BenefitGrant extends Model
         'order_no',
         'source_order_id',
         'source_event_id',
+        'meta_json',
     ];
 
     protected $casts = [
         'org_id' => 'integer',
         'expires_at' => 'datetime',
+        'meta_json' => 'array',
     ];
 
     public static function allowOrgZeroContext(): bool

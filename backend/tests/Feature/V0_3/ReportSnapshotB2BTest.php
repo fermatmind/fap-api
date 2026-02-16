@@ -232,6 +232,7 @@ class ReportSnapshotB2BTest extends TestCase
             'ok' => true,
             'locked' => false,
             'access_level' => 'full',
+            'variant' => 'full',
         ]);
     }
 }
