@@ -27,7 +27,7 @@ class AttemptWriteController extends Controller
     {
         $payload = $request->validated();
 
-        $anonId = trim((string) ($payload['anon_id'] ?? $request->header('X-Anon-Id') ?? ''));
+        $anonId = trim((string) ($request->attributes->get('client_anon_id') ?? $payload['anon_id'] ?? ''));
         if ($anonId !== '') {
             $payload['anon_id'] = $anonId;
         }
