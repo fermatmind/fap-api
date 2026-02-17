@@ -210,14 +210,23 @@ class HighIdorOwnership404Test extends TestCase
             ->assertStatus(404);
     }
 
-    public function test_anon_b_cannot_get_anon_a_order(): void
+    public function test_header_only_order_read_returns_degraded_payload_without_sensitive_fields(): void
     {
         $orderNo = 'ord_pr60_' . Str::lower(Str::random(10));
         $this->insertOrderForAnonA($orderNo);
 
-        $this->withHeaders(['X-Anon-Id' => self::ANON_B])
-            ->getJson("/api/v0.3/orders/{$orderNo}")
-            ->assertStatus(404);
+        $response = $this->withHeaders(['X-Anon-Id' => self::ANON_B])
+            ->getJson("/api/v0.3/orders/{$orderNo}");
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('ownership_verified', false)
+            ->assertJsonPath('order_no', $orderNo)
+            ->assertJsonPath('status', 'pending');
+
+        $response->assertJsonMissingPath('order');
+        $response->assertJsonMissingPath('amount_cents');
+        $response->assertJsonMissingPath('currency');
     }
 
     public function test_anon_b_cannot_lookup_anon_a_order_via_v02_lookup_order(): void

@@ -104,22 +104,40 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
-        $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
+        $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no, true);
         if (!($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
             $message = trim((string) ($result['message'] ?? ''));
             abort($status, $message !== '' ? $message : 'request failed.');
         }
 
+        $order = $result['order'];
+        $ownershipVerified = (bool) ($result['ownership_verified'] ?? true);
+        $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
+        $message = $this->publicOrderMessage((string) ($order->status ?? ''));
+
+        if (!$ownershipVerified) {
+            return response()->json([
+                'ok' => true,
+                'ownership_verified' => false,
+                'order_no' => $order->order_no ?? null,
+                'attempt_id' => $order->target_attempt_id ?? null,
+                'status' => $status,
+                'updated_at' => $order->updated_at ?? null,
+                'message' => $message,
+            ]);
+        }
+
         return response()->json([
             'ok' => true,
-            'order' => $result['order'],
-            'order_no' => $result['order']->order_no ?? null,
-            'attempt_id' => $result['order']->target_attempt_id ?? null,
-            'status' => $this->normalizePublicOrderStatus((string) ($result['order']->status ?? '')),
-            'message' => $this->publicOrderMessage((string) ($result['order']->status ?? '')),
-            'amount_cents' => $result['order']->amount_cents ?? $result['order']->amount_total ?? null,
-            'currency' => $result['order']->currency ?? null,
+            'ownership_verified' => true,
+            'order' => $order,
+            'order_no' => $order->order_no ?? null,
+            'attempt_id' => $order->target_attempt_id ?? null,
+            'status' => $status,
+            'message' => $message,
+            'amount_cents' => $order->amount_cents ?? $order->amount_total ?? null,
+            'currency' => $order->currency ?? null,
         ]);
     }
 
