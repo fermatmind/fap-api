@@ -171,52 +171,51 @@ class OrderManager
         ];
     }
 
-    public function getOrder(int $orgId, ?string $userId, ?string $anonId, string $orderNo): array
+    public function getOrder(
+        int $orgId,
+        ?string $userId,
+        ?string $anonId,
+        string $orderNo,
+        bool $allowAnonymousFallback = false
+    ): array
     {
         $orderNo = trim($orderNo);
         if ($orderNo === '') {
             return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
         }
 
-        $query = DB::table('orders')
+        $order = DB::table('orders')
             ->where('order_no', $orderNo)
-            ->where('org_id', $orgId);
+            ->where('org_id', $orgId)
+            ->first();
+
+        if (!$order) {
+            return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+        }
 
         $uid = $this->trimOrNull($userId);
         $aid = $this->trimOrNull($anonId);
 
-        if ($uid === null && $aid === null) {
-            $query->whereRaw('1=0');
-        } else {
-            $query->where(function ($q) use ($uid, $aid) {
-                $applied = false;
+        $ownedByUser = $uid !== null && $uid === $this->trimOrNull($order->user_id ?? null);
+        $ownedByAnon = $aid !== null && $aid === $this->trimOrNull($order->anon_id ?? null);
+        $ownershipVerified = $ownedByUser || $ownedByAnon;
 
-                if ($uid !== null) {
-                    $q->where('user_id', $uid);
-                    $applied = true;
-                }
-                if ($aid !== null) {
-                    if ($applied) {
-                        $q->orWhere('anon_id', $aid);
-                    } else {
-                        $q->where('anon_id', $aid);
-                        $applied = true;
-                    }
-                }
-                if (!$applied) {
-                    $q->whereRaw('1=0');
-                }
-            });
+        if (!$ownershipVerified && $uid === null && $aid === null && $allowAnonymousFallback) {
+            return [
+                'ok' => true,
+                'order' => $order,
+                'ownership_verified' => false,
+            ];
         }
 
-        $order = $query->first();
-        if (!$order) {
+        if (!$ownershipVerified) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
         return [
             'ok' => true,
             'order' => $order,
+            'ownership_verified' => true,
         ];
     }
 
