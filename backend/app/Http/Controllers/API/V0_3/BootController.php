@@ -79,8 +79,8 @@ class BootController extends Controller
         $candidates = [
             $request->attributes->get('anon_id'),
             $request->attributes->get('fm_anon_id'),
+            $request->attributes->get('client_anon_id'),
             $request->query('anon_id'),
-            $request->header('X-Anon-Id'),
         ];
 
         foreach ($candidates as $candidate) {

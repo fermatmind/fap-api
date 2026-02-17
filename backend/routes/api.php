@@ -317,7 +317,7 @@ Route::prefix("v0.3")->middleware([
         ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
         ->name('api.v0_3.webhooks.payment');
 
-    Route::middleware(ResolveOrgContext::class)->group(function () use ($payProviders) {
+    Route::middleware([\App\Http\Middleware\ResolveAnonId::class, ResolveOrgContext::class])->group(function () use ($payProviders) {
         // 0) Boot (flags + experiments)
         Route::get("/boot", [BootV0_3Controller::class, "show"]);
         Route::get("/flags", [BootV0_3Controller::class, "flags"]);
