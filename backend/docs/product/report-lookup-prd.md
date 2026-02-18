@@ -1,184 +1,258 @@
-# Report Lookup（找回）+ 身份体系（SSOT）PRD（Phase A/B）
+# Report Lookup + Identity PRD (Canonical, Code-Truth)
 
-版本：v0.1  
-作者：FermatMind  
-更新时间：2026-01-18
+Status: Active (Canonical)
+Version: 2026-02-18
+Scope: v0.2 lookup/auth/identity runtime contract
 
----
+## 0. Canonical Rule
+- Canonical document: `backend/docs/product/report-lookup-prd.md`
+- Deprecated mirror: `docs/product/report-lookup-prd.md`
+- Route/code source of truth:
+  - `backend/routes/api.php`
+  - `cd backend && php artisan route:list --path=api --except-vendor --json`
+  - Controllers:
+    - `backend/app/Http/Controllers/LookupController.php`
+    - `backend/app/Http/Controllers/API/V0_2/AuthPhoneController.php`
+    - `backend/app/Http/Controllers/API/V0_2/AuthProviderController.php`
+    - `backend/app/Http/Controllers/API/V0_2/IdentityController.php`
 
-## 0. 一句话目标
+This PRD documents only landed behavior. Any endpoint not in routes is Draft/Planned.
 
-在不强制注册的前提下，让用户随时找回报告，并通过**手机号主账号（SSOT）**实现跨端共享资产，同时把“找回”变成留存与转化的关键环节。
+## 1. Phase A Scope (Implemented)
 
----
+### 1.1 Route Matrix
+| Status | Method | Path | Auth | Middleware/Notes |
+|---|---|---|---|---|
+| Implemented | `GET` | `/api/v0.2/lookup/ticket/{code}` | `Auth: Public` | `throttle:api_public` + LookupController IP limiter |
+| Implemented | `POST` | `/api/v0.2/lookup/device` | `Auth: FmTokenAuth` | `throttle:api_public`, user/anon ownership constrained |
+| Implemented | `POST` | `/api/v0.2/lookup/order` | `Auth: FmTokenAuth` | runtime switch `LOOKUP_ORDER` must be enabled |
+| Implemented | `POST` | `/api/v0.2/auth/phone/send_code` | `Auth: Public` | `throttle:api_auth`, PIPL consent required |
+| Implemented | `POST` | `/api/v0.2/auth/phone/verify` | `Auth: Public` | `throttle:api_auth`, PIPL consent required |
+| Implemented | `POST` | `/api/v0.2/auth/provider` | `Auth: Public` | `throttle:api_auth`, provider enum validated |
+| Implemented | `POST` | `/api/v0.2/me/identities/bind` | `Auth: FmTokenAuth` | provider binding with conflict checks |
+| Implemented | `GET` | `/api/v0.2/me/identities` | `Auth: FmTokenAuth` | list identities |
 
-## 0.2 验收口径（必须满足）
+## 2. Implemented Contracts (Detail)
 
-### A. 找回方式（至少两种可用）
-- P0：Ticket Code 找回（匿名最强兜底）
-- P0：Device Resume（本设备无感继续/找回）
-- P0.5：手机号登录/绑定后进入“我的报告”（/me 资产库）
+### 2.1 Ticket Lookup
+Endpoint: `GET /api/v0.2/lookup/ticket/{code}`
 
-### B. 跨端共享成立（Phase B）
-- 同手机号在不同端登录/绑定后，能看到同一份 reports / orders（同一 user_id）
+Auth: `Auth: Public`
 
-### C. 最小售后 SOP
-- 提供客服决策树、红线与工单字段
+Request:
+- Path `code`: normalized to uppercase.
+- Must match regex `^FMT-[A-Z0-9]{8}$`.
 
-### D. 邮箱字段协议与合规说明
-- 可先不发邮件，但能收集并说明用途（仅找回/通知，不用于营销，除非额外同意）
+Success `200`:
+```json
+{
+  "ok": true,
+  "attempt_id": "<uuid>",
+  "ticket_code": "FMT-ABCDEFGH",
+  "result_api": "/api/v0.2/attempts/<uuid>/result",
+  "report_api": "/api/v0.2/attempts/<uuid>/report",
+  "result_page": null,
+  "report_page": null
+}
+```
 
-### E. 合规：PIPL 强制勾选
-- 所有“获取手机号/发送验证码/提交邮箱”等动作前必须显式勾选协议
-- 不能默认勾选、不能点击按钮自动勾选
-- 未勾选必须阻止动作并提示
+Error shape:
+- `429 RATE_LIMITED`
+- `422 INVALID_FORMAT`
+- `404 NOT_FOUND`
 
----
+Ownership/Scope:
+- Org-scoped (`resolveOrgId`) lookup.
 
-## 1. 总体策略：三层身份模型（核心）
+### 2.2 Device Lookup
+Endpoint: `POST /api/v0.2/lookup/device`
 
-### L0 匿名资产层（默认永远可用）
-- Ticket Code（票据码）：匿名、跨设备、最强兜底（对标 123test）
-- Device Resume（设备召回）：同设备无感继续（localStorage/device ids）
+Auth: `Auth: FmTokenAuth`
 
-### L1 轻绑定层（可选增强）
-- 手机号绑定：跨端共享总线（SSOT），售后兜底
-- 邮箱绑定：仅做找回/通知通道（不作为账号主键）
+Request:
+- `attempt_ids` required array.
+- Empty array allowed, returns empty `items`.
+- Max 20 ids (excess truncated).
+- Each id must be UUID string.
 
-### L2 账号层（重度/付费用户）
-- 手机号验证码即登录/注册（Web/App 必备）
-- 第三方登录（微信/抖音/百度）+ 绑定手机号
-- “我的报告 /me”资产库（长期留存载体）
+Success `200`:
+```json
+{
+  "ok": true,
+  "items": [
+    {
+      "attempt_id": "<uuid>",
+      "ticket_code": "FMT-ABCDEFGH",
+      "result_api": "/api/v0.2/attempts/<uuid>/result",
+      "report_api": "/api/v0.2/attempts/<uuid>/report"
+    }
+  ]
+}
+```
 
-**强制原则：匿名可用永远成立；但在关键节点引导绑定。**
+Error shape:
+- `429 RATE_LIMITED`
+- `422 INVALID_PAYLOAD`
+- `422 INVALID_ID`
+- `404 NOT_FOUND`
 
----
+Ownership/Scope:
+- Org + ownership constrained by `fm_user_id` / `fm_anon_id`.
 
-## 2. 多平台账户共享：硬规则（SSOT）
+### 2.3 Order Lookup
+Endpoint: `POST /api/v0.2/lookup/order`
 
-### Rule A：手机号是唯一跨端强身份（Single Source of Truth）
-- 手机号验证成功 → 唯一确定 user_id
-- wechat/douyin/baidu 的 openid/uid 仅作为 identities（登录方式），不是跨端主键
+Auth: `Auth: FmTokenAuth`
 
-### Rule B：绑定手机号 = 资产归集开关
-在任意端完成手机号绑定后：
-1) 当前会话匿名资产（device/ticket/最近 attempts）→ 归集到该 user_id  
-2) 当前平台 identity（wechat/douyin/baidu）→ 写入 identities，绑定到同一 user_id  
-3) 后续同手机号在任意端登录 → 看到同一份资产
+Request:
+- `order_no` required (body first, query fallback).
 
-### Rule C：MVP 冲突策略简单化
-- MVP 只做“匿名 → 手机号账号”的单向归集（APPEND）
-- 不做复杂账号合并/双向同步
-- 冲突：禁止静默改绑，提示走人工/SOP
+Runtime gates:
+- Feature toggle-like runtime switch `LOOKUP_ORDER` (via `RuntimeConfig`).
+- Requires supported order table/column (`orders|payments`, `order_no|order_id|order_number|order_sn`).
 
----
+Success `200`:
+```json
+{
+  "ok": true,
+  "order_no": "ORD-123",
+  "attempt_id": "<uuid>",
+  "result_api": "/api/v0.2/attempts/<uuid>/result",
+  "report_api": "/api/v0.2/attempts/<uuid>/report"
+}
+```
 
-## 3. 用户侧入口与体验闭环（Phase A 最小闭环）
+Error shape:
+- `429 RATE_LIMITED`
+- `422 INVALID_ORDER`
+- `200 ok=false NOT_ENABLED`
+- `200 ok=false NOT_SUPPORTED`
+- `404 NOT_FOUND`
 
-### 3.1 结果页（最关键）
-必须展示 Ticket Code，并强调保存：
-- 文案：这是您通往内心世界的唯一票据，请截图保存
-- 交互：复制 + toast
+### 2.4 Phone OTP Send
+Endpoint: `POST /api/v0.2/auth/phone/send_code`
 
-防丢失钩子（至少做 1 个）：
-- 结果生成完成（loading 结束）
-- 支付成功（未来）
-- Exit Intent（未来）
+Auth: `Auth: Public`
 
-### 3.2 首页 Smart Resume（建议）
-若本地有 latest_attempt_ids：
-- Banner：继续查看 / 绑定手机号保存 / 复制票据码 / 重新开始
+Request (controller runtime validation):
+- `phone` required string max 32
+- `scene` optional string max 32, default `login`
+- `anon_id` optional string max 128
+- `device_key` optional string max 256
+- `consent` accepted required (`consent` or legacy `agree`)
 
-### 3.3 找回中心 /lookup（可选 UI）
-Phase A 可以不做 UI，但后端必须有接口支持：
-- /lookup/ticket/{code}
-- /lookup/device
+Normalization/Policy:
+- Phone normalization supports `+...` and CN 11-digit -> `+86...`.
+- PIPL consent is enforced.
+- IP + phone scoped rate limits.
 
-### 3.4 我的报告 /me（Phase A 核心验收）
-登录后能看到报告列表 기억：
-- 数据源：GET /api/v0.2/me/attempts（fm_token 门禁）
-- 点击进入：/pages/result/result?attempt_id=...
+Success `200`:
+```json
+{
+  "ok": true,
+  "phone": "+8613812345678",
+  "scene": "login",
+  "ttl_seconds": 300,
+  "dev_code": "123456"
+}
+```
+`dev_code` only appears in dev-like environments.
 
----
+### 2.5 Phone OTP Verify
+Endpoint: `POST /api/v0.2/auth/phone/verify`
 
-## 4. 当前实现状态（Phase A 已完成项）
+Auth: `Auth: Public`
 
-### 4.1 后端接口（已上线 / 已门禁）
-- GET /api/v0.2/attempts/{id}/result   ✅ fm_token 门禁
-- GET /api/v0.2/attempts/{id}/report   ✅ fm_token 门禁
-- POST /api/v0.2/lookup/device         ✅ fm_token 门禁
-- GET /api/v0.2/me/attempts            ✅ fm_token 门禁（使用 middleware 注入 identity）
+Request (controller runtime validation):
+- `phone` required string max 32
+- `code` required string max 16
+- `scene` optional string max 32, default `login`
+- `anon_id` optional string max 128
+- `device_key` optional string max 256
+- `consent` accepted required
 
-### 4.2 小程序（已完成项）
-- 401 自动跳 login 并回跳原页 ✅
-- result 页：优先后端 result/report 渲染 ✅
-- history 页：使用 /me/attempts 作为数据源 ✅
-- ticket_code 在 result 页展示与复制（带 PIPL 勾选）✅
+Behavior:
+- Verifies OTP.
+- Finds/creates user by phone.
+- Performs MVP asset append (`anon_id -> user`) when available.
+- Issues FM token.
 
----
+Success `200`:
+```json
+{
+  "ok": true,
+  "token": "<fm_token>",
+  "expires_at": "<iso8601>",
+  "user": {
+    "id": "<user_id>",
+    "phone": "+8613812345678"
+  }
+}
+```
 
-## 5. Phase A（本周可 demo，必须过验收）
+### 2.6 Provider Login
+Endpoint: `POST /api/v0.2/auth/provider`
 
-### Phase A 要交付
-1) 后端最小闭环：ticket_code 可查 attempt/report（lookup/ticket）  
-2) 结果页展示 + 复制 ticket_code  
-3) “我的报告”列表（/me/attempts）  
-4) 文档交付：PRD + SOP + identity/email spec  
-5) 合规：PIPL 强制勾选写死口径（并在关键动作实现）
+Auth: `Auth: Public`
 
----
+Request (`AuthProviderRequest`):
+- `provider` required enum: `wechat|douyin|baidu|web|app`
+- `provider_code` required string max 128
+- `anon_id` optional string max 128
 
-## 6. Phase B（手机号 SSOT + 跨端共享）
+Behavior:
+- If identity not bound: return `ok=true, bound=false`.
+- If bound: issue FM token and return `bound=true`.
+- `provider_code=dev` is local/testing only.
 
-### Phase B 要交付
-- 手机号一键取号（小程序）+ Web/App OTP（至少一个端可用）
-- users / identities 数据模型落地
-- 登录后把匿名 attempts 归集到 user_id（APPEND）
-- /me/attempts 从 user_id 拉历史（不靠 anon/device）
+### 2.7 Bind Identity
+Endpoint: `POST /api/v0.2/me/identities/bind`
 
----
+Auth: `Auth: FmTokenAuth`
 
-## 7. 风控与合规（写死口径）
+Request (`BindIdentityRequest`):
+- `provider` required enum: `wechat|douyin|baidu|web|app`
+- `provider_uid` required string max 128
+- `consent` required accepted
+- `meta` optional object
 
-### 7.1 风控
-- OTP/SMS 限频：手机号/IP 分级限频
-- 验证码错误次数锁定
-- lookup 限频：ticket/phone/email/order 分开限频
-- 防枚举：email/phone 建议盲回应（MVP 可弱化但必须限频+审计）
+Success `200`:
+```json
+{
+  "ok": true,
+  "identity": {
+    "provider": "wechat",
+    "provider_uid": "..."
+  }
+}
+```
 
-### 7.2 合规
-- 明确用途：仅用于登录、资产同步、找回、售后通知
-- 不用于营销（除非用户另行勾选）
-- 数据保留期：建议 12 个月可配置
-- 删除/解绑：注销后 attempts 匿名化处理策略
+Error shape:
+- `401 UNAUTHORIZED`
+- `429 RATE_LIMITED`
+- business errors from `IdentityService` (e.g. conflict) with mapped status.
 
----
+## 3. Draft / Planned (Not Landed)
 
-## 8. 接口清单（协议级，不写代码）
+The following are not present in `backend/routes/api.php` and must not be treated as released:
 
-### Auth / Bind
-- /auth/wx_phone（小程序一键取号换 token 的入口，Phase A 为 dev stub）
-- /me/phone/bind（Phase B）
-- /me/email（Phase A 允许只收集，不发信）
+| Status | Planned Path | Note |
+|---|---|---|
+| Draft/Planned | `POST /api/v0.2/lookup/phone` | not in route table |
+| Draft/Planned | `POST /api/v0.2/lookup/email` | not in route table |
+| Draft/Planned | `POST /api/v0.2/me/import/device` | not in route table |
+| Draft/Planned | `POST /api/v0.2/me/import/ticket` | not in route table |
+| Draft/Planned | `POST /api/v0.2/me/import/order` | not in route table |
 
-### Lookup
-- /lookup/ticket/{code}
-- /lookup/device
-- /lookup/phone（Phase B）
-- /lookup/order（Phase B/P0.5）
-- /lookup/email（Phase D）
+## 4. Compliance + Security Baseline (Landed)
+- PIPL consent is mandatory on phone OTP send/verify (`consent` accepted).
+- Lookup flows are auditable (`LookupEventLogger`).
+- Rate limits exist at route middleware and controller service levels.
+- `lookup/device` and `lookup/order` are identity-gated (`FmTokenAuth`).
 
-### /me（资产中心）
-- GET /me/attempts
-- POST /me/import/device（Phase B）
-- POST /me/import/ticket（Phase B）
-- POST /me/import/order（Phase B）
+## 5. Open Gaps (Documented, not hidden)
+- FormRequest classes exist for phone send/verify with stricter E.164 + scene enum, but current routes execute controller-level validation.
+- `lookup/order` currently returns some failures as `200 + ok=false` (legacy compatibility), not strictly 4xx.
 
----
-
-## 9. 最短演示脚本（Phase A）
-1) 测评生成 attempt → 进入 result 页  
-2) result 页显示 ticket_code，复制成功  
-3) 清除 token：wx.removeStorageSync('fm_token')  
-4) 再进 history/result → 401 → 自动跳 login → 回跳  
-5) history 展示 /me/attempts 列表 → 点开进入 result/report（200）
+## 6. Change Control
+When routes or controller validation changes, this document must be updated in the same PR.
