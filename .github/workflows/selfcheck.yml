@@ -80,7 +80,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.4'
           tools: composer:v2
 
       - name: Setup Node
@@ -93,9 +93,9 @@ jobs:
         with:
           path: |
             ~/.composer/cache
-          key: composer-${{ runner.os }}-php82-${{ hashFiles('backend/composer.lock') }}
+          key: composer-${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
           restore-keys: |
-            composer-${{ runner.os }}-php82-
+            composer-${{ runner.os }}-php84-
 
       - name: Prepare Laravel cache dirs (for package:discover)
         working-directory: backend
@@ -346,7 +346,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.4'
           tools: composer:v2
           extensions: mbstring, dom, xml, curl, pdo_mysql, redis
 
