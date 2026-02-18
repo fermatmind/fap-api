@@ -1,46 +1,61 @@
-# 订单状态机（payments order state machine）
+# 订单状态机（OrderManager 真值版）
 
-## 定义
-- 标准流转：`created` → `pending` → `paid` → `fulfilled`。
-- 异常状态：`failed`、`canceled`。
-- 售后状态：`refunded`（全额/部分）。
-- 赠送状态：`gifted`。
+## 1. 真理源
+- `app/Services/Commerce/OrderManager.php`
+- `app/Services/Commerce/Webhook/Order/OrderStateMachine.php`
 
-## 规则
-1) 状态迁移表（写死）
+## 2. 状态集合（当前有效）
+`created, pending, paid, fulfilled, failed, canceled, refunded`
 
-| 当前状态 | 目标状态 | 触发方 | 触发时机 | 可否逆 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| created | pending | 客户端/服务端 | 创建支付单并发起支付 | 否 | 进入待支付 |
-| pending | paid | 支付服务 | 支付平台确认成功 | 否 | 仅支付确认触发 |
-| paid | fulfilled | 服务端 | 权益发放成功 | 否 | 权益确认后落盘 |
-| pending | failed | 支付服务 | 平台失败回调 | 否 | 失败后不可回退 |
-| created/pending | canceled | 用户/服务端 | 用户取消或超时取消 | 否 | 取消即终态 |
-| paid/fulfilled | refunded | 服务端 | 退款成功（部分/全额） | 否 | 售后终态 |
-| created | gifted | 服务端/运营 | 赠送订单创建 | 否 | 不经过支付 |
-| gifted | fulfilled | 服务端 | 权益发放成功 | 否 | 赠送发放完成 |
+说明：`OrderManager::isTransitionAllowed()` 是唯一迁移真值。
 
-2) 幂等约束（写死）
-- 同一订单同一事件重复处理，不改变最终状态。
-- `paid`、`fulfilled`、`refunded` 均为单次落盘状态，不允许回滚。
+## 3. allowTransition 真值矩阵
+- `created -> pending|paid|failed|canceled|refunded`
+- `pending -> paid|failed|canceled|refunded`
+- `paid -> fulfilled`
+- `fulfilled -> refunded`
 
-3) 并发约束（写死）
-- 同一订单的状态更新必须串行处理：使用数据库事务 + 行锁（或唯一约束）保证单写入。
-- 任意写入失败必须回滚，不允许写入部分状态。
+未列出的迁移全部非法，返回 `ORDER_STATUS_INVALID`。
 
-## 示例
-- 正常支付：`created` → `pending` → `paid` → `fulfilled`。
-- 支付失败：`created` → `pending` → `failed`。
-- 用户取消：`created` → `canceled`。
-- 退款：`paid` → `refunded`（部分/全额）。
-- 赠送：`created` → `gifted` → `fulfilled`。
+## 4. Webhook 推进规则
+`OrderStateMachine::advance()` 规则：
+- refund 事件: `-> refunded`
+- 非 refund: `transitionToPaidAtomic -> fulfilled`
 
-## 异常处理
-- 重复回调：按幂等规则返回当前状态，不再变更。
-- 乱序事件：若收到 `fulfilled` 前置事件缺失，进入异常队列并拒绝自动推进。
-- 状态冲突：检测到非法迁移（如 `failed` → `paid`）应直接拒绝并告警。
+语义细节：
+- `transitionToPaidAtomic` 先做有锁读取；若已 `paid|fulfilled`，返回 `already_paid=true` 幂等成功。
+- 完成 paid 后再推进 fulfilled，支付成功与权益完成拆分为两步状态推进。
 
-## 验收
-- 任意订单状态均可追溯到触发事件与责任方。
-- 乱序与重复事件不会造成状态倒退或重复落盘。
-- 并发更新不会导致双写或状态分叉。
+## 5. 并发与幂等
+- lockForUpdate + compare-and-update
+- ORDER_STATUS_CHANGED / ORDER_STATUS_INVALID 语义
+
+实现细节：
+- `transitionToPaidAtomic` 与 `transition` 都使用“where 当前状态”更新，防并发覆写。
+- 并发竞争下若状态已被其他请求推进：
+  - 若当前状态已达到目标（如已 paid/fulfilled），按幂等成功返回。
+  - 否则返回 `ORDER_STATUS_CHANGED`。
+- 非法迁移（不满足矩阵）返回 `ORDER_STATUS_INVALID`。
+
+## 6. 历史误差纠正
+- `gifted` 不是当前代码真值状态，标为 Deprecated Historical Note。
+- 旧文档中的 `created -> gifted -> fulfilled` 不是现行状态机路径。
+
+## 7. Mermaid 状态图（必须）
+```mermaid
+stateDiagram-v2
+    [*] --> created
+    created --> pending
+    created --> paid
+    created --> failed
+    created --> canceled
+    created --> refunded
+
+    pending --> paid
+    pending --> failed
+    pending --> canceled
+    pending --> refunded
+
+    paid --> fulfilled
+    fulfilled --> refunded
+```
