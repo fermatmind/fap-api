@@ -21,6 +21,29 @@ jobs:
       run:
         shell: bash
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: fap_ci
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - "3306:3306"
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+      redis:
+        image: redis:6-alpine
+        ports:
+          - "6379:6379"
+        options: >-
+          --health-cmd="redis-cli ping || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
     env:
       APP_ENV: testing
       APP_DEBUG: "true"
@@ -59,6 +82,11 @@ jobs:
         with:
           php-version: '8.4'
           tools: composer:v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Cache Composer
         uses: actions/cache@v4
@@ -290,6 +318,14 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=12
+      redis:
+        image: redis:6-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd="redis-cli ping || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
 
     env:
       APP_ENV: ci
@@ -312,7 +348,12 @@ jobs:
         with:
           php-version: '8.4'
           tools: composer:v2
-          extensions: mbstring, dom, xml, curl, pdo_mysql
+          extensions: mbstring, dom, xml, curl, pdo_mysql, redis
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Wait for mysql
         run: |

@@ -27,6 +27,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: fap_ci
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - "3306:3306"
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+      redis:
+        image: redis:6-alpine
+        ports:
+          - "6379:6379"
+        options: >-
+          --health-cmd="redis-cli ping || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
     # 关键：绑定 GitHub Environment，使 secrets.SSH_PRIVATE_KEY 读取到对应环境的 Environment Secret
     environment:
       name: ${{ github.event_name == 'workflow_dispatch' && inputs.env || 'staging' }}
@@ -52,6 +75,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: >
+            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: CAE gate (config + artifact safety)
         run: bash backend/scripts/cae_gate.sh
@@ -94,6 +131,22 @@ jobs:
           echo "SSH=$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT"
           echo "DEPLOY_PATH=$DEPLOY_PATH"
           echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
+
+      - name: Gate - ci_verify_mbti (Phase D)
+        env:
+          MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: fap_ci
+          DB_USERNAME: root
+          DB_PASSWORD: root
+          QUEUE_CONNECTION: redis
+          REDIS_HOST: 127.0.0.1
+          REDIS_PORT: 6379
+        run: |
+          set -euo pipefail
+          bash ./backend/scripts/ci_verify_mbti.sh
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -142,6 +195,14 @@ jobs:
         run: |
           set -euo pipefail
           php /tmp/dep.phar deploy "$TARGET" -f deploy.php -vvv --no-interaction
+
+      - name: Restart queue workers (Supervisor)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "cd '$DEPLOY_PATH/current' && php artisan queue:restart"
 
       - name: Healthcheck (post deploy)
         shell: bash

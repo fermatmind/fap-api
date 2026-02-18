@@ -24,5 +24,30 @@ services:
     volumes:
       - metabase-data:/metabase-data
 
+  mysql:
+    profiles: ["phase-d-deps"]
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fap_obs
+    ports:
+      - "13306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    profiles: ["phase-d-deps"]
+    image: redis:6-alpine
+    ports:
+      - "16379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
 volumes:
   metabase-data:
