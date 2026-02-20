@@ -16,23 +16,18 @@ final class SecurityGuardrailsTest extends TestCase
 
     /** @var array<int, string> */
     private const EXPLICIT_PUBLIC_MUTATING_ROUTES = [
-        '/api/v0.2/attempts',
-        '/api/v0.2/attempts/start',
-        '/api/v0.2/attempts/{id}/start',
-        '/api/v0.2/shares/{shareId}/click',
-        '/api/v0.2/auth/wx_phone',
-        '/api/v0.2/auth/phone/send_code',
-        '/api/v0.2/auth/phone/verify',
-        '/api/v0.2/auth/provider',
-        '/api/v0.2/events',
-        '/api/v0.2/webhooks/{provider}',
+        '/api/v0.2/{any?}',
         '/api/v0.3/webhooks/payment/{provider}',
+        '/api/v0.3/auth/wx_phone',
+        '/api/v0.3/auth/phone/send_code',
+        '/api/v0.3/auth/phone/verify',
         '/api/v0.3/attempts/start',
         '/api/v0.3/attempts/{attempt_id}/progress',
         '/api/v0.3/orders/checkout',
         '/api/v0.3/orders/lookup',
         '/api/v0.3/orders/{order_no}/resend',
         '/api/v0.3/orders/stub',
+        '/api/v0.3/shares/{shareId}/click',
     ];
 
     /** @var array<int, string> */
@@ -287,13 +282,14 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/[\'"]reason[\'"]\s*=>/', $source);
     }
 
-    public function test_v02_attempt_submit_has_public_overwrite_guard(): void
+    public function test_v02_routes_use_deprecated_410_contract(): void
     {
-        $source = file_get_contents(base_path('app/Services/Legacy/Mbti/Attempt/LegacyMbtiAttemptLifecycleService.php'));
+        $source = file_get_contents(base_path('routes/api.php'));
         $this->assertIsString($source);
 
-        $this->assertMatchesRegularExpression('/if\s*\(\s*!\s*\$isResultUpsertRoute\s*\)\s*\{\s*throw new ApiProblemException\(\s*409\s*,\s*[\'"]ATTEMPT_ALREADY_EXISTS[\'"]/', $source);
-        $this->assertMatchesRegularExpression('/resolveActorUserId/', $source);
+        $this->assertMatchesRegularExpression('/Route::prefix\(\s*"v0\.2"\s*\)/', $source);
+        $this->assertMatchesRegularExpression('/[\'"]error_code[\'"]\s*=>\s*[\'"]API_VERSION_DEPRECATED[\'"]/', $source);
+        $this->assertMatchesRegularExpression('/\],\s*410\s*\)/', $source);
     }
 
     /**

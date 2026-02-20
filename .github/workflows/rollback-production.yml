@@ -28,7 +28,7 @@ jobs:
       DEPLOY_PORT: "22"
 
       DEPLOY_PATH: "/var/www/fap-api"
-      HEALTHCHECK_URL: "https://fermatmind.com/api/v0.2/health"
+      HEALTHCHECK_URL: "https://fermatmind.com/api/healthz"
 
     steps:
       - name: Checkout code

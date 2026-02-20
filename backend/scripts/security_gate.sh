@@ -349,9 +349,9 @@ if (preg_match("/[\\x27\\x22]reason[\\x27\\x22]\\s*=>/", $source) === 1) {
 }
 '
 
-echo "[SECURITY_GATE] check 9/10: v0.2 public submit must not overwrite existing attempt id"
+echo "[SECURITY_GATE] check 9/10: v0.2 must stay on deprecated 410 contract"
 php -r '
-$path = getcwd() . "/app/Services/Legacy/Mbti/Attempt/LegacyMbtiAttemptLifecycleService.php";
+$path = getcwd() . "/routes/api.php";
 $source = file_get_contents($path);
 if (!is_string($source)) {
     fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read {$path}\n");
@@ -359,8 +359,9 @@ if (!is_string($source)) {
 }
 
 $checks = [
-    "public overwrite guard" => "/if\\s*\\(\\s*!\\s*\\x24isResultUpsertRoute\\s*\\)\\s*\\{\\s*throw new ApiProblemException\\(\\s*409\\s*,\\s*[\\x27\\x22]ATTEMPT_ALREADY_EXISTS[\\x27\\x22]/s",
-    "actor user resolver" => "/resolveActorUserId\\s*\\(/",
+    "v0.2 retired prefix" => "/Route::prefix\\(\\s*\\x22v0\\.2\\x22\\s*\\)/",
+    "v0.2 deprecated error code" => "/[\\x27\\x22]error_code[\\x27\\x22]\\s*=>\\s*[\\x27\\x22]API_VERSION_DEPRECATED[\\x27\\x22]/",
+    "v0.2 deprecated 410 status" => "/\\],\\s*410\\s*\\)/",
 ];
 
 $missing = [];
@@ -371,7 +372,7 @@ foreach ($checks as $name => $regex) {
 }
 
 if ($missing !== []) {
-    fwrite(STDERR, "[SECURITY_GATE][FAIL] missing v0.2 overwrite guard(s): " . implode(", ", $missing) . "\n");
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] missing v0.2 deprecated contract checks: " . implode(", ", $missing) . "\n");
     exit(1);
 }
 '

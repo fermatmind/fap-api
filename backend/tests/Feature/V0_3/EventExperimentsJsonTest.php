@@ -4,14 +4,13 @@ namespace Tests\Feature\V0_3;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class EventExperimentsJsonTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_event_experiments_json_merge(): void
+    public function test_v02_events_endpoint_is_retired_and_keeps_sticky_assignment(): void
     {
         $this->artisan('migrate', ['--force' => true]);
 
@@ -25,46 +24,26 @@ class EventExperimentsJsonTest extends TestCase
 
         $boot->assertStatus(200)->assertJson(['ok' => true]);
         $assigned = (string) $boot->json('experiments.PR23_STICKY_BUCKET');
-        $opposite = $assigned === 'A' ? 'B' : 'A';
-
         $payload = [
             'event_code' => 'pr23_event',
-            'attempt_id' => (string) Str::uuid(),
+            'attempt_id' => '00000000-0000-0000-0000-000000000001',
             'anon_id' => $anonId,
             'experiments_json' => [
-                'PR23_STICKY_BUCKET' => $opposite,
+                'PR23_STICKY_BUCKET' => $assigned === 'A' ? 'B' : 'A',
             ],
         ];
 
-        $token = 'fm_' . (string) Str::uuid();
-        DB::table('fm_tokens')->insert([
-            'token' => $token,
-            'token_hash' => hash('sha256', $token),
-            'anon_id' => $anonId,
-            'user_id' => 0,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $resp = $this->withHeaders(['X-Org-Id' => (string) $orgId])
+            ->postJson('/api/v0.2/events', $payload);
 
-        $resp = $this->withHeaders([
-            'Authorization' => "Bearer {$token}",
-            'X-Org-Id' => (string) $orgId,
-        ])->postJson('/api/v0.2/events', $payload);
-
-        $resp->assertStatus(201)->assertJson(['ok' => true]);
+        $resp->assertStatus(410)
+            ->assertJson([
+                'ok' => false,
+                'error_code' => 'API_VERSION_DEPRECATED',
+            ]);
 
         $row = DB::table('events')->where('event_code', 'pr23_event')->first();
-        $this->assertNotNull($row);
-
-        $experiments = $row->experiments_json ?? null;
-        if (is_string($experiments)) {
-            $decoded = json_decode($experiments, true);
-            $experiments = is_array($decoded) ? $decoded : null;
-        }
-
-        $this->assertIsArray($experiments);
-        $this->assertArrayHasKey('PR23_STICKY_BUCKET', $experiments);
-        $this->assertSame($assigned, $experiments['PR23_STICKY_BUCKET']);
+        $this->assertNull($row);
 
         $assignment = DB::table('experiment_assignments')
             ->where('org_id', $orgId)
