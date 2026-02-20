@@ -108,8 +108,8 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 cd "${BACKEND_DIR}"
 php -r '
@@ -338,8 +338,8 @@ cd "${REPO_DIR}"
 
 echo "${ORDER_NO}" > "${ART_DIR}/order_no.txt"
 expect_404 "${API_BASE}/api/v0.3/orders/${ORDER_NO}" "${ART_DIR}/order_idor.txt" "X-Anon-Id" "${ANON_B}"
-expect_404 "${API_BASE}/api/v0.2/attempts/${ATTEMPT_ID}/stats" "${ART_DIR}/psy_idor_stats.txt" "X-Anon-Id" "${ANON_B}"
-expect_404 "${API_BASE}/api/v0.2/attempts/${ATTEMPT_ID}/quality" "${ART_DIR}/psy_idor_quality.txt" "X-Anon-Id" "${ANON_B}"
+expect_404 "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/stats" "${ART_DIR}/psy_idor_stats.txt" "X-Anon-Id" "${ANON_B}"
+expect_404 "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/quality" "${ART_DIR}/psy_idor_quality.txt" "X-Anon-Id" "${ANON_B}"
 
 if [[ -n "${SERVE_PID:-}" ]] && ps -p "${SERVE_PID}" >/dev/null 2>&1; then
   kill "${SERVE_PID}" >/dev/null 2>&1 || true

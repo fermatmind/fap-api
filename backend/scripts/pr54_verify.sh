@@ -87,8 +87,8 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 cd "${BACKEND_DIR}"
 php -r '
@@ -355,7 +355,7 @@ DLQ_METRICS_BEFORE_JSON="${ART_DIR}/dlq_metrics_before.json"
 http_code="$(curl -sS -o "${DLQ_METRICS_BEFORE_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-FAP-Admin-Token: ${FAP_ADMIN_TOKEN}" \
-  "${API_BASE}/api/v0.2/admin/queue/dlq/metrics" || true)"
+  "${API_BASE}/api/v0.3/admin/queue/dlq/metrics" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "dlq_metrics_before_failed http=${http_code}" >&2
   cat "${DLQ_METRICS_BEFORE_JSON}" >&2 || true
@@ -370,7 +370,7 @@ http_code="$(curl -sS -o "${DLQ_REPLAY_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-FAP-Admin-Token: ${FAP_ADMIN_TOKEN}" \
   --data '{"force":false}' \
-  "${API_BASE}/api/v0.2/admin/queue/dlq/replay/${FAILED_JOB_ID}" || true)"
+  "${API_BASE}/api/v0.3/admin/queue/dlq/replay/${FAILED_JOB_ID}" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "dlq_replay_failed http=${http_code}" >&2
   cat "${DLQ_REPLAY_JSON}" >&2 || true
@@ -389,7 +389,7 @@ DLQ_METRICS_AFTER_JSON="${ART_DIR}/dlq_metrics_after.json"
 http_code="$(curl -sS -o "${DLQ_METRICS_AFTER_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-FAP-Admin-Token: ${FAP_ADMIN_TOKEN}" \
-  "${API_BASE}/api/v0.2/admin/queue/dlq/metrics" || true)"
+  "${API_BASE}/api/v0.3/admin/queue/dlq/metrics" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "dlq_metrics_after_failed http=${http_code}" >&2
   cat "${DLQ_METRICS_AFTER_JSON}" >&2 || true

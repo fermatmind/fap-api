@@ -50,8 +50,8 @@ sleep 2
 
 BASE_URL="http://${HOST}:${PORT}"
 
-curl -sS -H "X-FAP-Admin-Token: ${TOKEN}" "$BASE_URL/api/v0.2/admin/healthz/snapshot" >/tmp/pr10_admin_healthz.json
-curl -sS -H "X-FAP-Admin-Token: ${TOKEN}" "$BASE_URL/api/v0.2/admin/audit-logs" >/tmp/pr10_admin_audit.json
+curl -sS -H "X-FAP-Admin-Token: ${TOKEN}" "$BASE_URL/api/v0.3/admin/healthz/snapshot" >/tmp/pr10_admin_healthz.json
+curl -sS -H "X-FAP-Admin-Token: ${TOKEN}" "$BASE_URL/api/v0.3/admin/audit-logs" >/tmp/pr10_admin_audit.json
 
 if ! grep -Eq '\"ok\"[[:space:]]*:[[:space:]]*true' /tmp/pr10_admin_healthz.json; then
   echo "FAIL: healthz snapshot not ok"

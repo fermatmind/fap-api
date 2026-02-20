@@ -5,58 +5,33 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\NormalizeApiErrorContract;
 use App\Http\Middleware\LimitWebhookPayloadSize;
-use App\Http\Middleware\LimitIntegrationsWebhookPayloadSize;
 use App\Http\Controllers\HealthzController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\LookupController;
-use App\Http\Controllers\API\V0_2\LegacyAttemptController;
-use App\Http\Controllers\API\V0_2\AuthPhoneController;
-use App\Http\Controllers\API\V0_2\AuthProviderController;
-use App\Http\Controllers\API\V0_2\ClaimController;
-use App\Http\Controllers\API\V0_2\ContentPacksController;
-use App\Http\Controllers\API\V0_2\IdentityController;
-use App\Http\Controllers\API\V0_2\LegacyReportController;
-use App\Http\Controllers\API\V0_2\MemoryController;
-use App\Http\Controllers\API\V0_2\MeController;
-use App\Http\Controllers\API\V0_2\NormsController;
-use App\Http\Controllers\API\V0_2\PsychometricsController;
-use App\Http\Controllers\API\V0_2\ShareController;
-use App\Http\Controllers\API\V0_2\ValidityFeedbackController;
-use App\Http\Controllers\API\V0_2\AgentController;
-use App\Http\Controllers\API\V0_2\Admin\AdminOpsController;
-use App\Http\Controllers\API\V0_2\Admin\AdminAuditController;
-use App\Http\Controllers\API\V0_2\Admin\AdminAgentController;
-use App\Http\Controllers\API\V0_2\Admin\AdminMigrationController;
-use App\Http\Controllers\API\V0_2\Admin\AdminQueueController;
-use App\Http\Controllers\API\V0_2\Admin\AdminEventsController;
-use App\Http\Controllers\API\V0_2\Admin\AdminContentController;
-use App\Http\Controllers\API\V0_2\Admin\AdminGlobalSearchController;
-use App\Http\Controllers\API\V0_2\Admin\AdminGoLiveGateController;
-use App\Http\Controllers\API\V0_2\Admin\AdminOrganizationController;
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
 use App\Http\Controllers\API\V0_3\AttemptReadController;
 use App\Http\Controllers\API\V0_3\AttemptWriteController;
+use App\Http\Controllers\API\V0_3\AuthPhoneController as AuthPhoneV03Controller;
+use App\Http\Controllers\API\V0_3\AuthWxPhoneController as AuthWxPhoneV03Controller;
 use App\Http\Controllers\API\V0_3\BootController as BootV0_3Controller;
+use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
+use App\Http\Controllers\API\V0_3\ClaimController as ClaimV03Controller;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\API\V0_3\ScalesSitemapSourceController;
 use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
+use App\Http\Controllers\API\V0_3\ShareController as ShareV03Controller;
 use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
-use App\Http\Middleware\DisableLegacyV02Report;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Middleware\HealthzAccessControl;
-use App\Http\Controllers\Integrations\ProvidersController;
-use App\Http\Controllers\Webhooks\HandleProviderWebhook;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 | RouteServiceProvider loads this file with "/api" prefix.
-| So "/v0.2/health" becomes "/api/v0.2/health".
+| So "/v0.3/scales" becomes "/api/v0.3/scales".
 |--------------------------------------------------------------------------
 */
 
@@ -68,236 +43,17 @@ Route::middleware([HealthzAccessControl::class, 'throttle:api_public'])
     ->get('/healthz', [HealthzController::class, 'show'])
     ->name('healthz');
 
-Route::middleware([HealthzAccessControl::class, 'throttle:api_public'])
-    ->get('/v0.2/healthz', [HealthzController::class, 'show'])
-    ->name('healthz.v0_2');
-
 Route::prefix("v0.2")->middleware([
     'throttle:api_public',
     NormalizeApiErrorContract::class,
 ])->group(function () {
-
-    // 1) Health
-    Route::get("/health", [LegacyAttemptController::class, "health"]);
-
-    // 1.5) Content packs
-    Route::get("/content-packs", [ContentPacksController::class, "index"]);
-    Route::get("/content-packs/{pack_id}/{dir_version}/manifest", [ContentPacksController::class, "manifest"]);
-    Route::get("/content-packs/{pack_id}/{dir_version}/questions", [ContentPacksController::class, "questions"]);
-
-    // 1.6) Admin APIs (token or admin session)
-    Route::prefix("admin")
-        ->middleware(\App\Http\Middleware\AdminAuth::class)
-        ->group(function () {
-            // Ops snapshot
-            Route::get("/healthz/snapshot", [AdminOpsController::class, "healthzSnapshot"]);
-            Route::get("/migrations/observability", [AdminMigrationController::class, "observability"]);
-            Route::get("/migrations/rollback-preview", [AdminMigrationController::class, "rollbackPreview"]);
-            Route::get("/queue/dlq/metrics", [AdminQueueController::class, "metrics"]);
-            Route::post("/queue/dlq/replay/{failed_job_id}", [AdminQueueController::class, "replay"])
-                ->whereNumber('failed_job_id');
-
-            // Audit logs (read-only)
-            Route::get("/audit-logs", [AdminAuditController::class, "index"]);
-
-            // Events (read-only)
-            Route::get("/events", [AdminEventsController::class, "index"]);
-
-            // Agent controls (admin-only)
-            Route::post("/agent/disable-trigger", [AdminAgentController::class, "disableTrigger"]);
-            Route::post("/agent/replay/{user_id}", [AdminAgentController::class, "replay"]);
-
-            // Content releases (read-only + tools)
-            Route::get("/content-releases", [AdminContentController::class, "index"]);
-            Route::post("/content-releases/{id}/probe", [AdminContentController::class, "probe"]);
-            Route::post("/cache/invalidate", [AdminOpsController::class, "invalidateCache"]);
-            Route::get('/organizations', [AdminOrganizationController::class, 'index']);
-            Route::post('/organizations', [AdminOrganizationController::class, 'store']);
-            Route::post('/organizations/import-sync', [AdminOrganizationController::class, 'importSync']);
-            Route::get('/global-search', [AdminGlobalSearchController::class, 'search']);
-            Route::get('/go-live-gate', [AdminGoLiveGateController::class, 'show']);
-            Route::post('/go-live-gate/run', [AdminGoLiveGateController::class, 'run']);
-
-            // Legacy admin content release ops
-            Route::post(
-                "/content-releases/upload",
-                [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "upload"]
-            );
-            Route::post(
-                "/content-releases/publish",
-                [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "publish"]
-            );
-            Route::post(
-                "/content-releases/rollback",
-                [\App\Http\Controllers\API\V0_2\Admin\ContentReleaseController::class, "rollback"]
-            );
-        });
-
-    // 2) Scale meta
-    Route::get("/scales/MBTI", [LegacyAttemptController::class, "scaleMeta"]);
-    Route::get("/scale_meta", [LegacyAttemptController::class, "scaleMeta"]);
-    Route::get("/scales/{scale}/norms", [PsychometricsController::class, "listNorms"]);
-
-    // 3) Questions (demo)
-    Route::get("/scales/MBTI/questions", [LegacyAttemptController::class, "questions"]);
-    Route::get("/questions", [LegacyAttemptController::class, "questions"]);
-
-    Route::middleware('throttle:api_attempt_submit')->group(function () {
-        // 4) Submit attempt (anonymous allowed)
-        Route::post("/attempts", [LegacyAttemptController::class, "storeAttempt"]);
-
-        // 5) Start attempt (anonymous allowed)
-        Route::post("/attempts/start", [LegacyAttemptController::class, "startAttempt"]);
-        Route::post("/attempts/{id}/start", [LegacyAttemptController::class, "startAttempt"]);
-    });
-
-    // 6) Public share view (legacy)
-    Route::get("/share/{id}", [ShareController::class, "getShareView"])
-        ->middleware(\App\Http\Middleware\FmTokenOptional::class);
-
-    // 6.5) Lookups
-    Route::get("/lookup/ticket/{code}", [LookupController::class, "lookupTicket"]);
-
-    // 7) Share click (public)
-    // share_id now supports 32-hex legacy ids, so remove uuid middleware.
-    Route::post('/shares/{shareId}/click', [ShareController::class, 'click'])
-        ->middleware([
-            \App\Http\Middleware\FmTokenOptional::class,
-            \App\Http\Middleware\LimitApiPublicPayloadSize::class,
-            'throttle:api_public',
-        ])
-        ->where('shareId', '[A-Za-z0-9_-]{6,128}');
-
-    Route::middleware('throttle:api_auth')->group(function () {
-        // Auth (public)
-        if (app()->environment(['local', 'testing', 'ci'])) {
-            Route::post("/auth/wx_phone", \App\Http\Controllers\API\V0_2\AuthWxPhoneController::class);
-        } else {
-            Route::post("/auth/wx_phone", static function () {
-                abort(404);
-            });
-        }
-        Route::post("/auth/phone/send_code", [AuthPhoneController::class, "sendCode"]);
-        Route::post("/auth/phone/verify", [AuthPhoneController::class, "verify"]);
-        Route::post("/auth/provider", [AuthProviderController::class, "login"]);
-        Route::get("/claim/report", [ClaimController::class, "report"]);
-    });
-
-    // Events ingestion (public for now)
-    Route::post("/events", [EventController::class, "store"])
-        ->middleware('fap_feature:analytics');
-
-    // Norms
-    Route::get("/norms/percentile", [NormsController::class, "percentile"]);
-
-    Route::middleware('throttle:api_webhook')->group(function () {
-        // =========================================================
-        // Integrations (mock OAuth + ingestion + replay)
-        // =========================================================
-        Route::prefix("integrations/{provider}")->group(function () {
-            Route::get("/oauth/start", [ProvidersController::class, "oauthStart"]);
-            Route::get("/oauth/callback", [ProvidersController::class, "oauthCallback"]);
-            Route::post("/revoke", [ProvidersController::class, "revoke"])
-                ->middleware(\App\Http\Middleware\FmTokenAuth::class);
-            Route::post("/ingest", [ProvidersController::class, "ingest"])
-                ->middleware(\App\Http\Middleware\IntegrationsIngestAuth::class);
-            Route::post("/replay/{batch_id}", [ProvidersController::class, "replay"])
-                ->middleware(\App\Http\Middleware\FmTokenAuth::class);
-        });
-    });
-
-    // =========================================================
-    // Webhooks (provider push)
-    // =========================================================
-    Route::post("/webhooks/{provider}", [HandleProviderWebhook::class, "handle"])
-        ->whereIn('provider', ['mock', 'apple_health', 'google_fit', 'calendar', 'screen_time'])
-        ->middleware([LimitIntegrationsWebhookPayloadSize::class, 'throttle:api_webhook']);
-
-    // =========================================================
-    // AI Insights (async, budget guarded)
-    // =========================================================
-    Route::middleware([
-        \App\Http\Middleware\FmTokenAuth::class,
-        'fap_feature:insights',
-        'App\\Http\\Middleware\\CheckAiBudget',
-    ])->group(function () {
-        Route::post("/insights/generate", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@generate");
-    });
-    Route::get("/insights/{id}", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@show")
-        ->middleware([
-            \App\Http\Middleware\FmTokenOptional::class,
-            'fap_feature:insights',
-        ]);
-    Route::post("/insights/{id}/feedback", "App\\Http\\Controllers\\API\\V0_2\\InsightsController@feedback")
-        ->middleware([
-            \App\Http\Middleware\FmTokenAuth::class,
-            'fap_feature:insights',
-        ]);
-
-    // =========================================================
-    // Attempt read endpoints: keep UUID contract before auth gate
-    // =========================================================
-    Route::get("/attempts/{attemptId}/result", [LegacyReportController::class, "getResult"])
-        ->middleware([
-            'uuid:attemptId',
-            \App\Http\Middleware\FmTokenOptional::class,
-            DisableLegacyV02Report::class,
-        ]);
-    Route::get("/attempts/{attemptId}/report", [LegacyReportController::class, "getReport"])
-        ->middleware([
-            'uuid:attemptId',
-            \App\Http\Middleware\FmTokenOptional::class,
-            DisableLegacyV02Report::class,
-        ]);
-    Route::get("/attempts/{id}/quality", [PsychometricsController::class, "quality"])
-        ->middleware('uuid:id');
-    Route::get("/attempts/{id}/stats", [PsychometricsController::class, "stats"])
-        ->middleware('uuid:id');
-
-    // =========================================================
-    // Strict token gate: endpoints needing identity
-    // =========================================================
-    Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
-
-        // /me/*
-        Route::get("/me/attempts", [MeController::class, "attempts"]);
-        Route::get("/me/profile", [MeController::class, "profile"]);
-        Route::post("/me/email/bind", [MeController::class, "bindEmail"]);
-        Route::post("/me/bind-email", [MeController::class, "bindEmail"]);
-        Route::post("/me/email/verify-binding", [MeController::class, "verifyBinding"]);
-        Route::post("/me/identities/bind", [IdentityController::class, "bind"]);
-        Route::get("/me/identities", [IdentityController::class, "index"]);
-        Route::get("/me/data/sleep", [MeController::class, "sleepData"]);
-        Route::get("/me/data/mood", [MeController::class, "moodData"]);
-        Route::get("/me/data/screen-time", [MeController::class, "screenTimeData"]);
-
-        // Memory
-        Route::middleware('fap_feature:insights')->group(function () {
-            Route::post("/memory/propose", [MemoryController::class, "propose"]);
-            Route::post("/memory/{id}/confirm", [MemoryController::class, "confirm"]);
-            Route::delete("/memory/{id}", [MemoryController::class, "delete"]);
-            Route::get("/memory/search", [MemoryController::class, "search"]);
-            Route::get("/memory/export", [MemoryController::class, "export"]);
-        });
-
-        // Agent (me)
-        Route::middleware('fap_feature:agent')->group(function () {
-            Route::get("/me/agent/settings", [AgentController::class, "settings"]);
-            Route::post("/me/agent/settings", [AgentController::class, "updateSettings"]);
-            Route::get("/me/agent/messages", [AgentController::class, "messages"]);
-            Route::post("/me/agent/messages/{id}/feedback", [AgentController::class, "feedback"]);
-            Route::post("/me/agent/messages/{id}/ack", [AgentController::class, "ack"]);
-        });
-
-        // Attempts gated endpoints
-        Route::post("/attempts/{id}/result", [LegacyAttemptController::class, "upsertResult"]);
-        Route::get("/attempts/{id}/share", [ShareController::class, "getShare"]);
-
-        Route::post("/attempts/{attempt_id}/feedback", [ValidityFeedbackController::class, "store"]);
-        Route::post("/lookup/order", [LookupController::class, "lookupOrder"]);
-        Route::post("/lookup/device", [LookupController::class, "lookupDevice"]);
-
-    });
+    Route::any('/{any?}', static function () {
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
+            'message' => 'API v0.2 has been retired. Use /api/v0.3.',
+        ], 410);
+    })->where('any', '.*');
 });
 
 Route::prefix("v0.3")->middleware([
@@ -316,6 +72,24 @@ Route::prefix("v0.3")->middleware([
     )->whereIn('provider', $payProviders)
         ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
         ->name('api.v0_3.webhooks.payment');
+
+    Route::middleware('throttle:api_auth')->group(function () {
+        if (app()->environment(['local', 'testing', 'ci'])) {
+            Route::post('/auth/wx_phone', AuthWxPhoneV03Controller::class);
+        } else {
+            Route::post('/auth/wx_phone', static function () {
+                abort(404);
+            });
+        }
+        Route::post('/auth/phone/send_code', [AuthPhoneV03Controller::class, 'sendCode']);
+        Route::post('/auth/phone/verify', [AuthPhoneV03Controller::class, 'verify']);
+    });
+
+    Route::get('/claim/report', [ClaimV03Controller::class, 'report']);
+
+    Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
+        Route::get('/me/attempts', [MeV03Controller::class, 'attempts']);
+    });
 
     Route::middleware([\App\Http\Middleware\ResolveAnonId::class, ResolveOrgContext::class])->group(function () use ($payProviders) {
         // 0) Boot (flags + experiments)
@@ -349,6 +123,8 @@ Route::prefix("v0.3")->middleware([
         Route::get("/attempts/{id}/report", [AttemptReadController::class, "report"])
             ->middleware('uuid:id')
             ->name('api.v0_3.attempts.report');
+        Route::get("/attempts/{id}/share", [ShareV03Controller::class, "getShare"])
+            ->middleware(\App\Http\Middleware\FmTokenAuth::class);
 
         // 3) Commerce v2 (public with org context)
         Route::get("/skus", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus")
@@ -374,7 +150,14 @@ Route::prefix("v0.3")->middleware([
             ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);
         Route::get("/orders/{order_no}", "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder");
-        Route::get("/shares/{id}", [ShareController::class, "getShareView"]);
+        Route::get("/shares/{id}", [ShareV03Controller::class, "getShareView"]);
+        Route::post('/shares/{shareId}/click', [ShareV03Controller::class, 'click'])
+            ->middleware([
+                \App\Http\Middleware\FmTokenOptional::class,
+                \App\Http\Middleware\LimitApiPublicPayloadSize::class,
+                'throttle:api_public',
+            ])
+            ->where('shareId', '[A-Za-z0-9_-]{6,128}');
     });
 
     Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])

@@ -84,8 +84,8 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 # pack/seed/config consistency
 cd "${BACKEND_DIR}"
@@ -296,7 +296,7 @@ http_code="$(curl -sS -o "${VALID_WEBHOOK_JSON}" -w "%{http_code}" \
   -H "X-Webhook-Timestamp: ${WEBHOOK_TIMESTAMP}" \
   -H "X-Webhook-Signature: ${WEBHOOK_SIGNATURE}" \
   --data-binary @"${WEBHOOK_PAYLOAD_JSON}" \
-  "${API_BASE}/api/v0.2/webhooks/mock" || true)"
+  "${API_BASE}/api/v0.3/webhooks/mock" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "webhook_valid_failed http=${http_code}" >&2
   cat "${VALID_WEBHOOK_JSON}" >&2 || true
@@ -308,7 +308,7 @@ http_code="$(curl -sS -o "${MISSING_TS_JSON}" -w "%{http_code}" \
   -X POST -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "X-Webhook-Signature: ${WEBHOOK_SIGNATURE}" \
   --data-binary @"${WEBHOOK_PAYLOAD_JSON}" \
-  "${API_BASE}/api/v0.2/webhooks/mock" || true)"
+  "${API_BASE}/api/v0.3/webhooks/mock" || true)"
 if [[ "${http_code}" != "404" ]]; then
   echo "webhook_missing_timestamp_failed http=${http_code}" >&2
   cat "${MISSING_TS_JSON}" >&2 || true
@@ -329,7 +329,7 @@ http_code="$(curl -sS -o "${EXPIRED_JSON}" -w "%{http_code}" \
   -H "X-Webhook-Timestamp: ${EXPIRED_TIMESTAMP}" \
   -H "X-Webhook-Signature: ${EXPIRED_SIGNATURE}" \
   --data-binary @"${WEBHOOK_PAYLOAD_JSON}" \
-  "${API_BASE}/api/v0.2/webhooks/mock" || true)"
+  "${API_BASE}/api/v0.3/webhooks/mock" || true)"
 if [[ "${http_code}" != "404" ]]; then
   echo "webhook_expired_timestamp_failed http=${http_code}" >&2
   cat "${EXPIRED_JSON}" >&2 || true

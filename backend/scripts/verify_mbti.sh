@@ -14,7 +14,7 @@ fi
 # -----------------------------
 API="${API:-http://127.0.0.1:1827}"
 SCALE_CODE="${SCALE_CODE:-MBTI}"
-SCALE_VERSION="${SCALE_VERSION:-v0.2}"
+SCALE_VERSION="${SCALE_VERSION:-v0.3}"
 ANSWER_CODE="${ANSWER_CODE:-C}"
 REGION="${REGION:-CN_MAINLAND}"
 LOCALE="${LOCALE:-zh-CN}"
@@ -319,7 +319,7 @@ exit(1);
 # Phase 0: health & questions & payload & attempt & report
 # -----------------------------
 echo "[1/8] health: $API"
-fetch_json "$API/api/v0.2/health" "$HEALTH_JSON"
+fetch_json "$API/api/healthz" "$HEALTH_JSON"
 HEALTH_JSON="$HEALTH_JSON" php -r '
 $j=json_decode(file_get_contents(getenv("HEALTH_JSON")), true);
 if (!is_array($j) || ($j["ok"] ?? false) !== true) {
@@ -330,14 +330,14 @@ echo "[OK] health: " . ($j["service"] ?? "") . " " . ($j["version"] ?? "") . " "
 '
 
 echo "[2/8] fetch questions"
-fetch_json "$API/api/v0.2/scales/$SCALE_CODE/questions" "$QUESTIONS_JSON"
+fetch_json "$API/api/v0.3/scales/$SCALE_CODE/questions" "$QUESTIONS_JSON"
 QUESTIONS_JSON="$QUESTIONS_JSON" php -r '
 $j=json_decode(file_get_contents(getenv("QUESTIONS_JSON")), true);
 if (!is_array($j) || ($j["ok"] ?? false) !== true) {
   fwrite(STDERR, "[FAIL] questions not ok\n");
   exit(1);
 }
-$items=$j["items"] ?? [];
+$items=$j["items"] ?? ($j["questions"]["items"] ?? ($j["questions"] ?? []));
 $cnt=is_array($items) ? count($items) : 0;
 if ($cnt <= 0) { fwrite(STDERR, "[FAIL] no items\n"); exit(1); }
 echo "[OK] questions count=" . $cnt . PHP_EOL;
@@ -346,12 +346,12 @@ echo "[OK] questions count=" . $cnt . PHP_EOL;
 echo "[3/8] build payload ($ANSWER_CODE for all)"
 QUESTIONS_JSON="$QUESTIONS_JSON" PAYLOAD_JSON="$PAYLOAD_JSON" ANSWER_CODE="$ANSWER_CODE" SCALE_CODE="$SCALE_CODE" SCALE_VERSION="$SCALE_VERSION" REGION="$REGION" LOCALE="$LOCALE" ANON_ID="$ANON_ID" php -r '
 $j=json_decode(file_get_contents(getenv("QUESTIONS_JSON")), true);
-$items=$j["items"] ?? [];
+$items=$j["items"] ?? ($j["questions"]["items"] ?? ($j["questions"] ?? []));
 $answers=[];
 if (is_array($items)) {
   foreach ($items as $q) {
     if (!is_array($q)) { continue; }
-    $qid=$q["question_id"] ?? "";
+    $qid=$q["question_id"] ?? ($q["id"] ?? "");
     if ($qid === "") { continue; }
     $answers[]=["question_id"=>$qid, "code"=>getenv("ANSWER_CODE")];
   }
@@ -365,6 +365,7 @@ $payload=[
   "scale_code"=>getenv("SCALE_CODE"),
   "scale_version"=>getenv("SCALE_VERSION"),
   "answers"=>$answers,
+  "duration_ms"=>120000,
   "client_platform"=>"cli",
   "client_version"=>"verify-1",
   "channel"=>"direct",
@@ -388,9 +389,9 @@ fi
 if [[ -n "${ATTEMPT_ID:-}" ]]; then
   echo "[4/8] reuse attempt: $ATTEMPT_ID"
 else
-  echo "[4/8] create attempt"
+  echo "[4/8] create attempt (v0.3/start)"
   http="$(curl -sS -L -o "$ATTEMPT_RESP_JSON" -w "%{http_code}" \
-    -X POST "$API/api/v0.2/attempts" \
+    -X POST "$API/api/v0.3/attempts/start" \
     -H 'Content-Type: application/json' \
     "${CURL_OWNER[@]}" \
     -d @"$PAYLOAD_JSON" || true)"
@@ -422,16 +423,89 @@ echo "$ATTEMPT_ID" > "$ATTEMPT_ID_TXT"
 echo "$ATTEMPT_ANON_ID" > "$ANON_ID_TXT"
 echo "[OK] attempt_id=$ATTEMPT_ID"
 
+echo "[4.2/8] submit attempt (v0.3/submit)"
+SUBMIT_PAYLOAD_JSON="$RUN_DIR/submit_payload.json"
+PAYLOAD_JSON="$PAYLOAD_JSON" SUBMIT_PAYLOAD_JSON="$SUBMIT_PAYLOAD_JSON" ATTEMPT_ID="$ATTEMPT_ID" php -r '
+$payload=json_decode(file_get_contents(getenv("PAYLOAD_JSON")), true);
+if (!is_array($payload)) { $payload=[]; }
+$payload["attempt_id"]=(string)getenv("ATTEMPT_ID");
+if (!isset($payload["duration_ms"]) || !is_numeric($payload["duration_ms"])) {
+  $payload["duration_ms"]=120000;
+}
+file_put_contents(getenv("SUBMIT_PAYLOAD_JSON"), json_encode($payload, JSON_UNESCAPED_UNICODE));
+'
+
+http="$(curl -sS -L -o "$ATTEMPT_RESP_JSON" -w "%{http_code}" \
+  -X POST "$API/api/v0.3/attempts/submit" \
+  -H 'Content-Type: application/json' \
+  "${CURL_AUTH[@]}" \
+  "${CURL_OWNER[@]}" \
+  -d @"$SUBMIT_PAYLOAD_JSON" || true)"
+
+if [[ "$http" != "200" && "$http" != "201" ]]; then
+  echo "[CURL][FAIL] submit attempt HTTP=$http" >&2
+  echo "---- body (first 1200 bytes) ----" >&2
+  head -c 1200 "$ATTEMPT_RESP_JSON" 2>/dev/null || true
+  echo >&2
+  exit 5
+fi
+
+ATTEMPT_RESP_JSON="$ATTEMPT_RESP_JSON" php -r '
+$j=json_decode(file_get_contents(getenv("ATTEMPT_RESP_JSON")), true);
+if (!is_array($j) || ($j["ok"] ?? false) !== true) {
+  fwrite(STDERR, "[FAIL] submit response not ok\n");
+  exit(2);
+}
+'
+
 echo "[4.5/8] grant report entitlement for verify owner"
 grant_attempt_entitlement "$ATTEMPT_ID" "$ATTEMPT_ANON_ID" || fail "failed to grant report entitlement"
 
 echo "[5/8] fetch report & share"
 [[ -n "${ATTEMPT_ANON_ID}" ]] || fail "missing ATTEMPT_ANON_ID for report ownership guard"
-REPORT_URL="$API/api/v0.2/attempts/$ATTEMPT_ID/report?anon_id=$ATTEMPT_ANON_ID"
-# ✅ report is now token-gated; send bearer token in CI/mainline verification.
+REPORT_URL="$API/api/v0.3/attempts/$ATTEMPT_ID/report?anon_id=$ATTEMPT_ANON_ID"
+# report can be resolved by anon_id ownership; keep bearer token for parity with CI gated flow.
 fetch_json "$REPORT_URL" "$REPORT_JSON" 1
-# share is now gated by fm_token
-fetch_json "$API/api/v0.2/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON" 1
+# v0.3 share is token-gated
+fetch_json "$API/api/v0.3/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON" 1
+echo "[5.1/8] wait report ready"
+ready=0
+for _ in $(seq 1 30); do
+  if REPORT_JSON="$REPORT_JSON" php -r '
+  $j=json_decode(file_get_contents(getenv("REPORT_JSON")), true);
+  if (!is_array($j) || ($j["ok"] ?? false) !== true) { exit(2); }
+  $report=$j["report"] ?? null;
+  $generating=(bool)($j["meta"]["generating"] ?? false);
+  if (!is_array($report) || $report === []) { exit(1); }
+  $hasContent = isset($report["versions"]) || isset($report["sections"]) || isset($report["highlights"]) || isset($report["profile"]) || isset($report["identity_card"]);
+  if (!$hasContent || $generating) { exit(1); }
+  exit(0);
+  '; then
+    ready=1
+    break
+  fi
+
+  # v0.3 full report may rely on async snapshot jobs; consume one reports job when available.
+  php artisan queue:work database --queue=reports --once --sleep=0 --tries=1 --timeout=30 --no-interaction >/dev/null 2>&1 || true
+  sleep 1
+  fetch_json "$REPORT_URL" "$REPORT_JSON" 1
+done
+if [[ "$ready" != "1" ]]; then
+  echo "[FAIL] report not ready after retries: $REPORT_URL" >&2
+  head -c 1200 "$REPORT_JSON" >&2 || true
+  echo >&2
+  exit 5
+fi
+# Keep legacy artifact contract for downstream acceptance scripts.
+REPORT_JSON="$REPORT_JSON" ATTEMPT_ID="$ATTEMPT_ID" php -r '
+$path=getenv("REPORT_JSON");
+$attemptId=(string)getenv("ATTEMPT_ID");
+$j=json_decode(file_get_contents($path), true);
+if (!is_array($j)) { exit(0); }
+if (($j["attempt_id"] ?? "") === "") { $j["attempt_id"]=$attemptId; }
+if (($j["attemptId"] ?? "") === "") { $j["attemptId"]=$attemptId; }
+file_put_contents($path, json_encode($j, JSON_UNESCAPED_UNICODE));
+'
 echo "[OK] report=$REPORT_JSON"
 echo "[OK] share=$SHARE_JSON"
 

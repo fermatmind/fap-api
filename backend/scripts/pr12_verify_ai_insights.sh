@@ -146,7 +146,7 @@ if [[ "$PHP_BIND_OK" -eq 1 ]]; then
     fi
 
     PORT="$candidate"
-    API="http://127.0.0.1:${PORT}/api/v0.2"
+    API="http://127.0.0.1:${PORT}/api/v0.3"
 
     if start_server ""; then
       SERVER_OK=1
@@ -173,7 +173,7 @@ http_request() {
 
   if [[ "$USE_INTERNAL" -eq 1 ]]; then
     if [[ "$req_path" != /api/* ]]; then
-      req_path="/api/v0.2${req_path}"
+      req_path="/api/v0.3${req_path}"
     fi
     local cmd=(php -r '
 require "vendor/autoload.php";
@@ -370,7 +370,7 @@ if [[ "$REDIS_SOCKET_OK" -eq 1 ]]; then
   if [[ "$USE_INTERNAL" -eq 0 ]]; then
     # 用新端口跑 breaker，避免“同端口重启导致 env 没真正生效/请求打到旧服务”
     PORT_BREAKER=$((PORT + 1))
-    API_BREAKER="http://127.0.0.1:${PORT_BREAKER}/api/v0.2"
+    API_BREAKER="http://127.0.0.1:${PORT_BREAKER}/api/v0.3"
     SERVER_LOG_BREAKER="$LOG_DIR/server_breaker.log"
 
     # 确保端口空闲

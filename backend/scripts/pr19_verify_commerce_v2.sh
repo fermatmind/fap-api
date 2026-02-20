@@ -151,11 +151,11 @@ echo "api=${API}" >>"${ENV_TXT}"
 echo "db=${SQLITE_DB}" >>"${ENV_TXT}"
 
 start_server "${PORT}"
-if ! wait_health "${API}/api/v0.2/health"; then
+if ! wait_health "${API}/api/healthz"; then
   echo "[PR19][WARN] server not healthy on port ${PORT}, retry once"
   cleanup_port "${PORT}"
   start_server "${PORT}"
-  wait_health "${API}/api/v0.2/health" || fail "server failed to start on port ${PORT}"
+  wait_health "${API}/api/healthz" || fail "server failed to start on port ${PORT}"
 fi
 
 echo "[PR19] server ok on ${API}"

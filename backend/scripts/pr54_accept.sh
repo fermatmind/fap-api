@@ -101,8 +101,8 @@ PR54 Acceptance Summary
   - default_pack_id: ${DEFAULT_PACK_ID}
   - default_dir_version: ${DEFAULT_DIR_VERSION}
 - smoke_urls:
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/admin/queue/dlq/metrics
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/admin/queue/dlq/replay/${FAILED_JOB_ID}
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/admin/queue/dlq/metrics
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/admin/queue/dlq/replay/${FAILED_JOB_ID}
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/scales/MBTI/questions
 - schema_changes:
   - create table queue_dlq_replays

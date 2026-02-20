@@ -31,9 +31,9 @@ final class IngestValidationTest extends TestCase
             'samples' => $samples,
         ]);
 
-        $response->assertStatus(422)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'VALIDATION_FAILED',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
         $this->assertSame(0, DB::table('ingest_batches')->count());
     }
@@ -54,9 +54,9 @@ final class IngestValidationTest extends TestCase
             ],
         ]);
 
-        $response->assertStatus(422)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'VALIDATION_FAILED',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
         $this->assertSame(0, DB::table('ingest_batches')->count());
     }
@@ -93,9 +93,9 @@ final class IngestValidationTest extends TestCase
             $rawBody
         );
 
-        $response->assertStatus(413)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'PAYLOAD_TOO_LARGE',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
         $this->assertSame(0, DB::table('ingest_batches')->count());
     }

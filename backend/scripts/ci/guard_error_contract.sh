@@ -11,8 +11,8 @@ TARGET_FILES=(
   "backend/app/Http/Controllers/API/V0_3/CommerceController.php"
   "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php"
   "backend/app/Http/Controllers/API/V0_3/AttemptWriteController.php"
-  "backend/app/Http/Controllers/API/V0_2/ShareController.php"
-  "backend/app/Http/Controllers/API/V0_2/LegacyReportController.php"
+  "backend/app/Http/Controllers/API/V0_3/ShareController.php"
+  "backend/app/Http/Controllers/API/V0_3/ClaimController.php"
 )
 
 # Keep a narrow exception list for unavoidable legacy cases.

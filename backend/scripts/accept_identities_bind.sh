@@ -22,10 +22,10 @@ echo "[ACCEPT_IDENT] SQLITE_DB=${SQLITE_DB}"
 echo "[ACCEPT_IDENT] PHONE=${PHONE} SCENE=${SCENE} PROVIDER=${PROVIDER} ANON_ID=${ANON_ID}"
 
 # 0) health
-curl -sS "${API}/api/v0.2/health" >/dev/null
+curl -sS "${API}/api/healthz" >/dev/null
 
 # 1) send_code (dev returns dev_code)
-SEND_JSON="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/send_code" \
+SEND_JSON="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/send_code" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"phone\":\"${PHONE}\",\"consent\":true,\"scene\":\"${SCENE}\"}")"
 
@@ -49,7 +49,7 @@ fi
 echo "[ACCEPT_IDENT] code=${CODE}"
 
 # 2) verify -> token1
-VERIFY_JSON="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/verify" \
+VERIFY_JSON="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/verify" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"phone\":\"${PHONE}\",\"code\":\"${CODE}\",\"consent\":true,\"scene\":\"${SCENE}\"}")"
 
@@ -62,7 +62,7 @@ fi
 echo "[ACCEPT_IDENT] token1=${TOKEN1}"
 
 # 3) provider login (expect bound=false, get provider_uid)
-PROV_JSON="$(curl -sS -X POST "${API}/api/v0.2/auth/provider" \
+PROV_JSON="$(curl -sS -X POST "${API}/api/v0.3/auth/provider" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"provider\":\"${PROVIDER}\",\"provider_code\":\"dev\",\"anon_id\":\"${ANON_ID}\"}")"
 
@@ -75,7 +75,7 @@ fi
 echo "[ACCEPT_IDENT] provider_uid=${PROVIDER_UID}"
 
 # 4) bind identity
-BIND_JSON="$(curl -sS -X POST "${API}/api/v0.2/me/identities/bind" \
+BIND_JSON="$(curl -sS -X POST "${API}/api/v0.3/me/identities/bind" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "Authorization: Bearer ${TOKEN1}" \
   -d "{\"provider\":\"${PROVIDER}\",\"provider_uid\":\"${PROVIDER_UID}\",\"consent\":true}")"
@@ -87,7 +87,7 @@ fi
 echo "[ACCEPT_IDENT] identity bound"
 
 # 5) provider login again -> token2
-PROV2_JSON="$(curl -sS -X POST "${API}/api/v0.2/auth/provider" \
+PROV2_JSON="$(curl -sS -X POST "${API}/api/v0.3/auth/provider" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"provider\":\"${PROVIDER}\",\"provider_code\":\"dev\",\"anon_id\":\"${ANON_ID}\"}")"
 
@@ -101,9 +101,9 @@ echo "[ACCEPT_IDENT] token2=${TOKEN2}"
 
 # 6) compare /me/attempts user_id
 ME1="$(curl -sS -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN1}" \
-  "${API}/api/v0.2/me/attempts?per_page=1&page=1")"
+  "${API}/api/v0.3/me/attempts?per_page=1&page=1")"
 ME2="$(curl -sS -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN2}" \
-  "${API}/api/v0.2/me/attempts?per_page=1&page=1")"
+  "${API}/api/v0.3/me/attempts?per_page=1&page=1")"
 
 export ME1
 export ME2

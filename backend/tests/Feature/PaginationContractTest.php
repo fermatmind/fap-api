@@ -25,7 +25,7 @@ final class PaginationContractTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer {$token}",
-        ])->getJson('/api/v0.2/me/attempts');
+        ])->getJson('/api/v0.3/me/attempts');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);

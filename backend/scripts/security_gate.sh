@@ -35,10 +35,10 @@ if (!is_string($source)) {
 }
 
 $checks = [
-    "v0.2 fm_token_auth_group" => "/Route::middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*->group\\s*\\(\\s*function\\s*\\(\\s*\\)\\s*\\{/s",
+    "v0.2 retired_prefix" => "/Route::prefix\\(\\s*\"v0\\.2\"\\s*\\)/s",
+    "v0.2 retired_any_route" => "/Route::any\\(\\s*[\\x27\\x22]\\/\\{any\\?\\}[\\x27\\x22]\\s*,\\s*static\\s+function\\s*\\(\\s*\\)\\s*\\{/s",
     "v0.3 attempts_submit_auth" => "/Route::post\\(\\s*\"\\/attempts\\/submit\"\\s*,\\s*\\[\\s*AttemptWriteController::class\\s*,\\s*\"submit\"\\s*\\]\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*;/s",
     "v0.3 auth_plus_ctx_group" => "/Route::middleware\\(\\s*\\[\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*,\\s*ResolveO[r]gContext::class\\s*\\]\\s*\\)\\s*->\\s*group\\s*\\(/s",
-    "v0.2 admin_auth_group" => "/Route::prefix\\(\\s*\"admin\"\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\AdminAuth::class\\s*\\)\\s*->group\\s*\\(/s",
 ];
 
 $missing = [];
@@ -148,9 +148,9 @@ if ($violations !== []) {
 echo "[SECURITY_GATE] check 3/10: ownership 404 contract (no 403 leaks)"
 php -r '
 $paths = [
-    "app/Http/Controllers/API/V0_2/LegacyReportController.php",
     "app/Http/Controllers/API/V0_3/AttemptReadController.php",
     "app/Http/Controllers/API/V0_3/AttemptProgressController.php",
+    "app/Http/Controllers/API/V0_3/ShareController.php",
     "app/Http/Controllers/LookupController.php",
     "app/Services/Legacy/LegacyReportService.php",
     "app/Services/Legacy/LegacyShareService.php",
@@ -349,9 +349,9 @@ if (preg_match("/[\\x27\\x22]reason[\\x27\\x22]\\s*=>/", $source) === 1) {
 }
 '
 
-echo "[SECURITY_GATE] check 9/10: v0.2 public submit must not overwrite existing attempt id"
+echo "[SECURITY_GATE] check 9/10: v0.2 must stay on deprecated 410 contract"
 php -r '
-$path = getcwd() . "/app/Services/Legacy/Mbti/Attempt/LegacyMbtiAttemptLifecycleService.php";
+$path = getcwd() . "/routes/api.php";
 $source = file_get_contents($path);
 if (!is_string($source)) {
     fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read {$path}\n");
@@ -359,8 +359,9 @@ if (!is_string($source)) {
 }
 
 $checks = [
-    "public overwrite guard" => "/if\\s*\\(\\s*!\\s*\\x24isResultUpsertRoute\\s*\\)\\s*\\{\\s*throw new ApiProblemException\\(\\s*409\\s*,\\s*[\\x27\\x22]ATTEMPT_ALREADY_EXISTS[\\x27\\x22]/s",
-    "actor user resolver" => "/resolveActorUserId\\s*\\(/",
+    "v0.2 retired prefix" => "/Route::prefix\\(\\s*\\x22v0\\.2\\x22\\s*\\)/",
+    "v0.2 deprecated error code" => "/[\\x27\\x22]error_code[\\x27\\x22]\\s*=>\\s*[\\x27\\x22]API_VERSION_DEPRECATED[\\x27\\x22]/",
+    "v0.2 deprecated 410 status" => "/\\],\\s*410\\s*\\)/",
 ];
 
 $missing = [];
@@ -371,7 +372,7 @@ foreach ($checks as $name => $regex) {
 }
 
 if ($missing !== []) {
-    fwrite(STDERR, "[SECURITY_GATE][FAIL] missing v0.2 overwrite guard(s): " . implode(", ", $missing) . "\n");
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] missing v0.2 deprecated contract checks: " . implode(", ", $missing) . "\n");
     exit(1);
 }
 '

@@ -35,9 +35,9 @@ trap cleanup EXIT
 API_BASE="http://127.0.0.1:${SERVE_PORT}"
 health_ok=0
 for i in $(seq 1 40); do
-  code="$(curl -s -o /dev/null -w "%{http_code}" "${API_BASE}/api/v0.2/health" || true)"
+  code="$(curl -s -o /dev/null -w "%{http_code}" "${API_BASE}/api/healthz" || true)"
   if [ "${code}" = "200" ]; then
-    curl -sS "${API_BASE}/api/v0.2/health" > "${OUT_DIR}/health.json" || true
+    curl -sS "${API_BASE}/api/healthz" > "${OUT_DIR}/health.json" || true
     health_ok=1
     break
   fi
@@ -45,7 +45,7 @@ for i in $(seq 1 40); do
 done
 
 if [ "${health_ok}" != "1" ]; then
-  php artisan route:list --path=api/v0.2/health > "${OUT_DIR}/health_route.txt" || true
+  php artisan route:list --path=api/healthz > "${OUT_DIR}/health_route.txt" || true
   cat > "${OUT_DIR}/health.json" <<'JSON'
 {"ok":false,"note":"serve unavailable in sandbox; see health_route.txt"}
 JSON

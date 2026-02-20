@@ -47,7 +47,6 @@ jobs:
     env:
       APP_ENV: testing
       APP_DEBUG: "true"
-      FEATURE_ENABLE_V0_2_REPORT: "true"
 
       DB_CONNECTION: sqlite
       DB_DATABASE: /tmp/fap-ci.sqlite
@@ -161,12 +160,12 @@ jobs:
           SRV_PID=$!
           trap "kill ${SRV_PID}" EXIT
           for i in $(seq 1 30); do
-            curl -sS http://127.0.0.1:18080/api/v0.2/health >/dev/null && break
+            curl -sS http://127.0.0.1:18080/api/healthz >/dev/null && break
             sleep 1
           done
           ANON_ID="ci_selfcheck"
           AUTH_RAW="$(
-            curl -sS -X POST "http://127.0.0.1:18080/api/v0.2/auth/wx_phone" \
+            curl -sS -X POST "http://127.0.0.1:18080/api/v0.3/auth/wx_phone" \
               -H "Content-Type: application/json" \
               -d "{\"wx_code\":\"dev\",\"phone_code\":\"dev\",\"anon_id\":\"${ANON_ID}\"}" \
             || true
@@ -177,7 +176,7 @@ jobs:
               | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["token"] ?? "";'
           )"
           if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then
-            echo "[selfcheck][FAIL] cannot get token from /api/v0.2/auth/wx_phone" >&2
+            echo "[selfcheck][FAIL] cannot get token from /api/v0.3/auth/wx_phone" >&2
             exit 1
           fi
           API="http://127.0.0.1:18080" ANON_ID="$ANON_ID" FM_TOKEN="$FM_TOKEN" bash scripts/verify_mbti.sh
@@ -329,7 +328,6 @@ jobs:
 
     env:
       APP_ENV: ci
-      FEATURE_ENABLE_V0_2_REPORT: "true"
       DB_CONNECTION: mysql
       DB_HOST: 127.0.0.1
       DB_PORT: 3306

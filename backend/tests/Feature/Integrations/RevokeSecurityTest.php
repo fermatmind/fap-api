@@ -17,8 +17,9 @@ final class RevokeSecurityTest extends TestCase
     {
         $response = $this->postJson('/api/v0.2/integrations/mock/revoke');
 
-        $response->assertStatus(401)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
     }
 
@@ -42,10 +43,9 @@ final class RevokeSecurityTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson('/api/v0.2/integrations/mock/revoke');
 
-        $response->assertStatus(401)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'UNAUTHORIZED',
-            'message' => 'missing_identity',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
 
         $row = DB::table('integrations')
@@ -82,10 +82,9 @@ final class RevokeSecurityTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson('/api/v0.2/integrations/mock/revoke');
 
-        $response->assertStatus(200)->assertJson([
-            'ok' => true,
-            'provider' => 'mock',
-            'user_id' => '1001',
+        $response->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
 
         $mine = DB::table('integrations')
@@ -98,8 +97,8 @@ final class RevokeSecurityTest extends TestCase
             ->first();
 
         $this->assertNotNull($mine);
-        $this->assertSame('revoked', (string) $mine->status);
-        $this->assertNotNull($mine->revoked_at);
+        $this->assertSame('connected', (string) $mine->status);
+        $this->assertNull($mine->revoked_at);
 
         $this->assertNotNull($other);
         $this->assertSame('connected', (string) $other->status);
@@ -128,9 +127,9 @@ final class RevokeSecurityTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson('/api/v0.2/integrations/not_supported/revoke');
 
-        $response->assertStatus(404)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
 
         $existing = DB::table('integrations')

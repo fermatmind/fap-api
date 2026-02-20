@@ -31,11 +31,11 @@ echo "${SRV_PID}" > "${ART_DIR}/server.pid"
 trap 'kill "${SRV_PID}" 2>/dev/null || true' EXIT
 
 for i in $(seq 1 40); do
-  curl -sS "${API_BASE}/api/v0.2/health" >/dev/null 2>&1 && break
+  curl -sS "${API_BASE}/api/healthz" >/dev/null 2>&1 && break
   sleep 1
 done
 
-if ! curl -sS "${API_BASE}/api/v0.2/health" >"${ART_DIR}/health.json"; then
+if ! curl -sS "${API_BASE}/api/healthz" >"${ART_DIR}/health.json"; then
   tail -n 200 "${ART_DIR}/logs/server.log" || true
   exit 1
 fi

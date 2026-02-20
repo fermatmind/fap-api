@@ -13,7 +13,7 @@ final class EventPayloadLimitsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_event_payload_is_limited_before_store(): void
+    public function test_v02_event_payload_endpoint_returns_deprecated_contract_before_store(): void
     {
         config()->set('fap.events.max_top_keys', 200);
         config()->set('fap.events.max_depth', 4);
@@ -52,24 +52,14 @@ final class EventPayloadLimitsTest extends TestCase
             ],
         ]);
 
-        $response->assertStatus(201)->assertJson([
-            'ok' => true,
+        $response->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
-
-        $row = DB::table('events')->where('id', (string) $response->json('id'))->first();
-        $this->assertNotNull($row);
-
-        $meta = $row->meta_json ?? null;
-        if (is_string($meta)) {
-            $decoded = json_decode($meta, true);
-            $meta = is_array($decoded) ? $decoded : [];
-        }
-
-        $this->assertIsArray($meta);
-        $this->assertSame(10, strlen((string) data_get($meta, 'props.long')));
+        $this->assertSame(0, DB::table('events')->where('event_code', 'pr44_payload_limit')->count());
     }
 
-    public function test_event_raw_payload_bytes_too_large_returns_413_and_not_store(): void
+    public function test_v02_event_raw_payload_bytes_returns_deprecated_contract_and_not_store(): void
     {
         config()->set('fap.events.max_payload_bytes', 256);
 
@@ -117,9 +107,9 @@ final class EventPayloadLimitsTest extends TestCase
             $rawBody
         );
 
-        $response->assertStatus(413)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'PAYLOAD_TOO_LARGE',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
 
         $this->assertSame(0, DB::table('events')->where('event_code', 'pr48_payload_too_large')->count());

@@ -83,8 +83,8 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 # pack/seed/config consistency
 cd "${BACKEND_DIR}"
@@ -169,12 +169,12 @@ cd "${REPO_DIR}"
 
 # error contract checks
 SHARE_INVALID_JSON="${ART_DIR}/share_invalid_uuid.json"
-http_code="$(curl -sS -o "${SHARE_INVALID_JSON}" -w "%{http_code}" -X POST "${API_BASE}/api/v0.2/shares/not-a-uuid/click" || true)"
+http_code="$(curl -sS -o "${SHARE_INVALID_JSON}" -w "%{http_code}" -X POST "${API_BASE}/api/v0.3/shares/not-a-uuid/click" || true)"
 [[ "${http_code}" == "404" ]] || fail "invalid share uuid must return 404"
 php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j) || (($j["error_code"] ?? "") !== "NOT_FOUND")) {fwrite(STDERR,"share_invalid_uuid_error_code_mismatch\n"); exit(1);} ' "${SHARE_INVALID_JSON}"
 
 ME_ATTEMPTS_JSON="${ART_DIR}/me_attempts_unauthorized.json"
-http_code="$(curl -sS -o "${ME_ATTEMPTS_JSON}" -w "%{http_code}" "${API_BASE}/api/v0.2/me/attempts" || true)"
+http_code="$(curl -sS -o "${ME_ATTEMPTS_JSON}" -w "%{http_code}" "${API_BASE}/api/v0.3/me/attempts" || true)"
 [[ "${http_code}" == "401" ]] || fail "me attempts without token must return 401"
 php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j) || (($j["error_code"] ?? "") !== "UNAUTHORIZED")) {fwrite(STDERR,"me_attempts_error_code_mismatch\n"); exit(1);} ' "${ME_ATTEMPTS_JSON}"
 

@@ -35,8 +35,8 @@ E0="$(count_events)"; R0="$(count_results)"; A0="$(count_attempts)"
 echo "events=$E0 results=$R0 attempts=$A0"
 echo
 
-echo "1) Health: $BASE_URL/api/v0.2/health"
-H="$(jget "$BASE_URL/api/v0.2/health")"
+echo "1) Health: $BASE_URL/api/healthz"
+H="$(jget "$BASE_URL/api/healthz")"
 Hf="$(save_json health "$H")"
 pp "$Hf"
 python3 - "$Hf" <<'PY'
@@ -47,8 +47,8 @@ print("health ok ✅")
 PY
 echo
 
-echo "2) Scale meta: $BASE_URL/api/v0.2/scales/MBTI"
-S="$(jget "$BASE_URL/api/v0.2/scales/MBTI")"
+echo "2) Scale meta: $BASE_URL/api/v0.3/scales/MBTI"
+S="$(jget "$BASE_URL/api/v0.3/scales/MBTI")"
 Sf="$(save_json scale "$S")"
 pp "$Sf"
 python3 - "$Sf" <<'PY'
@@ -60,8 +60,8 @@ print("scale meta ok ✅")
 PY
 echo
 
-echo "3) Questions: $BASE_URL/api/v0.2/scales/MBTI/questions"
-Q="$(jget "$BASE_URL/api/v0.2/scales/MBTI/questions")"
+echo "3) Questions: $BASE_URL/api/v0.3/scales/MBTI/questions"
+Q="$(jget "$BASE_URL/api/v0.3/scales/MBTI/questions")"
 Qf="$(save_json questions "$Q")"
 python3 - "$Qf" <<'PY'
 import json,sys
@@ -74,9 +74,9 @@ print("first_question_id=",items[0].get("question_id"))
 PY
 echo
 
-echo "4) POST attempt: $BASE_URL/api/v0.2/attempts"
+echo "4) POST attempt: $BASE_URL/api/v0.3/attempts"
 ANON="smoke-$(date +%s)"
-qids_json=$(curl -sS "$BASE_URL/api/v0.2/scales/MBTI/questions" | jq -c '[.items[].question_id]')
+qids_json=$(curl -sS "$BASE_URL/api/v0.3/scales/MBTI/questions" | jq -c '[.items[].question_id]')
 export QIDS_JSON="$qids_json"
 answers_json=$(python3 - <<'PY'
 import json, os
@@ -102,7 +102,7 @@ payload = {
 print(json.dumps(payload, ensure_ascii=False))
 PY
 )"
-P="$(jpost "$BASE_URL/api/v0.2/attempts" "$POST_BODY")"
+P="$(jpost "$BASE_URL/api/v0.3/attempts" "$POST_BODY")"
 Pf="$(save_json post_attempt "$P")"
 pp "$Pf"
 
@@ -145,11 +145,11 @@ print("DB delta after POST ok ✅")
 PY
 echo
 
-echo "5) GET result: $BASE_URL/api/v0.2/attempts/$ATTEMPT_ID/result"
+echo "5) GET result: $BASE_URL/api/v0.3/attempts/$ATTEMPT_ID/result"
 GR_BEFORE_R="$R1"
 GR_BEFORE_E="$E1"
 
-G="$(jget "$BASE_URL/api/v0.2/attempts/$ATTEMPT_ID/result")"
+G="$(jget "$BASE_URL/api/v0.3/attempts/$ATTEMPT_ID/result")"
 Gf="$(save_json get_result "$G")"
 pp "$Gf"
 
@@ -180,11 +180,11 @@ print("DB delta after GET result ok ✅")
 PY
 echo
 
-echo "6) GET share: $BASE_URL/api/v0.2/attempts/$ATTEMPT_ID/share"
+echo "6) GET share: $BASE_URL/api/v0.3/attempts/$ATTEMPT_ID/share"
 GS_BEFORE_R="$R2"
 GS_BEFORE_E="$E2"
 
-SHARE="$(jget "$BASE_URL/api/v0.2/attempts/$ATTEMPT_ID/share")"
+SHARE="$(jget "$BASE_URL/api/v0.3/attempts/$ATTEMPT_ID/share")"
 Sf2="$(save_json get_share "$SHARE")"
 pp "$Sf2"
 

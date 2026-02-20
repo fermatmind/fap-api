@@ -38,23 +38,20 @@ class ApiExceptionRendererTest extends TestCase
         $response->assertJsonMissingPath('error');
     }
 
-    public function test_share_click_not_found_returns_json_without_accept_header(): void
+    public function test_v02_share_click_returns_deprecated_json_without_accept_header(): void
     {
         $response = $this->post('/api/v0.2/shares/550e8400-e29b-41d4-a716-446655440000/click');
 
-        $response->assertStatus(404);
+        $response->assertStatus(410);
         $this->assertStringContainsString(
             'application/json',
             strtolower((string) $response->headers->get('Content-Type', ''))
         );
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
-            'message' => 'share not found',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
-        $decoded = json_decode((string) $response->getContent());
-        $this->assertIsObject($decoded);
-        $this->assertNull($decoded->details ?? null);
+        $response->assertJsonMissingPath('error');
     }
 
     public function test_validation_exception_is_standardized(): void

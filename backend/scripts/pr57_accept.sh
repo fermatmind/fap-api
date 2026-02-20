@@ -99,7 +99,7 @@ PR57 Acceptance Summary
   - default_pack_id: ${DEFAULT_PACK_ID}
   - default_dir_version: ${DEFAULT_DIR_VERSION}
 - smoke_urls:
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/healthz
+  - http://127.0.0.1:${SERVE_PORT}/api/healthz
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/webhooks/payment/billing
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/scales/MBTI/questions
 - schema_changes:

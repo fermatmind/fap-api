@@ -70,17 +70,22 @@ jobs:
           php artisan fap:scales:seed-default
           php artisan fap:scales:sync-slugs
 
-      - name: Verify migration observability routes
+      - name: Verify retired admin migration routes are absent
         working-directory: backend
         run: |
-          php artisan route:list | grep -E "migrations/observability|migrations/rollback-preview"
+          if php artisan route:list | grep -E "migrations/observability|migrations/rollback-preview"; then
+            echo "::error::retired admin migration routes still exposed"
+            exit 1
+          fi
 
-      - name: Run migration observability tests
+      - name: Run schema and migration regression
         working-directory: backend
         run: |
-          php artisan test --filter AdminMigrationObservabilityTest
           php artisan test --filter SchemaIndexTest
+          php artisan migrate:rollback --step=1 --force
+          php artisan migrate --force
 
-      - name: Run PR55 acceptance script
+      - name: Run security guardrails regression
+        working-directory: backend
         run: |
-          bash backend/scripts/pr55_accept.sh
+          php artisan test tests/Unit/Security/SecurityGuardrailsTest.php

@@ -126,7 +126,7 @@ trap restore EXIT
 # =========================
 call_refresh() {
   local label="$1"
-  local url="$BASE/api/v0.2/attempts/$ATT/report?refresh=1"
+  local url="$BASE/api/v0.3/attempts/$ATT/report?refresh=1"
   local http=""
   local curl_args=()
 

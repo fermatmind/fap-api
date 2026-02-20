@@ -239,11 +239,11 @@ jobs:
             *) echo "::error::invalid env=$TARGET_ENV"; exit 2;;
           esac
 
-          curl -fsS "$PUBLIC_BASE/api/v0.2/health" \
+          curl -fsS "$PUBLIC_BASE/api/healthz" \
             | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
 
-          curl -fsS "$PUBLIC_BASE/api/v0.2/scales/MBTI/questions?region=${REGION}&locale=${LOCALE}" \
+          curl -fsS "$PUBLIC_BASE/api/v0.3/scales/MBTI/questions?region=${REGION}&locale=${LOCALE}" \
             | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null
 
-          curl -fsS "$PUBLIC_BASE/api/v0.2/content-packs" \
+          curl -fsS "$PUBLIC_BASE/api/v0.3/scales" \
             | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((($j["ok"] ?? false) === true) ? 0 : 1);' >/dev/null

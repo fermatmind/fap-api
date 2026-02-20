@@ -19,7 +19,7 @@ class HealthzExposureTest extends TestCase
 
         $this->withServerVariables($server)
             ->getJson('/api/v0.2/healthz')
-            ->assertStatus(404);
+            ->assertStatus(410);
     }
 
     public function test_allowlist_ip_gets_minimal_healthz_payload(): void
@@ -45,7 +45,7 @@ class HealthzExposureTest extends TestCase
 
         $this->withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
             ->getJson('/api/v0.2/healthz')
-            ->assertStatus(200);
+            ->assertStatus(410);
     }
 
     private function forceEnvironment(string $env): void

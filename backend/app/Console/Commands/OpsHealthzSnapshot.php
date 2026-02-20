@@ -15,7 +15,7 @@ class OpsHealthzSnapshot extends Command
         {--env= : Environment name}
         {--base-url= : Base url for healthz}';
 
-    protected $description = 'Fetch /api/v0.2/healthz and persist ops health snapshot';
+    protected $description = 'Fetch /api/healthz and persist ops health snapshot';
 
     public function handle(): int
     {
@@ -29,7 +29,7 @@ class OpsHealthzSnapshot extends Command
             $baseUrl = (string) (\App\Support\RuntimeConfig::raw('FAP_BASE_URL') ?: 'http://127.0.0.1:8000');
         }
 
-        $url = rtrim($baseUrl, '/') . '/api/v0.2/healthz';
+        $url = rtrim($baseUrl, '/') . '/api/healthz';
 
         try {
             $data = null;
@@ -114,7 +114,7 @@ class OpsHealthzSnapshot extends Command
     private function fetchLocalHealthz(): ?array
     {
         try {
-            $request = Request::create('/api/v0.2/healthz', 'GET');
+            $request = Request::create('/api/healthz', 'GET');
             $controller = app(HealthzController::class);
             $response = $controller->show($request);
             $payload = $response->getData(true);

@@ -31,7 +31,7 @@ echo "${SRV_PID}" > "${ART_DIR}/server.pid"
 trap 'kill ${SRV_PID} >/dev/null 2>&1 || true' EXIT
 
 for i in $(seq 1 40); do
-  curl -sS "${API_BASE}/api/v0.2/health" >/dev/null && break
+  curl -sS "${API_BASE}/api/healthz" >/dev/null && break
   sleep 1
 done
 

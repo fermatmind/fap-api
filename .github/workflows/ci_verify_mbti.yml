@@ -193,7 +193,7 @@ jobs:
           php artisan test --filter ContentPacksIndexManifestConsistencyTest
           php artisan test --filter ContentPackResolverCacheTest
 
-      - name: Check content packs index endpoint
+      - name: Check v0.3 public scale index endpoint
         working-directory: backend
         run: |
           set -euo pipefail
@@ -201,10 +201,10 @@ jobs:
           SRV_PID=$!
           trap "kill ${SRV_PID}" EXIT
           for i in $(seq 1 30); do
-            curl -sS http://127.0.0.1:18000/api/v0.2/health >/dev/null && break
+            curl -sS http://127.0.0.1:18000/api/healthz >/dev/null && break
             sleep 1
           done
-          curl -sS http://127.0.0.1:18000/api/v0.2/content-packs | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);'
+          curl -sS http://127.0.0.1:18000/api/v0.3/scales | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);'
 
       - name: Run ci_verify_mbti
         env:

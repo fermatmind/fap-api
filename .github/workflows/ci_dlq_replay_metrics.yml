@@ -83,12 +83,15 @@ jobs:
           php artisan fap:scales:seed-default
           php artisan fap:scales:sync-slugs
 
-      - name: Route contract for DLQ APIs
+      - name: Verify legacy DLQ routes are retired
         working-directory: backend
         run: |
-          php artisan route:list | grep -E "queue/dlq/metrics|queue/dlq/replay"
+          if php artisan route:list | grep -E "queue/dlq/metrics|queue/dlq/replay"; then
+            echo "::error::legacy DLQ routes still exposed"
+            exit 1
+          fi
 
-      - name: Run DLQ replay metrics tests
+      - name: Run security guardrails regression
         working-directory: backend
         run: |
-          php artisan test --filter AdminQueueDlqReplayTest
+          php artisan test tests/Unit/Security/SecurityGuardrailsTest.php

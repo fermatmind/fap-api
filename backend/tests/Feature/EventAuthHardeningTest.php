@@ -13,7 +13,7 @@ final class EventAuthHardeningTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_events_rejects_revoked_fm_token(): void
+    public function test_v02_events_rejects_revoked_fm_token_with_deprecated_contract(): void
     {
         $token = $this->seedUserAndToken(3001, revokedAt: now()->subMinute()->toDateTimeString());
 
@@ -21,14 +21,14 @@ final class EventAuthHardeningTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson('/api/v0.2/events', $this->eventPayload('evt_revoked'));
 
-        $response->assertStatus(401)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'UNAUTHORIZED',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
         $this->assertSame(0, DB::table('events')->where('event_code', 'evt_revoked')->count());
     }
 
-    public function test_events_rejects_expired_fm_token(): void
+    public function test_v02_events_rejects_expired_fm_token_with_deprecated_contract(): void
     {
         $token = $this->seedUserAndToken(3002, expiresAt: now()->subMinute()->toDateTimeString());
 
@@ -36,14 +36,14 @@ final class EventAuthHardeningTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson('/api/v0.2/events', $this->eventPayload('evt_expired'));
 
-        $response->assertStatus(401)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'UNAUTHORIZED',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
         $this->assertSame(0, DB::table('events')->where('event_code', 'evt_expired')->count());
     }
 
-    public function test_events_bind_user_id_to_authenticated_token(): void
+    public function test_v02_events_do_not_write_even_with_authenticated_token(): void
     {
         $token = $this->seedUserAndToken(3003);
 
@@ -56,16 +56,14 @@ final class EventAuthHardeningTest extends TestCase
             ],
         ]));
 
-        $response->assertStatus(201)->assertJson([
-            'ok' => true,
+        $response->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
-
-        $row = DB::table('events')->where('id', (string) $response->json('id'))->first();
-        $this->assertNotNull($row);
-        $this->assertSame(3003, (int) ($row->user_id ?? 0));
+        $this->assertSame(0, DB::table('events')->where('event_code', 'evt_bound_user')->count());
     }
 
-    public function test_events_bind_anon_id_to_authenticated_token(): void
+    public function test_v02_events_do_not_write_anon_binding_even_with_authenticated_token(): void
     {
         $token = $this->seedUserAndToken(3004, anonId: 'event-auth-token-anon');
 
@@ -78,16 +76,14 @@ final class EventAuthHardeningTest extends TestCase
             ],
         ]));
 
-        $response->assertStatus(201)->assertJson([
-            'ok' => true,
+        $response->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
-
-        $row = DB::table('events')->where('id', (string) $response->json('id'))->first();
-        $this->assertNotNull($row);
-        $this->assertSame('event-auth-token-anon', (string) ($row->anon_id ?? ''));
+        $this->assertSame(0, DB::table('events')->where('event_code', 'evt_bound_anon')->count());
     }
 
-    public function test_events_reject_cross_user_attempt_reference(): void
+    public function test_v02_events_reject_cross_user_attempt_reference_with_deprecated_contract(): void
     {
         $ownerToken = $this->seedUserAndToken(3005, anonId: 'event-owner-anon');
         $attackerToken = $this->seedUserAndToken(3006, anonId: 'event-attacker-anon');
@@ -99,7 +95,7 @@ final class EventAuthHardeningTest extends TestCase
             'Authorization' => "Bearer {$ownerToken}",
         ])->postJson('/api/v0.2/events', array_merge($this->eventPayload('evt_owner_write'), [
             'attempt_id' => $attemptId,
-        ]))->assertStatus(201);
+        ]))->assertStatus(410);
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer {$attackerToken}",
@@ -107,15 +103,15 @@ final class EventAuthHardeningTest extends TestCase
             'attempt_id' => $attemptId,
         ]));
 
-        $response->assertStatus(404)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
 
         $this->assertSame(0, DB::table('events')->where('event_code', 'evt_cross_user_deny')->count());
     }
 
-    public function test_events_use_token_org_when_token_is_org_bound(): void
+    public function test_v02_events_use_deprecated_contract_when_token_is_org_bound(): void
     {
         $token = $this->seedUserAndToken(3007, orgId: 17);
 
@@ -124,13 +120,11 @@ final class EventAuthHardeningTest extends TestCase
             'X-Org-Id' => '999',
         ])->postJson('/api/v0.2/events', $this->eventPayload('evt_token_org_bound'));
 
-        $response->assertStatus(201)->assertJson([
-            'ok' => true,
+        $response->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
-
-        $row = DB::table('events')->where('id', (string) $response->json('id'))->first();
-        $this->assertNotNull($row);
-        $this->assertSame(17, (int) ($row->org_id ?? 0));
+        $this->assertSame(0, DB::table('events')->where('event_code', 'evt_token_org_bound')->count());
     }
 
     private function eventPayload(string $eventCode): array

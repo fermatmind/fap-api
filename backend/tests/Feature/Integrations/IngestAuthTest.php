@@ -17,9 +17,9 @@ final class IngestAuthTest extends TestCase
     {
         $response = $this->postJson('/api/v0.2/integrations/mock/ingest', $this->payload());
 
-        $response->assertStatus(401)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'UNAUTHORIZED',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
     }
 
@@ -50,20 +50,12 @@ final class IngestAuthTest extends TestCase
             'user_id' => '42',
         ]));
 
-        $response->assertStatus(200)->assertJson(['ok' => true]);
-
-        $batchId = (string) $response->json('batch_id');
-        $batch = DB::table('ingest_batches')->where('id', $batchId)->first();
-
-        $this->assertNotNull($batch);
-        $this->assertSame(1001, (int) $batch->user_id);
-        $this->assertSame(1001, (int) ($batch->actor_user_id ?? 0));
-        $this->assertSame('sanctum', (string) ($batch->auth_mode ?? ''));
-        $this->assertSame(0, (int) ($batch->signature_ok ?? 0));
-
-        $sleep = DB::table('sleep_samples')->where('ingest_batch_id', $batchId)->first();
-        $this->assertNotNull($sleep);
-        $this->assertSame(1001, (int) $sleep->user_id);
+        $response->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
+        ]);
+        $this->assertSame(0, DB::table('ingest_batches')->count());
+        $this->assertSame(0, DB::table('sleep_samples')->count());
     }
 
     public function test_ingest_with_valid_ingest_key_writes_mapped_user_id(): void
@@ -96,24 +88,11 @@ final class IngestAuthTest extends TestCase
             'X-Ingest-Event-Id' => $eventId,
         ])->postJson('/api/v0.2/integrations/mock/ingest', $payload);
 
-        $response->assertStatus(200)->assertJson(['ok' => true]);
-
-        $batchId = (string) $response->json('batch_id');
-        $batch = DB::table('ingest_batches')->where('id', $batchId)->first();
-
-        $this->assertNotNull($batch);
-        $this->assertSame(1001, (int) $batch->user_id);
-        $this->assertNull($batch->actor_user_id ?? null);
-        $this->assertSame('signature', (string) ($batch->auth_mode ?? ''));
-        $this->assertSame(1, (int) ($batch->signature_ok ?? 0));
-
-        $integration = DB::table('integrations')
-            ->where('provider', 'mock')
-            ->where('ingest_key_hash', hash('sha256', $ingestKey))
-            ->first();
-        $this->assertNotNull($integration);
-        $this->assertSame($eventId, (string) ($integration->webhook_last_event_id ?? ''));
-        $this->assertGreaterThan(0, (int) ($integration->webhook_last_timestamp ?? 0));
+        $response->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
+        ]);
+        $this->assertSame(0, DB::table('ingest_batches')->count());
     }
 
     public function test_ingest_with_invalid_ingest_key_returns_401(): void
@@ -140,9 +119,9 @@ final class IngestAuthTest extends TestCase
             'X-Ingest-Event-Id' => 'evt_bad_key_001',
         ])->postJson('/api/v0.2/integrations/mock/ingest', $this->payload());
 
-        $response->assertStatus(401)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'UNAUTHORIZED',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
         $this->assertSame(0, DB::table('ingest_batches')->count());
     }

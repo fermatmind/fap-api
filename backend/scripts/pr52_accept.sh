@@ -89,8 +89,8 @@ PR52 Acceptance Summary
   - anon_id: ${ANON_ID}
   - default_pack_id: ${DEFAULT_PACK_ID}
 - smoke_urls:
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/me/attempts
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/shares/not-a-uuid/click
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/me/attempts
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/shares/not-a-uuid/click
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/not-a-uuid/report
 - schema_changes:
   - none

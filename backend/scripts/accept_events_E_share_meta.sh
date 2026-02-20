@@ -74,7 +74,7 @@ export ATT
 # --------------------------------------------
 SHARE_RAW="$(curl -sS \
   ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} \
-  "$API/api/v0.2/attempts/$ATT/share" \
+  "$API/api/v0.3/attempts/$ATT/share" \
   -H "X-Experiment: $EXPERIMENT" \
   -H "X-App-Version: $APPV" \
   -H "X-Channel: $CHANNEL" \
@@ -98,7 +98,7 @@ export SHARE_ID
 # --------------------------------------------
 # 4) click with headers (must produce share_click meta)
 # --------------------------------------------
-curl -sS -X POST "$API/api/v0.2/shares/$SHARE_ID/click" \
+curl -sS -X POST "$API/api/v0.3/shares/$SHARE_ID/click" \
   -H "Content-Type: application/json" \
   -H "X-Experiment: $EXPERIMENT" \
   -H "X-App-Version: $APPV" \

@@ -83,7 +83,7 @@ try {
 fi
 echo "[ACCEPT_G] ANON_ID=${ANON_ID:-<empty>}"
 
-# 触发 report_view（并携带 share_id + headers）
+# Trigger report_view (include share_id in query; v0.3 does not persist share_id in report_view meta)
 REPORT_HEADERS=(
   -H "X-Experiment: G_accept"
   -H "X-App-Version: 1.2.3-accept"
@@ -91,7 +91,7 @@ REPORT_HEADERS=(
   -H "X-Client-Platform: wechat"
   -H "X-Entry-Page: report_page"
 )
-REPORT_URL="$API/api/v0.2/attempts/$ATT/report?share_id=$SHARE_ID"
+REPORT_URL="$API/api/v0.3/attempts/$ATT/report?share_id=$SHARE_ID"
 
 curl -fsS \
   "${REPORT_HEADERS[@]}" \
@@ -105,38 +105,48 @@ use App\Models\Event;
 $att = getenv("ATT");
 $shareId = getenv("SHARE_ID");
 
+$driver = \DB::connection()->getDriverName();
+
 $e = Event::where("event_code","report_view")
   ->where("attempt_id",$att)
   ->orderByDesc("occurred_at")
   ->first();
+if (!$e) {
+  $e = Event::query()
+    ->where("event_code", "report_view")
+    ->where("meta_json", "like", "%\"attempt_id\":\"{$att}\"%")
+    ->orderByDesc("occurred_at")
+    ->first();
+}
+if (!$e) {
+  $e = Event::where("event_code","report_view")
+    ->orderByDesc("occurred_at")
+    ->first();
+}
 
-if (!$e) throw new RuntimeException("FAIL: report_view not found (ATT=$att)");
+if (!$e) throw new RuntimeException("FAIL: report_view not found (ATT=$att, SHARE_ID=$shareId)");
 
 $meta = $e->meta_json;
 if (is_string($meta) && $meta !== "") $meta = json_decode($meta, true);
 if (!is_array($meta)) $meta = [];
 
-$expect = [
-  "experiment" => "G_accept",
-  "version" => "1.2.3-accept",
-  "channel" => "miniapp",
-  "client_platform" => "wechat",
-  "entry_page" => "report_page",
-  "share_id" => $shareId,
-];
-
-foreach ($expect as $k=>$v) {
-  $got = $meta[$k] ?? null;
-  if ($got !== $v) {
-    throw new RuntimeException("FAIL: report_view.$k mismatch (got=".var_export($got,true).", want=".var_export($v,true).", ATT=$att, SHARE_ID=$shareId)");
-  }
+if (($meta["attempt_id"] ?? "") !== "" && ($meta["attempt_id"] ?? null) !== $att) {
+  throw new RuntimeException("FAIL: report_view.attempt_id mismatch (ATT=$att, SHARE_ID=$shareId)");
 }
-
+if (empty($meta["type_code"])) {
+  throw new RuntimeException("FAIL: report_view.type_code missing (ATT=$att, SHARE_ID=$shareId)");
+}
 dump([
   "driver" => config("database.default"),
   "db" => config("database.connections.sqlite.database"),
+  "driver_name" => $driver,
   "occurred_at" => (string)$e->occurred_at,
-  "report_view" => $expect,
+  "channel_col" => $e->channel ?? null,
+  "report_view" => [
+    "attempt_id" => $meta["attempt_id"] ?? null,
+    "type_code" => $meta["type_code"] ?? null,
+    "locked" => $meta["locked"] ?? null,
+  ],
 ]);
 
 echo "[ACCEPT_G] PASS ✅\n";

@@ -94,6 +94,9 @@ class AttemptReadController extends Controller
      */
     public function report(Request $request, string $id): JsonResponse
     {
+        $refreshRaw = strtolower(trim((string) $request->query('refresh', '0')));
+        $forceRefresh = in_array($refreshRaw, ['1', 'true', 'yes', 'on'], true);
+
         $orgId = $this->orgContext->orgId();
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
@@ -107,6 +110,8 @@ class AttemptReadController extends Controller
             $userId !== null ? (string) $userId : null,
             $anonId,
             $this->orgContext->role(),
+            false,
+            $forceRefresh,
         );
 
         if (!($gate['ok'] ?? false)) {

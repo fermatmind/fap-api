@@ -93,7 +93,7 @@ PR47 Acceptance Summary
   - default_pack_id: ${DEFAULT_PACK_ID}
 - smoke_urls:
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/scales/MBTI/questions
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/webhooks/mock
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/webhooks/mock
 - schema_changes:
   - add columns on integrations: webhook_last_event_id, webhook_last_timestamp, webhook_last_received_at
   - add index: integrations_provider_external_user_idx

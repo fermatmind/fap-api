@@ -123,7 +123,7 @@ if (!is_array($d) || !($d["ok"] ?? false)) {
 
 # 7) rate limit probe (public GET)
 RATE_HEADERS="${ART_DIR}/rate_limit_headers.txt"
-HTTP_CODE="$(curl -sS -D "${RATE_HEADERS}" -o /dev/null -w "%{http_code}" "${API_BASE}/api/v0.2/health")"
+HTTP_CODE="$(curl -sS -D "${RATE_HEADERS}" -o /dev/null -w "%{http_code}" "${API_BASE}/api/healthz")"
 if [[ "${HTTP_CODE}" != "200" ]]; then
   fail "rate limit probe initial request failed http=${HTTP_CODE}"
 fi
@@ -142,7 +142,7 @@ ATTEMPTS=$((REMAINING + 1))
 HIT=0
 for i in $(seq 1 "${ATTEMPTS}"); do
   HDR="${ART_DIR}/rate_limit_attempt_${i}.headers"
-  CODE="$(curl -sS -D "${HDR}" -o /dev/null -w "%{http_code}" "${API_BASE}/api/v0.2/health")"
+  CODE="$(curl -sS -D "${HDR}" -o /dev/null -w "%{http_code}" "${API_BASE}/api/healthz")"
   if [[ "${CODE}" == "429" ]]; then
     HIT=1
     RETRY_AFTER="$(grep -i '^Retry-After:' "${HDR}" | tail -n 1 | awk '{print $2}' | tr -d '\r')"

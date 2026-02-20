@@ -19,7 +19,6 @@ export APP_ENV="${APP_ENV:-testing}"
 export DB_CONNECTION=sqlite
 export DB_DATABASE=/tmp/fap-ci.sqlite
 export QUEUE_CONNECTION=sync
-export FEATURE_ENABLE_V0_2_REPORT="${FEATURE_ENABLE_V0_2_REPORT:-1}"
 
 # Content packs (force local driver + repo path)
 export FAP_PACKS_DRIVER=local
@@ -57,7 +56,7 @@ php artisan key:generate --force >/dev/null 2>&1 || true
 bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
 php artisan fap:schema:verify
 
-# Ensure MBTI commercial benefit codes exist for v0.2 report/share entitlement gate.
+# Ensure MBTI commercial benefit codes exist for report/share entitlement gate.
 BACKEND_DIR="$BACKEND_DIR" php -r '
 $backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
 require $backendDir . "/vendor/autoload.php";
@@ -527,8 +526,8 @@ echo "[CI] starting server: php artisan serve --host=$HOST --port=$PORT"
 php artisan serve --host="$HOST" --port="$PORT" >"$SERVE_LOG" 2>&1 &
 SERVE_PID=$!
 
-echo "[CI] waiting for health: $API/api/v0.2/health"
-wait_health "$API/api/v0.2/health" 100 || {
+echo "[CI] waiting for health: $API/api/healthz"
+wait_health "$API/api/healthz" 100 || {
   echo "[CI][FAIL] server not ready"
   echo "---- tail artisan_serve.log ----" >&2
   tail -n 120 "$SERVE_LOG" >&2 || true
@@ -608,8 +607,8 @@ fi
 # -----------------------------
 # Smoke: questions endpoint must be ok=true
 # -----------------------------
-echo "[CI] smoke: /api/v0.2/scales/MBTI/questions"
-curl -fsS "$API/api/v0.2/scales/MBTI/questions" >"$SMOKE_Q_LOG" || {
+echo "[CI] smoke: /api/v0.3/scales/MBTI/questions"
+curl -fsS "$API/api/v0.3/scales/MBTI/questions" >"$SMOKE_Q_LOG" || {
   echo "[CI][FAIL] smoke curl failed"
   tail -n 120 "$SERVE_LOG" >&2 || true
   exit 13
@@ -631,14 +630,14 @@ echo "[CI] smoke OK"
 echo "[CI] get fm_token for gated endpoints"
 echo "[CI] verify anon_id=$ANON_ID"
 FM_TOKEN="$(
-  curl -sS -X POST "$API/api/v0.2/auth/wx_phone" \
+  curl -sS -X POST "$API/api/v0.3/auth/wx_phone" \
     -H "Content-Type: application/json" \
     -d "{\"wx_code\":\"dev\",\"phone_code\":\"dev\",\"anon_id\":\"${ANON_ID}\"}" \
   | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["token"] ?? "";'
 )"
 
 if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then
-  echo "[CI][FAIL] cannot get token from /api/v0.2/auth/wx_phone" >&2
+  echo "[CI][FAIL] cannot get token from /api/v0.3/auth/wx_phone" >&2
   exit 15
 fi
 
@@ -659,7 +658,7 @@ if [[ ! -s "$ATTEMPT_ID_FILE" ]]; then
   fail "missing attempt_id file for content_graph checks: $ATTEMPT_ID_FILE"
 fi
 ATTEMPT_ID="$(cat "$ATTEMPT_ID_FILE")"
-REPORT_URL="$API/api/v0.2/attempts/$ATTEMPT_ID/report"
+REPORT_URL="$API/api/v0.3/attempts/$ATTEMPT_ID/report?anon_id=$ANON_ID"
 
 RR_REPORT_1="$RR_DIR/report_rr_1.json"
 RR_REPORT_2="$RR_DIR/report_rr_2.json"

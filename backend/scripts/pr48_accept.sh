@@ -94,7 +94,7 @@ PR48 Acceptance Summary
   - default_pack_id: ${DEFAULT_PACK_ID}
 - smoke_urls:
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/scales/MBTI/questions
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/events
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/events
 - schema_changes:
   - none
 TXT

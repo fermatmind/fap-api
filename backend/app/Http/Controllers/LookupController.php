@@ -16,7 +16,7 @@ class LookupController extends Controller
     use ResolvesOrgId;
 
     /**
-     * GET /api/v0.2/lookup/ticket/{code}
+     * GET /api/v0.3/lookup/ticket/{code}
      */
     public function lookupTicket(Request $request, string $code): JsonResponse
     {
@@ -81,15 +81,15 @@ class LookupController extends Controller
             'ok' => true,
             'attempt_id' => $id,
             'ticket_code' => $attempt->ticket_code,
-            'result_api' => "/api/v0.2/attempts/{$id}/result",
-            'report_api' => "/api/v0.2/attempts/{$id}/report",
+            'result_api' => "/api/v0.3/attempts/{$id}/result",
+            'report_api' => "/api/v0.3/attempts/{$id}/report",
             'result_page' => null,
             'report_page' => null,
         ]);
     }
 
     /**
-     * POST /api/v0.2/lookup/device
+     * POST /api/v0.3/lookup/device
      */
     public function lookupDevice(Request $request): JsonResponse
     {
@@ -202,8 +202,8 @@ class LookupController extends Controller
             $items[] = [
                 'attempt_id' => $a->id,
                 'ticket_code' => $a->ticket_code,
-                'result_api' => "/api/v0.2/attempts/{$a->id}/result",
-                'report_api' => "/api/v0.2/attempts/{$a->id}/report",
+                'result_api' => "/api/v0.3/attempts/{$a->id}/result",
+                'report_api' => "/api/v0.3/attempts/{$a->id}/report",
             ];
         }
 
@@ -219,7 +219,7 @@ class LookupController extends Controller
     }
 
     /**
-     * POST /api/v0.2/lookup/order
+     * POST /api/v0.3/lookup/order
      */
     public function lookupOrder(Request $request): JsonResponse
     {
@@ -313,8 +313,8 @@ class LookupController extends Controller
             'attempt_id' => $attemptId !== '' ? $attemptId : null,
         ];
         if ($attemptId !== '') {
-            $resp['result_api'] = "/api/v0.2/attempts/{$attemptId}/result";
-            $resp['report_api'] = "/api/v0.2/attempts/{$attemptId}/report";
+            $resp['result_api'] = "/api/v0.3/attempts/{$attemptId}/result";
+            $resp['report_api'] = "/api/v0.3/attempts/{$attemptId}/report";
         }
 
         $logger->log('lookup_order', true, $request, null, [
@@ -473,7 +473,7 @@ class LookupController extends Controller
     }
 
     /**
-     * ✅ GET /api/v0.2/me/attempts  (fm_token gate)
+     * ✅ GET /api/v0.3/me/attempts  (fm_token gate)
      *
      * Query:
      * - limit: default 20, max 50
@@ -555,8 +555,8 @@ class LookupController extends Controller
                 'scale_version' => $a->scale_version,
                 'type_code' => $r?->type_code ?? null,
                 'created_at' => $a->created_at ? $a->created_at->toISOString() : null,
-                'result_api' => "/api/v0.2/attempts/{$a->id}/result",
-                'report_api' => "/api/v0.2/attempts/{$a->id}/report",
+                'result_api' => "/api/v0.3/attempts/{$a->id}/result",
+                'report_api' => "/api/v0.3/attempts/{$a->id}/report",
             ];
         }
 

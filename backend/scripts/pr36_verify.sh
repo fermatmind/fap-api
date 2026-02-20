@@ -37,12 +37,12 @@ trap cleanup EXIT
 API_BASE="http://127.0.0.1:${SERVE_PORT}"
 
 for i in $(seq 1 40); do
-  code="$(curl -sS -o /dev/null -w "%{http_code}" "${API_BASE}/api/v0.2/health" || true)"
+  code="$(curl -sS -o /dev/null -w "%{http_code}" "${API_BASE}/api/healthz" || true)"
   [ "${code}" = "200" ] && break
   sleep 1
 done
 
-curl -sS "${API_BASE}/api/v0.2/health" > "${OUT_DIR}/health.json"
+curl -sS "${API_BASE}/api/healthz" > "${OUT_DIR}/health.json"
 
 echo "[PR${PR_NUM}] run unit test: GenericLikertDriverTest" | tee -a "${OUT_DIR}/verify.log"
 php artisan test --filter "GenericLikertDriverTest" | tee "${OUT_DIR}/phpunit.log"

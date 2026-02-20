@@ -84,8 +84,8 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 cd "${BACKEND_DIR}"
 php artisan route:list --path=api/v0.3/webhooks/payment --json > "${ART_DIR}/route_webhook.json"

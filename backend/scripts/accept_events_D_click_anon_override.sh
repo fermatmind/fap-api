@@ -48,7 +48,7 @@ echo "[ACCEPT_D2] ATT=$ATT"
 export ATT
 
 # --- Call /share to get SHARE_ID
-SHARE_RAW="$(curl -sS ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} "$API/api/v0.2/attempts/$ATT/share" || true)"
+SHARE_RAW="$(curl -sS ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} "$API/api/v0.3/attempts/$ATT/share" || true)"
 SHARE_JSON="$(printf '%s\n' "$SHARE_RAW" | sed -n '/^{/,$p')"
 SHARE_ID="$(printf '%s\n' "$SHARE_JSON" | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["share_id"] ?? ($j["shareId"] ?? "");' 2>/dev/null || true)"
 
@@ -64,7 +64,7 @@ export SHARE_ID
 OVERRIDE_ANON_ID="client_override_123"
 echo "[ACCEPT_D2] override_anon_id=$OVERRIDE_ANON_ID"
 
-CLICK_RAW="$(curl -sS -X POST "$API/api/v0.2/shares/$SHARE_ID/click" \
+CLICK_RAW="$(curl -sS -X POST "$API/api/v0.3/shares/$SHARE_ID/click" \
   -H "Content-Type: application/json" \
   -d "{\"anon_id\":\"$OVERRIDE_ANON_ID\"}" \
   || true)"

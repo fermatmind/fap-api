@@ -248,8 +248,8 @@ class HighIdorOwnership404Test extends TestCase
             'Authorization' => 'Bearer ' . $anonBToken,
         ])->postJson('/api/v0.2/lookup/order', [
             'order_no' => $orderNo,
-        ])->assertStatus(404)
-            ->assertJsonPath('error_code', 'NOT_FOUND');
+        ])->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
     }
 
     public function test_anon_b_cannot_submit_feedback_for_anon_a_attempt(): void
@@ -264,8 +264,8 @@ class HighIdorOwnership404Test extends TestCase
             'Authorization' => 'Bearer ' . $anonBToken,
         ])->postJson("/api/v0.2/attempts/{$attemptId}/feedback", [
             'score' => 3,
-        ])->assertStatus(404)
-            ->assertJsonPath('error_code', 'NOT_FOUND');
+        ])->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
     }
 
     public function test_anon_b_cannot_post_feedback_to_anon_a_attempt(): void
@@ -295,8 +295,8 @@ class HighIdorOwnership404Test extends TestCase
             'Authorization' => 'Bearer ' . $attackerToken,
         ])->postJson("/api/v0.2/attempts/{$attemptId}/feedback", [
             'score' => 4,
-        ])->assertStatus(404)
-            ->assertJsonPath('error_code', 'NOT_FOUND');
+        ])->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
     }
 
     public function test_anon_b_cannot_access_anon_a_psychometrics_stats_or_quality(): void
@@ -322,11 +322,11 @@ class HighIdorOwnership404Test extends TestCase
 
         $this->withHeaders(['X-Anon-Id' => self::ANON_B])
             ->getJson("/api/v0.2/attempts/{$attemptId}/stats")
-            ->assertStatus(404);
+            ->assertStatus(410);
 
         $this->withHeaders(['X-Anon-Id' => self::ANON_B])
             ->getJson("/api/v0.2/attempts/{$attemptId}/quality")
-            ->assertStatus(404);
+            ->assertStatus(410);
     }
 
 }

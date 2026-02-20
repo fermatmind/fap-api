@@ -87,8 +87,8 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 cd "${BACKEND_DIR}"
 php -r '
@@ -384,7 +384,7 @@ MIGRATION_OBS_JSON="${ART_DIR}/migration_observability.json"
 http_code="$(curl -sS -o "${MIGRATION_OBS_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-FAP-Admin-Token: ${FAP_ADMIN_TOKEN}" \
-  "${API_BASE}/api/v0.2/admin/migrations/observability?limit=5" || true)"
+  "${API_BASE}/api/v0.3/admin/migrations/observability?limit=5" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "migration_observability_failed http=${http_code}" >&2
   cat "${MIGRATION_OBS_JSON}" >&2 || true
@@ -402,7 +402,7 @@ ROLLBACK_PREVIEW_JSON="${ART_DIR}/migration_rollback_preview.json"
 http_code="$(curl -sS -o "${ROLLBACK_PREVIEW_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-FAP-Admin-Token: ${FAP_ADMIN_TOKEN}" \
-  "${API_BASE}/api/v0.2/admin/migrations/rollback-preview?steps=2" || true)"
+  "${API_BASE}/api/v0.3/admin/migrations/rollback-preview?steps=2" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "rollback_preview_failed http=${http_code}" >&2
   cat "${ROLLBACK_PREVIEW_JSON}" >&2 || true

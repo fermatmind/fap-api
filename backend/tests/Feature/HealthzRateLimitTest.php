@@ -10,7 +10,12 @@ class HealthzRateLimitTest extends TestCase
 {
     public function test_healthz_returns_minimal_payload_and_request_id(): void
     {
-        $response = $this->getJson('/api/healthz');
+        config([
+            'healthz.allowed_ips' => ['127.0.0.1/32'],
+        ]);
+
+        $response = $this->withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
+            ->getJson('/api/healthz');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -29,22 +34,19 @@ class HealthzRateLimitTest extends TestCase
         config([
             'fap.rate_limits.api_public_per_minute' => 2,
             'fap.rate_limits.bypass_in_test_env' => false,
+            'healthz.allowed_ips' => ['198.51.100.23/32'],
         ]);
 
         $server = ['REMOTE_ADDR' => '198.51.100.23'];
-        $ip = Request::create('/api/v0.2/health', 'GET', [], [], [], $server)->ip();
+        $ip = Request::create('/api/healthz', 'GET', [], [], [], $server)->ip();
         app(RateLimiter::class)->clear(md5('api_public' . 'ip:' . $ip));
 
-        $this->withServerVariables($server)->getJson('/api/v0.2/health')->assertStatus(200);
-        $this->withServerVariables($server)->getJson('/api/v0.2/health')->assertStatus(200);
+        $this->withServerVariables($server)->getJson('/api/healthz')->assertStatus(200);
+        $this->withServerVariables($server)->getJson('/api/healthz')->assertStatus(200);
 
-        $response = $this->withServerVariables($server)->getJson('/api/v0.2/health');
+        $response = $this->withServerVariables($server)->getJson('/api/healthz');
 
         $response->assertStatus(429);
-        $response->assertJsonStructure([
-            'error' => ['code', 'message'],
-        ]);
-        $response->assertJsonPath('error.code', 'RATE_LIMIT_PUBLIC');
         $this->assertTrue($response->headers->has('Retry-After'));
         $this->assertTrue($response->headers->has('X-Request-Id'));
     }

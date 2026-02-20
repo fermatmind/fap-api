@@ -89,7 +89,8 @@ class ReportGatekeeper
         ?string $userId,
         ?string $anonId,
         ?string $role = null,
-        bool $forceSystemAccess = false
+        bool $forceSystemAccess = false,
+        bool $forceRefresh = false
     ): array {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
@@ -160,7 +161,7 @@ class ReportGatekeeper
         $locked = $variant === ReportAccess::VARIANT_FREE;
 
         $shouldUseSnapshot = $hasFullAccess && $this->modulesCoverOffered($modulesAllowed, $modulesOffered);
-        if ($shouldUseSnapshot) {
+        if ($shouldUseSnapshot && !$forceRefresh) {
             $snapshotRow = DB::table('report_snapshots')
                 ->where('org_id', $orgId)
                 ->where('attempt_id', $attemptId)
