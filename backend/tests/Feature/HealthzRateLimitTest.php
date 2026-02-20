@@ -10,7 +10,12 @@ class HealthzRateLimitTest extends TestCase
 {
     public function test_healthz_returns_minimal_payload_and_request_id(): void
     {
-        $response = $this->getJson('/api/healthz');
+        config([
+            'healthz.allowed_ips' => ['127.0.0.1/32'],
+        ]);
+
+        $response = $this->withServerVariables(['REMOTE_ADDR' => '127.0.0.1'])
+            ->getJson('/api/healthz');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -29,6 +34,7 @@ class HealthzRateLimitTest extends TestCase
         config([
             'fap.rate_limits.api_public_per_minute' => 2,
             'fap.rate_limits.bypass_in_test_env' => false,
+            'healthz.allowed_ips' => ['198.51.100.23/32'],
         ]);
 
         $server = ['REMOTE_ADDR' => '198.51.100.23'];
