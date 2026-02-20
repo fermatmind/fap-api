@@ -95,7 +95,7 @@ BILLING_MISSING_TS_STATUS="$(cat "${ART_DIR}/billing_missing_timestamp.status" 2
   echo "  - drop unique(payment_events.provider_event_id) if exists"
   echo "  - add unique(payment_events.provider, payment_events.provider_event_id)"
   echo "- smoke_urls:"
-  echo "  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/healthz"
+  echo "  - http://127.0.0.1:${SERVE_PORT}/api/healthz"
   echo "  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/webhooks/payment/billing"
 } > "${ART_DIR}/summary.txt"
 

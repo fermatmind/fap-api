@@ -33,10 +33,6 @@ class LegacyShareFlowService
 
     public function getShareLinkForAttempt(string $attemptId, array $input): array
     {
-        if (!config('features.enable_v0_2_report', false)) {
-            throw (new ModelNotFoundException())->setModel(Attempt::class, [$attemptId]);
-        }
-
         $attempt = $this->legacyShareService->resolveAttemptForAuth($attemptId, $this->orgContext);
         $commercial = $this->resolveCommercial($attempt);
 

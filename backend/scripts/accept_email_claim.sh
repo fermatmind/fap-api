@@ -21,7 +21,7 @@ echo "[ACCEPT_EMAIL] SQLITE_DB=${SQLITE_DB}"
 echo "[ACCEPT_EMAIL] PHONE=${PHONE} SCENE=${SCENE} EMAIL=${EMAIL}"
 
 # 0) health (response may include notices; keep last JSON line but ignore content)
-curl -sS "${API}/api/v0.2/health" >/dev/null
+curl -sS "${API}/api/healthz" >/dev/null
 
 # 1) find attempt_id with result
 ATT_OUT="$(cd "${BACKEND_DIR}" && php artisan tinker --execute='
@@ -48,7 +48,7 @@ fi
 echo "[ACCEPT_EMAIL] attempt_id=${ATTEMPT_ID}"
 
 # 2) send_code (dev may return dev_code; fallback to Cache)
-SEND_BODY="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/send_code" \
+SEND_BODY="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/send_code" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"phone\":\"${PHONE}\",\"consent\":true,\"scene\":\"${SCENE}\"}")"
 # some environments prepend PHP notices; keep only the last JSON line
@@ -85,7 +85,7 @@ fi
 echo "[ACCEPT_EMAIL] code=${CODE}"
 
 # 3) verify -> token
-VERIFY_BODY="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/verify" \
+VERIFY_BODY="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/verify" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"phone\":\"${PHONE}\",\"code\":\"${CODE}\",\"consent\":true,\"scene\":\"${SCENE}\"}")"
 VERIFY_JSON="$(printf "%s\n" "${VERIFY_BODY}" | tail -n 1)"
@@ -99,7 +99,7 @@ fi
 echo "[ACCEPT_EMAIL] token_issued=${TOKEN}"
 
 # 4) bind email
-BIND_BODY="$(curl -sS -X POST "${API}/api/v0.2/me/email/bind" \
+BIND_BODY="$(curl -sS -X POST "${API}/api/v0.3/me/email/bind" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "Authorization: Bearer ${TOKEN}" \
   -d "{\"email\":\"${EMAIL}\",\"consent\":true}")"
@@ -113,7 +113,7 @@ echo "[ACCEPT_EMAIL] email bound"
 
 # 5) trigger report (with token)
 REPORT_BODY="$(curl -sS -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" \
-  "${API}/api/v0.2/attempts/${ATTEMPT_ID}/report")"
+  "${API}/api/v0.3/attempts/${ATTEMPT_ID}/report")"
 REPORT_JSON="$(printf "%s\n" "${REPORT_BODY}" | tail -n 1)"
 
 if ! php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((int) !($j["ok"] ?? false));' <<<"${REPORT_JSON}"; then
@@ -150,7 +150,7 @@ echo "[ACCEPT_EMAIL] claim_token=${CLAIM_TOKEN}"
 
 # 7) claim report (token may be used only once)
 CLAIM_BODY="$(curl -sS -H "Accept: application/json" \
-  "${API}/api/v0.2/claim/report?token=${CLAIM_TOKEN}")"
+  "${API}/api/v0.3/claim/report?token=${CLAIM_TOKEN}")"
 CLAIM_JSON="$(printf "%s\n" "${CLAIM_BODY}" | tail -n 1)"
 
 if ! php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((int) !($j["ok"] ?? false));' <<<"${CLAIM_JSON}"; then

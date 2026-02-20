@@ -235,7 +235,7 @@ if [[ "$USE_EMBEDDED" == "0" ]]; then
   log "Waiting for health"
   health_code=""
   for _i in $(seq 1 30); do
-    health_code=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:${SERVE_PORT}/api/v0.2/health" || true)
+    health_code=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:${SERVE_PORT}/api/healthz" || true)
     [[ "$health_code" == "200" ]] && break
     sleep 0.5
   done

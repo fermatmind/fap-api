@@ -3,7 +3,7 @@ set -euo pipefail
 
 # accept_events_D_anon.sh
 # M3 hard: anon_id must exist and must NOT be placeholder for:
-#   - result_view
+#   - report_view
 #   - share_generate
 #   - share_click
 
@@ -74,7 +74,7 @@ export ATT
 #    the share_generate event should have same anon_id as attempt-side (if implemented).
 SHARE_RAW="$(curl -sS \
   ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} \
-  "$API/api/v0.2/attempts/$ATT/share" \
+  "$API/api/v0.3/attempts/$ATT/share" \
   -H "X-Experiment: $EXPERIMENT" \
   -H "X-App-Version: $APPV" \
   -H "X-Channel: $CHANNEL" \
@@ -93,7 +93,7 @@ echo "[ACCEPT_D] SHARE_ID=$SHARE_ID"
 export SHARE_ID
 
 # Trigger click so share_click event exists
-curl -sS -X POST "$API/api/v0.2/shares/$SHARE_ID/click" \
+curl -sS -X POST "$API/api/v0.3/shares/$SHARE_ID/click" \
   -H "Content-Type: application/json" \
   -H "X-Experiment: $EXPERIMENT" \
   -H "X-App-Version: $APPV" \
@@ -159,7 +159,7 @@ $fetch = function(string $eventCode) use ($att, $shareId, $applyShareIdFilter) {
     ->where("event_code", $eventCode)
     ->where("attempt_id", $att);
 
-  // result_view may not carry share_id; we will handle it separately below.
+  // report_view may not carry share_id; we will handle it separately below.
   if (in_array($eventCode, ["share_generate", "share_click"], true)) {
     $q = $applyShareIdFilter($q);
   }
@@ -170,14 +170,14 @@ $fetch = function(string $eventCode) use ($att, $shareId, $applyShareIdFilter) {
 $sg = $fetch("share_generate");
 $sc = $fetch("share_click");
 
-// result_view: usually keyed by attempt_id only (no share_id)
+// report_view: usually keyed by attempt_id only (no share_id)
 $rv = \DB::table("events")
-  ->where("event_code", "result_view")
+  ->where("event_code", "report_view")
   ->where("attempt_id", $att)
   ->orderByDesc("occurred_at")
   ->first();
 
-if (!$rv) $fail("missing result_view");
+if (!$rv) $fail("missing report_view");
 if (!$sg) $fail("missing share_generate");
 if (!$sc) $fail("missing share_click");
 
@@ -206,13 +206,13 @@ $assertAnon = function($row, array $m, string $label) use ($fail, $blacklist, $n
   return $anon;
 };
 
-$rvAnon = $assertAnon($rv, $rvm, "result_view");
+$rvAnon = $assertAnon($rv, $rvm, "report_view");
 $sgAnon = $assertAnon($sg, $sgm, "share_generate");
 $scAnon = $assertAnon($sc, $scm, "share_click");
 
 dump([
   "driver" => $driver,
-  "result_view" => [
+  "report_view" => [
     "occurred_at" => $rv->occurred_at ?? null,
     "anon_id" => $rvAnon,
   ],

@@ -62,7 +62,7 @@ echo "$SERVER_PID" > "$ART_DIR/server.pid"
 log "Waiting for health"
 health_code=""
 for _i in $(seq 1 40); do
-  health_code="$(curl -s -o /dev/null -w "%{http_code}" "$API_BASE/api/v0.2/health" || true)"
+  health_code="$(curl -s -o /dev/null -w "%{http_code}" "$API_BASE/api/healthz" || true)"
   if [[ "$health_code" == "200" ]]; then
     break
   fi
@@ -227,7 +227,7 @@ if [[ "$VAR_A" != "$VAR_A2" ]]; then
   exit 1
 fi
 
-log "POST /api/v0.2/events"
+log "POST /api/v0.3/events"
 EVENT_PAYLOAD="$ART_DIR/curl_event_payload.json"
 php -r '
 $boot=json_decode(file_get_contents($argv[1]), true);
@@ -288,7 +288,7 @@ $stmt->execute(array_values($data));
   exit 1
 }
 EVENT_RESP="$ART_DIR/curl_event.json"
-code_event=$(curl_json "$API_BASE/api/v0.2/events" "$EVENT_RESP" \
+code_event=$(curl_json "$API_BASE/api/v0.3/events" "$EVENT_RESP" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $AUTH_TOKEN" \

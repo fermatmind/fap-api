@@ -57,7 +57,7 @@ php artisan db:seed --class=QuantifiedSelfSeeder
 
 start_server
 
-BASE_URL="http://${HOST}:${PORT}/api/v0.2"
+BASE_URL="http://${HOST}:${PORT}/api/v0.3"
 
 oauth_start=$(curl -s "${BASE_URL}/integrations/mock/oauth/start")
 state=$(echo "${oauth_start}" | php -r 'echo json_decode(stream_get_contents(STDIN), true)["state"] ?? "";')

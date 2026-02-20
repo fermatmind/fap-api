@@ -19,7 +19,7 @@ LOG_DIR="$RUN_DIR/logs"
 mkdir -p "$LOG_DIR"
 
 PORT="${PORT:-18111}"
-API="http://127.0.0.1:${PORT}/api/v0.2"
+API="http://127.0.0.1:${PORT}/api/v0.3"
 
 SERVER_LOG="$LOG_DIR/server.log"
 SUMMARY="$RUN_DIR/summary.txt"

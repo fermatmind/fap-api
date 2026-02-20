@@ -33,8 +33,8 @@ class EmailOutboxService
         $locale = $this->resolveAttemptLocale($attemptId);
         $subject = $this->defaultSubjectForTemplate('report_claim', $locale);
 
-        $reportUrl = "/api/v0.2/attempts/{$attemptId}/report";
-        $claimUrl = "/api/v0.2/claim/report?token={$token}";
+        $reportUrl = "/api/v0.3/attempts/{$attemptId}/report";
+        $claimUrl = "/api/v0.3/claim/report?token={$token}";
 
         $payload = [
             'attempt_id' => $attemptId,
@@ -241,7 +241,7 @@ class EmailOutboxService
             ];
         }
 
-        $reportUrl = $payload['report_url'] ?? "/api/v0.2/attempts/{$attemptId}/report";
+        $reportUrl = $payload['report_url'] ?? "/api/v0.3/attempts/{$attemptId}/report";
 
         return [
             'ok' => true,

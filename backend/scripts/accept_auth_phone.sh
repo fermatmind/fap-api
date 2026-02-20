@@ -24,7 +24,7 @@ echo "[ACCEPT_PHONE] SQLITE_DB=${SQLITE_DB}"
 echo "[ACCEPT_PHONE] PHONE=${PHONE} SCENE=${SCENE} ANON_ID=${ANON_ID}"
 
 # 0) health
-curl -sS "${API}/api/v0.2/health" >/dev/null
+curl -sS "${API}/api/healthz" >/dev/null
 
 # 1) 取最新 attempt 并绑定 anon_id（仅在 sqlite 且 attempts 表存在时做；否则跳过绑定）
 ATTEMPT_ID=""
@@ -62,7 +62,7 @@ else
 fi
 
 # 2) send_code（dev 下会返回 dev_code）
-SEND_JSON="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/send_code" \
+SEND_JSON="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/send_code" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"phone\":\"${PHONE}\",\"consent\":true,\"scene\":\"${SCENE}\"}")"
 
@@ -89,7 +89,7 @@ echo "[ACCEPT_PHONE] code=${CODE}"
 echo "[ACCEPT_PHONE] dev_code=${CODE}"
 
 # 3) verify -> token（携带 anon_id 触发归集）
-VERIFY_JSON="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/verify" \
+VERIFY_JSON="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/verify" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"phone\":\"${PHONE}\",\"code\":\"${CODE}\",\"consent\":true,\"scene\":\"${SCENE}\",\"anon_id\":\"${ANON_ID}\"}")"
 
@@ -103,7 +103,7 @@ echo "[ACCEPT_PHONE] token_issued=${TOKEN}"
 
 # 4) /me/attempts 必须能看到刚才被归集的 attempt_id
 ME_JSON="$(curl -sS -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" \
-  "${API}/api/v0.2/me/attempts?per_page=20&page=1")"
+  "${API}/api/v0.3/me/attempts?per_page=20&page=1")"
 
 # 关键：让子进程 php 能拿到 ATTEMPT_ID
 export ATTEMPT_ID

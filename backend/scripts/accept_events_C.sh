@@ -4,12 +4,12 @@ set -euo pipefail
 # ------------------------------------------------------------
 # accept_events_C.sh
 # One-shot acceptance for M3 Events loop:
-# - result_view on GET /attempts/{id}/report (refresh + cache)
+# - report_view on GET /attempts/{id}/report (refresh + cache)
 # - share_generate on GET /attempts/{id}/share
 # - share_click on POST /shares/{shareId}/click
 #
 # Assumptions:
-# - API is already running (default: http://127.0.0.1:18000)
+# - API is already running (default: http://127.0.0.1:1827)
 # - Using testing/sqlite db at backend/database/database.sqlite
 # - json parsing via php
 #
@@ -77,19 +77,19 @@ fi
 echo "[ACCEPT] ANON_ID=$ANON_ID"
 export ANON_ID
 
-# ---- 1) result_view: refresh=1 then cache hit ----
+# ---- 1) report_view: refresh=1 then cache hit ----
 curl -sS -H "X-Anon-Id: $ANON_ID" \
-  "$API/api/v0.2/attempts/$ATT/report?refresh=1&anon_id=$ANON_ID" >/dev/null
+  "$API/api/v0.3/attempts/$ATT/report?refresh=1&anon_id=$ANON_ID" >/dev/null
 sleep 1
 curl -sS -H "X-Anon-Id: $ANON_ID" \
-  "$API/api/v0.2/attempts/$ATT/report?anon_id=$ANON_ID" >/dev/null
+  "$API/api/v0.3/attempts/$ATT/report?anon_id=$ANON_ID" >/dev/null
 
 # ---- 2) share_generate (with optional headers) ----
 # Use set -u safe array expansion in case HDRS is empty.
 SHARE_RAW="$(
   curl -sS \
     ${AUTH_HDRS[@]+"${AUTH_HDRS[@]}"} \
-    "$API/api/v0.2/attempts/$ATT/share" \
+    "$API/api/v0.3/attempts/$ATT/share" \
     ${HDRS[@]+"${HDRS[@]}"} \
   || true
 )"
@@ -105,7 +105,7 @@ echo "[ACCEPT] SHARE_ID=$SHARE_ID"
 export SHARE_ID
 
 # ---- 3) share_click (with optional headers) ----
-curl -sS -X POST "$API/api/v0.2/shares/$SHARE_ID/click" \
+curl -sS -X POST "$API/api/v0.3/shares/$SHARE_ID/click" \
   -H "Content-Type: application/json" \
   ${HDRS[@]+"${HDRS[@]}"} \
   -d '{}' >/dev/null
@@ -133,7 +133,7 @@ $fetch = function($code) use ($att) {
     ->first();
 };
 
-$rv = $fetch("result_view");
+$rv = $fetch("report_view");
 $sg = $fetch("share_generate");
 $sc = $fetch("share_click");
 
@@ -141,12 +141,10 @@ $rvMeta = $rv ? json_decode($rv->meta_json ?? "{}", true) : [];
 $sgMeta = $sg ? json_decode($sg->meta_json ?? "{}", true) : [];
 $scMeta = $sc ? json_decode($sc->meta_json ?? "{}", true) : [];
 
-$must((bool)$rv, "missing result_view");
-$must(is_string($rvMeta["type_code"] ?? null) && $rvMeta["type_code"] !== "", "result_view.meta_json.type_code missing");
-$must(is_string($rvMeta["engine_version"] ?? null) && $rvMeta["engine_version"] !== "", "result_view.meta_json.engine_version missing");
-$must(is_string($rvMeta["content_package_version"] ?? null) && $rvMeta["content_package_version"] !== "", "result_view.meta_json.content_package_version missing");
-$must(array_key_exists("cache", $rvMeta), "result_view.meta_json.cache missing");
-$must(array_key_exists("refresh", $rvMeta), "result_view.meta_json.refresh missing");
+$must((bool)$rv, "missing report_view");
+$must(($rvMeta["attempt_id"] ?? null) === $att, "report_view.meta_json.attempt_id mismatch");
+$must(is_string($rvMeta["type_code"] ?? null) && $rvMeta["type_code"] !== "", "report_view.meta_json.type_code missing");
+$must(array_key_exists("locked", $rvMeta), "report_view.meta_json.locked missing");
 
 $must((bool)$sg, "missing share_generate");
 $must(($sgMeta["share_id"] ?? null) === $shareId, "share_generate.meta_json.share_id mismatch");
@@ -163,13 +161,11 @@ dump([
   "OK" => true,
   "attempt_id" => $att,
   "share_id" => $shareId,
-  "result_view" => [
+  "report_view" => [
     "occurred_at" => $rv->occurred_at ?? null,
+    "attempt_id" => $rvMeta["attempt_id"] ?? null,
     "type_code" => $rvMeta["type_code"] ?? null,
-    "engine_version" => $rvMeta["engine_version"] ?? null,
-    "content_package_version" => $rvMeta["content_package_version"] ?? null,
-    "cache" => $rvMeta["cache"] ?? null,
-    "refresh" => $rvMeta["refresh"] ?? null,
+    "locked" => $rvMeta["locked"] ?? null,
   ],
   "share_generate" => [
     "occurred_at" => $sg->occurred_at ?? null,

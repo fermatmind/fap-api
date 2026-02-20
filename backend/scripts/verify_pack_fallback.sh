@@ -10,7 +10,7 @@ if [[ -z "$ID" ]]; then
   exit 1
 fi
 
-api() { curl -s "$BASE_URL/api/v0.2/attempts/$ID/report"; }
+api() { curl -s "$BASE_URL/api/v0.3/attempts/$ID/report"; }
 
 set_attempt() {
   local region="$1"

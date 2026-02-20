@@ -20,7 +20,7 @@ if [[ "${LOOKUP_ORDER}" != "1" ]]; then
 fi
 
 # 0) health
-curl -sS "${API}/api/v0.2/health" >/dev/null
+curl -sS "${API}/api/healthz" >/dev/null
 
 # 1) detect table/column/order_no
 INFO_OUT="$(cd "${BACKEND_DIR}" && php artisan tinker --execute='
@@ -65,25 +65,21 @@ ORDER_NO="$(printf "%s" "${INFO_OUT}" | sed -n 's/^ORDER_NO=//p' | tail -n 1)"
 
 PAYLOAD_ORDER_NO="${ORDER_NO:-TEST-ORDER-001}"
 
-RESP="$(curl -sS -X POST "${API}/api/v0.2/lookup/order" \
-  -H "Content-Type: application/json" -H "Accept: application/json" \
-  -d "{\"order_no\":\"${PAYLOAD_ORDER_NO}\"}")"
-
 if [[ -z "${TABLE_NAME}" || -z "${COLUMN_NAME}" ]]; then
-  if ! php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((int) !(($j["ok"] ?? true) === false && ($j["error"] ?? "") === "NOT_SUPPORTED"));' <<<"${RESP}"; then
-    echo "[ACCEPT_ORDER][FAIL] expect NOT_SUPPORTED: ${RESP}"
-    exit 1
-  fi
-  echo "[ACCEPT_ORDER] NOT_SUPPORTED OK"
+  echo "[ACCEPT_ORDER] SKIP (orders table/column not present)"
   exit 0
 fi
 
+RESP="$(curl -sS -X POST "${API}/api/v0.3/orders/lookup" \
+  -H "Content-Type: application/json" -H "Accept: application/json" \
+  -d "{\"order_no\":\"${PAYLOAD_ORDER_NO}\",\"email\":\"accept_lookup@example.local\"}")"
+
 if [[ -z "${ORDER_NO}" ]]; then
-  if ! php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((int) !(($j["ok"] ?? true) === false && ($j["error"] ?? "") === "NOT_FOUND"));' <<<"${RESP}"; then
-    echo "[ACCEPT_ORDER][FAIL] expect NOT_FOUND: ${RESP}"
+  if ! php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((int) !(($j["ok"] ?? true) === false && ($j["error_code"] ?? "") === "ORDER_NOT_FOUND"));' <<<"${RESP}"; then
+    echo "[ACCEPT_ORDER][FAIL] expect ORDER_NOT_FOUND: ${RESP}"
     exit 1
   fi
-  echo "[ACCEPT_ORDER] NOT_FOUND OK (no rows)"
+  echo "[ACCEPT_ORDER] ORDER_NOT_FOUND OK (no rows)"
   exit 0
 fi
 

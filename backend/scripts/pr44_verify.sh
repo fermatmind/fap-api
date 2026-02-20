@@ -82,8 +82,8 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 # pack/seed/config consistency
 cd "${BACKEND_DIR}"
@@ -281,7 +281,7 @@ AUTHORIZED_REPORT_JSON="${ART_DIR}/report_authorized.json"
 http_code="$(curl -sS -o "${AUTHORIZED_REPORT_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-Anon-Id: ${ANON_ID}" \
-  "${API_BASE}/api/v0.2/attempts/${ATTEMPT_ID}/report" || true)"
+  "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/report" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "authorized_report_failed http=${http_code}" >&2
   cat "${AUTHORIZED_REPORT_JSON}" >&2 || true
@@ -299,7 +299,7 @@ if (!is_array($j) || !($j["ok"] ?? false)) {
 NO_OWNER_REPORT_JSON="${ART_DIR}/report_no_owner.json"
 http_code="$(curl -sS -o "${NO_OWNER_REPORT_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
-  "${API_BASE}/api/v0.2/attempts/${ATTEMPT_ID}/report" || true)"
+  "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/report" || true)"
 echo "no_owner_http_code=${http_code}" > "${ART_DIR}/security_assertions.txt"
 if [[ "${http_code}" != "404" ]]; then
   cat "${NO_OWNER_REPORT_JSON}" >&2 || true
@@ -310,7 +310,7 @@ WRONG_OWNER_REPORT_JSON="${ART_DIR}/report_wrong_owner.json"
 http_code="$(curl -sS -o "${WRONG_OWNER_REPORT_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-Anon-Id: wrong-anon-pr44" \
-  "${API_BASE}/api/v0.2/attempts/${ATTEMPT_ID}/report" || true)"
+  "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/report" || true)"
 echo "wrong_owner_http_code=${http_code}" >> "${ART_DIR}/security_assertions.txt"
 if [[ "${http_code}" != "404" ]]; then
   cat "${WRONG_OWNER_REPORT_JSON}" >&2 || true

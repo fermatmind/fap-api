@@ -67,7 +67,7 @@ echo "$SERVER_PID" > "$ART_DIR/server.pid"
 log "Waiting for health"
 health_code=""
 for _i in $(seq 1 40); do
-  health_code="$(curl -s -o /dev/null -w "%{http_code}" "$API_BASE/api/v0.2/health" || true)"
+  health_code="$(curl -s -o /dev/null -w "%{http_code}" "$API_BASE/api/healthz" || true)"
   if [[ "$health_code" == "200" ]]; then
     break
   fi

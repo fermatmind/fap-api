@@ -79,7 +79,7 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
 
 # 1) pack/seed/config consistency
 DEFAULT_PACK_ID_FILE="${ART_DIR}/default_pack_id.txt"

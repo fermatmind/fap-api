@@ -85,7 +85,7 @@ ABORT_403_REPORT="${ART_DIR}/abort_403_assertions.txt"
 ABORT403_OK=1
 for target in \
   "backend/app/Http/Controllers/API/V0_3/AttemptsController.php" \
-  "backend/app/Http/Controllers/API/V0_2/PsychometricsController.php" \
+  "backend/app/Http/Controllers/API/V0_3/AttemptReadController.php" \
   "backend/app/Http/Controllers/API/V0_3/CommerceController.php" \
   "backend/app/Services/Commerce/OrderManager.php"; do
   if grep -n "abort(403)" "${target}" > /tmp/pr60_abort403_tmp.txt; then
@@ -125,10 +125,10 @@ PR60 Acceptance Summary
   - verify_log: ${ART_DIR}/verify.log
   - server_log: ${ART_DIR}/server.log
 - smoke_urls:
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/healthz
+  - http://127.0.0.1:${SERVE_PORT}/api/healthz
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/result
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/orders/${ORDER_NO}
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/attempts/${ATTEMPT_ID}/stats
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/${ATTEMPT_ID}/stats
 - schema_changes:
   - none (no migration added in PR60)
 TXT

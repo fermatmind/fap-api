@@ -13,7 +13,7 @@ echo "[ACCEPT_ABUSE] API=${API}"
 echo "[ACCEPT_ABUSE] SQLITE_DB=${SQLITE_DB}"
 
 # 0) health
-curl -sS "${API}/api/v0.2/health" >/dev/null
+curl -sS "${API}/api/healthz" >/dev/null
 
 # 0.5) ensure lookup_events exists
 HAS_EVENTS="$(cd "${BACKEND_DIR}" && php artisan tinker --execute='
@@ -27,7 +27,7 @@ if [[ "${HAS_EVENTS}" != "1" ]]; then
 fi
 
 # 1) provider login once (must write provider_login audit)
-PROV_RAW="$(curl -sS -X POST "${API}/api/v0.2/auth/provider" \
+PROV_RAW="$(curl -sS -X POST "${API}/api/v0.3/auth/provider" \
   -H "Accept: application/json" -H "Content-Type: application/json" \
   -d '{"provider":"web","provider_code":"dev","anon_id":"accept_abuse_probe"}' || true)"
 PROV_JSON="$(printf "%s\n" "${PROV_RAW}" | tail -n 1)"
@@ -45,7 +45,7 @@ RATE_LIMITED=0
 for i in {1..45}; do
   code="$(curl -s -o /dev/null -w "%{http_code}" \
     -H "Accept: application/json" \
-    "${API}/api/v0.2/claim/report?token=claim_invalid_token_for_abuse_test" || true)"
+    "${API}/api/v0.3/claim/report?token=claim_invalid_token_for_abuse_test" || true)"
   if [[ "${code}" == "429" ]]; then
     RATE_LIMITED=1
     break

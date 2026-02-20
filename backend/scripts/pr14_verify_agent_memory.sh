@@ -56,7 +56,7 @@ if [ "$PHP_BIND_OK" -eq 1 ]; then
   SERVER_PID=$!
   sleep 2
 
-  if ! curl -fsS "http://127.0.0.1:$PORT/api/v0.2/health" >/dev/null 2>&1; then
+  if ! curl -fsS "http://127.0.0.1:$PORT/api/healthz" >/dev/null 2>&1; then
     echo "[WARN] server not healthy; falling back to internal requests" >&2
     USE_INTERNAL=1
   fi
@@ -71,7 +71,7 @@ function cleanup() {
 }
 trap cleanup EXIT
 
-BASE_URL="http://127.0.0.1:$PORT/api/v0.2"
+BASE_URL="http://127.0.0.1:$PORT/api/v0.3"
 
 # Create fm_token if needed
 TOKEN=""
@@ -99,7 +99,7 @@ http_request() {
   if [ "$USE_INTERNAL" -eq 1 ]; then
     local tmp_body
     if [[ "$path" != /api/* ]]; then
-      path="/api/v0.2${path}"
+      path="/api/v0.3${path}"
     fi
     tmp_body=$(mktemp)
     printf "%s" "$body" > "$tmp_body"

@@ -82,7 +82,7 @@ curl -fsS -X POST \
 
 # 5) share (v0.2)
 curl -fsS -H "Accept: application/json" -H "X-Region: CN_MAINLAND" -H "Accept-Language: zh-CN" \
-  "${API}/api/v0.2/attempts/${ATTEMPT_ID}/share" > "${ART_DIR}/share.json"
+  "${API}/api/v0.3/attempts/${ATTEMPT_ID}/share" > "${ART_DIR}/share.json"
 
 # 6) assert response (no jq)
 php -r '

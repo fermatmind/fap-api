@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // Admin (used by /api/v0.2/admin/*)
+    // Admin API token
     'admin_token' => env('FAP_ADMIN_TOKEN', ''),
 
     // Content packages

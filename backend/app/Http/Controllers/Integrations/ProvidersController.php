@@ -49,7 +49,7 @@ class ProvidersController extends Controller
             'ok' => true,
             'provider' => $provider,
             'state' => $state,
-            'mock_url' => "/api/v0.2/integrations/{$provider}/oauth/callback?state={$state}&code=mock_code",
+            'mock_url' => "/api/v0.3/integrations/{$provider}/oauth/callback?state={$state}&code=mock_code",
         ]);
     }
 

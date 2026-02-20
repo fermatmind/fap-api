@@ -11,7 +11,7 @@ set -euo pipefail
 
 : "${ID:?missing env ID, e.g. export ID=...}"
 
-API="http://127.0.0.1:8000/api/v0.2/attempts/${ID}/report"
+API="http://127.0.0.1:8000/api/v0.3/attempts/${ID}/report"
 
 # 默认文件/卡片（你现在验证用的那套）
 FILE="${FILE:-../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_traits.json}"

@@ -103,8 +103,8 @@ PR55 Acceptance Summary
   - index_audit_total: ${INDEX_AUDIT_TOTAL}
   - rollback_preview_items: ${ROLLBACK_COUNT}
 - smoke_urls:
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/admin/migrations/observability?limit=5
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/admin/migrations/rollback-preview?steps=2
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/admin/migrations/observability?limit=5
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/admin/migrations/rollback-preview?steps=2
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/scales/MBTI/questions
 - schema_changes:
   - create table migration_index_audits

@@ -35,10 +35,10 @@ if (!is_string($source)) {
 }
 
 $checks = [
-    "v0.2 fm_token_auth_group" => "/Route::middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*->group\\s*\\(\\s*function\\s*\\(\\s*\\)\\s*\\{/s",
+    "v0.2 retired_prefix" => "/Route::prefix\\(\\s*\"v0\\.2\"\\s*\\)/s",
+    "v0.2 retired_any_route" => "/Route::any\\(\\s*[\\x27\\x22]\\/\\{any\\?\\}[\\x27\\x22]\\s*,\\s*static\\s+function\\s*\\(\\s*\\)\\s*\\{/s",
     "v0.3 attempts_submit_auth" => "/Route::post\\(\\s*\"\\/attempts\\/submit\"\\s*,\\s*\\[\\s*AttemptWriteController::class\\s*,\\s*\"submit\"\\s*\\]\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*;/s",
     "v0.3 auth_plus_ctx_group" => "/Route::middleware\\(\\s*\\[\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*,\\s*ResolveO[r]gContext::class\\s*\\]\\s*\\)\\s*->\\s*group\\s*\\(/s",
-    "v0.2 admin_auth_group" => "/Route::prefix\\(\\s*\"admin\"\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\AdminAuth::class\\s*\\)\\s*->group\\s*\\(/s",
 ];
 
 $missing = [];
@@ -148,9 +148,9 @@ if ($violations !== []) {
 echo "[SECURITY_GATE] check 3/10: ownership 404 contract (no 403 leaks)"
 php -r '
 $paths = [
-    "app/Http/Controllers/API/V0_2/LegacyReportController.php",
     "app/Http/Controllers/API/V0_3/AttemptReadController.php",
     "app/Http/Controllers/API/V0_3/AttemptProgressController.php",
+    "app/Http/Controllers/API/V0_3/ShareController.php",
     "app/Http/Controllers/LookupController.php",
     "app/Services/Legacy/LegacyReportService.php",
     "app/Services/Legacy/LegacyShareService.php",

@@ -680,7 +680,7 @@ final class ContentPackPublisher
 
         $errors = [];
 
-        $health = $this->fetchJson($baseUrl.'/api/v0.2/health', $baseUrl);
+        $health = $this->fetchJson($baseUrl.'/api/healthz', $baseUrl);
         if ($health['ok'] ?? false) {
             $probes['health'] = (bool) (($health['json']['ok'] ?? false) === true);
         }
@@ -688,7 +688,7 @@ final class ContentPackPublisher
             $errors[] = 'health_failed';
         }
 
-        $questionsUrl = $baseUrl.'/api/v0.2/scales/MBTI/questions?region='.urlencode($region).'&locale='.urlencode($locale);
+        $questionsUrl = $baseUrl.'/api/v0.3/scales/MBTI/questions?region='.urlencode($region).'&locale='.urlencode($locale);
         $questions = $this->fetchJson($questionsUrl, $baseUrl);
         if ($questions['ok'] ?? false) {
             $probes['questions'] = (bool) (($questions['json']['ok'] ?? false) === true);
@@ -697,11 +697,10 @@ final class ContentPackPublisher
             $errors[] = 'questions_failed';
         }
 
-        $packs = $this->fetchJson($baseUrl.'/api/v0.2/content-packs', $baseUrl);
+        $packs = $this->fetchJson($baseUrl.'/api/v0.3/scales/lookup?slug=mbti', $baseUrl);
         if ($packs['ok'] ?? false) {
             $ok = (bool) (($packs['json']['ok'] ?? false) === true);
-            $defaults = (array) ($packs['json']['defaults'] ?? []);
-            $defaultPackId = (string) ($defaults['default_pack_id'] ?? '');
+            $defaultPackId = (string) (($packs['json']['pack_id'] ?? ''));
             $hasPackId = $defaultPackId !== '';
             if ($expectedPackId !== '') {
                 $hasPackId = $hasPackId && $defaultPackId === $expectedPackId;

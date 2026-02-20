@@ -253,10 +253,6 @@ class LegacyReportService
     {
         $attemptId = (string) $attempt->id;
 
-        if (!config('features.enable_v0_2_report', false)) {
-            throw (new ModelNotFoundException())->setModel(Attempt::class, [$attemptId]);
-        }
-
         $result = Result::query()
             ->where('org_id', (int) ($attempt->org_id ?? 0))
             ->where('attempt_id', $attemptId)

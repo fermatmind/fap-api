@@ -91,7 +91,7 @@ curl -fsS \
   -H "X-Channel: miniapp" \
   -H "X-Client-Platform: wechat" \
   -H "X-Entry-Page: share_page" \
-  "$API/api/v0.2/attempts/$ATT/share" >"$TMP_RESP"
+  "$API/api/v0.3/attempts/$ATT/share" >"$TMP_RESP"
 
 if ! php -r '$j=json_decode(@file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$TMP_RESP" >/dev/null 2>&1; then
   echo "[ACCEPT_H][FAIL] /share response ok!=true. head:" >&2

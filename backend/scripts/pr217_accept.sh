@@ -96,10 +96,10 @@ trap cleanup EXIT
 # wait health
 API="http://127.0.0.1:${SERVE_PORT}"
 for i in $(seq 1 60); do
-  curl -fsS "${API}/api/v0.2/health" >/dev/null 2>&1 && break
+  curl -fsS "${API}/api/healthz" >/dev/null 2>&1 && break
   sleep 0.2
 done
-curl -fsS "${API}/api/v0.2/health" > "${ART_DIR}/health.json"
+curl -fsS "${API}/api/healthz" > "${ART_DIR}/health.json"
 
 # run verify
 bash "${SCRIPT_DIR}/pr217_verify.sh"

@@ -267,7 +267,7 @@ echo "${ORG_ID}" > "${ART_DIR}/org_id.txt"
 
 php artisan serve --host="${HOST}" --port="${SERVE_PORT}" >"${LOG_DIR}/server.log" 2>&1 &
 SERVE_PID=$!
-wait_health "${API}/api/v0.2/health" || fail "server not healthy on ${API}"
+wait_health "${API}/api/healthz" || fail "server not healthy on ${API}"
 
 SKUS_JSON="${ART_DIR}/skus.json"
 http_code=$(curl -sS -L -o "${SKUS_JSON}" -w "%{http_code}" \

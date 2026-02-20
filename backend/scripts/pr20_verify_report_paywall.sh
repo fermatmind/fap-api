@@ -143,12 +143,12 @@ echo "$SERVER_PID" > "$PID_FILE"
 
 # wait health
 for _ in $(seq 1 80); do
-  if curl -sS "$API/api/v0.2/health" >/dev/null 2>&1; then
+  if curl -sS "$API/api/healthz" >/dev/null 2>&1; then
     break
   fi
   sleep 0.1
 done
-curl -sS "$API/api/v0.2/health" >/dev/null 2>&1 || fail "server not ready on $API"
+curl -sS "$API/api/healthz" >/dev/null 2>&1 || fail "server not ready on $API"
 
 # ------------------------
 # MBTI: start -> questions -> submit（带登录 token，确保 attempt.user_id 有值）

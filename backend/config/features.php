@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'enable_v0_2_report' => (bool) env('FEATURE_ENABLE_V0_2_REPORT', false),
     'selfcheck_v2' => (bool) env('FEATURE_SELFCHECK_V2', false),
     'legacy_mbti_report_payload_v2' => (bool) env('FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2', false),
     'payment_webhook_v2' => (bool) env('FEATURE_PAYMENT_WEBHOOK_V2', false),

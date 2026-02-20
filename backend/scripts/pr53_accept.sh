@@ -91,7 +91,7 @@ PR53 Acceptance Summary
   - default_pack_id: ${DEFAULT_PACK_ID}
   - default_dir_version: ${DEFAULT_DIR_VERSION}
 - smoke_urls:
-  - http://127.0.0.1:${SERVE_PORT}/api/v0.2/content-packs/${DEFAULT_PACK_ID}/${DEFAULT_DIR_VERSION}/manifest
+  - http://127.0.0.1:${SERVE_PORT}/api/v0.3/content-packs/${DEFAULT_PACK_ID}/${DEFAULT_DIR_VERSION}/manifest
   - http://127.0.0.1:${SERVE_PORT}/api/v0.3/scales/MBTI/questions
 - schema_changes:
   - none

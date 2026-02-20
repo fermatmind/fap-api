@@ -21,7 +21,7 @@ echo "[ACCEPT_EMAIL_DEDUP] SQLITE_DB=${SQLITE_DB}"
 echo "[ACCEPT_EMAIL_DEDUP] PHONE=${PHONE} SCENE=${SCENE} EMAIL=${EMAIL}"
 
 # 0) health
-curl -sS "${API}/api/v0.2/health" >/dev/null
+curl -sS "${API}/api/healthz" >/dev/null
 
 # 1) find attempt_id with result
 ATT_OUT="$(cd "${BACKEND_DIR}" && php artisan tinker --execute='
@@ -49,7 +49,7 @@ export ATTEMPT_ID
 echo "[ACCEPT_EMAIL_DEDUP] attempt_id=${ATTEMPT_ID}"
 
 # 2) send_code (dev returns dev_code)
-SEND_RAW="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/send_code" \
+SEND_RAW="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/send_code" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"phone\":\"${PHONE}\",\"consent\":true,\"scene\":\"${SCENE}\"}")"
 SEND_JSON="$(printf "%s\n" "${SEND_RAW}" | tail -n 1)"
@@ -74,7 +74,7 @@ fi
 echo "[ACCEPT_EMAIL_DEDUP] code=${CODE}"
 
 # 3) verify -> token
-VERIFY_RAW="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/verify" \
+VERIFY_RAW="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/verify" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -d "{\"phone\":\"${PHONE}\",\"code\":\"${CODE}\",\"consent\":true,\"scene\":\"${SCENE}\"}")"
 VERIFY_JSON="$(printf "%s\n" "${VERIFY_RAW}" | tail -n 1)"
@@ -88,7 +88,7 @@ fi
 echo "[ACCEPT_EMAIL_DEDUP] token_issued=${TOKEN}"
 
 # 4) bind email
-BIND_JSON="$(curl -sS -X POST "${API}/api/v0.2/me/email/bind" \
+BIND_JSON="$(curl -sS -X POST "${API}/api/v0.3/me/email/bind" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "Authorization: Bearer ${TOKEN}" \
   -d "{\"email\":\"${EMAIL}\",\"consent\":true}")"
@@ -103,10 +103,10 @@ echo "[ACCEPT_EMAIL_DEDUP] email bound"
 
 # 5) trigger report twice
 REPORT_JSON_1="$(curl -sS -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" \
-  "${API}/api/v0.2/attempts/${ATTEMPT_ID}/report")"
+  "${API}/api/v0.3/attempts/${ATTEMPT_ID}/report")"
 REPORT_JSON_1="$(printf "%s\n" "${REPORT_JSON_1}" | tail -n 1)"
 REPORT_JSON_2="$(curl -sS -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" \
-  "${API}/api/v0.2/attempts/${ATTEMPT_ID}/report")"
+  "${API}/api/v0.3/attempts/${ATTEMPT_ID}/report")"
 REPORT_JSON_2="$(printf "%s\n" "${REPORT_JSON_2}" | tail -n 1)"
 
 if ! php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((int) !($j["ok"] ?? false));' <<<"${REPORT_JSON_1}"; then
@@ -179,7 +179,7 @@ fi
 echo "[ACCEPT_EMAIL_DEDUP] claim_token=${CLAIM_TOKEN}"
 
 CLAIM_JSON_1="$(curl -sS -H "Accept: application/json" \
-  "${API}/api/v0.2/claim/report?token=${CLAIM_TOKEN}")"
+  "${API}/api/v0.3/claim/report?token=${CLAIM_TOKEN}")"
 
 CLAIM_JSON_1="$(printf "%s\n" "${CLAIM_JSON_1}" | tail -n 1)"
 
@@ -189,7 +189,7 @@ if ! php -r '$j=json_decode(stream_get_contents(STDIN), true); exit((int) !($j["
 fi
 
 CLAIM_JSON_2="$(curl -sS -H "Accept: application/json" \
-  "${API}/api/v0.2/claim/report?token=${CLAIM_TOKEN}")"
+  "${API}/api/v0.3/claim/report?token=${CLAIM_TOKEN}")"
 
 CLAIM_JSON_2="$(printf "%s\n" "${CLAIM_JSON_2}" | tail -n 1)"
 

@@ -130,7 +130,7 @@ class LegacyMbtiAttemptLifecycleService
     }
 
     /**
-     * POST /api/v0.2/attempts
+     * POST /api/v0.3/attempts
      * ✅ 前端提交：answers[].question_id + answers[].code(A~E)
      * ✅ 后端用题库 options.score + key_pole + direction 计算 5 轴百分比
      */

@@ -88,7 +88,7 @@ class SecureLink extends Page
         ], now()->addMinutes($ttl));
 
         $base = rtrim((string) config('app.url', request()?->getSchemeAndHttpHost() ?? ''), '/');
-        $this->generatedLink = $base.'/api/v0.2/claim/report?token='.urlencode($token);
+        $this->generatedLink = $base.'/api/v0.3/claim/report?token='.urlencode($token);
 
         app(AuditLogger::class)->log(
             request(),

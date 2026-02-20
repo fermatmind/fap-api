@@ -82,13 +82,13 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 SHARE_CLICK_JSON="${ART_DIR}/share_click_404.json"
 VALID_SHARE_ID="550e8400-e29b-41d4-a716-446655440000"
 http_code="$(curl -sS -o "${SHARE_CLICK_JSON}" -w "%{http_code}" \
-  -X POST "${API_BASE}/api/v0.2/shares/${VALID_SHARE_ID}/click" || true)"
+  -X POST "${API_BASE}/api/v0.3/shares/${VALID_SHARE_ID}/click" || true)"
 echo "share_click_http_code=${http_code}" > "${ART_DIR}/api_error_contract.txt"
 if [[ "${http_code}" != "404" ]]; then
   cat "${SHARE_CLICK_JSON}" >&2 || true
@@ -295,7 +295,7 @@ AUTHORIZED_REPORT_JSON="${ART_DIR}/report_authorized.json"
 http_code="$(curl -sS -o "${AUTHORIZED_REPORT_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-Anon-Id: ${ANON_ID}" \
-  "${API_BASE}/api/v0.2/attempts/${ATTEMPT_ID}/report" || true)"
+  "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/report" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "authorized_report_failed http=${http_code}" >&2
   cat "${AUTHORIZED_REPORT_JSON}" >&2 || true
@@ -313,7 +313,7 @@ if (!is_array($j) || !($j["ok"] ?? false)) {
 NO_OWNER_REPORT_JSON="${ART_DIR}/report_no_owner.json"
 http_code="$(curl -sS -o "${NO_OWNER_REPORT_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
-  "${API_BASE}/api/v0.2/attempts/${ATTEMPT_ID}/report" || true)"
+  "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/report" || true)"
 echo "no_owner_http_code=${http_code}" > "${ART_DIR}/security_assertions.txt"
 if [[ "${http_code}" != "404" ]]; then
   cat "${NO_OWNER_REPORT_JSON}" >&2 || true
@@ -324,7 +324,7 @@ WRONG_OWNER_REPORT_JSON="${ART_DIR}/report_wrong_owner.json"
 http_code="$(curl -sS -o "${WRONG_OWNER_REPORT_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
   -H "X-Anon-Id: wrong-anon-pr45" \
-  "${API_BASE}/api/v0.2/attempts/${ATTEMPT_ID}/report" || true)"
+  "${API_BASE}/api/v0.3/attempts/${ATTEMPT_ID}/report" || true)"
 echo "wrong_owner_http_code=${http_code}" >> "${ART_DIR}/security_assertions.txt"
 if [[ "${http_code}" != "404" ]]; then
   cat "${WRONG_OWNER_REPORT_JSON}" >&2 || true

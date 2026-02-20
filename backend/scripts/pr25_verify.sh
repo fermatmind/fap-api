@@ -87,7 +87,7 @@ echo "[pr25] server_pid=${SERVER_PID}"
 
 HEALTH_OK=0
 for _ in {1..30}; do
-  if curl -sS "${API_BASE}/api/v0.2/health" >/dev/null 2>&1; then
+  if curl -sS "${API_BASE}/api/healthz" >/dev/null 2>&1; then
     HEALTH_OK=1
     break
   fi
@@ -96,7 +96,7 @@ done
 
 if [[ "${HEALTH_OK}" -ne 1 ]]; then
   echo "[pr25][fail] health check failed"
-  curl -sS "${API_BASE}/api/v0.2/health" || true
+  curl -sS "${API_BASE}/api/healthz" || true
   tail -n 80 "${SERVER_LOG}" || true
   exit 1
 fi

@@ -77,8 +77,8 @@ SERVE_PID="$!"
 echo "${SERVE_PID}" > "${ART_DIR}/server.pid"
 cd "${REPO_DIR}"
 
-wait_health "${API_BASE}/api/v0.2/healthz" || fail "healthz failed"
-curl -sS "${API_BASE}/api/v0.2/healthz" > "${ART_DIR}/healthz.json"
+wait_health "${API_BASE}/api/healthz" || fail "healthz failed"
+curl -sS "${API_BASE}/api/healthz" > "${ART_DIR}/healthz.json"
 
 cd "${BACKEND_DIR}"
 php -r '
@@ -206,7 +206,7 @@ DEFAULT_DIR_VERSION="$(cat "${ART_DIR}/config_default_dir_version.txt")"
 CONTENT_PACK_MANIFEST_JSON="${ART_DIR}/content_pack_manifest_api.json"
 http_code="$(curl -sS -o "${CONTENT_PACK_MANIFEST_JSON}" -w "%{http_code}" \
   -H "Accept: application/json" \
-  "${API_BASE}/api/v0.2/content-packs/${DEFAULT_PACK_ID}/${DEFAULT_DIR_VERSION}/manifest" || true)"
+  "${API_BASE}/api/v0.3/content-packs/${DEFAULT_PACK_ID}/${DEFAULT_DIR_VERSION}/manifest" || true)"
 if [[ "${http_code}" != "200" ]]; then
   echo "content_pack_manifest_api_failed http=${http_code}" >&2
   cat "${CONTENT_PACK_MANIFEST_JSON}" >&2 || true

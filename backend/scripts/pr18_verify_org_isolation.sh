@@ -43,7 +43,7 @@ trap cleanup EXIT
 
 echo "[PR18] wait for server"
 for _ in {1..30}; do
-  if curl -sS "${API}/api/v0.2/health" >/dev/null 2>&1; then
+  if curl -sS "${API}/api/healthz" >/dev/null 2>&1; then
     break
   fi
   sleep 0.5
@@ -57,7 +57,7 @@ get_token() {
   local verify_json
   local token
 
-  send_json="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/send_code" \
+  send_json="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/send_code" \
     -H "Content-Type: application/json" -H "Accept: application/json" \
     -d "{\"phone\":\"${phone}\",\"consent\":true,\"scene\":\"login\"}")"
 
@@ -78,7 +78,7 @@ echo (string) Cache::get($k);
     exit 1
   fi
 
-  verify_json="$(curl -sS -X POST "${API}/api/v0.2/auth/phone/verify" \
+  verify_json="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/verify" \
     -H "Content-Type: application/json" -H "Accept: application/json" \
     -d "{\"phone\":\"${phone}\",\"code\":\"${code}\",\"consent\":true,\"scene\":\"login\",\"anon_id\":\"${anon}\"}")"
 
