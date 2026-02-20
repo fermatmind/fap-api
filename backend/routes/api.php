@@ -21,7 +21,6 @@ use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\API\V0_3\ScalesSitemapSourceController;
 use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_3\ShareController as ShareV03Controller;
-use App\Http\Controllers\API\V0_3\Admin\AdminQueueController as AdminQueueV03Controller;
 use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
 use App\Http\Middleware\ResolveOrgContext;
@@ -73,14 +72,6 @@ Route::prefix("v0.3")->middleware([
     )->whereIn('provider', $payProviders)
         ->middleware([LimitWebhookPayloadSize::class, 'throttle:api_webhook'])
         ->name('api.v0_3.webhooks.payment');
-
-    Route::prefix('admin')
-        ->middleware(\App\Http\Middleware\AdminAuth::class)
-        ->group(function () {
-            Route::get('/queue/dlq/metrics', [AdminQueueV03Controller::class, 'metrics']);
-            Route::post('/queue/dlq/replay/{failed_job_id}', [AdminQueueV03Controller::class, 'replay'])
-                ->whereNumber('failed_job_id');
-        });
 
     Route::middleware('throttle:api_auth')->group(function () {
         if (app()->environment(['local', 'testing', 'ci'])) {
