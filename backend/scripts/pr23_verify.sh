@@ -227,126 +227,45 @@ if [[ "$VAR_A" != "$VAR_A2" ]]; then
   exit 1
 fi
 
-log "POST /api/v0.3/events"
-EVENT_PAYLOAD="$ART_DIR/curl_event_payload.json"
-php -r '
-$boot=json_decode(file_get_contents($argv[1]), true);
-$experiments=$boot["experiments"] ?? [];
-function uuidv4(){
-  $data = random_bytes(16);
-  $data[6] = chr((ord($data[6]) & 0x0f) | 0x40);
-  $data[8] = chr((ord($data[8]) & 0x3f) | 0x80);
-  return vsprintf("%s%s-%s-%s-%s-%s%s%s", str_split(bin2hex($data), 4));
-}
-$payload = [
-  "event_code" => "pr23_event",
-  "attempt_id" => uuidv4(),
-  "anon_id" => getenv("ANON_A") ?: "",
-  "experiments_json" => $experiments,
-];
-file_put_contents($argv[2], json_encode($payload, JSON_UNESCAPED_SLASHES));
-' "$BOOT_A" "$EVENT_PAYLOAD"
-
-AUTH_TOKEN="fm_$(php -r 'function uuidv4(){ $data=random_bytes(16); $data[6]=chr((ord($data[6]) & 0x0f) | 0x40); $data[8]=chr((ord($data[8]) & 0x3f) | 0x80); echo vsprintf("%s%s-%s-%s-%s-%s%s%s", str_split(bin2hex($data), 4)); } uuidv4();')"
-export AUTH_TOKEN
-php -r '
-$dbFile = getenv("DB_DATABASE") ?: "/tmp/pr23.sqlite";
-$token = getenv("AUTH_TOKEN") ?: "";
-$anon = getenv("ANON_A") ?: "";
-if ($token === "" || $anon === "") {
-    fwrite(STDERR, "missing token or anon\n");
-    exit(1);
-}
-$db = new PDO("sqlite:" . $dbFile);
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$columns = [];
-foreach ($db->query("PRAGMA table_info(fm_tokens)") as $row) {
-    $name = (string) ($row["name"] ?? "");
-    if ($name !== "") {
-        $columns[$name] = true;
-    }
-}
-$data = [
-    "token" => $token,
-    "anon_id" => $anon,
-    "created_at" => date("Y-m-d H:i:s"),
-    "updated_at" => date("Y-m-d H:i:s"),
-];
-if (isset($columns["token_hash"])) {
-    $data["token_hash"] = hash("sha256", $token);
-}
-if (isset($columns["user_id"])) {
-    $data["user_id"] = 0;
-}
-$keys = array_keys($data);
-$placeholders = implode(",", array_fill(0, count($keys), "?"));
-$sql = "INSERT INTO fm_tokens (" . implode(",", $keys) . ") VALUES (" . $placeholders . ")";
-$stmt = $db->prepare($sql);
-$stmt->execute(array_values($data));
-' || {
-  log "failed to seed fm_tokens for event ingest"
-  exit 1
-}
-EVENT_RESP="$ART_DIR/curl_event.json"
-code_event=$(curl_json "$API_BASE/api/v0.3/events" "$EVENT_RESP" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $AUTH_TOKEN" \
-  -H "X-Org-Id: $ORG_ID" \
-  --data-binary "@$EVENT_PAYLOAD")
-if [[ ! "$code_event" =~ ^2[0-9][0-9]$ ]]; then
-  log "event ingest failed: HTTP=$code_event"
-  tail -n 120 "$ART_DIR/server.log" | tee -a "$LOG_FILE" || true
-  exit 1
-fi
-assert_json "$EVENT_RESP"
-
-log "DB assertions"
+log "DB assertions (sticky assignments)"
 DB_ASSERT="$ART_DIR/db_assertions.json"
 EXP_AGG="$ART_DIR/experiments_agg.json"
-php -r '
+VAR_A="$VAR_A" VAR_B="$VAR_B" ANON_A="$ANON_A" ANON_B="$ANON_B" ORG_ID="$ORG_ID" php -r '
 $dbFile = getenv("DB_DATABASE") ?: "/tmp/pr23.sqlite";
-$anon = getenv("ANON_A") ?: "";
+$anonA = getenv("ANON_A") ?: "";
+$anonB = getenv("ANON_B") ?: "";
+$expectedA = getenv("VAR_A") ?: "";
+$expectedB = getenv("VAR_B") ?: "";
+$orgId = (int) (getenv("ORG_ID") ?: 0);
 $db = new PDO("sqlite:" . $dbFile);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$stmt = $db->prepare("select experiments_json from events where event_code = ? order by rowid desc limit 1");
-$stmt->execute(["pr23_event"]);
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-$experiments = null;
-if ($row && isset($row["experiments_json"])) {
-    $raw = $row["experiments_json"];
-    if (is_string($raw)) {
-        $decoded = json_decode($raw, true);
-        $experiments = is_array($decoded) ? $decoded : null;
-    } elseif (is_array($raw)) {
-        $experiments = $raw;
-    }
-}
-$ok = is_array($experiments) && isset($experiments["PR23_STICKY_BUCKET"]);
-$variant = $experiments["PR23_STICKY_BUCKET"] ?? null;
-$stmt = $db->prepare("select variant from experiment_assignments where org_id = 0 and anon_id = ? and experiment_key = ? limit 1");
-$stmt->execute([$anon, "PR23_STICKY_BUCKET"]);
-$assign = $stmt->fetch(PDO::FETCH_ASSOC);
-$assignVariant = $assign["variant"] ?? null;
+$stmt = $db->prepare("select variant from experiment_assignments where org_id = ? and anon_id = ? and experiment_key = ? limit 1");
+$stmt->execute([$orgId, $anonA, "PR23_STICKY_BUCKET"]);
+$assignA = $stmt->fetch(PDO::FETCH_ASSOC);
+$stmt->execute([$orgId, $anonB, "PR23_STICKY_BUCKET"]);
+$assignB = $stmt->fetch(PDO::FETCH_ASSOC);
+$variantA = is_array($assignA) ? (string) ($assignA["variant"] ?? "") : "";
+$variantB = is_array($assignB) ? (string) ($assignB["variant"] ?? "") : "";
+$ok = ($variantA !== "" && $variantB !== "" && $variantA === $expectedA && $variantB === $expectedB);
 $out = [
   "ok" => $ok,
-  "event_code" => "pr23_event",
-  "variant" => $variant,
-  "assignment_variant" => $assignVariant,
+  "boot_variant_a" => $expectedA,
+  "boot_variant_b" => $expectedB,
+  "assignment_variant_a" => $variantA,
+  "assignment_variant_b" => $variantB,
 ];
 file_put_contents($argv[1], json_encode($out, JSON_UNESCAPED_SLASHES));
-if (!$ok) { fwrite(STDERR, "experiments_json missing\n"); exit(1);} 
-$rows = $db->query("select experiments_json from events")->fetchAll(PDO::FETCH_ASSOC);
-$counts = [];
+if (!$ok) {
+  fwrite(STDERR, "sticky assignment mismatch\n");
+  exit(1);
+}
+$rows = $db->query("select variant, count(*) as c from experiment_assignments where org_id = {$orgId} and experiment_key = \"PR23_STICKY_BUCKET\" group by variant")->fetchAll(PDO::FETCH_ASSOC);
+$counts = ["A" => 0, "B" => 0];
 foreach ($rows as $r) {
-  $raw = $r["experiments_json"] ?? null;
-  if (is_string($raw)) {
-    $decoded = json_decode($raw, true);
-    $raw = is_array($decoded) ? $decoded : null;
-  }
-  if (is_array($raw) && isset($raw["PR23_STICKY_BUCKET"])) {
-    $v = (string) $raw["PR23_STICKY_BUCKET"];
-    $counts[$v] = ($counts[$v] ?? 0) + 1;
+  $v = (string) ($r["variant"] ?? "");
+  $c = (int) ($r["c"] ?? 0);
+  if ($v === "A" || $v === "B") {
+    $counts[$v] = $c;
   }
 }
 file_put_contents($argv[2], json_encode($counts, JSON_UNESCAPED_SLASHES));

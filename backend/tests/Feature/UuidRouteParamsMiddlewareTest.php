@@ -8,27 +8,25 @@ use Tests\TestCase;
 
 final class UuidRouteParamsMiddlewareTest extends TestCase
 {
-    public function test_share_click_with_invalid_uuid_returns_uniform_404_json(): void
+    public function test_v02_share_click_with_invalid_uuid_returns_deprecated_contract(): void
     {
         $response = $this->postJson('/api/v0.2/shares/not-a-uuid/click');
 
-        $response->assertStatus(404);
+        $response->assertStatus(410);
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
-            'message' => 'Not Found',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
     }
 
-    public function test_attempt_report_with_invalid_uuid_returns_uniform_404_json(): void
+    public function test_v02_attempt_report_with_invalid_uuid_returns_deprecated_contract(): void
     {
         $response = $this->getJson('/api/v0.2/attempts/not-a-uuid/report');
 
-        $response->assertStatus(404);
+        $response->assertStatus(410);
         $response->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
-            'message' => 'Not Found',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
     }
 

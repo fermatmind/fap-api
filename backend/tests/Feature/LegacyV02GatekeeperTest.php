@@ -16,7 +16,7 @@ final class LegacyV02GatekeeperTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_flag_off_returns_404_for_v02_report_and_result(): void
+    public function test_v02_report_and_result_return_deprecated_contract_when_flag_off(): void
     {
         config(['features.enable_v0_2_report' => false]);
 
@@ -24,14 +24,16 @@ final class LegacyV02GatekeeperTest extends TestCase
 
         $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/report")
-            ->assertStatus(404);
+            ->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
 
         $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/result")
-            ->assertStatus(404);
+            ->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
     }
 
-    public function test_flag_on_locked_returns_402_without_sensitive_fields(): void
+    public function test_v02_report_and_result_return_deprecated_contract_when_flag_on_and_locked(): void
     {
         config(['features.enable_v0_2_report' => true]);
 
@@ -39,20 +41,16 @@ final class LegacyV02GatekeeperTest extends TestCase
 
         $report = $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/report");
-        $report->assertStatus(402)
-            ->assertJsonPath('error_code', 'PAYMENT_REQUIRED')
-            ->assertJsonMissingPath('report');
+        $report->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
 
         $result = $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/result");
-        $result->assertStatus(402)
-            ->assertJsonPath('error_code', 'PAYMENT_REQUIRED')
-            ->assertJsonMissingPath('type_code')
-            ->assertJsonMissingPath('scores')
-            ->assertJsonMissingPath('scores_pct');
+        $result->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
     }
 
-    public function test_flag_on_unlocked_returns_200_with_legacy_shapes(): void
+    public function test_v02_report_and_result_return_deprecated_contract_when_flag_on_and_unlocked(): void
     {
         config(['features.enable_v0_2_report' => true]);
 
@@ -60,28 +58,13 @@ final class LegacyV02GatekeeperTest extends TestCase
 
         $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/report")
-            ->assertStatus(200)
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('attempt_id', $attemptId)
-            ->assertJsonStructure([
-                'ok',
-                'attempt_id',
-                'type_code',
-                'report',
-            ]);
+            ->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
 
         $this->withHeader('X-Anon-Id', $anonId)
             ->getJson("/api/v0.2/attempts/{$attemptId}/result")
-            ->assertStatus(200)
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('attempt_id', $attemptId)
-            ->assertJsonStructure([
-                'ok',
-                'attempt_id',
-                'type_code',
-                'scores',
-                'scores_pct',
-            ]);
+            ->assertStatus(410)
+            ->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
     }
 
     private function seedFixture(bool $withGrant): array

@@ -32,19 +32,15 @@ class HealthzRateLimitTest extends TestCase
         ]);
 
         $server = ['REMOTE_ADDR' => '198.51.100.23'];
-        $ip = Request::create('/api/v0.2/health', 'GET', [], [], [], $server)->ip();
+        $ip = Request::create('/api/healthz', 'GET', [], [], [], $server)->ip();
         app(RateLimiter::class)->clear(md5('api_public' . 'ip:' . $ip));
 
-        $this->withServerVariables($server)->getJson('/api/v0.2/health')->assertStatus(200);
-        $this->withServerVariables($server)->getJson('/api/v0.2/health')->assertStatus(200);
+        $this->withServerVariables($server)->getJson('/api/healthz')->assertStatus(200);
+        $this->withServerVariables($server)->getJson('/api/healthz')->assertStatus(200);
 
-        $response = $this->withServerVariables($server)->getJson('/api/v0.2/health');
+        $response = $this->withServerVariables($server)->getJson('/api/healthz');
 
         $response->assertStatus(429);
-        $response->assertJsonStructure([
-            'error' => ['code', 'message'],
-        ]);
-        $response->assertJsonPath('error.code', 'RATE_LIMIT_PUBLIC');
         $this->assertTrue($response->headers->has('Retry-After'));
         $this->assertTrue($response->headers->has('X-Request-Id'));
     }

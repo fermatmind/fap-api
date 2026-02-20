@@ -35,16 +35,16 @@ final class ErrorContractConsistencyTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_lookup_ticket_invalid_format_returns_unified_error_contract(): void
+    public function test_v02_lookup_ticket_returns_deprecated_error_contract(): void
     {
         $response = $this->getJson('/api/v0.2/lookup/ticket/BAD');
 
-        $response->assertStatus(422);
-        $response->assertJsonPath('error_code', 'INVALID_FORMAT');
+        $response->assertStatus(410);
+        $response->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
         $this->assertUnifiedErrorContract($response);
     }
 
-    public function test_lookup_order_disabled_returns_unified_error_contract(): void
+    public function test_v02_lookup_order_returns_deprecated_error_contract(): void
     {
         $this->setEnv('LOOKUP_ORDER', '0');
         $token = $this->seedFmToken('anon_contract_lookup_order');
@@ -55,12 +55,12 @@ final class ErrorContractConsistencyTest extends TestCase
             'order_no' => 'ord_contract_disabled',
         ]);
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('error_code', 'NOT_ENABLED');
+        $response->assertStatus(410);
+        $response->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
         $this->assertUnifiedErrorContract($response);
     }
 
-    public function test_validity_feedback_disabled_returns_unified_error_contract(): void
+    public function test_v02_validity_feedback_returns_deprecated_error_contract(): void
     {
         $this->setEnv('FEEDBACK_ENABLED', '0');
         $token = $this->seedFmToken('anon_contract_feedback');
@@ -71,8 +71,8 @@ final class ErrorContractConsistencyTest extends TestCase
             'score' => 5,
         ]);
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('error_code', 'NOT_ENABLED');
+        $response->assertStatus(410);
+        $response->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
         $this->assertUnifiedErrorContract($response);
     }
 
@@ -129,12 +129,12 @@ final class ErrorContractConsistencyTest extends TestCase
         $this->assertUnifiedErrorContract($response);
     }
 
-    public function test_v02_me_profile_unauthenticated_returns_unified_error_contract(): void
+    public function test_v02_me_profile_returns_deprecated_error_contract(): void
     {
         $response = $this->getJson('/api/v0.2/me/profile');
 
-        $response->assertStatus(401);
-        $response->assertJsonPath('error_code', 'UNAUTHENTICATED');
+        $response->assertStatus(410);
+        $response->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
         $this->assertUnifiedErrorContract($response);
     }
 

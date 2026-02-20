@@ -20,8 +20,9 @@ final class ReplaySecurityTest extends TestCase
 
         $response = $this->postJson("/api/v0.2/integrations/mock/replay/{$batchId}");
 
-        $response->assertStatus(401)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
     }
 
@@ -36,9 +37,9 @@ final class ReplaySecurityTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson("/api/v0.2/integrations/mock/replay/{$batchId}");
 
-        $response->assertStatus(404)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
     }
 
@@ -53,9 +54,9 @@ final class ReplaySecurityTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson("/api/v0.2/integrations/google_fit/replay/{$batchId}");
 
-        $response->assertStatus(404)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'NOT_FOUND',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
 
         $batch = DB::table('ingest_batches')->where('id', $batchId)->first();
@@ -84,10 +85,9 @@ final class ReplaySecurityTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson("/api/v0.2/integrations/mock/replay/{$batchId}");
 
-        $response->assertStatus(401)->assertJson([
+        $response->assertStatus(410)->assertJson([
             'ok' => false,
-            'error_code' => 'UNAUTHORIZED',
-            'message' => 'missing_identity',
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
 
         $batch = DB::table('ingest_batches')->where('id', $batchId)->first();
@@ -107,22 +107,22 @@ final class ReplaySecurityTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->postJson("/api/v0.2/integrations/mock/replay/{$batchId}");
 
-        $first->assertStatus(200)->assertJson([
-            'ok' => true,
+        $first->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
-        $this->assertSame(1, (int) $first->json('inserted'));
 
         $second = $this->withHeaders([
             'Authorization' => "Bearer {$token}",
         ])->postJson("/api/v0.2/integrations/mock/replay/{$batchId}");
 
-        $second->assertStatus(200)->assertJson([
-            'ok' => true,
-            'inserted' => 0,
+        $second->assertStatus(410)->assertJson([
+            'ok' => false,
+            'error_code' => 'API_VERSION_DEPRECATED',
         ]);
 
-        $this->assertSame(2, DB::table('sleep_samples')->where('ingest_batch_id', $batchId)->count());
-        $this->assertSame(1, DB::table('idempotency_keys')->count());
+        $this->assertSame(1, DB::table('sleep_samples')->where('ingest_batch_id', $batchId)->count());
+        $this->assertSame(0, DB::table('idempotency_keys')->count());
     }
 
     private function seedUserAndToken(int $userId, string $role): string
