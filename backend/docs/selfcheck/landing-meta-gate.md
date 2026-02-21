@@ -12,7 +12,7 @@
 - `meta/landing.json`
 
 示例（MBTI pack）：
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2/meta/landing.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/meta/landing.json`
 
 说明：
 - meta 文件必须随 `content_package_version` 一起变更与发布
@@ -143,7 +143,7 @@
 在 repo 的 `backend/` 下执行：
 
 ```bash
-php artisan fap:self-check --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2
+php artisan fap:self-check --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
 echo $?
 ```
 

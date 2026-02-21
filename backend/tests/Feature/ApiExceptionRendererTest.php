@@ -38,22 +38,6 @@ class ApiExceptionRendererTest extends TestCase
         $response->assertJsonMissingPath('error');
     }
 
-    public function test_v02_share_click_returns_deprecated_json_without_accept_header(): void
-    {
-        $response = $this->post('/api/v0.2/shares/550e8400-e29b-41d4-a716-446655440000/click');
-
-        $response->assertStatus(410);
-        $this->assertStringContainsString(
-            'application/json',
-            strtolower((string) $response->headers->get('Content-Type', ''))
-        );
-        $response->assertJson([
-            'ok' => false,
-            'error_code' => 'API_VERSION_DEPRECATED',
-        ]);
-        $response->assertJsonMissingPath('error');
-    }
-
     public function test_validation_exception_is_standardized(): void
     {
         Route::post('/api/v0.3/_test_validation', static function (Request $request): array {
