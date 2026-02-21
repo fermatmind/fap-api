@@ -56,6 +56,14 @@ php artisan key:generate --force >/dev/null 2>&1 || true
 bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
 php artisan fap:schema:verify
 
+RUN_BIG5_OCEAN_GATE="${RUN_BIG5_OCEAN_GATE:-0}"
+if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
+  echo "[CI] running BIG5_OCEAN content gates"
+  php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
+  php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
+  php artisan test --filter BigFive
+fi
+
 # Ensure MBTI commercial benefit codes exist for report/share entitlement gate.
 BACKEND_DIR="$BACKEND_DIR" php -r '
 $backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");

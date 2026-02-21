@@ -209,6 +209,7 @@ jobs:
       - name: Run ci_verify_mbti
         env:
           MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
+          RUN_BIG5_OCEAN_GATE: "1"
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
