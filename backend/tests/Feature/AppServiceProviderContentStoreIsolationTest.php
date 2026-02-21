@@ -21,7 +21,7 @@ final class AppServiceProviderContentStoreIsolationTest extends TestCase
     {
         $attemptId = $this->seedCrossTenantAttempt(orgId: 999);
 
-        $request = Request::create('/api/v0.2/content-packs', 'GET', [
+        $request = Request::create('/api/v0.3/content-packs', 'GET', [
             'attempt_id' => $attemptId,
             'org_id' => 999,
         ]);
@@ -38,15 +38,14 @@ final class AppServiceProviderContentStoreIsolationTest extends TestCase
         $this->assertNotContains(999, $orgBindings);
 
         $highlights = $store->loadHighlights();
-        $this->assertSame('MBTI-CN-v0.2.2', (string) ($highlights['meta']['package'] ?? ''));
-        $this->assertNotSame('MBTI-CN-v0.2.1-TEST', (string) ($highlights['meta']['package'] ?? ''));
+        $this->assertSame('MBTI-CN-v0.3', (string) ($highlights['meta']['package'] ?? ''));
     }
 
     public function test_content_store_attempt_lookup_falls_back_to_org_context_when_request_attrs_missing(): void
     {
         $attemptId = $this->seedCrossTenantAttempt(orgId: 999);
 
-        $request = Request::create('/api/v0.2/content-packs', 'GET', [
+        $request = Request::create('/api/v0.3/content-packs', 'GET', [
             'attempt_id' => $attemptId,
             'org_id' => 999,
         ]);
@@ -66,14 +65,13 @@ final class AppServiceProviderContentStoreIsolationTest extends TestCase
         $this->assertNotContains(999, $orgBindings);
 
         $highlights = $store->loadHighlights();
-        $this->assertSame('MBTI-CN-v0.2.2', (string) ($highlights['meta']['package'] ?? ''));
-        $this->assertNotSame('MBTI-CN-v0.2.1-TEST', (string) ($highlights['meta']['package'] ?? ''));
+        $this->assertSame('MBTI-CN-v0.3', (string) ($highlights['meta']['package'] ?? ''));
     }
 
     private function seedCrossTenantAttempt(int $orgId): string
     {
-        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.2');
-        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.2.2');
+        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3');
+        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.3');
         config()->set('content_packs.default_region', 'CN_MAINLAND');
         config()->set('content_packs.default_locale', 'zh-CN');
 
@@ -95,9 +93,9 @@ final class AppServiceProviderContentStoreIsolationTest extends TestCase
             'channel' => 'test',
             'started_at' => now(),
             'submitted_at' => now(),
-            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
-            'dir_version' => 'MBTI-CN-v0.2.1-TEST',
-            'content_package_version' => 'v0.2.1-TEST',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 

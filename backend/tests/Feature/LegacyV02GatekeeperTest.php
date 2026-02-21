@@ -90,7 +90,7 @@ final class LegacyV02GatekeeperTest extends TestCase
             'submitted_at' => now(),
             'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => (string) config('content_packs.default_dir_version'),
-            'content_package_version' => 'v0.2.2',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 
@@ -123,7 +123,7 @@ final class LegacyV02GatekeeperTest extends TestCase
                 'AT' => 'clear',
             ],
             'profile_version' => 'mbti32-v2.5',
-            'content_package_version' => 'v0.2.2',
+            'content_package_version' => 'v0.3',
             'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => (string) config('content_packs.default_dir_version'),
             'scoring_spec_version' => '2026.01',

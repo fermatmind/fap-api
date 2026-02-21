@@ -1,7 +1,7 @@
 > Status: Active
 > Owner: liufuwei
 > Last Updated: 2025-12-16
-> Version: Copywriting No-Go v0.2.1 (Stage 1 / v0.2-A)
+> Version: Copywriting No-Go v0.3 (Stage 1 / v0.3-A)
 > Related Docs:
 > - docs/README.md
 > - docs/03-stage1/README.md
@@ -9,20 +9,20 @@
 > - docs/03-stage1/content-release-checklist.md
 > - docs/04-stage2/mbti-report-engine-v1.2.md
 
-# 文案禁区清单（Copywriting No-Go List）— v0.2.1（对齐 API & 合规）
+# 文案禁区清单（Copywriting No-Go List）— v0.3（对齐 API & 合规）
 
-版本：**v0.2.1**  
+版本：**v0.3**  
 适用范围：FAP（Fermat Assessment Platform）MBTI 主流程的所有用户可见文案：  
 - 结果页（Profile / Report）  
 - 分享卡（Share Asset）  
 - 站内说明页（隐私/用户权益/免责声明）  
 - 推送、活动页、公众号/社群投放素材  
 
-目标：避免 **夸大疗效、误导诊断、恐吓式营销、隐私违规、歧视与攻击**，并与 v0.2.1 的 **字段/接口**（`content_package_version`、`scores_pct`、`axis_states`、`share_id`、`GET /attempts/{id}/share`）保持一致口径。
+目标：避免 **夸大疗效、误导诊断、恐吓式营销、隐私违规、歧视与攻击**，并与 v0.3 的 **字段/接口**（`content_package_version`、`scores_pct`、`axis_states`、`share_id`、`GET /attempts/{id}/share`）保持一致口径。
 
 ---
 
-## 0. v0.2.1 新增字段/接口对文案的影响（必须遵守）
+## 0. v0.3 新增字段/接口对文案的影响（必须遵守）
 
 ### 0.1 新增字段（文案可引用的“口径锚点”）
 
@@ -40,7 +40,7 @@
 
 ### 0.2 新增接口（分享链路）
 
-- `GET /api/v0.2/attempts/{attempt_id}/share`
+- `GET /api/v0.3/attempts/{attempt_id}/share`
   - 禁止文案暗示“我们会把你的作答明细分享出去”
   - 分享卡内容只允许使用该接口返回的模板字段（例如：`type_code/type_name/tagline/rarity/keywords/short_summary`）
   - 分享卡不得包含：手机号、邮箱、精确定位、设备标识、可回溯的测评明细
@@ -112,7 +112,7 @@
 
 ---
 
-## 2. 百分比与状态机口径禁区（v0.2.1 重点）
+## 2. 百分比与状态机口径禁区（v0.3 重点）
 
 ### 2.1 `scores_pct`（百分比）不得被解释为“能力高低/优劣”
 
@@ -218,7 +218,7 @@
 
 ---
 
-## 6. 发布前文案自检（对齐 content-release-checklist v0.2.1）
+## 6. 发布前文案自检（对齐 content-release-checklist v0.3）
 
 每次发布内容包（`content_package_version`）前，必须做一次快速自检：
 

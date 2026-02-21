@@ -9,7 +9,7 @@
   - backend/app/Services/Content/ContentLoaderService.php
 - 相关路由：
   - POST /api/v0.3/webhooks/payment/{provider}
-  - GET  /api/v0.2/attempts/{id}/report
+  - GET  /api/v0.3/attempts/{id}/report
 - 需要新增/修改点：
   - GenericLikertDriver：支持 reverse + weight（兼容旧格式负权重表达）
   - Webhook：Cache lock + transaction 内幂等 insertOrIgnore

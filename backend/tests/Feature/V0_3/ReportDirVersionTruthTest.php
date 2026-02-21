@@ -18,12 +18,12 @@ class ReportDirVersionTruthTest extends TestCase
 
     public function test_report_uses_attempt_dir_version_as_single_truth(): void
     {
-        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.2.2');
-        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.2');
+        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.3');
+        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3');
 
         $attemptId = (string) Str::uuid();
-        $packId = 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST';
-        $dirVersion = 'MBTI-CN-v0.2.1-TEST';
+        $packId = 'MBTI.cn-mainland.zh-CN.v0.3';
+        $dirVersion = 'MBTI-CN-v0.3';
 
         Attempt::create([
             'id' => $attemptId,
@@ -40,7 +40,7 @@ class ReportDirVersionTruthTest extends TestCase
             'submitted_at' => now(),
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
-            'content_package_version' => 'v0.2.1-TEST',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 
@@ -112,7 +112,7 @@ class ReportDirVersionTruthTest extends TestCase
         $report = is_array($reportJob?->report_json) ? $reportJob->report_json : [];
         $this->assertSame($dirVersion, $report['versions']['legacy_dir'] ?? null);
         $this->assertSame($dirVersion, $report['versions']['dir_version'] ?? null);
-        $this->assertSame('v0.2.1-TEST', $report['versions']['content_package_version'] ?? null);
+        $this->assertSame('v0.3', $report['versions']['content_package_version'] ?? null);
 
         $found = app(ContentPacksIndex::class)->find($packId, $dirVersion);
         $this->assertTrue((bool) ($found['ok'] ?? false));

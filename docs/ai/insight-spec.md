@@ -4,7 +4,7 @@
 AI Insights provide a summarized, explainable insight payload for a given time period. Outputs are traceable via `evidence_json`, `input_hash`, `prompt_version`, and model metadata.
 
 ## API Endpoints
-### POST /api/v0.2/insights/generate
+### POST /api/v0.3/insights/generate
 Request JSON:
 ```json
 {
@@ -28,7 +28,7 @@ Response JSON:
 }
 ```
 
-### GET /api/v0.2/insights/{id}
+### GET /api/v0.3/insights/{id}
 Response JSON:
 ```json
 {
@@ -56,7 +56,7 @@ Response JSON:
 }
 ```
 
-### POST /api/v0.2/insights/{id}/feedback
+### POST /api/v0.3/insights/{id}/feedback
 Request JSON:
 ```json
 {

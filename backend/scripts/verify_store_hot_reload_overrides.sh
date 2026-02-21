@@ -4,7 +4,7 @@ set -euo pipefail
 : "${ID:?Please export ID=<attempt_uuid> first}"
 
 API="${API:-http://127.0.0.1:8000/api/v0.3/attempts/$ID/report}"
-FILE="${FILE:-../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_overrides.json}"
+FILE="${FILE:-../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_overrides.json}"
 CANARY_PREFIX="${CANARY_PREFIX:-@@CANARY_OV@@}"
 
 echo "[INFO] api=$API"

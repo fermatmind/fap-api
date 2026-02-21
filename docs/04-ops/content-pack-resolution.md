@@ -6,8 +6,8 @@
 
 ## 2) 目录与字段定义
 - pack_id：manifest.json.pack_id
-- dir_version：目录名（MBTI-CN-v0.2.1-TEST）
-- content_package_version：manifest.json.content_package_version（v0.2.1-TEST）
+- dir_version：目录名（MBTI-CN-v0.3）
+- content_package_version：manifest.json.content_package_version（v0.3）
 
 ## 3) 解析步骤
 1. 先取 X-Region/X-Locale header

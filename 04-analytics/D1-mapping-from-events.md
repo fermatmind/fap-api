@@ -27,4 +27,4 @@ Stage: 2 · Skeleton-level
   - 计算公式。
   - 统计粒度（按周）。
 
-This doc must stay consistent with `D1-8-kpi-weekly-template-v0.2.md`.
+This doc must stay consistent with `D1-8-kpi-weekly-template-v0.3.md`.

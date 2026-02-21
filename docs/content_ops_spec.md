@@ -327,7 +327,7 @@ bash backend/scripts/ci_verify_mbti.sh
 
 3) **跑“库存总览统计”（用于周报/PR comment）**
 ```bash
-PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
 POOLS="$PACK_DIR/report_highlights_pools.json"
 READS="$PACK_DIR/report_recommended_reads.json"
 
@@ -375,7 +375,7 @@ git switch -c "$BR"
 
 3) **本机校验（必须全绿）**
 ```bash
-PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
 bash backend/scripts/mvp_check.sh "$PACK_DIR"
 bash backend/scripts/ci_verify_mbti.sh
 ```

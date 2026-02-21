@@ -23,17 +23,17 @@
 
 ## 相关路由
 - 已存在：
-  - POST /api/v0.2/events
-  - POST /api/v0.2/payments/webhook/mock
-  - POST /api/v0.2/auth/provider
-  - /api/v0.2/me/*（需要 FmTokenAuth）
+  - POST /api/v0.3/events
+  - POST /api/v0.3/payments/webhook/mock
+  - POST /api/v0.3/auth/provider
+  - /api/v0.3/me/*（需要 FmTokenAuth）
 - 当前不存在：
-  - /api/v0.2/integrations/*
-  - /api/v0.2/webhooks/*
-  - /api/v0.2/me/data/*
+  - /api/v0.3/integrations/*
+  - /api/v0.3/webhooks/*
+  - /api/v0.3/me/data/*
 
 ## 需要新增/修改点
-- 新增路由：/api/v0.2/integrations/{provider}/* 与 /api/v0.2/webhooks/{provider}。
+- 新增路由：/api/v0.3/integrations/{provider}/* 与 /api/v0.3/webhooks/{provider}。
 - 新增 /me/data/sleep|mood|screen-time 查询路由（FmTokenAuth 下）。
 - 新增 migrations：integrations / ingest_batches / domain samples / idempotency_keys。
 - 新增 Service/Support：IngestionService / ReplayService / ConsentService / IdempotencyStore。

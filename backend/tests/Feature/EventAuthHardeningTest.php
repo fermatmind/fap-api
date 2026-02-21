@@ -183,7 +183,7 @@ final class EventAuthHardeningTest extends TestCase
             'question_count' => 10,
             'answers_summary_json' => json_encode(['answered' => 10], JSON_UNESCAPED_UNICODE),
             'client_platform' => 'web',
-            'content_package_version' => 'v0.2.2',
+            'content_package_version' => 'v0.3',
             'started_at' => $now->copy()->subMinutes(2),
             'submitted_at' => $now->copy()->subMinute(),
             'created_at' => $now,

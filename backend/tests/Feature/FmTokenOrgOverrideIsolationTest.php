@@ -96,7 +96,7 @@ final class FmTokenOrgOverrideIsolationTest extends TestCase
             'submitted_at' => now()->subMinute(),
             'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => (string) config('content_packs.default_dir_version'),
-            'content_package_version' => 'v0.2.2',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
             'calculation_snapshot_json' => [
                 'stats' => ['score' => 42],

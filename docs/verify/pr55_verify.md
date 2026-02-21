@@ -34,5 +34,5 @@ Step Verification Commands
 
 Curl Smoke Examples
 
-- `curl -sS -H "X-FAP-Admin-Token: pr55-admin-token" "http://127.0.0.1:1855/api/v0.2/admin/migrations/observability?limit=5"`
-- `curl -sS -H "X-FAP-Admin-Token: pr55-admin-token" "http://127.0.0.1:1855/api/v0.2/admin/migrations/rollback-preview?steps=2"`
+- `curl -sS -H "X-FAP-Admin-Token: pr55-admin-token" "http://127.0.0.1:1855/api/v0.3/admin/migrations/observability?limit=5"`
+- `curl -sS -H "X-FAP-Admin-Token: pr55-admin-token" "http://127.0.0.1:1855/api/v0.3/admin/migrations/rollback-preview?steps=2"`

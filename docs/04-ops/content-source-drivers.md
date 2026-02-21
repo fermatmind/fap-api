@@ -6,7 +6,7 @@
 ## B) Key 规范
 - key 统一为相对路径（不以 "/" 开头）
 - 示例：
-  - `default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json`
+  - `default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/manifest.json`
 
 ## C) 配置项说明（content_packs.php）
 - `FAP_PACKS_ROOT`：本地内容根目录（local 模式使用）
@@ -16,7 +16,7 @@
 
 ## D) 本地验收（local）
 ```bash
-cd backend && php artisan fap:self-check --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+cd backend && php artisan fap:self-check --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
 ```
 
 ## E) 生产验收（s3）
@@ -24,7 +24,7 @@ cd backend && php artisan fap:self-check --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN
 
 运行：
 ```bash
-cd backend && php artisan fap:resolve-pack --scale=default --region=CN_MAINLAND --locale=zh-CN --version=MBTI-CN-v0.2.1-TEST
+cd backend && php artisan fap:resolve-pack --scale=default --region=CN_MAINLAND --locale=zh-CN --version=MBTI-CN-v0.3
 ```
 
 期望输出：

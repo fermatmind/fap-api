@@ -23,11 +23,11 @@ Mirror Policy: This file must be updated in the same PR with `docs/data/ingestio
 ## 2.1 入口与认证
 
 ### 2.1.1 入口路由
-- `POST /api/v0.2/integrations/{provider}/ingest`
-- `POST /api/v0.2/integrations/{provider}/replay/{batch_id}`
-- `POST /api/v0.2/integrations/{provider}/revoke`
-- `GET /api/v0.2/integrations/{provider}/oauth/start`
-- `GET /api/v0.2/integrations/{provider}/oauth/callback`
+- `POST /api/v0.3/integrations/{provider}/ingest`
+- `POST /api/v0.3/integrations/{provider}/replay/{batch_id}`
+- `POST /api/v0.3/integrations/{provider}/revoke`
+- `GET /api/v0.3/integrations/{provider}/oauth/start`
+- `GET /api/v0.3/integrations/{provider}/oauth/callback`
 
 ### 2.1.2 认证上下文
 - `integrations` 表记录 provider 授权状态与 `ingest_key_hash`

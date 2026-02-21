@@ -8,8 +8,8 @@
   - `backend/app/Services/Queue/QueueDlqService.php`
   - `backend/database/migrations/2026_02_08_030000_create_queue_dlq_replays_table.php`
 - 相关路由：
-  - `GET /api/v0.2/admin/queue/dlq/metrics`
-  - `POST /api/v0.2/admin/queue/dlq/replay/{failed_job_id}`
+  - `GET /api/v0.3/admin/queue/dlq/metrics`
+  - `POST /api/v0.3/admin/queue/dlq/replay/{failed_job_id}`
 - 相关 DB 表/迁移：
   - `failed_jobs`（DLQ 来源）
   - `jobs`（replay 重投目标）

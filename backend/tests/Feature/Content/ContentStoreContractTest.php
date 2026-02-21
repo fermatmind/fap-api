@@ -28,20 +28,20 @@ final class ContentStoreContractTest extends TestCase
         config()->set('content_packs.default_locale', 'zh-CN');
         config()->set('cache.default', 'array');
 
-        $this->seedPack('MBTI-CN-v0.2.1-TEST', [
+        $this->seedPack('MBTI-CN-v0.3-A', [
             'schema' => 'fap.report.highlights.v1',
-            'templates' => ['v' => '0.2.1'],
+            'templates' => ['v' => '0.3.1'],
             'rules' => ['min_items' => 3],
         ]);
 
-        $this->seedPack('MBTI-CN-v0.2.2', [
+        $this->seedPack('MBTI-CN-v0.3-B', [
             'schema' => 'fap.report.highlights.v1',
-            'templates' => ['v' => '0.2.2'],
+            'templates' => ['v' => '0.3.2'],
             'rules' => ['min_items' => 3],
         ]);
 
-        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
-        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.MBTI-CN-v0.2.1-TEST');
+        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.3-A');
+        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.MBTI-CN-v0.3-A');
 
         $this->app->forgetInstance(ContentStore::class);
     }
@@ -60,7 +60,7 @@ final class ContentStoreContractTest extends TestCase
         $second = $store->loadHighlights();
 
         $this->assertSame($first, $second);
-        $this->assertSame('0.2.1', (string) ($first['templates']['v'] ?? ''));
+        $this->assertSame('0.3.1', (string) ($first['templates']['v'] ?? ''));
     }
 
     public function test_cache_hit_keeps_second_read_stable_when_source_changes(): void
@@ -68,7 +68,7 @@ final class ContentStoreContractTest extends TestCase
         $store = app(ContentStore::class);
         $first = $store->loadHighlights();
 
-        $path = $this->packPath('MBTI-CN-v0.2.1-TEST') . '/report_highlights_templates.json';
+        $path = $this->packPath('MBTI-CN-v0.3-A') . '/report_highlights_templates.json';
         file_put_contents($path, json_encode([
             'schema' => 'fap.report.highlights.v1',
             'templates' => ['v' => 'mutated'],
@@ -78,7 +78,7 @@ final class ContentStoreContractTest extends TestCase
         $second = $store->loadHighlights();
 
         $this->assertSame($first, $second);
-        $this->assertSame('0.2.1', (string) ($second['templates']['v'] ?? ''));
+        $this->assertSame('0.3.1', (string) ($second['templates']['v'] ?? ''));
     }
 
     public function test_dir_version_change_invalidates_cache_and_returns_new_content(): void
@@ -86,22 +86,22 @@ final class ContentStoreContractTest extends TestCase
         $storeA = app(ContentStore::class);
         $a = $storeA->loadHighlights();
 
-        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.2.2');
-        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.MBTI-CN-v0.2.2');
+        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.3-B');
+        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.MBTI-CN-v0.3-B');
         $this->app->forgetInstance(ContentStore::class);
 
         $storeB = app(ContentStore::class);
         $b = $storeB->loadHighlights();
 
         $this->assertNotSame((string) ($a['templates']['v'] ?? ''), (string) ($b['templates']['v'] ?? ''));
-        $this->assertSame('0.2.2', (string) ($b['templates']['v'] ?? ''));
+        $this->assertSame('0.3.2', (string) ($b['templates']['v'] ?? ''));
     }
 
     public function test_missing_resource_returns_empty_doc_contract(): void
     {
-        $this->seedPack('MBTI-CN-v0.2.3-missing', null, includeHighlights: false);
-        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.2.3-missing');
-        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.MBTI-CN-v0.2.3-missing');
+        $this->seedPack('MBTI-CN-v0.3-missing', null, includeHighlights: false);
+        config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.3-missing');
+        config()->set('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.MBTI-CN-v0.3-missing');
         $this->app->forgetInstance(ContentStore::class);
 
         $store = app(ContentStore::class);

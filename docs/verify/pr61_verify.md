@@ -20,7 +20,7 @@
 5. scripts + CI: `bash -n /Users/rainie/Desktop/GitHub/fap-api/backend/scripts/pr61_verify.sh && bash -n /Users/rainie/Desktop/GitHub/fap-api/backend/scripts/pr61_accept.sh && bash /Users/rainie/Desktop/GitHub/fap-api/backend/scripts/pr61_accept.sh && bash /Users/rainie/Desktop/GitHub/fap-api/backend/scripts/ci_verify_mbti.sh`
 
 ## Contract Smoke (curl)
-- `curl -i http://127.0.0.1:1861/api/v0.2/healthz`
+- `curl -i http://127.0.0.1:1861/api/v0.3/healthz`
 - `curl -i http://127.0.0.1:1861/api/v0.3/scales/MBTI/questions`
 
 ## PASS Keywords

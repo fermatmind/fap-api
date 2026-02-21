@@ -26,7 +26,7 @@ class LegacyMbtiPackRepository
         if ($dirVersion === '') {
             $dirVersion = (string) config(
                 'content_packs.default_dir_version',
-                config('content.default_versions.default', 'MBTI-CN-v0.2.1-TEST')
+                config('content.default_versions.default', 'MBTI-CN-v0.3')
             );
         }
 

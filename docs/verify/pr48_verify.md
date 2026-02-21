@@ -27,7 +27,7 @@
 
 Key Notes
 
-- `/api/v0.2/events` 增加 raw payload bytes 上限，超限返回 `413` + `payload_too_large`。
+- `/api/v0.3/events` 增加 raw payload bytes 上限，超限返回 `413` + `payload_too_large`。
 - `SensitiveDataRedactor` 支持心理隐私键递归脱敏与 redaction 计数/version 输出。
 - `AuditLogger` 对整段 meta 执行 redactor+sanitize，并写入 `meta_json._redaction` 指标。
 - `pr48_verify.sh` 保留 pack/seed/config 一致性校验，并新增 events 超限验收（413 + 不落库）。

@@ -16,6 +16,6 @@
 - 用户撤回后：停止写入 + 标记 revoked_at。
 
 ## 撤回流程
-1) `POST /api/v0.2/integrations/{provider}/revoke`
+1) `POST /api/v0.3/integrations/{provider}/revoke`
 2) integrations.status = revoked，写 revoked_at
 3) 后续 PR 可增加数据删除与导出任务

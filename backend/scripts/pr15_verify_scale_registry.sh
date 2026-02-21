@@ -56,7 +56,7 @@ Smoke URLs:
 
 Key outputs:
 - scale_code: MBTI
-- dir_version: MBTI-CN-v0.2.1-TEST
+- dir_version: MBTI-CN-v0.3
 
 Schema changes:
 - scales_registry (unique org_id+primary_slug; indexes: org_id, driver_type, is_public, is_active)

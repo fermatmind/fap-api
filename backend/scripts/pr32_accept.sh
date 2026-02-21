@@ -20,8 +20,8 @@ export FAP_PACKS_DRIVER="${FAP_PACKS_DRIVER:-local}"
 export FAP_PACKS_ROOT="${FAP_PACKS_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)/content_packages}"
 export FAP_DEFAULT_REGION="${FAP_DEFAULT_REGION:-CN_MAINLAND}"
 export FAP_DEFAULT_LOCALE="${FAP_DEFAULT_LOCALE:-zh-CN}"
-export FAP_DEFAULT_PACK_ID="${FAP_DEFAULT_PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.2}"
-export FAP_DEFAULT_DIR_VERSION="${FAP_DEFAULT_DIR_VERSION:-MBTI-CN-v0.2.2}"
+export FAP_DEFAULT_PACK_ID="${FAP_DEFAULT_PACK_ID:-MBTI.cn-mainland.zh-CN.v0.3}"
+export FAP_DEFAULT_DIR_VERSION="${FAP_DEFAULT_DIR_VERSION:-MBTI-CN-v0.3}"
 
 export DB_CONNECTION=sqlite
 export DB_DATABASE=/tmp/pr32.sqlite

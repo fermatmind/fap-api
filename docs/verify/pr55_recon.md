@@ -9,8 +9,8 @@
   - `backend/app/Support/Database/SchemaIndex.php`
   - `backend/database/migrations/2026_02_08_040000_create_migration_index_audits_table.php`
 - 相关路由：
-  - `GET /api/v0.2/admin/migrations/observability`
-  - `GET /api/v0.2/admin/migrations/rollback-preview`
+  - `GET /api/v0.3/admin/migrations/observability`
+  - `GET /api/v0.3/admin/migrations/rollback-preview`
 - 相关 DB 表/迁移：
   - `migrations`（回滚预览来源）
   - `migration_index_audits`（本 PR 新增，记录 index 动作）

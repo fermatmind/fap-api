@@ -26,7 +26,7 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         $scale   = 'default';
         $region  = 'CN_MAINLAND';
         $locale  = 'zh-CN';
-        $version = 'MBTI-CN-v0.2.1-TEST';
+        $version = 'MBTI-CN-v0.3';
 
         // ✅ 关键：很多 legacy 代码/Service 仍然从 env('MBTI_CONTENT_PACKAGE') 取 pack
         // 必须用“路径风格”：scale/region/locale/version
@@ -200,7 +200,7 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         $scale   = (string) config('fap.content.scale', 'default');
         $region  = (string) config('fap.content.region', 'CN_MAINLAND');
         $locale  = (string) config('fap.content.locale', 'zh-CN');
-        $version = (string) config('fap.content.content_package_version', 'MBTI-CN-v0.2.1-TEST');
+        $version = (string) config('fap.content.content_package_version', 'MBTI-CN-v0.3');
 
         $srcPackDir = $origRoot . DIRECTORY_SEPARATOR . $scale . DIRECTORY_SEPARATOR . $region . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $version;
         $dstPackDir = $tmpRoot  . DIRECTORY_SEPARATOR . $scale . DIRECTORY_SEPARATOR . $region . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $version;

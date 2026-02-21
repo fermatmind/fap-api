@@ -35,12 +35,12 @@ bash backend/scripts/ci_verify_mbti.sh
 
 ## Curl examples
 ```bash
-curl -sS -i http://127.0.0.1:1869/api/v0.2/healthz || true
+curl -sS -i http://127.0.0.1:1869/api/v0.3/healthz || true
 curl -sS -i \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer fm_00000000-0000-4000-8000-000000000000" \
   -d '{"event_code":"pr69_probe","attempt_id":"11111111-1111-4111-8111-111111111111"}' \
-  http://127.0.0.1:1869/api/v0.2/events || true
+  http://127.0.0.1:1869/api/v0.3/events || true
 ```
 
 ## PASS Criteria

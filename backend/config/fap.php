@@ -5,7 +5,7 @@ return [
     'admin_token' => env('FAP_ADMIN_TOKEN', ''),
 
     // Content packages
-    'content_package_version' => env('FAP_CONTENT_PACKAGE_VERSION', 'MBTI-CN-v0.2.2'),
+    'content_package_version' => env('FAP_CONTENT_PACKAGE_VERSION', 'MBTI-CN-v0.3'),
     'content_packages_dir' => env('FAP_CONTENT_PACKAGES_DIR', null),
     'support_email' => env('FAP_SUPPORT_EMAIL', env('SUPPORT_EMAIL', '')),
 

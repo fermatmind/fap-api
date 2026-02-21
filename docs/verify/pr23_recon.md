@@ -8,7 +8,7 @@
   - `backend/app/Http/Middleware/FmTokenAuth.php`
   - `backend/app/Support/OrgContext.php`
 - 相关路由：
-  - `POST /api/v0.2/events`
+  - `POST /api/v0.3/events`
   - `GET /api/v0.3/boot`
   - `GET /api/v0.4/boot`
 - 相关 DB 表/迁移：

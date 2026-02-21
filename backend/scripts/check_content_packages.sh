@@ -7,7 +7,7 @@ BACKEND_DIR="$(cd -- "$SCRIPT_DIR/.." && pwd)"
 REPO_ROOT="$(cd -- "$BACKEND_DIR/.." && pwd)"
 
 ROOT="${1:-$REPO_ROOT/content_packages}"
-MANIFEST="${2:-$ROOT/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/manifest.json}"
+MANIFEST="${2:-$ROOT/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/manifest.json}"
 
 if [[ ! -d "$ROOT/default" ]]; then
   echo "ERROR: not found: $ROOT/default"

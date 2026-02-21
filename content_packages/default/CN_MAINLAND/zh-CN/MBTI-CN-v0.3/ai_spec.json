@@ -1,0 +1,54 @@
+{
+    "schema": "fap.report.rules.v1",
+    "scale_code": "MBTI",
+    "version": "0.2.2",
+    "features": [
+        {
+            "id": "ai_insights_v1",
+            "enabled": true,
+            "input_contract": {
+                "required": [
+                    "type_code",
+                    "dimension_scores",
+                    "pci",
+                    "top_strengths",
+                    "top_risks",
+                    "locale",
+                    "region"
+                ],
+                "optional": [
+                    "age_range",
+                    "work_role",
+                    "relationship_status",
+                    "goals"
+                ]
+            },
+            "output_contract": {
+                "required": [
+                    "summary",
+                    "strengths",
+                    "blind_spots",
+                    "growth_plan",
+                    "relationship_tips",
+                    "stress_tips",
+                    "disclaimer"
+                ],
+                "format": "json"
+            },
+            "prompt_templates": {
+                "system": "你是一个严谨的性格测评解读助手。输出必须符合 JSON 结构，避免医疗诊断与绝对化判断。",
+                "user": "基于输入的 type_code 与维度分数，生成可执行建议，语气友好但克制，避免标签化攻击。"
+            },
+            "audit_fields": [
+                "prompt_id",
+                "prompt_sha256",
+                "model",
+                "temperature",
+                "max_output_tokens",
+                "input_token_count",
+                "output_token_count",
+                "latency_ms"
+            ]
+        }
+    ]
+}

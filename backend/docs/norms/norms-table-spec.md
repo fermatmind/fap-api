@@ -32,7 +32,7 @@ v1 仅提供**全体样本**的「超过 X% 的人」能力，默认不开启，
 - v1 仅支持整数 score_int 查询
 
 ### pack_id 与 results 过滤
-- norms 以 `pack_id` 作为版本归属（例：`MBTI.cn-mainland.zh-CN.v0.2.1-TEST`）
+- norms 以 `pack_id` 作为版本归属（例：`MBTI.cn-mainland.zh-CN.v0.2.2`）
 - 当 `results.content_package_version` 存在时：
   - 从 `pack_id` 解析 version（示例：`v0.2.1-TEST`）
   - 过滤 `results.content_package_version == version`
@@ -87,7 +87,7 @@ v1 仅提供**全体样本**的「超过 X% 的人」能力，默认不开启，
 
 ## 查询契约
 ### API：percentile 查询
-`GET /api/v0.2/norms/percentile?pack_id=...&metric_key=EI&score=42`
+`GET /api/v0.3/norms/percentile?pack_id=...&metric_key=EI&score=42`
 
 返回字段（固定）：
 - `ok`
@@ -140,7 +140,7 @@ v1 仅提供**全体样本**的「超过 X% 的人」能力，默认不开启，
 ```json
 {
   "ok": true,
-  "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.1-TEST",
+  "pack_id": "MBTI.cn-mainland.zh-CN.v0.2.2",
   "metric_key": "EI",
   "score_int": 50,
   "percentile": 0.5,

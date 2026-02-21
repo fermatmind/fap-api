@@ -1,0 +1,57 @@
+{
+    "schema": "fap.report.highlights.v1",
+    "schema_version": "report-highlights-policy@v1",
+    "min_total": 3,
+    "max_total": 4,
+    "per_pool": {
+        "strength": {
+            "min": 1,
+            "max": 2
+        },
+        "blindspot": {
+            "min": 1,
+            "max": 1
+        },
+        "action": {
+            "min": 1,
+            "max": 1
+        }
+    },
+    "selection_order": [
+        "strength",
+        "blindspot",
+        "action"
+    ],
+    "dedupe": {
+        "by_template_id": true,
+        "by_group_id": true
+    },
+    "fill_strategy": {
+        "primary": "rules",
+        "secondary": [
+            "tag_match",
+            "fallback_ids"
+        ],
+        "tag_match_min_overlap": 1
+    },
+    "fallback_ids": {
+        "strength": [
+            "hl_s_core_strength_1",
+            "hl_s_core_strength_2"
+        ],
+        "blindspot": [
+            "hl_b_core_blindspot_1"
+        ],
+        "action": [
+            "hl_a_core_action_1"
+        ]
+    },
+    "explain": {
+        "should_expose_explain": true,
+        "meta_path": "report._meta.highlights"
+    },
+    "limits": {
+        "max_items_per_axis": 1,
+        "allow_same_axis_across_pools": true
+    }
+}

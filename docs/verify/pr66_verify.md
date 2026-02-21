@@ -45,7 +45,7 @@ bash backend/scripts/ci_verify_mbti.sh
 
 ## Curl example
 ```bash
-curl -sS -i http://127.0.0.1:1866/api/v0.2/healthz || true
+curl -sS -i http://127.0.0.1:1866/api/v0.3/healthz || true
 ```
 
 ## Artifacts

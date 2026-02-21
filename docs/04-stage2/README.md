@@ -1,9 +1,9 @@
-# Stage 2 Overview (FAP v0.2-B) — CN Mainland Business Loop
+# Stage 2 Overview (FAP v0.3-B) — CN Mainland Business Loop
 
 > Status: Active  
 > Owner: liufuwei  
 > Last Updated: 2025-12-16  
-> Version: FAP v0.2-B  
+> Version: FAP v0.3-B  
 > Related Docs:
 > - docs/04-stage2/README.md
 > - docs/04-stage2/mbti-report-engine-v1.2.md
@@ -53,7 +53,7 @@ Stage 2 的报告引擎统一升级为：**FAP 动态报告引擎 v1.2**
 ### Stage 2 总纲
 
 - docs/04-stage2/README.md
-- docs/04-stage2/stage2-v0.2-b-overview.md
+- docs/04-stage2/stage2-v0.3-b-overview.md
 
 ### 报告引擎（v1.2）
 
@@ -63,7 +63,7 @@ Stage 2 的报告引擎统一升级为：**FAP 动态报告引擎 v1.2**
 
 ### API / 事件 / 数据
 
-- docs/03-stage1/api-v0.2-spec.md  
+- docs/03-stage1/api-v0.3-spec.md  
   - Note: Stage 2 的接口、字段、envelope 口径以该 Spec 为准
 - docs/04-stage2/event-responsibility-matrix.md
 - docs/04-stage2/analytics-stage2-funnel-spec.md

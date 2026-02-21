@@ -97,7 +97,7 @@ fap-api/
 │     └─ pr14_verify_agent_memory.sh
 ├─ content_packages/
 │  └─ default/
-│     └─ CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/
+│     └─ CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2/
 │        ├─ manifest.json
 │        ├─ version.json
 │        ├─ questions.json
@@ -174,7 +174,7 @@ fap-web/
         |
         |  GET questions
         v
-(fap-api) /api/v0.2/scales/MBTI/questions
+(fap-api) /api/v0.3/scales/MBTI/questions
         |
         |  POST attempts/submit
         v
@@ -296,12 +296,12 @@ metabase views / dashboards（触发率/发送率/负反馈/风险升级/成本�
 
 5.1 核心 API（对外）
 	•	GET  /api/health（阶段0）
-	•	GET  /api/v0.2/healthz（PR8）
-	•	GET  /api/v0.2/scales/MBTI
-	•	GET  /api/v0.2/scales/MBTI/questions
-	•	POST /api/v0.2/attempts（或 start/submit 组合）
-	•	GET  /api/v0.2/attempts/{id}/result
-	•	GET  /api/v0.2/attempts/{id}/report
+	•	GET  /api/v0.3/healthz（PR8）
+	•	GET  /api/v0.3/scales/MBTI
+	•	GET  /api/v0.3/scales/MBTI/questions
+	•	POST /api/v0.3/attempts（或 start/submit 组合）
+	•	GET  /api/v0.3/attempts/{id}/result
+	•	GET  /api/v0.3/attempts/{id}/report
 
 5.2 事件（漏斗最小集）
 	•	scale_view
@@ -428,14 +428,14 @@ PR15：Scale Registry + Slug Lookup（v0.3 多量表/SEO 入口）
 
 8.1 本地/CI（内容与MBTI链路）
 	•	make selfcheck
-	•	cd backend && php artisan fap:self-check --strict-assets --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+	•	cd backend && php artisan fap:self-check --strict-assets --pkg=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2
 	•	cd backend && bash scripts/ci_verify_mbti.sh
 
 8.2 线上（健康收口）
 	•	/api/health（阶段0）
-	•	/api/v0.2/healthz（PR8）
-	•	/api/v0.2/scales/MBTI/questions
-	•	/api/v0.2/content-packs
+	•	/api/v0.3/healthz（PR8）
+	•	/api/v0.3/scales/MBTI/questions
+	•	/api/v0.3/content-packs
 
 ⸻
 

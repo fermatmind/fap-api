@@ -17,7 +17,7 @@ Branch: chore/pr12-ai-insights-budget
 - `php -m | rg -n "^redis$"`
 
 ## Existing Entry Points / Related Files
-- Routes: `backend/routes/api.php` has `/api/v0.2/*` groups with Admin, Auth, Attempts, Reports, Payments, etc. No insights routes yet.
+- Routes: `backend/routes/api.php` has `/api/v0.3/*` groups with Admin, Auth, Attempts, Reports, Payments, etc. No insights routes yet.
 - Middleware: `backend/app/Http/Middleware/FmTokenAuth.php` resolves `fm_user_id`/`anon_id` and injects into request attributes.
 - Queue: `backend/config/queue.php` defines `sync`, `database`, `redis`, etc. No dedicated insights queue name yet.
 - Redis: PHP `redis` extension is installed; Healthz controller checks redis/queue (`backend/app/Http/Controllers/HealthzController.php`).
@@ -29,8 +29,8 @@ Branch: chore/pr12-ai-insights-budget
 - Latest migrations are for admin, psychometrics snapshot, and quality tables (2026-01-28).
 
 ## Routes Snapshot
-- Current `/api/v0.2` includes auth, attempts, reports, payments, admin endpoints.
-- No `/api/v0.2/insights` routes in `php artisan route:list` output.
+- Current `/api/v0.3` includes auth, attempts, reports, payments, admin endpoints.
+- No `/api/v0.3/insights` routes in `php artisan route:list` output.
 
 ## Risks + Avoidance
 - Redis unavailable → budget ledger cannot increment/check.
@@ -42,7 +42,7 @@ Branch: chore/pr12-ai-insights-budget
 - Evidence not traceable → build evidence hash + structured pointers; avoid PII.
 
 ## Required Additions/Changes (PR12)
-- Routes: `/api/v0.2/insights/*` endpoints under v0.2 group with budget middleware.
+- Routes: `/api/v0.3/insights/*` endpoints under v0.2 group with budget middleware.
 - Config: new `backend/config/ai.php` + optional queue config note.
 - Migrations: `ai_insights` + `ai_insight_feedback` tables (idempotent).
 - Services: `BudgetLedger`, `InsightGenerator`, `EvidenceBuilder`.

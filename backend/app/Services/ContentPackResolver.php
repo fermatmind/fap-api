@@ -137,6 +137,10 @@ final class ContentPackResolver
             if (strtolower($file->getFilename()) !== 'manifest.json') continue;
 
             $manifestPath = $file->getPathname();
+            $manifestPathNorm = str_replace(DIRECTORY_SEPARATOR, '/', $manifestPath);
+            if (str_contains($manifestPathNorm, '/_deprecated/')) continue;
+            if (str_contains($manifestPathNorm, '/compiled/')) continue;
+            if (!str_contains($manifestPathNorm, '/default/')) continue;
             $manifest = $this->readJson($manifestPath);
             if (!is_array($manifest)) continue;
 

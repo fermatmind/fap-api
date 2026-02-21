@@ -265,8 +265,8 @@ class TransactionSlimmingTest extends TestCase
             'started_at' => now(),
             'submitted_at' => now(),
             'pack_id' => (string) config('content_packs.default_pack_id'),
-            'dir_version' => 'MBTI-CN-v0.2.1-TEST',
-            'content_package_version' => 'v0.2.1-TEST',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 
@@ -298,7 +298,7 @@ class TransactionSlimmingTest extends TestCase
                 'JP' => 'clear',
                 'AT' => 'clear',
             ],
-            'content_package_version' => 'v0.2.1-TEST',
+            'content_package_version' => 'v0.3',
             'result_json' => [
                 'raw_score' => 0,
                 'final_score' => 0,
@@ -322,7 +322,7 @@ class TransactionSlimmingTest extends TestCase
                 ],
             ],
             'pack_id' => (string) config('content_packs.default_pack_id'),
-            'dir_version' => 'MBTI-CN-v0.2.1-TEST',
+            'dir_version' => 'MBTI-CN-v0.3',
             'scoring_spec_version' => '2026.01',
             'report_engine_version' => 'v1.2',
             'is_valid' => true,

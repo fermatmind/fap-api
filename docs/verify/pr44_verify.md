@@ -20,7 +20,7 @@
 Key Notes
 
 - analytics event payload limit is now configurable via `fap.events.*` / `FAP_EVENTS_*`.
-- `/api/v0.2/events` now limits `props`/`props_json`/`meta_json` before normalization and persistence.
+- `/api/v0.3/events` now limits `props`/`props_json`/`meta_json` before normalization and persistence.
 - event ingest response status is `201` for created event rows.
 - verification blocker handling:
   - port bind under sandbox (`1844`, `1827`) required elevated rerun.

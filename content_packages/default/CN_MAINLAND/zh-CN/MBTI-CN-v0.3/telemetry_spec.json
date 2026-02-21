@@ -1,0 +1,99 @@
+{
+    "schema": "fap.report.rules.v1",
+    "scale_code": "MBTI",
+    "version": "0.2.2",
+    "events": [
+        {
+            "name": "mbti_test_start",
+            "props": [
+                "pack_id",
+                "dir_version",
+                "content_pack_version",
+                "entry",
+                "region",
+                "locale"
+            ]
+        },
+        {
+            "name": "mbti_question_answer",
+            "props": [
+                "attempt_id",
+                "question_code",
+                "option_key",
+                "elapsed_ms_bucket"
+            ]
+        },
+        {
+            "name": "mbti_test_submit",
+            "props": [
+                "attempt_id",
+                "answers_count",
+                "duration_ms",
+                "quality_flags"
+            ]
+        },
+        {
+            "name": "mbti_report_view",
+            "props": [
+                "result_id",
+                "section_id",
+                "locked",
+                "variant_id"
+            ]
+        },
+        {
+            "name": "mbti_paywall_impression",
+            "props": [
+                "result_id",
+                "variant_id",
+                "offer_order"
+            ]
+        },
+        {
+            "name": "mbti_paywall_click",
+            "props": [
+                "result_id",
+                "sku_code",
+                "variant_id"
+            ]
+        },
+        {
+            "name": "mbti_purchase_success",
+            "props": [
+                "order_id",
+                "sku_code",
+                "amount_cents",
+                "currency",
+                "benefits_granted"
+            ]
+        }
+    ],
+    "experiments": [
+        {
+            "key": "mbti_paywall_variant",
+            "scope": "account",
+            "variants": [
+                "paywall_v1",
+                "paywall_v2"
+            ],
+            "allocation": [
+                0.5,
+                0.5
+            ]
+        }
+    ],
+    "coverage": {
+        "report_sections": [
+            "overview",
+            "type_snapshot",
+            "dimension_summary",
+            "traits",
+            "growth",
+            "relationships",
+            "stress_recovery",
+            "career",
+            "recommended_reads",
+            "borderline_notes"
+        ]
+    }
+}

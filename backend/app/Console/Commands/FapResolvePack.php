@@ -21,7 +21,7 @@ class FapResolvePack extends Command
         $scale  = (string)$this->argument('scale_code');
         $region = (string)$this->argument('region');
         $locale = (string)$this->argument('locale');
-        $ver    = (string)$this->argument('version');
+        $ver    = $this->normalizeVersion((string)$this->argument('version'));
 
         $rp = $resolver->resolve($scale, $region, $locale, $ver);
 
@@ -34,5 +34,19 @@ class FapResolvePack extends Command
         $this->line(json_encode($rp->trace, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
 
         return 0;
+    }
+
+    private function normalizeVersion(string $version): string
+    {
+        $version = trim($version);
+        if ($version === '') {
+            return $version;
+        }
+
+        if (preg_match('/^MBTI-CN-(v[0-9][A-Za-z0-9._-]*)$/', $version, $m) === 1) {
+            return $m[1];
+        }
+
+        return $version;
     }
 }

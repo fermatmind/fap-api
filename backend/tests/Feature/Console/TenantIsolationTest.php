@@ -173,7 +173,7 @@ final class TenantIsolationTest extends TestCase
             'submitted_at' => now(),
             'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => (string) config('content_packs.default_dir_version'),
-            'content_package_version' => 'v0.2.2',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
             'calculation_snapshot_json' => ['seed' => true],
         ]);
@@ -207,7 +207,7 @@ final class TenantIsolationTest extends TestCase
             'anon_id' => (string) ($attempt->anon_id ?? ''),
             'scale_code' => (string) ($attempt->scale_code ?? 'MBTI'),
             'scale_version' => (string) ($attempt->scale_version ?? 'v0.3'),
-            'content_package_version' => (string) ($attempt->content_package_version ?? 'v0.2.2'),
+            'content_package_version' => (string) ($attempt->content_package_version ?? 'v0.3'),
         ]);
     }
 

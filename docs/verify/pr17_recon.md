@@ -4,7 +4,7 @@ Date: 2026-01-29
 
 ## 相关入口文件（attempts/results/report/scoring）
 - `backend/routes/api.php`
-  - v0.2 已有 `/api/v0.2/attempts`, `/attempts/start`, `/attempts/{id}/result`, `/attempts/{id}/report`
+  - v0.2 已有 `/api/v0.3/attempts`, `/attempts/start`, `/attempts/{id}/result`, `/attempts/{id}/report`
   - v0.3 仅有 `/api/v0.3/scales`、`/scales/lookup`、`/scales/{scale_code}`、`/scales/{scale_code}/questions`
 - `backend/app/Http/Controllers/MbtiController.php`
   - v0.2 attempts start/submit/result/report 主链路

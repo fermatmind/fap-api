@@ -6,7 +6,7 @@
   - backend/scripts/ci/prepare_sqlite.sh
   - backend/config/content_packs.php
 - Related routes:
-  - /api/v0.2/content-packs
+  - /api/v0.3/content-packs
   - /api/v0.3/attempts/start
   - /api/v0.3/attempts/submit
   - /api/v0.3/scales/{code}/questions

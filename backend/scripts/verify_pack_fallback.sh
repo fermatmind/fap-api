@@ -51,28 +51,28 @@ echo
 echo "[A] exact: CN_MAINLAND / zh-CN"
 set_attempt "CN_MAINLAND" "zh-CN"
 check_versions
-expect_pack "MBTI.cn-mainland.zh-CN.v0.2.1-TEST"
+expect_pack "MBTI.cn-mainland.zh-CN.v0.3"
 echo
 
 # B. locale 降级（zh-TW → zh）
 echo "[B] locale fallback: CN_MAINLAND / zh-TW -> zh"
 set_attempt "CN_MAINLAND" "zh-TW"
 check_versions
-expect_pack "MBTI.cn-mainland.zh.v0.2.1-TEST"
+expect_pack "MBTI.cn-mainland.zh.v0.3"
 echo
 
 # C. region 降级（CN_MAINLAND/en 不存在 → GLOBAL/en 命中）
 echo "[C] region fallback: CN_MAINLAND / en -> GLOBAL/en"
 set_attempt "CN_MAINLAND" "en"
 check_versions
-expect_pack "MBTI.global.en.v0.2.1-TEST"
+expect_pack "MBTI.global.en.v0.3"
 echo
 
 # D. 最终兜底（fr-FR 不存在 → final_fallback 落到 GLOBAL/en）
 echo "[D] final fallback: CN_MAINLAND / fr-FR -> GLOBAL/en"
 set_attempt "CN_MAINLAND" "fr-FR"
 check_versions
-expect_pack "MBTI.global.en.v0.2.1-TEST"
+expect_pack "MBTI.global.en.v0.3"
 echo
 
 echo "🎉 ALL PASS"

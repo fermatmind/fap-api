@@ -22,8 +22,8 @@ final class LegacyMbtiReportPayloadBuilderTest extends TestCase
 
         config()->set('content_packs.root', $this->packsRoot);
 
-        $packDir = $this->packsRoot . '/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2';
-        $this->contentDir = 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2';
+        $packDir = $this->packsRoot . '/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
+        $this->contentDir = 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
         File::ensureDirectoryExists($packDir);
 
         $this->writeJson($packDir . '/report_highlights_templates.json', [

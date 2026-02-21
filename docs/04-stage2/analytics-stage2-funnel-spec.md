@@ -1,13 +1,13 @@
 > Status: Active
 > Owner: liufuwei
 > Last Updated: 2025-12-16
-> Version: Analytics v0.2-B
+> Version: Analytics v0.3-B
 > Related Docs:
 > - docs/04-stage2/README.md
 > - docs/04-stage2/event-responsibility-matrix.md
 > - docs/04-stage2/stage2-acceptance-playbook.md
-> - docs/03-stage1/fap-v0.2-glossary.md
-> - docs/03-stage1/api-v0.2-spec.md
+> - docs/03-stage1/fap-v0.3-glossary.md
+> - docs/03-stage1/api-v0.3-spec.md
 
 # Stage 2 数据与漏斗规范（Funnel + Weekly Ritual）
 
@@ -49,8 +49,8 @@
 ## 3. 事件字段口径（摘要）
 
 详见 Stage 1 events 规范与术语词典：  
-- docs/03-stage1/api-v0.2-spec.md  
-- docs/03-stage1/fap-v0.2-glossary.md
+- docs/03-stage1/api-v0.3-spec.md  
+- docs/03-stage1/fap-v0.3-glossary.md
 
 ### 3.1 必带字段（Required）
 每条 events 必须尽量带齐：
@@ -58,7 +58,7 @@
 - user_id（预留，可空）
 - openid（预留，可空）
 - scale_code（例如 MBTI）
-- scale_version（例如 v0.2）
+- scale_version（例如 v0.3）
 - attempt_id（可空：但推荐尽量带，漏斗口径需要）
 - region / locale
 - source / channel

@@ -23,19 +23,19 @@ This PRD documents only landed behavior. Any endpoint not in routes is Draft/Pla
 ### 1.1 Route Matrix
 | Status | Method | Path | Auth | Middleware/Notes |
 |---|---|---|---|---|
-| Implemented | `GET` | `/api/v0.2/lookup/ticket/{code}` | `Auth: Public` | `throttle:api_public` + LookupController IP limiter |
-| Implemented | `POST` | `/api/v0.2/lookup/device` | `Auth: FmTokenAuth` | `throttle:api_public`, user/anon ownership constrained |
-| Implemented | `POST` | `/api/v0.2/lookup/order` | `Auth: FmTokenAuth` | runtime switch `LOOKUP_ORDER` must be enabled |
-| Implemented | `POST` | `/api/v0.2/auth/phone/send_code` | `Auth: Public` | `throttle:api_auth`, PIPL consent required |
-| Implemented | `POST` | `/api/v0.2/auth/phone/verify` | `Auth: Public` | `throttle:api_auth`, PIPL consent required |
-| Implemented | `POST` | `/api/v0.2/auth/provider` | `Auth: Public` | `throttle:api_auth`, provider enum validated |
-| Implemented | `POST` | `/api/v0.2/me/identities/bind` | `Auth: FmTokenAuth` | provider binding with conflict checks |
-| Implemented | `GET` | `/api/v0.2/me/identities` | `Auth: FmTokenAuth` | list identities |
+| Implemented | `GET` | `/api/v0.3/lookup/ticket/{code}` | `Auth: Public` | `throttle:api_public` + LookupController IP limiter |
+| Implemented | `POST` | `/api/v0.3/lookup/device` | `Auth: FmTokenAuth` | `throttle:api_public`, user/anon ownership constrained |
+| Implemented | `POST` | `/api/v0.3/lookup/order` | `Auth: FmTokenAuth` | runtime switch `LOOKUP_ORDER` must be enabled |
+| Implemented | `POST` | `/api/v0.3/auth/phone/send_code` | `Auth: Public` | `throttle:api_auth`, PIPL consent required |
+| Implemented | `POST` | `/api/v0.3/auth/phone/verify` | `Auth: Public` | `throttle:api_auth`, PIPL consent required |
+| Implemented | `POST` | `/api/v0.3/auth/provider` | `Auth: Public` | `throttle:api_auth`, provider enum validated |
+| Implemented | `POST` | `/api/v0.3/me/identities/bind` | `Auth: FmTokenAuth` | provider binding with conflict checks |
+| Implemented | `GET` | `/api/v0.3/me/identities` | `Auth: FmTokenAuth` | list identities |
 
 ## 2. Implemented Contracts (Detail)
 
 ### 2.1 Ticket Lookup
-Endpoint: `GET /api/v0.2/lookup/ticket/{code}`
+Endpoint: `GET /api/v0.3/lookup/ticket/{code}`
 
 Auth: `Auth: Public`
 
@@ -49,8 +49,8 @@ Success `200`:
   "ok": true,
   "attempt_id": "<uuid>",
   "ticket_code": "FMT-ABCDEFGH",
-  "result_api": "/api/v0.2/attempts/<uuid>/result",
-  "report_api": "/api/v0.2/attempts/<uuid>/report",
+  "result_api": "/api/v0.3/attempts/<uuid>/result",
+  "report_api": "/api/v0.3/attempts/<uuid>/report",
   "result_page": null,
   "report_page": null
 }
@@ -65,7 +65,7 @@ Ownership/Scope:
 - Org-scoped (`resolveOrgId`) lookup.
 
 ### 2.2 Device Lookup
-Endpoint: `POST /api/v0.2/lookup/device`
+Endpoint: `POST /api/v0.3/lookup/device`
 
 Auth: `Auth: FmTokenAuth`
 
@@ -83,8 +83,8 @@ Success `200`:
     {
       "attempt_id": "<uuid>",
       "ticket_code": "FMT-ABCDEFGH",
-      "result_api": "/api/v0.2/attempts/<uuid>/result",
-      "report_api": "/api/v0.2/attempts/<uuid>/report"
+      "result_api": "/api/v0.3/attempts/<uuid>/result",
+      "report_api": "/api/v0.3/attempts/<uuid>/report"
     }
   ]
 }
@@ -100,7 +100,7 @@ Ownership/Scope:
 - Org + ownership constrained by `fm_user_id` / `fm_anon_id`.
 
 ### 2.3 Order Lookup
-Endpoint: `POST /api/v0.2/lookup/order`
+Endpoint: `POST /api/v0.3/lookup/order`
 
 Auth: `Auth: FmTokenAuth`
 
@@ -117,8 +117,8 @@ Success `200`:
   "ok": true,
   "order_no": "ORD-123",
   "attempt_id": "<uuid>",
-  "result_api": "/api/v0.2/attempts/<uuid>/result",
-  "report_api": "/api/v0.2/attempts/<uuid>/report"
+  "result_api": "/api/v0.3/attempts/<uuid>/result",
+  "report_api": "/api/v0.3/attempts/<uuid>/report"
 }
 ```
 
@@ -130,7 +130,7 @@ Error shape:
 - `404 NOT_FOUND`
 
 ### 2.4 Phone OTP Send
-Endpoint: `POST /api/v0.2/auth/phone/send_code`
+Endpoint: `POST /api/v0.3/auth/phone/send_code`
 
 Auth: `Auth: Public`
 
@@ -159,7 +159,7 @@ Success `200`:
 `dev_code` only appears in dev-like environments.
 
 ### 2.5 Phone OTP Verify
-Endpoint: `POST /api/v0.2/auth/phone/verify`
+Endpoint: `POST /api/v0.3/auth/phone/verify`
 
 Auth: `Auth: Public`
 
@@ -191,7 +191,7 @@ Success `200`:
 ```
 
 ### 2.6 Provider Login
-Endpoint: `POST /api/v0.2/auth/provider`
+Endpoint: `POST /api/v0.3/auth/provider`
 
 Auth: `Auth: Public`
 
@@ -206,7 +206,7 @@ Behavior:
 - `provider_code=dev` is local/testing only.
 
 ### 2.7 Bind Identity
-Endpoint: `POST /api/v0.2/me/identities/bind`
+Endpoint: `POST /api/v0.3/me/identities/bind`
 
 Auth: `Auth: FmTokenAuth`
 
@@ -238,11 +238,11 @@ The following are not present in `backend/routes/api.php` and must not be treate
 
 | Status | Planned Path | Note |
 |---|---|---|
-| Draft/Planned | `POST /api/v0.2/lookup/phone` | not in route table |
-| Draft/Planned | `POST /api/v0.2/lookup/email` | not in route table |
-| Draft/Planned | `POST /api/v0.2/me/import/device` | not in route table |
-| Draft/Planned | `POST /api/v0.2/me/import/ticket` | not in route table |
-| Draft/Planned | `POST /api/v0.2/me/import/order` | not in route table |
+| Draft/Planned | `POST /api/v0.3/lookup/phone` | not in route table |
+| Draft/Planned | `POST /api/v0.3/lookup/email` | not in route table |
+| Draft/Planned | `POST /api/v0.3/me/import/device` | not in route table |
+| Draft/Planned | `POST /api/v0.3/me/import/ticket` | not in route table |
+| Draft/Planned | `POST /api/v0.3/me/import/order` | not in route table |
 
 ## 4. Compliance + Security Baseline (Landed)
 - PIPL consent is mandatory on phone OTP send/verify (`consent` accepted).

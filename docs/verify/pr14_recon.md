@@ -26,13 +26,13 @@
 
 ## 相关路由
 - 已存在：
-  - /api/v0.2/insights/*（generate/show/feedback）
-  - /api/v0.2/integrations/*（ingest/replay/revoke/oauth）
-  - /api/v0.2/admin/*（audit-logs/events/healthz 等）
+  - /api/v0.3/insights/*（generate/show/feedback）
+  - /api/v0.3/integrations/*（ingest/replay/revoke/oauth）
+  - /api/v0.3/admin/*（audit-logs/events/healthz 等）
 - 当前不存在：
-  - /api/v0.2/memory/*
-  - /api/v0.2/me/agent/*
-  - /api/v0.2/admin/agent/*
+  - /api/v0.3/memory/*
+  - /api/v0.3/me/agent/*
+  - /api/v0.3/admin/agent/*
 
 ## 可复用组件
 - BudgetLedger + CheckAiBudget：预算熔断/降级主逻辑。

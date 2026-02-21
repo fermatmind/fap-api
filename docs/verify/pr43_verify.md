@@ -18,8 +18,8 @@
 Key Notes
 
 - uuid route guard coverage:
-  - `/api/v0.2/shares/{shareId}/click` uses `uuid:shareId`
-  - `/api/v0.2/attempts/{id}/result|report|quality|stats` use `uuid:id`
+  - `/api/v0.3/shares/{shareId}/click` uses `uuid:shareId`
+  - `/api/v0.3/attempts/{id}/result|report|quality|stats` use `uuid:id`
   - malformed UUID route params return uniform `404` with `{"ok":false,"error":"NOT_FOUND","message":"Not Found"}`
 - report owner guard verified:
   - no owner => 404

@@ -20,5 +20,5 @@
 
 ## 导出
 - Filament Audit Logs 页面支持导出 CSV（默认导出最近 1000 条）
-- API 侧可通过 `/api/v0.2/admin/audit-logs` 分页查询后导出
+- API 侧可通过 `/api/v0.3/admin/audit-logs` 分页查询后导出
 

@@ -122,10 +122,10 @@ export FAP_PACKS_ROOT="$REPO_DIR/content_packages"
 export FAP_DEFAULT_REGION="CN_MAINLAND"
 export FAP_DEFAULT_LOCALE="zh-CN"
 
-# ✅ PR20（老验收）固定跑 v0.2.1-TEST 的 MBTI 包（避免被 v0.2.2 默认值影响）
-export FAP_DEFAULT_PACK_ID="MBTI.cn-mainland.zh-CN.v0.2.1-TEST"
-export FAP_DEFAULT_DIR_VERSION="MBTI-CN-v0.2.1-TEST"
-export FAP_CONTENT_PACKAGE_VERSION="MBTI-CN-v0.2.1-TEST"
+# ✅ PR20（老验收）固定跑 v0.3 的 MBTI 包（避免被 v0.3 默认值影响）
+export FAP_DEFAULT_PACK_ID="MBTI.cn-mainland.zh-CN.v0.3"
+export FAP_DEFAULT_DIR_VERSION="MBTI-CN-v0.3"
+export FAP_CONTENT_PACKAGE_VERSION="MBTI-CN-v0.3"
 
 php artisan route:list > "$ART_DIR/routes.txt"
 
@@ -348,7 +348,7 @@ http_code="$(post_billing_webhook "$WEBHOOK_PAYLOAD" "$ART_DIR/curl_webhook.json
 curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_paid.json" "$ANON_TOKEN" || fail "fetch paid report failed"
 
 # paid report must remain identical after registry update (snapshot)
-php artisan tinker --execute="\\Illuminate\\Support\\Facades\\DB::table('scales_registry')->where('org_id',0)->where('code','MBTI')->update(['default_dir_version'=>'MBTI-CN-v0.2.1-NOTEXIST','updated_at'=>now()]);" >/dev/null
+php artisan tinker --execute="\\Illuminate\\Support\\Facades\\DB::table('scales_registry')->where('org_id',0)->where('code','MBTI')->update(['default_dir_version'=>'MBTI-CN-v0.3-NOTEXIST','updated_at'=>now()]);" >/dev/null
 
 curl_json GET "$API/api/v0.3/attempts/${attempt_id}/report" "" "$ART_DIR/curl_report_paid_after_update.json" "$ANON_TOKEN" || fail "fetch paid report after update failed"
 

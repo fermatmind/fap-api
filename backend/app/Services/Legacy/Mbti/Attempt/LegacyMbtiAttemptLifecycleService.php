@@ -72,7 +72,7 @@ class LegacyMbtiAttemptLifecycleService
     {
         return (string) config(
             'content_packs.default_dir_version',
-            config('content.default_versions.default', 'MBTI-CN-v0.2.1-TEST')
+            config('content.default_versions.default', 'MBTI-CN-v0.3')
         );
     }
 
@@ -87,7 +87,7 @@ class LegacyMbtiAttemptLifecycleService
         $payload = $request->validate([
             'anon_id' => ['required', 'string', 'max:64'],
             'scale_code' => ['required', 'string', 'in:MBTI'],
-            'scale_version' => ['required', 'string', 'in:v0.2,v0.2.1,v0.2.1-TEST,v0.2.2'],
+            'scale_version' => ['required', 'string', 'in:v0.3'],
             'question_count' => ['required', 'integer', 'in:24,93,144'],
             'client_platform' => ['required', 'string', 'max:32'],
             'client_version' => ['nullable', 'string', 'max:32'],
@@ -141,7 +141,7 @@ class LegacyMbtiAttemptLifecycleService
         $payload = $request->validate([
             'anon_id' => ['required', 'string', 'max:64'],
             'scale_code' => ['required', 'string', 'in:MBTI'],
-            'scale_version' => ['required', 'string', 'in:v0.2,v0.2.1,v0.2.1-TEST,v0.2.2'],
+            'scale_version' => ['required', 'string', 'in:v0.3'],
 
             'answers' => ['required', 'array', 'min:1'],
             'answers.*.question_id' => ['required', 'string'],

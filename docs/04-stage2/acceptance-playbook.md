@@ -1,16 +1,16 @@
 > Status: Active
 > Owner: liufuwei
 > Last Updated: 2025-12-16
-> Version: Acceptance v0.2-B
+> Version: Acceptance v0.3-B
 > Related Docs:
 > - docs/04-stage2/README.md
-> - docs/04-stage2/stage2-v0.2-b-overview.md
+> - docs/04-stage2/stage2-v0.3-b-overview.md
 > - docs/04-stage2/mbti-report-engine-v1.2.md
 > - docs/04-stage2/analytics-stage2-funnel-spec.md
 > - docs/04-stage2/compliance-stage2-user-rights.md
 
 cat > docs/acceptance-playbook.md <<'EOF'
-# Acceptance Playbook（发布验收剧本）— v0.2.1
+# Acceptance Playbook（发布验收剧本）— v0.3
 
 目标：每次发布前 15 分钟固定跑完，保证“主流程可用 + 数据一致 + 埋点口径稳定 + 周报可见变化”。
 
@@ -23,14 +23,14 @@ cat > docs/acceptance-playbook.md <<'EOF'
 - 线上示例：`https://fermatmind.com`
 
 ### 1.1 拉题（Scale/Questions）
-- 访问：`GET /api/v0.2/scales/mbti`
+- 访问：`GET /api/v0.3/scales/mbti`
 - 验收点：
   - HTTP 200
   - `ok=true`
   - 返回包含 `scale_code=MBTI`、`scale_version`、题目数组（数量符合预期）
 
 ### 1.2 提交作答（Attempts Submit）
-- 访问：`POST /api/v0.2/attempts`
+- 访问：`POST /api/v0.3/attempts`
 - 验收点：
   - HTTP 200
   - `ok=true`
@@ -38,15 +38,15 @@ cat > docs/acceptance-playbook.md <<'EOF'
   - 后端写入 attempts + results（见 DB 检查）
 
 ### 1.3 查结果（Result Read）
-- 访问：`GET /api/v0.2/attempts/{attempt_id}/result`
+- 访问：`GET /api/v0.3/attempts/{attempt_id}/result`
 - 验收点：
   - HTTP 200
   - `ok=true`
   - 返回 `type_code`
-  - 返回 `scores_pct` / `axis_states`（若 v0.2.1 已接入则必须存在）
+  - 返回 `scores_pct` / `axis_states`（若 v0.3 已接入则必须存在）
 
 ### 1.4 查分享（Share Payload）
-- 访问：`GET /api/v0.2/attempts/{attempt_id}/share`
+- 访问：`GET /api/v0.3/attempts/{attempt_id}/share`
 - 验收点：
   - HTTP 200
   - `ok=true`
@@ -54,7 +54,7 @@ cat > docs/acceptance-playbook.md <<'EOF'
   - 返回字段能用于前端生成分享卡（type_code/tagline/keywords 等最小字段可用）
 
 ### 1.5 查权益说明（User Rights）
-- 访问：`GET /api/v0.2/user-rights`（或你实际实现的隐私/权益 summary 端点）
+- 访问：`GET /api/v0.3/user-rights`（或你实际实现的隐私/权益 summary 端点）
 - 验收点：
   - HTTP 200
   - 文案包含：我们记录什么/用途/如何删除/如何导出/联系渠道
@@ -72,7 +72,7 @@ cat > docs/acceptance-playbook.md <<'EOF'
 
 ### 2.2 外键/关联检查
 - `results.attempt_id` 必须存在且能 JOIN 到 attempts
-- 同一个 attempt_id 不应生成多条 results（除非你明确允许“多版本重算”，v0.2.1 默认不允许）
+- 同一个 attempt_id 不应生成多条 results（除非你明确允许“多版本重算”，v0.3 默认不允许）
 
 ---
 

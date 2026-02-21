@@ -7,7 +7,7 @@
 默认缓存目录：
 `backend/storage/app/private/content_packs_cache/<pack>/...`
 
-其中 `<pack>` 形如：`default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST`。
+其中 `<pack>` 形如：`default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3`。
 
 ## 元数据
 每个 pack 目录包含 `.pack_cache_meta.json`，字段含义：

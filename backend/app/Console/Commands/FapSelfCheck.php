@@ -23,7 +23,7 @@ use Illuminate\Console\Command;
 class FapSelfCheck extends Command
 {
     protected $signature = 'fap:self-check
-    {--pkg= : Relative folder under content_packages (e.g. MBTI/CN_MAINLAND/zh-CN/v0.2.1-TEST)}
+    {--pkg= : Relative folder under content_packages (e.g. default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3)}
     {--path= : Path to manifest.json}
     {--pack_id= : Resolve manifest.json by pack_id (scan content_packages)}
     {--strict-assets : Fail if known files exist in package dir but are not declared in manifest.assets; also validate questions assets paths}';

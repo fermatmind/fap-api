@@ -13,11 +13,11 @@
 本规范仅适用于：
 - REGION：`CN_MAINLAND`
 - LOCALE：`zh-CN`
-- 目标内容包（示例）：`MBTI-CN-v0.2.1-TEST`
+- 目标内容包（示例）：`MBTI-CN-v0.3`
 
 ### 0.1 唯一允许修改的 Overrides 文件（Canonical）
 ✅ 只允许改这一份：
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_overrides.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_overrides.json`
 
 ### 0.2 禁止修改的路径（历史对照 / 回溯用）
 🚫 任何情况下都不允许改：
@@ -98,7 +98,7 @@ PR 必填字段（复制这个模板）：
 
 ```bash
 # 1) 去掉尾随空格
-sed -i '' -E 's/[[:space:]]+$//' content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_overrides.json
+sed -i '' -E 's/[[:space:]]+$//' content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_overrides.json
 git diff --check
 
 # 2) 跑 CI E2E（包含 self-check / MVP check / verify_mbti / overrides D 验收）
@@ -155,7 +155,7 @@ bash backend/scripts/ci_verify_mbti.sh
 ## 8. 你要改哪一个文件（再次强调）
 
 ✅ 只能改：
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_overrides.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_overrides.json`
 
 🚫 禁止改：
 - `content_packages/_deprecated/**`

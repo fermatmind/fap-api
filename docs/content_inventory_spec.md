@@ -13,7 +13,7 @@
 本规范当前只覆盖：
 - REGION：CN_MAINLAND
 - LOCALE：zh-CN
-- 目标内容包（示例）：MBTI-CN-v0.2.1-TEST
+- 目标内容包（示例）：MBTI-CN-v0.3
 - 重点资产：
   - Highlights：report_highlights_templates.json（库存口径以 templates 为准）
   - Reads：report_recommended_reads.json（按 bucket 分组的内容库 + rules）
@@ -178,7 +178,7 @@ MVP 最低门槛（写死）：
 
 4.1 一键脚本（推荐）
 --------------------------------------------
-PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
 bash backend/scripts/mvp_check.sh "$PACK_DIR"
 echo "EXIT=$?"
 

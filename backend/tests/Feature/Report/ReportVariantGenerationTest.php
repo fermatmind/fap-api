@@ -46,8 +46,8 @@ final class ReportVariantGenerationTest extends TestCase
     private function createAttemptWithResult(string $anonId): string
     {
         $attemptId = (string) Str::uuid();
-        $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
-        $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
+        $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3');
+        $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3');
 
         Attempt::create([
             'id' => $attemptId,
@@ -64,7 +64,7 @@ final class ReportVariantGenerationTest extends TestCase
             'submitted_at' => now(),
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
-            'content_package_version' => 'v0.2.1-TEST',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 
@@ -84,7 +84,7 @@ final class ReportVariantGenerationTest extends TestCase
             ],
             'scores_pct' => ['EI' => 50, 'SN' => 50, 'TF' => 50, 'JP' => 50, 'AT' => 50],
             'axis_states' => ['EI' => 'clear', 'SN' => 'clear', 'TF' => 'clear', 'JP' => 'clear', 'AT' => 'clear'],
-            'content_package_version' => 'v0.2.1-TEST',
+            'content_package_version' => 'v0.3',
             'result_json' => ['type_code' => 'INTJ-A'],
             'pack_id' => $packId,
             'dir_version' => $dirVersion,

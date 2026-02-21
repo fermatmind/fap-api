@@ -163,6 +163,9 @@ final class ContentPacksIndex
             if (str_contains($manifestPathNorm, '/_deprecated/')) {
                 continue;
             }
+            if (!str_contains($manifestPathNorm, '/default/')) {
+                continue;
+            }
 
             try {
                 $manifestRaw = File::get($manifestPath);

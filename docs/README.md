@@ -1,7 +1,7 @@
 > Status: Active
 > Owner: liufuwei
 > Last Updated: 2026-01-12
-> Version: Docs Index v0.2.1
+> Version: Docs Index v0.3
 > Related Docs:
 > - PROJECT_OVERVIEW.md
 > - docs/03-stage1/README.md
@@ -39,11 +39,11 @@
 ## 2) 全局口径（所有阶段必须遵守）
 
 ### 2.1 版本号口径（最小集合）
-- `scale_version`：量表/题库版本（例：`v0.2`）
+- `scale_version`：量表/题库版本（例：`v0.3`）
 - `profile_version`：32 型主档骨架版本（例：`mbti32-v2.5`）
-- `content_package_version`：内容资产包版本（例：`MBTI-CN-v0.2`）
+- `content_package_version`：内容资产包版本（例：`MBTI-CN-v0.3`）
 - `report_engine_version`：报告引擎版本（例：`v1.2`）
-- `policy_version`：组装策略/阈值策略版本（例：`policy-v0.2-r1`）
+- `policy_version`：组装策略/阈值策略版本（例：`policy-v0.3-r1`）
 
 > 约束：线上数据可回溯；升级只能“加版本”，不能覆盖旧版本的语义。
 
@@ -75,7 +75,7 @@
 
 ### 工程/产品（主链路）
 1) docs/03-stage1/README.md（先理解口径与规范）
-2) docs/03-stage1/api-v0.2-spec.md（接口口径）
+2) docs/03-stage1/api-v0.3-spec.md（接口口径）
 3) docs/04-stage2/README.md（Stage2 总纲与里程碑）
 4) docs/04-stage2/mbti-report-engine-v1.2.md（报告引擎结构）
 5) docs/04-stage2/analytics-stage2-funnel-spec.md（漏斗指标与事件映射）
@@ -114,7 +114,7 @@
 ### 6.4 热修（Overrides：最危险能力）
 - docs/overrides_hotfix_spec.md
 - 唯一 canonical 文件（示例）：
-  - `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_overrides.json`
+  - `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_overrides.json`
 
 ### 6.5 写作规范（长期建设）
 - docs/rules_writing_spec.md

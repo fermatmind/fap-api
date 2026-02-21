@@ -67,8 +67,8 @@ jobs:
       # hard defaults (avoid resolver picking "default")
       FAP_DEFAULT_REGION: CN_MAINLAND
       FAP_DEFAULT_LOCALE: zh-CN
-      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
-      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.2.1-TEST
+      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.3
+      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.3
 
       MODE: ci
       STRICT: "1"
@@ -208,7 +208,7 @@ jobs:
 
       - name: Run ci_verify_mbti
         env:
-          MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST
+          MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
           DB_PORT: 3306

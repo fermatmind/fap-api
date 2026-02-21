@@ -16,6 +16,6 @@
   - default/CN_MAINLAND/zh-CN/SIMPLE-SCORE-CN-v0.3.0-DEMO
   - default/CN_MAINLAND/zh-CN/DEMO-ANSWERS-CN-v0.3.0-DEMO
 - Deprecated handling:
-  - Deprecated packs (e.g. MBTI-CN-v0.2.1-TEST) are excluded from strict-assets gate.
+  - Deprecated packs (e.g. MBTI-CN-v0.2.2) are excluded from strict-assets gate.
 - Artifacts:
   - backend/artifacts/pr27/summary.txt

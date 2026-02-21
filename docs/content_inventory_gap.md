@@ -11,7 +11,7 @@
 ## 1) Reads（report_recommended_reads.json）
 
 来源文件：
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_recommended_reads.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_recommended_reads.json`
 
 ### 1.1 总览（按 bucket）
 
@@ -140,14 +140,14 @@
 > - Current：以本机 jq 输出为准（可在 PR comment 贴统计输出作为验收凭证）
 
 来源文件（MBTI CN 主包）：
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_relationships.json`
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_fallback_relationships.json`
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_career.json`
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_fallback_career.json`
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_stress_recovery.json`
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_fallback_stress_recovery.json`
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_growth.json`
-- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_fallback_growth.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_relationships.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_fallback_relationships.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_career.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_fallback_career.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_stress_recovery.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_fallback_stress_recovery.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_growth.json`
+- `content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_fallback_growth.json`
 
 ### 2.5.1 总览（P0：general + fallback）
 

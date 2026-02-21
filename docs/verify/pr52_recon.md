@@ -8,8 +8,8 @@
   - backend/app/Http/Middleware/NormalizeApiErrorContract.php
   - backend/app/Support/ApiExceptionRenderer.php
 - 相关路由：
-  - GET /api/v0.2/me/attempts
-  - POST /api/v0.2/shares/{shareId}/click
+  - GET /api/v0.3/me/attempts
+  - POST /api/v0.3/shares/{shareId}/click
   - GET|PUT /api/v0.3/attempts/{attempt_id}/progress
   - GET /api/v0.3/attempts/{id}/result
   - GET /api/v0.3/attempts/{id}/report

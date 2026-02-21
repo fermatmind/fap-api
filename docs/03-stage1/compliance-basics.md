@@ -1,26 +1,26 @@
 > Status: Active
 > Owner: liufuwei
 > Last Updated: 2025-12-16
-> Version: Compliance Basics v0.2.1 (Stage 1 / v0.2-A)
+> Version: Compliance Basics v0.3 (Stage 1 / v0.3-A)
 > Related Docs:
 > - docs/README.md
 > - docs/03-stage1/README.md
-> - docs/03-stage1/fap-v0.2-glossary.md
-> - docs/03-stage1/api-v0.2-spec.md
+> - docs/03-stage1/fap-v0.3-glossary.md
+> - docs/03-stage1/api-v0.3-spec.md
 > - docs/03-stage1/copywriting-no-go-list.md
 > - docs/04-stage2/compliance-stage2-user-rights.md
 
-# 合规最小三件套（Compliance Basics）— v0.2.1（对齐 API v0.2.1）
+# 合规最小三件套（Compliance Basics）— v0.3（对齐 API v0.3）
 
-版本：**v0.2.1**  
+版本：**v0.3**  
 适用范围：Fermat Assessment Platform（FAP）在 **中国大陆（CN_MAINLAND）** 的 MBTI 主流程（测评 → 报告 → 分享 → 增长）。  
 目标：阶段二前不追求“完备合规系统”，先把 **可执行、可解释、可处理** 的最小闭环跑起来。
 
 ---
 
-## 0. v0.2.1 本次修订要点（对齐 API）
+## 0. v0.3 本次修订要点（对齐 API）
 
-本文件对齐 `docs/03-stage1/api-v0.2-spec.md` 的 v0.2.1 修订版，明确以下新增点的合规口径：
+本文件对齐 `docs/03-stage1/api-v0.3-spec.md` 的 v0.3 修订版，明确以下新增点的合规口径：
 
 ### 0.1 新增字段（可能涉及个人信息/可识别信息）
 
@@ -31,16 +31,16 @@
 
 ### 0.2 新增接口（涉及分享与追踪）
 
-- `GET /api/v0.2/attempts/{attempt_id}/share`  
+- `GET /api/v0.3/attempts/{attempt_id}/share`  
   返回“分享模板渲染所需字段”，前端生成分享图片；生成成功后上报 `share_generate` 事件。
 
 ---
 
-## 1. 合规范围与原则（v0.2.1 最小口径）
+## 1. 合规范围与原则（v0.3 最小口径）
 
 ### 1.1 范围
 
-- 本文件只覆盖：**MBTI v0.2** 主流程相关的数据与处理动作：
+- 本文件只覆盖：**MBTI v0.3** 主流程相关的数据与处理动作：
   - `attempts`（作答记录）
   - `results`（结果记录）
   - `events`（埋点事件）
@@ -56,7 +56,7 @@
 
 ---
 
-## 2. 数据分类（v0.2.1）
+## 2. 数据分类（v0.3）
 
 ### 2.1 业务数据（核心）
 
@@ -74,10 +74,10 @@
   - `attempt_id`
   - `type_code`（如 ENFJ-A）
   - `scores_raw`（原始分数）
-  - `scores_pct`（v0.2.1 新增：五轴百分比）
-  - `axis_states`（v0.2.1 新增：五轴状态）
+  - `scores_pct`（v0.3 新增：五轴百分比）
+  - `axis_states`（v0.3 新增：五轴状态）
   - `profile_version`
-  - `content_package_version`（v0.2.1 新增）
+  - `content_package_version`（v0.3 新增）
   - `is_valid`
   - `computed_at`
 
@@ -85,7 +85,7 @@
 
 - `events`
   - `event_code`（scale_view/test_start/test_submit/result_view/share_generate…）
-  - `anon_id` / `user_id`（v0.2 预留 user）
+  - `anon_id` / `user_id`（v0.3 预留 user）
   - `scale_code` / `scale_version`
   - `attempt_id`（若有关）
   - `channel` / `region` / `locale`
@@ -95,7 +95,7 @@
 
 ### 2.3 识别与风险分级（阶段二前的实际做法）
 
-- **anon_id**：在 v0.2.1 语境下属于“可关联同一用户多次行为的标识”，应视作 **可识别性较高的标识符**（即便不含实名）。
+- **anon_id**：在 v0.3 语境下属于“可关联同一用户多次行为的标识”，应视作 **可识别性较高的标识符**（即便不含实名）。
 - **answers_summary_json / scores_pct / axis_states / type_code**：属于个人测评结果与偏好信息，需按“更敏感的个人信息”对待（内部访问受控、最小展示）。
 
 ---
@@ -124,7 +124,7 @@
 
 ---
 
-## 4. 数据保存与访问控制（v0.2.1 建议口径）
+## 4. 数据保存与访问控制（v0.3 建议口径）
 
 ### 4.1 保存期限（阶段二可先写“最小承诺”）
 
@@ -148,7 +148,7 @@
 
 ---
 
-## 5. 用户权益最小通道（v0.2.1）
+## 5. 用户权益最小通道（v0.3）
 
 阶段二前只做“最小可执行”，允许人工流程，但必须**写清楚**。
 
@@ -156,7 +156,7 @@
 
 你需要在 `fermatmind.com` 放一个公开页面（最简可用）：
 
-- 推荐路径：`/privacy/mbti-v0.2` 或 `/user-rights`
+- 推荐路径：`/privacy/mbti-v0.3` 或 `/user-rights`
 
 页面至少包含：
 
@@ -169,7 +169,7 @@
    - 建议邮箱：`privacy@fermatmind.com`（或你的官方邮箱）
    - 可选：微信客服号/公众号客服入口
 
-### 5.2 用户请求类型（v0.2.1 最小支持）
+### 5.2 用户请求类型（v0.3 最小支持）
 
 - **删除请求（Delete Request）**
   - 删除指定 `anon_id` 关联的：
@@ -221,7 +221,7 @@
 
 ---
 
-## 7. 与 API v0.2.1 对齐的“字段/接口合规说明”
+## 7. 与 API v0.3 对齐的“字段/接口合规说明”
 
 ### 7.1 content_package_version（新增字段）
 
@@ -243,7 +243,7 @@
 - 风险：中（若 share_id 可被外部枚举/查询，会间接泄露信息）
 - 处理：
   - share_id 仅作为内部追踪标识
-  - 不提供 `GET /share/{share_id}` 这种可被枚举的公开读取接口（v0.2.1 不提供）
+  - 不提供 `GET /share/{share_id}` 这种可被枚举的公开读取接口（v0.3 不提供）
   - 分享卡对外传播应通过“图片 + 小程序入口”，而不是暴露 share_id
 
 ### 7.4 新增接口：GET /attempts/{attempt_id}/share
@@ -255,11 +255,11 @@
 
 ---
 
-## 8. 最小合规自检清单（v0.2.1）
+## 8. 最小合规自检清单（v0.3）
 
 上线/发布前，你至少要确认：
 
-- [ ] 公开页面已上线：`/privacy/mbti-v0.2` 或 `/user-rights`
+- [ ] 公开页面已上线：`/privacy/mbti-v0.3` 或 `/user-rights`
 - [ ] 页面写清：收集数据、用途、删除/导出请求方式、联系邮箱
 - [ ] 生产日志不输出 answers 明文（尤其 answers_summary_json）
 - [ ] 后台列表页不直接展示 answers_summary_json 全量
@@ -270,7 +270,7 @@
 
 ## 9. 附：对外页面建议文案骨架（可直接复制到网站）
 
-标题：**费马测试（Fermat Assessment Platform）用户数据与权益说明（MBTI v0.2）**
+标题：**费马测试（Fermat Assessment Platform）用户数据与权益说明（MBTI v0.3）**
 
 1. 我们会记录哪些数据  
    - 匿名标识（anon_id）  

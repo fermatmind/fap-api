@@ -19,7 +19,7 @@ php artisan test --filter=V0_3
 ## 关键输出预期
 - scales 列表返回 ok=true 且包含 MBTI
 - lookup 返回 scale_code=MBTI
-- lookup 返回 dir_version=MBTI-CN-v0.2.1-TEST
+- lookup 返回 dir_version=MBTI-CN-v0.2.2
 
 示例（节选）：
 ```json
@@ -27,6 +27,6 @@ php artisan test --filter=V0_3
   "ok": true,
   "scale_code": "MBTI",
   "primary_slug": "mbti-test",
-  "dir_version": "MBTI-CN-v0.2.1-TEST"
+  "dir_version": "MBTI-CN-v0.2.2"
 }
 ```

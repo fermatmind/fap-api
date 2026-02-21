@@ -17,7 +17,7 @@
 - 现有表集中于 attempts/results/content packs/norms/admin/ai 等，与本 PR 新表无冲突。
 
 ## 相关路由
-- 已存在：/api/v0.2/scales/MBTI、/api/v0.2/lookup/* 等。
+- 已存在：/api/v0.3/scales/MBTI、/api/v0.3/lookup/* 等。
 - 当前不存在：/api/v0.3/*（route:list 未命中 v0.3）。
 
 ## 需要新增/修改点

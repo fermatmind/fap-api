@@ -7,7 +7,7 @@ class ContentPackage
     public static function mbtiPackageVersion(): string
     {
         // 跟你 share 返回的 content_package_version 保持一致
-        return (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
+        return (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3');
     }
 
     /**

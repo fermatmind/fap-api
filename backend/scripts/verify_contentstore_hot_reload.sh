@@ -14,7 +14,7 @@ set -euo pipefail
 API="http://127.0.0.1:8000/api/v0.3/attempts/${ID}/report"
 
 # 默认文件/卡片（你现在验证用的那套）
-FILE="${FILE:-../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/report_cards_traits.json}"
+FILE="${FILE:-../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/report_cards_traits.json}"
 CARD_ID="${CARD_ID:-traits_axis_SN_N_strong}"
 CANARY_PREFIX="${CANARY_PREFIX:-@@CANARY@@}"
 

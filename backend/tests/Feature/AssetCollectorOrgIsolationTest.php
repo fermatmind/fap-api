@@ -82,9 +82,9 @@ final class AssetCollectorOrgIsolationTest extends TestCase
             'channel' => 'test',
             'started_at' => now()->subMinute(),
             'submitted_at' => now(),
-            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.2'),
-            'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.2'),
-            'content_package_version' => 'v0.2.2',
+            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'),
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 

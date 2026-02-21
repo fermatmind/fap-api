@@ -11,7 +11,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # Active packs only (deprecated packs are excluded from strict-assets gate)
 PKGS=(
-  "default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2"
+  "default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
   "default/CN_MAINLAND/zh-CN/IQ-RAVEN-CN-v0.3.0-DEMO"
   "default/CN_MAINLAND/zh-CN/SIMPLE-SCORE-CN-v0.3.0-DEMO"
   "default/CN_MAINLAND/zh-CN/DEMO-ANSWERS-CN-v0.3.0-DEMO"
