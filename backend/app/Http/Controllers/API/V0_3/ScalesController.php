@@ -116,7 +116,11 @@ class ScalesController extends Controller
                 ], 500);
             }
 
-            $questionsDoc = $compiled['questions_doc'] ?? null;
+            $normalizedLocale = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
+            $questionsDocByLocale = is_array($compiled['questions_doc_by_locale'] ?? null)
+                ? $compiled['questions_doc_by_locale']
+                : [];
+            $questionsDoc = $questionsDocByLocale[$normalizedLocale] ?? ($compiled['questions_doc'] ?? null);
             if (!is_array($questionsDoc)) {
                 return response()->json([
                     'ok' => false,
@@ -129,7 +133,7 @@ class ScalesController extends Controller
                 'ok' => true,
                 'scale_code' => $code,
                 'region' => $region,
-                'locale' => $locale,
+                'locale' => $normalizedLocale,
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'content_package_version' => (string) ($compiled['pack_version'] ?? $version),

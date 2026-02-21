@@ -77,6 +77,10 @@ final class BigFiveContentCompileService
 
         $questions = [];
         $questionsDocItems = [];
+        $questionsDocItemsByLocale = [
+            'zh-CN' => [],
+            'en' => [],
+        ];
         $questionIndex = [];
         $facetIndex = [];
         $domainIndex = [];
@@ -116,6 +120,7 @@ final class BigFiveContentCompileService
             $domainIndex[$domain][] = $qid;
 
             $docOptions = [];
+            $docOptionsEn = [];
             foreach ($options as $opt) {
                 $docOptions[] = [
                     'code' => (string) $opt['code'],
@@ -123,17 +128,40 @@ final class BigFiveContentCompileService
                     'text' => (string) $opt['label_zh'],
                     'text_en' => (string) $opt['label_en'],
                 ];
+
+                $docOptionsEn[] = [
+                    'code' => (string) $opt['code'],
+                    'score' => (int) $opt['score'],
+                    'text' => (string) $opt['label_en'],
+                    'text_zh' => (string) $opt['label_zh'],
+                    'text_en' => (string) $opt['label_en'],
+                ];
             }
 
-            $questionsDocItems[] = [
+            $zhItem = [
                 'question_id' => (string) $qid,
                 'order' => $qid,
                 'dimension' => $question['dimension'],
                 'facet_code' => $question['facet_code'],
                 'text' => $question['text_zh'],
+                'text_zh' => $question['text_zh'],
                 'text_en' => $question['text_en'],
                 'direction' => $direction,
                 'options' => $docOptions,
+            ];
+            $questionsDocItems[] = $zhItem;
+            $questionsDocItemsByLocale['zh-CN'][] = $zhItem;
+
+            $questionsDocItemsByLocale['en'][] = [
+                'question_id' => (string) $qid,
+                'order' => $qid,
+                'dimension' => $question['dimension'],
+                'facet_code' => $question['facet_code'],
+                'text' => $question['text_en'],
+                'text_zh' => $question['text_zh'],
+                'text_en' => $question['text_en'],
+                'direction' => $direction,
+                'options' => $docOptionsEn,
             ];
         }
 
@@ -206,6 +234,18 @@ final class BigFiveContentCompileService
             'questions_doc' => [
                 'schema' => 'fap.questions.v1',
                 'items' => $questionsDocItems,
+            ],
+            'questions_doc_by_locale' => [
+                'zh-CN' => [
+                    'schema' => 'fap.questions.v1',
+                    'locale' => 'zh-CN',
+                    'items' => $questionsDocItemsByLocale['zh-CN'],
+                ],
+                'en' => [
+                    'schema' => 'fap.questions.v1',
+                    'locale' => 'en',
+                    'items' => $questionsDocItemsByLocale['en'],
+                ],
             ],
             'options' => $options,
         ];
