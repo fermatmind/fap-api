@@ -174,6 +174,8 @@ Route::prefix("v0.3")->middleware([
                 ->middleware(\App\Http\Middleware\RequireOrgRole::class . ':owner,admin');
             Route::get('/orgs/{org_id}/big5/audits', [BigFiveOpsController::class, 'audits'])
                 ->middleware(\App\Http\Middleware\RequireOrgRole::class . ':owner,admin');
+            Route::get('/orgs/{org_id}/big5/audits/{audit_id}', [BigFiveOpsController::class, 'audit'])
+                ->middleware(\App\Http\Middleware\RequireOrgRole::class . ':owner,admin');
             Route::get('/orgs/{org_id}/big5/releases/latest', [BigFiveOpsController::class, 'latest'])
                 ->middleware(\App\Http\Middleware\RequireOrgRole::class . ':owner,admin');
             Route::get('/orgs/{org_id}/big5/releases/{release_id}', [BigFiveOpsController::class, 'release'])

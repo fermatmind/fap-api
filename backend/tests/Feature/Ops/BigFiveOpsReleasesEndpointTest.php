@@ -213,6 +213,106 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('error_code', 'ORG_NOT_FOUND');
     }
 
+    public function test_owner_can_get_big5_audit_detail_with_related_release(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-audit-detail@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+        $releaseId = (string) Str::uuid();
+
+        $this->insertRelease([
+            'id' => $releaseId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'status' => 'success',
+            'norms_version' => '2026Q2_zhcn_prod_v1',
+        ]);
+
+        $auditId = (int) DB::table('audit_logs')->insertGetId([
+            'actor_admin_id' => null,
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $releaseId,
+            'meta_json' => json_encode(['manifest_hash' => str_repeat('a', 64)], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => '127.0.0.1',
+            'user_agent' => 'phpunit',
+            'request_id' => 'req_audit_detail',
+            'reason' => '',
+            'result' => 'success',
+            'created_at' => now(),
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/audits/' . $auditId);
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('item.id', $auditId);
+        $response->assertJsonPath('item.action', 'big5_pack_publish');
+        $response->assertJsonPath('release.release_id', $releaseId);
+    }
+
+    public function test_audit_detail_returns_not_found_for_non_big5_action(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-audit-detail-nonbig5@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $auditId = (int) DB::table('audit_logs')->insertGetId([
+            'actor_admin_id' => null,
+            'action' => 'admin_login',
+            'target_type' => 'admin_user',
+            'target_id' => '1',
+            'meta_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => '127.0.0.1',
+            'user_agent' => 'phpunit',
+            'request_id' => 'req_audit_detail_nonbig5',
+            'reason' => '',
+            'result' => 'success',
+            'created_at' => now(),
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/audits/' . $auditId);
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'AUDIT_NOT_FOUND');
+    }
+
+    public function test_non_member_cannot_access_big5_audit_detail_endpoint(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-audit-detail-2@big5.test');
+        $outsider = $this->createUserWithToken('ops-outsider-audit-detail@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $auditId = (int) DB::table('audit_logs')->insertGetId([
+            'actor_admin_id' => null,
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => (string) Str::uuid(),
+            'meta_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => '127.0.0.1',
+            'user_agent' => 'phpunit',
+            'request_id' => 'req_audit_detail_forbidden',
+            'reason' => '',
+            'result' => 'success',
+            'created_at' => now(),
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $outsider['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/audits/' . $auditId);
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'ORG_NOT_FOUND');
+    }
+
     public function test_latest_release_returns_not_found_when_big5_release_absent(): void
     {
         $owner = $this->createUserWithToken('ops-owner-latest-missing@big5.test');

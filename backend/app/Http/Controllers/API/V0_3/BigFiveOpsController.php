@@ -164,6 +164,54 @@ final class BigFiveOpsController extends Controller
         ]);
     }
 
+    public function audit(Request $request, int $org_id, string $audit_id): JsonResponse
+    {
+        $audit_id = trim($audit_id);
+        if ($audit_id === '') {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'AUDIT_NOT_FOUND',
+                'message' => 'audit not found.',
+            ], 404);
+        }
+
+        $row = DB::table('audit_logs')
+            ->where('id', $audit_id)
+            ->whereIn('action', ['big5_pack_publish', 'big5_pack_rollback'])
+            ->first();
+
+        if (! $row) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'AUDIT_NOT_FOUND',
+                'message' => 'audit not found.',
+            ], 404);
+        }
+
+        $release = null;
+        $targetType = (string) ($row->target_type ?? '');
+        $targetId = (string) ($row->target_id ?? '');
+        if ($targetType === 'content_pack_release' && $targetId !== '') {
+            $releaseRow = DB::table('content_pack_releases')
+                ->where('id', $targetId)
+                ->where(function ($q): void {
+                    $q->where('to_pack_id', 'BIG5_OCEAN')
+                        ->orWhere('from_pack_id', 'BIG5_OCEAN');
+                })
+                ->first();
+            if ($releaseRow) {
+                $release = $this->mapReleaseRow($releaseRow);
+            }
+        }
+
+        return response()->json([
+            'ok' => true,
+            'org_id' => $org_id,
+            'item' => $this->mapAuditRow($row),
+            'release' => $release,
+        ]);
+    }
+
     public function release(Request $request, int $org_id, string $release_id): JsonResponse
     {
         $release_id = trim($release_id);
