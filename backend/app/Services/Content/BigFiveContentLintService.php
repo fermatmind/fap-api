@@ -230,6 +230,35 @@ final class BigFiveContentLintService
         if (! is_array($doc['validity_checks'] ?? null)) {
             $errors[] = $this->error($file, 1, 'validity_checks missing.');
         }
+
+        $validityItems = is_array($doc['validity_items'] ?? null) ? $doc['validity_items'] : [];
+        if ($validityItems === []) {
+            $errors[] = $this->error($file, 1, 'validity_items missing.');
+
+            return;
+        }
+
+        foreach ($validityItems as $idx => $item) {
+            if (!is_array($item)) {
+                $errors[] = $this->error($file, 1, "validity_items[{$idx}] must be object.");
+                continue;
+            }
+
+            $itemId = trim((string) ($item['item_id'] ?? ''));
+            $promptZh = trim((string) ($item['prompt_zh'] ?? ''));
+            $promptEn = trim((string) ($item['prompt_en'] ?? ''));
+            $expectedCode = (int) ($item['expected_code'] ?? 0);
+
+            if ($itemId === '') {
+                $errors[] = $this->error($file, 1, "validity_items[{$idx}].item_id required.");
+            }
+            if ($promptZh === '' || $promptEn === '') {
+                $errors[] = $this->error($file, 1, "validity_items[{$idx}] prompt_zh/prompt_en required.");
+            }
+            if ($expectedCode < 1 || $expectedCode > 5) {
+                $errors[] = $this->error($file, 1, "validity_items[{$idx}].expected_code must be 1..5.");
+            }
+        }
     }
 
     /**

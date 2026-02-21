@@ -108,6 +108,7 @@ class ScalesController extends Controller
         if ($code === 'BIG5_OCEAN') {
             $version = (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
             $compiled = $bigFivePackLoader->readCompiledJson('questions.compiled.json', $version);
+            $policyCompiled = $bigFivePackLoader->readCompiledJson('policy.compiled.json', $version);
             if (!is_array($compiled)) {
                 return response()->json([
                     'ok' => false,
@@ -129,6 +130,28 @@ class ScalesController extends Controller
                 ], 500);
             }
 
+            $policy = is_array($policyCompiled['policy'] ?? null) ? $policyCompiled['policy'] : [];
+            $validityItemsRaw = is_array($policy['validity_items'] ?? null) ? $policy['validity_items'] : [];
+            $validityItems = [];
+            foreach ($validityItemsRaw as $item) {
+                if (!is_array($item)) {
+                    continue;
+                }
+                $itemId = trim((string) ($item['item_id'] ?? ''));
+                if ($itemId === '') {
+                    continue;
+                }
+                $prompt = $normalizedLocale === 'zh-CN'
+                    ? trim((string) ($item['prompt_zh'] ?? ''))
+                    : trim((string) ($item['prompt_en'] ?? ''));
+
+                $validityItems[] = [
+                    'item_id' => $itemId,
+                    'text' => $prompt,
+                    'required' => (bool) ($item['required'] ?? false),
+                ];
+            }
+
             return response()->json([
                 'ok' => true,
                 'scale_code' => $code,
@@ -138,6 +161,9 @@ class ScalesController extends Controller
                 'dir_version' => $dirVersion,
                 'content_package_version' => (string) ($compiled['pack_version'] ?? $version),
                 'questions' => $questionsDoc,
+                'meta' => [
+                    'validity_items' => $validityItems,
+                ],
             ]);
         }
 

@@ -131,6 +131,18 @@ final class NormsBig5Rebuild extends Command
             if (! in_array($quality, $qualityLevels, true)) {
                 continue;
             }
+            $qualityFlags = data_get($score, 'quality.flags');
+            if (is_array($qualityFlags)) {
+                $upperFlags = array_map(
+                    static fn ($flag): string => strtoupper(trim((string) $flag)),
+                    $qualityFlags
+                );
+                foreach (['ATTENTION_CHECK_FAILED', 'SPEEDING', 'STRAIGHTLINING'] as $blockedFlag) {
+                    if (in_array($blockedFlag, $upperFlags, true)) {
+                        continue 2;
+                    }
+                }
+            }
 
             $domains = data_get($score, 'raw_scores.domains_mean');
             $facets = data_get($score, 'raw_scores.facets_mean');

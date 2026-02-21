@@ -79,8 +79,25 @@
       "NEUTRAL_OVERUSE": {
         "neutral_rate_gt": 0.6
       }
-    }
+    },
+    "attention_check_failed_level": "C"
   },
+  "validity_items": [
+    {
+      "item_id": "V1",
+      "prompt_en": "For data quality, please choose option 2 for this item.",
+      "prompt_zh": "为保证数据质量，本题请选择选项 2。",
+      "expected_code": 2,
+      "required": true
+    },
+    {
+      "item_id": "V2",
+      "prompt_en": "For data quality, please choose option 4 for this item.",
+      "prompt_zh": "为保证数据质量，本题请选择选项 4。",
+      "expected_code": 4,
+      "required": true
+    }
+  ],
   "tags_rules": {
     "profiles": {
       "profile:resilient": {
