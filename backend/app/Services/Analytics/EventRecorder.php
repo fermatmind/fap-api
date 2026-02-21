@@ -4,15 +4,16 @@ namespace App\Services\Analytics;
 
 use App\Models\Event;
 use App\Services\Experiments\ExperimentAssigner;
+use App\Support\SensitiveDataRedactor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 final class EventRecorder
 {
     public function __construct(
         private ExperimentAssigner $experimentAssigner,
+        private ?SensitiveDataRedactor $redactor = null,
     ) {
     }
 
@@ -21,6 +22,8 @@ final class EventRecorder
         if (!\App\Support\SchemaBaseline::hasTable('events')) {
             return;
         }
+
+        $meta = $this->sanitizeMetaForStorage($eventCode, $meta);
 
         $now = now();
         $payload = [
@@ -136,5 +139,33 @@ final class EventRecorder
         }
 
         return [];
+    }
+
+    /**
+     * @param array<string,mixed> $meta
+     * @return array<string,mixed>
+     */
+    private function sanitizeMetaForStorage(string $eventCode, array $meta): array
+    {
+        $normalizedCode = strtolower(trim($eventCode));
+        if (!str_starts_with($normalizedCode, 'big5_')) {
+            return $meta;
+        }
+
+        $redactor = $this->redactor instanceof SensitiveDataRedactor
+            ? $this->redactor
+            : new SensitiveDataRedactor();
+        $result = $redactor->redactWithMeta($meta);
+        $sanitized = is_array($result['data'] ?? null) ? $result['data'] : $meta;
+        $count = (int) ($result['count'] ?? 0);
+        if ($count > 0) {
+            $sanitized['_redaction'] = [
+                'count' => $count,
+                'version' => (string) ($result['version'] ?? 'v2'),
+                'scope' => 'big5_event_meta',
+            ];
+        }
+
+        return $sanitized;
     }
 }
