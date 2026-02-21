@@ -1,0 +1,76 @@
+[
+  {
+    "sku": "SKU_BIG5_FULL_REPORT_299",
+    "anchor_sku": "SKU_BIG5_FULL_REPORT",
+    "scale_code": "BIG5_OCEAN",
+    "benefit_type": "report_unlock",
+    "benefit_code": "BIG5_FULL_REPORT",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 299,
+    "currency": "CNY",
+    "title": "BIG5 Full Report",
+    "is_active": true,
+    "metadata_json": {
+      "label": "BIG5 full report",
+      "effective_default": true,
+      "anchor_sku": "SKU_BIG5_FULL_REPORT",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "big5_full_report",
+      "modules_included": [
+        "big5_full",
+        "big5_action_plan"
+      ]
+    }
+  },
+  {
+    "sku": "SKU_BIG5_FULL_REPORT",
+    "anchor_sku": "SKU_BIG5_FULL_REPORT",
+    "scale_code": "BIG5_OCEAN",
+    "benefit_type": "report_unlock",
+    "benefit_code": "BIG5_FULL_REPORT",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 299,
+    "currency": "CNY",
+    "title": "BIG5 Full Report (anchor)",
+    "is_active": true,
+    "metadata_json": {
+      "label": "BIG5 full report (anchor)",
+      "anchor": true,
+      "deprecated": true,
+      "effective_sku": "SKU_BIG5_FULL_REPORT_299",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "big5_full_report",
+      "offer": false,
+      "modules_included": [
+        "big5_full",
+        "big5_action_plan"
+      ]
+    }
+  },
+  {
+    "sku": "SKU_BIG5_ACTION_PLAN_99",
+    "anchor_sku": "",
+    "scale_code": "BIG5_OCEAN",
+    "benefit_type": "report_unlock",
+    "benefit_code": "BIG5_ACTION_PLAN",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 99,
+    "currency": "CNY",
+    "title": "BIG5 Action Plan",
+    "is_active": true,
+    "metadata_json": {
+      "label": "BIG5 action plan",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "big5_action_plan",
+      "modules_included": [
+        "big5_action_plan"
+      ]
+    }
+  }
+]

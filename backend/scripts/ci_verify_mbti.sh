@@ -56,6 +56,21 @@ php artisan key:generate --force >/dev/null 2>&1 || true
 bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
 php artisan fap:schema:verify
 
+RUN_BIG5_OCEAN_GATE="${RUN_BIG5_OCEAN_GATE:-0}"
+RUN_FULL_SCALE_REGRESSION="${RUN_FULL_SCALE_REGRESSION:-0}"
+SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION}"
+if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
+  echo "[CI] running BIG5_OCEAN content gates"
+  php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
+  php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
+  php artisan test --filter BigFive
+
+  echo "[CI] rebuilding sqlite baseline after BIG5_OCEAN gate"
+  bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+  php artisan fap:schema:verify
+fi
+
 # Ensure MBTI commercial benefit codes exist for report/share entitlement gate.
 BACKEND_DIR="$BACKEND_DIR" php -r '
 $backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
@@ -608,6 +623,32 @@ fi
 # Smoke: questions endpoint must be ok=true
 # -----------------------------
 echo "[CI] smoke: /api/v0.3/scales/MBTI/questions"
+if ! BACKEND_DIR="$BACKEND_DIR" php -r '
+$backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
+require $backendDir . "/vendor/autoload.php";
+$app = require $backendDir . "/bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+
+if (!Illuminate\Support\Facades\Schema::hasTable("scales_registry")) {
+    fwrite(STDERR, "scales_registry table missing before MBTI smoke\n");
+    exit(2);
+}
+
+$exists = Illuminate\Support\Facades\DB::table("scales_registry")
+    ->where("org_id", 0)
+    ->where("code", "MBTI")
+    ->exists();
+
+if (!$exists) {
+    fwrite(STDERR, "MBTI scale row missing in scales_registry before MBTI smoke\n");
+    exit(3);
+}
+'; then
+  echo "[CI][FAIL] MBTI scale registry baseline missing before smoke"
+  exit 13
+fi
+
 curl -fsS "$API/api/v0.3/scales/MBTI/questions" >"$SMOKE_Q_LOG" || {
   echo "[CI][FAIL] smoke curl failed"
   tail -n 120 "$SERVE_LOG" >&2 || true

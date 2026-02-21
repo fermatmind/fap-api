@@ -338,6 +338,11 @@ class EntitlementManager
             ],
             'MBTI_CAREER' => [ReportAccess::MODULE_CAREER],
             'MBTI_RELATIONSHIP', 'MBTI_RELATIONSHIPS' => [ReportAccess::MODULE_RELATIONSHIPS],
+            'BIG5_FULL_REPORT', 'BIG5_FULL' => [
+                ReportAccess::MODULE_BIG5_FULL,
+                ReportAccess::MODULE_BIG5_ACTION_PLAN,
+            ],
+            'BIG5_ACTION_PLAN' => [ReportAccess::MODULE_BIG5_ACTION_PLAN],
             default => [],
         };
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Content\BigFiveContentCompileService;
 use App\Services\Content\ContentCompileService;
 use Illuminate\Console\Command;
 
@@ -11,14 +12,24 @@ final class ContentCompile extends Command
 {
     protected $signature = 'content:compile
         {--all : Compile all content packs}
-        {--pack= : Compile a single pack_id}';
+        {--pack= : Compile a single pack_id}
+        {--pack-version= : Compile a specific pack version}';
 
     protected $description = 'Compile content packs into normalized runtime artifacts.';
 
-    public function handle(ContentCompileService $service): int
+    public function handle(ContentCompileService $service, BigFiveContentCompileService $bigFiveCompile): int
     {
         $pack = $this->option('pack');
-        $result = $service->compileAll(is_string($pack) ? $pack : null);
+        $version = $this->option('pack-version');
+        if (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
+            $single = $bigFiveCompile->compile(is_string($version) ? $version : null);
+            $result = [
+                'ok' => (bool) ($single['ok'] ?? false),
+                'packs' => [$single],
+            ];
+        } else {
+            $result = $service->compileAll(is_string($pack) ? $pack : null);
+        }
 
         $packs = is_array($result['packs'] ?? null) ? $result['packs'] : [];
         if ($packs === []) {
@@ -43,9 +54,11 @@ final class ContentCompile extends Command
                     continue;
                 }
                 $file = (string) ($err['file'] ?? '');
+                $line = (int) ($err['line'] ?? 0);
                 $block = (string) ($err['block_id'] ?? '');
                 $msg = (string) ($err['message'] ?? '');
-                $this->line("  - {$file} :: {$block} :: {$msg}");
+                $lineLabel = $line > 0 ? (':' . $line) : '';
+                $this->line("  - {$file}{$lineLabel} :: {$block} :: {$msg}");
             }
         }
 

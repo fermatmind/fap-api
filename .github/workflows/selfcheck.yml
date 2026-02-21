@@ -152,6 +152,21 @@ jobs:
         run: |
           bash scripts/ci/prepare_sqlite.sh
 
+      - name: Resolve scale impact
+        id: scale-impact
+        working-directory: backend
+        run: |
+          bash scripts/ci/resolve_scale_impact.sh --base origin/main --head HEAD --format json
+
+      - name: Run BIG5 isolation gates (when BIG5/shared changed)
+        if: steps.scale-impact.outputs.run_big5_ocean_gate == '1'
+        working-directory: backend
+        run: |
+          php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
+          php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
+          php artisan test --filter BigFive
+          bash scripts/ci/prepare_sqlite.sh
+
       - name: Run selfcheck (active packs)
         run: bash backend/scripts/ci_selfcheck_packs.sh
 
@@ -397,6 +412,10 @@ jobs:
       - name: Run tests with MySQL
         working-directory: backend
         run: php vendor/phpunit/phpunit/phpunit --configuration phpunit.mysql.xml
+
+      - name: Rebuild MySQL baseline before smoke
+        working-directory: backend
+        run: bash scripts/ci/prepare_mysql.sh
 
       - name: Smoke v0.3 (mysql lane)
         working-directory: backend

@@ -1,0 +1,211 @@
+{
+    "schema": "big5.policy.compiled.v1",
+    "pack_id": "BIG5_OCEAN",
+    "pack_version": "v1",
+    "generated_at": "2026-02-21T14:05:06.740769Z",
+    "policy": {
+        "pack_id": "BIG5_OCEAN",
+        "pack_version": "v1",
+        "engine_version": "big5_ipipneo120_v3.0.0",
+        "spec_version": "big5_spec_2026Q1_v1",
+        "item_bank_version": "big5_ipipneo120_bilingual_v1",
+        "norms_version": "2026Q1_v1",
+        "answer_scale": {
+            "min": 1,
+            "max": 5,
+            "midpoint": 3
+        },
+        "percentile_buckets": {
+            "low": [
+                0,
+                30
+            ],
+            "mid": [
+                31,
+                69
+            ],
+            "high": [
+                70,
+                100
+            ],
+            "extreme_low": [
+                0,
+                10
+            ],
+            "extreme_high": [
+                90,
+                100
+            ]
+        },
+        "norm_fallback": {
+            "group_priority": [
+                "{locale}_{gender}_{age_band}",
+                "{locale}_{gender}_all",
+                "{locale}_all",
+                "global_all"
+            ],
+            "facet_fallback_group": "global_all",
+            "missing_percentile_strategy": "linear_from_raw_mean",
+            "linear_from_raw_mean": {
+                "min_mean": 1,
+                "max_mean": 5,
+                "min_percentile": 0,
+                "max_percentile": 100
+            },
+            "status_mapping": {
+                "full_coverage": "CALIBRATED",
+                "partial_or_fallback": "PROVISIONAL",
+                "no_norms": "MISSING"
+            }
+        },
+        "validity_checks": {
+            "grade_A": {
+                "completion_rate": 1,
+                "time_per_item_avg_min": 2,
+                "longstring_max_max": 12,
+                "facet_inconsistency_mean_max": 0.9
+            },
+            "grade_B": {
+                "completion_rate": 1,
+                "time_per_item_avg_min": 1.2,
+                "longstring_max_max": 18,
+                "facet_inconsistency_mean_max": 1.1
+            },
+            "grade_C": {
+                "completion_rate": 1,
+                "time_per_item_avg_min": 0.8,
+                "longstring_max_max": 30,
+                "facet_inconsistency_mean_max": 1.3
+            },
+            "flags": {
+                "SPEEDING": {
+                    "time_per_item_avg_lt": 0.8
+                },
+                "STRAIGHTLINING": {
+                    "longstring_max_gt": 30
+                },
+                "INCONSISTENT": {
+                    "facet_inconsistency_mean_gt": 1.3
+                },
+                "EXTREME_RESPONDING": {
+                    "extreme_rate_gt": 0.8
+                },
+                "NEUTRAL_OVERUSE": {
+                    "neutral_rate_gt": 0.6
+                }
+            }
+        },
+        "tags_rules": {
+            "profiles": {
+                "profile:resilient": {
+                    "N": [
+                        "low"
+                    ],
+                    "C": [
+                        "high"
+                    ]
+                },
+                "profile:overcontrolled": {
+                    "N": [
+                        "high"
+                    ],
+                    "C": [
+                        "high"
+                    ]
+                },
+                "profile:undercontrolled": {
+                    "N": [
+                        "high"
+                    ],
+                    "C": [
+                        "low"
+                    ]
+                },
+                "profile:explorer": {
+                    "O": [
+                        "high"
+                    ],
+                    "E": [
+                        "mid",
+                        "high"
+                    ]
+                },
+                "profile:steady_operator": {
+                    "C": [
+                        "high"
+                    ],
+                    "A": [
+                        "high"
+                    ],
+                    "N": [
+                        "low",
+                        "mid"
+                    ]
+                }
+            }
+        },
+        "disclaimer": {
+            "en": "This report is for personality self-reflection and not a medical diagnosis.",
+            "zh-CN": "本报告仅用于人格自我了解，不构成医学或精神健康诊断。"
+        }
+    },
+    "variables_allowlist": {
+        "required": [
+            "quality.level",
+            "norms.status"
+        ],
+        "allowed": [
+            "attempt_id",
+            "scale_code",
+            "variant",
+            "access_level",
+            "quality.level",
+            "quality.notice",
+            "quality.report_tone",
+            "norms.status",
+            "norms.group_id",
+            "norms.group_label",
+            "facts.top_growth_facets_text",
+            "domains.O.percentile",
+            "domains.O.bucket_label",
+            "domains.C.percentile",
+            "domains.C.bucket_label",
+            "domains.E.percentile",
+            "domains.E.bucket_label",
+            "domains.A.percentile",
+            "domains.A.bucket_label",
+            "domains.N.percentile",
+            "domains.N.bucket_label",
+            "facets.N1.percentile",
+            "facets.N2.percentile",
+            "facets.N3.percentile",
+            "facets.N4.percentile",
+            "facets.N5.percentile",
+            "facets.N6.percentile",
+            "facets.E1.percentile",
+            "facets.E2.percentile",
+            "facets.E3.percentile",
+            "facets.E4.percentile",
+            "facets.E5.percentile",
+            "facets.E6.percentile",
+            "facets.O1.percentile",
+            "facets.O2.percentile",
+            "facets.O3.percentile",
+            "facets.O4.percentile",
+            "facets.O5.percentile",
+            "facets.O6.percentile",
+            "facets.A1.percentile",
+            "facets.A2.percentile",
+            "facets.A3.percentile",
+            "facets.A4.percentile",
+            "facets.A5.percentile",
+            "facets.A6.percentile",
+            "facets.C1.percentile",
+            "facets.C2.percentile",
+            "facets.C3.percentile",
+            "facets.C4.percentile",
+            "facets.C5.percentile",
+            "facets.C6.percentile"
+        ]
+    }
+}

@@ -195,6 +195,7 @@ return [
         'iq' => App\Services\Assessment\Drivers\IqTestDriver::class,
         'generic_scoring' => App\Services\Assessment\Drivers\GenericScoringDriver::class,
         'big5' => App\Services\Assessment\Drivers\GenericScoringDriver::class,
+        'big5_ocean' => App\Services\Assessment\Drivers\BigFiveOceanDriver::class,
     ],
 
     // Persist raw answers (audit)

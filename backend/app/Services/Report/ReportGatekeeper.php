@@ -30,6 +30,7 @@ class ReportGatekeeper
         private EntitlementManager $entitlements,
         private SkuCatalog $skus,
         private ReportComposer $reportComposer,
+        private BigFiveReportComposer $bigFiveReportComposer,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
     ) {
@@ -132,27 +133,41 @@ class ReportGatekeeper
 
         $modulesOffered = $this->collectModulesFromOffers((array) ($paywall['offers'] ?? []));
         if ($modulesOffered === []) {
-            $modulesOffered = ReportAccess::allDefaultModulesOffered();
+            $modulesOffered = ReportAccess::allDefaultModulesOffered($scaleCode);
         }
 
         $modulesAllowed = $this->entitlements->getAllowedModulesForAttempt($orgId, $attemptId);
-        if ($modulesAllowed === []) {
-            $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked();
+        if ($scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+            $modulesAllowed = array_values(array_filter(
+                $modulesAllowed,
+                static fn (string $module): bool => str_starts_with(strtolower($module), 'big5_')
+            ));
         }
+        if ($modulesAllowed === []) {
+            $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked($scaleCode);
+        }
+
+        $freeModule = ReportAccess::freeModuleForScale($scaleCode);
+        $fullModule = ReportAccess::fullModuleForScale($scaleCode);
+
         if ($hasFullAccess) {
             $modulesAllowed = ReportAccess::normalizeModules(array_merge(
                 $modulesAllowed,
                 $modulesOffered,
-                [ReportAccess::MODULE_CORE_FULL, ReportAccess::MODULE_CORE_FREE]
+                [$fullModule, $freeModule]
             ));
         }
-        if (!in_array(ReportAccess::MODULE_CORE_FREE, $modulesAllowed, true)) {
-            $modulesAllowed[] = ReportAccess::MODULE_CORE_FREE;
+        if (!in_array($freeModule, $modulesAllowed, true)) {
+            $modulesAllowed[] = $freeModule;
             $modulesAllowed = ReportAccess::normalizeModules($modulesAllowed);
         }
 
         $modulesPreview = ReportAccess::normalizeModules($modulesOffered);
-        $hasPaidModuleAccess = count(array_diff($modulesAllowed, [ReportAccess::MODULE_CORE_FREE])) > 0;
+        $hasPaidModuleAccess = count(array_diff($modulesAllowed, [$freeModule])) > 0;
+
+        $scoreContract = $this->extractScoreContract($result);
+        $normsPayload = is_array($scoreContract['norms'] ?? null) ? $scoreContract['norms'] : [];
+        $qualityPayload = is_array($scoreContract['quality'] ?? null) ? $scoreContract['quality'] : [];
 
         $variant = $hasPaidModuleAccess ? ReportAccess::VARIANT_FULL : ReportAccess::VARIANT_FREE;
         $reportAccessLevel = $variant === ReportAccess::VARIANT_FREE
@@ -184,7 +199,9 @@ class ReportGatekeeper
                         ],
                         $modulesAllowed,
                         $modulesOffered,
-                        $modulesPreview
+                        $modulesPreview,
+                        $normsPayload,
+                        $qualityPayload
                     );
                 }
 
@@ -203,7 +220,9 @@ class ReportGatekeeper
                         ],
                         $modulesAllowed,
                         $modulesOffered,
-                        $modulesPreview
+                        $modulesPreview,
+                        $normsPayload,
+                        $qualityPayload
                     );
                 }
 
@@ -222,7 +241,9 @@ class ReportGatekeeper
                     [],
                     $modulesAllowed,
                     $modulesOffered,
-                    $modulesPreview
+                    $modulesPreview,
+                    $normsPayload,
+                    $qualityPayload
                 );
             }
         }
@@ -246,7 +267,7 @@ class ReportGatekeeper
 
         // Non-MBTI reports are still built by GenericReportBuilder. Re-apply teaser
         // masking when locked to avoid exposing full payload to unpaid users.
-        if ($locked && strtoupper($scaleCode) !== 'MBTI') {
+        if ($locked && !in_array(strtoupper($scaleCode), ['MBTI', 'BIG5_OCEAN'], true)) {
             $report = $this->applyTeaser($report, $viewPolicy);
         }
 
@@ -256,7 +277,7 @@ class ReportGatekeeper
                 $attempt,
                 $result,
                 ReportAccess::VARIANT_FREE,
-                ReportAccess::defaultModulesAllowedForLocked(),
+                ReportAccess::defaultModulesAllowedForLocked($scaleCode),
                 $modulesPreview
             );
             $reportFree = is_array($reportFreeBuilt['report'] ?? null) ? $reportFreeBuilt['report'] : [];
@@ -273,7 +294,9 @@ class ReportGatekeeper
             [],
             $modulesAllowed,
             $modulesOffered,
-            $modulesPreview
+            $modulesPreview,
+            $normsPayload,
+            $qualityPayload
         );
     }
 
@@ -657,6 +680,37 @@ class ReportGatekeeper
                     ];
             }
 
+            if ($scaleCode === 'BIG5_OCEAN') {
+                $composed = $this->bigFiveReportComposer->composeVariant($attempt, $result, $variant, [
+                    'org_id' => (int) ($attempt->org_id ?? 0),
+                    'variant' => $variant,
+                    'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                        ? ReportAccess::REPORT_ACCESS_FREE
+                        : ReportAccess::REPORT_ACCESS_FULL,
+                    'modules_allowed' => $modulesAllowed,
+                    'modules_preview' => $modulesPreview,
+                ]);
+                if (!($composed['ok'] ?? false)) {
+                    return [
+                        'ok' => false,
+                        'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
+                        'message' => (string) ($composed['message'] ?? 'report generation failed.'),
+                        'status' => (int) ($composed['status'] ?? 500),
+                    ];
+                }
+
+                $report = $composed['report'] ?? null;
+
+                return is_array($report)
+                    ? ['ok' => true, 'report' => $report]
+                    : [
+                        'ok' => false,
+                        'error' => 'REPORT_FAILED',
+                        'message' => 'report generation failed.',
+                        'status' => 500,
+                    ];
+            }
+
             $report = $this->genericReportBuilder->build($attempt, $result);
 
             return is_array($report)
@@ -702,7 +756,9 @@ class ReportGatekeeper
         array $meta = [],
         array $modulesAllowed = [],
         array $modulesOffered = [],
-        array $modulesPreview = []
+        array $modulesPreview = [],
+        array $norms = [],
+        array $quality = []
     ): array
     {
         return [
@@ -718,7 +774,44 @@ class ReportGatekeeper
             'modules_preview' => ReportAccess::normalizeModules($modulesPreview),
             'view_policy' => $viewPolicy,
             'meta' => $meta,
+            'norms' => $norms,
+            'quality' => $quality,
             'report' => $report,
+        ];
+    }
+
+    /**
+     * @return array{norms:array<string,mixed>,quality:array<string,mixed>}
+     */
+    private function extractScoreContract(Result $result): array
+    {
+        $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
+        $candidates = [
+            $payload['normed_json'] ?? null,
+            $payload['breakdown_json']['score_result'] ?? null,
+            $payload['axis_scores_json']['score_result'] ?? null,
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (!is_array($candidate)) {
+                continue;
+            }
+
+            $norms = is_array($candidate['norms'] ?? null) ? $candidate['norms'] : [];
+            $quality = is_array($candidate['quality'] ?? null) ? $candidate['quality'] : [];
+            if ($norms === [] && $quality === []) {
+                continue;
+            }
+
+            return [
+                'norms' => $norms,
+                'quality' => $quality,
+            ];
+        }
+
+        return [
+            'norms' => [],
+            'quality' => [],
         ];
     }
 

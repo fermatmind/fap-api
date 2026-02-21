@@ -86,19 +86,20 @@ final class ScaleRegistrySeeder extends Seeder
         $writer->syncSlugsForScale($scale);
         $this->command?->info('ScaleRegistrySeeder: MBTI scale upserted.');
 
-        $big5PackId = 'BIG5.cn-mainland.zh-CN.v0.1.0-TEST';
-        $big5DirVersion = 'BIG5-CN-v0.1.0-TEST';
+        $big5PackId = 'BIG5_OCEAN';
+        $big5DirVersion = 'v1';
 
         $big5 = $writer->upsertScale([
-            'code' => 'BIG5',
+            'code' => 'BIG5_OCEAN',
             'org_id' => 0,
-            'primary_slug' => 'big5',
+            'primary_slug' => 'big5-ocean',
             'slugs_json' => [
+                'big5-ocean',
                 'big5',
                 'big5-personality-test',
             ],
-            'driver_type' => 'big5',
-            'assessment_driver' => 'generic_scoring',
+            'driver_type' => 'big5_ocean',
+            'assessment_driver' => 'big5_ocean',
 
             'default_pack_id' => $big5PackId,
             'default_region' => $defaultRegion,
@@ -107,28 +108,33 @@ final class ScaleRegistrySeeder extends Seeder
 
             'capabilities_json' => [
                 'assets' => false,
+                'questions' => true,
             ],
             'view_policy_json' => [
-                'free_sections' => ['intro', 'score'],
+                'free_sections' => ['summary', 'domains_overview', 'disclaimer'],
                 'blur_others' => false,
                 'teaser_percent' => 0.0,
+                'upgrade_sku' => 'SKU_BIG5_FULL_REPORT_299',
             ],
             'commercial_json' => [
-                'price_tier' => 'FREE',
+                'price_tier' => 'PAID',
+                'report_benefit_code' => 'BIG5_FULL_REPORT',
+                'credit_benefit_code' => 'BIG5_FULL_REPORT',
+                'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_299',
             ],
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'Quiz',
-                'name' => 'BIG5 Personality Test',
-                'description' => 'BIG5 personality test (demo).',
+                'name' => 'BIG5 OCEAN Personality Test',
+                'description' => 'BIG5 OCEAN personality test (IPIP-NEO-120).',
             ],
 
             'is_public' => true,
-            'is_active' => false,
+            'is_active' => true,
         ]);
 
         $writer->syncSlugsForScale($big5);
-        $this->command?->info('ScaleRegistrySeeder: BIG5 scale upserted.');
+        $this->command?->info('ScaleRegistrySeeder: BIG5_OCEAN scale upserted.');
     }
 
     private function resolveSkuDefaults(): array

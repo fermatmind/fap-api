@@ -25,7 +25,27 @@ echo "[PR56][ACCEPT] art_dir=${ART_DIR}"
 cd "${BACKEND_DIR}"
 composer install --no-interaction --no-progress
 composer validate --strict >"${ART_DIR}/composer_validate.txt"
-composer audit --no-interaction >"${ART_DIR}/composer_audit.txt"
+set +e
+AUDIT_EXIT=1
+for attempt in 1 2 3; do
+  composer audit --no-interaction --ignore-unreachable >"${ART_DIR}/composer_audit.txt" 2>&1
+  AUDIT_EXIT=$?
+  if [ "${AUDIT_EXIT}" -eq 0 ]; then
+    break
+  fi
+  if [ "${attempt}" -lt 3 ]; then
+    {
+      echo ""
+      echo "[PR56][ACCEPT] composer audit failed (attempt ${attempt}/3), retrying in 5s..."
+    } >>"${ART_DIR}/composer_audit.txt"
+    sleep 5
+  fi
+done
+set -e
+if [ "${AUDIT_EXIT}" -ne 0 ]; then
+  echo "[PR56][ACCEPT][FAIL] composer audit failed after retries (exit=${AUDIT_EXIT})"
+  exit "${AUDIT_EXIT}"
+fi
 composer --version >"${ART_DIR}/composer_version.txt"
 cd "${REPO_DIR}"
 

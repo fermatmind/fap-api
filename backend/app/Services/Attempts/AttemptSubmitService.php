@@ -218,6 +218,9 @@ class AttemptSubmitService
             $axisStates = $axisScores['axis_states'] ?? null;
 
             $resultJson = $scoreResult->toArray();
+            if ($scaleCode === 'BIG5_OCEAN' && is_array($resultJson['normed_json'] ?? null)) {
+                $resultJson = array_merge($resultJson, $resultJson['normed_json']);
+            }
             $resultJson['scale_code'] = $scaleCode;
             $resultJson['pack_id'] = $packId;
             $resultJson['dir_version'] = $dirVersion;

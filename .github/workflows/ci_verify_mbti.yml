@@ -206,9 +206,18 @@ jobs:
           done
           curl -sS http://127.0.0.1:18000/api/v0.3/scales | php -r '$j=json_decode(stream_get_contents(STDIN), true); exit(($j["ok"] ?? false) ? 0 : 1);'
 
+      - name: Resolve scale impact
+        id: scale-impact
+        working-directory: backend
+        run: |
+          bash scripts/ci/resolve_scale_impact.sh --base origin/main --head HEAD --format json
+
       - name: Run ci_verify_mbti
         env:
           MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
+          RUN_BIG5_OCEAN_GATE: ${{ steps.scale-impact.outputs.run_big5_ocean_gate }}
+          RUN_FULL_SCALE_REGRESSION: ${{ steps.scale-impact.outputs.run_full_scale_regression }}
+          SCALE_SCOPE: ${{ steps.scale-impact.outputs.scale_scope }}
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
@@ -225,7 +234,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: verify_mbti_artifacts
+          name: ci_verify_mbti_${{ matrix.mode }}_mbti
           path: backend/artifacts/verify_mbti
           if-no-files-found: ignore
           retention-days: 7

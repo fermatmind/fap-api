@@ -6,6 +6,9 @@ namespace App\Services\Report;
 
 final class ReportAccess
 {
+    public const SCALE_MBTI = 'MBTI';
+    public const SCALE_BIG5_OCEAN = 'BIG5_OCEAN';
+
     public const VARIANT_FREE = 'free';
     public const VARIANT_FULL = 'full';
 
@@ -20,6 +23,9 @@ final class ReportAccess
     public const MODULE_CORE_FULL = 'core_full';
     public const MODULE_CAREER = 'career';
     public const MODULE_RELATIONSHIPS = 'relationships';
+    public const MODULE_BIG5_CORE = 'big5_core';
+    public const MODULE_BIG5_FULL = 'big5_full';
+    public const MODULE_BIG5_ACTION_PLAN = 'big5_action_plan';
 
     /**
      * Growth/traits/stress_recovery are part of core_full by default.
@@ -35,8 +41,13 @@ final class ReportAccess
     /**
      * @return list<string>
      */
-    public static function defaultModulesAllowedForLocked(): array
+    public static function defaultModulesAllowedForLocked(?string $scaleCode = null): array
     {
+        $scaleCode = strtoupper(trim((string) $scaleCode));
+        if ($scaleCode === self::SCALE_BIG5_OCEAN) {
+            return [self::MODULE_BIG5_CORE];
+        }
+
         return [self::MODULE_CORE_FREE];
     }
 
@@ -60,13 +71,39 @@ final class ReportAccess
     /**
      * @return list<string>
      */
-    public static function allDefaultModulesOffered(): array
+    public static function allDefaultModulesOffered(?string $scaleCode = null): array
     {
+        $scaleCode = strtoupper(trim((string) $scaleCode));
+        if ($scaleCode === self::SCALE_BIG5_OCEAN) {
+            return [
+                self::MODULE_BIG5_FULL,
+                self::MODULE_BIG5_ACTION_PLAN,
+            ];
+        }
+
         return [
             self::MODULE_CORE_FULL,
             self::MODULE_CAREER,
             self::MODULE_RELATIONSHIPS,
         ];
+    }
+
+    public static function freeModuleForScale(?string $scaleCode = null): string
+    {
+        $scaleCode = strtoupper(trim((string) $scaleCode));
+
+        return $scaleCode === self::SCALE_BIG5_OCEAN
+            ? self::MODULE_BIG5_CORE
+            : self::MODULE_CORE_FREE;
+    }
+
+    public static function fullModuleForScale(?string $scaleCode = null): string
+    {
+        $scaleCode = strtoupper(trim((string) $scaleCode));
+
+        return $scaleCode === self::SCALE_BIG5_OCEAN
+            ? self::MODULE_BIG5_FULL
+            : self::MODULE_CORE_FULL;
     }
 
     public static function normalizeVariant(?string $variant): string
