@@ -433,7 +433,7 @@ final class BigFiveReportComposer
         array $facetBuckets
     ): array {
         $allowedLevels = $variant === ReportAccess::VARIANT_FREE ? ['free'] : ['free', 'paid'];
-        $out = [];
+        $selectedRows = [];
 
         if ($sectionKey === 'domains_overview') {
             foreach (self::DOMAIN_ORDER as $domain) {
@@ -442,10 +442,8 @@ final class BigFiveReportComposer
                 if (! is_array($row)) {
                     continue;
                 }
-                $out[] = $this->renderBlock($row, $templateContext);
+                $selectedRows[] = $row;
             }
-
-            return $out;
         }
 
         if ($sectionKey === 'facet_table') {
@@ -454,10 +452,8 @@ final class BigFiveReportComposer
                 if (! is_array($row)) {
                     continue;
                 }
-                $out[] = $this->renderBlock($row, $templateContext);
+                $selectedRows[] = $row;
             }
-
-            return $out;
         }
 
         if ($sectionKey === 'top_facets') {
@@ -472,10 +468,8 @@ final class BigFiveReportComposer
                 if (! is_array($row)) {
                     continue;
                 }
-                $out[] = $this->renderBlock($row, $templateContext);
+                $selectedRows[] = $row;
             }
-
-            return $out;
         }
 
         if ($sectionKey === 'facets_deepdive') {
@@ -496,13 +490,21 @@ final class BigFiveReportComposer
                 if (! is_array($row)) {
                     continue;
                 }
-                $out[] = $this->renderBlock($row, $templateContext);
+                $selectedRows[] = $row;
             }
-
-            return $out;
         }
 
-        return [];
+        if ($selectedRows === []) {
+            return [];
+        }
+
+        $selectedRows = $this->enforceExclusiveGroup($selectedRows);
+        $out = [];
+        foreach ($selectedRows as $row) {
+            $out[] = $this->renderBlock($row, $templateContext);
+        }
+
+        return $out;
     }
 
     /**
@@ -551,20 +553,88 @@ final class BigFiveReportComposer
                     continue;
                 }
 
-                usort($matches, static function (array $a, array $b): int {
-                    $priorityCmp = ((int) ($b['priority'] ?? 0)) <=> ((int) ($a['priority'] ?? 0));
-                    if ($priorityCmp !== 0) {
-                        return $priorityCmp;
-                    }
-
-                    return strcmp((string) ($a['block_id'] ?? ''), (string) ($b['block_id'] ?? ''));
-                });
-
-                return $matches[0];
+                $winner = $this->resolveConflictsByPriority($matches);
+                if (is_array($winner)) {
+                    return $winner;
+                }
             }
         }
 
         return null;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $matches
+     * @return array<string,mixed>|null
+     */
+    private function resolveConflictsByPriority(array $matches): ?array
+    {
+        if ($matches === []) {
+            return null;
+        }
+
+        usort($matches, fn (array $a, array $b): int => $this->compareBlockPriority($a, $b));
+
+        return $matches[0];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $rows
+     * @return list<array<string,mixed>>
+     */
+    private function enforceExclusiveGroup(array $rows): array
+    {
+        if ($rows === []) {
+            return [];
+        }
+
+        $bestByGroup = [];
+        foreach ($rows as $index => $row) {
+            $exclusive = trim((string) ($row['exclusive_group'] ?? ''));
+            $key = $exclusive !== '' ? $exclusive : '__row_' . $index;
+
+            if (! isset($bestByGroup[$key])) {
+                $bestByGroup[$key] = [
+                    'index' => $index,
+                    'row' => $row,
+                ];
+                continue;
+            }
+
+            $current = $bestByGroup[$key]['row'];
+            if ($this->compareBlockPriority($row, $current) < 0) {
+                $bestByGroup[$key]['row'] = $row;
+            }
+        }
+
+        usort($bestByGroup, static fn (array $a, array $b): int => ((int) $a['index']) <=> ((int) $b['index']));
+
+        $out = [];
+        foreach ($bestByGroup as $item) {
+            $candidate = $item['row'] ?? null;
+            if (! is_array($candidate)) {
+                continue;
+            }
+            $out[] = $candidate;
+        }
+
+        return $out;
+    }
+
+    /**
+     * Higher priority row comes first.
+     *
+     * @param  array<string,mixed>  $a
+     * @param  array<string,mixed>  $b
+     */
+    private function compareBlockPriority(array $a, array $b): int
+    {
+        $priorityCmp = ((int) ($b['priority'] ?? 0)) <=> ((int) ($a['priority'] ?? 0));
+        if ($priorityCmp !== 0) {
+            return $priorityCmp;
+        }
+
+        return strcmp((string) ($a['block_id'] ?? ''), (string) ($b['block_id'] ?? ''));
     }
 
     /**

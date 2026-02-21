@@ -53,6 +53,7 @@ final class BigFiveContentLintService
         $this->lintBucketCopy($version, $errors);
         $this->lintReportLayout($version, $errors);
         $this->lintBlocks($version, $errors);
+        $this->lintBlockConflictRules($version, $errors);
         $this->lintBlocksCoverage($version, $errors);
         $this->lintLayoutSatisfiability($version, $errors);
         $this->lintLanding($version, $errors);
@@ -569,6 +570,15 @@ final class BigFiveContentLintService
 
             return;
         }
+        $conflictRules = is_array($doc['conflict_rules'] ?? null) ? $doc['conflict_rules'] : [];
+        $selector = strtolower(trim((string) ($conflictRules['selector'] ?? '')));
+        if ($selector !== 'priority_desc_block_id_asc') {
+            $errors[] = $this->error($file, 1, 'conflict_rules.selector must be priority_desc_block_id_asc.');
+        }
+        $exclusivePolicy = strtolower(trim((string) ($conflictRules['exclusive_group_policy'] ?? '')));
+        if ($exclusivePolicy !== 'single_per_group') {
+            $errors[] = $this->error($file, 1, 'conflict_rules.exclusive_group_policy must be single_per_group.');
+        }
 
         $seenKeys = [];
         foreach ($sections as $index => $section) {
@@ -618,6 +628,13 @@ final class BigFiveContentLintService
             $maxBlocks = (int) ($section['max_blocks'] ?? -1);
             if ($minBlocks < 0 || $maxBlocks < 0 || $maxBlocks < $minBlocks) {
                 $errors[] = $this->error($file, 1, "sections[{$index}] min_blocks/max_blocks invalid.");
+            }
+
+            if (strtolower(trim((string) ($section['source'] ?? ''))) === 'blocks') {
+                $exclusiveGroups = is_array($section['exclusive_groups'] ?? null) ? $section['exclusive_groups'] : [];
+                if ($exclusiveGroups === []) {
+                    $errors[] = $this->error($file, 1, "sections[{$index}].exclusive_groups must not be empty for blocks source.");
+                }
             }
         }
 
@@ -728,6 +745,77 @@ final class BigFiveContentLintService
         }
         if (count($facetTableCodes) !== 30) {
             $errors[] = $this->error($this->loader->rawPath('blocks', $version), 1, 'facet_table must cover 30/30 facets.');
+        }
+    }
+
+    /**
+     * @param  list<array{file:string,line:int,message:string}>  $errors
+     */
+    private function lintBlockConflictRules(string $version, array &$errors): void
+    {
+        $blocksByFile = $this->loadRawBlocks($version);
+        if ($blocksByFile === []) {
+            return;
+        }
+
+        $seenBlockIds = [];
+        $selectorGroups = [];
+        foreach ($blocksByFile as $file => $blocks) {
+            foreach ($blocks as $index => $block) {
+                if (! is_array($block)) {
+                    continue;
+                }
+
+                $blockId = trim((string) ($block['block_id'] ?? ''));
+                if ($blockId !== '') {
+                    if (isset($seenBlockIds[$blockId])) {
+                        $errors[] = $this->error($file, 1, "duplicate block_id detected: {$blockId}");
+                    }
+                    $seenBlockIds[$blockId] = $file;
+                }
+
+                $section = strtolower(trim((string) ($block['section'] ?? '')));
+                $locale = strtolower(trim((string) ($block['locale'] ?? '')));
+                $accessLevel = strtolower(trim((string) ($block['access_level'] ?? '')));
+                $metricCode = strtoupper(trim((string) ($block['metric_code'] ?? '')));
+                $bucket = strtolower(trim((string) ($block['bucket'] ?? '')));
+                $selectorKey = implode('|', [$section, $locale, $accessLevel, $metricCode, $bucket]);
+
+                $selectorGroups[$selectorKey][] = [
+                    'file' => $file,
+                    'index' => $index,
+                    'priority' => (int) ($block['priority'] ?? 0),
+                    'exclusive_group' => trim((string) ($block['exclusive_group'] ?? '')),
+                ];
+            }
+        }
+
+        foreach ($selectorGroups as $selectorKey => $items) {
+            if (count($items) <= 1) {
+                continue;
+            }
+
+            $prioritySeen = [];
+            foreach ($items as $item) {
+                $exclusiveGroup = (string) ($item['exclusive_group'] ?? '');
+                if ($exclusiveGroup === '') {
+                    $errors[] = $this->error(
+                        (string) ($item['file'] ?? ''),
+                        1,
+                        "selector conflict requires exclusive_group: {$selectorKey}"
+                    );
+                }
+
+                $priority = (int) ($item['priority'] ?? 0);
+                if (isset($prioritySeen[$priority])) {
+                    $errors[] = $this->error(
+                        (string) ($item['file'] ?? ''),
+                        1,
+                        "selector conflict has duplicate priority={$priority}: {$selectorKey}"
+                    );
+                }
+                $prioritySeen[$priority] = true;
+            }
         }
     }
 
