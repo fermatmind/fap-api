@@ -209,6 +209,51 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('audits.0.target_id', $latestId);
     }
 
+    public function test_latest_release_audits_supports_result_filter(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-latest-audits-result@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $latestId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $latestId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->insertAudit([
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $latestId,
+            'result' => 'success',
+            'request_id' => 'req_latest_release_audit_success',
+        ]);
+        $this->insertAudit([
+            'action' => 'big5_pack_rollback',
+            'target_type' => 'content_pack_release',
+            'target_id' => $latestId,
+            'result' => 'failed',
+            'request_id' => 'req_latest_release_audit_failed',
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest/audits?result=failed&limit=10');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('item.release_id', $latestId);
+        $response->assertJsonPath('count', 1);
+        $response->assertJsonPath('audits.0.result', 'failed');
+        $response->assertJsonPath('audits.0.target_id', $latestId);
+    }
+
     public function test_owner_can_list_big5_audits_with_filters(): void
     {
         $owner = $this->createUserWithToken('ops-owner-audits@big5.test');

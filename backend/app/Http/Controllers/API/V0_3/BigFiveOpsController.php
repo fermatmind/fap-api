@@ -72,6 +72,10 @@ final class BigFiveOpsController extends Controller
         if (! in_array($action, ['publish', 'rollback'], true)) {
             $action = '';
         }
+        $result = strtolower(trim((string) $request->query('result', '')));
+        if (! in_array($result, ['success', 'failed'], true)) {
+            $result = '';
+        }
         $limit = (int) $request->query('limit', 20);
         if ($limit < 1) {
             $limit = 1;
@@ -108,6 +112,9 @@ final class BigFiveOpsController extends Controller
         $audits = DB::table('audit_logs')
             ->whereIn('action', ['big5_pack_publish', 'big5_pack_rollback'])
             ->where('target_id', (string) ($row->id ?? ''))
+            ->when($result !== '', function ($q) use ($result): void {
+                $q->where('result', $result);
+            })
             ->orderByDesc('id')
             ->limit($limit)
             ->get();
