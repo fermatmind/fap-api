@@ -70,9 +70,25 @@ class Pr19CommerceSeeder extends Seeder
         }
 
         if (Schema::hasTable('scales_registry')) {
-            $mbti = DB::table('scales_registry')->where('org_id', 0)->where('code', 'MBTI')->first();
-            if ($mbti) {
-                $commercial = $mbti->commercial_json ?? null;
+            $catalog = app(SkuCatalog::class);
+            $targets = [
+                'MBTI' => [
+                    'report_benefit_code' => 'MBTI_REPORT_FULL',
+                    'credit_benefit_code' => 'MBTI_CREDIT',
+                ],
+                'BIG5_OCEAN' => [
+                    'report_benefit_code' => 'BIG5_FULL_REPORT',
+                    'credit_benefit_code' => 'BIG5_FULL_REPORT',
+                ],
+            ];
+
+            foreach ($targets as $scaleCode => $benefits) {
+                $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', $scaleCode)->first();
+                if (!$scale) {
+                    continue;
+                }
+
+                $commercial = $scale->commercial_json ?? null;
                 if (is_string($commercial)) {
                     $decoded = json_decode($commercial, true);
                     $commercial = is_array($decoded) ? $decoded : null;
@@ -81,13 +97,12 @@ class Pr19CommerceSeeder extends Seeder
                     $commercial = [];
                 }
 
-                $catalog = app(SkuCatalog::class);
-                $offers = $this->buildOffersFromSkus($catalog->listActiveSkus('MBTI'));
-                $defaultEffective = $catalog->defaultEffectiveSku('MBTI');
-                $defaultAnchor = $catalog->defaultAnchorSku('MBTI');
+                $offers = $this->buildOffersFromSkus($catalog->listActiveSkus($scaleCode));
+                $defaultEffective = $catalog->defaultEffectiveSku($scaleCode);
+                $defaultAnchor = $catalog->defaultAnchorSku($scaleCode);
 
-                $commercial['report_benefit_code'] = 'MBTI_REPORT_FULL';
-                $commercial['credit_benefit_code'] = 'MBTI_CREDIT';
+                $commercial['report_benefit_code'] = $benefits['report_benefit_code'];
+                $commercial['credit_benefit_code'] = $benefits['credit_benefit_code'];
                 if ($defaultEffective) {
                     $commercial['report_unlock_sku'] = $defaultEffective;
                 }
@@ -102,7 +117,7 @@ class Pr19CommerceSeeder extends Seeder
 
                 DB::table('scales_registry')
                     ->where('org_id', 0)
-                    ->where('code', 'MBTI')
+                    ->where('code', $scaleCode)
                     ->update([
                         'commercial_json' => $payload,
                         'updated_at' => $now,
@@ -115,18 +130,35 @@ class Pr19CommerceSeeder extends Seeder
 
     private function loadSkuSeedData(): array
     {
-        $path = database_path('seed_data/skus_mbti.json');
-        if (!is_file($path)) {
-            return [];
+        $paths = [
+            database_path('seed_data/skus_mbti.json'),
+            database_path('seed_data/skus_big5_ocean.json'),
+        ];
+
+        $rows = [];
+        foreach ($paths as $path) {
+            if (!is_file($path)) {
+                continue;
+            }
+
+            $raw = file_get_contents($path);
+            if (!is_string($raw) || $raw === '') {
+                continue;
+            }
+
+            $decoded = json_decode($raw, true);
+            if (!is_array($decoded)) {
+                continue;
+            }
+
+            foreach ($decoded as $row) {
+                if (is_array($row)) {
+                    $rows[] = $row;
+                }
+            }
         }
 
-        $raw = file_get_contents($path);
-        if (!is_string($raw) || $raw === '') {
-            return [];
-        }
-
-        $decoded = json_decode($raw, true);
-        return is_array($decoded) ? $decoded : [];
+        return $rows;
     }
 
     private function buildOffersFromSkus(array $items): array
