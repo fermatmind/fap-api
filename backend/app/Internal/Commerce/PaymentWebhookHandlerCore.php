@@ -846,10 +846,17 @@ class PaymentWebhookHandlerCore
         $orderRow = null;
 
         if ($orderNo !== '') {
-            $orderRow = DB::table('orders')
-                ->where('order_no', $orderNo)
-                ->where('org_id', $orgId)
-                ->first();
+            $orderQuery = DB::table('orders')
+                ->where('order_no', $orderNo);
+            if ($orgId > 0) {
+                $orderQuery->where('org_id', $orgId);
+            }
+            $orderRow = $orderQuery->first();
+            if (!$orderRow && $orgId > 0) {
+                $orderRow = DB::table('orders')
+                    ->where('order_no', $orderNo)
+                    ->first();
+            }
             if ($orderRow) {
                 if ($attemptId === '') {
                     $attemptId = trim((string) ($orderRow->target_attempt_id ?? ''));
@@ -865,6 +872,20 @@ class PaymentWebhookHandlerCore
                         ?? ''
                     )));
                 }
+            }
+        }
+
+        if ($skuCode === '' && $providerEventId !== '') {
+            $eventRow = DB::table('payment_events')
+                ->where('provider', $provider)
+                ->where('provider_event_id', $providerEventId)
+                ->first();
+            if ($eventRow) {
+                $skuCode = strtoupper(trim((string) (
+                    $eventRow->effective_sku
+                    ?? $eventRow->requested_sku
+                    ?? ''
+                )));
             }
         }
 

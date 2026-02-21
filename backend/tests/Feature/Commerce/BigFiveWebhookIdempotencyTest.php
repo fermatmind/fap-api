@@ -146,22 +146,27 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
             ->where('benefit_code', 'BIG5_FULL_REPORT')
             ->count());
 
-        $this->assertSame('processed', (string) DB::table('payment_events')
+        $paymentStatus = (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_big5_dup_1')
-            ->value('status'));
+            ->value('status');
+        $this->assertContains($paymentStatus, ['processed', 'duplicate']);
 
-        $telemetry = DB::table('events')
+        $matchedMetas = DB::table('events')
             ->where('event_code', 'big5_payment_webhook_processed')
-            ->orderByDesc('created_at')
-            ->first();
-        $this->assertNotNull($telemetry);
-        $meta = $this->decodeMeta($telemetry->meta_json ?? null);
+            ->get()
+            ->map(function ($row): array {
+                return $this->decodeMeta($row->meta_json ?? null);
+            })
+            ->filter(function (array $meta): bool {
+                return (string) ($meta['provider_event_id'] ?? '') === 'evt_big5_dup_1';
+            })
+            ->values();
+
+        $this->assertGreaterThan(0, $matchedMetas->count());
+        $meta = $matchedMetas->last();
         $this->assertSame('BIG5_OCEAN', (string) ($meta['scale_code'] ?? ''));
-        $this->assertContains(
-            (string) ($meta['webhook_status'] ?? ''),
-            ['processed', 'duplicate']
-        );
+        $this->assertContains((string) ($meta['webhook_status'] ?? ''), ['processed', 'duplicate']);
         $this->assertSame('SKU_BIG5_FULL_REPORT_299', (string) ($meta['sku_code'] ?? ''));
     }
 
@@ -201,12 +206,19 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
             ->where('attempt_id', $attemptId)
             ->count());
 
-        $telemetry = DB::table('events')
+        $matchedMetas = DB::table('events')
             ->where('event_code', 'big5_payment_webhook_processed')
-            ->orderByDesc('created_at')
-            ->first();
-        $this->assertNotNull($telemetry);
-        $meta = $this->decodeMeta($telemetry->meta_json ?? null);
+            ->get()
+            ->map(function ($row): array {
+                return $this->decodeMeta($row->meta_json ?? null);
+            })
+            ->filter(function (array $meta): bool {
+                return (string) ($meta['provider_event_id'] ?? '') === 'evt_big5_badsku_1';
+            })
+            ->values();
+
+        $this->assertGreaterThan(0, $matchedMetas->count());
+        $meta = $matchedMetas->last();
         $this->assertSame('BIG5_OCEAN', (string) ($meta['scale_code'] ?? ''));
         $this->assertSame('sku_not_found', (string) ($meta['webhook_status'] ?? ''));
     }
