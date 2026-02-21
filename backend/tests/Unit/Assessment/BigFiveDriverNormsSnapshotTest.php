@@ -65,8 +65,8 @@ final class BigFiveDriverNormsSnapshotTest extends TestCase
         $snapshot = is_array($attempt->calculation_snapshot_json) ? $attempt->calculation_snapshot_json : [];
         $norms = is_array($snapshot['norms'] ?? null) ? $snapshot['norms'] : [];
 
-        $this->assertSame('zh-CN_xu_all_18-60', (string) ($norms['group_id'] ?? ''));
-        $this->assertSame('PROVISIONAL', (string) ($norms['status'] ?? ''));
+        $this->assertSame('zh-CN_prod_all_18-60', (string) ($norms['group_id'] ?? ''));
+        $this->assertSame('CALIBRATED', (string) ($norms['status'] ?? ''));
         $this->assertNotSame('', (string) ($norms['source_id'] ?? ''));
         $this->assertNotSame('', (string) ($norms['norms_version'] ?? ''));
     }

@@ -85,7 +85,7 @@ final class BigFiveGoldenCasesTest extends TestCase
             $this->assertSame($expectedStatus, (string) ($score['norms']['status'] ?? ''));
             $expectedGroupId = ((string) ($case['locale'] ?? 'zh-CN')) === 'en'
                 ? 'en_johnson_all_18-60'
-                : 'zh-CN_xu_all_18-60';
+                : 'zh-CN_prod_all_18-60';
             $this->assertSame($expectedGroupId, (string) ($score['norms']['group_id'] ?? ''));
 
             $expectedDomainBuckets = is_array($case['expected_domain_buckets'] ?? null)

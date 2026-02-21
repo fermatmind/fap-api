@@ -27,8 +27,8 @@ final class NormGroupResolverTest extends TestCase
             'age_band' => '18-60',
         ]);
 
-        $this->assertSame('zh-CN_xu_all_18-60', $resolved['group_id']);
-        $this->assertSame('PROVISIONAL', $resolved['status']);
+        $this->assertSame('zh-CN_prod_all_18-60', $resolved['group_id']);
+        $this->assertSame('CALIBRATED', $resolved['status']);
         $this->assertSame('db', $resolved['origin']);
     }
 

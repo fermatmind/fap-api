@@ -179,12 +179,35 @@ final class BigFiveContentCompileService
                 continue;
             }
 
+            $region = strtoupper(str_replace('-', '_', trim((string) ($row['region'] ?? ($row['country'] ?? '')))));
+            if ($region === '') {
+                $region = 'GLOBAL';
+            }
+
+            $ageMin = (int) ($row['age_min'] ?? 0);
+            $ageMax = (int) ($row['age_max'] ?? 0);
+            $ageBand = trim((string) ($row['age_band'] ?? ''));
+            if ($ageBand === '' && $ageMin > 0 && $ageMax > 0 && $ageMax >= $ageMin) {
+                $ageBand = $ageMin . '-' . $ageMax;
+            }
+            if ($ageBand === '') {
+                $ageBand = 'all';
+            }
+
             $norms['groups'][$groupId] = $norms['groups'][$groupId] ?? [
                 'group_id' => $groupId,
                 'locale' => (string) ($row['locale'] ?? ''),
-                'country' => (string) ($row['country'] ?? ''),
-                'age_band' => (string) ($row['age_band'] ?? ''),
+                'region' => $region,
+                'country' => (string) ($row['country'] ?? $region),
                 'gender' => (string) ($row['gender'] ?? ''),
+                'age_min' => $ageMin > 0 ? $ageMin : null,
+                'age_max' => $ageMax > 0 ? $ageMax : null,
+                'age_band' => $ageBand,
+                'norms_version' => (string) ($row['norms_version'] ?? ''),
+                'source_id' => (string) ($row['source_id'] ?? ''),
+                'source_type' => (string) ($row['source_type'] ?? ''),
+                'status' => strtoupper((string) ($row['status'] ?? '')),
+                'published_at' => (string) ($row['published_at'] ?? ''),
                 'metrics' => [
                     'domain' => [],
                     'facet' => [],
@@ -197,6 +220,9 @@ final class BigFiveContentCompileService
                 'sample_n' => (int) ($row['sample_n'] ?? 0),
                 'norms_version' => (string) ($row['norms_version'] ?? ''),
                 'source_id' => (string) ($row['source_id'] ?? ''),
+                'source_type' => (string) ($row['source_type'] ?? ''),
+                'status' => strtoupper((string) ($row['status'] ?? '')),
+                'published_at' => (string) ($row['published_at'] ?? ''),
             ];
         }
 

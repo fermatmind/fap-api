@@ -68,7 +68,10 @@ class NormGroupResolver
 
         return match ($status) {
             'CALIBRATED' => 'CALIBRATED',
+            'PROVISIONAL' => 'PROVISIONAL',
+            'MISSING' => 'MISSING',
             'BOOTSTRAP' => 'PROVISIONAL',
+            'RETIRED' => 'PROVISIONAL',
             default => 'PROVISIONAL',
         };
     }

@@ -26,9 +26,9 @@ final class BigFiveNormResolverTest extends TestCase
             'age_band' => '18-60',
         ]);
 
-        $this->assertSame('zh-CN_xu_all_18-60', $resolved['domain_group_id']);
-        $this->assertSame('zh-CN_xu_all_18-60', $resolved['facet_group_id']);
-        $this->assertSame('PROVISIONAL', $resolved['status']);
+        $this->assertSame('zh-CN_prod_all_18-60', $resolved['domain_group_id']);
+        $this->assertSame('zh-CN_prod_all_18-60', $resolved['facet_group_id']);
+        $this->assertSame('CALIBRATED', $resolved['status']);
         $this->assertSame('db', $resolved['origin']);
     }
 
