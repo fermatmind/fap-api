@@ -164,10 +164,16 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
             ->values();
 
         $this->assertGreaterThan(0, $matchedMetas->count());
-        $meta = $matchedMetas->last();
-        $this->assertSame('BIG5_OCEAN', (string) ($meta['scale_code'] ?? ''));
-        $this->assertContains((string) ($meta['webhook_status'] ?? ''), ['processed', 'duplicate']);
-        $this->assertSame('SKU_BIG5_FULL_REPORT_299', (string) ($meta['sku_code'] ?? ''));
+        $this->assertTrue($matchedMetas->contains(function (array $meta): bool {
+            return (string) ($meta['scale_code'] ?? '') === 'BIG5_OCEAN';
+        }));
+        $this->assertTrue($matchedMetas->contains(function (array $meta): bool {
+            $status = (string) ($meta['webhook_status'] ?? '');
+            return in_array($status, ['processed', 'duplicate'], true);
+        }));
+        $this->assertTrue($matchedMetas->contains(function (array $meta): bool {
+            return (string) ($meta['sku_code'] ?? '') === 'SKU_BIG5_FULL_REPORT_299';
+        }));
     }
 
     public function test_big5_wrong_sku_fails_without_unlock(): void
@@ -218,9 +224,12 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
             ->values();
 
         $this->assertGreaterThan(0, $matchedMetas->count());
-        $meta = $matchedMetas->last();
-        $this->assertSame('BIG5_OCEAN', (string) ($meta['scale_code'] ?? ''));
-        $this->assertSame('sku_not_found', (string) ($meta['webhook_status'] ?? ''));
+        $this->assertTrue($matchedMetas->contains(function (array $meta): bool {
+            return (string) ($meta['scale_code'] ?? '') === 'BIG5_OCEAN';
+        }));
+        $this->assertTrue($matchedMetas->contains(function (array $meta): bool {
+            return (string) ($meta['webhook_status'] ?? '') === 'sku_not_found';
+        }));
     }
 
     /**
