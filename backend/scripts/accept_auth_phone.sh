@@ -61,6 +61,52 @@ else
   echo "[ACCEPT_PHONE][WARN] no attempt bound (no sqlite/attempts). Will only verify token gate + /me ok."
 fi
 
+# 1.5) 清理本地验收遗留限流计数，避免跨运行污染
+export ACCEPT_PHONE_API="${API}"
+cd "${BACKEND_DIR}" && php artisan tinker --execute='
+use Illuminate\Support\Facades\Cache;
+
+$phoneRaw = (string) getenv("PHONE");
+$sceneRaw = (string) getenv("SCENE");
+$api = (string) getenv("ACCEPT_PHONE_API");
+
+$scene = trim($sceneRaw) !== "" ? strtolower(trim($sceneRaw)) : "login";
+
+$normalizePhone = static function (string $raw): string {
+    $s = trim($raw);
+    $s = str_replace([" ", "-", "(", ")"], "", $s);
+    if ($s === "") {
+        return "";
+    }
+    if ($s[0] !== "+" && preg_match("/^1\\d{10}$/", $s) === 1) {
+        return "+86" . $s;
+    }
+    return $s;
+};
+
+$phone = $normalizePhone($phoneRaw);
+
+$ips = ["127.0.0.1", "::1"];
+$host = parse_url($api, PHP_URL_HOST);
+if (is_string($host) && trim($host) !== "") {
+    $ips[] = trim($host);
+}
+$ips = array_values(array_unique($ips));
+
+foreach ($ips as $ip) {
+    Cache::forget("rate:phone_send_code:ip:{$ip}");
+    Cache::forget("otp:rate:ip:{$ip}");
+}
+
+if ($phone !== "") {
+    Cache::forget("rate:phone_send_code:phone:{$phone}");
+    Cache::forget("otp:rate:phone:{$phone}");
+    Cache::forget("otp:{$scene}:{$phone}");
+    Cache::forget("otp:{$scene}:{$phone}:fail");
+}
+'
+echo "[ACCEPT_PHONE] cleared local otp/rate limiter keys"
+
 # 2) send_code（dev 下会返回 dev_code）
 SEND_JSON="$(curl -sS -X POST "${API}/api/v0.3/auth/phone/send_code" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
