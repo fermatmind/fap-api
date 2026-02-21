@@ -11,6 +11,53 @@ use Illuminate\Support\Facades\DB;
 
 final class BigFiveOpsController extends Controller
 {
+    public function latest(Request $request, int $org_id): JsonResponse
+    {
+        $region = trim((string) $request->query('region', 'CN_MAINLAND'));
+        if ($region === '') {
+            $region = 'CN_MAINLAND';
+        }
+        $locale = trim((string) $request->query('locale', 'zh-CN'));
+        if ($locale === '') {
+            $locale = 'zh-CN';
+        }
+        $action = strtolower(trim((string) $request->query('action', '')));
+        if (! in_array($action, ['publish', 'rollback'], true)) {
+            $action = '';
+        }
+
+        $query = DB::table('content_pack_releases')
+            ->where('region', $region)
+            ->where('locale', $locale)
+            ->where(function ($q): void {
+                $q->where('to_pack_id', 'BIG5_OCEAN')
+                    ->orWhere('from_pack_id', 'BIG5_OCEAN');
+            });
+
+        if ($action !== '') {
+            $query->where('action', $action);
+        }
+
+        $row = $query
+            ->orderByDesc('created_at')
+            ->orderByDesc('updated_at')
+            ->first();
+
+        if (! $row) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'RELEASE_NOT_FOUND',
+                'message' => 'release not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'ok' => true,
+            'org_id' => $org_id,
+            'item' => $this->mapReleaseRow($row),
+        ]);
+    }
+
     public function releases(Request $request, int $org_id): JsonResponse
     {
         $limit = (int) $request->query('limit', 20);

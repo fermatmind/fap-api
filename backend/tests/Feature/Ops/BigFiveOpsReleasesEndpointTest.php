@@ -109,6 +109,73 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('error_code', 'ORG_NOT_FOUND');
     }
 
+    public function test_owner_can_get_latest_big5_release(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-latest@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $now = now();
+        $this->insertRelease([
+            'id' => (string) Str::uuid(),
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'status' => 'success',
+            'norms_version' => '2026Q1_zhcn_prod_v1',
+            'created_at' => $now->copy()->subMinutes(2),
+            'updated_at' => $now->copy()->subMinutes(2),
+        ]);
+
+        $latestId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $latestId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'status' => 'success',
+            'norms_version' => '2026Q2_zhcn_prod_v1',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest?region=CN_MAINLAND&locale=zh-CN');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('item.release_id', $latestId);
+        $response->assertJsonPath('item.evidence.norms_version', '2026Q2_zhcn_prod_v1');
+    }
+
+    public function test_latest_release_returns_not_found_when_big5_release_absent(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-latest-missing@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $this->insertRelease([
+            'id' => (string) Str::uuid(),
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'to_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest');
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'RELEASE_NOT_FOUND');
+    }
+
     public function test_owner_can_get_big5_release_detail_with_audits(): void
     {
         $owner = $this->createUserWithToken('ops-owner-detail@big5.test');
