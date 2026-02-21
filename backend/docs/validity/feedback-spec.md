@@ -1,4 +1,4 @@
-# Validity Feedback v0.2 规范（MVP）
+# Validity Feedback v0.3 规范（MVP）
 
 版本：v0.1  
 更新时间：2026-01-21
@@ -109,7 +109,7 @@ TODO（未来收紧）：
 
 ### 4.2 pack_version
 - 从 `pack_id` 解析：取最后一个 `.v` 之后的子串
-  - 例：`MBTI.cn-mainland.zh-CN.v0.2.2` → `v0.2.1-TEST`
+  - 例：`MBTI.cn-mainland.zh-CN.v0.3` → `v0.3`
 
 ### 4.3 report_version
 - `REPORT_VERSION`（env）

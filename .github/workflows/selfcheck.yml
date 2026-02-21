@@ -67,6 +67,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Guard v0.3 alignment (legacy residue gate)
+        run: bash backend/scripts/guard_v03_alignment.sh --changed-only --base origin/main
+
       - name: Guard no committed secrets (H-02)
         run: bash backend/scripts/ci/guard_no_committed_secrets.sh
 

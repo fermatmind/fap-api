@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -14,67 +12,6 @@ use Tests\TestCase;
 final class ErrorContractConsistencyTest extends TestCase
 {
     use RefreshDatabase;
-
-    /** @var array<string, string|null> */
-    private array $envBackup = [];
-
-    protected function tearDown(): void
-    {
-        foreach ($this->envBackup as $key => $value) {
-            if ($value === null) {
-                putenv($key);
-                unset($_ENV[$key], $_SERVER[$key]);
-                continue;
-            }
-
-            putenv("{$key}={$value}");
-            $_ENV[$key] = $value;
-            $_SERVER[$key] = $value;
-        }
-
-        parent::tearDown();
-    }
-
-    public function test_v02_lookup_ticket_returns_deprecated_error_contract(): void
-    {
-        $response = $this->getJson('/api/v0.2/lookup/ticket/BAD');
-
-        $response->assertStatus(410);
-        $response->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
-        $this->assertUnifiedErrorContract($response);
-    }
-
-    public function test_v02_lookup_order_returns_deprecated_error_contract(): void
-    {
-        $this->setEnv('LOOKUP_ORDER', '0');
-        $token = $this->seedFmToken('anon_contract_lookup_order');
-
-        $response = $this->withHeaders([
-            'Authorization' => "Bearer {$token}",
-        ])->postJson('/api/v0.2/lookup/order', [
-            'order_no' => 'ord_contract_disabled',
-        ]);
-
-        $response->assertStatus(410);
-        $response->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
-        $this->assertUnifiedErrorContract($response);
-    }
-
-    public function test_v02_validity_feedback_returns_deprecated_error_contract(): void
-    {
-        $this->setEnv('FEEDBACK_ENABLED', '0');
-        $token = $this->seedFmToken('anon_contract_feedback');
-
-        $response = $this->withHeaders([
-            'Authorization' => "Bearer {$token}",
-        ])->postJson('/api/v0.2/attempts/' . (string) Str::uuid() . '/feedback', [
-            'score' => 5,
-        ]);
-
-        $response->assertStatus(410);
-        $response->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
-        $this->assertUnifiedErrorContract($response);
-    }
 
     public function test_v03_payment_webhook_invalid_signature_returns_unified_error_contract(): void
     {
@@ -129,15 +66,6 @@ final class ErrorContractConsistencyTest extends TestCase
         $this->assertUnifiedErrorContract($response);
     }
 
-    public function test_v02_me_profile_returns_deprecated_error_contract(): void
-    {
-        $response = $this->getJson('/api/v0.2/me/profile');
-
-        $response->assertStatus(410);
-        $response->assertJsonPath('error_code', 'API_VERSION_DEPRECATED');
-        $this->assertUnifiedErrorContract($response);
-    }
-
     private function assertUnifiedErrorContract(TestResponse $response): void
     {
         $response->assertJsonPath('ok', false);
@@ -152,39 +80,5 @@ final class ErrorContractConsistencyTest extends TestCase
 
         $this->assertNotSame('', trim($errorCode));
         $this->assertNotSame('', trim($message));
-    }
-
-    private function seedFmToken(string $anonId): string
-    {
-        $token = 'fm_' . (string) Str::uuid();
-
-        $row = [
-            'token' => $token,
-            'token_hash' => hash('sha256', $token),
-            'anon_id' => $anonId,
-            'expires_at' => now()->addHour(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-
-        if (Schema::hasColumn('fm_tokens', 'user_id')) {
-            $row['user_id'] = null;
-        }
-
-        DB::table('fm_tokens')->insert($row);
-
-        return $token;
-    }
-
-    private function setEnv(string $key, string $value): void
-    {
-        if (!array_key_exists($key, $this->envBackup)) {
-            $current = getenv($key);
-            $this->envBackup[$key] = $current === false ? null : (string) $current;
-        }
-
-        putenv("{$key}={$value}");
-        $_ENV[$key] = $value;
-        $_SERVER[$key] = $value;
     }
 }

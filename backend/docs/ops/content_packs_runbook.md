@@ -14,10 +14,10 @@
 - 能取 result/report：GET /api/v0.3/attempts/{id}/result|report -> ok=true
 
 判定命令：
-- php artisan fap:resolve-pack MBTI CN_MAINLAND zh-CN MBTI-CN-v0.2.2 -vvv
+- php artisan fap:resolve-pack MBTI CN_MAINLAND zh-CN MBTI-CN-v0.3 -vvv
   看到：
-  - RESOLVED pack_id=MBTI.cn-mainland.zh-CN.v0.2.2
-  - manifest.version=v0.2.1-TEST
+  - RESOLVED pack_id=MBTI.cn-mainland.zh-CN.v0.3
+  - manifest.version=v0.3
   - picked.reason=default_pack_id
 
 ---
@@ -39,8 +39,8 @@ FAP_S3_PREFIX=content_packages/
 FAP_PACKS_CACHE_DIR=/var/www/fap-api/shared/content_packs_cache
 
 # 默认包：必须指向真实 pack_id，避免 default
-FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.2.2
-FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.2.2
+FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.3
+FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.3
 FAP_DEFAULT_REGION=CN_MAINLAND
 FAP_DEFAULT_LOCALE=zh-CN
 
@@ -70,7 +70,7 @@ sudo chmod -R 775 /var/www/fap-api/shared/content_packs_cache
 2.2 内容包源目录（如果同时保留 local 方案或需要 rsync）
 /var/www/fap-api/shared/content_packages
 要求至少包含：
-/var/www/fap-api/shared/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2/
+/var/www/fap-api/shared/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/
 
 ---
 
@@ -79,8 +79,8 @@ sudo chmod -R 775 /var/www/fap-api/shared/content_packs_cache
 生产约定关键路径（示例 packId + dirVersion）：
 
 content_packages/
-  MBTI.cn-mainland.zh-CN.v0.2.2/
-    MBTI-CN-v0.2.2/
+  MBTI.cn-mainland.zh-CN.v0.3/
+    MBTI-CN-v0.3/
       manifest.json
       questions.json
       type_profiles.json
@@ -110,7 +110,7 @@ content_packages/
     ...
 
 示例：
-/var/www/fap-api/shared/content_packs_cache/MBTI-CN-v0.2.2/manifest.json
+/var/www/fap-api/shared/content_packs_cache/MBTI-CN-v0.3/manifest.json
 
 注意：
 - pack_id 不作为目录名（由 manifest.json 内 pack_id 字段提供）
@@ -121,11 +121,11 @@ content_packages/
 ## 5. 快速修复：从 shared/content_packages 同步到 cache_dir（local -> cache）
 
 当已存在：
-/var/www/fap-api/shared/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2/
+/var/www/fap-api/shared/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/
 
 将其同步到 cache_dir/<dir_version>/：
 
-DIR="MBTI-CN-v0.2.2"
+DIR="MBTI-CN-v0.3"
 
 sudo mkdir -p /var/www/fap-api/shared/content_packs_cache/${DIR}
 
@@ -151,8 +151,8 @@ sudo -u www-data HOME=/tmp XDG_CONFIG_HOME=/tmp php artisan tinker --execute='
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
-$packId="MBTI.cn-mainland.zh-CN.v0.2.2";
-$dir="MBTI-CN-v0.2.2";
+$packId="MBTI.cn-mainland.zh-CN.v0.3";
+$dir="MBTI-CN-v0.3";
 $s3Base="content_packages/$packId/$dir/";
 
 $cacheRoot=rtrim((string)config("content_packs.cache_dir"),"/");
@@ -173,9 +173,9 @@ echo "DONE\n";
 '
 
 随后校验：
-sudo ls -lah /var/www/fap-api/shared/content_packs_cache/MBTI-CN-v0.2.2/manifest.json
-sudo ls -lah /var/www/fap-api/shared/content_packs_cache/MBTI-CN-v0.2.2/questions.json
-sudo ls -lah /var/www/fap-api/shared/content_packs_cache/MBTI-CN-v0.2.2/scoring_spec.json
+sudo ls -lah /var/www/fap-api/shared/content_packs_cache/MBTI-CN-v0.3/manifest.json
+sudo ls -lah /var/www/fap-api/shared/content_packs_cache/MBTI-CN-v0.3/questions.json
+sudo ls -lah /var/www/fap-api/shared/content_packs_cache/MBTI-CN-v0.3/scoring_spec.json
 
 ---
 
