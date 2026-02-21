@@ -52,4 +52,13 @@ return [
         'window_days_default' => 365,
         'publish_every_valid_samples' => 50000,
     ],
+
+    'psychometrics' => [
+        'window_days_default' => 90,
+        'min_samples' => 100,
+        'thresholds' => [
+            'domain_alpha_warn' => 0.65,
+            'facet_item_total_corr_warn' => 0.20,
+        ],
+    ],
 ];
