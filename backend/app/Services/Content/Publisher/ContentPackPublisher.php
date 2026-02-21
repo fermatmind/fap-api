@@ -329,26 +329,37 @@ final class ContentPackPublisher
         $tmpDir = '';
 
         try {
-            $last = DB::table('content_pack_releases')
+            $publishRows = DB::table('content_pack_releases')
                 ->where('action', 'publish')
                 ->where('status', 'success')
                 ->where('region', $region)
                 ->where('locale', $locale)
                 ->where('dir_alias', $dirAlias)
                 ->orderByDesc('created_at')
-                ->first();
+                ->orderByDesc('updated_at')
+                ->get();
+
+            if ($publishRows->isEmpty()) {
+                throw new RuntimeException('NO_PUBLISH_TO_ROLLBACK');
+            }
+
+            $last = null;
+            $backupPath = '';
+            foreach ($publishRows as $candidate) {
+                $candidateBackup = $this->backupsRoot((string) $candidate->id).DIRECTORY_SEPARATOR.'previous_pack';
+                if (File::isDirectory($candidateBackup)) {
+                    $last = $candidate;
+                    $backupPath = $candidateBackup;
+                    break;
+                }
+            }
 
             if (! $last) {
-                throw new RuntimeException('NO_PUBLISH_TO_ROLLBACK');
+                throw new RuntimeException('BACKUP_NOT_FOUND');
             }
 
             $fromVersionId = $last->to_version_id ?? null;
             $fromPackId = (string) ($last->to_pack_id ?? '');
-
-            $backupPath = $this->backupsRoot((string) $last->id).DIRECTORY_SEPARATOR.'previous_pack';
-            if (! File::isDirectory($backupPath)) {
-                throw new RuntimeException('BACKUP_NOT_FOUND');
-            }
 
             $packsRoot = $this->packsRoot();
             $targetDir = $this->targetPackDir($packsRoot, $region, $locale, $dirAlias);
@@ -383,6 +394,13 @@ final class ContentPackPublisher
 
             $toVersionId = $rolledBack['version_id'] !== '' ? $rolledBack['version_id'] : ($last->from_version_id ?? null);
             $toPackId = $rolledBack['pack_id'];
+            if ($toPackId === '') {
+                $toPackId = (string) ($last->from_pack_id ?? '');
+                if ($toPackId === '') {
+                    $toPackId = (string) ($last->to_pack_id ?? '');
+                }
+                $rolledBack['pack_id'] = $toPackId;
+            }
 
             $status = 'success';
         } catch (\Throwable $e) {
