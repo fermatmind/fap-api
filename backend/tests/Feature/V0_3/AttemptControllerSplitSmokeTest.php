@@ -20,6 +20,7 @@ class AttemptControllerSplitSmokeTest extends TestCase
         $show = $routes->match(Request::create('/api/v0.3/attempts/00000000-0000-0000-0000-000000000000', 'GET'));
         $result = $routes->match(Request::create('/api/v0.3/attempts/00000000-0000-0000-0000-000000000000/result', 'GET'));
         $report = $routes->match(Request::create('/api/v0.3/attempts/00000000-0000-0000-0000-000000000000/report', 'GET'));
+        $reportPdf = $routes->match(Request::create('/api/v0.3/attempts/00000000-0000-0000-0000-000000000000/report.pdf', 'GET'));
         $skus = $routes->match(Request::create('/api/v0.3/skus', 'GET'));
 
         $this->assertStringContainsString(AttemptWriteController::class . '@start', $start->getActionName());
@@ -27,11 +28,13 @@ class AttemptControllerSplitSmokeTest extends TestCase
         $this->assertStringContainsString(AttemptReadController::class . '@show', $show->getActionName());
         $this->assertStringContainsString(AttemptReadController::class . '@result', $result->getActionName());
         $this->assertStringContainsString(AttemptReadController::class . '@report', $report->getActionName());
+        $this->assertStringContainsString(AttemptReadController::class . '@reportPdf', $reportPdf->getActionName());
         $this->assertStringContainsString(CommerceController::class . '@listSkus', $skus->getActionName());
 
         $this->assertNotNull($routes->getByName('api.v0_3.attempts.show'));
         $this->assertNotNull($routes->getByName('api.v0_3.attempts.result'));
         $this->assertNotNull($routes->getByName('api.v0_3.attempts.report'));
+        $this->assertNotNull($routes->getByName('api.v0_3.attempts.report_pdf'));
         $this->assertNotNull($routes->getByName('api.v0_3.skus'));
     }
 }
