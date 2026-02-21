@@ -1,7 +1,7 @@
 # PR8 Observability & Alerts
 
 ## Healthz Endpoint
-- Path: `GET /api/v0.2/healthz`
+- Path: `GET /api/v0.3/healthz`
 - 期望：
   - `.ok == true`
   - `.deps.db.ok == true`
@@ -25,8 +25,8 @@
 - Healthz `.deps.cache_dirs.ok==false`：P2
 
 ### Latency (API)
-- `/api/v0.2/healthz` p95 > 300ms 持续 5 分钟：P2
-- `/api/v0.2/scales/MBTI/questions` p95 > 800ms 持续 5 分钟：P2
+- `/api/v0.3/healthz` p95 > 300ms 持续 5 分钟：P2
+- `/api/v0.3/scales/MBTI/questions` p95 > 800ms 持续 5 分钟：P2
 
 ### Errors
 - 5xx rate > 1% 持续 5 分钟：P1

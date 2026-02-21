@@ -26,12 +26,12 @@ return [
     'loader_cache_ttl_seconds' => (int) env('CONTENT_LOADER_CACHE_TTL_SECONDS', 300),
 
     // ✅ CI/服务器建议强约束：默认 pack_id 明确指向你的主包，避免回退到 GLOBAL/en
-    // default_pack_id 对应 manifest.json.pack_id（MBTI.cn-mainland.zh-CN.v0.2.2）
-    'default_pack_id' => env('FAP_DEFAULT_PACK_ID', 'MBTI.cn-mainland.zh-CN.v0.2.2'),
+    // default_pack_id 对应 manifest.json.pack_id（MBTI.cn-mainland.zh-CN.v0.3）
+    'default_pack_id' => env('FAP_DEFAULT_PACK_ID', 'MBTI.cn-mainland.zh-CN.v0.3'),
     // demo_pack_id 对应 demo manifest.json.pack_id（default）
     'demo_pack_id' => env('FAP_DEMO_PACK_ID', 'default'),
-    // default_dir_version 对应目录名（MBTI-CN-v0.2.2）
-    'default_dir_version' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.2.2'),
+    // default_dir_version 对应目录名（MBTI-CN-v0.3）
+    'default_dir_version' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.3'),
 
     // ✅ 默认 region/locale 也钉死到 CN_MAINLAND/zh-CN（仍保留 fallback 机制）
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),

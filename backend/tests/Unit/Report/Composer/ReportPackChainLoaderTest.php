@@ -17,8 +17,8 @@ final class ReportPackChainLoaderTest extends TestCase
         /** @var ReportPackChainLoader $loader */
         $loader = app(ReportPackChainLoader::class);
 
-        $dir = $loader->packIdToDir('MBTI.global.en.v0.2.1-TEST');
+        $dir = $loader->packIdToDir('MBTI.global.en.v0.3');
 
-        $this->assertSame('MBTI/GLOBAL/en/v0.2.1-TEST', $dir);
+        $this->assertSame('MBTI/GLOBAL/en/v0.3', $dir);
     }
 }

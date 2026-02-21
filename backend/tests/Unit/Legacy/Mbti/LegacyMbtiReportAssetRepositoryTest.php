@@ -22,8 +22,8 @@ final class LegacyMbtiReportAssetRepositoryTest extends TestCase
 
         config()->set('content_packs.root', $this->packsRoot);
 
-        $packDir = $this->packsRoot . '/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2';
-        $this->contentDir = 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2';
+        $packDir = $this->packsRoot . '/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
+        $this->contentDir = 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
         File::ensureDirectoryExists($packDir);
 
         file_put_contents($packDir . '/report_cards_traits.json', json_encode([

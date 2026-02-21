@@ -365,8 +365,8 @@ final class PaymentWebhookProcessorContractTest extends TestCase
     private function createMbtiAttemptWithResult(): string
     {
         $attemptId = (string) Str::uuid();
-        $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
-        $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
+        $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3');
+        $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3');
 
         Attempt::create([
             'id' => $attemptId,
@@ -383,7 +383,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
             'submitted_at' => now(),
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
-            'content_package_version' => 'v0.2.1-TEST',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 

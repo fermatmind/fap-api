@@ -16,7 +16,8 @@ final class ContentPackResolverCacheTest extends TestCase
         $dirVersion = 'MBTI-CN-v-cache';
 
         $root = sys_get_temp_dir() . '/pr34_content_pack_' . uniqid('', true);
-        $packDir = $root . DIRECTORY_SEPARATOR . $dirVersion;
+        $packDir = $root . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . 'CN_MAINLAND' . DIRECTORY_SEPARATOR .
+            'zh-CN' . DIRECTORY_SEPARATOR . $dirVersion;
         File::ensureDirectoryExists($packDir);
 
         file_put_contents($packDir . DIRECTORY_SEPARATOR . 'manifest.json', json_encode([
@@ -32,6 +33,7 @@ final class ContentPackResolverCacheTest extends TestCase
 
         config()->set('content_packs.root', $root);
         config()->set('content_packs.default_pack_id', $packId);
+        config()->set('content_packs.default_dir_version', $dirVersion);
         config()->set('content_packs.default_region', 'CN_MAINLAND');
         config()->set('content_packs.default_locale', 'zh-CN');
         config()->set('content_packs.loader_cache_ttl_seconds', 600);

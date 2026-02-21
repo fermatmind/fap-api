@@ -45,7 +45,7 @@ final class ContentPackCoverageMatrixTest extends TestCase
             'submitted_at' => now(),
             'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => (string) config('content_packs.default_dir_version'),
-            'content_package_version' => 'v0.2.2',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 
@@ -65,7 +65,7 @@ final class ContentPackCoverageMatrixTest extends TestCase
             ],
             'scores_pct' => ['EI' => 50, 'SN' => 50, 'TF' => 50, 'JP' => 50, 'AT' => 50],
             'axis_states' => ['EI' => 'clear', 'SN' => 'clear', 'TF' => 'clear', 'JP' => 'clear', 'AT' => 'clear'],
-            'content_package_version' => 'v0.2.2',
+            'content_package_version' => 'v0.3',
             'result_json' => ['type_code' => 'INTJ-A'],
             'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => (string) config('content_packs.default_dir_version'),

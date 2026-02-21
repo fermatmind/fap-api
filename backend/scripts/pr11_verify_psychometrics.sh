@@ -74,7 +74,7 @@ else
   }
 fi
 
-PACK_DIR="$REPO_DIR/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+PACK_DIR="$REPO_DIR/content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
 QUESTIONS_JSON="$PACK_DIR/questions.json"
 
 if [[ ! -f "$QUESTIONS_JSON" ]]; then
@@ -94,7 +94,7 @@ foreach ($items as $q) {
 $payload = [
   "anon_id" => "anon_pr11",
   "scale_code" => "MBTI",
-  "scale_version" => "v0.2.1-TEST",
+  "scale_version" => "v0.3",
   "question_count" => count($answers),
   "answers" => $answers,
   "client_platform" => "web",

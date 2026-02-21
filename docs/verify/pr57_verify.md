@@ -35,5 +35,5 @@ Step Verification Commands
 
 Curl Smoke Examples
 
-- `curl -sS "http://127.0.0.1:1857/api/v0.2/healthz"`
+- `curl -sS "http://127.0.0.1:1857/api/v0.3/healthz"`
 - `curl -sS -X POST -H "Content-Type: application/json" -H "Accept: application/json" --data '{}' "http://127.0.0.1:1857/api/v0.3/webhooks/payment/stub"`

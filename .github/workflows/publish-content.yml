@@ -25,12 +25,12 @@ on:
         description: "Default dir alias"
         required: true
         type: string
-        default: "MBTI-CN-v0.2.1-TEST"
+        default: "MBTI-CN-v0.3"
       file_path:
         description: "Folder to zip and upload"
         required: true
         type: string
-        default: "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+        default: "content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
       probe:
         description: "true/false"
         required: true
@@ -108,7 +108,7 @@ jobs:
           [ -n "${ZIP_PATH:-}" ] || { echo "::error::ZIP_PATH is empty"; exit 1; }
           [ -f "$ZIP_PATH" ] || { echo "::error::zip not found at $ZIP_PATH"; exit 1; }
 
-          HTTP_RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/upload" \
+          HTTP_RESP="$(curl -sS -X POST "$BASE_URL/api/v0.3/admin/content-releases/upload" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \
             -F "file=@${ZIP_PATH}" \
             -w '\n__HTTP_STATUS__:%{http_code}\n')"
@@ -181,7 +181,7 @@ jobs:
 
           echo "Payload=$PAYLOAD"
 
-          HTTP_RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/publish" \
+          HTTP_RESP="$(curl -sS -X POST "$BASE_URL/api/v0.3/admin/content-releases/publish" \
             -H "Accept: application/json" \
             -H "Content-Type: application/json" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \

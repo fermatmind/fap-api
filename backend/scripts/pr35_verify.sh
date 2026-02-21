@@ -12,9 +12,9 @@ export TERM=dumb
 export XDEBUG_MODE=off
 export FAP_PACKS_DRIVER=local
 export FAP_PACKS_ROOT="$(pwd)/content_packages"
-export FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.2.2
-export FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.2.2
-export FAP_CONTENT_PACKAGE_VERSION=v0.2.2
+export FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.3
+export FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.3
+export FAP_CONTENT_PACKAGE_VERSION=v0.3
 
 ART_DIR="backend/artifacts/pr35"
 mkdir -p "${ART_DIR}"

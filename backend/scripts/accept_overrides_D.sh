@@ -40,11 +40,11 @@ need_cmd php
 REPO_DIR="$(cd "$BACKEND_DIR/.." && pwd)"
 CONTENT_ROOT="${CONTENT_ROOT:-$REPO_DIR/content_packages}"
 
-PKG_REL="${MBTI_CONTENT_PACKAGE:-default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST}"
+PKG_REL="${MBTI_CONTENT_PACKAGE:-default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3}"
 PKG_DIR="${PKG_DIR:-$CONTENT_ROOT/$PKG_REL}"
 
 RESOLVED_OVR=""
-RESOLVE_OUT="$(cd "$BACKEND_DIR" && php artisan fap:resolve-pack MBTI CN_MAINLAND zh-CN MBTI-CN-v0.2.1-TEST -vvv 2>/dev/null || true)"
+RESOLVE_OUT="$(cd "$BACKEND_DIR" && php artisan fap:resolve-pack MBTI CN_MAINLAND zh-CN MBTI-CN-v0.3 -vvv 2>/dev/null || true)"
 BASE_DIR="$(printf '%s' "$RESOLVE_OUT" | tr -d '\r' | awk -F= '/^base_dir=/{print $2; exit}')"
 if [[ -n "${BASE_DIR}" ]]; then
   RESOLVED_OVR="${BASE_DIR%/}/report_overrides.json"
@@ -71,7 +71,7 @@ SAVE_REPORTS="${SAVE_REPORTS:-0}"
 
 if [[ ! -f "$OVR_FILE" ]]; then
   echo "❌ overrides file not found: $OVR_FILE"
-  echo "Tip: export MBTI_CONTENT_PACKAGE=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+  echo "Tip: export MBTI_CONTENT_PACKAGE=default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
   echo "     or export PKG_DIR=... or export OVR_FILE=..."
   exit 1
 fi

@@ -16,8 +16,8 @@ class CreditsConsumeOnAttemptSubmitTest extends TestCase
     use RefreshDatabase;
 
     // 与 repo 内 content pack/seed/config 口径保持一致（PR21/22/23/24/25 的默认约定）
-    private const DEFAULT_PACK_ID = 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST';
-    private const DEFAULT_DIR_VERSION = 'MBTI-CN-v0.2.1-TEST';
+    private const DEFAULT_PACK_ID = 'MBTI.cn-mainland.zh-CN.v0.3';
+    private const DEFAULT_DIR_VERSION = 'MBTI-CN-v0.3';
     private const DEFAULT_REGION = 'CN_MAINLAND';
     private const DEFAULT_LOCALE = 'zh-CN';
 

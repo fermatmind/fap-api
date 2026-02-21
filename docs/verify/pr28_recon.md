@@ -20,7 +20,7 @@
 - POST /api/v0.3/attempts/start -> API\V0_3\AttemptsController@start
 - POST /api/v0.3/attempts/submit -> API\V0_3\AttemptsController@submit
 - GET /api/v0.3/attempts/{id}/report -> API\V0_3\AttemptsController@report
-- GET /api/v0.2/content-packs/{pack_id}/{dir_version}/questions -> API\V0_2\ContentPacksController@questions
+- GET /api/v0.3/content-packs/{pack_id}/{dir_version}/questions -> API\V0_2\ContentPacksController@questions
 - 相关 DB 表/迁移（必须列出完整路径）：
 - backend/database/migrations/2026_01_26_090000_create_report_jobs_table.php
 - backend/database/migrations/2026_01_28_110000_add_psychometrics_snapshot_to_attempts.php

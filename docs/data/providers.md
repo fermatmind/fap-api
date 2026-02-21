@@ -3,18 +3,18 @@
 ## 通用字段
 ### OAuth
 1) Start：
-   - `GET /api/v0.2/integrations/{provider}/oauth/start`
+   - `GET /api/v0.3/integrations/{provider}/oauth/start`
 2) Callback：
-   - `GET /api/v0.2/integrations/{provider}/oauth/callback?state=...&code=...`
+   - `GET /api/v0.3/integrations/{provider}/oauth/callback?state=...&code=...`
 
 ### Webhook
-- `POST /api/v0.2/webhooks/{provider}`
+- `POST /api/v0.3/webhooks/{provider}`
 - Headers:
   - `X-Webhook-Timestamp`（Unix 秒级时间戳；若配置 secret 则必填）
   - `X-Webhook-Signature`（HMAC-SHA256；签名串为 `"{timestamp}.{raw_body}"`）
 
 ### Ingest
-- `POST /api/v0.2/integrations/{provider}/ingest`
+- `POST /api/v0.3/integrations/{provider}/ingest`
 - Headers:
   - `X-Ingest-Key`（明文 key，服务端按 `sha256` 比对 `ingest_key_hash`）
   - `X-Ingest-Event-Id`（事件唯一 ID，重复请求会被拒绝）

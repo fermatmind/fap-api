@@ -1,17 +1,17 @@
 > Status: Active
 > Owner: liufuwei
 > Last Updated: 2025-12-16
-> Version: Compliance CN v0.2
+> Version: Compliance CN v0.3
 > Related Docs:
 > - docs/04-stage2/README.md
 > - docs/03-stage1/compliance-basics.md
 
-# Stage 2 合规：用户权益最小通道（CN v0.2）
+# Stage 2 合规：用户权益最小通道（CN v0.3）
 目标：能上线、能解释、能处理请求（先人工流程）
 
 ## 1. 对外页面（网站）
 建议新增：
-- /privacy/mbti-v0.2 或 /user-rights
+- /privacy/mbti-v0.3 或 /user-rights
 包含：
 1) 我们记录什么数据（anon_id/attempts/results/events）
 2) 数据用途（生成结果/改进产品；不售卖）

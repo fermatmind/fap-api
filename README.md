@@ -9,7 +9,7 @@
 ## Current Runtime Snapshot
 - API route total: `120` (`/api/*`, exclude vendor)
 - Route groups:
-  - `v0.2`: `82` routes (legacy MBTI flows, auth/lookup, admin, content packs, insights)
+  - `v0.3`: `82` routes (legacy MBTI flows, auth/lookup, admin, content packs, insights)
   - `v0.3`: `31` routes (attempt lifecycle, commerce, org/collaboration)
   - `v0.4`: `5` routes (boot + org assessments)
   - base: `2` routes (`/api/healthz`, `/api/user`)
@@ -33,7 +33,7 @@ php artisan route:list --path=api --except-vendor --json
 - Feature gate overlay: `fap_feature:*`
 
 ## Runtime Docs Navigation
-- 全局 API 契约（v0.2/v0.3/v0.4）: `01-api-design/MBTI-v0.2-endpoints.md`
+- 全局 API 契约（v0.3/v0.3/v0.4）: `01-api-design/MBTI-v0.3-endpoints.md`
 - Lookup/Auth/Identity canonical PRD: `backend/docs/product/report-lookup-prd.md`
 - 后端验收与运行手册: `backend/README.md`
 - 文档总入口（含历史分期文档）: `docs/README.md`

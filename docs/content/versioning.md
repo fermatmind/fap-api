@@ -8,11 +8,11 @@
 ## 2) 规范约束（必须）
 - pack_id 必须与 manifest.json 的 pack_id 完全一致。
 - version.json 必须存在，并与 manifest.json 的关键字段保持一致。
-- content_package_version 建议稳定、可读、可回溯（例如：v0.2.1-TEST）。
+- content_package_version 建议稳定、可读、可回溯（例如：v0.3）。
 - 严禁 *.bak.* / *.tmp / *~ / .DS_Store 进入可发布目录。
 
 ## 3) 示例（当前主包）
-- pack_id: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
-- dir_version: MBTI-CN-v0.2.1-TEST
-- content_package_version: v0.2.1-TEST
+- pack_id: MBTI.cn-mainland.zh-CN.v0.3
+- dir_version: MBTI-CN-v0.3
+- content_package_version: v0.3
 - semver: 0.2.1-test

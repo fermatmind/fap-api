@@ -1,4 +1,4 @@
-# Psychometrics (v0.2)
+# Psychometrics (v0.3)
 
 本规范描述 PR11 引入的 psychometrics 输出：z / percentile / stanine / SE / CI，以及质量控制与报告输出口径。
 
@@ -67,10 +67,10 @@ grade 规则：
 
 ### 4.2 API
 
-- `GET /api/v0.2/scales/{scale}/norms`：列出可用常模版本、bucket keys。
-- `GET /api/v0.2/attempts/{id}/stats`：返回 snapshot.stats。
-- `GET /api/v0.2/attempts/{id}/quality`：返回 grade + checks。
-- `GET /api/v0.2/attempts/{id}/report?include=psychometrics`：report 内追加 `psychometrics` 字段。
+- `GET /api/v0.3/scales/{scale}/norms`：列出可用常模版本、bucket keys。
+- `GET /api/v0.3/attempts/{id}/stats`：返回 snapshot.stats。
+- `GET /api/v0.3/attempts/{id}/quality`：返回 grade + checks。
+- `GET /api/v0.3/attempts/{id}/report?include=psychometrics`：report 内追加 `psychometrics` 字段。
 
 ### 4.3 auth 口径
 

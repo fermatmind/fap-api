@@ -5,18 +5,18 @@
 - 相关入口文件（命中 KEY_RE 后补齐）：
   - backend/app/Services/ContentPackResolver.php（legacy：fallback + loadJson/loadText 热路径）
   - backend/app/Services/Content/ContentStore.php（hot_redis 资产缓存策略）
-  - backend/app/Http/Controllers/MbtiController.php（/api/v0.2/attempts/{id}/report）
+  - backend/app/Http/Controllers/MbtiController.php（/api/v0.3/attempts/{id}/report）
   - backend/app/Http/Middleware/FmTokenOptional.php（fm_user_id / fm_anon_id 注入）
   - backend/routes/api.php（v0.2 路由与 middleware 口径）
   - backend/config/cache.php（hot_redis store）
   - backend/config/content_packs.php（TTL/store 参数）
 
 - 相关路由：
-  - GET  /api/v0.2/scales/MBTI/questions
-  - POST /api/v0.2/attempts
-  - GET  /api/v0.2/attempts/{attempt_id}/report
-  - POST /api/v0.2/shares
-  - GET  /api/v0.2/shares/{share_id}/click
+  - GET  /api/v0.3/scales/MBTI/questions
+  - POST /api/v0.3/attempts
+  - GET  /api/v0.3/attempts/{attempt_id}/report
+  - POST /api/v0.3/shares
+  - GET  /api/v0.3/shares/{share_id}/click
 
 - 相关 DB 表/迁移：
   - attempts

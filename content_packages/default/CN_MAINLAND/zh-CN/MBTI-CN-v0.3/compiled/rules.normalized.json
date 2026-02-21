@@ -1,0 +1,47 @@
+{
+    "schema": "fap.content.compiled.rules.v1",
+    "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
+    "version": "v0.3",
+    "generated_at": "2026-02-21T04:27:39+00:00",
+    "rules": [
+        {
+            "id": "cards_drop_badge_01",
+            "target": "cards",
+            "priority": 50,
+            "match": {
+                "section": [
+                    "traits"
+                ]
+            },
+            "action": "drop",
+            "forbid": [
+                "badge:trial"
+            ]
+        },
+        {
+            "id": "hl_keep_axis_01",
+            "target": "highlights",
+            "priority": 10,
+            "match": {
+                "type_code": [
+                    "ENTJ-A",
+                    "ENTJ-T"
+                ]
+            },
+            "action": "keep",
+            "require_any": [
+                "axis:TF:T",
+                "axis:JP:J"
+            ]
+        },
+        {
+            "id": "reads_drop_trial_01",
+            "target": "reads",
+            "priority": 100,
+            "action": "drop",
+            "require_any": [
+                "badge:trial"
+            ]
+        }
+    ]
+}

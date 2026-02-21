@@ -7,7 +7,7 @@
   - 跨 org 访问统一 404（避免信息泄露）。
 - 非目标
   - 不实现复杂权限矩阵（仅 owner/admin/member）。
-  - 不改动 v0.2 逻辑与数据结构（仅新增 org_id 字段与最小写入）。
+  - 不改动 v0.3 逻辑与数据结构（仅新增 org_id 字段与最小写入）。
 
 ## public org_id=0 策略与 is_public 规则
 - org_id=0 = public 组织。

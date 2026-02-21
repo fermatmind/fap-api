@@ -8,8 +8,8 @@
   - `backend/database/seeders/ScaleRegistrySeeder.php`
   - `backend/database/seeders/CiScalesRegistrySeeder.php`
 - 相关路由：
-  - `GET /api/v0.2/content-packs`
-  - `GET /api/v0.2/content-packs/{pack_id}/{dir_version}/manifest`
+  - `GET /api/v0.3/content-packs`
+  - `GET /api/v0.3/content-packs/{pack_id}/{dir_version}/manifest`
   - `GET /api/v0.3/scales/{scale_code}/questions`
   - `POST /api/v0.3/attempts/start`
   - `POST /api/v0.3/attempts/submit`

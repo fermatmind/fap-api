@@ -18,7 +18,7 @@
 ## 回放流程（Replay）
 1) 确认 batch_id：来自 ingest 返回或 webhook 回执。
 2) 调用：
-   - `POST /api/v0.2/integrations/{provider}/replay/{batch_id}`
+   - `POST /api/v0.3/integrations/{provider}/replay/{batch_id}`
 3) 预期：
    - inserted=0 且 skipped>0（幂等生效）。
 

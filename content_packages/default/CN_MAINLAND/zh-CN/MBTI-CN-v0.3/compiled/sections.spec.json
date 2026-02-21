@@ -1,0 +1,43 @@
+{
+    "schema": "fap.report.section_policies.v1",
+    "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
+    "version": "v0.3",
+    "generated_at": "2026-02-21T04:27:39+00:00",
+    "items": {
+        "traits": {
+            "min_cards": 3,
+            "target_cards": 3,
+            "max_cards": 4,
+            "allow_fallback": true,
+            "fallback_file": "report_cards_fallback_traits.json"
+        },
+        "career": {
+            "min_cards": 3,
+            "target_cards": 3,
+            "max_cards": 4,
+            "allow_fallback": true,
+            "fallback_file": "report_cards_fallback_career.json"
+        },
+        "growth": {
+            "min_cards": 3,
+            "target_cards": 3,
+            "max_cards": 4,
+            "allow_fallback": true,
+            "fallback_file": "report_cards_fallback_growth.json"
+        },
+        "relationships": {
+            "min_cards": 2,
+            "target_cards": 2,
+            "max_cards": 4,
+            "allow_fallback": true,
+            "fallback_file": "report_cards_fallback_relationships.json"
+        },
+        "stress_recovery": {
+            "min_cards": 2,
+            "target_cards": 2,
+            "max_cards": 4,
+            "allow_fallback": true,
+            "fallback_file": "report_cards_fallback_stress_recovery.json"
+        }
+    }
+}

@@ -16,7 +16,7 @@ final class ContentPackLintTest extends TestCase
         $this->artisan('content:lint --all')->assertExitCode(0);
         $this->artisan('content:compile --all')->assertExitCode(0);
 
-        $compiledDir = base_path('../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2/compiled');
+        $compiledDir = base_path('../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/compiled');
         $this->assertFileExists($compiledDir . '/cards.normalized.json');
         $this->assertFileExists($compiledDir . '/cards.tag_index.json');
         $this->assertFileExists($compiledDir . '/rules.normalized.json');

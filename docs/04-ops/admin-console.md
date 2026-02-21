@@ -25,12 +25,12 @@
 ## 登录方式
 - 初始化：`php artisan admin:bootstrap-owner --email=owner@example.com --password=owner12345 --name=Owner`
 - 打开：`/admin`（默认 `http://127.0.0.1:18010/admin`）
-- 备用：API Token 访问 `/api/v0.2/admin/*`（Header：`X-FAP-Admin-Token`）
+- 备用：API Token 访问 `/api/v0.3/admin/*`（Header：`X-FAP-Admin-Token`）
 - 开关：`FAP_ADMIN_PANEL_ENABLED=true|false`
 
 ## 常用路径
 - UI：`/admin`
-- API：`/api/v0.2/admin/*`
+- API：`/api/v0.3/admin/*`
 
 ## 截图位点（待补）
 - Admin 登录页（/admin）

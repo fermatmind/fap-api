@@ -4,7 +4,7 @@ Date: 2026-01-29
 
 ## 相关入口文件（questions 输出链路）
 - `backend/routes/api.php`
-  - v0.2 已有 `/api/v0.2/content-packs/{pack_id}/{dir_version}/questions`
+  - v0.2 已有 `/api/v0.3/content-packs/{pack_id}/{dir_version}/questions`
   - v0.2 MBTI questions: `MbtiController::questions()`
   - v0.3 目前仅有 scales index/show/lookup，无 questions endpoint
 - `backend/app/Http/Controllers/MbtiController.php`

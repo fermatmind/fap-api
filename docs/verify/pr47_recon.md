@@ -7,7 +7,7 @@
   - backend/config/services.php
   - backend/.env.example
 - 相关路由：
-  - POST /api/v0.2/webhooks/{provider}
+  - POST /api/v0.3/webhooks/{provider}
 - 相关 DB 表/迁移：
   - integrations（新增 webhook_last_event_id / webhook_last_timestamp / webhook_last_received_at）
   - idempotency_keys（保持现有幂等语义）

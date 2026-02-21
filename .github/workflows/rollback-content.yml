@@ -29,7 +29,7 @@ on:
         description: "Dir alias to rollback"
         required: true
         type: string
-        default: "MBTI-CN-v0.2.1-TEST"
+        default: "MBTI-CN-v0.3"
       probe:
         description: "true/false"
         required: true
@@ -108,7 +108,7 @@ jobs:
 
           echo "Payload=$PAYLOAD"
 
-          HTTP_RESP="$(curl -sS -X POST "$BASE_URL/api/v0.2/admin/content-releases/rollback" \
+          HTTP_RESP="$(curl -sS -X POST "$BASE_URL/api/v0.3/admin/content-releases/rollback" \
             -H "Accept: application/json" \
             -H "Content-Type: application/json" \
             -H "X-Admin-Token: ${ADMIN_TOKEN}" \

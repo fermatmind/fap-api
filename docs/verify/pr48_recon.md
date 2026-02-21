@@ -9,15 +9,15 @@
   - backend/config/fap.php
   - backend/.env.example
 - 相关路由：
-  - POST /api/v0.2/events
-  - GET /api/v0.2/admin/audit-logs
+  - POST /api/v0.3/events
+  - GET /api/v0.3/admin/audit-logs
 - 相关 DB 表/迁移：
   - events（本次不改表结构，仅新增入口字节上限守卫）
   - audit_logs（本次不改表结构，仅增强 meta_json 脱敏与指标）
   - fm_tokens（用于 events 鉴权 token 解析）
 - 需要新增/修改点：
   - 新增 fap.events.max_payload_bytes / FAP_EVENTS_MAX_PAYLOAD_BYTES
-  - /api/v0.2/events 在鉴权前执行 raw payload bytes 限制，超限返回 413 payload_too_large
+  - /api/v0.3/events 在鉴权前执行 raw payload bytes 限制，超限返回 413 payload_too_large
   - SensitiveDataRedactor 增强心理隐私递归脱敏 + 计数/version
   - AuditLogger 对整段 meta 进行 redactor+sanitize，并记录 _redaction 指标与 AUDIT_LOG_REDACTED
   - 新增 PR48 accept/verify 脚本和 verify 文档

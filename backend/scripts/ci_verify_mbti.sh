@@ -29,8 +29,8 @@ export FAP_S3_PREFIX="${FAP_S3_PREFIX:-content_packages/}"
 # MBTI defaults (avoid resolver picking default)
 export FAP_DEFAULT_REGION=CN_MAINLAND
 export FAP_DEFAULT_LOCALE=zh-CN
-export FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.2.2
-export FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.2.2
+export FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.3
+export FAP_DEFAULT_DIR_VERSION=MBTI-CN-v0.3
 
 # -----------------------------
 # Auth header holder (must be defined under -u)
@@ -116,8 +116,8 @@ VERIFY_ANON_ID="${VERIFY_ANON_ID:-ci_verify}"
 export ANON_ID="${ANON_ID:-$VERIFY_ANON_ID}"
 
 # Your stable pack identifiers
-PACK_ID="${PACK_ID:-MBTI.cn-mainland.zh-CN.v0.2.2}"
-LEGACY_DIR="${LEGACY_DIR:-MBTI-CN-v0.2.2}"
+PACK_ID="${PACK_ID:-MBTI.cn-mainland.zh-CN.v0.3}"
+LEGACY_DIR="${LEGACY_DIR:-MBTI-CN-v0.3}"
 
 # Artifacts
 RUN_DIR="${RUN_DIR:-$BACKEND_DIR/artifacts/verify_mbti}"
@@ -264,7 +264,7 @@ fetch_authed_json() {
 
 # -----------------------------
 # Ensure legacy alias exists (CI runner usually doesn't have it)
-#   ../content_packages/MBTI-CN-v0.2.2 -> default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2
+#   ../content_packages/MBTI-CN-v0.3 -> default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
 # -----------------------------
 CONTENT_ROOT="$REPO_DIR/content_packages"
 CANON_REL="default/${REGION}/${LOCALE}/${LEGACY_DIR}"

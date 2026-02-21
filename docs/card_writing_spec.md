@@ -166,11 +166,11 @@ reads 本质是“推荐阅读/练习/资源卡”，比章节卡更偏：
 ### 4.3 上线前验收（建议每次 PR 跑）
 ```bash
 # 去尾随空格
-sed -i '' -E 's/[[:space:]]+$//' content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/*.json
+sed -i '' -E 's/[[:space:]]+$//' content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/*.json
 git diff --check
 
 # MVP 统计
-PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
 bash backend/scripts/mvp_check.sh "$PACK_DIR"
 
 # 全链路硬闸

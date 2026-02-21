@@ -2,7 +2,7 @@
 
 ## Healthz red -> triage flow
 
-1) Check `/api/v0.2/healthz` response and identify which deps are red.
+1) Check `/api/v0.3/healthz` response and identify which deps are red.
 2) Validate infra/service connectivity (db/redis/queue/cache/content_source).
 3) Check deploy history (`v_deploy_events`) for recent changes.
 4) If needed, rollback or hotfix. Re-run healthz snapshot to confirm.

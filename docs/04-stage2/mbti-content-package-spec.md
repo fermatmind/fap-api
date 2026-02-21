@@ -1,7 +1,7 @@
 > Status: Draft
 > Owner: liufuwei
 > Last Updated: 2025-12-16
-> Version: MBTI Content Package CN v0.2
+> Version: MBTI Content Package CN v0.3
 > Related Docs:
 > - docs/04-stage2/mbti-report-engine-v1.2.md
 > - docs/04-stage2/mbti-content-schema.md
@@ -11,17 +11,17 @@
 用于：版本化、灰度、回滚、跨端复用（小程序/官网/后台）
 
 ## 1. 命名与版本口径（与 Stage 1 一致）
-- content_package：MBTI-CN-v0.2
+- content_package：MBTI-CN-v0.3
 - profile_version：mbti32-v2.5（示例）
-- axis_dynamics_version：axis-v0.2-r1
-- layer_profiles_version：layers-v0.2-r1
-- assembly_policy_version：policy-v0.2-r1
-- content_graph_version：graph-v0.2-r1
+- axis_dynamics_version：axis-v0.3-r1
+- layer_profiles_version：layers-v0.3-r1
+- assembly_policy_version：policy-v0.3-r1
+- content_graph_version：graph-v0.3-r1
 
 原则：任何面向用户的内容变更，必须体现在版本号上；支持灰度与回滚。
 
 ## 2. 目录结构（推荐）
-content_packages/MBTI-CN-v0.2/
+content_packages/MBTI-CN-v0.3/
   type_profiles/
     ENFJ-A.json
     ENFJ-T.json
@@ -29,21 +29,21 @@ content_packages/MBTI-CN-v0.2/
   trait_scale_config/
     thresholds.json
   axis_dynamics/
-    axis-v0.2-r1/
+    axis-v0.3-r1/
       EI/
       SN/
       TF/
       JP/
       AT/
   layer_profiles/
-    layers-v0.2-r1/
+    layers-v0.3-r1/
       role_profiles.json
       strategy_profiles.json
       identity_profiles.json
   assembly_policy/
-    policy-v0.2-r1.json
+    policy-v0.3-r1.json
   content_graph/
-    graph-v0.2-r1.json
+    graph-v0.3-r1.json
   release_notes/
     2025-xx-xx.md
 

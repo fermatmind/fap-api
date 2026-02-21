@@ -7,7 +7,7 @@ Last Updated: 2026-02-18
 
 ### API 版本与核心路由组
 - 总路由（`/api/*`，exclude vendor）：`120`
-- `v0.2`（82）：legacy MBTI、auth/lookup、admin、content packs、insights
+- `v0.3`（82）：legacy MBTI、auth/lookup、admin、content packs、insights
 - `v0.3`（31）：attempt start/submit/report、commerce、org/invite/wallet
 - `v0.4`（5）：`/boot` + org assessments（create/invite/progress/summary）
 
@@ -84,7 +84,7 @@ REGION="CN_MAINLAND" LOCALE="zh-CN" EXPECT_PACK_PREFIX="MBTI.cn-mainland.zh-CN."
 建议在 CI/服务器设置：
 - `FAP_DEFAULT_REGION=CN_MAINLAND`
 - `FAP_DEFAULT_LOCALE=zh-CN`
-- `FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.2.1-TEST`
+- `FAP_DEFAULT_PACK_ID=MBTI.cn-mainland.zh-CN.v0.3`
 
 ### E. Overrides 回归验收（D-1/D-2/D-3）
 ```bash

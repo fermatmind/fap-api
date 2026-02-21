@@ -15,7 +15,7 @@
 
 - REGION：`CN_MAINLAND`
 - LOCALE：`zh-CN`
-- 内容包示例：`content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/`
+- 内容包示例：`content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/`
 - 规则主要分两类：
   1) **Highlights 规则**（拆文件）：`report_highlights_policy.json` / `report_highlights_rules.json` / `report_highlights_pools.json`
   2) **章节卡片规则**（通用选择）：`report_rules.json` / `report_section_policies.json` / `report_select_rules.json`
@@ -108,11 +108,11 @@
 ### 5.1 本地（建议每次都跑）
 ```bash
 # 0) 清理尾随空格
-sed -i '' -E 's/[[:space:]]+$//' content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST/*.json
+sed -i '' -E 's/[[:space:]]+$//' content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/*.json
 git diff --check
 
 # 1) MVP 统计（templates + reads）
-PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST"
+PACK_DIR="content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3"
 bash backend/scripts/mvp_check.sh "$PACK_DIR"
 echo "EXIT=$?"
 

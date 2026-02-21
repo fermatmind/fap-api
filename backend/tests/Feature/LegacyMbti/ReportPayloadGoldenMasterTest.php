@@ -22,7 +22,7 @@ final class ReportPayloadGoldenMasterTest extends TestCase
         File::ensureDirectoryExists($this->packsRoot);
         config()->set('content_packs.root', $this->packsRoot);
 
-        $this->contentDir = 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2';
+        $this->contentDir = 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
         $packDir = $this->packsRoot . '/' . $this->contentDir;
         File::ensureDirectoryExists($packDir);
 

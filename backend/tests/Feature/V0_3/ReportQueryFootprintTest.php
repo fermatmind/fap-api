@@ -25,8 +25,8 @@ final class ReportQueryFootprintTest extends TestCase
     private function createMbtiAttemptWithResult(string $anonId): string
     {
         $attemptId = (string) Str::uuid();
-        $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST');
-        $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.2.1-TEST');
+        $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3');
+        $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3');
 
         Attempt::create([
             'id' => $attemptId,
@@ -43,7 +43,7 @@ final class ReportQueryFootprintTest extends TestCase
             'submitted_at' => now(),
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
-            'content_package_version' => 'v0.2.1-TEST',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 
@@ -69,7 +69,7 @@ final class ReportQueryFootprintTest extends TestCase
                 'JP' => 'clear',
                 'AT' => 'clear',
             ],
-            'content_package_version' => 'v0.2.1-TEST',
+            'content_package_version' => 'v0.3',
             'result_json' => [
                 'raw_score' => 0,
                 'final_score' => 0,

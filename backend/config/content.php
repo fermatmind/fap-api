@@ -27,10 +27,10 @@ return [
      */
     'default_versions' => [
         // ✅ 线上默认 scale=default 时用这个
-        'default' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.2.2'),
+        'default' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.3'),
 
         // ✅ 可选：兼容旧路径/旧调用（如果历史上有人传 scale=MBTI）
-        'MBTI' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.2.2'),
+        'MBTI' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.3'),
     ],
 
     /**

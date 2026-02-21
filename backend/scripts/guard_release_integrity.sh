@@ -14,7 +14,7 @@ REPO_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"
 REPO_NAME="$(basename "${REPO_DIR}")"
 
 # Pack path can be overridden via PACK_REL; default is mainline pack.
-PACK_REL="${PACK_REL:-default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST}"
+PACK_REL="${PACK_REL:-default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3}"
 PACK_DIR="${REPO_DIR}/content_packages/${PACK_REL}"
 
 echo "[GUARD] repo=${REPO_NAME}"

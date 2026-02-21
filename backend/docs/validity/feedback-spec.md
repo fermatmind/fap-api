@@ -11,7 +11,7 @@
 ---
 
 ## 1) API
-`POST /api/v0.2/attempts/{attempt_id}/feedback`
+`POST /api/v0.3/attempts/{attempt_id}/feedback`
 
 - 需要 `Authorization: Bearer <fm_token>`（走 `FmTokenAuth`）
 - Feature Flag：`FEEDBACK_ENABLED=0/1`（默认 0）
@@ -109,7 +109,7 @@ TODO（未来收紧）：
 
 ### 4.2 pack_version
 - 从 `pack_id` 解析：取最后一个 `.v` 之后的子串
-  - 例：`MBTI.cn-mainland.zh-CN.v0.2.1-TEST` → `v0.2.1-TEST`
+  - 例：`MBTI.cn-mainland.zh-CN.v0.2.2` → `v0.2.1-TEST`
 
 ### 4.3 report_version
 - `REPORT_VERSION`（env）
@@ -157,7 +157,7 @@ curl -X POST \
   -H "Authorization: Bearer fm_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{"score":4,"reason_tags":["too_long","not_accurate"],"free_text":"整体还可以"}' \
-  "http://127.0.0.1:18000/api/v0.2/attempts/<attempt_id>/feedback"
+  "http://127.0.0.1:18000/api/v0.3/attempts/<attempt_id>/feedback"
 ```
 
 ---

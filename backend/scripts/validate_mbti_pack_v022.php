@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$defaultDir = realpath(__DIR__ . '/../../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.2');
+$defaultDir = realpath(__DIR__ . '/../../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3');
 $packDir = $argv[1] ?? ($defaultDir ?: '');
 if ($packDir === '' || !is_dir($packDir)) {
     fwrite(STDERR, "usage: php backend/scripts/validate_mbti_pack_v022.php <pack_dir>\n");
@@ -47,7 +47,7 @@ if ($version) {
     if ($dirVersion === '' || $dirVersion !== $dirName) {
         $errors[] = "version.json dir_version mismatch: {$dirVersion} (dir={$dirName})";
     }
-    if ($packId !== 'MBTI.cn-mainland.zh-CN.v0.2.2') {
+    if ($packId !== 'MBTI.cn-mainland.zh-CN.v0.3') {
         $errors[] = "version.json pack_id mismatch: {$packId}";
     }
     foreach ([$contentVersion, $scoringVersion, $normVersion] as $v) {

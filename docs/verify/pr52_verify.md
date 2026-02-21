@@ -41,7 +41,7 @@ Step Verification Commands
 
 Contract Smoke (curl)
 
-- `curl -i http://127.0.0.1:1852/api/v0.2/me/attempts` -> `401` + `error_code=UNAUTHORIZED`
-- `curl -i -X POST http://127.0.0.1:1852/api/v0.2/shares/not-a-uuid/click` -> `404` + `error_code=NOT_FOUND`
+- `curl -i http://127.0.0.1:1852/api/v0.3/me/attempts` -> `401` + `error_code=UNAUTHORIZED`
+- `curl -i -X POST http://127.0.0.1:1852/api/v0.3/shares/not-a-uuid/click` -> `404` + `error_code=NOT_FOUND`
 - `curl -i -H "X-Org-Id: 999999" http://127.0.0.1:1852/api/v0.3/scales` -> `404` + `error_code=ORG_NOT_FOUND`
 - `curl -i http://127.0.0.1:1852/api/v0.3/__missing` -> `404` + `error_code=NOT_FOUND`

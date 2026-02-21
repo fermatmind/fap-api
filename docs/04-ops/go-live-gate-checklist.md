@@ -28,6 +28,6 @@
 - If all checklist items pass: `PASS`
 
 ## Execution
-- API: `GET /api/v0.2/admin/go-live-gate`
-- API (force run): `POST /api/v0.2/admin/go-live-gate/run`
+- API: `GET /api/v0.3/admin/go-live-gate`
+- API (force run): `POST /api/v0.3/admin/go-live-gate/run`
 - Script: `bash backend/scripts/go_live_gate.sh`

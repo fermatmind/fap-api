@@ -1,15 +1,15 @@
 > Status: Stable
 > Owner: liufuwei
 > Last Updated: 2025-12-16
-> Version: MBTI Content Schema v0.2
+> Version: MBTI Content Schema v0.3
 > Related Docs:
 > - docs/04-stage2/mbti-report-engine-v1.2.md
 > - docs/04-stage2/mbti-content-package-spec.md
 
-# MBTI 内容结构规范（Content Schema）— v0.2.1（对齐 API / 合规 / 发布）
+# MBTI 内容结构规范（Content Schema）— v0.3（对齐 API / 合规 / 发布）
 
-> 适用范围：FAP `v0.2.x`（MBTI 主流程）内容资产的**权威规范源**。  
-> 本版本：**v0.2.1**（新增：`content_package_version`、动态报告字段、分享模板协议、合规模块与写作约束对齐）
+> 适用范围：FAP `v0.3.x`（MBTI 主流程）内容资产的**权威规范源**。  
+> 本版本：**v0.3**（新增：`content_package_version`、动态报告字段、分享模板协议、合规模块与写作约束对齐）
 
 ---
 
@@ -32,16 +32,16 @@
 
 | 名称 | 字段 | 示例 | 含义 | 变更时机 |
 |---|---|---|---|---|
-| 题库/评分版本 | `scale_version` | `v0.2` | 题目与计分规则版本 | 改题/改评分必须升版本 |
+| 题库/评分版本 | `scale_version` | `v0.3` | 题目与计分规则版本 | 改题/改评分必须升版本 |
 | 类型骨架文案版本 | `profile_version` | `mbti32-v2.5` | 32 型长文/骨架结构版本 | 文案结构或叙事升级 |
-| 内容资产包版本（权威） | `content_package_version` | `MBTI-CN-v0.2.1` | 动态模块/分享/免责声明/推荐等一揽子版本 | 任何可发布内容变化都应升版本或 hotfix |
+| 内容资产包版本（权威） | `content_package_version` | `MBTI-CN-v0.3` | 动态模块/分享/免责声明/推荐等一揽子版本 | 任何可发布内容变化都应升版本或 hotfix |
 
-> v0.2.1：**以 `content_package_version` 作为“发布/回滚”的最小单位**（对齐 `content-release-checklist.md`）。
+> v0.3：**以 `content_package_version` 作为“发布/回滚”的最小单位**（对齐 `content-release-checklist.md`）。
 
 ### 1.2 目录结构（建议，但强烈推荐）
 
 content_packages/
-MBTI-CN-v0.2.1/
+MBTI-CN-v0.3/
 manifest.json
 type_profiles/
 ENFJ-A.json
@@ -50,13 +50,13 @@ ENFJ-T.json
 share_templates/
 wechat-moment-v1.json
 axis_dynamics/
-…（可从 v0.2.2 起逐步填充）
+…（可从 v0.3 起逐步填充）
 layer_profiles/
 role.json
 strategy.json
 identity.json
 disclaimers/
-mbti-v0.2.1.json
+mbti-v0.3.json
 content_graph/
 nodes.json
 rules.json
@@ -73,7 +73,7 @@ rules.json
 - `region`（string，必填，例：`CN_MAINLAND`）
 - `locale`（string，必填，例：`zh-CN`）
 - `scale_code`（string，必填，固定：`MBTI`）
-- `scale_version`（string，必填，例：`v0.2`）
+- `scale_version`（string，必填，例：`v0.3`）
 - `profile_version`（string，必填，例：`mbti32-v2.5`）
 - `created_at` / `updated_at`（ISO8601）
 - `notes`（string，可选）
@@ -81,15 +81,15 @@ rules.json
 **示例：**
 ```jsonc
 {
-  "content_package_version": "MBTI-CN-v0.2.1",
+  "content_package_version": "MBTI-CN-v0.3",
   "region": "CN_MAINLAND",
   "locale": "zh-CN",
   "scale_code": "MBTI",
-  "scale_version": "v0.2",
+  "scale_version": "v0.3",
   "profile_version": "mbti32-v2.5",
   "created_at": "2025-12-15T00:00:00Z",
   "updated_at": "2025-12-15T00:00:00Z",
-  "notes": "v0.2.1: add share template protocol + dynamic report fields placeholders + compliance modules"
+  "notes": "v0.3: add share template protocol + dynamic report fields placeholders + compliance modules"
 }
 
 
@@ -142,10 +142,10 @@ TypeProfile 用于结果页的“主叙事骨架”。
 
 ⸻
 
-4. 动态报告模块（Dynamic Report Modules）— v0.2.1 新增口径
+4. 动态报告模块（Dynamic Report Modules）— v0.3 新增口径
 
-v0.2.1 先把“结构与字段”定下来；内容可以逐步补齐。
-对齐 api-v0.2-spec.md v0.2.1：后端返回 scores_pct、axis_states、highlights、sections.cards 等。
+v0.3 先把“结构与字段”定下来；内容可以逐步补齐。
+对齐 api-v0.3-spec.md v0.3：后端返回 scores_pct、axis_states、highlights、sections.cards 等。
 
 4.1 scores_pct（五轴百分比）
 	•	字段名：scores_pct
@@ -165,7 +165,7 @@ v0.2.1 先把“结构与字段”定下来；内容可以逐步补齐。
 统一卡片字段（前端稳定渲染）：
 	•	card_id（string，必填，内容资产唯一 ID）
 	•	card_type（string，必填）
-	•	v0.2.1 建议先支持：explain / action
+	•	v0.3 建议先支持：explain / action
 	•	预留：behavior / pitfall
 	•	title（string，必填）
 	•	body（string|string[]，必填）
@@ -186,14 +186,14 @@ v0.2.1 先把“结构与字段”定下来；内容可以逐步补齐。
 	•	relationships.cards[]
 	•	说明：后端按组装策略（AssemblyPolicy）分发卡片，前端只展示。
 
-v0.2.1：你可以先做到 highlights + identity_card 有内容，sections.* 先为空数组也可上线。
+v0.3：你可以先做到 highlights + identity_card 有内容，sections.* 先为空数组也可上线。
 
 ⸻
 
-5. 分享资产协议（Share Template Protocol）— v0.2.1 必须对齐
+5. 分享资产协议（Share Template Protocol）— v0.3 必须对齐
 
-对齐 api-v0.2-spec.md v0.2.1 新增接口：
-GET /api/v0.2/attempts/{attempt_id}/share
+对齐 api-v0.3-spec.md v0.3 新增接口：
+GET /api/v0.3/attempts/{attempt_id}/share
 
 5.1 SharePayload（后端返回给前端生成分享卡的最小字段）
 
@@ -213,7 +213,7 @@ GET /api/v0.2/attempts/{attempt_id}/share
 
 {
   "share_id": "sh_2f1a8c...9d",
-  "content_package_version": "MBTI-CN-v0.2.1",
+  "content_package_version": "MBTI-CN-v0.3",
   "type_code": "ENFJ-A",
   "type_name": "主人公型",
   "tagline": "笃定型领路人",
@@ -235,9 +235,9 @@ GET /api/v0.2/attempts/{attempt_id}/share
 
 ⸻
 
-6. 合规模块（Compliance Modules）— v0.2.1 必须落地
+6. 合规模块（Compliance Modules）— v0.3 必须落地
 
-对齐 compliance-basics.md v0.2.1：结果页/分享页/权益说明必须可引用同一套合规模块资产。
+对齐 compliance-basics.md v0.3：结果页/分享页/权益说明必须可引用同一套合规模块资产。
 
 6.1 DisclaimerBlock（结果页免责声明块）
 	•	字段：
@@ -258,9 +258,9 @@ GET /api/v0.2/attempts/{attempt_id}/share
 
 ⸻
 
-7. 组装策略（Assembly Policy）— v0.2.1 结构预留
+7. 组装策略（Assembly Policy）— v0.3 结构预留
 
-v0.2.1 不强制你一次做完，但要把“规则入口”留好，避免未来推翻。
+v0.3 不强制你一次做完，但要把“规则入口”留好，避免未来推翻。
 
 7.1 Policy 关键概念（术语对齐 glossary）
 	•	top_strength_axes：强度最高的 Top-2/Top-3 轴
@@ -288,7 +288,7 @@ v0.2.1 不强制你一次做完，但要把“规则入口”留好，避免未�
 
 ⸻
 
-9. 与 API 的字段/接口对齐清单（v0.2.1）
+9. 与 API 的字段/接口对齐清单（v0.3）
 
 9.1 结果接口返回中，与内容相关的字段（必须）
 	•	profile_version（用于加载 TypeProfile）
@@ -302,20 +302,20 @@ v0.2.1 不强制你一次做完，但要把“规则入口”留好，避免未�
 	•	新增（建议）：disclaimer_block（或由内容包注入）
 
 9.2 分享接口（新增）
-	•	GET /api/v0.2/attempts/{attempt_id}/share
+	•	GET /api/v0.3/attempts/{attempt_id}/share
 	•	返回 SharePayload
 	•	包含 share_id、content_package_version、模板所需字段
 	•	前端生成图片后触发 share_generate 事件
 
 9.3 用户权益相关接口（新增/补齐）
-	•	GET /api/v0.2/user-rights
+	•	GET /api/v0.3/user-rights
 	•	返回权益说明摘要（可用于前端展示/落地页一致性）
-	•	POST /api/v0.2/user-requests
+	•	POST /api/v0.3/user-requests
 	•	提交删除/导出请求（可配合事件：delete_request_submit / export_request_submit）
 
 ⸻
 
-10. 最低可上线标准（v0.2.1）
+10. 最低可上线标准（v0.3）
 
 只要你满足以下内容资产，就能稳定上线并支持后续扩展：
 	•	✅ 内容包 manifest.json（含 content_package_version）

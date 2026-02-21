@@ -36,7 +36,7 @@ class SelfCheckContentEngineCore
         }
 
         // default (keep your previous convention)
-        $defaultPkg = \App\Support\RuntimeConfig::value('MBTI_CONTENT_PACKAGE', 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.2.1-TEST');
+        $defaultPkg = \App\Support\RuntimeConfig::value('MBTI_CONTENT_PACKAGE', 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3');
         return base_path("../content_packages/{$defaultPkg}/manifest.json");
     }
 
@@ -54,6 +54,9 @@ class SelfCheckContentEngineCore
             /** @var \SplFileInfo $file */
             if (strtolower($file->getFilename()) !== 'manifest.json') continue;
             $p = $file->getPathname();
+            $norm = str_replace(DIRECTORY_SEPARATOR, '/', $p);
+            if (str_contains($norm, '/_deprecated/')) continue;
+            if (!str_contains($norm, '/default/')) continue;
             $json = $this->readJsonFile($p);
             if (is_array($json) && (string)($json['pack_id'] ?? '') === $packId) {
                 return $p;
@@ -425,7 +428,7 @@ public function checkLandingMeta(string $path, array $manifest, string $packId, 
     }
 
     // 4) pack_id must match directory name (FAIL)
-    $packDirName = basename($baseDir); // e.g. MBTI-CN-v0.2.1-TEST
+    $packDirName = basename($baseDir); // e.g. MBTI-CN-v0.3
     $metaPackId = (string)($landing['pack_id'] ?? ($doc['pack_id'] ?? ''));
     if ($metaPackId !== '' && $metaPackId !== $packDirName) {
         $errors[] = "pack={$packId} file={$path} path=$.pack_id :: must equal pack directory '{$packDirName}', got=" . var_export($metaPackId, true);

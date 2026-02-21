@@ -1,7 +1,7 @@
 # PR27 Recon
 
 - 目标：
-  - 修复 PR 的 selfcheck CI 红：停止对 MBTI-CN-v0.2.1-TEST 执行 strict-assets gate
+  - 修复 PR 的 selfcheck CI 红：停止对 MBTI-CN-v0.2.2 执行 strict-assets gate
   - 建立长期稳定口径：selfcheck 只跑 active pack 清单（包含 MBTI-CN-v0.2.2），并固化脚本入口
 - 相关入口文件：
   - CI/workflow：.github/workflows（搜索 selfcheck / fap:self-check）

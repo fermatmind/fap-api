@@ -8,7 +8,7 @@
 - 2026-01-08 ~ 2026-01-14（7 天）
 
 ## 维度
-- pack_id: MBTI.cn-mainland.zh-CN.v0.2.1-TEST
+- pack_id: MBTI.cn-mainland.zh-CN.v0.2.2
 - pack_version: v0.2.1-TEST
 - report_version: 0.2.1
 

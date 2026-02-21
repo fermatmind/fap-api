@@ -1,0 +1,345 @@
+{
+    "meta": {
+        "norm_id": "mbti.cn-mainland.zh-CN.2026",
+        "version": "1.0.0",
+        "region": "CN_MAINLAND",
+        "locale": "zh-CN",
+        "bucket_keys": [
+            "region",
+            "locale",
+            "gender",
+            "age_group"
+        ],
+        "default_bucket": {
+            "region": "CN_MAINLAND",
+            "locale": "zh-CN"
+        },
+        "updated_at": "2026-01-28"
+    },
+    "buckets": [
+        {
+            "id": "cn-zh-default",
+            "keys": {
+                "region": "CN_MAINLAND",
+                "locale": "zh-CN"
+            },
+            "stats": {
+                "EI": {
+                    "mean": 52,
+                    "sd": 12,
+                    "n": 1200
+                },
+                "SN": {
+                    "mean": 49.5,
+                    "sd": 11,
+                    "n": 1200
+                },
+                "TF": {
+                    "mean": 51,
+                    "sd": 10.5,
+                    "n": 1200
+                },
+                "JP": {
+                    "mean": 50,
+                    "sd": 11.5,
+                    "n": 1200
+                },
+                "AT": {
+                    "mean": 48,
+                    "sd": 13,
+                    "n": 1200
+                }
+            },
+            "cdf": {
+                "EI": [
+                    {
+                        "score": 0,
+                        "cdf": 0.01
+                    },
+                    {
+                        "score": 25,
+                        "cdf": 0.2
+                    },
+                    {
+                        "score": 50,
+                        "cdf": 0.52
+                    },
+                    {
+                        "score": 75,
+                        "cdf": 0.82
+                    },
+                    {
+                        "score": 100,
+                        "cdf": 0.98
+                    }
+                ],
+                "SN": [
+                    {
+                        "score": 0,
+                        "cdf": 0.02
+                    },
+                    {
+                        "score": 25,
+                        "cdf": 0.22
+                    },
+                    {
+                        "score": 50,
+                        "cdf": 0.5
+                    },
+                    {
+                        "score": 75,
+                        "cdf": 0.8
+                    },
+                    {
+                        "score": 100,
+                        "cdf": 0.97
+                    }
+                ],
+                "TF": [
+                    {
+                        "score": 0,
+                        "cdf": 0.02
+                    },
+                    {
+                        "score": 25,
+                        "cdf": 0.24
+                    },
+                    {
+                        "score": 50,
+                        "cdf": 0.51
+                    },
+                    {
+                        "score": 75,
+                        "cdf": 0.79
+                    },
+                    {
+                        "score": 100,
+                        "cdf": 0.97
+                    }
+                ],
+                "JP": [
+                    {
+                        "score": 0,
+                        "cdf": 0.01
+                    },
+                    {
+                        "score": 25,
+                        "cdf": 0.21
+                    },
+                    {
+                        "score": 50,
+                        "cdf": 0.5
+                    },
+                    {
+                        "score": 75,
+                        "cdf": 0.81
+                    },
+                    {
+                        "score": 100,
+                        "cdf": 0.98
+                    }
+                ],
+                "AT": [
+                    {
+                        "score": 0,
+                        "cdf": 0.02
+                    },
+                    {
+                        "score": 25,
+                        "cdf": 0.23
+                    },
+                    {
+                        "score": 50,
+                        "cdf": 0.49
+                    },
+                    {
+                        "score": 75,
+                        "cdf": 0.78
+                    },
+                    {
+                        "score": 100,
+                        "cdf": 0.96
+                    }
+                ]
+            }
+        },
+        {
+            "id": "cn-zh-f",
+            "keys": {
+                "region": "CN_MAINLAND",
+                "locale": "zh-CN",
+                "gender": "F"
+            },
+            "stats": {
+                "EI": {
+                    "mean": 53,
+                    "sd": 11.5,
+                    "n": 620
+                },
+                "SN": {
+                    "mean": 50,
+                    "sd": 10.8,
+                    "n": 620
+                },
+                "TF": {
+                    "mean": 49,
+                    "sd": 10.2,
+                    "n": 620
+                },
+                "JP": {
+                    "mean": 51,
+                    "sd": 11,
+                    "n": 620
+                },
+                "AT": {
+                    "mean": 49,
+                    "sd": 12,
+                    "n": 620
+                }
+            },
+            "cdf": {
+                "EI": [
+                    {
+                        "score": 0,
+                        "cdf": 0.02
+                    },
+                    {
+                        "score": 25,
+                        "cdf": 0.23
+                    },
+                    {
+                        "score": 50,
+                        "cdf": 0.55
+                    },
+                    {
+                        "score": 75,
+                        "cdf": 0.84
+                    },
+                    {
+                        "score": 100,
+                        "cdf": 0.98
+                    }
+                ]
+            }
+        },
+        {
+            "id": "cn-zh-m",
+            "keys": {
+                "region": "CN_MAINLAND",
+                "locale": "zh-CN",
+                "gender": "M"
+            },
+            "stats": {
+                "EI": {
+                    "mean": 51,
+                    "sd": 12.5,
+                    "n": 580
+                },
+                "SN": {
+                    "mean": 49,
+                    "sd": 11.2,
+                    "n": 580
+                },
+                "TF": {
+                    "mean": 52,
+                    "sd": 10.8,
+                    "n": 580
+                },
+                "JP": {
+                    "mean": 49,
+                    "sd": 12,
+                    "n": 580
+                },
+                "AT": {
+                    "mean": 47,
+                    "sd": 13.5,
+                    "n": 580
+                }
+            },
+            "cdf": {
+                "EI": [
+                    {
+                        "score": 0,
+                        "cdf": 0.01
+                    },
+                    {
+                        "score": 25,
+                        "cdf": 0.18
+                    },
+                    {
+                        "score": 50,
+                        "cdf": 0.49
+                    },
+                    {
+                        "score": 75,
+                        "cdf": 0.8
+                    },
+                    {
+                        "score": 100,
+                        "cdf": 0.97
+                    }
+                ]
+            }
+        },
+        {
+            "id": "cn-zh-18-25",
+            "keys": {
+                "region": "CN_MAINLAND",
+                "locale": "zh-CN",
+                "age_group": "18-25"
+            },
+            "stats": {
+                "EI": {
+                    "mean": 54,
+                    "sd": 12,
+                    "n": 400
+                },
+                "SN": {
+                    "mean": 48,
+                    "sd": 10.5,
+                    "n": 400
+                },
+                "TF": {
+                    "mean": 50,
+                    "sd": 10,
+                    "n": 400
+                },
+                "JP": {
+                    "mean": 49,
+                    "sd": 11,
+                    "n": 400
+                },
+                "AT": {
+                    "mean": 47.5,
+                    "sd": 12,
+                    "n": 400
+                }
+            },
+            "cdf": {
+                "EI": [
+                    {
+                        "score": 0,
+                        "cdf": 0.02
+                    },
+                    {
+                        "score": 25,
+                        "cdf": 0.25
+                    },
+                    {
+                        "score": 50,
+                        "cdf": 0.57
+                    },
+                    {
+                        "score": 75,
+                        "cdf": 0.85
+                    },
+                    {
+                        "score": 100,
+                        "cdf": 0.98
+                    }
+                ]
+            }
+        }
+    ],
+    "schema": "fap.report.rules.v1"
+}

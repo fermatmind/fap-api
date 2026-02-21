@@ -38,9 +38,9 @@ class ManualGrantCreatesAuditTrailTest extends TestCase
             'answers_summary_json' => ['stage' => 'seed'],
             'started_at' => now(),
             'submitted_at' => now(),
-            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
-            'dir_version' => 'MBTI-CN-v0.2.1-TEST',
-            'content_package_version' => 'v0.2.1-TEST',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 
@@ -115,9 +115,9 @@ class ManualGrantCreatesAuditTrailTest extends TestCase
             'answers_summary_json' => ['stage' => 'seed'],
             'started_at' => now(),
             'submitted_at' => now(),
-            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
-            'dir_version' => 'MBTI-CN-v0.2.1-TEST',
-            'content_package_version' => 'v0.2.1-TEST',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 

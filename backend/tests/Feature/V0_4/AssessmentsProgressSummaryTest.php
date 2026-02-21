@@ -124,15 +124,15 @@ class AssessmentsProgressSummaryTest extends TestCase
                 'scores_pct' => json_encode(['EI' => 55, 'SN' => 62, 'TF' => 71, 'JP' => 48, 'AT' => 60]),
                 'axis_states' => json_encode(['EI' => 'weak', 'SN' => 'clear', 'TF' => 'strong', 'JP' => 'weak', 'AT' => 'clear']),
                 'profile_version' => null,
-                'content_package_version' => 'v0.2.1-TEST',
+                'content_package_version' => 'v0.3',
                 'result_json' => json_encode([
                     'final_score' => 144,
                     'axis_scores_json' => [
                         'scores_pct' => ['EI' => 55, 'SN' => 62, 'TF' => 71, 'JP' => 48, 'AT' => 60],
                     ],
                 ]),
-                'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.2.1-TEST',
-                'dir_version' => 'MBTI-CN-v0.2.1-TEST',
+                'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+                'dir_version' => 'MBTI-CN-v0.3',
                 'scoring_spec_version' => '2026.01',
                 'report_engine_version' => 'v1.2',
                 'is_valid' => 1,
