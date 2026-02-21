@@ -15,7 +15,7 @@ class MeController extends Controller
 
     public function attempts(MeAttemptsIndexRequest $request): JsonResponse
     {
-        $result = $this->me->listAttempts($request->pageSize(), $request->page());
+        $result = $this->me->listAttempts($request->pageSize(), $request->page(), $request->scaleCode());
 
         return response()->json(array_merge(['ok' => true], $result), 200);
     }

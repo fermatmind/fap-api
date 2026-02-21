@@ -30,7 +30,7 @@ class MeFacadeService
     ) {
     }
 
-    public function listAttempts(int $pageSize, int $page = 1): array
+    public function listAttempts(int $pageSize, int $page = 1, ?string $scaleCode = null): array
     {
         $userId = $this->orgContext->userId();
 
@@ -39,7 +39,8 @@ class MeFacadeService
             $userId !== null ? (string) $userId : null,
             $this->orgContext->anonId(),
             $this->normalizePageSize($pageSize),
-            max(1, $page)
+            max(1, $page),
+            $scaleCode
         );
     }
 

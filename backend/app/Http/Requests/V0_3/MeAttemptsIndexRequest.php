@@ -16,11 +16,13 @@ class MeAttemptsIndexRequest extends FormRequest
         $page = (int) $this->query('page', 1);
         $pageSizeRaw = $this->query('page_size', $this->query('per_page', 20));
         $pageSize = (int) $pageSizeRaw;
+        $scale = strtoupper(trim((string) $this->query('scale', '')));
 
         $this->merge([
             'page' => $page > 0 ? $page : 1,
             'page_size' => $pageSize,
             'per_page' => $pageSize,
+            'scale' => $scale,
         ]);
     }
 
@@ -30,6 +32,7 @@ class MeAttemptsIndexRequest extends FormRequest
             'page' => ['nullable', 'integer', 'min:1'],
             'page_size' => ['nullable', 'integer', 'min:1', 'max:50'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:50'],
+            'scale' => ['nullable', 'string', 'max:32'],
         ];
     }
 
@@ -49,5 +52,15 @@ class MeAttemptsIndexRequest extends FormRequest
 
         return min(50, $size);
     }
-}
 
+    public function scaleCode(): ?string
+    {
+        $validated = $this->validated();
+        $scale = strtoupper(trim((string) ($validated['scale'] ?? '')));
+        if ($scale === '') {
+            return null;
+        }
+
+        return $scale;
+    }
+}
