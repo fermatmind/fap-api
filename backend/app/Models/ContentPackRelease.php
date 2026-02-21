@@ -32,6 +32,11 @@ class ContentPackRelease extends Model
         'probe_ok',
         'probe_json',
         'probe_run_at',
+        'manifest_hash',
+        'compiled_hash',
+        'content_hash',
+        'norms_version',
+        'git_sha',
     ];
 
     protected $casts = [

@@ -2,7 +2,7 @@
     "schema": "big5.policy.compiled.v1",
     "pack_id": "BIG5_OCEAN",
     "pack_version": "v1",
-    "generated_at": "2026-02-21T15:13:26.351642Z",
+    "generated_at": "2026-02-21T16:04:08.795948Z",
     "policy": {
         "pack_id": "BIG5_OCEAN",
         "pack_version": "v1",
@@ -36,6 +36,12 @@
                 90,
                 100
             ]
+        },
+        "copy_bucket_fallback": {
+            "facets_deepdive": {
+                "extreme_low": "low",
+                "extreme_high": "high"
+            }
         },
         "norm_fallback": {
             "group_priority": [

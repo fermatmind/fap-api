@@ -283,22 +283,39 @@ final class BigFiveContentLintService
             if ($sd <= 0.0) {
                 $errors[] = $this->error($file, $line, 'sd must be > 0.');
             }
+            $sampleN = (int) ($row['sample_n'] ?? 0);
+            if ($sampleN <= 0) {
+                $errors[] = $this->error($file, $line, 'sample_n must be > 0.');
+            }
 
-            $coverage[$group][$level][$code] = true;
+            $coverage[strtolower($group)][$level][$code] = true;
         }
 
-        $globalDomains = array_keys((array) ($coverage['global_all']['domain'] ?? []));
-        $globalFacets = array_keys((array) ($coverage['global_all']['facet'] ?? []));
-        if (count($globalDomains) !== 5 || count(array_intersect($globalDomains, self::DOMAINS)) !== 5) {
-            $errors[] = $this->error($file, 1, 'global_all must fully cover 5 domain metrics.');
-        }
-        if (count($globalFacets) !== 30 || count(array_intersect($globalFacets, self::FACETS)) !== 30) {
-            $errors[] = $this->error($file, 1, 'global_all must fully cover 30 facet metrics.');
+        $this->assertNormGroupCoverage($file, $coverage, 'en_johnson_all_18-60', true, $errors);
+        $this->assertNormGroupCoverage($file, $coverage, 'zh-CN_prod_all_18-60', true, $errors);
+    }
+
+    /**
+     * @param array<string,array<string,array<string,bool>>> $coverage
+     * @param list<array{file:string,line:int,message:string}> $errors
+     */
+    private function assertNormGroupCoverage(
+        string $file,
+        array $coverage,
+        string $groupId,
+        bool $requireFacet,
+        array &$errors
+    ): void {
+        $groupKey = strtolower($groupId);
+        $domains = array_keys((array) ($coverage[$groupKey]['domain'] ?? []));
+        $facets = array_keys((array) ($coverage[$groupKey]['facet'] ?? []));
+
+        if (count($domains) !== 5 || count(array_intersect($domains, self::DOMAINS)) !== 5) {
+            $errors[] = $this->error($file, 1, "{$groupId} must fully cover 5 domain metrics.");
         }
 
-        $zhDomains = array_keys((array) ($coverage['zh-CN_all']['domain'] ?? []));
-        if (count($zhDomains) !== 5 || count(array_intersect($zhDomains, self::DOMAINS)) !== 5) {
-            $errors[] = $this->error($file, 1, 'zh-CN_all must fully cover 5 domain metrics.');
+        if ($requireFacet && (count($facets) !== 30 || count(array_intersect($facets, self::FACETS)) !== 30)) {
+            $errors[] = $this->error($file, 1, "{$groupId} must fully cover 30 facet metrics.");
         }
     }
 
@@ -314,8 +331,19 @@ final class BigFiveContentLintService
             return;
         }
 
+        $policy = $this->loader->readJson($this->loader->rawPath('policy.json', $version));
+        $extremeFallbackMap = [];
+        if (
+            is_array($policy)
+            && is_array($policy['copy_bucket_fallback'] ?? null)
+            && is_array($policy['copy_bucket_fallback']['facets_deepdive'] ?? null)
+        ) {
+            $extremeFallbackMap = $policy['copy_bucket_fallback']['facets_deepdive'];
+        }
+
         $domainCoverage = [];
         $facetCoverage = [];
+        $disclaimerCoverage = [];
         $varsUsed = [];
 
         foreach ($rows as $entry) {
@@ -335,8 +363,11 @@ final class BigFiveContentLintService
             if ($metricLevel === 'domain' && in_array($metricCode, self::DOMAINS, true)) {
                 $domainCoverage[$locale][$metricCode][$bucket] = true;
             }
-            if ($metricLevel === 'facet' && in_array($metricCode, self::FACETS, true) && in_array($bucket, ['low', 'high'], true)) {
+            if ($metricLevel === 'facet' && in_array($metricCode, self::FACETS, true) && in_array($bucket, ['low', 'high', 'extreme_low', 'extreme_high'], true)) {
                 $facetCoverage[$metricCode][$bucket] = true;
+            }
+            if ($metricLevel === 'global' && in_array($section, ['disclaimer', 'disclaimer_top'], true) && $bucket === 'all') {
+                $disclaimerCoverage[$section][$locale] = true;
             }
 
             foreach (['title', 'body'] as $field) {
@@ -368,9 +399,22 @@ final class BigFiveContentLintService
         }
 
         foreach (self::FACETS as $facet) {
-            foreach (['low', 'high'] as $bucket) {
-                if (!isset($facetCoverage[$facet][$bucket])) {
-                    $errors[] = $this->error($file, 1, "facet copy missing: facet={$facet}, bucket={$bucket}");
+            foreach (['low', 'high', 'extreme_low', 'extreme_high'] as $bucket) {
+                if (isset($facetCoverage[$facet][$bucket])) {
+                    continue;
+                }
+                $fallbackBucket = strtolower((string) ($extremeFallbackMap[$bucket] ?? ''));
+                if ($fallbackBucket !== '' && isset($facetCoverage[$facet][$fallbackBucket])) {
+                    continue;
+                }
+                $errors[] = $this->error($file, 1, "facet copy missing: facet={$facet}, bucket={$bucket}");
+            }
+        }
+
+        foreach (['disclaimer_top', 'disclaimer'] as $section) {
+            foreach (['zh-cn', 'en'] as $locale) {
+                if (!isset($disclaimerCoverage[$section][$locale])) {
+                    $errors[] = $this->error($file, 1, "{$section} copy missing for locale={$locale}");
                 }
             }
         }
@@ -415,6 +459,22 @@ final class BigFiveContentLintService
             }
             if (!is_array($node['faq'] ?? null)) {
                 $errors[] = $this->error($file, 1, "locales.{$locale}.faq must be array.");
+                continue;
+            }
+
+            foreach ((array) $node['faq'] as $index => $faqItem) {
+                if (!is_array($faqItem)) {
+                    $errors[] = $this->error($file, 1, "locales.{$locale}.faq.{$index} must be object.");
+                    continue;
+                }
+                $question = trim((string) ($faqItem['q'] ?? $faqItem['question'] ?? ''));
+                $answer = trim((string) ($faqItem['a'] ?? $faqItem['answer'] ?? ''));
+                if ($question === '') {
+                    $errors[] = $this->error($file, 1, "locales.{$locale}.faq.{$index}.question missing.");
+                }
+                if ($answer === '') {
+                    $errors[] = $this->error($file, 1, "locales.{$locale}.faq.{$index}.answer missing.");
+                }
             }
         }
     }

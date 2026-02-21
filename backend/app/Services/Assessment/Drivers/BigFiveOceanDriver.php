@@ -7,6 +7,7 @@ namespace App\Services\Assessment\Drivers;
 use App\Services\Assessment\ScoreResult;
 use App\Services\Assessment\Scorers\BigFiveScorerV3;
 use App\Services\Content\BigFivePackLoader;
+use App\Services\Observability\BigFiveTelemetry;
 use RuntimeException;
 
 final class BigFiveOceanDriver implements DriverInterface
@@ -14,6 +15,7 @@ final class BigFiveOceanDriver implements DriverInterface
     public function __construct(
         private readonly BigFivePackLoader $packLoader,
         private readonly BigFiveScorerV3 $scorer,
+        private readonly BigFiveTelemetry $bigFiveTelemetry,
     ) {
     }
 
@@ -48,6 +50,22 @@ final class BigFiveOceanDriver implements DriverInterface
             'gender' => (string) ($ctx['gender'] ?? 'ALL'),
             'duration_ms' => (int) ($ctx['duration_ms'] ?? 0),
         ]);
+
+        $norms = is_array($dto['norms'] ?? null) ? $dto['norms'] : [];
+        $quality = is_array($dto['quality'] ?? null) ? $dto['quality'] : [];
+        $this->bigFiveTelemetry->recordScored(
+            (int) ($ctx['org_id'] ?? 0),
+            $this->numericUserId((string) ($ctx['user_id'] ?? '')),
+            (string) ($ctx['anon_id'] ?? ''),
+            (string) ($ctx['attempt_id'] ?? ''),
+            (string) ($ctx['locale'] ?? ''),
+            (string) ($ctx['region'] ?? ''),
+            (string) ($norms['status'] ?? 'MISSING'),
+            (string) ($norms['group_id'] ?? ''),
+            (string) ($quality['level'] ?? 'D'),
+            BigFivePackLoader::PACK_ID,
+            $version
+        );
 
         $domainsPct = is_array($dto['scores_0_100']['domains_percentile'] ?? null)
             ? $dto['scores_0_100']['domains_percentile']
@@ -104,5 +122,15 @@ final class BigFiveOceanDriver implements DriverInterface
         }
 
         return $out;
+    }
+
+    private function numericUserId(string $userId): ?int
+    {
+        $userId = trim($userId);
+        if ($userId === '' || !preg_match('/^\d+$/', $userId)) {
+            return null;
+        }
+
+        return (int) $userId;
     }
 }

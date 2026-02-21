@@ -25,6 +25,8 @@ use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\NormsImport;
 use App\Console\Commands\NormsBig5Roll;
 use App\Console\Commands\Ops\PartitionAttemptAnswerRows;
+use App\Console\Commands\PacksPublish;
+use App\Console\Commands\PacksRollback;
 
 class Kernel extends ConsoleKernel
 {
@@ -55,6 +57,8 @@ class Kernel extends ConsoleKernel
         ContentCompile::class,
         NormsImport::class,
         NormsBig5Roll::class,
+        PacksPublish::class,
+        PacksRollback::class,
         CiScaleImpact::class,
         PartitionAttemptAnswerRows::class,
     ];

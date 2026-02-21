@@ -183,6 +183,8 @@ final class ContentPackPublisher
         $fromVersionId = null;
         $toVersionId = $versionId !== '' ? $versionId : null;
         $expectedPackId = '';
+        $targetDir = '';
+        $releaseEvidence = $this->emptyReleaseEvidence();
 
         $tmpDir = '';
         $previousPackPath = '';
@@ -253,6 +255,10 @@ final class ContentPackPublisher
                 throw new RuntimeException('SWAP_FAILED');
             }
 
+            $releaseEvidence = $this->resolveReleaseEvidence(
+                is_string($version->manifest_json ?? null) ? (string) $version->manifest_json : '',
+                $targetDir
+            );
             $status = 'success';
         } catch (\Throwable $e) {
             $message = $e->getMessage();
@@ -289,6 +295,11 @@ final class ContentPackPublisher
             'status' => $status,
             'message' => $message === '' ? null : $message,
             'created_by' => 'admin',
+            'manifest_hash' => $releaseEvidence['manifest_hash'] !== '' ? $releaseEvidence['manifest_hash'] : null,
+            'compiled_hash' => $releaseEvidence['compiled_hash'] !== '' ? $releaseEvidence['compiled_hash'] : null,
+            'content_hash' => $releaseEvidence['content_hash'] !== '' ? $releaseEvidence['content_hash'] : null,
+            'norms_version' => $releaseEvidence['norms_version'] !== '' ? $releaseEvidence['norms_version'] : null,
+            'git_sha' => $this->resolveGitSha(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -304,7 +315,14 @@ final class ContentPackPublisher
         ];
     }
 
-    public function rollback(string $region, string $locale, string $dirAlias, bool $probe, ?string $baseUrl = null): array
+    public function rollback(
+        string $region,
+        string $locale,
+        string $dirAlias,
+        bool $probe,
+        ?string $baseUrl = null,
+        ?string $toReleaseId = null
+    ): array
     {
         $releaseId = (string) Str::uuid();
         $status = 'failed';
@@ -325,30 +343,27 @@ final class ContentPackPublisher
         $toVersionId = null;
         $fromPackId = '';
         $toPackId = '';
+        $sourceReleaseId = '';
+        $releaseEvidence = $this->emptyReleaseEvidence();
+        $targetDir = '';
 
         $tmpDir = '';
 
         try {
-            $last = DB::table('content_pack_releases')
-                ->where('action', 'publish')
-                ->where('status', 'success')
-                ->where('region', $region)
-                ->where('locale', $locale)
-                ->where('dir_alias', $dirAlias)
-                ->orderByDesc('created_at')
-                ->first();
-
-            if (! $last) {
-                throw new RuntimeException('NO_PUBLISH_TO_ROLLBACK');
+            $selected = $this->selectRollbackSourceRelease($region, $locale, $dirAlias, $toReleaseId);
+            if (!($selected['ok'] ?? false)) {
+                throw new RuntimeException((string) ($selected['error'] ?? 'NO_PUBLISH_TO_ROLLBACK'));
             }
+
+            $last = $selected['release'] ?? null;
+            $backupPath = (string) ($selected['backup_path'] ?? '');
+            if (!is_object($last) || $backupPath === '') {
+                throw new RuntimeException('BACKUP_NOT_FOUND');
+            }
+            $sourceReleaseId = (string) ($last->id ?? '');
 
             $fromVersionId = $last->to_version_id ?? null;
             $fromPackId = (string) ($last->to_pack_id ?? '');
-
-            $backupPath = $this->backupsRoot((string) $last->id).DIRECTORY_SEPARATOR.'previous_pack';
-            if (! File::isDirectory($backupPath)) {
-                throw new RuntimeException('BACKUP_NOT_FOUND');
-            }
 
             $packsRoot = $this->packsRoot();
             $targetDir = $this->targetPackDir($packsRoot, $region, $locale, $dirAlias);
@@ -383,7 +398,28 @@ final class ContentPackPublisher
 
             $toVersionId = $rolledBack['version_id'] !== '' ? $rolledBack['version_id'] : ($last->from_version_id ?? null);
             $toPackId = $rolledBack['pack_id'];
+            if ($toPackId === '') {
+                $toPackId = (string) ($last->from_pack_id ?? '');
+                if ($toPackId === '') {
+                    $toPackId = (string) ($last->to_pack_id ?? '');
+                }
+                $rolledBack['pack_id'] = $toPackId;
+            }
 
+            $manifestJson = '';
+            if (is_string($last->from_version_id ?? null) && trim((string) $last->from_version_id) !== '') {
+                $versionRow = DB::table('content_pack_versions')->where('id', (string) $last->from_version_id)->first();
+                if (is_object($versionRow)) {
+                    $manifestJson = is_string($versionRow->manifest_json ?? null) ? (string) $versionRow->manifest_json : '';
+                }
+            }
+            if ($manifestJson === '' && is_string($last->to_version_id ?? null) && trim((string) $last->to_version_id) !== '') {
+                $versionRow = DB::table('content_pack_versions')->where('id', (string) $last->to_version_id)->first();
+                if (is_object($versionRow)) {
+                    $manifestJson = is_string($versionRow->manifest_json ?? null) ? (string) $versionRow->manifest_json : '';
+                }
+            }
+            $releaseEvidence = $this->resolveReleaseEvidence($manifestJson, $targetDir);
             $status = 'success';
         } catch (\Throwable $e) {
             $message = $e->getMessage();
@@ -419,6 +455,11 @@ final class ContentPackPublisher
             'to_pack_id' => $toPackId,
             'status' => $status,
             'message' => $message === '' ? null : $message,
+            'manifest_hash' => $releaseEvidence['manifest_hash'] !== '' ? $releaseEvidence['manifest_hash'] : null,
+            'compiled_hash' => $releaseEvidence['compiled_hash'] !== '' ? $releaseEvidence['compiled_hash'] : null,
+            'content_hash' => $releaseEvidence['content_hash'] !== '' ? $releaseEvidence['content_hash'] : null,
+            'norms_version' => $releaseEvidence['norms_version'] !== '' ? $releaseEvidence['norms_version'] : null,
+            'git_sha' => $this->resolveGitSha(),
             'created_by' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -428,10 +469,243 @@ final class ContentPackPublisher
             'ok' => true,
             'status' => $status,
             'release_id' => $releaseId,
+            'source_release_id' => $sourceReleaseId,
             'rolled_back_to' => $rolledBack,
             'probes' => $probes,
             'message' => $message,
         ];
+    }
+
+    /**
+     * @return array{manifest_hash:string,compiled_hash:string,content_hash:string,norms_version:string}
+     */
+    private function emptyReleaseEvidence(): array
+    {
+        return [
+            'manifest_hash' => '',
+            'compiled_hash' => '',
+            'content_hash' => '',
+            'norms_version' => '',
+        ];
+    }
+
+    /**
+     * @return array{ok:bool,release?:object,backup_path?:string,error?:string}
+     */
+    private function selectRollbackSourceRelease(
+        string $region,
+        string $locale,
+        string $dirAlias,
+        ?string $toReleaseId
+    ): array {
+        $toReleaseId = trim((string) $toReleaseId);
+        if ($toReleaseId !== '') {
+            $candidate = DB::table('content_pack_releases')
+                ->where('id', $toReleaseId)
+                ->where('action', 'publish')
+                ->where('status', 'success')
+                ->where('region', $region)
+                ->where('locale', $locale)
+                ->where('dir_alias', $dirAlias)
+                ->first();
+
+            if (!$candidate) {
+                return [
+                    'ok' => false,
+                    'error' => 'TARGET_RELEASE_NOT_FOUND',
+                ];
+            }
+
+            $backupPath = $this->backupsRoot((string) $candidate->id).DIRECTORY_SEPARATOR.'previous_pack';
+            if (!File::isDirectory($backupPath)) {
+                return [
+                    'ok' => false,
+                    'error' => 'TARGET_RELEASE_BACKUP_NOT_FOUND',
+                ];
+            }
+
+            return [
+                'ok' => true,
+                'release' => $candidate,
+                'backup_path' => $backupPath,
+            ];
+        }
+
+        $publishRows = DB::table('content_pack_releases')
+            ->where('action', 'publish')
+            ->where('status', 'success')
+            ->where('region', $region)
+            ->where('locale', $locale)
+            ->where('dir_alias', $dirAlias)
+            ->orderByDesc('created_at')
+            ->orderByDesc('updated_at')
+            ->get();
+
+        if ($publishRows->isEmpty()) {
+            return [
+                'ok' => false,
+                'error' => 'NO_PUBLISH_TO_ROLLBACK',
+            ];
+        }
+
+        foreach ($publishRows as $candidate) {
+            $backupPath = $this->backupsRoot((string) $candidate->id).DIRECTORY_SEPARATOR.'previous_pack';
+            if (!File::isDirectory($backupPath)) {
+                continue;
+            }
+
+            return [
+                'ok' => true,
+                'release' => $candidate,
+                'backup_path' => $backupPath,
+            ];
+        }
+
+        return [
+            'ok' => false,
+            'error' => 'BACKUP_NOT_FOUND',
+        ];
+    }
+
+    /**
+     * @return array{manifest_hash:string,compiled_hash:string,content_hash:string,norms_version:string}
+     */
+    private function resolveReleaseEvidence(string $manifestJson, string $targetDir): array
+    {
+        $evidence = $this->emptyReleaseEvidence();
+
+        $manifestJson = trim($manifestJson);
+        if ($manifestJson !== '') {
+            $evidence['manifest_hash'] = hash('sha256', $manifestJson);
+            $manifestDecoded = json_decode($manifestJson, true);
+            if (is_array($manifestDecoded)) {
+                $evidence['compiled_hash'] = trim((string) ($manifestDecoded['compiled_hash'] ?? ''));
+                $evidence['content_hash'] = trim((string) ($manifestDecoded['content_hash'] ?? ''));
+                $evidence['norms_version'] = trim((string) ($manifestDecoded['norms_version'] ?? ''));
+            }
+        }
+
+        if ($targetDir !== '' && File::isDirectory($targetDir)) {
+            $manifestPath = $targetDir.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'manifest.json';
+            if (File::exists($manifestPath)) {
+                $compiledManifestJson = (string) File::get($manifestPath);
+                $compiledManifestDecoded = json_decode($compiledManifestJson, true);
+                if (is_array($compiledManifestDecoded)) {
+                    if ($evidence['manifest_hash'] === '') {
+                        $evidence['manifest_hash'] = hash('sha256', $compiledManifestJson);
+                    }
+                    if ($evidence['compiled_hash'] === '') {
+                        $evidence['compiled_hash'] = trim((string) ($compiledManifestDecoded['compiled_hash'] ?? ''));
+                        if ($evidence['compiled_hash'] === '') {
+                            $hashes = is_array($compiledManifestDecoded['hashes'] ?? null) ? $compiledManifestDecoded['hashes'] : [];
+                            $evidence['compiled_hash'] = $this->hashMap($hashes);
+                        }
+                    }
+                    if ($evidence['content_hash'] === '') {
+                        $evidence['content_hash'] = trim((string) ($compiledManifestDecoded['content_hash'] ?? ''));
+                    }
+                    if ($evidence['norms_version'] === '') {
+                        $evidence['norms_version'] = trim((string) ($compiledManifestDecoded['norms_version'] ?? ''));
+                    }
+                }
+            }
+
+            if ($evidence['content_hash'] === '') {
+                $rawDir = $targetDir.DIRECTORY_SEPARATOR.'raw';
+                $evidence['content_hash'] = $this->hashDirectory($rawDir);
+            }
+            if ($evidence['norms_version'] === '') {
+                $normsPath = $targetDir.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'norms.compiled.json';
+                if (File::exists($normsPath)) {
+                    $normsDecoded = json_decode((string) File::get($normsPath), true);
+                    if (is_array($normsDecoded)) {
+                        $groups = is_array($normsDecoded['groups'] ?? null) ? $normsDecoded['groups'] : [];
+                        $evidence['norms_version'] = $this->resolveNormsVersionFromGroups($groups);
+                    }
+                }
+            }
+        }
+
+        return $evidence;
+    }
+
+    /**
+     * @param array<string,mixed> $hashes
+     */
+    private function hashMap(array $hashes): string
+    {
+        if ($hashes === []) {
+            return '';
+        }
+        ksort($hashes);
+        $rows = [];
+        foreach ($hashes as $name => $hash) {
+            $rows[] = (string) $name.':'.(string) $hash;
+        }
+
+        return hash('sha256', implode("\n", $rows));
+    }
+
+    private function hashDirectory(string $dir): string
+    {
+        if (!File::isDirectory($dir)) {
+            return '';
+        }
+
+        $files = File::allFiles($dir);
+        usort($files, static fn ($a, $b): int => strcmp($a->getPathname(), $b->getPathname()));
+        $prefix = rtrim($dir, '/\\').DIRECTORY_SEPARATOR;
+        $rows = [];
+        foreach ($files as $file) {
+            $path = $file->getPathname();
+            $relative = str_starts_with($path, $prefix) ? substr($path, strlen($prefix)) : $file->getFilename();
+            $rows[] = $relative.':'.hash_file('sha256', $path);
+        }
+
+        return hash('sha256', implode("\n", $rows));
+    }
+
+    /**
+     * @param array<string,mixed> $groups
+     */
+    private function resolveNormsVersionFromGroups(array $groups): string
+    {
+        $preferred = '';
+        $fallback = '';
+        foreach ($groups as $group) {
+            if (!is_array($group)) {
+                continue;
+            }
+            $normsVersion = trim((string) ($group['norms_version'] ?? ''));
+            if ($normsVersion === '') {
+                continue;
+            }
+            $status = strtoupper(trim((string) ($group['status'] ?? '')));
+            if ($status === 'CALIBRATED') {
+                return $normsVersion;
+            }
+            if ($preferred === '' && $status === 'PROVISIONAL') {
+                $preferred = $normsVersion;
+            }
+            if ($fallback === '') {
+                $fallback = $normsVersion;
+            }
+        }
+
+        return $preferred !== '' ? $preferred : $fallback;
+    }
+
+    private function resolveGitSha(): ?string
+    {
+        $sha = trim((string) env('GITHUB_SHA', ''));
+        if ($sha === '') {
+            $sha = trim((string) env('CI_COMMIT_SHA', ''));
+        }
+        if ($sha === '') {
+            return null;
+        }
+
+        return substr($sha, 0, 64);
     }
 
     private function packsRoot(): string

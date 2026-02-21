@@ -11,6 +11,7 @@ use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\SkuCatalog;
+use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Contracts\Cache\LockTimeoutException;
@@ -34,6 +35,7 @@ class PaymentWebhookHandlerCore
         private EntitlementManager $entitlements,
         private ReportSnapshotStore $reportSnapshots,
         private EventRecorder $events,
+        private ?BigFiveTelemetry $bigFiveTelemetry = null,
     ) {
         $stripe = new StripeGateway();
         $this->gateways[$stripe->provider()] = $stripe;
@@ -372,6 +374,16 @@ class PaymentWebhookHandlerCore
                     $quantity = (int) ($order->quantity ?? 1);
                     $benefitCode = strtoupper((string) ($skuRow->benefit_code ?? ''));
                     $kind = (string) ($skuRow->kind ?? '');
+                    if ($benefitCode === '') {
+                        $this->markEventError(
+                            $provider,
+                            $providerEventId,
+                            'failed',
+                            'BENEFIT_CODE_NOT_FOUND',
+                            'benefit code missing on sku.'
+                        );
+                        return $this->badRequest('BENEFIT_CODE_NOT_FOUND', 'benefit code missing on sku.');
+                    }
 
                     $attemptMeta = $this->resolveAttemptMeta((int) $order->org_id, (string) ($order->target_attempt_id ?? ''));
                     $eventBaseMeta = $this->buildEventMeta([
@@ -565,7 +577,17 @@ class PaymentWebhookHandlerCore
                 )->afterCommit();
             }
 
-            return $this->normalizeResultStatus($result);
+            $normalizedResult = $this->normalizeResultStatus($result);
+            $this->emitBigFiveWebhookTelemetry(
+                $normalizedResult,
+                is_array($postCommitCtx) ? $postCommitCtx : null,
+                $orgId,
+                $provider,
+                $providerEventId,
+                $orderNo
+            );
+
+            return $normalizedResult;
         } catch (LockTimeoutException $e) {
             return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
         }
@@ -793,6 +815,99 @@ class PaymentWebhookHandlerCore
         }
 
         return $outcome;
+    }
+
+    /**
+     * @param array<string,mixed> $result
+     * @param array<string,mixed>|null $postCommitCtx
+     */
+    private function emitBigFiveWebhookTelemetry(
+        array $result,
+        ?array $postCommitCtx,
+        int $orgId,
+        string $provider,
+        string $providerEventId,
+        string $orderNo
+    ): void {
+        if (!$this->bigFiveTelemetry instanceof BigFiveTelemetry) {
+            return;
+        }
+
+        $meta = is_array($postCommitCtx['event_meta'] ?? null) ? $postCommitCtx['event_meta'] : [];
+        $snapshotMeta = is_array($postCommitCtx['snapshot_meta'] ?? null) ? $postCommitCtx['snapshot_meta'] : [];
+
+        $scaleCode = strtoupper(trim((string) ($snapshotMeta['scale_code'] ?? ($meta['scale_code'] ?? ''))));
+        $attemptId = trim((string) ($postCommitCtx['attempt_id'] ?? ($meta['attempt_id'] ?? '')));
+        $orgId = (int) ($postCommitCtx['org_id'] ?? $orgId);
+        $skuCode = strtoupper(trim((string) ($meta['sku'] ?? '')));
+        $anonId = null;
+        $locale = '';
+        $region = '';
+        $orderRow = null;
+
+        if ($orderNo !== '') {
+            $orderRow = DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->first();
+            if ($orderRow) {
+                if ($attemptId === '') {
+                    $attemptId = trim((string) ($orderRow->target_attempt_id ?? ''));
+                    if ($attemptId === '') {
+                        $attemptId = trim((string) ($orderRow->attempt_id ?? ''));
+                    }
+                }
+                if ($skuCode === '') {
+                    $skuCode = strtoupper(trim((string) (
+                        $orderRow->effective_sku
+                        ?? $orderRow->sku
+                        ?? $orderRow->item_sku
+                        ?? ''
+                    )));
+                }
+            }
+        }
+
+        if ($attemptId !== '') {
+            $attemptRow = DB::table('attempts')->where('id', $attemptId)->first();
+            if ($attemptRow) {
+                $anonId = $attemptRow->anon_id ? (string) $attemptRow->anon_id : null;
+                $locale = (string) ($attemptRow->locale ?? '');
+                $region = (string) ($attemptRow->region ?? '');
+                if ($orgId <= 0) {
+                    $orgId = (int) ($attemptRow->org_id ?? 0);
+                }
+                if ($scaleCode === '') {
+                    $scaleCode = strtoupper(trim((string) ($attemptRow->scale_code ?? '')));
+                }
+            }
+        }
+
+        if ($scaleCode !== 'BIG5_OCEAN') {
+            return;
+        }
+
+        $status = 'failed';
+        if (($result['ok'] ?? false) === true) {
+            $status = ($result['duplicate'] ?? false) === true ? 'duplicate' : 'processed';
+        } elseif (is_string($result['error_code'] ?? null) && trim((string) $result['error_code']) !== '') {
+            $status = strtolower(trim((string) $result['error_code']));
+        }
+
+        $this->bigFiveTelemetry->recordPaymentWebhookProcessed(
+            $orgId,
+            $this->numericUserId(is_string($postCommitCtx['event_user_id'] ?? null) ? $postCommitCtx['event_user_id'] : null),
+            $anonId,
+            $attemptId !== '' ? $attemptId : null,
+            $locale,
+            $region,
+            $status,
+            $skuCode,
+            $skuCode,
+            $provider,
+            $providerEventId,
+            $orderNo
+        );
     }
 
     private function numericUserId(?string $userId): ?int

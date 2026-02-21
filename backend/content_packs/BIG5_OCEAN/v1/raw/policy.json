@@ -17,6 +17,12 @@
     "extreme_low": [0, 10],
     "extreme_high": [90, 100]
   },
+  "copy_bucket_fallback": {
+    "facets_deepdive": {
+      "extreme_low": "low",
+      "extreme_high": "high"
+    }
+  },
   "norm_fallback": {
     "group_priority": [
       "{locale}_{gender}_{age_band}",

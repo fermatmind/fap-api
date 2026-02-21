@@ -7,6 +7,7 @@ namespace App\Services\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Content\BigFivePackLoader;
+use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Template\TemplateContext;
 use App\Services\Template\TemplateEngine;
 
@@ -15,6 +16,7 @@ final class BigFiveReportComposer
     public function __construct(
         private readonly BigFivePackLoader $packLoader,
         private readonly TemplateEngine $templateEngine,
+        private readonly BigFiveTelemetry $bigFiveTelemetry,
     ) {
     }
 
@@ -77,6 +79,17 @@ final class BigFiveReportComposer
 
         $sections = [];
         $overallBucket = $this->resolveOverallBucket($domainBuckets);
+
+        $disclaimerTop = $this->selectCopyRow($copyCompiled, 'disclaimer_top', 'global', 'disclaimer_top', 'all', $locale);
+        if (is_array($disclaimerTop)) {
+            $sections[] = $this->makeSection(
+                'disclaimer_top',
+                'Important Note',
+                [$this->renderBlock($disclaimerTop, $templateContext)],
+                'free',
+                ReportAccess::MODULE_BIG5_CORE
+            );
+        }
 
         $summaryBlock = $this->selectCopyRow($copyCompiled, 'summary', 'domain', 'overall', $overallBucket, $locale);
         if (is_array($summaryBlock)) {
@@ -193,6 +206,24 @@ final class BigFiveReportComposer
             );
         }
 
+        $locked = $variant === ReportAccess::VARIANT_FREE;
+        $this->bigFiveTelemetry->recordReportComposed(
+            (int) ($attempt->org_id ?? 0),
+            $this->numericUserId($attempt->user_id ?? null),
+            (string) ($attempt->anon_id ?? ''),
+            (string) ($attempt->id ?? ''),
+            $locale,
+            (string) ($attempt->region ?? ''),
+            (string) ($scoreResult['norms']['status'] ?? 'MISSING'),
+            (string) ($scoreResult['norms']['group_id'] ?? ''),
+            (string) ($scoreResult['quality']['level'] ?? 'D'),
+            $variant,
+            $locked,
+            count($sections),
+            (string) ($attempt->pack_id ?? BigFivePackLoader::PACK_ID),
+            (string) ($attempt->dir_version ?? BigFivePackLoader::PACK_VERSION)
+        );
+
         return [
             'ok' => true,
             'report' => [
@@ -210,6 +241,19 @@ final class BigFiveReportComposer
                 'generated_at' => now()->toISOString(),
             ],
         ];
+    }
+
+    private function numericUserId(mixed $userId): ?int
+    {
+        if (is_int($userId)) {
+            return $userId;
+        }
+        $raw = trim((string) $userId);
+        if ($raw === '' || !preg_match('/^\d+$/', $raw)) {
+            return null;
+        }
+
+        return (int) $raw;
     }
 
     /**
@@ -338,8 +382,16 @@ final class BigFiveReportComposer
             $bucket = 'mid';
         }
 
-        if ($section === 'disclaimer') {
-            return [$bucket];
+        if (in_array($section, ['disclaimer', 'disclaimer_top'], true)) {
+            return [$bucket, 'all'];
+        }
+
+        if ($bucket === 'extreme_low') {
+            return ['extreme_low', 'low', 'mid'];
+        }
+
+        if ($bucket === 'extreme_high') {
+            return ['extreme_high', 'high', 'mid'];
         }
 
         if ($bucket === 'mid' && in_array($section, ['top_facets', 'facets_deepdive'], true)) {

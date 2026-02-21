@@ -109,9 +109,12 @@ final class ScaleRegistrySeeder extends Seeder
             'capabilities_json' => [
                 'assets' => false,
                 'questions' => true,
+                'enabled_in_prod' => true,
+                'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                'rollout_ratio' => 1.0,
             ],
             'view_policy_json' => [
-                'free_sections' => ['summary', 'domains_overview', 'disclaimer'],
+                'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
                 'blur_others' => false,
                 'teaser_percent' => 0.0,
                 'upgrade_sku' => 'SKU_BIG5_FULL_REPORT_299',
