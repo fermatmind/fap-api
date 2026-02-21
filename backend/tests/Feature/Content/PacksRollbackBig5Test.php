@@ -79,6 +79,19 @@ final class PacksRollbackBig5Test extends TestCase
 
         $this->assertTrue(File::isDirectory($target.'/compiled'));
         $this->assertTrue(File::exists($target.'/compiled/manifest.json'));
+
+        $audit = DB::table('audit_logs')
+            ->where('action', 'big5_pack_rollback')
+            ->where('target_id', (string) $release->id)
+            ->orderByDesc('id')
+            ->first();
+        $this->assertNotNull($audit);
+        $this->assertSame('success', (string) ($audit->result ?? ''));
+        $this->assertSame('content_pack_release', (string) ($audit->target_type ?? ''));
+        $auditMeta = json_decode((string) ($audit->meta_json ?? '{}'), true);
+        $this->assertIsArray($auditMeta);
+        $this->assertSame(self::DIR_ALIAS, (string) ($auditMeta['dir_alias'] ?? ''));
+        $this->assertSame($targetReleaseId, (string) ($auditMeta['source_release_id'] ?? ''));
     }
 
     public function test_packs_rollback_fails_with_unknown_to_release_id(): void
@@ -115,5 +128,14 @@ final class PacksRollbackBig5Test extends TestCase
         $this->assertNotNull($release);
         $this->assertSame('failed', (string) $release->status);
         $this->assertSame('TARGET_RELEASE_NOT_FOUND', (string) ($release->message ?? ''));
+
+        $audit = DB::table('audit_logs')
+            ->where('action', 'big5_pack_rollback')
+            ->where('target_id', (string) $release->id)
+            ->orderByDesc('id')
+            ->first();
+        $this->assertNotNull($audit);
+        $this->assertSame('failed', (string) ($audit->result ?? ''));
+        $this->assertSame('TARGET_RELEASE_NOT_FOUND', (string) ($audit->reason ?? ''));
     }
 }

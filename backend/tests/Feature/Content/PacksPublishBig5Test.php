@@ -57,6 +57,19 @@ final class PacksPublishBig5Test extends TestCase
         $this->assertSame('BIG5_OCEAN', (string) $version->pack_id);
         $this->assertSame('v1', (string) $version->content_package_version);
 
+        $audit = DB::table('audit_logs')
+            ->where('action', 'big5_pack_publish')
+            ->where('target_id', (string) $release->id)
+            ->orderByDesc('id')
+            ->first();
+        $this->assertNotNull($audit);
+        $this->assertSame('success', (string) ($audit->result ?? ''));
+        $this->assertSame('content_pack_release', (string) ($audit->target_type ?? ''));
+        $auditMeta = json_decode((string) ($audit->meta_json ?? '{}'), true);
+        $this->assertIsArray($auditMeta);
+        $this->assertSame(self::DIR_ALIAS, (string) ($auditMeta['dir_alias'] ?? ''));
+        $this->assertSame('BIG5_OCEAN', (string) ($auditMeta['scale_code'] ?? ''));
+
         $this->assertTrue(File::isDirectory($target.'/compiled'));
         $this->assertTrue(File::exists($target.'/compiled/manifest.json'));
     }
