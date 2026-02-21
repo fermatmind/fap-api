@@ -8,6 +8,7 @@ use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\AssessmentRunner;
+use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
@@ -25,6 +26,7 @@ class AttemptSubmitService
         private AssessmentRunner $assessmentRunner,
         private AttemptSubmitSideEffects $sideEffects,
         private ReportGatekeeper $reportGatekeeper,
+        private BigFiveTelemetry $bigFiveTelemetry,
     ) {}
 
     public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
@@ -81,6 +83,9 @@ class AttemptSubmitService
             'org_id' => $orgId,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
+            'attempt_id' => $attemptId,
+            'anon_id' => $actorAnonId,
+            'user_id' => $actorUserId,
         ];
 
         $scored = $this->assessmentRunner->run(
@@ -340,6 +345,28 @@ class AttemptSubmitService
 
         $this->sideEffects->appendReportPayload($ctx, $attemptId, $actorUserId, $actorAnonId, $responsePayload);
 
+        if (($responsePayload['ok'] ?? false) === true && $scaleCode === 'BIG5_OCEAN') {
+            $reportPayload = is_array($responsePayload['report'] ?? null) ? $responsePayload['report'] : [];
+            $scorePayload = is_array($responsePayload['result'] ?? null) ? $responsePayload['result'] : [];
+            $normsPayload = is_array($scorePayload['norms'] ?? null) ? $scorePayload['norms'] : [];
+            $qualityPayload = is_array($scorePayload['quality'] ?? null) ? $scorePayload['quality'] : [];
+
+            $this->bigFiveTelemetry->recordAttemptSubmitted(
+                $orgId,
+                $this->numericUserId($actorUserId),
+                $actorAnonId,
+                $attemptId,
+                $locale,
+                $region,
+                (string) ($normsPayload['status'] ?? 'MISSING'),
+                (string) ($normsPayload['group_id'] ?? ''),
+                (string) ($qualityPayload['level'] ?? 'D'),
+                (string) ($reportPayload['variant'] ?? 'free'),
+                (bool) ($reportPayload['locked'] ?? true),
+                (bool) ($responsePayload['idempotent'] ?? false)
+            );
+        }
+
         return $responsePayload;
     }
 
@@ -510,5 +537,15 @@ class AttemptSubmitService
         return Result::where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
             ->first();
+    }
+
+    private function numericUserId(?string $userId): ?int
+    {
+        $userId = trim((string) $userId);
+        if ($userId === '' || !preg_match('/^\d+$/', $userId)) {
+            return null;
+        }
+
+        return (int) $userId;
     }
 }

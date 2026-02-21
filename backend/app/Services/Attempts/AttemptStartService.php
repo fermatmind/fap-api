@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ContentPacksIndex;
+use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
@@ -23,6 +24,7 @@ class AttemptStartService
         private BigFivePackLoader $bigFivePackLoader,
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
+        private BigFiveTelemetry $bigFiveTelemetry,
     ) {}
 
     public function start(OrgContext $ctx, StartAttemptDTO $dto): array
@@ -107,6 +109,19 @@ class AttemptStartService
             'dir_version' => $dirVersion,
             'channel' => $channel !== '' ? $channel : null,
         ]);
+
+        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $this->bigFiveTelemetry->recordAttemptStarted(
+                $orgId,
+                $ctx->userId(),
+                $anonId,
+                (string) $attempt->id,
+                $locale,
+                $region,
+                $packId,
+                $dirVersion
+            );
+        }
 
         return [
             'ok' => true,
@@ -225,4 +240,5 @@ class AttemptStartService
 
         return (string) ($item['content_package_version'] ?? '');
     }
+
 }

@@ -7,6 +7,7 @@ namespace App\Services\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Content\BigFivePackLoader;
+use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Template\TemplateContext;
 use App\Services\Template\TemplateEngine;
 
@@ -15,6 +16,7 @@ final class BigFiveReportComposer
     public function __construct(
         private readonly BigFivePackLoader $packLoader,
         private readonly TemplateEngine $templateEngine,
+        private readonly BigFiveTelemetry $bigFiveTelemetry,
     ) {
     }
 
@@ -204,6 +206,24 @@ final class BigFiveReportComposer
             );
         }
 
+        $locked = $variant === ReportAccess::VARIANT_FREE;
+        $this->bigFiveTelemetry->recordReportComposed(
+            (int) ($attempt->org_id ?? 0),
+            $this->numericUserId($attempt->user_id ?? null),
+            (string) ($attempt->anon_id ?? ''),
+            (string) ($attempt->id ?? ''),
+            $locale,
+            (string) ($attempt->region ?? ''),
+            (string) ($scoreResult['norms']['status'] ?? 'MISSING'),
+            (string) ($scoreResult['norms']['group_id'] ?? ''),
+            (string) ($scoreResult['quality']['level'] ?? 'D'),
+            $variant,
+            $locked,
+            count($sections),
+            (string) ($attempt->pack_id ?? BigFivePackLoader::PACK_ID),
+            (string) ($attempt->dir_version ?? BigFivePackLoader::PACK_VERSION)
+        );
+
         return [
             'ok' => true,
             'report' => [
@@ -221,6 +241,19 @@ final class BigFiveReportComposer
                 'generated_at' => now()->toISOString(),
             ],
         ];
+    }
+
+    private function numericUserId(mixed $userId): ?int
+    {
+        if (is_int($userId)) {
+            return $userId;
+        }
+        $raw = trim((string) $userId);
+        if ($raw === '' || !preg_match('/^\d+$/', $raw)) {
+            return null;
+        }
+
+        return (int) $raw;
     }
 
     /**

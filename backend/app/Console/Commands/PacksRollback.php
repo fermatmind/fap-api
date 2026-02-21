@@ -14,6 +14,7 @@ final class PacksRollback extends Command
         {--region=CN_MAINLAND : Region}
         {--locale=zh-CN : Locale}
         {--dir_alias=v1 : Target dir alias}
+        {--to_release_id= : Rollback target publish release id}
         {--probe=0 : Run post-rollback probe}
         {--base_url= : Probe base url}';
 
@@ -30,6 +31,7 @@ final class PacksRollback extends Command
         $region = trim((string) $this->option('region'));
         $locale = trim((string) $this->option('locale'));
         $dirAlias = trim((string) $this->option('dir_alias'));
+        $toReleaseId = trim((string) $this->option('to_release_id'));
         $baseUrl = trim((string) $this->option('base_url'));
         $probe = $this->isTruthy($this->option('probe'));
 
@@ -43,12 +45,14 @@ final class PacksRollback extends Command
             $locale,
             $dirAlias,
             $probe,
-            $baseUrl === '' ? null : $baseUrl
+            $baseUrl === '' ? null : $baseUrl,
+            $toReleaseId === '' ? null : $toReleaseId
         );
 
         $status = (string) ($result['status'] ?? 'failed');
         $releaseId = (string) ($result['release_id'] ?? '');
         $message = (string) ($result['message'] ?? '');
+        $sourceReleaseId = (string) ($result['source_release_id'] ?? '');
         $rolledBackTo = is_array($result['rolled_back_to'] ?? null) ? $result['rolled_back_to'] : [];
         $packId = (string) ($rolledBackTo['pack_id'] ?? '');
         $versionId = (string) ($rolledBackTo['version_id'] ?? '');
@@ -60,6 +64,9 @@ final class PacksRollback extends Command
         }
         if ($versionId !== '') {
             $this->line("rolled_back_version_id={$versionId}");
+        }
+        if ($sourceReleaseId !== '') {
+            $this->line("source_release_id={$sourceReleaseId}");
         }
         if ($message !== '') {
             $this->line("message={$message}");

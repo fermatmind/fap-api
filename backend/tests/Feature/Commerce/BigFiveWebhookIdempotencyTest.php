@@ -150,6 +150,16 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_big5_dup_1')
             ->value('status'));
+
+        $telemetry = DB::table('events')
+            ->where('event_code', 'big5_payment_webhook_processed')
+            ->orderByDesc('created_at')
+            ->first();
+        $this->assertNotNull($telemetry);
+        $meta = $this->decodeMeta($telemetry->meta_json ?? null);
+        $this->assertSame('BIG5_OCEAN', (string) ($meta['scale_code'] ?? ''));
+        $this->assertSame('processed', (string) ($meta['webhook_status'] ?? ''));
+        $this->assertSame('SKU_BIG5_FULL_REPORT_299', (string) ($meta['sku_code'] ?? ''));
     }
 
     public function test_big5_wrong_sku_fails_without_unlock(): void
@@ -187,5 +197,30 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
             ->where('order_no', $orderNo)
             ->where('attempt_id', $attemptId)
             ->count());
+
+        $telemetry = DB::table('events')
+            ->where('event_code', 'big5_payment_webhook_processed')
+            ->orderByDesc('created_at')
+            ->first();
+        $this->assertNotNull($telemetry);
+        $meta = $this->decodeMeta($telemetry->meta_json ?? null);
+        $this->assertSame('BIG5_OCEAN', (string) ($meta['scale_code'] ?? ''));
+        $this->assertSame('sku_not_found', (string) ($meta['webhook_status'] ?? ''));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeMeta(mixed $raw): array
+    {
+        if (is_array($raw)) {
+            return $raw;
+        }
+        if (!is_string($raw) || trim($raw) === '') {
+            return [];
+        }
+
+        $decoded = json_decode($raw, true);
+        return is_array($decoded) ? $decoded : [];
     }
 }

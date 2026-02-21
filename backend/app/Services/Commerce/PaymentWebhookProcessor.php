@@ -8,6 +8,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\Webhook\PaymentWebhookHandler;
+use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Support\Facades\DB;
 
@@ -28,8 +29,18 @@ class PaymentWebhookProcessor
         private EntitlementManager $entitlements,
         private ReportSnapshotStore $reportSnapshots,
         private EventRecorder $events,
+        private ?BigFiveTelemetry $bigFiveTelemetry = null,
         ?PaymentWebhookHandler $handler = null,
     ) {
+        if (!($this->bigFiveTelemetry instanceof BigFiveTelemetry)) {
+            try {
+                $resolved = app(BigFiveTelemetry::class);
+                $this->bigFiveTelemetry = $resolved instanceof BigFiveTelemetry ? $resolved : null;
+            } catch (\Throwable) {
+                $this->bigFiveTelemetry = null;
+            }
+        }
+
         $this->handler = $handler ?? new PaymentWebhookHandler(
             $this->orders,
             $this->skus,
@@ -37,6 +48,7 @@ class PaymentWebhookProcessor
             $this->entitlements,
             $this->reportSnapshots,
             $this->events,
+            $this->bigFiveTelemetry,
         );
     }
 

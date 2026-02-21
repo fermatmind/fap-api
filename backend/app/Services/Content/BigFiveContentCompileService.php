@@ -341,11 +341,21 @@ final class BigFiveContentCompileService
             $hashes[$name] = hash('sha256', $json);
         }
 
+        $rawDir = $this->loader->rawDir($version);
+        $contentHash = $this->hashDirectory($rawDir);
+        $compiledHash = $this->hashMap($hashes);
+        $normsVersion = $this->resolveManifestNormsVersion(is_array($norms['groups'] ?? null) ? $norms['groups'] : []);
+
         $manifest = [
             'schema' => 'big5.compiled.manifest.v1',
             'pack_id' => BigFivePackLoader::PACK_ID,
             'pack_version' => $version,
+            'dir_version' => $version,
             'generated_at' => now()->toISOString(),
+            'compiled_at' => now()->toISOString(),
+            'content_hash' => $contentHash,
+            'compiled_hash' => $compiledHash,
+            'norms_version' => $normsVersion,
             'hashes' => $hashes,
             'compiled_files' => array_keys($files),
         ];
@@ -370,5 +380,69 @@ final class BigFiveContentCompileService
         $version = trim((string) $version);
 
         return $version !== '' ? $version : BigFivePackLoader::PACK_VERSION;
+    }
+
+    /**
+     * @param array<string,array<string,mixed>> $groups
+     */
+    private function resolveManifestNormsVersion(array $groups): string
+    {
+        $preferred = '';
+        $fallback = '';
+
+        foreach ($groups as $group) {
+            if (!is_array($group)) {
+                continue;
+            }
+            $version = trim((string) ($group['norms_version'] ?? ''));
+            if ($version === '') {
+                continue;
+            }
+
+            $status = strtoupper(trim((string) ($group['status'] ?? '')));
+            if ($status === 'CALIBRATED') {
+                return $version;
+            }
+
+            if ($preferred === '' && $status === 'PROVISIONAL') {
+                $preferred = $version;
+            }
+            if ($fallback === '') {
+                $fallback = $version;
+            }
+        }
+
+        return $preferred !== '' ? $preferred : $fallback;
+    }
+
+    private function hashMap(array $hashes): string
+    {
+        ksort($hashes);
+        $rows = [];
+        foreach ($hashes as $name => $hash) {
+            $rows[] = (string) $name . ':' . (string) $hash;
+        }
+
+        return hash('sha256', implode("\n", $rows));
+    }
+
+    private function hashDirectory(string $dir): string
+    {
+        if (!is_dir($dir)) {
+            return '';
+        }
+
+        $files = File::allFiles($dir);
+        usort($files, static fn (\SplFileInfo $a, \SplFileInfo $b): int => strcmp($a->getPathname(), $b->getPathname()));
+
+        $rows = [];
+        $prefix = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR;
+        foreach ($files as $file) {
+            $path = $file->getPathname();
+            $relative = str_starts_with($path, $prefix) ? substr($path, strlen($prefix)) : $file->getFilename();
+            $rows[] = $relative . ':' . hash_file('sha256', $path);
+        }
+
+        return hash('sha256', implode("\n", $rows));
     }
 }

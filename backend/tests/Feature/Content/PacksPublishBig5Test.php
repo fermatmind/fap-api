@@ -47,6 +47,10 @@ final class PacksPublishBig5Test extends TestCase
         $this->assertSame('success', (string) $release->status);
         $this->assertSame('BIG5_OCEAN', (string) $release->to_pack_id);
         $this->assertNotEmpty((string) $release->to_version_id);
+        $this->assertNotEmpty((string) ($release->manifest_hash ?? ''));
+        $this->assertNotEmpty((string) ($release->compiled_hash ?? ''));
+        $this->assertNotEmpty((string) ($release->content_hash ?? ''));
+        $this->assertNotEmpty((string) ($release->norms_version ?? ''));
 
         $version = DB::table('content_pack_versions')->where('id', (string) $release->to_version_id)->first();
         $this->assertNotNull($version);
