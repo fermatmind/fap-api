@@ -113,6 +113,57 @@ final class BigFiveOpsController extends Controller
         ]);
     }
 
+    public function audits(Request $request, int $org_id): JsonResponse
+    {
+        $limit = (int) $request->query('limit', 20);
+        if ($limit < 1) {
+            $limit = 1;
+        }
+        if ($limit > 100) {
+            $limit = 100;
+        }
+
+        $action = trim((string) $request->query('action', ''));
+        if (! in_array($action, ['big5_pack_publish', 'big5_pack_rollback'], true)) {
+            $action = '';
+        }
+        $result = strtolower(trim((string) $request->query('result', '')));
+        if (! in_array($result, ['success', 'failed'], true)) {
+            $result = '';
+        }
+        $releaseId = trim((string) $request->query('release_id', ''));
+
+        $query = DB::table('audit_logs')
+            ->whereIn('action', ['big5_pack_publish', 'big5_pack_rollback']);
+
+        if ($action !== '') {
+            $query->where('action', $action);
+        }
+        if ($result !== '') {
+            $query->where('result', $result);
+        }
+        if ($releaseId !== '') {
+            $query->where('target_id', $releaseId);
+        }
+
+        $rows = $query
+            ->orderByDesc('id')
+            ->limit($limit)
+            ->get();
+
+        $items = [];
+        foreach ($rows as $row) {
+            $items[] = $this->mapAuditRow($row);
+        }
+
+        return response()->json([
+            'ok' => true,
+            'org_id' => $org_id,
+            'count' => count($items),
+            'items' => $items,
+        ]);
+    }
+
     public function release(Request $request, int $org_id, string $release_id): JsonResponse
     {
         $release_id = trim($release_id);
@@ -149,17 +200,7 @@ final class BigFiveOpsController extends Controller
 
         $auditItems = [];
         foreach ($audits as $audit) {
-            $auditItems[] = [
-                'id' => (int) ($audit->id ?? 0),
-                'action' => (string) ($audit->action ?? ''),
-                'result' => (string) ($audit->result ?? ''),
-                'reason' => (string) ($audit->reason ?? ''),
-                'target_type' => (string) ($audit->target_type ?? ''),
-                'target_id' => (string) ($audit->target_id ?? ''),
-                'request_id' => (string) ($audit->request_id ?? ''),
-                'created_at' => (string) ($audit->created_at ?? ''),
-                'meta' => $this->decodeJson((string) ($audit->meta_json ?? '')),
-            ];
+            $auditItems[] = $this->mapAuditRow($audit);
         }
 
         return response()->json([
@@ -197,6 +238,24 @@ final class BigFiveOpsController extends Controller
                 'norms_version' => (string) ($row->norms_version ?? ''),
                 'git_sha' => (string) ($row->git_sha ?? ''),
             ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function mapAuditRow(object $row): array
+    {
+        return [
+            'id' => (int) ($row->id ?? 0),
+            'action' => (string) ($row->action ?? ''),
+            'result' => (string) ($row->result ?? ''),
+            'reason' => (string) ($row->reason ?? ''),
+            'target_type' => (string) ($row->target_type ?? ''),
+            'target_id' => (string) ($row->target_id ?? ''),
+            'request_id' => (string) ($row->request_id ?? ''),
+            'created_at' => (string) ($row->created_at ?? ''),
+            'meta' => $this->decodeJson((string) ($row->meta_json ?? '')),
         ];
     }
 
