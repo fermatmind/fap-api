@@ -14,12 +14,15 @@ final class BigFiveOpsReleaseFlowTest extends TestCase
     use RefreshDatabase;
 
     private const DIR_ALIAS = 'BIG5-OCEAN-OPS-FLOW-CI-TEST';
+    private const DIR_ALIAS_FAIL = 'BIG5-OCEAN-OPS-FLOW-FAIL-CI-TEST';
 
     protected function tearDown(): void
     {
-        $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/' . self::DIR_ALIAS);
-        if (File::isDirectory($target)) {
-            File::deleteDirectory($target);
+        foreach ([self::DIR_ALIAS, self::DIR_ALIAS_FAIL] as $alias) {
+            $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/' . $alias);
+            if (File::isDirectory($target)) {
+                File::deleteDirectory($target);
+            }
         }
 
         parent::tearDown();
@@ -102,5 +105,47 @@ final class BigFiveOpsReleaseFlowTest extends TestCase
         $this->assertSame($targetReleaseId, (string) ($rollbackMeta['source_release_id'] ?? ''));
         $this->assertSame(self::DIR_ALIAS, (string) ($rollbackMeta['dir_alias'] ?? ''));
     }
-}
 
+    public function test_ops_release_flow_records_failed_rollback_audit_for_unknown_target_release(): void
+    {
+        $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/' . self::DIR_ALIAS_FAIL);
+        if (File::isDirectory($target)) {
+            File::deleteDirectory($target);
+        }
+
+        $publishCommand = sprintf(
+            'packs:publish --scale=BIG5_OCEAN --pack=BIG5_OCEAN --pack-version=v1 --region=CN_MAINLAND --locale=zh-CN --dir_alias=%s --probe=0',
+            self::DIR_ALIAS_FAIL
+        );
+        $this->artisan($publishCommand)->assertExitCode(0);
+
+        $unknownReleaseId = (string) \Illuminate\Support\Str::uuid();
+        $this->artisan(sprintf(
+            'packs:rollback --scale=BIG5_OCEAN --region=CN_MAINLAND --locale=zh-CN --dir_alias=%s --to_release_id=%s --probe=0',
+            self::DIR_ALIAS_FAIL,
+            $unknownReleaseId
+        ))->assertExitCode(1);
+
+        $rollbackRelease = DB::table('content_pack_releases')
+            ->where('action', 'rollback')
+            ->where('dir_alias', self::DIR_ALIAS_FAIL)
+            ->orderByDesc('created_at')
+            ->first();
+        $this->assertNotNull($rollbackRelease);
+        $this->assertSame('failed', (string) ($rollbackRelease->status ?? ''));
+        $this->assertSame('TARGET_RELEASE_NOT_FOUND', (string) ($rollbackRelease->message ?? ''));
+
+        $rollbackAudit = DB::table('audit_logs')
+            ->where('action', 'big5_pack_rollback')
+            ->where('target_id', (string) $rollbackRelease->id)
+            ->orderByDesc('id')
+            ->first();
+        $this->assertNotNull($rollbackAudit);
+        $this->assertSame('failed', (string) ($rollbackAudit->result ?? ''));
+        $this->assertSame('TARGET_RELEASE_NOT_FOUND', (string) ($rollbackAudit->reason ?? ''));
+
+        $rollbackMeta = json_decode((string) ($rollbackAudit->meta_json ?? '{}'), true);
+        $this->assertIsArray($rollbackMeta);
+        $this->assertSame(self::DIR_ALIAS_FAIL, (string) ($rollbackMeta['dir_alias'] ?? ''));
+    }
+}
