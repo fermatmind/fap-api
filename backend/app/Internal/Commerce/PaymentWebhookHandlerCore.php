@@ -839,19 +839,31 @@ class PaymentWebhookHandlerCore
         $scaleCode = strtoupper(trim((string) ($snapshotMeta['scale_code'] ?? ($meta['scale_code'] ?? ''))));
         $attemptId = trim((string) ($postCommitCtx['attempt_id'] ?? ($meta['attempt_id'] ?? '')));
         $orgId = (int) ($postCommitCtx['org_id'] ?? $orgId);
+        $skuCode = strtoupper(trim((string) ($meta['sku'] ?? '')));
         $anonId = null;
         $locale = '';
         $region = '';
+        $orderRow = null;
 
-        if ($attemptId === '' && $orderNo !== '') {
+        if ($orderNo !== '') {
             $orderRow = DB::table('orders')
                 ->where('order_no', $orderNo)
                 ->where('org_id', $orgId)
                 ->first();
             if ($orderRow) {
-                $attemptId = trim((string) ($orderRow->target_attempt_id ?? ''));
                 if ($attemptId === '') {
-                    $attemptId = trim((string) ($orderRow->attempt_id ?? ''));
+                    $attemptId = trim((string) ($orderRow->target_attempt_id ?? ''));
+                    if ($attemptId === '') {
+                        $attemptId = trim((string) ($orderRow->attempt_id ?? ''));
+                    }
+                }
+                if ($skuCode === '') {
+                    $skuCode = strtoupper(trim((string) (
+                        $orderRow->effective_sku
+                        ?? $orderRow->sku
+                        ?? $orderRow->item_sku
+                        ?? ''
+                    )));
                 }
             }
         }
@@ -890,8 +902,8 @@ class PaymentWebhookHandlerCore
             $locale,
             $region,
             $status,
-            (string) ($meta['sku'] ?? ''),
-            (string) ($meta['sku'] ?? ''),
+            $skuCode,
+            $skuCode,
             $provider,
             $providerEventId,
             $orderNo
