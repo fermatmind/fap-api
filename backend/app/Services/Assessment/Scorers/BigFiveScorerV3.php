@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Assessment\Scorers;
 
 use App\Services\Assessment\Norms\BigFiveNormGroupResolver;
+use App\Services\Psychometrics\Big5\Big5Standardizer;
 
 final class BigFiveScorerV3
 {
@@ -55,6 +56,7 @@ final class BigFiveScorerV3
 
     public function __construct(
         private readonly BigFiveNormGroupResolver $normResolver,
+        private readonly Big5Standardizer $standardizer,
     ) {
     }
 
@@ -204,6 +206,14 @@ final class BigFiveScorerV3
         $topGrowth = $this->sortFacetByPercentile($facetsPercentile, false);
 
         $quality = $this->buildQuality($rawSequence, $facetValues, $facetMeans, $policy, $ctx);
+        if ($normStatus === 'MISSING') {
+            $flags = is_array($quality['flags'] ?? null) ? $quality['flags'] : [];
+            $flags[] = 'NORM_MISSING';
+            $quality['flags'] = array_values(array_unique(array_map(
+                static fn ($v): string => trim((string) $v),
+                $flags
+            )));
+        }
         $reportTone = in_array((string) ($quality['level'] ?? 'D'), ['A', 'B'], true)
             ? 'confident'
             : 'cautious';
@@ -222,16 +232,22 @@ final class BigFiveScorerV3
 
         $tags = $this->buildTags($domainBuckets, $facetBuckets, $facetsPercentile, $policy);
 
-        $normSourceId = '';
-        $normsVersion = '';
-        foreach ($normResolved['domains'] as $row) {
-            if (!is_array($row)) {
-                continue;
-            }
-            $normSourceId = (string) ($row['source_id'] ?? '');
-            $normsVersion = (string) ($row['norms_version'] ?? '');
-            if ($normSourceId !== '' || $normsVersion !== '') {
-                break;
+        $normSourceId = (string) ($normResolved['source_id'] ?? '');
+        $normsVersion = (string) ($normResolved['norms_version'] ?? '');
+        if ($normSourceId === '' || $normsVersion === '') {
+            foreach ($normResolved['domains'] as $row) {
+                if (!is_array($row)) {
+                    continue;
+                }
+                if ($normSourceId === '') {
+                    $normSourceId = (string) ($row['source_id'] ?? '');
+                }
+                if ($normsVersion === '') {
+                    $normsVersion = (string) ($row['norms_version'] ?? '');
+                }
+                if ($normSourceId !== '' && $normsVersion !== '') {
+                    break;
+                }
             }
         }
 
@@ -366,14 +382,14 @@ final class BigFiveScorerV3
             $sd = (float) ($normRow['sd'] ?? 0.0);
             $sampleN = (int) ($normRow['sample_n'] ?? 0);
             if ($sd > 0.0 && $sampleN > 0) {
-                $z = ($score - $mean) / $sd;
-                $z = max(-3.5, min(3.5, $z));
-                $t = (int) round(50 + 10 * $z);
-                $pct = (int) round($this->normalCdf($z) * 100);
+                $std = $this->standardizer->standardize($score, $mean, $sd);
+                $pct = (int) ($std['pct'] ?? 50);
+                $z = (float) ($std['z'] ?? 0.0);
+                $t = (int) ($std['t'] ?? 50);
 
                 return [
                     'pct' => max(0, min(100, $pct)),
-                    'z' => round($z, 2),
+                    'z' => $z,
                     't' => $t,
                     'fallback' => false,
                 ];
@@ -585,23 +601,6 @@ final class BigFiveScorerV3
             && (float) $metrics['time_per_item_avg'] >= $minTime
             && (int) $metrics['longstring_max'] <= $maxLongstring
             && (float) $metrics['facet_inconsistency_mean'] <= $maxInconsistency;
-    }
-
-    private function normalCdf(float $z): float
-    {
-        // Abramowitz and Stegun approximation.
-        $x = abs($z);
-        $t = 1.0 / (1.0 + 0.2316419 * $x);
-        $d = 0.3989423 * exp(-$x * $x / 2.0);
-        $p = 1.0 - $d * (
-            0.3193815 * $t
-            - 0.3565638 * $t * $t
-            + 1.781478 * $t * $t * $t
-            - 1.821256 * $t * $t * $t * $t
-            + 1.330274 * $t * $t * $t * $t * $t
-        );
-
-        return $z >= 0 ? $p : 1.0 - $p;
     }
 
     /**
