@@ -62,6 +62,7 @@ SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
 echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
+  bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
   php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
   php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
   php artisan test --filter BigFive
