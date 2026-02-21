@@ -153,6 +153,62 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('item.evidence.norms_version', '2026Q2_zhcn_prod_v1');
     }
 
+    public function test_owner_can_get_latest_big5_release_audits(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-latest-audits@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $oldReleaseId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $oldReleaseId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'created_at' => now()->subMinutes(5),
+            'updated_at' => now()->subMinutes(5),
+        ]);
+
+        $latestId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $latestId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->insertAudit([
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $oldReleaseId,
+            'result' => 'success',
+            'request_id' => 'req_old_release_audit',
+        ]);
+        $this->insertAudit([
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $latestId,
+            'result' => 'success',
+            'request_id' => 'req_latest_release_audit',
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest/audits?region=CN_MAINLAND&locale=zh-CN');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('item.release_id', $latestId);
+        $response->assertJsonPath('count', 1);
+        $response->assertJsonPath('audits.0.target_id', $latestId);
+    }
+
     public function test_owner_can_list_big5_audits_with_filters(): void
     {
         $owner = $this->createUserWithToken('ops-owner-audits@big5.test');
@@ -211,6 +267,20 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
 
         $response->assertStatus(404);
         $response->assertJsonPath('error_code', 'ORG_NOT_FOUND');
+    }
+
+    public function test_latest_release_audits_returns_not_found_when_release_absent(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-latest-audits-missing@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest/audits');
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'RELEASE_NOT_FOUND');
     }
 
     public function test_owner_can_get_big5_audit_detail_with_related_release(): void

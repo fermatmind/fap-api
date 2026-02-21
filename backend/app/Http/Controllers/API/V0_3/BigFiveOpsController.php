@@ -58,6 +58,74 @@ final class BigFiveOpsController extends Controller
         ]);
     }
 
+    public function latestAudits(Request $request, int $org_id): JsonResponse
+    {
+        $region = trim((string) $request->query('region', 'CN_MAINLAND'));
+        if ($region === '') {
+            $region = 'CN_MAINLAND';
+        }
+        $locale = trim((string) $request->query('locale', 'zh-CN'));
+        if ($locale === '') {
+            $locale = 'zh-CN';
+        }
+        $action = strtolower(trim((string) $request->query('action', '')));
+        if (! in_array($action, ['publish', 'rollback'], true)) {
+            $action = '';
+        }
+        $limit = (int) $request->query('limit', 20);
+        if ($limit < 1) {
+            $limit = 1;
+        }
+        if ($limit > 100) {
+            $limit = 100;
+        }
+
+        $query = DB::table('content_pack_releases')
+            ->where('region', $region)
+            ->where('locale', $locale)
+            ->where(function ($q): void {
+                $q->where('to_pack_id', 'BIG5_OCEAN')
+                    ->orWhere('from_pack_id', 'BIG5_OCEAN');
+            });
+
+        if ($action !== '') {
+            $query->where('action', $action);
+        }
+
+        $row = $query
+            ->orderByDesc('created_at')
+            ->orderByDesc('updated_at')
+            ->first();
+
+        if (! $row) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'RELEASE_NOT_FOUND',
+                'message' => 'release not found.',
+            ], 404);
+        }
+
+        $audits = DB::table('audit_logs')
+            ->whereIn('action', ['big5_pack_publish', 'big5_pack_rollback'])
+            ->where('target_id', (string) ($row->id ?? ''))
+            ->orderByDesc('id')
+            ->limit($limit)
+            ->get();
+
+        $auditItems = [];
+        foreach ($audits as $audit) {
+            $auditItems[] = $this->mapAuditRow($audit);
+        }
+
+        return response()->json([
+            'ok' => true,
+            'org_id' => $org_id,
+            'item' => $this->mapReleaseRow($row),
+            'count' => count($auditItems),
+            'audits' => $auditItems,
+        ]);
+    }
+
     public function releases(Request $request, int $org_id): JsonResponse
     {
         $limit = (int) $request->query('limit', 20);
