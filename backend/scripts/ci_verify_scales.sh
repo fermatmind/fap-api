@@ -49,4 +49,35 @@ if (!is_array($hashes) || count($hashes) === 0) {
 echo "[CI][scales] BIG5 manifest hash entries=" . count($hashes) . "\n";
 ' "${MANIFEST_PATH}"
 
+echo "[CI][scales] collecting BIG5 telemetry summary"
+TELEMETRY_JSON="$(cd "${BACKEND_DIR}" && php artisan big5:telemetry:summary --hours=168 --json=1 | tail -n 1)"
+php -r '
+$raw = $argv[1] ?? "";
+$decoded = json_decode($raw, true);
+if (!is_array($decoded)) {
+    fwrite(STDERR, "[CI][scales][FAIL] telemetry summary is not valid json\n");
+    exit(24);
+}
+$metrics = $decoded["metrics"] ?? null;
+if (!is_array($metrics)) {
+    fwrite(STDERR, "[CI][scales][FAIL] telemetry summary missing metrics object\n");
+    exit(25);
+}
+$required = [
+    "big5.report.failure_rate",
+    "big5.norms.fallback_rate",
+    "big5.norms.missing_rate",
+    "big5.payment.unlock_success_rate",
+    "big5.payment.webhook_failed_rate",
+    "big5.questions.locale_mismatch_rate",
+];
+foreach ($required as $key) {
+    if (!array_key_exists($key, $metrics)) {
+        fwrite(STDERR, "[CI][scales][FAIL] telemetry summary missing metric: {$key}\n");
+        exit(26);
+    }
+}
+echo "[CI][scales] telemetry metrics keys verified=" . count($required) . "\n";
+' "${TELEMETRY_JSON}"
+
 echo "[CI][scales] completed"
