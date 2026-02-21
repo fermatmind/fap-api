@@ -249,6 +249,9 @@ class AttemptReadController extends Controller
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => $disposition . '; filename="' . $fileName . '"',
             'Cache-Control' => 'private, no-store',
+            'X-Report-Scale' => strtoupper((string) ($attempt->scale_code ?? '')),
+            'X-Report-Variant' => strtolower((string) ($gate['variant'] ?? '')),
+            'X-Report-Locked' => ($gate['locked'] ?? false) ? 'true' : 'false',
         ]);
     }
 
