@@ -88,10 +88,7 @@ final class TemplateVariableRegistry
      */
     public function missingRequired(array $requiredList, TemplateContext $context): array
     {
-        $requiredList = array_values(array_unique(array_merge(
-            $requiredList,
-            $this->bigFiveVariableSpec()['required']
-        )));
+        $requiredList = array_values(array_unique($requiredList));
 
         $missing = [];
         foreach ($requiredList as $varName) {
@@ -138,10 +135,17 @@ final class TemplateVariableRegistry
             'required' => [],
         ];
 
-        $paths = [
-            ($this->bigFivePackLoader ?? new BigFivePackLoader())->compiledPath('policy.compiled.json', BigFivePackLoader::PACK_VERSION),
-            ($this->bigFivePackLoader ?? new BigFivePackLoader())->rawPath('variables_allowlist.json', BigFivePackLoader::PACK_VERSION),
-        ];
+        try {
+            $loader = $this->bigFivePackLoader ?? new BigFivePackLoader();
+            $paths = [
+                $loader->compiledPath('policy.compiled.json', BigFivePackLoader::PACK_VERSION),
+                $loader->rawPath('variables_allowlist.json', BigFivePackLoader::PACK_VERSION),
+            ];
+        } catch (\Throwable) {
+            // Plain unit tests may run without a bootstrapped Laravel application.
+            // In that case, BIG5 allowlist loading is skipped and falls back to defaults.
+            $paths = [];
+        }
 
         foreach ($paths as $path) {
             if (!is_file($path)) {

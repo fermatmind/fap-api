@@ -226,7 +226,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: verify_mbti_artifacts
+          name: verify_mbti_artifacts_${{ matrix.mode }}
           path: backend/artifacts/verify_mbti
           if-no-files-found: ignore
           retention-days: 7
