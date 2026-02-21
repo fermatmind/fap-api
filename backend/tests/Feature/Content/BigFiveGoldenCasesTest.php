@@ -20,6 +20,8 @@ final class BigFiveGoldenCasesTest extends TestCase
     public function test_golden_cases_scores_and_report_variants_are_stable(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
+        $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
+            ->assertExitCode(0);
 
         $loader = app(BigFivePackLoader::class);
         $questions = $loader->readCompiledJson('questions.compiled.json', 'v1');
@@ -81,6 +83,10 @@ final class BigFiveGoldenCasesTest extends TestCase
 
             $expectedStatus = (string) ($case['expected_norms_status'] ?? '');
             $this->assertSame($expectedStatus, (string) ($score['norms']['status'] ?? ''));
+            $expectedGroupId = ((string) ($case['locale'] ?? 'zh-CN')) === 'en'
+                ? 'en_johnson_all_18-60'
+                : 'zh-CN_xu_all_18-60';
+            $this->assertSame($expectedGroupId, (string) ($score['norms']['group_id'] ?? ''));
 
             $expectedDomainBuckets = is_array($case['expected_domain_buckets'] ?? null)
                 ? $case['expected_domain_buckets']

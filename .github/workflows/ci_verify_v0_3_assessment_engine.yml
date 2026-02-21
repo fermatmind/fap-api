@@ -76,8 +76,21 @@ jobs:
       - name: Composer validate & audit
         working-directory: backend
         run: |
+          set -euo pipefail
           composer validate --strict
-          composer audit --no-interaction
+          for attempt in 1 2 3; do
+            if composer audit --no-interaction --ignore-unreachable; then
+              break
+            fi
+
+            if [ "${attempt}" -eq 3 ]; then
+              echo "composer audit failed after ${attempt} attempts"
+              exit 1
+            fi
+
+            echo "composer audit failed (attempt ${attempt}/3), retrying in 5s..."
+            sleep 5
+          done
 
       - name: Prepare Laravel env
         working-directory: backend
