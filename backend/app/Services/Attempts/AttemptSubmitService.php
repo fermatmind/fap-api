@@ -198,6 +198,40 @@ class AttemptSubmitService
                 'duration_ms' => $durationMs,
                 'answers_digest' => $answersDigest,
             ]);
+
+            if ($scaleCode === 'BIG5_OCEAN' && is_array($scoreResult->normedJson ?? null)) {
+                $normed = (array) $scoreResult->normedJson;
+                $normsNode = is_array($normed['norms'] ?? null) ? $normed['norms'] : [];
+
+                $normsVersion = trim((string) ($normsNode['norms_version'] ?? ($normed['norms_version'] ?? '')));
+                $groupId = trim((string) ($normsNode['group_id'] ?? ($normed['group_id'] ?? '')));
+                $sourceId = trim((string) ($normsNode['source_id'] ?? ($normed['source_id'] ?? '')));
+                $status = strtoupper(trim((string) ($normsNode['status'] ?? ($normed['status'] ?? 'MISSING'))));
+                if (!in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+                    $status = 'MISSING';
+                }
+
+                if ($normsVersion !== '') {
+                    $locked->norm_version = $normsVersion;
+                }
+
+                $snapshot = $locked->calculation_snapshot_json;
+                if (!is_array($snapshot)) {
+                    $snapshot = [];
+                }
+
+                $snapshot['norms'] = [
+                    'norms_version' => $normsVersion,
+                    'group_id' => $groupId,
+                    'source_id' => $sourceId,
+                    'status' => $status,
+                ];
+                $snapshot['spec_version'] = (string) ($normed['spec_version'] ?? ($snapshot['spec_version'] ?? ''));
+                $snapshot['item_bank_version'] = (string) ($normed['item_bank_version'] ?? ($snapshot['item_bank_version'] ?? ''));
+                $snapshot['engine_version'] = (string) ($normed['engine_version'] ?? ($snapshot['engine_version'] ?? ''));
+                $locked->calculation_snapshot_json = $snapshot;
+            }
+
             if ($locked->started_at === null) {
                 $locked->started_at = now();
             }
