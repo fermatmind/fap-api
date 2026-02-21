@@ -55,29 +55,7 @@ final class BigFiveOpsController extends Controller
 
         $items = [];
         foreach ($rows as $row) {
-            $items[] = [
-                'release_id' => (string) ($row->id ?? ''),
-                'action' => (string) ($row->action ?? ''),
-                'status' => (string) ($row->status ?? ''),
-                'message' => (string) ($row->message ?? ''),
-                'dir_alias' => (string) ($row->dir_alias ?? ''),
-                'region' => (string) ($row->region ?? ''),
-                'locale' => (string) ($row->locale ?? ''),
-                'from_pack_id' => (string) ($row->from_pack_id ?? ''),
-                'to_pack_id' => (string) ($row->to_pack_id ?? ''),
-                'from_version_id' => (string) ($row->from_version_id ?? ''),
-                'to_version_id' => (string) ($row->to_version_id ?? ''),
-                'created_by' => (string) ($row->created_by ?? ''),
-                'created_at' => (string) ($row->created_at ?? ''),
-                'updated_at' => (string) ($row->updated_at ?? ''),
-                'evidence' => [
-                    'manifest_hash' => (string) ($row->manifest_hash ?? ''),
-                    'compiled_hash' => (string) ($row->compiled_hash ?? ''),
-                    'content_hash' => (string) ($row->content_hash ?? ''),
-                    'norms_version' => (string) ($row->norms_version ?? ''),
-                    'git_sha' => (string) ($row->git_sha ?? ''),
-                ],
-            ];
+            $items[] = $this->mapReleaseRow($row);
         }
 
         return response()->json([
@@ -87,5 +65,100 @@ final class BigFiveOpsController extends Controller
             'items' => $items,
         ]);
     }
-}
 
+    public function release(Request $request, int $org_id, string $release_id): JsonResponse
+    {
+        $release_id = trim($release_id);
+        if ($release_id === '') {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'RELEASE_NOT_FOUND',
+                'message' => 'release not found.',
+            ], 404);
+        }
+
+        $row = DB::table('content_pack_releases')
+            ->where('id', $release_id)
+            ->where(function ($q): void {
+                $q->where('to_pack_id', 'BIG5_OCEAN')
+                    ->orWhere('from_pack_id', 'BIG5_OCEAN');
+            })
+            ->first();
+
+        if (! $row) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'RELEASE_NOT_FOUND',
+                'message' => 'release not found.',
+            ], 404);
+        }
+
+        $audits = DB::table('audit_logs')
+            ->whereIn('action', ['big5_pack_publish', 'big5_pack_rollback'])
+            ->where('target_id', $release_id)
+            ->orderByDesc('id')
+            ->limit(20)
+            ->get();
+
+        $auditItems = [];
+        foreach ($audits as $audit) {
+            $auditItems[] = [
+                'id' => (int) ($audit->id ?? 0),
+                'action' => (string) ($audit->action ?? ''),
+                'result' => (string) ($audit->result ?? ''),
+                'reason' => (string) ($audit->reason ?? ''),
+                'target_type' => (string) ($audit->target_type ?? ''),
+                'target_id' => (string) ($audit->target_id ?? ''),
+                'request_id' => (string) ($audit->request_id ?? ''),
+                'created_at' => (string) ($audit->created_at ?? ''),
+                'meta' => $this->decodeJson((string) ($audit->meta_json ?? '')),
+            ];
+        }
+
+        return response()->json([
+            'ok' => true,
+            'org_id' => $org_id,
+            'item' => $this->mapReleaseRow($row),
+            'audits' => $auditItems,
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function mapReleaseRow(object $row): array
+    {
+        return [
+            'release_id' => (string) ($row->id ?? ''),
+            'action' => (string) ($row->action ?? ''),
+            'status' => (string) ($row->status ?? ''),
+            'message' => (string) ($row->message ?? ''),
+            'dir_alias' => (string) ($row->dir_alias ?? ''),
+            'region' => (string) ($row->region ?? ''),
+            'locale' => (string) ($row->locale ?? ''),
+            'from_pack_id' => (string) ($row->from_pack_id ?? ''),
+            'to_pack_id' => (string) ($row->to_pack_id ?? ''),
+            'from_version_id' => (string) ($row->from_version_id ?? ''),
+            'to_version_id' => (string) ($row->to_version_id ?? ''),
+            'created_by' => (string) ($row->created_by ?? ''),
+            'created_at' => (string) ($row->created_at ?? ''),
+            'updated_at' => (string) ($row->updated_at ?? ''),
+            'evidence' => [
+                'manifest_hash' => (string) ($row->manifest_hash ?? ''),
+                'compiled_hash' => (string) ($row->compiled_hash ?? ''),
+                'content_hash' => (string) ($row->content_hash ?? ''),
+                'norms_version' => (string) ($row->norms_version ?? ''),
+                'git_sha' => (string) ($row->git_sha ?? ''),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeJson(string $json): array
+    {
+        $decoded = json_decode($json, true);
+        return is_array($decoded) ? $decoded : [];
+    }
+}

@@ -109,6 +109,83 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('error_code', 'ORG_NOT_FOUND');
     }
 
+    public function test_owner_can_get_big5_release_detail_with_audits(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-detail@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $releaseId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $releaseId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'dir_alias' => 'v1',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'status' => 'success',
+            'manifest_hash' => str_repeat('a', 64),
+            'compiled_hash' => str_repeat('b', 64),
+            'content_hash' => str_repeat('c', 64),
+            'norms_version' => '2026Q1_zhcn_prod_v1',
+            'git_sha' => str_repeat('d', 40),
+        ]);
+
+        $this->insertAudit([
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $releaseId,
+            'result' => 'success',
+            'reason' => '',
+            'meta_json' => json_encode(['manifest_hash' => str_repeat('a', 64)], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'request_id' => 'req_big5_release_detail',
+        ]);
+
+        $this->insertAudit([
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => (string) Str::uuid(),
+            'result' => 'success',
+            'reason' => '',
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/' . $releaseId);
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('org_id', $orgId);
+        $response->assertJsonPath('item.release_id', $releaseId);
+        $response->assertJsonPath('item.evidence.norms_version', '2026Q1_zhcn_prod_v1');
+        $response->assertJsonPath('audits.0.action', 'big5_pack_publish');
+        $response->assertJsonPath('audits.0.target_id', $releaseId);
+        $response->assertJsonPath('audits.0.meta.manifest_hash', str_repeat('a', 64));
+    }
+
+    public function test_release_detail_returns_not_found_for_non_big5_release(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-nonbig5@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $releaseId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $releaseId,
+            'action' => 'publish',
+            'from_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'to_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/' . $releaseId);
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'RELEASE_NOT_FOUND');
+    }
+
     /**
      * @return array{user_id:int,token:string}
      */
@@ -172,5 +249,24 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
             'updated_at' => now(),
         ], $row));
     }
-}
 
+    /**
+     * @param array<string,mixed> $row
+     */
+    private function insertAudit(array $row): void
+    {
+        DB::table('audit_logs')->insert(array_merge([
+            'actor_admin_id' => null,
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => null,
+            'meta_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => '127.0.0.1',
+            'user_agent' => 'phpunit',
+            'request_id' => 'req_' . Str::random(8),
+            'reason' => null,
+            'result' => null,
+            'created_at' => now(),
+        ], $row));
+    }
+}

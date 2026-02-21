@@ -172,6 +172,8 @@ Route::prefix("v0.3")->middleware([
             Route::post("/orgs/invites/accept", [OrgInvitesController::class, "accept"]);
             Route::get('/orgs/{org_id}/big5/releases', [BigFiveOpsController::class, 'releases'])
                 ->middleware(\App\Http\Middleware\RequireOrgRole::class . ':owner,admin');
+            Route::get('/orgs/{org_id}/big5/releases/{release_id}', [BigFiveOpsController::class, 'release'])
+                ->middleware(\App\Http\Middleware\RequireOrgRole::class . ':owner,admin');
 
             // Org wallets (admin/owner only)
             Route::get("/orgs/{org_id}/wallets", "App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@wallets");
