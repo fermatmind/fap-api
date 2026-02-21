@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Services\Commerce\CommerceConfigValidator;
 use App\Services\Commerce\SkuCatalog;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,9 @@ class Pr19CommerceSeeder extends Seeder
             $this->command?->warn('Pr19CommerceSeeder skipped: seed data missing.');
             return;
         }
+        /** @var CommerceConfigValidator $validator */
+        $validator = app(CommerceConfigValidator::class);
+        $validator->validate($rows);
 
         $now = now();
 
@@ -29,7 +33,7 @@ class Pr19CommerceSeeder extends Seeder
                 continue;
             }
 
-            $sku = strtoupper(trim((string) ($item['sku'] ?? '')));
+            $sku = strtoupper(trim((string) ($item['sku'] ?? ($item['sku_code'] ?? ''))));
             if ($sku === '') {
                 continue;
             }
@@ -51,6 +55,17 @@ class Pr19CommerceSeeder extends Seeder
                 $meta['title'] = $title;
             }
 
+            $offerCode = trim((string) ($item['offer_code'] ?? ($meta['offer_code'] ?? '')));
+            if ($offerCode !== '' && empty($meta['offer_code'])) {
+                $meta['offer_code'] = $offerCode;
+            }
+
+            if (array_key_exists('modules_included', $item) || array_key_exists('modules_included', $meta)) {
+                $meta['modules_included'] = $this->normalizeModulesIncluded(
+                    $item['modules_included'] ?? ($meta['modules_included'] ?? null)
+                );
+            }
+
             $payload = [
                 'sku' => $sku,
                 'scale_code' => strtoupper(trim((string) ($item['scale_code'] ?? 'MBTI'))),
@@ -59,7 +74,7 @@ class Pr19CommerceSeeder extends Seeder
                 'benefit_code' => strtoupper(trim((string) ($item['benefit_code'] ?? ''))),
                 'scope' => (string) ($item['scope'] ?? ''),
                 'price_cents' => (int) ($item['price_cents'] ?? 0),
-                'currency' => (string) ($item['currency'] ?? 'USD'),
+                'currency' => strtoupper(trim((string) ($item['currency'] ?? 'USD'))),
                 'is_active' => (bool) ($item['is_active'] ?? true),
                 'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE),
                 'created_at' => $now,
@@ -194,14 +209,19 @@ class Pr19CommerceSeeder extends Seeder
             $periodDays = isset($meta['period_days']) ? (int) $meta['period_days'] : null;
 
             $entitlementId = trim((string) ($meta['entitlement_id'] ?? ''));
+            $offerCode = trim((string) ($meta['offer_code'] ?? ''));
+            $benefitCode = strtoupper(trim((string) ($item['benefit_code'] ?? '')));
             $modulesIncluded = $this->normalizeModulesIncluded($meta['modules_included'] ?? null);
 
             $offers[] = [
                 'sku' => $sku,
+                'sku_code' => $sku,
                 'price_cents' => (int) ($item['price_cents'] ?? 0),
                 'currency' => (string) ($item['currency'] ?? 'CNY'),
                 'title' => (string) ($meta['title'] ?? $meta['label'] ?? ''),
                 'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
+                'benefit_code' => $benefitCode !== '' ? $benefitCode : null,
+                'offer_code' => $offerCode !== '' ? $offerCode : null,
                 'modules_included' => $modulesIncluded,
                 'grant' => [
                     'type' => $grantType !== '' ? $grantType : null,

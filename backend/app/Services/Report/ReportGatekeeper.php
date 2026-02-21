@@ -458,16 +458,21 @@ class ReportGatekeeper
             $periodDays = isset($meta['period_days']) ? (int) $meta['period_days'] : null;
 
             $entitlementId = trim((string) ($meta['entitlement_id'] ?? ''));
+            $benefitCode = strtoupper(trim((string) ($item['benefit_code'] ?? '')));
+            $offerCode = trim((string) ($meta['offer_code'] ?? ''));
             $modulesIncluded = $this->normalizeModulesIncluded(
                 $item['modules_included'] ?? ($meta['modules_included'] ?? null)
             );
 
             $offers[] = [
                 'sku' => $sku,
+                'sku_code' => $sku,
                 'price_cents' => (int) ($item['price_cents'] ?? 0),
                 'currency' => (string) ($item['currency'] ?? 'CNY'),
                 'title' => (string) ($meta['title'] ?? $meta['label'] ?? ''),
                 'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
+                'benefit_code' => $benefitCode !== '' ? $benefitCode : null,
+                'offer_code' => $offerCode !== '' ? $offerCode : null,
                 'modules_included' => $modulesIncluded,
                 'grant' => [
                     'type' => $grantType !== '' ? $grantType : null,
@@ -496,21 +501,26 @@ class ReportGatekeeper
                 continue;
             }
 
-            $sku = strtoupper(trim((string) ($item['sku'] ?? '')));
+            $sku = strtoupper(trim((string) ($item['sku'] ?? ($item['sku_code'] ?? ''))));
             if ($sku === '') {
                 continue;
             }
 
             $grant = $this->normalizeGrant($item['grant'] ?? null);
             $entitlementId = trim((string) ($item['entitlement_id'] ?? ''));
+            $benefitCode = strtoupper(trim((string) ($item['benefit_code'] ?? '')));
+            $offerCode = trim((string) ($item['offer_code'] ?? ''));
             $modulesIncluded = $this->normalizeModulesIncluded($item['modules_included'] ?? null);
 
             $offers[] = [
                 'sku' => $sku,
+                'sku_code' => $sku,
                 'price_cents' => (int) ($item['price_cents'] ?? 0),
                 'currency' => (string) ($item['currency'] ?? 'CNY'),
                 'title' => (string) ($item['title'] ?? ''),
                 'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
+                'benefit_code' => $benefitCode !== '' ? $benefitCode : null,
+                'offer_code' => $offerCode !== '' ? $offerCode : null,
                 'modules_included' => $modulesIncluded,
                 'grant' => $grant,
             ];

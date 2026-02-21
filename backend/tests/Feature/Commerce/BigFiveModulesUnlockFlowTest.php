@@ -197,6 +197,18 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
         $this->assertNotEmpty($offers);
         foreach ($offers as $offer) {
             $this->assertIsArray($offer);
+            $this->assertArrayHasKey('sku', $offer);
+            $this->assertNotSame('', (string) ($offer['sku'] ?? ''));
+            $this->assertArrayHasKey('sku_code', $offer);
+            $this->assertSame((string) $offer['sku'], (string) $offer['sku_code']);
+            $this->assertArrayHasKey('benefit_code', $offer);
+            $this->assertNotSame('', (string) ($offer['benefit_code'] ?? ''));
+            $this->assertArrayHasKey('offer_code', $offer);
+            $this->assertNotSame('', (string) ($offer['offer_code'] ?? ''));
+            $this->assertArrayHasKey('price_cents', $offer);
+            $this->assertIsInt($offer['price_cents']);
+            $this->assertArrayHasKey('currency', $offer);
+            $this->assertNotSame('', (string) ($offer['currency'] ?? ''));
             $this->assertArrayHasKey('modules_included', $offer);
             $this->assertIsArray($offer['modules_included']);
         }

@@ -372,6 +372,16 @@ class PaymentWebhookHandlerCore
                     $quantity = (int) ($order->quantity ?? 1);
                     $benefitCode = strtoupper((string) ($skuRow->benefit_code ?? ''));
                     $kind = (string) ($skuRow->kind ?? '');
+                    if ($benefitCode === '') {
+                        $this->markEventError(
+                            $provider,
+                            $providerEventId,
+                            'failed',
+                            'BENEFIT_CODE_NOT_FOUND',
+                            'benefit code missing on sku.'
+                        );
+                        return $this->badRequest('BENEFIT_CODE_NOT_FOUND', 'benefit code missing on sku.');
+                    }
 
                     $attemptMeta = $this->resolveAttemptMeta((int) $order->org_id, (string) ($order->target_attempt_id ?? ''));
                     $eventBaseMeta = $this->buildEventMeta([
