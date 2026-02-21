@@ -10,6 +10,7 @@ use App\Models\Result;
 use App\Services\Assessment\AssessmentRunner;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleRegistry;
+use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -60,6 +61,8 @@ class AttemptSubmitService
 
         $region = (string) ($attempt->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
         $locale = (string) ($attempt->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
+
+        ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $attemptId);
 
         $draftAnswers = $this->progressService->loadDraftAnswers($attempt);
         $mergedAnswers = $this->mergeAnswersForSubmit($answers, $draftAnswers);

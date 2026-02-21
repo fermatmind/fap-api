@@ -9,6 +9,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Scale\ScaleRegistry;
+use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -38,22 +39,24 @@ class AttemptStartService
             throw new ApiProblemException(404, 'NOT_FOUND', 'scale not found.');
         }
 
+        $region = (string) ($dto->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
+        $locale = (string) ($dto->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
+
+        $anonId = trim((string) ($dto->anonId ?? ''));
+        if ($anonId === '') {
+            $anonId = 'anon_'.Str::uuid();
+        }
+
+        ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $anonId);
+
         $packId = (string) ($row['default_pack_id'] ?? '');
         $dirVersion = (string) ($row['default_dir_version'] ?? '');
         if ($packId === '' || $dirVersion === '') {
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
         }
 
-        $region = (string) ($dto->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
-        $locale = (string) ($dto->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
-
         $questionCount = $this->resolveQuestionCount($scaleCode, $packId, $dirVersion);
         $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
-
-        $anonId = trim((string) ($dto->anonId ?? ''));
-        if ($anonId === '') {
-            $anonId = 'anon_'.Str::uuid();
-        }
 
         $clientPlatform = (string) ($dto->clientPlatform ?? 'unknown');
         $clientVersion = (string) ($dto->clientVersion ?? '');
