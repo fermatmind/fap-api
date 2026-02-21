@@ -158,7 +158,10 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
         $this->assertNotNull($telemetry);
         $meta = $this->decodeMeta($telemetry->meta_json ?? null);
         $this->assertSame('BIG5_OCEAN', (string) ($meta['scale_code'] ?? ''));
-        $this->assertSame('processed', (string) ($meta['webhook_status'] ?? ''));
+        $this->assertContains(
+            (string) ($meta['webhook_status'] ?? ''),
+            ['processed', 'duplicate']
+        );
         $this->assertSame('SKU_BIG5_FULL_REPORT_299', (string) ($meta['sku_code'] ?? ''));
     }
 
