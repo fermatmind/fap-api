@@ -1,0 +1,145 @@
+{
+    "schema": "big5.blocks.action.v1",
+    "pack_id": "BIG5_OCEAN",
+    "pack_version": "v1",
+    "blocks": [
+        {
+            "block_id": "action_low_en",
+            "section": "action_plan",
+            "kind": "bullets",
+            "access_level": "paid",
+            "module_code": "big5_action_plan",
+            "metric_level": "domain",
+            "metric_code": "overall",
+            "bucket": "low",
+            "locale": "en",
+            "tags_any": [
+                "bucket:low",
+                "section:action_plan"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "action_plan_overall",
+            "variables": [
+                "facts.top_growth_facets_text"
+            ],
+            "title": "Action Plan",
+            "body": "Prioritize growth facets: {{facts.top_growth_facets_text}}."
+        },
+        {
+            "block_id": "action_mid_en",
+            "section": "action_plan",
+            "kind": "bullets",
+            "access_level": "paid",
+            "module_code": "big5_action_plan",
+            "metric_level": "domain",
+            "metric_code": "overall",
+            "bucket": "mid",
+            "locale": "en",
+            "tags_any": [
+                "bucket:mid",
+                "section:action_plan"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "action_plan_overall",
+            "variables": [
+                "facts.top_growth_facets_text"
+            ],
+            "title": "Action Plan",
+            "body": "Prioritize growth facets: {{facts.top_growth_facets_text}}."
+        },
+        {
+            "block_id": "action_high_en",
+            "section": "action_plan",
+            "kind": "bullets",
+            "access_level": "paid",
+            "module_code": "big5_action_plan",
+            "metric_level": "domain",
+            "metric_code": "overall",
+            "bucket": "high",
+            "locale": "en",
+            "tags_any": [
+                "bucket:high",
+                "section:action_plan"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "action_plan_overall",
+            "variables": [
+                "facts.top_growth_facets_text"
+            ],
+            "title": "Action Plan",
+            "body": "Prioritize growth facets: {{facts.top_growth_facets_text}}."
+        },
+        {
+            "block_id": "action_low_zh_cn",
+            "section": "action_plan",
+            "kind": "bullets",
+            "access_level": "paid",
+            "module_code": "big5_action_plan",
+            "metric_level": "domain",
+            "metric_code": "overall",
+            "bucket": "low",
+            "locale": "zh-CN",
+            "tags_any": [
+                "bucket:low",
+                "section:action_plan"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "action_plan_overall",
+            "variables": [
+                "facts.top_growth_facets_text"
+            ],
+            "title": "行动建议",
+            "body": "优先改进刻面：{{facts.top_growth_facets_text}}。"
+        },
+        {
+            "block_id": "action_mid_zh_cn",
+            "section": "action_plan",
+            "kind": "bullets",
+            "access_level": "paid",
+            "module_code": "big5_action_plan",
+            "metric_level": "domain",
+            "metric_code": "overall",
+            "bucket": "mid",
+            "locale": "zh-CN",
+            "tags_any": [
+                "bucket:mid",
+                "section:action_plan"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "action_plan_overall",
+            "variables": [
+                "facts.top_growth_facets_text"
+            ],
+            "title": "行动建议",
+            "body": "优先改进刻面：{{facts.top_growth_facets_text}}。"
+        },
+        {
+            "block_id": "action_high_zh_cn",
+            "section": "action_plan",
+            "kind": "bullets",
+            "access_level": "paid",
+            "module_code": "big5_action_plan",
+            "metric_level": "domain",
+            "metric_code": "overall",
+            "bucket": "high",
+            "locale": "zh-CN",
+            "tags_any": [
+                "bucket:high",
+                "section:action_plan"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "action_plan_overall",
+            "variables": [
+                "facts.top_growth_facets_text"
+            ],
+            "title": "行动建议",
+            "body": "优先改进刻面：{{facts.top_growth_facets_text}}。"
+        }
+    ]
+}

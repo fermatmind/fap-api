@@ -1,0 +1,237 @@
+{
+    "schema": "big5.blocks.profile.v1",
+    "pack_id": "BIG5_OCEAN",
+    "pack_version": "v1",
+    "blocks": [
+        {
+            "block_id": "profile_profile_resilient_en",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:resilient",
+            "bucket": "all",
+            "locale": "en",
+            "tags_any": [
+                "profile:resilient"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "Resilient Profile",
+            "body": "Current profile aligns with Resilient Profile (quality {{quality.level}}, norms {{norms.status}})."
+        },
+        {
+            "block_id": "profile_profile_overcontrolled_en",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:overcontrolled",
+            "bucket": "all",
+            "locale": "en",
+            "tags_any": [
+                "profile:overcontrolled"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "Overcontrolled Profile",
+            "body": "Current profile aligns with Overcontrolled Profile (quality {{quality.level}}, norms {{norms.status}})."
+        },
+        {
+            "block_id": "profile_profile_undercontrolled_en",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:undercontrolled",
+            "bucket": "all",
+            "locale": "en",
+            "tags_any": [
+                "profile:undercontrolled"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "Undercontrolled Profile",
+            "body": "Current profile aligns with Undercontrolled Profile (quality {{quality.level}}, norms {{norms.status}})."
+        },
+        {
+            "block_id": "profile_profile_explorer_en",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:explorer",
+            "bucket": "all",
+            "locale": "en",
+            "tags_any": [
+                "profile:explorer"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "Explorer Profile",
+            "body": "Current profile aligns with Explorer Profile (quality {{quality.level}}, norms {{norms.status}})."
+        },
+        {
+            "block_id": "profile_profile_steady_operator_en",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:steady_operator",
+            "bucket": "all",
+            "locale": "en",
+            "tags_any": [
+                "profile:steady_operator"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "Steady Operator Profile",
+            "body": "Current profile aligns with Steady Operator Profile (quality {{quality.level}}, norms {{norms.status}})."
+        },
+        {
+            "block_id": "profile_profile_resilient_zh_cn",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:resilient",
+            "bucket": "all",
+            "locale": "zh-CN",
+            "tags_any": [
+                "profile:resilient"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "韧性画像",
+            "body": "当前画像匹配 韧性画像（质量等级：{{quality.level}}；常模状态：{{norms.status}}）。"
+        },
+        {
+            "block_id": "profile_profile_overcontrolled_zh_cn",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:overcontrolled",
+            "bucket": "all",
+            "locale": "zh-CN",
+            "tags_any": [
+                "profile:overcontrolled"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "过度控制画像",
+            "body": "当前画像匹配 过度控制画像（质量等级：{{quality.level}}；常模状态：{{norms.status}}）。"
+        },
+        {
+            "block_id": "profile_profile_undercontrolled_zh_cn",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:undercontrolled",
+            "bucket": "all",
+            "locale": "zh-CN",
+            "tags_any": [
+                "profile:undercontrolled"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "失控风险画像",
+            "body": "当前画像匹配 失控风险画像（质量等级：{{quality.level}}；常模状态：{{norms.status}}）。"
+        },
+        {
+            "block_id": "profile_profile_explorer_zh_cn",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:explorer",
+            "bucket": "all",
+            "locale": "zh-CN",
+            "tags_any": [
+                "profile:explorer"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "探索者画像",
+            "body": "当前画像匹配 探索者画像（质量等级：{{quality.level}}；常模状态：{{norms.status}}）。"
+        },
+        {
+            "block_id": "profile_profile_steady_operator_zh_cn",
+            "section": "summary",
+            "kind": "card",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "profile",
+            "metric_code": "profile:steady_operator",
+            "bucket": "all",
+            "locale": "zh-CN",
+            "tags_any": [
+                "profile:steady_operator"
+            ],
+            "tags_all": [],
+            "priority": 90,
+            "exclusive_group": "summary_profile",
+            "variables": [
+                "quality.level",
+                "norms.status"
+            ],
+            "title": "稳健执行者画像",
+            "body": "当前画像匹配 稳健执行者画像（质量等级：{{quality.level}}；常模状态：{{norms.status}}）。"
+        }
+    ]
+}
