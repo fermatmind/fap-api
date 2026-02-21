@@ -119,9 +119,19 @@ class NormGroupResolver
             return $default;
         }
 
-        [$min, $max] = $this->parseAgeBand($default);
-        if ($age >= $min && $age <= $max) {
-            return $default;
+        $bands = (array) config('big5_norms.resolver.age_bands', []);
+        foreach ($bands as $band => $def) {
+            if (! is_string($band) || ! is_array($def)) {
+                continue;
+            }
+            $min = (int) ($def['min'] ?? 0);
+            $max = (int) ($def['max'] ?? 0);
+            if ($min <= 0 || $max <= 0 || $max < $min) {
+                continue;
+            }
+            if ($age >= $min && $age <= $max) {
+                return $band;
+            }
         }
 
         return $default;
@@ -157,6 +167,16 @@ class NormGroupResolver
                 continue;
             }
             $out[$groupId] = true;
+
+            $lowerGenderGroupId = strtr($template, [
+                '{locale}' => $locale,
+                '{gender}' => strtolower($gender),
+                '{age_band}' => $ageBand,
+            ]);
+            $lowerGenderGroupId = trim($lowerGenderGroupId);
+            if ($lowerGenderGroupId !== '') {
+                $out[$lowerGenderGroupId] = true;
+            }
         }
 
         return array_keys($out);

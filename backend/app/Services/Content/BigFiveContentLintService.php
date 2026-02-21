@@ -314,8 +314,16 @@ final class BigFiveContentLintService
             $coverage[strtolower($group)][$level][$code] = true;
         }
 
-        $this->assertNormGroupCoverage($file, $coverage, 'en_johnson_all_18-60', true, $errors);
-        $this->assertNormGroupCoverage($file, $coverage, 'zh-CN_prod_all_18-60', true, $errors);
+        $requiredGroups = (array) config('big5_norms.resolver.required_groups', [
+            'en_johnson_all_18-60',
+            'zh-CN_prod_all_18-60',
+        ]);
+        foreach ($requiredGroups as $requiredGroup) {
+            if (! is_string($requiredGroup) || trim($requiredGroup) === '') {
+                continue;
+            }
+            $this->assertNormGroupCoverage($file, $coverage, trim($requiredGroup), true, $errors);
+        }
     }
 
     /**
