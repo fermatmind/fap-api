@@ -21,6 +21,12 @@ final class PacksPublish extends Command
         {--locale=zh-CN : Locale}
         {--dir_alias=v1 : Target dir alias}
         {--probe=0 : Run post-publish probe}
+        {--skip_drift=0 : Skip norms drift check}
+        {--drift_from= : Drift check source norms version}
+        {--drift_to= : Drift check target norms version}
+        {--drift_group_id= : Drift check group id scope}
+        {--drift_threshold_mean=0.35 : Drift threshold for mean}
+        {--drift_threshold_sd=0.35 : Drift threshold for sd}
         {--base_url= : Probe base url}
         {--created_by=cli : Operator id}';
 
@@ -42,6 +48,7 @@ final class PacksPublish extends Command
         $baseUrl = trim((string) $this->option('base_url'));
         $createdBy = trim((string) $this->option('created_by'));
         $probe = $this->isTruthy($this->option('probe'));
+        $skipDrift = $this->isTruthy($this->option('skip_drift'));
 
         if ($packId === '' || $version === '' || $region === '' || $locale === '' || $dirAlias === '') {
             $this->error('--pack/--version/--region/--locale/--dir_alias are required.');
@@ -52,6 +59,34 @@ final class PacksPublish extends Command
         if (!File::isDirectory($sourceDir)) {
             $this->error("pack source directory not found: {$sourceDir}");
             return 1;
+        }
+
+        if (! $skipDrift) {
+            $fromVersion = trim((string) $this->option('drift_from'));
+            $toVersion = trim((string) $this->option('drift_to'));
+            if ($fromVersion !== '' && $toVersion !== '') {
+                $driftArgs = [
+                    '--scale' => $scaleCode,
+                    '--from' => $fromVersion,
+                    '--to' => $toVersion,
+                    '--threshold_mean' => (string) $this->option('drift_threshold_mean'),
+                    '--threshold_sd' => (string) $this->option('drift_threshold_sd'),
+                ];
+                $driftGroupId = trim((string) $this->option('drift_group_id'));
+                if ($driftGroupId !== '') {
+                    $driftArgs['--group_id'] = $driftGroupId;
+                }
+                $driftCode = $this->call('norms:big5:drift-check', $driftArgs);
+                if ($driftCode !== 0) {
+                    $this->error('drift-check failed, publish aborted.');
+
+                    return $driftCode;
+                }
+            } else {
+                $this->line('drift-check skipped: provide --drift_from and --drift_to to enable.');
+            }
+        } else {
+            $this->line('drift-check skipped by --skip_drift=1');
         }
 
         try {
