@@ -15,6 +15,7 @@ class ReportSnapshotStore
 
     public function __construct(
         private ReportComposer $reportComposer,
+        private BigFiveReportComposer $bigFiveReportComposer,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
     ) {}
@@ -133,10 +134,10 @@ class ReportSnapshotStore
         $scoringSpecVersion = $attempt->scoring_spec_version ?? $result->scoring_spec_version ?? null;
 
         $modulesFull = ReportAccess::normalizeModules(array_merge(
-            [ReportAccess::MODULE_CORE_FREE],
-            ReportAccess::allDefaultModulesOffered()
+            [ReportAccess::freeModuleForScale($scaleCode)],
+            ReportAccess::allDefaultModulesOffered($scaleCode)
         ));
-        $modulesPreview = ReportAccess::allDefaultModulesOffered();
+        $modulesPreview = ReportAccess::allDefaultModulesOffered($scaleCode);
 
         $reportFull = $this->buildVariantReport(
             $scaleCode,
@@ -155,7 +156,7 @@ class ReportSnapshotStore
             $attempt,
             $result,
             ReportAccess::VARIANT_FREE,
-            ReportAccess::defaultModulesAllowedForLocked(),
+            ReportAccess::defaultModulesAllowedForLocked($scaleCode),
             $modulesPreview
         );
         if (!is_array($reportFree)) {
@@ -320,6 +321,24 @@ class ReportSnapshotStore
                 'modules_allowed' => $modulesAllowed,
                 'modules_preview' => $modulesPreview,
             ], $result);
+            if (!($composed['ok'] ?? false)) {
+                return null;
+            }
+            $report = $composed['report'] ?? null;
+
+            return is_array($report) ? $report : null;
+        }
+
+        if ($scaleCode === 'BIG5_OCEAN') {
+            $composed = $this->bigFiveReportComposer->composeVariant($attempt, $result, $variant, [
+                'org_id' => (int) ($attempt->org_id ?? 0),
+                'variant' => $variant,
+                'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                    ? ReportAccess::REPORT_ACCESS_FREE
+                    : ReportAccess::REPORT_ACCESS_FULL,
+                'modules_allowed' => $modulesAllowed,
+                'modules_preview' => $modulesPreview,
+            ]);
             if (!($composed['ok'] ?? false)) {
                 return null;
             }

@@ -43,6 +43,42 @@ class AssessmentEngine
             $driverType = 'generic_scoring';
         }
 
+        if ($scaleCode === 'BIG5_OCEAN' || $driverType === 'big5_ocean') {
+            $driver = $this->resolveDriver($driverType);
+            if (!$driver) {
+                return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$driverType}");
+            }
+
+            $ctxMerged = array_merge($ctx, [
+                'org_id' => $orgId,
+                'scale_code' => $scaleCode,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'content_package_version' => $dirVersion,
+                'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+                'base_dir' => '',
+                'scoring_spec' => [],
+            ]);
+
+            try {
+                $result = $driver->score($answers, [], $ctxMerged);
+            } catch (\Throwable $e) {
+                return $this->error('SCORING_FAILED', 'scoring failed.');
+            }
+
+            return [
+                'ok' => true,
+                'result' => $result,
+                'driver_type' => $driverType,
+                'pack' => [
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $dirVersion,
+                ],
+                'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+            ];
+        }
+
         $pack = $this->resolvePack($packId, $dirVersion);
         if (!($pack['ok'] ?? false)) {
             return $this->error('PACK_NOT_FOUND', 'content pack not found.');

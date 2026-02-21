@@ -6,6 +6,7 @@ use App\DTO\Attempts\StartAttemptDTO;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
@@ -18,6 +19,7 @@ class AttemptStartService
     public function __construct(
         private ScaleRegistry $registry,
         private ContentPacksIndex $packsIndex,
+        private BigFivePackLoader $bigFivePackLoader,
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
     ) {}
@@ -45,7 +47,7 @@ class AttemptStartService
         $region = (string) ($dto->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
         $locale = (string) ($dto->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
 
-        $questionCount = $this->resolveQuestionCount($packId, $dirVersion);
+        $questionCount = $this->resolveQuestionCount($scaleCode, $packId, $dirVersion);
         $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
 
         $anonId = trim((string) ($dto->anonId ?? ''));
@@ -117,8 +119,22 @@ class AttemptStartService
         ];
     }
 
-    private function resolveQuestionCount(string $packId, string $dirVersion): int
+    private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion): int
     {
+        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $compiled = $this->bigFivePackLoader->readCompiledJson('questions.compiled.json', $dirVersion);
+            if (!is_array($compiled)) {
+                $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTIONS_MISSING', $packId, $dirVersion, 'questions.compiled.json');
+            }
+            $doc = is_array($compiled['questions_doc'] ?? null) ? $compiled['questions_doc'] : [];
+            $items = is_array($doc['items'] ?? null) ? $doc['items'] : null;
+            if (!is_array($items)) {
+                $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTIONS_INVALID', $packId, $dirVersion, 'questions.compiled.json');
+            }
+
+            return count($items);
+        }
+
         $questionsPath = '';
 
         $found = $this->packsIndex->find($packId, $dirVersion);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\QuestionsService;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
@@ -65,7 +66,12 @@ class ScalesController extends Controller
     /**
      * GET /api/v0.3/scales/{scale_code}/questions
      */
-    public function questions(Request $request, string $scale_code, QuestionsService $questionsService): JsonResponse
+    public function questions(
+        Request $request,
+        string $scale_code,
+        QuestionsService $questionsService,
+        BigFivePackLoader $bigFivePackLoader
+    ): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
         $code = strtoupper(trim($scale_code));
@@ -98,6 +104,38 @@ class ScalesController extends Controller
 
         $region = (string) ($request->query('region') ?? $row['default_region'] ?? config('content_packs.default_region', ''));
         $locale = (string) ($request->query('locale') ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
+
+        if ($code === 'BIG5_OCEAN') {
+            $version = (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
+            $compiled = $bigFivePackLoader->readCompiledJson('questions.compiled.json', $version);
+            if (!is_array($compiled)) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'COMPILED_MISSING',
+                    'message' => 'BIG5_OCEAN compiled questions missing.',
+                ], 500);
+            }
+
+            $questionsDoc = $compiled['questions_doc'] ?? null;
+            if (!is_array($questionsDoc)) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'COMPILED_INVALID',
+                    'message' => 'BIG5_OCEAN compiled questions invalid.',
+                ], 500);
+            }
+
+            return response()->json([
+                'ok' => true,
+                'scale_code' => $code,
+                'region' => $region,
+                'locale' => $locale,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'content_package_version' => (string) ($compiled['pack_version'] ?? $version),
+                'questions' => $questionsDoc,
+            ]);
+        }
 
         $assetsBaseUrlOverride = $request->attributes->get('assets_base_url');
         $assetsBaseUrlOverride = is_string($assetsBaseUrlOverride) ? $assetsBaseUrlOverride : null;
