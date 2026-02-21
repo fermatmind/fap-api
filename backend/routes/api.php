@@ -19,6 +19,7 @@ use App\Http\Controllers\API\V0_3\ClaimController as ClaimV03Controller;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\API\V0_3\ScalesSitemapSourceController;
+use App\Http\Controllers\API\V0_3\BigFiveOpsController;
 use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_3\ShareController as ShareV03Controller;
 use App\Http\Controllers\API\V0_4\BootController;
@@ -169,6 +170,8 @@ Route::prefix("v0.3")->middleware([
             Route::get("/orgs/me", [OrgsController::class, "me"]);
             Route::post("/orgs/{org_id}/invites", [OrgInvitesController::class, "store"]);
             Route::post("/orgs/invites/accept", [OrgInvitesController::class, "accept"]);
+            Route::get('/orgs/{org_id}/big5/releases', [BigFiveOpsController::class, 'releases'])
+                ->middleware(\App\Http\Middleware\RequireOrgRole::class . ':owner,admin');
 
             // Org wallets (admin/owner only)
             Route::get("/orgs/{org_id}/wallets", "App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@wallets");
