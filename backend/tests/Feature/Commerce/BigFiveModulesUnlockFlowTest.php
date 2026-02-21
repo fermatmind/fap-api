@@ -160,7 +160,7 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
         $beforeAllowed = (array) $before->json('modules_allowed');
         $this->assertContains('big5_core', $beforeAllowed);
         $beforeSections = array_map('strval', (array) array_column((array) $before->json('report.sections'), 'key'));
-        $this->assertSame(['summary', 'domains_overview', 'disclaimer'], $beforeSections);
+        $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'], $beforeSections);
 
         /** @var EntitlementManager $entitlements */
         $entitlements = app(EntitlementManager::class);
@@ -214,6 +214,6 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
         }
 
         $afterSections = array_map('strval', (array) array_column((array) $after->json('report.sections'), 'key'));
-        $this->assertSame(['summary', 'domains_overview', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'], $afterSections);
+        $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'], $afterSections);
     }
 }

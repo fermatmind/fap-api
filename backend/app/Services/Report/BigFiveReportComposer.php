@@ -78,6 +78,17 @@ final class BigFiveReportComposer
         $sections = [];
         $overallBucket = $this->resolveOverallBucket($domainBuckets);
 
+        $disclaimerTop = $this->selectCopyRow($copyCompiled, 'disclaimer_top', 'global', 'disclaimer_top', 'all', $locale);
+        if (is_array($disclaimerTop)) {
+            $sections[] = $this->makeSection(
+                'disclaimer_top',
+                'Important Note',
+                [$this->renderBlock($disclaimerTop, $templateContext)],
+                'free',
+                ReportAccess::MODULE_BIG5_CORE
+            );
+        }
+
         $summaryBlock = $this->selectCopyRow($copyCompiled, 'summary', 'domain', 'overall', $overallBucket, $locale);
         if (is_array($summaryBlock)) {
             $sections[] = $this->makeSection(
@@ -338,8 +349,16 @@ final class BigFiveReportComposer
             $bucket = 'mid';
         }
 
-        if ($section === 'disclaimer') {
-            return [$bucket];
+        if (in_array($section, ['disclaimer', 'disclaimer_top'], true)) {
+            return [$bucket, 'all'];
+        }
+
+        if ($bucket === 'extreme_low') {
+            return ['extreme_low', 'low', 'mid'];
+        }
+
+        if ($bucket === 'extreme_high') {
+            return ['extreme_high', 'high', 'mid'];
         }
 
         if ($bucket === 'mid' && in_array($section, ['top_facets', 'facets_deepdive'], true)) {

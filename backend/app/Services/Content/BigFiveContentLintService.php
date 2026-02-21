@@ -331,8 +331,19 @@ final class BigFiveContentLintService
             return;
         }
 
+        $policy = $this->loader->readJson($this->loader->rawPath('policy.json', $version));
+        $extremeFallbackMap = [];
+        if (
+            is_array($policy)
+            && is_array($policy['copy_bucket_fallback'] ?? null)
+            && is_array($policy['copy_bucket_fallback']['facets_deepdive'] ?? null)
+        ) {
+            $extremeFallbackMap = $policy['copy_bucket_fallback']['facets_deepdive'];
+        }
+
         $domainCoverage = [];
         $facetCoverage = [];
+        $disclaimerCoverage = [];
         $varsUsed = [];
 
         foreach ($rows as $entry) {
@@ -352,8 +363,11 @@ final class BigFiveContentLintService
             if ($metricLevel === 'domain' && in_array($metricCode, self::DOMAINS, true)) {
                 $domainCoverage[$locale][$metricCode][$bucket] = true;
             }
-            if ($metricLevel === 'facet' && in_array($metricCode, self::FACETS, true) && in_array($bucket, ['low', 'high'], true)) {
+            if ($metricLevel === 'facet' && in_array($metricCode, self::FACETS, true) && in_array($bucket, ['low', 'high', 'extreme_low', 'extreme_high'], true)) {
                 $facetCoverage[$metricCode][$bucket] = true;
+            }
+            if ($metricLevel === 'global' && in_array($section, ['disclaimer', 'disclaimer_top'], true) && $bucket === 'all') {
+                $disclaimerCoverage[$section][$locale] = true;
             }
 
             foreach (['title', 'body'] as $field) {
@@ -385,9 +399,22 @@ final class BigFiveContentLintService
         }
 
         foreach (self::FACETS as $facet) {
-            foreach (['low', 'high'] as $bucket) {
-                if (!isset($facetCoverage[$facet][$bucket])) {
-                    $errors[] = $this->error($file, 1, "facet copy missing: facet={$facet}, bucket={$bucket}");
+            foreach (['low', 'high', 'extreme_low', 'extreme_high'] as $bucket) {
+                if (isset($facetCoverage[$facet][$bucket])) {
+                    continue;
+                }
+                $fallbackBucket = strtolower((string) ($extremeFallbackMap[$bucket] ?? ''));
+                if ($fallbackBucket !== '' && isset($facetCoverage[$facet][$fallbackBucket])) {
+                    continue;
+                }
+                $errors[] = $this->error($file, 1, "facet copy missing: facet={$facet}, bucket={$bucket}");
+            }
+        }
+
+        foreach (['disclaimer_top', 'disclaimer'] as $section) {
+            foreach (['zh-cn', 'en'] as $locale) {
+                if (!isset($disclaimerCoverage[$section][$locale])) {
+                    $errors[] = $this->error($file, 1, "{$section} copy missing for locale={$locale}");
                 }
             }
         }
@@ -432,6 +459,22 @@ final class BigFiveContentLintService
             }
             if (!is_array($node['faq'] ?? null)) {
                 $errors[] = $this->error($file, 1, "locales.{$locale}.faq must be array.");
+                continue;
+            }
+
+            foreach ((array) $node['faq'] as $index => $faqItem) {
+                if (!is_array($faqItem)) {
+                    $errors[] = $this->error($file, 1, "locales.{$locale}.faq.{$index} must be object.");
+                    continue;
+                }
+                $question = trim((string) ($faqItem['q'] ?? $faqItem['question'] ?? ''));
+                $answer = trim((string) ($faqItem['a'] ?? $faqItem['answer'] ?? ''));
+                if ($question === '') {
+                    $errors[] = $this->error($file, 1, "locales.{$locale}.faq.{$index}.question missing.");
+                }
+                if ($answer === '') {
+                    $errors[] = $this->error($file, 1, "locales.{$locale}.faq.{$index}.answer missing.");
+                }
             }
         }
     }
