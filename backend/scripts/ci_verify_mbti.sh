@@ -57,6 +57,9 @@ bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
 php artisan fap:schema:verify
 
 RUN_BIG5_OCEAN_GATE="${RUN_BIG5_OCEAN_GATE:-0}"
+RUN_FULL_SCALE_REGRESSION="${RUN_FULL_SCALE_REGRESSION:-0}"
+SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
   php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1

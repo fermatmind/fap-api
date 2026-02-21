@@ -21,6 +21,7 @@ use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SyncScaleSlugs;
 use App\Console\Commands\ContentLint;
 use App\Console\Commands\ContentCompile;
+use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\Ops\PartitionAttemptAnswerRows;
 
 class Kernel extends ConsoleKernel
@@ -50,6 +51,7 @@ class Kernel extends ConsoleKernel
         SyncScaleSlugs::class,
         ContentLint::class,
         ContentCompile::class,
+        CiScaleImpact::class,
         PartitionAttemptAnswerRows::class,
     ];
 
