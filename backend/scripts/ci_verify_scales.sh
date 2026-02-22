@@ -102,4 +102,41 @@ echo "[CI][scales] commerce reconcile keys verified\n";
 echo "[CI][scales] running BIG5 perf budget gate"
 bash "${BACKEND_DIR}/scripts/ci/verify_big5_perf.sh"
 
+echo "[CI][scales] checking BIG5 questions sidecar artifact (warn-only budget)"
+QUESTIONS_FULL="${BACKEND_DIR}/content_packs/BIG5_OCEAN/v1/compiled/questions.compiled.json"
+QUESTIONS_MIN="${BACKEND_DIR}/content_packs/BIG5_OCEAN/v1/compiled/questions.min.compiled.json"
+if [[ ! -f "${QUESTIONS_MIN}" ]]; then
+  echo "[CI][scales][FAIL] missing sidecar compiled file: ${QUESTIONS_MIN}" >&2
+  exit 29
+fi
+if [[ ! -f "${QUESTIONS_FULL}" ]]; then
+  echo "[CI][scales][FAIL] missing compiled file: ${QUESTIONS_FULL}" >&2
+  exit 30
+fi
+
+FULL_BYTES="$(wc -c < "${QUESTIONS_FULL}" | tr -d '[:space:]')"
+MIN_BYTES="$(wc -c < "${QUESTIONS_MIN}" | tr -d '[:space:]')"
+if [[ "${FULL_BYTES}" == "0" ]]; then
+  echo "[CI][scales][FAIL] questions.compiled.json is empty" >&2
+  exit 31
+fi
+
+RATIO="$(php -r '$full=(float)$argv[1];$min=(float)$argv[2];echo $full>0?number_format($min/$full,4,".",""):"1.0000";' "${FULL_BYTES}" "${MIN_BYTES}")"
+echo "[CI][scales] questions sizes full_bytes=${FULL_BYTES} min_bytes=${MIN_BYTES} ratio=${RATIO}"
+
+MAX_RATIO="$(php -r '$cfg=require $argv[1];echo (string)($cfg["questions"]["min_compiled_max_ratio"] ?? "0.60");' "${BACKEND_DIR}/config/big5_content_budget.php")"
+MAX_BYTES="$(php -r '$cfg=require $argv[1];echo (string)($cfg["questions"]["min_compiled_max_bytes"] ?? "300000");' "${BACKEND_DIR}/config/big5_content_budget.php")"
+php -r '
+$ratio=(float)($argv[1] ?? "1");
+$maxRatio=(float)($argv[2] ?? "0.6");
+$minBytes=(int)($argv[3] ?? "0");
+$maxBytes=(int)($argv[4] ?? "300000");
+if ($ratio > $maxRatio) {
+    fwrite(STDOUT, "[CI][scales][WARN] questions.min ratio exceeds budget: {$ratio} > {$maxRatio}\n");
+}
+if ($minBytes > $maxBytes) {
+    fwrite(STDOUT, "[CI][scales][WARN] questions.min bytes exceed budget: {$minBytes} > {$maxBytes}\n");
+}
+' "${RATIO}" "${MAX_RATIO}" "${MIN_BYTES}" "${MAX_BYTES}"
+
 echo "[CI][scales] completed"
