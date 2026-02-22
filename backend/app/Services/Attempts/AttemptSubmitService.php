@@ -287,6 +287,29 @@ class AttemptSubmitService
                 $locked->answers_summary_json = $this->buildClinicalAnswersSummary($mergedAnswers, $normed, $durationMs);
             }
 
+            if ($scaleCode === 'SDS_20' && is_array($scoreResult->normedJson ?? null)) {
+                $normed = (array) $scoreResult->normedJson;
+                $versionSnapshot = is_array($normed['version_snapshot'] ?? null)
+                    ? $normed['version_snapshot']
+                    : [];
+
+                $snapshot = $locked->calculation_snapshot_json;
+                if (!is_array($snapshot)) {
+                    $snapshot = [];
+                }
+
+                $snapshot['sds_20'] = [
+                    'pack_id' => (string) ($versionSnapshot['pack_id'] ?? $packId),
+                    'pack_version' => (string) ($versionSnapshot['pack_version'] ?? $dirVersion),
+                    'policy_version' => (string) ($versionSnapshot['policy_version'] ?? ''),
+                    'engine_version' => (string) ($versionSnapshot['engine_version'] ?? data_get($normed, 'engine_version', 'v2.0_Factor_Logic')),
+                    'scoring_spec_version' => (string) ($versionSnapshot['scoring_spec_version'] ?? $scoringSpecVersion),
+                    'content_manifest_hash' => (string) ($versionSnapshot['content_manifest_hash'] ?? ''),
+                ];
+                $snapshot['quality'] = is_array($normed['quality'] ?? null) ? $normed['quality'] : ($snapshot['quality'] ?? []);
+                $locked->calculation_snapshot_json = $snapshot;
+            }
+
             if ($locked->started_at === null) {
                 $locked->started_at = now();
             }
@@ -307,7 +330,7 @@ class AttemptSubmitService
             $axisStates = $axisScores['axis_states'] ?? null;
 
             $resultJson = $scoreResult->toArray();
-            if ($scaleCode === 'BIG5_OCEAN' && is_array($resultJson['normed_json'] ?? null)) {
+            if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true) && is_array($resultJson['normed_json'] ?? null)) {
                 $resultJson = array_merge($resultJson, $resultJson['normed_json']);
             }
             $resultJson['scale_code'] = $scaleCode;

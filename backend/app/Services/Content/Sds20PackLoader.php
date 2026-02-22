@@ -57,6 +57,33 @@ final class Sds20PackLoader
     }
 
     /**
+     * @return array<int,array{direction:int}>
+     */
+    public function loadQuestionIndex(?string $version = null): array
+    {
+        $version = $this->normalizeVersion($version);
+        $rows = $this->readCsvWithLines($this->rawPath('questions_sds20_bilingual.csv', $version));
+
+        $out = [];
+        foreach ($rows as $entry) {
+            $row = (array) ($entry['row'] ?? []);
+            $qid = (int) ($row['question_id'] ?? 0);
+            $direction = (int) ($row['direction'] ?? 0);
+            if ($qid <= 0 || !in_array($direction, [1, -1], true)) {
+                continue;
+            }
+
+            $out[$qid] = [
+                'direction' => $direction,
+            ];
+        }
+
+        ksort($out, SORT_NUMERIC);
+
+        return $out;
+    }
+
+    /**
      * @return array{locale_requested:string,locale_resolved:string,items:list<array<string,mixed>>}
      */
     public function loadQuestionsDoc(string $locale, ?string $version = null): array
@@ -218,6 +245,33 @@ final class Sds20PackLoader
         $version = $this->normalizeVersion($version);
 
         return $this->readJson($this->rawPath('policy.json', $version)) ?? [];
+    }
+
+    public function resolveManifestHash(?string $version = null): string
+    {
+        $version = $this->normalizeVersion($version);
+        $manifest = $this->readJson($this->compiledPath('manifest.json', $version));
+        if (!is_array($manifest)) {
+            return '';
+        }
+
+        $hash = trim((string) ($manifest['compiled_hash'] ?? ''));
+        if ($hash !== '') {
+            return $hash;
+        }
+
+        $hashes = is_array($manifest['hashes'] ?? null) ? $manifest['hashes'] : [];
+        if ($hashes === []) {
+            return '';
+        }
+
+        ksort($hashes);
+        $rows = [];
+        foreach ($hashes as $name => $value) {
+            $rows[] = trim((string) $name) . ':' . trim((string) $value);
+        }
+
+        return hash('sha256', implode("\n", $rows));
     }
 
     /**
