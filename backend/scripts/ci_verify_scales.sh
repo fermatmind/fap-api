@@ -80,4 +80,26 @@ foreach ($required as $key) {
 echo "[CI][scales] telemetry metrics keys verified=" . count($required) . "\n";
 ' "${TELEMETRY_JSON}"
 
+echo "[CI][scales] running commerce reconcile smoke"
+RECON_DATE="$(TZ=Asia/Shanghai date +%F)"
+RECON_JSON="$(cd "${BACKEND_DIR}" && php artisan commerce:reconcile --date="${RECON_DATE}" --org_id=0 --json=1 | tail -n 1)"
+php -r '
+$raw = $argv[1] ?? "";
+$decoded = json_decode($raw, true);
+if (!is_array($decoded)) {
+    fwrite(STDERR, "[CI][scales][FAIL] commerce reconcile output is not valid json\n");
+    exit(27);
+}
+foreach (["ok", "paid_count", "unlocked_count", "mismatch_count", "mismatches"] as $key) {
+    if (!array_key_exists($key, $decoded)) {
+        fwrite(STDERR, "[CI][scales][FAIL] commerce reconcile missing key: {$key}\n");
+        exit(28);
+    }
+}
+echo "[CI][scales] commerce reconcile keys verified\n";
+' "${RECON_JSON}"
+
+echo "[CI][scales] running BIG5 perf budget gate"
+bash "${BACKEND_DIR}/scripts/ci/verify_big5_perf.sh"
+
 echo "[CI][scales] completed"

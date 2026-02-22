@@ -134,7 +134,9 @@ final class BigFiveReportComposer
             $locked,
             count($sections),
             (string) ($attempt->pack_id ?? BigFivePackLoader::PACK_ID),
-            (string) ($attempt->dir_version ?? BigFivePackLoader::PACK_VERSION)
+            (string) ($attempt->dir_version ?? BigFivePackLoader::PACK_VERSION),
+            (string) ($scoreResult['norms']['norms_version'] ?? ''),
+            null
         );
 
         return [

@@ -42,6 +42,46 @@ return [
         'cdf_file' => 'resources/stats/normal_cdf_0p01.csv',
     ],
 
+    'bootstrap' => [
+        'source_root' => storage_path('app/norm_sources/big5'),
+        'fallback_raw_csv' => 'content_packs/BIG5_OCEAN/v1/raw/norm_stats.csv',
+        'quality_filters' => ['A', 'B'],
+        'artifact_output_dir' => 'resources/norms/big5/build_artifacts',
+        'hash_algo' => 'sha256',
+        'sources' => [
+            'johnson_osf' => [
+                'locale' => 'en',
+                'region' => 'GLOBAL',
+                'group_id' => 'en_johnson_all_18-60',
+                'gender' => 'ALL',
+                'age_min' => 18,
+                'age_max' => 60,
+                'norms_version' => '2026Q1_bootstrap_v1',
+                'source_id' => 'GLOBAL_IPIPNEO_JOHNSON_ARCHIVE',
+                'source_type' => 'open_dataset',
+                'status' => 'CALIBRATED',
+                'published_at' => '2026-02-21T00:00:00Z',
+                'input_csv' => 'johnson_osf/en_attempts.csv',
+                'fallback_group_id' => 'en_johnson_all_18-60',
+            ],
+            'zh_cn_validation' => [
+                'locale' => 'zh-CN',
+                'region' => 'CN_MAINLAND',
+                'group_id' => 'zh-CN_xu_all_18-60',
+                'gender' => 'ALL',
+                'age_min' => 18,
+                'age_max' => 60,
+                'norms_version' => '2026Q1_xu_v1',
+                'source_id' => 'ZH_CN_IPIPNEO120_XU',
+                'source_type' => 'peer_reviewed',
+                'status' => 'PROVISIONAL',
+                'published_at' => '2026-02-21T00:00:00Z',
+                'input_csv' => 'zh_cn_validation/zh_cn_attempts.csv',
+                'fallback_group_id' => 'zh-CN_xu_all_18-60',
+            ],
+        ],
+    ],
+
     'rolling' => [
         'publish_thresholds' => [
             'zh-CN_prod_all_18-60' => 5000,

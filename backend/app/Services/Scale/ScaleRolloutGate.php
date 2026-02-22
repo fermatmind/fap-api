@@ -8,6 +8,10 @@ use App\Exceptions\Api\ApiProblemException;
 
 final class ScaleRolloutGate
 {
+    public const PAYWALL_OFF = 'off';
+    public const PAYWALL_FREE_ONLY = 'free_only';
+    public const PAYWALL_FULL = 'full';
+
     /**
      * @param array<string,mixed> $scaleRow
      */
@@ -21,6 +25,11 @@ final class ScaleRolloutGate
         );
         if (!$enabledInProd) {
             throw self::notEnabled($scaleCode, $region, 'disabled');
+        }
+
+        $paywallMode = self::paywallMode($scaleRow);
+        if ($paywallMode === self::PAYWALL_OFF) {
+            throw self::notEnabled($scaleCode, $region, 'paywall_off');
         }
 
         $enabledRegions = self::enabledRegions($capabilities);
@@ -44,6 +53,17 @@ final class ScaleRolloutGate
                 throw self::notEnabled($scaleCode, $region, 'ratio_not_hit');
             }
         }
+    }
+
+    /**
+     * @param array<string,mixed> $scaleRow
+     */
+    public static function paywallMode(array $scaleRow): string
+    {
+        $capabilities = self::capabilities($scaleRow);
+        $raw = $capabilities['paywall_mode'] ?? ($capabilities['rollout']['paywall_mode'] ?? self::PAYWALL_FULL);
+
+        return self::normalizePaywallMode($raw);
     }
 
     /**
@@ -135,6 +155,16 @@ final class ScaleRolloutGate
         return $default;
     }
 
+    private static function normalizePaywallMode(mixed $value): string
+    {
+        $mode = strtolower(trim((string) $value));
+        if (in_array($mode, [self::PAYWALL_OFF, self::PAYWALL_FREE_ONLY, self::PAYWALL_FULL], true)) {
+            return $mode;
+        }
+
+        return self::PAYWALL_FULL;
+    }
+
     private static function notEnabled(string $scaleCode, string $region, string $reason): ApiProblemException
     {
         return new ApiProblemException(
@@ -149,4 +179,3 @@ final class ScaleRolloutGate
         );
     }
 }
-

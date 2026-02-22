@@ -112,6 +112,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'enabled_in_prod' => true,
                 'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                 'rollout_ratio' => 1.0,
+                'paywall_mode' => 'full',
             ],
             'view_policy_json' => [
                 'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],

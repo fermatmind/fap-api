@@ -375,7 +375,10 @@ class AttemptSubmitService
                 (string) ($qualityPayload['level'] ?? 'D'),
                 (string) ($reportPayload['variant'] ?? 'free'),
                 (bool) ($reportPayload['locked'] ?? true),
-                (bool) ($responsePayload['idempotent'] ?? false)
+                (bool) ($responsePayload['idempotent'] ?? false),
+                $dirVersion,
+                null,
+                (string) ($normsPayload['norms_version'] ?? '')
             );
         }
 

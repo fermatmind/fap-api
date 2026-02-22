@@ -48,7 +48,7 @@ final class BigFiveOceanDriver implements DriverInterface
             'locale' => (string) ($ctx['locale'] ?? ''),
             'region' => (string) ($ctx['region'] ?? ''),
             'country' => (string) ($ctx['region'] ?? ''),
-            'age_band' => (string) ($ctx['age_band'] ?? 'all'),
+            'age_band' => (string) ($ctx['age_band'] ?? ''),
             'gender' => (string) ($ctx['gender'] ?? 'ALL'),
             'duration_ms' => (int) ($ctx['duration_ms'] ?? 0),
             'validity_items' => is_array($ctx['validity_items'] ?? null) ? $ctx['validity_items'] : [],
@@ -67,7 +67,8 @@ final class BigFiveOceanDriver implements DriverInterface
             (string) ($norms['group_id'] ?? ''),
             (string) ($quality['level'] ?? 'D'),
             BigFivePackLoader::PACK_ID,
-            $version
+            $version,
+            (string) ($norms['norms_version'] ?? '')
         );
 
         $domainsPct = is_array($dto['scores_0_100']['domains_percentile'] ?? null)

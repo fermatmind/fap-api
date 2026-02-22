@@ -103,6 +103,8 @@ final class NormsBig5Rebuild extends Command
             ->get();
 
         $deduped = [];
+        $lastAcceptedByIdentity = [];
+        $dedupWindowSeconds = 30 * 24 * 3600;
         foreach ($rows as $row) {
             $rowLocale = $this->normalizeLocale((string) ($row->locale ?? ''));
             $rowRegion = $this->normalizeRegion((string) ($row->region ?? ''));
@@ -115,9 +117,19 @@ final class NormsBig5Rebuild extends Command
                 $row->user_id ?? null,
                 (string) ($row->anon_id ?? '')
             );
-            if (! isset($deduped[$identity])) {
-                $deduped[$identity] = $row;
+            $submittedAtRaw = (string) ($row->submitted_at ?? '');
+            $submittedAtTs = strtotime($submittedAtRaw);
+            if ($submittedAtTs === false) {
+                continue;
             }
+
+            $lastAcceptedTs = $lastAcceptedByIdentity[$identity] ?? null;
+            if (is_int($lastAcceptedTs) && ($lastAcceptedTs - $submittedAtTs) < $dedupWindowSeconds) {
+                continue;
+            }
+
+            $lastAcceptedByIdentity[$identity] = $submittedAtTs;
+            $deduped[] = $row;
         }
 
         $domainSamples = [];

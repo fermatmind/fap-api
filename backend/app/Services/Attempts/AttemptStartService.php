@@ -22,6 +22,7 @@ class AttemptStartService
         private ScaleRegistry $registry,
         private ContentPacksIndex $packsIndex,
         private BigFivePackLoader $bigFivePackLoader,
+        private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
         private BigFiveTelemetry $bigFiveTelemetry,
@@ -51,6 +52,18 @@ class AttemptStartService
 
         ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $anonId);
 
+        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $retakePolicy = $this->resolveBigFiveRetakePolicy((string) ($row['default_dir_version'] ?? 'v1'));
+            $this->attemptRateLimitService->assertRetakeAllowed(
+                $orgId,
+                $scaleCode,
+                $ctx->userId(),
+                $anonId,
+                (int) ($retakePolicy['cooldown_hours'] ?? 24),
+                (int) ($retakePolicy['max_attempts_per_30_days'] ?? 3)
+            );
+        }
+
         $packId = (string) ($row['default_pack_id'] ?? '');
         $dirVersion = (string) ($row['default_dir_version'] ?? '');
         if ($packId === '' || $dirVersion === '') {
@@ -59,6 +72,29 @@ class AttemptStartService
 
         $questionCount = $this->resolveQuestionCount($scaleCode, $packId, $dirVersion);
         $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
+        $answersSummaryMeta = $dto->meta;
+        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $legalCompiled = $this->bigFivePackLoader->readCompiledJson('legal.compiled.json', $dirVersion);
+            $legal = is_array($legalCompiled['legal'] ?? null) ? $legalCompiled['legal'] : [];
+            $disclaimerVersion = trim((string) ($legal['disclaimer_version'] ?? ''));
+            $disclaimerHash = trim((string) ($legal['hash'] ?? ''));
+            $normalizedLocale = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
+            $disclaimerTexts = is_array($legal['texts'] ?? null) ? $legal['texts'] : [];
+            $disclaimerText = trim((string) ($disclaimerTexts[$normalizedLocale] ?? ''));
+
+            if ($disclaimerVersion === '') {
+                $disclaimerVersion = 'BIG5_OCEAN_'.$dirVersion;
+            }
+            if ($disclaimerHash === '') {
+                $disclaimerHash = hash('sha256', $disclaimerVersion.'|'.$disclaimerText);
+            }
+
+            $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
+            $answersMeta['disclaimer_version_accepted'] = $disclaimerVersion;
+            $answersMeta['disclaimer_hash'] = $disclaimerHash;
+            $answersMeta['disclaimer_locale'] = $normalizedLocale;
+            $answersSummaryMeta = $answersMeta;
+        }
 
         $clientPlatform = (string) ($dto->clientPlatform ?? 'unknown');
         $clientVersion = (string) ($dto->clientVersion ?? '');
@@ -85,7 +121,7 @@ class AttemptStartService
             'answers_summary_json' => [
                 'stage' => 'start',
                 'created_at_ms' => (int) round(microtime(true) * 1000),
-                'meta' => $dto->meta,
+                'meta' => $answersSummaryMeta,
             ],
         ]);
 
@@ -239,6 +275,41 @@ class AttemptStartService
         $item = $found['item'] ?? [];
 
         return (string) ($item['content_package_version'] ?? '');
+    }
+
+    /**
+     * @return array{cooldown_hours:int,max_attempts_per_30_days:int}
+     */
+    private function resolveBigFiveRetakePolicy(string $dirVersion): array
+    {
+        $cooldownHours = 24;
+        $maxAttempts = 3;
+
+        $compiled = $this->bigFivePackLoader->readCompiledJson('policy.compiled.json', $dirVersion);
+        $policy = is_array($compiled['policy'] ?? null) ? $compiled['policy'] : [];
+        $retake = is_array($policy['retake'] ?? null) ? $policy['retake'] : [];
+
+        if ($retake === []) {
+            $rawPath = base_path('content_packs/BIG5_OCEAN/v1/raw/policy.json');
+            if (is_file($rawPath)) {
+                $raw = json_decode((string) file_get_contents($rawPath), true);
+                if (is_array($raw)) {
+                    $retake = is_array($raw['retake'] ?? null) ? $raw['retake'] : [];
+                }
+            }
+        }
+
+        if (is_numeric($retake['cooldown_hours'] ?? null)) {
+            $cooldownHours = max(0, (int) $retake['cooldown_hours']);
+        }
+        if (is_numeric($retake['max_attempts_per_30_days'] ?? null)) {
+            $maxAttempts = max(0, (int) $retake['max_attempts_per_30_days']);
+        }
+
+        return [
+            'cooldown_hours' => $cooldownHours,
+            'max_attempts_per_30_days' => $maxAttempts,
+        ];
     }
 
 }

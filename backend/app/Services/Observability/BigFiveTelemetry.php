@@ -36,6 +36,7 @@ final class BigFiveTelemetry
                 'region' => $region,
                 'variant' => 'free',
                 'locked' => true,
+                'pack_version' => trim($dirVersion) !== '' ? trim($dirVersion) : null,
             ]
         );
     }
@@ -52,7 +53,10 @@ final class BigFiveTelemetry
         string $qualityLevel,
         string $variant,
         bool $locked,
-        bool $idempotent
+        bool $idempotent,
+        ?string $packVersion = null,
+        ?string $manifestHash = null,
+        ?string $normsVersion = null
     ): void {
         $this->emit(
             'big5_attempt_submitted',
@@ -71,6 +75,9 @@ final class BigFiveTelemetry
                 'variant' => strtolower(trim($variant)),
                 'locked' => $locked,
                 'idempotent' => $idempotent,
+                'pack_version' => trim((string) $packVersion) !== '' ? trim((string) $packVersion) : null,
+                'manifest_hash' => trim((string) $manifestHash) !== '' ? trim((string) $manifestHash) : null,
+                'norms_version' => trim((string) $normsVersion) !== '' ? trim((string) $normsVersion) : null,
             ]
         );
     }
@@ -86,7 +93,8 @@ final class BigFiveTelemetry
         string $normGroupId,
         string $qualityLevel,
         string $packId,
-        string $dirVersion
+        string $dirVersion,
+        ?string $normsVersion = null
     ): void {
         $this->emit(
             'big5_scored',
@@ -102,6 +110,8 @@ final class BigFiveTelemetry
                 'norms_status' => strtoupper(trim($normsStatus)),
                 'norm_group_id' => $normGroupId,
                 'quality_level' => strtoupper(trim($qualityLevel)),
+                'pack_version' => trim($dirVersion) !== '' ? trim($dirVersion) : null,
+                'norms_version' => trim((string) $normsVersion) !== '' ? trim((string) $normsVersion) : null,
             ]
         );
     }
@@ -120,7 +130,9 @@ final class BigFiveTelemetry
         bool $locked,
         int $sectionsCount,
         string $packId,
-        string $dirVersion
+        string $dirVersion,
+        ?string $normsVersion = null,
+        ?string $manifestHash = null
     ): void {
         $this->emit(
             'big5_report_composed',
@@ -139,6 +151,9 @@ final class BigFiveTelemetry
                 'variant' => strtolower(trim($variant)),
                 'locked' => $locked,
                 'sections_count' => $sectionsCount,
+                'pack_version' => trim($dirVersion) !== '' ? trim($dirVersion) : null,
+                'manifest_hash' => trim((string) $manifestHash) !== '' ? trim((string) $manifestHash) : null,
+                'norms_version' => trim((string) $normsVersion) !== '' ? trim((string) $normsVersion) : null,
             ]
         );
     }
@@ -235,6 +250,9 @@ final class BigFiveTelemetry
             'locked' => null,
             'sku_code' => null,
             'offer_code' => null,
+            'pack_version' => null,
+            'manifest_hash' => null,
+            'norms_version' => null,
         ], $meta);
     }
 }
