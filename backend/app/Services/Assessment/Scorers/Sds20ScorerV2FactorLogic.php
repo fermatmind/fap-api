@@ -17,14 +17,13 @@ final class Sds20ScorerV2FactorLogic
 
     public function __construct(
         private readonly SdsNormGroupResolver $normResolver,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param array<int|string,mixed> $answersByQuestionId
-     * @param array<int,array<string,mixed>> $questionIndex
-     * @param array<string,mixed> $policy
-     * @param array<string,mixed> $ctx
+     * @param  array<int|string,mixed>  $answersByQuestionId
+     * @param  array<int,array<string,mixed>>  $questionIndex
+     * @param  array<string,mixed>  $policy
+     * @param  array<string,mixed>  $ctx
      * @return array<string,mixed>
      */
     public function score(
@@ -40,17 +39,17 @@ final class Sds20ScorerV2FactorLogic
         $rawCodes = [];
 
         for ($qid = 1; $qid <= self::QUESTION_COUNT; $qid++) {
-            if (!array_key_exists($qid, $answers)) {
+            if (! array_key_exists($qid, $answers)) {
                 throw new \InvalidArgumentException('INVALID_ANSWER_SET: missing question_id='.$qid);
             }
 
             $code = strtoupper(trim((string) $answers[$qid]));
-            if (!in_array($code, self::ALLOWED_CODES, true)) {
+            if (! in_array($code, self::ALLOWED_CODES, true)) {
                 throw new \InvalidArgumentException('INVALID_ANSWER_SET: invalid code for question_id='.$qid);
             }
 
             $direction = (int) data_get($questionIndex, $qid.'.direction', 0);
-            if (!in_array($direction, [1, -1], true)) {
+            if (! in_array($direction, [1, -1], true)) {
                 throw new \InvalidArgumentException('INVALID_ANSWER_SET: invalid direction for question_id='.$qid);
             }
 
@@ -168,7 +167,7 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<int|string,mixed> $answers
+     * @param  array<int|string,mixed>  $answers
      * @return array<int,string>
      */
     private function normalizeAnswerMap(array $answers): array
@@ -182,7 +181,7 @@ final class Sds20ScorerV2FactorLogic
         $isList = array_keys($answers) === range(0, count($answers) - 1);
         if ($isList) {
             foreach ($answers as $answer) {
-                if (!is_array($answer)) {
+                if (! is_array($answer)) {
                     continue;
                 }
                 $qidRaw = trim((string) ($answer['question_id'] ?? ''));
@@ -229,7 +228,7 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>  $policy
      * @return array<string,int>
      */
     private function resolveBaseMap(array $policy): array
@@ -254,8 +253,8 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<int,string> $rawCodes
-     * @param array<string,mixed> $policy
+     * @param  array<int,string>  $rawCodes
+     * @param  array<string,mixed>  $policy
      * @return array{level:string,flags:list<string>}
      */
     private function buildQuality(array $rawCodes, int $completionSeconds, array $policy): array
@@ -285,7 +284,7 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<int,string> $rawCodes
+     * @param  array<int,string>  $rawCodes
      */
     private function longestRun(array $rawCodes): int
     {
@@ -315,20 +314,24 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<string,mixed> $ctx
+     * @param  array<string,mixed>  $ctx
      */
     private function resolveCompletionSeconds(array $ctx): int
     {
-        $durationMs = (int) ($ctx['duration_ms'] ?? 0);
-        if ($durationMs > 0) {
-            return max(0, (int) floor($durationMs / 1000));
+        $server = (int) ($ctx['server_duration_seconds'] ?? 0);
+        if ($server > 0) {
+            return $server;
         }
 
         $startedAt = $this->toTimestamp($ctx['started_at'] ?? null);
         $submittedAt = $this->toTimestamp($ctx['submitted_at'] ?? null);
-
         if ($startedAt !== null && $submittedAt !== null && $submittedAt >= $startedAt) {
             return $submittedAt - $startedAt;
+        }
+
+        $durationMs = (int) ($ctx['duration_ms'] ?? 0);
+        if ($durationMs > 0) {
+            return max(0, (int) floor($durationMs / 1000));
         }
 
         return 0;
@@ -340,7 +343,7 @@ final class Sds20ScorerV2FactorLogic
             return $value->getTimestamp();
         }
 
-        if (!is_string($value) && !is_numeric($value)) {
+        if (! is_string($value) && ! is_numeric($value)) {
             return null;
         }
 
@@ -368,7 +371,7 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>  $policy
      */
     private function computeIndexScore(int $rawScore, array $policy): int
     {
@@ -384,13 +387,13 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>  $policy
      */
     private function resolveClinicalLevel(int $indexScore, array $policy): string
     {
         $buckets = (array) ($policy['clinical_buckets'] ?? []);
         foreach ($buckets as $bucket) {
-            if (!is_array($bucket)) {
+            if (! is_array($bucket)) {
                 continue;
             }
 
@@ -420,8 +423,8 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<int,int> $itemScores
-     * @param array<string,mixed> $policy
+     * @param  array<int,int>  $itemScores
+     * @param  array<string,mixed>  $policy
      * @return array<string,array{score:int,max:int,severity:string}>
      */
     private function buildFactors(array $itemScores, array $policy): array
@@ -470,8 +473,8 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<int,int> $itemScores
-     * @param list<int> $coreItems
+     * @param  array<int,int>  $itemScores
+     * @param  list<int>  $coreItems
      */
     private function allCoreScoresAtMost(array $itemScores, array $coreItems, int $max): bool
     {
@@ -485,13 +488,13 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<string,mixed> $resolved
+     * @param  array<string,mixed>  $resolved
      * @return array<string,mixed>
      */
     private function buildNormsPayload(array $resolved): array
     {
         $status = strtoupper(trim((string) ($resolved['status'] ?? 'MISSING')));
-        if (!in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+        if (! in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
             $status = 'MISSING';
         }
 
@@ -521,7 +524,7 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<string,mixed> $norms
+     * @param  array<string,mixed>  $norms
      */
     private function resolvePercentile(int $indexScore, array $norms): ?int
     {
@@ -560,7 +563,7 @@ final class Sds20ScorerV2FactorLogic
     }
 
     /**
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>  $policy
      */
     private function hashPolicy(array $policy): string
     {
@@ -572,7 +575,7 @@ final class Sds20ScorerV2FactorLogic
 
     private function sortRecursive(mixed $value): mixed
     {
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             return $value;
         }
 

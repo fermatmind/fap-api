@@ -27,6 +27,7 @@ class AttemptSubmitService
         private AttemptSubmitSideEffects $sideEffects,
         private ReportGatekeeper $reportGatekeeper,
         private BigFiveTelemetry $bigFiveTelemetry,
+        private AttemptDurationResolver $durationResolver,
     ) {}
 
     public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
@@ -82,11 +83,14 @@ class AttemptSubmitService
         $packReleaseManifestHash = trim((string) ($attemptMeta['pack_release_manifest_hash'] ?? ''));
         $policyHash = trim((string) ($attemptMeta['policy_hash'] ?? ''));
         $engineVersion = trim((string) ($attemptMeta['engine_version'] ?? ''));
+        $submittedAt = now();
+        $serverDurationSeconds = $this->durationResolver->resolveServerSecondsFromValues($attempt->started_at, $submittedAt);
 
         $scoreContext = [
             'duration_ms' => $durationMs,
             'started_at' => $attempt->started_at,
-            'submitted_at' => now(),
+            'submitted_at' => $submittedAt,
+            'server_duration_seconds' => $serverDurationSeconds,
             'region' => $region,
             'locale' => $locale,
             'org_id' => $orgId,
@@ -168,7 +172,8 @@ class AttemptSubmitService
             $scoringSpecVersion,
             $actorUserId,
             $actorAnonId,
-            $validityItems
+            $validityItems,
+            $submittedAt
         ) {
             $locked = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)
                 ->lockForUpdate()
@@ -226,7 +231,7 @@ class AttemptSubmitService
                 'scoring_spec_version' => $scoringSpecVersion !== '' ? $scoringSpecVersion : null,
                 'region' => $region,
                 'locale' => $locale,
-                'submitted_at' => now(),
+                'submitted_at' => $submittedAt,
                 'duration_ms' => $durationMs,
                 'answers_digest' => $answersDigest,
             ]);
@@ -356,6 +361,9 @@ class AttemptSubmitService
             $resultJson = $scoreResult->toArray();
             if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true) && is_array($resultJson['normed_json'] ?? null)) {
                 $resultJson = array_merge($resultJson, $resultJson['normed_json']);
+            }
+            if (is_array($resultJson['quality'] ?? null)) {
+                $resultJson['quality']['client_duration_ms'] = $durationMs;
             }
             $resultJson['scale_code'] = $scaleCode;
             $resultJson['pack_id'] = $packId;
