@@ -22,6 +22,7 @@ class AttemptStartService
         private ScaleRegistry $registry,
         private ContentPacksIndex $packsIndex,
         private BigFivePackLoader $bigFivePackLoader,
+        private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
         private BigFiveTelemetry $bigFiveTelemetry,
@@ -50,6 +51,18 @@ class AttemptStartService
         }
 
         ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $anonId);
+
+        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $retakePolicy = $this->resolveBigFiveRetakePolicy((string) ($row['default_dir_version'] ?? 'v1'));
+            $this->attemptRateLimitService->assertRetakeAllowed(
+                $orgId,
+                $scaleCode,
+                $ctx->userId(),
+                $anonId,
+                (int) ($retakePolicy['cooldown_hours'] ?? 24),
+                (int) ($retakePolicy['max_attempts_per_30_days'] ?? 3)
+            );
+        }
 
         $packId = (string) ($row['default_pack_id'] ?? '');
         $dirVersion = (string) ($row['default_dir_version'] ?? '');
@@ -262,6 +275,41 @@ class AttemptStartService
         $item = $found['item'] ?? [];
 
         return (string) ($item['content_package_version'] ?? '');
+    }
+
+    /**
+     * @return array{cooldown_hours:int,max_attempts_per_30_days:int}
+     */
+    private function resolveBigFiveRetakePolicy(string $dirVersion): array
+    {
+        $cooldownHours = 24;
+        $maxAttempts = 3;
+
+        $compiled = $this->bigFivePackLoader->readCompiledJson('policy.compiled.json', $dirVersion);
+        $policy = is_array($compiled['policy'] ?? null) ? $compiled['policy'] : [];
+        $retake = is_array($policy['retake'] ?? null) ? $policy['retake'] : [];
+
+        if ($retake === []) {
+            $rawPath = base_path('content_packs/BIG5_OCEAN/v1/raw/policy.json');
+            if (is_file($rawPath)) {
+                $raw = json_decode((string) file_get_contents($rawPath), true);
+                if (is_array($raw)) {
+                    $retake = is_array($raw['retake'] ?? null) ? $raw['retake'] : [];
+                }
+            }
+        }
+
+        if (is_numeric($retake['cooldown_hours'] ?? null)) {
+            $cooldownHours = max(0, (int) $retake['cooldown_hours']);
+        }
+        if (is_numeric($retake['max_attempts_per_30_days'] ?? null)) {
+            $maxAttempts = max(0, (int) $retake['max_attempts_per_30_days']);
+        }
+
+        return [
+            'cooldown_hours' => $cooldownHours,
+            'max_attempts_per_30_days' => $maxAttempts,
+        ];
     }
 
 }
