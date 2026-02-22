@@ -32,6 +32,7 @@ class ReportGatekeeper
         private SkuCatalog $skus,
         private ReportComposer $reportComposer,
         private BigFiveReportComposer $bigFiveReportComposer,
+        private ClinicalCombo68ReportComposer $clinicalCombo68ReportComposer,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
     ) {
@@ -153,6 +154,11 @@ class ReportGatekeeper
                 $modulesAllowed,
                 static fn (string $module): bool => str_starts_with(strtolower($module), 'big5_')
             ));
+        } elseif ($scaleCode === ReportAccess::SCALE_CLINICAL_COMBO_68) {
+            $modulesAllowed = array_values(array_filter(
+                $modulesAllowed,
+                static fn (string $module): bool => str_starts_with(strtolower($module), 'clinical_')
+            ));
         }
         if ($modulesAllowed === []) {
             $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked($scaleCode);
@@ -182,6 +188,15 @@ class ReportGatekeeper
         $scoreContract = $this->extractScoreContract($result);
         $normsPayload = is_array($scoreContract['norms'] ?? null) ? $scoreContract['norms'] : [];
         $qualityPayload = is_array($scoreContract['quality'] ?? null) ? $scoreContract['quality'] : [];
+        $crisisAlert = (bool) ($qualityPayload['crisis_alert'] ?? false);
+
+        if ($scaleCode === ReportAccess::SCALE_CLINICAL_COMBO_68 && $crisisAlert) {
+            $paywall['offers'] = [];
+            $paywall['upgrade_sku'] = null;
+            $paywall['upgrade_sku_effective'] = null;
+            $modulesOffered = [];
+            $modulesPreview = [];
+        }
 
         $variant = $hasPaidModuleAccess ? ReportAccess::VARIANT_FULL : ReportAccess::VARIANT_FREE;
         $reportAccessLevel = $variant === ReportAccess::VARIANT_FREE
@@ -281,7 +296,7 @@ class ReportGatekeeper
 
         // Non-MBTI reports are still built by GenericReportBuilder. Re-apply teaser
         // masking when locked to avoid exposing full payload to unpaid users.
-        if ($locked && !in_array(strtoupper($scaleCode), ['MBTI', 'BIG5_OCEAN'], true)) {
+        if ($locked && !in_array(strtoupper($scaleCode), ['MBTI', 'BIG5_OCEAN', 'CLINICAL_COMBO_68'], true)) {
             $report = $this->applyTeaser($report, $viewPolicy);
         }
 
@@ -706,6 +721,37 @@ class ReportGatekeeper
 
             if ($scaleCode === 'BIG5_OCEAN') {
                 $composed = $this->bigFiveReportComposer->composeVariant($attempt, $result, $variant, [
+                    'org_id' => (int) ($attempt->org_id ?? 0),
+                    'variant' => $variant,
+                    'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                        ? ReportAccess::REPORT_ACCESS_FREE
+                        : ReportAccess::REPORT_ACCESS_FULL,
+                    'modules_allowed' => $modulesAllowed,
+                    'modules_preview' => $modulesPreview,
+                ]);
+                if (!($composed['ok'] ?? false)) {
+                    return [
+                        'ok' => false,
+                        'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
+                        'message' => (string) ($composed['message'] ?? 'report generation failed.'),
+                        'status' => (int) ($composed['status'] ?? 500),
+                    ];
+                }
+
+                $report = $composed['report'] ?? null;
+
+                return is_array($report)
+                    ? ['ok' => true, 'report' => $report]
+                    : [
+                        'ok' => false,
+                        'error' => 'REPORT_FAILED',
+                        'message' => 'report generation failed.',
+                        'status' => 500,
+                    ];
+            }
+
+            if ($scaleCode === 'CLINICAL_COMBO_68') {
+                $composed = $this->clinicalCombo68ReportComposer->composeVariant($attempt, $result, $variant, [
                     'org_id' => (int) ($attempt->org_id ?? 0),
                     'variant' => $variant,
                     'report_access_level' => $variant === ReportAccess::VARIANT_FREE

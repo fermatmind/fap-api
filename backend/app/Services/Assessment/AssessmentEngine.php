@@ -43,11 +43,19 @@ class AssessmentEngine
             $driverType = 'generic_scoring';
         }
 
-        if ($scaleCode === 'BIG5_OCEAN' || $driverType === 'big5_ocean') {
+        if (
+            $scaleCode === 'BIG5_OCEAN'
+            || $driverType === 'big5_ocean'
+            || $scaleCode === 'CLINICAL_COMBO_68'
+            || $driverType === 'clinical_combo_68'
+        ) {
             $driver = $this->resolveDriver($driverType);
             if (!$driver) {
                 return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$driverType}");
             }
+
+            $isClinical = $scaleCode === 'CLINICAL_COMBO_68' || $driverType === 'clinical_combo_68';
+            $scoringSpecVersion = $isClinical ? 'v1.0_2026' : 'big5_spec_2026Q1_v1';
 
             $ctxMerged = array_merge($ctx, [
                 'org_id' => $orgId,
@@ -55,7 +63,7 @@ class AssessmentEngine
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'content_package_version' => $dirVersion,
-                'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+                'scoring_spec_version' => $scoringSpecVersion,
                 'base_dir' => '',
                 'scoring_spec' => [],
             ]);
@@ -63,6 +71,9 @@ class AssessmentEngine
             try {
                 $result = $driver->score($answers, [], $ctxMerged);
             } catch (\Throwable $e) {
+                if ($e instanceof \InvalidArgumentException) {
+                    return $this->error('SCORING_INPUT_INVALID', $e->getMessage());
+                }
                 return $this->error('SCORING_FAILED', 'scoring failed.');
             }
 
@@ -75,7 +86,7 @@ class AssessmentEngine
                     'dir_version' => $dirVersion,
                     'content_package_version' => $dirVersion,
                 ],
-                'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+                'scoring_spec_version' => $scoringSpecVersion,
             ];
         }
 
@@ -126,6 +137,9 @@ class AssessmentEngine
         try {
             $result = $driver->score($answers, $scoringSpec, $ctxMerged);
         } catch (\Throwable $e) {
+            if ($e instanceof \InvalidArgumentException) {
+                return $this->error('SCORING_INPUT_INVALID', $e->getMessage());
+            }
             return $this->error('SCORING_FAILED', 'scoring failed.');
         }
 

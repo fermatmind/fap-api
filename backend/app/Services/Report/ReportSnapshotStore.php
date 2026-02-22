@@ -16,6 +16,7 @@ class ReportSnapshotStore
     public function __construct(
         private ReportComposer $reportComposer,
         private BigFiveReportComposer $bigFiveReportComposer,
+        private ClinicalCombo68ReportComposer $clinicalCombo68ReportComposer,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
     ) {}
@@ -331,6 +332,24 @@ class ReportSnapshotStore
 
         if ($scaleCode === 'BIG5_OCEAN') {
             $composed = $this->bigFiveReportComposer->composeVariant($attempt, $result, $variant, [
+                'org_id' => (int) ($attempt->org_id ?? 0),
+                'variant' => $variant,
+                'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                    ? ReportAccess::REPORT_ACCESS_FREE
+                    : ReportAccess::REPORT_ACCESS_FULL,
+                'modules_allowed' => $modulesAllowed,
+                'modules_preview' => $modulesPreview,
+            ]);
+            if (!($composed['ok'] ?? false)) {
+                return null;
+            }
+            $report = $composed['report'] ?? null;
+
+            return is_array($report) ? $report : null;
+        }
+
+        if ($scaleCode === 'CLINICAL_COMBO_68') {
+            $composed = $this->clinicalCombo68ReportComposer->composeVariant($attempt, $result, $variant, [
                 'org_id' => (int) ($attempt->org_id ?? 0),
                 'variant' => $variant,
                 'report_access_level' => $variant === ReportAccess::VARIANT_FREE

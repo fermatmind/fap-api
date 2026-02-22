@@ -94,8 +94,9 @@ class EntitlementManager
             ->first();
 
         $grantedModules = ReportAccess::normalizeModules($modules ?? $this->modulesFromBenefitCode($benefitCode));
-        if ($grantedModules !== [] && !in_array(ReportAccess::MODULE_CORE_FREE, $grantedModules, true)) {
-            $grantedModules[] = ReportAccess::MODULE_CORE_FREE;
+        $freeModule = $this->freeModuleFromBenefitCode($benefitCode);
+        if ($grantedModules !== [] && !in_array($freeModule, $grantedModules, true)) {
+            $grantedModules[] = $freeModule;
             $grantedModules = ReportAccess::normalizeModules($grantedModules);
         }
 
@@ -343,8 +344,28 @@ class EntitlementManager
                 ReportAccess::MODULE_BIG5_ACTION_PLAN,
             ],
             'BIG5_ACTION_PLAN' => [ReportAccess::MODULE_BIG5_ACTION_PLAN],
+            'CLINICAL_COMBO_68_PRO' => [
+                ReportAccess::MODULE_CLINICAL_FULL,
+                ReportAccess::MODULE_CLINICAL_RESILIENCE,
+                ReportAccess::MODULE_CLINICAL_PERFECTIONISM,
+                ReportAccess::MODULE_CLINICAL_ACTION_PLAN,
+            ],
             default => [],
         };
+    }
+
+    private function freeModuleFromBenefitCode(string $benefitCode): string
+    {
+        $benefitCode = strtoupper(trim($benefitCode));
+
+        if ($benefitCode === 'BIG5_FULL_REPORT' || $benefitCode === 'BIG5_ACTION_PLAN' || $benefitCode === 'BIG5_FULL') {
+            return ReportAccess::MODULE_BIG5_CORE;
+        }
+        if ($benefitCode === 'CLINICAL_COMBO_68_PRO') {
+            return ReportAccess::MODULE_CLINICAL_CORE;
+        }
+
+        return ReportAccess::MODULE_CORE_FREE;
     }
 
     /**

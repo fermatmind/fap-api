@@ -17,6 +17,9 @@ final class StartAttemptDTO
         public readonly ?string $channel,
         public readonly ?string $referrer,
         public readonly ?array $meta,
+        public readonly ?bool $consentAccepted,
+        public readonly ?string $consentVersion,
+        public readonly ?string $consentLocale,
     ) {}
 
     /**
@@ -29,6 +32,11 @@ final class StartAttemptDTO
             $meta = null;
         }
 
+        $consent = $payload['consent'] ?? null;
+        if (!is_array($consent)) {
+            $consent = [];
+        }
+
         return new self(
             scaleCode: strtoupper(trim((string) ($payload['scale_code'] ?? ''))),
             region: self::nullableString($payload['region'] ?? null),
@@ -39,6 +47,9 @@ final class StartAttemptDTO
             channel: self::nullableString($payload['channel'] ?? null),
             referrer: self::nullableString($payload['referrer'] ?? null),
             meta: $meta,
+            consentAccepted: array_key_exists('accepted', $consent) ? (bool) $consent['accepted'] : null,
+            consentVersion: self::nullableString($consent['version'] ?? null),
+            consentLocale: self::nullableString($consent['locale'] ?? null),
         );
     }
 

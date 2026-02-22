@@ -139,6 +139,54 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer->syncSlugsForScale($big5);
         $this->command?->info('ScaleRegistrySeeder: BIG5_OCEAN scale upserted.');
+
+        $clinical = $writer->upsertScale([
+            'code' => 'CLINICAL_COMBO_68',
+            'org_id' => 0,
+            'primary_slug' => 'clinical-combo-68',
+            'slugs_json' => [
+                'clinical-combo-68',
+                'depression-anxiety-combo',
+            ],
+            'driver_type' => 'clinical_combo_68',
+            'assessment_driver' => 'clinical_combo_68',
+            'default_pack_id' => 'CLINICAL_COMBO_68',
+            'default_region' => $defaultRegion,
+            'default_locale' => $defaultLocale,
+            'default_dir_version' => 'v1',
+            'capabilities_json' => [
+                'assets' => false,
+                'questions' => true,
+                'enabled_in_prod' => true,
+                'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                'rollout_ratio' => 1.0,
+                'paywall_mode' => 'full',
+            ],
+            'view_policy_json' => [
+                'free_sections' => ['disclaimer_top', 'free_core', 'free_blocks'],
+                'blur_others' => false,
+                'teaser_percent' => 0.0,
+                'upgrade_sku' => 'SKU_CLINICAL_COMBO_68_PRO_299',
+            ],
+            'commercial_json' => [
+                'price_tier' => 'PAID',
+                'report_benefit_code' => 'CLINICAL_COMBO_68_PRO',
+                'credit_benefit_code' => 'CLINICAL_COMBO_68_PRO',
+                'report_unlock_sku' => 'SKU_CLINICAL_COMBO_68_PRO_299',
+                'offers' => [],
+            ],
+            'seo_schema_json' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Quiz',
+                'name' => 'Comprehensive Depression and Anxiety Inventory',
+                'description' => 'Clinical combo assessment with 68 items.',
+            ],
+            'is_public' => true,
+            'is_active' => true,
+        ]);
+
+        $writer->syncSlugsForScale($clinical);
+        $this->command?->info('ScaleRegistrySeeder: CLINICAL_COMBO_68 scale upserted.');
     }
 
     private function resolveSkuDefaults(): array

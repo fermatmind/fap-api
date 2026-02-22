@@ -1,0 +1,64 @@
+{
+    "schema": "clinical_combo_68.landing.compiled.v1",
+    "pack_id": "CLINICAL_COMBO_68",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T10:00:07.494909Z",
+    "landing": {
+        "pack_id": "CLINICAL_COMBO_68",
+        "pack_version": "v1",
+        "title": {
+            "zh-CN": "抑郁焦虑综合测评【学术专业版】",
+            "en": "Comprehensive Depression and Anxiety Inventory"
+        },
+        "disclaimer": {
+            "zh-CN": "本报告结果基于您的自评数据生成，仅供自我探索与心理健康筛查参考，不可作为医疗诊断证明。如有明显不适，请及时前往正规医疗机构精神心理科/心理科就诊。",
+            "en": "This report is generated from self-reported data and is for self-exploration and mental health screening only. It is not a medical diagnosis. If you feel significant distress, please seek professional care promptly."
+        },
+        "crisis_banner": {
+            "zh-CN": "检测到您当前承受着极大的心理痛苦。请记住，您并不孤单。优先求助专业力量是勇敢的表现。",
+            "en": "We detected severe psychological distress. You are not alone. Seeking professional support first is a courageous and recommended step."
+        },
+        "privacy_notice": {
+            "zh-CN": "测评答案会以脱敏与最小化原则处理，用于生成报告与质量监控。",
+            "en": "Responses are handled under data minimization and de-identification principles for report generation and quality monitoring."
+        },
+        "modules": {
+            "zh-CN": {
+                "M1": {
+                    "title": "情绪频率探测",
+                    "guidance": "请回想在过去的两周（14天）里，您有多常受到以下问题的困扰？"
+                },
+                "M2": {
+                    "title": "近期压力与心理韧性",
+                    "guidance": "在过去的一个月里，您对生活节奏、挫折与压力的真实感受是？"
+                },
+                "M3": {
+                    "title": "完美主义与家庭标准",
+                    "guidance": "抛开近期的情绪，请根据您从小到大的一贯性格或成长经历进行评价。"
+                },
+                "M4": {
+                    "title": "强迫习惯与功能受损",
+                    "guidance": "最后，请评估在最近7天里，您是否有一些难以自控的特定思维或行为及其影响。"
+                }
+            },
+            "en": {
+                "M1": {
+                    "title": "Mood and Anxiety Frequency",
+                    "guidance": "Please think about the past two weeks (14 days). How often have you been bothered by the following problems?"
+                },
+                "M2": {
+                    "title": "Stress and Psychological Resilience",
+                    "guidance": "Over the past month, how often have you felt or experienced the following?"
+                },
+                "M3": {
+                    "title": "Perfectionism and Family Standards",
+                    "guidance": "Setting aside recent mood, please rate each statement based on your long-term personality pattern or upbringing experience."
+                },
+                "M4": {
+                    "title": "Compulsive Symptoms and Functional Impairment",
+                    "guidance": "Finally, please evaluate whether you have had hard-to-control thoughts or behaviors in the past 7 days, and how much they affected you."
+                }
+            }
+        }
+    }
+}

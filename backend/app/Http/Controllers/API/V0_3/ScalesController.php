@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Services\Content\BigFivePackLoader;
+use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\QuestionsService;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
@@ -70,7 +71,8 @@ class ScalesController extends Controller
         Request $request,
         string $scale_code,
         QuestionsService $questionsService,
-        BigFivePackLoader $bigFivePackLoader
+        BigFivePackLoader $bigFivePackLoader,
+        ClinicalComboPackLoader $clinicalPackLoader
     ): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
@@ -197,6 +199,37 @@ class ScalesController extends Controller
                     'disclaimer_version' => $disclaimerVersion,
                     'disclaimer_hash' => $disclaimerHash,
                     'disclaimer_text' => $disclaimerText,
+                ],
+            ]);
+        }
+
+        if ($code === 'CLINICAL_COMBO_68') {
+            $version = (string) ($row['default_dir_version'] ?? ClinicalComboPackLoader::PACK_VERSION);
+            $doc = $clinicalPackLoader->loadQuestionsDoc($locale, $version);
+            $consent = $clinicalPackLoader->loadConsent((string) ($doc['locale_resolved'] ?? $locale), $version);
+            $privacyAddendum = $clinicalPackLoader->loadPrivacyAddendum((string) ($doc['locale_resolved'] ?? $locale), $version);
+            $crisisResources = $clinicalPackLoader->loadCrisisResources((string) ($doc['locale_resolved'] ?? $locale), $region, $version);
+
+            return response()->json([
+                'ok' => true,
+                'scale_code' => $code,
+                'region' => $region,
+                'locale' => (string) ($doc['locale_resolved'] ?? 'zh-CN'),
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'content_package_version' => $version,
+                'questions' => [
+                    'schema' => 'fap.questions.v1',
+                    'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
+                ],
+                'meta' => [
+                    'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
+                    'locale_resolved' => (string) ($doc['locale_resolved'] ?? 'zh-CN'),
+                    'modules' => is_array($doc['modules'] ?? null) ? $doc['modules'] : [],
+                    'disclaimer_text' => (string) ($doc['disclaimer_text'] ?? ''),
+                    'consent' => $consent,
+                    'privacy_addendum' => $privacyAddendum,
+                    'crisis_resources' => $crisisResources,
                 ],
             ]);
         }

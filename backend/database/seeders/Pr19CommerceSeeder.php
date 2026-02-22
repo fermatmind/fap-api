@@ -95,6 +95,10 @@ class Pr19CommerceSeeder extends Seeder
                     'report_benefit_code' => 'BIG5_FULL_REPORT',
                     'credit_benefit_code' => 'BIG5_FULL_REPORT',
                 ],
+                'CLINICAL_COMBO_68' => [
+                    'report_benefit_code' => 'CLINICAL_COMBO_68_PRO',
+                    'credit_benefit_code' => 'CLINICAL_COMBO_68_PRO',
+                ],
             ];
 
             foreach ($targets as $scaleCode => $benefits) {
@@ -148,6 +152,7 @@ class Pr19CommerceSeeder extends Seeder
         $paths = [
             database_path('seed_data/skus_mbti.json'),
             database_path('seed_data/skus_big5_ocean.json'),
+            database_path('seed_data/skus_clinical_combo_68_pro.json'),
         ];
 
         $rows = [];

@@ -7,6 +7,7 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Content\BigFivePackLoader;
+use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Scale\ScaleRegistry;
@@ -22,6 +23,7 @@ class AttemptStartService
         private ScaleRegistry $registry,
         private ContentPacksIndex $packsIndex,
         private BigFivePackLoader $bigFivePackLoader,
+        private ClinicalComboPackLoader $clinicalPackLoader,
         private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
@@ -73,6 +75,29 @@ class AttemptStartService
         $questionCount = $this->resolveQuestionCount($scaleCode, $packId, $dirVersion);
         $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
         $answersSummaryMeta = $dto->meta;
+
+        if (strtoupper($scaleCode) === 'CLINICAL_COMBO_68') {
+            $policy = $this->clinicalPackLoader->loadPolicy($dirVersion);
+            $consentPolicy = is_array($policy['consent_policy'] ?? null) ? $policy['consent_policy'] : [];
+            $consentVersion = trim((string) ($dto->consentVersion ?? ($consentPolicy['version'] ?? '')));
+            $consentAccepted = (bool) ($dto->consentAccepted ?? false);
+            $consentLocale = $this->clinicalPackLoader->normalizeLocale((string) ($dto->consentLocale ?? $locale));
+
+            if ((bool) config('fap.features.clinical_consent_enforce', false)) {
+                if ($consentAccepted !== true || $consentVersion === '') {
+                    throw new ApiProblemException(422, 'CONSENT_REQUIRED', 'consent is required for CLINICAL_COMBO_68.');
+                }
+            }
+
+            $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
+            $answersMeta['consent'] = [
+                'accepted' => $consentAccepted,
+                'version' => $consentVersion,
+                'locale' => $consentLocale,
+            ];
+            $answersSummaryMeta = $answersMeta;
+        }
+
         if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
             $legalCompiled = $this->bigFivePackLoader->readCompiledJson('legal.compiled.json', $dirVersion);
             $legal = is_array($legalCompiled['legal'] ?? null) ? $legalCompiled['legal'] : [];
@@ -194,6 +219,16 @@ class AttemptStartService
             return count($items);
         }
 
+        if (strtoupper($scaleCode) === 'CLINICAL_COMBO_68') {
+            $doc = $this->clinicalPackLoader->loadQuestionsDoc('zh-CN', $dirVersion);
+            $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
+            if ($items === []) {
+                $this->logAndThrowContentPackError('CLINICAL_COMPILED_QUESTIONS_MISSING', $packId, $dirVersion, 'questions_zh.csv');
+            }
+
+            return count($items);
+        }
+
         $questionsPath = '';
 
         $found = $this->packsIndex->find($packId, $dirVersion);
@@ -272,6 +307,10 @@ class AttemptStartService
 
     private function resolveContentPackageVersion(string $packId, string $dirVersion): string
     {
+        if (strtoupper($packId) === 'CLINICAL_COMBO_68') {
+            return $dirVersion;
+        }
+
         $found = $this->packsIndex->find($packId, $dirVersion);
         if (! ($found['ok'] ?? false)) {
             return '';

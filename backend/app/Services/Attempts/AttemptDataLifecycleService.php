@@ -39,10 +39,27 @@ final class AttemptDataLifecycleService
             'report_snapshots_deleted' => 0,
             'shares_deleted' => 0,
             'report_jobs_deleted' => 0,
+            'attempt_answer_sets_deleted' => 0,
+            'attempt_answer_rows_deleted' => 0,
+            'benefit_grants_revoked' => 0,
             'attempts_redacted' => 0,
         ];
 
         DB::transaction(function () use ($attemptId, $orgId, &$counts, $context): void {
+            if (SchemaBaseline::hasTable('attempt_answer_sets')) {
+                $counts['attempt_answer_sets_deleted'] = DB::table('attempt_answer_sets')
+                    ->where('org_id', $orgId)
+                    ->where('attempt_id', $attemptId)
+                    ->delete();
+            }
+
+            if (SchemaBaseline::hasTable('attempt_answer_rows')) {
+                $counts['attempt_answer_rows_deleted'] = DB::table('attempt_answer_rows')
+                    ->where('org_id', $orgId)
+                    ->where('attempt_id', $attemptId)
+                    ->delete();
+            }
+
             $counts['results_deleted'] = DB::table('results')
                 ->where('org_id', $orgId)
                 ->where('attempt_id', $attemptId)
@@ -63,6 +80,18 @@ final class AttemptDataLifecycleService
                 $counts['report_jobs_deleted'] = DB::table('report_jobs')
                     ->where('attempt_id', $attemptId)
                     ->delete();
+            }
+
+            if (SchemaBaseline::hasTable('benefit_grants')) {
+                $counts['benefit_grants_revoked'] = DB::table('benefit_grants')
+                    ->where('org_id', $orgId)
+                    ->where('attempt_id', $attemptId)
+                    ->where('status', 'active')
+                    ->update([
+                        'status' => 'revoked',
+                        'revoked_at' => now(),
+                        'updated_at' => now(),
+                    ]);
             }
 
             $updates = [

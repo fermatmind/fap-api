@@ -255,6 +255,54 @@ final class AttemptSubmitSideEffects
         $responsePayload['report'] = $gate;
     }
 
+    /**
+     * @param array<string,mixed> $resultPayload
+     * @param array<string,mixed> $versionMeta
+     */
+    public function recordClinicalScoreEvent(
+        OrgContext $ctx,
+        string $attemptId,
+        ?string $actorUserId,
+        ?string $actorAnonId,
+        array $resultPayload,
+        array $versionMeta = []
+    ): void {
+        $contract = $this->extractScoreContract($resultPayload);
+        $quality = is_array($contract['quality'] ?? null) ? $contract['quality'] : [];
+        $scores = is_array($contract['scores'] ?? null) ? $contract['scores'] : [];
+        $snapshot = is_array($contract['version_snapshot'] ?? null) ? $contract['version_snapshot'] : [];
+
+        $this->eventRecorder->record(
+            'clinical_combo_68_scored',
+            $this->resolveUserIdInt($ctx, $actorUserId),
+            [
+                'scale_code' => 'CLINICAL_COMBO_68',
+                'attempt_id' => $attemptId,
+                'quality' => [
+                    'level' => (string) ($quality['level'] ?? 'D'),
+                    'flags' => array_values(array_filter(array_map('strval', (array) ($quality['flags'] ?? [])))),
+                    'crisis_alert' => (bool) ($quality['crisis_alert'] ?? false),
+                ],
+                'scores' => $this->extractClinicalScoreSnapshot($scores),
+                'versions' => [
+                    'pack_id' => (string) ($snapshot['pack_id'] ?? ($versionMeta['pack_id'] ?? 'CLINICAL_COMBO_68')),
+                    'pack_version' => (string) ($snapshot['pack_version'] ?? ''),
+                    'policy_version' => (string) ($snapshot['policy_version'] ?? ''),
+                    'engine_version' => (string) ($snapshot['engine_version'] ?? 'v1.0_2026'),
+                    'scoring_spec_version' => (string) ($snapshot['scoring_spec_version'] ?? ($versionMeta['scoring_spec_version'] ?? 'v1.0_2026')),
+                    'content_manifest_hash' => (string) ($snapshot['content_manifest_hash'] ?? ''),
+                ],
+            ],
+            [
+                'org_id' => $ctx->orgId(),
+                'anon_id' => $actorAnonId,
+                'attempt_id' => $attemptId,
+                'pack_id' => (string) ($versionMeta['pack_id'] ?? ''),
+                'dir_version' => (string) ($versionMeta['dir_version'] ?? ''),
+            ]
+        );
+    }
+
     private function resolveUserId(OrgContext $ctx, ?string $actorUserId): ?string
     {
         $candidates = [$actorUserId, $ctx->userId()];
@@ -295,5 +343,51 @@ final class AttemptSubmitSideEffects
         }
 
         return (int) $value;
+    }
+
+    /**
+     * @param array<string,mixed> $payload
+     * @return array<string,mixed>
+     */
+    private function extractScoreContract(array $payload): array
+    {
+        $candidates = [
+            $payload['normed_json'] ?? null,
+            $payload['breakdown_json']['score_result'] ?? null,
+            $payload['axis_scores_json']['score_result'] ?? null,
+            $payload,
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (!is_array($candidate)) {
+                continue;
+            }
+            if (strtoupper((string) ($candidate['scale_code'] ?? '')) !== 'CLINICAL_COMBO_68') {
+                continue;
+            }
+
+            return $candidate;
+        }
+
+        return [];
+    }
+
+    /**
+     * @param array<string,mixed> $scores
+     * @return array<string,array<string,mixed>>
+     */
+    private function extractClinicalScoreSnapshot(array $scores): array
+    {
+        $out = [];
+        foreach (['depression', 'anxiety', 'stress', 'resilience', 'perfectionism', 'ocd'] as $dim) {
+            $node = is_array($scores[$dim] ?? null) ? $scores[$dim] : [];
+            $out[$dim] = [
+                'raw' => (int) ($node['raw'] ?? 0),
+                't_score' => (int) ($node['t_score'] ?? 0),
+                'level' => (string) ($node['level'] ?? ''),
+            ];
+        }
+
+        return $out;
     }
 }

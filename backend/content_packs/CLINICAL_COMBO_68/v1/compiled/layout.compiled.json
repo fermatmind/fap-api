@@ -1,0 +1,157 @@
+{
+    "schema": "clinical_combo_68.layout.compiled.v1",
+    "pack_id": "CLINICAL_COMBO_68",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T10:00:07.494877Z",
+    "layout": {
+        "schema": "clinical_combo_68.report.layout.v2",
+        "conflict_rules": {
+            "selector": "priority_desc_block_id_asc",
+            "exclusive_group_policy": "single_per_group"
+        },
+        "sections": [
+            {
+                "key": "disclaimer_top",
+                "source": "copy",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 1
+            },
+            {
+                "key": "crisis_banner",
+                "source": "copy",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 0,
+                "max_blocks": 1
+            },
+            {
+                "key": "quick_overview",
+                "source": "blocks",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 2
+            },
+            {
+                "key": "symptoms_depression",
+                "source": "blocks",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 2
+            },
+            {
+                "key": "symptoms_anxiety",
+                "source": "blocks",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 2
+            },
+            {
+                "key": "symptoms_ocd",
+                "source": "blocks",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 2
+            },
+            {
+                "key": "stress_resilience",
+                "source": "blocks",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 3
+            },
+            {
+                "key": "perfectionism_overview",
+                "source": "blocks",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 2
+            },
+            {
+                "key": "paid_deep_dive",
+                "source": "blocks",
+                "access_level": "paid",
+                "module_code": "clinical_full",
+                "required_in_variant": [
+                    "full"
+                ],
+                "min_blocks": 0,
+                "max_blocks": 8
+            },
+            {
+                "key": "action_plan",
+                "source": "blocks",
+                "access_level": "paid",
+                "module_code": "clinical_action_plan",
+                "required_in_variant": [
+                    "full"
+                ],
+                "min_blocks": 0,
+                "max_blocks": 6
+            },
+            {
+                "key": "resources_footer",
+                "source": "blocks",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 3
+            },
+            {
+                "key": "scoring_notes",
+                "source": "blocks",
+                "access_level": "free",
+                "module_code": "clinical_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 2
+            }
+        ]
+    }
+}

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Content\BigFiveContentCompileService;
+use App\Services\Content\ClinicalComboContentCompileService;
 use App\Services\Content\ContentCompileService;
 use Illuminate\Console\Command;
 
@@ -17,12 +18,22 @@ final class ContentCompile extends Command
 
     protected $description = 'Compile content packs into normalized runtime artifacts.';
 
-    public function handle(ContentCompileService $service, BigFiveContentCompileService $bigFiveCompile): int
+    public function handle(
+        ContentCompileService $service,
+        BigFiveContentCompileService $bigFiveCompile,
+        ClinicalComboContentCompileService $clinicalCompile
+    ): int
     {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
         if (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
             $single = $bigFiveCompile->compile(is_string($version) ? $version : null);
+            $result = [
+                'ok' => (bool) ($single['ok'] ?? false),
+                'packs' => [$single],
+            ];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === 'CLINICAL_COMBO_68') {
+            $single = $clinicalCompile->compile(is_string($version) ? $version : null);
             $result = [
                 'ok' => (bool) ($single['ok'] ?? false),
                 'packs' => [$single],

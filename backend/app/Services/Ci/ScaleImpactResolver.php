@@ -8,6 +8,7 @@ final class ScaleImpactResolver
 {
     private const SCALE_MBTI = 'MBTI';
     private const SCALE_BIG5 = 'BIG5_OCEAN';
+    private const SCALE_CLINICAL = 'CLINICAL_COMBO_68';
 
     /**
      * @var list<string>
@@ -44,12 +45,14 @@ final class ScaleImpactResolver
         $sharedChanged = false;
         $mbtiChanged = false;
         $big5Changed = false;
+        $clinicalChanged = false;
 
         foreach ($normalized as $path) {
             if ($this->isSharedPath($path)) {
                 $sharedChanged = true;
                 $mbtiChanged = true;
                 $big5Changed = true;
+                $clinicalChanged = true;
                 continue;
             }
 
@@ -60,13 +63,25 @@ final class ScaleImpactResolver
             if ($this->isBig5Path($path)) {
                 $big5Changed = true;
             }
+
+            if ($this->isClinicalPath($path)) {
+                $clinicalChanged = true;
+            }
         }
 
         $runFullScaleRegression = $sharedChanged;
         $runBig5OceanGate = $sharedChanged || $big5Changed;
+        $runClinicalCombo68Gate = $sharedChanged || $clinicalChanged;
         $runMbtiSmoke = true;
 
-        $scaleScope = $this->buildScaleScope($runFullScaleRegression, $runBig5OceanGate, $mbtiChanged, $big5Changed);
+        $scaleScope = $this->buildScaleScope(
+            $runFullScaleRegression,
+            $runBig5OceanGate,
+            $runClinicalCombo68Gate,
+            $mbtiChanged,
+            $big5Changed,
+            $clinicalChanged
+        );
 
         $scalesChanged = [];
         if ($mbtiChanged) {
@@ -75,18 +90,23 @@ final class ScaleImpactResolver
         if ($big5Changed) {
             $scalesChanged[] = self::SCALE_BIG5;
         }
+        if ($clinicalChanged) {
+            $scalesChanged[] = self::SCALE_CLINICAL;
+        }
 
         return [
             'changed_files' => $normalized,
             'shared_changed' => $sharedChanged,
             'mbti_changed' => $mbtiChanged,
             'big5_ocean_changed' => $big5Changed,
+            'clinical_combo_68_changed' => $clinicalChanged,
             'run_full_scale_regression' => $runFullScaleRegression,
             'run_big5_ocean_gate' => $runBig5OceanGate,
+            'run_clinical_combo_68_gate' => $runClinicalCombo68Gate,
             'run_mbti_smoke' => $runMbtiSmoke,
             'scale_scope' => $scaleScope,
             'scales_changed' => $scalesChanged,
-            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed),
+            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed, $clinicalChanged),
         ];
     }
 
@@ -158,10 +178,29 @@ final class ScaleImpactResolver
         return false;
     }
 
-    private function buildScaleScope(bool $runFullScaleRegression, bool $runBig5OceanGate, bool $mbtiChanged, bool $big5Changed): string
+    private function isClinicalPath(string $path): bool
+    {
+        $upper = strtoupper($path);
+
+        return str_contains($upper, 'CLINICAL_COMBO_68')
+            || str_contains($upper, 'CDAI68');
+    }
+
+    private function buildScaleScope(
+        bool $runFullScaleRegression,
+        bool $runBig5OceanGate,
+        bool $runClinicalCombo68Gate,
+        bool $mbtiChanged,
+        bool $big5Changed,
+        bool $clinicalChanged
+    ): string
     {
         if ($runFullScaleRegression) {
             return 'full_regression';
+        }
+
+        if ($runBig5OceanGate && $runClinicalCombo68Gate) {
+            return 'big5_clinical_with_mbti_smoke';
         }
 
         if ($runBig5OceanGate) {
@@ -172,6 +211,14 @@ final class ScaleImpactResolver
             return 'big5_with_mbti_smoke';
         }
 
+        if ($runClinicalCombo68Gate) {
+            if ($mbtiChanged) {
+                return 'clinical_plus_mbti';
+            }
+
+            return 'clinical_with_mbti_smoke';
+        }
+
         if ($mbtiChanged) {
             return 'mbti_only';
         }
@@ -180,13 +227,21 @@ final class ScaleImpactResolver
             return 'big5_with_mbti_smoke';
         }
 
+        if ($clinicalChanged) {
+            return 'clinical_with_mbti_smoke';
+        }
+
         return 'mbti_only';
     }
 
-    private function buildReason(bool $sharedChanged, bool $mbtiChanged, bool $big5Changed): string
+    private function buildReason(bool $sharedChanged, bool $mbtiChanged, bool $big5Changed, bool $clinicalChanged): string
     {
         if ($sharedChanged) {
             return 'shared-layer changed: run full cross-scale regression';
+        }
+
+        if ($big5Changed && $clinicalChanged) {
+            return 'BIG5 and CLINICAL changed: run both gates + MBTI smoke';
         }
 
         if ($big5Changed && $mbtiChanged) {
@@ -195,6 +250,14 @@ final class ScaleImpactResolver
 
         if ($big5Changed) {
             return 'BIG5 changed: run BIG5 gate + MBTI smoke';
+        }
+
+        if ($clinicalChanged && $mbtiChanged) {
+            return 'CLINICAL changed with MBTI: run clinical gate + MBTI smoke';
+        }
+
+        if ($clinicalChanged) {
+            return 'CLINICAL changed: run clinical gate + MBTI smoke';
         }
 
         if ($mbtiChanged) {

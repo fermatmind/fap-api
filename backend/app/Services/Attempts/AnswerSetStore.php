@@ -13,6 +13,8 @@ class AnswerSetStore
         $canonicalJson = $this->encodeJson($normalized);
         $answersHash = hash('sha256', $canonicalJson);
         $compressed = $this->compressJson($canonicalJson);
+        $isClinical = strtoupper((string) ($attempt->scale_code ?? '')) === 'CLINICAL_COMBO_68';
+        $storedAnswersJson = $isClinical ? null : $compressed;
 
         $now = now();
         DB::table('attempt_answer_sets')->updateOrInsert([
@@ -23,7 +25,7 @@ class AnswerSetStore
             'pack_id' => (string) ($attempt->pack_id ?? ''),
             'dir_version' => (string) ($attempt->dir_version ?? ''),
             'scoring_spec_version' => $scoringSpecVersion !== '' ? $scoringSpecVersion : null,
-            'answers_json' => $compressed,
+            'answers_json' => $storedAnswersJson,
             'answers_hash' => $answersHash,
             'question_count' => count($normalized),
             'duration_ms' => $durationMs,
@@ -34,7 +36,7 @@ class AnswerSetStore
         return [
             'ok' => true,
             'answers_hash' => $answersHash,
-            'answers_json' => $compressed,
+            'answers_json' => $storedAnswersJson,
             'canonical_json' => $canonicalJson,
             'question_count' => count($normalized),
         ];
