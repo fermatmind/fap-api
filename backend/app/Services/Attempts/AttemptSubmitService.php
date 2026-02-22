@@ -37,6 +37,7 @@ class AttemptSubmitService
         }
 
         $answers = $dto->answers;
+        $validityItems = $dto->validityItems;
         $durationMs = $dto->durationMs;
         $inviteToken = $dto->inviteToken;
         $actorUserId = $this->resolveUserId($ctx, $dto->userId);
@@ -86,6 +87,7 @@ class AttemptSubmitService
             'attempt_id' => $attemptId,
             'anon_id' => $actorAnonId,
             'user_id' => $actorUserId,
+            'validity_items' => $validityItems,
         ];
 
         $scored = $this->assessmentRunner->run(
@@ -144,7 +146,8 @@ class AttemptSubmitService
             $contentPackageVersion,
             $scoringSpecVersion,
             $actorUserId,
-            $actorAnonId
+            $actorAnonId,
+            $validityItems
         ) {
             $locked = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)
                 ->lockForUpdate()
@@ -206,6 +209,15 @@ class AttemptSubmitService
                 'duration_ms' => $durationMs,
                 'answers_digest' => $answersDigest,
             ]);
+
+            if ($scaleCode === 'BIG5_OCEAN') {
+                $snapshot = $locked->calculation_snapshot_json;
+                if (!is_array($snapshot)) {
+                    $snapshot = [];
+                }
+                $snapshot['validity_items'] = $validityItems;
+                $locked->calculation_snapshot_json = $snapshot;
+            }
 
             if ($scaleCode === 'BIG5_OCEAN' && is_array($scoreResult->normedJson ?? null)) {
                 $normed = (array) $scoreResult->normedJson;

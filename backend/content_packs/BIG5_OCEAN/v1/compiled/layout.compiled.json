@@ -1,0 +1,252 @@
+{
+    "schema": "big5.layout.compiled.v1",
+    "pack_id": "BIG5_OCEAN",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T01:56:58.034957Z",
+    "layout": {
+        "schema": "big5.report_layout.v1",
+        "pack_id": "BIG5_OCEAN",
+        "pack_version": "v1",
+        "conflict_rules": {
+            "selector": "priority_desc_block_id_asc",
+            "exclusive_group_policy": "single_per_group"
+        },
+        "sections": [
+            {
+                "key": "disclaimer_top",
+                "source": "copy",
+                "title_en": "Important Note",
+                "title_zh": "重要提示",
+                "access_level": "free",
+                "module_code": "big5_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 1,
+                "fallback_tags": [
+                    "section:disclaimer_top"
+                ]
+            },
+            {
+                "key": "summary",
+                "source": "copy",
+                "title_en": "Summary",
+                "title_zh": "总结",
+                "access_level": "free",
+                "module_code": "big5_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 1,
+                "fallback_tags": [
+                    "section:summary"
+                ]
+            },
+            {
+                "key": "domains_overview",
+                "source": "blocks",
+                "title_en": "Domains Overview",
+                "title_zh": "维度总览",
+                "access_level": "free",
+                "module_code": "big5_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 5,
+                "max_blocks": 5,
+                "exclusive_groups": [
+                    "domain_O",
+                    "domain_C",
+                    "domain_E",
+                    "domain_A",
+                    "domain_N"
+                ],
+                "fallback_tags": [
+                    "section:domains_overview"
+                ]
+            },
+            {
+                "key": "facet_table",
+                "source": "blocks",
+                "title_en": "Facet Table",
+                "title_zh": "细分维度表",
+                "access_level": "paid",
+                "module_code": "big5_full",
+                "required_in_variant": [
+                    "full"
+                ],
+                "min_blocks": 30,
+                "max_blocks": 30,
+                "exclusive_groups": [
+                    "facet_table_N1",
+                    "facet_table_N2",
+                    "facet_table_N3",
+                    "facet_table_N4",
+                    "facet_table_N5",
+                    "facet_table_N6",
+                    "facet_table_E1",
+                    "facet_table_E2",
+                    "facet_table_E3",
+                    "facet_table_E4",
+                    "facet_table_E5",
+                    "facet_table_E6",
+                    "facet_table_O1",
+                    "facet_table_O2",
+                    "facet_table_O3",
+                    "facet_table_O4",
+                    "facet_table_O5",
+                    "facet_table_O6",
+                    "facet_table_A1",
+                    "facet_table_A2",
+                    "facet_table_A3",
+                    "facet_table_A4",
+                    "facet_table_A5",
+                    "facet_table_A6",
+                    "facet_table_C1",
+                    "facet_table_C2",
+                    "facet_table_C3",
+                    "facet_table_C4",
+                    "facet_table_C5",
+                    "facet_table_C6"
+                ],
+                "fallback_tags": [
+                    "section:facet_table"
+                ]
+            },
+            {
+                "key": "top_facets",
+                "source": "blocks",
+                "title_en": "Top Facets",
+                "title_zh": "优势刻面",
+                "access_level": "paid",
+                "module_code": "big5_full",
+                "required_in_variant": [
+                    "full"
+                ],
+                "min_blocks": 3,
+                "max_blocks": 3,
+                "exclusive_groups": [
+                    "top_facets_N1",
+                    "top_facets_N2",
+                    "top_facets_N3",
+                    "top_facets_N4",
+                    "top_facets_N5",
+                    "top_facets_N6",
+                    "top_facets_E1",
+                    "top_facets_E2",
+                    "top_facets_E3",
+                    "top_facets_E4",
+                    "top_facets_E5",
+                    "top_facets_E6",
+                    "top_facets_O1",
+                    "top_facets_O2",
+                    "top_facets_O3",
+                    "top_facets_O4",
+                    "top_facets_O5",
+                    "top_facets_O6",
+                    "top_facets_A1",
+                    "top_facets_A2",
+                    "top_facets_A3",
+                    "top_facets_A4",
+                    "top_facets_A5",
+                    "top_facets_A6",
+                    "top_facets_C1",
+                    "top_facets_C2",
+                    "top_facets_C3",
+                    "top_facets_C4",
+                    "top_facets_C5",
+                    "top_facets_C6"
+                ],
+                "fallback_tags": [
+                    "section:top_facets"
+                ]
+            },
+            {
+                "key": "facets_deepdive",
+                "source": "blocks",
+                "title_en": "Facets Deep Dive",
+                "title_zh": "刻面深度解读",
+                "access_level": "paid",
+                "module_code": "big5_full",
+                "required_in_variant": [
+                    "full"
+                ],
+                "min_blocks": 3,
+                "max_blocks": 6,
+                "exclusive_groups": [
+                    "facets_deepdive_N1",
+                    "facets_deepdive_N2",
+                    "facets_deepdive_N3",
+                    "facets_deepdive_N4",
+                    "facets_deepdive_N5",
+                    "facets_deepdive_N6",
+                    "facets_deepdive_E1",
+                    "facets_deepdive_E2",
+                    "facets_deepdive_E3",
+                    "facets_deepdive_E4",
+                    "facets_deepdive_E5",
+                    "facets_deepdive_E6",
+                    "facets_deepdive_O1",
+                    "facets_deepdive_O2",
+                    "facets_deepdive_O3",
+                    "facets_deepdive_O4",
+                    "facets_deepdive_O5",
+                    "facets_deepdive_O6",
+                    "facets_deepdive_A1",
+                    "facets_deepdive_A2",
+                    "facets_deepdive_A3",
+                    "facets_deepdive_A4",
+                    "facets_deepdive_A5",
+                    "facets_deepdive_A6",
+                    "facets_deepdive_C1",
+                    "facets_deepdive_C2",
+                    "facets_deepdive_C3",
+                    "facets_deepdive_C4",
+                    "facets_deepdive_C5",
+                    "facets_deepdive_C6"
+                ],
+                "fallback_tags": [
+                    "section:facets_deepdive"
+                ]
+            },
+            {
+                "key": "action_plan",
+                "source": "copy",
+                "title_en": "Action Plan",
+                "title_zh": "行动建议",
+                "access_level": "paid",
+                "module_code": "big5_action_plan",
+                "required_in_variant": [
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 1,
+                "fallback_tags": [
+                    "section:action_plan"
+                ]
+            },
+            {
+                "key": "disclaimer",
+                "source": "copy",
+                "title_en": "Disclaimer",
+                "title_zh": "免责声明",
+                "access_level": "free",
+                "module_code": "big5_core",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "min_blocks": 1,
+                "max_blocks": 1,
+                "fallback_tags": [
+                    "section:disclaimer"
+                ]
+            }
+        ]
+    }
+}

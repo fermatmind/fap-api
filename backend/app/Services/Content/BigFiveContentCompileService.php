@@ -11,8 +11,7 @@ final class BigFiveContentCompileService
     public function __construct(
         private readonly BigFivePackLoader $loader,
         private readonly BigFiveContentLintService $lint,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{ok:bool,pack_id:string,version:string,compiled_dir:string,errors:list<array{file:string,line:int,message:string}>,hashes:array<string,string>}
@@ -21,7 +20,7 @@ final class BigFiveContentCompileService
     {
         $version = $this->normalizeVersion($version);
         $lint = $this->lint->lint($version);
-        if (!($lint['ok'] ?? false)) {
+        if (! ($lint['ok'] ?? false)) {
             return [
                 'ok' => false,
                 'pack_id' => BigFivePackLoader::PACK_ID,
@@ -33,7 +32,7 @@ final class BigFiveContentCompileService
         }
 
         $compiledDir = $this->loader->compiledDir($version);
-        if (!is_dir($compiledDir)) {
+        if (! is_dir($compiledDir)) {
             File::makeDirectory($compiledDir, 0775, true, true);
         }
 
@@ -45,6 +44,8 @@ final class BigFiveContentCompileService
         $goldenRows = $this->loader->readCsvWithLines($this->loader->rawPath('golden_cases.csv', $version));
         $landing = $this->loader->readJson($this->loader->rawPath('landing_i18n.json', $version));
         $policy = $this->loader->readJson($this->loader->rawPath('policy.json', $version));
+        $layout = $this->loader->readJson($this->loader->rawPath('report_layout.json', $version));
+        $blocks = $this->readRawBlocks($version);
 
         $facetMap = [];
         foreach ($facetRows as $entry) {
@@ -188,7 +189,7 @@ final class BigFiveContentCompileService
             $ageMax = (int) ($row['age_max'] ?? 0);
             $ageBand = trim((string) ($row['age_band'] ?? ''));
             if ($ageBand === '' && $ageMin > 0 && $ageMax > 0 && $ageMax >= $ageMin) {
-                $ageBand = $ageMin . '-' . $ageMax;
+                $ageBand = $ageMin.'-'.$ageMax;
             }
             if ($ageBand === '') {
                 $ageBand = 'all';
@@ -306,6 +307,20 @@ final class BigFiveContentCompileService
                 'generated_at' => now()->toISOString(),
                 'rows' => $copy,
             ],
+            'layout.compiled.json' => [
+                'schema' => 'big5.layout.compiled.v1',
+                'pack_id' => BigFivePackLoader::PACK_ID,
+                'pack_version' => $version,
+                'generated_at' => now()->toISOString(),
+                'layout' => is_array($layout) ? $layout : [],
+            ],
+            'blocks.compiled.json' => [
+                'schema' => 'big5.blocks.compiled.v1',
+                'pack_id' => BigFivePackLoader::PACK_ID,
+                'pack_version' => $version,
+                'generated_at' => now()->toISOString(),
+                'blocks' => $blocks,
+            ],
             'landing.compiled.json' => [
                 'schema' => 'big5.landing.compiled.v1',
                 'pack_id' => BigFivePackLoader::PACK_ID,
@@ -334,10 +349,10 @@ final class BigFiveContentCompileService
         foreach ($files as $name => $payload) {
             $path = $this->loader->compiledPath($name, $version);
             $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-            if (!is_string($json)) {
+            if (! is_string($json)) {
                 continue;
             }
-            File::put($path, $json . "\n");
+            File::put($path, $json."\n");
             $hashes[$name] = hash('sha256', $json);
         }
 
@@ -361,7 +376,7 @@ final class BigFiveContentCompileService
         ];
         $manifestJson = json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
         if (is_string($manifestJson)) {
-            File::put($this->loader->compiledPath('manifest.json', $version), $manifestJson . "\n");
+            File::put($this->loader->compiledPath('manifest.json', $version), $manifestJson."\n");
             $hashes['manifest.json'] = hash('sha256', $manifestJson);
         }
 
@@ -383,7 +398,44 @@ final class BigFiveContentCompileService
     }
 
     /**
-     * @param array<string,array<string,mixed>> $groups
+     * @return list<array<string,mixed>>
+     */
+    private function readRawBlocks(string $version): array
+    {
+        $dir = $this->loader->rawPath('blocks', $version);
+        if (! is_dir($dir)) {
+            return [];
+        }
+
+        $files = File::files($dir);
+        usort($files, static fn (\SplFileInfo $a, \SplFileInfo $b): int => strcmp($a->getFilename(), $b->getFilename()));
+
+        $all = [];
+        foreach ($files as $file) {
+            $ext = strtolower((string) $file->getExtension());
+            if ($ext !== 'json') {
+                continue;
+            }
+
+            $doc = $this->loader->readJson($file->getPathname());
+            if (! is_array($doc)) {
+                continue;
+            }
+
+            $blocks = is_array($doc['blocks'] ?? null) ? $doc['blocks'] : [];
+            foreach ($blocks as $block) {
+                if (! is_array($block)) {
+                    continue;
+                }
+                $all[] = $block;
+            }
+        }
+
+        return $all;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $groups
      */
     private function resolveManifestNormsVersion(array $groups): string
     {
@@ -391,7 +443,7 @@ final class BigFiveContentCompileService
         $fallback = '';
 
         foreach ($groups as $group) {
-            if (!is_array($group)) {
+            if (! is_array($group)) {
                 continue;
             }
             $version = trim((string) ($group['norms_version'] ?? ''));
@@ -420,7 +472,7 @@ final class BigFiveContentCompileService
         ksort($hashes);
         $rows = [];
         foreach ($hashes as $name => $hash) {
-            $rows[] = (string) $name . ':' . (string) $hash;
+            $rows[] = (string) $name.':'.(string) $hash;
         }
 
         return hash('sha256', implode("\n", $rows));
@@ -428,7 +480,7 @@ final class BigFiveContentCompileService
 
     private function hashDirectory(string $dir): string
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             return '';
         }
 
@@ -436,11 +488,11 @@ final class BigFiveContentCompileService
         usort($files, static fn (\SplFileInfo $a, \SplFileInfo $b): int => strcmp($a->getPathname(), $b->getPathname()));
 
         $rows = [];
-        $prefix = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR;
+        $prefix = rtrim($dir, '/\\').DIRECTORY_SEPARATOR;
         foreach ($files as $file) {
             $path = $file->getPathname();
             $relative = str_starts_with($path, $prefix) ? substr($path, strlen($prefix)) : $file->getFilename();
-            $rows[] = $relative . ':' . hash_file('sha256', $path);
+            $rows[] = $relative.':'.hash_file('sha256', $path);
         }
 
         return hash('sha256', implode("\n", $rows));

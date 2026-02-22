@@ -8,9 +8,11 @@ final class SubmitAttemptDTO
 {
     /**
      * @param  array<int, array<string, mixed>>  $answers
+     * @param  array<int, array{item_id:string,code:int}>  $validityItems
      */
     public function __construct(
         public readonly array $answers,
+        public readonly array $validityItems,
         public readonly int $durationMs,
         public readonly string $inviteToken,
         public readonly ?string $userId,
@@ -34,8 +36,33 @@ final class SubmitAttemptDTO
             }
         }
 
+        $validityItems = $payload['validity_items'] ?? [];
+        if (!is_array($validityItems)) {
+            $validityItems = [];
+        }
+
+        $normalizedValidityItems = [];
+        foreach ($validityItems as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $itemId = trim((string) ($item['item_id'] ?? ''));
+            if ($itemId === '') {
+                continue;
+            }
+            $code = (int) ($item['code'] ?? 0);
+            if ($code < 1 || $code > 5) {
+                continue;
+            }
+            $normalizedValidityItems[] = [
+                'item_id' => $itemId,
+                'code' => $code,
+            ];
+        }
+
         return new self(
             answers: $normalizedAnswers,
+            validityItems: $normalizedValidityItems,
             durationMs: max(0, (int) ($payload['duration_ms'] ?? 0)),
             inviteToken: trim((string) ($payload['invite_token'] ?? '')),
             userId: self::normalizeUserId($payload['user_id'] ?? null),

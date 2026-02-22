@@ -20,6 +20,9 @@ class SubmitAttemptRequest extends FormRequest
             'answers.*.code' => ['nullable'],
             'answers.*.question_type' => ['nullable', 'string', 'max:32'],
             'answers.*.question_index' => ['nullable', 'integer', 'min:0'],
+            'validity_items' => ['nullable', 'array'],
+            'validity_items.*.item_id' => ['required_with:validity_items', 'string', 'max:64'],
+            'validity_items.*.code' => ['required_with:validity_items'],
             'duration_ms' => ['required', 'integer', 'min:0'],
             'invite_token' => ['nullable', 'string', 'max:64'],
         ];

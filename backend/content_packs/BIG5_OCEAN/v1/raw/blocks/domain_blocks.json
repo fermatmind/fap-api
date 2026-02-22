@@ -1,0 +1,697 @@
+{
+    "schema": "big5.blocks.domain.v1",
+    "pack_id": "BIG5_OCEAN",
+    "pack_version": "v1",
+    "blocks": [
+        {
+            "block_id": "domain_o_low_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "O",
+            "bucket": "low",
+            "locale": "en",
+            "tags_any": [
+                "domain:O",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_O",
+            "variables": [
+                "domains.O.percentile"
+            ],
+            "title": "Openness",
+            "body": "Openness is currently at percentile {{domains.O.percentile}} (low)."
+        },
+        {
+            "block_id": "domain_o_mid_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "O",
+            "bucket": "mid",
+            "locale": "en",
+            "tags_any": [
+                "domain:O",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_O",
+            "variables": [
+                "domains.O.percentile"
+            ],
+            "title": "Openness",
+            "body": "Openness is currently at percentile {{domains.O.percentile}} (mid)."
+        },
+        {
+            "block_id": "domain_o_high_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "O",
+            "bucket": "high",
+            "locale": "en",
+            "tags_any": [
+                "domain:O",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_O",
+            "variables": [
+                "domains.O.percentile"
+            ],
+            "title": "Openness",
+            "body": "Openness is currently at percentile {{domains.O.percentile}} (high)."
+        },
+        {
+            "block_id": "domain_c_low_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "C",
+            "bucket": "low",
+            "locale": "en",
+            "tags_any": [
+                "domain:C",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_C",
+            "variables": [
+                "domains.C.percentile"
+            ],
+            "title": "Conscientiousness",
+            "body": "Conscientiousness is currently at percentile {{domains.C.percentile}} (low)."
+        },
+        {
+            "block_id": "domain_c_mid_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "C",
+            "bucket": "mid",
+            "locale": "en",
+            "tags_any": [
+                "domain:C",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_C",
+            "variables": [
+                "domains.C.percentile"
+            ],
+            "title": "Conscientiousness",
+            "body": "Conscientiousness is currently at percentile {{domains.C.percentile}} (mid)."
+        },
+        {
+            "block_id": "domain_c_high_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "C",
+            "bucket": "high",
+            "locale": "en",
+            "tags_any": [
+                "domain:C",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_C",
+            "variables": [
+                "domains.C.percentile"
+            ],
+            "title": "Conscientiousness",
+            "body": "Conscientiousness is currently at percentile {{domains.C.percentile}} (high)."
+        },
+        {
+            "block_id": "domain_e_low_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "E",
+            "bucket": "low",
+            "locale": "en",
+            "tags_any": [
+                "domain:E",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_E",
+            "variables": [
+                "domains.E.percentile"
+            ],
+            "title": "Extraversion",
+            "body": "Extraversion is currently at percentile {{domains.E.percentile}} (low)."
+        },
+        {
+            "block_id": "domain_e_mid_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "E",
+            "bucket": "mid",
+            "locale": "en",
+            "tags_any": [
+                "domain:E",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_E",
+            "variables": [
+                "domains.E.percentile"
+            ],
+            "title": "Extraversion",
+            "body": "Extraversion is currently at percentile {{domains.E.percentile}} (mid)."
+        },
+        {
+            "block_id": "domain_e_high_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "E",
+            "bucket": "high",
+            "locale": "en",
+            "tags_any": [
+                "domain:E",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_E",
+            "variables": [
+                "domains.E.percentile"
+            ],
+            "title": "Extraversion",
+            "body": "Extraversion is currently at percentile {{domains.E.percentile}} (high)."
+        },
+        {
+            "block_id": "domain_a_low_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "A",
+            "bucket": "low",
+            "locale": "en",
+            "tags_any": [
+                "domain:A",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_A",
+            "variables": [
+                "domains.A.percentile"
+            ],
+            "title": "Agreeableness",
+            "body": "Agreeableness is currently at percentile {{domains.A.percentile}} (low)."
+        },
+        {
+            "block_id": "domain_a_mid_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "A",
+            "bucket": "mid",
+            "locale": "en",
+            "tags_any": [
+                "domain:A",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_A",
+            "variables": [
+                "domains.A.percentile"
+            ],
+            "title": "Agreeableness",
+            "body": "Agreeableness is currently at percentile {{domains.A.percentile}} (mid)."
+        },
+        {
+            "block_id": "domain_a_high_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "A",
+            "bucket": "high",
+            "locale": "en",
+            "tags_any": [
+                "domain:A",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_A",
+            "variables": [
+                "domains.A.percentile"
+            ],
+            "title": "Agreeableness",
+            "body": "Agreeableness is currently at percentile {{domains.A.percentile}} (high)."
+        },
+        {
+            "block_id": "domain_n_low_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "N",
+            "bucket": "low",
+            "locale": "en",
+            "tags_any": [
+                "domain:N",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_N",
+            "variables": [
+                "domains.N.percentile"
+            ],
+            "title": "Neuroticism",
+            "body": "Neuroticism is currently at percentile {{domains.N.percentile}} (low)."
+        },
+        {
+            "block_id": "domain_n_mid_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "N",
+            "bucket": "mid",
+            "locale": "en",
+            "tags_any": [
+                "domain:N",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_N",
+            "variables": [
+                "domains.N.percentile"
+            ],
+            "title": "Neuroticism",
+            "body": "Neuroticism is currently at percentile {{domains.N.percentile}} (mid)."
+        },
+        {
+            "block_id": "domain_n_high_en",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "N",
+            "bucket": "high",
+            "locale": "en",
+            "tags_any": [
+                "domain:N",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_N",
+            "variables": [
+                "domains.N.percentile"
+            ],
+            "title": "Neuroticism",
+            "body": "Neuroticism is currently at percentile {{domains.N.percentile}} (high)."
+        },
+        {
+            "block_id": "domain_o_low_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "O",
+            "bucket": "low",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:O",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_O",
+            "variables": [
+                "domains.O.percentile"
+            ],
+            "title": "开放性",
+            "body": "开放性当前处于第 {{domains.O.percentile}} 百分位（low）。"
+        },
+        {
+            "block_id": "domain_o_mid_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "O",
+            "bucket": "mid",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:O",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_O",
+            "variables": [
+                "domains.O.percentile"
+            ],
+            "title": "开放性",
+            "body": "开放性当前处于第 {{domains.O.percentile}} 百分位（mid）。"
+        },
+        {
+            "block_id": "domain_o_high_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "O",
+            "bucket": "high",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:O",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_O",
+            "variables": [
+                "domains.O.percentile"
+            ],
+            "title": "开放性",
+            "body": "开放性当前处于第 {{domains.O.percentile}} 百分位（high）。"
+        },
+        {
+            "block_id": "domain_c_low_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "C",
+            "bucket": "low",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:C",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_C",
+            "variables": [
+                "domains.C.percentile"
+            ],
+            "title": "尽责性",
+            "body": "尽责性当前处于第 {{domains.C.percentile}} 百分位（low）。"
+        },
+        {
+            "block_id": "domain_c_mid_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "C",
+            "bucket": "mid",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:C",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_C",
+            "variables": [
+                "domains.C.percentile"
+            ],
+            "title": "尽责性",
+            "body": "尽责性当前处于第 {{domains.C.percentile}} 百分位（mid）。"
+        },
+        {
+            "block_id": "domain_c_high_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "C",
+            "bucket": "high",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:C",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_C",
+            "variables": [
+                "domains.C.percentile"
+            ],
+            "title": "尽责性",
+            "body": "尽责性当前处于第 {{domains.C.percentile}} 百分位（high）。"
+        },
+        {
+            "block_id": "domain_e_low_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "E",
+            "bucket": "low",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:E",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_E",
+            "variables": [
+                "domains.E.percentile"
+            ],
+            "title": "外向性",
+            "body": "外向性当前处于第 {{domains.E.percentile}} 百分位（low）。"
+        },
+        {
+            "block_id": "domain_e_mid_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "E",
+            "bucket": "mid",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:E",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_E",
+            "variables": [
+                "domains.E.percentile"
+            ],
+            "title": "外向性",
+            "body": "外向性当前处于第 {{domains.E.percentile}} 百分位（mid）。"
+        },
+        {
+            "block_id": "domain_e_high_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "E",
+            "bucket": "high",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:E",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_E",
+            "variables": [
+                "domains.E.percentile"
+            ],
+            "title": "外向性",
+            "body": "外向性当前处于第 {{domains.E.percentile}} 百分位（high）。"
+        },
+        {
+            "block_id": "domain_a_low_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "A",
+            "bucket": "low",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:A",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_A",
+            "variables": [
+                "domains.A.percentile"
+            ],
+            "title": "宜人性",
+            "body": "宜人性当前处于第 {{domains.A.percentile}} 百分位（low）。"
+        },
+        {
+            "block_id": "domain_a_mid_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "A",
+            "bucket": "mid",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:A",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_A",
+            "variables": [
+                "domains.A.percentile"
+            ],
+            "title": "宜人性",
+            "body": "宜人性当前处于第 {{domains.A.percentile}} 百分位（mid）。"
+        },
+        {
+            "block_id": "domain_a_high_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "A",
+            "bucket": "high",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:A",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_A",
+            "variables": [
+                "domains.A.percentile"
+            ],
+            "title": "宜人性",
+            "body": "宜人性当前处于第 {{domains.A.percentile}} 百分位（high）。"
+        },
+        {
+            "block_id": "domain_n_low_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "N",
+            "bucket": "low",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:N",
+                "bucket:low"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_N",
+            "variables": [
+                "domains.N.percentile"
+            ],
+            "title": "神经质",
+            "body": "神经质当前处于第 {{domains.N.percentile}} 百分位（low）。"
+        },
+        {
+            "block_id": "domain_n_mid_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "N",
+            "bucket": "mid",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:N",
+                "bucket:mid"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_N",
+            "variables": [
+                "domains.N.percentile"
+            ],
+            "title": "神经质",
+            "body": "神经质当前处于第 {{domains.N.percentile}} 百分位（mid）。"
+        },
+        {
+            "block_id": "domain_n_high_zh_cn",
+            "section": "domains_overview",
+            "kind": "paragraph",
+            "access_level": "free",
+            "module_code": "big5_core",
+            "metric_level": "domain",
+            "metric_code": "N",
+            "bucket": "high",
+            "locale": "zh-CN",
+            "tags_any": [
+                "domain:N",
+                "bucket:high"
+            ],
+            "tags_all": [],
+            "priority": 100,
+            "exclusive_group": "domain_N",
+            "variables": [
+                "domains.N.percentile"
+            ],
+            "title": "神经质",
+            "body": "神经质当前处于第 {{domains.N.percentile}} 百分位（high）。"
+        }
+    ]
+}

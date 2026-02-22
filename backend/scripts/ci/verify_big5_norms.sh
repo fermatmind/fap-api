@@ -36,7 +36,7 @@ with csv_path.open('r', encoding='utf-8', newline='') as f:
     if missing:
         raise SystemExit(f"[FAIL] missing headers: {missing}")
 
-    groups = defaultdict(lambda: {'domain': set(), 'facet': set(), 'rows': []})
+    groups = defaultdict(lambda: {'domain': set(), 'facet': set(), 'rows': [], 'versions': set()})
     canonical = []
 
     for idx, row in enumerate(reader, start=2):
@@ -65,6 +65,7 @@ with csv_path.open('r', encoding='utf-8', newline='') as f:
             groups[gid]['facet'].add(code)
 
         groups[gid]['rows'].append((lvl, code))
+        groups[gid]['versions'].add((row.get('norms_version') or '').strip())
         canonical.append('|'.join(row.get(k,'') for k in required))
 
 if len(groups) < 2:
@@ -83,7 +84,12 @@ if 'en_johnson_all_18-60' not in groups:
 if 'zh-CN_xu_all_18-60' not in groups:
     raise SystemExit('[FAIL] missing group zh-CN_xu_all_18-60')
 
+versions = sorted({v for g in groups.values() for v in g['versions'] if v})
+if len(versions) < 2:
+    raise SystemExit(f"[FAIL] norms_version count < 2, got {len(versions)}")
+
 checksum = hashlib.sha256('\n'.join(sorted(canonical)).encode('utf-8')).hexdigest()
 print(f"[PASS] groups={len(groups)} checksum={checksum}")
+print(f"[PASS] norms_versions={len(versions)} drift_check_ready=true")
 print(f"[PASS] file={csv_path}")
 PY

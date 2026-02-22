@@ -2,7 +2,7 @@
     "schema": "big5.norms.compiled.v1",
     "pack_id": "BIG5_OCEAN",
     "pack_version": "v1",
-    "generated_at": "2026-02-21T16:04:08.795892Z",
+    "generated_at": "2026-02-22T01:56:58.034928Z",
     "groups": {
         "en_johnson_all_18-60": {
             "group_id": "en_johnson_all_18-60",
@@ -375,6 +375,748 @@
                 }
             }
         },
+        "en_johnson_f_18-29": {
+            "group_id": "en_johnson_f_18-29",
+            "locale": "en",
+            "region": "GLOBAL",
+            "country": "GLOBAL",
+            "gender": "F",
+            "age_min": 18,
+            "age_max": 29,
+            "age_band": "18-29",
+            "norms_version": "2026Q1_bootstrap_v1",
+            "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+            "source_type": "open_dataset",
+            "status": "CALIBRATED",
+            "published_at": "2026-02-21T00:00:00Z",
+            "metrics": {
+                "domain": {
+                    "A": {
+                        "mean": 3.31,
+                        "sd": 0.64,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C": {
+                        "mean": 3.28,
+                        "sd": 0.62,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E": {
+                        "mean": 3.02,
+                        "sd": 0.71,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N": {
+                        "mean": 2.84,
+                        "sd": 0.69,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O": {
+                        "mean": 3.15,
+                        "sd": 0.66,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    }
+                },
+                "facet": {
+                    "A1": {
+                        "mean": 3.19,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A2": {
+                        "mean": 3.24,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A3": {
+                        "mean": 3.29,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A4": {
+                        "mean": 3.34,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A5": {
+                        "mean": 3.39,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A6": {
+                        "mean": 3.44,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C1": {
+                        "mean": 3.16,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C2": {
+                        "mean": 3.2,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C3": {
+                        "mean": 3.26,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C4": {
+                        "mean": 3.3,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C5": {
+                        "mean": 3.36,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C6": {
+                        "mean": 3.41,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E1": {
+                        "mean": 2.9,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E2": {
+                        "mean": 2.95,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E3": {
+                        "mean": 3,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E4": {
+                        "mean": 3.05,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E5": {
+                        "mean": 3.1,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E6": {
+                        "mean": 3.15,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N1": {
+                        "mean": 2.72,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N2": {
+                        "mean": 2.76,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N3": {
+                        "mean": 2.82,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N4": {
+                        "mean": 2.86,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N5": {
+                        "mean": 2.92,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N6": {
+                        "mean": 2.97,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O1": {
+                        "mean": 3.03,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O2": {
+                        "mean": 3.07,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O3": {
+                        "mean": 3.13,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O4": {
+                        "mean": 3.18,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O5": {
+                        "mean": 3.23,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O6": {
+                        "mean": 3.28,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    }
+                }
+            }
+        },
+        "en_johnson_m_18-29": {
+            "group_id": "en_johnson_m_18-29",
+            "locale": "en",
+            "region": "GLOBAL",
+            "country": "GLOBAL",
+            "gender": "M",
+            "age_min": 18,
+            "age_max": 29,
+            "age_band": "18-29",
+            "norms_version": "2026Q1_bootstrap_v1",
+            "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+            "source_type": "open_dataset",
+            "status": "CALIBRATED",
+            "published_at": "2026-02-21T00:00:00Z",
+            "metrics": {
+                "domain": {
+                    "A": {
+                        "mean": 3.31,
+                        "sd": 0.64,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C": {
+                        "mean": 3.28,
+                        "sd": 0.62,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E": {
+                        "mean": 3.02,
+                        "sd": 0.71,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N": {
+                        "mean": 2.84,
+                        "sd": 0.69,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O": {
+                        "mean": 3.15,
+                        "sd": 0.66,
+                        "sample_n": 120000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    }
+                },
+                "facet": {
+                    "A1": {
+                        "mean": 3.19,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A2": {
+                        "mean": 3.24,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A3": {
+                        "mean": 3.29,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A4": {
+                        "mean": 3.34,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A5": {
+                        "mean": 3.39,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A6": {
+                        "mean": 3.44,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C1": {
+                        "mean": 3.16,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C2": {
+                        "mean": 3.2,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C3": {
+                        "mean": 3.26,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C4": {
+                        "mean": 3.3,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C5": {
+                        "mean": 3.36,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C6": {
+                        "mean": 3.41,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E1": {
+                        "mean": 2.9,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E2": {
+                        "mean": 2.95,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E3": {
+                        "mean": 3,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E4": {
+                        "mean": 3.05,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E5": {
+                        "mean": 3.1,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E6": {
+                        "mean": 3.15,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N1": {
+                        "mean": 2.72,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N2": {
+                        "mean": 2.76,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N3": {
+                        "mean": 2.82,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N4": {
+                        "mean": 2.86,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N5": {
+                        "mean": 2.92,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N6": {
+                        "mean": 2.97,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O1": {
+                        "mean": 3.03,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O2": {
+                        "mean": 3.07,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O3": {
+                        "mean": 3.13,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O4": {
+                        "mean": 3.18,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O5": {
+                        "mean": 3.23,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O6": {
+                        "mean": 3.28,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_bootstrap_v1",
+                        "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+                        "source_type": "open_dataset",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    }
+                }
+            }
+        },
         "zh-CN_prod_all_18-60": {
             "group_id": "zh-CN_prod_all_18-60",
             "locale": "zh-CN",
@@ -384,6 +1126,748 @@
             "age_min": 18,
             "age_max": 60,
             "age_band": "18-60",
+            "norms_version": "2026Q1_prod_v1",
+            "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+            "source_type": "internal_prod",
+            "status": "CALIBRATED",
+            "published_at": "2026-02-21T00:00:00Z",
+            "metrics": {
+                "domain": {
+                    "A": {
+                        "mean": 3.26,
+                        "sd": 0.61,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C": {
+                        "mean": 3.34,
+                        "sd": 0.6,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E": {
+                        "mean": 2.96,
+                        "sd": 0.68,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N": {
+                        "mean": 2.92,
+                        "sd": 0.66,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O": {
+                        "mean": 3.08,
+                        "sd": 0.63,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    }
+                },
+                "facet": {
+                    "A1": {
+                        "mean": 3.19,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A2": {
+                        "mean": 3.24,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A3": {
+                        "mean": 3.29,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A4": {
+                        "mean": 3.34,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A5": {
+                        "mean": 3.39,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A6": {
+                        "mean": 3.44,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C1": {
+                        "mean": 3.16,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C2": {
+                        "mean": 3.2,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C3": {
+                        "mean": 3.26,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C4": {
+                        "mean": 3.3,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C5": {
+                        "mean": 3.36,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C6": {
+                        "mean": 3.41,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E1": {
+                        "mean": 2.9,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E2": {
+                        "mean": 2.95,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E3": {
+                        "mean": 3,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E4": {
+                        "mean": 3.05,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E5": {
+                        "mean": 3.1,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E6": {
+                        "mean": 3.15,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N1": {
+                        "mean": 2.72,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N2": {
+                        "mean": 2.76,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N3": {
+                        "mean": 2.82,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N4": {
+                        "mean": 2.86,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N5": {
+                        "mean": 2.92,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N6": {
+                        "mean": 2.97,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O1": {
+                        "mean": 3.03,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O2": {
+                        "mean": 3.07,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O3": {
+                        "mean": 3.13,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O4": {
+                        "mean": 3.18,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O5": {
+                        "mean": 3.23,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O6": {
+                        "mean": 3.28,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    }
+                }
+            }
+        },
+        "zh-CN_prod_f_18-29": {
+            "group_id": "zh-CN_prod_f_18-29",
+            "locale": "zh-CN",
+            "region": "CN_MAINLAND",
+            "country": "CN_MAINLAND",
+            "gender": "F",
+            "age_min": 18,
+            "age_max": 29,
+            "age_band": "18-29",
+            "norms_version": "2026Q1_prod_v1",
+            "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+            "source_type": "internal_prod",
+            "status": "CALIBRATED",
+            "published_at": "2026-02-21T00:00:00Z",
+            "metrics": {
+                "domain": {
+                    "A": {
+                        "mean": 3.26,
+                        "sd": 0.61,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C": {
+                        "mean": 3.34,
+                        "sd": 0.6,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E": {
+                        "mean": 2.96,
+                        "sd": 0.68,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N": {
+                        "mean": 2.92,
+                        "sd": 0.66,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O": {
+                        "mean": 3.08,
+                        "sd": 0.63,
+                        "sample_n": 26000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    }
+                },
+                "facet": {
+                    "A1": {
+                        "mean": 3.19,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A2": {
+                        "mean": 3.24,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A3": {
+                        "mean": 3.29,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A4": {
+                        "mean": 3.34,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A5": {
+                        "mean": 3.39,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "A6": {
+                        "mean": 3.44,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C1": {
+                        "mean": 3.16,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C2": {
+                        "mean": 3.2,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C3": {
+                        "mean": 3.26,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C4": {
+                        "mean": 3.3,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C5": {
+                        "mean": 3.36,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "C6": {
+                        "mean": 3.41,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E1": {
+                        "mean": 2.9,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E2": {
+                        "mean": 2.95,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E3": {
+                        "mean": 3,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E4": {
+                        "mean": 3.05,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E5": {
+                        "mean": 3.1,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "E6": {
+                        "mean": 3.15,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N1": {
+                        "mean": 2.72,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N2": {
+                        "mean": 2.76,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N3": {
+                        "mean": 2.82,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N4": {
+                        "mean": 2.86,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N5": {
+                        "mean": 2.92,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "N6": {
+                        "mean": 2.97,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O1": {
+                        "mean": 3.03,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O2": {
+                        "mean": 3.07,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O3": {
+                        "mean": 3.13,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O4": {
+                        "mean": 3.18,
+                        "sd": 0.61,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O5": {
+                        "mean": 3.23,
+                        "sd": 0.64,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    },
+                    "O6": {
+                        "mean": 3.28,
+                        "sd": 0.58,
+                        "sample_n": 85000,
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "source_type": "internal_prod",
+                        "status": "CALIBRATED",
+                        "published_at": "2026-02-21T00:00:00Z"
+                    }
+                }
+            }
+        },
+        "zh-CN_prod_m_18-29": {
+            "group_id": "zh-CN_prod_m_18-29",
+            "locale": "zh-CN",
+            "region": "CN_MAINLAND",
+            "country": "CN_MAINLAND",
+            "gender": "M",
+            "age_min": 18,
+            "age_max": 29,
+            "age_band": "18-29",
             "norms_version": "2026Q1_prod_v1",
             "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
             "source_type": "internal_prod",

@@ -29,4 +29,15 @@ final class UuidRouteParamsMiddlewareTest extends TestCase
             'error_code' => 'NOT_FOUND',
         ]);
     }
+
+    public function test_v03_attempt_report_pdf_with_invalid_uuid_returns_uniform_404_json(): void
+    {
+        $response = $this->getJson('/api/v0.3/attempts/not-a-uuid/report.pdf');
+
+        $response->assertStatus(404);
+        $response->assertJson([
+            'ok' => false,
+            'error_code' => 'NOT_FOUND',
+        ]);
+    }
 }

@@ -579,6 +579,15 @@ final class BigFiveScorerV3
             $flags[] = 'NEUTRAL_OVERUSE';
         }
 
+        $attentionFailed = $this->hasAttentionCheckFailed($ctx, $policy);
+        if ($attentionFailed) {
+            $flags[] = 'ATTENTION_CHECK_FAILED';
+            $level = $this->downgradeQualityLevel(
+                $level,
+                strtoupper((string) ($policy['validity_checks']['attention_check_failed_level'] ?? 'C'))
+            );
+        }
+
         return [
             'level' => $level,
             'metrics' => $metrics,
@@ -601,6 +610,68 @@ final class BigFiveScorerV3
             && (float) $metrics['time_per_item_avg'] >= $minTime
             && (int) $metrics['longstring_max'] <= $maxLongstring
             && (float) $metrics['facet_inconsistency_mean'] <= $maxInconsistency;
+    }
+
+    /**
+     * @param array<string,mixed> $ctx
+     * @param array<string,mixed> $policy
+     */
+    private function hasAttentionCheckFailed(array $ctx, array $policy): bool
+    {
+        $validityItems = is_array($policy['validity_items'] ?? null) ? $policy['validity_items'] : [];
+        if ($validityItems === []) {
+            return false;
+        }
+
+        $answersRaw = is_array($ctx['validity_items'] ?? null) ? $ctx['validity_items'] : [];
+        if ($answersRaw === []) {
+            return false;
+        }
+        $answers = [];
+        foreach ($answersRaw as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $itemId = trim((string) ($row['item_id'] ?? ''));
+            if ($itemId === '') {
+                continue;
+            }
+            $answers[$itemId] = (int) ($row['code'] ?? 0);
+        }
+
+        foreach ($validityItems as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $itemId = trim((string) ($item['item_id'] ?? ''));
+            $required = (bool) ($item['required'] ?? false);
+            $expectedCode = (int) ($item['expected_code'] ?? 0);
+            if ($itemId === '' || !$required || $expectedCode < 1 || $expectedCode > 5) {
+                continue;
+            }
+
+            $actual = (int) ($answers[$itemId] ?? 0);
+            if ($actual !== $expectedCode) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function downgradeQualityLevel(string $level, string $target): string
+    {
+        $rank = [
+            'A' => 1,
+            'B' => 2,
+            'C' => 3,
+            'D' => 4,
+        ];
+
+        $level = isset($rank[$level]) ? $level : 'D';
+        $target = isset($rank[$target]) ? $target : 'C';
+
+        return $rank[$level] < $rank[$target] ? $target : $level;
     }
 
     /**

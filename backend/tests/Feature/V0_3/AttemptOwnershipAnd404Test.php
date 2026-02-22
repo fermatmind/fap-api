@@ -151,6 +151,7 @@ class AttemptOwnershipAnd404Test extends TestCase
 
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", $headersB));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report", $headersB));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", $headersB));
         $this->assertUniform404($this->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->defaultAnswers(),
@@ -181,6 +182,7 @@ class AttemptOwnershipAnd404Test extends TestCase
 
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", $headersB));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report", $headersB));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", $headersB));
         $this->assertUniform404($this->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->defaultAnswers(),
@@ -208,6 +210,7 @@ class AttemptOwnershipAnd404Test extends TestCase
 
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$missingAttemptId}/result", $headers));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$missingAttemptId}/report", $headers));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$missingAttemptId}/report.pdf", $headers));
         $this->assertUniform404($this->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $missingAttemptId,
             'answers' => $this->defaultAnswers(),
@@ -241,8 +244,10 @@ class AttemptOwnershipAnd404Test extends TestCase
 
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", $ownerHeaders));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report", $ownerHeaders));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", $ownerHeaders));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", $adminHeaders));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report", $adminHeaders));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", $adminHeaders));
     }
 
     public function test_missing_token_or_cross_org_access_returns_404(): void
@@ -265,8 +270,15 @@ class AttemptOwnershipAnd404Test extends TestCase
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", [
             'X-Org-Id' => (string) $org1,
         ]));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", [
+            'X-Org-Id' => (string) $org1,
+        ]));
 
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", [
+            'Authorization' => 'Bearer ' . $memberB['token'],
+            'X-Org-Id' => (string) $org2,
+        ]));
+        $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", [
             'Authorization' => 'Bearer ' . $memberB['token'],
             'X-Org-Id' => (string) $org2,
         ]));

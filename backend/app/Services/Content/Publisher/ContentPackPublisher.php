@@ -303,6 +303,28 @@ final class ContentPackPublisher
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $this->recordReleaseAudit(
+            'big5_pack_publish',
+            $releaseId,
+            $status,
+            $message,
+            [
+                'scale_code' => 'BIG5_OCEAN',
+                'region' => $region,
+                'locale' => $locale,
+                'dir_alias' => $dirAlias,
+                'from_pack_id' => $fromPackId,
+                'to_pack_id' => $toPackId,
+                'from_version_id' => $fromVersionId,
+                'to_version_id' => $toVersionId,
+                'probes' => $probes,
+                'manifest_hash' => $releaseEvidence['manifest_hash'],
+                'compiled_hash' => $releaseEvidence['compiled_hash'],
+                'content_hash' => $releaseEvidence['content_hash'],
+                'norms_version' => $releaseEvidence['norms_version'],
+                'git_sha' => $this->resolveGitSha(),
+            ]
+        );
 
         return [
             'ok' => true,
@@ -464,6 +486,30 @@ final class ContentPackPublisher
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $this->recordReleaseAudit(
+            'big5_pack_rollback',
+            $releaseId,
+            $status,
+            $message,
+            [
+                'scale_code' => 'BIG5_OCEAN',
+                'region' => $region,
+                'locale' => $locale,
+                'dir_alias' => $dirAlias,
+                'source_release_id' => $sourceReleaseId,
+                'from_pack_id' => $fromPackId,
+                'to_pack_id' => $toPackId,
+                'from_version_id' => $fromVersionId,
+                'to_version_id' => $toVersionId,
+                'rolled_back_to' => $rolledBack,
+                'probes' => $probes,
+                'manifest_hash' => $releaseEvidence['manifest_hash'],
+                'compiled_hash' => $releaseEvidence['compiled_hash'],
+                'content_hash' => $releaseEvidence['content_hash'],
+                'norms_version' => $releaseEvidence['norms_version'],
+                'git_sha' => $this->resolveGitSha(),
+            ]
+        );
 
         return [
             'ok' => true,
@@ -706,6 +752,41 @@ final class ContentPackPublisher
         }
 
         return substr($sha, 0, 64);
+    }
+
+    private function recordReleaseAudit(
+        string $action,
+        string $releaseId,
+        string $status,
+        string $message,
+        array $meta
+    ): void {
+        if (!\Illuminate\Support\Facades\Schema::hasTable('audit_logs')) {
+            return;
+        }
+
+        try {
+            DB::table('audit_logs')->insert([
+                'org_id' => 0,
+                'actor_admin_id' => null,
+                'action' => $action,
+                'target_type' => 'content_pack_release',
+                'target_id' => $releaseId,
+                'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'ip' => null,
+                'user_agent' => 'cli/content_pack_publisher',
+                'request_id' => null,
+                'reason' => $message === '' ? 'ok' : $message,
+                'result' => $status === 'success' ? 'success' : 'failed',
+                'created_at' => now(),
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('content pack release audit log failed', [
+                'action' => $action,
+                'release_id' => $releaseId,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     private function packsRoot(): string

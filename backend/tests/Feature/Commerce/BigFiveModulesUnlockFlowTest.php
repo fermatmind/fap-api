@@ -22,7 +22,7 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
@@ -56,7 +56,7 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
 
         $questionIndex = [];
         foreach ((array) ($questions['question_index'] ?? []) as $qid => $meta) {
-            if (!is_array($meta)) {
+            if (! is_array($meta)) {
                 continue;
             }
             $questionIndex[(int) $qid] = $meta;
@@ -90,8 +90,8 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
     public function test_big5_modules_unlock_flow(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_big5_unlock';
         $token = $this->issueAnonToken($anonId);
@@ -146,8 +146,8 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
 
         $before = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/attempts/' . $attemptId . '/report');
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
 
         $before->assertStatus(200);
         $before->assertJson([
@@ -179,8 +179,8 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
 
         $after = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/attempts/' . $attemptId . '/report');
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
 
         $after->assertStatus(200);
         $after->assertJson([
@@ -214,6 +214,9 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
         }
 
         $afterSections = array_map('strval', (array) array_column((array) $after->json('report.sections'), 'key'));
-        $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'], $afterSections);
+        $this->assertSame(
+            ['disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
+            $afterSections
+        );
     }
 }

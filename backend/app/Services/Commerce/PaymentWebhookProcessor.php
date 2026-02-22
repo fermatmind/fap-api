@@ -32,7 +32,7 @@ class PaymentWebhookProcessor
         private ?BigFiveTelemetry $bigFiveTelemetry = null,
         ?PaymentWebhookHandler $handler = null,
     ) {
-        if (!($this->bigFiveTelemetry instanceof BigFiveTelemetry)) {
+        if (! ($this->bigFiveTelemetry instanceof BigFiveTelemetry)) {
             try {
                 $resolved = app(BigFiveTelemetry::class);
                 $this->bigFiveTelemetry = $resolved instanceof BigFiveTelemetry ? $resolved : null;
@@ -48,6 +48,7 @@ class PaymentWebhookProcessor
             $this->entitlements,
             $this->reportSnapshots,
             $this->events,
+            null,
             $this->bigFiveTelemetry,
         );
     }
@@ -120,7 +121,7 @@ class PaymentWebhookProcessor
         }
 
         $order = DB::table('orders')->where('order_no', $orderNo)->first();
-        if (!$order) {
+        if (! $order) {
             return [0, null, null];
         }
 
@@ -140,8 +141,8 @@ class PaymentWebhookProcessor
         $provider = strtolower(trim($provider));
 
         $normalized = match ($provider) {
-            'stripe' => (new StripeGateway())->normalizePayload($payload),
-            'billing' => (new BillingGateway())->normalizePayload($payload),
+            'stripe' => (new StripeGateway)->normalizePayload($payload),
+            'billing' => (new BillingGateway)->normalizePayload($payload),
             default => $payload,
         };
 

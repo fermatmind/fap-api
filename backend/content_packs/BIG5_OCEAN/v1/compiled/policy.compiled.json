@@ -2,7 +2,7 @@
     "schema": "big5.policy.compiled.v1",
     "pack_id": "BIG5_OCEAN",
     "pack_version": "v1",
-    "generated_at": "2026-02-21T16:04:08.795948Z",
+    "generated_at": "2026-02-22T01:56:58.035012Z",
     "policy": {
         "pack_id": "BIG5_OCEAN",
         "pack_version": "v1",
@@ -99,8 +99,25 @@
                 "NEUTRAL_OVERUSE": {
                     "neutral_rate_gt": 0.6
                 }
-            }
+            },
+            "attention_check_failed_level": "C"
         },
+        "validity_items": [
+            {
+                "item_id": "V1",
+                "prompt_en": "For data quality, please choose option 2 for this item.",
+                "prompt_zh": "为保证数据质量，本题请选择选项 2。",
+                "expected_code": 2,
+                "required": true
+            },
+            {
+                "item_id": "V2",
+                "prompt_en": "For data quality, please choose option 4 for this item.",
+                "prompt_zh": "为保证数据质量，本题请选择选项 4。",
+                "expected_code": 4,
+                "required": true
+            }
+        ],
         "tags_rules": {
             "profiles": {
                 "profile:resilient": {
@@ -171,7 +188,10 @@
             "norms.status",
             "norms.group_id",
             "norms.group_label",
+            "facts.top_strength_facets_text",
             "facts.top_growth_facets_text",
+            "facts.top_strength_facets",
+            "facts.top_growth_facets",
             "domains.O.percentile",
             "domains.O.bucket_label",
             "domains.C.percentile",

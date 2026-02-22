@@ -42,13 +42,16 @@ final class BigFiveOceanDriver implements DriverInterface
         }
 
         $answersById = $this->normalizeAnswers($answers);
-        $dto = $this->scorer->score($answersById, $questionIndex, $compiledNorms, $compiledPolicy, [
+        $policy = is_array($compiledPolicy['policy'] ?? null) ? $compiledPolicy['policy'] : [];
+
+        $dto = $this->scorer->score($answersById, $questionIndex, $compiledNorms, $policy, [
             'locale' => (string) ($ctx['locale'] ?? ''),
             'region' => (string) ($ctx['region'] ?? ''),
             'country' => (string) ($ctx['region'] ?? ''),
             'age_band' => (string) ($ctx['age_band'] ?? 'all'),
             'gender' => (string) ($ctx['gender'] ?? 'ALL'),
             'duration_ms' => (int) ($ctx['duration_ms'] ?? 0),
+            'validity_items' => is_array($ctx['validity_items'] ?? null) ? $ctx['validity_items'] : [],
         ]);
 
         $norms = is_array($dto['norms'] ?? null) ? $dto['norms'] : [];
