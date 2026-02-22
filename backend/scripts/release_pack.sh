@@ -68,7 +68,10 @@ rm -rf "${STAGING_DIR}/.git" \
        "${STAGING_DIR}/backend/node_modules" \
        "${STAGING_DIR}/backend/storage/logs" \
        "${STAGING_DIR}/backend/artifacts" \
-       "${STAGING_DIR}/backend/storage/app/private/reports"
+       "${STAGING_DIR}/backend/storage/app/private/reports" \
+       "${STAGING_DIR}/backend/storage/app/private/artifacts" \
+       "${STAGING_DIR}/backend/storage/app/private/packs_v2" \
+       "${STAGING_DIR}/backend/storage/app/private/prune_plans"
 
 find "${STAGING_DIR}" -type f -name '*.sqlite*' -delete
 
@@ -84,6 +87,9 @@ find "${STAGING_DIR}" -type d -path '*/storage/logs' -print >> "$HITS_FILE"
 find "${STAGING_DIR}" -type d -name 'artifacts' -print >> "$HITS_FILE"
 find "${STAGING_DIR}" -type f -name '*.sqlite*' -print >> "$HITS_FILE"
 find "${STAGING_DIR}" -type d -path '*/storage/app/private/reports' -print >> "$HITS_FILE"
+find "${STAGING_DIR}" -type d -path '*/storage/app/private/artifacts' -print >> "$HITS_FILE"
+find "${STAGING_DIR}" -type d -path '*/storage/app/private/packs_v2' -print >> "$HITS_FILE"
+find "${STAGING_DIR}" -type d -path '*/storage/app/private/prune_plans' -print >> "$HITS_FILE"
 
 if [[ -s "$HITS_FILE" ]]; then
   echo "[FAIL] blacklist violations found:" >&2

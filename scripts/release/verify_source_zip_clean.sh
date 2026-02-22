@@ -17,7 +17,7 @@ LIST="$(unzip -Z1 "$ZIP")"
 LIST_FILTERED="$(echo "$LIST" | grep -vE '^(fap-api/backend/\.env\.example|fap-api/\.env\.example)$' || true)"
 
 # 1) 路径黑名单（命中直接失败）
-PATTERN_PATH='(^fap-api/\.git/|^fap-api/backend/\.env($|[./])|^fap-api/\.env($|[./])|^fap-api/backend/vendor/|^fap-api/vendor/|^fap-api/node_modules/|^fap-api/backend/node_modules/|^fap-api/backend/artifacts/|^fap-api/backend/database/.*\.sqlite$|^fap-api/backend/storage/logs/|^fap-api/backend/storage/framework/|^fap-api/backend/storage/app/private/reports/|^fap-api/backend/storage/app/archives/)'
+PATTERN_PATH='(^fap-api/\.git/|^fap-api/backend/\.env($|[./])|^fap-api/\.env($|[./])|^fap-api/backend/vendor/|^fap-api/vendor/|^fap-api/node_modules/|^fap-api/backend/node_modules/|^fap-api/backend/artifacts/|^fap-api/backend/database/.*\.sqlite$|^fap-api/backend/storage/logs/|^fap-api/backend/storage/framework/|^fap-api/backend/storage/app/private/reports/|^fap-api/backend/storage/app/private/artifacts/|^fap-api/backend/storage/app/private/packs_v2/|^fap-api/backend/storage/app/private/prune_plans/|^fap-api/backend/storage/app/archives/)'
 HITS_PATH="$(echo "$LIST_FILTERED" | grep -E "$PATTERN_PATH" || true)"
 [ -z "$HITS_PATH" ] || { echo "[verify][FAIL] forbidden paths found:"; echo "$HITS_PATH"; exit 1; }
 
