@@ -29,6 +29,7 @@ use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5TelemetrySummary;
+use App\Console\Commands\CommerceReconcile;
 use App\Console\Commands\Ops\PartitionAttemptAnswerRows;
 use App\Console\Commands\PacksPublish;
 use App\Console\Commands\PacksRollback;
@@ -67,6 +68,7 @@ class Kernel extends ConsoleKernel
         Big5PsychometricsReport::class,
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
+        CommerceReconcile::class,
         PacksPublish::class,
         PacksRollback::class,
         CiScaleImpact::class,

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # payments_reconcile_daily.sh
-# Minimal daily reconciliation for payments (orders/payment_events).
+# Daily reconciliation for payments via commerce:reconcile command.
 #
 # Env:
 #   RECONCILIATION_ENABLED=0|1  (default 0; 0 -> skip exit 0)
@@ -14,7 +14,7 @@ set -euo pipefail
 #   ARTIFACT_DIR=...            (optional; default backend/artifacts/payments)
 #
 # Output:
-#   JSON to stdout (grep-friendly), optional artifact file when WRITE_ARTIFACT=1.
+#   JSON to stdout (single-line), optional artifact file when WRITE_ARTIFACT=1.
 
 need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[ERR] missing cmd: $1" >&2; exit 2; }; }
 need_cmd php
@@ -48,102 +48,12 @@ if [[ "$DB_CONNECTION" == "sqlite" && ! -f "$SQLITE_DB" ]]; then
   exit 1
 fi
 
-PHP_CODE='
-use Illuminate\Support\Carbon;
-
-$tz = getenv("RECON_TZ") ?: "Asia/Shanghai";
-$date = getenv("DATE") ?: Carbon::now($tz)->format("Y-m-d");
-$start = Carbon::createFromFormat("Y-m-d", $date, $tz)->startOfDay();
-$end = (clone $start)->addDay();
-
-if (!\Schema::hasTable("orders")) {
-  fwrite(STDERR, "[RECON][ERR] missing table: orders\n");
-  exit(2);
-}
-if (!\Schema::hasTable("payment_events")) {
-  fwrite(STDERR, "[RECON][ERR] missing table: payment_events\n");
-  exit(2);
-}
-
-$ordersPaid = \DB::table("orders")
-  ->whereNotNull("paid_at")
-  ->where("paid_at", ">=", $start)
-  ->where("paid_at", "<", $end);
-
-$ordersRefunded = \DB::table("orders")
-  ->whereNotNull("refunded_at")
-  ->where("refunded_at", ">=", $start)
-  ->where("refunded_at", "<", $end);
-
-$ordersFulfilled = \DB::table("orders")
-  ->whereNotNull("fulfilled_at")
-  ->where("fulfilled_at", ">=", $start)
-  ->where("fulfilled_at", "<", $end);
-
-$ordersByStatus = (clone $ordersPaid)
-  ->select("status", \DB::raw("count(*) as cnt"))
-  ->groupBy("status")
-  ->orderByDesc("cnt")
-  ->get();
-
-$paidCount = (clone $ordersPaid)->count();
-$paidAmount = (int) (clone $ordersPaid)->sum("amount_total");
-
-$fulfilledCount = (clone $ordersFulfilled)->count();
-
-$refundCount = (clone $ordersRefunded)->count();
-$refundAmount = (int) (clone $ordersRefunded)->sum("amount_refunded");
-
-$netRevenue = $paidAmount - $refundAmount;
-
-$eventsQuery = \DB::table("payment_events")
-  ->where("created_at", ">=", $start)
-  ->where("created_at", "<", $end);
-
-$eventsTotal = (clone $eventsQuery)->count();
-$eventsByType = (clone $eventsQuery)
-  ->select("event_type", \DB::raw("count(*) as cnt"))
-  ->groupBy("event_type")
-  ->orderByDesc("cnt")
-  ->get();
-
-$out = [
-  "date" => $date,
-  "timezone" => $tz,
-  "window" => [
-    "start" => $start->toDateTimeString(),
-    "end" => $end->toDateTimeString(),
-  ],
-  "orders_by_status" => $ordersByStatus,
-  "success_paid" => [
-    "count" => $paidCount,
-    "amount_total" => $paidAmount,
-  ],
-  "success_fulfilled" => [
-    "count" => $fulfilledCount,
-  ],
-  "refunds" => [
-    "count" => $refundCount,
-    "amount_total" => $refundAmount,
-  ],
-  "net_revenue" => $netRevenue,
-  "payment_events" => [
-    "total" => $eventsTotal,
-    "by_type" => $eventsByType,
-  ],
-];
-
-echo json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL;
-';
-
 if [[ "$DB_CONNECTION" == "sqlite" ]]; then
   OUTPUT="$(APP_ENV="$APP_ENV" DB_CONNECTION="$DB_CONNECTION" DB_DATABASE="$SQLITE_DB" \
-    DATE="$DATE" RECON_TZ="$RECON_TZ" \
-    php artisan tinker --execute="$PHP_CODE")"
+    php artisan commerce:reconcile --date="$DATE" --org_id=0 --json=1 | tail -n 1)"
 else
   OUTPUT="$(APP_ENV="$APP_ENV" DB_CONNECTION="$DB_CONNECTION" \
-    DATE="$DATE" RECON_TZ="$RECON_TZ" \
-    php artisan tinker --execute="$PHP_CODE")"
+    php artisan commerce:reconcile --date="$DATE" --org_id=0 --json=1 | tail -n 1)"
 fi
 
 echo "$OUTPUT"
