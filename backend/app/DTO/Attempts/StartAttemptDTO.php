@@ -19,6 +19,7 @@ final class StartAttemptDTO
         public readonly ?array $meta,
         public readonly ?bool $consentAccepted,
         public readonly ?string $consentVersion,
+        public readonly ?string $consentHash,
         public readonly ?string $consentLocale,
     ) {}
 
@@ -33,7 +34,7 @@ final class StartAttemptDTO
         }
 
         $consent = $payload['consent'] ?? null;
-        if (!is_array($consent)) {
+        if (! is_array($consent)) {
             $consent = [];
         }
 
@@ -49,6 +50,7 @@ final class StartAttemptDTO
             meta: $meta,
             consentAccepted: array_key_exists('accepted', $consent) ? (bool) $consent['accepted'] : null,
             consentVersion: self::nullableString($consent['version'] ?? null),
+            consentHash: self::nullableString($consent['hash'] ?? null),
             consentLocale: self::nullableString($consent['locale'] ?? null),
         );
     }

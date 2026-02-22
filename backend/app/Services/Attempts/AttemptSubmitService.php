@@ -9,6 +9,8 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\AssessmentRunner;
 use App\Services\Observability\BigFiveTelemetry;
+use App\Services\Observability\ClinicalComboTelemetry;
+use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
@@ -27,6 +29,7 @@ class AttemptSubmitService
         private AttemptSubmitSideEffects $sideEffects,
         private ReportGatekeeper $reportGatekeeper,
         private BigFiveTelemetry $bigFiveTelemetry,
+        private AttemptDurationResolver $durationResolver,
     ) {}
 
     public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
@@ -51,15 +54,7 @@ class AttemptSubmitService
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code missing on attempt.');
         }
 
-        if ($scaleCode === 'SDS_20') {
-            $summary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
-            $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
-            $consent = is_array($meta['consent'] ?? null) ? $meta['consent'] : [];
-            $consentAccepted = (bool) ($consent['accepted'] ?? false);
-            if ($consentAccepted !== true) {
-                throw new ApiProblemException(422, 'SDS20_CONSENT_REQUIRED', 'consent is required for SDS_20 submit.');
-            }
-        }
+        $this->enforceConsentOnSubmit($scaleCode, $attempt, $dto);
 
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (! $row) {
@@ -85,10 +80,19 @@ class AttemptSubmitService
 
         $answersDigest = $this->computeAnswersDigest($mergedAnswers, $scaleCode, $packId, $dirVersion);
 
+        $attemptSummary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
+        $attemptMeta = is_array($attemptSummary['meta'] ?? null) ? $attemptSummary['meta'] : [];
+        $packReleaseManifestHash = trim((string) ($attemptMeta['pack_release_manifest_hash'] ?? ''));
+        $policyHash = trim((string) ($attemptMeta['policy_hash'] ?? ''));
+        $engineVersion = trim((string) ($attemptMeta['engine_version'] ?? ''));
+        $submittedAt = now();
+        $serverDurationSeconds = $this->durationResolver->resolveServerSecondsFromValues($attempt->started_at, $submittedAt);
+
         $scoreContext = [
             'duration_ms' => $durationMs,
             'started_at' => $attempt->started_at,
-            'submitted_at' => now(),
+            'submitted_at' => $submittedAt,
+            'server_duration_seconds' => $serverDurationSeconds,
             'region' => $region,
             'locale' => $locale,
             'org_id' => $orgId,
@@ -98,6 +102,9 @@ class AttemptSubmitService
             'anon_id' => $actorAnonId,
             'user_id' => $actorUserId,
             'validity_items' => $validityItems,
+            'content_manifest_hash' => $packReleaseManifestHash,
+            'policy_hash' => $policyHash,
+            'engine_version' => $engineVersion,
         ];
 
         $scored = $this->assessmentRunner->run(
@@ -167,7 +174,8 @@ class AttemptSubmitService
             $scoringSpecVersion,
             $actorUserId,
             $actorAnonId,
-            $validityItems
+            $validityItems,
+            $submittedAt
         ) {
             $locked = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)
                 ->lockForUpdate()
@@ -225,14 +233,14 @@ class AttemptSubmitService
                 'scoring_spec_version' => $scoringSpecVersion !== '' ? $scoringSpecVersion : null,
                 'region' => $region,
                 'locale' => $locale,
-                'submitted_at' => now(),
+                'submitted_at' => $submittedAt,
                 'duration_ms' => $durationMs,
                 'answers_digest' => $answersDigest,
             ]);
 
             if ($scaleCode === 'BIG5_OCEAN') {
                 $snapshot = $locked->calculation_snapshot_json;
-                if (!is_array($snapshot)) {
+                if (! is_array($snapshot)) {
                     $snapshot = [];
                 }
                 $snapshot['validity_items'] = $validityItems;
@@ -247,7 +255,7 @@ class AttemptSubmitService
                 $groupId = trim((string) ($normsNode['group_id'] ?? ($normed['group_id'] ?? '')));
                 $sourceId = trim((string) ($normsNode['source_id'] ?? ($normed['source_id'] ?? '')));
                 $status = strtoupper(trim((string) ($normsNode['status'] ?? ($normed['status'] ?? 'MISSING'))));
-                if (!in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+                if (! in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
                     $status = 'MISSING';
                 }
 
@@ -256,7 +264,7 @@ class AttemptSubmitService
                 }
 
                 $snapshot = $locked->calculation_snapshot_json;
-                if (!is_array($snapshot)) {
+                if (! is_array($snapshot)) {
                     $snapshot = [];
                 }
 
@@ -279,7 +287,7 @@ class AttemptSubmitService
                     : [];
 
                 $snapshot = $locked->calculation_snapshot_json;
-                if (!is_array($snapshot)) {
+                if (! is_array($snapshot)) {
                     $snapshot = [];
                 }
 
@@ -305,7 +313,7 @@ class AttemptSubmitService
                 $normsNode = is_array($normed['norms'] ?? null) ? $normed['norms'] : [];
 
                 $snapshot = $locked->calculation_snapshot_json;
-                if (!is_array($snapshot)) {
+                if (! is_array($snapshot)) {
                     $snapshot = [];
                 }
 
@@ -355,6 +363,9 @@ class AttemptSubmitService
             $resultJson = $scoreResult->toArray();
             if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true) && is_array($resultJson['normed_json'] ?? null)) {
                 $resultJson = array_merge($resultJson, $resultJson['normed_json']);
+            }
+            if (is_array($resultJson['quality'] ?? null)) {
+                $resultJson['quality']['client_duration_ms'] = $durationMs;
             }
             $resultJson['scale_code'] = $scaleCode;
             $resultJson['pack_id'] = $packId;
@@ -463,22 +474,77 @@ class AttemptSubmitService
             );
         }
 
-        if (($responsePayload['ok'] ?? false) === true && $scaleCode === 'CLINICAL_COMBO_68') {
-            $this->sideEffects->recordClinicalScoreEvent(
-                $ctx,
-                $attemptId,
-                $actorUserId,
-                $actorAnonId,
-                is_array($responsePayload['result'] ?? null) ? $responsePayload['result'] : [],
-                [
-                    'pack_id' => $packId,
-                    'dir_version' => $dirVersion,
-                    'scoring_spec_version' => $scoringSpecVersion,
-                ]
-            );
+        if (($responsePayload['ok'] ?? false) === true && in_array($scaleCode, ['CLINICAL_COMBO_68', 'SDS_20'], true)) {
+            $reportPayload = is_array($responsePayload['report'] ?? null) ? $responsePayload['report'] : [];
+            $scorePayload = is_array($responsePayload['result'] ?? null) ? $responsePayload['result'] : [];
+            $qualityPayload = is_array($scorePayload['quality'] ?? null)
+                ? $scorePayload['quality']
+                : (is_array(data_get($scorePayload, 'normed_json.quality')) ? data_get($scorePayload, 'normed_json.quality') : []);
+            $crisisReasons = array_values(array_filter(array_map('strval', (array) ($qualityPayload['crisis_reasons'] ?? []))));
+
+            $telemetry = $scaleCode === 'CLINICAL_COMBO_68'
+                ? app(ClinicalComboTelemetry::class)
+                : app(Sds20Telemetry::class);
+
+            $telemetry->attemptSubmitted($attempt, [
+                'quality_level' => strtoupper(trim((string) ($qualityPayload['level'] ?? 'D'))),
+                'variant' => strtolower(trim((string) ($reportPayload['variant'] ?? 'free'))),
+                'locked' => (bool) ($reportPayload['locked'] ?? true),
+                'idempotent' => (bool) ($responsePayload['idempotent'] ?? false),
+                'scoring_spec_version' => $scoringSpecVersion,
+            ]);
+
+            $telemetry->attemptScored($attempt, $scorePayload);
+
+            if ((bool) ($qualityPayload['crisis_alert'] ?? false) === true) {
+                $telemetry->crisisTriggered($attempt, [
+                    'quality_level' => strtoupper(trim((string) ($qualityPayload['level'] ?? 'D'))),
+                    'crisis_reasons' => $crisisReasons,
+                ]);
+            }
         }
 
         return $responsePayload;
+    }
+
+    private function enforceConsentOnSubmit(string $scaleCode, Attempt $attempt, SubmitAttemptDTO $dto): void
+    {
+        if (! in_array($scaleCode, ['CLINICAL_COMBO_68', 'SDS_20'], true)) {
+            return;
+        }
+
+        $requiredCode = $scaleCode === 'SDS_20' ? 'SDS20_CONSENT_REQUIRED' : 'CONSENT_REQUIRED';
+        $mismatchCode = $scaleCode === 'SDS_20' ? 'CONSENT_MISMATCH_SDS20' : 'CONSENT_MISMATCH';
+
+        $summary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
+        $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
+        $storedConsent = is_array($meta['consent'] ?? null) ? $meta['consent'] : [];
+
+        $storedAccepted = (bool) ($storedConsent['accepted'] ?? false);
+        $storedVersion = trim((string) ($storedConsent['version'] ?? ''));
+        $storedHash = trim((string) ($storedConsent['hash'] ?? ''));
+
+        $accepted = (bool) ($dto->consentAccepted ?? false);
+        $version = trim((string) ($dto->consentVersion ?? ''));
+        $hash = trim((string) ($dto->consentHash ?? ''));
+
+        if ($accepted !== true || $version === '') {
+            throw new ApiProblemException(422, $requiredCode, "consent is required for {$scaleCode} submit.");
+        }
+        if ($storedAccepted !== true || $storedVersion === '') {
+            throw new ApiProblemException(422, $requiredCode, "consent snapshot missing for {$scaleCode} submit.");
+        }
+        if ($version !== $storedVersion) {
+            throw new ApiProblemException(422, $mismatchCode, 'consent version/hash mismatch.');
+        }
+        if ($storedHash !== '') {
+            if ($hash === '') {
+                throw new ApiProblemException(422, $requiredCode, "consent hash is required for {$scaleCode} submit.");
+            }
+            if (! hash_equals($storedHash, $hash)) {
+                throw new ApiProblemException(422, $mismatchCode, 'consent version/hash mismatch.');
+            }
+        }
     }
 
     private function ownedAttemptQuery(
@@ -653,7 +719,7 @@ class AttemptSubmitService
     private function numericUserId(?string $userId): ?int
     {
         $userId = trim((string) $userId);
-        if ($userId === '' || !preg_match('/^\d+$/', $userId)) {
+        if ($userId === '' || ! preg_match('/^\d+$/', $userId)) {
             return null;
         }
 
@@ -661,8 +727,8 @@ class AttemptSubmitService
     }
 
     /**
-     * @param array<int,array<string,mixed>> $answers
-     * @param array<string,mixed> $normed
+     * @param  array<int,array<string,mixed>>  $answers
+     * @param  array<string,mixed>  $normed
      * @return array<string,mixed>
      */
     private function buildClinicalAnswersSummary(array $answers, array $normed, int $durationMs): array
@@ -676,7 +742,7 @@ class AttemptSubmitService
         ];
 
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
 

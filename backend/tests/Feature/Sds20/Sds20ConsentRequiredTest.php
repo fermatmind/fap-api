@@ -15,7 +15,7 @@ final class Sds20ConsentRequiredTest extends TestCase
 
     public function test_start_requires_consent_and_persists_consent_snapshot(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $missing = $this->withHeaders([
             'X-Anon-Id' => 'anon_sds20_missing_consent',
@@ -31,7 +31,9 @@ final class Sds20ConsentRequiredTest extends TestCase
         $questions = $this->getJson('/api/v0.3/scales/SDS_20/questions?locale=zh-CN');
         $questions->assertStatus(200);
         $consentVersion = (string) data_get($questions->json(), 'meta.consent.version', '');
+        $consentHash = (string) data_get($questions->json(), 'meta.consent.hash', '');
         $this->assertNotSame('', $consentVersion);
+        $this->assertNotSame('', $consentHash);
 
         $ok = $this->withHeaders([
             'X-Anon-Id' => 'anon_sds20_with_consent',
@@ -43,6 +45,7 @@ final class Sds20ConsentRequiredTest extends TestCase
             'consent' => [
                 'accepted' => true,
                 'version' => $consentVersion,
+                'hash' => $consentHash,
                 'locale' => 'zh-CN',
             ],
         ]);
@@ -59,6 +62,7 @@ final class Sds20ConsentRequiredTest extends TestCase
 
         $this->assertSame(true, (bool) ($consent['accepted'] ?? false));
         $this->assertSame($consentVersion, (string) ($consent['version'] ?? ''));
+        $this->assertSame($consentHash, (string) ($consent['hash'] ?? ''));
         $this->assertSame('zh-CN', (string) ($consent['locale'] ?? ''));
         $this->assertNotSame('', (string) ($meta['disclaimer_hash'] ?? ''));
     }

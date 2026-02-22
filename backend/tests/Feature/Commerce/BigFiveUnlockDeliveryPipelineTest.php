@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Commerce;
 
-use App\Jobs\GenerateBigFiveReportPdfJob;
+use App\Jobs\GenerateReportPdfJob;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
@@ -161,7 +161,7 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
                 && $job->orgId === 0
                 && $job->triggerSource === 'payment';
         });
-        Queue::assertPushed(GenerateBigFiveReportPdfJob::class, function (GenerateBigFiveReportPdfJob $job) use ($attemptId, $orderNo): bool {
+        Queue::assertPushed(GenerateReportPdfJob::class, function (GenerateReportPdfJob $job) use ($attemptId, $orderNo): bool {
             return $job->attemptId === $attemptId
                 && $job->orgId === 0
                 && $job->triggerSource === 'payment_unlock'

@@ -14,7 +14,7 @@ final class Sds20QuestionsApiTest extends TestCase
 
     public function test_questions_api_returns_bilingual_questions_options_and_meta(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $zh = $this->getJson('/api/v0.3/scales/SDS_20/questions?locale=zh-CN&region=CN_MAINLAND');
         $zh->assertStatus(200);
@@ -26,6 +26,7 @@ final class Sds20QuestionsApiTest extends TestCase
         $zh->assertJsonPath('options.format.0', '没有或很少时间');
         $zh->assertJsonPath('meta.consent.required', true);
         $this->assertNotSame('', (string) data_get($zh->json(), 'meta.consent.version', ''));
+        $this->assertNotSame('', (string) data_get($zh->json(), 'meta.consent.hash', ''));
         $this->assertNotEmpty((array) data_get($zh->json(), 'meta.source.items', []));
 
         $en = $this->getJson('/api/v0.3/scales/SDS_20/questions?locale=en&region=GLOBAL');

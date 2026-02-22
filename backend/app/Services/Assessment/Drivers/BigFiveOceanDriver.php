@@ -16,8 +16,7 @@ final class BigFiveOceanDriver implements DriverInterface
         private readonly BigFivePackLoader $packLoader,
         private readonly BigFiveScorerV3 $scorer,
         private readonly BigFiveTelemetry $bigFiveTelemetry,
-    ) {
-    }
+    ) {}
 
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
@@ -29,8 +28,8 @@ final class BigFiveOceanDriver implements DriverInterface
         $compiledNorms = $this->packLoader->readCompiledJson('norms.compiled.json', $version);
         $compiledPolicy = $this->packLoader->readCompiledJson('policy.compiled.json', $version);
 
-        if (!is_array($compiledNorms) || !is_array($compiledPolicy)) {
-            throw new RuntimeException('BIG5_OCEAN compiled pack missing. Run content:compile --pack=BIG5_OCEAN --version=' . $version);
+        if (! is_array($compiledNorms) || ! is_array($compiledPolicy)) {
+            throw new RuntimeException('BIG5_OCEAN compiled pack missing. Run content:compile --pack=BIG5_OCEAN --version='.$version);
         }
 
         $questionIndex = $this->resolveQuestionIndex($version);
@@ -45,6 +44,9 @@ final class BigFiveOceanDriver implements DriverInterface
             'age_band' => (string) ($ctx['age_band'] ?? ''),
             'gender' => (string) ($ctx['gender'] ?? 'ALL'),
             'duration_ms' => (int) ($ctx['duration_ms'] ?? 0),
+            'server_duration_seconds' => (int) ($ctx['server_duration_seconds'] ?? 0),
+            'started_at' => $ctx['started_at'] ?? null,
+            'submitted_at' => $ctx['submitted_at'] ?? null,
             'validity_items' => is_array($ctx['validity_items'] ?? null) ? $ctx['validity_items'] : [],
         ]);
 
@@ -92,7 +94,7 @@ final class BigFiveOceanDriver implements DriverInterface
     }
 
     /**
-     * @param array<int,mixed> $answers
+     * @param  array<int,mixed>  $answers
      * @return array<int,int>
      */
     private function normalizeAnswers(array $answers): array
@@ -100,12 +102,12 @@ final class BigFiveOceanDriver implements DriverInterface
         $out = [];
 
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
 
             $qidRaw = trim((string) ($answer['question_id'] ?? ''));
-            if ($qidRaw === '' || !preg_match('/^\d+$/', $qidRaw)) {
+            if ($qidRaw === '' || ! preg_match('/^\d+$/', $qidRaw)) {
                 continue;
             }
 
@@ -125,7 +127,7 @@ final class BigFiveOceanDriver implements DriverInterface
     private function numericUserId(string $userId): ?int
     {
         $userId = trim($userId);
-        if ($userId === '' || !preg_match('/^\d+$/', $userId)) {
+        if ($userId === '' || ! preg_match('/^\d+$/', $userId)) {
             return null;
         }
 
@@ -138,8 +140,8 @@ final class BigFiveOceanDriver implements DriverInterface
     private function resolveQuestionIndex(string $version): array
     {
         $questionIndex = $this->packLoader->readQuestionIndexPreferred($version, 120);
-        if (!is_array($questionIndex)) {
-            throw new RuntimeException('BIG5_OCEAN compiled questions missing. Run content:compile --pack=BIG5_OCEAN --version=' . $version);
+        if (! is_array($questionIndex)) {
+            throw new RuntimeException('BIG5_OCEAN compiled questions missing. Run content:compile --pack=BIG5_OCEAN --version='.$version);
         }
 
         return $questionIndex;

@@ -57,15 +57,14 @@ final class BigFiveScorerV3
     public function __construct(
         private readonly BigFiveNormGroupResolver $normResolver,
         private readonly Big5Standardizer $standardizer,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param array<int,int> $answersByQuestionId
-     * @param array<int,array<string,mixed>> $questionIndex
-     * @param array<string,mixed> $normsCompiled
-     * @param array<string,mixed> $policy
-     * @param array<string,mixed> $ctx
+     * @param  array<int,int>  $answersByQuestionId
+     * @param  array<int,array<string,mixed>>  $questionIndex
+     * @param  array<string,mixed>  $normsCompiled
+     * @param  array<string,mixed>  $policy
+     * @param  array<string,mixed>  $ctx
      * @return array<string,mixed>
      */
     public function score(
@@ -79,7 +78,7 @@ final class BigFiveScorerV3
         $rawSequence = [];
 
         for ($id = 1; $id <= 120; $id++) {
-            if (!array_key_exists($id, $answersByQuestionId)) {
+            if (! array_key_exists($id, $answersByQuestionId)) {
                 throw new \InvalidArgumentException("missing answer: {$id}");
             }
 
@@ -89,12 +88,12 @@ final class BigFiveScorerV3
             }
 
             $meta = $questionIndex[$id] ?? null;
-            if (!is_array($meta)) {
+            if (! is_array($meta)) {
                 throw new \InvalidArgumentException("question meta missing: {$id}");
             }
 
             $direction = (int) ($meta['direction'] ?? 1);
-            if (!in_array($direction, [1, -1], true)) {
+            if (! in_array($direction, [1, -1], true)) {
                 throw new \InvalidArgumentException("question direction invalid: {$id}");
             }
 
@@ -188,7 +187,7 @@ final class BigFiveScorerV3
         if ($normStatus === 'CALIBRATED' && $usedFallback) {
             $normStatus = 'PROVISIONAL';
         }
-        if (!in_array($normStatus, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+        if (! in_array($normStatus, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
             $normStatus = 'MISSING';
         }
 
@@ -236,7 +235,7 @@ final class BigFiveScorerV3
         $normsVersion = (string) ($normResolved['norms_version'] ?? '');
         if ($normSourceId === '' || $normsVersion === '') {
             foreach ($normResolved['domains'] as $row) {
-                if (!is_array($row)) {
+                if (! is_array($row)) {
                     continue;
                 }
                 if ($normSourceId === '') {
@@ -283,10 +282,10 @@ final class BigFiveScorerV3
     }
 
     /**
-     * @param array<string,string> $domainBuckets
-     * @param array<string,string> $facetBuckets
-     * @param array<string,int> $facetsPercentile
-     * @param array<string,mixed> $policy
+     * @param  array<string,string>  $domainBuckets
+     * @param  array<string,string>  $facetBuckets
+     * @param  array<string,int>  $facetsPercentile
+     * @param  array<string,mixed>  $policy
      * @return list<string>
      */
     private function buildTags(array $domainBuckets, array $facetBuckets, array $facetsPercentile, array $policy): array
@@ -314,7 +313,7 @@ final class BigFiveScorerV3
             : [];
 
         foreach ($profileRules as $profileTag => $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
             $ok = true;
@@ -329,7 +328,7 @@ final class BigFiveScorerV3
                     ? array_map(static fn ($v): string => strtolower(trim((string) $v)), $allowedBuckets)
                     : [];
 
-                if ($allowed === [] || !in_array($current, $allowed, true)) {
+                if ($allowed === [] || ! in_array($current, $allowed, true)) {
                     $ok = false;
                     break;
                 }
@@ -353,7 +352,7 @@ final class BigFiveScorerV3
     }
 
     /**
-     * @param list<float|int> $values
+     * @param  list<float|int>  $values
      */
     private function populationSd(array $values, float $mean): float
     {
@@ -371,8 +370,8 @@ final class BigFiveScorerV3
     }
 
     /**
-     * @param array<string,mixed>|null $normRow
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>|null  $normRow
+     * @param  array<string,mixed>  $policy
      * @return array{pct:int,z:float,t:int,fallback:bool}
      */
     private function normalizeWithNorm(float $score, ?array $normRow, array $policy): array
@@ -418,7 +417,7 @@ final class BigFiveScorerV3
     }
 
     /**
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>  $policy
      */
     private function bucketFromPercentile(int $pct, array $policy): string
     {
@@ -443,7 +442,7 @@ final class BigFiveScorerV3
     }
 
     /**
-     * @param array<string,int> $facetsPercentile
+     * @param  array<string,int>  $facetsPercentile
      * @return list<string>
      */
     private function sortFacetByPercentile(array $facetsPercentile, bool $desc): array
@@ -467,11 +466,11 @@ final class BigFiveScorerV3
     }
 
     /**
-     * @param list<int> $rawSequence
-     * @param array<string,list<int>> $facetValues
-     * @param array<string,float> $facetMeans
-     * @param array<string,mixed> $policy
-     * @param array<string,mixed> $ctx
+     * @param  list<int>  $rawSequence
+     * @param  array<string,list<int>>  $facetValues
+     * @param  array<string,float>  $facetMeans
+     * @param  array<string,mixed>  $policy
+     * @param  array<string,mixed>  $ctx
      * @return array<string,mixed>
      */
     private function buildQuality(
@@ -484,10 +483,7 @@ final class BigFiveScorerV3
         $answeredCount = count($rawSequence);
         $completionRate = $answeredCount > 0 ? $answeredCount / 120.0 : 0.0;
 
-        $durationMs = (int) ($ctx['duration_ms'] ?? 0);
-        $timeSecondsTotal = isset($ctx['time_seconds_total'])
-            ? (float) $ctx['time_seconds_total']
-            : ($durationMs > 0 ? round($durationMs / 1000.0, 3) : 0.0);
+        $timeSecondsTotal = $this->resolveTimeSecondsTotal($ctx);
         $timePerItemAvg = $answeredCount > 0 ? ($timeSecondsTotal / 120.0) : 0.0;
 
         $neutralCount = 0;
@@ -596,8 +592,8 @@ final class BigFiveScorerV3
     }
 
     /**
-     * @param array<string,mixed> $metrics
-     * @param array<string,mixed> $grade
+     * @param  array<string,mixed>  $metrics
+     * @param  array<string,mixed>  $grade
      */
     private function matchQualityGrade(array $metrics, array $grade): bool
     {
@@ -613,8 +609,8 @@ final class BigFiveScorerV3
     }
 
     /**
-     * @param array<string,mixed> $ctx
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>  $ctx
+     * @param  array<string,mixed>  $policy
      */
     private function hasAttentionCheckFailed(array $ctx, array $policy): bool
     {
@@ -629,7 +625,7 @@ final class BigFiveScorerV3
         }
         $answers = [];
         foreach ($answersRaw as $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             $itemId = trim((string) ($row['item_id'] ?? ''));
@@ -640,13 +636,13 @@ final class BigFiveScorerV3
         }
 
         foreach ($validityItems as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
             $itemId = trim((string) ($item['item_id'] ?? ''));
             $required = (bool) ($item['required'] ?? false);
             $expectedCode = (int) ($item['expected_code'] ?? 0);
-            if ($itemId === '' || !$required || $expectedCode < 1 || $expectedCode > 5) {
+            if ($itemId === '' || ! $required || $expectedCode < 1 || $expectedCode > 5) {
                 continue;
             }
 
@@ -672,6 +668,69 @@ final class BigFiveScorerV3
         $target = isset($rank[$target]) ? $target : 'C';
 
         return $rank[$level] < $rank[$target] ? $target : $level;
+    }
+
+    /**
+     * @param  array<string,mixed>  $ctx
+     */
+    private function resolveTimeSecondsTotal(array $ctx): float
+    {
+        $serverSeconds = (int) ($ctx['server_duration_seconds'] ?? 0);
+        if ($serverSeconds > 0) {
+            return (float) $serverSeconds;
+        }
+
+        $startedAt = $this->toTimestamp($ctx['started_at'] ?? null);
+        $submittedAt = $this->toTimestamp($ctx['submitted_at'] ?? null);
+        if ($startedAt !== null && $submittedAt !== null && $submittedAt >= $startedAt) {
+            return (float) ($submittedAt - $startedAt);
+        }
+
+        if (isset($ctx['time_seconds_total']) && is_numeric($ctx['time_seconds_total'])) {
+            return max(0.0, (float) $ctx['time_seconds_total']);
+        }
+
+        $durationMs = (int) ($ctx['duration_ms'] ?? 0);
+        if ($durationMs > 0) {
+            return round($durationMs / 1000.0, 3);
+        }
+
+        return 0.0;
+    }
+
+    private function toTimestamp(mixed $value): ?int
+    {
+        if ($value instanceof \DateTimeInterface) {
+            return $value->getTimestamp();
+        }
+
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
+            return null;
+        }
+
+        if (preg_match('/^\d+$/', $normalized) === 1) {
+            $number = (int) $normalized;
+            if ($number > 2_000_000_000_000) {
+                return (int) floor($number / 1000);
+            }
+            if ($number > 2_000_000_000) {
+                return (int) floor($number / 1000);
+            }
+
+            return $number;
+        }
+
+        $timestamp = strtotime($normalized);
+        if ($timestamp === false) {
+            return null;
+        }
+
+        return $timestamp;
     }
 
     /**

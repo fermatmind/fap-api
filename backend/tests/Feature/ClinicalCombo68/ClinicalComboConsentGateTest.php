@@ -17,7 +17,7 @@ final class ClinicalComboConsentGateTest extends TestCase
     public function test_consent_gate_respects_feature_flag(): void
     {
         $this->artisan('content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         Config::set('fap.features.clinical_consent_enforce', false);
         $startWithoutConsent = $this->withHeaders([
@@ -45,7 +45,9 @@ final class ClinicalComboConsentGateTest extends TestCase
         $questions = $this->getJson('/api/v0.3/scales/CLINICAL_COMBO_68/questions?locale=zh-CN');
         $questions->assertStatus(200);
         $consentVersion = (string) data_get($questions->json(), 'meta.consent.version', '');
+        $consentHash = (string) data_get($questions->json(), 'meta.consent.hash', '');
         $this->assertNotSame('', $consentVersion);
+        $this->assertNotSame('', $consentHash);
 
         $startWithConsent = $this->withHeaders([
             'X-Anon-Id' => 'anon_cc68_consent_on_ok',
@@ -57,6 +59,7 @@ final class ClinicalComboConsentGateTest extends TestCase
             'consent' => [
                 'accepted' => true,
                 'version' => $consentVersion,
+                'hash' => $consentHash,
                 'locale' => 'zh-CN',
             ],
         ]);
@@ -73,6 +76,7 @@ final class ClinicalComboConsentGateTest extends TestCase
 
         $this->assertSame(true, (bool) ($consent['accepted'] ?? false));
         $this->assertSame($consentVersion, (string) ($consent['version'] ?? ''));
+        $this->assertSame($consentHash, (string) ($consent['hash'] ?? ''));
         $this->assertSame('zh-CN', (string) ($consent['locale'] ?? ''));
     }
 }

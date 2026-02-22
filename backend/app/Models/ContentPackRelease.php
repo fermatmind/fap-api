@@ -37,12 +37,17 @@ class ContentPackRelease extends Model
         'content_hash',
         'norms_version',
         'git_sha',
+        'pack_version',
+        'manifest_json',
+        'storage_path',
+        'source_commit',
     ];
 
     protected $casts = [
         'probe_ok' => 'boolean',
         'probe_json' => 'array',
         'probe_run_at' => 'datetime',
+        'manifest_json' => 'array',
     ];
 
     public function fromVersion(): BelongsTo

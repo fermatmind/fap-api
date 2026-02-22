@@ -26,6 +26,7 @@ class StartAttemptRequest extends FormRequest
             'consent' => ['sometimes', 'array'],
             'consent.accepted' => ['sometimes', 'boolean'],
             'consent.version' => ['sometimes', 'string', 'max:128'],
+            'consent.hash' => ['sometimes', 'string', 'size:64'],
             'consent.locale' => ['nullable', 'string', 'max:16'],
         ];
     }
