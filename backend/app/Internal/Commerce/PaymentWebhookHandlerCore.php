@@ -2,6 +2,7 @@
 
 namespace App\Internal\Commerce;
 
+use App\Jobs\GenerateBigFiveReportPdfJob;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\BenefitWalletService;
@@ -11,6 +12,7 @@ use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\SkuCatalog;
+use App\Services\Email\EmailOutboxService;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportSnapshotStore;
@@ -23,6 +25,7 @@ use Illuminate\Support\Str;
 class PaymentWebhookHandlerCore
 {
     private const DEFAULT_WEBHOOK_LOCK_TTL_SECONDS = 10;
+
     private const DEFAULT_WEBHOOK_LOCK_BLOCK_SECONDS = 5;
 
     /** @var array<string, PaymentGatewayInterface> */
@@ -35,17 +38,18 @@ class PaymentWebhookHandlerCore
         private EntitlementManager $entitlements,
         private ReportSnapshotStore $reportSnapshots,
         private EventRecorder $events,
+        private ?EmailOutboxService $emailOutbox = null,
         private ?BigFiveTelemetry $bigFiveTelemetry = null,
     ) {
-        $stripe = new StripeGateway();
+        $stripe = new StripeGateway;
         $this->gateways[$stripe->provider()] = $stripe;
-        $billing = new BillingGateway();
+        $billing = new BillingGateway;
         $this->gateways[$billing->provider()] = $billing;
 
         if ($this->isStubEnabled()) {
             $stubGatewayClass = \App\Services\Commerce\PaymentGateway\StubGateway::class;
             if (class_exists($stubGatewayClass)) {
-                $stub = new $stubGatewayClass();
+                $stub = new $stubGatewayClass;
                 if ($stub instanceof PaymentGatewayInterface) {
                     $this->gateways[$stub->provider()] = $stub;
                 }
@@ -65,12 +69,12 @@ class PaymentWebhookHandlerCore
         int $rawPayloadBytes = -1
     ): array {
         $provider = strtolower(trim($provider));
-        if ($provider === 'stub' && !$this->isStubEnabled()) {
+        if ($provider === 'stub' && ! $this->isStubEnabled()) {
             return $this->notFound('PROVIDER_DISABLED', 'not found.');
         }
 
         $gateway = $this->gateways[$provider] ?? null;
-        if (!$gateway) {
+        if (! $gateway) {
             return $this->badRequest('PROVIDER_NOT_SUPPORTED', 'provider not supported.');
         }
 
@@ -170,7 +174,7 @@ class PaymentWebhookHandlerCore
                         ->where('provider_event_id', $providerEventId)
                         ->lockForUpdate()
                         ->first();
-                    if (!$eventRow) {
+                    if (! $eventRow) {
                         return $this->serverError('EVENT_INIT_FAILED', 'payment event init failed.');
                     }
 
@@ -222,6 +226,7 @@ class PaymentWebhookHandlerCore
 
                     if ($signatureOk !== true) {
                         $this->markEventError($provider, $providerEventId, 'rejected', 'INVALID_SIGNATURE', 'signature invalid.');
+
                         return $this->badRequest('INVALID_SIGNATURE', 'invalid signature.');
                     }
 
@@ -230,8 +235,9 @@ class PaymentWebhookHandlerCore
                         ->where('org_id', $orgId);
 
                     $order = $orderQuery->lockForUpdate()->first();
-                    if (!$order) {
+                    if (! $order) {
                         $this->markEventError($provider, $providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
+
                         return $this->notFound('ORDER_NOT_FOUND', 'not found.');
                     }
 
@@ -261,7 +267,7 @@ class PaymentWebhookHandlerCore
 
                     $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
                     $orderStatus = strtolower((string) ($order->status ?? ''));
-                    $orderAlreadySettled = !$isRefundEvent
+                    $orderAlreadySettled = ! $isRefundEvent
                         && in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true);
 
                     $orderMeta = $this->resolveOrderMeta($orgId, $orderNo, $order);
@@ -285,7 +291,7 @@ class PaymentWebhookHandlerCore
 
                     if ($isRefundEvent) {
                         $refund = $this->handleRefund($orderNo, $order, $normalized, $providerEventId, $orgId);
-                        if (!($refund['ok'] ?? false)) {
+                        if (! ($refund['ok'] ?? false)) {
                             $this->markEventError(
                                 $provider,
                                 $providerEventId,
@@ -293,9 +299,11 @@ class PaymentWebhookHandlerCore
                                 (string) ($refund['error'] ?? 'REFUND_FAILED'),
                                 (string) ($refund['message'] ?? 'refund failed.')
                             );
+
                             return $refund;
                         }
                         $this->markEventProcessed($provider, $providerEventId);
+
                         return $refund;
                     }
 
@@ -306,17 +314,19 @@ class PaymentWebhookHandlerCore
                         ?? ''));
                     if ($effectiveSku === '') {
                         $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku missing on order.');
+
                         return $this->badRequest('SKU_NOT_FOUND', 'sku missing on order.');
                     }
 
                     $skuRow = $this->skus->getActiveSku($effectiveSku);
-                    if (!$skuRow) {
+                    if (! $skuRow) {
                         $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku not found.');
+
                         return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
                     }
 
                     $guard = $this->validatePaidEventGuard($provider, $eventType, $normalized, $order);
-                    if (!($guard['ok'] ?? false)) {
+                    if (! ($guard['ok'] ?? false)) {
                         $this->markEventError(
                             $provider,
                             $providerEventId,
@@ -324,17 +334,18 @@ class PaymentWebhookHandlerCore
                             (string) ($guard['code'] ?? 'WEBHOOK_REJECTED'),
                             (string) ($guard['message'] ?? 'webhook rejected.')
                         );
+
                         return $this->notFound('NOT_FOUND', 'not found.');
                     }
 
-                    if (!$orderAlreadySettled) {
+                    if (! $orderAlreadySettled) {
                         $orderTransition = $this->orders->transitionToPaidAtomic(
                             $orderNo,
                             $orgId,
                             $normalized['external_trade_no'] ?? null,
                             $normalized['paid_at'] ?? null
                         );
-                        if (!($orderTransition['ok'] ?? false)) {
+                        if (! ($orderTransition['ok'] ?? false)) {
                             $this->markEventError(
                                 $provider,
                                 $providerEventId,
@@ -342,6 +353,7 @@ class PaymentWebhookHandlerCore
                                 (string) ($orderTransition['error'] ?? 'ORDER_STATUS_INVALID'),
                                 (string) ($orderTransition['message'] ?? 'order transition failed.')
                             );
+
                             return $orderTransition;
                         }
                     }
@@ -382,6 +394,7 @@ class PaymentWebhookHandlerCore
                             'BENEFIT_CODE_NOT_FOUND',
                             'benefit code missing on sku.'
                         );
+
                         return $this->badRequest('BENEFIT_CODE_NOT_FOUND', 'benefit code missing on sku.');
                     }
 
@@ -402,7 +415,7 @@ class PaymentWebhookHandlerCore
                     $eventUserId = $order->user_id ? (string) $order->user_id : $userId;
 
                     $retryingPostCommitOnly = $inserted === 0
-                        && !$this->isEventProcessed($eventRow)
+                        && ! $this->isEventProcessed($eventRow)
                         && $orderAlreadySettled;
 
                     if ($kind === 'credit_pack') {
@@ -413,6 +426,7 @@ class PaymentWebhookHandlerCore
                             || $quantity > intdiv(2147483647, $unitQty)
                         ) {
                             $this->markEventError($provider, $providerEventId, 'failed', 'TOPUP_DELTA_INVALID', 'topup delta invalid.');
+
                             return $this->badRequest('TOPUP_DELTA_INVALID', 'topup delta invalid.');
                         }
 
@@ -434,10 +448,11 @@ class PaymentWebhookHandlerCore
                         $attemptId = (string) ($order->target_attempt_id ?? '');
                         if ($attemptId === '') {
                             $this->markEventError($provider, $providerEventId, 'failed', 'ATTEMPT_REQUIRED', 'target_attempt_id is required.');
+
                             return $this->badRequest('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
                         }
 
-                        if (!$retryingPostCommitOnly) {
+                        if (! $retryingPostCommitOnly) {
                             $scopeOverride = trim((string) ($skuRow->scope ?? ''));
                             if ($scopeOverride === '') {
                                 $scopeOverride = 'attempt';
@@ -465,7 +480,7 @@ class PaymentWebhookHandlerCore
                                 $modulesIncluded
                             );
 
-                            if (!($grant['ok'] ?? false)) {
+                            if (! ($grant['ok'] ?? false)) {
                                 $this->markEventError(
                                     $provider,
                                     $providerEventId,
@@ -473,6 +488,7 @@ class PaymentWebhookHandlerCore
                                     (string) ($grant['error'] ?? 'ENTITLEMENT_FAILED'),
                                     (string) ($grant['message'] ?? 'entitlement grant failed.')
                                 );
+
                                 return $grant;
                             }
                         }
@@ -498,6 +514,7 @@ class PaymentWebhookHandlerCore
                         ];
                     } else {
                         $this->markEventError($provider, $providerEventId, 'failed', 'SKU_KIND_INVALID', 'unsupported sku kind.');
+
                         return $this->badRequest('SKU_KIND_INVALID', 'unsupported sku kind.');
                     }
 
@@ -528,7 +545,7 @@ class PaymentWebhookHandlerCore
                     }
 
                     $fulfilled = $this->orders->transition($orderNo, 'fulfilled', $orgId);
-                    if (!($fulfilled['ok'] ?? false)) {
+                    if (! ($fulfilled['ok'] ?? false)) {
                         $this->markEventError(
                             $provider,
                             $providerEventId,
@@ -536,6 +553,7 @@ class PaymentWebhookHandlerCore
                             (string) ($fulfilled['error'] ?? 'ORDER_STATUS_INVALID'),
                             (string) ($fulfilled['message'] ?? 'order transition failed.')
                         );
+
                         return $fulfilled;
                     }
 
@@ -561,7 +579,7 @@ class PaymentWebhookHandlerCore
                         (string) ($postCommitOutcome['error_message'] ?? 'post commit side effects failed.')
                     );
                 }
-            } elseif (($result['ok'] ?? false) && !($result['duplicate'] ?? false) && !($result['ignored'] ?? false)) {
+            } elseif (($result['ok'] ?? false) && ! ($result['duplicate'] ?? false) && ! ($result['ignored'] ?? false)) {
                 $this->markEventProcessed($provider, $providerEventId);
             }
 
@@ -574,6 +592,18 @@ class PaymentWebhookHandlerCore
                     (string) $snapshotJobCtx['attempt_id'],
                     (string) $snapshotJobCtx['trigger_source'],
                     $snapshotJobCtx['order_no'] !== null ? (string) $snapshotJobCtx['order_no'] : null,
+                )->afterCommit();
+            }
+
+            $pdfJobCtx = is_array($postCommitOutcome['pdf_job_ctx'] ?? null)
+                ? $postCommitOutcome['pdf_job_ctx']
+                : null;
+            if (is_array($pdfJobCtx) && ($result['ok'] ?? false)) {
+                GenerateBigFiveReportPdfJob::dispatch(
+                    (int) $pdfJobCtx['org_id'],
+                    (string) $pdfJobCtx['attempt_id'],
+                    (string) $pdfJobCtx['trigger_source'],
+                    $pdfJobCtx['order_no'] !== null ? (string) $pdfJobCtx['order_no'] : null,
                 )->afterCommit();
             }
 
@@ -601,7 +631,7 @@ class PaymentWebhookHandlerCore
         $provider = strtolower(trim($provider));
         $gateway = $this->gateways[$provider] ?? null;
 
-        if (!$gateway) {
+        if (! $gateway) {
             return $this->errorResult(400, 'PROVIDER_NOT_SUPPORTED', 'provider not supported.', null, [
                 'dry_run' => true,
             ]);
@@ -629,7 +659,7 @@ class PaymentWebhookHandlerCore
         }
 
         $isRefund = $this->isRefundEvent($eventType, $normalized);
-        if (!$isRefund && !$this->isAllowedSuccessEventType($provider, $eventType)) {
+        if (! $isRefund && ! $this->isAllowedSuccessEventType($provider, $eventType)) {
             return $this->errorResult(404, 'EVENT_TYPE_NOT_ALLOWED', 'event type not allowed.', null, [
                 'dry_run' => true,
                 'provider_event_id' => $providerEventId,
@@ -706,7 +736,7 @@ class PaymentWebhookHandlerCore
                         ]
                     );
 
-                    if (!($wallet['ok'] ?? false)) {
+                    if (! ($wallet['ok'] ?? false)) {
                         Log::warning('PAYMENT_WEBHOOK_POST_COMMIT_TOPUP_FAILED', [
                             'provider' => $provider,
                             'provider_event_id' => $providerEventId,
@@ -780,6 +810,20 @@ class PaymentWebhookHandlerCore
                         'trigger_source' => 'payment',
                         'order_no' => $orderNo !== '' ? $orderNo : null,
                     ];
+                    $outcome['pdf_job_ctx'] = [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'trigger_source' => 'payment_unlock',
+                        'order_no' => $orderNo !== '' ? $orderNo : null,
+                    ];
+
+                    $this->queueBigFiveUnlockEmail(
+                        $orgId,
+                        $attemptId,
+                        $orderNo,
+                        is_string($ctx['event_user_id'] ?? null) ? (string) $ctx['event_user_id'] : null,
+                        is_array($ctx['event_meta'] ?? null) ? (array) $ctx['event_meta'] : []
+                    );
                 } catch (\Throwable $e) {
                     Log::error('PAYMENT_WEBHOOK_POST_COMMIT_SEED_SNAPSHOT_FAILED', [
                         'provider' => $provider,
@@ -818,8 +862,8 @@ class PaymentWebhookHandlerCore
     }
 
     /**
-     * @param array<string,mixed> $result
-     * @param array<string,mixed>|null $postCommitCtx
+     * @param  array<string,mixed>  $result
+     * @param  array<string,mixed>|null  $postCommitCtx
      */
     private function emitBigFiveWebhookTelemetry(
         array $result,
@@ -829,7 +873,7 @@ class PaymentWebhookHandlerCore
         string $providerEventId,
         string $orderNo
     ): void {
-        if (!$this->bigFiveTelemetry instanceof BigFiveTelemetry) {
+        if (! $this->bigFiveTelemetry instanceof BigFiveTelemetry) {
             return;
         }
 
@@ -852,7 +896,7 @@ class PaymentWebhookHandlerCore
                 $orderQuery->where('org_id', $orgId);
             }
             $orderRow = $orderQuery->first();
-            if (!$orderRow && $orgId > 0) {
+            if (! $orderRow && $orgId > 0) {
                 $orderRow = DB::table('orders')
                     ->where('order_no', $orderNo)
                     ->first();
@@ -934,7 +978,7 @@ class PaymentWebhookHandlerCore
     private function numericUserId(?string $userId): ?int
     {
         $userId = $userId !== null ? trim($userId) : '';
-        if ($userId === '' || !preg_match('/^\d+$/', $userId)) {
+        if ($userId === '' || ! preg_match('/^\d+$/', $userId)) {
             return null;
         }
 
@@ -969,7 +1013,7 @@ class PaymentWebhookHandlerCore
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 
@@ -979,6 +1023,7 @@ class PaymentWebhookHandlerCore
     private function buildEventMeta(array $orderMeta, array $extra): array
     {
         $attempt = $orderMeta['attempt'] ?? [];
+
         return array_merge([
             'scale_code' => $attempt['scale_code'] ?? null,
             'attempt_id' => $attempt['attempt_id'] ?? null,
@@ -992,6 +1037,7 @@ class PaymentWebhookHandlerCore
     private function buildEventContext(array $orderMeta, ?string $anonId): array
     {
         $attempt = $orderMeta['attempt'] ?? [];
+
         return [
             'org_id' => $orderMeta['org_id'] ?? 0,
             'anon_id' => $anonId,
@@ -1009,7 +1055,7 @@ class PaymentWebhookHandlerCore
         $orderOrgId = $orgId;
         $attempt = [];
 
-        if (!$order) {
+        if (! $order) {
             $order = DB::table('orders')
                 ->where('order_no', $orderNo)
                 ->where('org_id', $orgId)
@@ -1076,7 +1122,7 @@ class PaymentWebhookHandlerCore
         $externalTradeNo = trim((string) ($normalized['external_trade_no'] ?? ''));
 
         $amount = $normalized['amount_cents'] ?? null;
-        if (!is_numeric($amount)) {
+        if (! is_numeric($amount)) {
             $amount = null;
         } else {
             $amount = (int) $amount;
@@ -1102,7 +1148,7 @@ class PaymentWebhookHandlerCore
     private function encodePayloadSummary(array $summary): string
     {
         $encoded = json_encode($summary, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($encoded) || $encoded === '') {
+        if (! is_string($encoded) || $encoded === '') {
             return '{}';
         }
 
@@ -1127,21 +1173,20 @@ class PaymentWebhookHandlerCore
         array $payloadMeta,
         string $rawPayloadSha256,
         int $rawPayloadBytes
-    ): array
-    {
+    ): array {
         $rawFallback = $this->resolvePayloadRawFallback($payload);
 
         $size = $rawPayloadBytes >= 0 ? $rawPayloadBytes : ($payloadMeta['size_bytes'] ?? null);
-        if (!is_numeric($size)) {
+        if (! is_numeric($size)) {
             $size = strlen($rawFallback);
         }
         $size = max(0, (int) $size);
 
         $sha = strtolower(trim($rawPayloadSha256));
-        if (!preg_match('/^[a-f0-9]{64}$/', $sha)) {
+        if (! preg_match('/^[a-f0-9]{64}$/', $sha)) {
             $sha = strtolower(trim((string) ($payloadMeta['sha256'] ?? '')));
         }
-        if (!preg_match('/^[a-f0-9]{64}$/', $sha)) {
+        if (! preg_match('/^[a-f0-9]{64}$/', $sha)) {
             $sha = hash('sha256', $rawFallback);
         }
 
@@ -1162,7 +1207,7 @@ class PaymentWebhookHandlerCore
     private function resolvePayloadRawFallback(array $payload): string
     {
         $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($raw)) {
+        if (! is_string($raw)) {
             return '';
         }
 
@@ -1234,7 +1279,7 @@ class PaymentWebhookHandlerCore
             ->where('id', $attemptId)
             ->where('org_id', $orgId)
             ->first();
-        if (!$row) {
+        if (! $row) {
             return [
                 'attempt_id' => null,
                 'scale_code' => null,
@@ -1251,6 +1296,140 @@ class PaymentWebhookHandlerCore
         ];
     }
 
+    /**
+     * @param  array<string,mixed>  $eventMeta
+     */
+    private function queueBigFiveUnlockEmail(
+        int $orgId,
+        string $attemptId,
+        string $orderNo,
+        ?string $eventUserId,
+        array $eventMeta
+    ): void {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return;
+        }
+
+        if (! \App\Support\SchemaBaseline::hasTable('users')
+            || ! \App\Support\SchemaBaseline::hasColumn('users', 'email')) {
+            return;
+        }
+
+        $attempt = DB::table('attempts')
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->first();
+        if (! $attempt) {
+            return;
+        }
+        if (strtoupper((string) ($attempt->scale_code ?? '')) !== 'BIG5_OCEAN') {
+            return;
+        }
+
+        $email = '';
+        $resolvedUserId = '';
+
+        $candidateUserIds = [];
+        $fromEvent = trim((string) ($eventUserId ?? ''));
+        if ($fromEvent !== '') {
+            $candidateUserIds[] = $fromEvent;
+        }
+        $fromAttempt = trim((string) ($attempt->user_id ?? ''));
+        if ($fromAttempt !== '') {
+            $candidateUserIds[] = $fromAttempt;
+        }
+
+        if ($orderNo !== '' && \App\Support\SchemaBaseline::hasTable('orders')) {
+            $orderRow = DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->first();
+            if ($orderRow) {
+                $fromOrder = trim((string) ($orderRow->user_id ?? ''));
+                if ($fromOrder !== '') {
+                    $candidateUserIds[] = $fromOrder;
+                }
+            }
+        }
+
+        foreach (array_values(array_unique($candidateUserIds)) as $candidateUserId) {
+            $candidateEmail = $this->resolveUserEmailById($candidateUserId);
+            if ($candidateEmail === '') {
+                continue;
+            }
+            $resolvedUserId = $candidateUserId;
+            $email = $candidateEmail;
+            break;
+        }
+
+        if ($email === '') {
+            return;
+        }
+
+        $outboxUserId = $this->resolveOutboxUserId($resolvedUserId, (string) ($attempt->anon_id ?? ''), $attemptId);
+        if ($outboxUserId === '') {
+            return;
+        }
+
+        try {
+            $service = $this->emailOutbox instanceof EmailOutboxService
+                ? $this->emailOutbox
+                : app(EmailOutboxService::class);
+
+            $productSummary = trim((string) ($eventMeta['sku'] ?? $eventMeta['benefit_code'] ?? ''));
+            $service->queuePaymentSuccess(
+                $outboxUserId,
+                $email,
+                $attemptId,
+                $orderNo !== '' ? $orderNo : null,
+                $productSummary !== '' ? $productSummary : null
+            );
+        } catch (\Throwable $e) {
+            Log::warning('PAYMENT_WEBHOOK_POST_COMMIT_QUEUE_EMAIL_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'order_no' => $orderNo,
+                'error_message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    private function resolveUserEmailById(string $userId): string
+    {
+        $userId = trim($userId);
+        if ($userId === '') {
+            return '';
+        }
+
+        $email = trim((string) DB::table('users')->where('id', $userId)->value('email'));
+        if ($email !== '') {
+            return $email;
+        }
+
+        return '';
+    }
+
+    private function resolveOutboxUserId(string $userId, string $anonId, string $attemptId): string
+    {
+        $userId = trim($userId);
+        if ($userId !== '') {
+            return substr($userId, 0, 64);
+        }
+
+        $anonId = trim($anonId);
+        if ($anonId !== '') {
+            return 'anon_'.substr(hash('sha256', $anonId), 0, 24);
+        }
+
+        $attemptId = trim($attemptId);
+        if ($attemptId !== '') {
+            return 'attempt_'.substr(hash('sha256', $attemptId), 0, 24);
+        }
+
+        return '';
+    }
+
     private function isStubEnabled(): bool
     {
         return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
@@ -1259,7 +1438,7 @@ class PaymentWebhookHandlerCore
     private function normalizeResultStatus(array $result): array
     {
         $isOk = ($result['ok'] ?? false) === true;
-        if (!$isOk) {
+        if (! $isOk) {
             $result = $this->canonicalizeErrorResult($result);
         }
 
@@ -1267,11 +1446,13 @@ class PaymentWebhookHandlerCore
             $candidate = (int) $result['status'];
             if ($candidate >= 100 && $candidate <= 599) {
                 $result['status'] = $candidate;
+
                 return $result;
             }
         }
 
         $result['status'] = $isOk ? 200 : 500;
+
         return $result;
     }
 
@@ -1359,12 +1540,12 @@ class PaymentWebhookHandlerCore
     }
 
     /**
-     * @param array<int, mixed> $candidates
+     * @param  array<int, mixed>  $candidates
      */
     private function firstNonEmptyString(array $candidates): string
     {
         foreach ($candidates as $candidate) {
-            if (!is_string($candidate) && !is_numeric($candidate)) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
                 continue;
             }
 
@@ -1380,6 +1561,7 @@ class PaymentWebhookHandlerCore
     private function normalizeEventType(array $normalized): string
     {
         $eventType = strtolower(trim((string) ($normalized['event_type'] ?? '')));
+
         return $eventType !== '' ? $eventType : 'payment_succeeded';
     }
 
@@ -1390,12 +1572,13 @@ class PaymentWebhookHandlerCore
         }
 
         $refundAmount = (int) ($normalized['refund_amount_cents'] ?? 0);
+
         return $refundAmount > 0;
     }
 
     private function validatePaidEventGuard(string $provider, string $eventType, array $normalized, object $order): array
     {
-        if (!$this->isAllowedSuccessEventType($provider, $eventType)) {
+        if (! $this->isAllowedSuccessEventType($provider, $eventType)) {
             return [
                 'ok' => false,
                 'code' => 'EVENT_TYPE_NOT_ALLOWED',
@@ -1508,12 +1691,12 @@ class PaymentWebhookHandlerCore
         }
 
         $transition = $this->orders->transition($orderNo, 'refunded', $orgId);
-        if (!($transition['ok'] ?? false)) {
+        if (! ($transition['ok'] ?? false)) {
             return $transition;
         }
 
         $revoked = $this->entitlements->revokeByOrderNo($orgId, $orderNo);
-        if (!($revoked['ok'] ?? false)) {
+        if (! ($revoked['ok'] ?? false)) {
             return $revoked;
         }
 

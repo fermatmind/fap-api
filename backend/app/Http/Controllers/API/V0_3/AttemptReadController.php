@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API\V0_3;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\V0_3\Concerns\ResolvesAttemptOwnership;
+use App\Http\Controllers\Controller;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Report\BigFivePdfDocumentService;
 use App\Services\Report\ReportGatekeeper;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
@@ -18,10 +19,10 @@ class AttemptReadController extends Controller
 
     public function __construct(
         private ReportGatekeeper $reportGatekeeper,
+        private BigFivePdfDocumentService $bigFivePdfDocumentService,
         private EventRecorder $eventRecorder,
         protected OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     /**
      * GET /api/v0.3/attempts/{id}
@@ -42,25 +43,25 @@ class AttemptReadController extends Controller
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
 
         $payload = $result->result_json;
-        if (!is_array($payload)) {
+        if (! is_array($payload)) {
             $payload = [];
         }
 
         $compatTypeCode = (string) (($payload['type_code'] ?? null) ?? ($result->type_code ?? ''));
 
         $compatScores = $result->scores_json;
-        if (!is_array($compatScores)) {
+        if (! is_array($compatScores)) {
             $compatScores = $payload['scores_json'] ?? $payload['scores'] ?? [];
         }
-        if (!is_array($compatScores)) {
+        if (! is_array($compatScores)) {
             $compatScores = [];
         }
 
         $compatScoresPct = $result->scores_pct;
-        if (!is_array($compatScoresPct)) {
+        if (! is_array($compatScoresPct)) {
             $compatScoresPct = $payload['scores_pct'] ?? ($payload['axis_scores_json']['scores_pct'] ?? null);
         }
-        if (!is_array($compatScoresPct)) {
+        if (! is_array($compatScoresPct)) {
             $compatScoresPct = [];
         }
 
@@ -115,7 +116,7 @@ class AttemptReadController extends Controller
             $forceRefresh,
         );
 
-        if (!($gate['ok'] ?? false)) {
+        if (! ($gate['ok'] ?? false)) {
             $status = (int) ($gate['status'] ?? 0);
             if ($status <= 0) {
                 $error = strtoupper((string) data_get($gate, 'error_code', data_get($gate, 'error', 'REPORT_FAILED')));
@@ -176,7 +177,7 @@ class AttemptReadController extends Controller
             false,
         );
 
-        if (!($gate['ok'] ?? false)) {
+        if (! ($gate['ok'] ?? false)) {
             $status = (int) ($gate['status'] ?? 0);
             if ($status <= 0) {
                 $error = strtoupper((string) data_get($gate, 'error_code', data_get($gate, 'error', 'REPORT_FAILED')));
@@ -191,7 +192,7 @@ class AttemptReadController extends Controller
         }
 
         $report = $gate['report'] ?? [];
-        if (!is_array($report)) {
+        if (! is_array($report)) {
             $report = [];
         }
 
@@ -214,24 +215,9 @@ class AttemptReadController extends Controller
             ?? data_get($result->result_json, 'normed_json.quality.level', '')
         )));
 
-        $lines = [
-            'Attempt ID: ' . (string) $attempt->id,
-            'Scale: ' . strtoupper((string) ($attempt->scale_code ?? '')),
-            'Variant: ' . strtolower((string) ($gate['variant'] ?? '')),
-            'Locked: ' . (($gate['locked'] ?? false) ? 'true' : 'false'),
-        ];
-        if ($normsStatus !== '') {
-            $lines[] = 'Norms Status: ' . $normsStatus;
-        }
-        if ($qualityLevel !== '') {
-            $lines[] = 'Quality Level: ' . $qualityLevel;
-        }
-        if ($sections !== []) {
-            $lines[] = 'Sections: ' . implode(', ', $sections);
-        }
-
-        $scaleSlug = strtolower((string) preg_replace('/[^a-z0-9]+/i', '_', (string) ($attempt->scale_code ?? 'report')));
-        $fileName = trim($scaleSlug, '_') . '_report_' . (string) $attempt->id . '.pdf';
+        $variant = $this->bigFivePdfDocumentService->normalizeVariant((string) ($gate['variant'] ?? 'free'));
+        $locked = (bool) ($gate['locked'] ?? false);
+        $fileName = $this->bigFivePdfDocumentService->fileName((string) ($attempt->scale_code ?? 'report'), (string) $attempt->id);
         $inline = in_array(strtolower(trim((string) $request->query('inline', '0'))), ['1', 'true', 'yes', 'on'], true);
         $disposition = $inline ? 'inline' : 'attachment';
 
@@ -241,80 +227,36 @@ class AttemptReadController extends Controller
             'dir_version' => (string) ($attempt->dir_version ?? ''),
             'type_code' => (string) ($result->type_code ?? ''),
             'attempt_id' => (string) $attempt->id,
-            'locked' => (bool) ($gate['locked'] ?? false),
-            'variant' => (string) ($gate['variant'] ?? ''),
+            'locked' => $locked,
+            'variant' => $variant,
         ]);
 
-        return response($this->buildSimplePdfDocument('FermatMind Report', $lines), 200, [
+        $pdfBinary = null;
+        if (strtoupper((string) ($attempt->scale_code ?? '')) === 'BIG5_OCEAN') {
+            $pdfBinary = $this->bigFivePdfDocumentService->readArtifact((string) $attempt->id, $variant);
+        }
+        if (! is_string($pdfBinary) || $pdfBinary === '') {
+            $pdfBinary = $this->bigFivePdfDocumentService->buildDocument(
+                (string) $attempt->id,
+                (string) ($attempt->scale_code ?? ''),
+                $locked,
+                $variant,
+                $normsStatus,
+                $qualityLevel,
+                $sections
+            );
+            if (strtoupper((string) ($attempt->scale_code ?? '')) === 'BIG5_OCEAN') {
+                $this->bigFivePdfDocumentService->storeArtifact((string) $attempt->id, $variant, $pdfBinary);
+            }
+        }
+
+        return response($pdfBinary, 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => $disposition . '; filename="' . $fileName . '"',
+            'Content-Disposition' => $disposition.'; filename="'.$fileName.'"',
             'Cache-Control' => 'private, no-store',
             'X-Report-Scale' => strtoupper((string) ($attempt->scale_code ?? '')),
-            'X-Report-Variant' => strtolower((string) ($gate['variant'] ?? '')),
-            'X-Report-Locked' => ($gate['locked'] ?? false) ? 'true' : 'false',
+            'X-Report-Variant' => $variant,
+            'X-Report-Locked' => $locked ? 'true' : 'false',
         ]);
-    }
-
-    /**
-     * @param list<string> $lines
-     */
-    private function buildSimplePdfDocument(string $title, array $lines): string
-    {
-        $title = $this->sanitizePdfText($title);
-        $stream = "BT\n/F1 14 Tf\n1 0 0 1 40 800 Tm\n(" . $title . ") Tj\n/F1 10 Tf\n";
-
-        $y = 780;
-        foreach ($lines as $line) {
-            $line = $this->sanitizePdfText($line);
-            if ($line === '') {
-                continue;
-            }
-            $stream .= "1 0 0 1 40 {$y} Tm\n(" . $line . ") Tj\n";
-            $y -= 14;
-            if ($y < 48) {
-                break;
-            }
-        }
-        $stream .= "ET\n";
-
-        $objects = [
-            "1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n",
-            "2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n",
-            "3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>\nendobj\n",
-            "4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n",
-            "5 0 obj\n<< /Length " . strlen($stream) . " >>\nstream\n" . $stream . "endstream\nendobj\n",
-        ];
-
-        $pdf = "%PDF-1.4\n";
-        $offsets = [0];
-        foreach ($objects as $index => $object) {
-            $offsets[$index + 1] = strlen($pdf);
-            $pdf .= $object;
-        }
-
-        $startXref = strlen($pdf);
-        $pdf .= "xref\n0 6\n";
-        $pdf .= "0000000000 65535 f \n";
-        for ($i = 1; $i <= 5; $i++) {
-            $pdf .= sprintf('%010d 00000 n ', $offsets[$i]) . "\n";
-        }
-        $pdf .= "trailer\n<< /Size 6 /Root 1 0 R >>\n";
-        $pdf .= "startxref\n" . $startXref . "\n%%EOF\n";
-
-        return $pdf;
-    }
-
-    private function sanitizePdfText(string $value): string
-    {
-        $value = trim($value);
-        if ($value === '') {
-            return '';
-        }
-
-        $value = substr($value, 0, 160);
-        $value = preg_replace('/[^ -~]/', '?', $value) ?? '';
-        $value = str_replace(['\\', '(', ')'], ['\\\\', '\\(', '\\)'], $value);
-
-        return $value;
     }
 }

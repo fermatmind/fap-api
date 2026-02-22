@@ -3,7 +3,6 @@
 namespace App\Services\Email;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class EmailOutboxService
@@ -15,7 +14,7 @@ class EmailOutboxService
      */
     public function queueReportClaim(string $userId, string $email, string $attemptId): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('email_outbox')) {
+        if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return ['ok' => false, 'error' => 'TABLE_MISSING'];
         }
 
@@ -27,7 +26,7 @@ class EmailOutboxService
             return ['ok' => false, 'error' => 'INVALID_INPUT'];
         }
 
-        $token = 'claim_' . (string) Str::uuid();
+        $token = 'claim_'.(string) Str::uuid();
         $tokenHash = hash('sha256', $token);
         $expiresAt = now()->addMinutes(15);
         $locale = $this->resolveAttemptLocale($attemptId);
@@ -140,6 +139,126 @@ class EmailOutboxService
     }
 
     /**
+     * Queue a payment-success email task (outbox only, no send).
+     *
+     * @return array{ok:bool,error?:string}
+     */
+    public function queuePaymentSuccess(
+        string $userId,
+        string $email,
+        string $attemptId,
+        ?string $orderNo = null,
+        ?string $productSummary = null
+    ): array {
+        if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
+            return ['ok' => false, 'error' => 'TABLE_MISSING'];
+        }
+
+        $userId = trim($userId);
+        $email = trim($email);
+        $attemptId = trim($attemptId);
+        $orderNo = trim((string) $orderNo);
+        $productSummary = trim((string) $productSummary);
+        if ($userId === '' || $email === '' || $attemptId === '') {
+            return ['ok' => false, 'error' => 'INVALID_INPUT'];
+        }
+
+        $locale = $this->resolveAttemptLocale($attemptId);
+        $subject = $this->defaultSubjectForTemplate('payment_success', $locale);
+        $reportUrl = "/api/v0.3/attempts/{$attemptId}/report";
+        $reportPdfUrl = "/api/v0.3/attempts/{$attemptId}/report.pdf";
+        $nonce = hash('sha256', 'payment_success|'.$attemptId.'|'.Str::uuid()->toString());
+
+        $payload = [
+            'attempt_id' => $attemptId,
+            'order_no' => $orderNo,
+            'report_url' => $reportUrl,
+            'report_pdf_url' => $reportPdfUrl,
+            'product_summary' => $productSummary,
+            'locale' => $locale,
+            'template_key' => 'payment_success',
+            'to_email' => $email,
+            'subject' => $subject,
+        ];
+
+        $pending = null;
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
+            $pending = DB::table('email_outbox')
+                ->where('user_id', $userId)
+                ->where('attempt_id', $attemptId)
+                ->where('template', 'payment_success')
+                ->where('status', 'pending')
+                ->orderByDesc('updated_at')
+                ->first();
+        }
+
+        if ($pending) {
+            $update = [
+                'email' => $email,
+                'attempt_id' => $attemptId,
+                'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'claim_token_hash' => $nonce,
+                'claim_expires_at' => null,
+                'updated_at' => now(),
+            ];
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+                $update['locale'] = $locale;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+                $update['template_key'] = 'payment_success';
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
+                $update['to_email'] = $email;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+                $update['subject'] = $subject;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+                $update['body_html'] = null;
+            }
+            DB::table('email_outbox')
+                ->where('id', $pending->id)
+                ->update($update);
+
+            return ['ok' => true];
+        }
+
+        $row = [
+            'id' => (string) Str::uuid(),
+            'user_id' => $userId,
+            'email' => $email,
+            'attempt_id' => $attemptId,
+            'template' => 'payment_success',
+            'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'claim_token_hash' => $nonce,
+            'claim_expires_at' => null,
+            'status' => 'pending',
+            'sent_at' => null,
+            'consumed_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+            $row['locale'] = $locale;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+            $row['template_key'] = 'payment_success';
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
+            $row['to_email'] = $email;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+            $row['subject'] = $subject;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+            $row['body_html'] = null;
+        }
+        DB::table('email_outbox')->insert($row);
+
+        return ['ok' => true];
+    }
+
+    /**
      * Claim report by token.
      *
      * @return array {ok:bool, attempt_id?:string, report_url?:string, status?:int, error?:string, message?:string}
@@ -156,7 +275,7 @@ class EmailOutboxService
             ];
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('email_outbox')) {
+        if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return [
                 'ok' => false,
                 'status' => 410,
@@ -170,7 +289,7 @@ class EmailOutboxService
             ->where('claim_token_hash', $tokenHash)
             ->first();
 
-        if (!$row) {
+        if (! $row) {
             return [
                 'ok' => false,
                 'status' => 422,
@@ -179,7 +298,7 @@ class EmailOutboxService
             ];
         }
 
-        if (!empty($row->claim_expires_at)) {
+        if (! empty($row->claim_expires_at)) {
             try {
                 if (now()->greaterThan(\Illuminate\Support\Carbon::parse($row->claim_expires_at))) {
                     return [
@@ -199,7 +318,7 @@ class EmailOutboxService
             }
         }
 
-        if (!empty($row->status) && $row->status !== 'pending') {
+        if (! empty($row->status) && $row->status !== 'pending') {
             return [
                 'ok' => false,
                 'status' => 410,
@@ -252,19 +371,24 @@ class EmailOutboxService
 
     private function decodePayload($raw): array
     {
-        if (is_array($raw)) return $raw;
-        if (!is_string($raw) || $raw === '') return [];
+        if (is_array($raw)) {
+            return $raw;
+        }
+        if (! is_string($raw) || $raw === '') {
+            return [];
+        }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : [];
     }
 
     private function resolveAttemptLocale(string $attemptId): string
     {
-        if (!\App\Support\SchemaBaseline::hasTable('attempts')) {
+        if (! \App\Support\SchemaBaseline::hasTable('attempts')) {
             return 'en';
         }
-        if (!\App\Support\SchemaBaseline::hasColumn('attempts', 'locale')) {
+        if (! \App\Support\SchemaBaseline::hasColumn('attempts', 'locale')) {
             return 'en';
         }
 
@@ -274,6 +398,7 @@ class EmailOutboxService
         }
 
         $lang = strtolower((string) explode('-', str_replace('_', '-', $locale))[0]);
+
         return $lang === 'zh' ? 'zh-CN' : 'en';
     }
 
@@ -282,6 +407,9 @@ class EmailOutboxService
         $lang = strtolower((string) explode('-', str_replace('_', '-', $locale))[0]);
         if ($templateKey === 'report_claim') {
             return $lang === 'zh' ? '你的报告链接已准备好' : 'Your report link is ready';
+        }
+        if ($templateKey === 'payment_success') {
+            return $lang === 'zh' ? '支付成功与报告交付通知' : 'Payment successful and report delivered';
         }
 
         return $lang === 'zh' ? 'FermatMind 通知' : 'FermatMind notification';
