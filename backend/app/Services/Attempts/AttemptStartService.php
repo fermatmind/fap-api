@@ -59,6 +59,29 @@ class AttemptStartService
 
         $questionCount = $this->resolveQuestionCount($scaleCode, $packId, $dirVersion);
         $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
+        $answersSummaryMeta = $dto->meta;
+        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $legalCompiled = $this->bigFivePackLoader->readCompiledJson('legal.compiled.json', $dirVersion);
+            $legal = is_array($legalCompiled['legal'] ?? null) ? $legalCompiled['legal'] : [];
+            $disclaimerVersion = trim((string) ($legal['disclaimer_version'] ?? ''));
+            $disclaimerHash = trim((string) ($legal['hash'] ?? ''));
+            $normalizedLocale = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
+            $disclaimerTexts = is_array($legal['texts'] ?? null) ? $legal['texts'] : [];
+            $disclaimerText = trim((string) ($disclaimerTexts[$normalizedLocale] ?? ''));
+
+            if ($disclaimerVersion === '') {
+                $disclaimerVersion = 'BIG5_OCEAN_'.$dirVersion;
+            }
+            if ($disclaimerHash === '') {
+                $disclaimerHash = hash('sha256', $disclaimerVersion.'|'.$disclaimerText);
+            }
+
+            $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
+            $answersMeta['disclaimer_version_accepted'] = $disclaimerVersion;
+            $answersMeta['disclaimer_hash'] = $disclaimerHash;
+            $answersMeta['disclaimer_locale'] = $normalizedLocale;
+            $answersSummaryMeta = $answersMeta;
+        }
 
         $clientPlatform = (string) ($dto->clientPlatform ?? 'unknown');
         $clientVersion = (string) ($dto->clientVersion ?? '');
@@ -85,7 +108,7 @@ class AttemptStartService
             'answers_summary_json' => [
                 'stage' => 'start',
                 'created_at_ms' => (int) round(microtime(true) * 1000),
-                'meta' => $dto->meta,
+                'meta' => $answersSummaryMeta,
             ],
         ]);
 

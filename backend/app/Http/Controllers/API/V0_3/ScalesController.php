@@ -109,6 +109,7 @@ class ScalesController extends Controller
             $version = (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
             $compiled = $bigFivePackLoader->readCompiledJson('questions.compiled.json', $version);
             $policyCompiled = $bigFivePackLoader->readCompiledJson('policy.compiled.json', $version);
+            $legalCompiled = $bigFivePackLoader->readCompiledJson('legal.compiled.json', $version);
             if (!is_array($compiled)) {
                 return response()->json([
                     'ok' => false,
@@ -131,6 +132,7 @@ class ScalesController extends Controller
             }
 
             $policy = is_array($policyCompiled['policy'] ?? null) ? $policyCompiled['policy'] : [];
+            $legal = is_array($legalCompiled['legal'] ?? null) ? $legalCompiled['legal'] : [];
             $validityItemsRaw = is_array($policy['validity_items'] ?? null) ? $policy['validity_items'] : [];
             $validityItems = [];
             foreach ($validityItemsRaw as $item) {
@@ -152,6 +154,22 @@ class ScalesController extends Controller
                 ];
             }
 
+            $disclaimerTexts = is_array($legal['texts'] ?? null) ? $legal['texts'] : [];
+            $policyDisclaimerTexts = is_array($policy['disclaimer'] ?? null) ? $policy['disclaimer'] : [];
+            $disclaimerText = trim((string) ($disclaimerTexts[$normalizedLocale] ?? ''));
+            if ($disclaimerText === '') {
+                $disclaimerText = trim((string) ($policyDisclaimerTexts[$normalizedLocale] ?? ''));
+            }
+
+            $disclaimerVersion = trim((string) ($legal['disclaimer_version'] ?? ''));
+            if ($disclaimerVersion === '') {
+                $disclaimerVersion = 'BIG5_OCEAN_'.$version;
+            }
+            $disclaimerHash = trim((string) ($legal['hash'] ?? ''));
+            if ($disclaimerHash === '') {
+                $disclaimerHash = hash('sha256', $disclaimerVersion.'|'.$disclaimerText);
+            }
+
             return response()->json([
                 'ok' => true,
                 'scale_code' => $code,
@@ -163,6 +181,9 @@ class ScalesController extends Controller
                 'questions' => $questionsDoc,
                 'meta' => [
                     'validity_items' => $validityItems,
+                    'disclaimer_version' => $disclaimerVersion,
+                    'disclaimer_hash' => $disclaimerHash,
+                    'disclaimer_text' => $disclaimerText,
                 ],
             ]);
         }

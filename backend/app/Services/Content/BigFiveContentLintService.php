@@ -51,6 +51,7 @@ final class BigFiveContentLintService
         $this->lintSources($version, $errors);
         $this->lintNormStats($version, $errors);
         $this->lintBucketCopy($version, $errors);
+        $this->lintComplianceCopy($version, $errors);
         $this->lintReportLayout($version, $errors);
         $this->lintBlocks($version, $errors);
         $this->lintBlockConflictRules($version, $errors);
@@ -547,6 +548,113 @@ final class BigFiveContentLintService
     /**
      * @param  list<array{file:string,line:int,message:string}>  $errors
      */
+    private function lintComplianceCopy(string $version, array &$errors): void
+    {
+        $file = $this->loader->rawPath('legal/disclaimer.json', $version);
+        $doc = $this->loader->readJson($file);
+        if (! is_array($doc)) {
+            $errors[] = $this->error($file, 1, 'legal disclaimer json missing or invalid.');
+
+            return;
+        }
+
+        $disclaimerVersion = trim((string) ($doc['disclaimer_version'] ?? ''));
+        if ($disclaimerVersion === '') {
+            $errors[] = $this->error($file, 1, 'disclaimer_version is required.');
+        }
+
+        $effectiveDate = trim((string) ($doc['effective_date'] ?? ''));
+        if ($effectiveDate === '') {
+            $errors[] = $this->error($file, 1, 'effective_date is required.');
+        }
+
+        $textsNode = is_array($doc['texts'] ?? null) ? $doc['texts'] : [];
+        $texts = [
+            'en' => trim((string) ($textsNode['en'] ?? '')),
+            'zh-CN' => trim((string) ($textsNode['zh-CN'] ?? '')),
+        ];
+        foreach ($texts as $locale => $text) {
+            if ($text === '') {
+                $errors[] = $this->error($file, 1, "texts.{$locale} is required.");
+            }
+        }
+
+        $requiredNode = is_array($doc['required_fragments'] ?? null) ? $doc['required_fragments'] : [];
+        $prohibitedNode = is_array($doc['prohibited_terms'] ?? null) ? $doc['prohibited_terms'] : [];
+        $requiredFragments = [
+            'en' => $this->normalizeStringList($requiredNode['en'] ?? null),
+            'zh-CN' => $this->normalizeStringList($requiredNode['zh-CN'] ?? null),
+        ];
+        $prohibitedTerms = [
+            'en' => $this->normalizeStringList($prohibitedNode['en'] ?? null),
+            'zh-CN' => $this->normalizeStringList($prohibitedNode['zh-CN'] ?? null),
+        ];
+
+        foreach (['en', 'zh-CN'] as $locale) {
+            if ($requiredFragments[$locale] === []) {
+                $errors[] = $this->error($file, 1, "required_fragments.{$locale} must not be empty.");
+            }
+            if ($prohibitedTerms[$locale] === []) {
+                $errors[] = $this->error($file, 1, "prohibited_terms.{$locale} must not be empty.");
+            }
+        }
+
+        $copyFile = $this->loader->rawPath('bucket_copy.csv', $version);
+        $rows = $this->loader->readCsvWithLines($copyFile);
+        $disclaimerCopy = [
+            'en' => [],
+            'zh-CN' => [],
+        ];
+        foreach ($rows as $entry) {
+            $row = (array) ($entry['row'] ?? []);
+            $section = strtolower(trim((string) ($row['section'] ?? '')));
+            if (! in_array($section, ['disclaimer', 'disclaimer_top'], true)) {
+                continue;
+            }
+
+            $locale = strtolower(trim((string) ($row['locale'] ?? '')));
+            $bucketLocale = $locale === 'zh-cn' ? 'zh-CN' : ($locale === 'en' ? 'en' : '');
+            if ($bucketLocale === '') {
+                continue;
+            }
+
+            $title = trim((string) ($row['title'] ?? ''));
+            $body = trim((string) ($row['body'] ?? ''));
+            $combined = trim($title.' '.$body);
+            if ($combined !== '') {
+                $disclaimerCopy[$bucketLocale][] = $combined;
+            }
+        }
+
+        foreach (['en', 'zh-CN'] as $locale) {
+            $copyText = mb_strtolower(implode("\n", $disclaimerCopy[$locale]));
+            $legalText = mb_strtolower($texts[$locale]);
+
+            foreach ($requiredFragments[$locale] as $fragment) {
+                $needle = mb_strtolower($fragment);
+                if ($needle === '') {
+                    continue;
+                }
+                if (! str_contains($copyText, $needle) && ! str_contains($legalText, $needle)) {
+                    $errors[] = $this->error($file, 1, "required compliance fragment missing for {$locale}: {$fragment}");
+                }
+            }
+
+            foreach ($prohibitedTerms[$locale] as $term) {
+                $needle = mb_strtolower($term);
+                if ($needle === '') {
+                    continue;
+                }
+                if (str_contains($copyText, $needle) || str_contains($legalText, $needle)) {
+                    $errors[] = $this->error($file, 1, "prohibited compliance term found for {$locale}: {$term}");
+                }
+            }
+        }
+    }
+
+    /**
+     * @param  list<array{file:string,line:int,message:string}>  $errors
+     */
     private function lintGoldenCases(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('golden_cases.csv', $version);
@@ -977,5 +1085,26 @@ final class BigFiveContentLintService
         $version = trim((string) $version);
 
         return $version !== '' ? $version : BigFivePackLoader::PACK_VERSION;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeStringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $out = [];
+        foreach ($value as $item) {
+            $text = trim((string) $item);
+            if ($text === '') {
+                continue;
+            }
+            $out[] = $text;
+        }
+
+        return array_values(array_unique($out));
     }
 }

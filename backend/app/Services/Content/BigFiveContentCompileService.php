@@ -44,6 +44,7 @@ final class BigFiveContentCompileService
         $goldenRows = $this->loader->readCsvWithLines($this->loader->rawPath('golden_cases.csv', $version));
         $landing = $this->loader->readJson($this->loader->rawPath('landing_i18n.json', $version));
         $policy = $this->loader->readJson($this->loader->rawPath('policy.json', $version));
+        $legal = $this->loader->readJson($this->loader->rawPath('legal/disclaimer.json', $version));
         $layout = $this->loader->readJson($this->loader->rawPath('report_layout.json', $version));
         $blocks = $this->readRawBlocks($version);
 
@@ -328,6 +329,13 @@ final class BigFiveContentCompileService
                 'generated_at' => now()->toISOString(),
                 'landing' => is_array($landing) ? $landing : [],
             ],
+            'legal.compiled.json' => [
+                'schema' => 'big5.legal.compiled.v1',
+                'pack_id' => BigFivePackLoader::PACK_ID,
+                'pack_version' => $version,
+                'generated_at' => now()->toISOString(),
+                'legal' => $this->buildLegalPayload($legal),
+            ],
             'golden_cases.compiled.json' => [
                 'schema' => 'big5.golden_cases.compiled.v1',
                 'pack_id' => BigFivePackLoader::PACK_ID,
@@ -496,5 +504,116 @@ final class BigFiveContentCompileService
         }
 
         return hash('sha256', implode("\n", $rows));
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $legal
+     * @return array<string,mixed>
+     */
+    private function buildLegalPayload(?array $legal): array
+    {
+        $legal = is_array($legal) ? $legal : [];
+        $textsNode = is_array($legal['texts'] ?? null) ? $legal['texts'] : [];
+        $texts = [
+            'zh-CN' => trim((string) ($textsNode['zh-CN'] ?? '')),
+            'en' => trim((string) ($textsNode['en'] ?? '')),
+        ];
+
+        $requiredNode = is_array($legal['required_fragments'] ?? null) ? $legal['required_fragments'] : [];
+        $requiredFragments = [
+            'zh-CN' => $this->normalizeStringList($requiredNode['zh-CN'] ?? null),
+            'en' => $this->normalizeStringList($requiredNode['en'] ?? null),
+        ];
+
+        $prohibitedNode = is_array($legal['prohibited_terms'] ?? null) ? $legal['prohibited_terms'] : [];
+        $prohibitedTerms = [
+            'zh-CN' => $this->normalizeStringList($prohibitedNode['zh-CN'] ?? null),
+            'en' => $this->normalizeStringList($prohibitedNode['en'] ?? null),
+        ];
+
+        $scope = $this->normalizeStringList($legal['scope'] ?? null);
+        $hashSource = [
+            'disclaimer_version' => trim((string) ($legal['disclaimer_version'] ?? '')),
+            'effective_date' => trim((string) ($legal['effective_date'] ?? '')),
+            'scope' => $scope,
+            'texts' => $texts,
+        ];
+
+        return [
+            'disclaimer_version' => trim((string) ($legal['disclaimer_version'] ?? '')),
+            'effective_date' => trim((string) ($legal['effective_date'] ?? '')),
+            'scope' => $scope,
+            'hash' => hash('sha256', $this->canonicalJson($hashSource)),
+            'texts' => $texts,
+            'required_fragments' => $requiredFragments,
+            'prohibited_terms' => $prohibitedTerms,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeStringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $out = [];
+        foreach ($value as $item) {
+            $text = trim((string) $item);
+            if ($text === '') {
+                continue;
+            }
+            $out[] = $text;
+        }
+
+        return array_values(array_unique($out));
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function canonicalJson(array $payload): string
+    {
+        ksort($payload);
+
+        foreach ($payload as $key => $value) {
+            if (is_array($value)) {
+                if (array_is_list($value)) {
+                    $payload[$key] = array_map(static function (mixed $item): mixed {
+                        return is_array($item) ? $item : (string) $item;
+                    }, $value);
+                } else {
+                    $payload[$key] = $this->canonicalizeAssoc($value);
+                }
+            }
+        }
+
+        $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return is_string($encoded) ? $encoded : '{}';
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function canonicalizeAssoc(array $payload): array
+    {
+        ksort($payload);
+        foreach ($payload as $key => $value) {
+            if (is_array($value)) {
+                if (array_is_list($value)) {
+                    $payload[$key] = array_map(static fn (mixed $item): string => trim((string) $item), $value);
+                } else {
+                    $payload[$key] = $this->canonicalizeAssoc($value);
+                }
+            } else {
+                $payload[$key] = trim((string) $value);
+            }
+        }
+
+        return $payload;
     }
 }
