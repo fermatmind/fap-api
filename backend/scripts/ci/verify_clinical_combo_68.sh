@@ -8,4 +8,5 @@ cd "$BACKEND_DIR"
 
 php artisan content:lint --pack=CLINICAL_COMBO_68 --pack-version=v1
 php artisan content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1
-php artisan test --filter ClinicalCombo
+php artisan test --testsuite=Feature --list-tests | rg -q "ClinicalCombo" || { echo "[FAIL] ClinicalCombo tests not discovered"; exit 31; }
+php artisan test --testsuite=Feature --filter ClinicalCombo
