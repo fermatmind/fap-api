@@ -18,6 +18,8 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
     use RefreshDatabase;
     use SignedBillingWebhook;
 
+    private const SIMPLE_SCORE_UNLOCK_SKU = 'SIMPLE_SCORE_REPORT_FULL_199';
+
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder())->run();
@@ -55,6 +57,31 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
             ['question_id' => 'SS-004', 'code' => '2'],
             ['question_id' => 'SS-005', 'code' => '1'],
         ];
+    }
+
+    private function seedSimpleScoreUnlockSku(): void
+    {
+        $now = now();
+
+        DB::table('skus')->updateOrInsert(
+            ['sku' => self::SIMPLE_SCORE_UNLOCK_SKU],
+            [
+                'scale_code' => 'SIMPLE_SCORE_DEMO',
+                'kind' => 'report_unlock',
+                'unit_qty' => 1,
+                'benefit_code' => 'MBTI_REPORT_FULL',
+                'scope' => 'attempt',
+                'price_cents' => 199,
+                'currency' => 'CNY',
+                'is_active' => true,
+                'meta_json' => json_encode([
+                    'modules_included' => ['core_full', 'career', 'relationships'],
+                    'label' => 'simple score demo full unlock (test only)',
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]
+        );
     }
 
     public function test_attempt_submit_report_payment_unlock_full_report_flow(): void
@@ -106,11 +133,14 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
         $this->assertSame('[LOCKED]', (string) data_get($beforePayload, 'summary.title'));
         $this->assertNull(data_get($beforePayload, 'summary.final_score'));
 
+        $this->seedSimpleScoreUnlockSku();
+
         $order = $this->withHeaders([
             'X-Anon-Id' => $anonId,
             'Authorization' => 'Bearer ' . $anonToken,
         ])->postJson('/api/v0.3/orders', [
-            'sku' => 'MBTI_REPORT_FULL_199',
+            // keep webhook scale guard strict: sku scale must match attempt scale.
+            'sku' => self::SIMPLE_SCORE_UNLOCK_SKU,
             'provider' => 'billing',
             'target_attempt_id' => $attemptId,
         ]);
