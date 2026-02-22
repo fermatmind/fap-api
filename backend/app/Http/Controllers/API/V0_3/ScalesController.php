@@ -107,28 +107,41 @@ class ScalesController extends Controller
 
         if ($code === 'BIG5_OCEAN') {
             $version = (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
-            $compiled = $bigFivePackLoader->readCompiledJson('questions.compiled.json', $version);
+            $normalizedLocale = $this->normalizeBigFiveLocale($locale);
+            $compiledMin = $bigFivePackLoader->readCompiledJson('questions.min.compiled.json', $version);
+            $compiled = null;
+            $questionsDoc = null;
+            $contentPackageVersion = $version;
             $policyCompiled = $bigFivePackLoader->readCompiledJson('policy.compiled.json', $version);
             $legalCompiled = $bigFivePackLoader->readCompiledJson('legal.compiled.json', $version);
-            if (!is_array($compiled)) {
-                return response()->json([
-                    'ok' => false,
-                    'error_code' => 'COMPILED_MISSING',
-                    'message' => 'BIG5_OCEAN compiled questions missing.',
-                ], 500);
+
+            if (is_array($compiledMin)) {
+                $questionsDoc = $this->buildBigFiveQuestionsDocFromMin($compiledMin, $normalizedLocale);
+                $contentPackageVersion = (string) ($compiledMin['pack_version'] ?? $version);
             }
 
-            $normalizedLocale = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
-            $questionsDocByLocale = is_array($compiled['questions_doc_by_locale'] ?? null)
-                ? $compiled['questions_doc_by_locale']
-                : [];
-            $questionsDoc = $questionsDocByLocale[$normalizedLocale] ?? ($compiled['questions_doc'] ?? null);
             if (!is_array($questionsDoc)) {
-                return response()->json([
-                    'ok' => false,
-                    'error_code' => 'COMPILED_INVALID',
-                    'message' => 'BIG5_OCEAN compiled questions invalid.',
-                ], 500);
+                $compiled = $bigFivePackLoader->readCompiledJson('questions.compiled.json', $version);
+                if (!is_array($compiled)) {
+                    return response()->json([
+                        'ok' => false,
+                        'error_code' => 'COMPILED_MISSING',
+                        'message' => 'BIG5_OCEAN compiled questions missing.',
+                    ], 500);
+                }
+
+                $questionsDocByLocale = is_array($compiled['questions_doc_by_locale'] ?? null)
+                    ? $compiled['questions_doc_by_locale']
+                    : [];
+                $questionsDoc = $questionsDocByLocale[$normalizedLocale] ?? ($compiled['questions_doc'] ?? null);
+                if (!is_array($questionsDoc)) {
+                    return response()->json([
+                        'ok' => false,
+                        'error_code' => 'COMPILED_INVALID',
+                        'message' => 'BIG5_OCEAN compiled questions invalid.',
+                    ], 500);
+                }
+                $contentPackageVersion = (string) ($compiled['pack_version'] ?? $version);
             }
 
             $policy = is_array($policyCompiled['policy'] ?? null) ? $policyCompiled['policy'] : [];
@@ -177,7 +190,7 @@ class ScalesController extends Controller
                 'locale' => $normalizedLocale,
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
-                'content_package_version' => (string) ($compiled['pack_version'] ?? $version),
+                'content_package_version' => $contentPackageVersion,
                 'questions' => $questionsDoc,
                 'meta' => [
                     'validity_items' => $validityItems,
@@ -212,5 +225,124 @@ class ScalesController extends Controller
             'content_package_version' => (string) ($loaded['content_package_version'] ?? ''),
             'questions' => $loaded['questions'],
         ]);
+    }
+
+    private function normalizeBigFiveLocale(string $locale): string
+    {
+        return str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
+    }
+
+    /**
+     * @param array<string,mixed> $compiledMin
+     * @return array<string,mixed>|null
+     */
+    private function buildBigFiveQuestionsDocFromMin(array $compiledMin, string $normalizedLocale): ?array
+    {
+        $questionIndex = is_array($compiledMin['question_index'] ?? null) ? $compiledMin['question_index'] : [];
+        $textsByLocale = is_array($compiledMin['texts_by_locale'] ?? null) ? $compiledMin['texts_by_locale'] : [];
+        $questionOptionSetRef = is_array($compiledMin['question_option_set_ref'] ?? null)
+            ? $compiledMin['question_option_set_ref']
+            : [];
+        $optionSets = is_array($compiledMin['option_sets'] ?? null) ? $compiledMin['option_sets'] : [];
+
+        $zhTexts = is_array($textsByLocale['zh-CN'] ?? null) ? $textsByLocale['zh-CN'] : [];
+        $enTexts = is_array($textsByLocale['en'] ?? null) ? $textsByLocale['en'] : [];
+
+        if (count($questionIndex) !== 120 || count($zhTexts) !== 120 || count($enTexts) !== 120) {
+            return null;
+        }
+
+        ksort($questionIndex, SORT_NUMERIC);
+
+        $items = [];
+        foreach ($questionIndex as $qidRaw => $meta) {
+            $qid = (int) $qidRaw;
+            if ($qid <= 0 || !is_array($meta)) {
+                return null;
+            }
+
+            $dimension = strtoupper(trim((string) ($meta['dimension'] ?? '')));
+            $facetCode = strtoupper(trim((string) ($meta['facet_code'] ?? '')));
+            $direction = (int) ($meta['direction'] ?? 0);
+
+            $textZh = trim((string) ($zhTexts[(string) $qid] ?? $zhTexts[$qid] ?? ''));
+            $textEn = trim((string) ($enTexts[(string) $qid] ?? $enTexts[$qid] ?? ''));
+            if (
+                $textZh === ''
+                || $textEn === ''
+                || $dimension === ''
+                || $facetCode === ''
+                || !in_array($direction, [1, -1], true)
+            ) {
+                return null;
+            }
+
+            $setId = (string) ($questionOptionSetRef[(string) $qid] ?? $questionOptionSetRef[$qid] ?? 'LIKERT5');
+            $rawOptionSet = is_array($optionSets[$setId] ?? null) ? $optionSets[$setId] : [];
+            $options = $this->buildBigFiveQuestionOptionsForLocale($rawOptionSet, $normalizedLocale);
+            if ($options === []) {
+                return null;
+            }
+
+            $items[] = [
+                'question_id' => (string) $qid,
+                'order' => $qid,
+                'dimension' => $dimension,
+                'facet_code' => $facetCode,
+                'text' => $normalizedLocale === 'zh-CN' ? $textZh : $textEn,
+                'text_zh' => $textZh,
+                'text_en' => $textEn,
+                'direction' => $direction,
+                'options' => $options,
+            ];
+        }
+
+        return [
+            'schema' => 'fap.questions.v1',
+            'items' => $items,
+        ];
+    }
+
+    /**
+     * @param list<array<string,mixed>> $rawOptionSet
+     * @return list<array<string,mixed>>
+     */
+    private function buildBigFiveQuestionOptionsForLocale(array $rawOptionSet, string $normalizedLocale): array
+    {
+        $options = [];
+        foreach ($rawOptionSet as $opt) {
+            if (!is_array($opt)) {
+                continue;
+            }
+
+            $code = trim((string) ($opt['code'] ?? ''));
+            $score = (int) ($opt['score'] ?? 0);
+            $labelZh = trim((string) ($opt['label_zh'] ?? $opt['text_zh'] ?? ''));
+            $labelEn = trim((string) ($opt['label_en'] ?? $opt['text_en'] ?? ''));
+
+            if ($code === '' || $labelZh === '' || $labelEn === '') {
+                return [];
+            }
+
+            if ($normalizedLocale === 'zh-CN') {
+                $options[] = [
+                    'code' => $code,
+                    'score' => $score,
+                    'text' => $labelZh,
+                    'text_en' => $labelEn,
+                ];
+                continue;
+            }
+
+            $options[] = [
+                'code' => $code,
+                'score' => $score,
+                'text' => $labelEn,
+                'text_zh' => $labelZh,
+                'text_en' => $labelEn,
+            ];
+        }
+
+        return $options;
     }
 }
