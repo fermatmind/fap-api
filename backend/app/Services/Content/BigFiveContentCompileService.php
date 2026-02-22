@@ -549,6 +549,9 @@ final class BigFiveContentCompileService
         }
 
         $optionSetId = 'LIKERT5';
+        $optionSets = [
+            $optionSetId => $this->buildStableOptionsSet($options),
+        ];
         $questionOptionSetRef = [];
         foreach (array_keys($questionIndex) as $qid) {
             $qidInt = (int) $qid;
@@ -566,10 +569,14 @@ final class BigFiveContentCompileService
             'generated_at' => now()->toISOString(),
             'question_index' => $questionIndex,
             'texts_by_locale' => $textsByLocale,
-            'option_sets' => [
-                $optionSetId => $this->buildStableOptionsSet($options),
-            ],
+            'option_sets' => $optionSets,
             'question_option_set_ref' => $questionOptionSetRef,
+            'content_evidence' => [
+                'question_index_sha256' => $this->stableHashValue($questionIndex),
+                'texts_by_locale_sha256' => $this->stableHashValue($textsByLocale),
+                'option_sets_sha256' => $this->stableHashValue($optionSets),
+                'question_option_set_ref_sha256' => $this->stableHashValue($questionOptionSetRef),
+            ],
         ];
     }
 
@@ -603,6 +610,36 @@ final class BigFiveContentCompileService
         });
 
         return $normalized;
+    }
+
+    private function stableHashValue(mixed $value): string
+    {
+        $normalized = $this->normalizeForStableHash($value);
+        $encoded = json_encode($normalized, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return hash('sha256', is_string($encoded) ? $encoded : '{}');
+    }
+
+    private function normalizeForStableHash(mixed $value): mixed
+    {
+        if (is_array($value)) {
+            if (array_is_list($value)) {
+                return array_map(fn (mixed $item): mixed => $this->normalizeForStableHash($item), $value);
+            }
+
+            ksort($value);
+            foreach ($value as $key => $item) {
+                $value[$key] = $this->normalizeForStableHash($item);
+            }
+
+            return $value;
+        }
+
+        if (is_bool($value) || is_int($value) || is_float($value)) {
+            return (string) $value;
+        }
+
+        return trim((string) $value);
     }
 
     /**
