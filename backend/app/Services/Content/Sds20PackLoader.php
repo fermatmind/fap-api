@@ -13,27 +13,27 @@ final class Sds20PackLoader
 
     public function packRoot(?string $version = null): string
     {
-        return base_path('content_packs/' . self::PACK_ID . '/' . $this->normalizeVersion($version));
+        return base_path('content_packs/'.self::PACK_ID.'/'.$this->normalizeVersion($version));
     }
 
     public function rawDir(?string $version = null): string
     {
-        return $this->packRoot($version) . DIRECTORY_SEPARATOR . 'raw';
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'raw';
     }
 
     public function compiledDir(?string $version = null): string
     {
-        return $this->packRoot($version) . DIRECTORY_SEPARATOR . 'compiled';
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'compiled';
     }
 
     public function rawPath(string $file, ?string $version = null): string
     {
-        return $this->rawDir($version) . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->rawDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     public function compiledPath(string $file, ?string $version = null): string
     {
-        return $this->compiledDir($version) . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->compiledDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     public function normalizeLocale(string $locale): string
@@ -46,6 +46,11 @@ final class Sds20PackLoader
         $version = trim((string) $version);
 
         return $version !== '' ? $version : self::PACK_VERSION;
+    }
+
+    public function hasCompiledFile(string $file, ?string $version = null): bool
+    {
+        return is_file($this->compiledPath($file, $version));
     }
 
     public function getQuestionCount(?string $version = null): int
@@ -61,21 +66,22 @@ final class Sds20PackLoader
      */
     public function loadQuestionIndex(?string $version = null): array
     {
-        $version = $this->normalizeVersion($version);
-        $rows = $this->readCsvWithLines($this->rawPath('questions_sds20_bilingual.csv', $version));
+        $compiled = $this->requireCompiledJson('questions.compiled.json', $version);
+        $index = is_array($compiled['question_index'] ?? null) ? $compiled['question_index'] : [];
 
         $out = [];
-        foreach ($rows as $entry) {
-            $row = (array) ($entry['row'] ?? []);
-            $qid = (int) ($row['question_id'] ?? 0);
-            $direction = (int) ($row['direction'] ?? 0);
-            if ($qid <= 0 || !in_array($direction, [1, -1], true)) {
+        foreach ($index as $qidRaw => $meta) {
+            $qid = (int) $qidRaw;
+            if ($qid <= 0 || !is_array($meta)) {
                 continue;
             }
 
-            $out[$qid] = [
-                'direction' => $direction,
-            ];
+            $direction = (int) ($meta['direction'] ?? 0);
+            if (!in_array($direction, [1, -1], true)) {
+                continue;
+            }
+
+            $out[$qid] = ['direction' => $direction];
         }
 
         ksort($out, SORT_NUMERIC);
@@ -88,40 +94,21 @@ final class Sds20PackLoader
      */
     public function loadQuestionsDoc(string $locale, ?string $version = null): array
     {
-        $version = $this->normalizeVersion($version);
+        $compiled = $this->requireCompiledJson('questions.compiled.json', $version);
         $localeResolved = $this->normalizeLocale($locale);
-        $rows = $this->readCsvWithLines($this->rawPath('questions_sds20_bilingual.csv', $version));
 
-        $items = [];
-        foreach ($rows as $entry) {
-            $row = (array) ($entry['row'] ?? []);
-            $qid = (int) ($row['question_id'] ?? 0);
-            $direction = (int) ($row['direction'] ?? 0);
-            if ($qid <= 0 || !in_array($direction, [1, -1], true)) {
-                continue;
-            }
-
-            $text = $localeResolved === 'zh-CN'
-                ? trim((string) ($row['text_zh'] ?? ''))
-                : trim((string) ($row['text_en'] ?? ''));
-            if ($text === '') {
-                continue;
-            }
-
-            $items[] = [
-                'question_id' => (string) $qid,
-                'order' => $qid,
-                'direction' => $direction,
-                'text' => $text,
-            ];
+        $docs = is_array($compiled['questions_doc_by_locale'] ?? null) ? $compiled['questions_doc_by_locale'] : [];
+        $doc = $docs[$localeResolved] ?? ($docs['zh-CN'] ?? null);
+        if (!is_array($doc)) {
+            throw new \RuntimeException('SDS20_COMPILED_INVALID: questions_doc_by_locale missing.');
         }
 
-        usort($items, static fn (array $a, array $b): int => ((int) ($a['order'] ?? 0)) <=> ((int) ($b['order'] ?? 0)));
+        $resolvedLocale = isset($docs[$localeResolved]) ? $localeResolved : 'zh-CN';
 
         return [
             'locale_requested' => $locale,
-            'locale_resolved' => $localeResolved,
-            'items' => $items,
+            'locale_resolved' => $resolvedLocale,
+            'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
         ];
     }
 
@@ -130,15 +117,13 @@ final class Sds20PackLoader
      */
     public function loadOptionsFormat(string $locale, ?string $version = null): array
     {
-        $version = $this->normalizeVersion($version);
+        $compiled = $this->requireCompiledJson('options.compiled.json', $version);
         $localeResolved = $this->normalizeLocale($locale);
-        $doc = $this->readJson($this->rawPath('options_sds20_bilingual.json', $version));
-        if (!is_array($doc)) {
-            return [];
-        }
 
-        $labels = is_array($doc['labels'] ?? null) ? $doc['labels'] : [];
-        $format = $labels[$localeResolved] ?? ($labels['zh-CN'] ?? []);
+        $formats = is_array($compiled['options_format_by_locale'] ?? null)
+            ? $compiled['options_format_by_locale']
+            : [];
+        $format = $formats[$localeResolved] ?? ($formats['zh-CN'] ?? []);
 
         $out = [];
         if (is_array($format)) {
@@ -158,37 +143,21 @@ final class Sds20PackLoader
      */
     public function loadLanding(string $locale, ?string $version = null): array
     {
-        $version = $this->normalizeVersion($version);
+        $compiled = $this->requireCompiledJson('landing.compiled.json', $version);
         $localeResolved = $this->normalizeLocale($locale);
-        $doc = $this->readJson($this->rawPath('landing_i18n.json', $version));
-        if (!is_array($doc)) {
-            return [
-                'locale_resolved' => $localeResolved,
-                'consent' => [
-                    'required' => true,
-                    'version' => '',
-                    'text' => '',
-                ],
-                'disclaimer' => [
-                    'version' => '',
-                    'hash' => '',
-                    'text' => '',
-                ],
-                'title' => '',
-                'crisis_hotline' => '',
-            ];
-        }
 
-        $node = is_array($doc[$localeResolved] ?? null)
-            ? $doc[$localeResolved]
-            : (is_array($doc['zh-CN'] ?? null) ? $doc['zh-CN'] : []);
+        $landing = is_array($compiled['landing'] ?? null) ? $compiled['landing'] : [];
+        $node = is_array($landing[$localeResolved] ?? null)
+            ? $landing[$localeResolved]
+            : (is_array($landing['zh-CN'] ?? null) ? $landing['zh-CN'] : []);
 
         $consent = is_array($node['consent'] ?? null) ? $node['consent'] : [];
         $disclaimer = is_array($node['disclaimer'] ?? null) ? $node['disclaimer'] : [];
 
+        $versionResolved = $this->normalizeVersion($version);
         $disclaimerVersion = trim((string) ($disclaimer['version'] ?? ''));
         if ($disclaimerVersion === '') {
-            $disclaimerVersion = 'SDS_20_disclaimer_' . $version;
+            $disclaimerVersion = 'SDS_20_disclaimer_'.$versionResolved;
         }
 
         $disclaimerText = trim((string) ($disclaimer['text'] ?? ''));
@@ -204,7 +173,7 @@ final class Sds20PackLoader
             'disclaimer' => [
                 'version' => $disclaimerVersion,
                 'text' => $disclaimerText,
-                'hash' => hash('sha256', $disclaimerVersion . '|' . $disclaimerText),
+                'hash' => hash('sha256', $disclaimerVersion.'|'.$disclaimerText),
             ],
             'crisis_hotline' => trim((string) ($node['crisis_hotline'] ?? '')),
         ];
@@ -215,22 +184,25 @@ final class Sds20PackLoader
      */
     public function loadSourceCatalog(?string $version = null): array
     {
-        $version = $this->normalizeVersion($version);
-        $rows = $this->readCsvWithLines($this->rawPath('source_catalog.csv', $version));
+        $compiled = $this->requireCompiledJson('sources.compiled.json', $version);
+        $sources = is_array($compiled['sources'] ?? null) ? $compiled['sources'] : [];
 
         $out = [];
-        foreach ($rows as $entry) {
-            $row = (array) ($entry['row'] ?? []);
-            $sourceId = trim((string) ($row['source_id'] ?? ''));
+        foreach ($sources as $source) {
+            if (!is_array($source)) {
+                continue;
+            }
+
+            $sourceId = trim((string) ($source['source_id'] ?? ''));
             if ($sourceId === '') {
                 continue;
             }
 
             $out[] = [
                 'source_id' => $sourceId,
-                'source_name' => trim((string) ($row['source_name'] ?? '')),
-                'license_note' => trim((string) ($row['license_note'] ?? '')),
-                'citation' => trim((string) ($row['citation'] ?? '')),
+                'source_name' => trim((string) ($source['source_name'] ?? '')),
+                'license_note' => trim((string) ($source['license_note'] ?? '')),
+                'citation' => trim((string) ($source['citation'] ?? '')),
             ];
         }
 
@@ -242,9 +214,9 @@ final class Sds20PackLoader
      */
     public function loadPolicy(?string $version = null): array
     {
-        $version = $this->normalizeVersion($version);
+        $compiled = $this->requireCompiledJson('policy.compiled.json', $version);
 
-        return $this->readJson($this->rawPath('policy.json', $version)) ?? [];
+        return is_array($compiled['policy'] ?? null) ? $compiled['policy'] : [];
     }
 
     /**
@@ -252,18 +224,9 @@ final class Sds20PackLoader
      */
     public function loadReportLayout(?string $version = null): array
     {
-        $version = $this->normalizeVersion($version);
-        $compiled = $this->readJson($this->compiledPath('report.compiled.json', $version));
-        if (is_array($compiled) && is_array($compiled['layout'] ?? null)) {
-            return $compiled['layout'];
-        }
+        $compiled = $this->requireCompiledJson('report.compiled.json', $version);
 
-        $raw = $this->readJson($this->rawPath('report_layout.json', $version)) ?? [];
-        if (is_array($raw['layout'] ?? null)) {
-            return $raw['layout'];
-        }
-
-        return is_array($raw) ? $raw : [];
+        return is_array($compiled['layout'] ?? null) ? $compiled['layout'] : [];
     }
 
     /**
@@ -271,34 +234,22 @@ final class Sds20PackLoader
      */
     public function loadReportBlocks(string $locale, ?string $version = null): array
     {
-        $version = $this->normalizeVersion($version);
+        $compiled = $this->requireCompiledJson('report.compiled.json', $version);
         $localeResolved = $this->normalizeLocale($locale);
 
-        $compiled = $this->readJson($this->compiledPath('report.compiled.json', $version));
-        if (is_array($compiled)) {
-            $blocksByLocale = is_array($compiled['blocks_by_locale'] ?? null) ? $compiled['blocks_by_locale'] : [];
-            $blocks = $blocksByLocale[$localeResolved] ?? ($blocksByLocale['zh-CN'] ?? null);
-            if (is_array($blocks)) {
-                return array_values(array_filter($blocks, static fn ($row): bool => is_array($row)));
-            }
+        $blocksByLocale = is_array($compiled['blocks_by_locale'] ?? null) ? $compiled['blocks_by_locale'] : [];
+        $blocks = $blocksByLocale[$localeResolved] ?? ($blocksByLocale['zh-CN'] ?? []);
+
+        if (!is_array($blocks)) {
+            return [];
         }
 
-        $freeDoc = $this->readJson($this->rawPath('blocks/free_blocks.json', $version)) ?? [];
-        $paidDoc = $this->readJson($this->rawPath('blocks/paid_blocks.json', $version)) ?? [];
-
-        $free = $this->normalizeReportBlockDoc($freeDoc, $localeResolved, 'free');
-        $paid = $this->normalizeReportBlockDoc($paidDoc, $localeResolved, 'paid');
-
-        return array_values(array_merge($free, $paid));
+        return array_values(array_filter($blocks, static fn ($row): bool => is_array($row)));
     }
 
     public function resolveManifestHash(?string $version = null): string
     {
-        $version = $this->normalizeVersion($version);
-        $manifest = $this->readJson($this->compiledPath('manifest.json', $version));
-        if (!is_array($manifest)) {
-            return '';
-        }
+        $manifest = $this->requireCompiledJson('manifest.json', $version);
 
         $hash = trim((string) ($manifest['compiled_hash'] ?? ''));
         if ($hash !== '') {
@@ -313,50 +264,24 @@ final class Sds20PackLoader
         ksort($hashes);
         $rows = [];
         foreach ($hashes as $name => $value) {
-            $rows[] = trim((string) $name) . ':' . trim((string) $value);
+            $rows[] = trim((string) $name).':'.trim((string) $value);
         }
 
         return hash('sha256', implode("\n", $rows));
     }
 
     /**
-     * @param array<string,mixed> $doc
-     * @return list<array<string,mixed>>
+     * @return array<string,mixed>|null
      */
-    private function normalizeReportBlockDoc(array $doc, string $locale, string $accessLevel): array
+    public function readCompiledJson(string $file, ?string $version = null): ?array
     {
-        $source = $doc[$locale] ?? ($doc['zh-CN'] ?? []);
-        if (!is_array($source)) {
-            return [];
-        }
-
-        $out = [];
-        foreach ($source as $row) {
-            if (!is_array($row)) {
-                continue;
-            }
-
-            $sectionKey = trim((string) ($row['section_key'] ?? ''));
-            if ($sectionKey === '') {
-                continue;
-            }
-
-            $out[] = [
-                'block_id' => (string) ($row['block_id'] ?? ''),
-                'section_key' => $sectionKey,
-                'title' => (string) ($row['title'] ?? ''),
-                'body_md' => (string) ($row['body_md'] ?? ''),
-                'access_level' => $accessLevel,
-            ];
-        }
-
-        return $out;
+        return $this->readJson($this->compiledPath($file, $version));
     }
 
     /**
      * @return list<array{line:int,row:array<string,string>}>
      */
-    private function readCsvWithLines(string $path): array
+    public function readCsvWithLines(string $path): array
     {
         if (!is_file($path)) {
             return [];
@@ -404,7 +329,7 @@ final class Sds20PackLoader
     /**
      * @return array<string,mixed>|null
      */
-    private function readJson(string $path): ?array
+    public function readJson(string $path): ?array
     {
         if (!is_file($path)) {
             return null;
@@ -419,5 +344,32 @@ final class Sds20PackLoader
         $decoded = json_decode($raw, true);
 
         return is_array($decoded) ? $decoded : null;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function requireCompiledJson(string $file, ?string $version = null): array
+    {
+        $versionResolved = $this->normalizeVersion($version);
+        $path = $this->compiledPath($file, $versionResolved);
+
+        if (!is_file($path)) {
+            throw $this->compiledMissingException($path, $versionResolved);
+        }
+
+        $decoded = $this->readJson($path);
+        if (!is_array($decoded)) {
+            throw new \RuntimeException('SDS20_COMPILED_INVALID: '.$path);
+        }
+
+        return $decoded;
+    }
+
+    private function compiledMissingException(string $path, string $version): \RuntimeException
+    {
+        return new \RuntimeException(
+            'SDS20_COMPILED_MISSING: '.$path.'. Run: php artisan content:compile --pack=SDS_20 --pack-version='.$version
+        );
     }
 }

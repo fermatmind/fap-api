@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Services\Content\BigFiveContentCompileService;
 use App\Services\Content\ClinicalComboContentCompileService;
 use App\Services\Content\ContentCompileService;
+use App\Services\Content\Sds20ContentCompileService;
 use Illuminate\Console\Command;
 
 final class ContentCompile extends Command
@@ -21,7 +22,8 @@ final class ContentCompile extends Command
     public function handle(
         ContentCompileService $service,
         BigFiveContentCompileService $bigFiveCompile,
-        ClinicalComboContentCompileService $clinicalCompile
+        ClinicalComboContentCompileService $clinicalCompile,
+        Sds20ContentCompileService $sds20Compile
     ): int
     {
         $pack = $this->option('pack');
@@ -34,6 +36,12 @@ final class ContentCompile extends Command
             ];
         } elseif (is_string($pack) && strtoupper(trim($pack)) === 'CLINICAL_COMBO_68') {
             $single = $clinicalCompile->compile(is_string($version) ? $version : null);
+            $result = [
+                'ok' => (bool) ($single['ok'] ?? false),
+                'packs' => [$single],
+            ];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === 'SDS_20') {
+            $single = $sds20Compile->compile(is_string($version) ? $version : null);
             $result = [
                 'ok' => (bool) ($single['ok'] ?? false),
                 'packs' => [$single],

@@ -9,6 +9,7 @@ final class ScaleImpactResolver
     private const SCALE_MBTI = 'MBTI';
     private const SCALE_BIG5 = 'BIG5_OCEAN';
     private const SCALE_CLINICAL = 'CLINICAL_COMBO_68';
+    private const SCALE_SDS = 'SDS_20';
 
     /**
      * @var list<string>
@@ -46,6 +47,7 @@ final class ScaleImpactResolver
         $mbtiChanged = false;
         $big5Changed = false;
         $clinicalChanged = false;
+        $sdsChanged = false;
 
         foreach ($normalized as $path) {
             if ($this->isSharedPath($path)) {
@@ -53,6 +55,7 @@ final class ScaleImpactResolver
                 $mbtiChanged = true;
                 $big5Changed = true;
                 $clinicalChanged = true;
+                $sdsChanged = true;
                 continue;
             }
 
@@ -67,20 +70,27 @@ final class ScaleImpactResolver
             if ($this->isClinicalPath($path)) {
                 $clinicalChanged = true;
             }
+
+            if ($this->isSdsPath($path)) {
+                $sdsChanged = true;
+            }
         }
 
         $runFullScaleRegression = $sharedChanged;
         $runBig5OceanGate = $sharedChanged || $big5Changed;
         $runClinicalCombo68Gate = $sharedChanged || $clinicalChanged;
+        $runSds20Gate = $sharedChanged || $sdsChanged;
         $runMbtiSmoke = true;
 
         $scaleScope = $this->buildScaleScope(
             $runFullScaleRegression,
             $runBig5OceanGate,
             $runClinicalCombo68Gate,
+            $runSds20Gate,
             $mbtiChanged,
             $big5Changed,
-            $clinicalChanged
+            $clinicalChanged,
+            $sdsChanged
         );
 
         $scalesChanged = [];
@@ -93,6 +103,9 @@ final class ScaleImpactResolver
         if ($clinicalChanged) {
             $scalesChanged[] = self::SCALE_CLINICAL;
         }
+        if ($sdsChanged) {
+            $scalesChanged[] = self::SCALE_SDS;
+        }
 
         return [
             'changed_files' => $normalized,
@@ -100,13 +113,15 @@ final class ScaleImpactResolver
             'mbti_changed' => $mbtiChanged,
             'big5_ocean_changed' => $big5Changed,
             'clinical_combo_68_changed' => $clinicalChanged,
+            'sds_20_changed' => $sdsChanged,
             'run_full_scale_regression' => $runFullScaleRegression,
             'run_big5_ocean_gate' => $runBig5OceanGate,
             'run_clinical_combo_68_gate' => $runClinicalCombo68Gate,
+            'run_sds_20_gate' => $runSds20Gate,
             'run_mbti_smoke' => $runMbtiSmoke,
             'scale_scope' => $scaleScope,
             'scales_changed' => $scalesChanged,
-            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed, $clinicalChanged),
+            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed, $clinicalChanged, $sdsChanged),
         ];
     }
 
@@ -186,21 +201,43 @@ final class ScaleImpactResolver
             || str_contains($upper, 'CDAI68');
     }
 
+    private function isSdsPath(string $path): bool
+    {
+        $upper = strtoupper($path);
+
+        return str_contains($upper, 'SDS_20')
+            || str_contains($upper, 'SDS20');
+    }
+
     private function buildScaleScope(
         bool $runFullScaleRegression,
         bool $runBig5OceanGate,
         bool $runClinicalCombo68Gate,
+        bool $runSds20Gate,
         bool $mbtiChanged,
         bool $big5Changed,
-        bool $clinicalChanged
+        bool $clinicalChanged,
+        bool $sdsChanged
     ): string
     {
         if ($runFullScaleRegression) {
             return 'full_regression';
         }
 
+        if ($runBig5OceanGate && $runClinicalCombo68Gate && $runSds20Gate) {
+            return 'big5_clinical_sds_with_mbti_smoke';
+        }
+
         if ($runBig5OceanGate && $runClinicalCombo68Gate) {
             return 'big5_clinical_with_mbti_smoke';
+        }
+
+        if ($runBig5OceanGate && $runSds20Gate) {
+            return 'big5_sds_with_mbti_smoke';
+        }
+
+        if ($runClinicalCombo68Gate && $runSds20Gate) {
+            return 'clinical_sds_with_mbti_smoke';
         }
 
         if ($runBig5OceanGate) {
@@ -219,6 +256,14 @@ final class ScaleImpactResolver
             return 'clinical_with_mbti_smoke';
         }
 
+        if ($runSds20Gate) {
+            if ($mbtiChanged) {
+                return 'sds_plus_mbti';
+            }
+
+            return 'sds_with_mbti_smoke';
+        }
+
         if ($mbtiChanged) {
             return 'mbti_only';
         }
@@ -231,13 +276,29 @@ final class ScaleImpactResolver
             return 'clinical_with_mbti_smoke';
         }
 
+        if ($sdsChanged) {
+            return 'sds_with_mbti_smoke';
+        }
+
         return 'mbti_only';
     }
 
-    private function buildReason(bool $sharedChanged, bool $mbtiChanged, bool $big5Changed, bool $clinicalChanged): string
+    private function buildReason(bool $sharedChanged, bool $mbtiChanged, bool $big5Changed, bool $clinicalChanged, bool $sdsChanged): string
     {
         if ($sharedChanged) {
             return 'shared-layer changed: run full cross-scale regression';
+        }
+
+        if ($big5Changed && $clinicalChanged && $sdsChanged) {
+            return 'BIG5 + CLINICAL + SDS changed: run all gates + MBTI smoke';
+        }
+
+        if ($big5Changed && $sdsChanged) {
+            return 'BIG5 and SDS changed: run both gates + MBTI smoke';
+        }
+
+        if ($clinicalChanged && $sdsChanged) {
+            return 'CLINICAL and SDS changed: run both gates + MBTI smoke';
         }
 
         if ($big5Changed && $clinicalChanged) {
@@ -258,6 +319,14 @@ final class ScaleImpactResolver
 
         if ($clinicalChanged) {
             return 'CLINICAL changed: run clinical gate + MBTI smoke';
+        }
+
+        if ($sdsChanged && $mbtiChanged) {
+            return 'SDS changed with MBTI: run SDS gate + MBTI smoke';
+        }
+
+        if ($sdsChanged) {
+            return 'SDS changed: run SDS gate + MBTI smoke';
         }
 
         if ($mbtiChanged) {

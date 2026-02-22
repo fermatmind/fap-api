@@ -62,4 +62,30 @@ final class ScaleImpactResolverTest extends TestCase
         $this->assertTrue((bool) ($result['run_mbti_smoke'] ?? false));
         $this->assertSame('clinical_with_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
     }
+
+    public function test_sds_only_change_runs_sds_gate_and_keeps_mbti_smoke(): void
+    {
+        $resolver = new ScaleImpactResolver();
+        $result = $resolver->resolve([
+            'backend/content_packs/SDS_20/v1/raw/policy.json',
+        ]);
+
+        $this->assertFalse((bool) ($result['shared_changed'] ?? true));
+        $this->assertTrue((bool) ($result['sds_20_changed'] ?? false));
+        $this->assertTrue((bool) ($result['run_sds_20_gate'] ?? false));
+        $this->assertTrue((bool) ($result['run_mbti_smoke'] ?? false));
+        $this->assertSame('sds_with_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
+    }
+
+    public function test_shared_layer_change_enables_sds_gate_too(): void
+    {
+        $resolver = new ScaleImpactResolver();
+        $result = $resolver->resolve([
+            'backend/app/Services/Report/ReportGatekeeper.php',
+        ]);
+
+        $this->assertTrue((bool) ($result['shared_changed'] ?? false));
+        $this->assertTrue((bool) ($result['run_sds_20_gate'] ?? false));
+        $this->assertSame('full_regression', (string) ($result['scale_scope'] ?? ''));
+    }
 }
