@@ -176,6 +176,19 @@ class AttemptStartService
     private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion): int
     {
         if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $minCompiled = $this->bigFivePackLoader->readCompiledJson('questions.min.compiled.json', $dirVersion);
+            if (is_array($minCompiled)) {
+                $questionIndex = is_array($minCompiled['question_index'] ?? null) ? $minCompiled['question_index'] : null;
+                if (is_array($questionIndex) && $questionIndex !== []) {
+                    return count($questionIndex);
+                }
+
+                Log::warning('BIG5_COMPILED_QUESTIONS_MIN_INVALID_FALLBACK', [
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                ]);
+            }
+
             $compiled = $this->bigFivePackLoader->readCompiledJson('questions.compiled.json', $dirVersion);
             if (!is_array($compiled)) {
                 $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTIONS_MISSING', $packId, $dirVersion, 'questions.compiled.json');
