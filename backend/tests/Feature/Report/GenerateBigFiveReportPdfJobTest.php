@@ -10,7 +10,7 @@ use App\Models\Result;
 use App\Services\Assessment\Scorers\BigFiveScorerV3;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Content\BigFivePackLoader;
-use App\Services\Report\BigFivePdfDocumentService;
+use App\Services\Report\Pdf\ReportPdfDocumentService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -141,10 +141,17 @@ final class GenerateBigFiveReportPdfJobTest extends TestCase
         $job = new GenerateBigFiveReportPdfJob(0, $attemptId, 'payment_unlock', 'ord_big5_pdf_job_1');
         app()->call([$job, 'handle']);
 
-        /** @var BigFivePdfDocumentService $pdfService */
-        $pdfService = app(BigFivePdfDocumentService::class);
-        $fullPath = $pdfService->artifactPath($attemptId, 'full');
-        $freePath = $pdfService->artifactPath($attemptId, 'free');
+        /** @var ReportPdfDocumentService $pdfService */
+        $pdfService = app(ReportPdfDocumentService::class);
+        /** @var Attempt|null $attempt */
+        $attempt = Attempt::query()->find($attemptId);
+        /** @var Result|null $result */
+        $result = Result::query()->where('attempt_id', $attemptId)->where('org_id', 0)->first();
+        $this->assertNotNull($attempt);
+        $this->assertNotNull($result);
+
+        $fullPath = $pdfService->resolveArtifactPath($attempt, 'full', $result);
+        $freePath = $pdfService->resolveArtifactPath($attempt, 'free', $result);
 
         $this->assertTrue(
             Storage::disk('local')->exists($fullPath) || Storage::disk('local')->exists($freePath),

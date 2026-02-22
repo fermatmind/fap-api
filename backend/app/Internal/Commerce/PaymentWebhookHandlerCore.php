@@ -2,7 +2,7 @@
 
 namespace App\Internal\Commerce;
 
-use App\Jobs\GenerateBigFiveReportPdfJob;
+use App\Jobs\GenerateReportPdfJob;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
@@ -620,7 +620,7 @@ class PaymentWebhookHandlerCore
                 ? $postCommitOutcome['pdf_job_ctx']
                 : null;
             if (is_array($pdfJobCtx) && ($result['ok'] ?? false)) {
-                GenerateBigFiveReportPdfJob::dispatch(
+                GenerateReportPdfJob::dispatch(
                     (int) $pdfJobCtx['org_id'],
                     (string) $pdfJobCtx['attempt_id'],
                     (string) $pdfJobCtx['trigger_source'],

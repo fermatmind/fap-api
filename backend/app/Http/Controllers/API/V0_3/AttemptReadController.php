@@ -8,7 +8,7 @@ use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
-use App\Services\Report\BigFivePdfDocumentService;
+use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportGatekeeper;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
@@ -21,7 +21,7 @@ class AttemptReadController extends Controller
 
     public function __construct(
         private ReportGatekeeper $reportGatekeeper,
-        private BigFivePdfDocumentService $bigFivePdfDocumentService,
+        private ReportPdfDocumentService $reportPdfDocumentService,
         private EventRecorder $eventRecorder,
         protected OrgContext $orgContext,
     ) {}
@@ -268,33 +268,9 @@ class AttemptReadController extends Controller
             abort($status, (string) ($gate['message'] ?? 'report generation failed.'));
         }
 
-        $report = $gate['report'] ?? [];
-        if (! is_array($report)) {
-            $report = [];
-        }
-
-        $sections = array_map(
-            'strval',
-            array_values(
-                array_filter(
-                    array_column((array) ($report['sections'] ?? []), 'key'),
-                    static fn ($value): bool => is_string($value) && trim($value) !== ''
-                )
-            )
-        );
-
-        $normsStatus = strtoupper(trim((string) (
-            data_get($gate, 'norms.status')
-            ?? data_get($result->result_json, 'normed_json.norms.status', '')
-        )));
-        $qualityLevel = strtoupper(trim((string) (
-            data_get($gate, 'quality.level')
-            ?? data_get($result->result_json, 'normed_json.quality.level', '')
-        )));
-
-        $variant = $this->bigFivePdfDocumentService->normalizeVariant((string) ($gate['variant'] ?? 'free'));
+        $variant = $this->reportPdfDocumentService->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? false);
-        $fileName = $this->bigFivePdfDocumentService->fileName((string) ($attempt->scale_code ?? 'report'), (string) $attempt->id);
+        $fileName = $this->reportPdfDocumentService->fileName((string) ($attempt->scale_code ?? 'report'), (string) $attempt->id);
         $inline = in_array(strtolower(trim((string) $request->query('inline', '0'))), ['1', 'true', 'yes', 'on'], true);
         $disposition = $inline ? 'inline' : 'attachment';
 
@@ -308,24 +284,10 @@ class AttemptReadController extends Controller
             'variant' => $variant,
         ]);
 
-        $pdfBinary = null;
-        if (strtoupper((string) ($attempt->scale_code ?? '')) === 'BIG5_OCEAN') {
-            $pdfBinary = $this->bigFivePdfDocumentService->readArtifact((string) $attempt->id, $variant);
-        }
-        if (! is_string($pdfBinary) || $pdfBinary === '') {
-            $pdfBinary = $this->bigFivePdfDocumentService->buildDocument(
-                (string) $attempt->id,
-                (string) ($attempt->scale_code ?? ''),
-                $locked,
-                $variant,
-                $normsStatus,
-                $qualityLevel,
-                $sections
-            );
-            if (strtoupper((string) ($attempt->scale_code ?? '')) === 'BIG5_OCEAN') {
-                $this->bigFivePdfDocumentService->storeArtifact((string) $attempt->id, $variant, $pdfBinary);
-            }
-        }
+        $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
+        $pdfBinary = (string) ($generated['binary'] ?? '');
+        $variant = (string) ($generated['variant'] ?? $variant);
+        $locked = (bool) ($generated['locked'] ?? $locked);
 
         return response($pdfBinary, 200, [
             'Content-Type' => 'application/pdf',
