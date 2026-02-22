@@ -8,6 +8,10 @@ cd "$BACKEND_DIR"
 
 php artisan content:lint --pack=SDS_20 --pack-version=v1
 php artisan content:compile --pack=SDS_20 --pack-version=v1
-php artisan test --testsuite=Feature --list-tests | rg -q "Sds20" || { echo "[FAIL] Sds20 tests not discovered"; exit 32; }
+if command -v rg >/dev/null 2>&1; then
+  php artisan test --testsuite=Feature --list-tests | rg -q "Sds20" || { echo "[FAIL] Sds20 tests not discovered"; exit 32; }
+else
+  php artisan test --testsuite=Feature --list-tests | grep -q "Sds20" || { echo "[FAIL] Sds20 tests not discovered"; exit 32; }
+fi
 php artisan test --testsuite=Feature --filter Sds20GoldenCasesTest
 php artisan test --testsuite=Feature --filter Sds20

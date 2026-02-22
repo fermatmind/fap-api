@@ -13,7 +13,7 @@ final class Sds20QualityGateTest extends TestCase
 
     public function test_speeding_sets_quality_to_d_with_flag(): void
     {
-        $dto = $this->scoreSds([], ['duration_ms' => 20000]);
+        $dto = $this->scoreSds([], ['server_duration_seconds' => 20]);
 
         $this->assertSame('D', (string) data_get($dto, 'quality.level', ''));
         $this->assertContains('SPEEDING', (array) data_get($dto, 'quality.flags', []));
@@ -21,7 +21,7 @@ final class Sds20QualityGateTest extends TestCase
 
     public function test_straightlining_sets_quality_to_c_when_not_speeding(): void
     {
-        $dto = $this->scoreSds([], ['duration_ms' => 98000]); // all A => run=20
+        $dto = $this->scoreSds([], ['server_duration_seconds' => 98]); // all A => run=20
 
         $this->assertSame('C', (string) data_get($dto, 'quality.level', ''));
         $this->assertContains('STRAIGHTLINING', (array) data_get($dto, 'quality.flags', []));

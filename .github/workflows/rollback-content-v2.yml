@@ -43,6 +43,14 @@ jobs:
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Validate composer config
+        working-directory: backend
+        run: composer validate --strict
+
+      - name: Audit composer dependencies
+        working-directory: backend
+        run: composer audit --no-interaction
+
       - name: Prepare app env
         working-directory: backend
         run: |
