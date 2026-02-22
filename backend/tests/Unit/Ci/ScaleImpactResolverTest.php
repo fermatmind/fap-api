@@ -77,6 +77,31 @@ final class ScaleImpactResolverTest extends TestCase
         $this->assertSame('sds_with_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
     }
 
+    public function test_sds_norms_change_runs_sds_norms_gate(): void
+    {
+        $resolver = new ScaleImpactResolver();
+        $result = $resolver->resolve([
+            'backend/config/sds_norms.php',
+        ]);
+
+        $this->assertFalse((bool) ($result['shared_changed'] ?? true));
+        $this->assertTrue((bool) ($result['sds_norms_changed'] ?? false));
+        $this->assertTrue((bool) ($result['run_sds_norms_gate'] ?? false));
+        $this->assertFalse((bool) ($result['run_sds_20_gate'] ?? true));
+    }
+
+    public function test_sds_content_change_does_not_force_sds_norms_gate(): void
+    {
+        $resolver = new ScaleImpactResolver();
+        $result = $resolver->resolve([
+            'backend/content_packs/SDS_20/v1/raw/policy.json',
+        ]);
+
+        $this->assertTrue((bool) ($result['sds_20_changed'] ?? false));
+        $this->assertTrue((bool) ($result['run_sds_20_gate'] ?? false));
+        $this->assertFalse((bool) ($result['run_sds_norms_gate'] ?? true));
+    }
+
     public function test_shared_layer_change_enables_sds_gate_too(): void
     {
         $resolver = new ScaleImpactResolver();
@@ -86,6 +111,7 @@ final class ScaleImpactResolverTest extends TestCase
 
         $this->assertTrue((bool) ($result['shared_changed'] ?? false));
         $this->assertTrue((bool) ($result['run_sds_20_gate'] ?? false));
+        $this->assertTrue((bool) ($result['run_sds_norms_gate'] ?? false));
         $this->assertSame('full_regression', (string) ($result['scale_scope'] ?? ''));
     }
 }

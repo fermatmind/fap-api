@@ -48,6 +48,7 @@ final class ScaleImpactResolver
         $big5Changed = false;
         $clinicalChanged = false;
         $sdsChanged = false;
+        $sdsNormsChanged = false;
 
         foreach ($normalized as $path) {
             if ($this->isSharedPath($path)) {
@@ -74,12 +75,17 @@ final class ScaleImpactResolver
             if ($this->isSdsPath($path)) {
                 $sdsChanged = true;
             }
+
+            if ($this->isSdsNormsPath($path)) {
+                $sdsNormsChanged = true;
+            }
         }
 
         $runFullScaleRegression = $sharedChanged;
         $runBig5OceanGate = $sharedChanged || $big5Changed;
         $runClinicalCombo68Gate = $sharedChanged || $clinicalChanged;
         $runSds20Gate = $sharedChanged || $sdsChanged;
+        $runSdsNormsGate = $sharedChanged || $sdsNormsChanged;
         $runMbtiSmoke = true;
 
         $scaleScope = $this->buildScaleScope(
@@ -114,14 +120,16 @@ final class ScaleImpactResolver
             'big5_ocean_changed' => $big5Changed,
             'clinical_combo_68_changed' => $clinicalChanged,
             'sds_20_changed' => $sdsChanged,
+            'sds_norms_changed' => $sdsNormsChanged,
             'run_full_scale_regression' => $runFullScaleRegression,
             'run_big5_ocean_gate' => $runBig5OceanGate,
             'run_clinical_combo_68_gate' => $runClinicalCombo68Gate,
             'run_sds_20_gate' => $runSds20Gate,
+            'run_sds_norms_gate' => $runSdsNormsGate,
             'run_mbti_smoke' => $runMbtiSmoke,
             'scale_scope' => $scaleScope,
             'scales_changed' => $scalesChanged,
-            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed, $clinicalChanged, $sdsChanged),
+            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed, $clinicalChanged, $sdsChanged, $sdsNormsChanged),
         ];
     }
 
@@ -209,6 +217,38 @@ final class ScaleImpactResolver
             || str_contains($upper, 'SDS20');
     }
 
+    private function isSdsNormsPath(string $path): bool
+    {
+        $upper = strtoupper($path);
+
+        if (str_contains($upper, 'BACKEND/CONFIG/SDS_NORMS.PHP')) {
+            return true;
+        }
+        if (str_contains($upper, 'BACKEND/RESOURCES/NORMS/SDS/')) {
+            return true;
+        }
+        if (str_contains($upper, 'BACKEND/SCRIPTS/CI/VERIFY_SDS_NORMS.SH')) {
+            return true;
+        }
+        if (str_contains($upper, 'BACKEND/APP/CONSOLE/COMMANDS/NORMSSDS')) {
+            return true;
+        }
+        if (str_contains($upper, 'BACKEND/APP/CONSOLE/COMMANDS/SDSPSYCHOMETRICSREPORT')) {
+            return true;
+        }
+        if (str_contains($upper, 'BACKEND/APP/SERVICES/PSYCHOMETRICS/SDS/')) {
+            return true;
+        }
+        if (str_contains($upper, 'BACKEND/APP/SERVICES/ASSESSMENT/NORMS/SDSNORMGROUPRESOLVER.PHP')) {
+            return true;
+        }
+        if (str_contains($upper, 'BACKEND/TESTS/FEATURE/PSYCHOMETRICS/SDS')) {
+            return true;
+        }
+
+        return false;
+    }
+
     private function buildScaleScope(
         bool $runFullScaleRegression,
         bool $runBig5OceanGate,
@@ -283,7 +323,14 @@ final class ScaleImpactResolver
         return 'mbti_only';
     }
 
-    private function buildReason(bool $sharedChanged, bool $mbtiChanged, bool $big5Changed, bool $clinicalChanged, bool $sdsChanged): string
+    private function buildReason(
+        bool $sharedChanged,
+        bool $mbtiChanged,
+        bool $big5Changed,
+        bool $clinicalChanged,
+        bool $sdsChanged,
+        bool $sdsNormsChanged
+    ): string
     {
         if ($sharedChanged) {
             return 'shared-layer changed: run full cross-scale regression';
@@ -327,6 +374,10 @@ final class ScaleImpactResolver
 
         if ($sdsChanged) {
             return 'SDS changed: run SDS gate + MBTI smoke';
+        }
+
+        if ($sdsNormsChanged) {
+            return 'SDS norms changed: run SDS norms gate + MBTI smoke';
         }
 
         if ($mbtiChanged) {
