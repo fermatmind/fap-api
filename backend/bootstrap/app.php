@@ -8,32 +8,36 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
 $runtimeDirs = [
-    __DIR__ . '/../storage/framework/cache',
-    __DIR__ . '/../storage/framework/sessions',
-    __DIR__ . '/../storage/framework/views',
-    __DIR__ . '/../storage/framework/testing',
-    __DIR__ . '/../bootstrap/cache',
+    __DIR__.'/../storage/framework/cache',
+    __DIR__.'/../storage/framework/sessions',
+    __DIR__.'/../storage/framework/views',
+    __DIR__.'/../storage/framework/testing',
+    __DIR__.'/../bootstrap/cache',
 ];
 
 foreach ($runtimeDirs as $dir) {
-    if (!is_dir($dir)) {
+    if (! is_dir($dir)) {
         @mkdir($dir, 0775, true);
     }
 }
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__ . '/../routes/web.php',
-        api: __DIR__ . '/../routes/api.php',
-        commands: __DIR__ . '/../routes/console.php',
+        web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
+        commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
     ->withCommands([
-        __DIR__ . '/../app/Console/Commands',
+        __DIR__.'/../app/Console/Commands',
         \App\Console\Commands\FapResolvePack::class,
     ])
     ->withSchedule(function (Schedule $schedule): void {
-        $schedule->command('payments:prune-events --days=90')->daily()->withoutOverlapping();
+        $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
+        $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
+        $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
+        $schedule->command('norms:big5:roll --window_days=365')->monthlyOn(1, '04:30')->withoutOverlapping();
+        $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([

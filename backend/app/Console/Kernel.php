@@ -20,6 +20,7 @@ use App\Console\Commands\FapWeeklyReport;
 use App\Console\Commands\MetricsWeeklyValidity;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\NormsBig5DriftCheck;
+use App\Console\Commands\NormsBig5MonthlyDriftCheck;
 use App\Console\Commands\NormsBig5Rebuild;
 use App\Console\Commands\NormsBig5Roll;
 use App\Console\Commands\NormsImport;
@@ -35,6 +36,7 @@ use App\Console\Commands\Packs2Rollback;
 use App\Console\Commands\PacksPublish;
 use App\Console\Commands\PacksRollback;
 use App\Console\Commands\PaymentsPruneEvents;
+use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SyncScaleSlugs;
@@ -72,6 +74,7 @@ class Kernel extends ConsoleKernel
         NormsBig5Roll::class,
         NormsBig5Rebuild::class,
         NormsBig5DriftCheck::class,
+        NormsBig5MonthlyDriftCheck::class,
         NormsBig5BootstrapBuild::class,
         Big5PsychometricsReport::class,
         NormsSdsRebuild::class,
@@ -86,6 +89,7 @@ class Kernel extends ConsoleKernel
         Packs2Activate::class,
         Packs2Rollback::class,
         Packs2List::class,
+        QualityDailySummary::class,
         CiScaleImpact::class,
         PartitionAttemptAnswerRows::class,
     ];
@@ -98,7 +102,11 @@ class Kernel extends ConsoleKernel
         // 示例（需要就开）：
         // $schedule->command('fap:self-check')->dailyAt('03:10');
         // $schedule->command('fap:validate-report --attempt=...')->hourly();
-        $schedule->command('payments:prune-events --days=90')->daily()->withoutOverlapping();
+        $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
+        $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
+        $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
+        $schedule->command('norms:big5:roll --window_days=365')->monthlyOn(1, '04:30')->withoutOverlapping();
+        $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();
     }
 
     /**
