@@ -28,6 +28,9 @@ use App\Console\Commands\NormsBig5Rebuild;
 use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\Big5PsychometricsReport;
+use App\Console\Commands\NormsSdsRebuild;
+use App\Console\Commands\NormsSdsDriftCheck;
+use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CommerceReconcile;
@@ -68,6 +71,9 @@ class Kernel extends ConsoleKernel
         NormsBig5DriftCheck::class,
         NormsBig5BootstrapBuild::class,
         Big5PsychometricsReport::class,
+        NormsSdsRebuild::class,
+        NormsSdsDriftCheck::class,
+        SdsPsychometricsReport::class,
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
         CommerceReconcile::class,

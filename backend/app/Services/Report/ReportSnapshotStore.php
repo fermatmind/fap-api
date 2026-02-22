@@ -17,6 +17,7 @@ class ReportSnapshotStore
         private ReportComposer $reportComposer,
         private BigFiveReportComposer $bigFiveReportComposer,
         private ClinicalCombo68ReportComposer $clinicalCombo68ReportComposer,
+        private Sds20ReportComposer $sds20ReportComposer,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
     ) {}
@@ -350,6 +351,24 @@ class ReportSnapshotStore
 
         if ($scaleCode === 'CLINICAL_COMBO_68') {
             $composed = $this->clinicalCombo68ReportComposer->composeVariant($attempt, $result, $variant, [
+                'org_id' => (int) ($attempt->org_id ?? 0),
+                'variant' => $variant,
+                'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                    ? ReportAccess::REPORT_ACCESS_FREE
+                    : ReportAccess::REPORT_ACCESS_FULL,
+                'modules_allowed' => $modulesAllowed,
+                'modules_preview' => $modulesPreview,
+            ]);
+            if (!($composed['ok'] ?? false)) {
+                return null;
+            }
+            $report = $composed['report'] ?? null;
+
+            return is_array($report) ? $report : null;
+        }
+
+        if ($scaleCode === 'SDS_20') {
+            $composed = $this->sds20ReportComposer->composeVariant($attempt, $result, $variant, [
                 'org_id' => (int) ($attempt->org_id ?? 0),
                 'variant' => $variant,
                 'report_access_level' => $variant === ReportAccess::VARIANT_FREE

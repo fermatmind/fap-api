@@ -350,6 +350,11 @@ class EntitlementManager
                 ReportAccess::MODULE_CLINICAL_PERFECTIONISM,
                 ReportAccess::MODULE_CLINICAL_ACTION_PLAN,
             ],
+            'SDS_20_FULL' => [
+                ReportAccess::MODULE_SDS_FULL,
+                ReportAccess::MODULE_SDS_FACTOR_DEEPDIVE,
+                ReportAccess::MODULE_SDS_ACTION_PLAN,
+            ],
             default => [],
         };
     }
@@ -363,6 +368,9 @@ class EntitlementManager
         }
         if ($benefitCode === 'CLINICAL_COMBO_68_PRO') {
             return ReportAccess::MODULE_CLINICAL_CORE;
+        }
+        if ($benefitCode === 'SDS_20_FULL') {
+            return ReportAccess::MODULE_SDS_CORE;
         }
 
         return ReportAccess::MODULE_CORE_FREE;

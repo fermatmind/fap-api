@@ -187,6 +187,53 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer->syncSlugsForScale($clinical);
         $this->command?->info('ScaleRegistrySeeder: CLINICAL_COMBO_68 scale upserted.');
+
+        $sds20 = $writer->upsertScale([
+            'code' => 'SDS_20',
+            'org_id' => 0,
+            'primary_slug' => 'sds-20',
+            'slugs_json' => [
+                'sds-20',
+                'zung-self-rating-depression-scale',
+            ],
+            'driver_type' => 'sds_20',
+            'assessment_driver' => 'sds_20',
+            'default_pack_id' => 'SDS_20',
+            'default_region' => $defaultRegion,
+            'default_locale' => $defaultLocale,
+            'default_dir_version' => 'v1',
+            'capabilities_json' => [
+                'assets' => false,
+                'questions' => true,
+                'enabled_in_prod' => true,
+                'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                'rollout_ratio' => 1.0,
+                'paywall_mode' => 'full',
+            ],
+            'view_policy_json' => [
+                'free_sections' => ['disclaimer_top', 'result_summary_free'],
+                'blur_others' => false,
+                'teaser_percent' => 0.0,
+                'upgrade_sku' => 'SKU_SDS_20_FULL_299',
+            ],
+            'commercial_json' => [
+                'price_tier' => 'PAID',
+                'report_benefit_code' => 'SDS_20_FULL',
+                'credit_benefit_code' => 'SDS_20_FULL',
+                'report_unlock_sku' => 'SKU_SDS_20_FULL_299',
+            ],
+            'seo_schema_json' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Quiz',
+                'name' => 'SDS-20 Depression Screening',
+                'description' => 'SDS-20 self-rating depression screening scale.',
+            ],
+            'is_public' => true,
+            'is_active' => true,
+        ]);
+
+        $writer->syncSlugsForScale($sds20);
+        $this->command?->info('ScaleRegistrySeeder: SDS_20 scale upserted.');
     }
 
     private function resolveSkuDefaults(): array

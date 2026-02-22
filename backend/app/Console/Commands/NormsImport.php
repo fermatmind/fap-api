@@ -42,6 +42,9 @@ class NormsImport extends Command
         'C1', 'C2', 'C3', 'C4', 'C5', 'C6',
     ];
 
+    private const SDS_METRIC_LEVEL = 'global';
+    private const SDS_METRIC_CODE = 'INDEX_SCORE';
+
     protected $signature = 'norms:import
         {--scale=BIG5_OCEAN : Scale code}
         {--csv= : CSV file path}
@@ -65,7 +68,9 @@ class NormsImport extends Command
 
         $csvPath = trim((string) $this->option('csv'));
         if ($csvPath === '') {
-            $csvPath = base_path('resources/norms/big5/big5_norm_stats_seed.csv');
+            $csvPath = $scaleCode === 'SDS_20'
+                ? base_path('resources/norms/sds/sds_norm_stats_seed.csv')
+                : base_path('resources/norms/big5/big5_norm_stats_seed.csv');
         } elseif (!str_starts_with($csvPath, '/')) {
             $csvPath = base_path($csvPath);
         }
@@ -94,15 +99,8 @@ class NormsImport extends Command
         ksort($groups);
         $this->info(sprintf('groups=%d', count($groups)));
         foreach ($groups as $groupKey => $group) {
-            $domainCount = count((array) ($group['coverage']['domain'] ?? []));
-            $facetCount = count((array) ($group['coverage']['facet'] ?? []));
-            $this->line(sprintf(
-                '- %s coverage=%d/35 (domain=%d facet=%d)',
-                $groupKey,
-                $domainCount + $facetCount,
-                $domainCount,
-                $facetCount
-            ));
+            $coverageLine = $this->coverageSummaryLine($scaleCode, is_array($group) ? $group : []);
+            $this->line(sprintf('- %s %s', $groupKey, $coverageLine));
         }
 
         $checksum = hash('sha256', json_encode($canonicalRows, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
@@ -284,6 +282,7 @@ class NormsImport extends Command
         $errors = [];
         $groups = [];
         $canonicalRows = [];
+        $isSdsScale = strtoupper($scaleCode) === 'SDS_20';
 
         $rowNo = 1;
         foreach ($rows as $row) {
@@ -342,19 +341,31 @@ class NormsImport extends Command
             $sd = (float) ($row['sd'] ?? 0);
             $sampleN = (int) ($row['sample_n'] ?? 0);
 
-            if (!in_array($metricLevel, ['domain', 'facet'], true)) {
-                $errors[] = "line {$rowNo}: invalid metric_level={$metricLevel}";
-            }
+            if ($isSdsScale) {
+                if (!in_array($metricLevel, ['global', 'index'], true)) {
+                    $errors[] = "line {$rowNo}: invalid metric_level={$metricLevel} for SDS_20";
+                }
+                if ($metricCode !== self::SDS_METRIC_CODE) {
+                    $errors[] = "line {$rowNo}: metric_code must be ".self::SDS_METRIC_CODE.' for SDS_20';
+                }
+                if ($mean < 0.0 || $mean > 100.0) {
+                    $errors[] = "line {$rowNo}: mean must be in [0,100] for SDS_20";
+                }
+            } else {
+                if (!in_array($metricLevel, ['domain', 'facet'], true)) {
+                    $errors[] = "line {$rowNo}: invalid metric_level={$metricLevel}";
+                }
 
-            if ($metricLevel === 'domain' && !in_array($metricCode, self::DOMAINS, true)) {
-                $errors[] = "line {$rowNo}: invalid domain metric_code={$metricCode}";
-            }
-            if ($metricLevel === 'facet' && !in_array($metricCode, self::FACETS, true)) {
-                $errors[] = "line {$rowNo}: invalid facet metric_code={$metricCode}";
-            }
+                if ($metricLevel === 'domain' && !in_array($metricCode, self::DOMAINS, true)) {
+                    $errors[] = "line {$rowNo}: invalid domain metric_code={$metricCode}";
+                }
+                if ($metricLevel === 'facet' && !in_array($metricCode, self::FACETS, true)) {
+                    $errors[] = "line {$rowNo}: invalid facet metric_code={$metricCode}";
+                }
 
-            if ($mean < 1.0 || $mean > 5.0) {
-                $errors[] = "line {$rowNo}: mean must be in [1,5]";
+                if ($mean < 1.0 || $mean > 5.0) {
+                    $errors[] = "line {$rowNo}: mean must be in [1,5]";
+                }
             }
             if ($sd <= 0.0) {
                 $errors[] = "line {$rowNo}: sd must be > 0";
@@ -378,6 +389,7 @@ class NormsImport extends Command
                     'coverage' => [
                         'domain' => [],
                         'facet' => [],
+                        'global' => [],
                     ],
                     'active_consistency' => $attrs['is_active'],
                 ];
@@ -410,20 +422,32 @@ class NormsImport extends Command
         }
 
         foreach ($groups as $groupKey => $group) {
-            $domainCoverage = array_keys((array) ($group['coverage']['domain'] ?? []));
-            $facetCoverage = array_keys((array) ($group['coverage']['facet'] ?? []));
+            if ($isSdsScale) {
+                $globalCoverage = array_keys((array) ($group['coverage']['global'] ?? []));
+                if (count($globalCoverage) !== 1 || !in_array(self::SDS_METRIC_CODE, $globalCoverage, true)) {
+                    $errors[] = 'group '.$groupKey.': global coverage must contain INDEX_SCORE';
+                }
 
-            if (count($domainCoverage) !== 5 || count(array_intersect($domainCoverage, self::DOMAINS)) !== 5) {
-                $errors[] = "group {$groupKey}: domain coverage must be exactly O/C/E/A/N";
-            }
+                $metricCount = count((array) $group['metrics']);
+                if ($metricCount !== 1) {
+                    $errors[] = "group {$groupKey}: metric coverage must be 1/1, got {$metricCount}";
+                }
+            } else {
+                $domainCoverage = array_keys((array) ($group['coverage']['domain'] ?? []));
+                $facetCoverage = array_keys((array) ($group['coverage']['facet'] ?? []));
 
-            if (count($facetCoverage) !== 30 || count(array_intersect($facetCoverage, self::FACETS)) !== 30) {
-                $errors[] = "group {$groupKey}: facet coverage must be exactly 30 facets";
-            }
+                if (count($domainCoverage) !== 5 || count(array_intersect($domainCoverage, self::DOMAINS)) !== 5) {
+                    $errors[] = "group {$groupKey}: domain coverage must be exactly O/C/E/A/N";
+                }
 
-            $metricCount = count((array) $group['metrics']);
-            if ($metricCount !== 35) {
-                $errors[] = "group {$groupKey}: metric coverage must be 35/35, got {$metricCount}";
+                if (count($facetCoverage) !== 30 || count(array_intersect($facetCoverage, self::FACETS)) !== 30) {
+                    $errors[] = "group {$groupKey}: facet coverage must be exactly 30 facets";
+                }
+
+                $metricCount = count((array) $group['metrics']);
+                if ($metricCount !== 35) {
+                    $errors[] = "group {$groupKey}: metric coverage must be 35/35, got {$metricCount}";
+                }
             }
         }
 
@@ -437,6 +461,28 @@ class NormsImport extends Command
         });
 
         return [empty($errors), $errors, $groups, $canonicalRows];
+    }
+
+    /**
+     * @param array<string,mixed> $group
+     */
+    private function coverageSummaryLine(string $scaleCode, array $group): string
+    {
+        if (strtoupper($scaleCode) === 'SDS_20') {
+            $globalCount = count((array) data_get($group, 'coverage.global', []));
+
+            return sprintf('coverage=%d/1 (global=%d)', $globalCount, $globalCount);
+        }
+
+        $domainCount = count((array) data_get($group, 'coverage.domain', []));
+        $facetCount = count((array) data_get($group, 'coverage.facet', []));
+
+        return sprintf(
+            'coverage=%d/35 (domain=%d facet=%d)',
+            $domainCount + $facetCount,
+            $domainCount,
+            $facetCount
+        );
     }
 
     private function readCsv(string $path, ?array $requiredHeaders = null): array

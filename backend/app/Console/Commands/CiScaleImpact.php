@@ -108,6 +108,9 @@ final class CiScaleImpact extends Command
 
         $lines = [
             'run_big5_ocean_gate=' . $bool((bool) ($payload['run_big5_ocean_gate'] ?? false)),
+            'run_clinical_combo_68_gate=' . $bool((bool) ($payload['run_clinical_combo_68_gate'] ?? false)),
+            'run_sds_20_gate=' . $bool((bool) ($payload['run_sds_20_gate'] ?? false)),
+            'run_sds_norms_gate=' . $bool((bool) ($payload['run_sds_norms_gate'] ?? false)),
             'run_full_scale_regression=' . $bool((bool) ($payload['run_full_scale_regression'] ?? false)),
             'run_mbti_smoke=' . $bool((bool) ($payload['run_mbti_smoke'] ?? true)),
             'scale_scope=' . (string) ($payload['scale_scope'] ?? 'mbti_only'),
@@ -130,6 +133,9 @@ final class CiScaleImpact extends Command
         $bool = static fn (bool $v): string => $v ? '1' : '0';
         $lines = [
             'run_big5_ocean_gate=' . $bool((bool) ($payload['run_big5_ocean_gate'] ?? false)),
+            'run_clinical_combo_68_gate=' . $bool((bool) ($payload['run_clinical_combo_68_gate'] ?? false)),
+            'run_sds_20_gate=' . $bool((bool) ($payload['run_sds_20_gate'] ?? false)),
+            'run_sds_norms_gate=' . $bool((bool) ($payload['run_sds_norms_gate'] ?? false)),
             'run_full_scale_regression=' . $bool((bool) ($payload['run_full_scale_regression'] ?? false)),
             'run_mbti_smoke=' . $bool((bool) ($payload['run_mbti_smoke'] ?? true)),
             'scale_scope=' . (string) ($payload['scale_scope'] ?? 'mbti_only'),

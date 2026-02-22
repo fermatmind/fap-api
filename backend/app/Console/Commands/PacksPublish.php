@@ -30,13 +30,13 @@ final class PacksPublish extends Command
         {--base_url= : Probe base url}
         {--created_by=cli : Operator id}';
 
-    protected $description = 'Publish BIG5_OCEAN local content pack through ContentPackPublisher.';
+    protected $description = 'Publish BIG5_OCEAN/SDS_20 local content pack through ContentPackPublisher.';
 
     public function handle(ContentPackPublisher $publisher): int
     {
         $scaleCode = strtoupper(trim((string) $this->option('scale')));
-        if ($scaleCode !== 'BIG5_OCEAN') {
-            $this->error('packs:publish currently supports only --scale=BIG5_OCEAN');
+        if (!in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true)) {
+            $this->error('packs:publish supports only --scale=BIG5_OCEAN|SDS_20');
             return 1;
         }
 
@@ -76,7 +76,7 @@ final class PacksPublish extends Command
                 if ($driftGroupId !== '') {
                     $driftArgs['--group_id'] = $driftGroupId;
                 }
-                $driftCode = $this->call('norms:big5:drift-check', $driftArgs);
+                $driftCode = $this->call($this->resolveDriftCommand($scaleCode), $driftArgs);
                 if ($driftCode !== 0) {
                     $this->error('drift-check failed, publish aborted.');
 
@@ -223,5 +223,12 @@ final class PacksPublish extends Command
 
         $normalized = strtolower(trim((string) $value));
         return in_array($normalized, ['1', 'true', 'yes', 'on'], true);
+    }
+
+    private function resolveDriftCommand(string $scaleCode): string
+    {
+        return $scaleCode === 'SDS_20'
+            ? 'norms:sds:drift-check'
+            : 'norms:big5:drift-check';
     }
 }

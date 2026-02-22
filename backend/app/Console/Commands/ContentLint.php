@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Services\Content\BigFiveContentLintService;
 use App\Services\Content\ClinicalComboContentLintService;
 use App\Services\Content\ContentLintService;
+use App\Services\Content\Sds20ContentLintService;
 use Illuminate\Console\Command;
 
 final class ContentLint extends Command
@@ -21,7 +22,8 @@ final class ContentLint extends Command
     public function handle(
         ContentLintService $service,
         BigFiveContentLintService $bigFiveLint,
-        ClinicalComboContentLintService $clinicalLint
+        ClinicalComboContentLintService $clinicalLint,
+        Sds20ContentLintService $sds20Lint
     ): int
     {
         $pack = $this->option('pack');
@@ -34,6 +36,12 @@ final class ContentLint extends Command
             ];
         } elseif (is_string($pack) && strtoupper(trim($pack)) === 'CLINICAL_COMBO_68') {
             $single = $clinicalLint->lint(is_string($version) ? $version : null);
+            $result = [
+                'ok' => (bool) ($single['ok'] ?? false),
+                'packs' => [$single],
+            ];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === 'SDS_20') {
+            $single = $sds20Lint->lint(is_string($version) ? $version : null);
             $result = [
                 'ok' => (bool) ($single['ok'] ?? false),
                 'packs' => [$single],

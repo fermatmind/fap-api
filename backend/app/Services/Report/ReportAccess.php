@@ -9,6 +9,7 @@ final class ReportAccess
     public const SCALE_MBTI = 'MBTI';
     public const SCALE_BIG5_OCEAN = 'BIG5_OCEAN';
     public const SCALE_CLINICAL_COMBO_68 = 'CLINICAL_COMBO_68';
+    public const SCALE_SDS_20 = 'SDS_20';
 
     public const VARIANT_FREE = 'free';
     public const VARIANT_FULL = 'full';
@@ -32,6 +33,10 @@ final class ReportAccess
     public const MODULE_CLINICAL_RESILIENCE = 'clinical_resilience';
     public const MODULE_CLINICAL_PERFECTIONISM = 'clinical_perfectionism';
     public const MODULE_CLINICAL_ACTION_PLAN = 'clinical_action_plan';
+    public const MODULE_SDS_CORE = 'sds_core';
+    public const MODULE_SDS_FULL = 'sds_full';
+    public const MODULE_SDS_FACTOR_DEEPDIVE = 'sds_factor_deepdive';
+    public const MODULE_SDS_ACTION_PLAN = 'sds_action_plan';
 
     /**
      * Growth/traits/stress_recovery are part of core_full by default.
@@ -55,6 +60,9 @@ final class ReportAccess
         }
         if ($scaleCode === self::SCALE_CLINICAL_COMBO_68) {
             return [self::MODULE_CLINICAL_CORE];
+        }
+        if ($scaleCode === self::SCALE_SDS_20) {
+            return [self::MODULE_SDS_CORE];
         }
 
         return [self::MODULE_CORE_FREE];
@@ -97,6 +105,13 @@ final class ReportAccess
                 self::MODULE_CLINICAL_ACTION_PLAN,
             ];
         }
+        if ($scaleCode === self::SCALE_SDS_20) {
+            return [
+                self::MODULE_SDS_FULL,
+                self::MODULE_SDS_FACTOR_DEEPDIVE,
+                self::MODULE_SDS_ACTION_PLAN,
+            ];
+        }
 
         return [
             self::MODULE_CORE_FULL,
@@ -112,6 +127,7 @@ final class ReportAccess
         return match ($scaleCode) {
             self::SCALE_BIG5_OCEAN => self::MODULE_BIG5_CORE,
             self::SCALE_CLINICAL_COMBO_68 => self::MODULE_CLINICAL_CORE,
+            self::SCALE_SDS_20 => self::MODULE_SDS_CORE,
             default => self::MODULE_CORE_FREE,
         };
     }
@@ -123,6 +139,7 @@ final class ReportAccess
         return match ($scaleCode) {
             self::SCALE_BIG5_OCEAN => self::MODULE_BIG5_FULL,
             self::SCALE_CLINICAL_COMBO_68 => self::MODULE_CLINICAL_FULL,
+            self::SCALE_SDS_20 => self::MODULE_SDS_FULL,
             default => self::MODULE_CORE_FULL,
         };
     }

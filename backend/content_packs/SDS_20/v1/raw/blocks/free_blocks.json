@@ -1,0 +1,30 @@
+{
+  "zh-CN": [
+    {
+      "block_id": "sds_global_summary",
+      "section_key": "result_summary_free",
+      "title": "结果概览",
+      "body_md": "指数分 {{scores.global.index_score}} 分，当前等级：{{scores.global.clinical_level}}。"
+    },
+    {
+      "block_id": "sds_factor_overview",
+      "section_key": "result_summary_free",
+      "title": "四因子概览",
+      "body_md": "情感 {{scores.factors.psycho_affective.score}}/{{scores.factors.psycho_affective.max}}；躯体 {{scores.factors.somatic.score}}/{{scores.factors.somatic.max}}；精神运动 {{scores.factors.psychomotor.score}}/{{scores.factors.psychomotor.max}}；认知 {{scores.factors.cognitive.score}}/{{scores.factors.cognitive.max}}。"
+    }
+  ],
+  "en": [
+    {
+      "block_id": "sds_global_summary",
+      "section_key": "result_summary_free",
+      "title": "Global Summary",
+      "body_md": "Index score: {{scores.global.index_score}}. Clinical level: {{scores.global.clinical_level}}."
+    },
+    {
+      "block_id": "sds_factor_overview",
+      "section_key": "result_summary_free",
+      "title": "Factor Overview",
+      "body_md": "Psycho-affective {{scores.factors.psycho_affective.score}}/{{scores.factors.psycho_affective.max}}, Somatic {{scores.factors.somatic.score}}/{{scores.factors.somatic.max}}, Psychomotor {{scores.factors.psychomotor.score}}/{{scores.factors.psychomotor.max}}, Cognitive {{scores.factors.cognitive.score}}/{{scores.factors.cognitive.max}}."
+    }
+  ]
+}

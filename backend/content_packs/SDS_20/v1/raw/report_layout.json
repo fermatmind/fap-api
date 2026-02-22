@@ -1,0 +1,34 @@
+{
+  "layout": {
+    "sections": [
+      {
+        "key": "disclaimer_top",
+        "source": "copy",
+        "access_level": "free",
+        "required_in_variant": ["free", "full"],
+        "module_code": "sds_core"
+      },
+      {
+        "key": "crisis_banner",
+        "source": "copy",
+        "access_level": "free",
+        "required_in_variant": ["free", "full"],
+        "module_code": "sds_core"
+      },
+      {
+        "key": "result_summary_free",
+        "source": "blocks",
+        "access_level": "free",
+        "required_in_variant": ["free", "full"],
+        "module_code": "sds_core"
+      },
+      {
+        "key": "paid_deep_dive",
+        "source": "blocks",
+        "access_level": "paid",
+        "required_in_variant": ["full"],
+        "module_code": "sds_full"
+      }
+    ]
+  }
+}

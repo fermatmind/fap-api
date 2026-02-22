@@ -9,11 +9,13 @@ class AnswerRowWriter
 {
     public function writeRows(Attempt $attempt, array $answers, int $durationMs): array
     {
-        if (strtoupper((string) ($attempt->scale_code ?? '')) === 'CLINICAL_COMBO_68') {
+        $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
+        if ($scaleCode === 'CLINICAL_COMBO_68') {
             return ['ok' => true, 'skipped' => true, 'rows' => 0];
         }
 
-        if (!$this->isEnabled()) {
+        $isSds20 = $scaleCode === 'SDS_20';
+        if (!$this->isEnabled() && !$isSds20) {
             return ['ok' => true, 'skipped' => true, 'rows' => 0];
         }
 
@@ -30,6 +32,13 @@ class AnswerRowWriter
                 continue;
             }
 
+            $answerPayload = $isSds20
+                ? [
+                    'question_id' => $qid,
+                    'redacted' => true,
+                ]
+                : $answer;
+
             $rows[] = [
                 'attempt_id' => (string) $attempt->id,
                 'org_id' => (int) ($attempt->org_id ?? 0),
@@ -41,7 +50,7 @@ class AnswerRowWriter
                 'question_type' => isset($answer['question_type'])
                     ? (string) $answer['question_type']
                     : (string) ($answer['type'] ?? ''),
-                'answer_json' => json_encode($answer, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'answer_json' => json_encode($answerPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'duration_ms' => $durationMs,
                 'submitted_at' => $now,
                 'created_at' => $now,

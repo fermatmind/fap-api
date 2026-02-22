@@ -216,6 +216,9 @@ jobs:
         env:
           MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
           RUN_BIG5_OCEAN_GATE: ${{ steps.scale-impact.outputs.run_big5_ocean_gate }}
+          RUN_CLINICAL_COMBO_68_GATE: ${{ steps.scale-impact.outputs.run_clinical_combo_68_gate }}
+          RUN_SDS_20_GATE: ${{ steps.scale-impact.outputs.run_sds_20_gate }}
+          RUN_SDS_NORMS_GATE: ${{ steps.scale-impact.outputs.run_sds_norms_gate }}
           RUN_FULL_SCALE_REGRESSION: ${{ steps.scale-impact.outputs.run_full_scale_regression }}
           SCALE_SCOPE: ${{ steps.scale-impact.outputs.scale_scope }}
           DB_CONNECTION: mysql

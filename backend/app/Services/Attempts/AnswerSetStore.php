@@ -13,8 +13,9 @@ class AnswerSetStore
         $canonicalJson = $this->encodeJson($normalized);
         $answersHash = hash('sha256', $canonicalJson);
         $compressed = $this->compressJson($canonicalJson);
-        $isClinical = strtoupper((string) ($attempt->scale_code ?? '')) === 'CLINICAL_COMBO_68';
-        $storedAnswersJson = $isClinical ? null : $compressed;
+        $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
+        $isSensitiveScale = in_array($scaleCode, ['CLINICAL_COMBO_68', 'SDS_20'], true);
+        $storedAnswersJson = $isSensitiveScale ? null : $compressed;
 
         $now = now();
         DB::table('attempt_answer_sets')->updateOrInsert([

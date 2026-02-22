@@ -51,6 +51,16 @@ class AttemptSubmitService
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code missing on attempt.');
         }
 
+        if ($scaleCode === 'SDS_20') {
+            $summary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
+            $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
+            $consent = is_array($meta['consent'] ?? null) ? $meta['consent'] : [];
+            $consentAccepted = (bool) ($consent['accepted'] ?? false);
+            if ($consentAccepted !== true) {
+                throw new ApiProblemException(422, 'SDS20_CONSENT_REQUIRED', 'consent is required for SDS_20 submit.');
+            }
+        }
+
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (! $row) {
             throw new ApiProblemException(404, 'NOT_FOUND', 'scale not found.');
@@ -287,6 +297,42 @@ class AttemptSubmitService
                 $locked->answers_summary_json = $this->buildClinicalAnswersSummary($mergedAnswers, $normed, $durationMs);
             }
 
+            if ($scaleCode === 'SDS_20' && is_array($scoreResult->normedJson ?? null)) {
+                $normed = (array) $scoreResult->normedJson;
+                $versionSnapshot = is_array($normed['version_snapshot'] ?? null)
+                    ? $normed['version_snapshot']
+                    : [];
+                $normsNode = is_array($normed['norms'] ?? null) ? $normed['norms'] : [];
+
+                $snapshot = $locked->calculation_snapshot_json;
+                if (!is_array($snapshot)) {
+                    $snapshot = [];
+                }
+
+                $normsVersion = trim((string) ($normsNode['norms_version'] ?? ''));
+                if ($normsVersion !== '') {
+                    $locked->norm_version = $normsVersion;
+                }
+
+                $snapshot['sds_20'] = [
+                    'pack_id' => (string) ($versionSnapshot['pack_id'] ?? $packId),
+                    'pack_version' => (string) ($versionSnapshot['pack_version'] ?? $dirVersion),
+                    'policy_version' => (string) ($versionSnapshot['policy_version'] ?? ''),
+                    'policy_hash' => (string) ($versionSnapshot['policy_hash'] ?? ''),
+                    'engine_version' => (string) ($versionSnapshot['engine_version'] ?? data_get($normed, 'engine_version', 'v2.0_Factor_Logic')),
+                    'scoring_spec_version' => (string) ($versionSnapshot['scoring_spec_version'] ?? $scoringSpecVersion),
+                    'content_manifest_hash' => (string) ($versionSnapshot['content_manifest_hash'] ?? ''),
+                    'norms' => [
+                        'status' => strtoupper(trim((string) ($normsNode['status'] ?? 'MISSING'))),
+                        'group_id' => (string) ($normsNode['group_id'] ?? ''),
+                        'norms_version' => $normsVersion,
+                        'source_id' => (string) ($normsNode['source_id'] ?? ''),
+                    ],
+                ];
+                $snapshot['quality'] = is_array($normed['quality'] ?? null) ? $normed['quality'] : ($snapshot['quality'] ?? []);
+                $locked->calculation_snapshot_json = $snapshot;
+            }
+
             if ($locked->started_at === null) {
                 $locked->started_at = now();
             }
@@ -307,7 +353,7 @@ class AttemptSubmitService
             $axisStates = $axisScores['axis_states'] ?? null;
 
             $resultJson = $scoreResult->toArray();
-            if ($scaleCode === 'BIG5_OCEAN' && is_array($resultJson['normed_json'] ?? null)) {
+            if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true) && is_array($resultJson['normed_json'] ?? null)) {
                 $resultJson = array_merge($resultJson, $resultJson['normed_json']);
             }
             $resultJson['scale_code'] = $scaleCode;

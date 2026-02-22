@@ -202,6 +202,7 @@ return [
         'big5' => App\Services\Assessment\Drivers\GenericScoringDriver::class,
         'big5_ocean' => App\Services\Assessment\Drivers\BigFiveOceanDriver::class,
         'clinical_combo_68' => App\Services\Assessment\Drivers\ClinicalCombo68Driver::class,
+        'sds_20' => App\Services\Assessment\Drivers\Sds20Driver::class,
     ],
 
     // Persist raw answers (audit)
