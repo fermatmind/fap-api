@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 final class Sds20PackLoader
 {
     public const PACK_ID = 'SDS_20';
+
     public const PACK_VERSION = 'v1';
 
     public function packRoot(?string $version = null): string
@@ -72,12 +73,12 @@ final class Sds20PackLoader
         $out = [];
         foreach ($index as $qidRaw => $meta) {
             $qid = (int) $qidRaw;
-            if ($qid <= 0 || !is_array($meta)) {
+            if ($qid <= 0 || ! is_array($meta)) {
                 continue;
             }
 
             $direction = (int) ($meta['direction'] ?? 0);
-            if (!in_array($direction, [1, -1], true)) {
+            if (! in_array($direction, [1, -1], true)) {
                 continue;
             }
 
@@ -99,7 +100,7 @@ final class Sds20PackLoader
 
         $docs = is_array($compiled['questions_doc_by_locale'] ?? null) ? $compiled['questions_doc_by_locale'] : [];
         $doc = $docs[$localeResolved] ?? ($docs['zh-CN'] ?? null);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             throw new \RuntimeException('SDS20_COMPILED_INVALID: questions_doc_by_locale missing.');
         }
 
@@ -155,6 +156,13 @@ final class Sds20PackLoader
         $disclaimer = is_array($node['disclaimer'] ?? null) ? $node['disclaimer'] : [];
 
         $versionResolved = $this->normalizeVersion($version);
+        $consentVersion = trim((string) ($consent['version'] ?? ''));
+        $consentText = trim((string) ($consent['text'] ?? ''));
+        $consentHash = trim((string) ($consent['hash'] ?? ''));
+        if ($consentHash === '') {
+            $consentHash = hash('sha256', $consentVersion.'|'.$consentText);
+        }
+
         $disclaimerVersion = trim((string) ($disclaimer['version'] ?? ''));
         if ($disclaimerVersion === '') {
             $disclaimerVersion = 'SDS_20_disclaimer_'.$versionResolved;
@@ -167,8 +175,9 @@ final class Sds20PackLoader
             'title' => trim((string) ($node['title'] ?? '')),
             'consent' => [
                 'required' => (bool) ($consent['required'] ?? true),
-                'version' => trim((string) ($consent['version'] ?? '')),
-                'text' => trim((string) ($consent['text'] ?? '')),
+                'version' => $consentVersion,
+                'text' => $consentText,
+                'hash' => $consentHash,
             ],
             'disclaimer' => [
                 'version' => $disclaimerVersion,
@@ -189,7 +198,7 @@ final class Sds20PackLoader
 
         $out = [];
         foreach ($sources as $source) {
-            if (!is_array($source)) {
+            if (! is_array($source)) {
                 continue;
             }
 
@@ -240,7 +249,7 @@ final class Sds20PackLoader
         $blocksByLocale = is_array($compiled['blocks_by_locale'] ?? null) ? $compiled['blocks_by_locale'] : [];
         $blocks = $blocksByLocale[$localeResolved] ?? ($blocksByLocale['zh-CN'] ?? []);
 
-        if (!is_array($blocks)) {
+        if (! is_array($blocks)) {
             return [];
         }
 
@@ -283,7 +292,7 @@ final class Sds20PackLoader
      */
     public function readCsvWithLines(string $path): array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return [];
         }
 
@@ -300,10 +309,11 @@ final class Sds20PackLoader
             $lineNo++;
             if ($lineNo === 1) {
                 $header = is_array($row) ? array_map(static fn ($v): string => trim((string) $v), $row) : [];
+
                 continue;
             }
 
-            if (!is_array($row) || $header === [] || $row === [null]) {
+            if (! is_array($row) || $header === [] || $row === [null]) {
                 continue;
             }
 
@@ -331,7 +341,7 @@ final class Sds20PackLoader
      */
     public function readJson(string $path): ?array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return null;
         }
 
@@ -354,12 +364,12 @@ final class Sds20PackLoader
         $versionResolved = $this->normalizeVersion($version);
         $path = $this->compiledPath($file, $versionResolved);
 
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             throw $this->compiledMissingException($path, $versionResolved);
         }
 
         $decoded = $this->readJson($path);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             throw new \RuntimeException('SDS20_COMPILED_INVALID: '.$path);
         }
 

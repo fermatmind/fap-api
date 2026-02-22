@@ -26,6 +26,10 @@ class SubmitAttemptRequest extends FormRequest
             'validity_items.*.item_id' => ['required_with:validity_items', 'string', 'max:64'],
             'validity_items.*.code' => ['required_with:validity_items'],
             'duration_ms' => ['required', 'integer', 'min:0'],
+            'consent' => ['sometimes', 'array'],
+            'consent.accepted' => ['sometimes', 'boolean'],
+            'consent.version' => ['sometimes', 'string', 'max:128'],
+            'consent.hash' => ['sometimes', 'string', 'size:64'],
             'invite_token' => ['nullable', 'string', 'max:64'],
         ];
     }

@@ -17,9 +17,7 @@ class ScalesController extends Controller
     public function __construct(
         private ScaleRegistry $registry,
         private OrgContext $orgContext,
-    )
-    {
-    }
+    ) {}
 
     /**
      * GET /api/v0.3/scales
@@ -51,7 +49,7 @@ class ScalesController extends Controller
         }
 
         $row = $this->registry->getByCode($code, $orgId);
-        if (!$row) {
+        if (! $row) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -75,8 +73,7 @@ class ScalesController extends Controller
         BigFivePackLoader $bigFivePackLoader,
         ClinicalComboPackLoader $clinicalPackLoader,
         Sds20PackLoader $sds20PackLoader
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $orgId = $this->orgContext->orgId();
         $code = strtoupper(trim($scale_code));
         if ($code === '') {
@@ -88,7 +85,7 @@ class ScalesController extends Controller
         }
 
         $row = $this->registry->getByCode($code, $orgId);
-        if (!$row) {
+        if (! $row) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -124,9 +121,9 @@ class ScalesController extends Controller
                 $contentPackageVersion = (string) ($compiledMin['pack_version'] ?? $version);
             }
 
-            if (!is_array($questionsDoc)) {
+            if (! is_array($questionsDoc)) {
                 $compiled = $bigFivePackLoader->readCompiledJson('questions.compiled.json', $version);
-                if (!is_array($compiled)) {
+                if (! is_array($compiled)) {
                     return response()->json([
                         'ok' => false,
                         'error_code' => 'COMPILED_MISSING',
@@ -138,7 +135,7 @@ class ScalesController extends Controller
                     ? $compiled['questions_doc_by_locale']
                     : [];
                 $questionsDoc = $questionsDocByLocale[$normalizedLocale] ?? ($compiled['questions_doc'] ?? null);
-                if (!is_array($questionsDoc)) {
+                if (! is_array($questionsDoc)) {
                     return response()->json([
                         'ok' => false,
                         'error_code' => 'COMPILED_INVALID',
@@ -153,7 +150,7 @@ class ScalesController extends Controller
             $validityItemsRaw = is_array($policy['validity_items'] ?? null) ? $policy['validity_items'] : [];
             $validityItems = [];
             foreach ($validityItemsRaw as $item) {
-                if (!is_array($item)) {
+                if (! is_array($item)) {
                     continue;
                 }
                 $itemId = trim((string) ($item['item_id'] ?? ''));
@@ -265,6 +262,7 @@ class ScalesController extends Controller
                     'consent' => [
                         'required' => (bool) data_get($landing, 'consent.required', true),
                         'version' => (string) data_get($landing, 'consent.version', ''),
+                        'hash' => (string) data_get($landing, 'consent.hash', ''),
                         'text' => (string) data_get($landing, 'consent.text', ''),
                     ],
                     'disclaimer' => [
@@ -283,9 +281,10 @@ class ScalesController extends Controller
         $assetsBaseUrlOverride = is_string($assetsBaseUrlOverride) ? $assetsBaseUrlOverride : null;
 
         $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
-        if (!($loaded['ok'] ?? false)) {
+        if (! ($loaded['ok'] ?? false)) {
             $error = (string) ($loaded['error_code'] ?? $loaded['error'] ?? 'READ_FAILED');
             $status = $error === 'NOT_FOUND' ? 404 : 500;
+
             return response()->json([
                 'ok' => false,
                 'error_code' => $error,
@@ -311,7 +310,7 @@ class ScalesController extends Controller
     }
 
     /**
-     * @param array<string,mixed> $compiledMin
+     * @param  array<string,mixed>  $compiledMin
      * @return array<string,mixed>|null
      */
     private function buildBigFiveQuestionsDocFromMin(array $compiledMin, string $normalizedLocale): ?array
@@ -335,7 +334,7 @@ class ScalesController extends Controller
         $items = [];
         foreach ($questionIndex as $qidRaw => $meta) {
             $qid = (int) $qidRaw;
-            if ($qid <= 0 || !is_array($meta)) {
+            if ($qid <= 0 || ! is_array($meta)) {
                 return null;
             }
 
@@ -350,7 +349,7 @@ class ScalesController extends Controller
                 || $textEn === ''
                 || $dimension === ''
                 || $facetCode === ''
-                || !in_array($direction, [1, -1], true)
+                || ! in_array($direction, [1, -1], true)
             ) {
                 return null;
             }
@@ -382,14 +381,14 @@ class ScalesController extends Controller
     }
 
     /**
-     * @param list<array<string,mixed>> $rawOptionSet
+     * @param  list<array<string,mixed>>  $rawOptionSet
      * @return list<array<string,mixed>>
      */
     private function buildBigFiveQuestionOptionsForLocale(array $rawOptionSet, string $normalizedLocale): array
     {
         $options = [];
         foreach ($rawOptionSet as $opt) {
-            if (!is_array($opt)) {
+            if (! is_array($opt)) {
                 continue;
             }
 
@@ -409,6 +408,7 @@ class ScalesController extends Controller
                     'text' => $labelZh,
                     'text_en' => $labelEn,
                 ];
+
                 continue;
             }
 

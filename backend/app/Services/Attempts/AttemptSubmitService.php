@@ -51,15 +51,7 @@ class AttemptSubmitService
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code missing on attempt.');
         }
 
-        if ($scaleCode === 'SDS_20') {
-            $summary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
-            $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
-            $consent = is_array($meta['consent'] ?? null) ? $meta['consent'] : [];
-            $consentAccepted = (bool) ($consent['accepted'] ?? false);
-            if ($consentAccepted !== true) {
-                throw new ApiProblemException(422, 'SDS20_CONSENT_REQUIRED', 'consent is required for SDS_20 submit.');
-            }
-        }
+        $this->enforceConsentOnSubmit($scaleCode, $attempt, $dto);
 
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (! $row) {
@@ -232,7 +224,7 @@ class AttemptSubmitService
 
             if ($scaleCode === 'BIG5_OCEAN') {
                 $snapshot = $locked->calculation_snapshot_json;
-                if (!is_array($snapshot)) {
+                if (! is_array($snapshot)) {
                     $snapshot = [];
                 }
                 $snapshot['validity_items'] = $validityItems;
@@ -247,7 +239,7 @@ class AttemptSubmitService
                 $groupId = trim((string) ($normsNode['group_id'] ?? ($normed['group_id'] ?? '')));
                 $sourceId = trim((string) ($normsNode['source_id'] ?? ($normed['source_id'] ?? '')));
                 $status = strtoupper(trim((string) ($normsNode['status'] ?? ($normed['status'] ?? 'MISSING'))));
-                if (!in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+                if (! in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
                     $status = 'MISSING';
                 }
 
@@ -256,7 +248,7 @@ class AttemptSubmitService
                 }
 
                 $snapshot = $locked->calculation_snapshot_json;
-                if (!is_array($snapshot)) {
+                if (! is_array($snapshot)) {
                     $snapshot = [];
                 }
 
@@ -279,7 +271,7 @@ class AttemptSubmitService
                     : [];
 
                 $snapshot = $locked->calculation_snapshot_json;
-                if (!is_array($snapshot)) {
+                if (! is_array($snapshot)) {
                     $snapshot = [];
                 }
 
@@ -305,7 +297,7 @@ class AttemptSubmitService
                 $normsNode = is_array($normed['norms'] ?? null) ? $normed['norms'] : [];
 
                 $snapshot = $locked->calculation_snapshot_json;
-                if (!is_array($snapshot)) {
+                if (! is_array($snapshot)) {
                     $snapshot = [];
                 }
 
@@ -481,6 +473,46 @@ class AttemptSubmitService
         return $responsePayload;
     }
 
+    private function enforceConsentOnSubmit(string $scaleCode, Attempt $attempt, SubmitAttemptDTO $dto): void
+    {
+        if (! in_array($scaleCode, ['CLINICAL_COMBO_68', 'SDS_20'], true)) {
+            return;
+        }
+
+        $requiredCode = $scaleCode === 'SDS_20' ? 'SDS20_CONSENT_REQUIRED' : 'CONSENT_REQUIRED';
+        $mismatchCode = $scaleCode === 'SDS_20' ? 'CONSENT_MISMATCH_SDS20' : 'CONSENT_MISMATCH';
+
+        $summary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
+        $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
+        $storedConsent = is_array($meta['consent'] ?? null) ? $meta['consent'] : [];
+
+        $storedAccepted = (bool) ($storedConsent['accepted'] ?? false);
+        $storedVersion = trim((string) ($storedConsent['version'] ?? ''));
+        $storedHash = trim((string) ($storedConsent['hash'] ?? ''));
+
+        $accepted = (bool) ($dto->consentAccepted ?? false);
+        $version = trim((string) ($dto->consentVersion ?? ''));
+        $hash = trim((string) ($dto->consentHash ?? ''));
+
+        if ($accepted !== true || $version === '') {
+            throw new ApiProblemException(422, $requiredCode, "consent is required for {$scaleCode} submit.");
+        }
+        if ($storedAccepted !== true || $storedVersion === '') {
+            throw new ApiProblemException(422, $requiredCode, "consent snapshot missing for {$scaleCode} submit.");
+        }
+        if ($version !== $storedVersion) {
+            throw new ApiProblemException(422, $mismatchCode, 'consent version/hash mismatch.');
+        }
+        if ($storedHash !== '') {
+            if ($hash === '') {
+                throw new ApiProblemException(422, $requiredCode, "consent hash is required for {$scaleCode} submit.");
+            }
+            if (! hash_equals($storedHash, $hash)) {
+                throw new ApiProblemException(422, $mismatchCode, 'consent version/hash mismatch.');
+            }
+        }
+    }
+
     private function ownedAttemptQuery(
         OrgContext $ctx,
         string $attemptId,
@@ -653,7 +685,7 @@ class AttemptSubmitService
     private function numericUserId(?string $userId): ?int
     {
         $userId = trim((string) $userId);
-        if ($userId === '' || !preg_match('/^\d+$/', $userId)) {
+        if ($userId === '' || ! preg_match('/^\d+$/', $userId)) {
             return null;
         }
 
@@ -661,8 +693,8 @@ class AttemptSubmitService
     }
 
     /**
-     * @param array<int,array<string,mixed>> $answers
-     * @param array<string,mixed> $normed
+     * @param  array<int,array<string,mixed>>  $answers
+     * @param  array<string,mixed>  $normed
      * @return array<string,mixed>
      */
     private function buildClinicalAnswersSummary(array $answers, array $normed, int $durationMs): array
@@ -676,7 +708,7 @@ class AttemptSubmitService
         ];
 
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
 

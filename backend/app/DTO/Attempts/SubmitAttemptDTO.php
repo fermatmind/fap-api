@@ -14,6 +14,9 @@ final class SubmitAttemptDTO
         public readonly array $answers,
         public readonly array $validityItems,
         public readonly int $durationMs,
+        public readonly ?bool $consentAccepted,
+        public readonly ?string $consentVersion,
+        public readonly ?string $consentHash,
         public readonly string $inviteToken,
         public readonly ?string $userId,
         public readonly ?string $anonId,
@@ -37,13 +40,13 @@ final class SubmitAttemptDTO
         }
 
         $validityItems = $payload['validity_items'] ?? [];
-        if (!is_array($validityItems)) {
+        if (! is_array($validityItems)) {
             $validityItems = [];
         }
 
         $normalizedValidityItems = [];
         foreach ($validityItems as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
             $itemId = trim((string) ($item['item_id'] ?? ''));
@@ -60,10 +63,18 @@ final class SubmitAttemptDTO
             ];
         }
 
+        $consent = $payload['consent'] ?? null;
+        if (! is_array($consent)) {
+            $consent = [];
+        }
+
         return new self(
             answers: $normalizedAnswers,
             validityItems: $normalizedValidityItems,
             durationMs: max(0, (int) ($payload['duration_ms'] ?? 0)),
+            consentAccepted: array_key_exists('accepted', $consent) ? (bool) $consent['accepted'] : null,
+            consentVersion: self::nullableString($consent['version'] ?? null),
+            consentHash: self::nullableString($consent['hash'] ?? null),
             inviteToken: trim((string) ($payload['invite_token'] ?? '')),
             userId: self::normalizeUserId($payload['user_id'] ?? null),
             anonId: self::nullableString($payload['anon_id'] ?? null),

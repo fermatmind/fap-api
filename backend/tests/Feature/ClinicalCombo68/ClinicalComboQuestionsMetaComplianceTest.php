@@ -15,13 +15,14 @@ final class ClinicalComboQuestionsMetaComplianceTest extends TestCase
     public function test_questions_meta_contains_compliance_payloads_and_locale_fallback(): void
     {
         $this->artisan('content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $zh = $this->getJson('/api/v0.3/scales/CLINICAL_COMBO_68/questions?locale=zh-CN&region=CN_MAINLAND');
         $zh->assertStatus(200);
         $zh->assertJsonPath('meta.locale_resolved', 'zh-CN');
         $zh->assertJsonPath('meta.consent.locale_resolved', 'zh-CN');
         $this->assertNotSame('', (string) data_get($zh->json(), 'meta.consent.version', ''));
+        $this->assertNotSame('', (string) data_get($zh->json(), 'meta.consent.hash', ''));
         $this->assertNotEmpty((array) data_get($zh->json(), 'meta.privacy_addendum.bullets', []));
         $this->assertNotEmpty((array) data_get($zh->json(), 'meta.crisis_resources.resources', []));
 

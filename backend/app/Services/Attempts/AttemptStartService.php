@@ -79,15 +79,24 @@ class AttemptStartService
         $answersSummaryMeta = $dto->meta;
 
         if (strtoupper($scaleCode) === 'CLINICAL_COMBO_68') {
-            $policy = $this->clinicalPackLoader->loadPolicy($dirVersion);
-            $consentPolicy = is_array($policy['consent_policy'] ?? null) ? $policy['consent_policy'] : [];
-            $consentVersion = trim((string) ($dto->consentVersion ?? ($consentPolicy['version'] ?? '')));
+            $consentDoc = $this->clinicalPackLoader->loadConsent($locale, $dirVersion);
+            $consentVersionExpected = trim((string) ($consentDoc['version'] ?? ''));
+            $consentHashExpected = trim((string) ($consentDoc['hash'] ?? ''));
+
+            $consentVersion = trim((string) ($dto->consentVersion ?? $consentVersionExpected));
+            $consentHash = trim((string) ($dto->consentHash ?? $consentHashExpected));
             $consentAccepted = (bool) ($dto->consentAccepted ?? false);
-            $consentLocale = $this->clinicalPackLoader->normalizeLocale((string) ($dto->consentLocale ?? $locale));
+            $consentLocale = $this->clinicalPackLoader->normalizeLocale((string) ($dto->consentLocale ?? ($consentDoc['locale_resolved'] ?? $locale)));
 
             if ((bool) config('fap.features.clinical_consent_enforce', false)) {
-                if ($consentAccepted !== true || $consentVersion === '') {
+                if ($consentAccepted !== true || $consentVersion === '' || $consentHash === '') {
                     throw new ApiProblemException(422, 'CONSENT_REQUIRED', 'consent is required for CLINICAL_COMBO_68.');
+                }
+                if (
+                    $consentVersionExpected !== '' && $consentVersion !== $consentVersionExpected
+                    || $consentHashExpected !== '' && $consentHash !== $consentHashExpected
+                ) {
+                    throw new ApiProblemException(422, 'CONSENT_MISMATCH', 'consent version/hash mismatch.');
                 }
             }
 
@@ -95,6 +104,7 @@ class AttemptStartService
             $answersMeta['consent'] = [
                 'accepted' => $consentAccepted,
                 'version' => $consentVersion,
+                'hash' => $consentHash,
                 'locale' => $consentLocale,
             ];
             $answersSummaryMeta = $answersMeta;
@@ -104,10 +114,16 @@ class AttemptStartService
             $normalizedLocale = $this->sds20PackLoader->normalizeLocale($locale);
             $landing = $this->sds20PackLoader->loadLanding($normalizedLocale, $dirVersion);
 
-            $consentVersion = trim((string) ($dto->consentVersion ?? data_get($landing, 'consent.version', '')));
+            $consentVersionExpected = trim((string) data_get($landing, 'consent.version', ''));
+            $consentHashExpected = trim((string) data_get($landing, 'consent.hash', ''));
+            $consentVersion = trim((string) ($dto->consentVersion ?? $consentVersionExpected));
+            $consentHash = trim((string) ($dto->consentHash ?? $consentHashExpected));
             $consentAccepted = (bool) ($dto->consentAccepted ?? false);
-            if ($consentAccepted !== true || $consentVersion === '') {
+            if ($consentAccepted !== true || $consentVersion === '' || $consentHash === '') {
                 throw new ApiProblemException(422, 'CONSENT_REQUIRED_SDS20', 'consent is required for SDS_20.');
+            }
+            if ($consentVersion !== $consentVersionExpected || $consentHash !== $consentHashExpected) {
+                throw new ApiProblemException(422, 'CONSENT_MISMATCH_SDS20', 'consent version/hash mismatch for SDS_20.');
             }
 
             $disclaimerVersion = trim((string) data_get($landing, 'disclaimer.version', ''));
@@ -124,6 +140,7 @@ class AttemptStartService
             $answersMeta['consent'] = [
                 'accepted' => true,
                 'version' => $consentVersion,
+                'hash' => $consentHash,
                 'locale' => $normalizedLocale,
             ];
             $answersMeta['disclaimer_version_accepted'] = $disclaimerVersion;
@@ -242,12 +259,12 @@ class AttemptStartService
             }
 
             $compiled = $this->bigFivePackLoader->readCompiledJson('questions.compiled.json', $dirVersion);
-            if (!is_array($compiled)) {
+            if (! is_array($compiled)) {
                 $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTIONS_MISSING', $packId, $dirVersion, 'questions.compiled.json');
             }
             $doc = is_array($compiled['questions_doc'] ?? null) ? $compiled['questions_doc'] : [];
             $items = is_array($doc['items'] ?? null) ? $doc['items'] : null;
-            if (!is_array($items)) {
+            if (! is_array($items)) {
                 $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTIONS_INVALID', $packId, $dirVersion, 'questions.compiled.json');
             }
 
@@ -403,5 +420,4 @@ class AttemptStartService
             'max_attempts_per_30_days' => $maxAttempts,
         ];
     }
-
 }

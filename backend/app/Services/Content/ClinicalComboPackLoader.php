@@ -9,31 +9,32 @@ use Illuminate\Support\Facades\File;
 final class ClinicalComboPackLoader
 {
     public const PACK_ID = 'CLINICAL_COMBO_68';
+
     public const PACK_VERSION = 'v1';
 
     public function packRoot(?string $version = null): string
     {
-        return base_path('content_packs/' . self::PACK_ID . '/' . $this->normalizeVersion($version));
+        return base_path('content_packs/'.self::PACK_ID.'/'.$this->normalizeVersion($version));
     }
 
     public function rawDir(?string $version = null): string
     {
-        return $this->packRoot($version) . DIRECTORY_SEPARATOR . 'raw';
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'raw';
     }
 
     public function compiledDir(?string $version = null): string
     {
-        return $this->packRoot($version) . DIRECTORY_SEPARATOR . 'compiled';
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'compiled';
     }
 
     public function rawPath(string $file, ?string $version = null): string
     {
-        return $this->rawDir($version) . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->rawDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     public function compiledPath(string $file, ?string $version = null): string
     {
-        return $this->compiledDir($version) . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->compiledDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     public function hasCompiledFile(string $file, ?string $version = null): bool
@@ -46,7 +47,7 @@ final class ClinicalComboPackLoader
      */
     public function readJson(string $path): ?array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return null;
         }
 
@@ -74,7 +75,7 @@ final class ClinicalComboPackLoader
      */
     public function readCsvWithLines(string $path): array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return [];
         }
 
@@ -91,10 +92,11 @@ final class ClinicalComboPackLoader
             $lineNo++;
             if ($lineNo === 1) {
                 $header = is_array($row) ? array_map(static fn ($v): string => trim((string) $v), $row) : [];
+
                 continue;
             }
 
-            if (!is_array($row) || $header === [] || $row === [null]) {
+            if (! is_array($row) || $header === [] || $row === [null]) {
                 continue;
             }
 
@@ -137,6 +139,7 @@ final class ClinicalComboPackLoader
             if (is_array($doc)) {
                 $resolved = isset($questionsByLocale[$localeResolved]) ? $localeResolved : 'zh-CN';
                 $landing = is_array($compiledLanding['landing'] ?? null) ? $compiledLanding['landing'] : [];
+
                 return [
                     'locale_requested' => $locale,
                     'locale_resolved' => $resolved,
@@ -209,7 +212,7 @@ final class ClinicalComboPackLoader
             $out = [];
             foreach ($index as $qidRaw => $meta) {
                 $qid = (int) $qidRaw;
-                if ($qid <= 0 || !is_array($meta)) {
+                if ($qid <= 0 || ! is_array($meta)) {
                     continue;
                 }
                 $out[$qid] = [
@@ -220,6 +223,7 @@ final class ClinicalComboPackLoader
             }
             if ($out !== []) {
                 ksort($out, SORT_NUMERIC);
+
                 return $out;
             }
         }
@@ -360,14 +364,14 @@ final class ClinicalComboPackLoader
         $unifiedBlocks = [];
         foreach ($unifiedFiles as $file) {
             $path = $this->rawPath($file, $version);
-            if (!is_file($path)) {
+            if (! is_file($path)) {
                 continue;
             }
             $hasUnified = true;
             $doc = $this->readJson($path);
             $rows = is_array($doc['blocks'] ?? null) ? $doc['blocks'] : [];
             foreach ($rows as $row) {
-                if (!is_array($row)) {
+                if (! is_array($row)) {
                     continue;
                 }
                 $normalized = $this->normalizeBlockRow($row);
@@ -396,7 +400,7 @@ final class ClinicalComboPackLoader
             $doc = $this->readJson($this->rawPath($file, $version));
             $blocks = is_array($doc['blocks'] ?? null) ? $doc['blocks'] : [];
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
                 $normalized = $this->normalizeBlockRow($block);
@@ -423,6 +427,8 @@ final class ClinicalComboPackLoader
             $byLocale = is_array($compiled['consent_by_locale'] ?? null) ? $compiled['consent_by_locale'] : [];
             $node = is_array($byLocale[$resolved] ?? null) ? $byLocale[$resolved] : (is_array($byLocale['zh-CN'] ?? null) ? $byLocale['zh-CN'] : []);
             if ($node !== []) {
+                $node = $this->withConsentHash($node);
+
                 return $node + [
                     'locale_requested' => $requested,
                     'locale_resolved' => $resolved,
@@ -488,7 +494,7 @@ final class ClinicalComboPackLoader
     {
         $version = $this->normalizeVersion($version);
         $manifest = $this->readCompiledJson('manifest.json', $version);
-        if (!is_array($manifest)) {
+        if (! is_array($manifest)) {
             return '';
         }
 
@@ -532,7 +538,7 @@ final class ClinicalComboPackLoader
         }
 
         foreach ($sets as $code => $set) {
-            if (!is_array($set)) {
+            if (! is_array($set)) {
                 continue;
             }
             $labels = is_array($set['labels_en'] ?? null) ? $set['labels_en'] : [];
@@ -543,8 +549,8 @@ final class ClinicalComboPackLoader
     }
 
     /**
-     * @param array<string,string> $labels
-     * @param array<string,mixed> $set
+     * @param  array<string,string>  $labels
+     * @param  array<string,mixed>  $set
      * @return list<array{code:string,text:string,score:int}>
      */
     private function buildOptionsFromLabels(array $labels, array $set): array
@@ -563,7 +569,7 @@ final class ClinicalComboPackLoader
     }
 
     /**
-     * @param array<string,mixed> $landing
+     * @param  array<string,mixed>  $landing
      * @return array<string,mixed>
      */
     private function resolveModules(array $landing, string $locale): array
@@ -575,7 +581,7 @@ final class ClinicalComboPackLoader
     }
 
     /**
-     * @param array<string,mixed> $landing
+     * @param  array<string,mixed>  $landing
      */
     private function resolveDisclaimerText(array $landing, string $locale): string
     {
@@ -590,7 +596,7 @@ final class ClinicalComboPackLoader
     }
 
     /**
-     * @param array<string,mixed> $raw
+     * @param  array<string,mixed>  $raw
      * @return array<string,mixed>
      */
     private function localizeConsentDoc(array $raw, string $requested, string $resolved): array
@@ -613,11 +619,61 @@ final class ClinicalComboPackLoader
             'checkboxes' => array_values(array_filter(array_map(static fn ($v): string => trim((string) $v), $checkboxes), static fn (string $v): bool => $v !== '')),
             'primary_button' => (string) ($primaryMap[$resolved] ?? ($primaryMap['zh-CN'] ?? '')),
             'secondary_button' => (string) ($secondaryMap[$resolved] ?? ($secondaryMap['zh-CN'] ?? '')),
+            'hash' => $this->resolveConsentHash([
+                'version' => (string) ($raw['version'] ?? ''),
+                'locale_resolved' => $resolved,
+                'title' => (string) ($titleMap[$resolved] ?? ($titleMap['zh-CN'] ?? '')),
+                'checkboxes' => $checkboxes,
+                'primary_button' => (string) ($primaryMap[$resolved] ?? ($primaryMap['zh-CN'] ?? '')),
+                'secondary_button' => (string) ($secondaryMap[$resolved] ?? ($secondaryMap['zh-CN'] ?? '')),
+            ]),
         ];
     }
 
     /**
-     * @param array<string,mixed> $raw
+     * @param  array<string,mixed>  $node
+     * @return array<string,mixed>
+     */
+    private function withConsentHash(array $node): array
+    {
+        $node['hash'] = $this->resolveConsentHash($node);
+
+        return $node;
+    }
+
+    /**
+     * @param  array<string,mixed>  $node
+     */
+    private function resolveConsentHash(array $node): string
+    {
+        $hash = trim((string) ($node['hash'] ?? ''));
+        if ($hash !== '') {
+            return $hash;
+        }
+
+        $checkboxes = [];
+        foreach ((array) ($node['checkboxes'] ?? []) as $item) {
+            $value = trim((string) $item);
+            if ($value !== '') {
+                $checkboxes[] = $value;
+            }
+        }
+
+        $payload = [
+            'version' => trim((string) ($node['version'] ?? '')),
+            'locale_resolved' => trim((string) ($node['locale_resolved'] ?? '')),
+            'title' => trim((string) ($node['title'] ?? '')),
+            'checkboxes' => $checkboxes,
+            'primary_button' => trim((string) ($node['primary_button'] ?? '')),
+            'secondary_button' => trim((string) ($node['secondary_button'] ?? '')),
+        ];
+        $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return hash('sha256', is_string($json) ? $json : '{}');
+    }
+
+    /**
+     * @param  array<string,mixed>  $raw
      * @return array<string,mixed>
      */
     private function localizePrivacyDoc(array $raw, string $requested, string $resolved): array
@@ -640,7 +696,7 @@ final class ClinicalComboPackLoader
     }
 
     /**
-     * @param array<string,mixed> $doc
+     * @param  array<string,mixed>  $doc
      * @return array<string,mixed>
      */
     private function resolveCrisisResources(array $doc, string $requestedLocale, string $resolvedLocale, string $requestedRegion): array
@@ -674,7 +730,7 @@ final class ClinicalComboPackLoader
 
         $resources = [];
         foreach ($rows as $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             $resources[] = [
@@ -696,7 +752,7 @@ final class ClinicalComboPackLoader
     }
 
     /**
-     * @param array<string,mixed> $row
+     * @param  array<string,mixed>  $row
      * @return array<string,mixed>|null
      */
     private function normalizeBlockRow(array $row): ?array
