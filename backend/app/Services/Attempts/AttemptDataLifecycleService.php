@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Attempts;
 
+use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class AttemptDataLifecycleService
 {
@@ -53,13 +53,13 @@ final class AttemptDataLifecycleService
                 ->where('attempt_id', $attemptId)
                 ->delete();
 
-            if (Schema::hasTable('shares')) {
+            if (SchemaBaseline::hasTable('shares')) {
                 $counts['shares_deleted'] = DB::table('shares')
                     ->where('attempt_id', $attemptId)
                     ->delete();
             }
 
-            if (Schema::hasTable('report_jobs')) {
+            if (SchemaBaseline::hasTable('report_jobs')) {
                 $counts['report_jobs_deleted'] = DB::table('report_jobs')
                     ->where('attempt_id', $attemptId)
                     ->delete();
@@ -73,23 +73,23 @@ final class AttemptDataLifecycleService
                 'updated_at' => now(),
             ];
 
-            if (Schema::hasColumn('attempts', 'answers_json')) {
+            if (SchemaBaseline::hasColumn('attempts', 'answers_json')) {
                 $updates['answers_json'] = json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }
-            if (Schema::hasColumn('attempts', 'answers_summary_json')) {
+            if (SchemaBaseline::hasColumn('attempts', 'answers_summary_json')) {
                 $updates['answers_summary_json'] = json_encode([
                     'stage' => 'purged',
                     'reason' => (string) ($context['reason'] ?? 'user_request'),
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }
-            if (Schema::hasColumn('attempts', 'calculation_snapshot_json')) {
+            if (SchemaBaseline::hasColumn('attempts', 'calculation_snapshot_json')) {
                 $updates['calculation_snapshot_json'] = json_encode([
                     'purged' => true,
                     'purged_at' => now()->toIso8601String(),
                     'reason' => (string) ($context['reason'] ?? 'user_request'),
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }
-            if (Schema::hasColumn('attempts', 'norm_version')) {
+            if (SchemaBaseline::hasColumn('attempts', 'norm_version')) {
                 $updates['norm_version'] = null;
             }
 
@@ -98,7 +98,7 @@ final class AttemptDataLifecycleService
                 ->where('org_id', $orgId)
                 ->update($updates);
 
-            if (Schema::hasTable('data_lifecycle_requests')) {
+            if (SchemaBaseline::hasTable('data_lifecycle_requests')) {
                 DB::table('data_lifecycle_requests')->insert([
                     'org_id' => $orgId,
                     'request_type' => 'attempt_purge',
@@ -129,4 +129,3 @@ final class AttemptDataLifecycleService
         ];
     }
 }
-
