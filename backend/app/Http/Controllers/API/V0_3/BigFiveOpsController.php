@@ -702,7 +702,7 @@ final class BigFiveOpsController extends Controller
                     'norms_version' => $normsVersion,
                     'region' => $region,
                     'locale' => $locale,
-                    'error' => $e->getMessage(),
+                    'error_message' => $e->getMessage(),
                 ]
             );
 
