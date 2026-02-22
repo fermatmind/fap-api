@@ -52,16 +52,16 @@ final class ContentPackV2Publisher
         $normsVersion = trim((string) ($manifest['norms_version'] ?? data_get($manifest, 'norms.norms_version', '')));
 
         $releaseId = (string) Str::uuid();
-        $storagePath = 'content_packs_v2/'.$packId.'/'.$packVersion.'/'.$releaseId;
+        $pathHash = $manifestHash !== '' ? $manifestHash : $releaseId;
+        $storagePath = 'private/packs_v2/'.$packId.'/'.$packVersion.'/'.$pathHash;
         $targetRoot = storage_path('app/'.$storagePath);
-        $targetCompiledDir = $targetRoot.'/compiled';
 
         if (File::isDirectory($targetRoot)) {
             File::deleteDirectory($targetRoot);
         }
 
-        File::ensureDirectoryExists(dirname($targetCompiledDir));
-        if (! File::copyDirectory($sourceCompiledDir, $targetCompiledDir)) {
+        File::ensureDirectoryExists(dirname($targetRoot));
+        if (! File::copyDirectory($sourceCompiledDir, $targetRoot)) {
             throw new RuntimeException('COPY_COMPILED_FAILED');
         }
 

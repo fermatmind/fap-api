@@ -31,6 +31,7 @@ use App\Console\Commands\OpsDeployEvent;
 use App\Console\Commands\OpsHealthzSnapshot;
 use App\Console\Commands\Packs2Activate;
 use App\Console\Commands\Packs2List;
+use App\Console\Commands\Packs2MigrateStoragePath;
 use App\Console\Commands\Packs2Publish;
 use App\Console\Commands\Packs2Rollback;
 use App\Console\Commands\PacksPublish;
@@ -39,6 +40,7 @@ use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
+use App\Console\Commands\StorageInventory;
 use App\Console\Commands\StorageMigrateLegacyArtifacts;
 use App\Console\Commands\StoragePrune;
 use App\Console\Commands\SyncScaleSlugs;
@@ -91,7 +93,9 @@ class Kernel extends ConsoleKernel
         Packs2Activate::class,
         Packs2Rollback::class,
         Packs2List::class,
+        Packs2MigrateStoragePath::class,
         StoragePrune::class,
+        StorageInventory::class,
         StorageMigrateLegacyArtifacts::class,
         QualityDailySummary::class,
         CiScaleImpact::class,
@@ -107,7 +111,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('fap:self-check')->dailyAt('03:10');
         // $schedule->command('fap:validate-report --attempt=...')->hourly();
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
+        $schedule->command('storage:prune --execute')->dailyAt('03:10')->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
+        $schedule->command('storage:inventory --json')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->command('norms:big5:roll --window_days=365')->monthlyOn(1, '04:30')->withoutOverlapping();
         $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();

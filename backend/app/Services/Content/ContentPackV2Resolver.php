@@ -81,26 +81,80 @@ final class ContentPackV2Resolver
             return null;
         }
 
-        $normalized = str_replace('\\', '/', $storagePath);
-        if (str_starts_with($normalized, '/')) {
-            $root = rtrim($normalized, '/');
-        } else {
-            $relative = ltrim($normalized, '/');
-            if (str_starts_with($relative, 'app/')) {
-                $relative = substr($relative, 4);
+        $roots = [$this->resolveStorageRoot($storagePath)];
+        foreach ($this->legacyFallbackRoots($release, $storagePath) as $legacyRoot) {
+            $roots[] = $legacyRoot;
+        }
+
+        $roots = array_values(array_unique(array_filter($roots, static fn (string $root): bool => $root !== '')));
+        foreach ($roots as $root) {
+            $compiledDir = $root;
+            if (is_dir($root.'/compiled')) {
+                $compiledDir = $root.'/compiled';
             }
-            $root = rtrim(storage_path('app/'.$relative), '/');
+
+            if (is_file($compiledDir.'/manifest.json')) {
+                return $compiledDir;
+            }
         }
 
-        $compiledDir = $root;
-        if (is_dir($root.'/compiled')) {
-            $compiledDir = $root.'/compiled';
+        return null;
+    }
+
+    private function resolveStorageRoot(string $storagePath): string
+    {
+        $normalized = str_replace('\\', '/', trim($storagePath));
+        if ($normalized === '') {
+            return '';
         }
 
-        if (! is_file($compiledDir.'/manifest.json')) {
-            return null;
+        if (str_starts_with($normalized, '/')) {
+            return rtrim($normalized, '/');
         }
 
-        return $compiledDir;
+        $relative = ltrim($normalized, '/');
+        if (str_starts_with($relative, 'app/')) {
+            $relative = substr($relative, 4);
+        }
+
+        return rtrim(storage_path('app/'.$relative), '/');
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function legacyFallbackRoots(object $release, string $storagePath): array
+    {
+        $normalizedStoragePath = str_replace('\\', '/', trim($storagePath));
+        $isNewPath = str_contains($normalizedStoragePath, 'private/packs_v2/');
+        if (! $isNewPath) {
+            return [];
+        }
+
+        $packId = strtoupper(trim((string) ($release->to_pack_id ?? '')));
+        $packVersion = trim((string) ($release->pack_version ?? $release->dir_alias ?? ''));
+        if ($packId === '' || $packVersion === '') {
+            return [];
+        }
+
+        $releaseId = trim((string) ($release->id ?? ''));
+        $manifestHash = strtolower(trim((string) ($release->manifest_hash ?? '')));
+
+        $candidates = [];
+        if ($manifestHash !== '') {
+            $candidates[] = storage_path('app/content_packs_v2/'.$packId.'/'.$packVersion.'/'.$manifestHash);
+        }
+        if ($releaseId !== '') {
+            $candidates[] = storage_path('app/content_packs_v2/'.$packId.'/'.$packVersion.'/'.$releaseId);
+        }
+
+        if (preg_match('#private/packs_v2/[^/]+/[^/]+/([^/]+)$#', trim($normalizedStoragePath, '/'), $m) === 1) {
+            $storageLeaf = trim((string) ($m[1] ?? ''));
+            if ($storageLeaf !== '') {
+                $candidates[] = storage_path('app/content_packs_v2/'.$packId.'/'.$packVersion.'/'.$storageLeaf);
+            }
+        }
+
+        return array_values(array_unique($candidates));
     }
 }
