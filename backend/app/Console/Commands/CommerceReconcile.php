@@ -20,6 +20,7 @@ final class CommerceReconcile extends Command
     public function handle(): int
     {
         $tz = 'Asia/Shanghai';
+        $storageTz = (string) config('app.timezone', 'UTC');
         $orgId = max(0, (int) $this->option('org_id'));
         $date = trim((string) ($this->option('date') ?? ''));
         if ($date === '') {
@@ -27,28 +28,30 @@ final class CommerceReconcile extends Command
         }
 
         try {
-            $start = Carbon::createFromFormat('Y-m-d', $date, $tz)->startOfDay();
+            $startAtBusinessTz = Carbon::createFromFormat('Y-m-d', $date, $tz)->startOfDay();
         } catch (\Throwable) {
             $this->error('Invalid --date, expected YYYY-MM-DD.');
 
             return self::FAILURE;
         }
-        $end = (clone $start)->addDay();
+        $endAtBusinessTz = (clone $startAtBusinessTz)->addDay();
+        $startAtStorageTz = (clone $startAtBusinessTz)->setTimezone($storageTz);
+        $endAtStorageTz = (clone $endAtBusinessTz)->setTimezone($storageTz);
 
         $paidOrders = DB::table('orders')
             ->select(['order_no', 'status'])
             ->where('org_id', $orgId)
             ->whereNotNull('order_no')
-            ->where(function ($query) use ($start, $end): void {
-                $query->where(function ($q) use ($start, $end): void {
+            ->where(function ($query) use ($startAtStorageTz, $endAtStorageTz): void {
+                $query->where(function ($q) use ($startAtStorageTz, $endAtStorageTz): void {
                     $q->whereNotNull('paid_at')
-                        ->where('paid_at', '>=', $start)
-                        ->where('paid_at', '<', $end);
-                })->orWhere(function ($q) use ($start, $end): void {
+                        ->where('paid_at', '>=', $startAtStorageTz)
+                        ->where('paid_at', '<', $endAtStorageTz);
+                })->orWhere(function ($q) use ($startAtStorageTz, $endAtStorageTz): void {
                     $q->whereNull('paid_at')
                         ->whereIn('status', ['paid', 'fulfilled', 'refunded', 'chargeback'])
-                        ->where('created_at', '>=', $start)
-                        ->where('created_at', '<', $end);
+                        ->where('created_at', '>=', $startAtStorageTz)
+                        ->where('created_at', '<', $endAtStorageTz);
                 });
             })
             ->orderBy('order_no')
@@ -100,8 +103,8 @@ final class CommerceReconcile extends Command
             ->where('org_id', $orgId)
             ->whereNotNull('order_no')
             ->where('status', 'active')
-            ->where('created_at', '>=', $start)
-            ->where('created_at', '<', $end)
+            ->where('created_at', '>=', $startAtStorageTz)
+            ->where('created_at', '<', $endAtStorageTz)
             ->groupBy('order_no')
             ->pluck('order_no')
             ->map(static fn (mixed $v): string => (string) $v)
@@ -123,8 +126,8 @@ final class CommerceReconcile extends Command
             'timezone' => $tz,
             'org_id' => $orgId,
             'window' => [
-                'start' => $start->toDateTimeString(),
-                'end' => $end->toDateTimeString(),
+                'start' => $startAtBusinessTz->toDateTimeString(),
+                'end' => $endAtBusinessTz->toDateTimeString(),
             ],
             'paid_count' => $paidCount,
             'unlocked_count' => $unlockedCount,
@@ -177,4 +180,3 @@ final class CommerceReconcile extends Command
         return in_array($normalized, ['1', 'true', 'yes', 'on'], true);
     }
 }
-
