@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\QuestionsService;
+use App\Services\Content\Sds20PackLoader;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
@@ -72,7 +73,8 @@ class ScalesController extends Controller
         string $scale_code,
         QuestionsService $questionsService,
         BigFivePackLoader $bigFivePackLoader,
-        ClinicalComboPackLoader $clinicalPackLoader
+        ClinicalComboPackLoader $clinicalPackLoader,
+        Sds20PackLoader $sds20PackLoader
     ): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
@@ -230,6 +232,49 @@ class ScalesController extends Controller
                     'consent' => $consent,
                     'privacy_addendum' => $privacyAddendum,
                     'crisis_resources' => $crisisResources,
+                ],
+            ]);
+        }
+
+        if ($code === 'SDS_20') {
+            $version = (string) ($row['default_dir_version'] ?? Sds20PackLoader::PACK_VERSION);
+            $doc = $sds20PackLoader->loadQuestionsDoc($locale, $version);
+            $localeResolved = (string) ($doc['locale_resolved'] ?? $sds20PackLoader->normalizeLocale($locale));
+            $landing = $sds20PackLoader->loadLanding($localeResolved, $version);
+            $sourceCatalog = $sds20PackLoader->loadSourceCatalog($version);
+            $optionsFormat = $sds20PackLoader->loadOptionsFormat($localeResolved, $version);
+
+            return response()->json([
+                'ok' => true,
+                'scale_code' => $code,
+                'region' => $region,
+                'locale' => $localeResolved,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'content_package_version' => $version,
+                'questions' => [
+                    'schema' => 'fap.questions.v1',
+                    'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
+                ],
+                'options' => [
+                    'format' => $optionsFormat,
+                ],
+                'meta' => [
+                    'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
+                    'locale_resolved' => $localeResolved,
+                    'consent' => [
+                        'required' => (bool) data_get($landing, 'consent.required', true),
+                        'version' => (string) data_get($landing, 'consent.version', ''),
+                        'text' => (string) data_get($landing, 'consent.text', ''),
+                    ],
+                    'disclaimer' => [
+                        'version' => (string) data_get($landing, 'disclaimer.version', ''),
+                        'hash' => (string) data_get($landing, 'disclaimer.hash', ''),
+                        'text' => (string) data_get($landing, 'disclaimer.text', ''),
+                    ],
+                    'source' => [
+                        'items' => $sourceCatalog,
+                    ],
                 ],
             ]);
         }

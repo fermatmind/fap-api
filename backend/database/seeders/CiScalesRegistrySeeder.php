@@ -169,6 +169,35 @@ final class CiScalesRegistrySeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
+            [
+                'org_id' => 0,
+                'code' => 'SDS_20',
+                'primary_slug' => 'sds-20',
+                'slugs_json' => json_encode(['sds-20', 'zung-self-rating-depression-scale'], JSON_UNESCAPED_UNICODE),
+                'driver_type' => 'sds_20',
+                'assessment_driver' => 'sds_20',
+                'default_pack_id' => 'SDS_20',
+                'default_region' => $defaultRegion,
+                'default_locale' => $defaultLocale,
+                'default_dir_version' => 'v1',
+                'capabilities_json' => json_encode([
+                    'assets' => false,
+                    'questions' => true,
+                    'enabled_in_prod' => true,
+                    'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                    'rollout_ratio' => 1.0,
+                    'paywall_mode' => 'full',
+                ], JSON_UNESCAPED_UNICODE),
+                'commercial_json' => json_encode([
+                    'report_benefit_code' => 'SDS_20_FULL',
+                    'credit_benefit_code' => 'SDS_20_FULL',
+                    'report_unlock_sku' => 'SKU_SDS_20_FULL_299',
+                ], JSON_UNESCAPED_UNICODE),
+                'is_public' => 1,
+                'is_active' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
         ];
 
         DB::table('scales_registry')->upsert(
@@ -191,6 +220,6 @@ final class CiScalesRegistrySeeder extends Seeder
             ]
         );
 
-        $this->command?->info('CiScalesRegistrySeeder: upserted 6 scales.');
+        $this->command?->info('CiScalesRegistrySeeder: upserted 7 scales.');
     }
 }

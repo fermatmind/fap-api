@@ -9,6 +9,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\ContentPacksIndex;
+use App\Services\Content\Sds20PackLoader;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
@@ -24,6 +25,7 @@ class AttemptStartService
         private ContentPacksIndex $packsIndex,
         private BigFivePackLoader $bigFivePackLoader,
         private ClinicalComboPackLoader $clinicalPackLoader,
+        private Sds20PackLoader $sds20PackLoader,
         private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
@@ -96,6 +98,39 @@ class AttemptStartService
                 'locale' => $consentLocale,
             ];
             $answersSummaryMeta = $answersMeta;
+        }
+
+        if (strtoupper($scaleCode) === 'SDS_20') {
+            $normalizedLocale = $this->sds20PackLoader->normalizeLocale($locale);
+            $landing = $this->sds20PackLoader->loadLanding($normalizedLocale, $dirVersion);
+
+            $consentVersion = trim((string) ($dto->consentVersion ?? data_get($landing, 'consent.version', '')));
+            $consentAccepted = (bool) ($dto->consentAccepted ?? false);
+            if ($consentAccepted !== true || $consentVersion === '') {
+                throw new ApiProblemException(422, 'CONSENT_REQUIRED_SDS20', 'consent is required for SDS_20.');
+            }
+
+            $disclaimerVersion = trim((string) data_get($landing, 'disclaimer.version', ''));
+            if ($disclaimerVersion === '') {
+                $disclaimerVersion = 'SDS_20_'.$dirVersion;
+            }
+            $disclaimerHash = trim((string) data_get($landing, 'disclaimer.hash', ''));
+            $disclaimerText = trim((string) data_get($landing, 'disclaimer.text', ''));
+            if ($disclaimerHash === '') {
+                $disclaimerHash = hash('sha256', $disclaimerVersion.'|'.$disclaimerText);
+            }
+
+            $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
+            $answersMeta['consent'] = [
+                'accepted' => true,
+                'version' => $consentVersion,
+                'locale' => $normalizedLocale,
+            ];
+            $answersMeta['disclaimer_version_accepted'] = $disclaimerVersion;
+            $answersMeta['disclaimer_hash'] = $disclaimerHash;
+            $answersMeta['disclaimer_locale'] = $normalizedLocale;
+            $answersSummaryMeta = $answersMeta;
+            $locale = $normalizedLocale;
         }
 
         if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
@@ -229,6 +264,15 @@ class AttemptStartService
             return count($items);
         }
 
+        if (strtoupper($scaleCode) === 'SDS_20') {
+            $count = $this->sds20PackLoader->getQuestionCount($dirVersion);
+            if ($count <= 0) {
+                $this->logAndThrowContentPackError('SDS20_QUESTIONS_MISSING', $packId, $dirVersion, 'questions_sds20_bilingual.csv');
+            }
+
+            return $count;
+        }
+
         $questionsPath = '';
 
         $found = $this->packsIndex->find($packId, $dirVersion);
@@ -308,6 +352,10 @@ class AttemptStartService
     private function resolveContentPackageVersion(string $packId, string $dirVersion): string
     {
         if (strtoupper($packId) === 'CLINICAL_COMBO_68') {
+            return $dirVersion;
+        }
+
+        if (strtoupper($packId) === 'SDS_20') {
             return $dirVersion;
         }
 
