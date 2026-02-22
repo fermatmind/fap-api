@@ -77,6 +77,12 @@ class AttemptSubmitService
 
         $answersDigest = $this->computeAnswersDigest($mergedAnswers, $scaleCode, $packId, $dirVersion);
 
+        $attemptSummary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
+        $attemptMeta = is_array($attemptSummary['meta'] ?? null) ? $attemptSummary['meta'] : [];
+        $packReleaseManifestHash = trim((string) ($attemptMeta['pack_release_manifest_hash'] ?? ''));
+        $policyHash = trim((string) ($attemptMeta['policy_hash'] ?? ''));
+        $engineVersion = trim((string) ($attemptMeta['engine_version'] ?? ''));
+
         $scoreContext = [
             'duration_ms' => $durationMs,
             'started_at' => $attempt->started_at,
@@ -90,6 +96,9 @@ class AttemptSubmitService
             'anon_id' => $actorAnonId,
             'user_id' => $actorUserId,
             'validity_items' => $validityItems,
+            'content_manifest_hash' => $packReleaseManifestHash,
+            'policy_hash' => $policyHash,
+            'engine_version' => $engineVersion,
         ];
 
         $scored = $this->assessmentRunner->run(

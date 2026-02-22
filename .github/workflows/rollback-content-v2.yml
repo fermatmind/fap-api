@@ -1,0 +1,66 @@
+name: Rollback Content V2
+
+on:
+  workflow_dispatch:
+    inputs:
+      pack:
+        description: Pack id, e.g. BIG5_OCEAN / CLINICAL_COMBO_68 / SDS_20
+        required: true
+        type: string
+      pack_version:
+        description: Pack version, e.g. v1
+        required: true
+        default: v1
+        type: string
+      to_release_id:
+        description: Release id to rollback to
+        required: true
+        type: string
+
+jobs:
+  rollback-content-v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      APP_ENV: ci
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /tmp/fap-ci.sqlite
+      QUEUE_CONNECTION: sync
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Prepare app env
+        working-directory: backend
+        run: |
+          if [ ! -f .env ]; then cp .env.example .env; fi
+          php artisan key:generate --force || true
+          php artisan migrate --force
+
+      - name: Rollback packs2 activation
+        working-directory: backend
+        run: |
+          php artisan packs2:rollback \
+            --pack="${{ inputs.pack }}" \
+            --pack-version="${{ inputs.pack_version }}" \
+            --to_release_id="${{ inputs.to_release_id }}"
+
+      - name: List packs2 releases
+        working-directory: backend
+        run: |
+          php artisan packs2:list \
+            --pack="${{ inputs.pack }}" \
+            --pack-version="${{ inputs.pack_version }}"

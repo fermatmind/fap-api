@@ -173,6 +173,16 @@ class AttemptStartService
             $answersSummaryMeta = $answersMeta;
         }
 
+        $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
+        $manifestHash = $this->resolveScaleManifestHash($scaleCode, $dirVersion);
+        if ($manifestHash !== '') {
+            $answersMeta['pack_release_manifest_hash'] = $manifestHash;
+        }
+        if (! array_key_exists('engine_version', $answersMeta)) {
+            $answersMeta['engine_version'] = $this->resolveScaleEngineVersion($scaleCode);
+        }
+        $answersSummaryMeta = $answersMeta;
+
         $clientPlatform = (string) ($dto->clientPlatform ?? 'unknown');
         $clientVersion = (string) ($dto->clientVersion ?? '');
         $channel = (string) ($dto->channel ?? '');
@@ -346,6 +356,26 @@ class AttemptStartService
         }
 
         return count($items);
+    }
+
+    private function resolveScaleManifestHash(string $scaleCode, string $dirVersion): string
+    {
+        return match (strtoupper($scaleCode)) {
+            'BIG5_OCEAN' => $this->bigFivePackLoader->resolveManifestHash($dirVersion),
+            'CLINICAL_COMBO_68' => $this->clinicalPackLoader->resolveManifestHash($dirVersion),
+            'SDS_20' => $this->sds20PackLoader->resolveManifestHash($dirVersion),
+            default => '',
+        };
+    }
+
+    private function resolveScaleEngineVersion(string $scaleCode): string
+    {
+        return match (strtoupper($scaleCode)) {
+            'BIG5_OCEAN' => 'v3',
+            'CLINICAL_COMBO_68' => 'v1.0_2026',
+            'SDS_20' => 'v2.0_Factor_Logic',
+            default => '',
+        };
     }
 
     private function logAndThrowContentPackError(

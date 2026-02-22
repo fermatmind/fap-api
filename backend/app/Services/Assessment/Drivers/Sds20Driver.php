@@ -14,8 +14,7 @@ final class Sds20Driver implements DriverInterface
     public function __construct(
         private readonly Sds20PackLoader $packLoader,
         private readonly Sds20ScorerV2FactorLogic $scorer,
-    ) {
-    }
+    ) {}
 
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
@@ -31,10 +30,14 @@ final class Sds20Driver implements DriverInterface
         }
 
         $answersById = $this->normalizeAnswers($answers);
+        $manifestHash = trim((string) ($ctx['content_manifest_hash'] ?? ''));
+        if ($manifestHash === '') {
+            $manifestHash = $this->packLoader->resolveManifestHash($version);
+        }
         $ctxMerged = array_merge($ctx, [
             'pack_id' => (string) ($ctx['pack_id'] ?? Sds20PackLoader::PACK_ID),
             'dir_version' => $version,
-            'content_manifest_hash' => $this->packLoader->resolveManifestHash($version),
+            'content_manifest_hash' => $manifestHash,
             'country' => (string) ($ctx['country'] ?? ($ctx['region'] ?? '')),
             'gender' => (string) ($ctx['gender'] ?? 'ALL'),
             'age_band' => (string) ($ctx['age_band'] ?? ''),
@@ -66,7 +69,7 @@ final class Sds20Driver implements DriverInterface
     }
 
     /**
-     * @param array<int|string,mixed> $answers
+     * @param  array<int|string,mixed>  $answers
      * @return array<int,mixed>
      */
     private function normalizeAnswers(array $answers): array
@@ -80,7 +83,7 @@ final class Sds20Driver implements DriverInterface
         $isList = array_keys($answers) === range(0, count($answers) - 1);
         if ($isList) {
             foreach ($answers as $answer) {
-                if (!is_array($answer)) {
+                if (! is_array($answer)) {
                     continue;
                 }
 
@@ -115,6 +118,7 @@ final class Sds20Driver implements DriverInterface
 
             if (is_array($value)) {
                 $out[$qid] = $value['code'] ?? ($value['value'] ?? $value['answer'] ?? null);
+
                 continue;
             }
 

@@ -12,6 +12,10 @@ final class ClinicalComboPackLoader
 
     public const PACK_VERSION = 'v1';
 
+    public function __construct(
+        private ?ContentPackV2Resolver $v2Resolver = null,
+    ) {}
+
     public function packRoot(?string $version = null): string
     {
         return base_path('content_packs/'.self::PACK_ID.'/'.$this->normalizeVersion($version));
@@ -24,6 +28,12 @@ final class ClinicalComboPackLoader
 
     public function compiledDir(?string $version = null): string
     {
+        $version = $this->normalizeVersion($version);
+        $activePath = $this->v2Resolver?->resolveActiveCompiledPath(self::PACK_ID, $version);
+        if (is_string($activePath) && $activePath !== '') {
+            return $activePath;
+        }
+
         return $this->packRoot($version).DIRECTORY_SEPARATOR.'compiled';
     }
 

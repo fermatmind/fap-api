@@ -14,8 +14,7 @@ final class ClinicalCombo68Driver implements DriverInterface
     public function __construct(
         private readonly ClinicalComboPackLoader $packLoader,
         private readonly ClinicalCombo68ScorerV1 $scorer,
-    ) {
-    }
+    ) {}
 
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
@@ -33,10 +32,14 @@ final class ClinicalCombo68Driver implements DriverInterface
         }
 
         $answersById = $this->normalizeAnswers($answers);
+        $manifestHash = trim((string) ($ctx['content_manifest_hash'] ?? ''));
+        if ($manifestHash === '') {
+            $manifestHash = $this->packLoader->resolveManifestHash($version);
+        }
         $ctxMerged = array_merge($ctx, [
             'pack_id' => (string) ($ctx['pack_id'] ?? ClinicalComboPackLoader::PACK_ID),
             'dir_version' => $version,
-            'content_manifest_hash' => $this->packLoader->resolveManifestHash($version),
+            'content_manifest_hash' => $manifestHash,
         ]);
 
         $dto = $this->scorer->score($answersById, $questionIndex, $optionSets, $policy, $ctxMerged);
@@ -80,7 +83,7 @@ final class ClinicalCombo68Driver implements DriverInterface
     }
 
     /**
-     * @param array<int,mixed> $answers
+     * @param  array<int,mixed>  $answers
      * @return array<int,mixed>
      */
     private function normalizeAnswers(array $answers): array
@@ -88,7 +91,7 @@ final class ClinicalCombo68Driver implements DriverInterface
         $out = [];
 
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
 

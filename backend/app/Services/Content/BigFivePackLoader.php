@@ -9,33 +9,44 @@ use Illuminate\Support\Facades\File;
 final class BigFivePackLoader
 {
     public const PACK_ID = 'BIG5_OCEAN';
+
     public const PACK_VERSION = 'v1';
+
+    public function __construct(
+        private ?ContentPackV2Resolver $v2Resolver = null,
+    ) {}
 
     public function packRoot(?string $version = null): string
     {
         $version = $this->normalizeVersion($version);
 
-        return base_path('content_packs/' . self::PACK_ID . '/' . $version);
+        return base_path('content_packs/'.self::PACK_ID.'/'.$version);
     }
 
     public function rawDir(?string $version = null): string
     {
-        return $this->packRoot($version) . DIRECTORY_SEPARATOR . 'raw';
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'raw';
     }
 
     public function compiledDir(?string $version = null): string
     {
-        return $this->packRoot($version) . DIRECTORY_SEPARATOR . 'compiled';
+        $version = $this->normalizeVersion($version);
+        $activePath = $this->v2Resolver?->resolveActiveCompiledPath(self::PACK_ID, $version);
+        if (is_string($activePath) && $activePath !== '') {
+            return $activePath;
+        }
+
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'compiled';
     }
 
     public function rawPath(string $file, ?string $version = null): string
     {
-        return $this->rawDir($version) . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->rawDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     public function compiledPath(string $file, ?string $version = null): string
     {
-        return $this->compiledDir($version) . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->compiledDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     /**
@@ -43,7 +54,7 @@ final class BigFivePackLoader
      */
     public function readCsvWithLines(string $path): array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return [];
         }
 
@@ -59,10 +70,11 @@ final class BigFivePackLoader
             $lineNo++;
             if ($lineNo === 1) {
                 $header = is_array($row) ? array_map(static fn ($v): string => trim((string) $v), $row) : [];
+
                 continue;
             }
 
-            if (!is_array($row) || $header === [] || $row === [null]) {
+            if (! is_array($row) || $header === [] || $row === [null]) {
                 continue;
             }
 
@@ -90,7 +102,7 @@ final class BigFivePackLoader
      */
     public function readJson(string $path): ?array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return null;
         }
 
@@ -136,7 +148,7 @@ final class BigFivePackLoader
         }
 
         $compiledFull = $this->readCompiledJson('questions.compiled.json', $version);
-        if (!is_array($compiledFull)) {
+        if (! is_array($compiledFull)) {
             return null;
         }
 
