@@ -35,6 +35,10 @@ final class Sds20Driver implements DriverInterface
             'pack_id' => (string) ($ctx['pack_id'] ?? Sds20PackLoader::PACK_ID),
             'dir_version' => $version,
             'content_manifest_hash' => $this->packLoader->resolveManifestHash($version),
+            'country' => (string) ($ctx['country'] ?? ($ctx['region'] ?? '')),
+            'gender' => (string) ($ctx['gender'] ?? 'ALL'),
+            'age_band' => (string) ($ctx['age_band'] ?? ''),
+            'age' => isset($ctx['age']) ? (int) $ctx['age'] : 0,
         ]);
 
         $dto = $this->scorer->score($answersById, $questionIndex, $policy, $ctxMerged);

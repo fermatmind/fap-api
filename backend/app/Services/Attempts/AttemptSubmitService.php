@@ -302,19 +302,32 @@ class AttemptSubmitService
                 $versionSnapshot = is_array($normed['version_snapshot'] ?? null)
                     ? $normed['version_snapshot']
                     : [];
+                $normsNode = is_array($normed['norms'] ?? null) ? $normed['norms'] : [];
 
                 $snapshot = $locked->calculation_snapshot_json;
                 if (!is_array($snapshot)) {
                     $snapshot = [];
                 }
 
+                $normsVersion = trim((string) ($normsNode['norms_version'] ?? ''));
+                if ($normsVersion !== '') {
+                    $locked->norm_version = $normsVersion;
+                }
+
                 $snapshot['sds_20'] = [
                     'pack_id' => (string) ($versionSnapshot['pack_id'] ?? $packId),
                     'pack_version' => (string) ($versionSnapshot['pack_version'] ?? $dirVersion),
                     'policy_version' => (string) ($versionSnapshot['policy_version'] ?? ''),
+                    'policy_hash' => (string) ($versionSnapshot['policy_hash'] ?? ''),
                     'engine_version' => (string) ($versionSnapshot['engine_version'] ?? data_get($normed, 'engine_version', 'v2.0_Factor_Logic')),
                     'scoring_spec_version' => (string) ($versionSnapshot['scoring_spec_version'] ?? $scoringSpecVersion),
                     'content_manifest_hash' => (string) ($versionSnapshot['content_manifest_hash'] ?? ''),
+                    'norms' => [
+                        'status' => strtoupper(trim((string) ($normsNode['status'] ?? 'MISSING'))),
+                        'group_id' => (string) ($normsNode['group_id'] ?? ''),
+                        'norms_version' => $normsVersion,
+                        'source_id' => (string) ($normsNode['source_id'] ?? ''),
+                    ],
                 ];
                 $snapshot['quality'] = is_array($normed['quality'] ?? null) ? $normed['quality'] : ($snapshot['quality'] ?? []);
                 $locked->calculation_snapshot_json = $snapshot;

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Assessment\Scorers;
 
+use App\Services\Assessment\Norms\SdsNormGroupResolver;
+
 final class Sds20ScorerV2FactorLogic
 {
     private const QUESTION_COUNT = 20;
@@ -12,6 +14,11 @@ final class Sds20ScorerV2FactorLogic
      * @var list<string>
      */
     private const ALLOWED_CODES = ['A', 'B', 'C', 'D'];
+
+    public function __construct(
+        private readonly SdsNormGroupResolver $normResolver,
+    ) {
+    }
 
     /**
      * @param array<int|string,mixed> $answersByQuestionId
@@ -78,6 +85,16 @@ final class Sds20ScorerV2FactorLogic
         $rawTotal = array_sum($itemScores);
         $indexScore = $this->computeIndexScore($rawTotal, $policy);
         $clinicalLevel = $this->resolveClinicalLevel($indexScore, $policy);
+        $policyHash = $this->hashPolicy($policy);
+        $norms = $this->buildNormsPayload($this->normResolver->resolve([
+            'locale' => (string) ($ctx['locale'] ?? ''),
+            'region' => (string) ($ctx['region'] ?? ($ctx['country'] ?? '')),
+            'country' => (string) ($ctx['country'] ?? ($ctx['region'] ?? '')),
+            'gender' => (string) ($ctx['gender'] ?? 'ALL'),
+            'age_band' => (string) ($ctx['age_band'] ?? ''),
+            'age' => isset($ctx['age']) ? (int) $ctx['age'] : 0,
+        ]));
+        $percentile = $this->resolvePercentile($indexScore, $norms);
 
         $factors = $this->buildFactors($itemScores, $policy);
 
@@ -132,15 +149,17 @@ final class Sds20ScorerV2FactorLogic
                     'raw' => $rawTotal,
                     'index_score' => $indexScore,
                     'clinical_level' => $clinicalLevel,
-                    'percentile' => null,
+                    'percentile' => $percentile,
                 ],
                 'factors' => $factors,
             ],
+            'norms' => $norms,
             'report_tags' => $reportTags,
             'version_snapshot' => [
                 'pack_id' => (string) ($ctx['pack_id'] ?? 'SDS_20'),
                 'pack_version' => (string) ($ctx['dir_version'] ?? 'v1'),
                 'policy_version' => (string) ($policy['scoring_spec_version'] ?? ''),
+                'policy_hash' => $policyHash,
                 'engine_version' => $engineVersion,
                 'scoring_spec_version' => (string) ($policy['scoring_spec_version'] ?? 'v2.0_Factor_Logic'),
                 'content_manifest_hash' => (string) ($ctx['content_manifest_hash'] ?? ''),
@@ -463,5 +482,113 @@ final class Sds20ScorerV2FactorLogic
         }
 
         return true;
+    }
+
+    /**
+     * @param array<string,mixed> $resolved
+     * @return array<string,mixed>
+     */
+    private function buildNormsPayload(array $resolved): array
+    {
+        $status = strtoupper(trim((string) ($resolved['status'] ?? 'MISSING')));
+        if (!in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+            $status = 'MISSING';
+        }
+
+        $metric = is_array($resolved['metric'] ?? null) ? $resolved['metric'] : [];
+        $mean = (float) ($metric['mean'] ?? 0.0);
+        $sd = (float) ($metric['sd'] ?? 0.0);
+        $sampleN = (int) ($metric['sample_n'] ?? 0);
+
+        if ($mean <= 0.0 || $sd <= 0.0 || $sampleN <= 0) {
+            $status = 'MISSING';
+        }
+
+        return [
+            'status' => $status,
+            'group_id' => (string) ($resolved['group_id'] ?? ''),
+            'norms_version' => (string) ($resolved['norms_version'] ?? ''),
+            'source_id' => (string) ($resolved['source_id'] ?? ''),
+            'source_type' => (string) ($resolved['source_type'] ?? ''),
+            'metric' => [
+                'metric_level' => (string) ($metric['metric_level'] ?? 'global'),
+                'metric_code' => (string) ($metric['metric_code'] ?? 'INDEX_SCORE'),
+                'mean' => round($mean, 4),
+                'sd' => round($sd, 4),
+                'sample_n' => $sampleN,
+            ],
+        ];
+    }
+
+    /**
+     * @param array<string,mixed> $norms
+     */
+    private function resolvePercentile(int $indexScore, array $norms): ?int
+    {
+        $status = strtoupper(trim((string) ($norms['status'] ?? 'MISSING')));
+        if ($status === 'MISSING') {
+            return null;
+        }
+
+        $metric = is_array($norms['metric'] ?? null) ? $norms['metric'] : [];
+        $mean = (float) ($metric['mean'] ?? 0.0);
+        $sd = (float) ($metric['sd'] ?? 0.0);
+        if ($mean <= 0.0 || $sd <= 0.0) {
+            return null;
+        }
+
+        $z = ($indexScore - $mean) / $sd;
+        $pct = (int) round($this->normalCdfApprox($z) * 100);
+
+        return max(0, min(100, $pct));
+    }
+
+    private function normalCdfApprox(float $z): float
+    {
+        $x = abs($z);
+        $t = 1.0 / (1.0 + 0.2316419 * $x);
+        $d = 0.3989423 * exp(-$x * $x / 2.0);
+        $p = 1.0 - $d * (
+            0.3193815 * $t
+            - 0.3565638 * $t * $t
+            + 1.781478 * $t * $t * $t
+            - 1.821256 * $t * $t * $t * $t
+            + 1.330274 * $t * $t * $t * $t * $t
+        );
+
+        return $z >= 0 ? $p : 1.0 - $p;
+    }
+
+    /**
+     * @param array<string,mixed> $policy
+     */
+    private function hashPolicy(array $policy): string
+    {
+        $normalized = $this->sortRecursive($policy);
+        $encoded = json_encode($normalized, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return hash('sha256', is_string($encoded) ? $encoded : '{}');
+    }
+
+    private function sortRecursive(mixed $value): mixed
+    {
+        if (!is_array($value)) {
+            return $value;
+        }
+
+        if (array_is_list($value)) {
+            foreach ($value as $idx => $item) {
+                $value[$idx] = $this->sortRecursive($item);
+            }
+
+            return $value;
+        }
+
+        ksort($value);
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->sortRecursive($item);
+        }
+
+        return $value;
     }
 }
