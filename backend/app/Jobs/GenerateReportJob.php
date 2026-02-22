@@ -6,13 +6,13 @@ use App\Models\Attempt;
 use App\Models\ReportJob;
 use App\Models\Result;
 use App\Services\Report\ReportComposer;
+use App\Services\Storage\ArtifactStore;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class GenerateReportJob implements ShouldQueue
@@ -28,10 +28,11 @@ class GenerateReportJob implements ShouldQueue
         $this->jobId = $jobId;
     }
 
-    public function handle(ReportComposer $composer): void
+    public function handle(ReportComposer $composer, ?ArtifactStore $artifactStore = null): void
     {
         $attempt = Attempt::query()->where('id', $this->attemptId)->firstOrFail();
         $attemptId = (string) $attempt->id;
+        $scaleCode = (string) ($attempt->scale_code ?? 'MBTI');
         $orgId = (int) ($attempt->org_id ?? 0);
 
         $result = Result::query()
@@ -89,7 +90,12 @@ class GenerateReportJob implements ShouldQueue
             $job->report_json = $reportPayload;
             $job->save();
 
-            $this->persistReportJson($attemptId, $reportPayload);
+            $this->persistReportJson(
+                $artifactStore ?? app(ArtifactStore::class),
+                $scaleCode,
+                $attemptId,
+                $reportPayload
+            );
         } catch (\Throwable $e) {
             $job->status = 'failed';
             $job->failed_at = now();
@@ -107,40 +113,26 @@ class GenerateReportJob implements ShouldQueue
         }
     }
 
-    private function persistReportJson(string $attemptId, array $reportPayload): void
-    {
-        $disk = array_key_exists('private', config('filesystems.disks', []))
-            ? Storage::disk('private')
-            : Storage::disk(config('filesystems.default', 'local'));
-
-        $latestRelPath = "reports/{$attemptId}/report.json";
+    private function persistReportJson(
+        ArtifactStore $artifactStore,
+        string $scaleCode,
+        string $attemptId,
+        array $reportPayload
+    ): void {
+        $latestRelPath = $artifactStore->reportJsonPath($scaleCode, $attemptId);
 
         try {
-            $json = json_encode($reportPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-            if ($json === false) {
-                throw new \RuntimeException('json_encode_failed: ' . json_last_error_msg());
-            }
-
-            if (method_exists($disk, 'makeDirectory')) {
-                $disk->makeDirectory("reports/{$attemptId}");
-            }
-
-            $disk->put($latestRelPath, $json);
-
-            $ts = function_exists('now') ? now()->format('Ymd_His') : date('Ymd_His');
-            $snapRelPath = "reports/{$attemptId}/report.{$ts}.json";
-            $disk->put($snapRelPath, $json);
+            $artifactStore->putReportJson($scaleCode, $attemptId, $reportPayload);
 
             Log::info('[report_job] persisted report.json', [
+                'scale_code' => $scaleCode,
                 'attempt_id' => $attemptId,
-                'disk' => array_key_exists('private', config('filesystems.disks', []))
-                    ? 'private'
-                    : config('filesystems.default', 'local'),
+                'disk' => 'local',
                 'latest' => $latestRelPath,
-                'snapshot' => $snapRelPath,
             ]);
         } catch (\Throwable $e) {
             Log::warning('[report_job] persist report.json failed', [
+                'scale_code' => $scaleCode,
                 'attempt_id' => $attemptId,
                 'path' => $latestRelPath,
                 'err' => $e->getMessage(),

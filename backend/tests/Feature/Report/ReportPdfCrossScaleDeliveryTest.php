@@ -8,6 +8,7 @@ use App\Services\Assessment\Scorers\ClinicalCombo68ScorerV1;
 use App\Services\Assessment\Scorers\Sds20ScorerV2FactorLogic;
 use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\Sds20PackLoader;
+use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Models\Attempt;
 use App\Models\Result;
 use Database\Seeders\ScaleRegistrySeeder;
@@ -51,8 +52,8 @@ final class ReportPdfCrossScaleDeliveryTest extends TestCase
         $sdsPdf->assertHeader('Content-Type', 'application/pdf');
         $sdsPdf->assertHeader('X-Report-Scale', 'SDS_20');
 
-        $clinicalFilesFirst = Storage::disk('local')->allFiles('private/reports/CLINICAL_COMBO_68/'.$clinicalAttemptId);
-        $sdsFilesFirst = Storage::disk('local')->allFiles('private/reports/SDS_20/'.$sdsAttemptId);
+        $clinicalFilesFirst = Storage::disk('local')->allFiles('artifacts/pdf/CLINICAL_COMBO_68/'.$clinicalAttemptId);
+        $sdsFilesFirst = Storage::disk('local')->allFiles('artifacts/pdf/SDS_20/'.$sdsAttemptId);
         $this->assertCount(1, $clinicalFilesFirst);
         $this->assertCount(1, $sdsFilesFirst);
         $this->assertStringContainsString('/report_free.pdf', $clinicalFilesFirst[0]);
@@ -64,8 +65,32 @@ final class ReportPdfCrossScaleDeliveryTest extends TestCase
         ])->get('/api/v0.3/attempts/'.$clinicalAttemptId.'/report.pdf');
         $clinicalPdfAgain->assertStatus(200);
 
-        $clinicalFilesSecond = Storage::disk('local')->allFiles('private/reports/CLINICAL_COMBO_68/'.$clinicalAttemptId);
+        $clinicalFilesSecond = Storage::disk('local')->allFiles('artifacts/pdf/CLINICAL_COMBO_68/'.$clinicalAttemptId);
         $this->assertSame($clinicalFilesFirst, $clinicalFilesSecond);
+
+        /** @var Attempt|null $clinicalAttempt */
+        $clinicalAttempt = Attempt::query()->find($clinicalAttemptId);
+        /** @var Result|null $clinicalResult */
+        $clinicalResult = Result::query()->where('attempt_id', $clinicalAttemptId)->where('org_id', 0)->first();
+        $this->assertNotNull($clinicalAttempt);
+        $this->assertNotNull($clinicalResult);
+
+        /** @var ReportPdfDocumentService $pdfService */
+        $pdfService = app(ReportPdfDocumentService::class);
+        $manifestHash = $pdfService->resolveManifestHash($clinicalAttempt, $clinicalResult);
+        $newPdfPath = $pdfService->resolveArtifactPath($clinicalAttempt, 'free', $clinicalResult);
+        Storage::disk('local')->delete($newPdfPath);
+
+        $legacyPdfPath = sprintf(
+            'private/reports/CLINICAL_COMBO_68/%s/%s/report_free.pdf',
+            $clinicalAttemptId,
+            $manifestHash
+        );
+        $legacyBytes = '%PDF-legacy-fallback%';
+        Storage::disk('local')->put($legacyPdfPath, $legacyBytes);
+
+        $fallbackRead = $pdfService->readArtifact($clinicalAttempt, 'free', $clinicalResult);
+        $this->assertSame($legacyBytes, $fallbackRead);
     }
 
     private function createClinicalAttemptWithResult(string $anonId): string

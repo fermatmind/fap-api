@@ -39,6 +39,7 @@ use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
+use App\Console\Commands\StorageMigrateLegacyArtifacts;
 use App\Console\Commands\StoragePrune;
 use App\Console\Commands\SyncScaleSlugs;
 use Illuminate\Console\Scheduling\Schedule;
@@ -91,6 +92,7 @@ class Kernel extends ConsoleKernel
         Packs2Rollback::class,
         Packs2List::class,
         StoragePrune::class,
+        StorageMigrateLegacyArtifacts::class,
         QualityDailySummary::class,
         CiScaleImpact::class,
         PartitionAttemptAnswerRows::class,

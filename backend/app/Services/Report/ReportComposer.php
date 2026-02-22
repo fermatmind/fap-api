@@ -75,7 +75,7 @@ class ReportComposer
             && is_array($payload['report'] ?? null)
         ) {
             $attemptId = (string) ($payload['attempt_id'] ?? $composeContext->attemptId);
-            $this->persistence->persist($attemptId, $payload['report']);
+            $this->persistence->persist((string) ($attempt->scale_code ?? 'MBTI'), $attemptId, $payload['report']);
         }
 
         return $payload;

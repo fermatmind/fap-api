@@ -4,49 +4,33 @@ declare(strict_types=1);
 
 namespace App\Services\Report\Composer;
 
+use App\Services\Storage\ArtifactStore;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class ReportPersistence
 {
-    public function persist(string $attemptId, array $payload): void
+    public function __construct(
+        private readonly ArtifactStore $artifactStore
+    ) {
+    }
+
+    public function persist(string $scaleCode, string $attemptId, array $payload): void
     {
         try {
-            $disk = Storage::disk('local');
-            $baseDir = "reports/{$attemptId}";
-            $disk->makeDirectory($baseDir);
-
-            $json = json_encode(
-                $payload,
-                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
-            );
-
-            if ($json === false) {
-                Log::warning('[REPORT] persist_report_json_encode_failed', [
-                    'attempt_id' => $attemptId,
-                    'json_error' => json_last_error_msg(),
-                ]);
-                return;
-            }
-
-            $pathLatest = "{$baseDir}/report.json";
-            $disk->put($pathLatest, $json);
-
-            $ts = now()->format('Ymd_His');
-            $pathSnapshot = "{$baseDir}/report.{$ts}.json";
-            $disk->put($pathSnapshot, $json);
+            $this->artifactStore->putReportJson($scaleCode, $attemptId, $payload);
+            $pathLatest = $this->artifactStore->reportJsonPath($scaleCode, $attemptId);
 
             Log::info('[REPORT] persisted', [
+                'scale_code' => $scaleCode,
                 'attempt_id' => $attemptId,
                 'disk' => 'local',
                 'root' => (string) config('filesystems.disks.local.root'),
                 'latest' => $pathLatest,
-                'snapshot' => $pathSnapshot,
-                'latest_exists' => $disk->exists($pathLatest),
-                'latest_abs' => method_exists($disk, 'path') ? $disk->path($pathLatest) : null,
+                'latest_exists' => true,
             ]);
         } catch (\Throwable $e) {
             Log::warning('[REPORT] persist_report_failed', [
+                'scale_code' => $scaleCode,
                 'attempt_id' => $attemptId,
                 'error' => $e->getMessage(),
             ]);

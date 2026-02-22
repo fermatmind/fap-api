@@ -4,34 +4,19 @@ declare(strict_types=1);
 
 namespace App\Services\Report\Pdf;
 
+use App\Services\Storage\ArtifactStore;
 use Illuminate\Support\Facades\Storage;
 
 final class ReportPdfArtifactStore
 {
+    public function __construct(
+        private readonly ArtifactStore $artifactStore
+    ) {
+    }
+
     public function path(string $scaleCode, string $attemptId, string $manifestHash, string $variant): string
     {
-        $scale = strtoupper(trim($scaleCode));
-        if ($scale === '') {
-            $scale = 'UNKNOWN';
-        }
-        $scale = preg_replace('/[^A-Z0-9_]/', '_', $scale) ?? 'UNKNOWN';
-
-        $attempt = trim($attemptId);
-        if ($attempt === '') {
-            $attempt = 'unknown_attempt';
-        }
-        $attempt = preg_replace('/[^a-zA-Z0-9\\-_]/', '_', $attempt) ?? 'unknown_attempt';
-
-        $hash = trim($manifestHash) !== '' ? trim($manifestHash) : 'nohash';
-        $hash = preg_replace('/[^a-zA-Z0-9\\-_\\.]/', '', $hash) ?? 'nohash';
-        if ($hash === '') {
-            $hash = 'nohash';
-        }
-
-        $variant = strtolower(trim($variant));
-        $variant = in_array($variant, ['free', 'full'], true) ? $variant : 'free';
-
-        return "private/reports/{$scale}/{$attempt}/{$hash}/report_{$variant}.pdf";
+        return $this->artifactStore->pdfPath($scaleCode, $attemptId, $manifestHash, $variant);
     }
 
     public function exists(string $path): bool
@@ -48,6 +33,19 @@ final class ReportPdfArtifactStore
     {
         $disk = Storage::disk('local');
         if (! $disk->exists($path)) {
+            if (preg_match('#^artifacts/pdf/([^/]+)/([^/]+)/([^/]+)/report_(free|full)\\.pdf$#i', $path, $m) === 1) {
+                $fallback = $this->artifactStore->getPdf(
+                    (string) ($m[1] ?? ''),
+                    (string) ($m[2] ?? ''),
+                    (string) ($m[3] ?? ''),
+                    (string) ($m[4] ?? 'free')
+                );
+
+                if (is_array($fallback) && is_string($fallback['binary'] ?? null)) {
+                    return $fallback['binary'];
+                }
+            }
+
             return null;
         }
 
