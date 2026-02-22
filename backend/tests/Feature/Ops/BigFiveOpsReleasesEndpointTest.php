@@ -254,6 +254,63 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('audits.0.target_id', $latestId);
     }
 
+    public function test_latest_release_audits_supports_release_action_filter(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-latest-audits-release-action@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $publishId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $publishId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'created_at' => now()->subMinutes(1),
+            'updated_at' => now()->subMinutes(1),
+        ]);
+
+        $rollbackId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $rollbackId,
+            'action' => 'rollback',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->insertAudit([
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $publishId,
+            'result' => 'success',
+            'request_id' => 'req_latest_release_action_publish',
+        ]);
+        $this->insertAudit([
+            'action' => 'big5_pack_rollback',
+            'target_type' => 'content_pack_release',
+            'target_id' => $rollbackId,
+            'result' => 'success',
+            'request_id' => 'req_latest_release_action_rollback',
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest/audits?release_action=publish&limit=10');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('item.release_id', $publishId);
+        $response->assertJsonPath('item.action', 'publish');
+        $response->assertJsonPath('count', 1);
+        $response->assertJsonPath('audits.0.target_id', $publishId);
+    }
+
     public function test_owner_can_list_big5_audits_with_filters(): void
     {
         $owner = $this->createUserWithToken('ops-owner-audits@big5.test');

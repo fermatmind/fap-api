@@ -68,9 +68,13 @@ final class BigFiveOpsController extends Controller
         if ($locale === '') {
             $locale = 'zh-CN';
         }
-        $action = strtolower(trim((string) $request->query('action', '')));
-        if (! in_array($action, ['publish', 'rollback'], true)) {
-            $action = '';
+        $releaseAction = strtolower(trim((string) $request->query('release_action', '')));
+        $legacyAction = strtolower(trim((string) $request->query('action', '')));
+        if ($releaseAction === '' && in_array($legacyAction, ['publish', 'rollback'], true)) {
+            $releaseAction = $legacyAction;
+        }
+        if (! in_array($releaseAction, ['publish', 'rollback'], true)) {
+            $releaseAction = '';
         }
         $result = strtolower(trim((string) $request->query('result', '')));
         if (! in_array($result, ['success', 'failed'], true)) {
@@ -92,8 +96,8 @@ final class BigFiveOpsController extends Controller
                     ->orWhere('from_pack_id', 'BIG5_OCEAN');
             });
 
-        if ($action !== '') {
-            $query->where('action', $action);
+        if ($releaseAction !== '') {
+            $query->where('action', $releaseAction);
         }
 
         $row = $query
