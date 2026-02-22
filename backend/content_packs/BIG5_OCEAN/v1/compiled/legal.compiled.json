@@ -1,0 +1,42 @@
+{
+    "schema": "big5.legal.compiled.v1",
+    "pack_id": "BIG5_OCEAN",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T03:54:16.344320Z",
+    "legal": {
+        "disclaimer_version": "BIG5_OCEAN_2026Q1_v1",
+        "effective_date": "2026-02-24",
+        "scope": [
+            "test",
+            "report",
+            "payment"
+        ],
+        "hash": "e6b548a206d5703efdae210afb5c6b7d88c48f286d55b6c9945c824047f901c2",
+        "texts": {
+            "zh-CN": "本人格报告仅用于自我了解与教育参考，不构成医学或精神健康诊断，也不能替代专业帮助。如你处于心理困扰，请及时寻求专业帮助。",
+            "en": "This personality report is for self-reflection and education only. It is not a medical or psychiatric diagnosis, and does not replace professional care. If you are in distress, seek professional support."
+        },
+        "required_fragments": {
+            "zh-CN": [
+                "不构成医学或精神健康诊断",
+                "寻求专业帮助"
+            ],
+            "en": [
+                "not a medical or psychiatric diagnosis",
+                "seek professional support"
+            ]
+        },
+        "prohibited_terms": {
+            "zh-CN": [
+                "你被诊断为",
+                "临床诊断为",
+                "你患有"
+            ],
+            "en": [
+                "you are diagnosed with",
+                "clinical diagnosis:",
+                "you have a disorder"
+            ]
+        }
+    }
+}

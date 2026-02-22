@@ -2,7 +2,7 @@
     "schema": "big5.policy.compiled.v1",
     "pack_id": "BIG5_OCEAN",
     "pack_version": "v1",
-    "generated_at": "2026-02-22T01:56:58.035012Z",
+    "generated_at": "2026-02-22T03:54:16.344365Z",
     "policy": {
         "pack_id": "BIG5_OCEAN",
         "pack_version": "v1",
@@ -101,6 +101,10 @@
                 }
             },
             "attention_check_failed_level": "C"
+        },
+        "retake": {
+            "cooldown_hours": 24,
+            "max_attempts_per_30_days": 3
         },
         "validity_items": [
             {
