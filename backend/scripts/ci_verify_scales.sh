@@ -102,4 +102,99 @@ echo "[CI][scales] commerce reconcile keys verified\n";
 echo "[CI][scales] running BIG5 perf budget gate"
 bash "${BACKEND_DIR}/scripts/ci/verify_big5_perf.sh"
 
+echo "[CI][scales] checking BIG5 questions sidecar artifact (budget gate)"
+QUESTIONS_FULL="${BACKEND_DIR}/content_packs/BIG5_OCEAN/v1/compiled/questions.compiled.json"
+QUESTIONS_MIN="${BACKEND_DIR}/content_packs/BIG5_OCEAN/v1/compiled/questions.min.compiled.json"
+if [[ ! -f "${QUESTIONS_MIN}" ]]; then
+  echo "[CI][scales][FAIL] missing sidecar compiled file: ${QUESTIONS_MIN}" >&2
+  exit 29
+fi
+if [[ ! -f "${QUESTIONS_FULL}" ]]; then
+  echo "[CI][scales][FAIL] missing compiled file: ${QUESTIONS_FULL}" >&2
+  exit 30
+fi
+
+FULL_BYTES="$(wc -c < "${QUESTIONS_FULL}" | tr -d '[:space:]')"
+MIN_BYTES="$(wc -c < "${QUESTIONS_MIN}" | tr -d '[:space:]')"
+if [[ "${FULL_BYTES}" == "0" ]]; then
+  echo "[CI][scales][FAIL] questions.compiled.json is empty" >&2
+  exit 31
+fi
+
+RATIO="$(php -r '$full=(float)$argv[1];$min=(float)$argv[2];echo $full>0?number_format($min/$full,4,".",""):"1.0000";' "${FULL_BYTES}" "${MIN_BYTES}")"
+echo "[CI][scales] questions sizes full_bytes=${FULL_BYTES} min_bytes=${MIN_BYTES} ratio=${RATIO}"
+
+MAX_RATIO="$(php -r '$cfg=require $argv[1];echo (string)($cfg["questions"]["min_compiled_max_ratio"] ?? "0.60");' "${BACKEND_DIR}/config/big5_content_budget.php")"
+MAX_BYTES="$(php -r '$cfg=require $argv[1];echo (string)($cfg["questions"]["min_compiled_max_bytes"] ?? "300000");' "${BACKEND_DIR}/config/big5_content_budget.php")"
+php -r '
+$ratio=(float)($argv[1] ?? "1");
+$maxRatio=(float)($argv[2] ?? "0.6");
+$minBytes=(int)($argv[3] ?? "0");
+$maxBytes=(int)($argv[4] ?? "300000");
+if ($ratio > $maxRatio) {
+    fwrite(STDERR, "[CI][scales][FAIL] questions.min ratio exceeds budget: {$ratio} > {$maxRatio}\n");
+    exit(32);
+}
+if ($minBytes > $maxBytes) {
+    fwrite(STDERR, "[CI][scales][FAIL] questions.min bytes exceed budget: {$minBytes} > {$maxBytes}\n");
+    exit(33);
+}
+fwrite(STDOUT, "[CI][scales] questions.min budget gate passed\n");
+' "${RATIO}" "${MAX_RATIO}" "${MIN_BYTES}" "${MAX_BYTES}"
+
+php -r '
+$path = $argv[1] ?? "";
+$raw = @file_get_contents($path);
+if (!is_string($raw) || $raw === "") {
+    fwrite(STDERR, "[CI][scales][FAIL] unable to read questions.min.compiled.json\n");
+    exit(34);
+}
+$doc = json_decode($raw, true);
+if (!is_array($doc)) {
+    fwrite(STDERR, "[CI][scales][FAIL] invalid questions.min.compiled.json payload\n");
+    exit(35);
+}
+$evidence = $doc["content_evidence"] ?? null;
+if (!is_array($evidence)) {
+    fwrite(STDERR, "[CI][scales][FAIL] missing content_evidence in questions.min.compiled.json\n");
+    exit(36);
+}
+$targets = [
+    "question_index_sha256" => $doc["question_index"] ?? [],
+    "texts_by_locale_sha256" => $doc["texts_by_locale"] ?? [],
+    "option_sets_sha256" => $doc["option_sets"] ?? [],
+    "question_option_set_ref_sha256" => $doc["question_option_set_ref"] ?? [],
+];
+$normalize = function ($value) use (&$normalize) {
+    if (is_array($value)) {
+        if (array_is_list($value)) {
+            return array_map(fn($item) => $normalize($item), $value);
+        }
+        ksort($value);
+        foreach ($value as $key => $item) {
+            $value[$key] = $normalize($item);
+        }
+        return $value;
+    }
+    if (is_bool($value) || is_int($value) || is_float($value)) {
+        return (string) $value;
+    }
+    return trim((string) $value);
+};
+foreach ($targets as $key => $node) {
+    $actual = trim((string)($evidence[$key] ?? ""));
+    if (!preg_match("/^[a-f0-9]{64}$/", $actual)) {
+        fwrite(STDERR, "[CI][scales][FAIL] invalid content_evidence hash format: {$key}\n");
+        exit(37);
+    }
+    $encoded = json_encode($normalize($node), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    $expected = hash("sha256", is_string($encoded) ? $encoded : "{}");
+    if (!hash_equals($expected, $actual)) {
+        fwrite(STDERR, "[CI][scales][FAIL] content_evidence hash mismatch: {$key}\n");
+        exit(38);
+    }
+}
+fwrite(STDOUT, "[CI][scales] questions.min content_evidence gate passed\n");
+' "${QUESTIONS_MIN}"
+
 echo "[CI][scales] completed"

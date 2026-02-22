@@ -118,6 +118,38 @@ final class BigFivePackLoader
         return is_file($this->compiledPath($file, $version));
     }
 
+    /**
+     * Prefer sidecar question index (questions.min.compiled.json), then fallback to full compiled questions index.
+     *
+     * @return array<int,array<string,mixed>>|null
+     */
+    public function readQuestionIndexPreferred(?string $version = null, int $expectedCount = 120): ?array
+    {
+        $compiledMin = $this->readCompiledJson('questions.min.compiled.json', $version);
+        if (is_array($compiledMin)) {
+            $questionIndex = is_array($compiledMin['question_index'] ?? null)
+                ? $compiledMin['question_index']
+                : [];
+            if (count($questionIndex) === $expectedCount) {
+                return $questionIndex;
+            }
+        }
+
+        $compiledFull = $this->readCompiledJson('questions.compiled.json', $version);
+        if (!is_array($compiledFull)) {
+            return null;
+        }
+
+        $questionIndex = is_array($compiledFull['question_index'] ?? null)
+            ? $compiledFull['question_index']
+            : [];
+        if (count($questionIndex) === $expectedCount) {
+            return $questionIndex;
+        }
+
+        return null;
+    }
+
     private function normalizeVersion(?string $version): string
     {
         $version = trim((string) $version);

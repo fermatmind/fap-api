@@ -176,6 +176,11 @@ class AttemptStartService
     private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion): int
     {
         if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $questionIndex = $this->bigFivePackLoader->readQuestionIndexPreferred($dirVersion, 120);
+            if (is_array($questionIndex)) {
+                return count($questionIndex);
+            }
+
             $compiled = $this->bigFivePackLoader->readCompiledJson('questions.compiled.json', $dirVersion);
             if (!is_array($compiled)) {
                 $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTIONS_MISSING', $packId, $dirVersion, 'questions.compiled.json');

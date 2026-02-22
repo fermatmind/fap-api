@@ -278,8 +278,16 @@ final class BigFiveContentCompileService
             'options' => $options,
         ];
 
+        $questionsMinPayload = $this->buildQuestionsMinPayload(
+            $version,
+            $questionIndex,
+            $questionsDocItemsByLocale,
+            $options
+        );
+
         $files = [
             'questions.compiled.json' => $questionsPayload,
+            'questions.min.compiled.json' => $questionsMinPayload,
             'facet_index.json' => [
                 'schema' => 'big5.facet_index.v1',
                 'pack_id' => BigFivePackLoader::PACK_ID,
@@ -504,6 +512,134 @@ final class BigFiveContentCompileService
         }
 
         return hash('sha256', implode("\n", $rows));
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $questionIndex
+     * @param  array<string,list<array<string,mixed>>>  $questionsDocItemsByLocale
+     * @param  list<array<string,mixed>>  $options
+     * @return array<string,mixed>
+     */
+    private function buildQuestionsMinPayload(
+        string $version,
+        array $questionIndex,
+        array $questionsDocItemsByLocale,
+        array $options
+    ): array {
+        $textsByLocale = [
+            'zh-CN' => [],
+            'en' => [],
+        ];
+
+        foreach (['zh-CN', 'en'] as $locale) {
+            $items = is_array($questionsDocItemsByLocale[$locale] ?? null) ? $questionsDocItemsByLocale[$locale] : [];
+            foreach ($items as $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                $qid = (int) ($item['question_id'] ?? 0);
+                if ($qid <= 0) {
+                    continue;
+                }
+
+                $textsByLocale[$locale][$qid] = (string) ($item['text'] ?? '');
+            }
+            ksort($textsByLocale[$locale], SORT_NUMERIC);
+        }
+
+        $optionSetId = 'LIKERT5';
+        $optionSets = [
+            $optionSetId => $this->buildStableOptionsSet($options),
+        ];
+        $questionOptionSetRef = [];
+        foreach (array_keys($questionIndex) as $qid) {
+            $qidInt = (int) $qid;
+            if ($qidInt <= 0) {
+                continue;
+            }
+            $questionOptionSetRef[$qidInt] = $optionSetId;
+        }
+        ksort($questionOptionSetRef, SORT_NUMERIC);
+
+        return [
+            'schema' => 'big5.questions.min.compiled.v1',
+            'pack_id' => BigFivePackLoader::PACK_ID,
+            'pack_version' => $version,
+            'generated_at' => now()->toISOString(),
+            'question_index' => $questionIndex,
+            'texts_by_locale' => $textsByLocale,
+            'option_sets' => $optionSets,
+            'question_option_set_ref' => $questionOptionSetRef,
+            'content_evidence' => [
+                'question_index_sha256' => $this->stableHashValue($questionIndex),
+                'texts_by_locale_sha256' => $this->stableHashValue($textsByLocale),
+                'option_sets_sha256' => $this->stableHashValue($optionSets),
+                'question_option_set_ref_sha256' => $this->stableHashValue($questionOptionSetRef),
+            ],
+        ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $options
+     * @return list<array{code:string,score:int,label_zh:string,label_en:string}>
+     */
+    private function buildStableOptionsSet(array $options): array
+    {
+        $normalized = [];
+        foreach ($options as $option) {
+            if (! is_array($option)) {
+                continue;
+            }
+
+            $normalized[] = [
+                'code' => trim((string) ($option['code'] ?? '')),
+                'score' => (int) ($option['score'] ?? 0),
+                'label_zh' => (string) ($option['label_zh'] ?? ''),
+                'label_en' => (string) ($option['label_en'] ?? ''),
+            ];
+        }
+
+        usort($normalized, static function (array $a, array $b): int {
+            $scoreCmp = ((int) $a['score']) <=> ((int) $b['score']);
+            if ($scoreCmp !== 0) {
+                return $scoreCmp;
+            }
+
+            return strcmp((string) $a['code'], (string) $b['code']);
+        });
+
+        return $normalized;
+    }
+
+    private function stableHashValue(mixed $value): string
+    {
+        $normalized = $this->normalizeForStableHash($value);
+        $encoded = json_encode($normalized, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return hash('sha256', is_string($encoded) ? $encoded : '{}');
+    }
+
+    private function normalizeForStableHash(mixed $value): mixed
+    {
+        if (is_array($value)) {
+            if (array_is_list($value)) {
+                return array_map(fn (mixed $item): mixed => $this->normalizeForStableHash($item), $value);
+            }
+
+            ksort($value);
+            foreach ($value as $key => $item) {
+                $value[$key] = $this->normalizeForStableHash($item);
+            }
+
+            return $value;
+        }
+
+        if (is_bool($value) || is_int($value) || is_float($value)) {
+            return (string) $value;
+        }
+
+        return trim((string) $value);
     }
 
     /**
