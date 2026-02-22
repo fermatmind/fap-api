@@ -1,0 +1,65 @@
+[
+  {
+    "sku": "SKU_SDS_20_FULL_299",
+    "sku_code": "SKU_SDS_20_FULL_299",
+    "anchor_sku": "SKU_SDS_20_FULL",
+    "scale_code": "SDS_20",
+    "benefit_type": "report_unlock",
+    "benefit_code": "SDS_20_FULL",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 299,
+    "currency": "CNY",
+    "offer_code": "SDS_20_FULL_MAIN",
+    "modules_included": [
+      "sds_full",
+      "sds_factor_deepdive",
+      "sds_action_plan"
+    ],
+    "title": "SDS_20 Full Report",
+    "is_active": true,
+    "metadata_json": {
+      "label": "SDS_20 full report",
+      "offer_code": "SDS_20_FULL_MAIN",
+      "effective_default": true,
+      "anchor_sku": "SKU_SDS_20_FULL",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "sds_20_full",
+      "modules_included": [
+        "sds_full",
+        "sds_factor_deepdive",
+        "sds_action_plan"
+      ]
+    }
+  },
+  {
+    "sku": "SKU_SDS_20_FULL",
+    "sku_code": "SKU_SDS_20_FULL",
+    "anchor_sku": "SKU_SDS_20_FULL",
+    "scale_code": "SDS_20",
+    "benefit_type": "report_unlock",
+    "benefit_code": "SDS_20_FULL",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 299,
+    "currency": "CNY",
+    "title": "SDS_20 Full Report (anchor)",
+    "is_active": true,
+    "metadata_json": {
+      "label": "SDS_20 full report (anchor)",
+      "anchor": true,
+      "deprecated": true,
+      "effective_sku": "SKU_SDS_20_FULL_299",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "sds_20_full",
+      "offer": false,
+      "modules_included": [
+        "sds_full",
+        "sds_factor_deepdive",
+        "sds_action_plan"
+      ]
+    }
+  }
+]

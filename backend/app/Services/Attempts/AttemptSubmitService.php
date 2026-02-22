@@ -51,6 +51,16 @@ class AttemptSubmitService
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code missing on attempt.');
         }
 
+        if ($scaleCode === 'SDS_20') {
+            $summary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
+            $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
+            $consent = is_array($meta['consent'] ?? null) ? $meta['consent'] : [];
+            $consentAccepted = (bool) ($consent['accepted'] ?? false);
+            if ($consentAccepted !== true) {
+                throw new ApiProblemException(422, 'SDS20_CONSENT_REQUIRED', 'consent is required for SDS_20 submit.');
+            }
+        }
+
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (! $row) {
             throw new ApiProblemException(404, 'NOT_FOUND', 'scale not found.');

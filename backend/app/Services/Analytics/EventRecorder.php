@@ -155,7 +155,8 @@ final class EventRecorder
     {
         $normalizedCode = strtolower(trim($eventCode));
         $needsRedaction = str_starts_with($normalizedCode, 'big5_')
-            || str_starts_with($normalizedCode, 'clinical_combo_68_');
+            || str_starts_with($normalizedCode, 'clinical_combo_68_')
+            || str_starts_with($normalizedCode, 'sds_');
         if (!$needsRedaction) {
             return $meta;
         }
@@ -172,7 +173,9 @@ final class EventRecorder
                 'version' => (string) ($result['version'] ?? 'v2'),
                 'scope' => str_starts_with($normalizedCode, 'big5_')
                     ? 'big5_event_meta'
-                    : 'clinical_event_meta',
+                    : (str_starts_with($normalizedCode, 'sds_')
+                        ? 'sds_event_meta'
+                        : 'clinical_event_meta'),
             ];
         }
 

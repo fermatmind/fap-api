@@ -461,6 +461,15 @@ class PaymentWebhookHandlerCore
                             return $this->badRequest($code, $message);
                         }
 
+                        $scaleGuard = $this->validateAttemptScaleForSku($skuRow, $attemptMeta);
+                        if (!($scaleGuard['ok'] ?? false)) {
+                            $code = (string) ($scaleGuard['error'] ?? 'ATTEMPT_SCALE_MISMATCH');
+                            $message = (string) ($scaleGuard['message'] ?? 'attempt scale does not match sku scale.');
+                            $this->markEventError($provider, $providerEventId, 'rejected', $code, $message);
+
+                            return $this->badRequest($code, $message);
+                        }
+
                         if (! $retryingPostCommitOnly) {
                             $scopeOverride = trim((string) ($skuRow->scope ?? ''));
                             if ($scopeOverride === '') {
@@ -1319,6 +1328,34 @@ class PaymentWebhookHandlerCore
         }
 
         return ['ok' => true];
+    }
+
+    /**
+     * @param array<string,mixed> $attemptMeta
+     * @return array{ok:bool,error?:string,message?:string}
+     */
+    private function validateAttemptScaleForSku(object $skuRow, array $attemptMeta): array
+    {
+        $skuScaleCode = strtoupper(trim((string) ($skuRow->scale_code ?? '')));
+        $attemptScaleCode = strtoupper(trim((string) ($attemptMeta['scale_code'] ?? '')));
+
+        if ($attemptScaleCode === '') {
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_NOT_FOUND',
+                'message' => 'target attempt not found.',
+            ];
+        }
+
+        if ($skuScaleCode === '' || $skuScaleCode === $attemptScaleCode) {
+            return ['ok' => true];
+        }
+
+        return [
+            'ok' => false,
+            'error' => 'ATTEMPT_SCALE_MISMATCH',
+            'message' => 'attempt scale_code does not match sku scale_code.',
+        ];
     }
 
     private function resolveAttemptMeta(int $orgId, ?string $attemptId): array

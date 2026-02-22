@@ -16,6 +16,13 @@ final class CommerceConfigValidator
         'big5_relationship',
     ];
 
+    private const SDS_ALLOWED_MODULES = [
+        ReportAccess::MODULE_SDS_CORE,
+        ReportAccess::MODULE_SDS_FULL,
+        ReportAccess::MODULE_SDS_FACTOR_DEEPDIVE,
+        ReportAccess::MODULE_SDS_ACTION_PLAN,
+    ];
+
     /**
      * @param list<array<string,mixed>> $rows
      */
@@ -65,12 +72,8 @@ final class CommerceConfigValidator
                 $errors[] = $this->err($index, $sku, 'benefit_code is required for report_unlock sku');
             }
 
-            if ($scaleCode !== ReportAccess::SCALE_BIG5_OCEAN) {
+            if ($scaleCode !== ReportAccess::SCALE_BIG5_OCEAN && $scaleCode !== ReportAccess::SCALE_SDS_20) {
                 continue;
-            }
-
-            if ($currency !== 'CNY') {
-                $errors[] = $this->err($index, $sku, 'BIG5_OCEAN sku currency must be CNY');
             }
 
             $meta = $this->metaFromRow($row);
@@ -78,19 +81,47 @@ final class CommerceConfigValidator
                 $row['modules_included'] ?? ($meta['modules_included'] ?? null)
             );
 
-            foreach ($modules as $module) {
-                if (!in_array($module, self::BIG5_ALLOWED_MODULES, true)) {
-                    $errors[] = $this->err($index, $sku, "invalid BIG5 module: {$module}");
+            if ($scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+                if ($currency !== 'CNY') {
+                    $errors[] = $this->err($index, $sku, 'BIG5_OCEAN sku currency must be CNY');
+                }
+
+                foreach ($modules as $module) {
+                    if (!in_array($module, self::BIG5_ALLOWED_MODULES, true)) {
+                        $errors[] = $this->err($index, $sku, "invalid BIG5 module: {$module}");
+                    }
+                }
+
+                foreach ($this->expectedModulesByBenefit($benefitCode) as $requiredModule) {
+                    if (!in_array($requiredModule, $modules, true)) {
+                        $errors[] = $this->err(
+                            $index,
+                            $sku,
+                            "benefit_code {$benefitCode} must include module {$requiredModule}"
+                        );
+                    }
                 }
             }
 
-            foreach ($this->expectedModulesByBenefit($benefitCode) as $requiredModule) {
-                if (!in_array($requiredModule, $modules, true)) {
-                    $errors[] = $this->err(
-                        $index,
-                        $sku,
-                        "benefit_code {$benefitCode} must include module {$requiredModule}"
-                    );
+            if ($scaleCode === ReportAccess::SCALE_SDS_20) {
+                if ($currency !== 'CNY') {
+                    $errors[] = $this->err($index, $sku, 'SDS_20 sku currency must be CNY');
+                }
+
+                foreach ($modules as $module) {
+                    if (!in_array($module, self::SDS_ALLOWED_MODULES, true)) {
+                        $errors[] = $this->err($index, $sku, "invalid SDS_20 module: {$module}");
+                    }
+                }
+
+                foreach ($this->expectedModulesByBenefit($benefitCode) as $requiredModule) {
+                    if (!in_array($requiredModule, $modules, true)) {
+                        $errors[] = $this->err(
+                            $index,
+                            $sku,
+                            "benefit_code {$benefitCode} must include module {$requiredModule}"
+                        );
+                    }
                 }
             }
 
@@ -151,6 +182,11 @@ final class CommerceConfigValidator
                 ReportAccess::MODULE_BIG5_ACTION_PLAN,
             ],
             'BIG5_ACTION_PLAN' => [ReportAccess::MODULE_BIG5_ACTION_PLAN],
+            'SDS_20_FULL' => [
+                ReportAccess::MODULE_SDS_FULL,
+                ReportAccess::MODULE_SDS_FACTOR_DEEPDIVE,
+                ReportAccess::MODULE_SDS_ACTION_PLAN,
+            ],
             default => [],
         };
     }
