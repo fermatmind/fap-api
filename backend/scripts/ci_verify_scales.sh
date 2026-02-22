@@ -99,4 +99,7 @@ foreach (["ok", "paid_count", "unlocked_count", "mismatch_count", "mismatches"] 
 echo "[CI][scales] commerce reconcile keys verified\n";
 ' "${RECON_JSON}"
 
+echo "[CI][scales] running BIG5 perf budget gate"
+bash "${BACKEND_DIR}/scripts/ci/verify_big5_perf.sh"
+
 echo "[CI][scales] completed"
