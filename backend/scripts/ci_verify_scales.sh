@@ -102,7 +102,7 @@ echo "[CI][scales] commerce reconcile keys verified\n";
 echo "[CI][scales] running BIG5 perf budget gate"
 bash "${BACKEND_DIR}/scripts/ci/verify_big5_perf.sh"
 
-echo "[CI][scales] checking BIG5 questions sidecar artifact (warn-only budget)"
+echo "[CI][scales] checking BIG5 questions sidecar artifact (budget gate)"
 QUESTIONS_FULL="${BACKEND_DIR}/content_packs/BIG5_OCEAN/v1/compiled/questions.compiled.json"
 QUESTIONS_MIN="${BACKEND_DIR}/content_packs/BIG5_OCEAN/v1/compiled/questions.min.compiled.json"
 if [[ ! -f "${QUESTIONS_MIN}" ]]; then
@@ -132,11 +132,14 @@ $maxRatio=(float)($argv[2] ?? "0.6");
 $minBytes=(int)($argv[3] ?? "0");
 $maxBytes=(int)($argv[4] ?? "300000");
 if ($ratio > $maxRatio) {
-    fwrite(STDOUT, "[CI][scales][WARN] questions.min ratio exceeds budget: {$ratio} > {$maxRatio}\n");
+    fwrite(STDERR, "[CI][scales][FAIL] questions.min ratio exceeds budget: {$ratio} > {$maxRatio}\n");
+    exit(32);
 }
 if ($minBytes > $maxBytes) {
-    fwrite(STDOUT, "[CI][scales][WARN] questions.min bytes exceed budget: {$minBytes} > {$maxBytes}\n");
+    fwrite(STDERR, "[CI][scales][FAIL] questions.min bytes exceed budget: {$minBytes} > {$maxBytes}\n");
+    exit(33);
 }
+fwrite(STDOUT, "[CI][scales] questions.min budget gate passed\n");
 ' "${RATIO}" "${MAX_RATIO}" "${MIN_BYTES}" "${MAX_BYTES}"
 
 echo "[CI][scales] completed"
