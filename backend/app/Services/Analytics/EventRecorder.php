@@ -14,12 +14,18 @@ final class EventRecorder
     public function __construct(
         private ExperimentAssigner $experimentAssigner,
         private ?SensitiveDataRedactor $redactor = null,
+        private ?Big5EventSchema $big5EventSchema = null,
     ) {
     }
 
     public function record(string $eventCode, ?int $userId, array $meta = [], array $context = []): void
     {
         if (!\App\Support\SchemaBaseline::hasTable('events')) {
+            return;
+        }
+
+        $meta = $this->validateBigFiveEventMeta($eventCode, $meta);
+        if ($meta === null) {
             return;
         }
 
@@ -167,5 +173,33 @@ final class EventRecorder
         }
 
         return $sanitized;
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>|null
+     */
+    private function validateBigFiveEventMeta(string $eventCode, array $meta): ?array
+    {
+        $normalizedCode = strtolower(trim($eventCode));
+        if (!str_starts_with($normalizedCode, 'big5_')) {
+            return $meta;
+        }
+
+        $schema = $this->big5EventSchema instanceof Big5EventSchema
+            ? $this->big5EventSchema
+            : new Big5EventSchema();
+
+        try {
+            return $schema->validate($eventCode, $meta);
+        } catch (\InvalidArgumentException $e) {
+            Log::warning('BIG5_EVENT_SCHEMA_INVALID', [
+                'event_code' => $eventCode,
+                'message' => $e->getMessage(),
+                'meta_keys' => array_values(array_map('strval', array_keys($meta))),
+            ]);
+
+            return null;
+        }
     }
 }

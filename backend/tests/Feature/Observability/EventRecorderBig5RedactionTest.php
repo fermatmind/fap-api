@@ -18,6 +18,17 @@ final class EventRecorderBig5RedactionTest extends TestCase
         /** @var EventRecorder $recorder */
         $recorder = app(EventRecorder::class);
         $recorder->record('big5_attempt_submitted', null, [
+            'scale_code' => 'BIG5_OCEAN',
+            'pack_version' => 'v1',
+            'manifest_hash' => 'manifest_abc',
+            'norms_version' => '2026Q1_prod_v1',
+            'quality_level' => 'A',
+            'variant' => 'free',
+            'locked' => true,
+            'locale' => 'zh-CN',
+            'region' => 'CN_MAINLAND',
+            'norms_status' => 'CALIBRATED',
+            'norm_group_id' => 'zh-CN_prod_all_18-60',
             'answers' => [
                 ['question_id' => 1, 'code' => 5],
                 ['question_id' => 2, 'code' => 1],
@@ -70,4 +81,3 @@ final class EventRecorderBig5RedactionTest extends TestCase
         $this->assertArrayNotHasKey('_redaction', $meta);
     }
 }
-
