@@ -9,6 +9,7 @@ use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Scale\ScaleRegistry;
+use App\Services\Scale\ScaleRolloutGate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -69,6 +70,8 @@ class ReportGatekeeper
         }
 
         $commercial = $this->normalizeCommercial($registry['commercial_json'] ?? null);
+        $paywallMode = ScaleRolloutGate::paywallMode($registry);
+        $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
         $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
         if ($benefitCode === '') {
             $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
@@ -77,6 +80,9 @@ class ReportGatekeeper
         $hasAccess = $benefitCode !== ''
             ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
             : false;
+        if ($forceFreeOnly) {
+            $hasAccess = false;
+        }
 
         return [
             'ok' => true,
@@ -120,6 +126,8 @@ class ReportGatekeeper
 
         $viewPolicy = $this->normalizeViewPolicy($registry['view_policy_json'] ?? null);
         $commercial = $this->normalizeCommercial($registry['commercial_json'] ?? null);
+        $paywallMode = ScaleRolloutGate::paywallMode($registry);
+        $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
         $paywall = $this->buildPaywall($viewPolicy, $commercial, $scaleCode);
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
         $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
@@ -130,6 +138,9 @@ class ReportGatekeeper
         $hasFullAccess = $benefitCode !== ''
             ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
             : false;
+        if ($forceFreeOnly) {
+            $hasFullAccess = false;
+        }
 
         $modulesOffered = $this->collectModulesFromOffers((array) ($paywall['offers'] ?? []));
         if ($modulesOffered === []) {
@@ -144,6 +155,9 @@ class ReportGatekeeper
             ));
         }
         if ($modulesAllowed === []) {
+            $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked($scaleCode);
+        }
+        if ($forceFreeOnly) {
             $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked($scaleCode);
         }
 

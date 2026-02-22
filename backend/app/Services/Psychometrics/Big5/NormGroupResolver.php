@@ -109,11 +109,11 @@ class NormGroupResolver
     private function resolveAgeBand(array $ctx): string
     {
         $ageBand = trim((string) ($ctx['age_band'] ?? ''));
-        if ($ageBand !== '') {
+        $default = (string) config('big5_norms.resolver.default_age_band', '18-60');
+        if ($ageBand !== '' && !in_array(strtolower($ageBand), ['all', 'any', '*'], true)) {
             return $ageBand;
         }
 
-        $default = (string) config('big5_norms.resolver.default_age_band', '18-60');
         $age = (int) ($ctx['age'] ?? 0);
         if ($age <= 0) {
             return $default;
@@ -262,12 +262,16 @@ class NormGroupResolver
     {
         $locale = str_replace('_', '-', trim($locale));
         $locale = $locale !== '' ? $locale : 'en';
-        $localeUpper = str_replace('-', '_', strtoupper($locale));
-        $ageBand = $ageBand !== '' ? $ageBand : 'all';
-        $gender = $gender !== '' ? $gender : 'ALL';
-        $country = strtoupper(str_replace('-', '_', $country));
+        $gender = $gender !== '' ? strtoupper($gender) : 'ALL';
+        $country = strtoupper(str_replace('-', '_', trim($country)));
+        $ageBand = trim($ageBand);
+        if ($ageBand === '' || in_array(strtolower($ageBand), ['all', 'any', '*'], true)) {
+            $ageBand = (string) config('big5_norms.resolver.default_age_band', '18-60');
+        }
 
-        $candidates = [
+        $candidates = $this->buildDbCandidates($locale, $gender, $ageBand);
+        $localeUpper = str_replace('-', '_', strtoupper($locale));
+        $legacyCandidates = [
             sprintf('%s_%s_%s', $locale, $gender, $ageBand),
             sprintf('%s_%s_all', $locale, $gender),
             sprintf('%s_all', $locale),
@@ -275,6 +279,13 @@ class NormGroupResolver
             sprintf('%s_%s_all', $localeUpper, $gender),
             sprintf('%s_all', $localeUpper),
         ];
+
+        foreach ($legacyCandidates as $candidate) {
+            $candidate = trim($candidate);
+            if ($candidate !== '') {
+                $candidates[] = $candidate;
+            }
+        }
 
         if ($country !== '' && $country !== 'GLOBAL') {
             $candidates[] = sprintf('%s_%s_%s_%s', $country, $localeUpper, $gender, $ageBand);
@@ -285,7 +296,7 @@ class NormGroupResolver
 
         $unique = [];
         foreach ($candidates as $candidate) {
-            $candidate = trim($candidate);
+            $candidate = trim((string) $candidate);
             if ($candidate === '') {
                 continue;
             }

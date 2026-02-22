@@ -139,7 +139,7 @@ final class BigFiveScorerV3
         $normResolved = $this->normResolver->resolve($normsCompiled, [
             'locale' => (string) ($ctx['locale'] ?? ''),
             'country' => (string) ($ctx['country'] ?? ($ctx['region'] ?? '')),
-            'age_band' => (string) ($ctx['age_band'] ?? 'all'),
+            'age_band' => (string) ($ctx['age_band'] ?? ''),
             'gender' => (string) ($ctx['gender'] ?? 'ALL'),
         ]);
 
