@@ -247,6 +247,51 @@ final class Sds20PackLoader
         return $this->readJson($this->rawPath('policy.json', $version)) ?? [];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    public function loadReportLayout(?string $version = null): array
+    {
+        $version = $this->normalizeVersion($version);
+        $compiled = $this->readJson($this->compiledPath('report.compiled.json', $version));
+        if (is_array($compiled) && is_array($compiled['layout'] ?? null)) {
+            return $compiled['layout'];
+        }
+
+        $raw = $this->readJson($this->rawPath('report_layout.json', $version)) ?? [];
+        if (is_array($raw['layout'] ?? null)) {
+            return $raw['layout'];
+        }
+
+        return is_array($raw) ? $raw : [];
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    public function loadReportBlocks(string $locale, ?string $version = null): array
+    {
+        $version = $this->normalizeVersion($version);
+        $localeResolved = $this->normalizeLocale($locale);
+
+        $compiled = $this->readJson($this->compiledPath('report.compiled.json', $version));
+        if (is_array($compiled)) {
+            $blocksByLocale = is_array($compiled['blocks_by_locale'] ?? null) ? $compiled['blocks_by_locale'] : [];
+            $blocks = $blocksByLocale[$localeResolved] ?? ($blocksByLocale['zh-CN'] ?? null);
+            if (is_array($blocks)) {
+                return array_values(array_filter($blocks, static fn ($row): bool => is_array($row)));
+            }
+        }
+
+        $freeDoc = $this->readJson($this->rawPath('blocks/free_blocks.json', $version)) ?? [];
+        $paidDoc = $this->readJson($this->rawPath('blocks/paid_blocks.json', $version)) ?? [];
+
+        $free = $this->normalizeReportBlockDoc($freeDoc, $localeResolved, 'free');
+        $paid = $this->normalizeReportBlockDoc($paidDoc, $localeResolved, 'paid');
+
+        return array_values(array_merge($free, $paid));
+    }
+
     public function resolveManifestHash(?string $version = null): string
     {
         $version = $this->normalizeVersion($version);
@@ -272,6 +317,40 @@ final class Sds20PackLoader
         }
 
         return hash('sha256', implode("\n", $rows));
+    }
+
+    /**
+     * @param array<string,mixed> $doc
+     * @return list<array<string,mixed>>
+     */
+    private function normalizeReportBlockDoc(array $doc, string $locale, string $accessLevel): array
+    {
+        $source = $doc[$locale] ?? ($doc['zh-CN'] ?? []);
+        if (!is_array($source)) {
+            return [];
+        }
+
+        $out = [];
+        foreach ($source as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $sectionKey = trim((string) ($row['section_key'] ?? ''));
+            if ($sectionKey === '') {
+                continue;
+            }
+
+            $out[] = [
+                'block_id' => (string) ($row['block_id'] ?? ''),
+                'section_key' => $sectionKey,
+                'title' => (string) ($row['title'] ?? ''),
+                'body_md' => (string) ($row['body_md'] ?? ''),
+                'access_level' => $accessLevel,
+            ];
+        }
+
+        return $out;
     }
 
     /**
