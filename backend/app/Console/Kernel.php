@@ -26,6 +26,7 @@ use App\Console\Commands\NormsImport;
 use App\Console\Commands\NormsBig5Roll;
 use App\Console\Commands\NormsBig5Rebuild;
 use App\Console\Commands\NormsBig5DriftCheck;
+use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5TelemetrySummary;
@@ -65,6 +66,7 @@ class Kernel extends ConsoleKernel
         NormsBig5Roll::class,
         NormsBig5Rebuild::class,
         NormsBig5DriftCheck::class,
+        NormsBig5BootstrapBuild::class,
         Big5PsychometricsReport::class,
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
