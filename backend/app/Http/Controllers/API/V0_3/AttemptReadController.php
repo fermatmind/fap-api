@@ -6,6 +6,8 @@ use App\Http\Controllers\API\V0_3\Concerns\ResolvesAttemptOwnership;
 use App\Http\Controllers\Controller;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Observability\ClinicalComboTelemetry;
+use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\BigFivePdfDocumentService;
 use App\Services\Report\ReportGatekeeper;
 use App\Support\OrgContext;
@@ -201,6 +203,18 @@ class AttemptReadController extends Controller
             'attempt_id' => (string) $attempt->id,
             'locked' => (bool) ($gate['locked'] ?? false),
         ]);
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        $reportViewMeta = [
+            'variant' => strtolower(trim((string) ($gate['variant'] ?? 'free'))),
+            'locked' => (bool) ($gate['locked'] ?? false),
+            'source' => 'report_api',
+            'access_level' => strtolower(trim((string) ($gate['access_level'] ?? 'free'))),
+        ];
+        if ($scaleCode === 'CLINICAL_COMBO_68') {
+            app(ClinicalComboTelemetry::class)->reportViewed($attempt, $reportViewMeta);
+        } elseif ($scaleCode === 'SDS_20') {
+            app(Sds20Telemetry::class)->reportViewed($attempt, $reportViewMeta);
+        }
 
         $gateMeta = [];
         if (isset($gate['meta']) && is_array($gate['meta'])) {

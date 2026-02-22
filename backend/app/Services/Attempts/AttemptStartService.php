@@ -11,6 +11,8 @@ use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\Sds20PackLoader;
 use App\Services\Observability\BigFiveTelemetry;
+use App\Services\Observability\ClinicalComboTelemetry;
+use App\Services\Observability\Sds20Telemetry;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
@@ -244,6 +246,16 @@ class AttemptStartService
                 $packId,
                 $dirVersion
             );
+        } elseif (strtoupper($scaleCode) === 'CLINICAL_COMBO_68') {
+            app(ClinicalComboTelemetry::class)->attemptStarted($attempt, [
+                'variant' => 'free',
+                'locked' => true,
+            ]);
+        } elseif (strtoupper($scaleCode) === 'SDS_20') {
+            app(Sds20Telemetry::class)->attemptStarted($attempt, [
+                'variant' => 'free',
+                'locked' => true,
+            ]);
         }
 
         return [

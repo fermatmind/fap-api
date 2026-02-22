@@ -130,6 +130,32 @@ final class BigFivePackLoader
         return is_file($this->compiledPath($file, $version));
     }
 
+    public function resolveManifestHash(?string $version = null): string
+    {
+        $manifest = $this->readCompiledJson('manifest.json', $version);
+        if (! is_array($manifest)) {
+            return '';
+        }
+
+        $hash = trim((string) ($manifest['compiled_hash'] ?? ''));
+        if ($hash !== '') {
+            return $hash;
+        }
+
+        $hashes = is_array($manifest['hashes'] ?? null) ? $manifest['hashes'] : [];
+        if ($hashes === []) {
+            return trim((string) ($manifest['content_hash'] ?? ''));
+        }
+
+        ksort($hashes);
+        $rows = [];
+        foreach ($hashes as $name => $value) {
+            $rows[] = trim((string) $name).':'.trim((string) $value);
+        }
+
+        return hash('sha256', implode("\n", $rows));
+    }
+
     /**
      * Prefer sidecar question index (questions.min.compiled.json), then fallback to full compiled questions index.
      *

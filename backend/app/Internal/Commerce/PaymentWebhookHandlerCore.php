@@ -4,6 +4,7 @@ namespace App\Internal\Commerce;
 
 use App\Jobs\GenerateBigFiveReportPdfJob;
 use App\Jobs\GenerateReportSnapshotJob;
+use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\BenefitWalletService;
 use App\Services\Commerce\EntitlementManager;
@@ -14,6 +15,8 @@ use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Email\EmailOutboxService;
 use App\Services\Observability\BigFiveTelemetry;
+use App\Services\Observability\ClinicalComboTelemetry;
+use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Contracts\Cache\LockTimeoutException;
@@ -835,6 +838,25 @@ class PaymentWebhookHandlerCore
                         'order_no' => $orderNo !== '' ? $orderNo : null,
                     ];
 
+                    try {
+                        $this->emitScaleUnlockTelemetry(
+                            $orgId,
+                            $attemptId,
+                            $provider,
+                            $providerEventId,
+                            $orderNo !== '' ? $orderNo : null
+                        );
+                    } catch (\Throwable $e) {
+                        Log::warning('PAYMENT_WEBHOOK_UNLOCK_TELEMETRY_FAILED', [
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'org_id' => $orgId,
+                            'attempt_id' => $attemptId,
+                            'error_message' => $e->getMessage(),
+                        ]);
+                    }
+
                     if (!$this->isCrisisAttempt($orgId, $attemptId)) {
                         $this->queueBigFiveUnlockEmail(
                             $orgId,
@@ -993,6 +1015,43 @@ class PaymentWebhookHandlerCore
             $providerEventId,
             $orderNo
         );
+    }
+
+    private function emitScaleUnlockTelemetry(
+        int $orgId,
+        string $attemptId,
+        string $provider,
+        string $providerEventId,
+        ?string $orderNo = null
+    ): void {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return;
+        }
+
+        $attempt = Attempt::query()->where('id', $attemptId)->first();
+        if (! $attempt instanceof Attempt) {
+            return;
+        }
+
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        $meta = [
+            'provider' => strtolower(trim($provider)),
+            'provider_event_id' => trim($providerEventId),
+            'order_no' => $orderNo !== null ? trim($orderNo) : '',
+            'unlock_source' => 'payment_webhook',
+            'variant' => 'full',
+            'locked' => false,
+        ];
+
+        if ($scaleCode === 'CLINICAL_COMBO_68') {
+            app(ClinicalComboTelemetry::class)->unlocked($attempt, $meta);
+            return;
+        }
+
+        if ($scaleCode === 'SDS_20') {
+            app(Sds20Telemetry::class)->unlocked($attempt, $meta);
+        }
     }
 
     private function numericUserId(?string $userId): ?int

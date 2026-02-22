@@ -9,6 +9,8 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\AssessmentRunner;
 use App\Services\Observability\BigFiveTelemetry;
+use App\Services\Observability\ClinicalComboTelemetry;
+use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
@@ -472,19 +474,34 @@ class AttemptSubmitService
             );
         }
 
-        if (($responsePayload['ok'] ?? false) === true && $scaleCode === 'CLINICAL_COMBO_68') {
-            $this->sideEffects->recordClinicalScoreEvent(
-                $ctx,
-                $attemptId,
-                $actorUserId,
-                $actorAnonId,
-                is_array($responsePayload['result'] ?? null) ? $responsePayload['result'] : [],
-                [
-                    'pack_id' => $packId,
-                    'dir_version' => $dirVersion,
-                    'scoring_spec_version' => $scoringSpecVersion,
-                ]
-            );
+        if (($responsePayload['ok'] ?? false) === true && in_array($scaleCode, ['CLINICAL_COMBO_68', 'SDS_20'], true)) {
+            $reportPayload = is_array($responsePayload['report'] ?? null) ? $responsePayload['report'] : [];
+            $scorePayload = is_array($responsePayload['result'] ?? null) ? $responsePayload['result'] : [];
+            $qualityPayload = is_array($scorePayload['quality'] ?? null)
+                ? $scorePayload['quality']
+                : (is_array(data_get($scorePayload, 'normed_json.quality')) ? data_get($scorePayload, 'normed_json.quality') : []);
+            $crisisReasons = array_values(array_filter(array_map('strval', (array) ($qualityPayload['crisis_reasons'] ?? []))));
+
+            $telemetry = $scaleCode === 'CLINICAL_COMBO_68'
+                ? app(ClinicalComboTelemetry::class)
+                : app(Sds20Telemetry::class);
+
+            $telemetry->attemptSubmitted($attempt, [
+                'quality_level' => strtoupper(trim((string) ($qualityPayload['level'] ?? 'D'))),
+                'variant' => strtolower(trim((string) ($reportPayload['variant'] ?? 'free'))),
+                'locked' => (bool) ($reportPayload['locked'] ?? true),
+                'idempotent' => (bool) ($responsePayload['idempotent'] ?? false),
+                'scoring_spec_version' => $scoringSpecVersion,
+            ]);
+
+            $telemetry->attemptScored($attempt, $scorePayload);
+
+            if ((bool) ($qualityPayload['crisis_alert'] ?? false) === true) {
+                $telemetry->crisisTriggered($attempt, [
+                    'quality_level' => strtoupper(trim((string) ($qualityPayload['level'] ?? 'D'))),
+                    'crisis_reasons' => $crisisReasons,
+                ]);
+            }
         }
 
         return $responsePayload;
