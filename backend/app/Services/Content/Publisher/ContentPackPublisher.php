@@ -303,13 +303,19 @@ final class ContentPackPublisher
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $resolvedScaleCode = strtoupper(trim($toPackId));
+        if (!in_array($resolvedScaleCode, ['BIG5_OCEAN', 'SDS_20'], true)) {
+            $resolvedScaleCode = 'BIG5_OCEAN';
+        }
+        $auditAction = $resolvedScaleCode === 'SDS_20' ? 'sds_pack_publish' : 'big5_pack_publish';
+
         $this->recordReleaseAudit(
-            'big5_pack_publish',
+            $auditAction,
             $releaseId,
             $status,
             $message,
             [
-                'scale_code' => 'BIG5_OCEAN',
+                'scale_code' => $resolvedScaleCode,
                 'region' => $region,
                 'locale' => $locale,
                 'dir_alias' => $dirAlias,
