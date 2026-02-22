@@ -26,20 +26,14 @@ final class BigFiveOceanDriver implements DriverInterface
             $version = BigFivePackLoader::PACK_VERSION;
         }
 
-        $compiledQuestions = $this->packLoader->readCompiledJson('questions.compiled.json', $version);
         $compiledNorms = $this->packLoader->readCompiledJson('norms.compiled.json', $version);
         $compiledPolicy = $this->packLoader->readCompiledJson('policy.compiled.json', $version);
 
-        if (!is_array($compiledQuestions) || !is_array($compiledNorms) || !is_array($compiledPolicy)) {
+        if (!is_array($compiledNorms) || !is_array($compiledPolicy)) {
             throw new RuntimeException('BIG5_OCEAN compiled pack missing. Run content:compile --pack=BIG5_OCEAN --version=' . $version);
         }
 
-        $questionIndex = is_array($compiledQuestions['question_index'] ?? null)
-            ? $compiledQuestions['question_index']
-            : [];
-        if (count($questionIndex) !== 120) {
-            throw new RuntimeException('BIG5_OCEAN compiled question index invalid.');
-        }
+        $questionIndex = $this->resolveQuestionIndex($version);
 
         $answersById = $this->normalizeAnswers($answers);
         $policy = is_array($compiledPolicy['policy'] ?? null) ? $compiledPolicy['policy'] : [];
@@ -136,5 +130,35 @@ final class BigFiveOceanDriver implements DriverInterface
         }
 
         return (int) $userId;
+    }
+
+    /**
+     * @return array<int,array<string,mixed>>
+     */
+    private function resolveQuestionIndex(string $version): array
+    {
+        $compiledMin = $this->packLoader->readCompiledJson('questions.min.compiled.json', $version);
+        if (is_array($compiledMin)) {
+            $questionIndex = is_array($compiledMin['question_index'] ?? null)
+                ? $compiledMin['question_index']
+                : [];
+            if (count($questionIndex) === 120) {
+                return $questionIndex;
+            }
+        }
+
+        $compiledQuestions = $this->packLoader->readCompiledJson('questions.compiled.json', $version);
+        if (!is_array($compiledQuestions)) {
+            throw new RuntimeException('BIG5_OCEAN compiled questions missing. Run content:compile --pack=BIG5_OCEAN --version=' . $version);
+        }
+
+        $questionIndex = is_array($compiledQuestions['question_index'] ?? null)
+            ? $compiledQuestions['question_index']
+            : [];
+        if (count($questionIndex) !== 120) {
+            throw new RuntimeException('BIG5_OCEAN compiled question index invalid.');
+        }
+
+        return $questionIndex;
     }
 }
