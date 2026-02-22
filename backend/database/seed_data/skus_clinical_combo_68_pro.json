@@ -1,0 +1,68 @@
+[
+  {
+    "sku": "SKU_CLINICAL_COMBO_68_PRO_299",
+    "sku_code": "SKU_CLINICAL_COMBO_68_PRO_299",
+    "anchor_sku": "SKU_CLINICAL_COMBO_68_PRO",
+    "scale_code": "CLINICAL_COMBO_68",
+    "benefit_type": "report_unlock",
+    "benefit_code": "CLINICAL_COMBO_68_PRO",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 299,
+    "currency": "CNY",
+    "offer_code": "CLINICAL_COMBO_68_PRO_MAIN",
+    "modules_included": [
+      "clinical_full",
+      "clinical_resilience",
+      "clinical_perfectionism",
+      "clinical_action_plan"
+    ],
+    "title": "Clinical Combo 68 Pro Report",
+    "is_active": true,
+    "metadata_json": {
+      "label": "Clinical Combo 68 Pro Report",
+      "offer_code": "CLINICAL_COMBO_68_PRO_MAIN",
+      "effective_default": true,
+      "anchor_sku": "SKU_CLINICAL_COMBO_68_PRO",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "clinical_combo_68_pro",
+      "modules_included": [
+        "clinical_full",
+        "clinical_resilience",
+        "clinical_perfectionism",
+        "clinical_action_plan"
+      ]
+    }
+  },
+  {
+    "sku": "SKU_CLINICAL_COMBO_68_PRO",
+    "sku_code": "SKU_CLINICAL_COMBO_68_PRO",
+    "anchor_sku": "SKU_CLINICAL_COMBO_68_PRO",
+    "scale_code": "CLINICAL_COMBO_68",
+    "benefit_type": "report_unlock",
+    "benefit_code": "CLINICAL_COMBO_68_PRO",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 299,
+    "currency": "CNY",
+    "title": "Clinical Combo 68 Pro Report (anchor)",
+    "is_active": true,
+    "metadata_json": {
+      "label": "Clinical Combo 68 Pro Report (anchor)",
+      "anchor": true,
+      "deprecated": true,
+      "effective_sku": "SKU_CLINICAL_COMBO_68_PRO_299",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "clinical_combo_68_pro",
+      "offer": false,
+      "modules_included": [
+        "clinical_full",
+        "clinical_resilience",
+        "clinical_perfectionism",
+        "clinical_action_plan"
+      ]
+    }
+  }
+]

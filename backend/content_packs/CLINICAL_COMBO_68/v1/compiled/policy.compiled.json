@@ -1,0 +1,296 @@
+{
+    "schema": "clinical_combo_68.policy.compiled.v1",
+    "pack_id": "CLINICAL_COMBO_68",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T10:00:07.494838Z",
+    "policy": {
+        "pack_id": "CLINICAL_COMBO_68",
+        "pack_version": "v1",
+        "policy_version": "2026.02.v1",
+        "engine_version": "v1.0_2026",
+        "scoring_spec_version": "v1.0_2026",
+        "reverse_questions": [
+            18,
+            19
+        ],
+        "quality_rules": {
+            "speeding_min_seconds": 100,
+            "straightlining_min_run": 15,
+            "extreme_rate_min": 0.88,
+            "neutral_rate_min": 0.6,
+            "level_order": [
+                "D",
+                "C",
+                "B",
+                "A"
+            ],
+            "inconsistency_pair": {
+                "q17_min": 3,
+                "q18_reversed_min": 3
+            }
+        },
+        "crisis_rules": {
+            "q9_min": 2,
+            "q68_min": 3,
+            "reason_map": {
+                "q9": "SUICIDAL_IDEATION",
+                "q68": "FUNCTION_IMPAIRMENT"
+            }
+        },
+        "scoring_rules": {
+            "mu_sigma": {
+                "depression": {
+                    "mu": 10.5,
+                    "sigma": 6.2
+                },
+                "anxiety": {
+                    "mu": 8.2,
+                    "sigma": 5.5
+                },
+                "stress": {
+                    "mu": 9,
+                    "sigma": 3.5
+                },
+                "resilience": {
+                    "mu": 24.5,
+                    "sigma": 6.8
+                },
+                "perfectionism": {
+                    "mu": 82,
+                    "sigma": 18.5
+                },
+                "ocd": {
+                    "mu": 12,
+                    "sigma": 8
+                }
+            },
+            "t_score_clamp": {
+                "min": 20,
+                "max": 80
+            },
+            "buckets": {
+                "depression": [
+                    {
+                        "min_t": 20,
+                        "max_t": 59,
+                        "level": "normal"
+                    },
+                    {
+                        "min_t": 60,
+                        "max_t": 64,
+                        "level": "mild"
+                    },
+                    {
+                        "min_t": 65,
+                        "max_t": 69,
+                        "level": "moderate"
+                    },
+                    {
+                        "min_t": 70,
+                        "max_t": 80,
+                        "level": "severe"
+                    }
+                ],
+                "anxiety": [
+                    {
+                        "min_t": 20,
+                        "max_t": 59,
+                        "level": "normal"
+                    },
+                    {
+                        "min_t": 60,
+                        "max_t": 64,
+                        "level": "mild"
+                    },
+                    {
+                        "min_t": 65,
+                        "max_t": 69,
+                        "level": "moderate"
+                    },
+                    {
+                        "min_t": 70,
+                        "max_t": 80,
+                        "level": "severe"
+                    }
+                ],
+                "stress": [
+                    {
+                        "min_t": 20,
+                        "max_t": 54,
+                        "level": "low"
+                    },
+                    {
+                        "min_t": 55,
+                        "max_t": 64,
+                        "level": "medium"
+                    },
+                    {
+                        "min_t": 65,
+                        "max_t": 74,
+                        "level": "high"
+                    },
+                    {
+                        "min_t": 75,
+                        "max_t": 80,
+                        "level": "extreme"
+                    }
+                ],
+                "resilience": [
+                    {
+                        "min_t": 20,
+                        "max_t": 39,
+                        "level": "fragile"
+                    },
+                    {
+                        "min_t": 40,
+                        "max_t": 49,
+                        "level": "low"
+                    },
+                    {
+                        "min_t": 50,
+                        "max_t": 59,
+                        "level": "average"
+                    },
+                    {
+                        "min_t": 60,
+                        "max_t": 69,
+                        "level": "strong"
+                    },
+                    {
+                        "min_t": 70,
+                        "max_t": 80,
+                        "level": "very_strong"
+                    }
+                ],
+                "perfectionism": [
+                    {
+                        "min_t": 20,
+                        "max_t": 44,
+                        "level": "easygoing"
+                    },
+                    {
+                        "min_t": 45,
+                        "max_t": 54,
+                        "level": "balanced"
+                    },
+                    {
+                        "min_t": 55,
+                        "max_t": 64,
+                        "level": "perfectionist"
+                    },
+                    {
+                        "min_t": 65,
+                        "max_t": 80,
+                        "level": "extreme"
+                    }
+                ],
+                "ocd": [
+                    {
+                        "min_t": 20,
+                        "max_t": 54,
+                        "level": "subclinical"
+                    },
+                    {
+                        "min_t": 55,
+                        "max_t": 64,
+                        "level": "mild"
+                    },
+                    {
+                        "min_t": 65,
+                        "max_t": 74,
+                        "level": "moderate"
+                    },
+                    {
+                        "min_t": 75,
+                        "max_t": 80,
+                        "level": "severe"
+                    }
+                ]
+            }
+        },
+        "report_tags": {
+            "dominant_trait_tie_order": [
+                "CM",
+                "PS",
+                "ORG",
+                "PE",
+                "DA"
+            ]
+        },
+        "ethical_paywall": {
+            "free_core": [
+                "depression",
+                "anxiety",
+                "ocd",
+                "stress"
+            ],
+            "paid_blocks": [
+                "resilience",
+                "perfectionism",
+                "action_plan"
+            ]
+        },
+        "consent_policy": {
+            "version": "CLINICAL_COMBO_68_CONSENT_2026_02",
+            "required_when_scale_code": "CLINICAL_COMBO_68"
+        },
+        "content_aliases": {
+            "levels": {
+                "perfectionism": {
+                    "rigid": [
+                        "extreme"
+                    ]
+                },
+                "resilience": {
+                    "strong_band": [
+                        "strong",
+                        "very_strong"
+                    ]
+                }
+            }
+        },
+        "content_condition_rules": {
+            "logic_default": "all",
+            "allowed_ops": [
+                "eq",
+                "in",
+                "contains",
+                "gte",
+                "lte"
+            ],
+            "allowed_paths": [
+                "quality.crisis_alert",
+                "quality.flags",
+                "scores.depression.level",
+                "scores.depression.flags",
+                "scores.anxiety.level",
+                "scores.ocd.level",
+                "scores.stress.level",
+                "scores.resilience.level",
+                "scores.perfectionism.level",
+                "facts.function_impairment_level",
+                "report_tags"
+            ]
+        }
+    },
+    "variables_allowlist": {
+        "allowed": [
+            "depression_level",
+            "depression_flags",
+            "anxiety_level",
+            "ocd_level",
+            "stress_level",
+            "resilience_level",
+            "perfectionism_level",
+            "function_impairment_level",
+            "function_impairment_raw",
+            "dominant_trait_tag",
+            "PE_parental",
+            "ORG_order",
+            "PS_standards",
+            "CM_mistakes",
+            "DA_doubts"
+        ],
+        "required": []
+    }
+}

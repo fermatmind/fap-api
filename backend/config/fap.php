@@ -18,6 +18,7 @@ return [
         'agent' => (bool) env('FAP_FEATURE_AGENT', false),
         'insights' => (bool) env('FAP_FEATURE_INSIGHTS', false),
         'analytics' => (bool) env('FAP_FEATURE_ANALYTICS', true),
+        'clinical_consent_enforce' => (bool) env('FAP_FEATURE_CLINICAL_CONSENT_ENFORCE', false),
     ],
 
     'payments' => [
@@ -200,6 +201,7 @@ return [
         'generic_scoring' => App\Services\Assessment\Drivers\GenericScoringDriver::class,
         'big5' => App\Services\Assessment\Drivers\GenericScoringDriver::class,
         'big5_ocean' => App\Services\Assessment\Drivers\BigFiveOceanDriver::class,
+        'clinical_combo_68' => App\Services\Assessment\Drivers\ClinicalCombo68Driver::class,
     ],
 
     // Persist raw answers (audit)

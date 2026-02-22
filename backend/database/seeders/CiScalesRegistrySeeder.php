@@ -140,6 +140,35 @@ final class CiScalesRegistrySeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
+            [
+                'org_id' => 0,
+                'code' => 'CLINICAL_COMBO_68',
+                'primary_slug' => 'clinical-combo-68',
+                'slugs_json' => json_encode(['clinical-combo-68', 'depression-anxiety-combo'], JSON_UNESCAPED_UNICODE),
+                'driver_type' => 'clinical_combo_68',
+                'assessment_driver' => 'clinical_combo_68',
+                'default_pack_id' => 'CLINICAL_COMBO_68',
+                'default_region' => $defaultRegion,
+                'default_locale' => $defaultLocale,
+                'default_dir_version' => 'v1',
+                'capabilities_json' => json_encode([
+                    'assets' => false,
+                    'questions' => true,
+                    'enabled_in_prod' => true,
+                    'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                    'rollout_ratio' => 1.0,
+                    'paywall_mode' => 'full',
+                ], JSON_UNESCAPED_UNICODE),
+                'commercial_json' => json_encode([
+                    'report_benefit_code' => 'CLINICAL_COMBO_68_PRO',
+                    'credit_benefit_code' => 'CLINICAL_COMBO_68_PRO',
+                    'report_unlock_sku' => 'SKU_CLINICAL_COMBO_68_PRO_299',
+                ], JSON_UNESCAPED_UNICODE),
+                'is_public' => 1,
+                'is_active' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
         ];
 
         DB::table('scales_registry')->upsert(
@@ -162,6 +191,6 @@ final class CiScalesRegistrySeeder extends Seeder
             ]
         );
 
-        $this->command?->info('CiScalesRegistrySeeder: upserted 5 scales.');
+        $this->command?->info('CiScalesRegistrySeeder: upserted 6 scales.');
     }
 }

@@ -154,7 +154,9 @@ final class EventRecorder
     private function sanitizeMetaForStorage(string $eventCode, array $meta): array
     {
         $normalizedCode = strtolower(trim($eventCode));
-        if (!str_starts_with($normalizedCode, 'big5_')) {
+        $needsRedaction = str_starts_with($normalizedCode, 'big5_')
+            || str_starts_with($normalizedCode, 'clinical_combo_68_');
+        if (!$needsRedaction) {
             return $meta;
         }
 
@@ -168,7 +170,9 @@ final class EventRecorder
             $sanitized['_redaction'] = [
                 'count' => $count,
                 'version' => (string) ($result['version'] ?? 'v2'),
-                'scope' => 'big5_event_meta',
+                'scope' => str_starts_with($normalizedCode, 'big5_')
+                    ? 'big5_event_meta'
+                    : 'clinical_event_meta',
             ];
         }
 

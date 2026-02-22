@@ -9,6 +9,10 @@ class AnswerRowWriter
 {
     public function writeRows(Attempt $attempt, array $answers, int $durationMs): array
     {
+        if (strtoupper((string) ($attempt->scale_code ?? '')) === 'CLINICAL_COMBO_68') {
+            return ['ok' => true, 'skipped' => true, 'rows' => 0];
+        }
+
         if (!$this->isEnabled()) {
             return ['ok' => true, 'skipped' => true, 'rows' => 0];
         }

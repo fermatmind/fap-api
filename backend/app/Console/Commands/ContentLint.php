@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Content\BigFiveContentLintService;
+use App\Services\Content\ClinicalComboContentLintService;
 use App\Services\Content\ContentLintService;
 use Illuminate\Console\Command;
 
@@ -17,12 +18,22 @@ final class ContentLint extends Command
 
     protected $description = 'Lint content packs for schema/access/template safety before release.';
 
-    public function handle(ContentLintService $service, BigFiveContentLintService $bigFiveLint): int
+    public function handle(
+        ContentLintService $service,
+        BigFiveContentLintService $bigFiveLint,
+        ClinicalComboContentLintService $clinicalLint
+    ): int
     {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
         if (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
             $single = $bigFiveLint->lint(is_string($version) ? $version : null);
+            $result = [
+                'ok' => (bool) ($single['ok'] ?? false),
+                'packs' => [$single],
+            ];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === 'CLINICAL_COMBO_68') {
+            $single = $clinicalLint->lint(is_string($version) ? $version : null);
             $result = [
                 'ok' => (bool) ($single['ok'] ?? false),
                 'packs' => [$single],

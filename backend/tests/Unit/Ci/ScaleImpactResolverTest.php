@@ -48,4 +48,18 @@ final class ScaleImpactResolverTest extends TestCase
         $this->assertFalse((bool) ($result['run_big5_ocean_gate'] ?? true));
         $this->assertSame('mbti_only', (string) ($result['scale_scope'] ?? ''));
     }
+
+    public function test_clinical_only_change_runs_clinical_gate_and_keeps_mbti_smoke(): void
+    {
+        $resolver = new ScaleImpactResolver();
+        $result = $resolver->resolve([
+            'backend/content_packs/CLINICAL_COMBO_68/v1/raw/policy.json',
+        ]);
+
+        $this->assertFalse((bool) ($result['shared_changed'] ?? true));
+        $this->assertTrue((bool) ($result['clinical_combo_68_changed'] ?? false));
+        $this->assertTrue((bool) ($result['run_clinical_combo_68_gate'] ?? false));
+        $this->assertTrue((bool) ($result['run_mbti_smoke'] ?? false));
+        $this->assertSame('clinical_with_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
+    }
 }

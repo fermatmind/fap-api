@@ -1,0 +1,183 @@
+{
+  "schema": "clinical_combo_68.blocks.paid.v2",
+  "blocks": [
+    {
+      "block_id": "paid_perf_pe_parental_zh",
+      "section": "paid_deep_dive",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 220,
+      "exclusive_group": "perf_dominant",
+      "conditions": [
+        { "path": "report_tags", "op": "contains", "value": "trait:parental_expectation_dominant" }
+      ],
+      "title": "你的完美主义更像“外部高标准驱动”",
+      "body_md": "你更容易把自我评价与外部认可绑定。优化方向不是降低上进心，而是把评价权从外部拿回自己手里：优先追踪可控过程指标，再看结果指标。"
+    },
+    {
+      "block_id": "paid_perf_org_order_zh",
+      "section": "paid_deep_dive",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 220,
+      "exclusive_group": "perf_dominant",
+      "conditions": [
+        { "path": "report_tags", "op": "contains", "value": "trait:orderliness_dominant" }
+      ],
+      "title": "你的完美主义更像“秩序感驱动”",
+      "body_md": "你在结构和秩序中更容易稳定与高效。建议建立“弹性秩序”：关键任务维持高标准，非关键任务允许 80 分运行。"
+    },
+    {
+      "block_id": "paid_perf_ps_standards_zh",
+      "section": "paid_deep_dive",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 220,
+      "exclusive_group": "perf_dominant",
+      "conditions": [
+        { "path": "report_tags", "op": "contains", "value": "trait:high_standards_dominant" }
+      ],
+      "title": "你的完美主义更像“自我高目标驱动”",
+      "body_md": "高目标是优势，但当它绑定人格价值时会放大波动。建议把“我这个人好不好”改为“这次策略是否有效”，将目标从身份里剥离。"
+    },
+    {
+      "block_id": "paid_perf_cm_mistakes_zh",
+      "section": "paid_deep_dive",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 220,
+      "exclusive_group": "perf_dominant",
+      "conditions": [
+        { "path": "report_tags", "op": "contains", "value": "trait:mistake_concern_dominant" }
+      ],
+      "title": "你的完美主义更像“害怕犯错驱动”",
+      "body_md": "你对错误高度敏感，容易过度准备或拖延。可从低风险场景做“可控失误训练”，提升对不确定性的耐受能力。"
+    },
+    {
+      "block_id": "paid_perf_da_doubts_zh",
+      "section": "paid_deep_dive",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 220,
+      "exclusive_group": "perf_dominant",
+      "conditions": [
+        { "path": "report_tags", "op": "contains", "value": "trait:doubt_checking_dominant" }
+      ],
+      "title": "你的完美主义更像“反复确认驱动”",
+      "body_md": "你对不确定性的耐受阈值偏低，容易反复确认。建议设置明确确认规则，并用延迟技术削弱“必须马上确认”的冲动。"
+    },
+    {
+      "block_id": "paid_resilience_praise_zh",
+      "section": "paid_deep_dive",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 180,
+      "exclusive_group": "resilience_bonus",
+      "conditions": [
+        { "path": "scores.resilience.level", "op": "in", "value": ["strong_band"] }
+      ],
+      "title": "你的韧性是稀缺优势资产",
+      "body_md": "你在压力下仍能保持恢复与推进能力。建议把恢复仪式、支持网络与节律管理固定化，防止高韧性人群的隐性透支。"
+    },
+    {
+      "block_id": "paid_perf_generic_en",
+      "section": "paid_deep_dive",
+      "locale": "en",
+      "access_level": "paid",
+      "priority": 120,
+      "exclusive_group": "perf_dominant",
+      "title": "Perfectionism Deep Dive",
+      "body_md": "Your profile highlights one dominant perfectionism pathway. The action plan focuses on reducing overcontrol while preserving performance."
+    },
+    {
+      "block_id": "paid_resilience_praise_en",
+      "section": "paid_deep_dive",
+      "locale": "en",
+      "access_level": "paid",
+      "priority": 110,
+      "exclusive_group": "resilience_bonus",
+      "conditions": [
+        { "path": "scores.resilience.level", "op": "in", "value": ["strong", "very_strong"] }
+      ],
+      "title": "Resilience Advantage",
+      "body_md": "You retain stronger recovery under pressure. Preserve this advantage with explicit recovery routines and boundaries."
+    },
+
+    {
+      "block_id": "paid_action_depression_14d_zh",
+      "section": "action_plan",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 200,
+      "exclusive_group": "action_depression",
+      "conditions": [
+        { "path": "scores.depression.level", "op": "in", "value": ["moderate", "severe"] }
+      ],
+      "title": "14 天行为激活计划",
+      "body_md": "先把任务缩到最小可启动单位，记录完成而不评价；逐步恢复睡眠、光照、活动与低负荷社交，把行动与情绪解绑。"
+    },
+    {
+      "block_id": "paid_action_anxiety_14d_zh",
+      "section": "action_plan",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 190,
+      "exclusive_group": "action_anxiety",
+      "conditions": [
+        { "path": "scores.anxiety.level", "op": "in", "value": ["moderate", "severe"] }
+      ],
+      "title": "14 天焦虑管理计划",
+      "body_md": "每天固定呼吸训练与担忧窗口；把担忧分为可控/不可控；减少高刺激暴露并安排身体释放任务。"
+    },
+    {
+      "block_id": "paid_action_ocd_erp_start_zh",
+      "section": "action_plan",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 180,
+      "exclusive_group": "action_ocd",
+      "conditions": [
+        { "path": "scores.ocd.level", "op": "in", "value": ["moderate", "severe"] }
+      ],
+      "title": "ERP 起步训练",
+      "body_md": "从最低难度场景开始延迟 1 分钟执行冲动行为，逐步延长到 5 分钟，并记录冲动强度与延迟结果。"
+    },
+    {
+      "block_id": "paid_action_perfectionism_14d_zh",
+      "section": "action_plan",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 170,
+      "exclusive_group": "action_perfectionism",
+      "conditions": [
+        { "path": "scores.perfectionism.level", "op": "in", "value": ["perfectionist", "rigid"] }
+      ],
+      "title": "把完美主义从折磨变成能力",
+      "body_md": "每天选择 1 件任务做 80 分交付；区分最低可交付标准与优化标准；使用事实陈述替代人格审判。"
+    },
+    {
+      "block_id": "paid_action_burnout_zh",
+      "section": "action_plan",
+      "locale": "zh-CN",
+      "access_level": "paid",
+      "priority": 160,
+      "exclusive_group": "action_burnout",
+      "conditions": [
+        { "path": "scores.stress.level", "op": "in", "value": ["high", "extreme"] },
+        { "path": "scores.resilience.level", "op": "in", "value": ["fragile", "low"] }
+      ],
+      "title": "倦怠风险：先止损再重建",
+      "body_md": "对任务做必须/可延后/可放弃分层，建立硬边界，优先恢复睡眠与身体，再逐步重建执行能力。"
+    },
+    {
+      "block_id": "paid_action_safety_core_en",
+      "section": "action_plan",
+      "locale": "en",
+      "access_level": "paid",
+      "priority": 100,
+      "exclusive_group": "action_en_generic",
+      "title": "14-day Stabilization Plan",
+      "body_md": "Use small daily activation, scheduled worry processing, and low-risk ERP-style delay practice. Seek professional care if impairment worsens."
+    }
+  ]
+}

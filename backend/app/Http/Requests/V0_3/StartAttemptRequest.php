@@ -23,6 +23,10 @@ class StartAttemptRequest extends FormRequest
             'channel' => ['nullable', 'string', 'max:32'],
             'referrer' => ['nullable', 'string', 'max:255'],
             'meta' => ['sometimes', 'array'],
+            'consent' => ['sometimes', 'array'],
+            'consent.accepted' => ['sometimes', 'boolean'],
+            'consent.version' => ['sometimes', 'string', 'max:128'],
+            'consent.locale' => ['nullable', 'string', 'max:16'],
         ];
     }
 }

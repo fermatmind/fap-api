@@ -99,7 +99,17 @@ class AttemptSubmitService
             $scoreContext
         );
         if (! ($scored['ok'] ?? false)) {
-            throw new ApiProblemException(500, 'SCORING_FAILED', (string) ($scored['message'] ?? 'scoring failed.'));
+            $errorCode = strtoupper(trim((string) ($scored['error'] ?? 'SCORING_FAILED')));
+            if ($errorCode === '') {
+                $errorCode = 'SCORING_FAILED';
+            }
+            $status = match ($errorCode) {
+                'SCORING_INPUT_INVALID' => 422,
+                'SCALE_NOT_FOUND' => 404,
+                default => 500,
+            };
+
+            throw new ApiProblemException($status, $errorCode, (string) ($scored['message'] ?? 'scoring failed.'));
         }
 
         $scoreResult = $scored['result'];
@@ -252,6 +262,31 @@ class AttemptSubmitService
                 $locked->calculation_snapshot_json = $snapshot;
             }
 
+            if ($scaleCode === 'CLINICAL_COMBO_68' && is_array($scoreResult->normedJson ?? null)) {
+                $normed = (array) $scoreResult->normedJson;
+                $versionSnapshot = is_array($normed['version_snapshot'] ?? null)
+                    ? $normed['version_snapshot']
+                    : [];
+
+                $snapshot = $locked->calculation_snapshot_json;
+                if (!is_array($snapshot)) {
+                    $snapshot = [];
+                }
+
+                $snapshot['clinical_combo_68'] = [
+                    'pack_id' => (string) ($versionSnapshot['pack_id'] ?? $packId),
+                    'pack_version' => (string) ($versionSnapshot['pack_version'] ?? $dirVersion),
+                    'policy_version' => (string) ($versionSnapshot['policy_version'] ?? ''),
+                    'engine_version' => (string) ($versionSnapshot['engine_version'] ?? data_get($normed, 'engine_version', 'v1.0_2026')),
+                    'scoring_spec_version' => (string) ($versionSnapshot['scoring_spec_version'] ?? $scoringSpecVersion),
+                    'content_manifest_hash' => (string) ($versionSnapshot['content_manifest_hash'] ?? ''),
+                ];
+                $snapshot['quality'] = is_array($normed['quality'] ?? null) ? $normed['quality'] : [];
+                $locked->calculation_snapshot_json = $snapshot;
+
+                $locked->answers_summary_json = $this->buildClinicalAnswersSummary($mergedAnswers, $normed, $durationMs);
+            }
+
             if ($locked->started_at === null) {
                 $locked->started_at = now();
             }
@@ -379,6 +414,21 @@ class AttemptSubmitService
                 $dirVersion,
                 null,
                 (string) ($normsPayload['norms_version'] ?? '')
+            );
+        }
+
+        if (($responsePayload['ok'] ?? false) === true && $scaleCode === 'CLINICAL_COMBO_68') {
+            $this->sideEffects->recordClinicalScoreEvent(
+                $ctx,
+                $attemptId,
+                $actorUserId,
+                $actorAnonId,
+                is_array($responsePayload['result'] ?? null) ? $responsePayload['result'] : [],
+                [
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'scoring_spec_version' => $scoringSpecVersion,
+                ]
             );
         }
 
@@ -562,5 +612,93 @@ class AttemptSubmitService
         }
 
         return (int) $userId;
+    }
+
+    /**
+     * @param array<int,array<string,mixed>> $answers
+     * @param array<string,mixed> $normed
+     * @return array<string,mixed>
+     */
+    private function buildClinicalAnswersSummary(array $answers, array $normed, int $durationMs): array
+    {
+        $counts = [
+            'A' => 0,
+            'B' => 0,
+            'C' => 0,
+            'D' => 0,
+            'E' => 0,
+        ];
+
+        foreach ($answers as $answer) {
+            if (!is_array($answer)) {
+                continue;
+            }
+
+            $code = $this->normalizeAnswerCode($answer['code'] ?? null);
+            if ($code === null) {
+                continue;
+            }
+            $counts[$code] = (int) ($counts[$code] ?? 0) + 1;
+        }
+
+        $quality = is_array($normed['quality'] ?? null) ? $normed['quality'] : [];
+        $metrics = is_array($quality['metrics'] ?? null) ? $quality['metrics'] : [];
+        $versionSnapshot = is_array($normed['version_snapshot'] ?? null) ? $normed['version_snapshot'] : [];
+
+        return [
+            'stage' => 'submit',
+            'counts' => $counts,
+            'neutral_rate' => (float) ($metrics['neutral_rate'] ?? 0.0),
+            'extreme_rate' => (float) ($metrics['extreme_rate'] ?? 0.0),
+            'longstring_max' => (int) ($metrics['longstring_max'] ?? 0),
+            'quality_level' => (string) ($quality['level'] ?? 'D'),
+            'flags' => array_values(array_filter(array_map('strval', (array) ($quality['flags'] ?? [])))),
+            'crisis_alert' => (bool) ($quality['crisis_alert'] ?? false),
+            'completion_time_seconds' => (int) ($quality['completion_time_seconds'] ?? 0),
+            'duration_ms_client' => $durationMs,
+            'versions' => [
+                'pack_id' => (string) ($versionSnapshot['pack_id'] ?? 'CLINICAL_COMBO_68'),
+                'pack_version' => (string) ($versionSnapshot['pack_version'] ?? ''),
+                'policy_version' => (string) ($versionSnapshot['policy_version'] ?? ''),
+                'engine_version' => (string) ($versionSnapshot['engine_version'] ?? data_get($normed, 'engine_version', 'v1.0_2026')),
+                'scoring_spec_version' => (string) ($versionSnapshot['scoring_spec_version'] ?? ''),
+                'content_manifest_hash' => (string) ($versionSnapshot['content_manifest_hash'] ?? ''),
+            ],
+        ];
+    }
+
+    private function normalizeAnswerCode(mixed $raw): ?string
+    {
+        if (is_array($raw)) {
+            $raw = $raw['code'] ?? ($raw['value'] ?? null);
+        }
+
+        if (is_string($raw)) {
+            $value = strtoupper(trim($raw));
+            if (preg_match('/^[A-E]$/', $value) === 1) {
+                return $value;
+            }
+            if (preg_match('/^[0-5]$/', $value) === 1) {
+                $n = (int) $value;
+                if ($n >= 1 && $n <= 5) {
+                    return ['A', 'B', 'C', 'D', 'E'][$n - 1];
+                }
+                if ($n >= 0 && $n <= 4) {
+                    return ['A', 'B', 'C', 'D', 'E'][$n];
+                }
+            }
+        }
+
+        if (is_int($raw) || is_float($raw)) {
+            $n = (int) $raw;
+            if ($n >= 1 && $n <= 5) {
+                return ['A', 'B', 'C', 'D', 'E'][$n - 1];
+            }
+            if ($n >= 0 && $n <= 4) {
+                return ['A', 'B', 'C', 'D', 'E'][$n];
+            }
+        }
+
+        return null;
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Template;
 
 use App\Services\Content\BigFivePackLoader;
+use App\Services\Content\ClinicalComboPackLoader;
 
 final class TemplateVariableRegistry
 {
@@ -38,7 +39,15 @@ final class TemplateVariableRegistry
      */
     private ?array $bigFiveVariableSpec = null;
 
-    public function __construct(private readonly ?BigFivePackLoader $bigFivePackLoader = null)
+    /**
+     * @var array{allowed:list<string>,required:list<string>}|null
+     */
+    private ?array $clinicalVariableSpec = null;
+
+    public function __construct(
+        private readonly ?BigFivePackLoader $bigFivePackLoader = null,
+        private readonly ?ClinicalComboPackLoader $clinicalPackLoader = null,
+    )
     {
     }
 
@@ -50,6 +59,9 @@ final class TemplateVariableRegistry
         $out = self::ALLOWED;
         foreach ($this->bigFiveVariableSpec()['allowed'] as $varName) {
             $out[$varName] = 'BIG5 template variable';
+        }
+        foreach ($this->clinicalVariableSpec()['allowed'] as $varName) {
+            $out[$varName] = 'CLINICAL_COMBO_68 template variable';
         }
 
         return $out;
@@ -70,7 +82,11 @@ final class TemplateVariableRegistry
             return true;
         }
 
-        return in_array($varName, $this->bigFiveVariableSpec()['allowed'], true);
+        if (in_array($varName, $this->bigFiveVariableSpec()['allowed'], true)) {
+            return true;
+        }
+
+        return in_array($varName, $this->clinicalVariableSpec()['allowed'], true);
     }
 
     public function assertAllowed(string $varName): void
@@ -118,7 +134,10 @@ final class TemplateVariableRegistry
      */
     public function requiredVariables(): array
     {
-        return $this->bigFiveVariableSpec()['required'];
+        return array_values(array_unique(array_merge(
+            $this->bigFiveVariableSpec()['required'],
+            $this->clinicalVariableSpec()['required']
+        )));
     }
 
     /**
@@ -182,5 +201,66 @@ final class TemplateVariableRegistry
         $this->bigFiveVariableSpec = $default;
 
         return $this->bigFiveVariableSpec;
+    }
+
+    /**
+     * @return array{allowed:list<string>,required:list<string>}
+     */
+    private function clinicalVariableSpec(): array
+    {
+        if ($this->clinicalVariableSpec !== null) {
+            return $this->clinicalVariableSpec;
+        }
+
+        $default = [
+            'allowed' => [],
+            'required' => [],
+        ];
+
+        try {
+            $loader = $this->clinicalPackLoader ?? new ClinicalComboPackLoader();
+            $paths = [
+                $loader->compiledPath('policy.compiled.json', ClinicalComboPackLoader::PACK_VERSION),
+                $loader->rawPath('variables_allowlist.json', ClinicalComboPackLoader::PACK_VERSION),
+            ];
+        } catch (\Throwable) {
+            $paths = [];
+        }
+
+        foreach ($paths as $path) {
+            if (!is_file($path)) {
+                continue;
+            }
+            $raw = file_get_contents($path);
+            if (!is_string($raw) || $raw === '') {
+                continue;
+            }
+            $decoded = json_decode($raw, true);
+            if (!is_array($decoded)) {
+                continue;
+            }
+
+            $node = $decoded;
+            if (isset($decoded['variables_allowlist']) && is_array($decoded['variables_allowlist'])) {
+                $node = $decoded['variables_allowlist'];
+            }
+
+            $allowed = is_array($node['allowed'] ?? null) ? $node['allowed'] : [];
+            $required = is_array($node['required'] ?? null) ? $node['required'] : [];
+
+            $default['allowed'] = array_values(array_unique(array_filter(array_map(
+                static fn ($v): string => trim((string) $v),
+                $allowed
+            ))));
+            $default['required'] = array_values(array_unique(array_filter(array_map(
+                static fn ($v): string => trim((string) $v),
+                $required
+            ))));
+            break;
+        }
+
+        $this->clinicalVariableSpec = $default;
+
+        return $this->clinicalVariableSpec;
     }
 }

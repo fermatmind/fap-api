@@ -42,6 +42,69 @@ class AttemptReadController extends Controller
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
 
+        $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
+        if ($scaleCode === 'CLINICAL_COMBO_68') {
+            $gate = $this->reportGatekeeper->resolve(
+                $orgId,
+                $id,
+                $this->resolveUserId($request),
+                $this->resolveAnonId($request),
+                $this->orgContext->role(),
+                false,
+                false,
+            );
+
+            if (! ($gate['ok'] ?? false)) {
+                $status = (int) ($gate['status'] ?? 0);
+                if ($status <= 0) {
+                    $error = strtoupper((string) data_get($gate, 'error_code', data_get($gate, 'error', 'REPORT_FAILED')));
+                    $status = match ($error) {
+                        'ATTEMPT_REQUIRED', 'SCALE_REQUIRED' => 400,
+                        'ATTEMPT_NOT_FOUND', 'RESULT_NOT_FOUND', 'SCALE_NOT_FOUND' => 404,
+                        default => 500,
+                    };
+                }
+
+                abort($status, (string) ($gate['message'] ?? 'report generation failed.'));
+            }
+
+            $report = is_array($gate['report'] ?? null) ? $gate['report'] : [];
+            $safeResult = [
+                'scale_code' => $scaleCode,
+                'quality' => is_array($gate['quality'] ?? null) ? $gate['quality'] : [],
+                'scores' => is_array($report['scores'] ?? null) ? $report['scores'] : [],
+                'report_tags' => is_array($report['report_tags'] ?? null) ? $report['report_tags'] : [],
+                'sections' => is_array($report['sections'] ?? null) ? $report['sections'] : [],
+            ];
+
+            $this->eventRecorder->recordFromRequest($request, 'result_view', $this->resolveUserId($request), [
+                'scale_code' => (string) ($attempt->scale_code ?? ''),
+                'pack_id' => (string) ($attempt->pack_id ?? ''),
+                'dir_version' => (string) ($attempt->dir_version ?? ''),
+                'type_code' => (string) ($result->type_code ?? ''),
+                'attempt_id' => (string) $attempt->id,
+                'locked' => (bool) ($gate['locked'] ?? true),
+            ]);
+
+            return response()->json([
+                'ok' => true,
+                'attempt_id' => (string) $attempt->id,
+                'type_code' => '',
+                'scores' => $safeResult['scores'],
+                'scores_pct' => [],
+                'result' => $safeResult,
+                'report' => $gate,
+                'meta' => [
+                    'scale_code' => (string) ($attempt->scale_code ?? ''),
+                    'pack_id' => (string) ($attempt->pack_id ?? ''),
+                    'dir_version' => (string) ($attempt->dir_version ?? ''),
+                    'content_package_version' => (string) ($attempt->content_package_version ?? ''),
+                    'scoring_spec_version' => (string) ($attempt->scoring_spec_version ?? ''),
+                    'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
+                ],
+            ]);
+        }
+
         $payload = $result->result_json;
         if (! is_array($payload)) {
             $payload = [];

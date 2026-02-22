@@ -8,6 +8,7 @@ final class ReportAccess
 {
     public const SCALE_MBTI = 'MBTI';
     public const SCALE_BIG5_OCEAN = 'BIG5_OCEAN';
+    public const SCALE_CLINICAL_COMBO_68 = 'CLINICAL_COMBO_68';
 
     public const VARIANT_FREE = 'free';
     public const VARIANT_FULL = 'full';
@@ -26,6 +27,11 @@ final class ReportAccess
     public const MODULE_BIG5_CORE = 'big5_core';
     public const MODULE_BIG5_FULL = 'big5_full';
     public const MODULE_BIG5_ACTION_PLAN = 'big5_action_plan';
+    public const MODULE_CLINICAL_CORE = 'clinical_core';
+    public const MODULE_CLINICAL_FULL = 'clinical_full';
+    public const MODULE_CLINICAL_RESILIENCE = 'clinical_resilience';
+    public const MODULE_CLINICAL_PERFECTIONISM = 'clinical_perfectionism';
+    public const MODULE_CLINICAL_ACTION_PLAN = 'clinical_action_plan';
 
     /**
      * Growth/traits/stress_recovery are part of core_full by default.
@@ -46,6 +52,9 @@ final class ReportAccess
         $scaleCode = strtoupper(trim((string) $scaleCode));
         if ($scaleCode === self::SCALE_BIG5_OCEAN) {
             return [self::MODULE_BIG5_CORE];
+        }
+        if ($scaleCode === self::SCALE_CLINICAL_COMBO_68) {
+            return [self::MODULE_CLINICAL_CORE];
         }
 
         return [self::MODULE_CORE_FREE];
@@ -80,6 +89,14 @@ final class ReportAccess
                 self::MODULE_BIG5_ACTION_PLAN,
             ];
         }
+        if ($scaleCode === self::SCALE_CLINICAL_COMBO_68) {
+            return [
+                self::MODULE_CLINICAL_FULL,
+                self::MODULE_CLINICAL_RESILIENCE,
+                self::MODULE_CLINICAL_PERFECTIONISM,
+                self::MODULE_CLINICAL_ACTION_PLAN,
+            ];
+        }
 
         return [
             self::MODULE_CORE_FULL,
@@ -92,18 +109,22 @@ final class ReportAccess
     {
         $scaleCode = strtoupper(trim((string) $scaleCode));
 
-        return $scaleCode === self::SCALE_BIG5_OCEAN
-            ? self::MODULE_BIG5_CORE
-            : self::MODULE_CORE_FREE;
+        return match ($scaleCode) {
+            self::SCALE_BIG5_OCEAN => self::MODULE_BIG5_CORE,
+            self::SCALE_CLINICAL_COMBO_68 => self::MODULE_CLINICAL_CORE,
+            default => self::MODULE_CORE_FREE,
+        };
     }
 
     public static function fullModuleForScale(?string $scaleCode = null): string
     {
         $scaleCode = strtoupper(trim((string) $scaleCode));
 
-        return $scaleCode === self::SCALE_BIG5_OCEAN
-            ? self::MODULE_BIG5_FULL
-            : self::MODULE_CORE_FULL;
+        return match ($scaleCode) {
+            self::SCALE_BIG5_OCEAN => self::MODULE_BIG5_FULL,
+            self::SCALE_CLINICAL_COMBO_68 => self::MODULE_CLINICAL_FULL,
+            default => self::MODULE_CORE_FULL,
+        };
     }
 
     public static function normalizeVariant(?string $variant): string

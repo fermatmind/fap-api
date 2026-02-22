@@ -452,6 +452,15 @@ class PaymentWebhookHandlerCore
                             return $this->badRequest('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
                         }
 
+                        $ownerGuard = $this->validateAttemptOwnershipForOrder($order, $attemptMeta);
+                        if (!($ownerGuard['ok'] ?? false)) {
+                            $code = (string) ($ownerGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH');
+                            $message = (string) ($ownerGuard['message'] ?? 'order owner mismatch.');
+                            $this->markEventError($provider, $providerEventId, 'rejected', $code, $message);
+
+                            return $this->badRequest($code, $message);
+                        }
+
                         if (! $retryingPostCommitOnly) {
                             $scopeOverride = trim((string) ($skuRow->scope ?? ''));
                             if ($scopeOverride === '') {
@@ -817,13 +826,15 @@ class PaymentWebhookHandlerCore
                         'order_no' => $orderNo !== '' ? $orderNo : null,
                     ];
 
-                    $this->queueBigFiveUnlockEmail(
-                        $orgId,
-                        $attemptId,
-                        $orderNo,
-                        is_string($ctx['event_user_id'] ?? null) ? (string) $ctx['event_user_id'] : null,
-                        is_array($ctx['event_meta'] ?? null) ? (array) $ctx['event_meta'] : []
-                    );
+                    if (!$this->isCrisisAttempt($orgId, $attemptId)) {
+                        $this->queueBigFiveUnlockEmail(
+                            $orgId,
+                            $attemptId,
+                            $orderNo,
+                            is_string($ctx['event_user_id'] ?? null) ? (string) $ctx['event_user_id'] : null,
+                            is_array($ctx['event_meta'] ?? null) ? (array) $ctx['event_meta'] : []
+                        );
+                    }
                 } catch (\Throwable $e) {
                     Log::error('PAYMENT_WEBHOOK_POST_COMMIT_SEED_SNAPSHOT_FAILED', [
                         'provider' => $provider,
@@ -1263,6 +1274,53 @@ class PaymentWebhookHandlerCore
         ]);
     }
 
+    /**
+     * @param array<string,mixed> $attemptMeta
+     * @return array{ok:bool,error?:string,message?:string}
+     */
+    private function validateAttemptOwnershipForOrder(object $order, array $attemptMeta): array
+    {
+        $attemptId = trim((string) ($attemptMeta['attempt_id'] ?? ''));
+        if ($attemptId === '') {
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_NOT_FOUND',
+                'message' => 'target attempt not found.',
+            ];
+        }
+
+        $orderUserId = trim((string) ($order->user_id ?? ''));
+        $orderAnonId = trim((string) ($order->anon_id ?? ''));
+        $attemptUserId = trim((string) ($attemptMeta['user_id'] ?? ''));
+        $attemptAnonId = trim((string) ($attemptMeta['anon_id'] ?? ''));
+
+        if ($orderUserId !== '') {
+            if ($attemptUserId !== '' && $attemptUserId === $orderUserId) {
+                return ['ok' => true];
+            }
+
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_OWNER_MISMATCH',
+                'message' => 'attempt owner user_id does not match order user_id.',
+            ];
+        }
+
+        if ($orderAnonId !== '') {
+            if ($attemptAnonId !== '' && $attemptAnonId === $orderAnonId) {
+                return ['ok' => true];
+            }
+
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_OWNER_MISMATCH',
+                'message' => 'attempt owner anon_id does not match order anon_id.',
+            ];
+        }
+
+        return ['ok' => true];
+    }
+
     private function resolveAttemptMeta(int $orgId, ?string $attemptId): array
     {
         $attemptId = $attemptId !== null ? trim($attemptId) : '';
@@ -1272,6 +1330,9 @@ class PaymentWebhookHandlerCore
                 'scale_code' => null,
                 'pack_id' => null,
                 'dir_version' => null,
+                'scoring_spec_version' => null,
+                'user_id' => null,
+                'anon_id' => null,
             ];
         }
 
@@ -1285,6 +1346,9 @@ class PaymentWebhookHandlerCore
                 'scale_code' => null,
                 'pack_id' => null,
                 'dir_version' => null,
+                'scoring_spec_version' => null,
+                'user_id' => null,
+                'anon_id' => null,
             ];
         }
 
@@ -1293,6 +1357,9 @@ class PaymentWebhookHandlerCore
             'scale_code' => (string) ($row->scale_code ?? ''),
             'pack_id' => (string) ($row->pack_id ?? ''),
             'dir_version' => (string) ($row->dir_version ?? ''),
+            'scoring_spec_version' => (string) ($row->scoring_spec_version ?? ''),
+            'user_id' => isset($row->user_id) ? (string) ($row->user_id ?? '') : null,
+            'anon_id' => isset($row->anon_id) ? (string) ($row->anon_id ?? '') : null,
         ];
     }
 
@@ -1393,6 +1460,49 @@ class PaymentWebhookHandlerCore
                 'error_message' => $e->getMessage(),
             ]);
         }
+    }
+
+    private function isCrisisAttempt(int $orgId, string $attemptId): bool
+    {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return false;
+        }
+
+        $result = DB::table('results')
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->first();
+        if (!$result) {
+            return false;
+        }
+
+        $payload = $result->result_json ?? null;
+        if (!is_array($payload)) {
+            if (!is_string($payload) || trim($payload) === '') {
+                return false;
+            }
+            $decoded = json_decode($payload, true);
+            $payload = is_array($decoded) ? $decoded : [];
+        }
+
+        $candidates = [
+            $payload['normed_json'] ?? null,
+            $payload['breakdown_json']['score_result'] ?? null,
+            $payload['axis_scores_json']['score_result'] ?? null,
+            $payload,
+        ];
+        foreach ($candidates as $candidate) {
+            if (!is_array($candidate)) {
+                continue;
+            }
+            $quality = is_array($candidate['quality'] ?? null) ? $candidate['quality'] : [];
+            if ((bool) ($quality['crisis_alert'] ?? false) === true) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function resolveUserEmailById(string $userId): string

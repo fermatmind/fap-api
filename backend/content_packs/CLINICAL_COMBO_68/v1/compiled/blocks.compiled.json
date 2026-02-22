@@ -1,0 +1,1392 @@
+{
+    "schema": "clinical_combo_68.blocks.compiled.v1",
+    "pack_id": "CLINICAL_COMBO_68",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T10:00:07.494894Z",
+    "blocks_by_locale": {
+        "zh-CN": [
+            {
+                "block_id": "free_disclaimer_top_zh",
+                "section": "disclaimer_top",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 1000,
+                "exclusive_group": "disclaimer_top",
+                "title": "重要说明（请先阅读）",
+                "body_md": "本报告基于自评问卷生成，用于心理健康筛查参考，不构成医疗诊断或治疗建议。出现明显痛苦或功能受损时，请优先联系线下精神心理专科或持证专业人员。",
+                "id": "free_disclaimer_top_zh",
+                "body": "本报告基于自评问卷生成，用于心理健康筛查参考，不构成医疗诊断或治疗建议。出现明显痛苦或功能受损时，请优先联系线下精神心理专科或持证专业人员。",
+                "conditions": []
+            },
+            {
+                "block_id": "free_crisis_banner_zh",
+                "section": "crisis_banner",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 1000,
+                "exclusive_group": "crisis_banner",
+                "conditions": [
+                    {
+                        "path": "quality.crisis_alert",
+                        "op": "eq",
+                        "value": true
+                    }
+                ],
+                "title": "已检测到高危信号，请立刻优先求助专业支持",
+                "body_md": "你正在承受非常强烈的痛苦。请优先联系身边可信任的人、危机热线或当地紧急服务，并把安全放在第一位。",
+                "id": "free_crisis_banner_zh",
+                "body": "你正在承受非常强烈的痛苦。请优先联系身边可信任的人、危机热线或当地紧急服务，并把安全放在第一位。"
+            },
+            {
+                "block_id": "free_quick_overview_zh",
+                "section": "quick_overview",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 200,
+                "exclusive_group": "quick_overview_intro",
+                "title": "本次测评要点",
+                "body_md": "先看抑郁/焦虑/强迫与功能受损，再看压力与韧性。T 分用于对齐不同量表区间，便于横向比较和趋势追踪。",
+                "id": "free_quick_overview_zh",
+                "body": "先看抑郁/焦虑/强迫与功能受损，再看压力与韧性。T 分用于对齐不同量表区间，便于横向比较和趋势追踪。",
+                "conditions": []
+            },
+            {
+                "block_id": "free_impair_none_zh",
+                "section": "quick_overview",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "none"
+                    }
+                ],
+                "title": "总体功能受损：无",
+                "body_md": "当前情绪、压力或习惯对工作、社交与生活照料影响很小。",
+                "id": "free_impair_none_zh",
+                "body": "当前情绪、压力或习惯对工作、社交与生活照料影响很小。"
+            },
+            {
+                "block_id": "free_impair_mild_zh",
+                "section": "quick_overview",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "mild"
+                    }
+                ],
+                "title": "总体功能受损：轻度",
+                "body_md": "已有一定干扰，但整体仍可维持。建议优先做节律与压力管理。",
+                "id": "free_impair_mild_zh",
+                "body": "已有一定干扰，但整体仍可维持。建议优先做节律与压力管理。"
+            },
+            {
+                "block_id": "free_impair_moderate_zh",
+                "section": "quick_overview",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "moderate"
+                    }
+                ],
+                "title": "总体功能受损：中度",
+                "body_md": "维持日常生活需要明显额外精力，建议主动减负并尽快获得支持。",
+                "id": "free_impair_moderate_zh",
+                "body": "维持日常生活需要明显额外精力，建议主动减负并尽快获得支持。"
+            },
+            {
+                "block_id": "free_impair_severe_zh",
+                "section": "quick_overview",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "severe"
+                    }
+                ],
+                "title": "总体功能受损：严重",
+                "body_md": "已难以完成日常任务。优先目标是恢复基本功能与安全，并尽快寻求专业支持。",
+                "id": "free_impair_severe_zh",
+                "body": "已难以完成日常任务。优先目标是恢复基本功能与安全，并尽快寻求专业支持。"
+            },
+            {
+                "block_id": "free_impair_extreme_zh",
+                "section": "quick_overview",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "extreme"
+                    }
+                ],
+                "title": "总体功能受损：极度",
+                "body_md": "已无法正常生活。请立刻启动危机求助流程并联系线下支持网络。",
+                "id": "free_impair_extreme_zh",
+                "body": "已无法正常生活。请立刻启动危机求助流程并联系线下支持网络。"
+            },
+            {
+                "block_id": "free_dep_normal_zh",
+                "section": "symptoms_depression",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 140,
+                "exclusive_group": "dep_level",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "eq",
+                        "value": "normal"
+                    }
+                ],
+                "title": "抑郁相关困扰：正常范围",
+                "body_md": "近两周抑郁相关困扰总体在可恢复范围。建议继续维护作息、运动和社交连接。",
+                "id": "free_dep_normal_zh",
+                "body": "近两周抑郁相关困扰总体在可恢复范围。建议继续维护作息、运动和社交连接。"
+            },
+            {
+                "block_id": "free_dep_mild_zh",
+                "section": "symptoms_depression",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 140,
+                "exclusive_group": "dep_level",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "eq",
+                        "value": "mild"
+                    }
+                ],
+                "title": "抑郁相关困扰：轻度",
+                "body_md": "动力与兴趣出现下降，建议用行为激活法把任务拆到可立即开始的最小步。",
+                "id": "free_dep_mild_zh",
+                "body": "动力与兴趣出现下降，建议用行为激活法把任务拆到可立即开始的最小步。"
+            },
+            {
+                "block_id": "free_dep_moderate_zh",
+                "section": "symptoms_depression",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 140,
+                "exclusive_group": "dep_level",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "eq",
+                        "value": "moderate"
+                    }
+                ],
+                "title": "抑郁相关困扰：中度",
+                "body_md": "情绪低落和乏力已持续并影响功能，建议尽快做系统评估并结合专业支持。",
+                "id": "free_dep_moderate_zh",
+                "body": "情绪低落和乏力已持续并影响功能，建议尽快做系统评估并结合专业支持。"
+            },
+            {
+                "block_id": "free_dep_severe_zh",
+                "section": "symptoms_depression",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 140,
+                "exclusive_group": "dep_level",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "eq",
+                        "value": "severe"
+                    }
+                ],
+                "title": "抑郁相关困扰：重度",
+                "body_md": "当前痛苦和功能受损可能非常突出。请优先降负荷与保安全，并尽快获得专业支持。",
+                "id": "free_dep_severe_zh",
+                "body": "当前痛苦和功能受损可能非常突出。请优先降负荷与保安全，并尽快获得专业支持。"
+            },
+            {
+                "block_id": "free_dep_masked_zh",
+                "section": "symptoms_depression",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 220,
+                "exclusive_group": "dep_masked_hint",
+                "conditions": [
+                    {
+                        "path": "scores.depression.flags",
+                        "op": "contains",
+                        "value": "masked_depression"
+                    }
+                ],
+                "title": "额外提示：隐匿性低落信号",
+                "body_md": "你的结果呈现“总体抑郁负荷较高，但核心情绪表达较少”的模式，常伴随疲惫、睡眠紊乱与注意力下降。",
+                "id": "free_dep_masked_zh",
+                "body": "你的结果呈现“总体抑郁负荷较高，但核心情绪表达较少”的模式，常伴随疲惫、睡眠紊乱与注意力下降。"
+            },
+            {
+                "block_id": "free_anx_normal_zh",
+                "section": "symptoms_anxiety",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 130,
+                "exclusive_group": "anx_level",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "eq",
+                        "value": "normal"
+                    }
+                ],
+                "title": "焦虑相关困扰：正常范围",
+                "body_md": "紧张和担忧反应总体可调节，建议继续保持固定放松窗口。",
+                "id": "free_anx_normal_zh",
+                "body": "紧张和担忧反应总体可调节，建议继续保持固定放松窗口。"
+            },
+            {
+                "block_id": "free_anx_mild_zh",
+                "section": "symptoms_anxiety",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 130,
+                "exclusive_group": "anx_level",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "eq",
+                        "value": "mild"
+                    }
+                ],
+                "title": "焦虑相关困扰：轻度",
+                "body_md": "担忧占用注意力增加，建议用可控/不可控分类与延迟反刍训练。",
+                "id": "free_anx_mild_zh",
+                "body": "担忧占用注意力增加，建议用可控/不可控分类与延迟反刍训练。"
+            },
+            {
+                "block_id": "free_anx_moderate_zh",
+                "section": "symptoms_anxiety",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 130,
+                "exclusive_group": "anx_level",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "eq",
+                        "value": "moderate"
+                    }
+                ],
+                "title": "焦虑相关困扰：中度",
+                "body_md": "警报系统可能处于过度敏感状态，建议先做身体降唤醒，再处理认知反刍。",
+                "id": "free_anx_moderate_zh",
+                "body": "警报系统可能处于过度敏感状态，建议先做身体降唤醒，再处理认知反刍。"
+            },
+            {
+                "block_id": "free_anx_severe_zh",
+                "section": "symptoms_anxiety",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 130,
+                "exclusive_group": "anx_level",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "eq",
+                        "value": "severe"
+                    }
+                ],
+                "title": "焦虑相关困扰：重度",
+                "body_md": "高强度焦虑可能伴随明显功能下降，建议尽快联系专业支持。",
+                "id": "free_anx_severe_zh",
+                "body": "高强度焦虑可能伴随明显功能下降，建议尽快联系专业支持。"
+            },
+            {
+                "block_id": "free_ocd_subclinical_zh",
+                "section": "symptoms_ocd",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 120,
+                "exclusive_group": "ocd_level",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "eq",
+                        "value": "subclinical"
+                    }
+                ],
+                "title": "强迫相关干扰：亚临床",
+                "body_md": "存在一定强迫相关体验，但总体干扰仍在可控范围。",
+                "id": "free_ocd_subclinical_zh",
+                "body": "存在一定强迫相关体验，但总体干扰仍在可控范围。"
+            },
+            {
+                "block_id": "free_ocd_mild_zh",
+                "section": "symptoms_ocd",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 120,
+                "exclusive_group": "ocd_level",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "eq",
+                        "value": "mild"
+                    }
+                ],
+                "title": "强迫相关干扰：轻度",
+                "body_md": "反复确认或反复思考已造成困扰，可从低难度延迟执行训练开始。",
+                "id": "free_ocd_mild_zh",
+                "body": "反复确认或反复思考已造成困扰，可从低难度延迟执行训练开始。"
+            },
+            {
+                "block_id": "free_ocd_moderate_zh",
+                "section": "symptoms_ocd",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 120,
+                "exclusive_group": "ocd_level",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "eq",
+                        "value": "moderate"
+                    }
+                ],
+                "title": "强迫相关干扰：中度",
+                "body_md": "时间占用与功能干扰明显，建议系统学习 ERP 原则并逐步练习。",
+                "id": "free_ocd_moderate_zh",
+                "body": "时间占用与功能干扰明显，建议系统学习 ERP 原则并逐步练习。"
+            },
+            {
+                "block_id": "free_ocd_severe_zh",
+                "section": "symptoms_ocd",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 120,
+                "exclusive_group": "ocd_level",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "eq",
+                        "value": "severe"
+                    }
+                ],
+                "title": "强迫相关干扰：重度",
+                "body_md": "强迫干扰已严重影响生活，建议尽快获得专业评估与干预。",
+                "id": "free_ocd_severe_zh",
+                "body": "强迫干扰已严重影响生活，建议尽快获得专业评估与干预。"
+            },
+            {
+                "block_id": "free_stress_low_zh",
+                "section": "stress_resilience",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 110,
+                "exclusive_group": "stress_level",
+                "conditions": [
+                    {
+                        "path": "scores.stress.level",
+                        "op": "eq",
+                        "value": "low"
+                    }
+                ],
+                "title": "压力超载：低",
+                "body_md": "当前压力负荷较低，建议把这段时期作为恢复储备窗口。",
+                "id": "free_stress_low_zh",
+                "body": "当前压力负荷较低，建议把这段时期作为恢复储备窗口。"
+            },
+            {
+                "block_id": "free_stress_medium_zh",
+                "section": "stress_resilience",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 110,
+                "exclusive_group": "stress_level",
+                "conditions": [
+                    {
+                        "path": "scores.stress.level",
+                        "op": "eq",
+                        "value": "medium"
+                    }
+                ],
+                "title": "压力超载：中等",
+                "body_md": "近期压力上升，建议优先做日程减法并维持睡眠与恢复。",
+                "id": "free_stress_medium_zh",
+                "body": "近期压力上升，建议优先做日程减法并维持睡眠与恢复。"
+            },
+            {
+                "block_id": "free_stress_high_zh",
+                "section": "stress_resilience",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 110,
+                "exclusive_group": "stress_level",
+                "conditions": [
+                    {
+                        "path": "scores.stress.level",
+                        "op": "in",
+                        "value": [
+                            "high",
+                            "extreme"
+                        ]
+                    }
+                ],
+                "title": "压力超载：高",
+                "body_md": "当前压力负荷处于高位，建议尽快进行压力源梳理、边界重建和支持动员。",
+                "id": "free_stress_high_zh",
+                "body": "当前压力负荷处于高位，建议尽快进行压力源梳理、边界重建和支持动员。"
+            },
+            {
+                "block_id": "free_res_fragile_zh",
+                "section": "stress_resilience",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 100,
+                "exclusive_group": "res_level",
+                "conditions": [
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "in",
+                        "value": [
+                            "fragile",
+                            "low"
+                        ]
+                    }
+                ],
+                "title": "心理韧性：偏脆弱",
+                "body_md": "这通常是长期超载后的系统反应，不代表你不够强。建议先恢复睡眠与身体活力。",
+                "id": "free_res_fragile_zh",
+                "body": "这通常是长期超载后的系统反应，不代表你不够强。建议先恢复睡眠与身体活力。"
+            },
+            {
+                "block_id": "free_res_normal_zh",
+                "section": "stress_resilience",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 100,
+                "exclusive_group": "res_level",
+                "conditions": [
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "eq",
+                        "value": "average"
+                    }
+                ],
+                "title": "心理韧性：常规水平",
+                "body_md": "你具备基本恢复能力，可通过小习惯与支持系统进一步提升恢复速度。",
+                "id": "free_res_normal_zh",
+                "body": "你具备基本恢复能力，可通过小习惯与支持系统进一步提升恢复速度。"
+            },
+            {
+                "block_id": "free_res_strong_zh",
+                "section": "stress_resilience",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 100,
+                "exclusive_group": "res_level",
+                "conditions": [
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "in",
+                        "value": [
+                            "strong",
+                            "very_strong"
+                        ]
+                    }
+                ],
+                "title": "心理韧性：较强",
+                "body_md": "你具备较好的压力下恢复与推进能力，深度区会提供优势强化建议。",
+                "id": "free_res_strong_zh",
+                "body": "你具备较好的压力下恢复与推进能力，深度区会提供优势强化建议。"
+            },
+            {
+                "block_id": "free_perf_overview_zh",
+                "section": "perfectionism_overview",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 90,
+                "exclusive_group": "perf_overview",
+                "title": "完美主义特质概览",
+                "body_md": "你可以在深度区查看完美主义五子维度的具体驱动机制与可执行调整策略。",
+                "id": "free_perf_overview_zh",
+                "body": "你可以在深度区查看完美主义五子维度的具体驱动机制与可执行调整策略。",
+                "conditions": []
+            },
+            {
+                "block_id": "free_resources_footer_zh",
+                "section": "resources_footer",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 80,
+                "exclusive_group": "resources_footer",
+                "title": "资源与下一步",
+                "body_md": "如出现明显痛苦或功能受损，请优先联系专业支持。建议 2-4 周后复测并观察趋势变化。",
+                "id": "free_resources_footer_zh",
+                "body": "如出现明显痛苦或功能受损，请优先联系专业支持。建议 2-4 周后复测并观察趋势变化。",
+                "conditions": []
+            },
+            {
+                "block_id": "free_scoring_notes_zh",
+                "section": "scoring_notes",
+                "locale": "zh-CN",
+                "access_level": "free",
+                "priority": 70,
+                "exclusive_group": "scoring_notes",
+                "title": "计分说明",
+                "body_md": "T 分范围为 20-80，T=50 约为常模平均，约每 10 分代表 1 个标准差。请结合质量提示与现实功能变化综合理解结果。",
+                "id": "free_scoring_notes_zh",
+                "body": "T 分范围为 20-80，T=50 约为常模平均，约每 10 分代表 1 个标准差。请结合质量提示与现实功能变化综合理解结果。",
+                "conditions": []
+            },
+            {
+                "block_id": "paid_perf_pe_parental_zh",
+                "section": "paid_deep_dive",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:parental_expectation_dominant"
+                    }
+                ],
+                "title": "你的完美主义更像“外部高标准驱动”",
+                "body_md": "你更容易把自我评价与外部认可绑定。优化方向不是降低上进心，而是把评价权从外部拿回自己手里：优先追踪可控过程指标，再看结果指标。",
+                "id": "paid_perf_pe_parental_zh",
+                "body": "你更容易把自我评价与外部认可绑定。优化方向不是降低上进心，而是把评价权从外部拿回自己手里：优先追踪可控过程指标，再看结果指标。"
+            },
+            {
+                "block_id": "paid_perf_org_order_zh",
+                "section": "paid_deep_dive",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:orderliness_dominant"
+                    }
+                ],
+                "title": "你的完美主义更像“秩序感驱动”",
+                "body_md": "你在结构和秩序中更容易稳定与高效。建议建立“弹性秩序”：关键任务维持高标准，非关键任务允许 80 分运行。",
+                "id": "paid_perf_org_order_zh",
+                "body": "你在结构和秩序中更容易稳定与高效。建议建立“弹性秩序”：关键任务维持高标准，非关键任务允许 80 分运行。"
+            },
+            {
+                "block_id": "paid_perf_ps_standards_zh",
+                "section": "paid_deep_dive",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:high_standards_dominant"
+                    }
+                ],
+                "title": "你的完美主义更像“自我高目标驱动”",
+                "body_md": "高目标是优势，但当它绑定人格价值时会放大波动。建议把“我这个人好不好”改为“这次策略是否有效”，将目标从身份里剥离。",
+                "id": "paid_perf_ps_standards_zh",
+                "body": "高目标是优势，但当它绑定人格价值时会放大波动。建议把“我这个人好不好”改为“这次策略是否有效”，将目标从身份里剥离。"
+            },
+            {
+                "block_id": "paid_perf_cm_mistakes_zh",
+                "section": "paid_deep_dive",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:mistake_concern_dominant"
+                    }
+                ],
+                "title": "你的完美主义更像“害怕犯错驱动”",
+                "body_md": "你对错误高度敏感，容易过度准备或拖延。可从低风险场景做“可控失误训练”，提升对不确定性的耐受能力。",
+                "id": "paid_perf_cm_mistakes_zh",
+                "body": "你对错误高度敏感，容易过度准备或拖延。可从低风险场景做“可控失误训练”，提升对不确定性的耐受能力。"
+            },
+            {
+                "block_id": "paid_perf_da_doubts_zh",
+                "section": "paid_deep_dive",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 220,
+                "exclusive_group": "perf_dominant",
+                "conditions": [
+                    {
+                        "path": "report_tags",
+                        "op": "contains",
+                        "value": "trait:doubt_checking_dominant"
+                    }
+                ],
+                "title": "你的完美主义更像“反复确认驱动”",
+                "body_md": "你对不确定性的耐受阈值偏低，容易反复确认。建议设置明确确认规则，并用延迟技术削弱“必须马上确认”的冲动。",
+                "id": "paid_perf_da_doubts_zh",
+                "body": "你对不确定性的耐受阈值偏低，容易反复确认。建议设置明确确认规则，并用延迟技术削弱“必须马上确认”的冲动。"
+            },
+            {
+                "block_id": "paid_resilience_praise_zh",
+                "section": "paid_deep_dive",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 180,
+                "exclusive_group": "resilience_bonus",
+                "conditions": [
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "in",
+                        "value": [
+                            "strong_band"
+                        ]
+                    }
+                ],
+                "title": "你的韧性是稀缺优势资产",
+                "body_md": "你在压力下仍能保持恢复与推进能力。建议把恢复仪式、支持网络与节律管理固定化，防止高韧性人群的隐性透支。",
+                "id": "paid_resilience_praise_zh",
+                "body": "你在压力下仍能保持恢复与推进能力。建议把恢复仪式、支持网络与节律管理固定化，防止高韧性人群的隐性透支。"
+            },
+            {
+                "block_id": "paid_action_depression_14d_zh",
+                "section": "action_plan",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 200,
+                "exclusive_group": "action_depression",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "in",
+                        "value": [
+                            "moderate",
+                            "severe"
+                        ]
+                    }
+                ],
+                "title": "14 天行为激活计划",
+                "body_md": "先把任务缩到最小可启动单位，记录完成而不评价；逐步恢复睡眠、光照、活动与低负荷社交，把行动与情绪解绑。",
+                "id": "paid_action_depression_14d_zh",
+                "body": "先把任务缩到最小可启动单位，记录完成而不评价；逐步恢复睡眠、光照、活动与低负荷社交，把行动与情绪解绑。"
+            },
+            {
+                "block_id": "paid_action_anxiety_14d_zh",
+                "section": "action_plan",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 190,
+                "exclusive_group": "action_anxiety",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "in",
+                        "value": [
+                            "moderate",
+                            "severe"
+                        ]
+                    }
+                ],
+                "title": "14 天焦虑管理计划",
+                "body_md": "每天固定呼吸训练与担忧窗口；把担忧分为可控/不可控；减少高刺激暴露并安排身体释放任务。",
+                "id": "paid_action_anxiety_14d_zh",
+                "body": "每天固定呼吸训练与担忧窗口；把担忧分为可控/不可控；减少高刺激暴露并安排身体释放任务。"
+            },
+            {
+                "block_id": "paid_action_ocd_erp_start_zh",
+                "section": "action_plan",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 180,
+                "exclusive_group": "action_ocd",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "in",
+                        "value": [
+                            "moderate",
+                            "severe"
+                        ]
+                    }
+                ],
+                "title": "ERP 起步训练",
+                "body_md": "从最低难度场景开始延迟 1 分钟执行冲动行为，逐步延长到 5 分钟，并记录冲动强度与延迟结果。",
+                "id": "paid_action_ocd_erp_start_zh",
+                "body": "从最低难度场景开始延迟 1 分钟执行冲动行为，逐步延长到 5 分钟，并记录冲动强度与延迟结果。"
+            },
+            {
+                "block_id": "paid_action_perfectionism_14d_zh",
+                "section": "action_plan",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 170,
+                "exclusive_group": "action_perfectionism",
+                "conditions": [
+                    {
+                        "path": "scores.perfectionism.level",
+                        "op": "in",
+                        "value": [
+                            "perfectionist",
+                            "rigid"
+                        ]
+                    }
+                ],
+                "title": "把完美主义从折磨变成能力",
+                "body_md": "每天选择 1 件任务做 80 分交付；区分最低可交付标准与优化标准；使用事实陈述替代人格审判。",
+                "id": "paid_action_perfectionism_14d_zh",
+                "body": "每天选择 1 件任务做 80 分交付；区分最低可交付标准与优化标准；使用事实陈述替代人格审判。"
+            },
+            {
+                "block_id": "paid_action_burnout_zh",
+                "section": "action_plan",
+                "locale": "zh-CN",
+                "access_level": "paid",
+                "priority": 160,
+                "exclusive_group": "action_burnout",
+                "conditions": [
+                    {
+                        "path": "scores.stress.level",
+                        "op": "in",
+                        "value": [
+                            "high",
+                            "extreme"
+                        ]
+                    },
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "in",
+                        "value": [
+                            "fragile",
+                            "low"
+                        ]
+                    }
+                ],
+                "title": "倦怠风险：先止损再重建",
+                "body_md": "对任务做必须/可延后/可放弃分层，建立硬边界，优先恢复睡眠与身体，再逐步重建执行能力。",
+                "id": "paid_action_burnout_zh",
+                "body": "对任务做必须/可延后/可放弃分层，建立硬边界，优先恢复睡眠与身体，再逐步重建执行能力。"
+            }
+        ],
+        "en": [
+            {
+                "block_id": "free_disclaimer_top_en",
+                "section": "disclaimer_top",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 1000,
+                "exclusive_group": "disclaimer_top",
+                "title": "Important Notice",
+                "body_md": "This report is based on self-reported data for screening and self-exploration. It is not a medical diagnosis. Seek licensed professional support if distress or impairment is significant.",
+                "id": "free_disclaimer_top_en",
+                "body": "This report is based on self-reported data for screening and self-exploration. It is not a medical diagnosis. Seek licensed professional support if distress or impairment is significant.",
+                "conditions": []
+            },
+            {
+                "block_id": "free_crisis_banner_en",
+                "section": "crisis_banner",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 1000,
+                "exclusive_group": "crisis_banner",
+                "conditions": [
+                    {
+                        "path": "quality.crisis_alert",
+                        "op": "eq",
+                        "value": true
+                    }
+                ],
+                "title": "High-risk signal detected: seek immediate support",
+                "body_md": "You may be experiencing severe distress. Prioritize immediate safety, contact trusted support, crisis resources, or local emergency services.",
+                "id": "free_crisis_banner_en",
+                "body": "You may be experiencing severe distress. Prioritize immediate safety, contact trusted support, crisis resources, or local emergency services."
+            },
+            {
+                "block_id": "free_quick_overview_en",
+                "section": "quick_overview",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 200,
+                "exclusive_group": "quick_overview_intro",
+                "title": "Key Takeaways",
+                "body_md": "Review symptom risks and functional impairment first, then stress/resilience. T-scores align severity across dimensions for clearer tracking.",
+                "id": "free_quick_overview_en",
+                "body": "Review symptom risks and functional impairment first, then stress/resilience. T-scores align severity across dimensions for clearer tracking.",
+                "conditions": []
+            },
+            {
+                "block_id": "free_impair_none_en",
+                "section": "quick_overview",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "none"
+                    }
+                ],
+                "title": "Functional Impairment: None",
+                "body_md": "Current symptoms have minimal impact on work, relationships, and self-care.",
+                "id": "free_impair_none_en",
+                "body": "Current symptoms have minimal impact on work, relationships, and self-care."
+            },
+            {
+                "block_id": "free_impair_mild_en",
+                "section": "quick_overview",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "mild"
+                    }
+                ],
+                "title": "Functional Impairment: Mild",
+                "body_md": "There is some interference, but overall functioning is still mostly preserved.",
+                "id": "free_impair_mild_en",
+                "body": "There is some interference, but overall functioning is still mostly preserved."
+            },
+            {
+                "block_id": "free_impair_moderate_en",
+                "section": "quick_overview",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "moderate"
+                    }
+                ],
+                "title": "Functional Impairment: Moderate",
+                "body_md": "Daily functioning requires substantial extra effort. Active support is recommended.",
+                "id": "free_impair_moderate_en",
+                "body": "Daily functioning requires substantial extra effort. Active support is recommended."
+            },
+            {
+                "block_id": "free_impair_severe_en",
+                "section": "quick_overview",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "severe"
+                    }
+                ],
+                "title": "Functional Impairment: Severe",
+                "body_md": "Daily tasks are significantly compromised. Prompt professional support is strongly recommended.",
+                "id": "free_impair_severe_en",
+                "body": "Daily tasks are significantly compromised. Prompt professional support is strongly recommended."
+            },
+            {
+                "block_id": "free_impair_extreme_en",
+                "section": "quick_overview",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 150,
+                "exclusive_group": "impair_level",
+                "conditions": [
+                    {
+                        "path": "facts.function_impairment_level",
+                        "op": "eq",
+                        "value": "extreme"
+                    }
+                ],
+                "title": "Functional Impairment: Extreme",
+                "body_md": "Normal functioning is critically impaired. Immediate crisis support is required.",
+                "id": "free_impair_extreme_en",
+                "body": "Normal functioning is critically impaired. Immediate crisis support is required."
+            },
+            {
+                "block_id": "free_dep_normal_en",
+                "section": "symptoms_depression",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 140,
+                "exclusive_group": "dep_level",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "eq",
+                        "value": "normal"
+                    }
+                ],
+                "title": "Depression-related burden: Normal range",
+                "body_md": "Depressive burden is currently in a generally recoverable range. Keep stable routines and social connection.",
+                "id": "free_dep_normal_en",
+                "body": "Depressive burden is currently in a generally recoverable range. Keep stable routines and social connection."
+            },
+            {
+                "block_id": "free_dep_mild_en",
+                "section": "symptoms_depression",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 140,
+                "exclusive_group": "dep_level",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "eq",
+                        "value": "mild"
+                    }
+                ],
+                "title": "Depression-related burden: Mild",
+                "body_md": "Energy and interest appear reduced. Use small actionable steps to restart behavioral momentum.",
+                "id": "free_dep_mild_en",
+                "body": "Energy and interest appear reduced. Use small actionable steps to restart behavioral momentum."
+            },
+            {
+                "block_id": "free_dep_moderate_en",
+                "section": "symptoms_depression",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 140,
+                "exclusive_group": "dep_level",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "eq",
+                        "value": "moderate"
+                    }
+                ],
+                "title": "Depression-related burden: Moderate",
+                "body_md": "Symptoms are sustained and functionally meaningful. Consider structured professional assessment and support.",
+                "id": "free_dep_moderate_en",
+                "body": "Symptoms are sustained and functionally meaningful. Consider structured professional assessment and support."
+            },
+            {
+                "block_id": "free_dep_severe_en",
+                "section": "symptoms_depression",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 140,
+                "exclusive_group": "dep_level",
+                "conditions": [
+                    {
+                        "path": "scores.depression.level",
+                        "op": "eq",
+                        "value": "severe"
+                    }
+                ],
+                "title": "Depression-related burden: Severe",
+                "body_md": "Distress and impairment may be high. Prioritize safety, reduce load, and seek urgent professional support.",
+                "id": "free_dep_severe_en",
+                "body": "Distress and impairment may be high. Prioritize safety, reduce load, and seek urgent professional support."
+            },
+            {
+                "block_id": "free_dep_masked_en",
+                "section": "symptoms_depression",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 220,
+                "exclusive_group": "dep_masked_hint",
+                "conditions": [
+                    {
+                        "path": "scores.depression.flags",
+                        "op": "contains",
+                        "value": "masked_depression"
+                    }
+                ],
+                "title": "Additional note: Possible masked depressive pattern",
+                "body_md": "This pattern can present as fatigue, sleep disruption, and cognitive depletion with less explicit low-mood reporting.",
+                "id": "free_dep_masked_en",
+                "body": "This pattern can present as fatigue, sleep disruption, and cognitive depletion with less explicit low-mood reporting."
+            },
+            {
+                "block_id": "free_anx_normal_en",
+                "section": "symptoms_anxiety",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 130,
+                "exclusive_group": "anx_level",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "eq",
+                        "value": "normal"
+                    }
+                ],
+                "title": "Anxiety-related burden: Normal range",
+                "body_md": "Anxiety responses are currently manageable. Keep routine relaxation and sleep rhythm.",
+                "id": "free_anx_normal_en",
+                "body": "Anxiety responses are currently manageable. Keep routine relaxation and sleep rhythm."
+            },
+            {
+                "block_id": "free_anx_mild_en",
+                "section": "symptoms_anxiety",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 130,
+                "exclusive_group": "anx_level",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "eq",
+                        "value": "mild"
+                    }
+                ],
+                "title": "Anxiety-related burden: Mild",
+                "body_md": "Worry appears more intrusive. Structured worry scheduling and cognitive defusion can help.",
+                "id": "free_anx_mild_en",
+                "body": "Worry appears more intrusive. Structured worry scheduling and cognitive defusion can help."
+            },
+            {
+                "block_id": "free_anx_moderate_en",
+                "section": "symptoms_anxiety",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 130,
+                "exclusive_group": "anx_level",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "eq",
+                        "value": "moderate"
+                    }
+                ],
+                "title": "Anxiety-related burden: Moderate",
+                "body_md": "Hyperarousal may be sustained. Prioritize physical down-regulation and reduce high-stimulation exposure.",
+                "id": "free_anx_moderate_en",
+                "body": "Hyperarousal may be sustained. Prioritize physical down-regulation and reduce high-stimulation exposure."
+            },
+            {
+                "block_id": "free_anx_severe_en",
+                "section": "symptoms_anxiety",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 130,
+                "exclusive_group": "anx_level",
+                "conditions": [
+                    {
+                        "path": "scores.anxiety.level",
+                        "op": "eq",
+                        "value": "severe"
+                    }
+                ],
+                "title": "Anxiety-related burden: Severe",
+                "body_md": "High-intensity anxiety with potential functional impairment requires prompt professional support.",
+                "id": "free_anx_severe_en",
+                "body": "High-intensity anxiety with potential functional impairment requires prompt professional support."
+            },
+            {
+                "block_id": "free_ocd_subclinical_en",
+                "section": "symptoms_ocd",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 120,
+                "exclusive_group": "ocd_level",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "eq",
+                        "value": "subclinical"
+                    }
+                ],
+                "title": "OCD-related interference: Subclinical",
+                "body_md": "Obsessive-compulsive symptoms are present but currently within a more manageable range.",
+                "id": "free_ocd_subclinical_en",
+                "body": "Obsessive-compulsive symptoms are present but currently within a more manageable range."
+            },
+            {
+                "block_id": "free_ocd_mild_en",
+                "section": "symptoms_ocd",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 120,
+                "exclusive_group": "ocd_level",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "eq",
+                        "value": "mild"
+                    }
+                ],
+                "title": "OCD-related interference: Mild",
+                "body_md": "Repetitive checking or ritual-like patterns are causing burden. Start with short delay training.",
+                "id": "free_ocd_mild_en",
+                "body": "Repetitive checking or ritual-like patterns are causing burden. Start with short delay training."
+            },
+            {
+                "block_id": "free_ocd_moderate_en",
+                "section": "symptoms_ocd",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 120,
+                "exclusive_group": "ocd_level",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "eq",
+                        "value": "moderate"
+                    }
+                ],
+                "title": "OCD-related interference: Moderate",
+                "body_md": "Interference and time costs are notable. Structured ERP-oriented training is recommended.",
+                "id": "free_ocd_moderate_en",
+                "body": "Interference and time costs are notable. Structured ERP-oriented training is recommended."
+            },
+            {
+                "block_id": "free_ocd_severe_en",
+                "section": "symptoms_ocd",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 120,
+                "exclusive_group": "ocd_level",
+                "conditions": [
+                    {
+                        "path": "scores.ocd.level",
+                        "op": "eq",
+                        "value": "severe"
+                    }
+                ],
+                "title": "OCD-related interference: Severe",
+                "body_md": "Symptoms are highly disruptive. Prompt specialist evaluation and support are recommended.",
+                "id": "free_ocd_severe_en",
+                "body": "Symptoms are highly disruptive. Prompt specialist evaluation and support are recommended."
+            },
+            {
+                "block_id": "free_stress_low_en",
+                "section": "stress_resilience",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 110,
+                "exclusive_group": "stress_level",
+                "conditions": [
+                    {
+                        "path": "scores.stress.level",
+                        "op": "eq",
+                        "value": "low"
+                    }
+                ],
+                "title": "Stress overload: Low",
+                "body_md": "Current stress load appears relatively low. Maintain routines and recovery habits.",
+                "id": "free_stress_low_en",
+                "body": "Current stress load appears relatively low. Maintain routines and recovery habits."
+            },
+            {
+                "block_id": "free_stress_medium_en",
+                "section": "stress_resilience",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 110,
+                "exclusive_group": "stress_level",
+                "conditions": [
+                    {
+                        "path": "scores.stress.level",
+                        "op": "eq",
+                        "value": "medium"
+                    }
+                ],
+                "title": "Stress overload: Medium",
+                "body_md": "Stress burden is elevated. Reduce task density and prioritize sleep/recovery.",
+                "id": "free_stress_medium_en",
+                "body": "Stress burden is elevated. Reduce task density and prioritize sleep/recovery."
+            },
+            {
+                "block_id": "free_stress_high_en",
+                "section": "stress_resilience",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 110,
+                "exclusive_group": "stress_level",
+                "conditions": [
+                    {
+                        "path": "scores.stress.level",
+                        "op": "in",
+                        "value": [
+                            "high",
+                            "extreme"
+                        ]
+                    }
+                ],
+                "title": "Stress overload: High",
+                "body_md": "Stress burden is high and may destabilize functioning. Add boundaries and support quickly.",
+                "id": "free_stress_high_en",
+                "body": "Stress burden is high and may destabilize functioning. Add boundaries and support quickly."
+            },
+            {
+                "block_id": "free_res_fragile_en",
+                "section": "stress_resilience",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 100,
+                "exclusive_group": "res_level",
+                "conditions": [
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "in",
+                        "value": [
+                            "fragile",
+                            "low"
+                        ]
+                    }
+                ],
+                "title": "Resilience: Fragile",
+                "body_md": "This often reflects chronic overload rather than personal weakness. Restore basic recovery first.",
+                "id": "free_res_fragile_en",
+                "body": "This often reflects chronic overload rather than personal weakness. Restore basic recovery first."
+            },
+            {
+                "block_id": "free_res_normal_en",
+                "section": "stress_resilience",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 100,
+                "exclusive_group": "res_level",
+                "conditions": [
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "eq",
+                        "value": "average"
+                    }
+                ],
+                "title": "Resilience: Typical",
+                "body_md": "You show baseline adaptive capacity that can be strengthened with consistent routines.",
+                "id": "free_res_normal_en",
+                "body": "You show baseline adaptive capacity that can be strengthened with consistent routines."
+            },
+            {
+                "block_id": "free_res_strong_en",
+                "section": "stress_resilience",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 100,
+                "exclusive_group": "res_level",
+                "conditions": [
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "in",
+                        "value": [
+                            "strong",
+                            "very_strong"
+                        ]
+                    }
+                ],
+                "title": "Resilience: Strong",
+                "body_md": "You retain stronger recovery capacity under stress. Deep-dive modules can help sustain this advantage.",
+                "id": "free_res_strong_en",
+                "body": "You retain stronger recovery capacity under stress. Deep-dive modules can help sustain this advantage."
+            },
+            {
+                "block_id": "free_perf_overview_en",
+                "section": "perfectionism_overview",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 90,
+                "exclusive_group": "perf_overview",
+                "title": "Perfectionism Overview",
+                "body_md": "The deep-dive section explains your five perfectionism drivers and practical adjustment strategies.",
+                "id": "free_perf_overview_en",
+                "body": "The deep-dive section explains your five perfectionism drivers and practical adjustment strategies.",
+                "conditions": []
+            },
+            {
+                "block_id": "free_resources_footer_en",
+                "section": "resources_footer",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 80,
+                "exclusive_group": "resources_footer",
+                "title": "Resources and Next Steps",
+                "body_md": "If distress or impairment is significant, seek professional care first. Consider retesting in 2-4 weeks to track trends.",
+                "id": "free_resources_footer_en",
+                "body": "If distress or impairment is significant, seek professional care first. Consider retesting in 2-4 weeks to track trends.",
+                "conditions": []
+            },
+            {
+                "block_id": "free_scoring_notes_en",
+                "section": "scoring_notes",
+                "locale": "en",
+                "access_level": "free",
+                "priority": 70,
+                "exclusive_group": "scoring_notes",
+                "title": "Scoring Notes",
+                "body_md": "T-scores are clamped to 20-80, with T=50 near normative mean and ~10 points approximating one SD. Interpret alongside quality flags and real-life functioning.",
+                "id": "free_scoring_notes_en",
+                "body": "T-scores are clamped to 20-80, with T=50 near normative mean and ~10 points approximating one SD. Interpret alongside quality flags and real-life functioning.",
+                "conditions": []
+            },
+            {
+                "block_id": "paid_perf_generic_en",
+                "section": "paid_deep_dive",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 120,
+                "exclusive_group": "perf_dominant",
+                "title": "Perfectionism Deep Dive",
+                "body_md": "Your profile highlights one dominant perfectionism pathway. The action plan focuses on reducing overcontrol while preserving performance.",
+                "id": "paid_perf_generic_en",
+                "body": "Your profile highlights one dominant perfectionism pathway. The action plan focuses on reducing overcontrol while preserving performance.",
+                "conditions": []
+            },
+            {
+                "block_id": "paid_resilience_praise_en",
+                "section": "paid_deep_dive",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 110,
+                "exclusive_group": "resilience_bonus",
+                "conditions": [
+                    {
+                        "path": "scores.resilience.level",
+                        "op": "in",
+                        "value": [
+                            "strong",
+                            "very_strong"
+                        ]
+                    }
+                ],
+                "title": "Resilience Advantage",
+                "body_md": "You retain stronger recovery under pressure. Preserve this advantage with explicit recovery routines and boundaries.",
+                "id": "paid_resilience_praise_en",
+                "body": "You retain stronger recovery under pressure. Preserve this advantage with explicit recovery routines and boundaries."
+            },
+            {
+                "block_id": "paid_action_safety_core_en",
+                "section": "action_plan",
+                "locale": "en",
+                "access_level": "paid",
+                "priority": 100,
+                "exclusive_group": "action_en_generic",
+                "title": "14-day Stabilization Plan",
+                "body_md": "Use small daily activation, scheduled worry processing, and low-risk ERP-style delay practice. Seek professional care if impairment worsens.",
+                "id": "paid_action_safety_core_en",
+                "body": "Use small daily activation, scheduled worry processing, and low-risk ERP-style delay practice. Seek professional care if impairment worsens.",
+                "conditions": []
+            }
+        ]
+    }
+}

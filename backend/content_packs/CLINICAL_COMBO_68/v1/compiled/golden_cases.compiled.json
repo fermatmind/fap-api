@@ -1,0 +1,63 @@
+{
+    "schema": "clinical_combo_68.golden_cases.compiled.v1",
+    "pack_id": "CLINICAL_COMBO_68",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T10:00:07.494967Z",
+    "cases": [
+        {
+            "case_id": "ALL_A",
+            "answers": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "time_seconds_total": 320,
+            "expected_crisis_alert": false,
+            "expected_masked_depression": false,
+            "expected_crisis_reasons": []
+        },
+        {
+            "case_id": "ALL_C",
+            "answers": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+            "time_seconds_total": 320,
+            "expected_crisis_alert": true,
+            "expected_masked_depression": false,
+            "expected_crisis_reasons": [
+                "SUICIDAL_IDEATION"
+            ]
+        },
+        {
+            "case_id": "ALL_E",
+            "answers": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+            "time_seconds_total": 320,
+            "expected_crisis_alert": true,
+            "expected_masked_depression": false,
+            "expected_crisis_reasons": [
+                "SUICIDAL_IDEATION",
+                "FUNCTION_IMPAIRMENT"
+            ]
+        },
+        {
+            "case_id": "Q18_Q19_BOUNDARY",
+            "answers": "BBBBBBBBBBBBBBBBBAEBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+            "time_seconds_total": 320,
+            "expected_crisis_alert": false,
+            "expected_masked_depression": false,
+            "expected_crisis_reasons": []
+        },
+        {
+            "case_id": "MASKED_DEPRESSION",
+            "answers": "ABDDDDDDABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+            "time_seconds_total": 320,
+            "expected_crisis_alert": false,
+            "expected_masked_depression": true,
+            "expected_crisis_reasons": []
+        },
+        {
+            "case_id": "CRISIS_Q68",
+            "answers": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBD",
+            "time_seconds_total": 320,
+            "expected_crisis_alert": true,
+            "expected_masked_depression": false,
+            "expected_crisis_reasons": [
+                "FUNCTION_IMPAIRMENT"
+            ]
+        }
+    ]
+}

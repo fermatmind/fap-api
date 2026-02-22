@@ -1,0 +1,32 @@
+{
+    "schema": "clinical_combo_68.privacy.compiled.v1",
+    "pack_id": "CLINICAL_COMBO_68",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T10:00:07.494938Z",
+    "privacy_addendum_by_locale": {
+        "zh-CN": {
+            "version": "CLINICAL_COMBO_68_PRIVACY_2026_02",
+            "locale_requested": "zh-CN",
+            "locale_resolved": "zh-CN",
+            "title": "心理健康数据隐私补充",
+            "bullets": [
+                "本测评属于敏感心理健康信息，平台执行哈希化与脱敏策略，不在可回读层保存逐题明文答案。",
+                "平台保存核心结果数据（维度分数、风险等级、质量标记、版本快照）用于报告生成与历史对比。",
+                "用户可申请删除测评记录；删除后报告与相关导出文件不可访问。",
+                "数据传输与存储采用加密与访问控制，日志与埋点不记录逐题答案明文。"
+            ]
+        },
+        "en": {
+            "version": "CLINICAL_COMBO_68_PRIVACY_2026_02",
+            "locale_requested": "en",
+            "locale_resolved": "en",
+            "title": "Mental Health Data Privacy Addendum",
+            "bullets": [
+                "This assessment contains sensitive mental health data and uses hashing plus de-identification; readable raw item answers are not retained.",
+                "Core result fields (scores, risk levels, quality flags, version snapshots) are retained for report generation and history comparison.",
+                "Users may request deletion; reports and related exports become inaccessible after deletion.",
+                "Transport and storage are protected with encryption and access control; logs and analytics do not store raw item answers."
+            ]
+        }
+    }
+}
