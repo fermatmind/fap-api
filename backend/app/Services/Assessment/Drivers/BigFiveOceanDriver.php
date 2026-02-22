@@ -137,26 +137,9 @@ final class BigFiveOceanDriver implements DriverInterface
      */
     private function resolveQuestionIndex(string $version): array
     {
-        $compiledMin = $this->packLoader->readCompiledJson('questions.min.compiled.json', $version);
-        if (is_array($compiledMin)) {
-            $questionIndex = is_array($compiledMin['question_index'] ?? null)
-                ? $compiledMin['question_index']
-                : [];
-            if (count($questionIndex) === 120) {
-                return $questionIndex;
-            }
-        }
-
-        $compiledQuestions = $this->packLoader->readCompiledJson('questions.compiled.json', $version);
-        if (!is_array($compiledQuestions)) {
+        $questionIndex = $this->packLoader->readQuestionIndexPreferred($version, 120);
+        if (!is_array($questionIndex)) {
             throw new RuntimeException('BIG5_OCEAN compiled questions missing. Run content:compile --pack=BIG5_OCEAN --version=' . $version);
-        }
-
-        $questionIndex = is_array($compiledQuestions['question_index'] ?? null)
-            ? $compiledQuestions['question_index']
-            : [];
-        if (count($questionIndex) !== 120) {
-            throw new RuntimeException('BIG5_OCEAN compiled question index invalid.');
         }
 
         return $questionIndex;
