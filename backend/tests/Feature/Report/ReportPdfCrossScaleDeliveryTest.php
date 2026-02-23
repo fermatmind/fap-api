@@ -51,8 +51,8 @@ final class ReportPdfCrossScaleDeliveryTest extends TestCase
         $sdsPdf->assertHeader('Content-Type', 'application/pdf');
         $sdsPdf->assertHeader('X-Report-Scale', 'SDS_20');
 
-        $clinicalFilesFirst = Storage::disk('local')->allFiles('private/reports/CLINICAL_COMBO_68/'.$clinicalAttemptId);
-        $sdsFilesFirst = Storage::disk('local')->allFiles('private/reports/SDS_20/'.$sdsAttemptId);
+        $clinicalFilesFirst = Storage::disk('local')->allFiles('artifacts/pdf/CLINICAL_COMBO_68/'.$clinicalAttemptId);
+        $sdsFilesFirst = Storage::disk('local')->allFiles('artifacts/pdf/SDS_20/'.$sdsAttemptId);
         $this->assertCount(1, $clinicalFilesFirst);
         $this->assertCount(1, $sdsFilesFirst);
         $this->assertStringContainsString('/report_free.pdf', $clinicalFilesFirst[0]);
@@ -64,7 +64,7 @@ final class ReportPdfCrossScaleDeliveryTest extends TestCase
         ])->get('/api/v0.3/attempts/'.$clinicalAttemptId.'/report.pdf');
         $clinicalPdfAgain->assertStatus(200);
 
-        $clinicalFilesSecond = Storage::disk('local')->allFiles('private/reports/CLINICAL_COMBO_68/'.$clinicalAttemptId);
+        $clinicalFilesSecond = Storage::disk('local')->allFiles('artifacts/pdf/CLINICAL_COMBO_68/'.$clinicalAttemptId);
         $this->assertSame($clinicalFilesFirst, $clinicalFilesSecond);
     }
 

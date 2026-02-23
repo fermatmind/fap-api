@@ -39,9 +39,32 @@ final class ReportPdfDocumentService
 
     public function readArtifact(Attempt $attempt, string $variant, ?Result $result = null): ?string
     {
-        $path = $this->resolveArtifactPath($attempt, $variant, $result);
+        $variant = $this->normalizeVariant($variant);
+        $manifestHash = $this->resolveManifestHash($attempt, $result);
+        $path = $this->artifactStore->path(
+            (string) ($attempt->scale_code ?? 'UNKNOWN'),
+            (string) $attempt->id,
+            $manifestHash,
+            $variant
+        );
+        $candidates = array_merge([
+            $path,
+        ], $this->artifactStore->legacyPaths(
+            (string) ($attempt->scale_code ?? 'UNKNOWN'),
+            (string) $attempt->id,
+            $manifestHash,
+            $variant
+        ));
+        $cached = $this->artifactStore->getFirst($candidates);
+        if (is_string($cached) && $cached !== '') {
+            if (! $this->artifactStore->exists($path)) {
+                $this->artifactStore->put($path, $cached);
+            }
 
-        return $this->artifactStore->get($path);
+            return $cached;
+        }
+
+        return null;
     }
 
     /**
@@ -59,9 +82,20 @@ final class ReportPdfDocumentService
             $manifestHash,
             $variant
         );
-
-        $cached = $this->artifactStore->get($path);
+        $candidates = array_merge([
+            $path,
+        ], $this->artifactStore->legacyPaths(
+            (string) ($attempt->scale_code ?? 'UNKNOWN'),
+            (string) $attempt->id,
+            $manifestHash,
+            $variant
+        ));
+        $cached = $this->artifactStore->getFirst($candidates);
         if (is_string($cached) && $cached !== '') {
+            if (! $this->artifactStore->exists($path)) {
+                $this->artifactStore->put($path, $cached);
+            }
+
             return [
                 'binary' => $cached,
                 'storage_path' => $path,

@@ -40,6 +40,8 @@ use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\StoragePrune;
+use App\Console\Commands\StorageMigrateLegacyArtifacts;
+use App\Console\Commands\StorageInventory;
 use App\Console\Commands\SyncScaleSlugs;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -91,6 +93,8 @@ class Kernel extends ConsoleKernel
         Packs2Rollback::class,
         Packs2List::class,
         StoragePrune::class,
+        StorageMigrateLegacyArtifacts::class,
+        StorageInventory::class,
         QualityDailySummary::class,
         CiScaleImpact::class,
         PartitionAttemptAnswerRows::class,
@@ -104,6 +108,10 @@ class Kernel extends ConsoleKernel
         // 示例（需要就开）：
         // $schedule->command('fap:self-check')->dailyAt('03:10');
         // $schedule->command('fap:validate-report --attempt=...')->hourly();
+        $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();
+        $schedule->command('storage:prune --execute --scope=content_releases_retention')->dailyAt('03:20')->withoutOverlapping();
+        $schedule->command('storage:prune --execute --scope=legacy_private_private_cleanup')->dailyAt('03:30')->withoutOverlapping();
+        $schedule->command('storage:inventory --json')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
