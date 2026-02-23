@@ -52,18 +52,13 @@ final class ContentPackV2Publisher
         $normsVersion = trim((string) ($manifest['norms_version'] ?? data_get($manifest, 'norms.norms_version', '')));
 
         $releaseId = (string) Str::uuid();
-        $storagePath = 'content_packs_v2/'.$packId.'/'.$packVersion.'/'.$releaseId;
-        $targetRoot = storage_path('app/'.$storagePath);
-        $targetCompiledDir = $targetRoot.'/compiled';
+        $primaryStoragePath = 'private/packs_v2/'.$packId.'/'.$packVersion.'/'.$releaseId;
+        $mirrorStoragePath = 'content_packs_v2/'.$packId.'/'.$packVersion.'/'.$releaseId;
 
-        if (File::isDirectory($targetRoot)) {
-            File::deleteDirectory($targetRoot);
-        }
+        $this->copyCompiledToStoragePath($sourceCompiledDir, $primaryStoragePath);
+        $this->copyCompiledToStoragePath($sourceCompiledDir, $mirrorStoragePath);
 
-        File::ensureDirectoryExists(dirname($targetCompiledDir));
-        if (! File::copyDirectory($sourceCompiledDir, $targetCompiledDir)) {
-            throw new RuntimeException('COPY_COMPILED_FAILED');
-        }
+        $storagePath = $primaryStoragePath;
 
         $sourceCommit = trim((string) ($options['source_commit'] ?? ''));
         $createdBy = trim((string) ($options['created_by'] ?? 'packs2'));
@@ -279,5 +274,20 @@ final class ContentPackV2Publisher
         $root = storage_path('app/'.ltrim(str_starts_with($storagePath, 'app/') ? substr($storagePath, 4) : $storagePath, '/'));
 
         return is_file($root.'/compiled/manifest.json') || is_file($root.'/manifest.json');
+    }
+
+    private function copyCompiledToStoragePath(string $sourceCompiledDir, string $storagePath): void
+    {
+        $targetRoot = storage_path('app/'.$storagePath);
+        $targetCompiledDir = $targetRoot.'/compiled';
+
+        if (File::isDirectory($targetRoot)) {
+            File::deleteDirectory($targetRoot);
+        }
+
+        File::ensureDirectoryExists(dirname($targetCompiledDir));
+        if (! File::copyDirectory($sourceCompiledDir, $targetCompiledDir)) {
+            throw new RuntimeException('COPY_COMPILED_FAILED: '.$storagePath);
+        }
     }
 }

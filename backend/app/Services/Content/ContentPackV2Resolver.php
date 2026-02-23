@@ -81,26 +81,51 @@ final class ContentPackV2Resolver
             return null;
         }
 
-        $normalized = str_replace('\\', '/', $storagePath);
+        $roots = $this->candidateRootsFromStoragePath($storagePath);
+        foreach ($roots as $root) {
+            $compiledDir = is_dir($root.'/compiled') ? $root.'/compiled' : $root;
+            if (is_file($compiledDir.'/manifest.json')) {
+                return $compiledDir;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function candidateRootsFromStoragePath(string $storagePath): array
+    {
+        $normalized = str_replace('\\', '/', trim($storagePath));
+        if ($normalized === '') {
+            return [];
+        }
+
+        $candidates = [];
         if (str_starts_with($normalized, '/')) {
-            $root = rtrim($normalized, '/');
+            $candidates[] = rtrim($normalized, '/');
         } else {
             $relative = ltrim($normalized, '/');
             if (str_starts_with($relative, 'app/')) {
                 $relative = substr($relative, 4);
             }
-            $root = rtrim(storage_path('app/'.$relative), '/');
+            $relative = ltrim($relative, '/');
+            if ($relative !== '') {
+                $candidates[] = rtrim(storage_path('app/'.$relative), '/');
+            }
+
+            if (str_starts_with($relative, 'private/packs_v2/')) {
+                $mirror = 'content_packs_v2/'.substr($relative, strlen('private/packs_v2/'));
+                $candidates[] = rtrim(storage_path('app/'.$mirror), '/');
+            } elseif (str_starts_with($relative, 'content_packs_v2/')) {
+                $mirror = 'private/packs_v2/'.substr($relative, strlen('content_packs_v2/'));
+                $candidates[] = rtrim(storage_path('app/'.$mirror), '/');
+            }
         }
 
-        $compiledDir = $root;
-        if (is_dir($root.'/compiled')) {
-            $compiledDir = $root.'/compiled';
-        }
+        $candidates = array_values(array_unique(array_filter($candidates, static fn (string $root): bool => $root !== '')));
 
-        if (! is_file($compiledDir.'/manifest.json')) {
-            return null;
-        }
-
-        return $compiledDir;
+        return $candidates;
     }
 }

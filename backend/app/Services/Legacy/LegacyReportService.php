@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\ReportJob;
 use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
+use App\Services\Storage\ArtifactStore;
 use App\Support\OrgContext;
 use App\Support\WritesEvents;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -16,7 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Throwable;
 
@@ -25,7 +25,8 @@ class LegacyReportService
     use WritesEvents;
 
     public function __construct(
-        private OrgContext $orgContext
+        private OrgContext $orgContext,
+        private readonly ArtifactStore $artifactStore,
     ) {
     }
 
@@ -371,24 +372,19 @@ class LegacyReportService
             : null;
 
         if (!is_array($reportPayload)) {
-            $disk = array_key_exists('private', config('filesystems.disks', []))
-                ? Storage::disk('private')
-                : Storage::disk(config('filesystems.default', 'local'));
-            $latestRelPath = "reports/{$attemptId}/report.json";
+            $scaleCode = (string) (
+                $result?->scale_code
+                ?? $attempt->scale_code
+                ?? data_get($attempt->result_json, 'scale_code', 'MBTI')
+            );
 
             try {
-                if ($disk->exists($latestRelPath)) {
-                    $cachedJson = $disk->get($latestRelPath);
-                    $cached = json_decode($cachedJson, true);
-                    if (is_array($cached)) {
-                        $reportPayload = $cached;
-                    }
-                }
+                $reportPayload = $this->artifactStore->getReportJson($scaleCode, $attemptId);
             } catch (Throwable $e) {
                 Log::error('LEGACY_REPORT_CACHE_READ_FAILED', [
                     'attempt_id' => $attemptId,
                     'request_id' => $this->requestId($request),
-                    'path' => $latestRelPath,
+                    'path' => $this->artifactStore->reportCanonicalPath($scaleCode, $attemptId),
                     'message' => $e->getMessage(),
                 ]);
 

@@ -4,32 +4,59 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Storage\ArtifactStore;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 final class StoragePrune extends Command
 {
     private const SCOPE_REPORTS_BACKUPS = 'reports_backups';
+    private const SCOPE_CONTENT_RELEASES = 'content_releases_retention';
+    private const SCOPE_LEGACY_PRIVATE_PRIVATE = 'legacy_private_private_cleanup';
+
+    private const STRATEGY_STRICT = 'strict';
+    private const STRATEGY_BROAD = 'broad';
 
     /** @var list<string> */
     private const SUPPORTED_SCOPES = [
         self::SCOPE_REPORTS_BACKUPS,
+        self::SCOPE_CONTENT_RELEASES,
+        self::SCOPE_LEGACY_PRIVATE_PRIVATE,
+    ];
+
+    /** @var list<string> */
+    private const SUPPORTED_STRATEGIES = [
+        self::STRATEGY_STRICT,
+        self::STRATEGY_BROAD,
     ];
 
     protected $signature = 'storage:prune
         {--dry-run : Generate prune plan only}
         {--execute : Execute prune plan}
         {--scope=reports_backups : Prune scope}
+        {--strategy=strict : reports_backups strategy(strict|broad)}
         {--plan= : Plan json path for execute mode}';
 
     protected $description = 'Generate/execute storage prune plans.';
+
+    public function __construct(
+        private readonly ArtifactStore $artifactStore,
+    ) {
+        parent::__construct();
+    }
 
     public function handle(): int
     {
         $dryRun = (bool) $this->option('dry-run');
         $execute = (bool) $this->option('execute');
         $scope = strtolower(trim((string) $this->option('scope')));
+        $strategy = strtolower(trim((string) $this->option('strategy')));
+        if ($strategy === '') {
+            $strategy = self::STRATEGY_STRICT;
+        }
 
         if (! in_array($scope, self::SUPPORTED_SCOPES, true)) {
             $this->error('unsupported --scope: '.$scope);
@@ -43,17 +70,31 @@ final class StoragePrune extends Command
             return self::FAILURE;
         }
 
-        if ($dryRun) {
-            return $this->dryRun($scope);
+        if ($scope === self::SCOPE_REPORTS_BACKUPS && ! in_array($strategy, self::SUPPORTED_STRATEGIES, true)) {
+            $this->error('unsupported --strategy for reports_backups: '.$strategy);
+
+            return self::FAILURE;
         }
 
-        return $this->executePlan($scope);
+        if ($scope === self::SCOPE_REPORTS_BACKUPS && $strategy === self::STRATEGY_BROAD && $execute) {
+            $this->error('reports_backups strategy=broad is dry-run only in phased rollout.');
+
+            return self::FAILURE;
+        }
+
+        if ($dryRun) {
+            return $this->dryRun($scope, $strategy);
+        }
+
+        return $this->executePlan($scope, $strategy);
     }
 
-    private function dryRun(string $scope): int
+    private function dryRun(string $scope, string $strategy): int
     {
         $entries = match ($scope) {
-            self::SCOPE_REPORTS_BACKUPS => $this->collectReportBackupEntries(),
+            self::SCOPE_REPORTS_BACKUPS => $this->collectReportBackupEntries($strategy),
+            self::SCOPE_CONTENT_RELEASES => $this->collectContentReleasesRetentionEntries(),
+            self::SCOPE_LEGACY_PRIVATE_PRIVATE => $this->collectLegacyPrivatePrivateEntries(),
             default => [],
         };
 
@@ -66,16 +107,24 @@ final class StoragePrune extends Command
             }
 
             $bytes = max(0, (int) ($entry['bytes'] ?? 0));
-            $paths[] = [
+            $item = [
                 'path' => $path,
                 'bytes' => $bytes,
             ];
+
+            $canonical = trim((string) ($entry['canonical'] ?? ''));
+            if ($canonical !== '') {
+                $item['canonical'] = $canonical;
+            }
+
+            $paths[] = $item;
             $totalBytes += $bytes;
         }
 
         $plan = [
-            'schema' => 'storage_prune_plan.v1',
+            'schema' => 'storage_prune_plan.v2',
             'scope' => $scope,
+            'strategy' => $scope === self::SCOPE_REPORTS_BACKUPS ? $strategy : null,
             'generated_at' => now()->toISOString(),
             'files' => $paths,
             'summary' => [
@@ -101,6 +150,9 @@ final class StoragePrune extends Command
 
         $this->line('status=planned');
         $this->line('scope='.$scope);
+        if ($scope === self::SCOPE_REPORTS_BACKUPS) {
+            $this->line('strategy='.$strategy);
+        }
         $this->line('plan='.$planPath);
         $this->line('files='.count($paths));
         $this->line('bytes='.$totalBytes);
@@ -108,7 +160,7 @@ final class StoragePrune extends Command
         return self::SUCCESS;
     }
 
-    private function executePlan(string $scope): int
+    private function executePlan(string $scope, string $strategy): int
     {
         $planOption = trim((string) $this->option('plan'));
         if ($planOption === '') {
@@ -131,11 +183,37 @@ final class StoragePrune extends Command
             return self::FAILURE;
         }
 
+        $planSchema = trim((string) ($decoded['schema'] ?? ''));
+        if (! in_array($planSchema, ['storage_prune_plan.v1', 'storage_prune_plan.v2'], true)) {
+            $this->error('unsupported plan schema: '.$planSchema);
+
+            return self::FAILURE;
+        }
+
         $planScope = strtolower(trim((string) ($decoded['scope'] ?? '')));
         if ($planScope !== $scope) {
             $this->error('plan scope mismatch: plan='.$planScope.' cli='.$scope);
 
             return self::FAILURE;
+        }
+
+        $planStrategy = strtolower(trim((string) ($decoded['strategy'] ?? self::STRATEGY_STRICT)));
+        if ($scope === self::SCOPE_REPORTS_BACKUPS) {
+            if (! in_array($planStrategy, self::SUPPORTED_STRATEGIES, true)) {
+                $this->error('unsupported plan strategy: '.$planStrategy);
+
+                return self::FAILURE;
+            }
+            if ($planStrategy !== $strategy) {
+                $this->error('plan strategy mismatch: plan='.$planStrategy.' cli='.$strategy);
+
+                return self::FAILURE;
+            }
+            if ($strategy === self::STRATEGY_BROAD) {
+                $this->error('reports_backups strategy=broad is dry-run only in phased rollout.');
+
+                return self::FAILURE;
+            }
         }
 
         $files = is_array($decoded['files'] ?? null) ? $decoded['files'] : [];
@@ -152,7 +230,14 @@ final class StoragePrune extends Command
                 continue;
             }
 
-            if (! $this->isPrunablePathForScope($scope, $relPath)) {
+            $canonical = trim((string) (is_array($fileEntry) ? ($fileEntry['canonical'] ?? '') : ''));
+
+            if (! $this->isPrunablePathForScope($scope, $relPath, $strategy)) {
+                $skippedFiles++;
+                continue;
+            }
+
+            if ($scope === self::SCOPE_LEGACY_PRIVATE_PRIVATE && $canonical !== '' && ! $disk->exists($canonical)) {
                 $skippedFiles++;
                 continue;
             }
@@ -174,13 +259,22 @@ final class StoragePrune extends Command
             $deletedBytes += max(0, $bytes);
         }
 
+        if ($scope === self::SCOPE_LEGACY_PRIVATE_PRIVATE) {
+            $this->cleanupEmptyDirectories(storage_path('app/private/private'));
+        }
+
         $this->line('status=executed');
         $this->line('scope='.$scope);
+        if ($scope === self::SCOPE_REPORTS_BACKUPS) {
+            $this->line('strategy='.$strategy);
+        }
         $this->line('plan='.$planPath);
         $this->line('deleted_files='.$deletedFiles);
         $this->line('deleted_bytes='.$deletedBytes);
         $this->line('missing_files='.$missingFiles);
         $this->line('skipped_files='.$skippedFiles);
+
+        $this->recordAudit($scope, $strategy, $deletedFiles, $deletedBytes, $missingFiles, $skippedFiles, $planPath);
 
         return self::SUCCESS;
     }
@@ -188,7 +282,7 @@ final class StoragePrune extends Command
     /**
      * @return list<array{path:string,bytes:int}>
      */
-    private function collectReportBackupEntries(): array
+    private function collectReportBackupEntries(string $strategy): array
     {
         $root = storage_path('app/private/reports');
         if (! is_dir($root)) {
@@ -212,13 +306,139 @@ final class StoragePrune extends Command
             }
 
             $relPath = str_replace('\\', '/', substr($fullPath, strlen($prefix)));
-            if (! $this->isReportTimestampBackupPath($relPath)) {
+            $matches = $strategy === self::STRATEGY_STRICT
+                ? $this->isReportTimestampBackupPathStrict($relPath)
+                : $this->isReportTimestampBackupPathBroad($relPath);
+
+            if (! $matches) {
                 continue;
             }
 
             $items[] = [
                 'path' => $relPath,
                 'bytes' => max(0, (int) ($file->getSize() ?: 0)),
+            ];
+        }
+
+        usort($items, static fn (array $a, array $b): int => strcmp($a['path'], $b['path']));
+
+        return $items;
+    }
+
+    /**
+     * @return list<array{path:string,bytes:int}>
+     */
+    private function collectContentReleasesRetentionEntries(): array
+    {
+        $root = storage_path('app/private/content_releases');
+        if (! is_dir($root)) {
+            return [];
+        }
+
+        $keepLastN = max(0, (int) config('storage_retention.content_releases.keep_last_n', 20));
+        $keepDays = max(0, (int) config('storage_retention.content_releases.keep_days', 180));
+        $threshold = now()->subDays($keepDays)->getTimestamp();
+
+        $releaseDirs = [];
+        foreach (new \DirectoryIterator($root) as $item) {
+            if (! $item->isDir() || $item->isDot()) {
+                continue;
+            }
+
+            $dirPath = $item->getPathname();
+            $releaseDirs[] = [
+                'name' => $item->getFilename(),
+                'path' => $dirPath,
+                'mtime' => (int) (@filemtime($dirPath) ?: 0),
+            ];
+        }
+
+        usort($releaseDirs, static fn (array $a, array $b): int => $b['mtime'] <=> $a['mtime']);
+
+        $items = [];
+        foreach ($releaseDirs as $index => $dir) {
+            $isProtectedByCount = $index < $keepLastN;
+            $isProtectedByAge = ((int) $dir['mtime']) >= $threshold;
+            if ($isProtectedByCount || $isProtectedByAge) {
+                continue;
+            }
+
+            $iterator = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator((string) $dir['path'], \FilesystemIterator::SKIP_DOTS)
+            );
+            foreach ($iterator as $file) {
+                if (! $file instanceof \SplFileInfo || ! $file->isFile()) {
+                    continue;
+                }
+
+                $fullPath = $file->getPathname();
+                $prefix = rtrim(storage_path('app/private'), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+                if (! str_starts_with($fullPath, $prefix)) {
+                    continue;
+                }
+
+                $relPath = str_replace('\\', '/', substr($fullPath, strlen($prefix)));
+                $items[] = [
+                    'path' => $relPath,
+                    'bytes' => max(0, (int) ($file->getSize() ?: 0)),
+                ];
+            }
+        }
+
+        usort($items, static fn (array $a, array $b): int => strcmp($a['path'], $b['path']));
+
+        return $items;
+    }
+
+    /**
+     * @return list<array{path:string,bytes:int,canonical:string}>
+     */
+    private function collectLegacyPrivatePrivateEntries(): array
+    {
+        $root = storage_path('app/private/private');
+        if (! is_dir($root)) {
+            return [];
+        }
+
+        $items = [];
+        $disk = Storage::disk('local');
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $file) {
+            if (! $file instanceof \SplFileInfo || ! $file->isFile()) {
+                continue;
+            }
+
+            $fullPath = $file->getPathname();
+            $prefix = rtrim(storage_path('app/private'), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+            if (! str_starts_with($fullPath, $prefix)) {
+                continue;
+            }
+
+            $relPath = str_replace('\\', '/', substr($fullPath, strlen($prefix)));
+            if (! str_starts_with($relPath, 'private/')) {
+                continue;
+            }
+
+            $candidates = $this->legacyCanonicalCandidates($relPath);
+            $canonical = '';
+            foreach ($candidates as $candidate) {
+                if ($candidate !== '' && $disk->exists($candidate)) {
+                    $canonical = $candidate;
+                    break;
+                }
+            }
+
+            if ($canonical === '') {
+                continue;
+            }
+
+            $items[] = [
+                'path' => $relPath,
+                'bytes' => max(0, (int) ($file->getSize() ?: 0)),
+                'canonical' => $canonical,
             ];
         }
 
@@ -241,16 +461,138 @@ final class StoragePrune extends Command
         return storage_path('app/private/'.ltrim($planOption, '/\\'));
     }
 
-    private function isPrunablePathForScope(string $scope, string $relPath): bool
+    private function isPrunablePathForScope(string $scope, string $relPath, string $strategy): bool
     {
         return match ($scope) {
-            self::SCOPE_REPORTS_BACKUPS => $this->isReportTimestampBackupPath($relPath),
+            self::SCOPE_REPORTS_BACKUPS => $strategy === self::STRATEGY_STRICT
+                ? $this->isReportTimestampBackupPathStrict($relPath)
+                : $this->isReportTimestampBackupPathBroad($relPath),
+            self::SCOPE_CONTENT_RELEASES => str_starts_with($relPath, 'content_releases/'),
+            self::SCOPE_LEGACY_PRIVATE_PRIVATE => str_starts_with($relPath, 'private/'),
             default => false,
         };
     }
 
-    private function isReportTimestampBackupPath(string $relPath): bool
+    private function isReportTimestampBackupPathStrict(string $relPath): bool
     {
         return preg_match('#^reports/[^/]+/report\.\d{8}_\d{6}\.json$#', $relPath) === 1;
+    }
+
+    private function isReportTimestampBackupPathBroad(string $relPath): bool
+    {
+        if (preg_match('#^reports/[^/]+/(report|report_snapshot)\.json$#', $relPath) === 1) {
+            return false;
+        }
+
+        return preg_match('#^reports/[^/]+/(report|report_snapshot)\..+\.json$#', $relPath) === 1;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function legacyCanonicalCandidates(string $legacyPath): array
+    {
+        $candidates = [];
+
+        $stripped = substr($legacyPath, strlen('private/'));
+        if (is_string($stripped) && $stripped !== '') {
+            $candidates[] = $stripped;
+        }
+
+        if (preg_match('#^private/reports/([^/]+)/([^/]+)/([^/]+)/report_(free|full)\.pdf$#i', $legacyPath, $m) === 1) {
+            $candidates[] = $this->artifactStore->pdfCanonicalPath(
+                (string) $m[1],
+                (string) $m[2],
+                (string) $m[3],
+                (string) $m[4]
+            );
+        } elseif (preg_match('#^private/reports/([^/]+)/([^/]+)/report_(free|full)\.pdf$#i', $legacyPath, $m) === 1) {
+            $candidates[] = $this->artifactStore->pdfCanonicalPath(
+                (string) $m[1],
+                (string) $m[2],
+                'nohash',
+                (string) $m[3]
+            );
+        }
+
+        if (preg_match('#^private/reports/([^/]+)/report\.json$#', $legacyPath, $m) === 1) {
+            $candidates[] = $this->artifactStore->reportCanonicalPath('MBTI', (string) $m[1]);
+        } elseif (preg_match('#^private/reports/([^/]+)/([^/]+)/report\.json$#', $legacyPath, $m) === 1) {
+            $candidates[] = $this->artifactStore->reportCanonicalPath((string) $m[1], (string) $m[2]);
+        }
+
+        $candidates = array_values(array_unique(array_filter($candidates, static fn (string $path): bool => $path !== '')));
+
+        return $candidates;
+    }
+
+    private function cleanupEmptyDirectories(string $root): void
+    {
+        if (! is_dir($root)) {
+            return;
+        }
+
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach ($iterator as $item) {
+            if (! $item instanceof \SplFileInfo || ! $item->isDir()) {
+                continue;
+            }
+
+            $dir = $item->getPathname();
+            $children = @scandir($dir);
+            if ($children === false) {
+                continue;
+            }
+
+            if (count($children) === 2) {
+                @rmdir($dir);
+            }
+        }
+
+        $children = @scandir($root);
+        if (is_array($children) && count($children) === 2) {
+            @rmdir($root);
+        }
+    }
+
+    private function recordAudit(
+        string $scope,
+        string $strategy,
+        int $deletedFiles,
+        int $deletedBytes,
+        int $missingFiles,
+        int $skippedFiles,
+        string $planPath
+    ): void {
+        if (! Schema::hasTable('audit_logs')) {
+            return;
+        }
+
+        DB::table('audit_logs')->insert([
+            'org_id' => 0,
+            'actor_admin_id' => null,
+            'action' => 'storage_prune',
+            'target_type' => 'storage',
+            'target_id' => $scope,
+            'meta_json' => json_encode([
+                'scope' => $scope,
+                'strategy' => $scope === self::SCOPE_REPORTS_BACKUPS ? $strategy : null,
+                'deleted_files_count' => $deletedFiles,
+                'deleted_bytes' => $deletedBytes,
+                'missing_files' => $missingFiles,
+                'skipped_files' => $skippedFiles,
+                'plan' => $planPath,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => null,
+            'user_agent' => 'cli/storage_prune',
+            'request_id' => null,
+            'reason' => 'retention_policy',
+            'result' => 'success',
+            'created_at' => now(),
+        ]);
     }
 }
