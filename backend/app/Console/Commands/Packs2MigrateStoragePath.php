@@ -8,6 +8,7 @@ use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 final class Packs2MigrateStoragePath extends Command
@@ -287,8 +288,12 @@ final class Packs2MigrateStoragePath extends Command
 
         try {
             DB::table('audit_logs')->insert($row);
-        } catch (\Throwable) {
-            // keep storage path migration non-blocking when audit persistence is unavailable.
+        } catch (\Throwable $e) {
+            Log::warning('packs2_migrate_audit_log_insert_failed', [
+                'command' => 'packs2:migrate-storage-path',
+                'release_id' => $operation['release_id'] ?? null,
+                'error' => $e->getMessage(),
+            ]);
         }
     }
 }

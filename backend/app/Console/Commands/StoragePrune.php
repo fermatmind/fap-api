@@ -8,6 +8,7 @@ use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
@@ -780,8 +781,13 @@ final class StoragePrune extends Command
 
         try {
             DB::table('audit_logs')->insert($row);
-        } catch (\Throwable) {
-            // keep prune flow non-blocking when audit table shape is unavailable in test/runtime.
+        } catch (\Throwable $e) {
+            Log::warning('storage_prune_audit_log_insert_failed', [
+                'command' => 'storage:prune',
+                'scope' => $scope,
+                'plan_path' => $planPath,
+                'error' => $e->getMessage(),
+            ]);
         }
     }
 }

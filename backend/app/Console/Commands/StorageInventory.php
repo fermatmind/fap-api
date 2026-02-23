@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Support\SchemaBaseline;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 final class StorageInventory extends Command
@@ -225,8 +226,11 @@ final class StorageInventory extends Command
 
         try {
             DB::table('audit_logs')->insert($row);
-        } catch (\Throwable) {
-            // keep inventory snapshot non-blocking when audit persistence is unavailable.
+        } catch (\Throwable $e) {
+            Log::warning('storage_inventory_audit_log_insert_failed', [
+                'command' => 'storage:inventory',
+                'error' => $e->getMessage(),
+            ]);
         }
     }
 }
