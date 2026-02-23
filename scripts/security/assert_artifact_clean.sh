@@ -92,6 +92,30 @@ check_repo_mode() {
     done <<< "$hits"
   fi
 
+  hits="$(contains_path '^backend/storage/app/private/artifacts/' "$tracked" | grep -Ev '/\.gitkeep$' || true)"
+  if [[ -n "$hits" ]]; then
+    while IFS= read -r f; do
+      [[ -n "$f" ]] || continue
+      fail "forbidden tracked runtime artifact: $f ; fix: keep only .gitkeep in backend/storage/app/private/artifacts."
+    done <<< "$hits"
+  fi
+
+  hits="$(contains_path '^backend/storage/app/private/packs_v2/' "$tracked" | grep -Ev '/\.gitkeep$' || true)"
+  if [[ -n "$hits" ]]; then
+    while IFS= read -r f; do
+      [[ -n "$f" ]] || continue
+      fail "forbidden tracked runtime artifact: $f ; fix: keep only .gitkeep in backend/storage/app/private/packs_v2."
+    done <<< "$hits"
+  fi
+
+  hits="$(contains_path '^backend/storage/app/private/prune_plans/' "$tracked" | grep -Ev '/\.gitkeep$' || true)"
+  if [[ -n "$hits" ]]; then
+    while IFS= read -r f; do
+      [[ -n "$f" ]] || continue
+      fail "forbidden tracked runtime artifact: $f ; fix: keep only .gitkeep in backend/storage/app/private/prune_plans."
+    done <<< "$hits"
+  fi
+
   hits="$(contains_path '^backend/storage/app/archives/' "$tracked" | grep -Ev '/\.gitkeep$' || true)"
   if [[ -n "$hits" ]]; then
     while IFS= read -r f; do
@@ -151,6 +175,9 @@ check_artifact_mode() {
   check_only_gitkeep_files "backend/storage/logs"
   check_only_gitkeep_files "backend/storage/framework"
   check_only_gitkeep_files "backend/storage/app/private/reports"
+  check_only_gitkeep_files "backend/storage/app/private/artifacts"
+  check_only_gitkeep_files "backend/storage/app/private/packs_v2"
+  check_only_gitkeep_files "backend/storage/app/private/prune_plans"
   check_only_gitkeep_files "backend/storage/app/archives"
 
   for p in \
