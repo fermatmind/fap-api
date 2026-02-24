@@ -9,6 +9,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\ContentPacksIndex;
+use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\Sds20PackLoader;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
@@ -28,6 +29,7 @@ class AttemptStartService
         private BigFivePackLoader $bigFivePackLoader,
         private ClinicalComboPackLoader $clinicalPackLoader,
         private Sds20PackLoader $sds20PackLoader,
+        private Eq60PackLoader $eq60PackLoader,
         private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
@@ -312,6 +314,15 @@ class AttemptStartService
             return $count;
         }
 
+        if (strtoupper($scaleCode) === 'EQ_60') {
+            $count = $this->eq60PackLoader->getQuestionCount($dirVersion);
+            if ($count <= 0) {
+                $this->logAndThrowContentPackError('EQ60_QUESTIONS_MISSING', $packId, $dirVersion, 'questions_eq60_bilingual.csv');
+            }
+
+            return $count;
+        }
+
         $questionsPath = '';
 
         $found = $this->packsIndex->find($packId, $dirVersion);
@@ -376,6 +387,7 @@ class AttemptStartService
             'BIG5_OCEAN' => $this->bigFivePackLoader->resolveManifestHash($dirVersion),
             'CLINICAL_COMBO_68' => $this->clinicalPackLoader->resolveManifestHash($dirVersion),
             'SDS_20' => $this->sds20PackLoader->resolveManifestHash($dirVersion),
+            'EQ_60' => $this->eq60PackLoader->resolveManifestHash($dirVersion),
             default => '',
         };
     }
@@ -386,6 +398,7 @@ class AttemptStartService
             'BIG5_OCEAN' => 'v3',
             'CLINICAL_COMBO_68' => 'v1.0_2026',
             'SDS_20' => 'v2.0_Factor_Logic',
+            'EQ_60' => 'eq60_likert_v1',
             default => '',
         };
     }
@@ -415,6 +428,10 @@ class AttemptStartService
         }
 
         if (strtoupper($packId) === 'SDS_20') {
+            return $dirVersion;
+        }
+
+        if (strtoupper($packId) === 'EQ_60') {
             return $dirVersion;
         }
 

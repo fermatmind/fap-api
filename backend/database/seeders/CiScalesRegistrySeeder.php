@@ -198,6 +198,33 @@ final class CiScalesRegistrySeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
+            [
+                'org_id' => 0,
+                'code' => 'EQ_60',
+                'primary_slug' => 'eq-test',
+                'slugs_json' => json_encode(['eq-test', 'emotional-intelligence-test'], JSON_UNESCAPED_UNICODE),
+                'driver_type' => 'eq_60',
+                'assessment_driver' => 'eq_60',
+                'default_pack_id' => 'EQ_60',
+                'default_region' => $defaultRegion,
+                'default_locale' => $defaultLocale,
+                'default_dir_version' => 'v1',
+                'capabilities_json' => json_encode([
+                    'questions' => true,
+                    'enabled_in_prod' => true,
+                    'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                    'rollout_ratio' => 1.0,
+                ], JSON_UNESCAPED_UNICODE),
+                'commercial_json' => json_encode([
+                    'report_benefit_code' => 'EQ_60_FULL',
+                    'credit_benefit_code' => 'EQ_60_FULL',
+                    'report_unlock_sku' => 'SKU_EQ_60_FULL_299',
+                ], JSON_UNESCAPED_UNICODE),
+                'is_public' => 1,
+                'is_active' => 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
         ];
 
         DB::table('scales_registry')->upsert(
@@ -220,6 +247,6 @@ final class CiScalesRegistrySeeder extends Seeder
             ]
         );
 
-        $this->command?->info('CiScalesRegistrySeeder: upserted 7 scales.');
+        $this->command?->info('CiScalesRegistrySeeder: upserted 8 scales.');
     }
 }

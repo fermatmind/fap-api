@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V0_3;
 use App\Http\Controllers\Controller;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
+use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\QuestionsService;
 use App\Services\Content\Sds20PackLoader;
 use App\Services\Scale\ScaleRegistry;
@@ -72,7 +73,8 @@ class ScalesController extends Controller
         QuestionsService $questionsService,
         BigFivePackLoader $bigFivePackLoader,
         ClinicalComboPackLoader $clinicalPackLoader,
-        Sds20PackLoader $sds20PackLoader
+        Sds20PackLoader $sds20PackLoader,
+        Eq60PackLoader $eq60PackLoader
     ): JsonResponse {
         $orgId = $this->orgContext->orgId();
         $code = strtoupper(trim($scale_code));
@@ -273,6 +275,32 @@ class ScalesController extends Controller
                     'source' => [
                         'items' => $sourceCatalog,
                     ],
+                ],
+            ]);
+        }
+
+        if ($code === 'EQ_60') {
+            $version = (string) ($row['default_dir_version'] ?? Eq60PackLoader::PACK_VERSION);
+            $doc = $eq60PackLoader->loadQuestionsDoc($locale, $version);
+            $localeResolved = (string) ($doc['locale_resolved'] ?? $eq60PackLoader->normalizeLocale($locale));
+
+            return response()->json([
+                'ok' => true,
+                'scale_code' => $code,
+                'region' => $region,
+                'locale' => $localeResolved,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'content_package_version' => $version,
+                'questions' => [
+                    'schema' => 'fap.questions.v1',
+                    'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
+                ],
+                'meta' => [
+                    'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
+                    'locale_resolved' => $localeResolved,
+                    'option_anchors' => is_array($doc['option_anchors'] ?? null) ? $doc['option_anchors'] : [],
+                    'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['SA', 'ER', 'SE', 'RM'],
                 ],
             ]);
         }

@@ -59,10 +59,11 @@ php artisan fap:schema:verify
 RUN_BIG5_OCEAN_GATE="${RUN_BIG5_OCEAN_GATE:-0}"
 RUN_CLINICAL_COMBO_68_GATE="${RUN_CLINICAL_COMBO_68_GATE:-0}"
 RUN_SDS_20_GATE="${RUN_SDS_20_GATE:-0}"
+RUN_EQ_60_GATE="${RUN_EQ_60_GATE:-0}"
 RUN_SDS_NORMS_GATE="${RUN_SDS_NORMS_GATE:-0}"
 RUN_FULL_SCALE_REGRESSION="${RUN_FULL_SCALE_REGRESSION:-0}"
 SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
-echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
@@ -89,6 +90,14 @@ if [[ "$RUN_SDS_20_GATE" == "1" ]]; then
   RUN_SDS_20_GATE=1 bash "$BACKEND_DIR/scripts/ci/verify_sds_20.sh"
 
   echo "[CI] rebuilding sqlite baseline after SDS_20 gate"
+  bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+  php artisan fap:schema:verify
+fi
+
+if [[ "$RUN_EQ_60_GATE" == "1" ]]; then
+  echo "[CI] running EQ_60 content gates"
+  RUN_EQ_60_GATE=1 bash "$BACKEND_DIR/scripts/ci/verify_eq_60.sh"
+  echo "[CI] rebuilding sqlite baseline after EQ_60 gate"
   bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
   php artisan fap:schema:verify
 fi

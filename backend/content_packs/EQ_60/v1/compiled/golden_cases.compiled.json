@@ -1,0 +1,48 @@
+{
+    "schema": "eq_60.golden_cases.compiled.v1",
+    "pack_id": "EQ_60",
+    "pack_version": "v1",
+    "generated_at": "2026-02-24T08:45:29.332914Z",
+    "cases": [
+        {
+            "case_id": "all_A",
+            "locale": "zh-CN",
+            "answers": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "expected_total": 124,
+            "expected_sa": 31,
+            "expected_er": 39,
+            "expected_se": 27,
+            "expected_rm": 27
+        },
+        {
+            "case_id": "all_C",
+            "locale": "zh-CN",
+            "answers": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+            "expected_total": 180,
+            "expected_sa": 45,
+            "expected_er": 45,
+            "expected_se": 45,
+            "expected_rm": 45
+        },
+        {
+            "case_id": "all_E",
+            "locale": "en",
+            "answers": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+            "expected_total": 236,
+            "expected_sa": 59,
+            "expected_er": 51,
+            "expected_se": 63,
+            "expected_rm": 63
+        },
+        {
+            "case_id": "alt_AB",
+            "locale": "zh-CN",
+            "answers": "ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
+            "expected_total": 138,
+            "expected_sa": 36,
+            "expected_er": 39,
+            "expected_se": 30,
+            "expected_rm": 33
+        }
+    ]
+}

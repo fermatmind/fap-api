@@ -50,6 +50,9 @@ class AssessmentEngine
             || $driverType === 'clinical_combo_68'
             || $scaleCode === 'SDS_20'
             || $driverType === 'sds_20'
+            || $scaleCode === 'EQ_60'
+            || $driverType === 'eq_60'
+            || $driverType === 'eq_test'
         ) {
             $driver = $this->resolveDriver($driverType);
             if (!$driver) {
@@ -58,9 +61,10 @@ class AssessmentEngine
 
             $isClinical = $scaleCode === 'CLINICAL_COMBO_68' || $driverType === 'clinical_combo_68';
             $isSds20 = $scaleCode === 'SDS_20' || $driverType === 'sds_20';
+            $isEq60 = $scaleCode === 'EQ_60' || $driverType === 'eq_60' || $driverType === 'eq_test';
             $scoringSpecVersion = $isClinical
                 ? 'v1.0_2026'
-                : ($isSds20 ? 'v2.0_Factor_Logic' : 'big5_spec_2026Q1_v1');
+                : ($isSds20 ? 'v2.0_Factor_Logic' : ($isEq60 ? 'eq60_spec_2026_v1' : 'big5_spec_2026Q1_v1'));
 
             $ctxMerged = array_merge($ctx, [
                 'org_id' => $orgId,
