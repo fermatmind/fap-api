@@ -39,7 +39,7 @@ final class Eq60ContentGateTest extends TestCase
         $zh->assertJsonPath('locale', 'zh-CN');
         $this->assertCount(60, (array) data_get($zh->json(), 'questions.items', []));
         $this->assertCount(5, (array) data_get($zh->json(), 'meta.option_anchors', []));
-        $this->assertSame(['SA', 'ER', 'SE', 'RM'], array_values((array) data_get($zh->json(), 'meta.dimension_codes', [])));
+        $this->assertSame(['SA', 'ER', 'EM', 'RM'], array_values((array) data_get($zh->json(), 'meta.dimension_codes', [])));
 
         $en = $this->getJson('/api/v0.3/scales/EQ_60/questions?locale=en&region=GLOBAL');
         $en->assertStatus(200);

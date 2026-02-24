@@ -2,10 +2,10 @@
     "schema": "eq_60.policy.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-02-24T08:45:29.332885Z",
+    "generated_at": "2026-02-24T09:17:55.959703Z",
     "policy": {
-        "engine_version": "eq60_likert_v1",
-        "scoring_spec_version": "eq60_spec_2026_v1",
+        "engine_version": "v1.0_normed_validity",
+        "scoring_spec_version": "eq60_spec_2026_v2",
         "answer_codes_allowed": [
             "A",
             "B",
@@ -16,7 +16,7 @@
         "dimension_codes": [
             "SA",
             "ER",
-            "SE",
+            "EM",
             "RM"
         ],
         "dimension_map": {
@@ -54,7 +54,7 @@
                 29,
                 30
             ],
-            "SE": [
+            "EM": [
                 31,
                 32,
                 33,
@@ -118,6 +118,133 @@
                 "max": 300
             }
         },
+        "validity_rules": {
+            "speeding": {
+                "c_lt_seconds": 120,
+                "d_lt_seconds": 75
+            },
+            "longstring": {
+                "c_gte": 25,
+                "d_gte": 35
+            },
+            "extreme_rate": {
+                "c_gte": 0.85
+            },
+            "neutral_rate": {
+                "c_gte": 0.7
+            },
+            "inconsistency": {
+                "c_gte": 18,
+                "d_gte": 24
+            }
+        },
+        "inconsistency_pairs": [
+            [
+                1,
+                11
+            ],
+            [
+                2,
+                15
+            ],
+            [
+                10,
+                14
+            ],
+            [
+                16,
+                22
+            ],
+            [
+                19,
+                20
+            ],
+            [
+                27,
+                29
+            ],
+            [
+                31,
+                33
+            ],
+            [
+                32,
+                39
+            ],
+            [
+                34,
+                44
+            ],
+            [
+                47,
+                57
+            ]
+        ],
+        "std_score": {
+            "mean": 100,
+            "sd": 15,
+            "clamp_min": 55,
+            "clamp_max": 145
+        },
+        "bootstrap_norms": {
+            "mu_dim": 53.5,
+            "sigma_dim": 7.5,
+            "status": "PROVISIONAL",
+            "version": "bootstrap_v1",
+            "group": "locale_all_18-60"
+        },
+        "level_bands": {
+            "baseline_max": 84.99,
+            "developing_max": 92.99,
+            "competent_max": 107.99,
+            "proficient_max": 115
+        },
+        "cross_insight_rules": [
+            {
+                "tag": "profile:overthinking_burn",
+                "when": {
+                    "SA_gte": 108,
+                    "ER_lte": 92
+                }
+            },
+            {
+                "tag": "profile:social_masking",
+                "when": {
+                    "RM_gte": 108,
+                    "SA_lte": 92
+                }
+            },
+            {
+                "tag": "profile:cool_detached",
+                "when": {
+                    "ER_gte": 108,
+                    "EM_lte": 92
+                }
+            },
+            {
+                "tag": "profile:compassion_overload",
+                "when": {
+                    "EM_gte": 115,
+                    "ER_lte": 92
+                }
+            },
+            {
+                "tag": "profile:emotion_leader",
+                "when": {
+                    "RM_gte": 115,
+                    "EM_gte": 108
+                }
+            },
+            {
+                "tag": "profile:balanced_high_eq",
+                "when": {
+                    "SA_gte": 108,
+                    "ER_gte": 108,
+                    "EM_gte": 108,
+                    "RM_gte": 108
+                }
+            }
+        ],
         "view_policy": {
             "free_sections": [
                 "intro",

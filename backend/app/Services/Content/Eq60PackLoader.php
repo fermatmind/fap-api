@@ -89,7 +89,7 @@ final class Eq60PackLoader
 
             $dimension = strtoupper(trim((string) ($meta['dimension'] ?? '')));
             $direction = (int) ($meta['direction'] ?? 0);
-            if (!in_array($dimension, ['SA', 'ER', 'SE', 'RM'], true)) {
+            if (!in_array($dimension, ['SA', 'ER', 'EM', 'RM'], true)) {
                 continue;
             }
             if (!in_array($direction, [1, -1], true)) {
@@ -118,7 +118,7 @@ final class Eq60PackLoader
 
             $dimension = strtoupper(trim((string) ($row['dimension'] ?? '')));
             $direction = (int) ($row['direction'] ?? 0);
-            if (!in_array($dimension, ['SA', 'ER', 'SE', 'RM'], true)) {
+            if (!in_array($dimension, ['SA', 'ER', 'EM', 'RM'], true)) {
                 continue;
             }
             if (!in_array($direction, [1, -1], true)) {
@@ -151,7 +151,7 @@ final class Eq60PackLoader
                 $resolvedLocale = isset($docs[$localeResolved]) ? $localeResolved : 'zh-CN';
                 $dimensionCodes = array_values(array_filter(array_map(
                     static fn ($code): string => strtoupper(trim((string) $code)),
-                    (array) ($compiled['dimension_codes'] ?? ['SA', 'ER', 'SE', 'RM'])
+                    (array) ($compiled['dimension_codes'] ?? ['SA', 'ER', 'EM', 'RM'])
                 )));
 
                 return [
@@ -189,7 +189,7 @@ final class Eq60PackLoader
             'locale_requested' => $locale,
             'locale_resolved' => $localeResolved,
             'items' => $items,
-            'dimension_codes' => ['SA', 'ER', 'SE', 'RM'],
+            'dimension_codes' => ['SA', 'ER', 'EM', 'RM'],
             'option_anchors' => $this->loadOptionAnchors($localeResolved, $version),
         ];
     }

@@ -1,0 +1,43 @@
+{
+  "schema": "eq_60.report.free_blocks.v1",
+  "zh-CN": [
+    {
+      "section_key": "eq_summary_free",
+      "block_id": "eq_summary_free_1",
+      "title": "你的 EQ 概览",
+      "body_md": "全局标准分：{{scores.global.std_score}}，百分位：{{scores.global.percentile}}。"
+    },
+    {
+      "section_key": "eq_dimensions_free",
+      "block_id": "eq_dimensions_free_1",
+      "title": "四维简评",
+      "body_md": "SA：{{scores.SA.level}}；ER：{{scores.ER.level}}；EM：{{scores.EM.level}}；RM：{{scores.RM.level}}。"
+    },
+    {
+      "section_key": "eq_paywall_teaser",
+      "block_id": "eq_paywall_teaser_1",
+      "title": "解锁深度报告",
+      "body_md": "升级后可查看交叉洞察、14 天训练计划和场景化建议。"
+    }
+  ],
+  "en": [
+    {
+      "section_key": "eq_summary_free",
+      "block_id": "eq_summary_free_1",
+      "title": "Your EQ Overview",
+      "body_md": "Global score: {{scores.global.std_score}} (percentile {{scores.global.percentile}})."
+    },
+    {
+      "section_key": "eq_dimensions_free",
+      "block_id": "eq_dimensions_free_1",
+      "title": "Quadrant Snapshot",
+      "body_md": "SA: {{scores.SA.level}}, ER: {{scores.ER.level}}, EM: {{scores.EM.level}}, RM: {{scores.RM.level}}."
+    },
+    {
+      "section_key": "eq_paywall_teaser",
+      "block_id": "eq_paywall_teaser_1",
+      "title": "Unlock Full Report",
+      "body_md": "Upgrade to view cross-quadrant insights and a 14-day growth plan."
+    }
+  ]
+}
