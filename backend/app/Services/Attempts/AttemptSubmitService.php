@@ -341,6 +341,46 @@ class AttemptSubmitService
                 $locked->calculation_snapshot_json = $snapshot;
             }
 
+            if ($scaleCode === 'EQ_60' && is_array($scoreResult->normedJson ?? null)) {
+                $normed = (array) $scoreResult->normedJson;
+                $versionSnapshot = is_array($normed['version_snapshot'] ?? null)
+                    ? $normed['version_snapshot']
+                    : [];
+                $normsNode = is_array($normed['norms'] ?? null) ? $normed['norms'] : [];
+                $qualityNode = is_array($normed['quality'] ?? null) ? $normed['quality'] : [];
+
+                $snapshot = $locked->calculation_snapshot_json;
+                if (! is_array($snapshot)) {
+                    $snapshot = [];
+                }
+
+                $normsVersion = trim((string) ($normsNode['version'] ?? ''));
+                if ($normsVersion !== '') {
+                    $locked->norm_version = $normsVersion;
+                }
+
+                $snapshot['eq_60'] = [
+                    'pack_id' => (string) ($versionSnapshot['pack_id'] ?? $packId),
+                    'pack_version' => (string) ($versionSnapshot['pack_version'] ?? $dirVersion),
+                    'policy_version' => (string) ($versionSnapshot['policy_version'] ?? ''),
+                    'policy_hash' => (string) ($versionSnapshot['policy_hash'] ?? ''),
+                    'engine_version' => (string) ($versionSnapshot['engine_version'] ?? data_get($normed, 'engine_version', 'v1.0_normed_validity')),
+                    'scoring_spec_version' => (string) ($versionSnapshot['scoring_spec_version'] ?? $scoringSpecVersion),
+                    'content_manifest_hash' => (string) ($versionSnapshot['content_manifest_hash'] ?? ''),
+                    'norms' => [
+                        'status' => strtoupper(trim((string) ($normsNode['status'] ?? 'PROVISIONAL'))),
+                        'group' => (string) ($normsNode['group'] ?? ''),
+                        'version' => $normsVersion,
+                    ],
+                    'quality' => [
+                        'level' => strtoupper(trim((string) ($qualityNode['level'] ?? 'A'))),
+                        'flags' => array_values(array_filter(array_map('strval', (array) ($qualityNode['flags'] ?? [])))),
+                    ],
+                ];
+                $snapshot['quality'] = $qualityNode !== [] ? $qualityNode : ($snapshot['quality'] ?? []);
+                $locked->calculation_snapshot_json = $snapshot;
+            }
+
             if ($locked->started_at === null) {
                 $locked->started_at = now();
             }
@@ -361,7 +401,7 @@ class AttemptSubmitService
             $axisStates = $axisScores['axis_states'] ?? null;
 
             $resultJson = $scoreResult->toArray();
-            if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true) && is_array($resultJson['normed_json'] ?? null)) {
+            if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20', 'EQ_60'], true) && is_array($resultJson['normed_json'] ?? null)) {
                 $resultJson = array_merge($resultJson, $resultJson['normed_json']);
             }
             if (is_array($resultJson['quality'] ?? null)) {

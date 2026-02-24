@@ -398,7 +398,7 @@ class AttemptStartService
             'BIG5_OCEAN' => 'v3',
             'CLINICAL_COMBO_68' => 'v1.0_2026',
             'SDS_20' => 'v2.0_Factor_Logic',
-            'EQ_60' => 'eq60_likert_v1',
+            'EQ_60' => 'v1.0_normed_validity',
             default => '',
         };
     }
