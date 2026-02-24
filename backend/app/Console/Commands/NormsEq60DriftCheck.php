@@ -131,18 +131,34 @@ final class NormsEq60DriftCheck extends Command
      */
     private function loadVersions(string $scale, string $version, string $groupId): array
     {
+        $normalizedVersion = strtolower(trim($version));
         $query = DB::table('scale_norms_versions')
-            ->where('scale_code', $scale)
-            ->where('version', $version);
+            ->where('scale_code', $scale);
         if ($groupId !== '') {
             $query->where('group_id', $groupId);
         }
+        if ($normalizedVersion === 'active') {
+            $query->where('is_active', 1);
+        } elseif ($normalizedVersion === 'candidate') {
+            $query->where('is_active', 0)
+                ->whereIn('status', ['CALIBRATED', 'PROVISIONAL']);
+        } else {
+            $query->where('version', $version);
+        }
 
-        $rows = $query->get(['id', 'group_id', 'version', 'published_at']);
+        $rows = $query
+            ->orderByDesc('is_active')
+            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
+            ->get(['id', 'group_id', 'version', 'published_at', 'is_active', 'status']);
         $out = [];
         foreach ($rows as $row) {
             $gid = trim((string) ($row->group_id ?? ''));
             if ($gid === '') {
+                continue;
+            }
+
+            if ($normalizedVersion === 'candidate' && (int) ($row->is_active ?? 0) === 1) {
                 continue;
             }
 

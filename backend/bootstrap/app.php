@@ -40,8 +40,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
+        $schedule->command('eq60:psychometrics --window=last_90_days')->weeklyOn(1, '04:20')->withoutOverlapping();
         $schedule->command('norms:big5:roll --window_days=365')->monthlyOn(1, '04:30')->withoutOverlapping();
         $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();
+        $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
