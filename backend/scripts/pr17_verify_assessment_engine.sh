@@ -269,7 +269,9 @@ cat <<JSON > "$RUN_DIR/raven_submit_payload.json"
   "attempt_id": "$raven_attempt_id",
   "duration_ms": 20000,
   "answers": [
-    {"question_id":"RAVEN_DEMO_1","code":"B"}
+    {"question_id":"MATRIX_Q01","code":"A"},
+    {"question_id":"ODD_Q01","code":"B"},
+    {"question_id":"SERIES_Q01","code":"C"}
   ]
 }
 JSON
@@ -281,9 +283,15 @@ http_code=$(curl -sS -L -o "$raven_submit" -w "%{http_code}" -X POST \
   "$API/api/v0.3/attempts/submit" || true)
 [[ "$http_code" == "200" ]] || fail "raven submit failed (http=$http_code)"
 
-raven_time_bonus="$(json_get "$raven_submit" "result.breakdown_json.time_bonus" || true)"
+raven_status="$(json_get "$raven_submit" "result.breakdown_json.status" || true)"
+raven_reason="$(json_get "$raven_submit" "result.breakdown_json.reason_code" || true)"
+raven_quality_level="$(json_get "$raven_submit" "result.breakdown_json.quality.level" || true)"
+raven_raw="$(json_get "$raven_submit" "result.raw_score" || true)"
 raven_final="$(json_get "$raven_submit" "result.final_score" || true)"
-[[ -n "$raven_time_bonus" && -n "$raven_final" ]] || fail "raven submit missing fields"
+[[ "$raven_status" == "unscored" ]] || fail "raven submit unexpected status: $raven_status"
+[[ "$raven_reason" == "ANSWER_KEY_MISSING" ]] || fail "raven submit unexpected reason: $raven_reason"
+[[ "$raven_raw" == "0" && "$raven_final" == "0" ]] || fail "raven submit expected raw/final score 0"
+[[ -n "$raven_quality_level" ]] || fail "raven submit missing quality.level"
 
 echo "[PR17] iq_raven result" | tee -a "$LOG_FILE"
 http_code=$(curl -sS -L -o "$raven_result" -w "%{http_code}" \
@@ -305,7 +313,10 @@ PR17 verify summary
 - seed: ok (Pr16IqRavenDemoSeeder, Pr17SimpleScoreDemoSeeder)
 - simple_score_demo raw_score: $simple_raw
 - simple_score_demo final_score: $simple_final
-- iq_raven time_bonus: $raven_time_bonus
+- iq_raven status: $raven_status
+- iq_raven reason_code: $raven_reason
+- iq_raven quality.level: $raven_quality_level
+- iq_raven raw_score: $raven_raw
 - iq_raven final_score: $raven_final
 - report locked (simple_score_demo): $simple_locked
 - modified_files:

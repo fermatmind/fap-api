@@ -8,116 +8,121 @@ class IqTestDriver implements DriverInterface
 {
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
-        $answerKey = $spec['answer_key'] ?? [];
-        if (!is_array($answerKey)) {
-            $answerKey = [];
-        }
+        $durationMs = max(0, (int) ($ctx['duration_ms'] ?? 0));
+        $normalizedItems = $this->normalizeAnswers($answers);
+        $quality = $this->buildQuality($durationMs, $normalizedItems, $spec);
 
-        $scoreSpec = $spec['score'] ?? [];
-        if (!is_array($scoreSpec)) {
-            $scoreSpec = [];
-        }
+        $breakdown = [
+            'status' => 'unscored',
+            'reason_code' => 'ANSWER_KEY_MISSING',
+            'scoring_mode' => (string) ($spec['scoring_mode'] ?? 'pending_answer_key'),
+            'duration_ms' => $durationMs,
+            'answer_count' => count($normalizedItems),
+            'quality' => $quality,
+            'items' => $normalizedItems,
+        ];
 
-        $correctScore = (int) ($scoreSpec['correct'] ?? 1);
-        $wrongScore = (int) ($scoreSpec['wrong'] ?? 0);
+        return new ScoreResult(0.0, 0.0, $breakdown, null, null, [
+            'status' => 'unscored',
+            'reason_code' => 'ANSWER_KEY_MISSING',
+        ]);
+    }
 
-        $total = 0;
-        $correct = 0;
-        $items = [];
+    /**
+     * @return list<array{question_id:string,code:string}>
+     */
+    private function normalizeAnswers(array $answers): array
+    {
+        $normalized = [];
 
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
 
-            $qid = trim((string) ($answer['question_id'] ?? ''));
-            $code = strtoupper((string) ($answer['code'] ?? ''));
-            if ($qid === '' || $code === '') {
+            $questionId = strtoupper(trim((string) ($answer['question_id'] ?? '')));
+            $code = strtoupper(trim((string) ($answer['code'] ?? ($answer['option_code'] ?? ''))));
+            if ($questionId === '' || $code === '') {
                 continue;
             }
 
-            $total += 1;
-            $expected = strtoupper((string) ($answerKey[$qid] ?? ''));
-            $isCorrect = $expected !== '' && $expected === $code;
-
-            if ($isCorrect) {
-                $correct += 1;
+            if (! preg_match('/^[A-F]$/', $code)) {
+                continue;
             }
 
-            $items[] = [
-                'question_id' => $qid,
+            $normalized[$questionId] = [
+                'question_id' => $questionId,
                 'code' => $code,
-                'correct' => $isCorrect,
             ];
         }
 
-        $rawScore = ($correct * $correctScore) + (($total - $correct) * $wrongScore);
-        $timeBonus = $this->resolveTimeBonus((int) ($ctx['duration_ms'] ?? 0), $spec['time_bonus'] ?? null);
-        $finalScore = $rawScore + $timeBonus['bonus'];
+        ksort($normalized);
 
-        $accuracy = $total > 0 ? round($correct / $total, 4) : 0.0;
-
-        $breakdown = [
-            'score_method' => 'answer_key',
-            'correct_count' => $correct,
-            'total_count' => $total,
-            'accuracy' => $accuracy,
-            'duration_ms' => (int) ($ctx['duration_ms'] ?? 0),
-            'time_bonus' => $timeBonus['bonus'],
-            'time_bonus_rule' => $timeBonus['rule'],
-            'items' => $items,
-        ];
-
-        $normed = [
-            'correct_rate' => $accuracy,
-        ];
-
-        return new ScoreResult((float) $rawScore, (float) $finalScore, $breakdown, null, null, $normed);
+        return array_values($normalized);
     }
 
-    private function resolveTimeBonus(int $durationMs, ?array $timeBonusSpec): array
+    /**
+     * @param  list<array{question_id:string,code:string}>  $items
+     * @return array{level:string,flags:list<string>}
+     */
+    private function buildQuality(int $durationMs, array $items, array $spec): array
     {
-        $bonus = 0;
-        $rule = null;
+        $qualityRules = is_array($spec['quality_rules'] ?? null) ? $spec['quality_rules'] : [];
+        $flags = [];
 
-        if ($durationMs <= 0 || !is_array($timeBonusSpec)) {
-            return ['bonus' => $bonus, 'rule' => $rule];
+        $speedingSecondsLt = (int) ($qualityRules['speeding_seconds_lt'] ?? 0);
+        if ($speedingSecondsLt > 0 && $durationMs > 0 && $durationMs < ($speedingSecondsLt * 1000)) {
+            $flags[] = 'SPEEDING';
         }
 
-        $rules = $timeBonusSpec['rules'] ?? null;
-        if (!is_array($rules)) {
-            return ['bonus' => $bonus, 'rule' => $rule];
+        $straightliningRunLen = (int) ($qualityRules['straightlining_run_len_gte'] ?? 0);
+        if ($straightliningRunLen > 1 && $this->maxRunLengthByCode($items) >= $straightliningRunLen) {
+            $flags[] = 'STRAIGHTLINING';
         }
 
-        foreach ($rules as $candidate) {
-            if (!is_array($candidate)) {
+        if ($items === []) {
+            $flags[] = 'NO_VALID_ANSWERS';
+        }
+
+        $level = match (true) {
+            in_array('NO_VALID_ANSWERS', $flags, true) => 'D',
+            $flags === [] => 'A',
+            default => 'B',
+        };
+
+        return [
+            'level' => $level,
+            'flags' => array_values(array_unique($flags)),
+        ];
+    }
+
+    /**
+     * @param  list<array{question_id:string,code:string}>  $items
+     */
+    private function maxRunLengthByCode(array $items): int
+    {
+        $maxRun = 0;
+        $currentRun = 0;
+        $prev = null;
+
+        foreach ($items as $item) {
+            $code = (string) ($item['code'] ?? '');
+            if ($code === '') {
                 continue;
             }
-            $maxMs = (int) ($candidate['max_ms'] ?? 0);
-            if ($maxMs <= 0) {
-                continue;
+
+            if ($code === $prev) {
+                $currentRun++;
+            } else {
+                $currentRun = 1;
+                $prev = $code;
             }
-            if ($durationMs <= $maxMs) {
-                $bonus = (int) ($candidate['bonus'] ?? 0);
-                $rule = [
-                    'max_ms' => $maxMs,
-                    'bonus' => $bonus,
-                ];
-                return ['bonus' => $bonus, 'rule' => $rule];
+
+            if ($currentRun > $maxRun) {
+                $maxRun = $currentRun;
             }
         }
 
-        $last = end($rules);
-        if (is_array($last)) {
-            $bonus = (int) ($last['bonus'] ?? 0);
-            if (array_key_exists('max_ms', $last)) {
-                $rule = [
-                    'max_ms' => (int) ($last['max_ms'] ?? 0),
-                    'bonus' => $bonus,
-                ];
-            }
-        }
-
-        return ['bonus' => $bonus, 'rule' => $rule];
+        return $maxRun;
     }
 }

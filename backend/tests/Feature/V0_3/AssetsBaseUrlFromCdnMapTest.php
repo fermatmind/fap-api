@@ -11,7 +11,7 @@ class AssetsBaseUrlFromCdnMapTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_iq_raven_assets_use_cdn_map_base_url(): void
+    public function test_iq_raven_questions_return_30_inline_svg_items(): void
     {
         $this->artisan('migrate', ['--force' => true]);
         $this->artisan('fap:scales:seed-default');
@@ -25,12 +25,37 @@ class AssetsBaseUrlFromCdnMapTest extends TestCase
         $response->assertStatus(200);
 
         $doc = $response->json('questions');
-        $image = $doc['items'][0]['assets']['image'] ?? '';
+        $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
+        $this->assertCount(30, $items);
 
-        $base = (string) config('cdn_map.map.US.assets_base_url');
-        $this->assertNotSame('', $base);
-        $expectedPrefix = rtrim($base, '/') . '/default/IQ-RAVEN-CN-v0.3.0-DEMO/';
-        $this->assertIsString($image);
-        $this->assertStringStartsWith($expectedPrefix, $image);
+        $sectionCounts = [
+            'matrix' => 0,
+            'odd' => 0,
+            'series' => 0,
+        ];
+
+        foreach ($items as $item) {
+            $sectionCode = (string) ($item['section_code'] ?? '');
+            $this->assertArrayHasKey($sectionCode, $sectionCounts);
+            $sectionCounts[$sectionCode]++;
+
+            $stemPaths = data_get($item, 'stem.svg.paths', []);
+            $this->assertIsArray($stemPaths);
+            $this->assertNotEmpty($stemPaths);
+
+            $options = is_array($item['options'] ?? null) ? $item['options'] : [];
+            $expectedOptionCount = $sectionCode === 'series' ? 6 : 5;
+            $this->assertCount($expectedOptionCount, $options);
+
+            foreach ($options as $option) {
+                $optionPaths = data_get($option, 'svg.paths', []);
+                $this->assertIsArray($optionPaths);
+                $this->assertNotEmpty($optionPaths);
+            }
+        }
+
+        $this->assertSame(9, $sectionCounts['matrix']);
+        $this->assertSame(10, $sectionCounts['odd']);
+        $this->assertSame(11, $sectionCounts['series']);
     }
 }

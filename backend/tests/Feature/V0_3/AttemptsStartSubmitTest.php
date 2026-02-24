@@ -17,7 +17,7 @@ class AttemptsStartSubmitTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -35,9 +35,9 @@ class AttemptsStartSubmitTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr16IqRavenDemoSeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr16IqRavenDemoSeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     public function test_simple_score_start_submit_result(): void
@@ -66,7 +66,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
@@ -84,14 +84,14 @@ class AttemptsStartSubmitTest extends TestCase
 
         $result = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
         $result->assertStatus(200);
         $this->assertSame(15, (int) $result->json('result.raw_score'));
 
         $dup = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
@@ -107,7 +107,7 @@ class AttemptsStartSubmitTest extends TestCase
         $this->assertSame(1, Result::where('attempt_id', $attemptId)->count());
     }
 
-    public function test_iq_raven_time_bonus(): void
+    public function test_iq_raven_submit_unscored_status(): void
     {
         $this->seedScales();
         $anonId = 'v03_iq_owner';
@@ -120,22 +120,47 @@ class AttemptsStartSubmitTest extends TestCase
             'anon_id' => $anonId,
         ]);
         $start->assertStatus(200);
+        $this->assertSame(30, (int) $start->json('question_count'));
         $attemptId = (string) $start->json('attempt_id');
+
+        $answers = [
+            ['question_id' => 'MATRIX_Q01', 'code' => 'A'],
+            ['question_id' => 'ODD_Q01', 'code' => 'B'],
+            ['question_id' => 'SERIES_Q01', 'code' => 'C'],
+        ];
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
-            'answers' => [
-                ['question_id' => 'RAVEN_DEMO_1', 'code' => 'B'],
-            ],
+            'answers' => $answers,
             'duration_ms' => 20000,
         ]);
 
         $submit->assertStatus(200);
-        $this->assertSame(3, (int) $submit->json('result.breakdown_json.time_bonus'));
-        $this->assertSame(4, (int) $submit->json('result.final_score'));
+        $this->assertSame('unscored', (string) $submit->json('result.breakdown_json.status'));
+        $this->assertSame('ANSWER_KEY_MISSING', (string) $submit->json('result.breakdown_json.reason_code'));
+        $this->assertSame(0, (int) $submit->json('result.raw_score'));
+        $this->assertSame(0, (int) $submit->json('result.final_score'));
+        $this->assertNull(data_get($submit->json(), 'result.breakdown_json.time_bonus'));
+        $this->assertNotSame('', (string) $submit->json('result.breakdown_json.quality.level'));
+
+        $dup = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$anonToken,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $answers,
+            'duration_ms' => 20000,
+        ]);
+        $dup->assertStatus(200);
+        $dup->assertJson([
+            'ok' => true,
+            'attempt_id' => $attemptId,
+            'idempotent' => true,
+        ]);
+        $this->assertSame('unscored', (string) $dup->json('result.breakdown_json.status'));
     }
 
     public function test_mbti_report_locked_true_without_entitlement(): void
@@ -222,7 +247,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $resultResp = $this->withHeaders([
             'X-Anon-Id' => 'anon_test',
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
 
         $resultResp->assertStatus(200);
@@ -233,7 +258,7 @@ class AttemptsStartSubmitTest extends TestCase
 
         $report = $this->withHeaders([
             'X-Anon-Id' => 'anon_test',
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
         $report->assertJson([
