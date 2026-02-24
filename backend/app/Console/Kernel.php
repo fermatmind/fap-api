@@ -23,6 +23,9 @@ use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\NormsBig5MonthlyDriftCheck;
 use App\Console\Commands\NormsBig5Rebuild;
 use App\Console\Commands\NormsBig5Roll;
+use App\Console\Commands\NormsEq60Activate;
+use App\Console\Commands\NormsEq60DriftCheck;
+use App\Console\Commands\NormsEq60Import;
 use App\Console\Commands\NormsImport;
 use App\Console\Commands\NormsSdsDriftCheck;
 use App\Console\Commands\NormsSdsRebuild;
@@ -80,6 +83,9 @@ class Kernel extends ConsoleKernel
         NormsBig5MonthlyDriftCheck::class,
         NormsBig5BootstrapBuild::class,
         Big5PsychometricsReport::class,
+        NormsEq60Import::class,
+        NormsEq60Activate::class,
+        NormsEq60DriftCheck::class,
         NormsSdsRebuild::class,
         NormsSdsDriftCheck::class,
         SdsPsychometricsReport::class,

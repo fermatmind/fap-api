@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Assessment\Scorers;
 
+use App\Services\Psychometrics\Eq60\NormGroupResolver;
+
 final class Eq60ScorerV1NormedValidity
 {
+    public function __construct(
+        private readonly ?NormGroupResolver $normGroupResolver = null
+    ) {}
+
     /**
      * @param  array<int|string,mixed>  $answersByQid
      * @param  array<int,array<string,mixed>>  $questionIndex
@@ -87,10 +93,17 @@ final class Eq60ScorerV1NormedValidity
         }
 
         $bootstrap = is_array($policy['bootstrap_norms'] ?? null) ? $policy['bootstrap_norms'] : [];
-        $muDim = (float) ($bootstrap['mu_dim'] ?? 53.5);
-        $sigmaDim = (float) ($bootstrap['sigma_dim'] ?? 7.5);
+        $bootstrapMu = (float) ($bootstrap['mu_dim'] ?? 53.5);
+        $bootstrapSigma = (float) ($bootstrap['sigma_dim'] ?? 7.5);
+        if ($bootstrapSigma <= 0.0) {
+            $bootstrapSigma = 7.5;
+        }
+
+        $normResolved = $this->resolveNormsContext($ctx, $bootstrap, $bootstrapMu, $bootstrapSigma);
+        $muDim = (float) ($normResolved['mu_dim'] ?? $bootstrapMu);
+        $sigmaDim = (float) ($normResolved['sigma_dim'] ?? $bootstrapSigma);
         if ($sigmaDim <= 0.0) {
-            $sigmaDim = 7.5;
+            $sigmaDim = $bootstrapSigma;
         }
 
         $dimensionScores = [];
@@ -134,12 +147,8 @@ final class Eq60ScorerV1NormedValidity
             $scores[$dimensionCode] = $dimensionScores[$dimensionCode] ?? [];
         }
 
-        $norms = [
-            'status' => strtoupper(trim((string) ($bootstrap['status'] ?? 'PROVISIONAL'))),
-            'version' => trim((string) ($bootstrap['version'] ?? 'bootstrap_v1')),
-            'group' => trim((string) ($bootstrap['group'] ?? 'locale_all_18-60')),
-        ];
-        if (! in_array($norms['status'], ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+        $norms = is_array($normResolved['norms'] ?? null) ? $normResolved['norms'] : [];
+        if (! in_array((string) ($norms['status'] ?? ''), ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
             $norms['status'] = 'PROVISIONAL';
         }
 
@@ -352,6 +361,94 @@ final class Eq60ScorerV1NormedValidity
         $timestamp = strtotime($normalized);
 
         return $timestamp === false ? null : $timestamp;
+    }
+
+    /**
+     * @param  array<string,mixed>  $ctx
+     * @param  array<string,mixed>  $bootstrap
+     * @return array{
+     *   mu_dim:float,
+     *   sigma_dim:float,
+     *   norms:array<string,mixed>
+     * }
+     */
+    private function resolveNormsContext(array $ctx, array $bootstrap, float $fallbackMu, float $fallbackSigma): array
+    {
+        $norms = [
+            'status' => strtoupper(trim((string) ($bootstrap['status'] ?? 'PROVISIONAL'))),
+            'version' => trim((string) ($bootstrap['version'] ?? 'bootstrap_v1')),
+            'group' => trim((string) ($bootstrap['group'] ?? 'locale_all_18-60')),
+        ];
+        if (! in_array($norms['status'], ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+            $norms['status'] = 'PROVISIONAL';
+        }
+
+        if (!$this->normGroupResolver instanceof NormGroupResolver) {
+            return [
+                'mu_dim' => $fallbackMu,
+                'sigma_dim' => $fallbackSigma,
+                'norms' => $norms,
+            ];
+        }
+
+        $resolved = $this->normGroupResolver->resolve('EQ_60', [
+            'locale' => (string) ($ctx['locale'] ?? ''),
+            'region' => (string) ($ctx['region'] ?? ''),
+            'gender' => (string) ($ctx['gender'] ?? ''),
+            'age' => (int) ($ctx['age'] ?? 0),
+            'age_band' => (string) ($ctx['age_band'] ?? ''),
+        ]);
+
+        if (! is_array($resolved)) {
+            return [
+                'mu_dim' => $fallbackMu,
+                'sigma_dim' => $fallbackSigma,
+                'norms' => $norms,
+            ];
+        }
+
+        $resolvedStatus = strtoupper(trim((string) ($resolved['status'] ?? 'MISSING')));
+        if (! in_array($resolvedStatus, ['CALIBRATED', 'PROVISIONAL', 'MISSING'], true)) {
+            $resolvedStatus = 'MISSING';
+        }
+
+        $metric = is_array($resolved['metric'] ?? null) ? $resolved['metric'] : [];
+        $metricMean = (float) ($metric['mean'] ?? 0.0);
+        $metricSd = (float) ($metric['sd'] ?? 0.0);
+        $metricSampleN = (int) ($metric['sample_n'] ?? 0);
+        $usableMetric = $resolvedStatus !== 'MISSING' && $metricMean > 0.0 && $metricSd > 0.0 && $metricSampleN > 0;
+
+        if ($usableMetric) {
+            $norms['status'] = $resolvedStatus;
+            $resolvedVersion = trim((string) ($resolved['norms_version'] ?? ''));
+            if ($resolvedVersion !== '') {
+                $norms['version'] = $resolvedVersion;
+            }
+            $resolvedGroup = trim((string) ($resolved['group_id'] ?? ''));
+            if ($resolvedGroup !== '') {
+                $norms['group'] = $resolvedGroup;
+            }
+            $resolvedSourceId = trim((string) ($resolved['source_id'] ?? ''));
+            if ($resolvedSourceId !== '') {
+                $norms['source_id'] = $resolvedSourceId;
+            }
+            $resolvedSourceType = trim((string) ($resolved['source_type'] ?? ''));
+            if ($resolvedSourceType !== '') {
+                $norms['source_type'] = $resolvedSourceType;
+            }
+
+            return [
+                'mu_dim' => $metricMean,
+                'sigma_dim' => $metricSd,
+                'norms' => $norms,
+            ];
+        }
+
+        return [
+            'mu_dim' => $fallbackMu,
+            'sigma_dim' => $fallbackSigma,
+            'norms' => $norms,
+        ];
     }
 
     /**
