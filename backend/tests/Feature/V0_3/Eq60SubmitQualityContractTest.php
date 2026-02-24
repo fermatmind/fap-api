@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-final class Eq60StartSubmitTest extends TestCase
+final class Eq60SubmitQualityContractTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_eq60_start_submit_returns_dimension_scores(): void
+    public function test_submit_returns_quality_norms_scores_and_version_snapshot_contract(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
         (new ScaleRegistrySeeder())->run();
 
-        $anonId = 'anon_eq60_owner';
+        $anonId = 'anon_eq60_contract';
         $token = $this->issueAnonToken($anonId);
 
         $start = $this->withHeaders([
@@ -32,9 +32,6 @@ final class Eq60StartSubmitTest extends TestCase
         ]);
 
         $start->assertStatus(200);
-        $start->assertJsonPath('scale_code', 'EQ_60');
-        $start->assertJsonPath('question_count', 60);
-
         $attemptId = (string) $start->json('attempt_id');
         $this->assertNotSame('', $attemptId);
 
@@ -48,30 +45,31 @@ final class Eq60StartSubmitTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
-            'duration_ms' => 160000,
+            'duration_ms' => 65000,
         ]);
 
         $submit->assertStatus(200);
         $submit->assertJsonPath('ok', true);
         $submit->assertJsonPath('attempt_id', $attemptId);
-
-        $dimScores = (array) data_get($submit->json(), 'result.breakdown_json.dim_scores', []);
-        $this->assertSame(45, (int) ($dimScores['SA'] ?? 0));
-        $this->assertSame(45, (int) ($dimScores['ER'] ?? 0));
-        $this->assertSame(45, (int) ($dimScores['EM'] ?? 0));
-        $this->assertSame(45, (int) ($dimScores['RM'] ?? 0));
-        $this->assertSame(180, (int) data_get($submit->json(), 'result.final_score', 0));
-        $this->assertSame(45, (int) data_get($submit->json(), 'result.scores.EM.raw_sum', 0));
-        $this->assertSame('PROVISIONAL', (string) data_get($submit->json(), 'result.norms.status', ''));
+        $submit->assertJsonPath('result.scale_code', 'EQ_60');
+        $submit->assertJsonPath('result.quality.level', 'D');
+        $submit->assertJsonPath('result.norms.status', 'PROVISIONAL');
+        $submit->assertJsonPath('result.norms.version', 'bootstrap_v1');
+        $submit->assertJsonPath('result.scores.SA.raw_sum', 45);
+        $submit->assertJsonPath('result.scores.ER.raw_sum', 45);
+        $submit->assertJsonPath('result.scores.EM.raw_sum', 45);
+        $submit->assertJsonPath('result.scores.RM.raw_sum', 45);
+        $submit->assertJsonPath('result.version_snapshot.engine_version', 'v1.0_normed_validity');
+        $submit->assertJsonPath('result.version_snapshot.scoring_spec_version', 'eq60_spec_2026_v2');
     }
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),

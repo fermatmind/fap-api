@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Assessment\Drivers;
 
 use App\Services\Assessment\ScoreResult;
+use App\Services\Assessment\Scorers\Eq60ScorerV1NormedValidity;
 use App\Services\Content\Eq60PackLoader;
 use RuntimeException;
 
@@ -12,6 +13,7 @@ final class Eq60Driver implements DriverInterface
 {
     public function __construct(
         private readonly Eq60PackLoader $packLoader,
+        private readonly Eq60ScorerV1NormedValidity $scorer,
     ) {}
 
     public function score(array $answers, array $spec, array $ctx): ScoreResult
@@ -35,52 +37,35 @@ final class Eq60Driver implements DriverInterface
             throw new \InvalidArgumentException('EQ_60 requires exactly 60 answers.');
         }
 
-        $dimScores = [
-            'SA' => 0,
-            'ER' => 0,
-            'SE' => 0,
-            'RM' => 0,
-        ];
-        $rawTotal = 0;
-        $resolvedTotal = 0;
-
-        foreach ($questionIndex as $qid => $meta) {
-            if (!array_key_exists($qid, $answersById)) {
-                throw new \InvalidArgumentException('missing answer for question_id=' . $qid);
-            }
-
-            $code = strtoupper(trim((string) $answersById[$qid]));
-            if ($code === '' || !array_key_exists($code, $scoreMap)) {
-                throw new \InvalidArgumentException('invalid answer code for question_id=' . $qid);
-            }
-
-            $dimension = strtoupper(trim((string) ($meta['dimension'] ?? '')));
-            if (!array_key_exists($dimension, $dimScores)) {
-                throw new \InvalidArgumentException('invalid question dimension for question_id=' . $qid);
-            }
-
-            $direction = (int) ($meta['direction'] ?? 1);
-            if (!in_array($direction, [1, -1], true)) {
-                throw new \InvalidArgumentException('invalid question direction for question_id=' . $qid);
-            }
-
-            $raw = (int) $scoreMap[$code];
-            $resolved = $direction === -1 ? 6 - $raw : $raw;
-
-            $rawTotal += $raw;
-            $resolvedTotal += $resolved;
-            $dimScores[$dimension] += $resolved;
-        }
+        $scorePayload = $this->scorer->score(
+            $answersById,
+            $questionIndex,
+            $policy,
+            array_merge($ctx, [
+                'pack_id' => (string) ($ctx['pack_id'] ?? Eq60PackLoader::PACK_ID),
+                'dir_version' => $version,
+                'score_map' => $scoreMap,
+            ])
+        );
 
         $manifestHash = trim((string) ($ctx['content_manifest_hash'] ?? ''));
         if ($manifestHash === '') {
             $manifestHash = $this->packLoader->resolveManifestHash($version);
         }
 
-        $scoringSpecVersion = trim((string) ($ctx['scoring_spec_version'] ?? ($policy['scoring_spec_version'] ?? 'eq60_spec_2026_v1')));
+        $scoringSpecVersion = trim((string) ($ctx['scoring_spec_version'] ?? ($policy['scoring_spec_version'] ?? 'eq60_spec_2026_v2')));
         if ($scoringSpecVersion === '') {
-            $scoringSpecVersion = 'eq60_spec_2026_v1';
+            $scoringSpecVersion = 'eq60_spec_2026_v2';
         }
+
+        $dimScores = [
+            'SA' => (int) data_get($scorePayload, 'scores.SA.raw_sum', 0),
+            'ER' => (int) data_get($scorePayload, 'scores.ER.raw_sum', 0),
+            'EM' => (int) data_get($scorePayload, 'scores.EM.raw_sum', 0),
+            'RM' => (int) data_get($scorePayload, 'scores.RM.raw_sum', 0),
+        ];
+        $resolvedTotal = (int) data_get($scorePayload, 'scores.global.raw_sum', array_sum($dimScores));
+        $rawTotal = array_sum($dimScores);
 
         $dimPct = [];
         foreach ($dimScores as $dimension => $score) {
@@ -88,26 +73,36 @@ final class Eq60Driver implements DriverInterface
         }
 
         $scoreResult = [
-            'scale_code' => 'EQ_60',
-            'engine_version' => 'eq60_likert_v1',
-            'version_snapshot' => [
-                'pack_id' => (string) ($ctx['pack_id'] ?? Eq60PackLoader::PACK_ID),
-                'pack_version' => $version,
-                'policy_version' => trim((string) ($policy['engine_version'] ?? 'eq60_likert_v1')),
-                'scoring_spec_version' => $scoringSpecVersion,
-                'content_manifest_hash' => $manifestHash,
-            ],
+            'scale_code' => (string) ($scorePayload['scale_code'] ?? 'EQ_60'),
+            'engine_version' => (string) ($scorePayload['engine_version'] ?? 'v1.0_normed_validity'),
+            'version_snapshot' => array_merge(
+                [
+                    'pack_id' => (string) ($ctx['pack_id'] ?? Eq60PackLoader::PACK_ID),
+                    'pack_version' => $version,
+                    'policy_version' => $scoringSpecVersion,
+                    'scoring_spec_version' => $scoringSpecVersion,
+                    'content_manifest_hash' => $manifestHash,
+                ],
+                is_array($scorePayload['version_snapshot'] ?? null) ? $scorePayload['version_snapshot'] : []
+            ),
             'dim_scores' => $dimScores,
             'total_score' => $resolvedTotal,
             'raw_total_before_reverse' => $rawTotal,
             'answer_count' => count($answersById),
+            'quality' => is_array($scorePayload['quality'] ?? null) ? $scorePayload['quality'] : [],
+            'norms' => is_array($scorePayload['norms'] ?? null) ? $scorePayload['norms'] : [],
+            'scores' => is_array($scorePayload['scores'] ?? null) ? $scorePayload['scores'] : [],
+            'report_tags' => array_values(array_filter(
+                array_map('strval', (array) ($scorePayload['report_tags'] ?? [])),
+                static fn (string $tag): bool => $tag !== ''
+            )),
         ];
 
         return new ScoreResult(
             rawScore: (float) $resolvedTotal,
             finalScore: (float) $resolvedTotal,
             breakdownJson: [
-                'score_method' => 'eq60_likert_v1',
+                'score_method' => 'v1.0_normed_validity',
                 'answer_count' => count($answersById),
                 'dim_scores' => $dimScores,
                 'total_score' => $resolvedTotal,
@@ -120,6 +115,7 @@ final class Eq60Driver implements DriverInterface
                     'dim_scores' => $dimScores,
                     'total_score' => $resolvedTotal,
                     'raw_total_before_reverse' => $rawTotal,
+                    'scores' => is_array($scorePayload['scores'] ?? null) ? $scorePayload['scores'] : [],
                 ],
                 'scores_pct' => array_merge($dimPct, [
                     'TOTAL' => round(($resolvedTotal - 60) / 240 * 100, 2),
@@ -127,7 +123,7 @@ final class Eq60Driver implements DriverInterface
                 'axis_states' => [],
                 'score_result' => $scoreResult,
             ],
-            normedJson: $scoreResult,
+            normedJson: $scorePayload,
         );
     }
 

@@ -1,0 +1,47 @@
+{
+  "schema": "eq_60.report_layout.v1",
+  "sections": [
+    {
+      "key": "disclaimer_top",
+      "source": "copy",
+      "access_level": "free",
+      "required_in_variant": ["free", "full"],
+      "module_code": "eq_core"
+    },
+    {
+      "key": "eq_summary_free",
+      "source": "blocks",
+      "access_level": "free",
+      "required_in_variant": ["free", "full"],
+      "module_code": "eq_core"
+    },
+    {
+      "key": "eq_dimensions_free",
+      "source": "blocks",
+      "access_level": "free",
+      "required_in_variant": ["free", "full"],
+      "module_code": "eq_core"
+    },
+    {
+      "key": "eq_paywall_teaser",
+      "source": "blocks",
+      "access_level": "free",
+      "required_in_variant": ["free", "full"],
+      "module_code": "eq_core"
+    },
+    {
+      "key": "eq_cross_insights",
+      "source": "blocks",
+      "access_level": "paid",
+      "required_in_variant": ["full"],
+      "module_code": "eq_cross_insights"
+    },
+    {
+      "key": "eq_growth_plan",
+      "source": "blocks",
+      "access_level": "paid",
+      "required_in_variant": ["full"],
+      "module_code": "eq_growth_plan"
+    }
+  ]
+}

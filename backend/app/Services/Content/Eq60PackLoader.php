@@ -77,7 +77,7 @@ final class Eq60PackLoader
      */
     public function loadQuestionIndex(?string $version = null): array
     {
-        $compiled = $this->readCompiledJson('questions.compiled.json', $version);
+        $compiled = $this->requireCompiledJson('questions.compiled.json', $version);
         $index = is_array($compiled['question_index'] ?? null) ? $compiled['question_index'] : [];
 
         $out = [];
@@ -89,36 +89,7 @@ final class Eq60PackLoader
 
             $dimension = strtoupper(trim((string) ($meta['dimension'] ?? '')));
             $direction = (int) ($meta['direction'] ?? 0);
-            if (!in_array($dimension, ['SA', 'ER', 'SE', 'RM'], true)) {
-                continue;
-            }
-            if (!in_array($direction, [1, -1], true)) {
-                continue;
-            }
-
-            $out[$qid] = [
-                'dimension' => $dimension,
-                'direction' => $direction,
-            ];
-        }
-
-        if ($out !== []) {
-            ksort($out, SORT_NUMERIC);
-
-            return $out;
-        }
-
-        $rows = $this->readCsvWithLines($this->rawPath('questions_eq60_bilingual.csv', $version));
-        foreach ($rows as $entry) {
-            $row = (array) ($entry['row'] ?? []);
-            $qid = (int) ($row['question_id'] ?? 0);
-            if ($qid <= 0) {
-                continue;
-            }
-
-            $dimension = strtoupper(trim((string) ($row['dimension'] ?? '')));
-            $direction = (int) ($row['direction'] ?? 0);
-            if (!in_array($dimension, ['SA', 'ER', 'SE', 'RM'], true)) {
+            if (!in_array($dimension, ['SA', 'ER', 'EM', 'RM'], true)) {
                 continue;
             }
             if (!in_array($direction, [1, -1], true)) {
@@ -133,6 +104,14 @@ final class Eq60PackLoader
 
         ksort($out, SORT_NUMERIC);
 
+        if ($out === []) {
+            $path = $this->compiledPath('questions.compiled.json', $version);
+            throw new \RuntimeException(
+                'EQ_60 compiled question_index missing or empty at ' . $path
+                    . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+            );
+        }
+
         return $out;
     }
 
@@ -142,55 +121,29 @@ final class Eq60PackLoader
     public function loadQuestionsDoc(string $locale, ?string $version = null): array
     {
         $localeResolved = $this->normalizeLocale($locale);
-        $compiled = $this->readCompiledJson('questions.compiled.json', $version);
-
-        if (is_array($compiled)) {
-            $docs = is_array($compiled['questions_doc_by_locale'] ?? null) ? $compiled['questions_doc_by_locale'] : [];
-            $doc = $docs[$localeResolved] ?? ($docs['zh-CN'] ?? null);
-            if (is_array($doc)) {
-                $resolvedLocale = isset($docs[$localeResolved]) ? $localeResolved : 'zh-CN';
-                $dimensionCodes = array_values(array_filter(array_map(
-                    static fn ($code): string => strtoupper(trim((string) $code)),
-                    (array) ($compiled['dimension_codes'] ?? ['SA', 'ER', 'SE', 'RM'])
-                )));
-
-                return [
-                    'locale_requested' => $locale,
-                    'locale_resolved' => $resolvedLocale,
-                    'items' => array_values(array_filter((array) ($doc['items'] ?? []), static fn ($item): bool => is_array($item))),
-                    'dimension_codes' => $dimensionCodes,
-                    'option_anchors' => $this->loadOptionAnchors($resolvedLocale, $version),
-                ];
-            }
+        $compiled = $this->requireCompiledJson('questions.compiled.json', $version);
+        $docs = is_array($compiled['questions_doc_by_locale'] ?? null) ? $compiled['questions_doc_by_locale'] : [];
+        $doc = $docs[$localeResolved] ?? ($docs['zh-CN'] ?? null);
+        if (!is_array($doc)) {
+            $path = $this->compiledPath('questions.compiled.json', $version);
+            throw new \RuntimeException(
+                'EQ_60 compiled questions_doc_by_locale missing at ' . $path
+                    . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+            );
         }
 
-        $rows = $this->readCsvWithLines($this->rawPath('questions_eq60_bilingual.csv', $version));
-        $textField = $localeResolved === 'zh-CN' ? 'text_zh' : 'text_en';
-        $items = [];
-        foreach ($rows as $entry) {
-            $row = (array) ($entry['row'] ?? []);
-            $qid = (int) ($row['question_id'] ?? 0);
-            if ($qid <= 0) {
-                continue;
-            }
-
-            $items[] = [
-                'question_id' => (string) $qid,
-                'order' => $qid,
-                'dimension' => strtoupper(trim((string) ($row['dimension'] ?? ''))),
-                'direction' => (int) ($row['direction'] ?? 0),
-                'text' => trim((string) ($row[$textField] ?? '')),
-            ];
-        }
-
-        usort($items, static fn (array $a, array $b): int => ((int) ($a['order'] ?? 0)) <=> ((int) ($b['order'] ?? 0)));
+        $resolvedLocale = isset($docs[$localeResolved]) ? $localeResolved : 'zh-CN';
+        $dimensionCodes = array_values(array_filter(array_map(
+            static fn ($code): string => strtoupper(trim((string) $code)),
+            (array) ($compiled['dimension_codes'] ?? ['SA', 'ER', 'EM', 'RM'])
+        )));
 
         return [
             'locale_requested' => $locale,
-            'locale_resolved' => $localeResolved,
-            'items' => $items,
-            'dimension_codes' => ['SA', 'ER', 'SE', 'RM'],
-            'option_anchors' => $this->loadOptionAnchors($localeResolved, $version),
+            'locale_resolved' => $resolvedLocale,
+            'items' => array_values(array_filter((array) ($doc['items'] ?? []), static fn ($item): bool => is_array($item))),
+            'dimension_codes' => $dimensionCodes,
+            'option_anchors' => $this->loadOptionAnchors($resolvedLocale, $version),
         ];
     }
 
@@ -199,42 +152,13 @@ final class Eq60PackLoader
      */
     public function loadOptions(?string $version = null): array
     {
-        $compiled = $this->readCompiledJson('options.compiled.json', $version);
-        if (is_array($compiled)) {
-            $codes = array_values(array_map(
-                static fn ($code): string => strtoupper(trim((string) $code)),
-                (array) ($compiled['codes'] ?? [])
-            ));
-
-            $scoreMapRaw = is_array($compiled['score_map'] ?? null) ? $compiled['score_map'] : [];
-            $scoreMap = [];
-            foreach ($scoreMapRaw as $code => $value) {
-                $normCode = strtoupper(trim((string) $code));
-                if ($normCode === '') {
-                    continue;
-                }
-                $scoreMap[$normCode] = (int) $value;
-            }
-
-            $labelsByLocale = is_array($compiled['labels_by_locale'] ?? null) ? $compiled['labels_by_locale'] : [];
-
-            return [
-                'codes' => $codes,
-                'labels' => [
-                    'zh-CN' => array_values(array_map(static fn ($label): string => trim((string) $label), (array) ($labelsByLocale['zh-CN'] ?? []))),
-                    'en' => array_values(array_map(static fn ($label): string => trim((string) $label), (array) ($labelsByLocale['en'] ?? []))),
-                ],
-                'score_map' => $scoreMap,
-            ];
-        }
-
-        $raw = $this->readJson($this->rawPath('options_eq60_bilingual.json', $version)) ?? [];
+        $compiled = $this->requireCompiledJson('options.compiled.json', $version);
         $codes = array_values(array_map(
             static fn ($code): string => strtoupper(trim((string) $code)),
-            (array) ($raw['codes'] ?? [])
+            (array) ($compiled['codes'] ?? [])
         ));
 
-        $scoreMapRaw = is_array($raw['score_map'] ?? null) ? $raw['score_map'] : [];
+        $scoreMapRaw = is_array($compiled['score_map'] ?? null) ? $compiled['score_map'] : [];
         $scoreMap = [];
         foreach ($scoreMapRaw as $code => $value) {
             $normCode = strtoupper(trim((string) $code));
@@ -244,11 +168,13 @@ final class Eq60PackLoader
             $scoreMap[$normCode] = (int) $value;
         }
 
+        $labelsByLocale = is_array($compiled['labels_by_locale'] ?? null) ? $compiled['labels_by_locale'] : [];
+
         return [
             'codes' => $codes,
             'labels' => [
-                'zh-CN' => array_values(array_map(static fn ($label): string => trim((string) $label), (array) data_get($raw, 'labels.zh-CN', []))),
-                'en' => array_values(array_map(static fn ($label): string => trim((string) $label), (array) data_get($raw, 'labels.en', []))),
+                'zh-CN' => array_values(array_map(static fn ($label): string => trim((string) $label), (array) ($labelsByLocale['zh-CN'] ?? []))),
+                'en' => array_values(array_map(static fn ($label): string => trim((string) $label), (array) ($labelsByLocale['en'] ?? []))),
             ],
             'score_map' => $scoreMap,
         ];
@@ -260,50 +186,40 @@ final class Eq60PackLoader
     public function loadOptionAnchors(string $locale, ?string $version = null): array
     {
         $localeResolved = $this->normalizeLocale($locale);
-        $compiled = $this->readCompiledJson('options.compiled.json', $version);
-        if (is_array($compiled)) {
-            $anchorsByLocale = is_array($compiled['option_anchors_by_locale'] ?? null) ? $compiled['option_anchors_by_locale'] : [];
-            $anchors = $anchorsByLocale[$localeResolved] ?? ($anchorsByLocale['zh-CN'] ?? []);
-            if (is_array($anchors)) {
-                $normalized = [];
-                foreach ($anchors as $anchor) {
-                    if (!is_array($anchor)) {
-                        continue;
-                    }
-
-                    $code = strtoupper(trim((string) ($anchor['code'] ?? '')));
-                    $label = trim((string) ($anchor['label'] ?? ''));
-                    if ($code === '' || $label === '') {
-                        continue;
-                    }
-                    $normalized[] = ['code' => $code, 'label' => $label];
-                }
-
-                if ($normalized !== []) {
-                    return $normalized;
-                }
-            }
+        $compiled = $this->requireCompiledJson('options.compiled.json', $version);
+        $anchorsByLocale = is_array($compiled['option_anchors_by_locale'] ?? null) ? $compiled['option_anchors_by_locale'] : [];
+        $anchors = $anchorsByLocale[$localeResolved] ?? ($anchorsByLocale['zh-CN'] ?? []);
+        if (!is_array($anchors)) {
+            $path = $this->compiledPath('options.compiled.json', $version);
+            throw new \RuntimeException(
+                'EQ_60 compiled option_anchors_by_locale missing at ' . $path
+                    . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+            );
         }
 
-        $options = $this->loadOptions($version);
-        $codes = (array) ($options['codes'] ?? []);
-        $labels = (array) data_get($options, 'labels.' . $localeResolved, data_get($options, 'labels.zh-CN', []));
-
-        $anchors = [];
-        foreach ($codes as $idx => $codeRaw) {
-            $code = strtoupper(trim((string) $codeRaw));
-            $label = trim((string) ($labels[$idx] ?? ''));
-            if ($code === '' || $label === '') {
+        $normalized = [];
+        foreach ($anchors as $anchor) {
+            if (!is_array($anchor)) {
                 continue;
             }
 
-            $anchors[] = [
-                'code' => $code,
-                'label' => $label,
-            ];
+            $code = strtoupper(trim((string) ($anchor['code'] ?? '')));
+            $label = trim((string) ($anchor['label'] ?? ''));
+            if ($code === '' || $label === '') {
+                continue;
+            }
+            $normalized[] = ['code' => $code, 'label' => $label];
         }
 
-        return $anchors;
+        if ($normalized === []) {
+            $path = $this->compiledPath('options.compiled.json', $version);
+            throw new \RuntimeException(
+                'EQ_60 compiled option anchors are empty at ' . $path
+                    . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+            );
+        }
+
+        return $normalized;
     }
 
     /**
@@ -311,15 +227,17 @@ final class Eq60PackLoader
      */
     public function loadPolicy(?string $version = null): array
     {
-        $compiled = $this->readCompiledJson('policy.compiled.json', $version);
-        if (is_array($compiled)) {
-            $policy = $compiled['policy'] ?? null;
-            if (is_array($policy)) {
-                return $policy;
-            }
+        $compiled = $this->requireCompiledJson('policy.compiled.json', $version);
+        $policy = $compiled['policy'] ?? null;
+        if (is_array($policy)) {
+            return $policy;
         }
 
-        return $this->readJson($this->rawPath('policy.json', $version)) ?? [];
+        $path = $this->compiledPath('policy.compiled.json', $version);
+        throw new \RuntimeException(
+            'EQ_60 compiled policy missing at ' . $path
+                . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+        );
     }
 
     /**
@@ -327,15 +245,17 @@ final class Eq60PackLoader
      */
     public function loadLanding(?string $version = null): array
     {
-        $compiled = $this->readCompiledJson('landing.compiled.json', $version);
-        if (is_array($compiled)) {
-            $landing = $compiled['landing'] ?? null;
-            if (is_array($landing)) {
-                return $landing;
-            }
+        $compiled = $this->requireCompiledJson('landing.compiled.json', $version);
+        $landing = $compiled['landing'] ?? null;
+        if (is_array($landing)) {
+            return $landing;
         }
 
-        return $this->readJson($this->rawPath('landing_i18n.json', $version)) ?? [];
+        $path = $this->compiledPath('landing.compiled.json', $version);
+        throw new \RuntimeException(
+            'EQ_60 compiled landing missing at ' . $path
+                . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+        );
     }
 
     /**
@@ -343,7 +263,7 @@ final class Eq60PackLoader
      */
     public function loadGoldenCases(?string $version = null): array
     {
-        $compiled = $this->readCompiledJson('golden_cases.compiled.json', $version);
+        $compiled = $this->requireCompiledJson('golden_cases.compiled.json', $version);
         if (is_array($compiled)) {
             $cases = $compiled['cases'] ?? null;
             if (is_array($cases)) {
@@ -386,6 +306,24 @@ final class Eq60PackLoader
     public function readCompiledJson(string $file, ?string $version = null): ?array
     {
         return $this->readJson($this->compiledPath($file, $version));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function requireCompiledJson(string $file, ?string $version = null): array
+    {
+        $version = $this->normalizeVersion($version);
+        $path = $this->compiledPath($file, $version);
+        $decoded = $this->readJson($path);
+        if (is_array($decoded)) {
+            return $decoded;
+        }
+
+        throw new \RuntimeException(
+            'EQ_60 compiled content missing: ' . $path
+                . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $version
+        );
     }
 
     /**

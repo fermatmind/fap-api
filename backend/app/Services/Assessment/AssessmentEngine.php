@@ -64,7 +64,7 @@ class AssessmentEngine
             $isEq60 = $scaleCode === 'EQ_60' || $driverType === 'eq_60' || $driverType === 'eq_test';
             $scoringSpecVersion = $isClinical
                 ? 'v1.0_2026'
-                : ($isSds20 ? 'v2.0_Factor_Logic' : ($isEq60 ? 'eq60_spec_2026_v1' : 'big5_spec_2026Q1_v1'));
+                : ($isSds20 ? 'v2.0_Factor_Logic' : ($isEq60 ? 'eq60_spec_2026_v2' : 'big5_spec_2026Q1_v1'));
 
             $ctxMerged = array_merge($ctx, [
                 'org_id' => $orgId,

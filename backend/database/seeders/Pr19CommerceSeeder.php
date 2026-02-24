@@ -103,6 +103,10 @@ class Pr19CommerceSeeder extends Seeder
                     'report_benefit_code' => 'SDS_20_FULL',
                     'credit_benefit_code' => 'SDS_20_FULL',
                 ],
+                'EQ_60' => [
+                    'report_benefit_code' => 'EQ_60_FULL',
+                    'credit_benefit_code' => 'EQ_60_FULL',
+                ],
             ];
 
             foreach ($targets as $scaleCode => $benefits) {
@@ -158,6 +162,7 @@ class Pr19CommerceSeeder extends Seeder
             database_path('seed_data/skus_big5_ocean.json'),
             database_path('seed_data/skus_clinical_combo_68_pro.json'),
             database_path('seed_data/skus_sds_20.json'),
+            database_path('seed_data/skus_eq_60.json'),
         ];
 
         $rows = [];

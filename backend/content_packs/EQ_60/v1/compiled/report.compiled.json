@@ -1,0 +1,157 @@
+{
+    "schema": "eq_60.report.compiled.v1",
+    "pack_id": "EQ_60",
+    "pack_version": "v1",
+    "generated_at": "2026-02-24T10:13:01.270463Z",
+    "layout": {
+        "schema": "eq_60.report_layout.v1",
+        "sections": [
+            {
+                "key": "disclaimer_top",
+                "source": "copy",
+                "access_level": "free",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "module_code": "eq_core"
+            },
+            {
+                "key": "eq_summary_free",
+                "source": "blocks",
+                "access_level": "free",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "module_code": "eq_core"
+            },
+            {
+                "key": "eq_dimensions_free",
+                "source": "blocks",
+                "access_level": "free",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "module_code": "eq_core"
+            },
+            {
+                "key": "eq_paywall_teaser",
+                "source": "blocks",
+                "access_level": "free",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "module_code": "eq_core"
+            },
+            {
+                "key": "eq_cross_insights",
+                "source": "blocks",
+                "access_level": "paid",
+                "required_in_variant": [
+                    "full"
+                ],
+                "module_code": "eq_cross_insights"
+            },
+            {
+                "key": "eq_growth_plan",
+                "source": "blocks",
+                "access_level": "paid",
+                "required_in_variant": [
+                    "full"
+                ],
+                "module_code": "eq_growth_plan"
+            }
+        ]
+    },
+    "blocks": {
+        "free": {
+            "schema": "eq_60.report.free_blocks.v1",
+            "zh-CN": [
+                {
+                    "section_key": "eq_summary_free",
+                    "block_id": "eq_summary_free_1",
+                    "title": "你的 EQ 概览",
+                    "body_md": "全局标准分：{{scores.global.std_score}}，百分位：{{scores.global.percentile}}。"
+                },
+                {
+                    "section_key": "eq_dimensions_free",
+                    "block_id": "eq_dimensions_free_1",
+                    "title": "四维简评",
+                    "body_md": "SA：{{scores.SA.level}}；ER：{{scores.ER.level}}；EM：{{scores.EM.level}}；RM：{{scores.RM.level}}。"
+                },
+                {
+                    "section_key": "eq_paywall_teaser",
+                    "block_id": "eq_paywall_teaser_1",
+                    "title": "解锁深度报告",
+                    "body_md": "升级后可查看交叉洞察、14 天训练计划和场景化建议。"
+                }
+            ],
+            "en": [
+                {
+                    "section_key": "eq_summary_free",
+                    "block_id": "eq_summary_free_1",
+                    "title": "Your EQ Overview",
+                    "body_md": "Global score: {{scores.global.std_score}} (percentile {{scores.global.percentile}})."
+                },
+                {
+                    "section_key": "eq_dimensions_free",
+                    "block_id": "eq_dimensions_free_1",
+                    "title": "Quadrant Snapshot",
+                    "body_md": "SA: {{scores.SA.level}}, ER: {{scores.ER.level}}, EM: {{scores.EM.level}}, RM: {{scores.RM.level}}."
+                },
+                {
+                    "section_key": "eq_paywall_teaser",
+                    "block_id": "eq_paywall_teaser_1",
+                    "title": "Unlock Full Report",
+                    "body_md": "Upgrade to view cross-quadrant insights and a 14-day growth plan."
+                }
+            ]
+        },
+        "paid": {
+            "schema": "eq_60.report.paid_blocks.v1",
+            "zh-CN": [
+                {
+                    "section_key": "eq_cross_insights",
+                    "block_id": "eq_cross_insights_1",
+                    "title": "交叉洞察",
+                    "body_md": "命中标签：{{report_tags_csv}}。请结合具体情境理解分数，不做道德化判断。"
+                },
+                {
+                    "section_key": "eq_growth_plan",
+                    "block_id": "eq_growth_plan_1",
+                    "title": "14 天成长计划",
+                    "body_md": "Day1-7 聚焦情绪识别，Day8-14 聚焦边界与沟通训练。"
+                }
+            ],
+            "en": [
+                {
+                    "section_key": "eq_cross_insights",
+                    "block_id": "eq_cross_insights_1",
+                    "title": "Cross-Quadrant Insights",
+                    "body_md": "Triggered tags: {{report_tags_csv}}. Interpret scores as patterns, not labels."
+                },
+                {
+                    "section_key": "eq_growth_plan",
+                    "block_id": "eq_growth_plan_1",
+                    "title": "14-Day Growth Plan",
+                    "body_md": "Days 1-7: awareness drills; Days 8-14: boundary setting and communication practice."
+                }
+            ]
+        }
+    },
+    "variables_allowlist": {
+        "schema": "eq_60.report.variables_allowlist.v1",
+        "variables": [
+            "scores.global.std_score",
+            "scores.global.percentile",
+            "scores.SA.level",
+            "scores.ER.level",
+            "scores.EM.level",
+            "scores.RM.level",
+            "report_tags_csv"
+        ]
+    }
+}

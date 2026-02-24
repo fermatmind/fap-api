@@ -41,6 +41,7 @@ final class Eq60ContentCompileService
             'options.compiled.json',
             'policy.compiled.json',
             'landing.compiled.json',
+            'report.compiled.json',
             'golden_cases.compiled.json',
             'manifest.json',
         ] as $compiledFile) {
@@ -60,7 +61,7 @@ final class Eq60ContentCompileService
             $qid = (int) ($row['question_id'] ?? 0);
             $dimension = strtoupper(trim((string) ($row['dimension'] ?? '')));
             $direction = (int) ($row['direction'] ?? 0);
-            if ($qid <= 0 || !in_array($dimension, ['SA', 'ER', 'SE', 'RM'], true) || !in_array($direction, [1, -1], true)) {
+            if ($qid <= 0 || !in_array($dimension, ['SA', 'ER', 'EM', 'RM'], true) || !in_array($direction, [1, -1], true)) {
                 continue;
             }
 
@@ -118,6 +119,10 @@ final class Eq60ContentCompileService
 
         $policyRaw = $this->loader->readJson($this->loader->rawPath('policy.json', $version)) ?? [];
         $landingRaw = $this->loader->readJson($this->loader->rawPath('landing_i18n.json', $version)) ?? [];
+        $reportLayoutRaw = $this->loader->readJson($this->loader->rawPath('report_layout.json', $version)) ?? [];
+        $reportFreeBlocksRaw = $this->loader->readJson($this->loader->rawPath('blocks/free_blocks.json', $version)) ?? [];
+        $reportPaidBlocksRaw = $this->loader->readJson($this->loader->rawPath('blocks/paid_blocks.json', $version)) ?? [];
+        $reportVariablesRaw = $this->loader->readJson($this->loader->rawPath('variables_allowlist.json', $version)) ?? [];
         $goldenCases = $this->compileGoldenCases($version);
 
         $files = [
@@ -126,7 +131,7 @@ final class Eq60ContentCompileService
                 'pack_id' => Eq60PackLoader::PACK_ID,
                 'pack_version' => $version,
                 'generated_at' => now()->toISOString(),
-                'dimension_codes' => ['SA', 'ER', 'SE', 'RM'],
+                'dimension_codes' => ['SA', 'ER', 'EM', 'RM'],
                 'question_index' => $questionIndex,
                 'questions_doc_by_locale' => [
                     'zh-CN' => [
@@ -164,6 +169,18 @@ final class Eq60ContentCompileService
                 'pack_version' => $version,
                 'generated_at' => now()->toISOString(),
                 'landing' => $landingRaw,
+            ],
+            'report.compiled.json' => [
+                'schema' => 'eq_60.report.compiled.v1',
+                'pack_id' => Eq60PackLoader::PACK_ID,
+                'pack_version' => $version,
+                'generated_at' => now()->toISOString(),
+                'layout' => $reportLayoutRaw,
+                'blocks' => [
+                    'free' => $reportFreeBlocksRaw,
+                    'paid' => $reportPaidBlocksRaw,
+                ],
+                'variables_allowlist' => $reportVariablesRaw,
             ],
             'golden_cases.compiled.json' => [
                 'schema' => 'eq_60.golden_cases.compiled.v1',
@@ -253,7 +270,7 @@ final class Eq60ContentCompileService
                 'expected_total' => (int) ($row['expected_total'] ?? 0),
                 'expected_sa' => (int) ($row['expected_sa'] ?? 0),
                 'expected_er' => (int) ($row['expected_er'] ?? 0),
-                'expected_se' => (int) ($row['expected_se'] ?? 0),
+                'expected_em' => (int) ($row['expected_em'] ?? 0),
                 'expected_rm' => (int) ($row['expected_rm'] ?? 0),
             ];
         }

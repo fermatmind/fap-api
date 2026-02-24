@@ -11,7 +11,7 @@ final class Eq60ContentLintService
     /**
      * @var list<string>
      */
-    private const REQUIRED_DIMENSIONS = ['SA', 'ER', 'SE', 'RM'];
+    private const REQUIRED_DIMENSIONS = ['SA', 'ER', 'EM', 'RM'];
 
     /**
      * @var list<int>
@@ -74,7 +74,7 @@ final class Eq60ContentLintService
 
             $dimension = strtoupper(trim((string) ($row['dimension'] ?? '')));
             if (!in_array($dimension, self::REQUIRED_DIMENSIONS, true)) {
-                $errors[] = $this->error($file, $line, 'dimension must be one of SA/ER/SE/RM.');
+                $errors[] = $this->error($file, $line, 'dimension must be one of SA/ER/EM/RM.');
                 continue;
             }
 
@@ -194,11 +194,11 @@ final class Eq60ContentLintService
             }
         }
 
-        if (trim((string) ($doc['engine_version'] ?? '')) !== 'eq60_likert_v1') {
-            $errors[] = $this->error($file, 1, 'engine_version must be eq60_likert_v1.');
+        if (trim((string) ($doc['engine_version'] ?? '')) !== 'v1.0_normed_validity') {
+            $errors[] = $this->error($file, 1, 'engine_version must be v1.0_normed_validity.');
         }
-        if (trim((string) ($doc['scoring_spec_version'] ?? '')) !== 'eq60_spec_2026_v1') {
-            $errors[] = $this->error($file, 1, 'scoring_spec_version must be eq60_spec_2026_v1.');
+        if (trim((string) ($doc['scoring_spec_version'] ?? '')) !== 'eq60_spec_2026_v2') {
+            $errors[] = $this->error($file, 1, 'scoring_spec_version must be eq60_spec_2026_v2.');
         }
 
         $dimensionMap = is_array($doc['dimension_map'] ?? null) ? $doc['dimension_map'] : [];
@@ -325,14 +325,14 @@ final class Eq60ContentLintService
             $expectedTotal = (int) ($row['expected_total'] ?? -1);
             $expectedSa = (int) ($row['expected_sa'] ?? -1);
             $expectedEr = (int) ($row['expected_er'] ?? -1);
-            $expectedSe = (int) ($row['expected_se'] ?? -1);
+            $expectedEm = (int) ($row['expected_em'] ?? -1);
             $expectedRm = (int) ($row['expected_rm'] ?? -1);
 
             if (
                 $expectedTotal !== $computed['total']
                 || $expectedSa !== $computed['SA']
                 || $expectedEr !== $computed['ER']
-                || $expectedSe !== $computed['SE']
+                || $expectedEm !== $computed['EM']
                 || $expectedRm !== $computed['RM']
             ) {
                 $errors[] = $this->error($file, $line, 'golden case expected scores do not match computed scores.');
@@ -349,7 +349,7 @@ final class Eq60ContentLintService
             return 'ER';
         }
         if ($qid >= 31 && $qid <= 45) {
-            return 'SE';
+            return 'EM';
         }
         if ($qid >= 46 && $qid <= 60) {
             return 'RM';
@@ -360,12 +360,12 @@ final class Eq60ContentLintService
 
     /**
      * @param array<int,array{dimension:string,direction:int}> $questionIndex
-     * @return array{SA:int,ER:int,SE:int,RM:int,total:int}
+     * @return array{SA:int,ER:int,EM:int,RM:int,total:int}
      */
     private function computeScoresByAnswerString(string $answers, array $questionIndex): array
     {
         $scoreMap = ['A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5];
-        $dimScores = ['SA' => 0, 'ER' => 0, 'SE' => 0, 'RM' => 0];
+        $dimScores = ['SA' => 0, 'ER' => 0, 'EM' => 0, 'RM' => 0];
 
         for ($qid = 1; $qid <= self::REQUIRED_QUESTION_COUNT; $qid++) {
             $code = substr($answers, $qid - 1, 1);
@@ -384,9 +384,9 @@ final class Eq60ContentLintService
         return [
             'SA' => $dimScores['SA'],
             'ER' => $dimScores['ER'],
-            'SE' => $dimScores['SE'],
+            'EM' => $dimScores['EM'],
             'RM' => $dimScores['RM'],
-            'total' => $dimScores['SA'] + $dimScores['ER'] + $dimScores['SE'] + $dimScores['RM'],
+            'total' => $dimScores['SA'] + $dimScores['ER'] + $dimScores['EM'] + $dimScores['RM'],
         ];
     }
 

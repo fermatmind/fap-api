@@ -12,6 +12,7 @@ use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\CommerceReconcile;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
+use App\Console\Commands\Eq60PsychometricsReport;
 use App\Console\Commands\FapEmailOutboxSend;
 use App\Console\Commands\FapResolvePack;
 use App\Console\Commands\FapSelfCheck;
@@ -23,6 +24,9 @@ use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\NormsBig5MonthlyDriftCheck;
 use App\Console\Commands\NormsBig5Rebuild;
 use App\Console\Commands\NormsBig5Roll;
+use App\Console\Commands\NormsEq60Activate;
+use App\Console\Commands\NormsEq60DriftCheck;
+use App\Console\Commands\NormsEq60Import;
 use App\Console\Commands\NormsImport;
 use App\Console\Commands\NormsSdsDriftCheck;
 use App\Console\Commands\NormsSdsRebuild;
@@ -80,6 +84,10 @@ class Kernel extends ConsoleKernel
         NormsBig5MonthlyDriftCheck::class,
         NormsBig5BootstrapBuild::class,
         Big5PsychometricsReport::class,
+        NormsEq60Import::class,
+        NormsEq60Activate::class,
+        NormsEq60DriftCheck::class,
+        Eq60PsychometricsReport::class,
         NormsSdsRebuild::class,
         NormsSdsDriftCheck::class,
         SdsPsychometricsReport::class,
@@ -115,8 +123,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
+        $schedule->command('eq60:psychometrics --window=last_90_days')->weeklyOn(1, '04:20')->withoutOverlapping();
         $schedule->command('norms:big5:roll --window_days=365')->monthlyOn(1, '04:30')->withoutOverlapping();
         $schedule->command('norms:big5:monthly-drift-check')->monthlyOn(1, '04:50')->withoutOverlapping();
+        $schedule->command('norms:eq60:drift-check --from=active --to=candidate')->monthlyOn(1, '05:00')->withoutOverlapping();
     }
 
     /**
