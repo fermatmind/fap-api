@@ -355,6 +355,11 @@ class EntitlementManager
                 ReportAccess::MODULE_SDS_FACTOR_DEEPDIVE,
                 ReportAccess::MODULE_SDS_ACTION_PLAN,
             ],
+            'EQ_60_FULL' => [
+                ReportAccess::MODULE_EQ_FULL,
+                ReportAccess::MODULE_EQ_CROSS_INSIGHTS,
+                ReportAccess::MODULE_EQ_GROWTH_PLAN,
+            ],
             default => [],
         };
     }
@@ -371,6 +376,9 @@ class EntitlementManager
         }
         if ($benefitCode === 'SDS_20_FULL') {
             return ReportAccess::MODULE_SDS_CORE;
+        }
+        if ($benefitCode === 'EQ_60_FULL') {
+            return ReportAccess::MODULE_EQ_CORE;
         }
 
         return ReportAccess::MODULE_CORE_FREE;

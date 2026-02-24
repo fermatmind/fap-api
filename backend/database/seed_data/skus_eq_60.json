@@ -1,0 +1,65 @@
+[
+  {
+    "sku": "SKU_EQ_60_FULL_299",
+    "sku_code": "SKU_EQ_60_FULL_299",
+    "anchor_sku": "SKU_EQ_60_FULL",
+    "scale_code": "EQ_60",
+    "benefit_type": "report_unlock",
+    "benefit_code": "EQ_60_FULL",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 299,
+    "currency": "CNY",
+    "offer_code": "EQ_60_FULL_MAIN",
+    "modules_included": [
+      "eq_full",
+      "eq_cross_insights",
+      "eq_growth_plan"
+    ],
+    "title": "EQ_60 Full Report",
+    "is_active": true,
+    "metadata_json": {
+      "label": "EQ_60 full report",
+      "offer_code": "EQ_60_FULL_MAIN",
+      "effective_default": true,
+      "anchor_sku": "SKU_EQ_60_FULL",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "eq_60_full",
+      "modules_included": [
+        "eq_full",
+        "eq_cross_insights",
+        "eq_growth_plan"
+      ]
+    }
+  },
+  {
+    "sku": "SKU_EQ_60_FULL",
+    "sku_code": "SKU_EQ_60_FULL",
+    "anchor_sku": "SKU_EQ_60_FULL",
+    "scale_code": "EQ_60",
+    "benefit_type": "report_unlock",
+    "benefit_code": "EQ_60_FULL",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 299,
+    "currency": "CNY",
+    "title": "EQ_60 Full Report (anchor)",
+    "is_active": true,
+    "metadata_json": {
+      "label": "EQ_60 full report (anchor)",
+      "anchor": true,
+      "deprecated": true,
+      "effective_sku": "SKU_EQ_60_FULL_299",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "eq_60_full",
+      "offer": false,
+      "modules_included": [
+        "eq_full",
+        "eq_cross_insights",
+        "eq_growth_plan"
+      ]
+    }
+  }
+]

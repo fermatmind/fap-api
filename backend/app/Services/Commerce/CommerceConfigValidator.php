@@ -23,6 +23,13 @@ final class CommerceConfigValidator
         ReportAccess::MODULE_SDS_ACTION_PLAN,
     ];
 
+    private const EQ_ALLOWED_MODULES = [
+        ReportAccess::MODULE_EQ_CORE,
+        ReportAccess::MODULE_EQ_FULL,
+        ReportAccess::MODULE_EQ_CROSS_INSIGHTS,
+        ReportAccess::MODULE_EQ_GROWTH_PLAN,
+    ];
+
     /**
      * @param list<array<string,mixed>> $rows
      */
@@ -72,7 +79,11 @@ final class CommerceConfigValidator
                 $errors[] = $this->err($index, $sku, 'benefit_code is required for report_unlock sku');
             }
 
-            if ($scaleCode !== ReportAccess::SCALE_BIG5_OCEAN && $scaleCode !== ReportAccess::SCALE_SDS_20) {
+            if (
+                $scaleCode !== ReportAccess::SCALE_BIG5_OCEAN
+                && $scaleCode !== ReportAccess::SCALE_SDS_20
+                && $scaleCode !== ReportAccess::SCALE_EQ_60
+            ) {
                 continue;
             }
 
@@ -125,11 +136,33 @@ final class CommerceConfigValidator
                 }
             }
 
+            if ($scaleCode === ReportAccess::SCALE_EQ_60) {
+                if ($currency !== 'CNY') {
+                    $errors[] = $this->err($index, $sku, 'EQ_60 sku currency must be CNY');
+                }
+
+                foreach ($modules as $module) {
+                    if (!in_array($module, self::EQ_ALLOWED_MODULES, true)) {
+                        $errors[] = $this->err($index, $sku, "invalid EQ_60 module: {$module}");
+                    }
+                }
+
+                foreach ($this->expectedModulesByBenefit($benefitCode) as $requiredModule) {
+                    if (!in_array($requiredModule, $modules, true)) {
+                        $errors[] = $this->err(
+                            $index,
+                            $sku,
+                            "benefit_code {$benefitCode} must include module {$requiredModule}"
+                        );
+                    }
+                }
+            }
+
             $offerDisabled = array_key_exists('offer', $meta) && $meta['offer'] === false;
             if ($isActive && !$offerDisabled) {
                 $offerCode = trim((string) ($row['offer_code'] ?? ($meta['offer_code'] ?? '')));
                 if ($offerCode === '') {
-                    $errors[] = $this->err($index, $sku, 'offer_code is required for active BIG5 offers');
+                    $errors[] = $this->err($index, $sku, 'offer_code is required for active offer skus');
                 }
             }
         }
@@ -186,6 +219,11 @@ final class CommerceConfigValidator
                 ReportAccess::MODULE_SDS_FULL,
                 ReportAccess::MODULE_SDS_FACTOR_DEEPDIVE,
                 ReportAccess::MODULE_SDS_ACTION_PLAN,
+            ],
+            'EQ_60_FULL' => [
+                ReportAccess::MODULE_EQ_FULL,
+                ReportAccess::MODULE_EQ_CROSS_INSIGHTS,
+                ReportAccess::MODULE_EQ_GROWTH_PLAN,
             ],
             default => [],
         };
