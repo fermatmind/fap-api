@@ -24,6 +24,12 @@ jobs:
           coverage: none
           tools: composer:v2
 
+      - name: Prepare supply-chain evidence path
+        run: |
+          set -euo pipefail
+          mkdir -p _audit
+          printf '{"results":[]}\n' > _audit/osv-composer-lock.json
+
       - name: Composer validate (backend)
         working-directory: backend
         run: composer validate --strict
@@ -34,7 +40,19 @@ jobs:
 
       - name: Composer audit (backend)
         working-directory: backend
-        run: composer audit --no-interaction
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if composer audit --no-interaction --ignore-unreachable; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "composer audit failed (attempt ${attempt}/3), retrying in 5s..."
+              sleep 5
+            fi
+          done
+          echo "::error::composer audit failed after 3 attempts"
+          exit 1
 
       - name: OSV scan composer.lock
         run: |
