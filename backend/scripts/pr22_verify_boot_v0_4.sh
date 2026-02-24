@@ -344,20 +344,35 @@ $kernel->bootstrap();
 $file = getenv('QUESTIONS_FILE');
 $data = json_decode(file_get_contents($file), true);
 $items = $data['questions']['items'] ?? [];
-$first = $items[0]['assets']['image'] ?? '';
-if (!is_string($first) || $first === '') {
-    fwrite(STDERR, "missing first asset url\n");
+if (!is_array($items) || $items === []) {
+    fwrite(STDERR, "questions items missing\n");
     exit(1);
 }
-$base = (string) config('cdn_map.map.US.assets_base_url');
-if ($base === '') {
-    fwrite(STDERR, "cdn base missing\n");
+
+$firstItem = is_array($items[0] ?? null) ? $items[0] : [];
+$firstAsset = $firstItem['assets']['image'] ?? null;
+$hasLegacyAssetUrl = is_string($firstAsset) && $firstAsset !== '';
+
+$firstStemPaths = $firstItem['stem']['svg']['paths'] ?? [];
+$hasInlineSvgStem = is_array($firstStemPaths) && count($firstStemPaths) > 0;
+
+if (!$hasLegacyAssetUrl && !$hasInlineSvgStem) {
+    fwrite(STDERR, "missing first asset url and inline svg stem paths\n");
     exit(1);
 }
-$prefix = rtrim($base, '/') . '/default/IQ-RAVEN-CN-v0.3.0-DEMO/';
-if (!str_starts_with($first, $prefix)) {
-    fwrite(STDERR, "asset prefix mismatch\n");
-    exit(1);
+
+if ($hasLegacyAssetUrl) {
+    $base = (string) config('cdn_map.map.US.assets_base_url');
+    if ($base === '') {
+        fwrite(STDERR, "cdn base missing\n");
+        exit(1);
+    }
+
+    $prefix = rtrim($base, '/') . '/default/IQ-RAVEN-CN-v0.3.0-DEMO/';
+    if (!str_starts_with((string) $firstAsset, $prefix)) {
+        fwrite(STDERR, "asset prefix mismatch\n");
+        exit(1);
+    }
 }
 
 $count = is_array($items) ? count($items) : 0;
