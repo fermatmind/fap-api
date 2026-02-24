@@ -130,6 +130,23 @@ final class ScaleImpactResolverTest extends TestCase
         $this->assertFalse((bool) ($result['run_sds_20_gate'] ?? true));
     }
 
+    public function test_eq_compiled_change_runs_eq_gate_only(): void
+    {
+        $resolver = new ScaleImpactResolver();
+        $result = $resolver->resolve([
+            'backend/content_packs/EQ_60/v1/compiled/manifest.json',
+        ]);
+
+        $this->assertFalse((bool) ($result['shared_changed'] ?? true));
+        $this->assertTrue((bool) ($result['eq_60_changed'] ?? false));
+        $this->assertTrue((bool) ($result['run_eq_60_gate'] ?? false));
+        $this->assertFalse((bool) ($result['run_big5_ocean_gate'] ?? true));
+        $this->assertFalse((bool) ($result['run_clinical_combo_68_gate'] ?? true));
+        $this->assertFalse((bool) ($result['run_sds_20_gate'] ?? true));
+        $this->assertFalse((bool) ($result['run_sds_norms_gate'] ?? true));
+        $this->assertSame('eq60_with_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
+    }
+
     public function test_eq_specific_class_change_does_not_force_full_regression(): void
     {
         $resolver = new ScaleImpactResolver();
