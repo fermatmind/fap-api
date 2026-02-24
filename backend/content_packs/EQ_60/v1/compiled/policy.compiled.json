@@ -1,11 +1,17 @@
 {
-    "schema": "eq_60.policy.compiled.v1",
+    "schema": "eq_60.policy.compiled.v2",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-02-24T10:13:01.270424Z",
+    "generated_at": "2026-02-24T12:57:13.344928Z",
     "policy": {
+        "schema": "eq_60.policy.runtime.v2",
+        "pack_id": "EQ_60",
+        "pack_version": "v1",
+        "source_pack_id": "EQ_GOLEMAN_60",
+        "source_scale_code": "EQ_GOLEMAN_60",
         "engine_version": "v1.0_normed_validity",
         "scoring_spec_version": "eq60_spec_2026_v2",
+        "source_spec_version": "eq60_spec_v1",
         "answer_codes_allowed": [
             "A",
             "B",
@@ -144,32 +150,24 @@
                 11
             ],
             [
-                2,
-                15
-            ],
-            [
-                10,
-                14
-            ],
-            [
                 16,
                 22
             ],
             [
-                19,
-                20
+                32,
+                39
+            ],
+            [
+                46,
+                52
             ],
             [
                 27,
-                29
+                30
             ],
             [
-                31,
-                33
-            ],
-            [
-                32,
-                39
+                10,
+                14
             ],
             [
                 34,
@@ -178,6 +176,14 @@
             [
                 47,
                 57
+            ],
+            [
+                28,
+                18
+            ],
+            [
+                41,
+                31
             ]
         ],
         "std_score": {
@@ -197,66 +203,228 @@
             "baseline_max": 84.99,
             "developing_max": 92.99,
             "competent_max": 107.99,
-            "proficient_max": 115
+            "proficient_max": 115.99
         },
         "cross_insight_rules": [
             {
                 "tag": "profile:overthinking_burn",
                 "when": {
-                    "SA_gte": 108,
-                    "ER_lte": 92
+                    "SA_GTE": 108,
+                    "ER_LTE": 92
                 }
             },
             {
                 "tag": "profile:social_masking",
                 "when": {
-                    "RM_gte": 108,
-                    "SA_lte": 92
-                }
-            },
-            {
-                "tag": "profile:cool_detached",
-                "when": {
-                    "ER_gte": 108,
-                    "EM_lte": 92
+                    "RM_GTE": 108,
+                    "SA_LTE": 92
                 }
             },
             {
                 "tag": "profile:compassion_overload",
                 "when": {
-                    "EM_gte": 115,
-                    "ER_lte": 92
+                    "EM_GTE": 115,
+                    "ER_LTE": 92
+                }
+            },
+            {
+                "tag": "profile:cool_detached",
+                "when": {
+                    "ER_GTE": 108,
+                    "EM_LTE": 92
                 }
             },
             {
                 "tag": "profile:emotion_leader",
                 "when": {
-                    "RM_gte": 115,
-                    "EM_gte": 108
+                    "RM_GTE": 115,
+                    "EM_GTE": 108
                 }
             },
             {
                 "tag": "profile:balanced_high_eq",
                 "when": {
-                    "SA_gte": 108,
-                    "ER_gte": 108,
-                    "EM_gte": 108,
-                    "RM_gte": 108
+                    "SA_GTE": 108,
+                    "ER_GTE": 108,
+                    "EM_GTE": 108,
+                    "RM_GTE": 108
                 }
             }
         ],
-        "view_policy": {
-            "free_sections": [
-                "intro",
-                "summary"
+        "tags": {
+            "primary_profile_priority": [
+                "profile:balanced_high_eq",
+                "profile:emotion_leader",
+                "profile:compassion_overload",
+                "profile:overthinking_burn",
+                "profile:social_masking",
+                "profile:cool_detached"
             ],
-            "blur_others": true,
-            "teaser_percent": 0.35,
-            "upgrade_sku": "SKU_EQ_60_FULL_299"
+            "rules": [
+                {
+                    "tag": "profile:overthinking_burn",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "SA",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "ER",
+                                "op": "<=",
+                                "value": 92
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "focus:regulation_skills"
+                    ]
+                },
+                {
+                    "tag": "profile:social_masking",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "RM",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "SA",
+                                "op": "<=",
+                                "value": 92
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "focus:self_connection"
+                    ]
+                },
+                {
+                    "tag": "profile:compassion_overload",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "EM",
+                                "op": ">=",
+                                "value": 115
+                            },
+                            {
+                                "metric": "ER",
+                                "op": "<=",
+                                "value": 92
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "focus:boundary_setting"
+                    ]
+                },
+                {
+                    "tag": "profile:cool_detached",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "ER",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "EM",
+                                "op": "<=",
+                                "value": 92
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "focus:empathy_practice"
+                    ]
+                },
+                {
+                    "tag": "profile:emotion_leader",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "RM",
+                                "op": ">=",
+                                "value": 115
+                            },
+                            {
+                                "metric": "EM",
+                                "op": ">=",
+                                "value": 108
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "strength:influence"
+                    ]
+                },
+                {
+                    "tag": "profile:balanced_high_eq",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "SA",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "ER",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "EM",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "RM",
+                                "op": ">=",
+                                "value": 108
+                            }
+                        ]
+                    },
+                    "add_tags": []
+                }
+            ]
         },
-        "commercial": {
-            "pricing_mode": "preview_paid",
-            "report_unlock_sku": "SKU_EQ_60_FULL_299"
+        "report": {
+            "sections_free": [
+                "disclaimer_top",
+                "quality_notice",
+                "global_overview",
+                "self_awareness",
+                "emotion_regulation",
+                "empathy",
+                "relationship_management",
+                "methodology",
+                "disclaimer_bottom"
+            ],
+            "sections_full": [
+                "disclaimer_top",
+                "quality_notice",
+                "global_overview",
+                "self_awareness",
+                "emotion_regulation",
+                "empathy",
+                "relationship_management",
+                "cross_quadrant_insight",
+                "action_plan_14d",
+                "methodology",
+                "disclaimer_bottom"
+            ],
+            "access_modules": {
+                "free": [
+                    "eq_core"
+                ],
+                "paid": [
+                    "eq_cross_insights",
+                    "eq_growth_plan"
+                ]
+            }
         }
     }
 }

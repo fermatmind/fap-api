@@ -152,7 +152,14 @@ final class Eq60ScorerV1NormedValidity
             $norms['status'] = 'PROVISIONAL';
         }
 
-        $reportTags = $this->buildReportTags($scores, $policy, $quality);
+        $reportData = $this->buildReportTags($scores, $policy, $quality);
+        $reportTags = (array) ($reportData['tags'] ?? []);
+        $primaryProfile = trim((string) ($reportData['primary_profile'] ?? ''));
+
+        $scores['self_awareness'] = is_array($scores['SA'] ?? null) ? $scores['SA'] : [];
+        $scores['emotion_regulation'] = is_array($scores['ER'] ?? null) ? $scores['ER'] : [];
+        $scores['empathy'] = is_array($scores['EM'] ?? null) ? $scores['EM'] : [];
+        $scores['relationship_management'] = is_array($scores['RM'] ?? null) ? $scores['RM'] : [];
         $policyHash = trim((string) ($ctx['policy_hash'] ?? ''));
         if ($policyHash === '') {
             $policyHash = hash(
@@ -187,6 +194,10 @@ final class Eq60ScorerV1NormedValidity
                 'level' => $quality['level'],
                 'flags' => $quality['flags'],
                 'completion_time_seconds' => $completionSeconds,
+                'longstring_max' => $quality['longstring_max'],
+                'extreme_rate' => $quality['extreme_rate'],
+                'neutral_rate' => $quality['neutral_rate'],
+                'inconsistency_index' => $quality['inconsistency_index'],
                 'metrics' => [
                     'completion_time_seconds' => $completionSeconds,
                     'longstring_max' => $quality['longstring_max'],
@@ -197,6 +208,10 @@ final class Eq60ScorerV1NormedValidity
             ],
             'norms' => $norms,
             'scores' => $scores,
+            'report' => [
+                'primary_profile' => $primaryProfile,
+                'tags' => $reportTags,
+            ],
             'report_tags' => $reportTags,
         ];
     }
@@ -704,17 +719,33 @@ final class Eq60ScorerV1NormedValidity
      * @param  array<string,mixed>  $scores
      * @param  array<string,mixed>  $policy
      * @param  array<string,mixed>  $quality
-     * @return list<string>
+     * @return array{tags:list<string>,primary_profile:string}
      */
     private function buildReportTags(array $scores, array $policy, array $quality): array
     {
         $tags = [];
 
-        $rules = array_values(array_filter(
-            (array) ($policy['cross_insight_rules'] ?? []),
-            static fn ($rule): bool => is_array($rule)
-        ));
+        $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? 'A')));
+        if (in_array($qualityLevel, ['A', 'B', 'C', 'D'], true)) {
+            $tags[] = 'quality_level:'.$qualityLevel;
+        }
+        foreach ((array) ($quality['flags'] ?? []) as $flag) {
+            $normalized = strtoupper(trim((string) $flag));
+            if ($normalized === '') {
+                continue;
+            }
+            $tags[] = 'quality_flag:'.$normalized;
+        }
+
+        $rules = (array) data_get($policy, 'tags.rules', []);
+        if ($rules === []) {
+            $rules = (array) ($policy['cross_insight_rules'] ?? []);
+        }
+
         foreach ($rules as $rule) {
+            if (!is_array($rule)) {
+                continue;
+            }
             $tag = trim((string) ($rule['tag'] ?? ''));
             $when = is_array($rule['when'] ?? null) ? $rule['when'] : [];
             if ($tag === '' || $when === []) {
@@ -722,30 +753,14 @@ final class Eq60ScorerV1NormedValidity
             }
             if ($this->matchCrossRule($scores, $when)) {
                 $tags[] = $tag;
+
+                foreach ((array) ($rule['add_tags'] ?? []) as $extraTag) {
+                    $extra = trim((string) $extraTag);
+                    if ($extra !== '') {
+                        $tags[] = $extra;
+                    }
+                }
             }
-        }
-
-        $strengthMap = [
-            'SA' => 'strength:high_self_awareness',
-            'ER' => 'strength:high_emotion_regulation',
-            'EM' => 'strength:high_empathy',
-            'RM' => 'strength:high_relationship_management',
-        ];
-        foreach ($strengthMap as $dimension => $tag) {
-            $stdScore = (float) data_get($scores, $dimension.'.std_score', 0.0);
-            if ($stdScore > 115.0) {
-                $tags[] = $tag;
-            }
-        }
-
-        $erStdScore = (float) data_get($scores, 'ER.std_score', 0.0);
-        if ($erStdScore <= 92.0) {
-            $tags[] = 'focus:regulation_skills';
-        }
-
-        $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? 'A')));
-        if (in_array($qualityLevel, ['C', 'D'], true)) {
-            $tags[] = 'data_quality:warning';
         }
 
         $tags = array_values(array_unique(array_map(
@@ -754,7 +769,10 @@ final class Eq60ScorerV1NormedValidity
         )));
         $tags = array_values(array_filter($tags, static fn (string $tag): bool => $tag !== ''));
 
-        return $tags;
+        return [
+            'tags' => $tags,
+            'primary_profile' => $this->resolvePrimaryProfileTag($tags, $policy),
+        ];
     }
 
     /**
@@ -763,27 +781,156 @@ final class Eq60ScorerV1NormedValidity
      */
     private function matchCrossRule(array $scores, array $when): bool
     {
+        $allConditions = (array) ($when['all'] ?? []);
+        if ($allConditions !== []) {
+            foreach ($allConditions as $condition) {
+                if (!is_array($condition) || !$this->matchCrossCondition($scores, $condition)) {
+                    return false;
+                }
+            }
+
+            $anyConditions = (array) ($when['any'] ?? []);
+            if ($anyConditions === []) {
+                return true;
+            }
+
+            foreach ($anyConditions as $condition) {
+                if (is_array($condition) && $this->matchCrossCondition($scores, $condition)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         foreach ($when as $key => $value) {
             $name = strtoupper(trim((string) $key));
             if ($name === '') {
                 continue;
             }
 
-            if (preg_match('/^(SA|ER|EM|RM)_(GTE|LTE)$/', $name, $m) !== 1) {
+            if (preg_match('/^(SA|ER|EM|RM|GLOBAL)_(GTE|LTE|GT|LT|EQ|NE)$/', $name, $m) !== 1) {
                 return false;
             }
             $dimension = $m[1];
             $operator = $m[2];
             $threshold = (float) $value;
-            $stdScore = (float) data_get($scores, $dimension.'.std_score', 0.0);
+            $stdScore = $this->metricStdScore($scores, $dimension);
+            if ($stdScore === null) {
+                return false;
+            }
+
             if ($operator === 'GTE' && $stdScore < $threshold) {
+                return false;
+            }
+            if ($operator === 'GT' && $stdScore <= $threshold) {
                 return false;
             }
             if ($operator === 'LTE' && $stdScore > $threshold) {
                 return false;
             }
+            if ($operator === 'LT' && $stdScore >= $threshold) {
+                return false;
+            }
+            if ($operator === 'EQ' && abs($stdScore - $threshold) > 0.000001) {
+                return false;
+            }
+            if ($operator === 'NE' && abs($stdScore - $threshold) <= 0.000001) {
+                return false;
+            }
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $tags
+     * @param  array<string,mixed>  $policy
+     */
+    private function resolvePrimaryProfileTag(array $tags, array $policy): string
+    {
+        $priority = array_values(array_filter(array_map(
+            static fn ($tag): string => trim((string) $tag),
+            (array) data_get($policy, 'tags.primary_profile_priority', [])
+        )));
+
+        if ($priority === []) {
+            $priority = [
+                'profile:balanced_high_eq',
+                'profile:emotion_leader',
+                'profile:compassion_overload',
+                'profile:overthinking_burn',
+                'profile:social_masking',
+                'profile:cool_detached',
+            ];
+        }
+
+        foreach ($priority as $profileTag) {
+            if (in_array($profileTag, $tags, true)) {
+                return $profileTag;
+            }
+        }
+
+        foreach ($tags as $tag) {
+            if (str_starts_with($tag, 'profile:')) {
+                return $tag;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * @param  array<string,mixed>  $condition
+     */
+    private function matchCrossCondition(array $scores, array $condition): bool
+    {
+        $metric = strtoupper(trim((string) ($condition['metric'] ?? '')));
+        $op = trim((string) ($condition['op'] ?? '>='));
+        $value = (float) ($condition['value'] ?? 0.0);
+
+        $score = $this->metricStdScore($scores, $metric);
+        if ($score === null) {
+            return false;
+        }
+
+        return match ($op) {
+            '>', 'gt' => $score > $value,
+            '>=', 'gte' => $score >= $value,
+            '<', 'lt' => $score < $value,
+            '<=', 'lte' => $score <= $value,
+            '==', 'eq' => abs($score - $value) <= 0.000001,
+            '!=', 'ne' => abs($score - $value) > 0.000001,
+            default => false,
+        };
+    }
+
+    /**
+     * @param  array<string,mixed>  $scores
+     */
+    private function metricStdScore(array $scores, string $metric): ?float
+    {
+        $metric = strtoupper(trim($metric));
+        if ($metric === '') {
+            return null;
+        }
+
+        $path = match ($metric) {
+            'SA', 'SELF_AWARENESS' => 'SA.std_score',
+            'ER', 'EMOTION_REGULATION' => 'ER.std_score',
+            'EM', 'EMPATHY' => 'EM.std_score',
+            'RM', 'RELATIONSHIP_MANAGEMENT' => 'RM.std_score',
+            'GLOBAL' => 'global.std_score',
+            default => null,
+        };
+        if ($path === null) {
+            return null;
+        }
+
+        if (!is_numeric(data_get($scores, $path))) {
+            return null;
+        }
+
+        return (float) data_get($scores, $path);
     }
 }

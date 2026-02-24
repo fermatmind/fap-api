@@ -1,31 +1,603 @@
 {
-  "schema": "eq_60.report.paid_blocks.v1",
-  "zh-CN": [
+  "schema": "eq60.report_blocks.v1",
+  "pack_id": "EQ_GOLEMAN_60",
+  "pack_version": "v1",
+  "blocks": [
     {
-      "section_key": "eq_cross_insights",
-      "block_id": "eq_cross_insights_1",
-      "title": "交叉洞察",
-      "body_md": "命中标签：{{report_tags_csv}}。请结合具体情境理解分数，不做道德化判断。"
+      "block_id": "eq60_profile_balanced_high_zh",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "zh-CN",
+      "title": "四维均衡高",
+      "body": "**你的主要画像：四维均衡高（高自我觉察 + 高调节 + 高共情 + 高社交）**\n\n你的四个维度都处在较高区间，说明你能把“看见情绪—管理情绪—理解他人—影响关系”串成一个完整闭环。你不仅能识别与表达，也能在压力下保持稳定；不仅能共情，也能把关系带到更合作的方向。\n\n**你常见的优势**\n- 自我稳定：能在情绪起伏中保持清醒与行动力。\n- 关系连接：能让别人感到被理解，同时不丢失边界。\n- 影响力：更容易建立信任，并在冲突中促成共识。\n\n**需要留意的风险**\n- 过度承担：在高共情与高影响力下，容易把“照顾他人”变成习惯性任务。\n- 高标准疲劳：对自己与他人期待都很高，长期会累。\n- 输出大于恢复：在高强度社交与工作中，需要刻意安排恢复。\n\n**升级方向：把优势沉淀为系统**\n付费报告会把你的优势拆成可复用的“能力模块”，并提供 14 天游程用于巩固与升级：\n1) 情绪复盘：把觉察变成可迁移的经验。\n2) 影响力脚本：在冲突与协作中持续产出“低摩擦沟通”。\n3) 恢复策略：让高水平输出保持可持续。\n\n**你会在付费报告里得到什么**\n- 你的高分护城河：哪些能力最能支撑你长期发展。\n- 风险预警：在高强度环境里最容易掉坑的点。\n- 14 天游程：巩固优势、建立恢复、升级领导力。",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.emotion_regulation.std_score",
+        "scores.empathy.std_score",
+        "scores.relationship_management.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:balanced_high_eq"
+      ],
+      "priority": 100,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "balanced_high_eq"
     },
     {
-      "section_key": "eq_growth_plan",
-      "block_id": "eq_growth_plan_1",
-      "title": "14 天成长计划",
-      "body_md": "Day1-7 聚焦情绪识别，Day8-14 聚焦边界与沟通训练。"
-    }
-  ],
-  "en": [
-    {
-      "section_key": "eq_cross_insights",
-      "block_id": "eq_cross_insights_1",
-      "title": "Cross-Quadrant Insights",
-      "body_md": "Triggered tags: {{report_tags_csv}}. Interpret scores as patterns, not labels."
+      "block_id": "eq60_profile_balanced_high_en",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "en",
+      "title": "Balanced High EQ",
+      "body": "**Primary profile: Balanced High EQ (High across all four quadrants)**\n\nAll four dimensions are in a high range, meaning you can connect the loop: notice emotion → regulate → understand others → manage relationships. You can identify and express feelings, stay stable under pressure, empathize, and move relationships toward cooperation.\n\n**Typical strengths**\n- Self stability under emotional fluctuation.\n- Connection with boundaries.\n- Trust building and conflict‑to‑consensus influence.\n\n**Risks to watch**\n- Over‑carrying others’ emotions as a default duty.\n- High‑standards fatigue.\n- Output exceeding recovery; you need deliberate restoration.\n\n**Upgrade direction: turn strengths into a system**\nPremium breaks your strengths into reusable modules and provides a 14‑day consolidation plan:\n1) Emotional reflection that transfers across contexts.\n2) Influence scripts for low‑friction collaboration.\n3) Recovery strategy for sustainable high performance.\n\n**What premium adds**\n- Your strongest moat capabilities.\n- Risk warnings in high‑intensity environments.\n- 14‑day plan to consolidate, recover, and upgrade leadership.",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.emotion_regulation.std_score",
+        "scores.empathy.std_score",
+        "scores.relationship_management.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:balanced_high_eq"
+      ],
+      "priority": 100,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "balanced_high_eq"
     },
     {
-      "section_key": "eq_growth_plan",
-      "block_id": "eq_growth_plan_1",
-      "title": "14-Day Growth Plan",
-      "body_md": "Days 1-7: awareness drills; Days 8-14: boundary setting and communication practice."
+      "block_id": "eq60_profile_emotion_leader_zh",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "zh-CN",
+      "title": "影响力型情绪领袖",
+      "body": "**你的主要画像：影响力型情绪领袖（高社交管理 + 高同理心）**\n\n本次测评显示：社交管理 **{{scores.relationship_management.std_score}}** 与同理心 **{{scores.empathy.std_score}}** 都较高。你能读懂空气，也能把人带到同一条船上：看到情绪、承接情绪、再把能量导向行动。你往往是团队粘合剂，在冲突、协作、公开表达中都能自然产生影响力。\n\n**你常见的优势**\n- 群体氛围管理：能让人感到安全，合作更容易发生。\n- 冲突降温：能把对抗拉回“共同目标”。\n- 非职权影响力：不靠职位也能推动共识与行动。\n\n**常见代价**\n- 过度承载：习惯把别人的情绪也当成自己的责任。\n- 过度可用：别人更容易依赖你，边界被悄悄拉宽。\n- 情绪劳动：长期输出关怀会消耗精力，需要恢复机制。\n\n**关键转折：把影响力做成可持续的系统**\n真正的情绪领袖既能照顾他人，也能保护自己。报告会给你一套“可持续影响力”框架：\n1) **会前校准**：用 30 秒把团队情绪温度拉到可合作区间。\n2) **冲突脚本**：先共情，再对齐目标，再拆分行动。\n3) **自我恢复**：在输出关怀后做 5 分钟回收，避免长期透支。\n\n**适合你的会议句式**\n- “我听见大家有点紧张，我们先对齐目标，再分配下一步。”\n- “这件事对你很重要，我尊重你的立场，我们一起找可执行方案。”\n- “我现在能支持到这里，后续由谁来接力更合适？”\n\n**你会在付费报告里得到什么**\n- 你的影响力风格画像：你更擅长用哪种方式带动他人。\n- 边界与恢复：把情绪劳动变成可持续资产。\n- 14 天游程：把你的优势升级为稳定的领导力技能。",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.empathy.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:emotion_leader"
+      ],
+      "priority": 90,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "emotion_leader"
+    },
+    {
+      "block_id": "eq60_profile_emotion_leader_en",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "en",
+      "title": "Emotional Leader",
+      "body": "**Primary profile: Emotional Leader (High Relationship Mgmt + High Empathy)**\n\nYour results show Relationship Management **{{scores.relationship_management.std_score}}** and Empathy **{{scores.empathy.std_score}}** both high. You read the room and move people onto the same boat: acknowledge emotion, hold it, then channel energy into action. You often act as social glue and generate influence naturally.\n\n**Typical strengths**\n- Climate management: people feel safe; collaboration becomes easier.\n- De‑escalation: shifting conflict back to shared goals.\n- Non‑positional influence: driving consensus without authority.\n\n**Typical costs**\n- Over‑carrying others’ feelings.\n- Being overly available; boundaries stretch quietly.\n- Emotional labor: sustained care output needs recovery.\n\n**Key shift: sustainable influence**\nReal emotional leadership includes self‑protection. Premium provides a framework:\n1) 30‑second pre‑meeting calibration.\n2) Conflict scripts: empathize → align goal → define actions.\n3) Self‑recovery: 5‑minute ‘energy return’ after heavy interactions.\n\n**Meeting scripts**\n- “I sense tension. Let’s align on the goal, then define next steps.”\n- “I hear this matters to you. I respect your stance. Let’s find an executable option.”\n- “I can support up to here—who can take the next handoff?”\n\n**What premium adds**\n- Your influence style profile.\n- Boundaries & recovery to turn emotional labor into an asset.\n- 14‑day plan to upgrade strengths into stable leadership skills.",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.empathy.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:emotion_leader"
+      ],
+      "priority": 90,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "emotion_leader"
+    },
+    {
+      "block_id": "eq60_profile_compassion_overload_zh",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "zh-CN",
+      "title": "情绪海绵型",
+      "body": "**你的主要画像：情绪海绵型（高同理心 + 低情绪调节）**\n\n本次测评显示：同理心与社会感知 **{{scores.empathy.std_score}}** 很高，情绪调节 **{{scores.emotion_regulation.std_score}}** 偏低。你对他人的痛苦与压力高度敏感，常常会“替别人难受”，也更容易被群体氛围影响。优势是真诚、温暖、能看见别人；代价是情绪过载与边界模糊。\n\n**你常见的优势**\n- 高共鸣：别人更愿意向你倾诉，信任建立更快。\n- 读空气能力强：能敏锐捕捉情绪变化与隐性冲突。\n- 关怀动机：有强烈的助人倾向与责任感。\n\n**常见代价**\n- 情绪感染：别人的情绪进入你的身体，影响睡眠与精力。\n- 救援反射：看到痛苦就想立刻解决，容易过度卷入。\n- 边界消失：把“同理”误用成“承担”，最后自己被掏空。\n\n**关键转折：把共情变成“有边界的关怀”**\n高共情不需要牺牲自我。训练重点是三层边界：\n1) **情绪边界**：区分“这是对方的感受”与“这是我的感受”。\n2) **时间边界**：明确陪伴时长与可用精力。\n3) **行动边界**：从“替你解决”转成“陪你一起看见选择”。\n\n**适合你的回应句式**\n- “我听见你很难受，我愿意陪你 10 分钟，先把事情捋清。”\n- “我能提供的是……更深入的部分需要你自己决定。”\n- “我很在乎你，我也需要先照顾好自己的精力。”\n\n**你会在付费报告里得到什么**\n- 边界训练：把共情从消耗变成资源。\n- 调节工具：让情绪不过载、不回流到生活里。\n- 14 天游程：建立可持续的助人方式。",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.emotion_regulation.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:compassion_overload"
+      ],
+      "priority": 80,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "compassion_overload"
+    },
+    {
+      "block_id": "eq60_profile_compassion_overload_en",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "en",
+      "title": "Compassion Overload",
+      "body": "**Primary profile: Compassion Overload (High Empathy + Low Regulation)**\n\nYour results show Empathy **{{scores.empathy.std_score}}** very high and Emotion Regulation **{{scores.emotion_regulation.std_score}}** lower. You feel others’ pain and stress strongly, and group climate can affect you quickly. The gift is warmth and attunement; the cost is overload and blurry boundaries.\n\n**Typical strengths**\n- High resonance: people open up to you easily.\n- Strong ‘room reading’: you sense shifts and hidden tension.\n- Care motive: a real drive to help.\n\n**Typical costs**\n- Emotional contagion: others’ feelings enter your body and drain sleep/energy.\n- Rescue reflex: urgency to fix, leading to over‑involvement.\n- Boundary loss: ‘empathy’ turns into ‘carrying,’ then burnout.\n\n**Key shift: bounded care**\nHigh empathy doesn’t require self‑sacrifice. Training focuses on three boundaries:\n1) **Emotional boundary**: “This is theirs” vs “this is mine.”\n2) **Time boundary**: define how long you can be available.\n3) **Action boundary**: move from ‘fixing’ to ‘helping them see choices.’\n\n**Support scripts**\n- “I hear this is hard. I can stay with you for 10 minutes to sort it out.”\n- “What I can offer is … The deeper choice is yours.”\n- “I care about you, and I also need to protect my energy.”\n\n**What premium adds**\n- Boundary training to turn empathy into a resource.\n- Regulation tools to prevent overload spillover.\n- 14‑day plan for sustainable helping.",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.emotion_regulation.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:compassion_overload"
+      ],
+      "priority": 80,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "compassion_overload"
+    },
+    {
+      "block_id": "eq60_profile_overthinking_burn_zh",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "zh-CN",
+      "title": "极度内耗型",
+      "body": "**你的主要画像：极度内耗型（高自我觉察 + 低情绪调节）**\n\n本次测评显示：自我情绪认知 **{{scores.self_awareness.std_score}}**，情绪调节 **{{scores.emotion_regulation.std_score}}**。这组组合常见于高觉察人群：你能很快捕捉到情绪细节，但当情绪强度上升时，系统缺少足够“降温”的自动化动作，于是更容易进入反复思考、内耗、睡前停不下来等模式。\n\n**你常见的优势**\n- 早期预警：情绪刚出现就能察觉，能发现“哪里不对劲”。\n- 语言化能力：能描述细微差别，适合复盘与沟通。\n- 对关系的敏感：能捕捉氛围变化，常常先看到风险。\n\n**常见代价**\n- 反刍耗能：越想越清楚，却越难行动。\n- 自我苛责：把情绪当作问题本身，而不是信号。\n- 身体负担：紧绷、疲惫、睡眠质量下降、注意力被拉走。\n\n**关键转折：从“看见情绪”到“让情绪流动”**\n调节的核心不是压住情绪，而是让情绪完成它的生理波段，并把能量导向下一步行动。报告的 14 天计划会优先建立 3 个微技能：\n1) **90 秒降温**：给神经系统一个回到窗口期的机会。\n2) **把反刍变成行动**：把脑内循环写成“下一步清单”。\n3) **更温和的内在对话**：把批评改成事实描述，再提出可执行请求。\n\n**适合你的沟通句式**\n- “我现在有点紧绷，我需要 10 分钟整理再继续。”\n- “我在乎的是……我希望我们能……”\n- “我愿意承担……我现在做不到的是……”\n\n**你会在付费报告里得到什么**\n- 触发点地图：哪些情境最容易把你推入内耗。\n- 降温工具箱：在 3 分钟内把强度拉回可管理区间。\n- 14 天游程：每天 10–15 分钟，把觉察转成复原力。",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.emotion_regulation.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:overthinking_burn"
+      ],
+      "priority": 70,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "overthinking_burn"
+    },
+    {
+      "block_id": "eq60_profile_overthinking_burn_en",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "en",
+      "title": "Overthinking & Burn",
+      "body": "**Primary profile: Overthinking & Burn (High Self‑Awareness + Low Regulation)**\n\nYour results show Self‑Awareness **{{scores.self_awareness.std_score}}** and Emotion Regulation **{{scores.emotion_regulation.std_score}}**. This pattern is common in highly aware people: you detect emotional detail early, yet when intensity rises the system lacks enough automatic “cool‑down” moves, so rumination and depletion become more likely.\n\n**Typical strengths**\n- Early warning: you notice signals fast and spot what’s “off.”\n- Language: you can describe nuance, which helps reflection and communication.\n- Relational sensitivity: you read shifts in atmosphere early.\n\n**Typical costs**\n- Rumination drain: clearer thinking but less action.\n- Self‑criticism: treating emotions as the problem rather than a signal.\n- Body load: tension, fatigue, sleep disruption, reduced focus.\n\n**Key shift: from noticing to letting emotions move**\nRegulation is not suppression. It’s completing the physiological wave and redirecting energy to the next step. The 14‑day plan builds three micro‑skills:\n1) **90‑second cool‑down** to return to a workable window.\n2) **Turn rumination into action** with a ‘next‑step list.’\n3) **Gentler inner dialogue**: facts first, then one concrete request.\n\n**Useful scripts**\n- “I’m tense. I need 10 minutes to reset, then I can continue.”\n- “What matters to me is … I’d like us to …”\n- “I can take on … What I can’t do right now is …”\n\n**What premium adds**\n- Trigger map: contexts that pull you into overthinking.\n- Cool‑down toolbox: reduce intensity within minutes.\n- 14‑day training: 10–15 minutes/day to convert awareness into resilience.",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.emotion_regulation.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:overthinking_burn"
+      ],
+      "priority": 70,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "overthinking_burn"
+    },
+    {
+      "block_id": "eq60_profile_social_masking_zh",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "zh-CN",
+      "title": "社交伪装型",
+      "body": "**你的主要画像：社交伪装型（高社交管理 + 低自我觉察）**\n\n本次测评显示：社交管理 **{{scores.relationship_management.std_score}}** 较高，自我情绪认知 **{{scores.self_awareness.std_score}}** 偏低。你很擅长在场面上“把局面做漂亮”：会照顾气氛、会推进合作、会让关系看起来顺滑。但与此同时，你对自己的真实感受与需要更容易失联，久而久之会出现空心感、疲惫感，甚至在夜深人静时突然情绪反扑。\n\n**你常见的优势**\n- 人际推进：能把陌生关系迅速变得可合作。\n- 场面管理：能稳定氛围、减少尴尬与冲突升级。\n- 影响力：更容易被信任，也更容易获得机会。\n\n**常见代价**\n- 讨好与过度承担：把“让别人舒服”当成默认任务。\n- 自我感稀薄：不知道自己真正想要什么，决策依赖外界反馈。\n- 情绪延迟爆发：当压力累积到阈值，会突然失控或想逃离。\n\n**关键转折：先连接自己，再管理关系**\n高社交能力是一种技能，不该以牺牲自我为代价。付费报告的训练会从三件事开始：\n1) **情绪体检**：每天 2 次 30 秒，把“我感觉怎样”放回日程。\n2) **需要与边界**：把“我愿意/我不愿意”说清楚。\n3) **真实表达的安全练习**：在低风险关系里练习更真实的请求。\n\n**适合你的边界句式**\n- “我愿意帮到这里，接下来需要你来决定。”\n- “这件事我能做的是……我不能承诺的是……”\n- “我需要一点时间确认自己的想法，再给答复。”\n\n**你会在付费报告里得到什么**\n- 你的“角色面具”画像：你在不同关系中常用的伪装策略。\n- 自我连接训练：把情绪与价值观重新对齐。\n- 14 天游程：从讨好走向稳定、清晰的自我边界。",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.self_awareness.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:social_masking"
+      ],
+      "priority": 60,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "social_masking"
+    },
+    {
+      "block_id": "eq60_profile_social_masking_en",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "en",
+      "title": "Social Masking",
+      "body": "**Primary profile: Social Masking (High Relationship Mgmt + Low Self‑Awareness)**\n\nYour results show Relationship Management **{{scores.relationship_management.std_score}}** high and Self‑Awareness **{{scores.self_awareness.std_score}}** low. You’re skilled at making situations run smoothly—reading the room, keeping harmony, moving collaboration forward. At the same time, your own feelings and needs can go offline. Over time this can create emptiness, fatigue, or a delayed emotional rebound.\n\n**Typical strengths**\n- Social momentum: turning strangers into collaborators quickly.\n- Situation management: reducing awkwardness and escalation.\n- Influence: trust and opportunities come easier.\n\n**Typical costs**\n- People‑pleasing and over‑responsibility.\n- Thin self‑signal: decisions depend heavily on external feedback.\n- Delayed blow‑ups after stress accumulates.\n\n**Key shift: connect to self before managing others**\nHigh social skill should not require self‑sacrifice. Premium training starts with:\n1) **Micro check‑ins** twice a day.\n2) **Needs & boundaries**: clarify what you will and won’t do.\n3) **Safe authenticity practice**: make real requests in low‑risk relationships.\n\n**Boundary scripts**\n- “I can support up to this point; the next decision is yours.”\n- “What I can do is … What I can’t promise is …”\n- “I need time to check in with myself before I reply.”\n\n**What premium adds**\n- Your ‘role mask’ patterns across contexts.\n- Self‑connection training aligned with values.\n- 14‑day plan to move from pleasing to clear boundaries.",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.self_awareness.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:social_masking"
+      ],
+      "priority": 60,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "social_masking"
+    },
+    {
+      "block_id": "eq60_profile_cool_detached_zh",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "zh-CN",
+      "title": "钝感理智型",
+      "body": "**你的主要画像：钝感理智型（高情绪调节 + 低同理心）**\n\n本次测评显示：情绪调节 **{{scores.emotion_regulation.std_score}}** 较高，同理心与社会感知 **{{scores.empathy.std_score}}** 偏低。你更像一台稳定的系统：在压力下保持冷静、做事理性、很少失控。优势是抗压与客观；挑战在于亲密关系或团队氛围中，别人可能感到“被解决了问题，却没被理解情绪”。\n\n**你常见的优势**\n- 抗压稳定：危机时刻不慌乱，能稳住局面。\n- 决策清晰：更少被情绪噪音干扰。\n- 边界明确：不容易被他人情绪裹挟。\n\n**常见代价**\n- 情绪解码不足：更难读到他人的潜台词与需要。\n- 关系温度偏低：在亲密关系中容易被评价为冷淡。\n- 冲突处理偏“解决方案”：忽略了对方需要被共情的阶段。\n\n**关键转折：把理性升级为“带温度的理性”**\n同理心不是情绪化，而是一种信息处理能力：先识别对方情绪，再进入解决问题。训练重点是三步：\n1) **观察线索**：表情、语气、节奏、停顿。\n2) **反映感受**：用一句话说出你读到的情绪。\n3) **再谈方案**：确认对方需要倾听或需要建议。\n\n**适合你的共情句式**\n- “我听见你很失望，这对你很重要。”\n- “你希望我先听你说完，还是一起想办法？”\n- “我可能理解得不完全对，你更像是在……吗？”\n\n**你会在付费报告里得到什么**\n- 共情练习：把“读人”变成可训练的技能。\n- 对话脚本：把冲突从对抗拉回合作。\n- 14 天游程：每天 10–15 分钟提升关系温度。",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.empathy.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:cool_detached"
+      ],
+      "priority": 50,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "cool_detached"
+    },
+    {
+      "block_id": "eq60_profile_cool_detached_en",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "en",
+      "title": "Calm but Detached",
+      "body": "**Primary profile: Calm but Detached (High Regulation + Low Empathy)**\n\nYour results show Emotion Regulation **{{scores.emotion_regulation.std_score}}** high and Empathy **{{scores.empathy.std_score}}** lower. You operate like a stable system—calm under pressure, rational, rarely reactive. The strength is resilience and objectivity; the challenge is that others may feel their emotion wasn’t understood even when the problem gets solved.\n\n**Typical strengths**\n- Crisis stability: you keep things together when it’s hot.\n- Clear decisions with less emotional noise.\n- Strong boundaries: less emotional contagion.\n\n**Typical costs**\n- Harder to decode subtext and emotional needs.\n- Lower relational warmth in intimacy.\n- ‘Solution mode’ too early in conflict.\n\n**Key shift: warm rationality**\nEmpathy isn’t being emotional; it’s information processing: identify the other’s feeling first, then solve. Training uses 3 steps:\n1) Observe cues (face, tone, pace, pauses).\n2) Reflect feeling in one sentence.\n3) Ask whether they want listening or brainstorming.\n\n**Empathy scripts**\n- “I hear you’re disappointed—this matters to you.”\n- “Do you want me to listen first or help find options?”\n- “I might be off—does it feel more like … ?”\n\n**What premium adds**\n- Trainable empathy drills.\n- Dialogue scripts to shift conflict into cooperation.\n- 14‑day plan to raise relational warmth.",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.empathy.std_score"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight",
+        "profile:cool_detached"
+      ],
+      "priority": 50,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "cool_detached"
+    },
+    {
+      "block_id": "eq60_profile_default_zh",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "zh-CN",
+      "title": "综合型",
+      "body": "**你的画像：综合型（未命中典型交叉画像）**\n\n你的四个维度没有呈现出明显的“高低落差组合”，更像是均衡发展的曲线。付费报告会把每个维度的优势与盲点拆到具体场景，并给出 14 天游程，用于把分数转化为可执行的行为习惯。\n\n你会看到：\n- 你的四维雷达解读与短板定位\n- 适配你分数结构的训练重点\n- 可直接照做的对话脚本与练习清单",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight"
+      ],
+      "priority": 10,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "default"
+    },
+    {
+      "block_id": "eq60_profile_default_en",
+      "section": "cross_quadrant_insight",
+      "kind": "paragraph",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "locale": "en",
+      "title": "General Profile",
+      "body": "**Your profile: General (No strong cross‑pattern detected)**\n\nYour four dimensions do not show a strong high‑low gap pattern. Premium breaks each dimension into real‑world strengths/risks and provides a 14‑day plan to convert scores into practice.\n\nYou will get:\n- A clear radar interpretation and weakest‑link focus\n- Training priorities matched to your score structure\n- Ready‑to‑use scripts and exercise checklists",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:cross_quadrant_insight"
+      ],
+      "priority": 10,
+      "exclusive_group": "primary_profile",
+      "metric_level": "profile",
+      "metric_code": "default"
+    },
+    {
+      "block_id": "eq60_plan_maintenance_zh",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "zh-CN",
+      "title": "高水平巩固",
+      "body": "**14 天游程：高水平巩固与恢复（每天 10–15 分钟）**\n\n目标：巩固你的高分能力，避免过度承担，建立稳定恢复节奏。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 优势地图 | 写下你最稳的 2 个维度与最常用的行为表现。 |\n| Day 2 | 边界确认 | 写 3 条边界原则（时间/情绪/行动），放在手机备忘。 |\n| Day 3 | 高压预案 | 列出 3 个高压场景，对应 1 个降温动作与 1 个求助对象。 |\n| Day 4 | 关系投资 | 选择 1 段重要关系，做一次高质量连接（倾听+反馈）。 |\n| Day 5 | 冲突脚本 | 写一个你常用的“共情→目标→下一步”模板并复读 3 次。 |\n| Day 6 | 输出与恢复 | 记录一天的输出/恢复比，安排 20 分钟恢复性活动。 |\n| Day 7 | 情绪复盘 | 复盘一件事：情绪信号→选择→结果→下次更优动作。 |\n| Day 8 | 影响力伦理 | 写下你坚持的 3 条影响力原则（不操控/尊重选择等）。 |\n| Day 9 | 可持续关怀 | 对一位伙伴给出支持，同时明确时长与边界。 |\n| Day10 | 真实表达 | 说出一次真实感受 + 需求 + 请求，保持温和与清晰。 |\n| Day11 | 复杂对话 | 选择一个难对话，写 5 句脚本：开场/共情/边界/方案/收尾。 |\n| Day12 | 精力管理 | 给自己的精力打分 0–10，低于 6 时主动减负。 |\n| Day13 | 学习升级 | 选择一个沟通微技能（提问/反馈/协商），刻意练习 10 分钟。 |\n| Day14 | 巩固与计划 | 总结本周期最有效的 3 个动作，写下下一周期计划。 |\n\n**使用方式**：高水平的关键在于节奏与边界，让长期稳定成为默认。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "profile:balanced_high_eq"
+      ],
+      "priority": 100,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "balanced_high_eq"
+    },
+    {
+      "block_id": "eq60_plan_maintenance_en",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "en",
+      "title": "High‑Level Consolidation",
+      "body": "**14‑Day Plan: High‑Level Consolidation & Recovery (10–15 min/day)**\n\nGoal: consolidate strong capabilities, avoid over‑carrying, and build a steady recovery rhythm.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Strength map | Identify your top 2 dimensions and how they show up behaviorally. |\n| Day 2 | Boundaries | Write 3 boundary principles (time/emotion/action). |\n| Day 3 | High‑pressure plan | 3 scenarios + 1 cool‑down action + 1 support person each. |\n| Day 4 | Relationship investment | Do one high‑quality connection: listen + specific feedback. |\n| Day 5 | Conflict script | Draft your empathize → goal → next step template and rehearse. |\n| Day 6 | Output vs recovery | Track the ratio; schedule 20 minutes restoration. |\n| Day 7 | Emotional reflection | Signal → choice → outcome → better next move. |\n| Day 8 | Influence ethics | Write 3 principles (no manipulation, respect choice, etc.). |\n| Day 9 | Sustainable care | Support one person with clear time/energy boundaries. |\n| Day10 | Authentic request | Share feeling + need + request with warmth and clarity. |\n| Day11 | Hard conversation | Draft 5 lines: open/empathize/boundary/plan/close. |\n| Day12 | Energy management | Rate energy 0–10; below 6, reduce load intentionally. |\n| Day13 | Skill upgrade | Pick one micro skill (questions/feedback/negotiation) and drill 10 minutes. |\n| Day14 | Consolidate & plan | Summarize your best 3 moves and plan the next cycle. |\n\nHigh performance lasts through rhythm and boundaries.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "profile:balanced_high_eq"
+      ],
+      "priority": 100,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "balanced_high_eq"
+    },
+    {
+      "block_id": "eq60_plan_influence_zh",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "zh-CN",
+      "title": "情绪影响力",
+      "body": "**14 天游程：情绪影响力与可持续领导（每天 10–15 分钟）**\n\n目标：把你的共情与社交管理优势做成可复用的领导力脚本，同时建立恢复机制。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 影响力盘点 | 写下你最擅长影响的 3 种方式（倾听/鼓励/推动）。 |\n| Day 2 | 会前校准 | 会前 30 秒：问团队一句“大家此刻的状态 0–10？” |\n| Day 3 | 共情开场 | 练习一句开场：“我听见这里有压力，我们先对齐目标。” |\n| Day 4 | 冲突脚本 | 三步：共情 → 对齐目标 → 明确下一步。写 1 个模板。 |\n| Day 5 | 会议收尾 | 用一句话收尾：决定 + 负责人 + 时间点。 |\n| Day 6 | 关系修复 | 找一个小摩擦，做一次修复：承认影响 + 邀请对话。 |\n| Day 7 | 影响力边界 | 写下：我愿意承担到哪一步？我不承担什么？ |\n| Day 8 | 反馈艺术 | 给出一次高质量反馈：具体行为 + 影响 + 期待。 |\n| Day 9 | 情绪劳动回收 | 深度沟通后做 5 分钟走动/呼吸，回收能量。 |\n| Day10 | 赋能提问 | 用 3 个问题带团队：目标？障碍？下一步？ |\n| Day11 | 公开表达 | 练习 60 秒表达：情绪承接 + 事实 + 行动号召。 |\n| Day12 | 决策透明 | 把一个决策写成：依据是什么？取舍是什么？ |\n| Day13 | 协作降摩擦 | 识别一个“卡点”，用一句话对齐责任边界。 |\n| Day14 | 复盘与巩固 | 总结你的 3 句核心脚本 + 3 个恢复动作。 |\n\n**使用方式**：影响力来自稳定与清晰，恢复来自边界与节奏。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "strength:influence"
+      ],
+      "priority": 90,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "influence"
+    },
+    {
+      "block_id": "eq60_plan_influence_en",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "en",
+      "title": "Emotional Influence",
+      "body": "**14‑Day Plan: Emotional Influence & Sustainable Leadership (10–15 min/day)**\n\nGoal: turn your empathy + relationship skill into reusable leadership scripts, with a recovery system.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Influence audit | List 3 ways you influence best (listen/encourage/drive). |\n| Day 2 | Pre‑meeting calibration | Ask: “State 0–10 right now?” (30 seconds). |\n| Day 3 | Empathic opener | Practice: “I sense pressure. Let’s align on the goal first.” |\n| Day 4 | Conflict script | 3 steps: empathize → align goal → define next step. Draft a template. |\n| Day 5 | Close meetings | One sentence: decision + owner + timing. |\n| Day 6 | Repair | Fix one micro‑friction: acknowledge impact + invite talk. |\n| Day 7 | Influence boundaries | Write: what I will carry; what I won’t. |\n| Day 8 | Feedback craft | Give one feedback: behavior + impact + expectation. |\n| Day 9 | Energy return | After heavy talks: 5 minutes walk/breath to reset. |\n| Day10 | Empowering questions | Use 3: goal? obstacle? next step? |\n| Day11 | Public message | 60‑second: acknowledge emotion + facts + call to action. |\n| Day12 | Decision transparency | Write: rationale + trade‑offs. |\n| Day13 | Reduce friction | Identify a bottleneck; align responsibility boundary in one sentence. |\n| Day14 | Consolidate | 3 core scripts + 3 recovery actions. |\n\nInfluence comes from clarity and stability; sustainability comes from boundaries and rhythm.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "strength:influence"
+      ],
+      "priority": 90,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "influence"
+    },
+    {
+      "block_id": "eq60_plan_boundary_zh",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "zh-CN",
+      "title": "共情边界",
+      "body": "**14 天游程：共情边界与可持续关怀（每天 10–15 分钟）**\n\n目标：保留你的温暖与敏锐，同时建立情绪、时间与行动边界，避免情绪过载。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 区分“我的/你的” | 写下今天一次情绪感染：这是谁的情绪？我能做的是什么？ |\n| Day 2 | 情绪隔离 | 练习一句话：“我看见你很难受，这是你的感受，我在这里陪你。” |\n| Day 3 | 时间边界 | 设定陪伴时长（10/20 分钟），并写下结束句式。 |\n| Day 4 | 行动边界 | 把“替你解决”改成“我陪你看见选择”，写 3 个提问。 |\n| Day 5 | 身体回到自己 | 2 分钟触感练习：握杯子/触摸桌面，回到身体。 |\n| Day 6 | 自我慈悲 | 写 3 句：这很难；我并不孤单；我愿意善待自己。 |\n| Day 7 | 求助与转介 | 列出 3 个可转介资源（朋友/专业/工具），不独自承担。 |\n| Day 8 | 同理而不内卷 | 对话中先复述感受，再问“你想要倾听还是建议？” |\n| Day 9 | 关怀后回收 | 每次深度倾听后做 5 分钟走动/呼吸，回收能量。 |\n| Day10 | 说出限制 | 练习：“我能陪你到这里，之后我需要休息。”并使用 1 次。 |\n| Day11 | 负荷监测 | 今日给情绪负荷打分 0–10，超过 7 时主动减少输入。 |\n| Day12 | 只做一件事 | 把助人行动缩到 1 个最小动作，避免过度卷入。 |\n| Day13 | 关系结构 | 写下 1 段高消耗关系：我需要怎样的边界才能持续？ |\n| Day14 | 复盘与巩固 | 总结 3 条你的边界原则 + 3 句你的关怀脚本。 |\n\n**使用方式**：边界不是冷漠，是让你的关怀变得可持续。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "focus:boundary_setting"
+      ],
+      "priority": 80,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "boundary_setting"
+    },
+    {
+      "block_id": "eq60_plan_boundary_en",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "en",
+      "title": "Boundaried Care",
+      "body": "**14‑Day Plan: Boundaried Care (10–15 min/day)**\n\nGoal: keep your warmth and sensitivity while building emotional, time, and action boundaries to prevent overload.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Mine vs yours | Note one contagion moment: whose emotion is it? what can I do? |\n| Day 2 | Emotional boundary | Practice: “I see it’s hard for you. This is your feeling. I’m here with you.” |\n| Day 3 | Time boundary | Set a time cap (10/20 min) and write an ending script. |\n| Day 4 | Action boundary | Shift from fixing to options: write 3 guiding questions. |\n| Day 5 | Back to body | 2‑minute tactile grounding (cup/table texture). |\n| Day 6 | Self‑compassion | Write 3 lines: this is hard; I’m not alone; I’ll be kind to myself. |\n| Day 7 | Support & referral | List 3 resources you can hand off to; don’t carry alone. |\n| Day 8 | Empathize without spiraling | Reflect feeling, then ask: listen or brainstorm? |\n| Day 9 | Energy return | After deep listening: 5 minutes walk/breath to reset. |\n| Day10 | State limits | Use: “I can stay up to here; then I need rest.” once. |\n| Day11 | Load monitoring | Rate emotional load 0–10; above 7, reduce inputs intentionally. |\n| Day12 | One smallest act | Keep helping action to 1 minimal step; avoid over‑involvement. |\n| Day13 | Relationship structure | Pick one draining relationship: what boundary makes it sustainable? |\n| Day14 | Consolidate | 3 boundary principles + 3 care scripts. |\n\nBoundaries aren’t coldness—they make care sustainable.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "focus:boundary_setting"
+      ],
+      "priority": 80,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "boundary_setting"
+    },
+    {
+      "block_id": "eq60_plan_regulation_zh",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "zh-CN",
+      "title": "情绪调节",
+      "body": "**14 天游程：情绪调节与复原力（每天 10–15 分钟）**\n\n目标：把情绪强度拉回可管理区间，把反刍转成行动，把恢复做成习惯。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 情绪温度计 | 写下今天最强烈的情绪，强度 0–10；再写 1 句“我需要什么”。 |\n| Day 2 | 90 秒降温 | 缓慢呼气 6 次 + 脚底触地感 30 秒；记录强度变化。 |\n| Day 3 | 身体扫描 | 从头到脚扫一遍紧绷点；每个部位放松 1 次呼气。 |\n| Day 4 | 反刍外化 | 把脑内循环写成三列：事实 / 想法 / 下一步动作。 |\n| Day 5 | 认知重评三问 | 写下：我在意的价值？可控部分？最小可做一步？ |\n| Day 6 | 情绪命名扩展 | 用更细词汇命名情绪（例如：烦躁/焦虑/失落）；写出触发点。 |\n| Day 7 | 行为激活 | 选 1 个能在 10 分钟完成的小行动，完成后记录心情变化。 |\n| Day 8 | 冲突前暂停 | 练习句式：“我需要 10 分钟整理，再继续。”并在真实场景用 1 次。 |\n| Day 9 | 睡前卸载 | 睡前写 5 行：未完成的事 → 明天第一步 → 放下语句。 |\n| Day10 | 情绪与需求 | 把今天一个情绪写成：感受 + 需求 + 具体请求。 |\n| Day11 | 情绪波段记录 | 被触发后记录 3 次强度（0/5/15 分钟），观察自然回落。 |\n| Day12 | 恢复性活动 | 安排 20 分钟恢复：走路/拉伸/热水；记录身体放松点。 |\n| Day13 | 高压日预案 | 写 3 个高压触发点 + 对应 1 个降温动作 + 1 个求助对象。 |\n| Day14 | 复盘与巩固 | 回看 14 天，选出最有效的 2 个工具，写进“随身清单”。 |\n\n**使用方式**：每天只做一项，做到就算完成；第二天继续推进。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "focus:regulation_skills"
+      ],
+      "priority": 70,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "regulation_skills"
+    },
+    {
+      "block_id": "eq60_plan_regulation_en",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "en",
+      "title": "Regulation & Resilience",
+      "body": "**14‑Day Plan: Regulation & Resilience (10–15 min/day)**\n\nGoal: bring intensity back into a workable range, convert rumination into action, and make recovery habitual.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Emotion thermometer | Name the strongest emotion today, rate 0–10, write one sentence: “What do I need?” |\n| Day 2 | 90‑second cool‑down | Slow exhale ×6 + feel feet on ground for 30s; note intensity change. |\n| Day 3 | Body scan | Scan tension head‑to‑toe; release each area with one long exhale. |\n| Day 4 | Externalize rumination | Write 3 columns: facts / thoughts / next step. |\n| Day 5 | Reframe 3 questions | What value matters? What’s controllable? What’s the smallest next step? |\n| Day 6 | Expand emotion labels | Use more precise words; write the trigger. |\n| Day 7 | Behavioral activation | Do one 10‑minute action; note mood shift afterward. |\n| Day 8 | Pause before conflict | Practice: “I need 10 minutes to reset, then I’ll continue.” Use once. |\n| Day 9 | Pre‑sleep unload | Write 5 lines: open loops → first step tomorrow → closing sentence. |\n| Day10 | Emotion → need → request | Convert one emotion into feeling + need + concrete request. |\n| Day11 | Wave tracking | After a trigger, record intensity at 0/5/15 minutes; observe natural drop. |\n| Day12 | Recovery activity | Schedule 20 minutes: walk/stretch/warm shower; note body relief. |\n| Day13 | High‑pressure plan | 3 triggers + 1 cool‑down action each + 1 support person. |\n| Day14 | Consolidate | Pick your 2 best tools and put them into a ‘carry list.’ |\n\nHow to use: one practice per day is enough—consistency beats intensity.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "focus:regulation_skills"
+      ],
+      "priority": 70,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "regulation_skills"
+    },
+    {
+      "block_id": "eq60_plan_empathy_zh",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "zh-CN",
+      "title": "同理心练习",
+      "body": "**14 天游程：同理心与关系温度（每天 10–15 分钟）**\n\n目标：把“解决问题模式”前移一小步，先识别情绪，再进入方案，让关系更有温度。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 情绪词库 | 写下 20 个情绪词（积极/消极各 10），扩大识别范围。 |\n| Day 2 | 观察线索 | 选 1 次对话，记录对方的语气/停顿/表情变化。 |\n| Day 3 | 反映式倾听 | 用一句话复述对方情绪：“我听见你有点……”。 |\n| Day 4 | 确认理解 | 加一句确认：“我理解得接近吗？” |\n| Day 5 | 延迟建议 | 在对话里延迟给建议 2 分钟，只提问与复述。 |\n| Day 6 | 视角转换 | 写下对方立场：他/她最担心什么？最想保护什么？ |\n| Day 7 | 高质量提问 | 准备 5 个开放问题（“对你最重要的是？”）。 |\n| Day 8 | 情绪+事实 | 练习两句：先情绪，再事实：“我理解你……我们再看……”。 |\n| Day 9 | 道歉与修复 | 在一段关系里做一次小修复：承认影响 + 提出补救。 |\n| Day10 | 温度反馈 | 询问对方一次：“我刚才的回应让你感觉怎样？” |\n| Day11 | 共情不等同 | 写下：共情 = 理解；认同 = 同意（两者可分离）。 |\n| Day12 | 冲突降温 | 冲突时先说一句共情，再谈边界与方案。 |\n| Day13 | 复盘一段对话 | 回看一次争执：我错过了什么情绪线索？ |\n| Day14 | 复盘与巩固 | 选出 3 个最有效的共情句式，写成随身卡片。 |\n\n**使用方式**：先做“情绪层”的理解，再进入“问题层”的解决。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "focus:empathy_practice"
+      ],
+      "priority": 60,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "empathy_practice"
+    },
+    {
+      "block_id": "eq60_plan_empathy_en",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "en",
+      "title": "Empathy Practice",
+      "body": "**14‑Day Plan: Empathy & Relational Warmth (10–15 min/day)**\n\nGoal: step back from ‘solution mode’ for a moment—identify emotion first, then solve.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Emotion vocabulary | Write 20 emotion words (10 positive/10 negative). |\n| Day 2 | Observe cues | In one conversation, note tone/pauses/expressions. |\n| Day 3 | Reflective listening | Say one sentence: “I hear you feel …” |\n| Day 4 | Confirm | Add: “Am I close?” |\n| Day 5 | Delay advice | Hold advice for 2 minutes; only ask and reflect. |\n| Day 6 | Perspective | Write: what are they worried about? what are they protecting? |\n| Day 7 | Open questions | Prepare 5 open questions (“What matters most to you?”). |\n| Day 8 | Emotion then fact | Practice: emotion sentence first, then fact/plan. |\n| Day 9 | Repair | Do one small repair: acknowledge impact + offer remedy. |\n| Day10 | Warmth feedback | Ask once: “How did my response land for you?” |\n| Day11 | Separate empathy & agreement | Empathy = understand; agreement = endorse. Keep them distinct. |\n| Day12 | De‑escalate conflict | Start with one empathic line, then boundary and plan. |\n| Day13 | Review one dialogue | What emotional cue did I miss? |\n| Day14 | Consolidate | Pick 3 best empathy scripts and put them on a card. |\n\nSequence: understand emotion first, solve the problem second.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "focus:empathy_practice"
+      ],
+      "priority": 60,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "empathy_practice"
+    },
+    {
+      "block_id": "eq60_plan_self_connection_zh",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "zh-CN",
+      "title": "自我连接",
+      "body": "**14 天游程：自我连接与边界（每天 10–15 分钟）**\n\n目标：把“照顾他人”与“照顾自己”同时放进日程，让选择更清晰、更真实。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 情绪体检 | 早晚各 30 秒：我现在感觉怎样？我需要什么？ |\n| Day 2 | 价值排序 | 写下 5 个你最在乎的价值（健康/成长/关系等），选出前 2。 |\n| Day 3 | 讨好触发点 | 回想最近一次勉强答应，写下触发点与当时的担心。 |\n| Day 4 | 边界句式 1 | 练习：“我能做到……我做不到……”写 3 条。 |\n| Day 5 | 身体信号 | 记录 3 次身体信号（胸闷/胃紧/肩硬），对应当下情绪。 |\n| Day 6 | 真实请求 | 把一个隐忍写成请求：感受 + 需求 + 具体请求。 |\n| Day 7 | 小拒绝练习 | 在低风险场景拒绝 1 次，用“感谢 + 事实 + 选择”。 |\n| Day 8 | 关系盘点 | 写下 3 段关系：我投入什么？我获得什么？我想调整什么？ |\n| Day 9 | 空心感填充 | 安排 20 分钟只为自己：运动/阅读/创作；不做社交输出。 |\n| Day10 | 边界句式 2 | 练习：“我需要时间确认，再回复。”并使用 1 次。 |\n| Day11 | 自我肯定 | 写下 3 句肯定：我允许自己……我值得……我正在学习…… |\n| Day12 | 真实表达 | 在安全的人面前说出 1 句真实感受，不带解释与道歉。 |\n| Day13 | 选择权回收 | 面对一个请求，先写两种选择与代价，再回复对方。 |\n| Day14 | 复盘与巩固 | 总结最有效的 2 个边界句式与 2 个自我连接动作。 |\n\n**使用方式**：每次练习结束，用一句话记录“我更像自己了吗？”",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "focus:self_connection"
+      ],
+      "priority": 50,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "self_connection"
+    },
+    {
+      "block_id": "eq60_plan_self_connection_en",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "en",
+      "title": "Self‑Connection",
+      "body": "**14‑Day Plan: Self‑Connection & Boundaries (10–15 min/day)**\n\nGoal: keep caring for others and caring for yourself in the same system—choices become clearer and more authentic.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Micro check‑ins | Twice daily: What do I feel? What do I need? |\n| Day 2 | Values | List 5 core values; pick top 2. |\n| Day 3 | Pleasing triggers | Recall one ‘reluctant yes’; write the fear behind it. |\n| Day 4 | Boundary script 1 | Practice: “I can do … I can’t do …” (write 3). |\n| Day 5 | Body signals | Note 3 body cues and the emotion underneath. |\n| Day 6 | Real request | Convert one hidden need into feeling + need + request. |\n| Day 7 | Small no | Say no once in a low‑risk context: Appreciation + Fact + Choice. |\n| Day 8 | Relationship audit | 3 relationships: what I give / get / want to adjust. |\n| Day 9 | Fill the ‘empty’ | 20 minutes for you: move/read/create—no social output. |\n| Day10 | Boundary script 2 | Use: “I need time to check, I’ll reply later.” once. |\n| Day11 | Self‑affirmation | Write 3 lines: I allow … I deserve … I’m learning … |\n| Day12 | Authentic expression | Share 1 honest feeling with a safe person—no apologizing. |\n| Day13 | Reclaim choice | For one request: write 2 options + costs before replying. |\n| Day14 | Consolidate | Summarize your best 2 scripts + 2 self‑connection moves. |\n\nAfter each practice, write one sentence: “Did I feel more like myself?”",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d",
+        "focus:self_connection"
+      ],
+      "priority": 50,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "self_connection"
+    },
+    {
+      "block_id": "eq60_plan_generic_zh",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "zh-CN",
+      "title": "通用成长计划",
+      "body": "**14 天游程：通用成长计划（每天 10–15 分钟）**\n\n目标：用最小成本提升 EQ 四象限的基础能力。\n\n| 天数 | 主题 | 今日练习 |\n|---|---|---|\n| Day 1 | 情绪命名 | 写下 3 个情绪词 + 触发点。 |\n| Day 2 | 降温练习 | 缓慢呼气 6 次 + 身体扫描 1 分钟。 |\n| Day 3 | 复述倾听 | 对话中复述 1 次对方感受，再进入讨论。 |\n| Day 4 | 事实与请求 | 用三句式写下：事实/感受/请求。 |\n| Day 5 | 小行动 | 完成 1 个 10 分钟行动，记录情绪变化。 |\n| Day 6 | 边界句式 | 写 3 条“我能/我不能”的边界句。 |\n| Day 7 | 关系连接 | 主动联系 1 人：表达感谢 + 具体反馈。 |\n| Day 8 | 冲突降温 | 冲突时先共情 1 句，再对齐目标。 |\n| Day 9 | 睡前卸载 | 写 5 行未完成清单 + 明天第一步。 |\n| Day10 | 视角转换 | 写下对方最在乎的价值与担心。 |\n| Day11 | 反馈练习 | 给出一次具体反馈：行为 + 影响 + 期待。 |\n| Day12 | 精力恢复 | 安排 20 分钟恢复性活动。 |\n| Day13 | 难对话脚本 | 写 5 句脚本：开场/共情/边界/方案/收尾。 |\n| Day14 | 复盘巩固 | 选出最有效的 3 个动作，写入随身清单。 |\n\n**使用方式**：按顺序完成即可，过程中用一句话记录今天的收获。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d"
+      ],
+      "priority": 10,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "generic"
+    },
+    {
+      "block_id": "eq60_plan_generic_en",
+      "section": "action_plan_14d",
+      "kind": "table",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "locale": "en",
+      "title": "General Growth Plan",
+      "body": "**14‑Day Plan: General Growth (10–15 min/day)**\n\nGoal: improve baseline skills across the four EQ quadrants with minimal time cost.\n\n| Day | Theme | Practice |\n|---|---|---|\n| Day 1 | Name emotions | 3 emotion words + trigger. |\n| Day 2 | Cool‑down | Slow exhale ×6 + 1‑minute body scan. |\n| Day 3 | Reflective listening | Reflect the other’s feeling once before discussing. |\n| Day 4 | Fact → feeling → request | Write the 3‑sentence script. |\n| Day 5 | Small action | Do one 10‑minute action; note mood change. |\n| Day 6 | Boundary scripts | Write 3 “I can / I can’t” lines. |\n| Day 7 | Connection | Reach out to 1 person: appreciation + specific feedback. |\n| Day 8 | De‑escalate | Start conflict with 1 empathic sentence, then align goal. |\n| Day 9 | Pre‑sleep unload | 5‑line open‑loop list + first step tomorrow. |\n| Day10 | Perspective | Write the other’s value and worry. |\n| Day11 | Feedback | Behavior + impact + expectation once. |\n| Day12 | Recovery | Schedule 20 minutes restoration. |\n| Day13 | Hard talk script | 5 lines: open/empathize/boundary/plan/close. |\n| Day14 | Consolidate | Pick 3 best moves and add to your carry list. |\n\nFollow the order; write one sentence daily on what you learned.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:action_plan_14d"
+      ],
+      "priority": 10,
+      "exclusive_group": "action_plan_primary",
+      "metric_level": "action_plan",
+      "metric_code": "generic"
     }
   ]
 }

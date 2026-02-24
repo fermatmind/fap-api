@@ -43,11 +43,16 @@ final class Eq60ReportPaywallTest extends TestCase
         );
 
         $this->assertSame('disclaimer_top', (string) data_get($sections, '0.key', ''));
-        $this->assertContains('eq_summary_free', $keys);
-        $this->assertContains('eq_dimensions_free', $keys);
-        $this->assertContains('eq_paywall_teaser', $keys);
-        $this->assertNotContains('eq_cross_insights', $keys);
-        $this->assertNotContains('eq_growth_plan', $keys);
+        $this->assertContains('quality_notice', $keys);
+        $this->assertContains('global_overview', $keys);
+        $this->assertContains('self_awareness', $keys);
+        $this->assertContains('emotion_regulation', $keys);
+        $this->assertContains('empathy', $keys);
+        $this->assertContains('relationship_management', $keys);
+        $this->assertContains('methodology', $keys);
+        $this->assertContains('disclaimer_bottom', $keys);
+        $this->assertNotContains('cross_quadrant_insight', $keys);
+        $this->assertNotContains('action_plan_14d', $keys);
         $this->assertSame([], (array) data_get($gate, 'report.compat.paid_blocks', []));
     }
 
@@ -90,8 +95,8 @@ final class Eq60ReportPaywallTest extends TestCase
             static fn (array $section): string => (string) ($section['key'] ?? ''),
             array_filter($sections, 'is_array')
         );
-        $this->assertContains('eq_cross_insights', $keys);
-        $this->assertContains('eq_growth_plan', $keys);
+        $this->assertContains('cross_quadrant_insight', $keys);
+        $this->assertContains('action_plan_14d', $keys);
         $this->assertNotEmpty((array) data_get($gate, 'report.compat.paid_blocks', []));
     }
 
