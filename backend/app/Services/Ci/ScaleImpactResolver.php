@@ -10,6 +10,7 @@ final class ScaleImpactResolver
     private const SCALE_BIG5 = 'BIG5_OCEAN';
     private const SCALE_CLINICAL = 'CLINICAL_COMBO_68';
     private const SCALE_SDS = 'SDS_20';
+    private const SCALE_EQ = 'EQ_60';
 
     /**
      * @var list<string>
@@ -48,6 +49,7 @@ final class ScaleImpactResolver
         $big5Changed = false;
         $clinicalChanged = false;
         $sdsChanged = false;
+        $eqChanged = false;
         $sdsNormsChanged = false;
 
         foreach ($normalized as $path) {
@@ -57,6 +59,7 @@ final class ScaleImpactResolver
                 $big5Changed = true;
                 $clinicalChanged = true;
                 $sdsChanged = true;
+                $eqChanged = true;
                 continue;
             }
 
@@ -76,6 +79,10 @@ final class ScaleImpactResolver
                 $sdsChanged = true;
             }
 
+            if ($this->isEqPath($path)) {
+                $eqChanged = true;
+            }
+
             if ($this->isSdsNormsPath($path)) {
                 $sdsNormsChanged = true;
             }
@@ -85,6 +92,7 @@ final class ScaleImpactResolver
         $runBig5OceanGate = $sharedChanged || $big5Changed;
         $runClinicalCombo68Gate = $sharedChanged || $clinicalChanged;
         $runSds20Gate = $sharedChanged || $sdsChanged;
+        $runEq60Gate = $sharedChanged || $eqChanged;
         $runSdsNormsGate = $sharedChanged || $sdsNormsChanged;
         $runMbtiSmoke = true;
 
@@ -93,10 +101,12 @@ final class ScaleImpactResolver
             $runBig5OceanGate,
             $runClinicalCombo68Gate,
             $runSds20Gate,
+            $runEq60Gate,
             $mbtiChanged,
             $big5Changed,
             $clinicalChanged,
-            $sdsChanged
+            $sdsChanged,
+            $eqChanged
         );
 
         $scalesChanged = [];
@@ -112,6 +122,9 @@ final class ScaleImpactResolver
         if ($sdsChanged) {
             $scalesChanged[] = self::SCALE_SDS;
         }
+        if ($eqChanged) {
+            $scalesChanged[] = self::SCALE_EQ;
+        }
 
         return [
             'changed_files' => $normalized,
@@ -120,16 +133,18 @@ final class ScaleImpactResolver
             'big5_ocean_changed' => $big5Changed,
             'clinical_combo_68_changed' => $clinicalChanged,
             'sds_20_changed' => $sdsChanged,
+            'eq_60_changed' => $eqChanged,
             'sds_norms_changed' => $sdsNormsChanged,
             'run_full_scale_regression' => $runFullScaleRegression,
             'run_big5_ocean_gate' => $runBig5OceanGate,
             'run_clinical_combo_68_gate' => $runClinicalCombo68Gate,
             'run_sds_20_gate' => $runSds20Gate,
+            'run_eq_60_gate' => $runEq60Gate,
             'run_sds_norms_gate' => $runSdsNormsGate,
             'run_mbti_smoke' => $runMbtiSmoke,
             'scale_scope' => $scaleScope,
             'scales_changed' => $scalesChanged,
-            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed, $clinicalChanged, $sdsChanged, $sdsNormsChanged),
+            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed, $clinicalChanged, $sdsChanged, $eqChanged, $sdsNormsChanged),
         ];
     }
 
@@ -157,6 +172,10 @@ final class ScaleImpactResolver
 
     private function isSharedPath(string $path): bool
     {
+        if ($this->isEqIsolatedPath($path)) {
+            return false;
+        }
+
         if (in_array($path, self::SHARED_EXACT, true)) {
             return true;
         }
@@ -168,6 +187,13 @@ final class ScaleImpactResolver
         }
 
         return false;
+    }
+
+    private function isEqIsolatedPath(string $path): bool
+    {
+        return str_starts_with($path, 'backend/content_packs/EQ_60/')
+            || str_contains($path, 'Eq60')
+            || str_contains($path, 'EQ_60');
     }
 
     private function isMbtiPath(string $path): bool
@@ -217,6 +243,14 @@ final class ScaleImpactResolver
             || str_contains($upper, 'SDS20');
     }
 
+    private function isEqPath(string $path): bool
+    {
+        $upper = strtoupper($path);
+
+        return str_contains($upper, 'EQ_60')
+            || str_contains($path, 'Eq60');
+    }
+
     private function isSdsNormsPath(string $path): bool
     {
         $upper = strtoupper($path);
@@ -254,10 +288,12 @@ final class ScaleImpactResolver
         bool $runBig5OceanGate,
         bool $runClinicalCombo68Gate,
         bool $runSds20Gate,
+        bool $runEq60Gate,
         bool $mbtiChanged,
         bool $big5Changed,
         bool $clinicalChanged,
-        bool $sdsChanged
+        bool $sdsChanged,
+        bool $eqChanged
     ): string
     {
         if ($runFullScaleRegression) {
@@ -304,6 +340,14 @@ final class ScaleImpactResolver
             return 'sds_with_mbti_smoke';
         }
 
+        if ($runEq60Gate) {
+            if ($mbtiChanged) {
+                return 'eq60_plus_mbti';
+            }
+
+            return 'eq60_with_mbti_smoke';
+        }
+
         if ($mbtiChanged) {
             return 'mbti_only';
         }
@@ -320,6 +364,10 @@ final class ScaleImpactResolver
             return 'sds_with_mbti_smoke';
         }
 
+        if ($eqChanged) {
+            return 'eq60_with_mbti_smoke';
+        }
+
         return 'mbti_only';
     }
 
@@ -329,6 +377,7 @@ final class ScaleImpactResolver
         bool $big5Changed,
         bool $clinicalChanged,
         bool $sdsChanged,
+        bool $eqChanged,
         bool $sdsNormsChanged
     ): string
     {
@@ -374,6 +423,14 @@ final class ScaleImpactResolver
 
         if ($sdsChanged) {
             return 'SDS changed: run SDS gate + MBTI smoke';
+        }
+
+        if ($eqChanged && $mbtiChanged) {
+            return 'EQ_60 changed with MBTI: run EQ_60 gate + MBTI smoke';
+        }
+
+        if ($eqChanged) {
+            return 'EQ_60 changed: run EQ_60 gate + MBTI smoke';
         }
 
         if ($sdsNormsChanged) {

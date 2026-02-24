@@ -203,6 +203,8 @@ return [
         'big5_ocean' => App\Services\Assessment\Drivers\BigFiveOceanDriver::class,
         'clinical_combo_68' => App\Services\Assessment\Drivers\ClinicalCombo68Driver::class,
         'sds_20' => App\Services\Assessment\Drivers\Sds20Driver::class,
+        'eq_60' => App\Services\Assessment\Drivers\Eq60Driver::class,
+        'eq_test' => App\Services\Assessment\Drivers\Eq60Driver::class,
     ],
 
     // Persist raw answers (audit)

@@ -234,6 +234,58 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer->syncSlugsForScale($sds20);
         $this->command?->info('ScaleRegistrySeeder: SDS_20 scale upserted.');
+
+        $eq60 = $writer->upsertScale([
+            'code' => 'EQ_60',
+            'org_id' => 0,
+            'primary_slug' => 'eq-test',
+            'slugs_json' => [
+                'eq-test',
+                'emotional-intelligence-test',
+            ],
+            'driver_type' => 'eq_60',
+            'assessment_driver' => 'eq_60',
+            'default_pack_id' => 'EQ_60',
+            'default_region' => $defaultRegion,
+            'default_locale' => $defaultLocale,
+            'default_dir_version' => 'v1',
+            'capabilities_json' => [
+                'questions' => true,
+                'enabled_in_prod' => true,
+                'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                'rollout_ratio' => 1.0,
+            ],
+            'view_policy_json' => [
+                'free_sections' => ['intro', 'summary'],
+                'blur_others' => true,
+                'teaser_percent' => 0.35,
+                'upgrade_sku' => 'SKU_EQ_60_FULL_299',
+            ],
+            'commercial_json' => [
+                'price_tier' => 'PAID',
+                'report_benefit_code' => 'EQ_60_FULL',
+                'credit_benefit_code' => 'EQ_60_FULL',
+                'report_unlock_sku' => 'SKU_EQ_60_FULL_299',
+            ],
+            'seo_schema_json' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Quiz',
+                'name' => 'EQ Test (Emotional Intelligence Assessment)',
+            ],
+            'seo_i18n_json' => [
+                'en' => [
+                    'title' => 'EQ Test (Emotional Intelligence Assessment)',
+                ],
+                'zh' => [
+                    'title' => '情商（EQ）测试',
+                ],
+            ],
+            'is_public' => true,
+            'is_active' => true,
+        ]);
+
+        $writer->syncSlugsForScale($eq60);
+        $this->command?->info('ScaleRegistrySeeder: EQ_60 scale upserted.');
     }
 
     private function resolveSkuDefaults(): array

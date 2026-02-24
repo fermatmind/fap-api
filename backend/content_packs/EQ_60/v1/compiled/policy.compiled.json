@@ -1,0 +1,135 @@
+{
+    "schema": "eq_60.policy.compiled.v1",
+    "pack_id": "EQ_60",
+    "pack_version": "v1",
+    "generated_at": "2026-02-24T08:45:29.332885Z",
+    "policy": {
+        "engine_version": "eq60_likert_v1",
+        "scoring_spec_version": "eq60_spec_2026_v1",
+        "answer_codes_allowed": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+        ],
+        "dimension_codes": [
+            "SA",
+            "ER",
+            "SE",
+            "RM"
+        ],
+        "dimension_map": {
+            "SA": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ],
+            "ER": [
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+            ],
+            "SE": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+            ],
+            "RM": [
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60
+            ]
+        },
+        "reverse_question_ids": [
+            5,
+            10,
+            11,
+            15,
+            18,
+            20,
+            22,
+            23,
+            29,
+            30,
+            31,
+            42,
+            44,
+            52,
+            53,
+            57
+        ],
+        "reverse_rule": "6_minus_raw",
+        "score_range": {
+            "dimension": {
+                "min": 15,
+                "max": 75
+            },
+            "total": {
+                "min": 60,
+                "max": 300
+            }
+        },
+        "view_policy": {
+            "free_sections": [
+                "intro",
+                "summary"
+            ],
+            "blur_others": true,
+            "teaser_percent": 0.35,
+            "upgrade_sku": "SKU_EQ_60_FULL_299"
+        },
+        "commercial": {
+            "pricing_mode": "preview_paid",
+            "report_unlock_sku": "SKU_EQ_60_FULL_299"
+        }
+    }
+}
