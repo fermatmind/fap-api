@@ -354,15 +354,21 @@ cleanup() {
   local ec=$?
   trap - EXIT INT TERM
 
-  if [[ -n "${SERVE_PID:-}" ]]; then
-    kill "$SERVE_PID" >/dev/null 2>&1 || true
-  fi
+  stop_server_if_running
 
   cleanup_legacy_alias
   cleanup_env_file
   exit "$ec"
 }
 trap cleanup EXIT INT TERM
+
+stop_server_if_running() {
+  if [[ -n "${SERVE_PID:-}" ]]; then
+    kill "$SERVE_PID" >/dev/null 2>&1 || true
+    wait "$SERVE_PID" 2>/dev/null || true
+    SERVE_PID=""
+  fi
+}
 
 if [[ -d "$CANON_ABS" ]]; then
   if [[ ! -e "$ALIAS_ABS" ]]; then
@@ -942,6 +948,9 @@ API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_D_anon_block_placeholder_click.sh"
 
 echo "[CI] events acceptance OK"
+
+echo "[CI] stopping API server before phpunit gates"
+stop_server_if_running
 
 echo "[CI] payment event provider uniqueness gate"
 php artisan test --filter PaymentEventUniquenessAcrossProvidersTest

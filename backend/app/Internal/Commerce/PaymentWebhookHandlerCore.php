@@ -661,14 +661,23 @@ class PaymentWebhookHandlerCore
             }
 
             $normalizedResult = $this->normalizeResultStatus($result);
-            $this->emitBigFiveWebhookTelemetry(
-                $normalizedResult,
-                is_array($postCommitCtx) ? $postCommitCtx : null,
-                $orgId,
-                $provider,
-                $providerEventId,
-                $orderNo
-            );
+            try {
+                $this->emitBigFiveWebhookTelemetry(
+                    $normalizedResult,
+                    is_array($postCommitCtx) ? $postCommitCtx : null,
+                    $orgId,
+                    $provider,
+                    $providerEventId,
+                    $orderNo
+                );
+            } catch (\Throwable $e) {
+                Log::warning('PAYMENT_WEBHOOK_TELEMETRY_FAILED', [
+                    'provider' => $provider,
+                    'provider_event_id' => $providerEventId,
+                    'order_no' => $orderNo,
+                    'error_message' => $e->getMessage(),
+                ]);
+            }
 
             return $normalizedResult;
         } catch (LockTimeoutException $e) {
@@ -676,11 +685,7 @@ class PaymentWebhookHandlerCore
         }
     }
 
-    /**
-     * @param  callable():array<string,mixed>  $callback
-     * @return array<string,mixed>
-     */
-    private function runWithTransientDbRetry(callable $callback): array
+    private function runWithTransientDbRetry(callable $callback): mixed
     {
         $attempt = 0;
 
@@ -1392,10 +1397,14 @@ class PaymentWebhookHandlerCore
             return;
         }
 
-        DB::table('payment_events')
-            ->where('provider', $provider)
-            ->where('provider_event_id', $providerEventId)
-            ->update($updates);
+        $this->runWithTransientDbRetry(function () use ($provider, $providerEventId, $updates): bool {
+            DB::table('payment_events')
+                ->where('provider', $provider)
+                ->where('provider_event_id', $providerEventId)
+                ->update($updates);
+
+            return true;
+        });
     }
 
     private function markEventProcessed(string $provider, string $providerEventId): void

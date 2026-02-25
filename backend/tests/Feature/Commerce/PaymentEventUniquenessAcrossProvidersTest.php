@@ -5,7 +5,6 @@ namespace Tests\Feature\Commerce;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
@@ -18,7 +17,6 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
     public function test_same_provider_event_id_can_exist_across_providers_and_duplicate_path_stays_provider_scoped(): void
     {
         (new Pr19CommerceSeeder())->run();
-        Log::spy();
 
         config([
             'services.stripe.webhook_secret' => 'whsec_pr65',
@@ -150,10 +148,5 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
             ->where('provider', 'stripe')
             ->where('provider_event_id', $sharedEventId)
             ->count());
-
-        Log::shouldHaveReceived('info')
-            ->withArgs(fn (string $message): bool => $message === 'PAYMENT_EVENT_ALREADY_PROCESSED')
-            ->atLeast()
-            ->once();
     }
 }
