@@ -1,0 +1,27 @@
+{
+  "schema_version": "pack-manifest@v1",
+  "pack_type": "content_pack",
+  "scale_code": "BIG5",
+  "region": "CN_MAINLAND",
+  "locale": "zh-CN",
+  "content_package_version": "v0.1.0-TEST",
+  "pack_id": "BIG5.cn-mainland.zh-CN.v0.1.0-TEST",
+  "fallback": [],
+  "capabilities": {
+    "questions": true,
+    "assets": false,
+    "share_templates": false
+  },
+  "schemas": {
+    "questions": "fap.questions.v1",
+    "rules": "fap.report.rules.v1"
+  },
+  "assets": {
+    "questions": [
+      "questions.json"
+    ],
+    "rules": [
+      "scoring_spec.json"
+    ]
+  }
+}

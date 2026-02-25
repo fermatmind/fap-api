@@ -1,0 +1,25 @@
+{
+  "blocks": [
+    {
+      "id": "free_depression_anxiety",
+      "section": "free_blocks",
+      "locale": "zh-CN",
+      "title": "抑郁焦虑筛查结论",
+      "body": "当前抑郁等级：{{depression_level}}，焦虑等级：{{anxiety_level}}。"
+    },
+    {
+      "id": "free_ocd_stress",
+      "section": "free_blocks",
+      "locale": "zh-CN",
+      "title": "强迫与压力状态",
+      "body": "当前强迫干扰等级：{{ocd_level}}，压力等级：{{stress_level}}。"
+    },
+    {
+      "id": "free_function_impairment",
+      "section": "free_blocks",
+      "locale": "zh-CN",
+      "title": "功能受损提示",
+      "body": "总体功能受损评分（Q68）：{{function_impairment_raw}}/4。"
+    }
+  ]
+}

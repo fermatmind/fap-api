@@ -1,0 +1,1607 @@
+{
+  "schema": "eq60.report_blocks.v1",
+  "pack_id": "EQ_GOLEMAN_60",
+  "pack_version": "v1",
+  "blocks": [
+    {
+      "block_id": "eq60_disclaimer_top_zh",
+      "section": "disclaimer_top",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "重要声明",
+      "body": "本测评为自评问卷，用于自我探索与能力训练方向参考，不构成医疗诊断或心理治疗建议。\n结果受作答状态、理解方式与作答质量影响。\n当你出现持续的情绪困扰、睡眠显著受影响、工作/学习/关系功能受损时，建议寻求专业心理支持。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:disclaimer_top"
+      ],
+      "priority": 100,
+      "exclusive_group": "disclaimer_top"
+    },
+    {
+      "block_id": "eq60_disclaimer_top_en",
+      "section": "disclaimer_top",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Important Notice",
+      "body": "This assessment is a self‑report questionnaire for self‑reflection and skill development. It is not a medical diagnosis or psychotherapy advice.\nResults depend on your current state, interpretation, and response quality.\nWhen distress persists or daily functioning is significantly impaired, professional support is recommended.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:disclaimer_top"
+      ],
+      "priority": 100,
+      "exclusive_group": "disclaimer_top"
+    },
+    {
+      "block_id": "eq60_quality_level_D_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量提示",
+      "body": "本次答卷质量等级为 **D**：一致性不足或作答异常显著，结果波动较大；建议复测后再做关键决策参考。",
+      "variables": [
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_level:D"
+      ],
+      "priority": 100,
+      "exclusive_group": "quality_level"
+    },
+    {
+      "block_id": "eq60_quality_level_D_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Response Quality",
+      "body": "Response quality is **D**: strong inconsistency or abnormal response patterns; results may vary widely—retake is recommended.",
+      "variables": [
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_level:D"
+      ],
+      "priority": 100,
+      "exclusive_group": "quality_level"
+    },
+    {
+      "block_id": "eq60_quality_level_C_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量提示",
+      "body": "本次答卷质量等级为 **C**：存在明显作答风格或一致性问题，结果用于自我参考更合适；建议在精力更稳定时复测。",
+      "variables": [
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_level:C"
+      ],
+      "priority": 80,
+      "exclusive_group": "quality_level"
+    },
+    {
+      "block_id": "eq60_quality_level_C_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Response Quality",
+      "body": "Response quality is **C**: notable response‑style or consistency issues; treat results as a rough reference and consider retaking.",
+      "variables": [
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_level:C"
+      ],
+      "priority": 80,
+      "exclusive_group": "quality_level"
+    },
+    {
+      "block_id": "eq60_quality_level_B_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量提示",
+      "body": "本次答卷质量等级为 **B**：整体可用，存在轻微作答风格偏差，解读时留意报告中的提示。",
+      "variables": [
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_level:B"
+      ],
+      "priority": 20,
+      "exclusive_group": "quality_level"
+    },
+    {
+      "block_id": "eq60_quality_level_B_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Response Quality",
+      "body": "Response quality is **B**: generally usable with mild response‑style bias; read the cautions in the report.",
+      "variables": [
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_level:B"
+      ],
+      "priority": 20,
+      "exclusive_group": "quality_level"
+    },
+    {
+      "block_id": "eq60_quality_level_A_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量提示",
+      "body": "本次答卷质量等级为 **A**：一致性与作答节奏表现稳定，结果解释可靠度较高。",
+      "variables": [
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_level:A"
+      ],
+      "priority": 10,
+      "exclusive_group": "quality_level"
+    },
+    {
+      "block_id": "eq60_quality_level_A_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Response Quality",
+      "body": "Response quality is **A**: consistency and pacing are stable; interpretability is high.",
+      "variables": [
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_level:A"
+      ],
+      "priority": 10,
+      "exclusive_group": "quality_level"
+    },
+    {
+      "block_id": "eq60_quality_flag_INCONSISTENT_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量细节",
+      "body": "检测到内部矛盾指数偏高（{{quality.inconsistency_index}}）。建议在更放松、理解更清晰的状态下复测，以提升结果稳定性。",
+      "variables": [
+        "quality.inconsistency_index"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:INCONSISTENT"
+      ],
+      "priority": 100,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_INCONSISTENT_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Quality Detail",
+      "body": "High inconsistency detected (index: {{quality.inconsistency_index}}). Retaking under a calmer, clearer state improves stability.",
+      "variables": [
+        "quality.inconsistency_index"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:INCONSISTENT"
+      ],
+      "priority": 100,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_SPEEDING_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量细节",
+      "body": "完成用时 **{{quality.completion_time_seconds}} 秒**，明显偏短。快速作答会降低区分度，建议复测以获得更稳的画像。",
+      "variables": [
+        "quality.completion_time_seconds"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:SPEEDING"
+      ],
+      "priority": 90,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_SPEEDING_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Quality Detail",
+      "body": "Completion time **{{quality.completion_time_seconds}}s** is notably short. Very fast responses reduce precision—consider retaking.",
+      "variables": [
+        "quality.completion_time_seconds"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:SPEEDING"
+      ],
+      "priority": 90,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_LONGSTRING_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量细节",
+      "body": "检测到较长的连续同一选项（最长 **{{quality.longstring_max}} 题**）。这种作答风格会削弱量表区分度，建议复测。",
+      "variables": [
+        "quality.longstring_max"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:LONGSTRING"
+      ],
+      "priority": 80,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_LONGSTRING_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Quality Detail",
+      "body": "Long strings detected (max run **{{quality.longstring_max}}**). This response style reduces discrimination—consider retaking.",
+      "variables": [
+        "quality.longstring_max"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:LONGSTRING"
+      ],
+      "priority": 80,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_EXTREME_RESPONSE_BIAS_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量细节",
+      "body": "检测到大量使用极端选项（1/5），比例约 **{{quality.extreme_rate}}**。极端作答会放大强度，解读时以趋势为主。",
+      "variables": [
+        "quality.extreme_rate"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:EXTREME_RESPONSE_BIAS"
+      ],
+      "priority": 70,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_EXTREME_RESPONSE_BIAS_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Quality Detail",
+      "body": "Frequent extreme options (1/5) detected (rate **{{quality.extreme_rate}}**). Extreme responding can inflate intensity—focus on trends.",
+      "variables": [
+        "quality.extreme_rate"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:EXTREME_RESPONSE_BIAS"
+      ],
+      "priority": 70,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_NEUTRAL_RESPONSE_BIAS_zh",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "作答质量细节",
+      "body": "检测到大量使用中立选项（3），比例约 **{{quality.neutral_rate}}**。中立偏好会降低维度区分度，建议复测。",
+      "variables": [
+        "quality.neutral_rate"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:NEUTRAL_RESPONSE_BIAS"
+      ],
+      "priority": 60,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_quality_flag_NEUTRAL_RESPONSE_BIAS_en",
+      "section": "quality_notice",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Quality Detail",
+      "body": "Frequent neutral options (3) detected (rate **{{quality.neutral_rate}}**). Neutral responding lowers discrimination—consider retaking.",
+      "variables": [
+        "quality.neutral_rate"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:quality_notice",
+        "quality_flag:NEUTRAL_RESPONSE_BIAS"
+      ],
+      "priority": 60,
+      "exclusive_group": "quality_flag"
+    },
+    {
+      "block_id": "eq60_global_overview_zh",
+      "section": "global_overview",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.summary",
+      "locale": "zh-CN",
+      "title": "综合概览",
+      "body": "你的综合 EQ 标准分为 **{{scores.global.std_score}}**（人群平均 100，标准差 15），处于第 **{{scores.global.percentile}}** 百分位。\n\n本测评基于四项能力：自我情绪认知（SA）、情绪调节（ER）、同理心与社会感知（EM）、社交管理（RM）。报告会给出各维度的标准分与发展阶段，用于定位优势与训练重点。\n\n本次作答质量等级：**{{quality.level}}**。",
+      "variables": [
+        "scores.global.std_score",
+        "scores.global.percentile",
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:global_overview"
+      ],
+      "priority": 50,
+      "exclusive_group": "global_overview"
+    },
+    {
+      "block_id": "eq60_global_overview_en",
+      "section": "global_overview",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.summary",
+      "locale": "en",
+      "title": "Overview",
+      "body": "Your overall EQ standard score is **{{scores.global.std_score}}** (population mean 100, SD 15), at the **{{scores.global.percentile}}** percentile.\n\nThis assessment covers four capabilities: Self‑Awareness (SA), Emotion Regulation (ER), Social Awareness & Empathy (EM), and Relationship Management (RM). Each section includes a standard score and a maturity band to locate strengths and training priorities.\n\nResponse quality: **{{quality.level}}**.",
+      "variables": [
+        "scores.global.std_score",
+        "scores.global.percentile",
+        "quality.level"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:global_overview"
+      ],
+      "priority": 50,
+      "exclusive_group": "global_overview"
+    },
+    {
+      "block_id": "eq60_sa_baseline_zh",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "自我情绪认知 · 觉察盲区（Baseline）",
+      "body": "**本维度：自我情绪认知（Self‑Awareness）**\n\n标准分：**{{scores.self_awareness.std_score}}**（第 {{scores.self_awareness.percentile}} 百分位），阶段：**觉察盲区（Baseline）**。\n\n你的情绪体验可能来得很快、走得也快，但很难用语言说清楚。多数时候，身体先反应（紧绷、疲惫、心跳加速），大脑随后才意识到情绪。这个分数不等于“没有情绪”，而是代表情绪信息尚未被清晰标注。常见表现包括：情绪混杂、事后才明白自己为何不舒服、在冲突中更倾向沉默或回避而非表达。\n\n**练习提示（1分钟）**：此刻用三个词命名情绪（例如：紧张/委屈/烦躁），再用 0–10 标出强度，并写下“我真正需要什么”。",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:baseline"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "baseline"
+    },
+    {
+      "block_id": "eq60_sa_baseline_en",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Self‑Awareness · Baseline",
+      "body": "**Dimension: Self‑Awareness**\n\nStandard score: **{{scores.self_awareness.std_score}}** ({{scores.self_awareness.percentile}} percentile), band: **Baseline**.\n\nYou may notice that emotions come and go, yet putting them into precise words feels hard. Often your body reacts first (tension, fatigue, restlessness) and only later your mind labels what’s happening. This score doesn’t mean you “have no feelings”; it means emotional signals are not consistently named and organized. Common patterns include mixed feelings, understanding triggers only in hindsight, and using silence/avoidance instead of expression in conflict.\n\n**1‑minute practice**: Name your emotion with 3 words, rate intensity 0–10, and write one sentence: “What do I actually need right now?”",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:baseline"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "baseline"
+    },
+    {
+      "block_id": "eq60_sa_developing_zh",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "自我情绪认知 · 发展中（Developing）",
+      "body": "**本维度：自我情绪认知（Self‑Awareness）**\n\n标准分：**{{scores.self_awareness.std_score}}**（第 {{scores.self_awareness.percentile}} 百分位），阶段：**发展中（Developing）**。\n\n你已经能觉察到情绪变化，也能在很多时候分辨“焦虑/委屈/愤怒/失落”的差别。但在忙碌或压力上升时，觉察会断线，仍会出现“知道不舒服却说不清”的时刻。这个阶段的关键在于：把模糊的感受持续练成可描述、可沟通的语言。\n\n**练习提示**：每天固定两次 30 秒“情绪打点”（早/晚），记录情绪+触发点+想要的支持。",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:developing"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "developing"
+    },
+    {
+      "block_id": "eq60_sa_developing_en",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Self‑Awareness · Developing",
+      "body": "**Dimension: Self‑Awareness**\n\nStandard score: **{{scores.self_awareness.std_score}}** ({{scores.self_awareness.percentile}} percentile), band: **Developing**.\n\nYou can sense emotional shifts and often distinguish anxiety, sadness, anger, or disappointment. Under busier days or rising pressure, awareness can drop and the feeling becomes vague again. The growth edge here is turning fuzzy sensations into language you can communicate.\n\n**Practice**: Do two 30‑second check‑ins daily (morning/evening): emotion + trigger + support you want.",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:developing"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "developing"
+    },
+    {
+      "block_id": "eq60_sa_competent_zh",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "自我情绪认知 · 稳定可用（Competent）",
+      "body": "**本维度：自我情绪认知（Self‑Awareness）**\n\n标准分：**{{scores.self_awareness.std_score}}**（第 {{scores.self_awareness.percentile}} 百分位），阶段：**稳定可用（Competent）**。\n\n你通常能识别情绪，并把情绪与触发点、需求联系起来。你能在大部分场景下清楚表达“我正在紧张/我需要时间/我被忽视了”。这种能力能明显降低误解与内耗，让沟通更聚焦问题本身，而不是被情绪噪音牵着走。\n\n**练习提示**：在关键对话前，用一句话写清“我在乎什么”，让表达更稳定。",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:competent"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "competent"
+    },
+    {
+      "block_id": "eq60_sa_competent_en",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Self‑Awareness · Competent",
+      "body": "**Dimension: Self‑Awareness**\n\nStandard score: **{{scores.self_awareness.std_score}}** ({{scores.self_awareness.percentile}} percentile), band: **Competent**.\n\nYou usually identify emotions and connect them to triggers and needs. In many situations you can say things like “I’m tense,” “I need a moment,” or “I felt overlooked.” This reduces misunderstanding and rumination, keeping conversations closer to the real issue.\n\n**Practice**: Before a key conversation, write one sentence: “What matters most to me here?”",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:competent"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "competent"
+    },
+    {
+      "block_id": "eq60_sa_proficient_zh",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "自我情绪认知 · 成熟（Proficient）",
+      "body": "**本维度：自我情绪认知（Self‑Awareness）**\n\n标准分：**{{scores.self_awareness.std_score}}**（第 {{scores.self_awareness.percentile}} 百分位），阶段：**成熟（Proficient）**。\n\n你对情绪变化敏锐，能在情绪刚出现时就捕捉到信号，并用具体词汇命名。你也能看见情绪背后的价值与需求，从而做出更稳的选择。你往往能提前发现自己进入“紧绷/烦躁/防御”状态，并及时调整表达方式。\n\n**练习提示**：遇到强烈情绪时先做“命名→允许→转向”（不压抑、不放任）。",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:proficient"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "proficient"
+    },
+    {
+      "block_id": "eq60_sa_proficient_en",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Self‑Awareness · Proficient",
+      "body": "**Dimension: Self‑Awareness**\n\nStandard score: **{{scores.self_awareness.std_score}}** ({{scores.self_awareness.percentile}} percentile), band: **Proficient**.\n\nYou pick up emotional signals early and name them with specific words. You also see the value/need behind the emotion, which supports steadier choices. You often notice yourself entering a defensive or tense state and adjust how you respond.\n\n**Practice**: Use “Name → Allow → Redirect” when intensity rises (not suppressing, not acting it out).",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:proficient"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "proficient"
+    },
+    {
+      "block_id": "eq60_sa_exceptional_zh",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "自我情绪认知 · 卓越稀缺（Exceptional）",
+      "body": "**本维度：自我情绪认知（Self‑Awareness）**\n\n标准分：**{{scores.self_awareness.std_score}}**（第 {{scores.self_awareness.percentile}} 百分位），阶段：**卓越稀缺（Exceptional）**。\n\n你拥有非常细腻的情绪颗粒度与表达系统，能区分相近情绪（紧张 vs 害怕、失望 vs 挫败），并把体验表达得清晰而不伤人。这是一种稀缺能力，能显著提升领导力、亲密关系深度对话与自我成长效率。\n\n**练习提示**：把你的“情绪语言”用在共创：用 1 句话说感受，用 1 句话说需求，用 1 个具体请求结束对话。",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:exceptional"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "exceptional"
+    },
+    {
+      "block_id": "eq60_sa_exceptional_en",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Self‑Awareness · Exceptional",
+      "body": "**Dimension: Self‑Awareness**\n\nStandard score: **{{scores.self_awareness.std_score}}** ({{scores.self_awareness.percentile}} percentile), band: **Exceptional**.\n\nYou have rare emotional granularity and a strong vocabulary. You can tell close emotions apart (nervous vs. scared; disappointed vs. defeated) and express them clearly without harming others. This skill boosts leadership, deep relationships, and learning speed.\n\n**Practice**: Use a 3‑step script: 1 sentence for feeling, 1 for need, 1 concrete request.",
+      "variables": [
+        "scores.self_awareness.std_score",
+        "scores.self_awareness.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness",
+        "bucket:exceptional"
+      ],
+      "priority": 50,
+      "exclusive_group": "self_awareness_bucket",
+      "metric_level": "dimension",
+      "metric_code": "SA",
+      "bucket": "exceptional"
+    },
+    {
+      "block_id": "eq60_sa_fallback_zh",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "自我情绪认知",
+      "body": "本维度：自我情绪认知。\n\n当前无法匹配到具体阶段文本，请联系支持团队检查内容包与评分版本。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness"
+      ],
+      "priority": 1,
+      "exclusive_group": "self_awareness_bucket"
+    },
+    {
+      "block_id": "eq60_sa_fallback_en",
+      "section": "self_awareness",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Self‑Awareness",
+      "body": "Dimension: Self‑Awareness.\n\nNo matching band copy was found. Please check the content pack and scoring version.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:self_awareness"
+      ],
+      "priority": 1,
+      "exclusive_group": "self_awareness_bucket"
+    },
+    {
+      "block_id": "eq60_er_baseline_zh",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "情绪调节与控制 · 觉察盲区（Baseline）",
+      "body": "**本维度：情绪调节与控制（Emotion Regulation）**\n\n标准分：**{{scores.emotion_regulation.std_score}}**（第 {{scores.emotion_regulation.percentile}} 百分位），阶段：**觉察盲区（Baseline）**。\n\n在高压或被触发时，情绪更容易接管行动系统，出现冲动反应、反复纠结、睡眠受影响或持续紧绷。这个分数不代表意志力不足，而是调节工具箱尚未形成稳定的自动化。调节的目标不是“把情绪消灭”，而是把强度与持续时间拉回可管理范围。\n\n**练习提示（90秒）**：停下→缓慢呼气 6 次→把注意力放回脚底触地感，给自己争取“反应前的空隙”。",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:baseline"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "baseline"
+    },
+    {
+      "block_id": "eq60_er_baseline_en",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Emotion Regulation · Baseline",
+      "body": "**Dimension: Emotion Regulation**\n\nStandard score: **{{scores.emotion_regulation.std_score}}** ({{scores.emotion_regulation.percentile}} percentile), band: **Baseline**.\n\nUnder pressure or triggers, emotions can take over the action system—impulses, rumination, sleep disruption, or prolonged tension. This is not a “willpower” label; it reflects a toolbox that isn’t automatic yet. Regulation aims to bring intensity and duration back into a manageable range, not to erase emotions.\n\n**90‑second reset**: Pause → slow exhale 6 times → feel your feet on the ground to create space before reacting.",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:baseline"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "baseline"
+    },
+    {
+      "block_id": "eq60_er_developing_zh",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "情绪调节与控制 · 发展中（Developing）",
+      "body": "**本维度：情绪调节与控制（Emotion Regulation）**\n\n标准分：**{{scores.emotion_regulation.std_score}}**（第 {{scores.emotion_regulation.percentile}} 百分位），阶段：**发展中（Developing）**。\n\n你能在不少场景里把情绪拉回来，但在强刺激（被否定、被误解、突发冲突）时仍会“上头”。你已经开始学会缓冲与复盘，恢复速度会随压力波动。这个阶段的关键在于：把有效的小方法练到“顺手就用”。\n\n**练习提示**：为自己准备 3 个固定的降温动作（喝水/走动/写三句事实），每次被触发先做其中一个。",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:developing"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "developing"
+    },
+    {
+      "block_id": "eq60_er_developing_en",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Emotion Regulation · Developing",
+      "body": "**Dimension: Emotion Regulation**\n\nStandard score: **{{scores.emotion_regulation.std_score}}** ({{scores.emotion_regulation.percentile}} percentile), band: **Developing**.\n\nYou can regulate in many moments, yet strong triggers (criticism, misunderstanding, sudden conflict) still push you into heat. You’re learning to buffer and recover, and your recovery speed varies with stress. The goal now is to rehearse small tools until they become easy.\n\n**Practice**: Pick 3 cooling actions (water, brief walk, write 3 facts). Use one before replying.",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:developing"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "developing"
+    },
+    {
+      "block_id": "eq60_er_competent_zh",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "情绪调节与控制 · 稳定可用（Competent）",
+      "body": "**本维度：情绪调节与控制（Emotion Regulation）**\n\n标准分：**{{scores.emotion_regulation.std_score}}**（第 {{scores.emotion_regulation.percentile}} 百分位），阶段：**稳定可用（Competent）**。\n\n你一般能把情绪强度控制在可管理范围内，能暂停、复盘、再行动。偶尔会被情绪带走，但你知道怎样回到轨道：调整呼吸、改变环境、转向更具体的行动。你在高压任务中更容易保持持续输出。\n\n**练习提示**：把“反刍”改为“下一步”：写下 1 个能在 10 分钟内完成的动作。",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:competent"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "competent"
+    },
+    {
+      "block_id": "eq60_er_competent_en",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Emotion Regulation · Competent",
+      "body": "**Dimension: Emotion Regulation**\n\nStandard score: **{{scores.emotion_regulation.std_score}}** ({{scores.emotion_regulation.percentile}} percentile), band: **Competent**.\n\nMost of the time you keep emotional intensity within a workable range. You can pause, reflect, and act. Even when you get pulled off track, you know how to return—breath, environment change, and a concrete next step.\n\n**Practice**: Turn rumination into action: write 1 task you can finish in 10 minutes.",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:competent"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "competent"
+    },
+    {
+      "block_id": "eq60_er_proficient_zh",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "情绪调节与控制 · 成熟（Proficient）",
+      "body": "**本维度：情绪调节与控制（Emotion Regulation）**\n\n标准分：**{{scores.emotion_regulation.std_score}}**（第 {{scores.emotion_regulation.percentile}} 百分位），阶段：**成熟（Proficient）**。\n\n你在压力下仍能保持清晰，能较快从负面情绪里“翻篇”，并用更有建设性的方式回应。你做决定时能减少情绪噪音，也更少在关系中失控。你的优势在于：既能接纳情绪，又能把情绪转化为行动。\n\n**练习提示**：用“事实—感受—请求”三句式沟通，避免情绪升级。",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:proficient"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "proficient"
+    },
+    {
+      "block_id": "eq60_er_proficient_en",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Emotion Regulation · Proficient",
+      "body": "**Dimension: Emotion Regulation**\n\nStandard score: **{{scores.emotion_regulation.std_score}}** ({{scores.emotion_regulation.percentile}} percentile), band: **Proficient**.\n\nYou stay relatively clear under pressure, move on from negative states faster, and respond in more constructive ways. Your decisions carry less emotional noise. You can accept emotions while converting them into action.\n\n**Practice**: Use “Fact → Feeling → Request” to keep communication from escalating.",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:proficient"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "proficient"
+    },
+    {
+      "block_id": "eq60_er_exceptional_zh",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "情绪调节与控制 · 卓越稀缺（Exceptional）",
+      "body": "**本维度：情绪调节与控制（Emotion Regulation）**\n\n标准分：**{{scores.emotion_regulation.std_score}}**（第 {{scores.emotion_regulation.percentile}} 百分位），阶段：**卓越稀缺（Exceptional）**。\n\n你的情绪系统稳定而灵活。你既能接纳情绪信号，也能在需要时迅速调节强度与持续时间。你在团队与关系中常常扮演稳定器的角色。需要留意的点是：稳定不等于压抑，长期把情绪放在角落也会消耗能量。\n\n**练习提示**：每周安排一次 15 分钟“情绪清仓”，把未处理的感受写下来并做收尾。",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:exceptional"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "exceptional"
+    },
+    {
+      "block_id": "eq60_er_exceptional_en",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Emotion Regulation · Exceptional",
+      "body": "**Dimension: Emotion Regulation**\n\nStandard score: **{{scores.emotion_regulation.std_score}}** ({{scores.emotion_regulation.percentile}} percentile), band: **Exceptional**.\n\nYour system is stable and flexible. You receive emotions as signals, and you can adjust intensity/duration when needed. In groups you often act as a stabilizer. One reminder: stability isn’t suppression—unprocessed emotions still cost energy.\n\n**Practice**: Schedule a weekly 15‑minute ‘emotional clean‑out’ to close open loops.",
+      "variables": [
+        "scores.emotion_regulation.std_score",
+        "scores.emotion_regulation.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation",
+        "bucket:exceptional"
+      ],
+      "priority": 50,
+      "exclusive_group": "emotion_regulation_bucket",
+      "metric_level": "dimension",
+      "metric_code": "ER",
+      "bucket": "exceptional"
+    },
+    {
+      "block_id": "eq60_er_fallback_zh",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "情绪调节与控制",
+      "body": "本维度：情绪调节与控制。\n\n当前无法匹配到具体阶段文本，请联系支持团队检查内容包与评分版本。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation"
+      ],
+      "priority": 1,
+      "exclusive_group": "emotion_regulation_bucket"
+    },
+    {
+      "block_id": "eq60_er_fallback_en",
+      "section": "emotion_regulation",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Emotion Regulation",
+      "body": "Dimension: Emotion Regulation.\n\nNo matching band copy was found. Please check the content pack and scoring version.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:emotion_regulation"
+      ],
+      "priority": 1,
+      "exclusive_group": "emotion_regulation_bucket"
+    },
+    {
+      "block_id": "eq60_em_baseline_zh",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "同理心与社会感知 · 觉察盲区（Baseline）",
+      "body": "**本维度：同理心与社会感知（Social Awareness & Empathy）**\n\n标准分：**{{scores.empathy.std_score}}**（第 {{scores.empathy.percentile}} 百分位），阶段：**觉察盲区（Baseline）**。\n\n你更习惯用事实与逻辑处理人际信息，对他人的情绪线索不太敏感。这个分数不等于冷漠，更多体现为注意力默认投向任务与解决方案。人际互动中，你可能更容易忽略语气、停顿、表情这些“隐含信息”，从而错过对方真正的需要。\n\n**练习提示**：对话中先做一次复述：用一句话总结对方的感受，再进入解决问题。",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:baseline"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "baseline"
+    },
+    {
+      "block_id": "eq60_em_baseline_en",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Social Awareness & Empathy · Baseline",
+      "body": "**Dimension: Social Awareness & Empathy**\n\nStandard score: **{{scores.empathy.std_score}}** ({{scores.empathy.percentile}} percentile), band: **Baseline**.\n\nYou tend to process social situations through facts and logic, and emotional cues in others may be less salient. This score doesn’t equal “coldness”; it reflects attention defaulting to tasks and solutions. In conversations, tone, pauses, and facial cues can be missed, so you may overlook what the other person truly needs.\n\n**Practice**: Reflect first: name what you think they feel in one sentence before problem‑solving.",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:baseline"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "baseline"
+    },
+    {
+      "block_id": "eq60_em_developing_zh",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "同理心与社会感知 · 发展中（Developing）",
+      "body": "**本维度：同理心与社会感知（Social Awareness & Empathy）**\n\n标准分：**{{scores.empathy.std_score}}**（第 {{scores.empathy.percentile}} 百分位），阶段：**发展中（Developing）**。\n\n你能读到部分非语言线索，但在复杂关系或含蓄表达中仍会误判。你已经意识到“情绪也是信息”，正在练习解码。这个阶段适合训练两件事：更具体地观察线索，以及用更温和的方式确认自己的理解。\n\n**练习提示**：把“你怎么了？”改成“我注意到你刚才沉默了，我理解你可能有点……对吗？”",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:developing"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "developing"
+    },
+    {
+      "block_id": "eq60_em_developing_en",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Social Awareness & Empathy · Developing",
+      "body": "**Dimension: Social Awareness & Empathy**\n\nStandard score: **{{scores.empathy.std_score}}** ({{scores.empathy.percentile}} percentile), band: **Developing**.\n\nYou catch some non‑verbal signals, yet subtle or complex contexts can still be misread. You already know emotions carry data—you’re strengthening your decoding. Two key skills: observe cues more specifically, and confirm your read gently.\n\n**Practice**: Try: “I noticed you went quiet. I’m guessing you might feel … Is that close?”",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:developing"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "developing"
+    },
+    {
+      "block_id": "eq60_em_competent_zh",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "同理心与社会感知 · 稳定可用（Competent）",
+      "body": "**本维度：同理心与社会感知（Social Awareness & Empathy）**\n\n标准分：**{{scores.empathy.std_score}}**（第 {{scores.empathy.percentile}} 百分位），阶段：**稳定可用（Competent）**。\n\n你能比较稳定地识别他人情绪，并理解情绪背后的需要。你在多数社交场景中能做到“听懂言外之意”，也更容易在冲突里保持尊重与连接。你的共情能力能显著提升合作质量与亲密关系安全感。\n\n**练习提示**：在给建议前先问一句“你希望我倾听还是一起想办法？”",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:competent"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "competent"
+    },
+    {
+      "block_id": "eq60_em_competent_en",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Social Awareness & Empathy · Competent",
+      "body": "**Dimension: Social Awareness & Empathy**\n\nStandard score: **{{scores.empathy.std_score}}** ({{scores.empathy.percentile}} percentile), band: **Competent**.\n\nYou can reliably recognize others’ emotions and the needs behind them. You often ‘hear the subtext’ and maintain respect and connection in conflict. This supports trust in teams and safety in close relationships.\n\n**Practice**: Before advice, ask: “Do you want me to listen, or brainstorm with you?”",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:competent"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "competent"
+    },
+    {
+      "block_id": "eq60_em_proficient_zh",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "同理心与社会感知 · 成熟（Proficient）",
+      "body": "**本维度：同理心与社会感知（Social Awareness & Empathy）**\n\n标准分：**{{scores.empathy.std_score}}**（第 {{scores.empathy.percentile}} 百分位），阶段：**成熟（Proficient）**。\n\n你对微表情、语气、节奏变化非常敏锐，能快速感知群体氛围与潜在张力。你往往能在冲突升温前捕捉信号并做预防，例如：及时降温、转移到更安全的沟通方式、让对方感到被看见。\n\n**练习提示**：在高压场景里先稳住情绪温度，再谈事实与方案。",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:proficient"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "proficient"
+    },
+    {
+      "block_id": "eq60_em_proficient_en",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Social Awareness & Empathy · Proficient",
+      "body": "**Dimension: Social Awareness & Empathy**\n\nStandard score: **{{scores.empathy.std_score}}** ({{scores.empathy.percentile}} percentile), band: **Proficient**.\n\nYou’re sensitive to micro‑expressions, tone, and pace shifts, and you sense group climate quickly. You often notice tension before it escalates and can de‑escalate early.\n\n**Practice**: Stabilize emotional temperature first, then discuss facts and solutions.",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:proficient"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "proficient"
+    },
+    {
+      "block_id": "eq60_em_exceptional_zh",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "同理心与社会感知 · 卓越稀缺（Exceptional）",
+      "body": "**本维度：同理心与社会感知（Social Awareness & Empathy）**\n\n标准分：**{{scores.empathy.std_score}}**（第 {{scores.empathy.percentile}} 百分位），阶段：**卓越稀缺（Exceptional）**。\n\n你的共情能力极强，能在高噪音环境里仍准确读到他人的情绪与动机，并用温和方式回应。这是影响力的重要底座。需要留意的点是：共情强度越高，越要建立边界，避免把别人的情绪带回自己的生活节奏里。\n\n**练习提示**：把“我也很难受”改成“我看见你很难受，我愿意陪你一会儿”，保留边界感。",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:exceptional"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "exceptional"
+    },
+    {
+      "block_id": "eq60_em_exceptional_en",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Social Awareness & Empathy · Exceptional",
+      "body": "**Dimension: Social Awareness & Empathy**\n\nStandard score: **{{scores.empathy.std_score}}** ({{scores.empathy.percentile}} percentile), band: **Exceptional**.\n\nYour empathy is exceptionally strong. Even in noisy environments you read emotions and motives accurately and respond with warmth. This is a foundation of influence. Keep boundaries to prevent emotional overload.\n\n**Practice**: Use: “I see this is hard for you. I can stay with you for a bit,” while keeping your limits.",
+      "variables": [
+        "scores.empathy.std_score",
+        "scores.empathy.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy",
+        "bucket:exceptional"
+      ],
+      "priority": 50,
+      "exclusive_group": "empathy_bucket",
+      "metric_level": "dimension",
+      "metric_code": "EM",
+      "bucket": "exceptional"
+    },
+    {
+      "block_id": "eq60_em_fallback_zh",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "同理心与社会感知",
+      "body": "本维度：同理心与社会感知。\n\n当前无法匹配到具体阶段文本，请联系支持团队检查内容包与评分版本。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy"
+      ],
+      "priority": 1,
+      "exclusive_group": "empathy_bucket"
+    },
+    {
+      "block_id": "eq60_em_fallback_en",
+      "section": "empathy",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Social Awareness & Empathy",
+      "body": "Dimension: Social Awareness & Empathy.\n\nNo matching band copy was found. Please check the content pack and scoring version.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:empathy"
+      ],
+      "priority": 1,
+      "exclusive_group": "empathy_bucket"
+    },
+    {
+      "block_id": "eq60_rm_baseline_zh",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "社交技能与人际管理 · 觉察盲区（Baseline）",
+      "body": "**本维度：社交技能与人际管理（Relationship Management）**\n\n标准分：**{{scores.relationship_management.std_score}}**（第 {{scores.relationship_management.percentile}} 百分位），阶段：**觉察盲区（Baseline）**。\n\n你在社交场景中更谨慎或更内向，倾向于减少曝光与消耗。你能建立关系，但可能不喜欢高频社交或功利性联络。这个分数不等于“社交能力差”，更多反映为：你更重视安全感与深度，而不是社交热闹。\n\n**练习提示**：把社交目标从“认识很多人”改成“维护 3 段高质量连接”。",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:baseline"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "baseline"
+    },
+    {
+      "block_id": "eq60_rm_baseline_en",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Relationship Management · Baseline",
+      "body": "**Dimension: Relationship Management**\n\nStandard score: **{{scores.relationship_management.std_score}}** ({{scores.relationship_management.percentile}} percentile), band: **Baseline**.\n\nIn social settings you may be more cautious or introverted and prefer lower exposure. You can build relationships, yet high‑frequency or transactional networking may feel draining. This doesn’t mean ‘bad social skills’—it often reflects a preference for safety and depth over social volume.\n\n**Practice**: Shift the goal from “more contacts” to “3 high‑quality connections.”",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:baseline"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "baseline"
+    },
+    {
+      "block_id": "eq60_rm_developing_zh",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "社交技能与人际管理 · 发展中（Developing）",
+      "body": "**本维度：社交技能与人际管理（Relationship Management）**\n\n标准分：**{{scores.relationship_management.std_score}}**（第 {{scores.relationship_management.percentile}} 百分位），阶段：**发展中（Developing）**。\n\n你能在熟悉的人群中表现自然，在陌生或高压力社交场景会更紧张与保留。你开始掌握一些互动技巧，但社交仍会耗能。这个阶段的关键在于：找到适合自己的社交节奏与角色，不把外向当作标准答案。\n\n**练习提示**：给自己设定“时长上限”，社交结束后安排恢复时间。",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:developing"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "developing"
+    },
+    {
+      "block_id": "eq60_rm_developing_en",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Relationship Management · Developing",
+      "body": "**Dimension: Relationship Management**\n\nStandard score: **{{scores.relationship_management.std_score}}** ({{scores.relationship_management.percentile}} percentile), band: **Developing**.\n\nYou’re comfortable with familiar people, and you can feel more reserved in unfamiliar or high‑stakes social contexts. You’re building skills, yet social time still costs energy. The growth edge is finding your own rhythm instead of chasing extroversion.\n\n**Practice**: Set a time cap for events and plan a recovery block afterward.",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:developing"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "developing"
+    },
+    {
+      "block_id": "eq60_rm_competent_zh",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "社交技能与人际管理 · 稳定可用（Competent）",
+      "body": "**本维度：社交技能与人际管理（Relationship Management）**\n\n标准分：**{{scores.relationship_management.std_score}}**（第 {{scores.relationship_management.percentile}} 百分位），阶段：**稳定可用（Competent）**。\n\n你具备良好的沟通与协作能力，能建立稳定的人际网络与信任。你能在多数场景里表达观点、处理分歧、维持关系质量。你通常能在“真实表达”和“关系维护”之间找到平衡。\n\n**练习提示**：遇到分歧时先对齐共同目标，再讨论方案。",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:competent"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "competent"
+    },
+    {
+      "block_id": "eq60_rm_competent_en",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Relationship Management · Competent",
+      "body": "**Dimension: Relationship Management**\n\nStandard score: **{{scores.relationship_management.std_score}}** ({{scores.relationship_management.percentile}} percentile), band: **Competent**.\n\nYou communicate and collaborate well, maintain trust, and manage disagreements without breaking the relationship. You tend to balance authenticity with relationship care.\n\n**Practice**: In conflict, align on the shared goal first, then discuss options.",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:competent"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "competent"
+    },
+    {
+      "block_id": "eq60_rm_proficient_zh",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "社交技能与人际管理 · 成熟（Proficient）",
+      "body": "**本维度：社交技能与人际管理（Relationship Management）**\n\n标准分：**{{scores.relationship_management.std_score}}**（第 {{scores.relationship_management.percentile}} 百分位），阶段：**成熟（Proficient）**。\n\n你很会营造氛围、建立连接，也能在冲突里找到双赢路径。你不只“会聊”，更能让对方感到被理解与被尊重。你往往能在团队中自然形成影响力，推动协作发生。\n\n**练习提示**：用“感谢—具体反馈—邀请”三段式，提升关系质量。",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:proficient"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "proficient"
+    },
+    {
+      "block_id": "eq60_rm_proficient_en",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Relationship Management · Proficient",
+      "body": "**Dimension: Relationship Management**\n\nStandard score: **{{scores.relationship_management.std_score}}** ({{scores.relationship_management.percentile}} percentile), band: **Proficient**.\n\nYou create rapport and connection, and you can move conflict toward a win‑win path. People often feel understood and respected around you, which naturally builds influence.\n\n**Practice**: Use a 3‑step: Appreciation → Specific feedback → Invitation.",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:proficient"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "proficient"
+    },
+    {
+      "block_id": "eq60_rm_exceptional_zh",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "社交技能与人际管理 · 卓越稀缺（Exceptional）",
+      "body": "**本维度：社交技能与人际管理（Relationship Management）**\n\n标准分：**{{scores.relationship_management.std_score}}**（第 {{scores.relationship_management.percentile}} 百分位），阶段：**卓越稀缺（Exceptional）**。\n\n你具备稀缺的非职权影响力：能推动合作、化解摩擦、促成共识。你常被视为团队粘合剂。需要留意的点是：不把“让所有人满意”当成唯一目标，避免为了维持和谐而忽略自己的界限与需要。\n\n**练习提示**：在关键场景里先确认“我愿意承担到哪一步”，再做承诺。",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:exceptional"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "exceptional"
+    },
+    {
+      "block_id": "eq60_rm_exceptional_en",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Relationship Management · Exceptional",
+      "body": "**Dimension: Relationship Management**\n\nStandard score: **{{scores.relationship_management.std_score}}** ({{scores.relationship_management.percentile}} percentile), band: **Exceptional**.\n\nYou have rare non‑positional influence: you build consensus, reduce friction, and activate cooperation. You’re often a social ‘glue’ in teams. A key guardrail is not making ‘everyone satisfied’ your only metric—protect your boundaries and needs.\n\n**Practice**: Decide your limits first (“How far am I willing to go?”) before you commit.",
+      "variables": [
+        "scores.relationship_management.std_score",
+        "scores.relationship_management.percentile"
+      ],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management",
+        "bucket:exceptional"
+      ],
+      "priority": 50,
+      "exclusive_group": "relationship_management_bucket",
+      "metric_level": "dimension",
+      "metric_code": "RM",
+      "bucket": "exceptional"
+    },
+    {
+      "block_id": "eq60_rm_fallback_zh",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "zh-CN",
+      "title": "社交技能与人际管理",
+      "body": "本维度：社交技能与人际管理。\n\n当前无法匹配到具体阶段文本，请联系支持团队检查内容包与评分版本。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management"
+      ],
+      "priority": 1,
+      "exclusive_group": "relationship_management_bucket"
+    },
+    {
+      "block_id": "eq60_rm_fallback_en",
+      "section": "relationship_management",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "locale": "en",
+      "title": "Relationship Management",
+      "body": "Dimension: Relationship Management.\n\nNo matching band copy was found. Please check the content pack and scoring version.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:relationship_management"
+      ],
+      "priority": 1,
+      "exclusive_group": "relationship_management_bucket"
+    },
+    {
+      "block_id": "eq60_methodology_zh",
+      "section": "methodology",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "方法说明",
+      "body": "**计分方法（上线版 v1.0）**\n\n1) 60 题采用 5 点量表作答；反向题在计分前做翻转（6−选项值）。\n2) 每个维度 15 题，先得到原始分，再转为标准分：平均 100、标准差 15。\n3) 同时计算作答质量指标（耗时、直线作答、极端/中立偏好、内部一致性）。质量等级为 A/B 的数据进入常模库。\n4) 付费报告包含跨维度洞察与 14 天训练计划，目标是把“理解”转化为“可执行的行为改变”。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:methodology"
+      ],
+      "priority": 50,
+      "exclusive_group": "methodology"
+    },
+    {
+      "block_id": "eq60_methodology_en",
+      "section": "methodology",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Methodology",
+      "body": "**Scoring (Production v1.0)**\n\n1) 60 items use a 5‑point scale; reverse‑keyed items are flipped before aggregation (6 − response).\n2) Each quadrant has 15 items. Raw sums are mapped to standard scores (mean 100, SD 15).\n3) Response‑quality indicators are computed (time, long‑stringing, extreme/neutral bias, internal consistency). Only A/B quality enters the norm pool.\n4) Premium content adds cross‑quadrant insights and a 14‑day training plan to convert understanding into practice.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:methodology"
+      ],
+      "priority": 50,
+      "exclusive_group": "methodology"
+    },
+    {
+      "block_id": "eq60_disclaimer_bottom_zh",
+      "section": "disclaimer_bottom",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "zh-CN",
+      "title": "结尾提示",
+      "body": "**使用建议**：本报告用于自我理解与训练方向参考。复测周期建议不少于 14 天，以减少短期情绪波动带来的噪音。\n本平台不会把单次测评结果用于任何“贴标签式”的决策。",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:disclaimer_bottom"
+      ],
+      "priority": 50,
+      "exclusive_group": "disclaimer_bottom"
+    },
+    {
+      "block_id": "eq60_disclaimer_bottom_en",
+      "section": "disclaimer_bottom",
+      "kind": "paragraph",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "locale": "en",
+      "title": "Closing Notes",
+      "body": "**How to use this report**: Treat this as guidance for self‑reflection and skill training. A retake interval of at least 14 days improves stability.\nThis platform does not use a single test result for labeling decisions.",
+      "variables": [],
+      "tags_any": [],
+      "tags_all": [
+        "section:disclaimer_bottom"
+      ],
+      "priority": 50,
+      "exclusive_group": "disclaimer_bottom"
+    }
+  ]
+}

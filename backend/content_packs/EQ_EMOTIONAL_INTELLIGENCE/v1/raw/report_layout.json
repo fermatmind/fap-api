@@ -1,0 +1,196 @@
+{
+  "schema": "eq60.report_layout.v1",
+  "pack_id": "EQ_GOLEMAN_60",
+  "pack_version": "v1",
+  "conflict_rules": {
+    "priority_wins": true,
+    "exclusive_group": true
+  },
+  "sections": [
+    {
+      "key": "disclaimer_top",
+      "source": "blocks",
+      "title_en": "Important Notice",
+      "title_zh": "重要声明",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:disclaimer_top"
+      ]
+    },
+    {
+      "key": "quality_notice",
+      "source": "blocks",
+      "title_en": "Response Quality",
+      "title_zh": "作答质量提示",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 0,
+      "max_blocks": 2,
+      "fallback_tags": [
+        "section:quality_notice"
+      ]
+    },
+    {
+      "key": "global_overview",
+      "source": "blocks",
+      "title_en": "Overview",
+      "title_zh": "综合概览",
+      "access_level": "free",
+      "module_code": "eq60.summary",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:global_overview"
+      ]
+    },
+    {
+      "key": "self_awareness",
+      "source": "blocks",
+      "title_en": "Self‑Awareness",
+      "title_zh": "自我情绪认知",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:self_awareness"
+      ]
+    },
+    {
+      "key": "emotion_regulation",
+      "source": "blocks",
+      "title_en": "Emotion Regulation",
+      "title_zh": "情绪调节与控制",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:emotion_regulation"
+      ]
+    },
+    {
+      "key": "empathy",
+      "source": "blocks",
+      "title_en": "Social Awareness & Empathy",
+      "title_zh": "同理心与社会感知",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:empathy"
+      ]
+    },
+    {
+      "key": "relationship_management",
+      "source": "blocks",
+      "title_en": "Relationship Management",
+      "title_zh": "社交技能与人际管理",
+      "access_level": "free",
+      "module_code": "eq60.quadrants",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:relationship_management"
+      ]
+    },
+    {
+      "key": "cross_quadrant_insight",
+      "source": "blocks",
+      "title_en": "Cross‑Quadrant Insight",
+      "title_zh": "交叉洞察长文",
+      "access_level": "paid",
+      "module_code": "eq60.insights",
+      "required_in_variant": [
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:cross_quadrant_insight"
+      ]
+    },
+    {
+      "key": "action_plan_14d",
+      "source": "blocks",
+      "title_en": "14‑Day Plan",
+      "title_zh": "14 天游程",
+      "access_level": "paid",
+      "module_code": "eq60.action_plan",
+      "required_in_variant": [
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:action_plan_14d"
+      ]
+    },
+    {
+      "key": "methodology",
+      "source": "blocks",
+      "title_en": "Methodology",
+      "title_zh": "方法说明",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:methodology"
+      ]
+    },
+    {
+      "key": "disclaimer_bottom",
+      "source": "blocks",
+      "title_en": "Closing Notes",
+      "title_zh": "结尾提示",
+      "access_level": "free",
+      "module_code": "eq60.meta",
+      "required_in_variant": [
+        "free",
+        "full"
+      ],
+      "min_blocks": 1,
+      "max_blocks": 1,
+      "fallback_tags": [
+        "section:disclaimer_bottom"
+      ]
+    }
+  ]
+}

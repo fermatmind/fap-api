@@ -1,0 +1,7 @@
+case_id,locale,answers,duration_ms,expected_index_score,expected_clinical_level,expected_crisis_alert,expected_quality_level,expected_has_somatic_exhaustion_mask
+all_A,zh-CN,AAAAAAAAAAAAAAAAAAAA,98000,62,mild_depression,0,C,0
+all_D,zh-CN,DDDDDDDDDDDDDDDDDDDD,98000,62,mild_depression,1,C,0
+crisis_q19_c,zh-CN,AAAAAAAAAAAAAAAAAACA,98000,65,moderate_depression,1,C,0
+somatic_mask,zh-CN,AADDAADDDDAADADAAADC,98000,93,severe_depression,1,A,1
+speeding_pattern,en,ABCDABCDABCDABCDABCD,20000,62,mild_depression,1,D,1
+straightline_B,zh-CN,BBBBBBBBBBBBBBBBBBBB,98000,62,mild_depression,0,C,0

@@ -1,0 +1,21 @@
+{
+  "version": "CLINICAL_COMBO_68_PRIVACY_2026_02",
+  "title": {
+    "zh-CN": "心理健康数据隐私补充",
+    "en": "Mental Health Data Privacy Addendum"
+  },
+  "bullets": {
+    "zh-CN": [
+      "本测评属于敏感心理健康信息，平台执行哈希化与脱敏策略，不在可回读层保存逐题明文答案。",
+      "平台保存核心结果数据（维度分数、风险等级、质量标记、版本快照）用于报告生成与历史对比。",
+      "用户可申请删除测评记录；删除后报告与相关导出文件不可访问。",
+      "数据传输与存储采用加密与访问控制，日志与埋点不记录逐题答案明文。"
+    ],
+    "en": [
+      "This assessment contains sensitive mental health data and uses hashing plus de-identification; readable raw item answers are not retained.",
+      "Core result fields (scores, risk levels, quality flags, version snapshots) are retained for report generation and history comparison.",
+      "Users may request deletion; reports and related exports become inaccessible after deletion.",
+      "Transport and storage are protected with encryption and access control; logs and analytics do not store raw item answers."
+    ]
+  }
+}

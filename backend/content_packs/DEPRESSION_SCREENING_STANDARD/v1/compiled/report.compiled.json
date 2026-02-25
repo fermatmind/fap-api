@@ -1,0 +1,111 @@
+{
+    "schema": "sds_20.report.compiled.v1",
+    "pack_id": "SDS_20",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T11:14:48.029050Z",
+    "layout": {
+        "sections": [
+            {
+                "key": "disclaimer_top",
+                "source": "copy",
+                "access_level": "free",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "module_code": "sds_core"
+            },
+            {
+                "key": "crisis_banner",
+                "source": "copy",
+                "access_level": "free",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "module_code": "sds_core"
+            },
+            {
+                "key": "result_summary_free",
+                "source": "blocks",
+                "access_level": "free",
+                "required_in_variant": [
+                    "free",
+                    "full"
+                ],
+                "module_code": "sds_core"
+            },
+            {
+                "key": "paid_deep_dive",
+                "source": "blocks",
+                "access_level": "paid",
+                "required_in_variant": [
+                    "full"
+                ],
+                "module_code": "sds_full"
+            }
+        ]
+    },
+    "blocks_by_locale": {
+        "zh-CN": [
+            {
+                "block_id": "sds_global_summary",
+                "section_key": "result_summary_free",
+                "title": "结果概览",
+                "body_md": "指数分 {{scores.global.index_score}} 分，当前等级：{{scores.global.clinical_level}}。",
+                "access_level": "free"
+            },
+            {
+                "block_id": "sds_factor_overview",
+                "section_key": "result_summary_free",
+                "title": "四因子概览",
+                "body_md": "情感 {{scores.factors.psycho_affective.score}}/{{scores.factors.psycho_affective.max}}；躯体 {{scores.factors.somatic.score}}/{{scores.factors.somatic.max}}；精神运动 {{scores.factors.psychomotor.score}}/{{scores.factors.psychomotor.max}}；认知 {{scores.factors.cognitive.score}}/{{scores.factors.cognitive.max}}。",
+                "access_level": "free"
+            },
+            {
+                "block_id": "sds_paid_deep_dive_1",
+                "section_key": "paid_deep_dive",
+                "title": "深度解析",
+                "body_md": "结合四因子结果，当前重点关注维度为：躯体化 {{scores.factors.somatic.severity}}、认知绝望 {{scores.factors.cognitive.severity}}。",
+                "access_level": "paid"
+            },
+            {
+                "block_id": "sds_paid_deep_dive_2",
+                "section_key": "paid_deep_dive",
+                "title": "行动建议",
+                "body_md": "建议优先执行规律作息与压力恢复计划，并在 2-4 周后复测观察变化。",
+                "access_level": "paid"
+            }
+        ],
+        "en": [
+            {
+                "block_id": "sds_global_summary",
+                "section_key": "result_summary_free",
+                "title": "Global Summary",
+                "body_md": "Index score: {{scores.global.index_score}}. Clinical level: {{scores.global.clinical_level}}.",
+                "access_level": "free"
+            },
+            {
+                "block_id": "sds_factor_overview",
+                "section_key": "result_summary_free",
+                "title": "Factor Overview",
+                "body_md": "Psycho-affective {{scores.factors.psycho_affective.score}}/{{scores.factors.psycho_affective.max}}, Somatic {{scores.factors.somatic.score}}/{{scores.factors.somatic.max}}, Psychomotor {{scores.factors.psychomotor.score}}/{{scores.factors.psychomotor.max}}, Cognitive {{scores.factors.cognitive.score}}/{{scores.factors.cognitive.max}}.",
+                "access_level": "free"
+            },
+            {
+                "block_id": "sds_paid_deep_dive_1",
+                "section_key": "paid_deep_dive",
+                "title": "Deep Interpretation",
+                "body_md": "Primary attention dimensions: Somatic {{scores.factors.somatic.severity}}, Cognitive/Hopelessness {{scores.factors.cognitive.severity}}.",
+                "access_level": "paid"
+            },
+            {
+                "block_id": "sds_paid_deep_dive_2",
+                "section_key": "paid_deep_dive",
+                "title": "Action Plan",
+                "body_md": "Prioritize sleep regularity and stress recovery, then retest in 2-4 weeks.",
+                "access_level": "paid"
+            }
+        ]
+    }
+}

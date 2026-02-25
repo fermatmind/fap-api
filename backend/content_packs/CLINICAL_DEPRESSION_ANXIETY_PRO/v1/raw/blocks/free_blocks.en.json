@@ -1,0 +1,25 @@
+{
+  "blocks": [
+    {
+      "id": "free_depression_anxiety",
+      "section": "free_blocks",
+      "locale": "en",
+      "title": "Depression and Anxiety Summary",
+      "body": "Current depression level: {{depression_level}}, anxiety level: {{anxiety_level}}."
+    },
+    {
+      "id": "free_ocd_stress",
+      "section": "free_blocks",
+      "locale": "en",
+      "title": "OCD and Stress Status",
+      "body": "Current OCD interference level: {{ocd_level}}, stress level: {{stress_level}}."
+    },
+    {
+      "id": "free_function_impairment",
+      "section": "free_blocks",
+      "locale": "en",
+      "title": "Functional Impairment",
+      "body": "Overall functional impairment score (Q68): {{function_impairment_raw}}/4."
+    }
+  ]
+}
