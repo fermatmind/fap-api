@@ -27,6 +27,8 @@ class LegacyShareService
 
         if (!$share) {
             $share = $this->createShare($attempt, $ctx->anonId());
+        } else {
+            $this->backfillShareScaleIdentityIfNeeded($share, $attempt);
         }
 
         $typeCode = (string) ($result->type_code ?? '');
@@ -127,6 +129,11 @@ class LegacyShareService
         $share->scale_code = (string) ($attempt->scale_code ?? '');
         $share->scale_version = (string) ($attempt->scale_version ?? '');
         $share->content_package_version = (string) ($attempt->content_package_version ?? '');
+        if ($this->shouldWriteScaleIdentityColumns()) {
+            [$scaleCodeV2, $scaleUid] = $this->resolveScaleIdentityValues($attempt);
+            $share->scale_code_v2 = $scaleCodeV2;
+            $share->scale_uid = $scaleUid;
+        }
 
         try {
             $share->save();
@@ -136,5 +143,66 @@ class LegacyShareService
                 ->where('attempt_id', (string) $attempt->id)
                 ->firstOrFail();
         }
+    }
+
+    private function backfillShareScaleIdentityIfNeeded(Share $share, Attempt $attempt): void
+    {
+        if (!$this->shouldWriteScaleIdentityColumns()) {
+            return;
+        }
+
+        [$scaleCodeV2, $scaleUid] = $this->resolveScaleIdentityValues($attempt);
+        $dirty = false;
+
+        if (trim((string) ($share->scale_code_v2 ?? '')) === '' && $scaleCodeV2 !== null && $scaleCodeV2 !== '') {
+            $share->scale_code_v2 = $scaleCodeV2;
+            $dirty = true;
+        }
+        if (trim((string) ($share->scale_uid ?? '')) === '' && $scaleUid !== null && $scaleUid !== '') {
+            $share->scale_uid = $scaleUid;
+            $dirty = true;
+        }
+
+        if (!$dirty) {
+            return;
+        }
+
+        try {
+            $share->save();
+        } catch (QueryException $e) {
+            // best effort backfill; keep read path unaffected on contention.
+        }
+    }
+
+    /**
+     * @return array{0:?string,1:?string}
+     */
+    private function resolveScaleIdentityValues(Attempt $attempt): array
+    {
+        $legacyCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
+        $scaleUid = trim((string) ($attempt->scale_uid ?? ''));
+
+        $mapV1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
+        $uidMap = (array) config('scale_identity.scale_uid_map', []);
+
+        if ($scaleCodeV2 === '' && $legacyCode !== '' && isset($mapV1ToV2[$legacyCode])) {
+            $scaleCodeV2 = strtoupper(trim((string) $mapV1ToV2[$legacyCode]));
+        }
+        if ($scaleUid === '' && $legacyCode !== '' && isset($uidMap[$legacyCode])) {
+            $scaleUid = trim((string) $uidMap[$legacyCode]);
+        }
+
+        return [
+            $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+            $scaleUid !== '' ? $scaleUid : null,
+        ];
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
     }
 }

@@ -185,6 +185,7 @@ final class ContentPackPublisher
         $expectedPackId = '';
         $targetDir = '';
         $releaseEvidence = $this->emptyReleaseEvidence();
+        $version = null;
 
         $tmpDir = '';
         $previousPackPath = '';
@@ -319,6 +320,9 @@ final class ContentPackPublisher
                 'region' => $region,
                 'locale' => $locale,
                 'dir_alias' => $dirAlias,
+                'content_publish_mode' => strtolower(trim((string) config('scale_identity.content_publish_mode', 'legacy'))),
+                'staged_source_type' => is_object($version) ? (string) ($version->source_type ?? '') : '',
+                'staged_source_ref' => is_object($version) ? (string) ($version->source_ref ?? '') : '',
                 'from_pack_id' => $fromPackId,
                 'to_pack_id' => $toPackId,
                 'from_version_id' => $fromVersionId,

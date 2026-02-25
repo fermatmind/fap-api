@@ -14,11 +14,14 @@ final class ClinicalComboPackLoader
 
     public function __construct(
         private ?ContentPackV2Resolver $v2Resolver = null,
+        private ContentPathAliasResolver $pathAliasResolver,
     ) {}
 
     public function packRoot(?string $version = null): string
     {
-        return base_path('content_packs/'.self::PACK_ID.'/'.$this->normalizeVersion($version));
+        $packBase = $this->pathAliasResolver->resolveBackendPackRoot(self::PACK_ID);
+
+        return rtrim($packBase, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->normalizeVersion($version);
     }
 
     public function rawDir(?string $version = null): string

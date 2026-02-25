@@ -5,6 +5,7 @@ namespace App\Services\Assessments;
 use App\Models\Assessment;
 use App\Models\AssessmentAssignment;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class AssessmentService
@@ -30,7 +31,7 @@ class AssessmentService
     ): Assessment {
         $now = now();
 
-        return Assessment::create([
+        $payload = [
             'org_id' => $orgId,
             'scale_code' => $scaleCode,
             'title' => $title,
@@ -39,7 +40,15 @@ class AssessmentService
             'status' => 'open',
             'created_at' => $now,
             'updated_at' => $now,
-        ]);
+        ];
+
+        if ($this->shouldWriteScaleIdentityColumns() && $this->assessmentsTableHasIdentityColumns()) {
+            $identity = $this->resolveScaleIdentityValues($scaleCode);
+            $payload['scale_code_v2'] = $identity['scale_code_v2'];
+            $payload['scale_uid'] = $identity['scale_uid'];
+        }
+
+        return Assessment::create($payload);
     }
 
     public function invite(Assessment $assessment, array $subjects): array
@@ -203,5 +212,54 @@ class AssessmentService
     private function generateInviteToken(): string
     {
         return Str::uuid()->toString() . Str::random(28);
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    private function assessmentsTableHasIdentityColumns(): bool
+    {
+        return Schema::hasTable('assessments')
+            && Schema::hasColumn('assessments', 'scale_code_v2')
+            && Schema::hasColumn('assessments', 'scale_uid');
+    }
+
+    /**
+     * @return array{scale_code_v2:string|null,scale_uid:string|null}
+     */
+    private function resolveScaleIdentityValues(string $scaleCode): array
+    {
+        $code = strtoupper(trim($scaleCode));
+        if ($code === '') {
+            return [
+                'scale_code_v2' => null,
+                'scale_uid' => null,
+            ];
+        }
+
+        $v1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
+        $v2ToV1 = (array) config('scale_identity.code_map_v2_to_v1', []);
+        $uidMap = (array) config('scale_identity.scale_uid_map', []);
+
+        $scaleCodeV1 = $code;
+        $scaleCodeV2 = null;
+
+        if (isset($v1ToV2[$code])) {
+            $scaleCodeV2 = strtoupper(trim((string) $v1ToV2[$code]));
+        } elseif (isset($v2ToV1[$code])) {
+            $scaleCodeV1 = strtoupper(trim((string) $v2ToV1[$code]));
+            $scaleCodeV2 = $code;
+        }
+
+        $scaleUid = trim((string) ($uidMap[$scaleCodeV1] ?? ''));
+
+        return [
+            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+        ];
     }
 }

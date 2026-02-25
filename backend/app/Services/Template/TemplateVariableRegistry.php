@@ -6,6 +6,7 @@ namespace App\Services\Template;
 
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
+use App\Services\Content\ContentPathAliasResolver;
 
 final class TemplateVariableRegistry
 {
@@ -155,7 +156,10 @@ final class TemplateVariableRegistry
         ];
 
         try {
-            $loader = $this->bigFivePackLoader ?? new BigFivePackLoader();
+            $loader = $this->bigFivePackLoader ?? new BigFivePackLoader(
+                null,
+                app(ContentPathAliasResolver::class)
+            );
             $paths = [
                 $loader->compiledPath('policy.compiled.json', BigFivePackLoader::PACK_VERSION),
                 $loader->rawPath('variables_allowlist.json', BigFivePackLoader::PACK_VERSION),
@@ -218,7 +222,10 @@ final class TemplateVariableRegistry
         ];
 
         try {
-            $loader = $this->clinicalPackLoader ?? new ClinicalComboPackLoader();
+            $loader = $this->clinicalPackLoader ?? new ClinicalComboPackLoader(
+                null,
+                app(ContentPathAliasResolver::class)
+            );
             $paths = [
                 $loader->compiledPath('policy.compiled.json', ClinicalComboPackLoader::PACK_VERSION),
                 $loader->rawPath('variables_allowlist.json', ClinicalComboPackLoader::PACK_VERSION),

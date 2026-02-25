@@ -32,6 +32,8 @@ class Event extends Model
 
         // funnel columns
         'scale_code',
+        'scale_code_v2',
+        'scale_uid',
         'scale_version',
         'channel',
         'region',

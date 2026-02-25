@@ -15,6 +15,8 @@ class Share extends Model
         'attempt_id',
         'anon_id',
         'scale_code',
+        'scale_code_v2',
+        'scale_uid',
         'scale_version',
         'content_package_version',
     ];

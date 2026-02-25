@@ -23,6 +23,7 @@ use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class PaymentWebhookHandlerCore
@@ -402,6 +403,11 @@ class PaymentWebhookHandlerCore
                     }
 
                     $attemptMeta = $this->resolveAttemptMeta((int) $order->org_id, (string) ($order->target_attempt_id ?? ''));
+                    $this->writePaymentEventScaleIdentity(
+                        $provider,
+                        $providerEventId,
+                        $attemptMeta
+                    );
                     $eventBaseMeta = $this->buildEventMeta([
                         'org_id' => (int) $order->org_id,
                         'sku' => $effectiveSku,
@@ -528,6 +534,8 @@ class PaymentWebhookHandlerCore
                             'received_event_context' => $eventContext,
                             'snapshot_meta' => [
                                 'scale_code' => (string) ($attemptMeta['scale_code'] ?? ''),
+                                'scale_code_v2' => (string) ($attemptMeta['scale_code_v2'] ?? ''),
+                                'scale_uid' => (string) ($attemptMeta['scale_uid'] ?? ''),
                                 'pack_id' => (string) ($attemptMeta['pack_id'] ?? ''),
                                 'dir_version' => (string) ($attemptMeta['dir_version'] ?? ''),
                                 'scoring_spec_version' => (string) ($attemptMeta['scoring_spec_version'] ?? ''),
@@ -820,6 +828,8 @@ class PaymentWebhookHandlerCore
                 try {
                     $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, $orderNo !== '' ? $orderNo : null, [
                         'scale_code' => (string) ($snapshotMeta['scale_code'] ?? ''),
+                        'scale_code_v2' => (string) ($snapshotMeta['scale_code_v2'] ?? ''),
+                        'scale_uid' => (string) ($snapshotMeta['scale_uid'] ?? ''),
                         'pack_id' => (string) ($snapshotMeta['pack_id'] ?? ''),
                         'dir_version' => (string) ($snapshotMeta['dir_version'] ?? ''),
                         'scoring_spec_version' => (string) ($snapshotMeta['scoring_spec_version'] ?? ''),
@@ -1424,6 +1434,8 @@ class PaymentWebhookHandlerCore
             return [
                 'attempt_id' => null,
                 'scale_code' => null,
+                'scale_code_v2' => null,
+                'scale_uid' => null,
                 'pack_id' => null,
                 'dir_version' => null,
                 'scoring_spec_version' => null,
@@ -1440,6 +1452,8 @@ class PaymentWebhookHandlerCore
             return [
                 'attempt_id' => null,
                 'scale_code' => null,
+                'scale_code_v2' => null,
+                'scale_uid' => null,
                 'pack_id' => null,
                 'dir_version' => null,
                 'scoring_spec_version' => null,
@@ -1451,11 +1465,100 @@ class PaymentWebhookHandlerCore
         return [
             'attempt_id' => (string) ($row->id ?? $attemptId),
             'scale_code' => (string) ($row->scale_code ?? ''),
+            'scale_code_v2' => (string) ($row->scale_code_v2 ?? ''),
+            'scale_uid' => (string) ($row->scale_uid ?? ''),
             'pack_id' => (string) ($row->pack_id ?? ''),
             'dir_version' => (string) ($row->dir_version ?? ''),
             'scoring_spec_version' => (string) ($row->scoring_spec_version ?? ''),
             'user_id' => isset($row->user_id) ? (string) ($row->user_id ?? '') : null,
             'anon_id' => isset($row->anon_id) ? (string) ($row->anon_id ?? '') : null,
+        ];
+    }
+
+    /**
+     * @param array<string,mixed> $attemptMeta
+     */
+    private function writePaymentEventScaleIdentity(string $provider, string $providerEventId, array $attemptMeta): void
+    {
+        if (! $this->shouldWriteScaleIdentityColumns()) {
+            return;
+        }
+
+        if (! Schema::hasTable('payment_events')
+            || ! Schema::hasColumn('payment_events', 'scale_code_v2')
+            || ! Schema::hasColumn('payment_events', 'scale_uid')) {
+            return;
+        }
+
+        $identity = $this->resolveScaleIdentityForPaymentEvent($attemptMeta);
+        $scaleCodeV2 = trim((string) ($identity['scale_code_v2'] ?? ''));
+        $scaleUid = trim((string) ($identity['scale_uid'] ?? ''));
+
+        if ($scaleCodeV2 === '' && $scaleUid === '') {
+            return;
+        }
+
+        DB::table('payment_events')
+            ->where('provider', $provider)
+            ->where('provider_event_id', $providerEventId)
+            ->update([
+                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+                'updated_at' => now(),
+            ]);
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    /**
+     * @param array<string,mixed> $attemptMeta
+     * @return array{scale_code_v2:string|null,scale_uid:string|null}
+     */
+    private function resolveScaleIdentityForPaymentEvent(array $attemptMeta): array
+    {
+        $scaleCodeV2 = strtoupper(trim((string) ($attemptMeta['scale_code_v2'] ?? '')));
+        $scaleUid = trim((string) ($attemptMeta['scale_uid'] ?? ''));
+
+        if ($scaleCodeV2 !== '' && $scaleUid !== '') {
+            return [
+                'scale_code_v2' => $scaleCodeV2,
+                'scale_uid' => $scaleUid,
+            ];
+        }
+
+        $scaleCodeV1 = strtoupper(trim((string) ($attemptMeta['scale_code'] ?? '')));
+        if ($scaleCodeV1 === '') {
+            return [
+                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+            ];
+        }
+
+        $v1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
+        $uidMap = (array) config('scale_identity.scale_uid_map', []);
+
+        if ($scaleCodeV2 === '') {
+            $mappedV2 = strtoupper(trim((string) ($v1ToV2[$scaleCodeV1] ?? '')));
+            if ($mappedV2 !== '') {
+                $scaleCodeV2 = $mappedV2;
+            }
+        }
+
+        if ($scaleUid === '') {
+            $mappedUid = trim((string) ($uidMap[$scaleCodeV1] ?? ''));
+            if ($mappedUid !== '') {
+                $scaleUid = $mappedUid;
+            }
+        }
+
+        return [
+            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
         ];
     }
 

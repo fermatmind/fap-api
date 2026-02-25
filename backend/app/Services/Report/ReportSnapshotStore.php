@@ -24,7 +24,7 @@ class ReportSnapshotStore
     ) {}
 
     /**
-     * @param array $meta {scale_code?:string, pack_id?:string, dir_version?:string, scoring_spec_version?:string}
+     * @param array $meta {scale_code?:string, scale_code_v2?:string, scale_uid?:string, pack_id?:string, dir_version?:string, scoring_spec_version?:string}
      */
     public function seedPendingSnapshot(int $orgId, string $attemptId, ?string $orderNo, array $meta): void
     {
@@ -46,12 +46,20 @@ class ReportSnapshotStore
         } elseif (!is_numeric($scoringSpecVersion)) {
             $scoringSpecVersion = null;
         }
+        $scaleCode = strtoupper(trim((string) ($meta['scale_code'] ?? '')));
+        $requestedScaleCodeV2 = strtoupper(trim((string) ($meta['scale_code_v2'] ?? '')));
+        $requestedScaleUid = trim((string) ($meta['scale_uid'] ?? ''));
+        [$scaleCodeV2, $scaleUid] = $this->resolveScaleIdentityValues(
+            $scaleCode,
+            $requestedScaleCodeV2,
+            $requestedScaleUid
+        );
 
         $row = [
             'org_id' => $orgId,
             'attempt_id' => $attemptId,
             'order_no' => $resolvedOrderNo !== '' ? $resolvedOrderNo : null,
-            'scale_code' => strtoupper(trim((string) ($meta['scale_code'] ?? ''))),
+            'scale_code' => $scaleCode,
             'pack_id' => trim((string) ($meta['pack_id'] ?? '')),
             'dir_version' => trim((string) ($meta['dir_version'] ?? '')),
             'scoring_spec_version' => $scoringSpecVersion,
@@ -65,6 +73,10 @@ class ReportSnapshotStore
             'created_at' => $now,
             'updated_at' => $now,
         ];
+        if ($this->shouldWriteScaleIdentityColumns()) {
+            $row['scale_code_v2'] = $scaleCodeV2;
+            $row['scale_uid'] = $scaleUid;
+        }
 
         DB::table('report_snapshots')->insertOrIgnore($row);
 
@@ -90,6 +102,14 @@ class ReportSnapshotStore
         }
         if ($row['dir_version'] !== '') {
             $updates['dir_version'] = $row['dir_version'];
+        }
+        if ($this->shouldWriteScaleIdentityColumns()) {
+            if ($scaleCodeV2 !== null && $scaleCodeV2 !== '') {
+                $updates['scale_code_v2'] = $scaleCodeV2;
+            }
+            if ($scaleUid !== null && $scaleUid !== '') {
+                $updates['scale_uid'] = $scaleUid;
+            }
         }
 
         $this->snapshotWriteQuery($orgId, $attemptId)->update($updates);
@@ -132,6 +152,13 @@ class ReportSnapshotStore
         }
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
+        $attemptScaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
+        $attemptScaleUid = trim((string) ($attempt->scale_uid ?? ''));
+        [$scaleCodeV2, $scaleUid] = $this->resolveScaleIdentityValues(
+            $scaleCode,
+            $attemptScaleCodeV2,
+            $attemptScaleUid
+        );
         $packId = (string) ($attempt->pack_id ?? '');
         $dirVersion = (string) ($attempt->dir_version ?? '');
         $scoringSpecVersion = $attempt->scoring_spec_version ?? $result->scoring_spec_version ?? null;
@@ -192,6 +219,10 @@ class ReportSnapshotStore
             'created_at' => $now,
             'updated_at' => $now,
         ];
+        if ($this->shouldWriteScaleIdentityColumns()) {
+            $row['scale_code_v2'] = $scaleCodeV2;
+            $row['scale_uid'] = $scaleUid;
+        }
 
         DB::table('report_snapshots')->insertOrIgnore($row);
 
@@ -201,6 +232,8 @@ class ReportSnapshotStore
 
         $this->eventRecorder->record('report_snapshot_created', null, [
             'scale_code' => $scaleCode,
+            'scale_code_v2' => $scaleCodeV2,
+            'scale_uid' => $scaleUid,
             'attempt_id' => $attemptId,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
@@ -209,6 +242,9 @@ class ReportSnapshotStore
         ], [
             'org_id' => $orgId,
             'attempt_id' => $attemptId,
+            'scale_code' => $scaleCode,
+            'scale_code_v2' => $scaleCodeV2,
+            'scale_uid' => $scaleUid,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
         ]);
@@ -416,6 +452,8 @@ class ReportSnapshotStore
             'attempt_id' => (string) ($row->attempt_id ?? ''),
             'order_no' => $row->order_no ?? null,
             'scale_code' => (string) ($row->scale_code ?? ''),
+            'scale_code_v2' => trim((string) ($row->scale_code_v2 ?? '')) !== '' ? (string) ($row->scale_code_v2 ?? '') : null,
+            'scale_uid' => trim((string) ($row->scale_uid ?? '')) !== '' ? (string) ($row->scale_uid ?? '') : null,
             'pack_id' => (string) ($row->pack_id ?? ''),
             'dir_version' => (string) ($row->dir_version ?? ''),
             'scoring_spec_version' => $row->scoring_spec_version ?? null,
@@ -480,6 +518,38 @@ class ReportSnapshotStore
         $status = strtolower(trim((string) ($row->status ?? 'ready')));
 
         return in_array($status, ['pending', 'ready', 'failed'], true) ? $status : 'ready';
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    /**
+     * @return array{0:?string,1:?string}
+     */
+    private function resolveScaleIdentityValues(string $scaleCode, string $scaleCodeV2, string $scaleUid): array
+    {
+        $legacyCode = strtoupper(trim($scaleCode));
+        $resolvedV2 = strtoupper(trim($scaleCodeV2));
+        $resolvedUid = trim($scaleUid);
+
+        $mapV1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
+        $uidMap = (array) config('scale_identity.scale_uid_map', []);
+
+        if ($resolvedV2 === '' && $legacyCode !== '' && isset($mapV1ToV2[$legacyCode])) {
+            $resolvedV2 = strtoupper(trim((string) $mapV1ToV2[$legacyCode]));
+        }
+        if ($resolvedUid === '' && $legacyCode !== '' && isset($uidMap[$legacyCode])) {
+            $resolvedUid = trim((string) $uidMap[$legacyCode]);
+        }
+
+        return [
+            $resolvedV2 !== '' ? $resolvedV2 : null,
+            $resolvedUid !== '' ? $resolvedUid : null,
+        ];
     }
 
     private function badRequest(string $code, string $message): array

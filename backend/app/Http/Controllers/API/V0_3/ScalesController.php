@@ -8,6 +8,7 @@ use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\QuestionsService;
 use App\Services\Content\Sds20PackLoader;
+use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
@@ -17,6 +18,7 @@ class ScalesController extends Controller
 {
     public function __construct(
         private ScaleRegistry $registry,
+        private ScaleIdentityResolver $identityResolver,
         private OrgContext $orgContext,
     ) {}
 
@@ -58,10 +60,13 @@ class ScalesController extends Controller
             ], 404);
         }
 
-        return response()->json([
+        $scaleCodeMeta = $this->buildScaleCodeMeta($code, $row);
+
+        return response()->json(array_merge([
             'ok' => true,
+            'scale_code' => $scaleCodeMeta['scale_code'],
             'item' => $row,
-        ]);
+        ], $scaleCodeMeta));
     }
 
     /**
@@ -94,6 +99,8 @@ class ScalesController extends Controller
                 'message' => 'scale not found.',
             ], 404);
         }
+        $resolvedScaleCode = strtoupper(trim((string) ($row['code'] ?? $code)));
+        $scaleCodeMeta = $this->buildScaleCodeMeta($code, $row);
 
         $packId = (string) ($row['default_pack_id'] ?? '');
         $dirVersion = (string) ($row['default_dir_version'] ?? '');
@@ -108,7 +115,7 @@ class ScalesController extends Controller
         $region = (string) ($request->query('region') ?? $row['default_region'] ?? config('content_packs.default_region', ''));
         $locale = (string) ($request->query('locale') ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
 
-        if ($code === 'BIG5_OCEAN') {
+        if ($resolvedScaleCode === 'BIG5_OCEAN') {
             $version = (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
             $normalizedLocale = $this->normalizeBigFiveLocale($locale);
             $compiledMin = $bigFivePackLoader->readCompiledJson('questions.min.compiled.json', $version);
@@ -188,7 +195,7 @@ class ScalesController extends Controller
 
             return response()->json([
                 'ok' => true,
-                'scale_code' => $code,
+                'scale_code' => $scaleCodeMeta['scale_code'],
                 'region' => $region,
                 'locale' => $normalizedLocale,
                 'pack_id' => $packId,
@@ -201,10 +208,10 @@ class ScalesController extends Controller
                     'disclaimer_hash' => $disclaimerHash,
                     'disclaimer_text' => $disclaimerText,
                 ],
-            ]);
+            ] + $scaleCodeMeta);
         }
 
-        if ($code === 'CLINICAL_COMBO_68') {
+        if ($resolvedScaleCode === 'CLINICAL_COMBO_68') {
             $version = (string) ($row['default_dir_version'] ?? ClinicalComboPackLoader::PACK_VERSION);
             $doc = $clinicalPackLoader->loadQuestionsDoc($locale, $version);
             $consent = $clinicalPackLoader->loadConsent((string) ($doc['locale_resolved'] ?? $locale), $version);
@@ -213,7 +220,7 @@ class ScalesController extends Controller
 
             return response()->json([
                 'ok' => true,
-                'scale_code' => $code,
+                'scale_code' => $scaleCodeMeta['scale_code'],
                 'region' => $region,
                 'locale' => (string) ($doc['locale_resolved'] ?? 'zh-CN'),
                 'pack_id' => $packId,
@@ -232,10 +239,10 @@ class ScalesController extends Controller
                     'privacy_addendum' => $privacyAddendum,
                     'crisis_resources' => $crisisResources,
                 ],
-            ]);
+            ] + $scaleCodeMeta);
         }
 
-        if ($code === 'SDS_20') {
+        if ($resolvedScaleCode === 'SDS_20') {
             $version = (string) ($row['default_dir_version'] ?? Sds20PackLoader::PACK_VERSION);
             $doc = $sds20PackLoader->loadQuestionsDoc($locale, $version);
             $localeResolved = (string) ($doc['locale_resolved'] ?? $sds20PackLoader->normalizeLocale($locale));
@@ -245,7 +252,7 @@ class ScalesController extends Controller
 
             return response()->json([
                 'ok' => true,
-                'scale_code' => $code,
+                'scale_code' => $scaleCodeMeta['scale_code'],
                 'region' => $region,
                 'locale' => $localeResolved,
                 'pack_id' => $packId,
@@ -276,17 +283,17 @@ class ScalesController extends Controller
                         'items' => $sourceCatalog,
                     ],
                 ],
-            ]);
+            ] + $scaleCodeMeta);
         }
 
-        if ($code === 'EQ_60') {
+        if ($resolvedScaleCode === 'EQ_60') {
             $version = (string) ($row['default_dir_version'] ?? Eq60PackLoader::PACK_VERSION);
             $doc = $eq60PackLoader->loadQuestionsDoc($locale, $version);
             $localeResolved = (string) ($doc['locale_resolved'] ?? $eq60PackLoader->normalizeLocale($locale));
 
             return response()->json([
                 'ok' => true,
-                'scale_code' => $code,
+                'scale_code' => $scaleCodeMeta['scale_code'],
                 'region' => $region,
                 'locale' => $localeResolved,
                 'pack_id' => $packId,
@@ -302,7 +309,7 @@ class ScalesController extends Controller
                     'option_anchors' => is_array($doc['option_anchors'] ?? null) ? $doc['option_anchors'] : [],
                     'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['SA', 'ER', 'SE', 'RM'],
                 ],
-            ]);
+            ] + $scaleCodeMeta);
         }
 
         $assetsBaseUrlOverride = $request->attributes->get('assets_base_url');
@@ -322,14 +329,14 @@ class ScalesController extends Controller
 
         return response()->json([
             'ok' => true,
-            'scale_code' => $code,
+            'scale_code' => $scaleCodeMeta['scale_code'],
             'region' => $region,
             'locale' => $locale,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
             'content_package_version' => (string) ($loaded['content_package_version'] ?? ''),
             'questions' => $loaded['questions'],
-        ]);
+        ] + $scaleCodeMeta);
     }
 
     private function normalizeBigFiveLocale(string $locale): string
@@ -450,5 +457,58 @@ class ScalesController extends Controller
         }
 
         return $options;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array{
+     *     requested_scale_code:string,
+     *     scale_code:string,
+     *     scale_code_legacy:string,
+     *     scale_code_v2:string,
+     *     scale_uid:?string,
+     *     pack_id_v2:?string,
+     *     dir_version_v2:?string,
+     *     resolved_from_alias:bool
+     * }
+     */
+    private function buildScaleCodeMeta(string $requestedScaleCode, array $row): array
+    {
+        $requested = strtoupper(trim($requestedScaleCode));
+        $legacyCode = strtoupper(trim((string) ($row['code'] ?? $requested)));
+        $identity = $this->identityResolver->resolveByAnyCode($requested);
+        if (! is_array($identity) || ! ((bool) ($identity['is_known'] ?? false))) {
+            $identity = $this->identityResolver->resolveByAnyCode($legacyCode);
+        }
+
+        $isKnown = is_array($identity) && ((bool) ($identity['is_known'] ?? false));
+        $resolvedV1 = $isKnown
+            ? strtoupper(trim((string) ($identity['scale_code_v1'] ?? $legacyCode)))
+            : $legacyCode;
+        $resolvedV2 = $isKnown
+            ? strtoupper(trim((string) ($identity['scale_code_v2'] ?? $legacyCode)))
+            : $legacyCode;
+        $scaleUid = $isKnown ? trim((string) ($identity['scale_uid'] ?? '')) : '';
+        $packIdV2 = $isKnown ? $this->trimOrNull($identity['pack_id_v2'] ?? null) : null;
+        $dirVersionV2 = $isKnown ? $this->trimOrNull($identity['dir_version_v2'] ?? null) : null;
+        $responseScaleCode = $this->identityResolver->resolveResponseScaleCode($legacyCode, $resolvedV2);
+
+        return [
+            'requested_scale_code' => $requested,
+            'scale_code' => $responseScaleCode,
+            'scale_code_legacy' => $legacyCode,
+            'scale_code_v2' => $resolvedV2 !== '' ? $resolvedV2 : $legacyCode,
+            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+            'pack_id_v2' => $packIdV2 ?? $this->trimOrNull($row['default_pack_id'] ?? null),
+            'dir_version_v2' => $dirVersionV2 ?? $this->trimOrNull($row['default_dir_version'] ?? null),
+            'resolved_from_alias' => $requested !== $resolvedV1,
+        ];
+    }
+
+    private function trimOrNull(mixed $value): ?string
+    {
+        $trimmed = trim((string) $value);
+
+        return $trimmed !== '' ? $trimmed : null;
     }
 }

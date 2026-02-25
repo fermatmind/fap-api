@@ -4,6 +4,7 @@ namespace App\Services\Attempts;
 
 use App\Models\Attempt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class AnswerRowWriter
 {
@@ -21,6 +22,10 @@ class AnswerRowWriter
 
         $rows = [];
         $now = now();
+        $canWriteIdentity = $this->shouldWriteScaleIdentityColumns() && $this->attemptAnswerRowsHasIdentityColumns();
+        $identity = $canWriteIdentity
+            ? $this->resolveScaleIdentityValues($attempt)
+            : ['scale_code_v2' => null, 'scale_uid' => null];
 
         foreach ($answers as $answer) {
             if (!is_array($answer)) {
@@ -39,7 +44,7 @@ class AnswerRowWriter
                 ]
                 : $answer;
 
-            $rows[] = [
+            $row = [
                 'attempt_id' => (string) $attempt->id,
                 'org_id' => (int) ($attempt->org_id ?? 0),
                 'scale_code' => (string) ($attempt->scale_code ?? ''),
@@ -55,6 +60,13 @@ class AnswerRowWriter
                 'submitted_at' => $now,
                 'created_at' => $now,
             ];
+
+            if ($canWriteIdentity) {
+                $row['scale_code_v2'] = $identity['scale_code_v2'];
+                $row['scale_uid'] = $identity['scale_uid'];
+            }
+
+            $rows[] = $row;
         }
 
         if (empty($rows)) {
@@ -71,10 +83,16 @@ class AnswerRowWriter
             $uniqueBy = ['attempt_id', 'question_id', 'submitted_at'];
         }
 
+        $updateColumns = ['org_id', 'scale_code', 'question_index', 'question_type', 'answer_json', 'duration_ms', 'submitted_at'];
+        if ($canWriteIdentity) {
+            $updateColumns[] = 'scale_code_v2';
+            $updateColumns[] = 'scale_uid';
+        }
+
         DB::table('attempt_answer_rows')->upsert(
             $rows,
             $uniqueBy,
-            ['org_id', 'scale_code', 'question_index', 'question_type', 'answer_json', 'duration_ms', 'submitted_at']
+            $updateColumns
         );
 
         return ['ok' => true, 'rows' => count($rows)];
@@ -84,5 +102,65 @@ class AnswerRowWriter
     {
         $mode = strtolower((string) config('fap_attempts.answer_rows_write_mode', 'off'));
         return $mode === 'on' || $mode === 'true' || $mode === '1';
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    private function attemptAnswerRowsHasIdentityColumns(): bool
+    {
+        return Schema::hasTable('attempt_answer_rows')
+            && Schema::hasColumn('attempt_answer_rows', 'scale_code_v2')
+            && Schema::hasColumn('attempt_answer_rows', 'scale_uid');
+    }
+
+    /**
+     * @return array{scale_code_v2:string|null,scale_uid:string|null}
+     */
+    private function resolveScaleIdentityValues(Attempt $attempt): array
+    {
+        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
+        $scaleUid = trim((string) ($attempt->scale_uid ?? ''));
+
+        if ($scaleCodeV2 !== '' && $scaleUid !== '') {
+            return [
+                'scale_code_v2' => $scaleCodeV2,
+                'scale_uid' => $scaleUid,
+            ];
+        }
+
+        $scaleCodeV1 = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if ($scaleCodeV1 === '') {
+            return [
+                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+            ];
+        }
+
+        $v1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
+        $uidMap = (array) config('scale_identity.scale_uid_map', []);
+
+        if ($scaleCodeV2 === '') {
+            $mappedV2 = strtoupper(trim((string) ($v1ToV2[$scaleCodeV1] ?? '')));
+            if ($mappedV2 !== '') {
+                $scaleCodeV2 = $mappedV2;
+            }
+        }
+
+        if ($scaleUid === '') {
+            $mappedUid = trim((string) ($uidMap[$scaleCodeV1] ?? ''));
+            if ($mappedUid !== '') {
+                $scaleUid = $mappedUid;
+            }
+        }
+
+        return [
+            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+        ];
     }
 }

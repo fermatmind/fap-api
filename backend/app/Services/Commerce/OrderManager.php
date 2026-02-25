@@ -4,6 +4,7 @@ namespace App\Services\Commerce;
 
 use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class OrderManager
@@ -115,6 +116,12 @@ class OrderManager
                     ? json_encode($orderMeta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                     : null,
             ];
+
+            if ($this->shouldWriteScaleIdentityColumns() && $this->ordersTableHasIdentityColumns()) {
+                $identity = $this->resolveOrderScaleIdentity($orgId, $targetAttemptId);
+                $row['scale_code_v2'] = $identity['scale_code_v2'];
+                $row['scale_uid'] = $identity['scale_uid'];
+            }
 
             if ($useIdempotency) {
                 $row['idempotency_key'] = $idempotencyKey;
@@ -516,6 +523,85 @@ class OrderManager
         }
 
         return $key;
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    private function ordersTableHasIdentityColumns(): bool
+    {
+        return Schema::hasTable('orders')
+            && Schema::hasColumn('orders', 'scale_code_v2')
+            && Schema::hasColumn('orders', 'scale_uid');
+    }
+
+    /**
+     * @return array{scale_code_v2:string|null,scale_uid:string|null}
+     */
+    private function resolveOrderScaleIdentity(int $orgId, ?string $targetAttemptId): array
+    {
+        $attemptId = $this->trimOrNull($targetAttemptId);
+        if ($attemptId === null) {
+            return [
+                'scale_code_v2' => null,
+                'scale_uid' => null,
+            ];
+        }
+
+        $attempt = DB::table('attempts')
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->first();
+        if (! $attempt) {
+            return [
+                'scale_code_v2' => null,
+                'scale_uid' => null,
+            ];
+        }
+
+        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
+        $scaleUid = trim((string) ($attempt->scale_uid ?? ''));
+
+        if ($scaleCodeV2 !== '' && $scaleUid !== '') {
+            return [
+                'scale_code_v2' => $scaleCodeV2,
+                'scale_uid' => $scaleUid,
+            ];
+        }
+
+        $scaleCodeV1 = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if ($scaleCodeV1 === '') {
+            return [
+                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+            ];
+        }
+
+        $v1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
+        $uidMap = (array) config('scale_identity.scale_uid_map', []);
+
+        if ($scaleCodeV2 === '') {
+            $mappedV2 = strtoupper(trim((string) ($v1ToV2[$scaleCodeV1] ?? '')));
+            if ($mappedV2 !== '') {
+                $scaleCodeV2 = $mappedV2;
+            }
+        }
+
+        if ($scaleUid === '') {
+            $mappedUid = trim((string) ($uidMap[$scaleCodeV1] ?? ''));
+            if ($mappedUid !== '') {
+                $scaleUid = $mappedUid;
+            }
+        }
+
+        return [
+            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+        ];
     }
 
     private function findIdempotentOrder(

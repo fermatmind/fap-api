@@ -38,6 +38,8 @@ class Order extends Model
         'created_ip',
         'idempotency_key',
         'target_attempt_id',
+        'scale_code_v2',
+        'scale_uid',
         'external_trade_no',
         'metadata',
         'meta_json',

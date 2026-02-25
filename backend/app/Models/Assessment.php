@@ -16,6 +16,8 @@ class Assessment extends Model
     protected $fillable = [
         'org_id',
         'scale_code',
+        'scale_code_v2',
+        'scale_uid',
         'title',
         'created_by',
         'due_at',

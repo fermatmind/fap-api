@@ -30,6 +30,18 @@ final class EventRecorder
         }
 
         $meta = $this->sanitizeMetaForStorage($eventCode, $meta);
+        $scaleCode = $this->resolveScaleIdentityString([
+            $meta['scale_code'] ?? null,
+            $context['scale_code'] ?? null,
+        ], true);
+        $scaleCodeV2 = $this->resolveScaleIdentityString([
+            $meta['scale_code_v2'] ?? null,
+            $context['scale_code_v2'] ?? null,
+        ], true);
+        $scaleUid = $this->resolveScaleIdentityString([
+            $meta['scale_uid'] ?? null,
+            $context['scale_uid'] ?? null,
+        ], false);
 
         $now = now();
         $payload = [
@@ -42,6 +54,7 @@ final class EventRecorder
             'session_id' => $context['session_id'] ?? null,
             'request_id' => $context['request_id'] ?? null,
             'attempt_id' => $context['attempt_id'] ?? null,
+            'scale_code' => $scaleCode,
             'channel' => $context['channel'] ?? null,
             'pack_id' => $context['pack_id'] ?? null,
             'dir_version' => $context['dir_version'] ?? null,
@@ -55,6 +68,10 @@ final class EventRecorder
         if (\App\Support\SchemaBaseline::hasColumn('events', 'experiments_json')) {
             $experiments = $context['experiments_json'] ?? [];
             $payload['experiments_json'] = is_array($experiments) ? $experiments : [];
+        }
+        if ($this->shouldWriteScaleIdentityColumns()) {
+            $payload['scale_code_v2'] = $scaleCodeV2;
+            $payload['scale_uid'] = $scaleUid;
         }
 
         try {
@@ -180,6 +197,33 @@ final class EventRecorder
         }
 
         return $sanitized;
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    /**
+     * @param  array<int,mixed>  $values
+     */
+    private function resolveScaleIdentityString(array $values, bool $uppercase): ?string
+    {
+        foreach ($values as $value) {
+            if (! is_string($value) && ! is_numeric($value)) {
+                continue;
+            }
+            $normalized = trim((string) $value);
+            if ($normalized === '') {
+                continue;
+            }
+
+            return $uppercase ? strtoupper($normalized) : $normalized;
+        }
+
+        return null;
     }
 
     /**
