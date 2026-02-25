@@ -43,7 +43,9 @@ class ContentProbeService
             $errors[] = 'questions_failed';
         }
 
-        $packs = $this->fetchJson($baseUrl . '/api/v0.3/scales/lookup?slug=mbti');
+        $packs = $this->fetchJson(
+            $baseUrl . '/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types'
+        );
         if ($packs['ok'] ?? false) {
             $ok = (bool) (($packs['json']['ok'] ?? false) === true);
             $defaultPackId = (string) (($packs['json']['pack_id'] ?? ''));

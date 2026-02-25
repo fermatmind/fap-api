@@ -20,11 +20,16 @@ class Pr16IqRavenDemoSeeder extends Seeder
         $scale = $writer->upsertScale([
             'code' => 'IQ_RAVEN',
             'org_id' => 0,
-            'primary_slug' => 'iq-test',
+            'primary_slug' => 'iq-test-intelligence-quotient-assessment',
             'slugs_json' => [
+                'iq-test-intelligence-quotient-assessment',
                 'iq-test',
+                'iq_raven',
+                'raven-iq-test',
+                'raven-matrices',
             ],
-            'driver_type' => 'iq_test',
+            'driver_type' => 'iq_raven',
+            'assessment_driver' => 'iq_raven',
             'default_pack_id' => $defaultPackId,
             'default_region' => 'CN_MAINLAND',
             'default_locale' => 'zh-CN',

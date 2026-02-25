@@ -36,8 +36,11 @@ final class ScaleRegistrySeeder extends Seeder
         $scale = $writer->upsertScale([
             'code' => 'MBTI',
             'org_id' => 0,
-            'primary_slug' => 'mbti-test',
+            'primary_slug' => 'mbti-personality-test-16-personality-types',
             'slugs_json' => [
+                'mbti-personality-test-16-personality-types',
+                'personality-mbti-test',
+                'mbti',
                 'mbti-test',
                 'mbti-personality-test',
             ],
@@ -92,8 +95,11 @@ final class ScaleRegistrySeeder extends Seeder
         $big5 = $writer->upsertScale([
             'code' => 'BIG5_OCEAN',
             'org_id' => 0,
-            'primary_slug' => 'big5-ocean',
+            'primary_slug' => 'big-five-personality-test-ocean-model',
             'slugs_json' => [
+                'big-five-personality-test-ocean-model',
+                'big-five-personality-test',
+                'big5-ocean-test',
                 'big5-ocean',
                 'big5',
                 'big5-personality-test',
@@ -143,8 +149,9 @@ final class ScaleRegistrySeeder extends Seeder
         $clinical = $writer->upsertScale([
             'code' => 'CLINICAL_COMBO_68',
             'org_id' => 0,
-            'primary_slug' => 'clinical-combo-68',
+            'primary_slug' => 'clinical-depression-anxiety-assessment-professional-edition',
             'slugs_json' => [
+                'clinical-depression-anxiety-assessment-professional-edition',
                 'clinical-combo-68',
                 'depression-anxiety-combo',
             ],
@@ -191,8 +198,9 @@ final class ScaleRegistrySeeder extends Seeder
         $sds20 = $writer->upsertScale([
             'code' => 'SDS_20',
             'org_id' => 0,
-            'primary_slug' => 'sds-20',
+            'primary_slug' => 'depression-screening-test-standard-edition',
             'slugs_json' => [
+                'depression-screening-test-standard-edition',
                 'sds-20',
                 'zung-self-rating-depression-scale',
             ],
@@ -235,11 +243,67 @@ final class ScaleRegistrySeeder extends Seeder
         $writer->syncSlugsForScale($sds20);
         $this->command?->info('ScaleRegistrySeeder: SDS_20 scale upserted.');
 
+        $demoPackId = trim((string) config('content_packs.demo_pack_id', ''));
+        if ($demoPackId === '') {
+            $demoPackId = $defaultPackId;
+        }
+        $iqRaven = $writer->upsertScale([
+            'code' => 'IQ_RAVEN',
+            'org_id' => 0,
+            'primary_slug' => 'iq-test-intelligence-quotient-assessment',
+            'slugs_json' => [
+                'iq-test-intelligence-quotient-assessment',
+                'iq-test',
+                'iq_raven',
+                'raven-iq-test',
+                'raven-matrices',
+            ],
+            'driver_type' => 'iq_raven',
+            'assessment_driver' => 'iq_raven',
+            'default_pack_id' => $demoPackId,
+            'default_region' => $defaultRegion,
+            'default_locale' => $defaultLocale,
+            'default_dir_version' => 'IQ-RAVEN-CN-v0.3.0-DEMO',
+            'capabilities_json' => [
+                'questions' => true,
+                'enabled_in_prod' => true,
+                'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                'rollout_ratio' => 1.0,
+            ],
+            'view_policy_json' => [
+                'free_sections' => ['intro', 'summary'],
+                'blur_others' => true,
+                'teaser_percent' => 0.35,
+            ],
+            'commercial_json' => [
+                'price_tier' => 'FREE',
+            ],
+            'seo_schema_json' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Quiz',
+                'name' => 'IQ Test (Intelligence Quotient Assessment)',
+            ],
+            'seo_i18n_json' => [
+                'en' => [
+                    'title' => 'IQ Test (Intelligence Quotient Assessment)',
+                ],
+                'zh' => [
+                    'title' => '智商（IQ）测试',
+                ],
+            ],
+            'is_public' => true,
+            'is_active' => true,
+        ]);
+
+        $writer->syncSlugsForScale($iqRaven);
+        $this->command?->info('ScaleRegistrySeeder: IQ_RAVEN scale upserted.');
+
         $eq60 = $writer->upsertScale([
             'code' => 'EQ_60',
             'org_id' => 0,
-            'primary_slug' => 'eq-test',
+            'primary_slug' => 'eq-test-emotional-intelligence-assessment',
             'slugs_json' => [
+                'eq-test-emotional-intelligence-assessment',
                 'eq-test',
                 'emotional-intelligence-test',
             ],

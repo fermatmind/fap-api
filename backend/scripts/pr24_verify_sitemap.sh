@@ -90,6 +90,9 @@ $app = require $repo . '/backend/bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
+$conn = \Illuminate\Support\Facades\DB::connection();
+$conn->table('scales_registry')->delete();
+
 $rows = [];
 for ($i = 1; $i <= 50; $i++) {
     $primary = sprintf('pr24-primary-%02d', $i);
