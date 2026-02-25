@@ -1,0 +1,1108 @@
+{
+    "schema": "eq_60.questions.compiled.v1",
+    "pack_id": "EQ_60",
+    "pack_version": "v1",
+    "generated_at": "2026-02-25T02:27:40.874133Z",
+    "dimension_codes": [
+        "SA",
+        "ER",
+        "EM",
+        "RM"
+    ],
+    "question_index": {
+        "1": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "2": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "3": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "4": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "5": {
+            "dimension": "SA",
+            "direction": -1
+        },
+        "6": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "7": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "8": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "9": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "10": {
+            "dimension": "SA",
+            "direction": -1
+        },
+        "11": {
+            "dimension": "SA",
+            "direction": -1
+        },
+        "12": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "13": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "14": {
+            "dimension": "SA",
+            "direction": 1
+        },
+        "15": {
+            "dimension": "SA",
+            "direction": -1
+        },
+        "16": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "17": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "18": {
+            "dimension": "ER",
+            "direction": -1
+        },
+        "19": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "20": {
+            "dimension": "ER",
+            "direction": -1
+        },
+        "21": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "22": {
+            "dimension": "ER",
+            "direction": -1
+        },
+        "23": {
+            "dimension": "ER",
+            "direction": -1
+        },
+        "24": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "25": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "26": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "27": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "28": {
+            "dimension": "ER",
+            "direction": 1
+        },
+        "29": {
+            "dimension": "ER",
+            "direction": -1
+        },
+        "30": {
+            "dimension": "ER",
+            "direction": -1
+        },
+        "31": {
+            "dimension": "EM",
+            "direction": -1
+        },
+        "32": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "33": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "34": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "35": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "36": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "37": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "38": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "39": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "40": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "41": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "42": {
+            "dimension": "EM",
+            "direction": -1
+        },
+        "43": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "44": {
+            "dimension": "EM",
+            "direction": -1
+        },
+        "45": {
+            "dimension": "EM",
+            "direction": 1
+        },
+        "46": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "47": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "48": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "49": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "50": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "51": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "52": {
+            "dimension": "RM",
+            "direction": -1
+        },
+        "53": {
+            "dimension": "RM",
+            "direction": -1
+        },
+        "54": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "55": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "56": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "57": {
+            "dimension": "RM",
+            "direction": -1
+        },
+        "58": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "59": {
+            "dimension": "RM",
+            "direction": 1
+        },
+        "60": {
+            "dimension": "RM",
+            "direction": 1
+        }
+    },
+    "questions_doc_by_locale": {
+        "zh-CN": {
+            "schema": "fap.questions.v1",
+            "locale": "zh-CN",
+            "items": [
+                {
+                    "question_id": "1",
+                    "order": 1,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "我能精准捕捉并识别自己当下的情绪状态。"
+                },
+                {
+                    "question_id": "2",
+                    "order": 2,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "我对自己的心境和情绪起伏有着极高的敏锐度。"
+                },
+                {
+                    "question_id": "3",
+                    "order": 3,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "在表达感受时，我能用非常精准的词汇来描述我的情绪。"
+                },
+                {
+                    "question_id": "4",
+                    "order": 4,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "情绪刚一冒头，我就能立刻察觉到它。"
+                },
+                {
+                    "question_id": "5",
+                    "order": 5,
+                    "dimension": "SA",
+                    "direction": -1,
+                    "text": "我常常觉得“词不达意”，很难用语言描述清楚自己的感受。"
+                },
+                {
+                    "question_id": "6",
+                    "order": 6,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "我能非常生动、细腻地向他人描述我的情感体验。"
+                },
+                {
+                    "question_id": "7",
+                    "order": 7,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "我的大脑里有一个非常丰富的“情绪词汇库”。"
+                },
+                {
+                    "question_id": "8",
+                    "order": 8,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "我总是很清楚自己正处于什么样的心境之中。"
+                },
+                {
+                    "question_id": "9",
+                    "order": 9,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "在这一整天里，我都能很好地追踪和留意自己的情绪变化。"
+                },
+                {
+                    "question_id": "10",
+                    "order": 10,
+                    "dimension": "SA",
+                    "direction": -1,
+                    "text": "我其实很排斥跟别人谈论我的真实感受。"
+                },
+                {
+                    "question_id": "11",
+                    "order": 11,
+                    "dimension": "SA",
+                    "direction": -1,
+                    "text": "我经常对自己产生的情绪感到莫名其妙或一头雾水。"
+                },
+                {
+                    "question_id": "12",
+                    "order": 12,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "我深知自己的情绪是如何在暗中影响我的行为和决定的。"
+                },
+                {
+                    "question_id": "13",
+                    "order": 13,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "每天早晨醒来，我会有意识地去感知一下自己今天的状态和心情。"
+                },
+                {
+                    "question_id": "14",
+                    "order": 14,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "把心里的感受倾诉出来，通常能让我心情舒畅不少。"
+                },
+                {
+                    "question_id": "15",
+                    "order": 15,
+                    "dimension": "SA",
+                    "direction": -1,
+                    "text": "一旦手头有事要忙，我几乎完全顾不上照顾自己的情绪。"
+                },
+                {
+                    "question_id": "16",
+                    "order": 16,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "我有能力驾驭自己的情绪。"
+                },
+                {
+                    "question_id": "17",
+                    "order": 17,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "我的情绪通常都在我的掌控范围之内。"
+                },
+                {
+                    "question_id": "18",
+                    "order": 18,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "遇到突发情况时，我经常会“上头”或者被情绪冲昏头脑。"
+                },
+                {
+                    "question_id": "19",
+                    "order": 19,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "遇到不开心的事情，我能很快从负面情绪中“翻篇”。"
+                },
+                {
+                    "question_id": "20",
+                    "order": 20,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "一旦有什么事惹恼了我，我很难让自己迅速平复下来。"
+                },
+                {
+                    "question_id": "21",
+                    "order": 21,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "我的决策很少会被一时的情绪波动所左右。"
+                },
+                {
+                    "question_id": "22",
+                    "order": 22,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "我有时会被排山倒海的情绪彻底淹没，感到无所适从。"
+                },
+                {
+                    "question_id": "23",
+                    "order": 23,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "我经常因为情绪太糟糕，导致一整天什么事都干不下去。"
+                },
+                {
+                    "question_id": "24",
+                    "order": 24,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "感到低落或提不起劲的时候，我总有办法让自己重新振作起来。"
+                },
+                {
+                    "question_id": "25",
+                    "order": 25,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "我不会任由自己被情绪牵着鼻子走。"
+                },
+                {
+                    "question_id": "26",
+                    "order": 26,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "是我在控制情绪，而不是情绪在控制我。"
+                },
+                {
+                    "question_id": "27",
+                    "order": 27,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "我极少发火或暴怒。"
+                },
+                {
+                    "question_id": "28",
+                    "order": 28,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "即使在巨大的压力下，我也能保持镇定自若。"
+                },
+                {
+                    "question_id": "29",
+                    "order": 29,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "在气头上时，我偶尔会说出或做出让自己事后懊悔不已的事情。"
+                },
+                {
+                    "question_id": "30",
+                    "order": 30,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "骨子里，我是一个容易冲动行事的人。"
+                },
+                {
+                    "question_id": "31",
+                    "order": 31,
+                    "dimension": "EM",
+                    "direction": -1,
+                    "text": "我有时真的搞不懂身边的人到底在想什么、感觉如何。"
+                },
+                {
+                    "question_id": "32",
+                    "order": 32,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "我非常擅长捕捉和解读他人的肢体语言。"
+                },
+                {
+                    "question_id": "33",
+                    "order": 33,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "对于周围人的情绪变化，我有着极强的嗅觉和洞察力。"
+                },
+                {
+                    "question_id": "34",
+                    "order": 34,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "看到别人遭受痛苦，我也会感同身受地觉得非常难过。"
+                },
+                {
+                    "question_id": "35",
+                    "order": 35,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "我很擅长解读那些“只可意会不可言传”的非语言暗示。"
+                },
+                {
+                    "question_id": "36",
+                    "order": 36,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "看到别人陷入困境时，我总是忍不住想要出手相助。"
+                },
+                {
+                    "question_id": "37",
+                    "order": 37,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "很多时候，我只需看人一眼，就能猜透他们的心思。"
+                },
+                {
+                    "question_id": "38",
+                    "order": 38,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "我是一个共情能力极强的人，很容易和别人产生共鸣。"
+                },
+                {
+                    "question_id": "39",
+                    "order": 39,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "单靠观察别人的微表情，我就能读懂很多潜在的信息。"
+                },
+                {
+                    "question_id": "40",
+                    "order": 40,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "就算对方什么都不说，我也能敏锐地察觉到他的失落或不悦。"
+                },
+                {
+                    "question_id": "41",
+                    "order": 41,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "即使别人把心事藏在肚子里，我也能精准地体会到他们的感受。"
+                },
+                {
+                    "question_id": "42",
+                    "order": 42,
+                    "dimension": "EM",
+                    "direction": -1,
+                    "text": "我有时觉得别人就像一本难懂的书，完全猜不透。"
+                },
+                {
+                    "question_id": "43",
+                    "order": 43,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "我对这个世界上的贫困和不公现象感到深深的关切。"
+                },
+                {
+                    "question_id": "44",
+                    "order": 44,
+                    "dimension": "EM",
+                    "direction": -1,
+                    "text": "别人的悲惨遭遇很难触动我，我通常没什么波澜。"
+                },
+                {
+                    "question_id": "45",
+                    "order": 45,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "我能毫不费力地站到别人的立场去体会他们的喜怒哀乐。"
+                },
+                {
+                    "question_id": "46",
+                    "order": 46,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我发自内心地享受与人打交道的社交场合。"
+                },
+                {
+                    "question_id": "47",
+                    "order": 47,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "在社交场合中，我总是表现得游刃有余、充满自信。"
+                },
+                {
+                    "question_id": "48",
+                    "order": 48,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我认为自己是一个有吸引力、自带气场的人。"
+                },
+                {
+                    "question_id": "49",
+                    "order": 49,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我是个“气氛组选手”，总能轻易把别人逗乐。"
+                },
+                {
+                    "question_id": "50",
+                    "order": 50,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我具备非常出色的人际交往手腕。"
+                },
+                {
+                    "question_id": "51",
+                    "order": 51,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我具有很强的说服力，很容易让别人接受我的观点。"
+                },
+                {
+                    "question_id": "52",
+                    "order": 52,
+                    "dimension": "RM",
+                    "direction": -1,
+                    "text": "我其实很反感那种刻意逢迎的功利性社交（Networking）。"
+                },
+                {
+                    "question_id": "53",
+                    "order": 53,
+                    "dimension": "RM",
+                    "direction": -1,
+                    "text": "在人群中，我总是尽量降低存在感，不想引起别人的注意。"
+                },
+                {
+                    "question_id": "54",
+                    "order": 54,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "只要有我在的聚会，绝对少不了欢乐和高潮。"
+                },
+                {
+                    "question_id": "55",
+                    "order": 55,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我对深度了解别人充满热情，喜欢和人建立真实的连接。"
+                },
+                {
+                    "question_id": "56",
+                    "order": 56,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我拥有几段让我倍感珍惜和享受的高质量友谊。"
+                },
+                {
+                    "question_id": "57",
+                    "order": 57,
+                    "dimension": "RM",
+                    "direction": -1,
+                    "text": "在和人打交道时，我常常会觉得有些局促和害羞。"
+                },
+                {
+                    "question_id": "58",
+                    "order": 58,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我非常享受和团队成员并肩作战、协同配合的感觉。"
+                },
+                {
+                    "question_id": "59",
+                    "order": 59,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "我是一个绝佳的倾听者，别人都愿意对我敞开心扉。"
+                },
+                {
+                    "question_id": "60",
+                    "order": 60,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "在别人眼里，我是一个非常有温度、随和友善的人。"
+                }
+            ]
+        },
+        "en": {
+            "schema": "fap.questions.v1",
+            "locale": "en",
+            "items": [
+                {
+                    "question_id": "1",
+                    "order": 1,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I am very good at identifying the emotions I am feeling."
+                },
+                {
+                    "question_id": "2",
+                    "order": 2,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I am highly aware of how I am feeling (my moods, emotions, etc.)."
+                },
+                {
+                    "question_id": "3",
+                    "order": 3,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I use very specific words to talk about how I am feeling."
+                },
+                {
+                    "question_id": "4",
+                    "order": 4,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I recognize emotions the moment I feel them."
+                },
+                {
+                    "question_id": "5",
+                    "order": 5,
+                    "dimension": "SA",
+                    "direction": -1,
+                    "text": "I find it hard to put how I am feeling into words."
+                },
+                {
+                    "question_id": "6",
+                    "order": 6,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I describe my emotional experiences vividly."
+                },
+                {
+                    "question_id": "7",
+                    "order": 7,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I have a rich emotional vocabulary."
+                },
+                {
+                    "question_id": "8",
+                    "order": 8,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I am consistently aware of what kind of mood I'm in."
+                },
+                {
+                    "question_id": "9",
+                    "order": 9,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I am good at keeping track of how I'm feeling throughout the day."
+                },
+                {
+                    "question_id": "10",
+                    "order": 10,
+                    "dimension": "SA",
+                    "direction": -1,
+                    "text": "I don't really like talking about the way I feel."
+                },
+                {
+                    "question_id": "11",
+                    "order": 11,
+                    "dimension": "SA",
+                    "direction": -1,
+                    "text": "I often feel confused by what I'm feeling."
+                },
+                {
+                    "question_id": "12",
+                    "order": 12,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "I understand how my feelings influence my behavior."
+                },
+                {
+                    "question_id": "13",
+                    "order": 13,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "When I get up in the morning, I consciously reflect on how I feel."
+                },
+                {
+                    "question_id": "14",
+                    "order": 14,
+                    "dimension": "SA",
+                    "direction": 1,
+                    "text": "Talking about how I am feeling usually improves my mood."
+                },
+                {
+                    "question_id": "15",
+                    "order": 15,
+                    "dimension": "SA",
+                    "direction": -1,
+                    "text": "I pay little attention to my emotions when there is a job to be done."
+                },
+                {
+                    "question_id": "16",
+                    "order": 16,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "I have control over my emotions."
+                },
+                {
+                    "question_id": "17",
+                    "order": 17,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "My emotions are under control."
+                },
+                {
+                    "question_id": "18",
+                    "order": 18,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "I often get caught up in the heat of the moment."
+                },
+                {
+                    "question_id": "19",
+                    "order": 19,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "I move on very quickly from negative emotions and bad moods."
+                },
+                {
+                    "question_id": "20",
+                    "order": 20,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "Once something upsets me, I find it hard to calm myself back down."
+                },
+                {
+                    "question_id": "21",
+                    "order": 21,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "My moods rarely affect my decisions."
+                },
+                {
+                    "question_id": "22",
+                    "order": 22,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "I am sometimes overwhelmed by my emotions."
+                },
+                {
+                    "question_id": "23",
+                    "order": 23,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "I often can't go about my day because of the emotions I am feeling."
+                },
+                {
+                    "question_id": "24",
+                    "order": 24,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "I find it easy to cheer myself up when I am feeling sad or unmotivated."
+                },
+                {
+                    "question_id": "25",
+                    "order": 25,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "I don't let myself get carried away with my feelings."
+                },
+                {
+                    "question_id": "26",
+                    "order": 26,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "I control my emotions; my emotions don't control me."
+                },
+                {
+                    "question_id": "27",
+                    "order": 27,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "I rarely get angry."
+                },
+                {
+                    "question_id": "28",
+                    "order": 28,
+                    "dimension": "ER",
+                    "direction": 1,
+                    "text": "I stay calm under stress."
+                },
+                {
+                    "question_id": "29",
+                    "order": 29,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "In the heat of the moment, I sometimes say or do things I later regret."
+                },
+                {
+                    "question_id": "30",
+                    "order": 30,
+                    "dimension": "ER",
+                    "direction": -1,
+                    "text": "I am impulsive by nature."
+                },
+                {
+                    "question_id": "31",
+                    "order": 31,
+                    "dimension": "EM",
+                    "direction": -1,
+                    "text": "I sometimes find it hard to figure out how people around me are feeling."
+                },
+                {
+                    "question_id": "32",
+                    "order": 32,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I am very good at reading body language."
+                },
+                {
+                    "question_id": "33",
+                    "order": 33,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I have an acute sense of how people around me are feeling."
+                },
+                {
+                    "question_id": "34",
+                    "order": 34,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I am easily upset by the pain of other people."
+                },
+                {
+                    "question_id": "35",
+                    "order": 35,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I am very good at reading nonverbal cues."
+                },
+                {
+                    "question_id": "36",
+                    "order": 36,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I often feel compelled to act when I see someone suffering."
+                },
+                {
+                    "question_id": "37",
+                    "order": 37,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I can often tell how people feel just by looking at them."
+                },
+                {
+                    "question_id": "38",
+                    "order": 38,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I am a very empathetic person."
+                },
+                {
+                    "question_id": "39",
+                    "order": 39,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I understand a lot just from other people's facial expressions."
+                },
+                {
+                    "question_id": "40",
+                    "order": 40,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I can tell if someone is upset without them having to say anything."
+                },
+                {
+                    "question_id": "41",
+                    "order": 41,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I am good at understanding how people feel, even when they don't say so out loud."
+                },
+                {
+                    "question_id": "42",
+                    "order": 42,
+                    "dimension": "EM",
+                    "direction": -1,
+                    "text": "I sometimes find other people hard to read."
+                },
+                {
+                    "question_id": "43",
+                    "order": 43,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I am very concerned about poverty and injustice in the world."
+                },
+                {
+                    "question_id": "44",
+                    "order": 44,
+                    "dimension": "EM",
+                    "direction": -1,
+                    "text": "I am not moved by other people's tragic stories."
+                },
+                {
+                    "question_id": "45",
+                    "order": 45,
+                    "dimension": "EM",
+                    "direction": 1,
+                    "text": "I can easily empathize with others' feelings."
+                },
+                {
+                    "question_id": "46",
+                    "order": 46,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I really enjoy socializing."
+                },
+                {
+                    "question_id": "47",
+                    "order": 47,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I am confident in social situations."
+                },
+                {
+                    "question_id": "48",
+                    "order": 48,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I consider myself to be charming."
+                },
+                {
+                    "question_id": "49",
+                    "order": 49,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I am very good at getting people to laugh."
+                },
+                {
+                    "question_id": "50",
+                    "order": 50,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I have very good social skills."
+                },
+                {
+                    "question_id": "51",
+                    "order": 51,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I am a very persuasive person."
+                },
+                {
+                    "question_id": "52",
+                    "order": 52,
+                    "dimension": "RM",
+                    "direction": -1,
+                    "text": "I don't really like networking."
+                },
+                {
+                    "question_id": "53",
+                    "order": 53,
+                    "dimension": "RM",
+                    "direction": -1,
+                    "text": "I try not to draw attention to myself."
+                },
+                {
+                    "question_id": "54",
+                    "order": 54,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I bring fun and excitement to social gatherings."
+                },
+                {
+                    "question_id": "55",
+                    "order": 55,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I really enjoy getting to know people better."
+                },
+                {
+                    "question_id": "56",
+                    "order": 56,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I have valuable friendships that I enjoy."
+                },
+                {
+                    "question_id": "57",
+                    "order": 57,
+                    "dimension": "RM",
+                    "direction": -1,
+                    "text": "I feel shy in social interactions."
+                },
+                {
+                    "question_id": "58",
+                    "order": 58,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I enjoy working together with others."
+                },
+                {
+                    "question_id": "59",
+                    "order": 59,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "I am a good listener."
+                },
+                {
+                    "question_id": "60",
+                    "order": 60,
+                    "dimension": "RM",
+                    "direction": 1,
+                    "text": "Other people see me as a warm and kind person."
+                }
+            ]
+        }
+    }
+}

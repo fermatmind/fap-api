@@ -1,0 +1,82 @@
+{
+    "schema": "eq_60.options.compiled.v1",
+    "pack_id": "EQ_60",
+    "pack_version": "v1",
+    "generated_at": "2026-02-25T02:27:40.874177Z",
+    "codes": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+    ],
+    "labels_by_locale": {
+        "zh-CN": [
+            "非常不同意",
+            "不同意",
+            "中立",
+            "同意",
+            "非常同意"
+        ],
+        "en": [
+            "Strongly Disagree",
+            "Disagree",
+            "Neutral",
+            "Agree",
+            "Strongly Agree"
+        ]
+    },
+    "score_map": {
+        "A": 1,
+        "B": 2,
+        "C": 3,
+        "D": 4,
+        "E": 5
+    },
+    "option_anchors_by_locale": {
+        "zh-CN": [
+            {
+                "code": "A",
+                "label": "非常不同意"
+            },
+            {
+                "code": "B",
+                "label": "不同意"
+            },
+            {
+                "code": "C",
+                "label": "中立"
+            },
+            {
+                "code": "D",
+                "label": "同意"
+            },
+            {
+                "code": "E",
+                "label": "非常同意"
+            }
+        ],
+        "en": [
+            {
+                "code": "A",
+                "label": "Strongly Disagree"
+            },
+            {
+                "code": "B",
+                "label": "Disagree"
+            },
+            {
+                "code": "C",
+                "label": "Neutral"
+            },
+            {
+                "code": "D",
+                "label": "Agree"
+            },
+            {
+                "code": "E",
+                "label": "Strongly Agree"
+            }
+        ]
+    }
+}

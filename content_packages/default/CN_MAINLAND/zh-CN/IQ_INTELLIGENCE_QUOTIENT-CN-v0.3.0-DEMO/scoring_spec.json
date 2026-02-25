@@ -1,0 +1,41 @@
+{
+    "version": "2026.02",
+    "scale_code": "IQ_RAVEN",
+    "driver_type": "iq_test",
+    "engine_version": "v1_iq30_unscored",
+    "scoring_mode": "pending_answer_key",
+    "item_bank": {
+        "bank_id": "IQ_RAVEN_30_SVG_CN_DEMO",
+        "item_count": 30,
+        "option_codes": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F"
+        ],
+        "sections": [
+            {
+                "code": "matrix",
+                "count": 9,
+                "option_count": 5
+            },
+            {
+                "code": "odd",
+                "count": 10,
+                "option_count": 5
+            },
+            {
+                "code": "series",
+                "count": 11,
+                "option_count": 6
+            }
+        ]
+    },
+    "quality_rules": {
+        "speeding_seconds_lt": 30,
+        "straightlining_run_len_gte": 8
+    },
+    "schema": "fap.report.rules.v1"
+}

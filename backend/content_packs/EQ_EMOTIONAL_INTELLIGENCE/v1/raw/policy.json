@@ -1,0 +1,476 @@
+{
+  "schema": "eq60.policy.v1",
+  "pack_id": "EQ_GOLEMAN_60",
+  "pack_version": "v1",
+  "scale_code": "EQ_GOLEMAN_60",
+  "engine_version": "eq60_v1.0_normed_validity",
+  "spec_version": "eq60_spec_v1",
+  "item_bank_version": "eq60_items_bilingual_v1",
+  "norms_version": "bootstrap_2026_02",
+  "answer_scale": {
+    "min": 1,
+    "max": 5,
+    "mid": 3,
+    "mapping": {
+      "A": 1,
+      "B": 2,
+      "C": 3,
+      "D": 4,
+      "E": 5
+    }
+  },
+  "scoring": {
+    "reverse_items": [
+      5,
+      10,
+      11,
+      15,
+      18,
+      20,
+      22,
+      23,
+      29,
+      30,
+      31,
+      42,
+      44,
+      52,
+      53,
+      57
+    ],
+    "dimensions": {
+      "self_awareness": {
+        "code": "SA",
+        "qids": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "emotion_regulation": {
+        "code": "ER",
+        "qids": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ]
+      },
+      "empathy": {
+        "code": "EM",
+        "qids": [
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45
+        ]
+      },
+      "relationship_management": {
+        "code": "RM",
+        "qids": [
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60
+        ]
+      }
+    },
+    "aggregation": {
+      "dimension_raw_sum": "sum(scored_items_in_dimension)",
+      "global_raw_sum": "sum(all_scored_items)"
+    },
+    "standardization": {
+      "target_mean": 100,
+      "target_sd": 15,
+      "clamp_min": 55,
+      "clamp_max": 145,
+      "bootstrap_params": {
+        "dimension": {
+          "mu": 53.5,
+          "sigma": 7.5
+        },
+        "global": {
+          "mu": 215,
+          "sigma": 28
+        }
+      },
+      "global_method": "global_z = mean(z_SA, z_ER, z_EM, z_RM); std = 100 + 15*global_z; clamp"
+    }
+  },
+  "maturity_bands": {
+    "bands": [
+      {
+        "bucket": "baseline",
+        "min": 55,
+        "max_exclusive": 85,
+        "label_en": "Baseline",
+        "label_zh": "觉察盲区"
+      },
+      {
+        "bucket": "developing",
+        "min": 85,
+        "max_exclusive": 93,
+        "label_en": "Developing",
+        "label_zh": "发展中"
+      },
+      {
+        "bucket": "competent",
+        "min": 93,
+        "max_exclusive": 108,
+        "label_en": "Competent",
+        "label_zh": "稳定可用"
+      },
+      {
+        "bucket": "proficient",
+        "min": 108,
+        "max_exclusive": 116,
+        "label_en": "Proficient",
+        "label_zh": "成熟"
+      },
+      {
+        "bucket": "exceptional",
+        "min": 116,
+        "max_exclusive": 146,
+        "label_en": "Exceptional",
+        "label_zh": "卓越稀缺"
+      }
+    ]
+  },
+  "validity": {
+    "quality_levels": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "time_seconds_thresholds": {
+      "C_below": 120,
+      "D_below": 75
+    },
+    "longstring_thresholds": {
+      "C_at_or_above": 25,
+      "D_at_or_above": 35
+    },
+    "response_style_thresholds": {
+      "extreme_rate_C_at_or_above": 0.85,
+      "neutral_rate_C_at_or_above": 0.7
+    },
+    "inconsistency_pairs": [
+      [
+        1,
+        11
+      ],
+      [
+        16,
+        22
+      ],
+      [
+        32,
+        39
+      ],
+      [
+        46,
+        52
+      ],
+      [
+        27,
+        30
+      ],
+      [
+        10,
+        14
+      ],
+      [
+        34,
+        44
+      ],
+      [
+        47,
+        57
+      ],
+      [
+        28,
+        18
+      ],
+      [
+        41,
+        31
+      ]
+    ],
+    "inconsistency_thresholds": {
+      "C_at_or_above": 18,
+      "D_at_or_above": 24
+    },
+    "flags": {
+      "SPEEDING": "completion_time_seconds below threshold",
+      "LONGSTRING": "longstring_max at/above threshold",
+      "EXTREME_RESPONSE_BIAS": "extreme_rate at/above threshold",
+      "NEUTRAL_RESPONSE_BIAS": "neutral_rate at/above threshold",
+      "INCONSISTENT": "inconsistency_index at/above threshold"
+    },
+    "grade_rule": "Start at A. Apply D rules first, then C rules. Keep the worst grade."
+  },
+  "norms": {
+    "status_values": [
+      "VALID",
+      "PROVISIONAL",
+      "INSUFFICIENT"
+    ],
+    "min_samples_per_group": 300,
+    "inclusion_rule": "only quality A/B attempts enter norm pool",
+    "group_keys": [
+      "locale",
+      "country",
+      "age_band",
+      "gender"
+    ],
+    "fallback_chain": [
+      [
+        "locale",
+        "country",
+        "age_band",
+        "gender"
+      ],
+      [
+        "locale",
+        "country",
+        "age_band"
+      ],
+      [
+        "locale",
+        "country"
+      ],
+      [
+        "locale"
+      ],
+      []
+    ],
+    "percentile_method": "When norms are insufficient, approximate percentile from standard score using Normal(100,15)."
+  },
+  "tags": {
+    "primary_profile_priority": [
+      "profile:balanced_high_eq",
+      "profile:emotion_leader",
+      "profile:compassion_overload",
+      "profile:overthinking_burn",
+      "profile:social_masking",
+      "profile:cool_detached"
+    ],
+    "rules": [
+      {
+        "tag": "profile:overthinking_burn",
+        "when": {
+          "all": [
+            {
+              "metric": "SA",
+              "op": ">=",
+              "value": 108
+            },
+            {
+              "metric": "ER",
+              "op": "<=",
+              "value": 92
+            }
+          ]
+        },
+        "add_tags": [
+          "focus:regulation_skills"
+        ]
+      },
+      {
+        "tag": "profile:social_masking",
+        "when": {
+          "all": [
+            {
+              "metric": "RM",
+              "op": ">=",
+              "value": 108
+            },
+            {
+              "metric": "SA",
+              "op": "<=",
+              "value": 92
+            }
+          ]
+        },
+        "add_tags": [
+          "focus:self_connection"
+        ]
+      },
+      {
+        "tag": "profile:compassion_overload",
+        "when": {
+          "all": [
+            {
+              "metric": "EM",
+              "op": ">=",
+              "value": 115
+            },
+            {
+              "metric": "ER",
+              "op": "<=",
+              "value": 92
+            }
+          ]
+        },
+        "add_tags": [
+          "focus:boundary_setting"
+        ]
+      },
+      {
+        "tag": "profile:cool_detached",
+        "when": {
+          "all": [
+            {
+              "metric": "ER",
+              "op": ">=",
+              "value": 108
+            },
+            {
+              "metric": "EM",
+              "op": "<=",
+              "value": 92
+            }
+          ]
+        },
+        "add_tags": [
+          "focus:empathy_practice"
+        ]
+      },
+      {
+        "tag": "profile:emotion_leader",
+        "when": {
+          "all": [
+            {
+              "metric": "RM",
+              "op": ">=",
+              "value": 115
+            },
+            {
+              "metric": "EM",
+              "op": ">=",
+              "value": 108
+            }
+          ]
+        },
+        "add_tags": [
+          "strength:influence"
+        ]
+      },
+      {
+        "tag": "profile:balanced_high_eq",
+        "when": {
+          "all": [
+            {
+              "metric": "SA",
+              "op": ">=",
+              "value": 108
+            },
+            {
+              "metric": "ER",
+              "op": ">=",
+              "value": 108
+            },
+            {
+              "metric": "EM",
+              "op": ">=",
+              "value": 108
+            },
+            {
+              "metric": "RM",
+              "op": ">=",
+              "value": 108
+            }
+          ]
+        },
+        "add_tags": []
+      }
+    ]
+  },
+  "report": {
+    "variants": [
+      "free",
+      "full"
+    ],
+    "sections_free": [
+      "disclaimer_top",
+      "quality_notice",
+      "global_overview",
+      "self_awareness",
+      "emotion_regulation",
+      "empathy",
+      "relationship_management",
+      "methodology",
+      "disclaimer_bottom"
+    ],
+    "sections_full": [
+      "disclaimer_top",
+      "quality_notice",
+      "global_overview",
+      "self_awareness",
+      "emotion_regulation",
+      "empathy",
+      "relationship_management",
+      "cross_quadrant_insight",
+      "action_plan_14d",
+      "methodology",
+      "disclaimer_bottom"
+    ],
+    "access_modules": {
+      "free": [
+        "eq60.meta",
+        "eq60.summary",
+        "eq60.quadrants"
+      ],
+      "paid": [
+        "eq60.insights",
+        "eq60.action_plan"
+      ]
+    }
+  }
+}

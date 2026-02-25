@@ -1,0 +1,75 @@
+{
+    "schema": "fap.landing.meta.v1",
+    "schema_version": 1,
+    "scale_code": "IQ_RAVEN",
+    "pack_id": "IQ-RAVEN-CN-v0.3.0-DEMO",
+    "locale": "zh-CN",
+    "region": "CN_MAINLAND",
+    "slug": "iq-raven-demo",
+    "last_updated": "2026-02-24",
+    "index_policy": {
+        "landing": {
+            "index": true,
+            "follow": true
+        },
+        "take": {
+            "index": false,
+            "follow": false,
+            "nocache": true
+        },
+        "result": {
+            "index": false,
+            "follow": false,
+            "nocache": true
+        },
+        "share": {
+            "index": false,
+            "follow": false,
+            "nocache": true
+        }
+    },
+    "landing": {
+        "canonical_path": "/test/iq-raven-demo",
+        "canonical_slug": "iq-raven-demo",
+        "variants": [
+            {
+                "variant_code": "svg_grid_30",
+                "label_zh": "30题图形推理版",
+                "question_count": 30,
+                "test_time_minutes": "15-25"
+            }
+        ],
+        "faq_list": [
+            {
+                "question": "这是什么测验？",
+                "answer": "这是 30 题矩阵推理原型版，用于验证题库与提交流程。"
+            },
+            {
+                "question": "需要多久完成？",
+                "answer": "全量 30 题通常需要 15-25 分钟。"
+            },
+            {
+                "question": "会直接给出 IQ 分数吗？",
+                "answer": "当前阶段提交结果为未评分（unscored），用于采集与链路验证。"
+            }
+        ],
+        "data_snippet": {
+            "table": {
+                "rows": [
+                    [
+                        "题量（3档）",
+                        "30题（matrix 9 / odd 10 / series 11）"
+                    ],
+                    [
+                        "预计用时（3档）",
+                        "15-25分钟"
+                    ],
+                    [
+                        "输出内容",
+                        "未评分提交状态与作答质量提示"
+                    ]
+                ]
+            }
+        }
+    }
+}

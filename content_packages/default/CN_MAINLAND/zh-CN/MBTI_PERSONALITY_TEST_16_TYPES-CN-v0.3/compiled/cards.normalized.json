@@ -1,0 +1,3576 @@
+{
+    "schema": "fap.content.compiled.cards.v1",
+    "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
+    "version": "v0.3",
+    "generated_at": "2026-02-21T04:27:39+00:00",
+    "sections": {
+        "career": {
+            "items": [
+                {
+                    "id": "career_role_SJ",
+                    "section": "career",
+                    "title": "SJ 职业底盘：把秩序做成生产力",
+                    "desc": "你更适合在“规则清晰、责任明确、可持续交付”的环境里建立优势。",
+                    "bullets": [
+                        "偏爱稳定可控的流程与标准",
+                        "擅长把工作做成可复制的体系",
+                        "对风险与细节更敏感"
+                    ],
+                    "tips": [
+                        "把你擅长的流程沉淀成模板/规范，会很快形成护城河",
+                        "避免长期处在“目标不清、频繁变更”的团队里消耗"
+                    ],
+                    "tags": [
+                        "kind:role",
+                        "role:SJ",
+                        "career:operations",
+                        "career:process"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "tags_any": [
+                            "role:SJ"
+                        ]
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_role_SP",
+                    "section": "career",
+                    "title": "SP 职业底盘：在变化里抓机会",
+                    "desc": "你更适合“节奏快、反馈快、允许试错”的场景，用行动换结果。",
+                    "bullets": [
+                        "临场应变强，敢先做再调",
+                        "擅长解决现场问题",
+                        "对体验与效率敏感"
+                    ],
+                    "tips": [
+                        "选岗位看‘反馈周期’，越短越能发挥优势",
+                        "给自己补一套轻量复盘机制，避免只忙不升级"
+                    ],
+                    "tags": [
+                        "kind:role",
+                        "role:SP",
+                        "career:execution",
+                        "career:field"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "tags_any": [
+                            "role:SP"
+                        ]
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_role_NT",
+                    "section": "career",
+                    "title": "NT 职业底盘：用模型与系统赢",
+                    "desc": "你更适合“复杂问题、强挑战、需要抽象与策略”的领域建立核心竞争力。",
+                    "bullets": [
+                        "擅长搭框架、做系统设计",
+                        "喜欢高难度与高自由度",
+                        "对逻辑一致性要求高"
+                    ],
+                    "tips": [
+                        "把你的思考固化成方法论/工具，会形成长期复利",
+                        "注意沟通时先对齐目标，再谈推导过程"
+                    ],
+                    "tags": [
+                        "kind:role",
+                        "role:NT",
+                        "career:strategy",
+                        "career:analysis"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "tags_any": [
+                            "role:NT"
+                        ]
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_role_NF",
+                    "section": "career",
+                    "title": "NF 职业底盘：用影响力与意义驱动",
+                    "desc": "你更适合“人和关系很重要、需要共情与引导”的场景，把愿景变成团队行动。",
+                    "bullets": [
+                        "擅长理解人、激发人",
+                        "更在意价值与使命感",
+                        "能把分歧拉回共识"
+                    ],
+                    "tips": [
+                        "选择能“看见人”的组织文化，你会更容易持续发光",
+                        "建立边界与规则，避免把能量用在无效照顾上"
+                    ],
+                    "tags": [
+                        "kind:role",
+                        "role:NF",
+                        "career:people",
+                        "career:impact"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "tags_any": [
+                            "role:NF"
+                        ]
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_EI_E_strong",
+                    "section": "career",
+                    "title": "E 偏好较强：前台协作型岗位更加分",
+                    "desc": "你在交流、协作、协调资源的场景中更容易进入状态并拿到结果。",
+                    "bullets": [
+                        "更适合对外沟通/跨团队协作",
+                        "在快节奏会议与现场推进中更强",
+                        "适合需要影响他人的岗位"
+                    ],
+                    "tips": [
+                        "把你的沟通优势沉淀成 SOP（会议节奏、推进模板）",
+                        "注意把输出落到“决策与行动项”，避免只热闹不收敛"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:E",
+                        "state:strong",
+                        "career:collaboration"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_EI_I_strong",
+                    "section": "career",
+                    "title": "I 偏好较强：深度型岗位更能吃到红利",
+                    "desc": "你在独立研究、深度分析、复杂推演的场景里更稳定地产出高质量成果。",
+                    "bullets": [
+                        "适合研究/分析/工程/写作等深度工作",
+                        "对复杂问题能持续钻研",
+                        "更需要低打扰环境"
+                    ],
+                    "tips": [
+                        "用“先写后聊”提高协作效率：先发 3 行结论+证据",
+                        "争取固定深度时间块，产出会显著提升"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:I",
+                        "state:strong",
+                        "career:deepwork"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_SN_S_strong",
+                    "section": "career",
+                    "title": "S 偏好较强：流程、运营、交付更稳",
+                    "desc": "你更擅长把事情做成可执行的步骤与标准，在交付体系中形成稳定优势。",
+                    "bullets": [
+                        "适合运营/项目/质量/供应链/财务等",
+                        "对细节与风险更敏感",
+                        "更相信验证与经验"
+                    ],
+                    "tips": [
+                        "用 checklist/模板把经验产品化，你会越做越轻松",
+                        "刻意补“趋势视角”：每月抬头看一次方向与外部变化"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:S",
+                        "state:strong",
+                        "career:operations"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "S",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_SN_N_strong",
+                    "section": "career",
+                    "title": "N 偏好较强：创新、策略、产品更适配",
+                    "desc": "你更擅长从模式与可能性里提炼方向，在不确定中做出更有想象力的方案。",
+                    "bullets": [
+                        "适合产品/战略/咨询/创意/研究等",
+                        "能快速抽象并搭框架",
+                        "对趋势与机会更敏感"
+                    ],
+                    "tips": [
+                        "把灵感落到 3 条可执行 next step，避免停在想法里",
+                        "找一位 S 偏好伙伴做落地校验，会更快成事"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:N",
+                        "state:strong",
+                        "career:strategy"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "N",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_TF_T_strong",
+                    "section": "career",
+                    "title": "T（理性）偏好较强：规则与决策岗位更占优",
+                    "desc": "你更擅长用标准与逻辑推进决策，在压力下也能保持清晰与一致性。",
+                    "bullets": [
+                        "适合管理、策略、谈判、工程、数据等",
+                        "敢做取舍，能扛关键决策",
+                        "喜欢明确指标与验收"
+                    ],
+                    "tips": [
+                        "对人际沟通补一句“我理解你的诉求”，阻力会小很多",
+                        "把观点写成“结论-依据-影响”，推进更快"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:T",
+                        "state:strong",
+                        "career:decision"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_TF_F_strong",
+                    "section": "career",
+                    "title": "F（感受）偏好较强：人和氛围是你的杠杆",
+                    "desc": "你更擅长理解需求、维护关系与凝聚团队，在服务与影响力场景里更强。",
+                    "bullets": [
+                        "适合 HR/教育/咨询/用户运营/社区等",
+                        "更能提升团队信任与稳定",
+                        "擅长冲突调停与共识建立"
+                    ],
+                    "tips": [
+                        "把边界写清楚：可做/不可做/需要交换什么",
+                        "用数据或事实补强判断，避免被情绪带着跑"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:F",
+                        "state:strong",
+                        "career:people"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "F",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_JP_J_strong",
+                    "section": "career",
+                    "title": "J 偏好较强：项目与管理更能发挥",
+                    "desc": "你更擅长规划、推进、闭环与交付，能把团队节奏拉稳。",
+                    "bullets": [
+                        "适合项目管理/运营管理/带团队",
+                        "对节点与风险敏感",
+                        "执行与收尾能力强"
+                    ],
+                    "tips": [
+                        "给计划留 15% 缓冲，抗波动更强",
+                        "练习“60 分先交付”，再迭代到 90 分"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:J",
+                        "state:strong",
+                        "career:management"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_JP_P_strong",
+                    "section": "career",
+                    "title": "P 偏好较强：敏捷型、探索型岗位更适配",
+                    "desc": "你更擅长在变化中试错迭代、快速调整，适合需要探索与应变的工作。",
+                    "bullets": [
+                        "适合创业/增长/销售/创意/现场交付等",
+                        "临场反应快，适应变化强",
+                        "能在不确定中抓机会"
+                    ],
+                    "tips": [
+                        "给探索设收束点：到点必须定一个版本",
+                        "用看板管理任务，避免注意力发散"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:P",
+                        "state:strong",
+                        "career:agile"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_AT_A_strong",
+                    "section": "career",
+                    "title": "A（坚定）偏好较强：更能稳住并扛住压力场景",
+                    "desc": "你更倾向在压力下先稳住节奏与判断，更敢拍板推进，适合承担明确责任与关键节点交付。",
+                    "bullets": [
+                        "关键时刻更敢做决策",
+                        "更容易稳定输出与扛责任",
+                        "更少被情绪波动拖慢节奏"
+                    ],
+                    "tips": [
+                        "把优势落到“节点-负责人-验收标准”，推进会更快",
+                        "注意留出校准机制：重大决策加一次反向验证"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:A",
+                        "state:strong",
+                        "career:stress",
+                        "career:delivery"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_AT_T_strong",
+                    "section": "career",
+                    "title": "T（敏感）偏好较强：更擅长校准风险与提升质量",
+                    "desc": "你更倾向在压力下自我校准、反复检查细节与风险，适合做质量把控、策略复盘与持续改进。",
+                    "bullets": [
+                        "更敏锐地发现隐患与风险点",
+                        "更重视质量与可控性",
+                        "更愿意复盘并不断优化"
+                    ],
+                    "tips": [
+                        "把担心写成清单：风险点-证据-应对策略，会明显降内耗",
+                        "设置“到点必须定稿”的收束点，避免无限优化"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:T",
+                        "state:strong",
+                        "career:quality",
+                        "career:review"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_EI_E_intro",
+                    "section": "career",
+                    "title": "E 轻解释：协作能帮你更快拿到结果",
+                    "desc": "即便不是强外向，你也会在适度交流中更快推进、对齐与收敛。",
+                    "bullets": [
+                        "讨论能帮助你理清思路",
+                        "更愿意通过协作推进",
+                        "更容易在互动中被点亮"
+                    ],
+                    "tips": [
+                        "用短会议+行动项替代长拉扯",
+                        "把关键结论写下来，避免只靠口头记忆"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:E",
+                        "state:clear",
+                        "career:collaboration"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_EI_I_intro",
+                    "section": "career",
+                    "title": "I 轻解释：深度时间是你的增益器",
+                    "desc": "即便不是强内向，你也会在安静专注中更快恢复与校准。",
+                    "bullets": [
+                        "独处能让你恢复专注",
+                        "更偏好深度而非频繁互动",
+                        "更喜欢先想清楚再表达"
+                    ],
+                    "tips": [
+                        "争取固定深度时段，产出会更稳定",
+                        "先发文字结论再讨论，协作更省力"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:I",
+                        "state:clear",
+                        "career:deepwork"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_JP_J_intro",
+                    "section": "career",
+                    "title": "J 轻解释：你更舒服在“有计划”的节奏里",
+                    "desc": "即便不算强 J，你也更喜欢清晰的优先级、节点与收尾感。",
+                    "bullets": [
+                        "更愿意先定关键节点",
+                        "更喜欢明确的优先级",
+                        "收尾会让你更安心"
+                    ],
+                    "tips": [
+                        "计划做轻：只定 3 个关键节点即可",
+                        "给变化留口子，别把自己锁死在完美计划里"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:J",
+                        "state:clear",
+                        "career:management"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_axis_JP_P_intro",
+                    "section": "career",
+                    "title": "P 轻解释：你更舒服在“先试试看”的节奏里",
+                    "desc": "即便不算强 P，你也更喜欢先探索、后收束，保留选择空间。",
+                    "bullets": [
+                        "更愿意先试出可行性",
+                        "更能适应变化",
+                        "更喜欢保留选择空间"
+                    ],
+                    "tips": [
+                        "探索也要有收束点，避免无限延展",
+                        "把灵感记成清单，再按优先级推进"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:P",
+                        "state:clear",
+                        "career:agile"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "career",
+                    "rules": []
+                },
+                {
+                    "id": "career_core_01",
+                    "section": "career",
+                    "title": "你的职业策略：先选“环境”，再选“岗位名”",
+                    "desc": "同一个岗位名在不同组织里差异很大。对你来说，环境匹配比头衔更关键。",
+                    "bullets": [
+                        "看清组织节奏：稳定 vs 变化",
+                        "看清衡量方式：指标 vs 关系",
+                        "看清决策结构：集中 vs 分散"
+                    ],
+                    "tips": [
+                        "面试时问 3 个问题：如何决策？如何评价？如何协作？",
+                        "把“我不适合的环境”列出来，能少走弯路"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "career:strategy"
+                    ],
+                    "priority": 100,
+                    "access_level": "preview",
+                    "module_code": "career",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "career_core_02",
+                    "section": "career",
+                    "title": "优势放大法：把擅长的事做成可复用资产",
+                    "desc": "比起到处补短板，你更适合把强项产品化：模板、流程、方法论、作品集。",
+                    "bullets": [
+                        "把经验沉淀成 SOP/清单",
+                        "把成果沉淀成作品集/案例",
+                        "把思考沉淀成方法论/工具"
+                    ],
+                    "tips": [
+                        "每完成一个项目，补一页“复盘卡片”",
+                        "把可复用的东西放进个人资料夹，长期复利"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "career:portfolio"
+                    ],
+                    "priority": 97,
+                    "access_level": "preview",
+                    "module_code": "career",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "career_core_03",
+                    "section": "career",
+                    "title": "协作打法：把分工写清楚，摩擦会少一半",
+                    "desc": "你在合作中更吃“清晰”。当职责、标准、节奏明确，你会进入高效区。",
+                    "bullets": [
+                        "把目标写成一句话",
+                        "把标准写成验收条件",
+                        "把节奏写成节点与行动项"
+                    ],
+                    "tips": [
+                        "开会必产出：结论+行动项+负责人+截止时间",
+                        "冲突先对齐目标，再讨论方案"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "career:collaboration"
+                    ],
+                    "priority": 95,
+                    "access_level": "preview",
+                    "module_code": "career",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "career_core_04",
+                    "section": "career",
+                    "title": "成长路径：先把“可替代”变成“不可替代”",
+                    "desc": "你的职业升级关键在于：从执行者变成能定义问题、搭系统、带结果的人。",
+                    "bullets": [
+                        "从做事 → 负责模块",
+                        "从负责模块 → 负责系统",
+                        "从负责系统 → 负责结果"
+                    ],
+                    "tips": [
+                        "给自己加一项“可见度工作”：让成果被看到",
+                        "每季度选一个“硬技能+软技能”组合升级"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "career:growth"
+                    ],
+                    "priority": 94,
+                    "access_level": "preview",
+                    "module_code": "career",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "career_core_05",
+                    "section": "career",
+                    "title": "选择原则：优先进入“能学到东西”的战场",
+                    "desc": "对你来说，学习速度和反馈质量决定了成长上限。",
+                    "bullets": [
+                        "有优秀同事与清晰反馈",
+                        "有高密度问题可练",
+                        "有可复盘的项目闭环"
+                    ],
+                    "tips": [
+                        "别只看薪资和 title，也看成长曲线",
+                        "如果 3 个月没有新能力增量，就该调整策略"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "career:learning"
+                    ],
+                    "priority": 92,
+                    "access_level": "preview",
+                    "module_code": "career",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "career_core_06",
+                    "section": "career",
+                    "title": "压力管理：把焦虑转成“可执行清单”",
+                    "desc": "职业压力多来自不确定。把不确定拆成可执行步骤，你会更快稳住。",
+                    "bullets": [
+                        "把担心写下来",
+                        "按影响大小排序",
+                        "先解决最高影响的一条"
+                    ],
+                    "tips": [
+                        "设一个完成线：到线就交付，再迭代",
+                        "用周复盘替代日内耗：每周校准一次方向"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "career:stress"
+                    ],
+                    "priority": 90,
+                    "access_level": "preview",
+                    "module_code": "career",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "career_core_07",
+                    "section": "career",
+                    "title": "长期护城河：把“稳定输出”变成品牌",
+                    "desc": "当别人靠爆发时，你靠稳定输出会越来越值钱：可靠、可预测、可复用。",
+                    "bullets": [
+                        "稳定交付 = 信任资本",
+                        "方法论沉淀 = 复利资本",
+                        "好合作 = 口碑资本"
+                    ],
+                    "tips": [
+                        "让自己的输出可被复盘：指标/案例/总结",
+                        "持续做一件能复利的事（写作/作品/工具）"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "career:moat"
+                    ],
+                    "priority": 88,
+                    "access_level": "preview",
+                    "module_code": "career",
+                    "rules": [],
+                    "match": null
+                }
+            ],
+            "rules": {
+                "min_cards": 2,
+                "target_cards": 3,
+                "max_cards": 6,
+                "fallback_tags": [
+                    "kind:core"
+                ]
+            }
+        },
+        "growth": {
+            "items": [
+                {
+                    "id": "growth_axis_EI_E_strong",
+                    "section": "growth",
+                    "title": "E 偏好较强：成长来自“碰撞与复盘”",
+                    "desc": "你更容易在交流、协作与现场推进中升级自己：先动起来，再迭代。",
+                    "bullets": [
+                        "在反馈中快速校准",
+                        "边做边学效率更高",
+                        "在团队中更容易被激发"
+                    ],
+                    "tips": [
+                        "给每次讨论留 3 分钟：写下结论与下一步",
+                        "别把成长等同于社交：要有输出与复盘"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:E",
+                        "state:strong",
+                        "topic:feedback"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_EI_I_strong",
+                    "section": "growth",
+                    "title": "I 偏好较强：成长来自“深度与沉淀”",
+                    "desc": "你更容易靠深度思考与持续沉淀拉开差距：安静时，你更强。",
+                    "bullets": [
+                        "独立学习效率更高",
+                        "擅长把复杂问题想透",
+                        "更需要低打扰环境"
+                    ],
+                    "tips": [
+                        "设置固定深度时间块（如 2×45 分钟）",
+                        "把学习输出成笔记/卡片，沉淀会很快复利"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:I",
+                        "state:strong",
+                        "topic:deepwork"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_SN_S_strong",
+                    "section": "growth",
+                    "title": "S 偏好较强：用“方法与练习”稳步升级",
+                    "desc": "你更适合通过可重复练习与流程化方法成长：一步一步把能力做扎实。",
+                    "bullets": [
+                        "擅长用练习形成肌肉记忆",
+                        "对细节与标准更敏感",
+                        "更相信验证与经验"
+                    ],
+                    "tips": [
+                        "把技能拆成 checklist，每周练一个小模块",
+                        "每月做一次‘复盘表’，看哪些习惯最有效"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:S",
+                        "state:strong",
+                        "topic:practice"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "S",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_SN_N_strong",
+                    "section": "growth",
+                    "title": "N 偏好较强：用“框架与洞察”跨级成长",
+                    "desc": "你更适合通过搭框架、找规律、做抽象来成长：一通百通。",
+                    "bullets": [
+                        "善于从模式里找本质",
+                        "学习迁移能力强",
+                        "能快速提出新方向"
+                    ],
+                    "tips": [
+                        "把学习整理成 1 页框架图，理解会更稳",
+                        "每次灵感落地 3 条 next step，别停在想法里"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:N",
+                        "state:strong",
+                        "topic:framework"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "N",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_TF_T_strong",
+                    "section": "growth",
+                    "title": "T（理性）偏好较强：用“标准化复盘”升级决策力",
+                    "desc": "你更适合用指标、原则与复盘机制成长：把判断变成可训练的能力。",
+                    "bullets": [
+                        "擅长用规则校准行为",
+                        "愿意面对问题本身",
+                        "能扛住压力做取舍"
+                    ],
+                    "tips": [
+                        "建立‘决策复盘’：当时依据/结果/下次改进",
+                        "表达时先给结论再给理由，协作会更省力"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:T",
+                        "state:strong",
+                        "topic:decision"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_TF_F_strong",
+                    "section": "growth",
+                    "title": "F（感受）偏好较强：用“关系与边界”让成长更稳",
+                    "desc": "你更适合在关系与价值中成长：学会表达需求、设定边界，你会更强。",
+                    "bullets": [
+                        "共情与连接是你的资源",
+                        "更在意意义与价值一致",
+                        "擅长照顾团队氛围"
+                    ],
+                    "tips": [
+                        "把‘不好意思’换成‘我需要…/我能…’",
+                        "为自己设一条边界线：什么情况必须拒绝"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:F",
+                        "state:strong",
+                        "topic:boundary"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "F",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_JP_J_strong",
+                    "section": "growth",
+                    "title": "J 偏好较强：用“计划与闭环”持续进阶",
+                    "desc": "你更适合用计划驱动成长：拆目标、定节奏、做复盘，升级很快。",
+                    "bullets": [
+                        "擅长把目标拆成里程碑",
+                        "对节点与进度敏感",
+                        "能把事情收尾做扎实"
+                    ],
+                    "tips": [
+                        "给计划留 15% 缓冲，避免太满导致挫败",
+                        "练习‘60 分交付线’，再迭代到 90 分"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:J",
+                        "state:strong",
+                        "topic:plan"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_JP_P_strong",
+                    "section": "growth",
+                    "title": "P 偏好较强：用“探索—收束”跑出成长速度",
+                    "desc": "你更适合通过探索与试错成长：先跑通，再优化，速度就是优势。",
+                    "bullets": [
+                        "学习路径更灵活",
+                        "试错迭代快",
+                        "在变化中抓机会"
+                    ],
+                    "tips": [
+                        "给探索设置收束点：到点必须定一个版本",
+                        "用看板把任务可视化，避免发散"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:P",
+                        "state:strong",
+                        "topic:explore"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_AT_A_strong",
+                    "section": "growth",
+                    "title": "A（自信型）偏好较强：用“大胆推进+反证”更强",
+                    "desc": "你更能在压力下保持笃定。成长关键是：大胆推进的同时加一道反证。",
+                    "bullets": [
+                        "推进快、内耗少",
+                        "敢承担关键决策",
+                        "能稳住节奏"
+                    ],
+                    "tips": [
+                        "每次重大判断加 1 条反证：它为什么可能错？",
+                        "把‘确定’与‘假设’分开写清楚"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:A",
+                        "state:strong",
+                        "topic:confidence"
+                    ],
+                    "priority": 92,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_AT_T_strong",
+                    "section": "growth",
+                    "title": "T（敏感型）偏好较强：用“完成线”终结过度打磨",
+                    "desc": "你更谨慎、校准更强。成长关键是：设完成线，别让完美主义拖慢你。",
+                    "bullets": [
+                        "风险意识强",
+                        "愿意自省与修正",
+                        "质量要求高"
+                    ],
+                    "tips": [
+                        "设一个完成线：到线就交付，再迭代",
+                        "把担心写成清单并排序，只先解决最重要的一条"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:T",
+                        "state:strong",
+                        "topic:calibration"
+                    ],
+                    "priority": 92,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_EI_E_intro",
+                    "section": "growth",
+                    "title": "E 轻解释：成长更靠“互动反馈”",
+                    "desc": "即便不是强外向，你也会在适度交流中更快校准与前进。",
+                    "bullets": [
+                        "讨论能帮助你理清思路",
+                        "更愿意用协作推进",
+                        "反馈让你升级更快"
+                    ],
+                    "tips": [
+                        "用短讨论+行动项替代长拉扯",
+                        "每次交流结束写下 1 条改进点"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:E",
+                        "state:clear"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_EI_I_intro",
+                    "section": "growth",
+                    "title": "I 轻解释：成长更靠“安静沉淀”",
+                    "desc": "即便不是强内向，你也会在独处与思考中更快恢复与校准。",
+                    "bullets": [
+                        "独处更能恢复专注",
+                        "更偏好深度学习",
+                        "更喜欢先想清楚再表达"
+                    ],
+                    "tips": [
+                        "把学习输出成卡片/笔记，复利会更明显",
+                        "给自己固定深度时段，别被碎片化吞掉"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:I",
+                        "state:clear"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_JP_J_intro",
+                    "section": "growth",
+                    "title": "J 轻解释：成长更靠“计划与闭环”",
+                    "desc": "即便不算强 J，你也更舒服在有节奏、有复盘的推进方式里。",
+                    "bullets": [
+                        "更愿意先定关键节点",
+                        "更喜欢明确优先级",
+                        "收尾会让你更安心"
+                    ],
+                    "tips": [
+                        "计划做轻：只定 3 个关键节点",
+                        "每周一次复盘：保留/删除/新增"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:J",
+                        "state:clear"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_JP_P_intro",
+                    "section": "growth",
+                    "title": "P 轻解释：成长更靠“探索与迭代”",
+                    "desc": "即便不算强 P，你也更舒服先尝试、再收束，用迭代找到最优路径。",
+                    "bullets": [
+                        "更愿意先试出可行性",
+                        "更能适应变化",
+                        "更喜欢保留选择空间"
+                    ],
+                    "tips": [
+                        "探索要有收束点：到点必须定一个版本",
+                        "把任务可视化，避免发散拖延"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:P",
+                        "state:clear"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_AT_A_intro",
+                    "section": "growth",
+                    "title": "A（自信型）轻解释：稳住节奏、敢推进",
+                    "desc": "即便不是强 A，你也可能在关键时刻更愿意先定方向、再迭代。",
+                    "bullets": [
+                        "更敢推进决定",
+                        "波动更小、更少内耗",
+                        "能稳定节奏"
+                    ],
+                    "tips": [
+                        "重大判断加一次反证检查",
+                        "把‘确定’与‘假设’分开表达"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:AT:A",
+                        "state:clear"
+                    ],
+                    "priority": 56,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_axis_AT_T_intro",
+                    "section": "growth",
+                    "title": "T（敏感型）轻解释：认真校准、持续优化",
+                    "desc": "即便不是强 T，你也可能在压力下更倾向复查修正，让结果更可靠。",
+                    "bullets": [
+                        "风险嗅觉更强",
+                        "更愿意自省与修正",
+                        "更在意做对"
+                    ],
+                    "tips": [
+                        "设定完成线：到线就交付，再迭代",
+                        "把担心写成清单并排序，只先解决最重要的一条"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:AT:T",
+                        "state:clear"
+                    ],
+                    "priority": 56,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "growth_core_01",
+                    "section": "growth",
+                    "title": "你的成长主线：把强项做成可复用资产",
+                    "desc": "成长最快的方法不是到处补短板，而是把强项沉淀成方法论与作品。",
+                    "bullets": [
+                        "把经验写成 SOP/清单",
+                        "把成果写成案例/作品集",
+                        "把思考写成框架/工具"
+                    ],
+                    "tips": [
+                        "每完成一个项目补一页复盘卡：做了什么/学到什么/下次怎么更好",
+                        "让输出可被复用，你会越做越轻松"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:assets"
+                    ],
+                    "priority": 100,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "growth_core_02",
+                    "section": "growth",
+                    "title": "升级方法：从“做事”到“定义问题”",
+                    "desc": "当你能定义问题、提出标准、设计路径，你的价值会跨级提升。",
+                    "bullets": [
+                        "从执行 → 负责模块",
+                        "从模块 → 搭系统",
+                        "从系统 → 负责结果"
+                    ],
+                    "tips": [
+                        "每次接任务先问 3 个问题：目标是什么？标准是什么？风险是什么？",
+                        "把方案写成 1 页纸：目标-路径-指标-风险"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:levelup"
+                    ],
+                    "priority": 97,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "growth_core_03",
+                    "section": "growth",
+                    "title": "自我管理：用节奏感替代硬拼",
+                    "desc": "你更适合用节奏驱动：推进—休整—复盘—再推进，稳定输出才是护城河。",
+                    "bullets": [
+                        "有节奏时更高效",
+                        "复盘能快速升级",
+                        "过度消耗会明显降质"
+                    ],
+                    "tips": [
+                        "给自己设固定收尾仪式：5 分钟复盘",
+                        "把休息写进计划：续航不是浪费"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:energy"
+                    ],
+                    "priority": 95,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "growth_core_04",
+                    "section": "growth",
+                    "title": "学习策略：要“输入—输出—反馈”闭环",
+                    "desc": "只有输入不会让你变强。关键是把学习变成可检验的输出与反馈。",
+                    "bullets": [
+                        "输入：看/听/学",
+                        "输出：写/讲/做",
+                        "反馈：复盘/对比/请教"
+                    ],
+                    "tips": [
+                        "每次学习至少产出 1 个可见成果（卡片/小作品/讲解）",
+                        "找一个反馈源：同伴/导师/用户/数据"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:learning"
+                    ],
+                    "priority": 94,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "growth_core_05",
+                    "section": "growth",
+                    "title": "沟通成长：把观点说清楚，比说得多更重要",
+                    "desc": "成长不仅是能力，也是在关键场景把观点说清楚、推动决策。",
+                    "bullets": [
+                        "先结论后理由",
+                        "用例子替代抽象",
+                        "把分歧写成选项"
+                    ],
+                    "tips": [
+                        "练习 30 秒表达：结论-依据-下一步",
+                        "把选择写成 A/B/C，决策会更快"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:communication"
+                    ],
+                    "priority": 92,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "growth_core_06",
+                    "section": "growth",
+                    "title": "抗压升级：把焦虑变成清单与排序",
+                    "desc": "压力最大的来源是不确定。把不确定拆成可执行步骤，你会更快稳住。",
+                    "bullets": [
+                        "写下担心点",
+                        "按影响大小排序",
+                        "先做最高影响的一条"
+                    ],
+                    "tips": [
+                        "只为‘高影响’投入精力，别被小概率耗尽",
+                        "到线就交付，再迭代"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:stress"
+                    ],
+                    "priority": 90,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "growth_core_07",
+                    "section": "growth",
+                    "title": "长期复利：让你的输出可被看见",
+                    "desc": "同样的努力，有没有被看见会决定成长速度。把成果可视化，你会更快获得机会。",
+                    "bullets": [
+                        "记录成果与指标",
+                        "沉淀案例与复盘",
+                        "建立作品集/内容库"
+                    ],
+                    "tips": [
+                        "每月整理一次‘我做成了什么’，形成清单",
+                        "把最好的 3 个成果放到最显眼的位置"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:visibility"
+                    ],
+                    "priority": 88,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                }
+            ],
+            "rules": {
+                "min_cards": 2,
+                "target_cards": 3,
+                "max_cards": 6,
+                "fallback_tags": [
+                    "kind:core"
+                ]
+            }
+        },
+        "relationships": {
+            "items": [
+                {
+                    "id": "rel_axis_EI_E_strong",
+                    "section": "relationships",
+                    "title": "E 偏好较强：关系靠互动保温",
+                    "desc": "你更容易在频繁互动里建立亲密感：越聊越熟，越见越近。",
+                    "bullets": [
+                        "更愿意主动开启话题",
+                        "在一起做事会更亲",
+                        "互动能快速修复距离感"
+                    ],
+                    "tips": [
+                        "把联系做成‘小频率’，别等大事件",
+                        "聊感受前先聊事实，沟通更顺"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:E",
+                        "state:strong",
+                        "topic:connection"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_EI_I_strong",
+                    "section": "relationships",
+                    "title": "I 偏好较强：关系要空间才更稳",
+                    "desc": "你更需要边界与独处充电。亲密不是黏在一起，而是彼此安心。",
+                    "bullets": [
+                        "更偏好深度而非高频",
+                        "更在意边界与尊重",
+                        "沉默不代表冷淡"
+                    ],
+                    "tips": [
+                        "提前说清你的充电方式：我需要一点安静时间",
+                        "用文字表达也很好：先写后聊更稳"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:I",
+                        "state:strong",
+                        "topic:boundary"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_SN_S_strong",
+                    "section": "relationships",
+                    "title": "S 偏好较强：爱体现在细节与兑现",
+                    "desc": "你更相信可见的行动：说到做到、照顾细节，会让你更安心。",
+                    "bullets": [
+                        "更在意‘做没做到’",
+                        "细节是你的安全感来源",
+                        "关系靠稳定投入"
+                    ],
+                    "tips": [
+                        "把期待说成具体行为：比如每周一次一起吃饭",
+                        "别用‘你懂的’测试对方，直接说更省心"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:S",
+                        "state:strong",
+                        "topic:security"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "S",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_SN_N_strong",
+                    "section": "relationships",
+                    "title": "N 偏好较强：你更在意意义与共鸣",
+                    "desc": "你渴望被理解与共鸣：价值观、未来感、精神连接会让你很投入。",
+                    "bullets": [
+                        "更在意‘我们是否同频’",
+                        "容易被愿景与可能性点燃",
+                        "喜欢一起想象未来"
+                    ],
+                    "tips": [
+                        "把浪漫落地成小仪式：更容易被长期维持",
+                        "当对方更务实时，试着把期待说得更具体"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:N",
+                        "state:strong",
+                        "topic:meaning"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "N",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_TF_T_strong",
+                    "section": "relationships",
+                    "title": "T（理性）偏好较强：你用“解决问题”表达在乎",
+                    "desc": "你更习惯把关系议题当成问题来处理：讲逻辑、讲方案、讲可行性。",
+                    "bullets": [
+                        "更关注事实与改进",
+                        "冲突时更想找原因",
+                        "表达偏直接"
+                    ],
+                    "tips": [
+                        "先共情一句再给方案：我懂你在意…我们可以…",
+                        "减少‘对错’，多对齐‘目标’"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:T",
+                        "state:strong",
+                        "topic:conflict"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_TF_F_strong",
+                    "section": "relationships",
+                    "title": "F（感受）偏好较强：你用“照顾感受”表达在乎",
+                    "desc": "你更在意对方感受与氛围：关系对你来说是彼此成全。",
+                    "bullets": [
+                        "共情更自然",
+                        "擅长照顾氛围",
+                        "更在意长期关系"
+                    ],
+                    "tips": [
+                        "善良要配边界：明确什么是你能承受的",
+                        "冲突时先说需求：我希望你…而不是你总是…"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:F",
+                        "state:strong",
+                        "topic:care"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "F",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_JP_J_strong",
+                    "section": "relationships",
+                    "title": "J 偏好较强：你要确定感与承诺",
+                    "desc": "你更希望关系有清晰边界与约定：确定感会让你更安心、更投入。",
+                    "bullets": [
+                        "更在意承诺与稳定",
+                        "更喜欢提前沟通计划",
+                        "不爱长期悬而未决"
+                    ],
+                    "tips": [
+                        "把期待写成可协商的约定：频率/分工/底线",
+                        "给对方一点适应期：别用一次表现定终身"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:J",
+                        "state:strong",
+                        "topic:commitment"
+                    ],
+                    "priority": 93,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_JP_P_strong",
+                    "section": "relationships",
+                    "title": "P 偏好较强：你要自由感与新鲜感",
+                    "desc": "你更舒服在不被束缚的节奏里：空间、弹性、探索会让你更亲近。",
+                    "bullets": [
+                        "不喜欢被过早锁死",
+                        "更适应变化",
+                        "更爱一起体验新事物"
+                    ],
+                    "tips": [
+                        "给关系加一点‘结构’：比如固定一次约会，但内容随意",
+                        "当对方需要确定感时，给一个时间点会很有用"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:P",
+                        "state:strong",
+                        "topic:freedom"
+                    ],
+                    "priority": 93,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_AT_A_strong",
+                    "section": "relationships",
+                    "title": "A（自信型）偏好较强：你更能稳住关系节奏",
+                    "desc": "你在压力下更笃定，能在冲突里保持主心骨，但要注意别太快下结论。",
+                    "bullets": [
+                        "更不容易被情绪带跑",
+                        "更敢拍板与推进沟通",
+                        "更能扛住矛盾期"
+                    ],
+                    "tips": [
+                        "冲突里加一道反问：我是不是太快判断了？",
+                        "多问一句：你真正想要我怎么做？"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:A",
+                        "state:strong",
+                        "topic:stability"
+                    ],
+                    "priority": 92,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_AT_T_strong",
+                    "section": "relationships",
+                    "title": "T（敏感型）偏好较强：你更会自省与修复",
+                    "desc": "你更谨慎、更在意做对。优势是修复力强，风险是容易把自己耗在内耗里。",
+                    "bullets": [
+                        "更愿意反思与道歉",
+                        "对细节更敏感",
+                        "更在意关系质量"
+                    ],
+                    "tips": [
+                        "把‘我是不是不好’换成‘下一步我能做什么’",
+                        "设一个停止线：讨论到这里，先休息再继续"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:T",
+                        "state:strong",
+                        "topic:repair"
+                    ],
+                    "priority": 92,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_EI_E_intro",
+                    "section": "relationships",
+                    "title": "E 轻解释：关系靠联系变熟",
+                    "desc": "即便不是强外向，你也会在适度互动里更容易拉近距离。",
+                    "bullets": [
+                        "互动能带来熟悉感",
+                        "一起做事会更亲",
+                        "更愿意主动联系"
+                    ],
+                    "tips": [
+                        "把联系做短：一条消息也算",
+                        "别等对方读心：直接说想见面更有效"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:E",
+                        "state:clear"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_EI_I_intro",
+                    "section": "relationships",
+                    "title": "I 轻解释：关系靠尊重与空间",
+                    "desc": "即便不是强内向，你也会在有边界、有独处的关系里更安心。",
+                    "bullets": [
+                        "需要安静充电",
+                        "偏好深度交流",
+                        "讨厌被打断与逼问"
+                    ],
+                    "tips": [
+                        "提前说清你的充电方式，误会会少很多",
+                        "用文字表达也很好：先写后聊更稳"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:I",
+                        "state:clear"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_JP_J_intro",
+                    "section": "relationships",
+                    "title": "J 轻解释：你喜欢确定感",
+                    "desc": "即便不算强 J，你也更舒服在有约定、有节奏的关系里。",
+                    "bullets": [
+                        "更喜欢提前沟通计划",
+                        "更在意承诺与稳定",
+                        "不爱长期悬而未决"
+                    ],
+                    "tips": [
+                        "把期待说成可协商的约定：频率/分工/底线",
+                        "给对方适应期：别用一次表现定终身"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:J",
+                        "state:clear"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_JP_P_intro",
+                    "section": "relationships",
+                    "title": "P 轻解释：你喜欢弹性与自由",
+                    "desc": "即便不算强 P，你也更舒服在不过度束缚的关系节奏里。",
+                    "bullets": [
+                        "更喜欢留余地",
+                        "更能适应变化",
+                        "更在意轻松感"
+                    ],
+                    "tips": [
+                        "给关系加一点结构：固定频率，但内容随意",
+                        "当对方需要确定感时，给时间点会更稳"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:P",
+                        "state:clear"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_AT_A_intro",
+                    "section": "relationships",
+                    "title": "A（自信型）轻解释：更稳、更敢沟通",
+                    "desc": "即便不是强 A，你也可能在关键时刻更愿意先稳住节奏、推进沟通。",
+                    "bullets": [
+                        "更敢把话说清楚",
+                        "更能稳住矛盾期",
+                        "更少被情绪拖走"
+                    ],
+                    "tips": [
+                        "冲突里加一道反问：我是不是太快判断了？",
+                        "多问一句：你希望我怎么做？"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:AT:A",
+                        "state:clear"
+                    ],
+                    "priority": 56,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_axis_AT_T_intro",
+                    "section": "relationships",
+                    "title": "T（敏感型）轻解释：更会在意与修复",
+                    "desc": "即便不是强 T，你也可能在压力下更倾向复查与修复，让关系更可靠。",
+                    "bullets": [
+                        "更愿意反思与道歉",
+                        "对细节更敏感",
+                        "更在意关系质量"
+                    ],
+                    "tips": [
+                        "把内耗写成下一步：我能做的一件事是什么？",
+                        "设一个停止线：先休息再继续讨论"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:AT:T",
+                        "state:clear"
+                    ],
+                    "priority": 56,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "relationships",
+                    "rules": []
+                },
+                {
+                    "id": "rel_core_01",
+                    "section": "relationships",
+                    "title": "关系的底层能力：把期待说清楚",
+                    "desc": "很多关系问题不是不爱，而是期待没说清。你说清楚，关系就会轻很多。",
+                    "bullets": [
+                        "把‘我希望’说成具体行为",
+                        "把‘不舒服’说成边界",
+                        "把‘在乎’说成行动"
+                    ],
+                    "tips": [
+                        "用句式：我在意…我希望你…我能…",
+                        "避免让对方猜：猜中是运气，猜错是误会"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:communication"
+                    ],
+                    "priority": 100,
+                    "access_level": "preview",
+                    "module_code": "relationships",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "rel_core_02",
+                    "section": "relationships",
+                    "title": "冲突处理：先降温，再对齐目标",
+                    "desc": "冲突不是输赢，而是信息。先把情绪降下来，再对齐要解决的事。",
+                    "bullets": [
+                        "先复述对方诉求",
+                        "再说自己的需求",
+                        "最后给出可执行方案"
+                    ],
+                    "tips": [
+                        "用一句话复述：我听到你在意的是…",
+                        "给一个选项：我们可以 A/B，你更想哪个？"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:conflict"
+                    ],
+                    "priority": 96,
+                    "access_level": "preview",
+                    "module_code": "relationships",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "rel_core_03",
+                    "section": "relationships",
+                    "title": "边界感：善良要配规则",
+                    "desc": "你越能说清楚边界，越能长期稳定地付出。边界不是冷漠，是自我保护。",
+                    "bullets": [
+                        "明确什么能做/不能做",
+                        "明确什么会消耗你",
+                        "明确底线触发条件"
+                    ],
+                    "tips": [
+                        "提前声明边界比事后爆炸更温柔",
+                        "用‘我需要’替代‘你总是’"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:boundary"
+                    ],
+                    "priority": 94,
+                    "access_level": "preview",
+                    "module_code": "relationships",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "rel_core_04",
+                    "section": "relationships",
+                    "title": "亲密建立：靠稳定的小投入",
+                    "desc": "亲密不是一次性的大浪漫，而是长期的稳定投入：频率、回应、在场。",
+                    "bullets": [
+                        "小频率联系",
+                        "及时回应",
+                        "一起做事/共享体验"
+                    ],
+                    "tips": [
+                        "固定一个小仪式：每周一次散步/晚餐",
+                        "在忙的时候也给一句确认：我在/我会回你"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:intimacy"
+                    ],
+                    "priority": 92,
+                    "access_level": "preview",
+                    "module_code": "relationships",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "rel_core_05",
+                    "section": "relationships",
+                    "title": "减少误会：别用‘读心’当测试",
+                    "desc": "用沉默、冷处理、试探来测试对方，成本很高。直接表达更有效。",
+                    "bullets": [
+                        "把不满说成需求",
+                        "把期待说成请求",
+                        "把担心说成事实"
+                    ],
+                    "tips": [
+                        "用句式：我担心…我希望…你能…吗？",
+                        "如果你不确定，就问：你是这个意思吗？"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:misunderstanding"
+                    ],
+                    "priority": 90,
+                    "access_level": "preview",
+                    "module_code": "relationships",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "rel_core_06",
+                    "section": "relationships",
+                    "title": "修复能力：关系不是不吵，而是能和好",
+                    "desc": "真正成熟的关系不是没有冲突，而是有修复机制：道歉、复盘、改进。",
+                    "bullets": [
+                        "及时道歉与解释",
+                        "复盘触发点",
+                        "约定下次怎么做"
+                    ],
+                    "tips": [
+                        "把道歉说完整：我做了什么-影响了你什么-我下次怎么改",
+                        "复盘只讨论行为，不攻击人格"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:repair"
+                    ],
+                    "priority": 88,
+                    "access_level": "preview",
+                    "module_code": "relationships",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "rel_core_07",
+                    "section": "relationships",
+                    "title": "安全感：一致性比热情更重要",
+                    "desc": "安全感来自一致性：说到做到、情绪稳定、回应可靠。",
+                    "bullets": [
+                        "一致性建立信任",
+                        "可预测降低焦虑",
+                        "长期投入更能打动人"
+                    ],
+                    "tips": [
+                        "把承诺量力而行：少承诺，多兑现",
+                        "在情绪上头时先暂停，等冷静再谈"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:security"
+                    ],
+                    "priority": 86,
+                    "access_level": "preview",
+                    "module_code": "relationships",
+                    "rules": [],
+                    "match": null
+                }
+            ],
+            "rules": {
+                "min_cards": 2,
+                "target_cards": 3,
+                "max_cards": 6,
+                "fallback_tags": [
+                    "kind:core"
+                ]
+            }
+        },
+        "stress_recovery": {
+            "items": [
+                {
+                    "id": "sr_axis_EI_E_strong",
+                    "section": "stress_recovery",
+                    "title": "E 偏好较强：压力下需要“动起来”才会回稳",
+                    "desc": "你更容易在行动与互动中恢复能量：越卡越要先启动，再迭代。",
+                    "bullets": [
+                        "一动起来就更清醒",
+                        "需要外部反馈帮助校准",
+                        "适合用“短冲刺”止损"
+                    ],
+                    "tips": [
+                        "把恢复做成 10 分钟行动：走路/整理/打一个电话",
+                        "先找一个人同步事实，再谈情绪与方案"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:E",
+                        "state:strong",
+                        "topic:activation"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_EI_I_strong",
+                    "section": "stress_recovery",
+                    "title": "I 偏好较强：压力下先“降噪”才能恢复",
+                    "desc": "你更需要独处与低刺激环境。恢复不是躲开问题，而是让系统回到可用区。",
+                    "bullets": [
+                        "需要安静减少输入",
+                        "更适合先写后说",
+                        "恢复依赖边界与节奏"
+                    ],
+                    "tips": [
+                        "先给自己 20 分钟低噪音时间（不社交/不刷信息流）",
+                        "把担心写成 3 条：事实/推测/下一步最小动作"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:I",
+                        "state:strong",
+                        "topic:quiet"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_SN_S_strong",
+                    "section": "stress_recovery",
+                    "title": "S 偏好较强：用“可控清单”把压力拆小",
+                    "desc": "你更容易被细节和未完成拖住。把任务变成可验证步骤，会显著降低压力。",
+                    "bullets": [
+                        "清单能带来掌控感",
+                        "做完一件就回一点能量",
+                        "适合用流程止损"
+                    ],
+                    "tips": [
+                        "列 3 件“今天必须完成”的小步（每步≤15分钟）",
+                        "先做能产生新信息的一步，而不是反复纠结"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:S",
+                        "state:strong",
+                        "topic:control"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "S",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_SN_N_strong",
+                    "section": "stress_recovery",
+                    "title": "N 偏好较强：压力下先“收敛问题”再推进",
+                    "desc": "你会在压力下发散很多可能性。恢复的关键是先收敛范围，再把想法落成下一步。",
+                    "bullets": [
+                        "容易被可能性淹没",
+                        "需要明确“最小可用答案”",
+                        "适合用框架收敛"
+                    ],
+                    "tips": [
+                        "写一句：我现在只解决什么？（不解决什么？）",
+                        "把选择缩到两项：A/B，并写出各自下一步验证动作"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:N",
+                        "state:strong",
+                        "topic:focus"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "N",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_TF_T_strong",
+                    "section": "stress_recovery",
+                    "title": "T（理性）偏好较强：用“事实—证据—下一步”止损",
+                    "desc": "你更擅长把压力拆成问题处理。注意别把自己逼到“必须完美”的角落。",
+                    "bullets": [
+                        "需要事实与证据稳定情绪",
+                        "喜欢把问题结构化",
+                        "容易对自己苛刻"
+                    ],
+                    "tips": [
+                        "写 3 列：事实/证据/下一步（≤10分钟）",
+                        "给自己一个够用线：做到 70 分先交付，再迭代"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:T",
+                        "state:strong",
+                        "topic:structure"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_TF_F_strong",
+                    "section": "stress_recovery",
+                    "title": "F（感受）偏好较强：先安抚感受，再谈解决",
+                    "desc": "你对氛围和关系更敏感。恢复不是“忍住”，而是把感受说清，需求被看见压力才会降。",
+                    "bullets": [
+                        "情绪被理解后会明显回稳",
+                        "更需要支持与连接",
+                        "容易为别人扛太多"
+                    ],
+                    "tips": [
+                        "用句式：我感到…因为我需要…我希望你…",
+                        "把照顾别人改成一件小边界：我现在只能做到哪一步"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:F",
+                        "state:strong",
+                        "topic:soothe"
+                    ],
+                    "priority": 94,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "F",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_JP_J_strong",
+                    "section": "stress_recovery",
+                    "title": "J 偏好较强：用计划恢复掌控，但别过度强控",
+                    "desc": "你会用确定感对抗压力。恢复的关键是“有计划但不僵化”。",
+                    "bullets": [
+                        "需要清晰的下一步",
+                        "讨厌悬而未决",
+                        "容易把压力变成强控"
+                    ],
+                    "tips": [
+                        "写 3 个检查点：现在/今天/本周（每个只写一件事）",
+                        "对不确定留余地：先做可逆小实验再定方案"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:J",
+                        "state:strong",
+                        "topic:plan"
+                    ],
+                    "priority": 93,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_JP_P_strong",
+                    "section": "stress_recovery",
+                    "title": "P 偏好较强：先减压再推进，用弹性找回节奏",
+                    "desc": "你更需要空间与弹性。恢复的关键是给自己一个轻结构，避免越自由越失控。",
+                    "bullets": [
+                        "需要缓冲与变化",
+                        "不喜欢被计划压住",
+                        "容易拖延导致更焦虑"
+                    ],
+                    "tips": [
+                        "给自己一个轻结构：只定开始时间，不定结束时间",
+                        "用 25 分钟冲刺+5 分钟休息找回节奏"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:P",
+                        "state:strong",
+                        "topic:flex"
+                    ],
+                    "priority": 93,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_AT_A_strong",
+                    "section": "stress_recovery",
+                    "title": "A（自信型）偏好较强：你能稳住，但别忽略身体信号",
+                    "desc": "你在压力下更能扛住与推进。风险是把疲劳当常态，直到系统突然掉线。",
+                    "bullets": [
+                        "更能继续推进",
+                        "不容易被情绪带跑",
+                        "可能忽略过载信号"
+                    ],
+                    "tips": [
+                        "每天做一次体感检查：睡眠/食欲/心跳/肩颈",
+                        "把休息当任务：先安排恢复点再安排冲刺"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:A",
+                        "state:strong",
+                        "topic:stability"
+                    ],
+                    "priority": 92,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_AT_T_strong",
+                    "section": "stress_recovery",
+                    "title": "T（敏感型）偏好较强：你更会自省，但要防止内耗",
+                    "desc": "你对风险与细节更敏锐。优势是能校准方向，风险是把压力转成反复自责。",
+                    "bullets": [
+                        "更愿意复查与修正",
+                        "对细节更敏感",
+                        "容易过度推演"
+                    ],
+                    "tips": [
+                        "把自责换成验证：我下一步能拿到什么新信息？",
+                        "设停止线：讨论/工作到这里，先休息再继续"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:T",
+                        "state:strong",
+                        "topic:repair"
+                    ],
+                    "priority": 92,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_EI_E_intro",
+                    "section": "stress_recovery",
+                    "title": "E 轻解释：恢复靠“动一动”更快回稳",
+                    "desc": "即便不是强外向，适度行动与互动也能帮你更快从压力里出来。",
+                    "bullets": [
+                        "行动能带来清晰",
+                        "互动能带来校准",
+                        "短冲刺比硬扛有效"
+                    ],
+                    "tips": [
+                        "先做 10 分钟动作：走路/收拾/同步事实",
+                        "把情绪写成一句需求，再去沟通"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:E",
+                        "state:clear"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_EI_I_intro",
+                    "section": "stress_recovery",
+                    "title": "I 轻解释：恢复靠“降噪”更稳",
+                    "desc": "即便不是强内向，降低刺激、留出独处时间也会让你恢复更快。",
+                    "bullets": [
+                        "低噪音更易回稳",
+                        "写下来比硬聊更省力",
+                        "边界能减少消耗"
+                    ],
+                    "tips": [
+                        "先给自己 20 分钟安静时间（不刷信息流）",
+                        "把担心写成下一步最小动作"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:I",
+                        "state:clear"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_JP_J_intro",
+                    "section": "stress_recovery",
+                    "title": "J 轻解释：用小计划换掌控",
+                    "desc": "即便不算强 J，做一个轻量计划也能显著降低压力的不确定感。",
+                    "bullets": [
+                        "清晰下一步会回稳",
+                        "检查点能减少焦虑",
+                        "把悬而未决写下来"
+                    ],
+                    "tips": [
+                        "写 3 个检查点：现在/今天/本周（每个只写一件）",
+                        "先做可逆小实验，再做大决定"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:J",
+                        "state:clear"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_JP_P_intro",
+                    "section": "stress_recovery",
+                    "title": "P 轻解释：用弹性找回节奏",
+                    "desc": "即便不算强 P，给自己弹性与空间也能降低压力并更快恢复。",
+                    "bullets": [
+                        "先减压再推进更有效",
+                        "轻结构能防止失控",
+                        "短冲刺能带来进展"
+                    ],
+                    "tips": [
+                        "只定开始时间，不定结束时间",
+                        "用 25/5 节奏先启动"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:P",
+                        "state:clear"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_AT_A_intro",
+                    "section": "stress_recovery",
+                    "title": "A（自信型）轻解释：能稳住，也要记得恢复",
+                    "desc": "即便不是强 A，你也可能在关键时刻更愿意稳住节奏、推进下一步。",
+                    "bullets": [
+                        "更敢面对问题",
+                        "更能继续推进",
+                        "需要恢复点防透支"
+                    ],
+                    "tips": [
+                        "把休息当任务：先安排恢复点再安排冲刺",
+                        "每天做一次体感检查：睡眠/心率/肩颈"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:AT:A",
+                        "state:clear"
+                    ],
+                    "priority": 56,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_axis_AT_T_intro",
+                    "section": "stress_recovery",
+                    "title": "T（敏感型）轻解释：更会校准，也要防内耗",
+                    "desc": "即便不是强 T，你也可能在压力下更谨慎复查与修复，让系统更可靠。",
+                    "bullets": [
+                        "更愿意复盘与修正",
+                        "对细节更敏感",
+                        "需要停止线防内耗"
+                    ],
+                    "tips": [
+                        "把自责换成验证：我下一步要拿到什么新信息？",
+                        "设停止线：先休息再继续讨论"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:AT:T",
+                        "state:clear"
+                    ],
+                    "priority": 56,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "sr_core_01",
+                    "section": "stress_recovery",
+                    "title": "压力止损：先让身体回到可用区",
+                    "desc": "压力上来时，先把身体拉回安全线：水、呼吸、走动、伸展。身体回稳，思考才会回来。",
+                    "bullets": [
+                        "先补水与呼吸",
+                        "再做 5–10 分钟走动/伸展",
+                        "最后写下下一步最小动作"
+                    ],
+                    "tips": [
+                        "把恢复当任务：先做再说",
+                        "不要用刷信息流当休息"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:recovery"
+                    ],
+                    "priority": 100,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "sr_core_02",
+                    "section": "stress_recovery",
+                    "title": "情绪降噪：把感受写成需求",
+                    "desc": "当你说不清时，先写下来：我感到…因为我需要…我希望… 需求被看见，压力会明显下降。",
+                    "bullets": [
+                        "写清感受",
+                        "找出真正需求",
+                        "把需求变成请求"
+                    ],
+                    "tips": [
+                        "先写后聊更稳",
+                        "用“我需要”替代“你总是”"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:emotion"
+                    ],
+                    "priority": 96,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "sr_core_03",
+                    "section": "stress_recovery",
+                    "title": "边界感：别把所有事都扛在身上",
+                    "desc": "压力常来自“全部都要我负责”。把范围说清：我能做到哪一步，剩下交给谁。",
+                    "bullets": [
+                        "明确责任边界",
+                        "减少无效承诺",
+                        "把任务分配出去"
+                    ],
+                    "tips": [
+                        "少承诺、多兑现",
+                        "先保住关键的 1–2 件事"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:boundary"
+                    ],
+                    "priority": 94,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "sr_core_04",
+                    "section": "stress_recovery",
+                    "title": "可恢复的休息：休息要让你“回来”",
+                    "desc": "真正恢复的休息会让你更轻：走路、伸展、热水、安静音乐、短睡。刷手机常让你更累。",
+                    "bullets": [
+                        "低刺激环境",
+                        "身体放松优先",
+                        "短而可执行"
+                    ],
+                    "tips": [
+                        "给休息一个时长：10/20/30 分钟",
+                        "休息后做一件小事完成闭环"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:rest"
+                    ],
+                    "priority": 92,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "sr_core_05",
+                    "section": "stress_recovery",
+                    "title": "睡眠优先：先保底再谈效率",
+                    "desc": "睡眠不足会放大焦虑和冲突。先做保底策略：固定起床时间、睡前不工作、把明天三件事写下来清空大脑。",
+                    "bullets": [
+                        "固定起床时间",
+                        "睡前 30 分钟不工作",
+                        "写下明天 3 件事"
+                    ],
+                    "tips": [
+                        "先保底 7 天，你会明显回稳",
+                        "别在深夜做大决定"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:sleep"
+                    ],
+                    "priority": 90,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "sr_core_06",
+                    "section": "stress_recovery",
+                    "title": "求助与支持：把支持变具体",
+                    "desc": "当压力持续超过一周，别只说“我很累”。把求助变成具体需求：帮我做哪件事/陪我聊10分钟/帮我确认一个决定。",
+                    "bullets": [
+                        "把问题说具体",
+                        "把支持说具体",
+                        "给对方一个可执行入口"
+                    ],
+                    "tips": [
+                        "用一句话开场：我需要你帮我…",
+                        "支持不是打扰，是协作"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:support"
+                    ],
+                    "priority": 88,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                }
+            ],
+            "rules": {
+                "min_cards": 2,
+                "target_cards": 3,
+                "max_cards": 6,
+                "fallback_tags": [
+                    "kind:core"
+                ]
+            }
+        },
+        "traits": {
+            "items": [
+                {
+                    "id": "traits_axis_EI_E_strong",
+                    "section": "traits",
+                    "title": "E 偏好较强：把互动当发动机",
+                    "desc": "你在交流与现场碰撞中更快进入状态，信息会在互动里收敛。",
+                    "bullets": [
+                        "开口能想得更清楚",
+                        "更容易主动连接与推进",
+                        "协作能显著提升你的效率"
+                    ],
+                    "tips": [
+                        "关键议题用 15 分钟快会/白板收敛",
+                        "留出发言空间，别把节奏拉太满"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:E",
+                        "state:strong"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_EI_I_strong",
+                    "section": "traits",
+                    "title": "I 偏好较强：深度思考是主战场",
+                    "desc": "你在安静与专注里输出更高质量判断，边界感对你很重要。",
+                    "bullets": [
+                        "独立思考质量更高",
+                        "更擅长深挖复杂问题",
+                        "不喜欢被频繁打断"
+                    ],
+                    "tips": [
+                        "把深度时间写进日程并标注“不可打断”",
+                        "先写后聊：会议前发 3 行观点"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:EI:I",
+                        "state:strong"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_SN_S_strong",
+                    "section": "traits",
+                    "title": "S 偏好较强：你信“验证过的路”",
+                    "desc": "你更相信事实、经验与可重复流程，细节会让你更安心。",
+                    "bullets": [
+                        "对资源与风险更敏感",
+                        "更擅长把事情做成标准件",
+                        "耐心把细节做到位"
+                    ],
+                    "tips": [
+                        "把可落地写成 checklist，提高团队一致性",
+                        "每次推进前问一句：最终指标是什么？"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:S",
+                        "state:strong"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "S",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_SN_N_strong",
+                    "section": "traits",
+                    "title": "N 偏好较强：你擅长从混沌里抓方向",
+                    "desc": "你更关注模式、趋势与可能性，能快速提炼关键变量。",
+                    "bullets": [
+                        "对变化更敏感",
+                        "善于提出新框架",
+                        "能把零散信息连成图景"
+                    ],
+                    "tips": [
+                        "把灵感落成 3 条 next step，避免停在想象里",
+                        "找一位 S 偏好伙伴做“落地翻译”"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:SN:N",
+                        "state:strong"
+                    ],
+                    "priority": 96,
+                    "match": {
+                        "axis": {
+                            "dim": "SN",
+                            "side": "N",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_TF_T_strong",
+                    "section": "traits",
+                    "title": "T（理性）偏好较强：你用标准给世界对齐",
+                    "desc": "你更倾向用逻辑、原则与标准做取舍，压力下也能保持清醒。",
+                    "bullets": [
+                        "更敢做艰难取舍",
+                        "善于建立规则体系",
+                        "不易被情绪带偏"
+                    ],
+                    "tips": [
+                        "对人际场景补一句“我理解你的在意点”",
+                        "避免把所有讨论都拉回对错，先对齐目标"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:T",
+                        "state:strong"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_TF_F_strong",
+                    "section": "traits",
+                    "title": "F（感受）偏好较强：你把“人”放在决策中心",
+                    "desc": "你更在意关系长期性与决策温度，能敏锐察觉隐含需求。",
+                    "bullets": [
+                        "更擅长照顾团队氛围",
+                        "更敏感于他人需求",
+                        "愿意为关系投入"
+                    ],
+                    "tips": [
+                        "把善意制度化：边界清楚才能走得更久",
+                        "决策前列一个事实清单，减少情绪拉扯"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:TF:F",
+                        "state:strong"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "TF",
+                            "side": "F",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_JP_J_strong",
+                    "section": "traits",
+                    "title": "J 偏好较强：你靠计划把不确定变可控",
+                    "desc": "你更愿意尽快定方向、定标准、定节奏，推进闭环能力强。",
+                    "bullets": [
+                        "对进度与节点更敏感",
+                        "更擅长形成闭环",
+                        "持续推进到收尾"
+                    ],
+                    "tips": [
+                        "给计划留 15% 缓冲，减少突发挫败感",
+                        "在拍板前做一次反向提问：还有什么没考虑？"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:J",
+                        "state:strong"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_JP_P_strong",
+                    "section": "traits",
+                    "title": "P 偏好较强：你把灵活当成优势武器",
+                    "desc": "你更能在变化中抓机会，边试边修正，适应速度快。",
+                    "bullets": [
+                        "反应快、调整快",
+                        "更擅长试错迭代",
+                        "在不确定中保持弹性"
+                    ],
+                    "tips": [
+                        "给探索设置收束时刻：到点必须定一个版本",
+                        "用看板/清单管理注意力，避免发散"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:JP:P",
+                        "state:strong"
+                    ],
+                    "priority": 95,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_AT_A_strong",
+                    "section": "traits",
+                    "title": "A（自信型）偏好较强：压力下更像“定海针”",
+                    "desc": "你更能在不确定里保持笃定，决策更快、波动更小。",
+                    "bullets": [
+                        "更少内耗",
+                        "更敢推进关键决策",
+                        "能稳住团队节奏"
+                    ],
+                    "tips": [
+                        "重大判断加一道反证清单，避免过度自信",
+                        "把“确定”和“假设”分开表达"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:A",
+                        "state:strong"
+                    ],
+                    "priority": 93,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_AT_T_strong",
+                    "section": "traits",
+                    "title": "T（敏感型）偏好较强：压力下更像“校准器”",
+                    "desc": "你更谨慎地检查与修正，风险嗅觉强，愿意迭代自己。",
+                    "bullets": [
+                        "风险意识更强",
+                        "更愿意反思与修正",
+                        "更在意质量与正确性"
+                    ],
+                    "tips": [
+                        "把担心写成清单并排序，只解决最重要的 1 条",
+                        "设置完成线：到线就交付，再迭代"
+                    ],
+                    "tags": [
+                        "kind:axis",
+                        "axis:AT:T",
+                        "state:strong"
+                    ],
+                    "priority": 93,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 12
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_EI_E_intro",
+                    "section": "traits",
+                    "title": "E 轻解释：互动能帮你更快“启动”",
+                    "desc": "即便不是强外向，你也会在适度交流中更快进入状态。",
+                    "bullets": [
+                        "讨论能帮助你理清思路",
+                        "更愿意通过协作推进",
+                        "在人群中更容易被点亮"
+                    ],
+                    "tips": [
+                        "把交流做短：用快会代替长拉扯",
+                        "给自己留一段安静收尾时间"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:E",
+                        "state:clear"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_EI_I_intro",
+                    "section": "traits",
+                    "title": "I 轻解释：独处能帮你更快“充电”",
+                    "desc": "即便不是强内向，你也会在安静思考中更快恢复与校准。",
+                    "bullets": [
+                        "独处能让你恢复专注",
+                        "更偏好深度而非频繁互动",
+                        "更喜欢先想清楚再表达"
+                    ],
+                    "tips": [
+                        "把重要观点先写成 3 行，再进入讨论",
+                        "给自己留一个不被打断的固定时段"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:EI:I",
+                        "state:clear"
+                    ],
+                    "priority": 60,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "I",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_JP_J_intro",
+                    "section": "traits",
+                    "title": "J 轻解释：你喜欢“有个计划”",
+                    "desc": "即便不算强 J，你也更舒服在有节奏、有闭环的推进方式里。",
+                    "bullets": [
+                        "更愿意先定关键节点",
+                        "更喜欢明确的优先级",
+                        "收尾会让你更安心"
+                    ],
+                    "tips": [
+                        "计划做轻一点：只定 3 个关键节点",
+                        "给变化留口子，不必一次定死所有细节"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:J",
+                        "state:clear"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "J",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_JP_P_intro",
+                    "section": "traits",
+                    "title": "P 轻解释：你喜欢“先试试看”",
+                    "desc": "即便不算强 P，你也更舒服在先探索、后收束的节奏里。",
+                    "bullets": [
+                        "更愿意先试出可行性",
+                        "更能适应变化",
+                        "更喜欢保留选择空间"
+                    ],
+                    "tips": [
+                        "探索也要有收束点，避免无限延展",
+                        "把灵感记成清单，再按优先级推进"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:JP:P",
+                        "state:clear"
+                    ],
+                    "priority": 58,
+                    "match": {
+                        "axis": {
+                            "dim": "JP",
+                            "side": "P",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_AT_A_intro",
+                    "section": "traits",
+                    "title": "A（自信型）轻解释：更快拍板、更稳推进",
+                    "desc": "即便不是强 A，你也可能在关键时刻更倾向快速定方向、先推进再校准。",
+                    "bullets": [
+                        "更敢推进决定",
+                        "波动更小、更少内耗",
+                        "能稳定团队节奏"
+                    ],
+                    "tips": [
+                        "重大判断加一次反证检查，避免过度自信",
+                        "把“确定”和“假设”分开说更清晰"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:AT:A",
+                        "state:clear"
+                    ],
+                    "priority": 56,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "A",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_axis_AT_T_intro",
+                    "section": "traits",
+                    "title": "T（敏感型）轻解释：更谨慎校准、更在意做对",
+                    "desc": "即便不是强 T，你也可能在压力下更倾向复查修正，让结果更可靠。",
+                    "bullets": [
+                        "风险嗅觉更强",
+                        "更愿意自省与修正",
+                        "更在意质量与正确性"
+                    ],
+                    "tips": [
+                        "把担心写成清单并排序，先解决最重要的一条",
+                        "设定完成线：到线就交付，再迭代"
+                    ],
+                    "tags": [
+                        "kind:axis_intro",
+                        "axis:AT:T",
+                        "state:clear"
+                    ],
+                    "priority": 56,
+                    "match": {
+                        "axis": {
+                            "dim": "AT",
+                            "side": "T",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": []
+                },
+                {
+                    "id": "traits_core_01",
+                    "section": "traits",
+                    "title": "你的底色：把事情推进到“有结果”",
+                    "desc": "你更容易把注意力放在目标与行动上：先推进，再优化。",
+                    "bullets": [
+                        "先行动再迭代",
+                        "偏好可衡量的结果",
+                        "对拖延与低效更敏感"
+                    ],
+                    "tips": [
+                        "给自己留一个“复盘窗口”，避免只顾推进忽略校准",
+                        "把关键目标写成 1 句话，协作会更顺"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "scope:general"
+                    ],
+                    "priority": 100,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "traits_core_02",
+                    "section": "traits",
+                    "title": "你更像“结构型推进者”",
+                    "desc": "遇到问题时，你会自然地把它拆成可执行步骤：先搭系统，再持续优化。",
+                    "bullets": [
+                        "把模糊变清晰",
+                        "把复杂变流程",
+                        "把目标变里程碑"
+                    ],
+                    "tips": [
+                        "把最重要的 1 个指标放在显眼位置，避免忙但跑偏",
+                        "每周做一次“减法”，删掉 1 个低价值任务"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:execution"
+                    ],
+                    "priority": 97,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "traits_core_03",
+                    "section": "traits",
+                    "title": "你对“质量线”很敏感",
+                    "desc": "你不太能忍受“差不多就行”，更倾向把标准说清楚、把结果做扎实。",
+                    "bullets": [
+                        "对瑕疵更敏感",
+                        "更愿意做长期积累",
+                        "更在意一致性与可复制"
+                    ],
+                    "tips": [
+                        "把“我想要”改写成“验收标准”，沟通会轻很多",
+                        "允许自己有一个 60 分交付线，再迭代到 90 分"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:quality"
+                    ],
+                    "priority": 95,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "traits_core_04",
+                    "section": "traits",
+                    "title": "你擅长把分歧变共识",
+                    "desc": "你不喜欢无效争论，更愿意对齐目标、拆清选项，让讨论回到可行动上。",
+                    "bullets": [
+                        "善于抓住共同目标",
+                        "能把讨论压缩成决策点",
+                        "更关注解决问题而非赢辩论"
+                    ],
+                    "tips": [
+                        "冲突场景先复述对方目标，再给方案",
+                        "把选择写成 A/B/C 三个选项，决策更快"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:collaboration"
+                    ],
+                    "priority": 93,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "traits_core_05",
+                    "section": "traits",
+                    "title": "你有“长期主义”的一面",
+                    "desc": "你更愿意做能复利的事：系统、习惯、关系、能力。",
+                    "bullets": [
+                        "更看重积累与复利",
+                        "不爱走捷径",
+                        "愿意为未来投入"
+                    ],
+                    "tips": [
+                        "把长期目标拆成 4 周一个小里程碑",
+                        "给自己一个“可持续强度”，别把热情一次烧完"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:longterm"
+                    ],
+                    "priority": 92,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "traits_core_06",
+                    "section": "traits",
+                    "title": "你对风险有天然嗅觉",
+                    "desc": "你会下意识寻找潜在问题与不确定点，这让你更稳，但也可能更紧绷。",
+                    "bullets": [
+                        "能提前看到坑",
+                        "更擅长做预案",
+                        "关键节点更谨慎"
+                    ],
+                    "tips": [
+                        "把风险写成 3 条：发生概率/影响/应对",
+                        "只为‘高影响’风险投入精力，别被小概率消耗"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:neutral",
+                        "topic:risk"
+                    ],
+                    "priority": 90,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "traits_core_07",
+                    "section": "traits",
+                    "title": "你需要“节奏感”而不是一直拼",
+                    "desc": "你更适合用节奏驱动：推进—休整—复盘—再推进，输出会更稳定。",
+                    "bullets": [
+                        "有节奏时更高效",
+                        "复盘能快速升级",
+                        "过度消耗会明显降质"
+                    ],
+                    "tips": [
+                        "给自己设一个固定收尾仪式（5 分钟复盘）",
+                        "把休息也写进计划：休息是续航，不是浪费"
+                    ],
+                    "tags": [
+                        "kind:core",
+                        "tone:warm",
+                        "topic:energy"
+                    ],
+                    "priority": 88,
+                    "access_level": "preview",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "card.canary.rules_on",
+                    "section": "traits",
+                    "title": "CANARY_RULES_ON",
+                    "desc": "如果你看到这张卡，说明 item.rules(require_all) 已生效",
+                    "bullets": [],
+                    "tips": [
+                        "先做一小步，再迭代优化"
+                    ],
+                    "tags": [
+                        "role:SJ",
+                        "topic:canary"
+                    ],
+                    "priority": 9999,
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "rules": [],
+                    "match": null
+                },
+                {
+                    "id": "card.canary.rules_off",
+                    "section": "traits",
+                    "title": "CANARY_RULES_OFF",
+                    "desc": "如果你看到这张卡，说明 rules 没生效（它应该被过滤掉）",
+                    "bullets": [],
+                    "tips": [
+                        "先做一小步，再迭代优化"
+                    ],
+                    "tags": [
+                        "role:SJ",
+                        "topic:canary"
+                    ],
+                    "rules": {
+                        "require_all": [
+                            "role:__NOT_EXIST__"
+                        ]
+                    },
+                    "priority": 9998,
+                    "access_level": "paid",
+                    "module_code": "core_full",
+                    "match": null
+                },
+                {
+                    "id": "card.canary.rule_engine",
+                    "section": "traits",
+                    "title": "CANARY_CARD_SELECTED",
+                    "desc": "如果你看到这张卡，说明 cards 走了 templates + rules 选择器",
+                    "bullets": [],
+                    "tips": [
+                        "先做一小步，再迭代优化"
+                    ],
+                    "tags": [
+                        "canary:card",
+                        "role:SJ"
+                    ],
+                    "rules": {
+                        "require_any": [],
+                        "require_all": [],
+                        "forbid": [
+                            "role:SJ"
+                        ],
+                        "min_match": 0
+                    },
+                    "priority": 999,
+                    "match": {
+                        "axis": {
+                            "dim": "EI",
+                            "side": "E",
+                            "min_delta": 0
+                        }
+                    },
+                    "access_level": "paid",
+                    "module_code": "core_full"
+                }
+            ],
+            "rules": {
+                "min_cards": 2,
+                "target_cards": 3,
+                "max_cards": 6,
+                "fallback_tags": [
+                    "kind:core"
+                ]
+            }
+        }
+    }
+}

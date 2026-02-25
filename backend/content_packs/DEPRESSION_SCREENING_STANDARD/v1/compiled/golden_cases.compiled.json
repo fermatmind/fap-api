@@ -1,0 +1,74 @@
+{
+    "schema": "sds_20.golden_cases.compiled.v1",
+    "pack_id": "SDS_20",
+    "pack_version": "v1",
+    "generated_at": "2026-02-22T11:14:48.029064Z",
+    "cases": [
+        {
+            "case_id": "all_A",
+            "locale": "zh-CN",
+            "answers": "AAAAAAAAAAAAAAAAAAAA",
+            "duration_ms": 98000,
+            "expected_index_score": 62,
+            "expected_clinical_level": "mild_depression",
+            "expected_crisis_alert": false,
+            "expected_quality_level": "C",
+            "expected_has_somatic_exhaustion_mask": false
+        },
+        {
+            "case_id": "all_D",
+            "locale": "zh-CN",
+            "answers": "DDDDDDDDDDDDDDDDDDDD",
+            "duration_ms": 98000,
+            "expected_index_score": 62,
+            "expected_clinical_level": "mild_depression",
+            "expected_crisis_alert": true,
+            "expected_quality_level": "C",
+            "expected_has_somatic_exhaustion_mask": false
+        },
+        {
+            "case_id": "crisis_q19_c",
+            "locale": "zh-CN",
+            "answers": "AAAAAAAAAAAAAAAAAACA",
+            "duration_ms": 98000,
+            "expected_index_score": 65,
+            "expected_clinical_level": "moderate_depression",
+            "expected_crisis_alert": true,
+            "expected_quality_level": "C",
+            "expected_has_somatic_exhaustion_mask": false
+        },
+        {
+            "case_id": "somatic_mask",
+            "locale": "zh-CN",
+            "answers": "AADDAADDDDAADADAAADC",
+            "duration_ms": 98000,
+            "expected_index_score": 93,
+            "expected_clinical_level": "severe_depression",
+            "expected_crisis_alert": true,
+            "expected_quality_level": "A",
+            "expected_has_somatic_exhaustion_mask": true
+        },
+        {
+            "case_id": "speeding_pattern",
+            "locale": "en",
+            "answers": "ABCDABCDABCDABCDABCD",
+            "duration_ms": 20000,
+            "expected_index_score": 62,
+            "expected_clinical_level": "mild_depression",
+            "expected_crisis_alert": true,
+            "expected_quality_level": "D",
+            "expected_has_somatic_exhaustion_mask": true
+        },
+        {
+            "case_id": "straightline_B",
+            "locale": "zh-CN",
+            "answers": "BBBBBBBBBBBBBBBBBBBB",
+            "duration_ms": 98000,
+            "expected_index_score": 62,
+            "expected_clinical_level": "mild_depression",
+            "expected_crisis_alert": false,
+            "expected_quality_level": "C",
+            "expected_has_somatic_exhaustion_mask": false
+        }
+    ]
+}

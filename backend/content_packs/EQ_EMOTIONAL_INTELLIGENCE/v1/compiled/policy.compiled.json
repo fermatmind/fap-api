@@ -1,0 +1,430 @@
+{
+    "schema": "eq_60.policy.compiled.v2",
+    "pack_id": "EQ_60",
+    "pack_version": "v1",
+    "generated_at": "2026-02-25T02:27:40.874193Z",
+    "policy": {
+        "schema": "eq_60.policy.runtime.v2",
+        "pack_id": "EQ_60",
+        "pack_version": "v1",
+        "source_pack_id": "EQ_GOLEMAN_60",
+        "source_scale_code": "EQ_GOLEMAN_60",
+        "engine_version": "v1.0_normed_validity",
+        "scoring_spec_version": "eq60_spec_2026_v2",
+        "source_spec_version": "eq60_spec_v1",
+        "answer_codes_allowed": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+        ],
+        "dimension_codes": [
+            "SA",
+            "ER",
+            "EM",
+            "RM"
+        ],
+        "dimension_map": {
+            "SA": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+            ],
+            "ER": [
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30
+            ],
+            "EM": [
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+            ],
+            "RM": [
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60
+            ]
+        },
+        "reverse_question_ids": [
+            5,
+            10,
+            11,
+            15,
+            18,
+            20,
+            22,
+            23,
+            29,
+            30,
+            31,
+            42,
+            44,
+            52,
+            53,
+            57
+        ],
+        "reverse_rule": "6_minus_raw",
+        "score_range": {
+            "dimension": {
+                "min": 15,
+                "max": 75
+            },
+            "total": {
+                "min": 60,
+                "max": 300
+            }
+        },
+        "validity_rules": {
+            "speeding": {
+                "c_lt_seconds": 120,
+                "d_lt_seconds": 75
+            },
+            "longstring": {
+                "c_gte": 25,
+                "d_gte": 35
+            },
+            "extreme_rate": {
+                "c_gte": 0.85
+            },
+            "neutral_rate": {
+                "c_gte": 0.7
+            },
+            "inconsistency": {
+                "c_gte": 18,
+                "d_gte": 24
+            }
+        },
+        "inconsistency_pairs": [
+            [
+                1,
+                11
+            ],
+            [
+                16,
+                22
+            ],
+            [
+                32,
+                39
+            ],
+            [
+                46,
+                52
+            ],
+            [
+                27,
+                30
+            ],
+            [
+                10,
+                14
+            ],
+            [
+                34,
+                44
+            ],
+            [
+                47,
+                57
+            ],
+            [
+                28,
+                18
+            ],
+            [
+                41,
+                31
+            ]
+        ],
+        "std_score": {
+            "mean": 100,
+            "sd": 15,
+            "clamp_min": 55,
+            "clamp_max": 145
+        },
+        "bootstrap_norms": {
+            "mu_dim": 53.5,
+            "sigma_dim": 7.5,
+            "status": "PROVISIONAL",
+            "version": "bootstrap_v1",
+            "group": "locale_all_18-60"
+        },
+        "level_bands": {
+            "baseline_max": 84.99,
+            "developing_max": 92.99,
+            "competent_max": 107.99,
+            "proficient_max": 115.99
+        },
+        "cross_insight_rules": [
+            {
+                "tag": "profile:overthinking_burn",
+                "when": {
+                    "SA_GTE": 108,
+                    "ER_LTE": 92
+                }
+            },
+            {
+                "tag": "profile:social_masking",
+                "when": {
+                    "RM_GTE": 108,
+                    "SA_LTE": 92
+                }
+            },
+            {
+                "tag": "profile:compassion_overload",
+                "when": {
+                    "EM_GTE": 115,
+                    "ER_LTE": 92
+                }
+            },
+            {
+                "tag": "profile:cool_detached",
+                "when": {
+                    "ER_GTE": 108,
+                    "EM_LTE": 92
+                }
+            },
+            {
+                "tag": "profile:emotion_leader",
+                "when": {
+                    "RM_GTE": 115,
+                    "EM_GTE": 108
+                }
+            },
+            {
+                "tag": "profile:balanced_high_eq",
+                "when": {
+                    "SA_GTE": 108,
+                    "ER_GTE": 108,
+                    "EM_GTE": 108,
+                    "RM_GTE": 108
+                }
+            }
+        ],
+        "tags": {
+            "primary_profile_priority": [
+                "profile:balanced_high_eq",
+                "profile:emotion_leader",
+                "profile:compassion_overload",
+                "profile:overthinking_burn",
+                "profile:social_masking",
+                "profile:cool_detached"
+            ],
+            "rules": [
+                {
+                    "tag": "profile:overthinking_burn",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "SA",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "ER",
+                                "op": "<=",
+                                "value": 92
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "focus:regulation_skills"
+                    ]
+                },
+                {
+                    "tag": "profile:social_masking",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "RM",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "SA",
+                                "op": "<=",
+                                "value": 92
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "focus:self_connection"
+                    ]
+                },
+                {
+                    "tag": "profile:compassion_overload",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "EM",
+                                "op": ">=",
+                                "value": 115
+                            },
+                            {
+                                "metric": "ER",
+                                "op": "<=",
+                                "value": 92
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "focus:boundary_setting"
+                    ]
+                },
+                {
+                    "tag": "profile:cool_detached",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "ER",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "EM",
+                                "op": "<=",
+                                "value": 92
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "focus:empathy_practice"
+                    ]
+                },
+                {
+                    "tag": "profile:emotion_leader",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "RM",
+                                "op": ">=",
+                                "value": 115
+                            },
+                            {
+                                "metric": "EM",
+                                "op": ">=",
+                                "value": 108
+                            }
+                        ]
+                    },
+                    "add_tags": [
+                        "strength:influence"
+                    ]
+                },
+                {
+                    "tag": "profile:balanced_high_eq",
+                    "when": {
+                        "all": [
+                            {
+                                "metric": "SA",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "ER",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "EM",
+                                "op": ">=",
+                                "value": 108
+                            },
+                            {
+                                "metric": "RM",
+                                "op": ">=",
+                                "value": 108
+                            }
+                        ]
+                    },
+                    "add_tags": []
+                }
+            ]
+        },
+        "report": {
+            "sections_free": [
+                "disclaimer_top",
+                "quality_notice",
+                "global_overview",
+                "self_awareness",
+                "emotion_regulation",
+                "empathy",
+                "relationship_management",
+                "methodology",
+                "disclaimer_bottom"
+            ],
+            "sections_full": [
+                "disclaimer_top",
+                "quality_notice",
+                "global_overview",
+                "self_awareness",
+                "emotion_regulation",
+                "empathy",
+                "relationship_management",
+                "cross_quadrant_insight",
+                "action_plan_14d",
+                "methodology",
+                "disclaimer_bottom"
+            ],
+            "access_modules": {
+                "free": [
+                    "eq_core"
+                ],
+                "paid": [
+                    "eq_cross_insights",
+                    "eq_growth_plan"
+                ]
+            }
+        }
+    }
+}
