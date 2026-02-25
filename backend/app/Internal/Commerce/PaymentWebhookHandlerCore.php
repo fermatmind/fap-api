@@ -32,6 +32,10 @@ class PaymentWebhookHandlerCore
 
     private const DEFAULT_WEBHOOK_LOCK_BLOCK_SECONDS = 5;
 
+    private const TRANSIENT_DB_RETRY_MAX_ATTEMPTS = 3;
+
+    private const TRANSIENT_DB_RETRY_BASE_USLEEP = 100000;
+
     /** @var array<string, PaymentGatewayInterface> */
     private array $gateways = [];
 
@@ -114,7 +118,10 @@ class PaymentWebhookHandlerCore
         $postCommitCtx = null;
 
         try {
-            $result = Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
+            $result = $this->runWithTransientDbRetry(function () use (
+                $lockKey,
+                $lockTtl,
+                $lockBlock,
                 $orderNo,
                 $normalized,
                 $providerEventId,
@@ -130,7 +137,7 @@ class PaymentWebhookHandlerCore
                 $signatureOk,
                 &$postCommitCtx
             ) {
-                return DB::transaction(function () use (
+                return Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
                     $orderNo,
                     $normalized,
                     $providerEventId,
@@ -146,6 +153,22 @@ class PaymentWebhookHandlerCore
                     $signatureOk,
                     &$postCommitCtx
                 ) {
+                    return DB::transaction(function () use (
+                        $orderNo,
+                        $normalized,
+                        $providerEventId,
+                        $provider,
+                        $orgId,
+                        $userId,
+                        $anonId,
+                        $eventType,
+                        $receivedAt,
+                        $payloadSummaryJson,
+                        $payloadExcerpt,
+                        $resolvedPayloadMeta,
+                        $signatureOk,
+                        &$postCommitCtx
+                    ) {
                     $insertSeed = [
                         'id' => (string) Str::uuid(),
                         'provider' => $provider,
@@ -591,6 +614,7 @@ class PaymentWebhookHandlerCore
                         'order_no' => $orderNo,
                         'provider_event_id' => $providerEventId,
                     ];
+                    });
                 });
             });
 
@@ -650,6 +674,54 @@ class PaymentWebhookHandlerCore
         } catch (LockTimeoutException $e) {
             return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
         }
+    }
+
+    /**
+     * @param callable():array<string,mixed> $callback
+     * @return array<string,mixed>
+     */
+    private function runWithTransientDbRetry(callable $callback): array
+    {
+        $attempt = 0;
+
+        while (true) {
+            try {
+                return $callback();
+            } catch (\Throwable $e) {
+                $attempt++;
+
+                if (! $this->isTransientDatabaseFailure($e) || $attempt >= self::TRANSIENT_DB_RETRY_MAX_ATTEMPTS) {
+                    throw $e;
+                }
+
+                usleep(self::TRANSIENT_DB_RETRY_BASE_USLEEP * $attempt);
+            }
+        }
+    }
+
+    private function isTransientDatabaseFailure(\Throwable $e): bool
+    {
+        $message = strtolower(trim($e->getMessage()));
+        if ($message === '') {
+            return false;
+        }
+
+        foreach ([
+            'database is locked',
+            'database table is locked',
+            'deadlock found',
+            'lock wait timeout exceeded',
+            'try restarting transaction',
+            'sqlstate[40001]',
+            'sqlstate[40p01]',
+            'sqlstate[hy000]',
+        ] as $needle) {
+            if (str_contains($message, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function evaluateDryRun(
