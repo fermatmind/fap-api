@@ -22,6 +22,8 @@ class ReportSnapshot extends Model
         'attempt_id',
         'order_no',
         'scale_code',
+        'scale_code_v2',
+        'scale_uid',
         'pack_id',
         'dir_version',
         'scoring_spec_version',

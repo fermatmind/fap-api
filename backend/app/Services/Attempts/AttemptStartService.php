@@ -14,6 +14,7 @@ use App\Services\Content\Sds20PackLoader;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
+use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
@@ -34,20 +35,39 @@ class AttemptStartService
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
         private BigFiveTelemetry $bigFiveTelemetry,
+        private ScaleIdentityResolver $identityResolver,
     ) {}
 
     public function start(OrgContext $ctx, StartAttemptDTO $dto): array
     {
         $orgId = $ctx->orgId();
 
-        $scaleCode = $dto->scaleCode;
-        if ($scaleCode === '') {
+        $requestedScaleCode = strtoupper(trim((string) $dto->scaleCode));
+        if ($requestedScaleCode === '') {
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code is required.');
         }
 
-        $row = $this->registry->getByCode($scaleCode, $orgId);
+        $row = $this->registry->getByCode($requestedScaleCode, $orgId);
         if (! $row) {
             throw new ApiProblemException(404, 'NOT_FOUND', 'scale not found.');
+        }
+        $scaleCode = strtoupper(trim((string) ($row['code'] ?? $requestedScaleCode)));
+        $this->assertDemoScaleAllowed($scaleCode, $requestedScaleCode);
+        $identity = $this->identityResolver->resolveByAnyCode($requestedScaleCode);
+        if (! is_array($identity) || ! ((bool) ($identity['is_known'] ?? false))) {
+            $identity = $this->identityResolver->resolveByAnyCode($scaleCode);
+        }
+        $scaleCodeV2 = $scaleCode;
+        $scaleUid = null;
+        if (is_array($identity) && ((bool) ($identity['is_known'] ?? false))) {
+            $resolvedV2 = strtoupper(trim((string) ($identity['scale_code_v2'] ?? '')));
+            $resolvedUid = trim((string) ($identity['scale_uid'] ?? ''));
+            if ($resolvedV2 !== '') {
+                $scaleCodeV2 = $resolvedV2;
+            }
+            if ($resolvedUid !== '') {
+                $scaleUid = $resolvedUid;
+            }
         }
 
         $region = (string) ($dto->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
@@ -192,7 +212,7 @@ class AttemptStartService
         $channel = (string) ($dto->channel ?? '');
         $referrer = (string) ($dto->referrer ?? '');
 
-        $attempt = Attempt::create([
+        $attemptPayload = [
             'org_id' => $orgId,
             'anon_id' => $anonId,
             'user_id' => $ctx->userId(),
@@ -214,7 +234,13 @@ class AttemptStartService
                 'created_at_ms' => (int) round(microtime(true) * 1000),
                 'meta' => $answersSummaryMeta,
             ],
-        ]);
+        ];
+        if ($this->shouldWriteScaleIdentityColumns()) {
+            $attemptPayload['scale_code_v2'] = $scaleCodeV2;
+            $attemptPayload['scale_uid'] = $scaleUid;
+        }
+
+        $attempt = Attempt::create($attemptPayload);
 
         $draft = $this->progressService->createDraftForAttempt($attempt);
         if (! empty($draft['expires_at'])) {
@@ -224,6 +250,8 @@ class AttemptStartService
 
         $this->eventRecorder->record('test_start', $ctx->userId(), [
             'scale_code' => $scaleCode,
+            'scale_code_v2' => $scaleCodeV2,
+            'scale_uid' => $scaleUid,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
             'content_package_version' => $contentPackageVersion,
@@ -232,6 +260,9 @@ class AttemptStartService
             'org_id' => $orgId,
             'anon_id' => $anonId,
             'attempt_id' => (string) $attempt->id,
+            'scale_code' => $scaleCode,
+            'scale_code_v2' => $scaleCodeV2,
+            'scale_uid' => $scaleUid,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
             'channel' => $channel !== '' ? $channel : null,
@@ -260,10 +291,17 @@ class AttemptStartService
             ]);
         }
 
+        $responseScaleCode = $this->identityResolver->resolveResponseScaleCode($scaleCode, $scaleCodeV2);
+
         return [
             'ok' => true,
             'attempt_id' => (string) $attempt->id,
-            'scale_code' => $scaleCode,
+            'scale_code' => $responseScaleCode,
+            'scale_code_legacy' => $scaleCode,
+            'scale_code_v2' => $scaleCodeV2,
+            'scale_uid' => $scaleUid,
+            'requested_scale_code' => $requestedScaleCode,
+            'resolved_from_alias' => $requestedScaleCode !== $scaleCode,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
             'region' => $region,
@@ -272,6 +310,45 @@ class AttemptStartService
             'resume_token' => (string) ($draft['token'] ?? ''),
             'resume_expires_at' => ! empty($draft['expires_at']) ? $draft['expires_at']->toISOString() : null,
         ];
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    private function assertDemoScaleAllowed(string $scaleCode, string $requestedScaleCode): void
+    {
+        $legacyCode = strtoupper(trim($scaleCode));
+        if ($legacyCode === '' || $this->identityResolver->shouldAllowDemoScale($legacyCode)) {
+            return;
+        }
+
+        $replacementLegacy = $this->identityResolver->demoReplacement($legacyCode);
+        $replacementV2 = null;
+        if ($replacementLegacy !== null) {
+            $replacementIdentity = $this->identityResolver->resolveByAnyCode($replacementLegacy);
+            if (is_array($replacementIdentity) && ((bool) ($replacementIdentity['is_known'] ?? false))) {
+                $resolved = strtoupper(trim((string) ($replacementIdentity['scale_code_v2'] ?? '')));
+                if ($resolved !== '') {
+                    $replacementV2 = $resolved;
+                }
+            }
+        }
+
+        throw new ApiProblemException(
+            410,
+            'SCALE_DEPRECATED',
+            'scale is deprecated.',
+            [
+                'requested_scale_code' => strtoupper(trim($requestedScaleCode)),
+                'scale_code_legacy' => $legacyCode,
+                'replacement_scale_code' => $replacementLegacy,
+                'replacement_scale_code_v2' => $replacementV2,
+            ]
+        );
     }
 
     private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion): int
@@ -457,12 +534,16 @@ class AttemptStartService
         $policy = is_array($compiled['policy'] ?? null) ? $compiled['policy'] : [];
         $retake = is_array($policy['retake'] ?? null) ? $policy['retake'] : [];
 
-        if ($retake === []) {
-            $rawPath = base_path('content_packs/BIG5_OCEAN/v1/raw/policy.json');
-            if (is_file($rawPath)) {
-                $raw = json_decode((string) file_get_contents($rawPath), true);
-                if (is_array($raw)) {
-                    $retake = is_array($raw['retake'] ?? null) ? $raw['retake'] : [];
+        $contentPathMode = strtolower(trim((string) config('scale_identity.content_path_mode', 'legacy')));
+        $preferRawInV2Mode = in_array($contentPathMode, ['dual_prefer_new', 'v2'], true);
+        if ($retake === [] || $preferRawInV2Mode) {
+            $raw = $this->bigFivePackLoader->readJson(
+                $this->bigFivePackLoader->rawPath('policy.json', $dirVersion)
+            );
+            if (is_array($raw)) {
+                $rawRetake = is_array($raw['retake'] ?? null) ? $raw['retake'] : [];
+                if ($rawRetake !== []) {
+                    $retake = $rawRetake;
                 }
             }
         }

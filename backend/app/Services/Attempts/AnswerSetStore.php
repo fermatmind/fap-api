@@ -3,6 +3,7 @@
 namespace App\Services\Attempts;
 
 use App\Models\Attempt;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 class AnswerSetStore
@@ -18,9 +19,7 @@ class AnswerSetStore
         $storedAnswersJson = $isSensitiveScale ? null : $compressed;
 
         $now = now();
-        DB::table('attempt_answer_sets')->updateOrInsert([
-            'attempt_id' => (string) $attempt->id,
-        ], [
+        $upsertValues = [
             'org_id' => (int) ($attempt->org_id ?? 0),
             'scale_code' => (string) ($attempt->scale_code ?? ''),
             'pack_id' => (string) ($attempt->pack_id ?? ''),
@@ -32,7 +31,29 @@ class AnswerSetStore
             'duration_ms' => $durationMs,
             'submitted_at' => $now,
             'created_at' => $now,
-        ]);
+        ];
+
+        $canWriteIdentity = $this->shouldWriteScaleIdentityColumns();
+        if ($canWriteIdentity) {
+            $identity = $this->resolveScaleIdentityValues($attempt);
+            $upsertValues['scale_code_v2'] = $identity['scale_code_v2'];
+            $upsertValues['scale_uid'] = $identity['scale_uid'];
+        }
+
+        try {
+            DB::table('attempt_answer_sets')->updateOrInsert([
+                'attempt_id' => (string) $attempt->id,
+            ], $upsertValues);
+        } catch (QueryException $exception) {
+            if (! $canWriteIdentity || ! $this->isMissingScaleIdentityColumnError($exception)) {
+                throw $exception;
+            }
+
+            unset($upsertValues['scale_code_v2'], $upsertValues['scale_uid']);
+            DB::table('attempt_answer_sets')->updateOrInsert([
+                'attempt_id' => (string) $attempt->id,
+            ], $upsertValues);
+        }
 
         return [
             'ok' => true,
@@ -110,5 +131,72 @@ class AnswerSetStore
             $result[] = $this->sortKeysRecursively($item);
         }
         return $result;
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    private function isMissingScaleIdentityColumnError(QueryException $exception): bool
+    {
+        $sqlState = strtoupper(trim((string) ($exception->errorInfo[0] ?? '')));
+        $message = strtolower($exception->getMessage());
+
+        if ($sqlState === '42S22') {
+            return true;
+        }
+
+        return str_contains($message, 'no such column')
+            || str_contains($message, 'has no column named')
+            || str_contains($message, 'unknown column');
+    }
+
+    /**
+     * @return array{scale_code_v2:string|null,scale_uid:string|null}
+     */
+    private function resolveScaleIdentityValues(Attempt $attempt): array
+    {
+        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
+        $scaleUid = trim((string) ($attempt->scale_uid ?? ''));
+
+        if ($scaleCodeV2 !== '' && $scaleUid !== '') {
+            return [
+                'scale_code_v2' => $scaleCodeV2,
+                'scale_uid' => $scaleUid,
+            ];
+        }
+
+        $scaleCodeV1 = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if ($scaleCodeV1 === '') {
+            return [
+                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+            ];
+        }
+
+        $v1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
+        $uidMap = (array) config('scale_identity.scale_uid_map', []);
+
+        if ($scaleCodeV2 === '') {
+            $mappedV2 = strtoupper(trim((string) ($v1ToV2[$scaleCodeV1] ?? '')));
+            if ($mappedV2 !== '') {
+                $scaleCodeV2 = $mappedV2;
+            }
+        }
+
+        if ($scaleUid === '') {
+            $mappedUid = trim((string) ($uidMap[$scaleCodeV1] ?? ''));
+            if ($mappedUid !== '') {
+                $scaleUid = $mappedUid;
+            }
+        }
+
+        return [
+            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+        ];
     }
 }

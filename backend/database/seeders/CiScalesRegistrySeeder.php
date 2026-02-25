@@ -35,6 +35,7 @@ final class CiScalesRegistrySeeder extends Seeder
         if ($demoPackId === '') {
             $demoPackId = $defaultPackId;
         }
+        $includeDemoScales = $this->includeDemoScales();
 
         $rows = [
             [
@@ -258,6 +259,13 @@ final class CiScalesRegistrySeeder extends Seeder
             ],
         ];
 
+        if (! $includeDemoScales) {
+            $rows = array_values(array_filter($rows, static function (array $row): bool {
+                $code = strtoupper(trim((string) ($row['code'] ?? '')));
+                return ! in_array($code, ['DEMO_ANSWERS', 'SIMPLE_SCORE_DEMO'], true);
+            }));
+        }
+
         DB::table('scales_registry')->upsert(
             $rows,
             ['code'],
@@ -278,6 +286,36 @@ final class CiScalesRegistrySeeder extends Seeder
             ]
         );
 
-        $this->command?->info('CiScalesRegistrySeeder: upserted 8 scales.');
+        if (! $includeDemoScales) {
+            DB::table('scales_registry')
+                ->where('org_id', 0)
+                ->whereIn('code', ['DEMO_ANSWERS', 'SIMPLE_SCORE_DEMO'])
+                ->update([
+                    'is_active' => 0,
+                    'is_public' => 0,
+                    'updated_at' => $now,
+                ]);
+        }
+
+        $this->command?->info(sprintf(
+            'CiScalesRegistrySeeder: upserted %d scales (include_demo_scales=%d).',
+            count($rows),
+            $includeDemoScales ? 1 : 0
+        ));
+    }
+
+    private function includeDemoScales(): bool
+    {
+        $raw = getenv('FAP_CI_INCLUDE_DEMO_SCALES');
+        if ($raw === false) {
+            return false;
+        }
+
+        $normalized = strtolower(trim((string) $raw));
+        if ($normalized === '') {
+            return false;
+        }
+
+        return ! in_array($normalized, ['0', 'false', 'off', 'no'], true);
     }
 }

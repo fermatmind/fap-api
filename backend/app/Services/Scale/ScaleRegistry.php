@@ -11,6 +11,10 @@ class ScaleRegistry
 {
     public const CACHE_TTL_SECONDS = 300;
 
+    public function __construct(
+        private ScaleIdentityResolver $identityResolver,
+    ) {}
+
     public function listVisible(int $orgId = 0): array
     {
         if ($orgId <= 0) {
@@ -63,39 +67,26 @@ class ScaleRegistry
 
     public function getByCode(string $code, int $orgId = 0): ?array
     {
-        $code = trim($code);
-        if ($code === '') {
+        $requestedCode = strtoupper(trim($code));
+        if ($requestedCode === '') {
             return null;
         }
 
-        $cacheKey = CacheKeys::scaleRegistryByCode($orgId, $code);
+        $cacheKey = CacheKeys::scaleRegistryByCode($orgId, $requestedCode);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
             return $cached;
         }
 
-        $row = null;
-        if ($orgId <= 0) {
-            $row = ScaleRegistryModel::query()
-                ->where('org_id', 0)
-                ->where('code', $code)
-                ->where('is_public', true)
-                ->first();
-        } else {
-            $row = ScaleRegistryModel::query()
-                ->where('org_id', $orgId)
-                ->where('code', $code)
-                ->first();
-            if (!$row) {
-                $row = ScaleRegistryModel::query()
-                    ->where('org_id', 0)
-                    ->where('code', $code)
-                    ->where('is_public', true)
-                    ->first();
+        $row = $this->findByCode($requestedCode, $orgId);
+        if (! $row) {
+            $resolvedCode = $this->normalizeLookupCode($requestedCode);
+            if ($resolvedCode !== '' && $resolvedCode !== $requestedCode) {
+                $row = $this->findByCode($resolvedCode, $orgId);
             }
         }
 
-        if (!$row) {
+        if (! $row) {
             return null;
         }
 
@@ -193,5 +184,56 @@ class ScaleRegistry
         Cache::put($cacheKey, $payload, self::CACHE_TTL_SECONDS);
 
         return $payload;
+    }
+
+    private function findByCode(string $code, int $orgId): ?ScaleRegistryModel
+    {
+        if ($orgId <= 0) {
+            return ScaleRegistryModel::query()
+                ->where('org_id', 0)
+                ->where('code', $code)
+                ->where('is_public', true)
+                ->first();
+        }
+
+        $row = ScaleRegistryModel::query()
+            ->where('org_id', $orgId)
+            ->where('code', $code)
+            ->first();
+        if ($row) {
+            return $row;
+        }
+
+        return ScaleRegistryModel::query()
+            ->where('org_id', 0)
+            ->where('code', $code)
+            ->where('is_public', true)
+            ->first();
+    }
+
+    private function normalizeLookupCode(string $requestedCode): string
+    {
+        $identity = $this->identityResolver->resolveByAnyCode($requestedCode);
+        if (! is_array($identity) || ! ((bool) ($identity['is_known'] ?? false))) {
+            return $requestedCode;
+        }
+
+        $legacyCode = strtoupper(trim((string) ($identity['scale_code_v1'] ?? '')));
+        if ($legacyCode === '') {
+            return $requestedCode;
+        }
+
+        $readMode = strtolower(trim((string) config('scale_identity.read_mode', 'legacy')));
+        $isLegacyInput = $requestedCode === $legacyCode;
+        if (
+            $isLegacyInput
+            && ! $this->identityResolver->acceptsLegacyScaleCode()
+            && in_array($readMode, ['v2', 'dual_prefer_new'], true)
+        ) {
+            return '';
+        }
+
+        // Current storage is still v1; known aliases are resolved to v1 for read compatibility.
+        return $legacyCode;
     }
 }

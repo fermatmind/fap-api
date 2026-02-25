@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Content\ContentPathAliasResolver;
 use App\Services\Content\Publisher\ContentPackPublisher;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ final class PacksPublish extends Command
 
     protected $description = 'Publish BIG5_OCEAN/SDS_20 local content pack through ContentPackPublisher.';
 
-    public function handle(ContentPackPublisher $publisher): int
+    public function handle(ContentPackPublisher $publisher, ContentPathAliasResolver $pathAliasResolver): int
     {
         $scaleCode = strtoupper(trim((string) $this->option('scale')));
         if (!in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true)) {
@@ -55,7 +56,9 @@ final class PacksPublish extends Command
             return 1;
         }
 
-        $sourceDir = base_path(sprintf('content_packs/%s/%s', $packId, $version));
+        $sourceContext = $pathAliasResolver->resolveBackendPublishSourceContext($packId, $version);
+        $sourceDir = trim((string) ($sourceContext['selected_path'] ?? ''));
+        $sourceSelection = strtolower(trim((string) ($sourceContext['selected_source'] ?? 'legacy')));
         if (!File::isDirectory($sourceDir)) {
             $this->error("pack source directory not found: {$sourceDir}");
             return 1;
@@ -90,7 +93,16 @@ final class PacksPublish extends Command
         }
 
         try {
-            $versionId = $this->stageVersion($sourceDir, $packId, $version, $region, $locale, $dirAlias, $createdBy === '' ? 'cli' : $createdBy);
+            $versionId = $this->stageVersion(
+                $sourceDir,
+                $packId,
+                $version,
+                $region,
+                $locale,
+                $dirAlias,
+                $createdBy === '' ? 'cli' : $createdBy,
+                $sourceSelection
+            );
         } catch (\Throwable $e) {
             $this->error('failed to stage content version: '.$e->getMessage());
             return 1;
@@ -128,7 +140,8 @@ final class PacksPublish extends Command
         string $region,
         string $locale,
         string $dirAlias,
-        string $createdBy
+        string $createdBy,
+        string $sourceSelection = 'legacy'
     ): string {
         $versionId = (string) Str::uuid();
         $privateRoot = rtrim(storage_path('app/private'), '/\\');
@@ -156,7 +169,7 @@ final class PacksPublish extends Command
             'pack_id' => $packId,
             'content_package_version' => $version,
             'dir_version_alias' => $dirAlias,
-            'source_type' => 'local_repo',
+            'source_type' => $this->resolveLocalSourceType($sourceSelection),
             'source_ref' => $sourceRef,
             'sha256' => $sha256,
             'manifest_json' => json_encode($manifestPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
@@ -230,5 +243,19 @@ final class PacksPublish extends Command
         return $scaleCode === 'SDS_20'
             ? 'norms:sds:drift-check'
             : 'norms:big5:drift-check';
+    }
+
+    private function resolveLocalSourceType(string $sourceSelection): string
+    {
+        $selection = strtolower(trim($sourceSelection));
+        if ($selection === 'mapped') {
+            return 'local_repo_mapped';
+        }
+
+        if ($selection === 'legacy') {
+            return 'local_repo_legacy';
+        }
+
+        return 'local_repo';
     }
 }

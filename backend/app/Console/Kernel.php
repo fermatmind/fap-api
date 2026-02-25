@@ -30,6 +30,18 @@ use App\Console\Commands\NormsEq60Import;
 use App\Console\Commands\NormsImport;
 use App\Console\Commands\NormsSdsDriftCheck;
 use App\Console\Commands\NormsSdsRebuild;
+use App\Console\Commands\Ops\ScaleIdentityGate;
+use App\Console\Commands\Ops\ContentPathMirror;
+use App\Console\Commands\Ops\BackfillAssessmentsScaleIdentity;
+use App\Console\Commands\Ops\BackfillAttemptAnswerRowsScaleIdentity;
+use App\Console\Commands\Ops\BackfillAttemptAnswerSetsScaleIdentity;
+use App\Console\Commands\Ops\BackfillAttemptsScaleIdentity;
+use App\Console\Commands\Ops\BackfillEventsScaleIdentity;
+use App\Console\Commands\Ops\BackfillOrdersScaleIdentity;
+use App\Console\Commands\Ops\BackfillPaymentEventsScaleIdentity;
+use App\Console\Commands\Ops\BackfillReportSnapshotsScaleIdentity;
+use App\Console\Commands\Ops\BackfillResultsScaleIdentity;
+use App\Console\Commands\Ops\BackfillSharesScaleIdentity;
 use App\Console\Commands\Ops\PartitionAttemptAnswerRows;
 use App\Console\Commands\OpsDeployEvent;
 use App\Console\Commands\OpsHealthzSnapshot;
@@ -105,6 +117,18 @@ class Kernel extends ConsoleKernel
         StorageInventory::class,
         QualityDailySummary::class,
         CiScaleImpact::class,
+        ContentPathMirror::class,
+        ScaleIdentityGate::class,
+        BackfillAssessmentsScaleIdentity::class,
+        BackfillAttemptAnswerRowsScaleIdentity::class,
+        BackfillAttemptAnswerSetsScaleIdentity::class,
+        BackfillAttemptsScaleIdentity::class,
+        BackfillEventsScaleIdentity::class,
+        BackfillOrdersScaleIdentity::class,
+        BackfillPaymentEventsScaleIdentity::class,
+        BackfillReportSnapshotsScaleIdentity::class,
+        BackfillResultsScaleIdentity::class,
+        BackfillSharesScaleIdentity::class,
         PartitionAttemptAnswerRows::class,
     ];
 

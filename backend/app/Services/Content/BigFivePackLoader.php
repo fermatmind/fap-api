@@ -14,13 +14,15 @@ final class BigFivePackLoader
 
     public function __construct(
         private ?ContentPackV2Resolver $v2Resolver = null,
+        private ContentPathAliasResolver $pathAliasResolver,
     ) {}
 
     public function packRoot(?string $version = null): string
     {
         $version = $this->normalizeVersion($version);
+        $packBase = $this->pathAliasResolver->resolveBackendPackRoot(self::PACK_ID);
 
-        return base_path('content_packs/'.self::PACK_ID.'/'.$version);
+        return rtrim($packBase, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$version;
     }
 
     public function rawDir(?string $version = null): string

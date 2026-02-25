@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
@@ -12,6 +13,7 @@ class ScalesLookupController extends Controller
 {
     public function __construct(
         private ScaleRegistry $registry,
+        private ScaleIdentityResolver $identityResolver,
         private OrgContext $orgContext,
     ) {}
 
@@ -48,21 +50,36 @@ class ScalesLookupController extends Controller
             ], 404);
         }
 
+        $legacyScaleCode = strtoupper(trim((string) ($row['code'] ?? '')));
+        if (! $this->identityResolver->shouldAllowDemoScale($legacyScaleCode)) {
+            return $this->deprecatedScaleResponse(
+                $legacyScaleCode,
+                $requestedSlug,
+                trim((string) ($row['primary_slug'] ?? ''))
+            );
+        }
+
         $primarySlug = trim((string) ($row['primary_slug'] ?? ''));
         $resolvedFromAlias = $primarySlug !== '' && $requestedSlug !== $primarySlug;
+        $scaleCodeMeta = $this->resolveScaleCodeMeta($row);
         $locale = $this->resolveRequestedLocale($request, (string) ($row['default_locale'] ?? 'en'));
         $seo = $this->resolveSeoByLocale($row, $locale);
         $isIndexable = $this->resolveIsIndexable($row);
 
         return response()->json([
             'ok' => true,
-            'scale_code' => $row['code'] ?? '',
+            'scale_code' => $scaleCodeMeta['scale_code'],
+            'scale_code_legacy' => $scaleCodeMeta['scale_code_legacy'],
+            'scale_code_v2' => $scaleCodeMeta['scale_code_v2'],
+            'scale_uid' => $scaleCodeMeta['scale_uid'],
             'primary_slug' => $primarySlug,
             'slug' => $primarySlug,
             'requested_slug' => $requestedSlug,
             'resolved_from_alias' => $resolvedFromAlias,
             'pack_id' => $row['default_pack_id'] ?? null,
             'dir_version' => $row['default_dir_version'] ?? null,
+            'pack_id_v2' => $scaleCodeMeta['pack_id_v2'],
+            'dir_version_v2' => $scaleCodeMeta['dir_version_v2'],
             'region' => $row['default_region'] ?? null,
             'locale' => $locale,
             'driver_type' => $row['driver_type'] ?? '',
@@ -216,5 +233,67 @@ class ScalesLookupController extends Controller
     {
         $trimmed = trim((string) $value);
         return $trimmed !== '' ? $trimmed : null;
+    }
+
+    private function deprecatedScaleResponse(string $legacyScaleCode, string $requestedSlug, string $primarySlug): JsonResponse
+    {
+        $replacementLegacy = $this->identityResolver->demoReplacement($legacyScaleCode);
+        $replacementV2 = null;
+        if ($replacementLegacy !== null) {
+            $replacementIdentity = $this->identityResolver->resolveByAnyCode($replacementLegacy);
+            if (is_array($replacementIdentity) && ((bool) ($replacementIdentity['is_known'] ?? false))) {
+                $resolved = strtoupper(trim((string) ($replacementIdentity['scale_code_v2'] ?? '')));
+                if ($resolved !== '') {
+                    $replacementV2 = $resolved;
+                }
+            }
+        }
+
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'SCALE_DEPRECATED',
+            'message' => 'scale is deprecated.',
+            'details' => [
+                'requested_slug' => $requestedSlug,
+                'primary_slug' => $primarySlug !== '' ? $primarySlug : null,
+                'scale_code_legacy' => $legacyScaleCode,
+                'replacement_scale_code' => $replacementLegacy,
+                'replacement_scale_code_v2' => $replacementV2,
+            ],
+        ], 410);
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array{
+     *     scale_code:string,
+     *     scale_code_legacy:string,
+     *     scale_code_v2:string,
+     *     scale_uid:?string,
+     *     pack_id_v2:?string,
+     *     dir_version_v2:?string
+     * }
+     */
+    private function resolveScaleCodeMeta(array $row): array
+    {
+        $legacyCode = strtoupper(trim((string) ($row['code'] ?? '')));
+        $identity = $this->identityResolver->resolveByAnyCode($legacyCode);
+        $isKnown = is_array($identity) && ((bool) ($identity['is_known'] ?? false));
+        $scaleUid = $isKnown ? trim((string) ($identity['scale_uid'] ?? '')) : '';
+        $scaleCodeV2 = $isKnown
+            ? strtoupper(trim((string) ($identity['scale_code_v2'] ?? $legacyCode)))
+            : $legacyCode;
+        $packIdV2 = $isKnown ? $this->trimOrNull($identity['pack_id_v2'] ?? null) : null;
+        $dirVersionV2 = $isKnown ? $this->trimOrNull($identity['dir_version_v2'] ?? null) : null;
+        $responseScaleCode = $this->identityResolver->resolveResponseScaleCode($legacyCode, $scaleCodeV2);
+
+        return [
+            'scale_code' => $responseScaleCode,
+            'scale_code_legacy' => $legacyCode,
+            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : $legacyCode,
+            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+            'pack_id_v2' => $packIdV2 ?? $this->trimOrNull($row['default_pack_id'] ?? null),
+            'dir_version_v2' => $dirVersionV2 ?? $this->trimOrNull($row['default_dir_version'] ?? null),
+        ];
     }
 }

@@ -15,10 +15,13 @@ final class PaymentWebhookController extends Controller
 {
     private const MAX_PAYLOAD_BYTES = 262144;
 
+    private const TRANSIENT_DB_RETRY_MAX_ATTEMPTS = 3;
+
+    private const TRANSIENT_DB_RETRY_BASE_USLEEP = 100000;
+
     public function __construct(
         private PaymentWebhookProcessor $processor,
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, string $provider): JsonResponse
     {
@@ -32,16 +35,29 @@ final class PaymentWebhookController extends Controller
         $payload = is_array($decoded) ? $decoded : [];
         $signatureOk = $this->resolveSignatureOk($request, $provider);
 
-        try {
-            $result = $this->processor->process($provider, $payload, $signatureOk);
-        } catch (\Throwable $e) {
-            Log::error('PAYMENT_WEBHOOK_INTERNAL_ERROR', [
-                'request_id' => $this->resolveRequestId($request),
-                'provider' => $provider,
-                'exception' => $e->getMessage(),
-            ]);
+        $requestId = $this->resolveRequestId($request);
+        $attempt = 0;
+        while (true) {
+            try {
+                $result = $this->processor->process($provider, $payload, $signatureOk);
+                break;
+            } catch (\Throwable $e) {
+                $attempt++;
 
-            return $this->errorResponse(500, 'WEBHOOK_INTERNAL_ERROR', 'webhook internal error');
+                if ($attempt < self::TRANSIENT_DB_RETRY_MAX_ATTEMPTS && $this->isTransientDatabaseFailure($e)) {
+                    usleep(self::TRANSIENT_DB_RETRY_BASE_USLEEP * $attempt);
+
+                    continue;
+                }
+
+                Log::error('PAYMENT_WEBHOOK_INTERNAL_ERROR', [
+                    'request_id' => $requestId,
+                    'provider' => $provider,
+                    'exception' => $e->getMessage(),
+                ]);
+
+                return $this->errorResponse(500, 'WEBHOOK_INTERNAL_ERROR', 'webhook internal error');
+            }
         }
 
         $status = (int) ($result['status'] ?? 200);
@@ -67,7 +83,7 @@ final class PaymentWebhookController extends Controller
     {
         $secret = $this->resolveStripeSecret();
         $legacySecret = $this->resolveStripeLegacySecret();
-        $gateway = new StripeGateway();
+        $gateway = new StripeGateway;
         $tolerance = $this->resolveTolerance();
 
         if ($this->verifyWithScopedConfig($request, $gateway, [
@@ -93,7 +109,7 @@ final class PaymentWebhookController extends Controller
     {
         $secret = $this->resolveBillingSecret();
         $legacySecret = $this->resolveBillingLegacySecret();
-        $gateway = new BillingGateway();
+        $gateway = new BillingGateway;
         $tolerance = $this->resolveTolerance();
 
         if ($this->verifyWithScopedConfig($request, $gateway, [
@@ -172,7 +188,7 @@ final class PaymentWebhookController extends Controller
     }
 
     /**
-     * @param array<int, string> $candidates
+     * @param  array<int, string>  $candidates
      */
     private function firstNonEmpty(array $candidates): string
     {
@@ -213,5 +229,30 @@ final class PaymentWebhookController extends Controller
             'message' => $message,
             'details' => $details === [] ? (object) [] : $details,
         ], $status);
+    }
+
+    private function isTransientDatabaseFailure(\Throwable $e): bool
+    {
+        $message = strtolower(trim($e->getMessage()));
+        if ($message === '') {
+            return false;
+        }
+
+        foreach ([
+            'database is locked',
+            'database table is locked',
+            'deadlock found',
+            'lock wait timeout exceeded',
+            'try restarting transaction',
+            'sqlstate[40001]',
+            'sqlstate[40p01]',
+            'sqlstate[hy000]',
+        ] as $needle) {
+            if (str_contains($message, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

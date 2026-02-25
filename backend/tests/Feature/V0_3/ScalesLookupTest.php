@@ -24,6 +24,11 @@ class ScalesLookupTest extends TestCase
         $response->assertJson([
             'ok' => true,
             'scale_code' => 'MBTI',
+            'scale_code_legacy' => 'MBTI',
+            'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
+            'scale_uid' => '11111111-1111-4111-8111-111111111111',
+            'pack_id_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES.cn-mainland.zh-CN.v0.3',
+            'dir_version_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',
             'primary_slug' => 'mbti-personality-test-16-personality-types',
             'requested_slug' => 'mbti-personality-test-16-personality-types',
             'resolved_from_alias' => false,
@@ -41,18 +46,18 @@ class ScalesLookupTest extends TestCase
         $this->artisan('fap:scales:sync-slugs');
 
         $cases = [
-            ['slug' => 'mbti-personality-test-16-personality-types', 'scale_code' => 'MBTI', 'primary_slug' => 'mbti-personality-test-16-personality-types', 'resolved_from_alias' => false],
-            ['slug' => 'mbti-test', 'scale_code' => 'MBTI', 'primary_slug' => 'mbti-personality-test-16-personality-types', 'resolved_from_alias' => true],
-            ['slug' => 'big-five-personality-test-ocean-model', 'scale_code' => 'BIG5_OCEAN', 'primary_slug' => 'big-five-personality-test-ocean-model', 'resolved_from_alias' => false],
-            ['slug' => 'big5-ocean', 'scale_code' => 'BIG5_OCEAN', 'primary_slug' => 'big-five-personality-test-ocean-model', 'resolved_from_alias' => true],
-            ['slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'scale_code' => 'CLINICAL_COMBO_68', 'primary_slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'resolved_from_alias' => false],
-            ['slug' => 'clinical-combo-68', 'scale_code' => 'CLINICAL_COMBO_68', 'primary_slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'resolved_from_alias' => true],
-            ['slug' => 'depression-screening-test-standard-edition', 'scale_code' => 'SDS_20', 'primary_slug' => 'depression-screening-test-standard-edition', 'resolved_from_alias' => false],
-            ['slug' => 'sds-20', 'scale_code' => 'SDS_20', 'primary_slug' => 'depression-screening-test-standard-edition', 'resolved_from_alias' => true],
-            ['slug' => 'iq-test-intelligence-quotient-assessment', 'scale_code' => 'IQ_RAVEN', 'primary_slug' => 'iq-test-intelligence-quotient-assessment', 'resolved_from_alias' => false],
-            ['slug' => 'iq-test', 'scale_code' => 'IQ_RAVEN', 'primary_slug' => 'iq-test-intelligence-quotient-assessment', 'resolved_from_alias' => true],
-            ['slug' => 'eq-test-emotional-intelligence-assessment', 'scale_code' => 'EQ_60', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => false],
-            ['slug' => 'eq-test', 'scale_code' => 'EQ_60', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => true],
+            ['slug' => 'mbti-personality-test-16-personality-types', 'scale_code' => 'MBTI', 'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES', 'primary_slug' => 'mbti-personality-test-16-personality-types', 'resolved_from_alias' => false],
+            ['slug' => 'mbti-test', 'scale_code' => 'MBTI', 'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES', 'primary_slug' => 'mbti-personality-test-16-personality-types', 'resolved_from_alias' => true],
+            ['slug' => 'big-five-personality-test-ocean-model', 'scale_code' => 'BIG5_OCEAN', 'scale_code_v2' => 'BIG_FIVE_OCEAN_MODEL', 'primary_slug' => 'big-five-personality-test-ocean-model', 'resolved_from_alias' => false],
+            ['slug' => 'big5-ocean', 'scale_code' => 'BIG5_OCEAN', 'scale_code_v2' => 'BIG_FIVE_OCEAN_MODEL', 'primary_slug' => 'big-five-personality-test-ocean-model', 'resolved_from_alias' => true],
+            ['slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'scale_code' => 'CLINICAL_COMBO_68', 'scale_code_v2' => 'CLINICAL_DEPRESSION_ANXIETY_PRO', 'primary_slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'resolved_from_alias' => false],
+            ['slug' => 'clinical-combo-68', 'scale_code' => 'CLINICAL_COMBO_68', 'scale_code_v2' => 'CLINICAL_DEPRESSION_ANXIETY_PRO', 'primary_slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'resolved_from_alias' => true],
+            ['slug' => 'depression-screening-test-standard-edition', 'scale_code' => 'SDS_20', 'scale_code_v2' => 'DEPRESSION_SCREENING_STANDARD', 'primary_slug' => 'depression-screening-test-standard-edition', 'resolved_from_alias' => false],
+            ['slug' => 'sds-20', 'scale_code' => 'SDS_20', 'scale_code_v2' => 'DEPRESSION_SCREENING_STANDARD', 'primary_slug' => 'depression-screening-test-standard-edition', 'resolved_from_alias' => true],
+            ['slug' => 'iq-test-intelligence-quotient-assessment', 'scale_code' => 'IQ_RAVEN', 'scale_code_v2' => 'IQ_INTELLIGENCE_QUOTIENT', 'primary_slug' => 'iq-test-intelligence-quotient-assessment', 'resolved_from_alias' => false],
+            ['slug' => 'iq-test', 'scale_code' => 'IQ_RAVEN', 'scale_code_v2' => 'IQ_INTELLIGENCE_QUOTIENT', 'primary_slug' => 'iq-test-intelligence-quotient-assessment', 'resolved_from_alias' => true],
+            ['slug' => 'eq-test-emotional-intelligence-assessment', 'scale_code' => 'EQ_60', 'scale_code_v2' => 'EQ_EMOTIONAL_INTELLIGENCE', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => false],
+            ['slug' => 'eq-test', 'scale_code' => 'EQ_60', 'scale_code_v2' => 'EQ_EMOTIONAL_INTELLIGENCE', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => true],
         ];
 
         foreach ($cases as $case) {
@@ -61,11 +66,15 @@ class ScalesLookupTest extends TestCase
             $response->assertJson([
                 'ok' => true,
                 'scale_code' => $case['scale_code'],
+                'scale_code_legacy' => $case['scale_code'],
+                'scale_code_v2' => $case['scale_code_v2'],
                 'primary_slug' => $case['primary_slug'],
                 'requested_slug' => $case['slug'],
                 'resolved_from_alias' => $case['resolved_from_alias'],
             ]);
             $response->assertJsonPath('slug', $case['primary_slug']);
+            $this->assertIsString($response->json('pack_id_v2'));
+            $this->assertIsString($response->json('dir_version_v2'));
         }
     }
 
@@ -82,6 +91,7 @@ class ScalesLookupTest extends TestCase
         $canonical->assertJson([
             'ok' => true,
             'primary_slug' => 'mbti-personality-test-16-personality-types',
+            'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
             'resolved_from_alias' => false,
         ]);
 
@@ -91,6 +101,24 @@ class ScalesLookupTest extends TestCase
             'ok' => false,
             'error_code' => 'NOT_FOUND',
         ]);
+    }
+
+    public function test_lookup_uses_v2_primary_scale_code_when_response_mode_is_v2(): void
+    {
+        $this->artisan('migrate', ['--force' => true]);
+        $this->artisan('fap:scales:seed-default');
+        $this->artisan('fap:scales:sync-slugs');
+
+        Config::set('scale_identity.api_response_scale_code_mode', 'v2');
+
+        $response = $this->getJson('/api/v0.3/scales/lookup?slug=mbti-test');
+        $response->assertStatus(200);
+        $response->assertJsonPath('scale_code', 'MBTI_PERSONALITY_TEST_16_TYPES');
+        $response->assertJsonPath('scale_code_legacy', 'MBTI');
+        $response->assertJsonPath('scale_code_v2', 'MBTI_PERSONALITY_TEST_16_TYPES');
+        $response->assertJsonPath('resolved_from_alias', true);
+        $response->assertJsonPath('pack_id_v2', 'MBTI_PERSONALITY_TEST_16_TYPES.cn-mainland.zh-CN.v0.3');
+        $response->assertJsonPath('dir_version_v2', 'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3');
     }
 
     public function test_lookup_unknown_slug_returns_not_found(): void
@@ -146,9 +174,16 @@ class ScalesLookupTest extends TestCase
         $response->assertJson([
             'ok' => true,
             'scale_code' => 'IQ_RAVEN',
+            'scale_code_legacy' => 'IQ_RAVEN',
+            'scale_code_v2' => 'IQ_INTELLIGENCE_QUOTIENT',
+            'scale_uid' => '55555555-5555-4555-8555-555555555555',
             'primary_slug' => 'raven-iq-test',
             'requested_slug' => 'raven-iq-test',
             'resolved_from_alias' => false,
+        ]);
+        $response->assertJsonStructure([
+            'pack_id_v2',
+            'dir_version_v2',
         ]);
         $response->assertJsonPath('seo_schema_json.@type', 'Quiz');
         $response->assertJsonPath('seo_schema.@type', 'Quiz');

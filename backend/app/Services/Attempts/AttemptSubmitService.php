@@ -12,6 +12,7 @@ use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\ReportGatekeeper;
+use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
@@ -30,6 +31,7 @@ class AttemptSubmitService
         private ReportGatekeeper $reportGatekeeper,
         private BigFiveTelemetry $bigFiveTelemetry,
         private AttemptDurationResolver $durationResolver,
+        private ScaleIdentityResolver $identityResolver,
     ) {}
 
     public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
@@ -53,6 +55,7 @@ class AttemptSubmitService
         if ($scaleCode === '') {
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code missing on attempt.');
         }
+        $this->assertDemoScaleAllowed($scaleCode, $attemptId);
 
         $this->enforceConsentOnSubmit($scaleCode, $attempt, $dto);
 
@@ -60,6 +63,20 @@ class AttemptSubmitService
         if (! $row) {
             throw new ApiProblemException(404, 'NOT_FOUND', 'scale not found.');
         }
+        $identity = $this->identityResolver->resolveByAnyCode($scaleCode);
+        $scaleCodeV2 = $scaleCode;
+        $scaleUid = null;
+        if (is_array($identity) && ((bool) ($identity['is_known'] ?? false))) {
+            $resolvedV2 = strtoupper(trim((string) ($identity['scale_code_v2'] ?? '')));
+            $resolvedUid = trim((string) ($identity['scale_uid'] ?? ''));
+            if ($resolvedV2 !== '') {
+                $scaleCodeV2 = $resolvedV2;
+            }
+            if ($resolvedUid !== '') {
+                $scaleUid = $resolvedUid;
+            }
+        }
+        $writeScaleIdentity = $this->shouldWriteScaleIdentityColumns();
 
         $packId = (string) ($attempt->pack_id ?? $row['default_pack_id'] ?? '');
         $dirVersion = (string) ($attempt->dir_version ?? $row['default_dir_version'] ?? '');
@@ -175,7 +192,10 @@ class AttemptSubmitService
             $actorUserId,
             $actorAnonId,
             $validityItems,
-            $submittedAt
+            $submittedAt,
+            $writeScaleIdentity,
+            $scaleCodeV2,
+            $scaleUid
         ) {
             $locked = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)
                 ->lockForUpdate()
@@ -191,6 +211,8 @@ class AttemptSubmitService
                             'org_id' => $orgId,
                             'attempt_id' => $attemptId,
                             'scale_code' => $scaleCode,
+                            'scale_code_v2' => $scaleCodeV2,
+                            'scale_uid' => $scaleUid,
                             'pack_id' => (string) ($locked->pack_id ?? $packId),
                             'dir_version' => (string) ($locked->dir_version ?? $dirVersion),
                             'scoring_spec_version' => (string) ($locked->scoring_spec_version ?? $scoringSpecVersion),
@@ -214,6 +236,8 @@ class AttemptSubmitService
                         'org_id' => $orgId,
                         'attempt_id' => $attemptId,
                         'scale_code' => $scaleCode,
+                        'scale_code_v2' => $scaleCodeV2,
+                        'scale_uid' => $scaleUid,
                         'pack_id' => (string) ($locked->pack_id ?? $packId),
                         'dir_version' => (string) ($locked->dir_version ?? $dirVersion),
                         'scoring_spec_version' => (string) ($locked->scoring_spec_version ?? $scoringSpecVersion),
@@ -226,7 +250,7 @@ class AttemptSubmitService
                 }
             }
 
-            $locked->fill([
+            $attemptFill = [
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'content_package_version' => $contentPackageVersion !== '' ? $contentPackageVersion : null,
@@ -236,7 +260,12 @@ class AttemptSubmitService
                 'submitted_at' => $submittedAt,
                 'duration_ms' => $durationMs,
                 'answers_digest' => $answersDigest,
-            ]);
+            ];
+            if ($writeScaleIdentity) {
+                $attemptFill['scale_code_v2'] = $scaleCodeV2;
+                $attemptFill['scale_uid'] = $scaleUid;
+            }
+            $locked->fill($attemptFill);
 
             if ($scaleCode === 'BIG5_OCEAN') {
                 $snapshot = $locked->calculation_snapshot_json;
@@ -433,6 +462,10 @@ class AttemptSubmitService
                 'is_valid' => true,
                 'computed_at' => now(),
             ];
+            if ($writeScaleIdentity) {
+                $resultData['scale_code_v2'] = $scaleCodeV2;
+                $resultData['scale_uid'] = $scaleUid;
+            }
 
             $existingResult = $this->findResult($orgId, $attemptId);
             if ($existingResult) {
@@ -449,6 +482,8 @@ class AttemptSubmitService
                 'org_id' => $orgId,
                 'attempt_id' => $attemptId,
                 'scale_code' => $scaleCode,
+                'scale_code_v2' => $scaleCodeV2,
+                'scale_uid' => $scaleUid,
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'scoring_spec_version' => $scoringSpecVersion,
@@ -730,6 +765,10 @@ class AttemptSubmitService
             $compatScoresPct = [];
         }
 
+        $legacyCode = (string) ($attempt->scale_code ?? '');
+        $v2Code = (string) ($attempt->scale_code_v2 ?? '');
+        $responseScaleCode = $this->identityResolver->resolveResponseScaleCode($legacyCode, $v2Code);
+
         return [
             'ok' => true,
             'attempt_id' => (string) $attempt->id,
@@ -738,7 +777,10 @@ class AttemptSubmitService
             'scores_pct' => $compatScoresPct,
             'result' => $payload,
             'meta' => [
-                'scale_code' => (string) ($attempt->scale_code ?? ''),
+                'scale_code' => $responseScaleCode,
+                'scale_code_legacy' => $legacyCode,
+                'scale_code_v2' => $v2Code,
+                'scale_uid' => $attempt->scale_uid !== null ? (string) $attempt->scale_uid : null,
                 'pack_id' => (string) ($attempt->pack_id ?? ''),
                 'dir_version' => (string) ($attempt->dir_version ?? ''),
                 'content_package_version' => (string) ($attempt->content_package_version ?? ''),
@@ -764,6 +806,45 @@ class AttemptSubmitService
         }
 
         return (int) $userId;
+    }
+
+    private function shouldWriteScaleIdentityColumns(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    private function assertDemoScaleAllowed(string $scaleCode, string $attemptId): void
+    {
+        $legacyCode = strtoupper(trim($scaleCode));
+        if ($legacyCode === '' || $this->identityResolver->shouldAllowDemoScale($legacyCode)) {
+            return;
+        }
+
+        $replacementLegacy = $this->identityResolver->demoReplacement($legacyCode);
+        $replacementV2 = null;
+        if ($replacementLegacy !== null) {
+            $replacementIdentity = $this->identityResolver->resolveByAnyCode($replacementLegacy);
+            if (is_array($replacementIdentity) && ((bool) ($replacementIdentity['is_known'] ?? false))) {
+                $resolved = strtoupper(trim((string) ($replacementIdentity['scale_code_v2'] ?? '')));
+                if ($resolved !== '') {
+                    $replacementV2 = $resolved;
+                }
+            }
+        }
+
+        throw new ApiProblemException(
+            410,
+            'SCALE_DEPRECATED',
+            'scale is deprecated.',
+            [
+                'attempt_id' => $attemptId,
+                'scale_code_legacy' => $legacyCode,
+                'replacement_scale_code' => $replacementLegacy,
+                'replacement_scale_code_v2' => $replacementV2,
+            ]
+        );
     }
 
     /**

@@ -36,6 +36,8 @@ final class AttemptSubmitSideEffects
         }
 
         $scaleCode = strtoupper(trim((string) ($payload['scale_code'] ?? '')));
+        $scaleCodeV2 = strtoupper(trim((string) ($payload['scale_code_v2'] ?? '')));
+        $scaleUid = trim((string) ($payload['scale_uid'] ?? ''));
         $packId = trim((string) ($payload['pack_id'] ?? ''));
         $dirVersion = trim((string) ($payload['dir_version'] ?? ''));
         $scoringSpecVersion = trim((string) ($payload['scoring_spec_version'] ?? ''));
@@ -88,6 +90,8 @@ final class AttemptSubmitSideEffects
                 if ($creditOk) {
                     $this->eventRecorder->record('wallet_consumed', $this->resolveUserIdInt($ctx, $actorUserId), [
                         'scale_code' => $scaleCode,
+                        'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                        'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
                         'pack_id' => $packId,
                         'dir_version' => $dirVersion,
                         'attempt_id' => $attemptId,
@@ -97,6 +101,9 @@ final class AttemptSubmitSideEffects
                         'org_id' => $orgId,
                         'anon_id' => $actorAnonId,
                         'attempt_id' => $attemptId,
+                        'scale_code' => $scaleCode,
+                        'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                        'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
                         'pack_id' => $packId,
                         'dir_version' => $dirVersion,
                     ]);
@@ -156,6 +163,8 @@ final class AttemptSubmitSideEffects
         try {
             $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, null, [
                 'scale_code' => $scaleCode,
+                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'scoring_spec_version' => $scoringSpecVersion,
@@ -187,6 +196,8 @@ final class AttemptSubmitSideEffects
     ): void {
         $this->eventRecorder->record('test_submit', $this->resolveUserIdInt($ctx, $actorUserId), [
             'scale_code' => (string) ($postCommitCtx['scale_code'] ?? ''),
+            'scale_code_v2' => (string) ($postCommitCtx['scale_code_v2'] ?? ''),
+            'scale_uid' => (string) ($postCommitCtx['scale_uid'] ?? ''),
             'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
             'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
             'attempt_id' => $attemptId,
@@ -194,6 +205,9 @@ final class AttemptSubmitSideEffects
             'org_id' => $ctx->orgId(),
             'anon_id' => $actorAnonId,
             'attempt_id' => $attemptId,
+            'scale_code' => (string) ($postCommitCtx['scale_code'] ?? ''),
+            'scale_code_v2' => (string) ($postCommitCtx['scale_code_v2'] ?? ''),
+            'scale_uid' => (string) ($postCommitCtx['scale_uid'] ?? ''),
             'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
             'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
         ]);

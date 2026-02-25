@@ -41,6 +41,8 @@ $canonical = json_decode((string) file_get_contents($argv[1]), true);
 if (!is_array($canonical) || ($canonical["ok"] ?? false) !== true) { fwrite(STDERR, "canonical lookup failed\n"); exit(1); }
 if (($canonical["resolved_from_alias"] ?? null) !== false) { fwrite(STDERR, "canonical resolved_from_alias must be false\n"); exit(1); }
 if (($canonical["primary_slug"] ?? "") !== "mbti-personality-test-16-personality-types") { fwrite(STDERR, "canonical primary_slug mismatch\n"); exit(1); }
+if (trim((string)($canonical["pack_id_v2"] ?? "")) === "") { fwrite(STDERR, "canonical pack_id_v2 missing\n"); exit(1); }
+if (trim((string)($canonical["dir_version_v2"] ?? "")) === "") { fwrite(STDERR, "canonical dir_version_v2 missing\n"); exit(1); }
 ' "$ART_DIR/curl_lookup_mbti.json"
 
 php -r '
@@ -48,6 +50,8 @@ $alias = json_decode((string) file_get_contents($argv[1]), true);
 if (!is_array($alias) || ($alias["ok"] ?? false) !== true) { fwrite(STDERR, "alias lookup failed\n"); exit(1); }
 if (($alias["resolved_from_alias"] ?? null) !== true) { fwrite(STDERR, "alias resolved_from_alias must be true\n"); exit(1); }
 if (($alias["primary_slug"] ?? "") !== "mbti-personality-test-16-personality-types") { fwrite(STDERR, "alias primary_slug mismatch\n"); exit(1); }
+if (trim((string)($alias["pack_id_v2"] ?? "")) === "") { fwrite(STDERR, "alias pack_id_v2 missing\n"); exit(1); }
+if (trim((string)($alias["dir_version_v2"] ?? "")) === "") { fwrite(STDERR, "alias dir_version_v2 missing\n"); exit(1); }
 ' "$ART_DIR/curl_lookup_mbti_alias.json"
 
 FAP_SCALE_LOOKUP_ALIAS_MODE=canonical_only php -S 127.0.0.1:8001 -t public > "$ART_DIR/server_canonical_only.log" 2>&1 &
@@ -99,6 +103,8 @@ Smoke URLs:
 Key outputs:
 - scale_code: MBTI
 - dir_version: MBTI-CN-v0.3
+- pack_id_v2: MBTI_PERSONALITY_TEST_16_TYPES.cn-mainland.zh-CN.v0.3
+- dir_version_v2: MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3
 
 Schema changes:
 - scales_registry (unique org_id+primary_slug; indexes: org_id, driver_type, is_public, is_active)

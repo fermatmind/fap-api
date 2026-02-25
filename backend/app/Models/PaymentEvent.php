@@ -37,6 +37,8 @@ class PaymentEvent extends Model
         'reason',
         'requested_sku',
         'effective_sku',
+        'scale_code_v2',
+        'scale_uid',
         'entitlement_id',
         'payload_json',
         'payload_size_bytes',

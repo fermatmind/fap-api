@@ -56,6 +56,7 @@ final class PacksPublishBig5Test extends TestCase
         $this->assertNotNull($version);
         $this->assertSame('BIG5_OCEAN', (string) $version->pack_id);
         $this->assertSame('v1', (string) $version->content_package_version);
+        $this->assertSame('local_repo_legacy', (string) $version->source_type);
 
         $audit = DB::table('audit_logs')
             ->where('action', 'big5_pack_publish')
@@ -69,6 +70,9 @@ final class PacksPublishBig5Test extends TestCase
         $this->assertIsArray($auditMeta);
         $this->assertSame(self::DIR_ALIAS, (string) ($auditMeta['dir_alias'] ?? ''));
         $this->assertSame('BIG5_OCEAN', (string) ($auditMeta['scale_code'] ?? ''));
+        $this->assertSame('legacy', (string) ($auditMeta['content_publish_mode'] ?? ''));
+        $this->assertSame('local_repo_legacy', (string) ($auditMeta['staged_source_type'] ?? ''));
+        $this->assertNotSame('', trim((string) ($auditMeta['staged_source_ref'] ?? '')));
 
         $this->assertTrue(File::isDirectory($target.'/compiled'));
         $this->assertTrue(File::exists($target.'/compiled/manifest.json'));

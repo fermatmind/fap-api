@@ -30,6 +30,8 @@ class Result extends Model
         'attempt_id',
         'org_id',
         'scale_code',
+        'scale_code_v2',
+        'scale_uid',
         'scale_version',
         'type_code',
         'scores_json',
