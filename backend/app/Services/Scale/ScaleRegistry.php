@@ -105,7 +105,7 @@ class ScaleRegistry
         return $payload;
     }
 
-    public function lookupBySlug(string $slug, int $orgId = 0): ?array
+    public function lookupBySlug(string $slug, int $orgId = 0, bool $allowAlias = true): ?array
     {
         $slug = trim(strtolower($slug));
         if ($slug === '') {
@@ -115,10 +115,43 @@ class ScaleRegistry
             return null;
         }
 
-        $cacheKey = CacheKeys::scaleRegistryBySlug($orgId, $slug);
+        $cacheSuffix = $allowAlias ? "compat:{$slug}" : "canonical:{$slug}";
+        $cacheKey = CacheKeys::scaleRegistryBySlug($orgId, $cacheSuffix);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
             return $cached;
+        }
+
+        if (! $allowAlias) {
+            $registry = null;
+            if ($orgId <= 0) {
+                $registry = ScaleRegistryModel::query()
+                    ->where('org_id', 0)
+                    ->where('primary_slug', $slug)
+                    ->where('is_public', true)
+                    ->first();
+            } else {
+                $registry = ScaleRegistryModel::query()
+                    ->where('org_id', $orgId)
+                    ->where('primary_slug', $slug)
+                    ->first();
+                if (! $registry) {
+                    $registry = ScaleRegistryModel::query()
+                        ->where('org_id', 0)
+                        ->where('primary_slug', $slug)
+                        ->where('is_public', true)
+                        ->first();
+                }
+            }
+
+            if (! $registry) {
+                return null;
+            }
+
+            $payload = $registry->toArray();
+            Cache::put($cacheKey, $payload, self::CACHE_TTL_SECONDS);
+
+            return $payload;
         }
 
         $slugRow = null;

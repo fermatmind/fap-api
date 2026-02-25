@@ -4,6 +4,7 @@ namespace Tests\Feature\V0_3;
 
 use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
@@ -18,16 +19,77 @@ class ScalesLookupTest extends TestCase
         $this->artisan('fap:scales:seed-default');
         $this->artisan('fap:scales:sync-slugs');
 
-        $response = $this->getJson('/api/v0.3/scales/lookup?slug=mbti-test');
+        $response = $this->getJson('/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types');
         $response->assertStatus(200);
         $response->assertJson([
             'ok' => true,
             'scale_code' => 'MBTI',
-            'primary_slug' => 'mbti-test',
+            'primary_slug' => 'mbti-personality-test-16-personality-types',
+            'requested_slug' => 'mbti-personality-test-16-personality-types',
+            'resolved_from_alias' => false,
         ]);
         $response->assertJsonStructure([
             'seo_schema_json',
             'seo_schema',
+        ]);
+    }
+
+    public function test_lookup_aliases_resolve_to_canonical_for_all_six_models(): void
+    {
+        $this->artisan('migrate', ['--force' => true]);
+        $this->artisan('fap:scales:seed-default');
+        $this->artisan('fap:scales:sync-slugs');
+
+        $cases = [
+            ['slug' => 'mbti-personality-test-16-personality-types', 'scale_code' => 'MBTI', 'primary_slug' => 'mbti-personality-test-16-personality-types', 'resolved_from_alias' => false],
+            ['slug' => 'mbti-test', 'scale_code' => 'MBTI', 'primary_slug' => 'mbti-personality-test-16-personality-types', 'resolved_from_alias' => true],
+            ['slug' => 'big-five-personality-test-ocean-model', 'scale_code' => 'BIG5_OCEAN', 'primary_slug' => 'big-five-personality-test-ocean-model', 'resolved_from_alias' => false],
+            ['slug' => 'big5-ocean', 'scale_code' => 'BIG5_OCEAN', 'primary_slug' => 'big-five-personality-test-ocean-model', 'resolved_from_alias' => true],
+            ['slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'scale_code' => 'CLINICAL_COMBO_68', 'primary_slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'resolved_from_alias' => false],
+            ['slug' => 'clinical-combo-68', 'scale_code' => 'CLINICAL_COMBO_68', 'primary_slug' => 'clinical-depression-anxiety-assessment-professional-edition', 'resolved_from_alias' => true],
+            ['slug' => 'depression-screening-test-standard-edition', 'scale_code' => 'SDS_20', 'primary_slug' => 'depression-screening-test-standard-edition', 'resolved_from_alias' => false],
+            ['slug' => 'sds-20', 'scale_code' => 'SDS_20', 'primary_slug' => 'depression-screening-test-standard-edition', 'resolved_from_alias' => true],
+            ['slug' => 'iq-test-intelligence-quotient-assessment', 'scale_code' => 'IQ_RAVEN', 'primary_slug' => 'iq-test-intelligence-quotient-assessment', 'resolved_from_alias' => false],
+            ['slug' => 'iq-test', 'scale_code' => 'IQ_RAVEN', 'primary_slug' => 'iq-test-intelligence-quotient-assessment', 'resolved_from_alias' => true],
+            ['slug' => 'eq-test-emotional-intelligence-assessment', 'scale_code' => 'EQ_60', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => false],
+            ['slug' => 'eq-test', 'scale_code' => 'EQ_60', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => true],
+        ];
+
+        foreach ($cases as $case) {
+            $response = $this->getJson('/api/v0.3/scales/lookup?slug='.$case['slug']);
+            $response->assertStatus(200);
+            $response->assertJson([
+                'ok' => true,
+                'scale_code' => $case['scale_code'],
+                'primary_slug' => $case['primary_slug'],
+                'requested_slug' => $case['slug'],
+                'resolved_from_alias' => $case['resolved_from_alias'],
+            ]);
+            $response->assertJsonPath('slug', $case['primary_slug']);
+        }
+    }
+
+    public function test_lookup_alias_mode_canonical_only_rejects_alias_but_allows_canonical(): void
+    {
+        $this->artisan('migrate', ['--force' => true]);
+        $this->artisan('fap:scales:seed-default');
+        $this->artisan('fap:scales:sync-slugs');
+
+        Config::set('scales_lookup.alias_mode', 'canonical_only');
+
+        $canonical = $this->getJson('/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types');
+        $canonical->assertStatus(200);
+        $canonical->assertJson([
+            'ok' => true,
+            'primary_slug' => 'mbti-personality-test-16-personality-types',
+            'resolved_from_alias' => false,
+        ]);
+
+        $alias = $this->getJson('/api/v0.3/scales/lookup?slug=mbti-test');
+        $alias->assertStatus(404);
+        $alias->assertJson([
+            'ok' => false,
+            'error_code' => 'NOT_FOUND',
         ]);
     }
 
@@ -85,6 +147,8 @@ class ScalesLookupTest extends TestCase
             'ok' => true,
             'scale_code' => 'IQ_RAVEN',
             'primary_slug' => 'raven-iq-test',
+            'requested_slug' => 'raven-iq-test',
+            'resolved_from_alias' => false,
         ]);
         $response->assertJsonPath('seo_schema_json.@type', 'Quiz');
         $response->assertJsonPath('seo_schema.@type', 'Quiz');

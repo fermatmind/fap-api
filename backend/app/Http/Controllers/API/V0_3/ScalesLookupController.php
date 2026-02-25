@@ -21,16 +21,16 @@ class ScalesLookupController extends Controller
     public function lookup(Request $request): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $slug = (string) $request->query('slug', '');
-        $slug = trim(strtolower($slug));
-        if ($slug === '') {
+        $requestedSlug = (string) $request->query('slug', '');
+        $requestedSlug = trim(strtolower($requestedSlug));
+        if ($requestedSlug === '') {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'SLUG_REQUIRED',
                 'message' => 'slug is required.',
             ], 400);
         }
-        if (! preg_match('/^[a-z0-9-]{0,127}$/', $slug)) {
+        if (! preg_match('/^[a-z0-9-]{0,127}$/', $requestedSlug)) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -38,7 +38,8 @@ class ScalesLookupController extends Controller
             ], 404);
         }
 
-        $row = $this->registry->lookupBySlug($slug, $orgId);
+        $allowAlias = config('scales_lookup.alias_mode', 'compat') !== 'canonical_only';
+        $row = $this->registry->lookupBySlug($requestedSlug, $orgId, $allowAlias);
         if (! $row) {
             return response()->json([
                 'ok' => false,
@@ -47,6 +48,8 @@ class ScalesLookupController extends Controller
             ], 404);
         }
 
+        $primarySlug = trim((string) ($row['primary_slug'] ?? ''));
+        $resolvedFromAlias = $primarySlug !== '' && $requestedSlug !== $primarySlug;
         $locale = $this->resolveRequestedLocale($request, (string) ($row['default_locale'] ?? 'en'));
         $seo = $this->resolveSeoByLocale($row, $locale);
         $isIndexable = $this->resolveIsIndexable($row);
@@ -54,8 +57,10 @@ class ScalesLookupController extends Controller
         return response()->json([
             'ok' => true,
             'scale_code' => $row['code'] ?? '',
-            'primary_slug' => $row['primary_slug'] ?? '',
-            'slug' => $row['primary_slug'] ?? '',
+            'primary_slug' => $primarySlug,
+            'slug' => $primarySlug,
+            'requested_slug' => $requestedSlug,
+            'resolved_from_alias' => $resolvedFromAlias,
             'pack_id' => $row['default_pack_id'] ?? null,
             'dir_version' => $row['default_dir_version'] ?? null,
             'region' => $row['default_region'] ?? null,
