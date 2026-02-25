@@ -16,6 +16,8 @@ class SitemapGeneratorTest extends TestCase
         config(['services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/']);
 
         $now = now();
+        // Isolate this test from migration-seeded default scales.
+        DB::table('scales_registry')->delete();
 
         DB::table('scales_registry')->insert([
             [
