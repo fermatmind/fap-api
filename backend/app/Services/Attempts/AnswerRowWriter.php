@@ -3,8 +3,8 @@
 namespace App\Services\Attempts;
 
 use App\Models\Attempt;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class AnswerRowWriter
 {
@@ -22,7 +22,7 @@ class AnswerRowWriter
 
         $rows = [];
         $now = now();
-        $canWriteIdentity = $this->shouldWriteScaleIdentityColumns() && $this->attemptAnswerRowsHasIdentityColumns();
+        $canWriteIdentity = $this->shouldWriteScaleIdentityColumns();
         $identity = $canWriteIdentity
             ? $this->resolveScaleIdentityValues($attempt)
             : ['scale_code_v2' => null, 'scale_uid' => null];
@@ -89,11 +89,33 @@ class AnswerRowWriter
             $updateColumns[] = 'scale_uid';
         }
 
-        DB::table('attempt_answer_rows')->upsert(
-            $rows,
-            $uniqueBy,
-            $updateColumns
-        );
+        try {
+            DB::table('attempt_answer_rows')->upsert(
+                $rows,
+                $uniqueBy,
+                $updateColumns
+            );
+        } catch (QueryException $exception) {
+            if (! $canWriteIdentity || ! $this->isMissingScaleIdentityColumnError($exception)) {
+                throw $exception;
+            }
+
+            foreach ($rows as &$row) {
+                unset($row['scale_code_v2'], $row['scale_uid']);
+            }
+            unset($row);
+
+            $fallbackColumns = array_values(array_filter(
+                $updateColumns,
+                static fn (string $column): bool => ! in_array($column, ['scale_code_v2', 'scale_uid'], true)
+            ));
+
+            DB::table('attempt_answer_rows')->upsert(
+                $rows,
+                $uniqueBy,
+                $fallbackColumns
+            );
+        }
 
         return ['ok' => true, 'rows' => count($rows)];
     }
@@ -111,11 +133,18 @@ class AnswerRowWriter
         return in_array($mode, ['dual', 'v2'], true);
     }
 
-    private function attemptAnswerRowsHasIdentityColumns(): bool
+    private function isMissingScaleIdentityColumnError(QueryException $exception): bool
     {
-        return Schema::hasTable('attempt_answer_rows')
-            && Schema::hasColumn('attempt_answer_rows', 'scale_code_v2')
-            && Schema::hasColumn('attempt_answer_rows', 'scale_uid');
+        $sqlState = strtoupper(trim((string) ($exception->errorInfo[0] ?? '')));
+        $message = strtolower($exception->getMessage());
+
+        if ($sqlState === '42S22') {
+            return true;
+        }
+
+        return str_contains($message, 'no such column')
+            || str_contains($message, 'has no column named')
+            || str_contains($message, 'unknown column');
     }
 
     /**

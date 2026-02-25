@@ -3,8 +3,8 @@
 namespace App\Services\Attempts;
 
 use App\Models\Attempt;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class AnswerSetStore
 {
@@ -33,15 +33,27 @@ class AnswerSetStore
             'created_at' => $now,
         ];
 
-        if ($this->shouldWriteScaleIdentityColumns() && $this->attemptAnswerSetsHasIdentityColumns()) {
+        $canWriteIdentity = $this->shouldWriteScaleIdentityColumns();
+        if ($canWriteIdentity) {
             $identity = $this->resolveScaleIdentityValues($attempt);
             $upsertValues['scale_code_v2'] = $identity['scale_code_v2'];
             $upsertValues['scale_uid'] = $identity['scale_uid'];
         }
 
-        DB::table('attempt_answer_sets')->updateOrInsert([
-            'attempt_id' => (string) $attempt->id,
-        ], $upsertValues);
+        try {
+            DB::table('attempt_answer_sets')->updateOrInsert([
+                'attempt_id' => (string) $attempt->id,
+            ], $upsertValues);
+        } catch (QueryException $exception) {
+            if (! $canWriteIdentity || ! $this->isMissingScaleIdentityColumnError($exception)) {
+                throw $exception;
+            }
+
+            unset($upsertValues['scale_code_v2'], $upsertValues['scale_uid']);
+            DB::table('attempt_answer_sets')->updateOrInsert([
+                'attempt_id' => (string) $attempt->id,
+            ], $upsertValues);
+        }
 
         return [
             'ok' => true,
@@ -128,11 +140,18 @@ class AnswerSetStore
         return in_array($mode, ['dual', 'v2'], true);
     }
 
-    private function attemptAnswerSetsHasIdentityColumns(): bool
+    private function isMissingScaleIdentityColumnError(QueryException $exception): bool
     {
-        return Schema::hasTable('attempt_answer_sets')
-            && Schema::hasColumn('attempt_answer_sets', 'scale_code_v2')
-            && Schema::hasColumn('attempt_answer_sets', 'scale_uid');
+        $sqlState = strtoupper(trim((string) ($exception->errorInfo[0] ?? '')));
+        $message = strtolower($exception->getMessage());
+
+        if ($sqlState === '42S22') {
+            return true;
+        }
+
+        return str_contains($message, 'no such column')
+            || str_contains($message, 'has no column named')
+            || str_contains($message, 'unknown column');
     }
 
     /**
