@@ -35,6 +35,12 @@ final class AuthGuestTokenTest extends TestCase
             ->first();
         $this->assertNotNull($row);
         $this->assertSame($anonId, (string) ($row->anon_id ?? ''));
+
+        $authRow = DB::table('auth_tokens')
+            ->where('token_hash', hash('sha256', $token))
+            ->first();
+        $this->assertNotNull($authRow);
+        $this->assertSame($anonId, (string) ($authRow->anon_id ?? ''));
     }
 
     public function test_guest_token_uses_transport_anon_id_when_body_is_missing(): void
