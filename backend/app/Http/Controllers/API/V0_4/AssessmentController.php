@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V0_4;
 use App\Http\Controllers\Controller;
 use App\Models\Assessment;
 use App\Services\Assessments\AssessmentService;
+use App\Services\Scale\ScaleCodeInputGuard;
+use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
@@ -16,9 +18,10 @@ class AssessmentController extends Controller
     public function __construct(
         private AssessmentService $assessments,
         private ScaleRegistry $registry,
+        private ScaleCodeInputGuard $inputGuard,
+        private ScaleCodeResponseProjector $responseProjector,
         private OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     /**
      * POST /api/v0.4/orgs/{org_id}/assessments
@@ -49,9 +52,10 @@ class AssessmentController extends Controller
                 'message' => 'scale_code is required.',
             ], 400);
         }
+        $this->inputGuard->assertAccepted($scaleCode);
 
         $row = $this->registry->getByCode($scaleCode, $orgId);
-        if (!$row) {
+        if (! $row) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -60,7 +64,7 @@ class AssessmentController extends Controller
         }
 
         $dueAt = null;
-        if (!empty($payload['due_at'])) {
+        if (! empty($payload['due_at'])) {
             try {
                 $dueAt = Carbon::parse($payload['due_at']);
             } catch (\Throwable $e) {
@@ -104,7 +108,7 @@ class AssessmentController extends Controller
         }
 
         $assessment = $this->assessments->findForOrg($orgId, $assessmentId);
-        if (!$assessment) {
+        if (! $assessment) {
             return $this->orgNotFound();
         }
 
@@ -139,7 +143,7 @@ class AssessmentController extends Controller
         }
 
         $assessment = $this->assessments->findForOrg($orgId, $assessmentId);
-        if (!$assessment) {
+        if (! $assessment) {
             return $this->orgNotFound();
         }
 
@@ -163,7 +167,7 @@ class AssessmentController extends Controller
         }
 
         $assessment = $this->assessments->findForOrg($orgId, $assessmentId);
-        if (!$assessment) {
+        if (! $assessment) {
             return $this->orgNotFound();
         }
 
@@ -178,10 +182,19 @@ class AssessmentController extends Controller
 
     private function payloadAssessment(Assessment $assessment): array
     {
+        $scaleCodes = $this->responseProjector->project(
+            (string) ($assessment->scale_code ?? ''),
+            (string) ($assessment->scale_code_v2 ?? ''),
+            $assessment->scale_uid !== null ? (string) $assessment->scale_uid : null
+        );
+
         return [
             'id' => (int) $assessment->id,
             'org_id' => (int) $assessment->org_id,
-            'scale_code' => (string) $assessment->scale_code,
+            'scale_code' => $scaleCodes['scale_code'],
+            'scale_code_legacy' => $scaleCodes['scale_code_legacy'],
+            'scale_code_v2' => $scaleCodes['scale_code_v2'],
+            'scale_uid' => $scaleCodes['scale_uid'],
             'title' => (string) $assessment->title,
             'created_by' => (int) $assessment->created_by,
             'status' => (string) $assessment->status,
@@ -194,7 +207,7 @@ class AssessmentController extends Controller
     private function resolveUserId(Request $request): ?int
     {
         $raw = (string) ($request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id') ?? '');
-        if ($raw === '' || !preg_match('/^\d+$/', $raw)) {
+        if ($raw === '' || ! preg_match('/^\d+$/', $raw)) {
             return null;
         }
 
@@ -206,7 +219,7 @@ class AssessmentController extends Controller
         $out = [];
 
         foreach ($subjects as $subject) {
-            if (!is_array($subject)) {
+            if (! is_array($subject)) {
                 continue;
             }
 
@@ -217,11 +230,11 @@ class AssessmentController extends Controller
                 continue;
             }
 
-            if ($type === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            if ($type === 'email' && ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
                 continue;
             }
 
-            if ($type === 'user' && !preg_match('/^\d+$/', $value)) {
+            if ($type === 'user' && ! preg_match('/^\d+$/', $value)) {
                 continue;
             }
 

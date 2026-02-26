@@ -4,6 +4,7 @@ namespace App\Services\Analytics;
 
 use App\Models\Event;
 use App\Services\Experiments\ExperimentAssigner;
+use App\Services\Scale\ScaleIdentityRuntimePolicy;
 use App\Support\SensitiveDataRedactor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,12 +16,12 @@ final class EventRecorder
         private ExperimentAssigner $experimentAssigner,
         private ?SensitiveDataRedactor $redactor = null,
         private ?Big5EventSchema $big5EventSchema = null,
-    ) {
-    }
+        private ?ScaleIdentityRuntimePolicy $runtimePolicy = null,
+    ) {}
 
     public function record(string $eventCode, ?int $userId, array $meta = [], array $context = []): void
     {
-        if (!\App\Support\SchemaBaseline::hasTable('events')) {
+        if (! \App\Support\SchemaBaseline::hasTable('events')) {
             return;
         }
 
@@ -109,7 +110,7 @@ final class EventRecorder
         $orgId = $request->attributes->get('org_id');
         $orgId = is_numeric($orgId) ? (int) $orgId : 0;
         $anonId = $request->attributes->get('anon_id');
-        if (!is_string($anonId) && !is_numeric($anonId)) {
+        if (! is_string($anonId) && ! is_numeric($anonId)) {
             $anonId = $request->input('anon_id', $request->header('X-Anon-Id'));
         }
         $anonId = is_string($anonId) || is_numeric($anonId) ? trim((string) $anonId) : '';
@@ -145,6 +146,7 @@ final class EventRecorder
         }
 
         $header = (string) $request->header('X-Boot-Experiments', '');
+
         return $this->normalizeExperiments($header);
     }
 
@@ -165,7 +167,7 @@ final class EventRecorder
     }
 
     /**
-     * @param array<string,mixed> $meta
+     * @param  array<string,mixed>  $meta
      * @return array<string,mixed>
      */
     private function sanitizeMetaForStorage(string $eventCode, array $meta): array
@@ -174,13 +176,13 @@ final class EventRecorder
         $needsRedaction = str_starts_with($normalizedCode, 'big5_')
             || str_starts_with($normalizedCode, 'clinical_combo_68_')
             || str_starts_with($normalizedCode, 'sds_');
-        if (!$needsRedaction) {
+        if (! $needsRedaction) {
             return $meta;
         }
 
         $redactor = $this->redactor instanceof SensitiveDataRedactor
             ? $this->redactor
-            : new SensitiveDataRedactor();
+            : new SensitiveDataRedactor;
         $result = $redactor->redactWithMeta($meta);
         $sanitized = is_array($result['data'] ?? null) ? $result['data'] : $meta;
         $count = (int) ($result['count'] ?? 0);
@@ -201,9 +203,16 @@ final class EventRecorder
 
     private function shouldWriteScaleIdentityColumns(): bool
     {
-        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
+        return $this->resolveRuntimePolicy()->shouldWriteScaleIdentityColumns();
+    }
 
-        return in_array($mode, ['dual', 'v2'], true);
+    private function resolveRuntimePolicy(): ScaleIdentityRuntimePolicy
+    {
+        if ($this->runtimePolicy instanceof ScaleIdentityRuntimePolicy) {
+            return $this->runtimePolicy;
+        }
+
+        return app(ScaleIdentityRuntimePolicy::class);
     }
 
     /**
@@ -233,13 +242,13 @@ final class EventRecorder
     private function validateBigFiveEventMeta(string $eventCode, array $meta): ?array
     {
         $normalizedCode = strtolower(trim($eventCode));
-        if (!str_starts_with($normalizedCode, 'big5_')) {
+        if (! str_starts_with($normalizedCode, 'big5_')) {
             return $meta;
         }
 
         $schema = $this->big5EventSchema instanceof Big5EventSchema
             ? $this->big5EventSchema
-            : new Big5EventSchema();
+            : new Big5EventSchema;
 
         try {
             return $schema->validate($eventCode, $meta);

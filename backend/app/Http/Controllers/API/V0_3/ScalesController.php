@@ -8,6 +8,8 @@ use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\QuestionsService;
 use App\Services\Content\Sds20PackLoader;
+use App\Services\Scale\ScaleCodeInputGuard;
+use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
@@ -19,6 +21,8 @@ class ScalesController extends Controller
     public function __construct(
         private ScaleRegistry $registry,
         private ScaleIdentityResolver $identityResolver,
+        private ScaleCodeResponseProjector $responseProjector,
+        private ScaleCodeInputGuard $inputGuard,
         private OrgContext $orgContext,
     ) {}
 
@@ -50,6 +54,7 @@ class ScalesController extends Controller
                 'message' => 'scale_code is required.',
             ], 400);
         }
+        $this->inputGuard->assertAccepted($code);
 
         $row = $this->registry->getByCode($code, $orgId);
         if (! $row) {
@@ -90,6 +95,7 @@ class ScalesController extends Controller
                 'message' => 'scale_code is required.',
             ], 400);
         }
+        $this->inputGuard->assertAccepted($code);
 
         $row = $this->registry->getByCode($code, $orgId);
         if (! $row) {
@@ -491,14 +497,18 @@ class ScalesController extends Controller
         $scaleUid = $isKnown ? trim((string) ($identity['scale_uid'] ?? '')) : '';
         $packIdV2 = $isKnown ? $this->trimOrNull($identity['pack_id_v2'] ?? null) : null;
         $dirVersionV2 = $isKnown ? $this->trimOrNull($identity['dir_version_v2'] ?? null) : null;
-        $responseScaleCode = $this->identityResolver->resolveResponseScaleCode($legacyCode, $resolvedV2);
+        $responseCodes = $this->responseProjector->project(
+            $legacyCode,
+            $resolvedV2,
+            $scaleUid !== '' ? $scaleUid : null
+        );
 
         return [
             'requested_scale_code' => $requested,
-            'scale_code' => $responseScaleCode,
-            'scale_code_legacy' => $legacyCode,
-            'scale_code_v2' => $resolvedV2 !== '' ? $resolvedV2 : $legacyCode,
-            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+            'scale_code' => $responseCodes['scale_code'],
+            'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+            'scale_code_v2' => $responseCodes['scale_code_v2'],
+            'scale_uid' => $responseCodes['scale_uid'],
             'pack_id_v2' => $packIdV2 ?? $this->trimOrNull($row['default_pack_id'] ?? null),
             'dir_version_v2' => $dirVersionV2 ?? $this->trimOrNull($row['default_dir_version'] ?? null),
             'resolved_from_alias' => $requested !== $resolvedV1,

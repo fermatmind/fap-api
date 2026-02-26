@@ -14,7 +14,10 @@ use App\Services\Content\Sds20PackLoader;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
-use App\Services\Scale\ScaleIdentityResolver;
+use App\Services\Scale\ScaleCodeInputGuard;
+use App\Services\Scale\ScaleCodeResponseProjector;
+use App\Services\Scale\ScaleIdentityRuntimePolicy;
+use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
@@ -35,7 +38,6 @@ class AttemptStartService
         private AttemptProgressService $progressService,
         private EventRecorder $eventRecorder,
         private BigFiveTelemetry $bigFiveTelemetry,
-        private ScaleIdentityResolver $identityResolver,
     ) {}
 
     public function start(OrgContext $ctx, StartAttemptDTO $dto): array
@@ -46,29 +48,29 @@ class AttemptStartService
         if ($requestedScaleCode === '') {
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code is required.');
         }
+        $this->inputGuard()->assertAccepted($requestedScaleCode);
 
         $row = $this->registry->getByCode($requestedScaleCode, $orgId);
         if (! $row) {
             throw new ApiProblemException(404, 'NOT_FOUND', 'scale not found.');
         }
         $scaleCode = strtoupper(trim((string) ($row['code'] ?? $requestedScaleCode)));
-        $this->assertDemoScaleAllowed($scaleCode, $requestedScaleCode);
-        $identity = $this->identityResolver->resolveByAnyCode($requestedScaleCode);
-        if (! is_array($identity) || ! ((bool) ($identity['is_known'] ?? false))) {
-            $identity = $this->identityResolver->resolveByAnyCode($scaleCode);
+        $writeProjector = $this->identityWriteProjector();
+        $projectedIdentity = $writeProjector->projectFromCodes($scaleCode);
+        $projectedFromRequestedCode = $writeProjector->projectFromCodes(
+            $requestedScaleCode,
+            $projectedIdentity['scale_code_v2'] ?? null,
+            $projectedIdentity['scale_uid'] ?? null
+        );
+        $scaleCodeV2 = strtoupper(trim((string) (
+            $projectedFromRequestedCode['scale_code_v2']
+                ?? $projectedIdentity['scale_code_v2']
+                ?? $scaleCode
+        )));
+        if ($scaleCodeV2 === '') {
+            $scaleCodeV2 = $scaleCode;
         }
-        $scaleCodeV2 = $scaleCode;
-        $scaleUid = null;
-        if (is_array($identity) && ((bool) ($identity['is_known'] ?? false))) {
-            $resolvedV2 = strtoupper(trim((string) ($identity['scale_code_v2'] ?? '')));
-            $resolvedUid = trim((string) ($identity['scale_uid'] ?? ''));
-            if ($resolvedV2 !== '') {
-                $scaleCodeV2 = $resolvedV2;
-            }
-            if ($resolvedUid !== '') {
-                $scaleUid = $resolvedUid;
-            }
-        }
+        $scaleUid = $projectedFromRequestedCode['scale_uid'] ?? $projectedIdentity['scale_uid'] ?? null;
 
         $region = (string) ($dto->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
         $locale = (string) ($dto->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
@@ -235,7 +237,7 @@ class AttemptStartService
                 'meta' => $answersSummaryMeta,
             ],
         ];
-        if ($this->shouldWriteScaleIdentityColumns()) {
+        if ($this->runtimePolicy()->shouldWriteScaleIdentityColumns()) {
             $attemptPayload['scale_code_v2'] = $scaleCodeV2;
             $attemptPayload['scale_uid'] = $scaleUid;
         }
@@ -291,15 +293,15 @@ class AttemptStartService
             ]);
         }
 
-        $responseScaleCode = $this->identityResolver->resolveResponseScaleCode($scaleCode, $scaleCodeV2);
+        $responseCodes = $this->responseProjector()->project($scaleCode, $scaleCodeV2, $scaleUid);
 
         return [
             'ok' => true,
             'attempt_id' => (string) $attempt->id,
-            'scale_code' => $responseScaleCode,
-            'scale_code_legacy' => $scaleCode,
-            'scale_code_v2' => $scaleCodeV2,
-            'scale_uid' => $scaleUid,
+            'scale_code' => $responseCodes['scale_code'],
+            'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+            'scale_code_v2' => $responseCodes['scale_code_v2'],
+            'scale_uid' => $responseCodes['scale_uid'],
             'requested_scale_code' => $requestedScaleCode,
             'resolved_from_alias' => $requestedScaleCode !== $scaleCode,
             'pack_id' => $packId,
@@ -312,43 +314,24 @@ class AttemptStartService
         ];
     }
 
-    private function shouldWriteScaleIdentityColumns(): bool
+    private function runtimePolicy(): ScaleIdentityRuntimePolicy
     {
-        $mode = strtolower(trim((string) config('scale_identity.write_mode', 'legacy')));
-
-        return in_array($mode, ['dual', 'v2'], true);
+        return app(ScaleIdentityRuntimePolicy::class);
     }
 
-    private function assertDemoScaleAllowed(string $scaleCode, string $requestedScaleCode): void
+    private function responseProjector(): ScaleCodeResponseProjector
     {
-        $legacyCode = strtoupper(trim($scaleCode));
-        if ($legacyCode === '' || $this->identityResolver->shouldAllowDemoScale($legacyCode)) {
-            return;
-        }
+        return app(ScaleCodeResponseProjector::class);
+    }
 
-        $replacementLegacy = $this->identityResolver->demoReplacement($legacyCode);
-        $replacementV2 = null;
-        if ($replacementLegacy !== null) {
-            $replacementIdentity = $this->identityResolver->resolveByAnyCode($replacementLegacy);
-            if (is_array($replacementIdentity) && ((bool) ($replacementIdentity['is_known'] ?? false))) {
-                $resolved = strtoupper(trim((string) ($replacementIdentity['scale_code_v2'] ?? '')));
-                if ($resolved !== '') {
-                    $replacementV2 = $resolved;
-                }
-            }
-        }
+    private function identityWriteProjector(): ScaleIdentityWriteProjector
+    {
+        return app(ScaleIdentityWriteProjector::class);
+    }
 
-        throw new ApiProblemException(
-            410,
-            'SCALE_DEPRECATED',
-            'scale is deprecated.',
-            [
-                'requested_scale_code' => strtoupper(trim($requestedScaleCode)),
-                'scale_code_legacy' => $legacyCode,
-                'replacement_scale_code' => $replacementLegacy,
-                'replacement_scale_code_v2' => $replacementV2,
-            ]
-        );
+    private function inputGuard(): ScaleCodeInputGuard
+    {
+        return app(ScaleCodeInputGuard::class);
     }
 
     private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion): int
