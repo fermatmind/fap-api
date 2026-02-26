@@ -67,7 +67,7 @@ class CommerceController extends Controller
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
         $contactEmail = $this->resolveContactEmail($payload, $userId !== null ? (string) $userId : null);
-        if ($userId === null && $contactEmail === null) {
+        if ($userId === null && $anonId === null && $contactEmail === null) {
             abort(422, 'email is required.');
         }
 
@@ -161,7 +161,7 @@ class CommerceController extends Controller
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
         $contactEmail = $this->resolveContactEmail($payload, $userId !== null ? (string) $userId : null);
-        if ($userId === null && $contactEmail === null) {
+        if ($userId === null && $anonId === null && $contactEmail === null) {
             abort(422, 'email is required.');
         }
 

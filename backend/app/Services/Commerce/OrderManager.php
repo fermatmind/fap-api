@@ -72,7 +72,7 @@ class OrderManager
         $normalizedUserId = $this->trimOrNull($userId);
         $normalizedAnonId = $this->trimOrNull($anonId);
         $contactEmailHash = $this->hashContactEmail($contactEmail);
-        if ($normalizedUserId === null && $contactEmailHash === null) {
+        if ($normalizedUserId === null && $normalizedAnonId === null && $contactEmailHash === null) {
             return $this->badRequest('EMAIL_REQUIRED', 'email is required.');
         }
 
