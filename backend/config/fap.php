@@ -84,6 +84,8 @@ return [
             'results',
             'role_user',
             'roles',
+            'scoring_models',
+            'scoring_model_rollouts',
             'scale_norms_versions',
             'scales_registry',
             'screen_time_samples',

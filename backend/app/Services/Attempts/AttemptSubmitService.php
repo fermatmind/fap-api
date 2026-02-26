@@ -8,6 +8,7 @@ use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\AssessmentRunner;
+use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
@@ -103,6 +104,7 @@ class AttemptSubmitService
         $engineVersion = trim((string) ($attemptMeta['engine_version'] ?? ''));
         $submittedAt = now();
         $serverDurationSeconds = $this->durationResolver->resolveServerSecondsFromValues($attempt->started_at, $submittedAt);
+        $experiments = $this->resolveScoreExperiments($orgId, $actorAnonId, $actorUserId);
 
         $scoreContext = [
             'duration_ms' => $durationMs,
@@ -121,6 +123,7 @@ class AttemptSubmitService
             'content_manifest_hash' => $packReleaseManifestHash,
             'policy_hash' => $policyHash,
             'engine_version' => $engineVersion,
+            'experiments_json' => $experiments,
         ];
 
         $scored = $this->assessmentRunner->run(
@@ -148,6 +151,9 @@ class AttemptSubmitService
         $scoreResult = $scored['result'];
         $contentPackageVersion = (string) ($scored['pack']['content_package_version'] ?? '');
         $scoringSpecVersion = (string) ($scored['scoring_spec_version'] ?? '');
+        $modelSelection = is_array($scored['model_selection'] ?? null)
+            ? $scored['model_selection']
+            : [];
 
         $commercial = $row['commercial_json'] ?? null;
         if (is_string($commercial)) {
@@ -188,6 +194,8 @@ class AttemptSubmitService
             $scoreResult,
             $contentPackageVersion,
             $scoringSpecVersion,
+            $modelSelection,
+            $experiments,
             $actorUserId,
             $actorAnonId,
             $validityItems,
@@ -448,6 +456,12 @@ class AttemptSubmitService
             $resultJson['dir_version'] = $dirVersion;
             $resultJson['content_package_version'] = $contentPackageVersion;
             $resultJson['scoring_spec_version'] = $scoringSpecVersion;
+            if ($modelSelection !== []) {
+                $resultJson['model_selection'] = $modelSelection;
+            }
+            if ($experiments !== []) {
+                $resultJson['experiments_json'] = $experiments;
+            }
             $resultJson['computed_at'] = now()->toISOString();
 
             $resultData = [
@@ -824,6 +838,43 @@ class AttemptSubmitService
         }
 
         return (int) $userId;
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    private function resolveScoreExperiments(int $orgId, ?string $actorAnonId, ?string $actorUserId): array
+    {
+        $anonId = trim((string) ($actorAnonId ?? ''));
+        if ($anonId === '') {
+            return [];
+        }
+
+        try {
+            $assignments = app(ExperimentAssigner::class)->assignActive(
+                $orgId,
+                $anonId,
+                $this->numericUserId($actorUserId)
+            );
+        } catch (\Throwable $e) {
+            return [];
+        }
+
+        if (!is_array($assignments)) {
+            return [];
+        }
+
+        $normalized = [];
+        foreach ($assignments as $key => $variant) {
+            $experimentKey = trim((string) $key);
+            $experimentVariant = trim((string) $variant);
+            if ($experimentKey === '' || $experimentVariant === '') {
+                continue;
+            }
+            $normalized[$experimentKey] = $experimentVariant;
+        }
+
+        return $normalized;
     }
 
     private function assertDemoScaleAllowed(string $scaleCode, string $attemptId): void
