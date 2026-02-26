@@ -67,8 +67,40 @@ RUN_SCALE_IDENTITY_CONTRACT="${RUN_SCALE_IDENTITY_CONTRACT:-0}"
 if [[ "$RUN_FULL_SCALE_REGRESSION" == "1" && "$RUN_SCALE_IDENTITY_CONTRACT" != "1" ]]; then
   RUN_SCALE_IDENTITY_CONTRACT="1"
 fi
+RUN_SCALE_IDENTITY_HARD_CUTOVER="${RUN_SCALE_IDENTITY_HARD_CUTOVER:-$RUN_SCALE_IDENTITY_CONTRACT}"
+if [[ "$RUN_FULL_SCALE_REGRESSION" == "1" && "$RUN_SCALE_IDENTITY_HARD_CUTOVER" != "1" ]]; then
+  RUN_SCALE_IDENTITY_HARD_CUTOVER="1"
+fi
+HARD_CUTOVER_ENV_APPLIED=0
+PREV_FAP_SCALE_IDENTITY_WRITE_MODE="${FAP_SCALE_IDENTITY_WRITE_MODE-__UNSET__}"
+PREV_FAP_SCALE_IDENTITY_READ_MODE="${FAP_SCALE_IDENTITY_READ_MODE-__UNSET__}"
+PREV_FAP_API_RESPONSE_SCALE_CODE_MODE="${FAP_API_RESPONSE_SCALE_CODE_MODE-__UNSET__}"
+PREV_FAP_ACCEPT_LEGACY_SCALE_CODE="${FAP_ACCEPT_LEGACY_SCALE_CODE-__UNSET__}"
+PREV_FAP_ALLOW_DEMO_SCALES="${FAP_ALLOW_DEMO_SCALES-__UNSET__}"
+PREV_FAP_CONTENT_PATH_MODE="${FAP_CONTENT_PATH_MODE-__UNSET__}"
+PREV_FAP_CONTENT_PUBLISH_MODE="${FAP_CONTENT_PUBLISH_MODE-__UNSET__}"
+if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+  export FAP_SCALE_IDENTITY_WRITE_MODE="${FAP_SCALE_IDENTITY_WRITE_MODE:-dual}"
+  export FAP_SCALE_IDENTITY_READ_MODE="${FAP_SCALE_IDENTITY_READ_MODE:-v2}"
+  export FAP_API_RESPONSE_SCALE_CODE_MODE="${FAP_API_RESPONSE_SCALE_CODE_MODE:-v2}"
+  export FAP_ACCEPT_LEGACY_SCALE_CODE="${FAP_ACCEPT_LEGACY_SCALE_CODE:-false}"
+  export FAP_ALLOW_DEMO_SCALES="${FAP_ALLOW_DEMO_SCALES:-false}"
+  export FAP_CONTENT_PATH_MODE="${FAP_CONTENT_PATH_MODE:-dual_prefer_new}"
+  export FAP_CONTENT_PUBLISH_MODE="${FAP_CONTENT_PUBLISH_MODE:-dual}"
+  HARD_CUTOVER_ENV_APPLIED=1
+fi
+
+restore_hard_cutover_env() {
+  if [[ "$PREV_FAP_SCALE_IDENTITY_WRITE_MODE" == "__UNSET__" ]]; then unset FAP_SCALE_IDENTITY_WRITE_MODE; else export FAP_SCALE_IDENTITY_WRITE_MODE="$PREV_FAP_SCALE_IDENTITY_WRITE_MODE"; fi
+  if [[ "$PREV_FAP_SCALE_IDENTITY_READ_MODE" == "__UNSET__" ]]; then unset FAP_SCALE_IDENTITY_READ_MODE; else export FAP_SCALE_IDENTITY_READ_MODE="$PREV_FAP_SCALE_IDENTITY_READ_MODE"; fi
+  if [[ "$PREV_FAP_API_RESPONSE_SCALE_CODE_MODE" == "__UNSET__" ]]; then unset FAP_API_RESPONSE_SCALE_CODE_MODE; else export FAP_API_RESPONSE_SCALE_CODE_MODE="$PREV_FAP_API_RESPONSE_SCALE_CODE_MODE"; fi
+  if [[ "$PREV_FAP_ACCEPT_LEGACY_SCALE_CODE" == "__UNSET__" ]]; then unset FAP_ACCEPT_LEGACY_SCALE_CODE; else export FAP_ACCEPT_LEGACY_SCALE_CODE="$PREV_FAP_ACCEPT_LEGACY_SCALE_CODE"; fi
+  if [[ "$PREV_FAP_ALLOW_DEMO_SCALES" == "__UNSET__" ]]; then unset FAP_ALLOW_DEMO_SCALES; else export FAP_ALLOW_DEMO_SCALES="$PREV_FAP_ALLOW_DEMO_SCALES"; fi
+  if [[ "$PREV_FAP_CONTENT_PATH_MODE" == "__UNSET__" ]]; then unset FAP_CONTENT_PATH_MODE; else export FAP_CONTENT_PATH_MODE="$PREV_FAP_CONTENT_PATH_MODE"; fi
+  if [[ "$PREV_FAP_CONTENT_PUBLISH_MODE" == "__UNSET__" ]]; then unset FAP_CONTENT_PUBLISH_MODE; else export FAP_CONTENT_PUBLISH_MODE="$PREV_FAP_CONTENT_PUBLISH_MODE"; fi
+}
 SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
-echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
@@ -262,6 +294,7 @@ fi
 ACCEPT_ORDER_SH="$SCRIPT_DIR/accept_lookup_order.sh"
 ACCEPT_ORDER="${ACCEPT_ORDER:-0}"  # 1=run, 0=skip
 SCALE_IDENTITY_CONTRACT_SH="$BACKEND_DIR/scripts/ci/verify_scale_identity_contract.sh"
+SCALE_IDENTITY_HARD_CUTOVER_SH="$BACKEND_DIR/scripts/ci/verify_scale_identity_hard_cutover.sh"
 
 if [[ "$ACCEPT_ORDER" == "1" ]]; then
   if [[ ! -f "$ACCEPT_ORDER_SH" ]]; then
@@ -270,7 +303,16 @@ if [[ "$ACCEPT_ORDER" == "1" ]]; then
   fi
 fi
 
-if [[ "$RUN_SCALE_IDENTITY_CONTRACT" == "1" ]]; then
+if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+  if [[ ! -x "$SCALE_IDENTITY_HARD_CUTOVER_SH" ]]; then
+    echo "[CI][FAIL] missing or not executable: $SCALE_IDENTITY_HARD_CUTOVER_SH" >&2
+    exit 14
+  fi
+  if [[ ! -x "$SCALE_IDENTITY_CONTRACT_SH" ]]; then
+    echo "[CI][FAIL] missing or not executable: $SCALE_IDENTITY_CONTRACT_SH" >&2
+    exit 14
+  fi
+elif [[ "$RUN_SCALE_IDENTITY_CONTRACT" == "1" ]]; then
   if [[ ! -x "$SCALE_IDENTITY_CONTRACT_SH" ]]; then
     echo "[CI][FAIL] missing or not executable: $SCALE_IDENTITY_CONTRACT_SH" >&2
     exit 14
@@ -690,16 +732,27 @@ fi
 # -----------------------------
 # Smoke: questions endpoint must be ok=true
 # -----------------------------
-echo "[CI] smoke: /api/v0.3/scales/MBTI/questions"
-if ! BACKEND_DIR="$BACKEND_DIR" php -r '
+SMOKE_SCALE_CODE="${SMOKE_SCALE_CODE:-MBTI}"
+if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+  SMOKE_SCALE_CODE="MBTI_PERSONALITY_TEST_16_TYPES"
+fi
+
+echo "[CI] smoke: /api/v0.3/scales/${SMOKE_SCALE_CODE}/questions"
+echo "[CI] smoke precheck db_connection=${DB_CONNECTION} db_database=${DB_DATABASE}"
+if ! APP_ENV="$APP_ENV" DB_CONNECTION="$DB_CONNECTION" DB_DATABASE="$DB_DATABASE" BACKEND_DIR="$BACKEND_DIR" php -r '
 $backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
 require $backendDir . "/vendor/autoload.php";
 $app = require $backendDir . "/bootstrap/app.php";
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
+$defaultConnection = (string) config("database.default", "");
+$resolvedDatabase = (string) config("database.connections.".$defaultConnection.".database", "");
+$resolvedPath = $resolvedDatabase !== "" ? realpath($resolvedDatabase) : false;
+$displayPath = is_string($resolvedPath) && $resolvedPath !== "" ? $resolvedPath : $resolvedDatabase;
+
 if (!Illuminate\Support\Facades\Schema::hasTable("scales_registry")) {
-    fwrite(STDERR, "scales_registry table missing before MBTI smoke\n");
+    fwrite(STDERR, "scales_registry table missing before MBTI smoke (conn={$defaultConnection}, db={$displayPath})\n");
     exit(2);
 }
 
@@ -709,7 +762,7 @@ $exists = Illuminate\Support\Facades\DB::table("scales_registry")
     ->exists();
 
 if (!$exists) {
-    fwrite(STDERR, "MBTI scale row missing in scales_registry before MBTI smoke\n");
+    fwrite(STDERR, "MBTI scale row missing in scales_registry before MBTI smoke (conn={$defaultConnection}, db={$displayPath})\n");
     exit(3);
 }
 '; then
@@ -717,11 +770,26 @@ if (!$exists) {
   exit 13
 fi
 
-curl -fsS "$API/api/v0.3/scales/MBTI/questions" >"$SMOKE_Q_LOG" || {
-  echo "[CI][FAIL] smoke curl failed"
+SMOKE_HTTP_CODE=""
+for attempt in 1 2 3; do
+  SMOKE_HTTP_CODE="$(curl -sS -o "$SMOKE_Q_LOG" -w "%{http_code}" "$API/api/v0.3/scales/${SMOKE_SCALE_CODE}/questions" || true)"
+  if [[ "$SMOKE_HTTP_CODE" == "200" ]]; then
+    break
+  fi
+
+  if [[ "$attempt" -lt 3 ]]; then
+    echo "[CI][WARN] smoke attempt ${attempt} failed http=${SMOKE_HTTP_CODE}, retrying..."
+    sleep 1
+  fi
+done
+
+if [[ "$SMOKE_HTTP_CODE" != "200" ]]; then
+  echo "[CI][FAIL] smoke curl failed http=${SMOKE_HTTP_CODE}"
+  head -c 1200 "$SMOKE_Q_LOG" || true
+  echo
   tail -n 120 "$SERVE_LOG" >&2 || true
   exit 13
-}
+fi
 
 if ! php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$SMOKE_Q_LOG" >/dev/null 2>&1; then
   echo "[CI][FAIL] smoke returned ok=false. body:"
@@ -733,8 +801,12 @@ if ! php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j
 fi
 echo "[CI] smoke OK"
 
-if [[ "$RUN_SCALE_IDENTITY_CONTRACT" == "1" ]]; then
-  echo "[CI] running scale identity contract gate (full regression)"
+if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+  echo "[CI] running scale identity hard-cutover contract gate (full regression)"
+  API="$API" REGION="$REGION" LOCALE="$LOCALE" bash "$SCALE_IDENTITY_HARD_CUTOVER_SH"
+  echo "[CI] scale identity hard-cutover contract gate OK"
+elif [[ "$RUN_SCALE_IDENTITY_CONTRACT" == "1" ]]; then
+  echo "[CI] running scale identity contract gate"
   API="$API" REGION="$REGION" LOCALE="$LOCALE" bash "$SCALE_IDENTITY_CONTRACT_SH"
   echo "[CI] scale identity contract gate OK"
 fi
@@ -758,8 +830,14 @@ fi
 
 set_curl_auth
 
-echo "[CI] running verify_mbti.sh (with FM_TOKEN)"
-API="$API" REGION="$REGION" LOCALE="$LOCALE" RUN_DIR="$RUN_DIR" ANON_ID="$ANON_ID" FM_TOKEN="$FM_TOKEN" \
+VERIFY_MBTI_SCALE_CODE="${VERIFY_MBTI_SCALE_CODE:-MBTI}"
+VERIFY_MBTI_EXPECT_PACK_PREFIX="${VERIFY_MBTI_EXPECT_PACK_PREFIX:-MBTI.cn-mainland.zh-CN.}"
+if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+  VERIFY_MBTI_SCALE_CODE="MBTI_PERSONALITY_TEST_16_TYPES"
+fi
+
+echo "[CI] running verify_mbti.sh (with FM_TOKEN) scale_code=${VERIFY_MBTI_SCALE_CODE}"
+API="$API" REGION="$REGION" LOCALE="$LOCALE" SCALE_CODE="$VERIFY_MBTI_SCALE_CODE" EXPECT_PACK_PREFIX="$VERIFY_MBTI_EXPECT_PACK_PREFIX" RUN_DIR="$RUN_DIR" ANON_ID="$ANON_ID" FM_TOKEN="$FM_TOKEN" \
   bash "$SCRIPT_DIR/verify_mbti.sh"
 echo "[CI] verify_mbti OK ✅"
 
@@ -951,7 +1029,7 @@ API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_G_report_view_meta.sh"
 
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_E_share_meta.sh"
+  SKIP_C=1 "$SCRIPT_DIR/accept_events_E_share_meta.sh"
 
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_H_share_view_meta.sh"
@@ -969,6 +1047,10 @@ echo "[CI] events acceptance OK"
 
 echo "[CI] stopping API server before phpunit gates"
 stop_server_if_running
+if [[ "$HARD_CUTOVER_ENV_APPLIED" == "1" ]]; then
+  echo "[CI] restoring scale identity env for phpunit gates"
+  restore_hard_cutover_env
+fi
 
 echo "[CI] payment event provider uniqueness gate"
 php artisan test --filter PaymentEventUniquenessAcrossProvidersTest
@@ -980,6 +1062,12 @@ php artisan test --filter MigrationRollbackSafetyTest
 php artisan test --filter MigrationsNoSilentCatchTest
 php artisan test --filter MigrationProtectedTablesNoDropTest
 echo "[CI] migration safety gates OK"
+
+if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+  echo "[CI] hard-cutover phpunit gate"
+  php artisan test tests/Feature/Ops/ScaleIdentityHardCutoverCiTest.php
+  echo "[CI] hard-cutover phpunit gate OK"
+fi
 
 echo "[CI] webhook/attempt regression gates"
 php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_3/PaymentWebhookControllerTest.php

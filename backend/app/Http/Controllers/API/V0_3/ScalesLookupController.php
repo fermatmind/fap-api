@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
@@ -14,6 +15,7 @@ class ScalesLookupController extends Controller
     public function __construct(
         private ScaleRegistry $registry,
         private ScaleIdentityResolver $identityResolver,
+        private ScaleCodeResponseProjector $responseProjector,
         private OrgContext $orgContext,
     ) {}
 
@@ -285,13 +287,17 @@ class ScalesLookupController extends Controller
             : $legacyCode;
         $packIdV2 = $isKnown ? $this->trimOrNull($identity['pack_id_v2'] ?? null) : null;
         $dirVersionV2 = $isKnown ? $this->trimOrNull($identity['dir_version_v2'] ?? null) : null;
-        $responseScaleCode = $this->identityResolver->resolveResponseScaleCode($legacyCode, $scaleCodeV2);
+        $responseCodes = $this->responseProjector->project(
+            $legacyCode,
+            $scaleCodeV2,
+            $scaleUid !== '' ? $scaleUid : null
+        );
 
         return [
-            'scale_code' => $responseScaleCode,
-            'scale_code_legacy' => $legacyCode,
-            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : $legacyCode,
-            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+            'scale_code' => $responseCodes['scale_code'],
+            'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+            'scale_code_v2' => $responseCodes['scale_code_v2'],
+            'scale_uid' => $responseCodes['scale_uid'],
             'pack_id_v2' => $packIdV2 ?? $this->trimOrNull($row['default_pack_id'] ?? null),
             'dir_version_v2' => $dirVersionV2 ?? $this->trimOrNull($row['default_dir_version'] ?? null),
         ];

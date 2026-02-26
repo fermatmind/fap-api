@@ -55,6 +55,8 @@ final class ScaleIdentityModeAuditCommandTest extends TestCase
         config()->set('scale_identity.write_mode', 'legacy');
         config()->set('scale_identity.read_mode', 'v2');
         config()->set('scale_identity.accept_legacy_scale_code', true);
+        config()->set('scale_identity.api_response_scale_code_mode', 'legacy');
+        config()->set('scale_identity.allow_demo_scales', true);
 
         $exitCode = Artisan::call('ops:scale-identity-mode-audit', [
             '--json' => '1',
@@ -75,5 +77,28 @@ final class ScaleIdentityModeAuditCommandTest extends TestCase
 
         $this->assertContains('read_mode', $keys);
         $this->assertContains('accept_legacy_scale_code', $keys);
+        $this->assertContains('api_response_scale_code_mode', $keys);
+        $this->assertContains('allow_demo_scales', $keys);
+    }
+
+    public function test_mode_audit_strict_passes_for_v2_hard_cutover_combo(): void
+    {
+        config()->set('scale_identity.write_mode', 'dual');
+        config()->set('scale_identity.read_mode', 'v2');
+        config()->set('scale_identity.accept_legacy_scale_code', false);
+        config()->set('scale_identity.api_response_scale_code_mode', 'v2');
+        config()->set('scale_identity.allow_demo_scales', false);
+
+        $exitCode = Artisan::call('ops:scale-identity-mode-audit', [
+            '--json' => '1',
+            '--strict' => '1',
+        ]);
+
+        $this->assertSame(0, $exitCode);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+        $this->assertIsArray($payload);
+        $this->assertTrue((bool) ($payload['pass'] ?? false));
+        $this->assertSame([], $payload['violations'] ?? null);
     }
 }

@@ -29,7 +29,9 @@ return [
     // Mode semantic guardrails (enforced by ops:scale-identity-mode-audit):
     // 1) read_mode=v2 requires write_mode in {dual,v2}
     // 2) read_mode=v2 requires accept_legacy_scale_code=false
-    // 3) Other combinations are allowed but may emit warnings in audit output.
+    // 3) read_mode=v2 requires api_response_scale_code_mode=v2
+    // 4) read_mode=v2 requires allow_demo_scales=false
+    // 5) Other combinations are allowed but may emit warnings in audit output.
 
     // Demo scale switch for offboarding.
     'allow_demo_scales' => (bool) env('FAP_ALLOW_DEMO_SCALES', true),

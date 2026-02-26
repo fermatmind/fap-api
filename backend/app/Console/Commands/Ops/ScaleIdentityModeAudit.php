@@ -164,6 +164,7 @@ final class ScaleIdentityModeAudit extends Command
         $contentPublishMode = (string) ($modes['content_publish_mode'] ?? 'legacy');
         $responseMode = (string) ($modes['api_response_scale_code_mode'] ?? 'legacy');
         $acceptLegacy = (bool) ($modes['accept_legacy_scale_code'] ?? true);
+        $allowDemoScales = (bool) ($modes['allow_demo_scales'] ?? true);
 
         if ($readMode === 'v2' && $writeMode === 'legacy') {
             $violations[] = [
@@ -180,6 +181,24 @@ final class ScaleIdentityModeAudit extends Command
                 'value' => 'true',
                 'expected' => 'false when read_mode=v2',
                 'reason' => 'v2 read mode conflicts with accepting legacy request code as primary input',
+            ];
+        }
+
+        if ($readMode === 'v2' && $responseMode !== 'v2') {
+            $violations[] = [
+                'key' => 'api_response_scale_code_mode',
+                'value' => $responseMode,
+                'expected' => 'v2 when read_mode=v2',
+                'reason' => 'v2 read mode requires v2 response primary scale_code to avoid mixed client contracts',
+            ];
+        }
+
+        if ($readMode === 'v2' && $allowDemoScales) {
+            $violations[] = [
+                'key' => 'allow_demo_scales',
+                'value' => 'true',
+                'expected' => 'false when read_mode=v2',
+                'reason' => 'v2 hard cutover requires demo scales disabled to prevent deprecated path fallback',
             ];
         }
 

@@ -102,7 +102,7 @@ class ScaleRegistry
         if ($slug === '') {
             return null;
         }
-        if (!preg_match('/^[a-z0-9-]{0,127}$/', $slug)) {
+        if (! preg_match('/^[a-z0-9-]{0,127}$/', $slug)) {
             return null;
         }
 
@@ -156,7 +156,7 @@ class ScaleRegistry
                 ->where('org_id', $orgId)
                 ->where('slug', $slug)
                 ->first();
-            if (!$slugRow) {
+            if (! $slugRow) {
                 $slugRow = ScaleSlug::query()
                     ->where('org_id', 0)
                     ->where('slug', $slug)
@@ -164,7 +164,7 @@ class ScaleRegistry
             }
         }
 
-        if (!$slugRow) {
+        if (! $slugRow) {
             return null;
         }
 
@@ -176,7 +176,7 @@ class ScaleRegistry
             })
             ->first();
 
-        if (!$registry) {
+        if (! $registry) {
             return null;
         }
 
@@ -223,17 +223,20 @@ class ScaleRegistry
             return $requestedCode;
         }
 
-        $readMode = strtolower(trim((string) config('scale_identity.read_mode', 'legacy')));
         $isLegacyInput = $requestedCode === $legacyCode;
         if (
             $isLegacyInput
-            && ! $this->identityResolver->acceptsLegacyScaleCode()
-            && in_array($readMode, ['v2', 'dual_prefer_new'], true)
+            && ! $this->runtimePolicy()->acceptsLegacyScaleCode()
         ) {
             return '';
         }
 
         // Current storage is still v1; known aliases are resolved to v1 for read compatibility.
         return $legacyCode;
+    }
+
+    private function runtimePolicy(): ScaleIdentityRuntimePolicy
+    {
+        return app(ScaleIdentityRuntimePolicy::class);
     }
 }

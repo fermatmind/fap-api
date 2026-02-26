@@ -47,6 +47,7 @@ SQLITE_DB_ABS="$(resolve_abs "$SQLITE_DB_IN")"
 RUN_DIR="${RUN_DIR:-$BACKEND_DIR/artifacts/verify_mbti}"
 SHARE_JSON="$RUN_DIR/share.json"
 TMP_RESP="$RUN_DIR/_accept_H_share_resp.json"
+TMP_RESP_CLEAN="$RUN_DIR/_accept_H_share_resp_clean.json"
 
 echo "[ACCEPT_H] repo=$REPO_DIR"
 echo "[ACCEPT_H] backend=$BACKEND_DIR"
@@ -93,16 +94,43 @@ curl -fsS \
   -H "X-Entry-Page: share_page" \
   "$API/api/v0.3/attempts/$ATT/share" >"$TMP_RESP"
 
-if ! php -r '$j=json_decode(@file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$TMP_RESP" >/dev/null 2>&1; then
+if ! php -r '
+$raw = (string) @file_get_contents($argv[1]);
+$out = (string) ($argv[2] ?? "");
+if ($raw === "" || $out === "") {
+    exit(1);
+}
+$candidate = "";
+$needlePos = strrpos($raw, "{\"ok\"");
+if ($needlePos !== false) {
+    $candidate = substr($raw, $needlePos);
+} else {
+    $bracePos = strpos($raw, "{");
+    if ($bracePos !== false) {
+        $candidate = substr($raw, $bracePos);
+    }
+}
+$decoded = $candidate !== "" ? json_decode($candidate, true) : null;
+if (!is_array($decoded)) {
+    exit(2);
+}
+file_put_contents($out, json_encode($decoded, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+' "$TMP_RESP" "$TMP_RESP_CLEAN" >/dev/null 2>&1; then
+  echo "[ACCEPT_H][FAIL] /share response is not parseable json. head:" >&2
+  head -n 60 "$TMP_RESP" >&2 || true
+  exit 2
+fi
+
+if ! php -r '$j=json_decode(@file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$TMP_RESP_CLEAN" >/dev/null 2>&1; then
   echo "[ACCEPT_H][FAIL] /share response ok!=true. head:" >&2
   head -n 60 "$TMP_RESP" >&2 || true
   exit 2
 fi
 
-SHARE_ID_RESP="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["share_id"] ?? "";' "$TMP_RESP" 2>/dev/null || true)"
+SHARE_ID_RESP="$(php -r '$j=json_decode(@file_get_contents($argv[1]), true); echo $j["share_id"] ?? "";' "$TMP_RESP_CLEAN" 2>/dev/null || true)"
 if [[ -z "$SHARE_ID_RESP" ]]; then
-  echo "[ACCEPT_H][FAIL] missing share_id in /share response: $TMP_RESP" >&2
-  cat "$TMP_RESP" >&2 || true
+  echo "[ACCEPT_H][FAIL] missing share_id in /share response: $TMP_RESP_CLEAN" >&2
+  cat "$TMP_RESP_CLEAN" >&2 || true
   exit 2
 fi
 

@@ -43,9 +43,9 @@ final class ScaleIdentityGate extends Command
         $thresholds = [
             'identity_resolve_mismatch_rate' => $this->floatEnv('FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX', 0.0),
             'dual_write_mismatch_rate' => $this->floatEnv('FAP_GATE_DUAL_WRITE_MISMATCH_RATE_MAX', 0.0),
-            'content_path_fallback_rate' => $this->floatEnv('FAP_GATE_CONTENT_PATH_FALLBACK_RATE_MAX', 1.0),
-            'legacy_code_hit_rate' => $this->floatEnv('FAP_GATE_LEGACY_CODE_HIT_RATE_MAX', 1.0),
-            'demo_scale_hit_rate' => $this->floatEnv('FAP_GATE_DEMO_SCALE_HIT_RATE_MAX', 0.001),
+            'content_path_fallback_rate' => $this->floatEnv('FAP_GATE_CONTENT_PATH_FALLBACK_RATE_MAX', 0.0),
+            'legacy_code_hit_rate' => $this->floatEnv('FAP_GATE_LEGACY_CODE_HIT_RATE_MAX', 0.0),
+            'demo_scale_hit_rate' => $this->floatEnv('FAP_GATE_DEMO_SCALE_HIT_RATE_MAX', 0.0),
         ];
 
         $strict = $this->isTruthy($this->option('strict'));

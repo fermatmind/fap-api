@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
-final class ScaleIdentityContractCiTest extends TestCase
+final class ScaleIdentityHardCutoverCiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_six_scale_questions_reject_legacy_and_accept_v2_codes_under_contract(): void
+    public function test_six_scale_questions_reject_legacy_and_accept_v2_codes_under_hard_cutover(): void
     {
         $this->artisan('migrate', ['--force' => true]);
         $this->artisan('fap:scales:seed-default');
@@ -46,7 +46,7 @@ final class ScaleIdentityContractCiTest extends TestCase
         }
     }
 
-    public function test_strict_gate_passes_with_contract_thresholds(): void
+    public function test_mode_audit_and_gate_strict_pass_under_hard_cutover_thresholds(): void
     {
         $this->artisan('migrate', ['--force' => true]);
         $this->artisan('fap:scales:seed-default');
@@ -79,20 +79,19 @@ final class ScaleIdentityContractCiTest extends TestCase
             $this->assertTrue((bool) ($modeAuditPayload['pass'] ?? false));
             $this->assertSame([], $modeAuditPayload['violations'] ?? null);
 
-            $exitCode = Artisan::call('ops:scale-identity-gate', [
+            $gateExitCode = Artisan::call('ops:scale-identity-gate', [
                 '--json' => '1',
                 '--strict' => '1',
                 '--hours' => '336',
                 '--max-rows' => '5000',
             ]);
+            $this->assertSame(0, $gateExitCode);
 
-            $this->assertSame(0, $exitCode);
-
-            $payload = json_decode(trim((string) Artisan::output()), true);
-            $this->assertIsArray($payload);
-            $this->assertTrue((bool) ($payload['ok'] ?? false));
-            $this->assertTrue((bool) ($payload['pass'] ?? false));
-            $this->assertSame([], $payload['violations'] ?? null);
+            $gatePayload = json_decode(trim((string) Artisan::output()), true);
+            $this->assertIsArray($gatePayload);
+            $this->assertTrue((bool) ($gatePayload['ok'] ?? false));
+            $this->assertTrue((bool) ($gatePayload['pass'] ?? false));
+            $this->assertSame([], $gatePayload['violations'] ?? null);
         } finally {
             $this->restoreEnv('FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX', $previous['FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX']);
             $this->restoreEnv('FAP_GATE_DUAL_WRITE_MISMATCH_RATE_MAX', $previous['FAP_GATE_DUAL_WRITE_MISMATCH_RATE_MAX']);

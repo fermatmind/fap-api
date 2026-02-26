@@ -10,6 +10,7 @@ use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportGatekeeper;
+use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class AttemptReadController extends Controller
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
         private EventRecorder $eventRecorder,
+        private ScaleCodeResponseProjector $responseProjector,
         protected OrgContext $orgContext,
     ) {}
 
@@ -43,6 +45,7 @@ class AttemptReadController extends Controller
         $attempt = $this->ownedAttemptQuery($request, $id)->firstOrFail();
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
+        $responseCodes = $this->resolveResponseScaleCodes($attempt);
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === 'CLINICAL_COMBO_68') {
@@ -72,7 +75,10 @@ class AttemptReadController extends Controller
 
             $report = is_array($gate['report'] ?? null) ? $gate['report'] : [];
             $safeResult = [
-                'scale_code' => $scaleCode,
+                'scale_code' => $responseCodes['scale_code'],
+                'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+                'scale_code_v2' => $responseCodes['scale_code_v2'],
+                'scale_uid' => $responseCodes['scale_uid'],
                 'quality' => is_array($gate['quality'] ?? null) ? $gate['quality'] : [],
                 'scores' => is_array($report['scores'] ?? null) ? $report['scores'] : [],
                 'report_tags' => is_array($report['report_tags'] ?? null) ? $report['report_tags'] : [],
@@ -97,7 +103,10 @@ class AttemptReadController extends Controller
                 'result' => $safeResult,
                 'report' => $gate,
                 'meta' => [
-                    'scale_code' => (string) ($attempt->scale_code ?? ''),
+                    'scale_code' => $responseCodes['scale_code'],
+                    'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+                    'scale_code_v2' => $responseCodes['scale_code_v2'],
+                    'scale_uid' => $responseCodes['scale_uid'],
                     'pack_id' => (string) ($attempt->pack_id ?? ''),
                     'dir_version' => (string) ($attempt->dir_version ?? ''),
                     'content_package_version' => (string) ($attempt->content_package_version ?? ''),
@@ -111,6 +120,10 @@ class AttemptReadController extends Controller
         if (! is_array($payload)) {
             $payload = [];
         }
+        $payload['scale_code'] = $responseCodes['scale_code'];
+        $payload['scale_code_legacy'] = $responseCodes['scale_code_legacy'];
+        $payload['scale_code_v2'] = $responseCodes['scale_code_v2'];
+        $payload['scale_uid'] = $responseCodes['scale_uid'];
 
         $compatTypeCode = (string) (($payload['type_code'] ?? null) ?? ($result->type_code ?? ''));
 
@@ -146,7 +159,10 @@ class AttemptReadController extends Controller
             'scores_pct' => $compatScoresPct,
             'result' => $payload,
             'meta' => [
-                'scale_code' => (string) ($attempt->scale_code ?? ''),
+                'scale_code' => $responseCodes['scale_code'],
+                'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+                'scale_code_v2' => $responseCodes['scale_code_v2'],
+                'scale_uid' => $responseCodes['scale_uid'],
                 'pack_id' => (string) ($attempt->pack_id ?? ''),
                 'dir_version' => (string) ($attempt->dir_version ?? ''),
                 'content_package_version' => (string) ($attempt->content_package_version ?? ''),
@@ -170,6 +186,7 @@ class AttemptReadController extends Controller
         $attempt = $this->ownedAttemptQuery($request, $id)->firstOrFail();
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
+        $responseCodes = $this->resolveResponseScaleCodes($attempt);
 
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
@@ -220,10 +237,20 @@ class AttemptReadController extends Controller
         if (isset($gate['meta']) && is_array($gate['meta'])) {
             $gateMeta = $gate['meta'];
         }
+        if (isset($gate['report']) && is_array($gate['report'])) {
+            $gate['report'] = $this->projectScaleCodePayload($gate['report'], $responseCodes);
+        }
 
         return response()->json(array_merge($gate, [
+            'scale_code' => $responseCodes['scale_code'],
+            'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+            'scale_code_v2' => $responseCodes['scale_code_v2'],
+            'scale_uid' => $responseCodes['scale_uid'],
             'meta' => array_merge($gateMeta, [
-                'scale_code' => (string) ($attempt->scale_code ?? ''),
+                'scale_code' => $responseCodes['scale_code'],
+                'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+                'scale_code_v2' => $responseCodes['scale_code_v2'],
+                'scale_uid' => $responseCodes['scale_uid'],
                 'pack_id' => (string) ($attempt->pack_id ?? ''),
                 'dir_version' => (string) ($attempt->dir_version ?? ''),
                 'content_package_version' => (string) ($attempt->content_package_version ?? ''),
@@ -231,6 +258,34 @@ class AttemptReadController extends Controller
                 'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
             ]),
         ]));
+    }
+
+    /**
+     * @return array{scale_code:string,scale_code_legacy:string,scale_code_v2:string,scale_uid:?string}
+     */
+    private function resolveResponseScaleCodes(object $attempt): array
+    {
+        return $this->responseProjector->project(
+            (string) ($attempt->scale_code ?? ''),
+            (string) ($attempt->scale_code_v2 ?? ''),
+            $attempt->scale_uid !== null ? (string) $attempt->scale_uid : null
+        );
+    }
+
+    /**
+     * @param  array{scale_code:string,scale_code_legacy:string,scale_code_v2:string,scale_uid:?string}  $responseCodes
+     * @return array<string,mixed>
+     */
+    private function projectScaleCodePayload(array $payload, array $responseCodes): array
+    {
+        if (array_key_exists('scale_code', $payload)) {
+            $payload['scale_code'] = $responseCodes['scale_code'];
+            $payload['scale_code_legacy'] = $responseCodes['scale_code_legacy'];
+            $payload['scale_code_v2'] = $responseCodes['scale_code_v2'];
+            $payload['scale_uid'] = $responseCodes['scale_uid'];
+        }
+
+        return $payload;
     }
 
     /**
