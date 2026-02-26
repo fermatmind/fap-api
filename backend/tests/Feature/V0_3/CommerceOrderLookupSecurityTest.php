@@ -28,7 +28,7 @@ final class CommerceOrderLookupSecurityTest extends TestCase
 
     public function test_lookup_with_wrong_email_is_blinded(): void
     {
-        $orderNo = 'ord_lookup_' . Str::lower(Str::random(8));
+        $orderNo = 'ord_lookup_'.Str::lower(Str::random(8));
         $this->insertOrderForLookup($orderNo, 'owner@example.com');
 
         $response = $this->postJson('/api/v0.3/orders/lookup', [
@@ -42,7 +42,7 @@ final class CommerceOrderLookupSecurityTest extends TestCase
 
     public function test_lookup_with_matching_email_hash_returns_status(): void
     {
-        $orderNo = 'ord_lookup_' . Str::lower(Str::random(8));
+        $orderNo = 'ord_lookup_'.Str::lower(Str::random(8));
         $this->insertOrderForLookup($orderNo, 'owner@example.com');
 
         $response = $this->postJson('/api/v0.3/orders/lookup', [
@@ -58,13 +58,13 @@ final class CommerceOrderLookupSecurityTest extends TestCase
 
     public function test_lookup_with_token_owner_works_without_email(): void
     {
-        $orderNo = 'ord_lookup_' . Str::lower(Str::random(8));
+        $orderNo = 'ord_lookup_'.Str::lower(Str::random(8));
         $this->insertOrderForLookup($orderNo, 'owner@example.com');
 
         $token = $this->issueAnonToken(self::ANON_OWNER);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v0.3/orders/lookup', [
             'order_no' => $orderNo,
         ]);
@@ -77,16 +77,32 @@ final class CommerceOrderLookupSecurityTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
+        $tokenHash = hash('sha256', $token);
+
         DB::table('fm_tokens')->insert([
             'token' => $token,
-            'token_hash' => hash('sha256', $token),
+            'token_hash' => $tokenHash,
             'user_id' => null,
             'anon_id' => $anonId,
             'org_id' => 0,
             'role' => 'public',
             'expires_at' => now()->addDay(),
             'revoked_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('auth_tokens')->insert([
+            'token_hash' => $tokenHash,
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'meta_json' => null,
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'last_used_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

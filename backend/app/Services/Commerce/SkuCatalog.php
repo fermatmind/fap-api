@@ -47,6 +47,17 @@ class SkuCatalog
                 continue;
             }
 
+            $modulesIncluded = $this->normalizeModulesIncluded($meta['modules_included'] ?? null);
+            if ($modulesIncluded === []) {
+                $benefitCode = strtoupper(trim((string) ($row->benefit_code ?? '')));
+                if ($benefitCode !== '') {
+                    $modulesIncluded = $this->benefitModuleRuleCatalog()->modulesForBenefitCode(
+                        (int) ($row->org_id ?? 0),
+                        $benefitCode
+                    );
+                }
+            }
+
             $items[] = [
                 'sku' => (string) ($row->sku ?? ''),
                 'scale_code' => (string) ($row->scale_code ?? ''),
@@ -58,7 +69,7 @@ class SkuCatalog
                 'currency' => (string) ($row->currency ?? ''),
                 'is_active' => (bool) ($row->is_active ?? false),
                 'meta_json' => $meta,
-                'modules_included' => $this->normalizeModulesIncluded($meta['modules_included'] ?? null),
+                'modules_included' => $modulesIncluded,
             ];
         }
 
@@ -289,5 +300,10 @@ class SkuCatalog
         }
 
         return null;
+    }
+
+    private function benefitModuleRuleCatalog(): BenefitModuleRuleCatalog
+    {
+        return app(BenefitModuleRuleCatalog::class);
     }
 }

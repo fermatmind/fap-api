@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V0_3;
 use App\Http\Controllers\API\V0_3\Concerns\ResolvesAttemptOwnership;
 use App\Http\Controllers\Controller;
 use App\Models\Result;
+use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
@@ -21,6 +22,7 @@ class AttemptReadController extends Controller
     use ResolvesAttemptOwnership;
 
     public function __construct(
+        private AttemptSubmissionService $attemptSubmissionService,
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
         private EventRecorder $eventRecorder,
@@ -34,6 +36,26 @@ class AttemptReadController extends Controller
     public function show(Request $request, string $id): JsonResponse
     {
         return $this->result($request, $id);
+    }
+
+    /**
+     * GET /api/v0.3/attempts/{attempt_id}/submission
+     */
+    public function submission(Request $request, string $attemptId): JsonResponse
+    {
+        $this->ownedAttemptQuery($request, $attemptId)->firstOrFail();
+
+        $payload = $this->attemptSubmissionService->latestForAttempt(
+            $this->orgContext,
+            $attemptId,
+            $this->resolveUserId($request),
+            $this->resolveAnonId($request)
+        );
+
+        $status = (int) ($payload['http_status'] ?? 200);
+        unset($payload['http_status']);
+
+        return response()->json($payload, $status);
     }
 
     /**

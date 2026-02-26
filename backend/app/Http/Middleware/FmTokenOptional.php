@@ -6,6 +6,7 @@ use App\Support\OrgContext;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class FmTokenOptional
@@ -36,7 +37,7 @@ class FmTokenOptional
             $token
         ) === 1;
 
-        if (!$isOk) {
+        if (! $isOk) {
             return $next($request);
         }
 
@@ -54,21 +55,18 @@ class FmTokenOptional
             'revoked_at',
         ];
 
-        $row = DB::table('fm_tokens')
-            ->select($select)
-            ->where('token_hash', $tokenHash)
-            ->first();
+        $row = $this->findTokenRow($tokenHash, $select);
 
-        if (!$row) {
+        if (! $row) {
             return $next($request);
         }
 
-        if (!empty($row->revoked_at)) {
+        if (! empty($row->revoked_at)) {
             return $next($request);
         }
 
         // expires_at check
-        if (!empty($row->expires_at)) {
+        if (! empty($row->expires_at)) {
             $exp = strtotime((string) $row->expires_at);
             if ($exp !== false && $exp < time()) {
                 return $next($request);
@@ -97,7 +95,7 @@ class FmTokenOptional
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
 
-        $ctx = new OrgContext();
+        $ctx = new OrgContext;
         $ctx->set($orgId, $resolvedUserId, $role, $anonId);
         app()->instance(OrgContext::class, $ctx);
 
@@ -156,5 +154,50 @@ class FmTokenOptional
         }
 
         return 'public';
+    }
+
+    /**
+     * @param  array<int,string>  $select
+     */
+    private function findTokenRow(string $tokenHash, array $select): ?object
+    {
+        $row = null;
+
+        try {
+            $row = DB::table('auth_tokens')
+                ->select($select)
+                ->where('token_hash', $tokenHash)
+                ->first();
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] auth_tokens_lookup_failed', [
+                'path' => 'middleware.fm_token_optional',
+                'exception' => $e::class,
+            ]);
+        }
+
+        if ($row) {
+            return $row;
+        }
+
+        try {
+            $legacy = DB::table('fm_tokens')
+                ->select($select)
+                ->where('token_hash', $tokenHash)
+                ->first();
+            if ($legacy) {
+                Log::info('[SEC] fm_token_legacy_hash_fallback_hit', [
+                    'path' => 'middleware.fm_token_optional',
+                ]);
+            }
+
+            return $legacy ?: null;
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] fm_tokens_lookup_failed', [
+                'path' => 'middleware.fm_token_optional',
+                'exception' => $e::class,
+            ]);
+        }
+
+        return null;
     }
 }

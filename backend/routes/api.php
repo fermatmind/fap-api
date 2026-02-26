@@ -9,6 +9,7 @@ use App\Http\Controllers\API\V0_3\AuthWxPhoneController as AuthWxPhoneV03Control
 use App\Http\Controllers\API\V0_3\BigFiveOpsController;
 use App\Http\Controllers\API\V0_3\BootController as BootV0_3Controller;
 use App\Http\Controllers\API\V0_3\ClaimController as ClaimV03Controller;
+use App\Http\Controllers\API\V0_3\ComplianceDsarController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
@@ -95,6 +96,15 @@ Route::prefix('v0.3')->middleware([
         Route::get('/me/attempts', [MeV03Controller::class, 'attempts']);
     });
 
+    Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])->group(function () {
+        Route::post('/compliance/dsar/requests', [ComplianceDsarController::class, 'store'])
+            ->middleware('throttle:api_auth');
+        Route::get('/compliance/dsar/requests/{id}', [ComplianceDsarController::class, 'show'])
+            ->middleware(['uuid:id', 'throttle:api_auth']);
+        Route::post('/compliance/dsar/requests/{id}/execute', [ComplianceDsarController::class, 'execute'])
+            ->middleware(['uuid:id', 'throttle:api_auth']);
+    });
+
     Route::middleware([\App\Http\Middleware\ResolveAnonId::class, ResolveOrgContext::class])->group(function () use ($payProviders) {
         // 0) Boot (flags + experiments)
         Route::get('/boot', [BootV0_3Controller::class, 'show']);
@@ -118,6 +128,9 @@ Route::prefix('v0.3')->middleware([
             ->middleware('uuid:attempt_id');
         Route::get('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'show'])
             ->middleware('uuid:attempt_id');
+        Route::get('/attempts/{attempt_id}/submission', [AttemptReadController::class, 'submission'])
+            ->middleware('uuid:attempt_id')
+            ->name('api.v0_3.attempts.submission');
         Route::get('/attempts/{id}', [AttemptReadController::class, 'show'])
             ->middleware('uuid:id')
             ->name('api.v0_3.attempts.show');

@@ -56,16 +56,31 @@ final class FmTokenOrgOverrideIsolationTest extends TestCase
 
     private function seedFmToken(int $userId, string $anonId, int $orgId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
+        $tokenHash = hash('sha256', $token);
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
-            'token_hash' => hash('sha256', $token),
+            'token_hash' => $tokenHash,
             'user_id' => $userId,
             'anon_id' => $anonId,
             'org_id' => $orgId,
             'role' => 'public',
             'expires_at' => now()->addHour(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('auth_tokens')->insert([
+            'token_hash' => $tokenHash,
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'org_id' => $orgId,
+            'role' => 'public',
+            'meta_json' => null,
+            'expires_at' => now()->addHour(),
+            'revoked_at' => null,
+            'last_used_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -79,7 +94,7 @@ final class FmTokenOrgOverrideIsolationTest extends TestCase
 
         Attempt::create([
             'id' => $attemptId,
-            'ticket_code' => 'FMT-' . strtoupper(substr(str_replace('-', '', (string) Str::uuid()), 0, 8)),
+            'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', (string) Str::uuid()), 0, 8)),
             'org_id' => $orgId,
             'anon_id' => $anonId,
             'user_id' => $userId,

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class FmTokenOptionalAuth
@@ -35,7 +36,7 @@ class FmTokenOptionalAuth
             $token
         ) === 1;
 
-        if (!$isOk) {
+        if (! $isOk) {
             return $this->unauthorizedResponse();
         }
 
@@ -50,21 +51,18 @@ class FmTokenOptionalAuth
             'revoked_at',
         ];
 
-        $row = DB::table('fm_tokens')
-            ->select($select)
-            ->where('token_hash', $tokenHash)
-            ->first();
+        $row = $this->findTokenRow($tokenHash, $select);
 
-        if (!$row) {
+        if (! $row) {
             return $this->unauthorizedResponse();
         }
 
-        if (property_exists($row, 'revoked_at') && !empty($row->revoked_at)) {
+        if (property_exists($row, 'revoked_at') && ! empty($row->revoked_at)) {
             return $this->unauthorizedResponse();
         }
 
         // expires_at check (only when present)
-        if (property_exists($row, 'expires_at') && !empty($row->expires_at)) {
+        if (property_exists($row, 'expires_at') && ! empty($row->expires_at)) {
             $exp = strtotime((string) $row->expires_at);
             if ($exp !== false && $exp < time()) {
                 return $this->unauthorizedResponse();
@@ -101,13 +99,17 @@ class FmTokenOptionalAuth
     {
         if (property_exists($row, 'user_id')) {
             $v = trim((string) ($row->user_id ?? ''));
-            if ($v !== '') return $v;
+            if ($v !== '') {
+                return $v;
+            }
         }
 
         foreach (['uid', 'user_uid', 'user'] as $c) {
             if (property_exists($row, $c)) {
                 $v = trim((string) ($row->{$c} ?? ''));
-                if ($v !== '') return $v;
+                if ($v !== '') {
+                    return $v;
+                }
             }
         }
 
@@ -139,7 +141,7 @@ class FmTokenOptionalAuth
         $tokenIsNumericPlaceholder = ($fromToken !== '' && preg_match('/^\d+$/', $fromToken) === 1);
 
         $chosen = '';
-        if ($fromToken !== '' && !$tokenIsNumericPlaceholder) {
+        if ($fromToken !== '' && ! $tokenIsNumericPlaceholder) {
             $chosen = $fromToken;
         } elseif ($fromToken === '') {
             $chosen = $fromReq;
@@ -162,11 +164,56 @@ class FmTokenOptionalAuth
     private function unauthorizedResponse(): Response
     {
         return response()->json([
-            'ok'      => false,
-            'error_code'   => 'UNAUTHORIZED',
+            'ok' => false,
+            'error_code' => 'UNAUTHORIZED',
             'message' => 'Missing or invalid fm_token. Please login.',
         ], 401)->withHeaders([
             'WWW-Authenticate' => 'Bearer realm="Fermat API", error="invalid_token"',
         ]);
+    }
+
+    /**
+     * @param  array<int,string>  $select
+     */
+    private function findTokenRow(string $tokenHash, array $select): ?object
+    {
+        $row = null;
+
+        try {
+            $row = DB::table('auth_tokens')
+                ->select($select)
+                ->where('token_hash', $tokenHash)
+                ->first();
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] auth_tokens_lookup_failed', [
+                'path' => 'middleware.fm_token_optional_auth',
+                'exception' => $e::class,
+            ]);
+        }
+
+        if ($row) {
+            return $row;
+        }
+
+        try {
+            $legacy = DB::table('fm_tokens')
+                ->select($select)
+                ->where('token_hash', $tokenHash)
+                ->first();
+            if ($legacy) {
+                Log::info('[SEC] fm_token_legacy_hash_fallback_hit', [
+                    'path' => 'middleware.fm_token_optional_auth',
+                ]);
+            }
+
+            return $legacy ?: null;
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] fm_tokens_lookup_failed', [
+                'path' => 'middleware.fm_token_optional_auth',
+                'exception' => $e::class,
+            ]);
+        }
+
+        return null;
     }
 }

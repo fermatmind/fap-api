@@ -42,20 +42,17 @@ class FmTokenAuth
             'revoked_at',
         ];
 
-        $row = DB::table('fm_tokens')
-            ->select($select)
-            ->where('token_hash', $tokenHash)
-            ->first();
+        $row = $this->findTokenRow($tokenHash, $select);
 
-        if (!$row) {
+        if (! $row) {
             return $this->unauthorizedResponse($request, 'token_not_found');
         }
 
-        if (!empty($row->revoked_at)) {
+        if (! empty($row->revoked_at)) {
             return $this->unauthorizedResponse($request, 'token_revoked');
         }
 
-        if (!empty($row->expires_at)) {
+        if (! empty($row->expires_at)) {
             $exp = strtotime((string) $row->expires_at);
             if ($exp !== false && $exp < time()) {
                 return $this->unauthorizedResponse($request, 'token_expired');
@@ -80,12 +77,12 @@ class FmTokenAuth
         if ($resolvedUserId !== null) {
             $request->attributes->set('fm_user_id', (string) $resolvedUserId);
 
-            if (!$this->userExists($request, $resolvedUserId)) {
+            if (! $this->userExists($request, $resolvedUserId)) {
                 return $this->unauthorizedResponse($request, 'token_user_not_found');
             }
 
             $request->attributes->set('user_id', (string) $resolvedUserId);
-            if (!$this->assertInjectedUserIdentity($request, $resolvedUserId)) {
+            if (! $this->assertInjectedUserIdentity($request, $resolvedUserId)) {
                 return $this->unauthorizedResponse($request, 'token_user_inject_mismatch');
             }
         }
@@ -109,7 +106,7 @@ class FmTokenAuth
 
         TouchFmTokenLastUsedAtJob::dispatch($tokenHash)->onQueue('ops');
 
-        $ctx = new OrgContext();
+        $ctx = new OrgContext;
         $ctx->set(
             $orgId,
             $resolvedUserId,
@@ -121,6 +118,51 @@ class FmTokenAuth
         $this->logAuthResult($request, true);
 
         return $next($request);
+    }
+
+    /**
+     * @param  array<int,string>  $select
+     */
+    private function findTokenRow(string $tokenHash, array $select): ?object
+    {
+        $row = null;
+
+        try {
+            $row = DB::table('auth_tokens')
+                ->select($select)
+                ->where('token_hash', $tokenHash)
+                ->first();
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] auth_tokens_lookup_failed', [
+                'path' => 'middleware.fm_token_auth',
+                'exception' => $e::class,
+            ]);
+        }
+
+        if ($row) {
+            return $row;
+        }
+
+        try {
+            $legacy = DB::table('fm_tokens')
+                ->select($select)
+                ->where('token_hash', $tokenHash)
+                ->first();
+            if ($legacy) {
+                Log::info('[SEC] fm_token_legacy_hash_fallback_hit', [
+                    'path' => 'middleware.fm_token_auth',
+                ]);
+            }
+
+            return $legacy ?: null;
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] fm_tokens_lookup_failed', [
+                'path' => 'middleware.fm_token_auth',
+                'exception' => $e::class,
+            ]);
+        }
+
+        return null;
     }
 
     private function userExists(Request $request, int $userId): bool
@@ -257,6 +299,7 @@ class FmTokenAuth
                 'fm_user_id' => $fmUserId !== '' ? $fmUserId : null,
                 'user_id' => $plainUserId !== '' ? $plainUserId : null,
             ]);
+
             return false;
         }
 
@@ -267,6 +310,7 @@ class FmTokenAuth
                 'fm_user_id' => $fmUserId,
                 'user_id' => $plainUserId,
             ]);
+
             return false;
         }
 

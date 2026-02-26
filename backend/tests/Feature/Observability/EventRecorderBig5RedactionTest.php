@@ -54,7 +54,7 @@ final class EventRecorderBig5RedactionTest extends TestCase
         $this->assertSame('big5_event_meta', (string) (($meta['_redaction']['scope'] ?? '')));
     }
 
-    public function test_non_big5_event_meta_keeps_answers_for_backward_compatibility(): void
+    public function test_non_big5_event_meta_is_redacted_globally(): void
     {
         /** @var EventRecorder $recorder */
         $recorder = app(EventRecorder::class);
@@ -63,6 +63,8 @@ final class EventRecorderBig5RedactionTest extends TestCase
                 ['question_id' => 1, 'code' => 5],
             ],
             'safe' => 'ok',
+            'to_email' => 'anon@example.com',
+            'phone_e164' => '+8613900002222',
         ], [
             'org_id' => 0,
             'anon_id' => 'anon_non_big5_event_redaction',
@@ -77,7 +79,10 @@ final class EventRecorderBig5RedactionTest extends TestCase
         $meta = json_decode((string) ($event->meta_json ?? '{}'), true);
         $this->assertIsArray($meta);
         $this->assertSame('ok', (string) ($meta['safe'] ?? ''));
-        $this->assertIsArray($meta['answers'] ?? null);
-        $this->assertArrayNotHasKey('_redaction', $meta);
+        $this->assertTrue((bool) (($meta['answers']['__redacted__'] ?? false)));
+        $this->assertSame('[REDACTED]', (string) ($meta['to_email'] ?? ''));
+        $this->assertSame('[REDACTED]', (string) ($meta['phone_e164'] ?? ''));
+        $this->assertGreaterThan(0, (int) (($meta['_redaction']['count'] ?? 0)));
+        $this->assertSame('event_meta', (string) (($meta['_redaction']['scope'] ?? '')));
     }
 }

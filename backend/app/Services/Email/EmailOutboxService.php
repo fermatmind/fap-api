@@ -2,11 +2,18 @@
 
 namespace App\Services\Email;
 
+use App\Support\PiiCipher;
+use App\Support\PiiReadFallbackMonitor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class EmailOutboxService
 {
+    public function __construct(
+        private readonly PiiCipher $piiCipher,
+        private readonly PiiReadFallbackMonitor $fallbackMonitor,
+    ) {}
+
     /**
      * Queue a report-claim email task (outbox only, no send).
      *
@@ -25,6 +32,9 @@ class EmailOutboxService
         if ($userId === '' || $email === '' || $attemptId === '') {
             return ['ok' => false, 'error' => 'INVALID_INPUT'];
         }
+
+        $emailHash = $this->piiCipher->emailHash($email);
+        $emailEnc = $this->piiCipher->encrypt($email);
 
         $token = 'claim_'.(string) Str::uuid();
         $tokenHash = hash('sha256', $token);
@@ -46,6 +56,8 @@ class EmailOutboxService
             'to_email' => $email,
             'subject' => $subject,
         ];
+        $payloadJson = $this->encodePayloadJson($payload);
+        $payloadEnc = $this->encodePayloadEncrypted($payload);
 
         $pending = null;
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
@@ -63,11 +75,29 @@ class EmailOutboxService
             $update = [
                 'email' => $email,
                 'attempt_id' => $attemptId,
-                'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'payload_json' => $payloadJson,
                 'claim_token_hash' => $tokenHash,
                 'claim_expires_at' => $expiresAt,
                 'updated_at' => now(),
             ];
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_hash')) {
+                $update['email_hash'] = $emailHash;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_enc')) {
+                $update['email_enc'] = $emailEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_hash')) {
+                $update['to_email_hash'] = $emailHash;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_enc')) {
+                $update['to_email_enc'] = $emailEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+                $update['payload_enc'] = $payloadEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
+                $update['payload_schema_version'] = 'v1';
+            }
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
                 $update['locale'] = $locale;
             }
@@ -102,7 +132,7 @@ class EmailOutboxService
             'email' => $email,
             'attempt_id' => $attemptId,
             'template' => 'report_claim',
-            'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'payload_json' => $payloadJson,
             'claim_token_hash' => $tokenHash,
             'claim_expires_at' => $expiresAt,
             'status' => 'pending',
@@ -111,6 +141,24 @@ class EmailOutboxService
             'created_at' => now(),
             'updated_at' => now(),
         ];
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_hash')) {
+            $row['email_hash'] = $emailHash;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_enc')) {
+            $row['email_enc'] = $emailEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_hash')) {
+            $row['to_email_hash'] = $emailHash;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_enc')) {
+            $row['to_email_enc'] = $emailEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+            $row['payload_enc'] = $payloadEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
+            $row['payload_schema_version'] = 'v1';
+        }
 
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
             $row['locale'] = $locale;
@@ -163,6 +211,9 @@ class EmailOutboxService
             return ['ok' => false, 'error' => 'INVALID_INPUT'];
         }
 
+        $emailHash = $this->piiCipher->emailHash($email);
+        $emailEnc = $this->piiCipher->encrypt($email);
+
         $locale = $this->resolveAttemptLocale($attemptId);
         $subject = $this->defaultSubjectForTemplate('payment_success', $locale);
         $reportUrl = "/api/v0.3/attempts/{$attemptId}/report";
@@ -180,6 +231,8 @@ class EmailOutboxService
             'to_email' => $email,
             'subject' => $subject,
         ];
+        $payloadJson = $this->encodePayloadJson($payload);
+        $payloadEnc = $this->encodePayloadEncrypted($payload);
 
         $pending = null;
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
@@ -196,11 +249,29 @@ class EmailOutboxService
             $update = [
                 'email' => $email,
                 'attempt_id' => $attemptId,
-                'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'payload_json' => $payloadJson,
                 'claim_token_hash' => $nonce,
                 'claim_expires_at' => null,
                 'updated_at' => now(),
             ];
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_hash')) {
+                $update['email_hash'] = $emailHash;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_enc')) {
+                $update['email_enc'] = $emailEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_hash')) {
+                $update['to_email_hash'] = $emailHash;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_enc')) {
+                $update['to_email_enc'] = $emailEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+                $update['payload_enc'] = $payloadEnc;
+            }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
+                $update['payload_schema_version'] = 'v1';
+            }
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
                 $update['locale'] = $locale;
             }
@@ -229,7 +300,7 @@ class EmailOutboxService
             'email' => $email,
             'attempt_id' => $attemptId,
             'template' => 'payment_success',
-            'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'payload_json' => $payloadJson,
             'claim_token_hash' => $nonce,
             'claim_expires_at' => null,
             'status' => 'pending',
@@ -238,6 +309,24 @@ class EmailOutboxService
             'created_at' => now(),
             'updated_at' => now(),
         ];
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_hash')) {
+            $row['email_hash'] = $emailHash;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_enc')) {
+            $row['email_enc'] = $emailEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_hash')) {
+            $row['to_email_hash'] = $emailHash;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_enc')) {
+            $row['to_email_enc'] = $emailEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+            $row['payload_enc'] = $payloadEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
+            $row['payload_schema_version'] = 'v1';
+        }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
             $row['locale'] = $locale;
         }
@@ -327,7 +416,7 @@ class EmailOutboxService
             ];
         }
 
-        $payload = $this->decodePayload($row->payload_json ?? null);
+        $payload = $this->decodePayloadFromRow($row);
         $attemptId = (string) ($payload['attempt_id'] ?? '');
         if ($attemptId === '') {
             return [
@@ -381,6 +470,49 @@ class EmailOutboxService
         $decoded = json_decode($raw, true);
 
         return is_array($decoded) ? $decoded : [];
+    }
+
+    private function decodePayloadFromRow(object $row): array
+    {
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+            $decrypted = $this->piiCipher->decrypt((string) ($row->payload_enc ?? ''));
+            if ($decrypted !== null) {
+                $decoded = json_decode($decrypted, true);
+                if (is_array($decoded)) {
+                    $this->fallbackMonitor->record('email_outbox.payload_read', false);
+
+                    return $decoded;
+                }
+            }
+        }
+
+        $fallbackPayload = $this->decodePayload($row->payload_json ?? null);
+        $this->fallbackMonitor->record('email_outbox.payload_read', $fallbackPayload !== []);
+
+        return $fallbackPayload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function encodePayloadJson(array $payload): string
+    {
+        $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return is_string($encoded) ? $encoded : '{}';
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function encodePayloadEncrypted(array $payload): ?string
+    {
+        $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (! is_string($encoded) || $encoded === '') {
+            return null;
+        }
+
+        return $this->piiCipher->encrypt($encoded);
     }
 
     private function resolveAttemptLocale(string $attemptId): string

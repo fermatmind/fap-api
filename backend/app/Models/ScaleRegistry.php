@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
+use App\Models\Scopes\TenantScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,14 +59,45 @@ class ScaleRegistry extends Model
         'is_indexable' => 'boolean',
     ];
 
-    public static function bypassTenantScope(): bool
+    /**
+     * Explicit tenant-scope bypass for system queries that must resolve
+     * org-local + global records in one read path.
+     *
+     * @param  list<int>  $orgIds
+     */
+    public static function queryByOrgWhitelist(array $orgIds): Builder
     {
-        return true;
+        $normalizedOrgIds = self::normalizeOrgWhitelist($orgIds);
+
+        $query = static::query()->withoutGlobalScope(TenantScope::class);
+        if ($normalizedOrgIds === []) {
+            return $query->where('org_id', -1);
+        }
+
+        return $query->whereIn('org_id', $normalizedOrgIds);
     }
 
     public function slugs(): HasMany
     {
         return $this->hasMany(ScaleSlug::class, 'scale_code', 'code')
             ->where('org_id', (int) $this->org_id);
+    }
+
+    /**
+     * @param  list<int>  $orgIds
+     * @return list<int>
+     */
+    private static function normalizeOrgWhitelist(array $orgIds): array
+    {
+        $set = [];
+        foreach ($orgIds as $orgId) {
+            $normalized = (int) $orgId;
+            if ($normalized < 0) {
+                continue;
+            }
+            $set[$normalized] = true;
+        }
+
+        return array_values(array_keys($set));
     }
 }

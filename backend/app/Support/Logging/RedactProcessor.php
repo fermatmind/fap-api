@@ -11,7 +11,10 @@ final class RedactProcessor
     private const REDACTED = '[REDACTED]';
 
     /** @var array<string, true> */
-    private array $sensitiveKeys = [];
+    private array $sensitiveExactKeys = [];
+
+    /** @var array<int, string> */
+    private array $sensitiveKeyParts = [];
 
     /**
      * @param list<string>|null $keys
@@ -25,12 +28,22 @@ final class RedactProcessor
             'authorization',
             'secret',
             'credit_card',
+            'email',
+            'phone',
+            'cookie',
+            'api_key',
+            'client_secret',
+            'private_key',
+            'signature',
+            'id_card',
+            'id_number',
         ];
 
         foreach ($keys as $key) {
             $normalized = strtolower(trim((string) $key));
             if ($normalized !== '') {
-                $this->sensitiveKeys[$normalized] = true;
+                $this->sensitiveExactKeys[$normalized] = true;
+                $this->sensitiveKeyParts[] = $normalized;
             }
         }
     }
@@ -86,6 +99,18 @@ final class RedactProcessor
 
     private function isSensitiveKey(int|string $key): bool
     {
-        return isset($this->sensitiveKeys[strtolower((string) $key)]);
+        $normalized = strtolower((string) $key);
+
+        if (isset($this->sensitiveExactKeys[$normalized])) {
+            return true;
+        }
+
+        foreach ($this->sensitiveKeyParts as $part) {
+            if ($part !== '' && str_contains($normalized, $part)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

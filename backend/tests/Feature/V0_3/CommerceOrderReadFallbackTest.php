@@ -15,14 +15,15 @@ final class CommerceOrderReadFallbackTest extends TestCase
     use RefreshDatabase;
 
     private const ANON_OWNER = 'order_read_owner';
+
     private const ANON_ATTACKER = 'order_read_attacker';
 
     public function test_without_identity_returns_404(): void
     {
-        $orderNo = 'ord_fallback_' . Str::lower(Str::random(10));
+        $orderNo = 'ord_fallback_'.Str::lower(Str::random(10));
         $this->insertOrderForOwner($orderNo);
 
-        $response = $this->getJson('/api/v0.3/orders/' . $orderNo);
+        $response = $this->getJson('/api/v0.3/orders/'.$orderNo);
 
         $response->assertStatus(404)
             ->assertJsonPath('error_code', 'NOT_FOUND');
@@ -30,13 +31,13 @@ final class CommerceOrderReadFallbackTest extends TestCase
 
     public function test_mismatched_token_identity_still_returns_404(): void
     {
-        $orderNo = 'ord_fallback_' . Str::lower(Str::random(10));
+        $orderNo = 'ord_fallback_'.Str::lower(Str::random(10));
         $this->insertOrderForOwner($orderNo);
 
         $token = $this->issueAnonToken(self::ANON_ATTACKER);
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/orders/' . $orderNo);
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
 
         $response->assertStatus(404)
             ->assertJsonPath('error_code', 'NOT_FOUND');
@@ -44,13 +45,13 @@ final class CommerceOrderReadFallbackTest extends TestCase
 
     public function test_matching_token_identity_returns_full_payload(): void
     {
-        $orderNo = 'ord_fallback_' . Str::lower(Str::random(10));
+        $orderNo = 'ord_fallback_'.Str::lower(Str::random(10));
         $this->insertOrderForOwner($orderNo);
 
         $token = $this->issueAnonToken(self::ANON_OWNER);
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/orders/' . $orderNo);
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
 
         $response->assertStatus(200)
             ->assertJsonPath('ok', true)
@@ -64,16 +65,32 @@ final class CommerceOrderReadFallbackTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
+        $tokenHash = hash('sha256', $token);
+
         DB::table('fm_tokens')->insert([
             'token' => $token,
-            'token_hash' => hash('sha256', $token),
+            'token_hash' => $tokenHash,
             'user_id' => null,
             'anon_id' => $anonId,
             'org_id' => 0,
             'role' => 'public',
             'expires_at' => now()->addDay(),
             'revoked_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('auth_tokens')->insert([
+            'token_hash' => $tokenHash,
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'meta_json' => null,
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'last_used_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -13,6 +13,7 @@ class AssessmentEngine
     public function __construct(
         private ContentPacksIndex $packsIndex,
         private ScaleRegistry $scaleRegistry,
+        private ScoringModelRouter $modelRouter,
     ) {
     }
 
@@ -43,28 +44,38 @@ class AssessmentEngine
             $driverType = 'generic_scoring';
         }
 
+        $defaultSpecVersion = $this->defaultSpecVersionFor($scaleCode, $driverType);
+        $modelRouterEnabled = (bool) config('fap.features.model_router_v2', true);
+        $modelSelection = $modelRouterEnabled
+            ? $this->modelRouter->select(
+                $orgId,
+                $scaleCode,
+                $driverType,
+                $defaultSpecVersion,
+                $ctx
+            )
+            : $this->disabledModelSelection($driverType, $defaultSpecVersion, $ctx);
+        $selectedDriverType = strtolower(trim((string) ($modelSelection['driver_type'] ?? $driverType)));
+        if ($selectedDriverType === '') {
+            $selectedDriverType = $driverType;
+        }
+
         if (
             $scaleCode === 'BIG5_OCEAN'
-            || $driverType === 'big5_ocean'
+            || $this->isSpecialDriverType($selectedDriverType)
             || $scaleCode === 'CLINICAL_COMBO_68'
-            || $driverType === 'clinical_combo_68'
             || $scaleCode === 'SDS_20'
-            || $driverType === 'sds_20'
             || $scaleCode === 'EQ_60'
-            || $driverType === 'eq_60'
-            || $driverType === 'eq_test'
         ) {
-            $driver = $this->resolveDriver($driverType);
+            $driver = $this->resolveDriver($selectedDriverType);
             if (!$driver) {
-                return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$driverType}");
+                return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$selectedDriverType}");
             }
 
-            $isClinical = $scaleCode === 'CLINICAL_COMBO_68' || $driverType === 'clinical_combo_68';
-            $isSds20 = $scaleCode === 'SDS_20' || $driverType === 'sds_20';
-            $isEq60 = $scaleCode === 'EQ_60' || $driverType === 'eq_60' || $driverType === 'eq_test';
-            $scoringSpecVersion = $isClinical
-                ? 'v1.0_2026'
-                : ($isSds20 ? 'v2.0_Factor_Logic' : ($isEq60 ? 'eq60_spec_2026_v2' : 'big5_spec_2026Q1_v1'));
+            $scoringSpecVersion = trim((string) ($modelSelection['scoring_spec_version'] ?? ''));
+            if ($scoringSpecVersion === '') {
+                $scoringSpecVersion = $this->defaultSpecVersionFor($scaleCode, $selectedDriverType);
+            }
 
             $ctxMerged = array_merge($ctx, [
                 'org_id' => $orgId,
@@ -73,6 +84,7 @@ class AssessmentEngine
                 'dir_version' => $dirVersion,
                 'content_package_version' => $dirVersion,
                 'scoring_spec_version' => $scoringSpecVersion,
+                'model_selection' => $modelSelection,
                 'base_dir' => '',
                 'scoring_spec' => [],
             ]);
@@ -89,13 +101,14 @@ class AssessmentEngine
             return [
                 'ok' => true,
                 'result' => $result,
-                'driver_type' => $driverType,
+                'driver_type' => $selectedDriverType,
                 'pack' => [
                     'pack_id' => $packId,
                     'dir_version' => $dirVersion,
                     'content_package_version' => $dirVersion,
                 ],
                 'scoring_spec_version' => $scoringSpecVersion,
+                'model_selection' => $modelSelection,
             ];
         }
 
@@ -115,6 +128,10 @@ class AssessmentEngine
         }
 
         $scoringSpecVersion = (string) ($scoringSpec['version'] ?? ($scoringSpec['scoring_spec_version'] ?? ''));
+        $selectedSpecVersion = trim((string) ($modelSelection['scoring_spec_version'] ?? ''));
+        if ($selectedSpecVersion !== '') {
+            $scoringSpecVersion = $selectedSpecVersion;
+        }
         $contentPackageVersion = (string) ($pack['content_package_version'] ?? '');
 
         $ctxMerged = array_merge($ctx, [
@@ -124,6 +141,7 @@ class AssessmentEngine
             'dir_version' => $dirVersion,
             'content_package_version' => $contentPackageVersion,
             'scoring_spec_version' => $scoringSpecVersion,
+            'model_selection' => $modelSelection,
             'base_dir' => (string) ($pack['base_dir'] ?? ''),
             'scoring_spec' => $scoringSpec,
         ]);
@@ -138,9 +156,9 @@ class AssessmentEngine
             $ctxMerged['questions'] = $questions;
         }
 
-        $driver = $this->resolveDriver($driverType);
+        $driver = $this->resolveDriver($selectedDriverType);
         if (!$driver) {
-            return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$driverType}");
+            return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$selectedDriverType}");
         }
 
         try {
@@ -155,13 +173,87 @@ class AssessmentEngine
         return [
             'ok' => true,
             'result' => $result,
-            'driver_type' => $driverType,
+            'driver_type' => $selectedDriverType,
             'pack' => [
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'content_package_version' => $contentPackageVersion,
             ],
             'scoring_spec_version' => $scoringSpecVersion,
+            'model_selection' => $modelSelection,
+        ];
+    }
+
+    private function defaultSpecVersionFor(string $scaleCode, string $driverType): string
+    {
+        $driverType = strtolower(trim($driverType));
+        $scaleCode = strtoupper(trim($scaleCode));
+
+        $isClinical = $scaleCode === 'CLINICAL_COMBO_68' || $driverType === 'clinical_combo_68';
+        if ($isClinical) {
+            return 'v1.0_2026';
+        }
+
+        $isSds20 = $scaleCode === 'SDS_20' || $driverType === 'sds_20';
+        if ($isSds20) {
+            return 'v2.0_Factor_Logic';
+        }
+
+        $isEq60 = $scaleCode === 'EQ_60' || $driverType === 'eq_60' || $driverType === 'eq_test';
+        if ($isEq60) {
+            return 'eq60_spec_2026_v2';
+        }
+
+        return 'big5_spec_2026Q1_v1';
+    }
+
+    private function isSpecialDriverType(string $driverType): bool
+    {
+        return in_array(
+            strtolower(trim($driverType)),
+            ['big5_ocean', 'clinical_combo_68', 'sds_20', 'eq_60', 'eq_test'],
+            true
+        );
+    }
+
+    /**
+     * @return array{
+     *   model_key:string,
+     *   driver_type:string,
+     *   scoring_spec_version:string,
+     *   source:string,
+     *   experiment_key:?string,
+     *   experiment_variant:?string,
+     *   rollout_id:?string,
+     *   model_id:?string,
+     *   experiments_json:array<string,string>
+     * }
+     */
+    private function disabledModelSelection(string $driverType, string $scoringSpecVersion, array $ctx): array
+    {
+        $experiments = [];
+        $rawExperiments = $ctx['experiments_json'] ?? null;
+        if (is_array($rawExperiments)) {
+            foreach ($rawExperiments as $key => $variant) {
+                $experimentKey = trim((string) $key);
+                $experimentVariant = trim((string) $variant);
+                if ($experimentKey === '' || $experimentVariant === '') {
+                    continue;
+                }
+                $experiments[$experimentKey] = $experimentVariant;
+            }
+        }
+
+        return [
+            'model_key' => 'default',
+            'driver_type' => strtolower(trim($driverType)),
+            'scoring_spec_version' => trim($scoringSpecVersion),
+            'source' => 'disabled',
+            'experiment_key' => null,
+            'experiment_variant' => null,
+            'rollout_id' => null,
+            'model_id' => null,
+            'experiments_json' => $experiments,
         ];
     }
 

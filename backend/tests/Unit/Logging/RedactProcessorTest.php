@@ -29,6 +29,8 @@ final class RedactProcessorTest extends TestCase
                 'token' => 'tok_123',
                 'payload' => [
                     'secret' => 'sec_123',
+                    'to_email' => 'user@example.com',
+                    'phone_e164' => '+8613900001111',
                     'trace_id' => 'trace-1',
                 ],
             ],
@@ -41,6 +43,8 @@ final class RedactProcessorTest extends TestCase
         $this->assertSame('[REDACTED]', $actual['context']['nested']['credit_card']);
         $this->assertSame('[REDACTED]', $actual['extra']['token']);
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['secret']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['to_email']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['phone_e164']);
         $this->assertSame('ok', $actual['context']['nested']['keep']);
         $this->assertSame('trace-1', $actual['extra']['payload']['trace_id']);
     }

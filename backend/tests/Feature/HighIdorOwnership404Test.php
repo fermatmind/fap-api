@@ -15,12 +15,13 @@ class HighIdorOwnership404Test extends TestCase
     use RefreshDatabase;
 
     private const ANON_A = 'pr60_anon_a';
+
     private const ANON_B = 'pr60_anon_b';
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     private function defaultAnswers(): array
@@ -36,15 +37,31 @@ class HighIdorOwnership404Test extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
+        $tokenHash = hash('sha256', $token);
+
         DB::table('fm_tokens')->insert([
             'token' => $token,
-            'token_hash' => hash('sha256', $token),
+            'token_hash' => $tokenHash,
             'user_id' => null,
             'anon_id' => $anonId,
             'org_id' => 0,
             'role' => 'public',
             'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('auth_tokens')->insert([
+            'token_hash' => $tokenHash,
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'meta_json' => null,
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'last_used_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -69,7 +86,7 @@ class HighIdorOwnership404Test extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => self::ANON_A,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->defaultAnswers(),
@@ -156,7 +173,7 @@ class HighIdorOwnership404Test extends TestCase
 
         $this->withHeaders([
             'X-Anon-Id' => self::ANON_B,
-            'Authorization' => 'Bearer ' . $anonBToken,
+            'Authorization' => 'Bearer '.$anonBToken,
         ])
             ->postJson('/api/v0.3/attempts/submit', [
                 'attempt_id' => $attemptId,
@@ -182,7 +199,7 @@ class HighIdorOwnership404Test extends TestCase
 
     public function test_header_only_order_read_returns_404(): void
     {
-        $orderNo = 'ord_pr60_' . Str::lower(Str::random(10));
+        $orderNo = 'ord_pr60_'.Str::lower(Str::random(10));
         $this->insertOrderForAnonA($orderNo);
 
         $response = $this->withHeaders(['X-Anon-Id' => self::ANON_B])
@@ -191,5 +208,4 @@ class HighIdorOwnership404Test extends TestCase
         $response->assertStatus(404)
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }
-
 }

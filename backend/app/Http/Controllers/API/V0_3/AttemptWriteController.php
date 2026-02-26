@@ -7,8 +7,8 @@ use App\DTO\Attempts\SubmitAttemptDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V0_3\StartAttemptRequest;
 use App\Http\Requests\V0_3\SubmitAttemptRequest;
+use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Attempts\AttemptStartService;
-use App\Services\Attempts\AttemptSubmitService;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 
@@ -17,7 +17,7 @@ class AttemptWriteController extends Controller
     public function __construct(
         protected OrgContext $orgContext,
         private AttemptStartService $startService,
-        private AttemptSubmitService $submitService,
+        private AttemptSubmissionService $submissionService,
     ) {}
 
     /**
@@ -72,8 +72,20 @@ class AttemptWriteController extends Controller
             ?? $request->attributes->get('fm_anon_id')
             ?? $this->orgContext->anonId();
 
-        $result = $this->submitService->submit($this->orgContext, $attemptId, SubmitAttemptDTO::fromArray($payload));
+        $mode = strtolower(trim((string) $request->query('mode', '')));
+        $asyncEnabled = (bool) config('fap.features.submit_async_v2', false);
+        $preferAsync = $asyncEnabled && $mode !== 'sync_legacy';
 
-        return response()->json($result);
+        $outcome = $this->submissionService->submit(
+            $this->orgContext,
+            $attemptId,
+            SubmitAttemptDTO::fromArray($payload),
+            $preferAsync
+        );
+
+        $status = (int) ($outcome['http_status'] ?? 200);
+        $result = is_array($outcome['payload'] ?? null) ? $outcome['payload'] : [];
+
+        return response()->json($result, $status);
     }
 }

@@ -173,13 +173,6 @@ final class EventRecorder
     private function sanitizeMetaForStorage(string $eventCode, array $meta): array
     {
         $normalizedCode = strtolower(trim($eventCode));
-        $needsRedaction = str_starts_with($normalizedCode, 'big5_')
-            || str_starts_with($normalizedCode, 'clinical_combo_68_')
-            || str_starts_with($normalizedCode, 'sds_');
-        if (! $needsRedaction) {
-            return $meta;
-        }
-
         $redactor = $this->redactor instanceof SensitiveDataRedactor
             ? $this->redactor
             : new SensitiveDataRedactor;
@@ -190,15 +183,28 @@ final class EventRecorder
             $sanitized['_redaction'] = [
                 'count' => $count,
                 'version' => (string) ($result['version'] ?? 'v2'),
-                'scope' => str_starts_with($normalizedCode, 'big5_')
-                    ? 'big5_event_meta'
-                    : (str_starts_with($normalizedCode, 'sds_')
-                        ? 'sds_event_meta'
-                        : 'clinical_event_meta'),
+                'scope' => $this->redactionScopeForEvent($normalizedCode),
             ];
         }
 
         return $sanitized;
+    }
+
+    private function redactionScopeForEvent(string $normalizedCode): string
+    {
+        if (str_starts_with($normalizedCode, 'big5_')) {
+            return 'big5_event_meta';
+        }
+
+        if (str_starts_with($normalizedCode, 'sds_')) {
+            return 'sds_event_meta';
+        }
+
+        if (str_starts_with($normalizedCode, 'clinical_combo_68_')) {
+            return 'clinical_event_meta';
+        }
+
+        return 'event_meta';
     }
 
     private function shouldWriteScaleIdentityColumns(): bool
