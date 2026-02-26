@@ -177,13 +177,38 @@ class FmTokenOptionalAuth
      */
     private function findTokenRow(string $tokenHash, array $select): ?object
     {
+        $row = null;
+
         try {
-            return DB::table('auth_tokens')
+            $row = DB::table('auth_tokens')
                 ->select($select)
                 ->where('token_hash', $tokenHash)
                 ->first();
         } catch (\Throwable $e) {
             Log::warning('[SEC] auth_tokens_lookup_failed', [
+                'path' => 'middleware.fm_token_optional_auth',
+                'exception' => $e::class,
+            ]);
+        }
+
+        if ($row) {
+            return $row;
+        }
+
+        try {
+            $legacy = DB::table('fm_tokens')
+                ->select($select)
+                ->where('token_hash', $tokenHash)
+                ->first();
+            if ($legacy) {
+                Log::info('[SEC] fm_token_legacy_hash_fallback_hit', [
+                    'path' => 'middleware.fm_token_optional_auth',
+                ]);
+            }
+
+            return $legacy ?: null;
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] fm_tokens_lookup_failed', [
                 'path' => 'middleware.fm_token_optional_auth',
                 'exception' => $e::class,
             ]);

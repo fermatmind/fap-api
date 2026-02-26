@@ -194,12 +194,36 @@ class FmTokenService
 
     private function findTokenRow(string $tokenHash): ?object
     {
+        $row = null;
+
         try {
-            return DB::table('auth_tokens')
+            $row = DB::table('auth_tokens')
                 ->where('token_hash', $tokenHash)
                 ->first();
         } catch (\Throwable $e) {
             Log::warning('[SEC] auth_tokens_lookup_failed', [
+                'source' => 'fm_token_service.validate_token',
+                'exception' => $e::class,
+            ]);
+        }
+
+        if ($row) {
+            return $row;
+        }
+
+        try {
+            $legacy = DB::table('fm_tokens')
+                ->where('token_hash', $tokenHash)
+                ->first();
+            if ($legacy) {
+                Log::info('[SEC] fm_token_legacy_hash_fallback_hit', [
+                    'source' => 'fm_token_service.validate_token',
+                ]);
+            }
+
+            return $legacy ?: null;
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] fm_tokens_lookup_failed', [
                 'source' => 'fm_token_service.validate_token',
                 'exception' => $e::class,
             ]);
