@@ -30,6 +30,7 @@ final class DsarRequestApiTest extends TestCase
         $attemptId = (string) Str::uuid();
         $this->seedAttempt($attemptId, $orgId, $subjectUserId, 'anon_subject_dsar');
         $this->seedEmailOutbox($subjectUserId, $attemptId);
+        $orderNo = $this->seedFinancialRecords($orgId, $subjectUserId, 'anon_subject_dsar', $attemptId);
 
         $headers = [
             'Authorization' => 'Bearer '.$ownerToken,
@@ -89,9 +90,50 @@ final class DsarRequestApiTest extends TestCase
         $this->assertStringStartsWith('deleted_user_'.$subjectUserId.'_', (string) ($outboxRow->to_email ?? ''));
         $this->assertStringEndsWith('@fermat.invalid', (string) ($outboxRow->to_email ?? ''));
 
+        $orderRow = DB::table('orders')->where('order_no', $orderNo)->first();
+        $this->assertNotNull($orderRow);
+        $this->assertNull($orderRow->user_id);
+        $this->assertStringStartsWith('dsar_', (string) ($orderRow->anon_id ?? ''));
+
+        $paymentEventRow = DB::table('payment_events')
+            ->where('order_no', $orderNo)
+            ->first();
+        $this->assertNotNull($paymentEventRow);
+        $payload = $paymentEventRow->payload_json;
+        if (is_string($payload) && $payload !== '') {
+            $decoded = json_decode($payload, true);
+            $payload = is_array($decoded) ? $decoded : [];
+        }
+        $this->assertIsArray($payload);
+        $this->assertTrue((bool) ($payload['retained'] ?? false));
+        $this->assertTrue((bool) ($payload['redacted'] ?? false));
+
+        $benefitGrantRow = DB::table('benefit_grants')
+            ->where('org_id', $orgId)
+            ->where('user_id', null)
+            ->where('benefit_code', 'MBTI_REPORT_FULL')
+            ->first();
+        $this->assertNotNull($benefitGrantRow);
+
         $dsarRow = DB::table('dsar_requests')->where('id', $requestId)->first();
         $this->assertNotNull($dsarRow);
         $this->assertSame('done', (string) ($dsarRow->status ?? ''));
+
+        $taskRows = DB::table('dsar_request_tasks')
+            ->where('request_id', $requestId)
+            ->whereIn('domain', ['orders', 'payment_events'])
+            ->get();
+        $this->assertCount(2, $taskRows);
+        foreach ($taskRows as $taskRow) {
+            $this->assertSame('done', (string) ($taskRow->status ?? ''));
+        }
+
+        $auditRow = DB::table('dsar_audit_logs')
+            ->where('request_id', $requestId)
+            ->where('event_type', 'dsar_completed')
+            ->orderByDesc('id')
+            ->first();
+        $this->assertNotNull($auditRow);
 
         $lifecycleAudit = DB::table('data_lifecycle_requests')
             ->where('request_type', 'user_dsar')
@@ -205,5 +247,68 @@ final class DsarRequestApiTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+
+    private function seedFinancialRecords(int $orgId, int $subjectUserId, string $anonId, string $attemptId): string
+    {
+        $orderNo = 'ORD-'.strtoupper(substr(str_replace('-', '', (string) Str::uuid()), 0, 12));
+        $orderId = (string) Str::uuid();
+
+        DB::table('orders')->insert([
+            'id' => $orderId,
+            'order_no' => $orderNo,
+            'org_id' => $orgId,
+            'user_id' => (string) $subjectUserId,
+            'anon_id' => $anonId,
+            'item_sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL',
+            'quantity' => 1,
+            'target_attempt_id' => $attemptId,
+            'amount_total' => 9900,
+            'amount_cents' => 9900,
+            'currency' => 'USD',
+            'status' => 'paid',
+            'provider' => 'billing',
+            'paid_at' => now()->subMinute(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('payment_events')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => $orgId,
+            'provider' => 'billing',
+            'provider_event_id' => 'evt_'.strtolower(substr(str_replace('-', '', (string) Str::uuid()), 0, 20)),
+            'order_id' => $orderId,
+            'order_no' => $orderNo,
+            'event_type' => 'order.paid',
+            'signature_ok' => true,
+            'payload_json' => json_encode([
+                'buyer_email' => "subject_{$subjectUserId}@example.test",
+                'buyer_phone' => '+8613900007002',
+                'amount_cents' => 9900,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'received_at' => now()->subMinute(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => $orgId,
+            'user_id' => (string) $subjectUserId,
+            'benefit_type' => 'report_unlock',
+            'benefit_ref' => 'MBTI_REPORT_FULL',
+            'source_order_id' => $orderId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'status' => 'active',
+            'order_no' => $orderNo,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $orderNo;
     }
 }

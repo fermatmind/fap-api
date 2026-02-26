@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace App\Services\Attempts;
 
+use App\Support\SensitiveDataRedactor;
 use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 final class UserDataLifecycleService
 {
     public function __construct(
         private readonly AttemptDataLifecycleService $attemptLifecycleService,
+        private readonly ?SensitiveDataRedactor $sensitiveDataRedactor = null,
     ) {}
 
     /**
@@ -30,6 +34,8 @@ final class UserDataLifecycleService
         $subjectUserIdStr = (string) $subjectUserId;
         $now = now();
         $redactedAnonId = $this->redactedAnonId($orgId, $subjectUserId);
+        $requestId = trim((string) ($context['request_id'] ?? ''));
+        $subjectAnonIds = $this->collectSubjectAnonIds($orgId, $subjectUserId, $subjectUserIdStr);
 
         $counts = [
             'attempts_purged' => 0,
@@ -42,9 +48,33 @@ final class UserDataLifecycleService
             'sessions_deleted' => 0,
             'users_anonymized' => 0,
             'users_deleted' => 0,
+            'events_pseudonymized' => 0,
+            'orders_pseudonymized' => 0,
+            'payment_events_pseudonymized' => 0,
+            'benefit_grants_pseudonymized' => 0,
         ];
 
         $attemptFailures = [];
+        $retentionSummary = [
+            'financial_records' => [
+                'strategy' => 'pseudonymize_retain',
+                'orders_retained' => 0,
+                'payment_events_retained' => 0,
+                'benefit_grants_retained' => 0,
+            ],
+        ];
+
+        $this->appendAuditLog(
+            $requestId,
+            $orgId,
+            $subjectUserId,
+            'dsar_started',
+            'user dsar started',
+            [
+                'mode' => $mode,
+                'subject_anon_ids' => $subjectAnonIds,
+            ]
+        );
 
         try {
             if (SchemaBaseline::hasTable('attempts')) {
@@ -222,8 +252,50 @@ final class UserDataLifecycleService
                 }
             }
 
+            $counts['events_pseudonymized'] = $this->pseudonymizeEvents(
+                $orgId,
+                $subjectUserId,
+                $redactedAnonId,
+                $subjectAnonIds
+            );
+
+            [$counts['orders_pseudonymized'], $orderNos] = $this->pseudonymizeOrders(
+                $orgId,
+                $subjectUserIdStr,
+                $redactedAnonId,
+                $subjectAnonIds
+            );
+
+            $counts['payment_events_pseudonymized'] = $this->pseudonymizePaymentEvents(
+                $orgId,
+                $orderNos
+            );
+
+            $counts['benefit_grants_pseudonymized'] = $this->pseudonymizeBenefitGrants(
+                $orgId,
+                $subjectUserIdStr,
+                $orderNos
+            );
+
+            $retentionSummary['financial_records']['orders_retained'] = $counts['orders_pseudonymized'];
+            $retentionSummary['financial_records']['payment_events_retained'] = $counts['payment_events_pseudonymized'];
+            $retentionSummary['financial_records']['benefit_grants_retained'] = $counts['benefit_grants_pseudonymized'];
+
             $this->recordDataLifecycleRequest($orgId, $subjectUserIdStr, $mode, $context, $counts, $attemptFailures);
+            $this->recordExecutionTasks($requestId, $orgId, $subjectUserId, $counts, $attemptFailures);
+            $this->appendAuditLog(
+                $requestId,
+                $orgId,
+                $subjectUserId,
+                'dsar_completed',
+                'user dsar completed',
+                [
+                    'counts' => $counts,
+                    'retention' => $retentionSummary,
+                ]
+            );
         } catch (\Throwable $e) {
+            $this->recordExecutionTasks($requestId, $orgId, $subjectUserId, $counts, $attemptFailures, $e::class);
             $this->recordDataLifecycleRequest(
                 $orgId,
                 $subjectUserIdStr,
@@ -233,6 +305,18 @@ final class UserDataLifecycleService
                 $attemptFailures,
                 'failed',
                 'failed'
+            );
+            $this->appendAuditLog(
+                $requestId,
+                $orgId,
+                $subjectUserId,
+                'dsar_failed',
+                'user dsar failed',
+                [
+                    'exception' => $e::class,
+                    'counts' => $counts,
+                ],
+                'error'
             );
 
             return [
@@ -249,6 +333,7 @@ final class UserDataLifecycleService
             'mode' => $mode,
             'counts' => $counts,
             'attempt_failures' => $attemptFailures,
+            'retention' => $retentionSummary,
         ];
     }
 
@@ -315,6 +400,361 @@ final class UserDataLifecycleService
         $suffix = substr(hash('sha256', "{$orgId}|{$subjectUserId}"), 0, 16);
 
         return "deleted_user_{$subjectUserId}_{$suffix}@fermat.invalid";
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function collectSubjectAnonIds(int $orgId, int $subjectUserId, string $subjectUserIdStr): array
+    {
+        $set = [];
+
+        if (Schema::hasTable('attempts') && Schema::hasColumn('attempts', 'anon_id') && Schema::hasColumn('attempts', 'user_id')) {
+            $rows = DB::table('attempts')
+                ->where('org_id', $orgId)
+                ->where('user_id', $subjectUserIdStr)
+                ->pluck('anon_id');
+            foreach ($rows as $row) {
+                $value = trim((string) $row);
+                if ($value !== '') {
+                    $set[$value] = true;
+                }
+            }
+        }
+
+        if (Schema::hasTable('auth_tokens') && Schema::hasColumn('auth_tokens', 'anon_id')) {
+            $rows = DB::table('auth_tokens')
+                ->where('org_id', $orgId)
+                ->where('user_id', $subjectUserId)
+                ->pluck('anon_id');
+            foreach ($rows as $row) {
+                $value = trim((string) $row);
+                if ($value !== '') {
+                    $set[$value] = true;
+                }
+            }
+        }
+
+        if (Schema::hasTable('fm_tokens') && Schema::hasColumn('fm_tokens', 'anon_id')) {
+            $query = DB::table('fm_tokens')->where('user_id', $subjectUserId);
+            if (Schema::hasColumn('fm_tokens', 'org_id')) {
+                $query->where('org_id', $orgId);
+            }
+            $rows = $query->pluck('anon_id');
+            foreach ($rows as $row) {
+                $value = trim((string) $row);
+                if ($value !== '') {
+                    $set[$value] = true;
+                }
+            }
+        }
+
+        if (Schema::hasTable('orders') && Schema::hasColumn('orders', 'anon_id') && Schema::hasColumn('orders', 'user_id')) {
+            $rows = DB::table('orders')
+                ->where('org_id', $orgId)
+                ->where('user_id', $subjectUserIdStr)
+                ->pluck('anon_id');
+            foreach ($rows as $row) {
+                $value = trim((string) $row);
+                if ($value !== '') {
+                    $set[$value] = true;
+                }
+            }
+        }
+
+        return array_values(array_keys($set));
+    }
+
+    private function pseudonymizeEvents(int $orgId, int $subjectUserId, string $redactedAnonId, array $subjectAnonIds): int
+    {
+        if (! Schema::hasTable('events')) {
+            return 0;
+        }
+
+        $hasUserId = Schema::hasColumn('events', 'user_id');
+        $hasAnonId = Schema::hasColumn('events', 'anon_id');
+        $canFilterByUser = $hasUserId;
+        $canFilterByAnon = $hasAnonId && $subjectAnonIds !== [];
+        if (! $canFilterByUser && ! $canFilterByAnon) {
+            return 0;
+        }
+
+        $query = DB::table('events')->where('org_id', $orgId);
+        $query->where(function ($inner) use ($canFilterByUser, $canFilterByAnon, $subjectUserId, $subjectAnonIds): void {
+            if ($canFilterByUser) {
+                $inner->where('user_id', $subjectUserId);
+            }
+            if ($canFilterByAnon) {
+                $inner->orWhereIn('anon_id', $subjectAnonIds);
+            }
+        });
+
+        $updates = [];
+        if (Schema::hasColumn('events', 'updated_at')) {
+            $updates['updated_at'] = now();
+        }
+        if ($hasUserId) {
+            $updates['user_id'] = null;
+        }
+        if ($hasAnonId) {
+            $updates['anon_id'] = $redactedAnonId;
+        }
+        if (Schema::hasColumn('events', 'meta_json')) {
+            $updates['meta_json'] = json_encode([
+                'redacted' => true,
+                'reason' => 'user_dsar_request',
+                'retained' => true,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        }
+
+        return $query->update($updates);
+    }
+
+    /**
+     * @param  list<string>  $subjectAnonIds
+     * @return array{0:int,1:list<string>}
+     */
+    private function pseudonymizeOrders(int $orgId, string $subjectUserIdStr, string $redactedAnonId, array $subjectAnonIds): array
+    {
+        if (! Schema::hasTable('orders') || ! Schema::hasColumn('orders', 'org_id')) {
+            return [0, []];
+        }
+
+        $hasUserId = Schema::hasColumn('orders', 'user_id');
+        $hasAnonId = Schema::hasColumn('orders', 'anon_id');
+        $canFilterByUser = $hasUserId;
+        $canFilterByAnon = $hasAnonId && $subjectAnonIds !== [];
+        if (! $canFilterByUser && ! $canFilterByAnon) {
+            return [0, []];
+        }
+
+        $scope = DB::table('orders')->where('org_id', $orgId);
+        $scope->where(function ($inner) use ($canFilterByUser, $canFilterByAnon, $subjectUserIdStr, $subjectAnonIds): void {
+            if ($canFilterByUser) {
+                $inner->where('user_id', $subjectUserIdStr);
+            }
+            if ($canFilterByAnon) {
+                $inner->orWhereIn('anon_id', $subjectAnonIds);
+            }
+        });
+
+        $orderNos = [];
+        if (Schema::hasColumn('orders', 'order_no')) {
+            $orderNos = array_values(array_unique(array_filter(
+                array_map(
+                    static fn (mixed $v): string => trim((string) $v),
+                    (clone $scope)->pluck('order_no')->all()
+                ),
+                static fn (string $v): bool => $v !== ''
+            )));
+        }
+
+        $updates = [];
+        if (Schema::hasColumn('orders', 'updated_at')) {
+            $updates['updated_at'] = now();
+        }
+        if ($hasUserId) {
+            $updates['user_id'] = null;
+        }
+        if ($hasAnonId) {
+            $updates['anon_id'] = $redactedAnonId;
+        }
+        if (Schema::hasColumn('orders', 'contact_email_hash')) {
+            $updates['contact_email_hash'] = null;
+        }
+        if (Schema::hasColumn('orders', 'meta_json')) {
+            $updates['meta_json'] = $this->redactedJson([
+                'retained' => true,
+                'reason' => 'user_dsar_request',
+                'domain' => 'orders',
+            ]);
+        }
+
+        $updated = $scope->update($updates);
+
+        return [$updated, $orderNos];
+    }
+
+    /**
+     * @param  list<string>  $orderNos
+     */
+    private function pseudonymizePaymentEvents(int $orgId, array $orderNos): int
+    {
+        if (! Schema::hasTable('payment_events') || $orderNos === []) {
+            return 0;
+        }
+        if (! Schema::hasColumn('payment_events', 'order_no')) {
+            return 0;
+        }
+
+        $query = DB::table('payment_events');
+        if (Schema::hasColumn('payment_events', 'org_id')) {
+            $query->where('org_id', $orgId);
+        }
+        $query->whereIn('order_no', $orderNos);
+
+        $updates = [];
+        if (Schema::hasColumn('payment_events', 'updated_at')) {
+            $updates['updated_at'] = now();
+        }
+        if (Schema::hasColumn('payment_events', 'payload_json')) {
+            $updates['payload_json'] = $this->redactedJson([
+                'redacted' => true,
+                'retained' => true,
+                'reason' => 'user_dsar_request',
+                'domain' => 'payment_events',
+            ]);
+        }
+        if (Schema::hasColumn('payment_events', 'payload_excerpt')) {
+            $updates['payload_excerpt'] = '[REDACTED]';
+        }
+
+        return $query->update($updates);
+    }
+
+    /**
+     * @param  list<string>  $orderNos
+     */
+    private function pseudonymizeBenefitGrants(int $orgId, string $subjectUserIdStr, array $orderNos): int
+    {
+        if (! Schema::hasTable('benefit_grants') || ! Schema::hasColumn('benefit_grants', 'org_id')) {
+            return 0;
+        }
+
+        $hasUserId = Schema::hasColumn('benefit_grants', 'user_id');
+        $hasOrderNo = Schema::hasColumn('benefit_grants', 'order_no');
+        $canFilterByUser = $hasUserId;
+        $canFilterByOrderNo = $hasOrderNo && $orderNos !== [];
+        if (! $canFilterByUser && ! $canFilterByOrderNo) {
+            return 0;
+        }
+
+        $query = DB::table('benefit_grants')->where('org_id', $orgId);
+        $query->where(function ($inner) use ($canFilterByUser, $canFilterByOrderNo, $subjectUserIdStr, $orderNos): void {
+            if ($canFilterByUser) {
+                $inner->where('user_id', $subjectUserIdStr);
+            }
+            if ($canFilterByOrderNo) {
+                $inner->orWhereIn('order_no', $orderNos);
+            }
+        });
+
+        $updates = [];
+        if (Schema::hasColumn('benefit_grants', 'updated_at')) {
+            $updates['updated_at'] = now();
+        }
+        if ($hasUserId) {
+            $updates['user_id'] = null;
+        }
+        if (Schema::hasColumn('benefit_grants', 'meta_json')) {
+            $updates['meta_json'] = $this->redactedJson([
+                'retained' => true,
+                'reason' => 'user_dsar_request',
+                'domain' => 'benefit_grants',
+            ]);
+        }
+
+        return $query->update($updates);
+    }
+
+    /**
+     * @param  array<string,mixed>  $counts
+     * @param  array<string,string>  $attemptFailures
+     */
+    private function recordExecutionTasks(
+        string $requestId,
+        int $orgId,
+        int $subjectUserId,
+        array $counts,
+        array $attemptFailures,
+        ?string $errorCode = null
+    ): void {
+        if ($requestId === '' || ! Schema::hasTable('dsar_request_tasks')) {
+            return;
+        }
+
+        $tasks = [
+            ['domain' => 'attempts', 'action' => 'purge', 'count_key' => 'attempts_purged', 'failure_key' => 'attempts_failed'],
+            ['domain' => 'auth_tokens', 'action' => 'revoke', 'count_key' => 'auth_tokens_revoked'],
+            ['domain' => 'legacy_tokens', 'action' => 'revoke', 'count_key' => 'legacy_tokens_revoked'],
+            ['domain' => 'email_outbox', 'action' => 'redact', 'count_key' => 'email_outbox_redacted'],
+            ['domain' => 'identities', 'action' => 'delete', 'count_key' => 'identities_deleted'],
+            ['domain' => 'sessions', 'action' => 'delete', 'count_key' => 'sessions_deleted'],
+            ['domain' => 'users', 'action' => 'anonymize', 'count_key' => 'users_anonymized'],
+            ['domain' => 'events', 'action' => 'pseudonymize', 'count_key' => 'events_pseudonymized'],
+            ['domain' => 'orders', 'action' => 'pseudonymize_retain', 'count_key' => 'orders_pseudonymized'],
+            ['domain' => 'payment_events', 'action' => 'pseudonymize_retain', 'count_key' => 'payment_events_pseudonymized'],
+            ['domain' => 'benefit_grants', 'action' => 'pseudonymize_retain', 'count_key' => 'benefit_grants_pseudonymized'],
+        ];
+
+        $now = now();
+        foreach ($tasks as $task) {
+            $count = (int) ($counts[$task['count_key']] ?? 0);
+            $failureCount = isset($task['failure_key']) ? (int) ($counts[$task['failure_key']] ?? 0) : 0;
+            $status = ($failureCount > 0 || $errorCode !== null) ? 'failed' : 'done';
+            $taskError = $failureCount > 0 ? 'PARTIAL_FAILURE' : $errorCode;
+
+            DB::table('dsar_request_tasks')->insert([
+                'id' => (string) Str::uuid(),
+                'request_id' => $requestId,
+                'org_id' => $orgId,
+                'subject_user_id' => $subjectUserId,
+                'domain' => (string) $task['domain'],
+                'action' => (string) $task['action'],
+                'status' => $status,
+                'error_code' => $taskError,
+                'stats_json' => json_encode([
+                    'affected_rows' => $count,
+                    'attempt_failures' => $task['domain'] === 'attempts' ? $attemptFailures : null,
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'started_at' => $now,
+                'finished_at' => $now,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function appendAuditLog(
+        string $requestId,
+        int $orgId,
+        int $subjectUserId,
+        string $eventType,
+        string $message,
+        array $context = [],
+        string $level = 'info'
+    ): void {
+        if ($requestId === '' || ! Schema::hasTable('dsar_audit_logs')) {
+            return;
+        }
+
+        $now = now();
+        DB::table('dsar_audit_logs')->insert([
+            'request_id' => $requestId,
+            'org_id' => $orgId,
+            'subject_user_id' => $subjectUserId,
+            'event_type' => $eventType,
+            'level' => $level,
+            'message' => $message,
+            'context_json' => $this->redactedJson($context),
+            'occurred_at' => $now,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function redactedJson(array $payload): string
+    {
+        $redactor = $this->sensitiveDataRedactor ?? new SensitiveDataRedactor;
+        $redacted = $redactor->redact($payload);
+
+        return json_encode($redacted, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '{}';
     }
 
     private function nullablePositiveInt(mixed $value): ?int
