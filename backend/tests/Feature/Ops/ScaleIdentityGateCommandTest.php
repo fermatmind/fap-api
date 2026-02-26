@@ -87,6 +87,33 @@ final class ScaleIdentityGateCommandTest extends TestCase
         }
     }
 
+    public function test_gate_command_strict_mode_fails_when_legacy_or_demo_hits_exist_under_zero_thresholds(): void
+    {
+        $this->insertAttempt('MBTI', 'MBTI_PERSONALITY_TEST_16_TYPES', '11111111-1111-4111-8111-111111111111');
+        $this->insertAttempt('DEMO_ANSWERS', null, null);
+
+        $exitCode = Artisan::call('ops:scale-identity-gate', [
+            '--json' => '1',
+            '--strict' => '1',
+            '--hours' => '336',
+            '--max-rows' => '1000',
+        ]);
+        $this->assertSame(1, $exitCode);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+        $this->assertIsArray($payload);
+        $this->assertFalse((bool) ($payload['pass'] ?? true));
+
+        $violations = is_array($payload['violations'] ?? null) ? $payload['violations'] : [];
+        $metrics = array_values(array_map(
+            static fn (array $item): string => (string) ($item['metric'] ?? ''),
+            array_filter($violations, 'is_array')
+        ));
+
+        $this->assertContains('legacy_code_hit_rate', $metrics);
+        $this->assertContains('demo_scale_hit_rate', $metrics);
+    }
+
     private function insertAttempt(string $scaleCode, ?string $scaleCodeV2, ?string $scaleUid): void
     {
         $payload = [
