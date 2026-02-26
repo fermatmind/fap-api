@@ -61,6 +61,21 @@ if (!$pass) {
 }
 ' "$ART_DIR/gate_strict.json"
 
+php artisan ops:scale-identity-mode-audit --json=1 --strict=1 > "$ART_DIR/mode_audit_strict.json"
+
+php -r '
+$payload = json_decode((string) file_get_contents($argv[1]), true);
+if (!is_array($payload)) {
+    fwrite(STDERR, "[FAIL] mode audit payload decode failed\n");
+    exit(1);
+}
+$pass = (bool) ($payload["pass"] ?? false);
+if (!$pass) {
+    fwrite(STDERR, "[FAIL] mode audit strict failed: ".json_encode($payload["violations"] ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n");
+    exit(1);
+}
+' "$ART_DIR/mode_audit_strict.json"
+
 cat > "$ART_DIR/summary.txt" <<TXT
 PR-A scale identity gate summary
 
@@ -69,6 +84,7 @@ Checks:
 - fap:scales:seed-default: OK
 - ops:scale-identity-gate --json=1: OK
 - ops:scale-identity-gate --strict=1 --json=1: PASS
+- ops:scale-identity-mode-audit --strict=1 --json=1: PASS
 
 Thresholds:
 - identity_resolve_mismatch_rate <= ${FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX}
@@ -80,6 +96,7 @@ Thresholds:
 Artifacts:
 - backend/artifacts/prA_gate_scale_identity/gate.json
 - backend/artifacts/prA_gate_scale_identity/gate_strict.json
+- backend/artifacts/prA_gate_scale_identity/mode_audit_strict.json
 - backend/artifacts/prA_gate_scale_identity/summary.txt
 TXT
 

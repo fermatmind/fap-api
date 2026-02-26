@@ -30,8 +30,6 @@ use App\Console\Commands\NormsEq60Import;
 use App\Console\Commands\NormsImport;
 use App\Console\Commands\NormsSdsDriftCheck;
 use App\Console\Commands\NormsSdsRebuild;
-use App\Console\Commands\Ops\ScaleIdentityGate;
-use App\Console\Commands\Ops\ContentPathMirror;
 use App\Console\Commands\Ops\BackfillAssessmentsScaleIdentity;
 use App\Console\Commands\Ops\BackfillAttemptAnswerRowsScaleIdentity;
 use App\Console\Commands\Ops\BackfillAttemptAnswerSetsScaleIdentity;
@@ -42,7 +40,10 @@ use App\Console\Commands\Ops\BackfillPaymentEventsScaleIdentity;
 use App\Console\Commands\Ops\BackfillReportSnapshotsScaleIdentity;
 use App\Console\Commands\Ops\BackfillResultsScaleIdentity;
 use App\Console\Commands\Ops\BackfillSharesScaleIdentity;
+use App\Console\Commands\Ops\ContentPathMirror;
 use App\Console\Commands\Ops\PartitionAttemptAnswerRows;
+use App\Console\Commands\Ops\ScaleIdentityGate;
+use App\Console\Commands\Ops\ScaleIdentityModeAudit;
 use App\Console\Commands\OpsDeployEvent;
 use App\Console\Commands\OpsHealthzSnapshot;
 use App\Console\Commands\Packs2Activate;
@@ -55,9 +56,9 @@ use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
-use App\Console\Commands\StoragePrune;
-use App\Console\Commands\StorageMigrateLegacyArtifacts;
 use App\Console\Commands\StorageInventory;
+use App\Console\Commands\StorageMigrateLegacyArtifacts;
+use App\Console\Commands\StoragePrune;
 use App\Console\Commands\SyncScaleSlugs;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -119,6 +120,7 @@ class Kernel extends ConsoleKernel
         CiScaleImpact::class,
         ContentPathMirror::class,
         ScaleIdentityGate::class,
+        ScaleIdentityModeAudit::class,
         BackfillAssessmentsScaleIdentity::class,
         BackfillAttemptAnswerRowsScaleIdentity::class,
         BackfillAttemptAnswerSetsScaleIdentity::class,
