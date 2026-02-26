@@ -45,13 +45,16 @@ class AssessmentEngine
         }
 
         $defaultSpecVersion = $this->defaultSpecVersionFor($scaleCode, $driverType);
-        $modelSelection = $this->modelRouter->select(
-            $orgId,
-            $scaleCode,
-            $driverType,
-            $defaultSpecVersion,
-            $ctx
-        );
+        $modelRouterEnabled = (bool) config('fap.features.model_router_v2', true);
+        $modelSelection = $modelRouterEnabled
+            ? $this->modelRouter->select(
+                $orgId,
+                $scaleCode,
+                $driverType,
+                $defaultSpecVersion,
+                $ctx
+            )
+            : $this->disabledModelSelection($driverType, $defaultSpecVersion, $ctx);
         $selectedDriverType = strtolower(trim((string) ($modelSelection['driver_type'] ?? $driverType)));
         if ($selectedDriverType === '') {
             $selectedDriverType = $driverType;
@@ -211,6 +214,47 @@ class AssessmentEngine
             ['big5_ocean', 'clinical_combo_68', 'sds_20', 'eq_60', 'eq_test'],
             true
         );
+    }
+
+    /**
+     * @return array{
+     *   model_key:string,
+     *   driver_type:string,
+     *   scoring_spec_version:string,
+     *   source:string,
+     *   experiment_key:?string,
+     *   experiment_variant:?string,
+     *   rollout_id:?string,
+     *   model_id:?string,
+     *   experiments_json:array<string,string>
+     * }
+     */
+    private function disabledModelSelection(string $driverType, string $scoringSpecVersion, array $ctx): array
+    {
+        $experiments = [];
+        $rawExperiments = $ctx['experiments_json'] ?? null;
+        if (is_array($rawExperiments)) {
+            foreach ($rawExperiments as $key => $variant) {
+                $experimentKey = trim((string) $key);
+                $experimentVariant = trim((string) $variant);
+                if ($experimentKey === '' || $experimentVariant === '') {
+                    continue;
+                }
+                $experiments[$experimentKey] = $experimentVariant;
+            }
+        }
+
+        return [
+            'model_key' => 'default',
+            'driver_type' => strtolower(trim($driverType)),
+            'scoring_spec_version' => trim($scoringSpecVersion),
+            'source' => 'disabled',
+            'experiment_key' => null,
+            'experiment_variant' => null,
+            'rollout_id' => null,
+            'model_id' => null,
+            'experiments_json' => $experiments,
+        ];
     }
 
     private function resolvePack(string $packId, string $dirVersion): array
