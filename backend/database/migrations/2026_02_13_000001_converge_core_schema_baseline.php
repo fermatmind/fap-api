@@ -25,18 +25,18 @@ return new class extends Migration
 
     private function convergeAttempts(): void
     {
-        if (!Schema::hasTable('attempts')) {
+        if (! Schema::hasTable('attempts')) {
             return;
         }
 
         Schema::table('attempts', function (Blueprint $table): void {
-            if (!Schema::hasColumn('attempts', 'org_id')) {
+            if (! Schema::hasColumn('attempts', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn('attempts', 'user_id')) {
+            if (! Schema::hasColumn('attempts', 'user_id')) {
                 $table->string('user_id', 64)->nullable();
             }
-            if (!Schema::hasColumn('attempts', 'anon_id')) {
+            if (! Schema::hasColumn('attempts', 'anon_id')) {
                 $table->string('anon_id', 64)->nullable();
             }
         });
@@ -44,12 +44,12 @@ return new class extends Migration
 
     private function convergeOrders(): void
     {
-        if (!Schema::hasTable('orders')) {
+        if (! Schema::hasTable('orders')) {
             return;
         }
 
         Schema::table('orders', function (Blueprint $table): void {
-            if (!Schema::hasColumn('orders', 'org_id')) {
+            if (! Schema::hasColumn('orders', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
         });
@@ -57,12 +57,12 @@ return new class extends Migration
 
     private function convergePaymentEvents(): void
     {
-        if (!Schema::hasTable('payment_events')) {
+        if (! Schema::hasTable('payment_events')) {
             return;
         }
 
         Schema::table('payment_events', function (Blueprint $table): void {
-            if (!Schema::hasColumn('payment_events', 'provider')) {
+            if (! Schema::hasColumn('payment_events', 'provider')) {
                 $table->string('provider', 32)->default('unknown');
             }
         });
@@ -70,12 +70,12 @@ return new class extends Migration
 
     private function convergeSkus(): void
     {
-        if (!Schema::hasTable('skus')) {
+        if (! Schema::hasTable('skus')) {
             return;
         }
 
         Schema::table('skus', function (Blueprint $table): void {
-            if (!Schema::hasColumn('skus', 'org_id')) {
+            if (! Schema::hasColumn('skus', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(1);
             }
         });
@@ -83,12 +83,12 @@ return new class extends Migration
 
     private function convergeReportSnapshots(): void
     {
-        if (!Schema::hasTable('report_snapshots')) {
+        if (! Schema::hasTable('report_snapshots')) {
             return;
         }
 
         Schema::table('report_snapshots', function (Blueprint $table): void {
-            if (!Schema::hasColumn('report_snapshots', 'org_id')) {
+            if (! Schema::hasColumn('report_snapshots', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
         });
@@ -96,22 +96,22 @@ return new class extends Migration
 
     private function convergeIdempotencyKeys(): void
     {
-        if (!Schema::hasTable('idempotency_keys')) {
+        if (! Schema::hasTable('idempotency_keys')) {
             return;
         }
 
         Schema::table('idempotency_keys', function (Blueprint $table): void {
-            if (!Schema::hasColumn('idempotency_keys', 'provider')) {
-                $table->string('provider', 64);
+            if (! Schema::hasColumn('idempotency_keys', 'provider')) {
+                $table->string('provider', 64)->nullable();
             }
-            if (!Schema::hasColumn('idempotency_keys', 'external_id')) {
-                $table->string('external_id', 191);
+            if (! Schema::hasColumn('idempotency_keys', 'external_id')) {
+                $table->string('external_id', 191)->nullable();
             }
-            if (!Schema::hasColumn('idempotency_keys', 'recorded_at')) {
-                $table->string('recorded_at', 64);
+            if (! Schema::hasColumn('idempotency_keys', 'recorded_at')) {
+                $table->string('recorded_at', 64)->nullable();
             }
-            if (!Schema::hasColumn('idempotency_keys', 'hash')) {
-                $table->string('hash', 128);
+            if (! Schema::hasColumn('idempotency_keys', 'hash')) {
+                $table->string('hash', 128)->nullable();
             }
         });
     }

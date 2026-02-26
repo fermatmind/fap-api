@@ -17,13 +17,14 @@ final class MigrationSafetyTest extends TestCase
         'dropColumn(',
         'dropTable(',
         'renameColumn(',
+        '->change(',
     ];
 
     #[Test]
     public function migrations_must_not_include_destructive_rollback_statements(): void
     {
         $files = glob(base_path('database/migrations/*.php'));
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             $this->fail('unable to read migration files');
         }
 
@@ -31,7 +32,7 @@ final class MigrationSafetyTest extends TestCase
 
         foreach ($files as $filePath) {
             $source = file_get_contents($filePath);
-            $this->assertIsString($source, 'unable to read migration file: ' . $filePath);
+            $this->assertIsString($source, 'unable to read migration file: '.$filePath);
 
             foreach (self::BLOCKED_PATTERNS as $pattern) {
                 $this->assertStringNotContainsString(
