@@ -1063,6 +1063,46 @@ php artisan test --filter MigrationsNoSilentCatchTest
 php artisan test --filter MigrationProtectedTablesNoDropTest
 echo "[CI] migration safety gates OK"
 
+echo "[CI] order security gate"
+bash scripts/verify_order_security.sh
+echo "[CI] order security gate OK"
+
+echo "[CI] psychometrics streaming gate"
+bash scripts/pr70_verify.sh
+echo "[CI] psychometrics streaming gate OK"
+
+echo "[CI] migration static guard gate"
+bash scripts/pr71_verify.sh
+echo "[CI] migration static guard gate OK"
+
+echo "[CI] big5 ops controller layering gate"
+bash scripts/pr72_verify.sh
+echo "[CI] big5 ops controller layering gate OK"
+
+echo "[CI] legacy service request coupling gate"
+bash scripts/pr73_verify.sh
+echo "[CI] legacy service request coupling gate OK"
+
+echo "[CI] constructor injection limit gate"
+bash scripts/pr74_verify.sh
+echo "[CI] constructor injection limit gate OK"
+
+echo "[CI] app env() usage gate"
+bash scripts/pr75_verify.sh
+echo "[CI] app env() usage gate OK"
+
+echo "[CI] events dedupe explain gate"
+bash scripts/pr76_verify.sh
+echo "[CI] events dedupe explain gate OK"
+
+echo "[CI] share flow alignment gate"
+bash scripts/pr77_verify.sh
+echo "[CI] share flow alignment gate OK"
+
+echo "[CI] dependency security gate"
+bash scripts/pr78_verify.sh
+echo "[CI] dependency security gate OK"
+
 if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
   echo "[CI] hard-cutover phpunit gate"
   php artisan test tests/Feature/Ops/ScaleIdentityHardCutoverCiTest.php
