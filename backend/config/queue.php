@@ -48,6 +48,24 @@ return [
             'after_commit' => false,
         ],
 
+        'database_reports' => [
+            'driver' => 'database',
+            'connection' => env('DB_QUEUE_REPORTS_CONNECTION', env('DB_QUEUE_CONNECTION')),
+            'table' => env('DB_QUEUE_REPORTS_TABLE', env('DB_QUEUE_TABLE', 'jobs')),
+            'queue' => env('DB_QUEUE_REPORTS', 'reports'),
+            'retry_after' => (int) env('DB_QUEUE_REPORTS_RETRY_AFTER', 300),
+            'after_commit' => false,
+        ],
+
+        'database_commerce' => [
+            'driver' => 'database',
+            'connection' => env('DB_QUEUE_COMMERCE_CONNECTION', env('DB_QUEUE_CONNECTION')),
+            'table' => env('DB_QUEUE_COMMERCE_TABLE', env('DB_QUEUE_TABLE', 'jobs')),
+            'queue' => env('DB_QUEUE_COMMERCE', 'commerce'),
+            'retry_after' => (int) env('DB_QUEUE_COMMERCE_RETRY_AFTER', 300),
+            'after_commit' => false,
+        ],
+
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => env('BEANSTALKD_QUEUE_HOST', 'localhost'),

@@ -27,6 +27,7 @@ fail() {
 echo "[PR69][VERIFY] start"
 
 QUEUE_ASSERT="${ART_DIR}/queue_assertions.txt"
+JOB_TIMEOUT_ASSERT="${ART_DIR}/job_timeout_assertions.txt"
 APP_PROVIDER_ASSERT="${ART_DIR}/app_service_provider_assertions.txt"
 REDACTOR_ASSERT="${ART_DIR}/redactor_assertions.txt"
 ENV_ASSERT="${ART_DIR}/env_assertions.txt"
@@ -49,12 +50,75 @@ foreach (["database", "redis", "beanstalkd"] as $name) {
         $errs[] = "connections.{$name}.retry_after must be 90";
     }
 }
+foreach (["database_reports", "database_commerce"] as $name) {
+    if (!isset($cfg["connections"][$name])) {
+        $errs[] = "connections.{$name} must exist";
+        continue;
+    }
+    $retry = $cfg["connections"][$name]["retry_after"] ?? null;
+    if ($retry !== 300) {
+        $errs[] = "connections.{$name}.retry_after must be 300";
+    }
+}
 if ($errs) {
     fwrite(STDERR, implode(PHP_EOL, $errs) . PHP_EOL);
     exit(1);
 }
 echo "queue_assert=pass" . PHP_EOL;
 ' "${BACKEND_DIR}/vendor/autoload.php" "${BACKEND_DIR}/config/queue.php" > "${QUEUE_ASSERT}" || fail "queue assertions failed"
+
+php -r '
+require $argv[1];
+$cfg = require $argv[2];
+
+$jobs = [
+    [
+        "class" => \App\Jobs\GenerateReportSnapshotJob::class,
+        "args" => [0, "attempt-x", "submit", null],
+        "expected_connection" => "database_reports",
+    ],
+    [
+        "class" => \App\Jobs\GenerateReportPdfJob::class,
+        "args" => [0, "attempt-x", "payment_unlock", "ord-x"],
+        "expected_connection" => "database_reports",
+    ],
+    [
+        "class" => \App\Jobs\Commerce\RefundOrderJob::class,
+        "args" => [0, "ord-x", "test", "corr-x"],
+        "expected_connection" => "database_commerce",
+    ],
+];
+
+$errs = [];
+foreach ($jobs as $spec) {
+    $class = $spec["class"];
+    $job = new $class(...$spec["args"]);
+    $conn = (string) ($job->connection ?? "");
+    if ($conn !== $spec["expected_connection"]) {
+        $errs[] = "{$class} connection must be {$spec["expected_connection"]}, got {$conn}";
+    }
+    $timeout = $job->timeout ?? null;
+    if (!is_int($timeout) || $timeout <= 0) {
+        $errs[] = "{$class} timeout must be positive int";
+        continue;
+    }
+    $retry = (int) ($cfg["connections"][$conn]["retry_after"] ?? 0);
+    if ($retry <= 0) {
+        $errs[] = "{$class} retry_after missing for connection {$conn}";
+    } elseif ($timeout >= $retry) {
+        $errs[] = "{$class} timeout({$timeout}) must be < retry_after({$retry})";
+    }
+    if (($job->failOnTimeout ?? false) !== true) {
+        $errs[] = "{$class} failOnTimeout must be true";
+    }
+}
+
+if ($errs) {
+    fwrite(STDERR, implode(PHP_EOL, $errs) . PHP_EOL);
+    exit(1);
+}
+echo "job_timeout_assert=pass" . PHP_EOL;
+' "${BACKEND_DIR}/vendor/autoload.php" "${BACKEND_DIR}/config/queue.php" > "${JOB_TIMEOUT_ASSERT}" || fail "job timeout assertions failed"
 
 grep -n -E "pushProcessor|SensitiveDataRedactor|context|extra" \
   "${BACKEND_DIR}/app/Providers/AppServiceProvider.php" > "${APP_PROVIDER_ASSERT}" || fail "AppServiceProvider assertions failed"
@@ -75,11 +139,13 @@ done
   grep -n -E "^EVENT_INGEST_TOKEN=$" "${BACKEND_DIR}/.env.example"
 } > "${ENV_ASSERT}" || fail ".env.example assertions failed"
 
-grep -n -E "hash_equals|ingest_token|fm_tokens|Schema::hasTable|DB::table\\('fm_tokens'\\)" \
+grep -n -E "hash_equals|ingest_token|fm_tokens|Schema::hasTable|DB::table\\('fm_tokens'\\)|FmTokenService|validateToken" \
   "${BACKEND_DIR}/app/Http/Controllers/EventController.php" "${BACKEND_DIR}/config/fap.php" > "${EVENT_ASSERT}" || fail "EventController assertions failed"
 grep -q -E "hash_equals" "${BACKEND_DIR}/app/Http/Controllers/EventController.php" || fail "hash_equals missing"
 grep -q -E "config\\('fap\\.events\\.ingest_token'" "${BACKEND_DIR}/app/Http/Controllers/EventController.php" || fail "ingest_token config read missing"
-grep -q -E "DB::table\\('fm_tokens'\\)" "${BACKEND_DIR}/app/Http/Controllers/EventController.php" || fail "fm_tokens DB exists check missing"
+if ! grep -q -E "DB::table\\('fm_tokens'\\)|FmTokenService|validateToken" "${BACKEND_DIR}/app/Http/Controllers/EventController.php"; then
+  fail "fm token validation path missing in EventController"
+fi
 
 ls -1 "${BACKEND_DIR}"/database/migrations/*failed_jobs* > "${MIGRATION_ASSERT}" 2>/dev/null || fail "failed_jobs migration missing"
 
