@@ -3,11 +3,16 @@
 namespace App\Services\Attempts;
 
 use App\Models\Attempt;
+use App\Services\Scale\ScaleIdentityWriteProjector;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 class AnswerSetStore
 {
+    public function __construct(
+        private readonly ScaleIdentityWriteProjector $identityProjector,
+    ) {}
+
     public function storeFinalAnswers(Attempt $attempt, array $answers, int $durationMs, string $scoringSpecVersion): array
     {
         $normalized = $this->canonicalizeAnswers($answers);
@@ -35,7 +40,7 @@ class AnswerSetStore
 
         $canWriteIdentity = $this->shouldWriteScaleIdentityColumns();
         if ($canWriteIdentity) {
-            $identity = $this->resolveScaleIdentityValues($attempt);
+            $identity = $this->identityProjector->projectFromAttempt($attempt);
             $upsertValues['scale_code_v2'] = $identity['scale_code_v2'];
             $upsertValues['scale_uid'] = $identity['scale_uid'];
         }
@@ -152,51 +157,5 @@ class AnswerSetStore
         return str_contains($message, 'no such column')
             || str_contains($message, 'has no column named')
             || str_contains($message, 'unknown column');
-    }
-
-    /**
-     * @return array{scale_code_v2:string|null,scale_uid:string|null}
-     */
-    private function resolveScaleIdentityValues(Attempt $attempt): array
-    {
-        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
-        $scaleUid = trim((string) ($attempt->scale_uid ?? ''));
-
-        if ($scaleCodeV2 !== '' && $scaleUid !== '') {
-            return [
-                'scale_code_v2' => $scaleCodeV2,
-                'scale_uid' => $scaleUid,
-            ];
-        }
-
-        $scaleCodeV1 = strtoupper(trim((string) ($attempt->scale_code ?? '')));
-        if ($scaleCodeV1 === '') {
-            return [
-                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
-                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
-            ];
-        }
-
-        $v1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
-        $uidMap = (array) config('scale_identity.scale_uid_map', []);
-
-        if ($scaleCodeV2 === '') {
-            $mappedV2 = strtoupper(trim((string) ($v1ToV2[$scaleCodeV1] ?? '')));
-            if ($mappedV2 !== '') {
-                $scaleCodeV2 = $mappedV2;
-            }
-        }
-
-        if ($scaleUid === '') {
-            $mappedUid = trim((string) ($uidMap[$scaleCodeV1] ?? ''));
-            if ($mappedUid !== '') {
-                $scaleUid = $mappedUid;
-            }
-        }
-
-        return [
-            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
-            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
-        ];
     }
 }
