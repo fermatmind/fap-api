@@ -4,12 +4,16 @@ namespace App\Support;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use App\Models\Event;
 use App\Services\Analytics\EventNormalizer;
 
 trait WritesEvents
 {
+    private static ?bool $hasShareDedupeLookupColumns = null;
+
     /**
      * Write into events table
      *
@@ -223,19 +227,28 @@ trait WritesEvents
 
             // B) share_generate / share_click dedupe
             if (in_array($eventCode, ['share_generate', 'share_click'], true) && $anonId && $attemptId) {
-                $shareStyle    = $incoming['share_style'] ?? null;
-                $pageSessionId = $incoming['page_session_id'] ?? null;
+                $shareStyle = trim((string) ($incoming['share_style'] ?? ''));
+                $pageSessionId = trim((string) ($incoming['page_session_id'] ?? ''));
 
-                if ($shareStyle && $pageSessionId) {
-                    $dup = Event::query()
+                if ($shareStyle !== '' && $pageSessionId !== '') {
+                    $dupQuery = Event::query()
                         ->where('event_code', $eventCode)
                         ->where('anon_id', $anonId)
-                        ->where('attempt_id', $attemptId)
-                        ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(meta_json, '$.share_style')) = ?", [$shareStyle])
-                        ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(meta_json, '$.page_session_id')) = ?", [$pageSessionId])
-                        ->exists();
+                        ->where('attempt_id', $attemptId);
 
-                    if ($dup) return;
+                    if ($this->canUseEventShareDedupeLookupColumns()) {
+                        $dupQuery
+                            ->where('share_style_g', $shareStyle)
+                            ->where('page_session_id_g', $pageSessionId);
+                    } else {
+                        $dupQuery
+                            ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(meta_json, '$.share_style')) = ?", [$shareStyle])
+                            ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(meta_json, '$.page_session_id')) = ?", [$pageSessionId]);
+                    }
+
+                    if ($dupQuery->exists()) {
+                        return;
+                    }
                 }
             }
 
@@ -291,5 +304,29 @@ trait WritesEvents
                 'error'      => $e->getMessage(),
             ]);
         }
+    }
+
+    private function canUseEventShareDedupeLookupColumns(): bool
+    {
+        if (self::$hasShareDedupeLookupColumns !== null) {
+            return self::$hasShareDedupeLookupColumns;
+        }
+
+        try {
+            $driver = DB::connection()->getDriverName();
+            if (!in_array($driver, ['mysql', 'sqlite'], true)) {
+                self::$hasShareDedupeLookupColumns = false;
+
+                return false;
+            }
+
+            self::$hasShareDedupeLookupColumns =
+                Schema::hasColumn('events', 'share_style_g')
+                && Schema::hasColumn('events', 'page_session_id_g');
+        } catch (\Throwable) {
+            self::$hasShareDedupeLookupColumns = false;
+        }
+
+        return self::$hasShareDedupeLookupColumns;
     }
 }
