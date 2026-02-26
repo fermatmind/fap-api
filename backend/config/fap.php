@@ -19,6 +19,7 @@ return [
         'insights' => (bool) env('FAP_FEATURE_INSIGHTS', false),
         'analytics' => (bool) env('FAP_FEATURE_ANALYTICS', true),
         'clinical_consent_enforce' => (bool) env('FAP_FEATURE_CLINICAL_CONSENT_ENFORCE', false),
+        'submit_async_v2' => (bool) env('FAP_FEATURE_SUBMIT_ASYNC_V2', false),
     ],
 
     'payments' => [
@@ -47,6 +48,7 @@ return [
             'auth_tokens',
             'attempt_quality',
             'attempts',
+            'attempt_submissions',
             'audit_logs',
             'content_pack_releases',
             'data_lifecycle_requests',

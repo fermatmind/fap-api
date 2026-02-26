@@ -128,6 +128,9 @@ Route::prefix('v0.3')->middleware([
             ->middleware('uuid:attempt_id');
         Route::get('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'show'])
             ->middleware('uuid:attempt_id');
+        Route::get('/attempts/{attempt_id}/submission', [AttemptReadController::class, 'submission'])
+            ->middleware('uuid:attempt_id')
+            ->name('api.v0_3.attempts.submission');
         Route::get('/attempts/{id}', [AttemptReadController::class, 'show'])
             ->middleware('uuid:id')
             ->name('api.v0_3.attempts.show');
