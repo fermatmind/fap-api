@@ -20,6 +20,7 @@ return [
         'analytics' => (bool) env('FAP_FEATURE_ANALYTICS', true),
         'clinical_consent_enforce' => (bool) env('FAP_FEATURE_CLINICAL_CONSENT_ENFORCE', false),
         'submit_async_v2' => (bool) env('FAP_FEATURE_SUBMIT_ASYNC_V2', false),
+        'report_snapshot_strict_v2' => (bool) env('FAP_FEATURE_REPORT_SNAPSHOT_STRICT_V2', false),
     ],
 
     'payments' => [

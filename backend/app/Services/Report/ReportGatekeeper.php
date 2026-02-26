@@ -2,6 +2,7 @@
 
 namespace App\Services\Report;
 
+use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
@@ -28,6 +29,7 @@ class ReportGatekeeper
         private ScaleRegistry $registry,
         private EntitlementManager $entitlements,
         private SkuCatalog $skus,
+        private ReportSnapshotStore $snapshotStore,
         private ReportComposerRegistry $composerRegistry,
     ) {}
 
@@ -211,17 +213,42 @@ class ReportGatekeeper
         $locked = $variant === ReportAccess::VARIANT_FREE;
 
         $shouldUseSnapshot = $hasFullAccess && $this->modulesCoverOffered($modulesAllowed, $modulesOffered);
-        if ($shouldUseSnapshot && ! $forceRefresh) {
+        $snapshotStrictMode = $this->strictSnapshotModeEnabled();
+        $shouldReadFromSnapshot = $snapshotStrictMode || $shouldUseSnapshot;
+        if ($shouldReadFromSnapshot && ($snapshotStrictMode || ! $forceRefresh)) {
             $snapshotRow = DB::table('report_snapshots')
                 ->where('org_id', $orgId)
                 ->where('attempt_id', $attemptId)
                 ->first();
 
+            if ($snapshotStrictMode && ($snapshotRow === null || $forceRefresh)) {
+                $this->enqueueSnapshotBuild($orgId, $attempt, $result);
+
+                return $this->responsePayload(
+                    $locked,
+                    $reportAccessLevel,
+                    $variant,
+                    $viewPolicy,
+                    [],
+                    $paywall,
+                    [
+                        'generating' => true,
+                        'snapshot_error' => false,
+                        'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                    ],
+                    $modulesAllowed,
+                    $modulesOffered,
+                    $modulesPreview,
+                    $normsPayload,
+                    $qualityPayload
+                );
+            }
+
             if ($snapshotRow) {
                 $snapshotStatus = strtolower(trim((string) ($snapshotRow->status ?? 'ready')));
                 if ($snapshotStatus === 'pending') {
                     return $this->responsePayload(
-                        false,
+                        $locked,
                         $reportAccessLevel,
                         $variant,
                         $viewPolicy,
@@ -242,7 +269,7 @@ class ReportGatekeeper
 
                 if ($snapshotStatus === 'failed') {
                     return $this->responsePayload(
-                        false,
+                        $locked,
                         $reportAccessLevel,
                         $variant,
                         $viewPolicy,
@@ -261,26 +288,68 @@ class ReportGatekeeper
                     );
                 }
 
-                $report = $this->decodeReportJson($snapshotRow->report_full_json ?? null);
-                if ($report === []) {
-                    $report = $this->decodeReportJson($snapshotRow->report_json ?? null);
+                $report = $this->snapshotReportForVariant($snapshotRow, $variant);
+                if ($report !== []) {
+                    return $this->responsePayload(
+                        $locked,
+                        $reportAccessLevel,
+                        $variant,
+                        $viewPolicy,
+                        $report,
+                        $paywall,
+                        [],
+                        $modulesAllowed,
+                        $modulesOffered,
+                        $modulesPreview,
+                        $normsPayload,
+                        $qualityPayload
+                    );
                 }
 
-                return $this->responsePayload(
-                    $locked,
-                    $reportAccessLevel,
-                    $variant,
-                    $viewPolicy,
-                    $report,
-                    $paywall,
-                    [],
-                    $modulesAllowed,
-                    $modulesOffered,
-                    $modulesPreview,
-                    $normsPayload,
-                    $qualityPayload
-                );
+                if ($snapshotStrictMode) {
+                    $this->enqueueSnapshotBuild($orgId, $attempt, $result);
+
+                    return $this->responsePayload(
+                        $locked,
+                        $reportAccessLevel,
+                        $variant,
+                        $viewPolicy,
+                        [],
+                        $paywall,
+                        [
+                            'generating' => true,
+                            'snapshot_error' => false,
+                            'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                        ],
+                        $modulesAllowed,
+                        $modulesOffered,
+                        $modulesPreview,
+                        $normsPayload,
+                        $qualityPayload
+                    );
+                }
             }
+        }
+
+        if ($snapshotStrictMode) {
+            return $this->responsePayload(
+                $locked,
+                $reportAccessLevel,
+                $variant,
+                $viewPolicy,
+                [],
+                $paywall,
+                [
+                    'generating' => true,
+                    'snapshot_error' => false,
+                    'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                ],
+                $modulesAllowed,
+                $modulesOffered,
+                $modulesPreview,
+                $normsPayload,
+                $qualityPayload
+            );
         }
 
         $built = $this->buildReportVariant(
@@ -758,6 +827,58 @@ class ReportGatekeeper
         return [];
     }
 
+    private function snapshotReportForVariant(object $snapshotRow, string $variant): array
+    {
+        if (ReportAccess::normalizeVariant($variant) === ReportAccess::VARIANT_FREE) {
+            return $this->decodeReportJson($snapshotRow->report_free_json ?? null);
+        }
+
+        $report = $this->decodeReportJson($snapshotRow->report_full_json ?? null);
+        if ($report !== []) {
+            return $report;
+        }
+
+        return $this->decodeReportJson($snapshotRow->report_json ?? null);
+    }
+
+    private function strictSnapshotModeEnabled(): bool
+    {
+        return (bool) config('fap.features.report_snapshot_strict_v2', false)
+            || (bool) config('fap.features.submit_async_v2', false);
+    }
+
+    private function enqueueSnapshotBuild(int $orgId, Attempt $attempt, Result $result): void
+    {
+        $attemptId = trim((string) ($attempt->id ?? ''));
+        if ($attemptId === '') {
+            return;
+        }
+
+        try {
+            $this->snapshotStore->seedPendingSnapshot($orgId, $attemptId, null, [
+                'scale_code' => strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? ''))),
+                'scale_code_v2' => strtoupper(trim((string) ($attempt->scale_code_v2 ?? $result->scale_code_v2 ?? ''))),
+                'scale_uid' => trim((string) ($attempt->scale_uid ?? $result->scale_uid ?? '')),
+                'pack_id' => (string) ($attempt->pack_id ?? $result->pack_id ?? ''),
+                'dir_version' => (string) ($attempt->dir_version ?? $result->dir_version ?? ''),
+                'scoring_spec_version' => (string) ($attempt->scoring_spec_version ?? $result->scoring_spec_version ?? ''),
+            ]);
+
+            GenerateReportSnapshotJob::dispatch(
+                $orgId,
+                $attemptId,
+                'report_api',
+                null
+            )->afterCommit();
+        } catch (\Throwable $e) {
+            Log::warning('[REPORT] snapshot_queue_failed', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
     private function responsePayload(
         bool $locked,
         string $accessLevel,
@@ -772,8 +893,15 @@ class ReportGatekeeper
         array $norms = [],
         array $quality = []
     ): array {
+        $generating = (bool) ($meta['generating'] ?? false);
+        $snapshotError = (bool) ($meta['snapshot_error'] ?? false);
+        $retryAfterSeconds = isset($meta['retry_after_seconds']) ? (int) $meta['retry_after_seconds'] : null;
+
         return [
             'ok' => true,
+            'generating' => $generating,
+            'snapshot_error' => $snapshotError,
+            'retry_after_seconds' => $retryAfterSeconds,
             'locked' => $locked,
             'access_level' => ReportAccess::normalizeReportAccessLevel($accessLevel),
             'variant' => ReportAccess::normalizeVariant($variant),
