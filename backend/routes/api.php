@@ -9,6 +9,7 @@ use App\Http\Controllers\API\V0_3\AuthWxPhoneController as AuthWxPhoneV03Control
 use App\Http\Controllers\API\V0_3\BigFiveOpsController;
 use App\Http\Controllers\API\V0_3\BootController as BootV0_3Controller;
 use App\Http\Controllers\API\V0_3\ClaimController as ClaimV03Controller;
+use App\Http\Controllers\API\V0_3\ComplianceDsarController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
@@ -93,6 +94,15 @@ Route::prefix('v0.3')->middleware([
 
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
         Route::get('/me/attempts', [MeV03Controller::class, 'attempts']);
+    });
+
+    Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])->group(function () {
+        Route::post('/compliance/dsar/requests', [ComplianceDsarController::class, 'store'])
+            ->middleware('throttle:api_auth');
+        Route::get('/compliance/dsar/requests/{id}', [ComplianceDsarController::class, 'show'])
+            ->middleware(['uuid:id', 'throttle:api_auth']);
+        Route::post('/compliance/dsar/requests/{id}/execute', [ComplianceDsarController::class, 'execute'])
+            ->middleware(['uuid:id', 'throttle:api_auth']);
     });
 
     Route::middleware([\App\Http\Middleware\ResolveAnonId::class, ResolveOrgContext::class])->group(function () use ($payProviders) {
