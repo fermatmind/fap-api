@@ -44,7 +44,6 @@ class FmTokenOptionalAuth
         $tokenHash = hash('sha256', $token);
         $select = [
             'token_hash',
-            'token',
             'user_id',
             'anon_id',
             'expires_at',
@@ -55,25 +54,6 @@ class FmTokenOptionalAuth
             ->select($select)
             ->where('token_hash', $tokenHash)
             ->first();
-        if (!$row) {
-            $row = DB::table('fm_tokens')
-                ->select($select)
-                ->where('token', $token)
-                ->first();
-
-            if ($row) {
-                $currentHash = trim((string) ($row->token_hash ?? ''));
-                if ($currentHash === '') {
-                    DB::table('fm_tokens')
-                        ->where('token', $token)
-                        ->update([
-                            'token_hash' => $tokenHash,
-                            'updated_at' => now(),
-                        ]);
-                    $row->token_hash = $tokenHash;
-                }
-            }
-        }
 
         if (!$row) {
             return $this->unauthorizedResponse();

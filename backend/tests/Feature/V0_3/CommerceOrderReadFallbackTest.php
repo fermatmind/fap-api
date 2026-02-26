@@ -17,22 +17,15 @@ final class CommerceOrderReadFallbackTest extends TestCase
     private const ANON_OWNER = 'order_read_owner';
     private const ANON_ATTACKER = 'order_read_attacker';
 
-    public function test_without_identity_returns_degraded_payload(): void
+    public function test_without_identity_returns_404(): void
     {
         $orderNo = 'ord_fallback_' . Str::lower(Str::random(10));
         $this->insertOrderForOwner($orderNo);
 
         $response = $this->getJson('/api/v0.3/orders/' . $orderNo);
 
-        $response->assertStatus(200)
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('ownership_verified', false)
-            ->assertJsonPath('order_no', $orderNo)
-            ->assertJsonPath('status', 'pending');
-
-        $response->assertJsonMissingPath('order');
-        $response->assertJsonMissingPath('amount_cents');
-        $response->assertJsonMissingPath('currency');
+        $response->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
     public function test_mismatched_token_identity_still_returns_404(): void

@@ -29,7 +29,9 @@ final class OrderScaleIdentityDualWriteTest extends TestCase
             'SKU_SDS_20_FULL_299',
             1,
             $attemptId,
-            'billing'
+            'billing',
+            null,
+            'anon_order_dual@example.com'
         );
 
         $this->assertTrue((bool) ($result['ok'] ?? false));
@@ -56,7 +58,9 @@ final class OrderScaleIdentityDualWriteTest extends TestCase
             'SKU_SDS_20_FULL_299',
             1,
             $attemptId,
-            'billing'
+            'billing',
+            null,
+            'anon_order_legacy@example.com'
         );
 
         $this->assertTrue((bool) ($result['ok'] ?? false));
@@ -114,4 +118,3 @@ final class OrderScaleIdentityDualWriteTest extends TestCase
         );
     }
 }
-

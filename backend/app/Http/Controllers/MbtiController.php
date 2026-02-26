@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\Legacy\LegacyRequestContext;
+use App\Http\Requests\V0_3\LegacyStartAttemptRequest;
+use App\Http\Requests\V0_3\LegacyStoreAttemptRequest;
 use App\Services\Legacy\LegacyMbtiAttemptService;
+use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class MbtiController extends Controller
 {
-    public function __construct(private LegacyMbtiAttemptService $service) {}
+    public function __construct(
+        private readonly LegacyMbtiAttemptService $service,
+        private readonly OrgContext $orgContext,
+    ) {}
 
     public function health(): JsonResponse
     {
@@ -33,19 +40,35 @@ class MbtiController extends Controller
         return response()->json($payload);
     }
 
-    public function startAttempt(Request $request): JsonResponse
+    public function startAttempt(LegacyStartAttemptRequest $request): JsonResponse
     {
-        return $this->toJson($this->service->startAttempt($request));
+        return $this->toJson(
+            $this->service->startAttempt(
+                $request->validated(),
+                LegacyRequestContext::fromRequest($request, $this->orgContext),
+            )
+        );
     }
 
-    public function storeAttempt(Request $request): JsonResponse
+    public function storeAttempt(LegacyStoreAttemptRequest $request): JsonResponse
     {
-        return $this->toJson($this->service->storeAttempt($request));
+        return $this->toJson(
+            $this->service->storeAttempt(
+                $request->validated(),
+                LegacyRequestContext::fromRequest($request, $this->orgContext),
+            )
+        );
     }
 
-    public function upsertResult(Request $request, string $attemptId): JsonResponse
+    public function upsertResult(LegacyStoreAttemptRequest $request, string $attemptId): JsonResponse
     {
-        return $this->toJson($this->service->upsertResult($request, $attemptId));
+        return $this->toJson(
+            $this->service->upsertResult(
+                $request->validated(),
+                $attemptId,
+                LegacyRequestContext::fromRequest($request, $this->orgContext),
+            )
+        );
     }
 
     private function toJson(array $payload): JsonResponse

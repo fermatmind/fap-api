@@ -4,8 +4,6 @@ namespace App\Services\Report;
 
 use App\Models\Attempt;
 use App\Models\Result;
-use App\Services\Analytics\EventRecorder;
-use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Scale\ScaleRegistry;
@@ -30,15 +28,8 @@ class ReportGatekeeper
         private ScaleRegistry $registry,
         private EntitlementManager $entitlements,
         private SkuCatalog $skus,
-        private ReportComposer $reportComposer,
-        private BigFiveReportComposer $bigFiveReportComposer,
-        private ClinicalCombo68ReportComposer $clinicalCombo68ReportComposer,
-        private Sds20ReportComposer $sds20ReportComposer,
-        private Eq60ReportComposer $eq60ReportComposer,
-        private GenericReportBuilder $genericReportBuilder,
-        private EventRecorder $eventRecorder,
-    ) {
-    }
+        private ReportComposerRegistry $composerRegistry,
+    ) {}
 
     public function ensureAccess(
         int $orgId,
@@ -53,12 +44,12 @@ class ReportGatekeeper
         }
 
         $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
-        if (!$attempt) {
+        if (! $attempt) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
-        if (!$result) {
+        if (! $result) {
             return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
         }
 
@@ -68,7 +59,7 @@ class ReportGatekeeper
         }
 
         $registry = $this->registry->getByCode($scaleCode, $orgId);
-        if (!$registry) {
+        if (! $registry) {
             return $this->notFound('SCALE_NOT_FOUND', 'scale not found.');
         }
 
@@ -89,7 +80,7 @@ class ReportGatekeeper
 
         return [
             'ok' => true,
-            'locked' => !$hasAccess,
+            'locked' => ! $hasAccess,
         ];
     }
 
@@ -108,12 +99,12 @@ class ReportGatekeeper
         }
 
         $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role, $forceSystemAccess)->first();
-        if (!$attempt) {
+        if (! $attempt) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
-        if (!$result) {
+        if (! $result) {
             return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
         }
 
@@ -123,7 +114,7 @@ class ReportGatekeeper
         }
 
         $registry = $this->registry->getByCode($scaleCode, $orgId);
-        if (!$registry) {
+        if (! $registry) {
             return $this->notFound('SCALE_NOT_FOUND', 'scale not found.');
         }
 
@@ -189,7 +180,7 @@ class ReportGatekeeper
                 [$fullModule, $freeModule]
             ));
         }
-        if (!in_array($freeModule, $modulesAllowed, true)) {
+        if (! in_array($freeModule, $modulesAllowed, true)) {
             $modulesAllowed[] = $freeModule;
             $modulesAllowed = ReportAccess::normalizeModules($modulesAllowed);
         }
@@ -220,7 +211,7 @@ class ReportGatekeeper
         $locked = $variant === ReportAccess::VARIANT_FREE;
 
         $shouldUseSnapshot = $hasFullAccess && $this->modulesCoverOffered($modulesAllowed, $modulesOffered);
-        if ($shouldUseSnapshot && !$forceRefresh) {
+        if ($shouldUseSnapshot && ! $forceRefresh) {
             $snapshotRow = DB::table('report_snapshots')
                 ->where('org_id', $orgId)
                 ->where('attempt_id', $attemptId)
@@ -300,18 +291,18 @@ class ReportGatekeeper
             $modulesAllowed,
             $modulesPreview
         );
-        if (!($built['ok'] ?? false)) {
+        if (! ($built['ok'] ?? false)) {
             return $built;
         }
 
         $report = $built['report'] ?? [];
-        if (!is_array($report)) {
+        if (! is_array($report)) {
             return $this->serverError('REPORT_FAILED', 'report generation failed.');
         }
 
         // Non-MBTI reports are still built by GenericReportBuilder. Re-apply teaser
         // masking when locked to avoid exposing full payload to unpaid users.
-        if ($locked && !in_array(strtoupper($scaleCode), ['MBTI', 'BIG5_OCEAN', 'CLINICAL_COMBO_68', 'SDS_20', 'EQ_60'], true)) {
+        if ($locked && ! in_array(strtoupper($scaleCode), ['MBTI', 'BIG5_OCEAN', 'CLINICAL_COMBO_68', 'SDS_20', 'EQ_60'], true)) {
             $report = $this->applyTeaser($report, $viewPolicy);
         }
 
@@ -422,8 +413,12 @@ class ReportGatekeeper
         $policy['blur_others'] = (bool) ($policy['blur_others'] ?? true);
 
         $pct = (float) ($policy['teaser_percent'] ?? self::DEFAULT_VIEW_POLICY['teaser_percent']);
-        if ($pct < 0) $pct = 0;
-        if ($pct > 1) $pct = 1;
+        if ($pct < 0) {
+            $pct = 0;
+        }
+        if ($pct > 1) {
+            $pct = 1;
+        }
         $policy['teaser_percent'] = $pct;
 
         $upgradeSku = trim((string) ($policy['upgrade_sku'] ?? ''));
@@ -438,6 +433,7 @@ class ReportGatekeeper
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
+
         return is_array($raw) ? $raw : [];
     }
 
@@ -473,7 +469,7 @@ class ReportGatekeeper
     {
         $offers = [];
         foreach ($items as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -535,13 +531,13 @@ class ReportGatekeeper
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 
         $offers = [];
         foreach ($raw as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -598,7 +594,7 @@ class ReportGatekeeper
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 
@@ -609,7 +605,7 @@ class ReportGatekeeper
     {
         $modules = [];
         foreach ($offers as $offer) {
-            if (!is_array($offer)) {
+            if (! is_array($offer)) {
                 continue;
             }
             $modules = array_merge(
@@ -629,7 +625,7 @@ class ReportGatekeeper
 
         $allowed = array_fill_keys(ReportAccess::normalizeModules($modulesAllowed), true);
         foreach (ReportAccess::normalizeModules($modulesOffered) as $module) {
-            if (!isset($allowed[$module])) {
+            if (! isset($allowed[$module])) {
                 return false;
             }
         }
@@ -700,11 +696,14 @@ class ReportGatekeeper
         string $variant,
         array $modulesAllowed = [],
         array $modulesPreview = []
-    ): array
-    {
+    ): array {
         try {
-            if ($scaleCode === 'MBTI') {
-                $composed = $this->reportComposer->composeVariant($attempt, $variant, [
+            $composed = $this->composerRegistry->composeVariant(
+                $scaleCode,
+                $attempt,
+                $result,
+                $variant,
+                [
                     'org_id' => (int) ($attempt->org_id ?? 0),
                     'variant' => $variant,
                     'report_access_level' => $variant === ReportAccess::VARIANT_FREE
@@ -712,153 +711,18 @@ class ReportGatekeeper
                         : ReportAccess::REPORT_ACCESS_FULL,
                     'modules_allowed' => $modulesAllowed,
                     'modules_preview' => $modulesPreview,
-                ], $result);
-                if (!($composed['ok'] ?? false)) {
-                    return [
-                        'ok' => false,
-                        'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
-                        'message' => (string) ($composed['message'] ?? 'report generation failed.'),
-                        'status' => (int) ($composed['status'] ?? 500),
-                    ];
-                }
-
-                $report = $composed['report'] ?? null;
-
-                return is_array($report)
-                    ? ['ok' => true, 'report' => $report]
-                    : [
-                        'ok' => false,
-                        'error' => 'REPORT_FAILED',
-                        'message' => 'report generation failed.',
-                        'status' => 500,
-                    ];
+                ]
+            );
+            if (! ($composed['ok'] ?? false)) {
+                return [
+                    'ok' => false,
+                    'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
+                    'message' => (string) ($composed['message'] ?? 'report generation failed.'),
+                    'status' => (int) ($composed['status'] ?? 500),
+                ];
             }
 
-            if ($scaleCode === 'BIG5_OCEAN') {
-                $composed = $this->bigFiveReportComposer->composeVariant($attempt, $result, $variant, [
-                    'org_id' => (int) ($attempt->org_id ?? 0),
-                    'variant' => $variant,
-                    'report_access_level' => $variant === ReportAccess::VARIANT_FREE
-                        ? ReportAccess::REPORT_ACCESS_FREE
-                        : ReportAccess::REPORT_ACCESS_FULL,
-                    'modules_allowed' => $modulesAllowed,
-                    'modules_preview' => $modulesPreview,
-                ]);
-                if (!($composed['ok'] ?? false)) {
-                    return [
-                        'ok' => false,
-                        'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
-                        'message' => (string) ($composed['message'] ?? 'report generation failed.'),
-                        'status' => (int) ($composed['status'] ?? 500),
-                    ];
-                }
-
-                $report = $composed['report'] ?? null;
-
-                return is_array($report)
-                    ? ['ok' => true, 'report' => $report]
-                    : [
-                        'ok' => false,
-                        'error' => 'REPORT_FAILED',
-                        'message' => 'report generation failed.',
-                        'status' => 500,
-                    ];
-            }
-
-            if ($scaleCode === 'CLINICAL_COMBO_68') {
-                $composed = $this->clinicalCombo68ReportComposer->composeVariant($attempt, $result, $variant, [
-                    'org_id' => (int) ($attempt->org_id ?? 0),
-                    'variant' => $variant,
-                    'report_access_level' => $variant === ReportAccess::VARIANT_FREE
-                        ? ReportAccess::REPORT_ACCESS_FREE
-                        : ReportAccess::REPORT_ACCESS_FULL,
-                    'modules_allowed' => $modulesAllowed,
-                    'modules_preview' => $modulesPreview,
-                ]);
-                if (!($composed['ok'] ?? false)) {
-                    return [
-                        'ok' => false,
-                        'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
-                        'message' => (string) ($composed['message'] ?? 'report generation failed.'),
-                        'status' => (int) ($composed['status'] ?? 500),
-                    ];
-                }
-
-                $report = $composed['report'] ?? null;
-
-                return is_array($report)
-                    ? ['ok' => true, 'report' => $report]
-                    : [
-                        'ok' => false,
-                        'error' => 'REPORT_FAILED',
-                        'message' => 'report generation failed.',
-                        'status' => 500,
-                    ];
-            }
-
-            if ($scaleCode === 'SDS_20') {
-                $composed = $this->sds20ReportComposer->composeVariant($attempt, $result, $variant, [
-                    'org_id' => (int) ($attempt->org_id ?? 0),
-                    'variant' => $variant,
-                    'report_access_level' => $variant === ReportAccess::VARIANT_FREE
-                        ? ReportAccess::REPORT_ACCESS_FREE
-                        : ReportAccess::REPORT_ACCESS_FULL,
-                    'modules_allowed' => $modulesAllowed,
-                    'modules_preview' => $modulesPreview,
-                ]);
-                if (!($composed['ok'] ?? false)) {
-                    return [
-                        'ok' => false,
-                        'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
-                        'message' => (string) ($composed['message'] ?? 'report generation failed.'),
-                        'status' => (int) ($composed['status'] ?? 500),
-                    ];
-                }
-
-                $report = $composed['report'] ?? null;
-
-                return is_array($report)
-                    ? ['ok' => true, 'report' => $report]
-                    : [
-                        'ok' => false,
-                        'error' => 'REPORT_FAILED',
-                        'message' => 'report generation failed.',
-                        'status' => 500,
-                    ];
-            }
-
-            if ($scaleCode === 'EQ_60') {
-                $composed = $this->eq60ReportComposer->composeVariant($attempt, $result, $variant, [
-                    'org_id' => (int) ($attempt->org_id ?? 0),
-                    'variant' => $variant,
-                    'report_access_level' => $variant === ReportAccess::VARIANT_FREE
-                        ? ReportAccess::REPORT_ACCESS_FREE
-                        : ReportAccess::REPORT_ACCESS_FULL,
-                    'modules_allowed' => $modulesAllowed,
-                    'modules_preview' => $modulesPreview,
-                ]);
-                if (!($composed['ok'] ?? false)) {
-                    return [
-                        'ok' => false,
-                        'error' => (string) ($composed['error'] ?? 'REPORT_FAILED'),
-                        'message' => (string) ($composed['message'] ?? 'report generation failed.'),
-                        'status' => (int) ($composed['status'] ?? 500),
-                    ];
-                }
-
-                $report = $composed['report'] ?? null;
-
-                return is_array($report)
-                    ? ['ok' => true, 'report' => $report]
-                    : [
-                        'ok' => false,
-                        'error' => 'REPORT_FAILED',
-                        'message' => 'report generation failed.',
-                        'status' => 500,
-                    ];
-            }
-
-            $report = $this->genericReportBuilder->build($attempt, $result);
+            $report = $composed['report'] ?? null;
 
             return is_array($report)
                 ? ['ok' => true, 'report' => $report]
@@ -887,6 +751,7 @@ class ReportGatekeeper
         }
         if (is_string($raw)) {
             $decoded = json_decode($raw, true);
+
             return is_array($decoded) ? $decoded : [];
         }
 
@@ -906,8 +771,7 @@ class ReportGatekeeper
         array $modulesPreview = [],
         array $norms = [],
         array $quality = []
-    ): array
-    {
+    ): array {
         return [
             'ok' => true,
             'locked' => $locked,
@@ -940,7 +804,7 @@ class ReportGatekeeper
         ];
 
         foreach ($candidates as $candidate) {
-            if (!is_array($candidate)) {
+            if (! is_array($candidate)) {
                 continue;
             }
 
@@ -965,7 +829,7 @@ class ReportGatekeeper
     private function numericUserId(?string $userId): ?int
     {
         $userId = $userId !== null ? trim($userId) : '';
-        if ($userId === '' || !preg_match('/^\d+$/', $userId)) {
+        if ($userId === '' || ! preg_match('/^\d+$/', $userId)) {
             return null;
         }
 

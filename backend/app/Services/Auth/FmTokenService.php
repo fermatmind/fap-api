@@ -24,6 +24,7 @@ class FmTokenService
 
         $token = 'fm_' . (string) Str::uuid();
         $tokenHash = hash('sha256', $token);
+        $tokenStorageKey = $this->tokenStorageKey($tokenHash);
 
         $ttlDays = (int) config('fap.fm_token_ttl_days', 30);
         if ($ttlDays <= 0) {
@@ -60,7 +61,7 @@ class FmTokenService
         }
 
         DB::table('fm_tokens')->insert([
-            'token' => $token,
+            'token' => $tokenStorageKey,
             'token_hash' => $tokenHash,
             'user_id' => $persistedUserId,
             'anon_id' => $anonId,
@@ -97,25 +98,6 @@ class FmTokenService
         $row = DB::table('fm_tokens')
             ->where('token_hash', $tokenHash)
             ->first();
-
-        if (!$row) {
-            $row = DB::table('fm_tokens')
-                ->where('token', $token)
-                ->first();
-
-            if ($row) {
-                $currentHash = trim((string) ($row->token_hash ?? ''));
-                if ($currentHash === '') {
-                    DB::table('fm_tokens')
-                        ->where('token', $token)
-                        ->update([
-                            'token_hash' => $tokenHash,
-                            'updated_at' => now(),
-                        ]);
-                    $row->token_hash = $tokenHash;
-                }
-            }
-        }
 
         if (!$row) {
             return ['ok' => false];
@@ -159,12 +141,7 @@ class FmTokenService
             $anonId = null;
         }
 
-        $dispatchHash = trim((string) ($row->token_hash ?? ''));
-        if ($dispatchHash === '') {
-            $dispatchHash = $tokenHash;
-        }
-
-        TouchFmTokenLastUsedAtJob::dispatch($dispatchHash)->onQueue('ops');
+        TouchFmTokenLastUsedAtJob::dispatch($tokenHash)->onQueue('ops');
 
         return [
             'ok' => true,
@@ -174,5 +151,10 @@ class FmTokenService
             'role' => $role,
             'anon_id' => $anonId,
         ];
+    }
+
+    private function tokenStorageKey(string $tokenHash): string
+    {
+        return 'retired_' . strtolower(trim($tokenHash));
     }
 }

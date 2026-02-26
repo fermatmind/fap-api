@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Legacy;
 
+use App\DTO\Legacy\LegacyRequestContext;
 use App\Exceptions\Api\ApiProblemException;
 use App\Services\Legacy\Mbti\Attempt\LegacyMbtiAttemptLifecycleService;
 use App\Services\Legacy\Mbti\Content\LegacyMbtiPackRepository;
@@ -11,7 +12,6 @@ use App\Services\Legacy\Mbti\Report\LegacyMbtiReportPayloadBuilder;
 use App\Support\CacheKeys;
 use App\Support\OrgContext;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
@@ -178,19 +178,28 @@ class LegacyMbtiAttemptService
         return $payload;
     }
 
-    public function startAttempt(Request $request, ?string $id = null): array
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    public function startAttempt(array $payload, LegacyRequestContext $context, ?string $id = null): array
     {
-        return $this->attemptLifecycle->startAttempt($request, $id);
+        return $this->attemptLifecycle->startAttempt($payload, $context, $id);
     }
 
-    public function storeAttempt(Request $request): array
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    public function storeAttempt(array $payload, LegacyRequestContext $context): array
     {
-        return $this->attemptLifecycle->storeAttempt($request);
+        return $this->attemptLifecycle->storeAttempt($payload, $context);
     }
 
-    public function upsertResult(Request $request, string $attemptId): array
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    public function upsertResult(array $payload, string $attemptId, LegacyRequestContext $context): array
     {
-        return $this->attemptLifecycle->upsertResult($request, $attemptId);
+        return $this->attemptLifecycle->upsertResult($payload, $attemptId, $context);
     }
 
     private function defaultRegion(): string

@@ -19,6 +19,10 @@ class GenerateReportSnapshotJob implements ShouldQueue
 
     public int $tries = 3;
 
+    public int $timeout = 150;
+
+    public bool $failOnTimeout = true;
+
     /** @var array<int, int> */
     public array $backoff = [5, 10, 20];
 
@@ -28,7 +32,7 @@ class GenerateReportSnapshotJob implements ShouldQueue
         public string $triggerSource,
         public ?string $orderNo = null,
     ) {
-        $this->onConnection('database');
+        $this->onConnection('database_reports');
         $this->onQueue('reports');
     }
 

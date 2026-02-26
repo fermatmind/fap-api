@@ -60,26 +60,6 @@ class FmTokenOptional
             ->first();
 
         if (!$row) {
-            $row = DB::table('fm_tokens')
-                ->select($select)
-                ->where('token', $token)
-                ->first();
-
-            if ($row) {
-                $currentHash = trim((string) ($row->token_hash ?? ''));
-                if ($currentHash === '') {
-                    DB::table('fm_tokens')
-                        ->where('token', $token)
-                        ->update([
-                            'token_hash' => $tokenHash,
-                            'updated_at' => now(),
-                        ]);
-                    $row->token_hash = $tokenHash;
-                }
-            }
-        }
-
-        if (!$row) {
             return $next($request);
         }
 

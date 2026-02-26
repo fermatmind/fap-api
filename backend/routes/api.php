@@ -136,9 +136,12 @@ Route::prefix('v0.3')->middleware([
         // 3) Commerce v2 (public with org context)
         Route::get('/skus', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus')
             ->name('api.v0_3.skus');
-        Route::post('/orders/checkout', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout');
-        Route::post('/orders/lookup', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@lookup');
-        Route::post('/orders/{order_no}/resend', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@resend');
+        Route::post('/orders/checkout', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout')
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
+        Route::post('/orders/lookup', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@lookup')
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
+        Route::post('/orders/{order_no}/resend', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@resend')
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::post('/orders', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder')
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
         Route::post('/orders/stub', static function (
@@ -156,7 +159,8 @@ Route::prefix('v0.3')->middleware([
         Route::post('/orders/{provider}', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder')
             ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);
-        Route::get('/orders/{order_no}', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder');
+        Route::get('/orders/{order_no}', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder')
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::get('/shares/{id}', [ShareV03Controller::class, 'getShareView']);
         Route::post('/shares/{shareId}/click', [ShareV03Controller::class, 'click'])
             ->middleware([

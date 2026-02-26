@@ -5,6 +5,8 @@ on:
     branches: ["main"]
   push:
     branches: ["main"]
+  schedule:
+    - cron: "17 3 * * 1"
 
 permissions:
   contents: read
@@ -54,6 +56,10 @@ jobs:
           echo "::error::composer audit failed after 3 attempts"
           exit 1
 
+      - name: Dependency governance gate (archive + diff + severity policy)
+        working-directory: backend
+        run: bash scripts/pr78_verify.sh
+
       - name: OSV scan composer.lock
         run: |
           set -euo pipefail
@@ -78,6 +84,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: supply-chain-evidence
-          path: _audit/osv-composer-lock.json
+          path: |
+            _audit/osv-composer-lock.json
+            backend/artifacts/pr78
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 30

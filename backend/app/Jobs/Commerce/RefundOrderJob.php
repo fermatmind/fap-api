@@ -22,6 +22,10 @@ class RefundOrderJob implements ShouldQueue
 
     public int $tries = 3;
 
+    public int $timeout = 120;
+
+    public bool $failOnTimeout = true;
+
     /** @var array<int,int> */
     public array $backoff = [10, 30, 60];
 
@@ -31,7 +35,7 @@ class RefundOrderJob implements ShouldQueue
         public string $reason,
         public string $correlationId,
     ) {
-        $this->onConnection('database');
+        $this->onConnection('database_commerce');
         $this->onQueue('commerce');
     }
 

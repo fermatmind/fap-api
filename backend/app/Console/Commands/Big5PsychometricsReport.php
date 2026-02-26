@@ -43,8 +43,9 @@ class Big5PsychometricsReport extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('big5_psychometrics_reports')) {
+        if (! Schema::hasTable('big5_psychometrics_reports')) {
             $this->error('Missing table big5_psychometrics_reports. Run migrations first.');
+
             return 1;
         }
 
@@ -69,32 +70,55 @@ class Big5PsychometricsReport extends Command
             $query->where('a.region', $region);
         }
 
-        $rows = $query->get();
-        $records = [];
-        foreach ($rows as $row) {
+        $sampleN = 0;
+        $domainStats = $this->initStats(self::DOMAINS);
+        $facetStats = $this->initStats(self::FACETS);
+        $domainTotalStats = $this->initStats(self::DOMAINS);
+        $facetItemTotalCorrStats = $this->initCorrelations(self::FACETS);
+
+        foreach ($query->cursor() as $row) {
             $payload = $this->decodeResultJson($row->result_json ?? null);
             $quality = strtoupper((string) data_get($payload, 'quality.level', ''));
-            if (!in_array($quality, $qualityLevels, true)) {
+            if (! in_array($quality, $qualityLevels, true)) {
                 continue;
             }
 
             $domains = data_get($payload, 'raw_scores.domains_mean');
             $facets = data_get($payload, 'raw_scores.facets_mean');
-            if (!is_array($domains) || !is_array($facets)) {
+            if (! is_array($domains) || ! is_array($facets)) {
                 continue;
             }
 
-            if (!$this->hasCompleteMetrics($domains, $facets)) {
+            if (! $this->hasCompleteMetrics($domains, $facets)) {
                 continue;
             }
 
-            $records[] = [
-                'domains' => $this->pickMetrics($domains, self::DOMAINS),
-                'facets' => $this->pickMetrics($facets, self::FACETS),
-            ];
+            $pickedDomains = $this->pickMetrics($domains, self::DOMAINS);
+            $pickedFacets = $this->pickMetrics($facets, self::FACETS);
+
+            $sampleN++;
+            foreach ($pickedDomains as $domain => $score) {
+                $this->pushStat($domainStats[$domain], (float) $score);
+            }
+            foreach ($pickedFacets as $facet => $score) {
+                $this->pushStat($facetStats[$facet], (float) $score);
+            }
+
+            foreach (self::DOMAIN_TO_FACETS as $domain => $facetsInDomain) {
+                $domainTotal = 0.0;
+                foreach ($facetsInDomain as $facet) {
+                    $domainTotal += (float) $pickedFacets[$facet];
+                }
+
+                $this->pushStat($domainTotalStats[$domain], $domainTotal);
+                foreach ($facetsInDomain as $facet) {
+                    $facetValue = (float) $pickedFacets[$facet];
+                    $sumOthers = $domainTotal - $facetValue;
+                    $this->pushCorrelation($facetItemTotalCorrStats[$facet], $facetValue, $sumOthers);
+                }
+            }
         }
 
-        $sampleN = count($records);
         if ($sampleN < $minSamples) {
             $this->warn(sprintf(
                 'insufficient samples: got=%d required=%d scale=%s locale=%s window=%s',
@@ -104,10 +128,19 @@ class Big5PsychometricsReport extends Command
                 $locale,
                 $window
             ));
+
             return 2;
         }
 
-        $metrics = $this->buildMetrics($records, $windowDays, $qualityLevels);
+        $metrics = $this->buildMetrics(
+            $sampleN,
+            $windowDays,
+            $qualityLevels,
+            $domainStats,
+            $facetStats,
+            $domainTotalStats,
+            $facetItemTotalCorrStats
+        );
         $now = now();
 
         DB::table('big5_psychometrics_reports')->insert([
@@ -160,7 +193,7 @@ class Big5PsychometricsReport extends Command
 
         $levels = [];
         foreach (str_split($normalized) as $char) {
-            if (in_array($char, ['A', 'B', 'C', 'D'], true) && !in_array($char, $levels, true)) {
+            if (in_array($char, ['A', 'B', 'C', 'D'], true) && ! in_array($char, $levels, true)) {
                 $levels[] = $char;
             }
         }
@@ -197,18 +230,18 @@ class Big5PsychometricsReport extends Command
     }
 
     /**
-     * @param array<string,mixed> $domains
-     * @param array<string,mixed> $facets
+     * @param  array<string,mixed>  $domains
+     * @param  array<string,mixed>  $facets
      */
     private function hasCompleteMetrics(array $domains, array $facets): bool
     {
         foreach (self::DOMAINS as $code) {
-            if (!isset($domains[$code]) || !is_numeric($domains[$code])) {
+            if (! isset($domains[$code]) || ! is_numeric($domains[$code])) {
                 return false;
             }
         }
         foreach (self::FACETS as $code) {
-            if (!isset($facets[$code]) || !is_numeric($facets[$code])) {
+            if (! isset($facets[$code]) || ! is_numeric($facets[$code])) {
                 return false;
             }
         }
@@ -217,8 +250,8 @@ class Big5PsychometricsReport extends Command
     }
 
     /**
-     * @param array<string,mixed> $metrics
-     * @param list<string> $codes
+     * @param  array<string,mixed>  $metrics
+     * @param  list<string>  $codes
      * @return array<string,float>
      */
     private function pickMetrics(array $metrics, array $codes): array
@@ -232,203 +265,208 @@ class Big5PsychometricsReport extends Command
     }
 
     /**
-     * @param list<array{domains:array<string,float>,facets:array<string,float>}> $records
-     * @param list<string> $qualityLevels
+     * @param  list<string>  $qualityLevels
+     * @param  array<string,array{n:int,sum:float,sum_sq:float}>  $domainStats
+     * @param  array<string,array{n:int,sum:float,sum_sq:float}>  $facetStats
+     * @param  array<string,array{n:int,sum:float,sum_sq:float}>  $domainTotalStats
+     * @param  array<string,array{n:int,sum_x:float,sum_y:float,sum_x2:float,sum_y2:float,sum_xy:float}>  $facetItemTotalCorrStats
      * @return array<string,mixed>
      */
-    private function buildMetrics(array $records, int $windowDays, array $qualityLevels): array
-    {
-        $domainSeries = [];
-        $facetSeries = [];
+    private function buildMetrics(
+        int $sampleN,
+        int $windowDays,
+        array $qualityLevels,
+        array $domainStats,
+        array $facetStats,
+        array $domainTotalStats,
+        array $facetItemTotalCorrStats
+    ): array {
+        $normalizedDomainStats = [];
         foreach (self::DOMAINS as $domain) {
-            $domainSeries[$domain] = [];
-        }
-        foreach (self::FACETS as $facet) {
-            $facetSeries[$facet] = [];
-        }
-
-        foreach ($records as $row) {
-            foreach (self::DOMAINS as $domain) {
-                $domainSeries[$domain][] = (float) $row['domains'][$domain];
-            }
-            foreach (self::FACETS as $facet) {
-                $facetSeries[$facet][] = (float) $row['facets'][$facet];
-            }
-        }
-
-        $domainStats = [];
-        foreach (self::DOMAINS as $domain) {
-            $series = $domainSeries[$domain];
-            $domainStats[$domain] = [
-                'mean' => round($this->mean($series), 4),
-                'sd' => round($this->populationSd($series), 4),
+            $stat = $domainStats[$domain];
+            $normalizedDomainStats[$domain] = [
+                'mean' => round($this->statMean($stat), 4),
+                'sd' => round($this->statPopulationSd($stat), 4),
             ];
         }
 
-        $facetStats = [];
+        $normalizedFacetStats = [];
         foreach (self::FACETS as $facet) {
-            $series = $facetSeries[$facet];
-            $facetStats[$facet] = [
-                'mean' => round($this->mean($series), 4),
-                'sd' => round($this->populationSd($series), 4),
+            $stat = $facetStats[$facet];
+            $normalizedFacetStats[$facet] = [
+                'mean' => round($this->statMean($stat), 4),
+                'sd' => round($this->statPopulationSd($stat), 4),
             ];
         }
 
         $domainAlpha = [];
         foreach (self::DOMAINS as $domain) {
             $facets = self::DOMAIN_TO_FACETS[$domain];
-            $matrix = [];
-            foreach ($records as $row) {
-                $matrix[] = array_map(static fn (string $f): float => (float) $row['facets'][$f], $facets);
+            $k = count($facets);
+            if ($k <= 1) {
+                $domainAlpha[$domain] = null;
+
+                continue;
             }
-            $domainAlpha[$domain] = $this->cronbachAlpha($matrix);
+
+            $sumItemVariance = 0.0;
+            foreach ($facets as $facet) {
+                $sumItemVariance += $this->statVariance($facetStats[$facet]);
+            }
+
+            $totalVariance = $this->statVariance($domainTotalStats[$domain]);
+            if ($totalVariance <= 0.0) {
+                $domainAlpha[$domain] = null;
+
+                continue;
+            }
+
+            $alpha = ($k / ($k - 1)) * (1.0 - ($sumItemVariance / $totalVariance));
+            $domainAlpha[$domain] = is_finite($alpha) ? round($alpha, 4) : null;
         }
 
         $facetItemTotalCorr = [];
-        foreach (self::DOMAIN_TO_FACETS as $domain => $facets) {
-            foreach ($facets as $facet) {
-                $x = [];
-                $y = [];
-                foreach ($records as $row) {
-                    $facetValue = (float) $row['facets'][$facet];
-                    $sumOthers = 0.0;
-                    foreach ($facets as $f2) {
-                        if ($f2 === $facet) {
-                            continue;
-                        }
-                        $sumOthers += (float) $row['facets'][$f2];
-                    }
-                    $x[] = $facetValue;
-                    $y[] = $sumOthers;
-                }
-                $facetItemTotalCorr[$facet] = $this->correlation($x, $y);
-            }
+        foreach (self::FACETS as $facet) {
+            $facetItemTotalCorr[$facet] = $this->corrFromStat($facetItemTotalCorrStats[$facet]);
         }
 
         $thresholds = (array) config('big5_norms.psychometrics.thresholds', []);
 
         return [
-            'sample_n' => count($records),
+            'sample_n' => $sampleN,
             'window_days' => $windowDays,
             'quality_filter' => $qualityLevels,
             'domain_alpha' => $domainAlpha,
-            'domain_stats' => $domainStats,
-            'facet_stats' => $facetStats,
+            'domain_stats' => $normalizedDomainStats,
+            'facet_stats' => $normalizedFacetStats,
             'facet_item_total_corr' => $facetItemTotalCorr,
             'thresholds' => $thresholds,
         ];
     }
 
     /**
-     * @param list<list<float>> $matrix
+     * @param  list<string>  $codes
+     * @return array<string,array{n:int,sum:float,sum_sq:float}>
      */
-    private function cronbachAlpha(array $matrix): ?float
+    private function initStats(array $codes): array
     {
-        if ($matrix === []) {
-            return null;
-        }
-        $k = count($matrix[0] ?? []);
-        if ($k <= 1) {
-            return null;
+        $stats = [];
+        foreach ($codes as $code) {
+            $stats[$code] = ['n' => 0, 'sum' => 0.0, 'sum_sq' => 0.0];
         }
 
-        $itemVariances = array_fill(0, $k, []);
-        $totalScores = [];
-
-        foreach ($matrix as $row) {
-            if (count($row) !== $k) {
-                return null;
-            }
-            $totalScores[] = array_sum($row);
-            for ($i = 0; $i < $k; $i++) {
-                $itemVariances[$i][] = (float) $row[$i];
-            }
-        }
-
-        $sumItemVariance = 0.0;
-        for ($i = 0; $i < $k; $i++) {
-            $sumItemVariance += $this->populationSd($itemVariances[$i]) ** 2;
-        }
-
-        $totalVariance = $this->populationSd($totalScores) ** 2;
-        if ($totalVariance <= 0.0) {
-            return null;
-        }
-
-        $alpha = ($k / ($k - 1)) * (1.0 - ($sumItemVariance / $totalVariance));
-        if (!is_finite($alpha)) {
-            return null;
-        }
-
-        return round($alpha, 4);
+        return $stats;
     }
 
     /**
-     * @param list<float> $x
-     * @param list<float> $y
+     * @param  list<string>  $codes
+     * @return array<string,array{n:int,sum_x:float,sum_y:float,sum_x2:float,sum_y2:float,sum_xy:float}>
      */
-    private function correlation(array $x, array $y): ?float
+    private function initCorrelations(array $codes): array
     {
-        $n = count($x);
-        if ($n === 0 || $n !== count($y)) {
+        $stats = [];
+        foreach ($codes as $code) {
+            $stats[$code] = [
+                'n' => 0,
+                'sum_x' => 0.0,
+                'sum_y' => 0.0,
+                'sum_x2' => 0.0,
+                'sum_y2' => 0.0,
+                'sum_xy' => 0.0,
+            ];
+        }
+
+        return $stats;
+    }
+
+    /**
+     * @param  array{n:int,sum:float,sum_sq:float}  $stat
+     */
+    private function pushStat(array &$stat, float $value): void
+    {
+        $stat['n']++;
+        $stat['sum'] += $value;
+        $stat['sum_sq'] += $value * $value;
+    }
+
+    /**
+     * @param  array{n:int,sum_x:float,sum_y:float,sum_x2:float,sum_y2:float,sum_xy:float}  $stat
+     */
+    private function pushCorrelation(array &$stat, float $x, float $y): void
+    {
+        $stat['n']++;
+        $stat['sum_x'] += $x;
+        $stat['sum_y'] += $y;
+        $stat['sum_x2'] += $x * $x;
+        $stat['sum_y2'] += $y * $y;
+        $stat['sum_xy'] += $x * $y;
+    }
+
+    /**
+     * @param  array{n:int,sum:float,sum_sq:float}  $stat
+     */
+    private function statMean(array $stat): float
+    {
+        if ($stat['n'] <= 0) {
+            return 0.0;
+        }
+
+        return $stat['sum'] / $stat['n'];
+    }
+
+    /**
+     * @param  array{n:int,sum:float,sum_sq:float}  $stat
+     */
+    private function statPopulationSd(array $stat): float
+    {
+        $variance = $this->statVariance($stat);
+
+        return $variance > 0.0 ? sqrt($variance) : 0.0;
+    }
+
+    /**
+     * @param  array{n:int,sum:float,sum_sq:float}  $stat
+     */
+    private function statVariance(array $stat): float
+    {
+        if ($stat['n'] <= 0) {
+            return 0.0;
+        }
+
+        $mean = $stat['sum'] / $stat['n'];
+        $variance = ($stat['sum_sq'] / $stat['n']) - ($mean * $mean);
+        if ($variance < 0.0 && abs($variance) < 1e-12) {
+            return 0.0;
+        }
+
+        return $variance > 0.0 ? $variance : 0.0;
+    }
+
+    /**
+     * @param  array{n:int,sum_x:float,sum_y:float,sum_x2:float,sum_y2:float,sum_xy:float}  $stat
+     */
+    private function corrFromStat(array $stat): ?float
+    {
+        $n = $stat['n'];
+        if ($n <= 0) {
             return null;
         }
 
-        $meanX = $this->mean($x);
-        $meanY = $this->mean($y);
-        $sumXY = 0.0;
-        $sumXX = 0.0;
-        $sumYY = 0.0;
-
-        for ($i = 0; $i < $n; $i++) {
-            $dx = $x[$i] - $meanX;
-            $dy = $y[$i] - $meanY;
-            $sumXY += $dx * $dy;
-            $sumXX += $dx * $dx;
-            $sumYY += $dy * $dy;
-        }
-
+        $sumX = $stat['sum_x'];
+        $sumY = $stat['sum_y'];
+        $sumXX = $stat['sum_x2'] - (($sumX * $sumX) / $n);
+        $sumYY = $stat['sum_y2'] - (($sumY * $sumY) / $n);
         if ($sumXX <= 0.0 || $sumYY <= 0.0) {
             return null;
         }
 
+        $sumXY = $stat['sum_xy'] - (($sumX * $sumY) / $n);
         $corr = $sumXY / sqrt($sumXX * $sumYY);
-        if (!is_finite($corr)) {
+        if (! is_finite($corr)) {
             return null;
         }
 
         return round($corr, 4);
-    }
-
-    /**
-     * @param list<float> $values
-     */
-    private function mean(array $values): float
-    {
-        if ($values === []) {
-            return 0.0;
-        }
-
-        return array_sum($values) / count($values);
-    }
-
-    /**
-     * @param list<float> $values
-     */
-    private function populationSd(array $values): float
-    {
-        if ($values === []) {
-            return 0.0;
-        }
-
-        $mean = $this->mean($values);
-        $sum = 0.0;
-        foreach ($values as $value) {
-            $d = ((float) $value) - $mean;
-            $sum += $d * $d;
-        }
-
-        return sqrt($sum / count($values));
     }
 
     /**

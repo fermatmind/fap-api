@@ -36,8 +36,6 @@ class AttemptStartService
         private Eq60PackLoader $eq60PackLoader,
         private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
-        private EventRecorder $eventRecorder,
-        private BigFiveTelemetry $bigFiveTelemetry,
     ) {}
 
     public function start(OrgContext $ctx, StartAttemptDTO $dto): array
@@ -250,7 +248,7 @@ class AttemptStartService
             $attempt->save();
         }
 
-        $this->eventRecorder->record('test_start', $ctx->userId(), [
+        $this->eventRecorder()->record('test_start', $ctx->userId(), [
             'scale_code' => $scaleCode,
             'scale_code_v2' => $scaleCodeV2,
             'scale_uid' => $scaleUid,
@@ -271,7 +269,7 @@ class AttemptStartService
         ]);
 
         if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
-            $this->bigFiveTelemetry->recordAttemptStarted(
+            $this->bigFiveTelemetry()->recordAttemptStarted(
                 $orgId,
                 $ctx->userId(),
                 $anonId,
@@ -312,6 +310,16 @@ class AttemptStartService
             'resume_token' => (string) ($draft['token'] ?? ''),
             'resume_expires_at' => ! empty($draft['expires_at']) ? $draft['expires_at']->toISOString() : null,
         ];
+    }
+
+    private function eventRecorder(): EventRecorder
+    {
+        return app(EventRecorder::class);
+    }
+
+    private function bigFiveTelemetry(): BigFiveTelemetry
+    {
+        return app(BigFiveTelemetry::class);
     }
 
     private function runtimePolicy(): ScaleIdentityRuntimePolicy
