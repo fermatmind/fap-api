@@ -11,7 +11,7 @@ final class ScaleImpactResolverTest extends TestCase
 {
     public function test_shared_layer_change_triggers_full_regression(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/app/Services/Template/TemplateEngine.php',
         ]);
@@ -24,7 +24,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_big5_only_change_runs_big5_gate_and_keeps_mbti_smoke(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/content_packs/BIG5_OCEAN/v1/raw/questions_big5_bilingual.csv',
         ]);
@@ -38,7 +38,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_mbti_only_change_skips_big5_gate(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3/questions.json',
         ]);
@@ -51,7 +51,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_clinical_only_change_runs_clinical_gate_and_keeps_mbti_smoke(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/content_packs/CLINICAL_COMBO_68/v1/raw/policy.json',
         ]);
@@ -65,7 +65,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_sds_only_change_runs_sds_gate_and_keeps_mbti_smoke(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/content_packs/SDS_20/v1/raw/policy.json',
         ]);
@@ -79,7 +79,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_sds_norms_change_runs_sds_norms_gate(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/config/sds_norms.php',
         ]);
@@ -92,7 +92,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_sds_content_change_does_not_force_sds_norms_gate(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/content_packs/SDS_20/v1/raw/policy.json',
         ]);
@@ -104,7 +104,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_shared_layer_change_enables_sds_gate_too(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/app/Services/Report/ReportGatekeeper.php',
         ]);
@@ -117,7 +117,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_eq_only_content_change_runs_eq_gate_only(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/content_packs/EQ_60/v1/raw/policy.json',
         ]);
@@ -132,7 +132,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_eq_compiled_change_runs_eq_gate_only(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/content_packs/EQ_60/v1/compiled/manifest.json',
         ]);
@@ -149,7 +149,7 @@ final class ScaleImpactResolverTest extends TestCase
 
     public function test_eq_specific_class_change_does_not_force_full_regression(): void
     {
-        $resolver = new ScaleImpactResolver();
+        $resolver = new ScaleImpactResolver;
         $result = $resolver->resolve([
             'backend/app/Services/Assessment/Drivers/Eq60Driver.php',
         ]);
@@ -158,5 +158,29 @@ final class ScaleImpactResolverTest extends TestCase
         $this->assertTrue((bool) ($result['eq_60_changed'] ?? false));
         $this->assertTrue((bool) ($result['run_eq_60_gate'] ?? false));
         $this->assertSame('eq60_with_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
+    }
+
+    public function test_ci_verify_mbti_workflow_change_triggers_full_regression(): void
+    {
+        $resolver = new ScaleImpactResolver;
+        $result = $resolver->resolve([
+            '.github/workflows/ci_verify_mbti.yml',
+        ]);
+
+        $this->assertTrue((bool) ($result['shared_changed'] ?? false));
+        $this->assertTrue((bool) ($result['run_full_scale_regression'] ?? false));
+        $this->assertSame('full_regression', (string) ($result['scale_scope'] ?? ''));
+    }
+
+    public function test_ci_contract_script_change_triggers_full_regression(): void
+    {
+        $resolver = new ScaleImpactResolver;
+        $result = $resolver->resolve([
+            'backend/scripts/ci/verify_scale_identity_contract.sh',
+        ]);
+
+        $this->assertTrue((bool) ($result['shared_changed'] ?? false));
+        $this->assertTrue((bool) ($result['run_full_scale_regression'] ?? false));
+        $this->assertSame('full_regression', (string) ($result['scale_scope'] ?? ''));
     }
 }

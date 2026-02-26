@@ -59,3 +59,26 @@ strict gate 指标（同窗口）：
 - `backend/artifacts/scale_identity_rollout/scale_runtime_storage_audit_20260226_004148.md`
 - `backend/artifacts/scale_identity_rollout/scale_dir_completeness_audit_20260226_003624.md`
 
+## 7) Phase-B 护栏附录（模式语义审计）
+
+为避免“配置值合法但组合语义冲突”的发布风险，Phase-B 增加发布前强校验：
+
+- 命令：`php artisan ops:scale-identity-mode-audit --json=1 --strict=1`
+- 发布门禁脚本：`backend/scripts/prA_gate_scale_identity.sh` 已接入该校验。
+
+当前审计规则（strict 失败条件）：
+
+1. 枚举值非法（任何 mode 超出允许集合）：
+   - `write_mode`: `legacy|dual|v2`
+   - `read_mode`: `legacy|dual_prefer_old|dual_prefer_new|v2`
+   - `content_path_mode`: `legacy|dual_prefer_old|dual_prefer_new|v2`
+   - `content_publish_mode`: `legacy|dual|v2`
+   - `api_response_scale_code_mode`: `legacy|dual|v2`
+2. 语义冲突：
+   - `read_mode=v2` 且 `write_mode=legacy`
+   - `read_mode=v2` 且 `accept_legacy_scale_code=true`
+
+说明：
+
+- 警告项（warnings）用于提示高耦合组合，不直接阻断发布。
+- strict 只在 violations 非空时阻断，保证“可回滚 + 可观测 + 可阻断”。

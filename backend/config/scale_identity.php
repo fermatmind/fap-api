@@ -21,8 +21,15 @@ return [
     'api_response_scale_code_mode' => env('FAP_API_RESPONSE_SCALE_CODE_MODE', 'legacy'),
 
     // Content path read mode and publish mode.
+    // content_path_mode: legacy|dual_prefer_old|dual_prefer_new|v2
+    // content_publish_mode: legacy|dual|v2
     'content_path_mode' => env('FAP_CONTENT_PATH_MODE', 'legacy'),
     'content_publish_mode' => env('FAP_CONTENT_PUBLISH_MODE', 'legacy'),
+
+    // Mode semantic guardrails (enforced by ops:scale-identity-mode-audit):
+    // 1) read_mode=v2 requires write_mode in {dual,v2}
+    // 2) read_mode=v2 requires accept_legacy_scale_code=false
+    // 3) Other combinations are allowed but may emit warnings in audit output.
 
     // Demo scale switch for offboarding.
     'allow_demo_scales' => (bool) env('FAP_ALLOW_DEMO_SCALES', true),

@@ -5,6 +5,7 @@ namespace App\Services\V0_3;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Models\Share;
+use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Support\OrgContext;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -12,6 +13,10 @@ use Illuminate\Database\QueryException;
 
 class ShareService
 {
+    public function __construct(
+        private readonly ScaleIdentityWriteProjector $identityProjector,
+    ) {}
+
     public function getOrCreateShare(string $attemptId, OrgContext $ctx): array
     {
         $attempt = $this->findAccessibleAttempt($attemptId, $ctx);
@@ -25,7 +30,7 @@ class ShareService
             ->where('attempt_id', $attemptId)
             ->first();
 
-        if (!$share) {
+        if (! $share) {
             $share = $this->createShare($attempt, $ctx->anonId());
         } else {
             $this->backfillShareScaleIdentityIfNeeded($share, $attempt);
@@ -36,7 +41,7 @@ class ShareService
         $typeName = (string) ($resultJson['type_name'] ?? $resultJson['type'] ?? $typeCode);
 
         $shareId = (string) $share->id;
-        $shareUrl = rtrim((string) config('app.frontend_url', 'http://localhost'), '/') . '/share/' . $shareId;
+        $shareUrl = rtrim((string) config('app.frontend_url', 'http://localhost'), '/').'/share/'.$shareId;
 
         return [
             'share_id' => $shareId,
@@ -61,7 +66,7 @@ class ShareService
         $orgId = (int) ($attempt->org_id ?? 0);
         $ctxOrgId = max(0, (int) app(OrgContext::class)->orgId());
         if ($ctxOrgId > 0 && $ctxOrgId !== $orgId) {
-            throw (new ModelNotFoundException())->setModel(Share::class, [$shareId]);
+            throw (new ModelNotFoundException)->setModel(Share::class, [$shareId]);
         }
 
         $result = Result::query()
@@ -94,12 +99,12 @@ class ShareService
             ->where('id', $attemptId)
             ->where('org_id', $ctx->orgId());
 
-        if (!$this->isAdmin($ctx)) {
+        if (! $this->isAdmin($ctx)) {
             $userId = $ctx->userId();
             $anonId = $ctx->anonId();
 
             if ($userId === null && ($anonId === null || $anonId === '')) {
-                throw (new ModelNotFoundException())->setModel(Attempt::class, [$attemptId]);
+                throw (new ModelNotFoundException)->setModel(Attempt::class, [$attemptId]);
             }
 
             $query->where(function (Builder $sub) use ($userId, $anonId): void {
@@ -122,7 +127,7 @@ class ShareService
 
     private function createShare(Attempt $attempt, ?string $anonId): Share
     {
-        $share = new Share();
+        $share = new Share;
         $share->id = bin2hex(random_bytes(16));
         $share->attempt_id = (string) $attempt->id;
         $share->anon_id = $anonId;
@@ -137,6 +142,7 @@ class ShareService
 
         try {
             $share->save();
+
             return $share;
         } catch (QueryException $e) {
             return Share::query()
@@ -147,7 +153,7 @@ class ShareService
 
     private function backfillShareScaleIdentityIfNeeded(Share $share, Attempt $attempt): void
     {
-        if (!$this->shouldWriteScaleIdentityColumns()) {
+        if (! $this->shouldWriteScaleIdentityColumns()) {
             return;
         }
 
@@ -163,7 +169,7 @@ class ShareService
             $dirty = true;
         }
 
-        if (!$dirty) {
+        if (! $dirty) {
             return;
         }
 
@@ -179,23 +185,11 @@ class ShareService
      */
     private function resolveScaleIdentityValues(Attempt $attempt): array
     {
-        $legacyCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
-        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
-        $scaleUid = trim((string) ($attempt->scale_uid ?? ''));
-
-        $mapV1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
-        $uidMap = (array) config('scale_identity.scale_uid_map', []);
-
-        if ($scaleCodeV2 === '' && $legacyCode !== '' && isset($mapV1ToV2[$legacyCode])) {
-            $scaleCodeV2 = strtoupper(trim((string) $mapV1ToV2[$legacyCode]));
-        }
-        if ($scaleUid === '' && $legacyCode !== '' && isset($uidMap[$legacyCode])) {
-            $scaleUid = trim((string) $uidMap[$legacyCode]);
-        }
+        $identity = $this->identityProjector->projectFromAttempt($attempt);
 
         return [
-            $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
-            $scaleUid !== '' ? $scaleUid : null,
+            $identity['scale_code_v2'],
+            $identity['scale_uid'],
         ];
     }
 

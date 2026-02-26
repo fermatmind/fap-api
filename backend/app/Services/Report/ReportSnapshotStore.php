@@ -6,11 +6,13 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\GenericReportBuilder;
+use App\Services\Scale\ScaleIdentityWriteProjector;
 use Illuminate\Support\Facades\DB;
 
 class ReportSnapshotStore
 {
     private const SNAPSHOT_VERSION = 'v1';
+
     private const REPORT_ENGINE_VERSION = 'v1.2';
 
     public function __construct(
@@ -21,10 +23,11 @@ class ReportSnapshotStore
         private Eq60ReportComposer $eq60ReportComposer,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
+        private ScaleIdentityWriteProjector $identityProjector,
     ) {}
 
     /**
-     * @param array $meta {scale_code?:string, scale_code_v2?:string, scale_uid?:string, pack_id?:string, dir_version?:string, scoring_spec_version?:string}
+     * @param  array  $meta  {scale_code?:string, scale_code_v2?:string, scale_uid?:string, pack_id?:string, dir_version?:string, scoring_spec_version?:string}
      */
     public function seedPendingSnapshot(int $orgId, string $attemptId, ?string $orderNo, array $meta): void
     {
@@ -43,7 +46,7 @@ class ReportSnapshotStore
         $scoringSpecVersion = $meta['scoring_spec_version'] ?? null;
         if (is_string($scoringSpecVersion)) {
             $scoringSpecVersion = trim($scoringSpecVersion) !== '' ? trim($scoringSpecVersion) : null;
-        } elseif (!is_numeric($scoringSpecVersion)) {
+        } elseif (! is_numeric($scoringSpecVersion)) {
             $scoringSpecVersion = null;
         }
         $scaleCode = strtoupper(trim((string) ($meta['scale_code'] ?? '')));
@@ -116,7 +119,7 @@ class ReportSnapshotStore
     }
 
     /**
-     * @param array $ctx {org_id:int, attempt_id:string, trigger_source:string, order_no?:string, user_id?:string, anon_id?:string, org_role?:string}
+     * @param  array  $ctx  {org_id:int, attempt_id:string, trigger_source:string, order_no?:string, user_id?:string, anon_id?:string, org_role?:string}
      */
     public function createSnapshotForAttempt(array $ctx): array
     {
@@ -142,12 +145,12 @@ class ReportSnapshotStore
         }
 
         $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
-        if (!$attempt) {
+        if (! $attempt) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
         $result = Result::where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
-        if (!$result) {
+        if (! $result) {
             return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
         }
 
@@ -177,7 +180,7 @@ class ReportSnapshotStore
             $modulesFull,
             $modulesPreview
         );
-        if (!is_array($reportFull)) {
+        if (! is_array($reportFull)) {
             return $this->serverError('REPORT_FAILED', 'report generation failed.');
         }
 
@@ -189,7 +192,7 @@ class ReportSnapshotStore
             ReportAccess::defaultModulesAllowedForLocked($scaleCode),
             $modulesPreview
         );
-        if (!is_array($reportFree)) {
+        if (! is_array($reportFree)) {
             return $this->serverError('REPORT_FAILED', 'report generation failed.');
         }
 
@@ -301,7 +304,7 @@ class ReportSnapshotStore
 
     private function normalizeActor(mixed $raw): ?string
     {
-        if (!is_string($raw) && !is_numeric($raw)) {
+        if (! is_string($raw) && ! is_numeric($raw)) {
             return null;
         }
 
@@ -348,8 +351,7 @@ class ReportSnapshotStore
         string $variant,
         array $modulesAllowed = [],
         array $modulesPreview = []
-    ): ?array
-    {
+    ): ?array {
         if ($scaleCode === 'MBTI') {
             $composed = $this->reportComposer->composeVariant($attempt, $variant, [
                 'org_id' => (int) ($attempt->org_id ?? 0),
@@ -360,7 +362,7 @@ class ReportSnapshotStore
                 'modules_allowed' => $modulesAllowed,
                 'modules_preview' => $modulesPreview,
             ], $result);
-            if (!($composed['ok'] ?? false)) {
+            if (! ($composed['ok'] ?? false)) {
                 return null;
             }
             $report = $composed['report'] ?? null;
@@ -378,7 +380,7 @@ class ReportSnapshotStore
                 'modules_allowed' => $modulesAllowed,
                 'modules_preview' => $modulesPreview,
             ]);
-            if (!($composed['ok'] ?? false)) {
+            if (! ($composed['ok'] ?? false)) {
                 return null;
             }
             $report = $composed['report'] ?? null;
@@ -396,7 +398,7 @@ class ReportSnapshotStore
                 'modules_allowed' => $modulesAllowed,
                 'modules_preview' => $modulesPreview,
             ]);
-            if (!($composed['ok'] ?? false)) {
+            if (! ($composed['ok'] ?? false)) {
                 return null;
             }
             $report = $composed['report'] ?? null;
@@ -414,7 +416,7 @@ class ReportSnapshotStore
                 'modules_allowed' => $modulesAllowed,
                 'modules_preview' => $modulesPreview,
             ]);
-            if (!($composed['ok'] ?? false)) {
+            if (! ($composed['ok'] ?? false)) {
                 return null;
             }
             $report = $composed['report'] ?? null;
@@ -432,7 +434,7 @@ class ReportSnapshotStore
                 'modules_allowed' => $modulesAllowed,
                 'modules_preview' => $modulesPreview,
             ]);
-            if (!($composed['ok'] ?? false)) {
+            if (! ($composed['ok'] ?? false)) {
                 return null;
             }
             $report = $composed['report'] ?? null;
@@ -490,6 +492,7 @@ class ReportSnapshotStore
         }
         if (is_string($raw)) {
             $decoded = json_decode($raw, true);
+
             return is_array($decoded) ? $decoded : [];
         }
 
@@ -532,23 +535,11 @@ class ReportSnapshotStore
      */
     private function resolveScaleIdentityValues(string $scaleCode, string $scaleCodeV2, string $scaleUid): array
     {
-        $legacyCode = strtoupper(trim($scaleCode));
-        $resolvedV2 = strtoupper(trim($scaleCodeV2));
-        $resolvedUid = trim($scaleUid);
-
-        $mapV1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
-        $uidMap = (array) config('scale_identity.scale_uid_map', []);
-
-        if ($resolvedV2 === '' && $legacyCode !== '' && isset($mapV1ToV2[$legacyCode])) {
-            $resolvedV2 = strtoupper(trim((string) $mapV1ToV2[$legacyCode]));
-        }
-        if ($resolvedUid === '' && $legacyCode !== '' && isset($uidMap[$legacyCode])) {
-            $resolvedUid = trim((string) $uidMap[$legacyCode]);
-        }
+        $identity = $this->identityProjector->projectFromCodes($scaleCode, $scaleCodeV2, $scaleUid);
 
         return [
-            $resolvedV2 !== '' ? $resolvedV2 : null,
-            $resolvedUid !== '' ? $resolvedUid : null,
+            $identity['scale_code_v2'],
+            $identity['scale_uid'],
         ];
     }
 

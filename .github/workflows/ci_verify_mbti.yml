@@ -221,6 +221,8 @@ jobs:
           RUN_EQ_60_GATE: ${{ steps.scale-impact.outputs.run_eq_60_gate }}
           RUN_SDS_NORMS_GATE: ${{ steps.scale-impact.outputs.run_sds_norms_gate }}
           RUN_FULL_SCALE_REGRESSION: ${{ steps.scale-impact.outputs.run_full_scale_regression }}
+          RUN_SCALE_IDENTITY_CONTRACT: ${{ steps.scale-impact.outputs.run_full_scale_regression }}
+          RUN_SCALE_IDENTITY_GATE: ${{ steps.scale-impact.outputs.run_full_scale_regression }}
           SCALE_SCOPE: ${{ steps.scale-impact.outputs.scale_scope }}
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
