@@ -93,9 +93,12 @@ class EntitlementManager
             ->where('attempt_id', $attemptId)
             ->first();
 
-        $grantedModules = ReportAccess::normalizeModules($modules ?? $this->modulesFromBenefitCode($benefitCode));
-        $freeModule = $this->freeModuleFromBenefitCode($benefitCode);
-        if ($grantedModules !== [] && !in_array($freeModule, $grantedModules, true)) {
+        $catalog = $this->benefitModuleRuleCatalog();
+        $grantedModules = ReportAccess::normalizeModules(
+            $modules ?? $catalog->modulesForBenefitCode($orgId, $benefitCode)
+        );
+        $freeModule = $catalog->freeModuleForBenefitCode($orgId, $benefitCode);
+        if ($grantedModules !== [] && $freeModule !== '' && !in_array($freeModule, $grantedModules, true)) {
             $grantedModules[] = $freeModule;
             $grantedModules = ReportAccess::normalizeModules($grantedModules);
         }
@@ -215,7 +218,10 @@ class EntitlementManager
             );
             $modules = array_merge(
                 $modules,
-                $this->modulesFromBenefitCode((string) ($row->benefit_code ?? ''))
+                $this->benefitModuleRuleCatalog()->modulesForBenefitCode(
+                    $orgId,
+                    (string) ($row->benefit_code ?? '')
+                )
             );
         }
 
@@ -322,69 +328,6 @@ class EntitlementManager
     }
 
     /**
-     * @return list<string>
-     */
-    private function modulesFromBenefitCode(string $benefitCode): array
-    {
-        $benefitCode = strtoupper(trim($benefitCode));
-        if ($benefitCode === '') {
-            return [];
-        }
-
-        return match ($benefitCode) {
-            'MBTI_REPORT_FULL' => [
-                ReportAccess::MODULE_CORE_FULL,
-                ReportAccess::MODULE_CAREER,
-                ReportAccess::MODULE_RELATIONSHIPS,
-            ],
-            'MBTI_CAREER' => [ReportAccess::MODULE_CAREER],
-            'MBTI_RELATIONSHIP', 'MBTI_RELATIONSHIPS' => [ReportAccess::MODULE_RELATIONSHIPS],
-            'BIG5_FULL_REPORT', 'BIG5_FULL' => [
-                ReportAccess::MODULE_BIG5_FULL,
-                ReportAccess::MODULE_BIG5_ACTION_PLAN,
-            ],
-            'BIG5_ACTION_PLAN' => [ReportAccess::MODULE_BIG5_ACTION_PLAN],
-            'CLINICAL_COMBO_68_PRO' => [
-                ReportAccess::MODULE_CLINICAL_FULL,
-                ReportAccess::MODULE_CLINICAL_RESILIENCE,
-                ReportAccess::MODULE_CLINICAL_PERFECTIONISM,
-                ReportAccess::MODULE_CLINICAL_ACTION_PLAN,
-            ],
-            'SDS_20_FULL' => [
-                ReportAccess::MODULE_SDS_FULL,
-                ReportAccess::MODULE_SDS_FACTOR_DEEPDIVE,
-                ReportAccess::MODULE_SDS_ACTION_PLAN,
-            ],
-            'EQ_60_FULL' => [
-                ReportAccess::MODULE_EQ_FULL,
-                ReportAccess::MODULE_EQ_CROSS_INSIGHTS,
-                ReportAccess::MODULE_EQ_GROWTH_PLAN,
-            ],
-            default => [],
-        };
-    }
-
-    private function freeModuleFromBenefitCode(string $benefitCode): string
-    {
-        $benefitCode = strtoupper(trim($benefitCode));
-
-        if ($benefitCode === 'BIG5_FULL_REPORT' || $benefitCode === 'BIG5_ACTION_PLAN' || $benefitCode === 'BIG5_FULL') {
-            return ReportAccess::MODULE_BIG5_CORE;
-        }
-        if ($benefitCode === 'CLINICAL_COMBO_68_PRO') {
-            return ReportAccess::MODULE_CLINICAL_CORE;
-        }
-        if ($benefitCode === 'SDS_20_FULL') {
-            return ReportAccess::MODULE_SDS_CORE;
-        }
-        if ($benefitCode === 'EQ_60_FULL') {
-            return ReportAccess::MODULE_EQ_CORE;
-        }
-
-        return ReportAccess::MODULE_CORE_FREE;
-    }
-
-    /**
      * @return array<string,mixed>
      */
     private function decodeMeta(mixed $meta): array
@@ -401,5 +344,10 @@ class EntitlementManager
         }
 
         return [];
+    }
+
+    private function benefitModuleRuleCatalog(): BenefitModuleRuleCatalog
+    {
+        return app(BenefitModuleRuleCatalog::class);
     }
 }

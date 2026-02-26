@@ -51,6 +51,7 @@ return [
             'attempts',
             'attempt_submissions',
             'audit_logs',
+            'benefit_module_rules',
             'content_pack_releases',
             'data_lifecycle_requests',
             'dsar_requests',
