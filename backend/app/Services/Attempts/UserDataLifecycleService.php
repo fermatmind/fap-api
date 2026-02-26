@@ -7,7 +7,6 @@ namespace App\Services\Attempts;
 use App\Support\SensitiveDataRedactor;
 use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 final class UserDataLifecycleService
@@ -409,7 +408,7 @@ final class UserDataLifecycleService
     {
         $set = [];
 
-        if (Schema::hasTable('attempts') && Schema::hasColumn('attempts', 'anon_id') && Schema::hasColumn('attempts', 'user_id')) {
+        if (SchemaBaseline::hasTable('attempts') && SchemaBaseline::hasColumn('attempts', 'anon_id') && SchemaBaseline::hasColumn('attempts', 'user_id')) {
             $rows = DB::table('attempts')
                 ->where('org_id', $orgId)
                 ->where('user_id', $subjectUserIdStr)
@@ -422,7 +421,7 @@ final class UserDataLifecycleService
             }
         }
 
-        if (Schema::hasTable('auth_tokens') && Schema::hasColumn('auth_tokens', 'anon_id')) {
+        if (SchemaBaseline::hasTable('auth_tokens') && SchemaBaseline::hasColumn('auth_tokens', 'anon_id')) {
             $rows = DB::table('auth_tokens')
                 ->where('org_id', $orgId)
                 ->where('user_id', $subjectUserId)
@@ -435,9 +434,9 @@ final class UserDataLifecycleService
             }
         }
 
-        if (Schema::hasTable('fm_tokens') && Schema::hasColumn('fm_tokens', 'anon_id')) {
+        if (SchemaBaseline::hasTable('fm_tokens') && SchemaBaseline::hasColumn('fm_tokens', 'anon_id')) {
             $query = DB::table('fm_tokens')->where('user_id', $subjectUserId);
-            if (Schema::hasColumn('fm_tokens', 'org_id')) {
+            if (SchemaBaseline::hasColumn('fm_tokens', 'org_id')) {
                 $query->where('org_id', $orgId);
             }
             $rows = $query->pluck('anon_id');
@@ -449,7 +448,7 @@ final class UserDataLifecycleService
             }
         }
 
-        if (Schema::hasTable('orders') && Schema::hasColumn('orders', 'anon_id') && Schema::hasColumn('orders', 'user_id')) {
+        if (SchemaBaseline::hasTable('orders') && SchemaBaseline::hasColumn('orders', 'anon_id') && SchemaBaseline::hasColumn('orders', 'user_id')) {
             $rows = DB::table('orders')
                 ->where('org_id', $orgId)
                 ->where('user_id', $subjectUserIdStr)
@@ -467,12 +466,12 @@ final class UserDataLifecycleService
 
     private function pseudonymizeEvents(int $orgId, int $subjectUserId, string $redactedAnonId, array $subjectAnonIds): int
     {
-        if (! Schema::hasTable('events')) {
+        if (! SchemaBaseline::hasTable('events')) {
             return 0;
         }
 
-        $hasUserId = Schema::hasColumn('events', 'user_id');
-        $hasAnonId = Schema::hasColumn('events', 'anon_id');
+        $hasUserId = SchemaBaseline::hasColumn('events', 'user_id');
+        $hasAnonId = SchemaBaseline::hasColumn('events', 'anon_id');
         $canFilterByUser = $hasUserId;
         $canFilterByAnon = $hasAnonId && $subjectAnonIds !== [];
         if (! $canFilterByUser && ! $canFilterByAnon) {
@@ -490,7 +489,7 @@ final class UserDataLifecycleService
         });
 
         $updates = [];
-        if (Schema::hasColumn('events', 'updated_at')) {
+        if (SchemaBaseline::hasColumn('events', 'updated_at')) {
             $updates['updated_at'] = now();
         }
         if ($hasUserId) {
@@ -499,7 +498,7 @@ final class UserDataLifecycleService
         if ($hasAnonId) {
             $updates['anon_id'] = $redactedAnonId;
         }
-        if (Schema::hasColumn('events', 'meta_json')) {
+        if (SchemaBaseline::hasColumn('events', 'meta_json')) {
             $updates['meta_json'] = json_encode([
                 'redacted' => true,
                 'reason' => 'user_dsar_request',
@@ -516,12 +515,12 @@ final class UserDataLifecycleService
      */
     private function pseudonymizeOrders(int $orgId, string $subjectUserIdStr, string $redactedAnonId, array $subjectAnonIds): array
     {
-        if (! Schema::hasTable('orders') || ! Schema::hasColumn('orders', 'org_id')) {
+        if (! SchemaBaseline::hasTable('orders') || ! SchemaBaseline::hasColumn('orders', 'org_id')) {
             return [0, []];
         }
 
-        $hasUserId = Schema::hasColumn('orders', 'user_id');
-        $hasAnonId = Schema::hasColumn('orders', 'anon_id');
+        $hasUserId = SchemaBaseline::hasColumn('orders', 'user_id');
+        $hasAnonId = SchemaBaseline::hasColumn('orders', 'anon_id');
         $canFilterByUser = $hasUserId;
         $canFilterByAnon = $hasAnonId && $subjectAnonIds !== [];
         if (! $canFilterByUser && ! $canFilterByAnon) {
@@ -539,7 +538,7 @@ final class UserDataLifecycleService
         });
 
         $orderNos = [];
-        if (Schema::hasColumn('orders', 'order_no')) {
+        if (SchemaBaseline::hasColumn('orders', 'order_no')) {
             $orderNos = array_values(array_unique(array_filter(
                 array_map(
                     static fn (mixed $v): string => trim((string) $v),
@@ -550,7 +549,7 @@ final class UserDataLifecycleService
         }
 
         $updates = [];
-        if (Schema::hasColumn('orders', 'updated_at')) {
+        if (SchemaBaseline::hasColumn('orders', 'updated_at')) {
             $updates['updated_at'] = now();
         }
         if ($hasUserId) {
@@ -559,10 +558,10 @@ final class UserDataLifecycleService
         if ($hasAnonId) {
             $updates['anon_id'] = $redactedAnonId;
         }
-        if (Schema::hasColumn('orders', 'contact_email_hash')) {
+        if (SchemaBaseline::hasColumn('orders', 'contact_email_hash')) {
             $updates['contact_email_hash'] = null;
         }
-        if (Schema::hasColumn('orders', 'meta_json')) {
+        if (SchemaBaseline::hasColumn('orders', 'meta_json')) {
             $updates['meta_json'] = $this->redactedJson([
                 'retained' => true,
                 'reason' => 'user_dsar_request',
@@ -580,24 +579,24 @@ final class UserDataLifecycleService
      */
     private function pseudonymizePaymentEvents(int $orgId, array $orderNos): int
     {
-        if (! Schema::hasTable('payment_events') || $orderNos === []) {
+        if (! SchemaBaseline::hasTable('payment_events') || $orderNos === []) {
             return 0;
         }
-        if (! Schema::hasColumn('payment_events', 'order_no')) {
+        if (! SchemaBaseline::hasColumn('payment_events', 'order_no')) {
             return 0;
         }
 
         $query = DB::table('payment_events');
-        if (Schema::hasColumn('payment_events', 'org_id')) {
+        if (SchemaBaseline::hasColumn('payment_events', 'org_id')) {
             $query->where('org_id', $orgId);
         }
         $query->whereIn('order_no', $orderNos);
 
         $updates = [];
-        if (Schema::hasColumn('payment_events', 'updated_at')) {
+        if (SchemaBaseline::hasColumn('payment_events', 'updated_at')) {
             $updates['updated_at'] = now();
         }
-        if (Schema::hasColumn('payment_events', 'payload_json')) {
+        if (SchemaBaseline::hasColumn('payment_events', 'payload_json')) {
             $updates['payload_json'] = $this->redactedJson([
                 'redacted' => true,
                 'retained' => true,
@@ -605,7 +604,7 @@ final class UserDataLifecycleService
                 'domain' => 'payment_events',
             ]);
         }
-        if (Schema::hasColumn('payment_events', 'payload_excerpt')) {
+        if (SchemaBaseline::hasColumn('payment_events', 'payload_excerpt')) {
             $updates['payload_excerpt'] = '[REDACTED]';
         }
 
@@ -617,12 +616,12 @@ final class UserDataLifecycleService
      */
     private function pseudonymizeBenefitGrants(int $orgId, string $subjectUserIdStr, array $orderNos): int
     {
-        if (! Schema::hasTable('benefit_grants') || ! Schema::hasColumn('benefit_grants', 'org_id')) {
+        if (! SchemaBaseline::hasTable('benefit_grants') || ! SchemaBaseline::hasColumn('benefit_grants', 'org_id')) {
             return 0;
         }
 
-        $hasUserId = Schema::hasColumn('benefit_grants', 'user_id');
-        $hasOrderNo = Schema::hasColumn('benefit_grants', 'order_no');
+        $hasUserId = SchemaBaseline::hasColumn('benefit_grants', 'user_id');
+        $hasOrderNo = SchemaBaseline::hasColumn('benefit_grants', 'order_no');
         $canFilterByUser = $hasUserId;
         $canFilterByOrderNo = $hasOrderNo && $orderNos !== [];
         if (! $canFilterByUser && ! $canFilterByOrderNo) {
@@ -640,13 +639,13 @@ final class UserDataLifecycleService
         });
 
         $updates = [];
-        if (Schema::hasColumn('benefit_grants', 'updated_at')) {
+        if (SchemaBaseline::hasColumn('benefit_grants', 'updated_at')) {
             $updates['updated_at'] = now();
         }
         if ($hasUserId) {
             $updates['user_id'] = null;
         }
-        if (Schema::hasColumn('benefit_grants', 'meta_json')) {
+        if (SchemaBaseline::hasColumn('benefit_grants', 'meta_json')) {
             $updates['meta_json'] = $this->redactedJson([
                 'retained' => true,
                 'reason' => 'user_dsar_request',
@@ -669,7 +668,7 @@ final class UserDataLifecycleService
         array $attemptFailures,
         ?string $errorCode = null
     ): void {
-        if ($requestId === '' || ! Schema::hasTable('dsar_request_tasks')) {
+        if ($requestId === '' || ! SchemaBaseline::hasTable('dsar_request_tasks')) {
             return;
         }
 
@@ -727,7 +726,7 @@ final class UserDataLifecycleService
         array $context = [],
         string $level = 'info'
     ): void {
-        if ($requestId === '' || ! Schema::hasTable('dsar_audit_logs')) {
+        if ($requestId === '' || ! SchemaBaseline::hasTable('dsar_audit_logs')) {
             return;
         }
 
