@@ -10,6 +10,7 @@ use App\Services\Audit\LookupEventLogger;
 use App\Services\Auth\FmTokenService;
 use App\Services\Auth\PhoneOtpService;
 use App\Support\PiiCipher;
+use App\Support\PiiReadFallbackMonitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -43,7 +44,7 @@ class AuthPhoneController extends Controller
         $logger = app(LookupEventLogger::class);
 
         $limitPhone = $limiter->limit('FAP_RATE_SEND_CODE_PHONE', 5);
-        if ($phone !== '' && !$limiter->hit("phone_send_code:phone:{$phone}", $limitPhone, 60)) {
+        if ($phone !== '' && ! $limiter->hit("phone_send_code:phone:{$phone}", $limitPhone, 60)) {
             $logger->log('phone_send_code', false, $request, null, [
                 'error_code' => 'RATE_LIMITED',
                 'scope' => 'phone',
@@ -55,7 +56,7 @@ class AuthPhoneController extends Controller
         }
 
         $limitIp = $limiter->limit('FAP_RATE_SEND_CODE_IP', 20);
-        if ($ip !== '' && !$limiter->hit("phone_send_code:ip:{$ip}", $limitIp, 60)) {
+        if ($ip !== '' && ! $limiter->hit("phone_send_code:ip:{$ip}", $limitIp, 60)) {
             $logger->log('phone_send_code', false, $request, null, [
                 'error_code' => 'RATE_LIMITED',
                 'scope' => 'ip',
@@ -93,7 +94,7 @@ class AuthPhoneController extends Controller
             'ttl_seconds' => (int) ($res['ttl_seconds'] ?? 300),
         ];
 
-        if (!empty($res['dev_code'])) {
+        if (! empty($res['dev_code'])) {
             $out['dev_code'] = (string) $res['dev_code'];
         }
 
@@ -205,7 +206,7 @@ class AuthPhoneController extends Controller
         }
 
         if (preg_match('/^1\d{10}$/', $s)) {
-            return '+86' . $s;
+            return '+86'.$s;
         }
 
         return $s;
@@ -306,7 +307,7 @@ class AuthPhoneController extends Controller
         $insert = [];
 
         if ($hasUid) {
-            $insert['uid'] = 'u_' . bin2hex(random_bytes(5));
+            $insert['uid'] = 'u_'.bin2hex(random_bytes(5));
         }
 
         if ($phoneCol) {
@@ -336,19 +337,19 @@ class AuthPhoneController extends Controller
             $insert['updated_at'] = now();
         }
 
-        if (\App\Support\SchemaBaseline::hasColumn('users', 'name') && !array_key_exists('name', $insert)) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'name') && ! array_key_exists('name', $insert)) {
             $insert['name'] = 'user';
         }
-        if (\App\Support\SchemaBaseline::hasColumn('users', 'email') && !array_key_exists('email', $insert)) {
-            $insert['email'] = $pii->legacyEmailPlaceholder($pii->emailHash('phone_' . md5($phoneE164) . '@example.local'));
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email') && ! array_key_exists('email', $insert)) {
+            $insert['email'] = $pii->legacyEmailPlaceholder($pii->emailHash('phone_'.md5($phoneE164).'@example.local'));
         }
-        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_hash') && !array_key_exists('email_hash', $insert)) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_hash') && ! array_key_exists('email_hash', $insert)) {
             $insert['email_hash'] = $pii->emailHash((string) $insert['email']);
         }
-        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_enc') && !array_key_exists('email_enc', $insert)) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_enc') && ! array_key_exists('email_enc', $insert)) {
             $insert['email_enc'] = $pii->encrypt((string) $insert['email']);
         }
-        if (\App\Support\SchemaBaseline::hasColumn('users', 'password') && !array_key_exists('password', $insert)) {
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'password') && ! array_key_exists('password', $insert)) {
             $insert['password'] = bcrypt(bin2hex(random_bytes(8)));
         }
 
@@ -369,15 +370,20 @@ class AuthPhoneController extends Controller
         $uid = (string) ($row->{$pk} ?? '');
         /** @var PiiCipher $pii */
         $pii = app(PiiCipher::class);
+        /** @var PiiReadFallbackMonitor $fallbackMonitor */
+        $fallbackMonitor = app(PiiReadFallbackMonitor::class);
 
         $phone = null;
+        $fallbackUsed = false;
         if (\App\Support\SchemaBaseline::hasColumn('users', 'phone_e164_enc')) {
             $phone = $pii->decrypt((string) ($row->phone_e164_enc ?? ''));
         }
         if (($phone === null || $phone === '') && $phoneCol) {
             $raw = (string) ($row->{$phoneCol} ?? '');
             $phone = $raw !== '' ? $raw : null;
+            $fallbackUsed = $phone !== null;
         }
+        $fallbackMonitor->record('users.phone_read', $fallbackUsed);
 
         $anonId = property_exists($row, 'anon_id') ? (string) ($row->anon_id ?? '') : null;
         if ($anonId === '') {

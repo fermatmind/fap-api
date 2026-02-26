@@ -3,6 +3,7 @@
 namespace App\Services\Email;
 
 use App\Support\PiiCipher;
+use App\Support\PiiReadFallbackMonitor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -10,6 +11,7 @@ class EmailOutboxService
 {
     public function __construct(
         private readonly PiiCipher $piiCipher,
+        private readonly PiiReadFallbackMonitor $fallbackMonitor,
     ) {}
 
     /**
@@ -477,16 +479,21 @@ class EmailOutboxService
             if ($decrypted !== null) {
                 $decoded = json_decode($decrypted, true);
                 if (is_array($decoded)) {
+                    $this->fallbackMonitor->record('email_outbox.payload_read', false);
+
                     return $decoded;
                 }
             }
         }
 
-        return $this->decodePayload($row->payload_json ?? null);
+        $fallbackPayload = $this->decodePayload($row->payload_json ?? null);
+        $this->fallbackMonitor->record('email_outbox.payload_read', $fallbackPayload !== []);
+
+        return $fallbackPayload;
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function encodePayloadJson(array $payload): string
     {
@@ -496,12 +503,12 @@ class EmailOutboxService
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function encodePayloadEncrypted(array $payload): ?string
     {
         $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($encoded) || $encoded === '') {
+        if (! is_string($encoded) || $encoded === '') {
             return null;
         }
 

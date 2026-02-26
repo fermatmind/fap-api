@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Support\PiiCipher;
+use App\Support\PiiReadFallbackMonitor;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -11,17 +13,20 @@ use Illuminate\Support\Facades\View;
 class FapEmailOutboxSend extends Command
 {
     protected $signature = 'email:outbox-send {--limit=50}';
+
     protected $description = 'Send pending email outbox rows using the log mailer.';
 
     public function handle(): int
     {
-        if (!$this->outboxSendEnabled()) {
+        if (! $this->outboxSendEnabled()) {
             $this->info('EMAIL_OUTBOX_SEND=0 (disabled)');
+
             return Command::SUCCESS;
         }
 
-        if (!Schema::hasTable('email_outbox')) {
+        if (! Schema::hasTable('email_outbox')) {
             $this->warn('email_outbox table missing');
+
             return Command::SUCCESS;
         }
 
@@ -45,6 +50,7 @@ class FapEmailOutboxSend extends Command
 
         if ($rows->isEmpty()) {
             $this->info('No pending outbox rows.');
+
             return Command::SUCCESS;
         }
 
@@ -52,10 +58,11 @@ class FapEmailOutboxSend extends Command
         $skipped = 0;
 
         foreach ($rows as $row) {
-            $payload = $this->decodePayload($row->payload_json ?? null);
+            $payload = $this->decodePayloadFromRow($row);
             $email = $this->resolveRecipientEmail($row, $payload);
             if ($email === '') {
                 $skipped++;
+
                 continue;
             }
 
@@ -76,7 +83,8 @@ class FapEmailOutboxSend extends Command
                     });
                 }
             } catch (\Throwable $e) {
-                $this->warn('Send failed for outbox id=' . (string) ($row->id ?? ''));
+                $this->warn('Send failed for outbox id='.(string) ($row->id ?? ''));
+
                 continue;
             }
 
@@ -112,29 +120,75 @@ class FapEmailOutboxSend extends Command
         }
 
         $this->info("Sent {$sent}, skipped {$skipped}.");
+
         return Command::SUCCESS;
     }
 
     private function decodePayload($raw): array
     {
-        if (is_array($raw)) return $raw;
-        if (!is_string($raw) || $raw === '') return [];
+        if (is_array($raw)) {
+            return $raw;
+        }
+        if (! is_string($raw) || $raw === '') {
+            return [];
+        }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : [];
+    }
+
+    private function decodePayloadFromRow(object $row): array
+    {
+        $pii = app(PiiCipher::class);
+        $monitor = app(PiiReadFallbackMonitor::class);
+
+        if (property_exists($row, 'payload_enc')) {
+            $decrypted = $pii->decrypt((string) ($row->payload_enc ?? ''));
+            if ($decrypted !== null) {
+                $decoded = json_decode($decrypted, true);
+                if (is_array($decoded)) {
+                    $monitor->record('email_outbox.payload_read', false);
+
+                    return $decoded;
+                }
+            }
+        }
+
+        $decoded = $this->decodePayload($row->payload_json ?? null);
+        $monitor->record('email_outbox.payload_read', $decoded !== []);
+
+        return $decoded;
     }
 
     private function outboxSendEnabled(): bool
     {
         $raw = \App\Support\RuntimeConfig::value('EMAIL_OUTBOX_SEND', '0');
+
         return filter_var($raw, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function resolveRecipientEmail(object $row, array $payload): string
     {
+        $pii = app(PiiCipher::class);
+        $monitor = app(PiiReadFallbackMonitor::class);
+
+        $encryptedCandidates = [
+            $this->decryptOrEmpty($pii, property_exists($row, 'to_email_enc') ? ($row->to_email_enc ?? null) : null),
+            $this->decryptOrEmpty($pii, property_exists($row, 'email_enc') ? ($row->email_enc ?? null) : null),
+        ];
+        foreach ($encryptedCandidates as $candidate) {
+            $value = trim((string) $candidate);
+            if ($value !== '') {
+                $monitor->record('email_outbox.recipient_read', false);
+
+                return $value;
+            }
+        }
+
         $candidates = [
             $row->to_email ?? null,
             $row->email ?? null,
@@ -144,15 +198,26 @@ class FapEmailOutboxSend extends Command
         foreach ($candidates as $candidate) {
             $value = trim((string) $candidate);
             if ($value !== '') {
+                $monitor->record('email_outbox.recipient_read', true);
+
                 return $value;
             }
         }
 
+        $monitor->record('email_outbox.recipient_read', false);
+
         return '';
     }
 
+    private function decryptOrEmpty(PiiCipher $pii, mixed $ciphertext): string
+    {
+        $decrypted = $pii->decrypt(is_string($ciphertext) ? $ciphertext : null);
+
+        return $decrypted !== null ? trim($decrypted) : '';
+    }
+
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function resolveTemplateKey(object $row, array $payload): string
     {
@@ -173,7 +238,7 @@ class FapEmailOutboxSend extends Command
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function resolveSubject(object $row, array $payload, string $templateKey, string $locale): string
     {
@@ -189,6 +254,7 @@ class FapEmailOutboxSend extends Command
         }
 
         $isZh = $this->languageFromLocale($locale) === 'zh';
+
         return match ($templateKey) {
             'payment_success' => $isZh ? '支付成功与报告交付通知' : 'Payment successful and report delivered',
             'refund_notice' => $isZh ? '退款处理通知' : 'Refund processing notice',
@@ -199,7 +265,7 @@ class FapEmailOutboxSend extends Command
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function resolveBodyHtml(object $row, array $payload, string $templateKey, string $locale): string
     {
@@ -217,7 +283,7 @@ class FapEmailOutboxSend extends Command
         if ($view === '') {
             return '';
         }
-        if (!View::exists($view)) {
+        if (! View::exists($view)) {
             return '';
         }
 
@@ -225,7 +291,7 @@ class FapEmailOutboxSend extends Command
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function resolveBodyText(array $payload): string
     {
@@ -251,7 +317,7 @@ class FapEmailOutboxSend extends Command
     {
         $lang = $this->languageFromLocale($locale);
         $supported = ['payment_success', 'refund_notice', 'support_contact'];
-        if (!in_array($templateKey, $supported, true)) {
+        if (! in_array($templateKey, $supported, true)) {
             return '';
         }
 
@@ -261,11 +327,12 @@ class FapEmailOutboxSend extends Command
         }
 
         $fallback = "emails.en.{$templateKey}";
+
         return View::exists($fallback) ? $fallback : '';
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      * @return array<string,mixed>
      */
     private function buildTemplateData(object $row, array $payload, string $locale): array
@@ -305,6 +372,7 @@ class FapEmailOutboxSend extends Command
         }
 
         $lang = strtolower((string) explode('-', $locale)[0]);
+
         return $lang === 'zh' ? 'zh-CN' : 'en';
     }
 
@@ -322,17 +390,18 @@ class FapEmailOutboxSend extends Command
     {
         $appUrl = rtrim((string) config('app.url', 'http://localhost'), '/');
         $global = [
-            'terms' => trim((string) config('regions.regions.US.legal_urls.terms', $appUrl . '/terms')),
-            'privacy' => trim((string) config('regions.regions.US.legal_urls.privacy', $appUrl . '/privacy')),
-            'refund' => trim((string) config('regions.regions.US.legal_urls.refund', $appUrl . '/refund')),
+            'terms' => trim((string) config('regions.regions.US.legal_urls.terms', $appUrl.'/terms')),
+            'privacy' => trim((string) config('regions.regions.US.legal_urls.privacy', $appUrl.'/privacy')),
+            'refund' => trim((string) config('regions.regions.US.legal_urls.refund', $appUrl.'/refund')),
         ];
         $cn = [
-            'terms' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.terms', $appUrl . '/zh/terms')),
-            'privacy' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.privacy', $appUrl . '/zh/privacy')),
-            'refund' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.refund', $appUrl . '/zh/refund')),
+            'terms' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.terms', $appUrl.'/zh/terms')),
+            'privacy' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.privacy', $appUrl.'/zh/privacy')),
+            'refund' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.refund', $appUrl.'/zh/refund')),
         ];
 
         $target = $this->languageFromLocale($locale) === 'zh' ? $cn : $global;
+
         return [
             'terms' => $target['terms'] !== '' ? $target['terms'] : $global['terms'],
             'privacy' => $target['privacy'] !== '' ? $target['privacy'] : $global['privacy'],
@@ -365,6 +434,6 @@ class FapEmailOutboxSend extends Command
             return $url;
         }
 
-        return rtrim($base, '/') . '/' . ltrim($url, '/');
+        return rtrim($base, '/').'/'.ltrim($url, '/');
     }
 }
