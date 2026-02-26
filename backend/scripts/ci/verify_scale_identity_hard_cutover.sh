@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKEND_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+CONTRACT_SH="${BACKEND_DIR}/scripts/ci/verify_scale_identity_contract.sh"
+
+API="${API:-http://127.0.0.1:1827}"
+REGION="${REGION:-CN_MAINLAND}"
+LOCALE="${LOCALE:-zh-CN}"
+
+if [[ ! -x "$CONTRACT_SH" ]]; then
+  echo "[CI][hard-cutover][FAIL] missing or not executable: $CONTRACT_SH" >&2
+  exit 14
+fi
+
+# Enforce hard-cutover runtime contract during probes.
+export FAP_SCALE_IDENTITY_WRITE_MODE="${FAP_SCALE_IDENTITY_WRITE_MODE:-dual}"
+export FAP_SCALE_IDENTITY_READ_MODE="${FAP_SCALE_IDENTITY_READ_MODE:-v2}"
+export FAP_API_RESPONSE_SCALE_CODE_MODE="${FAP_API_RESPONSE_SCALE_CODE_MODE:-v2}"
+export FAP_ACCEPT_LEGACY_SCALE_CODE="${FAP_ACCEPT_LEGACY_SCALE_CODE:-false}"
+export FAP_ALLOW_DEMO_SCALES="${FAP_ALLOW_DEMO_SCALES:-false}"
+export FAP_CONTENT_PATH_MODE="${FAP_CONTENT_PATH_MODE:-dual_prefer_new}"
+export FAP_CONTENT_PUBLISH_MODE="${FAP_CONTENT_PUBLISH_MODE:-dual}"
+
+# Hard-cutover status contract.
+export LEGACY_EXPECTED_STATUS="${LEGACY_EXPECTED_STATUS:-410}"
+export V2_EXPECTED_STATUS="${V2_EXPECTED_STATUS:-200}"
+export LEGACY_EXPECTED_ERROR_CODE="${LEGACY_EXPECTED_ERROR_CODE:-SCALE_CODE_LEGACY_NOT_ACCEPTED}"
+
+# Strict gate thresholds.
+export FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX="${FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX:-0}"
+export FAP_GATE_DUAL_WRITE_MISMATCH_RATE_MAX="${FAP_GATE_DUAL_WRITE_MISMATCH_RATE_MAX:-0}"
+export FAP_GATE_CONTENT_PATH_FALLBACK_RATE_MAX="${FAP_GATE_CONTENT_PATH_FALLBACK_RATE_MAX:-0}"
+export FAP_GATE_LEGACY_CODE_HIT_RATE_MAX="${FAP_GATE_LEGACY_CODE_HIT_RATE_MAX:-0}"
+export FAP_GATE_DEMO_SCALE_HIT_RATE_MAX="${FAP_GATE_DEMO_SCALE_HIT_RATE_MAX:-0}"
+
+echo "[CI][hard-cutover] verifying strict contract API=${API} region=${REGION} locale=${LOCALE}"
+API="$API" REGION="$REGION" LOCALE="$LOCALE" bash "$CONTRACT_SH"
+echo "[CI][hard-cutover] contract verification completed"
