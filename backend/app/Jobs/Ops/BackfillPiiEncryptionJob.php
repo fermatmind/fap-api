@@ -426,8 +426,18 @@ class BackfillPiiEncryptionJob implements ShouldQueue
 
         if (is_string($payload)) {
             $payload = trim($payload);
+            if ($payload === '') {
+                return null;
+            }
 
-            return $payload === '' ? null : $payload;
+            $decoded = json_decode($payload, true);
+            if (json_last_error() === JSON_ERROR_NONE && (is_array($decoded) || is_object($decoded))) {
+                $encoded = json_encode($decoded, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+                return is_string($encoded) && trim($encoded) !== '' ? $encoded : null;
+            }
+
+            return $payload;
         }
 
         if (is_array($payload) || is_object($payload)) {
