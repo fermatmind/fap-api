@@ -22,12 +22,12 @@ class ScaleRegistryWriter
         $data['code'] = $code;
         $data['org_id'] = $orgId;
 
-        ScaleRegistryModel::query()->updateOrCreate([
+        ScaleRegistryModel::queryByOrgWhitelist([$orgId])->updateOrCreate([
             'code' => $code,
             'org_id' => $orgId,
         ], $data);
 
-        $scale = ScaleRegistryModel::query()
+        $scale = ScaleRegistryModel::queryByOrgWhitelist([$orgId])
             ->where('code', $code)
             ->where('org_id', $orgId)
             ->firstOrFail();
@@ -61,13 +61,13 @@ class ScaleRegistryWriter
         }
 
         DB::transaction(function () use ($orgId, $code, $primarySlug, $normalized) {
-            ScaleSlug::query()
+            ScaleSlug::queryByOrgWhitelist([$orgId])
                 ->where('org_id', $orgId)
                 ->where('scale_code', $code)
                 ->delete();
 
             foreach (array_keys($normalized) as $slug) {
-                ScaleSlug::query()->create([
+                ScaleSlug::queryByOrgWhitelist([$orgId])->create([
                     'org_id' => $orgId,
                     'slug' => $slug,
                     'scale_code' => $code,

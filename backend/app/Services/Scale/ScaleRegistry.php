@@ -5,6 +5,7 @@ namespace App\Services\Scale;
 use App\Models\ScaleRegistry as ScaleRegistryModel;
 use App\Models\ScaleSlug;
 use App\Support\CacheKeys;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 
 class ScaleRegistry
@@ -27,7 +28,7 @@ class ScaleRegistry
             return $cached;
         }
 
-        $rows = ScaleRegistryModel::query()
+        $rows = $this->registryQueryForOrg($orgId, true)
             ->where('is_active', true)
             ->where(function ($q) use ($orgId) {
                 $q->where('org_id', $orgId)
@@ -46,14 +47,15 @@ class ScaleRegistry
 
     public function listActivePublic(int $orgId = 0): array
     {
-        $cacheKey = CacheKeys::scaleRegistryActive($orgId);
+        $targetOrgId = $orgId > 0 ? $orgId : 0;
+        $cacheKey = CacheKeys::scaleRegistryActive($targetOrgId);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
             return $cached;
         }
 
-        $rows = ScaleRegistryModel::query()
-            ->where('org_id', $orgId)
+        $rows = $this->registryQueryForOrg($targetOrgId)
+            ->where('org_id', $targetOrgId)
             ->where('is_active', true)
             ->where('is_public', true)
             ->orderBy('code')
@@ -116,18 +118,18 @@ class ScaleRegistry
         if (! $allowAlias) {
             $registry = null;
             if ($orgId <= 0) {
-                $registry = ScaleRegistryModel::query()
+                $registry = $this->registryQueryForOrg(0)
                     ->where('org_id', 0)
                     ->where('primary_slug', $slug)
                     ->where('is_public', true)
                     ->first();
             } else {
-                $registry = ScaleRegistryModel::query()
+                $registry = $this->registryQueryForOrg($orgId)
                     ->where('org_id', $orgId)
                     ->where('primary_slug', $slug)
                     ->first();
                 if (! $registry) {
-                    $registry = ScaleRegistryModel::query()
+                    $registry = $this->registryQueryForOrg(0)
                         ->where('org_id', 0)
                         ->where('primary_slug', $slug)
                         ->where('is_public', true)
@@ -147,17 +149,17 @@ class ScaleRegistry
 
         $slugRow = null;
         if ($orgId <= 0) {
-            $slugRow = ScaleSlug::query()
+            $slugRow = $this->slugQueryForOrg(0)
                 ->where('org_id', 0)
                 ->where('slug', $slug)
                 ->first();
         } else {
-            $slugRow = ScaleSlug::query()
+            $slugRow = $this->slugQueryForOrg($orgId)
                 ->where('org_id', $orgId)
                 ->where('slug', $slug)
                 ->first();
             if (! $slugRow) {
-                $slugRow = ScaleSlug::query()
+                $slugRow = $this->slugQueryForOrg(0)
                     ->where('org_id', 0)
                     ->where('slug', $slug)
                     ->first();
@@ -168,10 +170,11 @@ class ScaleRegistry
             return null;
         }
 
-        $registry = ScaleRegistryModel::query()
-            ->where('org_id', (int) ($slugRow->org_id ?? $orgId))
+        $registryOrgId = (int) ($slugRow->org_id ?? $orgId);
+        $registry = $this->registryQueryForOrg($registryOrgId)
+            ->where('org_id', $registryOrgId)
             ->where('code', $slugRow->scale_code)
-            ->when((int) ($slugRow->org_id ?? $orgId) === 0, function ($q) {
+            ->when($registryOrgId === 0, function ($q) {
                 $q->where('is_public', true);
             })
             ->first();
@@ -189,14 +192,14 @@ class ScaleRegistry
     private function findByCode(string $code, int $orgId): ?ScaleRegistryModel
     {
         if ($orgId <= 0) {
-            return ScaleRegistryModel::query()
+            return $this->registryQueryForOrg(0)
                 ->where('org_id', 0)
                 ->where('code', $code)
                 ->where('is_public', true)
                 ->first();
         }
 
-        $row = ScaleRegistryModel::query()
+        $row = $this->registryQueryForOrg($orgId)
             ->where('org_id', $orgId)
             ->where('code', $code)
             ->first();
@@ -204,11 +207,31 @@ class ScaleRegistry
             return $row;
         }
 
-        return ScaleRegistryModel::query()
+        return $this->registryQueryForOrg(0)
             ->where('org_id', 0)
             ->where('code', $code)
             ->where('is_public', true)
             ->first();
+    }
+
+    private function registryQueryForOrg(int $orgId, bool $includeGlobalFallback = false): Builder
+    {
+        $orgWhitelist = [$orgId > 0 ? $orgId : 0];
+        if ($includeGlobalFallback && $orgId > 0) {
+            $orgWhitelist[] = 0;
+        }
+
+        return ScaleRegistryModel::queryByOrgWhitelist($orgWhitelist);
+    }
+
+    private function slugQueryForOrg(int $orgId, bool $includeGlobalFallback = false): Builder
+    {
+        $orgWhitelist = [$orgId > 0 ? $orgId : 0];
+        if ($includeGlobalFallback && $orgId > 0) {
+            $orgWhitelist[] = 0;
+        }
+
+        return ScaleSlug::queryByOrgWhitelist($orgWhitelist);
     }
 
     private function normalizeLookupCode(string $requestedCode): string
