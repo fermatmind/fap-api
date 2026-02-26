@@ -13,6 +13,7 @@ class SyncScaleSlugs extends Command
 {
     protected $signature = 'fap:scales:sync-slugs';
     protected $description = 'Rebuild scale_slugs from scales_registry.';
+    private const V2_TABLE = 'scales_registry_v2';
 
     public function handle(): int
     {
@@ -27,7 +28,7 @@ class SyncScaleSlugs extends Command
             ScaleSlug::query()->delete();
         });
 
-        $scales = ScaleRegistryModel::query()->orderBy('code')->get();
+        $scales = $this->loadScalesForSlugSync();
         foreach ($scales as $scale) {
             $writer->syncSlugsForScale($scale);
         }
@@ -35,5 +36,35 @@ class SyncScaleSlugs extends Command
         $this->info('Scale slugs sync complete.');
 
         return self::SUCCESS;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection<int,ScaleRegistryModel>
+     */
+    private function loadScalesForSlugSync()
+    {
+        if (!Schema::hasTable(self::V2_TABLE) || !(bool) config('fap.scales_registry.use_v2', true)) {
+            return ScaleRegistryModel::query()->orderBy('code')->get();
+        }
+
+        $rows = DB::table(self::V2_TABLE)
+            ->orderBy('org_id')
+            ->orderBy('code')
+            ->get();
+
+        return $rows->map(function (object $row): ScaleRegistryModel {
+            $payload = (array) $row;
+            if (is_string($payload['slugs_json'] ?? null)) {
+                $decoded = json_decode((string) $payload['slugs_json'], true);
+                $payload['slugs_json'] = is_array($decoded) ? $decoded : [];
+            } elseif (!is_array($payload['slugs_json'] ?? null)) {
+                $payload['slugs_json'] = [];
+            }
+
+            $model = new ScaleRegistryModel();
+            $model->forceFill($payload);
+
+            return $model;
+        });
     }
 }

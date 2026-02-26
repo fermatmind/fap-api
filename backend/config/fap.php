@@ -31,6 +31,10 @@ return [
         'forbid_missing_overrides' => (bool) env('FAP_FORBID_MISSING_OVERRIDES', false),
     ],
 
+    'scales_registry' => [
+        'use_v2' => (bool) env('FAP_SCALES_REGISTRY_USE_V2', true),
+    ],
+
     'schema_baseline' => [
         'required_tables' => [
             'admin_users',
