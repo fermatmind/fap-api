@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Legacy\Mbti\Attempt;
 
+use App\DTO\Legacy\LegacyRequestContext;
 use App\Exceptions\Api\ApiProblemException;
 use App\Jobs\GenerateReportJob;
 use App\Models\Attempt;
@@ -16,10 +17,8 @@ use App\Services\Psychometrics\QualityChecker;
 use App\Services\Psychometrics\ScoreNormalizer;
 use App\Support\OrgContext;
 use App\Support\WritesEvents;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -76,25 +75,18 @@ class LegacyMbtiAttemptLifecycleService
         );
     }
 
-    public function startAttempt(Request $request, ?string $id = null): array
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    public function startAttempt(array $payload, LegacyRequestContext $context, ?string $id = null): array
     {
-        $this->currentRequestId = $this->extractRequestId($request);
+        $this->currentRequestId = $context->resolvedRequestId();
 
         if (is_string($id) && trim($id) !== '') {
-            $request->merge(['attempt_id' => trim($id)]);
+            $payload['attempt_id'] = trim($id);
         }
 
-        $payload = $request->validate([
-            'anon_id' => ['required', 'string', 'max:64'],
-            'scale_code' => ['required', 'string', 'in:MBTI'],
-            'scale_version' => ['required', 'string', 'in:v0.3'],
-            'question_count' => ['required', 'integer', 'in:24,93,144'],
-            'client_platform' => ['required', 'string', 'max:32'],
-            'client_version' => ['nullable', 'string', 'max:32'],
-            'channel' => ['nullable', 'string', 'max:32'],
-            'referrer' => ['nullable', 'string', 'max:255'],
-            'meta_json' => ['sometimes', 'array'],
-        ]);
+        $payload = $this->normalizeStartPayload($payload);
 
         $attempt = Attempt::create([
             'id' => (string) Str::uuid(),
@@ -130,38 +122,16 @@ class LegacyMbtiAttemptLifecycleService
     }
 
     /**
-     * POST /api/v0.3/attempts
-     * ✅ 前端提交：answers[].question_id + answers[].code(A~E)
-     * ✅ 后端用题库 options.score + key_pole + direction 计算 5 轴百分比
+     * @param  array<string, mixed>  $payload
      */
-    public function storeAttempt(Request $request): array
+    public function storeAttempt(array $payload, LegacyRequestContext $context, bool $isResultUpsertRoute = false): array
     {
-        $this->currentRequestId = $this->extractRequestId($request);
-
-        $payload = $request->validate([
-            'anon_id' => ['required', 'string', 'max:64'],
-            'scale_code' => ['required', 'string', 'in:MBTI'],
-            'scale_version' => ['required', 'string', 'in:v0.3'],
-
-            'answers' => ['required', 'array', 'min:1'],
-            'answers.*.question_id' => ['required', 'string'],
-            'answers.*.code' => ['required', 'string', 'in:A,B,C,D,E'],
-
-            // 可选字段
-            'client_platform' => ['nullable', 'string', 'max:32'],
-            'client_version' => ['nullable', 'string', 'max:32'],
-            'channel' => ['nullable', 'string', 'max:32'],
-            'referrer' => ['nullable', 'string', 'max:255'],
-            'region' => ['nullable', 'string', 'max:32'],
-            'locale' => ['nullable', 'string', 'max:16'],
-            'attempt_id' => ['nullable', 'string', 'max:64'],
-            'demographics' => ['sometimes', 'array'],
-        ]);
+        $this->currentRequestId = $context->resolvedRequestId();
+        $payload = $this->normalizeStorePayload($payload);
 
         $attemptId = isset($payload['attempt_id']) && is_string($payload['attempt_id']) && trim($payload['attempt_id']) !== ''
             ? trim($payload['attempt_id'])
             : (string) Str::uuid();
-        $isResultUpsertRoute = trim((string) ($request->route('id') ?? '')) !== '';
 
         Log::info('[attempt_submit] received', [
             'attempt_id' => $attemptId,
@@ -302,8 +272,16 @@ class LegacyMbtiAttemptLifecycleService
 
         $canStoreJson = \App\Support\SchemaBaseline::hasColumn('attempts', 'answers_json');
         $canStorePath = \App\Support\SchemaBaseline::hasColumn('attempts', 'answers_storage_path');
-        $actorUserId = $this->resolveActorUserId($request);
-        $actorAnonId = $this->resolveActorAnonId($request);
+        $actorUserId = $context->resolvedUserId();
+        $actorAnonId = $context->resolvedAnonId();
+        $eventRequest = $context->toEventRequest([], [
+            'anon_id' => $payload['anon_id'],
+            'region' => $payload['region'] ?? null,
+            'locale' => $payload['locale'] ?? null,
+            'channel' => $payload['channel'] ?? null,
+            'client_platform' => $payload['client_platform'] ?? null,
+            'client_version' => $payload['client_version'] ?? null,
+        ]);
 
         if (! $canStoreJson && (! $storeToStorage || ! $canStorePath)) {
             throw new ApiProblemException(
@@ -319,7 +297,7 @@ class LegacyMbtiAttemptLifecycleService
         }
 
         $tx = DB::transaction(function () use (
-            $request,
+            $eventRequest,
             $payload,
             $attemptId,
             $expectedQuestionCount,
@@ -531,7 +509,7 @@ class LegacyMbtiAttemptLifecycleService
             }
 
             // ✅ 4) test_submit event（保持你原逻辑）
-            $this->logEvent('test_submit', $request, [
+            $this->logEvent('test_submit', $eventRequest, [
                 'anon_id' => $payload['anon_id'],
                 'scale_code' => $attempt->scale_code,
                 'scale_version' => $attempt->scale_version,
@@ -592,14 +570,14 @@ class LegacyMbtiAttemptLifecycleService
         ];
     }
 
-    public function upsertResult(\Illuminate\Http\Request $request, string $attemptId)
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    public function upsertResult(array $payload, string $attemptId, LegacyRequestContext $context): array
     {
-        // 让 /attempts/{id}/result 走你现有的 storeAttempt 逻辑（写 attempts.result_json + results 表）
-        $request->merge([
-            'attempt_id' => $attemptId,
-        ]);
+        $payload['attempt_id'] = $attemptId;
 
-        return $this->storeAttempt($request);
+        return $this->storeAttempt($payload, $context, true);
     }
 
     private function ensureReportJob(string $attemptId, bool $reset = false): ReportJob
@@ -869,46 +847,92 @@ class LegacyMbtiAttemptLifecycleService
         return hash('sha256', json_encode($norm, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
-    private function resolveActorUserId(Request $request): ?string
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function normalizeStartPayload(array $payload): array
     {
-        $candidates = [
-            $request->attributes->get('fm_user_id'),
-            $request->attributes->get('user_id'),
-        ];
+        $anonId = trim((string) ($payload['anon_id'] ?? ''));
+        $scaleCode = trim((string) ($payload['scale_code'] ?? ''));
+        $scaleVersion = trim((string) ($payload['scale_version'] ?? ''));
+        $clientPlatform = trim((string) ($payload['client_platform'] ?? ''));
 
-        foreach ($candidates as $candidate) {
-            if (! is_string($candidate) && ! is_numeric($candidate)) {
-                continue;
-            }
-
-            $value = trim((string) $candidate);
-            if ($value !== '' && preg_match('/^\d+$/', $value) === 1) {
-                return $value;
-            }
+        if ($anonId === '' || $scaleCode === '' || $scaleVersion === '' || $clientPlatform === '') {
+            throw new ApiProblemException(422, 'VALIDATION_FAILED', 'missing required attempt start fields.');
         }
 
-        return null;
+        if ($scaleCode !== 'MBTI' || $scaleVersion !== 'v0.3') {
+            throw new ApiProblemException(422, 'VALIDATION_FAILED', 'invalid scale for legacy MBTI flow.');
+        }
+
+        $payload['anon_id'] = $anonId;
+        $payload['scale_code'] = $scaleCode;
+        $payload['scale_version'] = $scaleVersion;
+        $payload['client_platform'] = $clientPlatform;
+        $payload['question_count'] = (int) ($payload['question_count'] ?? 0);
+        $payload['client_version'] = $this->nullableString($payload['client_version'] ?? null);
+        $payload['channel'] = $this->nullableString($payload['channel'] ?? null);
+        $payload['referrer'] = $this->nullableString($payload['referrer'] ?? null);
+
+        if (! is_array($payload['meta_json'] ?? null)) {
+            $payload['meta_json'] = null;
+        }
+
+        return $payload;
     }
 
-    private function resolveActorAnonId(Request $request): ?string
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function normalizeStorePayload(array $payload): array
     {
-        $candidates = [
-            $request->attributes->get('anon_id'),
-            $request->attributes->get('fm_anon_id'),
-        ];
+        $anonId = trim((string) ($payload['anon_id'] ?? ''));
+        $scaleCode = trim((string) ($payload['scale_code'] ?? ''));
+        $scaleVersion = trim((string) ($payload['scale_version'] ?? ''));
 
-        foreach ($candidates as $candidate) {
-            if (! is_string($candidate) && ! is_numeric($candidate)) {
-                continue;
-            }
-
-            $value = trim((string) $candidate);
-            if ($value !== '') {
-                return $value;
-            }
+        if ($anonId === '' || $scaleCode === '' || $scaleVersion === '') {
+            throw new ApiProblemException(422, 'VALIDATION_FAILED', 'missing required attempt submit fields.');
         }
 
-        return null;
+        if ($scaleCode !== 'MBTI' || $scaleVersion !== 'v0.3') {
+            throw new ApiProblemException(422, 'VALIDATION_FAILED', 'invalid scale for legacy MBTI flow.');
+        }
+
+        $answers = $payload['answers'] ?? null;
+        if (! is_array($answers) || count($answers) === 0) {
+            throw new ApiProblemException(422, 'VALIDATION_FAILED', 'answers is required.');
+        }
+
+        $payload['anon_id'] = $anonId;
+        $payload['scale_code'] = $scaleCode;
+        $payload['scale_version'] = $scaleVersion;
+        $payload['answers'] = $answers;
+        $payload['attempt_id'] = $this->nullableString($payload['attempt_id'] ?? null);
+        $payload['client_platform'] = $this->nullableString($payload['client_platform'] ?? null);
+        $payload['client_version'] = $this->nullableString($payload['client_version'] ?? null);
+        $payload['channel'] = $this->nullableString($payload['channel'] ?? null);
+        $payload['referrer'] = $this->nullableString($payload['referrer'] ?? null);
+        $payload['region'] = $this->nullableString($payload['region'] ?? null);
+        $payload['locale'] = $this->nullableString($payload['locale'] ?? null);
+
+        if (! is_array($payload['demographics'] ?? null)) {
+            $payload['demographics'] = null;
+        }
+
+        return $payload;
+    }
+
+    private function nullableString(mixed $value): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized !== '' ? $normalized : null;
     }
 
     /**
@@ -936,20 +960,5 @@ class LegacyMbtiAttemptLifecycleService
     private function requestId(): string
     {
         return $this->currentRequestId ?? '';
-    }
-
-    private function extractRequestId(Request $request): string
-    {
-        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
-        if ($requestId !== '') {
-            return $requestId;
-        }
-
-        $requestId = trim((string) $request->header('X-Request-Id', ''));
-        if ($requestId !== '') {
-            return $requestId;
-        }
-
-        return trim((string) $request->header('X-Request-ID', ''));
     }
 }
