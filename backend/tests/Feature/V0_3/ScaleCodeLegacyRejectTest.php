@@ -76,4 +76,29 @@ final class ScaleCodeLegacyRejectTest extends TestCase
         $v2Response->assertJsonPath('ok', true);
         $v2Response->assertJsonPath('scale_code_v2', 'MBTI_PERSONALITY_TEST_16_TYPES');
     }
+
+    public function test_questions_reject_demo_scales_when_demo_is_disabled(): void
+    {
+        $this->artisan('migrate', ['--force' => true]);
+        $this->artisan('fap:scales:seed-default');
+
+        Config::set('scale_identity.allow_demo_scales', false);
+
+        $cases = [
+            ['code' => 'DEMO_ANSWERS', 'replacement_v2' => 'IQ_INTELLIGENCE_QUOTIENT'],
+            ['code' => 'SIMPLE_SCORE_DEMO', 'replacement_v2' => 'DEPRESSION_SCREENING_STANDARD'],
+        ];
+
+        foreach ($cases as $case) {
+            $code = (string) $case['code'];
+            $replacementV2 = (string) $case['replacement_v2'];
+
+            $response = $this->getJson("/api/v0.3/scales/{$code}/questions?region=CN_MAINLAND&locale=zh-CN");
+            $response->assertStatus(410);
+            $response->assertJsonPath('error_code', 'SCALE_DEPRECATED');
+            $response->assertJsonPath('details.requested_scale_code', $code);
+            $response->assertJsonPath('details.scale_code_legacy', $code);
+            $response->assertJsonPath('details.replacement_scale_code_v2', $replacementV2);
+        }
+    }
 }

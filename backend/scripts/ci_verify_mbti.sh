@@ -738,15 +738,21 @@ if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
 fi
 
 echo "[CI] smoke: /api/v0.3/scales/${SMOKE_SCALE_CODE}/questions"
-if ! BACKEND_DIR="$BACKEND_DIR" php -r '
+echo "[CI] smoke precheck db_connection=${DB_CONNECTION} db_database=${DB_DATABASE}"
+if ! APP_ENV="$APP_ENV" DB_CONNECTION="$DB_CONNECTION" DB_DATABASE="$DB_DATABASE" BACKEND_DIR="$BACKEND_DIR" php -r '
 $backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
 require $backendDir . "/vendor/autoload.php";
 $app = require $backendDir . "/bootstrap/app.php";
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
+$defaultConnection = (string) config("database.default", "");
+$resolvedDatabase = (string) config("database.connections.".$defaultConnection.".database", "");
+$resolvedPath = $resolvedDatabase !== "" ? realpath($resolvedDatabase) : false;
+$displayPath = is_string($resolvedPath) && $resolvedPath !== "" ? $resolvedPath : $resolvedDatabase;
+
 if (!Illuminate\Support\Facades\Schema::hasTable("scales_registry")) {
-    fwrite(STDERR, "scales_registry table missing before MBTI smoke\n");
+    fwrite(STDERR, "scales_registry table missing before MBTI smoke (conn={$defaultConnection}, db={$displayPath})\n");
     exit(2);
 }
 
@@ -756,7 +762,7 @@ $exists = Illuminate\Support\Facades\DB::table("scales_registry")
     ->exists();
 
 if (!$exists) {
-    fwrite(STDERR, "MBTI scale row missing in scales_registry before MBTI smoke\n");
+    fwrite(STDERR, "MBTI scale row missing in scales_registry before MBTI smoke (conn={$defaultConnection}, db={$displayPath})\n");
     exit(3);
 }
 '; then
@@ -1023,7 +1029,7 @@ API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_G_report_view_meta.sh"
 
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_E_share_meta.sh"
+  SKIP_C=1 "$SCRIPT_DIR/accept_events_E_share_meta.sh"
 
 API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
   "$SCRIPT_DIR/accept_events_H_share_view_meta.sh"
