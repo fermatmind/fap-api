@@ -29,7 +29,7 @@ final class SdsPsychometricsReport extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('sds_psychometrics_reports')) {
+        if (! Schema::hasTable('sds_psychometrics_reports')) {
             $this->error('Missing table sds_psychometrics_reports. Run migrations first.');
 
             return 1;
@@ -60,13 +60,15 @@ final class SdsPsychometricsReport extends Command
             $query->where('a.region', $region);
         }
 
-        $rows = $query->get();
-
-        $records = [];
         $totalQualityRecords = 0;
         $qualityCWorseCount = 0;
+        $sampleN = 0;
+        $crisisCount = 0;
+        $bucketCounts = [];
+        $indexStats = ['n' => 0, 'sum' => 0.0, 'sum_sq' => 0.0];
+        $factorStats = $this->initStats(self::FACTORS);
 
-        foreach ($rows as $row) {
+        foreach ($query->cursor() as $row) {
             $payload = $this->decodeResultJson($row->result_json ?? null);
             if ($payload === []) {
                 continue;
@@ -77,15 +79,15 @@ final class SdsPsychometricsReport extends Command
                 ?? data_get($payload, 'normed_json.quality.level')
                 ?? ''
             ));
-            if (!in_array($quality, ['A', 'B', 'C', 'D'], true)) {
+            if (! in_array($quality, ['A', 'B', 'C', 'D'], true)) {
                 continue;
             }
 
             $indexScore = data_get($payload, 'scores.global.index_score');
-            if (!is_numeric($indexScore)) {
+            if (! is_numeric($indexScore)) {
                 $indexScore = data_get($payload, 'normed_json.scores.global.index_score');
             }
-            if (!is_numeric($indexScore)) {
+            if (! is_numeric($indexScore)) {
                 continue;
             }
 
@@ -94,45 +96,44 @@ final class SdsPsychometricsReport extends Command
                 $qualityCWorseCount++;
             }
 
-            if (!in_array($quality, $qualityLevels, true)) {
+            if (! in_array($quality, $qualityLevels, true)) {
                 continue;
             }
+
+            $sampleN++;
+            $this->pushStat($indexStats, (float) $indexScore);
 
             $crisisAlert = (bool) (
                 data_get($payload, 'quality.crisis_alert')
                 ?? data_get($payload, 'normed_json.quality.crisis_alert')
                 ?? false
             );
+            if ($crisisAlert) {
+                $crisisCount++;
+            }
 
             $clinicalLevel = trim((string) (
                 data_get($payload, 'scores.global.clinical_level')
                 ?? data_get($payload, 'normed_json.scores.global.clinical_level')
                 ?? ''
             ));
-            if ($clinicalLevel === '') {
-                $clinicalLevel = 'unknown';
+            $bucket = strtolower($clinicalLevel);
+            if ($bucket === '') {
+                $bucket = 'unknown';
             }
+            $bucketCounts[$bucket] = (int) ($bucketCounts[$bucket] ?? 0) + 1;
 
-            $factorScores = [];
             foreach (self::FACTORS as $factor) {
                 $score = data_get($payload, 'scores.factors.'.$factor.'.score');
-                if (!is_numeric($score)) {
+                if (! is_numeric($score)) {
                     $score = data_get($payload, 'normed_json.scores.factors.'.$factor.'.score');
                 }
                 if (is_numeric($score)) {
-                    $factorScores[$factor] = (float) $score;
+                    $this->pushStat($factorStats[$factor], (float) $score);
                 }
             }
-
-            $records[] = [
-                'index_score' => (float) $indexScore,
-                'crisis_alert' => $crisisAlert,
-                'clinical_level' => $clinicalLevel,
-                'factor_scores' => $factorScores,
-            ];
         }
 
-        $sampleN = count($records);
         if ($sampleN < $minSamples) {
             $this->warn(sprintf(
                 'insufficient samples: got=%d required=%d scale=%s locale=%s window=%s',
@@ -146,7 +147,17 @@ final class SdsPsychometricsReport extends Command
             return 2;
         }
 
-        $metrics = $this->buildMetrics($records, $windowDays, $qualityLevels, $totalQualityRecords, $qualityCWorseCount);
+        $metrics = $this->buildMetrics(
+            $sampleN,
+            $windowDays,
+            $qualityLevels,
+            $totalQualityRecords,
+            $qualityCWorseCount,
+            $indexStats,
+            $crisisCount,
+            $bucketCounts,
+            $factorStats
+        );
         $now = now();
 
         DB::table('sds_psychometrics_reports')->insert([
@@ -226,7 +237,7 @@ final class SdsPsychometricsReport extends Command
         $levels = [];
         foreach ($parts as $part) {
             $candidate = strtoupper(trim((string) $part));
-            if (in_array($candidate, ['A', 'B', 'C', 'D'], true) && !in_array($candidate, $levels, true)) {
+            if (in_array($candidate, ['A', 'B', 'C', 'D'], true) && ! in_array($candidate, $levels, true)) {
                 $levels[] = $candidate;
             }
         }
@@ -268,46 +279,23 @@ final class SdsPsychometricsReport extends Command
     }
 
     /**
+     * @param  list<string>  $qualityLevels
+     * @param  array{n:int,sum:float,sum_sq:float}  $indexStats
+     * @param  array<string,int>  $bucketCounts
+     * @param  array<string,array{n:int,sum:float,sum_sq:float}>  $factorStats
      * @return array<string,mixed>
      */
     private function buildMetrics(
-        array $records,
+        int $sampleN,
         int $windowDays,
         array $qualityLevels,
         int $totalQualityRecords,
-        int $qualityCWorseCount
+        int $qualityCWorseCount,
+        array $indexStats,
+        int $crisisCount,
+        array $bucketCounts,
+        array $factorStats
     ): array {
-        $indexScores = [];
-        $crisisCount = 0;
-        $bucketCounts = [];
-        $factorSeries = [];
-        foreach (self::FACTORS as $factor) {
-            $factorSeries[$factor] = [];
-        }
-
-        foreach ($records as $row) {
-            $index = (float) ($row['index_score'] ?? 0.0);
-            $indexScores[] = $index;
-
-            if ((bool) ($row['crisis_alert'] ?? false)) {
-                $crisisCount++;
-            }
-
-            $bucket = strtolower(trim((string) ($row['clinical_level'] ?? 'unknown')));
-            if ($bucket === '') {
-                $bucket = 'unknown';
-            }
-            $bucketCounts[$bucket] = (int) ($bucketCounts[$bucket] ?? 0) + 1;
-
-            $factorScores = is_array($row['factor_scores'] ?? null) ? $row['factor_scores'] : [];
-            foreach (self::FACTORS as $factor) {
-                if (isset($factorScores[$factor]) && is_numeric($factorScores[$factor])) {
-                    $factorSeries[$factor][] = (float) $factorScores[$factor];
-                }
-            }
-        }
-
-        $sampleN = count($records);
         $distribution = [];
         foreach ($bucketCounts as $bucket => $count) {
             $distribution[$bucket] = [
@@ -319,10 +307,9 @@ final class SdsPsychometricsReport extends Command
 
         $factorSummary = [];
         foreach (self::FACTORS as $factor) {
-            $series = $factorSeries[$factor];
             $factorSummary[$factor] = [
-                'mean' => round($this->mean($series), 4),
-                'sd' => round($this->populationSd($series), 4),
+                'mean' => round($this->statMean($factorStats[$factor]), 4),
+                'sd' => round($this->statPopulationSd($factorStats[$factor]), 4),
             ];
         }
 
@@ -334,8 +321,8 @@ final class SdsPsychometricsReport extends Command
             'sample_n' => $sampleN,
             'window_days' => $windowDays,
             'quality_filter' => array_values($qualityLevels),
-            'index_score_mean' => round($this->mean($indexScores), 4),
-            'index_score_sd' => round($this->populationSd($indexScores), 4),
+            'index_score_mean' => round($this->statMean($indexStats), 4),
+            'index_score_sd' => round($this->statPopulationSd($indexStats), 4),
             'crisis_rate' => $sampleN > 0 ? round($crisisCount / $sampleN, 4) : 0.0,
             'quality_c_or_worse_rate' => $qualityCWorseRate,
             'clinical_bucket_distribution' => $distribution,
@@ -363,33 +350,56 @@ final class SdsPsychometricsReport extends Command
     }
 
     /**
-     * @param list<float> $values
+     * @param  list<string>  $codes
+     * @return array<string,array{n:int,sum:float,sum_sq:float}>
      */
-    private function mean(array $values): float
+    private function initStats(array $codes): array
     {
-        if ($values === []) {
-            return 0.0;
+        $stats = [];
+        foreach ($codes as $code) {
+            $stats[$code] = ['n' => 0, 'sum' => 0.0, 'sum_sq' => 0.0];
         }
 
-        return array_sum($values) / count($values);
+        return $stats;
     }
 
     /**
-     * @param list<float> $values
+     * @param  array{n:int,sum:float,sum_sq:float}  $stat
      */
-    private function populationSd(array $values): float
+    private function pushStat(array &$stat, float $value): void
     {
-        if (count($values) <= 1) {
+        $stat['n']++;
+        $stat['sum'] += $value;
+        $stat['sum_sq'] += $value * $value;
+    }
+
+    /**
+     * @param  array{n:int,sum:float,sum_sq:float}  $stat
+     */
+    private function statMean(array $stat): float
+    {
+        if ($stat['n'] <= 0) {
             return 0.0;
         }
 
-        $mean = $this->mean($values);
-        $acc = 0.0;
-        foreach ($values as $value) {
-            $delta = $value - $mean;
-            $acc += $delta * $delta;
+        return $stat['sum'] / $stat['n'];
+    }
+
+    /**
+     * @param  array{n:int,sum:float,sum_sq:float}  $stat
+     */
+    private function statPopulationSd(array $stat): float
+    {
+        if ($stat['n'] <= 1) {
+            return 0.0;
         }
 
-        return sqrt($acc / count($values));
+        $mean = $stat['sum'] / $stat['n'];
+        $variance = ($stat['sum_sq'] / $stat['n']) - ($mean * $mean);
+        if ($variance < 0.0 && abs($variance) < 1e-12) {
+            return 0.0;
+        }
+
+        return $variance > 0.0 ? sqrt($variance) : 0.0;
     }
 }
