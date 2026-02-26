@@ -63,8 +63,12 @@ RUN_EQ_60_GATE="${RUN_EQ_60_GATE:-0}"
 RUN_SDS_NORMS_GATE="${RUN_SDS_NORMS_GATE:-0}"
 RUN_FULL_SCALE_REGRESSION="${RUN_FULL_SCALE_REGRESSION:-0}"
 RUN_SCALE_IDENTITY_GATE="${RUN_SCALE_IDENTITY_GATE:-0}"
+RUN_SCALE_IDENTITY_CONTRACT="${RUN_SCALE_IDENTITY_CONTRACT:-0}"
+if [[ "$RUN_FULL_SCALE_REGRESSION" == "1" && "$RUN_SCALE_IDENTITY_CONTRACT" != "1" ]]; then
+  RUN_SCALE_IDENTITY_CONTRACT="1"
+fi
 SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
-echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
@@ -257,10 +261,18 @@ fi
 # ----------------------------
 ACCEPT_ORDER_SH="$SCRIPT_DIR/accept_lookup_order.sh"
 ACCEPT_ORDER="${ACCEPT_ORDER:-0}"  # 1=run, 0=skip
+SCALE_IDENTITY_CONTRACT_SH="$BACKEND_DIR/scripts/ci/verify_scale_identity_contract.sh"
 
 if [[ "$ACCEPT_ORDER" == "1" ]]; then
   if [[ ! -f "$ACCEPT_ORDER_SH" ]]; then
     echo "[CI][FAIL] missing: $ACCEPT_ORDER_SH" >&2
+    exit 14
+  fi
+fi
+
+if [[ "$RUN_SCALE_IDENTITY_CONTRACT" == "1" ]]; then
+  if [[ ! -x "$SCALE_IDENTITY_CONTRACT_SH" ]]; then
+    echo "[CI][FAIL] missing or not executable: $SCALE_IDENTITY_CONTRACT_SH" >&2
     exit 14
   fi
 fi
@@ -720,6 +732,12 @@ if ! php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j
   exit 13
 fi
 echo "[CI] smoke OK"
+
+if [[ "$RUN_SCALE_IDENTITY_CONTRACT" == "1" ]]; then
+  echo "[CI] running scale identity contract gate (full regression)"
+  API="$API" REGION="$REGION" LOCALE="$LOCALE" bash "$SCALE_IDENTITY_CONTRACT_SH"
+  echo "[CI] scale identity contract gate OK"
+fi
 
 # -----------------------------
 # Run E2E verify

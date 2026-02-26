@@ -7,9 +7,13 @@ namespace App\Services\Ci;
 final class ScaleImpactResolver
 {
     private const SCALE_MBTI = 'MBTI';
+
     private const SCALE_BIG5 = 'BIG5_OCEAN';
+
     private const SCALE_CLINICAL = 'CLINICAL_COMBO_68';
+
     private const SCALE_SDS = 'SDS_20';
+
     private const SCALE_EQ = 'EQ_60';
 
     /**
@@ -60,6 +64,7 @@ final class ScaleImpactResolver
                 $clinicalChanged = true;
                 $sdsChanged = true;
                 $eqChanged = true;
+
                 continue;
             }
 
@@ -149,7 +154,7 @@ final class ScaleImpactResolver
     }
 
     /**
-     * @param array<int,string> $paths
+     * @param  array<int,string>  $paths
      * @return list<string>
      */
     private function normalizePaths(array $paths): array
@@ -160,7 +165,10 @@ final class ScaleImpactResolver
             if ($value === '') {
                 continue;
             }
-            $value = ltrim($value, './');
+            while (str_starts_with($value, './')) {
+                $value = substr($value, 2);
+            }
+            $value = ltrim($value, '/');
             $out[$value] = true;
         }
 
@@ -294,8 +302,7 @@ final class ScaleImpactResolver
         bool $clinicalChanged,
         bool $sdsChanged,
         bool $eqChanged
-    ): string
-    {
+    ): string {
         if ($runFullScaleRegression) {
             return 'full_regression';
         }
@@ -379,8 +386,7 @@ final class ScaleImpactResolver
         bool $sdsChanged,
         bool $eqChanged,
         bool $sdsNormsChanged
-    ): string
-    {
+    ): string {
         if ($sharedChanged) {
             return 'shared-layer changed: run full cross-scale regression';
         }
