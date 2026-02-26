@@ -3,6 +3,7 @@
 namespace App\Services\Commerce;
 
 use App\Services\Report\ReportAccess;
+use App\Services\Scale\ScaleIdentityWriteProjector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -10,11 +11,14 @@ use Illuminate\Support\Str;
 class OrderManager
 {
     private const FINAL_STATUSES = ['fulfilled', 'failed', 'canceled', 'refunded'];
+
     private const MAX_ORDER_QUANTITY = 1000;
+
     private const MAX_INT32 = 2147483647;
 
     public function __construct(
         private SkuCatalog $skus,
+        private ScaleIdentityWriteProjector $identityProjector,
     ) {}
 
     public function createOrder(
@@ -43,7 +47,7 @@ class OrderManager
         }
 
         $skuRow = $resolved['sku_row'] ?? null;
-        if (!$skuRow) {
+        if (! $skuRow) {
             return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
         }
 
@@ -60,7 +64,7 @@ class OrderManager
 
         $skuToLookup = $effectiveSku !== '' ? $effectiveSku : $requestedSku;
         $provider = strtolower(trim($provider));
-        if ($provider === '' || !in_array($provider, $this->allowedProviders(), true)) {
+        if ($provider === '' || ! in_array($provider, $this->allowedProviders(), true)) {
             return $this->badRequest('PROVIDER_NOT_SUPPORTED', 'provider not supported.');
         }
 
@@ -84,7 +88,7 @@ class OrderManager
             $useIdempotency,
             $modulesIncluded
         ): array {
-            $orderNo = 'ord_' . Str::uuid();
+            $orderNo = 'ord_'.Str::uuid();
             $now = now();
 
             $orderMeta = [];
@@ -184,8 +188,7 @@ class OrderManager
         ?string $anonId,
         string $orderNo,
         bool $allowAnonymousFallback = false
-    ): array
-    {
+    ): array {
         $orderNo = trim($orderNo);
         if ($orderNo === '') {
             return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
@@ -196,7 +199,7 @@ class OrderManager
             ->where('org_id', $orgId)
             ->first();
 
-        if (!$order) {
+        if (! $order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
@@ -207,7 +210,7 @@ class OrderManager
         $ownedByAnon = $aid !== null && $aid === $this->trimOrNull($order->anon_id ?? null);
         $ownershipVerified = $ownedByUser || $ownedByAnon;
 
-        if (!$ownershipVerified && $uid === null && $aid === null && $allowAnonymousFallback) {
+        if (! $ownershipVerified && $uid === null && $aid === null && $allowAnonymousFallback) {
             return [
                 'ok' => true,
                 'order' => $order,
@@ -215,7 +218,7 @@ class OrderManager
             ];
         }
 
-        if (!$ownershipVerified) {
+        if (! $ownershipVerified) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
@@ -242,7 +245,7 @@ class OrderManager
             ->where('org_id', $orgId)
             ->lockForUpdate()
             ->first();
-        if (!$order) {
+        if (! $order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
@@ -259,7 +262,7 @@ class OrderManager
             ];
         }
 
-        if (!$this->isTransitionAllowed($fromStatus, 'paid')) {
+        if (! $this->isTransitionAllowed($fromStatus, 'paid')) {
             return $this->conflict('ORDER_STATUS_INVALID', 'invalid order status transition.');
         }
 
@@ -285,7 +288,7 @@ class OrderManager
 
         if ($updated === 0) {
             $current = DB::table('orders')->where('order_no', $orderNo)->where('org_id', $orgId)->first();
-            if (!$current) {
+            if (! $current) {
                 return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
             }
             $currentStatus = strtolower((string) ($current->status ?? ''));
@@ -323,7 +326,7 @@ class OrderManager
         }
 
         $order = $query->first();
-        if (!$order) {
+        if (! $order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
@@ -339,7 +342,7 @@ class OrderManager
             ];
         }
 
-        if (!$this->isTransitionAllowed($fromStatus, $toStatus)) {
+        if (! $this->isTransitionAllowed($fromStatus, $toStatus)) {
             return $this->conflict('ORDER_STATUS_INVALID', 'invalid order status transition.');
         }
 
@@ -369,7 +372,7 @@ class OrderManager
         $updated = $updateQuery->update($updates);
         if ($updated === 0) {
             $current = DB::table('orders')->where('order_no', $orderNo)->first();
-            if (!$current) {
+            if (! $current) {
                 return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
             }
 
@@ -470,7 +473,7 @@ class OrderManager
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 
@@ -563,45 +566,11 @@ class OrderManager
             ];
         }
 
-        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
-        $scaleUid = trim((string) ($attempt->scale_uid ?? ''));
-
-        if ($scaleCodeV2 !== '' && $scaleUid !== '') {
-            return [
-                'scale_code_v2' => $scaleCodeV2,
-                'scale_uid' => $scaleUid,
-            ];
-        }
-
-        $scaleCodeV1 = strtoupper(trim((string) ($attempt->scale_code ?? '')));
-        if ($scaleCodeV1 === '') {
-            return [
-                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
-                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
-            ];
-        }
-
-        $v1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
-        $uidMap = (array) config('scale_identity.scale_uid_map', []);
-
-        if ($scaleCodeV2 === '') {
-            $mappedV2 = strtoupper(trim((string) ($v1ToV2[$scaleCodeV1] ?? '')));
-            if ($mappedV2 !== '') {
-                $scaleCodeV2 = $mappedV2;
-            }
-        }
-
-        if ($scaleUid === '') {
-            $mappedUid = trim((string) ($uidMap[$scaleCodeV1] ?? ''));
-            if ($mappedUid !== '') {
-                $scaleUid = $mappedUid;
-            }
-        }
-
-        return [
-            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
-            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
-        ];
+        return $this->identityProjector->projectFromCodes(
+            (string) ($attempt->scale_code ?? ''),
+            (string) ($attempt->scale_code_v2 ?? ''),
+            (string) ($attempt->scale_uid ?? '')
+        );
     }
 
     private function findIdempotentOrder(

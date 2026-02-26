@@ -4,15 +4,17 @@ namespace App\Services\Assessments;
 
 use App\Models\Assessment;
 use App\Models\AssessmentAssignment;
+use App\Services\Scale\ScaleIdentityWriteProjector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class AssessmentService
 {
-    public function __construct(private AssessmentSummaryService $summaryService)
-    {
-    }
+    public function __construct(
+        private AssessmentSummaryService $summaryService,
+        private ScaleIdentityWriteProjector $identityProjector,
+    ) {}
 
     public function findForOrg(int $orgId, int $assessmentId): ?Assessment
     {
@@ -58,7 +60,7 @@ class AssessmentService
         $now = now();
 
         foreach ($subjects as $subject) {
-            if (!is_array($subject)) {
+            if (! is_array($subject)) {
                 continue;
             }
 
@@ -68,13 +70,13 @@ class AssessmentService
             if ($type === '' || $value === '') {
                 continue;
             }
-            if (!in_array($type, ['user', 'email'], true)) {
+            if (! in_array($type, ['user', 'email'], true)) {
                 continue;
             }
-            if ($type === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            if ($type === 'email' && ! filter_var($value, FILTER_VALIDATE_EMAIL)) {
                 continue;
             }
-            if ($type === 'user' && !preg_match('/^\d+$/', $value)) {
+            if ($type === 'user' && ! preg_match('/^\d+$/', $value)) {
                 continue;
             }
 
@@ -187,7 +189,7 @@ class AssessmentService
                 ->lockForUpdate()
                 ->first();
 
-            if (!$row) {
+            if (! $row) {
                 return null;
             }
 
@@ -211,7 +213,7 @@ class AssessmentService
 
     private function generateInviteToken(): string
     {
-        return Str::uuid()->toString() . Str::random(28);
+        return Str::uuid()->toString().Str::random(28);
     }
 
     private function shouldWriteScaleIdentityColumns(): bool
@@ -233,33 +235,6 @@ class AssessmentService
      */
     private function resolveScaleIdentityValues(string $scaleCode): array
     {
-        $code = strtoupper(trim($scaleCode));
-        if ($code === '') {
-            return [
-                'scale_code_v2' => null,
-                'scale_uid' => null,
-            ];
-        }
-
-        $v1ToV2 = (array) config('scale_identity.code_map_v1_to_v2', []);
-        $v2ToV1 = (array) config('scale_identity.code_map_v2_to_v1', []);
-        $uidMap = (array) config('scale_identity.scale_uid_map', []);
-
-        $scaleCodeV1 = $code;
-        $scaleCodeV2 = null;
-
-        if (isset($v1ToV2[$code])) {
-            $scaleCodeV2 = strtoupper(trim((string) $v1ToV2[$code]));
-        } elseif (isset($v2ToV1[$code])) {
-            $scaleCodeV1 = strtoupper(trim((string) $v2ToV1[$code]));
-            $scaleCodeV2 = $code;
-        }
-
-        $scaleUid = trim((string) ($uidMap[$scaleCodeV1] ?? ''));
-
-        return [
-            'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
-            'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
-        ];
+        return $this->identityProjector->projectFromCodes($scaleCode);
     }
 }
