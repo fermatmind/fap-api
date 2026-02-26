@@ -29,7 +29,8 @@ class OrderManager
         int $quantity,
         ?string $targetAttemptId,
         string $provider,
-        ?string $idempotencyKey = null
+        ?string $idempotencyKey = null,
+        ?string $contactEmail = null
     ): array {
         $requestedSku = $this->skus->normalizeSku($sku);
         if ($requestedSku === '') {
@@ -68,13 +69,20 @@ class OrderManager
             return $this->badRequest('PROVIDER_NOT_SUPPORTED', 'provider not supported.');
         }
 
+        $normalizedUserId = $this->trimOrNull($userId);
+        $normalizedAnonId = $this->trimOrNull($anonId);
+        $contactEmailHash = $this->hashContactEmail($contactEmail);
+        if ($normalizedUserId === null && $contactEmailHash === null) {
+            return $this->badRequest('EMAIL_REQUIRED', 'email is required.');
+        }
+
         $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
         $useIdempotency = $idempotencyKey !== '';
 
         $createRow = function () use (
             $orgId,
-            $userId,
-            $anonId,
+            $normalizedUserId,
+            $normalizedAnonId,
             $skuToLookup,
             $quantity,
             $targetAttemptId,
@@ -86,7 +94,8 @@ class OrderManager
             $entitlementId,
             $idempotencyKey,
             $useIdempotency,
-            $modulesIncluded
+            $modulesIncluded,
+            $contactEmailHash
         ): array {
             $orderNo = 'ord_'.Str::uuid();
             $now = now();
@@ -100,8 +109,8 @@ class OrderManager
                 'id' => (string) Str::uuid(),
                 'order_no' => $orderNo,
                 'org_id' => $orgId,
-                'user_id' => $this->trimOrNull($userId),
-                'anon_id' => $this->trimOrNull($anonId),
+                'user_id' => $normalizedUserId,
+                'anon_id' => $normalizedAnonId,
                 'sku' => $skuToLookup,
                 'quantity' => $quantity,
                 'target_attempt_id' => $this->trimOrNull($targetAttemptId),
@@ -120,6 +129,9 @@ class OrderManager
                     ? json_encode($orderMeta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                     : null,
             ];
+            if (Schema::hasColumn('orders', 'contact_email_hash')) {
+                $row['contact_email_hash'] = $contactEmailHash;
+            }
 
             if ($this->shouldWriteScaleIdentityColumns() && $this->ordersTableHasIdentityColumns()) {
                 $identity = $this->resolveOrderScaleIdentity($orgId, $targetAttemptId);
@@ -180,6 +192,47 @@ class OrderManager
             'order_no' => $order->order_no ?? $row['order_no'],
             'order' => $order ?? $row,
         ];
+    }
+
+    public function findLookupOrder(
+        int $orgId,
+        ?string $userId,
+        ?string $anonId,
+        string $orderNo,
+        ?string $contactEmailHash = null
+    ): ?object {
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return null;
+        }
+
+        $query = DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId);
+
+        $uid = $this->trimOrNull($userId);
+        $aid = $this->trimOrNull($anonId);
+        $emailHash = $this->normalizeEmailHash($contactEmailHash);
+        $canMatchByEmailHash = $emailHash !== null && Schema::hasColumn('orders', 'contact_email_hash');
+        if ($uid === null && $aid === null && ! $canMatchByEmailHash) {
+            return null;
+        }
+
+        $query->where(function ($scoped) use ($uid, $aid, $canMatchByEmailHash, $emailHash): void {
+            if ($uid !== null) {
+                $scoped->orWhere('user_id', $uid);
+            }
+
+            if ($aid !== null) {
+                $scoped->orWhere('anon_id', $aid);
+            }
+
+            if ($canMatchByEmailHash && $emailHash !== null) {
+                $scoped->orWhere('contact_email_hash', $emailHash);
+            }
+        });
+
+        return $query->first();
     }
 
     public function getOrder(
@@ -526,6 +579,40 @@ class OrderManager
         }
 
         return $key;
+    }
+
+    private function hashContactEmail(?string $email): ?string
+    {
+        $normalized = $this->normalizeEmail($email);
+        if ($normalized === null) {
+            return null;
+        }
+
+        return hash('sha256', $normalized);
+    }
+
+    private function normalizeEmail(?string $email): ?string
+    {
+        $email = mb_strtolower(trim((string) $email), 'UTF-8');
+        if ($email === '') {
+            return null;
+        }
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            return null;
+        }
+
+        return $email;
+    }
+
+    private function normalizeEmailHash(?string $hash): ?string
+    {
+        $hash = strtolower(trim((string) $hash));
+        if ($hash === '' || preg_match('/^[a-f0-9]{64}$/', $hash) !== 1) {
+            return null;
+        }
+
+        return $hash;
     }
 
     private function shouldWriteScaleIdentityColumns(): bool

@@ -10,56 +10,69 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-final class CommerceOrderReadFallbackTest extends TestCase
+final class CommerceOrderLookupSecurityTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const ANON_OWNER = 'order_read_owner';
-    private const ANON_ATTACKER = 'order_read_attacker';
+    private const ANON_OWNER = 'lookup_owner';
 
-    public function test_without_identity_returns_404(): void
+    public function test_lookup_requires_email_when_identity_missing(): void
     {
-        $orderNo = 'ord_fallback_' . Str::lower(Str::random(10));
-        $this->insertOrderForOwner($orderNo);
+        $response = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => 'ord_missing_identity',
+        ]);
 
-        $response = $this->getJson('/api/v0.3/orders/' . $orderNo);
-
-        $response->assertStatus(404)
-            ->assertJsonPath('error_code', 'NOT_FOUND');
+        $response->assertStatus(422)
+            ->assertJsonPath('error_code', 'VALIDATION_FAILED');
     }
 
-    public function test_mismatched_token_identity_still_returns_404(): void
+    public function test_lookup_with_wrong_email_is_blinded(): void
     {
-        $orderNo = 'ord_fallback_' . Str::lower(Str::random(10));
-        $this->insertOrderForOwner($orderNo);
+        $orderNo = 'ord_lookup_' . Str::lower(Str::random(8));
+        $this->insertOrderForLookup($orderNo, 'owner@example.com');
 
-        $token = $this->issueAnonToken(self::ANON_ATTACKER);
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/orders/' . $orderNo);
+        $response = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => 'attacker@example.com',
+        ]);
 
         $response->assertStatus(404)
-            ->assertJsonPath('error_code', 'NOT_FOUND');
+            ->assertJsonPath('error_code', 'ORDER_NOT_FOUND');
     }
 
-    public function test_matching_token_identity_returns_full_payload(): void
+    public function test_lookup_with_matching_email_hash_returns_status(): void
     {
-        $orderNo = 'ord_fallback_' . Str::lower(Str::random(10));
-        $this->insertOrderForOwner($orderNo);
+        $orderNo = 'ord_lookup_' . Str::lower(Str::random(8));
+        $this->insertOrderForLookup($orderNo, 'owner@example.com');
 
-        $token = $this->issueAnonToken(self::ANON_OWNER);
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/orders/' . $orderNo);
+        $response = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => 'owner@example.com',
+        ]);
 
         $response->assertStatus(200)
             ->assertJsonPath('ok', true)
-            ->assertJsonPath('ownership_verified', true)
             ->assertJsonPath('order_no', $orderNo)
-            ->assertJsonPath('status', 'pending')
-            ->assertJsonPath('amount_cents', 1990)
-            ->assertJsonPath('currency', 'USD')
-            ->assertJsonPath('order.anon_id', self::ANON_OWNER);
+            ->assertJsonPath('status', 'pending');
+    }
+
+    public function test_lookup_with_token_owner_works_without_email(): void
+    {
+        $orderNo = 'ord_lookup_' . Str::lower(Str::random(8));
+        $this->insertOrderForLookup($orderNo, 'owner@example.com');
+
+        $token = $this->issueAnonToken(self::ANON_OWNER);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('order_no', $orderNo)
+            ->assertJsonPath('status', 'pending');
     }
 
     private function issueAnonToken(string $anonId): string
@@ -81,7 +94,7 @@ final class CommerceOrderReadFallbackTest extends TestCase
         return $token;
     }
 
-    private function insertOrderForOwner(string $orderNo): void
+    private function insertOrderForLookup(string $orderNo, string $email): void
     {
         $now = now();
         $row = [
@@ -103,6 +116,9 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'updated_at' => $now,
         ];
 
+        if (Schema::hasColumn('orders', 'contact_email_hash')) {
+            $row['contact_email_hash'] = hash('sha256', mb_strtolower(trim($email), 'UTF-8'));
+        }
         if (Schema::hasColumn('orders', 'amount_total')) {
             $row['amount_total'] = 1990;
         }

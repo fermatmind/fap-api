@@ -180,7 +180,7 @@ class HighIdorOwnership404Test extends TestCase
             ->assertStatus(404);
     }
 
-    public function test_header_only_order_read_returns_degraded_payload_without_sensitive_fields(): void
+    public function test_header_only_order_read_returns_404(): void
     {
         $orderNo = 'ord_pr60_' . Str::lower(Str::random(10));
         $this->insertOrderForAnonA($orderNo);
@@ -188,15 +188,8 @@ class HighIdorOwnership404Test extends TestCase
         $response = $this->withHeaders(['X-Anon-Id' => self::ANON_B])
             ->getJson("/api/v0.3/orders/{$orderNo}");
 
-        $response->assertStatus(200)
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('ownership_verified', false)
-            ->assertJsonPath('order_no', $orderNo)
-            ->assertJsonPath('status', 'pending');
-
-        $response->assertJsonMissingPath('order');
-        $response->assertJsonMissingPath('amount_cents');
-        $response->assertJsonMissingPath('currency');
+        $response->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
 }

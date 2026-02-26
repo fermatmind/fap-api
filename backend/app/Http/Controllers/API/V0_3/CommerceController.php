@@ -51,6 +51,7 @@ class CommerceController extends Controller
         $payload = $request->validate([
             'sku' => ['required', 'string', 'max:64'],
             'quantity' => ['nullable', 'integer', 'min:1', 'max:1000'],
+            'email' => ['nullable', 'string', 'max:320'],
             'target_attempt_id' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
@@ -65,6 +66,10 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
+        $contactEmail = $this->resolveContactEmail($payload, $userId !== null ? (string) $userId : null);
+        if ($userId === null && $contactEmail === null) {
+            abort(422, 'email is required.');
+        }
 
         $provider = $this->resolveProvider($payload, $providerFromRoute);
         if ($provider === '') {
@@ -81,7 +86,8 @@ class CommerceController extends Controller
             (int) ($payload['quantity'] ?? 1),
             $payload['target_attempt_id'] ?? null,
             $provider,
-            $idempotencyKey
+            $idempotencyKey,
+            $contactEmail
         );
 
         if (!($result['ok'] ?? false)) {
@@ -104,7 +110,7 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
-        $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no, true);
+        $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no, false);
         if (!($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
             $message = trim((string) ($result['message'] ?? ''));
@@ -118,14 +124,10 @@ class CommerceController extends Controller
 
         if (!$ownershipVerified) {
             return response()->json([
-                'ok' => true,
-                'ownership_verified' => false,
-                'order_no' => $order->order_no ?? null,
-                'attempt_id' => $order->target_attempt_id ?? null,
-                'status' => $status,
-                'updated_at' => $order->updated_at ?? null,
-                'message' => $message,
-            ]);
+                'ok' => false,
+                'error_code' => 'ORDER_NOT_FOUND',
+                'message' => 'order not found.',
+            ], 404);
         }
 
         return response()->json([
@@ -149,6 +151,7 @@ class CommerceController extends Controller
         $payload = $request->validate([
             'attempt_id' => ['nullable', 'string', 'max:64'],
             'sku' => ['nullable', 'string', 'max:64'],
+            'email' => ['nullable', 'string', 'max:320'],
             'order_no' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
@@ -157,6 +160,10 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
+        $contactEmail = $this->resolveContactEmail($payload, $userId !== null ? (string) $userId : null);
+        if ($userId === null && $contactEmail === null) {
+            abort(422, 'email is required.');
+        }
 
         $existingOrderNo = trim((string) ($payload['order_no'] ?? ''));
         if ($existingOrderNo !== '') {
@@ -202,7 +209,8 @@ class CommerceController extends Controller
             1,
             $attemptId !== '' ? $attemptId : null,
             $provider,
-            $idempotencyKey
+            $idempotencyKey,
+            $contactEmail
         );
 
         if (!($created['ok'] ?? false)) {
@@ -228,18 +236,30 @@ class CommerceController extends Controller
     {
         $payload = $request->validate([
             'order_no' => ['required', 'string', 'max:64'],
-            'email' => ['required', 'string', 'max:320'],
+            'email' => ['nullable', 'string', 'max:320'],
         ]);
 
         $orderNo = trim((string) ($payload['order_no'] ?? ''));
         $orgId = $this->orgContext->orgId();
+        $userId = $this->orgContext->userId();
+        $anonId = $this->resolveAnonId($request);
+        $contactEmailHash = $this->hashContactEmail((string) ($payload['email'] ?? ''));
 
-        $query = DB::table('orders')->where('order_no', $orderNo);
-        if ($orgId > 0) {
-            $query->where('org_id', $orgId);
+        if ($userId === null && $anonId === null && $contactEmailHash === null) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'VALIDATION_FAILED',
+                'message' => 'email is required when identity is missing.',
+            ], 422);
         }
 
-        $order = $query->first();
+        $order = $this->orders->findLookupOrder(
+            $orgId,
+            $userId !== null ? (string) $userId : null,
+            $anonId,
+            $orderNo,
+            $contactEmailHash
+        );
         if (!$order) {
             return response()->json([
                 'ok' => false,
@@ -282,6 +302,7 @@ class CommerceController extends Controller
     {
         return match ($code) {
             'SKU_NOT_FOUND', 'ORDER_NOT_FOUND' => 404,
+            'EMAIL_REQUIRED' => 422,
             'TABLE_MISSING' => 500,
             default => 400,
         };
@@ -293,6 +314,7 @@ class CommerceController extends Controller
             $this->orgContext->anonId(),
             $request->attributes->get('anon_id'),
             $request->attributes->get('fm_anon_id'),
+            $request->attributes->get('client_anon_id'),
         ];
 
         foreach ($candidates as $candidate) {
@@ -397,6 +419,47 @@ class CommerceController extends Controller
 
         $sku = trim((string) $sku);
         return $sku !== '' ? strtoupper($sku) : '';
+    }
+
+    private function resolveContactEmail(array $payload, ?string $userId): ?string
+    {
+        $inputEmail = $this->normalizeEmail((string) ($payload['email'] ?? ''));
+        if ($inputEmail !== null) {
+            return $inputEmail;
+        }
+
+        $uid = trim((string) $userId);
+        if ($uid === '' || preg_match('/^\d+$/', $uid) !== 1) {
+            return null;
+        }
+
+        $dbEmail = DB::table('users')->where('id', (int) $uid)->value('email');
+
+        return $this->normalizeEmail((string) ($dbEmail ?? ''));
+    }
+
+    private function hashContactEmail(string $email): ?string
+    {
+        $normalized = $this->normalizeEmail($email);
+        if ($normalized === null) {
+            return null;
+        }
+
+        return hash('sha256', $normalized);
+    }
+
+    private function normalizeEmail(string $email): ?string
+    {
+        $email = mb_strtolower(trim($email), 'UTF-8');
+        if ($email === '') {
+            return null;
+        }
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            return null;
+        }
+
+        return $email;
     }
 
     private function normalizePublicOrderStatus(string $status): string
