@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
 use App\Http\Controllers\API\V0_3\AttemptReadController;
 use App\Http\Controllers\API\V0_3\AttemptWriteController;
+use App\Http\Controllers\API\V0_3\AuthGuestController as AuthGuestV03Controller;
 use App\Http\Controllers\API\V0_3\AuthPhoneController as AuthPhoneV03Controller;
 use App\Http\Controllers\API\V0_3\AuthWxPhoneController as AuthWxPhoneV03Controller;
 use App\Http\Controllers\API\V0_3\BigFiveOpsController;
@@ -74,6 +75,9 @@ Route::prefix('v0.3')->middleware([
         ->name('api.v0_3.webhooks.payment');
 
     Route::middleware('throttle:api_auth')->group(function () {
+        Route::post('/auth/guest', AuthGuestV03Controller::class)
+            ->middleware(\App\Http\Middleware\ResolveAnonId::class);
+
         if (app()->environment(['local', 'testing', 'ci'])) {
             Route::post('/auth/wx_phone', AuthWxPhoneV03Controller::class);
         } else {

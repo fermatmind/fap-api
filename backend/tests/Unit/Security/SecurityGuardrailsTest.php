@@ -18,6 +18,7 @@ final class SecurityGuardrailsTest extends TestCase
     private const EXPLICIT_PUBLIC_MUTATING_ROUTES = [
         '/api/v0.2/{any?}',
         '/api/v0.3/webhooks/payment/{provider}',
+        '/api/v0.3/auth/guest',
         '/api/v0.3/auth/wx_phone',
         '/api/v0.3/auth/phone/send_code',
         '/api/v0.3/auth/phone/verify',
