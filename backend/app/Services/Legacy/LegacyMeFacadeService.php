@@ -9,6 +9,7 @@ use App\Services\Legacy\Me\MeAttemptsService;
 use App\Services\Legacy\Me\MeMetricsService;
 use App\Services\Legacy\Me\MeProfileService;
 use App\Support\OrgContext;
+use App\Support\PiiCipher;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Contracts\Mail\Factory as MailFactory;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class LegacyMeFacadeService
         private readonly LoggerInterface $logger,
         private readonly MailFactory $mailer,
         private readonly CacheRepository $cache,
+        private readonly PiiCipher $piiCipher,
     ) {
     }
 
@@ -60,17 +62,32 @@ class LegacyMeFacadeService
         }
 
         $pk = \App\Support\SchemaBaseline::hasColumn('users', 'uid') ? 'uid' : 'id';
+        $emailHash = $this->piiCipher->emailHash($email);
+        $emailEnc = $this->piiCipher->encrypt($email);
 
-        $exists = DB::table('users')
-            ->where('email', $email)
-            ->where($pk, '!=', (string) $userId)
-            ->exists();
+        $existsQuery = DB::table('users')->where($pk, '!=', (string) $userId);
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_hash')) {
+            $existsQuery->where(function ($q) use ($emailHash, $email): void {
+                $q->where('email_hash', $emailHash)
+                    ->orWhere('email', $email);
+            });
+        } else {
+            $existsQuery->where('email', $email);
+        }
+
+        $exists = $existsQuery->exists();
 
         if ($exists) {
             throw new ApiProblemException(422, 'EMAIL_IN_USE', 'email already in use.');
         }
 
         $update = ['email' => $email];
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_hash')) {
+            $update['email_hash'] = $emailHash;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_enc')) {
+            $update['email_enc'] = $emailEnc;
+        }
         if (\App\Support\SchemaBaseline::hasColumn('users', 'email_verified_at')) {
             $update['email_verified_at'] = now();
         }

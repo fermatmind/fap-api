@@ -9,6 +9,7 @@ use App\Services\Account\AssetCollector;
 use App\Services\Audit\LookupEventLogger;
 use App\Services\Auth\FmTokenService;
 use App\Services\Auth\PhoneOtpService;
+use App\Support\PiiCipher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -164,9 +165,11 @@ class AuthPhoneController extends Controller
 
         /** @var FmTokenService $tokenSvc */
         $tokenSvc = app(FmTokenService::class);
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
         $issued = $tokenSvc->issueForUser((string) $userId, [
             'provider' => 'phone',
-            'phone' => $phone,
+            'phone_hash' => $pii->phoneHash($phone),
             'anon_id' => $anonId,
         ]);
 
@@ -263,16 +266,30 @@ class AuthPhoneController extends Controller
 
     private function findOrCreateUserByPhone(string $phoneE164, ?string $anonId): array
     {
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+
         $hasUid = \App\Support\SchemaBaseline::hasColumn('users', 'uid');
         $pk = $hasUid ? 'uid' : 'id';
 
         $hasPhoneE164 = \App\Support\SchemaBaseline::hasColumn('users', 'phone_e164');
         $hasPhone = \App\Support\SchemaBaseline::hasColumn('users', 'phone');
+        $hasPhoneHash = \App\Support\SchemaBaseline::hasColumn('users', 'phone_e164_hash');
+        $hasPhoneEnc = \App\Support\SchemaBaseline::hasColumn('users', 'phone_e164_enc');
 
         $phoneCol = $hasPhoneE164 ? 'phone_e164' : ($hasPhone ? 'phone' : null);
+        $phoneHash = $pii->phoneHash($phoneE164);
+        $phoneEnc = $pii->encrypt($phoneE164);
 
         $query = DB::table('users');
-        if ($phoneCol) {
+        if ($hasPhoneHash) {
+            $query->where(function ($q) use ($phoneHash, $phoneCol, $phoneE164): void {
+                $q->where('phone_e164_hash', $phoneHash);
+                if ($phoneCol !== null) {
+                    $q->orWhere($phoneCol, $phoneE164);
+                }
+            });
+        } elseif ($phoneCol) {
             $query->where($phoneCol, $phoneE164);
         } else {
             $query->where($pk, '__no_match__');
@@ -294,6 +311,12 @@ class AuthPhoneController extends Controller
 
         if ($phoneCol) {
             $insert[$phoneCol] = $phoneE164;
+        }
+        if ($hasPhoneHash) {
+            $insert['phone_e164_hash'] = $phoneHash;
+        }
+        if ($hasPhoneEnc) {
+            $insert['phone_e164_enc'] = $phoneEnc;
         }
 
         if ($anonId && \App\Support\SchemaBaseline::hasColumn('users', 'anon_id')) {
@@ -317,7 +340,13 @@ class AuthPhoneController extends Controller
             $insert['name'] = 'user';
         }
         if (\App\Support\SchemaBaseline::hasColumn('users', 'email') && !array_key_exists('email', $insert)) {
-            $insert['email'] = 'phone_' . md5($phoneE164) . '@example.local';
+            $insert['email'] = $pii->legacyEmailPlaceholder($pii->emailHash('phone_' . md5($phoneE164) . '@example.local'));
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_hash') && !array_key_exists('email_hash', $insert)) {
+            $insert['email_hash'] = $pii->emailHash((string) $insert['email']);
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'email_enc') && !array_key_exists('email_enc', $insert)) {
+            $insert['email_enc'] = $pii->encrypt((string) $insert['email']);
         }
         if (\App\Support\SchemaBaseline::hasColumn('users', 'password') && !array_key_exists('password', $insert)) {
             $insert['password'] = bcrypt(bin2hex(random_bytes(8)));
@@ -338,7 +367,17 @@ class AuthPhoneController extends Controller
     private function buildUserPayloadFromRow(object $row, string $pk, ?string $phoneCol): array
     {
         $uid = (string) ($row->{$pk} ?? '');
-        $phone = $phoneCol ? (string) ($row->{$phoneCol} ?? '') : null;
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+
+        $phone = null;
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'phone_e164_enc')) {
+            $phone = $pii->decrypt((string) ($row->phone_e164_enc ?? ''));
+        }
+        if (($phone === null || $phone === '') && $phoneCol) {
+            $raw = (string) ($row->{$phoneCol} ?? '');
+            $phone = $raw !== '' ? $raw : null;
+        }
 
         $anonId = property_exists($row, 'anon_id') ? (string) ($row->anon_id ?? '') : null;
         if ($anonId === '') {
