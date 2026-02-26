@@ -17,6 +17,8 @@ return [
 
     'version' => env('APP_VERSION', 'unknown'),
 
+    'git_sha' => env('GITHUB_SHA', env('CI_COMMIT_SHA', '')),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

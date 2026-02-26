@@ -753,10 +753,7 @@ final class ContentPackPublisher
 
     private function resolveGitSha(): ?string
     {
-        $sha = trim((string) env('GITHUB_SHA', ''));
-        if ($sha === '') {
-            $sha = trim((string) env('CI_COMMIT_SHA', ''));
-        }
+        $sha = trim((string) config('app.git_sha', ''));
         if ($sha === '') {
             return null;
         }
