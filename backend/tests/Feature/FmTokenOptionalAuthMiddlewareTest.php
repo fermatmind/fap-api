@@ -18,15 +18,16 @@ final class FmTokenOptionalAuthMiddlewareTest extends TestCase
     public function test_revoked_token_is_rejected(): void
     {
         $token = 'fm_'.(string) Str::uuid();
-        DB::table('fm_tokens')->insert([
-            'token' => $token,
+        DB::table('auth_tokens')->insert([
             'token_hash' => hash('sha256', $token),
-            'user_id' => '9001',
+            'user_id' => 9001,
             'anon_id' => 'anon-9001',
             'org_id' => 0,
             'role' => 'public',
+            'meta_json' => null,
             'revoked_at' => now()->subMinute(),
             'expires_at' => now()->addDay(),
+            'last_used_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -42,15 +43,16 @@ final class FmTokenOptionalAuthMiddlewareTest extends TestCase
     public function test_expired_token_is_rejected(): void
     {
         $token = 'fm_'.(string) Str::uuid();
-        DB::table('fm_tokens')->insert([
-            'token' => $token,
+        DB::table('auth_tokens')->insert([
             'token_hash' => hash('sha256', $token),
-            'user_id' => '9002',
+            'user_id' => 9002,
             'anon_id' => 'anon-9002',
             'org_id' => 0,
             'role' => 'public',
+            'meta_json' => null,
             'revoked_at' => null,
             'expires_at' => now()->subMinute(),
+            'last_used_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

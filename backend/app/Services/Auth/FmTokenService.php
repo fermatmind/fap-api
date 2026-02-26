@@ -195,12 +195,9 @@ class FmTokenService
     private function findTokenRow(string $tokenHash): ?object
     {
         try {
-            $row = DB::table('auth_tokens')
+            return DB::table('auth_tokens')
                 ->where('token_hash', $tokenHash)
                 ->first();
-            if ($row !== null) {
-                return $row;
-            }
         } catch (\Throwable $e) {
             Log::warning('[SEC] auth_tokens_lookup_failed', [
                 'source' => 'fm_token_service.validate_token',
@@ -208,8 +205,6 @@ class FmTokenService
             ]);
         }
 
-        return DB::table('fm_tokens')
-            ->where('token_hash', $tokenHash)
-            ->first();
+        return null;
     }
 }
