@@ -32,7 +32,6 @@ class AttemptSubmitService
         private AssessmentRunner $assessmentRunner,
         private AttemptSubmitSideEffects $sideEffects,
         private ReportGatekeeper $reportGatekeeper,
-        private BigFiveTelemetry $bigFiveTelemetry,
         private AttemptDurationResolver $durationResolver,
         private ScaleIdentityResolver $identityResolver,
     ) {}
@@ -538,7 +537,7 @@ class AttemptSubmitService
             $normsPayload = is_array($scorePayload['norms'] ?? null) ? $scorePayload['norms'] : [];
             $qualityPayload = is_array($scorePayload['quality'] ?? null) ? $scorePayload['quality'] : [];
 
-            $this->bigFiveTelemetry->recordAttemptSubmitted(
+            $this->bigFiveTelemetry()->recordAttemptSubmitted(
                 $orgId,
                 $this->numericUserId($actorUserId),
                 $actorAnonId,
@@ -588,6 +587,11 @@ class AttemptSubmitService
         }
 
         return $responsePayload;
+    }
+
+    private function bigFiveTelemetry(): BigFiveTelemetry
+    {
+        return app(BigFiveTelemetry::class);
     }
 
     private function enforceConsentOnSubmit(string $scaleCode, Attempt $attempt, SubmitAttemptDTO $dto): void
