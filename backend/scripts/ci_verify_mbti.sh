@@ -764,11 +764,26 @@ if (!$exists) {
   exit 13
 fi
 
-curl -fsS "$API/api/v0.3/scales/${SMOKE_SCALE_CODE}/questions" >"$SMOKE_Q_LOG" || {
-  echo "[CI][FAIL] smoke curl failed"
+SMOKE_HTTP_CODE=""
+for attempt in 1 2 3; do
+  SMOKE_HTTP_CODE="$(curl -sS -o "$SMOKE_Q_LOG" -w "%{http_code}" "$API/api/v0.3/scales/${SMOKE_SCALE_CODE}/questions" || true)"
+  if [[ "$SMOKE_HTTP_CODE" == "200" ]]; then
+    break
+  fi
+
+  if [[ "$attempt" -lt 3 ]]; then
+    echo "[CI][WARN] smoke attempt ${attempt} failed http=${SMOKE_HTTP_CODE}, retrying..."
+    sleep 1
+  fi
+done
+
+if [[ "$SMOKE_HTTP_CODE" != "200" ]]; then
+  echo "[CI][FAIL] smoke curl failed http=${SMOKE_HTTP_CODE}"
+  head -c 1200 "$SMOKE_Q_LOG" || true
+  echo
   tail -n 120 "$SERVE_LOG" >&2 || true
   exit 13
-}
+fi
 
 if ! php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$SMOKE_Q_LOG" >/dev/null 2>&1; then
   echo "[CI][FAIL] smoke returned ok=false. body:"
