@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use App\Contracts\Security\PiiEnvelopeAdapter;
 use Illuminate\Support\Facades\Crypt;
 
 final class PiiCipher
 {
     private const PLACEHOLDER_DOMAIN = 'privacy.local';
+
+    private const DEFAULT_KEY_ID = 'local-app-key';
+
+    private const DEFAULT_ALGO = 'laravel-crypt-v1';
+
+    public function __construct(
+        private readonly PiiEnvelopeAdapter $envelopeAdapter,
+    ) {}
 
     public function currentKeyVersion(): int
     {
@@ -44,7 +53,19 @@ final class PiiCipher
             return null;
         }
 
-        return Crypt::encryptString($normalized);
+        $envelope = [
+            'ciphertext' => $this->envelopeAdapter->encrypt($normalized),
+            'key_id' => $this->currentKeyId(),
+            'key_version' => $this->currentKeyVersion(),
+            'algo' => $this->currentAlgo(),
+        ];
+
+        $encoded = json_encode($envelope, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (! is_string($encoded) || trim($encoded) === '') {
+            return (string) $envelope['ciphertext'];
+        }
+
+        return $encoded;
     }
 
     public function decrypt(?string $ciphertext): ?string
@@ -54,9 +75,20 @@ final class PiiCipher
             return null;
         }
 
-        try {
-            $plaintext = Crypt::decryptString($ciphertext);
-        } catch (\Throwable) {
+        $envelope = $this->decodeEnvelope($ciphertext);
+        if ($envelope !== null) {
+            $plaintext = $this->envelopeAdapter->decrypt((string) $envelope['ciphertext']);
+            if ($plaintext === null) {
+                $plaintext = $this->decryptLegacyCiphertext((string) $envelope['ciphertext']);
+            }
+        } else {
+            $plaintext = $this->envelopeAdapter->decrypt($ciphertext);
+            if ($plaintext === null) {
+                $plaintext = $this->decryptLegacyCiphertext($ciphertext);
+            }
+        }
+
+        if ($plaintext === null) {
             return null;
         }
 
@@ -80,5 +112,55 @@ final class PiiCipher
         $salt = (string) config('app.key', 'fap-key');
 
         return hash_hmac('sha256', $namespace.'|'.$value, $salt);
+    }
+
+    private function currentKeyId(): string
+    {
+        $keyId = trim((string) config('services.pii.key_id', self::DEFAULT_KEY_ID));
+
+        return $keyId !== '' ? $keyId : self::DEFAULT_KEY_ID;
+    }
+
+    private function currentAlgo(): string
+    {
+        $algo = trim((string) config('services.pii.algo', self::DEFAULT_ALGO));
+
+        return $algo !== '' ? $algo : self::DEFAULT_ALGO;
+    }
+
+    /**
+     * @return array{ciphertext:string,key_id:string,key_version:int,algo:string}|null
+     */
+    private function decodeEnvelope(string $value): ?array
+    {
+        $decoded = json_decode($value, true);
+        if (! is_array($decoded)) {
+            return null;
+        }
+
+        $ciphertext = trim((string) ($decoded['ciphertext'] ?? ''));
+        $keyId = trim((string) ($decoded['key_id'] ?? ''));
+        $algo = trim((string) ($decoded['algo'] ?? ''));
+        $keyVersion = (int) ($decoded['key_version'] ?? 0);
+
+        if ($ciphertext === '' || $keyId === '' || $algo === '' || $keyVersion <= 0) {
+            return null;
+        }
+
+        return [
+            'ciphertext' => $ciphertext,
+            'key_id' => $keyId,
+            'key_version' => $keyVersion,
+            'algo' => $algo,
+        ];
+    }
+
+    private function decryptLegacyCiphertext(string $ciphertext): ?string
+    {
+        try {
+            return Crypt::decryptString($ciphertext);
+        } catch (\Throwable) {
+            return null;
+        }
     }
 }

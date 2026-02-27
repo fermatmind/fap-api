@@ -140,6 +140,8 @@ return [
 
     'pii' => [
         'key_version' => (int) env('PII_KEY_VERSION', 1),
+        'key_id' => env('PII_KEY_ID', 'local-app-key'),
+        'algo' => env('PII_ENVELOPE_ALGO', 'laravel-crypt-v1'),
     ],
 
 ];

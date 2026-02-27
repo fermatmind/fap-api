@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\Security\PiiEnvelopeAdapter;
 use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
 use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
 use App\Models\AdminApproval;
@@ -28,6 +29,7 @@ use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
 use App\Support\Logging\RedactProcessor;
 use App\Support\OrgContext;
+use App\Support\Security\LocalPiiEnvelopeAdapter;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -52,6 +54,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(PiiEnvelopeAdapter::class, LocalPiiEnvelopeAdapter::class);
+
         // Bind ContentPackResolver so app(ContentPackResolver::class) works everywhere.
         $this->app->singleton(ContentPackResolver::class, function () {
             return new ContentPackResolver;
