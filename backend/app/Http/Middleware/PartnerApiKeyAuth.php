@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Support\SchemaBaseline;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Response;
 
 final class PartnerApiKeyAuth
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (! Schema::hasTable('partner_api_keys')) {
+        if (! SchemaBaseline::hasTable('partner_api_keys')) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'PARTNER_API_NOT_READY',
@@ -131,7 +131,7 @@ final class PartnerApiKeyAuth
         int $latencyMs,
         int $statusCode
     ): void {
-        if (! Schema::hasTable('partner_api_usages')) {
+        if (! SchemaBaseline::hasTable('partner_api_usages')) {
             return;
         }
 
