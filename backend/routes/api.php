@@ -62,10 +62,17 @@ Route::prefix('v0.3')->middleware([
     'throttle:api_public',
     NormalizeApiErrorContract::class,
 ])->group(function () {
-    $payProviders = ['stripe', 'billing'];
+    $payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'alipay'];
     if (app()->environment(['local', 'testing']) && config('payments.allow_stub') === true) {
         $payProviders[] = 'stub';
     }
+    if (! app()->environment(['local', 'testing'])) {
+        $payProviders = array_values(array_filter(
+            $payProviders,
+            static fn (string $provider): bool => $provider !== 'stub'
+        ));
+    }
+    $payProviders = array_values(array_unique($payProviders));
 
     // ✅ 关键修复：payment webhook 必须是“公共入口”，不能依赖 ResolveOrgContext / token
     Route::post(
@@ -172,6 +179,8 @@ Route::prefix('v0.3')->middleware([
         Route::post('/orders/{provider}', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder')
             ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);
+        Route::get('/orders/{order_no}/pay/alipay', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@launchAlipay')
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::get('/orders/{order_no}', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder')
             ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::get('/shares/{id}', [ShareV03Controller::class, 'getShareView']);

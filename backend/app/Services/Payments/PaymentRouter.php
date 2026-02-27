@@ -15,7 +15,7 @@ final class PaymentRouter
         $methods = [];
         if (is_array($priority) && isset($priority[$region]) && is_array($priority[$region])) {
             foreach ($priority[$region] as $method) {
-                if (!is_string($method)) {
+                if (! is_string($method)) {
                     continue;
                 }
 
@@ -42,6 +42,7 @@ final class PaymentRouter
     public function primaryProviderForRegion(string $region): string
     {
         $methods = $this->methodsForRegion($region);
+
         return $methods[0] ?? '';
     }
 
@@ -54,17 +55,46 @@ final class PaymentRouter
 
         $default = (string) (config('regions.default_region') ?? config('content_packs.default_region', 'CN_MAINLAND'));
         $default = strtoupper(trim($default));
+
         return $default !== '' ? $default : 'CN_MAINLAND';
     }
 
     private function allowedProviders(): array
     {
-        $providers = ['stripe', 'billing'];
-        if ($this->isStubEnabled()) {
-            $providers[] = 'stub';
+        $providers = [];
+        $configured = config('payments.providers', []);
+        if (is_array($configured)) {
+            foreach ($configured as $provider => $providerConfig) {
+                if (! is_string($provider)) {
+                    continue;
+                }
+
+                $provider = strtolower(trim($provider));
+                if ($provider === '') {
+                    continue;
+                }
+
+                $enabled = (bool) (is_array($providerConfig) ? ($providerConfig['enabled'] ?? false) : false);
+                if (! $enabled) {
+                    continue;
+                }
+
+                if ($provider === 'stub' && ! $this->isStubEnabled()) {
+                    continue;
+                }
+
+                $providers[] = $provider;
+            }
         }
 
-        return $providers;
+        if ($providers === []) {
+            $providers = ['stripe', 'billing'];
+            if ($this->isStubEnabled()) {
+                $providers[] = 'stub';
+            }
+        }
+
+        return array_values(array_unique($providers));
     }
 
     private function isStubEnabled(): bool

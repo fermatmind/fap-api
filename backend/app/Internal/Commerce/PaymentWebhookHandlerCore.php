@@ -9,9 +9,12 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\BenefitWalletService;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
+use App\Services\Commerce\PaymentGateway\AlipayGateway;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
+use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
+use App\Services\Commerce\PaymentGateway\WechatPayGateway;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Email\EmailOutboxService;
 use App\Services\Observability\BigFiveTelemetry;
@@ -50,9 +53,28 @@ class PaymentWebhookHandlerCore
         private ?BigFiveTelemetry $bigFiveTelemetry = null,
     ) {
         $stripe = new StripeGateway;
-        $this->gateways[$stripe->provider()] = $stripe;
+        if ($this->isProviderEnabled($stripe->provider())) {
+            $this->gateways[$stripe->provider()] = $stripe;
+        }
         $billing = new BillingGateway;
-        $this->gateways[$billing->provider()] = $billing;
+        if ($this->isProviderEnabled($billing->provider())) {
+            $this->gateways[$billing->provider()] = $billing;
+        }
+
+        $lemonsqueezy = new LemonSqueezyGateway;
+        if ($this->isProviderEnabled($lemonsqueezy->provider())) {
+            $this->gateways[$lemonsqueezy->provider()] = $lemonsqueezy;
+        }
+
+        $wechatpay = new WechatPayGateway;
+        if ($this->isProviderEnabled($wechatpay->provider())) {
+            $this->gateways[$wechatpay->provider()] = $wechatpay;
+        }
+
+        $alipay = new AlipayGateway;
+        if ($this->isProviderEnabled($alipay->provider())) {
+            $this->gateways[$alipay->provider()] = $alipay;
+        }
 
         if ($this->isStubEnabled()) {
             $stubGatewayClass = \App\Services\Commerce\PaymentGateway\StubGateway::class;
@@ -1826,6 +1848,25 @@ class PaymentWebhookHandlerCore
         return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
     }
 
+    private function isProviderEnabled(string $provider): bool
+    {
+        $provider = strtolower(trim($provider));
+        if ($provider === '') {
+            return false;
+        }
+
+        if ($provider === 'stub') {
+            return $this->isStubEnabled();
+        }
+
+        $configured = config("payments.providers.{$provider}.enabled");
+        if ($configured !== null) {
+            return (bool) $configured;
+        }
+
+        return in_array($provider, ['stripe', 'billing'], true);
+    }
+
     private function normalizeResultStatus(array $result): array
     {
         $isOk = ($result['ok'] ?? false) === true;
@@ -2027,6 +2068,21 @@ class PaymentWebhookHandlerCore
                     'payment.success',
                     'payment_completed',
                     'paid',
+                ],
+                'lemonsqueezy' => [
+                    'order_created',
+                    'subscription_payment_success',
+                    'payment_succeeded',
+                ],
+                'wechatpay' => [
+                    'payment_succeeded',
+                    'success',
+                    'trade_success',
+                ],
+                'alipay' => [
+                    'payment_succeeded',
+                    'trade_success',
+                    'trade_finished',
                 ],
                 default => ['payment_succeeded'],
             };
