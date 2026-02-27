@@ -5,8 +5,9 @@ namespace App\Services\Report;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
-use App\Services\Commerce\EntitlementManager;
-use App\Services\Commerce\SkuCatalog;
+use App\Services\Report\Resolvers\AccessResolver;
+use App\Services\Report\Resolvers\CrisisPolicyResolver;
+use App\Services\Report\Resolvers\OfferResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use Illuminate\Support\Facades\DB;
@@ -18,19 +19,13 @@ class ReportGatekeeper
 
     private const SNAPSHOT_RETRY_AFTER_SECONDS = 3;
 
-    private const DEFAULT_VIEW_POLICY = [
-        'free_sections' => ['intro', 'score'],
-        'blur_others' => true,
-        'teaser_percent' => 0.3,
-        'upgrade_sku' => null,
-    ];
-
     public function __construct(
         private ScaleRegistry $registry,
-        private EntitlementManager $entitlements,
-        private SkuCatalog $skus,
         private ReportSnapshotStore $snapshotStore,
         private ReportComposerRegistry $composerRegistry,
+        private AccessResolver $accessResolver,
+        private OfferResolver $offerResolver,
+        private CrisisPolicyResolver $crisisPolicyResolver,
     ) {}
 
     public function ensureAccess(
@@ -65,20 +60,18 @@ class ReportGatekeeper
             return $this->notFound('SCALE_NOT_FOUND', 'scale not found.');
         }
 
-        $commercial = $this->normalizeCommercial($registry['commercial_json'] ?? null);
+        $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
-        $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
-        if ($benefitCode === '') {
-            $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
-        }
-
-        $hasAccess = $benefitCode !== ''
-            ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
-            : false;
-        if ($forceFreeOnly) {
-            $hasAccess = false;
-        }
+        $accessState = $this->accessResolver->resolveAccess(
+            $orgId,
+            $userId,
+            $anonId,
+            $attemptId,
+            $commercial,
+            $forceFreeOnly
+        );
+        $hasAccess = (bool) ($accessState['has_full_access'] ?? false);
 
         return [
             'ok' => true,
@@ -120,91 +113,59 @@ class ReportGatekeeper
             return $this->notFound('SCALE_NOT_FOUND', 'scale not found.');
         }
 
-        $viewPolicy = $this->normalizeViewPolicy($registry['view_policy_json'] ?? null);
-        $commercial = $this->normalizeCommercial($registry['commercial_json'] ?? null);
+        $viewPolicy = $this->offerResolver->normalizeViewPolicy($registry['view_policy_json'] ?? null);
+        $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
-        $paywall = $this->buildPaywall($viewPolicy, $commercial, $scaleCode, $orgId);
+        $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $scaleCode, $orgId);
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
-        $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
-        if ($benefitCode === '') {
-            $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
-        }
 
-        $hasFullAccess = $benefitCode !== ''
-            ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
-            : false;
-        if ($forceFreeOnly) {
-            $hasFullAccess = false;
-        }
+        $accessState = $this->accessResolver->resolveAccess(
+            $orgId,
+            $userId,
+            $anonId,
+            $attemptId,
+            $commercial,
+            $forceFreeOnly
+        );
+        $hasFullAccess = (bool) ($accessState['has_full_access'] ?? false);
 
-        $modulesOffered = $this->collectModulesFromOffers((array) ($paywall['offers'] ?? []));
+        $modulesOffered = $this->offerResolver->collectModulesFromOffers((array) ($paywall['offers'] ?? []));
         if ($modulesOffered === []) {
             $modulesOffered = ReportAccess::allDefaultModulesOffered($scaleCode);
         }
 
-        $modulesAllowed = $this->entitlements->getAllowedModulesForAttempt($orgId, $attemptId);
-        if ($scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
-            $modulesAllowed = array_values(array_filter(
-                $modulesAllowed,
-                static fn (string $module): bool => str_starts_with(strtolower($module), 'big5_')
-            ));
-        } elseif ($scaleCode === ReportAccess::SCALE_CLINICAL_COMBO_68) {
-            $modulesAllowed = array_values(array_filter(
-                $modulesAllowed,
-                static fn (string $module): bool => str_starts_with(strtolower($module), 'clinical_')
-            ));
-        } elseif ($scaleCode === ReportAccess::SCALE_SDS_20) {
-            $modulesAllowed = array_values(array_filter(
-                $modulesAllowed,
-                static fn (string $module): bool => str_starts_with(strtolower($module), 'sds_')
-            ));
-        } elseif ($scaleCode === ReportAccess::SCALE_EQ_60) {
-            $modulesAllowed = array_values(array_filter(
-                $modulesAllowed,
-                static fn (string $module): bool => str_starts_with(strtolower($module), 'eq_')
-            ));
-        }
-        if ($modulesAllowed === []) {
-            $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked($scaleCode);
-        }
-        if ($forceFreeOnly) {
-            $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked($scaleCode);
-        }
-
-        $freeModule = ReportAccess::freeModuleForScale($scaleCode);
-        $fullModule = ReportAccess::fullModuleForScale($scaleCode);
-
-        if ($hasFullAccess) {
-            $modulesAllowed = ReportAccess::normalizeModules(array_merge(
-                $modulesAllowed,
-                $modulesOffered,
-                [$fullModule, $freeModule]
-            ));
-        }
-        if (! in_array($freeModule, $modulesAllowed, true)) {
-            $modulesAllowed[] = $freeModule;
-            $modulesAllowed = ReportAccess::normalizeModules($modulesAllowed);
-        }
-
-        $modulesPreview = ReportAccess::normalizeModules($modulesOffered);
-        $hasPaidModuleAccess = count(array_diff($modulesAllowed, [$freeModule])) > 0;
+        $modulesState = $this->accessResolver->resolveModules(
+            $scaleCode,
+            $orgId,
+            $attemptId,
+            $hasFullAccess,
+            $forceFreeOnly,
+            $modulesOffered
+        );
+        $modulesAllowed = (array) ($modulesState['modules_allowed'] ?? []);
+        $modulesPreview = (array) ($modulesState['modules_preview'] ?? []);
+        $hasPaidModuleAccess = (bool) ($modulesState['has_paid_module_access'] ?? false);
 
         $scoreContract = $this->extractScoreContract($result);
         $normsPayload = is_array($scoreContract['norms'] ?? null) ? $scoreContract['norms'] : [];
         $qualityPayload = is_array($scoreContract['quality'] ?? null) ? $scoreContract['quality'] : [];
-        $crisisAlert = (bool) ($qualityPayload['crisis_alert'] ?? false);
-
-        if (in_array($scaleCode, [ReportAccess::SCALE_CLINICAL_COMBO_68, ReportAccess::SCALE_SDS_20], true) && $crisisAlert) {
-            $paywall['offers'] = [];
-            $paywall['upgrade_sku'] = null;
-            $paywall['upgrade_sku_effective'] = null;
-            $modulesOffered = [];
-            $modulesPreview = [];
-            $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked($scaleCode);
-            $hasFullAccess = false;
-            $hasPaidModuleAccess = false;
-        }
+        $crisisState = $this->crisisPolicyResolver->apply(
+            $scaleCode,
+            $qualityPayload,
+            $paywall,
+            $modulesAllowed,
+            $modulesOffered,
+            $modulesPreview,
+            $hasFullAccess,
+            $hasPaidModuleAccess
+        );
+        $paywall = (array) ($crisisState['paywall'] ?? $paywall);
+        $modulesAllowed = (array) ($crisisState['modules_allowed'] ?? $modulesAllowed);
+        $modulesOffered = (array) ($crisisState['modules_offered'] ?? $modulesOffered);
+        $modulesPreview = (array) ($crisisState['modules_preview'] ?? $modulesPreview);
+        $hasFullAccess = (bool) ($crisisState['has_full_access'] ?? $hasFullAccess);
+        $hasPaidModuleAccess = (bool) ($crisisState['has_paid_module_access'] ?? $hasPaidModuleAccess);
 
         $variant = $hasPaidModuleAccess ? ReportAccess::VARIANT_FULL : ReportAccess::VARIANT_FREE;
         $reportAccessLevel = $variant === ReportAccess::VARIANT_FREE
@@ -212,7 +173,7 @@ class ReportGatekeeper
             : ReportAccess::REPORT_ACCESS_FULL;
         $locked = $variant === ReportAccess::VARIANT_FREE;
 
-        $shouldUseSnapshot = $hasFullAccess && $this->modulesCoverOffered($modulesAllowed, $modulesOffered);
+        $shouldUseSnapshot = $hasFullAccess && $this->offerResolver->modulesCoverOffered($modulesAllowed, $modulesOffered);
         $snapshotStrictMode = $this->strictSnapshotModeEnabled();
         $shouldReadFromSnapshot = $snapshotStrictMode || $shouldUseSnapshot;
         if ($shouldReadFromSnapshot && ($snapshotStrictMode || ! $forceRefresh)) {
@@ -466,241 +427,6 @@ class ReportGatekeeper
         return in_array($role, ['member', 'viewer'], true);
     }
 
-    private function normalizeViewPolicy(mixed $raw): array
-    {
-        if (is_string($raw)) {
-            $decoded = json_decode($raw, true);
-            $raw = is_array($decoded) ? $decoded : null;
-        }
-        $raw = is_array($raw) ? $raw : [];
-
-        $policy = array_merge(self::DEFAULT_VIEW_POLICY, $raw);
-
-        $freeSections = $policy['free_sections'] ?? null;
-        $policy['free_sections'] = is_array($freeSections) ? array_values($freeSections) : self::DEFAULT_VIEW_POLICY['free_sections'];
-
-        $policy['blur_others'] = (bool) ($policy['blur_others'] ?? true);
-
-        $pct = (float) ($policy['teaser_percent'] ?? self::DEFAULT_VIEW_POLICY['teaser_percent']);
-        if ($pct < 0) {
-            $pct = 0;
-        }
-        if ($pct > 1) {
-            $pct = 1;
-        }
-        $policy['teaser_percent'] = $pct;
-
-        $upgradeSku = trim((string) ($policy['upgrade_sku'] ?? ''));
-        $policy['upgrade_sku'] = $upgradeSku !== '' ? $upgradeSku : null;
-
-        return $policy;
-    }
-
-    private function normalizeCommercial(mixed $raw): array
-    {
-        if (is_string($raw)) {
-            $decoded = json_decode($raw, true);
-            $raw = is_array($decoded) ? $decoded : null;
-        }
-
-        return is_array($raw) ? $raw : [];
-    }
-
-    private function buildPaywall(array $viewPolicy, array $commercial, string $scaleCode, int $orgId): array
-    {
-        $scaleCode = strtoupper(trim($scaleCode));
-        $effectiveSku = strtoupper(trim((string) ($viewPolicy['upgrade_sku'] ?? '')));
-        if ($effectiveSku === '' || $this->skus->isAnchorSku($effectiveSku, $scaleCode, $orgId)) {
-            $effectiveSku = $this->skus->defaultEffectiveSku($scaleCode, $orgId) ?? $effectiveSku;
-        }
-
-        $viewPolicy['upgrade_sku'] = $effectiveSku !== '' ? $effectiveSku : null;
-
-        $anchorSku = $this->skus->anchorForSku($effectiveSku, $scaleCode, $orgId);
-        if ($anchorSku === null || $anchorSku === '') {
-            $anchorSku = $this->skus->defaultAnchorSku($scaleCode, $orgId);
-        }
-
-        $offers = $this->buildOffersFromSkus($this->skus->listActiveSkus($scaleCode, $orgId));
-        if (count($offers) === 0) {
-            $offers = $this->normalizeOffers($commercial['offers'] ?? null);
-        }
-
-        return [
-            'upgrade_sku' => $anchorSku,
-            'upgrade_sku_effective' => $effectiveSku !== '' ? $effectiveSku : null,
-            'offers' => $offers,
-            'view_policy' => $viewPolicy,
-        ];
-    }
-
-    private function buildOffersFromSkus(array $items): array
-    {
-        $offers = [];
-        foreach ($items as $item) {
-            if (! is_array($item)) {
-                continue;
-            }
-
-            $sku = strtoupper(trim((string) ($item['sku'] ?? '')));
-            if ($sku === '') {
-                continue;
-            }
-
-            $meta = $item['meta_json'] ?? null;
-            if (is_string($meta)) {
-                $decoded = json_decode($meta, true);
-                $meta = is_array($decoded) ? $decoded : null;
-            }
-            $meta = is_array($meta) ? $meta : [];
-
-            if (array_key_exists('offer', $meta) && $meta['offer'] === false) {
-                continue;
-            }
-
-            $grantType = trim((string) ($meta['grant_type'] ?? ''));
-            if ($grantType === '') {
-                $grantType = strtolower(trim((string) ($item['kind'] ?? '')));
-            }
-
-            $grantQty = isset($meta['grant_qty']) ? (int) $meta['grant_qty'] : 1;
-            $periodDays = isset($meta['period_days']) ? (int) $meta['period_days'] : null;
-
-            $entitlementId = trim((string) ($meta['entitlement_id'] ?? ''));
-            $benefitCode = strtoupper(trim((string) ($item['benefit_code'] ?? '')));
-            $offerCode = trim((string) ($meta['offer_code'] ?? ''));
-            $modulesIncluded = $this->normalizeModulesIncluded(
-                $item['modules_included'] ?? ($meta['modules_included'] ?? null)
-            );
-
-            $offers[] = [
-                'sku' => $sku,
-                'sku_code' => $sku,
-                'price_cents' => (int) ($item['price_cents'] ?? 0),
-                'currency' => (string) ($item['currency'] ?? 'CNY'),
-                'title' => (string) ($meta['title'] ?? $meta['label'] ?? ''),
-                'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
-                'benefit_code' => $benefitCode !== '' ? $benefitCode : null,
-                'offer_code' => $offerCode !== '' ? $offerCode : null,
-                'modules_included' => $modulesIncluded,
-                'grant' => [
-                    'type' => $grantType !== '' ? $grantType : null,
-                    'qty' => $grantQty,
-                    'period_days' => $periodDays,
-                ],
-            ];
-        }
-
-        return $offers;
-    }
-
-    private function normalizeOffers(mixed $raw): array
-    {
-        if (is_string($raw)) {
-            $decoded = json_decode($raw, true);
-            $raw = is_array($decoded) ? $decoded : null;
-        }
-        if (! is_array($raw)) {
-            return [];
-        }
-
-        $offers = [];
-        foreach ($raw as $item) {
-            if (! is_array($item)) {
-                continue;
-            }
-
-            $sku = strtoupper(trim((string) ($item['sku'] ?? ($item['sku_code'] ?? ''))));
-            if ($sku === '') {
-                continue;
-            }
-
-            $grant = $this->normalizeGrant($item['grant'] ?? null);
-            $entitlementId = trim((string) ($item['entitlement_id'] ?? ''));
-            $benefitCode = strtoupper(trim((string) ($item['benefit_code'] ?? '')));
-            $offerCode = trim((string) ($item['offer_code'] ?? ''));
-            $modulesIncluded = $this->normalizeModulesIncluded($item['modules_included'] ?? null);
-
-            $offers[] = [
-                'sku' => $sku,
-                'sku_code' => $sku,
-                'price_cents' => (int) ($item['price_cents'] ?? 0),
-                'currency' => (string) ($item['currency'] ?? 'CNY'),
-                'title' => (string) ($item['title'] ?? ''),
-                'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
-                'benefit_code' => $benefitCode !== '' ? $benefitCode : null,
-                'offer_code' => $offerCode !== '' ? $offerCode : null,
-                'modules_included' => $modulesIncluded,
-                'grant' => $grant,
-            ];
-        }
-
-        return $offers;
-    }
-
-    private function normalizeGrant(mixed $raw): array
-    {
-        if (is_string($raw)) {
-            $decoded = json_decode($raw, true);
-            $raw = is_array($decoded) ? $decoded : null;
-        }
-        $raw = is_array($raw) ? $raw : [];
-
-        $type = trim((string) ($raw['type'] ?? ''));
-        $qty = isset($raw['qty']) ? (int) $raw['qty'] : null;
-        $periodDays = isset($raw['period_days']) ? (int) $raw['period_days'] : null;
-
-        return [
-            'type' => $type !== '' ? $type : null,
-            'qty' => $qty,
-            'period_days' => $periodDays,
-        ];
-    }
-
-    private function normalizeModulesIncluded(mixed $raw): array
-    {
-        if (is_string($raw)) {
-            $decoded = json_decode($raw, true);
-            $raw = is_array($decoded) ? $decoded : null;
-        }
-        if (! is_array($raw)) {
-            return [];
-        }
-
-        return ReportAccess::normalizeModules($raw);
-    }
-
-    private function collectModulesFromOffers(array $offers): array
-    {
-        $modules = [];
-        foreach ($offers as $offer) {
-            if (! is_array($offer)) {
-                continue;
-            }
-            $modules = array_merge(
-                $modules,
-                $this->normalizeModulesIncluded($offer['modules_included'] ?? null)
-            );
-        }
-
-        return ReportAccess::normalizeModules($modules);
-    }
-
-    private function modulesCoverOffered(array $modulesAllowed, array $modulesOffered): bool
-    {
-        if ($modulesOffered === []) {
-            return true;
-        }
-
-        $allowed = array_fill_keys(ReportAccess::normalizeModules($modulesAllowed), true);
-        foreach (ReportAccess::normalizeModules($modulesOffered) as $module) {
-            if (! isset($allowed[$module])) {
-                return false;
-            }
-        }
-
-        return true;
-    }
 
     private function upsertSnapshotVariants(
         int $orgId,
@@ -952,16 +678,6 @@ class ReportGatekeeper
             'norms' => [],
             'quality' => [],
         ];
-    }
-
-    private function numericUserId(?string $userId): ?int
-    {
-        $userId = $userId !== null ? trim($userId) : '';
-        if ($userId === '' || ! preg_match('/^\d+$/', $userId)) {
-            return null;
-        }
-
-        return (int) $userId;
     }
 
     private function badRequest(string $code, string $message): array
