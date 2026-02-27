@@ -124,8 +124,10 @@ final class SchemaBaseline
             if ($name !== '') {
                 return $name;
             }
-        } catch (\Throwable) {
-            // Fall through to configured default.
+        } catch (\Throwable $e) {
+            Log::warning('[schema_baseline] connection_name_resolve_failed', [
+                'exception' => $e::class,
+            ]);
         }
 
         $default = strtolower(trim((string) config('database.default', 'default')));

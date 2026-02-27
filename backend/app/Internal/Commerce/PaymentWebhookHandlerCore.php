@@ -1138,7 +1138,12 @@ class PaymentWebhookHandlerCore
             return;
         }
 
-        $attempt = Attempt::query()->where('id', $attemptId)->first();
+        $attemptQuery = Attempt::withoutGlobalScopes()->where('id', $attemptId);
+        if ($orgId > 0) {
+            $attemptQuery->where('org_id', $orgId);
+        }
+
+        $attempt = $attemptQuery->first();
         if (! $attempt instanceof Attempt) {
             return;
         }
