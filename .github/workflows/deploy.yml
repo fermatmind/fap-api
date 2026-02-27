@@ -64,6 +64,7 @@ jobs:
       DEPLOY_HOST_PROD: "122.152.221.126"
       DEPLOY_PATH_PROD: "/var/www/fap-api"
       HEALTHCHECK_URL_PROD: "https://fermatmind.com/api/healthz"
+      AUTH_GUEST_CHECK_URL_PROD: "https://fermatmind.com/api/v0.3/auth/guest"
 
       # ====== staging ======
       DEPLOY_USER_STG: "ubuntu"
@@ -71,6 +72,7 @@ jobs:
       DEPLOY_HOST_STG: "49.234.55.28"
       DEPLOY_PATH_STG: "/var/www/fap-api-staging"
       HEALTHCHECK_URL_STG: "https://staging.fermatmind.com/api/healthz"
+      AUTH_GUEST_CHECK_URL_STG: "https://staging.fermatmind.com/api/v0.3/auth/guest"
 
     steps:
       - name: Checkout code
@@ -105,6 +107,7 @@ jobs:
               DEPLOY_PORT="$DEPLOY_PORT_PROD"
               DEPLOY_PATH="$DEPLOY_PATH_PROD"
               HEALTHCHECK_URL="$HEALTHCHECK_URL_PROD"
+              AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_PROD"
               ;;
             staging)
               DEPLOY_HOST="$DEPLOY_HOST_STG"
@@ -112,6 +115,7 @@ jobs:
               DEPLOY_PORT="$DEPLOY_PORT_STG"
               DEPLOY_PATH="$DEPLOY_PATH_STG"
               HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
+              AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_STG"
               ;;
             *)
               echo "invalid TARGET=$TARGET"
@@ -125,12 +129,14 @@ jobs:
             echo "DEPLOY_PORT=$DEPLOY_PORT"
             echo "DEPLOY_PATH=$DEPLOY_PATH"
             echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
+            echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
           } >> "$GITHUB_ENV"
 
           echo "TARGET=$TARGET"
           echo "SSH=$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT"
           echo "DEPLOY_PATH=$DEPLOY_PATH"
           echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
+          echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
 
       - name: Gate - ci_verify_mbti (Phase D)
         env:
@@ -215,4 +221,19 @@ jobs:
             sleep 3
           done
           echo "Healthcheck failed"
+          exit 1
+
+      - name: Contract check (auth/guest post deploy)
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Auth guest contract: $AUTH_GUEST_CHECK_URL"
+          for i in 1 2 3 4 5; do
+            OUT="$(curl -fsS --max-time 10 -X POST "$AUTH_GUEST_CHECK_URL" -H 'Content-Type: application/json' --data '{"anon_id":"deploy_contract_probe"}' || true)"
+            if echo "$OUT" | php -r '$j = json_decode(stream_get_contents(STDIN), true); exit((is_array($j) && (($j["ok"] ?? false) === true) && (($j["anon_id"] ?? "") === "deploy_contract_probe")) ? 0 : 1);'; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Auth guest contract check failed"
           exit 1

@@ -172,8 +172,9 @@ cd /opt/fap-api/backend
 php artisan route:list
 php artisan migrate
 
-curl -i http://127.0.0.1:8000/api/v0.2/health
+curl -i http://127.0.0.1:8000/api/healthz
 curl -i http://127.0.0.1:8000/api/v0.4/boot
+curl -i -X POST http://127.0.0.1:8000/api/v0.3/auth/guest -H 'Content-Type: application/json' -d '{"anon_id":"deploy_contract_probe"}'
 curl -i -X POST http://127.0.0.1:8000/api/v0.3/attempts/start -H 'Content-Type: application/json' -d '{"scale_code":"MBTI"}'
 
 cd /opt/fap-api
@@ -182,7 +183,7 @@ bash backend/scripts/ci_verify_mbti.sh
 
 通过标准：
 - 路由与迁移命令成功。
-- 健康检查接口可达。
+- 健康检查接口可达，且 `/api/v0.3/auth/guest` 合约通过。
 - MBTI CI 验收链路通过。
 
 ## 8. 回滚流程

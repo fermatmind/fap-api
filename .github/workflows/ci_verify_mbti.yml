@@ -186,6 +186,8 @@ jobs:
           php artisan test --filter OrgContextMiddlewareTest
           php artisan test --filter MeAttemptsAuthContractTest
           php artisan test --filter ApiErrorContractMiddlewareTest
+          php artisan test --filter AuthGuestTokenTest
+          php artisan test --filter AuthGuestRouteWiringTest
 
       - name: Run content pack manifest consistency tests
         working-directory: backend

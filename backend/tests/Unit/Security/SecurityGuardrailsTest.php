@@ -284,6 +284,21 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/[\'"]reason[\'"]\s*=>/', $source);
     }
 
+    public function test_v03_auth_guest_route_wiring_and_middleware_contract(): void
+    {
+        $source = file_get_contents(base_path('routes/api.php'));
+        $this->assertIsString($source);
+
+        $this->assertMatchesRegularExpression(
+            '/Route::middleware\(\s*[\'"]throttle:api_auth[\'"]\s*\)\s*->\s*group\s*\(\s*function\s*\(\s*\)\s*\{/s',
+            $source
+        );
+        $this->assertMatchesRegularExpression(
+            '/Route::post\(\s*[\'"]\/auth\/guest[\'"]\s*,\s*AuthGuestV03Controller::class\s*\)\s*->\s*middleware\(\s*\\\\App\\\\Http\\\\Middleware\\\\ResolveAnonId::class\s*\)\s*;/s',
+            $source
+        );
+    }
+
     public function test_v02_routes_use_deprecated_410_contract(): void
     {
         $source = file_get_contents(base_path('routes/api.php'));

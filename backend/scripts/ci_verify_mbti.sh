@@ -309,12 +309,18 @@ ACCEPT_ORDER_SH="$SCRIPT_DIR/accept_lookup_order.sh"
 ACCEPT_ORDER="${ACCEPT_ORDER:-0}"  # 1=run, 0=skip
 SCALE_IDENTITY_CONTRACT_SH="$BACKEND_DIR/scripts/ci/verify_scale_identity_contract.sh"
 SCALE_IDENTITY_HARD_CUTOVER_SH="$BACKEND_DIR/scripts/ci/verify_scale_identity_hard_cutover.sh"
+AUTH_GUEST_CONTRACT_SH="$BACKEND_DIR/scripts/verify_auth_guest_contract.sh"
 
 if [[ "$ACCEPT_ORDER" == "1" ]]; then
   if [[ ! -f "$ACCEPT_ORDER_SH" ]]; then
     echo "[CI][FAIL] missing: $ACCEPT_ORDER_SH" >&2
     exit 14
   fi
+fi
+
+if [[ ! -x "$AUTH_GUEST_CONTRACT_SH" ]]; then
+  echo "[CI][FAIL] missing or not executable: $AUTH_GUEST_CONTRACT_SH" >&2
+  exit 14
 fi
 
 if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
@@ -1076,6 +1082,10 @@ php artisan test --filter MigrationRollbackSafetyTest
 php artisan test --filter MigrationsNoSilentCatchTest
 php artisan test --filter MigrationProtectedTablesNoDropTest
 echo "[CI] migration safety gates OK"
+
+echo "[CI] auth guest contract gate"
+bash scripts/verify_auth_guest_contract.sh
+echo "[CI] auth guest contract gate OK"
 
 echo "[CI] order security gate"
 bash scripts/verify_order_security.sh
