@@ -20,10 +20,12 @@ use App\Http\Controllers\API\V0_3\ShareController as ShareV03Controller;
 use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
 use App\Http\Controllers\API\V0_4\BootController;
+use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
 use App\Http\Middleware\NormalizeApiErrorContract;
+use App\Http\Middleware\PartnerApiKeyAuth;
 use App\Http\Middleware\ResolveOrgContext;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -234,6 +236,18 @@ Route::prefix('v0.3')->middleware([
 Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(function () {
     Route::get('/boot', [BootController::class, 'show'])
         ->middleware('throttle:api_public');
+
+    Route::prefix('partners')
+        ->middleware([
+            'throttle:api_public',
+            PartnerApiKeyAuth::class,
+        ])
+        ->group(function () {
+            Route::post('/sessions', [PartnerController::class, 'createSession']);
+            Route::get('/sessions/{attempt_id}/status', [PartnerController::class, 'status'])
+                ->middleware('uuid:attempt_id');
+            Route::post('/webhooks/sign', [PartnerController::class, 'signWebhook']);
+        });
 
     Route::middleware([
         \App\Http\Middleware\FmTokenAuth::class,

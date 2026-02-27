@@ -64,6 +64,7 @@ RUN_SDS_NORMS_GATE="${RUN_SDS_NORMS_GATE:-0}"
 RUN_FULL_SCALE_REGRESSION="${RUN_FULL_SCALE_REGRESSION:-0}"
 RUN_SCALE_IDENTITY_GATE="${RUN_SCALE_IDENTITY_GATE:-0}"
 RUN_SCALE_IDENTITY_CONTRACT="${RUN_SCALE_IDENTITY_CONTRACT:-0}"
+RUN_PARTNER_API_SMOKE="${RUN_PARTNER_API_SMOKE:-0}"
 if [[ "$RUN_FULL_SCALE_REGRESSION" == "1" && "$RUN_SCALE_IDENTITY_CONTRACT" != "1" ]]; then
   RUN_SCALE_IDENTITY_CONTRACT="1"
 fi
@@ -100,7 +101,7 @@ restore_hard_cutover_env() {
   if [[ "$PREV_FAP_CONTENT_PUBLISH_MODE" == "__UNSET__" ]]; then unset FAP_CONTENT_PUBLISH_MODE; else export FAP_CONTENT_PUBLISH_MODE="$PREV_FAP_CONTENT_PUBLISH_MODE"; fi
 }
 SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
-echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER} run_partner_api_smoke=${RUN_PARTNER_API_SMOKE}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
@@ -155,6 +156,11 @@ if [[ "$RUN_SCALE_IDENTITY_GATE" == "1" ]]; then
   echo "[CI] rebuilding sqlite baseline after scale identity gate"
   bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
   php artisan fap:schema:verify
+fi
+
+if [[ "$RUN_PARTNER_API_SMOKE" == "1" ]]; then
+  echo "[CI] running Partner API smoke test"
+  php artisan test --filter PartnerApiMvpTest
 fi
 
 # Ensure MBTI commercial benefit codes exist for report/share entitlement gate.
