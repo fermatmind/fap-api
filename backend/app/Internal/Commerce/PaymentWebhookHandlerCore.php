@@ -650,13 +650,18 @@ class PaymentWebhookHandlerCore
                 if (($postCommitOutcome['ok'] ?? false) === true) {
                     $this->markEventProcessed($provider, $providerEventId);
                 } else {
+                    $errorCode = (string) ($postCommitOutcome['error_code'] ?? 'POST_COMMIT_FAILED');
+                    $errorMessage = (string) ($postCommitOutcome['error_message'] ?? 'post commit side effects failed.');
                     $this->markEventError(
                         $provider,
                         $providerEventId,
                         'post_commit_failed',
-                        (string) ($postCommitOutcome['error_code'] ?? 'POST_COMMIT_FAILED'),
-                        (string) ($postCommitOutcome['error_message'] ?? 'post commit side effects failed.')
+                        $errorCode,
+                        $errorMessage
                     );
+
+                    // Return failure so providers can replay the same event and converge state.
+                    $result = $this->serverError($errorCode, $errorMessage);
                 }
             } elseif (($result['ok'] ?? false) && ! ($result['duplicate'] ?? false) && ! ($result['ignored'] ?? false)) {
                 $this->markEventProcessed($provider, $providerEventId);
