@@ -230,6 +230,8 @@ SERVE_LOG="$LOG_DIR/artisan_serve.log"
 SELF_CHECK_LOG="$LOG_DIR/self_check.log"
 SMOKE_Q_LOG="$LOG_DIR/smoke_questions.json"
 MVP_LOG="$LOG_DIR/mvp_check.log"
+QUEUE_BACKLOG_PROBE_LOG="$LOG_DIR/queue_backlog_probe.json"
+QUEUE_BACKLOG_PROBE_ERR_LOG="$LOG_DIR/queue_backlog_probe.err.log"
 
 # ----------------------------
 # Phase B: phone OTP acceptance script
@@ -1115,3 +1117,10 @@ php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_
 php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_3/PaymentWebhookRouteWiringTest.php
 php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/Architecture/V0_3TraitReferenceTest.php
 echo "[CI] webhook/attempt regression gates OK"
+
+echo "[CI] queue backlog probe (non-blocking)"
+if php artisan ops:queue-backlog-probe --json=1 --strict=0 >"$QUEUE_BACKLOG_PROBE_LOG" 2>"$QUEUE_BACKLOG_PROBE_ERR_LOG"; then
+  echo "[CI] queue backlog probe artifact=$QUEUE_BACKLOG_PROBE_LOG"
+else
+  echo "[CI][WARN] queue backlog probe failed (non-blocking), see $QUEUE_BACKLOG_PROBE_ERR_LOG"
+fi
