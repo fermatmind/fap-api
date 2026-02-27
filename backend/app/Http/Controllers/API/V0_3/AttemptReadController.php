@@ -207,7 +207,29 @@ class AttemptReadController extends Controller
         $anonId = $this->resolveAnonId($request);
         $attempt = $this->ownedAttemptQuery($request, $id)->firstOrFail();
 
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
+        if ($result === null) {
+            $submissionPayload = $this->attemptSubmissionService->latestForAttempt(
+                $this->orgContext,
+                $id,
+                $userId !== null ? (string) $userId : null,
+                $anonId
+            );
+
+            if (($submissionPayload['ok'] ?? false) === true && ($submissionPayload['generating'] ?? false) === true) {
+                return response()->json([
+                    'ok' => true,
+                    'attempt_id' => $id,
+                    'generating' => true,
+                    'submission_state' => (string) data_get($submissionPayload, 'submission.state', 'pending'),
+                    'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+                    'result' => null,
+                    'report' => [],
+                ], 202);
+            }
+
+            abort(404, 'result not found.');
+        }
         $responseCodes = $this->resolveResponseScaleCodes($attempt);
 
         $gate = $this->reportGatekeeper->resolve(
