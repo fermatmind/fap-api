@@ -31,6 +31,38 @@ log() {
   echo "[$(date +'%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
 }
 
+ensure_database_ready() {
+  if [[ "${DB_CONNECTION:-}" == "sqlite" ]]; then
+    local sqlite_db="${DB_DATABASE:-/tmp/pr21.sqlite}"
+    mkdir -p "$(dirname "$sqlite_db")"
+    [[ -f "$sqlite_db" ]] || touch "$sqlite_db"
+  fi
+
+  local schema_ready
+  schema_ready="$(REPO_DIR="$ROOT_DIR" php -r '
+  $repo = getenv("REPO_DIR") ?: getcwd();
+  require $repo . "/backend/vendor/autoload.php";
+  $app = require $repo . "/backend/bootstrap/app.php";
+  $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+  $kernel->bootstrap();
+  try {
+      $hasMigrations = \Illuminate\Support\Facades\Schema::hasTable("migrations");
+      $hasAttempts = \Illuminate\Support\Facades\Schema::hasTable("attempts");
+      echo ($hasMigrations && $hasAttempts) ? "1" : "0";
+  } catch (\Throwable $e) {
+      echo "0";
+  }
+  ' 2>>"$LOG_FILE" || echo "0")"
+
+  if [[ "$schema_ready" != "1" ]]; then
+    log "Preparing database schema"
+    (
+      cd "$BACKEND_DIR"
+      php artisan migrate --force
+    ) >> "$LOG_FILE" 2>&1
+  fi
+}
+
 # ---- 新增：通用 JSON 校验（避免 JSONDecodeError 直接爆栈）----
 assert_json_file() {
   local path="$1"
@@ -225,6 +257,8 @@ cleanup() {
 trap cleanup EXIT
 
 if [[ "$USE_EMBEDDED" == "0" ]]; then
+  ensure_database_ready
+
   log "Starting server on port ${SERVE_PORT}"
   (
     cd "$BACKEND_DIR"
@@ -395,11 +429,11 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
   printf '%s' "$embedded_headers" > "$headers_file"
-  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/submit" "$payload_file" "$headers_file" > "$ART_DIR/curl_submit.json" 2>>"$LOG_FILE" || true
+  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/submit?mode=sync_legacy" "$payload_file" "$headers_file" > "$ART_DIR/curl_submit.json" 2>>"$LOG_FILE" || true
   rm -f "$payload_file" "$headers_file"
   assert_json_file "$ART_DIR/curl_submit.json" "submit"
 else
-  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/submit" "$ART_DIR/curl_submit.json" '{
+  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/submit?mode=sync_legacy" "$ART_DIR/curl_submit.json" '{
       "attempt_id":"'"${ATTEMPT_ID}"'",
       "duration_ms":3600,
       "answers":[
@@ -444,11 +478,11 @@ if [[ "$USE_EMBEDDED" == "1" ]]; then
   headers_file=$(mktemp)
   printf '%s' "$embedded_payload" > "$payload_file"
   printf '%s' "$embedded_headers" > "$headers_file"
-  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/submit" "$payload_file" "$headers_file" > "$ART_DIR/curl_submit_dup.json" 2>>"$LOG_FILE" || true
+  REPO_DIR="$ROOT_DIR" php /tmp/pr21_http.php POST "/api/v0.3/attempts/submit?mode=sync_legacy" "$payload_file" "$headers_file" > "$ART_DIR/curl_submit_dup.json" 2>>"$LOG_FILE" || true
   rm -f "$payload_file" "$headers_file"
   assert_json_file "$ART_DIR/curl_submit_dup.json" "submit_dup"
 else
-  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/submit" "$ART_DIR/curl_submit_dup.json" '{
+  code="$(curl_json POST "http://127.0.0.1:${SERVE_PORT}/api/v0.3/attempts/submit?mode=sync_legacy" "$ART_DIR/curl_submit_dup.json" '{
       "attempt_id":"'"${ATTEMPT_ID}"'",
       "duration_ms":3600,
       "answers":[

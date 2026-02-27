@@ -290,7 +290,7 @@ $payload=[
 file_put_contents($argv[3], json_encode($payload, JSON_UNESCAPED_UNICODE));
 ' "$attempt_id" "$ART_DIR/mbti_answers.json" "$ART_DIR/curl_submit_payload_mbti.json"
 
-http_code="$(curl -sS -o "$ART_DIR/curl_submit_mbti.json" -w "%{http_code}" -X POST "$API/api/v0.3/attempts/submit" \
+http_code="$(curl -sS -o "$ART_DIR/curl_submit_mbti.json" -w "%{http_code}" -X POST "$API/api/v0.3/attempts/submit?mode=sync_legacy" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "X-Anon-Id: ${ANON_ID}" \

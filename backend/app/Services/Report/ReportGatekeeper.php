@@ -45,7 +45,7 @@ class ReportGatekeeper
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
+        $result = Result::withoutGlobalScopes()->where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
         if (! $result) {
             return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
         }
@@ -98,7 +98,7 @@ class ReportGatekeeper
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
+        $result = Result::withoutGlobalScopes()->where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
         if (! $result) {
             return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
         }
@@ -373,7 +373,7 @@ class ReportGatekeeper
         ?string $role,
         bool $forceSystemAccess = false
     ): \Illuminate\Database\Eloquent\Builder {
-        $query = Attempt::query()
+        $query = Attempt::withoutGlobalScopes()
             ->where('id', $attemptId)
             ->where('org_id', $orgId);
 

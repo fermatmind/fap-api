@@ -206,6 +206,46 @@ ORG_ID="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo $j["or
 
 echo "org_id=${ORG_ID}" >>"${ENV_TXT}"
 
+ORG_ID_ENV="${ORG_ID}" run_artisan tinker --execute='
+use Illuminate\Support\Facades\DB;
+$orgId = (int) getenv("ORG_ID_ENV");
+$codes = ["MBTI", "SIMPLE_SCORE_DEMO"];
+$now = now();
+
+$registryRows = DB::table("scales_registry_v2")
+    ->where("org_id", 0)
+    ->whereIn("code", $codes)
+    ->get();
+foreach ($registryRows as $row) {
+    $payload = (array) $row;
+    unset($payload["id"]);
+    $payload["org_id"] = $orgId;
+    $payload["is_public"] = false;
+    $payload["created_at"] = $now;
+    $payload["updated_at"] = $now;
+    DB::table("scales_registry_v2")->updateOrInsert(
+        ["org_id" => $orgId, "code" => (string) ($payload["code"] ?? "")],
+        $payload
+    );
+}
+
+$slugRows = DB::table("scale_slugs")
+    ->where("org_id", 0)
+    ->whereIn("scale_code", $codes)
+    ->get();
+foreach ($slugRows as $row) {
+    $payload = (array) $row;
+    unset($payload["id"]);
+    $payload["org_id"] = $orgId;
+    $payload["created_at"] = $now;
+    $payload["updated_at"] = $now;
+    DB::table("scale_slugs")->updateOrInsert(
+        ["org_id" => $orgId, "slug" => (string) ($payload["slug"] ?? "")],
+        $payload
+    );
+}
+' >/dev/null 2>&1 || fail "tenant scale bootstrap failed"
+
 CURL_SKUS="${RUN_DIR}/curl_skus.json"
 http_code=$(curl -sS -L -o "${CURL_SKUS}" -w "%{http_code}" \
   "${API}/api/v0.3/skus?scale=MBTI" \
@@ -273,7 +313,7 @@ ANSWERS_PAYLOAD='{"attempt_id":"'"${ATTEMPT_ID}"'","answers":[{"question_id":"SS
 
 CURL_SUBMIT="${RUN_DIR}/curl_submit.json"
 http_code=$(curl -sS -L -o "${CURL_SUBMIT}" -w "%{http_code}" \
-  -X POST "${API}/api/v0.3/attempts/submit" \
+  -X POST "${API}/api/v0.3/attempts/submit?mode=sync_legacy" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "X-Org-Id: ${ORG_ID}" \
@@ -282,7 +322,7 @@ http_code=$(curl -sS -L -o "${CURL_SUBMIT}" -w "%{http_code}" \
 
 CURL_SUBMIT_DUP="${RUN_DIR}/curl_submit_dup.json"
 http_code=$(curl -sS -L -o "${CURL_SUBMIT_DUP}" -w "%{http_code}" \
-  -X POST "${API}/api/v0.3/attempts/submit" \
+  -X POST "${API}/api/v0.3/attempts/submit?mode=sync_legacy" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "X-Org-Id: ${ORG_ID}" \
