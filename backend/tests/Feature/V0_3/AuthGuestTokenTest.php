@@ -30,11 +30,10 @@ final class AuthGuestTokenTest extends TestCase
         $this->assertSame($token, (string) $response->json('token'));
         $this->assertSame($token, (string) $response->json('auth_token'));
 
-        $row = DB::table('fm_tokens')
+        $legacyRow = DB::table('fm_tokens')
             ->where('token_hash', hash('sha256', $token))
             ->first();
-        $this->assertNotNull($row);
-        $this->assertSame($anonId, (string) ($row->anon_id ?? ''));
+        $this->assertNull($legacyRow);
 
         $authRow = DB::table('auth_tokens')
             ->where('token_hash', hash('sha256', $token))

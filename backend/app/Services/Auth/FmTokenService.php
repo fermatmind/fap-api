@@ -25,7 +25,6 @@ class FmTokenService
 
         $token = 'fm_'.(string) Str::uuid();
         $tokenHash = hash('sha256', $token);
-        $tokenStorageKey = $this->tokenStorageKey($tokenHash);
 
         $ttlDays = (int) config('fap.fm_token_ttl_days', 30);
         if ($ttlDays <= 0) {
@@ -63,53 +62,31 @@ class FmTokenService
 
         $now = now();
 
-        DB::table('fm_tokens')->insert([
-            'token' => $tokenStorageKey,
-            'token_hash' => $tokenHash,
-            'user_id' => $persistedUserId,
-            'anon_id' => $anonId,
-            'org_id' => $orgId,
-            'role' => $role,
-            'expires_at' => $expiresAt,
-            'revoked_at' => null,
-            'meta_json' => $metaJson,
-            'last_used_at' => null,
-            'created_at' => $now,
-            'updated_at' => $now,
+        DB::table('auth_tokens')->upsert([
+            [
+                'token_hash' => $tokenHash,
+                'user_id' => $persistedUserId,
+                'anon_id' => $anonId,
+                'org_id' => $orgId,
+                'role' => $role,
+                'meta_json' => $metaJson,
+                'expires_at' => $expiresAt,
+                'revoked_at' => null,
+                'last_used_at' => null,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+        ], ['token_hash'], [
+            'user_id',
+            'anon_id',
+            'org_id',
+            'role',
+            'meta_json',
+            'expires_at',
+            'revoked_at',
+            'last_used_at',
+            'updated_at',
         ]);
-
-        try {
-            DB::table('auth_tokens')->upsert([
-                [
-                    'token_hash' => $tokenHash,
-                    'user_id' => $persistedUserId,
-                    'anon_id' => $anonId,
-                    'org_id' => $orgId,
-                    'role' => $role,
-                    'meta_json' => $metaJson,
-                    'expires_at' => $expiresAt,
-                    'revoked_at' => null,
-                    'last_used_at' => null,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ],
-            ], ['token_hash'], [
-                'user_id',
-                'anon_id',
-                'org_id',
-                'role',
-                'meta_json',
-                'expires_at',
-                'revoked_at',
-                'last_used_at',
-                'updated_at',
-            ]);
-        } catch (\Throwable $e) {
-            Log::warning('[SEC] auth_tokens_dual_write_failed', [
-                'source' => 'fm_token_service.issue_for_user',
-                'exception' => $e::class,
-            ]);
-        }
 
         return [
             'token' => $token,
@@ -187,48 +164,18 @@ class FmTokenService
         ];
     }
 
-    private function tokenStorageKey(string $tokenHash): string
-    {
-        return 'retired_'.strtolower(trim($tokenHash));
-    }
-
     private function findTokenRow(string $tokenHash): ?object
     {
-        $row = null;
-
         try {
-            $row = DB::table('auth_tokens')
+            return DB::table('auth_tokens')
                 ->where('token_hash', $tokenHash)
-                ->first();
+                ->first() ?: null;
         } catch (\Throwable $e) {
             Log::warning('[SEC] auth_tokens_lookup_failed', [
                 'source' => 'fm_token_service.validate_token',
                 'exception' => $e::class,
             ]);
+            return null;
         }
-
-        if ($row) {
-            return $row;
-        }
-
-        try {
-            $legacy = DB::table('fm_tokens')
-                ->where('token_hash', $tokenHash)
-                ->first();
-            if ($legacy) {
-                Log::info('[SEC] fm_token_legacy_hash_fallback_hit', [
-                    'source' => 'fm_token_service.validate_token',
-                ]);
-            }
-
-            return $legacy ?: null;
-        } catch (\Throwable $e) {
-            Log::warning('[SEC] fm_tokens_lookup_failed', [
-                'source' => 'fm_token_service.validate_token',
-                'exception' => $e::class,
-            ]);
-        }
-
-        return null;
     }
 }
