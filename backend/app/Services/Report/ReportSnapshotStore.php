@@ -8,6 +8,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ReportSnapshotStore
 {
@@ -518,9 +519,19 @@ class ReportSnapshotStore
 
     private function snapshotStatus(?object $row): string
     {
-        $status = strtolower(trim((string) ($row->status ?? 'ready')));
+        $status = strtolower(trim((string) ($row->status ?? '')));
+        if (in_array($status, ['pending', 'ready', 'failed'], true)) {
+            return $status;
+        }
 
-        return in_array($status, ['pending', 'ready', 'failed'], true) ? $status : 'ready';
+        Log::warning('[REPORT] snapshot_status_unknown', [
+            'org_id' => (int) ($row->org_id ?? 0),
+            'attempt_id' => (string) ($row->attempt_id ?? ''),
+            'status' => $status !== '' ? $status : null,
+            'source' => 'report_snapshot_store',
+        ]);
+
+        return 'failed';
     }
 
     private function shouldWriteScaleIdentityColumns(): bool
