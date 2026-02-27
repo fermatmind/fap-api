@@ -284,6 +284,11 @@ return [
         'bypass_in_test_env' => (bool) env('FAP_RATE_LIMIT_BYPASS_IN_TEST_ENV', true),
     ],
 
+    'observability' => [
+        'slow_query_log_enabled' => (bool) env('FAP_OBSERVABILITY_SLOW_QUERY_LOG_ENABLED', true),
+        'slow_query_ms' => (float) env('FAP_OBSERVABILITY_SLOW_QUERY_MS', 500),
+    ],
+
     'events' => [
         'max_top_keys' => (int) env('FAP_EVENTS_MAX_TOP_KEYS', 200),
         'max_depth' => (int) env('FAP_EVENTS_MAX_DEPTH', 4),

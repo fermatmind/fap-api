@@ -31,12 +31,14 @@ use App\Support\OrgContext;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route as IlluminateRoute;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use RuntimeException;
@@ -298,6 +300,8 @@ class AppServiceProvider extends ServiceProvider
             Log::emergency('CRITICAL: PRODUCTION_APP_DEBUG_TRUE');
         }
 
+        $this->registerSlowQueryTelemetry();
+
         $response = function (string $code, string $message) {
             return function (Request $request, array $headers) use ($code, $message) {
                 return response()->json([
@@ -442,5 +446,110 @@ class AppServiceProvider extends ServiceProvider
                 ])->save();
             }
         });
+    }
+
+    private function registerSlowQueryTelemetry(): void
+    {
+        DB::listen(function (QueryExecuted $query): void {
+            if (! (bool) config('fap.observability.slow_query_log_enabled', true)) {
+                return;
+            }
+
+            $thresholdMs = max(0.0, (float) config('fap.observability.slow_query_ms', 500));
+            $sqlMs = max(0.0, (float) ($query->time ?? 0.0));
+            if ($sqlMs < $thresholdMs) {
+                return;
+            }
+
+            $request = request();
+            $route = $this->resolveSlowQueryRoute($request);
+            $requestId = $this->resolveSlowQueryRequestId($request);
+            $orgId = $this->resolveSlowQueryOrgId($request);
+
+            $normalizedSql = preg_replace('/\s+/', ' ', trim((string) ($query->sql ?? '')));
+            if (! is_string($normalizedSql)) {
+                $normalizedSql = '';
+            }
+            if (strlen($normalizedSql) > 512) {
+                $normalizedSql = substr($normalizedSql, 0, 512).'...';
+            }
+
+            Log::warning('SLOW_QUERY_DETECTED', [
+                'org_id' => $orgId,
+                'route' => $route,
+                'sql_ms' => round($sqlMs, 3),
+                'request_id' => $requestId,
+                'connection' => (string) ($query->connectionName ?? ''),
+                'bindings_count' => is_array($query->bindings ?? null) ? count($query->bindings) : 0,
+                'sql' => $normalizedSql,
+            ]);
+        });
+    }
+
+    private function resolveSlowQueryRoute(mixed $request): string
+    {
+        if (! $request instanceof Request) {
+            return 'console';
+        }
+
+        $route = '';
+        try {
+            $routeValue = $request->route();
+            if ($routeValue instanceof IlluminateRoute) {
+                $route = trim((string) $routeValue->uri());
+            } elseif (is_string($routeValue)) {
+                $route = trim($routeValue);
+            }
+        } catch (\Throwable) {
+            $route = '';
+        }
+
+        if ($route === '') {
+            $route = trim((string) $request->path());
+        }
+
+        return $route !== '' ? $route : '/';
+    }
+
+    private function resolveSlowQueryRequestId(mixed $request): ?string
+    {
+        if (! $request instanceof Request) {
+            return null;
+        }
+
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+        if ($requestId === '') {
+            $requestId = trim((string) $request->header('X-Request-Id', $request->header('X-Request-ID', '')));
+        }
+
+        return $requestId !== '' ? $requestId : null;
+    }
+
+    private function resolveSlowQueryOrgId(mixed $request): int
+    {
+        $orgId = 0;
+
+        if ($request instanceof Request) {
+            $attrOrgId = $request->attributes->get('org_id');
+            if (is_numeric($attrOrgId)) {
+                $orgId = (int) $attrOrgId;
+            }
+            if ($orgId <= 0) {
+                $attrFmOrgId = $request->attributes->get('fm_org_id');
+                if (is_numeric($attrFmOrgId)) {
+                    $orgId = (int) $attrFmOrgId;
+                }
+            }
+        }
+
+        if ($orgId <= 0) {
+            try {
+                $orgId = (int) app(OrgContext::class)->orgId();
+            } catch (\Throwable) {
+                $orgId = 0;
+            }
+        }
+
+        return max(0, $orgId);
     }
 }
