@@ -31,4 +31,38 @@ return [
         'admin_login_max_attempts' => (int) env('OPS_ADMIN_LOGIN_MAX_ATTEMPTS', 5),
         'admin_login_decay_seconds' => (int) env('OPS_ADMIN_LOGIN_DECAY_SECONDS', 300),
     ],
+
+    'queue_backlog_probe' => [
+        'queues' => ['attempts', 'reports', 'commerce'],
+        'window_minutes' => (int) env('OPS_QUEUE_BACKLOG_WINDOW_MINUTES', 60),
+        'strict_default' => (bool) env('OPS_QUEUE_BACKLOG_STRICT_DEFAULT', false),
+        'thresholds' => [
+            'attempts' => [
+                'max_pending' => (int) env('OPS_QUEUE_ATTEMPTS_MAX_PENDING', 120),
+                'max_failed' => (int) env('OPS_QUEUE_ATTEMPTS_MAX_FAILED', 15),
+                'max_oldest_seconds' => (int) env('OPS_QUEUE_ATTEMPTS_MAX_OLDEST_SECONDS', 240),
+                'max_timeout_failures' => (int) env('OPS_QUEUE_ATTEMPTS_MAX_TIMEOUT_FAILURES', 3),
+            ],
+            'reports' => [
+                'max_pending' => (int) env('OPS_QUEUE_REPORTS_MAX_PENDING', 60),
+                'max_failed' => (int) env('OPS_QUEUE_REPORTS_MAX_FAILED', 10),
+                'max_oldest_seconds' => (int) env('OPS_QUEUE_REPORTS_MAX_OLDEST_SECONDS', 300),
+                'max_timeout_failures' => (int) env('OPS_QUEUE_REPORTS_MAX_TIMEOUT_FAILURES', 2),
+            ],
+            'commerce' => [
+                'max_pending' => (int) env('OPS_QUEUE_COMMERCE_MAX_PENDING', 40),
+                'max_failed' => (int) env('OPS_QUEUE_COMMERCE_MAX_FAILED', 8),
+                'max_oldest_seconds' => (int) env('OPS_QUEUE_COMMERCE_MAX_OLDEST_SECONDS', 180),
+                'max_timeout_failures' => (int) env('OPS_QUEUE_COMMERCE_MAX_TIMEOUT_FAILURES', 2),
+            ],
+        ],
+        'alert_policy' => [
+            'escalation_chain' => ['ops-oncall', 'backend-oncall', 'payments-oncall'],
+            'quiet_window' => [
+                'timezone' => env('OPS_QUEUE_ALERT_QUIET_TZ', 'Asia/Shanghai'),
+                'start' => env('OPS_QUEUE_ALERT_QUIET_START', '02:00'),
+                'end' => env('OPS_QUEUE_ALERT_QUIET_END', '08:00'),
+            ],
+        ],
+    ],
 ];

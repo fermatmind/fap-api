@@ -127,11 +127,39 @@ php artisan queue:flush
 - 关注表：`ai_insights`
 - 典型问题：预算/外部 provider 超时导致 failed
 
-## 6. SLO 与告警建议
-- `failed_jobs` 总量 > 0 且持续 5 分钟：warning
-- `jobs(queue=reports)` 积压超过阈值（例如 > 100）且 10 分钟无下降：critical
-- `report_snapshots.status=pending` 超时（例如 > 5 分钟）占比异常：warning
-- `payment_events.handle_status in (failed,reprocess_failed)` 激增：warning
+## 6. SLO 与告警策略（FER2-24）
+`ops:queue-backlog-probe` 默认输出 `attempts/reports/commerce` 三队列 SLO 指标，含：
+- backlog：`pending/reserved/delayed/oldest_pending_seconds`
+- failures：`failed_total/window_timeout_failures`
+- slo：`pending_utilization/failed_utilization/oldest_pending_utilization/timeout_failure_utilization/max_utilization`
+
+默认阈值（可通过 `OPS_QUEUE_*` 环境变量覆盖）：
+
+| Queue | max_pending | max_failed | max_oldest_seconds | max_timeout_failures |
+|---|---:|---:|---:|---:|
+| attempts | 120 | 15 | 240 | 3 |
+| reports | 60 | 10 | 300 | 2 |
+| commerce | 40 | 8 | 180 | 2 |
+
+### 6.1 告警分级
+- Warning：任意队列 `max_utilization > 0.8` 且持续 10 分钟。
+- Critical：任意队列发生 breach（超过阈值）且持续 5 分钟。
+- Recovery：连续 10 分钟无 breach 且 `max_utilization <= 0.6`。
+
+### 6.2 升级链路（escalation chain）
+1. `ops-oncall`（首响）
+2. `backend-oncall`（5 分钟未恢复）
+3. `payments-oncall`（commerce 队列连续 breach > 10 分钟）
+
+### 6.3 静默窗口（quiet window）
+- 时区：`Asia/Shanghai`
+- 窗口：`02:00-08:00`
+- 规则：静默窗口仅抑制 Warning，不抑制 Critical。
+
+### 6.4 CI 阻断模式
+- 非阻断（默认）：`php artisan ops:queue-backlog-probe --json=1 --strict=0`
+- 阻断：`php artisan ops:queue-backlog-probe --json=1 --strict=1`
+- 也可配置默认严格模式：`OPS_QUEUE_BACKLOG_STRICT_DEFAULT=true`
 
 ## 7. 演练清单
 1. 人工制造一条失败任务（测试环境）。
