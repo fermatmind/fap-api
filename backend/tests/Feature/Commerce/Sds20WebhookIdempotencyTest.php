@@ -77,8 +77,10 @@ final class Sds20WebhookIdempotencyTest extends TestCase
         ];
 
         $resp = $this->postSignedBillingWebhook($payload, ['X-Org-Id' => '0']);
-        $resp->assertStatus(400);
+        $resp->assertStatus(200);
         $resp->assertJsonPath('error_code', 'ATTEMPT_SCALE_MISMATCH');
+        $resp->assertJsonPath('rejected', true);
+        $resp->assertJsonPath('reject_reason', 'ATTEMPT_SCALE_MISMATCH');
 
         $this->assertSame(0, DB::table('benefit_grants')
             ->where('order_no', $orderNo)
@@ -89,6 +91,10 @@ final class Sds20WebhookIdempotencyTest extends TestCase
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_sds_scale_mismatch_1')
             ->value('last_error_code'));
+        $this->assertSame('ATTEMPT_SCALE_MISMATCH', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_sds_scale_mismatch_1')
+            ->value('reason'));
     }
 
     private function createSdsAttemptWithResult(string $anonId): string

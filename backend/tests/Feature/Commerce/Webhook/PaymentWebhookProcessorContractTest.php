@@ -134,9 +134,11 @@ final class PaymentWebhookProcessorContractTest extends TestCase
             'event_type' => 'payment_succeeded',
         ]);
 
-        $res->assertStatus(400)->assertJson([
+        $res->assertStatus(200)->assertJson([
             'ok' => false,
             'error_code' => 'PROVIDER_MISMATCH',
+            'rejected' => true,
+            'reject_reason' => 'PROVIDER_MISMATCH',
         ]);
 
         $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
@@ -144,6 +146,10 @@ final class PaymentWebhookProcessorContractTest extends TestCase
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_contract_provider_mismatch_1')
             ->value('last_error_code'));
+        $this->assertSame('REJECTED_PROVIDER_MISMATCH', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_contract_provider_mismatch_1')
+            ->value('reason'));
         $this->assertSame(0, DB::table('benefit_grants')->count());
     }
 
@@ -190,11 +196,16 @@ final class PaymentWebhookProcessorContractTest extends TestCase
         ], 0, null, null, true);
 
         $this->assertFalse((bool) ($amountMismatch['ok'] ?? true));
-        $this->assertSame(404, (int) ($amountMismatch['status'] ?? 0));
+        $this->assertSame(200, (int) ($amountMismatch['status'] ?? 0));
+        $this->assertSame('AMOUNT_MISMATCH', (string) ($amountMismatch['reject_reason'] ?? ''));
         $this->assertSame('AMOUNT_MISMATCH', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_contract_amount_mismatch_1')
             ->value('last_error_code'));
+        $this->assertSame('AMOUNT_MISMATCH', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_contract_amount_mismatch_1')
+            ->value('reason'));
 
         $currencyMismatch = $processor->handle('billing', [
             'provider_event_id' => 'evt_contract_currency_mismatch_1',
@@ -205,11 +216,16 @@ final class PaymentWebhookProcessorContractTest extends TestCase
         ], 0, null, null, true);
 
         $this->assertFalse((bool) ($currencyMismatch['ok'] ?? true));
-        $this->assertSame(404, (int) ($currencyMismatch['status'] ?? 0));
+        $this->assertSame(200, (int) ($currencyMismatch['status'] ?? 0));
+        $this->assertSame('CURRENCY_MISMATCH', (string) ($currencyMismatch['reject_reason'] ?? ''));
         $this->assertSame('CURRENCY_MISMATCH', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_contract_currency_mismatch_1')
             ->value('last_error_code'));
+        $this->assertSame('CURRENCY_MISMATCH', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_contract_currency_mismatch_1')
+            ->value('reason'));
     }
 
     public function test_missing_order_keeps_contract_and_does_not_grant_benefit(): void
@@ -224,9 +240,11 @@ final class PaymentWebhookProcessorContractTest extends TestCase
             'event_type' => 'payment_succeeded',
         ], ['X-Org-Id' => '0']);
 
-        $res->assertStatus(404)->assertJson([
+        $res->assertStatus(200)->assertJson([
             'ok' => false,
             'error_code' => 'ORDER_NOT_FOUND',
+            'rejected' => true,
+            'reject_reason' => 'ORDER_NOT_FOUND',
         ]);
 
         $this->assertSame(0, DB::table('benefit_grants')->count());

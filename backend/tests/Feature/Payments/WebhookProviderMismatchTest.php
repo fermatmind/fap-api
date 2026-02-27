@@ -56,11 +56,13 @@ class WebhookProviderMismatchTest extends TestCase
             'X-Org-Id' => '0',
         ]);
 
-        $response->assertStatus(400);
+        $response->assertStatus(200);
         $response->assertJson([
             'ok' => false,
             'error_code' => 'PROVIDER_MISMATCH',
             'message' => 'provider mismatch',
+            'rejected' => true,
+            'reject_reason' => 'PROVIDER_MISMATCH',
         ]);
 
         $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
@@ -73,6 +75,10 @@ class WebhookProviderMismatchTest extends TestCase
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_provider_mismatch_1')
             ->value('last_error_code'));
+        $this->assertSame('REJECTED_PROVIDER_MISMATCH', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_provider_mismatch_1')
+            ->value('reason'));
         $this->assertSame(0, DB::table('benefit_grants')->count());
         $this->assertSame(0, DB::table('report_snapshots')->count());
     }

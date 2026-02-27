@@ -75,13 +75,19 @@ final class ClinicalCombo68WebhookIdempotencyTest extends TestCase
         ];
 
         $resp = $this->postSignedBillingWebhook($payload, ['X-Org-Id' => '0']);
-        $resp->assertStatus(400);
+        $resp->assertStatus(200);
         $resp->assertJsonPath('error_code', 'ATTEMPT_OWNER_MISMATCH');
+        $resp->assertJsonPath('rejected', true);
+        $resp->assertJsonPath('reject_reason', 'ATTEMPT_OWNER_MISMATCH');
 
         $this->assertSame(0, DB::table('benefit_grants')
             ->where('order_no', $orderNo)
             ->where('attempt_id', $attemptId)
             ->count());
+        $this->assertSame('ATTEMPT_OWNER_MISMATCH', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_cc68_owner_mismatch_1')
+            ->value('reason'));
     }
 
     private function createClinicalAttemptWithResult(string $anonId): string
@@ -178,4 +184,3 @@ final class ClinicalCombo68WebhookIdempotencyTest extends TestCase
         ]);
     }
 }
-
