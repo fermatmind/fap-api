@@ -25,7 +25,7 @@ trap cleanup EXIT
 
 echo "[SECURITY_GATE] start"
 
-echo "[SECURITY_GATE] check 1/10: critical route auth invariants"
+echo "[SECURITY_GATE] check 1/11: critical route auth invariants"
 php -r '
 $path = getcwd() . "/routes/api.php";
 $source = file_get_contents($path);
@@ -54,7 +54,34 @@ if ($missing !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 2/10: no request->all() mass assignment sinks"
+echo "[SECURITY_GATE] check 2/11: v0.3 auth guest route contract"
+php -r '
+$path = getcwd() . "/routes/api.php";
+$source = file_get_contents($path);
+if (!is_string($source)) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] unable to read {$path}\n");
+    exit(1);
+}
+
+$checks = [
+    "v0.3 auth middleware group" => "/Route::middleware\\(\\s*[\\x27\\x22]throttle:api_auth[\\x27\\x22]\\s*\\)\\s*->\\s*group\\s*\\(\\s*function\\s*\\(\\s*\\)\\s*\\{/s",
+    "v0.3 auth guest route" => "/Route::post\\(\\s*[\\x27\\x22]\\/auth\\/guest[\\x27\\x22]\\s*,\\s*AuthGuestV03Controller::class\\s*\\)\\s*->\\s*middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\ResolveAnonId::class\\s*\\)\\s*;/s",
+];
+
+$missing = [];
+foreach ($checks as $name => $regex) {
+    if (preg_match($regex, $source) !== 1) {
+        $missing[] = $name;
+    }
+}
+
+if ($missing !== []) {
+    fwrite(STDERR, "[SECURITY_GATE][FAIL] missing auth guest route invariants: " . implode(", ", $missing) . "\n");
+    exit(1);
+}
+'
+
+echo "[SECURITY_GATE] check 3/11: no request->all() mass assignment sinks"
 php -r '
 $roots = [
     getcwd() . "/routes",
@@ -145,7 +172,7 @@ if ($violations !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 3/10: ownership 404 contract (no 403 leaks)"
+echo "[SECURITY_GATE] check 4/11: ownership 404 contract (no 403 leaks)"
 php -r '
 $paths = [
     "app/Http/Controllers/API/V0_3/AttemptReadController.php",
@@ -228,7 +255,7 @@ if ($violations !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 4/10: v0.3 attempt ownership resolver must not trust anon headers"
+echo "[SECURITY_GATE] check 5/11: v0.3 attempt ownership resolver must not trust anon headers"
 php -r '
 $path = getcwd() . "/app/Http/Controllers/API/V0_3/Concerns/ResolvesAttemptOwnership.php";
 $source = file_get_contents($path);
@@ -250,7 +277,7 @@ foreach ($forbidden as $regex) {
 }
 '
 
-echo "[SECURITY_GATE] check 5/10: org context can hydrate anon identity from token payload"
+echo "[SECURITY_GATE] check 6/11: org context can hydrate anon identity from token payload"
 php -r '
 $path = getcwd() . "/app/Http/Middleware/ResolveOrgContext.php";
 $source = file_get_contents($path);
@@ -278,7 +305,7 @@ if ($missing !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 6/10: webhook signature verifier has no testing/local fail-open"
+echo "[SECURITY_GATE] check 7/11: webhook signature verifier has no testing/local fail-open"
 php -r '
 $path = getcwd() . "/app/Http/Controllers/Webhooks/HandleProviderWebhook.php";
 $source = file_get_contents($path);
@@ -298,7 +325,7 @@ if (preg_match("/allow_unsigned_without_secret/", $source) !== 1) {
 }
 '
 
-echo "[SECURITY_GATE] check 7/10: fm token middlewares enforce revoked/expired checks"
+echo "[SECURITY_GATE] check 8/11: fm token middlewares enforce revoked/expired checks"
 php -r '
 $paths = [
     "app/Http/Middleware/FmTokenAuth.php",
@@ -329,7 +356,7 @@ if ($missing !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 8/10: content pack API errors must not leak internal reason"
+echo "[SECURITY_GATE] check 9/11: content pack API errors must not leak internal reason"
 php -r '
 $path = getcwd() . "/app/Support/ApiExceptionRenderer.php";
 $source = file_get_contents($path);
@@ -349,7 +376,7 @@ if (preg_match("/[\\x27\\x22]reason[\\x27\\x22]\\s*=>/", $source) === 1) {
 }
 '
 
-echo "[SECURITY_GATE] check 9/10: v0.2 must stay on deprecated 410 contract"
+echo "[SECURITY_GATE] check 10/11: v0.2 must stay on deprecated 410 contract"
 php -r '
 $path = getcwd() . "/routes/api.php";
 $source = file_get_contents($path);
@@ -359,7 +386,7 @@ if (!is_string($source)) {
 }
 
 $checks = [
-    "v0.2 retired prefix" => "/Route::prefix\\(\\s*\\x22v0\\.2\\x22\\s*\\)/",
+    "v0.2 retired prefix" => "/Route::prefix\\(\\s*[\\x27\\x22]v0\\.2[\\x27\\x22]\\s*\\)/",
     "v0.2 deprecated error code" => "/[\\x27\\x22]error_code[\\x27\\x22]\\s*=>\\s*[\\x27\\x22]API_VERSION_DEPRECATED[\\x27\\x22]/",
     "v0.2 deprecated 410 status" => "/\\],\\s*410\\s*\\)/",
 ];
@@ -377,7 +404,7 @@ if ($missing !== []) {
 }
 '
 
-echo "[SECURITY_GATE] check 10/10: unit guard test"
+echo "[SECURITY_GATE] check 11/11: unit guard test"
 php artisan test --testsuite=Unit --filter=SecurityGuardrailsTest
 
 echo "[SECURITY_GATE] PASS"

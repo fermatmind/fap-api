@@ -203,7 +203,17 @@ task('ensure:phpredis', function () {
  */
 task('healthcheck:public', function () {
     $host = get('healthcheck_host');
-    $cmd  = "curl -fsS --resolve {$host}:443:127.0.0.1 https://{$host}/api/v0.2/healthz | jq -e '.ok==true'";
+    $cmd  = "curl -fsS --resolve {$host}:443:127.0.0.1 https://{$host}/api/healthz | jq -e '.ok==true'";
+    run($cmd);
+});
+
+task('healthcheck:auth-guest-contract', function () {
+    $host = get('healthcheck_host');
+    $payload = escapeshellarg((string) json_encode([
+        'anon_id' => 'deploy_contract_probe',
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+    $cmd = "curl -fsS --resolve {$host}:443:127.0.0.1 -H 'Content-Type: application/json' -X POST https://{$host}/api/v0.3/auth/guest --data {$payload} | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'";
     run($cmd);
 });
 
@@ -232,6 +242,6 @@ after('deploy:shared', 'ensure:healthz-deps');
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck:public');
+after('deploy:symlink', 'healthcheck:auth-guest-contract');
 
 after('deploy:failed', 'deploy:unlock');
-
