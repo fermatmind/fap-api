@@ -39,3 +39,13 @@
 - [ ] 所有 workflow 都包含并通过 `bash backend/scripts/cae_gate.sh`。
 - [ ] 受影响密钥全部轮换并完成功能验证。
 - [ ] 形成书面复盘与审计证据（命令输出、CI 链接、发布记录）。
+
+## 6. Rotation Audit 查询与留存
+- 审计查询接口（需 `owner/admin` 且组织隔离）：
+  - `GET /api/v0.4/orgs/{org_id}/compliance/rotation/audits`
+  - `GET /api/v0.4/orgs/{org_id}/compliance/rotation/audits/{id}`
+- 审计字段约定：`actor` / `scope` / `key_version` / `batch` / `result` / `created_at`。
+- 留存策略（TTL）：
+  - `STORAGE_RETENTION_ROTATION_AUDITS_POLICY=ttl`
+  - `STORAGE_RETENTION_ROTATION_AUDITS_DAYS=180`
+- 查询接口会按 TTL 返回窗口内数据，窗口外数据需按归档流程离线检索。

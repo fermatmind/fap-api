@@ -12,4 +12,8 @@ return [
     'logs' => [
         'keep_days' => (int) env('STORAGE_RETENTION_LOGS_DAYS', 30),
     ],
+    'rotation_audits' => [
+        'policy' => (string) env('STORAGE_RETENTION_ROTATION_AUDITS_POLICY', 'ttl'),
+        'keep_days' => (int) env('STORAGE_RETENTION_ROTATION_AUDITS_DAYS', 180),
+    ],
 ];
