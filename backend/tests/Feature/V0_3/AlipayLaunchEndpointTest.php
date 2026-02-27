@@ -41,10 +41,6 @@ final class AlipayLaunchEndpointTest extends TestCase
         $service->shouldReceive('launch')
             ->once()
             ->with(Mockery::type('array'), 'desktop')
-            ->andReturn('ignored');
-        $service->shouldReceive('toHttpResponse')
-            ->once()
-            ->with('ignored')
             ->andReturn(new Response('<html>pay</html>', 200));
         $this->app->instance(AlipayCheckoutService::class, $service);
 
