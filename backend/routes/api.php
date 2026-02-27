@@ -20,6 +20,7 @@ use App\Http\Controllers\API\V0_3\ShareController as ShareV03Controller;
 use App\Http\Controllers\API\V0_3\Webhooks\PaymentWebhookController;
 use App\Http\Controllers\API\V0_4\AssessmentController;
 use App\Http\Controllers\API\V0_4\BootController;
+use App\Http\Controllers\API\V0_4\ExperimentGovernanceController;
 use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\HealthzAccessControl;
@@ -253,6 +254,27 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
         \App\Http\Middleware\FmTokenAuth::class,
         \App\Http\Middleware\RequireOrgRole::class.':owner,admin',
     ])->group(function () {
+        Route::post('/orgs/{org_id}/experiments/rollouts/{rollout_id}/approve', [
+            ExperimentGovernanceController::class,
+            'approve',
+        ])->middleware('uuid:rollout_id');
+        Route::post('/orgs/{org_id}/experiments/rollouts/{rollout_id}/pause', [
+            ExperimentGovernanceController::class,
+            'pause',
+        ])->middleware('uuid:rollout_id');
+        Route::post('/orgs/{org_id}/experiments/rollouts/{rollout_id}/rollback', [
+            ExperimentGovernanceController::class,
+            'rollback',
+        ])->middleware('uuid:rollout_id');
+        Route::put('/orgs/{org_id}/experiments/rollouts/{rollout_id}/guardrails', [
+            ExperimentGovernanceController::class,
+            'upsertGuardrail',
+        ])->middleware('uuid:rollout_id');
+        Route::post('/orgs/{org_id}/experiments/rollouts/{rollout_id}/guardrails/evaluate', [
+            ExperimentGovernanceController::class,
+            'evaluateGuardrails',
+        ])->middleware('uuid:rollout_id');
+
         Route::post('/orgs/{org_id}/assessments', [AssessmentController::class, 'store']);
         Route::post('/orgs/{org_id}/assessments/{id}/invite', [AssessmentController::class, 'invite']);
         Route::get('/orgs/{org_id}/assessments/{id}/progress', [AssessmentController::class, 'progress']);
