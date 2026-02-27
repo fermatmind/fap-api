@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Compliance;
 
+use App\Jobs\ExecuteDsarRequestJob;
 use App\Services\Auth\FmTokenService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -16,6 +18,8 @@ final class DsarRequestApiTest extends TestCase
 
     public function test_owner_can_create_and_execute_user_dsar_request(): void
     {
+        Queue::fake();
+
         $orgId = 701;
         $ownerUserId = 70101;
         $subjectUserId = 70102;
@@ -58,9 +62,65 @@ final class DsarRequestApiTest extends TestCase
         $execute = $this->withHeaders($headers)
             ->postJson('/api/v0.3/compliance/dsar/requests/'.$requestId.'/execute');
 
-        $execute->assertStatus(200)
+        $execute->assertStatus(202)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('request_id', $requestId)
+            ->assertJsonPath('status', 'running');
+        $taskId = (string) $execute->json('task_id');
+        $referenceId = (string) $execute->json('job_reference');
+        $this->assertNotSame('', $taskId);
+        $this->assertNotSame('', $referenceId);
+
+        Queue::assertPushed(ExecuteDsarRequestJob::class, function (ExecuteDsarRequestJob $job) use (
+            $requestId,
+            $orgId,
+            $ownerUserId,
+            $taskId,
+            $referenceId
+        ): bool {
+            return $job->requestId === $requestId
+                && $job->orgId === $orgId
+                && $job->actorUserId === $ownerUserId
+                && $job->taskId === $taskId
+                && $job->referenceId === $referenceId;
+        });
+
+        $this->withHeaders($headers)
+            ->getJson('/api/v0.3/compliance/dsar/requests/'.$requestId)
+            ->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('request.status', 'running');
+
+        $executeReplay = $this->withHeaders($headers)
+            ->postJson('/api/v0.3/compliance/dsar/requests/'.$requestId.'/execute');
+
+        $executeReplay->assertStatus(202)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('request_id', $requestId)
+            ->assertJsonPath('status', 'running')
+            ->assertJsonPath('task_id', $taskId)
+            ->assertJsonPath('job_reference', $referenceId);
+        Queue::assertPushed(ExecuteDsarRequestJob::class, 1);
+
+        $job = new ExecuteDsarRequestJob($requestId, $orgId, $ownerUserId, $taskId, $referenceId);
+        $job->handle(app(\App\Services\Attempts\UserDataLifecycleService::class));
+
+        $this->withHeaders($headers)
+            ->getJson('/api/v0.3/compliance/dsar/requests/'.$requestId)
+            ->assertStatus(200)
             ->assertJsonPath('ok', true)
             ->assertJsonPath('request.status', 'done');
+
+        $executeAfterDone = $this->withHeaders($headers)
+            ->postJson('/api/v0.3/compliance/dsar/requests/'.$requestId.'/execute');
+
+        $executeAfterDone->assertStatus(202)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('request_id', $requestId)
+            ->assertJsonPath('status', 'done')
+            ->assertJsonPath('task_id', $taskId)
+            ->assertJsonPath('job_reference', $referenceId);
+        Queue::assertPushed(ExecuteDsarRequestJob::class, 1);
 
         $subjectTokenRow = DB::table('auth_tokens')
             ->where('token_hash', hash('sha256', $subjectToken))
@@ -134,6 +194,27 @@ final class DsarRequestApiTest extends TestCase
             ->orderByDesc('id')
             ->first();
         $this->assertNotNull($auditRow);
+
+        $statusTransitions = DB::table('dsar_audit_logs')
+            ->where('request_id', $requestId)
+            ->where('event_type', 'dsar_status_transition')
+            ->orderBy('id')
+            ->get();
+        $this->assertCount(2, $statusTransitions);
+
+        $firstTransition = $statusTransitions->first();
+        $firstContext = $this->decodeAuditContext($firstTransition?->context_json ?? null);
+        $this->assertSame('pending', (string) ($firstContext['from'] ?? ''));
+        $this->assertSame('running', (string) ($firstContext['to'] ?? ''));
+        $this->assertSame($taskId, (string) ($firstContext['task_id'] ?? ''));
+        $this->assertSame($referenceId, (string) ($firstContext['reference_id'] ?? ''));
+
+        $lastTransition = $statusTransitions->last();
+        $lastContext = $this->decodeAuditContext($lastTransition?->context_json ?? null);
+        $this->assertSame('running', (string) ($lastContext['from'] ?? ''));
+        $this->assertSame('done', (string) ($lastContext['to'] ?? ''));
+        $this->assertSame($taskId, (string) ($lastContext['task_id'] ?? ''));
+        $this->assertSame($referenceId, (string) ($lastContext['reference_id'] ?? ''));
 
         $lifecycleAudit = DB::table('data_lifecycle_requests')
             ->where('request_type', 'user_dsar')
@@ -310,5 +391,22 @@ final class DsarRequestApiTest extends TestCase
         ]);
 
         return $orderNo;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeAuditContext(mixed $value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+        if (! is_string($value) || $value === '') {
+            return [];
+        }
+
+        $decoded = json_decode($value, true);
+
+        return is_array($decoded) ? $decoded : [];
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
-use App\Services\Attempts\UserDataLifecycleService;
+use App\Jobs\ExecuteDsarRequestJob;
 use App\Support\SchemaBaseline;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,10 +20,6 @@ final class ComplianceDsarController extends Controller
 
     /** @var array<int,string> */
     private const ALLOWED_ROLES = ['owner', 'admin'];
-
-    public function __construct(
-        private readonly UserDataLifecycleService $userDataLifecycleService,
-    ) {}
 
     public function store(Request $request): JsonResponse
     {
@@ -113,88 +109,131 @@ final class ComplianceDsarController extends Controller
             }
 
             $status = trim((string) ($row->status ?? 'pending'));
-            if ($status === 'running') {
-                return ['state' => 'running', 'row' => $row];
-            }
-            if ($status === 'done') {
-                return ['state' => 'done', 'row' => $row];
+            $subjectUserId = (int) ($row->subject_user_id ?? 0);
+            $payload = $this->decodeJson($row->payload_json ?? null) ?? [];
+            $execution = is_array($payload['execution'] ?? null) ? $payload['execution'] : [];
+
+            $referenceId = trim((string) ($execution['reference_id'] ?? ''));
+            if ($referenceId === '') {
+                $referenceId = (string) Str::uuid();
             }
 
-            DB::table('dsar_requests')
-                ->where('id', $id)
-                ->where('org_id', $context['org_id'])
-                ->update([
+            $taskId = trim((string) ($execution['task_id'] ?? ''));
+            if ($taskId === '' && SchemaBaseline::hasTable('dsar_request_tasks')) {
+                $existingTaskId = DB::table('dsar_request_tasks')
+                    ->where('request_id', $id)
+                    ->where('domain', 'orchestration')
+                    ->where('action', 'execute')
+                    ->orderByDesc('created_at')
+                    ->value('id');
+                $taskId = is_string($existingTaskId) ? trim($existingTaskId) : '';
+            }
+            if ($taskId === '') {
+                $taskId = (string) Str::uuid();
+            }
+
+            if ($status === 'pending') {
+                if (SchemaBaseline::hasTable('dsar_request_tasks')) {
+                    $existing = DB::table('dsar_request_tasks')
+                        ->where('request_id', $id)
+                        ->where('domain', 'orchestration')
+                        ->where('action', 'execute')
+                        ->orderByDesc('created_at')
+                        ->first();
+
+                    if ($existing === null) {
+                        DB::table('dsar_request_tasks')->insert([
+                            'id' => $taskId,
+                            'request_id' => $id,
+                            'org_id' => $context['org_id'],
+                            'subject_user_id' => $subjectUserId > 0 ? $subjectUserId : null,
+                            'domain' => 'orchestration',
+                            'action' => 'execute',
+                            'status' => 'pending',
+                            'error_code' => null,
+                            'stats_json' => json_encode([
+                                'queued_by_user_id' => $context['actor_user_id'],
+                                'reference_id' => $referenceId,
+                            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                            'started_at' => null,
+                            'finished_at' => null,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    } else {
+                        $taskId = (string) ($existing->id ?? $taskId);
+                    }
+                }
+
+                $payload['execution'] = [
+                    'reference_id' => $referenceId,
+                    'task_id' => $taskId,
+                    'queued_by_user_id' => $context['actor_user_id'],
+                    'queued_at' => now()->toISOString(),
+                ];
+
+                DB::table('dsar_requests')
+                    ->where('id', $id)
+                    ->where('org_id', $context['org_id'])
+                    ->update([
+                        'status' => 'running',
+                        'executed_by_user_id' => $context['actor_user_id'],
+                        'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                        'updated_at' => now(),
+                    ]);
+
+                $this->appendStatusTransitionAudit(
+                    $id,
+                    $context['org_id'],
+                    $subjectUserId,
+                    'pending',
+                    'running',
+                    $referenceId,
+                    $taskId
+                );
+
+                return [
+                    'state' => 'dispatch',
                     'status' => 'running',
-                    'executed_by_user_id' => $context['actor_user_id'],
-                    'updated_at' => now(),
-                ]);
+                    'task_id' => $taskId,
+                    'reference_id' => $referenceId,
+                ];
+            }
 
-            $fresh = DB::table('dsar_requests')
-                ->where('id', $id)
-                ->where('org_id', $context['org_id'])
-                ->first();
-
-            return ['state' => 'ready', 'row' => $fresh];
+            return [
+                'state' => 'existing',
+                'status' => $status !== '' ? $status : 'running',
+                'task_id' => $taskId,
+                'reference_id' => $referenceId,
+            ];
         });
 
         $state = (string) ($lock['state'] ?? '');
         if ($state === 'missing') {
             return $this->requestNotFound();
         }
-        if ($state === 'running') {
-            return response()->json([
-                'ok' => true,
-                'request_id' => $id,
-                'status' => 'running',
-            ], 202);
+
+        $status = (string) ($lock['status'] ?? 'running');
+        $taskId = (string) ($lock['task_id'] ?? '');
+        $referenceId = (string) ($lock['reference_id'] ?? '');
+
+        if ($state === 'dispatch') {
+            ExecuteDsarRequestJob::dispatch(
+                $id,
+                $context['org_id'],
+                $context['actor_user_id'],
+                $taskId,
+                $referenceId
+            );
         }
-        if ($state === 'done') {
-            /** @var object $row */
-            $row = $lock['row'];
-
-            return response()->json([
-                'ok' => true,
-                'request' => $this->mapRequestRow($row),
-            ]);
-        }
-
-        /** @var object $row */
-        $row = $lock['row'];
-        $mode = trim((string) ($row->mode ?? 'hybrid_anonymize'));
-        $subjectUserId = (int) ($row->subject_user_id ?? 0);
-
-        $result = $this->userDataLifecycleService->process(
-            $context['org_id'],
-            $subjectUserId,
-            $mode,
-            [
-                'actor_user_id' => $context['actor_user_id'],
-                'request_id' => (string) ($row->id ?? $id),
-                'reason' => (string) ($row->reason ?? 'user_dsar_request'),
-            ]
-        );
-
-        $status = ($result['ok'] ?? false) === true ? 'done' : 'failed';
-        $now = now();
-
-        DB::table('dsar_requests')
-            ->where('id', $id)
-            ->where('org_id', $context['org_id'])
-            ->update([
-                'status' => $status,
-                'result_json' => json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'executed_by_user_id' => $context['actor_user_id'],
-                'executed_at' => $now,
-                'updated_at' => $now,
-            ]);
-
-        $updated = $this->findRequestRow($id, $context['org_id']);
 
         return response()->json([
-            'ok' => ($result['ok'] ?? false) === true,
-            'request' => $updated !== null ? $this->mapRequestRow($updated) : null,
-            'result' => $result,
-        ]);
+            'ok' => true,
+            'request_id' => $id,
+            'status' => $status,
+            'task_id' => $taskId !== '' ? $taskId : null,
+            'job_reference' => $referenceId !== '' ? $referenceId : null,
+        ], 202);
     }
 
     /**
@@ -305,5 +344,38 @@ final class ComplianceDsarController extends Controller
             'error_code' => 'DSAR_REQUEST_NOT_FOUND',
             'message' => 'dsar request not found.',
         ], 404);
+    }
+
+    private function appendStatusTransitionAudit(
+        string $requestId,
+        int $orgId,
+        int $subjectUserId,
+        string $from,
+        string $to,
+        string $referenceId,
+        string $taskId
+    ): void {
+        if (! SchemaBaseline::hasTable('dsar_audit_logs')) {
+            return;
+        }
+
+        $now = now();
+        DB::table('dsar_audit_logs')->insert([
+            'request_id' => $requestId,
+            'org_id' => $orgId,
+            'subject_user_id' => $subjectUserId > 0 ? $subjectUserId : null,
+            'event_type' => 'dsar_status_transition',
+            'level' => 'info',
+            'message' => sprintf('dsar request transitioned from %s to %s', $from, $to),
+            'context_json' => json_encode([
+                'from' => $from,
+                'to' => $to,
+                'reference_id' => $referenceId,
+                'task_id' => $taskId,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'occurred_at' => $now,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
     }
 }
