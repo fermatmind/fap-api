@@ -18,23 +18,12 @@ class ExperimentAssigner
 
     public function assignActive(int $orgId, ?string $anonId, ?int $userId): array
     {
-        $configs = config('fap_experiments.experiments', []);
-        if (!is_array($configs)) {
-            return [];
+        $activeRegistry = $this->activeExperimentsFromRegistry($orgId);
+        if ($activeRegistry !== []) {
+            return $this->assignMany($activeRegistry, $orgId, $anonId, $userId);
         }
 
-        $active = [];
-        foreach ($configs as $key => $config) {
-            if (!is_array($config)) {
-                continue;
-            }
-            if (!($config['is_active'] ?? false)) {
-                continue;
-            }
-            $active[$key] = $config;
-        }
-
-        return $this->assignMany($active, $orgId, $anonId, $userId);
+        return $this->assignMany($this->activeExperimentsFromConfig(), $orgId, $anonId, $userId);
     }
 
     public function assignMany(array $experiments, int $orgId, ?string $anonId, ?int $userId): array
@@ -137,6 +126,98 @@ class ExperimentAssigner
         }
 
         return $variant;
+    }
+
+    private function activeExperimentsFromRegistry(int $orgId): array
+    {
+        if (!\App\Support\SchemaBaseline::hasTable('experiments_registry')) {
+            return [];
+        }
+
+        $now = now();
+        $rows = DB::table('experiments_registry')
+            ->where('org_id', $orgId)
+            ->where('is_active', true)
+            ->where(function ($query) use ($now): void {
+                $query->whereNull('active_from')->orWhere('active_from', '<=', $now);
+            })
+            ->where(function ($query) use ($now): void {
+                $query->whereNull('active_to')->orWhere('active_to', '>', $now);
+            })
+            ->orderByDesc('active_from')
+            ->orderBy('experiment_key')
+            ->get(['experiment_key', 'variants_json']);
+
+        $active = [];
+        foreach ($rows as $row) {
+            $experimentKey = trim((string) ($row->experiment_key ?? ''));
+            if ($experimentKey === '') {
+                continue;
+            }
+
+            $variants = $this->normalizeVariantWeights($row->variants_json ?? null);
+            if ($variants === []) {
+                continue;
+            }
+
+            $active[$experimentKey] = [
+                'variants' => $variants,
+            ];
+        }
+
+        return $active;
+    }
+
+    private function activeExperimentsFromConfig(): array
+    {
+        $configs = config('fap_experiments.experiments', []);
+        if (!is_array($configs)) {
+            return [];
+        }
+
+        $active = [];
+        foreach ($configs as $key => $config) {
+            if (!is_array($config)) {
+                continue;
+            }
+            if (!($config['is_active'] ?? false)) {
+                continue;
+            }
+            $active[$key] = $config;
+        }
+
+        return $active;
+    }
+
+    private function normalizeVariantWeights(mixed $payload): array
+    {
+        if (is_string($payload) && $payload !== '') {
+            $decoded = json_decode($payload, true);
+            if (is_array($decoded)) {
+                $payload = $decoded;
+            }
+        }
+
+        if (!is_array($payload)) {
+            return [];
+        }
+
+        $normalized = [];
+        foreach ($payload as $variant => $weight) {
+            $variantKey = trim((string) $variant);
+            if ($variantKey === '' || !is_numeric($weight)) {
+                continue;
+            }
+
+            $normalizedWeight = (int) round((float) $weight);
+            if ($normalizedWeight <= 0) {
+                continue;
+            }
+
+            $normalized[$variantKey] = $normalizedWeight;
+        }
+
+        return $normalized;
     }
 
     private function findExisting(string $experimentKey, int $orgId, ?int $userId, string $anonId): ?ExperimentAssignment
