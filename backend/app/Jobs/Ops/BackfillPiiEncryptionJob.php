@@ -90,13 +90,14 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         $hasEmailEnc = Schema::hasColumn('users', 'email_enc');
         $hasPhoneHash = Schema::hasColumn('users', 'phone_e164_hash');
         $hasPhoneEnc = Schema::hasColumn('users', 'phone_e164_enc');
+        $hasKeyVersion = Schema::hasColumn('users', 'key_version');
         $hasMigratedAt = Schema::hasColumn('users', 'pii_migrated_at');
 
         if (! $hasEmailHash && ! $hasEmailEnc && ! $hasPhoneHash && ! $hasPhoneEnc) {
             return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_id' => 0];
         }
 
-        [$lastId] = $this->loadState('pii_backfill_users_v1');
+        [$lastId] = $this->loadState('pii_backfill_users_v2');
         $nextId = max(0, (int) $lastId);
 
         $scanned = 0;
@@ -116,9 +117,14 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         if ($hasPhoneEnc) {
             $select[] = 'phone_e164_enc';
         }
+        if ($hasKeyVersion) {
+            $select[] = 'key_version';
+        }
         if ($hasMigratedAt) {
             $select[] = 'pii_migrated_at';
         }
+
+        $keyVersion = $cipher->currentKeyVersion();
 
         do {
             $rows = DB::table('users')
@@ -161,6 +167,18 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                     }
                 }
 
+                if ($hasKeyVersion && $this->isMissingKeyVersion($row->key_version ?? null)) {
+                    $hasAnyPii =
+                        ($hasEmailHash && ! $this->isBlank($updates['email_hash'] ?? ($row->email_hash ?? null)))
+                        || ($hasEmailEnc && ! $this->isBlank($updates['email_enc'] ?? ($row->email_enc ?? null)))
+                        || ($hasPhoneHash && ! $this->isBlank($updates['phone_e164_hash'] ?? ($row->phone_e164_hash ?? null)))
+                        || ($hasPhoneEnc && ! $this->isBlank($updates['phone_e164_enc'] ?? ($row->phone_e164_enc ?? null)));
+
+                    if ($hasAnyPii) {
+                        $updates['key_version'] = $keyVersion;
+                    }
+                }
+
                 if ($hasMigratedAt && $row->pii_migrated_at === null) {
                     $emailHash = (string) ($updates['email_hash'] ?? ($row->email_hash ?? ''));
                     $emailEnc = (string) ($updates['email_enc'] ?? ($row->email_enc ?? ''));
@@ -189,7 +207,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             }
 
             $chunks++;
-            $this->persistState('pii_backfill_users_v1', $nextId, null);
+            $this->persistState('pii_backfill_users_v2', $nextId, null);
             $this->sleepBetweenChunks();
         } while (true);
 
@@ -216,6 +234,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         $hasToEmailEnc = Schema::hasColumn('email_outbox', 'to_email_enc');
         $hasPayloadEnc = Schema::hasColumn('email_outbox', 'payload_enc');
         $hasPayloadVersion = Schema::hasColumn('email_outbox', 'payload_schema_version');
+        $hasKeyVersion = Schema::hasColumn('email_outbox', 'key_version');
         $hasToEmail = Schema::hasColumn('email_outbox', 'to_email');
         $hasPayloadJson = Schema::hasColumn('email_outbox', 'payload_json');
 
@@ -223,7 +242,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_cursor' => ''];
         }
 
-        [, $lastCursor] = $this->loadState('pii_backfill_email_outbox_v1');
+        [, $lastCursor] = $this->loadState('pii_backfill_email_outbox_v2');
         $cursor = $lastCursor !== null ? trim($lastCursor) : '';
 
         $scanned = 0;
@@ -255,6 +274,11 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         if ($hasPayloadVersion) {
             $select[] = 'payload_schema_version';
         }
+        if ($hasKeyVersion) {
+            $select[] = 'key_version';
+        }
+
+        $keyVersion = $cipher->currentKeyVersion();
 
         do {
             $query = DB::table('email_outbox')
@@ -316,6 +340,19 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                     $updates['payload_schema_version'] = 'v1-json-enc';
                 }
 
+                if ($hasKeyVersion && $this->isMissingKeyVersion($row->key_version ?? null)) {
+                    $hasAnyPii =
+                        ($hasEmailHash && ! $this->isBlank($updates['email_hash'] ?? ($row->email_hash ?? null)))
+                        || ($hasEmailEnc && ! $this->isBlank($updates['email_enc'] ?? ($row->email_enc ?? null)))
+                        || ($hasToEmailHash && ! $this->isBlank($updates['to_email_hash'] ?? ($row->to_email_hash ?? null)))
+                        || ($hasToEmailEnc && ! $this->isBlank($updates['to_email_enc'] ?? ($row->to_email_enc ?? null)))
+                        || ($hasPayloadEnc && ! $this->isBlank($updates['payload_enc'] ?? ($row->payload_enc ?? null)));
+
+                    if ($hasAnyPii) {
+                        $updates['key_version'] = $keyVersion;
+                    }
+                }
+
                 if ($updates === []) {
                     continue;
                 }
@@ -330,7 +367,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             }
 
             $chunks++;
-            $this->persistState('pii_backfill_email_outbox_v1', 0, $cursor);
+            $this->persistState('pii_backfill_email_outbox_v2', 0, $cursor);
             $this->sleepBetweenChunks();
         } while (true);
 
@@ -416,6 +453,16 @@ class BackfillPiiEncryptionJob implements ShouldQueue
     private function isBlank(mixed $value): bool
     {
         return trim((string) ($value ?? '')) === '';
+    }
+
+    private function isMissingKeyVersion(mixed $value): bool
+    {
+        $normalized = trim((string) ($value ?? ''));
+        if ($normalized === '') {
+            return true;
+        }
+
+        return (int) $normalized <= 0;
     }
 
     private function normalizePayloadJson(mixed $payload): ?string

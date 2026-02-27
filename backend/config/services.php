@@ -138,4 +138,8 @@ return [
         ],
     ],
 
+    'pii' => [
+        'key_version' => (int) env('PII_KEY_VERSION', 1),
+    ],
+
 ];

@@ -35,6 +35,7 @@ class EmailOutboxService
 
         $emailHash = $this->piiCipher->emailHash($email);
         $emailEnc = $this->piiCipher->encrypt($email);
+        $keyVersion = $this->piiCipher->currentKeyVersion();
         $maskedEmail = $this->maskedLegacyEmail($emailHash);
 
         $token = 'claim_'.(string) Str::uuid();
@@ -99,6 +100,9 @@ class EmailOutboxService
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
                 $update['payload_schema_version'] = 'v1';
             }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'key_version')) {
+                $update['key_version'] = $keyVersion;
+            }
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
                 $update['locale'] = $locale;
             }
@@ -160,6 +164,9 @@ class EmailOutboxService
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
             $row['payload_schema_version'] = 'v1';
         }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'key_version')) {
+            $row['key_version'] = $keyVersion;
+        }
 
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
             $row['locale'] = $locale;
@@ -214,6 +221,7 @@ class EmailOutboxService
 
         $emailHash = $this->piiCipher->emailHash($email);
         $emailEnc = $this->piiCipher->encrypt($email);
+        $keyVersion = $this->piiCipher->currentKeyVersion();
         $maskedEmail = $this->maskedLegacyEmail($emailHash);
 
         $locale = $this->resolveAttemptLocale($attemptId);
@@ -274,6 +282,9 @@ class EmailOutboxService
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
                 $update['payload_schema_version'] = 'v1';
             }
+            if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'key_version')) {
+                $update['key_version'] = $keyVersion;
+            }
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
                 $update['locale'] = $locale;
             }
@@ -328,6 +339,9 @@ class EmailOutboxService
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
             $row['payload_schema_version'] = 'v1';
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'key_version')) {
+            $row['key_version'] = $keyVersion;
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
             $row['locale'] = $locale;

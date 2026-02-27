@@ -13,7 +13,6 @@ use App\Support\PiiCipher;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Contracts\Mail\Factory as MailFactory;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Psr\Log\LoggerInterface;
 
@@ -29,8 +28,7 @@ class LegacyMeFacadeService
         private readonly MailFactory $mailer,
         private readonly CacheRepository $cache,
         private readonly PiiCipher $piiCipher,
-    ) {
-    }
+    ) {}
 
     public function listAttempts(int $pageSize, int $page = 1): array
     {
@@ -57,13 +55,14 @@ class LegacyMeFacadeService
             throw new ApiProblemException(401, 'UNAUTHORIZED', 'Missing or invalid fm_token.');
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('users') || !\App\Support\SchemaBaseline::hasColumn('users', 'email')) {
+        if (! \App\Support\SchemaBaseline::hasTable('users') || ! \App\Support\SchemaBaseline::hasColumn('users', 'email')) {
             throw new ApiProblemException(500, 'INVALID_SCHEMA', 'users.email column not found.');
         }
 
         $pk = \App\Support\SchemaBaseline::hasColumn('users', 'uid') ? 'uid' : 'id';
         $emailHash = $this->piiCipher->emailHash($email);
         $emailEnc = $this->piiCipher->encrypt($email);
+        $keyVersion = $this->piiCipher->currentKeyVersion();
 
         $existsQuery = DB::table('users')->where($pk, '!=', (string) $userId);
         if (\App\Support\SchemaBaseline::hasColumn('users', 'email_hash')) {
@@ -87,6 +86,9 @@ class LegacyMeFacadeService
         }
         if (\App\Support\SchemaBaseline::hasColumn('users', 'email_enc')) {
             $update['email_enc'] = $emailEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'key_version')) {
+            $update['key_version'] = $keyVersion;
         }
         if (\App\Support\SchemaBaseline::hasColumn('users', 'email_verified_at')) {
             $update['email_verified_at'] = now();
@@ -120,7 +122,7 @@ class LegacyMeFacadeService
             ]
         );
 
-        if (!($identity['ok'] ?? false)) {
+        if (! ($identity['ok'] ?? false)) {
             $error = (string) ($identity['error'] ?? 'IDENTITY_BIND_FAILED');
             if ($error === 'IDENTITY_CONFLICT') {
                 throw new ApiProblemException(422, 'EMAIL_IN_USE', 'email already in use.');
@@ -133,7 +135,7 @@ class LegacyMeFacadeService
             throw new ApiProblemException((int) ($identity['status'] ?? 422), 'IDENTITY_BIND_FAILED', (string) ($identity['message'] ?? 'identity bind failed.'));
         }
 
-        $token = 'email_bind_' . (string) Str::uuid();
+        $token = 'email_bind_'.(string) Str::uuid();
         $this->cache->put($this->verifyCacheKey($token), [
             'user_id' => (string) $userId,
             'email' => $email,
@@ -159,7 +161,7 @@ class LegacyMeFacadeService
         $key = $this->verifyCacheKey($token);
         $payload = $this->cache->get($key);
 
-        if (!is_array($payload)) {
+        if (! is_array($payload)) {
             throw new ApiProblemException(422, 'INVALID_TOKEN', 'verification token invalid.');
         }
 
@@ -233,6 +235,6 @@ class LegacyMeFacadeService
 
     private function verifyCacheKey(string $token): string
     {
-        return 'email_binding_verify:' . hash('sha256', $token);
+        return 'email_binding_verify:'.hash('sha256', $token);
     }
 }

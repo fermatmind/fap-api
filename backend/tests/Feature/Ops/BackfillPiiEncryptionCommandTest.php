@@ -7,6 +7,7 @@ namespace Tests\Feature\Ops;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class BackfillPiiEncryptionCommandTest extends TestCase
@@ -56,6 +57,9 @@ final class BackfillPiiEncryptionCommandTest extends TestCase
         $this->assertSame($pii->phoneHash('+15551230000'), (string) ($user->phone_e164_hash ?? ''));
         $this->assertSame('Backfill.User@example.com', $pii->decrypt((string) ($user->email_enc ?? '')));
         $this->assertSame('+15551230000', $pii->decrypt((string) ($user->phone_e164_enc ?? '')));
+        if (Schema::hasColumn('users', 'key_version')) {
+            $this->assertSame($pii->currentKeyVersion(), (int) ($user->key_version ?? 0));
+        }
         $this->assertNotNull($user->pii_migrated_at ?? null);
 
         $outbox = DB::table('email_outbox')->where('id', $outboxId)->first();
@@ -65,6 +69,9 @@ final class BackfillPiiEncryptionCommandTest extends TestCase
         $this->assertSame('Backfill.User@example.com', $pii->decrypt((string) ($outbox->email_enc ?? '')));
         $this->assertSame('receiver@example.com', $pii->decrypt((string) ($outbox->to_email_enc ?? '')));
         $this->assertSame('v1-json-enc', (string) ($outbox->payload_schema_version ?? ''));
+        if (Schema::hasColumn('email_outbox', 'key_version')) {
+            $this->assertSame($pii->currentKeyVersion(), (int) ($outbox->key_version ?? 0));
+        }
         $payloadDecoded = $pii->decrypt((string) ($outbox->payload_enc ?? ''));
         $this->assertIsString($payloadDecoded);
         $this->assertTrue(str_contains((string) $payloadDecoded, '"attempt_id":"attempt_demo_1"'));
@@ -81,11 +88,11 @@ final class BackfillPiiEncryptionCommandTest extends TestCase
         $this->assertSame((string) ($outbox->to_email_hash ?? ''), (string) ($outboxAgain->to_email_hash ?? ''));
 
         $keys = DB::table('migration_backfills')
-            ->whereIn('key', ['pii_backfill_users_v1', 'pii_backfill_email_outbox_v1'])
+            ->whereIn('key', ['pii_backfill_users_v2', 'pii_backfill_email_outbox_v2'])
             ->pluck('key')
             ->all();
 
-        $this->assertContains('pii_backfill_users_v1', $keys);
-        $this->assertContains('pii_backfill_email_outbox_v1', $keys);
+        $this->assertContains('pii_backfill_users_v2', $keys);
+        $this->assertContains('pii_backfill_email_outbox_v2', $keys);
     }
 }
