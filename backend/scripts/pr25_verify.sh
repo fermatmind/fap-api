@@ -128,6 +128,61 @@ ADMIN_TOKEN="fm_00000000-0000-4000-8000-000000000001"
 MEMBER_TOKEN="fm_11111111-1111-4111-8111-111111111111"
 ORG_ID=2500
 
+php -r '
+$pdo = new PDO("sqlite:" . getenv("DB_DATABASE"));
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$now = date("Y-m-d H:i:s");
+$orgId = 2500;
+$codes = ["MBTI"];
+
+foreach ($codes as $code) {
+  $stmt = $pdo->prepare("SELECT * FROM scales_registry_v2 WHERE org_id = 0 AND code = ?");
+  $stmt->execute([$code]);
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  if (!$row) {
+    continue;
+  }
+  unset($row["id"]);
+  $row["org_id"] = $orgId;
+  $row["is_public"] = 0;
+  $row["created_at"] = $now;
+  $row["updated_at"] = $now;
+
+  $exists = $pdo->prepare("SELECT 1 FROM scales_registry_v2 WHERE org_id = ? AND code = ? LIMIT 1");
+  $exists->execute([$orgId, $code]);
+  $found = (bool) $exists->fetchColumn();
+  if ($found) {
+    $upd = $pdo->prepare("UPDATE scales_registry_v2 SET primary_slug=:primary_slug, slugs_json=:slugs_json, driver_type=:driver_type, assessment_driver=:assessment_driver, default_pack_id=:default_pack_id, default_region=:default_region, default_locale=:default_locale, default_dir_version=:default_dir_version, capabilities_json=:capabilities_json, view_policy_json=:view_policy_json, commercial_json=:commercial_json, seo_schema_json=:seo_schema_json, seo_i18n_json=:seo_i18n_json, content_i18n_json=:content_i18n_json, report_summary_i18n_json=:report_summary_i18n_json, is_public=:is_public, is_active=:is_active, is_indexable=:is_indexable, updated_at=:updated_at WHERE org_id=:org_id AND code=:code");
+    $upd->execute($row);
+  } else {
+    $ins = $pdo->prepare("INSERT INTO scales_registry_v2 (org_id, code, primary_slug, slugs_json, driver_type, assessment_driver, default_pack_id, default_region, default_locale, default_dir_version, capabilities_json, view_policy_json, commercial_json, seo_schema_json, seo_i18n_json, content_i18n_json, report_summary_i18n_json, is_public, is_active, is_indexable, created_at, updated_at) VALUES (:org_id, :code, :primary_slug, :slugs_json, :driver_type, :assessment_driver, :default_pack_id, :default_region, :default_locale, :default_dir_version, :capabilities_json, :view_policy_json, :commercial_json, :seo_schema_json, :seo_i18n_json, :content_i18n_json, :report_summary_i18n_json, :is_public, :is_active, :is_indexable, :created_at, :updated_at)");
+    $ins->execute($row);
+  }
+
+  $slugRows = $pdo->prepare("SELECT * FROM scale_slugs WHERE org_id = 0 AND scale_code = ?");
+  $slugRows->execute([$code]);
+  while ($slug = $slugRows->fetch(PDO::FETCH_ASSOC)) {
+    unset($slug["id"]);
+    $slug["org_id"] = $orgId;
+    $slug["created_at"] = $now;
+    $slug["updated_at"] = $now;
+    $slugValue = (string) ($slug["slug"] ?? "");
+    if ($slugValue === "") {
+      continue;
+    }
+    $slugExists = $pdo->prepare("SELECT 1 FROM scale_slugs WHERE org_id = ? AND slug = ? LIMIT 1");
+    $slugExists->execute([$orgId, $slugValue]);
+    if ($slugExists->fetchColumn()) {
+      $slugUpd = $pdo->prepare("UPDATE scale_slugs SET scale_code=:scale_code, is_primary=:is_primary, updated_at=:updated_at WHERE org_id=:org_id AND slug=:slug");
+      $slugUpd->execute($slug);
+    } else {
+      $slugIns = $pdo->prepare("INSERT INTO scale_slugs (org_id, scale_code, slug, is_primary, created_at, updated_at) VALUES (:org_id, :scale_code, :slug, :is_primary, :created_at, :updated_at)");
+      $slugIns->execute($slug);
+    }
+  }
+}
+'
+
 CREATE_JSON="${ART_DIR}/create_assessment.json"
 CREATE_BODY="$(php -r 'echo json_encode(["scale_code"=>"MBTI","title"=>"PR25 Team MBTI","due_at"=>date(DATE_ATOM, strtotime("+7 days"))], JSON_UNESCAPED_UNICODE);')"
 
@@ -207,7 +262,7 @@ for i in 0 1 2; do
   SUBMIT_JSON="${ART_DIR}/attempt_submit_${i}.json"
   SUBMIT_BODY="$(INVITE_TOKEN="${INVITE_TOKEN}" ATTEMPT_ID="${ATTEMPT_ID}" ANSWERS_PATH="${ANSWERS_JSON}" php -r '$answers=json_decode(file_get_contents(getenv("ANSWERS_PATH")), true); $token=getenv("INVITE_TOKEN"); $payload=["attempt_id"=>getenv("ATTEMPT_ID"),"answers"=>$answers,"duration_ms"=>120000,"invite_token"=>$token]; echo json_encode($payload, JSON_UNESCAPED_UNICODE);')"
 
-  curl -sS -X POST "${API_BASE}/api/v0.3/attempts/submit" \
+  curl -sS -X POST "${API_BASE}/api/v0.3/attempts/submit?mode=sync_legacy" \
     -H "Content-Type: application/json" -H "Accept: application/json" \
     -H "Authorization: Bearer ${ADMIN_TOKEN}" \
     -H "X-Org-Id: ${ORG_ID}" \
@@ -278,7 +333,7 @@ INVITE_TOKEN="$(php -r '$list=json_decode(stream_get_contents(STDIN), true); ech
 SUBMIT_JSON="${ART_DIR}/attempt_submit_insufficient.json"
 SUBMIT_BODY="$(ATTEMPT_ID="${ATTEMPT_ID}" INVITE_TOKEN="${INVITE_TOKEN}" ANSWERS_PATH="${ANSWERS_JSON}" php -r '$answers=json_decode(file_get_contents(getenv("ANSWERS_PATH")), true); $payload=["attempt_id"=>getenv("ATTEMPT_ID"),"answers"=>$answers,"duration_ms"=>120000,"invite_token"=>getenv("INVITE_TOKEN")]; echo json_encode($payload, JSON_UNESCAPED_UNICODE);')"
 
-SUBMIT_STATUS="$(curl -sS -o "${SUBMIT_JSON}" -w "%{http_code}" -X POST "${API_BASE}/api/v0.3/attempts/submit" \
+SUBMIT_STATUS="$(curl -sS -o "${SUBMIT_JSON}" -w "%{http_code}" -X POST "${API_BASE}/api/v0.3/attempts/submit?mode=sync_legacy" \
   -H "Content-Type: application/json" -H "Accept: application/json" \
   -H "Authorization: Bearer ${ADMIN_TOKEN}" \
   -H "X-Org-Id: ${ORG_ID}" \

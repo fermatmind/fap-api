@@ -77,6 +77,7 @@ class OrgIsolationAttemptsTest extends TestCase
                 'updated_at' => now(),
             ],
         ]);
+        $this->grantScaleForOrg((int) $orgId1, 'SIMPLE_SCORE_DEMO');
 
         $start = $this->withHeaders([
     'Authorization' => 'Bearer ' . $user['token'],

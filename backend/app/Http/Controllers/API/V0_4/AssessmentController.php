@@ -56,6 +56,9 @@ class AssessmentController extends Controller
 
         $row = $this->registry->getByCode($scaleCode, $orgId);
         if (! $row) {
+            $row = $this->registry->getByCode($scaleCode, 0);
+        }
+        if (! $row) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',

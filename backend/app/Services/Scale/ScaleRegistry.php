@@ -31,7 +31,6 @@ class ScaleRegistry
         if (is_array($cached)) {
             return $cached;
         }
-        $tenantStrict = $this->tenantStrictEnabled();
 
         if ($this->useV2ForTenantReads($orgId)) {
             $tenantRows = $this->v2RegistryQuery()
@@ -49,39 +48,14 @@ class ScaleRegistry
                 ->get()
                 ->toArray();
             $tenantRows = $this->mergeRowsByCode($tenantRows, $legacyTenantRows);
-            if ($tenantStrict) {
-                Cache::put($cacheKey, $tenantRows, self::CACHE_TTL_SECONDS);
+            Cache::put($cacheKey, $tenantRows, self::CACHE_TTL_SECONDS);
 
-                return $tenantRows;
-            }
-
-            $globalRows = $this->registryQueryForOrg(0)
-                ->where('org_id', 0)
-                ->where('is_active', true)
-                ->where('is_public', true)
-                ->orderBy('code')
-                ->get()
-                ->toArray();
-
-            $rows = $this->mergeRowsByCode($tenantRows, $globalRows);
-            Cache::put($cacheKey, $rows, self::CACHE_TTL_SECONDS);
-
-            return $rows;
+            return $tenantRows;
         }
 
-        $query = $this->registryQueryForOrg($orgId, ! $tenantStrict)
-            ->where('is_active', true);
-
-        if ($tenantStrict) {
-            $query->where('org_id', $orgId);
-        } else {
-            $query->where(function ($q) use ($orgId) {
-                $q->where('org_id', $orgId)
-                    ->orWhere(function ($q) {
-                        $q->where('org_id', 0)->where('is_public', true);
-                    });
-            });
-        }
+        $query = $this->registryQueryForOrg($orgId)
+            ->where('is_active', true)
+            ->where('org_id', $orgId);
 
         $rows = $query
             ->orderBy('code')
@@ -183,13 +157,6 @@ class ScaleRegistry
                     ->where('org_id', $orgId)
                     ->where('primary_slug', $slug)
                     ->first();
-                if (! $registry && ! $this->tenantStrictEnabled()) {
-                    $registry = $this->registryQueryForOrg(0)
-                        ->where('org_id', 0)
-                        ->where('primary_slug', $slug)
-                        ->where('is_public', true)
-                        ->first();
-                }
             }
 
             if (! $registry) {
@@ -213,12 +180,6 @@ class ScaleRegistry
                 ->where('org_id', $orgId)
                 ->where('slug', $slug)
                 ->first();
-            if (! $slugRow && ! $this->tenantStrictEnabled()) {
-                $slugRow = $this->slugQueryForOrg(0)
-                    ->where('org_id', 0)
-                    ->where('slug', $slug)
-                    ->first();
-            }
         }
 
         if (! $slugRow) {
@@ -226,7 +187,7 @@ class ScaleRegistry
         }
 
         $registryOrgId = (int) ($slugRow->org_id ?? $orgId);
-        if ($orgId > 0 && $this->tenantStrictEnabled() && $registryOrgId !== $orgId) {
+        if ($orgId > 0 && $registryOrgId !== $orgId) {
             return null;
         }
         $registry = $this->registryQueryForOrg($registryOrgId)
@@ -279,20 +240,8 @@ class ScaleRegistry
         if ($row) {
             return $row->toArray();
         }
-        if ($this->tenantStrictEnabled()) {
-            return null;
-        }
 
-        $globalRow = $this->registryQueryForOrg(0)
-            ->where('org_id', 0)
-            ->where('code', $code)
-            ->where('is_public', true)
-            ->first();
-        if (! $globalRow) {
-            return null;
-        }
-
-        return $globalRow->toArray();
+        return null;
     }
 
     private function registryQueryForOrg(int $orgId, bool $includeGlobalFallback = false): Builder
@@ -328,11 +277,6 @@ class ScaleRegistry
         return Schema::hasTable(self::REGISTRY_V2_TABLE);
     }
 
-    private function tenantStrictEnabled(): bool
-    {
-        return (bool) config('fap.features.tenant_strict_v2', false);
-    }
-
     private function v2RegistryQuery()
     {
         return DB::table(self::REGISTRY_V2_TABLE);
@@ -348,29 +292,14 @@ class ScaleRegistry
             if ($tenantRegistry) {
                 return (array) $tenantRegistry;
             }
-            if ($this->tenantStrictEnabled()) {
-                return null;
-            }
 
-            $globalRegistry = $this->registryQueryForOrg(0)
-                ->where('org_id', 0)
-                ->where('primary_slug', $slug)
-                ->where('is_public', true)
-                ->first();
-
-            return $globalRegistry ? $globalRegistry->toArray() : null;
+            return null;
         }
 
         $slugRow = $this->slugQueryForOrg($orgId)
             ->where('org_id', $orgId)
             ->where('slug', $slug)
             ->first();
-        if (! $slugRow && ! $this->tenantStrictEnabled()) {
-            $slugRow = $this->slugQueryForOrg(0)
-                ->where('org_id', 0)
-                ->where('slug', $slug)
-                ->first();
-        }
         if (! $slugRow) {
             return null;
         }
@@ -390,17 +319,8 @@ class ScaleRegistry
                 return (array) $tenantRegistry;
             }
         }
-        if ($this->tenantStrictEnabled()) {
-            return null;
-        }
 
-        $globalRegistry = $this->registryQueryForOrg(0)
-            ->where('org_id', 0)
-            ->where('code', $scaleCode)
-            ->where('is_public', true)
-            ->first();
-
-        return $globalRegistry ? $globalRegistry->toArray() : null;
+        return null;
     }
 
     /**

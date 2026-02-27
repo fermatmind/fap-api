@@ -196,6 +196,6 @@ class Attempt extends Model
 
     public static function allowOrgZeroContext(): bool
     {
-        return true;
+        return self::allowOrgZeroWithResolvedContext();
     }
 }

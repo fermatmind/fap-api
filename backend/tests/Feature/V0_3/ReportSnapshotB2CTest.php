@@ -159,6 +159,7 @@ class ReportSnapshotB2CTest extends TestCase
     {
         $this->seedScales();
         [$orgId, $userId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'MBTI');
 
         $attemptId = $this->createMbtiAttemptWithResult($orgId, $userId);
 

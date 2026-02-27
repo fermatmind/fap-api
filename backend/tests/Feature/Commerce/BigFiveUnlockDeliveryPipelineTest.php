@@ -8,6 +8,7 @@ use App\Jobs\GenerateReportPdfJob;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Support\PiiCipher;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -175,7 +176,16 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
             ->first();
         $this->assertNotNull($row);
         $this->assertSame('pending', (string) ($row->status ?? ''));
-        $this->assertSame('buyer+big5@example.com', (string) ($row->email ?? ''));
+
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+        $expectedEmailHash = $pii->emailHash('buyer+big5@example.com');
+        $this->assertSame($expectedEmailHash, (string) ($row->email_hash ?? ''));
+        $this->assertSame('buyer+big5@example.com', $pii->decrypt((string) ($row->email_enc ?? '')));
+        $this->assertSame(
+            $pii->legacyEmailPlaceholder($expectedEmailHash),
+            (string) ($row->email ?? '')
+        );
 
         $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
         $this->assertIsArray($payloadJson);

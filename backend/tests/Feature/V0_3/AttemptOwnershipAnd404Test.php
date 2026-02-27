@@ -7,6 +7,7 @@ use Database\Seeders\Pr17SimpleScoreDemoSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -75,6 +76,7 @@ class AttemptOwnershipAnd404Test extends TestCase
 
     private function createSubmittedAttempt(int $orgId, string $token, string $anonId): string
     {
+        $this->mirrorGlobalScaleToTenantOrg('SIMPLE_SCORE_DEMO', $orgId);
         $this->ensureCreditWallet($orgId);
 
         $headers = [
@@ -97,9 +99,68 @@ class AttemptOwnershipAnd404Test extends TestCase
             'answers' => $this->defaultAnswers(),
             'duration_ms' => 120000,
         ], $headers);
-        $submit->assertStatus(200);
+        $this->assertContains($submit->getStatusCode(), [200, 202], 'submit should return sync(200) or async-accepted(202)');
 
         return $attemptId;
+    }
+
+    private function mirrorGlobalScaleToTenantOrg(string $scaleCode, int $orgId): void
+    {
+        if ($orgId <= 0 || ! Schema::hasTable('scales_registry_v2')) {
+            return;
+        }
+
+        $source = DB::table('scales_registry_v2')
+            ->where('org_id', 0)
+            ->where('code', $scaleCode)
+            ->first();
+
+        $this->assertNotNull($source, "Missing global scale seed for {$scaleCode}");
+
+        DB::table('scales_registry_v2')->upsert([[
+            'org_id' => $orgId,
+            'code' => (string) $source->code,
+            'primary_slug' => (string) $source->primary_slug,
+            'slugs_json' => (string) $source->slugs_json,
+            'driver_type' => (string) $source->driver_type,
+            'assessment_driver' => $source->assessment_driver,
+            'default_pack_id' => $source->default_pack_id,
+            'default_region' => $source->default_region,
+            'default_locale' => $source->default_locale,
+            'default_dir_version' => $source->default_dir_version,
+            'capabilities_json' => $source->capabilities_json,
+            'view_policy_json' => $source->view_policy_json,
+            'commercial_json' => $source->commercial_json,
+            'seo_schema_json' => $source->seo_schema_json,
+            'seo_i18n_json' => $source->seo_i18n_json,
+            'content_i18n_json' => $source->content_i18n_json,
+            'report_summary_i18n_json' => $source->report_summary_i18n_json,
+            'is_public' => false,
+            'is_active' => (bool) ($source->is_active ?? true),
+            'is_indexable' => (bool) ($source->is_indexable ?? true),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]], ['org_id', 'code'], [
+            'primary_slug',
+            'slugs_json',
+            'driver_type',
+            'assessment_driver',
+            'default_pack_id',
+            'default_region',
+            'default_locale',
+            'default_dir_version',
+            'capabilities_json',
+            'view_policy_json',
+            'commercial_json',
+            'seo_schema_json',
+            'seo_i18n_json',
+            'content_i18n_json',
+            'report_summary_i18n_json',
+            'is_public',
+            'is_active',
+            'is_indexable',
+            'updated_at',
+        ]);
     }
 
     private function ensureCreditWallet(int $orgId): void

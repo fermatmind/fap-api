@@ -79,6 +79,7 @@ class AttemptSubmitIdempotencyTest extends TestCase
     {
         $this->seedScales();
         [$orgId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'DEMO_ANSWERS');
 
         $start = $this->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'DEMO_ANSWERS',

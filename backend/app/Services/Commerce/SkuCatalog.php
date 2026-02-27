@@ -4,6 +4,7 @@ namespace App\Services\Commerce;
 
 use App\Models\Sku;
 use App\Services\Report\ReportAccess;
+use Illuminate\Support\Collection;
 
 class SkuCatalog
 {
@@ -13,20 +14,33 @@ class SkuCatalog
         return $sku !== '' ? $sku : '';
     }
 
-    public function getActiveSku(string $sku, ?string $scaleCode = null): ?Sku
+    public function getActiveSku(
+        string $sku,
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): ?Sku
     {
         $sku = $this->normalizeSku($sku);
         if ($sku === '') {
             return null;
         }
 
-        $query = $this->baseQuery($scaleCode, true)->where('sku', $sku);
-        return $query->first();
+        $rows = $this->baseQuery($scaleCode, true, $orgId, $includeGlobalFallback)
+            ->where('sku', $sku)
+            ->get();
+
+        return $this->pickPreferredRow($rows, $orgId);
     }
 
-    public function assertActiveSku(string $sku, ?string $scaleCode = null): Sku
+    public function assertActiveSku(
+        string $sku,
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): Sku
     {
-        $row = $this->getActiveSku($sku, $scaleCode);
+        $row = $this->getActiveSku($sku, $scaleCode, $orgId, $includeGlobalFallback);
         if (!$row) {
             throw new \InvalidArgumentException('SKU_NOT_FOUND');
         }
@@ -34,12 +48,17 @@ class SkuCatalog
         return $row;
     }
 
-    public function listActiveSkus(?string $scaleCode = null): array
+    public function listActiveSkus(
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): array
     {
         $items = [];
-        $rows = $this->baseQuery($scaleCode, true)
+        $rows = $this->baseQuery($scaleCode, true, $orgId, $includeGlobalFallback)
             ->orderBy('sku')
             ->get();
+        $rows = $this->dedupeRowsBySku($rows, $orgId);
 
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row);
@@ -76,7 +95,12 @@ class SkuCatalog
         return $items;
     }
 
-    public function resolveSkuMeta(string $sku, ?string $scaleCode = null): array
+    public function resolveSkuMeta(
+        string $sku,
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): array
     {
         $requestedSku = $this->normalizeSku($sku);
         if ($requestedSku === '') {
@@ -89,7 +113,7 @@ class SkuCatalog
             ];
         }
 
-        $requestedRow = $this->findSkuRow($requestedSku, $scaleCode);
+        $requestedRow = $this->findSkuRow($requestedSku, $scaleCode, $orgId, $includeGlobalFallback);
         if (!$requestedRow) {
             return [
                 'requested_sku' => $requestedSku,
@@ -108,7 +132,12 @@ class SkuCatalog
             $anchorSku = $requestedSku;
             $effectiveSku = $this->normalizeSku((string) ($requestedMeta['effective_sku'] ?? ''));
             if ($effectiveSku === '') {
-                $effectiveSku = $this->resolveEffectiveSkuFromAnchor($requestedSku, $scaleCode) ?? '';
+                $effectiveSku = $this->resolveEffectiveSkuFromAnchor(
+                    $requestedSku,
+                    $scaleCode,
+                    $orgId,
+                    $includeGlobalFallback
+                ) ?? '';
             }
         } else {
             $anchorSku = $this->normalizeSku((string) ($requestedMeta['anchor_sku'] ?? ''));
@@ -118,9 +147,9 @@ class SkuCatalog
             $effectiveSku = $requestedSku;
         }
 
-        $effectiveRow = $this->getActiveSku($effectiveSku, $scaleCode);
+        $effectiveRow = $this->getActiveSku($effectiveSku, $scaleCode, $orgId, $includeGlobalFallback);
         if (!$effectiveRow && $requestedSku !== $effectiveSku) {
-            $effectiveRow = $this->getActiveSku($requestedSku, $scaleCode);
+            $effectiveRow = $this->getActiveSku($requestedSku, $scaleCode, $orgId, $includeGlobalFallback);
         }
 
         $entitlementId = null;
@@ -138,14 +167,19 @@ class SkuCatalog
         ];
     }
 
-    public function isAnchorSku(string $sku, ?string $scaleCode = null): bool
+    public function isAnchorSku(
+        string $sku,
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): bool
     {
         $sku = $this->normalizeSku($sku);
         if ($sku === '') {
             return false;
         }
 
-        $row = $this->findSkuRow($sku, $scaleCode);
+        $row = $this->findSkuRow($sku, $scaleCode, $orgId, $includeGlobalFallback);
         if (!$row) {
             return false;
         }
@@ -153,14 +187,19 @@ class SkuCatalog
         return $this->isAnchorMeta($this->decodeMeta($row));
     }
 
-    public function anchorForSku(string $sku, ?string $scaleCode = null): ?string
+    public function anchorForSku(
+        string $sku,
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): ?string
     {
         $sku = $this->normalizeSku($sku);
         if ($sku === '') {
             return null;
         }
 
-        $row = $this->findSkuRow($sku, $scaleCode);
+        $row = $this->findSkuRow($sku, $scaleCode, $orgId, $includeGlobalFallback);
         if (!$row) {
             return null;
         }
@@ -175,12 +214,19 @@ class SkuCatalog
             return $anchorSku;
         }
 
-        return $this->resolveAnchorSkuForEffective($sku, $scaleCode);
+        return $this->resolveAnchorSkuForEffective($sku, $scaleCode, $orgId, $includeGlobalFallback);
     }
 
-    public function defaultAnchorSku(?string $scaleCode = null): ?string
+    public function defaultAnchorSku(
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): ?string
     {
-        $rows = $this->baseQuery($scaleCode, false)->orderBy('sku')->get();
+        $rows = $this->baseQuery($scaleCode, false, $orgId, $includeGlobalFallback)
+            ->orderBy('sku')
+            ->get();
+        $rows = $this->dedupeRowsBySku($rows, $orgId);
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row);
             if ($this->isAnchorMeta($meta)) {
@@ -188,17 +234,21 @@ class SkuCatalog
             }
         }
 
-        $defaultEffective = $this->defaultEffectiveSku($scaleCode);
+        $defaultEffective = $this->defaultEffectiveSku($scaleCode, $orgId, $includeGlobalFallback);
         if ($defaultEffective) {
-            return $this->anchorForSku($defaultEffective, $scaleCode);
+            return $this->anchorForSku($defaultEffective, $scaleCode, $orgId, $includeGlobalFallback);
         }
 
         return null;
     }
 
-    public function defaultEffectiveSku(?string $scaleCode = null): ?string
+    public function defaultEffectiveSku(
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): ?string
     {
-        $items = $this->listActiveSkus($scaleCode);
+        $items = $this->listActiveSkus($scaleCode, $orgId, $includeGlobalFallback);
         if (count($items) === 0) {
             return null;
         }
@@ -213,12 +263,22 @@ class SkuCatalog
         return (string) ($items[0]['sku'] ?? null);
     }
 
-    private function baseQuery(?string $scaleCode, bool $activeOnly): \Illuminate\Database\Eloquent\Builder
+    private function baseQuery(
+        ?string $scaleCode,
+        bool $activeOnly,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): \Illuminate\Database\Eloquent\Builder
     {
         $query = Sku::query();
         if ($activeOnly) {
             $query->where('is_active', true);
         }
+
+        if ($orgId !== null) {
+            $query->forOrg($orgId, $includeGlobalFallback);
+        }
+
         $scale = $this->normalizeScaleCode($scaleCode);
         if ($scale !== null) {
             $query->where('scale_code', $scale);
@@ -268,15 +328,31 @@ class SkuCatalog
         return !empty($meta['anchor']) || !empty($meta['is_anchor']);
     }
 
-    private function findSkuRow(string $sku, ?string $scaleCode = null): ?Sku
+    private function findSkuRow(
+        string $sku,
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): ?Sku
     {
-        $query = $this->baseQuery($scaleCode, false)->where('sku', $sku);
-        return $query->first();
+        $rows = $this->baseQuery($scaleCode, false, $orgId, $includeGlobalFallback)
+            ->where('sku', $sku)
+            ->get();
+
+        return $this->pickPreferredRow($rows, $orgId);
     }
 
-    private function resolveEffectiveSkuFromAnchor(string $anchorSku, ?string $scaleCode = null): ?string
+    private function resolveEffectiveSkuFromAnchor(
+        string $anchorSku,
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): ?string
     {
-        $rows = $this->baseQuery($scaleCode, true)->orderBy('sku')->get();
+        $rows = $this->baseQuery($scaleCode, true, $orgId, $includeGlobalFallback)
+            ->orderBy('sku')
+            ->get();
+        $rows = $this->dedupeRowsBySku($rows, $orgId);
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row);
             $metaAnchor = $this->normalizeSku((string) ($meta['anchor_sku'] ?? ''));
@@ -288,9 +364,17 @@ class SkuCatalog
         return null;
     }
 
-    private function resolveAnchorSkuForEffective(string $effectiveSku, ?string $scaleCode = null): ?string
+    private function resolveAnchorSkuForEffective(
+        string $effectiveSku,
+        ?string $scaleCode = null,
+        ?int $orgId = null,
+        bool $includeGlobalFallback = true
+    ): ?string
     {
-        $rows = $this->baseQuery($scaleCode, false)->orderBy('sku')->get();
+        $rows = $this->baseQuery($scaleCode, false, $orgId, $includeGlobalFallback)
+            ->orderBy('sku')
+            ->get();
+        $rows = $this->dedupeRowsBySku($rows, $orgId);
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row);
             $metaEffective = $this->normalizeSku((string) ($meta['effective_sku'] ?? ''));
@@ -305,5 +389,70 @@ class SkuCatalog
     private function benefitModuleRuleCatalog(): BenefitModuleRuleCatalog
     {
         return app(BenefitModuleRuleCatalog::class);
+    }
+
+    /**
+     * @param  Collection<int,Sku>  $rows
+     * @return Collection<int,Sku>
+     */
+    private function dedupeRowsBySku(Collection $rows, ?int $orgId): Collection
+    {
+        if ($orgId === null) {
+            return $rows;
+        }
+
+        return $rows
+            ->groupBy(fn (Sku $row): string => $this->normalizeSku((string) ($row->sku ?? '')))
+            ->map(function (Collection $group) use ($orgId): ?Sku {
+                return $this->pickPreferredRow($group, $orgId);
+            })
+            ->filter(static fn (mixed $row): bool => $row instanceof Sku)
+            ->sortBy(fn (Sku $row): string => (string) ($row->sku ?? ''))
+            ->values();
+    }
+
+    /**
+     * @param  Collection<int,Sku>  $rows
+     */
+    private function pickPreferredRow(Collection $rows, ?int $orgId): ?Sku
+    {
+        if ($rows->isEmpty()) {
+            return null;
+        }
+
+        if ($orgId === null) {
+            $first = $rows->first();
+            return $first instanceof Sku ? $first : null;
+        }
+
+        $sorted = $rows->sort(function (Sku $left, Sku $right) use ($orgId): int {
+            $leftPriority = $this->orgPriority((int) ($left->org_id ?? 0), $orgId);
+            $rightPriority = $this->orgPriority((int) ($right->org_id ?? 0), $orgId);
+            if ($leftPriority !== $rightPriority) {
+                return $leftPriority <=> $rightPriority;
+            }
+
+            return strcmp((string) ($left->sku ?? ''), (string) ($right->sku ?? ''));
+        });
+
+        $first = $sorted->first();
+        return $first instanceof Sku ? $first : null;
+    }
+
+    private function orgPriority(int $rowOrgId, int $targetOrgId): int
+    {
+        if ($rowOrgId === $targetOrgId) {
+            return 0;
+        }
+        if ($rowOrgId === 0) {
+            return 1;
+        }
+
+        $legacyOrgId = (int) config('fap.legacy_org_id', 1);
+        if ($legacyOrgId > 0 && $rowOrgId === $legacyOrgId) {
+            return 2;
+        }
+
+        return 3;
     }
 }

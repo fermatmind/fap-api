@@ -126,9 +126,13 @@ trap restore EXIT
 # =========================
 call_refresh() {
   local label="$1"
-  local url="$BASE/api/v0.3/attempts/$ATT/report?refresh=1"
+  local refresh_url="$BASE/api/v0.3/attempts/$ATT/report?refresh=1"
+  local poll_url="$BASE/api/v0.3/attempts/$ATT/report"
   local http=""
   local curl_args=()
+  local max_tries="${REFRESH_MAX_TRIES:-30}"
+  local attempt=0
+  local ready=0
 
   if [[ ${#CURL_AUTH[@]} -gt 0 ]]; then
     curl_args+=("${CURL_AUTH[@]}")
@@ -137,28 +141,70 @@ call_refresh() {
     curl_args+=("${OWNER_HDR[@]}")
   fi
 
-  http="$(curl -sS -L -o "$TMP_REPORT" -w "%{http_code}" \
-    "${curl_args[@]}" \
-    -H 'Accept: application/json' \
-    "$url" || true)"
+  while (( attempt < max_tries )); do
+    attempt=$((attempt + 1))
+    local url="$poll_url"
+    if (( attempt == 1 )); then
+      url="$refresh_url"
+    fi
+    http="$(curl -sS -L -o "$TMP_REPORT" -w "%{http_code}" \
+      "${curl_args[@]}" \
+      -H 'Accept: application/json' \
+      "$url" || true)"
 
-  if [[ "$http" != "200" ]]; then
-    echo "❌ call_refresh HTTP=$http url=$url" >&2
+    if [[ "$http" != "200" && "$http" != "202" ]]; then
+      echo "❌ call_refresh HTTP=$http url=$url" >&2
+      echo "---- body (first 400 bytes) ----" >&2
+      head -c 400 "$TMP_REPORT" 2>/dev/null || true
+      echo >&2
+      exit 2
+    fi
+
+    if FILE="$TMP_REPORT" php -r '
+$f=getenv("FILE");
+$j=json_decode(file_get_contents($f), true);
+if (!is_array($j) || ($j["ok"] ?? false) !== true) { exit(11); }
+$report = $j["report"] ?? null;
+$traitsCards = $report["sections"]["traits"]["cards"] ?? null;
+if (is_array($traitsCards) && $traitsCards !== []) { exit(0); }
+$engine = $report["versions"]["engine"] ?? null;
+if (is_string($engine) && trim($engine) !== "") { exit(0); }
+$generating = (bool)($j["generating"] ?? ($j["meta"]["generating"] ?? false));
+if ($generating || !is_array($report) || $report === []) { exit(10); }
+exit(11);
+'; then
+      ready=1
+      break
+    fi
+
+    (
+      cd "$BACKEND_DIR"
+      php artisan queue:work database --queue=attempts --once --sleep=0 --tries=1 --timeout=30 --no-interaction >/dev/null 2>&1 || true
+      php artisan queue:work database --queue=reports --once --sleep=0 --tries=1 --timeout=30 --no-interaction >/dev/null 2>&1 || true
+    )
+
+    local retry_after=0
+    retry_after="$(FILE="$TMP_REPORT" php -r '
+$j=json_decode(file_get_contents(getenv("FILE")), true);
+if (!is_array($j)) { echo 0; exit; }
+$v = (int) ($j["retry_after_seconds"] ?? ($j["meta"]["retry_after_seconds"] ?? 0));
+echo $v > 0 ? $v : 0;
+')"
+    if [[ ! "$retry_after" =~ ^[0-9]+$ ]]; then
+      retry_after=0
+    fi
+    if (( retry_after > 0 )); then
+      sleep "$retry_after"
+    else
+      sleep 1
+    fi
+  done
+
+  if [[ "$ready" != "1" ]]; then
+    echo "❌ call_refresh timed out waiting report ready (label=${label})" >&2
     echo "---- body (first 400 bytes) ----" >&2
     head -c 400 "$TMP_REPORT" 2>/dev/null || true
     echo >&2
-    exit 2
-  fi
-
-  if ! FILE="$TMP_REPORT" php -r '
-$f=getenv("FILE");
-$j=json_decode(file_get_contents($f), true);
-if (!is_array($j)) { exit(2); }
-if (($j["ok"] ?? false) !== true) { exit(3); }
-$engine = $j["report"]["versions"]["engine"] ?? null;
-if ($engine === null || $engine === "") { exit(4); }
-'; then
-    echo "❌ call_refresh invalid report schema" >&2
     exit 2
   fi
 

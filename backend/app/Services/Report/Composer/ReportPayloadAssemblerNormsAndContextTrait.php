@@ -28,7 +28,7 @@ trait ReportPayloadAssemblerNormsAndContextTrait
         }
 
         $metrics = ['EI', 'SN', 'TF', 'JP', 'AT'];
-        $metricsPayload = [];
+        $scoreByMetric = [];
 
         foreach ($metrics as $metric) {
             if (!array_key_exists($metric, $scoresPct)) {
@@ -39,13 +39,35 @@ trait ReportPayloadAssemblerNormsAndContextTrait
                 return null;
             }
 
-            $scoreInt = (int) round((float) $score);
-            $row = DB::table('norms_table')
-                ->where('norms_version_id', (string) $version->id)
-                ->where('metric_key', $metric)
-                ->where('score_int', $scoreInt)
-                ->first();
+            $scoreByMetric[$metric] = (int) round((float) $score);
+        }
 
+        $rows = DB::table('norms_table')
+            ->where('norms_version_id', (string) $version->id)
+            ->whereIn('metric_key', $metrics)
+            ->whereIn('score_int', array_values(array_unique(array_values($scoreByMetric))))
+            ->get([
+                'metric_key',
+                'score_int',
+                'percentile',
+            ]);
+
+        $rowsByMetricAndScore = [];
+        foreach ($rows as $row) {
+            $rowMetric = strtoupper(trim((string) ($row->metric_key ?? '')));
+            if ($rowMetric === '') {
+                continue;
+            }
+
+            $rowScoreInt = (int) ($row->score_int ?? 0);
+            $rowsByMetricAndScore[$rowMetric.'|'.$rowScoreInt] = $row;
+        }
+
+        $metricsPayload = [];
+        foreach ($metrics as $metric) {
+            $scoreInt = (int) ($scoreByMetric[$metric] ?? 0);
+            $rowKey = $metric.'|'.$scoreInt;
+            $row = $rowsByMetricAndScore[$rowKey] ?? null;
             if (!$row) {
                 return null;
             }

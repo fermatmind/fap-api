@@ -141,6 +141,7 @@ class ReportSnapshotB2BTest extends TestCase
     {
         $this->seedScales();
         [$orgId, $userId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'SIMPLE_SCORE_DEMO');
 
         $orderNo = 'ord_b2b_1';
         DB::table('orders')->insert([

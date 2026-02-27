@@ -39,5 +39,6 @@ final class SchemaCache
     {
         self::$tableCache = [];
         self::$columnCache = [];
+        \App\Support\SchemaBaseline::clearCache();
     }
 }

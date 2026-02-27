@@ -217,7 +217,7 @@ http_code=$(curl -sS -L -o "$simple_submit" -w "%{http_code}" -X POST \
   -H "X-Anon-Id: ${SIMPLE_ANON_ID}" \
   -H "Authorization: Bearer ${simple_token}" \
   -d @"$RUN_DIR/simple_submit_payload.json" \
-  "$API/api/v0.3/attempts/submit" || true)
+  "$API/api/v0.3/attempts/submit?mode=sync_legacy" || true)
 [[ "$http_code" == "200" ]] || fail "simple submit failed (http=$http_code)"
 
 simple_raw="$(json_get "$simple_submit" "result.raw_score" || true)"
@@ -280,7 +280,7 @@ http_code=$(curl -sS -L -o "$raven_submit" -w "%{http_code}" -X POST \
   -H "X-Anon-Id: ${RAVEN_ANON_ID}" \
   -H "Authorization: Bearer ${raven_token}" \
   -d @"$RUN_DIR/raven_submit_payload.json" \
-  "$API/api/v0.3/attempts/submit" || true)
+  "$API/api/v0.3/attempts/submit?mode=sync_legacy" || true)
 [[ "$http_code" == "200" ]] || fail "raven submit failed (http=$http_code)"
 
 raven_status="$(json_get "$raven_submit" "result.breakdown_json.status" || true)"

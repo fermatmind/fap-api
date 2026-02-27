@@ -252,7 +252,7 @@ class EntitlementManager
             ];
         }
 
-        $skuRow = DB::table('skus')->where('sku', $sku)->first();
+        $skuRow = app(SkuCatalog::class)->getActiveSku($sku, null, $orderOrgId);
         $benefitCode = $skuRow ? strtoupper((string) ($skuRow->benefit_code ?? '')) : '';
 
         if ($benefitCode === '') {

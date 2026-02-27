@@ -58,15 +58,5 @@ class TouchFmTokenLastUsedAtJob implements ShouldBeUnique, ShouldQueue
                 'exception' => $e::class,
             ]);
         }
-
-        DB::table('fm_tokens')
-            ->where('token_hash', $tokenHash)
-            ->where(function ($query) use ($threshold): void {
-                $query->whereNull('last_used_at')->orWhere('last_used_at', '<', $threshold);
-            })
-            ->update([
-                'last_used_at' => $now,
-                'updated_at' => $now,
-            ]);
     }
 }

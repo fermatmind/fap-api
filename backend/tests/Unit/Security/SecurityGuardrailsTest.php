@@ -37,6 +37,7 @@ final class SecurityGuardrailsTest extends TestCase
         'FmTokenAuth',
         'AdminAuth',
         'IntegrationsIngestAuth',
+        'PartnerApiKeyAuth',
     ];
 
     /** @var array<int, string> */

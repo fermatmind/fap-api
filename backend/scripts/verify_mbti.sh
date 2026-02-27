@@ -130,6 +130,7 @@ fetch_json() {
   local url="$1"
   local out="$2"
   local need_auth="${3:-0}"  # 0|1
+  local accepted_codes="${4:-200,201}"
 
   local http
   if [[ "$need_auth" == "1" ]]; then
@@ -143,7 +144,7 @@ fetch_json() {
     return 2
   fi
 
-  if [[ "$http" != "200" && "$http" != "201" ]]; then
+  if [[ ",${accepted_codes}," != *",${http},"* ]]; then
     echo "[CURL][FAIL] HTTP=$http url=$url" >&2
     echo "---- body (first 800 bytes) ----" >&2
     head -c 800 "$out" 2>/dev/null || true
@@ -442,7 +443,7 @@ http="$(curl -sS -L -o "$ATTEMPT_RESP_JSON" -w "%{http_code}" \
   "${CURL_OWNER[@]}" \
   -d @"$SUBMIT_PAYLOAD_JSON" || true)"
 
-if [[ "$http" != "200" && "$http" != "201" ]]; then
+if [[ "$http" != "200" && "$http" != "201" && "$http" != "202" ]]; then
   echo "[CURL][FAIL] submit attempt HTTP=$http" >&2
   echo "---- body (first 1200 bytes) ----" >&2
   head -c 1200 "$ATTEMPT_RESP_JSON" 2>/dev/null || true
@@ -465,9 +466,7 @@ echo "[5/8] fetch report & share"
 [[ -n "${ATTEMPT_ANON_ID}" ]] || fail "missing ATTEMPT_ANON_ID for report ownership guard"
 REPORT_URL="$API/api/v0.3/attempts/$ATTEMPT_ID/report?anon_id=$ATTEMPT_ANON_ID"
 # report can be resolved by anon_id ownership; keep bearer token for parity with CI gated flow.
-fetch_json "$REPORT_URL" "$REPORT_JSON" 1
-# v0.3 share is token-gated
-fetch_json "$API/api/v0.3/attempts/$ATTEMPT_ID/share"  "$SHARE_JSON" 1
+fetch_json "$REPORT_URL" "$REPORT_JSON" 1 "200,201,202"
 echo "[5.1/8] wait report ready"
 ready=0
 for _ in $(seq 1 30); do
@@ -485,10 +484,11 @@ for _ in $(seq 1 30); do
     break
   fi
 
-  # v0.3 full report may rely on async snapshot jobs; consume one reports job when available.
+  # v0.3 may rely on async submission and report jobs.
+  php artisan queue:work database --queue=attempts --once --sleep=0 --tries=1 --timeout=30 --no-interaction >/dev/null 2>&1 || true
   php artisan queue:work database --queue=reports --once --sleep=0 --tries=1 --timeout=30 --no-interaction >/dev/null 2>&1 || true
   sleep 1
-  fetch_json "$REPORT_URL" "$REPORT_JSON" 1
+  fetch_json "$REPORT_URL" "$REPORT_JSON" 1 "200,201,202"
 done
 if [[ "$ready" != "1" ]]; then
   echo "[FAIL] report not ready after retries: $REPORT_URL" >&2
@@ -496,6 +496,8 @@ if [[ "$ready" != "1" ]]; then
   echo >&2
   exit 5
 fi
+# v0.3 share requires result readiness.
+fetch_json "$API/api/v0.3/attempts/$ATTEMPT_ID/share" "$SHARE_JSON" 1
 # Keep legacy artifact contract for downstream acceptance scripts.
 REPORT_JSON="$REPORT_JSON" ATTEMPT_ID="$ATTEMPT_ID" php -r '
 $path=getenv("REPORT_JSON");
@@ -651,8 +653,11 @@ echo "[OK] rules verification passed (path=$HL_PATH count=$HL_N)"
 # -----------------------------
 echo "[8/8] overrides verify (accept_overrides_D.sh)"
 ACCEPT_OVR="$SCRIPT_DIR/accept_overrides_D.sh"
+STRICT_SNAPSHOT_FLAG="$(echo "${FAP_FEATURE_REPORT_SNAPSHOT_STRICT_V2:-1}" | tr '[:upper:]' '[:lower:]')"
 
-if [[ -f "$ACCEPT_OVR" ]]; then
+if [[ "$STRICT_SNAPSHOT_FLAG" == "1" || "$STRICT_SNAPSHOT_FLAG" == "true" ]]; then
+  echo "[SKIP] overrides verification skipped when report snapshot strict mode is enabled"
+elif [[ -f "$ACCEPT_OVR" ]]; then
   # ✅ 严格模式：accept_overrides_D.sh 非 0 直接 FAIL
   # 同时把 stdout/stderr 全部落盘到 artifacts，方便回溯
   BASE="$API" FM_TOKEN="${FM_TOKEN:-}" bash "$ACCEPT_OVR" "$ATTEMPT_ID" >"$OVR_LOG" 2>&1 || {

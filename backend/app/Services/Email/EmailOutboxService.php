@@ -35,6 +35,7 @@ class EmailOutboxService
 
         $emailHash = $this->piiCipher->emailHash($email);
         $emailEnc = $this->piiCipher->encrypt($email);
+        $maskedEmail = $this->maskedLegacyEmail($emailHash);
 
         $token = 'claim_'.(string) Str::uuid();
         $tokenHash = hash('sha256', $token);
@@ -56,7 +57,7 @@ class EmailOutboxService
             'to_email' => $email,
             'subject' => $subject,
         ];
-        $payloadJson = $this->encodePayloadJson($payload);
+        $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
         $payloadEnc = $this->encodePayloadEncrypted($payload);
 
         $pending = null;
@@ -73,7 +74,7 @@ class EmailOutboxService
 
         if ($pending) {
             $update = [
-                'email' => $email,
+                'email' => $maskedEmail,
                 'attempt_id' => $attemptId,
                 'payload_json' => $payloadJson,
                 'claim_token_hash' => $tokenHash,
@@ -105,7 +106,7 @@ class EmailOutboxService
                 $update['template_key'] = 'report_claim';
             }
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
-                $update['to_email'] = $email;
+                $update['to_email'] = $maskedEmail;
             }
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
                 $update['subject'] = $subject;
@@ -129,7 +130,7 @@ class EmailOutboxService
         $row = [
             'id' => (string) Str::uuid(),
             'user_id' => $userId,
-            'email' => $email,
+            'email' => $maskedEmail,
             'attempt_id' => $attemptId,
             'template' => 'report_claim',
             'payload_json' => $payloadJson,
@@ -167,7 +168,7 @@ class EmailOutboxService
             $row['template_key'] = 'report_claim';
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
-            $row['to_email'] = $email;
+            $row['to_email'] = $maskedEmail;
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
             $row['subject'] = $subject;
@@ -213,6 +214,7 @@ class EmailOutboxService
 
         $emailHash = $this->piiCipher->emailHash($email);
         $emailEnc = $this->piiCipher->encrypt($email);
+        $maskedEmail = $this->maskedLegacyEmail($emailHash);
 
         $locale = $this->resolveAttemptLocale($attemptId);
         $subject = $this->defaultSubjectForTemplate('payment_success', $locale);
@@ -231,7 +233,7 @@ class EmailOutboxService
             'to_email' => $email,
             'subject' => $subject,
         ];
-        $payloadJson = $this->encodePayloadJson($payload);
+        $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
         $payloadEnc = $this->encodePayloadEncrypted($payload);
 
         $pending = null;
@@ -247,7 +249,7 @@ class EmailOutboxService
 
         if ($pending) {
             $update = [
-                'email' => $email,
+                'email' => $maskedEmail,
                 'attempt_id' => $attemptId,
                 'payload_json' => $payloadJson,
                 'claim_token_hash' => $nonce,
@@ -279,7 +281,7 @@ class EmailOutboxService
                 $update['template_key'] = 'payment_success';
             }
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
-                $update['to_email'] = $email;
+                $update['to_email'] = $maskedEmail;
             }
             if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
                 $update['subject'] = $subject;
@@ -297,7 +299,7 @@ class EmailOutboxService
         $row = [
             'id' => (string) Str::uuid(),
             'user_id' => $userId,
-            'email' => $email,
+            'email' => $maskedEmail,
             'attempt_id' => $attemptId,
             'template' => 'payment_success',
             'payload_json' => $payloadJson,
@@ -334,7 +336,7 @@ class EmailOutboxService
             $row['template_key'] = 'payment_success';
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
-            $row['to_email'] = $email;
+            $row['to_email'] = $maskedEmail;
         }
         if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
             $row['subject'] = $subject;
@@ -490,6 +492,29 @@ class EmailOutboxService
         $this->fallbackMonitor->record('email_outbox.payload_read', $fallbackPayload !== []);
 
         return $fallbackPayload;
+    }
+
+    /**
+     * Keep payload_json as a minimal non-sensitive fallback while payload_enc remains authoritative.
+     *
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function sanitizePayloadForJson(array $payload): array
+    {
+        unset(
+            $payload['email'],
+            $payload['to_email'],
+            $payload['claim_token'],
+            $payload['claim_url']
+        );
+
+        return $payload;
+    }
+
+    private function maskedLegacyEmail(string $emailHash): string
+    {
+        return $this->piiCipher->legacyEmailPlaceholder($emailHash);
     }
 
     /**

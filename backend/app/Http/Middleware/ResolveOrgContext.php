@@ -66,6 +66,11 @@ class ResolveOrgContext
 
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
+        $request->attributes->set('org_context_resolved', true);
+
+        if ($orgId <= 0 && $this->isOpsSystemBypass($request, $role)) {
+            $request->attributes->set('org_context_bypass', true);
+        }
 
         $this->orgContext->set($orgId, $userId, $role, $anonId);
         app()->instance(OrgContext::class, $this->orgContext);
@@ -235,5 +240,16 @@ class ResolveOrgContext
             'error_code' => 'ORG_NOT_FOUND',
             'message' => 'org not found.',
         ], 404);
+    }
+
+    private function isOpsSystemBypass(Request $request, ?string $role): bool
+    {
+        if (! $request->is('ops*')) {
+            return false;
+        }
+
+        $normalizedRole = strtolower(trim((string) $role));
+
+        return in_array($normalizedRole, ['system', 'ops', 'admin'], true);
     }
 }

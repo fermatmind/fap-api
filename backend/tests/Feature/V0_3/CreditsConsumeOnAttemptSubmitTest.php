@@ -279,6 +279,7 @@ class CreditsConsumeOnAttemptSubmitTest extends TestCase
     {
         $this->seedScales();
         [$orgId, $userId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'SIMPLE_SCORE_DEMO');
 
         $this->seedWallet($orgId, 3);
         $inviteTokens = $this->createAssessmentWithAssignments($orgId, $userId, 4);

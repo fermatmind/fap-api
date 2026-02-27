@@ -301,7 +301,7 @@ class AuthPhoneController extends Controller
         if ($row) {
             $userId = (string) ($row->{$pk} ?? '');
 
-            return [$userId, $this->buildUserPayloadFromRow($row, $pk, $phoneCol)];
+            return [$userId, $this->buildUserPayloadFromRow($row, $pk)];
         }
 
         $insert = [];
@@ -310,9 +310,6 @@ class AuthPhoneController extends Controller
             $insert['uid'] = 'u_'.bin2hex(random_bytes(5));
         }
 
-        if ($phoneCol) {
-            $insert[$phoneCol] = $phoneE164;
-        }
         if ($hasPhoneHash) {
             $insert['phone_e164_hash'] = $phoneHash;
         }
@@ -353,19 +350,25 @@ class AuthPhoneController extends Controller
             $insert['password'] = bcrypt(bin2hex(random_bytes(8)));
         }
 
-        DB::table('users')->insert($insert);
+        $insertedId = null;
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'id')) {
+            $insertedId = DB::table('users')->insertGetId($insert);
+        } else {
+            DB::table('users')->insert($insert);
+        }
 
         $row2 = DB::table('users')
-            ->when($phoneCol !== null, fn ($q) => $q->where($phoneCol, $phoneE164))
-            ->orderByDesc($hasUid ? 'created_at' : 'id')
+            ->when($insertedId !== null, fn ($q) => $q->where('id', (int) $insertedId))
+            ->when($insertedId === null && $hasPhoneHash, fn ($q) => $q->where('phone_e164_hash', $phoneHash))
+            ->when($insertedId === null && ! $hasPhoneHash && $phoneCol !== null, fn ($q) => $q->where($phoneCol, $phoneE164))
             ->first();
 
         $userId = $row2 ? (string) ($row2->{$pk} ?? '') : (string) ($insert[$pk] ?? '');
 
-        return [$userId, $this->buildUserPayloadFromRow($row2 ?? (object) $insert, $pk, $phoneCol)];
+        return [$userId, $this->buildUserPayloadFromRow($row2 ?? (object) $insert, $pk)];
     }
 
-    private function buildUserPayloadFromRow(object $row, string $pk, ?string $phoneCol): array
+    private function buildUserPayloadFromRow(object $row, string $pk): array
     {
         $uid = (string) ($row->{$pk} ?? '');
         /** @var PiiCipher $pii */
@@ -374,16 +377,25 @@ class AuthPhoneController extends Controller
         $fallbackMonitor = app(PiiReadFallbackMonitor::class);
 
         $phone = null;
-        $fallbackUsed = false;
         if (\App\Support\SchemaBaseline::hasColumn('users', 'phone_e164_enc')) {
             $phone = $pii->decrypt((string) ($row->phone_e164_enc ?? ''));
         }
-        if (($phone === null || $phone === '') && $phoneCol) {
-            $raw = (string) ($row->{$phoneCol} ?? '');
-            $phone = $raw !== '' ? $raw : null;
-            $fallbackUsed = $phone !== null;
+
+        $blockedPlaintextFallback = false;
+        if ($phone === null || $phone === '') {
+            $plainE164 = property_exists($row, 'phone_e164') ? trim((string) ($row->phone_e164 ?? '')) : '';
+            $plainLegacy = property_exists($row, 'phone') ? trim((string) ($row->phone ?? '')) : '';
+            $blockedPlaintextFallback = ($plainE164 !== '' || $plainLegacy !== '');
         }
-        $fallbackMonitor->record('users.phone_read', $fallbackUsed);
+
+        if ($blockedPlaintextFallback) {
+            Log::warning('AUTH_PHONE_PLAINTEXT_READ_FALLBACK_BLOCKED', [
+                'user_id' => $uid !== '' ? $uid : null,
+                'has_phone_e164' => property_exists($row, 'phone_e164') ? trim((string) ($row->phone_e164 ?? '')) !== '' : false,
+                'has_phone_legacy' => property_exists($row, 'phone') ? trim((string) ($row->phone ?? '')) !== '' : false,
+            ]);
+        }
+        $fallbackMonitor->record('users.phone_read', false);
 
         $anonId = property_exists($row, 'anon_id') ? (string) ($row->anon_id ?? '') : null;
         if ($anonId === '') {

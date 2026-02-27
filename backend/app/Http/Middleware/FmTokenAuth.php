@@ -42,7 +42,7 @@ class FmTokenAuth
             'revoked_at',
         ];
 
-        $row = $this->findTokenRow($tokenHash, $select);
+        $row = $this->findTokenRow($token, $tokenHash, $select);
 
         if (! $row) {
             return $this->unauthorizedResponse($request, 'token_not_found');
@@ -103,6 +103,11 @@ class FmTokenAuth
         $request->attributes->set('fm_org_id', $orgId);
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
+        $request->attributes->set('org_context_resolved', true);
+
+        if ($orgId <= 0 && $this->isOpsSystemBypass($request, $role)) {
+            $request->attributes->set('org_context_bypass', true);
+        }
 
         TouchFmTokenLastUsedAtJob::dispatch($tokenHash)->onQueue('ops');
 
@@ -123,15 +128,16 @@ class FmTokenAuth
     /**
      * @param  array<int,string>  $select
      */
-    private function findTokenRow(string $tokenHash, array $select): ?object
+    private function findTokenRow(string $token, string $tokenHash, array $select): ?object
     {
-        $row = null;
-
         try {
-            $row = DB::table('auth_tokens')
+            $authRow = DB::table('auth_tokens')
                 ->select($select)
                 ->where('token_hash', $tokenHash)
                 ->first();
+            if ($authRow) {
+                return $authRow;
+            }
         } catch (\Throwable $e) {
             Log::warning('[SEC] auth_tokens_lookup_failed', [
                 'path' => 'middleware.fm_token_auth',
@@ -139,30 +145,32 @@ class FmTokenAuth
             ]);
         }
 
-        if ($row) {
-            return $row;
+        if (! $this->shouldAllowLegacyTestingTokenFallback()) {
+            return null;
         }
 
         try {
-            $legacy = DB::table('fm_tokens')
+            $legacyRow = DB::table('fm_tokens')
                 ->select($select)
+                ->where('token', $token)
                 ->where('token_hash', $tokenHash)
                 ->first();
-            if ($legacy) {
-                Log::info('[SEC] fm_token_legacy_hash_fallback_hit', [
-                    'path' => 'middleware.fm_token_auth',
-                ]);
+            if ($legacyRow) {
+                return $legacyRow;
             }
-
-            return $legacy ?: null;
         } catch (\Throwable $e) {
-            Log::warning('[SEC] fm_tokens_lookup_failed', [
+            Log::warning('[SEC] fm_tokens_legacy_lookup_failed', [
                 'path' => 'middleware.fm_token_auth',
                 'exception' => $e::class,
             ]);
         }
 
         return null;
+    }
+
+    private function shouldAllowLegacyTestingTokenFallback(): bool
+    {
+        return app()->environment(['testing', 'ci']);
     }
 
     private function userExists(Request $request, int $userId): bool
@@ -410,5 +418,16 @@ class FmTokenAuth
         }
 
         return null;
+    }
+
+    private function isOpsSystemBypass(Request $request, string $role): bool
+    {
+        if (! $request->is('ops*')) {
+            return false;
+        }
+
+        $normalizedRole = strtolower(trim($role));
+
+        return in_array($normalizedRole, ['system', 'ops', 'admin'], true);
     }
 }

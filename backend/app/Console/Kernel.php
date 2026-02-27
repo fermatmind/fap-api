@@ -42,6 +42,7 @@ use App\Console\Commands\Ops\BackfillResultsScaleIdentity;
 use App\Console\Commands\Ops\BackfillSharesScaleIdentity;
 use App\Console\Commands\Ops\ContentPathMirror;
 use App\Console\Commands\Ops\PartitionAttemptAnswerRows;
+use App\Console\Commands\Ops\QueueBacklogProbe;
 use App\Console\Commands\Ops\ScaleIdentityGate;
 use App\Console\Commands\Ops\ScaleIdentityModeAudit;
 use App\Console\Commands\OpsDeployEvent;
@@ -132,6 +133,7 @@ class Kernel extends ConsoleKernel
         BackfillResultsScaleIdentity::class,
         BackfillSharesScaleIdentity::class,
         PartitionAttemptAnswerRows::class,
+        QueueBacklogProbe::class,
     ];
 
     /**

@@ -19,11 +19,11 @@ return [
         'insights' => (bool) env('FAP_FEATURE_INSIGHTS', false),
         'analytics' => (bool) env('FAP_FEATURE_ANALYTICS', true),
         'security_v2' => (bool) env('FAP_FEATURE_SECURITY_V2', true),
-        'tenant_strict_v2' => (bool) env('FAP_FEATURE_TENANT_STRICT_V2', false),
+        'tenant_strict_v2' => (bool) env('FAP_FEATURE_TENANT_STRICT_V2', true),
         'clinical_consent_enforce' => (bool) env('FAP_FEATURE_CLINICAL_CONSENT_ENFORCE', false),
         'model_router_v2' => (bool) env('FAP_FEATURE_MODEL_ROUTER_V2', true),
-        'submit_async_v2' => (bool) env('FAP_FEATURE_SUBMIT_ASYNC_V2', false),
-        'report_snapshot_strict_v2' => (bool) env('FAP_FEATURE_REPORT_SNAPSHOT_STRICT_V2', false),
+        'submit_async_v2' => (bool) env('FAP_FEATURE_SUBMIT_ASYNC_V2', true),
+        'report_snapshot_strict_v2' => (bool) env('FAP_FEATURE_REPORT_SNAPSHOT_STRICT_V2', true),
     ],
 
     'payments' => [
@@ -282,6 +282,11 @@ return [
         'api_attempt_submit_per_minute' => (int) env('FAP_RATE_LIMIT_ATTEMPT_SUBMIT_PER_MINUTE', 20),
         'api_webhook_per_minute' => (int) env('FAP_RATE_LIMIT_WEBHOOK_PER_MINUTE', 60),
         'bypass_in_test_env' => (bool) env('FAP_RATE_LIMIT_BYPASS_IN_TEST_ENV', true),
+    ],
+
+    'observability' => [
+        'slow_query_log_enabled' => (bool) env('FAP_OBSERVABILITY_SLOW_QUERY_LOG_ENABLED', true),
+        'slow_query_ms' => (float) env('FAP_OBSERVABILITY_SLOW_QUERY_MS', 500),
     ],
 
     'events' => [
