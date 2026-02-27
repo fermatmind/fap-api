@@ -38,7 +38,7 @@ final class ScaleRegistryTenantIsolationTest extends TestCase
         $this->assertNotContains('TENANT_BRAVO_PRIVATE', $codes);
     }
 
-    public function test_scale_registry_service_blocks_cross_tenant_slug_resolution(): void
+    public function test_scale_registry_service_blocks_cross_tenant_and_global_slug_resolution_for_tenant_reads(): void
     {
         $this->seedScale('GLOBAL_PUBLIC_SCALE', 0, 'global-public-scale', true);
         $this->seedScale('TENANT_ALPHA_PRIVATE', 101, 'tenant-alpha-private', false);
@@ -55,11 +55,10 @@ final class ScaleRegistryTenantIsolationTest extends TestCase
         $this->assertNull($crossTenant);
 
         $global = $registry->lookupBySlug('global-public-scale', 101, true);
-        $this->assertNotNull($global);
-        $this->assertSame(0, (int) ($global['org_id'] ?? -1));
+        $this->assertNull($global);
     }
 
-    public function test_scale_registry_service_list_visible_contains_only_tenant_and_global_public(): void
+    public function test_scale_registry_service_list_visible_contains_only_tenant_rows_for_tenant_reads(): void
     {
         $this->seedScale('GLOBAL_PUBLIC_SCALE', 0, 'global-public-scale', true);
         $this->seedScale('GLOBAL_PRIVATE_SCALE', 0, 'global-private-scale', false);
@@ -71,8 +70,8 @@ final class ScaleRegistryTenantIsolationTest extends TestCase
         $rows = $registry->listVisible(101);
         $codes = array_values(array_map(static fn (array $row): string => (string) ($row['code'] ?? ''), $rows));
 
-        $this->assertContains('GLOBAL_PUBLIC_SCALE', $codes);
         $this->assertContains('TENANT_ALPHA_PRIVATE', $codes);
+        $this->assertNotContains('GLOBAL_PUBLIC_SCALE', $codes);
         $this->assertNotContains('GLOBAL_PRIVATE_SCALE', $codes);
         $this->assertNotContains('TENANT_BRAVO_PRIVATE', $codes);
     }

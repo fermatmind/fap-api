@@ -19,7 +19,7 @@ return [
         'insights' => (bool) env('FAP_FEATURE_INSIGHTS', false),
         'analytics' => (bool) env('FAP_FEATURE_ANALYTICS', true),
         'security_v2' => (bool) env('FAP_FEATURE_SECURITY_V2', true),
-        'tenant_strict_v2' => (bool) env('FAP_FEATURE_TENANT_STRICT_V2', false),
+        'tenant_strict_v2' => (bool) env('FAP_FEATURE_TENANT_STRICT_V2', true),
         'clinical_consent_enforce' => (bool) env('FAP_FEATURE_CLINICAL_CONSENT_ENFORCE', false),
         'model_router_v2' => (bool) env('FAP_FEATURE_MODEL_ROUTER_V2', true),
         'submit_async_v2' => (bool) env('FAP_FEATURE_SUBMIT_ASYNC_V2', false),
