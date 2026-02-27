@@ -64,6 +64,7 @@ return [
     'payment_webhook' => [
         'lock_ttl_seconds' => (int) env('PAYMENT_WEBHOOK_LOCK_TTL_SECONDS', 10),
         'lock_block_seconds' => (int) env('PAYMENT_WEBHOOK_LOCK_BLOCK_SECONDS', 5),
+        'lock_contention_budget_ms' => (int) env('PAYMENT_WEBHOOK_LOCK_CONTENTION_BUDGET_MS', 3000),
         'success_event_types' => [
             'stripe' => array_values(array_filter(array_map(
                 static fn ($v) => strtolower(trim((string) $v)),

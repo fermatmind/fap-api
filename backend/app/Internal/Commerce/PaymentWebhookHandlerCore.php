@@ -35,6 +35,8 @@ class PaymentWebhookHandlerCore
 
     private const DEFAULT_WEBHOOK_LOCK_BLOCK_SECONDS = 5;
 
+    private const DEFAULT_WEBHOOK_LOCK_CONTENTION_BUDGET_MS = 3000;
+
     private const TRANSIENT_DB_RETRY_MAX_ATTEMPTS = 3;
 
     private const TRANSIENT_DB_RETRY_BASE_USLEEP = 100000;
@@ -127,7 +129,8 @@ class PaymentWebhookHandlerCore
         );
         $payloadSummaryJson = $this->encodePayloadSummary($payloadSummary);
         $payloadExcerpt = $this->buildPayloadExcerpt($payloadSummaryJson);
-        $lockKey = "webhook_pay:{$provider}:{$providerEventId}";
+        $normalizedOrgId = max(0, $orgId);
+        $lockKey = $this->buildWebhookLockKey($provider, $normalizedOrgId, $providerEventId);
         $lockTtl = max(1, (int) config(
             'services.payment_webhook.lock_ttl_seconds',
             self::DEFAULT_WEBHOOK_LOCK_TTL_SECONDS
@@ -136,19 +139,26 @@ class PaymentWebhookHandlerCore
             'services.payment_webhook.lock_block_seconds',
             self::DEFAULT_WEBHOOK_LOCK_BLOCK_SECONDS
         ));
+        $contentionBudgetMs = max(1, (int) config(
+            'services.payment_webhook.lock_contention_budget_ms',
+            self::DEFAULT_WEBHOOK_LOCK_CONTENTION_BUDGET_MS
+        ));
         $postCommitOutcome = null;
         $postCommitCtx = null;
+        $lockWaitStartedAt = microtime(true);
 
         try {
             $result = $this->runWithTransientDbRetry(function () use (
                 $lockKey,
                 $lockTtl,
                 $lockBlock,
+                $contentionBudgetMs,
                 $orderNo,
                 $normalized,
                 $providerEventId,
                 $provider,
                 $orgId,
+                $normalizedOrgId,
                 $userId,
                 $anonId,
                 $eventType,
@@ -157,14 +167,18 @@ class PaymentWebhookHandlerCore
                 $payloadExcerpt,
                 $resolvedPayloadMeta,
                 $signatureOk,
+                &$lockWaitStartedAt,
                 &$postCommitCtx
             ) {
+                $lockWaitStartedAt = microtime(true);
+
                 return Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
                     $orderNo,
                     $normalized,
                     $providerEventId,
                     $provider,
                     $orgId,
+                    $normalizedOrgId,
                     $userId,
                     $anonId,
                     $eventType,
@@ -173,8 +187,24 @@ class PaymentWebhookHandlerCore
                     $payloadExcerpt,
                     $resolvedPayloadMeta,
                     $signatureOk,
+                    $lockBlock,
+                    $contentionBudgetMs,
+                    $lockKey,
+                    &$lockWaitStartedAt,
                     &$postCommitCtx
                 ) {
+                    $lockWaitMs = $this->resolveLockWaitMs($lockWaitStartedAt);
+                    $this->observeWebhookLockWait(
+                        $provider,
+                        $normalizedOrgId,
+                        $providerEventId,
+                        $lockKey,
+                        $lockWaitMs,
+                        $lockBlock,
+                        $contentionBudgetMs,
+                        false
+                    );
+
                     return DB::transaction(function () use (
                         $orderNo,
                         $normalized,
@@ -712,6 +742,17 @@ class PaymentWebhookHandlerCore
 
             return $normalizedResult;
         } catch (LockTimeoutException $e) {
+            $this->observeWebhookLockWait(
+                $provider,
+                $normalizedOrgId,
+                $providerEventId,
+                $lockKey,
+                $this->resolveLockWaitMs($lockWaitStartedAt),
+                $lockBlock,
+                $contentionBudgetMs,
+                true
+            );
+
             return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
         }
     }
@@ -1433,6 +1474,46 @@ class PaymentWebhookHandlerCore
         }
 
         return false;
+    }
+
+    private function buildWebhookLockKey(string $provider, int $orgId, string $providerEventId): string
+    {
+        return 'webhook_pay:'.$provider.':org_'.$orgId.':'.$providerEventId;
+    }
+
+    private function resolveLockWaitMs(float $lockWaitStartedAt): int
+    {
+        return max(0, (int) round((microtime(true) - $lockWaitStartedAt) * 1000));
+    }
+
+    private function observeWebhookLockWait(
+        string $provider,
+        int $orgId,
+        string $providerEventId,
+        string $lockKey,
+        int $lockWaitMs,
+        int $lockBlock,
+        int $contentionBudgetMs,
+        bool $timedOut
+    ): void {
+        $context = [
+            'provider' => $provider,
+            'org_id' => max(0, $orgId),
+            'provider_event_id' => $providerEventId,
+            'lock_key' => $lockKey,
+            'lock_wait_ms' => max(0, $lockWaitMs),
+            'lock_block_seconds' => max(0, $lockBlock),
+            'contention_budget_ms' => max(1, $contentionBudgetMs),
+            'budget_exceeded' => $lockWaitMs >= $contentionBudgetMs,
+        ];
+
+        if ($timedOut) {
+            Log::warning('PAYMENT_WEBHOOK_LOCK_CONTENTION', $context);
+
+            return;
+        }
+
+        Log::info('PAYMENT_WEBHOOK_LOCK_ACQUIRED', $context);
     }
 
     private function updatePaymentEvent(string $provider, string $providerEventId, array $updates): void
