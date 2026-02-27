@@ -26,6 +26,11 @@ return [
         'report_snapshot_strict_v2' => (bool) env('FAP_FEATURE_REPORT_SNAPSHOT_STRICT_V2', true),
     ],
 
+    'queue' => [
+        'attempt_connection' => env('FAP_ATTEMPT_QUEUE_CONNECTION', null),
+        'attempt_queue' => env('FAP_ATTEMPT_QUEUE', 'attempts'),
+    ],
+
     'payments' => [
         'enabled' => (bool) env('FAP_PAYMENTS_ENABLED', true),
         'webhooks_enabled' => (bool) env('FAP_PAYMENTS_WEBHOOKS_ENABLED', true),
