@@ -310,9 +310,6 @@ class AuthPhoneController extends Controller
             $insert['uid'] = 'u_'.bin2hex(random_bytes(5));
         }
 
-        if ($phoneCol) {
-            $insert[$phoneCol] = $phoneE164;
-        }
         if ($hasPhoneHash) {
             $insert['phone_e164_hash'] = $phoneHash;
         }
@@ -353,11 +350,17 @@ class AuthPhoneController extends Controller
             $insert['password'] = bcrypt(bin2hex(random_bytes(8)));
         }
 
-        DB::table('users')->insert($insert);
+        $insertedId = null;
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'id')) {
+            $insertedId = DB::table('users')->insertGetId($insert);
+        } else {
+            DB::table('users')->insert($insert);
+        }
 
         $row2 = DB::table('users')
-            ->when($phoneCol !== null, fn ($q) => $q->where($phoneCol, $phoneE164))
-            ->orderByDesc($hasUid ? 'created_at' : 'id')
+            ->when($insertedId !== null, fn ($q) => $q->where('id', (int) $insertedId))
+            ->when($insertedId === null && $hasPhoneHash, fn ($q) => $q->where('phone_e164_hash', $phoneHash))
+            ->when($insertedId === null && ! $hasPhoneHash && $phoneCol !== null, fn ($q) => $q->where($phoneCol, $phoneE164))
             ->first();
 
         $userId = $row2 ? (string) ($row2->{$pk} ?? '') : (string) ($insert[$pk] ?? '');
