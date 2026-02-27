@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce\Checkout;
 
-use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Yansongda\Pay\Pay;
 
 class AlipayCheckoutService
@@ -61,35 +59,6 @@ class AlipayCheckoutService
         }
 
         return Pay::alipay()->web($payload);
-    }
-
-    public function toHttpResponse(mixed $gatewayResponse): ?Response
-    {
-        if ($gatewayResponse instanceof Response) {
-            return $gatewayResponse;
-        }
-
-        if ($gatewayResponse instanceof PsrResponseInterface) {
-            $headers = [];
-            foreach ($gatewayResponse->getHeaders() as $name => $values) {
-                $headers[$name] = implode(', ', $values);
-            }
-
-            return response((string) $gatewayResponse->getBody(), $gatewayResponse->getStatusCode(), $headers);
-        }
-
-        if (is_object($gatewayResponse) && method_exists($gatewayResponse, 'getContent')) {
-            $content = (string) $gatewayResponse->getContent();
-            $status = method_exists($gatewayResponse, 'getStatusCode') ? (int) $gatewayResponse->getStatusCode() : 200;
-
-            return response($content, $status);
-        }
-
-        if (is_string($gatewayResponse) && trim($gatewayResponse) !== '') {
-            return response($gatewayResponse, 200);
-        }
-
-        return null;
     }
 
     private function isMobileUserAgent(string $userAgent): bool
