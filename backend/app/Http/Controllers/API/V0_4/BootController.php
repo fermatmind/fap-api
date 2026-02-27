@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_4;
 
 use App\Http\Controllers\Controller;
+use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Payments\PaymentRouter;
 use App\Support\RegionContext;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class BootController extends Controller
     public function __construct(
         private RegionContext $regionContext,
         private PaymentRouter $paymentRouter,
+        private ExperimentAssigner $experimentAssigner,
     ) {
     }
 
@@ -26,6 +28,11 @@ class BootController extends Controller
         $region = $this->regionContext->region();
         $locale = $this->regionContext->locale();
         $currency = $this->regionContext->currency();
+        $this->primeOrgContextForPublicBoot($request);
+        $anonId = $this->resolveAnonId($request);
+        $bootExperiments = $anonId !== null
+            ? $this->experimentAssigner->assignActive(0, $anonId, null)
+            : [];
 
         $regionsConfig = config('regions.regions', []);
         $regionConfig = is_array($regionsConfig) ? ($regionsConfig[$region] ?? []) : [];
@@ -48,7 +55,8 @@ class BootController extends Controller
                 'legal_urls' => is_array($regionConfig['legal_urls'] ?? null) ? $regionConfig['legal_urls'] : [],
             ],
             'experiments' => [
-                'boot_experiments' => [],
+                'experiments_json' => $bootExperiments,
+                'boot_experiments' => $bootExperiments,
             ],
             'feature_flags_version' => (string) \App\Support\RuntimeConfig::value('FAP_FEATURE_FLAGS_VERSION', 'v0.4'),
             'policy_versions' => is_array($regionConfig['policy_versions'] ?? null) ? $regionConfig['policy_versions'] : [],
@@ -62,7 +70,7 @@ class BootController extends Controller
         $etag = '"' . sha1($body) . '"';
         $headers = [
             'Cache-Control' => 'public, max-age=300',
-            'Vary' => 'X-Region, Accept-Language, X-FAP-Locale',
+            'Vary' => 'X-Region, Accept-Language, X-FAP-Locale, X-Anon-Id',
             'ETag' => $etag,
             'Content-Type' => 'application/json',
         ];
@@ -115,5 +123,37 @@ class BootController extends Controller
         }
 
         return false;
+    }
+
+    private function resolveAnonId(Request $request): ?string
+    {
+        $candidates = [
+            $request->attributes->get('anon_id'),
+            $request->attributes->get('fm_anon_id'),
+            $request->attributes->get('client_anon_id'),
+            $request->query('anon_id'),
+            $request->header('X-Anon-Id'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (!is_string($candidate) && !is_numeric($candidate)) {
+                continue;
+            }
+            $value = trim((string) $candidate);
+            if ($value === '' || strlen($value) > 128) {
+                continue;
+            }
+
+            return $value;
+        }
+
+        return null;
+    }
+
+    private function primeOrgContextForPublicBoot(Request $request): void
+    {
+        $request->attributes->set('org_context_resolved', true);
+        $request->attributes->set('org_id', 0);
+        $request->attributes->set('fm_org_id', 0);
     }
 }
