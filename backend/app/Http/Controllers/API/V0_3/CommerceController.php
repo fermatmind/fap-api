@@ -42,7 +42,7 @@ class CommerceController extends Controller
             abort(400, 'scale is required.');
         }
 
-        $items = $this->skus->listActiveSkus($scale);
+        $items = $this->skus->listActiveSkus($scale, $this->orgContext->orgId());
 
         return response()->json([
             'ok' => true,
@@ -198,7 +198,7 @@ class CommerceController extends Controller
 
         $sku = trim((string) ($payload['sku'] ?? ''));
         if ($sku === '') {
-            $sku = $this->resolveDefaultCheckoutSku();
+            $sku = $this->resolveDefaultCheckoutSku($orgId);
         }
         if ($sku === '') {
             abort(422, 'sku unavailable.');
@@ -645,15 +645,26 @@ class CommerceController extends Controller
         return $requestId !== '' ? $requestId : (string) Str::uuid();
     }
 
-    private function resolveDefaultCheckoutSku(): string
+    private function resolveDefaultCheckoutSku(int $orgId): string
     {
-        $sku = DB::table('skus')
-            ->where('is_active', 1)
-            ->orderBy('price_cents')
-            ->value('sku');
+        $items = $this->skus->listActiveSkus(null, $orgId);
+        if ($items === []) {
+            return '';
+        }
 
-        $sku = trim((string) $sku);
+        usort($items, static function (array $left, array $right): int {
+            $priceCompare = ((int) ($left['price_cents'] ?? 0)) <=> ((int) ($right['price_cents'] ?? 0));
+            if ($priceCompare !== 0) {
+                return $priceCompare;
+            }
 
+            return strcmp(
+                strtoupper(trim((string) ($left['sku'] ?? ''))),
+                strtoupper(trim((string) ($right['sku'] ?? '')))
+            );
+        });
+
+        $sku = trim((string) ($items[0]['sku'] ?? ''));
         return $sku !== '' ? strtoupper($sku) : '';
     }
 

@@ -124,7 +124,7 @@ class ReportGatekeeper
         $commercial = $this->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
-        $paywall = $this->buildPaywall($viewPolicy, $commercial, $scaleCode);
+        $paywall = $this->buildPaywall($viewPolicy, $commercial, $scaleCode, $orgId);
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
         $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
         if ($benefitCode === '') {
@@ -506,22 +506,22 @@ class ReportGatekeeper
         return is_array($raw) ? $raw : [];
     }
 
-    private function buildPaywall(array $viewPolicy, array $commercial, string $scaleCode): array
+    private function buildPaywall(array $viewPolicy, array $commercial, string $scaleCode, int $orgId): array
     {
         $scaleCode = strtoupper(trim($scaleCode));
         $effectiveSku = strtoupper(trim((string) ($viewPolicy['upgrade_sku'] ?? '')));
-        if ($effectiveSku === '' || $this->skus->isAnchorSku($effectiveSku, $scaleCode)) {
-            $effectiveSku = $this->skus->defaultEffectiveSku($scaleCode) ?? $effectiveSku;
+        if ($effectiveSku === '' || $this->skus->isAnchorSku($effectiveSku, $scaleCode, $orgId)) {
+            $effectiveSku = $this->skus->defaultEffectiveSku($scaleCode, $orgId) ?? $effectiveSku;
         }
 
         $viewPolicy['upgrade_sku'] = $effectiveSku !== '' ? $effectiveSku : null;
 
-        $anchorSku = $this->skus->anchorForSku($effectiveSku, $scaleCode);
+        $anchorSku = $this->skus->anchorForSku($effectiveSku, $scaleCode, $orgId);
         if ($anchorSku === null || $anchorSku === '') {
-            $anchorSku = $this->skus->defaultAnchorSku($scaleCode);
+            $anchorSku = $this->skus->defaultAnchorSku($scaleCode, $orgId);
         }
 
-        $offers = $this->buildOffersFromSkus($this->skus->listActiveSkus($scaleCode));
+        $offers = $this->buildOffersFromSkus($this->skus->listActiveSkus($scaleCode, $orgId));
         if (count($offers) === 0) {
             $offers = $this->normalizeOffers($commercial['offers'] ?? null);
         }

@@ -367,7 +367,7 @@ class PaymentWebhookHandlerCore
                             return $this->badRequest('SKU_NOT_FOUND', 'sku missing on order.');
                         }
 
-                        $skuRow = $this->skus->getActiveSku($effectiveSku);
+                        $skuRow = $this->skus->getActiveSku($effectiveSku, null, (int) ($order->org_id ?? $orgId));
                         if (! $skuRow) {
                             $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku not found.');
 
@@ -1256,7 +1256,7 @@ class PaymentWebhookHandlerCore
             $orderUserId = $order->user_id ? (string) $order->user_id : null;
             $sku = strtoupper((string) ($order->sku ?? $order->item_sku ?? ''));
             if ($sku !== '') {
-                $skuRow = DB::table('skus')->where('sku', $sku)->first();
+                $skuRow = $this->skus->getActiveSku($sku, null, $orderOrgId);
                 if ($skuRow) {
                     $benefitCode = strtoupper((string) ($skuRow->benefit_code ?? ''));
                 }
@@ -1292,7 +1292,15 @@ class PaymentWebhookHandlerCore
         }
 
         $skuToResolve = $requestedSku !== '' ? $requestedSku : $effectiveSku;
-        $resolved = $skuToResolve !== '' ? $this->skus->resolveSkuMeta($skuToResolve) : [];
+        $resolved = [];
+        if ($skuToResolve !== '') {
+            $orderOrgId = $order ? (int) ($order->org_id ?? 0) : 0;
+            $resolved = $this->skus->resolveSkuMeta(
+                $skuToResolve,
+                null,
+                $orderOrgId
+            );
+        }
 
         $resolvedRequested = $resolved['requested_sku'] ?? null;
         $resolvedEffective = $resolved['effective_sku'] ?? null;

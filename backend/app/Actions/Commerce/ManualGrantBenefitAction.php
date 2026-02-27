@@ -7,6 +7,7 @@ namespace App\Actions\Commerce;
 use App\Models\AdminUser;
 use App\Models\Order;
 use App\Services\Commerce\EntitlementManager;
+use App\Services\Commerce\SkuCatalog;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -57,7 +58,8 @@ final class ManualGrantBenefitAction
         if ($benefitCode === '') {
             $sku = strtoupper(trim((string) ($order->effective_sku ?? $order->sku ?? $order->item_sku ?? '')));
             if ($sku !== '') {
-                $benefitCode = strtoupper((string) (DB::table('skus')->where('sku', $sku)->value('benefit_code') ?? ''));
+                $skuRow = app(SkuCatalog::class)->getActiveSku($sku, null, $orgId);
+                $benefitCode = strtoupper((string) ($skuRow?->benefit_code ?? ''));
             }
         }
 

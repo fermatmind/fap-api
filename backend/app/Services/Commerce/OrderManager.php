@@ -37,7 +37,7 @@ class OrderManager
             return $this->badRequest('SKU_REQUIRED', 'sku is required.');
         }
 
-        $resolved = $this->skus->resolveSkuMeta($requestedSku);
+        $resolved = $this->skus->resolveSkuMeta($requestedSku, null, $orgId);
         $effectiveSku = strtoupper(trim((string) ($resolved['effective_sku'] ?? '')));
         $entitlementId = $resolved['entitlement_id'] ?? null;
         $requestedSku = strtoupper(trim((string) ($resolved['requested_sku'] ?? $requestedSku)));
