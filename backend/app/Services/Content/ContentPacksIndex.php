@@ -217,8 +217,18 @@ final class ContentPacksIndex
             }
 
             $packPath = $this->relativePath($rootNorm, $packDir);
-            $updatedAt = @filemtime($manifestPath);
-            $updatedAt = is_int($updatedAt) ? $updatedAt : 0;
+            $manifestSig = $this->fileSignature($manifestPath);
+            $versionSig = $this->fileSignature($versionPath);
+            $questionsSig = $this->fileSignature($questionsPath);
+            if ($manifestSig === null || $versionSig === null || $questionsSig === null) {
+                continue;
+            }
+
+            $updatedAt = max(
+                (int) ($manifestSig['mtime'] ?? 0),
+                (int) ($versionSig['mtime'] ?? 0),
+                (int) ($questionsSig['mtime'] ?? 0)
+            );
 
             $items[] = [
                 'pack_id' => $packId,
@@ -230,6 +240,13 @@ final class ContentPacksIndex
                 'pack_path' => $packPath,
                 'manifest_path' => $manifestPath,
                 'questions_path' => $questionsPath,
+                'version_path' => $versionPath,
+                'manifest_mtime' => (int) ($manifestSig['mtime'] ?? 0),
+                'manifest_size' => (int) ($manifestSig['size'] ?? 0),
+                'version_mtime' => (int) ($versionSig['mtime'] ?? 0),
+                'version_size' => (int) ($versionSig['size'] ?? 0),
+                'questions_mtime' => (int) ($questionsSig['mtime'] ?? 0),
+                'questions_size' => (int) ($questionsSig['size'] ?? 0),
                 'updated_at' => $updatedAt,
             ];
 
@@ -338,31 +355,76 @@ final class ContentPacksIndex
     private function isItemFresh(array $item): bool
     {
         $manifestPath = (string) ($item['manifest_path'] ?? '');
+        $versionPath = (string) ($item['version_path'] ?? '');
         $questionsPath = (string) ($item['questions_path'] ?? '');
-        $packId = trim((string) ($item['pack_id'] ?? ''));
-        $dirVersion = trim((string) ($item['dir_version'] ?? ''));
-        $contentVersion = trim((string) ($item['content_package_version'] ?? ''));
-
-        if ($manifestPath === '' || $questionsPath === '' || $packId === '' || $dirVersion === '' || $contentVersion === '') {
+        if ($manifestPath === '' || $versionPath === '' || $questionsPath === '') {
             return false;
         }
 
-        $manifest = $this->readJsonFile($manifestPath);
-        if (!is_array($manifest) || !$this->isManifestConsistent($manifest, $dirVersion, $packId)) {
-            return false;
-        }
-        if ((string) ($manifest['content_package_version'] ?? '') !== $contentVersion) {
+        $manifestSig = $this->fileSignature($manifestPath);
+        $versionSig = $this->fileSignature($versionPath);
+        $questionsSig = $this->fileSignature($questionsPath);
+
+        if ($manifestSig === null || $versionSig === null || $questionsSig === null) {
             return false;
         }
 
-        $packDir = dirname($manifestPath);
-        $versionPath = $packDir . DIRECTORY_SEPARATOR . 'version.json';
-        $version = $this->readJsonFile($versionPath);
-        if (!is_array($version) || !$this->isVersionConsistent($version, $packId, $contentVersion, $dirVersion)) {
+        if (!$this->signatureMatches($item, 'manifest', $manifestSig)) {
+            return false;
+        }
+        if (!$this->signatureMatches($item, 'version', $versionSig)) {
+            return false;
+        }
+        if (!$this->signatureMatches($item, 'questions', $questionsSig)) {
             return false;
         }
 
-        return is_array($this->readJsonFile($questionsPath));
+        return true;
+    }
+
+    /**
+     * @return array{mtime:int,size:int}|null
+     */
+    private function fileSignature(string $path): ?array
+    {
+        if ($path === '' || !File::isFile($path)) {
+            return null;
+        }
+
+        try {
+            $mtimeRaw = @filemtime($path);
+            $sizeRaw = @filesize($path);
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        if (!is_int($mtimeRaw) && !is_numeric($mtimeRaw)) {
+            return null;
+        }
+        if (!is_int($sizeRaw) && !is_numeric($sizeRaw)) {
+            return null;
+        }
+
+        return [
+            'mtime' => (int) $mtimeRaw,
+            'size' => (int) $sizeRaw,
+        ];
+    }
+
+    /**
+     * @param  array{mtime:int,size:int}  $signature
+     */
+    private function signatureMatches(array $item, string $prefix, array $signature): bool
+    {
+        $mtimeKey = $prefix.'_mtime';
+        $sizeKey = $prefix.'_size';
+
+        if (!array_key_exists($mtimeKey, $item) || !array_key_exists($sizeKey, $item)) {
+            return false;
+        }
+
+        return (int) ($item[$mtimeKey] ?? -1) === (int) ($signature['mtime'] ?? -2)
+            && (int) ($item[$sizeKey] ?? -1) === (int) ($signature['size'] ?? -2);
     }
 
     private function readJsonFile(string $path): ?array
