@@ -52,6 +52,15 @@ return [
         'allow_legacy_signature' => (bool) env('BILLING_WEBHOOK_ALLOW_LEGACY_SIGNATURE', false), // kept for backward compatibility
     ],
 
+    'lemonsqueezy' => [
+        'api_key' => env('LEMONSQUEEZY_API_KEY', ''),
+        'store_id' => env('LEMONSQUEEZY_STORE_ID', ''),
+        'variant_id' => env('LEMONSQUEEZY_VARIANT_ID', ''),
+        'api_base' => env('LEMONSQUEEZY_API_BASE', 'https://api.lemonsqueezy.com/v1'),
+        'checkout_redirect_url' => env('LEMONSQUEEZY_CHECKOUT_REDIRECT_URL', ''),
+        'webhook_secret' => env('LEMONSQUEEZY_WEBHOOK_SECRET', ''),
+    ],
+
     'payment_webhook' => [
         'lock_ttl_seconds' => (int) env('PAYMENT_WEBHOOK_LOCK_TTL_SECONDS', 10),
         'lock_block_seconds' => (int) env('PAYMENT_WEBHOOK_LOCK_BLOCK_SECONDS', 5),
@@ -70,13 +79,34 @@ return [
                     'payment_succeeded,payment.success,payment_completed,paid'
                 ))
             ))),
+            'lemonsqueezy' => array_values(array_filter(array_map(
+                static fn ($v) => strtolower(trim((string) $v)),
+                explode(',', (string) env(
+                    'PAYMENT_WEBHOOK_LEMONSQUEEZY_SUCCESS_EVENTS',
+                    'order_created,subscription_payment_success'
+                ))
+            ))),
+            'wechatpay' => array_values(array_filter(array_map(
+                static fn ($v) => strtolower(trim((string) $v)),
+                explode(',', (string) env(
+                    'PAYMENT_WEBHOOK_WECHATPAY_SUCCESS_EVENTS',
+                    'payment_succeeded,success,trade_success'
+                ))
+            ))),
+            'alipay' => array_values(array_filter(array_map(
+                static fn ($v) => strtolower(trim((string) $v)),
+                explode(',', (string) env(
+                    'PAYMENT_WEBHOOK_ALIPAY_SUCCESS_EVENTS',
+                    'payment_succeeded,trade_success,trade_finished'
+                ))
+            ))),
         ],
     ],
 
     'seo' => [
         'tests_url_prefix' => env(
             'SEO_TESTS_URL_PREFIX',
-            rtrim((string) env('APP_URL', 'http://localhost'), '/') . '/tests/'
+            rtrim((string) env('APP_URL', 'http://localhost'), '/').'/tests/'
         ),
     ],
 

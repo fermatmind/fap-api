@@ -16,12 +16,15 @@ class PaymentWebhookRouteWiringTest extends TestCase
 
         $route = app('router')->getRoutes()->getByName('api.v0_3.webhooks.payment');
         $this->assertNotNull($route);
-        $this->assertSame(PaymentWebhookController::class . '@handle', $route->getActionName());
+        $this->assertSame(PaymentWebhookController::class.'@handle', $route->getActionName());
 
         $providerWhere = (string) ($route->wheres['provider'] ?? '');
         $this->assertNotSame('', $providerWhere);
         $this->assertStringContainsString('stripe', $providerWhere);
         $this->assertStringContainsString('billing', $providerWhere);
+        $this->assertStringContainsString('lemonsqueezy', $providerWhere);
+        $this->assertStringContainsString('wechatpay', $providerWhere);
+        $this->assertStringContainsString('alipay', $providerWhere);
         $stubEnabled = app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
         if ($stubEnabled) {
             $this->assertStringContainsString('stub', $providerWhere);

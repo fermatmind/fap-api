@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Services\Commerce\Checkout\AlipayCheckoutService;
+use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
+use App\Services\Commerce\Checkout\WechatPayCheckoutService;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Payments\PaymentRouter;
@@ -13,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class CommerceController extends Controller
 {
@@ -22,8 +26,10 @@ class CommerceController extends Controller
         private OrderManager $orders,
         private SkuCatalog $skus,
         private PaymentRouter $paymentRouter,
-    ) {
-    }
+        private LemonSqueezyCheckoutService $lemonSqueezyCheckout,
+        private WechatPayCheckoutService $wechatPayCheckout,
+        private AlipayCheckoutService $alipayCheckout,
+    ) {}
 
     /**
      * GET /api/v0.3/skus?scale=MBTI
@@ -90,7 +96,7 @@ class CommerceController extends Controller
             $contactEmail
         );
 
-        if (!($result['ok'] ?? false)) {
+        if (! ($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
             $message = trim((string) ($result['message'] ?? ''));
             abort($status, $message !== '' ? $message : 'request failed.');
@@ -111,7 +117,7 @@ class CommerceController extends Controller
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
         $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no, false);
-        if (!($result['ok'] ?? false)) {
+        if (! ($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
             $message = trim((string) ($result['message'] ?? ''));
             abort($status, $message !== '' ? $message : 'request failed.');
@@ -122,7 +128,7 @@ class CommerceController extends Controller
         $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
         $message = $this->publicOrderMessage((string) ($order->status ?? ''));
 
-        if (!$ownershipVerified) {
+        if (! $ownershipVerified) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'ORDER_NOT_FOUND',
@@ -170,12 +176,20 @@ class CommerceController extends Controller
             $existing = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $existingOrderNo);
             if ($existing['ok'] ?? false) {
                 $order = $existing['order'];
+
+                $provider = strtolower(trim((string) ($order->provider ?? '')));
+                if ($provider === '') {
+                    $provider = (string) $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
+                }
+
                 return response()->json([
                     'ok' => true,
                     'order_no' => $order->order_no ?? $existingOrderNo,
                     'attempt_id' => $order->target_attempt_id ?? null,
                     'status' => $this->normalizePublicOrderStatus((string) ($order->status ?? '')),
                     'message' => $this->publicOrderMessage((string) ($order->status ?? '')),
+                    'provider' => $provider,
+                    'pay' => null,
                     'checkout_url' => null,
                 ]);
             }
@@ -193,7 +207,7 @@ class CommerceController extends Controller
         if ($provider === '') {
             $provider = (string) $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
         }
-        if ($provider === '' || !in_array($provider, ['stripe', 'billing', 'stub'], true)) {
+        if ($provider === '' || ! in_array($provider, $this->allowedProviders(), true)) {
             abort(422, 'provider unavailable.');
         }
         $this->guardStubProvider($request, $provider);
@@ -213,19 +227,62 @@ class CommerceController extends Controller
             $contactEmail
         );
 
-        if (!($created['ok'] ?? false)) {
+        if (! ($created['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) data_get($created, 'error_code', data_get($created, 'error', '')));
             $message = trim((string) ($created['message'] ?? 'request failed.'));
             abort($status, $message);
         }
 
+        $order = $created['order'] ?? null;
+        $orderNo = trim((string) data_get($order, 'order_no', $created['order_no'] ?? ''));
+        $attemptIdFromOrder = trim((string) data_get($order, 'target_attempt_id', $attemptId));
+        $amountCents = (int) data_get($order, 'amount_cents', 0);
+        $currency = strtoupper(trim((string) data_get($order, 'currency', 'USD')));
+        $description = strtoupper(trim((string) data_get($order, 'sku', $sku)));
+        if ($description === '') {
+            $description = 'FermatMind Order';
+        }
+
+        $payAction = $this->resolveCheckoutPayAction(
+            $provider,
+            $orderNo,
+            $attemptIdFromOrder !== '' ? $attemptIdFromOrder : null,
+            $amountCents,
+            $currency,
+            $description,
+            $contactEmail,
+            (string) $request->userAgent()
+        );
+
+        if (($payAction['ok'] ?? true) !== true) {
+            $status = (int) ($payAction['status'] ?? 502);
+            abort($status >= 400 ? $status : 502, (string) ($payAction['message'] ?? 'payment unavailable.'));
+        }
+
+        $payType = strtolower(trim((string) ($payAction['type'] ?? '')));
+        $payValue = trim((string) ($payAction['value'] ?? ''));
+        $checkoutUrl = null;
+        $payPayload = null;
+        if ($payType !== '' && $payValue !== '') {
+            $payPayload = [
+                'type' => $payType,
+                'value' => $payValue,
+                'provider' => $provider,
+            ];
+            if ($payType === 'redirect') {
+                $checkoutUrl = $payValue;
+            }
+        }
+
         return response()->json([
             'ok' => true,
-            'order_no' => $created['order_no'] ?? null,
-            'attempt_id' => $attemptId !== '' ? $attemptId : null,
+            'order_no' => $orderNo !== '' ? $orderNo : ($created['order_no'] ?? null),
+            'attempt_id' => $attemptIdFromOrder !== '' ? $attemptIdFromOrder : null,
+            'provider' => $provider,
             'status' => 'pending',
             'message' => 'Order created, waiting for payment.',
-            'checkout_url' => null,
+            'pay' => $payPayload,
+            'checkout_url' => $checkoutUrl,
         ]);
     }
 
@@ -260,7 +317,7 @@ class CommerceController extends Controller
             $orderNo,
             $contactEmailHash
         );
-        if (!$order) {
+        if (! $order) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'ORDER_NOT_FOUND',
@@ -284,7 +341,7 @@ class CommerceController extends Controller
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
         $found = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
-        if (!($found['ok'] ?? false)) {
+        if (! ($found['ok'] ?? false)) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'ORDER_NOT_FOUND',
@@ -296,6 +353,118 @@ class CommerceController extends Controller
             'ok' => true,
             'message' => 'Delivery notice has been queued.',
         ]);
+    }
+
+    /**
+     * GET /api/v0.3/orders/{order_no}/pay/alipay
+     */
+    public function launchAlipay(Request $request, string $order_no): Response
+    {
+        if (! $this->isProviderEnabled('alipay')) {
+            abort(404);
+        }
+
+        $orgId = $this->orgContext->orgId();
+        $userId = $this->orgContext->userId();
+        $anonId = $this->resolveAnonId($request);
+        $found = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
+        if (! ($found['ok'] ?? false)) {
+            abort(404);
+        }
+
+        $order = $found['order'];
+        $provider = strtolower(trim((string) ($order->provider ?? '')));
+        if ($provider !== 'alipay') {
+            abort(404);
+        }
+
+        $scene = strtolower(trim((string) $request->query('scene', 'desktop')));
+        if (! in_array($scene, ['desktop', 'mobile'], true)) {
+            $scene = 'desktop';
+        }
+
+        try {
+            $launch = $this->alipayCheckout->launch((array) $order, $scene);
+            $response = $this->alipayCheckout->toHttpResponse($launch);
+            if ($response instanceof Response) {
+                return $response;
+            }
+        } catch (\Throwable $e) {
+            Log::error('ALIPAY_LAUNCH_FAILED', [
+                'order_no' => $order_no,
+                'exception' => $e->getMessage(),
+            ]);
+        }
+
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'PAYMENT_PROVIDER_ERROR',
+            'message' => 'failed to launch alipay checkout.',
+        ], 502);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function resolveCheckoutPayAction(
+        string $provider,
+        string $orderNo,
+        ?string $attemptId,
+        int $amountCents,
+        string $currency,
+        string $description,
+        ?string $contactEmail,
+        string $userAgent
+    ): array {
+        return match ($provider) {
+            'lemonsqueezy' => $this->resolveLemonCheckoutAction(
+                $orderNo,
+                $attemptId,
+                $amountCents,
+                $currency,
+                $contactEmail
+            ),
+            'wechatpay' => $this->wechatPayCheckout->createCheckoutAction(
+                $orderNo,
+                $description,
+                $amountCents,
+                $currency,
+                $userAgent
+            ),
+            'alipay' => $this->alipayCheckout->createCheckoutAction(
+                $orderNo,
+                $userAgent
+            ),
+            default => ['ok' => true],
+        };
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function resolveLemonCheckoutAction(
+        string $orderNo,
+        ?string $attemptId,
+        int $amountCents,
+        string $currency,
+        ?string $contactEmail
+    ): array {
+        $result = $this->lemonSqueezyCheckout->createCheckout(
+            $orderNo,
+            $attemptId,
+            $amountCents,
+            $currency,
+            $contactEmail
+        );
+        if (! ($result['ok'] ?? false)) {
+            return $result;
+        }
+
+        return [
+            'ok' => true,
+            'type' => 'redirect',
+            'value' => (string) ($result['url'] ?? ''),
+        ];
     }
 
     private function mapErrorStatus(string $code): int
@@ -337,12 +506,14 @@ class CommerceController extends Controller
         }
 
         $body = trim((string) ($payload['idempotency_key'] ?? ''));
+
         return $body !== '' ? $body : null;
     }
 
     private function resolveProvider(array $payload, ?string $providerFromRoute): string
     {
         $provider = $this->resolveRequestedProvider($payload, $providerFromRoute);
+
         return in_array($provider, $this->allowedProviders(), true) ? $provider : '';
     }
 
@@ -376,12 +547,45 @@ class CommerceController extends Controller
 
     private function allowedProviders(): array
     {
-        $providers = ['stripe', 'billing'];
-        if ($this->isStubEnabled()) {
-            $providers[] = 'stub';
+        $providers = [];
+        $configured = config('payments.providers', []);
+        if (is_array($configured)) {
+            foreach ($configured as $provider => $providerConfig) {
+                if (! is_string($provider)) {
+                    continue;
+                }
+
+                $provider = strtolower(trim($provider));
+                if ($provider === '') {
+                    continue;
+                }
+
+                $enabled = (bool) (is_array($providerConfig) ? ($providerConfig['enabled'] ?? false) : false);
+                if (! $enabled) {
+                    continue;
+                }
+
+                if ($provider === 'stub' && ! $this->isStubEnabled()) {
+                    continue;
+                }
+
+                $providers[] = $provider;
+            }
         }
 
-        return $providers;
+        if ($providers === []) {
+            $providers = ['stripe', 'billing'];
+            if ($this->isStubEnabled()) {
+                $providers[] = 'stub';
+            }
+        }
+
+        return array_values(array_unique($providers));
+    }
+
+    private function isProviderEnabled(string $provider): bool
+    {
+        return in_array(strtolower(trim($provider)), $this->allowedProviders(), true);
     }
 
     private function isStubEnabled(): bool
@@ -407,6 +611,7 @@ class CommerceController extends Controller
         }
 
         $requestId = trim((string) $request->input('request_id', ''));
+
         return $requestId !== '' ? $requestId : (string) Str::uuid();
     }
 
@@ -418,6 +623,7 @@ class CommerceController extends Controller
             ->value('sku');
 
         $sku = trim((string) $sku);
+
         return $sku !== '' ? strtoupper($sku) : '';
     }
 
@@ -465,6 +671,7 @@ class CommerceController extends Controller
     private function normalizePublicOrderStatus(string $status): string
     {
         $status = strtolower(trim($status));
+
         return match ($status) {
             'paid', 'fulfilled' => 'paid',
             'failed' => 'failed',

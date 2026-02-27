@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Services\Commerce;
 
 use App\Services\Analytics\EventRecorder;
+use App\Services\Commerce\PaymentGateway\AlipayGateway;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
+use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
+use App\Services\Commerce\PaymentGateway\WechatPayGateway;
 use App\Services\Commerce\Webhook\PaymentWebhookHandler;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Report\ReportSnapshotStore;
@@ -143,6 +146,9 @@ class PaymentWebhookProcessor
         $normalized = match ($provider) {
             'stripe' => (new StripeGateway)->normalizePayload($payload),
             'billing' => (new BillingGateway)->normalizePayload($payload),
+            'lemonsqueezy' => (new LemonSqueezyGateway)->normalizePayload($payload),
+            'wechatpay' => (new WechatPayGateway)->normalizePayload($payload),
+            'alipay' => (new AlipayGateway)->normalizePayload($payload),
             default => $payload,
         };
 

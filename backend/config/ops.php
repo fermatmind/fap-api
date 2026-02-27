@@ -9,6 +9,10 @@ return [
     ))),
 
     'go_live_gate' => [
+        // enabled_only: only validate providers that are enabled in payments.providers.*
+        // all: validate all known providers regardless of enabled status.
+        'payment_policy' => env('OPS_GATE_PAYMENT_POLICY', 'enabled_only'),
+
         'stripe_secret' => env('STRIPE_SECRET', ''),
         'stripe_webhook_secret' => env('STRIPE_WEBHOOK_SECRET', ''),
         'require_stripe_live' => (bool) env('OPS_GATE_REQUIRE_STRIPE_LIVE', true),
