@@ -41,7 +41,7 @@ class BenefitGrant extends Model
 
     public static function allowOrgZeroContext(): bool
     {
-        return true;
+        return self::allowOrgZeroWithResolvedContext();
     }
 
     public function attempt(): BelongsTo

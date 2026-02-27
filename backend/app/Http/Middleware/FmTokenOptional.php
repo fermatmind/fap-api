@@ -94,6 +94,11 @@ class FmTokenOptional
         $request->attributes->set('fm_org_id', $orgId);
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
+        $request->attributes->set('org_context_resolved', true);
+
+        if ($orgId <= 0 && $this->isOpsSystemBypass($request, $role)) {
+            $request->attributes->set('org_context_bypass', true);
+        }
 
         $ctx = new OrgContext;
         $ctx->set($orgId, $resolvedUserId, $role, $anonId);
@@ -173,5 +178,16 @@ class FmTokenOptional
             ]);
             return null;
         }
+    }
+
+    private function isOpsSystemBypass(Request $request, string $role): bool
+    {
+        if (! $request->is('ops*')) {
+            return false;
+        }
+
+        $normalizedRole = strtolower(trim($role));
+
+        return in_array($normalizedRole, ['system', 'ops', 'admin'], true);
     }
 }

@@ -47,6 +47,9 @@ class FmTokenOptionalAuth
             'token_hash',
             'user_id',
             'anon_id',
+            'org_id',
+            'role',
+            'meta_json',
             'expires_at',
             'revoked_at',
         ];
@@ -90,6 +93,18 @@ class FmTokenOptionalAuth
             }
             $request->attributes->set('anon_id', $anonId);
             $request->attributes->set('fm_anon_id', $anonId);
+        }
+
+        $orgId = $this->resolveNumeric($row->org_id ?? null) ?? 0;
+        $role = $this->resolveRole($row->role ?? null, $row->meta_json ?? null);
+
+        $request->attributes->set('fm_org_id', $orgId);
+        $request->attributes->set('org_id', $orgId);
+        $request->attributes->set('org_role', $role);
+        $request->attributes->set('org_context_resolved', true);
+
+        if ($orgId <= 0 && $this->isOpsSystemBypass($request, $role)) {
+            $request->attributes->set('org_context_bypass', true);
         }
 
         return $next($request);
@@ -172,6 +187,43 @@ class FmTokenOptionalAuth
         ]);
     }
 
+    private function resolveNumeric(mixed $candidate): ?int
+    {
+        $raw = trim((string) $candidate);
+        if ($raw === '' || preg_match('/^\d+$/', $raw) !== 1) {
+            return null;
+        }
+
+        return (int) $raw;
+    }
+
+    private function resolveRole(mixed $roleCandidate, mixed $metaCandidate): string
+    {
+        $role = trim((string) $roleCandidate);
+        if ($role !== '') {
+            return $role;
+        }
+
+        if (is_array($metaCandidate)) {
+            $metaRole = trim((string) ($metaCandidate['role'] ?? ''));
+            if ($metaRole !== '') {
+                return $metaRole;
+            }
+        }
+
+        if (is_string($metaCandidate) && $metaCandidate !== '') {
+            $decoded = json_decode($metaCandidate, true);
+            if (is_array($decoded)) {
+                $metaRole = trim((string) ($decoded['role'] ?? ''));
+                if ($metaRole !== '') {
+                    return $metaRole;
+                }
+            }
+        }
+
+        return 'public';
+    }
+
     /**
      * @param  array<int,string>  $select
      */
@@ -189,5 +241,16 @@ class FmTokenOptionalAuth
             ]);
             return null;
         }
+    }
+
+    private function isOpsSystemBypass(Request $request, string $role): bool
+    {
+        if (! $request->is('ops*')) {
+            return false;
+        }
+
+        $normalizedRole = strtolower(trim($role));
+
+        return in_array($normalizedRole, ['system', 'ops', 'admin'], true);
     }
 }
