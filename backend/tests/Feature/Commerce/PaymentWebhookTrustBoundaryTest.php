@@ -91,12 +91,17 @@ class PaymentWebhookTrustBoundaryTest extends TestCase
         ], 0, null, null, true);
 
         $this->assertFalse($result['ok']);
-        $this->assertSame(404, (int) ($result['status'] ?? 0));
+        $this->assertSame(200, (int) ($result['status'] ?? 0));
+        $this->assertSame('AMOUNT_MISMATCH', (string) ($result['reject_reason'] ?? ''));
         $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
         $this->assertSame('AMOUNT_MISMATCH', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_trust_amt_1')
             ->value('last_error_code'));
+        $this->assertSame('AMOUNT_MISMATCH', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_trust_amt_1')
+            ->value('reason'));
     }
 
     public function test_processor_rejects_event_type_outside_whitelist(): void
@@ -115,11 +120,16 @@ class PaymentWebhookTrustBoundaryTest extends TestCase
         ], 0, null, null, true);
 
         $this->assertFalse($result['ok']);
-        $this->assertSame(404, (int) ($result['status'] ?? 0));
+        $this->assertSame(200, (int) ($result['status'] ?? 0));
+        $this->assertSame('EVENT_TYPE_NOT_ALLOWED', (string) ($result['reject_reason'] ?? ''));
         $this->assertSame('EVENT_TYPE_NOT_ALLOWED', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_trust_evt_1')
             ->value('last_error_code'));
+        $this->assertSame('EVENT_TYPE_NOT_ALLOWED', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_trust_evt_1')
+            ->value('reason'));
         $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
     }
 }

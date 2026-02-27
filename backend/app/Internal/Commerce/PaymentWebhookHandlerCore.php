@@ -204,6 +204,7 @@ class PaymentWebhookHandlerCore
                             'attempts' => 0,
                             'last_error_code' => null,
                             'last_error_message' => null,
+                            'reason' => null,
                             'processed_at' => null,
                             'handled_at' => null,
                             'handle_status' => null,
@@ -257,6 +258,7 @@ class PaymentWebhookHandlerCore
                             'attempts' => $attempts,
                             'last_error_code' => null,
                             'last_error_message' => null,
+                            'reason' => null,
                             'processed_at' => null,
                             'handled_at' => null,
                             'handle_status' => null,
@@ -287,7 +289,7 @@ class PaymentWebhookHandlerCore
                         if (! $order) {
                             $this->markEventError($provider, $providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
 
-                            return $this->notFound('ORDER_NOT_FOUND', 'not found.');
+                            return $this->semanticReject('ORDER_NOT_FOUND', 'order not found.');
                         }
 
                         $orderProvider = strtolower(trim((string) ($order->provider ?? '')));
@@ -311,7 +313,7 @@ class PaymentWebhookHandlerCore
                                 $detail
                             );
 
-                            return $this->badRequest('PROVIDER_MISMATCH', 'provider mismatch');
+                            return $this->semanticReject('PROVIDER_MISMATCH', 'provider mismatch');
                         }
 
                         $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
@@ -364,27 +366,29 @@ class PaymentWebhookHandlerCore
                         if ($effectiveSku === '') {
                             $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku missing on order.');
 
-                            return $this->badRequest('SKU_NOT_FOUND', 'sku missing on order.');
+                            return $this->semanticReject('SKU_NOT_FOUND', 'sku missing on order.');
                         }
 
                         $skuRow = $this->skus->getActiveSku($effectiveSku, null, (int) ($order->org_id ?? $orgId));
                         if (! $skuRow) {
                             $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku not found.');
 
-                            return $this->notFound('SKU_NOT_FOUND', 'sku not found.');
+                            return $this->semanticReject('SKU_NOT_FOUND', 'sku not found.');
                         }
 
                         $guard = $this->validatePaidEventGuard($provider, $eventType, $normalized, $order);
                         if (! ($guard['ok'] ?? false)) {
+                            $guardCode = (string) ($guard['code'] ?? 'WEBHOOK_REJECTED');
+                            $guardMessage = (string) ($guard['message'] ?? 'webhook rejected.');
                             $this->markEventError(
                                 $provider,
                                 $providerEventId,
                                 'rejected',
-                                (string) ($guard['code'] ?? 'WEBHOOK_REJECTED'),
-                                (string) ($guard['message'] ?? 'webhook rejected.')
+                                $guardCode,
+                                $guardMessage
                             );
 
-                            return $this->notFound('NOT_FOUND', 'not found.');
+                            return $this->semanticReject($guardCode, $guardMessage);
                         }
 
                         if (! $orderAlreadySettled) {
@@ -444,7 +448,7 @@ class PaymentWebhookHandlerCore
                                 'benefit code missing on sku.'
                             );
 
-                            return $this->badRequest('BENEFIT_CODE_NOT_FOUND', 'benefit code missing on sku.');
+                            return $this->semanticReject('BENEFIT_CODE_NOT_FOUND', 'benefit code missing on sku.');
                         }
 
                         $attemptMeta = $this->resolveAttemptMeta((int) $order->org_id, (string) ($order->target_attempt_id ?? ''));
@@ -481,7 +485,7 @@ class PaymentWebhookHandlerCore
                             ) {
                                 $this->markEventError($provider, $providerEventId, 'failed', 'TOPUP_DELTA_INVALID', 'topup delta invalid.');
 
-                                return $this->badRequest('TOPUP_DELTA_INVALID', 'topup delta invalid.');
+                                return $this->semanticReject('TOPUP_DELTA_INVALID', 'topup delta invalid.');
                             }
 
                             $postCommitCtx = [
@@ -503,7 +507,7 @@ class PaymentWebhookHandlerCore
                             if ($attemptId === '') {
                                 $this->markEventError($provider, $providerEventId, 'failed', 'ATTEMPT_REQUIRED', 'target_attempt_id is required.');
 
-                                return $this->badRequest('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
+                                return $this->semanticReject('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
                             }
 
                             $ownerGuard = $this->validateAttemptOwnershipForOrder($order, $attemptMeta);
@@ -512,7 +516,7 @@ class PaymentWebhookHandlerCore
                                 $message = (string) ($ownerGuard['message'] ?? 'order owner mismatch.');
                                 $this->markEventError($provider, $providerEventId, 'rejected', $code, $message);
 
-                                return $this->badRequest($code, $message);
+                                return $this->semanticReject($code, $message);
                             }
 
                             $scaleGuard = $this->validateAttemptScaleForSku($skuRow, $attemptMeta);
@@ -521,7 +525,7 @@ class PaymentWebhookHandlerCore
                                 $message = (string) ($scaleGuard['message'] ?? 'attempt scale does not match sku scale.');
                                 $this->markEventError($provider, $providerEventId, 'rejected', $code, $message);
 
-                                return $this->badRequest($code, $message);
+                                return $this->semanticReject($code, $message);
                             }
 
                             if (! $retryingPostCommitOnly) {
@@ -589,7 +593,7 @@ class PaymentWebhookHandlerCore
                         } else {
                             $this->markEventError($provider, $providerEventId, 'failed', 'SKU_KIND_INVALID', 'unsupported sku kind.');
 
-                            return $this->badRequest('SKU_KIND_INVALID', 'unsupported sku kind.');
+                            return $this->semanticReject('SKU_KIND_INVALID', 'unsupported sku kind.');
                         }
 
                         if ($orderAlreadySettled) {
@@ -1452,6 +1456,7 @@ class PaymentWebhookHandlerCore
             'handle_status' => 'processed',
             'last_error_code' => null,
             'last_error_message' => null,
+            'reason' => null,
             'updated_at' => $now,
         ]);
     }
@@ -1459,13 +1464,26 @@ class PaymentWebhookHandlerCore
     private function markEventError(string $provider, string $providerEventId, string $status, string $code, string $message): void
     {
         $now = now();
+        $normalizedCode = substr($this->normalizeErrorCode($code), 0, 64);
         $this->updatePaymentEvent($provider, $providerEventId, [
             'status' => $status,
             'handled_at' => $now,
             'handle_status' => $status,
             'last_error_code' => $code,
             'last_error_message' => $message,
+            'reason' => $normalizedCode,
             'updated_at' => $now,
+        ]);
+    }
+
+    private function semanticReject(string $code, string $message): array
+    {
+        $normalizedCode = $this->normalizeErrorCode($code);
+
+        return $this->errorResult(200, $normalizedCode, $message, null, [
+            'acknowledged' => true,
+            'rejected' => true,
+            'reject_reason' => $normalizedCode,
         ]);
     }
 

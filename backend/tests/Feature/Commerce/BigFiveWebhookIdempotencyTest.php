@@ -194,8 +194,10 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
         ];
 
         $response = $this->postSignedBillingWebhook($payload, ['X-Org-Id' => '0']);
-        $response->assertStatus(404);
+        $response->assertStatus(200);
         $response->assertJsonPath('error_code', 'SKU_NOT_FOUND');
+        $response->assertJsonPath('rejected', true);
+        $response->assertJsonPath('reject_reason', 'SKU_NOT_FOUND');
 
         $this->assertSame('failed', (string) DB::table('payment_events')
             ->where('provider', 'billing')
@@ -206,6 +208,10 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_big5_badsku_1')
             ->value('last_error_code'));
+        $this->assertSame('SKU_NOT_FOUND', (string) DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_big5_badsku_1')
+            ->value('reason'));
 
         $this->assertSame(0, DB::table('benefit_grants')
             ->where('order_no', $orderNo)

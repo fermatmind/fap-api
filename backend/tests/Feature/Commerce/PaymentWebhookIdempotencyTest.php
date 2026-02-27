@@ -161,15 +161,20 @@ class PaymentWebhookIdempotencyTest extends TestCase
         $first = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',
         ]);
-        $first->assertStatus(404);
+        $first->assertStatus(200);
         $first->assertJson([
             'ok' => false,
             'error_code' => 'ORDER_NOT_FOUND',
+            'rejected' => true,
+            'reject_reason' => 'ORDER_NOT_FOUND',
         ]);
 
         $this->assertSame('orphan', (string) DB::table('payment_events')
             ->where('provider_event_id', 'evt_orphan_1')
             ->value('status'));
+        $this->assertSame('ORDER_NOT_FOUND', (string) DB::table('payment_events')
+            ->where('provider_event_id', 'evt_orphan_1')
+            ->value('reason'));
 
         $attemptId = $this->createMbtiAttemptWithResult();
 
