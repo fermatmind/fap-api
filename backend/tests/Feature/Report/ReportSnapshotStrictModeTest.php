@@ -11,6 +11,7 @@ use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -21,8 +22,8 @@ final class ReportSnapshotStrictModeTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function issueAnonToken(string $anonId): string
@@ -133,5 +134,59 @@ final class ReportSnapshotStrictModeTest extends TestCase
                 && $job->attemptId === $attemptId
                 && $job->triggerSource === 'report_api';
         });
+    }
+
+    public function test_unknown_snapshot_status_returns_snapshot_error_and_observability_signal(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->seedScales();
+
+        $anonId = 'anon_report_snapshot_unknown';
+        $attemptId = $this->createAttemptWithResult($anonId);
+        $token = $this->issueAnonToken($anonId);
+
+        DB::table('report_snapshots')->insert([
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'order_no' => null,
+            'scale_code' => 'MBTI',
+            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'),
+            'scoring_spec_version' => '2026.01',
+            'report_engine_version' => 'v1.2',
+            'snapshot_version' => 'v1',
+            'report_json' => '{}',
+            'report_free_json' => '{}',
+            'report_full_json' => '{}',
+            'status' => 'mystery',
+            'last_error' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Log::spy();
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'ok' => true,
+            'generating' => false,
+            'snapshot_error' => true,
+        ]);
+        $this->assertSame([], (array) $response->json('report'));
+        $this->assertSame('mystery', (string) $response->json('meta.snapshot_status'));
+        $this->assertTrue((bool) $response->json('meta.snapshot_status_unknown'));
+
+        Log::shouldHaveReceived('warning')
+            ->withArgs(function (string $message, array $context) use ($attemptId): bool {
+                return $message === '[REPORT] snapshot_status_unknown'
+                    && (int) ($context['org_id'] ?? -1) === 0
+                    && (string) ($context['attempt_id'] ?? '') === $attemptId
+                    && (string) ($context['status'] ?? '') === 'mystery'
+                    && (string) ($context['source'] ?? '') === 'report_gatekeeper';
+            });
     }
 }

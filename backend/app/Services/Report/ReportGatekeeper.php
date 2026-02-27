@@ -206,7 +206,7 @@ class ReportGatekeeper
             }
 
             if ($snapshotRow) {
-                $snapshotStatus = strtolower(trim((string) ($snapshotRow->status ?? 'ready')));
+                $snapshotStatus = strtolower(trim((string) ($snapshotRow->status ?? '')));
                 if ($snapshotStatus === 'pending') {
                     return $this->responsePayload(
                         $locked,
@@ -240,6 +240,38 @@ class ReportGatekeeper
                             'generating' => false,
                             'snapshot_error' => true,
                             'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                        ],
+                        $modulesAllowed,
+                        $modulesOffered,
+                        $modulesPreview,
+                        $normsPayload,
+                        $qualityPayload
+                    );
+                }
+
+                if ($snapshotStatus !== 'ready') {
+                    Log::warning('[REPORT] snapshot_status_unknown', [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'status' => $snapshotStatus !== '' ? $snapshotStatus : null,
+                        'strict_mode' => $snapshotStrictMode,
+                        'variant' => $variant,
+                        'source' => 'report_gatekeeper',
+                    ]);
+
+                    return $this->responsePayload(
+                        $locked,
+                        $reportAccessLevel,
+                        $variant,
+                        $viewPolicy,
+                        [],
+                        $paywall,
+                        [
+                            'generating' => false,
+                            'snapshot_error' => true,
+                            'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                            'snapshot_status' => $snapshotStatus !== '' ? $snapshotStatus : null,
+                            'snapshot_status_unknown' => true,
                         ],
                         $modulesAllowed,
                         $modulesOffered,
@@ -426,7 +458,6 @@ class ReportGatekeeper
     {
         return in_array($role, ['member', 'viewer'], true);
     }
-
 
     private function upsertSnapshotVariants(
         int $orgId,
