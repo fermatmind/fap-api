@@ -289,7 +289,7 @@ final class SecurityGuardrailsTest extends TestCase
         $source = file_get_contents(base_path('routes/api.php'));
         $this->assertIsString($source);
 
-        $this->assertMatchesRegularExpression('/Route::prefix\(\s*"v0\.2"\s*\)/', $source);
+        $this->assertMatchesRegularExpression('/Route::prefix\(\s*[\'"]v0\.2[\'"]\s*\)/', $source);
         $this->assertMatchesRegularExpression('/[\'"]error_code[\'"]\s*=>\s*[\'"]API_VERSION_DEPRECATED[\'"]/', $source);
         $this->assertMatchesRegularExpression('/\],\s*410\s*\)/', $source);
     }
