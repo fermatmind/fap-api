@@ -41,18 +41,7 @@ class ExperimentExposureContractTest extends TestCase
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report")->assertStatus(200);
 
         foreach (['result_view', 'report_view'] as $eventCode) {
-            $event = DB::table('events')
-                ->where('event_code', $eventCode)
-                ->where('attempt_id', $attemptId)
-                ->orderByDesc('occurred_at')
-                ->first();
-            if (! $event) {
-                $event = DB::table('events')
-                    ->where('event_code', $eventCode)
-                    ->where('meta_json', 'like', '%"attempt_id":"' . $attemptId . '"%')
-                    ->orderByDesc('occurred_at')
-                    ->first();
-            }
+            $event = $this->findLatestEventByAttempt($eventCode, $attemptId);
             $this->assertNotNull($event, 'missing event row: ' . $eventCode);
 
             $experiments = json_decode((string) ($event->experiments_json ?? '{}'), true) ?: [];
@@ -185,5 +174,37 @@ class ExperimentExposureContractTest extends TestCase
         ]);
 
         return $attemptId;
+    }
+
+    private function findLatestEventByAttempt(string $eventCode, string $attemptId): ?object
+    {
+        $query = DB::table('events')
+            ->where('event_code', $eventCode)
+            ->where(function ($inner) use ($attemptId): void {
+                $inner->where('attempt_id', $attemptId);
+
+                $driver = DB::connection()->getDriverName();
+                if ($driver === 'mysql') {
+                    $inner->orWhereRaw(
+                        "JSON_UNQUOTE(JSON_EXTRACT(meta_json, '$.attempt_id')) = ?",
+                        [$attemptId]
+                    );
+
+                    return;
+                }
+
+                if ($driver === 'sqlite') {
+                    $inner->orWhereRaw(
+                        "json_extract(meta_json, '$.attempt_id') = ?",
+                        [$attemptId]
+                    );
+
+                    return;
+                }
+
+                $inner->orWhereRaw('meta_json like ?', ['%"attempt_id":"' . $attemptId . '"%']);
+            });
+
+        return $query->orderByDesc('occurred_at')->first();
     }
 }
