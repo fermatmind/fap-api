@@ -105,6 +105,7 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
     {
         $this->seedScales();
         [$orgId, $userId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'SIMPLE_SCORE_DEMO');
 
         $orderNo = 'ord_credit_1';
         DB::table('orders')->insert([

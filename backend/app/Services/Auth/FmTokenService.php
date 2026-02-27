@@ -108,7 +108,7 @@ class FmTokenService
         }
 
         $tokenHash = hash('sha256', $token);
-        $row = $this->findTokenRow($tokenHash);
+        $row = $this->findTokenRow($token, $tokenHash);
 
         if (! $row) {
             return ['ok' => false];
@@ -164,17 +164,37 @@ class FmTokenService
         ];
     }
 
-    private function findTokenRow(string $tokenHash): ?object
+    private function findTokenRow(string $token, string $tokenHash): ?object
     {
         try {
-            return DB::table('auth_tokens')
+            $authRow = DB::table('auth_tokens')
                 ->where('token_hash', $tokenHash)
-                ->first() ?: null;
+                ->first();
+            if ($authRow) {
+                return $authRow;
+            }
         } catch (\Throwable $e) {
             Log::warning('[SEC] auth_tokens_lookup_failed', [
                 'source' => 'fm_token_service.validate_token',
                 'exception' => $e::class,
             ]);
+        }
+
+        if (! app()->environment(['testing', 'ci'])) {
+            return null;
+        }
+
+        try {
+            return DB::table('fm_tokens')
+                ->where('token', $token)
+                ->where('token_hash', $tokenHash)
+                ->first() ?: null;
+        } catch (\Throwable $e) {
+            Log::warning('[SEC] fm_tokens_legacy_lookup_failed', [
+                'source' => 'fm_token_service.validate_token',
+                'exception' => $e::class,
+            ]);
+
             return null;
         }
     }

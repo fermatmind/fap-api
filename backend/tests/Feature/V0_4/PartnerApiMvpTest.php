@@ -21,7 +21,7 @@ class PartnerApiMvpTest extends TestCase
 
         $ownerId = $this->createUser('owner+partner@fm.test');
         $orgId = $this->createOrg($ownerId, 'Partner Org');
-        $this->grantScaleForOrg($orgId, 'MBTI');
+        $this->grantScaleForOrgInPartnerTest($orgId, 'MBTI');
         $apiKey = 'ptn_test_key_abc_123';
         $webhookSecret = 'whsec_partner_test';
         $apiKeyId = $this->createPartnerApiKey($orgId, $apiKey, $webhookSecret);
@@ -168,7 +168,7 @@ class PartnerApiMvpTest extends TestCase
         return $id;
     }
 
-    private function grantScaleForOrg(int $orgId, string $scaleCode): void
+    private function grantScaleForOrgInPartnerTest(int $orgId, string $scaleCode): void
     {
         $scaleCode = strtoupper(trim($scaleCode));
         $this->assertTrue(DB::table('scales_registry_v2')->exists(), 'scales_registry_v2 must exist for strict tenant reads.');

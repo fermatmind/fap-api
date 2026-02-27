@@ -128,6 +128,7 @@ class AttemptMemberViewerOwnershipTest extends TestCase
         $memberB = $this->createUserWithToken('high3_member_b@example.com');
 
         $orgId = $this->createOrg($owner['user_id']);
+        $this->grantScaleForOrg($orgId, 'SIMPLE_SCORE_DEMO');
         $this->addMember($orgId, $owner['user_id'], 'owner');
         $this->addMember($orgId, $memberA['user_id'], 'member');
         $this->addMember($orgId, $memberB['user_id'], 'member');
