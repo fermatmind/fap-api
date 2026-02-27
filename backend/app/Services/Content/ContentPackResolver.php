@@ -7,17 +7,16 @@ use RuntimeException;
 
 class ContentPackResolver
 {
-    public function __construct(
-        private readonly string $packsRoot,
-    ) {}
+    private readonly string $packsRoot;
+
+    public function __construct(?string $packsRoot = null)
+    {
+        $this->packsRoot = self::resolvePacksRoot($packsRoot);
+    }
 
     public static function make(): self
     {
-        $root = config('content.packs_root');
-        if (!is_string($root) || trim($root) === '') {
-            throw new RuntimeException("Missing config: content.packs_root");
-        }
-        return new self($root);
+        return new self(self::resolvePacksRoot());
     }
 
     /**
@@ -242,5 +241,25 @@ class ContentPackResolver
     {
         if ($a === []) return false;
         return array_keys($a) !== range(0, count($a) - 1);
+    }
+
+    private static function resolvePacksRoot(?string $packsRoot = null): string
+    {
+        $root = is_string($packsRoot) ? trim($packsRoot) : '';
+        if ($root !== '') {
+            return $root;
+        }
+
+        $root = trim((string) config('content_packs.root', ''));
+        if ($root === '') {
+            // Backward-compat key. content_packs.root remains the single source of truth.
+            $root = trim((string) config('content.packs_root', ''));
+        }
+
+        if ($root === '') {
+            throw new RuntimeException("Missing config: content_packs.root");
+        }
+
+        return $root;
     }
 }
