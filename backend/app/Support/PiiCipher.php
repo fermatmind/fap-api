@@ -10,6 +10,13 @@ final class PiiCipher
 {
     private const PLACEHOLDER_DOMAIN = 'privacy.local';
 
+    public function currentKeyVersion(): int
+    {
+        $version = (int) config('services.pii.key_version', 1);
+
+        return $version > 0 ? $version : 1;
+    }
+
     public function normalizeEmail(string $email): string
     {
         return mb_strtolower(trim($email), 'UTF-8');
@@ -65,13 +72,13 @@ final class PiiCipher
             $prefix = 'unknown';
         }
 
-        return 'redacted+' . $prefix . '@' . self::PLACEHOLDER_DOMAIN;
+        return 'redacted+'.$prefix.'@'.self::PLACEHOLDER_DOMAIN;
     }
 
     private function hash(string $value, string $namespace): string
     {
         $salt = (string) config('app.key', 'fap-key');
 
-        return hash_hmac('sha256', $namespace . '|' . $value, $salt);
+        return hash_hmac('sha256', $namespace.'|'.$value, $salt);
     }
 }

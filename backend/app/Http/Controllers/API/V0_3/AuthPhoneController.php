@@ -281,6 +281,7 @@ class AuthPhoneController extends Controller
         $phoneCol = $hasPhoneE164 ? 'phone_e164' : ($hasPhone ? 'phone' : null);
         $phoneHash = $pii->phoneHash($phoneE164);
         $phoneEnc = $pii->encrypt($phoneE164);
+        $keyVersion = $pii->currentKeyVersion();
 
         $query = DB::table('users');
         if ($hasPhoneHash) {
@@ -315,6 +316,9 @@ class AuthPhoneController extends Controller
         }
         if ($hasPhoneEnc) {
             $insert['phone_e164_enc'] = $phoneEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('users', 'key_version')) {
+            $insert['key_version'] = $keyVersion;
         }
 
         if ($anonId && \App\Support\SchemaBaseline::hasColumn('users', 'anon_id')) {
