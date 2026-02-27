@@ -21,6 +21,7 @@ class PartnerApiMvpTest extends TestCase
 
         $ownerId = $this->createUser('owner+partner@fm.test');
         $orgId = $this->createOrg($ownerId, 'Partner Org');
+        $this->grantScaleForOrg($orgId, 'MBTI');
         $apiKey = 'ptn_test_key_abc_123';
         $webhookSecret = 'whsec_partner_test';
         $apiKeyId = $this->createPartnerApiKey($orgId, $apiKey, $webhookSecret);
@@ -165,5 +166,57 @@ class PartnerApiMvpTest extends TestCase
         ]);
 
         return $id;
+    }
+
+    private function grantScaleForOrg(int $orgId, string $scaleCode): void
+    {
+        $scaleCode = strtoupper(trim($scaleCode));
+        $this->assertTrue(DB::table('scales_registry_v2')->exists(), 'scales_registry_v2 must exist for strict tenant reads.');
+
+        $publicV2 = DB::table('scales_registry_v2')
+            ->where('org_id', 0)
+            ->where('code', $scaleCode)
+            ->first();
+        $this->assertNotNull($publicV2, "Public v2 scale {$scaleCode} must exist in seeder.");
+
+        $update = [
+            'primary_slug' => $publicV2->primary_slug,
+            'slugs_json' => $publicV2->slugs_json,
+            'driver_type' => $publicV2->driver_type,
+            'assessment_driver' => $publicV2->assessment_driver,
+            'default_pack_id' => $publicV2->default_pack_id,
+            'default_region' => $publicV2->default_region,
+            'default_locale' => $publicV2->default_locale,
+            'default_dir_version' => $publicV2->default_dir_version,
+            'capabilities_json' => $publicV2->capabilities_json,
+            'view_policy_json' => $publicV2->view_policy_json,
+            'commercial_json' => $publicV2->commercial_json,
+            'seo_schema_json' => $publicV2->seo_schema_json,
+            'seo_i18n_json' => $publicV2->seo_i18n_json,
+            'content_i18n_json' => $publicV2->content_i18n_json ?? null,
+            'report_summary_i18n_json' => $publicV2->report_summary_i18n_json ?? null,
+            'is_public' => false,
+            'is_active' => true,
+            'is_indexable' => (bool) ($publicV2->is_indexable ?? true),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+        if (property_exists($publicV2, 'scale_uid')) {
+            $update['scale_uid'] = $publicV2->scale_uid;
+        }
+        if (property_exists($publicV2, 'canonical_code_v2')) {
+            $update['canonical_code_v2'] = $publicV2->canonical_code_v2;
+        }
+        if (property_exists($publicV2, 'legacy_code')) {
+            $update['legacy_code'] = $publicV2->legacy_code;
+        }
+
+        DB::table('scales_registry_v2')->updateOrInsert(
+            [
+                'org_id' => $orgId,
+                'code' => $scaleCode,
+            ],
+            $update
+        );
     }
 }

@@ -99,7 +99,7 @@ class AttemptOwnershipAnd404Test extends TestCase
             'answers' => $this->defaultAnswers(),
             'duration_ms' => 120000,
         ], $headers);
-        $submit->assertStatus(200);
+        $this->assertContains($submit->getStatusCode(), [200, 202], 'submit should return sync(200) or async-accepted(202)');
 
         return $attemptId;
     }
