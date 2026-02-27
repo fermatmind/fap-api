@@ -40,7 +40,7 @@ final class PaymentWebhookProcessorLockTest extends TestCase
 
         Cache::shouldReceive('lock')
             ->once()
-            ->with('webhook_pay:billing:evt_lock', 10)
+            ->with('webhook_pay:billing:org_0:evt_lock', 10)
             ->andReturn($lock);
 
         $processor = new PaymentWebhookProcessor(

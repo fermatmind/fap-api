@@ -32,7 +32,7 @@ final class PaymentWebhookLockBusyTest extends TestCase
 
         Cache::shouldReceive('lock')
             ->once()
-            ->with('webhook_pay:billing:evt_busy', 10)
+            ->with('webhook_pay:billing:org_0:evt_busy', 10)
             ->andThrow(new LockTimeoutException('lock timeout'));
 
         $processor = new PaymentWebhookProcessor(
