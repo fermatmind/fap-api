@@ -27,8 +27,9 @@ class ProcessAttemptSubmissionJob implements ShouldQueue
     public function __construct(
         public string $submissionId,
     ) {
-        $this->onConnection('database');
-        $this->onQueue('attempts');
+        $connection = config('fap.queue.attempt_connection');
+        $this->onConnection((is_string($connection) && $connection !== '') ? $connection : (string) config('queue.default'));
+        $this->onQueue(config('fap.queue.attempt_queue', 'attempts'));
     }
 
     public function handle(AttemptSubmissionService $service): void
@@ -36,4 +37,3 @@ class ProcessAttemptSubmissionJob implements ShouldQueue
         $service->process($this->submissionId);
     }
 }
-
