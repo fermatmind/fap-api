@@ -1,0 +1,188 @@
+<?php
+
+namespace Tests\Feature\V0_3;
+
+use App\Models\Attempt;
+use App\Models\Result;
+use Database\Seeders\Pr19CommerceSeeder;
+use Database\Seeders\ScaleRegistrySeeder;
+use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Tests\TestCase;
+
+final class NormsPayloadBatchQueryTest extends TestCase
+{
+    use RefreshDatabase;
+
+    private function seedScales(): void
+    {
+        (new ScaleRegistrySeeder())->run();
+        (new Pr19CommerceSeeder())->run();
+    }
+
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('auth_tokens')->insert([
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'meta_json' => null,
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'last_used_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
+    private function createMbtiAttemptWithResult(string $anonId): string
+    {
+        $attemptId = (string) Str::uuid();
+        $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3');
+        $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3');
+
+        Attempt::create([
+            'id' => $attemptId,
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 144,
+            'client_platform' => 'test',
+            'answers_summary_json' => ['stage' => 'seed'],
+            'started_at' => now(),
+            'submitted_at' => now(),
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
+            'content_package_version' => 'v0.3',
+            'scoring_spec_version' => '2026.01',
+        ]);
+
+        Result::create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'type_code' => 'INTJ-A',
+            'scores_json' => [],
+            'scores_pct' => [
+                'EI' => 50,
+                'SN' => 50,
+                'TF' => 50,
+                'JP' => 50,
+                'AT' => 50,
+            ],
+            'axis_states' => [
+                'EI' => 'clear',
+                'SN' => 'clear',
+                'TF' => 'clear',
+                'JP' => 'clear',
+                'AT' => 'clear',
+            ],
+            'content_package_version' => 'v0.3',
+            'result_json' => [
+                'raw_score' => 0,
+                'final_score' => 0,
+                'breakdown_json' => [],
+                'type_code' => 'INTJ-A',
+                'axis_scores_json' => [
+                    'scores_pct' => [
+                        'EI' => 50,
+                        'SN' => 50,
+                        'TF' => 50,
+                        'JP' => 50,
+                        'AT' => 50,
+                    ],
+                    'axis_states' => [
+                        'EI' => 'clear',
+                        'SN' => 'clear',
+                        'TF' => 'clear',
+                        'JP' => 'clear',
+                        'AT' => 'clear',
+                    ],
+                ],
+            ],
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
+            'scoring_spec_version' => '2026.01',
+            'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
+        ]);
+
+        return $attemptId;
+    }
+
+    public function test_norms_payload_uses_batched_norms_table_query(): void
+    {
+        $this->seedScales();
+
+        $anonId = 'anon_norms_batch_query';
+        $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $token = $this->issueAnonToken($anonId);
+
+        $normsVersionId = (string) Str::uuid();
+        DB::table('norms_versions')->insert([
+            'id' => $normsVersionId,
+            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'window_start_at' => now()->subDays(30),
+            'window_end_at' => now(),
+            'sample_n' => 10000,
+            'rank_rule' => 'leq',
+            'status' => 'active',
+            'computed_at' => now(),
+            'created_at' => now(),
+        ]);
+
+        foreach (['EI', 'SN', 'TF', 'JP', 'AT'] as $metric) {
+            DB::table('norms_table')->insert([
+                'norms_version_id' => $normsVersionId,
+                'metric_key' => $metric,
+                'score_int' => 50,
+                'leq_count' => 5000,
+                'percentile' => 0.5,
+                'created_at' => now(),
+            ]);
+        }
+
+        config()->set('fap.runtime.NORMS_ENABLED', 1);
+        config()->set('fap.runtime.NORMS_VERSION_PIN', $normsVersionId);
+
+        $queries = [];
+        DB::listen(static function (QueryExecuted $query) use (&$queries): void {
+            $queries[] = strtolower($query->sql);
+        });
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('report.norms.version_id', $normsVersionId);
+        $response->assertJsonPath('report.norms.metrics.EI.score_int', 50);
+
+        $normsTableQueries = array_values(array_filter(
+            $queries,
+            static fn (string $sql): bool => str_contains($sql, 'norms_table')
+        ));
+
+        $this->assertCount(
+            1,
+            $normsTableQueries,
+            "Expected one batched norms_table query, got ".count($normsTableQueries)."."
+        );
+    }
+}
