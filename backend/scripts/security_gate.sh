@@ -35,9 +35,9 @@ if (!is_string($source)) {
 }
 
 $checks = [
-    "v0.2 retired_prefix" => "/Route::prefix\\(\\s*\"v0\\.2\"\\s*\\)/s",
+    "v0.2 retired_prefix" => "/Route::prefix\\(\\s*[\\x27\\x22]v0\\.2[\\x27\\x22]\\s*\\)/s",
     "v0.2 retired_any_route" => "/Route::any\\(\\s*[\\x27\\x22]\\/\\{any\\?\\}[\\x27\\x22]\\s*,\\s*static\\s+function\\s*\\(\\s*\\)\\s*\\{/s",
-    "v0.3 attempts_submit_auth" => "/Route::post\\(\\s*\"\\/attempts\\/submit\"\\s*,\\s*\\[\\s*AttemptWriteController::class\\s*,\\s*\"submit\"\\s*\\]\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*;/s",
+    "v0.3 attempts_submit_auth" => "/Route::post\\(\\s*[\\x27\\x22]\\/attempts\\/submit[\\x27\\x22]\\s*,\\s*\\[\\s*AttemptWriteController::class\\s*,\\s*[\\x27\\x22]submit[\\x27\\x22]\\s*\\]\\s*\\)\\s*->middleware\\(\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*\\)\\s*;/s",
     "v0.3 auth_plus_ctx_group" => "/Route::middleware\\(\\s*\\[\\s*\\\\App\\\\Http\\\\Middleware\\\\FmTokenAuth::class\\s*,\\s*ResolveO[r]gContext::class\\s*\\]\\s*\\)\\s*->\\s*group\\s*\\(/s",
 ];
 
