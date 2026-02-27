@@ -29,7 +29,7 @@ class BootTest extends TestCase
         $this->assertNotSame('', $cache);
         $this->assertStringContainsString('max-age=300', $cache);
         $this->assertStringContainsString('public', $cache);
-        $response->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale');
+        $response->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale, X-Anon-Id');
         $this->assertNotEmpty($response->headers->get('ETag'));
     }
 
@@ -55,7 +55,7 @@ class BootTest extends TestCase
         $this->assertNotSame('', $cache);
         $this->assertStringContainsString('max-age=300', $cache);
         $this->assertStringContainsString('public', $cache);
-        $second->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale');
+        $second->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale, X-Anon-Id');
     }
 
     public function test_boot_differs_by_region(): void
@@ -103,6 +103,29 @@ class BootTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonPath('locale', 'zh-CN');
-        $response->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale');
+        $response->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale, X-Anon-Id');
+    }
+
+    public function test_boot_experiments_are_sticky_for_same_anon_id(): void
+    {
+        $headers = [
+            'X-Region' => 'CN_MAINLAND',
+            'Accept-Language' => 'zh-CN',
+            'X-Anon-Id' => 'fer2_v04_boot_sticky_anon',
+        ];
+
+        $first = $this->getJson('/api/v0.4/boot', $headers);
+        $first->assertStatus(200);
+        $firstVariant = trim((string) $first->json('experiments.boot_experiments.PR23_STICKY_BUCKET'));
+        $this->assertNotSame('', $firstVariant);
+        $this->assertSame(
+            $first->json('experiments.boot_experiments.PR23_STICKY_BUCKET'),
+            $first->json('experiments.experiments_json.PR23_STICKY_BUCKET')
+        );
+
+        $second = $this->getJson('/api/v0.4/boot', $headers);
+        $second->assertStatus(200);
+        $secondVariant = trim((string) $second->json('experiments.boot_experiments.PR23_STICKY_BUCKET'));
+        $this->assertSame($firstVariant, $secondVariant);
     }
 }
