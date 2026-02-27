@@ -114,6 +114,8 @@ final class QueueBacklogProbeCommandTest extends TestCase
         $this->assertIsArray($payload);
         $this->assertTrue((bool) ($payload['pass'] ?? false));
         $this->assertSame('database', (string) ($payload['queue_driver'] ?? ''));
+        $this->assertIsArray($payload['thresholds']['by_queue'] ?? null);
+        $this->assertIsArray($payload['slo'] ?? null);
 
         $queues = is_array($payload['queues'] ?? null) ? $payload['queues'] : [];
 
@@ -125,10 +127,17 @@ final class QueueBacklogProbeCommandTest extends TestCase
         $this->assertSame(1, (int) ($attempts['failures']['total'] ?? 0));
         $this->assertSame(1, (int) ($attempts['failures']['timeout_total'] ?? 0));
         $this->assertSame(1, (int) ($attempts['attempt_submissions']['states']['pending'] ?? 0));
+        $this->assertSame('ok', (string) ($attempts['slo']['status'] ?? ''));
+        $this->assertGreaterThanOrEqual(0.0, (float) ($attempts['slo']['max_utilization'] ?? -1));
 
         $reports = $this->findQueue($queues, 'reports');
         $this->assertIsArray($reports);
         $this->assertSame(1, (int) ($reports['report_jobs']['states']['running'] ?? 0));
+        $this->assertSame('ok', (string) ($reports['slo']['status'] ?? ''));
+
+        $commerce = $this->findQueue($queues, 'commerce');
+        $this->assertIsArray($commerce);
+        $this->assertSame('ok', (string) ($commerce['slo']['status'] ?? ''));
     }
 
     public function test_strict_mode_returns_failure_when_queue_threshold_is_exceeded(): void
@@ -163,6 +172,43 @@ final class QueueBacklogProbeCommandTest extends TestCase
         $first = is_array($violations[0] ?? null) ? $violations[0] : [];
         $this->assertSame('attempts', (string) ($first['queue'] ?? ''));
         $this->assertSame('pending', (string) ($first['metric'] ?? ''));
+    }
+
+    public function test_command_uses_default_three_queues_and_config_driven_strict_mode(): void
+    {
+        $this->useDatabaseQueueDriver();
+
+        config()->set('ops.queue_backlog_probe.queues', ['attempts', 'reports', 'commerce']);
+        config()->set('ops.queue_backlog_probe.strict_default', true);
+        config()->set('ops.queue_backlog_probe.thresholds.attempts.max_pending', 0);
+        config()->set('ops.queue_backlog_probe.thresholds.reports.max_pending', 999);
+        config()->set('ops.queue_backlog_probe.thresholds.commerce.max_pending', 999);
+
+        $nowTs = now()->timestamp;
+        DB::table('jobs')->insert([
+            'queue' => 'attempts',
+            'payload' => '{"job":"attempt.submit"}',
+            'attempts' => 1,
+            'reserved_at' => null,
+            'available_at' => $nowTs - 30,
+            'created_at' => $nowTs - 30,
+        ]);
+
+        $exitCode = Artisan::call('ops:queue-backlog-probe', [
+            '--json' => 1,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+        $this->assertIsArray($payload);
+        $this->assertFalse((bool) ($payload['pass'] ?? true));
+        $this->assertTrue((bool) ($payload['slo']['strict'] ?? false));
+
+        $queues = is_array($payload['queues'] ?? null) ? $payload['queues'] : [];
+        $this->assertNotSame([], $this->findQueue($queues, 'attempts'));
+        $this->assertNotSame([], $this->findQueue($queues, 'reports'));
+        $this->assertNotSame([], $this->findQueue($queues, 'commerce'));
     }
 
     private function useDatabaseQueueDriver(): void
