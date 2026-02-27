@@ -1089,6 +1089,10 @@ echo "[CI] migration static guard gate"
 bash scripts/pr71_verify.sh
 echo "[CI] migration static guard gate OK"
 
+echo "[CI] schema baseline runtime introspection gate"
+php artisan test --filter SchemaBaselineRuntimeIntrospectionTest
+echo "[CI] schema baseline runtime introspection gate OK"
+
 echo "[CI] big5 ops controller layering gate"
 bash scripts/pr72_verify.sh
 echo "[CI] big5 ops controller layering gate OK"
