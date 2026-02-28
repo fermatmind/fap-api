@@ -138,6 +138,37 @@ jobs:
           echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
           echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
 
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: |
+            backend/vendor
+            ~/.composer/cache/files
+          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php84-
+
+      - name: Prepare Laravel cache dirs (for package:discover)
+        working-directory: backend
+        run: |
+          mkdir -p storage/framework/cache/data
+          mkdir -p storage/framework/views
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/logs
+          mkdir -p bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: |
+          composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Preflight - backend vendor autoload exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f backend/vendor/autoload.php
+
       - name: Gate - ci_verify_mbti (Phase D)
         env:
           MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
