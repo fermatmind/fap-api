@@ -6,6 +6,7 @@ namespace App\Console\Commands\Ops;
 
 use App\Services\Ops\QueueBacklogProbeService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 final class QueueBacklogProbe extends Command
 {
@@ -70,6 +71,7 @@ final class QueueBacklogProbe extends Command
         $payload['queues'] = $assessment['queues'];
         $payload['violations'] = $assessment['violations'];
         $payload['pass'] = $assessment['pass'];
+        $this->emitBreachAlertOutlet($payload);
 
         if ($this->isTruthy($this->option('json'))) {
             $this->line((string) json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
@@ -109,6 +111,29 @@ final class QueueBacklogProbe extends Command
         }
 
         return self::SUCCESS;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function emitBreachAlertOutlet(array $payload): void
+    {
+        $violations = is_array($payload['violations'] ?? null) ? $payload['violations'] : [];
+        if ($violations === []) {
+            return;
+        }
+
+        $slo = is_array($payload['slo'] ?? null) ? $payload['slo'] : [];
+        Log::warning('QUEUE_BACKLOG_SLO_BREACH', [
+            'strict' => (bool) ($slo['strict'] ?? false),
+            'pass' => (bool) ($payload['pass'] ?? false),
+            'violations' => $violations,
+            'queues' => is_array($payload['queues'] ?? null) ? $payload['queues'] : [],
+            'thresholds' => is_array($payload['thresholds'] ?? null) ? $payload['thresholds'] : [],
+            'window_minutes' => (int) ($payload['window_minutes'] ?? 0),
+            'queue_driver' => (string) ($payload['queue_driver'] ?? ''),
+            'queue_connection' => (string) ($payload['queue_connection'] ?? ''),
+        ]);
     }
 
     /**
