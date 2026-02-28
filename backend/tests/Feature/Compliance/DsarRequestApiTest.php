@@ -49,25 +49,11 @@ final class DsarRequestApiTest extends TestCase
 
         $create->assertStatus(202)
             ->assertJsonPath('ok', true)
-            ->assertJsonPath('status', 'pending');
-        $requestId = (string) $create->json('request_id');
-        $this->assertNotSame('', $requestId);
-
-        $this->withHeaders($headers)
-            ->getJson('/api/v0.3/compliance/dsar/requests/'.$requestId)
-            ->assertStatus(200)
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('request.status', 'pending');
-
-        $execute = $this->withHeaders($headers)
-            ->postJson('/api/v0.3/compliance/dsar/requests/'.$requestId.'/execute');
-
-        $execute->assertStatus(202)
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('request_id', $requestId)
             ->assertJsonPath('status', 'running');
-        $taskId = (string) $execute->json('task_id');
-        $referenceId = (string) $execute->json('job_reference');
+        $requestId = (string) $create->json('request_id');
+        $taskId = (string) $create->json('meta.execution.task_id');
+        $referenceId = (string) $create->json('meta.execution.job_reference');
+        $this->assertNotSame('', $requestId);
         $this->assertNotSame('', $taskId);
         $this->assertNotSame('', $referenceId);
 
@@ -85,6 +71,39 @@ final class DsarRequestApiTest extends TestCase
                 && $job->referenceId === $referenceId;
         });
 
+        $createReplay = $this->withHeaders($headers)->postJson('/api/v0.3/compliance/dsar/requests', [
+            'subject_user_id' => $subjectUserId,
+            'mode' => 'hybrid_anonymize',
+            'reason' => 'subject requested erase',
+        ]);
+
+        $createReplay->assertStatus(202)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('request_id', $requestId)
+            ->assertJsonPath('status', 'running')
+            ->assertJsonPath('meta.execution.task_id', $taskId)
+            ->assertJsonPath('meta.execution.job_reference', $referenceId);
+        Queue::assertPushed(ExecuteDsarRequestJob::class, 1);
+
+        $this->withHeaders($headers)
+            ->getJson('/api/v0.3/compliance/dsar/requests/'.$requestId)
+            ->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('request.status', 'running');
+
+        $execute = $this->withHeaders($headers)
+            ->postJson('/api/v0.3/compliance/dsar/requests/'.$requestId.'/execute');
+
+        $execute->assertStatus(202)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('request_id', $requestId)
+            ->assertJsonPath('status', 'running')
+            ->assertJsonPath('task_id', $taskId)
+            ->assertJsonPath('job_reference', $referenceId)
+            ->assertJsonPath('meta.execution.task_id', $taskId)
+            ->assertJsonPath('meta.execution.job_reference', $referenceId);
+        Queue::assertPushed(ExecuteDsarRequestJob::class, 1);
+
         $this->withHeaders($headers)
             ->getJson('/api/v0.3/compliance/dsar/requests/'.$requestId)
             ->assertStatus(200)
@@ -99,7 +118,9 @@ final class DsarRequestApiTest extends TestCase
             ->assertJsonPath('request_id', $requestId)
             ->assertJsonPath('status', 'running')
             ->assertJsonPath('task_id', $taskId)
-            ->assertJsonPath('job_reference', $referenceId);
+            ->assertJsonPath('job_reference', $referenceId)
+            ->assertJsonPath('meta.execution.task_id', $taskId)
+            ->assertJsonPath('meta.execution.job_reference', $referenceId);
         Queue::assertPushed(ExecuteDsarRequestJob::class, 1);
 
         $job = new ExecuteDsarRequestJob($requestId, $orgId, $ownerUserId, $taskId, $referenceId);
@@ -119,7 +140,9 @@ final class DsarRequestApiTest extends TestCase
             ->assertJsonPath('request_id', $requestId)
             ->assertJsonPath('status', 'done')
             ->assertJsonPath('task_id', $taskId)
-            ->assertJsonPath('job_reference', $referenceId);
+            ->assertJsonPath('job_reference', $referenceId)
+            ->assertJsonPath('meta.execution.task_id', $taskId)
+            ->assertJsonPath('meta.execution.job_reference', $referenceId);
         Queue::assertPushed(ExecuteDsarRequestJob::class, 1);
 
         $subjectTokenRow = DB::table('auth_tokens')
@@ -224,6 +247,99 @@ final class DsarRequestApiTest extends TestCase
         $this->assertNotNull($lifecycleAudit);
 
         $this->assertNotEmpty($ownerToken);
+    }
+
+    public function test_execute_job_failed_marks_terminal_audit_dlq_state(): void
+    {
+        $orgId = 702;
+        $ownerUserId = 70201;
+        $subjectUserId = 70202;
+        $requestId = (string) Str::uuid();
+        $taskId = (string) Str::uuid();
+        $referenceId = (string) Str::uuid();
+
+        $this->seedUser($ownerUserId, "owner_{$ownerUserId}@example.test", '+8613900007101');
+        $this->seedUser($subjectUserId, "subject_{$subjectUserId}@example.test", '+8613900007102');
+        $this->seedOrgWithOwnerMembership($orgId, $ownerUserId);
+
+        DB::table('dsar_requests')->insert([
+            'id' => $requestId,
+            'org_id' => $orgId,
+            'subject_user_id' => $subjectUserId,
+            'requested_by_user_id' => $ownerUserId,
+            'executed_by_user_id' => $ownerUserId,
+            'mode' => 'hybrid_anonymize',
+            'status' => 'running',
+            'reason' => 'retry exhaustion case',
+            'payload_json' => json_encode([
+                'execution' => [
+                    'task_id' => $taskId,
+                    'reference_id' => $referenceId,
+                ],
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'result_json' => null,
+            'requested_at' => now()->subMinute(),
+            'executed_at' => null,
+            'created_at' => now()->subMinute(),
+            'updated_at' => now()->subMinute(),
+        ]);
+
+        DB::table('dsar_request_tasks')->insert([
+            'id' => $taskId,
+            'request_id' => $requestId,
+            'org_id' => $orgId,
+            'subject_user_id' => $subjectUserId,
+            'domain' => 'orchestration',
+            'action' => 'execute',
+            'status' => 'running',
+            'error_code' => null,
+            'stats_json' => null,
+            'started_at' => now()->subMinute(),
+            'finished_at' => null,
+            'created_at' => now()->subMinute(),
+            'updated_at' => now()->subMinute(),
+        ]);
+
+        $job = new ExecuteDsarRequestJob($requestId, $orgId, $ownerUserId, $taskId, $referenceId);
+        $job->failed(new \RuntimeException('simulated terminal failure'));
+
+        $requestRow = DB::table('dsar_requests')->where('id', $requestId)->first();
+        $this->assertNotNull($requestRow);
+        $this->assertSame('failed', (string) ($requestRow->status ?? ''));
+        $requestResult = $this->decodeAuditContext($requestRow->result_json ?? null);
+        $this->assertSame('USER_DSAR_RETRY_EXHAUSTED', (string) ($requestResult['error_code'] ?? ''));
+
+        $taskRow = DB::table('dsar_request_tasks')->where('id', $taskId)->first();
+        $this->assertNotNull($taskRow);
+        $this->assertSame('failed', (string) ($taskRow->status ?? ''));
+        $this->assertSame('USER_DSAR_RETRY_EXHAUSTED', (string) ($taskRow->error_code ?? ''));
+        $taskStats = $this->decodeAuditContext($taskRow->stats_json ?? null);
+        $this->assertTrue((bool) ($taskStats['dlq_marked'] ?? false));
+        $this->assertSame(3, (int) ($taskStats['max_tries'] ?? 0));
+        $this->assertSame('compliance', (string) ($taskStats['queue'] ?? ''));
+        $this->assertNotSame('', (string) ($taskStats['connection'] ?? ''));
+
+        $statusTransitionAudit = DB::table('dsar_audit_logs')
+            ->where('request_id', $requestId)
+            ->where('event_type', 'dsar_status_transition')
+            ->orderByDesc('id')
+            ->first();
+        $this->assertNotNull($statusTransitionAudit);
+        $statusTransitionContext = $this->decodeAuditContext($statusTransitionAudit->context_json ?? null);
+        $this->assertSame('running', (string) ($statusTransitionContext['from'] ?? ''));
+        $this->assertSame('failed', (string) ($statusTransitionContext['to'] ?? ''));
+
+        $terminalAudit = DB::table('dsar_audit_logs')
+            ->where('request_id', $requestId)
+            ->where('event_type', 'dsar_job_failed_terminal')
+            ->orderByDesc('id')
+            ->first();
+        $this->assertNotNull($terminalAudit);
+        $terminalContext = $this->decodeAuditContext($terminalAudit->context_json ?? null);
+        $this->assertSame('USER_DSAR_RETRY_EXHAUSTED', (string) ($terminalContext['error_code'] ?? ''));
+        $this->assertSame($taskId, (string) ($terminalContext['task_id'] ?? ''));
+        $this->assertSame($referenceId, (string) ($terminalContext['reference_id'] ?? ''));
+        $this->assertSame('RuntimeException', (string) ($terminalContext['exception_class'] ?? ''));
     }
 
     private function seedUser(int $userId, string $email, string $phoneE164): void
