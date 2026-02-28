@@ -253,6 +253,18 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
             'order_no' => $orderNo,
             'provider_event_id' => 'evt_atomic_report_1',
         ]);
+        $this->assertFalse((bool) ($second->json('duplicate') ?? false));
+        $this->assertSame(
+            'processed',
+            (string) (DB::table('payment_events')
+                ->where('provider', 'billing')
+                ->where('provider_event_id', 'evt_atomic_report_1')
+                ->value('status') ?? '')
+        );
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->count());
+        $this->assertSame(1, DB::table('report_snapshots')->where('attempt_id', $attemptId)->count());
+        Queue::assertPushed(GenerateReportSnapshotJob::class, 1);
+        Queue::assertPushed(GenerateReportPdfJob::class, 1);
 
         $third = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => '0',

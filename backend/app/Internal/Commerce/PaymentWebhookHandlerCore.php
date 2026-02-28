@@ -100,23 +100,94 @@ class PaymentWebhookHandlerCore
         string $rawPayloadSha256 = '',
         int $rawPayloadBytes = -1
     ): array {
+        $ctx = $this->stagePrecheck(
+            $provider,
+            $payload,
+            $orgId,
+            $userId,
+            $anonId,
+            $signatureOk,
+            $payloadMeta,
+            $rawPayloadSha256,
+            $rawPayloadBytes
+        );
+
+        if (isset($ctx['result']) && is_array($ctx['result'])) {
+            return $ctx['result'];
+        }
+
+        $ctx = $this->stageTransition($ctx);
+
+        try {
+            $ctx = $this->stageEntitlement($ctx);
+        } catch (LockTimeoutException $e) {
+            $this->observeWebhookLockWait(
+                (string) $ctx['provider'],
+                (int) $ctx['normalized_org_id'],
+                (string) $ctx['provider_event_id'],
+                (string) $ctx['lock_key'],
+                $this->resolveLockWaitMs((float) $ctx['lock_wait_started_at']),
+                (int) $ctx['lock_block'],
+                (int) $ctx['contention_budget_ms'],
+                true
+            );
+
+            return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
+        }
+
+        $ctx = $this->stagePostCommit($ctx);
+        $normalizedResult = is_array($ctx['normalized_result'] ?? null)
+            ? $ctx['normalized_result']
+            : $this->normalizeResultStatus((array) ($ctx['result'] ?? []));
+
+        try {
+            $this->emitBigFiveWebhookTelemetry(
+                $normalizedResult,
+                is_array($ctx['post_commit_ctx'] ?? null) ? $ctx['post_commit_ctx'] : null,
+                (int) $ctx['org_id'],
+                (string) $ctx['provider'],
+                (string) $ctx['provider_event_id'],
+                (string) $ctx['order_no']
+            );
+        } catch (\Throwable $e) {
+            Log::warning('PAYMENT_WEBHOOK_TELEMETRY_FAILED', [
+                'provider' => (string) $ctx['provider'],
+                'provider_event_id' => (string) $ctx['provider_event_id'],
+                'order_no' => (string) $ctx['order_no'],
+                'error_message' => $e->getMessage(),
+            ]);
+        }
+
+        return $normalizedResult;
+    }
+
+    private function stagePrecheck(
+        string $provider,
+        array $payload,
+        int $orgId,
+        ?string $userId,
+        ?string $anonId,
+        bool $signatureOk,
+        array $payloadMeta,
+        string $rawPayloadSha256,
+        int $rawPayloadBytes
+    ): array {
         $provider = strtolower(trim($provider));
         if ($provider === 'stub' && ! $this->isStubEnabled()) {
-            return $this->notFound('PROVIDER_DISABLED', 'not found.');
+            return ['result' => $this->notFound('PROVIDER_DISABLED', 'not found.')];
         }
 
         $gateway = $this->gateways[$provider] ?? null;
         if (! $gateway) {
-            return $this->badRequest('PROVIDER_NOT_SUPPORTED', 'provider not supported.');
+            return ['result' => $this->badRequest('PROVIDER_NOT_SUPPORTED', 'provider not supported.')];
         }
 
         $normalized = $gateway->normalizePayload($payload);
         $providerEventId = trim((string) ($normalized['provider_event_id'] ?? ''));
         $orderNo = trim((string) ($normalized['order_no'] ?? ''));
         $eventType = $this->normalizeEventType($normalized);
-
         if ($providerEventId === '' || $orderNo === '') {
-            return $this->badRequest('PAYLOAD_INVALID', 'provider_event_id and order_no are required.');
+            return ['result' => $this->badRequest('PAYLOAD_INVALID', 'provider_event_id and order_no are required.')];
         }
 
         $receivedAt = now();
@@ -129,30 +200,101 @@ class PaymentWebhookHandlerCore
         );
         $payloadSummaryJson = $this->encodePayloadSummary($payloadSummary);
         $payloadExcerpt = $this->buildPayloadExcerpt($payloadSummaryJson);
-        $normalizedOrgId = max(0, $orgId);
-        $lockKey = $this->buildWebhookLockKey($provider, $normalizedOrgId, $providerEventId);
-        $lockTtl = max(1, (int) config(
+
+        return [
+            'provider' => $provider,
+            'normalized' => $normalized,
+            'provider_event_id' => $providerEventId,
+            'order_no' => $orderNo,
+            'event_type' => $eventType,
+            'org_id' => $orgId,
+            'normalized_org_id' => max(0, $orgId),
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'signature_ok' => $signatureOk,
+            'received_at' => $receivedAt,
+            'resolved_payload_meta' => $resolvedPayloadMeta,
+            'payload_summary_json' => $payloadSummaryJson,
+            'payload_excerpt' => $payloadExcerpt,
+        ];
+    }
+
+    private function stageTransition(array $ctx): array
+    {
+        $ctx['lock_key'] = $this->buildWebhookLockKey(
+            (string) $ctx['provider'],
+            (int) $ctx['normalized_org_id'],
+            (string) $ctx['provider_event_id']
+        );
+        $ctx['lock_ttl'] = max(1, (int) config(
             'services.payment_webhook.lock_ttl_seconds',
             self::DEFAULT_WEBHOOK_LOCK_TTL_SECONDS
         ));
-        $lockBlock = max(0, (int) config(
+        $ctx['lock_block'] = max(0, (int) config(
             'services.payment_webhook.lock_block_seconds',
             self::DEFAULT_WEBHOOK_LOCK_BLOCK_SECONDS
         ));
-        $contentionBudgetMs = max(1, (int) config(
+        $ctx['contention_budget_ms'] = max(1, (int) config(
             'services.payment_webhook.lock_contention_budget_ms',
             self::DEFAULT_WEBHOOK_LOCK_CONTENTION_BUDGET_MS
         ));
-        $postCommitOutcome = null;
-        $postCommitCtx = null;
-        $lockWaitStartedAt = microtime(true);
+        $ctx['lock_wait_started_at'] = microtime(true);
+        $ctx['post_commit_outcome'] = null;
+        $ctx['post_commit_ctx'] = null;
 
-        try {
-            $result = $this->runWithTransientDbRetry(function () use (
-                $lockKey,
-                $lockTtl,
-                $lockBlock,
-                $contentionBudgetMs,
+        return $ctx;
+    }
+
+    private function stageEntitlement(array $ctx): array
+    {
+        $provider = (string) $ctx['provider'];
+        $normalized = (array) $ctx['normalized'];
+        $providerEventId = (string) $ctx['provider_event_id'];
+        $orderNo = (string) $ctx['order_no'];
+        $eventType = (string) $ctx['event_type'];
+        $orgId = (int) $ctx['org_id'];
+        $normalizedOrgId = (int) $ctx['normalized_org_id'];
+        $userId = isset($ctx['user_id']) && $ctx['user_id'] !== null ? (string) $ctx['user_id'] : null;
+        $anonId = isset($ctx['anon_id']) && $ctx['anon_id'] !== null ? (string) $ctx['anon_id'] : null;
+        $signatureOk = (bool) $ctx['signature_ok'];
+        $receivedAt = $ctx['received_at'];
+        $payloadSummaryJson = (string) $ctx['payload_summary_json'];
+        $payloadExcerpt = (string) $ctx['payload_excerpt'];
+        $resolvedPayloadMeta = (array) $ctx['resolved_payload_meta'];
+        $lockKey = (string) $ctx['lock_key'];
+        $lockTtl = (int) $ctx['lock_ttl'];
+        $lockBlock = (int) $ctx['lock_block'];
+        $contentionBudgetMs = (int) $ctx['contention_budget_ms'];
+
+        $postCommitCtx = is_array($ctx['post_commit_ctx'] ?? null)
+            ? $ctx['post_commit_ctx']
+            : null;
+
+        $result = $this->runWithTransientDbRetry(function () use (
+            $lockKey,
+            $lockTtl,
+            $lockBlock,
+            $contentionBudgetMs,
+            $orderNo,
+            $normalized,
+            $providerEventId,
+            $provider,
+            $orgId,
+            $normalizedOrgId,
+            $userId,
+            $anonId,
+            $eventType,
+            $receivedAt,
+            $payloadSummaryJson,
+            $payloadExcerpt,
+            $resolvedPayloadMeta,
+            $signatureOk,
+            &$ctx,
+            &$postCommitCtx
+        ) {
+            $ctx['lock_wait_started_at'] = microtime(true);
+
+            return Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
                 $orderNo,
                 $normalized,
                 $providerEventId,
@@ -167,18 +309,30 @@ class PaymentWebhookHandlerCore
                 $payloadExcerpt,
                 $resolvedPayloadMeta,
                 $signatureOk,
-                &$lockWaitStartedAt,
+                $lockBlock,
+                $contentionBudgetMs,
+                $lockKey,
+                &$ctx,
                 &$postCommitCtx
             ) {
-                $lockWaitStartedAt = microtime(true);
+                $lockWaitMs = $this->resolveLockWaitMs((float) $ctx['lock_wait_started_at']);
+                $this->observeWebhookLockWait(
+                    $provider,
+                    $normalizedOrgId,
+                    $providerEventId,
+                    $lockKey,
+                    $lockWaitMs,
+                    $lockBlock,
+                    $contentionBudgetMs,
+                    false
+                );
 
-                return Cache::lock($lockKey, $lockTtl)->block($lockBlock, function () use (
+                return DB::transaction(function () use (
                     $orderNo,
                     $normalized,
                     $providerEventId,
                     $provider,
                     $orgId,
-                    $normalizedOrgId,
                     $userId,
                     $anonId,
                     $eventType,
@@ -187,574 +341,528 @@ class PaymentWebhookHandlerCore
                     $payloadExcerpt,
                     $resolvedPayloadMeta,
                     $signatureOk,
-                    $lockBlock,
-                    $contentionBudgetMs,
-                    $lockKey,
-                    &$lockWaitStartedAt,
                     &$postCommitCtx
                 ) {
-                    $lockWaitMs = $this->resolveLockWaitMs($lockWaitStartedAt);
-                    $this->observeWebhookLockWait(
-                        $provider,
-                        $normalizedOrgId,
-                        $providerEventId,
-                        $lockKey,
-                        $lockWaitMs,
-                        $lockBlock,
-                        $contentionBudgetMs,
-                        false
-                    );
+                    $insertSeed = [
+                        'id' => (string) Str::uuid(),
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_id' => (string) Str::uuid(),
+                        'event_type' => $eventType,
+                        'order_no' => $orderNo,
+                        'payload_json' => $payloadSummaryJson,
+                        'signature_ok' => $signatureOk,
+                        'status' => 'received',
+                        'attempts' => 0,
+                        'last_error_code' => null,
+                        'last_error_message' => null,
+                        'reason' => null,
+                        'processed_at' => null,
+                        'handled_at' => null,
+                        'handle_status' => null,
+                        'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
+                        'payload_sha256' => $resolvedPayloadMeta['sha256'],
+                        'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
+                        'payload_excerpt' => $payloadExcerpt,
+                        'received_at' => $receivedAt,
+                        'created_at' => $receivedAt,
+                        'updated_at' => $receivedAt,
+                    ];
 
-                    return DB::transaction(function () use (
-                        $orderNo,
-                        $normalized,
-                        $providerEventId,
-                        $provider,
-                        $orgId,
-                        $userId,
-                        $anonId,
-                        $eventType,
-                        $receivedAt,
-                        $payloadSummaryJson,
-                        $payloadExcerpt,
-                        $resolvedPayloadMeta,
-                        $signatureOk,
-                        &$postCommitCtx
-                    ) {
-                        $insertSeed = [
-                            'id' => (string) Str::uuid(),
+                    $inserted = (int) DB::table('payment_events')->insertOrIgnore($insertSeed);
+
+                    $eventRow = DB::table('payment_events')
+                        ->where('provider', $provider)
+                        ->where('provider_event_id', $providerEventId)
+                        ->lockForUpdate()
+                        ->first();
+                    if (! $eventRow) {
+                        return $this->serverError('EVENT_INIT_FAILED', 'payment event init failed.');
+                    }
+
+                    if ($inserted === 0 && $this->isEventProcessed($eventRow)) {
+                        Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
                             'provider' => $provider,
                             'provider_event_id' => $providerEventId,
-                            'order_id' => (string) Str::uuid(),
-                            'event_type' => $eventType,
-                            'order_no' => $orderNo,
-                            'payload_json' => $payloadSummaryJson,
-                            'signature_ok' => $signatureOk,
-                            'status' => 'received',
-                            'attempts' => 0,
-                            'last_error_code' => null,
-                            'last_error_message' => null,
-                            'reason' => null,
-                            'processed_at' => null,
-                            'handled_at' => null,
-                            'handle_status' => null,
-                            'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
-                            'payload_sha256' => $resolvedPayloadMeta['sha256'],
-                            'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
-                            'payload_excerpt' => $payloadExcerpt,
-                            'received_at' => $receivedAt,
-                            'created_at' => $receivedAt,
-                            'updated_at' => $receivedAt,
-                        ];
-
-                        $inserted = (int) DB::table('payment_events')->insertOrIgnore($insertSeed);
-
-                        $eventRow = DB::table('payment_events')
-                            ->where('provider', $provider)
-                            ->where('provider_event_id', $providerEventId)
-                            ->lockForUpdate()
-                            ->first();
-                        if (! $eventRow) {
-                            return $this->serverError('EVENT_INIT_FAILED', 'payment event init failed.');
-                        }
-
-                        if ($inserted === 0 && $this->isEventProcessed($eventRow)) {
-                            Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
-                                'provider' => $provider,
-                                'provider_event_id' => $providerEventId,
-                                'order_id' => $eventRow->order_id ?? null,
-                            ]);
-
-                            return [
-                                'ok' => true,
-                                'duplicate' => true,
-                                'order_no' => $orderNo,
-                                'provider_event_id' => $providerEventId,
-                            ];
-                        }
-
-                        $attempts = (int) ($eventRow->attempts ?? 0);
-                        $attempts = $attempts > 0 ? $attempts + 1 : 1;
-
-                        $baseRow = [
-                            'provider' => $provider,
-                            'provider_event_id' => $providerEventId,
-                            'order_id' => $eventRow->order_id ?? ($insertSeed['order_id'] ?? (string) Str::uuid()),
-                            'event_type' => $eventType,
-                            'order_no' => $orderNo,
-                            'payload_json' => $payloadSummaryJson,
-                            'signature_ok' => $signatureOk,
-                            'status' => 'received',
-                            'attempts' => $attempts,
-                            'last_error_code' => null,
-                            'last_error_message' => null,
-                            'reason' => null,
-                            'processed_at' => null,
-                            'handled_at' => null,
-                            'handle_status' => null,
-                            'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
-                            'payload_sha256' => $resolvedPayloadMeta['sha256'],
-                            'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
-                            'payload_excerpt' => $payloadExcerpt,
-                            'received_at' => $receivedAt,
-                            'updated_at' => $receivedAt,
-                        ];
-
-                        DB::table('payment_events')
-                            ->where('provider', $provider)
-                            ->where('provider_event_id', $providerEventId)
-                            ->update($baseRow);
-
-                        if ($signatureOk !== true) {
-                            $this->markEventError($provider, $providerEventId, 'rejected', 'INVALID_SIGNATURE', 'signature invalid.');
-
-                            return $this->badRequest('INVALID_SIGNATURE', 'invalid signature.');
-                        }
-
-                        $orderQuery = DB::table('orders')
-                            ->where('order_no', $orderNo)
-                            ->where('org_id', $orgId);
-
-                        $order = $orderQuery->lockForUpdate()->first();
-                        if (! $order) {
-                            $this->markEventError($provider, $providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
-
-                            return $this->semanticReject('ORDER_NOT_FOUND', 'order not found.');
-                        }
-
-                        $orderProvider = strtolower(trim((string) ($order->provider ?? '')));
-                        $webhookProvider = strtolower(trim((string) $provider));
-                        if ($orderProvider !== $webhookProvider) {
-                            $detail = "order.provider={$orderProvider}; webhook.provider={$webhookProvider}";
-
-                            Log::warning('PAYMENT_EVENT_PROVIDER_MISMATCH', [
-                                'provider' => $provider,
-                                'order_provider' => $orderProvider !== '' ? $orderProvider : null,
-                                'provider_event_id' => $providerEventId,
-                                'order_no' => $orderNo,
-                                'order_id' => $order->id ?? null,
-                            ]);
-
-                            $this->markEventError(
-                                $provider,
-                                $providerEventId,
-                                'rejected',
-                                'rejected_provider_mismatch',
-                                $detail
-                            );
-
-                            return $this->semanticReject('PROVIDER_MISMATCH', 'provider mismatch');
-                        }
-
-                        $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
-                        $orderStatus = strtolower((string) ($order->status ?? ''));
-                        $orderAlreadySettled = ! $isRefundEvent
-                            && in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true);
-
-                        $orderMeta = $this->resolveOrderMeta($orgId, $orderNo, $order);
-                        $normalizedSkuMeta = $this->normalizeOrderSkuMeta($order);
-                        $this->updatePaymentEvent($provider, $providerEventId, [
-                            'order_id' => $order->id ?? null,
-                            'event_type' => $eventType,
-                            'signature_ok' => $signatureOk,
-                            'requested_sku' => $normalizedSkuMeta['requested_sku'] ?? null,
-                            'effective_sku' => $normalizedSkuMeta['effective_sku'] ?? null,
-                            'entitlement_id' => $normalizedSkuMeta['entitlement_id'] ?? null,
+                            'order_id' => $eventRow->order_id ?? null,
                         ]);
-
-                        $eventUserId = $orderMeta['user_id'] ?? $userId;
-                        $eventMeta = $this->buildEventMeta($orderMeta, [
-                            'provider' => $provider,
-                            'provider_event_id' => $providerEventId,
-                            'order_no' => $orderNo,
-                        ]);
-                        $eventContext = $this->buildEventContext($orderMeta, $anonId);
-
-                        if ($isRefundEvent) {
-                            $refund = $this->handleRefund($orderNo, $order, $normalized, $providerEventId, $orgId);
-                            if (! ($refund['ok'] ?? false)) {
-                                $this->markEventError(
-                                    $provider,
-                                    $providerEventId,
-                                    'failed',
-                                    (string) ($refund['error'] ?? 'REFUND_FAILED'),
-                                    (string) ($refund['message'] ?? 'refund failed.')
-                                );
-
-                                return $refund;
-                            }
-                            $this->markEventProcessed($provider, $providerEventId);
-
-                            return $refund;
-                        }
-
-                        $effectiveSku = strtoupper((string) ($normalizedSkuMeta['effective_sku']
-                            ?? $order->effective_sku
-                            ?? $order->sku
-                            ?? $order->item_sku
-                            ?? ''));
-                        if ($effectiveSku === '') {
-                            $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku missing on order.');
-
-                            return $this->semanticReject('SKU_NOT_FOUND', 'sku missing on order.');
-                        }
-
-                        $skuRow = $this->skus->getActiveSku($effectiveSku, null, (int) ($order->org_id ?? $orgId));
-                        if (! $skuRow) {
-                            $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku not found.');
-
-                            return $this->semanticReject('SKU_NOT_FOUND', 'sku not found.');
-                        }
-
-                        $guard = $this->validatePaidEventGuard($provider, $eventType, $normalized, $order);
-                        if (! ($guard['ok'] ?? false)) {
-                            $guardCode = (string) ($guard['code'] ?? 'WEBHOOK_REJECTED');
-                            $guardMessage = (string) ($guard['message'] ?? 'webhook rejected.');
-                            $this->markEventError(
-                                $provider,
-                                $providerEventId,
-                                'rejected',
-                                $guardCode,
-                                $guardMessage
-                            );
-
-                            return $this->semanticReject($guardCode, $guardMessage);
-                        }
-
-                        if (! $orderAlreadySettled) {
-                            $orderTransition = $this->orders->transitionToPaidAtomic(
-                                $orderNo,
-                                $orgId,
-                                $normalized['external_trade_no'] ?? null,
-                                $normalized['paid_at'] ?? null
-                            );
-                            if (! ($orderTransition['ok'] ?? false)) {
-                                $this->markEventError(
-                                    $provider,
-                                    $providerEventId,
-                                    'failed',
-                                    (string) ($orderTransition['error'] ?? 'ORDER_STATUS_INVALID'),
-                                    (string) ($orderTransition['message'] ?? 'order transition failed.')
-                                );
-
-                                return $orderTransition;
-                            }
-                        }
-
-                        $updateRow = [
-                            'updated_at' => now(),
-                            'requested_sku' => $normalizedSkuMeta['requested_sku'] ?? ($order->requested_sku ?? null),
-                            'effective_sku' => $normalizedSkuMeta['effective_sku'] ?? ($order->effective_sku ?? null),
-                            'entitlement_id' => $normalizedSkuMeta['entitlement_id'] ?? ($order->entitlement_id ?? null),
-                        ];
-                        $externalTradeNo = $normalized['external_trade_no'] ?? null;
-                        if ($externalTradeNo) {
-                            $updateRow['external_trade_no'] = $externalTradeNo;
-                        }
-
-                        if (count($updateRow) > 1) {
-                            $skuMetaForOrder = $this->decodeMeta($skuRow->meta_json ?? null);
-                            $modulesIncludedForOrder = $this->normalizeModulesIncluded($skuMetaForOrder['modules_included'] ?? null);
-                            if ($modulesIncludedForOrder !== []) {
-                                $orderMeta = $this->decodeMeta($order->meta_json ?? null);
-                                $orderMeta['modules_included'] = $modulesIncludedForOrder;
-                                $updateRow['meta_json'] = json_encode($orderMeta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                            }
-
-                            DB::table('orders')
-                                ->where('order_no', $orderNo)
-                                ->update($updateRow);
-                        }
-
-                        $quantity = (int) ($order->quantity ?? 1);
-                        $benefitCode = strtoupper((string) ($skuRow->benefit_code ?? ''));
-                        $kind = (string) ($skuRow->kind ?? '');
-                        if ($benefitCode === '') {
-                            $this->markEventError(
-                                $provider,
-                                $providerEventId,
-                                'failed',
-                                'BENEFIT_CODE_NOT_FOUND',
-                                'benefit code missing on sku.'
-                            );
-
-                            return $this->semanticReject('BENEFIT_CODE_NOT_FOUND', 'benefit code missing on sku.');
-                        }
-
-                        $attemptMeta = $this->resolveAttemptMeta((int) $order->org_id, (string) ($order->target_attempt_id ?? ''));
-                        $this->writePaymentEventScaleIdentity(
-                            $provider,
-                            $providerEventId,
-                            $attemptMeta
-                        );
-                        $eventBaseMeta = $this->buildEventMeta([
-                            'org_id' => (int) $order->org_id,
-                            'sku' => $effectiveSku,
-                            'benefit_code' => $benefitCode,
-                            'attempt' => $attemptMeta,
-                        ], [
-                            'order_no' => $orderNo,
-                            'provider_event_id' => $providerEventId,
-                        ]);
-                        $eventContext = $this->buildEventContext([
-                            'org_id' => (int) $order->org_id,
-                            'attempt' => $attemptMeta,
-                        ], $anonId);
-                        $eventUserId = $order->user_id ? (string) $order->user_id : $userId;
-
-                        $retryingPostCommitOnly = $inserted === 0
-                            && ! $this->isEventProcessed($eventRow)
-                            && $orderAlreadySettled;
-
-                        if ($kind === 'credit_pack') {
-                            $unitQty = (int) ($skuRow->unit_qty ?? 0);
-                            if (
-                                $unitQty <= 0
-                                || $quantity <= 0
-                                || $quantity > intdiv(2147483647, $unitQty)
-                            ) {
-                                $this->markEventError($provider, $providerEventId, 'failed', 'TOPUP_DELTA_INVALID', 'topup delta invalid.');
-
-                                return $this->semanticReject('TOPUP_DELTA_INVALID', 'topup delta invalid.');
-                            }
-
-                            $postCommitCtx = [
-                                'kind' => 'credit_pack',
-                                'org_id' => (int) $order->org_id,
-                                'provider' => $provider,
-                                'provider_event_id' => $providerEventId,
-                                'order_no' => $orderNo,
-                                'benefit_code' => $benefitCode,
-                                'topup_delta' => $unitQty * $quantity,
-                                'event_user_id' => $eventUserId,
-                                'event_meta' => $eventBaseMeta,
-                                'event_context' => $eventContext,
-                                'received_event_meta' => $eventMeta,
-                                'received_event_context' => $eventContext,
-                            ];
-                        } elseif ($kind === 'report_unlock') {
-                            $attemptId = (string) ($order->target_attempt_id ?? '');
-                            if ($attemptId === '') {
-                                $this->markEventError($provider, $providerEventId, 'failed', 'ATTEMPT_REQUIRED', 'target_attempt_id is required.');
-
-                                return $this->semanticReject('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
-                            }
-
-                            $ownerGuard = $this->validateAttemptOwnershipForOrder($order, $attemptMeta);
-                            if (! ($ownerGuard['ok'] ?? false)) {
-                                $code = (string) ($ownerGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH');
-                                $message = (string) ($ownerGuard['message'] ?? 'order owner mismatch.');
-                                $this->markEventError($provider, $providerEventId, 'rejected', $code, $message);
-
-                                return $this->semanticReject($code, $message);
-                            }
-
-                            $scaleGuard = $this->validateAttemptScaleForSku($skuRow, $attemptMeta);
-                            if (! ($scaleGuard['ok'] ?? false)) {
-                                $code = (string) ($scaleGuard['error'] ?? 'ATTEMPT_SCALE_MISMATCH');
-                                $message = (string) ($scaleGuard['message'] ?? 'attempt scale does not match sku scale.');
-                                $this->markEventError($provider, $providerEventId, 'rejected', $code, $message);
-
-                                return $this->semanticReject($code, $message);
-                            }
-
-                            if (! $retryingPostCommitOnly) {
-                                $scopeOverride = trim((string) ($skuRow->scope ?? ''));
-                                if ($scopeOverride === '') {
-                                    $scopeOverride = 'attempt';
-                                }
-
-                                $expiresAt = null;
-                                $skuMeta = $this->decodeMeta($skuRow->meta_json ?? null);
-                                $modulesIncluded = $this->normalizeModulesIncluded($skuMeta['modules_included'] ?? null);
-                                if ($skuMeta !== []) {
-                                    $durationDays = isset($skuMeta['duration_days']) ? (int) $skuMeta['duration_days'] : 0;
-                                    if ($durationDays > 0) {
-                                        $expiresAt = now()->addDays($durationDays)->toISOString();
-                                    }
-                                }
-
-                                $grant = $this->entitlements->grantAttemptUnlock(
-                                    (int) $order->org_id,
-                                    $order->user_id ? (string) $order->user_id : $userId,
-                                    $order->anon_id ? (string) $order->anon_id : $anonId,
-                                    $benefitCode,
-                                    $attemptId,
-                                    $orderNo,
-                                    $scopeOverride,
-                                    $expiresAt,
-                                    $modulesIncluded
-                                );
-
-                                if (! ($grant['ok'] ?? false)) {
-                                    $this->markEventError(
-                                        $provider,
-                                        $providerEventId,
-                                        'failed',
-                                        (string) ($grant['error'] ?? 'ENTITLEMENT_FAILED'),
-                                        (string) ($grant['message'] ?? 'entitlement grant failed.')
-                                    );
-
-                                    return $grant;
-                                }
-                            }
-
-                            $postCommitCtx = [
-                                'kind' => 'report_unlock',
-                                'org_id' => (int) $order->org_id,
-                                'provider' => $provider,
-                                'provider_event_id' => $providerEventId,
-                                'order_no' => $orderNo,
-                                'attempt_id' => $attemptId,
-                                'event_user_id' => $eventUserId,
-                                'event_meta' => $eventBaseMeta,
-                                'event_context' => $eventContext,
-                                'received_event_meta' => $eventMeta,
-                                'received_event_context' => $eventContext,
-                                'snapshot_meta' => [
-                                    'scale_code' => (string) ($attemptMeta['scale_code'] ?? ''),
-                                    'scale_code_v2' => (string) ($attemptMeta['scale_code_v2'] ?? ''),
-                                    'scale_uid' => (string) ($attemptMeta['scale_uid'] ?? ''),
-                                    'pack_id' => (string) ($attemptMeta['pack_id'] ?? ''),
-                                    'dir_version' => (string) ($attemptMeta['dir_version'] ?? ''),
-                                    'scoring_spec_version' => (string) ($attemptMeta['scoring_spec_version'] ?? ''),
-                                ],
-                            ];
-                        } else {
-                            $this->markEventError($provider, $providerEventId, 'failed', 'SKU_KIND_INVALID', 'unsupported sku kind.');
-
-                            return $this->semanticReject('SKU_KIND_INVALID', 'unsupported sku kind.');
-                        }
-
-                        if ($orderAlreadySettled) {
-                            if ($retryingPostCommitOnly) {
-                                return [
-                                    'ok' => true,
-                                    'duplicate' => false,
-                                    'order_no' => $orderNo,
-                                    'provider_event_id' => $providerEventId,
-                                ];
-                            }
-
-                            Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
-                                'provider' => $provider,
-                                'provider_event_id' => $providerEventId,
-                                'order_id' => $order->id ?? null,
-                            ]);
-
-                            $this->markEventProcessed($provider, $providerEventId);
-
-                            return [
-                                'ok' => true,
-                                'duplicate' => true,
-                                'order_no' => $orderNo,
-                                'provider_event_id' => $providerEventId,
-                            ];
-                        }
-
-                        $fulfilled = $this->orders->transition($orderNo, 'fulfilled', $orgId);
-                        if (! ($fulfilled['ok'] ?? false)) {
-                            $this->markEventError(
-                                $provider,
-                                $providerEventId,
-                                'failed',
-                                (string) ($fulfilled['error'] ?? 'ORDER_STATUS_INVALID'),
-                                (string) ($fulfilled['message'] ?? 'order transition failed.')
-                            );
-
-                            return $fulfilled;
-                        }
 
                         return [
                             'ok' => true,
+                            'duplicate' => true,
                             'order_no' => $orderNo,
                             'provider_event_id' => $providerEventId,
                         ];
-                    });
-                });
-            });
+                    }
 
-            if (($result['ok'] ?? false) && is_array($postCommitCtx)) {
-                $postCommitOutcome = $this->runWebhookPostCommitSideEffects($postCommitCtx);
+                    $attempts = (int) ($eventRow->attempts ?? 0);
+                    $attempts = $attempts > 0 ? $attempts + 1 : 1;
 
-                if (($postCommitOutcome['ok'] ?? false) === true) {
-                    $this->markEventProcessed($provider, $providerEventId);
-                } else {
-                    $errorCode = (string) ($postCommitOutcome['error_code'] ?? 'POST_COMMIT_FAILED');
-                    $errorMessage = (string) ($postCommitOutcome['error_message'] ?? 'post commit side effects failed.');
-                    $this->markEventError(
+                    $baseRow = [
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_id' => $eventRow->order_id ?? ($insertSeed['order_id'] ?? (string) Str::uuid()),
+                        'event_type' => $eventType,
+                        'order_no' => $orderNo,
+                        'payload_json' => $payloadSummaryJson,
+                        'signature_ok' => $signatureOk,
+                        'status' => 'received',
+                        'attempts' => $attempts,
+                        'last_error_code' => null,
+                        'last_error_message' => null,
+                        'reason' => null,
+                        'processed_at' => null,
+                        'handled_at' => null,
+                        'handle_status' => null,
+                        'payload_size_bytes' => $resolvedPayloadMeta['size_bytes'],
+                        'payload_sha256' => $resolvedPayloadMeta['sha256'],
+                        'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
+                        'payload_excerpt' => $payloadExcerpt,
+                        'received_at' => $receivedAt,
+                        'updated_at' => $receivedAt,
+                    ];
+
+                    DB::table('payment_events')
+                        ->where('provider', $provider)
+                        ->where('provider_event_id', $providerEventId)
+                        ->update($baseRow);
+
+                    if ($signatureOk !== true) {
+                        $this->markEventError($provider, $providerEventId, 'rejected', 'INVALID_SIGNATURE', 'signature invalid.');
+
+                        return $this->badRequest('INVALID_SIGNATURE', 'invalid signature.');
+                    }
+
+                    $orderQuery = DB::table('orders')
+                        ->where('order_no', $orderNo)
+                        ->where('org_id', $orgId);
+
+                    $order = $orderQuery->lockForUpdate()->first();
+                    if (! $order) {
+                        $this->markEventError($provider, $providerEventId, 'orphan', 'ORDER_NOT_FOUND', 'order not found.');
+
+                        return $this->semanticReject('ORDER_NOT_FOUND', 'order not found.');
+                    }
+
+                    $orderProvider = strtolower(trim((string) ($order->provider ?? '')));
+                    $webhookProvider = strtolower(trim((string) $provider));
+                    if ($orderProvider !== $webhookProvider) {
+                        $detail = "order.provider={$orderProvider}; webhook.provider={$webhookProvider}";
+
+                        Log::warning('PAYMENT_EVENT_PROVIDER_MISMATCH', [
+                            'provider' => $provider,
+                            'order_provider' => $orderProvider !== '' ? $orderProvider : null,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'order_id' => $order->id ?? null,
+                        ]);
+
+                        $this->markEventError(
+                            $provider,
+                            $providerEventId,
+                            'rejected',
+                            'rejected_provider_mismatch',
+                            $detail
+                        );
+
+                        return $this->semanticReject('PROVIDER_MISMATCH', 'provider mismatch');
+                    }
+
+                    $isRefundEvent = $this->isRefundEvent($eventType, $normalized);
+                    $orderStatus = strtolower((string) ($order->status ?? ''));
+                    $orderAlreadySettled = ! $isRefundEvent
+                        && in_array($orderStatus, ['paid', 'fulfilled', 'completed', 'delivered', 'refunded'], true);
+
+                    $orderMeta = $this->resolveOrderMeta($orgId, $orderNo, $order);
+                    $normalizedSkuMeta = $this->normalizeOrderSkuMeta($order);
+                    $this->updatePaymentEvent($provider, $providerEventId, [
+                        'order_id' => $order->id ?? null,
+                        'event_type' => $eventType,
+                        'signature_ok' => $signatureOk,
+                        'requested_sku' => $normalizedSkuMeta['requested_sku'] ?? null,
+                        'effective_sku' => $normalizedSkuMeta['effective_sku'] ?? null,
+                        'entitlement_id' => $normalizedSkuMeta['entitlement_id'] ?? null,
+                    ]);
+
+                    $eventUserId = $orderMeta['user_id'] ?? $userId;
+                    $eventMeta = $this->buildEventMeta($orderMeta, [
+                        'provider' => $provider,
+                        'provider_event_id' => $providerEventId,
+                        'order_no' => $orderNo,
+                    ]);
+                    $eventContext = $this->buildEventContext($orderMeta, $anonId);
+
+                    if ($isRefundEvent) {
+                        $refund = $this->handleRefund($orderNo, $order, $normalized, $providerEventId, $orgId);
+                        if (! ($refund['ok'] ?? false)) {
+                            $this->markEventError(
+                                $provider,
+                                $providerEventId,
+                                'failed',
+                                (string) ($refund['error'] ?? 'REFUND_FAILED'),
+                                (string) ($refund['message'] ?? 'refund failed.')
+                            );
+
+                            return $refund;
+                        }
+                        $this->markEventProcessed($provider, $providerEventId);
+
+                        return $refund;
+                    }
+
+                    $effectiveSku = strtoupper((string) ($normalizedSkuMeta['effective_sku']
+                        ?? $order->effective_sku
+                        ?? $order->sku
+                        ?? $order->item_sku
+                        ?? ''));
+                    if ($effectiveSku === '') {
+                        $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku missing on order.');
+
+                        return $this->semanticReject('SKU_NOT_FOUND', 'sku missing on order.');
+                    }
+
+                    $skuRow = $this->skus->getActiveSku($effectiveSku, null, (int) ($order->org_id ?? $orgId));
+                    if (! $skuRow) {
+                        $this->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku not found.');
+
+                        return $this->semanticReject('SKU_NOT_FOUND', 'sku not found.');
+                    }
+
+                    $guard = $this->validatePaidEventGuard($provider, $eventType, $normalized, $order);
+                    if (! ($guard['ok'] ?? false)) {
+                        $guardCode = (string) ($guard['code'] ?? 'WEBHOOK_REJECTED');
+                        $guardMessage = (string) ($guard['message'] ?? 'webhook rejected.');
+                        $this->markEventError(
+                            $provider,
+                            $providerEventId,
+                            'rejected',
+                            $guardCode,
+                            $guardMessage
+                        );
+
+                        return $this->semanticReject($guardCode, $guardMessage);
+                    }
+
+                    if (! $orderAlreadySettled) {
+                        $orderTransition = $this->orders->transitionToPaidAtomic(
+                            $orderNo,
+                            $orgId,
+                            $normalized['external_trade_no'] ?? null,
+                            $normalized['paid_at'] ?? null
+                        );
+                        if (! ($orderTransition['ok'] ?? false)) {
+                            $this->markEventError(
+                                $provider,
+                                $providerEventId,
+                                'failed',
+                                (string) ($orderTransition['error'] ?? 'ORDER_STATUS_INVALID'),
+                                (string) ($orderTransition['message'] ?? 'order transition failed.')
+                            );
+
+                            return $orderTransition;
+                        }
+                    }
+
+                    $updateRow = [
+                        'updated_at' => now(),
+                        'requested_sku' => $normalizedSkuMeta['requested_sku'] ?? ($order->requested_sku ?? null),
+                        'effective_sku' => $normalizedSkuMeta['effective_sku'] ?? ($order->effective_sku ?? null),
+                        'entitlement_id' => $normalizedSkuMeta['entitlement_id'] ?? ($order->entitlement_id ?? null),
+                    ];
+                    $externalTradeNo = $normalized['external_trade_no'] ?? null;
+                    if ($externalTradeNo) {
+                        $updateRow['external_trade_no'] = $externalTradeNo;
+                    }
+
+                    if (count($updateRow) > 1) {
+                        $skuMetaForOrder = $this->decodeMeta($skuRow->meta_json ?? null);
+                        $modulesIncludedForOrder = $this->normalizeModulesIncluded($skuMetaForOrder['modules_included'] ?? null);
+                        if ($modulesIncludedForOrder !== []) {
+                            $orderMeta = $this->decodeMeta($order->meta_json ?? null);
+                            $orderMeta['modules_included'] = $modulesIncludedForOrder;
+                            $updateRow['meta_json'] = json_encode($orderMeta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                        }
+
+                        DB::table('orders')
+                            ->where('order_no', $orderNo)
+                            ->update($updateRow);
+                    }
+
+                    $quantity = (int) ($order->quantity ?? 1);
+                    $benefitCode = strtoupper((string) ($skuRow->benefit_code ?? ''));
+                    $kind = (string) ($skuRow->kind ?? '');
+                    if ($benefitCode === '') {
+                        $this->markEventError(
+                            $provider,
+                            $providerEventId,
+                            'failed',
+                            'BENEFIT_CODE_NOT_FOUND',
+                            'benefit code missing on sku.'
+                        );
+
+                        return $this->semanticReject('BENEFIT_CODE_NOT_FOUND', 'benefit code missing on sku.');
+                    }
+
+                    $attemptMeta = $this->resolveAttemptMeta((int) $order->org_id, (string) ($order->target_attempt_id ?? ''));
+                    $this->writePaymentEventScaleIdentity(
                         $provider,
                         $providerEventId,
-                        'post_commit_failed',
-                        $errorCode,
-                        $errorMessage
+                        $attemptMeta
                     );
+                    $eventBaseMeta = $this->buildEventMeta([
+                        'org_id' => (int) $order->org_id,
+                        'sku' => $effectiveSku,
+                        'benefit_code' => $benefitCode,
+                        'attempt' => $attemptMeta,
+                    ], [
+                        'order_no' => $orderNo,
+                        'provider_event_id' => $providerEventId,
+                    ]);
+                    $eventContext = $this->buildEventContext([
+                        'org_id' => (int) $order->org_id,
+                        'attempt' => $attemptMeta,
+                    ], $anonId);
+                    $eventUserId = $order->user_id ? (string) $order->user_id : $userId;
 
-                    // Return failure so providers can replay the same event and converge state.
-                    $result = $this->serverError($errorCode, $errorMessage);
-                }
-            } elseif (($result['ok'] ?? false) && ! ($result['duplicate'] ?? false) && ! ($result['ignored'] ?? false)) {
+                    $retryingPostCommitOnly = $inserted === 0
+                        && ! $this->isEventProcessed($eventRow)
+                        && $orderAlreadySettled;
+
+                    if ($kind === 'credit_pack') {
+                        $unitQty = (int) ($skuRow->unit_qty ?? 0);
+                        if (
+                            $unitQty <= 0
+                            || $quantity <= 0
+                            || $quantity > intdiv(2147483647, $unitQty)
+                        ) {
+                            $this->markEventError($provider, $providerEventId, 'failed', 'TOPUP_DELTA_INVALID', 'topup delta invalid.');
+
+                            return $this->semanticReject('TOPUP_DELTA_INVALID', 'topup delta invalid.');
+                        }
+
+                        $postCommitCtx = [
+                            'kind' => 'credit_pack',
+                            'org_id' => (int) $order->org_id,
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'benefit_code' => $benefitCode,
+                            'topup_delta' => $unitQty * $quantity,
+                            'event_user_id' => $eventUserId,
+                            'event_meta' => $eventBaseMeta,
+                            'event_context' => $eventContext,
+                            'received_event_meta' => $eventMeta,
+                            'received_event_context' => $eventContext,
+                        ];
+                    } elseif ($kind === 'report_unlock') {
+                        $attemptId = (string) ($order->target_attempt_id ?? '');
+                        if ($attemptId === '') {
+                            $this->markEventError($provider, $providerEventId, 'failed', 'ATTEMPT_REQUIRED', 'target_attempt_id is required.');
+
+                            return $this->semanticReject('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
+                        }
+
+                        $ownerGuard = $this->validateAttemptOwnershipForOrder($order, $attemptMeta);
+                        if (! ($ownerGuard['ok'] ?? false)) {
+                            $code = (string) ($ownerGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH');
+                            $message = (string) ($ownerGuard['message'] ?? 'order owner mismatch.');
+                            $this->markEventError($provider, $providerEventId, 'rejected', $code, $message);
+
+                            return $this->semanticReject($code, $message);
+                        }
+
+                        $scaleGuard = $this->validateAttemptScaleForSku($skuRow, $attemptMeta);
+                        if (! ($scaleGuard['ok'] ?? false)) {
+                            $code = (string) ($scaleGuard['error'] ?? 'ATTEMPT_SCALE_MISMATCH');
+                            $message = (string) ($scaleGuard['message'] ?? 'attempt scale does not match sku scale.');
+                            $this->markEventError($provider, $providerEventId, 'rejected', $code, $message);
+
+                            return $this->semanticReject($code, $message);
+                        }
+
+                        if (! $retryingPostCommitOnly) {
+                            $scopeOverride = trim((string) ($skuRow->scope ?? ''));
+                            if ($scopeOverride === '') {
+                                $scopeOverride = 'attempt';
+                            }
+
+                            $expiresAt = null;
+                            $skuMeta = $this->decodeMeta($skuRow->meta_json ?? null);
+                            $modulesIncluded = $this->normalizeModulesIncluded($skuMeta['modules_included'] ?? null);
+                            if ($skuMeta !== []) {
+                                $durationDays = isset($skuMeta['duration_days']) ? (int) $skuMeta['duration_days'] : 0;
+                                if ($durationDays > 0) {
+                                    $expiresAt = now()->addDays($durationDays)->toISOString();
+                                }
+                            }
+
+                            $grant = $this->entitlements->grantAttemptUnlock(
+                                (int) $order->org_id,
+                                $order->user_id ? (string) $order->user_id : $userId,
+                                $order->anon_id ? (string) $order->anon_id : $anonId,
+                                $benefitCode,
+                                $attemptId,
+                                $orderNo,
+                                $scopeOverride,
+                                $expiresAt,
+                                $modulesIncluded
+                            );
+
+                            if (! ($grant['ok'] ?? false)) {
+                                $this->markEventError(
+                                    $provider,
+                                    $providerEventId,
+                                    'failed',
+                                    (string) ($grant['error'] ?? 'ENTITLEMENT_FAILED'),
+                                    (string) ($grant['message'] ?? 'entitlement grant failed.')
+                                );
+
+                                return $grant;
+                            }
+                        }
+
+                        $postCommitCtx = [
+                            'kind' => 'report_unlock',
+                            'org_id' => (int) $order->org_id,
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_no' => $orderNo,
+                            'attempt_id' => $attemptId,
+                            'event_user_id' => $eventUserId,
+                            'event_meta' => $eventBaseMeta,
+                            'event_context' => $eventContext,
+                            'received_event_meta' => $eventMeta,
+                            'received_event_context' => $eventContext,
+                            'snapshot_meta' => [
+                                'scale_code' => (string) ($attemptMeta['scale_code'] ?? ''),
+                                'scale_code_v2' => (string) ($attemptMeta['scale_code_v2'] ?? ''),
+                                'scale_uid' => (string) ($attemptMeta['scale_uid'] ?? ''),
+                                'pack_id' => (string) ($attemptMeta['pack_id'] ?? ''),
+                                'dir_version' => (string) ($attemptMeta['dir_version'] ?? ''),
+                                'scoring_spec_version' => (string) ($attemptMeta['scoring_spec_version'] ?? ''),
+                            ],
+                        ];
+                    } else {
+                        $this->markEventError($provider, $providerEventId, 'failed', 'SKU_KIND_INVALID', 'unsupported sku kind.');
+
+                        return $this->semanticReject('SKU_KIND_INVALID', 'unsupported sku kind.');
+                    }
+
+                    if ($orderAlreadySettled) {
+                        if ($retryingPostCommitOnly) {
+                            return [
+                                'ok' => true,
+                                'duplicate' => false,
+                                'order_no' => $orderNo,
+                                'provider_event_id' => $providerEventId,
+                            ];
+                        }
+
+                        Log::info('PAYMENT_EVENT_ALREADY_PROCESSED', [
+                            'provider' => $provider,
+                            'provider_event_id' => $providerEventId,
+                            'order_id' => $order->id ?? null,
+                        ]);
+
+                        $this->markEventProcessed($provider, $providerEventId);
+
+                        return [
+                            'ok' => true,
+                            'duplicate' => true,
+                            'order_no' => $orderNo,
+                            'provider_event_id' => $providerEventId,
+                        ];
+                    }
+
+                    $fulfilled = $this->orders->transition($orderNo, 'fulfilled', $orgId);
+                    if (! ($fulfilled['ok'] ?? false)) {
+                        $this->markEventError(
+                            $provider,
+                            $providerEventId,
+                            'failed',
+                            (string) ($fulfilled['error'] ?? 'ORDER_STATUS_INVALID'),
+                            (string) ($fulfilled['message'] ?? 'order transition failed.')
+                        );
+
+                        return $fulfilled;
+                    }
+
+                    return [
+                        'ok' => true,
+                        'order_no' => $orderNo,
+                        'provider_event_id' => $providerEventId,
+                    ];
+                });
+            });
+        });
+
+        $ctx['result'] = $result;
+        $ctx['post_commit_ctx'] = $postCommitCtx;
+
+        return $ctx;
+    }
+
+    private function stagePostCommit(array $ctx): array
+    {
+        $provider = (string) $ctx['provider'];
+        $providerEventId = (string) $ctx['provider_event_id'];
+        $result = (array) ($ctx['result'] ?? []);
+        $postCommitCtx = is_array($ctx['post_commit_ctx'] ?? null)
+            ? $ctx['post_commit_ctx']
+            : null;
+        $postCommitOutcome = null;
+
+        if (($result['ok'] ?? false) && is_array($postCommitCtx)) {
+            $postCommitOutcome = $this->runWebhookPostCommitSideEffects($postCommitCtx);
+
+            if (($postCommitOutcome['ok'] ?? false) === true) {
                 $this->markEventProcessed($provider, $providerEventId);
-            }
-
-            $snapshotJobCtx = is_array($postCommitOutcome['snapshot_job_ctx'] ?? null)
-                ? $postCommitOutcome['snapshot_job_ctx']
-                : null;
-            if (is_array($snapshotJobCtx) && ($result['ok'] ?? false)) {
-                GenerateReportSnapshotJob::dispatch(
-                    (int) $snapshotJobCtx['org_id'],
-                    (string) $snapshotJobCtx['attempt_id'],
-                    (string) $snapshotJobCtx['trigger_source'],
-                    $snapshotJobCtx['order_no'] !== null ? (string) $snapshotJobCtx['order_no'] : null,
-                )->afterCommit();
-            }
-
-            $pdfJobCtx = is_array($postCommitOutcome['pdf_job_ctx'] ?? null)
-                ? $postCommitOutcome['pdf_job_ctx']
-                : null;
-            if (is_array($pdfJobCtx) && ($result['ok'] ?? false)) {
-                GenerateReportPdfJob::dispatch(
-                    (int) $pdfJobCtx['org_id'],
-                    (string) $pdfJobCtx['attempt_id'],
-                    (string) $pdfJobCtx['trigger_source'],
-                    $pdfJobCtx['order_no'] !== null ? (string) $pdfJobCtx['order_no'] : null,
-                )->afterCommit();
-            }
-
-            $normalizedResult = $this->normalizeResultStatus($result);
-            try {
-                $this->emitBigFiveWebhookTelemetry(
-                    $normalizedResult,
-                    is_array($postCommitCtx) ? $postCommitCtx : null,
-                    $orgId,
+            } else {
+                $errorCode = (string) ($postCommitOutcome['error_code'] ?? 'POST_COMMIT_FAILED');
+                $errorMessage = (string) ($postCommitOutcome['error_message'] ?? 'post commit side effects failed.');
+                $this->markEventError(
                     $provider,
                     $providerEventId,
-                    $orderNo
+                    'post_commit_failed',
+                    $errorCode,
+                    $errorMessage
                 );
-            } catch (\Throwable $e) {
-                Log::warning('PAYMENT_WEBHOOK_TELEMETRY_FAILED', [
-                    'provider' => $provider,
-                    'provider_event_id' => $providerEventId,
-                    'order_no' => $orderNo,
-                    'error_message' => $e->getMessage(),
-                ]);
+
+                $result = $this->serverError($errorCode, $errorMessage);
             }
-
-            return $normalizedResult;
-        } catch (LockTimeoutException $e) {
-            $this->observeWebhookLockWait(
-                $provider,
-                $normalizedOrgId,
-                $providerEventId,
-                $lockKey,
-                $this->resolveLockWaitMs($lockWaitStartedAt),
-                $lockBlock,
-                $contentionBudgetMs,
-                true
-            );
-
-            return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
+        } elseif (($result['ok'] ?? false) && ! ($result['duplicate'] ?? false) && ! ($result['ignored'] ?? false)) {
+            $this->markEventProcessed($provider, $providerEventId);
         }
+
+        $snapshotJobCtx = is_array($postCommitOutcome['snapshot_job_ctx'] ?? null)
+            ? $postCommitOutcome['snapshot_job_ctx']
+            : null;
+        if (is_array($snapshotJobCtx) && ($result['ok'] ?? false)) {
+            GenerateReportSnapshotJob::dispatch(
+                (int) $snapshotJobCtx['org_id'],
+                (string) $snapshotJobCtx['attempt_id'],
+                (string) $snapshotJobCtx['trigger_source'],
+                $snapshotJobCtx['order_no'] !== null ? (string) $snapshotJobCtx['order_no'] : null,
+            )->afterCommit();
+        }
+
+        $pdfJobCtx = is_array($postCommitOutcome['pdf_job_ctx'] ?? null)
+            ? $postCommitOutcome['pdf_job_ctx']
+            : null;
+        if (is_array($pdfJobCtx) && ($result['ok'] ?? false)) {
+            GenerateReportPdfJob::dispatch(
+                (int) $pdfJobCtx['org_id'],
+                (string) $pdfJobCtx['attempt_id'],
+                (string) $pdfJobCtx['trigger_source'],
+                $pdfJobCtx['order_no'] !== null ? (string) $pdfJobCtx['order_no'] : null,
+            )->afterCommit();
+        }
+
+        $ctx['post_commit_outcome'] = $postCommitOutcome;
+        $ctx['result'] = $result;
+        $ctx['normalized_result'] = $this->normalizeResultStatus($result);
+
+        return $ctx;
     }
 
     private function runWithTransientDbRetry(callable $callback): mixed
