@@ -14,6 +14,7 @@ class BackfillPiiEncryption extends Command
         {--chunk=1000 : Chunk size}
         {--sleep-ms=50 : Pause between chunks in milliseconds}
         {--rotate-key-version= : Rotate encrypted payloads to target key_version}
+        {--dry-run : Preview rotation/backfill without persisting updates}
         {--batch= : Rotation audit batch reference}
         {--sync : Run immediately in current process}';
 
@@ -33,6 +34,7 @@ class BackfillPiiEncryption extends Command
             chunk: (int) $this->option('chunk'),
             sleepMs: (int) $this->option('sleep-ms'),
             rotateKeyVersion: $rotateKeyVersion,
+            dryRun: (bool) $this->option('dry-run'),
             batchRef: $this->resolveBatchRef()
         );
 
@@ -48,6 +50,7 @@ class BackfillPiiEncryption extends Command
             chunk: (int) $this->option('chunk'),
             sleepMs: (int) $this->option('sleep-ms'),
             rotateKeyVersion: $rotateKeyVersion,
+            dryRun: (bool) $this->option('dry-run'),
             batchRef: $this->resolveBatchRef()
         )->onQueue('ops');
 

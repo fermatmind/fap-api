@@ -31,6 +31,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         public int $chunk = 1000,
         public int $sleepMs = 50,
         public ?int $rotateKeyVersion = null,
+        public bool $dryRun = false,
         public ?string $batchRef = null
     ) {
         $this->scope = $this->normalizeScope($scope) ?? 'all';
@@ -64,19 +65,21 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             $stats = [];
 
             if ($scope === 'all' || $scope === 'users') {
-                $stats['users'] = $this->backfillUsers($cipher, $targetKeyVersion);
+                $stats['users'] = $this->backfillUsers($cipher, $targetKeyVersion, $this->dryRun);
             }
 
             if ($scope === 'all' || $scope === 'email_outbox') {
-                $stats['email_outbox'] = $this->backfillEmailOutbox($cipher, $targetKeyVersion);
+                $stats['email_outbox'] = $this->backfillEmailOutbox($cipher, $targetKeyVersion, $this->dryRun);
             }
 
             if ($targetKeyVersion !== null) {
-                $cipher->activateKeyVersion($targetKeyVersion);
+                if (! $this->dryRun) {
+                    $cipher->activateKeyVersion($targetKeyVersion);
+                }
                 $affectedCount = $this->resolveRotationAffectedCount($stats);
                 $this->recordRotationAudit(
                     $targetKeyVersion,
-                    $affectedCount > 0 ? 'ok' : 'noop',
+                    $this->dryRun ? 'dry_run' : ($affectedCount > 0 ? 'ok' : 'noop'),
                     $scope,
                     $stats
                 );
@@ -87,6 +90,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                 'chunk' => $this->chunk,
                 'sleep_ms' => $this->sleepMs,
                 'rotate_key_version' => $targetKeyVersion,
+                'dry_run' => $this->dryRun,
                 'stats' => $stats,
                 'elapsed_ms' => (int) ((microtime(true) - $startedAt) * 1000),
             ]);
@@ -98,7 +102,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
     /**
      * @return array{scanned:int,updated:int,chunks:int,last_id:int,affected_count:int}
      */
-    private function backfillUsers(PiiCipher $cipher, ?int $targetKeyVersion): array
+    private function backfillUsers(PiiCipher $cipher, ?int $targetKeyVersion, bool $dryRun): array
     {
         if (! Schema::hasTable('users')) {
             return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_id' => 0, 'affected_count' => 0];
@@ -249,9 +253,11 @@ class BackfillPiiEncryptionJob implements ShouldQueue
 
                 $updates['updated_at'] = now();
 
-                DB::table('users')
-                    ->where('id', $nextId)
-                    ->update($updates);
+                if (! $dryRun) {
+                    DB::table('users')
+                        ->where('id', $nextId)
+                        ->update($updates);
+                }
 
                 $updated++;
                 if ($rotatedThisRow) {
@@ -260,8 +266,10 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             }
 
             $chunks++;
-            $this->persistState('pii_backfill_users_v2', $nextId, null);
-            $this->sleepBetweenChunks();
+            if (! $dryRun) {
+                $this->persistState('pii_backfill_users_v2', $nextId, null);
+                $this->sleepBetweenChunks();
+            }
         } while (true);
 
         return [
@@ -276,7 +284,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
     /**
      * @return array{scanned:int,updated:int,chunks:int,last_cursor:string,affected_count:int}
      */
-    private function backfillEmailOutbox(PiiCipher $cipher, ?int $targetKeyVersion): array
+    private function backfillEmailOutbox(PiiCipher $cipher, ?int $targetKeyVersion, bool $dryRun): array
     {
         if (! Schema::hasTable('email_outbox')) {
             return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_cursor' => '', 'affected_count' => 0];
@@ -460,9 +468,11 @@ class BackfillPiiEncryptionJob implements ShouldQueue
 
                 $updates['updated_at'] = now();
 
-                DB::table('email_outbox')
-                    ->where('id', $id)
-                    ->update($updates);
+                if (! $dryRun) {
+                    DB::table('email_outbox')
+                        ->where('id', $id)
+                        ->update($updates);
+                }
 
                 $updated++;
                 if ($rotatedThisRow) {
@@ -471,8 +481,10 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             }
 
             $chunks++;
-            $this->persistState('pii_backfill_email_outbox_v2', 0, $cursor);
-            $this->sleepBetweenChunks();
+            if (! $dryRun) {
+                $this->persistState('pii_backfill_email_outbox_v2', 0, $cursor);
+                $this->sleepBetweenChunks();
+            }
         } while (true);
 
         return [
@@ -574,6 +586,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             'chunk' => $this->chunk,
             'sleep_ms' => $this->sleepMs,
             'rotate_key_version' => $targetKeyVersion,
+            'dry_run' => $this->dryRun,
             'affected_count' => $this->resolveRotationAffectedCount($stats),
             'stats' => $stats,
         ];

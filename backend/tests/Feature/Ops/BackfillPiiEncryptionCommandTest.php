@@ -95,4 +95,61 @@ final class BackfillPiiEncryptionCommandTest extends TestCase
         $this->assertContains('pii_backfill_users_v2', $keys);
         $this->assertContains('pii_backfill_email_outbox_v2', $keys);
     }
+
+    public function test_rotation_dry_run_does_not_persist_or_activate_but_writes_audit(): void
+    {
+        config()->set('services.pii.adapter', 'local');
+        config()->set('services.pii.key_version', 1);
+
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+
+        $email = 'dry.run.rotation@example.com';
+        $phone = '+15551234444';
+
+        $userId = DB::table('users')->insertGetId([
+            'name' => 'Dry Run User',
+            'email' => $email,
+            'password' => bcrypt('secret-123'),
+            'phone_e164' => $phone,
+            'email_hash' => $pii->emailHash($email),
+            'email_enc' => $pii->encryptWithKeyVersion($email, 1),
+            'phone_e164_hash' => $pii->phoneHash($phone),
+            'phone_e164_enc' => $pii->encryptWithKeyVersion($phone, 1),
+            'key_version' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $before = DB::table('users')->where('id', $userId)->first();
+        $this->assertNotNull($before);
+        $beforeEmailEnc = (string) ($before->email_enc ?? '');
+        $beforePhoneEnc = (string) ($before->phone_e164_enc ?? '');
+
+        $this->artisan('ops:backfill-pii-encryption', [
+            '--sync' => true,
+            '--scope' => 'users',
+            '--rotate-key-version' => 2,
+            '--dry-run' => true,
+            '--batch' => 'batch_rotate_dry_run',
+        ])->assertExitCode(0);
+
+        $after = DB::table('users')->where('id', $userId)->first();
+        $this->assertNotNull($after);
+        $this->assertSame(1, (int) ($after->key_version ?? 0));
+        $this->assertSame($beforeEmailEnc, (string) ($after->email_enc ?? ''));
+        $this->assertSame($beforePhoneEnc, (string) ($after->phone_e164_enc ?? ''));
+        $this->assertSame(1, app(PiiCipher::class)->currentKeyVersion());
+
+        if (Schema::hasTable('rotation_audits')) {
+            $audit = DB::table('rotation_audits')
+                ->where('scope', 'pii')
+                ->where('batch_ref', 'batch_rotate_dry_run')
+                ->orderByDesc('created_at')
+                ->first();
+            $this->assertNotNull($audit);
+            $this->assertSame(2, (int) ($audit->key_version ?? 0));
+            $this->assertSame('dry_run', (string) ($audit->result ?? ''));
+        }
+    }
 }

@@ -56,9 +56,12 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(PiiEnvelopeAdapter::class, function ($app) {
-            return match ((string) config('services.pii.adapter', 'local')) {
+            $adapter = strtolower(trim((string) config('services.pii.adapter', 'local')));
+
+            return match ($adapter) {
+                'local' => $app->make(LocalPiiEnvelopeAdapter::class),
                 'external_kms' => $app->make(ExternalKmsPiiEnvelopeAdapter::class),
-                default => $app->make(LocalPiiEnvelopeAdapter::class),
+                default => throw new RuntimeException("Unsupported services.pii.adapter [{$adapter}]"),
             };
         });
 
