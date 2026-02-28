@@ -3,7 +3,6 @@
 namespace App\Services\Commerce\Webhook;
 
 use App\Internal\Commerce\PaymentWebhookHandlerCore;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -35,6 +34,7 @@ class WebhookEntitlementService
         $lockTtl = (int) $ctx['lock_ttl'];
         $lockBlock = (int) $ctx['lock_block'];
         $contentionBudgetMs = (int) $ctx['contention_budget_ms'];
+        $requestId = $this->normalizeRequestId($ctx['request_id'] ?? null);
 
         $postCommitCtx = is_array($ctx['post_commit_ctx'] ?? null)
             ? $ctx['post_commit_ctx']
@@ -59,6 +59,7 @@ class WebhookEntitlementService
             $payloadExcerpt,
             $resolvedPayloadMeta,
             $signatureOk,
+            $requestId,
             &$ctx,
             &$postCommitCtx
         ) {
@@ -79,6 +80,7 @@ class WebhookEntitlementService
                 $payloadExcerpt,
                 $resolvedPayloadMeta,
                 $signatureOk,
+                $requestId,
                 $lockBlock,
                 $contentionBudgetMs,
                 $lockKey,
@@ -111,10 +113,9 @@ class WebhookEntitlementService
                     $payloadExcerpt,
                     $resolvedPayloadMeta,
                     $signatureOk,
+                    $requestId,
                     &$postCommitCtx
                 ) {
-                    $requestId = $this->resolveRequestIdForStorage();
-
                     $insertSeed = [
                         'id' => (string) Str::uuid(),
                         'provider' => $provider,
@@ -576,24 +577,13 @@ class WebhookEntitlementService
         return $ctx;
     }
 
-    private function resolveRequestIdForStorage(): ?string
+    private function normalizeRequestId(mixed $value): ?string
     {
-        $request = request();
-        if (! $request instanceof Request) {
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
             return null;
         }
 
-        foreach ([
-            (string) ($request->attributes->get('request_id') ?? ''),
-            (string) $request->header('X-Request-Id', ''),
-            (string) $request->header('X-Request-ID', ''),
-        ] as $candidate) {
-            $value = trim($candidate);
-            if ($value !== '') {
-                return substr($value, 0, 128);
-            }
-        }
-
-        return null;
+        return substr($normalized, 0, 128);
     }
 }

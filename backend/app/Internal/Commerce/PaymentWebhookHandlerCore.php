@@ -117,6 +117,8 @@ class PaymentWebhookHandlerCore
         string $rawPayloadSha256 = '',
         int $rawPayloadBytes = -1
     ): array {
+        $requestId = $this->resolveRequestIdFromRuntimeContext();
+
         $ctx = $this->precheckStage->handle(
             $provider,
             $payload,
@@ -126,7 +128,8 @@ class PaymentWebhookHandlerCore
             $signatureOk,
             $payloadMeta,
             $rawPayloadSha256,
-            $rawPayloadBytes
+            $rawPayloadBytes,
+            $requestId
         );
 
         if (isset($ctx['result']) && is_array($ctx['result'])) {
@@ -241,6 +244,33 @@ class PaymentWebhookHandlerCore
         }
 
         return false;
+    }
+
+    private function resolveRequestIdFromRuntimeContext(): ?string
+    {
+        try {
+            $request = request();
+        } catch (\Throwable) {
+            return null;
+        }
+
+        if (! $request instanceof \Illuminate\Http\Request) {
+            return null;
+        }
+
+        foreach ([
+            (string) ($request->attributes->get('request_id') ?? ''),
+            (string) $request->header('X-Request-Id', ''),
+            (string) $request->header('X-Request-ID', ''),
+            (string) $request->input('request_id', ''),
+        ] as $candidate) {
+            $value = trim($candidate);
+            if ($value !== '') {
+                return substr($value, 0, 128);
+            }
+        }
+
+        return null;
     }
 
     public function evaluateDryRun(

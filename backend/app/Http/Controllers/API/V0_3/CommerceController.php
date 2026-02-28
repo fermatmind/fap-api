@@ -94,7 +94,8 @@ class CommerceController extends Controller
             $payload['target_attempt_id'] ?? null,
             $provider,
             $idempotencyKey,
-            $contactEmail
+            $contactEmail,
+            $this->resolveRequestId($request)
         );
 
         if (! ($result['ok'] ?? false)) {
@@ -225,7 +226,8 @@ class CommerceController extends Controller
             $attemptId !== '' ? $attemptId : null,
             $provider,
             $idempotencyKey,
-            $contactEmail
+            $contactEmail,
+            $this->resolveRequestId($request)
         );
 
         if (! ($created['ok'] ?? false)) {

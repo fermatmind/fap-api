@@ -105,27 +105,18 @@ final class RequestIdPropagationTest extends TestCase
         $this->seedSku('SKU_REQ_ID_PROBE', 'MBTI');
 
         $requestId = 'req_fer2_42_order_create';
-        $request = Request::create('/api/v0.3/orders', 'POST');
-        $request->attributes->set('request_id', $requestId);
-
-        $originalRequest = app('request');
-        app()->instance('request', $request);
-
-        try {
-            $result = app(OrderManager::class)->createOrder(
-                0,
-                null,
-                'anon_reqid_order',
-                'SKU_REQ_ID_PROBE',
-                1,
-                null,
-                'billing',
-                null,
-                'anon_reqid_order@example.com'
-            );
-        } finally {
-            app()->instance('request', $originalRequest);
-        }
+        $result = app(OrderManager::class)->createOrder(
+            0,
+            null,
+            'anon_reqid_order',
+            'SKU_REQ_ID_PROBE',
+            1,
+            null,
+            'billing',
+            null,
+            'anon_reqid_order@example.com',
+            $requestId
+        );
 
         $this->assertTrue((bool) ($result['ok'] ?? false));
         $orderNo = (string) ($result['order_no'] ?? '');
