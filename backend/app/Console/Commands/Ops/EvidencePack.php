@@ -9,8 +9,10 @@ use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Schema;
 
 final class EvidencePack extends Command
 {
@@ -41,6 +43,7 @@ final class EvidencePack extends Command
         $healthzSnapshot = $this->collectHealthzSnapshot((string) $this->option('base-url'));
         $queueBacklogSnapshot = $this->collectQueueBacklogProbeSnapshot($windowMinutes);
         $slowQuerySnapshot = $this->collectSlowQueryTelemetrySnapshot($windowMinutes);
+        $apiSloSnapshot = $this->collectApiSloSnapshot($windowMinutes);
 
         $revisionPayload = [
             'revision' => $revision,
@@ -58,6 +61,7 @@ final class EvidencePack extends Command
                 'healthz_snapshot' => 'healthz_snapshot.json',
                 'queue_backlog_probe' => 'queue_backlog_probe.json',
                 'slow_query_telemetry' => 'slow_query_telemetry.json',
+                'api_slo' => 'api_slo.json',
             ],
         ];
 
@@ -65,6 +69,7 @@ final class EvidencePack extends Command
         $this->writeJson($packDir.'/healthz_snapshot.json', $healthzSnapshot);
         $this->writeJson($packDir.'/queue_backlog_probe.json', $queueBacklogSnapshot);
         $this->writeJson($packDir.'/slow_query_telemetry.json', $slowQuerySnapshot);
+        $this->writeJson($packDir.'/api_slo.json', $apiSloSnapshot);
         $this->writeJson($packDir.'/manifest.json', $manifestPayload);
 
         $this->info($packDir);
@@ -214,6 +219,80 @@ final class EvidencePack extends Command
             'by_connection' => $byConnection,
             'samples' => $samples,
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function collectApiSloSnapshot(int $windowMinutes): array
+    {
+        return [
+            'captured_at' => CarbonImmutable::now('UTC')->toIso8601String(),
+            'window_minutes' => $windowMinutes,
+            'status' => 'UNKNOWN',
+            'metrics' => [
+                'p95_ms' => [
+                    'value' => null,
+                    'status' => 'UNKNOWN',
+                    'reason' => 'apm_not_configured',
+                ],
+                'error_rate' => [
+                    'value' => null,
+                    'status' => 'UNKNOWN',
+                    'reason' => 'apm_not_configured',
+                ],
+            ],
+            'request_id_coverage' => [
+                'events' => $this->collectRequestIdCoverage('events', 'occurred_at', $windowMinutes),
+                'orders' => $this->collectRequestIdCoverage('orders', 'created_at', $windowMinutes),
+                'payment_events' => $this->collectRequestIdCoverage('payment_events', 'received_at', $windowMinutes),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function collectRequestIdCoverage(string $table, string $timeColumn, int $windowMinutes): array
+    {
+        if (! Schema::hasTable($table) || ! Schema::hasColumn($table, 'request_id') || ! Schema::hasColumn($table, $timeColumn)) {
+            return [
+                'status' => 'UNKNOWN',
+                'reason' => 'table_or_columns_missing',
+                'total' => null,
+                'with_request_id' => null,
+                'coverage_ratio' => null,
+            ];
+        }
+
+        $windowStart = CarbonImmutable::now('UTC')->subMinutes($windowMinutes)->toDateTimeString();
+
+        try {
+            $query = DB::table($table)->where($timeColumn, '>=', $windowStart);
+            $total = (int) $query->count();
+            $withRequestId = (int) DB::table($table)
+                ->where($timeColumn, '>=', $windowStart)
+                ->whereNotNull('request_id')
+                ->where('request_id', '!=', '')
+                ->count();
+
+            $ratio = $total > 0 ? round($withRequestId / $total, 6) : null;
+
+            return [
+                'status' => 'OK',
+                'total' => $total,
+                'with_request_id' => $withRequestId,
+                'coverage_ratio' => $ratio,
+            ];
+        } catch (\Throwable) {
+            return [
+                'status' => 'UNKNOWN',
+                'reason' => 'query_failed',
+                'total' => null,
+                'with_request_id' => null,
+                'coverage_ratio' => null,
+            ];
+        }
     }
 
     /**

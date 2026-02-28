@@ -473,7 +473,9 @@ class OrderManager
         $row['item_sku'] = $row['sku'];
         $row['provider_order_id'] = null;
         $row['device_id'] = null;
-        $row['request_id'] = null;
+        $row['request_id'] = array_key_exists('request_id', $row)
+            ? $row['request_id']
+            : $this->resolveRequestIdFromCurrentRequest();
         $row['created_ip'] = null;
         $row['fulfilled_at'] = null;
         $row['refunded_at'] = null;
@@ -481,6 +483,27 @@ class OrderManager
         $row['refund_reason'] = null;
 
         return $row;
+    }
+
+    private function resolveRequestIdFromCurrentRequest(): ?string
+    {
+        $request = request();
+        if (! $request instanceof \Illuminate\Http\Request) {
+            return null;
+        }
+
+        foreach ([
+            (string) ($request->attributes->get('request_id') ?? ''),
+            (string) $request->header('X-Request-Id', ''),
+            (string) $request->header('X-Request-ID', ''),
+        ] as $candidate) {
+            $value = trim($candidate);
+            if ($value !== '') {
+                return substr($value, 0, 128);
+            }
+        }
+
+        return null;
     }
 
     private function allowedProviders(): array

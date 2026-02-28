@@ -3,6 +3,7 @@
 namespace App\Services\Commerce\Webhook;
 
 use App\Internal\Commerce\PaymentWebhookHandlerCore;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -112,6 +113,8 @@ class WebhookEntitlementService
                     $signatureOk,
                     &$postCommitCtx
                 ) {
+                    $requestId = $this->resolveRequestIdForStorage();
+
                     $insertSeed = [
                         'id' => (string) Str::uuid(),
                         'provider' => $provider,
@@ -133,6 +136,7 @@ class WebhookEntitlementService
                         'payload_sha256' => $resolvedPayloadMeta['sha256'],
                         'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
                         'payload_excerpt' => $payloadExcerpt,
+                        'request_id' => $requestId,
                         'received_at' => $receivedAt,
                         'created_at' => $receivedAt,
                         'updated_at' => $receivedAt,
@@ -187,6 +191,7 @@ class WebhookEntitlementService
                         'payload_sha256' => $resolvedPayloadMeta['sha256'],
                         'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
                         'payload_excerpt' => $payloadExcerpt,
+                        'request_id' => $requestId,
                         'received_at' => $receivedAt,
                         'updated_at' => $receivedAt,
                     ];
@@ -569,5 +574,26 @@ class WebhookEntitlementService
         $ctx['post_commit_ctx'] = $postCommitCtx;
 
         return $ctx;
+    }
+
+    private function resolveRequestIdForStorage(): ?string
+    {
+        $request = request();
+        if (! $request instanceof Request) {
+            return null;
+        }
+
+        foreach ([
+            (string) ($request->attributes->get('request_id') ?? ''),
+            (string) $request->header('X-Request-Id', ''),
+            (string) $request->header('X-Request-ID', ''),
+        ] as $candidate) {
+            $value = trim($candidate);
+            if ($value !== '') {
+                return substr($value, 0, 128);
+            }
+        }
+
+        return null;
     }
 }
