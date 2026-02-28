@@ -684,7 +684,8 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\FmTokenOptional"
+                    "App\\Http\\Middleware\\FmTokenOptional",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_order_lookup"
                 ]
             }
         },
@@ -1310,7 +1311,8 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\FmTokenOptional",
-                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize"
+                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track"
                 ]
             }
         },
