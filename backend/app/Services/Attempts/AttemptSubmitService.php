@@ -39,6 +39,19 @@ class AttemptSubmitService
 
     public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
     {
+        $guarded = $this->stageGuard($ctx, $attemptId, $dto);
+        $canonicalized = $this->stageCanonicalize($guarded);
+        $scored = $this->stageScore($canonicalized);
+        $tx = $this->stageTx($ctx, $canonicalized, $scored);
+
+        return $this->stagePostCommit($ctx, $canonicalized, $scored, $tx);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function stageGuard(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
+    {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'attempt_id is required.');
@@ -89,6 +102,57 @@ class AttemptSubmitService
 
         ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $attemptId);
 
+        return [
+            'attempt_id' => $attemptId,
+            'dto' => $dto,
+            'answers' => $answers,
+            'validity_items' => $validityItems,
+            'duration_ms' => $durationMs,
+            'invite_token' => $inviteToken,
+            'actor_user_id' => $actorUserId,
+            'actor_anon_id' => $actorAnonId,
+            'org_id' => $orgId,
+            'attempt' => $attempt,
+            'scale_code' => $scaleCode,
+            'registry_row' => $row,
+            'scale_code_v2' => $scaleCodeV2,
+            'scale_uid' => $scaleUid,
+            'write_scale_identity' => $writeScaleIdentity,
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
+            'region' => $region,
+            'locale' => $locale,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $guarded
+     * @return array<string,mixed>
+     */
+    private function stageCanonicalize(array $guarded): array
+    {
+        /** @var Attempt $attempt */
+        $attempt = $guarded['attempt'];
+        $answers = (array) ($guarded['answers'] ?? []);
+        $scaleCode = (string) ($guarded['scale_code'] ?? '');
+        $packId = (string) ($guarded['pack_id'] ?? '');
+        $dirVersion = (string) ($guarded['dir_version'] ?? '');
+        $durationMs = (int) ($guarded['duration_ms'] ?? 0);
+        $orgId = (int) ($guarded['org_id'] ?? 0);
+        $actorAnonId = $guarded['actor_anon_id'] ?? null;
+        if ($actorAnonId !== null) {
+            $actorAnonId = (string) $actorAnonId;
+        }
+
+        $actorUserId = $guarded['actor_user_id'] ?? null;
+        if ($actorUserId !== null) {
+            $actorUserId = (string) $actorUserId;
+        }
+        $attemptId = (string) ($guarded['attempt_id'] ?? '');
+        $validityItems = (array) ($guarded['validity_items'] ?? []);
+        $region = (string) ($guarded['region'] ?? '');
+        $locale = (string) ($guarded['locale'] ?? '');
+
         $draftAnswers = $this->progressService->loadDraftAnswers($attempt);
         $mergedAnswers = $this->mergeAnswersForSubmit($answers, $draftAnswers);
         if (empty($mergedAnswers)) {
@@ -126,6 +190,30 @@ class AttemptSubmitService
             'experiments_json' => $experiments,
         ];
 
+        return array_merge($guarded, [
+            'merged_answers' => $mergedAnswers,
+            'answers_digest' => $answersDigest,
+            'submitted_at' => $submittedAt,
+            'server_duration_seconds' => $serverDurationSeconds,
+            'experiments' => $experiments,
+            'score_context' => $scoreContext,
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $canonicalized
+     * @return array<string,mixed>
+     */
+    private function stageScore(array $canonicalized): array
+    {
+        $scaleCode = (string) ($canonicalized['scale_code'] ?? '');
+        $orgId = (int) ($canonicalized['org_id'] ?? 0);
+        $packId = (string) ($canonicalized['pack_id'] ?? '');
+        $dirVersion = (string) ($canonicalized['dir_version'] ?? '');
+        $mergedAnswers = (array) ($canonicalized['merged_answers'] ?? []);
+        $scoreContext = (array) ($canonicalized['score_context'] ?? []);
+        $registryRow = (array) ($canonicalized['registry_row'] ?? []);
+
         $scored = $this->assessmentRunner->run(
             $scaleCode,
             $orgId,
@@ -155,7 +243,7 @@ class AttemptSubmitService
             ? $scored['model_selection']
             : [];
 
-        $commercial = $row['commercial_json'] ?? null;
+        $commercial = $registryRow['commercial_json'] ?? null;
         if (is_string($commercial)) {
             $decoded = json_decode($commercial, true);
             $commercial = is_array($decoded) ? $decoded : null;
@@ -170,6 +258,59 @@ class AttemptSubmitService
         if ($entitlementBenefitCode === '') {
             $entitlementBenefitCode = $creditBenefitCode;
         }
+
+        return [
+            'score_result' => $scoreResult,
+            'content_package_version' => $contentPackageVersion,
+            'scoring_spec_version' => $scoringSpecVersion,
+            'model_selection' => $modelSelection,
+            'credit_benefit_code' => $creditBenefitCode,
+            'entitlement_benefit_code' => $entitlementBenefitCode,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $canonicalized
+     * @param  array<string,mixed>  $scored
+     * @return array<string,mixed>
+     */
+    private function stageTx(OrgContext $ctx, array $canonicalized, array $scored): array
+    {
+        $attemptId = (string) ($canonicalized['attempt_id'] ?? '');
+        $mergedAnswers = (array) ($canonicalized['merged_answers'] ?? []);
+        $answersDigest = (string) ($canonicalized['answers_digest'] ?? '');
+        $durationMs = (int) ($canonicalized['duration_ms'] ?? 0);
+        $orgId = (int) ($canonicalized['org_id'] ?? 0);
+        $scaleCode = (string) ($canonicalized['scale_code'] ?? '');
+        $packId = (string) ($canonicalized['pack_id'] ?? '');
+        $dirVersion = (string) ($canonicalized['dir_version'] ?? '');
+        $region = (string) ($canonicalized['region'] ?? '');
+        $locale = (string) ($canonicalized['locale'] ?? '');
+        $inviteToken = (string) ($canonicalized['invite_token'] ?? '');
+        $actorUserId = $canonicalized['actor_user_id'] ?? null;
+        if ($actorUserId !== null) {
+            $actorUserId = (string) $actorUserId;
+        }
+
+        $actorAnonId = $canonicalized['actor_anon_id'] ?? null;
+        if ($actorAnonId !== null) {
+            $actorAnonId = (string) $actorAnonId;
+        }
+        $validityItems = (array) ($canonicalized['validity_items'] ?? []);
+        $submittedAt = $canonicalized['submitted_at'] ?? now();
+        $writeScaleIdentity = (bool) ($canonicalized['write_scale_identity'] ?? false);
+        $scaleCodeV2 = (string) ($canonicalized['scale_code_v2'] ?? '');
+        $scaleUid = $canonicalized['scale_uid'] ?? null;
+
+        $scoreResult = $scored['score_result'];
+        $contentPackageVersion = (string) ($scored['content_package_version'] ?? '');
+        $scoringSpecVersion = (string) ($scored['scoring_spec_version'] ?? '');
+        $modelSelection = is_array($scored['model_selection'] ?? null)
+            ? $scored['model_selection']
+            : [];
+        $creditBenefitCode = (string) ($scored['credit_benefit_code'] ?? '');
+        $entitlementBenefitCode = (string) ($scored['entitlement_benefit_code'] ?? '');
+        $experiments = is_array($canonicalized['experiments'] ?? null) ? $canonicalized['experiments'] : [];
 
         $responsePayload = null;
         $postCommitCtx = null;
@@ -517,6 +658,41 @@ class AttemptSubmitService
         if (! is_array($responsePayload)) {
             throw new ApiProblemException(500, 'INTERNAL_ERROR', 'unexpected submit state.');
         }
+
+        return [
+            'response_payload' => $responsePayload,
+            'post_commit_ctx' => $postCommitCtx,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $canonicalized
+     * @param  array<string,mixed>  $scored
+     * @param  array<string,mixed>  $tx
+     * @return array<string,mixed>
+     */
+    private function stagePostCommit(OrgContext $ctx, array $canonicalized, array $scored, array $tx): array
+    {
+        /** @var Attempt $attempt */
+        $attempt = $canonicalized['attempt'];
+        $attemptId = (string) ($canonicalized['attempt_id'] ?? '');
+        $orgId = (int) ($canonicalized['org_id'] ?? 0);
+        $scaleCode = (string) ($canonicalized['scale_code'] ?? '');
+        $locale = (string) ($canonicalized['locale'] ?? '');
+        $region = (string) ($canonicalized['region'] ?? '');
+        $dirVersion = (string) ($canonicalized['dir_version'] ?? '');
+        $actorUserId = $canonicalized['actor_user_id'] ?? null;
+        if ($actorUserId !== null) {
+            $actorUserId = (string) $actorUserId;
+        }
+
+        $actorAnonId = $canonicalized['actor_anon_id'] ?? null;
+        if ($actorAnonId !== null) {
+            $actorAnonId = (string) $actorAnonId;
+        }
+        $scoringSpecVersion = (string) ($scored['scoring_spec_version'] ?? '');
+        $responsePayload = is_array($tx['response_payload'] ?? null) ? $tx['response_payload'] : [];
+        $postCommitCtx = is_array($tx['post_commit_ctx'] ?? null) ? $tx['post_commit_ctx'] : null;
 
         $snapshotJobCtx = null;
         if (($responsePayload['ok'] ?? false) === true && is_array($postCommitCtx)) {
