@@ -29,6 +29,7 @@ use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
 use App\Support\Logging\RedactProcessor;
 use App\Support\OrgContext;
+use App\Support\Security\ExternalKmsPiiEnvelopeAdapter;
 use App\Support\Security\LocalPiiEnvelopeAdapter;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
@@ -54,7 +55,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(PiiEnvelopeAdapter::class, LocalPiiEnvelopeAdapter::class);
+        $this->app->singleton(PiiEnvelopeAdapter::class, function ($app) {
+            return match ((string) config('services.pii.adapter', 'local')) {
+                'external_kms' => $app->make(ExternalKmsPiiEnvelopeAdapter::class),
+                default => $app->make(LocalPiiEnvelopeAdapter::class),
+            };
+        });
 
         // Bind ContentPackResolver so app(ContentPackResolver::class) works everywhere.
         $this->app->singleton(ContentPackResolver::class, function () {
