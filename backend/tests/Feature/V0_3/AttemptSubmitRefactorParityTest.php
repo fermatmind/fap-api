@@ -126,6 +126,7 @@ final class AttemptSubmitRefactorParityTest extends TestCase
             'result.scale_code_legacy',
             'result.scale_code_v2',
             'result.scale_uid',
+            'report.locked',
         ];
 
         foreach ($stablePaths as $path) {
