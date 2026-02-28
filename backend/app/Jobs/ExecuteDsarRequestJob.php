@@ -54,6 +54,7 @@ final class ExecuteDsarRequestJob implements ShouldQueue
         if ($requestRow === null) {
             return;
         }
+        $replayContext = $this->extractReplayContext($requestRow);
 
         $currentStatus = trim((string) ($requestRow->status ?? 'pending'));
         if (in_array($currentStatus, ['done', 'failed'], true)) {
@@ -113,6 +114,21 @@ final class ExecuteDsarRequestJob implements ShouldQueue
         }
 
         $this->appendAuditTransition($currentStatus, $finalStatus, $result);
+        if ($replayContext !== null) {
+            $eventType = $finalStatus === 'done' ? 'requeue_done' : 'requeue_failed';
+            $level = $finalStatus === 'done' ? 'info' : 'error';
+            $this->appendReplayOutcomeAudit($requestRow, $eventType, $level, [
+                'task_id' => $replayContext['task_id'],
+                'reference_id' => $replayContext['reference_id'],
+                'requeue_count' => $replayContext['requeue_count'],
+                'requeue_reason' => $replayContext['requeue_reason'],
+                'requeue_requested_by_user_id' => $replayContext['requeue_requested_by_user_id'],
+                'requeue_requested_at' => $replayContext['requeue_requested_at'],
+                'error_code' => $finalStatus === 'failed'
+                    ? (string) ($result['error'] ?? 'USER_DSAR_FAILED')
+                    : null,
+            ]);
+        }
     }
 
     public function failed(Throwable $exception): void
@@ -125,6 +141,7 @@ final class ExecuteDsarRequestJob implements ShouldQueue
         if ($requestRow === null) {
             return;
         }
+        $replayContext = $this->extractReplayContext($requestRow);
 
         $currentStatus = trim((string) ($requestRow->status ?? 'pending'));
         if (in_array($currentStatus, ['done', 'failed'], true)) {
@@ -205,6 +222,19 @@ final class ExecuteDsarRequestJob implements ShouldQueue
 
         $this->appendAuditTransition($currentStatus, 'failed', ['ok' => false]);
         $this->appendTerminalFailureAudit($requestRow, $result['terminal'], $finishedAt);
+        if ($replayContext !== null) {
+            $this->appendReplayOutcomeAudit($requestRow, 'requeue_failed', 'error', [
+                'task_id' => $replayContext['task_id'],
+                'reference_id' => $replayContext['reference_id'],
+                'requeue_count' => $replayContext['requeue_count'],
+                'requeue_reason' => $replayContext['requeue_reason'],
+                'requeue_requested_by_user_id' => $replayContext['requeue_requested_by_user_id'],
+                'requeue_requested_at' => $replayContext['requeue_requested_at'],
+                'error_code' => 'USER_DSAR_RETRY_EXHAUSTED',
+                'attempts' => $attempts,
+                'max_tries' => $maxTries,
+            ]);
+        }
     }
 
     /**
@@ -278,5 +308,110 @@ final class ExecuteDsarRequestJob implements ShouldQueue
             'created_at' => $now,
             'updated_at' => $now,
         ]);
+    }
+
+    /**
+     * @return array{
+     *   task_id:string,
+     *   reference_id:string,
+     *   requeue_count:int,
+     *   requeue_reason:?string,
+     *   requeue_requested_by_user_id:?int,
+     *   requeue_requested_at:?string
+     * }|null
+     */
+    private function extractReplayContext(object $requestRow): ?array
+    {
+        $payload = $this->decodeJson($requestRow->payload_json ?? null);
+        if ($payload === null) {
+            return null;
+        }
+
+        $execution = is_array($payload['execution'] ?? null) ? $payload['execution'] : [];
+        $requeueCount = max(0, (int) ($execution['requeue_count'] ?? 0));
+        if ($requeueCount <= 0) {
+            return null;
+        }
+
+        $taskId = trim((string) ($execution['task_id'] ?? $this->taskId));
+        $referenceId = trim((string) ($execution['reference_id'] ?? $this->referenceId));
+        if ($taskId === '' || $referenceId === '') {
+            return null;
+        }
+
+        $requeueReason = trim((string) ($execution['requeue_reason'] ?? ''));
+        if ($requeueReason === '') {
+            $requeueReason = null;
+        }
+
+        $requestedByRaw = trim((string) ($execution['requeue_requested_by_user_id'] ?? ''));
+        $requestedBy = null;
+        if ($requestedByRaw !== '' && preg_match('/^\d+$/', $requestedByRaw) === 1) {
+            $requestedByInt = (int) $requestedByRaw;
+            if ($requestedByInt > 0) {
+                $requestedBy = $requestedByInt;
+            }
+        }
+
+        $requestedAt = trim((string) ($execution['requeue_requested_at'] ?? ''));
+        if ($requestedAt === '') {
+            $requestedAt = null;
+        }
+
+        return [
+            'task_id' => $taskId,
+            'reference_id' => $referenceId,
+            'requeue_count' => $requeueCount,
+            'requeue_reason' => $requeueReason,
+            'requeue_requested_by_user_id' => $requestedBy,
+            'requeue_requested_at' => $requestedAt,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function appendReplayOutcomeAudit(
+        object $requestRow,
+        string $eventType,
+        string $level,
+        array $context
+    ): void {
+        if (! SchemaBaseline::hasTable('dsar_audit_logs')) {
+            return;
+        }
+
+        $now = now();
+        DB::table('dsar_audit_logs')->insert([
+            'request_id' => $this->requestId,
+            'org_id' => $this->orgId,
+            'subject_user_id' => (int) ($requestRow->subject_user_id ?? 0) ?: null,
+            'event_type' => $eventType,
+            'level' => $level,
+            'message' => $eventType === 'requeue_done'
+                ? 'dsar replay completed successfully.'
+                : 'dsar replay finished with failure.',
+            'context_json' => json_encode($context, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'occurred_at' => $now,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function decodeJson(mixed $value): ?array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+        if (! is_string($value) || trim($value) === '') {
+            return null;
+        }
+
+        $decoded = json_decode($value, true);
+
+        return is_array($decoded) ? $decoded : null;
     }
 }
