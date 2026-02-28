@@ -30,7 +30,8 @@ class OrderManager
         ?string $targetAttemptId,
         string $provider,
         ?string $idempotencyKey = null,
-        ?string $contactEmail = null
+        ?string $contactEmail = null,
+        ?string $requestId = null,
     ): array {
         $requestedSku = $this->skus->normalizeSku($sku);
         if ($requestedSku === '') {
@@ -95,7 +96,8 @@ class OrderManager
             $idempotencyKey,
             $useIdempotency,
             $modulesIncluded,
-            $contactEmailHash
+            $contactEmailHash,
+            $requestId
         ): array {
             $orderNo = 'ord_'.Str::uuid();
             $now = now();
@@ -143,7 +145,7 @@ class OrderManager
                 $row['idempotency_key'] = $idempotencyKey;
             }
 
-            return $this->applyLegacyColumns($row);
+            return $this->applyLegacyColumns($row, $requestId);
         };
 
         if ($useIdempotency) {
@@ -466,14 +468,16 @@ class OrderManager
         return false;
     }
 
-    private function applyLegacyColumns(array $row): array
+    private function applyLegacyColumns(array $row, ?string $requestId = null): array
     {
         $row['amount_total'] = $row['amount_cents'];
         $row['amount_refunded'] = 0;
         $row['item_sku'] = $row['sku'];
         $row['provider_order_id'] = null;
         $row['device_id'] = null;
-        $row['request_id'] = null;
+        $row['request_id'] = array_key_exists('request_id', $row)
+            ? $this->normalizeRequestId($row['request_id'])
+            : $this->normalizeRequestId($requestId);
         $row['created_ip'] = null;
         $row['fulfilled_at'] = null;
         $row['refunded_at'] = null;
@@ -481,6 +485,16 @@ class OrderManager
         $row['refund_reason'] = null;
 
         return $row;
+    }
+
+    private function normalizeRequestId(mixed $value): ?string
+    {
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
+            return null;
+        }
+
+        return substr($normalized, 0, 128);
     }
 
     private function allowedProviders(): array

@@ -19,7 +19,8 @@ class WebhookPrecheckService
         bool $signatureOk,
         array $payloadMeta,
         string $rawPayloadSha256,
-        int $rawPayloadBytes
+        int $rawPayloadBytes,
+        ?string $requestId = null
     ): array {
         $provider = strtolower(trim($provider));
         if ($provider === 'stub' && ! $this->core->isStubEnabled()) {
@@ -49,6 +50,10 @@ class WebhookPrecheckService
         );
         $payloadSummaryJson = $this->core->encodePayloadSummary($payloadSummary);
         $payloadExcerpt = $this->core->buildPayloadExcerpt($payloadSummaryJson);
+        $normalizedRequestId = trim((string) $requestId);
+        if ($normalizedRequestId !== '') {
+            $normalizedRequestId = substr($normalizedRequestId, 0, 128);
+        }
 
         return [
             'provider' => $provider,
@@ -65,6 +70,7 @@ class WebhookPrecheckService
             'resolved_payload_meta' => $resolvedPayloadMeta,
             'payload_summary_json' => $payloadSummaryJson,
             'payload_excerpt' => $payloadExcerpt,
+            'request_id' => $normalizedRequestId !== '' ? $normalizedRequestId : null,
         ];
     }
 }

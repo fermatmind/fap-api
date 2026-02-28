@@ -129,7 +129,10 @@ final class EventRecorder
 
     private function contextFromRequest(Request $request): array
     {
-        $requestId = trim((string) ($request->header('X-Request-Id') ?? $request->header('X-Request-ID')));
+        $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+        if ($requestId === '') {
+            $requestId = trim((string) ($request->header('X-Request-Id') ?? $request->header('X-Request-ID')));
+        }
         $sessionId = trim((string) ($request->header('X-Session-Id') ?? $request->header('X-Session-ID')));
         $channel = trim((string) $request->header('X-Channel', ''));
         $attemptId = (string) $request->input('attempt_id', '');

@@ -34,6 +34,7 @@ class WebhookEntitlementService
         $lockTtl = (int) $ctx['lock_ttl'];
         $lockBlock = (int) $ctx['lock_block'];
         $contentionBudgetMs = (int) $ctx['contention_budget_ms'];
+        $requestId = $this->normalizeRequestId($ctx['request_id'] ?? null);
 
         $postCommitCtx = is_array($ctx['post_commit_ctx'] ?? null)
             ? $ctx['post_commit_ctx']
@@ -58,6 +59,7 @@ class WebhookEntitlementService
             $payloadExcerpt,
             $resolvedPayloadMeta,
             $signatureOk,
+            $requestId,
             &$ctx,
             &$postCommitCtx
         ) {
@@ -78,6 +80,7 @@ class WebhookEntitlementService
                 $payloadExcerpt,
                 $resolvedPayloadMeta,
                 $signatureOk,
+                $requestId,
                 $lockBlock,
                 $contentionBudgetMs,
                 $lockKey,
@@ -110,6 +113,7 @@ class WebhookEntitlementService
                     $payloadExcerpt,
                     $resolvedPayloadMeta,
                     $signatureOk,
+                    $requestId,
                     &$postCommitCtx
                 ) {
                     $insertSeed = [
@@ -133,6 +137,7 @@ class WebhookEntitlementService
                         'payload_sha256' => $resolvedPayloadMeta['sha256'],
                         'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
                         'payload_excerpt' => $payloadExcerpt,
+                        'request_id' => $requestId,
                         'received_at' => $receivedAt,
                         'created_at' => $receivedAt,
                         'updated_at' => $receivedAt,
@@ -187,6 +192,7 @@ class WebhookEntitlementService
                         'payload_sha256' => $resolvedPayloadMeta['sha256'],
                         'payload_s3_key' => $resolvedPayloadMeta['s3_key'],
                         'payload_excerpt' => $payloadExcerpt,
+                        'request_id' => $requestId,
                         'received_at' => $receivedAt,
                         'updated_at' => $receivedAt,
                     ];
@@ -569,5 +575,15 @@ class WebhookEntitlementService
         $ctx['post_commit_ctx'] = $postCommitCtx;
 
         return $ctx;
+    }
+
+    private function normalizeRequestId(mixed $value): ?string
+    {
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
+            return null;
+        }
+
+        return substr($normalized, 0, 128);
     }
 }

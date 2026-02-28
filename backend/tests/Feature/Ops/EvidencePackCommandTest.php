@@ -83,12 +83,14 @@ final class EvidencePackCommandTest extends TestCase
         $healthzPath = $packDir.'/healthz_snapshot.json';
         $queuePath = $packDir.'/queue_backlog_probe.json';
         $slowPath = $packDir.'/slow_query_telemetry.json';
+        $apiSloPath = $packDir.'/api_slo.json';
 
         $this->assertFileExists($manifestPath);
         $this->assertFileExists($revisionPath);
         $this->assertFileExists($healthzPath);
         $this->assertFileExists($queuePath);
         $this->assertFileExists($slowPath);
+        $this->assertFileExists($apiSloPath);
 
         $manifest = json_decode((string) file_get_contents($manifestPath), true);
         $this->assertIsArray($manifest);
@@ -114,6 +116,13 @@ final class EvidencePackCommandTest extends TestCase
         $this->assertIsArray($slowPayload);
         $this->assertGreaterThanOrEqual(1, (int) ($slowPayload['window_total'] ?? 0));
         $this->assertSame(1, (int) (($slowPayload['by_route']['api/v0.3/attempts/submit'] ?? 0)));
+
+        $apiSloPayload = json_decode((string) file_get_contents($apiSloPath), true);
+        $this->assertIsArray($apiSloPayload);
+        $this->assertSame('UNKNOWN', (string) ($apiSloPayload['status'] ?? ''));
+        $this->assertSame('UNKNOWN', (string) data_get($apiSloPayload, 'metrics.p95_ms.status', ''));
+        $this->assertSame('UNKNOWN', (string) data_get($apiSloPayload, 'metrics.error_rate.status', ''));
+        $this->assertIsArray($apiSloPayload['request_id_coverage'] ?? null);
     }
 
     private function useDatabaseQueueDriver(): void
