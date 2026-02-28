@@ -1,3 +1,8 @@
+## 🚀 Latest Stable Release
+
+Enterprise Phase 1 Complete  
+Tag: v0.3.1-fer2-wave-complete
+
 > Status: Active
 > Last Updated: 2026-02-18
 > Scope: Laravel API runtime + content packages + docs aligned to code truth
