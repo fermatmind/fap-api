@@ -147,6 +147,9 @@ return [
             'timeout_ms' => (int) env('PII_EXTERNAL_KMS_TIMEOUT_MS', 800),
             'dry_run' => (bool) env('PII_EXTERNAL_KMS_DRY_RUN', false),
             'fallback_to_local' => (bool) env('PII_EXTERNAL_KMS_FALLBACK_TO_LOCAL', false),
+            'max_retries' => (int) env('PII_EXTERNAL_KMS_MAX_RETRIES', 2),
+            'retry_backoff_ms' => (int) env('PII_EXTERNAL_KMS_RETRY_BACKOFF_MS', 50),
+            // allowed values: none|timeout|retryable|non_retryable|timeout_once|retryable_once
             'simulate' => env('PII_EXTERNAL_KMS_SIMULATE', 'none'),
         ],
     ],
