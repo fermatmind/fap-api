@@ -1144,14 +1144,14 @@ php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_
 php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/Architecture/V0_3TraitReferenceTest.php
 echo "[CI] webhook/attempt regression gates OK"
 
-QUEUE_BACKLOG_PROBE_STRICT="${QUEUE_BACKLOG_PROBE_STRICT:-0}"
+QUEUE_BACKLOG_PROBE_STRICT="${QUEUE_BACKLOG_PROBE_STRICT:-1}"
 if [[ "$QUEUE_BACKLOG_PROBE_STRICT" == "1" ]]; then
   echo "[CI] queue backlog probe (blocking strict=1)"
-  php artisan ops:queue-backlog-probe --json=1 --strict=1 >"$QUEUE_BACKLOG_PROBE_LOG" 2>"$QUEUE_BACKLOG_PROBE_ERR_LOG"
+  php artisan ops:queue-backlog-probe --json=1 --strict="$QUEUE_BACKLOG_PROBE_STRICT" >"$QUEUE_BACKLOG_PROBE_LOG" 2>"$QUEUE_BACKLOG_PROBE_ERR_LOG"
   echo "[CI] queue backlog probe artifact=$QUEUE_BACKLOG_PROBE_LOG"
 else
   echo "[CI] queue backlog probe (non-blocking strict=0)"
-  if php artisan ops:queue-backlog-probe --json=1 --strict=0 >"$QUEUE_BACKLOG_PROBE_LOG" 2>"$QUEUE_BACKLOG_PROBE_ERR_LOG"; then
+  if php artisan ops:queue-backlog-probe --json=1 --strict="$QUEUE_BACKLOG_PROBE_STRICT" >"$QUEUE_BACKLOG_PROBE_LOG" 2>"$QUEUE_BACKLOG_PROBE_ERR_LOG"; then
     echo "[CI] queue backlog probe artifact=$QUEUE_BACKLOG_PROBE_LOG"
   else
     echo "[CI][WARN] queue backlog probe failed (non-blocking), see $QUEUE_BACKLOG_PROBE_ERR_LOG"

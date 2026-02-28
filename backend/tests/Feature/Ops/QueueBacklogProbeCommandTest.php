@@ -7,6 +7,7 @@ namespace Tests\Feature\Ops;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -172,6 +173,83 @@ final class QueueBacklogProbeCommandTest extends TestCase
         $first = is_array($violations[0] ?? null) ? $violations[0] : [];
         $this->assertSame('attempts', (string) ($first['queue'] ?? ''));
         $this->assertSame('pending', (string) ($first['metric'] ?? ''));
+    }
+
+    public function test_strict_override_zero_disables_blocking_even_when_default_is_strict(): void
+    {
+        $this->useDatabaseQueueDriver();
+        config()->set('ops.queue_backlog_probe.strict_default', true);
+
+        $nowTs = now()->timestamp;
+        DB::table('jobs')->insert([
+            'queue' => 'attempts',
+            'payload' => '{"job":"attempt.submit"}',
+            'attempts' => 1,
+            'reserved_at' => null,
+            'available_at' => $nowTs - 60,
+            'created_at' => $nowTs - 60,
+        ]);
+
+        $exitCode = Artisan::call('ops:queue-backlog-probe', [
+            '--json' => 1,
+            '--strict' => 0,
+            '--queues' => 'attempts',
+            '--max-pending' => 0,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+        $this->assertIsArray($payload);
+        $this->assertFalse((bool) ($payload['slo']['strict'] ?? true));
+        $this->assertFalse((bool) ($payload['pass'] ?? true));
+    }
+
+    public function test_logs_structured_warning_when_slo_breach_happens(): void
+    {
+        $this->useDatabaseQueueDriver();
+        Log::spy();
+
+        $nowTs = now()->timestamp;
+        DB::table('jobs')->insert([
+            'queue' => 'attempts',
+            'payload' => '{"job":"attempt.submit"}',
+            'attempts' => 1,
+            'reserved_at' => null,
+            'available_at' => $nowTs - 45,
+            'created_at' => $nowTs - 45,
+        ]);
+
+        $exitCode = Artisan::call('ops:queue-backlog-probe', [
+            '--json' => 1,
+            '--strict' => 0,
+            '--queues' => 'attempts',
+            '--max-pending' => 0,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+
+        Log::shouldHaveReceived('warning')
+            ->atLeast()
+            ->once()
+            ->withArgs(function (string $message, array $context): bool {
+                if ($message !== 'QUEUE_BACKLOG_SLO_BREACH') {
+                    return false;
+                }
+
+                foreach (['strict', 'pass', 'violations', 'queues', 'thresholds', 'window_minutes', 'queue_driver'] as $key) {
+                    if (! array_key_exists($key, $context)) {
+                        return false;
+                    }
+                }
+
+                return $context['strict'] === false
+                    && $context['pass'] === false
+                    && is_array($context['violations'])
+                    && $context['violations'] !== []
+                    && is_array($context['queues'])
+                    && is_array($context['thresholds']);
+            });
     }
 
     public function test_command_uses_default_three_queues_and_config_driven_strict_mode(): void
