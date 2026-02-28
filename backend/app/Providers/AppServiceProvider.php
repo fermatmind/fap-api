@@ -315,13 +315,46 @@ class AppServiceProvider extends ServiceProvider
 
         $this->registerSlowQueryTelemetry();
 
-        $response = function (string $code, string $message) {
-            return function (Request $request, array $headers) use ($code, $message) {
+        $resolveRequestId = function (Request $request): string {
+            $requestId = trim((string) ($request->attributes->get('request_id') ?? ''));
+            if ($requestId !== '') {
+                return $requestId;
+            }
+
+            $requestId = trim((string) $request->header('X-Request-Id', ''));
+            if ($requestId !== '') {
+                return $requestId;
+            }
+
+            $requestId = trim((string) $request->header('X-Request-ID', ''));
+            if ($requestId !== '') {
+                return $requestId;
+            }
+
+            return (string) \Illuminate\Support\Str::uuid();
+        };
+
+        $scopedRateKey = function (Request $request, string $scope): string {
+            $ip = (string) ($request->ip() ?? 'unknown');
+            $orgId = (int) ($request->attributes->get('org_id', $request->attributes->get('fm_org_id', 0)) ?? 0);
+            $route = (string) (($request->route()?->uri()) ?? $request->path());
+
+            return implode('|', [
+                $scope,
+                'ip:'.$ip,
+                'org:'.max(0, $orgId),
+                'route:'.$route,
+            ]);
+        };
+
+        $response = function (string $code, string $message) use ($resolveRequestId) {
+            return function (Request $request, array $headers) use ($code, $message, $resolveRequestId) {
                 return response()->json([
-                    'error' => [
-                        'code' => $code,
-                        'message' => $message,
-                    ],
+                    'ok' => false,
+                    'error_code' => $code,
+                    'message' => $message,
+                    'details' => null,
+                    'request_id' => $resolveRequestId($request),
                 ], 429)->withHeaders($headers);
             };
         };
@@ -353,7 +386,7 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_PUBLIC', 'Too many requests. Please retry later.'));
         });
 
-        RateLimiter::for('api_auth', function (Request $request) use ($response, $shouldBypassRateLimits) {
+        RateLimiter::for('api_auth', function (Request $request) use ($response, $shouldBypassRateLimits, $scopedRateKey) {
             if ($shouldBypassRateLimits()) {
                 return Limit::none();
             }
@@ -362,8 +395,34 @@ class AppServiceProvider extends ServiceProvider
             $limit = max(1, $limit);
 
             return Limit::perMinute($limit)
-                ->by('ip:'.$request->ip())
+                ->by($scopedRateKey($request, 'api_auth'))
                 ->response($response('RATE_LIMIT_AUTH', 'Too many auth requests. Please retry later.'));
+        });
+
+        RateLimiter::for('api_order_lookup', function (Request $request) use ($response, $shouldBypassRateLimits, $scopedRateKey) {
+            if ($shouldBypassRateLimits()) {
+                return Limit::none();
+            }
+
+            $limit = (int) config('fap.rate_limits.api_order_lookup_per_minute', 20);
+            $limit = max(1, $limit);
+
+            return Limit::perMinute($limit)
+                ->by($scopedRateKey($request, 'api_order_lookup'))
+                ->response($response('RATE_LIMIT_ORDER_LOOKUP', 'Too many order lookup requests. Please retry later.'));
+        });
+
+        RateLimiter::for('api_track', function (Request $request) use ($response, $shouldBypassRateLimits, $scopedRateKey) {
+            if ($shouldBypassRateLimits()) {
+                return Limit::none();
+            }
+
+            $limit = (int) config('fap.rate_limits.api_track_per_minute', 60);
+            $limit = max(1, $limit);
+
+            return Limit::perMinute($limit)
+                ->by($scopedRateKey($request, 'api_track'))
+                ->response($response('RATE_LIMIT_TRACK', 'Too many tracking requests. Please retry later.'));
         });
 
         RateLimiter::for('api_attempt_submit', function (Request $request) use ($response, $shouldBypassRateLimits) {
@@ -386,7 +445,7 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_ATTEMPT_SUBMIT', 'Too many attempt submissions. Please retry later.'));
         });
 
-        RateLimiter::for('api_webhook', function (Request $request) use ($response, $shouldBypassRateLimits) {
+        RateLimiter::for('api_webhook', function (Request $request) use ($response, $shouldBypassRateLimits, $scopedRateKey) {
             if ($shouldBypassRateLimits()) {
                 return Limit::none();
             }
@@ -399,7 +458,8 @@ class AppServiceProvider extends ServiceProvider
                 $provider = (string) $request->route('provider_code', '');
             }
 
-            $key = $provider !== '' ? ('provider:'.$provider) : ('ip:'.$request->ip());
+            $scope = 'api_webhook:'.($provider !== '' ? $provider : 'unknown');
+            $key = $scopedRateKey($request, $scope);
 
             return Limit::perMinute($limit)
                 ->by($key)

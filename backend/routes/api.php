@@ -163,7 +163,7 @@ Route::prefix('v0.3')->middleware([
         Route::post('/orders/checkout', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout')
             ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::post('/orders/lookup', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@lookup')
-            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
+            ->middleware([\App\Http\Middleware\FmTokenOptional::class, 'throttle:api_order_lookup']);
         Route::post('/orders/{order_no}/resend', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@resend')
             ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::post('/orders', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder')
@@ -192,7 +192,7 @@ Route::prefix('v0.3')->middleware([
             ->middleware([
                 \App\Http\Middleware\FmTokenOptional::class,
                 \App\Http\Middleware\LimitApiPublicPayloadSize::class,
-                'throttle:api_public',
+                'throttle:api_track',
             ])
             ->where('shareId', '[A-Za-z0-9_-]{6,128}');
     });
