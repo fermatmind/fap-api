@@ -84,8 +84,9 @@ final class PiiCipher
         config(['services.pii.key_version' => $version]);
         try {
             Cache::forever($this->activeKeyVersionCacheKey(), $version);
-        } catch (\Throwable) {
+        } catch (\Throwable $cacheError) {
             // Cache persistence is auxiliary; runtime config is the source of truth.
+            report($cacheError);
         }
     }
 
