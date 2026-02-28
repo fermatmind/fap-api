@@ -66,6 +66,8 @@ RUN_SCALE_IDENTITY_GATE="${RUN_SCALE_IDENTITY_GATE:-0}"
 RUN_SCALE_IDENTITY_CONTRACT="${RUN_SCALE_IDENTITY_CONTRACT:-0}"
 RUN_PARTNER_API_SMOKE="${RUN_PARTNER_API_SMOKE:-1}"
 RUN_EXPERIMENT_GOVERNANCE_GATE="${RUN_EXPERIMENT_GOVERNANCE_GATE:-0}"
+RUN_OPENAPI_DIFF_GATE="${RUN_OPENAPI_DIFF_GATE:-1}"
+OPENAPI_DIFF_ALLOW_DRIFT="${OPENAPI_DIFF_ALLOW_DRIFT:-0}"
 if [[ "$RUN_FULL_SCALE_REGRESSION" == "1" && "$RUN_SCALE_IDENTITY_CONTRACT" != "1" ]]; then
   RUN_SCALE_IDENTITY_CONTRACT="1"
 fi
@@ -102,7 +104,7 @@ restore_hard_cutover_env() {
   if [[ "$PREV_FAP_CONTENT_PUBLISH_MODE" == "__UNSET__" ]]; then unset FAP_CONTENT_PUBLISH_MODE; else export FAP_CONTENT_PUBLISH_MODE="$PREV_FAP_CONTENT_PUBLISH_MODE"; fi
 }
 SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
-echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER} run_partner_api_smoke=${RUN_PARTNER_API_SMOKE} run_experiment_governance_gate=${RUN_EXPERIMENT_GOVERNANCE_GATE}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER} run_partner_api_smoke=${RUN_PARTNER_API_SMOKE} run_experiment_governance_gate=${RUN_EXPERIMENT_GOVERNANCE_GATE} run_openapi_diff_gate=${RUN_OPENAPI_DIFF_GATE} openapi_diff_allow_drift=${OPENAPI_DIFF_ALLOW_DRIFT}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
@@ -1086,6 +1088,26 @@ echo "[CI] migration safety gates OK"
 echo "[CI] auth guest contract gate"
 bash scripts/verify_auth_guest_contract.sh
 echo "[CI] auth guest contract gate OK"
+
+if [[ "$RUN_OPENAPI_DIFF_GATE" == "1" ]]; then
+  echo "[CI] openapi diff gate"
+
+  if [[ "$OPENAPI_DIFF_ALLOW_DRIFT" == "1" ]]; then
+    if bash scripts/export_openapi.sh --check; then
+      echo "[CI] openapi diff snapshot check OK (override mode)"
+    else
+      echo "[CI][WARN] openapi drift detected but OPENAPI_DIFF_ALLOW_DRIFT=1 (non-blocking)"
+    fi
+    OPENAPI_DIFF_ALLOW_DRIFT=1 php artisan test --filter OpenApiDiffTest
+  else
+    bash scripts/export_openapi.sh --check
+    OPENAPI_DIFF_ALLOW_DRIFT=0 php artisan test --filter OpenApiDiffTest
+  fi
+
+  echo "[CI] openapi diff gate OK"
+else
+  echo "[CI] openapi diff gate skipped (RUN_OPENAPI_DIFF_GATE=0)"
+fi
 
 echo "[CI] order security gate"
 bash scripts/verify_order_security.sh

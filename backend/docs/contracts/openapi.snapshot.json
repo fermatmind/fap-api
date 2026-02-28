@@ -1,0 +1,1668 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "fap-api route contract snapshot",
+        "version": "route-list-v1"
+    },
+    "paths": {
+        "/api/healthz": {
+            "get": {
+                "operationId": "healthz",
+                "tags": [
+                    "api:root"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\HealthzController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\HealthzAccessControl",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ],
+                "x-laravel-name": "healthz"
+            }
+        },
+        "/api/user": {
+            "get": {
+                "operationId": "get_api_user",
+                "tags": [
+                    "api:root"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "Closure",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Auth\\Middleware\\Authenticate:sanctum"
+                ]
+            }
+        },
+        "/api/v0.2/{any?}": {
+            "delete": {
+                "operationId": "delete_api_v0_2_any_",
+                "tags": [
+                    "api:v0.2"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "Closure",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            },
+            "get": {
+                "operationId": "get_api_v0_2_any_",
+                "tags": [
+                    "api:v0.2"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "Closure",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            },
+            "options": {
+                "operationId": "options_api_v0_2_any_",
+                "tags": [
+                    "api:v0.2"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "Closure",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            },
+            "patch": {
+                "operationId": "patch_api_v0_2_any_",
+                "tags": [
+                    "api:v0.2"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "Closure",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            },
+            "post": {
+                "operationId": "post_api_v0_2_any_",
+                "tags": [
+                    "api:v0.2"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "Closure",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            },
+            "put": {
+                "operationId": "put_api_v0_2_any_",
+                "tags": [
+                    "api:v0.2"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "Closure",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            }
+        },
+        "/api/v0.3/attempts/start": {
+            "post": {
+                "operationId": "post_api_v0_3_attempts_start",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptWriteController@start",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit"
+                ]
+            }
+        },
+        "/api/v0.3/attempts/submit": {
+            "post": {
+                "operationId": "post_api_v0_3_attempts_submit",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptWriteController@submit",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/attempts/{attempt_id}/progress": {
+            "get": {
+                "operationId": "get_api_v0_3_attempts_attempt_id_progress",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptProgressController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
+                ]
+            },
+            "put": {
+                "operationId": "put_api_v0_3_attempts_attempt_id_progress",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptProgressController@upsert",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
+                ]
+            }
+        },
+        "/api/v0.3/attempts/{attempt_id}/submission": {
+            "get": {
+                "operationId": "api.v0_3.attempts.submission",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@submission",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.submission"
+            }
+        },
+        "/api/v0.3/attempts/{id}": {
+            "get": {
+                "operationId": "api.v0_3.attempts.show",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.show"
+            }
+        },
+        "/api/v0.3/attempts/{id}/report": {
+            "get": {
+                "operationId": "api.v0_3.attempts.report",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@report",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.report"
+            }
+        },
+        "/api/v0.3/attempts/{id}/report.pdf": {
+            "get": {
+                "operationId": "api.v0_3.attempts.report_pdf",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@reportPdf",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.report_pdf"
+            }
+        },
+        "/api/v0.3/attempts/{id}/result": {
+            "get": {
+                "operationId": "api.v0_3.attempts.result",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@result",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.result"
+            }
+        },
+        "/api/v0.3/attempts/{id}/share": {
+            "get": {
+                "operationId": "get_api_v0_3_attempts_id_share",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ShareController@getShare",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/auth/guest": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_guest",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AuthGuestController",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth",
+                    "App\\Http\\Middleware\\ResolveAnonId"
+                ]
+            }
+        },
+        "/api/v0.3/auth/phone/send_code": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_phone_send_code",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AuthPhoneController@sendCode",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/auth/phone/verify": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_phone_verify",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AuthPhoneController@verify",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/auth/wx_phone": {
+            "post": {
+                "operationId": "post_api_v0_3_auth_wx_phone",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AuthWxPhoneController",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/boot": {
+            "get": {
+                "operationId": "get_api_v0_3_boot",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BootController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/claim/report": {
+            "get": {
+                "operationId": "get_api_v0_3_claim_report",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ClaimController@report",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            }
+        },
+        "/api/v0.3/compliance/dsar/requests": {
+            "post": {
+                "operationId": "post_api_v0_3_compliance_dsar_requests",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ComplianceDsarController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/compliance/dsar/requests/{id}": {
+            "get": {
+                "operationId": "get_api_v0_3_compliance_dsar_requests_id_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ComplianceDsarController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/compliance/dsar/requests/{id}/execute": {
+            "post": {
+                "operationId": "post_api_v0_3_compliance_dsar_requests_id_execute",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ComplianceDsarController@execute",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/experiments": {
+            "get": {
+                "operationId": "get_api_v0_3_experiments",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BootController@experiments",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/flags": {
+            "get": {
+                "operationId": "get_api_v0_3_flags",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BootController@flags",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/me/attempts": {
+            "get": {
+                "operationId": "get_api_v0_3_me_attempts",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\MeController@attempts",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/orders": {
+            "post": {
+                "operationId": "post_api_v0_3_orders",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/orders/checkout": {
+            "post": {
+                "operationId": "post_api_v0_3_orders_checkout",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional"
+                ]
+            }
+        },
+        "/api/v0.3/orders/lookup": {
+            "post": {
+                "operationId": "post_api_v0_3_orders_lookup",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@lookup",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional"
+                ]
+            }
+        },
+        "/api/v0.3/orders/stub": {
+            "post": {
+                "operationId": "post_api_v0_3_orders_stub",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "Closure",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/orders/{order_no}": {
+            "get": {
+                "operationId": "get_api_v0_3_orders_order_no_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional"
+                ]
+            }
+        },
+        "/api/v0.3/orders/{order_no}/pay/alipay": {
+            "get": {
+                "operationId": "get_api_v0_3_orders_order_no_pay_alipay",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@launchAlipay",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional"
+                ]
+            }
+        },
+        "/api/v0.3/orders/{order_no}/resend": {
+            "post": {
+                "operationId": "post_api_v0_3_orders_order_no_resend",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@resend",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional"
+                ]
+            }
+        },
+        "/api/v0.3/orders/{provider}": {
+            "post": {
+                "operationId": "post_api_v0_3_orders_provider_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
+            }
+        },
+        "/api/v0.3/orgs": {
+            "post": {
+                "operationId": "post_api_v0_3_orgs",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\OrgsController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/invites/accept": {
+            "post": {
+                "operationId": "post_api_v0_3_orgs_invites_accept",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\OrgInvitesController@accept",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/me": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_me",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\OrgsController@me",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/audits": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_org_id_big5_audits",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@audits",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/audits/{audit_id}": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_org_id_big5_audits_audit_id_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@audit",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/norms/activate": {
+            "post": {
+                "operationId": "post_api_v0_3_orgs_org_id_big5_norms_activate",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@activateNorms",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/norms/drift-check": {
+            "post": {
+                "operationId": "post_api_v0_3_orgs_org_id_big5_norms_drift_check",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@driftCheckNorms",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/norms/rebuild": {
+            "post": {
+                "operationId": "post_api_v0_3_orgs_org_id_big5_norms_rebuild",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@rebuildNorms",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/releases": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_org_id_big5_releases",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@releases",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/releases/latest": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_org_id_big5_releases_latest",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@latest",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/releases/latest/audits": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_org_id_big5_releases_latest_audits",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@latestAudits",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/releases/publish": {
+            "post": {
+                "operationId": "post_api_v0_3_orgs_org_id_big5_releases_publish",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@publish",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/releases/rollback": {
+            "post": {
+                "operationId": "post_api_v0_3_orgs_org_id_big5_releases_rollback",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@rollback",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/big5/releases/{release_id}": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_org_id_big5_releases_release_id_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\BigFiveOpsController@release",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/invites": {
+            "post": {
+                "operationId": "post_api_v0_3_orgs_org_id_invites",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\OrgInvitesController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/wallets": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_org_id_wallets",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@wallets",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/orgs/{org_id}/wallets/{benefit_code}/ledger": {
+            "get": {
+                "operationId": "get_api_v0_3_orgs_org_id_wallets_benefit_code_ledger",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@ledger",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/scales": {
+            "get": {
+                "operationId": "get_api_v0_3_scales",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ScalesController@index",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/scales/lookup": {
+            "get": {
+                "operationId": "get_api_v0_3_scales_lookup",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ScalesLookupController@lookup",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/scales/sitemap-source": {
+            "get": {
+                "operationId": "get_api_v0_3_scales_sitemap_source",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ScalesSitemapSourceController@index",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/scales/{scale_code}": {
+            "get": {
+                "operationId": "get_api_v0_3_scales_scale_code_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ScalesController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/scales/{scale_code}/questions": {
+            "get": {
+                "operationId": "get_api_v0_3_scales_scale_code_questions",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ScalesController@questions",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/shares/{id}": {
+            "get": {
+                "operationId": "get_api_v0_3_shares_id_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ShareController@getShareView",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/shares/{shareId}/click": {
+            "post": {
+                "operationId": "post_api_v0_3_shares_shareid_click",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ShareController@click",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional",
+                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize"
+                ]
+            }
+        },
+        "/api/v0.3/skus": {
+            "get": {
+                "operationId": "api.v0_3.skus",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ],
+                "x-laravel-name": "api.v0_3.skus"
+            }
+        },
+        "/api/v0.3/webhooks/payment/{provider}": {
+            "post": {
+                "operationId": "api.v0_3.webhooks.payment",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\Webhooks\\PaymentWebhookController@handle",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\LimitWebhookPayloadSize",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_webhook"
+                ],
+                "x-laravel-name": "api.v0_3.webhooks.payment"
+            }
+        },
+        "/api/v0.4/boot": {
+            "get": {
+                "operationId": "get_api_v0_4_boot",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\BootController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/assessments": {
+            "post": {
+                "operationId": "post_api_v0_4_orgs_org_id_assessments",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\AssessmentController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/assessments/{id}/invite": {
+            "post": {
+                "operationId": "post_api_v0_4_orgs_org_id_assessments_id_invite",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\AssessmentController@invite",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/assessments/{id}/progress": {
+            "get": {
+                "operationId": "get_api_v0_4_orgs_org_id_assessments_id_progress",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\AssessmentController@progress",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/assessments/{id}/summary": {
+            "get": {
+                "operationId": "get_api_v0_4_orgs_org_id_assessments_id_summary",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\AssessmentController@summary",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/compliance/rotation/audits": {
+            "get": {
+                "operationId": "get_api_v0_4_orgs_org_id_compliance_rotation_audits",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\RotationAuditController@index",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/compliance/rotation/audits/{id}": {
+            "get": {
+                "operationId": "get_api_v0_4_orgs_org_id_compliance_rotation_audits_id_",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\RotationAuditController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/experiments/rollouts/{rollout_id}/approve": {
+            "post": {
+                "operationId": "post_api_v0_4_orgs_org_id_experiments_rollouts_rollout_id_approve",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\ExperimentGovernanceController@approve",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:rollout_id"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/experiments/rollouts/{rollout_id}/guardrails": {
+            "put": {
+                "operationId": "put_api_v0_4_orgs_org_id_experiments_rollouts_rollout_id_guardrails",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\ExperimentGovernanceController@upsertGuardrail",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:rollout_id"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/experiments/rollouts/{rollout_id}/guardrails/evaluate": {
+            "post": {
+                "operationId": "post_api_v0_4_orgs_org_id_experiments_rollouts_rollout_id_guardrails_evaluate",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\ExperimentGovernanceController@evaluateGuardrails",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:rollout_id"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/experiments/rollouts/{rollout_id}/pause": {
+            "post": {
+                "operationId": "post_api_v0_4_orgs_org_id_experiments_rollouts_rollout_id_pause",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\ExperimentGovernanceController@pause",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:rollout_id"
+                ]
+            }
+        },
+        "/api/v0.4/orgs/{org_id}/experiments/rollouts/{rollout_id}/rollback": {
+            "post": {
+                "operationId": "post_api_v0_4_orgs_org_id_experiments_rollouts_rollout_id_rollback",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\ExperimentGovernanceController@rollback",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\RequireOrgRole:owner,admin",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:rollout_id"
+                ]
+            }
+        },
+        "/api/v0.4/partners/sessions": {
+            "post": {
+                "operationId": "post_api_v0_4_partners_sessions",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\PartnerController@createSession",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\PartnerApiKeyAuth"
+                ]
+            }
+        },
+        "/api/v0.4/partners/sessions/{attempt_id}/status": {
+            "get": {
+                "operationId": "get_api_v0_4_partners_sessions_attempt_id_status",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\PartnerController@status",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\PartnerApiKeyAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
+                ]
+            }
+        },
+        "/api/v0.4/partners/webhooks/sign": {
+            "post": {
+                "operationId": "post_api_v0_4_partners_webhooks_sign",
+                "tags": [
+                    "api:v0.4"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_4\\PartnerController@signWebhook",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\PartnerApiKeyAuth"
+                ]
+            }
+        }
+    }
+}
