@@ -153,6 +153,58 @@ final class PaymentWebhookProcessorContractTest extends TestCase
         $this->assertSame(0, DB::table('benefit_grants')->count());
     }
 
+    public function test_semantic_reject_keeps_http_200_and_reject_reason_contract(): void
+    {
+        (new Pr19CommerceSeeder())->run();
+
+        $orderNo = 'ord_contract_semantic_reject_1';
+        DB::table('orders')->insert([
+            'id' => (string) Str::uuid(),
+            'order_no' => $orderNo,
+            'org_id' => 0,
+            'user_id' => null,
+            'anon_id' => null,
+            'sku' => 'MBTI_CREDIT',
+            'quantity' => 1,
+            'target_attempt_id' => null,
+            'amount_cents' => 4990,
+            'currency' => 'USD',
+            'status' => 'created',
+            'provider' => 'billing',
+            'external_trade_no' => null,
+            'paid_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'amount_total' => 4990,
+            'amount_refunded' => 0,
+            'item_sku' => 'MBTI_CREDIT',
+            'provider_order_id' => null,
+            'device_id' => null,
+            'request_id' => null,
+            'created_ip' => null,
+            'fulfilled_at' => null,
+            'refunded_at' => null,
+        ]);
+
+        $res = $this->postSignedBillingWebhook([
+            'provider_event_id' => 'evt_contract_semantic_reject_1',
+            'order_no' => $orderNo,
+            'amount_cents' => 1,
+            'currency' => 'USD',
+            'event_type' => 'payment_succeeded',
+        ], ['X-Org-Id' => '0']);
+
+        $res->assertStatus(200)->assertJson([
+            'ok' => false,
+            'error_code' => 'AMOUNT_MISMATCH',
+            'rejected' => true,
+            'reject_reason' => 'AMOUNT_MISMATCH',
+        ]);
+
+        $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
+        $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $orderNo)->count());
+    }
+
     public function test_amount_and_currency_mismatch_are_rejected_with_stable_contract(): void
     {
         (new Pr19CommerceSeeder())->run();
