@@ -99,6 +99,23 @@ final class ExperimentGuardrailsEvaluate extends Command
                 count($results),
                 $rolledBackCount
             ));
+
+            foreach ($results as $index => $result) {
+                $rollout = is_array($result['rollout'] ?? null) ? $result['rollout'] : [];
+                $funnel = is_array($result['funnel'] ?? null) ? $result['funnel'] : [];
+                $stageCounts = is_array($funnel['stage_counts'] ?? null) ? $funnel['stage_counts'] : [];
+                $rolloutLabel = trim((string) ($rollout['id'] ?? '')) ?: 'rollout_'.($index + 1);
+
+                $this->line(sprintf(
+                    '%s start_test=%d submit_attempt=%d checkout_start=%d payment_succeeded=%d report_ready=%d',
+                    $rolloutLabel,
+                    (int) ($stageCounts['start_test'] ?? 0),
+                    (int) ($stageCounts['submit_attempt'] ?? 0),
+                    (int) ($stageCounts['checkout_start'] ?? 0),
+                    (int) ($stageCounts['payment_succeeded'] ?? 0),
+                    (int) ($stageCounts['report_ready'] ?? 0)
+                ));
+            }
         }
 
         if ($this->isTruthy($this->option('strict')) && $rolledBackCount > 0) {
