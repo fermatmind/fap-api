@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class BackfillPiiEncryptionJob implements ShouldQueue
 {
@@ -28,11 +29,15 @@ class BackfillPiiEncryptionJob implements ShouldQueue
     public function __construct(
         public string $scope = 'all',
         public int $chunk = 1000,
-        public int $sleepMs = 50
+        public int $sleepMs = 50,
+        public ?int $rotateKeyVersion = null,
+        public ?string $batchRef = null
     ) {
         $this->scope = $this->normalizeScope($scope) ?? 'all';
         $this->chunk = max(100, $chunk);
         $this->sleepMs = max(0, $sleepMs);
+        $this->rotateKeyVersion = $this->normalizeTargetKeyVersion($rotateKeyVersion);
+        $this->batchRef = $this->normalizeBatchRef($batchRef);
     }
 
     public function handle(): void
@@ -55,20 +60,33 @@ class BackfillPiiEncryptionJob implements ShouldQueue
 
         try {
             $cipher = app(PiiCipher::class);
+            $targetKeyVersion = $this->normalizeTargetKeyVersion($this->rotateKeyVersion);
             $stats = [];
 
             if ($scope === 'all' || $scope === 'users') {
-                $stats['users'] = $this->backfillUsers($cipher);
+                $stats['users'] = $this->backfillUsers($cipher, $targetKeyVersion);
             }
 
             if ($scope === 'all' || $scope === 'email_outbox') {
-                $stats['email_outbox'] = $this->backfillEmailOutbox($cipher);
+                $stats['email_outbox'] = $this->backfillEmailOutbox($cipher, $targetKeyVersion);
+            }
+
+            if ($targetKeyVersion !== null) {
+                $cipher->activateKeyVersion($targetKeyVersion);
+                $affectedCount = $this->resolveRotationAffectedCount($stats);
+                $this->recordRotationAudit(
+                    $targetKeyVersion,
+                    $affectedCount > 0 ? 'ok' : 'noop',
+                    $scope,
+                    $stats
+                );
             }
 
             Log::info('[pii_encryption_backfill] done', [
                 'scope' => $scope,
                 'chunk' => $this->chunk,
                 'sleep_ms' => $this->sleepMs,
+                'rotate_key_version' => $targetKeyVersion,
                 'stats' => $stats,
                 'elapsed_ms' => (int) ((microtime(true) - $startedAt) * 1000),
             ]);
@@ -78,12 +96,12 @@ class BackfillPiiEncryptionJob implements ShouldQueue
     }
 
     /**
-     * @return array{scanned:int,updated:int,chunks:int,last_id:int}
+     * @return array{scanned:int,updated:int,chunks:int,last_id:int,affected_count:int}
      */
-    private function backfillUsers(PiiCipher $cipher): array
+    private function backfillUsers(PiiCipher $cipher, ?int $targetKeyVersion): array
     {
         if (! Schema::hasTable('users')) {
-            return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_id' => 0];
+            return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_id' => 0, 'affected_count' => 0];
         }
 
         $hasEmailHash = Schema::hasColumn('users', 'email_hash');
@@ -94,7 +112,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         $hasMigratedAt = Schema::hasColumn('users', 'pii_migrated_at');
 
         if (! $hasEmailHash && ! $hasEmailEnc && ! $hasPhoneHash && ! $hasPhoneEnc) {
-            return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_id' => 0];
+            return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_id' => 0, 'affected_count' => 0];
         }
 
         [$lastId] = $this->loadState('pii_backfill_users_v2');
@@ -103,6 +121,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         $scanned = 0;
         $updated = 0;
         $chunks = 0;
+        $affectedCount = 0;
 
         $select = ['id', 'email', 'phone_e164'];
         if ($hasEmailHash) {
@@ -148,6 +167,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                 $updates = [];
                 $email = trim((string) ($row->email ?? ''));
                 $phone = trim((string) ($row->phone_e164 ?? ''));
+                $rotatedThisRow = false;
 
                 if ($email !== '') {
                     if ($hasEmailHash && $this->isBlank($row->email_hash ?? null)) {
@@ -167,7 +187,37 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                     }
                 }
 
-                if ($hasKeyVersion && $this->isMissingKeyVersion($row->key_version ?? null)) {
+                if ($targetKeyVersion !== null && $hasKeyVersion && $this->isOlderKeyVersion($row->key_version ?? null, $targetKeyVersion)) {
+                    if ($hasEmailEnc) {
+                        $emailPlaintext = $this->resolvePlaintextForRotation(
+                            $email,
+                            $updates['email_enc'] ?? ($row->email_enc ?? null),
+                            $cipher
+                        );
+                        if ($emailPlaintext !== null) {
+                            $updates['email_enc'] = $cipher->encryptWithKeyVersion($emailPlaintext, $targetKeyVersion);
+                            $rotatedThisRow = true;
+                        }
+                    }
+
+                    if ($hasPhoneEnc) {
+                        $phonePlaintext = $this->resolvePlaintextForRotation(
+                            $phone,
+                            $updates['phone_e164_enc'] ?? ($row->phone_e164_enc ?? null),
+                            $cipher
+                        );
+                        if ($phonePlaintext !== null) {
+                            $updates['phone_e164_enc'] = $cipher->encryptWithKeyVersion($phonePlaintext, $targetKeyVersion);
+                            $rotatedThisRow = true;
+                        }
+                    }
+
+                    if ($rotatedThisRow) {
+                        $updates['key_version'] = $targetKeyVersion;
+                    }
+                }
+
+                if ($hasKeyVersion && $this->isMissingKeyVersion($row->key_version ?? null) && ! $rotatedThisRow) {
                     $hasAnyPii =
                         ($hasEmailHash && ! $this->isBlank($updates['email_hash'] ?? ($row->email_hash ?? null)))
                         || ($hasEmailEnc && ! $this->isBlank($updates['email_enc'] ?? ($row->email_enc ?? null)))
@@ -204,6 +254,9 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                     ->update($updates);
 
                 $updated++;
+                if ($rotatedThisRow) {
+                    $affectedCount++;
+                }
             }
 
             $chunks++;
@@ -216,16 +269,17 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             'updated' => $updated,
             'chunks' => $chunks,
             'last_id' => $nextId,
+            'affected_count' => $affectedCount,
         ];
     }
 
     /**
-     * @return array{scanned:int,updated:int,chunks:int,last_cursor:string}
+     * @return array{scanned:int,updated:int,chunks:int,last_cursor:string,affected_count:int}
      */
-    private function backfillEmailOutbox(PiiCipher $cipher): array
+    private function backfillEmailOutbox(PiiCipher $cipher, ?int $targetKeyVersion): array
     {
         if (! Schema::hasTable('email_outbox')) {
-            return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_cursor' => ''];
+            return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_cursor' => '', 'affected_count' => 0];
         }
 
         $hasEmailHash = Schema::hasColumn('email_outbox', 'email_hash');
@@ -239,7 +293,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         $hasPayloadJson = Schema::hasColumn('email_outbox', 'payload_json');
 
         if (! $hasEmailHash && ! $hasEmailEnc && ! $hasToEmailHash && ! $hasToEmailEnc && ! $hasPayloadEnc) {
-            return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_cursor' => ''];
+            return ['scanned' => 0, 'updated' => 0, 'chunks' => 0, 'last_cursor' => '', 'affected_count' => 0];
         }
 
         [, $lastCursor] = $this->loadState('pii_backfill_email_outbox_v2');
@@ -248,6 +302,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         $scanned = 0;
         $updated = 0;
         $chunks = 0;
+        $affectedCount = 0;
 
         $select = ['id', 'email'];
         if ($hasEmailHash) {
@@ -306,6 +361,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                 $updates = [];
                 $email = trim((string) ($row->email ?? ''));
                 $toEmail = $hasToEmail ? trim((string) ($row->to_email ?? '')) : '';
+                $rotatedThisRow = false;
 
                 if ($email !== '') {
                     if ($hasEmailHash && $this->isBlank($row->email_hash ?? null)) {
@@ -340,7 +396,52 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                     $updates['payload_schema_version'] = 'v1-json-enc';
                 }
 
-                if ($hasKeyVersion && $this->isMissingKeyVersion($row->key_version ?? null)) {
+                if ($targetKeyVersion !== null && $hasKeyVersion && $this->isOlderKeyVersion($row->key_version ?? null, $targetKeyVersion)) {
+                    if ($hasEmailEnc) {
+                        $emailPlaintext = $this->resolvePlaintextForRotation(
+                            $email,
+                            $updates['email_enc'] ?? ($row->email_enc ?? null),
+                            $cipher
+                        );
+                        if ($emailPlaintext !== null) {
+                            $updates['email_enc'] = $cipher->encryptWithKeyVersion($emailPlaintext, $targetKeyVersion);
+                            $rotatedThisRow = true;
+                        }
+                    }
+
+                    if ($hasToEmailEnc) {
+                        $toEmailPlaintext = $this->resolvePlaintextForRotation(
+                            $toEmail,
+                            $updates['to_email_enc'] ?? ($row->to_email_enc ?? null),
+                            $cipher
+                        );
+                        if ($toEmailPlaintext !== null) {
+                            $updates['to_email_enc'] = $cipher->encryptWithKeyVersion($toEmailPlaintext, $targetKeyVersion);
+                            $rotatedThisRow = true;
+                        }
+                    }
+
+                    if ($hasPayloadEnc) {
+                        $payloadPlaintext = $this->resolvePayloadPlaintextForRotation(
+                            $row->payload_json ?? null,
+                            $updates['payload_enc'] ?? ($row->payload_enc ?? null),
+                            $cipher
+                        );
+                        if ($payloadPlaintext !== null) {
+                            $updates['payload_enc'] = $cipher->encryptWithKeyVersion($payloadPlaintext, $targetKeyVersion);
+                            if ($hasPayloadVersion) {
+                                $updates['payload_schema_version'] = 'v1-json-enc';
+                            }
+                            $rotatedThisRow = true;
+                        }
+                    }
+
+                    if ($rotatedThisRow) {
+                        $updates['key_version'] = $targetKeyVersion;
+                    }
+                }
+
+                if ($hasKeyVersion && $this->isMissingKeyVersion($row->key_version ?? null) && ! $rotatedThisRow) {
                     $hasAnyPii =
                         ($hasEmailHash && ! $this->isBlank($updates['email_hash'] ?? ($row->email_hash ?? null)))
                         || ($hasEmailEnc && ! $this->isBlank($updates['email_enc'] ?? ($row->email_enc ?? null)))
@@ -364,6 +465,9 @@ class BackfillPiiEncryptionJob implements ShouldQueue
                     ->update($updates);
 
                 $updated++;
+                if ($rotatedThisRow) {
+                    $affectedCount++;
+                }
             }
 
             $chunks++;
@@ -376,6 +480,7 @@ class BackfillPiiEncryptionJob implements ShouldQueue
             'updated' => $updated,
             'chunks' => $chunks,
             'last_cursor' => $cursor,
+            'affected_count' => $affectedCount,
         ];
     }
 
@@ -438,6 +543,153 @@ class BackfillPiiEncryptionJob implements ShouldQueue
         }
 
         usleep($this->sleepMs * 1000);
+    }
+
+    /**
+     * @param  array<string,mixed>  $stats
+     */
+    private function resolveRotationAffectedCount(array $stats): int
+    {
+        $affected = 0;
+        foreach (['users', 'email_outbox'] as $scope) {
+            $section = is_array($stats[$scope] ?? null) ? $stats[$scope] : [];
+            $affected += (int) ($section['affected_count'] ?? 0);
+        }
+
+        return max(0, $affected);
+    }
+
+    /**
+     * @param  array<string,mixed>  $stats
+     */
+    private function recordRotationAudit(int $targetKeyVersion, string $result, string $scope, array $stats): void
+    {
+        if (! Schema::hasTable('rotation_audits')) {
+            return;
+        }
+
+        $now = now();
+        $meta = [
+            'scope' => $scope,
+            'chunk' => $this->chunk,
+            'sleep_ms' => $this->sleepMs,
+            'rotate_key_version' => $targetKeyVersion,
+            'affected_count' => $this->resolveRotationAffectedCount($stats),
+            'stats' => $stats,
+        ];
+        $metaJson = json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        if (! is_string($metaJson)) {
+            $metaJson = null;
+        }
+
+        $row = [
+            'id' => (string) Str::uuid(),
+        ];
+
+        if (Schema::hasColumn('rotation_audits', 'org_id')) {
+            $row['org_id'] = 0;
+        }
+        if (Schema::hasColumn('rotation_audits', 'actor')) {
+            $row['actor'] = 'ops:backfill-pii-encryption';
+        }
+        if (Schema::hasColumn('rotation_audits', 'actor_user_id')) {
+            $row['actor_user_id'] = null;
+        }
+        if (Schema::hasColumn('rotation_audits', 'scope')) {
+            $row['scope'] = 'pii';
+        }
+        if (Schema::hasColumn('rotation_audits', 'key_version')) {
+            $row['key_version'] = $targetKeyVersion;
+        }
+        if (Schema::hasColumn('rotation_audits', 'batch_ref')) {
+            $row['batch_ref'] = $this->batchRef;
+        }
+        if (Schema::hasColumn('rotation_audits', 'result')) {
+            $row['result'] = substr(trim($result), 0, 32) ?: 'ok';
+        }
+        if (Schema::hasColumn('rotation_audits', 'meta_json')) {
+            $row['meta_json'] = $metaJson;
+        }
+        if (Schema::hasColumn('rotation_audits', 'created_at')) {
+            $row['created_at'] = $now;
+        }
+        if (Schema::hasColumn('rotation_audits', 'updated_at')) {
+            $row['updated_at'] = $now;
+        }
+
+        DB::table('rotation_audits')->insert($row);
+    }
+
+    private function normalizeTargetKeyVersion(?int $version): ?int
+    {
+        if ($version === null) {
+            return null;
+        }
+
+        return $version > 0 ? $version : null;
+    }
+
+    private function normalizeBatchRef(?string $batchRef): ?string
+    {
+        $batchRef = trim((string) ($batchRef ?? ''));
+        if ($batchRef === '') {
+            return null;
+        }
+
+        return substr($batchRef, 0, 64);
+    }
+
+    private function isOlderKeyVersion(mixed $value, int $targetKeyVersion): bool
+    {
+        if ($targetKeyVersion <= 0) {
+            return false;
+        }
+
+        $current = (int) trim((string) ($value ?? ''));
+
+        return $current < $targetKeyVersion;
+    }
+
+    private function resolvePlaintextForRotation(string $plainCandidate, mixed $encryptedCandidate, PiiCipher $cipher): ?string
+    {
+        $plainCandidate = trim($plainCandidate);
+        if ($plainCandidate !== '') {
+            return $plainCandidate;
+        }
+
+        $encryptedCandidate = trim((string) ($encryptedCandidate ?? ''));
+        if ($encryptedCandidate === '') {
+            return null;
+        }
+
+        return $cipher->decrypt($encryptedCandidate);
+    }
+
+    private function resolvePayloadPlaintextForRotation(mixed $payloadJson, mixed $encryptedCandidate, PiiCipher $cipher): ?string
+    {
+        $payload = $this->normalizePayloadJson($payloadJson);
+        if ($payload !== null) {
+            return $payload;
+        }
+
+        $encryptedCandidate = trim((string) ($encryptedCandidate ?? ''));
+        if ($encryptedCandidate === '') {
+            return null;
+        }
+
+        $decrypted = $cipher->decrypt($encryptedCandidate);
+        if ($decrypted === null) {
+            return null;
+        }
+
+        $normalized = $this->normalizePayloadJson($decrypted);
+        if ($normalized !== null) {
+            return $normalized;
+        }
+
+        $decrypted = trim($decrypted);
+
+        return $decrypted !== '' ? $decrypted : null;
     }
 
     private function normalizeScope(string $scope): ?string

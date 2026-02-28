@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Contracts\Security\PiiEnvelopeAdapter;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 
 final class PiiCipher
@@ -48,15 +49,21 @@ final class PiiCipher
 
     public function encrypt(?string $value): ?string
     {
+        return $this->encryptWithKeyVersion($value, $this->currentKeyVersion());
+    }
+
+    public function encryptWithKeyVersion(?string $value, int $version): ?string
+    {
         $normalized = trim((string) $value);
         if ($normalized === '') {
             return null;
         }
 
+        $resolvedVersion = $version > 0 ? $version : $this->currentKeyVersion();
         $envelope = [
             'ciphertext' => $this->envelopeAdapter->encrypt($normalized),
             'key_id' => $this->currentKeyId(),
-            'key_version' => $this->currentKeyVersion(),
+            'key_version' => $resolvedVersion,
             'algo' => $this->currentAlgo(),
         ];
 
@@ -66,6 +73,20 @@ final class PiiCipher
         }
 
         return $encoded;
+    }
+
+    public function activateKeyVersion(int $version): void
+    {
+        if ($version <= 0) {
+            return;
+        }
+
+        config(['services.pii.key_version' => $version]);
+        try {
+            Cache::forever($this->activeKeyVersionCacheKey(), $version);
+        } catch (\Throwable) {
+            // Cache persistence is auxiliary; runtime config is the source of truth.
+        }
     }
 
     public function decrypt(?string $ciphertext): ?string
@@ -126,6 +147,13 @@ final class PiiCipher
         $algo = trim((string) config('services.pii.algo', self::DEFAULT_ALGO));
 
         return $algo !== '' ? $algo : self::DEFAULT_ALGO;
+    }
+
+    private function activeKeyVersionCacheKey(): string
+    {
+        $key = trim((string) config('services.pii.active_key_version_cache_key', 'pii:active_key_version'));
+
+        return $key !== '' ? $key : 'pii:active_key_version';
     }
 
     /**
