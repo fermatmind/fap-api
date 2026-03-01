@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce\Checkout;
 
+use Illuminate\Support\Facades\DB;
 use Yansongda\Pay\Pay;
+use function data_get;
+use function url;
 
 class WechatPayCheckoutService
 {
@@ -31,17 +34,26 @@ class WechatPayCheckoutService
             $notifyUrl = url('/api/v0.3/webhooks/payment/wechatpay');
         }
 
+        $outTradeNo = $this->resolveOutTradeNo($orderNo);
+        $this->persistExternalTradeNo($orderNo, $outTradeNo);
+
         Pay::config(config('pay'));
 
         $order = [
-            'out_trade_no' => $orderNo,
+            'out_trade_no' => $outTradeNo,
             'description' => $description,
             'amount' => [
                 'total' => $amountCents,
                 'currency' => strtoupper(trim($currency)) !== '' ? strtoupper(trim($currency)) : 'CNY',
             ],
             'notify_url' => $notifyUrl,
+            'attach' => $orderNo,
         ];
+
+        $appId = $this->resolveWechatAppId();
+        if ($appId !== '') {
+            $order['appid'] = $appId;
+        }
 
         try {
             if ($this->isMobileUserAgent($userAgent)) {
@@ -88,6 +100,85 @@ class WechatPayCheckoutService
                 'message' => 'wechat checkout failed.',
                 'details' => $e->getMessage(),
             ];
+        }
+    }
+
+    private function resolveWechatAppId(): string
+    {
+        $default = config('pay.wechat.default', []);
+
+        $mpAppId = trim((string) data_get($default, 'mp_app_id', ''));
+        if ($mpAppId !== '') {
+            return $mpAppId;
+        }
+
+        $appId = trim((string) data_get($default, 'app_id', ''));
+        if ($appId !== '') {
+            return $appId;
+        }
+
+        return trim((string) data_get($default, 'mini_app_id', ''));
+    }
+
+    private function resolveOutTradeNo(string $orderNo): string
+    {
+        $orderNo = trim($orderNo);
+
+        $persisted = $this->resolvePersistedExternalTradeNo($orderNo);
+        if ($persisted !== '') {
+            return $persisted;
+        }
+
+        if (preg_match('/^ord_([0-9a-fA-F]{8})-([0-9a-fA-F]{4})-([0-9a-fA-F]{4})-([0-9a-fA-F]{4})-([0-9a-fA-F]{12})$/', $orderNo, $m) === 1) {
+            return strtolower($m[1] . $m[2] . $m[3] . $m[4] . $m[5]);
+        }
+
+        return 'wx' . substr(hash('sha256', $orderNo), 0, 30);
+    }
+
+    private function resolvePersistedExternalTradeNo(string $orderNo): string
+    {
+        if ($orderNo === '') {
+            return '';
+        }
+
+        try {
+            $existing = trim((string) DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->value('external_trade_no'));
+
+            if ($existing !== '' && strlen($existing) <= 32) {
+                return $existing;
+            }
+        } catch (\Throwable) {
+            // ignore and continue fallback
+        }
+
+        return '';
+    }
+
+    private function persistExternalTradeNo(string $orderNo, string $outTradeNo): void
+    {
+        $orderNo = trim($orderNo);
+        $outTradeNo = trim($outTradeNo);
+
+        if ($orderNo === '' || $outTradeNo === '') {
+            return;
+        }
+
+        try {
+            DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where(function ($query): void {
+                    $query->whereNull('external_trade_no')
+                        ->orWhere('external_trade_no', '');
+                })
+                ->update([
+                    'external_trade_no' => $outTradeNo,
+                    'updated_at' => now(),
+                ]);
+        } catch (\Throwable) {
+            // ignore write failures; checkout should still proceed
         }
     }
 
