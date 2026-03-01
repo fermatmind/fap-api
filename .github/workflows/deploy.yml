@@ -231,7 +231,9 @@ jobs:
           DEPLOYER_NO_INTERACTION: "1"
         run: |
           set -euo pipefail
-          php /tmp/dep.phar deploy "$TARGET" -f deploy.php -vvv --no-interaction
+          php /tmp/dep.phar deploy "$TARGET" -f deploy.php \
+            -o release_name="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -vvv --no-interaction
 
       - name: Restart queue workers (Supervisor)
         shell: bash
