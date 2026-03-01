@@ -248,9 +248,13 @@ jobs:
         run: |
           set -euo pipefail
           echo "Healthcheck: $HEALTHCHECK_URL"
+          HEALTHCHECK_HOST="$(echo "$HEALTHCHECK_URL" | awk -F[/:] '{print $4}')"
           for i in 1 2 3 4 5 6 7 8 9 10; do
-            OUT="$(curl -fsS --max-time 10 "$HEALTHCHECK_URL" || true)"
-            echo "$OUT" | grep -q '"ok":true' && exit 0
+            if ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "curl -fsS --resolve '$HEALTHCHECK_HOST:443:127.0.0.1' 'https://$HEALTHCHECK_HOST/api/healthz' | jq -e '.ok==true'" >/dev/null; then
+              exit 0
+            fi
             sleep 3
           done
           echo "Healthcheck failed"
@@ -261,9 +265,11 @@ jobs:
         run: |
           set -euo pipefail
           echo "Auth guest contract: $AUTH_GUEST_CHECK_URL"
+          AUTH_HOST="$(echo "$AUTH_GUEST_CHECK_URL" | awk -F[/:] '{print $4}')"
           for i in 1 2 3 4 5; do
-            OUT="$(curl -fsS --max-time 10 -X POST "$AUTH_GUEST_CHECK_URL" -H 'Content-Type: application/json' --data '{"anon_id":"deploy_contract_probe"}' || true)"
-            if echo "$OUT" | php -r '$j = json_decode(stream_get_contents(STDIN), true); exit((is_array($j) && (($j["ok"] ?? false) === true) && (($j["anon_id"] ?? "") === "deploy_contract_probe")) ? 0 : 1);'; then
+            if ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null; then
               exit 0
             fi
             sleep 2
