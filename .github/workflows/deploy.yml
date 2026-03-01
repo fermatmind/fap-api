@@ -158,6 +158,14 @@ jobs:
           mkdir -p bootstrap/cache
           chmod -R ug+rwX storage bootstrap/cache || true
 
+      - name: Composer validate (strict)
+        working-directory: backend
+        run: composer validate --strict
+
+      - name: Composer audit
+        working-directory: backend
+        run: composer audit --no-interaction --ignore-unreachable
+
       - name: Install backend dependencies
         working-directory: backend
         run: |
