@@ -9,16 +9,23 @@ return [
             'mch_secret_key' => env('WECHAT_PAY_MCH_SECRET_KEY', ''),
             'mch_secret_cert' => env('WECHAT_PAY_MCH_SECRET_CERT', storage_path('app/cert/wechat/apiclient_key.pem')),
             'mch_public_cert_path' => env('WECHAT_PAY_MCH_PUBLIC_CERT', storage_path('app/cert/wechat/apiclient_cert.pem')),
-            'wechat_public_cert_path' => env(
-                'WECHAT_PAY_PLATFORM_CERT',
-                storage_path('app/cert/wechat/wechatpay_platform_cert.pem')
-            ),
+            'wechat_public_cert_path' => [
+                env('WECHAT_PAY_PLATFORM_PUB_KEY_ID', '') => env(
+                    'WECHAT_PAY_PLATFORM_CERT',
+                    storage_path('app/cert/wechat/wechatpay_platform_cert.pem')
+                ),
+            ],
             'app_id' => env('WECHAT_PAY_APP_ID', ''),
             'mp_app_id' => env('WECHAT_PAY_MP_APP_ID', ''),
             'mini_app_id' => env('WECHAT_PAY_MINI_APP_ID', ''),
             'notify_url' => env('WECHAT_PAY_NOTIFY_URL', ''),
             'return_url' => env('WECHAT_PAY_RETURN_URL', ''),
-            'mode' => env('WECHAT_PAY_MODE', 'normal'),
+            'mode' => (int) env('WECHAT_PAY_MODE', 0),
+            'http' => [
+                'base_uri' => env('WECHAT_PAY_BASE_URI', 'https://api.mch.weixin.qq.com'),
+                'timeout' => (float) env('WECHAT_PAY_HTTP_TIMEOUT', 5.0),
+                'connect_timeout' => (float) env('WECHAT_PAY_HTTP_CONNECT_TIMEOUT', 5.0),
+            ],
         ],
     ],
     'alipay' => [
