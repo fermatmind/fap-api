@@ -241,7 +241,7 @@ jobs:
           set -euo pipefail
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "cd '$DEPLOY_PATH/current' && php artisan queue:restart"
+            "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
 
       - name: Healthcheck (post deploy)
         shell: bash
