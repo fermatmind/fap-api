@@ -150,8 +150,8 @@ class WechatPayCheckoutService
             if ($existing !== '' && strlen($existing) <= 32) {
                 return $existing;
             }
-        } catch (\Throwable) {
-            // ignore and continue fallback
+        } catch (\Throwable $e) {
+            report($e);
         }
 
         return '';
@@ -177,8 +177,8 @@ class WechatPayCheckoutService
                     'external_trade_no' => $outTradeNo,
                     'updated_at' => now(),
                 ]);
-        } catch (\Throwable) {
-            // ignore write failures; checkout should still proceed
+        } catch (\Throwable $e) {
+            report($e);
         }
     }
 
