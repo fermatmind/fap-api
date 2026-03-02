@@ -8,6 +8,7 @@ use App\Support\CacheKeys;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 class ScaleRegistry
@@ -75,13 +76,10 @@ class ScaleRegistry
             return $cached;
         }
 
-        $rows = $this->registryQueryForOrg(0)
-            ->where('org_id', 0)
-            ->where('is_active', true)
-            ->where('is_public', true)
-            ->orderBy('code')
-            ->get()
-            ->toArray();
+        $rows = $this->listActivePublicFromLegacy();
+        if ($rows === []) {
+            $rows = $this->listActivePublicFromV2();
+        }
 
         Cache::put($cacheKey, $rows, self::CACHE_TTL_SECONDS);
 
@@ -221,16 +219,12 @@ class ScaleRegistry
         }
 
         if ($orgId <= 0) {
-            $row = $this->registryQueryForOrg(0)
-                ->where('org_id', 0)
-                ->where('code', $code)
-                ->where('is_public', true)
-                ->first();
-            if (! $row) {
-                return null;
+            $legacyRow = $this->findPublicByCodeFromLegacy($code);
+            if ($legacyRow !== null) {
+                return $legacyRow;
             }
 
-            return $row->toArray();
+            return $this->findPublicByCodeFromV2($code);
         }
 
         $row = $this->registryQueryForOrg($orgId)
@@ -280,6 +274,157 @@ class ScaleRegistry
     private function v2RegistryQuery()
     {
         return DB::table(self::REGISTRY_V2_TABLE);
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function listActivePublicFromLegacy(): array
+    {
+        if (! Schema::hasTable(self::REGISTRY_LEGACY_TABLE)) {
+            return [];
+        }
+
+        try {
+            return $this->registryQueryForOrg(0)
+                ->where('org_id', 0)
+                ->where('is_active', true)
+                ->where('is_public', true)
+                ->orderBy('code')
+                ->get()
+                ->toArray();
+        } catch (\Throwable $e) {
+            Log::warning('[scale_registry] legacy_public_read_failed', [
+                'source' => 'scale_registry.list_active_public',
+                'exception' => $e::class,
+            ]);
+
+            return [];
+        }
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function listActivePublicFromV2(): array
+    {
+        if (! $this->canReadPublicFromV2()) {
+            return [];
+        }
+
+        try {
+            return $this->v2RegistryQuery()
+                ->where('org_id', 0)
+                ->where('is_active', true)
+                ->where('is_public', true)
+                ->orderBy('code')
+                ->get()
+                ->map(fn (object $row): array => $this->normalizeV2RegistryRow((array) $row))
+                ->all();
+        } catch (\Throwable $e) {
+            Log::warning('[scale_registry] v2_public_read_failed', [
+                'source' => 'scale_registry.list_active_public',
+                'exception' => $e::class,
+            ]);
+
+            return [];
+        }
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function findPublicByCodeFromLegacy(string $code): ?array
+    {
+        if (! Schema::hasTable(self::REGISTRY_LEGACY_TABLE)) {
+            return null;
+        }
+
+        try {
+            $row = $this->registryQueryForOrg(0)
+                ->where('org_id', 0)
+                ->where('code', $code)
+                ->where('is_public', true)
+                ->first();
+
+            return $row ? $row->toArray() : null;
+        } catch (\Throwable $e) {
+            Log::warning('[scale_registry] legacy_public_lookup_failed', [
+                'source' => 'scale_registry.find_by_code',
+                'exception' => $e::class,
+            ]);
+
+            return null;
+        }
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function findPublicByCodeFromV2(string $code): ?array
+    {
+        if (! $this->canReadPublicFromV2()) {
+            return null;
+        }
+
+        try {
+            $row = $this->v2RegistryQuery()
+                ->where('org_id', 0)
+                ->where('code', $code)
+                ->where('is_public', true)
+                ->first();
+            if (! $row) {
+                return null;
+            }
+
+            return $this->normalizeV2RegistryRow((array) $row);
+        } catch (\Throwable $e) {
+            Log::warning('[scale_registry] v2_public_lookup_failed', [
+                'source' => 'scale_registry.find_by_code',
+                'exception' => $e::class,
+            ]);
+
+            return null;
+        }
+    }
+
+    private function canReadPublicFromV2(): bool
+    {
+        if (! (bool) config('fap.scales_registry.use_v2', true)) {
+            return false;
+        }
+
+        return Schema::hasTable(self::REGISTRY_V2_TABLE);
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>
+     */
+    private function normalizeV2RegistryRow(array $row): array
+    {
+        foreach ([
+            'slugs_json',
+            'capabilities_json',
+            'view_policy_json',
+            'commercial_json',
+            'seo_schema_json',
+            'seo_i18n_json',
+            'content_i18n_json',
+            'report_summary_i18n_json',
+        ] as $jsonColumn) {
+            $value = $row[$jsonColumn] ?? null;
+            if (! is_string($value) || trim($value) === '') {
+                continue;
+            }
+
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                $row[$jsonColumn] = $decoded;
+            }
+        }
+
+        return $row;
     }
 
     private function lookupBySlugFromV2(string $slug, int $orgId, bool $allowAlias): ?array

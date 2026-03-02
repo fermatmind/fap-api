@@ -23,23 +23,34 @@ final class AuthGuestController extends Controller
             $request
         );
 
-        $issued = $tokenService->issueForUser($anonId, [
-            'provider' => 'guest',
-            'anon_id' => $anonId,
-            'role' => 'public',
-            'org_id' => 0,
-        ]);
+        try {
+            $issued = $tokenService->issueForUser($anonId, [
+                'provider' => 'guest',
+                'anon_id' => $anonId,
+                'role' => 'public',
+                'org_id' => 0,
+            ]);
 
-        $token = (string) ($issued['token'] ?? '');
+            $token = (string) ($issued['token'] ?? '');
 
-        return response()->json([
-            'ok' => true,
-            'fm_token' => $token,
-            'token' => $token,
-            'auth_token' => $token,
-            'expires_at' => $issued['expires_at'] ?? null,
-            'anon_id' => $anonId,
-        ]);
+            return response()->json([
+                'ok' => true,
+                'fm_token' => $token,
+                'token' => $token,
+                'auth_token' => $token,
+                'expires_at' => $issued['expires_at'] ?? null,
+                'anon_id' => $anonId,
+            ]);
+        } catch (\Throwable $e) {
+            report($e);
+
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'AUTH_SERVICE_UNAVAILABLE',
+                'message' => 'auth service unavailable.',
+                'details' => [],
+            ], 503);
+        }
     }
 
     private function resolveAnonId(mixed $bodyAnonId, Request $request): string
