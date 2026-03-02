@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V0_3;
 
+use App\Exceptions\Api\ApiProblemException;
 use App\Http\Controllers\Controller;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
@@ -345,6 +346,10 @@ class ScalesController extends Controller
             'questions' => $loaded['questions'],
         ] + $scaleCodeMeta);
         } catch (\Throwable $e) {
+            if ($e instanceof ApiProblemException) {
+                throw $e;
+            }
+
             report($e);
 
             return response()->json([
