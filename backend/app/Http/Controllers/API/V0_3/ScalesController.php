@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V0_3;
 
+use App\Exceptions\Api\ApiProblemException;
 use App\Http\Controllers\Controller;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
@@ -86,6 +87,7 @@ class ScalesController extends Controller
         Sds20PackLoader $sds20PackLoader,
         Eq60PackLoader $eq60PackLoader
     ): JsonResponse {
+        try {
         $orgId = $this->orgContext->orgId();
         $code = strtoupper(trim($scale_code));
         if ($code === '') {
@@ -115,7 +117,7 @@ class ScalesController extends Controller
                 'ok' => false,
                 'error_code' => 'PACK_NOT_CONFIGURED',
                 'message' => 'scale pack not configured.',
-            ], 500);
+            ], 503);
         }
 
         $region = (string) ($request->query('region') ?? $row['default_region'] ?? config('content_packs.default_region', ''));
@@ -143,7 +145,7 @@ class ScalesController extends Controller
                         'ok' => false,
                         'error_code' => 'COMPILED_MISSING',
                         'message' => 'BIG5_OCEAN compiled questions missing.',
-                    ], 500);
+                    ], 503);
                 }
 
                 $questionsDocByLocale = is_array($compiled['questions_doc_by_locale'] ?? null)
@@ -155,7 +157,7 @@ class ScalesController extends Controller
                         'ok' => false,
                         'error_code' => 'COMPILED_INVALID',
                         'message' => 'BIG5_OCEAN compiled questions invalid.',
-                    ], 500);
+                    ], 503);
                 }
                 $contentPackageVersion = (string) ($compiled['pack_version'] ?? $version);
             }
@@ -324,7 +326,7 @@ class ScalesController extends Controller
         $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
         if (! ($loaded['ok'] ?? false)) {
             $error = (string) ($loaded['error_code'] ?? $loaded['error'] ?? 'READ_FAILED');
-            $status = $error === 'NOT_FOUND' ? 404 : 500;
+            $status = $error === 'NOT_FOUND' ? 404 : 503;
 
             return response()->json([
                 'ok' => false,
@@ -343,6 +345,20 @@ class ScalesController extends Controller
             'content_package_version' => (string) ($loaded['content_package_version'] ?? ''),
             'questions' => $loaded['questions'],
         ] + $scaleCodeMeta);
+        } catch (\Throwable $e) {
+            if ($e instanceof ApiProblemException) {
+                throw $e;
+            }
+
+            report($e);
+
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'QUESTIONS_UNAVAILABLE',
+                'message' => 'questions unavailable.',
+                'details' => [],
+            ], 503);
+        }
     }
 
     private function normalizeBigFiveLocale(string $locale): string

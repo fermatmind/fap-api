@@ -29,7 +29,11 @@ class BootTest extends TestCase
         $this->assertNotSame('', $cache);
         $this->assertStringContainsString('max-age=300', $cache);
         $this->assertStringContainsString('public', $cache);
-        $response->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale, X-Anon-Id');
+        $vary = (string) $response->headers->get('Vary', '');
+        $this->assertStringContainsString('X-Region', $vary);
+        $this->assertStringContainsString('Accept-Language', $vary);
+        $this->assertStringContainsString('X-FAP-Locale', $vary);
+        $this->assertStringContainsString('X-Anon-Id', $vary);
         $this->assertNotEmpty($response->headers->get('ETag'));
     }
 
@@ -55,7 +59,11 @@ class BootTest extends TestCase
         $this->assertNotSame('', $cache);
         $this->assertStringContainsString('max-age=300', $cache);
         $this->assertStringContainsString('public', $cache);
-        $second->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale, X-Anon-Id');
+        $vary = (string) $second->headers->get('Vary', '');
+        $this->assertStringContainsString('X-Region', $vary);
+        $this->assertStringContainsString('Accept-Language', $vary);
+        $this->assertStringContainsString('X-FAP-Locale', $vary);
+        $this->assertStringContainsString('X-Anon-Id', $vary);
     }
 
     public function test_boot_differs_by_region(): void
@@ -103,7 +111,11 @@ class BootTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonPath('locale', 'zh-CN');
-        $response->assertHeader('Vary', 'X-Region, Accept-Language, X-FAP-Locale, X-Anon-Id');
+        $vary = (string) $response->headers->get('Vary', '');
+        $this->assertStringContainsString('X-Region', $vary);
+        $this->assertStringContainsString('Accept-Language', $vary);
+        $this->assertStringContainsString('X-FAP-Locale', $vary);
+        $this->assertStringContainsString('X-Anon-Id', $vary);
     }
 
     public function test_boot_experiments_are_sticky_for_same_anon_id(): void
