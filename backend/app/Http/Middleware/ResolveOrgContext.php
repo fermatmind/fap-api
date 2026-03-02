@@ -61,6 +61,15 @@ class ResolveOrgContext
             }
         } else {
             $orgId = 0;
+
+            if ($userId === null) {
+                $userId = $this->resolveUserIdFromToken($request);
+                if ($userId !== null) {
+                    $request->attributes->set('fm_user_id', (string) $userId);
+                    $request->attributes->set('user_id', (string) $userId);
+                }
+            }
+
             $role = $this->resolveTokenRole($request) ?? 'public';
         }
 
