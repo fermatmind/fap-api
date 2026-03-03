@@ -25,14 +25,47 @@ final class AttemptSubmissionService
      */
     public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto, bool $preferAsync): array
     {
-        if (! $preferAsync || ! SchemaBaseline::hasTable('attempt_submissions')) {
+        $attemptId = trim($attemptId);
+        $hasTable = SchemaBaseline::hasTable('attempt_submissions');
+
+        // sync: keep submit contract unchanged and mirror status into attempt_submissions for /submission.
+        if (! $preferAsync || ! $hasTable) {
+            try {
+                $resultPayload = $this->attemptSubmitService->submit($ctx, $attemptId, $dto);
+            } catch (ApiProblemException $e) {
+                if ($hasTable) {
+                    $this->recordSyncSubmissionFailure(
+                        $ctx,
+                        $attemptId,
+                        $dto,
+                        $e->errorCode(),
+                        $e->getMessage()
+                    );
+                }
+                throw $e;
+            } catch (\Throwable $e) {
+                if ($hasTable) {
+                    $this->recordSyncSubmissionFailure(
+                        $ctx,
+                        $attemptId,
+                        $dto,
+                        'SUBMISSION_SYNC_FAILED',
+                        $e::class.': '.$e->getMessage()
+                    );
+                }
+                throw $e;
+            }
+
+            if ($hasTable) {
+                $this->recordSyncSubmissionSuccess($ctx, $attemptId, $dto, $resultPayload);
+            }
+
             return [
                 'http_status' => 200,
-                'payload' => $this->attemptSubmitService->submit($ctx, $attemptId, $dto),
+                'payload' => $resultPayload,
             ];
         }
 
-        $attemptId = trim($attemptId);
         if ($attemptId === '') {
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'attempt_id is required.');
         }
@@ -230,8 +263,8 @@ final class AttemptSubmissionService
         }
 
         $row = $query
-            ->orderByDesc('created_at')
             ->orderByDesc('updated_at')
+            ->orderByDesc('created_at')
             ->first();
 
         if ($row === null) {
@@ -251,6 +284,7 @@ final class AttemptSubmissionService
             'attempt_id' => $attemptId,
             'submission' => [
                 'id' => (string) ($row->id ?? ''),
+                'mode' => strtolower(trim((string) ($row->mode ?? ''))),
                 'state' => $state,
                 'error_code' => $this->nullableString($row->error_code ?? null),
                 'error_message' => $this->nullableString($row->error_message ?? null),
@@ -294,6 +328,142 @@ final class AttemptSubmissionService
                 'finished_at' => now(),
                 'updated_at' => now(),
             ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $responsePayload
+     */
+    private function recordSyncSubmissionSuccess(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto, array $responsePayload): void
+    {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '' || ! SchemaBaseline::hasTable('attempt_submissions')) {
+            return;
+        }
+
+        $actorUserId = $this->resolveUserId($ctx, $dto->userId);
+        $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
+
+        $payload = $this->buildPayload($dto, $actorUserId, $actorAnonId);
+        $dedupeKey = $this->buildDedupeKey($ctx->orgId(), $attemptId, $payload);
+        $orgId = $ctx->orgId();
+        $now = now();
+
+        $encodedRequest = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $encodedResponse = json_encode($responsePayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        DB::transaction(function () use ($orgId, $attemptId, $actorUserId, $actorAnonId, $dedupeKey, $encodedRequest, $encodedResponse, $now): void {
+            $existing = DB::table('attempt_submissions')
+                ->where('org_id', $orgId)
+                ->where('dedupe_key', $dedupeKey)
+                ->lockForUpdate()
+                ->first();
+
+            if ($existing !== null) {
+                DB::table('attempt_submissions')
+                    ->where('id', (string) $existing->id)
+                    ->update([
+                        'mode' => 'sync',
+                        'state' => 'succeeded',
+                        'error_code' => null,
+                        'error_message' => null,
+                        'request_payload_json' => $encodedRequest,
+                        'response_payload_json' => $encodedResponse,
+                        'started_at' => $existing->started_at ?? $now,
+                        'finished_at' => $now,
+                        'updated_at' => $now,
+                    ]);
+
+                return;
+            }
+
+            DB::table('attempt_submissions')->insert([
+                'id' => (string) Str::uuid(),
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'actor_user_id' => $actorUserId !== null ? (int) $actorUserId : null,
+                'actor_anon_id' => $actorAnonId,
+                'dedupe_key' => $dedupeKey,
+                'mode' => 'sync',
+                'state' => 'succeeded',
+                'error_code' => null,
+                'error_message' => null,
+                'request_payload_json' => $encodedRequest,
+                'response_payload_json' => $encodedResponse,
+                'started_at' => $now,
+                'finished_at' => $now,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        });
+    }
+
+    private function recordSyncSubmissionFailure(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto, string $errorCode, string $message): void
+    {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '' || ! SchemaBaseline::hasTable('attempt_submissions')) {
+            return;
+        }
+
+        $actorUserId = $this->resolveUserId($ctx, $dto->userId);
+        $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
+
+        $payload = $this->buildPayload($dto, $actorUserId, $actorAnonId);
+        $dedupeKey = $this->buildDedupeKey($ctx->orgId(), $attemptId, $payload);
+        $orgId = $ctx->orgId();
+        $now = now();
+
+        $errorCode = strtoupper(trim($errorCode));
+        if ($errorCode === '') {
+            $errorCode = 'SUBMISSION_FAILED';
+        }
+
+        $encodedRequest = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $errorMessage = $this->truncate($message, 255);
+
+        DB::transaction(function () use ($orgId, $attemptId, $actorUserId, $actorAnonId, $dedupeKey, $encodedRequest, $errorCode, $errorMessage, $now): void {
+            $existing = DB::table('attempt_submissions')
+                ->where('org_id', $orgId)
+                ->where('dedupe_key', $dedupeKey)
+                ->lockForUpdate()
+                ->first();
+
+            if ($existing !== null) {
+                DB::table('attempt_submissions')
+                    ->where('id', (string) $existing->id)
+                    ->update([
+                        'mode' => 'sync',
+                        'state' => 'failed',
+                        'error_code' => $errorCode,
+                        'error_message' => $errorMessage,
+                        'request_payload_json' => $encodedRequest,
+                        'response_payload_json' => null,
+                        'started_at' => $existing->started_at ?? $now,
+                        'finished_at' => $now,
+                        'updated_at' => $now,
+                    ]);
+
+                return;
+            }
+
+            DB::table('attempt_submissions')->insert([
+                'id' => (string) Str::uuid(),
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'actor_user_id' => $actorUserId !== null ? (int) $actorUserId : null,
+                'actor_anon_id' => $actorAnonId,
+                'dedupe_key' => $dedupeKey,
+                'mode' => 'sync',
+                'state' => 'failed',
+                'error_code' => $errorCode,
+                'error_message' => $errorMessage,
+                'request_payload_json' => $encodedRequest,
+                'response_payload_json' => null,
+                'started_at' => $now,
+                'finished_at' => $now,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        });
     }
 
     /**
@@ -457,4 +627,3 @@ final class AttemptSubmissionService
         return $query->whereRaw('1=0');
     }
 }
-
