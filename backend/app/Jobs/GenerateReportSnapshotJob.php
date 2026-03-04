@@ -44,13 +44,11 @@ class GenerateReportSnapshotJob implements ShouldQueue
         }
 
         $snapshot = $this->snapshotQuery($attemptId)->first();
-        if (!$snapshot) {
-            return;
-        }
-
-        $status = strtolower(trim((string) ($snapshot->status ?? 'ready')));
-        if ($status === 'ready') {
-            return;
+        if ($snapshot) {
+            $status = strtolower(trim((string) ($snapshot->status ?? '')));
+            if ($status === 'ready') {
+                return;
+            }
         }
 
         try {
