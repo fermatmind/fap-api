@@ -28,7 +28,7 @@ return [
 
     'queue' => [
         'attempt_connection' => env('FAP_ATTEMPT_QUEUE_CONNECTION', null),
-        'attempt_queue' => env('FAP_ATTEMPT_QUEUE', 'attempts'),
+        'attempt_queue' => env('FAP_ATTEMPT_QUEUE', 'default'),
     ],
 
     'payments' => [
