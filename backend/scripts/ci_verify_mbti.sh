@@ -19,6 +19,7 @@ export APP_ENV="${APP_ENV:-testing}"
 export DB_CONNECTION=sqlite
 export DB_DATABASE=/tmp/fap-ci.sqlite
 export QUEUE_CONNECTION=sync
+export FAP_ATTEMPT_WRITE_CONNECTION="${FAP_ATTEMPT_WRITE_CONNECTION:-sqlite}"
 
 # Content packs (force local driver + repo path)
 export FAP_PACKS_DRIVER=local
