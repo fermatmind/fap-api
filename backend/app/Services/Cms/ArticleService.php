@@ -314,6 +314,7 @@ final class ArticleService
         $payload = $snapshotArticle instanceof Article
             ? $snapshotArticle->toArray()
             : $article->toArray();
+        $payload['snapshot_at'] = now();
 
         return ArticleRevision::query()
             ->withoutGlobalScopes()

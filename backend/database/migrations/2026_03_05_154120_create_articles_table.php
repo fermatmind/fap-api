@@ -28,6 +28,7 @@ return new class extends Migration
             $table->timestamp('published_at')->nullable();
             $table->timestamp('scheduled_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['org_id', 'locale', 'slug'], 'articles_org_locale_slug_unique');
             $table->index(['org_id', 'status', 'published_at'], 'articles_org_status_published_idx');

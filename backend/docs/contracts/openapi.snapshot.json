@@ -1665,6 +1665,142 @@
                     "App\\Http\\Middleware\\PartnerApiKeyAuth"
                 ]
             }
+        },
+        "/api/v0.5/articles": {
+            "get": {
+                "operationId": "get_api_v0_5_articles",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/articles/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_articles_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/articles/{slug}/seo": {
+            "get": {
+                "operationId": "get_api_v0_5_articles_slug_seo",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@seo",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/cms/articles": {
+            "post": {
+                "operationId": "post_api_v0_5_cms_articles",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@store",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/cms/articles/{id}": {
+            "put": {
+                "operationId": "put_api_v0_5_cms_articles_id_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@update",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/cms/articles/{id}/publish": {
+            "post": {
+                "operationId": "post_api_v0_5_cms_articles_id_publish",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@publish",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/cms/articles/{id}/seo": {
+            "post": {
+                "operationId": "post_api_v0_5_cms_articles_id_seo",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@generateSeo",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/cms/articles/{id}/unpublish": {
+            "post": {
+                "operationId": "post_api_v0_5_cms_articles_id_unpublish",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@unpublish",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
         }
     }
 }

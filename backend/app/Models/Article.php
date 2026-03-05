@@ -63,6 +63,13 @@ class Article extends Model
         );
     }
 
+    public function scopePublished($query)
+    {
+        return $query
+            ->where('status', 'published')
+            ->where('is_public', true);
+    }
+
     public function revisions(): HasMany
     {
         return $this->hasMany(ArticleRevision::class, 'article_id', 'id');
@@ -81,4 +88,3 @@ class Article extends Model
             ->first();
     }
 }
-

@@ -23,6 +23,7 @@ use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\ExperimentGovernanceController;
 use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
+use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
@@ -49,7 +50,7 @@ Route::middleware([HealthzAccessControl::class, 'throttle:api_public'])
     ->get('/healthz', [HealthzController::class, 'show'])
     ->name('healthz');
 
-Route::prefix("v0.2")->middleware([
+Route::prefix('v0.2')->middleware([
     'throttle:api_public',
     NormalizeApiErrorContract::class,
 ])->group(function () {
@@ -132,7 +133,7 @@ Route::prefix('v0.3')->middleware([
         // 2) Attempts lifecycle
         Route::middleware('throttle:api_attempt_submit')->group(function () {
             Route::post('/attempts/start', [AttemptWriteController::class, 'start']);
-            Route::post("/attempts/submit", [AttemptWriteController::class, "submit"])
+            Route::post('/attempts/submit', [AttemptWriteController::class, 'submit'])
                 ->middleware(\App\Http\Middleware\FmTokenAuth::class);
         });
         Route::put('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'upsert'])
@@ -289,4 +290,17 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
         Route::get('/orgs/{org_id}/assessments/{id}/progress', [AssessmentController::class, 'progress']);
         Route::get('/orgs/{org_id}/assessments/{id}/summary', [AssessmentController::class, 'summary']);
     });
+});
+
+Route::prefix('v0.5')->group(function () {
+    Route::get('/articles', [ArticleController::class, 'index']);
+    Route::get('/articles/{slug}', [ArticleController::class, 'show']);
+    Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
+
+    Route::post('/cms/articles', [ArticleController::class, 'store']);
+    Route::put('/cms/articles/{id}', [ArticleController::class, 'update']);
+
+    Route::post('/cms/articles/{id}/publish', [ArticleController::class, 'publish']);
+    Route::post('/cms/articles/{id}/unpublish', [ArticleController::class, 'unpublish']);
+    Route::post('/cms/articles/{id}/seo', [ArticleController::class, 'generateSeo']);
 });

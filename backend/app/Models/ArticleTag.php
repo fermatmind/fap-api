@@ -36,7 +36,8 @@ class ArticleTag extends Model
             'article_tag_map',
             'tag_id',
             'article_id'
-        );
+        )
+            ->withPivot(['org_id', 'created_at'])
+            ->withTimestamps();
     }
 }
-
