@@ -242,7 +242,7 @@ class AttemptStartService
         }
 
         $persisted = DB::transaction(function () use ($attemptPayload): array {
-            $attempt = Attempt::create($attemptPayload);
+            $attempt = Attempt::onWriteConnection()->create($attemptPayload);
             if (! $attempt instanceof Attempt) {
                 throw new \RuntimeException('Failed to persist attempt');
             }
