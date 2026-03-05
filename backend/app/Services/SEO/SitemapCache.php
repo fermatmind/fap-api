@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Cache;
 
 class SitemapCache
 {
-    public const XML_CACHE_KEY = 'seo:sitemap:xml:v1';
-    public const ETAG_CACHE_KEY = 'seo:sitemap:etag:v1';
+    public const XML_CACHE_KEY = 'seo:sitemap:xml:v2';
+
+    public const ETAG_CACHE_KEY = 'seo:sitemap:etag:v2';
+
     public const TTL_SECONDS = 86400;
 
     public function get(): ?array
@@ -15,11 +17,11 @@ class SitemapCache
         $xml = Cache::get(self::XML_CACHE_KEY);
         $etag = Cache::get(self::ETAG_CACHE_KEY);
 
-        if (!is_string($xml) || $xml === '') {
+        if (! is_string($xml) || $xml === '') {
             return null;
         }
 
-        if (!is_string($etag) || $etag === '') {
+        if (! is_string($etag) || $etag === '') {
             return null;
         }
 
@@ -39,8 +41,8 @@ class SitemapCache
     {
         $normalizedList = array_values($slugList);
         $slugListHash = sha1(implode("\n", $normalizedList));
-        $etagBase = $maxUpdatedAt . '|' . $slugCount . '|' . $slugListHash;
+        $etagBase = $maxUpdatedAt.'|'.$slugCount.'|'.$slugListHash;
 
-        return '"' . sha1($etagBase) . '"';
+        return '"'.sha1($etagBase).'"';
     }
 }

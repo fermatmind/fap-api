@@ -21,6 +21,54 @@ class SitemapGenerator
 
     public function generate(): array
     {
+        $locale = (string) config('app.locale', 'en');
+
+        $urls = array_merge(
+            $this->getScaleUrls($locale),
+            $this->getArticleUrls($locale)
+        );
+
+        $urls = collect($urls)
+            ->unique('loc')
+            ->values()
+            ->all();
+
+        usort($urls, static function (array $a, array $b): int {
+            return strcmp((string) ($a['loc'] ?? ''), (string) ($b['loc'] ?? ''));
+        });
+
+        $slugList = [];
+        $maxUpdatedAt = null;
+
+        foreach ($urls as $row) {
+            $slug = trim((string) ($row['slug'] ?? ''));
+            if ($slug !== '') {
+                $slugList[] = $slug;
+            }
+
+            $updatedValue = (string) ($row['updated_at'] ?? '');
+            if ($updatedValue === '') {
+                $updatedValue = (string) ($row['lastmod'] ?? '');
+            }
+
+            $updatedAt = $this->parseUpdatedAt($updatedValue);
+            if ($updatedAt && ($maxUpdatedAt === null || $updatedAt->gt($maxUpdatedAt))) {
+                $maxUpdatedAt = $updatedAt;
+            }
+        }
+
+        $xml = $this->buildXml($urls);
+
+        return [
+            'xml' => $xml,
+            'slug_list' => $slugList,
+            'slug_count' => count($slugList),
+            'max_updated_at' => $maxUpdatedAt ? $maxUpdatedAt->toDateTimeString() : '',
+        ];
+    }
+
+    private function getScaleUrls(string $locale): array
+    {
         $rows = DB::table('scales_registry')
             ->select('primary_slug', 'slugs_json', 'view_policy_json', 'updated_at')
             ->where('is_active', 1)
@@ -29,7 +77,6 @@ class SitemapGenerator
             ->get();
 
         $slugDates = [];
-        $maxUpdatedAt = null;
 
         foreach ($rows as $row) {
             if (! $this->isIndexablePublic($row->view_policy_json ?? null)) {
@@ -37,9 +84,6 @@ class SitemapGenerator
             }
 
             $updatedAt = $this->parseUpdatedAt($row->updated_at ?? null);
-            if ($updatedAt && ($maxUpdatedAt === null || $updatedAt->gt($maxUpdatedAt))) {
-                $maxUpdatedAt = $updatedAt;
-            }
 
             $slugs = $this->collectSlugs($row->primary_slug ?? null, $row->slugs_json ?? null);
             foreach ($slugs as $slug) {
@@ -63,14 +107,51 @@ class SitemapGenerator
         $slugList = array_keys($slugDates);
         sort($slugList, SORT_STRING);
 
-        $xml = $this->buildXml($slugList, $slugDates);
+        $urls = [];
+        foreach ($slugList as $slug) {
+            $urls[] = [
+                'loc' => $this->urlPrefix.rawurlencode($slug),
+                'lastmod' => $this->formatLastmod($slugDates[$slug] ?? null),
+                'slug' => $slug,
+                'updated_at' => ($slugDates[$slug] ?? null)?->toDateTimeString(),
+            ];
+        }
 
-        return [
-            'xml' => $xml,
-            'slug_list' => $slugList,
-            'slug_count' => count($slugList),
-            'max_updated_at' => $maxUpdatedAt ? $maxUpdatedAt->toDateTimeString() : '',
-        ];
+        return $urls;
+    }
+
+    private function getArticleUrls(string $locale): array
+    {
+        $rows = \App\Models\Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('status', 'published')
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->select(['slug', 'updated_at', 'published_at'])
+            ->orderByDesc('updated_at')
+            ->get();
+
+        $prefix = rtrim((string) config('services.seo.articles_url_prefix'), '/');
+
+        $urls = [];
+
+        foreach ($rows as $row) {
+            $url = $prefix.'/'.rawurlencode($row->slug);
+
+            $lastmod = $row->updated_at
+                ?? $row->published_at
+                ?? now();
+
+            $urls[] = [
+                'loc' => $url,
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => (string) $row->slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
     }
 
     private function collectSlugs($primarySlug, $slugsJson): array
@@ -154,24 +235,26 @@ class SitemapGenerator
         return true;
     }
 
-    private function buildXml(array $slugList, array $slugDates): string
+    private function buildXml(array $urls): string
     {
         $lines = [];
         $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
         $lines[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-        foreach ($slugList as $slug) {
-            $slug = trim((string) $slug);
-            if ($slug === '') {
+        foreach ($urls as $row) {
+            $loc = trim((string) ($row['loc'] ?? ''));
+            if ($loc === '') {
                 continue;
             }
 
-            $loc = $this->urlPrefix.rawurlencode($slug);
-            $lastmod = $this->formatLastmod($slugDates[$slug] ?? null);
+            $lastmod = trim((string) ($row['lastmod'] ?? ''));
+            if ($lastmod === '') {
+                $lastmod = '1970-01-01';
+            }
 
             $lines[] = '  <url>';
             $lines[] = '    <loc>'.htmlspecialchars($loc, ENT_XML1).'</loc>';
-            $lines[] = '    <lastmod>'.$lastmod.'</lastmod>';
+            $lines[] = '    <lastmod>'.htmlspecialchars($lastmod, ENT_XML1).'</lastmod>';
             $lines[] = '    <changefreq>weekly</changefreq>';
             $lines[] = '    <priority>0.7</priority>';
             $lines[] = '  </url>';
