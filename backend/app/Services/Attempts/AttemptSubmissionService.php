@@ -612,7 +612,7 @@ final class AttemptSubmissionService
         ?string $actorUserId,
         ?string $actorAnonId
     ): Builder {
-        $query = Attempt::query()
+        $query = Attempt::onWriteConnection()
             ->where('id', $attemptId)
             ->where('org_id', $ctx->orgId());
 
