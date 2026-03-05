@@ -41,7 +41,7 @@ class AttemptStartService
 
     public function start(OrgContext $ctx, StartAttemptDTO $dto): array
     {
-        $orgId = $ctx->orgId();
+        $orgId = $ctx->orgId() ?? 0;
 
         $requestedScaleCode = strtoupper(trim((string) $dto->scaleCode));
         if ($requestedScaleCode === '') {
