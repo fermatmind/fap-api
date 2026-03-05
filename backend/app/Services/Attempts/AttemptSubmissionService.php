@@ -613,6 +613,7 @@ final class AttemptSubmissionService
         ?string $actorAnonId
     ): Builder {
         $query = Attempt::onWriteConnection()
+            ->withoutGlobalScopes()
             ->where('id', $attemptId)
             ->where('org_id', $ctx->orgId());
 
