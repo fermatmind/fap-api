@@ -68,6 +68,79 @@ final class ArticleSeoService
         });
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    public function buildSeoPayload(Article $article): array
+    {
+        $locale = trim((string) $article->locale);
+        if ($locale === '') {
+            $locale = 'en';
+        }
+
+        $seo = null;
+        if ($article->relationLoaded('seoMeta') && $article->seoMeta instanceof ArticleSeoMeta) {
+            $seo = $article->seoMeta;
+        }
+
+        if (! $seo instanceof ArticleSeoMeta) {
+            $seo = ArticleSeoMeta::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', (int) $article->org_id)
+                ->where('article_id', (int) $article->id)
+                ->where('locale', $locale)
+                ->first();
+        }
+
+        $title = $seo?->seo_title ?? $article->title;
+        $descriptionSource = (string) ($article->excerpt ?? $article->content_md);
+        $description = $seo?->seo_description ?? Str::limit(strip_tags($descriptionSource), 160);
+
+        $canonical = $seo?->canonical_url
+            ?? rtrim((string) config('app.url', ''), '/').'/articles/'.rawurlencode((string) $article->slug);
+
+        return [
+            'title' => $title,
+            'description' => $description,
+            'canonical' => $canonical,
+
+            'og' => [
+                'title' => $seo?->og_title ?? $title,
+                'description' => $seo?->og_description ?? $description,
+                'image' => $seo?->og_image_url,
+                'type' => 'article',
+            ],
+
+            'twitter' => [
+                'card' => 'summary_large_image',
+                'title' => $title,
+                'description' => $description,
+                'image' => $seo?->og_image_url,
+            ],
+
+            'robots' => $seo?->robots ?? 'index,follow',
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function generateJsonLd(Article $article): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'Article',
+            'headline' => $article->title,
+            'datePublished' => optional($article->published_at)->toAtomString(),
+            'dateModified' => optional($article->updated_at)->toAtomString(),
+            'author' => [
+                '@type' => 'Organization',
+                'name' => 'FermatMind',
+            ],
+            'mainEntityOfPage' => rtrim((string) config('app.url', ''), '/').'/articles/'.rawurlencode((string) $article->slug),
+        ];
+    }
+
     private function extractDescription(string $contentMd): string
     {
         $text = preg_replace('/`{1,3}[^`]*`{1,3}/u', ' ', $contentMd);

@@ -21,8 +21,7 @@ class ArticleController extends Controller
         private readonly ArticleService $articleService,
         private readonly ArticlePublishService $articlePublishService,
         private readonly ArticleSeoService $articleSeoService,
-    ) {
-    }
+    ) {}
 
     /**
      * GET /api/v0.5/articles
@@ -111,6 +110,49 @@ class ArticleController extends Controller
         return response()->json([
             'ok' => true,
             'article' => $this->articlePayload($article),
+        ]);
+    }
+
+    /**
+     * GET /api/v0.5/articles/{slug}/seo
+     */
+    public function seo(Request $request, string $slug): JsonResponse
+    {
+        $locale = trim((string) $request->query('locale', 'en'));
+        if ($locale === '') {
+            $locale = 'en';
+        }
+
+        $orgId = $this->resolveOrgId($request);
+        $normalizedSlug = trim($slug);
+        if ($normalizedSlug === '') {
+            return response()->json(['error' => 'not found'], 404);
+        }
+
+        $article = null;
+
+        try {
+            $article = Article::findBySlug($normalizedSlug, $locale);
+        } catch (OrgContextMissingException) {
+            $article = null;
+        }
+
+        if (! $article instanceof Article || (int) $article->org_id !== $orgId) {
+            $article = Article::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $orgId)
+                ->where('slug', $normalizedSlug)
+                ->where('locale', $locale)
+                ->first();
+        }
+
+        if (! $article instanceof Article || (string) $article->status !== 'published' || ! (bool) $article->is_public) {
+            return response()->json(['error' => 'not found'], 404);
+        }
+
+        return response()->json([
+            'meta' => $this->articleSeoService->buildSeoPayload($article),
+            'jsonld' => $this->articleSeoService->generateJsonLd($article),
         ]);
     }
 

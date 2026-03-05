@@ -1700,6 +1700,23 @@
                 ]
             }
         },
+        "/api/v0.5/articles/{slug}/seo": {
+            "get": {
+                "operationId": "get_api_v0_5_articles_slug_seo",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@seo",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/cms/articles": {
             "post": {
                 "operationId": "post_api_v0_5_cms_articles",
