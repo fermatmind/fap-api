@@ -237,38 +237,44 @@ class AttemptStartService
             ],
         ];
         if ($this->runtimePolicy()->shouldWriteScaleIdentityColumns()) {
-            $attemptPayload['scale_code_v2'] = $scaleCodeV2;
-            $attemptPayload['scale_uid'] = $scaleUid;
-        }
+    $attemptPayload['scale_code_v2'] = $scaleCodeV2;
+    $attemptPayload['scale_uid'] = $scaleUid;
+}
 
-        $persisted = DB::transaction(function () use ($attemptPayload): array {
+// generate UUID BEFORE transaction
+if (empty($attemptPayload['id'])) {
+    $attemptPayload['id'] = (string) Str::uuid();
+}
 
-            // ensure UUID exists before insert (avoid silent insert failure)
-            if (empty($attemptPayload['id'])) {
-                $attemptPayload['id'] = (string) Str::uuid();
-            }
+$persisted = DB::transaction(function () use ($attemptPayload): array {
 
-            $attempt = new Attempt();
-            $attempt->setConnection('mysql');
+    $attempt = new Attempt();
 
-            // bypass fillable restrictions but keep model events
-            $attempt->forceFill($attemptPayload);
+    $attemptWriteConnection = trim((string) getenv('FAP_ATTEMPT_WRITE_CONNECTION'));
+    if ($attemptWriteConnection === '') {
+        $attemptWriteConnection = 'mysql';
+    }
 
-            // throw exception if insert fails (instead of silent failure)
-            $attempt->saveOrFail();
+    $attempt->setConnection($attemptWriteConnection);
 
-            $draft = $this->progressService->createDraftForAttempt($attempt);
+    // bypass fillable restrictions but keep model events
+    $attempt->forceFill($attemptPayload);
 
-            if (! empty($draft['expires_at'])) {
-                $attempt->resume_expires_at = $draft['expires_at'];
-                $attempt->save();
-            }
+    // throw exception if insert fails
+    $attempt->saveOrFail();
 
-            return [
-                'attempt' => $attempt,
-                'draft' => $draft,
-            ];
-        });
+    $draft = $this->progressService->createDraftForAttempt($attempt);
+
+    if (! empty($draft['expires_at'])) {
+        $attempt->resume_expires_at = $draft['expires_at'];
+        $attempt->save();
+    }
+
+    return [
+        'attempt' => $attempt,
+        'draft' => $draft,
+    ];
+});
 
         /** @var Attempt $attempt */
         $attempt = $persisted['attempt'];
