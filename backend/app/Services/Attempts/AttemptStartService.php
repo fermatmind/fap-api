@@ -21,6 +21,7 @@ use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -240,13 +241,27 @@ class AttemptStartService
             $attemptPayload['scale_uid'] = $scaleUid;
         }
 
-        $attempt = Attempt::create($attemptPayload);
+        $persisted = DB::transaction(function () use ($attemptPayload): array {
+            $attempt = Attempt::create($attemptPayload);
+            if (! $attempt instanceof Attempt) {
+                throw new \RuntimeException('Failed to persist attempt');
+            }
 
-        $draft = $this->progressService->createDraftForAttempt($attempt);
-        if (! empty($draft['expires_at'])) {
-            $attempt->resume_expires_at = $draft['expires_at'];
-            $attempt->save();
-        }
+            $draft = $this->progressService->createDraftForAttempt($attempt);
+            if (! empty($draft['expires_at'])) {
+                $attempt->resume_expires_at = $draft['expires_at'];
+                $attempt->save();
+            }
+
+            return [
+                'attempt' => $attempt,
+                'draft' => $draft,
+            ];
+        });
+
+        /** @var Attempt $attempt */
+        $attempt = $persisted['attempt'];
+        $draft = is_array($persisted['draft'] ?? null) ? $persisted['draft'] : [];
 
         $this->eventRecorder()->record('test_start', $ctx->userId(), [
             'scale_code' => $scaleCode,
