@@ -237,9 +237,9 @@ class AttemptStartService
             ],
         ];
         if ($this->runtimePolicy()->shouldWriteScaleIdentityColumns()) {
-    $attemptPayload['scale_code_v2'] = $scaleCodeV2;
-    $attemptPayload['scale_uid'] = $scaleUid;
-}
+            $attemptPayload['scale_code_v2'] = $scaleCodeV2;
+            $attemptPayload['scale_uid'] = $scaleUid;
+        }
 
         // Ensure UUID exists before insert
         if (empty($attemptPayload['id'])) {
@@ -247,21 +247,27 @@ class AttemptStartService
         }
 
         // ensure required DB defaults exist
-        if (!array_key_exists('duration_ms', $attemptPayload)) {
+        if (! array_key_exists('duration_ms', $attemptPayload)) {
             $attemptPayload['duration_ms'] = 0;
         }
 
         $persisted = DB::transaction(function () use ($attemptPayload): array {
+            $attempt = new Attempt;
 
-            // Insert using Query Builder to avoid Eloquent silent failures
-            DB::table('attempts')->insert($attemptPayload);
+            $attemptWriteConnection = trim((string) getenv('FAP_ATTEMPT_WRITE_CONNECTION'));
+            if ($attemptWriteConnection === '') {
+                $attemptWriteConnection = 'mysql';
+            }
 
-            // Reload using Eloquent (so downstream code still works)
-            $attempt = Attempt::query()->findOrFail($attemptPayload['id']);
+            $attempt->setConnection($attemptWriteConnection);
+
+            // keep model casts/mutators for json columns
+            $attempt->forceFill($attemptPayload);
+            $attempt->saveOrFail();
 
             $draft = $this->progressService->createDraftForAttempt($attempt);
 
-            if (!empty($draft['expires_at'])) {
+            if (! empty($draft['expires_at'])) {
                 $attempt->resume_expires_at = $draft['expires_at'];
                 $attempt->save();
             }
