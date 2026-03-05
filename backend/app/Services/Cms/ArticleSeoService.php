@@ -104,6 +104,6 @@ final class ArticleSeoService
             return null;
         }
 
-        return $baseUrl.'/articles/'.rawurlencode($locale).'/'.rawurlencode($slug);
+        return $baseUrl.'/articles/'.rawurlencode($slug);
     }
 }
