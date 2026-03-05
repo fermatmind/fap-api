@@ -1,0 +1,108 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Guard no committed secrets (H-02)
+        run: bash backend/scripts/ci/guard_no_committed_secrets.sh
+
+      - name: CAE gate (config + artifact safety)
+        run: bash backend/scripts/cae_gate.sh
+
+  verify-mbti:
+    name: verify-mbti-${{ matrix.mode }}
+    needs: hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - mode: legacy
+            FEATURE_SELFCHECK_V2: "false"
+            FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: "false"
+            FEATURE_PAYMENT_WEBHOOK_V2: "false"
+            FEATURE_CONTENT_STORE_V2: "false"
+          - mode: v2
+            FEATURE_SELFCHECK_V2: "true"
+            FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: "true"
+            FEATURE_PAYMENT_WEBHOOK_V2: "true"
+            FEATURE_CONTENT_STORE_V2: "true"
+
+    env:
+      FEATURE_SELFCHECK_V2: ${{ matrix.FEATURE_SELFCHECK_V2 }}
+      FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: ${{ matrix.FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2 }}
+      FEATURE_PAYMENT_WEBHOOK_V2: ${{ matrix.FEATURE_PAYMENT_WEBHOOK_V2 }}
+      FEATURE_CONTENT_STORE_V2: ${{ matrix.FEATURE_CONTENT_STORE_V2 }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: >
+            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: |
+            backend/vendor
+            ~/.composer/cache/files
+          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php84-
+
+      - name: Prepare Laravel cache dirs
+        working-directory: backend
+        run: |
+          mkdir -p storage/framework/cache/data
+          mkdir -p storage/framework/views
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/logs
+          mkdir -p bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Run ci_verify_mbti
+        run: bash ./backend/scripts/ci_verify_mbti.sh
+
+      - name: Upload verify_mbti artifacts (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci_verify_mbti_${{ matrix.mode }}
+          path: backend/artifacts/verify_mbti
+          if-no-files-found: ignore
+          retention-days: 7
