@@ -243,27 +243,32 @@ class AttemptStartService
 
         $persisted = DB::transaction(function () use ($attemptPayload): array {
 
-    $attempt = new Attempt();
-    $attempt->setConnection('mysql');
-    $attempt->forceFill($attemptPayload);
-    $attempt->save();
+            // ensure UUID exists before insert (avoid silent insert failure)
+            if (empty($attemptPayload['id'])) {
+                $attemptPayload['id'] = (string) Str::uuid();
+            }
 
-    if (! $attempt->exists) {
-        throw new \RuntimeException('Failed to persist attempt');
-    }
+            $attempt = new Attempt();
+            $attempt->setConnection('mysql');
 
-    $draft = $this->progressService->createDraftForAttempt($attempt);
+            // bypass fillable restrictions but keep model events
+            $attempt->forceFill($attemptPayload);
 
-    if (! empty($draft['expires_at'])) {
-        $attempt->resume_expires_at = $draft['expires_at'];
-        $attempt->save();
-    }
+            // throw exception if insert fails (instead of silent failure)
+            $attempt->saveOrFail();
 
-    return [
-        'attempt' => $attempt,
-        'draft' => $draft,
-    ];
-});
+            $draft = $this->progressService->createDraftForAttempt($attempt);
+
+            if (! empty($draft['expires_at'])) {
+                $attempt->resume_expires_at = $draft['expires_at'];
+                $attempt->save();
+            }
+
+            return [
+                'attempt' => $attempt,
+                'draft' => $draft,
+            ];
+        });
 
         /** @var Attempt $attempt */
         $attempt = $persisted['attempt'];
