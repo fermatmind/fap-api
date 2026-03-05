@@ -74,10 +74,10 @@ class AttemptStartService
         $region = (string) ($dto->region ?? $row['default_region'] ?? config('content_packs.default_region', ''));
         $locale = (string) ($dto->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
 
-        $anonId = trim((string) ($dto->anonId ?? ''));
-        if ($anonId === '') {
-            $anonId = 'anon_'.Str::uuid();
-        }
+        $anonId = trim((string) ($dto->anonId ?? $ctx->anonId() ?? ''));
+if ($anonId === '') {
+    $anonId = 'anon_'.Str::uuid();
+}
 
         ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $anonId);
 
@@ -254,12 +254,10 @@ class AttemptStartService
         $persisted = DB::transaction(function () use ($attemptPayload): array {
             $attempt = new Attempt;
 
-            $attemptWriteConnection = trim((string) getenv('FAP_ATTEMPT_WRITE_CONNECTION'));
-            if ($attemptWriteConnection === '') {
-                $attemptWriteConnection = 'mysql';
-            }
-
-            $attempt->setConnection($attemptWriteConnection);
+            // ✅ 保证 start 和 submit 使用同一套 Attempt::onWriteConnection() 的写库连接
+            $attempt->setConnection(
+                Attempt::onWriteConnection()->getModel()->getConnectionName()
+            );
 
             // keep model casts/mutators for json columns
             $attempt->forceFill($attemptPayload);

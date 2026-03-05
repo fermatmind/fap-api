@@ -26,6 +26,23 @@ final class AttemptSubmissionService
     public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto, bool $preferAsync): array
     {
         $attemptId = trim($attemptId);
+
+        // ✅ org_id 兜底：public/guest 场景没有 org 时统一用 0，并写回 ctx（避免后续 Attempt 全局 org scope 用 null）
+        $orgId = $ctx->orgId() ?? 0;
+        if ($ctx->orgId() === null) {
+            $normalizedUserId = $this->normalizeUserId($ctx->userId());
+            $normalizedAnonId = $this->normalizeAnonId($ctx->anonId());
+
+            $fixedCtx = new OrgContext();
+            $fixedCtx->set(
+                $orgId,
+                $normalizedUserId !== null ? (int) $normalizedUserId : null,
+                'public',
+                $normalizedAnonId
+            );
+            $ctx = $fixedCtx;
+        }
+
         $hasTable = SchemaBaseline::hasTable('attempt_submissions');
 
         // sync: keep submit contract unchanged and mirror status into attempt_submissions for /submission.
@@ -75,8 +92,7 @@ final class AttemptSubmissionService
         $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)->firstOrFail();
 
         $payload = $this->buildPayload($dto, $actorUserId, $actorAnonId);
-        $dedupeKey = $this->buildDedupeKey($ctx->orgId(), $attemptId, $payload);
-        $orgId = $ctx->orgId();
+        $dedupeKey = $this->buildDedupeKey($orgId, $attemptId, $payload);
         $now = now();
 
         $submission = DB::transaction(function () use ($orgId, $attemptId, $actorUserId, $actorAnonId, $dedupeKey, $payload, $now): array {
@@ -246,7 +262,7 @@ final class AttemptSubmissionService
         }
 
         $query = DB::table('attempt_submissions')
-            ->where('org_id', $ctx->orgId())
+            ->where('org_id', $ctx->orgId() ?? 0)
             ->where('attempt_id', $attemptId);
 
         if ($actorUserId !== null) {
