@@ -612,11 +612,9 @@ final class AttemptSubmissionService
         ?string $actorUserId,
         ?string $actorAnonId
     ): Builder {
-        $query = (new Attempt())
-            ->setConnection('mysql')
-            ->newQueryWithoutScopes()
-            ->where('id', $attemptId)
-            ->where('org_id', $ctx->orgId());
+        $query = Attempt::onWriteConnection()
+            ->withoutGlobalScopes()
+            ->where('id', $attemptId);
 
         if ($actorUserId !== null) {
             return $query->where('user_id', $actorUserId);

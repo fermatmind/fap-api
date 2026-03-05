@@ -242,10 +242,12 @@ class AttemptStartService
         }
 
         $persisted = DB::transaction(function () use ($attemptPayload): array {
+
             $attempt = (new Attempt())
                 ->setConnection('mysql')
                 ->newQueryWithoutScopes()
                 ->create($attemptPayload);
+                
             if (! $attempt instanceof Attempt) {
                 throw new \RuntimeException('Failed to persist attempt');
             }
