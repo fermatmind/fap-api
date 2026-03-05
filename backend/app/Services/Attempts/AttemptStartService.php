@@ -41,7 +41,7 @@ class AttemptStartService
 
     public function start(OrgContext $ctx, StartAttemptDTO $dto): array
     {
-        $orgId = $ctx->orgId();
+        $orgId = $ctx->orgId() ?? 0;
 
         $requestedScaleCode = strtoupper(trim((string) $dto->scaleCode));
         if ($requestedScaleCode === '') {
@@ -237,44 +237,46 @@ class AttemptStartService
             ],
         ];
         if ($this->runtimePolicy()->shouldWriteScaleIdentityColumns()) {
-    $attemptPayload['scale_code_v2'] = $scaleCodeV2;
-    $attemptPayload['scale_uid'] = $scaleUid;
-}
+            $attemptPayload['scale_code_v2'] = $scaleCodeV2;
+            $attemptPayload['scale_uid'] = $scaleUid;
+        }
 
-        // generate UUID BEFORE transaction
-if (empty($attemptPayload['id'])) {
-    $attemptPayload['id'] = (string) Str::uuid();
-}
+        // Ensure UUID exists before insert
+        if (empty($attemptPayload['id'])) {
+            $attemptPayload['id'] = (string) Str::uuid();
+        }
 
-$persisted = DB::transaction(function () use ($attemptPayload): array {
+        // ensure required DB defaults exist
+        if (! array_key_exists('duration_ms', $attemptPayload)) {
+            $attemptPayload['duration_ms'] = 0;
+        }
 
-    $attempt = new Attempt();
+        $persisted = DB::transaction(function () use ($attemptPayload): array {
+            $attempt = new Attempt;
 
-    $attemptWriteConnection = trim((string) getenv('FAP_ATTEMPT_WRITE_CONNECTION'));
-    if ($attemptWriteConnection === '') {
-        $attemptWriteConnection = 'mysql';
-    }
+            $attemptWriteConnection = trim((string) getenv('FAP_ATTEMPT_WRITE_CONNECTION'));
+            if ($attemptWriteConnection === '') {
+                $attemptWriteConnection = 'mysql';
+            }
 
-    $attempt->setConnection($attemptWriteConnection);
+            $attempt->setConnection($attemptWriteConnection);
 
-    // bypass fillable restrictions but keep model events
-    $attempt->forceFill($attemptPayload);
+            // keep model casts/mutators for json columns
+            $attempt->forceFill($attemptPayload);
+            $attempt->saveOrFail();
 
-    // throw exception if insert fails
-    $attempt->saveOrFail();
+            $draft = $this->progressService->createDraftForAttempt($attempt);
 
-    $draft = $this->progressService->createDraftForAttempt($attempt);
+            if (! empty($draft['expires_at'])) {
+                $attempt->resume_expires_at = $draft['expires_at'];
+                $attempt->save();
+            }
 
-    if (! empty($draft['expires_at'])) {
-        $attempt->resume_expires_at = $draft['expires_at'];
-        $attempt->save();
-    }
-
-    return [
-        'attempt' => $attempt,
-        'draft' => $draft,
-    ];
-});
+            return [
+                'attempt' => $attempt,
+                'draft' => $draft,
+            ];
+        });
 
         /** @var Attempt $attempt */
         $attempt = $persisted['attempt'];
