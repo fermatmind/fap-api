@@ -241,7 +241,7 @@ class AttemptStartService
     $attemptPayload['scale_uid'] = $scaleUid;
 }
 
-// generate UUID BEFORE transaction
+        // generate UUID BEFORE transaction
 if (empty($attemptPayload['id'])) {
     $attemptPayload['id'] = (string) Str::uuid();
 }
