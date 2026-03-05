@@ -241,40 +241,36 @@ class AttemptStartService
     $attemptPayload['scale_uid'] = $scaleUid;
 }
 
-        // generate UUID BEFORE transaction
-if (empty($attemptPayload['id'])) {
-    $attemptPayload['id'] = (string) Str::uuid();
-}
+        // Ensure UUID exists before insert
+        if (empty($attemptPayload['id'])) {
+            $attemptPayload['id'] = (string) Str::uuid();
+        }
 
-$persisted = DB::transaction(function () use ($attemptPayload): array {
+        // ensure required DB defaults exist
+        if (!array_key_exists('duration_ms', $attemptPayload)) {
+            $attemptPayload['duration_ms'] = 0;
+        }
 
-    $attempt = new Attempt();
+        $persisted = DB::transaction(function () use ($attemptPayload): array {
 
-    $attemptWriteConnection = trim((string) getenv('FAP_ATTEMPT_WRITE_CONNECTION'));
-    if ($attemptWriteConnection === '') {
-        $attemptWriteConnection = 'mysql';
-    }
+            // Insert using Query Builder to avoid Eloquent silent failures
+            DB::table('attempts')->insert($attemptPayload);
 
-    $attempt->setConnection($attemptWriteConnection);
+            // Reload using Eloquent (so downstream code still works)
+            $attempt = Attempt::query()->findOrFail($attemptPayload['id']);
 
-    // bypass fillable restrictions but keep model events
-    $attempt->forceFill($attemptPayload);
+            $draft = $this->progressService->createDraftForAttempt($attempt);
 
-    // throw exception if insert fails
-    $attempt->saveOrFail();
+            if (!empty($draft['expires_at'])) {
+                $attempt->resume_expires_at = $draft['expires_at'];
+                $attempt->save();
+            }
 
-    $draft = $this->progressService->createDraftForAttempt($attempt);
-
-    if (! empty($draft['expires_at'])) {
-        $attempt->resume_expires_at = $draft['expires_at'];
-        $attempt->save();
-    }
-
-    return [
-        'attempt' => $attempt,
-        'draft' => $draft,
-    ];
-});
+            return [
+                'attempt' => $attempt,
+                'draft' => $draft,
+            ];
+        });
 
         /** @var Attempt $attempt */
         $attempt = $persisted['attempt'];
