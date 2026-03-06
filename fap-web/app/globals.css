@@ -1,0 +1,185 @@
+:root {
+  color-scheme: light;
+  --bg: #eef3f7;
+  --surface: rgba(255, 255, 255, 0.94);
+  --surface-alt: rgba(245, 249, 252, 0.88);
+  --text: #17212b;
+  --muted: #61707f;
+  --accent: #0f6c5d;
+  --accent-strong: #0a5146;
+  --link: #1769e0;
+  --border: rgba(29, 54, 81, 0.12);
+  --shadow: 0 28px 80px rgba(36, 62, 87, 0.12);
+  --font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-serif: "Canela", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(27, 125, 108, 0.18), transparent 28%),
+    linear-gradient(180deg, #f8fbfd 0%, var(--bg) 100%);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: inherit;
+}
+
+.page-shell {
+  width: min(100%, 78rem);
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.career-list-page,
+.career-detail-page {
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.career-list-page {
+  padding: 2.75rem;
+}
+
+.career-detail-page {
+  padding: 3rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 4.4vw, 4.4rem);
+  line-height: 0.98;
+}
+
+.page-subtitle {
+  max-width: 46rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.career-list {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+
+.career-card {
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1.35rem;
+  background: var(--surface-alt);
+}
+
+.career-link {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.55rem, 2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--link);
+  text-decoration: none;
+}
+
+.career-link:hover {
+  color: #114ea7;
+}
+
+.career-summary {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.career-hero {
+  display: grid;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.career-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.career-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.career-sections {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.career-section {
+  padding: 1.35rem 1.45rem;
+  border: 1px solid var(--border);
+  border-radius: 1.3rem;
+  background: var(--surface-alt);
+}
+
+.career-section h2 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.career-section p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .career-list-page,
+  .career-detail-page {
+    padding: 1.4rem;
+    border-radius: 1.3rem;
+  }
+
+  .career-card,
+  .career-section {
+    padding: 1.1rem;
+  }
+}
