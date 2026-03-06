@@ -15,6 +15,7 @@ class SubmitAttemptRequest extends FormRequest
     {
         return [
             'attempt_id' => ['required', 'string', 'max:64'],
+            'anon_id' => ['nullable', 'string', 'max:191'],
             'answers' => ['nullable', 'array'],
             'answers.*.question_id' => ['required_with:answers', 'string', 'max:128'],
             // Keep submit contract scale-agnostic; scale-specific answer validation

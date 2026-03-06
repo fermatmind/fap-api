@@ -74,7 +74,10 @@ class AttemptWriteController extends Controller
             ?? $request->attributes->get('fm_anon_id')
             ?? ''
         ));
-        $bodyAnonId = trim((string) ($payload['anon_id'] ?? ''));
+
+        // ✅ 必须从原始 request input 取，不能依赖 validated()，否则 rules 里没放 anon_id 就会被过滤掉
+        $bodyAnonId = trim((string) ($request->input('anon_id') ?? ''));
+
         $ctxAnonId = trim((string) ($this->orgContext->anonId() ?? ''));
 
         $payload['anon_id'] = $attrAnonId !== ''
