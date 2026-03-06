@@ -25,12 +25,18 @@ use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Http\Controllers\HealthzController;
+use App\Http\Middleware\AdminAuth;
+use App\Http\Middleware\EnsureCmsAdminAuthorized;
+use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
 use App\Http\Middleware\NormalizeApiErrorContract;
 use App\Http\Middleware\PartnerApiKeyAuth;
 use App\Http\Middleware\ResolveOrgContext;
+use App\Http\Middleware\SetOpsRequestContext;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Http\Request;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -297,10 +303,20 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
 
-    Route::post('/cms/articles', [ArticleController::class, 'store']);
-    Route::put('/cms/articles/{id}', [ArticleController::class, 'update']);
+    Route::middleware([
+        EncryptCookies::class,
+        AddQueuedCookiesToResponse::class,
+        StartSession::class,
+        SetOpsRequestContext::class,
+        AdminAuth::class,
+        ResolveOrgContext::class,
+        EnsureCmsAdminAuthorized::class,
+    ])->group(function () {
+        Route::post('/cms/articles', [ArticleController::class, 'store']);
+        Route::put('/cms/articles/{id}', [ArticleController::class, 'update']);
 
-    Route::post('/cms/articles/{id}/publish', [ArticleController::class, 'publish']);
-    Route::post('/cms/articles/{id}/unpublish', [ArticleController::class, 'unpublish']);
-    Route::post('/cms/articles/{id}/seo', [ArticleController::class, 'generateSeo']);
+        Route::post('/cms/articles/{id}/publish', [ArticleController::class, 'publish']);
+        Route::post('/cms/articles/{id}/unpublish', [ArticleController::class, 'unpublish']);
+        Route::post('/cms/articles/{id}/seo', [ArticleController::class, 'generateSeo']);
+    });
 });

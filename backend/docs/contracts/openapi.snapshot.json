@@ -1730,7 +1730,14 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@store",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
                 ]
             }
         },
@@ -1747,7 +1754,14 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@update",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
                 ]
             }
         },
@@ -1764,7 +1778,14 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@publish",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
                 ]
             }
         },
@@ -1781,7 +1802,14 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@generateSeo",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
                 ]
             }
         },
@@ -1798,7 +1826,14 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@unpublish",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
                 ]
             }
         }

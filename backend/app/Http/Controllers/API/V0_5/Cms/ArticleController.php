@@ -169,7 +169,6 @@ class ArticleController extends Controller
             'category_id' => ['nullable', 'integer', 'min:1'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['integer', 'min:1'],
-            'org_id' => ['nullable', 'integer', 'min:0'],
         ]);
 
         try {
@@ -180,7 +179,7 @@ class ArticleController extends Controller
                 (string) $payload['content_md'],
                 isset($payload['category_id']) ? (int) $payload['category_id'] : null,
                 isset($payload['tags']) && is_array($payload['tags']) ? $payload['tags'] : [],
-                isset($payload['org_id']) ? (int) $payload['org_id'] : $this->resolveOrgId($request)
+                $this->resolveTrustedOrgId($request)
             );
         } catch (InvalidArgumentException $e) {
             return $this->invalidArgument($e);
@@ -238,6 +237,7 @@ class ArticleController extends Controller
         }
 
         try {
+            $this->assertArticleInOrgScope($articleId, $this->resolveTrustedOrgId($request));
             $article = $this->articleService->updateArticle($articleId, $fields, $tags);
         } catch (InvalidArgumentException $e) {
             return $this->invalidArgument($e);
@@ -256,7 +256,7 @@ class ArticleController extends Controller
     /**
      * POST /api/v0.5/cms/articles/{id}/publish
      */
-    public function publish(string $id): JsonResponse
+    public function publish(Request $request, string $id): JsonResponse
     {
         $articleId = $this->resolveArticleId($id);
         if ($articleId === null) {
@@ -268,6 +268,7 @@ class ArticleController extends Controller
         }
 
         try {
+            $this->assertArticleInOrgScope($articleId, $this->resolveTrustedOrgId($request));
             $article = $this->articlePublishService->publishArticle($articleId);
         } catch (InvalidArgumentException $e) {
             return $this->invalidArgument($e);
@@ -286,7 +287,7 @@ class ArticleController extends Controller
     /**
      * POST /api/v0.5/cms/articles/{id}/unpublish
      */
-    public function unpublish(string $id): JsonResponse
+    public function unpublish(Request $request, string $id): JsonResponse
     {
         $articleId = $this->resolveArticleId($id);
         if ($articleId === null) {
@@ -298,6 +299,7 @@ class ArticleController extends Controller
         }
 
         try {
+            $this->assertArticleInOrgScope($articleId, $this->resolveTrustedOrgId($request));
             $article = $this->articlePublishService->unpublishArticle($articleId);
         } catch (InvalidArgumentException $e) {
             return $this->invalidArgument($e);
@@ -316,7 +318,7 @@ class ArticleController extends Controller
     /**
      * POST /api/v0.5/cms/articles/{id}/seo
      */
-    public function generateSeo(string $id): JsonResponse
+    public function generateSeo(Request $request, string $id): JsonResponse
     {
         $articleId = $this->resolveArticleId($id);
         if ($articleId === null) {
@@ -328,6 +330,7 @@ class ArticleController extends Controller
         }
 
         try {
+            $this->assertArticleInOrgScope($articleId, $this->resolveTrustedOrgId($request));
             $seoMeta = $this->articleSeoService->generateSeoMeta($articleId);
         } catch (InvalidArgumentException $e) {
             return $this->invalidArgument($e);
@@ -362,6 +365,30 @@ class ArticleController extends Controller
         return preg_match('/^\d+$/', $raw) === 1 ? (int) $raw : 0;
     }
 
+    private function resolveTrustedOrgId(Request $request): int
+    {
+        $candidates = [
+            $request->attributes->get('fm_org_id'),
+            $request->hasSession() ? $request->session()->get('ops_org_id') : null,
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_int($candidate) && ! is_string($candidate) && ! is_numeric($candidate)) {
+                continue;
+            }
+
+            $raw = trim((string) $candidate);
+            if ($raw === '' || preg_match('/^\d+$/', $raw) !== 1) {
+                continue;
+            }
+
+            return max(0, (int) $raw);
+        }
+
+        // CMS global/internal preview content lives in org 0 when no ops org is selected.
+        return 0;
+    }
+
     private function resolveArticleId(string $id): ?int
     {
         $normalized = trim($id);
@@ -372,6 +399,29 @@ class ArticleController extends Controller
         $articleId = (int) $normalized;
 
         return $articleId > 0 ? $articleId : null;
+    }
+
+    private function assertArticleInOrgScope(int $articleId, int $trustedOrgId): void
+    {
+        $exists = Article::query()
+            ->withoutGlobalScopes()
+            ->where('id', $articleId)
+            ->whereIn('org_id', $this->allowedOrgIds($trustedOrgId))
+            ->exists();
+
+        if (! $exists) {
+            throw new RuntimeException('article not found.');
+        }
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    private function allowedOrgIds(int $trustedOrgId): array
+    {
+        $normalizedOrgId = max(0, $trustedOrgId);
+
+        return $normalizedOrgId > 0 ? [0, $normalizedOrgId] : [0];
     }
 
     /**
