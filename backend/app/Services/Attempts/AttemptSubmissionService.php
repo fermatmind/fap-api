@@ -89,7 +89,11 @@ final class AttemptSubmissionService
 
         $actorUserId = $this->resolveUserId($ctx, $dto->userId);
         $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
-        $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)->firstOrFail();
+
+        $attempt = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)->first();
+        if (! $attempt) {
+            throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+        }
 
         $payload = $this->buildPayload($dto, $actorUserId, $actorAnonId);
         $dedupeKey = $this->buildDedupeKey($orgId, $attemptId, $payload);

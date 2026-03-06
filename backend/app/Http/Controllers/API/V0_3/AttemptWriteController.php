@@ -68,8 +68,11 @@ class AttemptWriteController extends Controller
         $payload['user_id'] = $request->attributes->get('fm_user_id')
             ?? $request->attributes->get('user_id')
             ?? $this->orgContext->userId();
+
+        $requestAnonId = trim((string) ($request->input('anon_id') ?? ''));
         $payload['anon_id'] = $request->attributes->get('anon_id')
             ?? $request->attributes->get('fm_anon_id')
+            ?? ($requestAnonId !== '' ? $requestAnonId : null)
             ?? $this->orgContext->anonId();
 
         $mode = strtolower(trim((string) $request->query('mode', '')));
