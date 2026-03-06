@@ -113,6 +113,10 @@ return [
             'SEO_ARTICLES_PREFIX',
             rtrim((string) env('APP_URL', 'http://localhost'), '/').'/articles'
         ),
+        'topics_url_prefix' => env(
+            'SEO_TOPICS_PREFIX',
+            rtrim((string) env('APP_URL', 'http://localhost'), '/').'/topics'
+        ),
     ],
 
     'integrations' => [

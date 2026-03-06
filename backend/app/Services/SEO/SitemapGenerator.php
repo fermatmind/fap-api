@@ -9,6 +9,8 @@ class SitemapGenerator
 {
     private string $urlPrefix;
 
+    private string $topicsUrlPrefix;
+
     public function __construct()
     {
         $configuredPrefix = trim((string) config('services.seo.tests_url_prefix', ''));
@@ -17,6 +19,13 @@ class SitemapGenerator
         }
 
         $this->urlPrefix = rtrim($configuredPrefix, '/').'/';
+
+        $configuredTopicsPrefix = trim((string) config('services.seo.topics_url_prefix', ''));
+        if ($configuredTopicsPrefix === '') {
+            $configuredTopicsPrefix = rtrim((string) config('app.url', 'http://localhost'), '/').'/topics';
+        }
+
+        $this->topicsUrlPrefix = rtrim($configuredTopicsPrefix, '/');
     }
 
     public function generate(): array
@@ -25,7 +34,8 @@ class SitemapGenerator
 
         $urls = array_merge(
             $this->getScaleUrls($locale),
-            $this->getArticleUrls($locale)
+            $this->getArticleUrls($locale),
+            $this->getTopicUrls($locale)
         );
 
         $urls = collect($urls)
@@ -147,6 +157,38 @@ class SitemapGenerator
                 'loc' => $url,
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => (string) $row->slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
+    }
+
+    private function getTopicUrls(string $locale): array
+    {
+        $rows = \App\Models\Topic::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->select(['slug', 'updated_at', 'created_at'])
+            ->orderByDesc('updated_at')
+            ->get();
+
+        $urls = [];
+
+        foreach ($rows as $row) {
+            $slug = trim((string) $row->slug);
+            if ($slug === '') {
+                continue;
+            }
+
+            $lastmod = $row->updated_at
+                ?? $row->created_at
+                ?? now();
+
+            $urls[] = [
+                'loc' => $this->topicsUrlPrefix.'/'.rawurlencode($slug),
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => $slug,
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
         }

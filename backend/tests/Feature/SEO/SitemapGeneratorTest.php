@@ -18,6 +18,7 @@ class SitemapGeneratorTest extends TestCase
         $now = now();
         // Isolate this test from migration-seeded default scales.
         DB::table('scales_registry')->delete();
+        DB::table('topics')->delete();
 
         DB::table('scales_registry')->insert([
             [
@@ -94,5 +95,54 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringNotContainsString($prefix . 'private-global-alt', $xml);
         $this->assertStringNotContainsString($prefix . 'tenant-public', $xml);
         $this->assertStringNotContainsString($prefix . 'tenant-public-alt', $xml);
+    }
+
+    public function test_generate_includes_global_topics_and_excludes_tenant_topics(): void
+    {
+        config([
+            'services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/',
+            'services.seo.topics_url_prefix' => 'https://fermatmind.com/topics',
+        ]);
+
+        $now = now();
+
+        DB::table('scales_registry')->delete();
+        DB::table('articles')->delete();
+        DB::table('topics')->delete();
+
+        DB::table('topics')->insert([
+            [
+                'org_id' => 0,
+                'name' => 'MBTI',
+                'slug' => 'mbti',
+                'description' => 'Global topic',
+                'seo_title' => null,
+                'seo_description' => null,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'org_id' => 42,
+                'name' => 'Tenant Topic',
+                'slug' => 'tenant-topic',
+                'description' => 'Tenant topic',
+                'seo_title' => null,
+                'seo_description' => null,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+        ]);
+
+        $payload = app(SitemapGenerator::class)->generate();
+
+        $slugList = (array) ($payload['slug_list'] ?? []);
+
+        $this->assertContains('mbti', $slugList);
+        $this->assertNotContains('tenant-topic', $slugList);
+
+        $xml = (string) ($payload['xml'] ?? '');
+
+        $this->assertStringContainsString('https://fermatmind.com/topics/mbti', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/topics/tenant-topic', $xml);
     }
 }

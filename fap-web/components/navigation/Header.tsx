@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const navItems = [
   { href: "/tests", label: "Tests" },
+  { href: "/topics", label: "Topics" },
   { href: "/personality", label: "Personality" },
   { href: "/career", label: "Career" },
   { href: "/articles", label: "Articles" },
@@ -26,4 +27,3 @@ export default function Header() {
     </header>
   );
 }
-
