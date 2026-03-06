@@ -1,0 +1,287 @@
+:root {
+  color-scheme: light;
+  --bg: #f7f0e8;
+  --surface: rgba(255, 255, 255, 0.94);
+  --surface-alt: rgba(251, 247, 241, 0.92);
+  --text: #1f1a16;
+  --muted: #6f665f;
+  --accent: #7c4dff;
+  --accent-strong: #5f35cf;
+  --link: #1864e8;
+  --border: rgba(78, 58, 36, 0.12);
+  --shadow: 0 26px 80px rgba(72, 49, 25, 0.11);
+  --font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia,
+    serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(124, 77, 255, 0.16), transparent 28%),
+    linear-gradient(180deg, #fffaf5 0%, var(--bg) 100%);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: inherit;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 251, 246, 0.82);
+  border-bottom: 1px solid rgba(78, 58, 36, 0.08);
+}
+
+.site-shell,
+.page-shell {
+  width: min(100%, 78rem);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.site-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4.5rem;
+}
+
+.site-brand {
+  color: var(--accent-strong);
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.site-nav a {
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--text);
+  background: rgba(124, 77, 255, 0.08);
+}
+
+.page-shell {
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+
+.personality-list-page,
+.personality-detail-page {
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.personality-list-page {
+  padding: 2.75rem;
+}
+
+.personality-detail-page {
+  padding: 3rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 4.2vw, 4.5rem);
+  line-height: 0.98;
+}
+
+.page-subtitle {
+  max-width: 48rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.personality-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.personality-card,
+.detail-block,
+.related-card {
+  border: 1px solid var(--border);
+  border-radius: 1.35rem;
+  background: var(--surface-alt);
+}
+
+.personality-card {
+  display: block;
+  padding: 1.45rem;
+  text-decoration: none;
+}
+
+.personality-card:hover,
+.related-card:hover {
+  border-color: rgba(124, 77, 255, 0.28);
+}
+
+.personality-card h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  line-height: 1.1;
+}
+
+.personality-card p {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.personality-hero {
+  display: grid;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.personality-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.detail-grid,
+.related-grid {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.detail-grid {
+  margin-top: 2rem;
+}
+
+.detail-block {
+  padding: 1.35rem 1.45rem;
+}
+
+.detail-block h2,
+.related-section h2 {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.detail-block p,
+.related-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.related-section {
+  margin-top: 2rem;
+}
+
+.related-grid {
+  margin-top: 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.related-card {
+  display: block;
+  padding: 1.2rem 1.25rem;
+  text-decoration: none;
+}
+
+.related-card h3 {
+  margin: 0;
+  color: var(--link);
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.related-card p {
+  margin-top: 0.55rem;
+}
+
+@media (max-width: 800px) {
+  .personality-grid,
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell,
+  .page-shell {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .site-shell {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .page-shell {
+    padding-top: 1.25rem;
+    padding-bottom: 3rem;
+  }
+
+  .personality-list-page,
+  .personality-detail-page {
+    padding: 1.4rem;
+    border-radius: 1.3rem;
+  }
+
+  .personality-card,
+  .detail-block,
+  .related-card {
+    padding: 1.1rem;
+  }
+}
