@@ -46,6 +46,11 @@ final class ContentPacksIndex
         }
 
         if ($packsRootFs === '' || !File::isDirectory($packsRootFs)) {
+            Log::error('CONTENT_PACKS_ROOT_INVALID', [
+                'driver' => $driver,
+                'packs_root' => $packsRootFs,
+            ]);
+
             return [
                 'ok' => false,
                 'driver' => $driver,
@@ -57,6 +62,13 @@ final class ContentPacksIndex
         }
 
         $items = $this->scanItems($packsRootFs);
+        if ($items === []) {
+            Log::error('CONTENT_PACKS_INDEX_EMPTY', [
+                'driver' => $driver,
+                'packs_root' => $packsRootFs,
+            ]);
+        }
+
         $byPackId = $this->buildByPackId($items, $defaults);
 
         $index = [
@@ -135,6 +147,15 @@ final class ContentPacksIndex
         }
     }
 
+    private function debugLog(string $event, array $context = []): void
+    {
+        if (! (bool) config('content_packs.debug_log', false)) {
+            return;
+        }
+
+        Log::warning($event, $context);
+    }
+
     private function defaults(): array
     {
         return [
@@ -153,19 +174,34 @@ final class ContentPacksIndex
         $seen = [];
         $rootNorm = rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $packsRootFs), '/');
 
+        $stats = [
+            'manifests_seen' => 0,
+            'skipped_deprecated' => 0,
+            'skipped_manifest_json_invalid' => 0,
+            'skipped_manifest_consistency' => 0,
+            'skipped_version_invalid' => 0,
+            'skipped_questions_invalid' => 0,
+            'skipped_duplicate' => 0,
+            'accepted' => 0,
+        ];
+
         foreach (File::allFiles($packsRootFs) as $file) {
             if ($file->getFilename() !== 'manifest.json') {
                 continue;
             }
 
+            $stats['manifests_seen']++;
+
             $manifestPath = $file->getPathname();
             $manifestPathNorm = str_replace(DIRECTORY_SEPARATOR, '/', $manifestPath);
             if (str_contains($manifestPathNorm, '/_deprecated/')) {
+                $stats['skipped_deprecated']++;
                 continue;
             }
-            if (!str_contains($manifestPathNorm, '/default/')) {
-                continue;
-            }
+
+            // 正式修复：
+            // 不再强制要求 manifest 路径里必须包含 /default/
+            // 只要 manifest/version/questions 三件套一致，就视为有效 legacy pack。
 
             try {
                 $manifestRaw = File::get($manifestPath);
@@ -175,6 +211,7 @@ final class ContentPacksIndex
 
             $manifest = json_decode($manifestRaw, true);
             if (!is_array($manifest)) {
+                $stats['skipped_manifest_json_invalid']++;
                 continue;
             }
 
@@ -186,12 +223,14 @@ final class ContentPacksIndex
             $packDir = dirname($manifestPath);
             $dirVersion = basename($packDir);
             if (!$this->isManifestConsistent($manifest, $dirVersion, $packId)) {
+                $stats['skipped_manifest_consistency']++;
                 continue;
             }
 
             $versionPath = $packDir . DIRECTORY_SEPARATOR . 'version.json';
             $version = $this->readJsonFile($versionPath);
             if (!is_array($version)) {
+                $stats['skipped_version_invalid']++;
                 continue;
             }
             if (!$this->isVersionConsistent(
@@ -200,19 +239,23 @@ final class ContentPacksIndex
                 (string) ($manifest['content_package_version'] ?? ''),
                 $dirVersion
             )) {
+                $stats['skipped_version_invalid']++;
                 continue;
             }
 
             $questionsPath = $packDir . DIRECTORY_SEPARATOR . 'questions.json';
             if (!File::exists($questionsPath)) {
+                $stats['skipped_questions_invalid']++;
                 continue;
             }
             if (!is_array($this->readJsonFile($questionsPath))) {
+                $stats['skipped_questions_invalid']++;
                 continue;
             }
 
             $key = $packId . '|' . $dirVersion;
             if (isset($seen[$key])) {
+                $stats['skipped_duplicate']++;
                 continue;
             }
 
@@ -229,6 +272,8 @@ final class ContentPacksIndex
                 (int) ($versionSig['mtime'] ?? 0),
                 (int) ($questionsSig['mtime'] ?? 0)
             );
+
+            $stats['accepted']++;
 
             $items[] = [
                 'pack_id' => $packId,
@@ -260,6 +305,11 @@ final class ContentPacksIndex
             }
             return strcmp((string) ($a['dir_version'] ?? ''), (string) ($b['dir_version'] ?? ''));
         });
+
+        $this->debugLog('CONTENT_PACKS_INDEX_SCAN_SUMMARY', [
+            'packs_root' => $packsRootFs,
+            'stats' => $stats,
+        ]);
 
         return $items;
     }

@@ -1,13 +1,16 @@
 <?php
 // file: backend/config/content_packs.php
 
-declare(strict_types=1);
+$defaultPacksRoot = realpath(dirname(base_path()) . '/content_packages');
+if ($defaultPacksRoot === false || $defaultPacksRoot === '') {
+    $defaultPacksRoot = dirname(base_path()) . '/content_packages';
+}
 
 return [
     // content_packages 根目录（本机/服务器/CI 都建议通过 env 固定）
     // - 本机默认：base_path('../content_packages')
     // - CI 建议：FAP_PACKS_ROOT=../content_packages（相对 backend/ 目录）
-    'root' => env('FAP_PACKS_ROOT', base_path('../content_packages')),
+    'root' => env('FAP_PACKS_ROOT', $defaultPacksRoot),
 
     // 内容源驱动：local|s3
     // - local：root 指向 content_packages 根目录
@@ -24,6 +27,7 @@ return [
     'cache_ttl_seconds' => (int)env('FAP_PACKS_CACHE_TTL_SECONDS', 3600),
     'loader_cache_store' => env('CONTENT_LOADER_CACHE_STORE', 'array'),
     'loader_cache_ttl_seconds' => (int) env('CONTENT_LOADER_CACHE_TTL_SECONDS', 300),
+    'debug_log' => (bool) env('FAP_PACKS_DEBUG_LOG', false),
 
     // ✅ CI/服务器建议强约束：默认 pack_id 明确指向你的主包，避免回退到 GLOBAL/en
     // default_pack_id 对应 manifest.json.pack_id（MBTI.cn-mainland.zh-CN.v0.3）
