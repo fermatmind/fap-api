@@ -4,6 +4,10 @@ export type Article = {
   title: string;
   excerpt: string;
   publishedAt: string;
+  tags: {
+    slug: string;
+    name: string;
+  }[];
   body: string[];
   relatedCareerSlugs: string[];
   relatedPersonalityTypes: string[];
@@ -33,6 +37,12 @@ export type Personality = {
   relatedArticleSlugs: string[];
 };
 
+export type RelatedContentItem = {
+  title: string;
+  slug: string;
+  url: string;
+};
+
 const articles: Article[] = [
   {
     id: "article-logic-luck",
@@ -41,6 +51,10 @@ const articles: Article[] = [
     excerpt:
       "A practical look at how deliberate choices and randomness shape long-term career growth.",
     publishedAt: "March 6, 2026",
+    tags: [
+      { slug: "career-strategy", name: "Career Strategy" },
+      { slug: "decision-making", name: "Decision Making" },
+    ],
     body: [
       "Career progress is rarely a straight line. Good systems increase the odds of useful opportunities, but timing and context still matter.",
       "The most resilient professionals combine clear decision rules with room to adapt. That balance makes luck easier to capture when it appears.",
@@ -55,6 +69,10 @@ const articles: Article[] = [
     excerpt:
       "Design a weekly cadence that protects focus, creative energy, and execution quality.",
     publishedAt: "February 18, 2026",
+    tags: [
+      { slug: "career-strategy", name: "Career Strategy" },
+      { slug: "deep-work", name: "Deep Work" },
+    ],
     body: [
       "Sustained focus is not just a habit. It is an operating model that shapes how a team protects time, energy, and attention.",
       "High-signal calendars separate thinking blocks from collaboration blocks, which lowers switching costs and improves output quality.",
@@ -69,12 +87,34 @@ const articles: Article[] = [
     excerpt:
       "How faster teams reduce friction by making intent, ownership, and tradeoffs explicit.",
     publishedAt: "January 27, 2026",
+    tags: [
+      { slug: "career-strategy", name: "Career Strategy" },
+      { slug: "team-communication", name: "Team Communication" },
+    ],
     body: [
       "Most execution problems are coordination problems in disguise. Teams move faster when decisions, risks, and next steps are visible.",
       "Communication frameworks work best when they are simple enough to survive real deadlines and real ambiguity.",
     ],
     relatedCareerSlugs: ["product-manager", "ux-researcher"],
     relatedPersonalityTypes: ["ENFJ", "ENTP"],
+  },
+  {
+    id: "article-example",
+    slug: "example",
+    title: "Example Article",
+    excerpt:
+      "A reference article used to validate internal recommendations across the content platform.",
+    publishedAt: "March 6, 2026",
+    tags: [
+      { slug: "career-strategy", name: "Career Strategy" },
+      { slug: "internal-linking", name: "Internal Linking" },
+    ],
+    body: [
+      "This page exists so related content can be validated quickly during development and review.",
+      "Because it shares tags with other articles, the recommendation engine can surface useful internal links immediately.",
+    ],
+    relatedCareerSlugs: ["software-engineer", "product-manager"],
+    relatedPersonalityTypes: ["INTP", "ENTJ"],
   },
 ];
 
@@ -413,6 +453,14 @@ export function getArticle(slug: string) {
   return articles.find((article) => article.slug === slug) || null;
 }
 
+export function getArticlesByTag(tagSlug: string, excludeSlug?: string) {
+  return articles.filter(
+    (article) =>
+      article.slug !== excludeSlug &&
+      article.tags.some((tag) => tag.slug === tagSlug),
+  );
+}
+
 export function getCareers() {
   return careers;
 }
@@ -443,3 +491,80 @@ export function getPersonalities() {
   return personalityTypes.map((type) => getPersonality(type)!);
 }
 
+function toRelatedArticleItem(article: Article): RelatedContentItem {
+  return {
+    title: article.title,
+    slug: article.slug,
+    url: `/articles/${article.slug}`,
+  };
+}
+
+function toRelatedCareerItem(career: Career): RelatedContentItem {
+  return {
+    title: career.name,
+    slug: career.slug,
+    url: `/career/${career.slug}`,
+  };
+}
+
+function toRelatedPersonalityItem(personality: Personality): RelatedContentItem {
+  return {
+    title: `${personality.type} Personality Guide`,
+    slug: personality.slug,
+    url: `/personality/${personality.slug}`,
+  };
+}
+
+export function getRelatedArticlesForArticle(article: Article) {
+  const primaryTag = article.tags[0]?.slug;
+
+  if (!primaryTag) {
+    return [];
+  }
+
+  return getArticlesByTag(primaryTag, article.slug)
+    .map(toRelatedArticleItem)
+    .slice(0, 3);
+}
+
+export function getRelatedCareersForArticle(article: Article) {
+  return article.relatedCareerSlugs
+    .map((careerSlug) => getCareer(careerSlug))
+    .filter(Boolean)
+    .map((career) => toRelatedCareerItem(career!));
+}
+
+export function getRelatedPersonalitiesForArticle(article: Article) {
+  return article.relatedPersonalityTypes
+    .map((type) => getPersonality(type))
+    .filter(Boolean)
+    .map((personality) => toRelatedPersonalityItem(personality!));
+}
+
+export function getRelatedArticlesForCareer(career: Career) {
+  return getArticles()
+    .filter((article) => article.relatedCareerSlugs.includes(career.slug))
+    .map(toRelatedArticleItem)
+    .slice(0, 4);
+}
+
+export function getRelatedPersonalitiesForCareer(career: Career) {
+  return getPersonalities()
+    .filter((personality) => personality.relatedCareerSlugs.includes(career.slug))
+    .map(toRelatedPersonalityItem)
+    .slice(0, 4);
+}
+
+export function getRelatedCareersForPersonality(personality: Personality) {
+  return personality.relatedCareerSlugs
+    .map((slug) => getCareer(slug))
+    .filter(Boolean)
+    .map((career) => toRelatedCareerItem(career!));
+}
+
+export function getRelatedArticlesForPersonality(personality: Personality) {
+  return personality.relatedArticleSlugs
+    .map((slug) => getArticle(slug))
+    .filter(Boolean)
+    .map((article) => toRelatedArticleItem(article!));
+}

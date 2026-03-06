@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
-import { getArticle, getCareer, getPersonality } from "@/lib/content";
+import RelatedContent from "@/components/content/RelatedContent";
+import {
+  getArticle,
+  getRelatedArticlesForArticle,
+  getRelatedCareersForArticle,
+  getRelatedPersonalitiesForArticle,
+} from "@/lib/content";
 
 export const dynamic = "force-dynamic";
 
@@ -47,13 +52,9 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
     notFound();
   }
 
-  const relatedCareers = article.relatedCareerSlugs
-    .map((careerSlug) => getCareer(careerSlug))
-    .filter(Boolean);
-
-  const relatedPersonalities = article.relatedPersonalityTypes
-    .map((type) => getPersonality(type))
-    .filter(Boolean);
+  const relatedArticles = getRelatedArticlesForArticle(article);
+  const relatedCareers = getRelatedCareersForArticle(article);
+  const relatedPersonalities = getRelatedPersonalitiesForArticle(article);
 
   return (
     <div className="shell page-shell">
@@ -83,36 +84,14 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
         </article>
 
         <div className="split-grid">
-          <aside className="related-panel">
-            <h2>Related careers</h2>
-            <ul className="link-list">
-              {relatedCareers.map((career) => (
-                <li key={career!.id}>
-                  <Link href={`/career/${career!.slug}`}>
-                    <strong>{career!.name}</strong>
-                    <span>{career!.summary}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </aside>
-
-          <aside className="related-panel">
-            <h2>Related personalities</h2>
-            <ul className="link-list">
-              {relatedPersonalities.map((personality) => (
-                <li key={personality!.type}>
-                  <Link href={`/personality/${personality!.slug}`}>
-                    <strong>{personality!.type}</strong>
-                    <span>{personality!.summary}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </aside>
+          <RelatedContent title="Related Articles" items={relatedArticles} />
+          <RelatedContent title="Related Careers" items={relatedCareers} />
+          <RelatedContent
+            title="Related Personality Types"
+            items={relatedPersonalities}
+          />
         </div>
       </section>
     </div>
   );
 }
-

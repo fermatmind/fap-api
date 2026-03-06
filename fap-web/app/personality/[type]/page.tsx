@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
-import { getArticle, getCareer, getPersonality } from "@/lib/content";
+import RelatedContent from "@/components/content/RelatedContent";
+import {
+  getPersonality,
+  getRelatedArticlesForPersonality,
+  getRelatedCareersForPersonality,
+} from "@/lib/content";
 
 export const dynamic = "force-dynamic";
 
@@ -51,12 +55,8 @@ export default async function PersonalityDetailPage({
     notFound();
   }
 
-  const relatedCareers = personality.relatedCareerSlugs
-    .map((slug) => getCareer(slug))
-    .filter(Boolean);
-  const relatedArticles = personality.relatedArticleSlugs
-    .map((slug) => getArticle(slug))
-    .filter(Boolean);
+  const relatedCareers = getRelatedCareersForPersonality(personality);
+  const relatedArticles = getRelatedArticlesForPersonality(personality);
 
   return (
     <div className="shell page-shell">
@@ -102,35 +102,9 @@ export default async function PersonalityDetailPage({
       </section>
 
       <section className="split-grid">
-        <aside className="related-panel">
-          <h2>Related careers</h2>
-          <ul className="link-list">
-            {relatedCareers.map((career) => (
-              <li key={career!.id}>
-                <Link href={`/career/${career!.slug}`}>
-                  <strong>{career!.name}</strong>
-                  <span>{career!.summary}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </aside>
-
-        <aside className="related-panel">
-          <h2>Related articles</h2>
-          <ul className="link-list">
-            {relatedArticles.map((article) => (
-              <li key={article!.id}>
-                <Link href={`/articles/${article!.slug}`}>
-                  <strong>{article!.title}</strong>
-                  <span>{article!.excerpt}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </aside>
+        <RelatedContent title="Related Careers" items={relatedCareers} />
+        <RelatedContent title="Related Articles" items={relatedArticles} />
       </section>
     </div>
   );
 }
-

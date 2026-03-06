@@ -222,6 +222,16 @@ img {
   gap: 0.25rem;
 }
 
+.related-content .link-list {
+  gap: 0.6rem;
+}
+
+.related-content__link {
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
 .link-list strong {
   color: var(--text);
 }
@@ -297,4 +307,3 @@ img {
     padding-top: 1.5rem;
   }
 }
-
