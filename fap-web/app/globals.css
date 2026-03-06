@@ -1,0 +1,161 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f0e7;
+  --paper: rgba(255, 253, 249, 0.94);
+  --text: #1f1a17;
+  --muted: #6c635a;
+  --accent: #155eef;
+  --accent-strong: #1149b6;
+  --border: rgba(74, 53, 35, 0.12);
+  --shadow: 0 24px 70px rgba(56, 38, 18, 0.1);
+  --font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia,
+    serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(177, 141, 93, 0.2), transparent 30%),
+    linear-gradient(180deg, #fbf8f3 0%, var(--bg) 100%);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: inherit;
+}
+
+.page-shell {
+  width: min(100%, 74rem);
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.articles-page {
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1;
+}
+
+.page-subtitle {
+  max-width: 44rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.article-list {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.article-card {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-card:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.article-link {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.article-link:hover {
+  color: var(--accent-strong);
+}
+
+.article-excerpt {
+  margin: 0.85rem 0 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.article-date {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 2.25rem;
+  flex-wrap: wrap;
+}
+
+.pagination-link,
+.pagination-current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+}
+
+.pagination-link {
+  color: var(--accent-strong);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.pagination-link:hover {
+  border-color: rgba(21, 94, 239, 0.28);
+}
+
+.pagination-current {
+  color: var(--muted);
+  background: rgba(89, 66, 34, 0.04);
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .articles-page {
+    padding: 1.4rem;
+    border-radius: 1.3rem;
+  }
+}
