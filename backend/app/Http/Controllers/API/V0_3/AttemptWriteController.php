@@ -69,11 +69,17 @@ class AttemptWriteController extends Controller
             ?? $request->attributes->get('user_id')
             ?? $this->orgContext->userId();
 
-        $requestAnonId = trim((string) ($request->input('anon_id') ?? ''));
-        $payload['anon_id'] = $request->attributes->get('anon_id')
+        $attrAnonId = trim((string) (
+            $request->attributes->get('anon_id')
             ?? $request->attributes->get('fm_anon_id')
-            ?? ($requestAnonId !== '' ? $requestAnonId : null)
-            ?? $this->orgContext->anonId();
+            ?? ''
+        ));
+        $bodyAnonId = trim((string) ($payload['anon_id'] ?? ''));
+        $ctxAnonId = trim((string) ($this->orgContext->anonId() ?? ''));
+
+        $payload['anon_id'] = $attrAnonId !== ''
+            ? $attrAnonId
+            : ($bodyAnonId !== '' ? $bodyAnonId : ($ctxAnonId !== '' ? $ctxAnonId : null));
 
         $mode = strtolower(trim((string) $request->query('mode', '')));
         $asyncEnabled = (bool) config('fap.features.submit_async_v2', false);
