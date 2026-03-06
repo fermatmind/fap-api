@@ -251,13 +251,13 @@ if ($anonId === '') {
             $attemptPayload['duration_ms'] = 0;
         }
 
-        $persisted = DB::transaction(function () use ($attemptPayload): array {
+        $writeConnectionName = Attempt::onWriteConnection()->getModel()->getConnectionName();
+
+        $persisted = DB::connection($writeConnectionName)->transaction(function () use ($attemptPayload, $writeConnectionName): array {
             $attempt = new Attempt;
 
-            // ✅ 保证 start 和 submit 使用同一套 Attempt::onWriteConnection() 的写库连接
-            $attempt->setConnection(
-                Attempt::onWriteConnection()->getModel()->getConnectionName()
-            );
+            // ✅ 保证 start / submit / report 都使用同一套写库连接
+            $attempt->setConnection($writeConnectionName);
 
             // keep model casts/mutators for json columns
             $attempt->forceFill($attemptPayload);
@@ -327,6 +327,9 @@ if ($anonId === '') {
 
         return [
             'ok' => true,
+            'org_id' => $orgId,
+            'anon_id' => $anonId,
+
             'attempt_id' => (string) $attempt->id,
             'scale_code' => $responseCodes['scale_code'],
             'scale_code_legacy' => $responseCodes['scale_code_legacy'],

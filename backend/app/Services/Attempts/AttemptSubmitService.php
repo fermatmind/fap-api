@@ -148,9 +148,15 @@ class AttemptSubmitService
         ?string $actorUserId,
         ?string $actorAnonId
     ): Builder {
-        $query = Attempt::query()
+        $orgId = $ctx->orgId() ?? 0;
+        $orgIds = $orgId === 0 ? [0] : [$orgId, 0];
+
+        // ✅ 强制走写库 + 去掉全局 scopes
+        // ✅ whereIn(org_id, [$orgId, 0])：兼容历史 attempt 写成 org_id=0
+        $query = Attempt::onWriteConnection()
+            ->withoutGlobalScopes()
             ->where('id', $attemptId)
-            ->where('org_id', $ctx->orgId());
+            ->whereIn('org_id', $orgIds);
 
         $role = (string) ($ctx->role() ?? '');
         if (in_array($role, ['owner', 'admin'], true)) {

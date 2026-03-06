@@ -261,8 +261,12 @@ final class AttemptSubmissionService
             ];
         }
 
+                $orgId = $ctx->orgId() ?? 0;
+        $actorUserId = $this->normalizeUserId($actorUserId);
+        $actorAnonId = $this->normalizeAnonId($actorAnonId);
+
         $query = DB::table('attempt_submissions')
-            ->where('org_id', $ctx->orgId() ?? 0)
+            ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId);
 
         if ($actorUserId !== null) {
@@ -282,6 +286,24 @@ final class AttemptSubmissionService
             ->orderByDesc('updated_at')
             ->orderByDesc('created_at')
             ->first();
+
+        // ✅ org fallback：兼容历史 public attempt/submission 写成 org_id=0
+        if ($row === null && $orgId !== 0) {
+            $fallback = DB::table('attempt_submissions')
+                ->where('org_id', 0)
+                ->where('attempt_id', $attemptId);
+
+            if ($actorUserId !== null) {
+                $fallback->where('actor_user_id', (int) $actorUserId);
+            } elseif ($actorAnonId !== null) {
+                $fallback->where('actor_anon_id', $actorAnonId);
+            }
+
+            $row = $fallback
+                ->orderByDesc('updated_at')
+                ->orderByDesc('created_at')
+                ->first();
+        }
 
         if ($row === null) {
             return [
@@ -360,8 +382,8 @@ final class AttemptSubmissionService
         $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
 
         $payload = $this->buildPayload($dto, $actorUserId, $actorAnonId);
-        $dedupeKey = $this->buildDedupeKey($ctx->orgId(), $attemptId, $payload);
-        $orgId = $ctx->orgId();
+        $orgId = $ctx->orgId() ?? 0;
+        $dedupeKey = $this->buildDedupeKey($orgId, $attemptId, $payload);
         $now = now();
 
         $encodedRequest = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -424,8 +446,8 @@ final class AttemptSubmissionService
         $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
 
         $payload = $this->buildPayload($dto, $actorUserId, $actorAnonId);
-        $dedupeKey = $this->buildDedupeKey($ctx->orgId(), $attemptId, $payload);
-        $orgId = $ctx->orgId();
+        $orgId = $ctx->orgId() ?? 0;
+        $dedupeKey = $this->buildDedupeKey($orgId, $attemptId, $payload);
         $now = now();
 
         $errorCode = strtoupper(trim($errorCode));
@@ -628,9 +650,18 @@ final class AttemptSubmissionService
         ?string $actorUserId,
         ?string $actorAnonId
     ): Builder {
+        $orgId = $ctx->orgId() ?? 0;
+        $orgIds = $orgId === 0 ? [0] : [$orgId, 0];
+
+        // ✅ 强制走写库 + 去掉全局 scopes
+        // ✅ whereIn(org_id, [$orgId, 0])：兼容历史 attempt 写成 org_id=0 的情况
         $query = Attempt::onWriteConnection()
             ->withoutGlobalScopes()
-            ->where('id', $attemptId);
+            ->where('id', $attemptId)
+            ->whereIn('org_id', $orgIds);
+
+        $actorUserId = $this->normalizeUserId($actorUserId);
+        $actorAnonId = $this->normalizeAnonId($actorAnonId);
 
         if ($actorUserId !== null) {
             return $query->where('user_id', $actorUserId);
@@ -640,6 +671,6 @@ final class AttemptSubmissionService
             return $query->where('anon_id', $actorAnonId);
         }
 
-        return $query->whereRaw('1=0');
+        throw new ApiProblemException(401, 'UNAUTHORIZED', 'actor identity missing.');
     }
 }
