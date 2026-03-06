@@ -27,8 +27,12 @@ class AttemptSubmitGuardService
         $actorUserId = $this->core->resolveUserId($ctx, $dto->userId);
         $actorAnonId = $this->core->resolveAnonId($ctx, $dto->anonId);
 
-        $orgId = $ctx->orgId();
-        $attempt = $this->core->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)->firstOrFail();
+        $orgId = $ctx->orgId() ?? 0;
+        $attempt = $this->core->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)->first();
+
+        if (! $attempt) {
+            throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+        }
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {

@@ -87,7 +87,11 @@ class AttemptSubmitTxService
         ) {
             $locked = $this->core->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)
                 ->lockForUpdate()
-                ->firstOrFail();
+                ->first();
+
+if (! $locked) {
+    throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+}
 
             $existingDigest = trim((string) ($locked->answers_digest ?? ''));
             if ($locked->submitted_at && $existingDigest !== '') {
