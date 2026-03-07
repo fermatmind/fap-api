@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ArticleTagResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Models\ArticleTag;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
@@ -14,7 +15,6 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -88,15 +88,19 @@ class ArticleTagResource extends Resource
                 TextColumn::make('slug')
                     ->searchable()
                     ->copyable(),
-                IconColumn::make('is_active')
-                    ->boolean()
+                TextColumn::make('is_active')
+                    ->label('Status')
+                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, 'active', 'inactive'))
+                    ->badge()
+                    ->color(fn (bool|int|string|null $state): string => StatusBadge::booleanColor($state))
                     ->sortable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable(),
             ])
             ->filters([
-                TernaryFilter::make('is_active'),
+                TernaryFilter::make('is_active')
+                    ->label('Status'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

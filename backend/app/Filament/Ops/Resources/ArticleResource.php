@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ArticleResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
@@ -159,7 +160,7 @@ class ArticleResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->sortable()
-                    ->color(fn (string $state): string => $state === 'published' ? 'success' : 'gray'),
+                    ->color(fn (string $state): string => StatusBadge::color($state)),
                 Tables\Columns\TextColumn::make('locale')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('published_at')

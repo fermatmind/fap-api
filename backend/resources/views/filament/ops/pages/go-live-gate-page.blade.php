@@ -1,30 +1,52 @@
 <x-filament-panels::page>
-    <div class="space-y-4">
+    <div class="ops-shell-page">
         <x-filament::section>
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="text-sm font-semibold text-gray-900">Gate Status:</span>
-                <span class="rounded-full px-2 py-1 text-xs font-semibold {{ (($gate['status'] ?? 'STOP-SHIP') === 'PASS') ? 'bg-success-100 text-success-700' : 'bg-danger-100 text-danger-700' }}">
-                    {{ (string) ($gate['status'] ?? 'STOP-SHIP') }}
-                </span>
-                <x-filament::button size="sm" color="gray" wire:click="refreshChecks">Refresh</x-filament::button>
-                <x-filament::button size="sm" color="primary" wire:click="runChecks">Run Checks</x-filament::button>
+            <div class="ops-workbench-toolbar ops-workbench-toolbar--split">
+                <div class="ops-workbench-toolbar__main">
+                    <div class="ops-shell-inline-intro">
+                        <span class="ops-shell-inline-intro__eyebrow">Governance checkpoint</span>
+                        <p class="ops-shell-inline-intro__meta">
+                            Review the current go-live signals before releasing content or escalating operational changes.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span class="ops-control-label">Gate status</span>
+                        <x-filament.ops.shared.status-pill
+                            :state="(($gate['status'] ?? 'STOP-SHIP') === 'PASS') ? 'success' : 'failed'"
+                            :label="(string) ($gate['status'] ?? 'STOP-SHIP')"
+                        />
+                        <span class="ops-control-hint">Generated: {{ (string) ($gate['generated_at'] ?? '-') }}</span>
+                    </div>
+                </div>
+
+                <div class="ops-workbench-toolbar__actions">
+                    <x-filament::button size="sm" color="gray" wire:click="refreshChecks">Refresh</x-filament::button>
+                    <x-filament::button size="sm" color="primary" wire:click="runChecks">Run Checks</x-filament::button>
+                </div>
             </div>
-            <p class="mt-2 text-xs text-gray-500">Generated: {{ (string) ($gate['generated_at'] ?? '-') }}</p>
         </x-filament::section>
 
         @foreach (($gate['groups'] ?? []) as $groupKey => $group)
             <x-filament::section>
-                <h3 class="text-sm font-semibold text-gray-900">{{ (string) ($group['label'] ?? $groupKey) }}</h3>
-                <div class="mt-3 space-y-2">
+                <div class="ops-results-header">
+                    <div>
+                        <h3 class="ops-results-header__title">{{ (string) ($group['label'] ?? $groupKey) }}</h3>
+                        <p class="ops-results-header__meta">Each check shares the same status language as the rest of Ops.</p>
+                    </div>
+                </div>
+
+                <div class="ops-card-list mt-4">
                     @foreach (($group['checks'] ?? []) as $check)
-                        <div class="rounded-lg border border-gray-200 p-3">
-                            <div class="flex items-center justify-between gap-3">
-                                <p class="text-sm font-medium text-gray-900">{{ (string) ($check['key'] ?? '-') }}</p>
-                                <span class="rounded-full px-2 py-1 text-xs font-semibold {{ (($check['passed'] ?? false) ? 'bg-success-100 text-success-700' : 'bg-danger-100 text-danger-700') }}">
-                                    {{ (($check['passed'] ?? false) ? 'PASS' : 'STOP-SHIP') }}
-                                </span>
+                        <div class="ops-result-card">
+                            <div class="ops-result-card__header">
+                                <p class="ops-result-card__title">{{ (string) ($check['key'] ?? '-') }}</p>
+                                <x-filament.ops.shared.status-pill
+                                    :state="($check['passed'] ?? false) ? 'success' : 'failed'"
+                                    :label="(($check['passed'] ?? false) ? 'PASS' : 'STOP-SHIP')"
+                                />
                             </div>
-                            <p class="mt-1 text-xs text-gray-500">{{ (string) ($check['message'] ?? '') }}</p>
+                            <p class="ops-result-card__meta">{{ (string) ($check['message'] ?? '') }}</p>
                         </div>
                     @endforeach
                 </div>

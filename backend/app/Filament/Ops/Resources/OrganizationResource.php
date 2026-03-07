@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\OrganizationResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Organization;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
@@ -88,7 +89,10 @@ class OrganizationResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('id')->label('Org ID')->sortable(),
-                Tables\Columns\TextColumn::make('status')->badge()->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => StatusBadge::color($state))
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('domain')->toggleable(),
                 Tables\Columns\TextColumn::make('timezone')->toggleable(),
                 Tables\Columns\TextColumn::make('locale')->toggleable(),

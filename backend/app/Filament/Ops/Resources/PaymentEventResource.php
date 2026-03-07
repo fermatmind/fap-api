@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\PaymentEventResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Models\AdminApproval;
 use App\Models\PaymentEvent;
@@ -15,7 +16,6 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class PaymentEventResource extends BaseTenantResource
@@ -55,9 +55,20 @@ class PaymentEventResource extends BaseTenantResource
                 Tables\Columns\TextColumn::make('provider')->sortable(),
                 Tables\Columns\TextColumn::make('provider_event_id')->label('Event ID')->searchable()->copyable(),
                 Tables\Columns\TextColumn::make('order_no')->searchable()->copyable(),
-                Tables\Columns\TextColumn::make('status')->badge()->sortable(),
-                Tables\Columns\TextColumn::make('handle_status')->badge()->toggleable(),
-                Tables\Columns\IconColumn::make('signature_ok')->boolean()->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => StatusBadge::color($state))
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('handle_status')
+                    ->badge()
+                    ->color(fn (?string $state): string => StatusBadge::color($state))
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('signature_ok')
+                    ->label('Signature')
+                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, 'valid', 'invalid'))
+                    ->badge()
+                    ->color(fn (bool|int|string|null $state): string => StatusBadge::isTruthy($state) ? 'success' : 'danger')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('processed_at')->dateTime()->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])

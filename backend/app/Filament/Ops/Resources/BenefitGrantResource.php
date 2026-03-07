@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\BenefitGrantResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Models\AdminApproval;
 use App\Models\BenefitGrant;
@@ -15,7 +16,6 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class BenefitGrantResource extends BaseTenantResource
@@ -55,7 +55,10 @@ class BenefitGrantResource extends BaseTenantResource
                 Tables\Columns\TextColumn::make('order_no')->searchable()->copyable(),
                 Tables\Columns\TextColumn::make('attempt_id')->searchable()->copyable(),
                 Tables\Columns\TextColumn::make('benefit_code')->sortable(),
-                Tables\Columns\TextColumn::make('status')->badge()->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => StatusBadge::color($state))
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('user_id')->toggleable(),
                 Tables\Columns\TextColumn::make('expires_at')->dateTime()->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
