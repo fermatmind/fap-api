@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ArticleResource\Pages;
+use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Support\OrgContext;
@@ -60,87 +61,166 @@ class ArticleResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\Tabs::make('Article')
-                ->tabs([
-                    Forms\Components\Tabs\Tab::make('Basic')
-                        ->schema([
-                            Forms\Components\Hidden::make('org_id')
-                                ->default(fn (): int => max(0, (int) app(OrgContext::class)->orgId())),
-                            Forms\Components\TextInput::make('title')
-                                ->required()
-                                ->maxLength(255),
-                            Forms\Components\TextInput::make('slug')
-                                ->required()
-                                ->maxLength(127),
-                            Forms\Components\TextInput::make('locale')
-                                ->required()
-                                ->maxLength(16)
-                                ->default('en'),
-                            Forms\Components\Select::make('category_id')
-                                ->label('Category')
-                                ->relationship(
-                                    'category',
-                                    'name',
-                                    fn (Builder $query): Builder => $query->whereIn('article_categories.org_id', self::tenantOrgIds())
-                                )
-                                ->searchable()
-                                ->preload(),
-                            BelongsToManyMultiSelect::make('tags')
-                                ->relationship(
-                                    'tags',
-                                    'name',
-                                    fn (Builder $query): Builder => $query->whereIn('article_tags.org_id', self::tenantOrgIds())
-                                )
-                                ->searchable()
-                                ->preload(),
-                        ]),
-                    Forms\Components\Tabs\Tab::make('Content')
-                        ->schema([
-                            Forms\Components\Textarea::make('excerpt')
-                                ->rows(4),
-                            Forms\Components\MarkdownEditor::make('content_md')
-                                ->required()
-                                ->columnSpanFull(),
-                            Forms\Components\TextInput::make('cover_image_url')
-                                ->maxLength(255),
-                        ]),
-                    Forms\Components\Tabs\Tab::make('SEO')
-                        ->schema([
-                            Forms\Components\Section::make('SEO Meta')
-                                ->relationship('seoMeta')
-                                ->schema([
-                                    Forms\Components\TextInput::make('seo_title')
-                                        ->maxLength(60),
-                                    Forms\Components\Textarea::make('seo_description')
-                                        ->rows(3)
-                                        ->maxLength(160),
-                                    Forms\Components\TextInput::make('canonical_url')
-                                        ->maxLength(255),
-                                    Forms\Components\TextInput::make('og_title')
-                                        ->maxLength(90),
-                                    Forms\Components\Textarea::make('og_description')
-                                        ->rows(3)
-                                        ->maxLength(200),
-                                    Forms\Components\TextInput::make('og_image_url')
-                                        ->maxLength(255),
-                                ]),
-                        ]),
-                    Forms\Components\Tabs\Tab::make('Publish')
-                        ->schema([
-                            Forms\Components\Select::make('status')
-                                ->required()
-                                ->options([
-                                    'draft' => 'draft',
-                                    'published' => 'published',
-                                ])
-                                ->default('draft'),
-                            Forms\Components\Toggle::make('is_public')
-                                ->default(false),
-                            Forms\Components\Toggle::make('is_indexable')
-                                ->default(true),
-                            Forms\Components\DateTimePicker::make('published_at'),
-                            Forms\Components\DateTimePicker::make('scheduled_at'),
-                        ]),
+            Forms\Components\Hidden::make('org_id')
+                ->default(fn (): int => max(0, (int) app(OrgContext::class)->orgId())),
+            Forms\Components\Grid::make([
+                'default' => 1,
+                'xl' => 12,
+            ])
+                ->extraAttributes(['class' => 'ops-article-workspace-layout'])
+                ->schema([
+                    Forms\Components\Group::make([
+                        Forms\Components\Section::make('Basic')
+                            ->description('Write the article headline, URL slug, and short summary before moving into the body.')
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--main'])
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->columnSpanFull()
+                                    ->helperText('Primary headline used throughout the editorial workspace and public article page.')
+                                    ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field ops-article-workspace-field--title'])
+                                    ->extraInputAttributes(['class' => 'ops-article-workspace-input ops-article-workspace-input--title']),
+                                Forms\Components\TextInput::make('slug')
+                                    ->required()
+                                    ->maxLength(127)
+                                    ->helperText('Used in the public article URL. Keep it short, stable, and human-readable.')
+                                    ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field']),
+                                Forms\Components\Textarea::make('excerpt')
+                                    ->rows(4)
+                                    ->columnSpanFull()
+                                    ->helperText('Short summary for list previews, share cards, and search snippets.')
+                                    ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field ops-article-workspace-field--summary']),
+                            ])
+                            ->columns(2),
+                        Forms\Components\Section::make('Content')
+                            ->description('Draft the canonical article body and any lead media reference used by the frontend.')
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--main'])
+                            ->schema([
+                                Forms\Components\MarkdownEditor::make('content_md')
+                                    ->required()
+                                    ->columnSpanFull()
+                                    ->helperText('This markdown body is the source content for article rendering and editorial review.')
+                                    ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field ops-article-workspace-field--editor']),
+                                Forms\Components\TextInput::make('cover_image_url')
+                                    ->maxLength(255)
+                                    ->columnSpanFull()
+                                    ->helperText('Optional lead image URL used for cards, previews, and Open Graph fallback.'),
+                            ]),
+                    ])
+                        ->columnSpan([
+                            'xl' => 8,
+                        ])
+                        ->extraAttributes(['class' => 'ops-article-workspace-main-column']),
+                    Forms\Components\Group::make([
+                        Forms\Components\Section::make('Publish')
+                            ->description('Control editorial state, public visibility, and release timing from one side rail.')
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('workspace_state')
+                                    ->label('Editorial cues')
+                                    ->content(fn (Forms\Get $get, ?Article $record) => ArticleWorkspace::renderEditorialCues($get, $record))
+                                    ->columnSpanFull(),
+                                Forms\Components\Select::make('status')
+                                    ->required()
+                                    ->options(self::statusOptions())
+                                    ->default('draft')
+                                    ->helperText('Published records are ready for release once visibility and scheduling are aligned.'),
+                                Forms\Components\Toggle::make('is_public')
+                                    ->label('Public visibility')
+                                    ->default(false)
+                                    ->helperText('Controls whether the article can be served on the public experience.'),
+                                Forms\Components\Toggle::make('is_indexable')
+                                    ->label('Search indexable')
+                                    ->default(true)
+                                    ->helperText('Signals whether search engines should index this article.'),
+                                Forms\Components\DateTimePicker::make('published_at')
+                                    ->helperText('Set the publish timestamp used for editorial reporting and release cues.'),
+                                Forms\Components\DateTimePicker::make('scheduled_at')
+                                    ->helperText('Optional future release time for editorial scheduling.'),
+                            ]),
+                        Forms\Components\Section::make('Locale, category, and tags')
+                            ->description('Organize the article for the right locale, taxonomy, and downstream filtering.')
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\TextInput::make('locale')
+                                    ->required()
+                                    ->maxLength(16)
+                                    ->default('en')
+                                    ->helperText('Locale code used for editorial segmentation and frontend routing.'),
+                                Forms\Components\Select::make('category_id')
+                                    ->label('Category')
+                                    ->relationship(
+                                        'category',
+                                        'name',
+                                        fn (Builder $query): Builder => $query->whereIn('article_categories.org_id', self::tenantOrgIds())
+                                    )
+                                    ->searchable()
+                                    ->preload()
+                                    ->helperText('Primary editorial bucket for this article.'),
+                                BelongsToManyMultiSelect::make('tags')
+                                    ->relationship(
+                                        'tags',
+                                        'name',
+                                        fn (Builder $query): Builder => $query->whereIn('article_tags.org_id', self::tenantOrgIds())
+                                    )
+                                    ->searchable()
+                                    ->preload()
+                                    ->helperText('Tags help content operators slice the workspace and power discovery.'),
+                            ]),
+                        Forms\Components\Section::make('SEO')
+                            ->relationship('seoMeta')
+                            ->description('Keep search and social metadata grouped so the article stays easy to review and maintain.')
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('seo_snapshot')
+                                    ->label('SEO snapshot')
+                                    ->content(fn (Forms\Get $get) => ArticleWorkspace::renderSeoSnapshot($get))
+                                    ->columnSpanFull(),
+                                Forms\Components\TextInput::make('seo_title')
+                                    ->maxLength(60)
+                                    ->helperText('Recommended search result headline. Keep it focused and concise.'),
+                                Forms\Components\Textarea::make('seo_description')
+                                    ->rows(3)
+                                    ->maxLength(160)
+                                    ->helperText('Search snippet summary shown in results and link previews.'),
+                                Forms\Components\TextInput::make('canonical_url')
+                                    ->maxLength(255)
+                                    ->helperText('Use when the public URL must explicitly point search engines to the canonical article URL.'),
+                                Forms\Components\TextInput::make('og_title')
+                                    ->maxLength(90)
+                                    ->helperText('Optional social headline override for richer sharing cards.'),
+                                Forms\Components\Textarea::make('og_description')
+                                    ->rows(3)
+                                    ->maxLength(200)
+                                    ->helperText('Optional social description override for editorial campaigns.'),
+                                Forms\Components\TextInput::make('og_image_url')
+                                    ->maxLength(255)
+                                    ->helperText('Optional image URL for Open Graph and social previews.'),
+                            ]),
+                        Forms\Components\Section::make('Record cues')
+                            ->description('Read-only context to help editors understand what is already live and when it last changed.')
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                            ->visible(fn (?Article $record): bool => filled($record))
+                            ->schema([
+                                Forms\Components\Placeholder::make('public_url_preview')
+                                    ->label('Public URL')
+                                    ->content(fn (Forms\Get $get, ?Article $record): string => ArticleWorkspace::publicUrl((string) ($get('slug') ?? $record?->slug ?? '')) ?? 'Public URL appears after a slug is set.'),
+                                Forms\Components\Placeholder::make('created_at_summary')
+                                    ->label('Created')
+                                    ->content(fn (?Article $record): string => ArticleWorkspace::formatTimestamp($record?->created_at, 'Draft not saved yet')),
+                                Forms\Components\Placeholder::make('updated_at_summary')
+                                    ->label('Last updated')
+                                    ->content(fn (?Article $record): string => ArticleWorkspace::formatTimestamp($record?->updated_at, 'Draft not saved yet')),
+                                Forms\Components\Placeholder::make('published_at_summary')
+                                    ->label('Last published')
+                                    ->content(fn (?Article $record): string => ArticleWorkspace::formatTimestamp($record?->published_at, 'Not published yet')),
+                            ]),
+                    ])
+                        ->columnSpan([
+                            'xl' => 4,
+                        ])
+                        ->extraAttributes(['class' => 'ops-article-workspace-rail-column']),
                 ]),
         ]);
     }
@@ -149,33 +229,45 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Article')
+                    ->html()
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->formatStateUsing(fn (Article $record): string => (string) view('filament.ops.articles.partials.table-title', [
+                        'meta' => ArticleWorkspace::titleMeta($record),
+                        'title' => $record->title,
+                    ])->render()),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable()
-                    ->copyable(),
+                    ->copyable()
+                    ->formatStateUsing(fn (string $state): string => '/'.trim($state, '/'))
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->sortable()
+                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->description(fn (Article $record): string => ArticleWorkspace::visibilityMeta($record))
                     ->color(fn (string $state): string => StatusBadge::color($state)),
                 Tables\Columns\TextColumn::make('locale')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('published_at')
+                    ->label('Published')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->placeholder('Not published'),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Updated')
+                    ->since()
                     ->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
-                    ->options([
-                        'draft' => 'draft',
-                        'published' => 'published',
-                    ]),
+                    ->options(self::statusOptions()),
                 Tables\Filters\SelectFilter::make('locale')
                     ->options(fn (): array => static::getEloquentQuery()
                         ->select('locale')
@@ -185,9 +277,14 @@ class ArticleResource extends Resource
                         ->pluck('locale', 'locale')
                         ->toArray()),
             ])
+            ->searchPlaceholder('Search title or slug')
             ->defaultSort('updated_at', 'desc')
+            ->recordUrl(fn (Article $record): string => static::getUrl('edit', ['record' => $record]))
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Edit')
+                    ->icon('heroicon-o-pencil-square')
+                    ->color('gray'),
             ])
             ->bulkActions([]);
     }
@@ -215,6 +312,17 @@ class ArticleResource extends Resource
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
         return $orgId > 0 ? [0, $orgId] : [0];
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    private static function statusOptions(): array
+    {
+        return [
+            'draft' => 'draft',
+            'published' => 'published',
+        ];
     }
 
     private static function canRead(): bool
