@@ -1836,6 +1836,57 @@
                     "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
                 ]
             }
+        },
+        "/api/v0.5/personality": {
+            "get": {
+                "operationId": "get_api_v0_5_personality",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/personality/{type}": {
+            "get": {
+                "operationId": "get_api_v0_5_personality_type_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/personality/{type}/seo": {
+            "get": {
+                "operationId": "get_api_v0_5_personality_type_seo",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@seo",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
         }
     }
 }
