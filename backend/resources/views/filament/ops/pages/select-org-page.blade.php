@@ -9,8 +9,8 @@
         @endif
 
         <x-filament::section>
-            <div class="ops-select-org-toolbar grid gap-4 md:grid-cols-3">
-                <div class="md:col-span-2">
+            <div class="ops-workbench-toolbar ops-workbench-toolbar--split ops-select-org-toolbar">
+                <div class="ops-workbench-toolbar__main md:col-span-2">
                     <div class="ops-shell-inline-intro">
                         <span class="ops-shell-inline-intro__eyebrow">Workspace scope</span>
                         <p class="ops-shell-inline-intro__meta">
@@ -18,16 +18,19 @@
                         </p>
                     </div>
 
-                    <label class="block text-sm font-medium text-gray-700" for="ops-org-search">Search organizations</label>
-                    <input
-                        id="ops-org-search"
-                        type="text"
-                        wire:model.live.debounce.300ms="search"
-                        placeholder="Search by org name or org id"
-                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                    />
+                    <div class="ops-control-stack">
+                        <label class="ops-control-label" for="ops-org-search">Search organizations</label>
+                        <input
+                            id="ops-org-search"
+                            type="text"
+                            wire:model.live.debounce.300ms="search"
+                            placeholder="Search by org name or org id"
+                            class="ops-input"
+                        />
+                        <p class="ops-control-hint">Search the current admin-visible organization list by name or exact org id.</p>
+                    </div>
                 </div>
-                <div class="ops-select-org-actions flex items-end gap-2">
+                <div class="ops-workbench-toolbar__actions ops-select-org-actions">
                     @if ($this->canCreateOrganization())
                         <x-filament::button color="primary" wire:click="createOrganization">
                             Create Organization
@@ -50,7 +53,11 @@
                         </div>
                         <div>
                             <p class="ops-select-org-row__meta">status</p>
-                            <p class="ops-select-org-row__value">{{ $organization['status'] }}</p>
+                            <x-filament.ops.shared.status-pill
+                                class="mt-2"
+                                :state="$organization['status']"
+                                :label="$organization['status']"
+                            />
                         </div>
                         <div>
                             <p class="ops-select-org-row__meta">domain</p>
@@ -70,13 +77,14 @@
                 </x-filament::section>
             @empty
                 <x-filament::section>
-                    <div class="ops-select-org-empty space-y-4">
-                        <div>
-                            <p class="ops-select-org-row__title">No organizations found</p>
-                            <p class="ops-shell-inline-intro__meta">{{ $this->whyVisibleHint() }}</p>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2">
+                    <x-filament.ops.shared.empty-state
+                        class="ops-select-org-empty"
+                        eyebrow="Organization scope"
+                        icon="heroicon-o-building-office-2"
+                        title="No organizations found"
+                        :description="$this->whyVisibleHint()"
+                    >
+                        <x-slot name="actions">
                             @if ($this->canCreateOrganization())
                                 <x-filament::button color="primary" wire:click="createOrganization">
                                     Create Organization
@@ -85,8 +93,8 @@
                             <x-filament::button color="gray" wire:click="goToImport">
                                 Import/Sync Organizations
                             </x-filament::button>
-                        </div>
-                    </div>
+                        </x-slot>
+                    </x-filament.ops.shared.empty-state>
                 </x-filament::section>
             @endforelse
         </div>

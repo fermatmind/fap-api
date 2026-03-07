@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\AdminApprovalResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Jobs\ExecuteApprovalJob;
 use App\Models\AdminApproval;
@@ -45,7 +46,7 @@ class AdminApprovalResource extends BaseTenantResource
         return $count > 0 ? (string) $count : null;
     }
 
-    public static function getNavigationBadgeColor(): string | array | null
+    public static function getNavigationBadgeColor(): string|array|null
     {
         return 'warning';
     }
@@ -70,7 +71,10 @@ class AdminApprovalResource extends BaseTenantResource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('type')->badge(),
-                Tables\Columns\TextColumn::make('status')->badge()->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => StatusBadge::color($state))
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('requested_by_admin_user_id')->label('Requested By'),
                 Tables\Columns\TextColumn::make('approved_by_admin_user_id')->label('Approved By'),
                 Tables\Columns\TextColumn::make('reason')->limit(60)->tooltip(fn (AdminApproval $record): string => (string) $record->reason),

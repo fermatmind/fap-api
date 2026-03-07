@@ -298,13 +298,20 @@ task('fap:seed_shared_content_packages', function () {
 before('deploy', 'guard:forbid-destructive');
 before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
+
 after('deploy:update_code', 'ensure:node-toolchain');
-after('ensure:node-toolchain', 'build:ops-theme');
-after('build:ops-theme', 'guard:ops-theme-asset');
 
 after('deploy:shared', 'ensure:shared-perms');
 after('deploy:shared', 'ensure:healthz-deps');
-after('deploy:vendors', 'artisan:filament:assets');
+
+/**
+ * vendor 必须先安装完成：
+ * - build:ops-theme 依赖 vendor/filament/filament/tailwind.config.preset
+ * - artisan:filament:assets 也依赖 composer vendor
+ */
+after('deploy:vendors', 'build:ops-theme');
+after('build:ops-theme', 'guard:ops-theme-asset');
+after('guard:ops-theme-asset', 'artisan:filament:assets');
 after('artisan:filament:assets', 'guard:filament-assets');
 
 after('deploy:symlink', 'reload:php-fpm');

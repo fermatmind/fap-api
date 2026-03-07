@@ -2,8 +2,9 @@
 
 namespace App\Filament\Ops\Resources;
 
-use App\Filament\Shared\BaseTenantResource;
 use App\Filament\Ops\Resources\AuditLogResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
+use App\Filament\Shared\BaseTenantResource;
 use App\Models\AuditLog;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
@@ -18,7 +19,9 @@ class AuditLogResource extends BaseTenantResource
     protected static ?string $model = AuditLog::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+
     protected static ?string $navigationGroup = 'Observability';
+
     protected static ?string $navigationLabel = 'Audit Logs';
 
     private static function scopedQuery(): Builder
@@ -68,7 +71,10 @@ class AuditLogResource extends BaseTenantResource
                 Tables\Columns\TextColumn::make('ip')->toggleable(),
                 Tables\Columns\TextColumn::make('request_id')->toggleable(),
                 Tables\Columns\TextColumn::make('reason')->toggleable(),
-                Tables\Columns\TextColumn::make('result')->badge()->toggleable(),
+                Tables\Columns\TextColumn::make('result')
+                    ->badge()
+                    ->color(fn (?string $state): string => StatusBadge::color($state))
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
@@ -105,11 +111,11 @@ class AuditLogResource extends BaseTenantResource
                         Forms\Components\DatePicker::make('date_to')->label('To'),
                     ])
                     ->query(function ($query, array $data) {
-                        if (!empty($data['date_from'])) {
+                        if (! empty($data['date_from'])) {
                             $from = Carbon::parse((string) $data['date_from'])->startOfDay();
                             $query->where('created_at', '>=', $from);
                         }
-                        if (!empty($data['date_to'])) {
+                        if (! empty($data['date_to'])) {
                             $toExclusive = Carbon::parse((string) $data['date_to'])->addDay()->startOfDay();
                             $query->where('created_at', '<', $toExclusive);
                         }
@@ -169,11 +175,11 @@ class AuditLogResource extends BaseTenantResource
                             $query->where('actor_admin_id', $actorAdminId);
                         }
 
-                        if (!empty($data['date_from'])) {
+                        if (! empty($data['date_from'])) {
                             $from = Carbon::parse((string) $data['date_from'])->startOfDay();
                             $query->where('created_at', '>=', $from);
                         }
-                        if (!empty($data['date_to'])) {
+                        if (! empty($data['date_to'])) {
                             $toExclusive = Carbon::parse((string) $data['date_to'])->addDay()->startOfDay();
                             $query->where('created_at', '<', $toExclusive);
                         }
@@ -218,7 +224,8 @@ class AuditLogResource extends BaseTenantResource
                     ->label('Meta')
                     ->modalContent(function (AuditLog $record) {
                         $json = json_encode($record->meta_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-                        return new \Illuminate\Support\HtmlString('<pre style="white-space: pre-wrap;">' . e($json) . '</pre>');
+
+                        return new \Illuminate\Support\HtmlString('<pre style="white-space: pre-wrap;">'.e($json).'</pre>');
                     })
                     ->modalHeading('Meta JSON'),
             ])

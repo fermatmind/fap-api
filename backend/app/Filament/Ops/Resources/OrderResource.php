@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\OrderResource\Pages;
 use App\Filament\Ops\Resources\OrderResource\RelationManagers\BenefitGrantsRelationManager;
 use App\Filament\Ops\Resources\OrderResource\RelationManagers\PaymentEventsRelationManager;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Models\AdminApproval;
 use App\Models\Order;
@@ -17,7 +18,6 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class OrderResource extends BaseTenantResource
@@ -55,7 +55,10 @@ class OrderResource extends BaseTenantResource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('order_no')->searchable()->copyable(),
-                Tables\Columns\TextColumn::make('status')->badge()->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => StatusBadge::color($state))
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('provider')->sortable(),
                 Tables\Columns\TextColumn::make('amount_cents')->label('Amount')->numeric()->sortable(),
                 Tables\Columns\TextColumn::make('currency')->sortable(),

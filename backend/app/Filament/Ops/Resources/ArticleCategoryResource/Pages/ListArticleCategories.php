@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources\ArticleCategoryResource\Pages;
 
 use App\Filament\Ops\Resources\ArticleCategoryResource;
+use App\Filament\Ops\Resources\Pages\Concerns\HasSharedListEmptyState;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListArticleCategories extends ListRecords
 {
+    use HasSharedListEmptyState;
+
     protected static string $resource = ArticleCategoryResource::class;
 
     protected function getHeaderActions(): array

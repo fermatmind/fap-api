@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ContentPackReleaseResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Jobs\Content\RunContentProbeJob;
 use App\Models\AdminApproval;
 use App\Models\ContentPackRelease;
@@ -68,7 +69,10 @@ class ContentPackReleaseResource extends Resource
                 Tables\Columns\TextColumn::make('dir_alias')->searchable(),
                 Tables\Columns\TextColumn::make('from_pack_id')->label('From Pack')->toggleable(),
                 Tables\Columns\TextColumn::make('to_pack_id')->label('To Pack')->toggleable(),
-                Tables\Columns\TextColumn::make('status')->badge()->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => StatusBadge::color($state))
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('probe_ok')->boolean()->label('Probe OK'),
                 Tables\Columns\TextColumn::make('probe_run_at')->dateTime()->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
