@@ -1,34 +1,29 @@
 <?php
 
 return [
-    'paths' => ['api/*'],
+    'paths' => [
+        'api/*',
+        'sanctum/csrf-cookie',
+    ],
 
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'https://www.fermatmind.com',
         'https://fermatmind.com',
+        'https://www.fermatmind.com',
     ],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => [
-        'Authorization',
-        'Content-Type',
-        'X-Org-Id',
-        'X-FM-Org-Id',
-        'X-Anon-Id',
-        'Idempotency-Key',
-        'X-Request-Id',
-        'X-Requested-With',
-        'Accept',
-    ],
+    'allowed_headers' => ['*'],
 
     'exposed_headers' => [
         'X-Request-Id',
+        'X-RateLimit-Limit',
+        'X-RateLimit-Remaining',
     ],
 
-    'max_age' => 86400,
+    'max_age' => 600,
 
     'supports_credentials' => false,
 ];
