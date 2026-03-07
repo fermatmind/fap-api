@@ -1,8 +1,9 @@
 <x-filament-panels::page>
     <x-filament::section>
-        <div class="ops-two-factor-stack max-w-md space-y-3">
-            <h3 class="text-lg font-semibold text-gray-900">Two-Factor Authentication</h3>
-            <p class="text-sm text-gray-600">Enter your authenticator code or one-time recovery code.</p>
+        <div class="ops-two-factor-stack max-w-md space-y-4">
+            <p class="ops-shell-inline-intro__meta">
+                Confirm your admin session with an authenticator code or one-time recovery code.
+            </p>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700" for="totp-code">Verification code</label>

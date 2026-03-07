@@ -85,12 +85,16 @@ class AdminPanelProvider extends PanelProvider
                 fn () => view('filament.ops.hooks.login-intro')
             )
             ->renderHook(
-                PanelsRenderHook::TOPBAR_END,
-                fn () => view('filament.ops.livewire.locale-switcher-hook')
+                PanelsRenderHook::TOPBAR_START,
+                fn () => view('filament.ops.hooks.topbar-context')
             )
             ->renderHook(
-                PanelsRenderHook::TOPBAR_END,
-                fn () => view('filament.ops.livewire.current-org-switcher-hook')
+                PanelsRenderHook::USER_MENU_BEFORE,
+                fn () => view('filament.ops.hooks.topbar-controls')
+            )
+            ->renderHook(
+                PanelsRenderHook::SIDEBAR_FOOTER,
+                fn () => view('filament.ops.hooks.sidebar-footer')
             )
             ->authMiddleware([
                 Authenticate::class,
