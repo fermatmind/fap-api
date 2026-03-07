@@ -89,6 +89,65 @@ host('staging')
 
 /**
  * ======================================================
+ * Node / NPM（Ops Theme release build）
+ * ======================================================
+ */
+task('ensure:node-toolchain', function () {
+    if (! test('command -v node >/dev/null 2>&1')) {
+        throw new \RuntimeException('node missing on deploy host');
+    }
+
+    if (! test('command -v npm >/dev/null 2>&1')) {
+        throw new \RuntimeException('npm missing on deploy host');
+    }
+
+    $nodeVersion = trim(run('node -p "process.versions.node"'));
+    $npmVersion = trim(run('npm -v'));
+
+    if (version_compare($nodeVersion, '20.19.0', '<')) {
+        throw new \RuntimeException("node {$nodeVersion} is too old; require >= 20.19.0 for current backend package.json");
+    }
+
+    if (version_compare($npmVersion, '10.0.0', '<')) {
+        throw new \RuntimeException("npm {$npmVersion} is too old; require >= 10.0.0 for reproducible backend package-lock installs");
+    }
+});
+
+task('build:ops-theme', function () {
+    within('{{release_path}}/backend', function () {
+        run('test -f package-lock.json');
+        run('npm ci --no-audit --no-fund');
+        run('npm run build:ops-theme');
+    });
+});
+
+task('guard:ops-theme-asset', function () {
+    $asset = '{{release_path}}/backend/public/css/filament/ops/theme.css';
+
+    if (! test("[ -s {$asset} ]")) {
+        throw new \RuntimeException("ops theme asset missing or empty: {$asset}");
+    }
+});
+
+task('guard:filament-assets', function () {
+    $assets = [
+        '{{release_path}}/backend/public/css/filament/forms/forms.css',
+        '{{release_path}}/backend/public/css/filament/support/support.css',
+        '{{release_path}}/backend/public/css/filament/filament/app.css',
+        '{{release_path}}/backend/public/js/filament/filament/app.js',
+        '{{release_path}}/backend/public/js/filament/support/support.js',
+        '{{release_path}}/backend/public/js/filament/notifications/notifications.js',
+    ];
+
+    foreach ($assets as $asset) {
+        if (! test("[ -s {$asset} ]")) {
+            throw new \RuntimeException("filament asset missing or empty: {$asset}");
+        }
+    }
+});
+
+/**
+ * ======================================================
  * Composer（backend）
  * ======================================================
  */
@@ -101,6 +160,10 @@ task('deploy:vendors', function () {
  * Artisan（全部强制走 backend）
  * ======================================================
  */
+task('artisan:filament:assets', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan filament:assets --ansi');
+});
+
 task('artisan:storage:link', function () {
     run('{{bin/php}} {{release_path}}/backend/artisan storage:link --ansi');
 });
@@ -235,9 +298,14 @@ task('fap:seed_shared_content_packages', function () {
 before('deploy', 'guard:forbid-destructive');
 before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
+after('deploy:update_code', 'ensure:node-toolchain');
+after('ensure:node-toolchain', 'build:ops-theme');
+after('build:ops-theme', 'guard:ops-theme-asset');
 
 after('deploy:shared', 'ensure:shared-perms');
 after('deploy:shared', 'ensure:healthz-deps');
+after('deploy:vendors', 'artisan:filament:assets');
+after('artisan:filament:assets', 'guard:filament-assets');
 
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');

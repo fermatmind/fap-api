@@ -1,0 +1,431 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+@import '../../../../vendor/filament/filament/resources/css/base.css';
+
+@config 'tailwind.config.js';
+
+@layer base {
+    :root {
+        --ops-bg-app: #f7f8fa;
+        --ops-bg-surface: #ffffff;
+        --ops-bg-surface-subtle: #fbfcfd;
+        --ops-text-primary: #111827;
+        --ops-text-secondary: #4b5563;
+        --ops-text-tertiary: #9ca3af;
+        --ops-border-default: #e5e7eb;
+        --ops-border-strong: #d1d5db;
+        --ops-radius-input: 12px;
+        --ops-radius-button: 12px;
+        --ops-radius-card: 16px;
+        --ops-radius-overlay: 20px;
+        --ops-radius-badge: 999px;
+        --ops-shadow-surface: 0 1px 2px rgba(17, 24, 39, 0.03), 0 12px 32px rgba(17, 24, 39, 0.04);
+        --ops-shadow-overlay: 0 18px 48px rgba(15, 23, 42, 0.12);
+        --ops-font-page-title: clamp(1.75rem, 3vw, 2.125rem);
+        --ops-font-section-title: 1.125rem;
+        --ops-font-card-title: 1rem;
+        --ops-font-body: 0.9375rem;
+        --ops-font-meta: 0.75rem;
+    }
+
+    .fi-body.fi-panel-ops {
+        background-color: var(--ops-bg-app);
+        background-image:
+            radial-gradient(circle at top left, rgba(var(--primary-50), 0.95), rgba(var(--primary-50), 0) 38rem),
+            linear-gradient(180deg, #ffffff 0%, var(--ops-bg-app) 26%, #f3f5f8 100%);
+        color: var(--ops-text-primary);
+        font-feature-settings: 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv11' 1;
+    }
+
+    .fi-body.fi-panel-ops,
+    .fi-body.fi-panel-ops .fi-input,
+    .fi-body.fi-panel-ops .fi-select-input,
+    .fi-body.fi-panel-ops .fi-fo-date-time-picker-display-text-input,
+    .fi-body.fi-panel-ops .fi-fo-textarea textarea,
+    .fi-body.fi-panel-ops .fi-fo-rich-editor-editor {
+        color: var(--ops-text-primary);
+    }
+
+    .fi-body.fi-panel-ops .fi-logo {
+        color: var(--ops-text-primary);
+        font-size: 1.125rem;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+    }
+}
+
+@layer components {
+    .fi-body.fi-panel-ops .fi-layout,
+    .fi-body.fi-panel-ops .fi-simple-layout {
+        min-height: 100vh;
+        background: transparent;
+    }
+
+    .fi-body.fi-panel-ops .fi-main {
+        padding-bottom: 2rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-topbar nav {
+        background: rgba(255, 255, 255, 0.8);
+        border-bottom: 1px solid rgba(229, 231, 235, 0.86);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar {
+        background: rgba(247, 248, 250, 0.82);
+        border-right: 1px solid rgba(229, 231, 235, 0.92);
+        backdrop-filter: blur(18px);
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-header {
+        background: rgba(255, 255, 255, 0.84);
+        border-bottom: 1px solid rgba(229, 231, 235, 0.85);
+        box-shadow: none;
+        backdrop-filter: blur(18px);
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-nav {
+        gap: 1.25rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.75rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-nav-groups {
+        gap: 1.25rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-group-label {
+        color: var(--ops-text-tertiary);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-item-button,
+    .fi-body.fi-panel-ops .fi-sidebar-group-button,
+    .fi-body.fi-panel-ops .fi-topbar-item-button,
+    .fi-body.fi-panel-ops .fi-tabs-item,
+    .fi-body.fi-panel-ops .fi-icon-btn {
+        border-radius: 14px;
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-item-button,
+    .fi-body.fi-panel-ops .fi-sidebar-group-button,
+    .fi-body.fi-panel-ops .fi-topbar-item-button {
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-item-icon,
+    .fi-body.fi-panel-ops .fi-sidebar-group-icon,
+    .fi-body.fi-panel-ops .fi-topbar-item-icon {
+        color: var(--ops-text-tertiary);
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-item:not(.fi-active) > .fi-sidebar-item-button:hover,
+    .fi-body.fi-panel-ops .fi-topbar-item:not(.fi-active) .fi-topbar-item-button:hover,
+    .fi-body.fi-panel-ops .fi-tabs-item:not(.fi-active):hover {
+        background: rgba(255, 255, 255, 0.74);
+        color: var(--ops-text-primary);
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-item.fi-active > .fi-sidebar-item-button,
+    .fi-body.fi-panel-ops .fi-topbar-item.fi-active .fi-topbar-item-button,
+    .fi-body.fi-panel-ops .fi-tabs-item.fi-active {
+        background: rgba(var(--primary-50), 0.92);
+        box-shadow: inset 0 0 0 1px rgba(var(--primary-100), 0.95);
+        color: rgb(var(--primary-700));
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar-item.fi-active .fi-sidebar-item-icon,
+    .fi-body.fi-panel-ops .fi-topbar-item.fi-active .fi-topbar-item-icon,
+    .fi-body.fi-panel-ops .fi-tabs-item.fi-active .fi-tabs-item-icon {
+        color: rgb(var(--primary-600));
+    }
+
+    .fi-body.fi-panel-ops .fi-header {
+        gap: 1.25rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-header-heading {
+        color: var(--ops-text-primary);
+        font-size: var(--ops-font-page-title);
+        line-height: 1.05;
+        letter-spacing: -0.045em;
+    }
+
+    .fi-body.fi-panel-ops .fi-header-subheading {
+        margin-top: 0.75rem;
+        max-width: 42rem;
+        color: var(--ops-text-secondary);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .fi-body.fi-panel-ops .fi-section,
+    .fi-body.fi-panel-ops .fi-simple-main,
+    .fi-body.fi-panel-ops .fi-ta-ctn,
+    .fi-body.fi-panel-ops .fi-ta-record,
+    .fi-body.fi-panel-ops .fi-wi-stats-overview-stat {
+        background: var(--ops-bg-surface);
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        box-shadow: var(--ops-shadow-surface);
+    }
+
+    .fi-body.fi-panel-ops .fi-simple-main {
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: var(--ops-radius-overlay);
+        box-shadow: var(--ops-shadow-overlay);
+        backdrop-filter: blur(18px);
+    }
+
+    .fi-body.fi-panel-ops .fi-section-header-heading,
+    .fi-body.fi-panel-ops .fi-ta-header-heading,
+    .fi-body.fi-panel-ops .fi-wi-stats-overview-header-heading {
+        color: var(--ops-text-primary);
+        font-size: var(--ops-font-section-title);
+        letter-spacing: -0.025em;
+    }
+
+    .fi-body.fi-panel-ops .fi-section-header-description,
+    .fi-body.fi-panel-ops .fi-ta-header-description,
+    .fi-body.fi-panel-ops .fi-wi-stats-overview-header-description,
+    .fi-body.fi-panel-ops .fi-wi-stats-overview-stat-label,
+    .fi-body.fi-panel-ops .fi-wi-stats-overview-stat-description,
+    .fi-body.fi-panel-ops .fi-ta-empty-state-description {
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .fi-section-content-ctn,
+    .fi-body.fi-panel-ops .fi-section-footer {
+        border-color: var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .fi-wi-stats-overview-stat-value {
+        letter-spacing: -0.04em;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-header-ctn,
+    .fi-body.fi-panel-ops .fi-ta-header-toolbar,
+    .fi-body.fi-panel-ops .fi-ta-content,
+    .fi-body.fi-panel-ops .fi-ta-pagination,
+    .fi-body.fi-panel-ops .fi-ta-filters-below-content,
+    .fi-body.fi-panel-ops .fi-ta-filters-above-content-ctn {
+        background: transparent;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-header-cell-label {
+        color: var(--ops-text-primary);
+        font-size: 0.8125rem;
+        letter-spacing: 0.01em;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-row:hover,
+    .fi-body.fi-panel-ops .fi-ta-record:hover {
+        background: rgba(var(--primary-50), 0.62);
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-filter-indicators,
+    .fi-body.fi-panel-ops .fi-ta-selection-indicator,
+    .fi-body.fi-panel-ops .fi-ta-summary-header-row,
+    .fi-body.fi-panel-ops .fi-ta-group-header {
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-empty-state-icon-ctn {
+        background: rgba(var(--primary-50), 0.9);
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-empty-state-icon {
+        color: rgb(var(--primary-600));
+    }
+
+    .fi-body.fi-panel-ops .fi-btn,
+    .fi-body.fi-panel-ops .fi-icon-btn {
+        font-weight: 600;
+        letter-spacing: -0.01em;
+    }
+
+    .fi-body.fi-panel-ops .fi-btn {
+        min-height: 2.75rem;
+        border-radius: var(--ops-radius-button);
+    }
+
+    .fi-body.fi-panel-ops .fi-btn:not(.fi-btn-outlined).fi-color-primary,
+    .fi-body.fi-panel-ops .fi-btn:not(.fi-btn-outlined).fi-color-info {
+        background: linear-gradient(180deg, rgba(var(--primary-600), 1), rgba(var(--primary-700), 1));
+        box-shadow: 0 10px 18px rgba(var(--primary-500), 0.18);
+    }
+
+    .fi-body.fi-panel-ops .fi-btn:not(.fi-btn-outlined).fi-color-primary:hover,
+    .fi-body.fi-panel-ops .fi-btn:not(.fi-btn-outlined).fi-color-info:hover {
+        background: linear-gradient(180deg, rgba(var(--primary-500), 1), rgba(var(--primary-600), 1));
+    }
+
+    .fi-body.fi-panel-ops .fi-btn.fi-color-gray:not(.fi-btn-outlined),
+    .fi-body.fi-panel-ops .fi-icon-btn.fi-color-gray {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: inset 0 0 0 1px var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .fi-btn.fi-color-gray:not(.fi-btn-outlined):hover,
+    .fi-body.fi-panel-ops .fi-icon-btn.fi-color-gray:hover {
+        background: var(--ops-bg-surface-subtle);
+        color: var(--ops-text-primary);
+    }
+
+    .fi-body.fi-panel-ops .fi-btn.fi-btn-outlined {
+        border-radius: var(--ops-radius-button);
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: inset 0 0 0 1px var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .fi-btn:focus-visible,
+    .fi-body.fi-panel-ops .fi-icon-btn:focus-visible {
+        box-shadow: 0 0 0 4px rgba(var(--primary-100), 0.9);
+    }
+
+    .fi-body.fi-panel-ops .fi-input-wrp {
+        min-height: 3rem;
+        border-radius: var(--ops-radius-input);
+        background: var(--ops-bg-surface);
+        box-shadow: inset 0 0 0 1px var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .fi-input-wrp:focus-within {
+        box-shadow:
+            inset 0 0 0 1px rgb(var(--primary-500)),
+            0 0 0 4px rgba(var(--primary-100), 0.9);
+    }
+
+    .fi-body.fi-panel-ops .fi-input-wrp-label {
+        color: var(--ops-text-tertiary);
+        font-size: var(--ops-font-meta);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+    }
+
+    .fi-body.fi-panel-ops .fi-input,
+    .fi-body.fi-panel-ops .fi-select-input,
+    .fi-body.fi-panel-ops .fi-fo-date-time-picker-display-text-input,
+    .fi-body.fi-panel-ops .fi-fo-textarea textarea,
+    .fi-body.fi-panel-ops .choices__input {
+        font-size: var(--ops-font-body);
+    }
+
+    .fi-body.fi-panel-ops .choices__inner,
+    .fi-body.fi-panel-ops .choices__list--dropdown,
+    .fi-body.fi-panel-ops .choices__list[aria-expanded] {
+        background: var(--ops-bg-surface);
+        border-color: var(--ops-border-default);
+        border-radius: var(--ops-radius-input);
+        box-shadow: var(--ops-shadow-overlay);
+    }
+
+    .fi-body.fi-panel-ops .choices__list--multiple .choices__item {
+        border-radius: var(--ops-radius-badge);
+        background: rgba(var(--primary-50), 0.92);
+        color: rgb(var(--primary-700));
+    }
+
+    .fi-body.fi-panel-ops .fi-badge {
+        border-radius: var(--ops-radius-badge);
+        box-shadow: none;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+    }
+
+    .ops-auth-intro {
+        display: grid;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .ops-auth-intro__eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        border-radius: var(--ops-radius-badge);
+        background: rgba(var(--primary-50), 0.92);
+        color: rgb(var(--primary-700));
+        padding: 0.35rem 0.7rem;
+        font-size: var(--ops-font-meta);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .ops-auth-intro__title {
+        color: var(--ops-text-primary);
+        font-size: 1.625rem;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+    }
+
+    .ops-auth-intro__meta {
+        margin-top: 0.35rem;
+        color: var(--ops-text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .ops-topbar-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        border-radius: var(--ops-radius-badge);
+        background: rgba(255, 255, 255, 0.88);
+        padding: 0.375rem 0.45rem 0.375rem 0.75rem;
+        box-shadow: inset 0 0 0 1px var(--ops-border-default);
+    }
+
+    .ops-topbar-chip__text {
+        display: flex;
+        min-width: 0;
+        align-items: baseline;
+        gap: 0.45rem;
+    }
+
+    .ops-topbar-chip__label {
+        color: var(--ops-text-tertiary);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .ops-topbar-chip__value {
+        max-width: 16rem;
+        overflow: hidden;
+        color: var(--ops-text-primary);
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ops-topbar-locale {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1023px) {
+    .fi-body.fi-panel-ops .fi-main {
+        padding-bottom: 1.5rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-simple-main {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .ops-topbar-chip__value {
+        max-width: 10rem;
+    }
+}

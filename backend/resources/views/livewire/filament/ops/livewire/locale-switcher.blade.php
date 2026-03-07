@@ -1,4 +1,4 @@
-<div class="px-2">
+<div class="ops-topbar-locale">
     <x-filament::dropdown placement="bottom-end">
         <x-slot name="trigger">
             <x-filament::button color="gray" size="sm" icon="heroicon-m-language">
@@ -18,4 +18,3 @@
         </x-filament::dropdown.list>
     </x-filament::dropdown>
 </div>
-
