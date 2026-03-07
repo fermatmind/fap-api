@@ -1,6 +1,6 @@
 <x-filament-panels::page>
     <x-filament::section>
-        <div class="max-w-md space-y-3">
+        <div class="ops-two-factor-stack max-w-md space-y-3">
             <h3 class="text-lg font-semibold text-gray-900">Two-Factor Authentication</h3>
             <p class="text-sm text-gray-600">Enter your authenticator code or one-time recovery code.</p>
 

@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-    <div class="space-y-6">
+    <div class="ops-select-org-page space-y-6">
         @if (session()->has('ops_org_required_message'))
             <x-filament::section>
                 <p class="text-sm text-warning-700">
@@ -9,7 +9,7 @@
         @endif
 
         <x-filament::section>
-            <div class="grid gap-4 md:grid-cols-3">
+            <div class="ops-select-org-toolbar grid gap-4 md:grid-cols-3">
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700" for="ops-org-search">Search organizations</label>
                     <input
@@ -36,7 +36,7 @@
         <div class="space-y-3">
             @forelse ($organizations as $organization)
                 <x-filament::section>
-                    <div class="grid gap-3 md:grid-cols-6 md:items-center">
+                    <div class="ops-select-org-row grid gap-3 md:grid-cols-6 md:items-center">
                         <div class="md:col-span-2">
                             <p class="text-sm font-semibold text-gray-900">{{ $organization['name'] }}</p>
                             <p class="text-xs text-gray-500">org id: {{ $organization['id'] }}</p>
@@ -63,7 +63,7 @@
                 </x-filament::section>
             @empty
                 <x-filament::section>
-                    <div class="space-y-4">
+                    <div class="ops-select-org-empty space-y-4">
                         <div>
                             <p class="text-base font-semibold text-gray-900">No organizations found</p>
                             <p class="text-sm text-gray-600">{{ $this->whyVisibleHint() }}</p>

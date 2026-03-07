@@ -106,6 +106,17 @@ php artisan route:cache
 php artisan fap:schema:verify
 ```
 
+### 5.1 Ops Theme Build in Deploy Pipeline
+- 当前 Filament Ops Panel 通过 `->theme(asset('css/filament/ops/theme.css'))` 注册自定义主题。
+- Deployer 发布时会在 `{{release_path}}/backend` 内执行：
+  - `npm ci --no-audit --no-fund`
+  - `npm run build:ops-theme`
+- Deployer 还会显式执行 `php artisan filament:assets`，确保 Filament 核心 CSS/JS 被复制到当前 release 的 `backend/public`。
+- 发布链会在切换 symlink 前校验 `backend/public/css/filament/ops/theme.css` 已生成且非空；若缺失，部署会直接失败。
+- 发布链也会校验关键 Filament 资源存在且非空；缺失这些资源会导致 `/ops` 的样式缺失、脚本 404 或 Alpine 初始化报错。
+- 这一步是 release 产物构建，不是 shared 配置，也不是将编译产物提交进 git。
+- 若目标主机缺少 `node` / `npm`，或版本低于当前仓库基线（Node 20.19+ / NPM 10+），部署会 fail fast。
+
 ## 6. Supervisor 队列守护配置（无 Horizon）
 当前基线：使用 Supervisor 常驻 `queue:work`。至少部署以下两个 program。
 

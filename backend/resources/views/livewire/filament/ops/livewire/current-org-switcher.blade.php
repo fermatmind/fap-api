@@ -1,10 +1,12 @@
-<div class="flex items-center gap-x-2">
-    <span class="text-sm text-gray-600 dark:text-gray-300">
-        {{ __('ops.topbar.current_org') }}:
-        <span class="font-medium text-gray-900 dark:text-gray-100">
+<div class="ops-topbar-chip">
+    <div class="ops-topbar-chip__text">
+        <span class="ops-topbar-chip__label">
+            {{ __('ops.topbar.current_org') }}
+        </span>
+        <span class="ops-topbar-chip__value">
             {{ $orgName }}
         </span>
-    </span>
+    </div>
 
     <x-filament::button
         type="button"
