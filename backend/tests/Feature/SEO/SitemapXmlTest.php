@@ -3,6 +3,7 @@
 namespace Tests\Feature\SEO;
 
 use App\Models\PersonalityProfile;
+use App\Models\TopicProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -118,6 +119,63 @@ class SitemapXmlTest extends TestCase
             'updated_at' => $nowB,
         ]);
 
+        TopicProfile::query()->create([
+            'org_id' => 0,
+            'topic_code' => 'mbti',
+            'slug' => 'mbti',
+            'locale' => 'en',
+            'title' => 'MBTI',
+            'subtitle' => 'Understand personality preferences and type dynamics.',
+            'excerpt' => 'Explore MBTI concepts, type profiles, guides, and tests.',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 11, 30, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 10,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
+        TopicProfile::query()->create([
+            'org_id' => 0,
+            'topic_code' => 'mbti',
+            'slug' => 'mbti',
+            'locale' => 'zh-CN',
+            'title' => 'MBTI 主题',
+            'subtitle' => '理解人格偏好与类型框架。',
+            'excerpt' => '探索 MBTI 概念、类型档案与测试入口。',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 30, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 10,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
+        TopicProfile::query()->create([
+            'org_id' => 0,
+            'topic_code' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'title' => 'Big Five',
+            'subtitle' => 'Trait dimensions for personality description.',
+            'excerpt' => 'Explore the Big Five model.',
+            'status' => TopicProfile::STATUS_DRAFT,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => null,
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 20,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
         $response = $this->get('/sitemap.xml');
 
         $response->assertStatus(200);
@@ -145,6 +203,11 @@ class SitemapXmlTest extends TestCase
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/topics</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics/mbti</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/topics/mbti</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/topics/big-five</loc>', $body);
         $this->assertStringContainsString('<changefreq>weekly</changefreq>', $body);
         $this->assertStringContainsString('<priority>0.7</priority>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-30</lastmod>', $body);

@@ -3,7 +3,9 @@
 namespace App\Services\SEO;
 
 use App\Models\PersonalityProfile;
+use App\Models\TopicProfile;
 use App\Services\Cms\PersonalityProfileSeoService;
+use App\Services\Cms\TopicProfileSeoService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +15,7 @@ class SitemapGenerator
 
     public function __construct(
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+        private readonly TopicProfileSeoService $topicProfileSeoService,
     ) {
         $configuredPrefix = trim((string) config('services.seo.tests_url_prefix', ''));
         if ($configuredPrefix === '') {
@@ -29,7 +32,8 @@ class SitemapGenerator
         $urls = array_merge(
             $this->getScaleUrls($locale),
             $this->getArticleUrls($locale),
-            $this->getPersonalityUrls()
+            $this->getPersonalityUrls(),
+            $this->getTopicUrls()
         );
 
         $urls = collect($urls)
@@ -217,6 +221,71 @@ class SitemapGenerator
                 'loc' => $baseUrl.'/'.$segment.'/personality',
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => 'personality-list:'.$segment,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
+    }
+
+    private function getTopicUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $rows = TopicProfile::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('status', TopicProfile::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->whereIn('locale', TopicProfile::SUPPORTED_LOCALES)
+            ->whereNotNull('slug')
+            ->where('slug', '<>', '')
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->select(['slug', 'locale', 'updated_at', 'published_at'])
+            ->orderBy('locale')
+            ->orderBy('slug')
+            ->get();
+
+        $urls = [];
+        $listLastModified = [];
+
+        foreach ($rows as $row) {
+            $slug = trim((string) $row->slug);
+            $locale = trim((string) $row->locale);
+
+            if ($slug === '' || $locale === '') {
+                continue;
+            }
+
+            $segment = $this->topicProfileSeoService->mapBackendLocaleToFrontendSegment($locale);
+            $lastmod = $row->updated_at
+                ?? $row->published_at
+                ?? now();
+
+            $urls[] = [
+                'loc' => $baseUrl.'/'.$segment.'/topics/'.rawurlencode($slug),
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'topics:'.$segment.':'.$slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+
+            if (! isset($listLastModified[$segment]) || $lastmod->gt($listLastModified[$segment])) {
+                $listLastModified[$segment] = $lastmod;
+            }
+        }
+
+        foreach ($listLastModified as $segment => $lastmod) {
+            $urls[] = [
+                'loc' => $baseUrl.'/'.$segment.'/topics',
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'topics-list:'.$segment,
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
         }
