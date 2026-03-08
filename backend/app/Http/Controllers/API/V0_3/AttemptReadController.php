@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API\V0_3;
 
+use App\Exceptions\Api\ApiProblemException;
 use App\Http\Controllers\API\V0_3\Concerns\ResolvesAttemptOwnership;
 use App\Http\Controllers\Controller;
+use App\Models\Attempt;
 use App\Models\Result;
-use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
@@ -20,6 +22,10 @@ use Illuminate\Http\Response;
 class AttemptReadController extends Controller
 {
     use ResolvesAttemptOwnership;
+
+    private const PUBLIC_RESULT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60'];
+
+    private const SENSITIVE_RESULT_READ_SCALES = ['SDS_20', 'CLINICAL_COMBO_68'];
 
     public function __construct(
         private AttemptSubmissionService $attemptSubmissionService,
@@ -64,12 +70,21 @@ class AttemptReadController extends Controller
     public function result(Request $request, string $id): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $attempt = $this->ownedAttemptQuery($request, $id)->firstOrFail();
+        $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $id)->first();
+        if (! $result instanceof Result) {
+            throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
+        }
 
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
-        $responseCodes = $this->resolveResponseScaleCodes($attempt);
+        $responseCodes = $this->resolveResponseScaleCodes($result);
+        $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
+        $attempt = $this->resolveAttemptForResultRead($request, $orgId, $id, $scaleCode);
+        $attemptId = $this->resolveAttemptId($result, $attempt, $id);
+        $packId = $this->preferredStringField($result, $attempt, 'pack_id');
+        $dirVersion = $this->preferredStringField($result, $attempt, 'dir_version');
+        $contentPackageVersion = $this->preferredStringField($result, $attempt, 'content_package_version');
+        $scoringSpecVersion = $this->preferredStringField($result, $attempt, 'scoring_spec_version');
+        $reportEngineVersion = $this->preferredStringField($result, null, 'report_engine_version', 'v1.2');
 
-        $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === 'CLINICAL_COMBO_68') {
             $gate = $this->reportGatekeeper->resolve(
                 $orgId,
@@ -108,17 +123,17 @@ class AttemptReadController extends Controller
             ];
 
             $this->eventRecorder->recordFromRequest($request, 'result_view', $this->resolveUserId($request), [
-                'scale_code' => (string) ($attempt->scale_code ?? ''),
-                'pack_id' => (string) ($attempt->pack_id ?? ''),
-                'dir_version' => (string) ($attempt->dir_version ?? ''),
+                'scale_code' => $scaleCode,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
                 'type_code' => (string) ($result->type_code ?? ''),
-                'attempt_id' => (string) $attempt->id,
+                'attempt_id' => $attemptId,
                 'locked' => (bool) ($gate['locked'] ?? true),
             ]);
 
             return response()->json([
                 'ok' => true,
-                'attempt_id' => (string) $attempt->id,
+                'attempt_id' => $attemptId,
                 'type_code' => '',
                 'scores' => $safeResult['scores'],
                 'scores_pct' => [],
@@ -129,11 +144,11 @@ class AttemptReadController extends Controller
                     'scale_code_legacy' => $responseCodes['scale_code_legacy'],
                     'scale_code_v2' => $responseCodes['scale_code_v2'],
                     'scale_uid' => $responseCodes['scale_uid'],
-                    'pack_id' => (string) ($attempt->pack_id ?? ''),
-                    'dir_version' => (string) ($attempt->dir_version ?? ''),
-                    'content_package_version' => (string) ($attempt->content_package_version ?? ''),
-                    'scoring_spec_version' => (string) ($attempt->scoring_spec_version ?? ''),
-                    'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $contentPackageVersion,
+                    'scoring_spec_version' => $scoringSpecVersion,
+                    'report_engine_version' => $reportEngineVersion,
                 ],
             ]);
         }
@@ -166,16 +181,16 @@ class AttemptReadController extends Controller
         }
 
         $this->eventRecorder->recordFromRequest($request, 'result_view', $this->resolveUserId($request), [
-            'scale_code' => (string) ($attempt->scale_code ?? ''),
-            'pack_id' => (string) ($attempt->pack_id ?? ''),
-            'dir_version' => (string) ($attempt->dir_version ?? ''),
+            'scale_code' => $scaleCode,
+            'pack_id' => $packId,
+            'dir_version' => $dirVersion,
             'type_code' => (string) ($result->type_code ?? ''),
-            'attempt_id' => (string) $attempt->id,
+            'attempt_id' => $attemptId,
         ]);
 
         return response()->json([
             'ok' => true,
-            'attempt_id' => (string) $attempt->id,
+            'attempt_id' => $attemptId,
             'type_code' => $compatTypeCode,
             'scores' => $compatScores,
             'scores_pct' => $compatScoresPct,
@@ -185,11 +200,11 @@ class AttemptReadController extends Controller
                 'scale_code_legacy' => $responseCodes['scale_code_legacy'],
                 'scale_code_v2' => $responseCodes['scale_code_v2'],
                 'scale_uid' => $responseCodes['scale_uid'],
-                'pack_id' => (string) ($attempt->pack_id ?? ''),
-                'dir_version' => (string) ($attempt->dir_version ?? ''),
-                'content_package_version' => (string) ($attempt->content_package_version ?? ''),
-                'scoring_spec_version' => (string) ($attempt->scoring_spec_version ?? ''),
-                'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'content_package_version' => $contentPackageVersion,
+                'scoring_spec_version' => $scoringSpecVersion,
+                'report_engine_version' => $reportEngineVersion,
             ],
         ]);
     }
@@ -330,6 +345,67 @@ class AttemptReadController extends Controller
         }
 
         return $payload;
+    }
+
+    private function resolveAttemptForResultRead(Request $request, int $orgId, string $attemptId, string $scaleCode): ?Attempt
+    {
+        if ($this->isPublicResultScale($scaleCode)) {
+            return Attempt::withoutGlobalScopes()
+                ->where('org_id', $orgId)
+                ->where('id', $attemptId)
+                ->first();
+        }
+
+        $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+    }
+
+    private function isPublicResultScale(string $scaleCode): bool
+    {
+        return in_array($scaleCode, self::PUBLIC_RESULT_READ_SCALES, true);
+    }
+
+    private function resolveNormalizedScaleCode(array $responseCodes): string
+    {
+        $legacy = strtoupper(trim((string) ($responseCodes['scale_code_legacy'] ?? '')));
+        if ($legacy !== '') {
+            return $legacy;
+        }
+
+        return strtoupper(trim((string) ($responseCodes['scale_code'] ?? '')));
+    }
+
+    private function resolveAttemptId(Result $result, ?Attempt $attempt, string $fallbackAttemptId): string
+    {
+        if ($attempt instanceof Attempt) {
+            return (string) $attempt->id;
+        }
+
+        $resultAttemptId = trim((string) ($result->attempt_id ?? ''));
+        if ($resultAttemptId !== '') {
+            return $resultAttemptId;
+        }
+
+        return $fallbackAttemptId;
+    }
+
+    private function preferredStringField(object $primary, ?object $fallback, string $field, string $default = ''): string
+    {
+        $primaryValue = trim((string) ($primary->{$field} ?? ''));
+        if ($primaryValue !== '') {
+            return $primaryValue;
+        }
+
+        $fallbackValue = trim((string) ($fallback?->{$field} ?? ''));
+        if ($fallbackValue !== '') {
+            return $fallbackValue;
+        }
+
+        return $default;
     }
 
     /**

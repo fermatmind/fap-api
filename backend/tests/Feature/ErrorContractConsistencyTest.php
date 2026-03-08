@@ -31,7 +31,7 @@ final class ErrorContractConsistencyTest extends TestCase
             ],
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-        if (!is_string($raw)) {
+        if (! is_string($raw)) {
             self::fail('Failed to encode webhook payload.');
         }
 
@@ -53,7 +53,7 @@ final class ErrorContractConsistencyTest extends TestCase
         $this->assertUnifiedErrorContract($response);
     }
 
-    public function test_v03_attempt_not_found_returns_resource_not_found_contract(): void
+    public function test_v03_attempt_not_found_returns_result_not_found_contract(): void
     {
         $attemptId = (string) Str::uuid();
 
@@ -62,7 +62,8 @@ final class ErrorContractConsistencyTest extends TestCase
         ])->getJson("/api/v0.3/attempts/{$attemptId}");
 
         $response->assertStatus(404);
-        $response->assertJsonPath('error_code', 'RESOURCE_NOT_FOUND');
+        $response->assertJsonPath('error_code', 'RESULT_NOT_FOUND');
+        $response->assertJsonPath('message', 'result not found.');
         $this->assertUnifiedErrorContract($response);
     }
 
