@@ -1,0 +1,131 @@
+{
+    "meta": {
+        "schema_version": "v1",
+        "topic_code": "mbti",
+        "locale": "zh-CN",
+        "source": "fap-web topics baseline",
+        "generated_at": "2026-03-08T00:00:00Z"
+    },
+    "profile": {
+        "slug": "mbti",
+        "title": "MBTI 主题内容聚合",
+        "subtitle": "把 MBTI 文章、职业发展内容与推荐画像聚合到一个内部链接中心。",
+        "excerpt": "当你希望把 MBTI 解读、职业匹配和后续行动放到同一个内容路径里时，从这个主题页开始。",
+        "hero_kicker": null,
+        "hero_quote": null,
+        "cover_image_url": null,
+        "status": "published",
+        "is_public": true,
+        "is_indexable": true,
+        "published_at": null,
+        "scheduled_at": null,
+        "sort_order": 10
+    },
+    "sections": [
+        {
+            "section_key": "overview",
+            "title": null,
+            "render_variant": "rich_text",
+            "body_md": "当你希望把 MBTI 解读、职业匹配和后续行动放到同一个内容路径里时，从这个主题页开始。",
+            "body_html": null,
+            "payload_json": null,
+            "sort_order": 10,
+            "is_enabled": true
+        },
+        {
+            "section_key": "why_it_matters",
+            "title": null,
+            "render_variant": "callout",
+            "body_md": "把 MBTI 文章、职业发展内容与推荐画像聚合到一个内部链接中心。",
+            "body_html": null,
+            "payload_json": null,
+            "sort_order": 20,
+            "is_enabled": true
+        },
+        {
+            "section_key": "related_topics_intro",
+            "title": "相关人格画像",
+            "render_variant": "callout",
+            "body_md": null,
+            "body_html": null,
+            "payload_json": null,
+            "sort_order": 30,
+            "is_enabled": true
+        }
+    ],
+    "entries": [
+        {
+            "entry_type": "scale",
+            "group_key": "featured",
+            "target_key": "MBTI",
+            "target_locale": null,
+            "title_override": "开始 MBTI 性格测试",
+            "excerpt_override": "探索你的 16 型人格偏好，并获得结构化类型解读。",
+            "badge_label": "测试",
+            "cta_label": "开始测试",
+            "target_url_override": null,
+            "payload_json": null,
+            "sort_order": 10,
+            "is_featured": true,
+            "is_enabled": true
+        },
+        {
+            "entry_type": "personality_profile",
+            "group_key": "personalities",
+            "target_key": "INTJ",
+            "target_locale": "zh-CN",
+            "title_override": null,
+            "excerpt_override": null,
+            "badge_label": "人格",
+            "cta_label": "查看",
+            "target_url_override": null,
+            "payload_json": null,
+            "sort_order": 20,
+            "is_featured": false,
+            "is_enabled": true
+        },
+        {
+            "entry_type": "custom_link",
+            "group_key": "related",
+            "target_key": "from-mbti-to-job-fit",
+            "target_locale": "zh-CN",
+            "title_override": "如何将 MBTI 用于职业匹配",
+            "excerpt_override": "用于提升职业决策质量与执行结果的实操框架。",
+            "badge_label": "职业指南",
+            "cta_label": "阅读",
+            "target_url_override": "/zh/career/guides/from-mbti-to-job-fit",
+            "payload_json": null,
+            "sort_order": 30,
+            "is_featured": false,
+            "is_enabled": true
+        },
+        {
+            "entry_type": "custom_link",
+            "group_key": "related",
+            "target_key": "how-to-find-right-career-direction",
+            "target_locale": "zh-CN",
+            "title_override": "如何找到适合自己的职业方向",
+            "excerpt_override": "用于提升职业决策质量与执行结果的实操框架。",
+            "badge_label": "职业指南",
+            "cta_label": "阅读",
+            "target_url_override": "/zh/career/guides/how-to-find-right-career-direction",
+            "payload_json": null,
+            "sort_order": 40,
+            "is_featured": false,
+            "is_enabled": true
+        }
+    ],
+    "seo_meta": {
+        "seo_title": "MBTI 主题中心",
+        "seo_description": "把 MBTI 文章、职业发展内容与推荐画像聚合到一个内部链接中心。",
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+    }
+}
