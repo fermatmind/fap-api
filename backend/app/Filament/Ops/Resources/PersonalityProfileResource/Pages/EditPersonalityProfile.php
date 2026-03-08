@@ -1,0 +1,129 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Filament\Ops\Resources\PersonalityProfileResource\Pages;
+
+use App\Filament\Ops\Resources\PersonalityProfileResource;
+use App\Filament\Ops\Resources\PersonalityProfileResource\Support\PersonalityWorkspace;
+use App\Models\PersonalityProfile;
+use Filament\Actions\Action;
+use Filament\Resources\Pages\EditRecord;
+use Illuminate\Contracts\Support\Htmlable;
+
+class EditPersonalityProfile extends EditRecord
+{
+    protected static string $resource = PersonalityProfileResource::class;
+
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $workspaceSectionsState = [];
+
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $workspaceSeoState = [];
+
+    public function getTitle(): string|Htmlable
+    {
+        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : 'Edit Personality Profile';
+    }
+
+    public function getSubheading(): ?string
+    {
+        return 'Maintain the structured MBTI profile without leaving the editorial workspace.';
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('backToPersonality')
+                ->label('All Personality Profiles')
+                ->url(PersonalityProfileResource::getUrl())
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray'),
+        ];
+    }
+
+    protected function getSaveFormAction(): Action
+    {
+        return parent::getSaveFormAction()
+            ->label('Save Changes')
+            ->icon('heroicon-o-check-circle');
+    }
+
+    protected function getCancelFormAction(): Action
+    {
+        return parent::getCancelFormAction()
+            ->label('Back to Personality')
+            ->icon('heroicon-o-arrow-left');
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        return [
+            ...$data,
+            'workspace_sections' => PersonalityWorkspace::workspaceSectionsFromRecord($this->getRecord()),
+            'workspace_seo' => PersonalityWorkspace::workspaceSeoFromRecord($this->getRecord()),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $this->workspaceSectionsState = is_array($data['workspace_sections'] ?? null) ? $data['workspace_sections'] : [];
+        $this->workspaceSeoState = is_array($data['workspace_seo'] ?? null) ? $data['workspace_seo'] : [];
+
+        unset($data['workspace_sections'], $data['workspace_seo']);
+
+        $typeCode = PersonalityWorkspace::normalizeTypeCode((string) ($data['type_code'] ?? ''));
+
+        $data['org_id'] = 0;
+        $data['scale_code'] = PersonalityProfile::SCALE_CODE_MBTI;
+        $data['type_code'] = $typeCode;
+        $data['slug'] = PersonalityWorkspace::normalizeSlug((string) ($data['slug'] ?? ''), $typeCode);
+        $data['locale'] = PersonalityWorkspace::normalizeLocale((string) ($data['locale'] ?? 'en'));
+        $data['updated_by_admin_user_id'] = $this->currentAdminId();
+
+        return $data;
+    }
+
+    protected function afterSave(): void
+    {
+        PersonalityWorkspace::syncWorkspaceSections($this->getRecord(), $this->workspaceSectionsState);
+        PersonalityWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
+        $this->getRecord()->unsetRelation('sections');
+        $this->getRecord()->unsetRelation('seoMeta');
+        PersonalityWorkspace::createRevision($this->getRecord(), 'Workspace update');
+    }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Personality profile updated';
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return PersonalityProfileResource::getUrl('edit', ['record' => $this->getRecord()]);
+    }
+
+    private function currentAdminId(): ?int
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        if (! is_object($user) || ! method_exists($user, 'getAuthIdentifier')) {
+            return null;
+        }
+
+        return (int) $user->getAuthIdentifier();
+    }
+}
