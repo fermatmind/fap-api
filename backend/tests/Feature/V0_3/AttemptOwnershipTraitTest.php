@@ -18,28 +18,29 @@ final class AttemptOwnershipTraitTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
-    private function seedAttemptAndResult(string $anonId): string
+    private function seedAttemptAndResult(string $anonId, string $scaleCode = 'MBTI'): string
     {
         $attemptId = (string) Str::uuid();
+        $isMbti = $scaleCode === 'MBTI';
 
         Attempt::create([
             'id' => $attemptId,
             'org_id' => 0,
             'anon_id' => $anonId,
-            'scale_code' => 'MBTI',
+            'scale_code' => $scaleCode,
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 144,
+            'question_count' => $isMbti ? 144 : 5,
             'client_platform' => 'test',
             'answers_summary_json' => ['stage' => 'seed'],
             'started_at' => now(),
             'submitted_at' => now(),
-            'pack_id' => (string) config('content_packs.default_pack_id'),
-            'dir_version' => 'MBTI-CN-v0.3',
+            'pack_id' => $isMbti ? (string) config('content_packs.default_pack_id') : "{$scaleCode}.pack",
+            'dir_version' => $isMbti ? 'MBTI-CN-v0.3' : "{$scaleCode}.dir",
             'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
@@ -48,39 +49,51 @@ final class AttemptOwnershipTraitTest extends TestCase
             'id' => (string) Str::uuid(),
             'org_id' => 0,
             'attempt_id' => $attemptId,
-            'scale_code' => 'MBTI',
+            'scale_code' => $scaleCode,
             'scale_version' => 'v0.3',
-            'type_code' => 'INTJ-A',
-            'scores_json' => [
-                'EI' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
-                'SN' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
-                'TF' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
-                'JP' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
-                'AT' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
-            ],
-            'scores_pct' => [
-                'EI' => 50,
-                'SN' => 50,
-                'TF' => 50,
-                'JP' => 50,
-                'AT' => 50,
-            ],
-            'axis_states' => [
-                'EI' => 'clear',
-                'SN' => 'clear',
-                'TF' => 'clear',
-                'JP' => 'clear',
-                'AT' => 'clear',
-            ],
-            'content_package_version' => 'v0.3',
-            'result_json' => [
-                'type_code' => 'INTJ-A',
-                'scores_json' => [
+            'type_code' => $isMbti ? 'INTJ-A' : 'SIMPLE-SCORE',
+            'scores_json' => $isMbti
+                ? [
                     'EI' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
+                    'SN' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
+                    'TF' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
+                    'JP' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
+                    'AT' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
+                ]
+                : ['raw_score' => 15, 'final_score' => 15],
+            'scores_pct' => $isMbti
+                ? [
+                    'EI' => 50,
+                    'SN' => 50,
+                    'TF' => 50,
+                    'JP' => 50,
+                    'AT' => 50,
+                ]
+                : [],
+            'axis_states' => $isMbti
+                ? [
+                    'EI' => 'clear',
+                    'SN' => 'clear',
+                    'TF' => 'clear',
+                    'JP' => 'clear',
+                    'AT' => 'clear',
+                ]
+                : [],
+            'content_package_version' => 'v0.3',
+            'result_json' => $isMbti
+                ? [
+                    'type_code' => 'INTJ-A',
+                    'scores_json' => [
+                        'EI' => ['a' => 10, 'b' => 10, 'sum' => 0, 'total' => 20],
+                    ],
+                ]
+                : [
+                    'raw_score' => 15,
+                    'final_score' => 15,
+                    'type_code' => 'SIMPLE-SCORE',
                 ],
-            ],
-            'pack_id' => (string) config('content_packs.default_pack_id'),
-            'dir_version' => 'MBTI-CN-v0.3',
+            'pack_id' => $isMbti ? (string) config('content_packs.default_pack_id') : "{$scaleCode}.pack",
+            'dir_version' => $isMbti ? 'MBTI-CN-v0.3' : "{$scaleCode}.dir",
             'scoring_spec_version' => '2026.01',
             'report_engine_version' => 'v1.2',
             'is_valid' => true,
@@ -113,7 +126,7 @@ final class AttemptOwnershipTraitTest extends TestCase
     public function test_report_returns_404_without_auth_and_anon_header(): void
     {
         $this->seedScales();
-        $attemptId = $this->seedAttemptAndResult('sec003-owner-anon');
+        $attemptId = $this->seedAttemptAndResult('sec003-owner-anon', 'SIMPLE_SCORE_DEMO');
 
         $this->getJson(route('api.v0_3.attempts.report', ['id' => $attemptId]))
             ->assertStatus(404);
@@ -122,7 +135,7 @@ final class AttemptOwnershipTraitTest extends TestCase
     public function test_report_returns_404_when_anon_header_mismatch(): void
     {
         $this->seedScales();
-        $attemptId = $this->seedAttemptAndResult('sec003-owner-anon');
+        $attemptId = $this->seedAttemptAndResult('sec003-owner-anon', 'SIMPLE_SCORE_DEMO');
 
         $this->withHeader('X-Anon-Id', 'sec003-other-anon')
             ->getJson(route('api.v0_3.attempts.report', ['id' => $attemptId]))
@@ -137,9 +150,9 @@ final class AttemptOwnershipTraitTest extends TestCase
         $token = $this->issueAnonToken($anonId);
 
         $response = $this->withHeaders([
-                'X-Anon-Id' => $anonId,
-                'Authorization' => 'Bearer '.$token,
-            ])
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])
             ->getJson(route('api.v0_3.attempts.report', ['id' => $attemptId]));
 
         $this->assertContains($response->status(), [200, 402]);

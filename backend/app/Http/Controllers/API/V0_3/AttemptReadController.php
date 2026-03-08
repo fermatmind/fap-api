@@ -220,10 +220,8 @@ class AttemptReadController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
-        $attempt = $this->ownedAttemptQuery($request, $id)->firstOrFail();
-
-        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->first();
-        if ($result === null) {
+        $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $id)->first();
+        if (! $result instanceof Result) {
             $submissionPayload = $this->attemptSubmissionService->latestForAttempt(
                 $this->orgContext,
                 $id,
@@ -243,33 +241,21 @@ class AttemptReadController extends Controller
                 ], 202);
             }
 
-            abort(404, 'result not found.');
+            throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
         }
-        $responseCodes = $this->resolveResponseScaleCodes($attempt);
+        $responseCodes = $this->resolveResponseScaleCodes($result);
+        $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
+        $attempt = $this->resolveAttemptForReportRead($request, $orgId, $id, $scaleCode);
 
-        $gate = $this->reportGatekeeper->resolve(
+        $gate = $this->resolveReportGate(
             $orgId,
             $id,
             $userId !== null ? (string) $userId : null,
             $anonId,
             $this->orgContext->role(),
-            false,
+            $this->isPublicReportScale($scaleCode),
             $forceRefresh,
         );
-
-        if (! ($gate['ok'] ?? false)) {
-            $status = (int) ($gate['status'] ?? 0);
-            if ($status <= 0) {
-                $error = strtoupper((string) data_get($gate, 'error_code', data_get($gate, 'error', 'REPORT_FAILED')));
-                $status = match ($error) {
-                    'ATTEMPT_REQUIRED', 'SCALE_REQUIRED' => 400,
-                    'ATTEMPT_NOT_FOUND', 'RESULT_NOT_FOUND', 'SCALE_NOT_FOUND' => 404,
-                    default => 500,
-                };
-            }
-
-            abort($status, (string) ($gate['message'] ?? 'report generation failed.'));
-        }
 
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
             'scale_code' => (string) ($attempt->scale_code ?? ''),
@@ -317,6 +303,70 @@ class AttemptReadController extends Controller
                 'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
             ]),
         ]));
+    }
+
+    private function resolveAttemptForReportRead(Request $request, int $orgId, string $attemptId, string $scaleCode): Attempt
+    {
+        if ($this->isPublicReportScale($scaleCode)) {
+            $attempt = Attempt::withoutGlobalScopes()
+                ->where('org_id', $orgId)
+                ->where('id', $attemptId)
+                ->first();
+
+            if ($attempt instanceof Attempt) {
+                return $attempt;
+            }
+
+            throw new ApiProblemException(404, 'ATTEMPT_NOT_FOUND', 'attempt not found.');
+        }
+
+        $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+    }
+
+    private function resolveReportGate(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $role,
+        bool $forceSystemAccess,
+        bool $forceRefresh
+    ): array {
+        $gate = $this->reportGatekeeper->resolve(
+            $orgId,
+            $attemptId,
+            $userId,
+            $anonId,
+            $role,
+            $forceSystemAccess,
+            $forceRefresh,
+        );
+
+        if ($gate['ok'] ?? false) {
+            return $gate;
+        }
+
+        $errorCode = strtoupper((string) data_get($gate, 'error_code', data_get($gate, 'error', 'REPORT_FAILED')));
+        $status = (int) ($gate['status'] ?? 0);
+        if ($status <= 0) {
+            $status = match ($errorCode) {
+                'ATTEMPT_REQUIRED', 'SCALE_REQUIRED' => 400,
+                'ATTEMPT_NOT_FOUND', 'RESULT_NOT_FOUND', 'SCALE_NOT_FOUND' => 404,
+                default => 500,
+            };
+        }
+
+        $message = trim((string) ($gate['message'] ?? 'report generation failed.'));
+        if ($message === '') {
+            $message = 'report generation failed.';
+        }
+
+        throw new ApiProblemException($status, $errorCode !== '' ? $errorCode : 'REPORT_FAILED', $message);
     }
 
     /**
@@ -367,6 +417,11 @@ class AttemptReadController extends Controller
     private function isPublicResultScale(string $scaleCode): bool
     {
         return in_array($scaleCode, self::PUBLIC_RESULT_READ_SCALES, true);
+    }
+
+    private function isPublicReportScale(string $scaleCode): bool
+    {
+        return $this->isPublicResultScale($scaleCode);
     }
 
     private function resolveNormalizedScaleCode(array $responseCodes): string
