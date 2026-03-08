@@ -2,6 +2,8 @@
 
 namespace App\Services\SEO;
 
+use App\Models\PersonalityProfile;
+use App\Services\Cms\PersonalityProfileSeoService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -9,8 +11,9 @@ class SitemapGenerator
 {
     private string $urlPrefix;
 
-    public function __construct()
-    {
+    public function __construct(
+        private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+    ) {
         $configuredPrefix = trim((string) config('services.seo.tests_url_prefix', ''));
         if ($configuredPrefix === '') {
             $configuredPrefix = rtrim((string) config('app.url', 'http://localhost'), '/').'/tests/';
@@ -25,7 +28,8 @@ class SitemapGenerator
 
         $urls = array_merge(
             $this->getScaleUrls($locale),
-            $this->getArticleUrls($locale)
+            $this->getArticleUrls($locale),
+            $this->getPersonalityUrls()
         );
 
         $urls = collect($urls)
@@ -147,6 +151,72 @@ class SitemapGenerator
                 'loc' => $url,
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => (string) $row->slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
+    }
+
+    private function getPersonalityUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $rows = PersonalityProfile::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+            ->where('status', 'published')
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->whereIn('locale', PersonalityProfile::SUPPORTED_LOCALES)
+            ->whereNotNull('slug')
+            ->where('slug', '<>', '')
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->select(['slug', 'locale', 'updated_at', 'published_at'])
+            ->orderBy('locale')
+            ->orderBy('slug')
+            ->get();
+
+        $urls = [];
+        $listLastModified = [];
+
+        foreach ($rows as $row) {
+            $slug = trim((string) $row->slug);
+            $locale = trim((string) $row->locale);
+
+            if ($slug === '' || $locale === '') {
+                continue;
+            }
+
+            $segment = $this->personalityProfileSeoService->mapBackendLocaleToFrontendSegment($locale);
+            $lastmod = $row->updated_at
+                ?? $row->published_at
+                ?? now();
+
+            $urls[] = [
+                'loc' => $baseUrl.'/'.$segment.'/personality/'.rawurlencode($slug),
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'personality:'.$segment.':'.$slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+
+            if (! isset($listLastModified[$segment]) || $lastmod->gt($listLastModified[$segment])) {
+                $listLastModified[$segment] = $lastmod;
+            }
+        }
+
+        foreach ($listLastModified as $segment => $lastmod) {
+            $urls[] = [
+                'loc' => $baseUrl.'/'.$segment.'/personality',
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'personality-list:'.$segment,
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
         }
