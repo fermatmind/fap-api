@@ -18,6 +18,7 @@ return [
         'X-Org-Id',
         'X-FM-Org-Id',
         'X-Anon-Id',
+        'X-Fap-Locale',
         'Idempotency-Key',
         'X-Request-Id',
         'X-Requested-With',
