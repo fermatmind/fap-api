@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\SEO;
 
+use App\Models\PersonalityProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ class SitemapXmlTest extends TestCase
     public function test_sitemap_xml_is_cached_and_filtered(): void
     {
         config(['services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/']);
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
         $nowA = Carbon::create(2026, 1, 30, 10, 0, 0);
         $nowB = Carbon::create(2026, 1, 31, 12, 0, 0);
@@ -78,6 +80,44 @@ class SitemapXmlTest extends TestCase
             ],
         ]);
 
+        PersonalityProfile::query()->create([
+            'org_id' => 0,
+            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'title' => 'INTJ Personality Type',
+            'subtitle' => 'Strategic and future-oriented.',
+            'excerpt' => 'Explore INTJ traits, strengths, and growth.',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 11, 0, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
+        PersonalityProfile::query()->create([
+            'org_id' => 0,
+            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'zh-CN',
+            'title' => 'INTJ 人格类型',
+            'subtitle' => '理性、战略、面向未来。',
+            'excerpt' => '探索 INTJ 的特质、优势与成长方向。',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 0, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
         $response = $this->get('/sitemap.xml');
 
         $response->assertStatus(200);
@@ -94,18 +134,22 @@ class SitemapXmlTest extends TestCase
         $response->assertHeaderMissing('Set-Cookie');
 
         $body = (string) $response->getContent();
-        $prefix = rtrim((string) config('services.seo.tests_url_prefix'), '/') . '/';
-        $this->assertStringContainsString('<loc>' . $prefix . 'alpha</loc>', $body);
-        $this->assertStringContainsString('<loc>' . $prefix . 'beta</loc>', $body);
-        $this->assertStringContainsString('<loc>' . $prefix . 'gamma</loc>', $body);
-        $this->assertStringContainsString('<loc>' . $prefix . 'delta</loc>', $body);
-        $this->assertStringNotContainsString('<loc>' . $prefix . 'hidden</loc>', $body);
-        $this->assertStringNotContainsString('<loc>' . $prefix . 'hidden-alt</loc>', $body);
+        $prefix = rtrim((string) config('services.seo.tests_url_prefix'), '/').'/';
+        $this->assertStringContainsString('<loc>'.$prefix.'alpha</loc>', $body);
+        $this->assertStringContainsString('<loc>'.$prefix.'beta</loc>', $body);
+        $this->assertStringContainsString('<loc>'.$prefix.'gamma</loc>', $body);
+        $this->assertStringContainsString('<loc>'.$prefix.'delta</loc>', $body);
+        $this->assertStringNotContainsString('<loc>'.$prefix.'hidden</loc>', $body);
+        $this->assertStringNotContainsString('<loc>'.$prefix.'hidden-alt</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $body);
         $this->assertStringContainsString('<changefreq>weekly</changefreq>', $body);
         $this->assertStringContainsString('<priority>0.7</priority>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-30</lastmod>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-31</lastmod>', $body);
-        $this->assertSame(1, substr_count($body, '<loc>' . $prefix . 'alpha</loc>'));
+        $this->assertSame(1, substr_count($body, '<loc>'.$prefix.'alpha</loc>'));
 
         $second = $this->withHeaders(['If-None-Match' => $etag])->get('/sitemap.xml');
         $second->assertStatus(304);
