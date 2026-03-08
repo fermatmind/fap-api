@@ -24,6 +24,7 @@ use App\Http\Controllers\API\V0_4\ExperimentGovernanceController;
 use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
+use App\Http\Controllers\API\V0_5\Cms\CareerJobController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
 use App\Http\Controllers\HealthzController;
@@ -304,6 +305,9 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
+    Route::get('/career-jobs', [CareerJobController::class, 'index']);
+    Route::get('/career-jobs/{slug}/seo', [CareerJobController::class, 'seo']);
+    Route::get('/career-jobs/{slug}', [CareerJobController::class, 'show']);
     Route::get('/personality', [PersonalityController::class, 'index']);
     Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);
     Route::get('/personality/{type}', [PersonalityController::class, 'show']);
