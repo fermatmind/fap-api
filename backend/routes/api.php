@@ -25,6 +25,7 @@ use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
+use App\Http\Controllers\API\V0_5\Cms\TopicController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EnsureCmsAdminAuthorized;
@@ -306,6 +307,9 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/personality', [PersonalityController::class, 'index']);
     Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);
     Route::get('/personality/{type}', [PersonalityController::class, 'show']);
+    Route::get('/topics', [TopicController::class, 'index']);
+    Route::get('/topics/{slug}/seo', [TopicController::class, 'seo']);
+    Route::get('/topics/{slug}', [TopicController::class, 'show']);
 
     Route::middleware([
         EncryptCookies::class,

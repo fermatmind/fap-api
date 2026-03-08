@@ -1887,6 +1887,57 @@
                     "api"
                 ]
             }
+        },
+        "/api/v0.5/topics": {
+            "get": {
+                "operationId": "get_api_v0_5_topics",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\TopicController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/topics/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_topics_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\TopicController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/topics/{slug}/seo": {
+            "get": {
+                "operationId": "get_api_v0_5_topics_slug_seo",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\TopicController@seo",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
         }
     }
 }
