@@ -3,7 +3,9 @@
 namespace Tests\Feature\SEO;
 
 use App\Models\PersonalityProfile;
+use App\Models\TopicProfile;
 use App\Services\Cms\PersonalityProfileSeoService;
+use App\Services\Cms\TopicProfileSeoService;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -205,6 +207,95 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh), 'canonical'), $xml);
     }
 
+    public function test_generate_includes_only_indexable_global_topic_urls_with_locale_aware_paths(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        $eligibleEn = $this->createTopicProfile([
+            'topic_code' => 'mbti',
+            'slug' => 'mbti',
+            'locale' => 'en',
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 7, 9, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 7, 10, 0, 0, 'UTC'),
+        ]);
+
+        $eligibleZh = $this->createTopicProfile([
+            'topic_code' => 'mbti',
+            'slug' => 'mbti',
+            'locale' => 'zh-CN',
+            'title' => 'MBTI 主题',
+            'subtitle' => '理解人格偏好与类型框架。',
+            'excerpt' => '探索 MBTI 概念、类型档案与测试入口。',
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 7, 11, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 7, 12, 0, 0, 'UTC'),
+        ]);
+
+        $this->createTopicProfile([
+            'topic_code' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'status' => 'draft',
+            'updated_at' => Carbon::create(2026, 3, 7, 12, 30, 0, 'UTC'),
+        ]);
+        $this->createTopicProfile([
+            'topic_code' => 'enneagram',
+            'slug' => 'enneagram',
+            'locale' => 'en',
+            'is_public' => false,
+            'updated_at' => Carbon::create(2026, 3, 7, 12, 45, 0, 'UTC'),
+        ]);
+        $this->createTopicProfile([
+            'topic_code' => 'self-awareness',
+            'slug' => 'self-awareness',
+            'locale' => 'en',
+            'is_indexable' => false,
+            'updated_at' => Carbon::create(2026, 3, 7, 13, 0, 0, 'UTC'),
+        ]);
+        $this->createTopicProfile([
+            'org_id' => 9,
+            'topic_code' => 'eq',
+            'slug' => 'eq',
+            'locale' => 'en',
+            'updated_at' => Carbon::create(2026, 3, 7, 13, 15, 0, 'UTC'),
+        ]);
+        $this->createTopicProfile([
+            'topic_code' => 'disc',
+            'slug' => 'disc',
+            'locale' => 'fr',
+            'updated_at' => Carbon::create(2026, 3, 7, 13, 30, 0, 'UTC'),
+        ]);
+
+        $payload = app(SitemapGenerator::class)->generate();
+        $xml = (string) ($payload['xml'] ?? '');
+
+        $this->assertStringContainsString('https://staging.fermatmind.com/en/topics', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/zh/topics', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/en/topics/mbti', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/zh/topics/mbti', $xml);
+
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/topics/big-five', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/topics/enneagram', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/topics/self-awareness', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/topics/eq', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/fr/topics/disc', $xml);
+
+        $seoService = app(TopicProfileSeoService::class);
+
+        $this->assertSame(
+            data_get($seoService->buildMeta($eligibleEn, 'en'), 'canonical'),
+            data_get($seoService->buildJsonLd($eligibleEn, 'en'), 'mainEntityOfPage')
+        );
+        $this->assertSame(
+            data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'),
+            data_get($seoService->buildJsonLd($eligibleZh, 'zh-CN'), 'mainEntityOfPage')
+        );
+        $this->assertSame('CollectionPage', data_get($seoService->buildJsonLd($eligibleEn, 'en'), '@type'));
+        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn, 'en'), 'canonical'), $xml);
+        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'), $xml);
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */
@@ -226,6 +317,32 @@ class SitemapGeneratorTest extends TestCase
             'published_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
             'scheduled_at' => null,
             'schema_version' => 'v1',
+            'created_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createTopicProfile(array $overrides = []): TopicProfile
+    {
+        /** @var TopicProfile */
+        return TopicProfile::query()->create(array_merge([
+            'org_id' => 0,
+            'topic_code' => 'mbti',
+            'slug' => 'mbti',
+            'locale' => 'en',
+            'title' => 'MBTI',
+            'subtitle' => 'Understand personality preferences and type dynamics.',
+            'excerpt' => 'Explore MBTI concepts, type profiles, guides, and tests.',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 0,
             'created_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
         ], $overrides));
