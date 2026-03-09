@@ -32,8 +32,11 @@ class GenerateReportSnapshotJob implements ShouldQueue
         public string $triggerSource,
         public ?string $orderNo = null,
     ) {
-        $this->onConnection('database_reports');
-        $this->onQueue('reports');
+        $connection = trim((string) config('fap.queue.report_connection', 'database_reports'));
+        $queue = trim((string) config('fap.queue.report_queue', 'reports'));
+
+        $this->onConnection($connection !== '' ? $connection : 'database_reports');
+        $this->onQueue($queue !== '' ? $queue : 'reports');
     }
 
     public function handle(ReportSnapshotStore $store): void

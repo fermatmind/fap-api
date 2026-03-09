@@ -29,6 +29,8 @@ return [
     'queue' => [
         'attempt_connection' => env('FAP_ATTEMPT_QUEUE_CONNECTION', null),
         'attempt_queue' => env('FAP_ATTEMPT_QUEUE', 'default'),
+        'report_connection' => env('FAP_REPORT_QUEUE_CONNECTION', 'database_reports'),
+        'report_queue' => env('FAP_REPORT_QUEUE', 'reports'),
     ],
 
     'payments' => [
