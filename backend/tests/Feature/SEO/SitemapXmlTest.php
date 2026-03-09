@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\SEO;
 
+use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -176,6 +177,59 @@ class SitemapXmlTest extends TestCase
             'updated_at' => $nowB,
         ]);
 
+        CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => 'product-manager',
+            'slug' => 'product-manager',
+            'locale' => 'en',
+            'title' => 'Product Manager',
+            'excerpt' => 'Responsibilities, salary, growth path, and personality fit for Product Managers.',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 11, 45, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 0,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
+        CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => 'product-manager',
+            'slug' => 'product-manager',
+            'locale' => 'zh-CN',
+            'title' => '产品经理',
+            'excerpt' => '了解产品经理的职责、薪资水平、发展路径和人格匹配。',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 45, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 0,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
+        CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => 'private-role',
+            'slug' => 'private-role',
+            'locale' => 'en',
+            'title' => 'Private Role',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => false,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 50, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 0,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
         $response = $this->get('/sitemap.xml');
 
         $response->assertStatus(200);
@@ -208,6 +262,11 @@ class SitemapXmlTest extends TestCase
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics/mbti</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/topics/mbti</loc>', $body);
         $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/topics/big-five</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/jobs</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/product-manager</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs/product-manager</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/private-role</loc>', $body);
         $this->assertStringContainsString('<changefreq>weekly</changefreq>', $body);
         $this->assertStringContainsString('<priority>0.7</priority>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-30</lastmod>', $body);

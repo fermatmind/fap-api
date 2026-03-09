@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\SEO;
 
+use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
+use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\TopicProfileSeoService;
 use App\Services\SEO\SitemapGenerator;
@@ -296,6 +298,105 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'), $xml);
     }
 
+    public function test_generate_includes_only_indexable_global_career_job_urls_with_locale_aware_paths(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        $eligibleEn = $this->createCareerJob([
+            'job_code' => 'product-manager',
+            'slug' => 'product-manager',
+            'locale' => 'en',
+            'title' => 'Product Manager',
+            'excerpt' => 'Responsibilities, salary, growth path, and personality fit for Product Managers.',
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 8, 9, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 8, 10, 0, 0, 'UTC'),
+        ]);
+
+        $eligibleZh = $this->createCareerJob([
+            'job_code' => 'product-manager',
+            'slug' => 'product-manager',
+            'locale' => 'zh-CN',
+            'title' => '产品经理',
+            'excerpt' => '了解产品经理的职责、薪资水平、发展路径和人格匹配。',
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 8, 11, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 8, 12, 0, 0, 'UTC'),
+        ]);
+
+        $this->createCareerJob([
+            'job_code' => 'draft-role',
+            'slug' => 'draft-role',
+            'locale' => 'en',
+            'status' => CareerJob::STATUS_DRAFT,
+            'updated_at' => Carbon::create(2026, 3, 8, 12, 30, 0, 'UTC'),
+        ]);
+        $this->createCareerJob([
+            'job_code' => 'private-role',
+            'slug' => 'private-role',
+            'locale' => 'en',
+            'is_public' => false,
+            'updated_at' => Carbon::create(2026, 3, 8, 12, 45, 0, 'UTC'),
+        ]);
+        $this->createCareerJob([
+            'job_code' => 'noindex-role',
+            'slug' => 'noindex-role',
+            'locale' => 'en',
+            'is_indexable' => false,
+            'updated_at' => Carbon::create(2026, 3, 8, 13, 0, 0, 'UTC'),
+        ]);
+        $this->createCareerJob([
+            'org_id' => 9,
+            'job_code' => 'tenant-role',
+            'slug' => 'tenant-role',
+            'locale' => 'en',
+            'updated_at' => Carbon::create(2026, 3, 8, 13, 15, 0, 'UTC'),
+        ]);
+        $this->createCareerJob([
+            'job_code' => 'future-role',
+            'slug' => 'future-role',
+            'locale' => 'en',
+            'published_at' => Carbon::create(2026, 3, 12, 9, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 8, 13, 30, 0, 'UTC'),
+        ]);
+        $this->createCareerJob([
+            'job_code' => 'fr-role',
+            'slug' => 'fr-role',
+            'locale' => 'fr',
+            'updated_at' => Carbon::create(2026, 3, 8, 13, 45, 0, 'UTC'),
+        ]);
+
+        $payload = app(SitemapGenerator::class)->generate();
+        $xml = (string) ($payload['xml'] ?? '');
+
+        $this->assertStringContainsString('https://staging.fermatmind.com/en/career/jobs', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/zh/career/jobs', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/en/career/jobs/product-manager', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/zh/career/jobs/product-manager', $xml);
+
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/draft-role', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/private-role', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/noindex-role', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/tenant-role', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/future-role', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/fr/career/jobs/fr-role', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/zh-CN/career/jobs/product-manager', $xml);
+
+        $seoService = app(CareerJobSeoService::class);
+
+        $this->assertSame(
+            data_get($seoService->buildMeta($eligibleEn, 'en'), 'canonical'),
+            data_get($seoService->buildJsonLd($eligibleEn, 'en'), 'mainEntityOfPage')
+        );
+        $this->assertSame(
+            data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'),
+            data_get($seoService->buildJsonLd($eligibleZh, 'zh-CN'), 'mainEntityOfPage')
+        );
+        $this->assertSame('Occupation', data_get($seoService->buildJsonLd($eligibleEn, 'en'), '@type'));
+        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn, 'en'), 'canonical'), $xml);
+        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'), $xml);
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */
@@ -345,6 +446,32 @@ class SitemapGeneratorTest extends TestCase
             'sort_order' => 0,
             'created_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createCareerJob(array $overrides = []): CareerJob
+    {
+        /** @var CareerJob */
+        return CareerJob::query()->create(array_merge([
+            'org_id' => 0,
+            'job_code' => 'product-manager',
+            'slug' => 'product-manager',
+            'locale' => 'en',
+            'title' => 'Product Manager',
+            'subtitle' => null,
+            'excerpt' => 'Responsibilities, salary, growth path, and personality fit for Product Managers.',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 8, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 0,
+            'created_at' => Carbon::create(2026, 3, 8, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 8, 8, 0, 0, 'UTC'),
         ], $overrides));
     }
 }

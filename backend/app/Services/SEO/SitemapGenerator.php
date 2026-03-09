@@ -2,8 +2,10 @@
 
 namespace App\Services\SEO;
 
+use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
+use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\TopicProfileSeoService;
 use Illuminate\Support\Carbon;
@@ -14,6 +16,7 @@ class SitemapGenerator
     private string $urlPrefix;
 
     public function __construct(
+        private readonly CareerJobSeoService $careerJobSeoService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
     ) {
@@ -32,6 +35,7 @@ class SitemapGenerator
         $urls = array_merge(
             $this->getScaleUrls($locale),
             $this->getArticleUrls($locale),
+            $this->getCareerJobUrls(),
             $this->getPersonalityUrls(),
             $this->getTopicUrls()
         );
@@ -226,6 +230,112 @@ class SitemapGenerator
         }
 
         return $urls;
+    }
+
+    private function getCareerJobUrls(): array
+    {
+        return array_merge(
+            $this->getCareerJobListUrls(),
+            $this->getCareerJobDetailUrls()
+        );
+    }
+
+    private function getCareerJobListUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $rows = CareerJob::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('status', CareerJob::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->whereIn('locale', CareerJob::SUPPORTED_LOCALES)
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->select(['locale', 'updated_at', 'published_at'])
+            ->orderBy('locale')
+            ->get();
+
+        $listLastModified = [];
+
+        foreach ($rows as $row) {
+            $locale = trim((string) $row->locale);
+            if ($locale === '') {
+                continue;
+            }
+
+            $segment = $this->careerJobSeoService->mapBackendLocaleToFrontendSegment($locale);
+            $lastmod = $row->updated_at
+                ?? $row->published_at
+                ?? now();
+
+            if (! isset($listLastModified[$segment]) || $lastmod->gt($listLastModified[$segment])) {
+                $listLastModified[$segment] = $lastmod;
+            }
+        }
+
+        $urls = [];
+        foreach ($listLastModified as $segment => $lastmod) {
+            $urls[] = [
+                'loc' => $baseUrl.'/'.$segment.'/career/jobs',
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'career-jobs-list:'.$segment,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
+    }
+
+    private function getCareerJobDetailUrls(): array
+    {
+        $rows = CareerJob::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('status', CareerJob::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->whereIn('locale', CareerJob::SUPPORTED_LOCALES)
+            ->whereNotNull('slug')
+            ->where('slug', '<>', '')
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->select(['slug', 'locale', 'updated_at', 'published_at'])
+            ->orderBy('locale')
+            ->orderBy('slug')
+            ->get();
+
+        $urls = [];
+
+        foreach ($rows as $row) {
+            $slug = trim((string) $row->slug);
+            $locale = trim((string) $row->locale);
+
+            if ($slug === '' || $locale === '') {
+                continue;
+            }
+
+            $lastmod = $row->updated_at
+                ?? $row->published_at
+                ?? now();
+
+            $urls[] = [
+                'loc' => $this->careerJobSeoService->buildCanonicalUrl($row, $locale),
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'career-jobs:'.$this->careerJobSeoService->mapBackendLocaleToFrontendSegment($locale).':'.$slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return array_values(array_filter($urls, static fn (array $row): bool => ! empty($row['loc'])));
     }
 
     private function getTopicUrls(): array
