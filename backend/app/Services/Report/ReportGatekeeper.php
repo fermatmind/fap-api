@@ -2,9 +2,13 @@
 
 namespace App\Services\Report;
 
+use App\DTO\ResolvedPack;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Content\ContentPack;
+use App\Services\Content\ContentStore;
+use App\Services\ContentPackResolver;
 use App\Services\Report\Resolvers\AccessResolver;
 use App\Services\Report\Resolvers\CrisisPolicyResolver;
 use App\Services\Report\Resolvers\OfferResolver;
@@ -107,6 +111,8 @@ class ReportGatekeeper
         if ($scaleCode === '') {
             return $this->badRequest('SCALE_REQUIRED', 'scale_code missing on attempt.');
         }
+        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? $result->scale_code_v2 ?? '')));
+        $isMbtiContract = $this->isMbtiReportContractEnabled($scaleCode, $scaleCodeV2);
 
         $registry = $this->registry->getByCode($scaleCode, $orgId);
         if (! $registry) {
@@ -115,9 +121,10 @@ class ReportGatekeeper
 
         $viewPolicy = $this->offerResolver->normalizeViewPolicy($registry['view_policy_json'] ?? null);
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
+        $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
-        $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $scaleCode, $orgId);
+        $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $commercialSpec, $scaleCode, $orgId);
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
 
         $accessState = $this->accessResolver->resolveAccess(
@@ -201,7 +208,8 @@ class ReportGatekeeper
                     $modulesOffered,
                     $modulesPreview,
                     $normsPayload,
-                    $qualityPayload
+                    $qualityPayload,
+                    $isMbtiContract
                 );
             }
 
@@ -224,7 +232,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
 
@@ -245,7 +254,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
 
@@ -277,7 +287,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
 
@@ -295,7 +306,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
 
@@ -318,7 +330,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
             }
@@ -341,7 +354,8 @@ class ReportGatekeeper
                 $modulesOffered,
                 $modulesPreview,
                 $normsPayload,
-                $qualityPayload
+                $qualityPayload,
+                $isMbtiContract
             );
         }
 
@@ -393,7 +407,8 @@ class ReportGatekeeper
             $modulesOffered,
             $modulesPreview,
             $normsPayload,
-            $qualityPayload
+            $qualityPayload,
+            $isMbtiContract
         );
     }
 
@@ -648,13 +663,27 @@ class ReportGatekeeper
         array $modulesOffered = [],
         array $modulesPreview = [],
         array $norms = [],
-        array $quality = []
+        array $quality = [],
+        bool $isMbtiContract = false
     ): array {
         $generating = (bool) ($meta['generating'] ?? false);
         $snapshotError = (bool) ($meta['snapshot_error'] ?? false);
         $retryAfterSeconds = isset($meta['retry_after_seconds']) ? (int) $meta['retry_after_seconds'] : null;
+        if ($report !== []) {
+            if ($isMbtiContract) {
+                $report['recommended_reads'] = is_array($report['recommended_reads'] ?? null)
+                    ? array_values($report['recommended_reads'])
+                    : [];
+            } else {
+                unset($report['recommended_reads']);
 
-        return [
+                if (is_array($report['layers'] ?? null)) {
+                    unset($report['layers']['identity']);
+                }
+            }
+        }
+
+        $payload = [
             'ok' => true,
             'generating' => $generating,
             'snapshot_error' => $snapshotError,
@@ -674,6 +703,94 @@ class ReportGatekeeper
             'quality' => $quality,
             'report' => $report,
         ];
+
+        if ($isMbtiContract) {
+            $payload['cta'] = $this->offerResolver->buildCtaPayload($paywall, $locked);
+        }
+
+        return $payload;
+    }
+
+    private function loadCommercialSpecForAttempt(Attempt $attempt, Result $result): array
+    {
+        try {
+            $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? '')));
+            $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? $result->scale_code_v2 ?? '')));
+            $region = trim((string) ($attempt->region ?? config('content_packs.default_region', '')));
+            $locale = trim((string) ($attempt->locale ?? config('content_packs.default_locale', '')));
+            $version = trim((string) ($attempt->content_package_version ?? $result->content_package_version ?? ''));
+            $dirVersion = trim((string) ($attempt->dir_version ?? $result->dir_version ?? ''));
+
+            if (! $this->isMbtiReportContractEnabled($scaleCode, $scaleCodeV2)) {
+                return [];
+            }
+
+            if ($scaleCode === '' || $region === '' || $locale === '' || $version === '') {
+                return [];
+            }
+
+            /** @var ContentPackResolver $resolver */
+            $resolver = app(ContentPackResolver::class);
+            $resolved = $resolver->resolve($scaleCode, $region, $locale, $version, $dirVersion !== '' ? $dirVersion : null);
+            $store = new ContentStore($this->resolvedPackToContentPackChain($resolved), [], $dirVersion);
+
+            return $store->loadCommercialSpec();
+        } catch (\Throwable $e) {
+            Log::warning('[REPORT] commercial_spec_load_failed', [
+                'attempt_id' => (string) ($attempt->id ?? ''),
+                'scale_code' => (string) ($attempt->scale_code ?? ''),
+                'error' => $e->getMessage(),
+            ]);
+
+            return [];
+        }
+    }
+
+    /**
+     * @return array<int, ContentPack>
+     */
+    private function resolvedPackToContentPackChain(ResolvedPack $resolved): array
+    {
+        $makePack = static function (array $manifest, string $baseDir): ContentPack {
+            return new ContentPack(
+                packId: (string) ($manifest['pack_id'] ?? ''),
+                scaleCode: (string) ($manifest['scale_code'] ?? ''),
+                region: (string) ($manifest['region'] ?? ''),
+                locale: (string) ($manifest['locale'] ?? ''),
+                version: (string) ($manifest['content_package_version'] ?? ''),
+                basePath: $baseDir,
+                manifest: $manifest,
+            );
+        };
+
+        $chain = [
+            $makePack(is_array($resolved->manifest ?? null) ? $resolved->manifest : [], (string) ($resolved->baseDir ?? '')),
+        ];
+
+        foreach ($resolved->fallbackChain ?? [] as $fallback) {
+            if (! is_array($fallback)) {
+                continue;
+            }
+
+            $manifest = is_array($fallback['manifest'] ?? null) ? $fallback['manifest'] : [];
+            $baseDir = (string) ($fallback['base_dir'] ?? '');
+            if ($manifest === [] || $baseDir === '') {
+                continue;
+            }
+
+            $chain[] = $makePack($manifest, $baseDir);
+        }
+
+        return $chain;
+    }
+
+    private function isMbtiReportContractEnabled(?string $scaleCode, ?string $scaleCodeV2 = null): bool
+    {
+        $normalizedScaleCode = strtoupper(trim((string) $scaleCode));
+        $normalizedScaleCodeV2 = strtoupper(trim((string) $scaleCodeV2));
+
+        return $normalizedScaleCode === 'MBTI'
+            || $normalizedScaleCodeV2 === 'MBTI_PERSONALITY_TEST_16_TYPES';
     }
 
     /**

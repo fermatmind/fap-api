@@ -487,6 +487,17 @@ public function loadSelectRules(): array
         return $doc;
     }
 
+    public function loadCommercialSpec(): array
+    {
+        $doc = $this->loadJsonByBasenamePreferAssetKey('rules', 'commercial_spec.json');
+        $this->lightSchemaCheck($doc, 'commercial_spec.json');
+
+        $doc['variants'] = is_array($doc['variants'] ?? null) ? array_values($doc['variants']) : [];
+        $doc['offers'] = is_array($doc['offers'] ?? null) ? array_values($doc['offers']) : [];
+
+        return $doc;
+    }
+
 /**
  * ✅ report_overrides.json（统一覆写器入口用）
  * - 必须走当前 pack chain（含 fallback chain）
@@ -1305,13 +1316,17 @@ public function loadReportOverrides(): array
     {
         $normList = function ($list) {
             if (!is_array($list)) return [];
-            foreach ($list as &$it) {
-                if (!is_array($it)) { $it = []; continue; }
-                if (!isset($it['tags']) || !is_array($it['tags'])) $it['tags'] = [];
-                if (!isset($it['priority']) || !is_numeric($it['priority'])) $it['priority'] = 0;
+
+            $out = [];
+            foreach ($list as $it) {
+                if (!is_array($it)) {
+                    continue;
+                }
+
+                $out[] = ReportContentNormalizer::read($it);
             }
-            unset($it);
-            return $list;
+
+            return $out;
         };
 
         // by_type/by_role/by_strategy/by_top_axis 都是 map -> list

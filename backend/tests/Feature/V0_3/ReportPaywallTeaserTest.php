@@ -54,6 +54,7 @@ class ReportPaywallTeaserTest extends TestCase
             'org_id' => 0,
             'anon_id' => 'anon_test',
             'scale_code' => 'MBTI',
+            'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
@@ -73,6 +74,7 @@ class ReportPaywallTeaserTest extends TestCase
             'org_id' => 0,
             'attempt_id' => $attemptId,
             'scale_code' => 'MBTI',
+            'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
             'scale_version' => 'v0.3',
             'type_code' => 'INTJ-A',
             'scores_json' => [
@@ -156,10 +158,16 @@ class ReportPaywallTeaserTest extends TestCase
         $this->assertNotEmpty($report->json('offers'));
         $offerSkus = array_map(fn ($item) => $item['sku'] ?? null, (array) $report->json('offers'));
         $this->assertContains('MBTI_REPORT_FULL_199', $offerSkus);
+        $this->assertIsArray($report->json('cta'));
+        $this->assertTrue((bool) $report->json('cta.visible'));
+        $this->assertSame('upsell', $report->json('cta.kind'));
+        $this->assertSame('MBTI_REPORT_FULL', $report->json('cta.target_sku'));
+        $this->assertSame('MBTI_REPORT_FULL_199', $report->json('cta.target_sku_effective'));
         $this->assertNotNull($report->json('report'));
         $this->assertNotEmpty((array) $report->json('report.profile'));
         $this->assertNotEmpty((array) $report->json('report.identity_card'));
         $this->assertNotEmpty((array) $report->json('report.highlights'));
+        $this->assertIsArray($report->json('report.recommended_reads'));
         foreach (['traits', 'growth', 'career', 'relationships'] as $section) {
             $this->assertNotEmpty((array) $report->json("report.sections.{$section}.cards"));
         }

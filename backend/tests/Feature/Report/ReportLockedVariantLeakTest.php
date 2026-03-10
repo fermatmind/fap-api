@@ -53,6 +53,7 @@ final class ReportLockedVariantLeakTest extends TestCase
             'org_id' => 0,
             'anon_id' => $anonId,
             'scale_code' => 'MBTI',
+            'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
@@ -72,6 +73,7 @@ final class ReportLockedVariantLeakTest extends TestCase
             'org_id' => 0,
             'attempt_id' => $attemptId,
             'scale_code' => 'MBTI',
+            'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
             'scale_version' => 'v0.3',
             'type_code' => 'INTJ-A',
             'scores_json' => [
@@ -120,11 +122,29 @@ final class ReportLockedVariantLeakTest extends TestCase
         $this->assertNotEmpty((array) $resp->json('report.profile'));
         $this->assertNotEmpty((array) $resp->json('report.identity_card'));
         $this->assertNotEmpty((array) $resp->json('report.highlights'));
+        $this->assertIsArray($resp->json('report.recommended_reads'));
+        $this->assertIsArray($resp->json('cta'));
+        $this->assertTrue((bool) $resp->json('cta.visible'));
+        $this->assertSame('upsell', $resp->json('cta.kind'));
+        $this->assertNotEmpty((array) $resp->json('cta.benefit_bullets'));
+        $identityLayer = (array) $resp->json('report.layers.identity');
+        $this->assertNotEmpty($identityLayer);
+        $this->assertNotContains('fallback:true', (array) ($identityLayer['tags'] ?? []));
         foreach (['traits', 'growth', 'career', 'relationships'] as $section) {
             $cards = (array) $resp->json("report.sections.{$section}.cards");
             $this->assertNotEmpty($cards);
             $this->assertTrue($this->hasRicherCopy($cards), "Section {$section} should keep richer teaser copy");
         }
+
+        foreach ((array) $resp->json('report.recommended_reads') as $item) {
+            $this->assertIsArray($item);
+            $this->assertArrayNotHasKey('access_level', $item);
+            $this->assertArrayNotHasKey('module_code', $item);
+            $this->assertArrayNotHasKey('locked', $item);
+        }
+
+        $this->assertArrayNotHasKey('access_level', $identityLayer);
+        $this->assertArrayNotHasKey('module_code', $identityLayer);
 
         $levels = $this->collectAccessLevels($resp->json('report'));
         $this->assertNotEmpty($levels);

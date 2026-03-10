@@ -111,7 +111,7 @@ final class ReportContentNormalizer
 
     /**
      * recommended_reads 统一 normalize：
-     * - tips: 若未来 reads 也支持 tips，可统一补（当前即使不用也不影响）
+     * - 输出稳定字段 shape，避免前端处理“字段有时不存在”
      * - tags: array<string>（缺省 => []）
      * - priority: int（缺省 => 0）
      *
@@ -120,16 +120,42 @@ final class ReportContentNormalizer
      */
     public static function read(array $r): array
     {
-        // reads 目前不一定有 tips，但统一补不会破坏兼容
-        $r = self::fillTipsIfMissing($r);
+        $stringOrNull = static function (mixed $value): ?string {
+            if ($value === null) {
+                return null;
+            }
 
-        if (!array_key_exists('tags', $r)) $r['tags'] = [];
-        $r['tags'] = self::normalizeStringArray($r['tags']);
+            if (! is_string($value) && ! is_numeric($value)) {
+                return null;
+            }
 
-        if (!array_key_exists('priority', $r)) $r['priority'] = 0;
-        $r['priority'] = (int)($r['priority'] ?? 0);
+            $normalized = trim((string) $value);
 
-        return $r;
+            return $normalized !== '' ? $normalized : null;
+        };
+
+        $estimatedMinutes = null;
+        if (array_key_exists('estimated_minutes', $r) && $r['estimated_minutes'] !== null && $r['estimated_minutes'] !== '') {
+            $estimatedMinutes = (int) $r['estimated_minutes'];
+        }
+
+        return [
+            'id' => (string) ($r['id'] ?? ''),
+            'type' => $stringOrNull($r['type'] ?? null) ?? 'article',
+            'title' => (string) ($r['title'] ?? ''),
+            'desc' => $stringOrNull($r['desc'] ?? null),
+            'url' => $stringOrNull($r['url'] ?? null),
+            'cover' => $stringOrNull($r['cover'] ?? null),
+            'cta' => $stringOrNull($r['cta'] ?? null),
+            'priority' => (int) ($r['priority'] ?? 0),
+            'tags' => self::normalizeStringArray($r['tags'] ?? []),
+            'estimated_minutes' => $estimatedMinutes,
+            'status' => $stringOrNull($r['status'] ?? null),
+            'published_at' => $stringOrNull($r['published_at'] ?? null),
+            'updated_at' => $stringOrNull($r['updated_at'] ?? null),
+            'canonical_id' => $stringOrNull($r['canonical_id'] ?? null),
+            'canonical_url' => $stringOrNull($r['canonical_url'] ?? null),
+        ];
     }
 
     /**

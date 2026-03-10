@@ -14,6 +14,19 @@ class OfferResolver
         'upgrade_sku' => null,
     ];
 
+    private const DEFAULT_CTA = [
+        'visible' => false,
+        'kind' => 'none',
+        'title' => null,
+        'subtitle' => null,
+        'primary_label' => null,
+        'secondary_label' => null,
+        'benefit_bullets' => [],
+        'badge' => null,
+        'target_sku' => null,
+        'target_sku_effective' => null,
+    ];
+
     public function __construct(private SkuCatalog $skus) {}
 
     public function normalizeViewPolicy(mixed $raw): array
@@ -56,7 +69,7 @@ class OfferResolver
         return is_array($raw) ? $raw : [];
     }
 
-    public function buildPaywall(array $viewPolicy, array $commercial, string $scaleCode, int $orgId): array
+    public function buildPaywall(array $viewPolicy, array $commercial, array $commercialSpec, string $scaleCode, int $orgId): array
     {
         $scaleCode = strtoupper(trim($scaleCode));
         $effectiveSku = strtoupper(trim((string) ($viewPolicy['upgrade_sku'] ?? '')));
@@ -80,8 +93,42 @@ class OfferResolver
             'upgrade_sku' => $anchorSku,
             'upgrade_sku_effective' => $effectiveSku !== '' ? $effectiveSku : null,
             'offers' => $offers,
+            'cta_copy' => $scaleCode === 'MBTI'
+                ? $this->resolveCtaCopy($commercialSpec, $anchorSku, $effectiveSku !== '' ? $effectiveSku : null)
+                : null,
             'view_policy' => $viewPolicy,
         ];
+    }
+
+    public function buildCtaPayload(array $paywall, bool $locked): array
+    {
+        $payload = self::DEFAULT_CTA;
+        $payload['target_sku'] = $this->normalizeNullableString($paywall['upgrade_sku'] ?? null);
+        $payload['target_sku_effective'] = $this->normalizeNullableString($paywall['upgrade_sku_effective'] ?? null);
+
+        $canUpsell = $locked
+            && (
+                $payload['target_sku'] !== null
+                || $payload['target_sku_effective'] !== null
+                || count((array) ($paywall['offers'] ?? [])) > 0
+            );
+
+        if (! $canUpsell) {
+            return $payload;
+        }
+
+        $copy = $this->normalizeCtaCopy($paywall['cta_copy'] ?? null);
+
+        return array_merge($payload, [
+            'visible' => true,
+            'kind' => 'upsell',
+            'title' => $copy['title'],
+            'subtitle' => $copy['subtitle'],
+            'primary_label' => $copy['primary_label'],
+            'secondary_label' => $copy['secondary_label'],
+            'benefit_bullets' => $copy['benefit_bullets'],
+            'badge' => $copy['badge'],
+        ]);
     }
 
     /**
@@ -232,6 +279,88 @@ class OfferResolver
         }
 
         return $offers;
+    }
+
+    private function resolveCtaCopy(array $commercialSpec, ?string $anchorSku, ?string $effectiveSku): array
+    {
+        $variants = is_array($commercialSpec['variants'] ?? null) ? $commercialSpec['variants'] : [];
+        if ($variants === []) {
+            return $this->normalizeCtaCopy(null);
+        }
+
+        $normalizedAnchor = strtoupper(trim((string) ($anchorSku ?? '')));
+        $normalizedEffective = strtoupper(trim((string) ($effectiveSku ?? '')));
+        $defaultVariant = null;
+
+        foreach ($variants as $variant) {
+            if (! is_array($variant)) {
+                continue;
+            }
+
+            if (($variant['default'] ?? false) === true && $defaultVariant === null) {
+                $defaultVariant = $variant;
+            }
+
+            $variantAnchor = strtoupper(trim((string) ($variant['upgrade_sku_anchor'] ?? '')));
+            $variantEffective = strtoupper(trim((string) ($variant['upgrade_sku'] ?? '')));
+
+            if ($normalizedEffective !== '' && $variantEffective === $normalizedEffective) {
+                return $this->normalizeCtaCopy($variant['cta_copy'] ?? ($variant['cta'] ?? null));
+            }
+
+            if ($normalizedAnchor !== '' && $variantAnchor === $normalizedAnchor) {
+                return $this->normalizeCtaCopy($variant['cta_copy'] ?? ($variant['cta'] ?? null));
+            }
+        }
+
+        if (is_array($defaultVariant)) {
+            return $this->normalizeCtaCopy($defaultVariant['cta_copy'] ?? ($defaultVariant['cta'] ?? null));
+        }
+
+        return $this->normalizeCtaCopy($variants[0]['cta_copy'] ?? ($variants[0]['cta'] ?? null) ?? null);
+    }
+
+    private function normalizeCtaCopy(mixed $raw): array
+    {
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            $raw = is_array($decoded) ? $decoded : null;
+        }
+
+        $raw = is_array($raw) ? $raw : [];
+
+        $benefitBullets = $raw['benefit_bullets'] ?? [];
+        if (! is_array($benefitBullets)) {
+            $benefitBullets = [];
+        }
+
+        $benefitBullets = array_values(array_filter(array_map(function ($item) {
+            return $this->normalizeNullableString($item);
+        }, $benefitBullets)));
+
+        return [
+            'title' => $this->normalizeNullableString($raw['title'] ?? null),
+            'subtitle' => $this->normalizeNullableString($raw['subtitle'] ?? null),
+            'primary_label' => $this->normalizeNullableString($raw['primary_label'] ?? null),
+            'secondary_label' => $this->normalizeNullableString($raw['secondary_label'] ?? null),
+            'benefit_bullets' => $benefitBullets,
+            'badge' => $this->normalizeNullableString($raw['badge'] ?? null),
+        ];
+    }
+
+    private function normalizeNullableString(mixed $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized !== '' ? $normalized : null;
     }
 
     /**
