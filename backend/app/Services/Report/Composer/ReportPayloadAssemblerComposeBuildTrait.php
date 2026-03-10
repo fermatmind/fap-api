@@ -5,6 +5,7 @@ namespace App\Services\Report\Composer;
 use App\Services\Content\ContentStore;
 use App\Services\Report\HighlightBuilder;
 use App\Services\Report\ReportAccess;
+use App\Services\Report\ReportContentNormalizer;
 use Illuminate\Support\Facades\Log;
 
 trait ReportPayloadAssemblerComposeBuildTrait
@@ -137,21 +138,16 @@ trait ReportPayloadAssemblerComposeBuildTrait
             ],
         ]);
 
-        $contentGraphEnabled = (bool) \App\Support\RuntimeConfig::value('CONTENT_GRAPH_ENABLED', false);
-        $includeRecommendedReads = false;
-        $recommendedReads = [];
-
-        if ($contentGraphEnabled) {
-            [$recommendedReads, $includeRecommendedReads] = $this->buildRecommendedReadsFromContentGraph(
-                $chain,
-                $scaleCode,
-                $region,
-                $locale,
+        $recommendedReadsEnabled = (bool) \App\Support\RuntimeConfig::value('CONTENT_GRAPH_ENABLED', false);
+        $recommendedReads = $recommendedReadsEnabled
+            ? $this->buildRecommendedReadsFromStaticDoc(
+                $store->loadReads(),
                 $typeCode,
-                $scores,
-                $axisStates
-            );
-        }
+                $tags,
+                $scores
+            )
+            : [];
+        $includeRecommendedReads = true;
 
         [$highlights, $sections, $recommendedReads, $ovrExplain] = $this->applyOverridesUnified(
             $chain,
@@ -185,10 +181,6 @@ trait ReportPayloadAssemblerComposeBuildTrait
                 ->apply('cards', $cards, $rulesDoc, array_merge($reCtxBase, ['section_key' => (string) $sectionKey]), "cards:{$sectionKey}");
         }
         unset($sec);
-
-        if (!$includeRecommendedReads) {
-            $recommendedReads = [];
-        }
 
         try {
             $hlReportForFinalize = $reportForHL;
@@ -322,5 +314,313 @@ trait ReportPayloadAssemblerComposeBuildTrait
             'assemblerGlobalMeta' => $assemblerGlobalMeta,
             'explainPayload' => $explainPayload,
         ];
+    }
+
+    private function buildRecommendedReadsFromStaticDoc(
+        array $doc,
+        string $typeCode,
+        array $tags,
+        array $scores
+    ): array {
+        $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
+        $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
+
+        $fillOrder = is_array($rules['fill_order'] ?? null)
+            ? array_values(array_filter($rules['fill_order'], fn ($x) => is_string($x) && trim($x) !== ''))
+            : ['by_type', 'by_role', 'by_strategy', 'by_top_axis', 'fallback'];
+
+        $bucketQuota = is_array($rules['bucket_quota'] ?? null) ? $rules['bucket_quota'] : [];
+        $maxItems = max(0, (int) ($rules['max_items'] ?? 8));
+        $minItems = max(0, (int) ($rules['min_items'] ?? 0));
+        $defaults = is_array($rules['defaults'] ?? null) ? $rules['defaults'] : [];
+        $sortMode = strtolower(trim((string) ($rules['sort'] ?? '')));
+
+        $byType = is_array($items['by_type'] ?? null) ? $items['by_type'] : [];
+        $byRole = is_array($items['by_role'] ?? null) ? $items['by_role'] : [];
+        $byStrategy = is_array($items['by_strategy'] ?? null) ? $items['by_strategy'] : [];
+        $byTopAxis = is_array($items['by_top_axis'] ?? null) ? $items['by_top_axis'] : [];
+        $fallback = is_array($items['fallback'] ?? null) ? $items['fallback'] : [];
+
+        $roleCode = $this->extractRecommendedReadsTagValue($tags, 'role:');
+        $strategyCode = $this->extractRecommendedReadsTagValue($tags, 'strategy:');
+        $topAxisKeyCandidates = $this->buildRecommendedReadsTopAxisKeyCandidates($rules, $scores);
+
+        $bucketLists = [
+            'by_type' => is_array($byType[$typeCode] ?? null) ? $byType[$typeCode] : [],
+            'by_role' => is_array($byRole[$roleCode] ?? null) ? $byRole[$roleCode] : [],
+            'by_strategy' => is_array($byStrategy[$strategyCode] ?? null) ? $byStrategy[$strategyCode] : [],
+            'by_top_axis' => $this->pickRecommendedReadsTopAxisBucket($byTopAxis, $topAxisKeyCandidates),
+            'fallback' => is_array($fallback) ? $fallback : [],
+        ];
+
+        foreach ($bucketLists as $bucketName => &$list) {
+            $list = $this->normalizeRecommendedReadsBucket($list, $defaults, $sortMode);
+        }
+        unset($list);
+
+        $out = [];
+        $seen = [
+            'id' => [],
+            'canonical_id' => [],
+            'canonical_url' => [],
+            'url' => [],
+        ];
+
+        foreach ($fillOrder as $bucketName) {
+            if ($maxItems > 0 && count($out) >= $maxItems) {
+                break;
+            }
+
+            $list = $bucketLists[$bucketName] ?? [];
+            if (! is_array($list) || $list === []) {
+                continue;
+            }
+
+            $remaining = $maxItems > 0 ? max(0, $maxItems - count($out)) : count($list);
+            $cap = $this->resolveRecommendedReadsBucketCap($bucketQuota[$bucketName] ?? $remaining, $remaining);
+            if ($cap <= 0) {
+                continue;
+            }
+
+            $taken = 0;
+            foreach ($list as $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+                if ($maxItems > 0 && count($out) >= $maxItems) {
+                    break;
+                }
+                if ($taken >= $cap) {
+                    break;
+                }
+                if ($this->isRecommendedReadDuplicate($item, $seen)) {
+                    continue;
+                }
+
+                $this->markRecommendedReadSeen($item, $seen);
+                $out[] = $item;
+                $taken++;
+            }
+        }
+
+        $targetCount = $maxItems > 0 ? min($maxItems, $minItems) : $minItems;
+        if ($targetCount > 0 && count($out) < $targetCount) {
+            foreach ($bucketLists['fallback'] ?? [] as $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+                if (count($out) >= $targetCount) {
+                    break;
+                }
+                if ($maxItems > 0 && count($out) >= $maxItems) {
+                    break;
+                }
+                if ($this->isRecommendedReadDuplicate($item, $seen)) {
+                    continue;
+                }
+
+                $this->markRecommendedReadSeen($item, $seen);
+                $out[] = $item;
+            }
+        }
+
+        if ($sortMode === 'priority_desc') {
+            usort($out, fn (array $a, array $b) => ((int) ($b['priority'] ?? 0)) <=> ((int) ($a['priority'] ?? 0)));
+        }
+
+        return array_values($out);
+    }
+
+    private function extractRecommendedReadsTagValue(array $tags, string $prefix): string
+    {
+        foreach ($tags as $tag) {
+            if (! is_string($tag)) {
+                continue;
+            }
+
+            $tag = trim($tag);
+            if ($tag === '' || ! str_starts_with($tag, $prefix)) {
+                continue;
+            }
+
+            return strtoupper(substr($tag, strlen($prefix)));
+        }
+
+        return '';
+    }
+
+    private function buildRecommendedReadsTopAxisKeyCandidates(array $rules, array $scores): array
+    {
+        $best = null;
+
+        foreach (['EI', 'SN', 'TF', 'JP', 'AT'] as $dim) {
+            $node = is_array($scores[$dim] ?? null) ? $scores[$dim] : [];
+            $delta = abs((int) ($node['delta'] ?? 0));
+            $side = strtoupper(trim((string) ($node['side'] ?? '')));
+            if ($side === '') {
+                continue;
+            }
+
+            if ($best === null || $delta > $best['delta']) {
+                $best = [
+                    'dim' => $dim,
+                    'delta' => $delta,
+                    'side' => $side,
+                ];
+            }
+        }
+
+        if (! is_array($best)) {
+            return [];
+        }
+
+        $plain = $best['dim'] . ':' . $best['side'];
+        $prefixed = 'axis:' . $plain;
+        $format = trim((string) ($rules['axis_key_format'] ?? ''));
+        $formatted = $format !== ''
+            ? str_replace(['${DIM}', '${SIDE}'], [$best['dim'], $best['side']], $format)
+            : '';
+
+        return array_values(array_unique(array_filter([$formatted, $prefixed, $plain], fn ($x) => is_string($x) && trim($x) !== '')));
+    }
+
+    private function pickRecommendedReadsTopAxisBucket(array $byTopAxis, array $candidates): array
+    {
+        foreach ($candidates as $candidate) {
+            if (is_array($byTopAxis[$candidate] ?? null)) {
+                return $byTopAxis[$candidate];
+            }
+        }
+
+        return [];
+    }
+
+    private function normalizeRecommendedReadsBucket(array $list, array $defaults, string $sortMode): array
+    {
+        $out = [];
+
+        foreach ($list as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $normalized = ReportContentNormalizer::read(array_merge($defaults, $item));
+            if ($normalized['id'] === '' || $normalized['title'] === '') {
+                continue;
+            }
+
+            $out[] = $normalized;
+        }
+
+        if ($sortMode === 'priority_desc') {
+            usort($out, fn (array $a, array $b) => ((int) ($b['priority'] ?? 0)) <=> ((int) ($a['priority'] ?? 0)));
+        }
+
+        return $out;
+    }
+
+    private function resolveRecommendedReadsBucketCap(mixed $rawCap, int $remaining): int
+    {
+        if (is_string($rawCap)) {
+            $normalized = strtolower(trim($rawCap));
+            if (in_array($normalized, ['remaining', '*', 'all'], true)) {
+                return $remaining;
+            }
+            if (is_numeric($rawCap)) {
+                return max(0, (int) $rawCap);
+            }
+
+            return 0;
+        }
+
+        if (is_int($rawCap) || is_float($rawCap)) {
+            return max(0, (int) $rawCap);
+        }
+
+        return $remaining;
+    }
+
+    private function isRecommendedReadDuplicate(array $item, array $seen): bool
+    {
+        $id = trim((string) ($item['id'] ?? ''));
+        if ($id !== '' && isset($seen['id'][$id])) {
+            return true;
+        }
+
+        foreach (['canonical_id', 'canonical_url', 'url'] as $key) {
+            $value = $this->normalizeRecommendedReadDedupeValue($item[$key] ?? null, $key);
+            if ($value === '') {
+                continue;
+            }
+            if (isset($seen[$key][$value])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function markRecommendedReadSeen(array $item, array &$seen): void
+    {
+        $id = trim((string) ($item['id'] ?? ''));
+        if ($id !== '') {
+            $seen['id'][$id] = true;
+        }
+
+        foreach (['canonical_id', 'canonical_url', 'url'] as $key) {
+            $value = $this->normalizeRecommendedReadDedupeValue($item[$key] ?? null, $key);
+            if ($value !== '') {
+                $seen[$key][$value] = true;
+            }
+        }
+    }
+
+    private function normalizeRecommendedReadDedupeValue(mixed $value, string $kind): string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return '';
+        }
+
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
+            return '';
+        }
+
+        if (! in_array($kind, ['canonical_url', 'url'], true)) {
+            return $normalized;
+        }
+
+        $parts = parse_url($normalized);
+        if (! is_array($parts)) {
+            return $normalized;
+        }
+
+        $host = strtolower((string) ($parts['host'] ?? ''));
+        $path = (string) ($parts['path'] ?? '');
+        $query = (string) ($parts['query'] ?? '');
+
+        if ($path === '') {
+            return $normalized;
+        }
+
+        if ($path !== '/' && str_ends_with($path, '/')) {
+            $path = rtrim($path, '/');
+        }
+
+        $qs = [];
+        if ($query !== '') {
+            parse_str($query, $qs);
+        }
+
+        $filtered = [];
+        if (array_key_exists('id', $qs) && $qs['id'] !== '' && $qs['id'] !== null) {
+            $filtered['id'] = $qs['id'];
+        }
+
+        ksort($filtered);
+        $queryString = http_build_query($filtered);
+        $key = $queryString !== '' ? ($path . '?' . $queryString) : $path;
+
+        return $host !== '' ? ($host . $key) : $key;
     }
 }

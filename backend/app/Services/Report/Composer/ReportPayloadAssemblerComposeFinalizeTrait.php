@@ -38,6 +38,12 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
 
         $legacyContentPackageDir = $contentPackageDir;
         $realContentPackageDir = $this->packIdToDir($contentPackId);
+        $identityLayer = $this->hydrateIdentityLayerFromPackIfNeeded(
+            $identityLayer,
+            $contentPackId,
+            $contentPackageDir,
+            $typeCode
+        );
 
         $reportPayload = [
             'versions' => [
@@ -71,11 +77,8 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
             ],
             'sections' => $sections,
             'warnings' => $warnings,
+            'recommended_reads' => $recommendedReads,
         ];
-
-        if ($includeRecommendedReads) {
-            $reportPayload['recommended_reads'] = $recommendedReads;
-        }
 
         $normsPayload = $this->buildNormsPayload($contentPackId, $scoresPct);
         if (is_array($normsPayload)) {
@@ -186,5 +189,95 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
         }
 
         return $reportPayload;
+    }
+
+    private function hydrateIdentityLayerFromPackIfNeeded(
+        ?array $identityLayer,
+        string $contentPackId,
+        string $contentPackageDir,
+        string $typeCode
+    ): ?array {
+        $current = is_array($identityLayer) ? $identityLayer : null;
+        $hasFallbackTag = in_array('fallback:true', (array) ($current['tags'] ?? []), true);
+        $hasContent = $current !== null
+            && trim((string) ($current['title'] ?? '')) !== ''
+            && trim((string) ($current['one_liner'] ?? '')) !== ''
+            && ! $hasFallbackTag;
+
+        if ($hasContent) {
+            return $current;
+        }
+
+        $authored = $this->loadIdentityLayerFromContentPack($contentPackId, $contentPackageDir, $typeCode);
+        if ($authored === null) {
+            return $current;
+        }
+
+        if ($current !== null && trim((string) ($current['micro_line'] ?? '')) !== '') {
+            $authored['micro_line'] = (string) $current['micro_line'];
+        } else {
+            $authored['micro_line'] = (string) ($authored['micro_line'] ?? '');
+        }
+
+        $authored['type_code'] = $typeCode;
+
+        return $authored;
+    }
+
+    private function loadIdentityLayerFromContentPack(string $contentPackId, string $contentPackageDir, string $typeCode): ?array
+    {
+        foreach ($this->identityLayerPathCandidates($contentPackId, $contentPackageDir) as $path) {
+            if (! is_file($path)) {
+                continue;
+            }
+
+            $raw = @file_get_contents($path);
+            if (! is_string($raw) || trim($raw) === '') {
+                continue;
+            }
+
+            $json = json_decode($raw, true);
+            if (! is_array($json)) {
+                continue;
+            }
+
+            $items = is_array($json['items'] ?? null) ? $json['items'] : $json;
+            $layer = is_array($items[$typeCode] ?? null) ? $items[$typeCode] : null;
+            if (! is_array($layer)) {
+                continue;
+            }
+
+            $layer['bullets'] = is_array($layer['bullets'] ?? null) ? array_values($layer['bullets']) : [];
+            $layer['tags'] = is_array($layer['tags'] ?? null) ? array_values($layer['tags']) : [];
+
+            return $layer;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function identityLayerPathCandidates(string $contentPackId, string $contentPackageDir): array
+    {
+        $root = rtrim((string) config('content_packs.root', ''), DIRECTORY_SEPARATOR);
+        if ($root === '') {
+            return [];
+        }
+
+        $parts = explode('.', $contentPackId);
+        $region = strtoupper(str_replace('-', '_', (string) ($parts[1] ?? config('content_packs.default_region', 'CN_MAINLAND'))));
+        $locale = (string) ($parts[2] ?? config('content_packs.default_locale', 'zh-CN'));
+
+        $candidates = [
+            $root . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . $region . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $contentPackageDir . DIRECTORY_SEPARATOR . 'identity_layers.json',
+        ];
+
+        foreach (glob($root . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . $contentPackageDir . DIRECTORY_SEPARATOR . 'identity_layers.json') ?: [] as $path) {
+            $candidates[] = $path;
+        }
+
+        return array_values(array_unique($candidates));
     }
 }

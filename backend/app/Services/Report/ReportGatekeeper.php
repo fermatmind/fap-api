@@ -2,9 +2,13 @@
 
 namespace App\Services\Report;
 
+use App\DTO\ResolvedPack;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Content\ContentPack;
+use App\Services\Content\ContentStore;
+use App\Services\ContentPackResolver;
 use App\Services\Report\Resolvers\AccessResolver;
 use App\Services\Report\Resolvers\CrisisPolicyResolver;
 use App\Services\Report\Resolvers\OfferResolver;
@@ -115,9 +119,10 @@ class ReportGatekeeper
 
         $viewPolicy = $this->offerResolver->normalizeViewPolicy($registry['view_policy_json'] ?? null);
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
+        $commercialSpec = $this->loadCommercialSpecForAttempt($attempt, $result);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
-        $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $scaleCode, $orgId);
+        $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $commercialSpec, $scaleCode, $orgId);
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
 
         $accessState = $this->accessResolver->resolveAccess(
@@ -653,6 +658,11 @@ class ReportGatekeeper
         $generating = (bool) ($meta['generating'] ?? false);
         $snapshotError = (bool) ($meta['snapshot_error'] ?? false);
         $retryAfterSeconds = isset($meta['retry_after_seconds']) ? (int) $meta['retry_after_seconds'] : null;
+        if ($report !== []) {
+            $report['recommended_reads'] = is_array($report['recommended_reads'] ?? null)
+                ? array_values($report['recommended_reads'])
+                : [];
+        }
 
         return [
             'ok' => true,
@@ -665,6 +675,7 @@ class ReportGatekeeper
             'upgrade_sku' => $paywall['upgrade_sku'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'upgrade_sku_effective' => $paywall['upgrade_sku_effective'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'offers' => $paywall['offers'] ?? [],
+            'cta' => $this->offerResolver->buildCtaPayload($paywall, $locked),
             'modules_allowed' => ReportAccess::normalizeModules($modulesAllowed),
             'modules_offered' => ReportAccess::normalizeModules($modulesOffered),
             'modules_preview' => ReportAccess::normalizeModules($modulesPreview),
@@ -674,6 +685,74 @@ class ReportGatekeeper
             'quality' => $quality,
             'report' => $report,
         ];
+    }
+
+    private function loadCommercialSpecForAttempt(Attempt $attempt, Result $result): array
+    {
+        try {
+            $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? '')));
+            $region = trim((string) ($attempt->region ?? config('content_packs.default_region', '')));
+            $locale = trim((string) ($attempt->locale ?? config('content_packs.default_locale', '')));
+            $version = trim((string) ($attempt->content_package_version ?? $result->content_package_version ?? ''));
+            $dirVersion = trim((string) ($attempt->dir_version ?? $result->dir_version ?? ''));
+
+            if ($scaleCode === '' || $region === '' || $locale === '' || $version === '') {
+                return [];
+            }
+
+            /** @var ContentPackResolver $resolver */
+            $resolver = app(ContentPackResolver::class);
+            $resolved = $resolver->resolve($scaleCode, $region, $locale, $version, $dirVersion !== '' ? $dirVersion : null);
+            $store = new ContentStore($this->resolvedPackToContentPackChain($resolved), [], $dirVersion);
+
+            return $store->loadCommercialSpec();
+        } catch (\Throwable $e) {
+            Log::warning('[REPORT] commercial_spec_load_failed', [
+                'attempt_id' => (string) ($attempt->id ?? ''),
+                'scale_code' => (string) ($attempt->scale_code ?? ''),
+                'error' => $e->getMessage(),
+            ]);
+
+            return [];
+        }
+    }
+
+    /**
+     * @return array<int, ContentPack>
+     */
+    private function resolvedPackToContentPackChain(ResolvedPack $resolved): array
+    {
+        $makePack = static function (array $manifest, string $baseDir): ContentPack {
+            return new ContentPack(
+                packId: (string) ($manifest['pack_id'] ?? ''),
+                scaleCode: (string) ($manifest['scale_code'] ?? ''),
+                region: (string) ($manifest['region'] ?? ''),
+                locale: (string) ($manifest['locale'] ?? ''),
+                version: (string) ($manifest['content_package_version'] ?? ''),
+                basePath: $baseDir,
+                manifest: $manifest,
+            );
+        };
+
+        $chain = [
+            $makePack(is_array($resolved->manifest ?? null) ? $resolved->manifest : [], (string) ($resolved->baseDir ?? '')),
+        ];
+
+        foreach ($resolved->fallbackChain ?? [] as $fallback) {
+            if (! is_array($fallback)) {
+                continue;
+            }
+
+            $manifest = is_array($fallback['manifest'] ?? null) ? $fallback['manifest'] : [];
+            $baseDir = (string) ($fallback['base_dir'] ?? '');
+            if ($manifest === [] || $baseDir === '') {
+                continue;
+            }
+
+            $chain[] = $makePack($manifest, $baseDir);
+        }
+
+        return $chain;
     }
 
     /**

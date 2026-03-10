@@ -118,6 +118,10 @@ final class ReportVariantGenerationTest extends TestCase
             'variant' => 'free',
         ]);
         $this->assertIsArray($locked->json('report'));
+        $this->assertIsArray($locked->json('report.recommended_reads'));
+        $this->assertIsArray($locked->json('cta'));
+        $this->assertTrue((bool) $locked->json('cta.visible'));
+        $this->assertSame('upsell', $locked->json('cta.kind'));
 
         /** @var EntitlementManager $entitlements */
         $entitlements = app(EntitlementManager::class);
@@ -149,6 +153,10 @@ final class ReportVariantGenerationTest extends TestCase
 
         $this->assertIsArray($unlocked->json('offers'));
         $this->assertIsArray($unlocked->json('report'));
+        $this->assertIsArray($unlocked->json('report.recommended_reads'));
+        $this->assertIsArray($unlocked->json('cta'));
+        $this->assertFalse((bool) $unlocked->json('cta.visible'));
+        $this->assertSame('none', $unlocked->json('cta.kind'));
         $this->assertNotNull($unlocked->json('modules_allowed'));
         $this->assertNotNull($unlocked->json('modules_offered'));
         $this->assertNotNull($unlocked->json('modules_preview'));

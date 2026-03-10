@@ -120,11 +120,29 @@ final class ReportLockedVariantLeakTest extends TestCase
         $this->assertNotEmpty((array) $resp->json('report.profile'));
         $this->assertNotEmpty((array) $resp->json('report.identity_card'));
         $this->assertNotEmpty((array) $resp->json('report.highlights'));
+        $this->assertIsArray($resp->json('report.recommended_reads'));
+        $this->assertIsArray($resp->json('cta'));
+        $this->assertTrue((bool) $resp->json('cta.visible'));
+        $this->assertSame('upsell', $resp->json('cta.kind'));
+        $this->assertNotEmpty((array) $resp->json('cta.benefit_bullets'));
+        $identityLayer = (array) $resp->json('report.layers.identity');
+        $this->assertNotEmpty($identityLayer);
+        $this->assertNotContains('fallback:true', (array) ($identityLayer['tags'] ?? []));
         foreach (['traits', 'growth', 'career', 'relationships'] as $section) {
             $cards = (array) $resp->json("report.sections.{$section}.cards");
             $this->assertNotEmpty($cards);
             $this->assertTrue($this->hasRicherCopy($cards), "Section {$section} should keep richer teaser copy");
         }
+
+        foreach ((array) $resp->json('report.recommended_reads') as $item) {
+            $this->assertIsArray($item);
+            $this->assertArrayNotHasKey('access_level', $item);
+            $this->assertArrayNotHasKey('module_code', $item);
+            $this->assertArrayNotHasKey('locked', $item);
+        }
+
+        $this->assertArrayNotHasKey('access_level', $identityLayer);
+        $this->assertArrayNotHasKey('module_code', $identityLayer);
 
         $levels = $this->collectAccessLevels($resp->json('report'));
         $this->assertNotEmpty($levels);
