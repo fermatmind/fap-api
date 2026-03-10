@@ -54,6 +54,7 @@ class ReportPaywallTeaserTest extends TestCase
             'org_id' => 0,
             'anon_id' => 'anon_test',
             'scale_code' => 'MBTI',
+            'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
@@ -73,6 +74,7 @@ class ReportPaywallTeaserTest extends TestCase
             'org_id' => 0,
             'attempt_id' => $attemptId,
             'scale_code' => 'MBTI',
+            'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
             'scale_version' => 'v0.3',
             'type_code' => 'INTJ-A',
             'scores_json' => [

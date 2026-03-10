@@ -111,6 +111,8 @@ class ReportGatekeeper
         if ($scaleCode === '') {
             return $this->badRequest('SCALE_REQUIRED', 'scale_code missing on attempt.');
         }
+        $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? $result->scale_code_v2 ?? '')));
+        $isMbtiContract = $this->isMbtiReportContractEnabled($scaleCode, $scaleCodeV2);
 
         $registry = $this->registry->getByCode($scaleCode, $orgId);
         if (! $registry) {
@@ -119,7 +121,7 @@ class ReportGatekeeper
 
         $viewPolicy = $this->offerResolver->normalizeViewPolicy($registry['view_policy_json'] ?? null);
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
-        $commercialSpec = $this->loadCommercialSpecForAttempt($attempt, $result);
+        $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
         $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $commercialSpec, $scaleCode, $orgId);
@@ -206,7 +208,8 @@ class ReportGatekeeper
                     $modulesOffered,
                     $modulesPreview,
                     $normsPayload,
-                    $qualityPayload
+                    $qualityPayload,
+                    $isMbtiContract
                 );
             }
 
@@ -229,7 +232,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
 
@@ -250,7 +254,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
 
@@ -282,7 +287,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
 
@@ -300,7 +306,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
 
@@ -323,7 +330,8 @@ class ReportGatekeeper
                         $modulesOffered,
                         $modulesPreview,
                         $normsPayload,
-                        $qualityPayload
+                        $qualityPayload,
+                        $isMbtiContract
                     );
                 }
             }
@@ -346,7 +354,8 @@ class ReportGatekeeper
                 $modulesOffered,
                 $modulesPreview,
                 $normsPayload,
-                $qualityPayload
+                $qualityPayload,
+                $isMbtiContract
             );
         }
 
@@ -398,7 +407,8 @@ class ReportGatekeeper
             $modulesOffered,
             $modulesPreview,
             $normsPayload,
-            $qualityPayload
+            $qualityPayload,
+            $isMbtiContract
         );
     }
 
@@ -653,18 +663,27 @@ class ReportGatekeeper
         array $modulesOffered = [],
         array $modulesPreview = [],
         array $norms = [],
-        array $quality = []
+        array $quality = [],
+        bool $isMbtiContract = false
     ): array {
         $generating = (bool) ($meta['generating'] ?? false);
         $snapshotError = (bool) ($meta['snapshot_error'] ?? false);
         $retryAfterSeconds = isset($meta['retry_after_seconds']) ? (int) $meta['retry_after_seconds'] : null;
         if ($report !== []) {
-            $report['recommended_reads'] = is_array($report['recommended_reads'] ?? null)
-                ? array_values($report['recommended_reads'])
-                : [];
+            if ($isMbtiContract) {
+                $report['recommended_reads'] = is_array($report['recommended_reads'] ?? null)
+                    ? array_values($report['recommended_reads'])
+                    : [];
+            } else {
+                unset($report['recommended_reads']);
+
+                if (is_array($report['layers'] ?? null)) {
+                    unset($report['layers']['identity']);
+                }
+            }
         }
 
-        return [
+        $payload = [
             'ok' => true,
             'generating' => $generating,
             'snapshot_error' => $snapshotError,
@@ -675,7 +694,6 @@ class ReportGatekeeper
             'upgrade_sku' => $paywall['upgrade_sku'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'upgrade_sku_effective' => $paywall['upgrade_sku_effective'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'offers' => $paywall['offers'] ?? [],
-            'cta' => $this->offerResolver->buildCtaPayload($paywall, $locked),
             'modules_allowed' => ReportAccess::normalizeModules($modulesAllowed),
             'modules_offered' => ReportAccess::normalizeModules($modulesOffered),
             'modules_preview' => ReportAccess::normalizeModules($modulesPreview),
@@ -685,16 +703,27 @@ class ReportGatekeeper
             'quality' => $quality,
             'report' => $report,
         ];
+
+        if ($isMbtiContract) {
+            $payload['cta'] = $this->offerResolver->buildCtaPayload($paywall, $locked);
+        }
+
+        return $payload;
     }
 
     private function loadCommercialSpecForAttempt(Attempt $attempt, Result $result): array
     {
         try {
             $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? '')));
+            $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? $result->scale_code_v2 ?? '')));
             $region = trim((string) ($attempt->region ?? config('content_packs.default_region', '')));
             $locale = trim((string) ($attempt->locale ?? config('content_packs.default_locale', '')));
             $version = trim((string) ($attempt->content_package_version ?? $result->content_package_version ?? ''));
             $dirVersion = trim((string) ($attempt->dir_version ?? $result->dir_version ?? ''));
+
+            if (! $this->isMbtiReportContractEnabled($scaleCode, $scaleCodeV2)) {
+                return [];
+            }
 
             if ($scaleCode === '' || $region === '' || $locale === '' || $version === '') {
                 return [];
@@ -753,6 +782,15 @@ class ReportGatekeeper
         }
 
         return $chain;
+    }
+
+    private function isMbtiReportContractEnabled(?string $scaleCode, ?string $scaleCodeV2 = null): bool
+    {
+        $normalizedScaleCode = strtoupper(trim((string) $scaleCode));
+        $normalizedScaleCodeV2 = strtoupper(trim((string) $scaleCodeV2));
+
+        return $normalizedScaleCode === 'MBTI'
+            || $normalizedScaleCodeV2 === 'MBTI_PERSONALITY_TEST_16_TYPES';
     }
 
     /**

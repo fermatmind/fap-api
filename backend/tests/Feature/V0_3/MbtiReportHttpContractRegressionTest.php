@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Report;
+namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
 use App\Models\Result;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-final class ReportVariantGenerationTest extends TestCase
+final class MbtiReportHttpContractRegressionTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -43,7 +43,7 @@ final class ReportVariantGenerationTest extends TestCase
         return $token;
     }
 
-    private function createAttemptWithResult(string $anonId): string
+    private function createAttemptWithResult(string $anonId, string $typeCode = 'INTJ-A'): string
     {
         $attemptId = (string) Str::uuid();
         $packId = (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3');
@@ -76,7 +76,7 @@ final class ReportVariantGenerationTest extends TestCase
             'scale_code' => 'MBTI',
             'scale_code_v2' => 'MBTI_PERSONALITY_TEST_16_TYPES',
             'scale_version' => 'v0.3',
-            'type_code' => 'INTJ-A',
+            'type_code' => $typeCode,
             'scores_json' => [
                 'EI' => ['a' => 10, 'b' => 10, 'neutral' => 0, 'sum' => 0, 'total' => 20],
                 'SN' => ['a' => 10, 'b' => 10, 'neutral' => 0, 'sum' => 0, 'total' => 20],
@@ -87,7 +87,7 @@ final class ReportVariantGenerationTest extends TestCase
             'scores_pct' => ['EI' => 50, 'SN' => 50, 'TF' => 50, 'JP' => 50, 'AT' => 50],
             'axis_states' => ['EI' => 'clear', 'SN' => 'clear', 'TF' => 'clear', 'JP' => 'clear', 'AT' => 'clear'],
             'content_package_version' => 'v0.3',
-            'result_json' => ['type_code' => 'INTJ-A'],
+            'result_json' => ['type_code' => $typeCode],
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
             'scoring_spec_version' => '2026.01',
@@ -99,31 +99,49 @@ final class ReportVariantGenerationTest extends TestCase
         return $attemptId;
     }
 
-    public function test_locked_and_unlocked_report_variants_are_generated(): void
+    public function test_locked_free_mbti_report_http_contract_includes_mbti_only_fields(): void
     {
         $this->seedScales();
 
-        $anonId = 'anon_variant_test';
+        $anonId = 'anon_mbti_http_locked';
         $token = $this->issueAnonToken($anonId);
-        $attemptId = $this->createAttemptWithResult($anonId);
+        $attemptId = $this->createAttemptWithResult($anonId, 'ENFP-T');
 
-        $locked = $this->withHeaders([
+        $resp = $this->withHeaders([
             'X-Anon-Id' => $anonId,
             'Authorization' => 'Bearer ' . $token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
-        $locked->assertStatus(200);
-        $locked->assertJson([
+        $resp->assertStatus(200);
+        $resp->assertJson([
             'ok' => true,
             'locked' => true,
             'access_level' => 'free',
             'variant' => 'free',
         ]);
-        $this->assertIsArray($locked->json('report'));
-        $this->assertIsArray($locked->json('report.recommended_reads'));
-        $this->assertIsArray($locked->json('cta'));
-        $this->assertTrue((bool) $locked->json('cta.visible'));
-        $this->assertSame('upsell', $locked->json('cta.kind'));
+        $this->assertIsArray($resp->json('cta'));
+        $this->assertTrue((bool) $resp->json('cta.visible'));
+        $this->assertSame('upsell', $resp->json('cta.kind'));
+        $this->assertSame('MBTI_REPORT_FULL', $resp->json('cta.target_sku'));
+        $this->assertNotSame('', trim((string) $resp->json('cta.target_sku_effective')));
+        $this->assertIsArray($resp->json('report.recommended_reads'));
+        $this->assertNotSame('', trim((string) $resp->json('report.layers.identity.title')));
+        $this->assertNotSame('', trim((string) $resp->json('report.layers.identity.subtitle')));
+        $this->assertNotSame('', trim((string) $resp->json('report.layers.identity.one_liner')));
+        $this->assertIsArray($resp->json('report.layers.identity.tags'));
+        $this->assertSame(
+            ['traits', 'career', 'growth', 'relationships'],
+            array_keys((array) $resp->json('report.sections'))
+        );
+    }
+
+    public function test_unlocked_paid_mbti_report_http_contract_keeps_section_gate_semantics(): void
+    {
+        $this->seedScales();
+
+        $anonId = 'anon_mbti_http_full';
+        $token = $this->issueAnonToken($anonId);
+        $attemptId = $this->createAttemptWithResult($anonId, 'INTJ-A');
 
         /** @var EntitlementManager $entitlements */
         $entitlements = app(EntitlementManager::class);
@@ -140,32 +158,52 @@ final class ReportVariantGenerationTest extends TestCase
         );
         $this->assertTrue((bool) ($grant['ok'] ?? false));
 
-        $unlocked = $this->withHeaders([
+        $resp = $this->withHeaders([
             'X-Anon-Id' => $anonId,
             'Authorization' => 'Bearer ' . $token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
-        $unlocked->assertStatus(200);
-        $unlocked->assertJson([
+        $resp->assertStatus(200);
+        $resp->assertJson([
             'ok' => true,
             'locked' => false,
             'access_level' => 'full',
             'variant' => 'full',
         ]);
+        $this->assertIsArray($resp->json('cta'));
+        $this->assertFalse((bool) $resp->json('cta.visible'));
+        $this->assertSame('none', $resp->json('cta.kind'));
+        $this->assertIsArray($resp->json('report.recommended_reads'));
+        $this->assertSame(
+            ['traits', 'career', 'growth', 'relationships'],
+            array_keys((array) $resp->json('report.sections'))
+        );
+        $this->assertContains('paid', $this->collectAccessLevels($resp->json('report')));
+    }
 
-        $this->assertIsArray($unlocked->json('offers'));
-        $this->assertIsArray($unlocked->json('report'));
-        $this->assertIsArray($unlocked->json('report.recommended_reads'));
-        $this->assertIsArray($unlocked->json('cta'));
-        $this->assertFalse((bool) $unlocked->json('cta.visible'));
-        $this->assertSame('none', $unlocked->json('cta.kind'));
-        $this->assertNotNull($unlocked->json('modules_allowed'));
-        $this->assertNotNull($unlocked->json('modules_offered'));
-        $this->assertNotNull($unlocked->json('modules_preview'));
+    /**
+     * @return list<string>
+     */
+    private function collectAccessLevels(mixed $node): array
+    {
+        $levels = [];
 
-        $snapshot = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
-        $this->assertNotNull($snapshot);
-        $this->assertNotEmpty((string) ($snapshot->report_free_json ?? ''));
-        $this->assertNotEmpty((string) ($snapshot->report_full_json ?? ''));
+        $walk = function (mixed $value) use (&$walk, &$levels): void {
+            if (! is_array($value)) {
+                return;
+            }
+
+            if (array_key_exists('access_level', $value) && is_string($value['access_level'])) {
+                $levels[] = strtolower((string) $value['access_level']);
+            }
+
+            foreach ($value as $child) {
+                $walk($child);
+            }
+        };
+
+        $walk($node);
+
+        return array_values(array_unique($levels));
     }
 }

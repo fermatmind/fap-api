@@ -38,12 +38,14 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
 
         $legacyContentPackageDir = $contentPackageDir;
         $realContentPackageDir = $this->packIdToDir($contentPackId);
-        $identityLayer = $this->hydrateIdentityLayerFromPackIfNeeded(
-            $identityLayer,
-            $contentPackId,
-            $contentPackageDir,
-            $typeCode
-        );
+        if ($this->shouldPreferAuthoredMbtiIdentityLayer($contentPackId, $contentPackageDir)) {
+            $identityLayer = $this->hydrateIdentityLayerFromPackIfNeeded(
+                $identityLayer,
+                $contentPackId,
+                $contentPackageDir,
+                $typeCode
+            );
+        }
 
         $reportPayload = [
             'versions' => [
@@ -77,8 +79,11 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
             ],
             'sections' => $sections,
             'warnings' => $warnings,
-            'recommended_reads' => $recommendedReads,
         ];
+
+        if ($includeRecommendedReads) {
+            $reportPayload['recommended_reads'] = $recommendedReads;
+        }
 
         $normsPayload = $this->buildNormsPayload($contentPackId, $scoresPct);
         if (is_array($normsPayload)) {
@@ -279,5 +284,14 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
         }
 
         return array_values(array_unique($candidates));
+    }
+
+    private function shouldPreferAuthoredMbtiIdentityLayer(string $contentPackId, string $contentPackageDir): bool
+    {
+        $packScaleCode = strtoupper(trim((string) strtok($contentPackId, '.')));
+        $normalizedDir = strtoupper(trim($contentPackageDir));
+
+        return $packScaleCode === 'MBTI'
+            || str_starts_with($normalizedDir, 'MBTI');
     }
 }

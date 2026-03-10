@@ -93,7 +93,9 @@ class OfferResolver
             'upgrade_sku' => $anchorSku,
             'upgrade_sku_effective' => $effectiveSku !== '' ? $effectiveSku : null,
             'offers' => $offers,
-            'cta_copy' => $this->resolveCtaCopy($commercialSpec, $anchorSku, $effectiveSku !== '' ? $effectiveSku : null),
+            'cta_copy' => $scaleCode === 'MBTI'
+                ? $this->resolveCtaCopy($commercialSpec, $anchorSku, $effectiveSku !== '' ? $effectiveSku : null)
+                : null,
             'view_policy' => $viewPolicy,
         ];
     }

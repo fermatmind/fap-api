@@ -138,7 +138,12 @@ trait ReportPayloadAssemblerComposeBuildTrait
             ],
         ]);
 
-        $recommendedReadsEnabled = (bool) \App\Support\RuntimeConfig::value('CONTENT_GRAPH_ENABLED', false);
+        $isMbtiContract = $this->isMbtiReportContractScale(
+            $scaleCode,
+            is_string($input['scaleCodeV2'] ?? null) ? (string) $input['scaleCodeV2'] : null
+        );
+        $recommendedReadsEnabled = $isMbtiContract
+            && (bool) \App\Support\RuntimeConfig::value('CONTENT_GRAPH_ENABLED', false);
         $recommendedReads = $recommendedReadsEnabled
             ? $this->buildRecommendedReadsFromStaticDoc(
                 $store->loadReads(),
@@ -147,7 +152,7 @@ trait ReportPayloadAssemblerComposeBuildTrait
                 $scores
             )
             : [];
-        $includeRecommendedReads = true;
+        $includeRecommendedReads = $isMbtiContract;
 
         [$highlights, $sections, $recommendedReads, $ovrExplain] = $this->applyOverridesUnified(
             $chain,
@@ -622,5 +627,14 @@ trait ReportPayloadAssemblerComposeBuildTrait
         $key = $queryString !== '' ? ($path . '?' . $queryString) : $path;
 
         return $host !== '' ? ($host . $key) : $key;
+    }
+
+    private function isMbtiReportContractScale(string $scaleCode, ?string $scaleCodeV2 = null): bool
+    {
+        $normalizedScaleCode = strtoupper(trim($scaleCode));
+        $normalizedScaleCodeV2 = strtoupper(trim((string) $scaleCodeV2));
+
+        return $normalizedScaleCode === 'MBTI'
+            || $normalizedScaleCodeV2 === 'MBTI_PERSONALITY_TEST_16_TYPES';
     }
 }
