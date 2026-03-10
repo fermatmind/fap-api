@@ -117,9 +117,39 @@ final class ReportLockedVariantLeakTest extends TestCase
             'access_level' => 'free',
         ]);
 
+        $this->assertNotEmpty((array) $resp->json('report.profile'));
+        $this->assertNotEmpty((array) $resp->json('report.identity_card'));
+        $this->assertNotEmpty((array) $resp->json('report.highlights'));
+        foreach (['traits', 'growth', 'career', 'relationships'] as $section) {
+            $cards = (array) $resp->json("report.sections.{$section}.cards");
+            $this->assertNotEmpty($cards);
+            $this->assertTrue($this->hasRicherCopy($cards), "Section {$section} should keep richer teaser copy");
+        }
+
         $levels = $this->collectAccessLevels($resp->json('report'));
         $this->assertNotEmpty($levels);
         $this->assertNotContains('paid', $levels);
+    }
+
+    /**
+     * @param array<int, mixed> $cards
+     */
+    private function hasRicherCopy(array $cards): bool
+    {
+        foreach ($cards as $card) {
+            if (! is_array($card)) {
+                continue;
+            }
+
+            $title = trim((string) ($card['title'] ?? ''));
+            $desc = trim((string) ($card['desc'] ?? $card['text'] ?? ''));
+
+            if ($title !== '' && $desc !== '') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

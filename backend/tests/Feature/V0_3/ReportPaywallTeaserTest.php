@@ -157,6 +157,12 @@ class ReportPaywallTeaserTest extends TestCase
         $offerSkus = array_map(fn ($item) => $item['sku'] ?? null, (array) $report->json('offers'));
         $this->assertContains('MBTI_REPORT_FULL_199', $offerSkus);
         $this->assertNotNull($report->json('report'));
+        $this->assertNotEmpty((array) $report->json('report.profile'));
+        $this->assertNotEmpty((array) $report->json('report.identity_card'));
+        $this->assertNotEmpty((array) $report->json('report.highlights'));
+        foreach (['traits', 'growth', 'career', 'relationships'] as $section) {
+            $this->assertNotEmpty((array) $report->json("report.sections.{$section}.cards"));
+        }
         $this->assertSame(0, DB::table('report_snapshots')->count());
     }
 }
