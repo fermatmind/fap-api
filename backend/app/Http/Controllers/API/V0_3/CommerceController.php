@@ -129,6 +129,7 @@ class CommerceController extends Controller
         $ownershipVerified = (bool) ($result['ownership_verified'] ?? true);
         $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
         $message = $this->publicOrderMessage((string) ($order->status ?? ''));
+        $delivery = $this->orders->presentOrderDelivery($order);
 
         if (! $ownershipVerified) {
             return response()->json([
@@ -143,11 +144,12 @@ class CommerceController extends Controller
             'ownership_verified' => true,
             'order' => $order,
             'order_no' => $order->order_no ?? null,
-            'attempt_id' => $order->target_attempt_id ?? null,
+            'attempt_id' => $delivery['attempt_id'],
             'status' => $status,
             'message' => $message,
             'amount_cents' => $order->amount_cents ?? $order->amount_total ?? null,
             'currency' => $order->currency ?? null,
+            'delivery' => $delivery['delivery'],
         ]);
     }
 
@@ -328,10 +330,14 @@ class CommerceController extends Controller
             ], 404);
         }
 
+        $delivery = $this->orders->presentOrderDelivery($order);
+
         return response()->json([
             'ok' => true,
             'order_no' => $order->order_no ?? $orderNo,
             'status' => $this->normalizePublicOrderStatus((string) ($order->status ?? '')),
+            'attempt_id' => $delivery['attempt_id'],
+            'delivery' => $delivery['delivery'],
         ]);
     }
 
@@ -343,8 +349,8 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
-        $found = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
-        if (! ($found['ok'] ?? false)) {
+        $resent = $this->orders->resendDelivery($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
+        if (! ($resent['ok'] ?? false)) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'ORDER_NOT_FOUND',
@@ -667,6 +673,7 @@ class CommerceController extends Controller
         });
 
         $sku = trim((string) ($items[0]['sku'] ?? ''));
+
         return $sku !== '' ? strtoupper($sku) : '';
     }
 

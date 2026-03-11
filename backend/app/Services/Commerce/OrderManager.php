@@ -2,6 +2,7 @@
 
 namespace App\Services\Commerce;
 
+use App\Services\Email\EmailOutboxService;
 use App\Services\Report\ReportAccess;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,7 @@ class OrderManager
     public function __construct(
         private SkuCatalog $skus,
         private ScaleIdentityWriteProjector $identityProjector,
+        private EmailOutboxService $emailOutbox,
     ) {}
 
     public function createOrder(
@@ -284,6 +286,58 @@ class OrderManager
         ];
     }
 
+    /**
+     * @return array{attempt_id:?string,delivery:array{can_view_report:bool,report_url:?string,can_download_pdf:bool,report_pdf_url:?string,can_resend:bool}}
+     */
+    public function presentOrderDelivery(object $order): array
+    {
+        $delivery = $this->compileOrderDeliveryState($order);
+
+        return [
+            'attempt_id' => $delivery['attempt_id'],
+            'delivery' => $this->presentCompiledOrderDeliveryState($delivery),
+        ];
+    }
+
+    public function resendDelivery(
+        int $orgId,
+        ?string $userId,
+        ?string $anonId,
+        string $orderNo
+    ): array {
+        $found = $this->getOrder($orgId, $userId, $anonId, $orderNo);
+        if (! ($found['ok'] ?? false)) {
+            return $found;
+        }
+
+        $order = $found['order'];
+        $delivery = $this->compileOrderDeliveryState($order);
+
+        if (($delivery['can_resend'] ?? false) !== true) {
+            return [
+                'ok' => true,
+                'queued' => false,
+                'order' => $order,
+                'delivery' => $this->presentCompiledOrderDeliveryState($delivery),
+            ];
+        }
+
+        $queued = $this->emailOutbox->queuePaymentSuccess(
+            (string) ($delivery['delivery_user_id'] ?? ''),
+            (string) ($delivery['delivery_email'] ?? ''),
+            (string) ($delivery['attempt_id'] ?? ''),
+            $this->trimOrNull((string) ($order->order_no ?? '')),
+            $this->resolveOrderProductSummary($order)
+        );
+
+        return [
+            'ok' => true,
+            'queued' => (bool) ($queued['ok'] ?? false),
+            'order' => $order,
+            'delivery' => $this->presentCompiledOrderDeliveryState($delivery),
+        ];
+    }
+
     public function transitionToPaidAtomic(
         string $orderNo,
         int $orgId,
@@ -485,6 +539,103 @@ class OrderManager
         $row['refund_reason'] = null;
 
         return $row;
+    }
+
+    /**
+     * @return array{attempt_id:?string,report_url:?string,report_pdf_url:?string,can_view_report:bool,can_download_pdf:bool,can_resend:bool,delivery_email:?string,delivery_user_id:?string}
+     */
+    private function compileOrderDeliveryState(object $order): array
+    {
+        $orgId = (int) ($order->org_id ?? 0);
+        $attemptId = $this->resolveKnownAttemptId($orgId, $order->target_attempt_id ?? null);
+        $reportUrl = $attemptId !== null ? $this->reportUrl($attemptId) : null;
+        $reportPdfUrl = $attemptId !== null ? $this->reportPdfUrl($attemptId) : null;
+        $deliveryEligible = $attemptId !== null && $this->isDeliveryEligibleStatus((string) ($order->status ?? ''));
+        $recipient = $attemptId !== null
+            ? $this->emailOutbox->resolvePaymentSuccessRecipient(
+                $this->trimOrNull((string) ($order->user_id ?? '')),
+                $this->trimOrNull((string) ($order->anon_id ?? '')),
+                $attemptId,
+                $this->trimOrNull((string) ($order->order_no ?? ''))
+            )
+            : ['email' => null, 'user_id' => null];
+
+        $deliveryEmail = $this->trimOrNull((string) ($recipient['email'] ?? ''));
+        $deliveryUserId = $this->trimOrNull((string) ($recipient['user_id'] ?? ''));
+
+        return [
+            'attempt_id' => $attemptId,
+            'report_url' => $reportUrl,
+            'report_pdf_url' => $reportPdfUrl,
+            'can_view_report' => $deliveryEligible,
+            'can_download_pdf' => $deliveryEligible,
+            'can_resend' => $deliveryEligible && $deliveryEmail !== null && $deliveryUserId !== null,
+            'delivery_email' => $deliveryEmail,
+            'delivery_user_id' => $deliveryUserId,
+        ];
+    }
+
+    /**
+     * @param  array{attempt_id:?string,report_url:?string,report_pdf_url:?string,can_view_report:bool,can_download_pdf:bool,can_resend:bool,delivery_email:?string,delivery_user_id:?string}  $delivery
+     * @return array{can_view_report:bool,report_url:?string,can_download_pdf:bool,report_pdf_url:?string,can_resend:bool}
+     */
+    private function presentCompiledOrderDeliveryState(array $delivery): array
+    {
+        return [
+            'can_view_report' => (bool) ($delivery['can_view_report'] ?? false),
+            'report_url' => $delivery['report_url'] ?? null,
+            'can_download_pdf' => (bool) ($delivery['can_download_pdf'] ?? false),
+            'report_pdf_url' => $delivery['report_pdf_url'] ?? null,
+            'can_resend' => (bool) ($delivery['can_resend'] ?? false),
+        ];
+    }
+
+    private function resolveKnownAttemptId(int $orgId, mixed $candidate): ?string
+    {
+        $attemptId = trim((string) $candidate);
+        if ($attemptId === '') {
+            return null;
+        }
+
+        $exists = DB::table('attempts')
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->exists();
+
+        return $exists ? $attemptId : null;
+    }
+
+    private function isDeliveryEligibleStatus(string $status): bool
+    {
+        return in_array(strtolower(trim($status)), ['paid', 'fulfilled'], true);
+    }
+
+    private function resolveOrderProductSummary(object $order): ?string
+    {
+        $candidates = [
+            $order->effective_sku ?? null,
+            $order->requested_sku ?? null,
+            $order->sku ?? null,
+        ];
+
+        foreach ($candidates as $candidate) {
+            $value = $this->trimOrNull((string) $candidate);
+            if ($value !== null) {
+                return $value;
+            }
+        }
+
+        return null;
+    }
+
+    private function reportUrl(string $attemptId): string
+    {
+        return "/api/v0.3/attempts/{$attemptId}/report";
+    }
+
+    private function reportPdfUrl(string $attemptId): string
+    {
+        return "/api/v0.3/attempts/{$attemptId}/report.pdf";
     }
 
     private function normalizeRequestId(mixed $value): ?string

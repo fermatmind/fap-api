@@ -120,5 +120,6 @@ final class PiiKeyVersionCompatibilityTest extends TestCase
         $claimed = app(EmailOutboxService::class)->claimReport($token);
         $this->assertTrue((bool) ($claimed['ok'] ?? false));
         $this->assertSame($attemptId, (string) ($claimed['attempt_id'] ?? ''));
+        $this->assertSame("/api/v0.3/attempts/{$attemptId}/report.pdf", (string) ($claimed['report_pdf_url'] ?? ''));
     }
 }
