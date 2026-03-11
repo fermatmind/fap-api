@@ -16,9 +16,7 @@ use Throwable;
 
 class ShareController extends Controller
 {
-    public function __construct(private readonly ShareFlowService $shareFlow)
-    {
-    }
+    public function __construct(private readonly ShareFlowService $shareFlow) {}
 
     public function click(ShareClickRequest $request, string $shareId): JsonResponse
     {
@@ -26,7 +24,7 @@ class ShareController extends Controller
         $this->ensureSupportedShareId($routeShareId);
 
         try {
-            $result = $this->shareFlow->clickAndComposeReport(
+            $result = $this->shareFlow->recordClick(
                 $routeShareId,
                 $request->validated(),
                 $this->requestMeta($request)
@@ -97,7 +95,7 @@ class ShareController extends Controller
     private function resolveOrgId(Request $request): int
     {
         $orgId = $request->attributes->get('org_id');
-        if (!is_numeric($orgId)) {
+        if (! is_numeric($orgId)) {
             $orgId = $request->attributes->get('fm_org_id');
         }
 

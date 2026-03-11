@@ -29,8 +29,8 @@ use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\AdminAuth;
-use App\Http\Middleware\EnsureCmsAdminAuthorized;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\EnsureCmsAdminAuthorized;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
 use App\Http\Middleware\NormalizeApiErrorContract;
@@ -164,6 +164,7 @@ Route::prefix('v0.3')->middleware([
         Route::get('/attempts/{id}/report.pdf', [AttemptReadController::class, 'reportPdf'])
             ->middleware('uuid:id')
             ->name('api.v0_3.attempts.report_pdf');
+        // Share contract routes stay fixed; summary/click semantics are implemented in ShareController/services.
         Route::get('/attempts/{id}/share', [ShareV03Controller::class, 'getShare'])
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
 

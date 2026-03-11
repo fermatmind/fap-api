@@ -58,6 +58,16 @@ class ShareFlowService
     }
 
     /**
+     * @param  array<string, mixed>  $input
+     * @param  array<string, mixed>  $requestMeta
+     * @return array<string, mixed>
+     */
+    public function recordClick(string $shareId, array $input, array $requestMeta): array
+    {
+        return $this->core->recordClick($shareId, $input, $requestMeta);
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public function getShareView(string $shareId): array
