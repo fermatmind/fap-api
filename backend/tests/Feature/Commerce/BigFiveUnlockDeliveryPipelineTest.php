@@ -45,6 +45,41 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
         return (string) $userId;
     }
 
+    private function issueToken(string $userId, string $anonId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+        $tokenHash = hash('sha256', $token);
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => $tokenHash,
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('auth_tokens')->insert([
+            'token_hash' => $tokenHash,
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'meta_json' => null,
+            'expires_at' => now()->addDay(),
+            'revoked_at' => null,
+            'last_used_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
     private function createBigFiveAttemptWithResult(string $anonId, ?string $userId): string
     {
         $attemptId = (string) Str::uuid();
@@ -141,6 +176,7 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
 
         $userId = $this->createUserWithEmail('buyer+big5@example.com');
         $anonId = 'anon_big5_delivery';
+        $token = $this->issueToken($userId, $anonId);
         $attemptId = $this->createBigFiveAttemptWithResult($anonId, $userId);
         $orderNo = 'ord_big5_delivery_1';
         $this->createOrder($orderNo, 'SKU_BIG5_FULL_REPORT_299', $attemptId, $anonId, 299, $userId);
@@ -195,5 +231,20 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
         if (Schema::hasColumn('email_outbox', 'template_key')) {
             $this->assertContains((string) ($row->template_key ?? ''), ['', 'payment_success']);
         }
+
+        $orderRead = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $orderRead->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('order_no', $orderNo)
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('delivery.can_view_report', true)
+            ->assertJsonPath('delivery.report_url', "/api/v0.3/attempts/{$attemptId}/report")
+            ->assertJsonPath('delivery.can_download_pdf', true)
+            ->assertJsonPath('delivery.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
+            ->assertJsonPath('delivery.can_resend', true);
     }
 }

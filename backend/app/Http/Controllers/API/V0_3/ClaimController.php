@@ -20,10 +20,11 @@ class ClaimController extends Controller
         $logger = app(LookupEventLogger::class);
 
         $limitIp = $limiter->limit('FAP_RATE_CLAIM_REPORT_IP', 30);
-        if ($ip !== '' && !$limiter->hit("claim_report:ip:{$ip}", $limitIp, 60)) {
+        if ($ip !== '' && ! $limiter->hit("claim_report:ip:{$ip}", $limitIp, 60)) {
             $logger->log('claim_report', false, $request, null, [
                 'error_code' => 'RATE_LIMITED',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'RATE_LIMITED',
@@ -37,6 +38,7 @@ class ClaimController extends Controller
             $logger->log('claim_report', false, $request, null, [
                 'error_code' => 'INVALID_TOKEN',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'INVALID_TOKEN',
@@ -48,12 +50,13 @@ class ClaimController extends Controller
         $svc = app(EmailOutboxService::class);
         $res = $svc->claimReport($token);
 
-        if (!($res['ok'] ?? false)) {
+        if (! ($res['ok'] ?? false)) {
             $status = (int) ($res['status'] ?? 422);
             $logger->log('claim_report', false, $request, null, [
                 'error_code' => (string) ($res['error'] ?? 'INVALID_TOKEN'),
                 'token_hash' => hash('sha256', $token),
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => $res['error'] ?? 'INVALID_TOKEN',
@@ -70,6 +73,7 @@ class ClaimController extends Controller
             'ok' => true,
             'attempt_id' => (string) ($res['attempt_id'] ?? ''),
             'report_url' => $res['report_url'] ?? null,
+            'report_pdf_url' => $res['report_pdf_url'] ?? null,
         ]);
     }
 }

@@ -40,10 +40,13 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('error_code', 'ORDER_NOT_FOUND');
     }
 
-    public function test_lookup_with_matching_email_hash_returns_status(): void
+    public function test_lookup_with_matching_email_hash_returns_delivery_contract(): void
     {
         $orderNo = 'ord_lookup_'.Str::lower(Str::random(8));
-        $this->insertOrderForLookup($orderNo, 'owner@example.com');
+        $userId = $this->createUser('owner@example.com');
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, (string) $userId);
+        $this->insertOrderForLookup($orderNo, 'owner@example.com', $attemptId, 'paid', (string) $userId);
 
         $response = $this->postJson('/api/v0.3/orders/lookup', [
             'order_no' => $orderNo,
@@ -53,7 +56,13 @@ final class CommerceOrderLookupSecurityTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonPath('ok', true)
             ->assertJsonPath('order_no', $orderNo)
-            ->assertJsonPath('status', 'pending');
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('delivery.can_view_report', true)
+            ->assertJsonPath('delivery.report_url', "/api/v0.3/attempts/{$attemptId}/report")
+            ->assertJsonPath('delivery.can_download_pdf', true)
+            ->assertJsonPath('delivery.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
+            ->assertJsonPath('delivery.can_resend', true);
     }
 
     public function test_lookup_with_token_owner_works_without_email(): void
@@ -72,7 +81,29 @@ final class CommerceOrderLookupSecurityTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonPath('ok', true)
             ->assertJsonPath('order_no', $orderNo)
-            ->assertJsonPath('status', 'pending');
+            ->assertJsonPath('status', 'pending')
+            ->assertJsonPath('attempt_id', null)
+            ->assertJsonPath('delivery.can_view_report', false)
+            ->assertJsonPath('delivery.report_url', null)
+            ->assertJsonPath('delivery.can_download_pdf', false)
+            ->assertJsonPath('delivery.report_pdf_url', null)
+            ->assertJsonPath('delivery.can_resend', false);
+    }
+
+    private function createUser(string $email): int
+    {
+        $userId = random_int(100000, 999999);
+
+        DB::table('users')->insert([
+            'id' => $userId,
+            'name' => 'Lookup Owner',
+            'email' => $email,
+            'password' => bcrypt('secret'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $userId;
     }
 
     private function issueAnonToken(string $anonId): string
@@ -110,24 +141,57 @@ final class CommerceOrderLookupSecurityTest extends TestCase
         return $token;
     }
 
-    private function insertOrderForLookup(string $orderNo, string $email): void
+    private function insertAttempt(string $attemptId, string $anonId, ?string $userId = null): void
     {
+        DB::table('attempts')->insert([
+            'id' => $attemptId,
+            'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', $attemptId), 0, 8)),
+            'org_id' => 0,
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 120,
+            'answers_summary_json' => json_encode(['stage' => 'seed'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'client_platform' => 'test',
+            'client_version' => '1.0.0',
+            'channel' => 'test',
+            'started_at' => now()->subMinute(),
+            'submitted_at' => now(),
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'content_package_version' => 'v1',
+            'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function insertOrderForLookup(
+        string $orderNo,
+        string $email,
+        ?string $attemptId = null,
+        string $status = 'created',
+        ?string $userId = null
+    ): void {
         $now = now();
         $row = [
             'id' => (string) Str::uuid(),
             'order_no' => $orderNo,
             'org_id' => 0,
-            'user_id' => null,
+            'user_id' => $userId,
             'anon_id' => self::ANON_OWNER,
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
-            'target_attempt_id' => null,
+            'target_attempt_id' => $attemptId,
             'amount_cents' => 1990,
             'currency' => 'USD',
-            'status' => 'created',
+            'status' => $status,
             'provider' => 'billing',
             'external_trade_no' => null,
-            'paid_at' => null,
+            'paid_at' => $status === 'paid' ? $now : null,
             'created_at' => $now,
             'updated_at' => $now,
         ];

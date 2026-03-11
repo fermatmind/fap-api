@@ -46,7 +46,9 @@ final class CommerceOrderReadFallbackTest extends TestCase
     public function test_matching_token_identity_returns_full_payload(): void
     {
         $orderNo = 'ord_fallback_'.Str::lower(Str::random(10));
-        $this->insertOrderForOwner($orderNo);
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER);
+        $this->insertOrderForOwner($orderNo, $attemptId, 'paid');
 
         $token = $this->issueAnonToken(self::ANON_OWNER);
         $response = $this->withHeaders([
@@ -57,10 +59,16 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('ownership_verified', true)
             ->assertJsonPath('order_no', $orderNo)
-            ->assertJsonPath('status', 'pending')
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('attempt_id', $attemptId)
             ->assertJsonPath('amount_cents', 1990)
             ->assertJsonPath('currency', 'USD')
-            ->assertJsonPath('order.anon_id', self::ANON_OWNER);
+            ->assertJsonPath('order.anon_id', self::ANON_OWNER)
+            ->assertJsonPath('delivery.can_view_report', true)
+            ->assertJsonPath('delivery.report_url', "/api/v0.3/attempts/{$attemptId}/report")
+            ->assertJsonPath('delivery.can_download_pdf', true)
+            ->assertJsonPath('delivery.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
+            ->assertJsonPath('delivery.can_resend', false);
     }
 
     private function issueAnonToken(string $anonId): string
@@ -98,7 +106,35 @@ final class CommerceOrderReadFallbackTest extends TestCase
         return $token;
     }
 
-    private function insertOrderForOwner(string $orderNo): void
+    private function insertAttempt(string $attemptId, string $anonId): void
+    {
+        DB::table('attempts')->insert([
+            'id' => $attemptId,
+            'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', $attemptId), 0, 8)),
+            'org_id' => 0,
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 120,
+            'answers_summary_json' => json_encode(['stage' => 'seed'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'client_platform' => 'test',
+            'client_version' => '1.0.0',
+            'channel' => 'test',
+            'started_at' => now()->subMinute(),
+            'submitted_at' => now(),
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'content_package_version' => 'v1',
+            'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function insertOrderForOwner(string $orderNo, ?string $attemptId = null, string $status = 'created'): void
     {
         $now = now();
         $row = [
@@ -109,13 +145,13 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'anon_id' => self::ANON_OWNER,
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
-            'target_attempt_id' => null,
+            'target_attempt_id' => $attemptId,
             'amount_cents' => 1990,
             'currency' => 'USD',
-            'status' => 'created',
+            'status' => $status,
             'provider' => 'billing',
             'external_trade_no' => null,
-            'paid_at' => null,
+            'paid_at' => $status === 'paid' ? $now : null,
             'created_at' => $now,
             'updated_at' => $now,
         ];

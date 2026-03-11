@@ -44,12 +44,14 @@ class EmailOutboxService
         $locale = $this->resolveAttemptLocale($attemptId);
         $subject = $this->defaultSubjectForTemplate('report_claim', $locale);
 
-        $reportUrl = "/api/v0.3/attempts/{$attemptId}/report";
+        $reportUrl = $this->reportUrl($attemptId);
+        $reportPdfUrl = $this->reportPdfUrl($attemptId);
         $claimUrl = "/api/v0.3/claim/report?token={$token}";
 
         $payload = [
             'attempt_id' => $attemptId,
             'report_url' => $reportUrl,
+            'report_pdf_url' => $reportPdfUrl,
             'claim_token' => $token,
             'claim_url' => $claimUrl,
             'claim_expires_at' => $expiresAt->toIso8601String(),
@@ -226,8 +228,8 @@ class EmailOutboxService
 
         $locale = $this->resolveAttemptLocale($attemptId);
         $subject = $this->defaultSubjectForTemplate('payment_success', $locale);
-        $reportUrl = "/api/v0.3/attempts/{$attemptId}/report";
-        $reportPdfUrl = "/api/v0.3/attempts/{$attemptId}/report.pdf";
+        $reportUrl = $this->reportUrl($attemptId);
+        $reportPdfUrl = $this->reportPdfUrl($attemptId);
         $nonce = hash('sha256', 'payment_success|'.$attemptId.'|'.Str::uuid()->toString());
 
         $payload = [
@@ -466,11 +468,85 @@ class EmailOutboxService
         }
 
         $reportUrl = $payload['report_url'] ?? "/api/v0.3/attempts/{$attemptId}/report";
+        $reportPdfUrl = $payload['report_pdf_url'] ?? $this->reportPdfUrl($attemptId);
 
         return [
             'ok' => true,
             'attempt_id' => $attemptId,
             'report_url' => $reportUrl,
+            'report_pdf_url' => $reportPdfUrl,
+        ];
+    }
+
+    /**
+     * @return array{email:?string,user_id:?string}
+     */
+    public function resolvePaymentSuccessRecipient(
+        ?string $userId,
+        ?string $anonId,
+        ?string $attemptId,
+        ?string $orderNo = null
+    ): array {
+        $attemptId = $this->trimOrNull($attemptId);
+        if ($attemptId === null) {
+            return [
+                'email' => null,
+                'user_id' => null,
+            ];
+        }
+
+        $normalizedUserId = $this->trimOrNull($userId);
+        $normalizedAnonId = $this->trimOrNull($anonId);
+        $resolvedOutboxUserId = $this->resolveOutboxUserId($normalizedUserId, $normalizedAnonId, $attemptId);
+        $email = $this->resolveUserEmailById($normalizedUserId);
+        if ($email !== '') {
+            return [
+                'email' => $email,
+                'user_id' => $resolvedOutboxUserId,
+            ];
+        }
+
+        if (! \App\Support\SchemaBaseline::hasTable('email_outbox')
+            || ! \App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
+            return [
+                'email' => null,
+                'user_id' => null,
+            ];
+        }
+
+        $normalizedOrderNo = $this->trimOrNull($orderNo);
+        $rows = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->whereIn('template', ['payment_success', 'report_claim'])
+            ->orderByDesc('updated_at')
+            ->get();
+
+        foreach ($rows as $row) {
+            $payload = null;
+            if ((string) ($row->template ?? '') === 'payment_success' && $normalizedOrderNo !== null) {
+                $payload = $this->decodePayloadFromRow($row);
+                $payloadOrderNo = $this->trimOrNull((string) ($payload['order_no'] ?? ''));
+                if ($payloadOrderNo !== null && $payloadOrderNo !== $normalizedOrderNo) {
+                    continue;
+                }
+            }
+
+            $email = $this->extractRecipientEmailFromOutboxRow($row, $payload);
+            if ($email === '') {
+                continue;
+            }
+
+            $rowUserId = $this->trimOrNull((string) ($row->user_id ?? ''));
+
+            return [
+                'email' => $email,
+                'user_id' => $this->resolveOutboxUserId($rowUserId, $normalizedAnonId, $attemptId),
+            ];
+        }
+
+        return [
+            'email' => null,
+            'user_id' => null,
         ];
     }
 
@@ -524,6 +600,34 @@ class EmailOutboxService
         );
 
         return $payload;
+    }
+
+    private function extractRecipientEmailFromOutboxRow(object $row, ?array $payload = null): string
+    {
+        $candidates = [];
+
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_enc')) {
+            $candidates[] = $this->piiCipher->decrypt((string) ($row->to_email_enc ?? ''));
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_enc')) {
+            $candidates[] = $this->piiCipher->decrypt((string) ($row->email_enc ?? ''));
+        }
+
+        if ($payload === null) {
+            $payload = $this->decodePayloadFromRow($row);
+        }
+
+        $candidates[] = $payload['to_email'] ?? null;
+        $candidates[] = $payload['email'] ?? null;
+
+        foreach ($candidates as $candidate) {
+            $email = $this->normalizeEmailAddress($candidate);
+            if ($email !== null) {
+                return $email;
+            }
+        }
+
+        return '';
     }
 
     private function maskedLegacyEmail(string $emailHash): string
@@ -584,5 +688,74 @@ class EmailOutboxService
         }
 
         return $lang === 'zh' ? 'FermatMind 通知' : 'FermatMind notification';
+    }
+
+    private function resolveUserEmailById(?string $userId): string
+    {
+        $userId = $this->trimOrNull($userId);
+        if ($userId === null) {
+            return '';
+        }
+
+        if (! \App\Support\SchemaBaseline::hasTable('users')
+            || ! \App\Support\SchemaBaseline::hasColumn('users', 'email')) {
+            return '';
+        }
+
+        $email = DB::table('users')->where('id', $userId)->value('email');
+        $normalized = $this->normalizeEmailAddress($email);
+
+        return $normalized ?? '';
+    }
+
+    private function resolveOutboxUserId(?string $userId, ?string $anonId, string $attemptId): ?string
+    {
+        $userId = $this->trimOrNull($userId);
+        if ($userId !== null) {
+            return substr($userId, 0, 64);
+        }
+
+        $anonId = $this->trimOrNull($anonId);
+        if ($anonId !== null) {
+            return 'anon_'.substr(hash('sha256', $anonId), 0, 24);
+        }
+
+        $attemptId = $this->trimOrNull($attemptId);
+        if ($attemptId !== null) {
+            return 'attempt_'.substr(hash('sha256', $attemptId), 0, 24);
+        }
+
+        return null;
+    }
+
+    private function normalizeEmailAddress(mixed $email): ?string
+    {
+        $email = mb_strtolower(trim((string) $email), 'UTF-8');
+        if ($email === '') {
+            return null;
+        }
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            return null;
+        }
+
+        return $email;
+    }
+
+    private function trimOrNull(?string $value): ?string
+    {
+        $value = trim((string) $value);
+
+        return $value !== '' ? $value : null;
+    }
+
+    private function reportUrl(string $attemptId): string
+    {
+        return "/api/v0.3/attempts/{$attemptId}/report";
+    }
+
+    private function reportPdfUrl(string $attemptId): string
+    {
+        return "/api/v0.3/attempts/{$attemptId}/report.pdf";
     }
 }
