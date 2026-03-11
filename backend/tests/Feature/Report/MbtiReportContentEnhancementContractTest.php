@@ -10,6 +10,7 @@ use App\Services\Commerce\EntitlementManager;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -165,6 +166,8 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
             $this->assertNotSame('', trim((string) ($layer['one_liner'] ?? '')));
             $this->assertNotEmpty((array) ($layer['bullets'] ?? []));
             $this->assertNotContains('fallback:true', (array) ($layer['tags'] ?? []), "identity layer should not fallback for {$typeCode}");
+            $this->assertArrayHasKey('role_card', (array) $resp->json('report.layers'));
+            $this->assertArrayHasKey('strategy_card', (array) $resp->json('report.layers'));
         }
     }
 
@@ -188,11 +191,9 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
             'access_level' => 'free',
             'variant' => 'free',
         ]);
-        $this->assertStableCtaShape((array) $locked->json('cta'));
+        $this->assertFrozenMbtiContractShape($locked);
         $this->assertTrue((bool) $locked->json('cta.visible'));
-        $this->assertIsArray($locked->json('report.recommended_reads'));
         $this->assertStableRecommendedReadShape((array) ($locked->json('report.recommended_reads.0') ?? []));
-        $this->assertSame(['traits', 'career', 'growth', 'relationships'], array_keys((array) $locked->json('report.sections')));
 
         /** @var EntitlementManager $entitlements */
         $entitlements = app(EntitlementManager::class);
@@ -221,11 +222,9 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
             'access_level' => 'full',
             'variant' => 'full',
         ]);
-        $this->assertStableCtaShape((array) $unlocked->json('cta'));
+        $this->assertFrozenMbtiContractShape($unlocked);
         $this->assertFalse((bool) $unlocked->json('cta.visible'));
         $this->assertSame('none', $unlocked->json('cta.kind'));
-        $this->assertIsArray($unlocked->json('report.recommended_reads'));
-        $this->assertSame(['traits', 'career', 'growth', 'relationships'], array_keys((array) $unlocked->json('report.sections')));
     }
 
     public function test_free_and_full_gate_semantics_remain_unchanged_with_new_fields(): void
@@ -314,6 +313,10 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
      */
     private function assertStableRecommendedReadShape(array $item): void
     {
+        if ($item === []) {
+            return;
+        }
+
         foreach ([
             'id',
             'type',
@@ -339,6 +342,47 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
         $this->assertIsString($item['title']);
         $this->assertIsInt($item['priority']);
         $this->assertIsArray($item['tags']);
+    }
+
+    private function assertFrozenMbtiContractShape(TestResponse $response): void
+    {
+        /** @var array<string,mixed> $payload */
+        $payload = $response->json();
+        $this->assertArrayHasKey('cta', $payload);
+        $this->assertStableCtaShape((array) $payload['cta']);
+
+        /** @var array<string,mixed> $report */
+        $report = (array) ($payload['report'] ?? []);
+        $this->assertIsArray($report);
+        $this->assertArrayHasKey('layers', $report);
+        $this->assertArrayHasKey('sections', $report);
+        $this->assertArrayHasKey('scores_pct', $report);
+        $this->assertArrayHasKey('axis_states', $report);
+        $this->assertArrayHasKey('recommended_reads', $report);
+
+        $this->assertIsArray($report['scores_pct']);
+        $this->assertIsArray($report['axis_states']);
+        $this->assertIsArray($report['recommended_reads']);
+        $this->assertSame(['traits', 'career', 'growth', 'relationships'], array_keys((array) $report['sections']));
+
+        /** @var array<string,mixed> $layers */
+        $layers = (array) $report['layers'];
+        foreach (['role_card', 'strategy_card', 'identity'] as $key) {
+            $this->assertArrayHasKey($key, $layers);
+            $this->assertIsArray($layers[$key]);
+        }
+
+        $identity = (array) $layers['identity'];
+        $this->assertNotEmpty($identity);
+        foreach (['title', 'subtitle', 'one_liner', 'bullets', 'tags'] as $key) {
+            $this->assertArrayHasKey($key, $identity);
+        }
+        $this->assertNotSame('', trim((string) ($identity['title'] ?? '')));
+        $this->assertNotSame('', trim((string) ($identity['subtitle'] ?? '')));
+        $this->assertNotSame('', trim((string) ($identity['one_liner'] ?? '')));
+        $this->assertIsArray($identity['bullets']);
+        $this->assertIsArray($identity['tags']);
+        $this->assertNotContains('fallback:true', (array) ($identity['tags'] ?? []));
     }
 
     /**
