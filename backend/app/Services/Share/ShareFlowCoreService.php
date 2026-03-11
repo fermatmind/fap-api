@@ -76,6 +76,16 @@ final class ShareFlowCoreService
      */
     public function clickAndComposeReport(string $shareId, array $input, array $requestMeta): array
     {
+        return $this->recordClick($shareId, $input, $requestMeta);
+    }
+
+    /**
+     * @param  array<string, mixed>  $input
+     * @param  array<string, mixed>  $requestMeta
+     * @return array<string, mixed>
+     */
+    public function recordClick(string $shareId, array $input, array $requestMeta): array
+    {
         $share = Share::withoutGlobalScopes()->where('id', $shareId)->first();
         if (! $share) {
             throw new NotFoundHttpException('share not found');
@@ -91,11 +101,15 @@ final class ShareFlowCoreService
             ->where('share_id', $shareId)
             ->orderByDesc('occurred_at')
             ->first();
-        if (! $gen) {
-            throw new NotFoundHttpException('share generate event not found');
-        }
+        $genMeta = $gen ? $this->normalizeMeta($gen->meta_json ?? null) : [];
 
-        $genMeta = $this->normalizeMeta($gen->meta_json ?? null);
+        $attempt = Attempt::withoutGlobalScopes()->where('id', $attemptId)->firstOrFail();
+        $this->assertOrgIsolation($attempt);
+
+        $result = Result::withoutGlobalScopes()
+            ->where('org_id', (int) ($attempt->org_id ?? 0))
+            ->where('attempt_id', (string) $attempt->id)
+            ->first();
 
         $experiment = trim((string) ($requestMeta['experiment'] ?? ($input['experiment'] ?? '')));
         if ($experiment === '') {
@@ -109,18 +123,18 @@ final class ShareFlowCoreService
 
         $channel = trim((string) ($requestMeta['channel'] ?? ($genMeta['channel'] ?? '')));
         $clientPlatform = trim((string) ($requestMeta['client_platform'] ?? ($genMeta['client_platform'] ?? '')));
-        $entryPage = trim((string) ($requestMeta['entry_page'] ?? ''));
+        $entryPage = trim((string) ($requestMeta['entry_page'] ?? ($genMeta['entry_page'] ?? '')));
 
-        $typeCode = trim((string) ($genMeta['type_code'] ?? ''));
-        $packVersion = trim((string) ($genMeta['content_package_version'] ?? ''));
+        $typeCode = trim((string) ($genMeta['type_code'] ?? ($result?->type_code ?? '')));
+        $packVersion = trim((string) (
+            $genMeta['content_package_version']
+            ?? ($attempt->content_package_version ?? $result?->content_package_version ?? '')
+        ));
         $engineVersion = trim((string) ($genMeta['engine_version'] ?? ($genMeta['engine'] ?? '')));
-        $profileVersion = trim((string) ($genMeta['profile_version'] ?? ''));
+        $profileVersion = trim((string) ($genMeta['profile_version'] ?? ($result?->profile_version ?? '')));
 
         $meta = is_array($input['meta_json'] ?? null) ? $input['meta_json'] : [];
-
-        if (! isset($meta['share_id'])) {
-            $meta['share_id'] = $shareId;
-        }
+        $meta['share_id'] = $shareId;
         $meta['attempt_id'] = $attemptId;
 
         if ($typeCode !== '' && ! isset($meta['type_code'])) {
@@ -137,6 +151,14 @@ final class ShareFlowCoreService
         }
         if ($profileVersion !== '' && ! isset($meta['profile_version'])) {
             $meta['profile_version'] = $profileVersion;
+        }
+
+        $entrypoint = trim((string) ($meta['entrypoint'] ?? ''));
+        if ($entrypoint === '') {
+            $entrypoint = trim((string) ($entryPage !== '' ? $entryPage : ($genMeta['entrypoint'] ?? '')));
+        }
+        if ($entrypoint !== '') {
+            $meta['entrypoint'] = $entrypoint;
         }
 
         if ($experiment !== '' && ! isset($meta['experiment'])) {
@@ -156,10 +178,10 @@ final class ShareFlowCoreService
             $meta['entry_page'] = $entryPage;
         }
 
-        if (! isset($meta['share_generate_event_id'])) {
+        if ($gen && ! isset($meta['share_generate_event_id'])) {
             $meta['share_generate_event_id'] = (string) ($gen->id ?? '');
         }
-        if (! isset($meta['share_generate_occurred_at'])) {
+        if ($gen && ! isset($meta['share_generate_occurred_at'])) {
             $meta['share_generate_occurred_at'] = (string) ($gen->occurred_at ?? '');
         }
 
@@ -172,17 +194,22 @@ final class ShareFlowCoreService
         if (! isset($meta['ref'])) {
             $meta['ref'] = trim((string) ($requestMeta['referer'] ?? ''));
         }
+        if (! isset($meta['referrer'])) {
+            $meta['referrer'] = trim((string) ($requestMeta['referer'] ?? ($input['ref'] ?? '')));
+        }
+        if (! isset($meta['landing_path'])) {
+            $meta['landing_path'] = $this->extractLandingPath($input);
+        }
+        if (! isset($meta['compare_intent']) && array_key_exists('compare_intent', $genMeta)) {
+            $meta['compare_intent'] = $genMeta['compare_intent'];
+        }
+        if (! isset($meta['utm']) && is_array($genMeta['utm'] ?? null)) {
+            $meta['utm'] = $genMeta['utm'];
+        }
 
-        $meta = array_filter($meta, static fn (mixed $v): bool => ! ($v === null || $v === ''));
+        $meta['utm'] = $this->normalizeUtmMeta($meta['utm'] ?? null);
+        $meta = $this->filterMeta($meta);
         $meta = $this->eventPayloadLimiter->limit($meta);
-
-        $attempt = Attempt::withoutGlobalScopes()->where('id', $attemptId)->firstOrFail();
-        $this->assertOrgIsolation($attempt);
-
-        $result = Result::withoutGlobalScopes()
-            ->where('org_id', (int) ($attempt->org_id ?? 0))
-            ->where('attempt_id', (string) $attempt->id)
-            ->firstOrFail();
 
         $event = new Event;
         $event->id = $this->newUuid();
@@ -190,73 +217,21 @@ final class ShareFlowCoreService
         $event->org_id = (int) ($attempt->org_id ?? 0);
         $event->attempt_id = (string) $attempt->id;
         $event->share_id = $shareId;
-        $event->anon_id = $this->resolveClickAnonId($input, $gen);
+        $event->anon_id = $this->resolveClickAnonId(
+            $input,
+            $gen,
+            is_string($share->anon_id ?? null) ? (string) $share->anon_id : null
+        );
         $event->meta_json = $meta;
         $event->occurred_at = ! empty($input['occurred_at'])
             ? Carbon::parse((string) $input['occurred_at'])
             : now();
         $event->save();
 
-        $ctx = [
-            'share_id' => $shareId,
-            'attempt_id' => (string) $attempt->id,
-            'experiment' => $experiment,
-            'version' => $version,
-            'type_code' => $typeCode,
-            'engine' => $engineVersion,
-            'profile_version' => $profileVersion,
-            'content_package_version' => $packVersion,
-            'org_id' => (int) ($attempt->org_id ?? 0),
-        ];
-
-        try {
-            $composed = $this->reportComposer->compose($attempt, $ctx, $result);
-        } catch (\Throwable $e) {
-            $this->logger->error('[share] report compose failed', [
-                'share_id' => $shareId,
-                'attempt_id' => (string) $attempt->id,
-                'org_id' => (int) ($attempt->org_id ?? 0),
-                'exception' => $e::class,
-                'message' => $e->getMessage(),
-            ]);
-            throw $e;
-        }
-
-        $report = is_array($composed['report'] ?? null) ? $composed['report'] : $this->toArray($composed);
-        if (! is_array($report)) {
-            $report = [];
-        }
-
-        if (! isset($report['_meta']) || ! is_array($report['_meta'])) {
-            $report['_meta'] = [];
-        }
-
-        $metaFill = [
-            'share_id' => $shareId,
-            'attempt_id' => (string) $attempt->id,
-            'type_code' => $typeCode,
-            'engine' => $engineVersion,
-            'profile_version' => $profileVersion,
-            'content_package_version' => $packVersion,
-            'experiment' => $experiment,
-            'version' => $version,
-            'generated_at' => now()->toISOString(),
-        ];
-
-        foreach ($metaFill as $key => $value) {
-            if ($value === '' || $value === null) {
-                continue;
-            }
-            if (! array_key_exists($key, $report['_meta'])) {
-                $report['_meta'][$key] = $value;
-            }
-        }
-
         return [
             'id' => (string) $event->id,
             'share_id' => $shareId,
-            'attempt_id' => (string) $attempt->id,
-            'report' => $this->filterReport($report),
+            'recorded_at' => $event->occurred_at?->toISOString(),
         ];
     }
 
@@ -414,7 +389,7 @@ final class ShareFlowCoreService
     /**
      * @param  array<string, mixed>  $input
      */
-    private function resolveClickAnonId(array $input, Event $gen): ?string
+    private function resolveClickAnonId(array $input, ?Event $gen = null, ?string $shareAnonId = null): ?string
     {
         $badAnon = static function (?string $value): bool {
             if ($value === null) {
@@ -455,6 +430,11 @@ final class ShareFlowCoreService
             return $fromInput;
         }
 
+        $fromShare = trim((string) ($shareAnonId ?? ''));
+        if ($fromShare !== '' && ! $badAnon($fromShare)) {
+            return $fromShare;
+        }
+
         $fromGen = trim((string) ($gen->anon_id ?? ''));
         if ($fromGen !== '' && ! $badAnon($fromGen)) {
             return $fromGen;
@@ -492,6 +472,73 @@ final class ShareFlowCoreService
         }
 
         return [];
+    }
+
+    /**
+     * @return array<string, string>|null
+     */
+    private function normalizeUtmMeta(mixed $utm): ?array
+    {
+        if (! is_array($utm)) {
+            return null;
+        }
+
+        $normalized = [];
+        foreach (['source', 'medium', 'campaign', 'term', 'content'] as $key) {
+            $value = trim((string) ($utm[$key] ?? ''));
+            if ($value !== '') {
+                $normalized[$key] = $value;
+            }
+        }
+
+        return $normalized === [] ? null : $normalized;
+    }
+
+    private function extractLandingPath(array $input): ?string
+    {
+        $landingPath = trim((string) ($input['landing_path'] ?? ''));
+        if ($landingPath !== '') {
+            return $landingPath;
+        }
+
+        $url = trim((string) ($input['url'] ?? ''));
+        if ($url === '') {
+            return null;
+        }
+
+        $parsed = parse_url($url, PHP_URL_PATH);
+
+        return is_string($parsed) && trim($parsed) !== '' ? trim($parsed) : null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $meta
+     * @return array<string, mixed>
+     */
+    private function filterMeta(array $meta): array
+    {
+        $filtered = [];
+
+        foreach ($meta as $key => $value) {
+            if (is_array($value)) {
+                $value = $this->filterMeta($value);
+                if ($value === []) {
+                    continue;
+                }
+
+                $filtered[$key] = $value;
+
+                continue;
+            }
+
+            if ($value === null || $value === '') {
+                continue;
+            }
+
+            $filtered[$key] = $value;
+        }
+
+        return $filtered;
     }
 
     /**

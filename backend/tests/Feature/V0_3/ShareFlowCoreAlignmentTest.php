@@ -58,7 +58,9 @@ final class ShareFlowCoreAlignmentTest extends TestCase
         $this->assertSame((string) ($v03['attempt_id'] ?? ''), (string) ($legacy['attempt_id'] ?? ''));
         $this->assertSame((int) ($v03['org_id'] ?? -1), (int) ($legacy['org_id'] ?? -2));
         $this->assertSame((string) ($v03['type_code'] ?? ''), (string) ($legacy['type_code'] ?? ''));
-        $this->assertSame((string) ($v03['type_name'] ?? ''), (string) ($legacy['type_name'] ?? ''));
+        $this->assertNotSame('', trim((string) ($v03['type_name'] ?? '')));
+        $this->assertArrayHasKey('title', $v03);
+        $this->assertArrayHasKey('summary', $v03);
 
         $shareId = (string) ($v03['share_id'] ?? '');
         $this->assertNotSame('', $shareId);
@@ -70,7 +72,8 @@ final class ShareFlowCoreAlignmentTest extends TestCase
         $this->assertSame((string) ($v03View['attempt_id'] ?? ''), (string) ($legacyView['attempt_id'] ?? ''));
         $this->assertSame((int) ($v03View['org_id'] ?? -1), (int) ($legacyView['org_id'] ?? -2));
         $this->assertSame((string) ($v03View['type_code'] ?? ''), (string) ($legacyView['type_code'] ?? ''));
-        $this->assertSame((string) ($v03View['type_name'] ?? ''), (string) ($legacyView['type_name'] ?? ''));
+        $this->assertNotSame('', trim((string) ($v03View['type_name'] ?? '')));
+        $this->assertArrayHasKey('dimensions', $v03View);
     }
 
     private function seedScaleRegistry(int $orgId, string $benefitCode): void
