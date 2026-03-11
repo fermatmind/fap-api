@@ -10,6 +10,7 @@ use App\Services\Commerce\EntitlementManager;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -119,20 +120,13 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'access_level' => 'free',
             'variant' => 'free',
         ]);
-        $this->assertIsArray($resp->json('cta'));
-        $this->assertTrue((bool) $resp->json('cta.visible'));
-        $this->assertSame('upsell', $resp->json('cta.kind'));
-        $this->assertSame('MBTI_REPORT_FULL', $resp->json('cta.target_sku'));
-        $this->assertNotSame('', trim((string) $resp->json('cta.target_sku_effective')));
-        $this->assertIsArray($resp->json('report.recommended_reads'));
-        $this->assertNotSame('', trim((string) $resp->json('report.layers.identity.title')));
-        $this->assertNotSame('', trim((string) $resp->json('report.layers.identity.subtitle')));
-        $this->assertNotSame('', trim((string) $resp->json('report.layers.identity.one_liner')));
-        $this->assertIsArray($resp->json('report.layers.identity.tags'));
-        $this->assertSame(
-            ['traits', 'career', 'growth', 'relationships'],
-            array_keys((array) $resp->json('report.sections'))
-        );
+        $this->assertStableMbtiEnvelope($resp);
+
+        $cta = (array) $resp->json('cta');
+        $this->assertTrue((bool) $cta['visible']);
+        $this->assertSame('upsell', $cta['kind']);
+        $this->assertSame('MBTI_REPORT_FULL', $cta['target_sku']);
+        $this->assertNotSame('', trim((string) $cta['target_sku_effective']));
     }
 
     public function test_unlocked_paid_mbti_report_http_contract_keeps_section_gate_semantics(): void
@@ -170,15 +164,267 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'access_level' => 'full',
             'variant' => 'full',
         ]);
-        $this->assertIsArray($resp->json('cta'));
-        $this->assertFalse((bool) $resp->json('cta.visible'));
-        $this->assertSame('none', $resp->json('cta.kind'));
-        $this->assertIsArray($resp->json('report.recommended_reads'));
+        $this->assertStableMbtiEnvelope($resp);
+
+        $cta = (array) $resp->json('cta');
+        $this->assertFalse((bool) $cta['visible']);
+        $this->assertSame('none', $cta['kind']);
+        $this->assertContains('paid', $this->collectAccessLevels($resp->json('report')));
+    }
+
+    private function assertStableMbtiEnvelope(TestResponse $response): void
+    {
+        /** @var array<string,mixed> $payload */
+        $payload = $response->json();
+
+        foreach ([
+            'ok',
+            'generating',
+            'snapshot_error',
+            'retry_after_seconds',
+            'locked',
+            'access_level',
+            'variant',
+            'offers',
+            'modules_allowed',
+            'modules_offered',
+            'modules_preview',
+            'view_policy',
+            'meta',
+            'report',
+            'scale_code',
+            'scale_code_legacy',
+            'scale_code_v2',
+            'scale_uid',
+            'cta',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $payload);
+        }
+
+        $this->assertIsBool($payload['ok']);
+        $this->assertIsBool($payload['generating']);
+        $this->assertIsBool($payload['snapshot_error']);
+        $this->assertTrue($payload['retry_after_seconds'] === null || is_int($payload['retry_after_seconds']));
+        $this->assertIsBool($payload['locked']);
+        $this->assertIsString($payload['access_level']);
+        $this->assertIsString($payload['variant']);
+        $this->assertIsArray($payload['offers']);
+        $this->assertIsArray($payload['modules_allowed']);
+        $this->assertIsArray($payload['modules_offered']);
+        $this->assertIsArray($payload['modules_preview']);
+        $this->assertIsArray($payload['view_policy']);
+        $this->assertIsArray($payload['meta']);
+        $this->assertIsArray($payload['report']);
+        $this->assertNotSame('', trim((string) $payload['scale_code']));
+        $this->assertNotSame('', trim((string) $payload['scale_code_legacy']));
+        $this->assertNotSame('', trim((string) $payload['scale_code_v2']));
+        $this->assertNotSame('', trim((string) $payload['scale_uid']));
+
+        $this->assertStableCtaShape((array) $payload['cta']);
+        $this->assertStableMbtiReportShape((array) $payload['report']);
+    }
+
+    /**
+     * @param array<string,mixed> $cta
+     */
+    private function assertStableCtaShape(array $cta): void
+    {
+        foreach ([
+            'visible',
+            'kind',
+            'title',
+            'subtitle',
+            'primary_label',
+            'secondary_label',
+            'benefit_bullets',
+            'badge',
+            'target_sku',
+            'target_sku_effective',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $cta);
+        }
+
+        $this->assertIsBool($cta['visible']);
+        $this->assertIsString($cta['kind']);
+        $this->assertTrue($cta['title'] === null || is_string($cta['title']));
+        $this->assertTrue($cta['subtitle'] === null || is_string($cta['subtitle']));
+        $this->assertTrue($cta['primary_label'] === null || is_string($cta['primary_label']));
+        $this->assertTrue($cta['secondary_label'] === null || is_string($cta['secondary_label']));
+        $this->assertIsArray($cta['benefit_bullets']);
+        $this->assertTrue($cta['badge'] === null || is_string($cta['badge']));
+        $this->assertTrue($cta['target_sku'] === null || is_string($cta['target_sku']));
+        $this->assertTrue($cta['target_sku_effective'] === null || is_string($cta['target_sku_effective']));
+    }
+
+    /**
+     * @param array<string,mixed> $report
+     */
+    private function assertStableMbtiReportShape(array $report): void
+    {
+        foreach ([
+            'profile',
+            'identity_card',
+            'highlights',
+            'layers',
+            'sections',
+            'recommended_reads',
+            'tags',
+            'scores',
+            'scores_pct',
+            'axis_states',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $report);
+        }
+
+        $this->assertStableProfileShape((array) $report['profile']);
+        $this->assertStableIdentityCardShape((array) $report['identity_card']);
+        $this->assertStableHighlightsShape((array) $report['highlights']);
+        $this->assertStableLayersShape((array) $report['layers']);
+        $this->assertStableSectionsShape((array) $report['sections']);
+        $this->assertStableRecommendedReadsShape((array) $report['recommended_reads']);
+        $this->assertIsArray($report['tags']);
+        $this->assertIsArray($report['scores']);
+        $this->assertIsArray($report['scores_pct']);
+        $this->assertIsArray($report['axis_states']);
+    }
+
+    /**
+     * @param array<string,mixed> $profile
+     */
+    private function assertStableProfileShape(array $profile): void
+    {
+        foreach ([
+            'type_code',
+            'type_name',
+            'tagline',
+            'rarity',
+            'keywords',
+            'short_summary',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $profile);
+        }
+
+        $this->assertNotSame('', trim((string) $profile['type_code']));
+        $this->assertNotSame('', trim((string) $profile['type_name']));
+        $this->assertTrue($profile['tagline'] === null || is_string($profile['tagline']));
+        $this->assertTrue($profile['rarity'] === null || is_string($profile['rarity']) || is_numeric($profile['rarity']));
+        $this->assertIsArray($profile['keywords']);
+        $this->assertTrue($profile['short_summary'] === null || is_string($profile['short_summary']));
+    }
+
+    /**
+     * @param array<string,mixed> $identityCard
+     */
+    private function assertStableIdentityCardShape(array $identityCard): void
+    {
+        foreach ([
+            'title',
+            'subtitle',
+            'tagline',
+            'summary',
+            'share_text',
+            'tags',
+            'badge',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $identityCard);
+        }
+
+        $this->assertNotSame('', trim((string) $identityCard['title']));
+        $this->assertTrue($identityCard['subtitle'] === null || is_string($identityCard['subtitle']));
+        $this->assertTrue($identityCard['tagline'] === null || is_string($identityCard['tagline']));
+        $this->assertTrue($identityCard['summary'] === null || is_string($identityCard['summary']));
+        $this->assertTrue($identityCard['share_text'] === null || is_string($identityCard['share_text']));
+        $this->assertIsArray($identityCard['tags']);
+        $this->assertIsArray($identityCard['badge']);
+    }
+
+    /**
+     * @param array<int,array<string,mixed>> $highlights
+     */
+    private function assertStableHighlightsShape(array $highlights): void
+    {
+        $this->assertIsArray($highlights);
+        $this->assertNotEmpty($highlights);
+
+        $first = (array) ($highlights[0] ?? []);
+        foreach (['title', 'text', 'tips'] as $key) {
+            $this->assertArrayHasKey($key, $first);
+        }
+
+        $this->assertNotSame('', trim((string) $first['title']));
+        $this->assertNotSame('', trim((string) $first['text']));
+        $this->assertIsArray($first['tips']);
+    }
+
+    /**
+     * @param array<string,mixed> $layers
+     */
+    private function assertStableLayersShape(array $layers): void
+    {
+        foreach (['role_card', 'strategy_card', 'identity'] as $key) {
+            $this->assertArrayHasKey($key, $layers);
+            $this->assertIsArray($layers[$key]);
+        }
+
+        $identity = (array) $layers['identity'];
+        foreach (['title', 'subtitle', 'one_liner', 'bullets', 'tags'] as $key) {
+            $this->assertArrayHasKey($key, $identity);
+        }
+
+        $this->assertNotSame('', trim((string) $identity['title']));
+        $this->assertNotSame('', trim((string) $identity['subtitle']));
+        $this->assertNotSame('', trim((string) $identity['one_liner']));
+        $this->assertIsArray($identity['bullets']);
+        $this->assertIsArray($identity['tags']);
+    }
+
+    /**
+     * @param array<string,mixed> $sections
+     */
+    private function assertStableSectionsShape(array $sections): void
+    {
         $this->assertSame(
             ['traits', 'career', 'growth', 'relationships'],
-            array_keys((array) $resp->json('report.sections'))
+            array_keys($sections)
         );
-        $this->assertContains('paid', $this->collectAccessLevels($resp->json('report')));
+    }
+
+    /**
+     * @param array<int,array<string,mixed>> $reads
+     */
+    private function assertStableRecommendedReadsShape(array $reads): void
+    {
+        $this->assertIsArray($reads);
+
+        $first = (array) ($reads[0] ?? []);
+        if ($first === []) {
+            return;
+        }
+
+        foreach ([
+            'id',
+            'type',
+            'title',
+            'desc',
+            'url',
+            'cover',
+            'cta',
+            'priority',
+            'tags',
+            'estimated_minutes',
+            'status',
+            'published_at',
+            'updated_at',
+            'canonical_id',
+            'canonical_url',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $first);
+        }
+
+        $this->assertNotSame('', trim((string) $first['id']));
+        $this->assertNotSame('', trim((string) $first['type']));
+        $this->assertNotSame('', trim((string) $first['title']));
+        $this->assertIsArray($first['tags']);
     }
 
     /**

@@ -13,6 +13,7 @@ use App\Services\Report\ReportAccess;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\Feature\Sds20\Concerns\BuildsSds20ScorerInput;
@@ -254,9 +255,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
             'access_level' => 'free',
             'variant' => 'free',
         ]);
-        $locked->assertJsonMissingPath('cta');
-        $locked->assertJsonMissingPath('report.recommended_reads');
-        $locked->assertJsonMissingPath('report.layers.identity');
+        $this->assertSharedNonMbtiEnvelope($locked);
+        $this->assertMbtiOnlyFieldsAreMissing($locked);
         $this->assertSame(
             ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
             array_map('strval', (array) array_column((array) $locked->json('report.sections'), 'key'))
@@ -289,9 +289,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
             'access_level' => 'full',
             'variant' => 'full',
         ]);
-        $unlocked->assertJsonMissingPath('cta');
-        $unlocked->assertJsonMissingPath('report.recommended_reads');
-        $unlocked->assertJsonMissingPath('report.layers.identity');
+        $this->assertSharedNonMbtiEnvelope($unlocked);
+        $this->assertMbtiOnlyFieldsAreMissing($unlocked);
         $this->assertSame(
             ['disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
             array_map('strval', (array) array_column((array) $unlocked->json('report.sections'), 'key'))
@@ -320,9 +319,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
             'access_level' => 'free',
             'variant' => 'free',
         ]);
-        $locked->assertJsonMissingPath('cta');
-        $locked->assertJsonMissingPath('report.recommended_reads');
-        $locked->assertJsonMissingPath('report.layers.identity');
+        $this->assertSharedNonMbtiEnvelope($locked);
+        $this->assertMbtiOnlyFieldsAreMissing($locked);
         $this->assertContains(ReportAccess::MODULE_SDS_CORE, (array) $locked->json('modules_allowed'));
         $this->assertNotEmpty((array) $locked->json('report.sections'));
 
@@ -358,10 +356,59 @@ final class NonMbtiReportContractRegressionTest extends TestCase
             'access_level' => 'full',
             'variant' => 'full',
         ]);
-        $unlocked->assertJsonMissingPath('cta');
-        $unlocked->assertJsonMissingPath('report.recommended_reads');
-        $unlocked->assertJsonMissingPath('report.layers.identity');
+        $this->assertSharedNonMbtiEnvelope($unlocked);
+        $this->assertMbtiOnlyFieldsAreMissing($unlocked);
         $this->assertContains(ReportAccess::MODULE_SDS_FULL, (array) $unlocked->json('modules_allowed'));
         $this->assertNotEmpty((array) $unlocked->json('report.sections'));
+    }
+
+    private function assertSharedNonMbtiEnvelope(TestResponse $response): void
+    {
+        /** @var array<string,mixed> $payload */
+        $payload = $response->json();
+
+        foreach ([
+            'locked',
+            'access_level',
+            'variant',
+            'offers',
+            'modules_allowed',
+            'view_policy',
+            'meta',
+            'report',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $payload);
+        }
+
+        $this->assertIsBool($payload['locked']);
+        $this->assertIsString($payload['access_level']);
+        $this->assertIsString($payload['variant']);
+        $this->assertIsArray($payload['offers']);
+        $this->assertIsArray($payload['modules_allowed']);
+        $this->assertIsArray($payload['view_policy']);
+        $this->assertIsArray($payload['meta']);
+        $this->assertIsArray($payload['report']);
+    }
+
+    private function assertMbtiOnlyFieldsAreMissing(TestResponse $response): void
+    {
+        $response->assertJsonMissingPath('cta');
+        $response->assertJsonMissingPath('report.recommended_reads');
+        $response->assertJsonMissingPath('report.layers.identity');
+
+        foreach ([
+            'report.profile',
+            'report.identity_card',
+            'report.highlights',
+            'report.tags',
+            'report.scores_pct',
+            'report.axis_states',
+            'report.warnings',
+            'report._meta',
+            'report.borderline_note',
+            'report.versions',
+        ] as $path) {
+            $response->assertJsonMissingPath($path);
+        }
     }
 }
