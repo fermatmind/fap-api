@@ -59,7 +59,7 @@ final class ShareFlowCoreService
             $benefitCode
         );
 
-        if (! $hasFullAccess) {
+        if (! $hasFullAccess && ! $this->canGeneratePublicShareSummary($attempt)) {
             throw new HttpException(402, 'PAYMENT_REQUIRED');
         }
 
@@ -384,6 +384,11 @@ final class ShareFlowCoreService
             'subscription_benefit_code' => strtoupper(trim((string) ($commercial['subscription_benefit_code'] ?? ''))),
             'default_sku' => trim((string) ($commercial['default_sku'] ?? '')),
         ];
+    }
+
+    private function canGeneratePublicShareSummary(Attempt $attempt): bool
+    {
+        return strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI';
     }
 
     /**

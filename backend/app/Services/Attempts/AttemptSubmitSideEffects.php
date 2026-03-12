@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Attempts;
 
+use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessments\AssessmentService;
 use App\Services\Commerce\BenefitWalletService;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Report\ReportSnapshotStore;
+use App\Services\V0_3\MbtiCompareInviteService;
 use App\Support\OrgContext;
 use Illuminate\Support\Facades\Log;
 
@@ -24,8 +26,8 @@ final class AttemptSubmitSideEffects
         private ReportSnapshotStore $reportSnapshots,
         private EventRecorder $eventRecorder,
         private ReportGatekeeper $reportGatekeeper,
-    ) {
-    }
+        private MbtiCompareInviteService $mbtiCompareInvites,
+    ) {}
 
     public function runAfterSubmit(OrgContext $ctx, array $payload, ?string $actorUserId, ?string $actorAnonId): ?array
     {
@@ -42,8 +44,29 @@ final class AttemptSubmitSideEffects
         $dirVersion = trim((string) ($payload['dir_version'] ?? ''));
         $scoringSpecVersion = trim((string) ($payload['scoring_spec_version'] ?? ''));
         $inviteToken = trim((string) ($payload['invite_token'] ?? ''));
+        $shareId = trim((string) ($payload['share_id'] ?? ''));
+        $compareInviteId = trim((string) ($payload['compare_invite_id'] ?? ''));
         $creditBenefitCode = strtoupper(trim((string) ($payload['credit_benefit_code'] ?? '')));
         $entitlementBenefitCode = strtoupper(trim((string) ($payload['entitlement_benefit_code'] ?? '')));
+
+        if ($scaleCode === 'MBTI' && $compareInviteId !== '') {
+            $attempt = Attempt::query()->where('id', $attemptId)->where('org_id', $orgId)->first();
+            if (! $attempt instanceof Attempt) {
+                throw new \RuntimeException('submitted attempt missing for compare invite binding.');
+            }
+
+            if ($shareId === '') {
+                throw new \RuntimeException('share_id is required when compare_invite_id is present.');
+            }
+
+            $this->mbtiCompareInvites->attachInviteeFromSubmit(
+                $compareInviteId,
+                $shareId,
+                $attempt,
+                $this->resolveAnonId($ctx, $actorAnonId),
+                $this->resolveUserId($ctx, $actorUserId)
+            );
+        }
 
         $consumeB2BCredit = false;
         if ($inviteToken !== '' && $orgId > 0) {
@@ -65,7 +88,7 @@ final class AttemptSubmitSideEffects
             try {
                 $consume = $this->benefitWallets->consume($orgId, self::B2B_CREDIT_BENEFIT_CODE, $attemptId);
                 $creditOk = (bool) ($consume['ok'] ?? false);
-                if (!$creditOk) {
+                if (! $creditOk) {
                     Log::warning('SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_FAILED', [
                         'org_id' => $orgId,
                         'attempt_id' => $attemptId,
@@ -83,7 +106,7 @@ final class AttemptSubmitSideEffects
             }
         }
 
-        if ($orgId > 0 && $creditBenefitCode !== '' && !$consumeB2BCredit) {
+        if ($orgId > 0 && $creditBenefitCode !== '' && ! $consumeB2BCredit) {
             try {
                 $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
                 $creditOk = (bool) ($consume['ok'] ?? false);
@@ -141,7 +164,7 @@ final class AttemptSubmitSideEffects
                     null
                 );
 
-                if (!($grant['ok'] ?? false)) {
+                if (! ($grant['ok'] ?? false)) {
                     Log::warning('SUBMIT_POST_COMMIT_GRANT_FAILED', [
                         'org_id' => $orgId,
                         'attempt_id' => $attemptId,
@@ -248,7 +271,7 @@ final class AttemptSubmitSideEffects
             return;
         }
 
-        if (!($gate['ok'] ?? false)) {
+        if (! ($gate['ok'] ?? false)) {
             Log::warning('SUBMIT_REPORT_GATE_FAILED', [
                 'org_id' => $ctx->orgId(),
                 'attempt_id' => $attemptId,
@@ -270,8 +293,8 @@ final class AttemptSubmitSideEffects
     }
 
     /**
-     * @param array<string,mixed> $resultPayload
-     * @param array<string,mixed> $versionMeta
+     * @param  array<string,mixed>  $resultPayload
+     * @param  array<string,mixed>  $versionMeta
      */
     public function recordClinicalScoreEvent(
         OrgContext $ctx,
@@ -360,7 +383,7 @@ final class AttemptSubmitSideEffects
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      * @return array<string,mixed>
      */
     private function extractScoreContract(array $payload): array
@@ -373,7 +396,7 @@ final class AttemptSubmitSideEffects
         ];
 
         foreach ($candidates as $candidate) {
-            if (!is_array($candidate)) {
+            if (! is_array($candidate)) {
                 continue;
             }
             if (strtoupper((string) ($candidate['scale_code'] ?? '')) !== 'CLINICAL_COMBO_68') {
@@ -387,7 +410,7 @@ final class AttemptSubmitSideEffects
     }
 
     /**
-     * @param array<string,mixed> $scores
+     * @param  array<string,mixed>  $scores
      * @return array<string,array<string,mixed>>
      */
     private function extractClinicalScoreSnapshot(array $scores): array

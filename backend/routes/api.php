@@ -10,6 +10,7 @@ use App\Http\Controllers\API\V0_3\BigFiveOpsController;
 use App\Http\Controllers\API\V0_3\BootController as BootV0_3Controller;
 use App\Http\Controllers\API\V0_3\ClaimController as ClaimV03Controller;
 use App\Http\Controllers\API\V0_3\ComplianceDsarController;
+use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
@@ -165,7 +166,7 @@ Route::prefix('v0.3')->middleware([
             ->middleware('uuid:id')
             ->name('api.v0_3.attempts.report_pdf');
         // Share contract routes stay fixed; summary/click semantics are implemented in ShareController/services.
-        Route::get('/attempts/{id}/share', [ShareV03Controller::class, 'getShare'])
+        Route::match(['GET', 'POST'], '/attempts/{id}/share', [ShareV03Controller::class, 'getShare'])
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
 
         // 3) Commerce v2 (public with org context)
@@ -206,6 +207,19 @@ Route::prefix('v0.3')->middleware([
                 'throttle:api_track',
             ])
             ->where('shareId', '[A-Za-z0-9_-]{6,128}');
+        Route::post('/shares/{shareId}/compare-invites', [MbtiCompareInviteController::class, 'store'])
+            ->middleware([
+                \App\Http\Middleware\FmTokenOptional::class,
+                \App\Http\Middleware\LimitApiPublicPayloadSize::class,
+                'throttle:api_track',
+            ])
+            ->where('shareId', '[A-Za-z0-9_-]{6,128}');
+        Route::get('/compare/mbti/{inviteId}', [MbtiCompareInviteController::class, 'show'])
+            ->middleware([
+                \App\Http\Middleware\FmTokenOptional::class,
+                'throttle:api_track',
+                'uuid:inviteId',
+            ]);
     });
 
     Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])

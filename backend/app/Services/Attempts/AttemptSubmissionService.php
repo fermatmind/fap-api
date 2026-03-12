@@ -33,7 +33,7 @@ final class AttemptSubmissionService
             $normalizedUserId = $this->normalizeUserId($ctx->userId());
             $normalizedAnonId = $this->normalizeAnonId($ctx->anonId());
 
-            $fixedCtx = new OrgContext();
+            $fixedCtx = new OrgContext;
             $fixedCtx->set(
                 $orgId,
                 $normalizedUserId !== null ? (int) $normalizedUserId : null,
@@ -222,7 +222,7 @@ final class AttemptSubmissionService
             return;
         }
 
-        $ctx = new OrgContext();
+        $ctx = new OrgContext;
         $ctx->set(
             $orgId,
             $actorUserId !== null ? (int) $actorUserId : null,
@@ -265,7 +265,7 @@ final class AttemptSubmissionService
             ];
         }
 
-                $orgId = $ctx->orgId() ?? 0;
+        $orgId = $ctx->orgId() ?? 0;
         $actorUserId = $this->normalizeUserId($actorUserId);
         $actorAnonId = $this->normalizeAnonId($actorAnonId);
 
@@ -525,6 +525,13 @@ final class AttemptSubmissionService
             'invite_token' => $dto->inviteToken,
             'user_id' => $actorUserId,
             'anon_id' => $actorAnonId,
+            'share_id' => $dto->shareId,
+            'compare_invite_id' => $dto->compareInviteId,
+            'share_click_id' => $dto->shareClickId,
+            'entrypoint' => $dto->entrypoint,
+            'referrer' => $dto->referrer,
+            'landing_path' => $dto->landingPath,
+            'utm' => $dto->utm,
         ];
     }
 

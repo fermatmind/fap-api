@@ -4,14 +4,12 @@ namespace App\Services\Attempts;
 
 use App\DTO\Attempts\SubmitAttemptDTO;
 use App\Exceptions\Api\ApiProblemException;
-use App\Support\OrgContext;
 use App\Services\Scale\ScaleRolloutGate;
+use App\Support\OrgContext;
 
 class AttemptSubmitGuardService
 {
-    public function __construct(private AttemptSubmitService $core)
-    {
-    }
+    public function __construct(private AttemptSubmitService $core) {}
 
     public function handle(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto): array
     {
@@ -24,6 +22,13 @@ class AttemptSubmitGuardService
         $validityItems = $dto->validityItems;
         $durationMs = $dto->durationMs;
         $inviteToken = $dto->inviteToken;
+        $shareId = $dto->shareId;
+        $compareInviteId = $dto->compareInviteId;
+        $shareClickId = $dto->shareClickId;
+        $entrypoint = $dto->entrypoint;
+        $referrer = $dto->referrer;
+        $landingPath = $dto->landingPath;
+        $utm = $dto->utm;
         $actorUserId = $this->core->resolveUserId($ctx, $dto->userId);
         $actorAnonId = $this->core->resolveAnonId($ctx, $dto->anonId);
 
@@ -76,6 +81,13 @@ class AttemptSubmitGuardService
             'validity_items' => $validityItems,
             'duration_ms' => $durationMs,
             'invite_token' => $inviteToken,
+            'share_id' => $shareId,
+            'compare_invite_id' => $compareInviteId,
+            'share_click_id' => $shareClickId,
+            'entrypoint' => $entrypoint,
+            'referrer' => $referrer,
+            'landing_path' => $landingPath,
+            'utm' => $utm,
             'actor_user_id' => $actorUserId,
             'actor_anon_id' => $actorAnonId,
             'org_id' => $orgId,

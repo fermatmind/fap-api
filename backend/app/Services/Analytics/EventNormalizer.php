@@ -11,6 +11,7 @@ class EventNormalizer
         $props = self::ensureArray($payload['props'] ?? []);
         $meta = self::ensureArray($payload['meta_json'] ?? []);
         $mergedProps = array_merge($props, $meta);
+        $utm = self::ensureArray($mergedProps['utm'] ?? []);
 
         $eventName = self::firstNonEmpty([
             $payload['event_name'] ?? null,
@@ -140,18 +141,21 @@ class EventNormalizer
                 $payload['utmSource'] ?? null,
                 $mergedProps['utm_source'] ?? null,
                 $mergedProps['utmSource'] ?? null,
+                $utm['source'] ?? null,
             ])),
             'utm_medium' => self::toString(self::firstNonEmpty([
                 $payload['utm_medium'] ?? null,
                 $payload['utmMedium'] ?? null,
                 $mergedProps['utm_medium'] ?? null,
                 $mergedProps['utmMedium'] ?? null,
+                $utm['medium'] ?? null,
             ])),
             'utm_campaign' => self::toString(self::firstNonEmpty([
                 $payload['utm_campaign'] ?? null,
                 $payload['utmCampaign'] ?? null,
                 $mergedProps['utm_campaign'] ?? null,
                 $mergedProps['utmCampaign'] ?? null,
+                $utm['campaign'] ?? null,
             ])),
             'referrer' => self::toString(self::firstNonEmpty([
                 $payload['referrer'] ?? null,
@@ -211,8 +215,10 @@ class EventNormalizer
                 if ($trimmed === '') {
                     continue;
                 }
+
                 return $trimmed;
             }
+
             return $value;
         }
 
@@ -226,6 +232,7 @@ class EventNormalizer
         }
         if (is_string($value)) {
             $trimmed = trim($value);
+
             return $trimmed === '' ? null : $trimmed;
         }
 

@@ -165,7 +165,20 @@ class CommerceController extends Controller
             'order_no' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
+            'share_id' => ['nullable', 'string', 'max:128'],
+            'compare_invite_id' => ['nullable', 'string', 'max:128'],
+            'share_click_id' => ['nullable', 'string', 'max:128'],
+            'entrypoint' => ['nullable', 'string', 'max:128'],
+            'referrer' => ['nullable', 'string', 'max:2048'],
+            'landing_path' => ['nullable', 'string', 'max:2048'],
+            'utm' => ['nullable'],
+            'utm_source' => ['nullable', 'string', 'max:512'],
+            'utm_medium' => ['nullable', 'string', 'max:512'],
+            'utm_campaign' => ['nullable', 'string', 'max:512'],
+            'utm_term' => ['nullable', 'string', 'max:512'],
+            'utm_content' => ['nullable', 'string', 'max:512'],
         ]);
+        $attribution = $this->extractAttribution($request, $payload);
 
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
@@ -180,6 +193,9 @@ class CommerceController extends Controller
             $existing = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $existingOrderNo);
             if ($existing['ok'] ?? false) {
                 $order = $existing['order'];
+                if ($attribution !== []) {
+                    $this->orders->mergeAttribution((string) ($order->order_no ?? $existingOrderNo), $orgId, $attribution);
+                }
 
                 $provider = strtolower(trim((string) ($order->provider ?? '')));
                 if ($provider === '') {
@@ -229,13 +245,19 @@ class CommerceController extends Controller
             $provider,
             $idempotencyKey,
             $contactEmail,
-            $this->resolveRequestId($request)
+            $this->resolveRequestId($request),
+            $attribution
         );
 
         if (! ($created['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) data_get($created, 'error_code', data_get($created, 'error', '')));
             $message = trim((string) ($created['message'] ?? 'request failed.'));
             abort($status, $message);
+        }
+
+        $orderNoForAttribution = trim((string) data_get($created, 'order.order_no', $created['order_no'] ?? ''));
+        if ($orderNoForAttribution !== '' && $attribution !== []) {
+            $this->orders->mergeAttribution($orderNoForAttribution, $orgId, $attribution);
         }
 
         $order = $created['order'] ?? null;
@@ -740,5 +762,92 @@ class CommerceController extends Controller
             'refunded' => 'Order refunded.',
             default => 'Confirming your payment...',
         };
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function extractAttribution(Request $request, array $payload): array
+    {
+        $attribution = [];
+
+        foreach ([
+            'share_id' => 128,
+            'compare_invite_id' => 128,
+            'share_click_id' => 128,
+            'entrypoint' => 128,
+            'referrer' => 2048,
+            'landing_path' => 2048,
+        ] as $field => $maxLength) {
+            $value = $this->truncateNullableString($payload[$field] ?? $request->input($field), $maxLength);
+            if ($value !== null) {
+                $attribution[$field] = $value;
+            }
+        }
+
+        $utm = $this->normalizeUtm($payload['utm'] ?? $request->input('utm'));
+        $flatUtm = $this->normalizeFlatUtm($request, $payload);
+        $mergedUtm = array_replace($utm ?? [], $flatUtm);
+        if ($mergedUtm !== []) {
+            $attribution['utm'] = $mergedUtm;
+        }
+
+        return $attribution;
+    }
+
+    /**
+     * @return array<string, string>|null
+     */
+    private function normalizeUtm(mixed $value): ?array
+    {
+        if (! is_array($value)) {
+            return null;
+        }
+
+        $normalized = [];
+        foreach (['source', 'medium', 'campaign', 'term', 'content'] as $key) {
+            $candidate = $this->truncateNullableString($value[$key] ?? null, 512);
+            if ($candidate !== null) {
+                $normalized[$key] = $candidate;
+            }
+        }
+
+        return $normalized === [] ? null : $normalized;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, string>
+     */
+    private function normalizeFlatUtm(Request $request, array $payload): array
+    {
+        $normalized = [];
+        foreach (['source', 'medium', 'campaign', 'term', 'content'] as $key) {
+            $candidate = $this->truncateNullableString($payload['utm_'.$key] ?? $request->input('utm_'.$key), 512);
+            if ($candidate !== null) {
+                $normalized[$key] = $candidate;
+            }
+        }
+
+        return $normalized;
+    }
+
+    private function truncateNullableString(mixed $value, int $maxLength): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
+            return null;
+        }
+
+        if (mb_strlen($normalized, 'UTF-8') > $maxLength) {
+            $normalized = mb_substr($normalized, 0, $maxLength, 'UTF-8');
+        }
+
+        return $normalized;
     }
 }

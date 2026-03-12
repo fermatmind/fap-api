@@ -34,6 +34,7 @@ class OrderManager
         ?string $idempotencyKey = null,
         ?string $contactEmail = null,
         ?string $requestId = null,
+        array $attribution = [],
     ): array {
         $requestedSku = $this->skus->normalizeSku($sku);
         if ($requestedSku === '') {
@@ -99,7 +100,8 @@ class OrderManager
             $useIdempotency,
             $modulesIncluded,
             $contactEmailHash,
-            $requestId
+            $requestId,
+            $attribution
         ): array {
             $orderNo = 'ord_'.Str::uuid();
             $now = now();
@@ -107,6 +109,10 @@ class OrderManager
             $orderMeta = [];
             if ($modulesIncluded !== []) {
                 $orderMeta['modules_included'] = $modulesIncluded;
+            }
+            $normalizedAttribution = $this->normalizeAttribution($attribution);
+            if ($normalizedAttribution !== []) {
+                $orderMeta['attribution'] = $normalizedAttribution;
             }
 
             $row = [
@@ -364,6 +370,8 @@ class OrderManager
         }
 
         if (in_array($fromStatus, ['paid', 'fulfilled'], true)) {
+            $this->syncPurchasedInviteFromOrder($order, $paidAt);
+
             return [
                 'ok' => true,
                 'order' => $order,
@@ -413,6 +421,7 @@ class OrderManager
         }
 
         $order = DB::table('orders')->where('order_no', $orderNo)->where('org_id', $orgId)->first();
+        $this->syncPurchasedInviteFromOrder($order, $paidAt);
 
         return [
             'ok' => true,
@@ -445,6 +454,10 @@ class OrderManager
         }
 
         if ($fromStatus === $toStatus) {
+            if (in_array($toStatus, ['paid', 'fulfilled'], true)) {
+                $this->syncPurchasedInviteFromOrder($order, null);
+            }
+
             return [
                 'ok' => true,
                 'order' => $order,
@@ -497,11 +510,43 @@ class OrderManager
         }
 
         $order = DB::table('orders')->where('order_no', $orderNo)->first();
+        if (in_array($toStatus, ['paid', 'fulfilled'], true)) {
+            $this->syncPurchasedInviteFromOrder($order, null);
+        }
 
         return [
             'ok' => true,
             'order' => $order,
         ];
+    }
+
+    public function mergeAttribution(string $orderNo, int $orgId, array $attribution): void
+    {
+        $normalizedAttribution = $this->normalizeAttribution($attribution);
+        if ($normalizedAttribution === []) {
+            return;
+        }
+
+        $order = DB::table('orders')
+            ->where('order_no', trim($orderNo))
+            ->where('org_id', $orgId)
+            ->first();
+
+        if (! $order) {
+            return;
+        }
+
+        $meta = $this->decodeMeta($order->meta_json ?? null);
+        $existingAttribution = is_array($meta['attribution'] ?? null) ? $meta['attribution'] : [];
+        $meta['attribution'] = array_replace($existingAttribution, $normalizedAttribution);
+
+        DB::table('orders')
+            ->where('order_no', (string) $order->order_no)
+            ->where('org_id', $orgId)
+            ->update([
+                'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'updated_at' => now(),
+            ]);
     }
 
     private function isTransitionAllowed(string $fromStatus, string $toStatus): bool
@@ -636,6 +681,77 @@ class OrderManager
     private function reportPdfUrl(string $attemptId): string
     {
         return "/api/v0.3/attempts/{$attemptId}/report.pdf";
+    }
+
+    /**
+     * @param  array<string, mixed>  $attribution
+     * @return array<string, mixed>
+     */
+    private function normalizeAttribution(array $attribution): array
+    {
+        $normalized = [];
+
+        foreach ([
+            'share_id' => 128,
+            'compare_invite_id' => 128,
+            'share_click_id' => 128,
+            'entrypoint' => 128,
+            'referrer' => 2048,
+            'landing_path' => 2048,
+        ] as $field => $maxLength) {
+            $value = $this->trimOrNull($attribution[$field] ?? null);
+            if ($value === null) {
+                continue;
+            }
+
+            $normalized[$field] = mb_strlen($value, 'UTF-8') > $maxLength
+                ? mb_substr($value, 0, $maxLength, 'UTF-8')
+                : $value;
+        }
+
+        $utm = $attribution['utm'] ?? null;
+        if (is_array($utm)) {
+            $normalizedUtm = [];
+            foreach (['source', 'medium', 'campaign', 'term', 'content'] as $key) {
+                $value = $this->trimOrNull($utm[$key] ?? null);
+                if ($value !== null) {
+                    $normalizedUtm[$key] = mb_strlen($value, 'UTF-8') > 512
+                        ? mb_substr($value, 0, 512, 'UTF-8')
+                        : $value;
+                }
+            }
+
+            if ($normalizedUtm !== []) {
+                $normalized['utm'] = $normalizedUtm;
+            }
+        }
+
+        return $normalized;
+    }
+
+    private function syncPurchasedInviteFromOrder(?object $order, ?string $paidAt): void
+    {
+        if (! $order || ! Schema::hasTable('mbti_compare_invites')) {
+            return;
+        }
+
+        $meta = $this->decodeMeta($order->meta_json ?? null);
+        $attribution = is_array($meta['attribution'] ?? null) ? $meta['attribution'] : [];
+        $compareInviteId = trim((string) ($attribution['compare_invite_id'] ?? ''));
+        if ($compareInviteId === '') {
+            return;
+        }
+
+        $update = [
+            'invitee_order_no' => $this->trimOrNull((string) ($order->order_no ?? '')),
+            'purchased_at' => $paidAt !== null && trim($paidAt) !== '' ? $paidAt : ($order->paid_at ?? now()),
+            'status' => 'purchased',
+            'updated_at' => now(),
+        ];
+
+        DB::table('mbti_compare_invites')
+            ->where('id', $compareInviteId)
+            ->update($update);
     }
 
     private function normalizeRequestId(mixed $value): ?string

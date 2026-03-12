@@ -9,6 +9,7 @@ final class SubmitAttemptDTO
     /**
      * @param  array<int, array<string, mixed>>  $answers
      * @param  array<int, array{item_id:string,code:int}>  $validityItems
+     * @param  array<string, string>|null  $utm
      */
     public function __construct(
         public readonly array $answers,
@@ -20,6 +21,13 @@ final class SubmitAttemptDTO
         public readonly string $inviteToken,
         public readonly ?string $userId,
         public readonly ?string $anonId,
+        public readonly ?string $shareId,
+        public readonly ?string $compareInviteId,
+        public readonly ?string $shareClickId,
+        public readonly ?string $entrypoint,
+        public readonly ?string $referrer,
+        public readonly ?string $landingPath,
+        public readonly ?array $utm,
     ) {}
 
     /**
@@ -68,6 +76,19 @@ final class SubmitAttemptDTO
             $consent = [];
         }
 
+        $utm = $payload['utm'] ?? null;
+        if (! is_array($utm)) {
+            $utm = null;
+        }
+
+        $normalizedUtm = [];
+        foreach (['source', 'medium', 'campaign', 'term', 'content'] as $key) {
+            $value = self::nullableString($utm[$key] ?? null);
+            if ($value !== null) {
+                $normalizedUtm[$key] = $value;
+            }
+        }
+
         return new self(
             answers: $normalizedAnswers,
             validityItems: $normalizedValidityItems,
@@ -78,6 +99,13 @@ final class SubmitAttemptDTO
             inviteToken: trim((string) ($payload['invite_token'] ?? '')),
             userId: self::normalizeUserId($payload['user_id'] ?? null),
             anonId: self::nullableString($payload['anon_id'] ?? null),
+            shareId: self::nullableString($payload['share_id'] ?? null),
+            compareInviteId: self::nullableString($payload['compare_invite_id'] ?? null),
+            shareClickId: self::nullableString($payload['share_click_id'] ?? null),
+            entrypoint: self::nullableString($payload['entrypoint'] ?? null),
+            referrer: self::nullableString($payload['referrer'] ?? null),
+            landingPath: self::nullableString($payload['landing_path'] ?? null),
+            utm: $normalizedUtm !== [] ? $normalizedUtm : null,
         );
     }
 

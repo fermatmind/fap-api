@@ -369,6 +369,26 @@
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\FmTokenAuth"
                 ]
+            },
+            "post": {
+                "operationId": "post_api_v0_3_attempts_id_share",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ShareController@getShare",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ]
             }
         },
         "/api/v0.3/auth/guest": {
@@ -489,6 +509,30 @@
                     "api",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
                     "App\\Http\\Middleware\\NormalizeApiErrorContract"
+                ]
+            }
+        },
+        "/api/v0.3/compare/mbti/{inviteId}": {
+            "get": {
+                "operationId": "get_api_v0_3_compare_mbti_inviteid_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\MbtiCompareInviteController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:inviteId"
                 ]
             }
         },
@@ -1304,6 +1348,30 @@
                     }
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ShareController@click",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional",
+                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track"
+                ]
+            }
+        },
+        "/api/v0.3/shares/{shareId}/compare-invites": {
+            "post": {
+                "operationId": "post_api_v0_3_shares_shareid_compare_invites",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\MbtiCompareInviteController@store",
                 "x-laravel-middleware": [
                     "api",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",

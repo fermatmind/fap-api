@@ -23,6 +23,12 @@ final class RateLimitKeyEndpointsTest extends TestCase
         $shareClick = $this->findRoute('POST', 'api/v0.3/shares/{shareId}/click');
         $this->assertContains('throttle:api_track', $shareClick->gatherMiddleware());
 
+        $compareInviteCreate = $this->findRoute('POST', 'api/v0.3/shares/{shareId}/compare-invites');
+        $this->assertContains('throttle:api_track', $compareInviteCreate->gatherMiddleware());
+
+        $compareInviteView = $this->findRoute('GET', 'api/v0.3/compare/mbti/{inviteId}');
+        $this->assertContains('throttle:api_track', $compareInviteView->gatherMiddleware());
+
         $paymentWebhook = $this->findRoute('POST', 'api/v0.3/webhooks/payment/{provider}');
         $this->assertContains('throttle:api_webhook', $paymentWebhook->gatherMiddleware());
     }
@@ -117,6 +123,36 @@ final class RateLimitKeyEndpointsTest extends TestCase
 
         $response = $this->call('POST', '/api/v0.3/webhooks/payment/stripe', [], [], [], $server, $raw);
         $this->assertRateLimitContract($response->status(), $response->json(), 'RATE_LIMIT_WEBHOOK');
+    }
+
+    public function test_compare_invite_public_routes_share_track_rate_limit_contract(): void
+    {
+        $this->configureRateLimitGate([
+            'fap.rate_limits.api_track_per_minute' => 2,
+        ]);
+
+        $server = ['REMOTE_ADDR' => '198.51.100.44'];
+
+        $first = $this->withServerVariables($server)->postJson('/api/v0.3/shares/abc12345/compare-invites', []);
+        $second = $this->withServerVariables($server)->postJson('/api/v0.3/shares/abc12345/compare-invites', []);
+
+        $this->assertNotSame(429, $first->status());
+        $this->assertNotSame(429, $second->status());
+
+        $response = $this->withServerVariables($server)->postJson('/api/v0.3/shares/abc12345/compare-invites', []);
+        $this->assertRateLimitContract($response->status(), $response->json(), 'RATE_LIMIT_TRACK');
+
+        $getServer = ['REMOTE_ADDR' => '198.51.100.45'];
+        $inviteId = '11111111-1111-4111-8111-111111111111';
+
+        $firstGet = $this->withServerVariables($getServer)->getJson("/api/v0.3/compare/mbti/{$inviteId}");
+        $secondGet = $this->withServerVariables($getServer)->getJson("/api/v0.3/compare/mbti/{$inviteId}");
+
+        $this->assertNotSame(429, $firstGet->status());
+        $this->assertNotSame(429, $secondGet->status());
+
+        $thirdGet = $this->withServerVariables($getServer)->getJson("/api/v0.3/compare/mbti/{$inviteId}");
+        $this->assertRateLimitContract($thirdGet->status(), $thirdGet->json(), 'RATE_LIMIT_TRACK');
     }
 
     private function configureRateLimitGate(array $overrides = []): void
