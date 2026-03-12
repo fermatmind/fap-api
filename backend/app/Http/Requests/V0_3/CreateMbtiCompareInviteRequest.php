@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\V0_3;
 
 use App\Exceptions\Api\ApiProblemException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
 
-class ShareClickRequest extends FormRequest
+final class CreateMbtiCompareInviteRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -40,6 +42,11 @@ class ShareClickRequest extends FormRequest
             }
         }
 
+        $metaShareClickId = $this->normalizeString($mergedMeta['share_click_id'] ?? null, 128);
+        if ($metaShareClickId !== null) {
+            $mergedMeta['share_click_id'] = $metaShareClickId;
+        }
+
         if ($this->has('compare_intent')) {
             $mergedMeta['compare_intent'] = $this->boolean('compare_intent');
         } elseif (array_key_exists('compare_intent', $mergedMeta)) {
@@ -61,27 +68,19 @@ class ShareClickRequest extends FormRequest
     {
         return [
             'anon_id' => ['nullable', 'string', 'max:128'],
-            'occurred_at' => ['nullable', 'date'],
-            'meta_json' => ['nullable', 'array'],
-            'meta' => ['nullable'],
-            'ref' => ['nullable', 'string', 'max:1024'],
-            'ua' => ['nullable', 'string', 'max:1024'],
-            'ip' => ['nullable', 'string', 'max:64'],
+            'entrypoint' => ['nullable', 'string', 'max:128'],
+            'referrer' => ['nullable', 'string', 'max:2048'],
+            'landing_path' => ['nullable', 'string', 'max:2048'],
+            'compare_intent' => ['nullable', 'boolean'],
             'utm' => ['nullable'],
             'utm_source' => ['nullable', 'string', 'max:512'],
             'utm_medium' => ['nullable', 'string', 'max:512'],
             'utm_campaign' => ['nullable', 'string', 'max:512'],
             'utm_term' => ['nullable', 'string', 'max:512'],
             'utm_content' => ['nullable', 'string', 'max:512'],
-            'experiment' => ['nullable', 'string', 'max:64'],
-            'version' => ['nullable', 'string', 'max:64'],
-            'url' => ['nullable', 'string', 'max:2048'],
-            'trace_id' => ['nullable', 'string', 'max:128'],
-            'entrypoint' => ['nullable', 'string', 'max:128'],
-            'referrer' => ['nullable', 'string', 'max:2048'],
-            'landing_path' => ['nullable', 'string', 'max:2048'],
-            'compare_intent' => ['nullable', 'boolean'],
             'share_click_id' => ['nullable', 'string', 'max:128'],
+            'meta_json' => ['nullable', 'array'],
+            'meta' => ['nullable'],
         ];
     }
 

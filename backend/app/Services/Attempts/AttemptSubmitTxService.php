@@ -10,9 +10,7 @@ use Illuminate\Support\Str;
 
 class AttemptSubmitTxService
 {
-    public function __construct(private AttemptSubmitService $core)
-    {
-    }
+    public function __construct(private AttemptSubmitService $core) {}
 
     public function handle(OrgContext $ctx, array $canonicalized, array $scored): array
     {
@@ -27,6 +25,13 @@ class AttemptSubmitTxService
         $region = (string) ($canonicalized['region'] ?? '');
         $locale = (string) ($canonicalized['locale'] ?? '');
         $inviteToken = (string) ($canonicalized['invite_token'] ?? '');
+        $shareId = trim((string) ($canonicalized['share_id'] ?? ''));
+        $compareInviteId = trim((string) ($canonicalized['compare_invite_id'] ?? ''));
+        $shareClickId = trim((string) ($canonicalized['share_click_id'] ?? ''));
+        $entrypoint = trim((string) ($canonicalized['entrypoint'] ?? ''));
+        $referrer = trim((string) ($canonicalized['referrer'] ?? ''));
+        $landingPath = trim((string) ($canonicalized['landing_path'] ?? ''));
+        $utm = is_array($canonicalized['utm'] ?? null) ? $canonicalized['utm'] : [];
         $actorUserId = $canonicalized['actor_user_id'] ?? null;
         if ($actorUserId !== null) {
             $actorUserId = (string) $actorUserId;
@@ -70,6 +75,13 @@ class AttemptSubmitTxService
             $region,
             $locale,
             $inviteToken,
+            $shareId,
+            $compareInviteId,
+            $shareClickId,
+            $entrypoint,
+            $referrer,
+            $landingPath,
+            $utm,
             $creditBenefitCode,
             $entitlementBenefitCode,
             $scoreResult,
@@ -89,9 +101,9 @@ class AttemptSubmitTxService
                 ->lockForUpdate()
                 ->first();
 
-if (! $locked) {
-    throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
-}
+            if (! $locked) {
+                throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+            }
 
             $existingDigest = trim((string) ($locked->answers_digest ?? ''));
             if ($locked->submitted_at && $existingDigest !== '') {
@@ -109,6 +121,13 @@ if (! $locked) {
                             'dir_version' => (string) ($locked->dir_version ?? $dirVersion),
                             'scoring_spec_version' => (string) ($locked->scoring_spec_version ?? $scoringSpecVersion),
                             'invite_token' => $inviteToken,
+                            'share_id' => $shareId,
+                            'compare_invite_id' => $compareInviteId,
+                            'share_click_id' => $shareClickId,
+                            'entrypoint' => $entrypoint,
+                            'referrer' => $referrer,
+                            'landing_path' => $landingPath,
+                            'utm' => $utm,
                             'credit_benefit_code' => $creditBenefitCode,
                             'entitlement_benefit_code' => $entitlementBenefitCode,
                         ];
@@ -134,6 +153,13 @@ if (! $locked) {
                         'dir_version' => (string) ($locked->dir_version ?? $dirVersion),
                         'scoring_spec_version' => (string) ($locked->scoring_spec_version ?? $scoringSpecVersion),
                         'invite_token' => $inviteToken,
+                        'share_id' => $shareId,
+                        'compare_invite_id' => $compareInviteId,
+                        'share_click_id' => $shareClickId,
+                        'entrypoint' => $entrypoint,
+                        'referrer' => $referrer,
+                        'landing_path' => $landingPath,
+                        'utm' => $utm,
                         'credit_benefit_code' => $creditBenefitCode,
                         'entitlement_benefit_code' => $entitlementBenefitCode,
                     ];
@@ -305,6 +331,27 @@ if (! $locked) {
             if ($locked->started_at === null) {
                 $locked->started_at = now();
             }
+
+            $answersSummary = is_array($locked->answers_summary_json ?? null) ? $locked->answers_summary_json : [];
+            $answersSummaryMeta = is_array($answersSummary['meta'] ?? null) ? $answersSummary['meta'] : [];
+            foreach ([
+                'share_id' => $shareId,
+                'compare_invite_id' => $compareInviteId,
+                'share_click_id' => $shareClickId,
+                'entrypoint' => $entrypoint,
+                'referrer' => $referrer,
+                'landing_path' => $landingPath,
+            ] as $field => $value) {
+                if ($value !== '') {
+                    $answersSummaryMeta[$field] = $value;
+                }
+            }
+            if ($utm !== []) {
+                $answersSummaryMeta['utm'] = $utm;
+            }
+            $answersSummary['meta'] = $answersSummaryMeta;
+            $locked->answers_summary_json = $answersSummary;
+
             $locked->save();
 
             $this->core->answerPersistence()->persist($locked, $mergedAnswers, $durationMs, $scoringSpecVersion);
@@ -394,6 +441,13 @@ if (! $locked) {
                 'dir_version' => $dirVersion,
                 'scoring_spec_version' => $scoringSpecVersion,
                 'invite_token' => $inviteToken,
+                'share_id' => $shareId,
+                'compare_invite_id' => $compareInviteId,
+                'share_click_id' => $shareClickId,
+                'entrypoint' => $entrypoint,
+                'referrer' => $referrer,
+                'landing_path' => $landingPath,
+                'utm' => $utm,
                 'credit_benefit_code' => $creditBenefitCode,
                 'entitlement_benefit_code' => $entitlementBenefitCode,
             ];

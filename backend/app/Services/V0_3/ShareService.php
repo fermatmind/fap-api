@@ -69,6 +69,15 @@ class ShareService
         return $this->buildSharePayload($share, $attempt, $result);
     }
 
+    public function buildPublicSummaryPayload(
+        Attempt $attempt,
+        Result $result,
+        ?string $shareId = null,
+        ?string $createdAt = null
+    ): array {
+        return $this->buildCanonicalPayload(null, $attempt, $result, $shareId, $createdAt);
+    }
+
     public function resolveAttemptForAuth(string $attemptId, OrgContext $ctx): Attempt
     {
         return $this->findAccessibleAttempt($attemptId, $ctx);
@@ -183,31 +192,13 @@ class ShareService
 
     private function buildSharePayload(Share $share, Attempt $attempt, Result $result): array
     {
-        $summary = $this->buildShareSummary($share, $attempt, $result);
-        $shareId = (string) $share->id;
-
-        return [
-            'share_id' => $shareId,
-            'share_url' => $this->buildShareUrl($shareId),
-            'attempt_id' => (string) $attempt->id,
-            'created_at' => $share->created_at?->toISOString(),
-            'org_id' => (int) ($attempt->org_id ?? 0),
-            'content_package_version' => (string) ($attempt->content_package_version ?? $result->content_package_version ?? ''),
-            'type_code' => $summary['type_code'],
-            'type_name' => $summary['type_name'],
-            'id' => $shareId,
-            'scale_code' => $summary['scale_code'],
-            'locale' => $summary['locale'],
-            'title' => $summary['title'],
-            'subtitle' => $summary['subtitle'],
-            'summary' => $summary['summary'],
-            'tagline' => $summary['tagline'],
-            'rarity' => $summary['rarity'],
-            'tags' => $summary['tags'],
-            'dimensions' => $summary['dimensions'],
-            'primary_cta_label' => $summary['primary_cta_label'],
-            'primary_cta_path' => $summary['primary_cta_path'],
-        ];
+        return $this->buildCanonicalPayload(
+            $share,
+            $attempt,
+            $result,
+            (string) $share->id,
+            $share->created_at?->toISOString()
+        );
     }
 
     /**
@@ -227,7 +218,7 @@ class ShareService
      *   primary_cta_path:string
      * }
      */
-    private function buildShareSummary(Share $share, Attempt $attempt, Result $result): array
+    private function buildShareSummary(?Share $share, Attempt $attempt, Result $result): array
     {
         $resultJson = $this->normalizeArray($result->result_json ?? null);
         $report = $this->buildPublicSafeReportSnapshot($attempt, $result);
@@ -235,7 +226,7 @@ class ShareService
         $identityCard = $this->normalizeArray($report['identity_card'] ?? null);
         $identityLayer = $this->normalizeArray(data_get($report, 'layers.identity'));
 
-        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? $share->scale_code ?? '')));
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? ($share?->scale_code ?? '') ?? '')));
         if ($scaleCode === '') {
             $scaleCode = 'MBTI';
         }
@@ -627,5 +618,57 @@ class ShareService
         $segment = $locale === 'zh-CN' ? 'zh' : 'en';
 
         return '/'.$segment.'/tests/'.rawurlencode($slug);
+    }
+
+    private function buildCanonicalPayload(
+        ?Share $share,
+        Attempt $attempt,
+        Result $result,
+        ?string $shareId,
+        ?string $createdAt
+    ): array {
+        $summary = $this->buildShareSummary($share, $attempt, $result);
+        $resolvedShareId = trim((string) $shareId);
+        $locale = (string) ($summary['locale'] ?? 'zh-CN');
+        $compareEnabled = strtoupper((string) ($summary['scale_code'] ?? '')) === 'MBTI';
+
+        return [
+            'share_id' => $resolvedShareId !== '' ? $resolvedShareId : null,
+            'share_url' => $resolvedShareId !== '' ? $this->buildLocalizedShareUrl($resolvedShareId, $locale) : null,
+            'attempt_id' => (string) $attempt->id,
+            'created_at' => $createdAt,
+            'org_id' => (int) ($attempt->org_id ?? 0),
+            'content_package_version' => (string) ($attempt->content_package_version ?? $result->content_package_version ?? ''),
+            'type_code' => $summary['type_code'],
+            'type_name' => $summary['type_name'],
+            'id' => $resolvedShareId !== '' ? $resolvedShareId : null,
+            'scale_code' => $summary['scale_code'],
+            'locale' => $locale,
+            'title' => $summary['title'],
+            'subtitle' => $summary['subtitle'],
+            'summary' => $summary['summary'],
+            'tagline' => $summary['tagline'],
+            'rarity' => $summary['rarity'],
+            'tags' => $summary['tags'],
+            'dimensions' => $summary['dimensions'],
+            'primary_cta_label' => $summary['primary_cta_label'],
+            'primary_cta_path' => $summary['primary_cta_path'],
+            'compare_enabled' => $compareEnabled,
+            'compare_cta_label' => $compareEnabled
+                ? $this->resolveCompareCtaLabel($locale)
+                : null,
+        ];
+    }
+
+    private function buildLocalizedShareUrl(string $shareId, string $locale): string
+    {
+        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+
+        return rtrim((string) config('app.frontend_url', 'http://localhost'), '/').'/'.$segment.'/share/'.$shareId;
+    }
+
+    private function resolveCompareCtaLabel(string $locale): string
+    {
+        return $locale === 'zh-CN' ? '邀请朋友来测并对比' : 'Invite a friend to compare';
     }
 }

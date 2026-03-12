@@ -6,10 +6,7 @@ namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
 use App\Models\Result;
-use App\Services\Commerce\EntitlementManager;
-use App\Services\Legacy\LegacyShareFlowService;
-use App\Services\V0_3\ShareFlowService;
-use App\Support\OrgContext;
+use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -19,125 +16,211 @@ final class ShareFlowCoreAlignmentTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_v03_and_legacy_share_flow_return_aligned_payloads_for_same_input(): void
+    public function test_attempt_share_get_and_post_return_aligned_payloads(): void
     {
-        $orgId = 123;
-        $attemptId = (string) Str::uuid();
-        $anonId = 'anon_share_flow_alignment';
-        $benefitCode = 'MBTI_REPORT_FULL';
+        $this->seedScales();
 
-        $this->seedScaleRegistry($orgId, $benefitCode);
-        $this->seedAttemptAndResult($orgId, $attemptId, $anonId);
+        $anonId = 'anon_share_alignment_get_post';
+        $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $token = $this->issueAnonToken($anonId);
 
-        $ctx = new OrgContext;
-        $ctx->set($orgId, null, 'public', $anonId);
-        app()->instance(OrgContext::class, $ctx);
-
-        app(EntitlementManager::class)->grantAttemptUnlock(
-            $orgId,
-            null,
-            $anonId,
-            $benefitCode,
-            $attemptId,
-            null
-        );
-
-        $input = [
-            'experiment' => 'exp_alignment',
-            'version' => '1.0.0',
-            'channel' => 'miniapp',
-            'client_platform' => 'wechat',
-            'entry_page' => 'result_page',
+        $headers = [
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => $anonId,
         ];
 
-        $v03 = app(ShareFlowService::class)->getShareLinkForAttempt($attemptId, $input);
-        $legacy = app(LegacyShareFlowService::class)->getShareLinkForAttempt($attemptId, $input);
+        $get = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/share");
+        $post = $this->withHeaders($headers)->postJson("/api/v0.3/attempts/{$attemptId}/share");
 
-        $this->assertSame((string) ($v03['share_id'] ?? ''), (string) ($legacy['share_id'] ?? ''));
-        $this->assertSame((string) ($v03['share_url'] ?? ''), (string) ($legacy['share_url'] ?? ''));
-        $this->assertSame((string) ($v03['attempt_id'] ?? ''), (string) ($legacy['attempt_id'] ?? ''));
-        $this->assertSame((int) ($v03['org_id'] ?? -1), (int) ($legacy['org_id'] ?? -2));
-        $this->assertSame((string) ($v03['type_code'] ?? ''), (string) ($legacy['type_code'] ?? ''));
-        $this->assertNotSame('', trim((string) ($v03['type_name'] ?? '')));
-        $this->assertArrayHasKey('title', $v03);
-        $this->assertArrayHasKey('summary', $v03);
+        $get->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('compare_enabled', true)
+            ->assertJsonPath('compare_cta_label', '邀请朋友来测并对比')
+            ->assertJsonPath('primary_cta_path', '/zh/tests/mbti-personality-test-16-personality-types');
+        $post->assertOk()
+            ->assertJsonPath('ok', true);
 
-        $shareId = (string) ($v03['share_id'] ?? '');
+        foreach ([
+            'share_id',
+            'share_url',
+            'attempt_id',
+            'org_id',
+            'content_package_version',
+            'type_code',
+            'type_name',
+            'id',
+            'scale_code',
+            'locale',
+            'title',
+            'subtitle',
+            'summary',
+            'tagline',
+            'rarity',
+            'tags',
+            'dimensions',
+            'primary_cta_label',
+            'primary_cta_path',
+            'compare_enabled',
+            'compare_cta_label',
+        ] as $field) {
+            $this->assertSame($get->json($field), $post->json($field), "share field mismatch for {$field}");
+        }
+
+        $this->assertStringContainsString('/zh/share/'.$get->json('share_id'), (string) $get->json('share_url'));
+    }
+
+    public function test_attempt_share_and_public_share_view_return_aligned_summary_payloads(): void
+    {
+        $this->seedScales();
+
+        $anonId = 'anon_share_alignment_view';
+        $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $token = $this->issueAnonToken($anonId);
+
+        $share = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => $anonId,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/share");
+
+        $share->assertOk();
+        $shareId = (string) $share->json('share_id');
         $this->assertNotSame('', $shareId);
 
-        $v03View = app(ShareFlowService::class)->getShareView($shareId);
-        $legacyView = app(LegacyShareFlowService::class)->getShareView($shareId);
+        $view = $this->getJson("/api/v0.3/shares/{$shareId}");
+        $view->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('compare_enabled', true)
+            ->assertJsonPath('compare_cta_label', '邀请朋友来测并对比');
 
-        $this->assertSame((string) ($v03View['share_id'] ?? ''), (string) ($legacyView['share_id'] ?? ''));
-        $this->assertSame((string) ($v03View['attempt_id'] ?? ''), (string) ($legacyView['attempt_id'] ?? ''));
-        $this->assertSame((int) ($v03View['org_id'] ?? -1), (int) ($legacyView['org_id'] ?? -2));
-        $this->assertSame((string) ($v03View['type_code'] ?? ''), (string) ($legacyView['type_code'] ?? ''));
-        $this->assertNotSame('', trim((string) ($v03View['type_name'] ?? '')));
-        $this->assertArrayHasKey('dimensions', $v03View);
+        foreach ([
+            'share_id',
+            'share_url',
+            'attempt_id',
+            'org_id',
+            'content_package_version',
+            'type_code',
+            'type_name',
+            'id',
+            'scale_code',
+            'locale',
+            'title',
+            'subtitle',
+            'summary',
+            'tagline',
+            'rarity',
+            'tags',
+            'dimensions',
+            'primary_cta_label',
+            'primary_cta_path',
+            'compare_enabled',
+            'compare_cta_label',
+        ] as $field) {
+            $this->assertSame($share->json($field), $view->json($field), "share/view field mismatch for {$field}");
+        }
+
+        foreach ([
+            'report',
+            'result',
+            'offers',
+            'recommended_reads',
+            'layers',
+            'sections',
+            'cta',
+            'report_url',
+            'report_pdf_url',
+            'private_result_path',
+        ] as $forbiddenField) {
+            $view->assertJsonMissingPath($forbiddenField);
+        }
     }
 
-    private function seedScaleRegistry(int $orgId, string $benefitCode): void
+    private function seedScales(): void
     {
-        $now = now();
-        DB::table('scales_registry')->updateOrInsert(
-            ['code' => 'MBTI'],
-            [
-                'org_id' => $orgId,
-                'primary_slug' => 'mbti',
-                'slugs_json' => json_encode(['mbti'], JSON_UNESCAPED_UNICODE),
-                'driver_type' => 'questionnaire',
-                'default_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
-                'default_region' => 'CN_MAINLAND',
-                'default_locale' => 'zh-CN',
-                'default_dir_version' => 'MBTI-CN-v0.3',
-                'capabilities_json' => json_encode([], JSON_UNESCAPED_UNICODE),
-                'view_policy_json' => json_encode([], JSON_UNESCAPED_UNICODE),
-                'commercial_json' => json_encode(['report_benefit_code' => $benefitCode], JSON_UNESCAPED_UNICODE),
-                'seo_schema_json' => json_encode([], JSON_UNESCAPED_UNICODE),
-                'is_public' => 1,
-                'is_active' => 1,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ]
-        );
+        (new ScaleRegistrySeeder)->run();
     }
 
-    private function seedAttemptAndResult(int $orgId, string $attemptId, string $anonId): void
+    private function issueAnonToken(string $anonId): string
     {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
+    }
+
+    private function createMbtiAttemptWithResult(string $anonId): string
+    {
+        $attemptId = (string) Str::uuid();
+
         Attempt::create([
             'id' => $attemptId,
-            'org_id' => $orgId,
+            'org_id' => 0,
             'anon_id' => $anonId,
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 1,
+            'question_count' => 144,
             'client_platform' => 'test',
             'answers_summary_json' => ['stage' => 'seed'],
             'started_at' => now()->subMinute(),
             'submitted_at' => now(),
-            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
-            'dir_version' => 'MBTI-CN-v0.3',
+            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'),
             'content_package_version' => 'v0.3',
             'scoring_spec_version' => '2026.01',
         ]);
 
         Result::create([
             'id' => (string) Str::uuid(),
-            'org_id' => $orgId,
+            'org_id' => 0,
             'attempt_id' => $attemptId,
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.3',
             'type_code' => 'INTJ-A',
             'scores_json' => ['total' => 100],
-            'is_valid' => true,
-            'computed_at' => now(),
-            'result_json' => ['type_code' => 'INTJ-A'],
-            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
-            'dir_version' => 'MBTI-CN-v0.3',
+            'scores_pct' => [
+                'EI' => 35,
+                'SN' => 72,
+                'TF' => 68,
+                'JP' => 63,
+                'AT' => 58,
+            ],
+            'axis_states' => [
+                'EI' => 'clear',
+                'SN' => 'clear',
+                'TF' => 'clear',
+                'JP' => 'moderate',
+                'AT' => 'moderate',
+            ],
+            'profile_version' => 'mbti32-v2.5',
+            'content_package_version' => 'v0.3',
+            'result_json' => [
+                'type_code' => 'INTJ-A',
+                'type_name' => '建筑师型',
+                'summary' => 'Public-safe share summary.',
+                'tagline' => '冷静的长期规划者',
+                'rarity' => '约 2%',
+                'keywords' => ['战略', '独立', '前瞻'],
+            ],
+            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'),
             'scoring_spec_version' => '2026.01',
             'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
         ]);
+
+        return $attemptId;
     }
 }

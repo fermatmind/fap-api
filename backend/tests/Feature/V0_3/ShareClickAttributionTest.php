@@ -96,6 +96,40 @@ final class ShareClickAttributionTest extends TestCase
         $this->assertSame((string) $share->attempt_id, data_get($event->meta_json, 'attempt_id'));
     }
 
+    public function test_click_accepts_flat_utm_fields_and_normalizes_them_into_nested_utm_meta(): void
+    {
+        $share = $this->createShareFixture('flat_utm_owner');
+
+        $response = $this->postJson("/api/v0.3/shares/{$share->id}/click", [
+            'anon_id' => 'flat_utm_probe',
+            'utm_source' => 'share',
+            'utm_medium' => 'organic',
+            'utm_campaign' => 'pr07a',
+            'utm_term' => 'mbti_compare',
+            'utm_content' => 'invite_card',
+            'entrypoint' => 'share_page',
+            'landing_path' => '/zh/share/'.(string) $share->id,
+            'share_click_id' => 'clk_flat_001',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('share_id', (string) $share->id);
+
+        $event = Event::query()
+            ->where('event_code', 'share_click')
+            ->where('share_id', (string) $share->id)
+            ->latest('created_at')
+            ->firstOrFail();
+
+        $this->assertSame('share', data_get($event->meta_json, 'utm.source'));
+        $this->assertSame('organic', data_get($event->meta_json, 'utm.medium'));
+        $this->assertSame('pr07a', data_get($event->meta_json, 'utm.campaign'));
+        $this->assertSame('mbti_compare', data_get($event->meta_json, 'utm.term'));
+        $this->assertSame('invite_card', data_get($event->meta_json, 'utm.content'));
+        $this->assertSame('clk_flat_001', data_get($event->meta_json, 'share_click_id'));
+    }
+
     private function createShareFixture(string $ownerAnonId): Share
     {
         $attemptId = (string) Str::uuid();
