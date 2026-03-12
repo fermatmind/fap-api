@@ -2,8 +2,6 @@
 
 namespace App\Internal\Commerce;
 
-use App\Jobs\GenerateReportPdfJob;
-use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\BenefitWalletService;
@@ -27,11 +25,9 @@ use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Contracts\Cache\LockTimeoutException;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 class PaymentWebhookHandlerCore
 {
@@ -180,7 +176,6 @@ class PaymentWebhookHandlerCore
 
         return $normalizedResult;
     }
-
 
     public function gatewayFor(string $provider): ?PaymentGatewayInterface
     {
@@ -718,6 +713,55 @@ class PaymentWebhookHandlerCore
         }
 
         return [];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function extractOrderAttribution(object $order): array
+    {
+        $meta = $this->decodeMeta($order->meta_json ?? null);
+        $attribution = is_array($meta['attribution'] ?? null) ? $meta['attribution'] : [];
+        $normalized = [];
+
+        foreach ([
+            'share_id' => 128,
+            'compare_invite_id' => 128,
+            'share_click_id' => 128,
+            'entrypoint' => 128,
+            'referrer' => 2048,
+            'landing_path' => 2048,
+        ] as $field => $maxLength) {
+            $value = is_scalar($attribution[$field] ?? null) ? trim((string) $attribution[$field]) : '';
+            if ($value === '') {
+                continue;
+            }
+
+            $normalized[$field] = mb_strlen($value, 'UTF-8') > $maxLength
+                ? mb_substr($value, 0, $maxLength, 'UTF-8')
+                : $value;
+        }
+
+        $utm = $attribution['utm'] ?? null;
+        if (is_array($utm)) {
+            $normalizedUtm = [];
+            foreach (['source', 'medium', 'campaign', 'term', 'content'] as $key) {
+                $value = is_scalar($utm[$key] ?? null) ? trim((string) $utm[$key]) : '';
+                if ($value === '') {
+                    continue;
+                }
+
+                $normalizedUtm[$key] = mb_strlen($value, 'UTF-8') > 512
+                    ? mb_substr($value, 0, 512, 'UTF-8')
+                    : $value;
+            }
+
+            if ($normalizedUtm !== []) {
+                $normalized['utm'] = $normalizedUtm;
+            }
+        }
+
+        return $normalized;
     }
 
     /**
@@ -1288,6 +1332,8 @@ class PaymentWebhookHandlerCore
 
         $email = '';
         $resolvedUserId = '';
+        $attribution = [];
+        $orderRow = null;
 
         $candidateUserIds = [];
         $fromEvent = trim((string) ($eventUserId ?? ''));
@@ -1309,6 +1355,7 @@ class PaymentWebhookHandlerCore
                 if ($fromOrder !== '') {
                     $candidateUserIds[] = $fromOrder;
                 }
+                $attribution = $this->extractOrderAttribution($orderRow);
             }
         }
 
@@ -1342,7 +1389,8 @@ class PaymentWebhookHandlerCore
                 $email,
                 $attemptId,
                 $orderNo !== '' ? $orderNo : null,
-                $productSummary !== '' ? $productSummary : null
+                $productSummary !== '' ? $productSummary : null,
+                $attribution
             );
         } catch (\Throwable $e) {
             Log::warning('PAYMENT_WEBHOOK_POST_COMMIT_QUEUE_EMAIL_FAILED', [

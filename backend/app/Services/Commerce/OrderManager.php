@@ -293,7 +293,19 @@ class OrderManager
     }
 
     /**
-     * @return array{attempt_id:?string,delivery:array{can_view_report:bool,report_url:?string,can_download_pdf:bool,report_pdf_url:?string,can_resend:bool}}
+     * @return array{
+     *     attempt_id:?string,
+     *     delivery:array{
+     *         can_view_report:bool,
+     *         report_url:?string,
+     *         can_download_pdf:bool,
+     *         report_pdf_url:?string,
+     *         can_resend:bool,
+     *         contact_email_present:bool,
+     *         last_delivery_email_sent_at:?string,
+     *         can_request_claim_email:bool
+     *     }
+     * }
      */
     public function presentOrderDelivery(object $order): array
     {
@@ -333,7 +345,8 @@ class OrderManager
             (string) ($delivery['delivery_email'] ?? ''),
             (string) ($delivery['attempt_id'] ?? ''),
             $this->trimOrNull((string) ($order->order_no ?? '')),
-            $this->resolveOrderProductSummary($order)
+            $this->resolveOrderProductSummary($order),
+            $this->extractAttributionFromOrder($order)
         );
 
         return [
@@ -341,6 +354,80 @@ class OrderManager
             'queued' => (bool) ($queued['ok'] ?? false),
             'order' => $order,
             'delivery' => $this->presentCompiledOrderDeliveryState($delivery),
+        ];
+    }
+
+    /**
+     * @return array{
+     *     eligible:bool,
+     *     order:?object,
+     *     attempt_id:?string,
+     *     outbox_user_id:?string,
+     *     attribution:array<string,mixed>
+     * }
+     */
+    public function resolveClaimRequestContext(int $orgId, string $orderNo, string $email): array
+    {
+        $normalizedEmail = $this->normalizeEmail($email);
+        if ($normalizedEmail === null) {
+            return [
+                'eligible' => false,
+                'order' => null,
+                'attempt_id' => null,
+                'outbox_user_id' => null,
+                'attribution' => [],
+            ];
+        }
+
+        $order = DB::table('orders')
+            ->where('order_no', trim($orderNo))
+            ->where('org_id', $orgId)
+            ->first();
+        if (! $order) {
+            return [
+                'eligible' => false,
+                'order' => null,
+                'attempt_id' => null,
+                'outbox_user_id' => null,
+                'attribution' => [],
+            ];
+        }
+
+        $delivery = $this->compileOrderDeliveryState($order);
+        $attemptId = $this->trimOrNull((string) ($delivery['attempt_id'] ?? ''));
+        if ($attemptId === null || ($delivery['can_request_claim_email'] ?? false) !== true) {
+            return [
+                'eligible' => false,
+                'order' => $order,
+                'attempt_id' => $attemptId,
+                'outbox_user_id' => null,
+                'attribution' => $this->extractAttributionFromOrder($order),
+            ];
+        }
+
+        $emailMatches = $this->emailMatchesOrderContact($order, $normalizedEmail)
+            || $this->emailMatchesOrderUser($order, $normalizedEmail)
+            || $this->emailOutbox->hasHistoricalRecipient(
+                $attemptId,
+                $this->trimOrNull((string) ($order->order_no ?? '')),
+                $normalizedEmail
+            );
+
+        $outboxUserId = $this->trimOrNull((string) ($delivery['delivery_user_id'] ?? ''));
+        if ($outboxUserId === null) {
+            $outboxUserId = $this->emailOutbox->resolveDeliveryUserId(
+                $this->trimOrNull((string) ($order->user_id ?? '')),
+                $this->trimOrNull((string) ($order->anon_id ?? '')),
+                $attemptId
+            );
+        }
+
+        return [
+            'eligible' => $emailMatches && $outboxUserId !== null,
+            'order' => $order,
+            'attempt_id' => $attemptId,
+            'outbox_user_id' => $outboxUserId,
+            'attribution' => $this->extractAttributionFromOrder($order),
         ];
     }
 
@@ -587,7 +674,19 @@ class OrderManager
     }
 
     /**
-     * @return array{attempt_id:?string,report_url:?string,report_pdf_url:?string,can_view_report:bool,can_download_pdf:bool,can_resend:bool,delivery_email:?string,delivery_user_id:?string}
+     * @return array{
+     *     attempt_id:?string,
+     *     report_url:?string,
+     *     report_pdf_url:?string,
+     *     can_view_report:bool,
+     *     can_download_pdf:bool,
+     *     can_resend:bool,
+     *     delivery_email:?string,
+     *     delivery_user_id:?string,
+     *     contact_email_present:bool,
+     *     last_delivery_email_sent_at:?string,
+     *     can_request_claim_email:bool
+     * }
      */
     private function compileOrderDeliveryState(object $order): array
     {
@@ -607,6 +706,13 @@ class OrderManager
 
         $deliveryEmail = $this->trimOrNull((string) ($recipient['email'] ?? ''));
         $deliveryUserId = $this->trimOrNull((string) ($recipient['user_id'] ?? ''));
+        $contactEmailPresent = $deliveryEmail !== null || $this->orderHasContactEmailHash($order);
+        $lastDeliveryEmailSentAt = $attemptId !== null
+            ? $this->emailOutbox->lastDeliveryEmailSentAt(
+                $attemptId,
+                $this->trimOrNull((string) ($order->order_no ?? ''))
+            )
+            : null;
 
         return [
             'attempt_id' => $attemptId,
@@ -617,12 +723,36 @@ class OrderManager
             'can_resend' => $deliveryEligible && $deliveryEmail !== null && $deliveryUserId !== null,
             'delivery_email' => $deliveryEmail,
             'delivery_user_id' => $deliveryUserId,
+            'contact_email_present' => $contactEmailPresent,
+            'last_delivery_email_sent_at' => $lastDeliveryEmailSentAt,
+            'can_request_claim_email' => $deliveryEligible && $contactEmailPresent,
         ];
     }
 
     /**
-     * @param  array{attempt_id:?string,report_url:?string,report_pdf_url:?string,can_view_report:bool,can_download_pdf:bool,can_resend:bool,delivery_email:?string,delivery_user_id:?string}  $delivery
-     * @return array{can_view_report:bool,report_url:?string,can_download_pdf:bool,report_pdf_url:?string,can_resend:bool}
+     * @param  array{
+     *     attempt_id:?string,
+     *     report_url:?string,
+     *     report_pdf_url:?string,
+     *     can_view_report:bool,
+     *     can_download_pdf:bool,
+     *     can_resend:bool,
+     *     delivery_email:?string,
+     *     delivery_user_id:?string,
+     *     contact_email_present:bool,
+     *     last_delivery_email_sent_at:?string,
+     *     can_request_claim_email:bool
+     * }  $delivery
+     * @return array{
+     *     can_view_report:bool,
+     *     report_url:?string,
+     *     can_download_pdf:bool,
+     *     report_pdf_url:?string,
+     *     can_resend:bool,
+     *     contact_email_present:bool,
+     *     last_delivery_email_sent_at:?string,
+     *     can_request_claim_email:bool
+     * }
      */
     private function presentCompiledOrderDeliveryState(array $delivery): array
     {
@@ -632,6 +762,9 @@ class OrderManager
             'can_download_pdf' => (bool) ($delivery['can_download_pdf'] ?? false),
             'report_pdf_url' => $delivery['report_pdf_url'] ?? null,
             'can_resend' => (bool) ($delivery['can_resend'] ?? false),
+            'contact_email_present' => (bool) ($delivery['contact_email_present'] ?? false),
+            'last_delivery_email_sent_at' => $delivery['last_delivery_email_sent_at'] ?? null,
+            'can_request_claim_email' => (bool) ($delivery['can_request_claim_email'] ?? false),
         ];
     }
 
@@ -671,6 +804,17 @@ class OrderManager
         }
 
         return null;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function extractAttributionFromOrder(object $order): array
+    {
+        $meta = $this->decodeMeta($order->meta_json ?? null);
+        $attribution = is_array($meta['attribution'] ?? null) ? $meta['attribution'] : [];
+
+        return $this->normalizeAttribution($attribution);
     }
 
     private function reportUrl(string $attemptId): string
@@ -922,6 +1066,34 @@ class OrderManager
         }
 
         return $hash;
+    }
+
+    private function orderHasContactEmailHash(object $order): bool
+    {
+        return Schema::hasColumn('orders', 'contact_email_hash')
+            && $this->normalizeEmailHash((string) ($order->contact_email_hash ?? '')) !== null;
+    }
+
+    private function emailMatchesOrderContact(object $order, string $email): bool
+    {
+        if (! $this->orderHasContactEmailHash($order)) {
+            return false;
+        }
+
+        return hash('sha256', $email) === strtolower(trim((string) ($order->contact_email_hash ?? '')));
+    }
+
+    private function emailMatchesOrderUser(object $order, string $email): bool
+    {
+        $userId = $this->trimOrNull((string) ($order->user_id ?? ''));
+        if ($userId === null || ! Schema::hasTable('users') || ! Schema::hasColumn('users', 'email')) {
+            return false;
+        }
+
+        $candidate = DB::table('users')->where('id', $userId)->value('email');
+        $normalized = $this->normalizeEmail((string) ($candidate ?? ''));
+
+        return $normalized !== null && $normalized === $email;
     }
 
     private function shouldWriteScaleIdentityColumns(): bool

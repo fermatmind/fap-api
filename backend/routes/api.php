@@ -10,6 +10,8 @@ use App\Http\Controllers\API\V0_3\BigFiveOpsController;
 use App\Http\Controllers\API\V0_3\BootController as BootV0_3Controller;
 use App\Http\Controllers\API\V0_3\ClaimController as ClaimV03Controller;
 use App\Http\Controllers\API\V0_3\ComplianceDsarController;
+use App\Http\Controllers\API\V0_3\EmailCaptureController;
+use App\Http\Controllers\API\V0_3\EmailPreferenceController;
 use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
@@ -178,6 +180,13 @@ Route::prefix('v0.3')->middleware([
             ->middleware([\App\Http\Middleware\FmTokenOptional::class, 'throttle:api_order_lookup']);
         Route::post('/orders/{order_no}/resend', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@resend')
             ->middleware(\App\Http\Middleware\FmTokenOptional::class);
+        Route::post('/claim/report', [ClaimV03Controller::class, 'requestReport'])
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
+        Route::post('/email/capture', [EmailCaptureController::class, 'store'])
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
+        Route::get('/email/preferences', [EmailPreferenceController::class, 'show']);
+        Route::post('/email/preferences', [EmailPreferenceController::class, 'update']);
+        Route::post('/email/unsubscribe', [EmailPreferenceController::class, 'unsubscribe']);
         Route::post('/orders', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder')
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
         Route::post('/orders/stub', static function (

@@ -129,7 +129,7 @@ class CommerceController extends Controller
         $ownershipVerified = (bool) ($result['ownership_verified'] ?? true);
         $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
         $message = $this->publicOrderMessage((string) ($order->status ?? ''));
-        $delivery = $this->orders->presentOrderDelivery($order);
+        $delivery = $this->buildOrderDelivery($order);
 
         if (! $ownershipVerified) {
             return response()->json([
@@ -352,7 +352,7 @@ class CommerceController extends Controller
             ], 404);
         }
 
-        $delivery = $this->orders->presentOrderDelivery($order);
+        $delivery = $this->buildOrderDelivery($order);
 
         return response()->json([
             'ok' => true,
@@ -738,6 +738,14 @@ class CommerceController extends Controller
         }
 
         return $email;
+    }
+
+    /**
+     * @return array{attempt_id:?string,delivery:array<string,mixed>}
+     */
+    private function buildOrderDelivery(object $order): array
+    {
+        return $this->orders->presentOrderDelivery($order);
     }
 
     private function normalizePublicOrderStatus(string $status): string

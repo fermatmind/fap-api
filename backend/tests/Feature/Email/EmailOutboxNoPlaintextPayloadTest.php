@@ -18,13 +18,13 @@ final class EmailOutboxNoPlaintextPayloadTest extends TestCase
 
     public function test_outbox_writes_masked_plaintext_columns_and_sanitized_payload_json(): void
     {
-        $userId = 'email_outbox_user_' . random_int(1000, 9999);
-        $email = 'buyer+' . random_int(1000, 9999) . '@example.com';
+        $userId = 'email_outbox_user_'.random_int(1000, 9999);
+        $email = 'buyer+'.random_int(1000, 9999).'@example.com';
         $attemptId = (string) Str::uuid();
 
         DB::table('attempts')->insert([
             'id' => $attemptId,
-            'ticket_code' => 'FMT-' . strtoupper(substr(str_replace('-', '', (string) Str::uuid()), 0, 8)),
+            'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', (string) Str::uuid()), 0, 8)),
             'org_id' => 0,
             'anon_id' => 'anon_email_outbox',
             'user_id' => null,
@@ -88,6 +88,7 @@ final class EmailOutboxNoPlaintextPayloadTest extends TestCase
             $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
             $this->assertIsArray($payloadJson);
             $this->assertSame($attemptId, (string) ($payloadJson['attempt_id'] ?? ''));
+            $this->assertArrayHasKey('attribution', $payloadJson);
             $this->assertArrayNotHasKey('email', $payloadJson);
             $this->assertArrayNotHasKey('to_email', $payloadJson);
             $this->assertArrayNotHasKey('claim_token', $payloadJson);
@@ -97,6 +98,7 @@ final class EmailOutboxNoPlaintextPayloadTest extends TestCase
             $this->assertIsArray($payloadEncDecoded);
             $this->assertSame($attemptId, (string) ($payloadEncDecoded['attempt_id'] ?? ''));
             $this->assertSame($email, (string) ($payloadEncDecoded['to_email'] ?? ''));
+            $this->assertArrayHasKey('attribution', $payloadEncDecoded);
         }
     }
 }

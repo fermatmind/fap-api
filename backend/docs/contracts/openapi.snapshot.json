@@ -510,6 +510,26 @@
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
                     "App\\Http\\Middleware\\NormalizeApiErrorContract"
                 ]
+            },
+            "post": {
+                "operationId": "post_api_v0_3_claim_report",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ClaimController@requestReport",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional"
+                ]
             }
         },
         "/api/v0.3/compare/mbti/{inviteId}": {
@@ -601,6 +621,89 @@
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
+                ]
+            }
+        },
+        "/api/v0.3/email/capture": {
+            "post": {
+                "operationId": "post_api_v0_3_email_capture",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\EmailCaptureController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenOptional"
+                ]
+            }
+        },
+        "/api/v0.3/email/preferences": {
+            "get": {
+                "operationId": "get_api_v0_3_email_preferences",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\EmailPreferenceController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            },
+            "post": {
+                "operationId": "post_api_v0_3_email_preferences",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\EmailPreferenceController@update",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/email/unsubscribe": {
+            "post": {
+                "operationId": "post_api_v0_3_email_unsubscribe",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\EmailPreferenceController@unsubscribe",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
                 ]
             }
         },

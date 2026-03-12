@@ -52,6 +52,7 @@ final class CommerceOrderResendTest extends TestCase
         $this->assertSame($orderNo, (string) ($payloadJson['order_no'] ?? ''));
         $this->assertSame("/api/v0.3/attempts/{$attemptId}/report", (string) ($payloadJson['report_url'] ?? ''));
         $this->assertSame("/api/v0.3/attempts/{$attemptId}/report.pdf", (string) ($payloadJson['report_pdf_url'] ?? ''));
+        $this->assertSame([], $payloadJson['attribution'] ?? null);
     }
 
     public function test_resend_reuses_existing_outbox_recipient_for_paid_anon_order(): void
@@ -88,6 +89,9 @@ final class CommerceOrderResendTest extends TestCase
         $pii = app(PiiCipher::class);
         $encryptedEmail = (string) (($row->to_email_enc ?? '') !== '' ? ($row->to_email_enc ?? '') : ($row->email_enc ?? ''));
         $this->assertSame('anon-resend@example.com', $pii->decrypt($encryptedEmail));
+        $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
+        $this->assertIsArray($payloadJson);
+        $this->assertSame([], $payloadJson['attribution'] ?? null);
     }
 
     public function test_resend_keeps_blind_success_for_ineligible_order_without_outbox_side_effect(): void

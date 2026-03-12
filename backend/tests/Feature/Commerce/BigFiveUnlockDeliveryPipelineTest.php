@@ -157,6 +157,21 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
             'paid_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
+            'meta_json' => json_encode([
+                'attribution' => [
+                    'share_id' => 'share_big5_unlock',
+                    'compare_invite_id' => (string) Str::uuid(),
+                    'share_click_id' => 'clk_big5_unlock',
+                    'entrypoint' => 'share_page',
+                    'referrer' => 'https://example.com/share/big5',
+                    'landing_path' => '/zh/share/big5',
+                    'utm' => [
+                        'source' => 'share',
+                        'medium' => 'organic',
+                        'campaign' => 'pr09',
+                    ],
+                ],
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'amount_total' => $amountCents,
             'amount_refunded' => 0,
             'item_sku' => $sku,
@@ -227,6 +242,9 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
         $this->assertIsArray($payloadJson);
         $this->assertSame("/api/v0.3/attempts/{$attemptId}/report", (string) ($payloadJson['report_url'] ?? ''));
         $this->assertSame("/api/v0.3/attempts/{$attemptId}/report.pdf", (string) ($payloadJson['report_pdf_url'] ?? ''));
+        $this->assertSame('share_big5_unlock', (string) data_get($payloadJson, 'attribution.share_id'));
+        $this->assertSame('clk_big5_unlock', (string) data_get($payloadJson, 'attribution.share_click_id'));
+        $this->assertSame('organic', (string) data_get($payloadJson, 'attribution.utm.medium'));
 
         if (Schema::hasColumn('email_outbox', 'template_key')) {
             $this->assertContains((string) ($row->template_key ?? ''), ['', 'payment_success']);
@@ -245,6 +263,9 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
             ->assertJsonPath('delivery.report_url', "/api/v0.3/attempts/{$attemptId}/report")
             ->assertJsonPath('delivery.can_download_pdf', true)
             ->assertJsonPath('delivery.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
-            ->assertJsonPath('delivery.can_resend', true);
+            ->assertJsonPath('delivery.can_resend', true)
+            ->assertJsonPath('delivery.contact_email_present', true)
+            ->assertJsonPath('delivery.last_delivery_email_sent_at', null)
+            ->assertJsonPath('delivery.can_request_claim_email', true);
     }
 }
