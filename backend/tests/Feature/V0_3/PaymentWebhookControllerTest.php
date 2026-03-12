@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_3;
 
+use App\Models\Attempt;
+use App\Models\Result;
 use App\Services\Commerce\PaymentWebhookProcessor;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -269,6 +271,139 @@ final class PaymentWebhookControllerTest extends TestCase
             ->where('provider_event_id', 'evt_sec002_bill_1')
             ->count());
         $this->assertSame(0, DB::table('email_outbox')->count());
+    }
+
+    public function test_valid_billing_signature_queues_payment_success_email_when_delivery_context_exists(): void
+    {
+        (new Pr19CommerceSeeder)->run();
+
+        config([
+            'services.billing.webhook_secret' => 'billing_secret_email_queue',
+            'services.billing.webhook_tolerance_seconds' => 300,
+            'services.billing.allow_legacy_signature' => false,
+        ]);
+
+        $userId = random_int(100000, 999999);
+        $attemptId = (string) Str::uuid();
+        $orderNo = 'ord_sec002_email_queue_1';
+
+        DB::table('users')->insert([
+            'id' => $userId,
+            'name' => 'Webhook Email User',
+            'email' => 'webhook-queue@example.com',
+            'password' => bcrypt('secret'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Attempt::query()->create([
+            'id' => $attemptId,
+            'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', $attemptId), 0, 8)),
+            'org_id' => 0,
+            'user_id' => (string) $userId,
+            'anon_id' => 'anon_webhook_email_queue',
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'en',
+            'question_count' => 120,
+            'answers_summary_json' => ['seed' => true],
+            'client_platform' => 'test',
+            'client_version' => '1.0.0',
+            'channel' => 'test',
+            'started_at' => now()->subMinute(),
+            'submitted_at' => now(),
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'content_package_version' => 'v1',
+            'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+        ]);
+
+        Result::query()->create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v0.3',
+            'type_code' => '',
+            'scores_json' => ['domains_mean' => ['O' => 3.0, 'C' => 3.0, 'E' => 3.0, 'A' => 3.0, 'N' => 3.0]],
+            'scores_pct' => ['O' => 50, 'C' => 50, 'E' => 50, 'A' => 50, 'N' => 50],
+            'axis_states' => [],
+            'content_package_version' => 'v1',
+            'result_json' => [
+                'normed_json' => [
+                    'norms' => ['status' => 'CALIBRATED'],
+                    'quality' => ['level' => 'A'],
+                ],
+            ],
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+            'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
+        ]);
+
+        DB::table('orders')->insert([
+            'id' => (string) Str::uuid(),
+            'order_no' => $orderNo,
+            'org_id' => 0,
+            'user_id' => (string) $userId,
+            'anon_id' => 'anon_webhook_email_queue',
+            'sku' => 'SKU_BIG5_FULL_REPORT_299',
+            'quantity' => 1,
+            'target_attempt_id' => $attemptId,
+            'amount_cents' => 299,
+            'currency' => 'CNY',
+            'status' => 'created',
+            'provider' => 'billing',
+            'external_trade_no' => null,
+            'paid_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'amount_total' => 299,
+            'amount_refunded' => 0,
+            'item_sku' => 'SKU_BIG5_FULL_REPORT_299',
+            'provider_order_id' => null,
+            'device_id' => null,
+            'request_id' => null,
+            'created_ip' => null,
+            'fulfilled_at' => null,
+            'refunded_at' => null,
+            'meta_json' => json_encode([
+                'attribution' => [
+                    'share_id' => 'share_webhook_queue',
+                    'utm' => [
+                        'source' => 'share',
+                        'medium' => 'organic',
+                        'campaign' => 'pr09c',
+                    ],
+                ],
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+        ]);
+
+        $payload = [
+            'provider_event_id' => 'evt_sec002_bill_email_queue',
+            'order_no' => $orderNo,
+            'amount_cents' => 299,
+            'currency' => 'CNY',
+        ];
+        $raw = $this->encodePayload($payload);
+
+        $response = $this->postSignedBilling($raw, 'billing_secret_email_queue');
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonMissingPath('error');
+        $this->assertNoLegacyErrorKey($response);
+
+        $row = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->where('template', 'payment_success')
+            ->first();
+
+        $this->assertNotNull($row);
+        $this->assertSame('pending', (string) ($row->status ?? ''));
+        $this->assertSame('share_webhook_queue', (string) data_get(json_decode((string) ($row->payload_json ?? '{}'), true), 'attribution.share_id'));
     }
 
     private function postSignedBilling(string $raw, string $secret): TestResponse

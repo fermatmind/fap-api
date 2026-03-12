@@ -13,6 +13,7 @@ use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -186,6 +187,12 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
 
     public function test_big5_unlock_webhook_queues_pdf_job_and_email_outbox(): void
     {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'mail.default' => 'array',
+        ]);
+
+        Mail::mailer('array')->getSymfonyTransport()->flush();
         $this->seedCommerce();
         Queue::fake();
 
@@ -267,5 +274,20 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
             ->assertJsonPath('delivery.contact_email_present', true)
             ->assertJsonPath('delivery.last_delivery_email_sent_at', null)
             ->assertJsonPath('delivery.can_request_claim_email', true);
+
+        $this->artisan('email:outbox-send --limit=10')
+            ->expectsOutput('Mailer array: sent 1, blocked 0, failed 0.')
+            ->assertExitCode(0);
+
+        $this->assertCount(1, Mail::mailer('array')->getSymfonyTransport()->messages());
+        $sentOrderRead = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $sentOrderRead->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('delivery.contact_email_present', true)
+            ->assertJsonPath('delivery.can_request_claim_email', true);
+        $this->assertNotNull($sentOrderRead->json('delivery.last_delivery_email_sent_at'));
     }
 }

@@ -2,17 +2,14 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title>支付成功通知</title>
+    <title>报告恢复邮件</title>
 </head>
 <body style="margin:0;padding:24px;background:#f6f4ef;font-family:Arial,sans-serif;color:#1f2933;line-height:1.7;">
 <div style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;padding:32px;">
-    <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2;">支付成功</h1>
-    <p style="margin:0 0 16px;">您的支付已确认，报告已可查看。</p>
+    <h1 style="margin:0 0 16px;font-size:28px;line-height:1.2;">报告恢复</h1>
+    <p style="margin:0 0 16px;">这是一封应请求发送的恢复邮件，用于帮助您重新访问报告。</p>
     @if(!empty($order_no))
         <p style="margin:0 0 8px;"><strong>订单号：</strong>{{ $order_no }}</p>
-    @endif
-    @if(!empty($product_summary))
-        <p style="margin:0 0 20px;"><strong>购买内容：</strong>{{ $product_summary }}</p>
     @endif
 
     @if(!empty($report_url))

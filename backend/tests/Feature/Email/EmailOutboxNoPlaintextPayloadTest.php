@@ -53,10 +53,27 @@ final class EmailOutboxNoPlaintextPayloadTest extends TestCase
         /** @var PiiCipher $pii */
         $pii = app(PiiCipher::class);
 
-        $claim = $service->queueReportClaim($userId, $email, $attemptId);
+        $claim = $service->queueReportClaim($userId, $email, $attemptId, 'ord_1000', [
+            'share_id' => 'share_no_plaintext',
+            'entrypoint' => 'order_lookup',
+            'landing_path' => '/orders/lookup',
+            'utm' => [
+                'source' => 'help',
+                'medium' => 'owned',
+                'campaign' => 'report-recovery',
+            ],
+        ]);
         $this->assertTrue((bool) ($claim['ok'] ?? false));
 
-        $this->assertTrue($service->queuePaymentSuccess($userId, $email, $attemptId, 'ord_1001', 'MBTI Full Report')['ok']);
+        $this->assertTrue($service->queuePaymentSuccess($userId, $email, $attemptId, 'ord_1001', 'MBTI Full Report', [
+            'share_id' => 'share_no_plaintext',
+            'share_click_id' => 'clk_no_plaintext',
+            'utm' => [
+                'source' => 'share',
+                'medium' => 'organic',
+                'campaign' => 'pr09c',
+            ],
+        ])['ok']);
 
         $rows = DB::table('email_outbox')
             ->where('user_id', $userId)
@@ -89,6 +106,7 @@ final class EmailOutboxNoPlaintextPayloadTest extends TestCase
             $this->assertIsArray($payloadJson);
             $this->assertSame($attemptId, (string) ($payloadJson['attempt_id'] ?? ''));
             $this->assertArrayHasKey('attribution', $payloadJson);
+            $this->assertNotEmpty($payloadJson['attribution']);
             $this->assertArrayNotHasKey('email', $payloadJson);
             $this->assertArrayNotHasKey('to_email', $payloadJson);
             $this->assertArrayNotHasKey('claim_token', $payloadJson);
