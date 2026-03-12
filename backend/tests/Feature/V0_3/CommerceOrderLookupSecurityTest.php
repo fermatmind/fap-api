@@ -62,7 +62,10 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('delivery.report_url', "/api/v0.3/attempts/{$attemptId}/report")
             ->assertJsonPath('delivery.can_download_pdf', true)
             ->assertJsonPath('delivery.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
-            ->assertJsonPath('delivery.can_resend', true);
+            ->assertJsonPath('delivery.can_resend', true)
+            ->assertJsonPath('delivery.contact_email_present', true)
+            ->assertJsonPath('delivery.last_delivery_email_sent_at', null)
+            ->assertJsonPath('delivery.can_request_claim_email', true);
     }
 
     public function test_lookup_with_token_owner_works_without_email(): void
@@ -87,7 +90,10 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('delivery.report_url', null)
             ->assertJsonPath('delivery.can_download_pdf', false)
             ->assertJsonPath('delivery.report_pdf_url', null)
-            ->assertJsonPath('delivery.can_resend', false);
+            ->assertJsonPath('delivery.can_resend', false)
+            ->assertJsonPath('delivery.contact_email_present', true)
+            ->assertJsonPath('delivery.last_delivery_email_sent_at', null)
+            ->assertJsonPath('delivery.can_request_claim_email', false);
     }
 
     private function createUser(string $email): int
@@ -198,6 +204,9 @@ final class CommerceOrderLookupSecurityTest extends TestCase
 
         if (Schema::hasColumn('orders', 'contact_email_hash')) {
             $row['contact_email_hash'] = hash('sha256', mb_strtolower(trim($email), 'UTF-8'));
+        }
+        if (Schema::hasColumn('orders', 'meta_json')) {
+            $row['meta_json'] = null;
         }
         if (Schema::hasColumn('orders', 'amount_total')) {
             $row['amount_total'] = 1990;

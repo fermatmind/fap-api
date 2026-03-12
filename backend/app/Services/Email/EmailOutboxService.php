@@ -19,8 +19,14 @@ class EmailOutboxService
      *
      * @return array {ok:bool, claim_token?:string, claim_url?:string, expires_at?:string}
      */
-    public function queueReportClaim(string $userId, string $email, string $attemptId): array
-    {
+    public function queueReportClaim(
+        string $userId,
+        string $email,
+        string $attemptId,
+        ?string $orderNo = null,
+        array $attribution = [],
+        ?string $preferredLocale = null
+    ): array {
         if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return ['ok' => false, 'error' => 'TABLE_MISSING'];
         }
@@ -28,6 +34,7 @@ class EmailOutboxService
         $userId = trim($userId);
         $email = trim($email);
         $attemptId = trim($attemptId);
+        $orderNo = trim((string) $orderNo);
 
         if ($userId === '' || $email === '' || $attemptId === '') {
             return ['ok' => false, 'error' => 'INVALID_INPUT'];
@@ -41,15 +48,17 @@ class EmailOutboxService
         $token = 'claim_'.(string) Str::uuid();
         $tokenHash = hash('sha256', $token);
         $expiresAt = now()->addMinutes(15);
-        $locale = $this->resolveAttemptLocale($attemptId);
+        $locale = $this->resolveRequestedLocale($attemptId, $preferredLocale);
         $subject = $this->defaultSubjectForTemplate('report_claim', $locale);
 
         $reportUrl = $this->reportUrl($attemptId);
         $reportPdfUrl = $this->reportPdfUrl($attemptId);
         $claimUrl = "/api/v0.3/claim/report?token={$token}";
+        $normalizedAttribution = $this->normalizeAttribution($attribution);
 
         $payload = [
             'attempt_id' => $attemptId,
+            'order_no' => $orderNo !== '' ? $orderNo : null,
             'report_url' => $reportUrl,
             'report_pdf_url' => $reportPdfUrl,
             'claim_token' => $token,
@@ -59,6 +68,7 @@ class EmailOutboxService
             'template_key' => 'report_claim',
             'to_email' => $email,
             'subject' => $subject,
+            'attribution' => $this->payloadAttribution($normalizedAttribution),
         ];
         $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
         $payloadEnc = $this->encodePayloadEncrypted($payload);
@@ -206,7 +216,9 @@ class EmailOutboxService
         string $email,
         string $attemptId,
         ?string $orderNo = null,
-        ?string $productSummary = null
+        ?string $productSummary = null,
+        array $attribution = [],
+        ?string $preferredLocale = null
     ): array {
         if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return ['ok' => false, 'error' => 'TABLE_MISSING'];
@@ -226,11 +238,12 @@ class EmailOutboxService
         $keyVersion = $this->piiCipher->currentKeyVersion();
         $maskedEmail = $this->maskedLegacyEmail($emailHash);
 
-        $locale = $this->resolveAttemptLocale($attemptId);
+        $locale = $this->resolveRequestedLocale($attemptId, $preferredLocale);
         $subject = $this->defaultSubjectForTemplate('payment_success', $locale);
         $reportUrl = $this->reportUrl($attemptId);
         $reportPdfUrl = $this->reportPdfUrl($attemptId);
         $nonce = hash('sha256', 'payment_success|'.$attemptId.'|'.Str::uuid()->toString());
+        $normalizedAttribution = $this->normalizeAttribution($attribution);
 
         $payload = [
             'attempt_id' => $attemptId,
@@ -242,6 +255,7 @@ class EmailOutboxService
             'template_key' => 'payment_success',
             'to_email' => $email,
             'subject' => $subject,
+            'attribution' => $this->payloadAttribution($normalizedAttribution),
         ];
         $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
         $payloadEnc = $this->encodePayloadEncrypted($payload);
@@ -550,6 +564,113 @@ class EmailOutboxService
         ];
     }
 
+    public function resolveDeliveryUserId(?string $userId, ?string $anonId, ?string $attemptId): ?string
+    {
+        $attemptId = $this->trimOrNull($attemptId);
+        if ($attemptId === null) {
+            return null;
+        }
+
+        return $this->resolveOutboxUserId(
+            $this->trimOrNull($userId),
+            $this->trimOrNull($anonId),
+            $attemptId
+        );
+    }
+
+    public function hasHistoricalRecipient(?string $attemptId, ?string $orderNo, string $email): bool
+    {
+        $attemptId = $this->trimOrNull($attemptId);
+        $email = $this->normalizeEmailAddress($email);
+        if ($attemptId === null || $email === null) {
+            return false;
+        }
+
+        if (! \App\Support\SchemaBaseline::hasTable('email_outbox')
+            || ! \App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
+            return false;
+        }
+
+        $normalizedOrderNo = $this->trimOrNull($orderNo);
+        $emailHash = $this->piiCipher->emailHash($email);
+        $query = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->whereIn('template', ['payment_success', 'report_claim'])
+            ->orderByDesc('updated_at');
+
+        $hasEmailHash = \App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_hash');
+        $hasToEmailHash = \App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_hash');
+
+        if ($hasEmailHash || $hasToEmailHash) {
+            $query->where(function ($builder) use ($emailHash, $hasEmailHash, $hasToEmailHash): void {
+                if ($hasEmailHash) {
+                    $builder->orWhere('email_hash', $emailHash);
+                }
+
+                if ($hasToEmailHash) {
+                    $builder->orWhere('to_email_hash', $emailHash);
+                }
+            });
+        }
+
+        $rows = $query->get();
+
+        foreach ($rows as $row) {
+            if ($normalizedOrderNo !== null) {
+                $payload = $this->decodePayloadFromRow($row);
+                $payloadOrderNo = $this->trimOrNull((string) ($payload['order_no'] ?? ''));
+                if ($payloadOrderNo !== null && $payloadOrderNo !== $normalizedOrderNo) {
+                    continue;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function lastDeliveryEmailSentAt(?string $attemptId, ?string $orderNo = null): ?string
+    {
+        $attemptId = $this->trimOrNull($attemptId);
+        if ($attemptId === null
+            || ! \App\Support\SchemaBaseline::hasTable('email_outbox')
+            || ! \App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')
+            || ! \App\Support\SchemaBaseline::hasColumn('email_outbox', 'sent_at')) {
+            return null;
+        }
+
+        $normalizedOrderNo = $this->trimOrNull($orderNo);
+        $rows = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->whereIn('template', ['payment_success', 'report_claim'])
+            ->whereNotNull('sent_at')
+            ->orderByDesc('sent_at')
+            ->limit($normalizedOrderNo === null ? 1 : 25)
+            ->get();
+
+        foreach ($rows as $row) {
+            if ($normalizedOrderNo !== null) {
+                $payload = $this->decodePayloadFromRow($row);
+                $payloadOrderNo = $this->trimOrNull((string) ($payload['order_no'] ?? ''));
+                if ($payloadOrderNo !== null && $payloadOrderNo !== $normalizedOrderNo) {
+                    continue;
+                }
+            }
+
+            $sentAt = $this->trimOrNull((string) ($row->sent_at ?? ''));
+            if ($sentAt !== null) {
+                try {
+                    return \Illuminate\Support\Carbon::parse($sentAt)->toIso8601String();
+                } catch (\Throwable) {
+                    return $sentAt;
+                }
+            }
+        }
+
+        return null;
+    }
+
     private function decodePayload($raw): array
     {
         if (is_array($raw)) {
@@ -677,6 +798,18 @@ class EmailOutboxService
         return $lang === 'zh' ? 'zh-CN' : 'en';
     }
 
+    private function resolveRequestedLocale(string $attemptId, ?string $preferredLocale = null): string
+    {
+        $preferredLocale = $this->trimOrNull($preferredLocale);
+        if ($preferredLocale !== null) {
+            $lang = strtolower((string) explode('-', str_replace('_', '-', $preferredLocale))[0]);
+
+            return $lang === 'zh' ? 'zh-CN' : 'en';
+        }
+
+        return $this->resolveAttemptLocale($attemptId);
+    }
+
     private function defaultSubjectForTemplate(string $templateKey, string $locale): string
     {
         $lang = strtolower((string) explode('-', str_replace('_', '-', $locale))[0]);
@@ -757,5 +890,59 @@ class EmailOutboxService
     private function reportPdfUrl(string $attemptId): string
     {
         return "/api/v0.3/attempts/{$attemptId}/report.pdf";
+    }
+
+    /**
+     * @param  array<string,mixed>  $attribution
+     * @return array<string,mixed>
+     */
+    private function normalizeAttribution(array $attribution): array
+    {
+        $normalized = [];
+
+        foreach ([
+            'share_id' => 128,
+            'compare_invite_id' => 128,
+            'share_click_id' => 128,
+            'entrypoint' => 128,
+            'referrer' => 2048,
+            'landing_path' => 2048,
+        ] as $field => $maxLength) {
+            $value = $this->trimOrNull(is_scalar($attribution[$field] ?? null) ? (string) $attribution[$field] : null);
+            if ($value === null) {
+                continue;
+            }
+
+            $normalized[$field] = mb_strlen($value, 'UTF-8') > $maxLength
+                ? mb_substr($value, 0, $maxLength, 'UTF-8')
+                : $value;
+        }
+
+        $utm = $attribution['utm'] ?? null;
+        if (is_array($utm)) {
+            $normalizedUtm = [];
+            foreach (['source', 'medium', 'campaign', 'term', 'content'] as $key) {
+                $value = $this->trimOrNull(is_scalar($utm[$key] ?? null) ? (string) $utm[$key] : null);
+                if ($value !== null) {
+                    $normalizedUtm[$key] = mb_strlen($value, 'UTF-8') > 512
+                        ? mb_substr($value, 0, 512, 'UTF-8')
+                        : $value;
+                }
+            }
+
+            if ($normalizedUtm !== []) {
+                $normalized['utm'] = $normalizedUtm;
+            }
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * @param  array<string,mixed>  $attribution
+     */
+    private function payloadAttribution(array $attribution): mixed
+    {
+        return $attribution === [] ? new \stdClass : $attribution;
     }
 }

@@ -16,8 +16,8 @@ use Tests\TestCase;
 
 final class PaymentWebhookControllerTest extends TestCase
 {
-    use RefreshDatabase;
     use MockeryPHPUnitIntegration;
+    use RefreshDatabase;
 
     public function test_unsigned_webhook_request_is_rejected_without_500(): void
     {
@@ -206,7 +206,7 @@ final class PaymentWebhookControllerTest extends TestCase
 
     public function test_valid_billing_signature_returns_200_and_writes_or_hits_idempotency(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         config([
             'services.billing.webhook_secret' => 'billing_secret_sec002',
@@ -263,10 +263,12 @@ final class PaymentWebhookControllerTest extends TestCase
         $second->assertJsonMissingPath('error');
         $this->assertNoLegacyErrorKey($second);
 
+        $this->assertSame('fulfilled', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
         $this->assertSame(1, DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_sec002_bill_1')
             ->count());
+        $this->assertSame(0, DB::table('email_outbox')->count());
     }
 
     private function postSignedBilling(string $raw, string $secret): TestResponse
@@ -301,7 +303,7 @@ final class PaymentWebhookControllerTest extends TestCase
     private function encodePayload(array $payload): string
     {
         $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($raw)) {
+        if (! is_string($raw)) {
             self::fail('json_encode payload failed.');
         }
 
