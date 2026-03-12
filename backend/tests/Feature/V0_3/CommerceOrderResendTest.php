@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_3;
 
+use App\Models\EmailPreference;
+use App\Services\Email\EmailCaptureService;
 use App\Services\Email\EmailOutboxService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -119,6 +122,56 @@ final class CommerceOrderResendTest extends TestCase
                 ->where('template', 'payment_success')
                 ->count()
         );
+    }
+
+    public function test_resend_delivery_send_execution_respects_report_recovery_preference(): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'mail.default' => 'array',
+        ]);
+
+        Mail::mailer('array')->getSymfonyTransport()->flush();
+
+        $email = 'resend-pref@example.com';
+        $userId = $this->createUser($email);
+        $attemptId = $this->createAttempt(self::USER_OWNER_ANON, (string) $userId);
+        $orderNo = 'ord_resend_'.Str::lower(Str::random(8));
+        $this->insertOrder($orderNo, $attemptId, 'paid', self::USER_OWNER_ANON, (string) $userId, 'BIG5_FULL_REPORT');
+
+        $capture = app(EmailCaptureService::class)->capture($email, ['surface' => 'lookup']);
+        EmailPreference::query()
+            ->where('subscriber_id', (string) ($capture['subscriber_id'] ?? ''))
+            ->update([
+                'marketing_updates' => true,
+                'report_recovery' => false,
+                'product_updates' => true,
+            ]);
+
+        $token = $this->issueToken((string) $userId, self::USER_OWNER_ANON);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/orders/'.$orderNo.'/resend');
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'ok' => true,
+                'message' => 'Delivery notice has been queued.',
+            ]);
+
+        $this->artisan('email:outbox-send --limit=10')
+            ->expectsOutput('Mailer array: sent 0, blocked 1, failed 0.')
+            ->assertExitCode(0);
+
+        $row = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->where('template', 'payment_success')
+            ->orderByDesc('updated_at')
+            ->first();
+
+        $this->assertNotNull($row);
+        $this->assertSame('skipped', (string) ($row->status ?? ''));
+        $this->assertCount(0, Mail::mailer('array')->getSymfonyTransport()->messages());
     }
 
     private function createUser(string $email): int

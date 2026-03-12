@@ -6,6 +6,7 @@ namespace App\Services\Email;
 
 use App\Models\EmailPreference;
 use App\Models\EmailSubscriber;
+use App\Models\EmailSuppression;
 use App\Support\PiiCipher;
 use Illuminate\Support\Str;
 
@@ -42,6 +43,91 @@ class EmailPreferenceService
         }
 
         return self::TOKEN_PREFIX.$this->base64UrlEncode($encrypted);
+    }
+
+    /**
+     * @return array{
+     *     allowed:bool,
+     *     status:string,
+     *     reason:?string,
+     *     suppressed:bool,
+     *     report_recovery:bool,
+     *     marketing_updates:bool,
+     *     product_updates:bool
+     * }
+     */
+    public function deliveryPolicyForEmail(string $email, string $templateKey): array
+    {
+        $normalizedEmail = $this->normalizeEmail($email);
+        if ($normalizedEmail === null) {
+            return [
+                'allowed' => false,
+                'status' => 'failed',
+                'reason' => 'invalid_recipient',
+                'suppressed' => false,
+                'report_recovery' => false,
+                'marketing_updates' => false,
+                'product_updates' => false,
+            ];
+        }
+
+        $emailHash = $this->piiCipher->emailHash($normalizedEmail);
+        $suppressed = EmailSuppression::query()
+            ->where('email_hash', $emailHash)
+            ->exists();
+
+        $subscriber = EmailSubscriber::query()
+            ->with('preference')
+            ->where('email_hash', $emailHash)
+            ->first();
+
+        $preference = $subscriber?->preference instanceof EmailPreference
+            ? $subscriber->preference
+            : null;
+
+        $reportRecovery = $preference instanceof EmailPreference
+            ? (bool) $preference->report_recovery
+            : (bool) ($subscriber->transactional_recovery_enabled ?? true);
+        $marketingUpdates = $preference instanceof EmailPreference
+            ? (bool) $preference->marketing_updates
+            : (bool) ($subscriber->marketing_consent ?? false);
+        $productUpdates = $preference instanceof EmailPreference
+            ? (bool) $preference->product_updates
+            : (bool) ($subscriber->marketing_consent ?? false);
+
+        if ($suppressed) {
+            return [
+                'allowed' => false,
+                'status' => 'suppressed',
+                'reason' => 'email_suppressed',
+                'suppressed' => true,
+                'report_recovery' => $reportRecovery,
+                'marketing_updates' => $marketingUpdates,
+                'product_updates' => $productUpdates,
+            ];
+        }
+
+        if ($this->requiresReportRecovery($templateKey) && ! $reportRecovery) {
+            return [
+                'allowed' => false,
+                'status' => 'skipped',
+                'reason' => 'report_recovery_disabled',
+                'suppressed' => false,
+                'report_recovery' => false,
+                'marketing_updates' => $marketingUpdates,
+                'product_updates' => $productUpdates,
+            ];
+        }
+
+        return [
+            'allowed' => true,
+            'status' => 'allowed',
+            'reason' => null,
+            'suppressed' => false,
+            'report_recovery' => $reportRecovery,
+            'marketing_updates' => $marketingUpdates,
+            'product_updates' => $productUpdates,
+        ];
     }
 
     /**
@@ -239,6 +325,25 @@ class EmailPreferenceService
         $payload = json_decode($json, true);
 
         return is_array($payload) ? $payload : null;
+    }
+
+    private function requiresReportRecovery(string $templateKey): bool
+    {
+        return in_array(trim($templateKey), ['payment_success', 'report_claim'], true);
+    }
+
+    private function normalizeEmail(string $email): ?string
+    {
+        $normalized = mb_strtolower(trim($email), 'UTF-8');
+        if ($normalized === '') {
+            return null;
+        }
+
+        if (filter_var($normalized, FILTER_VALIDATE_EMAIL) === false) {
+            return null;
+        }
+
+        return $normalized;
     }
 
     private function base64UrlEncode(string $value): string

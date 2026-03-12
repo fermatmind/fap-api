@@ -4,7 +4,10 @@ namespace App\Services\Email;
 
 use App\Support\PiiCipher;
 use App\Support\PiiReadFallbackMonitor;
+use App\Support\RuntimeConfig;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
 class EmailOutboxService
@@ -12,6 +15,7 @@ class EmailOutboxService
     public function __construct(
         private readonly PiiCipher $piiCipher,
         private readonly PiiReadFallbackMonitor $fallbackMonitor,
+        private readonly EmailPreferenceService $emailPreferences,
     ) {}
 
     /**
@@ -380,6 +384,339 @@ class EmailOutboxService
     }
 
     /**
+     * @return array{mailer:string,sent:int,blocked:int,failed:int,processed:int}
+     */
+    public function sendPending(int $limit, string $mailer): array
+    {
+        $limit = max(1, min($limit, 500));
+
+        $rows = DB::table('email_outbox')
+            ->where('status', 'pending')
+            ->where(function ($query): void {
+                $query->whereNull('claim_expires_at')
+                    ->orWhere('claim_expires_at', '>', now());
+            })
+            ->orderBy('created_at')
+            ->limit($limit)
+            ->get();
+
+        $sent = 0;
+        $blocked = 0;
+        $failed = 0;
+
+        foreach ($rows as $row) {
+            $prepared = $this->preparePendingDelivery($row);
+            if (! ($prepared['ok'] ?? false)) {
+                $this->markDeliveryFailed(
+                    $row,
+                    $prepared['payload'] ?? [],
+                    (string) ($prepared['locale'] ?? 'en'),
+                    (string) ($prepared['template_key'] ?? ''),
+                    (string) ($prepared['subject'] ?? ''),
+                    (string) ($prepared['body_html'] ?? ''),
+                    (string) ($prepared['error_code'] ?? 'invalid_payload'),
+                    (string) ($prepared['error_message'] ?? 'Unable to prepare email delivery.'),
+                    $mailer
+                );
+                $failed++;
+
+                continue;
+            }
+
+            $payload = $prepared['payload'];
+            $locale = (string) $prepared['locale'];
+            $templateKey = (string) $prepared['template_key'];
+            $subject = (string) $prepared['subject'];
+            $bodyHtml = (string) $prepared['body_html'];
+            $bodyText = (string) $prepared['body_text'];
+            $recipientEmail = (string) $prepared['recipient_email'];
+            $guard = is_array($prepared['guard'] ?? null) ? $prepared['guard'] : [];
+
+            if (! ($guard['allowed'] ?? false)) {
+                $this->markDeliveryBlocked(
+                    $row,
+                    $payload,
+                    $locale,
+                    $templateKey,
+                    $subject,
+                    $bodyHtml,
+                    (string) ($guard['status'] ?? 'suppressed'),
+                    (string) ($guard['reason'] ?? 'delivery_blocked'),
+                    $mailer
+                );
+                $blocked++;
+
+                continue;
+            }
+
+            try {
+                $this->sendMessage($mailer, $recipientEmail, $subject, $bodyHtml, $bodyText);
+            } catch (\Throwable $e) {
+                $this->markDeliveryFailed(
+                    $row,
+                    $payload,
+                    $locale,
+                    $templateKey,
+                    $subject,
+                    $bodyHtml,
+                    'send_failed',
+                    $e->getMessage(),
+                    $mailer
+                );
+                $failed++;
+
+                continue;
+            }
+
+            $this->markDeliverySent(
+                $row,
+                $payload,
+                $locale,
+                $templateKey,
+                $recipientEmail,
+                $subject,
+                $bodyHtml,
+                $mailer
+            );
+            $sent++;
+        }
+
+        return [
+            'mailer' => $mailer,
+            'sent' => $sent,
+            'blocked' => $blocked,
+            'failed' => $failed,
+            'processed' => $sent + $blocked + $failed,
+        ];
+    }
+
+    /**
+     * @return array{
+     *     ok:bool,
+     *     payload:array<string,mixed>,
+     *     locale:string,
+     *     template_key:string,
+     *     subject:string,
+     *     body_html:string,
+     *     body_text:string,
+     *     recipient_email:string,
+     *     guard:array<string,mixed>,
+     *     error_code?:string,
+     *     error_message?:string
+     * }
+     */
+    private function preparePendingDelivery(object $row): array
+    {
+        $payload = $this->decodePayloadFromRow($row);
+        $locale = $this->normalizeLocale((string) ($row->locale ?? ($payload['locale'] ?? 'en')));
+        $templateKey = $this->resolveTemplateKeyFromRow($row, $payload);
+        $subject = $this->resolveSubjectFromRow($row, $payload, $templateKey, $locale);
+        $recipientEmail = $this->extractRecipientEmailFromOutboxRow($row, $payload);
+
+        if ($recipientEmail === '') {
+            return [
+                'ok' => false,
+                'payload' => $payload,
+                'locale' => $locale,
+                'template_key' => $templateKey,
+                'subject' => $subject,
+                'body_html' => '',
+                'body_text' => '',
+                'recipient_email' => '',
+                'guard' => [],
+                'error_code' => 'recipient_missing',
+                'error_message' => 'Recipient email is missing.',
+            ];
+        }
+
+        $guard = $this->emailPreferences->deliveryPolicyForEmail($recipientEmail, $templateKey);
+        $bodyHtml = $this->resolveBodyHtmlFromRow($row, $payload, $templateKey, $locale, $recipientEmail, $guard);
+        $bodyText = $this->resolveBodyTextFromPayload($payload, $locale, $templateKey, $recipientEmail);
+
+        return [
+            'ok' => true,
+            'payload' => $payload,
+            'locale' => $locale,
+            'template_key' => $templateKey,
+            'subject' => $subject,
+            'body_html' => $bodyHtml,
+            'body_text' => $bodyText,
+            'recipient_email' => $recipientEmail,
+            'guard' => $guard,
+        ];
+    }
+
+    private function sendMessage(string $mailer, string $recipientEmail, string $subject, string $bodyHtml, string $bodyText): void
+    {
+        if ($bodyHtml !== '') {
+            Mail::mailer($mailer)->html($bodyHtml, function ($message) use ($recipientEmail, $subject): void {
+                $message->to($recipientEmail)->subject($subject);
+            });
+
+            return;
+        }
+
+        Mail::mailer($mailer)->raw($bodyText, function ($message) use ($recipientEmail, $subject): void {
+            $message->to($recipientEmail)->subject($subject);
+        });
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function markDeliverySent(
+        object $row,
+        array $payload,
+        string $locale,
+        string $templateKey,
+        string $recipientEmail,
+        string $subject,
+        string $bodyHtml,
+        string $mailer
+    ): void {
+        $emailHash = $this->piiCipher->emailHash($recipientEmail);
+        $payload = $this->appendExecutionMeta($payload, [
+            'status' => 'sent',
+            'mailer' => $mailer,
+            'guard' => 'allowed',
+            'attempted_at' => now()->toIso8601String(),
+        ]);
+
+        $update = [
+            'status' => 'sent',
+            'payload_json' => $this->encodePayloadJson($this->sanitizePayloadForJson($payload)),
+            'updated_at' => now(),
+        ];
+
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+            $update['payload_enc'] = $this->encodePayloadEncrypted($payload);
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+            $update['locale'] = $locale;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+            $update['template_key'] = $templateKey;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
+            $update['to_email'] = $this->maskedLegacyEmail($emailHash);
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+            $update['subject'] = $subject;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+            $update['body_html'] = $bodyHtml !== '' ? $bodyHtml : null;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'sent_at')) {
+            $update['sent_at'] = now();
+        }
+
+        DB::table('email_outbox')
+            ->where('id', $row->id)
+            ->where('status', 'pending')
+            ->update($update);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function markDeliveryBlocked(
+        object $row,
+        array $payload,
+        string $locale,
+        string $templateKey,
+        string $subject,
+        string $bodyHtml,
+        string $status,
+        string $reason,
+        string $mailer
+    ): void {
+        $payload = $this->appendExecutionMeta($payload, [
+            'status' => $status,
+            'mailer' => $mailer,
+            'guard' => $reason,
+            'attempted_at' => now()->toIso8601String(),
+        ]);
+
+        $update = [
+            'status' => $status,
+            'payload_json' => $this->encodePayloadJson($this->sanitizePayloadForJson($payload)),
+            'updated_at' => now(),
+        ];
+
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+            $update['payload_enc'] = $this->encodePayloadEncrypted($payload);
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+            $update['locale'] = $locale;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+            $update['template_key'] = $templateKey;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+            $update['subject'] = $subject;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+            $update['body_html'] = $bodyHtml !== '' ? $bodyHtml : null;
+        }
+
+        DB::table('email_outbox')
+            ->where('id', $row->id)
+            ->where('status', 'pending')
+            ->update($update);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function markDeliveryFailed(
+        object $row,
+        array $payload,
+        string $locale,
+        string $templateKey,
+        string $subject,
+        string $bodyHtml,
+        string $errorCode,
+        string $errorMessage,
+        string $mailer
+    ): void {
+        $payload = $this->appendExecutionMeta($payload, [
+            'status' => 'failed',
+            'mailer' => $mailer,
+            'guard' => 'send_failed',
+            'attempted_at' => now()->toIso8601String(),
+            'error_code' => $errorCode,
+            'error_message' => $this->truncateExecutionMessage($errorMessage),
+        ]);
+
+        $update = [
+            'status' => 'failed',
+            'payload_json' => $this->encodePayloadJson($this->sanitizePayloadForJson($payload)),
+            'updated_at' => now(),
+        ];
+
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+            $update['payload_enc'] = $this->encodePayloadEncrypted($payload);
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+            $update['locale'] = $locale;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+            $update['template_key'] = $templateKey;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+            $update['subject'] = $subject;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+            $update['body_html'] = $bodyHtml !== '' ? $bodyHtml : null;
+        }
+
+        DB::table('email_outbox')
+            ->where('id', $row->id)
+            ->where('status', 'pending')
+            ->update($update);
+    }
+
+    /**
      * Claim report by token.
      *
      * @return array {ok:bool, attempt_id?:string, report_url?:string, status?:int, error?:string, message?:string}
@@ -439,7 +776,8 @@ class EmailOutboxService
             }
         }
 
-        if (! empty($row->status) && $row->status !== 'pending') {
+        $status = strtolower(trim((string) ($row->status ?? 'pending')));
+        if ($status !== '' && ! in_array($status, ['pending', 'sent'], true)) {
             return [
                 'ok' => false,
                 'status' => 410,
@@ -469,7 +807,7 @@ class EmailOutboxService
 
         $updated = DB::table('email_outbox')
             ->where('id', $row->id)
-            ->where('status', 'pending')
+            ->whereIn('status', ['pending', 'sent'])
             ->update($update);
 
         if ($updated < 1) {
@@ -706,6 +1044,351 @@ class EmailOutboxService
     }
 
     /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function resolveTemplateKeyFromRow(object $row, array $payload): string
+    {
+        foreach ([
+            $row->template_key ?? null,
+            $row->template ?? null,
+            $payload['template_key'] ?? null,
+            $payload['template'] ?? null,
+        ] as $candidate) {
+            $value = strtolower(trim((string) $candidate));
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        return 'report_claim';
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function resolveSubjectFromRow(object $row, array $payload, string $templateKey, string $locale): string
+    {
+        foreach ([
+            $row->subject ?? null,
+            $payload['subject'] ?? null,
+        ] as $candidate) {
+            $value = trim((string) $candidate);
+            if ($value !== '') {
+                return $value;
+            }
+        }
+
+        return $this->defaultSubjectForTemplate($templateKey, $locale);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $guard
+     */
+    private function resolveBodyHtmlFromRow(
+        object $row,
+        array $payload,
+        string $templateKey,
+        string $locale,
+        string $recipientEmail,
+        array $guard
+    ): string {
+        $existing = trim((string) ($row->body_html ?? ''));
+        if ($existing !== '') {
+            return $existing;
+        }
+
+        $inline = trim((string) ($payload['body_html'] ?? ''));
+        if ($inline !== '') {
+            return $inline;
+        }
+
+        $view = $this->resolveEmailViewName($templateKey, $locale);
+        if ($view === '' || ! View::exists($view)) {
+            return '';
+        }
+
+        return trim((string) view(
+            $view,
+            $this->buildTemplateData($row, $payload, $locale, $templateKey, $recipientEmail, $guard)
+        )->render());
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function resolveBodyTextFromPayload(array $payload, string $locale, string $templateKey, string $recipientEmail): string
+    {
+        $body = trim((string) ($payload['body'] ?? ''));
+        if ($body !== '') {
+            return $body;
+        }
+
+        $data = $this->buildTemplateData((object) [], $payload, $locale, $templateKey, $recipientEmail, []);
+        $reportUrl = trim((string) ($data['report_url'] ?? ''));
+        if ($reportUrl !== '') {
+            return $reportUrl;
+        }
+
+        $orderLookupUrl = trim((string) ($data['order_lookup_url'] ?? ''));
+        if ($orderLookupUrl !== '') {
+            return $orderLookupUrl;
+        }
+
+        return 'Please contact support@fermatmind.com for assistance.';
+    }
+
+    private function resolveEmailViewName(string $templateKey, string $locale): string
+    {
+        $lang = strtolower((string) explode('-', $this->normalizeLocale($locale))[0]) === 'zh'
+            ? 'zh'
+            : 'en';
+        $supported = ['payment_success', 'report_claim', 'refund_notice', 'support_contact'];
+        if (! in_array($templateKey, $supported, true)) {
+            return '';
+        }
+
+        $view = "emails.{$lang}.{$templateKey}";
+        if (View::exists($view)) {
+            return $view;
+        }
+
+        $fallback = "emails.en.{$templateKey}";
+
+        return View::exists($fallback) ? $fallback : '';
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $guard
+     * @return array<string,mixed>
+     */
+    private function buildTemplateData(
+        object $row,
+        array $payload,
+        string $locale,
+        string $templateKey,
+        string $recipientEmail,
+        array $guard
+    ): array {
+        $backendBaseUrl = rtrim((string) config('app.url', 'http://localhost'), '/');
+        $frontendBaseUrl = $this->frontendBaseUrl($backendBaseUrl);
+        $legalUrls = $this->resolveLegalUrls($locale, $frontendBaseUrl);
+        $supportEmail = $this->resolveSupportEmail();
+        $normalizedAttribution = $this->normalizeAttribution(is_array($payload['attribution'] ?? null) ? $payload['attribution'] : []);
+
+        $orderNo = trim((string) ($payload['order_no'] ?? $payload['orderNo'] ?? ''));
+        $attemptId = trim((string) ($payload['attempt_id'] ?? ''));
+        $reportUrl = $this->absoluteUrl((string) ($payload['report_url'] ?? ''), $backendBaseUrl);
+        $reportPdfUrl = $this->absoluteUrl((string) ($payload['report_pdf_url'] ?? ''), $backendBaseUrl);
+
+        $tokenContext = [
+            'locale' => $locale,
+            'surface' => 'email_delivery',
+            'order_no' => $orderNo !== '' ? $orderNo : null,
+            'attempt_id' => $attemptId !== '' ? $attemptId : null,
+            'share_id' => $normalizedAttribution['share_id'] ?? null,
+            'compare_invite_id' => $normalizedAttribution['compare_invite_id'] ?? null,
+            'entrypoint' => $normalizedAttribution['entrypoint'] ?? "email_{$templateKey}",
+            'referrer' => $normalizedAttribution['referrer'] ?? null,
+            'landing_path' => $normalizedAttribution['landing_path'] ?? null,
+            'utm' => $normalizedAttribution['utm'] ?? null,
+        ];
+        $preferenceToken = $this->emailPreferences->issueTokenForEmail($recipientEmail, $tokenContext);
+        $query = $this->deepLinkQuery($normalizedAttribution, $locale, $orderNo, $attemptId);
+
+        $orderLookupUrl = $this->frontendUrl($frontendBaseUrl, '/orders/lookup', $query);
+        $emailPreferencesUrl = $this->frontendUrl($frontendBaseUrl, '/email/preferences', ['token' => $preferenceToken] + $query);
+        $emailUnsubscribeUrl = $this->frontendUrl($frontendBaseUrl, '/email/unsubscribe', ['token' => $preferenceToken] + $query);
+
+        $data = [
+            'locale' => $locale,
+            'template_key' => $templateKey,
+            'orderNo' => $orderNo,
+            'order_no' => $orderNo,
+            'attemptId' => $attemptId,
+            'attempt_id' => $attemptId,
+            'productSummary' => trim((string) ($payload['product_summary'] ?? $payload['item_summary'] ?? '')),
+            'product_summary' => trim((string) ($payload['product_summary'] ?? $payload['item_summary'] ?? '')),
+            'reportUrl' => $reportUrl,
+            'report_url' => $reportUrl,
+            'reportPdfUrl' => $reportPdfUrl,
+            'report_pdf_url' => $reportPdfUrl,
+            'orderLookupUrl' => $orderLookupUrl,
+            'order_lookup_url' => $orderLookupUrl,
+            'emailPreferencesUrl' => $emailPreferencesUrl,
+            'email_preferences_url' => $emailPreferencesUrl,
+            'emailUnsubscribeUrl' => $emailUnsubscribeUrl,
+            'email_unsubscribe_url' => $emailUnsubscribeUrl,
+            'refundStatus' => trim((string) ($payload['refund_status'] ?? '')),
+            'refund_status' => trim((string) ($payload['refund_status'] ?? '')),
+            'refundEta' => trim((string) ($payload['refund_eta'] ?? '')),
+            'refund_eta' => trim((string) ($payload['refund_eta'] ?? '')),
+            'supportEmail' => $supportEmail,
+            'support_email' => $supportEmail,
+            'supportTicketUrl' => $this->absoluteUrl((string) ($payload['support_ticket_url'] ?? ''), $frontendBaseUrl),
+            'support_ticket_url' => $this->absoluteUrl((string) ($payload['support_ticket_url'] ?? ''), $frontendBaseUrl),
+            'privacyUrl' => $legalUrls['privacy'],
+            'privacy_url' => $legalUrls['privacy'],
+            'termsUrl' => $legalUrls['terms'],
+            'terms_url' => $legalUrls['terms'],
+            'refundUrl' => $legalUrls['refund'],
+            'refund_url' => $legalUrls['refund'],
+            'outboxId' => trim((string) ($row->id ?? '')),
+            'outbox_id' => trim((string) ($row->id ?? '')),
+            'guard' => $guard,
+            'attribution' => $normalizedAttribution,
+            'share_id' => $normalizedAttribution['share_id'] ?? '',
+            'compare_invite_id' => $normalizedAttribution['compare_invite_id'] ?? '',
+            'share_click_id' => $normalizedAttribution['share_click_id'] ?? '',
+            'entrypoint' => $normalizedAttribution['entrypoint'] ?? '',
+            'referrer' => $normalizedAttribution['referrer'] ?? '',
+            'landing_path' => $normalizedAttribution['landing_path'] ?? '',
+            'utm_source' => (string) data_get($normalizedAttribution, 'utm.source', ''),
+            'utm_medium' => (string) data_get($normalizedAttribution, 'utm.medium', ''),
+            'utm_campaign' => (string) data_get($normalizedAttribution, 'utm.campaign', ''),
+            'utm_term' => (string) data_get($normalizedAttribution, 'utm.term', ''),
+            'utm_content' => (string) data_get($normalizedAttribution, 'utm.content', ''),
+        ];
+
+        return $data;
+    }
+
+    /**
+     * @param  array<string,mixed>  $attribution
+     * @return array<string,string>
+     */
+    private function deepLinkQuery(array $attribution, string $locale, string $orderNo, string $attemptId): array
+    {
+        $query = [];
+
+        if ($locale !== '') {
+            $query['locale'] = $locale;
+        }
+        if ($orderNo !== '') {
+            $query['order_no'] = $orderNo;
+        }
+        if ($attemptId !== '') {
+            $query['attempt_id'] = $attemptId;
+        }
+
+        foreach (['share_id', 'compare_invite_id', 'share_click_id', 'entrypoint', 'referrer', 'landing_path'] as $field) {
+            $value = $this->trimOrNull((string) ($attribution[$field] ?? ''));
+            if ($value !== null) {
+                $query[$field] = $value;
+            }
+        }
+
+        if (is_array($attribution['utm'] ?? null)) {
+            foreach (['source', 'medium', 'campaign', 'term', 'content'] as $field) {
+                $value = $this->trimOrNull((string) (($attribution['utm'][$field] ?? '')));
+                if ($value !== null) {
+                    $query['utm_'.$field] = $value;
+                }
+            }
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param  array<string,string>  $query
+     */
+    private function frontendUrl(string $base, string $path, array $query = []): string
+    {
+        $url = rtrim($base, '/').'/'.ltrim($path, '/');
+        if ($query === []) {
+            return $url;
+        }
+
+        return $url.'?'.http_build_query($query, '', '&', PHP_QUERY_RFC3986);
+    }
+
+    private function frontendBaseUrl(string $backendBaseUrl): string
+    {
+        $configured = trim((string) (RuntimeConfig::raw('FAP_BASE_URL') ?? ''));
+
+        return $configured !== '' ? rtrim($configured, '/') : $backendBaseUrl;
+    }
+
+    /**
+     * @return array{terms:string,privacy:string,refund:string}
+     */
+    private function resolveLegalUrls(string $locale, string $baseUrl): array
+    {
+        $global = [
+            'terms' => trim((string) config('regions.regions.US.legal_urls.terms', $baseUrl.'/terms')),
+            'privacy' => trim((string) config('regions.regions.US.legal_urls.privacy', $baseUrl.'/privacy')),
+            'refund' => trim((string) config('regions.regions.US.legal_urls.refund', $baseUrl.'/refund')),
+        ];
+        $cn = [
+            'terms' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.terms', $baseUrl.'/zh/terms')),
+            'privacy' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.privacy', $baseUrl.'/zh/privacy')),
+            'refund' => trim((string) config('regions.regions.CN_MAINLAND.legal_urls.refund', $baseUrl.'/zh/refund')),
+        ];
+
+        $target = strtolower((string) explode('-', $this->normalizeLocale($locale))[0]) === 'zh' ? $cn : $global;
+
+        return [
+            'terms' => $target['terms'] !== '' ? $target['terms'] : $global['terms'],
+            'privacy' => $target['privacy'] !== '' ? $target['privacy'] : $global['privacy'],
+            'refund' => $target['refund'] !== '' ? $target['refund'] : $global['refund'],
+        ];
+    }
+
+    private function resolveSupportEmail(): string
+    {
+        $support = trim((string) config('fap.support_email', ''));
+        if ($support !== '') {
+            return $support;
+        }
+
+        $from = trim((string) config('mail.from.address', ''));
+        if ($from !== '') {
+            return $from;
+        }
+
+        return 'support@fermatmind.com';
+    }
+
+    private function absoluteUrl(string $url, string $base): string
+    {
+        $url = trim($url);
+        if ($url === '') {
+            return '';
+        }
+        if (preg_match('#^https?://#i', $url) === 1) {
+            return $url;
+        }
+
+        return rtrim($base, '/').'/'.ltrim($url, '/');
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>
+     */
+    private function appendExecutionMeta(array $payload, array $meta): array
+    {
+        $payload['delivery_execution'] = $meta;
+
+        return $payload;
+    }
+
+    private function truncateExecutionMessage(string $message): string
+    {
+        $normalized = trim($message);
+        if ($normalized === '') {
+            return 'Unknown delivery error.';
+        }
+
+        return mb_strlen($normalized, 'UTF-8') > 512
+            ? mb_substr($normalized, 0, 512, 'UTF-8')
+            : $normalized;
+    }
+
+    /**
      * Keep payload_json as a minimal non-sensitive fallback while payload_enc remains authoritative.
      *
      * @param  array<string,mixed>  $payload
@@ -779,6 +1462,18 @@ class EmailOutboxService
         return $this->piiCipher->encrypt($encoded);
     }
 
+    private function normalizeLocale(string $locale): string
+    {
+        $locale = trim(str_replace('_', '-', $locale));
+        if ($locale === '') {
+            return 'en';
+        }
+
+        $lang = strtolower((string) explode('-', $locale)[0]);
+
+        return $lang === 'zh' ? 'zh-CN' : 'en';
+    }
+
     private function resolveAttemptLocale(string $attemptId): string
     {
         if (! \App\Support\SchemaBaseline::hasTable('attempts')) {
@@ -818,6 +1513,12 @@ class EmailOutboxService
         }
         if ($templateKey === 'payment_success') {
             return $lang === 'zh' ? '支付成功与报告交付通知' : 'Payment successful and report delivered';
+        }
+        if ($templateKey === 'refund_notice') {
+            return $lang === 'zh' ? '退款处理通知' : 'Refund processing notice';
+        }
+        if ($templateKey === 'support_contact') {
+            return $lang === 'zh' ? '客服联系信息' : 'Support contact details';
         }
 
         return $lang === 'zh' ? 'FermatMind 通知' : 'FermatMind notification';

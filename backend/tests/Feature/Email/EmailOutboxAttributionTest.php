@@ -8,6 +8,7 @@ use App\Services\Email\EmailOutboxService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -17,6 +18,13 @@ final class EmailOutboxAttributionTest extends TestCase
 
     public function test_payment_success_outbox_payload_includes_attribution_contract(): void
     {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'app.url' => 'https://api.example.test',
+            'mail.default' => 'array',
+        ]);
+
         $attemptId = $this->createAttempt();
         $email = 'buyer+'.random_int(1000, 9999).'@example.com';
 
@@ -66,10 +74,25 @@ final class EmailOutboxAttributionTest extends TestCase
         $this->assertIsArray($payloadEnc);
         $this->assertSame($email, (string) ($payloadEnc['to_email'] ?? ''));
         $this->assertSame('hero', (string) data_get($payloadEnc, 'attribution.utm.content'));
+
+        Mail::mailer('array')->getSymfonyTransport()->flush();
+        $this->artisan('email:outbox-send --limit=10')->assertExitCode(0);
+
+        $html = (string) Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage()->getHtmlBody();
+        $this->assertStringContainsString('share_id=share_123', $html);
+        $this->assertStringContainsString('utm_campaign=pr09', $html);
+        $this->assertStringContainsString('compare_invite_id=', $html);
     }
 
     public function test_report_claim_outbox_payload_includes_attribution_contract(): void
     {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'app.url' => 'https://api.example.test',
+            'mail.default' => 'array',
+        ]);
+
         $attemptId = $this->createAttempt();
 
         /** @var EmailOutboxService $outbox */
@@ -102,6 +125,13 @@ final class EmailOutboxAttributionTest extends TestCase
         $this->assertIsArray($payloadJson);
         $this->assertSame('share_claim', (string) data_get($payloadJson, 'attribution.share_id'));
         $this->assertSame('order_lookup', (string) data_get($payloadJson, 'attribution.entrypoint'));
+
+        Mail::mailer('array')->getSymfonyTransport()->flush();
+        $this->artisan('email:outbox-send --limit=10')->assertExitCode(0);
+
+        $html = (string) Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage()->getHtmlBody();
+        $this->assertStringContainsString('share_id=share_claim', $html);
+        $this->assertStringContainsString('utm_campaign=report-recovery', $html);
     }
 
     private function createAttempt(): string
