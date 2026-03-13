@@ -16,7 +16,7 @@ final class EmailCaptureRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $this->merge([
+        $payload = [
             'email' => $this->normalizeEmail($this->input('email')),
             'locale' => $this->normalizeString($this->input('locale'), 16),
             'surface' => $this->normalizeString($this->input('surface'), 64),
@@ -24,12 +24,21 @@ final class EmailCaptureRequest extends FormRequest
             'attempt_id' => $this->normalizeString($this->input('attempt_id'), 64),
             'share_id' => $this->normalizeString($this->input('share_id'), 128),
             'compare_invite_id' => $this->normalizeString($this->input('compare_invite_id'), 128),
+            'share_click_id' => $this->normalizeString($this->input('share_click_id'), 128),
             'entrypoint' => $this->normalizeString($this->input('entrypoint'), 128),
             'referrer' => $this->normalizeString($this->input('referrer'), 2048),
             'landing_path' => $this->normalizeString($this->input('landing_path'), 2048),
             'utm' => $this->normalizeUtm($this->input('utm')),
-            'marketing_consent' => $this->has('marketing_consent') ? $this->boolean('marketing_consent') : false,
-        ]);
+        ];
+
+        if ($this->has('marketing_consent')) {
+            $payload['marketing_consent'] = $this->boolean('marketing_consent');
+        }
+        if ($this->has('transactional_recovery_enabled')) {
+            $payload['transactional_recovery_enabled'] = $this->boolean('transactional_recovery_enabled');
+        }
+
+        $this->merge($payload);
     }
 
     public function rules(): array
@@ -42,6 +51,7 @@ final class EmailCaptureRequest extends FormRequest
             'attempt_id' => ['nullable', 'string', 'max:64'],
             'share_id' => ['nullable', 'string', 'max:128'],
             'compare_invite_id' => ['nullable', 'string', 'max:128'],
+            'share_click_id' => ['nullable', 'string', 'max:128'],
             'entrypoint' => ['nullable', 'string', 'max:128'],
             'referrer' => ['nullable', 'string', 'max:2048'],
             'landing_path' => ['nullable', 'string', 'max:2048'],
@@ -52,6 +62,7 @@ final class EmailCaptureRequest extends FormRequest
             'utm.term' => ['nullable', 'string', 'max:512'],
             'utm.content' => ['nullable', 'string', 'max:512'],
             'marketing_consent' => ['nullable', 'boolean'],
+            'transactional_recovery_enabled' => ['nullable', 'boolean'],
         ];
     }
 

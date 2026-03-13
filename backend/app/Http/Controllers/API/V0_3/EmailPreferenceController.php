@@ -40,7 +40,9 @@ final class EmailPreferenceController extends Controller
         EmailPreferencesUpdateRequest $request,
         EmailPreferenceService $preferences
     ): JsonResponse {
-        $result = $preferences->updateByToken((string) $request->validated('token'), $request->validated());
+        /** @var array<string,mixed> $payload */
+        $payload = $request->validated();
+        $result = $preferences->updateByToken((string) ($payload['token'] ?? ''), $payload);
 
         if (! ($result['ok'] ?? false)) {
             return response()->json([
@@ -63,9 +65,11 @@ final class EmailPreferenceController extends Controller
         EmailUnsubscribeRequest $request,
         EmailPreferenceService $preferences
     ): JsonResponse {
+        /** @var array<string,mixed> $payload */
+        $payload = $request->validated();
         $result = $preferences->unsubscribeByToken(
-            (string) $request->validated('token'),
-            (string) $request->validated('reason', 'user_request')
+            (string) ($payload['token'] ?? ''),
+            (string) ($payload['reason'] ?? 'user_request')
         );
 
         if (! ($result['ok'] ?? false)) {

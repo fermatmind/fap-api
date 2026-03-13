@@ -403,7 +403,10 @@ final class PaymentWebhookControllerTest extends TestCase
 
         $this->assertNotNull($row);
         $this->assertSame('pending', (string) ($row->status ?? ''));
-        $this->assertSame('share_webhook_queue', (string) data_get(json_decode((string) ($row->payload_json ?? '{}'), true), 'attribution.share_id'));
+        $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
+        $this->assertIsArray($payloadJson);
+        $this->assertSame('active', (string) ($payloadJson['subscriber_status'] ?? ''));
+        $this->assertSame('share_webhook_queue', (string) data_get($payloadJson, 'attribution.share_id'));
     }
 
     private function postSignedBilling(string $raw, string $secret): TestResponse

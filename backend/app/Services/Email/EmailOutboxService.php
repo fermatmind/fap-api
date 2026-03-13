@@ -16,6 +16,7 @@ class EmailOutboxService
         private readonly PiiCipher $piiCipher,
         private readonly PiiReadFallbackMonitor $fallbackMonitor,
         private readonly EmailPreferenceService $emailPreferences,
+        private readonly EmailCaptureService $emailCaptures,
     ) {}
 
     /**
@@ -58,20 +59,25 @@ class EmailOutboxService
         $reportUrl = $this->reportUrl($attemptId);
         $reportPdfUrl = $this->reportPdfUrl($attemptId);
         $claimUrl = "/api/v0.3/claim/report?token={$token}";
-        $normalizedAttribution = $this->normalizeAttribution($attribution);
+        $lifecycleContext = $this->buildLifecyclePayloadContext($email, $orderNo !== '' ? $orderNo : null, $attribution);
+        $normalizedAttribution = is_array($lifecycleContext['attribution'] ?? null)
+            ? $lifecycleContext['attribution']
+            : [];
 
         $payload = [
             'attempt_id' => $attemptId,
             'order_no' => $orderNo !== '' ? $orderNo : null,
             'report_url' => $reportUrl,
             'report_pdf_url' => $reportPdfUrl,
-            'claim_token' => $token,
-            'claim_url' => $claimUrl,
             'claim_expires_at' => $expiresAt->toIso8601String(),
             'locale' => $locale,
             'template_key' => 'report_claim',
             'to_email' => $email,
             'subject' => $subject,
+            'subscriber_status' => (string) ($lifecycleContext['subscriber_status'] ?? 'active'),
+            'marketing_consent' => (bool) ($lifecycleContext['marketing_consent'] ?? false),
+            'transactional_recovery_enabled' => (bool) ($lifecycleContext['transactional_recovery_enabled'] ?? true),
+            'surface' => $lifecycleContext['surface'] ?? null,
             'attribution' => $this->payloadAttribution($normalizedAttribution),
         ];
         $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
@@ -247,7 +253,10 @@ class EmailOutboxService
         $reportUrl = $this->reportUrl($attemptId);
         $reportPdfUrl = $this->reportPdfUrl($attemptId);
         $nonce = hash('sha256', 'payment_success|'.$attemptId.'|'.Str::uuid()->toString());
-        $normalizedAttribution = $this->normalizeAttribution($attribution);
+        $lifecycleContext = $this->buildLifecyclePayloadContext($email, $orderNo !== '' ? $orderNo : null, $attribution);
+        $normalizedAttribution = is_array($lifecycleContext['attribution'] ?? null)
+            ? $lifecycleContext['attribution']
+            : [];
 
         $payload = [
             'attempt_id' => $attemptId,
@@ -259,6 +268,10 @@ class EmailOutboxService
             'template_key' => 'payment_success',
             'to_email' => $email,
             'subject' => $subject,
+            'subscriber_status' => (string) ($lifecycleContext['subscriber_status'] ?? 'active'),
+            'marketing_consent' => (bool) ($lifecycleContext['marketing_consent'] ?? false),
+            'transactional_recovery_enabled' => (bool) ($lifecycleContext['transactional_recovery_enabled'] ?? true),
+            'surface' => $lifecycleContext['surface'] ?? null,
             'attribution' => $this->payloadAttribution($normalizedAttribution),
         ];
         $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
@@ -1159,6 +1172,51 @@ class EmailOutboxService
     }
 
     /**
+     * @param  array<string,mixed>  $context
+     * @return array<string,mixed>
+     */
+    public function buildLifecyclePayloadContext(string $email, ?string $orderNo = null, array $context = []): array
+    {
+        $subscriberSnapshot = $this->emailCaptures->subscriberLifecycleSnapshot($email);
+        $orderContext = $this->resolveOrderLifecycleContext($orderNo);
+
+        $subscriberAttribution = $this->normalizeAttribution(
+            is_array($subscriberSnapshot['last_context_json'] ?? null) ? $subscriberSnapshot['last_context_json'] : []
+        );
+        $orderAttribution = is_array($orderContext['attribution'] ?? null) ? $orderContext['attribution'] : [];
+        $contextAttribution = $this->normalizeAttribution(array_replace(
+            is_array($context['attribution'] ?? null) ? $context['attribution'] : [],
+            $context
+        ));
+
+        $surface = $this->firstNonEmptyString([
+            $context['surface'] ?? null,
+            data_get($orderContext, 'email_capture.surface'),
+            data_get($subscriberSnapshot, 'last_context_json.surface'),
+        ], 64);
+
+        return [
+            'subscriber_status' => $this->firstLifecycleStatus([
+                $subscriberSnapshot['subscriber_status'] ?? null,
+                data_get($orderContext, 'email_capture.subscriber_status'),
+                $context['subscriber_status'] ?? null,
+            ]) ?? 'active',
+            'marketing_consent' => $this->firstBoolean([
+                $context['marketing_consent'] ?? null,
+                $subscriberSnapshot['marketing_consent'] ?? null,
+                data_get($orderContext, 'email_capture.marketing_consent'),
+            ]) ?? false,
+            'transactional_recovery_enabled' => $this->firstBoolean([
+                $context['transactional_recovery_enabled'] ?? null,
+                $subscriberSnapshot['transactional_recovery_enabled'] ?? null,
+                data_get($orderContext, 'email_capture.transactional_recovery_enabled'),
+            ]) ?? true,
+            'surface' => $surface,
+            'attribution' => array_replace_recursive($subscriberAttribution, $orderAttribution, $contextAttribution),
+        ];
+    }
+
+    /**
      * @param  array<string,mixed>  $payload
      * @param  array<string,mixed>  $guard
      * @return array<string,mixed>
@@ -1189,6 +1247,7 @@ class EmailOutboxService
             'attempt_id' => $attemptId !== '' ? $attemptId : null,
             'share_id' => $normalizedAttribution['share_id'] ?? null,
             'compare_invite_id' => $normalizedAttribution['compare_invite_id'] ?? null,
+            'share_click_id' => $normalizedAttribution['share_click_id'] ?? null,
             'entrypoint' => $normalizedAttribution['entrypoint'] ?? "email_{$templateKey}",
             'referrer' => $normalizedAttribution['referrer'] ?? null,
             'landing_path' => $normalizedAttribution['landing_path'] ?? null,
@@ -1224,6 +1283,13 @@ class EmailOutboxService
             'refund_status' => trim((string) ($payload['refund_status'] ?? '')),
             'refundEta' => trim((string) ($payload['refund_eta'] ?? '')),
             'refund_eta' => trim((string) ($payload['refund_eta'] ?? '')),
+            'subscriberStatus' => trim((string) ($payload['subscriber_status'] ?? '')),
+            'subscriber_status' => trim((string) ($payload['subscriber_status'] ?? '')),
+            'marketingConsent' => (bool) ($payload['marketing_consent'] ?? false),
+            'marketing_consent' => (bool) ($payload['marketing_consent'] ?? false),
+            'transactionalRecoveryEnabled' => (bool) ($payload['transactional_recovery_enabled'] ?? true),
+            'transactional_recovery_enabled' => (bool) ($payload['transactional_recovery_enabled'] ?? true),
+            'surface' => trim((string) ($payload['surface'] ?? '')),
             'supportEmail' => $supportEmail,
             'support_email' => $supportEmail,
             'supportTicketUrl' => $this->absoluteUrl((string) ($payload['support_ticket_url'] ?? ''), $frontendBaseUrl),
@@ -1591,6 +1657,161 @@ class EmailOutboxService
     private function reportPdfUrl(string $attemptId): string
     {
         return "/api/v0.3/attempts/{$attemptId}/report.pdf";
+    }
+
+    /**
+     * @return array{attribution:array<string,mixed>,email_capture:array<string,mixed>}
+     */
+    private function resolveOrderLifecycleContext(?string $orderNo): array
+    {
+        $normalizedOrderNo = $this->trimOrNull($orderNo);
+        if ($normalizedOrderNo === null || ! \App\Support\SchemaBaseline::hasTable('orders')) {
+            return [
+                'attribution' => [],
+                'email_capture' => [],
+            ];
+        }
+
+        $order = DB::table('orders')
+            ->select(['meta_json', 'contact_email_hash'])
+            ->where('order_no', $normalizedOrderNo)
+            ->orderByDesc('updated_at')
+            ->first();
+
+        if (! $order) {
+            return [
+                'attribution' => [],
+                'email_capture' => [],
+            ];
+        }
+
+        $meta = $this->decodeMetaValue($order->meta_json ?? null);
+        $attribution = $this->normalizeAttribution(is_array($meta['attribution'] ?? null) ? $meta['attribution'] : []);
+        $emailCapture = $this->normalizeLifecycleEmailCapture(
+            is_array($meta['email_capture'] ?? null) ? $meta['email_capture'] : [],
+            $this->trimHash((string) ($order->contact_email_hash ?? ''))
+        );
+
+        return [
+            'attribution' => $attribution,
+            'email_capture' => $emailCapture,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $emailCapture
+     * @return array<string,mixed>
+     */
+    private function normalizeLifecycleEmailCapture(array $emailCapture, ?string $contactEmailHash = null): array
+    {
+        $normalized = [];
+
+        $resolvedHash = $contactEmailHash ?? $this->trimHash((string) ($emailCapture['contact_email_hash'] ?? ''));
+        if ($resolvedHash !== null) {
+            $normalized['contact_email_hash'] = $resolvedHash;
+        }
+
+        $status = $this->firstLifecycleStatus([$emailCapture['subscriber_status'] ?? null]);
+        if ($status !== null) {
+            $normalized['subscriber_status'] = $status;
+        }
+
+        foreach (['marketing_consent', 'transactional_recovery_enabled'] as $field) {
+            $value = $this->firstBoolean([$emailCapture[$field] ?? null]);
+            if ($value !== null) {
+                $normalized[$field] = $value;
+            }
+        }
+
+        foreach ([
+            'captured_at' => 64,
+            'surface' => 64,
+            'attempt_id' => 64,
+        ] as $field => $maxLength) {
+            $value = $this->firstNonEmptyString([$emailCapture[$field] ?? null], $maxLength);
+            if ($value !== null) {
+                $normalized[$field] = $value;
+            }
+        }
+
+        return array_replace($normalized, $this->normalizeAttribution($emailCapture));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeMetaValue(mixed $value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value) && trim($value) !== '') {
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    private function trimHash(string $value): ?string
+    {
+        $normalized = strtolower(trim($value));
+
+        return preg_match('/^[a-f0-9]{64}$/', $normalized) === 1 ? $normalized : null;
+    }
+
+    /**
+     * @param  array<int,mixed>  $candidates
+     */
+    private function firstBoolean(array $candidates): ?bool
+    {
+        foreach ($candidates as $candidate) {
+            if ($candidate === null) {
+                continue;
+            }
+
+            $value = filter_var($candidate, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+            if ($value !== null) {
+                return $value;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<int,mixed>  $candidates
+     */
+    private function firstLifecycleStatus(array $candidates): ?string
+    {
+        foreach ($candidates as $candidate) {
+            $value = strtolower(trim((string) $candidate));
+            if (in_array($value, ['active', 'unsubscribed', 'suppressed'], true)) {
+                return $value;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<int,mixed>  $candidates
+     */
+    private function firstNonEmptyString(array $candidates, int $maxLength): ?string
+    {
+        foreach ($candidates as $candidate) {
+            $value = $this->trimOrNull(is_scalar($candidate) ? (string) $candidate : null);
+            if ($value !== null) {
+                return mb_strlen($value, 'UTF-8') > $maxLength
+                    ? mb_substr($value, 0, $maxLength, 'UTF-8')
+                    : $value;
+            }
+        }
+
+        return null;
     }
 
     /**

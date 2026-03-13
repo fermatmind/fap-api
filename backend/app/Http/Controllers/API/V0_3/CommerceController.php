@@ -8,6 +8,7 @@ use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
+use App\Services\Email\EmailCaptureService;
 use App\Services\Payments\PaymentRouter;
 use App\Support\OrgContext;
 use App\Support\RegionContext;
@@ -25,6 +26,7 @@ class CommerceController extends Controller
         private OrgContext $orgContext,
         private RegionContext $regionContext,
         private OrderManager $orders,
+        private EmailCaptureService $emailCaptures,
         private SkuCatalog $skus,
         private PaymentRouter $paymentRouter,
         private LemonSqueezyCheckoutService $lemonSqueezyCheckout,
@@ -162,6 +164,9 @@ class CommerceController extends Controller
             'attempt_id' => ['nullable', 'string', 'max:64'],
             'sku' => ['nullable', 'string', 'max:64'],
             'email' => ['nullable', 'string', 'max:320'],
+            'marketing_consent' => ['nullable', 'boolean'],
+            'transactional_recovery_enabled' => ['nullable', 'boolean'],
+            'surface' => ['nullable', 'string', 'max:64'],
             'order_no' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
@@ -171,7 +176,12 @@ class CommerceController extends Controller
             'entrypoint' => ['nullable', 'string', 'max:128'],
             'referrer' => ['nullable', 'string', 'max:2048'],
             'landing_path' => ['nullable', 'string', 'max:2048'],
-            'utm' => ['nullable'],
+            'utm' => ['nullable', 'array'],
+            'utm.source' => ['nullable', 'string', 'max:512'],
+            'utm.medium' => ['nullable', 'string', 'max:512'],
+            'utm.campaign' => ['nullable', 'string', 'max:512'],
+            'utm.term' => ['nullable', 'string', 'max:512'],
+            'utm.content' => ['nullable', 'string', 'max:512'],
             'utm_source' => ['nullable', 'string', 'max:512'],
             'utm_medium' => ['nullable', 'string', 'max:512'],
             'utm_campaign' => ['nullable', 'string', 'max:512'],
@@ -188,13 +198,26 @@ class CommerceController extends Controller
             abort(422, 'email is required.');
         }
 
+        $subscriberCapture = $contactEmail !== null
+            ? $this->emailCaptures->capture(
+                $contactEmail,
+                $this->extractEmailCaptureContext($payload, $attribution)
+            )
+            : [];
+        $emailCapture = $this->buildCheckoutEmailCapture($contactEmail, $payload, $attribution, $subscriberCapture);
+
         $existingOrderNo = trim((string) ($payload['order_no'] ?? ''));
         if ($existingOrderNo !== '') {
             $existing = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $existingOrderNo);
             if ($existing['ok'] ?? false) {
                 $order = $existing['order'];
-                if ($attribution !== []) {
-                    $this->orders->mergeAttribution((string) ($order->order_no ?? $existingOrderNo), $orgId, $attribution);
+                if ($attribution !== [] || $emailCapture !== []) {
+                    $this->orders->mergeCheckoutContext(
+                        (string) ($order->order_no ?? $existingOrderNo),
+                        $orgId,
+                        $attribution,
+                        $emailCapture
+                    );
                 }
 
                 $provider = strtolower(trim((string) ($order->provider ?? '')));
@@ -246,7 +269,8 @@ class CommerceController extends Controller
             $idempotencyKey,
             $contactEmail,
             $this->resolveRequestId($request),
-            $attribution
+            $attribution,
+            $emailCapture
         );
 
         if (! ($created['ok'] ?? false)) {
@@ -256,8 +280,8 @@ class CommerceController extends Controller
         }
 
         $orderNoForAttribution = trim((string) data_get($created, 'order.order_no', $created['order_no'] ?? ''));
-        if ($orderNoForAttribution !== '' && $attribution !== []) {
-            $this->orders->mergeAttribution($orderNoForAttribution, $orgId, $attribution);
+        if ($orderNoForAttribution !== '' && ($attribution !== [] || $emailCapture !== [])) {
+            $this->orders->mergeCheckoutContext($orderNoForAttribution, $orgId, $attribution, $emailCapture);
         }
 
         $order = $created['order'] ?? null;
@@ -802,6 +826,76 @@ class CommerceController extends Controller
         }
 
         return $attribution;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $attribution
+     * @return array<string,mixed>
+     */
+    private function extractEmailCaptureContext(array $payload, array $attribution): array
+    {
+        $context = [];
+
+        foreach ([
+            'attempt_id' => 64,
+            'order_no' => 64,
+            'surface' => 64,
+        ] as $field => $maxLength) {
+            $value = $this->truncateNullableString($payload[$field] ?? null, $maxLength);
+            if ($value !== null) {
+                $context[$field] = $value;
+            }
+        }
+
+        foreach (['marketing_consent', 'transactional_recovery_enabled'] as $field) {
+            if (array_key_exists($field, $payload)) {
+                $context[$field] = (bool) $payload[$field];
+            }
+        }
+
+        return array_replace($context, $attribution);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $attribution
+     * @param  array<string,mixed>  $subscriberCapture
+     * @return array<string,mixed>
+     */
+    private function buildCheckoutEmailCapture(
+        ?string $contactEmail,
+        array $payload,
+        array $attribution,
+        array $subscriberCapture
+    ): array {
+        if ($contactEmail === null) {
+            return [];
+        }
+
+        $emailCapture = [
+            'contact_email_hash' => hash('sha256', mb_strtolower(trim($contactEmail), 'UTF-8')),
+            'subscriber_status' => (string) ($subscriberCapture['subscriber_status'] ?? 'active'),
+            'marketing_consent' => (bool) ($subscriberCapture['marketing_consent'] ?? false),
+            'transactional_recovery_enabled' => (bool) ($subscriberCapture['transactional_recovery_enabled'] ?? true),
+        ];
+
+        $capturedAt = trim((string) ($subscriberCapture['captured_at'] ?? ''));
+        if ($capturedAt !== '') {
+            $emailCapture['captured_at'] = $capturedAt;
+        }
+
+        $surface = $this->truncateNullableString($payload['surface'] ?? null, 64);
+        if ($surface !== null) {
+            $emailCapture['surface'] = $surface;
+        }
+
+        $attemptId = $this->truncateNullableString($payload['attempt_id'] ?? null, 64);
+        if ($attemptId !== null) {
+            $emailCapture['attempt_id'] = $attemptId;
+        }
+
+        return array_replace($emailCapture, $attribution);
     }
 
     /**

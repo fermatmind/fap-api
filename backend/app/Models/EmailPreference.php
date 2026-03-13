@@ -30,7 +30,19 @@ class EmailPreference extends Model
         'marketing_updates' => 'bool',
         'report_recovery' => 'bool',
         'product_updates' => 'bool',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
+
+    public function allowsMarketing(): bool
+    {
+        return (bool) ($this->marketing_updates || $this->product_updates);
+    }
+
+    public function allowsReportRecovery(): bool
+    {
+        return (bool) $this->report_recovery;
+    }
 
     public function subscriber(): BelongsTo
     {

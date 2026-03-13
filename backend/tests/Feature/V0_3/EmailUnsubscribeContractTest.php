@@ -36,9 +36,12 @@ final class EmailUnsubscribeContractTest extends TestCase
         $preference = DB::table('email_preferences')->first();
         $this->assertNotNull($subscriber);
         $this->assertNotNull($preference);
+        $this->assertSame('unsubscribed', (string) ($subscriber->status ?? ''));
         $this->assertFalse((bool) ($subscriber->marketing_consent ?? true));
         $this->assertFalse((bool) ($subscriber->transactional_recovery_enabled ?? true));
         $this->assertNotNull($subscriber->unsubscribed_at);
+        $this->assertNotNull($subscriber->last_marketing_consent_at);
+        $this->assertNotNull($subscriber->last_transactional_recovery_change_at);
         $this->assertFalse((bool) ($preference->marketing_updates ?? true));
         $this->assertFalse((bool) ($preference->report_recovery ?? true));
         $this->assertFalse((bool) ($preference->product_updates ?? true));

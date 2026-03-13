@@ -41,6 +41,7 @@ class Order extends Model
         'scale_code_v2',
         'scale_uid',
         'external_trade_no',
+        'contact_email_hash',
         'metadata',
         'meta_json',
         'paid_at',

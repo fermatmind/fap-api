@@ -24,23 +24,29 @@ class EmailCaptureService
      *     ok:bool,
      *     subscriber_id:string,
      *     status:string,
+     *     subscriber_status:string,
+     *     captured_at:string,
      *     marketing_consent:bool,
+     *     transactional_recovery_enabled:bool,
      *     preferences:array{marketing_updates:bool,report_recovery:bool,product_updates:bool}
      * }
      */
     public function capture(string $email, array $context = []): array
     {
-        $status = 'captured';
-        $subscriber = $this->upsertSubscriber($email, $context, $status);
+        $captureStatus = 'captured';
+        $subscriber = $this->upsertSubscriber($email, $context, $captureStatus);
         $preference = $subscriber->preference instanceof EmailPreference
             ? $subscriber->preference
-            : $this->ensurePreference($subscriber, null);
+            : $this->ensurePreference($subscriber, null, null);
 
         return [
             'ok' => true,
             'subscriber_id' => (string) $subscriber->getKey(),
-            'status' => $status,
-            'marketing_consent' => (bool) ($subscriber->marketing_consent ?? false),
+            'status' => $captureStatus,
+            'subscriber_status' => (string) ($subscriber->status ?? EmailSubscriber::STATUS_ACTIVE),
+            'captured_at' => $subscriber->last_captured_at?->toIso8601String() ?? now()->toIso8601String(),
+            'marketing_consent' => $subscriber->allowsMarketing(),
+            'transactional_recovery_enabled' => $subscriber->allowsTransactionalRecovery(),
             'preferences' => $this->preferencesPayload($preference),
         ];
     }
@@ -50,51 +56,107 @@ class EmailCaptureService
      */
     public function ensureSubscriber(string $email, array $context = []): EmailSubscriber
     {
-        $status = 'captured';
+        $captureStatus = 'captured';
 
-        return $this->upsertSubscriber($email, $context, $status);
+        return $this->upsertSubscriber($email, $context, $captureStatus);
     }
 
-    public function isSuppressed(string $email): bool
+    /**
+     * @return array{
+     *     subscriber_id:?string,
+     *     subscriber_status:string,
+     *     marketing_consent:bool,
+     *     transactional_recovery_enabled:bool,
+     *     first_source:?string,
+     *     last_source:?string,
+     *     first_context_json:array<string,mixed>,
+     *     last_context_json:array<string,mixed>,
+     *     first_captured_at:?string,
+     *     last_captured_at:?string
+     * }
+     */
+    public function subscriberLifecycleSnapshot(string $email): array
     {
-        $normalized = $this->normalizeEmail($email);
-        if ($normalized === null) {
-            return false;
+        $normalizedEmail = $this->normalizeEmail($email);
+        if ($normalizedEmail === null) {
+            return $this->defaultLifecycleSnapshot();
         }
 
-        return EmailSuppression::query()
-            ->where('email_hash', $this->piiCipher->emailHash($normalized))
+        $emailHash = $this->piiCipher->emailHash($normalizedEmail);
+        $suppressed = EmailSuppression::query()
+            ->where('email_hash', $emailHash)
             ->exists();
-    }
-
-    public function allowsReportRecovery(string $email): bool
-    {
-        $normalized = $this->normalizeEmail($email);
-        if ($normalized === null) {
-            return false;
-        }
-
-        if ($this->isSuppressed($normalized)) {
-            return false;
-        }
 
         $subscriber = EmailSubscriber::query()
             ->with('preference')
-            ->where('email_hash', $this->piiCipher->emailHash($normalized))
+            ->where('email_hash', $emailHash)
             ->first();
 
         if (! $subscriber) {
-            return true;
+            return [
+                'subscriber_id' => null,
+                'subscriber_status' => $suppressed ? EmailSubscriber::STATUS_SUPPRESSED : EmailSubscriber::STATUS_ACTIVE,
+                'marketing_consent' => false,
+                'transactional_recovery_enabled' => true,
+                'first_source' => null,
+                'last_source' => null,
+                'first_context_json' => [],
+                'last_context_json' => [],
+                'first_captured_at' => null,
+                'last_captured_at' => null,
+            ];
         }
 
         $preference = $subscriber->preference instanceof EmailPreference
             ? $subscriber->preference
             : null;
-        if ($preference instanceof EmailPreference) {
-            return (bool) $preference->report_recovery;
+
+        $marketingConsent = $preference instanceof EmailPreference
+            ? $preference->allowsMarketing()
+            : $subscriber->allowsMarketing();
+        $transactionalRecoveryEnabled = $preference instanceof EmailPreference
+            ? $preference->allowsReportRecovery()
+            : $subscriber->allowsTransactionalRecovery();
+        $subscriberStatus = $this->resolveLifecycleStatus(
+            $suppressed,
+            $marketingConsent,
+            $transactionalRecoveryEnabled,
+            $subscriber->unsubscribed_at
+        );
+
+        if ((string) ($subscriber->status ?? '') !== $subscriberStatus) {
+            $subscriber->status = $subscriberStatus;
+            $subscriber->save();
         }
 
-        return (bool) ($subscriber->transactional_recovery_enabled ?? true);
+        return [
+            'subscriber_id' => (string) $subscriber->getKey(),
+            'subscriber_status' => $subscriberStatus,
+            'marketing_consent' => $marketingConsent,
+            'transactional_recovery_enabled' => $transactionalRecoveryEnabled,
+            'first_source' => $subscriber->first_source,
+            'last_source' => $subscriber->last_source,
+            'first_context_json' => is_array($subscriber->first_context_json) ? $subscriber->first_context_json : [],
+            'last_context_json' => is_array($subscriber->last_context_json) ? $subscriber->last_context_json : [],
+            'first_captured_at' => $subscriber->first_captured_at?->toIso8601String(),
+            'last_captured_at' => $subscriber->last_captured_at?->toIso8601String(),
+        ];
+    }
+
+    public function isSuppressed(string $email): bool
+    {
+        return $this->subscriberLifecycleSnapshot($email)['subscriber_status'] === EmailSubscriber::STATUS_SUPPRESSED;
+    }
+
+    public function allowsReportRecovery(string $email): bool
+    {
+        $snapshot = $this->subscriberLifecycleSnapshot($email);
+
+        if ($snapshot['subscriber_status'] === EmailSubscriber::STATUS_SUPPRESSED) {
+            return false;
+        }
+
+        return (bool) $snapshot['transactional_recovery_enabled'];
     }
 
     private function normalizeEmail(string $email): ?string
@@ -114,7 +176,7 @@ class EmailCaptureService
     /**
      * @param  array<string,mixed>  $context
      */
-    private function upsertSubscriber(string $email, array $context, string &$status): EmailSubscriber
+    private function upsertSubscriber(string $email, array $context, string &$captureStatus): EmailSubscriber
     {
         $normalizedEmail = $this->normalizeEmail($email);
         if ($normalizedEmail === null) {
@@ -135,7 +197,11 @@ class EmailCaptureService
         $contextPayload = $this->normalizeContext($context);
         $marketingConsent = $this->resolveMarketingConsent($context);
         $marketingConsentProvided = array_key_exists('marketing_consent', $context);
+        $transactionalRecoveryEnabled = $this->resolveTransactionalRecoveryEnabled($context);
+        $transactionalRecoveryProvided = array_key_exists('transactional_recovery_enabled', $context);
+        $capturedAt = now();
         $created = false;
+
         $subscriber = DB::transaction(function () use (
             $emailHash,
             $emailEnc,
@@ -144,6 +210,10 @@ class EmailCaptureService
             $contextPayload,
             $marketingConsent,
             $marketingConsentProvided,
+            $transactionalRecoveryEnabled,
+            $transactionalRecoveryProvided,
+            $suppressed,
+            $capturedAt,
             &$created
         ): EmailSubscriber {
             $subscriber = EmailSubscriber::query()
@@ -155,6 +225,7 @@ class EmailCaptureService
                 $subscriber = new EmailSubscriber([
                     'id' => (string) Str::uuid(),
                     'email_hash' => $emailHash,
+                    'status' => EmailSubscriber::STATUS_ACTIVE,
                     'marketing_consent' => false,
                     'transactional_recovery_enabled' => true,
                 ]);
@@ -168,42 +239,75 @@ class EmailCaptureService
                 $subscriber->locale = $locale;
             }
 
-            if ($created && $source !== null && $subscriber->first_source === null) {
+            if ($source !== null && $subscriber->first_source === null) {
                 $subscriber->first_source = $source;
             }
             if ($source !== null) {
                 $subscriber->last_source = $source;
             }
 
-            if ($created && $contextPayload !== [] && empty($subscriber->first_context_json)) {
-                $subscriber->first_context_json = $contextPayload;
-            }
             if ($contextPayload !== []) {
-                $subscriber->last_context_json = $contextPayload;
+                $firstContext = is_array($subscriber->first_context_json) ? $subscriber->first_context_json : [];
+                $lastContext = is_array($subscriber->last_context_json) ? $subscriber->last_context_json : [];
+
+                if ($firstContext === []) {
+                    $subscriber->first_context_json = $contextPayload;
+                }
+                $subscriber->last_context_json = array_replace_recursive($lastContext, $contextPayload);
             }
+
+            if ($subscriber->first_captured_at === null) {
+                $subscriber->first_captured_at = $capturedAt;
+            }
+            $subscriber->last_captured_at = $capturedAt;
 
             if ($marketingConsentProvided && $marketingConsent !== null) {
                 $subscriber->marketing_consent = $marketingConsent;
+                $subscriber->last_marketing_consent_at = $capturedAt;
+            }
+            if ($transactionalRecoveryProvided && $transactionalRecoveryEnabled !== null) {
+                $subscriber->transactional_recovery_enabled = $transactionalRecoveryEnabled;
+                $subscriber->last_transactional_recovery_change_at = $capturedAt;
             }
 
             $subscriber->save();
 
-            $preference = $this->ensurePreference($subscriber, $marketingConsentProvided ? $marketingConsent : null);
-            $subscriber->transactional_recovery_enabled = (bool) $preference->report_recovery;
-            $subscriber->marketing_consent = (bool) ($preference->marketing_updates || $preference->product_updates);
+            $preference = $this->ensurePreference(
+                $subscriber,
+                $marketingConsentProvided ? $marketingConsent : null,
+                $transactionalRecoveryProvided ? $transactionalRecoveryEnabled : null
+            );
+
+            $subscriber->transactional_recovery_enabled = $preference->allowsReportRecovery();
+            $subscriber->marketing_consent = $preference->allowsMarketing();
+            $subscriber->status = $this->resolveLifecycleStatus(
+                $suppressed,
+                $subscriber->allowsMarketing(),
+                $subscriber->allowsTransactionalRecovery(),
+                $subscriber->unsubscribed_at
+            );
+            if ($subscriber->status === EmailSubscriber::STATUS_UNSUBSCRIBED && $subscriber->unsubscribed_at === null) {
+                $subscriber->unsubscribed_at = $capturedAt;
+            }
+            if ($subscriber->status === EmailSubscriber::STATUS_ACTIVE) {
+                $subscriber->unsubscribed_at = null;
+            }
             $subscriber->save();
             $subscriber->setRelation('preference', $preference);
 
-            return $subscriber;
+            return $subscriber->fresh(['preference']);
         });
 
-        $status = $suppressed ? 'suppressed' : ($created ? 'captured' : 'updated');
+        $captureStatus = $suppressed ? 'suppressed' : ($created ? 'captured' : 'updated');
 
         return $subscriber;
     }
 
-    private function ensurePreference(EmailSubscriber $subscriber, ?bool $marketingConsent): EmailPreference
-    {
+    private function ensurePreference(
+        EmailSubscriber $subscriber,
+        ?bool $marketingConsent,
+        ?bool $transactionalRecoveryEnabled
+    ): EmailPreference {
         $preference = EmailPreference::query()
             ->where('subscriber_id', $subscriber->getKey())
             ->first();
@@ -212,18 +316,28 @@ class EmailCaptureService
             $preference = new EmailPreference([
                 'id' => (string) Str::uuid(),
                 'subscriber_id' => (string) $subscriber->getKey(),
-                'marketing_updates' => (bool) $marketingConsent,
-                'report_recovery' => true,
-                'product_updates' => (bool) $marketingConsent,
+                'marketing_updates' => $marketingConsent ?? $subscriber->allowsMarketing(),
+                'report_recovery' => $transactionalRecoveryEnabled ?? $subscriber->allowsTransactionalRecovery(),
+                'product_updates' => $marketingConsent ?? $subscriber->allowsMarketing(),
             ]);
             $preference->save();
 
             return $preference;
         }
 
+        $dirty = false;
         if ($marketingConsent !== null) {
+            $dirty = $dirty || (bool) $preference->marketing_updates !== $marketingConsent;
+            $dirty = $dirty || (bool) $preference->product_updates !== $marketingConsent;
             $preference->marketing_updates = $marketingConsent;
             $preference->product_updates = $marketingConsent;
+        }
+        if ($transactionalRecoveryEnabled !== null) {
+            $dirty = $dirty || (bool) $preference->report_recovery !== $transactionalRecoveryEnabled;
+            $preference->report_recovery = $transactionalRecoveryEnabled;
+        }
+
+        if ($dirty) {
             $preference->save();
         }
 
@@ -232,6 +346,7 @@ class EmailCaptureService
 
     /**
      * @param  array<string,mixed>  $context
+     * @return array<string,mixed>
      */
     private function normalizeContext(array $context): array
     {
@@ -244,6 +359,7 @@ class EmailCaptureService
             'attempt_id' => 64,
             'share_id' => 128,
             'compare_invite_id' => 128,
+            'share_click_id' => 128,
             'entrypoint' => 128,
             'referrer' => 2048,
             'landing_path' => 2048,
@@ -263,6 +379,12 @@ class EmailCaptureService
             $consent = $this->resolveMarketingConsent($context);
             if ($consent !== null) {
                 $normalized['marketing_consent'] = $consent;
+            }
+        }
+        if (array_key_exists('transactional_recovery_enabled', $context)) {
+            $recovery = $this->resolveTransactionalRecoveryEnabled($context);
+            if ($recovery !== null) {
+                $normalized['transactional_recovery_enabled'] = $recovery;
             }
         }
 
@@ -287,6 +409,20 @@ class EmailCaptureService
         }
 
         $value = filter_var($context['marketing_consent'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+        return $value ?? false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function resolveTransactionalRecoveryEnabled(array $context): ?bool
+    {
+        if (! array_key_exists('transactional_recovery_enabled', $context)) {
+            return null;
+        }
+
+        $value = filter_var($context['transactional_recovery_enabled'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 
         return $value ?? false;
     }
@@ -327,6 +463,53 @@ class EmailCaptureService
         }
 
         return $normalized;
+    }
+
+    private function resolveLifecycleStatus(
+        bool $suppressed,
+        bool $marketingConsent,
+        bool $transactionalRecoveryEnabled,
+        mixed $unsubscribedAt = null
+    ): string {
+        if ($suppressed) {
+            return EmailSubscriber::STATUS_SUPPRESSED;
+        }
+
+        if ($unsubscribedAt !== null || (! $marketingConsent && ! $transactionalRecoveryEnabled)) {
+            return EmailSubscriber::STATUS_UNSUBSCRIBED;
+        }
+
+        return EmailSubscriber::STATUS_ACTIVE;
+    }
+
+    /**
+     * @return array{
+     *     subscriber_id:?string,
+     *     subscriber_status:string,
+     *     marketing_consent:bool,
+     *     transactional_recovery_enabled:bool,
+     *     first_source:?string,
+     *     last_source:?string,
+     *     first_context_json:array<string,mixed>,
+     *     last_context_json:array<string,mixed>,
+     *     first_captured_at:?string,
+     *     last_captured_at:?string
+     * }
+     */
+    private function defaultLifecycleSnapshot(): array
+    {
+        return [
+            'subscriber_id' => null,
+            'subscriber_status' => EmailSubscriber::STATUS_ACTIVE,
+            'marketing_consent' => false,
+            'transactional_recovery_enabled' => true,
+            'first_source' => null,
+            'last_source' => null,
+            'first_context_json' => [],
+            'last_context_json' => [],
+            'first_captured_at' => null,
+            'last_captured_at' => null,
+        ];
     }
 
     /**

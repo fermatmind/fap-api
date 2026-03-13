@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Email;
 
+use App\Services\Email\EmailCaptureService;
 use App\Services\Email\EmailOutboxService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,6 +28,15 @@ final class EmailOutboxAttributionTest extends TestCase
 
         $attemptId = $this->createAttempt();
         $email = 'buyer+'.random_int(1000, 9999).'@example.com';
+
+        app(EmailCaptureService::class)->capture($email, [
+            'surface' => 'share',
+            'share_id' => 'share_123',
+            'share_click_id' => 'clk_456',
+            'entrypoint' => 'share_page',
+            'marketing_consent' => true,
+            'transactional_recovery_enabled' => true,
+        ]);
 
         /** @var EmailOutboxService $outbox */
         $outbox = app(EmailOutboxService::class);
@@ -62,6 +72,9 @@ final class EmailOutboxAttributionTest extends TestCase
 
         $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
         $this->assertIsArray($payloadJson);
+        $this->assertSame('active', (string) ($payloadJson['subscriber_status'] ?? ''));
+        $this->assertSame(true, $payloadJson['marketing_consent'] ?? null);
+        $this->assertSame(true, $payloadJson['transactional_recovery_enabled'] ?? null);
         $this->assertSame('share_123', (string) data_get($payloadJson, 'attribution.share_id'));
         $this->assertSame('clk_456', (string) data_get($payloadJson, 'attribution.share_click_id'));
         $this->assertSame('organic', (string) data_get($payloadJson, 'attribution.utm.medium'));
@@ -73,6 +86,7 @@ final class EmailOutboxAttributionTest extends TestCase
         $payloadEnc = json_decode((string) $pii->decrypt((string) ($row->payload_enc ?? '')), true);
         $this->assertIsArray($payloadEnc);
         $this->assertSame($email, (string) ($payloadEnc['to_email'] ?? ''));
+        $this->assertSame('active', (string) ($payloadEnc['subscriber_status'] ?? ''));
         $this->assertSame('hero', (string) data_get($payloadEnc, 'attribution.utm.content'));
 
         Mail::mailer('array')->getSymfonyTransport()->flush();
@@ -94,6 +108,12 @@ final class EmailOutboxAttributionTest extends TestCase
         ]);
 
         $attemptId = $this->createAttempt();
+        app(EmailCaptureService::class)->capture('claim@example.com', [
+            'surface' => 'lookup',
+            'entrypoint' => 'order_lookup',
+            'marketing_consent' => false,
+            'transactional_recovery_enabled' => true,
+        ]);
 
         /** @var EmailOutboxService $outbox */
         $outbox = app(EmailOutboxService::class);
@@ -123,8 +143,18 @@ final class EmailOutboxAttributionTest extends TestCase
 
         $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
         $this->assertIsArray($payloadJson);
+        $this->assertSame('active', (string) ($payloadJson['subscriber_status'] ?? ''));
+        $this->assertSame(false, $payloadJson['marketing_consent'] ?? null);
+        $this->assertSame(true, $payloadJson['transactional_recovery_enabled'] ?? null);
         $this->assertSame('share_claim', (string) data_get($payloadJson, 'attribution.share_id'));
         $this->assertSame('order_lookup', (string) data_get($payloadJson, 'attribution.entrypoint'));
+
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+        $payloadEnc = json_decode((string) $pii->decrypt((string) ($row->payload_enc ?? '')), true);
+        $this->assertIsArray($payloadEnc);
+        $this->assertArrayNotHasKey('claim_token', $payloadEnc);
+        $this->assertArrayNotHasKey('claim_url', $payloadEnc);
 
         Mail::mailer('array')->getSymfonyTransport()->flush();
         $this->artisan('email:outbox-send --limit=10')->assertExitCode(0);

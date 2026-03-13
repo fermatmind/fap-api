@@ -35,6 +35,7 @@ class OrderManager
         ?string $contactEmail = null,
         ?string $requestId = null,
         array $attribution = [],
+        array $emailCapture = [],
     ): array {
         $requestedSku = $this->skus->normalizeSku($sku);
         if ($requestedSku === '') {
@@ -101,7 +102,8 @@ class OrderManager
             $modulesIncluded,
             $contactEmailHash,
             $requestId,
-            $attribution
+            $attribution,
+            $emailCapture
         ): array {
             $orderNo = 'ord_'.Str::uuid();
             $now = now();
@@ -113,6 +115,10 @@ class OrderManager
             $normalizedAttribution = $this->normalizeAttribution($attribution);
             if ($normalizedAttribution !== []) {
                 $orderMeta['attribution'] = $normalizedAttribution;
+            }
+            $normalizedEmailCapture = $this->normalizeEmailCapture($emailCapture, $contactEmailHash);
+            if ($normalizedEmailCapture !== []) {
+                $orderMeta['email_capture'] = $normalizedEmailCapture;
             }
 
             $row = [
@@ -609,8 +615,14 @@ class OrderManager
 
     public function mergeAttribution(string $orderNo, int $orgId, array $attribution): void
     {
+        $this->mergeCheckoutContext($orderNo, $orgId, $attribution, []);
+    }
+
+    public function mergeCheckoutContext(string $orderNo, int $orgId, array $attribution, array $emailCapture): void
+    {
         $normalizedAttribution = $this->normalizeAttribution($attribution);
-        if ($normalizedAttribution === []) {
+        $normalizedEmailCapture = $this->normalizeEmailCapture($emailCapture);
+        if ($normalizedAttribution === [] && $normalizedEmailCapture === []) {
             return;
         }
 
@@ -624,8 +636,14 @@ class OrderManager
         }
 
         $meta = $this->decodeMeta($order->meta_json ?? null);
-        $existingAttribution = is_array($meta['attribution'] ?? null) ? $meta['attribution'] : [];
-        $meta['attribution'] = array_replace($existingAttribution, $normalizedAttribution);
+        if ($normalizedAttribution !== []) {
+            $existingAttribution = is_array($meta['attribution'] ?? null) ? $meta['attribution'] : [];
+            $meta['attribution'] = array_replace_recursive($existingAttribution, $normalizedAttribution);
+        }
+        if ($normalizedEmailCapture !== []) {
+            $existingEmailCapture = is_array($meta['email_capture'] ?? null) ? $meta['email_capture'] : [];
+            $meta['email_capture'] = array_replace_recursive($existingEmailCapture, $normalizedEmailCapture);
+        }
 
         DB::table('orders')
             ->where('order_no', (string) $order->order_no)
@@ -817,6 +835,20 @@ class OrderManager
         return $this->normalizeAttribution($attribution);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    public function extractEmailCaptureFromOrder(object $order): array
+    {
+        $meta = $this->decodeMeta($order->meta_json ?? null);
+        $emailCapture = is_array($meta['email_capture'] ?? null) ? $meta['email_capture'] : [];
+
+        return $this->normalizeEmailCapture(
+            $emailCapture,
+            $this->normalizeEmailHash((string) ($order->contact_email_hash ?? ''))
+        );
+    }
+
     private function reportUrl(string $attemptId): string
     {
         return "/api/v0.3/attempts/{$attemptId}/report";
@@ -871,6 +903,52 @@ class OrderManager
         }
 
         return $normalized;
+    }
+
+    /**
+     * @param  array<string,mixed>  $emailCapture
+     * @return array<string,mixed>
+     */
+    private function normalizeEmailCapture(array $emailCapture, ?string $contactEmailHash = null): array
+    {
+        $normalized = [];
+
+        $resolvedContactEmailHash = $contactEmailHash ?? $this->normalizeEmailHash(
+            is_scalar($emailCapture['contact_email_hash'] ?? null) ? (string) $emailCapture['contact_email_hash'] : null
+        );
+        if ($resolvedContactEmailHash !== null) {
+            $normalized['contact_email_hash'] = $resolvedContactEmailHash;
+        }
+
+        $subscriberStatus = strtolower(trim((string) ($emailCapture['subscriber_status'] ?? '')));
+        if (in_array($subscriberStatus, ['active', 'unsubscribed', 'suppressed'], true)) {
+            $normalized['subscriber_status'] = $subscriberStatus;
+        }
+
+        foreach (['marketing_consent', 'transactional_recovery_enabled'] as $field) {
+            if (array_key_exists($field, $emailCapture)) {
+                $normalized[$field] = filter_var(
+                    $emailCapture[$field],
+                    FILTER_VALIDATE_BOOLEAN,
+                    FILTER_NULL_ON_FAILURE
+                ) ?? false;
+            }
+        }
+
+        foreach ([
+            'captured_at' => 64,
+            'surface' => 64,
+            'attempt_id' => 64,
+        ] as $field => $maxLength) {
+            $value = $this->trimOrNull(is_scalar($emailCapture[$field] ?? null) ? (string) $emailCapture[$field] : null);
+            if ($value !== null) {
+                $normalized[$field] = mb_strlen($value, 'UTF-8') > $maxLength
+                    ? mb_substr($value, 0, $maxLength, 'UTF-8')
+                    : $value;
+            }
+        }
+
+        return array_replace($normalized, $this->normalizeAttribution($emailCapture));
     }
 
     private function syncPurchasedInviteFromOrder(?object $order, ?string $paidAt): void

@@ -114,7 +114,8 @@ Route::prefix('v0.3')->middleware([
         Route::post('/auth/phone/verify', [AuthPhoneV03Controller::class, 'verify']);
     });
 
-    Route::get('/claim/report', [ClaimV03Controller::class, 'report']);
+    Route::get('/claim/report', [ClaimV03Controller::class, 'report'])
+        ->name('api.v0_3.claim.report');
 
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
         Route::get('/me/attempts', [MeV03Controller::class, 'attempts']);
@@ -175,18 +176,25 @@ Route::prefix('v0.3')->middleware([
         Route::get('/skus', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus')
             ->name('api.v0_3.skus');
         Route::post('/orders/checkout', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout')
-            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class)
+            ->name('api.v0_3.orders.checkout');
         Route::post('/orders/lookup', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@lookup')
-            ->middleware([\App\Http\Middleware\FmTokenOptional::class, 'throttle:api_order_lookup']);
+            ->middleware([\App\Http\Middleware\FmTokenOptional::class, 'throttle:api_order_lookup'])
+            ->name('api.v0_3.orders.lookup');
         Route::post('/orders/{order_no}/resend', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@resend')
             ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::post('/claim/report', [ClaimV03Controller::class, 'requestReport'])
-            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class)
+            ->name('api.v0_3.claim.report.request');
         Route::post('/email/capture', [EmailCaptureController::class, 'store'])
-            ->middleware(\App\Http\Middleware\FmTokenOptional::class);
-        Route::get('/email/preferences', [EmailPreferenceController::class, 'show']);
-        Route::post('/email/preferences', [EmailPreferenceController::class, 'update']);
-        Route::post('/email/unsubscribe', [EmailPreferenceController::class, 'unsubscribe']);
+            ->middleware(\App\Http\Middleware\FmTokenOptional::class)
+            ->name('api.v0_3.email.capture');
+        Route::get('/email/preferences', [EmailPreferenceController::class, 'show'])
+            ->name('api.v0_3.email.preferences.show');
+        Route::post('/email/preferences', [EmailPreferenceController::class, 'update'])
+            ->name('api.v0_3.email.preferences.update');
+        Route::post('/email/unsubscribe', [EmailPreferenceController::class, 'unsubscribe'])
+            ->name('api.v0_3.email.unsubscribe');
         Route::post('/orders', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder')
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
         Route::post('/orders/stub', static function (
