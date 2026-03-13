@@ -403,10 +403,12 @@ class EmailOutboxService
      */
     public function queuePreferencesUpdatedConfirmation(EmailSubscriber $subscriber, ?string $preferredLocale = null): array
     {
-        return $this->queueSubscriberLifecycleConfirmation(
+        return $this->queueSubscriberLifecycleEmail(
             $subscriber,
             'preferences_updated',
             'email_preferences',
+            null,
+            null,
             $preferredLocale
         );
     }
@@ -416,10 +418,12 @@ class EmailOutboxService
      */
     public function queueUnsubscribeConfirmation(EmailSubscriber $subscriber, ?string $preferredLocale = null): array
     {
-        return $this->queueSubscriberLifecycleConfirmation(
+        return $this->queueSubscriberLifecycleEmail(
             $subscriber,
             'unsubscribe_confirmation',
             'email_unsubscribe',
+            null,
+            null,
             $preferredLocale
         );
     }
@@ -427,11 +431,59 @@ class EmailOutboxService
     /**
      * @return array{ok:bool,queued:bool,error?:string,reason?:string}
      */
-    private function queueSubscriberLifecycleConfirmation(
+    public function queuePostPurchaseFollowup(
+        EmailSubscriber $subscriber,
+        string $attemptId,
+        string $orderNo,
+        ?string $preferredLocale = null
+    ): array {
+        return $this->queueSubscriberLifecycleEmail(
+            $subscriber,
+            'post_purchase_followup',
+            'post_purchase_followup',
+            $attemptId,
+            $orderNo,
+            $preferredLocale,
+            [],
+            ['pending', 'sent', 'consumed']
+        );
+    }
+
+    /**
+     * @return array{ok:bool,queued:bool,error?:string,reason?:string}
+     */
+    public function queueReportReactivation(
+        EmailSubscriber $subscriber,
+        string $attemptId,
+        string $orderNo,
+        ?string $preferredLocale = null
+    ): array {
+        return $this->queueSubscriberLifecycleEmail(
+            $subscriber,
+            'report_reactivation',
+            'report_reactivation',
+            $attemptId,
+            $orderNo,
+            $preferredLocale,
+            [],
+            ['pending', 'sent', 'consumed']
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $payloadOverrides
+     * @param  array<int,string>|null  $dedupeStatuses
+     * @return array{ok:bool,queued:bool,error?:string,reason?:string}
+     */
+    private function queueSubscriberLifecycleEmail(
         EmailSubscriber $subscriber,
         string $templateKey,
         string $surface,
-        ?string $preferredLocale = null
+        ?string $attemptId = null,
+        ?string $orderNo = null,
+        ?string $preferredLocale = null,
+        array $payloadOverrides = [],
+        ?array $dedupeStatuses = null
     ): array {
         if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return ['ok' => false, 'queued' => false, 'error' => 'TABLE_MISSING'];
@@ -443,18 +495,26 @@ class EmailOutboxService
             return ['ok' => false, 'queued' => false, 'error' => 'INVALID_RECIPIENT'];
         }
 
+        $lastContext = is_array($subscriber->last_context_json) ? $subscriber->last_context_json : [];
+        $attemptId = $this->trimOrNull($attemptId) ?? $this->trimOrNull((string) ($lastContext['attempt_id'] ?? ''));
+        $orderNo = $this->trimOrNull($orderNo) ?? $this->trimOrNull((string) ($lastContext['order_no'] ?? ''));
         $emailHash = $this->piiCipher->emailHash($email);
-        if ($this->hasPendingLifecycleTemplateRow($emailHash, $templateKey)) {
+
+        if ($orderNo !== null && in_array($templateKey, ['post_purchase_followup', 'report_reactivation'], true)) {
+            if ($this->hasLifecycleTemplateRowForOrder($templateKey, $orderNo, $attemptId, $dedupeStatuses ?? ['pending', 'sent', 'consumed'])) {
+                return ['ok' => true, 'queued' => false, 'reason' => 'existing_order_template'];
+            }
+        } elseif ($this->hasPendingLifecycleTemplateRow($emailHash, $templateKey)) {
             return ['ok' => true, 'queued' => false, 'reason' => 'pending_exists'];
         }
 
         $locale = $this->normalizeLocale((string) ($preferredLocale ?? ($subscriber->locale ?? '')));
+        if ($attemptId !== null && $preferredLocale === null) {
+            $locale = $this->resolveRequestedLocale($attemptId, null);
+        }
+
         $subject = $this->defaultSubjectForTemplate($templateKey, $locale);
         $emailEnc = $this->piiCipher->encrypt($email);
-        $keyVersion = $this->piiCipher->currentKeyVersion();
-        $lastContext = is_array($subscriber->last_context_json) ? $subscriber->last_context_json : [];
-        $attemptId = $this->trimOrNull((string) ($lastContext['attempt_id'] ?? ''));
-        $orderNo = $this->trimOrNull((string) ($lastContext['order_no'] ?? ''));
         $preferenceSnapshot = $this->preferenceSnapshotForSubscriber($subscriber);
         $lifecycleContext = $this->buildLifecyclePayloadContext($email, $orderNo, [
             'surface' => $surface,
@@ -464,9 +524,11 @@ class EmailOutboxService
             ? $lifecycleContext['attribution']
             : [];
 
-        $payload = [
+        $payload = array_replace([
             'attempt_id' => $attemptId,
             'order_no' => $orderNo,
+            'report_url' => $attemptId !== null ? $this->reportUrl($attemptId) : null,
+            'report_pdf_url' => $attemptId !== null ? $this->reportPdfUrl($attemptId) : null,
             'locale' => $locale,
             'template_key' => $templateKey,
             'to_email' => $email,
@@ -482,66 +544,20 @@ class EmailOutboxService
             'preferences_changed_at' => $subscriber->last_preferences_changed_at?->toIso8601String(),
             'unsubscribed_at' => $subscriber->unsubscribed_at?->toIso8601String(),
             'attribution' => $this->payloadAttribution($normalizedAttribution),
-        ];
+        ], $payloadOverrides);
         $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
         $payloadEnc = $this->encodePayloadEncrypted($payload);
-
-        $row = [
-            'id' => (string) Str::uuid(),
-            'user_id' => $subscriber->lifecycleOutboxUserId(),
-            'email' => $this->maskedLegacyEmail($emailHash),
-            'template' => $templateKey,
-            'payload_json' => $payloadJson,
-            'claim_token_hash' => hash('sha256', $templateKey.'|'.(string) $subscriber->getKey().'|'.Str::uuid()->toString()),
-            'claim_expires_at' => null,
-            'status' => 'pending',
-            'sent_at' => null,
-            'consumed_at' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
-
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
-            $row['attempt_id'] = $attemptId;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_hash')) {
-            $row['email_hash'] = $emailHash;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_enc')) {
-            $row['email_enc'] = $emailEnc;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_hash')) {
-            $row['to_email_hash'] = $emailHash;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_enc')) {
-            $row['to_email_enc'] = $emailEnc;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
-            $row['payload_enc'] = $payloadEnc;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
-            $row['payload_schema_version'] = 'v1';
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'key_version')) {
-            $row['key_version'] = $keyVersion;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
-            $row['locale'] = $locale;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
-            $row['template_key'] = $templateKey;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
-            $row['to_email'] = $this->maskedLegacyEmail($emailHash);
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
-            $row['subject'] = $subject;
-        }
-        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
-            $row['body_html'] = null;
-        }
-
-        DB::table('email_outbox')->insert($row);
+        DB::table('email_outbox')->insert($this->buildLifecycleOutboxRow(
+            $subscriber->lifecycleOutboxUserId(),
+            $templateKey,
+            $emailHash,
+            $emailEnc,
+            $attemptId,
+            $locale,
+            $subject,
+            $payloadJson,
+            $payloadEnc
+        ));
 
         return ['ok' => true, 'queued' => true];
     }
@@ -1328,6 +1344,8 @@ class EmailOutboxService
             'support_contact',
             'preferences_updated',
             'unsubscribe_confirmation',
+            'post_purchase_followup',
+            'report_reactivation',
         ];
         if (! in_array($templateKey, $supported, true)) {
             return '';
@@ -1677,6 +1695,75 @@ class EmailOutboxService
         ];
     }
 
+    private function buildLifecycleOutboxRow(
+        string $userId,
+        string $templateKey,
+        string $emailHash,
+        ?string $emailEnc,
+        ?string $attemptId,
+        string $locale,
+        string $subject,
+        string $payloadJson,
+        ?string $payloadEnc
+    ): array {
+        $row = [
+            'id' => (string) Str::uuid(),
+            'user_id' => $userId,
+            'email' => $this->maskedLegacyEmail($emailHash),
+            'template' => $templateKey,
+            'payload_json' => $payloadJson,
+            'claim_token_hash' => hash('sha256', $templateKey.'|'.$userId.'|'.Str::uuid()->toString()),
+            'claim_expires_at' => null,
+            'status' => 'pending',
+            'sent_at' => null,
+            'consumed_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
+            $row['attempt_id'] = $attemptId;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_hash')) {
+            $row['email_hash'] = $emailHash;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'email_enc')) {
+            $row['email_enc'] = $emailEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_hash')) {
+            $row['to_email_hash'] = $emailHash;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email_enc')) {
+            $row['to_email_enc'] = $emailEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_enc')) {
+            $row['payload_enc'] = $payloadEnc;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'payload_schema_version')) {
+            $row['payload_schema_version'] = 'v1';
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'key_version')) {
+            $row['key_version'] = $this->piiCipher->currentKeyVersion();
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'locale')) {
+            $row['locale'] = $locale;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+            $row['template_key'] = $templateKey;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'to_email')) {
+            $row['to_email'] = $this->maskedLegacyEmail($emailHash);
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'subject')) {
+            $row['subject'] = $subject;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'body_html')) {
+            $row['body_html'] = null;
+        }
+
+        return $row;
+    }
+
     private function hasPendingLifecycleTemplateRow(string $emailHash, string $templateKey): bool
     {
         $query = DB::table('email_outbox')
@@ -1711,9 +1798,46 @@ class EmailOutboxService
         return $query->exists();
     }
 
+    /**
+     * @param  array<int,string>  $statuses
+     */
+    private function hasLifecycleTemplateRowForOrder(string $templateKey, string $orderNo, ?string $attemptId, array $statuses): bool
+    {
+        $query = DB::table('email_outbox')
+            ->whereIn('status', $statuses)
+            ->where(function ($builder) use ($templateKey): void {
+                if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
+                    $builder->where('template_key', $templateKey);
+
+                    return;
+                }
+
+                $builder->where('template', $templateKey);
+            })
+            ->orderByDesc('updated_at');
+
+        if ($attemptId !== null && \App\Support\SchemaBaseline::hasColumn('email_outbox', 'attempt_id')) {
+            $query->where('attempt_id', $attemptId);
+        }
+
+        foreach ($query->get() as $row) {
+            $payload = $this->decodePayloadFromRow($row);
+            if ($this->trimOrNull((string) ($payload['order_no'] ?? '')) === $orderNo) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function recordLifecycleSubscriberDelivery(string $templateKey, string $recipientEmail, \Illuminate\Support\Carbon $sentAt): void
     {
-        if (! in_array($templateKey, ['preferences_updated', 'unsubscribe_confirmation'], true)) {
+        if (! in_array($templateKey, [
+            'preferences_updated',
+            'unsubscribe_confirmation',
+            'post_purchase_followup',
+            'report_reactivation',
+        ], true)) {
             return;
         }
 
@@ -1725,7 +1849,11 @@ class EmailOutboxService
             return;
         }
 
-        $subscriber->recordLifecycleSend($templateKey, $sentAt);
+        $subscriber->recordLifecycleSend(
+            $templateKey,
+            $sentAt,
+            EmailLifecycleRolloutService::nextEligibleAtForTemplate($templateKey, $sentAt)
+        );
         $subscriber->save();
     }
 
@@ -1848,6 +1976,12 @@ class EmailOutboxService
         }
         if ($templateKey === 'unsubscribe_confirmation') {
             return $lang === 'zh' ? '你已退订邮件' : 'You have been unsubscribed from emails';
+        }
+        if ($templateKey === 'post_purchase_followup') {
+            return $lang === 'zh' ? '你的报告已准备好查看' : 'Your report is ready to view';
+        }
+        if ($templateKey === 'report_reactivation') {
+            return $lang === 'zh' ? '回来继续查看你的报告' : 'Come back to your report';
         }
 
         return $lang === 'zh' ? 'FermatMind 通知' : 'FermatMind notification';
