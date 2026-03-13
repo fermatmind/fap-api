@@ -12,7 +12,7 @@ class FapEmailLifecycleRollout extends Command
 {
     protected $signature = 'email:lifecycle-rollout {--dry-run : Scan eligible subscribers without enqueueing outbox rows.}';
 
-    protected $description = 'Scan lifecycle confirmation candidates and enqueue pending outbox rows.';
+    protected $description = 'Scan lifecycle follow-up candidates and enqueue pending outbox rows.';
 
     public function __construct(
         private readonly EmailLifecycleRolloutService $rollout,
@@ -41,6 +41,16 @@ class FapEmailLifecycleRollout extends Command
             'unsubscribe_confirmation => candidates %d, enqueued %d',
             (int) data_get($result, 'templates.unsubscribe_confirmation.candidates', 0),
             (int) data_get($result, 'templates.unsubscribe_confirmation.enqueued', 0),
+        ));
+        $this->line(sprintf(
+            'post_purchase_followup => candidates %d, enqueued %d',
+            (int) data_get($result, 'templates.post_purchase_followup.candidates', 0),
+            (int) data_get($result, 'templates.post_purchase_followup.enqueued', 0),
+        ));
+        $this->line(sprintf(
+            'report_reactivation => candidates %d, enqueued %d',
+            (int) data_get($result, 'templates.report_reactivation.candidates', 0),
+            (int) data_get($result, 'templates.report_reactivation.enqueued', 0),
         ));
 
         if ((bool) ($result['dry_run'] ?? false)) {

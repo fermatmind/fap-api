@@ -228,6 +228,138 @@ final class EmailOutboxAttributionTest extends TestCase
         $this->assertStringContainsString('compare_invite_id=', $html);
     }
 
+    public function test_post_purchase_followup_outbox_payload_includes_attribution_contract(): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'app.url' => 'https://api.example.test',
+            'mail.default' => 'array',
+        ]);
+
+        $attemptId = $this->createAttempt();
+        $email = 'postpurchase@example.com';
+        $orderNo = 'ord_attr_post_purchase';
+
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'checkout',
+            'locale' => 'en',
+            'entrypoint' => 'checkout_success',
+        ]);
+        $this->createOrder($orderNo, $attemptId, $email, [
+            'share_id' => 'share_post_purchase',
+            'compare_invite_id' => (string) Str::uuid(),
+            'share_click_id' => 'clk_post_purchase',
+            'entrypoint' => 'checkout_success',
+            'referrer' => 'https://example.com/checkout',
+            'landing_path' => '/en/checkout',
+            'utm' => [
+                'source' => 'checkout',
+                'medium' => 'owned',
+                'campaign' => 'post-purchase-followup',
+                'content' => 'receipt',
+            ],
+        ]);
+
+        $queued = app(EmailOutboxService::class)->queuePostPurchaseFollowup($subscriber, $attemptId, $orderNo, 'en');
+        $this->assertTrue((bool) ($queued['ok'] ?? false));
+        $this->assertTrue((bool) ($queued['queued'] ?? false));
+
+        $row = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->where('template', 'post_purchase_followup')
+            ->first();
+        $this->assertNotNull($row);
+
+        $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
+        $this->assertIsArray($payloadJson);
+        $this->assertSame('share_post_purchase', (string) data_get($payloadJson, 'attribution.share_id'));
+        $this->assertSame('checkout_success', (string) data_get($payloadJson, 'attribution.entrypoint'));
+        $this->assertSame('owned', (string) data_get($payloadJson, 'attribution.utm.medium'));
+        $this->assertArrayNotHasKey('email', $payloadJson);
+        $this->assertArrayNotHasKey('to_email', $payloadJson);
+
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+        $payloadEnc = json_decode((string) $pii->decrypt((string) ($row->payload_enc ?? '')), true);
+        $this->assertIsArray($payloadEnc);
+        $this->assertSame($email, (string) ($payloadEnc['to_email'] ?? ''));
+        $this->assertSame('receipt', (string) data_get($payloadEnc, 'attribution.utm.content'));
+
+        Mail::mailer('array')->getSymfonyTransport()->flush();
+        $this->artisan('email:outbox-send --limit=10')->assertExitCode(0);
+
+        $html = (string) Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage()->getHtmlBody();
+        $this->assertStringContainsString('share_id=share_post_purchase', $html);
+        $this->assertStringContainsString('utm_campaign=post-purchase-followup', $html);
+        $this->assertStringContainsString('compare_invite_id=', $html);
+    }
+
+    public function test_report_reactivation_outbox_payload_includes_attribution_contract(): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'app.url' => 'https://api.example.test',
+            'mail.default' => 'array',
+        ]);
+
+        $attemptId = $this->createAttempt();
+        $email = 'reactivation@example.com';
+        $orderNo = 'ord_attr_report_reactivation';
+
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'report',
+            'locale' => 'en',
+            'entrypoint' => 'report_view',
+        ]);
+        $this->createOrder($orderNo, $attemptId, $email, [
+            'share_id' => 'share_report_reactivation',
+            'compare_invite_id' => (string) Str::uuid(),
+            'share_click_id' => 'clk_report_reactivation',
+            'entrypoint' => 'report_view',
+            'referrer' => 'https://example.com/report',
+            'landing_path' => '/en/report',
+            'utm' => [
+                'source' => 'email',
+                'medium' => 'owned',
+                'campaign' => 'report-reactivation',
+                'content' => 'followup',
+            ],
+        ]);
+
+        $queued = app(EmailOutboxService::class)->queueReportReactivation($subscriber, $attemptId, $orderNo, 'en');
+        $this->assertTrue((bool) ($queued['ok'] ?? false));
+        $this->assertTrue((bool) ($queued['queued'] ?? false));
+
+        $row = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->where('template', 'report_reactivation')
+            ->first();
+        $this->assertNotNull($row);
+
+        $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
+        $this->assertIsArray($payloadJson);
+        $this->assertSame('share_report_reactivation', (string) data_get($payloadJson, 'attribution.share_id'));
+        $this->assertSame('report_view', (string) data_get($payloadJson, 'attribution.entrypoint'));
+        $this->assertSame('owned', (string) data_get($payloadJson, 'attribution.utm.medium'));
+
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+        $payloadEnc = json_decode((string) $pii->decrypt((string) ($row->payload_enc ?? '')), true);
+        $this->assertIsArray($payloadEnc);
+        $this->assertSame($email, (string) ($payloadEnc['to_email'] ?? ''));
+        $this->assertSame('followup', (string) data_get($payloadEnc, 'attribution.utm.content'));
+
+        Mail::mailer('array')->getSymfonyTransport()->flush();
+        $this->artisan('email:outbox-send --limit=10')->assertExitCode(0);
+
+        $html = (string) Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage()->getHtmlBody();
+        $this->assertStringContainsString('share_id=share_report_reactivation', $html);
+        $this->assertStringContainsString('utm_campaign=report-reactivation', $html);
+        $this->assertStringContainsString('compare_invite_id=', $html);
+    }
+
     private function createAttempt(): string
     {
         $attemptId = (string) Str::uuid();
@@ -258,5 +390,46 @@ final class EmailOutboxAttributionTest extends TestCase
         ]);
 
         return $attemptId;
+    }
+
+    /**
+     * @param  array<string,mixed>  $attribution
+     */
+    private function createOrder(string $orderNo, string $attemptId, string $email, array $attribution): void
+    {
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+
+        DB::table('orders')->insert([
+            'id' => (string) Str::uuid(),
+            'order_no' => $orderNo,
+            'org_id' => 0,
+            'user_id' => null,
+            'anon_id' => 'anon_attr_order',
+            'sku' => 'SKU_MBTI_FULL_REPORT',
+            'quantity' => 1,
+            'target_attempt_id' => $attemptId,
+            'amount_cents' => 299,
+            'currency' => 'USD',
+            'status' => 'paid',
+            'provider' => 'billing',
+            'external_trade_no' => null,
+            'contact_email_hash' => $pii->emailHash($email),
+            'meta_json' => json_encode([
+                'attribution' => $attribution,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'paid_at' => now()->subDays(20),
+            'fulfilled_at' => now()->subDays(19),
+            'amount_total' => 299,
+            'amount_refunded' => 0,
+            'item_sku' => 'SKU_MBTI_FULL_REPORT',
+            'provider_order_id' => null,
+            'device_id' => null,
+            'request_id' => null,
+            'created_ip' => null,
+            'refunded_at' => null,
+            'created_at' => now()->subDays(20),
+            'updated_at' => now()->subDays(19),
+        ]);
     }
 }

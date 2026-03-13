@@ -101,6 +101,18 @@ class EmailPreferenceService
             ];
         }
 
+        if ($this->isRecoveryLifecycleFollowupTemplate($templateKey) && $subscriberStatus !== EmailSubscriber::STATUS_ACTIVE) {
+            return [
+                'allowed' => false,
+                'status' => 'skipped',
+                'reason' => 'subscriber_inactive',
+                'suppressed' => false,
+                'report_recovery' => $reportRecovery,
+                'marketing_updates' => $marketingUpdates,
+                'product_updates' => $productUpdates,
+            ];
+        }
+
         if ($this->requiresReportRecovery($templateKey) && ! $reportRecovery) {
             return [
                 'allowed' => false,
@@ -394,12 +406,22 @@ class EmailPreferenceService
 
     private function requiresReportRecovery(string $templateKey): bool
     {
-        return in_array(trim($templateKey), ['payment_success', 'report_claim'], true);
+        return in_array(trim($templateKey), [
+            'payment_success',
+            'report_claim',
+            'post_purchase_followup',
+            'report_reactivation',
+        ], true);
     }
 
     private function isLifecycleConfirmationTemplate(string $templateKey): bool
     {
         return in_array(trim($templateKey), ['preferences_updated', 'unsubscribe_confirmation'], true);
+    }
+
+    private function isRecoveryLifecycleFollowupTemplate(string $templateKey): bool
+    {
+        return in_array(trim($templateKey), ['post_purchase_followup', 'report_reactivation'], true);
     }
 
     private function normalizeEmail(string $email): ?string

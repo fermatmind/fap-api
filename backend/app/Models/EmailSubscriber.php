@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Schema;
 
 class EmailSubscriber extends Model
 {
@@ -47,6 +49,8 @@ class EmailSubscriber extends Model
         'last_preferences_confirmation_sent_at',
         'last_unsubscribe_confirmation_sent_at',
         'last_lifecycle_email_sent_at',
+        'last_lifecycle_template_key',
+        'next_lifecycle_eligible_at',
         'unsubscribed_at',
     ];
 
@@ -63,6 +67,7 @@ class EmailSubscriber extends Model
         'last_preferences_confirmation_sent_at' => 'datetime',
         'last_unsubscribe_confirmation_sent_at' => 'datetime',
         'last_lifecycle_email_sent_at' => 'datetime',
+        'next_lifecycle_eligible_at' => 'datetime',
         'unsubscribed_at' => 'datetime',
     ];
 
@@ -83,6 +88,21 @@ class EmailSubscriber extends Model
 
     public function scopeOutsideLifecycleCooldown(Builder $query, CarbonInterface $threshold): Builder
     {
+        if (Schema::hasColumn($this->getTable(), 'next_lifecycle_eligible_at')) {
+            return $query->where(function (Builder $builder) use ($threshold): void {
+                $builder->where(function (Builder $eligible): void {
+                    $eligible->whereNotNull('next_lifecycle_eligible_at')
+                        ->where('next_lifecycle_eligible_at', '<=', now());
+                })->orWhere(function (Builder $legacy) use ($threshold): void {
+                    $legacy->whereNull('next_lifecycle_eligible_at')
+                        ->where(function (Builder $fallback) use ($threshold): void {
+                            $fallback->whereNull('last_lifecycle_email_sent_at')
+                                ->orWhere('last_lifecycle_email_sent_at', '<=', $threshold);
+                        });
+                });
+            });
+        }
+
         return $query->where(function (Builder $builder) use ($threshold): void {
             $builder->whereNull('last_lifecycle_email_sent_at')
                 ->orWhere('last_lifecycle_email_sent_at', '<=', $threshold);
@@ -94,9 +114,20 @@ class EmailSubscriber extends Model
         return 'subscriber_'.(string) $this->getKey();
     }
 
-    public function recordLifecycleSend(string $templateKey, CarbonInterface $sentAt): void
+    public function recordLifecycleSend(string $templateKey, CarbonInterface $sentAt, ?CarbonInterface $nextEligibleAt = null): void
     {
         $this->last_lifecycle_email_sent_at = $sentAt;
+
+        if (Schema::hasColumn($this->getTable(), 'last_lifecycle_template_key')) {
+            $this->setAttribute('last_lifecycle_template_key', $templateKey);
+        }
+
+        if (Schema::hasColumn($this->getTable(), 'next_lifecycle_eligible_at')) {
+            $this->setAttribute(
+                'next_lifecycle_eligible_at',
+                $nextEligibleAt instanceof CarbonInterface ? Carbon::parse($nextEligibleAt) : null
+            );
+        }
 
         if ($templateKey === 'preferences_updated') {
             $this->last_preferences_confirmation_sent_at = $sentAt;
