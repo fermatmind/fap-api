@@ -55,6 +55,7 @@ final class CommerceOrderResendTest extends TestCase
         $this->assertSame($orderNo, (string) ($payloadJson['order_no'] ?? ''));
         $this->assertSame("/api/v0.3/attempts/{$attemptId}/report", (string) ($payloadJson['report_url'] ?? ''));
         $this->assertSame("/api/v0.3/attempts/{$attemptId}/report.pdf", (string) ($payloadJson['report_pdf_url'] ?? ''));
+        $this->assertSame('active', (string) ($payloadJson['subscriber_status'] ?? ''));
         $this->assertSame([], $payloadJson['attribution'] ?? null);
     }
 
@@ -94,6 +95,7 @@ final class CommerceOrderResendTest extends TestCase
         $this->assertSame('anon-resend@example.com', $pii->decrypt($encryptedEmail));
         $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
         $this->assertIsArray($payloadJson);
+        $this->assertSame('active', (string) ($payloadJson['subscriber_status'] ?? ''));
         $this->assertSame([], $payloadJson['attribution'] ?? null);
     }
 

@@ -765,6 +765,40 @@ class PaymentWebhookHandlerCore
     }
 
     /**
+     * @return array<string,mixed>
+     */
+    public function extractOrderLifecycleContext(object $order): array
+    {
+        $meta = $this->decodeMeta($order->meta_json ?? null);
+        $emailCapture = is_array($meta['email_capture'] ?? null) ? $meta['email_capture'] : [];
+        $normalized = [];
+
+        $subscriberStatus = strtolower(trim((string) ($emailCapture['subscriber_status'] ?? '')));
+        if (in_array($subscriberStatus, ['active', 'unsubscribed', 'suppressed'], true)) {
+            $normalized['subscriber_status'] = $subscriberStatus;
+        }
+
+        foreach (['marketing_consent', 'transactional_recovery_enabled'] as $field) {
+            if (array_key_exists($field, $emailCapture)) {
+                $normalized[$field] = filter_var(
+                    $emailCapture[$field],
+                    FILTER_VALIDATE_BOOLEAN,
+                    FILTER_NULL_ON_FAILURE
+                ) ?? false;
+            }
+        }
+
+        $surface = is_scalar($emailCapture['surface'] ?? null) ? trim((string) $emailCapture['surface']) : '';
+        if ($surface !== '') {
+            $normalized['surface'] = mb_strlen($surface, 'UTF-8') > 64
+                ? mb_substr($surface, 0, 64, 'UTF-8')
+                : $surface;
+        }
+
+        return array_replace($normalized, $this->extractOrderAttribution($order));
+    }
+
+    /**
      * @return list<string>
      */
     public function normalizeModulesIncluded(mixed $raw): array
@@ -1355,7 +1389,7 @@ class PaymentWebhookHandlerCore
                 if ($fromOrder !== '') {
                     $candidateUserIds[] = $fromOrder;
                 }
-                $attribution = $this->extractOrderAttribution($orderRow);
+                $attribution = $this->extractOrderLifecycleContext($orderRow);
             }
         }
 

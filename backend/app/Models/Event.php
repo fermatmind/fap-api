@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    use HasUuids, HasOrgScope;
+    use HasOrgScope, HasUuids;
 
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [
@@ -54,11 +55,11 @@ class Event extends Model
     ];
 
     protected $casts = [
-        'meta_json'   => 'array',
+        'meta_json' => 'array',
         'experiments_json' => 'array',
         'occurred_at' => 'datetime',
-        'org_id'      => 'integer',
-        'user_id'     => 'integer',
+        'org_id' => 'integer',
+        'user_id' => 'integer',
         'question_index' => 'integer',
         'duration_ms' => 'integer',
         'is_dropoff' => 'integer',

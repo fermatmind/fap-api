@@ -495,7 +495,7 @@
         },
         "/api/v0.3/claim/report": {
             "get": {
-                "operationId": "get_api_v0_3_claim_report",
+                "operationId": "api.v0_3.claim.report",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -509,10 +509,11 @@
                     "api",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
                     "App\\Http\\Middleware\\NormalizeApiErrorContract"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.claim.report"
             },
             "post": {
-                "operationId": "post_api_v0_3_claim_report",
+                "operationId": "api.v0_3.claim.report.request",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -529,7 +530,8 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\FmTokenOptional"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.claim.report.request"
             }
         },
         "/api/v0.3/compare/mbti/{inviteId}": {
@@ -626,7 +628,7 @@
         },
         "/api/v0.3/email/capture": {
             "post": {
-                "operationId": "post_api_v0_3_email_capture",
+                "operationId": "api.v0_3.email.capture",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -643,12 +645,13 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\FmTokenOptional"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.email.capture"
             }
         },
         "/api/v0.3/email/preferences": {
             "get": {
-                "operationId": "get_api_v0_3_email_preferences",
+                "operationId": "api.v0_3.email.preferences.show",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -664,10 +667,11 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.email.preferences.show"
             },
             "post": {
-                "operationId": "post_api_v0_3_email_preferences",
+                "operationId": "api.v0_3.email.preferences.update",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -683,12 +687,13 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.email.preferences.update"
             }
         },
         "/api/v0.3/email/unsubscribe": {
             "post": {
-                "operationId": "post_api_v0_3_email_unsubscribe",
+                "operationId": "api.v0_3.email.unsubscribe",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -704,7 +709,8 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.email.unsubscribe"
             }
         },
         "/api/v0.3/experiments": {
@@ -793,7 +799,7 @@
         },
         "/api/v0.3/orders/checkout": {
             "post": {
-                "operationId": "post_api_v0_3_orders_checkout",
+                "operationId": "api.v0_3.orders.checkout",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -810,12 +816,13 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\FmTokenOptional"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.orders.checkout"
             }
         },
         "/api/v0.3/orders/lookup": {
             "post": {
-                "operationId": "post_api_v0_3_orders_lookup",
+                "operationId": "api.v0_3.orders.lookup",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -833,7 +840,8 @@
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\FmTokenOptional",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_order_lookup"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.orders.lookup"
             }
         },
         "/api/v0.3/orders/stub": {

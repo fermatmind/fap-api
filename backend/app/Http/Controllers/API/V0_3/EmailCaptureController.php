@@ -13,7 +13,9 @@ final class EmailCaptureController extends Controller
 {
     public function store(EmailCaptureRequest $request, EmailCaptureService $captures): JsonResponse
     {
-        $result = $captures->capture((string) $request->validated('email'), $request->validated());
+        /** @var array<string,mixed> $payload */
+        $payload = $request->validated();
+        $result = $captures->capture((string) ($payload['email'] ?? ''), $payload);
 
         return response()->json($result);
     }

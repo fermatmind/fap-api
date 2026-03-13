@@ -249,6 +249,7 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
         $this->assertIsArray($payloadJson);
         $this->assertSame("/api/v0.3/attempts/{$attemptId}/report", (string) ($payloadJson['report_url'] ?? ''));
         $this->assertSame("/api/v0.3/attempts/{$attemptId}/report.pdf", (string) ($payloadJson['report_pdf_url'] ?? ''));
+        $this->assertSame('active', (string) ($payloadJson['subscriber_status'] ?? ''));
         $this->assertSame('share_big5_unlock', (string) data_get($payloadJson, 'attribution.share_id'));
         $this->assertSame('clk_big5_unlock', (string) data_get($payloadJson, 'attribution.share_click_id'));
         $this->assertSame('organic', (string) data_get($payloadJson, 'attribution.utm.medium'));

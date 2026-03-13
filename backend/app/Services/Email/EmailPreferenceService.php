@@ -58,8 +58,8 @@ class EmailPreferenceService
      */
     public function deliveryPolicyForEmail(string $email, string $templateKey): array
     {
-        $normalizedEmail = $this->normalizeEmail($email);
-        if ($normalizedEmail === null) {
+        $snapshot = $this->emailCapture->subscriberLifecycleSnapshot($email);
+        if ($this->normalizeEmail($email) === null) {
             return [
                 'allowed' => false,
                 'status' => 'failed',
@@ -71,31 +71,12 @@ class EmailPreferenceService
             ];
         }
 
-        $emailHash = $this->piiCipher->emailHash($normalizedEmail);
-        $suppressed = EmailSuppression::query()
-            ->where('email_hash', $emailHash)
-            ->exists();
+        $subscriberStatus = (string) ($snapshot['subscriber_status'] ?? EmailSubscriber::STATUS_ACTIVE);
+        $reportRecovery = (bool) ($snapshot['transactional_recovery_enabled'] ?? true);
+        $marketingUpdates = (bool) ($snapshot['marketing_consent'] ?? false);
+        $productUpdates = (bool) ($snapshot['marketing_consent'] ?? false);
 
-        $subscriber = EmailSubscriber::query()
-            ->with('preference')
-            ->where('email_hash', $emailHash)
-            ->first();
-
-        $preference = $subscriber?->preference instanceof EmailPreference
-            ? $subscriber->preference
-            : null;
-
-        $reportRecovery = $preference instanceof EmailPreference
-            ? (bool) $preference->report_recovery
-            : (bool) ($subscriber->transactional_recovery_enabled ?? true);
-        $marketingUpdates = $preference instanceof EmailPreference
-            ? (bool) $preference->marketing_updates
-            : (bool) ($subscriber->marketing_consent ?? false);
-        $productUpdates = $preference instanceof EmailPreference
-            ? (bool) $preference->product_updates
-            : (bool) ($subscriber->marketing_consent ?? false);
-
-        if ($suppressed) {
+        if ($subscriberStatus === EmailSubscriber::STATUS_SUPPRESSED) {
             return [
                 'allowed' => false,
                 'status' => 'suppressed',
@@ -185,11 +166,18 @@ class EmailPreferenceService
         $preference->product_updates = (bool) ($preferences['product_updates'] ?? false);
         $preference->save();
 
-        $subscriber->marketing_consent = (bool) ($preference->marketing_updates || $preference->product_updates);
-        $subscriber->transactional_recovery_enabled = (bool) $preference->report_recovery;
-        $subscriber->unsubscribed_at = $preference->marketing_updates || $preference->report_recovery || $preference->product_updates
+        $subscriber->marketing_consent = $preference->allowsMarketing();
+        $subscriber->transactional_recovery_enabled = $preference->allowsReportRecovery();
+        $subscriber->last_marketing_consent_at = now();
+        $subscriber->last_transactional_recovery_change_at = now();
+        $subscriber->unsubscribed_at = $preference->allowsMarketing() || $preference->allowsReportRecovery()
             ? null
             : now();
+        $subscriber->status = $this->resolveSubscriberStatus(
+            $subscriber,
+            $subscriber->marketing_consent,
+            $subscriber->transactional_recovery_enabled
+        );
         $subscriber->save();
 
         return [
@@ -221,15 +209,17 @@ class EmailPreferenceService
 
         $subscriber->marketing_consent = false;
         $subscriber->transactional_recovery_enabled = false;
+        $subscriber->last_marketing_consent_at = now();
+        $subscriber->last_transactional_recovery_change_at = now();
         $subscriber->unsubscribed_at = now();
-        $subscriber->save();
+        $subscriber->status = EmailSubscriber::STATUS_UNSUBSCRIBED;
 
-        if (is_string($reason) && trim($reason) !== '' && empty($subscriber->last_context_json)) {
-            $subscriber->last_context_json = [
-                'unsubscribe_reason' => trim($reason),
-            ];
-            $subscriber->save();
+        if (is_string($reason) && trim($reason) !== '') {
+            $lastContext = is_array($subscriber->last_context_json) ? $subscriber->last_context_json : [];
+            $lastContext['unsubscribe_reason'] = trim($reason);
+            $subscriber->last_context_json = $lastContext;
         }
+        $subscriber->save();
 
         return [
             'ok' => true,
@@ -284,9 +274,9 @@ class EmailPreferenceService
             : new EmailPreference([
                 'id' => (string) Str::uuid(),
                 'subscriber_id' => (string) $subscriber->getKey(),
-                'marketing_updates' => (bool) $subscriber->marketing_consent,
-                'report_recovery' => (bool) ($subscriber->transactional_recovery_enabled ?? true),
-                'product_updates' => (bool) $subscriber->marketing_consent,
+                'marketing_updates' => $subscriber->allowsMarketing(),
+                'report_recovery' => $subscriber->allowsTransactionalRecovery(),
+                'product_updates' => $subscriber->allowsMarketing(),
             ]);
         if (! $preference->exists) {
             $preference->save();
@@ -366,6 +356,26 @@ class EmailPreferenceService
         $decoded = base64_decode($normalized, true);
 
         return is_string($decoded) ? $decoded : null;
+    }
+
+    private function resolveSubscriberStatus(
+        EmailSubscriber $subscriber,
+        bool $marketingConsent,
+        bool $transactionalRecoveryEnabled
+    ): string {
+        $suppressed = EmailSuppression::query()
+            ->where('email_hash', (string) ($subscriber->email_hash ?? ''))
+            ->exists();
+
+        if ($suppressed) {
+            return EmailSubscriber::STATUS_SUPPRESSED;
+        }
+
+        if ($subscriber->unsubscribed_at !== null || (! $marketingConsent && ! $transactionalRecoveryEnabled)) {
+            return EmailSubscriber::STATUS_UNSUBSCRIBED;
+        }
+
+        return EmailSubscriber::STATUS_ACTIVE;
     }
 
     private function maskEmail(EmailSubscriber $subscriber): string

@@ -55,8 +55,11 @@ final class EmailPreferencesContractTest extends TestCase
         $preference = DB::table('email_preferences')->first();
         $this->assertNotNull($subscriber);
         $this->assertNotNull($preference);
+        $this->assertSame('active', (string) ($subscriber->status ?? ''));
         $this->assertTrue((bool) ($subscriber->marketing_consent ?? false));
         $this->assertFalse((bool) ($subscriber->transactional_recovery_enabled ?? true));
+        $this->assertNotNull($subscriber->last_marketing_consent_at);
+        $this->assertNotNull($subscriber->last_transactional_recovery_change_at);
         $this->assertTrue((bool) ($preference->marketing_updates ?? false));
         $this->assertFalse((bool) ($preference->report_recovery ?? true));
         $this->assertTrue((bool) ($preference->product_updates ?? false));

@@ -27,5 +27,7 @@ class EmailSuppression extends Model
 
     protected $casts = [
         'meta_json' => 'array',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }

@@ -108,6 +108,7 @@ final class ClaimReportEmailRequestTest extends TestCase
         $this->assertIsArray($payloadJson);
         $this->assertSame($orderNo, (string) ($payloadJson['order_no'] ?? ''));
         $this->assertSame($attemptId, (string) ($payloadJson['attempt_id'] ?? ''));
+        $this->assertSame('active', (string) ($payloadJson['subscriber_status'] ?? ''));
         $this->assertSame('/zh/orders/lookup', (string) data_get($payloadJson, 'attribution.landing_path'));
         $this->assertSame('clk_001', (string) data_get($payloadJson, 'attribution.share_click_id'));
         $this->assertArrayNotHasKey('email', $payloadJson);
@@ -121,6 +122,8 @@ final class ClaimReportEmailRequestTest extends TestCase
         $this->assertIsArray($payloadEnc);
         $this->assertSame('owner@example.com', (string) ($payloadEnc['to_email'] ?? ''));
         $this->assertSame('share_123', (string) data_get($payloadEnc, 'attribution.share_id'));
+        $this->assertArrayNotHasKey('claim_token', $payloadEnc);
+        $this->assertArrayNotHasKey('claim_url', $payloadEnc);
     }
 
     private function createAttempt(string $anonId): string

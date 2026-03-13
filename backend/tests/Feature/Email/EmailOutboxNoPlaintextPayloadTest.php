@@ -105,6 +105,9 @@ final class EmailOutboxNoPlaintextPayloadTest extends TestCase
             $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
             $this->assertIsArray($payloadJson);
             $this->assertSame($attemptId, (string) ($payloadJson['attempt_id'] ?? ''));
+            $this->assertSame('active', (string) ($payloadJson['subscriber_status'] ?? ''));
+            $this->assertSame(false, $payloadJson['marketing_consent'] ?? null);
+            $this->assertSame(true, $payloadJson['transactional_recovery_enabled'] ?? null);
             $this->assertArrayHasKey('attribution', $payloadJson);
             $this->assertNotEmpty($payloadJson['attribution']);
             $this->assertArrayNotHasKey('email', $payloadJson);
@@ -116,7 +119,10 @@ final class EmailOutboxNoPlaintextPayloadTest extends TestCase
             $this->assertIsArray($payloadEncDecoded);
             $this->assertSame($attemptId, (string) ($payloadEncDecoded['attempt_id'] ?? ''));
             $this->assertSame($email, (string) ($payloadEncDecoded['to_email'] ?? ''));
+            $this->assertSame('active', (string) ($payloadEncDecoded['subscriber_status'] ?? ''));
             $this->assertArrayHasKey('attribution', $payloadEncDecoded);
+            $this->assertArrayNotHasKey('claim_token', $payloadEncDecoded);
+            $this->assertArrayNotHasKey('claim_url', $payloadEncDecoded);
         }
     }
 }

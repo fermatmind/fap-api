@@ -38,10 +38,13 @@ final class EmailCaptureContractTest extends TestCase
         $response->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('status', 'captured')
+            ->assertJsonPath('subscriber_status', 'active')
+            ->assertJsonPath('transactional_recovery_enabled', true)
             ->assertJsonPath('marketing_consent', true)
             ->assertJsonPath('preferences.marketing_updates', true)
             ->assertJsonPath('preferences.report_recovery', true)
             ->assertJsonPath('preferences.product_updates', true);
+        $this->assertNotSame('', (string) $response->json('captured_at'));
 
         /** @var PiiCipher $pii */
         $pii = app(PiiCipher::class);
@@ -51,8 +54,12 @@ final class EmailCaptureContractTest extends TestCase
         $this->assertSame($email, $pii->decrypt((string) ($subscriber->email_enc ?? '')));
         $this->assertSame('lookup', (string) ($subscriber->first_source ?? ''));
         $this->assertSame('lookup', (string) ($subscriber->last_source ?? ''));
+        $this->assertSame('active', (string) ($subscriber->status ?? ''));
         $this->assertSame('zh-CN', (string) ($subscriber->locale ?? ''));
         $this->assertSame((string) $pii->currentKeyVersion(), (string) ($subscriber->pii_email_key_version ?? ''));
+        $this->assertNotNull($subscriber->first_captured_at);
+        $this->assertNotNull($subscriber->last_captured_at);
+        $this->assertNotNull($subscriber->last_marketing_consent_at);
 
         $firstContext = json_decode((string) ($subscriber->first_context_json ?? '{}'), true);
         $this->assertIsArray($firstContext);
@@ -87,7 +94,9 @@ final class EmailCaptureContractTest extends TestCase
 
         $response->assertOk()
             ->assertJsonPath('status', 'updated')
+            ->assertJsonPath('subscriber_status', 'active')
             ->assertJsonPath('marketing_consent', false)
+            ->assertJsonPath('transactional_recovery_enabled', true)
             ->assertJsonPath('preferences.marketing_updates', false)
             ->assertJsonPath('preferences.report_recovery', true)
             ->assertJsonPath('preferences.product_updates', false);
@@ -124,6 +133,8 @@ final class EmailCaptureContractTest extends TestCase
         $response->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('status', 'suppressed')
+            ->assertJsonPath('subscriber_status', 'suppressed')
+            ->assertJsonPath('transactional_recovery_enabled', true)
             ->assertJsonPath('preferences.report_recovery', true);
     }
 }
