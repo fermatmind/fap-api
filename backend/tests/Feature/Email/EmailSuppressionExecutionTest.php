@@ -141,6 +141,46 @@ final class EmailSuppressionExecutionTest extends TestCase
         $this->assertSame(0, Mail::mailer('array')->getSymfonyTransport()->messages()->count());
     }
 
+    public function test_suppression_hit_blocks_preferences_updated_confirmation_delivery(): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'mail.default' => 'array',
+        ]);
+
+        $this->flushArrayTransport();
+        $email = 'suppressed+preferences-confirmation@example.com';
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'preferences',
+            'locale' => 'en',
+        ]);
+        $subscriber->last_preferences_changed_at = now();
+        $subscriber->save();
+
+        $queued = app(EmailOutboxService::class)->queuePreferencesUpdatedConfirmation($subscriber);
+        $this->assertTrue((bool) ($queued['ok'] ?? false));
+        $this->assertTrue((bool) ($queued['queued'] ?? false));
+
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+        EmailSuppression::query()->create([
+            'id' => (string) Str::uuid(),
+            'email_hash' => $pii->emailHash($email),
+            'reason' => 'complaint',
+            'source' => 'test',
+            'meta_json' => ['channel' => 'qa'],
+        ]);
+
+        $this->artisan('email:outbox-send --limit=10')
+            ->expectsOutput('Mailer array: sent 0, blocked 1, failed 0.')
+            ->assertExitCode(0);
+
+        $row = DB::table('email_outbox')->where('template', 'preferences_updated')->first();
+        $this->assertNotNull($row);
+        $this->assertSame('suppressed', (string) ($row->status ?? ''));
+        $this->assertSame(0, Mail::mailer('array')->getSymfonyTransport()->messages()->count());
+    }
+
     private function createUser(string $email): int
     {
         $userId = random_int(100000, 999999);

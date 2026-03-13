@@ -13,6 +13,7 @@ use App\Console\Commands\CommerceReconcile;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
 use App\Console\Commands\Eq60PsychometricsReport;
+use App\Console\Commands\FapEmailLifecycleRollout;
 use App\Console\Commands\FapEmailOutboxSend;
 use App\Console\Commands\FapResolvePack;
 use App\Console\Commands\FapSelfCheck;
@@ -79,6 +80,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         FapEmailOutboxSend::class,
+        FapEmailLifecycleRollout::class,
         FapResolvePack::class,
         FapSelfCheck::class,
         FapValidateReport::class,
@@ -148,6 +150,7 @@ class Kernel extends ConsoleKernel
         // 示例（需要就开）：
         // $schedule->command('fap:self-check')->dailyAt('03:10');
         // $schedule->command('fap:validate-report --attempt=...')->hourly();
+        $schedule->command('email:lifecycle-rollout')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('email:outbox-send')->everyMinute()->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=content_releases_retention')->dailyAt('03:20')->withoutOverlapping();

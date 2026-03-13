@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Tests\Feature\Email;
 
 use App\Models\EmailPreference;
+use App\Models\EmailSubscriber;
 use App\Services\Email\EmailCaptureService;
 use App\Services\Email\EmailOutboxService;
+use App\Services\Email\EmailPreferenceService;
+use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -16,6 +19,41 @@ use Tests\TestCase;
 final class EmailPreferencesExecutionTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_preference_update_writes_foundation_state_and_rollout_command_enqueues_confirmation(): void
+    {
+        $email = 'preferences+foundation@example.com';
+        app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'preferences',
+            'locale' => 'en',
+            'share_id' => 'share_preferences_exec',
+        ]);
+
+        /** @var EmailPreferenceService $service */
+        $service = app(EmailPreferenceService::class);
+        $token = $service->issueTokenForEmail($email);
+        $response = $service->updateByToken($token, [
+            'marketing_updates' => true,
+            'report_recovery' => true,
+            'product_updates' => false,
+        ]);
+
+        $this->assertTrue((bool) ($response['ok'] ?? false));
+        $subscriber = $this->subscriberForEmail($email);
+        $this->assertNotNull($subscriber->last_preferences_changed_at);
+        $this->assertSame(0, DB::table('email_outbox')->count());
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 1')
+            ->expectsOutput('Enqueued: 1')
+            ->expectsOutput('preferences_updated => candidates 1, enqueued 1')
+            ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
+            ->assertExitCode(0);
+
+        $row = DB::table('email_outbox')->where('template', 'preferences_updated')->first();
+        $this->assertNotNull($row);
+        $this->assertSame('pending', (string) ($row->status ?? ''));
+    }
 
     public function test_report_recovery_true_allows_transactional_delivery_even_when_marketing_flags_are_false(): void
     {
@@ -130,5 +168,18 @@ final class EmailPreferencesExecutionTest extends TestCase
     private function flushArrayTransport(): void
     {
         Mail::mailer('array')->getSymfonyTransport()->flush();
+    }
+
+    private function subscriberForEmail(string $email): EmailSubscriber
+    {
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+
+        /** @var EmailSubscriber $subscriber */
+        $subscriber = EmailSubscriber::query()
+            ->where('email_hash', $pii->emailHash($email))
+            ->firstOrFail();
+
+        return $subscriber;
     }
 }

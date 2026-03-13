@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Email;
 
+use App\Services\Email\EmailCaptureService;
 use App\Services\Email\EmailOutboxService;
 use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -140,6 +141,40 @@ final class EmailOutboxSendCommandTest extends TestCase
         $this->assertIsArray($payloadJson);
         $this->assertSame('send_failed', (string) data_get($payloadJson, 'delivery_execution.error_code'));
         $this->assertStringContainsString('Simulated transport failure', (string) data_get($payloadJson, 'delivery_execution.error_message'));
+    }
+
+    public function test_command_updates_lifecycle_sent_markers_for_preferences_confirmation(): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'mail.default' => 'array',
+        ]);
+
+        $this->flushArrayTransport();
+        $email = 'buyer+preferences-marker@example.com';
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'preferences',
+            'locale' => 'en',
+            'entrypoint' => 'preferences_page',
+        ]);
+        $subscriber->last_preferences_changed_at = now();
+        $subscriber->save();
+
+        $queued = app(EmailOutboxService::class)->queuePreferencesUpdatedConfirmation($subscriber);
+        $this->assertTrue((bool) ($queued['ok'] ?? false));
+        $this->assertTrue((bool) ($queued['queued'] ?? false));
+
+        $this->artisan('email:outbox-send --limit=10')
+            ->expectsOutput('Mailer array: sent 1, blocked 0, failed 0.')
+            ->assertExitCode(0);
+
+        $subscriber->refresh();
+        $this->assertNotNull($subscriber->last_lifecycle_email_sent_at);
+        $this->assertNotNull($subscriber->last_preferences_confirmation_sent_at);
+
+        $message = Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage();
+        $this->assertSame('Your email preferences were updated', (string) $message->getSubject());
+        $this->assertStringContainsString('Manage email preferences', (string) $message->getHtmlBody());
     }
 
     private function createAttempt(string $locale = 'en'): string

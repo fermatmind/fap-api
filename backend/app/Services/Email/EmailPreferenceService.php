@@ -59,6 +59,7 @@ class EmailPreferenceService
     public function deliveryPolicyForEmail(string $email, string $templateKey): array
     {
         $snapshot = $this->emailCapture->subscriberLifecycleSnapshot($email);
+        $templateKey = strtolower(trim($templateKey));
         if ($this->normalizeEmail($email) === null) {
             return [
                 'allowed' => false,
@@ -82,6 +83,18 @@ class EmailPreferenceService
                 'status' => 'suppressed',
                 'reason' => 'email_suppressed',
                 'suppressed' => true,
+                'report_recovery' => $reportRecovery,
+                'marketing_updates' => $marketingUpdates,
+                'product_updates' => $productUpdates,
+            ];
+        }
+
+        if ($this->isLifecycleConfirmationTemplate($templateKey)) {
+            return [
+                'allowed' => true,
+                'status' => 'allowed',
+                'reason' => null,
+                'suppressed' => false,
                 'report_recovery' => $reportRecovery,
                 'marketing_updates' => $marketingUpdates,
                 'product_updates' => $productUpdates,
@@ -161,24 +174,60 @@ class EmailPreferenceService
         /** @var EmailPreference $preference */
         $preference = $resolved['preference'];
 
-        $preference->marketing_updates = (bool) ($preferences['marketing_updates'] ?? false);
-        $preference->report_recovery = (bool) ($preferences['report_recovery'] ?? false);
-        $preference->product_updates = (bool) ($preferences['product_updates'] ?? false);
-        $preference->save();
+        $requestedMarketingUpdates = (bool) ($preferences['marketing_updates'] ?? false);
+        $requestedReportRecovery = (bool) ($preferences['report_recovery'] ?? false);
+        $requestedProductUpdates = (bool) ($preferences['product_updates'] ?? false);
+        $timestamp = now();
 
-        $subscriber->marketing_consent = $preference->allowsMarketing();
-        $subscriber->transactional_recovery_enabled = $preference->allowsReportRecovery();
-        $subscriber->last_marketing_consent_at = now();
-        $subscriber->last_transactional_recovery_change_at = now();
-        $subscriber->unsubscribed_at = $preference->allowsMarketing() || $preference->allowsReportRecovery()
+        $preferencesChanged = (bool) $preference->marketing_updates !== $requestedMarketingUpdates
+            || (bool) $preference->report_recovery !== $requestedReportRecovery
+            || (bool) $preference->product_updates !== $requestedProductUpdates;
+
+        if ($preferencesChanged) {
+            $preference->marketing_updates = $requestedMarketingUpdates;
+            $preference->report_recovery = $requestedReportRecovery;
+            $preference->product_updates = $requestedProductUpdates;
+            $preference->save();
+        }
+
+        $marketingConsent = $preference->allowsMarketing();
+        $transactionalRecoveryEnabled = $preference->allowsReportRecovery();
+        $marketingConsentChanged = (bool) $subscriber->marketing_consent !== $marketingConsent;
+        $transactionalRecoveryChanged = (bool) $subscriber->transactional_recovery_enabled !== $transactionalRecoveryEnabled;
+
+        $nextUnsubscribedAt = $marketingConsent || $transactionalRecoveryEnabled
             ? null
-            : now();
-        $subscriber->status = $this->resolveSubscriberStatus(
+            : ($subscriber->unsubscribed_at ?? $timestamp);
+        $unsubscribedAtChanged = $subscriber->unsubscribed_at?->toIso8601String() !== $nextUnsubscribedAt?->toIso8601String();
+
+        $resolvedStatus = $this->resolveSubscriberStatus(
             $subscriber,
-            $subscriber->marketing_consent,
-            $subscriber->transactional_recovery_enabled
+            $marketingConsent,
+            $transactionalRecoveryEnabled,
+            $nextUnsubscribedAt
         );
-        $subscriber->save();
+        $statusChanged = (string) ($subscriber->status ?? '') !== $resolvedStatus;
+
+        if ($preferencesChanged || $marketingConsentChanged || $transactionalRecoveryChanged || $unsubscribedAtChanged || $statusChanged) {
+            $subscriber->marketing_consent = $marketingConsent;
+            $subscriber->transactional_recovery_enabled = $transactionalRecoveryEnabled;
+
+            if ($marketingConsentChanged) {
+                $subscriber->last_marketing_consent_at = $timestamp;
+            }
+
+            if ($transactionalRecoveryChanged) {
+                $subscriber->last_transactional_recovery_change_at = $timestamp;
+            }
+
+            if ($preferencesChanged) {
+                $subscriber->last_preferences_changed_at = $timestamp;
+            }
+
+            $subscriber->unsubscribed_at = $nextUnsubscribedAt;
+            $subscriber->status = $resolvedStatus;
+            $subscriber->save();
+        }
 
         return [
             'ok' => true,
@@ -202,24 +251,50 @@ class EmailPreferenceService
         /** @var EmailPreference $preference */
         $preference = $resolved['preference'];
 
-        $preference->marketing_updates = false;
-        $preference->report_recovery = false;
-        $preference->product_updates = false;
-        $preference->save();
+        $timestamp = now();
+        $preferencesChanged = (bool) $preference->marketing_updates
+            || (bool) $preference->report_recovery
+            || (bool) $preference->product_updates;
 
-        $subscriber->marketing_consent = false;
-        $subscriber->transactional_recovery_enabled = false;
-        $subscriber->last_marketing_consent_at = now();
-        $subscriber->last_transactional_recovery_change_at = now();
-        $subscriber->unsubscribed_at = now();
-        $subscriber->status = EmailSubscriber::STATUS_UNSUBSCRIBED;
+        if ($preferencesChanged) {
+            $preference->marketing_updates = false;
+            $preference->report_recovery = false;
+            $preference->product_updates = false;
+            $preference->save();
+        }
 
+        $marketingConsentChanged = (bool) $subscriber->marketing_consent;
+        $transactionalRecoveryChanged = (bool) $subscriber->transactional_recovery_enabled;
+        $nextUnsubscribedAt = $subscriber->unsubscribed_at ?? $timestamp;
+        $status = $this->resolveSubscriberStatus($subscriber, false, false, $nextUnsubscribedAt);
+        $statusChanged = (string) ($subscriber->status ?? '') !== $status;
+        $contextChanged = false;
         if (is_string($reason) && trim($reason) !== '') {
             $lastContext = is_array($subscriber->last_context_json) ? $subscriber->last_context_json : [];
-            $lastContext['unsubscribe_reason'] = trim($reason);
-            $subscriber->last_context_json = $lastContext;
+            $normalizedReason = trim($reason);
+            if (($lastContext['unsubscribe_reason'] ?? null) !== $normalizedReason) {
+                $lastContext['unsubscribe_reason'] = $normalizedReason;
+                $subscriber->last_context_json = $lastContext;
+                $contextChanged = true;
+            }
         }
-        $subscriber->save();
+
+        if ($preferencesChanged || $marketingConsentChanged || $transactionalRecoveryChanged || $statusChanged || $subscriber->unsubscribed_at === null || $contextChanged) {
+            $subscriber->marketing_consent = false;
+            $subscriber->transactional_recovery_enabled = false;
+            if ($marketingConsentChanged) {
+                $subscriber->last_marketing_consent_at = $timestamp;
+            }
+            if ($transactionalRecoveryChanged) {
+                $subscriber->last_transactional_recovery_change_at = $timestamp;
+            }
+            if ($preferencesChanged || $marketingConsentChanged || $transactionalRecoveryChanged || $subscriber->unsubscribed_at === null) {
+                $subscriber->last_preferences_changed_at = $timestamp;
+            }
+            $subscriber->unsubscribed_at = $nextUnsubscribedAt;
+            $subscriber->status = $status;
+            $subscriber->save();
+        }
 
         return [
             'ok' => true,
@@ -322,6 +397,11 @@ class EmailPreferenceService
         return in_array(trim($templateKey), ['payment_success', 'report_claim'], true);
     }
 
+    private function isLifecycleConfirmationTemplate(string $templateKey): bool
+    {
+        return in_array(trim($templateKey), ['preferences_updated', 'unsubscribe_confirmation'], true);
+    }
+
     private function normalizeEmail(string $email): ?string
     {
         $normalized = mb_strtolower(trim($email), 'UTF-8');
@@ -361,7 +441,8 @@ class EmailPreferenceService
     private function resolveSubscriberStatus(
         EmailSubscriber $subscriber,
         bool $marketingConsent,
-        bool $transactionalRecoveryEnabled
+        bool $transactionalRecoveryEnabled,
+        mixed $unsubscribedAt = null
     ): string {
         $suppressed = EmailSuppression::query()
             ->where('email_hash', (string) ($subscriber->email_hash ?? ''))
@@ -371,7 +452,7 @@ class EmailPreferenceService
             return EmailSubscriber::STATUS_SUPPRESSED;
         }
 
-        if ($subscriber->unsubscribed_at !== null || (! $marketingConsent && ! $transactionalRecoveryEnabled)) {
+        if ($unsubscribedAt !== null || (! $marketingConsent && ! $transactionalRecoveryEnabled)) {
             return EmailSubscriber::STATUS_UNSUBSCRIBED;
         }
 
