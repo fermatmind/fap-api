@@ -2,6 +2,7 @@
     $routeName = (string) request()->route()?->getName();
 
     $sectionLabel = match (true) {
+        str_contains($routeName, 'mbti-insights') => 'Assessment Insights',
         str_contains($routeName, 'article'),
         str_contains($routeName, 'content-pack'),
         str_contains($routeName, 'scale-registry'),
