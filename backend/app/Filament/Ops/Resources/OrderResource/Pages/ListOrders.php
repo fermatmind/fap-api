@@ -14,6 +14,21 @@ class ListOrders extends ListRecords
 
     protected static string $resource = OrderResource::class;
 
+    public function getTitle(): string
+    {
+        return 'Unlock / Commerce Linkage';
+    }
+
+    public function getHeading(): string
+    {
+        return 'Unlock / Commerce Linkage';
+    }
+
+    public function getSubheading(): ?string
+    {
+        return 'Order-rooted support diagnostics for payment, unlock, report, PDF, and share linkage.';
+    }
+
     protected function getHeaderActions(): array
     {
         return [];
