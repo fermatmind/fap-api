@@ -17,6 +17,10 @@ class EmailLifecycleRolloutService
 {
     public const CONFIRMATION_COOLDOWN_MINUTES = 10;
 
+    public const WELCOME_DELAY_MINUTES = 10;
+
+    public const WELCOME_COOLDOWN_DAYS = 7;
+
     public const POST_PURCHASE_FOLLOWUP_COOLDOWN_DAYS = 7;
 
     public const REPORT_REACTIVATION_COOLDOWN_DAYS = 14;
@@ -47,7 +51,8 @@ class EmailLifecycleRolloutService
      *         preferences_updated:array{candidates:int,enqueued:int},
      *         unsubscribe_confirmation:array{candidates:int,enqueued:int},
      *         post_purchase_followup:array{candidates:int,enqueued:int},
-     *         report_reactivation:array{candidates:int,enqueued:int}
+     *         report_reactivation:array{candidates:int,enqueued:int},
+     *         welcome:array{candidates:int,enqueued:int}
      *     }
      * }
      */
@@ -89,6 +94,14 @@ class EmailLifecycleRolloutService
             fn (EmailSubscriber $subscriber): array => $this->emailOutbox->queueUnsubscribeConfirmation($subscriber)
         );
 
+        $summary = $this->processSubscriberTemplate(
+            $summary,
+            'welcome',
+            $this->welcomeCandidates(),
+            $dryRun,
+            fn (EmailSubscriber $subscriber): array => $this->emailOutbox->queueWelcome($subscriber)
+        );
+
         $summary = $this->processOrderTemplate(
             $summary,
             'post_purchase_followup',
@@ -124,7 +137,8 @@ class EmailLifecycleRolloutService
      *     preferences_updated:array{candidates:int,enqueued:int},
      *     unsubscribe_confirmation:array{candidates:int,enqueued:int},
      *     post_purchase_followup:array{candidates:int,enqueued:int},
-     *     report_reactivation:array{candidates:int,enqueued:int}
+     *     report_reactivation:array{candidates:int,enqueued:int},
+     *     welcome:array{candidates:int,enqueued:int}
      * }
      */
     private function emptyTemplateSummary(): array
@@ -134,6 +148,7 @@ class EmailLifecycleRolloutService
             'unsubscribe_confirmation' => ['candidates' => 0, 'enqueued' => 0],
             'post_purchase_followup' => ['candidates' => 0, 'enqueued' => 0],
             'report_reactivation' => ['candidates' => 0, 'enqueued' => 0],
+            'welcome' => ['candidates' => 0, 'enqueued' => 0],
         ];
     }
 
@@ -267,6 +282,33 @@ class EmailLifecycleRolloutService
             ->orderBy('unsubscribed_at');
 
         return $this->excludeSuppressed($query)->get();
+    }
+
+    /**
+     * @return Collection<int,EmailSubscriber>
+     */
+    private function welcomeCandidates(): Collection
+    {
+        $threshold = $this->cooldownThresholdForTemplate('welcome');
+        $capturedBefore = $this->now()->copy()->subMinutes(self::WELCOME_DELAY_MINUTES);
+
+        $query = EmailSubscriber::query()
+            ->with('preference')
+            ->outsideLifecycleCooldown($threshold)
+            ->where('status', EmailSubscriber::STATUS_ACTIVE)
+            ->where('marketing_consent', true)
+            ->whereNotNull('first_captured_at')
+            ->where('first_captured_at', '<=', $capturedBefore)
+            ->orderBy('first_captured_at');
+
+        return $this->excludeSuppressed($query)
+            ->get()
+            ->reject(fn (EmailSubscriber $subscriber): bool => $this->hasTemplateForEmailHash(
+                (string) $subscriber->email_hash,
+                'welcome',
+                ['pending', 'sent', 'consumed']
+            ))
+            ->values();
     }
 
     /**
@@ -620,13 +662,21 @@ class EmailLifecycleRolloutService
 
     private function hasPendingTemplateForEmailHash(string $emailHash, string $templateKey): bool
     {
+        return $this->hasTemplateForEmailHash($emailHash, $templateKey, ['pending']);
+    }
+
+    /**
+     * @param  array<int,string>  $statuses
+     */
+    private function hasTemplateForEmailHash(string $emailHash, string $templateKey, array $statuses): bool
+    {
         $normalizedHash = strtolower(trim($emailHash));
-        if ($normalizedHash === '') {
+        if ($normalizedHash === '' || $statuses === []) {
             return false;
         }
 
         $query = DB::table('email_outbox')
-            ->where('status', 'pending')
+            ->whereIn('status', $statuses)
             ->where(function ($builder) use ($templateKey): void {
                 if (Schema::hasColumn('email_outbox', 'template_key')) {
                     $builder->where('template_key', $templateKey);
@@ -665,6 +715,7 @@ class EmailLifecycleRolloutService
     private static function cooldownIntervalForTemplate(string $templateKey): CarbonInterval
     {
         return match (trim($templateKey)) {
+            'welcome' => CarbonInterval::days(self::WELCOME_COOLDOWN_DAYS),
             'post_purchase_followup' => CarbonInterval::days(self::POST_PURCHASE_FOLLOWUP_COOLDOWN_DAYS),
             'report_reactivation' => CarbonInterval::days(self::REPORT_REACTIVATION_COOLDOWN_DAYS),
             default => CarbonInterval::minutes(self::CONFIRMATION_COOLDOWN_MINUTES),

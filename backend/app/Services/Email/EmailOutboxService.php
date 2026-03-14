@@ -431,6 +431,29 @@ class EmailOutboxService
     /**
      * @return array{ok:bool,queued:bool,error?:string,reason?:string}
      */
+    public function queueWelcome(EmailSubscriber $subscriber, ?string $preferredLocale = null): array
+    {
+        return $this->queueSubscriberLifecycleEmail(
+            $subscriber,
+            'welcome',
+            'welcome',
+            null,
+            null,
+            $preferredLocale,
+            [
+                'attempt_id' => null,
+                'order_no' => null,
+                'report_url' => null,
+                'report_pdf_url' => null,
+            ],
+            ['pending', 'sent', 'consumed'],
+            false
+        );
+    }
+
+    /**
+     * @return array{ok:bool,queued:bool,error?:string,reason?:string}
+     */
     public function queuePostPurchaseFollowup(
         EmailSubscriber $subscriber,
         string $attemptId,
@@ -483,7 +506,8 @@ class EmailOutboxService
         ?string $orderNo = null,
         ?string $preferredLocale = null,
         array $payloadOverrides = [],
-        ?array $dedupeStatuses = null
+        ?array $dedupeStatuses = null,
+        bool $useLastContextFallback = true
     ): array {
         if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return ['ok' => false, 'queued' => false, 'error' => 'TABLE_MISSING'];
@@ -495,7 +519,9 @@ class EmailOutboxService
             return ['ok' => false, 'queued' => false, 'error' => 'INVALID_RECIPIENT'];
         }
 
-        $lastContext = is_array($subscriber->last_context_json) ? $subscriber->last_context_json : [];
+        $lastContext = $useLastContextFallback && is_array($subscriber->last_context_json)
+            ? $subscriber->last_context_json
+            : [];
         $attemptId = $this->trimOrNull($attemptId) ?? $this->trimOrNull((string) ($lastContext['attempt_id'] ?? ''));
         $orderNo = $this->trimOrNull($orderNo) ?? $this->trimOrNull((string) ($lastContext['order_no'] ?? ''));
         $emailHash = $this->piiCipher->emailHash($email);
@@ -504,8 +530,8 @@ class EmailOutboxService
             if ($this->hasLifecycleTemplateRowForOrder($templateKey, $orderNo, $attemptId, $dedupeStatuses ?? ['pending', 'sent', 'consumed'])) {
                 return ['ok' => true, 'queued' => false, 'reason' => 'existing_order_template'];
             }
-        } elseif ($this->hasPendingLifecycleTemplateRow($emailHash, $templateKey)) {
-            return ['ok' => true, 'queued' => false, 'reason' => 'pending_exists'];
+        } elseif ($this->hasLifecycleTemplateRowForEmailHash($emailHash, $templateKey, $dedupeStatuses ?? ['pending'])) {
+            return ['ok' => true, 'queued' => false, 'reason' => 'existing_subscriber_template'];
         }
 
         $locale = $this->normalizeLocale((string) ($preferredLocale ?? ($subscriber->locale ?? '')));
@@ -708,7 +734,7 @@ class EmailOutboxService
             ];
         }
 
-        $guard = $this->emailPreferences->deliveryPolicyForEmail($recipientEmail, $templateKey);
+        $guard = $this->resolveDeliveryGuard($recipientEmail, $templateKey);
         $bodyHtml = $this->resolveBodyHtmlFromRow($row, $payload, $templateKey, $locale, $recipientEmail, $guard);
         $bodyText = $this->resolveBodyTextFromPayload($payload, $locale, $templateKey, $recipientEmail);
 
@@ -723,6 +749,65 @@ class EmailOutboxService
             'recipient_email' => $recipientEmail,
             'guard' => $guard,
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function resolveDeliveryGuard(string $recipientEmail, string $templateKey): array
+    {
+        $guard = $this->emailPreferences->deliveryPolicyForEmail($recipientEmail, $templateKey);
+
+        if ($templateKey !== 'welcome') {
+            return $guard;
+        }
+
+        $snapshot = $this->emailCaptures->subscriberLifecycleSnapshot($recipientEmail);
+        $subscriberStatus = (string) ($snapshot['subscriber_status'] ?? EmailSubscriber::STATUS_ACTIVE);
+        $marketingConsent = (bool) ($snapshot['marketing_consent'] ?? false);
+        $suppressed = $subscriberStatus === EmailSubscriber::STATUS_SUPPRESSED || (bool) ($guard['suppressed'] ?? false);
+
+        if ($suppressed) {
+            return array_replace($guard, [
+                'allowed' => false,
+                'status' => 'suppressed',
+                'reason' => 'email_suppressed',
+                'suppressed' => true,
+                'marketing_updates' => $marketingConsent,
+                'product_updates' => $marketingConsent,
+            ]);
+        }
+
+        if ($subscriberStatus !== EmailSubscriber::STATUS_ACTIVE) {
+            return array_replace($guard, [
+                'allowed' => false,
+                'status' => 'skipped',
+                'reason' => 'subscriber_inactive',
+                'suppressed' => false,
+                'marketing_updates' => $marketingConsent,
+                'product_updates' => $marketingConsent,
+            ]);
+        }
+
+        if (! $marketingConsent) {
+            return array_replace($guard, [
+                'allowed' => false,
+                'status' => 'skipped',
+                'reason' => 'marketing_consent_disabled',
+                'suppressed' => false,
+                'marketing_updates' => false,
+                'product_updates' => false,
+            ]);
+        }
+
+        return array_replace($guard, [
+            'allowed' => true,
+            'status' => 'allowed',
+            'reason' => null,
+            'suppressed' => false,
+            'marketing_updates' => true,
+            'product_updates' => true,
+        ]);
     }
 
     private function sendMessage(string $mailer, string $recipientEmail, string $subject, string $bodyHtml, string $bodyText): void
@@ -1346,6 +1431,7 @@ class EmailOutboxService
             'unsubscribe_confirmation',
             'post_purchase_followup',
             'report_reactivation',
+            'welcome',
         ];
         if (! in_array($templateKey, $supported, true)) {
             return '';
@@ -1445,10 +1531,14 @@ class EmailOutboxService
         ];
         $preferenceToken = $this->emailPreferences->issueTokenForEmail($recipientEmail, $tokenContext);
         $query = $this->deepLinkQuery($normalizedAttribution, $locale, $orderNo, $attemptId);
+        $helpPath = strtolower((string) explode('-', $this->normalizeLocale($locale))[0]) === 'zh'
+            ? '/zh/help'
+            : '/en/help';
 
         $orderLookupUrl = $this->frontendUrl($frontendBaseUrl, '/orders/lookup', $query);
         $emailPreferencesUrl = $this->frontendUrl($frontendBaseUrl, '/email/preferences', ['token' => $preferenceToken] + $query);
         $emailUnsubscribeUrl = $this->frontendUrl($frontendBaseUrl, '/email/unsubscribe', ['token' => $preferenceToken] + $query);
+        $helpUrl = $this->frontendUrl($frontendBaseUrl, $helpPath, $query);
         $preferences = is_array($payload['preferences'] ?? null) ? $payload['preferences'] : [];
 
         $data = [
@@ -1470,6 +1560,8 @@ class EmailOutboxService
             'email_preferences_url' => $emailPreferencesUrl,
             'emailUnsubscribeUrl' => $emailUnsubscribeUrl,
             'email_unsubscribe_url' => $emailUnsubscribeUrl,
+            'helpUrl' => $helpUrl,
+            'help_url' => $helpUrl,
             'preferences' => [
                 'marketing_updates' => (bool) ($preferences['marketing_updates'] ?? ($payload['marketing_updates'] ?? false)),
                 'report_recovery' => (bool) ($preferences['report_recovery'] ?? ($payload['report_recovery'] ?? true)),
@@ -1766,8 +1858,20 @@ class EmailOutboxService
 
     private function hasPendingLifecycleTemplateRow(string $emailHash, string $templateKey): bool
     {
+        return $this->hasLifecycleTemplateRowForEmailHash($emailHash, $templateKey, ['pending']);
+    }
+
+    /**
+     * @param  array<int,string>  $statuses
+     */
+    private function hasLifecycleTemplateRowForEmailHash(string $emailHash, string $templateKey, array $statuses): bool
+    {
+        if ($statuses === []) {
+            return false;
+        }
+
         $query = DB::table('email_outbox')
-            ->where('status', 'pending')
+            ->whereIn('status', $statuses)
             ->where(function ($builder) use ($templateKey): void {
                 if (\App\Support\SchemaBaseline::hasColumn('email_outbox', 'template_key')) {
                     $builder->where('template_key', $templateKey);
@@ -1837,6 +1941,7 @@ class EmailOutboxService
             'unsubscribe_confirmation',
             'post_purchase_followup',
             'report_reactivation',
+            'welcome',
         ], true)) {
             return;
         }
@@ -1982,6 +2087,9 @@ class EmailOutboxService
         }
         if ($templateKey === 'report_reactivation') {
             return $lang === 'zh' ? '回来继续查看你的报告' : 'Come back to your report';
+        }
+        if ($templateKey === 'welcome') {
+            return $lang === 'zh' ? '欢迎来到 FermatMind' : 'Welcome to FermatMind';
         }
 
         return $lang === 'zh' ? 'FermatMind 通知' : 'FermatMind notification';

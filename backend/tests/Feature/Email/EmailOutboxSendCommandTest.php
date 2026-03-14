@@ -179,6 +179,63 @@ final class EmailOutboxSendCommandTest extends TestCase
         $this->assertStringContainsString('Manage email preferences', (string) $message->getHtmlBody());
     }
 
+    public function test_command_sends_welcome_and_updates_lifecycle_sent_markers(): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'app.url' => 'https://api.example.test',
+            'mail.default' => 'array',
+        ]);
+
+        $this->flushArrayTransport();
+        $email = 'buyer+welcome-marker@example.com';
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'welcome',
+            'locale' => 'en',
+            'entrypoint' => 'welcome_capture',
+            'marketing_consent' => true,
+        ]);
+        $subscriber->forceFill([
+            'first_captured_at' => now()->subMinutes(11),
+            'last_captured_at' => now()->subMinutes(11),
+        ])->save();
+
+        $queued = app(EmailOutboxService::class)->queueWelcome($subscriber, 'en');
+        $this->assertTrue((bool) ($queued['ok'] ?? false));
+        $this->assertTrue((bool) ($queued['queued'] ?? false));
+
+        $this->artisan('email:outbox-send --limit=10')
+            ->expectsOutput('Mailer array: sent 1, blocked 0, failed 0.')
+            ->assertExitCode(0);
+
+        $row = DB::table('email_outbox')
+            ->where('template', 'welcome')
+            ->first();
+
+        $this->assertNotNull($row);
+        $this->assertSame('sent', (string) ($row->status ?? ''));
+        $this->assertNotNull($row->sent_at ?? null);
+
+        $subscriber->refresh();
+        $this->assertNotNull($subscriber->last_lifecycle_email_sent_at);
+        if (Schema::hasColumn('email_subscribers', 'last_lifecycle_template_key')) {
+            $this->assertSame('welcome', (string) $subscriber->getAttribute('last_lifecycle_template_key'));
+        }
+        if (Schema::hasColumn('email_subscribers', 'next_lifecycle_eligible_at')) {
+            $this->assertNotNull($subscriber->getAttribute('next_lifecycle_eligible_at'));
+            $this->assertTrue(
+                $subscriber->getAttribute('next_lifecycle_eligible_at')->greaterThan(
+                    $subscriber->last_lifecycle_email_sent_at->copy()->addDays(6)
+                )
+            );
+        }
+
+        $message = Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage();
+        $this->assertSame('Welcome to FermatMind', (string) $message->getSubject());
+        $this->assertStringContainsString('View help center', (string) $message->getHtmlBody());
+    }
+
     #[DataProvider('followupTemplateProvider')]
     public function test_command_sends_followup_templates_and_updates_lifecycle_sent_markers(
         string $templateKey,
