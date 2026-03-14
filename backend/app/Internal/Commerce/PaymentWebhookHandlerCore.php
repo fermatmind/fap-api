@@ -22,6 +22,7 @@ use App\Services\Email\EmailOutboxService;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
+use App\Services\Referral\ReferralRewardService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Contracts\Cache\LockTimeoutException;
@@ -151,6 +152,13 @@ class PaymentWebhookHandlerCore
             return $this->serverError('WEBHOOK_BUSY', 'payment webhook is busy, retry later.');
         }
 
+        $ctx = $this->runReferralRewardIssuanceStage($ctx);
+        if (($ctx['referral_reward_failed'] ?? false) === true) {
+            return is_array($ctx['result'] ?? null)
+                ? $ctx['result']
+                : $this->serverError('REFERRAL_REWARD_ISSUANCE_FAILED', 'referral reward issuance failed.');
+        }
+
         $ctx = $this->postCommitStage->handle($ctx);
         $normalizedResult = is_array($ctx['normalized_result'] ?? null)
             ? $ctx['normalized_result']
@@ -239,6 +247,49 @@ class PaymentWebhookHandlerCore
         }
 
         return false;
+    }
+
+    private function runReferralRewardIssuanceStage(array $ctx): array
+    {
+        $result = is_array($ctx['result'] ?? null) ? $ctx['result'] : [];
+        if (($result['ok'] ?? false) !== true || ($result['duplicate'] ?? false) === true || ($result['ignored'] ?? false) === true) {
+            return $ctx;
+        }
+
+        $orderNo = trim((string) ($ctx['order_no'] ?? ''));
+        if ($orderNo === '') {
+            return $ctx;
+        }
+
+        $outcome = app(ReferralRewardService::class)->issueForPaidOrder($orderNo, (int) ($ctx['org_id'] ?? 0), [
+            'provider' => (string) ($ctx['provider'] ?? ''),
+            'provider_event_id' => (string) ($ctx['provider_event_id'] ?? ''),
+        ]);
+
+        $ctx['referral_reward_outcome'] = $outcome;
+        if (($outcome['ok'] ?? false) === true) {
+            return $ctx;
+        }
+
+        $errorCode = (string) ($outcome['error_code'] ?? 'REFERRAL_REWARD_ISSUANCE_FAILED');
+        $errorMessage = (string) ($outcome['message'] ?? 'referral reward issuance failed.');
+        $provider = (string) ($ctx['provider'] ?? '');
+        $providerEventId = (string) ($ctx['provider_event_id'] ?? '');
+        if ($provider !== '' && $providerEventId !== '') {
+            $this->markEventError(
+                $provider,
+                $providerEventId,
+                'post_commit_failed',
+                $errorCode,
+                $errorMessage
+            );
+        }
+
+        $ctx['referral_reward_failed'] = true;
+        $ctx['result'] = $this->serverError($errorCode, $errorMessage);
+        $ctx['normalized_result'] = $this->normalizeResultStatus((array) $ctx['result']);
+
+        return $ctx;
     }
 
     private function resolveRequestIdFromRuntimeContext(): ?string

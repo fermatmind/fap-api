@@ -298,6 +298,24 @@ class OrderManager
         ];
     }
 
+    public function findOrderByOrderNo(string $orderNo, int $orgId): ?object
+    {
+        $normalizedOrderNo = trim($orderNo);
+        if ($normalizedOrderNo === '') {
+            return null;
+        }
+
+        return DB::table('orders')
+            ->where('order_no', $normalizedOrderNo)
+            ->where('org_id', $orgId)
+            ->first();
+    }
+
+    public function isPaidOrFulfilledStatus(?string $status): bool
+    {
+        return $this->isDeliveryEligibleStatus((string) $status);
+    }
+
     /**
      * @return array{
      *     attempt_id:?string,
