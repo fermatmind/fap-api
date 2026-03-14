@@ -36,6 +36,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->expectsOutput('Dry run: no outbox rows were enqueued.')
             ->assertExitCode(0);
 
@@ -57,6 +58,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->assertExitCode(0);
 
         $row = DB::table('email_outbox')->where('template', 'preferences_updated')->first();
@@ -76,6 +78,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->assertExitCode(0);
 
         $this->assertSame(1, DB::table('email_outbox')->where('template', 'unsubscribe_confirmation')->count());
@@ -101,9 +104,112 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->assertExitCode(0);
 
         $this->assertSame(0, DB::table('email_outbox')->count());
+    }
+
+    public function test_dry_run_counts_only_eligible_welcome_candidates(): void
+    {
+        $this->createWelcomeSubscriber('welcome+eligible@example.com', true, now()->subMinutes(11));
+        $this->createWelcomeSubscriber('welcome+recent@example.com', true, now()->subMinutes(9));
+        $this->createWelcomeSubscriber('welcome+no-consent@example.com', false, now()->subMinutes(11));
+
+        $this->artisan('email:lifecycle-rollout --dry-run')
+            ->expectsOutput('Candidates: 1')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('preferences_updated => candidates 0, enqueued 0')
+            ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
+            ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
+            ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 1, enqueued 0')
+            ->expectsOutput('Dry run: no outbox rows were enqueued.')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, DB::table('email_outbox')->count());
+    }
+
+    public function test_command_enqueues_welcome_for_eligible_subscriber(): void
+    {
+        $this->createWelcomeSubscriber('welcome+enqueue@example.com', true, now()->subMinutes(11));
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 1')
+            ->expectsOutput('Enqueued: 1')
+            ->expectsOutput('preferences_updated => candidates 0, enqueued 0')
+            ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
+            ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
+            ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 1, enqueued 1')
+            ->assertExitCode(0);
+
+        $row = DB::table('email_outbox')->where('template', 'welcome')->first();
+        $this->assertNotNull($row);
+        $this->assertSame('pending', (string) ($row->status ?? ''));
+    }
+
+    public function test_command_dedupes_welcome_once_ever_after_existing_sent_row(): void
+    {
+        $subscriber = $this->createWelcomeSubscriber('welcome+dedupe@example.com', true, now()->subMinutes(11));
+        $queued = app(EmailOutboxService::class)->queueWelcome($subscriber, 'en');
+        $this->assertTrue((bool) ($queued['ok'] ?? false));
+        $this->assertTrue((bool) ($queued['queued'] ?? false));
+
+        DB::table('email_outbox')
+            ->where('template', 'welcome')
+            ->update([
+                'status' => 'sent',
+                'sent_at' => now()->subDay(),
+                'updated_at' => now()->subDay(),
+            ]);
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 0')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('preferences_updated => candidates 0, enqueued 0')
+            ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
+            ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
+            ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
+            ->assertExitCode(0);
+
+        $this->assertSame(1, DB::table('email_outbox')->where('template', 'welcome')->count());
+    }
+
+    public function test_command_requires_marketing_consent_for_welcome(): void
+    {
+        $this->createWelcomeSubscriber('welcome+marketing-disabled@example.com', false, now()->subMinutes(11));
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 0')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('preferences_updated => candidates 0, enqueued 0')
+            ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
+            ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
+            ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, DB::table('email_outbox')->where('template', 'welcome')->count());
+    }
+
+    public function test_command_respects_welcome_cooldown(): void
+    {
+        $subscriber = $this->createWelcomeSubscriber('welcome+cooldown@example.com', true, now()->subMinutes(11));
+        $this->markSubscriberInCooldown($subscriber, 'welcome', now()->subDays(2));
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 0')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('preferences_updated => candidates 0, enqueued 0')
+            ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
+            ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
+            ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, DB::table('email_outbox')->where('template', 'welcome')->count());
     }
 
     public function test_dry_run_only_counts_eligible_post_purchase_followup_candidates(): void
@@ -151,6 +257,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 1, enqueued 1')
             ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->assertExitCode(0);
 
         $row = DB::table('email_outbox')->where('template', 'post_purchase_followup')->first();
@@ -164,6 +271,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->assertExitCode(0);
 
         $this->assertSame(1, DB::table('email_outbox')->where('template', 'post_purchase_followup')->count());
@@ -185,6 +293,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->assertExitCode(0);
 
         $this->assertSame(0, DB::table('email_outbox')->where('template', 'post_purchase_followup')->count());
@@ -230,6 +339,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 1, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->expectsOutput('Dry run: no outbox rows were enqueued.')
             ->assertExitCode(0);
 
@@ -253,6 +363,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 1, enqueued 1')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->assertExitCode(0);
 
         $row = DB::table('email_outbox')->where('template', 'report_reactivation')->first();
@@ -266,6 +377,7 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             ->expectsOutput('unsubscribe_confirmation => candidates 0, enqueued 0')
             ->expectsOutput('post_purchase_followup => candidates 0, enqueued 0')
             ->expectsOutput('report_reactivation => candidates 0, enqueued 0')
+            ->expectsOutput('welcome => candidates 0, enqueued 0')
             ->assertExitCode(0);
 
         $this->assertSame(1, DB::table('email_outbox')->where('template', 'report_reactivation')->count());
@@ -312,6 +424,32 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
         ]);
 
         return $this->subscriberForEmail($email);
+    }
+
+    private function createWelcomeSubscriber(string $email, bool $marketingConsent, CarbonInterface $capturedAt, string $locale = 'en'): EmailSubscriber
+    {
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'welcome',
+            'locale' => $locale,
+            'entrypoint' => 'welcome_capture',
+            'marketing_consent' => $marketingConsent,
+            'share_id' => 'share_welcome_rollout',
+            'share_click_id' => 'clk_welcome_rollout',
+            'referrer' => 'https://example.com/help',
+            'landing_path' => '/en/help',
+            'utm' => [
+                'source' => 'welcome',
+                'medium' => 'owned',
+                'campaign' => 'welcome-lifecycle',
+            ],
+        ]);
+
+        $subscriber->forceFill([
+            'first_captured_at' => $capturedAt,
+            'last_captured_at' => $capturedAt,
+        ])->save();
+
+        return $subscriber->fresh(['preference']);
     }
 
     private function createAttempt(string $locale = 'en', ?CarbonInterface $submittedAt = null): string

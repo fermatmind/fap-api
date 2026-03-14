@@ -52,6 +52,11 @@ class FapEmailLifecycleRollout extends Command
             (int) data_get($result, 'templates.report_reactivation.candidates', 0),
             (int) data_get($result, 'templates.report_reactivation.enqueued', 0),
         ));
+        $this->line(sprintf(
+            'welcome => candidates %d, enqueued %d',
+            (int) data_get($result, 'templates.welcome.candidates', 0),
+            (int) data_get($result, 'templates.welcome.enqueued', 0),
+        ));
 
         if ((bool) ($result['dry_run'] ?? false)) {
             $this->comment('Dry run: no outbox rows were enqueued.');
