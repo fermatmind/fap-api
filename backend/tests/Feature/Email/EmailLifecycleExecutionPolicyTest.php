@@ -37,6 +37,7 @@ final class EmailLifecycleExecutionPolicyTest extends TestCase
         $unsubscribePolicy = $service->deliveryPolicyForEmail($email, 'unsubscribe_confirmation');
         $postPurchasePolicy = $service->deliveryPolicyForEmail($email, 'post_purchase_followup');
         $reportReactivationPolicy = $service->deliveryPolicyForEmail($email, 'report_reactivation');
+        $onboardingPolicy = $service->deliveryPolicyForEmail($email, 'onboarding');
 
         $this->assertFalse((bool) ($preferencesPolicy['allowed'] ?? true));
         $this->assertSame('suppressed', (string) ($preferencesPolicy['status'] ?? ''));
@@ -46,6 +47,8 @@ final class EmailLifecycleExecutionPolicyTest extends TestCase
         $this->assertSame('suppressed', (string) ($postPurchasePolicy['status'] ?? ''));
         $this->assertFalse((bool) ($reportReactivationPolicy['allowed'] ?? true));
         $this->assertSame('suppressed', (string) ($reportReactivationPolicy['status'] ?? ''));
+        $this->assertFalse((bool) ($onboardingPolicy['allowed'] ?? true));
+        $this->assertSame('suppressed', (string) ($onboardingPolicy['status'] ?? ''));
     }
 
     public function test_preferences_updated_is_not_blocked_by_preference_toggles(): void
@@ -126,5 +129,73 @@ final class EmailLifecycleExecutionPolicyTest extends TestCase
         $this->assertSame('subscriber_inactive', (string) ($postPurchasePolicy['reason'] ?? ''));
         $this->assertFalse((bool) ($reportReactivationPolicy['allowed'] ?? true));
         $this->assertSame('subscriber_inactive', (string) ($reportReactivationPolicy['reason'] ?? ''));
+    }
+
+    public function test_onboarding_requires_active_subscriber_status(): void
+    {
+        $email = 'onboarding+inactive@example.com';
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'report',
+            'marketing_consent' => true,
+        ]);
+        $subscriber->forceFill([
+            'status' => 'unsubscribed',
+            'unsubscribed_at' => now(),
+            'marketing_consent' => true,
+            'transactional_recovery_enabled' => true,
+        ])->save();
+
+        $policy = app(EmailPreferenceService::class)->deliveryPolicyForEmail($email, 'onboarding');
+
+        $this->assertFalse((bool) ($policy['allowed'] ?? true));
+        $this->assertSame('subscriber_inactive', (string) ($policy['reason'] ?? ''));
+    }
+
+    public function test_onboarding_requires_product_updates_enabled(): void
+    {
+        $email = 'onboarding+product-disabled@example.com';
+        app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'report',
+            'marketing_consent' => true,
+        ]);
+
+        $service = app(EmailPreferenceService::class);
+        $token = $service->issueTokenForEmail($email);
+        $result = $service->updateByToken($token, [
+            'marketing_updates' => true,
+            'report_recovery' => true,
+            'product_updates' => false,
+        ]);
+        $this->assertTrue((bool) ($result['ok'] ?? false));
+
+        $policy = $service->deliveryPolicyForEmail($email, 'onboarding');
+
+        $this->assertFalse((bool) ($policy['allowed'] ?? true));
+        $this->assertSame('product_updates_disabled', (string) ($policy['reason'] ?? ''));
+    }
+
+    public function test_onboarding_does_not_depend_on_report_recovery_or_transactional_recovery(): void
+    {
+        $email = 'onboarding+recovery-disabled@example.com';
+        app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'report',
+            'marketing_consent' => true,
+        ]);
+
+        $service = app(EmailPreferenceService::class);
+        $token = $service->issueTokenForEmail($email);
+        $result = $service->updateByToken($token, [
+            'marketing_updates' => false,
+            'report_recovery' => false,
+            'product_updates' => true,
+        ]);
+        $this->assertTrue((bool) ($result['ok'] ?? false));
+
+        $policy = $service->deliveryPolicyForEmail($email, 'onboarding');
+
+        $this->assertTrue((bool) ($policy['allowed'] ?? false));
+        $this->assertSame('allowed', (string) ($policy['status'] ?? ''));
+        $this->assertSame(false, $policy['report_recovery'] ?? null);
+        $this->assertSame(true, $policy['product_updates'] ?? null);
     }
 }

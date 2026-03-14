@@ -236,6 +236,63 @@ final class EmailOutboxSendCommandTest extends TestCase
         $this->assertStringContainsString('View help center', (string) $message->getHtmlBody());
     }
 
+    public function test_command_sends_onboarding_and_updates_lifecycle_sent_markers(): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'app.url' => 'https://api.example.test',
+            'mail.default' => 'array',
+        ]);
+
+        $this->flushArrayTransport();
+        $email = 'buyer+onboarding-marker@example.com';
+        $attemptId = $this->createAttempt();
+        $orderNo = 'ord_onboarding_marker_'.Str::lower(Str::random(8));
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'report',
+            'locale' => 'en',
+            'entrypoint' => 'report_view',
+            'marketing_consent' => true,
+        ]);
+        $this->createLifecycleOrder($orderNo, $attemptId, $email);
+
+        $queued = app(EmailOutboxService::class)->queueOnboarding($subscriber, $attemptId, $orderNo, 'en');
+        $this->assertTrue((bool) ($queued['ok'] ?? false));
+        $this->assertTrue((bool) ($queued['queued'] ?? false));
+
+        $this->artisan('email:outbox-send --limit=10')
+            ->expectsOutput('Mailer array: sent 1, blocked 0, failed 0.')
+            ->assertExitCode(0);
+
+        $row = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->where('template', 'onboarding')
+            ->first();
+
+        $this->assertNotNull($row);
+        $this->assertSame('sent', (string) ($row->status ?? ''));
+        $this->assertNotNull($row->sent_at ?? null);
+
+        $subscriber->refresh();
+        $this->assertNotNull($subscriber->last_lifecycle_email_sent_at);
+        if (Schema::hasColumn('email_subscribers', 'last_lifecycle_template_key')) {
+            $this->assertSame('onboarding', (string) $subscriber->getAttribute('last_lifecycle_template_key'));
+        }
+        if (Schema::hasColumn('email_subscribers', 'next_lifecycle_eligible_at')) {
+            $this->assertNotNull($subscriber->getAttribute('next_lifecycle_eligible_at'));
+            $this->assertTrue(
+                $subscriber->getAttribute('next_lifecycle_eligible_at')->greaterThan(
+                    $subscriber->last_lifecycle_email_sent_at->copy()->addDays(6)
+                )
+            );
+        }
+
+        $message = Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage();
+        $this->assertSame('How to get more from your FermatMind report', (string) $message->getSubject());
+        $this->assertStringContainsString('Return to your report', (string) $message->getHtmlBody());
+    }
+
     #[DataProvider('followupTemplateProvider')]
     public function test_command_sends_followup_templates_and_updates_lifecycle_sent_markers(
         string $templateKey,

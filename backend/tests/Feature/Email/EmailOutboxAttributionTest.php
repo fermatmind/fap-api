@@ -427,6 +427,77 @@ final class EmailOutboxAttributionTest extends TestCase
         $this->assertStringContainsString('compare_invite_id=', $html);
     }
 
+    public function test_onboarding_outbox_payload_includes_attribution_contract(): void
+    {
+        config([
+            'fap.runtime.EMAIL_OUTBOX_SEND' => true,
+            'fap.runtime.FAP_BASE_URL' => 'https://app.example.test',
+            'app.url' => 'https://api.example.test',
+            'mail.default' => 'array',
+        ]);
+
+        $attemptId = $this->createAttempt();
+        $email = 'onboarding@example.com';
+        $orderNo = 'ord_attr_onboarding';
+
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'report',
+            'locale' => 'en',
+            'entrypoint' => 'report_view',
+            'marketing_consent' => true,
+        ]);
+        $this->createOrder($orderNo, $attemptId, $email, [
+            'share_id' => 'share_onboarding_attr',
+            'compare_invite_id' => (string) Str::uuid(),
+            'share_click_id' => 'clk_onboarding_attr',
+            'entrypoint' => 'report_view',
+            'referrer' => 'https://example.com/report',
+            'landing_path' => '/en/report',
+            'utm' => [
+                'source' => 'report',
+                'medium' => 'owned',
+                'campaign' => 'first-report-view-onboarding',
+                'content' => 'followup',
+            ],
+        ]);
+
+        $queued = app(EmailOutboxService::class)->queueOnboarding($subscriber, $attemptId, $orderNo, 'en');
+        $this->assertTrue((bool) ($queued['ok'] ?? false));
+        $this->assertTrue((bool) ($queued['queued'] ?? false));
+
+        $row = DB::table('email_outbox')
+            ->where('attempt_id', $attemptId)
+            ->where('template', 'onboarding')
+            ->first();
+        $this->assertNotNull($row);
+
+        $payloadJson = json_decode((string) ($row->payload_json ?? '{}'), true);
+        $this->assertIsArray($payloadJson);
+        $this->assertSame('share_onboarding_attr', (string) data_get($payloadJson, 'attribution.share_id'));
+        $this->assertSame('report_view', (string) data_get($payloadJson, 'attribution.entrypoint'));
+        $this->assertSame('owned', (string) data_get($payloadJson, 'attribution.utm.medium'));
+        $this->assertArrayNotHasKey('email', $payloadJson);
+        $this->assertArrayNotHasKey('to_email', $payloadJson);
+        $this->assertArrayNotHasKey('report_pdf_url', $payloadJson);
+
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+        $payloadEnc = json_decode((string) $pii->decrypt((string) ($row->payload_enc ?? '')), true);
+        $this->assertIsArray($payloadEnc);
+        $this->assertSame($email, (string) ($payloadEnc['to_email'] ?? ''));
+        $this->assertSame('followup', (string) data_get($payloadEnc, 'attribution.utm.content'));
+        $this->assertArrayNotHasKey('report_pdf_url', $payloadEnc);
+
+        Mail::mailer('array')->getSymfonyTransport()->flush();
+        $this->artisan('email:outbox-send --limit=10')->assertExitCode(0);
+
+        $html = (string) Mail::mailer('array')->getSymfonyTransport()->messages()->first()->getOriginalMessage()->getHtmlBody();
+        $this->assertStringContainsString('share_id=share_onboarding_attr', $html);
+        $this->assertStringContainsString('utm_campaign=first-report-view-onboarding', $html);
+        $this->assertStringContainsString('compare_invite_id=', $html);
+        $this->assertStringNotContainsString('report.pdf', $html);
+    }
+
     private function createAttempt(): string
     {
         $attemptId = (string) Str::uuid();

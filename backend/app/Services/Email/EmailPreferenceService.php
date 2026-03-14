@@ -75,7 +75,7 @@ class EmailPreferenceService
         $subscriberStatus = (string) ($snapshot['subscriber_status'] ?? EmailSubscriber::STATUS_ACTIVE);
         $reportRecovery = (bool) ($snapshot['transactional_recovery_enabled'] ?? true);
         $marketingUpdates = (bool) ($snapshot['marketing_consent'] ?? false);
-        $productUpdates = (bool) ($snapshot['marketing_consent'] ?? false);
+        $productUpdates = $this->resolveProductUpdatesForEmail($email);
 
         if ($subscriberStatus === EmailSubscriber::STATUS_SUPPRESSED) {
             return [
@@ -110,6 +110,30 @@ class EmailPreferenceService
                 'report_recovery' => $reportRecovery,
                 'marketing_updates' => $marketingUpdates,
                 'product_updates' => $productUpdates,
+            ];
+        }
+
+        if ($templateKey === 'onboarding' && $subscriberStatus !== EmailSubscriber::STATUS_ACTIVE) {
+            return [
+                'allowed' => false,
+                'status' => 'skipped',
+                'reason' => 'subscriber_inactive',
+                'suppressed' => false,
+                'report_recovery' => $reportRecovery,
+                'marketing_updates' => $marketingUpdates,
+                'product_updates' => $productUpdates,
+            ];
+        }
+
+        if ($templateKey === 'onboarding' && ! $productUpdates) {
+            return [
+                'allowed' => false,
+                'status' => 'skipped',
+                'reason' => 'product_updates_disabled',
+                'suppressed' => false,
+                'report_recovery' => $reportRecovery,
+                'marketing_updates' => $marketingUpdates,
+                'product_updates' => false,
             ];
         }
 
@@ -402,6 +426,30 @@ class EmailPreferenceService
         $payload = json_decode($json, true);
 
         return is_array($payload) ? $payload : null;
+    }
+
+    private function resolveProductUpdatesForEmail(string $email): bool
+    {
+        $normalizedEmail = $this->normalizeEmail($email);
+        if ($normalizedEmail === null) {
+            return false;
+        }
+
+        $subscriber = EmailSubscriber::query()
+            ->with('preference')
+            ->where('email_hash', $this->piiCipher->emailHash($normalizedEmail))
+            ->first();
+        if (! $subscriber) {
+            return false;
+        }
+
+        $preference = $subscriber->preference instanceof EmailPreference
+            ? $subscriber->preference
+            : null;
+
+        return $preference instanceof EmailPreference
+            ? (bool) $preference->product_updates
+            : (bool) $subscriber->marketing_consent;
     }
 
     private function requiresReportRecovery(string $templateKey): bool

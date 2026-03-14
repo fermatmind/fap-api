@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Email;
 
+use App\Models\EmailPreference;
 use App\Models\EmailSubscriber;
 use App\Support\PiiCipher;
 use Carbon\CarbonInterface;
@@ -24,6 +25,10 @@ class EmailLifecycleRolloutService
     public const POST_PURCHASE_FOLLOWUP_COOLDOWN_DAYS = 7;
 
     public const REPORT_REACTIVATION_COOLDOWN_DAYS = 14;
+
+    public const ONBOARDING_DELAY_HOURS = 24;
+
+    public const ONBOARDING_COOLDOWN_DAYS = 7;
 
     /**
      * @var array<string,EmailSubscriber|null>
@@ -52,7 +57,8 @@ class EmailLifecycleRolloutService
      *         unsubscribe_confirmation:array{candidates:int,enqueued:int},
      *         post_purchase_followup:array{candidates:int,enqueued:int},
      *         report_reactivation:array{candidates:int,enqueued:int},
-     *         welcome:array{candidates:int,enqueued:int}
+     *         welcome:array{candidates:int,enqueued:int},
+     *         onboarding:array{candidates:int,enqueued:int}
      *     }
      * }
      */
@@ -114,12 +120,24 @@ class EmailLifecycleRolloutService
             )
         );
 
-        return $this->processOrderTemplate(
+        $summary = $this->processOrderTemplate(
             $summary,
             'report_reactivation',
             $this->reportReactivationCandidates(),
             $dryRun,
             fn (object $order, EmailSubscriber $subscriber): array => $this->emailOutbox->queueReportReactivation(
+                $subscriber,
+                (string) $order->target_attempt_id,
+                (string) $order->order_no
+            )
+        );
+
+        return $this->processOrderTemplate(
+            $summary,
+            'onboarding',
+            $this->onboardingCandidates(),
+            $dryRun,
+            fn (object $order, EmailSubscriber $subscriber): array => $this->emailOutbox->queueOnboarding(
                 $subscriber,
                 (string) $order->target_attempt_id,
                 (string) $order->order_no
@@ -138,7 +156,8 @@ class EmailLifecycleRolloutService
      *     unsubscribe_confirmation:array{candidates:int,enqueued:int},
      *     post_purchase_followup:array{candidates:int,enqueued:int},
      *     report_reactivation:array{candidates:int,enqueued:int},
-     *     welcome:array{candidates:int,enqueued:int}
+     *     welcome:array{candidates:int,enqueued:int},
+     *     onboarding:array{candidates:int,enqueued:int}
      * }
      */
     private function emptyTemplateSummary(): array
@@ -149,6 +168,7 @@ class EmailLifecycleRolloutService
             'post_purchase_followup' => ['candidates' => 0, 'enqueued' => 0],
             'report_reactivation' => ['candidates' => 0, 'enqueued' => 0],
             'welcome' => ['candidates' => 0, 'enqueued' => 0],
+            'onboarding' => ['candidates' => 0, 'enqueued' => 0],
         ];
     }
 
@@ -448,6 +468,67 @@ class EmailLifecycleRolloutService
             ->values();
     }
 
+    /**
+     * @return Collection<int,array{order:object,subscriber:EmailSubscriber}>
+     */
+    private function onboardingCandidates(): Collection
+    {
+        if (! $this->canEvaluateOrderFollowups()) {
+            return collect();
+        }
+
+        return DB::table('orders')
+            ->select([
+                'id',
+                'order_no',
+                'status',
+                'target_attempt_id',
+                'contact_email_hash',
+            ])
+            ->whereIn('status', ['paid', 'fulfilled'])
+            ->whereNotNull('target_attempt_id')
+            ->whereNotNull('contact_email_hash')
+            ->orderBy('updated_at')
+            ->get()
+            ->map(function (object $order): ?array {
+                $attemptId = trim((string) ($order->target_attempt_id ?? ''));
+                $orderNo = trim((string) ($order->order_no ?? ''));
+
+                if ($attemptId === '' || $orderNo === '') {
+                    return null;
+                }
+
+                $subscriber = $this->subscriberForEmailHash((string) ($order->contact_email_hash ?? ''));
+                if (! $this->subscriberAllowedForOnboarding($subscriber, 'onboarding')) {
+                    return null;
+                }
+
+                $firstReportViewAt = $this->earliestEventAt($attemptId, 'report_view');
+                if (! $firstReportViewAt instanceof Carbon) {
+                    return null;
+                }
+
+                if ($firstReportViewAt->gt($this->now()->copy()->subHours(self::ONBOARDING_DELAY_HOURS))) {
+                    return null;
+                }
+
+                if ($this->hasOutboxRowForOrder($orderNo, $attemptId, ['onboarding'], ['pending', 'sent', 'consumed'])) {
+                    return null;
+                }
+
+                if ($this->hasOutboxRowForOrder($orderNo, $attemptId, ['report_claim'], ['pending', 'sent', 'consumed'])) {
+                    return null;
+                }
+
+                return [
+                    'order' => $order,
+                    'subscriber' => $subscriber,
+                ];
+            })
+            ->filter()
+            ->values();
+    }
+
     private function canEvaluateOrderFollowups(): bool
     {
         return Schema::hasTable('orders')
@@ -483,6 +564,34 @@ class EmailLifecycleRolloutService
         }
 
         if (! $subscriber->allowsTransactionalRecovery()) {
+            return false;
+        }
+
+        if ($this->isSuppressedHash((string) $subscriber->email_hash)) {
+            return false;
+        }
+
+        if (! $this->subscriberOutsideLifecycleCooldown($subscriber, $templateKey)) {
+            return false;
+        }
+
+        return $this->decryptSubscriberEmail($subscriber) !== null;
+    }
+
+    private function subscriberAllowedForOnboarding(?EmailSubscriber $subscriber, string $templateKey): bool
+    {
+        if (! $subscriber instanceof EmailSubscriber) {
+            return false;
+        }
+
+        if ((string) ($subscriber->status ?? '') !== EmailSubscriber::STATUS_ACTIVE) {
+            return false;
+        }
+
+        $preference = $subscriber->preference instanceof EmailPreference
+            ? $subscriber->preference
+            : null;
+        if (! ($preference instanceof EmailPreference ? (bool) $preference->product_updates : false)) {
             return false;
         }
 
@@ -556,6 +665,24 @@ class EmailLifecycleRolloutService
             ->where('attempt_id', $attemptId)
             ->where('event_code', $eventCode)
             ->max('occurred_at');
+
+        if (! is_string($value) || trim($value) === '') {
+            return null;
+        }
+
+        try {
+            return Carbon::parse($value);
+        } catch (\Throwable) {
+            return null;
+        }
+    }
+
+    private function earliestEventAt(string $attemptId, string $eventCode): ?Carbon
+    {
+        $value = DB::table('events')
+            ->where('attempt_id', $attemptId)
+            ->where('event_code', $eventCode)
+            ->min('occurred_at');
 
         if (! is_string($value) || trim($value) === '') {
             return null;
@@ -718,6 +845,7 @@ class EmailLifecycleRolloutService
             'welcome' => CarbonInterval::days(self::WELCOME_COOLDOWN_DAYS),
             'post_purchase_followup' => CarbonInterval::days(self::POST_PURCHASE_FOLLOWUP_COOLDOWN_DAYS),
             'report_reactivation' => CarbonInterval::days(self::REPORT_REACTIVATION_COOLDOWN_DAYS),
+            'onboarding' => CarbonInterval::days(self::ONBOARDING_COOLDOWN_DAYS),
             default => CarbonInterval::minutes(self::CONFIRMATION_COOLDOWN_MINUTES),
         };
     }

@@ -494,8 +494,43 @@ class EmailOutboxService
     }
 
     /**
+     * @return array{ok:bool,queued:bool,error?:string,reason?:string}
+     */
+    public function queueOnboarding(
+        EmailSubscriber $subscriber,
+        string $attemptId,
+        string $orderNo,
+        ?string $preferredLocale = null
+    ): array {
+        $attemptId = $this->trimOrNull($attemptId);
+        $orderNo = $this->trimOrNull($orderNo);
+
+        if ($attemptId === null || $orderNo === null) {
+            return ['ok' => false, 'queued' => false, 'error' => 'INVALID_INPUT'];
+        }
+
+        if ($this->hasLifecycleTemplateRowForOrder('report_claim', $orderNo, $attemptId, ['pending', 'sent', 'consumed'])) {
+            return ['ok' => true, 'queued' => false, 'reason' => 'existing_order_report_claim'];
+        }
+
+        return $this->queueSubscriberLifecycleEmail(
+            $subscriber,
+            'onboarding',
+            'first_report_view_onboarding',
+            $attemptId,
+            $orderNo,
+            $preferredLocale,
+            [],
+            ['pending', 'sent', 'consumed'],
+            true,
+            ['report_pdf_url']
+        );
+    }
+
+    /**
      * @param  array<string,mixed>  $payloadOverrides
      * @param  array<int,string>|null  $dedupeStatuses
+     * @param  array<int,string>  $payloadUnsetKeys
      * @return array{ok:bool,queued:bool,error?:string,reason?:string}
      */
     private function queueSubscriberLifecycleEmail(
@@ -507,7 +542,8 @@ class EmailOutboxService
         ?string $preferredLocale = null,
         array $payloadOverrides = [],
         ?array $dedupeStatuses = null,
-        bool $useLastContextFallback = true
+        bool $useLastContextFallback = true,
+        array $payloadUnsetKeys = []
     ): array {
         if (! \App\Support\SchemaBaseline::hasTable('email_outbox')) {
             return ['ok' => false, 'queued' => false, 'error' => 'TABLE_MISSING'];
@@ -526,7 +562,7 @@ class EmailOutboxService
         $orderNo = $this->trimOrNull($orderNo) ?? $this->trimOrNull((string) ($lastContext['order_no'] ?? ''));
         $emailHash = $this->piiCipher->emailHash($email);
 
-        if ($orderNo !== null && in_array($templateKey, ['post_purchase_followup', 'report_reactivation'], true)) {
+        if ($orderNo !== null && in_array($templateKey, ['post_purchase_followup', 'report_reactivation', 'onboarding'], true)) {
             if ($this->hasLifecycleTemplateRowForOrder($templateKey, $orderNo, $attemptId, $dedupeStatuses ?? ['pending', 'sent', 'consumed'])) {
                 return ['ok' => true, 'queued' => false, 'reason' => 'existing_order_template'];
             }
@@ -571,6 +607,11 @@ class EmailOutboxService
             'unsubscribed_at' => $subscriber->unsubscribed_at?->toIso8601String(),
             'attribution' => $this->payloadAttribution($normalizedAttribution),
         ], $payloadOverrides);
+
+        foreach ($payloadUnsetKeys as $key) {
+            unset($payload[$key]);
+        }
+
         $payloadJson = $this->encodePayloadJson($this->sanitizePayloadForJson($payload));
         $payloadEnc = $this->encodePayloadEncrypted($payload);
         DB::table('email_outbox')->insert($this->buildLifecycleOutboxRow(
@@ -1432,6 +1473,7 @@ class EmailOutboxService
             'post_purchase_followup',
             'report_reactivation',
             'welcome',
+            'onboarding',
         ];
         if (! in_array($templateKey, $supported, true)) {
             return '';
@@ -1942,6 +1984,7 @@ class EmailOutboxService
             'post_purchase_followup',
             'report_reactivation',
             'welcome',
+            'onboarding',
         ], true)) {
             return;
         }
@@ -2090,6 +2133,9 @@ class EmailOutboxService
         }
         if ($templateKey === 'welcome') {
             return $lang === 'zh' ? '欢迎来到 FermatMind' : 'Welcome to FermatMind';
+        }
+        if ($templateKey === 'onboarding') {
+            return $lang === 'zh' ? '如何更好地使用你的 FermatMind 报告' : 'How to get more from your FermatMind report';
         }
 
         return $lang === 'zh' ? 'FermatMind 通知' : 'FermatMind notification';

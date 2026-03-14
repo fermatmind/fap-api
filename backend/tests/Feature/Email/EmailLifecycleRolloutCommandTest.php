@@ -383,6 +383,125 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
         $this->assertSame(1, DB::table('email_outbox')->where('template', 'report_reactivation')->count());
     }
 
+    public function test_dry_run_counts_eligible_onboarding_candidates(): void
+    {
+        $eligibleEmail = 'onboarding+eligible@example.com';
+        $this->createOnboardingSubscriber($eligibleEmail, true);
+        $eligibleAttempt = $this->createAttempt('en', now()->subDays(3));
+        $eligibleOrder = 'ord_onboarding_eligible';
+        $this->createOrder($eligibleOrder, $eligibleAttempt, $eligibleEmail, 'fulfilled', now()->subDays(3), now()->subDays(2));
+        $this->recordEvent($eligibleAttempt, 'report_view', now()->subHours(30));
+
+        $recentEmail = 'onboarding+recent@example.com';
+        $this->createOnboardingSubscriber($recentEmail, true);
+        $recentAttempt = $this->createAttempt('en', now()->subDays(2));
+        $recentOrder = 'ord_onboarding_recent';
+        $this->createOrder($recentOrder, $recentAttempt, $recentEmail, 'paid', now()->subDays(2), null);
+        $this->recordEvent($recentAttempt, 'report_view', now()->subHours(12));
+
+        $this->artisan('email:lifecycle-rollout --dry-run')
+            ->expectsOutput('Candidates: 1')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('onboarding => candidates 1, enqueued 0')
+            ->expectsOutput('Dry run: no outbox rows were enqueued.')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, DB::table('email_outbox')->where('template', 'onboarding')->count());
+    }
+
+    public function test_command_enqueues_onboarding_once_per_order(): void
+    {
+        $email = 'onboarding+enqueue@example.com';
+        $this->createOnboardingSubscriber($email, true);
+        $attemptId = $this->createAttempt('en', now()->subDays(3));
+        $orderNo = 'ord_onboarding_enqueue';
+        $this->createOrder($orderNo, $attemptId, $email, 'fulfilled', now()->subDays(3), now()->subDays(2));
+        $this->recordEvent($attemptId, 'report_view', now()->subHours(30));
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 1')
+            ->expectsOutput('Enqueued: 1')
+            ->expectsOutput('onboarding => candidates 1, enqueued 1')
+            ->assertExitCode(0);
+
+        $row = DB::table('email_outbox')->where('template', 'onboarding')->first();
+        $this->assertNotNull($row);
+        $this->assertSame('pending', (string) ($row->status ?? ''));
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 0')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('onboarding => candidates 0, enqueued 0')
+            ->assertExitCode(0);
+
+        $this->assertSame(1, DB::table('email_outbox')->where('template', 'onboarding')->count());
+    }
+
+    public function test_command_requires_product_updates_for_onboarding(): void
+    {
+        $email = 'onboarding+product-disabled@example.com';
+        $this->createOnboardingSubscriber($email, true);
+        $this->updateSubscriberPreferences($email, [
+            'marketing_updates' => true,
+            'report_recovery' => true,
+            'product_updates' => false,
+        ]);
+        $subscriber = $this->subscriberForEmail($email);
+        $subscriber->forceFill([
+            'last_preferences_confirmation_sent_at' => $subscriber->last_preferences_changed_at,
+        ])->save();
+        $attemptId = $this->createAttempt('en', now()->subDays(3));
+        $orderNo = 'ord_onboarding_product_disabled';
+        $this->createOrder($orderNo, $attemptId, $email, 'paid', now()->subDays(3), null);
+        $this->recordEvent($attemptId, 'report_view', now()->subHours(30));
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 0')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('onboarding => candidates 0, enqueued 0')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, DB::table('email_outbox')->where('template', 'onboarding')->count());
+    }
+
+    public function test_command_respects_onboarding_cooldown(): void
+    {
+        $email = 'onboarding+cooldown@example.com';
+        $subscriber = $this->createOnboardingSubscriber($email, true);
+        $attemptId = $this->createAttempt('en', now()->subDays(3));
+        $orderNo = 'ord_onboarding_cooldown';
+        $this->createOrder($orderNo, $attemptId, $email, 'fulfilled', now()->subDays(3), now()->subDays(2));
+        $this->recordEvent($attemptId, 'report_view', now()->subHours(30));
+        $this->markSubscriberInCooldown($subscriber, 'onboarding', now()->subDay());
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 0')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('onboarding => candidates 0, enqueued 0')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, DB::table('email_outbox')->where('template', 'onboarding')->count());
+    }
+
+    public function test_command_does_not_enqueue_onboarding_when_report_claim_exists_for_order(): void
+    {
+        $email = 'onboarding+claimed@example.com';
+        $this->createOnboardingSubscriber($email, true);
+        $attemptId = $this->createAttempt('en', now()->subDays(3));
+        $orderNo = 'ord_onboarding_claimed';
+        $this->createOrder($orderNo, $attemptId, $email, 'paid', now()->subDays(3), null);
+        $this->recordEvent($attemptId, 'report_view', now()->subHours(30));
+        $this->queueReportClaim($email, $attemptId, $orderNo);
+
+        $this->artisan('email:lifecycle-rollout')
+            ->expectsOutput('Candidates: 0')
+            ->expectsOutput('Enqueued: 0')
+            ->expectsOutput('onboarding => candidates 0, enqueued 0')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, DB::table('email_outbox')->where('template', 'onboarding')->count());
+    }
+
     private function updatePreferencesFor(string $email, array $preferences): EmailSubscriber
     {
         app(EmailCaptureService::class)->ensureSubscriber($email, [
@@ -448,6 +567,18 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             'first_captured_at' => $capturedAt,
             'last_captured_at' => $capturedAt,
         ])->save();
+
+        return $subscriber->fresh(['preference']);
+    }
+
+    private function createOnboardingSubscriber(string $email, bool $marketingConsent, string $locale = 'en'): EmailSubscriber
+    {
+        $subscriber = app(EmailCaptureService::class)->ensureSubscriber($email, [
+            'surface' => 'report',
+            'locale' => $locale,
+            'entrypoint' => 'report_view',
+            'marketing_consent' => $marketingConsent,
+        ]);
 
         return $subscriber->fresh(['preference']);
     }
@@ -581,6 +712,14 @@ final class EmailLifecycleRolloutCommandTest extends TestCase
             $orderNo
         );
         $this->assertTrue((bool) ($queued['ok'] ?? false));
+    }
+
+    private function updateSubscriberPreferences(string $email, array $preferences): void
+    {
+        $service = app(EmailPreferenceService::class);
+        $token = $service->issueTokenForEmail($email);
+        $result = $service->updateByToken($token, $preferences);
+        $this->assertTrue((bool) ($result['ok'] ?? false));
     }
 
     private function recordEvent(string $attemptId, string $eventCode, CarbonInterface $occurredAt): void
