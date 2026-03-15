@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\SEO;
 
+use App\Models\Article;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
+use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\TopicProfileSeoService;
@@ -101,6 +103,97 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringNotContainsString($prefix.'private-global-alt', $xml);
         $this->assertStringNotContainsString($prefix.'tenant-public', $xml);
         $this->assertStringNotContainsString($prefix.'tenant-public-alt', $xml);
+    }
+
+    public function test_generate_includes_only_indexable_global_article_urls_with_locale_aware_paths(): void
+    {
+        config([
+            'app.url' => 'https://api.staging.fermatmind.com',
+            'app.frontend_url' => 'https://staging.fermatmind.com',
+        ]);
+
+        $eligibleEn = $this->createArticle([
+            'slug' => 'mbti-basics',
+            'locale' => 'en',
+            'title' => 'MBTI Basics',
+            'excerpt' => 'Learn the core concepts behind MBTI.',
+            'published_at' => Carbon::create(2026, 3, 6, 9, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 6, 10, 0, 0, 'UTC'),
+        ]);
+
+        $eligibleZh = $this->createArticle([
+            'slug' => 'mbti-basics',
+            'locale' => 'zh-CN',
+            'title' => 'MBTI 基础',
+            'excerpt' => '了解 MBTI 的核心概念。',
+            'published_at' => Carbon::create(2026, 3, 6, 11, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 6, 12, 0, 0, 'UTC'),
+        ]);
+
+        $this->createArticle([
+            'slug' => 'draft-article',
+            'locale' => 'en',
+            'status' => 'draft',
+            'updated_at' => Carbon::create(2026, 3, 6, 12, 30, 0, 'UTC'),
+        ]);
+        $this->createArticle([
+            'slug' => 'private-article',
+            'locale' => 'en',
+            'is_public' => false,
+            'updated_at' => Carbon::create(2026, 3, 6, 12, 45, 0, 'UTC'),
+        ]);
+        $this->createArticle([
+            'slug' => 'noindex-article',
+            'locale' => 'en',
+            'is_indexable' => false,
+            'updated_at' => Carbon::create(2026, 3, 6, 13, 0, 0, 'UTC'),
+        ]);
+        $this->createArticle([
+            'org_id' => 9,
+            'slug' => 'tenant-article',
+            'locale' => 'en',
+            'updated_at' => Carbon::create(2026, 3, 6, 13, 15, 0, 'UTC'),
+        ]);
+        $this->createArticle([
+            'slug' => 'future-article',
+            'locale' => 'en',
+            'published_at' => Carbon::now('UTC')->addDay(),
+            'updated_at' => Carbon::create(2026, 3, 6, 13, 30, 0, 'UTC'),
+        ]);
+        $this->createArticle([
+            'slug' => 'fr-article',
+            'locale' => 'fr',
+            'updated_at' => Carbon::create(2026, 3, 6, 13, 45, 0, 'UTC'),
+        ]);
+
+        $payload = app(SitemapGenerator::class)->generate();
+        $xml = (string) ($payload['xml'] ?? '');
+
+        $this->assertStringContainsString('https://staging.fermatmind.com/en/articles', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/zh/articles', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/en/articles/mbti-basics', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/zh/articles/mbti-basics', $xml);
+
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/articles/mbti-basics', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/articles/draft-article', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/articles/private-article', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/articles/noindex-article', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/articles/tenant-article', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/articles/future-article', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/fr/articles/fr-article', $xml);
+
+        $seoService = app(ArticleSeoService::class);
+
+        $this->assertSame(
+            $seoService->buildCanonicalUrl((string) $eligibleEn->slug, (string) $eligibleEn->locale),
+            data_get($seoService->buildSeoPayload($eligibleEn), 'canonical')
+        );
+        $this->assertSame(
+            $seoService->buildCanonicalUrl((string) $eligibleZh->slug, (string) $eligibleZh->locale),
+            data_get($seoService->buildSeoPayload($eligibleZh), 'canonical')
+        );
+        $this->assertStringContainsString(data_get($seoService->buildSeoPayload($eligibleEn), 'canonical'), $xml);
+        $this->assertStringContainsString(data_get($seoService->buildSeoPayload($eligibleZh), 'canonical'), $xml);
     }
 
     public function test_generate_includes_only_indexable_global_personality_urls_with_locale_aware_paths(): void
@@ -356,7 +449,7 @@ class SitemapGeneratorTest extends TestCase
             'job_code' => 'future-role',
             'slug' => 'future-role',
             'locale' => 'en',
-            'published_at' => Carbon::create(2026, 3, 12, 9, 0, 0, 'UTC'),
+            'published_at' => Carbon::now('UTC')->addDay(),
             'updated_at' => Carbon::create(2026, 3, 8, 13, 30, 0, 'UTC'),
         ]);
         $this->createCareerJob([
@@ -420,6 +513,33 @@ class SitemapGeneratorTest extends TestCase
             'schema_version' => 'v1',
             'created_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createArticle(array $overrides = []): Article
+    {
+        /** @var Article */
+        return Article::query()->create(array_merge([
+            'org_id' => 0,
+            'category_id' => null,
+            'author_admin_user_id' => null,
+            'slug' => 'article-slug',
+            'locale' => 'en',
+            'title' => 'Article Title',
+            'excerpt' => 'Article excerpt.',
+            'content_md' => '# Article body',
+            'content_html' => null,
+            'cover_image_url' => null,
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 6, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'created_at' => Carbon::create(2026, 3, 6, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 6, 8, 0, 0, 'UTC'),
         ], $overrides));
     }
 

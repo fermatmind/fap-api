@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\SEO;
 
+use App\Models\Article;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
@@ -177,6 +178,60 @@ class SitemapXmlTest extends TestCase
             'updated_at' => $nowB,
         ]);
 
+        Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'mbti-basics',
+            'locale' => 'en',
+            'title' => 'MBTI Basics',
+            'excerpt' => 'Learn the core concepts behind MBTI.',
+            'content_md' => '# MBTI Basics',
+            'content_html' => null,
+            'cover_image_url' => null,
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 11, 35, 0),
+            'scheduled_at' => null,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
+        Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'mbti-basics',
+            'locale' => 'zh-CN',
+            'title' => 'MBTI 基础',
+            'excerpt' => '了解 MBTI 的核心概念。',
+            'content_md' => '# MBTI 基础',
+            'content_html' => null,
+            'cover_image_url' => null,
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 35, 0),
+            'scheduled_at' => null,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
+        Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'article-draft',
+            'locale' => 'en',
+            'title' => 'Draft Article',
+            'excerpt' => 'Draft article should stay out of sitemap.',
+            'content_md' => '# Draft Article',
+            'content_html' => null,
+            'cover_image_url' => null,
+            'status' => 'draft',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => null,
+            'scheduled_at' => null,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
         CareerJob::query()->create([
             'org_id' => 0,
             'job_code' => 'product-manager',
@@ -262,6 +317,12 @@ class SitemapXmlTest extends TestCase
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics/mbti</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/topics/mbti</loc>', $body);
         $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/topics/big-five</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/articles</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/articles</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/articles/mbti-basics</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/articles/mbti-basics</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/articles/mbti-basics</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/articles/article-draft</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/jobs</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/product-manager</loc>', $body);

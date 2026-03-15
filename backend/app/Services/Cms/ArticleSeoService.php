@@ -13,6 +13,8 @@ use RuntimeException;
 
 final class ArticleSeoService
 {
+    public const SUPPORTED_LOCALES = ['en', 'zh-CN'];
+
     public function generateSeoMeta(int $articleId): ArticleSeoMeta
     {
         if ($articleId <= 0) {
@@ -30,10 +32,7 @@ final class ArticleSeoService
                 throw new RuntimeException('article not found.');
             }
 
-            $locale = trim((string) $article->locale);
-            if ($locale === '') {
-                $locale = 'en';
-            }
+            $locale = $this->normalizeLocale((string) $article->locale);
 
             $title = trim((string) $article->title);
             $descSource = trim((string) ($article->excerpt ?? ''));
@@ -43,7 +42,7 @@ final class ArticleSeoService
 
             $seoTitle = Str::limit($title, 60, '');
             $seoDescription = Str::limit($this->normalizeWhitespace($descSource), 160, '');
-            $canonicalUrl = $this->buildCanonicalUrl($locale, (string) $article->slug);
+            $canonicalUrl = $this->buildCanonicalUrl((string) $article->slug, $locale);
             $ogTitle = Str::limit($title, 90, '');
             $ogDescription = Str::limit($this->normalizeWhitespace($descSource), 200, '');
 
@@ -73,36 +72,20 @@ final class ArticleSeoService
      */
     public function buildSeoPayload(Article $article): array
     {
-        $locale = trim((string) $article->locale);
-        if ($locale === '') {
-            $locale = 'en';
-        }
-
-        $seo = null;
-        if ($article->relationLoaded('seoMeta') && $article->seoMeta instanceof ArticleSeoMeta) {
-            $seo = $article->seoMeta;
-        }
-
-        if (! $seo instanceof ArticleSeoMeta) {
-            $seo = ArticleSeoMeta::query()
-                ->withoutGlobalScopes()
-                ->where('org_id', (int) $article->org_id)
-                ->where('article_id', (int) $article->id)
-                ->where('locale', $locale)
-                ->first();
-        }
+        $locale = $this->normalizeLocale((string) $article->locale);
+        $seo = $this->resolveSeoMeta($article, $locale);
 
         $title = $seo?->seo_title ?? $article->title;
         $descriptionSource = (string) ($article->excerpt ?? $article->content_md);
-        $description = $seo?->seo_description ?? Str::limit(strip_tags($descriptionSource), 160);
-
-        $canonical = $seo?->canonical_url
-            ?? rtrim((string) config('app.url', ''), '/').'/articles/'.rawurlencode((string) $article->slug);
+        $description = $seo?->seo_description
+            ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160);
+        $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
 
         return [
             'title' => $title,
             'description' => $description,
             'canonical' => $canonical,
+            'alternates' => $this->buildAlternates($article),
 
             'og' => [
                 'title' => $seo?->og_title ?? $title,
@@ -118,7 +101,7 @@ final class ArticleSeoService
                 'image' => $seo?->og_image_url,
             ],
 
-            'robots' => $seo?->robots ?? 'index,follow',
+            'robots' => $seo?->robots ?? ((bool) $article->is_indexable ? 'index,follow' : 'noindex,nofollow'),
         ];
     }
 
@@ -127,18 +110,63 @@ final class ArticleSeoService
      */
     public function generateJsonLd(Article $article): array
     {
-        return [
+        $locale = $this->normalizeLocale((string) $article->locale);
+        $seo = $this->resolveSeoMeta($article, $locale);
+        $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
+        $descriptionSource = (string) ($article->excerpt ?? $article->content_md);
+
+        $jsonLd = [
             '@context' => 'https://schema.org',
             '@type' => 'Article',
-            'headline' => $article->title,
+            'headline' => $seo?->seo_title ?? $article->title,
+            'description' => $seo?->seo_description
+                ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
             'datePublished' => optional($article->published_at)->toAtomString(),
             'dateModified' => optional($article->updated_at)->toAtomString(),
             'author' => [
                 '@type' => 'Organization',
                 'name' => 'FermatMind',
             ],
-            'mainEntityOfPage' => rtrim((string) config('app.url', ''), '/').'/articles/'.rawurlencode((string) $article->slug),
+            '@id' => $canonical,
+            'url' => $canonical,
+            'mainEntityOfPage' => $canonical,
         ];
+
+        if ($seo instanceof ArticleSeoMeta && is_array($seo->schema_json)) {
+            $jsonLd = array_replace_recursive($jsonLd, $seo->schema_json);
+        }
+
+        return $this->normalizeJsonLdUrls($jsonLd, $canonical, (string) $article->slug);
+    }
+
+    public function buildCanonicalUrl(string $slug, string $locale): ?string
+    {
+        $baseUrl = $this->frontendBaseUrl();
+        $resolvedSlug = trim($slug);
+
+        if ($baseUrl === '' || $resolvedSlug === '') {
+            return null;
+        }
+
+        return $baseUrl
+            .'/'.$this->mapBackendLocaleToFrontendSegment($locale)
+            .'/articles/'
+            .rawurlencode($resolvedSlug);
+    }
+
+    public function buildListUrl(string $locale): ?string
+    {
+        $baseUrl = $this->frontendBaseUrl();
+        if ($baseUrl === '') {
+            return null;
+        }
+
+        return $baseUrl.'/'.$this->mapBackendLocaleToFrontendSegment($locale).'/articles';
+    }
+
+    public function mapBackendLocaleToFrontendSegment(string $locale): string
+    {
+        return $this->normalizeLocale($locale) === 'zh-CN' ? 'zh' : 'en';
     }
 
     private function extractDescription(string $contentMd): string
@@ -168,15 +196,120 @@ final class ArticleSeoService
         return is_string($normalized) ? $normalized : trim($value);
     }
 
-    private function buildCanonicalUrl(string $locale, string $slug): ?string
+    private function resolveSeoMeta(Article $article, string $locale): ?ArticleSeoMeta
     {
-        $baseUrl = rtrim((string) config('app.url', ''), '/');
-        $slug = trim($slug);
-
-        if ($baseUrl === '' || $slug === '') {
-            return null;
+        if (
+            $article->relationLoaded('seoMeta')
+            && $article->seoMeta instanceof ArticleSeoMeta
+            && $this->normalizeLocale((string) $article->seoMeta->locale) === $locale
+        ) {
+            return $article->seoMeta;
         }
 
-        return $baseUrl.'/articles/'.rawurlencode($slug);
+        return ArticleSeoMeta::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', (int) $article->org_id)
+            ->where('article_id', (int) $article->id)
+            ->where('locale', $locale)
+            ->first();
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function buildAlternates(Article $article): array
+    {
+        $variants = Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', (int) $article->org_id)
+            ->where('slug', (string) $article->slug)
+            ->where('status', 'published')
+            ->where('is_public', true)
+            ->whereIn('locale', self::SUPPORTED_LOCALES)
+            ->pluck('locale')
+            ->all();
+
+        $availableLocales = [];
+        foreach ($variants as $variantLocale) {
+            $availableLocales[$this->normalizeLocale((string) $variantLocale)] = true;
+        }
+
+        $alternates = [];
+        foreach (self::SUPPORTED_LOCALES as $supportedLocale) {
+            if (! isset($availableLocales[$supportedLocale])) {
+                continue;
+            }
+
+            $canonical = $this->buildCanonicalUrl((string) $article->slug, $supportedLocale);
+            if ($canonical === null) {
+                continue;
+            }
+
+            $alternates[$supportedLocale] = $canonical;
+            if ($supportedLocale === 'zh-CN') {
+                $alternates['zh'] = $canonical;
+            }
+        }
+
+        return $alternates;
+    }
+
+    /**
+     * @param  array<string, mixed>  $jsonLd
+     * @return array<string, mixed>
+     */
+    private function normalizeJsonLdUrls(array $jsonLd, ?string $canonical, string $slug): array
+    {
+        $walk = function (mixed $value) use (&$walk, $canonical, $slug): mixed {
+            if (is_array($value)) {
+                $normalized = [];
+                foreach ($value as $key => $nested) {
+                    $normalized[$key] = $walk($nested);
+                }
+
+                return $normalized;
+            }
+
+            if (! is_string($value) || $canonical === null || trim($value) === '') {
+                return $value;
+            }
+
+            $legacyCandidates = [];
+            foreach (array_unique(array_filter([
+                rtrim((string) config('app.url', ''), '/'),
+                $this->frontendBaseUrl(),
+            ])) as $baseUrl) {
+                $legacyCandidates[] = $baseUrl.'/articles/'.rawurlencode(trim($slug));
+            }
+            $legacyCandidates[] = '/articles/'.rawurlencode(trim($slug));
+
+            foreach ($legacyCandidates as $candidate) {
+                if ($candidate === '') {
+                    continue;
+                }
+
+                if ($value === $candidate) {
+                    return $canonical;
+                }
+
+                if (str_starts_with($value, $candidate.'#')) {
+                    return $canonical.substr($value, strlen($candidate));
+                }
+            }
+
+            return $value;
+        };
+
+        return $walk($jsonLd);
+    }
+
+    private function frontendBaseUrl(): string
+    {
+        return rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+    }
+
+    private function normalizeLocale(string $locale): string
+    {
+        return trim($locale) === 'zh-CN' ? 'zh-CN' : 'en';
     }
 }
