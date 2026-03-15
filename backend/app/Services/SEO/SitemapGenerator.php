@@ -3,10 +3,12 @@
 namespace App\Services\SEO;
 
 use App\Models\Article;
+use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
 use App\Services\Cms\ArticleSeoService;
+use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\TopicProfileSeoService;
@@ -19,6 +21,7 @@ class SitemapGenerator
 
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
+        private readonly CareerGuideSeoService $careerGuideSeoService,
         private readonly CareerJobSeoService $careerJobSeoService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
@@ -39,6 +42,7 @@ class SitemapGenerator
             $this->getScaleUrls($locale),
             $this->getArticleUrls(),
             $this->getCareerJobUrls(),
+            $this->getCareerGuideUrls(),
             $this->getPersonalityUrls(),
             $this->getTopicUrls()
         );
@@ -378,6 +382,108 @@ class SitemapGenerator
         return array_values(array_filter($urls, static fn (array $row): bool => ! empty($row['loc'])));
     }
 
+    private function getCareerGuideUrls(): array
+    {
+        return array_merge(
+            $this->getCareerGuideListUrls(),
+            $this->getCareerGuideDetailUrls()
+        );
+    }
+
+    private function getCareerGuideListUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $rows = CareerGuide::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('status', CareerGuide::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->whereIn('locale', CareerGuide::SUPPORTED_LOCALES)
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->select(['locale', 'created_at', 'updated_at', 'published_at'])
+            ->orderBy('locale')
+            ->get();
+
+        $listLastModified = [];
+
+        foreach ($rows as $row) {
+            $locale = trim((string) $row->locale);
+            if ($locale === '') {
+                continue;
+            }
+
+            $segment = $this->careerGuideSeoService->mapBackendLocaleToFrontendSegment($locale);
+            $lastmod = $this->resolveCareerGuideLastmod($row);
+
+            if (! isset($listLastModified[$segment]) || $lastmod->gt($listLastModified[$segment])) {
+                $listLastModified[$segment] = $lastmod;
+            }
+        }
+
+        $urls = [];
+        foreach ($listLastModified as $segment => $lastmod) {
+            $urls[] = [
+                'loc' => $baseUrl.'/'.$segment.'/career/guides',
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'career-guides-list:'.$segment,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return $urls;
+    }
+
+    private function getCareerGuideDetailUrls(): array
+    {
+        $rows = CareerGuide::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('status', CareerGuide::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->whereIn('locale', CareerGuide::SUPPORTED_LOCALES)
+            ->whereNotNull('slug')
+            ->where('slug', '<>', '')
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->select(['slug', 'locale', 'created_at', 'updated_at', 'published_at'])
+            ->orderBy('locale')
+            ->orderBy('slug')
+            ->get();
+
+        $urls = [];
+
+        foreach ($rows as $row) {
+            $slug = trim((string) $row->slug);
+            $locale = trim((string) $row->locale);
+
+            if ($slug === '' || $locale === '') {
+                continue;
+            }
+
+            $lastmod = $this->resolveCareerGuideLastmod($row);
+
+            $urls[] = [
+                'loc' => $this->careerGuideSeoService->buildCanonicalUrl($row, $locale),
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'career-guides:'.$this->careerGuideSeoService->mapBackendLocaleToFrontendSegment($locale).':'.$slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+        }
+
+        return array_values(array_filter($urls, static fn (array $row): bool => ! empty($row['loc'])));
+    }
+
     private function getTopicUrls(): array
     {
         $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
@@ -522,6 +628,14 @@ class SitemapGenerator
         }
 
         return true;
+    }
+
+    private function resolveCareerGuideLastmod(CareerGuide $guide): Carbon
+    {
+        return $guide->updated_at
+            ?? $guide->published_at
+            ?? $guide->created_at
+            ?? now();
     }
 
     private function buildXml(array $urls): string

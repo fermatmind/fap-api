@@ -3,6 +3,7 @@
 namespace Tests\Feature\SEO;
 
 use App\Models\Article;
+use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
@@ -285,6 +286,77 @@ class SitemapXmlTest extends TestCase
             'updated_at' => $nowB,
         ]);
 
+        $guideEn = $this->createCareerGuide([
+            'guide_code' => 'career-planning-101',
+            'slug' => 'career-planning-101',
+            'locale' => 'en',
+            'title' => 'Career Planning 101',
+            'published_at' => Carbon::create(2026, 1, 31, 13, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 1, 31, 12, 50, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 1, 31, 13, 30, 0, 'UTC'),
+        ]);
+
+        $guideZhPublishedAt = Carbon::create(2026, 1, 31, 14, 0, 0, 'UTC');
+
+        DB::table('career_guides')->insert([
+            'org_id' => 0,
+            'guide_code' => 'job-fit-guide',
+            'slug' => 'job-fit-guide',
+            'locale' => 'zh-CN',
+            'title' => '岗位匹配指南',
+            'excerpt' => '理解岗位匹配与职业选择。',
+            'category_slug' => 'job-fit',
+            'body_md' => '# 岗位匹配指南',
+            'body_html' => '<h1>岗位匹配指南</h1>',
+            'related_industry_slugs_json' => json_encode(['technology']),
+            'status' => CareerGuide::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'sort_order' => 0,
+            'published_at' => $guideZhPublishedAt,
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'created_at' => Carbon::create(2026, 1, 31, 13, 45, 0, 'UTC'),
+            'updated_at' => null,
+        ]);
+
+        $this->createCareerGuide([
+            'guide_code' => 'guide-draft',
+            'slug' => 'guide-draft',
+            'status' => CareerGuide::STATUS_DRAFT,
+            'updated_at' => Carbon::create(2026, 1, 31, 14, 10, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'guide_code' => 'guide-private',
+            'slug' => 'guide-private',
+            'is_public' => false,
+            'updated_at' => Carbon::create(2026, 1, 31, 14, 20, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'guide_code' => 'guide-noindex',
+            'slug' => 'guide-noindex',
+            'is_indexable' => false,
+            'updated_at' => Carbon::create(2026, 1, 31, 14, 30, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'guide_code' => 'guide-future',
+            'slug' => 'guide-future',
+            'published_at' => Carbon::now('UTC')->addDay(),
+            'updated_at' => Carbon::create(2026, 1, 31, 14, 40, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'org_id' => 9,
+            'guide_code' => 'guide-tenant',
+            'slug' => 'guide-tenant',
+            'updated_at' => Carbon::create(2026, 1, 31, 14, 50, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'guide_code' => 'guide-fr',
+            'slug' => 'guide-fr',
+            'locale' => 'fr',
+            'updated_at' => Carbon::create(2026, 1, 31, 15, 0, 0, 'UTC'),
+        ]);
+
         $response = $this->get('/sitemap.xml');
 
         $response->assertStatus(200);
@@ -328,11 +400,36 @@ class SitemapXmlTest extends TestCase
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/product-manager</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs/product-manager</loc>', $body);
         $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/private-role</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/guides</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/guides</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/guides/career-planning-101</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/guides/job-fit-guide</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/career/guides/career-planning-101</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-draft</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-private</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-noindex</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-future</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/guides/guide-tenant</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/fr/career/guides/guide-fr</loc>', $body);
         $this->assertStringContainsString('<changefreq>weekly</changefreq>', $body);
         $this->assertStringContainsString('<priority>0.7</priority>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-30</lastmod>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-31</lastmod>', $body);
         $this->assertSame(1, substr_count($body, '<loc>'.$prefix.'alpha</loc>'));
+
+        $entries = $this->sitemapEntries($body);
+        $this->assertSame(
+            $guideEn->updated_at?->toAtomString(),
+            $entries['https://staging.fermatmind.com/en/career/guides/career-planning-101'] ?? null
+        );
+        $this->assertSame(
+            $guideZhPublishedAt->toAtomString(),
+            $entries['https://staging.fermatmind.com/zh/career/guides'] ?? null
+        );
+        $this->assertSame(
+            $guideZhPublishedAt->toAtomString(),
+            $entries['https://staging.fermatmind.com/zh/career/guides/job-fit-guide'] ?? null
+        );
 
         $second = $this->withHeaders(['If-None-Match' => $etag])->get('/sitemap.xml');
         $second->assertStatus(304);
@@ -344,5 +441,64 @@ class SitemapXmlTest extends TestCase
         $second->assertHeader('ETag', $etag);
         $second->assertHeaderMissing('Set-Cookie');
         $this->assertSame('', (string) $second->getContent());
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createCareerGuide(array $overrides = []): CareerGuide
+    {
+        /** @var CareerGuide */
+        return CareerGuide::query()->create(array_merge([
+            'org_id' => 0,
+            'guide_code' => 'career-guide',
+            'slug' => 'career-guide',
+            'locale' => 'en',
+            'title' => 'Career guide',
+            'excerpt' => 'Career guide excerpt.',
+            'category_slug' => 'career-planning',
+            'body_md' => '# Career guide',
+            'body_html' => '<h1>Career guide</h1>',
+            'related_industry_slugs_json' => ['technology'],
+            'status' => CareerGuide::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'sort_order' => 0,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 40, 0, 'UTC'),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'created_at' => Carbon::create(2026, 1, 31, 12, 30, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 1, 31, 12, 40, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function sitemapEntries(string $xml): array
+    {
+        $document = simplexml_load_string($xml);
+        if ($document === false) {
+            $this->fail('Failed to parse sitemap XML.');
+        }
+
+        $document->registerXPathNamespace('s', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+        $nodes = $document->xpath('/s:urlset/s:url');
+        if ($nodes === false) {
+            return [];
+        }
+
+        $entries = [];
+        foreach ($nodes as $node) {
+            $children = $node->children('http://www.sitemaps.org/schemas/sitemap/0.9');
+            $loc = trim((string) $children->loc);
+            if ($loc === '') {
+                continue;
+            }
+
+            $entries[$loc] = trim((string) $children->lastmod);
+        }
+
+        return $entries;
     }
 }

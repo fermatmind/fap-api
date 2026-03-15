@@ -3,10 +3,12 @@
 namespace Tests\Feature\SEO;
 
 use App\Models\Article;
+use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
 use App\Services\Cms\ArticleSeoService;
+use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\TopicProfileSeoService;
@@ -490,6 +492,127 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'), $xml);
     }
 
+    public function test_generate_includes_only_indexable_global_career_guide_urls_with_locale_aware_paths_and_lastmod(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        $eligibleEn = $this->createCareerGuide([
+            'guide_code' => 'career-planning-101',
+            'slug' => 'career-planning-101',
+            'locale' => 'en',
+            'title' => 'Career Planning 101',
+            'published_at' => Carbon::create(2026, 3, 9, 9, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 3, 9, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 9, 10, 0, 0, 'UTC'),
+        ]);
+
+        $latestEn = $this->createCareerGuide([
+            'guide_code' => 'job-search-playbook',
+            'slug' => 'job-search-playbook',
+            'locale' => 'en',
+            'title' => 'Job Search Playbook',
+            'published_at' => Carbon::create(2026, 3, 9, 12, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 3, 9, 11, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 9, 14, 0, 0, 'UTC'),
+        ]);
+
+        DB::table('career_guides')->insert([
+            'org_id' => 0,
+            'guide_code' => 'job-fit-guide',
+            'slug' => 'job-fit-guide',
+            'locale' => 'zh-CN',
+            'title' => '岗位匹配指南',
+            'excerpt' => '理解岗位匹配与职业选择。',
+            'category_slug' => 'job-fit',
+            'body_md' => '# 岗位匹配指南',
+            'body_html' => '<h1>岗位匹配指南</h1>',
+            'related_industry_slugs_json' => json_encode(['technology']),
+            'status' => CareerGuide::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'sort_order' => 0,
+            'published_at' => Carbon::create(2026, 3, 9, 16, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'created_at' => Carbon::create(2026, 3, 9, 15, 0, 0, 'UTC'),
+            'updated_at' => null,
+        ]);
+
+        $eligibleZh = CareerGuide::query()
+            ->withoutGlobalScopes()
+            ->where('guide_code', 'job-fit-guide')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+
+        $this->createCareerGuide([
+            'guide_code' => 'draft-guide',
+            'slug' => 'draft-guide',
+            'status' => CareerGuide::STATUS_DRAFT,
+            'updated_at' => Carbon::create(2026, 3, 9, 17, 0, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'guide_code' => 'private-guide',
+            'slug' => 'private-guide',
+            'is_public' => false,
+            'updated_at' => Carbon::create(2026, 3, 9, 17, 15, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'guide_code' => 'noindex-guide',
+            'slug' => 'noindex-guide',
+            'is_indexable' => false,
+            'updated_at' => Carbon::create(2026, 3, 9, 17, 30, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'org_id' => 9,
+            'guide_code' => 'tenant-guide',
+            'slug' => 'tenant-guide',
+            'updated_at' => Carbon::create(2026, 3, 9, 17, 45, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'guide_code' => 'future-guide',
+            'slug' => 'future-guide',
+            'published_at' => Carbon::now('UTC')->addDay(),
+            'updated_at' => Carbon::create(2026, 3, 9, 18, 0, 0, 'UTC'),
+        ]);
+        $this->createCareerGuide([
+            'guide_code' => 'fr-guide',
+            'slug' => 'fr-guide',
+            'locale' => 'fr',
+            'updated_at' => Carbon::create(2026, 3, 9, 18, 15, 0, 'UTC'),
+        ]);
+
+        $payload = app(SitemapGenerator::class)->generate();
+        $xml = (string) ($payload['xml'] ?? '');
+        $entries = $this->sitemapEntries($xml);
+
+        $enListUrl = 'https://staging.fermatmind.com/en/career/guides';
+        $zhListUrl = 'https://staging.fermatmind.com/zh/career/guides';
+        $seoService = app(CareerGuideSeoService::class);
+        $enDetailUrl = $seoService->buildCanonicalUrl($eligibleEn);
+        $zhDetailUrl = $seoService->buildCanonicalUrl($eligibleZh);
+
+        $this->assertArrayHasKey($enListUrl, $entries);
+        $this->assertArrayHasKey($zhListUrl, $entries);
+        $this->assertNotNull($enDetailUrl);
+        $this->assertNotNull($zhDetailUrl);
+        $this->assertArrayHasKey($enDetailUrl, $entries);
+        $this->assertArrayHasKey($zhDetailUrl, $entries);
+
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/career/guides', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/career/guides/career-planning-101', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/guides/draft-guide', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/guides/private-guide', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/guides/noindex-guide', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/guides/tenant-guide', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/guides/future-guide', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/fr/career/guides/fr-guide', $xml);
+
+        $this->assertSame($latestEn->updated_at?->toAtomString(), $entries[$enListUrl]);
+        $this->assertSame($eligibleZh->published_at?->toAtomString(), $entries[$zhListUrl]);
+        $this->assertSame($eligibleEn->updated_at?->toAtomString(), $entries[$enDetailUrl]);
+        $this->assertSame($eligibleZh->published_at?->toAtomString(), $entries[$zhDetailUrl]);
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */
@@ -593,5 +716,64 @@ class SitemapGeneratorTest extends TestCase
             'created_at' => Carbon::create(2026, 3, 8, 8, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 8, 8, 0, 0, 'UTC'),
         ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createCareerGuide(array $overrides = []): CareerGuide
+    {
+        /** @var CareerGuide */
+        return CareerGuide::query()->create(array_merge([
+            'org_id' => 0,
+            'guide_code' => 'career-guide',
+            'slug' => 'career-guide',
+            'locale' => 'en',
+            'title' => 'Career guide',
+            'excerpt' => 'Career guide excerpt.',
+            'category_slug' => 'career-planning',
+            'body_md' => '# Career guide',
+            'body_html' => '<h1>Career guide</h1>',
+            'related_industry_slugs_json' => ['technology'],
+            'status' => CareerGuide::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'sort_order' => 0,
+            'published_at' => Carbon::create(2026, 3, 9, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'created_at' => Carbon::create(2026, 3, 9, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 9, 8, 0, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function sitemapEntries(string $xml): array
+    {
+        $document = simplexml_load_string($xml);
+        if ($document === false) {
+            $this->fail('Failed to parse sitemap XML.');
+        }
+
+        $document->registerXPathNamespace('s', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+        $nodes = $document->xpath('/s:urlset/s:url');
+        if ($nodes === false) {
+            return [];
+        }
+
+        $entries = [];
+        foreach ($nodes as $node) {
+            $children = $node->children('http://www.sitemaps.org/schemas/sitemap/0.9');
+            $loc = trim((string) $children->loc);
+            if ($loc === '') {
+                continue;
+            }
+
+            $entries[$loc] = trim((string) $children->lastmod);
+        }
+
+        return $entries;
     }
 }
