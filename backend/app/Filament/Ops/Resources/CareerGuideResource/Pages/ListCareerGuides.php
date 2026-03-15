@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Filament\Ops\Resources\CareerGuideResource\Pages;
+
+use App\Filament\Ops\Resources\CareerGuideResource;
+use App\Filament\Ops\Resources\Pages\Concerns\HasSharedListEmptyState;
+use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
+use Illuminate\Contracts\Support\Htmlable;
+
+class ListCareerGuides extends ListRecords
+{
+    use HasSharedListEmptyState;
+
+    protected static string $resource = CareerGuideResource::class;
+
+    public function getTitle(): string|Htmlable
+    {
+        return 'Career Guides';
+    }
+
+    public function getSubheading(): ?string
+    {
+        return 'Global career content workspace for structured career guides. Not tenant-specific.';
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make()
+                ->label('Create Career Guide')
+                ->icon('heroicon-o-plus'),
+        ];
+    }
+}
