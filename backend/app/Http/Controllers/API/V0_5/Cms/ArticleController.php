@@ -12,6 +12,7 @@ use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -28,16 +29,25 @@ class ArticleController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $orgId = $this->resolveOrgId($request);
+        $validated = $this->validateListQuery($request);
+        if ($validated instanceof JsonResponse) {
+            return $validated;
+        }
 
-        $paginator = Article::query()
+        $query = Article::query()
             ->withoutGlobalScopes()
-            ->where('org_id', $orgId)
+            ->where('org_id', $validated['org_id'])
             ->published()
-            ->with(['category', 'tags', 'seoMeta'])
+            ->with($this->articleRelations());
+
+        if ($validated['locale'] !== null) {
+            $query->where('locale', $validated['locale']);
+        }
+
+        $paginator = $query
             ->orderByDesc('published_at')
             ->orderByDesc('id')
-            ->paginate(20);
+            ->paginate(20, ['*'], 'page', $validated['page']);
 
         $items = [];
         foreach ($paginator->items() as $article) {
@@ -105,7 +115,7 @@ class ArticleController extends Controller
             ], 404);
         }
 
-        $article->loadMissing(['category', 'tags', 'seoMeta']);
+        $article->loadMissing($this->articleRelations());
 
         return response()->json([
             'ok' => true,
@@ -187,7 +197,7 @@ class ArticleController extends Controller
             return $this->runtimeError($e);
         }
 
-        $article->loadMissing(['category', 'tags', 'seoMeta']);
+        $article->loadMissing($this->articleRelations());
 
         return response()->json([
             'ok' => true,
@@ -245,7 +255,7 @@ class ArticleController extends Controller
             return $this->runtimeError($e);
         }
 
-        $article->loadMissing(['category', 'tags', 'seoMeta']);
+        $article->loadMissing($this->articleRelations());
 
         return response()->json([
             'ok' => true,
@@ -276,7 +286,7 @@ class ArticleController extends Controller
             return $this->runtimeError($e);
         }
 
-        $article->loadMissing(['category', 'tags', 'seoMeta']);
+        $article->loadMissing($this->articleRelations());
 
         return response()->json([
             'ok' => true,
@@ -307,7 +317,7 @@ class ArticleController extends Controller
             return $this->runtimeError($e);
         }
 
-        $article->loadMissing(['category', 'tags', 'seoMeta']);
+        $article->loadMissing($this->articleRelations());
 
         return response()->json([
             'ok' => true,
@@ -363,6 +373,30 @@ class ArticleController extends Controller
         $raw = trim((string) $request->query('org_id', '0'));
 
         return preg_match('/^\d+$/', $raw) === 1 ? (int) $raw : 0;
+    }
+
+    /**
+     * @return array{org_id:int,locale:?string,page:int}|JsonResponse
+     */
+    private function validateListQuery(Request $request): array|JsonResponse
+    {
+        $validator = Validator::make($request->query(), [
+            'org_id' => ['nullable', 'integer', 'min:0'],
+            'locale' => ['nullable', 'in:en,zh-CN'],
+            'page' => ['nullable', 'integer', 'min:1'],
+        ]);
+
+        if ($validator->fails()) {
+            return $this->invalidArgumentMessage($validator->errors()->first());
+        }
+
+        $validated = $validator->validated();
+
+        return [
+            'org_id' => (int) ($validated['org_id'] ?? 0),
+            'locale' => isset($validated['locale']) ? (string) $validated['locale'] : null,
+            'page' => (int) ($validated['page'] ?? 1),
+        ];
     }
 
     private function resolveTrustedOrgId(Request $request): int
@@ -425,6 +459,18 @@ class ArticleController extends Controller
     }
 
     /**
+     * @return array<string, \Closure>
+     */
+    private function articleRelations(): array
+    {
+        return [
+            'category' => static fn ($query) => $query->withoutGlobalScopes(),
+            'tags' => static fn ($query) => $query->withoutGlobalScopes(),
+            'seoMeta' => static fn ($query) => $query->withoutGlobalScopes(),
+        ];
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function articlePayload(Article $article): array
@@ -456,10 +502,15 @@ class ArticleController extends Controller
 
     private function invalidArgument(InvalidArgumentException $e): JsonResponse
     {
+        return $this->invalidArgumentMessage($e->getMessage());
+    }
+
+    private function invalidArgumentMessage(string $message): JsonResponse
+    {
         return response()->json([
             'ok' => false,
             'error_code' => 'INVALID_ARGUMENT',
-            'message' => $e->getMessage(),
+            'message' => $message,
         ], 422);
     }
 

@@ -2,9 +2,11 @@
 
 namespace App\Services\SEO;
 
+use App\Models\Article;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
+use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\TopicProfileSeoService;
@@ -16,6 +18,7 @@ class SitemapGenerator
     private string $urlPrefix;
 
     public function __construct(
+        private readonly ArticleSeoService $articleSeoService,
         private readonly CareerJobSeoService $careerJobSeoService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
@@ -34,7 +37,7 @@ class SitemapGenerator
 
         $urls = array_merge(
             $this->getScaleUrls($locale),
-            $this->getArticleUrls($locale),
+            $this->getArticleUrls(),
             $this->getCareerJobUrls(),
             $this->getPersonalityUrls(),
             $this->getTopicUrls()
@@ -132,33 +135,70 @@ class SitemapGenerator
         return $urls;
     }
 
-    private function getArticleUrls(string $locale): array
+    private function getArticleUrls(): array
     {
-        $rows = \App\Models\Article::query()
+        $rows = Article::query()
             ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->where('status', 'published')
             ->where('is_public', true)
             ->where('is_indexable', true)
-            ->select(['slug', 'updated_at', 'published_at'])
-            ->orderByDesc('updated_at')
+            ->whereIn('locale', ArticleSeoService::SUPPORTED_LOCALES)
+            ->whereNotNull('slug')
+            ->where('slug', '<>', '')
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->select(['slug', 'locale', 'updated_at', 'published_at'])
+            ->orderBy('locale')
+            ->orderBy('slug')
             ->get();
 
-        $prefix = rtrim((string) config('services.seo.articles_url_prefix'), '/');
-
         $urls = [];
+        $listLastModified = [];
 
         foreach ($rows as $row) {
-            $url = $prefix.'/'.rawurlencode($row->slug);
+            $slug = trim((string) $row->slug);
+            $locale = trim((string) $row->locale);
+
+            if ($slug === '' || $locale === '') {
+                continue;
+            }
 
             $lastmod = $row->updated_at
                 ?? $row->published_at
                 ?? now();
 
+            $segment = $this->articleSeoService->mapBackendLocaleToFrontendSegment($locale);
+            $url = $this->articleSeoService->buildCanonicalUrl($slug, $locale);
+
+            if ($url === null) {
+                continue;
+            }
+
             $urls[] = [
                 'loc' => $url,
                 'lastmod' => $lastmod->toAtomString(),
-                'slug' => (string) $row->slug,
+                'slug' => 'articles:'.$segment.':'.$slug,
+                'updated_at' => $lastmod->toDateTimeString(),
+            ];
+
+            if (! isset($listLastModified[$locale]) || $lastmod->gt($listLastModified[$locale])) {
+                $listLastModified[$locale] = $lastmod;
+            }
+        }
+
+        foreach ($listLastModified as $locale => $lastmod) {
+            $url = $this->articleSeoService->buildListUrl((string) $locale);
+            if ($url === null) {
+                continue;
+            }
+
+            $urls[] = [
+                'loc' => $url,
+                'lastmod' => $lastmod->toAtomString(),
+                'slug' => 'articles-list:'.$this->articleSeoService->mapBackendLocaleToFrontendSegment((string) $locale),
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
         }
