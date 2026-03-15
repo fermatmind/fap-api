@@ -1896,6 +1896,57 @@
                 ]
             }
         },
+        "/api/v0.5/career-guides": {
+            "get": {
+                "operationId": "get_api_v0_5_career_guides",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerGuideController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/career-guides/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_career_guides_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerGuideController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/career-guides/{slug}/seo": {
+            "get": {
+                "operationId": "get_api_v0_5_career_guides_slug_seo",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\CareerGuideController@seo",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career-jobs": {
             "get": {
                 "operationId": "get_api_v0_5_career_jobs",
