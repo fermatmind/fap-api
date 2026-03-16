@@ -10,9 +10,9 @@ use App\Services\Commerce\EntitlementManager;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Testing\TestResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 final class MbtiReportHttpContractRegressionTest extends TestCase
@@ -21,13 +21,13 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
@@ -110,7 +110,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
 
         $resp = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $resp->assertStatus(200);
@@ -127,6 +127,12 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
         $this->assertSame('upsell', $cta['kind']);
         $this->assertSame('MBTI_REPORT_FULL', $cta['target_sku']);
         $this->assertNotSame('', trim((string) $cta['target_sku_effective']));
+        $this->assertStableMbtiPublicSummaryV1(
+            (array) $resp->json('mbti_public_summary_v1'),
+            'ENFP-T',
+            'ENFP',
+            'T'
+        );
     }
 
     public function test_unlocked_paid_mbti_report_http_contract_keeps_section_gate_semantics(): void
@@ -154,7 +160,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
 
         $resp = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $resp->assertStatus(200);
@@ -170,6 +176,12 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
         $this->assertFalse((bool) $cta['visible']);
         $this->assertSame('none', $cta['kind']);
         $this->assertContains('paid', $this->collectAccessLevels($resp->json('report')));
+        $this->assertStableMbtiPublicSummaryV1(
+            (array) $resp->json('mbti_public_summary_v1'),
+            'INTJ-A',
+            'INTJ',
+            'A'
+        );
     }
 
     private function assertStableMbtiEnvelope(TestResponse $response): void
@@ -192,6 +204,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'view_policy',
             'meta',
             'report',
+            'mbti_public_summary_v1',
             'scale_code',
             'scale_code_legacy',
             'scale_code_v2',
@@ -215,6 +228,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
         $this->assertIsArray($payload['view_policy']);
         $this->assertIsArray($payload['meta']);
         $this->assertIsArray($payload['report']);
+        $this->assertIsArray($payload['mbti_public_summary_v1']);
         $this->assertNotSame('', trim((string) $payload['scale_code']));
         $this->assertNotSame('', trim((string) $payload['scale_code_legacy']));
         $this->assertNotSame('', trim((string) $payload['scale_code_v2']));
@@ -225,7 +239,57 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $cta
+     * @param  array<string,mixed>  $summary
+     */
+    private function assertStableMbtiPublicSummaryV1(
+        array $summary,
+        string $expectedRuntimeTypeCode,
+        string $expectedCanonicalType,
+        ?string $expectedVariant
+    ): void {
+        foreach ([
+            'runtime_type_code',
+            'canonical_type_16',
+            'display_type',
+            'variant',
+            'profile',
+            'summary_card',
+            'dimensions',
+            'sections',
+            'offer_set',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $summary);
+        }
+
+        $this->assertSame($expectedRuntimeTypeCode, $summary['runtime_type_code']);
+        $this->assertSame($expectedCanonicalType, $summary['canonical_type_16']);
+        $this->assertSame($expectedRuntimeTypeCode, $summary['display_type']);
+        $this->assertSame($expectedVariant, $summary['variant']);
+        $this->assertIsArray($summary['profile']);
+        $this->assertIsArray($summary['summary_card']);
+        $this->assertIsArray($summary['dimensions']);
+        $this->assertIsArray($summary['sections']);
+        $this->assertIsArray($summary['offer_set']);
+
+        $this->assertSame(
+            ['EI', 'SN', 'TF', 'JP', 'AT'],
+            array_map(
+                static fn (array $item): string => (string) ($item['id'] ?? ''),
+                (array) $summary['dimensions']
+            )
+        );
+        $this->assertSame($expectedRuntimeTypeCode, data_get($summary, 'display_type'));
+        $this->assertNotNull(data_get($summary, 'summary_card.share_text'));
+        $this->assertSame(
+            data_get($summary, 'offer_set.upgrade_sku'),
+            data_get($summary, 'offer_set.cta.target_sku_effective')
+                ?? data_get($summary, 'offer_set.cta.target_sku')
+                ?? data_get($summary, 'offer_set.upgrade_sku')
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $cta
      */
     private function assertStableCtaShape(array $cta): void
     {
@@ -257,7 +321,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $report
+     * @param  array<string,mixed>  $report
      */
     private function assertStableMbtiReportShape(array $report): void
     {
@@ -289,7 +353,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $profile
+     * @param  array<string,mixed>  $profile
      */
     private function assertStableProfileShape(array $profile): void
     {
@@ -313,7 +377,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $identityCard
+     * @param  array<string,mixed>  $identityCard
      */
     private function assertStableIdentityCardShape(array $identityCard): void
     {
@@ -339,7 +403,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
     }
 
     /**
-     * @param array<int,array<string,mixed>> $highlights
+     * @param  array<int,array<string,mixed>>  $highlights
      */
     private function assertStableHighlightsShape(array $highlights): void
     {
@@ -357,7 +421,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $layers
+     * @param  array<string,mixed>  $layers
      */
     private function assertStableLayersShape(array $layers): void
     {
@@ -379,7 +443,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $sections
+     * @param  array<string,mixed>  $sections
      */
     private function assertStableSectionsShape(array $sections): void
     {
@@ -390,7 +454,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
     }
 
     /**
-     * @param array<int,array<string,mixed>> $reads
+     * @param  array<int,array<string,mixed>>  $reads
      */
     private function assertStableRecommendedReadsShape(array $reads): void
     {

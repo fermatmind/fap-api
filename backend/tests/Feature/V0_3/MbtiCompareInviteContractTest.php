@@ -92,13 +92,22 @@ final class MbtiCompareInviteContractTest extends TestCase
             ->assertJsonPath('scale_code', 'MBTI')
             ->assertJsonPath('locale', 'zh-CN')
             ->assertJsonPath('status', 'pending')
-            ->assertJsonPath('invitee', null)
-            ->assertJsonPath('compare', null)
             ->assertJsonPath('primary_cta_label', '开始测试')
             ->assertJsonPath('primary_cta_path', '/zh/tests/mbti-personality-test-16-personality-types/take?share_id='.$shareId.'&compare_invite_id='.$inviteId)
             ->assertJsonPath('inviter.share_id', $shareId)
             ->assertJsonPath('inviter.type_code', 'INTJ-A')
-            ->assertJsonPath('inviter.summary', 'Public-safe share summary.');
+            ->assertJsonPath('inviter.summary', 'Public-safe share summary.')
+            ->assertJsonPath('inviter.mbti_public_summary_v1.runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('invitee.mbti_public_summary_v1.runtime_type_code', null)
+            ->assertJsonPath('compare.mbti_public_summary_v1.runtime_type_code', null);
+
+        $this->assertSame(
+            ['EI', 'SN', 'TF', 'JP', 'AT'],
+            array_map(
+                static fn (array $item): string => (string) ($item['id'] ?? ''),
+                (array) $response->json('inviter.mbti_public_summary_v1.dimensions')
+            )
+        );
 
         foreach ([
             'report',
@@ -118,13 +127,61 @@ final class MbtiCompareInviteContractTest extends TestCase
         $this->assertStringNotContainsString('PRIVATE_PAID_SECTION_BODY', (string) $response->getContent());
     }
 
+    public function test_ready_compare_contract_keeps_nested_public_summary_v1_for_inviter_invitee_and_compare(): void
+    {
+        $this->seedScales();
+
+        [$attemptId, $anonId, $token] = $this->createOwnerContext();
+        $shareId = $this->createShareViaApi($attemptId, $anonId, $token);
+        $invite = $this->postJson("/api/v0.3/shares/{$shareId}/compare-invites", [
+            'anon_id' => 'scan_probe',
+            'entrypoint' => 'share_page',
+            'compare_intent' => true,
+            'utm_source' => 'share',
+        ]);
+        $invite->assertOk();
+
+        $inviteId = (string) $invite->json('invite_id');
+        $inviteeAttemptId = $this->createMbtiAttemptWithResult('anon_compare_invitee', 'ENFP-T');
+
+        DB::table('mbti_compare_invites')
+            ->where('id', $inviteId)
+            ->update([
+                'invitee_attempt_id' => $inviteeAttemptId,
+                'status' => 'ready',
+                'accepted_at' => now(),
+                'completed_at' => now(),
+            ]);
+
+        $response = $this->getJson("/api/v0.3/compare/mbti/{$inviteId}");
+
+        $response->assertOk()
+            ->assertJsonPath('status', 'ready')
+            ->assertJsonPath('inviter.mbti_public_summary_v1.runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('inviter.mbti_public_summary_v1.variant', 'A')
+            ->assertJsonPath('invitee.mbti_public_summary_v1.runtime_type_code', 'ENFP-T')
+            ->assertJsonPath('invitee.mbti_public_summary_v1.canonical_type_16', 'ENFP')
+            ->assertJsonPath('invitee.mbti_public_summary_v1.variant', 'T')
+            ->assertJsonPath('compare.mbti_public_summary_v1.runtime_type_code', null)
+            ->assertJsonPath('compare.mbti_public_summary_v1.summary_card.title', $response->json('compare.title'))
+            ->assertJsonPath('compare.mbti_public_summary_v1.summary_card.share_text', $response->json('compare.summary'));
+
+        $this->assertSame(
+            ['EI', 'SN', 'TF', 'JP', 'AT'],
+            array_map(
+                static fn (array $item): string => (string) ($item['id'] ?? ''),
+                (array) $response->json('compare.mbti_public_summary_v1.dimensions')
+            )
+        );
+    }
+
     /**
      * @return array{0:string,1:string,2:string}
      */
     private function createOwnerContext(): array
     {
         $anonId = 'anon_compare_invite_owner';
-        $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $attemptId = $this->createMbtiAttemptWithResult($anonId, 'INTJ-A');
         $token = $this->issueAnonToken($anonId);
 
         return [$attemptId, $anonId, $token];
@@ -166,9 +223,26 @@ final class MbtiCompareInviteContractTest extends TestCase
         return (string) $response->json('share_id');
     }
 
-    private function createMbtiAttemptWithResult(string $anonId): string
+    private function createMbtiAttemptWithResult(string $anonId, string $typeCode = 'INTJ-A'): string
     {
         $attemptId = (string) Str::uuid();
+        $resultProfile = $typeCode === 'ENFP-T'
+            ? [
+                'type_name' => '竞选者型',
+                'summary' => 'Invitee public-safe share summary.',
+                'tagline' => '热情的连接者',
+                'rarity' => '约 8%',
+                'keywords' => ['热情', '灵感', '共情'],
+                'scores_pct' => ['EI' => 72, 'SN' => 74, 'TF' => 41, 'JP' => 38, 'AT' => 43],
+            ]
+            : [
+                'type_name' => '建筑师型',
+                'summary' => 'Public-safe share summary.',
+                'tagline' => '冷静的长期规划者',
+                'rarity' => '约 2%',
+                'keywords' => ['战略', '独立', '前瞻'],
+                'scores_pct' => ['EI' => 35, 'SN' => 72, 'TF' => 68, 'JP' => 63, 'AT' => 58],
+            ];
 
         Attempt::create([
             'id' => $attemptId,
@@ -195,15 +269,9 @@ final class MbtiCompareInviteContractTest extends TestCase
             'attempt_id' => $attemptId,
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.3',
-            'type_code' => 'INTJ-A',
+            'type_code' => $typeCode,
             'scores_json' => ['total' => 100],
-            'scores_pct' => [
-                'EI' => 35,
-                'SN' => 72,
-                'TF' => 68,
-                'JP' => 63,
-                'AT' => 58,
-            ],
+            'scores_pct' => $resultProfile['scores_pct'],
             'axis_states' => [
                 'EI' => 'clear',
                 'SN' => 'clear',
@@ -213,12 +281,12 @@ final class MbtiCompareInviteContractTest extends TestCase
             ],
             'content_package_version' => 'v0.3',
             'result_json' => [
-                'type_code' => 'INTJ-A',
-                'type_name' => '建筑师型',
-                'summary' => 'Public-safe share summary.',
-                'tagline' => '冷静的长期规划者',
-                'rarity' => '约 2%',
-                'keywords' => ['战略', '独立', '前瞻'],
+                'type_code' => $typeCode,
+                'type_name' => $resultProfile['type_name'],
+                'summary' => $resultProfile['summary'],
+                'tagline' => $resultProfile['tagline'],
+                'rarity' => $resultProfile['rarity'],
+                'keywords' => $resultProfile['keywords'],
                 'layers' => [
                     'identity' => [
                         'body' => 'PRIVATE_PAID_SECTION_BODY',

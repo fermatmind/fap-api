@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
+use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
@@ -31,6 +32,7 @@ class AttemptReadController extends Controller
         private AttemptSubmissionService $attemptSubmissionService,
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
+        private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
         protected OrgContext $orgContext,
@@ -286,7 +288,7 @@ class AttemptReadController extends Controller
             $gate['report'] = $this->projectScaleCodePayload($gate['report'], $responseCodes);
         }
 
-        return response()->json(array_merge($gate, [
+        $responsePayload = array_merge($gate, [
             'scale_code' => $responseCodes['scale_code'],
             'scale_code_legacy' => $responseCodes['scale_code_legacy'],
             'scale_code_v2' => $responseCodes['scale_code_v2'],
@@ -302,7 +304,17 @@ class AttemptReadController extends Controller
                 'scoring_spec_version' => (string) ($attempt->scoring_spec_version ?? ''),
                 'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
             ]),
-        ]));
+        ]);
+
+        if ($scaleCode === 'MBTI') {
+            $responsePayload['mbti_public_summary_v1'] = $this->mbtiPublicSummaryV1Builder->buildFromReportEnvelope(
+                $result,
+                $responsePayload,
+                (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
+            );
+        }
+
+        return response()->json($responsePayload);
     }
 
     private function resolveAttemptForReportRead(Request $request, int $orgId, string $attemptId, string $scaleCode): Attempt

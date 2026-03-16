@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\MbtiCompareInvite;
 use App\Models\Result;
 use App\Models\Share;
+use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -17,6 +18,7 @@ final class MbtiCompareInviteService
 {
     public function __construct(
         private readonly ShareService $shareService,
+        private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
     ) {}
 
     /**
@@ -67,8 +69,17 @@ final class MbtiCompareInviteService
         );
 
         $status = $this->normalizeStatus((string) ($invite->status ?? 'pending'));
-        $invitee = null;
-        $compare = null;
+        $inviter = $this->toSummaryLite($inviterPayload, true);
+        $invitee = [
+            'mbti_public_summary_v1' => $this->mbtiPublicSummaryV1Builder->scaffold(),
+        ];
+        $compare = [
+            'mbti_public_summary_v1' => $this->mbtiPublicSummaryV1Builder->buildFromComparePayload([
+                'title' => null,
+                'summary' => null,
+                'axes' => [],
+            ], $locale),
+        ];
 
         if (in_array($status, ['ready', 'purchased'], true)) {
             $inviteeAttemptId = trim((string) ($invite->invitee_attempt_id ?? ''));
@@ -84,7 +95,7 @@ final class MbtiCompareInviteService
                         $inviteePayload = $this->shareService->buildPublicSummaryPayload($inviteeAttempt, $inviteeResult);
                         $invitee = $this->toSummaryLite($inviteePayload, false);
                         $compare = $this->buildComparePayload(
-                            $this->toSummaryLite($inviterPayload, true),
+                            $inviter,
                             $invitee,
                             $locale
                         );
@@ -99,7 +110,7 @@ final class MbtiCompareInviteService
             'scale_code' => 'MBTI',
             'locale' => $locale,
             'status' => $status,
-            'inviter' => $this->toSummaryLite($inviterPayload, true),
+            'inviter' => $inviter,
             'invitee' => $invitee,
             'compare' => $compare,
             'primary_cta_label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
@@ -196,6 +207,9 @@ final class MbtiCompareInviteService
             'rarity' => $payload['rarity'] ?? null,
             'tags' => is_array($payload['tags'] ?? null) ? array_values($payload['tags']) : [],
             'dimensions' => is_array($payload['dimensions'] ?? null) ? array_values($payload['dimensions']) : [],
+            'mbti_public_summary_v1' => is_array($payload['mbti_public_summary_v1'] ?? null)
+                ? $payload['mbti_public_summary_v1']
+                : $this->mbtiPublicSummaryV1Builder->buildFromSharePayload($payload),
         ];
 
         if ($includeShareId) {
@@ -303,6 +317,11 @@ final class MbtiCompareInviteService
             'axes' => $axes,
             'title' => $title,
             'summary' => $summary,
+            'mbti_public_summary_v1' => $this->mbtiPublicSummaryV1Builder->buildFromComparePayload([
+                'title' => $title,
+                'summary' => $summary,
+                'axes' => $axes,
+            ], $locale),
         ];
     }
 

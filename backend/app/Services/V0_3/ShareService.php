@@ -7,6 +7,7 @@ use App\Models\PersonalityProfile;
 use App\Models\Result;
 use App\Models\Share;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportComposer;
 use App\Services\Scale\ScaleIdentityWriteProjector;
@@ -23,6 +24,7 @@ class ShareService
         private readonly ReportComposer $reportComposer,
         private readonly ScaleRegistry $scaleRegistry,
         private readonly PersonalityProfileService $personalityProfileService,
+        private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
     ) {}
 
     public function getOrCreateShare(string $attemptId, OrgContext $ctx): array
@@ -218,10 +220,10 @@ class ShareService
      *   primary_cta_path:string
      * }
      */
-    private function buildShareSummary(?Share $share, Attempt $attempt, Result $result): array
+    private function buildShareSummary(?Share $share, Attempt $attempt, Result $result, ?array $report = null): array
     {
         $resultJson = $this->normalizeArray($result->result_json ?? null);
-        $report = $this->buildPublicSafeReportSnapshot($attempt, $result);
+        $report = is_array($report) ? $report : $this->buildPublicSafeReportSnapshot($attempt, $result);
         $reportProfile = $this->normalizeArray($report['profile'] ?? null);
         $identityCard = $this->normalizeArray($report['identity_card'] ?? null);
         $identityLayer = $this->normalizeArray(data_get($report, 'layers.identity'));
@@ -627,12 +629,12 @@ class ShareService
         ?string $shareId,
         ?string $createdAt
     ): array {
-        $summary = $this->buildShareSummary($share, $attempt, $result);
+        $publicSafeReport = $this->buildPublicSafeReportSnapshot($attempt, $result);
+        $summary = $this->buildShareSummary($share, $attempt, $result, $publicSafeReport);
         $resolvedShareId = trim((string) $shareId);
         $locale = (string) ($summary['locale'] ?? 'zh-CN');
         $compareEnabled = strtoupper((string) ($summary['scale_code'] ?? '')) === 'MBTI';
-
-        return [
+        $payload = [
             'share_id' => $resolvedShareId !== '' ? $resolvedShareId : null,
             'share_url' => $resolvedShareId !== '' ? $this->buildLocalizedShareUrl($resolvedShareId, $locale) : null,
             'attempt_id' => (string) $attempt->id,
@@ -658,6 +660,16 @@ class ShareService
                 ? $this->resolveCompareCtaLabel($locale)
                 : null,
         ];
+
+        if ($compareEnabled) {
+            $payload['mbti_public_summary_v1'] = $this->mbtiPublicSummaryV1Builder->buildFromSharePayload(
+                $payload,
+                $publicSafeReport,
+                $locale
+            );
+        }
+
+        return $payload;
     }
 
     private function buildLocalizedShareUrl(string $shareId, string $locale): string
