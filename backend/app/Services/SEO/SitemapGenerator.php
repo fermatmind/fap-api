@@ -5,12 +5,12 @@ namespace App\Services\SEO;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
-use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
+use App\Services\Cms\PersonalityProfileService;
 use App\Services\Cms\TopicProfileSeoService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +23,7 @@ class SitemapGenerator
         private readonly ArticleSeoService $articleSeoService,
         private readonly CareerGuideSeoService $careerGuideSeoService,
         private readonly CareerJobSeoService $careerJobSeoService,
+        private readonly PersonalityProfileService $personalityProfileService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
     ) {
@@ -217,33 +218,20 @@ class SitemapGenerator
             return [];
         }
 
-        $rows = PersonalityProfile::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', 0)
-            ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
-            ->where('status', 'published')
-            ->where('is_public', true)
-            ->where('is_indexable', true)
-            ->whereIn('locale', PersonalityProfile::SUPPORTED_LOCALES)
-            ->whereNotNull('slug')
-            ->where('slug', '<>', '')
-            ->where(static function ($query): void {
-                $query->whereNull('published_at')
-                    ->orWhere('published_at', '<=', now());
-            })
-            ->select(['slug', 'locale', 'updated_at', 'published_at'])
-            ->orderBy('locale')
-            ->orderBy('slug')
-            ->get();
+        $rows = $this->personalityProfileService->getSitemapPublicProfiles();
 
         $urls = [];
         $listLastModified = [];
 
         foreach ($rows as $row) {
-            $slug = trim((string) $row->slug);
             $locale = trim((string) $row->locale);
+            $canonical = trim((string) data_get(
+                $this->personalityProfileSeoService->buildMeta($row),
+                'canonical',
+                ''
+            ));
 
-            if ($slug === '' || $locale === '') {
+            if ($canonical === '' || $locale === '') {
                 continue;
             }
 
@@ -253,9 +241,9 @@ class SitemapGenerator
                 ?? now();
 
             $urls[] = [
-                'loc' => $baseUrl.'/'.$segment.'/personality/'.rawurlencode($slug),
+                'loc' => $canonical,
                 'lastmod' => $lastmod->toAtomString(),
-                'slug' => 'personality:'.$segment.':'.$slug,
+                'slug' => 'personality:'.$segment.':'.trim((string) $row->slug),
                 'updated_at' => $lastmod->toDateTimeString(),
             ];
 

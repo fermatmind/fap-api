@@ -7,6 +7,7 @@ use App\Models\PersonalityProfile;
 use App\Models\Result;
 use App\Models\Share;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportComposer;
@@ -24,6 +25,7 @@ class ShareService
         private readonly ReportComposer $reportComposer,
         private readonly ScaleRegistry $scaleRegistry,
         private readonly PersonalityProfileService $personalityProfileService,
+        private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
     ) {}
 
@@ -667,7 +669,51 @@ class ShareService
                 $publicSafeReport,
                 $locale
             );
+            $payload['mbti_public_projection_v1'] = $this->mbtiPublicProjectionService->buildForSharePayload(
+                $payload,
+                $locale,
+                (int) ($attempt->org_id ?? 0),
+                $publicSafeReport,
+                $this->normalizeArray($result->result_json ?? null)
+            );
+            $payload = $this->applyMbtiProjectionAliases($payload);
         }
+
+        return $payload;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function applyMbtiProjectionAliases(array $payload): array
+    {
+        $projection = is_array($payload['mbti_public_projection_v1'] ?? null)
+            ? $payload['mbti_public_projection_v1']
+            : [];
+
+        if ($projection === []) {
+            return $payload;
+        }
+
+        $publicTags = is_array(data_get($projection, 'summary_card.public_tags'))
+            ? array_values(data_get($projection, 'summary_card.public_tags'))
+            : [];
+        $profileKeywords = is_array(data_get($projection, 'profile.keywords'))
+            ? array_values(data_get($projection, 'profile.keywords'))
+            : [];
+
+        $payload['type_code'] = (string) (data_get($projection, 'display_type') ?? $payload['type_code'] ?? '');
+        $payload['type_name'] = data_get($projection, 'profile.type_name') ?? $payload['type_name'] ?? null;
+        $payload['title'] = data_get($projection, 'summary_card.title') ?? $payload['title'] ?? null;
+        $payload['subtitle'] = data_get($projection, 'summary_card.subtitle') ?? $payload['subtitle'] ?? null;
+        $payload['summary'] = data_get($projection, 'summary_card.summary') ?? $payload['summary'] ?? null;
+        $payload['tagline'] = data_get($projection, 'summary_card.tagline') ?? $payload['tagline'] ?? null;
+        $payload['rarity'] = data_get($projection, 'profile.rarity') ?? $payload['rarity'] ?? null;
+        $payload['tags'] = $publicTags !== [] ? $publicTags : $profileKeywords;
+        $payload['dimensions'] = is_array($projection['dimensions'] ?? null)
+            ? array_values($projection['dimensions'])
+            : [];
 
         return $payload;
     }

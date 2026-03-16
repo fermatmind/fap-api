@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSeoMeta;
 use App\Models\TopicProfile;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
@@ -219,6 +220,14 @@ class SitemapGeneratorTest extends TestCase
             'published_at' => Carbon::create(2026, 3, 7, 11, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 7, 12, 0, 0, 'UTC'),
         ]);
+        $this->createPersonalitySeoMeta($eligibleEn, [
+            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
+            'jsonld_overrides_json' => ['mainEntityOfPage' => 'https://staging.fermatmind.com/en/personality/intj-a'],
+        ]);
+        $this->createPersonalitySeoMeta($eligibleZh, [
+            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-a',
+            'jsonld_overrides_json' => ['mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-a'],
+        ]);
 
         $this->createPersonalityProfile([
             'type_code' => 'ENTJ',
@@ -281,6 +290,8 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality', $xml);
         $this->assertStringContainsString('https://staging.fermatmind.com/en/personality/intj', $xml);
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality/intj', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/personality/intj-a', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/personality/intj-a', $xml);
 
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/personality/entj', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/personality/entp', $xml);
@@ -636,6 +647,28 @@ class SitemapGeneratorTest extends TestCase
             'schema_version' => 'v1',
             'created_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 7, 8, 0, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createPersonalitySeoMeta(PersonalityProfile $profile, array $overrides = []): PersonalityProfileSeoMeta
+    {
+        /** @var PersonalityProfileSeoMeta */
+        return PersonalityProfileSeoMeta::query()->create(array_merge([
+            'profile_id' => (int) $profile->id,
+            'seo_title' => null,
+            'seo_description' => null,
+            'canonical_url' => null,
+            'og_title' => null,
+            'og_description' => null,
+            'og_image_url' => null,
+            'twitter_title' => null,
+            'twitter_description' => null,
+            'twitter_image_url' => null,
+            'robots' => null,
+            'jsonld_overrides_json' => null,
         ], $overrides));
     }
 

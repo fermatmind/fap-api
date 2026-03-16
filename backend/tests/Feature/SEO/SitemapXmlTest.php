@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSeoMeta;
 use App\Models\TopicProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -84,7 +85,7 @@ class SitemapXmlTest extends TestCase
             ],
         ]);
 
-        PersonalityProfile::query()->create([
+        $personalityEn = PersonalityProfile::query()->create([
             'org_id' => 0,
             'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
             'type_code' => 'INTJ',
@@ -103,7 +104,7 @@ class SitemapXmlTest extends TestCase
             'updated_at' => $nowB,
         ]);
 
-        PersonalityProfile::query()->create([
+        $personalityZh = PersonalityProfile::query()->create([
             'org_id' => 0,
             'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
             'type_code' => 'INTJ',
@@ -118,6 +119,25 @@ class SitemapXmlTest extends TestCase
             'published_at' => Carbon::create(2026, 1, 31, 12, 0, 0),
             'scheduled_at' => null,
             'schema_version' => 'v1',
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
+        PersonalityProfileSeoMeta::query()->create([
+            'profile_id' => (int) $personalityEn->id,
+            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
+            'jsonld_overrides_json' => [
+                'mainEntityOfPage' => 'https://staging.fermatmind.com/en/personality/intj-a',
+            ],
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+        PersonalityProfileSeoMeta::query()->create([
+            'profile_id' => (int) $personalityZh->id,
+            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-a',
+            'jsonld_overrides_json' => [
+                'mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-a',
+            ],
             'created_at' => $nowB,
             'updated_at' => $nowB,
         ]);
@@ -384,6 +404,8 @@ class SitemapXmlTest extends TestCase
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/personality/intj-a</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj-a</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/topics</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics/mbti</loc>', $body);

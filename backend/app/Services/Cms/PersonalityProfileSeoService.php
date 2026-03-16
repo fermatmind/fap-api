@@ -5,48 +5,65 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\PersonalityProfile;
-use App\Models\PersonalityProfileSeoMeta;
 
 final class PersonalityProfileSeoService
 {
+    public function __construct(
+        private readonly PersonalityProfileService $personalityProfileService,
+    ) {}
+
     /**
      * @return array<string, mixed>
      */
     public function buildMeta(PersonalityProfile $profile): array
     {
-        $seoMeta = $this->resolveSeoMeta($profile);
+        $projection = $this->personalityProfileService->buildPublicProjection($profile);
         $title = $this->fallbackText(
-            $seoMeta?->seo_title,
+            data_get($projection, 'seo.title'),
+            data_get($projection, 'summary_card.title'),
             (string) $profile->title
         ) ?? (string) $profile->title;
         $description = $this->fallbackText(
-            $seoMeta?->seo_description,
+            data_get($projection, 'seo.description'),
+            data_get($projection, 'summary_card.summary'),
+            data_get($projection, 'summary_card.subtitle'),
             (string) ($profile->excerpt ?? null),
             (string) ($profile->subtitle ?? null)
         );
-        $canonical = $this->buildCanonicalUrl($profile, (string) $profile->locale);
-        $robots = $this->fallbackText($seoMeta?->robots)
-            ?? ((bool) $profile->is_indexable ? 'index,follow' : 'noindex,follow');
+        $canonical = $this->fallbackText(
+            data_get($projection, 'seo.canonical_url'),
+            $this->buildCanonicalUrl($profile, (string) $profile->locale)
+        );
+        $robots = $this->fallbackText(
+            data_get($projection, 'seo.robots')
+        ) ?? ((bool) $profile->is_indexable ? 'index,follow' : 'noindex,follow');
 
         return [
             'title' => $title,
             'description' => $description,
             'canonical' => $canonical,
             'og' => [
-                'title' => $this->fallbackText($seoMeta?->og_title, $title),
-                'description' => $this->fallbackText($seoMeta?->og_description, $description),
-                'image' => $this->fallbackText($seoMeta?->og_image_url),
+                'title' => $this->fallbackText(data_get($projection, 'seo.og_title'), $title),
+                'description' => $this->fallbackText(data_get($projection, 'seo.og_description'), $description),
+                'image' => $this->fallbackText(data_get($projection, 'seo.og_image_url')),
                 'type' => 'article',
             ],
             'twitter' => [
                 'card' => 'summary_large_image',
-                'title' => $this->fallbackText($seoMeta?->twitter_title, $seoMeta?->og_title, $title),
+                'title' => $this->fallbackText(
+                    data_get($projection, 'seo.twitter_title'),
+                    data_get($projection, 'seo.og_title'),
+                    $title
+                ),
                 'description' => $this->fallbackText(
-                    $seoMeta?->twitter_description,
-                    $seoMeta?->og_description,
+                    data_get($projection, 'seo.twitter_description'),
+                    data_get($projection, 'seo.og_description'),
                     $description
                 ),
-                'image' => $this->fallbackText($seoMeta?->twitter_image_url, $seoMeta?->og_image_url),
+                'image' => $this->fallbackText(
+                    data_get($projection, 'seo.twitter_image_url'),
+                    data_get($projection, 'seo.og_image_url')
+                ),
             ],
             'robots' => $robots,
         ];
@@ -57,6 +74,7 @@ final class PersonalityProfileSeoService
      */
     public function buildJsonLd(PersonalityProfile $profile): array
     {
+        $projection = $this->personalityProfileService->buildPublicProjection($profile);
         $meta = $this->buildMeta($profile);
         $jsonLd = [
             '@context' => 'https://schema.org',
@@ -65,16 +83,18 @@ final class PersonalityProfileSeoService
             'description' => $meta['description'],
             'about' => [
                 '@type' => 'DefinedTerm',
-                'name' => (string) $profile->type_code,
+                'name' => (string) data_get($projection, 'canonical_type_code', $profile->type_code),
                 'inDefinedTermSet' => (string) $profile->scale_code,
             ],
             'mainEntityOfPage' => $meta['canonical'],
         ];
 
-        $seoMeta = $this->resolveSeoMeta($profile);
-        if ($seoMeta instanceof PersonalityProfileSeoMeta && is_array($seoMeta->jsonld_overrides_json)) {
-            return array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json);
+        $overrides = data_get($projection, 'seo.jsonld');
+        if (is_array($overrides) && $overrides !== []) {
+            $jsonLd = array_replace_recursive($jsonLd, $overrides);
         }
+
+        $jsonLd['mainEntityOfPage'] = $meta['canonical'];
 
         return $jsonLd;
     }
@@ -97,17 +117,6 @@ final class PersonalityProfileSeoService
     public function mapBackendLocaleToFrontendSegment(string $locale): string
     {
         return trim($locale) === 'zh-CN' ? 'zh' : 'en';
-    }
-
-    private function resolveSeoMeta(PersonalityProfile $profile): ?PersonalityProfileSeoMeta
-    {
-        if ($profile->relationLoaded('seoMeta') && $profile->seoMeta instanceof PersonalityProfileSeoMeta) {
-            return $profile->seoMeta;
-        }
-
-        return PersonalityProfileSeoMeta::query()
-            ->where('profile_id', (int) $profile->id)
-            ->first();
     }
 
     private function publicRouteSlug(PersonalityProfile $profile): string
