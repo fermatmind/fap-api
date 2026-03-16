@@ -62,6 +62,7 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame('I', $response->json('dimensions.0.side'));
         $this->assertSame(65, $response->json('dimensions.0.pct'));
         $this->assertSame('clear', $response->json('dimensions.0.state'));
+        $this->assertStableMbtiPublicSummaryV1((array) $response->json('mbti_public_summary_v1'), 'INTJ-A', 'INTJ', 'A');
         $this->assertStringContainsString('/share/'.$response->json('share_id'), (string) $response->json('share_url'));
         $this->assertStringNotContainsString('PRIVATE_PAID_SECTION_BODY', (string) $response->getContent());
         $this->assertStringNotContainsString('PRIVATE_RESULT_PATH', (string) $response->getContent());
@@ -124,9 +125,26 @@ final class ShareSummaryContractTest extends TestCase
             'dimensions',
             'primary_cta_label',
             'primary_cta_path',
+            'mbti_public_summary_v1',
         ] as $key) {
             $this->assertSame($share->json($key), $view->json($key), "share field mismatch: {$key}");
         }
+
+        $this->assertSame(
+            'INTJ-A',
+            $view->json('mbti_public_summary_v1.display_type')
+        );
+        $this->assertSame(
+            $view->json('summary'),
+            $view->json('mbti_public_summary_v1.summary_card.share_text')
+        );
+        $this->assertSame(
+            ['EI', 'SN', 'TF', 'JP', 'AT'],
+            array_map(
+                static fn (array $item): string => (string) ($item['id'] ?? ''),
+                (array) $view->json('mbti_public_summary_v1.dimensions')
+            )
+        );
 
         $this->assertStringNotContainsString('PRIVATE_PAID_SECTION_BODY', (string) $view->getContent());
         $this->assertStringNotContainsString('PRIVATE_RESULT_PATH', (string) $view->getContent());
@@ -279,5 +297,30 @@ final class ShareSummaryContractTest extends TestCase
             'published_at' => now()->subMinute(),
             'schema_version' => 'v1',
         ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $summary
+     */
+    private function assertStableMbtiPublicSummaryV1(
+        array $summary,
+        string $expectedRuntimeTypeCode,
+        string $expectedCanonicalType,
+        ?string $expectedVariant
+    ): void {
+        $this->assertSame($expectedRuntimeTypeCode, $summary['runtime_type_code'] ?? null);
+        $this->assertSame($expectedCanonicalType, $summary['canonical_type_16'] ?? null);
+        $this->assertSame($expectedRuntimeTypeCode, $summary['display_type'] ?? null);
+        $this->assertSame($expectedVariant, $summary['variant'] ?? null);
+        $this->assertSame('建筑师型', data_get($summary, 'profile.type_name'));
+        $this->assertSame('冷静的长期规划者', data_get($summary, 'profile.nickname'));
+        $this->assertSame('Public-safe share summary.', data_get($summary, 'summary_card.share_text'));
+        $this->assertSame(
+            ['EI', 'SN', 'TF', 'JP', 'AT'],
+            array_map(
+                static fn (array $item): string => (string) ($item['id'] ?? ''),
+                (array) ($summary['dimensions'] ?? [])
+            )
+        );
     }
 }
