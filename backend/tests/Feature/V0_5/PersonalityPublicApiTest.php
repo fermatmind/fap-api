@@ -21,6 +21,12 @@ final class PersonalityPublicApiTest extends TestCase
             'type_code' => 'INTJ',
             'slug' => 'intj',
             'title' => 'INTJ - Architect',
+            'type_name' => 'Architect',
+            'nickname' => 'Systems builder',
+            'rarity_text' => 'About 2%',
+            'keywords_json' => ['strategy', 'independence'],
+            'hero_summary_md' => 'Strategic, independent, and long-range.',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
             'status' => 'published',
             'is_public' => true,
             'published_at' => now()->subMinute(),
@@ -61,7 +67,14 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('pagination.total', 1)
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.slug', 'intj')
-            ->assertJsonPath('items.0.seo_meta.seo_title', 'INTJ Personality');
+            ->assertJsonPath('items.0.seo_meta.seo_title', 'INTJ Personality')
+            ->assertJsonPath('items.0.canonical_type_code', 'INTJ')
+            ->assertJsonPath('items.0.schema_version', PersonalityProfile::SCHEMA_VERSION_V2)
+            ->assertJsonPath('items.0.type_name', 'Architect')
+            ->assertJsonPath('items.0.nickname', 'Systems builder')
+            ->assertJsonPath('items.0.rarity', 'About 2%')
+            ->assertJsonPath('items.0.keywords.0', 'strategy')
+            ->assertJsonPath('items.0.hero_summary', 'Strategic, independent, and long-range.');
     }
 
     public function test_list_respects_locale_and_org_scope(): void
@@ -120,6 +133,12 @@ final class PersonalityPublicApiTest extends TestCase
             'type_code' => 'INTJ',
             'slug' => 'intj',
             'title' => 'INTJ - Architect',
+            'type_name' => 'Architect',
+            'nickname' => 'Systems builder',
+            'rarity_text' => 'About 2%',
+            'keywords_json' => ['strategy', 'independence'],
+            'hero_summary_md' => 'Strategic, independent, and long-range.',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
             'status' => 'published',
             'is_public' => true,
             'published_at' => now()->subMinute(),
@@ -163,6 +182,13 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('profile.type_code', 'INTJ')
             ->assertJsonPath('profile.slug', 'intj')
+            ->assertJsonPath('profile.canonical_type_code', 'INTJ')
+            ->assertJsonPath('profile.schema_version', PersonalityProfile::SCHEMA_VERSION_V2)
+            ->assertJsonPath('profile.type_name', 'Architect')
+            ->assertJsonPath('profile.nickname', 'Systems builder')
+            ->assertJsonPath('profile.rarity', 'About 2%')
+            ->assertJsonPath('profile.keywords.1', 'independence')
+            ->assertJsonPath('profile.hero_summary', 'Strategic, independent, and long-range.')
             ->assertJsonCount(1, 'sections')
             ->assertJsonPath('sections.0.section_key', 'core_snapshot')
             ->assertJsonPath('seo_meta.seo_title', 'INTJ Personality Type')
@@ -266,6 +292,22 @@ final class PersonalityPublicApiTest extends TestCase
             'https://staging.fermatmind.com/zh/personality/intj',
             data_get($zhResponse->json(), 'jsonld.mainEntityOfPage')
         );
+    }
+
+    public function test_variant_route_key_remains_invalid_for_public_base_route(): void
+    {
+        $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+
+        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
     /**

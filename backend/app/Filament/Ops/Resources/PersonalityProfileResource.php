@@ -93,12 +93,22 @@ class PersonalityProfileResource extends Resource
                                     ->helperText('V1 supports the 16 base MBTI types only.')
                                     ->live()
                                     ->afterStateUpdated(function (?string $state, Forms\Set $set, Forms\Get $get): void {
+                                        $set('canonical_type_code', PersonalityWorkspace::normalizeCanonicalTypeCode(
+                                            (string) ($get('canonical_type_code') ?? ''),
+                                            $state,
+                                        ));
+
                                         if (trim((string) $get('slug')) !== '') {
                                             return;
                                         }
 
                                         $set('slug', PersonalityWorkspace::normalizeSlug(null, $state));
                                     }),
+                                Forms\Components\TextInput::make('canonical_type_code')
+                                    ->label('Canonical type')
+                                    ->readOnly()
+                                    ->dehydrated(false)
+                                    ->helperText('Auto-synced 16-type canonical identity for the base profile layer.'),
                                 Forms\Components\TextInput::make('slug')
                                     ->required()
                                     ->maxLength(64)
@@ -115,6 +125,16 @@ class PersonalityProfileResource extends Resource
                                     ->options(self::localeOptions())
                                     ->default('en')
                                     ->helperText('Stored as backend locale codes. Frontend URL mapping still resolves to locale-aware paths.'),
+                                Forms\Components\Select::make('schema_version')
+                                    ->required()
+                                    ->native(false)
+                                    ->options([
+                                        PersonalityProfile::SCHEMA_VERSION_V1 => PersonalityProfile::SCHEMA_VERSION_V1,
+                                        PersonalityProfile::SCHEMA_VERSION_V2 => PersonalityProfile::SCHEMA_VERSION_V2,
+                                    ])
+                                    ->default(PersonalityProfile::SCHEMA_VERSION_V2)
+                                    ->live()
+                                    ->helperText('Controls whether the workspace manages the legacy v1 catalog or the canonical MBTI v2 catalog.'),
                                 Forms\Components\TextInput::make('title')
                                     ->required()
                                     ->maxLength(255)
@@ -122,14 +142,35 @@ class PersonalityProfileResource extends Resource
                                     ->helperText('Primary profile heading shown in the workspace, public detail page, and SEO fallback.')
                                     ->extraFieldWrapperAttributes(['class' => 'ops-personality-workspace-field ops-personality-workspace-field--title'])
                                     ->extraInputAttributes(['class' => 'ops-personality-workspace-input ops-personality-workspace-input--title']),
+                                Forms\Components\TextInput::make('type_name')
+                                    ->label('Type name')
+                                    ->maxLength(120)
+                                    ->helperText('Canonical localized type name used by the 32-type content authority.'),
+                                Forms\Components\TextInput::make('nickname')
+                                    ->label('Nickname')
+                                    ->maxLength(160)
+                                    ->helperText('Optional editorial nickname for the canonical base profile.'),
                                 Forms\Components\TextInput::make('subtitle')
                                     ->maxLength(255)
-                                    ->columnSpanFull()
                                     ->helperText('Short supporting line for the hero and quick list scanning.'),
+                                Forms\Components\TextInput::make('rarity_text')
+                                    ->label('Rarity text')
+                                    ->maxLength(64)
+                                    ->helperText('Human-readable rarity label when canonical content provides one.'),
                                 Forms\Components\Textarea::make('excerpt')
                                     ->rows(4)
                                     ->columnSpanFull()
                                     ->helperText('Used as the summary fallback across list, SEO, and public profile contexts.')
+                                    ->extraFieldWrapperAttributes(['class' => 'ops-personality-workspace-field ops-personality-workspace-field--summary']),
+                                Forms\Components\TagsInput::make('keywords_json')
+                                    ->label('Keywords')
+                                    ->columnSpanFull()
+                                    ->helperText('Canonical keyword tags stored as structured JSON on the base profile row.'),
+                                Forms\Components\Textarea::make('hero_summary_md')
+                                    ->label('Hero summary')
+                                    ->rows(4)
+                                    ->columnSpanFull()
+                                    ->helperText('Canonical hero summary stored separately from excerpt and hero quote.')
                                     ->extraFieldWrapperAttributes(['class' => 'ops-personality-workspace-field ops-personality-workspace-field--summary']),
                             ])
                             ->columns(3),
@@ -177,6 +218,12 @@ class PersonalityProfileResource extends Resource
                                     ->content(fn (Forms\Get $get, ?PersonalityProfile $record): string => PersonalityWorkspace::normalizeTypeCode(
                                         (string) ($get('type_code') ?? $record?->type_code ?? '')
                                     ) ?: 'Not set yet'),
+                                Forms\Components\Placeholder::make('identity_canonical')
+                                    ->label('Canonical type')
+                                    ->content(fn (Forms\Get $get, ?PersonalityProfile $record): string => PersonalityWorkspace::normalizeCanonicalTypeCode(
+                                        (string) ($get('canonical_type_code') ?? $record?->canonical_type_code ?? ''),
+                                        (string) ($get('type_code') ?? $record?->type_code ?? ''),
+                                    ) ?: 'Not set yet'),
                                 Forms\Components\Placeholder::make('identity_slug')
                                     ->label('Slug')
                                     ->content(fn (Forms\Get $get, ?PersonalityProfile $record): string => PersonalityWorkspace::normalizeSlug(
@@ -191,6 +238,11 @@ class PersonalityProfileResource extends Resource
                                 Forms\Components\Placeholder::make('identity_org')
                                     ->label('Content scope')
                                     ->content('Global MBTI content (org_id=0)'),
+                                Forms\Components\Placeholder::make('identity_schema_version')
+                                    ->label('Schema version')
+                                    ->content(fn (Forms\Get $get, ?PersonalityProfile $record): string => PersonalityWorkspace::normalizeSchemaVersion(
+                                        (string) ($get('schema_version') ?? $record?->schema_version ?? PersonalityProfile::SCHEMA_VERSION_V1),
+                                    )),
                             ])
                             ->columns(2),
                         Forms\Components\Section::make('Publish')
@@ -325,6 +377,10 @@ class PersonalityProfileResource extends Resource
                     ->copyable()
                     ->formatStateUsing(fn (string $state): string => '/'.trim($state, '/'))
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('schema_version')
+                    ->badge()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->sortable()
@@ -361,6 +417,11 @@ class PersonalityProfileResource extends Resource
                     ->options(self::localeOptions()),
                 Tables\Filters\SelectFilter::make('status')
                     ->options(self::statusOptions()),
+                Tables\Filters\SelectFilter::make('schema_version')
+                    ->options([
+                        PersonalityProfile::SCHEMA_VERSION_V1 => PersonalityProfile::SCHEMA_VERSION_V1,
+                        PersonalityProfile::SCHEMA_VERSION_V2 => PersonalityProfile::SCHEMA_VERSION_V2,
+                    ]),
                 TernaryFilter::make('is_public')
                     ->label('Public'),
                 TernaryFilter::make('is_indexable')
@@ -431,11 +492,13 @@ class PersonalityProfileResource extends Resource
      */
     private static function sectionTabs(): array
     {
-        $variantOptions = PersonalityWorkspace::renderVariantOptions();
-
-        return collect(PersonalityWorkspace::sectionDefinitions())
-            ->map(function (array $definition, string $sectionKey) use ($variantOptions): Forms\Components\Tabs\Tab {
+        return collect(PersonalityWorkspace::allSectionDefinitions())
+            ->map(function (array $definition, string $sectionKey): Forms\Components\Tabs\Tab {
                 return Forms\Components\Tabs\Tab::make($definition['label'])
+                    ->visible(fn (Forms\Get $get): bool => PersonalityWorkspace::isManagedSectionKeyForSchemaVersion(
+                        $sectionKey,
+                        (string) ($get('schema_version') ?? PersonalityProfile::SCHEMA_VERSION_V1),
+                    ))
                     ->schema([
                         Forms\Components\Toggle::make("workspace_sections.{$sectionKey}.is_enabled")
                             ->label('Enable this section')
@@ -443,13 +506,22 @@ class PersonalityProfileResource extends Resource
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make("workspace_sections.{$sectionKey}.title")
                             ->label('Section title')
-                            ->required()
+                            ->required(fn (Forms\Get $get): bool => PersonalityWorkspace::isManagedSectionKeyForSchemaVersion(
+                                $sectionKey,
+                                (string) ($get('schema_version') ?? PersonalityProfile::SCHEMA_VERSION_V1),
+                            ))
                             ->maxLength(255),
                         Forms\Components\Select::make("workspace_sections.{$sectionKey}.render_variant")
                             ->label('Render variant')
                             ->native(false)
-                            ->options($variantOptions)
-                            ->required(),
+                            ->options(fn (Forms\Get $get): array => PersonalityWorkspace::renderVariantOptions(
+                                (string) ($get('schema_version') ?? PersonalityProfile::SCHEMA_VERSION_V1),
+                                $sectionKey,
+                            ))
+                            ->required(fn (Forms\Get $get): bool => PersonalityWorkspace::isManagedSectionKeyForSchemaVersion(
+                                $sectionKey,
+                                (string) ($get('schema_version') ?? PersonalityProfile::SCHEMA_VERSION_V1),
+                            )),
                         Forms\Components\Textarea::make("workspace_sections.{$sectionKey}.body_md")
                             ->label('Narrative body')
                             ->rows(8)

@@ -8,16 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PersonalityProfileSeoMeta extends Model
+class PersonalityProfileVariantSeoMeta extends Model
 {
     use HasFactory;
 
-    public const PROFILE_FOREIGN_KEY = 'profile_id';
-
-    protected $table = 'personality_profile_seo_meta';
+    protected $table = 'personality_profile_variant_seo_meta';
 
     protected $fillable = [
-        'profile_id',
+        'personality_profile_variant_id',
         'seo_title',
         'seo_description',
         'canonical_url',
@@ -32,14 +30,14 @@ class PersonalityProfileSeoMeta extends Model
     ];
 
     protected $casts = [
-        'profile_id' => 'integer',
+        'personality_profile_variant_id' => 'integer',
         'jsonld_overrides_json' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
-    public function profile(): BelongsTo
+    public function variant(): BelongsTo
     {
-        return $this->belongsTo(PersonalityProfile::class, self::PROFILE_FOREIGN_KEY, 'id');
+        return $this->belongsTo(PersonalityProfileVariant::class, 'personality_profile_variant_id', 'id');
     }
 }

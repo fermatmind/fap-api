@@ -33,6 +33,10 @@ class PersonalityProfileSection extends Model
         'faq',
         'links',
         'callout',
+        'letters_intro',
+        'trait_dimension_grid',
+        'preferred_role_list',
+        'premium_teaser',
     ];
 
     protected $table = 'personality_profile_sections';

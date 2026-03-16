@@ -118,7 +118,7 @@ class PersonalityController extends Controller
      */
     private function profileListPayload(PersonalityProfile $profile): array
     {
-        return [
+        return array_merge([
             'id' => (int) $profile->id,
             'org_id' => (int) $profile->org_id,
             'scale_code' => (string) $profile->scale_code,
@@ -134,7 +134,7 @@ class PersonalityController extends Controller
             'published_at' => $profile->published_at?->toISOString(),
             'updated_at' => $profile->updated_at?->toISOString(),
             'seo_meta' => $this->seoMetaSummaryPayload($profile->seoMeta),
-        ];
+        ], $this->personalityProfileService->publicCanonicalFields($profile));
     }
 
     /**
@@ -142,7 +142,7 @@ class PersonalityController extends Controller
      */
     private function profileDetailPayload(PersonalityProfile $profile): array
     {
-        return [
+        return array_merge([
             'id' => (int) $profile->id,
             'org_id' => (int) $profile->org_id,
             'scale_code' => (string) $profile->scale_code,
@@ -160,7 +160,7 @@ class PersonalityController extends Controller
             'is_indexable' => (bool) $profile->is_indexable,
             'published_at' => $profile->published_at?->toISOString(),
             'updated_at' => $profile->updated_at?->toISOString(),
-        ];
+        ], $this->personalityProfileService->publicCanonicalFields($profile));
     }
 
     /**

@@ -82,7 +82,7 @@ final class PersonalityProfileSeoService
     public function buildCanonicalUrl(PersonalityProfile $profile, string $locale): ?string
     {
         $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
-        $slug = trim((string) $profile->slug);
+        $slug = $this->publicRouteSlug($profile);
 
         if ($baseUrl === '' || $slug === '') {
             return null;
@@ -108,6 +108,11 @@ final class PersonalityProfileSeoService
         return PersonalityProfileSeoMeta::query()
             ->where('profile_id', (int) $profile->id)
             ->first();
+    }
+
+    private function publicRouteSlug(PersonalityProfile $profile): string
+    {
+        return trim((string) $profile->slug);
     }
 
     private function fallbackText(?string ...$candidates): ?string
