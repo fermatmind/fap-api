@@ -11,6 +11,7 @@ use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileRevision;
+use App\Models\PersonalityProfileSection;
 use App\Models\Role;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
@@ -154,6 +155,102 @@ final class PersonalityWorkspaceTest extends TestCase
         $this->assertSame('Updated long-range systems framing.', $latestRevision->snapshot_json['sections'][0]['body_md']);
     }
 
+    public function test_v1_profiles_use_legacy_catalog_while_v2_profiles_use_canonical_registry(): void
+    {
+        $legacyProfile = $this->seedProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj-v1',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V1,
+        ]);
+        $canonicalProfile = $this->seedProfile([
+            'type_code' => 'ENFJ',
+            'slug' => 'enfj-v2',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+
+        PersonalityWorkspace::syncWorkspaceSections($legacyProfile, $this->workspaceSectionsState());
+        PersonalityWorkspace::syncWorkspaceSections($canonicalProfile, $this->v2WorkspaceSectionsState());
+
+        $this->assertSame(
+            array_keys(PersonalityWorkspace::legacySectionDefinitions()),
+            array_keys(PersonalityWorkspace::sectionDefinitions(PersonalityProfile::SCHEMA_VERSION_V1))
+        );
+        $this->assertSame(
+            array_keys(PersonalityWorkspace::canonicalSectionDefinitions()),
+            array_keys(PersonalityWorkspace::sectionDefinitions(PersonalityProfile::SCHEMA_VERSION_V2))
+        );
+        $this->assertDatabaseHas('personality_profile_sections', [
+            'profile_id' => (int) $legacyProfile->id,
+            'section_key' => 'core_snapshot',
+        ]);
+        $this->assertDatabaseHas('personality_profile_sections', [
+            'profile_id' => (int) $canonicalProfile->id,
+            'section_key' => 'letters_intro',
+            'render_variant' => 'letters_intro',
+        ]);
+    }
+
+    public function test_v2_workspace_sync_keeps_canonical_sections_and_preserves_unmanaged_keys(): void
+    {
+        $profile = $this->seedProfile([
+            'type_code' => 'ENFJ',
+            'slug' => 'enfj',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'core_snapshot',
+            'title' => 'Legacy carry-over',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Keep me.',
+            'sort_order' => 5,
+            'is_enabled' => true,
+        ]);
+
+        PersonalityWorkspace::syncWorkspaceSections($profile, $this->v2WorkspaceSectionsState());
+
+        $freshProfile = $profile->fresh(['sections']);
+        $workspaceState = PersonalityWorkspace::workspaceSectionsFromRecord($freshProfile);
+
+        $this->assertDatabaseHas('personality_profile_sections', [
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'letters_intro',
+            'render_variant' => 'letters_intro',
+        ]);
+        $this->assertDatabaseHas('personality_profile_sections', [
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'trait_overview',
+            'render_variant' => 'trait_dimension_grid',
+        ]);
+        $this->assertDatabaseHas('personality_profile_sections', [
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'career.preferred_roles',
+            'render_variant' => 'preferred_role_list',
+        ]);
+        $this->assertDatabaseHas('personality_profile_sections', [
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'growth.motivators',
+            'render_variant' => 'premium_teaser',
+        ]);
+        $this->assertDatabaseHas('personality_profile_sections', [
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'relationships.rel_risks',
+            'render_variant' => 'premium_teaser',
+        ]);
+        $this->assertDatabaseHas('personality_profile_sections', [
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'core_snapshot',
+            'body_md' => 'Keep me.',
+        ]);
+
+        $this->assertSame('letters_intro', $workspaceState['letters_intro']['render_variant']);
+        $this->assertSame('trait_dimension_grid', $workspaceState['trait_overview']['render_variant']);
+        $this->assertSame('preferred_role_list', $workspaceState['career.preferred_roles']['render_variant']);
+        $this->assertSame('premium_teaser', $workspaceState['growth.motivators']['render_variant']);
+        $this->assertSame('premium_teaser', $workspaceState['relationships.rel_risks']['render_variant']);
+    }
+
     public function test_resource_query_is_locked_to_global_mbti_profiles(): void
     {
         $globalProfile = $this->seedProfile([
@@ -258,6 +355,7 @@ final class PersonalityWorkspaceTest extends TestCase
             'status' => 'draft',
             'is_public' => true,
             'is_indexable' => true,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V1,
         ], $overrides));
     }
 
@@ -311,5 +409,35 @@ final class PersonalityWorkspaceTest extends TestCase
             'robots' => 'index,follow',
             'jsonld_overrides_json_text' => '',
         ];
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function v2WorkspaceSectionsState(): array
+    {
+        $state = PersonalityWorkspace::defaultWorkspaceSectionsState();
+
+        $state['letters_intro']['body_md'] = 'E sees people, N sees patterns, F weighs values, J creates structure.';
+        $state['trait_overview']['payload_json_text'] = json_encode([
+            'summary' => 'Canonical MBTI dimensions for ENFJ.',
+            'dimensions' => [
+                ['id' => 'EI', 'label' => 'Energy', 'value_pct' => 68],
+                ['id' => 'SN', 'label' => 'Perception', 'value_pct' => 72],
+                ['id' => 'TF', 'label' => 'Decision', 'value_pct' => 64],
+                ['id' => 'JP', 'label' => 'Lifestyle', 'value_pct' => 58],
+                ['id' => 'AT', 'label' => 'Identity', 'value_pct' => 47],
+            ],
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $state['career.preferred_roles']['payload_json_text'] = json_encode([
+            'items' => [
+                ['title' => 'Teacher', 'fit' => 'high'],
+                ['title' => 'Coach', 'fit' => 'high'],
+            ],
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $state['growth.motivators']['body_md'] = 'Preview: recognition, purpose, and interpersonal momentum.';
+        $state['relationships.rel_risks']['body_md'] = 'Preview: overextending emotionally when mutuality is low.';
+
+        return $state;
     }
 }

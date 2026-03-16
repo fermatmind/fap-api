@@ -12,9 +12,11 @@ final class MbtiCanonicalSectionRegistry
 
     public const BUCKET_PREMIUM_TEASER = 'premium_teaser';
 
+    public const RENDER_VARIANT_LETTERS_INTRO = 'letters_intro';
+
     public const RENDER_VARIANT_RICH_TEXT = 'rich_text';
 
-    public const RENDER_VARIANT_BULLET_LIST = 'bullet_list';
+    public const RENDER_VARIANT_BULLET_LIST = 'bullets';
 
     public const RENDER_VARIANT_TRAIT_DIMENSION_GRID = 'trait_dimension_grid';
 
@@ -27,6 +29,11 @@ final class MbtiCanonicalSectionRegistry
      *   bucket:string,
      *   render_variant:string,
      *   group:string,
+     *   label:string,
+     *   title:string,
+     *   description:string,
+     *   sort_order:int,
+     *   enabled:bool,
      *   premium_teaser?:bool,
      *   payload_schema?:array<string,mixed>
      * }>
@@ -36,18 +43,33 @@ final class MbtiCanonicalSectionRegistry
         return [
             'letters_intro' => [
                 'bucket' => self::BUCKET_SECTIONS,
-                'render_variant' => self::RENDER_VARIANT_RICH_TEXT,
+                'render_variant' => self::RENDER_VARIANT_LETTERS_INTRO,
                 'group' => 'top',
+                'label' => 'Letters Intro',
+                'title' => 'Letter-by-letter introduction',
+                'description' => 'Headline and per-letter copy for the 32-type MBTI identity block.',
+                'sort_order' => 10,
+                'enabled' => true,
             ],
             'overview' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_RICH_TEXT,
                 'group' => 'top',
+                'label' => 'Overview',
+                'title' => 'Overview',
+                'description' => 'Narrative overview of the canonical personality profile.',
+                'sort_order' => 20,
+                'enabled' => true,
             ],
             'trait_overview' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_TRAIT_DIMENSION_GRID,
                 'group' => 'trait_overview',
+                'label' => 'Trait Overview',
+                'title' => 'Trait overview',
+                'description' => 'Canonical MBTI dimension grid using EI / SN / TF / JP / AT axis ids.',
+                'sort_order' => 30,
+                'enabled' => true,
                 'payload_schema' => [
                     'summary' => 'string|null',
                     'dimensions' => 'list<trait_dimension>',
@@ -58,79 +80,154 @@ final class MbtiCanonicalSectionRegistry
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_RICH_TEXT,
                 'group' => 'career',
+                'label' => 'Career Summary',
+                'title' => 'Career summary',
+                'description' => 'Narrative career overview for the canonical base profile.',
+                'sort_order' => 40,
+                'enabled' => true,
             ],
             'career.advantages' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_BULLET_LIST,
                 'group' => 'career',
+                'label' => 'Career Advantages',
+                'title' => 'Career advantages',
+                'description' => 'Bullet list of work strengths in career contexts.',
+                'sort_order' => 50,
+                'enabled' => true,
             ],
             'career.weaknesses' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_BULLET_LIST,
                 'group' => 'career',
+                'label' => 'Career Weaknesses',
+                'title' => 'Career weaknesses',
+                'description' => 'Bullet list of career blind spots and trade-offs.',
+                'sort_order' => 60,
+                'enabled' => true,
             ],
             'career.preferred_roles' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_PREFERRED_ROLE_LIST,
                 'group' => 'career',
+                'label' => 'Preferred Roles',
+                'title' => 'Preferred roles',
+                'description' => 'Grouped role recommendations for the canonical profile.',
+                'sort_order' => 70,
+                'enabled' => true,
             ],
             'career.upgrade_suggestions' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_BULLET_LIST,
                 'group' => 'career',
+                'label' => 'Upgrade Suggestions',
+                'title' => 'Career upgrade suggestions',
+                'description' => 'Upgrade formulas and bullet suggestions for career growth.',
+                'sort_order' => 80,
+                'enabled' => true,
             ],
             'growth.summary' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_RICH_TEXT,
                 'group' => 'growth',
+                'label' => 'Growth Summary',
+                'title' => 'Growth summary',
+                'description' => 'Narrative personal growth overview.',
+                'sort_order' => 90,
+                'enabled' => true,
             ],
             'growth.strengths' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_BULLET_LIST,
                 'group' => 'growth',
+                'label' => 'Growth Strengths',
+                'title' => 'Growth strengths',
+                'description' => 'Bullet list of personal growth strengths.',
+                'sort_order' => 100,
+                'enabled' => true,
             ],
             'growth.weaknesses' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_BULLET_LIST,
                 'group' => 'growth',
+                'label' => 'Growth Weaknesses',
+                'title' => 'Growth weaknesses',
+                'description' => 'Bullet list of growth liabilities and tensions.',
+                'sort_order' => 110,
+                'enabled' => true,
             ],
             'growth.motivators' => [
                 'bucket' => self::BUCKET_PREMIUM_TEASER,
                 'render_variant' => self::RENDER_VARIANT_PREMIUM_TEASER,
                 'group' => 'growth',
+                'label' => 'Growth Motivators',
+                'title' => 'Growth motivators',
+                'description' => 'Premium teaser describing what energizes the profile.',
+                'sort_order' => 120,
+                'enabled' => true,
                 'premium_teaser' => true,
             ],
             'growth.drainers' => [
                 'bucket' => self::BUCKET_PREMIUM_TEASER,
                 'render_variant' => self::RENDER_VARIANT_PREMIUM_TEASER,
                 'group' => 'growth',
+                'label' => 'Growth Drainers',
+                'title' => 'Growth drainers',
+                'description' => 'Premium teaser describing what depletes the profile.',
+                'sort_order' => 130,
+                'enabled' => true,
                 'premium_teaser' => true,
             ],
             'relationships.summary' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_RICH_TEXT,
                 'group' => 'relationships',
+                'label' => 'Relationships Summary',
+                'title' => 'Relationships summary',
+                'description' => 'Narrative overview for relationships and close dynamics.',
+                'sort_order' => 140,
+                'enabled' => true,
             ],
             'relationships.strengths' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_BULLET_LIST,
                 'group' => 'relationships',
+                'label' => 'Relationships Strengths',
+                'title' => 'Relationships strengths',
+                'description' => 'Bullet list of relationship strengths.',
+                'sort_order' => 150,
+                'enabled' => true,
             ],
             'relationships.weaknesses' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_BULLET_LIST,
                 'group' => 'relationships',
+                'label' => 'Relationships Weaknesses',
+                'title' => 'Relationships weaknesses',
+                'description' => 'Bullet list of relationship weak points.',
+                'sort_order' => 160,
+                'enabled' => true,
             ],
             'relationships.rel_advantages' => [
                 'bucket' => self::BUCKET_PREMIUM_TEASER,
                 'render_variant' => self::RENDER_VARIANT_PREMIUM_TEASER,
                 'group' => 'relationships',
+                'label' => 'Relationship Advantages',
+                'title' => 'Relationship advantages',
+                'description' => 'Premium teaser for interpersonal advantages.',
+                'sort_order' => 170,
+                'enabled' => true,
                 'premium_teaser' => true,
             ],
             'relationships.rel_risks' => [
                 'bucket' => self::BUCKET_PREMIUM_TEASER,
                 'render_variant' => self::RENDER_VARIANT_PREMIUM_TEASER,
                 'group' => 'relationships',
+                'label' => 'Relationship Risks',
+                'title' => 'Relationship risks',
+                'description' => 'Premium teaser for interpersonal risks.',
+                'sort_order' => 180,
+                'enabled' => true,
                 'premium_teaser' => true,
             ],
         ];
@@ -150,6 +247,14 @@ final class MbtiCanonicalSectionRegistry
             'JP' => 'JP',
             'AT' => 'AT',
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function traitOverviewAxisTargets(): array
+    {
+        return ['EI', 'SN', 'TF', 'JP', 'AT'];
     }
 
     public static function normalizeTraitAxisCode(string $axisCode): string

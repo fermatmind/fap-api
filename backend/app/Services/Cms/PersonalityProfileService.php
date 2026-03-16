@@ -20,6 +20,7 @@ final class PersonalityProfileService
     ): LengthAwarePaginator {
         return $this->basePublicQuery($orgId, $scaleCode, $locale)
             ->with('seoMeta')
+            ->orderBy('canonical_type_code')
             ->orderBy('type_code')
             ->orderBy('id')
             ->paginate($perPage, ['*'], 'page', $page);
@@ -62,12 +63,29 @@ final class PersonalityProfileService
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function publicCanonicalFields(PersonalityProfile $profile): array
+    {
+        return [
+            'canonical_type_code' => $profile->canonical_type_code,
+            'schema_version' => (string) $profile->schema_version,
+            'type_name' => $profile->type_name,
+            'nickname' => $profile->nickname,
+            'rarity' => $profile->rarity_text,
+            'keywords' => is_array($profile->keywords_json) ? array_values($profile->keywords_json) : [],
+            'hero_summary' => $profile->hero_summary_md,
+        ];
+    }
+
     private function basePublicQuery(int $orgId, string $scaleCode, string $locale): Builder
     {
         return PersonalityProfile::query()
             ->withoutGlobalScopes()
             ->where('org_id', max(0, $orgId))
             ->where('scale_code', $this->normalizeScaleCode($scaleCode))
+            ->whereIn('type_code', PersonalityProfile::TYPE_CODES)
             ->forLocale($this->normalizeLocale($locale))
             ->publishedPublic()
             ->where(static function (Builder $query): void {

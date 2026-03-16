@@ -10,8 +10,10 @@ use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileSeoMeta;
 use App\Services\Cms\PersonalityProfileSeoService;
+use App\Support\Mbti\MbtiCanonicalSectionRegistry;
 use Filament\Forms\Get;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
@@ -22,7 +24,7 @@ final class PersonalityWorkspace
     /**
      * @return array<string, array{label: string, title: string, description: string, render_variant: string, sort_order: int, enabled: bool}>
      */
-    public static function sectionDefinitions(): array
+    public static function legacySectionDefinitions(): array
     {
         return [
             'core_snapshot' => [
@@ -109,10 +111,64 @@ final class PersonalityWorkspace
     }
 
     /**
+     * @return array<string, array{label: string, title: string, description: string, render_variant: string, sort_order: int, enabled: bool}>
+     */
+    public static function canonicalSectionDefinitions(): array
+    {
+        return collect(MbtiCanonicalSectionRegistry::definitions())
+            ->mapWithKeys(static fn (array $definition, string $sectionKey): array => [
+                $sectionKey => [
+                    'label' => (string) ($definition['label'] ?? Str::of($sectionKey)->replace(['.', '_'], ' ')->headline()->value()),
+                    'title' => (string) ($definition['title'] ?? Str::of($sectionKey)->replace(['.', '_'], ' ')->headline()->value()),
+                    'description' => (string) ($definition['description'] ?? ''),
+                    'render_variant' => (string) $definition['render_variant'],
+                    'sort_order' => (int) ($definition['sort_order'] ?? 0),
+                    'enabled' => (bool) ($definition['enabled'] ?? true),
+                ],
+            ])
+            ->all();
+    }
+
+    /**
+     * @return array<string, array{label: string, title: string, description: string, render_variant: string, sort_order: int, enabled: bool}>
+     */
+    public static function allSectionDefinitions(): array
+    {
+        return array_merge(
+            self::legacySectionDefinitions(),
+            self::canonicalSectionDefinitions(),
+        );
+    }
+
+    /**
+     * @return array<string, array{label: string, title: string, description: string, render_variant: string, sort_order: int, enabled: bool}>
+     */
+    public static function sectionDefinitions(?string $schemaVersion = null): array
+    {
+        return self::normalizeSchemaVersion($schemaVersion) === PersonalityProfile::SCHEMA_VERSION_V2
+            ? self::canonicalSectionDefinitions()
+            : self::legacySectionDefinitions();
+    }
+
+    /**
      * @return array<string, string>
      */
-    public static function renderVariantOptions(): array
+    public static function renderVariantOptions(?string $schemaVersion = null, ?string $sectionKey = null): array
     {
+        $normalizedSchemaVersion = self::normalizeSchemaVersion($schemaVersion);
+
+        if (
+            $normalizedSchemaVersion === PersonalityProfile::SCHEMA_VERSION_V2
+            && $sectionKey !== null
+            && array_key_exists($sectionKey, self::canonicalSectionDefinitions())
+        ) {
+            $renderVariant = (string) self::canonicalSectionDefinitions()[$sectionKey]['render_variant'];
+
+            return [
+                $renderVariant => Str::of($renderVariant)->replace('_', ' ')->headline()->value(),
+            ];
+        }
+
         return collect(PersonalityProfileSection::RENDER_VARIANTS)
             ->mapWithKeys(static fn (string $variant): array => [
                 $variant => Str::of($variant)->replace('_', ' ')->headline()->value(),
@@ -129,13 +185,20 @@ final class PersonalityWorkspace
             'org_id' => 0,
             'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
             'type_code' => '',
+            'canonical_type_code' => '',
             'slug' => '',
             'locale' => 'en',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
             'title' => '',
+            'type_name' => '',
+            'nickname' => '',
+            'rarity_text' => '',
+            'keywords_json' => [],
             'subtitle' => '',
             'excerpt' => '',
             'hero_kicker' => '',
             'hero_quote' => '',
+            'hero_summary_md' => '',
             'hero_image_url' => '',
             'status' => 'draft',
             'is_public' => true,
@@ -154,7 +217,7 @@ final class PersonalityWorkspace
     {
         $state = [];
 
-        foreach (self::sectionDefinitions() as $sectionKey => $definition) {
+        foreach (self::allSectionDefinitions() as $sectionKey => $definition) {
             $state[$sectionKey] = [
                 'title' => $definition['title'],
                 'render_variant' => $definition['render_variant'],
@@ -259,18 +322,26 @@ final class PersonalityWorkspace
      */
     public static function syncWorkspaceSections(PersonalityProfile $profile, array $state): void
     {
-        $definitions = self::sectionDefinitions();
-        $knownSectionKeys = array_keys($definitions);
-
-        PersonalityProfileSection::query()
-            ->where('profile_id', (int) $profile->id)
-            ->whereNotIn('section_key', $knownSectionKeys)
-            ->delete();
+        $definitions = self::sectionDefinitions((string) $profile->schema_version);
+        $defaults = self::defaultWorkspaceSectionsState();
+        $submittedKeys = [];
 
         foreach ($definitions as $sectionKey => $definition) {
-            $sectionState = array_merge(
-                self::defaultWorkspaceSectionsState()[$sectionKey],
-                is_array($state[$sectionKey] ?? null) ? $state[$sectionKey] : [],
+            if (! is_array($state[$sectionKey] ?? null)) {
+                continue;
+            }
+
+            $submittedKeys[] = $sectionKey;
+            $sectionState = array_merge($defaults[$sectionKey], $state[$sectionKey]);
+
+            $payloadJson = self::normalizeSectionPayload(
+                $sectionKey,
+                self::decodeJsonText(
+                    $sectionState['payload_json_text'] ?? null,
+                    "workspace_sections.{$sectionKey}.payload_json_text",
+                ),
+                (string) $profile->schema_version,
+                "workspace_sections.{$sectionKey}.payload_json_text",
             );
 
             PersonalityProfileSection::query()->updateOrCreate(
@@ -280,17 +351,27 @@ final class PersonalityWorkspace
                 ],
                 [
                     'title' => self::normalizeNullableText((string) ($sectionState['title'] ?? '')) ?? $definition['title'],
-                    'render_variant' => self::normalizeRenderVariant((string) ($sectionState['render_variant'] ?? $definition['render_variant']), $definition['render_variant']),
+                    'render_variant' => self::normalizeRenderVariant(
+                        (string) ($sectionState['render_variant'] ?? $definition['render_variant']),
+                        $definition['render_variant'],
+                        array_keys(self::renderVariantOptions((string) $profile->schema_version, $sectionKey))
+                    ),
                     'body_md' => self::normalizeNullableText((string) ($sectionState['body_md'] ?? '')),
                     'body_html' => null,
-                    'payload_json' => self::decodeJsonText(
-                        $sectionState['payload_json_text'] ?? null,
-                        "workspace_sections.{$sectionKey}.payload_json_text",
-                    ),
+                    'payload_json' => $payloadJson,
                     'sort_order' => (int) ($sectionState['sort_order'] ?? $definition['sort_order']),
                     'is_enabled' => StatusBadge::isTruthy($sectionState['is_enabled'] ?? $definition['enabled']),
                 ],
             );
+        }
+
+        $removedKeys = array_values(array_diff(array_keys($definitions), $submittedKeys));
+
+        if ($removedKeys !== []) {
+            PersonalityProfileSection::query()
+                ->where('profile_id', (int) $profile->id)
+                ->whereIn('section_key', $removedKeys)
+                ->delete();
         }
 
         $profile->unsetRelation('sections');
@@ -346,13 +427,20 @@ final class PersonalityWorkspace
                 'org_id' => (int) $profile->org_id,
                 'scale_code' => (string) $profile->scale_code,
                 'type_code' => (string) $profile->type_code,
+                'canonical_type_code' => $profile->canonical_type_code,
                 'slug' => (string) $profile->slug,
                 'locale' => (string) $profile->locale,
                 'title' => (string) $profile->title,
+                'type_name' => $profile->type_name,
+                'nickname' => $profile->nickname,
+                'rarity_text' => $profile->rarity_text,
+                'keywords_json' => $profile->keywords_json,
                 'subtitle' => $profile->subtitle,
                 'excerpt' => $profile->excerpt,
                 'hero_kicker' => $profile->hero_kicker,
                 'hero_quote' => $profile->hero_quote,
+                'hero_summary_md' => $profile->hero_summary_md,
+                'hero_summary_html' => $profile->hero_summary_html,
                 'hero_image_url' => $profile->hero_image_url,
                 'status' => (string) $profile->status,
                 'is_public' => (bool) $profile->is_public,
@@ -515,7 +603,20 @@ final class PersonalityWorkspace
     {
         $normalized = Str::upper(trim((string) $typeCode));
 
-        return in_array($normalized, PersonalityProfile::TYPE_CODES, true) ? $normalized : $normalized;
+        return in_array($normalized, PersonalityProfile::BASE_TYPE_CODES, true) ? $normalized : $normalized;
+    }
+
+    public static function normalizeCanonicalTypeCode(?string $canonicalTypeCode, ?string $typeCode = null): ?string
+    {
+        $normalizedTypeCode = self::normalizeTypeCode($typeCode);
+
+        if (in_array($normalizedTypeCode, PersonalityProfile::BASE_TYPE_CODES, true)) {
+            return $normalizedTypeCode;
+        }
+
+        $normalized = Str::upper(trim((string) $canonicalTypeCode));
+
+        return $normalized !== '' ? $normalized : null;
     }
 
     public static function normalizeSlug(?string $slug, ?string $typeCode = null): string
@@ -538,6 +639,25 @@ final class PersonalityWorkspace
         $normalized = trim((string) $locale);
 
         return in_array($normalized, PersonalityProfile::SUPPORTED_LOCALES, true) ? $normalized : 'en';
+    }
+
+    public static function normalizeSchemaVersion(?string $schemaVersion): string
+    {
+        $normalized = trim((string) $schemaVersion);
+
+        return $normalized === PersonalityProfile::SCHEMA_VERSION_V2
+            ? PersonalityProfile::SCHEMA_VERSION_V2
+            : PersonalityProfile::SCHEMA_VERSION_V1;
+    }
+
+    public static function usesCanonicalSchema(?string $schemaVersion): bool
+    {
+        return self::normalizeSchemaVersion($schemaVersion) === PersonalityProfile::SCHEMA_VERSION_V2;
+    }
+
+    public static function isManagedSectionKeyForSchemaVersion(string $sectionKey, ?string $schemaVersion): bool
+    {
+        return array_key_exists($sectionKey, self::sectionDefinitions($schemaVersion));
     }
 
     /**
@@ -599,11 +719,17 @@ final class PersonalityWorkspace
         return (int) $user->getAuthIdentifier();
     }
 
-    private static function normalizeRenderVariant(string $variant, string $fallback): string
+    /**
+     * @param  list<string>|null  $allowedVariants
+     */
+    private static function normalizeRenderVariant(string $variant, string $fallback, ?array $allowedVariants = null): string
     {
         $normalized = trim($variant);
+        $variants = $allowedVariants !== null && $allowedVariants !== []
+            ? $allowedVariants
+            : PersonalityProfileSection::RENDER_VARIANTS;
 
-        return in_array($normalized, PersonalityProfileSection::RENDER_VARIANTS, true) ? $normalized : $fallback;
+        return in_array($normalized, $variants, true) ? $normalized : $fallback;
     }
 
     private static function normalizeNullableText(string $value): ?string
@@ -639,6 +765,50 @@ final class PersonalityWorkspace
         }
 
         return is_array($decoded) ? $decoded : null;
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $payload
+     * @return array<string, mixed>|null
+     */
+    private static function normalizeSectionPayload(
+        string $sectionKey,
+        ?array $payload,
+        ?string $schemaVersion,
+        string $field
+    ): ?array {
+        if ($payload === null) {
+            return null;
+        }
+
+        if (
+            self::usesCanonicalSchema($schemaVersion)
+            && $sectionKey === 'trait_overview'
+            && is_array($payload['dimensions'] ?? null)
+        ) {
+            $allowedAxisIds = MbtiCanonicalSectionRegistry::traitOverviewAxisTargets();
+
+            foreach (array_values($payload['dimensions']) as $index => $dimension) {
+                if (! is_array($dimension)) {
+                    throw ValidationException::withMessages([
+                        $field => sprintf('trait_overview.dimensions[%d] must be an object.', $index),
+                    ]);
+                }
+
+                $axisId = strtoupper(trim((string) Arr::get($dimension, 'id', '')));
+                if (! in_array($axisId, $allowedAxisIds, true)) {
+                    throw ValidationException::withMessages([
+                        $field => sprintf(
+                            'trait_overview.dimensions[%d].id must be one of %s.',
+                            $index,
+                            implode(', ', $allowedAxisIds),
+                        ),
+                    ]);
+                }
+            }
+        }
+
+        return $payload;
     }
 
     private static function normalizeTimestamp(mixed $value): ?string

@@ -8,6 +8,10 @@ use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileSeoMeta;
+use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantRevision;
+use App\Models\PersonalityProfileVariantSection;
+use App\Models\PersonalityProfileVariantSeoMeta;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -87,6 +91,7 @@ final class PersonalitySchemaSmokeTest extends TestCase
             $freshProfile->sections()->pluck('section_key')->all()
         );
         $this->assertSame('INTJ personality', $freshProfile->seoMeta?->seo_title);
+        $this->assertSame('INTJ', $freshProfile->canonical_type_code);
         $this->assertSame(
             [2, 1],
             $freshProfile->revisions()->pluck('revision_no')->all()
@@ -99,10 +104,12 @@ final class PersonalitySchemaSmokeTest extends TestCase
 
     public function test_unique_org_scale_type_locale_constraint_is_enforced(): void
     {
-        PersonalityProfile::query()->create($this->profilePayload([
+        $profile = PersonalityProfile::query()->create($this->profilePayload([
             'type_code' => 'ENFP',
             'slug' => 'enfp',
         ]));
+
+        $this->assertSame('ENFP', $profile->canonical_type_code);
 
         $this->expectException(QueryException::class);
 
@@ -158,6 +165,94 @@ final class PersonalitySchemaSmokeTest extends TestCase
         $this->assertDatabaseMissing('personality_profile_sections', ['id' => $section->id]);
         $this->assertDatabaseMissing('personality_profile_seo_meta', ['id' => $seoMeta->id]);
         $this->assertDatabaseMissing('personality_profile_revisions', ['id' => $revision->id]);
+    }
+
+    public function test_base_profile_can_hold_both_a_and_t_variants_but_not_duplicate_variant_codes(): void
+    {
+        $profile = PersonalityProfile::query()->create($this->profilePayload([
+            'type_code' => 'ENFJ',
+            'slug' => 'enfj',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]));
+
+        $assertive = PersonalityProfileVariant::query()->create([
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => 'ENFJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'ENFJ-A',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+
+        $turbulent = PersonalityProfileVariant::query()->create([
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => 'ENFJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'ENFJ-T',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+
+        $this->assertSame(
+            ['ENFJ-A', 'ENFJ-T'],
+            $profile->fresh()->variants()->pluck('runtime_type_code')->all()
+        );
+        $this->assertSame('A', $assertive->variant_code);
+        $this->assertSame('T', $turbulent->variant_code);
+
+        $this->expectException(QueryException::class);
+
+        PersonalityProfileVariant::query()->create([
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => 'ENFJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'ENFJ-A',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+    }
+
+    public function test_deleting_profile_cascades_variant_authority_tables(): void
+    {
+        $profile = PersonalityProfile::query()->create($this->profilePayload([
+            'type_code' => 'ENFJ',
+            'slug' => 'enfj',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]));
+
+        $variant = PersonalityProfileVariant::query()->create([
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => 'ENFJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'ENFJ-T',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+
+        $section = PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'section_key' => 'overview',
+            'render_variant' => 'rich_text',
+        ]);
+
+        $seoMeta = PersonalityProfileVariantSeoMeta::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'seo_title' => 'ENFJ-T',
+        ]);
+
+        $revision = PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'revision_no' => 1,
+            'snapshot_json' => [
+                'variant_profile' => ['runtime_type_code' => 'ENFJ-T'],
+                'variant_sections' => [['section_key' => 'overview']],
+                'variant_seo_meta' => ['seo_title' => 'ENFJ-T'],
+            ],
+            'created_at' => now(),
+        ]);
+
+        $profile->delete();
+
+        $this->assertDatabaseMissing('personality_profile_variants', ['id' => $variant->id]);
+        $this->assertDatabaseMissing('personality_profile_variant_sections', ['id' => $section->id]);
+        $this->assertDatabaseMissing('personality_profile_variant_seo_meta', ['id' => $seoMeta->id]);
+        $this->assertDatabaseMissing('personality_profile_variant_revisions', ['id' => $revision->id]);
     }
 
     /**

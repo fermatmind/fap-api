@@ -89,8 +89,15 @@ class EditPersonalityProfile extends EditRecord
         $data['org_id'] = 0;
         $data['scale_code'] = PersonalityProfile::SCALE_CODE_MBTI;
         $data['type_code'] = $typeCode;
+        $data['canonical_type_code'] = PersonalityWorkspace::normalizeCanonicalTypeCode(
+            (string) ($data['canonical_type_code'] ?? ''),
+            $typeCode,
+        );
         $data['slug'] = PersonalityWorkspace::normalizeSlug((string) ($data['slug'] ?? ''), $typeCode);
         $data['locale'] = PersonalityWorkspace::normalizeLocale((string) ($data['locale'] ?? 'en'));
+        $data['schema_version'] = PersonalityWorkspace::normalizeSchemaVersion(
+            (string) ($data['schema_version'] ?? $this->getRecord()->schema_version ?? PersonalityProfile::SCHEMA_VERSION_V1),
+        );
         $data['updated_by_admin_user_id'] = $this->currentAdminId();
 
         return $data;

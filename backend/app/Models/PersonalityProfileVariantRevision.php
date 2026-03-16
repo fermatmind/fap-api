@@ -8,18 +8,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PersonalityProfileRevision extends Model
+class PersonalityProfileVariantRevision extends Model
 {
     use HasFactory;
 
-    public const PROFILE_FOREIGN_KEY = 'profile_id';
-
-    protected $table = 'personality_profile_revisions';
+    protected $table = 'personality_profile_variant_revisions';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'profile_id',
+        'personality_profile_variant_id',
         'revision_no',
         'snapshot_json',
         'note',
@@ -28,15 +26,15 @@ class PersonalityProfileRevision extends Model
     ];
 
     protected $casts = [
-        'profile_id' => 'integer',
+        'personality_profile_variant_id' => 'integer',
         'revision_no' => 'integer',
         'snapshot_json' => 'array',
         'created_by_admin_user_id' => 'integer',
         'created_at' => 'datetime',
     ];
 
-    public function profile(): BelongsTo
+    public function variant(): BelongsTo
     {
-        return $this->belongsTo(PersonalityProfile::class, self::PROFILE_FOREIGN_KEY, 'id');
+        return $this->belongsTo(PersonalityProfileVariant::class, 'personality_profile_variant_id', 'id');
     }
 }
