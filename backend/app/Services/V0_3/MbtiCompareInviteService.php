@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\MbtiCompareInvite;
 use App\Models\Result;
 use App\Models\Share;
+use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
@@ -18,6 +19,7 @@ final class MbtiCompareInviteService
 {
     public function __construct(
         private readonly ShareService $shareService,
+        private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
     ) {}
 
@@ -69,10 +71,13 @@ final class MbtiCompareInviteService
         );
 
         $status = $this->normalizeStatus((string) ($invite->status ?? 'pending'));
-        $inviter = $this->toSummaryLite($inviterPayload, true);
-        $invitee = [
-            'mbti_public_summary_v1' => $this->mbtiPublicSummaryV1Builder->scaffold(),
-        ];
+        $inviter = $this->toSummaryLiteWithProjection(
+            $inviterPayload,
+            true,
+            (int) ($attempt->org_id ?? 0),
+            $locale
+        );
+        $invitee = $this->pendingInviteePayload();
         $compare = [
             'mbti_public_summary_v1' => $this->mbtiPublicSummaryV1Builder->buildFromComparePayload([
                 'title' => null,
@@ -93,7 +98,12 @@ final class MbtiCompareInviteService
 
                     if ($inviteeResult instanceof Result) {
                         $inviteePayload = $this->shareService->buildPublicSummaryPayload($inviteeAttempt, $inviteeResult);
-                        $invitee = $this->toSummaryLite($inviteePayload, false);
+                        $invitee = $this->toSummaryLiteWithProjection(
+                            $inviteePayload,
+                            false,
+                            (int) ($inviteeAttempt->org_id ?? 0),
+                            $locale
+                        );
                         $compare = $this->buildComparePayload(
                             $inviter,
                             $invitee,
@@ -219,6 +229,108 @@ final class MbtiCompareInviteService
         }
 
         return $summary;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function toSummaryLiteWithProjection(array $payload, bool $includeShareId, int $orgId, string $locale): array
+    {
+        $summary = $this->toSummaryLite($payload, $includeShareId);
+        $summary['mbti_public_projection_v1'] = $this->resolveParticipantProjection($payload, $orgId, $locale);
+
+        return $summary;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function pendingInviteePayload(): array
+    {
+        $summary = $this->mbtiPublicSummaryV1Builder->scaffold();
+
+        return [
+            'mbti_public_summary_v1' => $summary,
+            'mbti_public_projection_v1' => $this->scaffoldParticipantProjection($summary),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function resolveParticipantProjection(array $payload, int $orgId, string $locale): array
+    {
+        if (is_array($payload['mbti_public_projection_v1'] ?? null)) {
+            return $payload['mbti_public_projection_v1'];
+        }
+
+        $summary = is_array($payload['mbti_public_summary_v1'] ?? null)
+            ? $payload['mbti_public_summary_v1']
+            : $this->mbtiPublicSummaryV1Builder->buildFromSharePayload($payload, null, $locale);
+
+        return $this->mbtiPublicProjectionService->buildForSharePayload(
+            $payload + ['mbti_public_summary_v1' => $summary],
+            $locale,
+            $orgId
+        );
+    }
+
+    /**
+     * @param  array<string, mixed>  $summary
+     * @return array<string, mixed>
+     */
+    private function scaffoldParticipantProjection(array $summary): array
+    {
+        return [
+            'runtime_type_code' => $this->nullableString($summary['runtime_type_code'] ?? null),
+            'canonical_type_code' => $this->nullableString($summary['canonical_type_16'] ?? null),
+            'display_type' => $this->nullableString($summary['display_type'] ?? null),
+            'variant_code' => $this->nullableString($summary['variant'] ?? null),
+            'profile' => [
+                'type_name' => $this->nullableString(data_get($summary, 'profile.type_name')),
+                'nickname' => $this->nullableString(data_get($summary, 'profile.nickname')),
+                'rarity' => $this->nullableString(data_get($summary, 'profile.rarity')),
+                'keywords' => is_array(data_get($summary, 'profile.keywords'))
+                    ? array_values(data_get($summary, 'profile.keywords'))
+                    : [],
+                'hero_summary' => $this->nullableString(data_get($summary, 'profile.summary')),
+            ],
+            'summary_card' => [
+                'title' => $this->nullableString(data_get($summary, 'summary_card.title')),
+                'subtitle' => $this->nullableString(data_get($summary, 'summary_card.subtitle')),
+                'summary' => $this->nullableString(data_get($summary, 'summary_card.share_text')),
+                'tagline' => $this->nullableString(data_get($summary, 'profile.nickname')),
+                'public_tags' => is_array(data_get($summary, 'summary_card.tags'))
+                    ? array_values(data_get($summary, 'summary_card.tags'))
+                    : [],
+            ],
+            'dimensions' => [],
+            'sections' => [],
+            'seo' => [
+                'title' => null,
+                'description' => null,
+                'og_title' => null,
+                'og_description' => null,
+                'og_image_url' => null,
+                'twitter_title' => null,
+                'twitter_description' => null,
+                'twitter_image_url' => null,
+                'canonical_url' => null,
+                'robots' => null,
+                'jsonld' => [],
+            ],
+            'offer_set' => is_array($summary['offer_set'] ?? null)
+                ? $summary['offer_set']
+                : [],
+            '_meta' => [
+                'authority_source' => 'compare.pending_scaffold',
+                'route_mode' => 'runtime',
+                'public_route_type' => '16-type',
+                'schema_version' => 'v2',
+            ],
+        ];
     }
 
     private function buildTakePath(string $locale, string $shareId, string $inviteId, string $primaryCtaPath): string

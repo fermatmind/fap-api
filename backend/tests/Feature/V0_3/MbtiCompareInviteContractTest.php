@@ -98,8 +98,11 @@ final class MbtiCompareInviteContractTest extends TestCase
             ->assertJsonPath('inviter.type_code', 'INTJ-A')
             ->assertJsonPath('inviter.summary', 'Public-safe share summary.')
             ->assertJsonPath('inviter.mbti_public_summary_v1.runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('inviter.mbti_public_projection_v1.runtime_type_code', 'INTJ-A')
             ->assertJsonPath('invitee.mbti_public_summary_v1.runtime_type_code', null)
-            ->assertJsonPath('compare.mbti_public_summary_v1.runtime_type_code', null);
+            ->assertJsonPath('invitee.mbti_public_projection_v1.runtime_type_code', null)
+            ->assertJsonPath('compare.mbti_public_summary_v1.runtime_type_code', null)
+            ->assertJsonMissingPath('compare.mbti_public_projection_v1');
 
         $this->assertSame(
             ['EI', 'SN', 'TF', 'JP', 'AT'],
@@ -108,6 +111,25 @@ final class MbtiCompareInviteContractTest extends TestCase
                 (array) $response->json('inviter.mbti_public_summary_v1.dimensions')
             )
         );
+        $this->assertStableMbtiPublicProjectionV1(
+            (array) $response->json('inviter.mbti_public_projection_v1'),
+            'INTJ-A',
+            'INTJ',
+            'INTJ-A',
+            'A',
+            ['EI', 'SN', 'TF', 'JP', 'AT']
+        );
+        $this->assertStableMbtiPublicProjectionV1(
+            (array) $response->json('invitee.mbti_public_projection_v1'),
+            null,
+            null,
+            null,
+            null
+        );
+        $this->assertSame([], (array) $response->json('invitee.mbti_public_projection_v1.dimensions'));
+        $this->assertSame([], (array) $response->json('invitee.mbti_public_projection_v1.sections'));
+        $this->assertSame([], (array) $response->json('invitee.mbti_public_projection_v1.seo.jsonld'));
+        $this->assertSame('compare.pending_scaffold', $response->json('invitee.mbti_public_projection_v1._meta.authority_source'));
 
         foreach ([
             'report',
@@ -159,12 +181,16 @@ final class MbtiCompareInviteContractTest extends TestCase
             ->assertJsonPath('status', 'ready')
             ->assertJsonPath('inviter.mbti_public_summary_v1.runtime_type_code', 'INTJ-A')
             ->assertJsonPath('inviter.mbti_public_summary_v1.variant', 'A')
+            ->assertJsonPath('inviter.mbti_public_projection_v1.runtime_type_code', 'INTJ-A')
             ->assertJsonPath('invitee.mbti_public_summary_v1.runtime_type_code', 'ENFP-T')
             ->assertJsonPath('invitee.mbti_public_summary_v1.canonical_type_16', 'ENFP')
             ->assertJsonPath('invitee.mbti_public_summary_v1.variant', 'T')
+            ->assertJsonPath('invitee.mbti_public_projection_v1.runtime_type_code', 'ENFP-T')
+            ->assertJsonPath('invitee.mbti_public_projection_v1.canonical_type_code', 'ENFP')
             ->assertJsonPath('compare.mbti_public_summary_v1.runtime_type_code', null)
             ->assertJsonPath('compare.mbti_public_summary_v1.summary_card.title', $response->json('compare.title'))
-            ->assertJsonPath('compare.mbti_public_summary_v1.summary_card.share_text', $response->json('compare.summary'));
+            ->assertJsonPath('compare.mbti_public_summary_v1.summary_card.share_text', $response->json('compare.summary'))
+            ->assertJsonMissingPath('compare.mbti_public_projection_v1');
 
         $this->assertSame(
             ['EI', 'SN', 'TF', 'JP', 'AT'],
@@ -172,6 +198,22 @@ final class MbtiCompareInviteContractTest extends TestCase
                 static fn (array $item): string => (string) ($item['id'] ?? ''),
                 (array) $response->json('compare.mbti_public_summary_v1.dimensions')
             )
+        );
+        $this->assertStableMbtiPublicProjectionV1(
+            (array) $response->json('inviter.mbti_public_projection_v1'),
+            'INTJ-A',
+            'INTJ',
+            'INTJ-A',
+            'A',
+            ['EI', 'SN', 'TF', 'JP', 'AT']
+        );
+        $this->assertStableMbtiPublicProjectionV1(
+            (array) $response->json('invitee.mbti_public_projection_v1'),
+            'ENFP-T',
+            'ENFP',
+            'ENFP-T',
+            'T',
+            ['EI', 'SN', 'TF', 'JP', 'AT']
         );
     }
 
@@ -302,5 +344,53 @@ final class MbtiCompareInviteContractTest extends TestCase
         ]);
 
         return $attemptId;
+    }
+
+    /**
+     * @param  array<string, mixed>  $projection
+     * @param  list<string>  $expectedDimensionIds
+     */
+    private function assertStableMbtiPublicProjectionV1(
+        array $projection,
+        ?string $expectedRuntimeTypeCode,
+        ?string $expectedCanonicalType,
+        ?string $expectedDisplayType,
+        ?string $expectedVariant,
+        array $expectedDimensionIds = []
+    ): void {
+        foreach ([
+            'runtime_type_code',
+            'canonical_type_code',
+            'display_type',
+            'variant_code',
+            'profile',
+            'summary_card',
+            'dimensions',
+            'sections',
+            'seo',
+            'offer_set',
+            '_meta',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $projection);
+        }
+
+        $this->assertSame($expectedRuntimeTypeCode, $projection['runtime_type_code'] ?? null);
+        $this->assertSame($expectedCanonicalType, $projection['canonical_type_code'] ?? null);
+        $this->assertSame($expectedDisplayType, $projection['display_type'] ?? null);
+        $this->assertSame($expectedVariant, $projection['variant_code'] ?? null);
+        $this->assertIsArray($projection['profile'] ?? null);
+        $this->assertIsArray($projection['summary_card'] ?? null);
+        $this->assertIsArray($projection['dimensions'] ?? null);
+        $this->assertIsArray($projection['sections'] ?? null);
+        $this->assertIsArray($projection['seo'] ?? null);
+        $this->assertIsArray($projection['offer_set'] ?? null);
+        $this->assertIsArray($projection['_meta'] ?? null);
+        $this->assertSame(
+            $expectedDimensionIds,
+            array_map(
+                static fn (array $item): string => (string) ($item['id'] ?? ''),
+                (array) ($projection['dimensions'] ?? [])
+            )
+        );
     }
 }
