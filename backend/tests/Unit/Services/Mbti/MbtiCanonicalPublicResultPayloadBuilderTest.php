@@ -57,18 +57,25 @@ final class MbtiCanonicalPublicResultPayloadBuilderTest extends TestCase
             ],
         ]));
 
-        $this->assertSame('ENFJ-T', $payload['type_code']);
-        $this->assertSame('ENFJ', $payload['base_type_code']);
-        $this->assertSame('T', $payload['variant']);
+        $this->assertSame('ENFJ-T', $payload['runtime_type_code']);
+        $this->assertSame('ENFJ', $payload['canonical_type_code']);
+        $this->assertSame('ENFJ-T', $payload['display_type']);
+        $this->assertSame('T', $payload['variant_code']);
         $this->assertSame('Pilot hero summary', $payload['profile']['hero_summary']);
-        $this->assertSame('Leads with warmth, structure, and anticipation.', $payload['sections']['overview']['body']);
-        $this->assertSame('Career pilot summary.', $payload['sections']['career.summary']['body']);
+        $this->assertSame(
+            'Leads with warmth, structure, and anticipation.',
+            $this->findSection($payload['sections'], 'overview')['body_md'] ?? null
+        );
+        $this->assertSame(
+            'Career pilot summary.',
+            $this->findSection($payload['sections'], 'career.summary')['body_md'] ?? null
+        );
         $this->assertSame(
             MbtiCanonicalSectionRegistry::RENDER_VARIANT_PREMIUM_TEASER,
-            $payload['premium_teaser']['growth.motivators']['render_variant']
+            $this->findSection($payload['sections'], 'growth.motivators')['render'] ?? null
         );
-        $this->assertSame('SN', $payload['sections']['trait_overview']['payload']['dimensions'][1]['normalized_axis_code']);
-        $this->assertSame('TF', $payload['sections']['trait_overview']['payload']['dimensions'][2]['normalized_axis_code']);
+        $this->assertSame('SN', $payload['dimensions'][1]['id']);
+        $this->assertSame('TF', $payload['dimensions'][2]['id']);
     }
 
     public function test_builder_rejects_base_type_only_resolution_without_silent_fallback(): void
@@ -196,5 +203,20 @@ final class MbtiCanonicalPublicResultPayloadBuilderTest extends TestCase
                 ];
             }
         });
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $sections
+     * @return array<string, mixed>
+     */
+    private function findSection(array $sections, string $sectionKey): array
+    {
+        foreach ($sections as $section) {
+            if (($section['key'] ?? null) === $sectionKey) {
+                return $section;
+            }
+        }
+
+        return [];
     }
 }

@@ -78,6 +78,8 @@ class PersonalityController extends Controller
             return $this->notFoundResponse('personality profile not found.');
         }
 
+        $projection = $this->personalityProfileService->buildPublicProjection($profile);
+
         return response()->json([
             'ok' => true,
             'profile' => $this->profileDetailPayload($profile),
@@ -86,6 +88,7 @@ class PersonalityController extends Controller
                 $profile->sections->all()
             ),
             'seo_meta' => $this->seoMetaPayload($profile->seoMeta),
+            'mbti_public_projection_v1' => $projection,
         ]);
     }
 

@@ -6,7 +6,6 @@ namespace App\Services\Mbti;
 
 use App\Contracts\MbtiPublicResultAuthoritySource;
 use App\Contracts\MbtiPublicResultPayloadBuilder;
-use App\Support\Mbti\MbtiCanonicalPublicResultSchema;
 use App\Support\Mbti\MbtiCanonicalSectionRegistry;
 use App\Support\Mbti\MbtiPublicTypeIdentity;
 use InvalidArgumentException;
@@ -35,11 +34,66 @@ final class MbtiCanonicalPublicResultPayloadBuilder implements MbtiPublicResultP
             ));
         }
 
-        $payload = MbtiCanonicalPublicResultSchema::scaffoldPayload($identity, $source->sourceKey());
-        $profile = $this->arrayOrEmpty($authority['profile'] ?? null);
-        $payload['profile']['hero_summary'] = $this->nullableText($profile['hero_summary'] ?? null);
+        return $this->buildProjection($this->projectionAuthorityFromLegacySource(
+            $identity,
+            $source->sourceKey(),
+            $authority
+        ));
+    }
 
-        foreach ($this->arrayOrEmpty($authority['sections'] ?? null) as $sectionKey => $sectionData) {
+    /**
+     * @param  array<string, mixed>  $authority
+     * @return array<string, mixed>
+     */
+    public function buildProjection(array $authority): array
+    {
+        $routeMode = $this->resolveRouteMode($authority);
+        $canonicalTypeCode = $this->resolveCanonicalTypeCode($authority);
+
+        if ($canonicalTypeCode === null) {
+            throw new InvalidArgumentException('MBTI public projection requires canonical_type_code.');
+        }
+
+        $runtimeTypeCode = $routeMode === 'runtime'
+            ? $this->nullableUpperText($authority['runtime_type_code'] ?? $authority['display_type'] ?? null)
+            : $this->nullableUpperText($authority['runtime_type_code'] ?? null);
+        $displayType = $this->resolveDisplayType($authority, $routeMode, $canonicalTypeCode, $runtimeTypeCode);
+        $variantCode = $routeMode === 'runtime'
+            ? $this->resolveVariantCode($authority, $runtimeTypeCode, $displayType)
+            : null;
+        $sections = $this->normalizeSections($authority['sections'] ?? null);
+        $dimensions = $this->normalizeDimensions($authority['dimensions'] ?? null, $sections);
+
+        return [
+            'runtime_type_code' => $runtimeTypeCode,
+            'canonical_type_code' => $canonicalTypeCode,
+            'display_type' => $displayType,
+            'variant_code' => $variantCode,
+            'profile' => $this->normalizeProfile($authority['profile'] ?? null),
+            'summary_card' => $this->normalizeSummaryCard($authority['summary_card'] ?? null),
+            'dimensions' => $dimensions,
+            'sections' => $sections,
+            'seo' => $this->normalizeSeo($authority['seo'] ?? null),
+            'offer_set' => is_array($authority['offer_set'] ?? null) ? $authority['offer_set'] : [],
+            '_meta' => $this->normalizeMeta(
+                $authority['_meta'] ?? $authority['meta'] ?? null,
+                $routeMode
+            ),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $authority
+     * @return array<string, mixed>
+     */
+    private function projectionAuthorityFromLegacySource(
+        MbtiPublicTypeIdentity $identity,
+        string $sourceKey,
+        array $authority
+    ): array {
+        $sections = [];
+
+        foreach ((array) ($authority['sections'] ?? []) as $sectionKey => $sectionData) {
             if (! is_array($sectionData)) {
                 throw new InvalidArgumentException(sprintf(
                     'MBTI canonical section payload for [%s] must be an array.',
@@ -55,13 +109,18 @@ final class MbtiCanonicalPublicResultPayloadBuilder implements MbtiPublicResultP
                 ));
             }
 
-            $payload['sections'][(string) $sectionKey] = $this->mergeSectionEntry(
-                $payload['sections'][(string) $sectionKey],
-                $sectionData,
-            );
+            $sections[(string) $sectionKey] = [
+                'key' => (string) $sectionKey,
+                'title' => $sectionData['title'] ?? null,
+                'render' => $sectionData['render_variant'] ?? $definition['render_variant'],
+                'body_md' => $sectionData['body'] ?? null,
+                'payload' => is_array($sectionData['payload'] ?? null) ? $sectionData['payload'] : null,
+                'is_enabled' => true,
+                'source' => $sourceKey,
+            ];
         }
 
-        foreach ($this->arrayOrEmpty($authority['premium_teaser'] ?? null) as $sectionKey => $sectionData) {
+        foreach ((array) ($authority['premium_teaser'] ?? []) as $sectionKey => $sectionData) {
             if (! is_array($sectionData)) {
                 throw new InvalidArgumentException(sprintf(
                     'MBTI premium teaser payload for [%s] must be an array.',
@@ -77,91 +136,430 @@ final class MbtiCanonicalPublicResultPayloadBuilder implements MbtiPublicResultP
                 ));
             }
 
-            $payload['premium_teaser'][(string) $sectionKey] = $this->mergePremiumTeaserEntry(
-                $payload['premium_teaser'][(string) $sectionKey],
-                $sectionData,
-            );
+            $sections[(string) $sectionKey] = [
+                'key' => (string) $sectionKey,
+                'title' => $sectionData['title'] ?? null,
+                'render' => $sectionData['render_variant'] ?? $definition['render_variant'],
+                'body_md' => $sectionData['teaser'] ?? null,
+                'payload' => is_array($sectionData['payload'] ?? null) ? $sectionData['payload'] : null,
+                'is_enabled' => true,
+                'source' => $sourceKey,
+            ];
         }
 
-        foreach ($this->arrayOrEmpty($authority['seo_meta'] ?? null) as $key => $value) {
-            if (! array_key_exists((string) $key, $payload['seo_meta'])) {
+        $summary = $this->nullableText(data_get($authority, 'sections.trait_overview.payload.summary'));
+
+        return [
+            'runtime_type_code' => $identity->typeCode,
+            'canonical_type_code' => $identity->baseTypeCode,
+            'display_type' => $identity->typeCode,
+            'variant_code' => $identity->variant,
+            'profile' => [
+                'hero_summary' => $this->nullableText(data_get($authority, 'profile.hero_summary')),
+            ],
+            'summary_card' => [
+                'summary' => $summary,
+            ],
+            'dimensions' => is_array(data_get($authority, 'sections.trait_overview.payload.dimensions'))
+                ? data_get($authority, 'sections.trait_overview.payload.dimensions')
+                : [],
+            'sections' => $sections,
+            'seo' => [
+                'title' => $this->nullableText($authority['seo_meta']['seo_title'] ?? null),
+                'description' => $this->nullableText($authority['seo_meta']['seo_description'] ?? null),
+                'canonical_url' => $this->nullableText($authority['seo_meta']['canonical_url'] ?? null),
+                'og_title' => $this->nullableText($authority['seo_meta']['og_title'] ?? null),
+                'og_description' => $this->nullableText($authority['seo_meta']['og_description'] ?? null),
+                'og_image_url' => $this->nullableText($authority['seo_meta']['og_image_url'] ?? null),
+                'twitter_title' => $this->nullableText($authority['seo_meta']['twitter_title'] ?? null),
+                'twitter_description' => $this->nullableText($authority['seo_meta']['twitter_description'] ?? null),
+                'twitter_image_url' => $this->nullableText($authority['seo_meta']['twitter_image_url'] ?? null),
+                'robots' => $this->nullableText($authority['seo_meta']['robots'] ?? null),
+                'jsonld' => [],
+            ],
+            'offer_set' => [],
+            '_meta' => [
+                'authority_source' => $sourceKey,
+                'route_mode' => 'runtime',
+                'public_route_type' => '16-type',
+                'schema_version' => 'v2',
+                'authority_meta' => is_array($authority['meta'] ?? null) ? $authority['meta'] : [],
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $authority
+     * @return list<array<string, mixed>>
+     */
+    private function normalizeSections(mixed $authority): array
+    {
+        if (! is_array($authority)) {
+            return [];
+        }
+
+        $sections = [];
+
+        foreach ($authority as $sectionKey => $sectionData) {
+            if (! is_array($sectionData)) {
                 continue;
             }
 
-            $payload['seo_meta'][(string) $key] = $this->nullableText($value);
+            $key = trim((string) ($sectionData['key'] ?? $sectionKey));
+            if ($key === '') {
+                continue;
+            }
+
+            $definition = MbtiCanonicalSectionRegistry::definition($key);
+            $render = $this->nullableText($sectionData['render'] ?? $sectionData['render_variant'] ?? null)
+                ?? (string) $definition['render_variant'];
+
+            if ($render !== (string) $definition['render_variant']) {
+                throw new InvalidArgumentException(sprintf(
+                    'MBTI canonical section [%s] requires render_variant [%s], got [%s].',
+                    $key,
+                    (string) $definition['render_variant'],
+                    $render,
+                ));
+            }
+
+            if (($sectionData['is_enabled'] ?? true) === false) {
+                continue;
+            }
+
+            $sections[$key] = [
+                'key' => $key,
+                'title' => $this->nullableText($sectionData['title'] ?? null) ?? (string) $definition['title'],
+                'render' => $render,
+                'body_md' => $this->firstNonEmpty(
+                    $this->nullableText($sectionData['body_md'] ?? null),
+                    $this->nullableText($sectionData['body'] ?? null)
+                ),
+                'payload' => is_array($sectionData['payload'] ?? null) ? $sectionData['payload'] : [],
+                'is_enabled' => true,
+                'source' => $this->nullableText($sectionData['source'] ?? null) ?? 'unknown',
+                '_sort_order' => (int) ($definition['sort_order'] ?? 0),
+            ];
         }
 
-        $payload['_meta']['authority_meta'] = $this->arrayOrEmpty($authority['meta'] ?? null);
+        uasort($sections, static function (array $left, array $right): int {
+            return ($left['_sort_order'] ?? 0) <=> ($right['_sort_order'] ?? 0);
+        });
 
-        return $payload;
+        return array_values(array_map(static function (array $section): array {
+            unset($section['_sort_order']);
+
+            return $section;
+        }, $sections));
     }
 
     /**
-     * @param  array<string, mixed>  $template
-     * @param  array<string, mixed>  $source
+     * @param  list<array<string, mixed>>  $sections
+     * @return list<array<string, mixed>>
+     */
+    private function normalizeDimensions(mixed $dimensions, array $sections): array
+    {
+        $sourceItems = is_array($dimensions) && $dimensions !== []
+            ? $dimensions
+            : $this->traitOverviewDimensionsFromSections($sections);
+
+        if (! is_array($sourceItems)) {
+            return [];
+        }
+
+        $normalized = [];
+
+        foreach ($sourceItems as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $axisId = $this->normalizeAxisId($item);
+            if ($axisId === null) {
+                continue;
+            }
+
+            $normalized[$axisId] = [
+                'id' => $axisId,
+                'code' => $axisId,
+                'name' => $this->nullableText($item['name'] ?? $item['label'] ?? $item['axis_label'] ?? null) ?? $axisId,
+                'label' => $this->nullableText($item['label'] ?? $item['name'] ?? $item['axis_label'] ?? null) ?? $axisId,
+                'axis_left' => $this->nullableText($item['axis_left'] ?? null),
+                'axis_right' => $this->nullableText($item['axis_right'] ?? null),
+                'summary' => $this->nullableText($item['summary'] ?? null),
+                'description' => $this->nullableText($item['description'] ?? $item['text'] ?? null),
+                'score_pct' => $this->normalizePercent($item['score_pct'] ?? $item['value_pct'] ?? $item['percent'] ?? $item['pct'] ?? null),
+                'source' => $this->nullableText($item['source'] ?? null)
+                    ?? ($this->normalizePercent($item['score_pct'] ?? $item['value_pct'] ?? $item['percent'] ?? $item['pct'] ?? null) !== null ? 'runtime' : 'authored'),
+                'side' => null,
+                'side_label' => null,
+                'pct' => null,
+                'state' => $this->nullableText($item['state'] ?? null),
+            ];
+        }
+
+        $ordered = [];
+        foreach (MbtiCanonicalSectionRegistry::traitOverviewAxisTargets() as $axisId) {
+            if (isset($normalized[$axisId])) {
+                [$leftCode, $rightCode] = $this->axisLetters($axisId);
+                $scorePct = $normalized[$axisId]['score_pct'];
+                if (is_int($scorePct)) {
+                    $normalized[$axisId]['side'] = $scorePct >= 50 ? $leftCode : $rightCode;
+                    $normalized[$axisId]['side_label'] = $scorePct >= 50
+                        ? $normalized[$axisId]['axis_left']
+                        : $normalized[$axisId]['axis_right'];
+                    $normalized[$axisId]['pct'] = $scorePct >= 50 ? $scorePct : 100 - $scorePct;
+                }
+
+                $ordered[] = $normalized[$axisId];
+            }
+        }
+
+        return $ordered;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $sections
+     * @return list<array<string, mixed>>
+     */
+    private function traitOverviewDimensionsFromSections(array $sections): array
+    {
+        foreach ($sections as $section) {
+            if (($section['key'] ?? null) !== 'trait_overview') {
+                continue;
+            }
+
+            $payload = $section['payload'] ?? null;
+            if (is_array($payload['dimensions'] ?? null)) {
+                return array_values($payload['dimensions']);
+            }
+
+            return [];
+        }
+
+        return [];
+    }
+
+    /**
      * @return array<string, mixed>
      */
-    private function mergeSectionEntry(array $template, array $source): array
+    private function normalizeProfile(mixed $profile): array
     {
-        $this->assertRenderVariantMatches((string) $template['section_key'], $template, $source);
+        $payload = is_array($profile) ? $profile : [];
 
-        $template['title'] = $this->nullableText($source['title'] ?? $template['title'] ?? null);
-        $template['body'] = $this->nullableText($source['body'] ?? $template['body'] ?? null);
-
-        if (array_key_exists('payload', $source)) {
-            $template['payload'] = is_array($source['payload']) ? $source['payload'] : null;
-        }
-
-        return $template;
-    }
-
-    /**
-     * @param  array<string, mixed>  $template
-     * @param  array<string, mixed>  $source
-     * @return array<string, mixed>
-     */
-    private function mergePremiumTeaserEntry(array $template, array $source): array
-    {
-        $this->assertRenderVariantMatches((string) $template['section_key'], $template, $source);
-
-        $template['title'] = $this->nullableText($source['title'] ?? $template['title'] ?? null);
-        $template['teaser'] = $this->nullableText($source['teaser'] ?? $template['teaser'] ?? null);
-
-        if (array_key_exists('payload', $source)) {
-            $template['payload'] = is_array($source['payload']) ? $source['payload'] : null;
-        }
-
-        return $template;
-    }
-
-    /**
-     * @param  array<string, mixed>  $template
-     * @param  array<string, mixed>  $source
-     */
-    private function assertRenderVariantMatches(string $sectionKey, array $template, array $source): void
-    {
-        $runtimeVariant = trim((string) ($source['render_variant'] ?? ''));
-        if ($runtimeVariant === '') {
-            return;
-        }
-
-        $expectedVariant = (string) ($template['render_variant'] ?? '');
-        if ($runtimeVariant !== $expectedVariant) {
-            throw new InvalidArgumentException(sprintf(
-                'MBTI canonical section [%s] requires render_variant [%s], got [%s].',
-                $sectionKey,
-                $expectedVariant,
-                $runtimeVariant,
-            ));
-        }
+        return [
+            'type_name' => $this->nullableText($payload['type_name'] ?? null),
+            'nickname' => $this->nullableText($payload['nickname'] ?? null),
+            'rarity' => $this->nullableText($payload['rarity'] ?? null),
+            'keywords' => $this->stringList($payload['keywords'] ?? null),
+            'hero_summary' => $this->nullableText($payload['hero_summary'] ?? null),
+        ];
     }
 
     /**
      * @return array<string, mixed>
      */
-    private function arrayOrEmpty(mixed $value): array
+    private function normalizeSummaryCard(mixed $summaryCard): array
     {
-        return is_array($value) ? $value : [];
+        $payload = is_array($summaryCard) ? $summaryCard : [];
+
+        return [
+            'title' => $this->nullableText($payload['title'] ?? null),
+            'subtitle' => $this->nullableText($payload['subtitle'] ?? null),
+            'summary' => $this->nullableText($payload['summary'] ?? null),
+            'tagline' => $this->nullableText($payload['tagline'] ?? null),
+            'public_tags' => $this->stringList($payload['public_tags'] ?? $payload['tags'] ?? null),
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function normalizeSeo(mixed $seo): array
+    {
+        $payload = is_array($seo) ? $seo : [];
+
+        return [
+            'title' => $this->nullableText($payload['title'] ?? $payload['seo_title'] ?? null),
+            'description' => $this->nullableText($payload['description'] ?? $payload['seo_description'] ?? null),
+            'og_title' => $this->nullableText($payload['og_title'] ?? null),
+            'og_description' => $this->nullableText($payload['og_description'] ?? null),
+            'og_image_url' => $this->nullableText($payload['og_image_url'] ?? null),
+            'twitter_title' => $this->nullableText($payload['twitter_title'] ?? null),
+            'twitter_description' => $this->nullableText($payload['twitter_description'] ?? null),
+            'twitter_image_url' => $this->nullableText($payload['twitter_image_url'] ?? null),
+            'canonical_url' => $this->nullableText($payload['canonical_url'] ?? null),
+            'robots' => $this->nullableText($payload['robots'] ?? null),
+            'jsonld' => is_array($payload['jsonld'] ?? null) ? $payload['jsonld'] : [],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function normalizeMeta(mixed $meta, string $routeMode): array
+    {
+        $payload = is_array($meta) ? $meta : [];
+        $normalized = [
+            'authority_source' => $this->nullableText($payload['authority_source'] ?? null) ?? 'unknown',
+            'route_mode' => $this->nullableText($payload['route_mode'] ?? null) ?? $routeMode,
+            'public_route_type' => $this->nullableText($payload['public_route_type'] ?? null) ?? '16-type',
+            'schema_version' => $this->nullableText($payload['schema_version'] ?? null) ?? 'v2',
+        ];
+
+        if (is_array($payload['authority_meta'] ?? null)) {
+            $normalized['authority_meta'] = $payload['authority_meta'];
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * @param  array<string, mixed>  $authority
+     */
+    private function resolveRouteMode(array $authority): string
+    {
+        $normalized = strtolower(trim((string) (($authority['_meta']['route_mode'] ?? $authority['route_mode'] ?? ''))));
+        if (in_array($normalized, ['runtime', 'base'], true)) {
+            return $normalized;
+        }
+
+        return $this->nullableText($authority['runtime_type_code'] ?? null) !== null ? 'runtime' : 'base';
+    }
+
+    /**
+     * @param  array<string, mixed>  $authority
+     */
+    private function resolveCanonicalTypeCode(array $authority): ?string
+    {
+        $canonicalTypeCode = $this->nullableUpperText($authority['canonical_type_code'] ?? null);
+        if ($canonicalTypeCode !== null) {
+            return $canonicalTypeCode;
+        }
+
+        $runtimeTypeCode = $this->nullableUpperText($authority['runtime_type_code'] ?? $authority['display_type'] ?? null);
+        if ($runtimeTypeCode !== null && preg_match('/^(?<base>[EI][SN][TF][JP])-(?<variant>[AT])$/', $runtimeTypeCode, $matches) === 1) {
+            return (string) $matches['base'];
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $authority
+     */
+    private function resolveDisplayType(array $authority, string $routeMode, string $canonicalTypeCode, ?string $runtimeTypeCode): string
+    {
+        $displayType = $this->nullableUpperText($authority['display_type'] ?? null);
+        if ($displayType !== null) {
+            return $displayType;
+        }
+
+        if ($routeMode === 'runtime' && $runtimeTypeCode !== null) {
+            return $runtimeTypeCode;
+        }
+
+        return $canonicalTypeCode;
+    }
+
+    /**
+     * @param  array<string, mixed>  $authority
+     */
+    private function resolveVariantCode(array $authority, ?string $runtimeTypeCode, string $displayType): ?string
+    {
+        $variantCode = $this->nullableUpperText($authority['variant_code'] ?? null);
+        if ($variantCode !== null) {
+            return $variantCode;
+        }
+
+        $candidate = $runtimeTypeCode ?? $displayType;
+        if ($candidate !== null && preg_match('/^(?<base>[EI][SN][TF][JP])-(?<variant>[AT])$/', $candidate, $matches) === 1) {
+            return (string) $matches['variant'];
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $item
+     */
+    private function normalizeAxisId(array $item): ?string
+    {
+        $candidate = strtoupper(trim((string) ($item['id'] ?? $item['normalized_axis_code'] ?? $item['axis_code'] ?? $item['code'] ?? '')));
+        if ($candidate === '') {
+            return null;
+        }
+
+        return MbtiCanonicalSectionRegistry::normalizeTraitAxisCode($candidate);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function stringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $items = [];
+
+        foreach ($value as $item) {
+            $normalized = $this->nullableText($item);
+            if ($normalized === null) {
+                continue;
+            }
+
+            $items[$normalized] = true;
+        }
+
+        return array_keys($items);
+    }
+
+    private function nullableUpperText(mixed $value): ?string
+    {
+        $normalized = $this->nullableText($value);
+
+        return $normalized === null ? null : strtoupper($normalized);
+    }
+
+    private function normalizePercent(mixed $value): ?int
+    {
+        if (! is_numeric($value)) {
+            return null;
+        }
+
+        return max(0, min(100, (int) round((float) $value)));
+    }
+
+    /**
+     * @return array{0:string,1:string}
+     */
+    private function axisLetters(string $axisId): array
+    {
+        return match ($axisId) {
+            'EI' => ['E', 'I'],
+            'SN' => ['S', 'N'],
+            'TF' => ['T', 'F'],
+            'JP' => ['J', 'P'],
+            default => ['A', 'T'],
+        };
+    }
+
+    private function firstNonEmpty(?string ...$candidates): ?string
+    {
+        foreach ($candidates as $candidate) {
+            if ($candidate === null) {
+                continue;
+            }
+
+            $normalized = trim($candidate);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 
     private function nullableText(mixed $value): ?string

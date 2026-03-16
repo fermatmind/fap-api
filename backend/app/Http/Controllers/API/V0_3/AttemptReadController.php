@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
+use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
@@ -32,6 +33,7 @@ class AttemptReadController extends Controller
         private AttemptSubmissionService $attemptSubmissionService,
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
+        private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
@@ -311,6 +313,12 @@ class AttemptReadController extends Controller
                 $result,
                 $responsePayload,
                 (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
+            );
+            $responsePayload['mbti_public_projection_v1'] = $this->mbtiPublicProjectionService->buildForReportEnvelope(
+                $result,
+                $responsePayload,
+                (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+                (int) ($attempt->org_id ?? 0)
             );
         }
 

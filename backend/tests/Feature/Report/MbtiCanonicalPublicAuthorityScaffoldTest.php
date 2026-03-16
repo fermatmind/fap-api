@@ -42,11 +42,12 @@ final class MbtiCanonicalPublicAuthorityScaffoldTest extends TestCase
             ]),
         );
 
-        $this->assertSame('ENFJ-T', $payload['type_code']);
-        $this->assertSame('ENFJ', $payload['base_type_code']);
-        $this->assertSame('T', $payload['variant']);
+        $this->assertSame('ENFJ-T', $payload['runtime_type_code']);
+        $this->assertSame('ENFJ', $payload['canonical_type_code']);
+        $this->assertSame('ENFJ-T', $payload['display_type']);
+        $this->assertSame('T', $payload['variant_code']);
         $this->assertSame('Pilot report authority summary', $payload['profile']['hero_summary']);
-        $this->assertSame((string) $layer['one_liner'], $payload['sections']['overview']['body']);
+        $this->assertSame((string) $layer['one_liner'], $payload['sections'][0]['body_md']);
         $this->assertSame('report.v0_3.pilot', $payload['_meta']['authority_source']);
     }
 }

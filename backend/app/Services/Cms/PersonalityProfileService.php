@@ -5,12 +5,18 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\PersonalityProfile;
+use App\Services\Mbti\MbtiPublicProjectionService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class PersonalityProfileService
 {
+    public function __construct(
+        private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
+    ) {}
+
     public function listPublicProfiles(
         int $orgId,
         string $scaleCode,
@@ -19,7 +25,14 @@ final class PersonalityProfileService
         int $perPage = 20
     ): LengthAwarePaginator {
         return $this->basePublicQuery($orgId, $scaleCode, $locale)
-            ->with('seoMeta')
+            ->with([
+                'seoMeta',
+                'sections' => static function (HasMany $query): void {
+                    $query->where('is_enabled', true)
+                        ->orderBy('sort_order')
+                        ->orderBy('id');
+                },
+            ])
             ->orderBy('canonical_type_code')
             ->orderBy('type_code')
             ->orderBy('id')
@@ -51,6 +64,39 @@ final class PersonalityProfileService
     }
 
     /**
+     * @return Collection<int, PersonalityProfile>
+     */
+    public function getSitemapPublicProfiles(): Collection
+    {
+        return PersonalityProfile::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+            ->whereIn('type_code', PersonalityProfile::TYPE_CODES)
+            ->where('status', 'published')
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->whereIn('locale', PersonalityProfile::SUPPORTED_LOCALES)
+            ->whereNotNull('slug')
+            ->where('slug', '<>', '')
+            ->where(static function (Builder $query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->with([
+                'seoMeta',
+                'sections' => static function (HasMany $query): void {
+                    $query->where('is_enabled', true)
+                        ->orderBy('sort_order')
+                        ->orderBy('id');
+                },
+            ])
+            ->orderBy('locale')
+            ->orderBy('slug')
+            ->get();
+    }
+
+    /**
      * @return array{0:string,1:string}
      */
     public function resolveTypeLookup(string $typeLookup): array
@@ -68,15 +114,27 @@ final class PersonalityProfileService
      */
     public function publicCanonicalFields(PersonalityProfile $profile): array
     {
+        $projection = $this->buildPublicProjection($profile);
+
         return [
-            'canonical_type_code' => $profile->canonical_type_code,
-            'schema_version' => (string) $profile->schema_version,
-            'type_name' => $profile->type_name,
-            'nickname' => $profile->nickname,
-            'rarity' => $profile->rarity_text,
-            'keywords' => is_array($profile->keywords_json) ? array_values($profile->keywords_json) : [],
-            'hero_summary' => $profile->hero_summary_md,
+            'canonical_type_code' => data_get($projection, 'canonical_type_code'),
+            'schema_version' => (string) data_get($projection, '_meta.schema_version', $profile->schema_version),
+            'type_name' => data_get($projection, 'profile.type_name'),
+            'nickname' => data_get($projection, 'profile.nickname'),
+            'rarity' => data_get($projection, 'profile.rarity'),
+            'keywords' => is_array(data_get($projection, 'profile.keywords'))
+                ? array_values(data_get($projection, 'profile.keywords'))
+                : [],
+            'hero_summary' => data_get($projection, 'profile.hero_summary'),
         ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function buildPublicProjection(PersonalityProfile $profile): array
+    {
+        return $this->mbtiPublicProjectionService->buildForPersonalityProfile($profile);
     }
 
     private function basePublicQuery(int $orgId, string $scaleCode, string $locale): Builder

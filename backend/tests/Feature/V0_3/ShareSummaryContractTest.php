@@ -41,7 +41,7 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('locale', 'zh-CN')
             ->assertJsonPath('title', 'INTJ - Architect')
             ->assertJsonPath('subtitle', '独立、冷静、面向长期规划')
-            ->assertJsonPath('summary', 'Public-safe share summary.')
+            ->assertJsonPath('summary', '公开人格简介兜底文案')
             ->assertJsonPath('type_code', 'INTJ-A')
             ->assertJsonPath('type_name', '建筑师型')
             ->assertJsonPath('tagline', '冷静的长期规划者')
@@ -58,11 +58,18 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonMissingPath('cta');
 
         $this->assertCount(5, (array) $response->json('dimensions'));
-        $this->assertSame('EI', $response->json('dimensions.0.code'));
+        $this->assertSame('EI', $response->json('dimensions.0.id'));
         $this->assertSame('I', $response->json('dimensions.0.side'));
         $this->assertSame(65, $response->json('dimensions.0.pct'));
         $this->assertSame('clear', $response->json('dimensions.0.state'));
         $this->assertStableMbtiPublicSummaryV1((array) $response->json('mbti_public_summary_v1'), 'INTJ-A', 'INTJ', 'A');
+        $this->assertSame('INTJ-A', $response->json('mbti_public_projection_v1.display_type'));
+        $this->assertSame('INTJ', $response->json('mbti_public_projection_v1.canonical_type_code'));
+        $this->assertSame('建筑师型', $response->json('mbti_public_projection_v1.profile.type_name'));
+        $this->assertSame('公开人格简介兜底文案', $response->json('mbti_public_projection_v1.summary_card.summary'));
+        $this->assertSame($response->json('type_code'), $response->json('mbti_public_projection_v1.display_type'));
+        $this->assertSame($response->json('type_name'), $response->json('mbti_public_projection_v1.profile.type_name'));
+        $this->assertSame($response->json('dimensions'), $response->json('mbti_public_projection_v1.dimensions'));
         $this->assertStringContainsString('/share/'.$response->json('share_id'), (string) $response->json('share_url'));
         $this->assertStringNotContainsString('PRIVATE_PAID_SECTION_BODY', (string) $response->getContent());
         $this->assertStringNotContainsString('PRIVATE_RESULT_PATH', (string) $response->getContent());
@@ -95,7 +102,7 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('id', $shareId)
             ->assertJsonPath('title', 'INTJ - Architect')
             ->assertJsonPath('subtitle', '独立、冷静、面向长期规划')
-            ->assertJsonPath('summary', 'Public-safe share summary.')
+            ->assertJsonPath('summary', '公开人格简介兜底文案')
             ->assertJsonPath('type_code', 'INTJ-A')
             ->assertJsonPath('type_name', '建筑师型')
             ->assertJsonPath('tagline', '冷静的长期规划者')
@@ -126,6 +133,7 @@ final class ShareSummaryContractTest extends TestCase
             'primary_cta_label',
             'primary_cta_path',
             'mbti_public_summary_v1',
+            'mbti_public_projection_v1',
         ] as $key) {
             $this->assertSame($share->json($key), $view->json($key), "share field mismatch: {$key}");
         }
@@ -135,15 +143,16 @@ final class ShareSummaryContractTest extends TestCase
             $view->json('mbti_public_summary_v1.display_type')
         );
         $this->assertSame(
-            $view->json('summary'),
-            $view->json('mbti_public_summary_v1.summary_card.share_text')
+            $view->json('type_code'),
+            $view->json('mbti_public_projection_v1.display_type')
         );
         $this->assertSame(
-            ['EI', 'SN', 'TF', 'JP', 'AT'],
-            array_map(
-                static fn (array $item): string => (string) ($item['id'] ?? ''),
-                (array) $view->json('mbti_public_summary_v1.dimensions')
-            )
+            $view->json('type_name'),
+            $view->json('mbti_public_projection_v1.profile.type_name')
+        );
+        $this->assertSame(
+            $view->json('dimensions'),
+            $view->json('mbti_public_projection_v1.dimensions')
         );
 
         $this->assertStringNotContainsString('PRIVATE_PAID_SECTION_BODY', (string) $view->getContent());

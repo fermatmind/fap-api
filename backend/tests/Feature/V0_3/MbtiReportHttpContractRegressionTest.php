@@ -133,6 +133,12 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'ENFP',
             'T'
         );
+        $this->assertStableMbtiPublicProjectionV1(
+            (array) $resp->json('mbti_public_projection_v1'),
+            'ENFP-T',
+            'ENFP',
+            'T'
+        );
     }
 
     public function test_unlocked_paid_mbti_report_http_contract_keeps_section_gate_semantics(): void
@@ -182,6 +188,12 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'INTJ',
             'A'
         );
+        $this->assertStableMbtiPublicProjectionV1(
+            (array) $resp->json('mbti_public_projection_v1'),
+            'INTJ-A',
+            'INTJ',
+            'A'
+        );
     }
 
     private function assertStableMbtiEnvelope(TestResponse $response): void
@@ -205,6 +217,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'meta',
             'report',
             'mbti_public_summary_v1',
+            'mbti_public_projection_v1',
             'scale_code',
             'scale_code_legacy',
             'scale_code_v2',
@@ -229,6 +242,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
         $this->assertIsArray($payload['meta']);
         $this->assertIsArray($payload['report']);
         $this->assertIsArray($payload['mbti_public_summary_v1']);
+        $this->assertIsArray($payload['mbti_public_projection_v1']);
         $this->assertNotSame('', trim((string) $payload['scale_code']));
         $this->assertNotSame('', trim((string) $payload['scale_code_legacy']));
         $this->assertNotSame('', trim((string) $payload['scale_code_v2']));
@@ -285,6 +299,44 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             data_get($summary, 'offer_set.cta.target_sku_effective')
                 ?? data_get($summary, 'offer_set.cta.target_sku')
                 ?? data_get($summary, 'offer_set.upgrade_sku')
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     */
+    private function assertStableMbtiPublicProjectionV1(
+        array $projection,
+        string $expectedRuntimeTypeCode,
+        string $expectedCanonicalType,
+        ?string $expectedVariant
+    ): void {
+        foreach ([
+            'runtime_type_code',
+            'canonical_type_code',
+            'display_type',
+            'variant_code',
+            'profile',
+            'summary_card',
+            'dimensions',
+            'sections',
+            'seo',
+            'offer_set',
+            '_meta',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $projection);
+        }
+
+        $this->assertSame($expectedRuntimeTypeCode, $projection['runtime_type_code'] ?? null);
+        $this->assertSame($expectedCanonicalType, $projection['canonical_type_code'] ?? null);
+        $this->assertSame($expectedRuntimeTypeCode, $projection['display_type'] ?? null);
+        $this->assertSame($expectedVariant, $projection['variant_code'] ?? null);
+        $this->assertSame(
+            ['EI', 'SN', 'TF', 'JP', 'AT'],
+            array_map(
+                static fn (array $item): string => (string) ($item['id'] ?? ''),
+                (array) ($projection['dimensions'] ?? [])
+            )
         );
     }
 

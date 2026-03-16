@@ -146,8 +146,8 @@ final class PersonalityPublicApiTest extends TestCase
 
         PersonalityProfileSection::query()->create([
             'profile_id' => (int) $profile->id,
-            'section_key' => 'core_snapshot',
-            'title' => 'Core snapshot',
+            'section_key' => 'overview',
+            'title' => 'Overview',
             'render_variant' => 'rich_text',
             'body_md' => 'INTJ body',
             'sort_order' => 10,
@@ -190,8 +190,13 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('profile.keywords.1', 'independence')
             ->assertJsonPath('profile.hero_summary', 'Strategic, independent, and long-range.')
             ->assertJsonCount(1, 'sections')
-            ->assertJsonPath('sections.0.section_key', 'core_snapshot')
+            ->assertJsonPath('sections.0.section_key', 'overview')
             ->assertJsonPath('seo_meta.seo_title', 'INTJ Personality Type')
+            ->assertJsonPath('mbti_public_projection_v1.display_type', 'INTJ')
+            ->assertJsonPath('mbti_public_projection_v1.canonical_type_code', 'INTJ')
+            ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', null)
+            ->assertJsonPath('mbti_public_projection_v1.summary_card.title', 'INTJ - Architect')
+            ->assertJsonPath('mbti_public_projection_v1.sections.0.key', 'overview')
             ->assertJsonMissingPath('revisions');
     }
 
@@ -255,6 +260,10 @@ final class PersonalityPublicApiTest extends TestCase
         $this->createSeoMeta($enProfile, [
             'seo_title' => 'INTJ Personality Type: Traits, Careers, and Growth | FermatMind',
             'seo_description' => 'Explore INTJ traits, strengths, blind spots, work style, relationships, and growth advice.',
+            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
+            'jsonld_overrides_json' => [
+                'mainEntityOfPage' => 'https://staging.fermatmind.com/en/personality/intj-a',
+            ],
         ]);
 
         $zhProfile = $this->createProfile([
@@ -271,6 +280,10 @@ final class PersonalityPublicApiTest extends TestCase
         $this->createSeoMeta($zhProfile, [
             'seo_title' => 'INTJ 人格类型：特质、职业与成长 | FermatMind',
             'seo_description' => '探索 INTJ 的特质、优势、关系模式与成长建议。',
+            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-a',
+            'jsonld_overrides_json' => [
+                'mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-a',
+            ],
         ]);
 
         $enResponse = $this->getJson('/api/v0.5/personality/INTJ/seo?locale=en');
