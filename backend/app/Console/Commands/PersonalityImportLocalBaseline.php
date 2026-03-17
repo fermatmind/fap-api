@@ -65,10 +65,16 @@ final class PersonalityImportLocalBaseline extends Command
             $this->line('upsert='.((bool) $this->option('upsert') ? '1' : '0'));
             $this->line('status_mode='.$status);
             $this->line('profiles_found='.(string) $summary['profiles_found']);
+            $this->line('variants_found='.(string) $summary['variants_found']);
             $this->line('will_create='.(string) $summary['will_create']);
             $this->line('will_update='.(string) $summary['will_update']);
             $this->line('will_skip='.(string) $summary['will_skip']);
             $this->line('revisions_to_create='.(string) $summary['revisions_to_create']);
+            $this->line('variant_will_create='.(string) $summary['variant_will_create']);
+            $this->line('variant_will_update='.(string) $summary['variant_will_update']);
+            $this->line('variant_will_skip='.(string) $summary['variant_will_skip']);
+            $this->line('variant_will_delete='.(string) $summary['variant_will_delete']);
+            $this->line('variant_revisions_to_create='.(string) $summary['variant_revisions_to_create']);
             $this->line('errors_count='.(string) $summary['errors_count']);
 
             $this->info((bool) $this->option('dry-run') ? 'dry-run complete' : 'import complete');

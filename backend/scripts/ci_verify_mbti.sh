@@ -1075,6 +1075,20 @@ if [[ "$HARD_CUTOVER_ENV_APPLIED" == "1" ]]; then
   restore_hard_cutover_env
 fi
 
+echo "[CI] personality full-32 authority gate"
+php artisan personality:import-local-baseline --dry-run --upsert --status=published
+php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml \
+  tests/Feature/PersonalityCms/PersonalityBaselineImportTest.php \
+  tests/Feature/PersonalityCms/PersonalityVariantAuthorityTest.php \
+  tests/Unit/Services/Mbti/MbtiPublicProjectionServiceTest.php \
+  tests/Feature/V0_5/PersonalityPublicApiTest.php \
+  tests/Feature/SEO/SitemapGeneratorTest.php \
+  tests/Feature/SEO/SitemapXmlTest.php \
+  tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php \
+  tests/Feature/V0_3/ShareSummaryContractTest.php \
+  tests/Feature/V0_3/MbtiCompareInviteContractTest.php
+echo "[CI] personality full-32 authority gate OK"
+
 echo "[CI] payment event provider uniqueness gate"
 php artisan test --filter PaymentEventUniquenessAcrossProvidersTest
 echo "[CI] payment event provider uniqueness gate OK"

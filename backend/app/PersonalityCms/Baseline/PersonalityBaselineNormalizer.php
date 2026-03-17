@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\PersonalityCms\Baseline;
 
 use App\Models\PersonalityProfile;
-use App\Models\PersonalityProfileSection;
+use App\Support\Mbti\MbtiCanonicalSectionRegistry;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -20,9 +20,12 @@ final class PersonalityBaselineNormalizer
     public function normalizeDocuments(array $documents, array $selectedTypes = []): array
     {
         $normalizedTypes = $this->normalizeSelectedTypes($selectedTypes);
-        $profiles = [];
+        $profilesByLocaleType = [];
         $seenByLocaleType = [];
         $seenByLocaleSlug = [];
+        $variantsByLocaleType = [];
+        $seenVariantRuntime = [];
+        $seenVariantCode = [];
 
         foreach ($documents as $document) {
             $file = (string) ($document['file'] ?? 'unknown');
@@ -89,8 +92,76 @@ final class PersonalityBaselineNormalizer
 
                 $seenByLocaleType[$typeKey] = true;
                 $seenByLocaleSlug[$slugKey] = true;
-                $profiles[] = $profile;
+                $profilesByLocaleType[$typeKey] = $profile;
             }
+
+            $variantRows = $payload['variants'] ?? [];
+            if (! is_array($variantRows)) {
+                throw new RuntimeException(sprintf(
+                    'Baseline file %s must contain a variants array when provided.',
+                    $file,
+                ));
+            }
+
+            foreach ($variantRows as $index => $row) {
+                if (! is_array($row)) {
+                    throw new RuntimeException(sprintf(
+                        'Baseline file %s contains a non-object variant row at index %d.',
+                        $file,
+                        $index,
+                    ));
+                }
+
+                $variant = $this->normalizeVariant($row, $locale, $schemaVersion, $file, $index);
+                $canonicalTypeCode = (string) $variant['canonical_type_code'];
+                $runtimeTypeCode = (string) $variant['runtime_type_code'];
+                $variantCode = (string) $variant['variant_code'];
+
+                if ($normalizedTypes !== [] && ! in_array($canonicalTypeCode, $normalizedTypes, true)) {
+                    continue;
+                }
+
+                $runtimeKey = $locale.'|'.$runtimeTypeCode;
+                $variantKey = $locale.'|'.$canonicalTypeCode.'|'.$variantCode;
+
+                if (isset($seenVariantRuntime[$runtimeKey])) {
+                    throw new RuntimeException(sprintf(
+                        'Duplicate runtime_type_code %s for locale %s in baseline file %s.',
+                        $runtimeTypeCode,
+                        $locale,
+                        $file,
+                    ));
+                }
+
+                if (isset($seenVariantCode[$variantKey])) {
+                    throw new RuntimeException(sprintf(
+                        'Duplicate variant_code %s for canonical_type_code %s locale %s in baseline file %s.',
+                        $variantCode,
+                        $canonicalTypeCode,
+                        $locale,
+                        $file,
+                    ));
+                }
+
+                $seenVariantRuntime[$runtimeKey] = true;
+                $seenVariantCode[$variantKey] = true;
+                $variantsByLocaleType[$locale.'|'.$canonicalTypeCode][] = $variant;
+            }
+        }
+
+        foreach ($variantsByLocaleType as $typeKey => $variants) {
+            if (! isset($profilesByLocaleType[$typeKey])) {
+                throw new RuntimeException(sprintf(
+                    'Baseline variants reference missing canonical profile %s.',
+                    $typeKey,
+                ));
+            }
+        }
+
+        $profiles = [];
+        foreach ($profilesByLocaleType as $typeKey => $profile) {
+            $profile['variants'] = $this->sortVariants($variantsByLocaleType[$typeKey] ?? []);
+            $profiles[] = $profile;
         }
 
         usort(
@@ -153,24 +224,32 @@ final class PersonalityBaselineNormalizer
             'org_id' => 0,
             'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
             'type_code' => $typeCode,
+            'canonical_type_code' => $typeCode,
             'slug' => $slug,
             'locale' => $locale,
             'title' => $title,
+            'type_name' => $this->normalizeNullableText($row['type_name'] ?? null),
+            'nickname' => $this->normalizeNullableText($row['nickname'] ?? null),
+            'rarity_text' => $this->normalizeNullableText($row['rarity_text'] ?? null),
+            'keywords_json' => $this->normalizeStringList($row['keywords_json'] ?? []),
             'subtitle' => $this->normalizeNullableText($row['subtitle'] ?? null),
             'excerpt' => $this->normalizeNullableText($row['excerpt'] ?? null),
             'hero_kicker' => $this->normalizeNullableText($row['hero_kicker'] ?? null),
             'hero_quote' => $this->normalizeNullableText($row['hero_quote'] ?? null),
+            'hero_summary_md' => $this->normalizeNullableText($row['hero_summary_md'] ?? null),
+            'hero_summary_html' => $this->normalizeNullableText($row['hero_summary_html'] ?? null),
             'hero_image_url' => $this->normalizeNullableText($row['hero_image_url'] ?? null),
             'status' => $this->normalizeStatus($row['status'] ?? 'published', $file, $index),
             'is_public' => $this->normalizeBool($row['is_public'] ?? true),
             'is_indexable' => $this->normalizeBool($row['is_indexable'] ?? true),
             'published_at' => $this->normalizeNullableText($row['published_at'] ?? null),
             'scheduled_at' => $this->normalizeNullableText($row['scheduled_at'] ?? null),
-            'schema_version' => $schemaVersion !== '' ? $schemaVersion : 'v1',
+            'schema_version' => $schemaVersion !== '' ? $schemaVersion : PersonalityProfile::SCHEMA_VERSION_V2,
             'sections' => $sections,
             'seo_meta' => $this->normalizeSeoMeta(
                 is_array($row['seo_meta'] ?? null) ? $row['seo_meta'] : [],
             ),
+            'variants' => [],
         ];
     }
 
@@ -180,7 +259,6 @@ final class PersonalityBaselineNormalizer
      */
     private function normalizeSections(array $rows, string $file, int $profileIndex): array
     {
-        $known = PersonalityProfileSection::SECTION_KEYS;
         $sections = [];
         $seen = [];
 
@@ -195,16 +273,7 @@ final class PersonalityBaselineNormalizer
             }
 
             $sectionKey = trim((string) ($row['section_key'] ?? ''));
-
-            if ($sectionKey === '' || ! in_array($sectionKey, $known, true)) {
-                throw new RuntimeException(sprintf(
-                    'Baseline file %s contains unsupported section_key=%s at profiles[%d].sections[%d].',
-                    $file,
-                    $sectionKey,
-                    $profileIndex,
-                    $sectionIndex,
-                ));
-            }
+            $definition = $this->canonicalSectionDefinition($sectionKey, $file, $profileIndex, $sectionIndex);
 
             if (isset($seen[$sectionKey])) {
                 throw new RuntimeException(sprintf(
@@ -215,10 +284,10 @@ final class PersonalityBaselineNormalizer
                 ));
             }
 
-            $renderVariant = trim((string) ($row['render_variant'] ?? ''));
-            if ($renderVariant === '' || ! in_array($renderVariant, PersonalityProfileSection::RENDER_VARIANTS, true)) {
+            $renderVariant = trim((string) ($row['render_variant'] ?? $definition['render_variant']));
+            if ($renderVariant === '' || $renderVariant !== (string) $definition['render_variant']) {
                 throw new RuntimeException(sprintf(
-                    'Baseline file %s contains invalid render_variant for section %s at profiles[%d].sections[%d].',
+                    'Baseline file %s contains invalid render_variant for canonical section %s at profiles[%d].sections[%d].',
                     $file,
                     $sectionKey,
                     $profileIndex,
@@ -228,12 +297,161 @@ final class PersonalityBaselineNormalizer
 
             $sections[] = [
                 'section_key' => $sectionKey,
-                'title' => $this->normalizeNullableText($row['title'] ?? null),
+                'title' => $this->normalizeNullableText($row['title'] ?? null) ?? (string) $definition['title'],
                 'render_variant' => $renderVariant,
                 'body_md' => $this->normalizeNullableText($row['body_md'] ?? null),
                 'body_html' => $this->normalizeNullableText($row['body_html'] ?? null),
                 'payload_json' => Arr::exists($row, 'payload_json') ? $this->normalizeNullableArray($row['payload_json']) : null,
-                'sort_order' => (int) ($row['sort_order'] ?? 0),
+                'sort_order' => (int) ($row['sort_order'] ?? $definition['sort_order'] ?? 0),
+                'is_enabled' => $this->normalizeBool($row['is_enabled'] ?? true),
+            ];
+
+            $seen[$sectionKey] = true;
+        }
+
+        usort(
+            $sections,
+            static fn (array $left, array $right): int => [$left['sort_order'], $left['section_key']]
+                <=> [$right['sort_order'], $right['section_key']],
+        );
+
+        return $sections;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return array<string, mixed>
+     */
+    private function normalizeVariant(
+        array $row,
+        string $locale,
+        string $schemaVersion,
+        string $file,
+        int $index,
+    ): array {
+        $canonicalTypeCode = Str::upper(trim((string) ($row['canonical_type_code'] ?? '')));
+        $variantCode = Str::upper(trim((string) ($row['variant_code'] ?? '')));
+        $runtimeTypeCode = Str::upper(trim((string) ($row['runtime_type_code'] ?? '')));
+
+        if (! in_array($canonicalTypeCode, PersonalityProfile::TYPE_CODES, true)) {
+            throw new RuntimeException(sprintf(
+                'Baseline file %s has invalid canonical_type_code at variants[%d].',
+                $file,
+                $index,
+            ));
+        }
+
+        if (! in_array($variantCode, ['A', 'T'], true)) {
+            throw new RuntimeException(sprintf(
+                'Baseline file %s has invalid variant_code at variants[%d].',
+                $file,
+                $index,
+            ));
+        }
+
+        if (preg_match('/^(?<base>[EI][SN][TF][JP])-(?<variant>[AT])$/', $runtimeTypeCode, $matches) !== 1) {
+            throw new RuntimeException(sprintf(
+                'Baseline file %s has invalid runtime_type_code at variants[%d].',
+                $file,
+                $index,
+            ));
+        }
+
+        if ((string) $matches['base'] !== $canonicalTypeCode || (string) $matches['variant'] !== $variantCode) {
+            throw new RuntimeException(sprintf(
+                'Baseline file %s has mismatched runtime_type_code/canonical_type_code/variant_code at variants[%d].',
+                $file,
+                $index,
+            ));
+        }
+
+        return [
+            'canonical_type_code' => $canonicalTypeCode,
+            'variant_code' => $variantCode,
+            'runtime_type_code' => $runtimeTypeCode,
+            'locale' => $locale,
+            'schema_version' => $schemaVersion !== '' ? $schemaVersion : PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => $this->normalizeBool($row['is_published'] ?? false),
+            'published_at' => $this->normalizeNullableText($row['published_at'] ?? null),
+            'profile_overrides' => $this->normalizeVariantProfileOverrides(
+                is_array($row['profile_overrides'] ?? null) ? $row['profile_overrides'] : [],
+            ),
+            'section_overrides' => $this->normalizeVariantSections(
+                is_array($row['section_overrides'] ?? null) ? $row['section_overrides'] : [],
+                $file,
+                $index,
+            ),
+            'seo_overrides' => $this->normalizeSeoMeta(
+                is_array($row['seo_overrides'] ?? null) ? $row['seo_overrides'] : [],
+            ),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $profileOverrides
+     * @return array<string, mixed>
+     */
+    private function normalizeVariantProfileOverrides(array $profileOverrides): array
+    {
+        return [
+            'type_name' => $this->normalizeNullableText($profileOverrides['type_name'] ?? null),
+            'nickname' => $this->normalizeNullableText($profileOverrides['nickname'] ?? null),
+            'rarity_text' => $this->normalizeNullableText($profileOverrides['rarity_text'] ?? null),
+            'keywords_json' => $this->normalizeStringList($profileOverrides['keywords_json'] ?? []),
+            'hero_summary_md' => $this->normalizeNullableText($profileOverrides['hero_summary_md'] ?? null),
+            'hero_summary_html' => $this->normalizeNullableText($profileOverrides['hero_summary_html'] ?? null),
+        ];
+    }
+
+    /**
+     * @param  array<int, mixed>  $rows
+     * @return array<int, array<string, mixed>>
+     */
+    private function normalizeVariantSections(array $rows, string $file, int $variantIndex): array
+    {
+        $sections = [];
+        $seen = [];
+
+        foreach ($rows as $sectionIndex => $row) {
+            if (! is_array($row)) {
+                throw new RuntimeException(sprintf(
+                    'Baseline file %s contains a non-object variant section at variants[%d].section_overrides[%d].',
+                    $file,
+                    $variantIndex,
+                    $sectionIndex,
+                ));
+            }
+
+            $sectionKey = trim((string) ($row['section_key'] ?? ''));
+            $definition = $this->canonicalSectionDefinition($sectionKey, $file, $variantIndex, $sectionIndex, true);
+
+            if (isset($seen[$sectionKey])) {
+                throw new RuntimeException(sprintf(
+                    'Baseline file %s contains duplicate variant section_key=%s at variants[%d].',
+                    $file,
+                    $sectionKey,
+                    $variantIndex,
+                ));
+            }
+
+            $renderVariant = trim((string) ($row['render_variant'] ?? $definition['render_variant']));
+            if ($renderVariant === '' || $renderVariant !== (string) $definition['render_variant']) {
+                throw new RuntimeException(sprintf(
+                    'Baseline file %s contains invalid render_variant for variant section %s at variants[%d].section_overrides[%d].',
+                    $file,
+                    $sectionKey,
+                    $variantIndex,
+                    $sectionIndex,
+                ));
+            }
+
+            $sections[] = [
+                'section_key' => $sectionKey,
+                'render_variant' => $renderVariant,
+                'body_md' => $this->normalizeNullableText($row['body_md'] ?? null),
+                'body_html' => $this->normalizeNullableText($row['body_html'] ?? null),
+                'payload_json' => Arr::exists($row, 'payload_json') ? $this->normalizeNullableArray($row['payload_json']) : null,
+                'sort_order' => (int) ($row['sort_order'] ?? $definition['sort_order'] ?? 0),
                 'is_enabled' => $this->normalizeBool($row['is_enabled'] ?? true),
             ];
 
@@ -354,6 +572,29 @@ final class PersonalityBaselineNormalizer
     }
 
     /**
+     * @return list<string>
+     */
+    private function normalizeStringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $normalized = [];
+
+        foreach ($value as $item) {
+            $candidate = $this->normalizeNullableText($item);
+            if ($candidate === null) {
+                continue;
+            }
+
+            $normalized[$candidate] = true;
+        }
+
+        return array_values(array_keys($normalized));
+    }
+
+    /**
      * @return array<string, mixed>|array<int, mixed>|null
      */
     private function normalizeNullableArray(mixed $value): ?array
@@ -367,5 +608,45 @@ final class PersonalityBaselineNormalizer
         }
 
         return $value === [] ? null : $value;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function canonicalSectionDefinition(
+        string $sectionKey,
+        string $file,
+        int $rowIndex,
+        int $sectionIndex,
+        bool $isVariant = false,
+    ): array {
+        try {
+            return MbtiCanonicalSectionRegistry::definition($sectionKey);
+        } catch (\InvalidArgumentException) {
+            throw new RuntimeException(sprintf(
+                $isVariant
+                    ? 'Baseline file %s contains unsupported variant section_key=%s at variants[%d].section_overrides[%d].'
+                    : 'Baseline file %s contains unsupported section_key=%s at profiles[%d].sections[%d].',
+                $file,
+                $sectionKey,
+                $rowIndex,
+                $sectionIndex,
+            ));
+        }
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $variants
+     * @return array<int, array<string, mixed>>
+     */
+    private function sortVariants(array $variants): array
+    {
+        usort(
+            $variants,
+            static fn (array $left, array $right): int => [$left['variant_code'], $left['runtime_type_code']]
+                <=> [$right['variant_code'], $right['runtime_type_code']],
+        );
+
+        return $variants;
     }
 }

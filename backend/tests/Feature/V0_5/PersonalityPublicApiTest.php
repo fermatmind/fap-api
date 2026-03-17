@@ -8,6 +8,8 @@ use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileSeoMeta;
+use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantSeoMeta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -155,8 +157,8 @@ final class PersonalityPublicApiTest extends TestCase
         ]);
         PersonalityProfileSection::query()->create([
             'profile_id' => (int) $profile->id,
-            'section_key' => 'strengths',
-            'title' => 'Strengths',
+            'section_key' => 'growth.strengths',
+            'title' => 'Growth strengths',
             'render_variant' => 'bullets',
             'payload_json' => ['items' => [['title' => 'Strategic thinking']]],
             'sort_order' => 20,
@@ -265,6 +267,20 @@ final class PersonalityPublicApiTest extends TestCase
                 'mainEntityOfPage' => 'https://staging.fermatmind.com/en/personality/intj-a',
             ],
         ]);
+        $enVariant = $this->createVariant($enProfile, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($enVariant, [
+            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
+            'jsonld_overrides_json' => [
+                'mainEntityOfPage' => 'https://staging.fermatmind.com/en/personality/intj-a',
+            ],
+        ]);
 
         $zhProfile = $this->createProfile([
             'type_code' => 'INTJ',
@@ -283,6 +299,20 @@ final class PersonalityPublicApiTest extends TestCase
             'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-a',
             'jsonld_overrides_json' => [
                 'mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-a',
+            ],
+        ]);
+        $zhVariant = $this->createVariant($zhProfile, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($zhVariant, [
+            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-t',
+            'jsonld_overrides_json' => [
+                'mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-t',
             ],
         ]);
 
@@ -309,7 +339,7 @@ final class PersonalityPublicApiTest extends TestCase
 
     public function test_variant_route_key_remains_invalid_for_public_base_route(): void
     {
-        $this->createProfile([
+        $profile = $this->createProfile([
             'type_code' => 'INTJ',
             'slug' => 'intj',
             'status' => 'published',
@@ -317,6 +347,20 @@ final class PersonalityPublicApiTest extends TestCase
             'published_at' => now()->subMinute(),
             'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
         ]);
+        $this->createVariant($profile, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $this->getJson('/api/v0.5/personality/intj?locale=en')
+            ->assertOk()
+            ->assertJsonPath('profile.canonical_type_code', 'INTJ')
+            ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', null)
+            ->assertJsonPath('mbti_public_projection_v1.display_type', 'INTJ');
 
         $this->getJson('/api/v0.5/personality/intj-a?locale=en')
             ->assertStatus(404)
@@ -355,6 +399,51 @@ final class PersonalityPublicApiTest extends TestCase
         /** @var PersonalityProfileSeoMeta */
         return PersonalityProfileSeoMeta::query()->create(array_merge([
             'profile_id' => (int) $profile->id,
+            'seo_title' => null,
+            'seo_description' => null,
+            'canonical_url' => null,
+            'og_title' => null,
+            'og_description' => null,
+            'og_image_url' => null,
+            'twitter_title' => null,
+            'twitter_description' => null,
+            'twitter_image_url' => null,
+            'robots' => null,
+            'jsonld_overrides_json' => null,
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createVariant(PersonalityProfile $profile, array $overrides = []): PersonalityProfileVariant
+    {
+        /** @var PersonalityProfileVariant */
+        return PersonalityProfileVariant::query()->create(array_merge([
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => (string) $profile->type_code,
+            'variant_code' => 'A',
+            'runtime_type_code' => ((string) $profile->type_code).'-A',
+            'type_name' => 'Variant type',
+            'nickname' => 'Variant nickname',
+            'rarity_text' => 'About 3%',
+            'keywords_json' => ['variant'],
+            'hero_summary_md' => 'Variant summary',
+            'hero_summary_html' => null,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createVariantSeoMeta(PersonalityProfileVariant $variant, array $overrides = []): PersonalityProfileVariantSeoMeta
+    {
+        /** @var PersonalityProfileVariantSeoMeta */
+        return PersonalityProfileVariantSeoMeta::query()->create(array_merge([
+            'personality_profile_variant_id' => (int) $variant->id,
             'seo_title' => null,
             'seo_description' => null,
             'canonical_url' => null,

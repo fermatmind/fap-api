@@ -1,20 +1,26 @@
 {
   "meta": {
-    "schema_version": "v1",
+    "schema_version": "v2",
     "scale_code": "MBTI",
     "locale": "en",
-    "source": "fap-web careerRecommendationProfiles + personality.ts deterministic transforms",
-    "generated_at": "2026-03-08T00:00:00Z"
+    "source": "committed canonical base authority + placeholder variant authority until raw 32 source exists",
+    "generated_at": "2026-03-17T00:00:00Z"
   },
   "profiles": [
     {
       "type_code": "ENFJ",
       "slug": "enfj",
       "title": "ENFJ - Protagonist",
+      "type_name": "Protagonist",
+      "nickname": "Protagonist",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ENFJ profiles.",
       "hero_kicker": "Protagonist",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ENFJ profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -23,18 +29,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ENFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -54,12 +60,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -75,34 +81,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Lawyer, Teacher, Machine Learning Engineer.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Lawyer, Teacher, Machine Learning Engineer.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -147,7 +163,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -169,10 +185,16 @@
       "type_code": "ENFP",
       "slug": "enfp",
       "title": "ENFP - Campaigner",
+      "type_name": "Campaigner",
+      "nickname": "Campaigner",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ENFP profiles.",
       "hero_kicker": "Campaigner",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ENFP profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -181,18 +203,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ENFP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -212,12 +234,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -233,34 +255,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Physician, Data Scientist, Frontend Engineer.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Physician, Data Scientist, Frontend Engineer.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -305,7 +337,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -327,10 +359,16 @@
       "type_code": "ENTJ",
       "slug": "entj",
       "title": "ENTJ - Commander",
+      "type_name": "Commander",
+      "nickname": "Commander",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ENTJ profiles.",
       "hero_kicker": "Commander",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ENTJ profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -339,18 +377,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ENTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -370,12 +408,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -391,34 +429,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like UI/UX Designer, Digital Marketing Manager, Lawyer.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like UI/UX Designer, Digital Marketing Manager, Lawyer.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -463,7 +511,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -485,10 +533,16 @@
       "type_code": "ENTP",
       "slug": "entp",
       "title": "ENTP - Debater",
+      "type_name": "Debater",
+      "nickname": "Debater",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ENTP profiles.",
       "hero_kicker": "Debater",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ENTP profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -497,18 +551,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ENTP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -528,12 +582,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -549,34 +603,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Psychological Counselor, Investment Analyst, Physician.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Psychological Counselor, Investment Analyst, Physician.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -621,7 +685,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -643,10 +707,16 @@
       "type_code": "ESFJ",
       "slug": "esfj",
       "title": "ESFJ - Consul",
+      "type_name": "Consul",
+      "nickname": "Consul",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ESFJ profiles.",
       "hero_kicker": "Consul",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ESFJ profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -655,18 +725,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ESFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -686,12 +756,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -707,34 +777,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Frontend Engineer, Fullstack Engineer, Cloud Architect.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Frontend Engineer, Fullstack Engineer, Cloud Architect.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -779,7 +859,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -801,10 +881,16 @@
       "type_code": "ESFP",
       "slug": "esfp",
       "title": "ESFP - Entertainer",
+      "type_name": "Entertainer",
+      "nickname": "Entertainer",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ESFP profiles.",
       "hero_kicker": "Entertainer",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ESFP profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -813,18 +899,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ESFP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -844,12 +930,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -865,34 +951,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Cloud Architect, HR Business Partner, Management Consultant.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Cloud Architect, HR Business Partner, Management Consultant.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -937,7 +1033,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -959,10 +1055,16 @@
       "type_code": "ESTJ",
       "slug": "estj",
       "title": "ESTJ - Executive",
+      "type_name": "Executive",
+      "nickname": "Executive",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ESTJ profiles.",
       "hero_kicker": "Executive",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ESTJ profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -971,18 +1073,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ESTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1002,12 +1104,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1023,34 +1125,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Machine Learning Engineer, Backend Engineer, Cybersecurity Analyst.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Machine Learning Engineer, Backend Engineer, Cybersecurity Analyst.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -1095,7 +1207,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -1117,10 +1229,16 @@
       "type_code": "ESTP",
       "slug": "estp",
       "title": "ESTP - Entrepreneur",
+      "type_name": "Entrepreneur",
+      "nickname": "Entrepreneur",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ESTP profiles.",
       "hero_kicker": "Entrepreneur",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ESTP profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -1129,18 +1247,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ESTP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1160,12 +1278,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1181,34 +1299,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Cybersecurity Analyst, Operations Manager, Sales Manager.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Cybersecurity Analyst, Operations Manager, Sales Manager.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -1253,7 +1381,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -1275,10 +1403,16 @@
       "type_code": "INFJ",
       "slug": "infj",
       "title": "INFJ - Advocate",
+      "type_name": "Advocate",
+      "nickname": "Advocate",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for INFJ profiles.",
       "hero_kicker": "Advocate",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for INFJ profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -1287,18 +1421,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for INFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1318,12 +1452,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1339,34 +1473,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Digital Marketing Manager, Lawyer, Teacher.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Digital Marketing Manager, Lawyer, Teacher.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -1411,7 +1555,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -1433,10 +1577,16 @@
       "type_code": "INFP",
       "slug": "infp",
       "title": "INFP - Mediator",
+      "type_name": "Mediator",
+      "nickname": "Mediator",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for INFP profiles.",
       "hero_kicker": "Mediator",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for INFP profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -1445,18 +1595,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for INFP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1476,12 +1626,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1497,34 +1647,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Investment Analyst, Physician, Data Scientist.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Investment Analyst, Physician, Data Scientist.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -1569,7 +1729,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -1591,10 +1751,16 @@
       "type_code": "INTJ",
       "slug": "intj",
       "title": "INTJ - Architect",
+      "type_name": "Architect",
+      "nickname": "Architect",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for INTJ profiles.",
       "hero_kicker": "Architect",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for INTJ profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -1603,18 +1769,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for INTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1634,12 +1800,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1655,34 +1821,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Product Manager, UI/UX Designer, Digital Marketing Manager.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Product Manager, UI/UX Designer, Digital Marketing Manager.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -1727,7 +1903,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -1749,10 +1925,16 @@
       "type_code": "INTP",
       "slug": "intp",
       "title": "INTP - Logician",
+      "type_name": "Logician",
+      "nickname": "Logician",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for INTP profiles.",
       "hero_kicker": "Logician",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for INTP profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -1761,18 +1943,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for INTP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1792,12 +1974,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1813,34 +1995,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Data Analyst, Psychological Counselor, Investment Analyst.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Data Analyst, Psychological Counselor, Investment Analyst.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -1885,7 +2077,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -1907,10 +2099,16 @@
       "type_code": "ISFJ",
       "slug": "isfj",
       "title": "ISFJ - Defender",
+      "type_name": "Defender",
+      "nickname": "Defender",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ISFJ profiles.",
       "hero_kicker": "Defender",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ISFJ profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -1919,18 +2117,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ISFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1950,12 +2148,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -1971,34 +2169,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Data Scientist, Frontend Engineer, Fullstack Engineer.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Data Scientist, Frontend Engineer, Fullstack Engineer.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -2043,7 +2251,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -2065,10 +2273,16 @@
       "type_code": "ISFP",
       "slug": "isfp",
       "title": "ISFP - Adventurer",
+      "type_name": "Adventurer",
+      "nickname": "Adventurer",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ISFP profiles.",
       "hero_kicker": "Adventurer",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ISFP profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -2077,18 +2291,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ISFP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -2108,12 +2322,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -2129,34 +2343,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Fullstack Engineer, Cloud Architect, HR Business Partner.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Fullstack Engineer, Cloud Architect, HR Business Partner.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -2201,7 +2425,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -2223,10 +2447,16 @@
       "type_code": "ISTJ",
       "slug": "istj",
       "title": "ISTJ - Logistician",
+      "type_name": "Logistician",
+      "nickname": "Logistician",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ISTJ profiles.",
       "hero_kicker": "Logistician",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ISTJ profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -2235,18 +2465,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ISTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -2266,12 +2496,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -2287,34 +2517,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Teacher, Machine Learning Engineer, Backend Engineer.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Teacher, Machine Learning Engineer, Backend Engineer.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -2359,7 +2599,7 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
@@ -2381,10 +2621,16 @@
       "type_code": "ISTP",
       "slug": "istp",
       "title": "ISTP - Virtuoso",
+      "type_name": "Virtuoso",
+      "nickname": "Virtuoso",
+      "rarity_text": null,
+      "keywords_json": [],
       "subtitle": null,
       "excerpt": "Role recommendations and work-environment guidance for ISTP profiles.",
       "hero_kicker": "Virtuoso",
       "hero_quote": null,
+      "hero_summary_md": "Role recommendations and work-environment guidance for ISTP profiles.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -2393,18 +2639,18 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "Role recommendations and work-environment guidance for ISTP profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -2424,12 +2670,12 @@
               }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "growth_edges",
-          "title": "Growth edges",
+          "section_key": "growth.weaknesses",
+          "title": "Growth weaknesses",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
@@ -2445,34 +2691,44 @@
               }
             ]
           },
-          "sort_order": 30,
+          "sort_order": 110,
           "is_enabled": true
         },
         {
-          "section_key": "work_style",
-          "title": "Work style",
+          "section_key": "growth.summary",
+          "title": "Growth summary",
           "render_variant": "rich_text",
           "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 90,
+          "is_enabled": true
+        },
+        {
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 140,
+          "is_enabled": true
+        },
+        {
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
+          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Backend Engineer, Cybersecurity Analyst, Operations Manager.",
           "body_html": null,
           "payload_json": null,
           "sort_order": 40,
           "is_enabled": true
         },
         {
-          "section_key": "relationships",
-          "title": "Relationships",
-          "render_variant": "rich_text",
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "body_html": null,
-          "payload_json": null,
-          "sort_order": 50,
-          "is_enabled": true
-        },
-        {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
-          "body_md": "You usually perform best in high-autonomy role scope, clear success metrics, and consistent feedback cadence. Prioritize options like Backend Engineer, Cybersecurity Analyst, Operations Manager.",
+          "section_key": "career.preferred_roles",
+          "title": "Preferred roles",
+          "render_variant": "preferred_role_list",
+          "body_md": null,
           "body_html": null,
           "payload_json": {
             "recommended_jobs": [
@@ -2517,13 +2773,943 @@
             ],
             "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
           },
-          "sort_order": 80,
+          "sort_order": 70,
           "is_enabled": true
         }
       ],
       "seo_meta": {
         "seo_title": "ISTP Personality Guide",
         "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISTP personality type.",
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    }
+  ],
+  "variants": [
+    {
+      "runtime_type_code": "ENFJ-A",
+      "canonical_type_code": "ENFJ",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENFJ-T",
+      "canonical_type_code": "ENFJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENFP-A",
+      "canonical_type_code": "ENFP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENFP-T",
+      "canonical_type_code": "ENFP",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENTJ-A",
+      "canonical_type_code": "ENTJ",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENTJ-T",
+      "canonical_type_code": "ENTJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENTP-A",
+      "canonical_type_code": "ENTP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENTP-T",
+      "canonical_type_code": "ENTP",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ESFJ-A",
+      "canonical_type_code": "ESFJ",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ESFJ-T",
+      "canonical_type_code": "ESFJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ESFP-A",
+      "canonical_type_code": "ESFP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ESFP-T",
+      "canonical_type_code": "ESFP",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ESTJ-A",
+      "canonical_type_code": "ESTJ",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ESTJ-T",
+      "canonical_type_code": "ESTJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ESTP-A",
+      "canonical_type_code": "ESTP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ESTP-T",
+      "canonical_type_code": "ESTP",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INFJ-A",
+      "canonical_type_code": "INFJ",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INFJ-T",
+      "canonical_type_code": "INFJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INFP-A",
+      "canonical_type_code": "INFP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INFP-T",
+      "canonical_type_code": "INFP",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INTJ-A",
+      "canonical_type_code": "INTJ",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INTJ-T",
+      "canonical_type_code": "INTJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INTP-A",
+      "canonical_type_code": "INTP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INTP-T",
+      "canonical_type_code": "INTP",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ISFJ-A",
+      "canonical_type_code": "ISFJ",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ISFJ-T",
+      "canonical_type_code": "ISFJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ISFP-A",
+      "canonical_type_code": "ISFP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ISFP-T",
+      "canonical_type_code": "ISFP",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ISTJ-A",
+      "canonical_type_code": "ISTJ",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ISTJ-T",
+      "canonical_type_code": "ISTJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ISTP-A",
+      "canonical_type_code": "ISTP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ISTP-T",
+      "canonical_type_code": "ISTP",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": null,
+        "nickname": null,
+        "rarity_text": null,
+        "keywords_json": [],
+        "hero_summary_md": null,
+        "hero_summary_html": null
+      },
+      "section_overrides": [],
+      "seo_overrides": {
+        "seo_title": null,
+        "seo_description": null,
         "canonical_url": null,
         "og_title": null,
         "og_description": null,
