@@ -6,6 +6,8 @@ namespace Tests\Feature\PersonalityCms;
 
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantSection;
+use App\Models\PersonalityProfileVariantSeoMeta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,50 +15,52 @@ final class PersonalityVariantAuthorityTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_variant_authority_rows_can_coexist_while_public_route_stays_base_only(): void
+    public function test_imported_variant_authority_rows_can_coexist_while_public_route_stays_base_only(): void
     {
-        $profile = PersonalityProfile::query()->create([
-            'org_id' => 0,
-            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
-            'type_code' => 'ENFJ',
-            'slug' => 'enfj',
-            'locale' => 'en',
-            'title' => 'ENFJ Personality',
-            'status' => 'published',
-            'is_public' => true,
-            'is_indexable' => true,
-            'published_at' => now()->subMinute(),
-            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
-        ]);
+        $this->artisan('personality:import-local-baseline', [
+            '--locale' => ['en'],
+            '--type' => ['ENFP'],
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => 'tests/Fixtures/personality_baseline',
+        ])
+            ->expectsOutputToContain('profiles_found=1')
+            ->expectsOutputToContain('variants_found=2')
+            ->expectsOutputToContain('variant_will_create=2')
+            ->assertExitCode(0);
 
-        $assertive = PersonalityProfileVariant::query()->create([
-            'personality_profile_id' => (int) $profile->id,
-            'canonical_type_code' => 'ENFJ',
-            'variant_code' => 'A',
-            'runtime_type_code' => 'ENFJ-A',
-            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
-        ]);
+        $profile = PersonalityProfile::query()
+            ->withoutGlobalScopes()
+            ->where('type_code', 'ENFP')
+            ->where('locale', 'en')
+            ->firstOrFail();
 
-        $turbulent = PersonalityProfileVariant::query()->create([
-            'personality_profile_id' => (int) $profile->id,
-            'canonical_type_code' => 'ENFJ',
-            'variant_code' => 'T',
-            'runtime_type_code' => 'ENFJ-T',
-            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
-        ]);
+        $assertive = PersonalityProfileVariant::query()
+            ->where('personality_profile_id', (int) $profile->id)
+            ->where('runtime_type_code', 'ENFP-A')
+            ->firstOrFail();
 
-        $this->assertSame('ENFJ', $profile->canonical_type_code);
+        $turbulent = PersonalityProfileVariant::query()
+            ->where('personality_profile_id', (int) $profile->id)
+            ->where('runtime_type_code', 'ENFP-T')
+            ->firstOrFail();
+
+        $this->assertSame('ENFP', $profile->canonical_type_code);
         $this->assertSame('A', $assertive->variant_code);
-        $this->assertSame('ENFJ-A', $assertive->runtime_type_code);
+        $this->assertSame('ENFP-A', $assertive->runtime_type_code);
         $this->assertSame('T', $turbulent->variant_code);
-        $this->assertSame('ENFJ-T', $turbulent->runtime_type_code);
+        $this->assertSame('ENFP-T', $turbulent->runtime_type_code);
+        $this->assertSame(2, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(2, PersonalityProfileVariantSeoMeta::query()->count());
 
-        $this->getJson('/api/v0.5/personality/enfj?locale=en')
+        $this->getJson('/api/v0.5/personality/enfp?locale=en')
             ->assertOk()
-            ->assertJsonPath('profile.type_code', 'ENFJ')
-            ->assertJsonPath('profile.canonical_type_code', 'ENFJ');
+            ->assertJsonPath('profile.type_code', 'ENFP')
+            ->assertJsonPath('profile.canonical_type_code', 'ENFP')
+            ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', null)
+            ->assertJsonPath('mbti_public_projection_v1.canonical_type_code', 'ENFP');
 
-        $this->getJson('/api/v0.5/personality/enfj-a?locale=en')
+        $this->getJson('/api/v0.5/personality/enfp-a?locale=en')
             ->assertStatus(404);
     }
 }

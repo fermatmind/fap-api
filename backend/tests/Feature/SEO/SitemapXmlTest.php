@@ -7,6 +7,8 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSeoMeta;
+use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Models\TopicProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -138,6 +140,52 @@ class SitemapXmlTest extends TestCase
             'jsonld_overrides_json' => [
                 'mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-a',
             ],
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+        $personalityEnVariant = PersonalityProfileVariant::query()->create([
+            'personality_profile_id' => (int) $personalityEn->id,
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'type_name' => 'Architect Assertive',
+            'nickname' => 'Assertive strategist',
+            'rarity_text' => 'About 3%',
+            'keywords_json' => ['assertive'],
+            'hero_summary_md' => 'Variant summary',
+            'hero_summary_html' => null,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 11, 5, 0),
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+        PersonalityProfileVariantSeoMeta::query()->create([
+            'personality_profile_variant_id' => (int) $personalityEnVariant->id,
+            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+        $personalityZhVariant = PersonalityProfileVariant::query()->create([
+            'personality_profile_id' => (int) $personalityZh->id,
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'type_name' => '建筑师-T',
+            'nickname' => '反思策划者',
+            'rarity_text' => '约 2%',
+            'keywords_json' => ['反思'],
+            'hero_summary_md' => '变体摘要',
+            'hero_summary_html' => null,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 5, 0),
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+        PersonalityProfileVariantSeoMeta::query()->create([
+            'personality_profile_variant_id' => (int) $personalityZhVariant->id,
+            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-t',
             'created_at' => $nowB,
             'updated_at' => $nowB,
         ]);

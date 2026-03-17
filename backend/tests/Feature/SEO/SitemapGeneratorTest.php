@@ -7,6 +7,8 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSeoMeta;
+use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Models\TopicProfile;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
@@ -227,6 +229,28 @@ class SitemapGeneratorTest extends TestCase
         $this->createPersonalitySeoMeta($eligibleZh, [
             'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-a',
             'jsonld_overrides_json' => ['mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-a'],
+        ]);
+        $eligibleEnVariant = $this->createPersonalityVariant($eligibleEn, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => Carbon::create(2026, 3, 7, 9, 15, 0, 'UTC'),
+        ]);
+        $this->createPersonalityVariantSeoMeta($eligibleEnVariant, [
+            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
+        ]);
+        $eligibleZhVariant = $this->createPersonalityVariant($eligibleZh, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => Carbon::create(2026, 3, 7, 11, 15, 0, 'UTC'),
+        ]);
+        $this->createPersonalityVariantSeoMeta($eligibleZhVariant, [
+            'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-t',
         ]);
 
         $this->createPersonalityProfile([
@@ -658,6 +682,51 @@ class SitemapGeneratorTest extends TestCase
         /** @var PersonalityProfileSeoMeta */
         return PersonalityProfileSeoMeta::query()->create(array_merge([
             'profile_id' => (int) $profile->id,
+            'seo_title' => null,
+            'seo_description' => null,
+            'canonical_url' => null,
+            'og_title' => null,
+            'og_description' => null,
+            'og_image_url' => null,
+            'twitter_title' => null,
+            'twitter_description' => null,
+            'twitter_image_url' => null,
+            'robots' => null,
+            'jsonld_overrides_json' => null,
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createPersonalityVariant(PersonalityProfile $profile, array $overrides = []): PersonalityProfileVariant
+    {
+        /** @var PersonalityProfileVariant */
+        return PersonalityProfileVariant::query()->create(array_merge([
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => (string) $profile->type_code,
+            'variant_code' => 'A',
+            'runtime_type_code' => ((string) $profile->type_code).'-A',
+            'type_name' => 'Variant type',
+            'nickname' => 'Variant nickname',
+            'rarity_text' => 'About 3%',
+            'keywords_json' => ['variant'],
+            'hero_summary_md' => 'Variant summary',
+            'hero_summary_html' => null,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => Carbon::create(2026, 3, 7, 8, 15, 0, 'UTC'),
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createPersonalityVariantSeoMeta(PersonalityProfileVariant $variant, array $overrides = []): PersonalityProfileVariantSeoMeta
+    {
+        /** @var PersonalityProfileVariantSeoMeta */
+        return PersonalityProfileVariantSeoMeta::query()->create(array_merge([
+            'personality_profile_variant_id' => (int) $variant->id,
             'seo_title' => null,
             'seo_description' => null,
             'canonical_url' => null,

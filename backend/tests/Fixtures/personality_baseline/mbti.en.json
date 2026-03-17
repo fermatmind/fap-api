@@ -1,6 +1,6 @@
 {
   "meta": {
-    "schema_version": "v1",
+    "schema_version": "v2",
     "scale_code": "MBTI",
     "locale": "en",
     "source": "test fixture",
@@ -11,10 +11,19 @@
       "type_code": "INTJ",
       "slug": "intj",
       "title": "INTJ - Architect",
+      "type_name": "Architect",
+      "nickname": "Systems builder",
+      "rarity_text": "About 2%",
+      "keywords_json": [
+        "strategy",
+        "independence"
+      ],
       "subtitle": null,
       "excerpt": "Strategic and future-oriented.",
       "hero_kicker": "Architect",
       "hero_quote": null,
+      "hero_summary_md": "Strategic, independent, and long-range.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -23,46 +32,44 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "INTJs often focus on structure, strategy, and long-range planning.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
+          "section_key": "growth.strengths",
+          "title": "Growth strengths",
           "render_variant": "bullets",
           "body_md": null,
           "body_html": null,
           "payload_json": {
             "items": [
-              { "title": "System thinking", "body": null },
-              { "title": "Strategic planning", "body": null }
+              {
+                "title": "System thinking",
+                "body": null
+              },
+              {
+                "title": "Strategic planning",
+                "body": null
+              }
             ]
           },
-          "sort_order": 20,
+          "sort_order": 100,
           "is_enabled": true
         },
         {
-          "section_key": "career_fit",
-          "title": "Career fit",
-          "render_variant": "cards",
+          "section_key": "career.summary",
+          "title": "Career summary",
+          "render_variant": "rich_text",
           "body_md": "INTJs usually perform best when the environment is structured and autonomous.",
           "body_html": null,
-          "payload_json": {
-            "recommended_jobs": [
-              { "slug": "product-manager", "title": "Product Manager" }
-            ],
-            "avoid_jobs": [
-              { "slug": "teacher", "title": "Teacher" }
-            ],
-            "work_env": "Clear metrics and independent execution"
-          },
-          "sort_order": 80,
+          "payload_json": null,
+          "sort_order": 40,
           "is_enabled": true
         }
       ],
@@ -84,10 +91,19 @@
       "type_code": "ENFP",
       "slug": "enfp",
       "title": "ENFP - Campaigner",
+      "type_name": "Campaigner",
+      "nickname": "Idea spark",
+      "rarity_text": "About 8%",
+      "keywords_json": [
+        "curiosity",
+        "energy"
+      ],
       "subtitle": null,
       "excerpt": "Curious, energetic, and possibility-driven.",
       "hero_kicker": "Campaigner",
       "hero_quote": null,
+      "hero_summary_md": "ENFPs often thrive when they can connect ideas, people, and momentum.",
+      "hero_summary_html": null,
       "hero_image_url": null,
       "status": "published",
       "is_public": true,
@@ -96,34 +112,199 @@
       "scheduled_at": null,
       "sections": [
         {
-          "section_key": "core_snapshot",
-          "title": "Core snapshot",
+          "section_key": "overview",
+          "title": "Overview",
           "render_variant": "rich_text",
           "body_md": "ENFPs often thrive when they can connect ideas, people, and momentum.",
           "body_html": null,
           "payload_json": null,
-          "sort_order": 10,
+          "sort_order": 20,
           "is_enabled": true
         },
         {
-          "section_key": "strengths",
-          "title": "Strengths",
-          "render_variant": "bullets",
-          "body_md": null,
+          "section_key": "relationships.summary",
+          "title": "Relationships summary",
+          "render_variant": "rich_text",
+          "body_md": "ENFPs look for openness, warmth, and room to grow together.",
           "body_html": null,
-          "payload_json": {
-            "items": [
-              { "title": "Creative range", "body": null },
-              { "title": "High social energy", "body": null }
-            ]
-          },
-          "sort_order": 20,
+          "payload_json": null,
+          "sort_order": 140,
           "is_enabled": true
         }
       ],
       "seo_meta": {
         "seo_title": "ENFP Personality Guide",
         "seo_description": "Discover strengths, risks, and career fit for ENFP.",
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    }
+  ],
+  "variants": [
+    {
+      "runtime_type_code": "INTJ-A",
+      "canonical_type_code": "INTJ",
+      "variant_code": "A",
+      "is_published": true,
+      "published_at": "2026-03-08T00:00:00Z",
+      "profile_overrides": {
+        "type_name": "Architect Assertive",
+        "nickname": "Assertive strategist",
+        "rarity_text": "About 3%",
+        "keywords_json": [
+          "assertive",
+          "strategy"
+        ],
+        "hero_summary_md": "More steady under pressure and quicker to trust the plan.",
+        "hero_summary_html": null
+      },
+      "section_overrides": [
+        {
+          "section_key": "overview",
+          "render_variant": "rich_text",
+          "body_md": "INTJ-A tends to stay composed while executing long-range plans.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 20,
+          "is_enabled": true
+        }
+      ],
+      "seo_overrides": {
+        "seo_title": "INTJ-A Personality Guide",
+        "seo_description": "Assertive INTJ strengths, blind spots, and growth advice.",
+        "canonical_url": null,
+        "og_title": "INTJ-A Personality Guide",
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "INTJ-T",
+      "canonical_type_code": "INTJ",
+      "variant_code": "T",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": "Architect Turbulent",
+        "nickname": "Reflective strategist",
+        "rarity_text": "About 2%",
+        "keywords_json": [
+          "reflective",
+          "precision"
+        ],
+        "hero_summary_md": "More self-questioning and more likely to refine the system twice.",
+        "hero_summary_html": null
+      },
+      "section_overrides": [
+        {
+          "section_key": "overview",
+          "render_variant": "rich_text",
+          "body_md": "INTJ-T often double-checks assumptions before locking the system in place.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 20,
+          "is_enabled": true
+        }
+      ],
+      "seo_overrides": {
+        "seo_title": "INTJ-T Personality Guide",
+        "seo_description": "Turbulent INTJ strengths, blind spots, and growth advice.",
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENFP-A",
+      "canonical_type_code": "ENFP",
+      "variant_code": "A",
+      "is_published": false,
+      "published_at": null,
+      "profile_overrides": {
+        "type_name": "Campaigner Assertive",
+        "nickname": "Confident spark",
+        "rarity_text": "About 7%",
+        "keywords_json": [
+          "bold",
+          "optimistic"
+        ],
+        "hero_summary_md": "More comfortable leading with momentum and positive energy.",
+        "hero_summary_html": null
+      },
+      "section_overrides": [
+        {
+          "section_key": "overview",
+          "render_variant": "rich_text",
+          "body_md": "ENFP-A brings visible confidence into new people-and-ideas spaces.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 20,
+          "is_enabled": true
+        }
+      ],
+      "seo_overrides": {
+        "seo_title": "ENFP-A Personality Guide",
+        "seo_description": "Assertive ENFP strengths, blind spots, and growth advice.",
+        "canonical_url": null,
+        "og_title": null,
+        "og_description": null,
+        "og_image_url": null,
+        "twitter_title": null,
+        "twitter_description": null,
+        "twitter_image_url": null,
+        "robots": null,
+        "jsonld_overrides_json": null
+      }
+    },
+    {
+      "runtime_type_code": "ENFP-T",
+      "canonical_type_code": "ENFP",
+      "variant_code": "T",
+      "is_published": true,
+      "published_at": "2026-03-08T00:00:00Z",
+      "profile_overrides": {
+        "type_name": "Campaigner Turbulent",
+        "nickname": "Sensitive spark",
+        "rarity_text": "About 9%",
+        "keywords_json": [
+          "sensitive",
+          "adaptive"
+        ],
+        "hero_summary_md": "More sensitive to feedback and more likely to rework the message.",
+        "hero_summary_html": null
+      },
+      "section_overrides": [
+        {
+          "section_key": "overview",
+          "render_variant": "rich_text",
+          "body_md": "ENFP-T processes emotional feedback deeply before re-entering the room.",
+          "body_html": null,
+          "payload_json": null,
+          "sort_order": 20,
+          "is_enabled": true
+        }
+      ],
+      "seo_overrides": {
+        "seo_title": "ENFP-T Personality Guide",
+        "seo_description": "Turbulent ENFP strengths, blind spots, and growth advice.",
         "canonical_url": null,
         "og_title": null,
         "og_description": null,
