@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileSeoMeta;
+use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantSection;
+use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
 use Illuminate\Http\JsonResponse;
@@ -67,27 +70,28 @@ class PersonalityController extends Controller
             return $validated;
         }
 
-        $profile = $this->personalityProfileService->getPublicProfileByType(
+        $routeProfile = $this->personalityProfileService->getPublicDetailRouteProfileByType(
             $type,
             $validated['org_id'],
             $validated['scale_code'],
             $validated['locale'],
         );
 
-        if (! $profile instanceof PersonalityProfile) {
+        if (! is_array($routeProfile)) {
             return $this->notFoundResponse('personality profile not found.');
         }
 
-        $projection = $this->personalityProfileService->buildPublicProjection($profile);
+        /** @var PersonalityProfile $profile */
+        $profile = $routeProfile['profile'];
+        /** @var PersonalityProfileVariant|null $variant */
+        $variant = $routeProfile['variant'];
+        $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
 
         return response()->json([
             'ok' => true,
-            'profile' => $this->profileDetailPayload($profile),
-            'sections' => array_map(
-                fn (PersonalityProfileSection $section): array => $this->sectionPayload($section),
-                $profile->sections->all()
-            ),
-            'seo_meta' => $this->seoMetaPayload($profile->seoMeta),
+            'profile' => $this->profileDetailPayload($profile, $variant),
+            'sections' => $this->publicSectionPayloads($profile, $variant),
+            'seo_meta' => $this->seoMetaPayload($profile, $variant),
             'mbti_public_projection_v1' => $projection,
         ]);
     }
@@ -99,20 +103,25 @@ class PersonalityController extends Controller
             return $validated;
         }
 
-        $profile = $this->personalityProfileService->getPublicProfileByType(
+        $routeProfile = $this->personalityProfileService->getPublicDetailRouteProfileByType(
             $type,
             $validated['org_id'],
             $validated['scale_code'],
             $validated['locale'],
         );
 
-        if (! $profile instanceof PersonalityProfile) {
+        if (! is_array($routeProfile)) {
             return response()->json(['error' => 'not found'], 404);
         }
 
+        /** @var PersonalityProfile $profile */
+        $profile = $routeProfile['profile'];
+        /** @var PersonalityProfileVariant|null $variant */
+        $variant = $routeProfile['variant'];
+
         return response()->json([
-            'meta' => $this->personalityProfileSeoService->buildMeta($profile),
-            'jsonld' => $this->personalityProfileSeoService->buildJsonLd($profile),
+            'meta' => $this->personalityProfileSeoService->buildMeta($profile, $variant),
+            'jsonld' => $this->personalityProfileSeoService->buildJsonLd($profile, $variant),
         ]);
     }
 
@@ -143,7 +152,7 @@ class PersonalityController extends Controller
     /**
      * @return array<string, mixed>
      */
-    private function profileDetailPayload(PersonalityProfile $profile): array
+    private function profileDetailPayload(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
         return array_merge([
             'id' => (int) $profile->id,
@@ -163,7 +172,7 @@ class PersonalityController extends Controller
             'is_indexable' => (bool) $profile->is_indexable,
             'published_at' => $profile->published_at?->toISOString(),
             'updated_at' => $profile->updated_at?->toISOString(),
-        ], $this->personalityProfileService->publicCanonicalFields($profile));
+        ], $this->personalityProfileService->publicCanonicalFields($profile, $variant));
     }
 
     /**
@@ -186,25 +195,105 @@ class PersonalityController extends Controller
     /**
      * @return array<string, mixed>|null
      */
-    private function seoMetaPayload(?PersonalityProfileSeoMeta $seoMeta): ?array
+    private function seoMetaPayload(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): ?array
     {
-        if (! $seoMeta instanceof PersonalityProfileSeoMeta) {
+        $seoMeta = $profile->seoMeta;
+
+        if (! $seoMeta instanceof PersonalityProfileSeoMeta && ! ($variant?->seoMeta instanceof PersonalityProfileVariantSeoMeta)) {
             return null;
         }
 
-        return [
-            'seo_title' => $seoMeta->seo_title,
-            'seo_description' => $seoMeta->seo_description,
-            'canonical_url' => $seoMeta->canonical_url,
-            'og_title' => $seoMeta->og_title,
-            'og_description' => $seoMeta->og_description,
-            'og_image_url' => $seoMeta->og_image_url,
-            'twitter_title' => $seoMeta->twitter_title,
-            'twitter_description' => $seoMeta->twitter_description,
-            'twitter_image_url' => $seoMeta->twitter_image_url,
-            'robots' => $seoMeta->robots,
-            'jsonld_overrides_json' => $seoMeta->jsonld_overrides_json,
+        $meta = [
+            'seo_title' => $seoMeta?->seo_title,
+            'seo_description' => $seoMeta?->seo_description,
+            'canonical_url' => $this->personalityProfileSeoService->buildCanonicalUrl($profile, (string) $profile->locale),
+            'og_title' => $seoMeta?->og_title,
+            'og_description' => $seoMeta?->og_description,
+            'og_image_url' => $seoMeta?->og_image_url,
+            'twitter_title' => $seoMeta?->twitter_title,
+            'twitter_description' => $seoMeta?->twitter_description,
+            'twitter_image_url' => $seoMeta?->twitter_image_url,
+            'robots' => $seoMeta?->robots,
+            'jsonld_overrides_json' => $seoMeta?->jsonld_overrides_json,
         ];
+
+        $variantSeoMeta = $variant?->seoMeta;
+        if ($variantSeoMeta instanceof PersonalityProfileVariantSeoMeta) {
+            foreach ([
+                'seo_title',
+                'seo_description',
+                'og_title',
+                'og_description',
+                'og_image_url',
+                'twitter_title',
+                'twitter_description',
+                'twitter_image_url',
+                'robots',
+            ] as $field) {
+                if ($variantSeoMeta->{$field} !== null) {
+                    $meta[$field] = $variantSeoMeta->{$field};
+                }
+            }
+
+            if (is_array($variantSeoMeta->jsonld_overrides_json) && $variantSeoMeta->jsonld_overrides_json !== []) {
+                $meta['jsonld_overrides_json'] = $variantSeoMeta->jsonld_overrides_json;
+            }
+        }
+
+        return $meta;
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function publicSectionPayloads(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
+    {
+        $sections = $profile->sections
+            ->mapWithKeys(fn (PersonalityProfileSection $section): array => [
+                (string) $section->section_key => $this->sectionPayload($section),
+            ]);
+
+        if ($variant instanceof PersonalityProfileVariant) {
+            foreach ($variant->sections as $section) {
+                if (! $section instanceof PersonalityProfileVariantSection) {
+                    continue;
+                }
+
+                $sectionKey = trim((string) $section->section_key);
+                if ($sectionKey === '') {
+                    continue;
+                }
+
+                if (! (bool) $section->is_enabled) {
+                    $sections->forget($sectionKey);
+
+                    continue;
+                }
+
+                /** @var array<string, mixed>|null $baseSection */
+                $baseSection = $sections->get($sectionKey);
+                $sections->put($sectionKey, [
+                    'section_key' => $sectionKey,
+                    'title' => $section->title ?? $baseSection['title'] ?? null,
+                    'render_variant' => (string) ($section->render_variant ?: ($baseSection['render_variant'] ?? 'rich_text')),
+                    'body_md' => $section->body_md ?? $baseSection['body_md'] ?? null,
+                    'body_html' => $section->body_html ?? $baseSection['body_html'] ?? null,
+                    'payload_json' => is_array($section->payload_json)
+                        ? $section->payload_json
+                        : ($baseSection['payload_json'] ?? null),
+                    'sort_order' => (int) ($section->sort_order ?? $baseSection['sort_order'] ?? 0),
+                    'is_enabled' => true,
+                ]);
+            }
+        }
+
+        return $sections
+            ->sortBy([
+                ['sort_order', 'asc'],
+                ['section_key', 'asc'],
+            ])
+            ->values()
+            ->all();
     }
 
     /**

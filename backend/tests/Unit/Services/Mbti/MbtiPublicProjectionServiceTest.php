@@ -54,6 +54,71 @@ final class MbtiPublicProjectionServiceTest extends TestCase
         $this->assertSame([], $projection['offer_set']);
     }
 
+    public function test_it_builds_public_alias_projection_from_published_variant_authority(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        $profile = $this->createBaseProfile([
+            'title' => 'INTJ - Architect',
+            'subtitle' => 'Base subtitle',
+            'excerpt' => 'Base excerpt',
+        ]);
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'overview',
+            'title' => 'Overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Base overview',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+        PersonalityProfileSeoMeta::query()->create([
+            'profile_id' => (int) $profile->id,
+            'seo_title' => 'Base SEO title',
+        ]);
+
+        $variant = PersonalityProfileVariant::query()->create([
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'type_name' => 'Architect A',
+            'nickname' => 'Assertive strategist',
+            'rarity_text' => 'About 3%',
+            'keywords_json' => ['assertive', 'strategy'],
+            'hero_summary_md' => 'Variant hero summary',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'section_key' => 'overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Variant overview',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+        PersonalityProfileVariantSeoMeta::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'seo_title' => 'Variant SEO title',
+        ]);
+
+        $projection = app(MbtiPublicProjectionService::class)->buildForPublicPersonalityRoute($profile, $variant);
+
+        $this->assertSame('INTJ-A', $projection['runtime_type_code']);
+        $this->assertSame('INTJ', $projection['canonical_type_code']);
+        $this->assertSame('INTJ-A', $projection['display_type']);
+        $this->assertSame('A', $projection['variant_code']);
+        $this->assertSame('Architect A', data_get($projection, 'profile.type_name'));
+        $this->assertSame('Assertive strategist', data_get($projection, 'profile.nickname'));
+        $this->assertSame('Variant overview', data_get($projection, 'sections.0.body_md'));
+        $this->assertSame('Variant SEO title', data_get($projection, 'seo.title'));
+        $this->assertSame('https://staging.fermatmind.com/en/personality/intj', data_get($projection, 'seo.canonical_url'));
+        $this->assertSame('public_alias', data_get($projection, '_meta.route_mode'));
+        $this->assertSame('16-type', data_get($projection, '_meta.public_route_type'));
+    }
+
     public function test_it_merges_runtime_identity_report_fallback_and_cms_variant_authority_for_share_projection(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
