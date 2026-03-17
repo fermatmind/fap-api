@@ -117,7 +117,8 @@ final class MbtiPublicProjectionService
      */
     public function buildForPublicPersonalityRoute(
         PersonalityProfile $profile,
-        ?PersonalityProfileVariant $variant = null
+        ?PersonalityProfileVariant $variant = null,
+        string $routeMode = ''
     ): array {
         $profile->loadMissing([
             'sections' => static function (HasMany $query): void {
@@ -133,18 +134,20 @@ final class MbtiPublicProjectionService
 
         $runtimeTypeCode = $this->nullableText($authority['runtime_type_code'] ?? null);
         $canonicalTypeCode = strtoupper(trim((string) ($profile->canonical_type_code ?: $profile->type_code)));
+        $publicRouteSlug = $this->resolvePublicRouteSlug($profile, $variant);
 
         $authority['runtime_type_code'] = $runtimeTypeCode;
         $authority['display_type'] = $runtimeTypeCode ?? $canonicalTypeCode;
         $authority['variant_code'] = $this->nullableText($authority['variant_code'] ?? null);
+        $authority['public_route_slug'] = $publicRouteSlug;
         $authority['dimensions'] = [];
         $authority['offer_set'] = [];
         $authority['_meta'] = array_merge(
             is_array($authority['_meta'] ?? null) ? $authority['_meta'] : [],
             [
                 'authority_source' => 'personality_cms_v2',
-                'route_mode' => $variant instanceof PersonalityProfileVariant ? 'public_alias' : 'base',
-                'public_route_type' => '16-type',
+                'route_mode' => trim($routeMode) !== '' ? trim($routeMode) : ($variant instanceof PersonalityProfileVariant ? 'public_variant' : 'base'),
+                'public_route_type' => $variant instanceof PersonalityProfileVariant ? '32-type' : '16-type',
                 'schema_version' => (string) ($profile->schema_version ?: PersonalityProfile::SCHEMA_VERSION_V2),
             ],
         );
@@ -440,7 +443,8 @@ final class MbtiPublicProjectionService
         );
 
         $canonicalUrl = $this->buildCanonicalUrl(
-            $this->nullableText($authority['slug'] ?? null),
+            $this->nullableText($authority['public_route_slug'] ?? null)
+                ?? $this->nullableText($authority['slug'] ?? null),
             (string) ($authority['locale'] ?? 'en')
         );
 
@@ -483,6 +487,27 @@ final class MbtiPublicProjectionService
             : [];
 
         return $projection;
+    }
+
+    private function resolvePublicRouteSlug(
+        PersonalityProfile $profile,
+        ?PersonalityProfileVariant $variant = null
+    ): ?string {
+        $baseSlug = $this->nullableText($profile->slug);
+        if ($baseSlug === null) {
+            return null;
+        }
+
+        if (! $variant instanceof PersonalityProfileVariant) {
+            return $baseSlug;
+        }
+
+        $variantCode = strtoupper(trim((string) $variant->variant_code));
+        if (! in_array($variantCode, ['A', 'T'], true)) {
+            return $baseSlug;
+        }
+
+        return strtolower($baseSlug.'-'.$variantCode);
     }
 
     /**

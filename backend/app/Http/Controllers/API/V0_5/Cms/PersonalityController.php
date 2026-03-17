@@ -206,7 +206,7 @@ class PersonalityController extends Controller
         $meta = [
             'seo_title' => $seoMeta?->seo_title,
             'seo_description' => $seoMeta?->seo_description,
-            'canonical_url' => $this->personalityProfileSeoService->buildCanonicalUrl($profile, (string) $profile->locale),
+            'canonical_url' => $this->personalityProfileSeoService->buildCanonicalUrl($profile, (string) $profile->locale, $variant),
             'og_title' => $seoMeta?->og_title,
             'og_description' => $seoMeta?->og_description,
             'og_image_url' => $seoMeta?->og_image_url,

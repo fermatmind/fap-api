@@ -114,9 +114,9 @@ final class MbtiPublicProjectionServiceTest extends TestCase
         $this->assertSame('Assertive strategist', data_get($projection, 'profile.nickname'));
         $this->assertSame('Variant overview', data_get($projection, 'sections.0.body_md'));
         $this->assertSame('Variant SEO title', data_get($projection, 'seo.title'));
-        $this->assertSame('https://staging.fermatmind.com/en/personality/intj', data_get($projection, 'seo.canonical_url'));
-        $this->assertSame('public_alias', data_get($projection, '_meta.route_mode'));
-        $this->assertSame('16-type', data_get($projection, '_meta.public_route_type'));
+        $this->assertSame('https://staging.fermatmind.com/en/personality/intj-a', data_get($projection, 'seo.canonical_url'));
+        $this->assertSame('public_variant', data_get($projection, '_meta.route_mode'));
+        $this->assertSame('32-type', data_get($projection, '_meta.public_route_type'));
     }
 
     public function test_it_merges_runtime_identity_report_fallback_and_cms_variant_authority_for_share_projection(): void

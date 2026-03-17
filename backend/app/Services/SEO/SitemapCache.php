@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Cache;
 
 class SitemapCache
 {
-    public const XML_CACHE_KEY = 'seo:sitemap:xml:v4';
+    public const XML_CACHE_KEY = 'seo:sitemap:xml:v5';
 
-    public const ETAG_CACHE_KEY = 'seo:sitemap:etag:v4';
+    public const ETAG_CACHE_KEY = 'seo:sitemap:etag:v5';
 
     public const TTL_SECONDS = 86400;
 

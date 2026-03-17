@@ -450,10 +450,10 @@ class SitemapXmlTest extends TestCase
         $this->assertStringNotContainsString('<loc>'.$prefix.'hidden-alt</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/personality/intj-a</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj-a</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj-a</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj-t</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/topics</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/topics/mbti</loc>', $body);

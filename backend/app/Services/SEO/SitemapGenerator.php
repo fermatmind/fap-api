@@ -5,6 +5,7 @@ namespace App\Services\SEO;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\PersonalityProfileVariant;
 use App\Models\TopicProfile;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
@@ -225,30 +226,42 @@ class SitemapGenerator
 
         foreach ($rows as $row) {
             $locale = trim((string) $row->locale);
-            $canonical = trim((string) data_get(
-                $this->personalityProfileSeoService->buildMeta($row),
-                'canonical',
-                ''
-            ));
-
-            if ($canonical === '' || $locale === '') {
+            $segment = $this->personalityProfileSeoService->mapBackendLocaleToFrontendSegment($locale);
+            if ($locale === '') {
                 continue;
             }
 
-            $segment = $this->personalityProfileSeoService->mapBackendLocaleToFrontendSegment($locale);
-            $lastmod = $row->updated_at
-                ?? $row->published_at
-                ?? now();
+            foreach ($row->variants as $variant) {
+                if (! $variant instanceof PersonalityProfileVariant) {
+                    continue;
+                }
 
-            $urls[] = [
-                'loc' => $canonical,
-                'lastmod' => $lastmod->toAtomString(),
-                'slug' => 'personality:'.$segment.':'.trim((string) $row->slug),
-                'updated_at' => $lastmod->toDateTimeString(),
-            ];
+                $canonical = trim((string) data_get(
+                    $this->personalityProfileSeoService->buildMeta($row, $variant),
+                    'canonical',
+                    ''
+                ));
 
-            if (! isset($listLastModified[$segment]) || $lastmod->gt($listLastModified[$segment])) {
-                $listLastModified[$segment] = $lastmod;
+                if ($canonical === '') {
+                    continue;
+                }
+
+                $lastmod = $variant->updated_at
+                    ?? $variant->published_at
+                    ?? $row->updated_at
+                    ?? $row->published_at
+                    ?? now();
+
+                $urls[] = [
+                    'loc' => $canonical,
+                    'lastmod' => $lastmod->toAtomString(),
+                    'slug' => 'personality:'.$segment.':'.strtolower((string) $variant->runtime_type_code),
+                    'updated_at' => $lastmod->toDateTimeString(),
+                ];
+
+                if (! isset($listLastModified[$segment]) || $lastmod->gt($listLastModified[$segment])) {
+                    $listLastModified[$segment] = $lastmod;
+                }
             }
         }
 
