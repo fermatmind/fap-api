@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileVariant;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -64,6 +65,52 @@ final class PersonalityProfileService
     }
 
     /**
+     * @return array{profile:PersonalityProfile,variant:?PersonalityProfileVariant}|null
+     */
+    public function getPublicDetailRouteProfileByType(
+        string $typeLookup,
+        int $orgId,
+        string $scaleCode,
+        string $locale
+    ): ?array {
+        $lookup = $this->resolvePublicTypeLookup($typeLookup);
+
+        $profile = $this->basePublicQuery($orgId, $scaleCode, $locale)
+            ->where(function (Builder $query) use ($lookup): void {
+                $query->where('slug', $lookup['canonical_slug'])
+                    ->orWhere('type_code', $lookup['canonical_type_code']);
+            })
+            ->with([
+                'sections' => static function (HasMany $query): void {
+                    $query->where('is_enabled', true)
+                        ->orderBy('sort_order')
+                        ->orderBy('id');
+                },
+                'seoMeta',
+            ])
+            ->first();
+
+        if (! $profile instanceof PersonalityProfile) {
+            return null;
+        }
+
+        $variant = null;
+
+        if ($lookup['runtime_type_code'] !== null) {
+            $variant = $this->resolvePublishedVariantForPublicRoute($profile, $lookup['runtime_type_code']);
+
+            if (! $variant instanceof PersonalityProfileVariant) {
+                return null;
+            }
+        }
+
+        return [
+            'profile' => $profile,
+            'variant' => $variant,
+        ];
+    }
+
+    /**
      * @return Collection<int, PersonalityProfile>
      */
     public function getSitemapPublicProfiles(): Collection
@@ -112,9 +159,9 @@ final class PersonalityProfileService
     /**
      * @return array<string, mixed>
      */
-    public function publicCanonicalFields(PersonalityProfile $profile): array
+    public function publicCanonicalFields(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
-        $projection = $this->buildPublicProjection($profile);
+        $projection = $this->buildPublicProjection($profile, $variant);
 
         return [
             'canonical_type_code' => data_get($projection, 'canonical_type_code'),
@@ -132,9 +179,9 @@ final class PersonalityProfileService
     /**
      * @return array<string, mixed>
      */
-    public function buildPublicProjection(PersonalityProfile $profile): array
+    public function buildPublicProjection(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
-        return $this->mbtiPublicProjectionService->buildForPersonalityProfile($profile);
+        return $this->mbtiPublicProjectionService->buildForPublicPersonalityRoute($profile, $variant);
     }
 
     private function basePublicQuery(int $orgId, string $scaleCode, string $locale): Builder
@@ -162,5 +209,64 @@ final class PersonalityProfileService
         $normalized = strtoupper(trim($scaleCode));
 
         return $normalized !== '' ? $normalized : PersonalityProfile::SCALE_CODE_MBTI;
+    }
+
+    /**
+     * @return array{
+     *   canonical_slug:string,
+     *   canonical_type_code:string,
+     *   runtime_type_code:?string,
+     *   variant_code:?string
+     * }
+     */
+    private function resolvePublicTypeLookup(string $typeLookup): array
+    {
+        $normalized = trim($typeLookup);
+
+        if (preg_match('/^(?<base>[A-Za-z]{4})(?:-(?<variant>[AaTt]))?$/', $normalized, $matches) === 1) {
+            $baseTypeCode = strtoupper($matches['base']);
+            $variantCode = isset($matches['variant']) ? strtoupper($matches['variant']) : null;
+
+            return [
+                'canonical_slug' => strtolower($matches['base']),
+                'canonical_type_code' => $baseTypeCode,
+                'runtime_type_code' => $variantCode !== null ? $baseTypeCode.'-'.$variantCode : null,
+                'variant_code' => $variantCode,
+            ];
+        }
+
+        return [
+            'canonical_slug' => strtolower($normalized),
+            'canonical_type_code' => strtoupper($normalized),
+            'runtime_type_code' => null,
+            'variant_code' => null,
+        ];
+    }
+
+    private function resolvePublishedVariantForPublicRoute(
+        PersonalityProfile $profile,
+        string $runtimeTypeCode
+    ): ?PersonalityProfileVariant {
+        $normalizedRuntimeTypeCode = strtoupper(trim($runtimeTypeCode));
+
+        if ($normalizedRuntimeTypeCode === '') {
+            return null;
+        }
+
+        return $profile->variants()
+            ->where('runtime_type_code', $normalizedRuntimeTypeCode)
+            ->where('is_published', true)
+            ->where(static function (Builder $query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->with([
+                'sections' => static function (HasMany $query): void {
+                    $query->orderBy('sort_order')
+                        ->orderBy('id');
+                },
+                'seoMeta',
+            ])
+            ->first();
     }
 }

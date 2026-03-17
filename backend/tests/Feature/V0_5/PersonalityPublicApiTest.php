@@ -9,6 +9,7 @@ use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -276,6 +277,8 @@ final class PersonalityPublicApiTest extends TestCase
             'published_at' => now()->subMinute(),
         ]);
         $this->createVariantSeoMeta($enVariant, [
+            'seo_title' => 'INTJ-A Personality Type: Traits, Careers, and Growth | FermatMind',
+            'seo_description' => 'Explore INTJ-A traits, strengths, blind spots, work style, relationships, and growth advice.',
             'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
             'jsonld_overrides_json' => [
                 'mainEntityOfPage' => 'https://staging.fermatmind.com/en/personality/intj-a',
@@ -310,15 +313,18 @@ final class PersonalityPublicApiTest extends TestCase
             'published_at' => now()->subMinute(),
         ]);
         $this->createVariantSeoMeta($zhVariant, [
+            'seo_title' => 'INTJ-T 人格类型：特质、职业与成长 | FermatMind',
+            'seo_description' => '探索 INTJ-T 的特质、优势、关系模式与成长建议。',
             'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-t',
             'jsonld_overrides_json' => [
                 'mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-t',
             ],
         ]);
 
-        $enResponse = $this->getJson('/api/v0.5/personality/INTJ/seo?locale=en');
+        $enResponse = $this->getJson('/api/v0.5/personality/intj-a/seo?locale=en');
         $enResponse->assertOk()
-            ->assertJsonPath('meta.title', 'INTJ Personality Type: Traits, Careers, and Growth | FermatMind')
+            ->assertJsonPath('meta.title', 'INTJ-A Personality Type: Traits, Careers, and Growth | FermatMind')
+            ->assertJsonPath('meta.description', 'Explore INTJ-A traits, strengths, blind spots, work style, relationships, and growth advice.')
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/en/personality/intj')
             ->assertJsonPath('meta.robots', 'index,follow');
         self::assertSame('AboutPage', data_get($enResponse->json(), 'jsonld.@type'));
@@ -327,8 +333,10 @@ final class PersonalityPublicApiTest extends TestCase
             data_get($enResponse->json(), 'jsonld.mainEntityOfPage')
         );
 
-        $zhResponse = $this->getJson('/api/v0.5/personality/intj/seo?locale=zh-CN');
+        $zhResponse = $this->getJson('/api/v0.5/personality/intj-t/seo?locale=zh-CN');
         $zhResponse->assertOk()
+            ->assertJsonPath('meta.title', 'INTJ-T 人格类型：特质、职业与成长 | FermatMind')
+            ->assertJsonPath('meta.description', '探索 INTJ-T 的特质、优势、关系模式与成长建议。')
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh/personality/intj')
             ->assertJsonPath('meta.robots', 'noindex,follow');
         self::assertSame(
@@ -337,23 +345,70 @@ final class PersonalityPublicApiTest extends TestCase
         );
     }
 
-    public function test_variant_route_key_remains_invalid_for_public_base_route(): void
+    public function test_detail_accepts_published_public_aliases_while_base_canonical_stays_frozen(): void
     {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
         $profile = $this->createProfile([
             'type_code' => 'INTJ',
             'slug' => 'intj',
+            'type_name' => 'Architect',
+            'nickname' => 'Systems builder',
+            'rarity_text' => 'About 2%',
+            'keywords_json' => ['strategy', 'independence'],
+            'hero_summary_md' => 'Base hero summary',
             'status' => 'published',
             'is_public' => true,
             'published_at' => now()->subMinute(),
             'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
         ]);
-        $this->createVariant($profile, [
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'overview',
+            'title' => 'Overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Base overview',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+        $this->createSeoMeta($profile, [
+            'seo_title' => 'Base INTJ title',
+            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
+        ]);
+
+        $publishedVariant = $this->createVariant($profile, [
             'canonical_type_code' => 'INTJ',
             'variant_code' => 'A',
             'runtime_type_code' => 'INTJ-A',
+            'type_name' => 'Architect Assertive',
+            'nickname' => 'Assertive strategist',
+            'rarity_text' => 'About 3%',
+            'keywords_json' => ['assertive', 'strategy'],
+            'hero_summary_md' => 'Variant hero summary',
             'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
             'is_published' => true,
             'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($publishedVariant, [
+            'seo_title' => 'Variant INTJ-A title',
+            'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $publishedVariant->id,
+            'section_key' => 'overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Variant overview',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+        $this->createVariant($profile, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'type_name' => 'Architect Turbulent',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => false,
+            'published_at' => null,
         ]);
 
         $this->getJson('/api/v0.5/personality/intj?locale=en')
@@ -363,6 +418,26 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('mbti_public_projection_v1.display_type', 'INTJ');
 
         $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+            ->assertOk()
+            ->assertJsonPath('profile.type_code', 'INTJ')
+            ->assertJsonPath('profile.slug', 'intj')
+            ->assertJsonPath('profile.canonical_type_code', 'INTJ')
+            ->assertJsonPath('profile.type_name', 'Architect Assertive')
+            ->assertJsonPath('profile.nickname', 'Assertive strategist')
+            ->assertJsonPath('profile.rarity', 'About 3%')
+            ->assertJsonPath('profile.hero_summary', 'Variant hero summary')
+            ->assertJsonPath('sections.0.section_key', 'overview')
+            ->assertJsonPath('sections.0.body_md', 'Variant overview')
+            ->assertJsonPath('seo_meta.seo_title', 'Variant INTJ-A title')
+            ->assertJsonPath('seo_meta.canonical_url', 'https://staging.fermatmind.com/en/personality/intj')
+            ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('mbti_public_projection_v1.display_type', 'INTJ-A')
+            ->assertJsonPath('mbti_public_projection_v1.variant_code', 'A')
+            ->assertJsonPath('mbti_public_projection_v1._meta.route_mode', 'public_alias')
+            ->assertJsonPath('mbti_public_projection_v1._meta.public_route_type', '16-type')
+            ->assertJsonPath('mbti_public_projection_v1.seo.canonical_url', 'https://staging.fermatmind.com/en/personality/intj');
+
+        $this->getJson('/api/v0.5/personality/intj-t?locale=en')
             ->assertStatus(404)
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }

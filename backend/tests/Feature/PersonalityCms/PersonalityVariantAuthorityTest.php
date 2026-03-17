@@ -15,7 +15,7 @@ final class PersonalityVariantAuthorityTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_imported_variant_authority_rows_can_coexist_while_public_route_stays_base_only(): void
+    public function test_imported_variant_authority_rows_can_resolve_published_public_aliases_while_canonical_stays_base_only(): void
     {
         $this->artisan('personality:import-local-baseline', [
             '--locale' => ['en'],
@@ -59,6 +59,15 @@ final class PersonalityVariantAuthorityTest extends TestCase
             ->assertJsonPath('profile.canonical_type_code', 'ENFP')
             ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', null)
             ->assertJsonPath('mbti_public_projection_v1.canonical_type_code', 'ENFP');
+
+        $this->getJson('/api/v0.5/personality/enfp-t?locale=en')
+            ->assertOk()
+            ->assertJsonPath('profile.type_code', 'ENFP')
+            ->assertJsonPath('profile.canonical_type_code', 'ENFP')
+            ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', 'ENFP-T')
+            ->assertJsonPath('mbti_public_projection_v1.display_type', 'ENFP-T')
+            ->assertJsonPath('mbti_public_projection_v1.variant_code', 'T')
+            ->assertJsonPath('mbti_public_projection_v1._meta.public_route_type', '16-type');
 
         $this->getJson('/api/v0.5/personality/enfp-a?locale=en')
             ->assertStatus(404);

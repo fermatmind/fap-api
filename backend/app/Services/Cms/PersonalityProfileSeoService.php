@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileVariant;
 
 final class PersonalityProfileSeoService
 {
@@ -15,9 +16,9 @@ final class PersonalityProfileSeoService
     /**
      * @return array<string, mixed>
      */
-    public function buildMeta(PersonalityProfile $profile): array
+    public function buildMeta(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
-        $projection = $this->personalityProfileService->buildPublicProjection($profile);
+        $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
         $title = $this->fallbackText(
             data_get($projection, 'seo.title'),
             data_get($projection, 'summary_card.title'),
@@ -72,10 +73,10 @@ final class PersonalityProfileSeoService
     /**
      * @return array<string, mixed>
      */
-    public function buildJsonLd(PersonalityProfile $profile): array
+    public function buildJsonLd(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
-        $projection = $this->personalityProfileService->buildPublicProjection($profile);
-        $meta = $this->buildMeta($profile);
+        $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
+        $meta = $this->buildMeta($profile, $variant);
         $jsonLd = [
             '@context' => 'https://schema.org',
             '@type' => 'AboutPage',

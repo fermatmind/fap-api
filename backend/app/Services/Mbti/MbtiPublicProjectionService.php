@@ -109,6 +109,16 @@ final class MbtiPublicProjectionService
      */
     public function buildForPersonalityProfile(PersonalityProfile $profile): array
     {
+        return $this->buildForPublicPersonalityRoute($profile);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function buildForPublicPersonalityRoute(
+        PersonalityProfile $profile,
+        ?PersonalityProfileVariant $variant = null
+    ): array {
         $profile->loadMissing([
             'sections' => static function (HasMany $query): void {
                 $query->where('is_enabled', true)
@@ -119,16 +129,21 @@ final class MbtiPublicProjectionService
         ]);
 
         $authority = $this->profileAuthorityAdapter->fromBaseProfile($profile);
-        $authority['runtime_type_code'] = null;
-        $authority['display_type'] = strtoupper(trim((string) ($profile->canonical_type_code ?: $profile->type_code)));
-        $authority['variant_code'] = null;
+        $authority = $this->profileAuthorityAdapter->overlayVariant($authority, $variant);
+
+        $runtimeTypeCode = $this->nullableText($authority['runtime_type_code'] ?? null);
+        $canonicalTypeCode = strtoupper(trim((string) ($profile->canonical_type_code ?: $profile->type_code)));
+
+        $authority['runtime_type_code'] = $runtimeTypeCode;
+        $authority['display_type'] = $runtimeTypeCode ?? $canonicalTypeCode;
+        $authority['variant_code'] = $this->nullableText($authority['variant_code'] ?? null);
         $authority['dimensions'] = [];
         $authority['offer_set'] = [];
         $authority['_meta'] = array_merge(
             is_array($authority['_meta'] ?? null) ? $authority['_meta'] : [],
             [
                 'authority_source' => 'personality_cms_v2',
-                'route_mode' => 'base',
+                'route_mode' => $variant instanceof PersonalityProfileVariant ? 'public_alias' : 'base',
                 'public_route_type' => '16-type',
                 'schema_version' => (string) ($profile->schema_version ?: PersonalityProfile::SCHEMA_VERSION_V2),
             ],
