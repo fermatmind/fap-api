@@ -68,6 +68,44 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('delivery.can_request_claim_email', true);
     }
 
+    public function test_lookup_with_matching_email_hash_returns_mbti_access_hub_for_mbti_attempt(): void
+    {
+        $orderNo = 'ord_lookup_mbti_'.Str::lower(Str::random(8));
+        $userId = $this->createUser('owner@example.com');
+        $attemptId = (string) Str::uuid();
+        $compareInviteId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, (string) $userId, 'MBTI');
+        $this->insertOrderForLookup($orderNo, 'owner@example.com', $attemptId, 'paid', (string) $userId, [
+            'attribution' => [
+                'share_id' => 'share_001',
+                'compare_invite_id' => $compareInviteId,
+            ],
+        ]);
+
+        $response = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => 'owner@example.com',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.order_no', $orderNo)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'order_delivery')
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.can_download_pdf', true)
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'order_delivery')
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_lookup_order', true)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_request_claim_email', true)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_resend', true)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.share_id', 'share_001')
+            ->assertJsonPath('mbti_access_hub_v1.recovery.compare_invite_id', $compareInviteId)
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.has_entry', true)
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId);
+    }
+
     public function test_lookup_with_token_owner_works_without_email(): void
     {
         $orderNo = 'ord_lookup_'.Str::lower(Str::random(8));
@@ -147,15 +185,19 @@ final class CommerceOrderLookupSecurityTest extends TestCase
         return $token;
     }
 
-    private function insertAttempt(string $attemptId, string $anonId, ?string $userId = null): void
-    {
+    private function insertAttempt(
+        string $attemptId,
+        string $anonId,
+        ?string $userId = null,
+        string $scaleCode = 'BIG5_OCEAN'
+    ): void {
         DB::table('attempts')->insert([
             'id' => $attemptId,
             'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', $attemptId), 0, 8)),
             'org_id' => 0,
             'user_id' => $userId,
             'anon_id' => $anonId,
-            'scale_code' => 'BIG5_OCEAN',
+            'scale_code' => $scaleCode,
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
@@ -180,7 +222,8 @@ final class CommerceOrderLookupSecurityTest extends TestCase
         string $email,
         ?string $attemptId = null,
         string $status = 'created',
-        ?string $userId = null
+        ?string $userId = null,
+        ?array $meta = null
     ): void {
         $now = now();
         $row = [
@@ -206,7 +249,9 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             $row['contact_email_hash'] = hash('sha256', mb_strtolower(trim($email), 'UTF-8'));
         }
         if (Schema::hasColumn('orders', 'meta_json')) {
-            $row['meta_json'] = null;
+            $row['meta_json'] = $meta !== null
+                ? json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                : null;
         }
         if (Schema::hasColumn('orders', 'amount_total')) {
             $row['amount_total'] = 1990;

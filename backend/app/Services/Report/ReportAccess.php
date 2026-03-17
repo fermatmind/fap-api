@@ -6,41 +6,88 @@ namespace App\Services\Report;
 
 final class ReportAccess
 {
+    public const ACCESS_HUB_KEY = 'mbti_access_hub_v1';
+
+    public const ACCESS_HUB_STATE_LOCKED = 'locked';
+
+    public const ACCESS_HUB_STATE_READY = 'ready';
+
+    public const ACCESS_HUB_STATE_PENDING = 'pending';
+
+    public const ACCESS_HUB_STATE_RECOVERY_AVAILABLE = 'recovery_available';
+
+    public const ACCESS_HUB_SOURCE_REPORT_GATE = 'report_gate';
+
+    public const ACCESS_HUB_SOURCE_ORDER_DELIVERY = 'order_delivery';
+
+    public const ACCESS_HUB_SOURCE_ATTEMPT_PDF = 'attempt_pdf';
+
+    public const ACCESS_HUB_SOURCE_NONE = 'none';
+
+    public const ACCESS_HUB_ENTRY_KIND_MBTI_HISTORY = 'mbti_history';
+
     public const SCALE_MBTI = 'MBTI';
+
     public const SCALE_BIG5_OCEAN = 'BIG5_OCEAN';
+
     public const SCALE_CLINICAL_COMBO_68 = 'CLINICAL_COMBO_68';
+
     public const SCALE_SDS_20 = 'SDS_20';
+
     public const SCALE_EQ_60 = 'EQ_60';
 
     public const VARIANT_FREE = 'free';
+
     public const VARIANT_FULL = 'full';
 
     public const REPORT_ACCESS_FREE = 'free';
+
     public const REPORT_ACCESS_FULL = 'full';
 
     public const CARD_ACCESS_FREE = 'free';
+
     public const CARD_ACCESS_PREVIEW = 'preview';
+
     public const CARD_ACCESS_PAID = 'paid';
 
     public const MODULE_CORE_FREE = 'core_free';
+
     public const MODULE_CORE_FULL = 'core_full';
+
     public const MODULE_CAREER = 'career';
+
     public const MODULE_RELATIONSHIPS = 'relationships';
+
     public const MODULE_BIG5_CORE = 'big5_core';
+
     public const MODULE_BIG5_FULL = 'big5_full';
+
     public const MODULE_BIG5_ACTION_PLAN = 'big5_action_plan';
+
     public const MODULE_CLINICAL_CORE = 'clinical_core';
+
     public const MODULE_CLINICAL_FULL = 'clinical_full';
+
     public const MODULE_CLINICAL_RESILIENCE = 'clinical_resilience';
+
     public const MODULE_CLINICAL_PERFECTIONISM = 'clinical_perfectionism';
+
     public const MODULE_CLINICAL_ACTION_PLAN = 'clinical_action_plan';
+
     public const MODULE_SDS_CORE = 'sds_core';
+
     public const MODULE_SDS_FULL = 'sds_full';
+
     public const MODULE_SDS_FACTOR_DEEPDIVE = 'sds_factor_deepdive';
+
     public const MODULE_SDS_ACTION_PLAN = 'sds_action_plan';
+
     public const MODULE_EQ_CORE = 'eq_core';
+
     public const MODULE_EQ_FULL = 'eq_full';
+
     public const MODULE_EQ_CROSS_INSIGHTS = 'eq_cross_insights';
+
     public const MODULE_EQ_GROWTH_PLAN = 'eq_growth_plan';
 
     /**
