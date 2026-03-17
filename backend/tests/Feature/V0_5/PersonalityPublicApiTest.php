@@ -325,11 +325,13 @@ final class PersonalityPublicApiTest extends TestCase
         $enResponse->assertOk()
             ->assertJsonPath('meta.title', 'INTJ-A Personality Type: Traits, Careers, and Growth | FermatMind')
             ->assertJsonPath('meta.description', 'Explore INTJ-A traits, strengths, blind spots, work style, relationships, and growth advice.')
-            ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/en/personality/intj')
+            ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/en/personality/intj-a')
+            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/personality/intj-a')
+            ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/personality/intj-a')
             ->assertJsonPath('meta.robots', 'index,follow');
         self::assertSame('AboutPage', data_get($enResponse->json(), 'jsonld.@type'));
         self::assertSame(
-            'https://staging.fermatmind.com/en/personality/intj',
+            'https://staging.fermatmind.com/en/personality/intj-a',
             data_get($enResponse->json(), 'jsonld.mainEntityOfPage')
         );
 
@@ -337,15 +339,17 @@ final class PersonalityPublicApiTest extends TestCase
         $zhResponse->assertOk()
             ->assertJsonPath('meta.title', 'INTJ-T 人格类型：特质、职业与成长 | FermatMind')
             ->assertJsonPath('meta.description', '探索 INTJ-T 的特质、优势、关系模式与成长建议。')
-            ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh/personality/intj')
+            ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh/personality/intj-t')
+            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/personality/intj-t')
+            ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/personality/intj-t')
             ->assertJsonPath('meta.robots', 'noindex,follow');
         self::assertSame(
-            'https://staging.fermatmind.com/zh/personality/intj',
+            'https://staging.fermatmind.com/zh/personality/intj-t',
             data_get($zhResponse->json(), 'jsonld.mainEntityOfPage')
         );
     }
 
-    public function test_detail_accepts_published_public_aliases_while_base_canonical_stays_frozen(): void
+    public function test_detail_accepts_published_public_variants_after_canonical_cutover(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
@@ -429,13 +433,13 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('sections.0.section_key', 'overview')
             ->assertJsonPath('sections.0.body_md', 'Variant overview')
             ->assertJsonPath('seo_meta.seo_title', 'Variant INTJ-A title')
-            ->assertJsonPath('seo_meta.canonical_url', 'https://staging.fermatmind.com/en/personality/intj')
+            ->assertJsonPath('seo_meta.canonical_url', 'https://staging.fermatmind.com/en/personality/intj-a')
             ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', 'INTJ-A')
             ->assertJsonPath('mbti_public_projection_v1.display_type', 'INTJ-A')
             ->assertJsonPath('mbti_public_projection_v1.variant_code', 'A')
-            ->assertJsonPath('mbti_public_projection_v1._meta.route_mode', 'public_alias')
-            ->assertJsonPath('mbti_public_projection_v1._meta.public_route_type', '16-type')
-            ->assertJsonPath('mbti_public_projection_v1.seo.canonical_url', 'https://staging.fermatmind.com/en/personality/intj');
+            ->assertJsonPath('mbti_public_projection_v1._meta.route_mode', 'public_variant')
+            ->assertJsonPath('mbti_public_projection_v1._meta.public_route_type', '32-type')
+            ->assertJsonPath('mbti_public_projection_v1.seo.canonical_url', 'https://staging.fermatmind.com/en/personality/intj-a');
 
         $this->getJson('/api/v0.5/personality/intj-t?locale=en')
             ->assertStatus(404)

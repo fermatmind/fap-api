@@ -312,10 +312,10 @@ class SitemapGeneratorTest extends TestCase
 
         $this->assertStringContainsString('https://staging.fermatmind.com/en/personality', $xml);
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality', $xml);
-        $this->assertStringContainsString('https://staging.fermatmind.com/en/personality/intj', $xml);
-        $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality/intj', $xml);
-        $this->assertStringNotContainsString('https://staging.fermatmind.com/en/personality/intj-a', $xml);
-        $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/personality/intj-a', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/en/personality/intj-a', $xml);
+        $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality/intj-t', $xml);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $xml);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $xml);
 
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/personality/entj', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/personality/entp', $xml);
@@ -327,16 +327,16 @@ class SitemapGeneratorTest extends TestCase
         $seoService = app(PersonalityProfileSeoService::class);
 
         $this->assertSame(
-            data_get($seoService->buildMeta($eligibleEn), 'canonical'),
-            data_get($seoService->buildJsonLd($eligibleEn), 'mainEntityOfPage')
+            data_get($seoService->buildMeta($eligibleEn, $eligibleEnVariant), 'canonical'),
+            data_get($seoService->buildJsonLd($eligibleEn, $eligibleEnVariant), 'mainEntityOfPage')
         );
         $this->assertSame(
-            data_get($seoService->buildMeta($eligibleZh), 'canonical'),
-            data_get($seoService->buildJsonLd($eligibleZh), 'mainEntityOfPage')
+            data_get($seoService->buildMeta($eligibleZh, $eligibleZhVariant), 'canonical'),
+            data_get($seoService->buildJsonLd($eligibleZh, $eligibleZhVariant), 'mainEntityOfPage')
         );
-        $this->assertSame('AboutPage', data_get($seoService->buildJsonLd($eligibleEn), '@type'));
-        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn), 'canonical'), $xml);
-        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh), 'canonical'), $xml);
+        $this->assertSame('AboutPage', data_get($seoService->buildJsonLd($eligibleEn, $eligibleEnVariant), '@type'));
+        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn, $eligibleEnVariant), 'canonical'), $xml);
+        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, $eligibleZhVariant), 'canonical'), $xml);
     }
 
     public function test_generate_includes_only_indexable_global_topic_urls_with_locale_aware_paths(): void

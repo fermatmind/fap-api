@@ -137,10 +137,48 @@ final class PersonalityProfileService
                         ->orderBy('sort_order')
                         ->orderBy('id');
                 },
+                'variants' => static function (HasMany $query): void {
+                    $query->where('is_published', true)
+                        ->where(static function (Builder $nested): void {
+                            $nested->whereNull('published_at')
+                                ->orWhere('published_at', '<=', now());
+                        })
+                        ->with('seoMeta')
+                        ->orderByRaw("case when variant_code = 'A' then 0 when variant_code = 'T' then 1 else 9 end")
+                        ->orderBy('runtime_type_code')
+                        ->orderBy('id');
+                },
             ])
             ->orderBy('locale')
             ->orderBy('slug')
             ->get();
+    }
+
+    public function getDefaultPublishedVariantForCanonicalRoute(PersonalityProfile $profile): ?PersonalityProfileVariant
+    {
+        if ($profile->relationLoaded('variants')) {
+            /** @var PersonalityProfileVariant|null $variant */
+            $variant = $profile->variants
+                ->first(static fn (mixed $item): bool => $item instanceof PersonalityProfileVariant
+                    && $item->variant_code === 'A'
+                    && (bool) $item->is_published);
+
+            if ($variant instanceof PersonalityProfileVariant) {
+                $variant->loadMissing('seoMeta');
+
+                return $variant;
+            }
+        }
+
+        return $profile->variants()
+            ->where('variant_code', 'A')
+            ->where('is_published', true)
+            ->where(static function (Builder $query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->with('seoMeta')
+            ->first();
     }
 
     /**
@@ -181,7 +219,11 @@ final class PersonalityProfileService
      */
     public function buildPublicProjection(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
-        return $this->mbtiPublicProjectionService->buildForPublicPersonalityRoute($profile, $variant);
+        return $this->mbtiPublicProjectionService->buildForPublicPersonalityRoute(
+            $profile,
+            $variant,
+            $variant instanceof PersonalityProfileVariant ? 'public_variant' : 'base'
+        );
     }
 
     private function basePublicQuery(int $orgId, string $scaleCode, string $locale): Builder

@@ -19,6 +19,9 @@ final class PersonalityProfileSeoService
     public function buildMeta(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
         $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
+        $canonicalVariant = $variant instanceof PersonalityProfileVariant
+            ? $variant
+            : $this->personalityProfileService->getDefaultPublishedVariantForCanonicalRoute($profile);
         $title = $this->fallbackText(
             data_get($projection, 'seo.title'),
             data_get($projection, 'summary_card.title'),
@@ -32,8 +35,8 @@ final class PersonalityProfileSeoService
             (string) ($profile->subtitle ?? null)
         );
         $canonical = $this->fallbackText(
-            data_get($projection, 'seo.canonical_url'),
-            $this->buildCanonicalUrl($profile, (string) $profile->locale)
+            $this->buildCanonicalUrl($profile, (string) $profile->locale, $canonicalVariant),
+            data_get($projection, 'seo.canonical_url')
         );
         $robots = $this->fallbackText(
             data_get($projection, 'seo.robots')
@@ -43,6 +46,7 @@ final class PersonalityProfileSeoService
             'title' => $title,
             'description' => $description,
             'canonical' => $canonical,
+            'alternates' => $this->buildAlternates($profile, $canonicalVariant),
             'og' => [
                 'title' => $this->fallbackText(data_get($projection, 'seo.og_title'), $title),
                 'description' => $this->fallbackText(data_get($projection, 'seo.og_description'), $description),
@@ -100,10 +104,13 @@ final class PersonalityProfileSeoService
         return $jsonLd;
     }
 
-    public function buildCanonicalUrl(PersonalityProfile $profile, string $locale): ?string
-    {
+    public function buildCanonicalUrl(
+        PersonalityProfile $profile,
+        string $locale,
+        ?PersonalityProfileVariant $variant = null
+    ): ?string {
         $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
-        $slug = $this->publicRouteSlug($profile);
+        $slug = $this->publicRouteSlug($profile, $variant);
 
         if ($baseUrl === '' || $slug === '') {
             return null;
@@ -115,14 +122,39 @@ final class PersonalityProfileSeoService
             .rawurlencode($slug);
     }
 
+    /**
+     * @return array{en:?string,zh-CN:?string}
+     */
+    public function buildAlternates(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
+    {
+        return [
+            'en' => $this->buildCanonicalUrl($profile, 'en', $variant),
+            'zh-CN' => $this->buildCanonicalUrl($profile, 'zh-CN', $variant),
+        ];
+    }
+
     public function mapBackendLocaleToFrontendSegment(string $locale): string
     {
         return trim($locale) === 'zh-CN' ? 'zh' : 'en';
     }
 
-    private function publicRouteSlug(PersonalityProfile $profile): string
+    private function publicRouteSlug(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): string
     {
-        return trim((string) $profile->slug);
+        $baseSlug = trim((string) $profile->slug);
+        if ($baseSlug === '') {
+            return '';
+        }
+
+        if (! $variant instanceof PersonalityProfileVariant) {
+            return $baseSlug;
+        }
+
+        $variantCode = strtoupper(trim((string) $variant->variant_code));
+        if (! in_array($variantCode, ['A', 'T'], true)) {
+            return $baseSlug;
+        }
+
+        return strtolower($baseSlug.'-'.$variantCode);
     }
 
     private function fallbackText(?string ...$candidates): ?string
