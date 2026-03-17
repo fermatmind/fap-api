@@ -1078,6 +1078,7 @@ fi
 echo "[CI] personality full-32 authority gate"
 php artisan personality:import-local-baseline --dry-run --upsert --status=published
 php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml \
+  tests/Feature/V0_5/CareerRecommendationPublicApiTest.php \
   tests/Feature/PersonalityCms/PersonalityBaselineImportTest.php \
   tests/Feature/PersonalityCms/PersonalityVariantAuthorityTest.php \
   tests/Unit/Services/Mbti/MbtiPublicProjectionServiceTest.php \
