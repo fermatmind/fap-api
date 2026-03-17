@@ -9,11 +9,13 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
+use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
+use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Support\OrgContext;
@@ -35,6 +37,7 @@ class AttemptReadController extends Controller
         private ReportPdfDocumentService $reportPdfDocumentService,
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
+        private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
         protected OrgContext $orgContext,
@@ -319,6 +322,12 @@ class AttemptReadController extends Controller
                 $responsePayload,
                 (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
                 (int) ($attempt->org_id ?? 0)
+            );
+            $responsePayload[ReportAccess::ACCESS_HUB_KEY] = $this->mbtiAccessHubBuilder->buildForReportContext(
+                $attempt,
+                $gate,
+                $userId !== null ? (string) $userId : null,
+                $anonId
             );
         }
 

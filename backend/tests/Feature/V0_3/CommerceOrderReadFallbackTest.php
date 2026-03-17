@@ -71,6 +71,37 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonPath('delivery.can_resend', false);
     }
 
+    public function test_matching_token_identity_returns_mbti_access_hub_for_mbti_attempt(): void
+    {
+        $orderNo = 'ord_fallback_mbti_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'paid');
+
+        $token = $this->issueAnonToken(self::ANON_OWNER);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.order_no', $orderNo)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.report_url', "/api/v0.3/attempts/{$attemptId}/report")
+            ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'order_delivery')
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.can_download_pdf', true)
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'order_delivery')
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_lookup_order', true)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_request_claim_email', false)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_resend', false)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.has_entry', true)
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId);
+    }
+
     private function issueAnonToken(string $anonId): string
     {
         $token = 'fm_'.(string) Str::uuid();
@@ -106,7 +137,7 @@ final class CommerceOrderReadFallbackTest extends TestCase
         return $token;
     }
 
-    private function insertAttempt(string $attemptId, string $anonId): void
+    private function insertAttempt(string $attemptId, string $anonId, string $scaleCode = 'BIG5_OCEAN'): void
     {
         DB::table('attempts')->insert([
             'id' => $attemptId,
@@ -114,7 +145,7 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'org_id' => 0,
             'user_id' => null,
             'anon_id' => $anonId,
-            'scale_code' => 'BIG5_OCEAN',
+            'scale_code' => $scaleCode,
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',

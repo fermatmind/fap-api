@@ -311,6 +311,48 @@ class OrderManager
             ->first();
     }
 
+    public function findLatestAccessibleOrderForAttempt(
+        int $orgId,
+        ?string $userId,
+        ?string $anonId,
+        string $attemptId
+    ): ?object {
+        $normalizedAttemptId = $this->trimOrNull($attemptId);
+        if ($normalizedAttemptId === null) {
+            return null;
+        }
+
+        $uid = $this->trimOrNull($userId);
+        $aid = $this->trimOrNull($anonId);
+        if ($uid === null && $aid === null) {
+            return null;
+        }
+
+        $query = DB::table('orders')
+            ->where('org_id', $orgId)
+            ->where('target_attempt_id', $normalizedAttemptId)
+            ->where(function ($scoped) use ($uid, $aid): void {
+                if ($uid !== null) {
+                    $scoped->orWhere('user_id', $uid);
+                }
+
+                if ($aid !== null) {
+                    $scoped->orWhere('anon_id', $aid);
+                }
+            })
+            ->orderByRaw("
+                case
+                    when lower(coalesce(status, '')) in ('paid', 'fulfilled') then 0
+                    when lower(coalesce(status, '')) in ('created', 'pending') then 1
+                    else 2
+                end
+            ")
+            ->orderByDesc('updated_at')
+            ->orderByDesc('created_at');
+
+        return $query->first();
+    }
+
     public function isPaidOrFulfilledStatus(?string $status): bool
     {
         return $this->isDeliveryEligibleStatus((string) $status);

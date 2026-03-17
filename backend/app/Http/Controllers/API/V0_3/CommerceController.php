@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
 use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
+use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Email\EmailCaptureService;
 use App\Services\Payments\PaymentRouter;
+use App\Services\Report\ReportAccess;
 use App\Support\OrgContext;
 use App\Support\RegionContext;
 use Illuminate\Http\JsonResponse;
@@ -29,6 +31,7 @@ class CommerceController extends Controller
         private EmailCaptureService $emailCaptures,
         private SkuCatalog $skus,
         private PaymentRouter $paymentRouter,
+        private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private LemonSqueezyCheckoutService $lemonSqueezyCheckout,
         private WechatPayCheckoutService $wechatPayCheckout,
         private AlipayCheckoutService $alipayCheckout,
@@ -141,7 +144,7 @@ class CommerceController extends Controller
             ], 404);
         }
 
-        return response()->json([
+        $payload = [
             'ok' => true,
             'ownership_verified' => true,
             'order' => $order,
@@ -152,7 +155,14 @@ class CommerceController extends Controller
             'amount_cents' => $order->amount_cents ?? $order->amount_total ?? null,
             'currency' => $order->currency ?? null,
             'delivery' => $delivery['delivery'],
-        ]);
+        ];
+
+        $mbtiAccessHub = $this->mbtiAccessHubBuilder->buildForOrderContext($order);
+        if ($mbtiAccessHub !== null) {
+            $payload[ReportAccess::ACCESS_HUB_KEY] = $mbtiAccessHub;
+        }
+
+        return response()->json($payload);
     }
 
     /**
@@ -378,13 +388,20 @@ class CommerceController extends Controller
 
         $delivery = $this->buildOrderDelivery($order);
 
-        return response()->json([
+        $payload = [
             'ok' => true,
             'order_no' => $order->order_no ?? $orderNo,
             'status' => $this->normalizePublicOrderStatus((string) ($order->status ?? '')),
             'attempt_id' => $delivery['attempt_id'],
             'delivery' => $delivery['delivery'],
-        ]);
+        ];
+
+        $mbtiAccessHub = $this->mbtiAccessHubBuilder->buildForLookupHit($order);
+        if ($mbtiAccessHub !== null) {
+            $payload[ReportAccess::ACCESS_HUB_KEY] = $mbtiAccessHub;
+        }
+
+        return response()->json($payload);
     }
 
     /**

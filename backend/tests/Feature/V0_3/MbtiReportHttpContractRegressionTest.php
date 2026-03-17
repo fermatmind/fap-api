@@ -139,6 +139,22 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'ENFP',
             'T'
         );
+        $resp->assertJsonPath('mbti_access_hub_v1.access_state', 'locked')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.order_no', null)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.report_url', "/api/v0.3/attempts/{$attemptId}/report")
+            ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'report_gate')
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.can_download_pdf', false)
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'attempt_pdf')
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_lookup_order', true)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_request_claim_email', false)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_resend', false)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.has_entry', true)
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId);
     }
 
     public function test_unlocked_paid_mbti_report_http_contract_keeps_section_gate_semantics(): void
@@ -194,6 +210,22 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'INTJ',
             'A'
         );
+        $resp->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.order_no', null)
+            ->assertJsonPath('mbti_access_hub_v1.report_access.report_url', "/api/v0.3/attempts/{$attemptId}/report")
+            ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'report_gate')
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.can_download_pdf', true)
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'attempt_pdf')
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_lookup_order', true)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_request_claim_email', false)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.can_resend', false)
+            ->assertJsonPath('mbti_access_hub_v1.recovery.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.has_entry', true)
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId);
     }
 
     private function assertStableMbtiEnvelope(TestResponse $response): void
@@ -223,6 +255,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'scale_code_v2',
             'scale_uid',
             'cta',
+            'mbti_access_hub_v1',
         ] as $key) {
             $this->assertArrayHasKey($key, $payload);
         }
@@ -250,6 +283,63 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
 
         $this->assertStableCtaShape((array) $payload['cta']);
         $this->assertStableMbtiReportShape((array) $payload['report']);
+        $this->assertStableMbtiAccessHubShape((array) $payload['mbti_access_hub_v1']);
+    }
+
+    /**
+     * @param  array<string,mixed>  $hub
+     */
+    private function assertStableMbtiAccessHubShape(array $hub): void
+    {
+        foreach ([
+            'access_state',
+            'report_access',
+            'pdf_access',
+            'recovery',
+            'workspace_lite',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $hub);
+        }
+
+        $this->assertContains((string) ($hub['access_state'] ?? ''), ['locked', 'ready', 'pending', 'recovery_available']);
+
+        $reportAccess = (array) ($hub['report_access'] ?? []);
+        foreach (['can_view_report', 'attempt_id', 'order_no', 'report_url', 'source'] as $key) {
+            $this->assertArrayHasKey($key, $reportAccess);
+        }
+        $this->assertTrue($reportAccess['attempt_id'] === null || is_string($reportAccess['attempt_id']));
+        $this->assertTrue($reportAccess['order_no'] === null || is_string($reportAccess['order_no']));
+        $this->assertTrue($reportAccess['report_url'] === null || is_string($reportAccess['report_url']));
+        $this->assertContains((string) ($reportAccess['source'] ?? ''), ['report_gate', 'order_delivery', 'none']);
+
+        $pdfAccess = (array) ($hub['pdf_access'] ?? []);
+        foreach (['can_download_pdf', 'report_pdf_url', 'source'] as $key) {
+            $this->assertArrayHasKey($key, $pdfAccess);
+        }
+        $this->assertTrue($pdfAccess['report_pdf_url'] === null || is_string($pdfAccess['report_pdf_url']));
+        $this->assertContains((string) ($pdfAccess['source'] ?? ''), ['attempt_pdf', 'order_delivery', 'none']);
+
+        $recovery = (array) ($hub['recovery'] ?? []);
+        foreach ([
+            'can_lookup_order',
+            'can_request_claim_email',
+            'can_resend',
+            'attempt_id',
+            'share_id',
+            'compare_invite_id',
+        ] as $key) {
+            $this->assertArrayHasKey($key, $recovery);
+        }
+        $this->assertTrue($recovery['attempt_id'] === null || is_string($recovery['attempt_id']));
+        $this->assertTrue($recovery['share_id'] === null || is_string($recovery['share_id']));
+        $this->assertTrue($recovery['compare_invite_id'] === null || is_string($recovery['compare_invite_id']));
+
+        $workspaceLite = (array) ($hub['workspace_lite'] ?? []);
+        foreach (['has_entry', 'entry_kind', 'attempt_id'] as $key) {
+            $this->assertArrayHasKey($key, $workspaceLite);
+        }
+        $this->assertSame('mbti_history', $workspaceLite['entry_kind'] ?? null);
+        $this->assertTrue($workspaceLite['attempt_id'] === null || is_string($workspaceLite['attempt_id']));
     }
 
     /**
