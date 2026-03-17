@@ -42,6 +42,64 @@ final class CareerJobService
     /**
      * @return array<string, mixed>
      */
+    public function findPublishedJobsForMbtiGraph(string $graphTypeCode, string $locale, int $orgId = 0): array
+    {
+        $normalizedGraphTypeCode = strtoupper(trim($graphTypeCode));
+
+        if ($normalizedGraphTypeCode === '') {
+            return [];
+        }
+
+        $items = $this->basePublicQuery($orgId, $locale)
+            ->orderBy('sort_order')
+            ->orderBy('job_code')
+            ->orderBy('id')
+            ->get()
+            ->map(function (CareerJob $job) use ($normalizedGraphTypeCode): ?array {
+                $primaryCodes = $this->normalizeTypeCodes($job->mbti_primary_codes_json);
+                $secondaryCodes = $this->normalizeTypeCodes($job->mbti_secondary_codes_json);
+
+                if (in_array($normalizedGraphTypeCode, $primaryCodes, true)) {
+                    $fitBucket = 'primary';
+                } elseif (in_array($normalizedGraphTypeCode, $secondaryCodes, true)) {
+                    $fitBucket = 'secondary';
+                } else {
+                    return null;
+                }
+
+                return [
+                    '_fit_rank' => $fitBucket === 'primary' ? 0 : 1,
+                    '_sort_order' => (int) $job->sort_order,
+                    '_job_code' => (string) $job->job_code,
+                    '_id' => (int) $job->id,
+                    'slug' => (string) $job->slug,
+                    'title' => (string) $job->title,
+                    'summary' => $this->fallbackText($job->excerpt, $job->subtitle, $job->title),
+                    'fit_bucket' => $fitBucket,
+                    'fit_personality_codes' => $this->normalizeTypeCodes($job->fit_personality_codes_json),
+                    'mbti_primary_codes' => $primaryCodes,
+                    'mbti_secondary_codes' => $secondaryCodes,
+                ];
+            })
+            ->all();
+
+        $items = array_values(array_filter($items, static fn (mixed $item): bool => is_array($item)));
+
+        usort($items, static function (array $left, array $right): int {
+            return [(int) $left['_fit_rank'], (int) $left['_sort_order'], (string) $left['_job_code'], (int) $left['_id']]
+                <=> [(int) $right['_fit_rank'], (int) $right['_sort_order'], (string) $right['_job_code'], (int) $right['_id']];
+        });
+
+        return array_map(static function (array $item): array {
+            unset($item['_fit_rank'], $item['_sort_order'], $item['_job_code'], $item['_id']);
+
+            return $item;
+        }, $items);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
     public function listPayload(CareerJob $job): array
     {
         return [
@@ -203,5 +261,48 @@ final class CareerJobService
     private function normalizeSlug(string $slug): string
     {
         return strtolower(trim($slug));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeTypeCodes(mixed $codes): array
+    {
+        if (! is_array($codes)) {
+            return [];
+        }
+
+        $normalized = [];
+
+        foreach ($codes as $code) {
+            if (! is_scalar($code)) {
+                continue;
+            }
+
+            $value = strtoupper(trim((string) $code));
+            if ($value === '') {
+                continue;
+            }
+
+            $normalized[$value] = $value;
+        }
+
+        return array_values($normalized);
+    }
+
+    private function fallbackText(?string ...$candidates): ?string
+    {
+        foreach ($candidates as $candidate) {
+            if ($candidate === null) {
+                continue;
+            }
+
+            $normalized = trim($candidate);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 }

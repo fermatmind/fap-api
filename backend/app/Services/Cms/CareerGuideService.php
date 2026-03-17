@@ -10,6 +10,7 @@ use App\Models\CareerJob;
 use App\Models\PersonalityProfile;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 final class CareerGuideService
 {
@@ -38,6 +39,65 @@ final class CareerGuideService
             ->forSlug($this->normalizeSlug($slug))
             ->with('seoMeta')
             ->first();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function findPublishedGuidesForMbtiGraph(string $graphTypeCode, string $locale, int $orgId = 0): array
+    {
+        $normalizedGraphTypeCode = strtoupper(trim($graphTypeCode));
+
+        if ($normalizedGraphTypeCode === '') {
+            return [];
+        }
+
+        return $this->basePublicQuery($orgId, $locale)
+            ->with([
+                'relatedPersonalityProfiles' => function (BelongsToMany $query) use ($orgId, $locale): void {
+                    $query->withoutGlobalScopes()
+                        ->where('personality_profiles.org_id', max(0, $orgId))
+                        ->where('personality_profiles.scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+                        ->whereIn('personality_profiles.type_code', PersonalityProfile::TYPE_CODES)
+                        ->where('personality_profiles.locale', $this->normalizeLocale($locale))
+                        ->where('personality_profiles.status', 'published')
+                        ->where('personality_profiles.is_public', true)
+                        ->where(static function (Builder $builder): void {
+                            $builder->whereNull('personality_profiles.published_at')
+                                ->orWhere('personality_profiles.published_at', '<=', now());
+                        })
+                        ->orderBy('career_guide_personality_map.sort_order')
+                        ->orderBy('personality_profiles.id');
+                },
+            ])
+            ->orderBy('sort_order')
+            ->orderByDesc('published_at')
+            ->orderBy('guide_code')
+            ->orderBy('id')
+            ->get()
+            ->map(function (CareerGuide $guide) use ($normalizedGraphTypeCode): ?array {
+                $fitPersonalityCodes = $guide->relatedPersonalityProfiles
+                    ->filter(static fn (mixed $profile): bool => $profile instanceof PersonalityProfile)
+                    ->map(static fn (PersonalityProfile $profile): string => strtoupper((string) $profile->type_code))
+                    ->filter(static fn (string $typeCode): bool => $typeCode !== '')
+                    ->unique()
+                    ->values()
+                    ->all();
+
+                if (! in_array($normalizedGraphTypeCode, $fitPersonalityCodes, true)) {
+                    return null;
+                }
+
+                return [
+                    'slug' => (string) $guide->slug,
+                    'title' => (string) $guide->title,
+                    'summary' => $this->fallbackText($guide->excerpt, $guide->title),
+                    'fit_personality_codes' => $fitPersonalityCodes,
+                ];
+            })
+            ->filter()
+            ->values()
+            ->all();
     }
 
     /**
@@ -261,5 +321,21 @@ final class CareerGuideService
         $normalized = strtolower(trim($category));
 
         return $normalized !== '' ? $normalized : null;
+    }
+
+    private function fallbackText(?string ...$candidates): ?string
+    {
+        foreach ($candidates as $candidate) {
+            if ($candidate === null) {
+                continue;
+            }
+
+            $normalized = trim($candidate);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 }

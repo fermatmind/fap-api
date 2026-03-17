@@ -159,25 +159,45 @@ final class PersonalityProfileService
         if ($profile->relationLoaded('variants')) {
             /** @var PersonalityProfileVariant|null $variant */
             $variant = $profile->variants
-                ->first(static fn (mixed $item): bool => $item instanceof PersonalityProfileVariant
-                    && $item->variant_code === 'A'
-                    && (bool) $item->is_published);
+                ->filter(static fn (mixed $item): bool => $item instanceof PersonalityProfileVariant
+                    && (bool) $item->is_published
+                    && ($item->published_at === null || $item->published_at->isPast()))
+                ->sortBy([
+                    static fn (PersonalityProfileVariant $item): int => $item->variant_code === 'A' ? 0 : 1,
+                    static fn (PersonalityProfileVariant $item): string => (string) $item->runtime_type_code,
+                    static fn (PersonalityProfileVariant $item): int => (int) $item->id,
+                ])
+                ->first();
 
             if ($variant instanceof PersonalityProfileVariant) {
-                $variant->loadMissing('seoMeta');
+                $variant->loadMissing([
+                    'sections' => static function (HasMany $query): void {
+                        $query->orderBy('sort_order')
+                            ->orderBy('id');
+                    },
+                    'seoMeta',
+                ]);
 
                 return $variant;
             }
         }
 
         return $profile->variants()
-            ->where('variant_code', 'A')
             ->where('is_published', true)
             ->where(static function (Builder $query): void {
                 $query->whereNull('published_at')
                     ->orWhere('published_at', '<=', now());
             })
-            ->with('seoMeta')
+            ->with([
+                'sections' => static function (HasMany $query): void {
+                    $query->orderBy('sort_order')
+                        ->orderBy('id');
+                },
+                'seoMeta',
+            ])
+            ->orderByRaw("case when variant_code = 'A' then 0 when variant_code = 'T' then 1 else 9 end")
+            ->orderBy('runtime_type_code')
+            ->orderBy('id')
             ->first();
     }
 

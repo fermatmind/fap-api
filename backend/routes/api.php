@@ -29,6 +29,7 @@ use App\Http\Controllers\API\V0_4\RotationAuditController;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Http\Controllers\API\V0_5\Cms\CareerGuideController;
 use App\Http\Controllers\API\V0_5\Cms\CareerJobController;
+use App\Http\Controllers\API\V0_5\Cms\CareerRecommendationController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
 use App\Http\Controllers\HealthzController;
@@ -344,6 +345,8 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career-jobs', [CareerJobController::class, 'index']);
     Route::get('/career-jobs/{slug}/seo', [CareerJobController::class, 'seo']);
     Route::get('/career-jobs/{slug}', [CareerJobController::class, 'show']);
+    Route::get('/career-recommendations/mbti', [CareerRecommendationController::class, 'index']);
+    Route::get('/career-recommendations/mbti/{type}', [CareerRecommendationController::class, 'show']);
     Route::get('/personality', [PersonalityController::class, 'index']);
     Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);
     Route::get('/personality/{type}', [PersonalityController::class, 'show']);
