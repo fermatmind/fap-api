@@ -7,6 +7,7 @@ namespace Tests\Feature\V0_3;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\TestResponse;
 use Mockery;
@@ -17,6 +18,27 @@ final class CommerceCheckoutPayActionTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
     use RefreshDatabase;
+
+    public function test_checkout_options_allows_x_region_header_for_browser_preflight(): void
+    {
+        $response = app()->handle(Request::create(
+            '/api/v0.3/orders/checkout',
+            'OPTIONS',
+            [],
+            [],
+            [],
+            [
+                'HTTP_ORIGIN' => 'https://fermatmind.com',
+                'HTTP_ACCESS_CONTROL_REQUEST_METHOD' => 'POST',
+                'HTTP_ACCESS_CONTROL_REQUEST_HEADERS' => 'content-type,x-region,x-fap-locale,idempotency-key,x-anon-id',
+            ]
+        ));
+
+        $this->assertContains($response->getStatusCode(), [200, 204]);
+
+        $allowedHeaders = strtolower((string) $response->headers->get('Access-Control-Allow-Headers', ''));
+        $this->assertStringContainsString('x-region', $allowedHeaders);
+    }
 
     public function test_checkout_lemonsqueezy_returns_pay_redirect_and_checkout_url(): void
     {
