@@ -2,6 +2,7 @@
 
 namespace App\Services\Commerce;
 
+use App\Models\Order;
 use App\Services\Email\EmailOutboxService;
 use App\Services\Report\ReportAccess;
 use App\Services\Scale\ScaleIdentityWriteProjector;
@@ -21,6 +22,7 @@ class OrderManager
         private SkuCatalog $skus,
         private ScaleIdentityWriteProjector $identityProjector,
         private EmailOutboxService $emailOutbox,
+        private PaymentRecoveryToken $paymentRecoveryTokens,
     ) {}
 
     public function createOrder(
@@ -256,7 +258,8 @@ class OrderManager
         ?string $userId,
         ?string $anonId,
         string $orderNo,
-        bool $allowAnonymousFallback = false
+        bool $allowAnonymousFallback = false,
+        ?string $paymentRecoveryToken = null
     ): array {
         $orderNo = trim($orderNo);
         if ($orderNo === '') {
@@ -278,23 +281,96 @@ class OrderManager
         $ownedByUser = $uid !== null && $uid === $this->trimOrNull($order->user_id ?? null);
         $ownedByAnon = $aid !== null && $aid === $this->trimOrNull($order->anon_id ?? null);
         $ownershipVerified = $ownedByUser || $ownedByAnon;
+        $paymentRecoveryVerified = false;
+        $paymentRecoveryFailure = null;
 
-        if (! $ownershipVerified && $uid === null && $aid === null && $allowAnonymousFallback) {
+        $normalizedPaymentRecoveryToken = $this->trimOrNull($paymentRecoveryToken);
+        if (! $ownershipVerified && $normalizedPaymentRecoveryToken !== null) {
+            $verified = $this->paymentRecoveryTokens->verify($normalizedPaymentRecoveryToken, $orderNo);
+            if (($verified['ok'] ?? false) === true) {
+                $paymentRecoveryVerified = true;
+            } else {
+                $paymentRecoveryFailure = [
+                    'ok' => false,
+                    'error' => (string) ($verified['error'] ?? 'PAYMENT_RECOVERY_TOKEN_INVALID'),
+                    'message' => (string) ($verified['message'] ?? 'payment recovery token invalid.'),
+                ];
+            }
+        }
+
+        if (! $ownershipVerified && ! $paymentRecoveryVerified && $uid === null && $aid === null && $allowAnonymousFallback) {
             return [
                 'ok' => true,
                 'order' => $order,
                 'ownership_verified' => false,
+                'payment_recovery_verified' => false,
             ];
         }
 
-        if (! $ownershipVerified) {
+        if (! $ownershipVerified && $paymentRecoveryFailure !== null) {
+            return $paymentRecoveryFailure;
+        }
+
+        if (! $ownershipVerified && ! $paymentRecoveryVerified) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
         return [
             'ok' => true,
             'order' => $order,
-            'ownership_verified' => true,
+            'ownership_verified' => $ownershipVerified,
+            'payment_recovery_verified' => $paymentRecoveryVerified,
+        ];
+    }
+
+    public function issuePaymentRecoveryToken(object $order): ?string
+    {
+        $orderNo = $this->trimOrNull((string) ($order->order_no ?? ''));
+        if ($orderNo === null) {
+            return null;
+        }
+
+        return $this->paymentRecoveryTokens->issue($orderNo);
+    }
+
+    /**
+     * @return array{wait_url:?string,result_url:?string}
+     */
+    public function presentPaymentRecoveryUrls(
+        object $order,
+        ?string $paymentRecoveryToken = null,
+        ?string $fallbackLocale = null
+    ): array {
+        $base = $this->frontendBaseUrl();
+        if ($base === null) {
+            return [
+                'wait_url' => null,
+                'result_url' => null,
+            ];
+        }
+
+        $orderNo = $this->trimOrNull((string) ($order->order_no ?? ''));
+        $orgId = (int) ($order->org_id ?? 0);
+        $attemptId = $this->resolveKnownAttemptId($orgId, $order->target_attempt_id ?? null);
+        $localeSegment = $this->frontendLocaleSegment(
+            $this->resolveOrderLocale($orgId, $attemptId, $fallbackLocale)
+        );
+
+        $waitUrl = null;
+        $normalizedPaymentRecoveryToken = $this->trimOrNull($paymentRecoveryToken);
+        if ($orderNo !== null && $normalizedPaymentRecoveryToken !== null) {
+            $waitUrl = $base.'/'.$localeSegment.'/orders/'.urlencode($orderNo)
+                .'?'.http_build_query([
+                    'orderNo' => $orderNo,
+                    'paymentRecoveryToken' => $normalizedPaymentRecoveryToken,
+                ]);
+        }
+
+        return [
+            'wait_url' => $waitUrl,
+            'result_url' => $attemptId !== null
+                ? $base.'/'.$localeSegment.'/result/'.urlencode($attemptId)
+                : null,
         ];
     }
 
@@ -859,6 +935,36 @@ class OrderManager
             ->exists();
 
         return $exists ? $attemptId : null;
+    }
+
+    private function frontendBaseUrl(): ?string
+    {
+        $base = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+
+        return $base !== '' ? $base : null;
+    }
+
+    private function frontendLocaleSegment(string $locale): string
+    {
+        return str_starts_with(mb_strtolower(trim($locale), 'UTF-8'), 'zh') ? 'zh' : 'en';
+    }
+
+    private function resolveOrderLocale(int $orgId, ?string $attemptId, ?string $fallbackLocale = null): string
+    {
+        if ($attemptId !== null) {
+            $locale = DB::table('attempts')
+                ->where('id', $attemptId)
+                ->where('org_id', $orgId)
+                ->value('locale');
+            $normalized = $this->trimOrNull(is_string($locale) ? $locale : null);
+            if ($normalized !== null) {
+                return $normalized;
+            }
+        }
+
+        $fallback = $this->trimOrNull($fallbackLocale);
+
+        return $fallback ?? 'en';
     }
 
     private function isDeliveryEligibleStatus(string $status): bool

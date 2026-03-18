@@ -11,6 +11,10 @@ class Order extends Model
 {
     use HasOrgScope;
 
+    public const PAYMENT_RECOVERY_PURPOSE = 'payment_recovery';
+
+    public const PAYMENT_RECOVERY_TOKEN_TTL_SECONDS = 2592000;
+
     protected $table = 'orders';
 
     public $incrementing = false;

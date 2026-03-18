@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_3;
 
+use App\Services\Commerce\PaymentRecoveryToken;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -45,9 +46,11 @@ final class CommerceOrderReadFallbackTest extends TestCase
 
     public function test_matching_token_identity_returns_full_payload(): void
     {
+        config(['app.frontend_url' => 'https://web.example.test']);
+
         $orderNo = 'ord_fallback_'.Str::lower(Str::random(10));
         $attemptId = (string) Str::uuid();
-        $this->insertAttempt($attemptId, self::ANON_OWNER);
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'BIG5_OCEAN', 'en');
         $this->insertOrderForOwner($orderNo, $attemptId, 'paid');
 
         $token = $this->issueAnonToken(self::ANON_OWNER);
@@ -64,11 +67,14 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonPath('amount_cents', 1990)
             ->assertJsonPath('currency', 'USD')
             ->assertJsonPath('order.anon_id', self::ANON_OWNER)
+            ->assertJsonPath('result_url', "https://web.example.test/en/result/{$attemptId}")
             ->assertJsonPath('delivery.can_view_report', true)
             ->assertJsonPath('delivery.report_url', "/api/v0.3/attempts/{$attemptId}/report")
             ->assertJsonPath('delivery.can_download_pdf', true)
             ->assertJsonPath('delivery.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
             ->assertJsonPath('delivery.can_resend', false);
+
+        $this->assertNotSame('', (string) $response->json('payment_recovery_token'));
     }
 
     public function test_matching_token_identity_returns_mbti_access_hub_for_mbti_attempt(): void
@@ -100,6 +106,91 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.has_entry', true)
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId);
+    }
+
+    public function test_valid_payment_recovery_token_reads_pending_order_without_owner_identity(): void
+    {
+        config([
+            'app.frontend_url' => 'https://web.example.test',
+            'app.url' => 'http://localhost:8000',
+            'payments.providers.alipay.enabled' => true,
+        ]);
+
+        $orderNo = 'ord_recovery_pending_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'BIG5_OCEAN', 'en');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'created', 'alipay');
+
+        $token = app(PaymentRecoveryToken::class)->issue($orderNo);
+        $response = $this->getJson('/api/v0.3/orders/'.$orderNo.'?payment_recovery_token='.urlencode($token));
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('ownership_verified', false)
+            ->assertJsonPath('order_no', $orderNo)
+            ->assertJsonPath('status', 'pending')
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('payment_recovery_token', $token)
+            ->assertJsonPath('result_url', "https://web.example.test/en/result/{$attemptId}")
+            ->assertJsonPath('provider', 'alipay')
+            ->assertJsonPath('pay.type', 'html')
+            ->assertJsonPath('checkout_url', null)
+            ->assertJsonMissingPath('order');
+
+        $this->assertStringContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
+    }
+
+    public function test_valid_payment_recovery_token_reads_paid_order_without_owner_identity(): void
+    {
+        config(['app.frontend_url' => 'https://web.example.test']);
+
+        $orderNo = 'ord_recovery_paid_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'BIG5_OCEAN', 'zh-CN');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'fulfilled');
+
+        $token = app(PaymentRecoveryToken::class)->issue($orderNo);
+        $response = $this->withHeaders([
+            'X-Payment-Recovery-Token' => $token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('ownership_verified', false)
+            ->assertJsonPath('order_no', $orderNo)
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('payment_recovery_token', $token)
+            ->assertJsonPath('result_url', "https://web.example.test/zh/result/{$attemptId}")
+            ->assertJsonPath('pay', null)
+            ->assertJsonPath('checkout_url', null)
+            ->assertJsonMissingPath('order');
+    }
+
+    public function test_expired_payment_recovery_token_is_rejected(): void
+    {
+        $orderNo = 'ord_recovery_expired_'.Str::lower(Str::random(10));
+        $this->insertOrderForOwner($orderNo);
+
+        $token = $this->issuePaymentRecoveryToken($orderNo, time() - 60);
+        $response = $this->getJson('/api/v0.3/orders/'.$orderNo.'?payment_recovery_token='.urlencode($token));
+
+        $response->assertStatus(403)
+            ->assertJsonPath('error_code', 'PAYMENT_RECOVERY_TOKEN_EXPIRED');
+    }
+
+    public function test_tampered_payment_recovery_token_is_rejected(): void
+    {
+        $orderNo = 'ord_recovery_tampered_'.Str::lower(Str::random(10));
+        $this->insertOrderForOwner($orderNo);
+
+        $token = app(PaymentRecoveryToken::class)->issue($orderNo);
+        $tampered = substr($token, 0, -1).(str_ends_with($token, 'a') ? 'b' : 'a');
+
+        $response = $this->getJson('/api/v0.3/orders/'.$orderNo.'?payment_recovery_token='.urlencode($tampered));
+
+        $response->assertStatus(403)
+            ->assertJsonPath('error_code', 'PAYMENT_RECOVERY_TOKEN_INVALID');
     }
 
     private function issueAnonToken(string $anonId): string
@@ -137,8 +228,12 @@ final class CommerceOrderReadFallbackTest extends TestCase
         return $token;
     }
 
-    private function insertAttempt(string $attemptId, string $anonId, string $scaleCode = 'BIG5_OCEAN'): void
-    {
+    private function insertAttempt(
+        string $attemptId,
+        string $anonId,
+        string $scaleCode = 'BIG5_OCEAN',
+        string $locale = 'zh-CN'
+    ): void {
         DB::table('attempts')->insert([
             'id' => $attemptId,
             'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', $attemptId), 0, 8)),
@@ -148,7 +243,7 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'scale_code' => $scaleCode,
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
-            'locale' => 'zh-CN',
+            'locale' => $locale,
             'question_count' => 120,
             'answers_summary_json' => json_encode(['stage' => 'seed'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'client_platform' => 'test',
@@ -165,8 +260,12 @@ final class CommerceOrderReadFallbackTest extends TestCase
         ]);
     }
 
-    private function insertOrderForOwner(string $orderNo, ?string $attemptId = null, string $status = 'created'): void
-    {
+    private function insertOrderForOwner(
+        string $orderNo,
+        ?string $attemptId = null,
+        string $status = 'created',
+        string $provider = 'billing'
+    ): void {
         $now = now();
         $row = [
             'id' => (string) Str::uuid(),
@@ -180,7 +279,7 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'amount_cents' => 1990,
             'currency' => 'USD',
             'status' => $status,
-            'provider' => 'billing',
+            'provider' => $provider,
             'external_trade_no' => null,
             'paid_at' => $status === 'paid' ? $now : null,
             'created_at' => $now,
@@ -222,5 +321,40 @@ final class CommerceOrderReadFallbackTest extends TestCase
         }
 
         DB::table('orders')->insert($row);
+    }
+
+    private function issuePaymentRecoveryToken(string $orderNo, int $exp): string
+    {
+        $payload = [
+            'order_no' => $orderNo,
+            'purpose' => \App\Models\Order::PAYMENT_RECOVERY_PURPOSE,
+            'exp' => $exp,
+        ];
+
+        $payloadSegment = $this->base64UrlEncode((string) json_encode(
+            $payload,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        ));
+        $signature = hash_hmac('sha256', $payloadSegment, $this->paymentRecoverySigningKey(), true);
+
+        return $payloadSegment.'.'.$this->base64UrlEncode($signature);
+    }
+
+    private function paymentRecoverySigningKey(): string
+    {
+        $key = (string) config('app.key', '');
+        if (str_starts_with($key, 'base64:')) {
+            $decoded = base64_decode(substr($key, 7), true);
+            if (is_string($decoded) && $decoded !== '') {
+                return $decoded;
+            }
+        }
+
+        return $key;
+    }
+
+    private function base64UrlEncode(string $value): string
+    {
+        return rtrim(strtr(base64_encode($value), '+/', '-_'), '=');
     }
 }
