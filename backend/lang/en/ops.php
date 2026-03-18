@@ -62,6 +62,7 @@ return [
         'healthz_status' => 'Healthz Status',
         'funnel_7d' => 'Funnel (7d)',
         'paid_orders_today' => 'Paid Orders Today',
+        'pending_orders' => 'Pending Orders',
         'revenue_today' => 'Revenue Today',
         'unlock_rate' => 'Unlock Rate',
         'refund_count' => 'Refund Count',

@@ -135,6 +135,11 @@ class CommerceController extends Controller
         $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
         $message = $this->publicOrderMessage((string) ($order->status ?? ''));
         $delivery = $this->buildOrderDelivery($order);
+        $payment = $this->buildOrderPaymentPayload(
+            $request,
+            $order,
+            $status === 'pending' && $request->boolean('include_payment_action')
+        );
 
         if (! $ownershipVerified) {
             return response()->json([
@@ -154,6 +159,9 @@ class CommerceController extends Controller
             'message' => $message,
             'amount_cents' => $order->amount_cents ?? $order->amount_total ?? null,
             'currency' => $order->currency ?? null,
+            'provider' => $payment['provider'],
+            'pay' => $payment['pay'],
+            'checkout_url' => $payment['checkout_url'],
             'delivery' => $delivery['delivery'],
         ];
 
@@ -234,6 +242,11 @@ class CommerceController extends Controller
                 if ($provider === '') {
                     $provider = (string) $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
                 }
+                $payment = $this->buildOrderPaymentPayload(
+                    $request,
+                    $order,
+                    $this->normalizePublicOrderStatus((string) ($order->status ?? '')) === 'pending'
+                );
 
                 return response()->json([
                     'ok' => true,
@@ -241,9 +254,9 @@ class CommerceController extends Controller
                     'attempt_id' => $order->target_attempt_id ?? null,
                     'status' => $this->normalizePublicOrderStatus((string) ($order->status ?? '')),
                     'message' => $this->publicOrderMessage((string) ($order->status ?? '')),
-                    'provider' => $provider,
-                    'pay' => null,
-                    'checkout_url' => null,
+                    'provider' => $payment['provider'] ?? $provider,
+                    'pay' => $payment['pay'],
+                    'checkout_url' => $payment['checkout_url'],
                 ]);
             }
         }
@@ -509,6 +522,114 @@ class CommerceController extends Controller
             ),
             default => ['ok' => true],
         };
+    }
+
+    /**
+     * @return array{
+     *     provider:?string,
+     *     pay:?array{type:string,value:string,provider:string},
+     *     checkout_url:?string
+     * }
+     */
+    private function buildOrderPaymentPayload(Request $request, object $order, bool $includePaymentAction): array
+    {
+        $provider = strtolower(trim((string) ($order->provider ?? '')));
+        if ($provider === '') {
+            $provider = (string) $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
+        }
+
+        $normalizedProvider = $provider !== '' ? $provider : null;
+        if ($normalizedProvider === null || ! $this->isProviderEnabled($normalizedProvider)) {
+            return [
+                'provider' => $normalizedProvider,
+                'pay' => null,
+                'checkout_url' => null,
+            ];
+        }
+
+        if (! $includePaymentAction) {
+            return [
+                'provider' => $normalizedProvider,
+                'pay' => null,
+                'checkout_url' => null,
+            ];
+        }
+
+        $orderNo = trim((string) ($order->order_no ?? ''));
+        if ($orderNo === '') {
+            return [
+                'provider' => $normalizedProvider,
+                'pay' => null,
+                'checkout_url' => null,
+            ];
+        }
+
+        $amountCents = (int) ($order->amount_cents ?? $order->amount_total ?? 0);
+        $currency = strtoupper(trim((string) ($order->currency ?? 'USD')));
+        $description = strtoupper(trim((string) ($order->sku ?? '')));
+        if ($description === '') {
+            $description = 'FermatMind Order';
+        }
+
+        $payAction = $this->resolveCheckoutPayAction(
+            $normalizedProvider,
+            $orderNo,
+            $this->trimNullableString($order->target_attempt_id ?? null),
+            $amountCents,
+            $currency,
+            $description,
+            null,
+            (string) $request->userAgent()
+        );
+
+        if (($payAction['ok'] ?? true) !== true) {
+            Log::warning('ORDER_PAYMENT_ACTION_UNAVAILABLE', [
+                'order_no' => $orderNo,
+                'provider' => $normalizedProvider,
+                'status' => (string) ($order->status ?? ''),
+                'reason' => $payAction['error_code'] ?? $payAction['message'] ?? 'unknown',
+            ]);
+
+            return [
+                'provider' => $normalizedProvider,
+                'pay' => null,
+                'checkout_url' => null,
+            ];
+        }
+
+        return $this->presentCheckoutPayAction($normalizedProvider, $payAction);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payAction
+     * @return array{
+     *     provider:?string,
+     *     pay:?array{type:string,value:string,provider:string},
+     *     checkout_url:?string
+     * }
+     */
+    private function presentCheckoutPayAction(?string $provider, array $payAction): array
+    {
+        $payType = strtolower(trim((string) ($payAction['type'] ?? '')));
+        $payValue = trim((string) ($payAction['value'] ?? ''));
+
+        if ($payType === '' || $payValue === '') {
+            return [
+                'provider' => $provider,
+                'pay' => null,
+                'checkout_url' => null,
+            ];
+        }
+
+        return [
+            'provider' => $provider,
+            'pay' => [
+                'type' => $payType,
+                'value' => $payValue,
+                'provider' => $provider ?? '',
+            ],
+            'checkout_url' => $payType === 'redirect' ? $payValue : null,
+        ];
     }
 
     private function toHttpResponse(mixed $gatewayResponse): ?Response
@@ -779,6 +900,17 @@ class CommerceController extends Controller
         }
 
         return $email;
+    }
+
+    private function trimNullableString(mixed $value): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized !== '' ? $normalized : null;
     }
 
     /**

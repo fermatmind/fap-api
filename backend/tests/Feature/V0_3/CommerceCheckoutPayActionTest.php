@@ -8,7 +8,10 @@ use App\Services\Commerce\Checkout\WechatPayCheckoutService;
 use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -188,6 +191,80 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $this->assertNotSame('', (string) $response->json('order_no'));
     }
 
+    public function test_checkout_reuses_pending_order_and_returns_pay_action_for_existing_pending_order(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.wechatpay.enabled' => true,
+        ]);
+
+        $orderNo = 'ord_existing_pending_checkout_1';
+        $anonId = 'anon_existing_pending_checkout_1';
+        $this->insertPendingOrder($orderNo, 'wechatpay', $anonId);
+
+        $mock = Mockery::mock(WechatPayCheckoutService::class);
+        $mock->shouldReceive('createCheckoutAction')
+            ->once()
+            ->andReturn([
+                'ok' => true,
+                'type' => 'qr',
+                'value' => 'weixin://wxpay/bizpayurl?pr=existing_pending_checkout',
+            ]);
+        $this->app->instance(WechatPayCheckoutService::class, $mock);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ])->postJson('/api/v0.3/orders/checkout', [
+            'order_no' => $orderNo,
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('order_no', $orderNo);
+        $response->assertJsonPath('status', 'pending');
+        $response->assertJsonPath('provider', 'wechatpay');
+        $response->assertJsonPath('pay.type', 'qr');
+        $response->assertJsonPath('pay.value', 'weixin://wxpay/bizpayurl?pr=existing_pending_checkout');
+        $response->assertJsonPath('checkout_url', null);
+    }
+
+    public function test_get_order_can_include_payment_action_for_pending_orders(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.wechatpay.enabled' => true,
+        ]);
+
+        $orderNo = 'ord_include_payment_action_1';
+        $anonId = 'anon_include_payment_action_1';
+        $this->insertPendingOrder($orderNo, 'wechatpay', $anonId);
+
+        $mock = Mockery::mock(WechatPayCheckoutService::class);
+        $mock->shouldReceive('createCheckoutAction')
+            ->once()
+            ->andReturn([
+                'ok' => true,
+                'type' => 'qr',
+                'value' => 'weixin://wxpay/bizpayurl?pr=include_payment_action',
+            ]);
+        $this->app->instance(WechatPayCheckoutService::class, $mock);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ])->getJson('/api/v0.3/orders/'.$orderNo.'?include_payment_action=1');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('order_no', $orderNo);
+        $response->assertJsonPath('status', 'pending');
+        $response->assertJsonPath('provider', 'wechatpay');
+        $response->assertJsonPath('pay.type', 'qr');
+        $response->assertJsonPath('pay.value', 'weixin://wxpay/bizpayurl?pr=include_payment_action');
+        $response->assertJsonPath('checkout_url', null);
+    }
+
     private function seedCommerce(): void
     {
         (new Pr19CommerceSeeder)->run();
@@ -200,5 +277,64 @@ final class CommerceCheckoutPayActionTest extends TestCase
     private function checkout(array $payload, array $headers = []): TestResponse
     {
         return $this->withHeaders($headers)->postJson('/api/v0.3/orders/checkout', $payload);
+    }
+
+    private function insertPendingOrder(string $orderNo, string $provider, string $anonId): void
+    {
+        $now = now();
+        $row = [
+            'id' => (string) Str::uuid(),
+            'order_no' => $orderNo,
+            'org_id' => 0,
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'sku' => 'MBTI_CREDIT',
+            'item_sku' => 'MBTI_CREDIT',
+            'requested_sku' => 'MBTI_CREDIT',
+            'effective_sku' => 'MBTI_CREDIT',
+            'quantity' => 1,
+            'amount_total' => 199,
+            'amount_cents' => 199,
+            'amount_refunded' => 0,
+            'currency' => 'CNY',
+            'status' => 'created',
+            'provider' => $provider,
+            'provider_order_id' => null,
+            'device_id' => null,
+            'request_id' => 'req_'.$orderNo,
+            'created_ip' => null,
+            'target_attempt_id' => 'attempt_'.$orderNo,
+            'scale_code_v2' => null,
+            'scale_uid' => null,
+            'external_trade_no' => null,
+            'contact_email_hash' => null,
+            'metadata' => null,
+            'meta_json' => null,
+            'paid_at' => null,
+            'fulfilled_at' => null,
+            'refunded_at' => null,
+            'refund_amount_cents' => null,
+            'refund_reason' => null,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ];
+
+        foreach ([
+            'requested_sku',
+            'effective_sku',
+            'scale_code_v2',
+            'scale_uid',
+            'contact_email_hash',
+            'metadata',
+            'meta_json',
+            'refund_amount_cents',
+            'refund_reason',
+        ] as $column) {
+            if (! Schema::hasColumn('orders', $column)) {
+                unset($row[$column]);
+            }
+        }
+
+        DB::table('orders')->insert($row);
     }
 }

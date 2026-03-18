@@ -25,6 +25,7 @@ class CommerceKpiWidget extends BaseWidget
         if ($orgId <= 0) {
             return [
                 Stat::make(__('ops.widgets.paid_orders_today'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
+                Stat::make(__('ops.widgets.pending_orders'), '0')->description(__('ops.widgets.no_org_selected')),
                 Stat::make(__('ops.widgets.revenue_today'), '0')->description(__('ops.widgets.no_org_selected')),
                 Stat::make(__('ops.widgets.unlock_rate'), '0%')->description(__('ops.widgets.no_org_selected')),
                 Stat::make(__('ops.widgets.refund_count'), '0')->description(__('ops.widgets.no_org_selected')),
@@ -45,6 +46,11 @@ class CommerceKpiWidget extends BaseWidget
             ->where('created_at', '>=', $start)
             ->where('created_at', '<', $end)
             ->sum(DB::raw('COALESCE(amount_cents, 0)'));
+
+        $pendingOrders = (int) DB::table('orders')
+            ->where('org_id', $orgId)
+            ->whereRaw("lower(coalesce(status, '')) in (?, ?)", ['created', 'pending'])
+            ->count();
 
         $refundCount = (int) DB::table('orders')
             ->where('org_id', $orgId)
@@ -77,6 +83,8 @@ class CommerceKpiWidget extends BaseWidget
 
         return [
             Stat::make(__('ops.widgets.paid_orders_today'), (string) $paidOrders),
+            Stat::make(__('ops.widgets.pending_orders'), (string) $pendingOrders)
+                ->color($pendingOrders > 0 ? 'warning' : 'success'),
             Stat::make(__('ops.widgets.revenue_today'), (string) $todayRevenue)->description(__('ops.widgets.cents')),
             Stat::make(__('ops.widgets.unlock_rate'), (string) $unlockRate . '%'),
             Stat::make(__('ops.widgets.refund_count'), (string) $refundCount)
