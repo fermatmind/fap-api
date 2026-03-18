@@ -123,36 +123,54 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
-        $result = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no, false);
+        $requestedPaymentRecoveryToken = $this->resolvePaymentRecoveryToken($request);
+        $result = $this->orders->getOrder(
+            $orgId,
+            $userId !== null ? (string) $userId : null,
+            $anonId,
+            $order_no,
+            false,
+            $requestedPaymentRecoveryToken
+        );
         if (! ($result['ok'] ?? false)) {
-            $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
+            $errorCode = (string) data_get($result, 'error_code', data_get($result, 'error', ''));
             $message = trim((string) ($result['message'] ?? ''));
+            if (in_array($errorCode, ['PAYMENT_RECOVERY_TOKEN_INVALID', 'PAYMENT_RECOVERY_TOKEN_EXPIRED'], true)) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => $errorCode,
+                    'message' => $message !== '' ? $message : 'payment recovery token invalid.',
+                ], 403);
+            }
+
+            $status = $this->mapErrorStatus($errorCode);
             abort($status, $message !== '' ? $message : 'request failed.');
         }
 
         $order = $result['order'];
         $ownershipVerified = (bool) ($result['ownership_verified'] ?? true);
+        $paymentRecoveryVerified = (bool) ($result['payment_recovery_verified'] ?? false);
         $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
         $message = $this->publicOrderMessage((string) ($order->status ?? ''));
         $delivery = $this->buildOrderDelivery($order);
+        $paymentRecoveryToken = $paymentRecoveryVerified && $requestedPaymentRecoveryToken !== null
+            ? $requestedPaymentRecoveryToken
+            : $this->orders->issuePaymentRecoveryToken($order);
+        $recoveryUrls = $this->orders->presentPaymentRecoveryUrls(
+            $order,
+            $paymentRecoveryToken,
+            $this->resolveRequestedLocale($request)
+        );
         $payment = $this->buildOrderPaymentPayload(
             $request,
             $order,
-            $status === 'pending' && $request->boolean('include_payment_action')
+            $status === 'pending' && ($request->boolean('include_payment_action') || $paymentRecoveryVerified),
+            $paymentRecoveryToken
         );
-
-        if (! $ownershipVerified) {
-            return response()->json([
-                'ok' => false,
-                'error_code' => 'ORDER_NOT_FOUND',
-                'message' => 'order not found.',
-            ], 404);
-        }
 
         $payload = [
             'ok' => true,
-            'ownership_verified' => true,
-            'order' => $order,
+            'ownership_verified' => $ownershipVerified,
             'order_no' => $order->order_no ?? null,
             'attempt_id' => $delivery['attempt_id'],
             'status' => $status,
@@ -160,14 +178,20 @@ class CommerceController extends Controller
             'amount_cents' => $order->amount_cents ?? $order->amount_total ?? null,
             'currency' => $order->currency ?? null,
             'provider' => $payment['provider'],
+            'payment_recovery_token' => $paymentRecoveryToken,
+            'result_url' => $recoveryUrls['result_url'],
             'pay' => $payment['pay'],
             'checkout_url' => $payment['checkout_url'],
             'delivery' => $delivery['delivery'],
         ];
 
-        $mbtiAccessHub = $this->mbtiAccessHubBuilder->buildForOrderContext($order);
-        if ($mbtiAccessHub !== null) {
-            $payload[ReportAccess::ACCESS_HUB_KEY] = $mbtiAccessHub;
+        if ($ownershipVerified) {
+            $payload['order'] = $order;
+
+            $mbtiAccessHub = $this->mbtiAccessHubBuilder->buildForOrderContext($order);
+            if ($mbtiAccessHub !== null) {
+                $payload[ReportAccess::ACCESS_HUB_KEY] = $mbtiAccessHub;
+            }
         }
 
         return response()->json($payload);
@@ -242,10 +266,17 @@ class CommerceController extends Controller
                 if ($provider === '') {
                     $provider = (string) $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
                 }
+                $paymentRecoveryToken = $this->orders->issuePaymentRecoveryToken($order);
+                $recoveryUrls = $this->orders->presentPaymentRecoveryUrls(
+                    $order,
+                    $paymentRecoveryToken,
+                    $this->resolveRequestedLocale($request)
+                );
                 $payment = $this->buildOrderPaymentPayload(
                     $request,
                     $order,
-                    $this->normalizePublicOrderStatus((string) ($order->status ?? '')) === 'pending'
+                    $this->normalizePublicOrderStatus((string) ($order->status ?? '')) === 'pending',
+                    $paymentRecoveryToken
                 );
 
                 return response()->json([
@@ -255,6 +286,9 @@ class CommerceController extends Controller
                     'status' => $this->normalizePublicOrderStatus((string) ($order->status ?? '')),
                     'message' => $this->publicOrderMessage((string) ($order->status ?? '')),
                     'provider' => $payment['provider'] ?? $provider,
+                    'payment_recovery_token' => $paymentRecoveryToken,
+                    'wait_url' => $recoveryUrls['wait_url'],
+                    'result_url' => $recoveryUrls['result_url'],
                     'pay' => $payment['pay'],
                     'checkout_url' => $payment['checkout_url'],
                 ]);
@@ -360,6 +394,23 @@ class CommerceController extends Controller
             );
         }
 
+        $paymentRecoveryToken = $order !== null ? $this->orders->issuePaymentRecoveryToken($order) : null;
+        $recoveryUrls = $order !== null
+            ? $this->orders->presentPaymentRecoveryUrls(
+                $order,
+                $paymentRecoveryToken,
+                $this->resolveRequestedLocale($request)
+            )
+            : ['wait_url' => null, 'result_url' => null];
+        $presentedPayment = $this->decoratePaymentPayloadForRecovery(
+            [
+                'provider' => $provider,
+                'pay' => $payPayload,
+                'checkout_url' => $checkoutUrl,
+            ],
+            $paymentRecoveryToken
+        );
+
         return response()->json([
             'ok' => true,
             'order_no' => $orderNo !== '' ? $orderNo : ($created['order_no'] ?? null),
@@ -367,8 +418,11 @@ class CommerceController extends Controller
             'provider' => $provider,
             'status' => 'pending',
             'message' => 'Order created, waiting for payment.',
-            'pay' => $payPayload,
-            'checkout_url' => $checkoutUrl,
+            'payment_recovery_token' => $paymentRecoveryToken,
+            'wait_url' => $recoveryUrls['wait_url'],
+            'result_url' => $recoveryUrls['result_url'],
+            'pay' => $presentedPayment['pay'],
+            'checkout_url' => $presentedPayment['checkout_url'],
         ]);
     }
 
@@ -473,8 +527,20 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
-        $found = $this->orders->getOrder($orgId, $userId !== null ? (string) $userId : null, $anonId, $order_no);
+        $found = $this->orders->getOrder(
+            $orgId,
+            $userId !== null ? (string) $userId : null,
+            $anonId,
+            $order_no,
+            false,
+            $this->resolvePaymentRecoveryToken($request)
+        );
         if (! ($found['ok'] ?? false)) {
+            $errorCode = (string) data_get($found, 'error_code', data_get($found, 'error', ''));
+            if (in_array($errorCode, ['PAYMENT_RECOVERY_TOKEN_INVALID', 'PAYMENT_RECOVERY_TOKEN_EXPIRED'], true)) {
+                abort(403);
+            }
+
             abort(404);
         }
 
@@ -552,8 +618,12 @@ class CommerceController extends Controller
      *     checkout_url:?string
      * }
      */
-    private function buildOrderPaymentPayload(Request $request, object $order, bool $includePaymentAction): array
-    {
+    private function buildOrderPaymentPayload(
+        Request $request,
+        object $order,
+        bool $includePaymentAction,
+        ?string $paymentRecoveryToken = null
+    ): array {
         $provider = strtolower(trim((string) ($order->provider ?? '')));
         if ($provider === '') {
             $provider = (string) $this->paymentRouter->primaryProviderForRegion($this->regionContext->region());
@@ -571,7 +641,7 @@ class CommerceController extends Controller
         $scene = $this->resolvePaymentActionScene((string) $request->userAgent());
         $cached = $this->resolveCachedOrderPaymentPayload($order, $normalizedProvider, $scene);
         if ($cached !== null) {
-            return $cached;
+            return $this->decoratePaymentPayloadForRecovery($cached, $paymentRecoveryToken);
         }
 
         if ($normalizedProvider === null || ! $this->isProviderEnabled($normalizedProvider)) {
@@ -627,7 +697,7 @@ class CommerceController extends Controller
         $presented = $this->presentCheckoutPayAction($normalizedProvider, $payAction);
         $this->persistOrderPaymentPayload($order, $scene, $presented);
 
-        return $presented;
+        return $this->decoratePaymentPayloadForRecovery($presented, $paymentRecoveryToken);
     }
 
     /**
@@ -873,6 +943,39 @@ class CommerceController extends Controller
         return null;
     }
 
+    private function resolvePaymentRecoveryToken(Request $request): ?string
+    {
+        foreach ([
+            $request->query('payment_recovery_token'),
+            $request->query('paymentRecoveryToken'),
+            $request->header('X-Payment-Recovery-Token', ''),
+        ] as $candidate) {
+            $normalized = $this->trimNullableString($candidate);
+            if ($normalized !== null) {
+                return $normalized;
+            }
+        }
+
+        return null;
+    }
+
+    private function resolveRequestedLocale(Request $request): ?string
+    {
+        foreach ([
+            $request->query('locale'),
+            $request->header('X-Fap-Locale', ''),
+            $request->header('X-Locale', ''),
+            $request->getLocale(),
+        ] as $candidate) {
+            $normalized = $this->trimNullableString($candidate);
+            if ($normalized !== null) {
+                return $normalized;
+            }
+        }
+
+        return null;
+    }
+
     private function resolveIdempotencyKey(Request $request, array $payload): ?string
     {
         $header = trim((string) $request->header('Idempotency-Key', ''));
@@ -1096,6 +1199,53 @@ class CommerceController extends Controller
             'refunded' => 'Order refunded.',
             default => 'Confirming your payment...',
         };
+    }
+
+    /**
+     * @param  array{
+     *     provider:?string,
+     *     pay:?array{type:string,value:string,provider:string},
+     *     checkout_url:?string
+     * }  $payload
+     * @return array{
+     *     provider:?string,
+     *     pay:?array{type:string,value:string,provider:string},
+     *     checkout_url:?string
+     * }
+     */
+    private function decoratePaymentPayloadForRecovery(array $payload, ?string $paymentRecoveryToken): array
+    {
+        $normalizedToken = $this->trimNullableString($paymentRecoveryToken);
+        $provider = strtolower(trim((string) ($payload['provider'] ?? '')));
+        if ($normalizedToken === null || $provider !== 'alipay') {
+            return $payload;
+        }
+
+        $pay = $payload['pay'] ?? null;
+        if (is_array($pay)) {
+            $payValue = $this->trimNullableString($pay['value'] ?? null);
+            if ($payValue !== null) {
+                $payload['pay']['value'] = $this->appendPaymentRecoveryTokenToUrl($payValue, $normalizedToken);
+            }
+        }
+
+        $checkoutUrl = $this->trimNullableString($payload['checkout_url'] ?? null);
+        if ($checkoutUrl !== null) {
+            $payload['checkout_url'] = $this->appendPaymentRecoveryTokenToUrl($checkoutUrl, $normalizedToken);
+        }
+
+        return $payload;
+    }
+
+    private function appendPaymentRecoveryTokenToUrl(string $url, string $paymentRecoveryToken): string
+    {
+        if (str_contains($url, 'paymentRecoveryToken=')) {
+            return $url;
+        }
+
+        $separator = str_contains($url, '?') ? '&' : '?';
+
+        return $url.$separator.'paymentRecoveryToken='.rawurlencode($paymentRecoveryToken);
     }
 
     /**
