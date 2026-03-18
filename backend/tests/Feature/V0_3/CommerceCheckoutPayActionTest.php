@@ -44,6 +44,31 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $this->assertStringContainsString('x-region', $allowedHeaders);
     }
 
+    public function test_order_status_options_allows_payment_recovery_token_header_for_browser_preflight(): void
+    {
+        $response = app()->handle(Request::create(
+            '/api/v0.3/orders/ord_payment_recovery_preflight_1',
+            'OPTIONS',
+            [
+                'include_payment_action' => '1',
+                'payment_recovery_token' => 'token_payment_recovery_preflight_1',
+            ],
+            [],
+            [],
+            [
+                'HTTP_ORIGIN' => 'https://www.fermatmind.com',
+                'HTTP_ACCESS_CONTROL_REQUEST_METHOD' => 'GET',
+                'HTTP_ACCESS_CONTROL_REQUEST_HEADERS' => 'x-payment-recovery-token,x-anon-id',
+            ]
+        ));
+
+        $this->assertContains($response->getStatusCode(), [200, 204]);
+
+        $allowedHeaders = strtolower((string) $response->headers->get('Access-Control-Allow-Headers', ''));
+        $this->assertStringContainsString('x-payment-recovery-token', $allowedHeaders);
+        $this->assertStringContainsString('x-anon-id', $allowedHeaders);
+    }
+
     public function test_checkout_lemonsqueezy_returns_pay_redirect_and_checkout_url(): void
     {
         $this->seedCommerce();

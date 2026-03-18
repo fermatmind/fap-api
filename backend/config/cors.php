@@ -18,6 +18,7 @@ return [
         'X-Org-Id',
         'X-FM-Org-Id',
         'X-Anon-Id',
+        'X-Payment-Recovery-Token',
         'X-Region',
         'X-Fap-Locale',
         'Idempotency-Key',
