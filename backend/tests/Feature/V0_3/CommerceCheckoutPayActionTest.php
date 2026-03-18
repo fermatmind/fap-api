@@ -265,6 +265,42 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('checkout_url', null);
     }
 
+    public function test_lookup_can_include_payment_action_for_pending_orders_after_email_match(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.wechatpay.enabled' => true,
+        ]);
+
+        $orderNo = 'ord_lookup_include_payment_action_1';
+        $anonId = 'anon_lookup_include_payment_action_1';
+        $this->insertPendingOrder($orderNo, 'wechatpay', $anonId, 'buyer@example.com');
+
+        $mock = Mockery::mock(WechatPayCheckoutService::class);
+        $mock->shouldReceive('createCheckoutAction')
+            ->once()
+            ->andReturn([
+                'ok' => true,
+                'type' => 'qr',
+                'value' => 'weixin://wxpay/bizpayurl?pr=lookup_include_payment_action',
+            ]);
+        $this->app->instance(WechatPayCheckoutService::class, $mock);
+
+        $response = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => 'buyer@example.com',
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('order_no', $orderNo);
+        $response->assertJsonPath('status', 'pending');
+        $response->assertJsonPath('provider', 'wechatpay');
+        $response->assertJsonPath('pay.type', 'qr');
+        $response->assertJsonPath('pay.value', 'weixin://wxpay/bizpayurl?pr=lookup_include_payment_action');
+        $response->assertJsonPath('checkout_url', null);
+    }
+
     private function seedCommerce(): void
     {
         (new Pr19CommerceSeeder)->run();
@@ -279,7 +315,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
         return $this->withHeaders($headers)->postJson('/api/v0.3/orders/checkout', $payload);
     }
 
-    private function insertPendingOrder(string $orderNo, string $provider, string $anonId): void
+    private function insertPendingOrder(string $orderNo, string $provider, string $anonId, ?string $email = null): void
     {
         $now = now();
         $row = [
@@ -307,7 +343,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
             'scale_code_v2' => null,
             'scale_uid' => null,
             'external_trade_no' => null,
-            'contact_email_hash' => null,
+            'contact_email_hash' => $email ? hash('sha256', mb_strtolower(trim($email), 'UTF-8')) : null,
             'metadata' => null,
             'meta_json' => null,
             'paid_at' => null,

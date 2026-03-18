@@ -400,12 +400,21 @@ class CommerceController extends Controller
         }
 
         $delivery = $this->buildOrderDelivery($order);
+        $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
+        $payment = $this->buildOrderPaymentPayload(
+            $request,
+            $order,
+            $status === 'pending'
+        );
 
         $payload = [
             'ok' => true,
             'order_no' => $order->order_no ?? $orderNo,
-            'status' => $this->normalizePublicOrderStatus((string) ($order->status ?? '')),
+            'status' => $status,
             'attempt_id' => $delivery['attempt_id'],
+            'provider' => $payment['provider'],
+            'pay' => $payment['pay'],
+            'checkout_url' => $payment['checkout_url'],
             'delivery' => $delivery['delivery'],
         ];
 
