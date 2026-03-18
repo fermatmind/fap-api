@@ -336,6 +336,138 @@ final class CareerRecommendationPublicApiTest extends TestCase
             ->assertJsonPath('seo.alternates.zh-CN', '/zh/career/recommendations/mbti/intj-a');
     }
 
+    public function test_imported_local_baselines_make_representative_32_type_routes_non_empty(): void
+    {
+        $intjProfile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'title' => 'INTJ Personality Type',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($intjProfile, [
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $enfpProfile = $this->createProfile([
+            'type_code' => 'ENFP',
+            'slug' => 'enfp',
+            'locale' => 'en',
+            'title' => 'ENFP Personality Type',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($enfpProfile, [
+            'variant_code' => 'T',
+            'runtime_type_code' => 'ENFP-T',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $istjProfile = $this->createProfile([
+            'type_code' => 'ISTJ',
+            'slug' => 'istj',
+            'locale' => 'zh-CN',
+            'title' => 'ISTJ 人格类型',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($istjProfile, [
+            'variant_code' => 'A',
+            'runtime_type_code' => 'ISTJ-A',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $esfpProfile = $this->createProfile([
+            'type_code' => 'ESFP',
+            'slug' => 'esfp',
+            'locale' => 'zh-CN',
+            'title' => 'ESFP 人格类型',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($esfpProfile, [
+            'variant_code' => 'T',
+            'runtime_type_code' => 'ESFP-T',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $this->artisan('career-jobs:import-local-baseline', [
+            '--locale' => ['en', 'zh-CN'],
+            '--upsert' => true,
+            '--status' => 'published',
+        ])->assertExitCode(0);
+
+        $this->artisan('career-guides:import-local-baseline', [
+            '--locale' => ['en'],
+            '--guide' => [
+                'intj-career-playbook',
+                'enfp-career-playbook',
+            ],
+            '--upsert' => true,
+            '--status' => 'published',
+        ])->assertExitCode(0);
+
+        $this->artisan('career-guides:import-local-baseline', [
+            '--locale' => ['zh-CN'],
+            '--guide' => [
+                'istj-career-playbook',
+                'esfp-career-playbook',
+            ],
+            '--upsert' => true,
+            '--status' => 'published',
+        ])->assertExitCode(0);
+
+        $intjA = $this->getJson('/api/v0.5/career-recommendations/mbti/intj-a?locale=en');
+        $intjA->assertOk()
+            ->assertJsonPath('public_route_slug', 'intj-a')
+            ->assertJsonPath('graph_type_code', 'INTJ');
+        $this->assertGreaterThan(0, count((array) $intjA->json('matched_jobs')));
+        $this->assertGreaterThan(0, count((array) $intjA->json('matched_guides')));
+
+        $enfpT = $this->getJson('/api/v0.5/career-recommendations/mbti/enfp-t?locale=en');
+        $enfpT->assertOk()
+            ->assertJsonPath('public_route_slug', 'enfp-t')
+            ->assertJsonPath('graph_type_code', 'ENFP');
+        $this->assertGreaterThan(0, count((array) $enfpT->json('matched_jobs')));
+        $this->assertGreaterThan(0, count((array) $enfpT->json('matched_guides')));
+
+        $istjA = $this->getJson('/api/v0.5/career-recommendations/mbti/istj-a?locale=zh-CN');
+        $istjA->assertOk()
+            ->assertJsonPath('public_route_slug', 'istj-a')
+            ->assertJsonPath('graph_type_code', 'ISTJ');
+        $this->assertGreaterThan(0, count((array) $istjA->json('matched_jobs')));
+        $this->assertGreaterThan(0, count((array) $istjA->json('matched_guides')));
+
+        $esfpT = $this->getJson('/api/v0.5/career-recommendations/mbti/esfp-t?locale=zh-CN');
+        $esfpT->assertOk()
+            ->assertJsonPath('public_route_slug', 'esfp-t')
+            ->assertJsonPath('graph_type_code', 'ESFP');
+        $this->assertGreaterThan(0, count((array) $esfpT->json('matched_jobs')));
+        $this->assertGreaterThan(0, count((array) $esfpT->json('matched_guides')));
+
+        $legacy = $this->getJson('/api/v0.5/career-recommendations/mbti/intj?locale=en');
+        $legacy->assertOk()
+            ->assertJsonPath('public_route_slug', 'intj-a')
+            ->assertJsonPath('graph_type_code', 'INTJ');
+        $this->assertGreaterThan(0, count((array) $legacy->json('matched_jobs')));
+        $this->assertGreaterThan(0, count((array) $legacy->json('matched_guides')));
+    }
+
     public function test_legacy_4_letter_route_resolves_to_default_published_variant_and_unpublished_alias_returns_not_found(): void
     {
         $intjProfile = $this->createProfile([

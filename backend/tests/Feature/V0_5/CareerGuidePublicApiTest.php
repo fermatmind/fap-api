@@ -387,6 +387,60 @@ final class CareerGuidePublicApiTest extends TestCase
             ->assertJsonPath('error', 'not found');
     }
 
+    public function test_imported_local_baseline_publishes_family_guides_with_personality_maps(): void
+    {
+        $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'title' => 'INTJ Personality Type',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => Carbon::create(2026, 3, 18, 8, 0, 0, 'UTC'),
+        ]);
+        $this->createProfile([
+            'type_code' => 'ESFP',
+            'slug' => 'esfp',
+            'locale' => 'zh-CN',
+            'title' => 'ESFP 人格类型',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => Carbon::create(2026, 3, 18, 8, 5, 0, 'UTC'),
+        ]);
+
+        $this->artisan('career-jobs:import-local-baseline', [
+            '--locale' => ['en', 'zh-CN'],
+            '--upsert' => true,
+            '--status' => 'published',
+        ])->assertExitCode(0);
+
+        $this->artisan('career-guides:import-local-baseline', [
+            '--locale' => ['en'],
+            '--guide' => ['intj-career-playbook'],
+            '--upsert' => true,
+            '--status' => 'published',
+        ])->assertExitCode(0);
+
+        $this->artisan('career-guides:import-local-baseline', [
+            '--locale' => ['zh-CN'],
+            '--guide' => ['esfp-career-playbook'],
+            '--upsert' => true,
+            '--status' => 'published',
+        ])->assertExitCode(0);
+
+        $this->getJson('/api/v0.5/career-guides/intj-career-playbook?locale=en')
+            ->assertOk()
+            ->assertJsonPath('guide.guide_code', 'intj-career-playbook')
+            ->assertJsonPath('guide.locale', 'en')
+            ->assertJsonPath('related_personality_profiles.0.type_code', 'INTJ');
+
+        $this->getJson('/api/v0.5/career-guides/esfp-career-playbook?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('guide.guide_code', 'esfp-career-playbook')
+            ->assertJsonPath('guide.locale', 'zh-CN')
+            ->assertJsonPath('related_personality_profiles.0.type_code', 'ESFP');
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */

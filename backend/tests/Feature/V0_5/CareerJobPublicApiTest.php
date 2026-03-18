@@ -302,6 +302,34 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
+    public function test_imported_local_baseline_publishes_family_jobs_for_en_and_zh_cn(): void
+    {
+        $this->artisan('career-jobs:import-local-baseline', [
+            '--locale' => ['en', 'zh-CN'],
+            '--job' => [
+                'innovation-consultant',
+                'event-experience-producer',
+            ],
+            '--upsert' => true,
+            '--status' => 'published',
+        ])->assertExitCode(0);
+
+        $this->getJson('/api/v0.5/career-jobs/innovation-consultant?locale=en')
+            ->assertOk()
+            ->assertJsonPath('job.job_code', 'innovation-consultant')
+            ->assertJsonPath('job.locale', 'en')
+            ->assertJsonPath('job.fit_personality_codes.0', 'ENTJ')
+            ->assertJsonPath('job.mbti_primary_codes.0', 'ENTP')
+            ->assertJsonPath('job.mbti_secondary_codes.0', 'INTJ');
+
+        $this->getJson('/api/v0.5/career-jobs/event-experience-producer?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('job.job_code', 'event-experience-producer')
+            ->assertJsonPath('job.locale', 'zh-CN')
+            ->assertJsonPath('job.mbti_primary_codes.0', 'ESFP')
+            ->assertJsonPath('job.mbti_secondary_codes.0', 'ENFJ');
+    }
+
     public function test_detail_defaults_to_global_content_and_only_uses_requested_org_scope(): void
     {
         $this->createJob([
