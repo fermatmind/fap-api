@@ -62,6 +62,7 @@ return [
         'healthz_status' => '健康状态',
         'funnel_7d' => '漏斗（7天）',
         'paid_orders_today' => '今日已支付订单',
+        'pending_orders' => '待支付订单',
         'revenue_today' => '今日收入',
         'unlock_rate' => '解锁率',
         'refund_count' => '退款数量',
