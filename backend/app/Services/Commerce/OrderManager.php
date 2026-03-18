@@ -4,6 +4,7 @@ namespace App\Services\Commerce;
 
 use App\Models\Order;
 use App\Services\Email\EmailOutboxService;
+use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Report\ReportAccess;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,7 @@ class OrderManager
         private ScaleIdentityWriteProjector $identityProjector,
         private EmailOutboxService $emailOutbox,
         private PaymentRecoveryToken $paymentRecoveryTokens,
+        private PaymentProviderRegistry $paymentProviders,
     ) {}
 
     public function createOrder(
@@ -1154,45 +1156,7 @@ class OrderManager
 
     private function allowedProviders(): array
     {
-        $providers = [];
-        $configured = config('payments.providers', []);
-        if (is_array($configured)) {
-            foreach ($configured as $provider => $providerConfig) {
-                if (! is_string($provider)) {
-                    continue;
-                }
-
-                $provider = strtolower(trim($provider));
-                if ($provider === '') {
-                    continue;
-                }
-
-                $enabled = (bool) (is_array($providerConfig) ? ($providerConfig['enabled'] ?? false) : false);
-                if (! $enabled) {
-                    continue;
-                }
-
-                if ($provider === 'stub' && ! $this->isStubEnabled()) {
-                    continue;
-                }
-
-                $providers[] = $provider;
-            }
-        }
-
-        if ($providers === []) {
-            $providers = ['stripe', 'billing'];
-            if ($this->isStubEnabled()) {
-                $providers[] = 'stub';
-            }
-        }
-
-        return array_values(array_unique($providers));
-    }
-
-    private function isStubEnabled(): bool
-    {
-        return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
+        return $this->paymentProviders->enabledProviders();
     }
 
     /**

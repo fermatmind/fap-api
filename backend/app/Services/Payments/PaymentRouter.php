@@ -6,10 +6,14 @@ namespace App\Services\Payments;
 
 final class PaymentRouter
 {
+    public function __construct(
+        private PaymentProviderRegistry $providers,
+    ) {}
+
     public function methodsForRegion(string $region): array
     {
         $region = $this->normalizeRegion($region);
-        $allowed = $this->allowedProviders();
+        $allowed = $this->providers->enabledProviders();
 
         $priority = config('payments.provider_priority', []);
         $methods = [];
@@ -59,46 +63,4 @@ final class PaymentRouter
         return $default !== '' ? $default : 'CN_MAINLAND';
     }
 
-    private function allowedProviders(): array
-    {
-        $providers = [];
-        $configured = config('payments.providers', []);
-        if (is_array($configured)) {
-            foreach ($configured as $provider => $providerConfig) {
-                if (! is_string($provider)) {
-                    continue;
-                }
-
-                $provider = strtolower(trim($provider));
-                if ($provider === '') {
-                    continue;
-                }
-
-                $enabled = (bool) (is_array($providerConfig) ? ($providerConfig['enabled'] ?? false) : false);
-                if (! $enabled) {
-                    continue;
-                }
-
-                if ($provider === 'stub' && ! $this->isStubEnabled()) {
-                    continue;
-                }
-
-                $providers[] = $provider;
-            }
-        }
-
-        if ($providers === []) {
-            $providers = ['stripe', 'billing'];
-            if ($this->isStubEnabled()) {
-                $providers[] = 'stub';
-            }
-        }
-
-        return array_values(array_unique($providers));
-    }
-
-    private function isStubEnabled(): bool
-    {
-        return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
-    }
 }

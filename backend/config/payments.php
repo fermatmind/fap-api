@@ -35,9 +35,11 @@ return [
         ],
         'wechatpay' => [
             'enabled' => (bool) env('PAYMENTS_PROVIDER_WECHATPAY_ENABLED', false),
+            'auto_enable_when_configured' => (bool) env('PAYMENTS_PROVIDER_WECHATPAY_AUTO_ENABLE_WHEN_CONFIGURED', true),
         ],
         'alipay' => [
             'enabled' => (bool) env('PAYMENTS_PROVIDER_ALIPAY_ENABLED', false),
+            'auto_enable_when_configured' => (bool) env('PAYMENTS_PROVIDER_ALIPAY_AUTO_ENABLE_WHEN_CONFIGURED', true),
         ],
         'stub' => [
             'enabled' => (bool) env('PAYMENTS_ALLOW_STUB', false),

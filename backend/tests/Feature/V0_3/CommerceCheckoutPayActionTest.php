@@ -182,6 +182,53 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('checkout_url', null);
     }
 
+    public function test_checkout_cn_mainland_prefers_configured_wechatpay_even_when_enabled_flag_is_false(): void
+    {
+        $this->seedCommerce();
+
+        $certFiles = $this->createTempCertFiles(3);
+
+        try {
+            config([
+                'payments.providers.wechatpay.enabled' => false,
+                'payments.providers.wechatpay.auto_enable_when_configured' => true,
+                'payments.providers.billing.enabled' => true,
+                'pay.wechat.default.app_id' => 'wx_auto_enabled_001',
+                'pay.wechat.default.mch_id' => '1900000109',
+                'pay.wechat.default.mch_secret_key' => '12345678901234567890123456789012',
+                'pay.wechat.default.mch_secret_cert' => $certFiles[0],
+                'pay.wechat.default.mch_public_cert_path' => $certFiles[1],
+                'pay.wechat.default.wechat_public_cert_path' => ['wechatpay_cert_001' => $certFiles[2]],
+            ]);
+
+            $mock = Mockery::mock(WechatPayCheckoutService::class);
+            $mock->shouldReceive('createCheckoutAction')
+                ->once()
+                ->andReturn([
+                    'ok' => true,
+                    'type' => 'qr',
+                    'value' => 'weixin://wxpay/bizpayurl?pr=auto_enabled_wechatpay',
+                ]);
+            $this->app->instance(WechatPayCheckoutService::class, $mock);
+
+            $response = $this->checkout([
+                'sku' => 'MBTI_CREDIT',
+                'email' => 'wechat-auto-enabled@example.com',
+                'attempt_id' => 'attempt_wechat_auto_enabled_001',
+            ], [
+                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+                'X-Region' => 'CN_MAINLAND',
+            ]);
+
+            $response->assertStatus(200);
+            $response->assertJsonPath('provider', 'wechatpay');
+            $response->assertJsonPath('pay.type', 'qr');
+            $response->assertJsonPath('pay.value', 'weixin://wxpay/bizpayurl?pr=auto_enabled_wechatpay');
+        } finally {
+            $this->cleanupTempFiles($certFiles);
+        }
+    }
+
     public function test_checkout_alipay_desktop_returns_html_action_with_launch_url(): void
     {
         $this->seedCommerce();
@@ -551,5 +598,36 @@ final class CommerceCheckoutPayActionTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function createTempCertFiles(int $count): array
+    {
+        $files = [];
+        for ($index = 0; $index < $count; $index++) {
+            $path = tempnam(sys_get_temp_dir(), 'commerce_pay_cert_');
+            if (! is_string($path) || trim($path) === '') {
+                self::fail('failed to create temporary cert file.');
+            }
+
+            file_put_contents($path, 'dummy-cert-'.$index);
+            $files[] = $path;
+        }
+
+        return $files;
+    }
+
+    /**
+     * @param  array<int, string>  $files
+     */
+    private function cleanupTempFiles(array $files): void
+    {
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                @unlink($file);
+            }
+        }
     }
 }

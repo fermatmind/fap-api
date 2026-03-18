@@ -10,6 +10,7 @@ use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Email\EmailCaptureService;
+use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Payments\PaymentRouter;
 use App\Services\Report\ReportAccess;
 use App\Support\OrgContext;
@@ -31,6 +32,7 @@ class CommerceController extends Controller
         private EmailCaptureService $emailCaptures,
         private SkuCatalog $skus,
         private PaymentRouter $paymentRouter,
+        private PaymentProviderRegistry $paymentProviders,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private LemonSqueezyCheckoutService $lemonSqueezyCheckout,
         private WechatPayCheckoutService $wechatPayCheckout,
@@ -1025,50 +1027,12 @@ class CommerceController extends Controller
 
     private function allowedProviders(): array
     {
-        $providers = [];
-        $configured = config('payments.providers', []);
-        if (is_array($configured)) {
-            foreach ($configured as $provider => $providerConfig) {
-                if (! is_string($provider)) {
-                    continue;
-                }
-
-                $provider = strtolower(trim($provider));
-                if ($provider === '') {
-                    continue;
-                }
-
-                $enabled = (bool) (is_array($providerConfig) ? ($providerConfig['enabled'] ?? false) : false);
-                if (! $enabled) {
-                    continue;
-                }
-
-                if ($provider === 'stub' && ! $this->isStubEnabled()) {
-                    continue;
-                }
-
-                $providers[] = $provider;
-            }
-        }
-
-        if ($providers === []) {
-            $providers = ['stripe', 'billing'];
-            if ($this->isStubEnabled()) {
-                $providers[] = 'stub';
-            }
-        }
-
-        return array_values(array_unique($providers));
+        return $this->paymentProviders->enabledProviders();
     }
 
     private function isProviderEnabled(string $provider): bool
     {
-        return in_array(strtolower(trim($provider)), $this->allowedProviders(), true);
-    }
-
-    private function isStubEnabled(): bool
-    {
-        return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
+        return $this->paymentProviders->isEnabled($provider);
     }
 
     private function resolveRequestId(Request $request): string
