@@ -64,12 +64,14 @@
     "price_cents": 99,
     "currency": "CNY",
     "title": "MBTI Career Module",
-    "is_active": true,
+    "is_active": false,
     "metadata_json": {
       "label": "MBTI career module",
+      "deprecated": true,
       "grant_type": "report_unlock",
       "grant_qty": 1,
       "entitlement_id": "report_career",
+      "offer": false,
       "modules_included": [
         "career"
       ]
@@ -86,12 +88,14 @@
     "price_cents": 99,
     "currency": "CNY",
     "title": "MBTI Relationship Module",
-    "is_active": true,
+    "is_active": false,
     "metadata_json": {
       "label": "MBTI relationship module",
+      "deprecated": true,
       "grant_type": "report_unlock",
       "grant_qty": 1,
       "entitlement_id": "report_relationships",
+      "offer": false,
       "modules_included": [
         "relationships"
       ]

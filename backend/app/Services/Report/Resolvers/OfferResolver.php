@@ -88,6 +88,7 @@ class OfferResolver
         if (count($offers) === 0) {
             $offers = $this->normalizeOffers($commercial['offers'] ?? null);
         }
+        $offers = $this->filterOffersForScale($scaleCode, $offers);
 
         return [
             'upgrade_sku' => $anchorSku,
@@ -279,6 +280,35 @@ class OfferResolver
         }
 
         return $offers;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $offers
+     * @return list<array<string,mixed>>
+     */
+    private function filterOffersForScale(string $scaleCode, array $offers): array
+    {
+        if ($scaleCode !== 'MBTI') {
+            return array_values($offers);
+        }
+
+        $filtered = array_values(array_filter($offers, fn (array $offer): bool => $this->isMbtiFullReportOffer($offer)));
+
+        return $filtered !== [] ? $filtered : array_values($offers);
+    }
+
+    /**
+     * @param  array<string,mixed>  $offer
+     */
+    private function isMbtiFullReportOffer(array $offer): bool
+    {
+        $sku = strtoupper(trim((string) ($offer['sku'] ?? $offer['sku_code'] ?? '')));
+        $benefitCode = strtoupper(trim((string) ($offer['benefit_code'] ?? '')));
+        $modulesIncluded = $this->normalizeModulesIncluded($offer['modules_included'] ?? null);
+
+        return $benefitCode === 'MBTI_REPORT_FULL'
+            || str_contains($sku, 'MBTI_REPORT_FULL')
+            || in_array(ReportAccess::MODULE_CORE_FULL, $modulesIncluded, true);
     }
 
     private function resolveCtaCopy(array $commercialSpec, ?string $anchorSku, ?string $effectiveSku): array
