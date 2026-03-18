@@ -119,9 +119,9 @@ final class CommerceCheckoutPayActionTest extends TestCase
 
         $this->assertNotSame('', $orderNo);
         $this->assertNotSame('', $paymentRecoveryToken);
-        $this->assertStringContainsString('/en/orders/'.$orderNo, $waitUrl);
-        $this->assertStringContainsString('orderNo='.$orderNo, $waitUrl);
-        $this->assertStringContainsString('paymentRecoveryToken=', $waitUrl);
+        $this->assertStringContainsString('/en/pay/wait', $waitUrl);
+        $this->assertStringContainsString('order_no='.$orderNo, $waitUrl);
+        $this->assertStringContainsString('payment_recovery_token=', $waitUrl);
     }
 
     public function test_checkout_wechatpay_desktop_returns_qr_action(): void
