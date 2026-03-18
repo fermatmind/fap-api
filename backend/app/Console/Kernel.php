@@ -20,6 +20,7 @@ use App\Console\Commands\FapSelfCheck;
 use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
 use App\Console\Commands\MetricsWeeklyValidity;
+use App\Console\Commands\MbtiUpgradeLegacyPartialUnlocks;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\NormsBig5MonthlyDriftCheck;
@@ -86,6 +87,7 @@ class Kernel extends ConsoleKernel
         FapValidateReport::class,
         FapWeeklyReport::class,
         MetricsWeeklyValidity::class,
+        MbtiUpgradeLegacyPartialUnlocks::class,
         AdminBootstrapOwner::class,
         OpsDeployEvent::class,
         OpsHealthzSnapshot::class,
