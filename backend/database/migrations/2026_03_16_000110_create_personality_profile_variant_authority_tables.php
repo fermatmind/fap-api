@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('personality_profile_variants', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('personality_profile_id')
-                ->constrained('personality_profiles')
-                ->cascadeOnDelete();
+            $table->unsignedBigInteger('personality_profile_id');
             $table->string('canonical_type_code', 4);
             $table->char('variant_code', 1);
             $table->string('runtime_type_code', 8);
@@ -40,14 +38,17 @@ return new class extends Migration
                 ['personality_profile_id', 'runtime_type_code'],
                 'personality_profile_variants_profile_runtime_unique'
             );
+            $table->index('personality_profile_id', 'pp_variants_profile_idx');
             $table->index('canonical_type_code', 'personality_profile_variants_canonical_idx');
+            $table->foreign('personality_profile_id', 'pp_variants_profile_fk')
+                ->references('id')
+                ->on('personality_profiles')
+                ->cascadeOnDelete();
         });
 
         Schema::create('personality_profile_variant_sections', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('personality_profile_variant_id')
-                ->constrained('personality_profile_variants')
-                ->cascadeOnDelete();
+            $table->unsignedBigInteger('personality_profile_variant_id');
             $table->string('section_key', 100);
             $table->string('render_variant', 100);
             $table->longText('body_md')->nullable();
@@ -61,13 +62,16 @@ return new class extends Migration
                 ['personality_profile_variant_id', 'section_key'],
                 'personality_profile_variant_sections_variant_section_unique'
             );
+            $table->index('personality_profile_variant_id', 'pp_variant_sections_variant_idx');
+            $table->foreign('personality_profile_variant_id', 'pp_variant_sections_variant_fk')
+                ->references('id')
+                ->on('personality_profile_variants')
+                ->cascadeOnDelete();
         });
 
         Schema::create('personality_profile_variant_seo_meta', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('personality_profile_variant_id')
-                ->constrained('personality_profile_variants')
-                ->cascadeOnDelete();
+            $table->unsignedBigInteger('personality_profile_variant_id');
             $table->string('seo_title', 255)->nullable();
             $table->text('seo_description')->nullable();
             $table->string('canonical_url', 2048)->nullable();
@@ -85,18 +89,27 @@ return new class extends Migration
                 ['personality_profile_variant_id'],
                 'personality_profile_variant_seo_meta_variant_unique'
             );
+            $table->index('personality_profile_variant_id', 'pp_variant_seo_variant_idx');
+            $table->foreign('personality_profile_variant_id', 'pp_variant_seo_variant_fk')
+                ->references('id')
+                ->on('personality_profile_variants')
+                ->cascadeOnDelete();
         });
 
         Schema::create('personality_profile_variant_revisions', function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('personality_profile_variant_id')
-                ->constrained('personality_profile_variants')
-                ->cascadeOnDelete();
+            $table->unsignedBigInteger('personality_profile_variant_id');
             $table->unsignedInteger('revision_no');
             $table->json('snapshot_json');
             $table->string('note', 255)->nullable();
             $table->unsignedBigInteger('created_by_admin_user_id')->nullable();
             $table->timestamp('created_at')->useCurrent();
+
+            $table->index('personality_profile_variant_id', 'pp_variant_revisions_variant_idx');
+            $table->foreign('personality_profile_variant_id', 'pp_variant_revisions_variant_fk')
+                ->references('id')
+                ->on('personality_profile_variants')
+                ->cascadeOnDelete();
         });
     }
 
@@ -106,6 +119,6 @@ return new class extends Migration
     public function down(): void
     {
         // Intentionally non-destructive: rollback does not remove authority tables.
-        return;
+
     }
 };
