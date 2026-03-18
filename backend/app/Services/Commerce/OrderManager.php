@@ -359,10 +359,10 @@ class OrderManager
         $waitUrl = null;
         $normalizedPaymentRecoveryToken = $this->trimOrNull($paymentRecoveryToken);
         if ($orderNo !== null && $normalizedPaymentRecoveryToken !== null) {
-            $waitUrl = $base.'/'.$localeSegment.'/orders/'.urlencode($orderNo)
+            $waitUrl = $base.'/'.$localeSegment.'/pay/wait'
                 .'?'.http_build_query([
-                    'orderNo' => $orderNo,
-                    'paymentRecoveryToken' => $normalizedPaymentRecoveryToken,
+                    'order_no' => $orderNo,
+                    'payment_recovery_token' => $normalizedPaymentRecoveryToken,
                 ]);
         }
 
