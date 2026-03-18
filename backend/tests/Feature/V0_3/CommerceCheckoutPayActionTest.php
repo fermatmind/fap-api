@@ -301,6 +301,66 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('checkout_url', null);
     }
 
+    public function test_get_order_reuses_cached_payment_action_from_checkout_when_gateway_is_not_reinvoked(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.wechatpay.enabled' => true,
+        ]);
+
+        $anonId = 'anon_cached_payment_action_1';
+        $firstMock = Mockery::mock(WechatPayCheckoutService::class);
+        $firstMock->shouldReceive('createCheckoutAction')
+            ->once()
+            ->andReturn([
+                'ok' => true,
+                'type' => 'qr',
+                'value' => 'weixin://wxpay/bizpayurl?pr=cached_payment_action',
+            ]);
+        $this->app->instance(WechatPayCheckoutService::class, $firstMock);
+
+        $checkout = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ])->postJson('/api/v0.3/orders/checkout', [
+            'sku' => 'MBTI_CREDIT',
+            'provider' => 'wechatpay',
+            'email' => 'cached@example.com',
+        ]);
+
+        $checkout->assertStatus(200);
+        $checkout->assertJsonPath('pay.type', 'qr');
+        $checkout->assertJsonPath('pay.value', 'weixin://wxpay/bizpayurl?pr=cached_payment_action');
+
+        $orderNo = (string) $checkout->json('order_no');
+        $order = DB::table('orders')->where('order_no', $orderNo)->first();
+        $this->assertNotNull($order);
+        $meta = json_decode((string) ($order->meta_json ?? ''), true);
+        $this->assertIsArray($meta);
+        $this->assertSame(
+            'weixin://wxpay/bizpayurl?pr=cached_payment_action',
+            data_get($meta, 'payment_action_cache.wechatpay.desktop.pay.value')
+        );
+
+        $secondMock = Mockery::mock(WechatPayCheckoutService::class);
+        $secondMock->shouldReceive('createCheckoutAction')->never();
+        $this->app->instance(WechatPayCheckoutService::class, $secondMock);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ])->getJson('/api/v0.3/orders/'.$orderNo.'?include_payment_action=1');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('order_no', $orderNo);
+        $response->assertJsonPath('status', 'pending');
+        $response->assertJsonPath('provider', 'wechatpay');
+        $response->assertJsonPath('pay.type', 'qr');
+        $response->assertJsonPath('pay.value', 'weixin://wxpay/bizpayurl?pr=cached_payment_action');
+        $response->assertJsonPath('checkout_url', null);
+    }
+
     private function seedCommerce(): void
     {
         (new Pr19CommerceSeeder)->run();

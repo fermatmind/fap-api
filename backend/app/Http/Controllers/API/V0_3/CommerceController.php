@@ -348,6 +348,18 @@ class CommerceController extends Controller
             }
         }
 
+        if ($order !== null) {
+            $this->persistOrderPaymentPayload(
+                $order,
+                $this->resolvePaymentActionScene((string) $request->userAgent()),
+                [
+                    'provider' => $provider,
+                    'pay' => $payPayload,
+                    'checkout_url' => $checkoutUrl,
+                ]
+            );
+        }
+
         return response()->json([
             'ok' => true,
             'order_no' => $orderNo !== '' ? $orderNo : ($created['order_no'] ?? null),
@@ -548,7 +560,7 @@ class CommerceController extends Controller
         }
 
         $normalizedProvider = $provider !== '' ? $provider : null;
-        if ($normalizedProvider === null || ! $this->isProviderEnabled($normalizedProvider)) {
+        if (! $includePaymentAction) {
             return [
                 'provider' => $normalizedProvider,
                 'pay' => null,
@@ -556,7 +568,13 @@ class CommerceController extends Controller
             ];
         }
 
-        if (! $includePaymentAction) {
+        $scene = $this->resolvePaymentActionScene((string) $request->userAgent());
+        $cached = $this->resolveCachedOrderPaymentPayload($order, $normalizedProvider, $scene);
+        if ($cached !== null) {
+            return $cached;
+        }
+
+        if ($normalizedProvider === null || ! $this->isProviderEnabled($normalizedProvider)) {
             return [
                 'provider' => $normalizedProvider,
                 'pay' => null,
@@ -606,7 +624,10 @@ class CommerceController extends Controller
             ];
         }
 
-        return $this->presentCheckoutPayAction($normalizedProvider, $payAction);
+        $presented = $this->presentCheckoutPayAction($normalizedProvider, $payAction);
+        $this->persistOrderPaymentPayload($order, $scene, $presented);
+
+        return $presented;
     }
 
     /**
@@ -639,6 +660,129 @@ class CommerceController extends Controller
             ],
             'checkout_url' => $payType === 'redirect' ? $payValue : null,
         ];
+    }
+
+    /**
+     * @return array{
+     *     provider:?string,
+     *     pay:?array{type:string,value:string,provider:string},
+     *     checkout_url:?string
+     * }|null
+     */
+    private function resolveCachedOrderPaymentPayload(object $order, ?string $provider, string $scene): ?array
+    {
+        if ($provider === null || $scene === '') {
+            return null;
+        }
+
+        $meta = $this->decodeMeta($order->meta_json ?? null);
+        $scenes = $meta['payment_action_cache'][$provider] ?? null;
+        if (! is_array($scenes)) {
+            return null;
+        }
+
+        $payload = $scenes[$scene] ?? null;
+        if (! is_array($payload)) {
+            return null;
+        }
+
+        $pay = $payload['pay'] ?? null;
+        if (! is_array($pay)) {
+            return null;
+        }
+
+        $payType = strtolower(trim((string) ($pay['type'] ?? '')));
+        $payValue = trim((string) ($pay['value'] ?? ''));
+        if ($payType === '' || $payValue === '') {
+            return null;
+        }
+
+        return [
+            'provider' => $provider,
+            'pay' => [
+                'type' => $payType,
+                'value' => $payValue,
+                'provider' => $provider,
+            ],
+            'checkout_url' => $payType === 'redirect'
+                ? ($payload['checkout_url'] ?? $payValue)
+                : ($payload['checkout_url'] ?? null),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *     provider:?string,
+     *     pay:?array{type:string,value:string,provider:string},
+     *     checkout_url:?string
+     * }  $payload
+     */
+    private function persistOrderPaymentPayload(object $order, string $scene, array $payload): void
+    {
+        $provider = strtolower(trim((string) ($payload['provider'] ?? '')));
+        $pay = $payload['pay'] ?? null;
+        $orderNo = trim((string) ($order->order_no ?? ''));
+        $orgId = (int) ($order->org_id ?? 0);
+
+        if ($provider === '' || $scene === '' || $orderNo === '' || ! is_array($pay)) {
+            return;
+        }
+
+        $payType = strtolower(trim((string) ($pay['type'] ?? '')));
+        $payValue = trim((string) ($pay['value'] ?? ''));
+        if ($payType === '' || $payValue === '') {
+            return;
+        }
+
+        $meta = $this->decodeMeta($order->meta_json ?? null);
+        $cache = is_array($meta['payment_action_cache'] ?? null) ? $meta['payment_action_cache'] : [];
+        $providerCache = is_array($cache[$provider] ?? null) ? $cache[$provider] : [];
+        $providerCache[$scene] = [
+            'provider' => $provider,
+            'pay' => [
+                'type' => $payType,
+                'value' => $payValue,
+                'provider' => $provider,
+            ],
+            'checkout_url' => $payload['checkout_url'] ?? null,
+            'cached_at' => now()->toIso8601String(),
+        ];
+        $cache[$provider] = $providerCache;
+        $meta['payment_action_cache'] = $cache;
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->update([
+                'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'updated_at' => now(),
+            ]);
+    }
+
+    private function resolvePaymentActionScene(string $userAgent): string
+    {
+        return preg_match('/android|iphone|ipad|ipod|mobile|micromessenger/i', $userAgent) === 1
+            ? 'mobile'
+            : 'desktop';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeMeta(mixed $meta): array
+    {
+        if (is_array($meta)) {
+            return $meta;
+        }
+
+        if (is_string($meta) && $meta !== '') {
+            $decoded = json_decode($meta, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
     }
 
     private function toHttpResponse(mixed $gatewayResponse): ?Response
