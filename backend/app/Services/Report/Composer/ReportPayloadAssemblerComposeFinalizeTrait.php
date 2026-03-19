@@ -12,6 +12,7 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
         $contentPackId = (string) ($input['contentPackId'] ?? '');
         $profileVersion = (string) ($input['profileVersion'] ?? '');
         $contentPackageVersion = (string) ($input['contentPackageVersion'] ?? '');
+        $locale = (string) ($input['locale'] ?? '');
         $scores = is_array($input['scores'] ?? null) ? $input['scores'] : [];
         $scoresPct = is_array($input['scoresPct'] ?? null) ? $input['scoresPct'] : [];
         $axisStates = is_array($input['axisStates'] ?? null) ? $input['axisStates'] : [];
@@ -191,6 +192,21 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
             }
 
             $reportPayload['_explain'] = is_array($explainPayload) ? $explainPayload : [];
+        }
+
+        if ($contentPackId !== '' || $contentPackageDir !== '') {
+            $personalization = $this->mbtiResultPersonalizationService->buildForReportPayload($reportPayload, [
+                'type_code' => $typeCode,
+                'pack_id' => $contentPackId,
+                'dir_version' => $contentPackageDir,
+                'locale' => $locale,
+                'engine_version' => 'v1.2',
+            ]);
+
+            if ($personalization !== []) {
+                $personalization['locale'] = $locale !== '' ? $locale : 'zh-CN';
+                $reportPayload['_meta']['personalization'] = $personalization;
+            }
         }
 
         return $reportPayload;

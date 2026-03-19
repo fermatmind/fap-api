@@ -42,6 +42,7 @@
         "strategies": "fap.report.strategies.v1",
         "rules": "fap.report.rules.v1",
         "section_policies": "fap.report.section_policies.v1",
+        "dynamic_sections": "fap.mbti.dynamic_sections.v1",
         "overrides_unified": "fap.report.overrides.v1",
         "meta": "fap.landing.meta.v1"
     },
@@ -192,6 +193,9 @@
         ],
         "section_policies": [
             "report_section_policies.json"
+        ],
+        "dynamic_sections": [
+            "report_dynamic_sections.json"
         ],
         "overrides_unified": [
             "report_overrides.json"

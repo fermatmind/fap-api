@@ -4,6 +4,7 @@ namespace App\Services\Report\Composer;
 
 use App\Services\Content\ContentPacksIndex;
 use App\Services\ContentPackResolver;
+use App\Services\Mbti\MbtiResultPersonalizationService;
 use App\Services\Overrides\HighlightsOverridesApplier;
 use App\Services\Overrides\ReportOverridesApplier;
 use App\Services\Report\IdentityLayerBuilder;
@@ -29,6 +30,7 @@ class ReportPayloadAssembler
         private ReportOverridesApplier $reportOverridesApplier,
         private ContentPackResolver $resolver,
         private ContentPacksIndex $packsIndex,
+        private MbtiResultPersonalizationService $mbtiResultPersonalizationService,
     ) {
     }
 
