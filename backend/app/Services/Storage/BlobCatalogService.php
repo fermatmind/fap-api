@@ -44,7 +44,7 @@ class BlobCatalogService
                 'content_type' => $payload['content_type'] ?? null,
                 'encoding' => (string) ($payload['encoding'] ?? 'identity'),
                 'ref_count' => max(0, (int) ($payload['ref_count'] ?? $existing?->ref_count ?? 0)),
-                'first_seen_at' => $payload['first_seen_at'] ?? $existing?->first_seen_at,
+                'first_seen_at' => $payload['first_seen_at'] ?? $existing?->first_seen_at ?? now(),
                 'last_verified_at' => $payload['last_verified_at'] ?? $existing?->last_verified_at,
             ]
         );

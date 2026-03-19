@@ -142,6 +142,7 @@ final class BlobCatalogServiceTest extends TestCase
 
         $this->assertSame('blobs/sha256/cc/'.$hash, $blob->storage_path);
         $this->assertSame('blobs/sha256/cc/'.$hash, $service->storagePathForHash($hash));
+        $this->assertNotNull($blob->first_seen_at);
         $this->assertDatabaseHas('storage_blobs', [
             'hash' => $hash,
             'storage_path' => 'blobs/sha256/cc/'.$hash,
