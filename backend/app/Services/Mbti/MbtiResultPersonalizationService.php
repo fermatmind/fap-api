@@ -24,6 +24,7 @@ final class MbtiResultPersonalizationService
     private const TARGET_SECTIONS = [
         'overview',
         'trait_overview',
+        'traits.decision_style',
         'career.summary',
         'career.advantages',
         'career.weaknesses',
@@ -32,11 +33,13 @@ final class MbtiResultPersonalizationService
         'growth.summary',
         'growth.strengths',
         'growth.weaknesses',
+        'growth.stress_recovery',
         'growth.motivators',
         'growth.drainers',
         'relationships.summary',
         'relationships.strengths',
         'relationships.weaknesses',
+        'relationships.communication_style',
         'relationships.rel_advantages',
         'relationships.rel_risks',
     ];
@@ -47,6 +50,7 @@ final class MbtiResultPersonalizationService
     private const SECTION_SCENE_MAP = [
         'overview' => 'overview',
         'trait_overview' => 'overview',
+        'traits.decision_style' => 'decision',
         'career.summary' => 'work',
         'career.advantages' => 'work',
         'career.weaknesses' => 'work',
@@ -55,11 +59,13 @@ final class MbtiResultPersonalizationService
         'growth.summary' => 'growth',
         'growth.strengths' => 'growth',
         'growth.weaknesses' => 'growth',
+        'growth.stress_recovery' => 'stress_recovery',
         'growth.motivators' => 'growth',
         'growth.drainers' => 'stress_recovery',
         'relationships.summary' => 'relationships',
         'relationships.strengths' => 'relationships',
         'relationships.weaknesses' => 'relationships',
+        'relationships.communication_style' => 'communication',
         'relationships.rel_advantages' => 'communication',
         'relationships.rel_risks' => 'decision',
     ];
@@ -137,6 +143,9 @@ final class MbtiResultPersonalizationService
         'boundary' => '边界深解释',
         'identity' => '身份层',
         'scene' => '场景应用',
+        'decision' => '决策场景',
+        'stress_recovery' => '压力恢复场景',
+        'communication' => '沟通协作场景',
     ];
 
     /**
@@ -148,6 +157,9 @@ final class MbtiResultPersonalizationService
         'boundary' => 'Boundary deepening',
         'identity' => 'Identity layer',
         'scene' => 'Scene application',
+        'decision' => 'Decision scene',
+        'stress_recovery' => 'Stress recovery scene',
+        'communication' => 'Communication scene',
     ];
 
     /**
@@ -469,7 +481,7 @@ final class MbtiResultPersonalizationService
         }
 
         return [
-            'schema_version' => 'mbti.personalization.phase2.v1',
+            'schema_version' => 'mbti.personalization.phase4a.v1',
             'locale' => $locale,
             'type_code' => $typeCode,
             'identity' => $identity,
@@ -482,11 +494,13 @@ final class MbtiResultPersonalizationService
             'relationship_style_keys' => array_values((array) data_get($sceneFingerprint, 'relationships.style_keys', [])),
             'decision_style_keys' => array_values((array) data_get($sceneFingerprint, 'decision.style_keys', [])),
             'stress_recovery_keys' => array_values((array) data_get($sceneFingerprint, 'stress_recovery.style_keys', [])),
+            'communication_style_keys' => array_values((array) data_get($sceneFingerprint, 'communication.style_keys', [])),
             'variant_keys' => $variantKeys,
             'sections' => $sectionVariants,
             'pack_id' => trim((string) ($context['pack_id'] ?? data_get($reportPayload, 'versions.content_pack_id', ''))),
             'engine_version' => trim((string) ($context['engine_version'] ?? data_get($reportPayload, 'versions.engine', ''))),
             'content_package_dir' => trim((string) ($context['dir_version'] ?? data_get($reportPayload, 'versions.dir_version', ''))),
+            'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
         ];
     }
 
@@ -794,12 +808,13 @@ final class MbtiResultPersonalizationService
 
             $sceneText = $this->resolveSceneText($doc, $templateGroup, $locale, $primaryAxis);
             if ($sceneText !== '') {
-                $blockId = sprintf('%s.scene.%s.%s', $sectionKey, $axisCode, $side);
+                $sceneBlockKind = $this->sceneBlockKind($sceneKey);
+                $blockId = sprintf('%s.%s.%s.%s', $sectionKey, $sceneBlockKind, $axisCode, $side);
                 $selectedBlocks[] = $blockId;
                 $blocks[] = [
                     'id' => $blockId,
-                    'kind' => 'scene',
-                    'label' => $this->blockLabel('scene', $doc, $locale),
+                    'kind' => $sceneBlockKind,
+                    'label' => $this->blockLabel($sceneBlockKind, $doc, $locale),
                     'text' => $sceneText,
                 ];
             }
@@ -971,6 +986,16 @@ final class MbtiResultPersonalizationService
             'stress_recovery' => 'stress_recovery',
             'communication' => 'communication',
             default => $sectionKey === 'trait_overview' ? 'overview' : 'overview',
+        };
+    }
+
+    private function sceneBlockKind(string $sceneKey): string
+    {
+        return match ($sceneKey) {
+            'decision' => 'decision',
+            'stress_recovery' => 'stress_recovery',
+            'communication' => 'communication',
+            default => 'scene',
         };
     }
 

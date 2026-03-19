@@ -76,7 +76,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'dir_version' => 'MBTI-CN-v0.3',
             'scoring_spec_version' => '2026.03',
-            'report_engine_version' => 'report_phase2_contract',
+            'report_engine_version' => 'report_phase4a_contract',
             'is_valid' => true,
             'computed_at' => now(),
         ]);
@@ -96,16 +96,30 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase2.v1',
+            'mbti.personalization.phase4a.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
-            'report_phase2_contract',
+            'report_phase4a_contract',
             data_get($payload, 'report._meta.personalization.engine_version')
+        );
+        $this->assertSame(
+            'phase4a.v1',
+            data_get($payload, 'report._meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
             'work.primary.EI.E.clear',
             data_get($payload, 'report._meta.personalization.scene_fingerprint.work.style_key')
+        );
+        $this->assertSame(
+            [
+                'communication.primary.EI.E.clear',
+                'communication.support.TF.T.boundary',
+                'communication.identity.T',
+                'communication.boundary.TF',
+                'communication.boundary.JP',
+            ],
+            data_get($payload, 'report._meta.personalization.communication_style_keys')
         );
 
         ReportSnapshot::query()->create([
@@ -118,7 +132,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'dir_version' => 'MBTI-CN-v0.3',
             'scoring_spec_version' => '2026.03',
-            'report_engine_version' => 'report_phase2_contract',
+            'report_engine_version' => 'report_phase4a_contract',
             'snapshot_version' => 'phase2.contract',
             'report_json' => data_get($payload, 'report', []),
             'report_free_json' => data_get($payload, 'report', []),
@@ -137,6 +151,18 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'relationships.rel_risks:TF.T.boundary:identity.T:boundary.TF',
             $roundTrippedVariantKeys['relationships.rel_risks'] ?? null
         );
+        $this->assertSame(
+            'traits.decision_style:TF.T.boundary:identity.T:boundary.TF',
+            $roundTrippedVariantKeys['traits.decision_style'] ?? null
+        );
+        $this->assertSame(
+            'growth.stress_recovery:JP.J.boundary:identity.T:boundary.JP',
+            $roundTrippedVariantKeys['growth.stress_recovery'] ?? null
+        );
+        $this->assertSame(
+            'relationships.communication_style:EI.E.clear:identity.T:boundary.TF',
+            $roundTrippedVariantKeys['relationships.communication_style'] ?? null
+        );
 
         $projection = app(MbtiPublicProjectionService::class)->buildForReportEnvelope(
             $result,
@@ -154,10 +180,20 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $relationshipsRelRisks = collect(Arr::wrap($projection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.rel_risks');
+        $decisionStyle = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.decision_style');
+        $stressRecovery = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.stress_recovery');
+        $communicationStyle = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.communication_style');
 
         $this->assertSame(
-            'mbti.personalization.phase2.v1',
+            'mbti.personalization.phase4a.v1',
             data_get($projection, '_meta.personalization.schema_version')
+        );
+        $this->assertSame(
+            'phase4a.v1',
+            data_get($projection, '_meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
             'overview:EI.E.clear:identity.T:boundary.none',
@@ -168,10 +204,61 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'relationships.rel_risks:TF.T.boundary:identity.T:boundary.TF',
             $projectionVariantKeys['relationships.rel_risks'] ?? null
         );
+        $this->assertSame(
+            'traits.decision_style:TF.T.boundary:identity.T:boundary.TF',
+            $projectionVariantKeys['traits.decision_style'] ?? null
+        );
+        $this->assertSame(
+            'growth.stress_recovery:JP.J.boundary:identity.T:boundary.JP',
+            $projectionVariantKeys['growth.stress_recovery'] ?? null
+        );
+        $this->assertSame(
+            'relationships.communication_style:EI.E.clear:identity.T:boundary.TF',
+            $projectionVariantKeys['relationships.communication_style'] ?? null
+        );
         $this->assertIsArray($relationshipsRelRisks);
+        $this->assertIsArray($decisionStyle);
+        $this->assertIsArray($stressRecovery);
+        $this->assertIsArray($communicationStyle);
         $this->assertSame(
             'relationships.rel_risks:TF.T.boundary:identity.T:boundary.TF',
             data_get($relationshipsRelRisks, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'traits.decision_style:TF.T.boundary:identity.T:boundary.TF',
+            data_get($decisionStyle, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'growth.stress_recovery:JP.J.boundary:identity.T:boundary.JP',
+            data_get($stressRecovery, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'relationships.communication_style:EI.E.clear:identity.T:boundary.TF',
+            data_get($communicationStyle, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'decision',
+            data_get($decisionStyle, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'stress_recovery',
+            data_get($stressRecovery, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'communication',
+            data_get($communicationStyle, 'payload.blocks.1.kind')
+        );
+        $this->assertStringContainsString(
+            '两套入口之间切换',
+            (string) data_get($decisionStyle, 'payload.blocks.0.text', '')
+        );
+        $this->assertStringContainsString(
+            '过载时和恢复时可能会切到不同挡位',
+            (string) data_get($stressRecovery, 'payload.blocks.0.text', '')
+        );
+        $this->assertStringContainsString(
+            '你的起手表达方式',
+            (string) data_get($communicationStyle, 'payload.blocks.1.text', '')
         );
         $this->assertStringContainsString(
             '两套判断入口之间来回校准',

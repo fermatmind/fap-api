@@ -47,7 +47,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'dir_version' => 'MBTI-CN-v0.3',
             'locale' => 'zh-CN',
-            'engine_version' => 'report_phase2_contract',
+            'engine_version' => 'report_phase4a_contract',
         ]);
 
         $strong = $service->buildForReportPayload($strongPayload, [
@@ -55,18 +55,19 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'dir_version' => 'MBTI-CN-v0.3',
             'locale' => 'zh-CN',
-            'engine_version' => 'report_phase2_contract',
+            'engine_version' => 'report_phase4a_contract',
         ]);
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase2.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase4a.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
-        $this->assertSame('report_phase2_contract', $clear['engine_version']);
+        $this->assertSame('report_phase4a_contract', $clear['engine_version']);
+        $this->assertSame('phase4a.v1', $clear['dynamic_sections_version']);
         $this->assertSame('work.primary.EI.E.clear', data_get($clear, 'scene_fingerprint.work.style_key'));
         $this->assertSame('work.primary.EI.E.strong', data_get($strong, 'scene_fingerprint.work.style_key'));
         $this->assertSame(
@@ -78,6 +79,16 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
                 'relationships.boundary.JP',
             ],
             data_get($clear, 'relationship_style_keys')
+        );
+        $this->assertSame(
+            [
+                'communication.primary.EI.E.clear',
+                'communication.support.TF.T.boundary',
+                'communication.identity.T',
+                'communication.boundary.TF',
+                'communication.boundary.JP',
+            ],
+            data_get($clear, 'communication_style_keys')
         );
         $this->assertNotSame(
             data_get($clear, 'variant_keys.overview'),
@@ -95,6 +106,18 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'relationships.rel_risks:TF.T.boundary:identity.T:boundary.TF',
             $clear['variant_keys']['relationships.rel_risks'] ?? null
         );
+        $this->assertSame(
+            'traits.decision_style:TF.T.boundary:identity.T:boundary.TF',
+            $clear['variant_keys']['traits.decision_style'] ?? null
+        );
+        $this->assertSame(
+            'growth.stress_recovery:JP.P.boundary:identity.T:boundary.JP',
+            $clear['variant_keys']['growth.stress_recovery'] ?? null
+        );
+        $this->assertSame(
+            'relationships.communication_style:EI.E.clear:identity.T:boundary.TF',
+            $clear['variant_keys']['relationships.communication_style'] ?? null
+        );
         $this->assertNotSame(
             data_get($clear, 'sections.overview.selected_blocks.0'),
             data_get($strong, 'sections.overview.selected_blocks.0')
@@ -111,9 +134,92 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             '两套判断入口之间来回校准',
             (string) ($clear['sections']['relationships.rel_risks']['blocks'][3]['text'] ?? '')
         );
+        $this->assertSame(
+            'decision',
+            $clear['sections']['traits.decision_style']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'stress_recovery',
+            $clear['sections']['growth.stress_recovery']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'communication',
+            $clear['sections']['relationships.communication_style']['blocks'][1]['kind'] ?? null
+        );
         $this->assertStringContainsString(
             '压力升高时',
             (string) data_get($clear, 'scene_fingerprint.stress_recovery.summary', '')
+        );
+    }
+
+    public function test_it_changes_phase4a_scene_variant_keys_when_jp_band_changes(): void
+    {
+        $service = app(MbtiResultPersonalizationService::class);
+
+        $boundaryPayload = [
+            'versions' => [
+                'engine' => 'v1.2',
+                'content_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+                'dir_version' => 'MBTI-CN-v0.3',
+            ],
+            'profile' => [
+                'type_code' => 'ENFP-T',
+            ],
+            'scores' => [
+                'EI' => ['pct' => 67, 'delta' => 17, 'side' => 'E', 'state' => 'clear'],
+                'SN' => ['pct' => 64, 'delta' => 14, 'side' => 'N', 'state' => 'clear'],
+                'TF' => ['pct' => 59, 'delta' => 9, 'side' => 'T', 'state' => 'balanced'],
+                'JP' => ['pct' => 57, 'delta' => 7, 'side' => 'P', 'state' => 'moderate'],
+                'AT' => ['pct' => 68, 'delta' => 18, 'side' => 'T', 'state' => 'clear'],
+            ],
+            'axis_states' => [
+                'EI' => 'clear',
+                'SN' => 'clear',
+                'TF' => 'balanced',
+                'JP' => 'moderate',
+                'AT' => 'clear',
+            ],
+        ];
+
+        $clearPayload = $boundaryPayload;
+        $clearPayload['scores']['JP'] = ['pct' => 66, 'delta' => 16, 'side' => 'P', 'state' => 'clear'];
+        $clearPayload['axis_states']['JP'] = 'clear';
+
+        $boundary = $service->buildForReportPayload($boundaryPayload, [
+            'type_code' => 'ENFP-T',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase4a_contract',
+        ]);
+
+        $clear = $service->buildForReportPayload($clearPayload, [
+            'type_code' => 'ENFP-T',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase4a_contract',
+        ]);
+
+        $this->assertSame(
+            'growth.stress_recovery:JP.P.boundary:identity.T:boundary.JP',
+            $boundary['variant_keys']['growth.stress_recovery'] ?? null
+        );
+        $this->assertSame(
+            'growth.stress_recovery:JP.P.clear:identity.T:boundary.TF',
+            $clear['variant_keys']['growth.stress_recovery'] ?? null
+        );
+        $this->assertNotSame(
+            $boundary['variant_keys']['growth.stress_recovery'] ?? null,
+            $clear['variant_keys']['growth.stress_recovery'] ?? null
+        );
+        $this->assertStringContainsString(
+            '过载时和恢复时可能会切到不同挡位',
+            (string) ($boundary['sections']['growth.stress_recovery']['blocks'][0]['text'] ?? '')
+        );
+        $this->assertStringContainsString(
+            '更稳定的应对入口',
+            (string) ($clear['sections']['growth.stress_recovery']['blocks'][0]['text'] ?? '')
         );
     }
 
@@ -123,7 +229,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $payload = [
             'versions' => [
-                'engine' => 'report_phase2_contract',
+                'engine' => 'report_phase4a_contract',
                 'content_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
                 'dir_version' => 'MBTI-CN-v0.3',
             ],
@@ -151,7 +257,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'dir_version' => 'MBTI-CN-v0.3',
             'locale' => 'en',
-            'engine_version' => 'report_phase2_contract',
+            'engine_version' => 'report_phase4a_contract',
         ]);
 
         $this->assertSame('en', $english['locale']);
