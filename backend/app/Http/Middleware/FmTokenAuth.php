@@ -104,6 +104,7 @@ class FmTokenAuth
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
         $request->attributes->set('org_context_resolved', true);
+        $request->attributes->set('org_context_kind', OrgContext::deriveContextKind($orgId));
 
         if ($orgId <= 0 && $this->isOpsSystemBypass($request, $role)) {
             $request->attributes->set('org_context_bypass', true);
@@ -116,7 +117,8 @@ class FmTokenAuth
             $orgId,
             $resolvedUserId,
             $role,
-            $anonId
+            $anonId,
+            OrgContext::deriveContextKind($orgId)
         );
         app()->instance(OrgContext::class, $ctx);
 

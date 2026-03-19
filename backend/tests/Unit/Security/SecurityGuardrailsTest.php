@@ -28,7 +28,12 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.3/orders/lookup',
         '/api/v0.3/orders/{order_no}/resend',
         '/api/v0.3/orders/stub',
+        '/api/v0.3/claim/report',
+        '/api/v0.3/email/capture',
+        '/api/v0.3/email/preferences',
+        '/api/v0.3/email/unsubscribe',
         '/api/v0.3/shares/{shareId}/click',
+        '/api/v0.3/shares/{shareId}/compare-invites',
     ];
 
     /** @var array<int, string> */

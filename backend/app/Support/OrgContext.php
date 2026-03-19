@@ -6,17 +6,23 @@ use App\Exceptions\OrgContextMissingException;
 
 final class OrgContext
 {
+    public const KIND_PUBLIC = 'public';
+
+    public const KIND_TENANT = 'tenant';
+
     private int $orgId = 0;
     private ?int $userId = null;
     private ?string $role = null;
     private ?string $anonId = null;
+    private string $contextKind = self::KIND_PUBLIC;
 
-    public function set(int $orgId, ?int $userId, ?string $role, ?string $anonId = null): void
+    public function set(int $orgId, ?int $userId, ?string $role, ?string $anonId = null, ?string $contextKind = null): void
     {
         $this->orgId = $orgId;
         $this->userId = $userId;
         $this->role = $role;
         $this->anonId = $anonId !== null && trim($anonId) !== '' ? trim($anonId) : null;
+        $this->contextKind = self::normalizeContextKind($contextKind, $orgId);
     }
 
     public function orgId(): int
@@ -43,6 +49,11 @@ final class OrgContext
         return $orgId;
     }
 
+    public function scopedOrgId(): int
+    {
+        return $this->isTenantContext() ? $this->requirePositiveOrgId() : 0;
+    }
+
     public function userId(): ?int
     {
         return $this->userId;
@@ -56,6 +67,26 @@ final class OrgContext
     public function anonId(): ?string
     {
         return $this->anonId;
+    }
+
+    public function contextKind(): string
+    {
+        return $this->contextKind;
+    }
+
+    public function isPublicContext(): bool
+    {
+        return $this->contextKind === self::KIND_PUBLIC;
+    }
+
+    public function isTenantContext(): bool
+    {
+        return $this->contextKind === self::KIND_TENANT;
+    }
+
+    public static function deriveContextKind(int $orgId, ?string $preferred = null): string
+    {
+        return self::normalizeContextKind($preferred, $orgId);
     }
 
     private function resolveOrgIdFromRequest(): ?int
@@ -96,5 +127,15 @@ final class OrgContext
         }
 
         return (int) $raw;
+    }
+
+    private static function normalizeContextKind(?string $contextKind, int $orgId): string
+    {
+        $normalized = strtolower(trim((string) $contextKind));
+        if (in_array($normalized, [self::KIND_PUBLIC, self::KIND_TENANT], true)) {
+            return $normalized;
+        }
+
+        return $orgId > 0 ? self::KIND_TENANT : self::KIND_PUBLIC;
     }
 }

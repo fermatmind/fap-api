@@ -47,8 +47,8 @@ class ReportSnapshot extends Model
         'updated_at' => 'datetime',
     ];
 
-    public static function allowOrgZeroContext(): bool
+    public static function publicContextOrgId(): ?int
     {
-        return self::allowOrgZeroWithResolvedContext();
+        return self::resolvedPublicContextOrgId();
     }
 }

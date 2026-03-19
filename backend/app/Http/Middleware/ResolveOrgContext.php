@@ -73,15 +73,18 @@ class ResolveOrgContext
             $role = $this->resolveTokenRole($request) ?? 'public';
         }
 
+        $contextKind = OrgContext::deriveContextKind($orgId);
+
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
         $request->attributes->set('org_context_resolved', true);
+        $request->attributes->set('org_context_kind', $contextKind);
 
         if ($orgId <= 0 && $this->isOpsSystemBypass($request, $role)) {
             $request->attributes->set('org_context_bypass', true);
         }
 
-        $this->orgContext->set($orgId, $userId, $role, $anonId);
+        $this->orgContext->set($orgId, $userId, $role, $anonId, $contextKind);
         app()->instance(OrgContext::class, $this->orgContext);
 
         return $next($request);
@@ -96,32 +99,59 @@ class ResolveOrgContext
 
     private function resolveOrgId(Request $request): int
     {
-        $header = trim((string) $request->header('X-FM-Org-Id', ''));
-        if ($header === '') {
-            $header = trim((string) $request->header('X-Org-Id', ''));
-        }
-        if ($header === '') {
-            $header = trim((string) $request->query('org_id', ''));
-        }
-
-        if ($header !== '') {
-            if (preg_match('/^\d+$/', $header) !== 1) {
-                return -1;
-            }
-            return (int) $header;
-        }
-
-        $attr = $request->attributes->get('fm_org_id');
-        if (is_numeric($attr)) {
-            return (int) $attr;
-        }
-
+        $candidates = [
+            $request->header('X-FM-Org-Id'),
+            $request->header('X-Org-Id'),
+            $request->query('org_id'),
+            $request->route('org_id'),
+            $request->attributes->get('fm_org_id'),
+            $request->attributes->get('org_id'),
+        ];
         $tokenOrgId = $this->resolveOrgIdFromToken($request);
         if ($tokenOrgId !== null) {
-            return $tokenOrgId;
+            $candidates[] = $tokenOrgId;
         }
 
-        return 0;
+        $resolved = [];
+        foreach ($candidates as $candidate) {
+            $normalized = $this->normalizeOrgId($candidate);
+            if ($normalized === null) {
+                if (is_string($candidate) && trim($candidate) !== '') {
+                    return -1;
+                }
+
+                continue;
+            }
+
+            $resolved[] = $normalized;
+        }
+
+        $resolved = array_values(array_unique($resolved));
+        if ($resolved === []) {
+            return 0;
+        }
+
+        $positive = array_values(array_filter($resolved, static fn (int $value): bool => $value > 0));
+        $positive = array_values(array_unique($positive));
+        if ($positive !== []) {
+            return count($positive) === 1 ? $positive[0] : -1;
+        }
+
+        return count($resolved) === 1 ? $resolved[0] : -1;
+    }
+
+    private function normalizeOrgId(mixed $candidate): ?int
+    {
+        if (! is_int($candidate) && ! is_string($candidate) && ! is_numeric($candidate)) {
+            return null;
+        }
+
+        $raw = trim((string) $candidate);
+        if ($raw === '' || preg_match('/^\d+$/', $raw) !== 1) {
+            return null;
+        }
+
+        return (int) $raw;
     }
 
     private function resolveOrgIdFromToken(Request $request): ?int

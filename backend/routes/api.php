@@ -123,7 +123,11 @@ Route::prefix('v0.3')->middleware([
         Route::get('/me/attempts', [MeV03Controller::class, 'attempts']);
     });
 
-    Route::middleware([\App\Http\Middleware\FmTokenAuth::class, ResolveOrgContext::class])->group(function () {
+    Route::middleware([
+        \App\Http\Middleware\FmTokenAuth::class,
+        ResolveOrgContext::class,
+        \App\Http\Middleware\RequireTenantContext::class,
+    ])->group(function () {
         Route::post('/compliance/dsar/requests', [ComplianceDsarController::class, 'store'])
             ->middleware('throttle:api_auth');
         Route::get('/compliance/dsar/requests/{id}', [ComplianceDsarController::class, 'show'])
@@ -245,37 +249,40 @@ Route::prefix('v0.3')->middleware([
         ->group(function () {
             Route::post('/orgs', [OrgsController::class, 'store']);
             Route::get('/orgs/me', [OrgsController::class, 'me']);
-            Route::post('/orgs/{org_id}/invites', [OrgInvitesController::class, 'store']);
             Route::post('/orgs/invites/accept', [OrgInvitesController::class, 'accept']);
-            Route::get('/orgs/{org_id}/big5/releases', [BigFiveOpsController::class, 'releases'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::get('/orgs/{org_id}/big5/audits', [BigFiveOpsController::class, 'audits'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::get('/orgs/{org_id}/big5/audits/{audit_id}', [BigFiveOpsController::class, 'audit'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::get('/orgs/{org_id}/big5/releases/latest', [BigFiveOpsController::class, 'latest'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::get('/orgs/{org_id}/big5/releases/latest/audits', [BigFiveOpsController::class, 'latestAudits'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::get('/orgs/{org_id}/big5/releases/{release_id}', [BigFiveOpsController::class, 'release'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::post('/orgs/{org_id}/big5/releases/publish', [BigFiveOpsController::class, 'publish'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::post('/orgs/{org_id}/big5/releases/rollback', [BigFiveOpsController::class, 'rollback'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::post('/orgs/{org_id}/big5/norms/rebuild', [BigFiveOpsController::class, 'rebuildNorms'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::post('/orgs/{org_id}/big5/norms/drift-check', [BigFiveOpsController::class, 'driftCheckNorms'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
-            Route::post('/orgs/{org_id}/big5/norms/activate', [BigFiveOpsController::class, 'activateNorms'])
-                ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
 
-            // Org wallets (admin/owner only)
-            Route::get('/orgs/{org_id}/wallets', 'App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@wallets');
-            Route::get(
-                '/orgs/{org_id}/wallets/{benefit_code}/ledger',
-                'App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@ledger'
-            );
+            Route::middleware(\App\Http\Middleware\RequireTenantContext::class)->group(function () {
+                Route::post('/orgs/{org_id}/invites', [OrgInvitesController::class, 'store']);
+                Route::get('/orgs/{org_id}/big5/releases', [BigFiveOpsController::class, 'releases'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::get('/orgs/{org_id}/big5/audits', [BigFiveOpsController::class, 'audits'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::get('/orgs/{org_id}/big5/audits/{audit_id}', [BigFiveOpsController::class, 'audit'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::get('/orgs/{org_id}/big5/releases/latest', [BigFiveOpsController::class, 'latest'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::get('/orgs/{org_id}/big5/releases/latest/audits', [BigFiveOpsController::class, 'latestAudits'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::get('/orgs/{org_id}/big5/releases/{release_id}', [BigFiveOpsController::class, 'release'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::post('/orgs/{org_id}/big5/releases/publish', [BigFiveOpsController::class, 'publish'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::post('/orgs/{org_id}/big5/releases/rollback', [BigFiveOpsController::class, 'rollback'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::post('/orgs/{org_id}/big5/norms/rebuild', [BigFiveOpsController::class, 'rebuildNorms'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::post('/orgs/{org_id}/big5/norms/drift-check', [BigFiveOpsController::class, 'driftCheckNorms'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+                Route::post('/orgs/{org_id}/big5/norms/activate', [BigFiveOpsController::class, 'activateNorms'])
+                    ->middleware(\App\Http\Middleware\RequireOrgRole::class.':owner,admin');
+
+                // Org wallets (admin/owner only)
+                Route::get('/orgs/{org_id}/wallets', 'App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@wallets');
+                Route::get(
+                    '/orgs/{org_id}/wallets/{benefit_code}/ledger',
+                    'App\\Http\\Controllers\\API\\V0_3\\OrgWalletController@ledger'
+                );
+            });
         });
 });
 

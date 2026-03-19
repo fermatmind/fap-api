@@ -19,18 +19,20 @@ final class TenantScope implements Scope
             return;
         }
 
-        $orgId = (int) app(OrgContext::class)->orgId();
-        if ($orgId > 0) {
-            $builder->where($model->qualifyColumn('org_id'), $orgId);
+        /** @var OrgContext $orgContext */
+        $orgContext = app(OrgContext::class);
+        if ($orgContext->isTenantContext()) {
+            $builder->where($model->qualifyColumn('org_id'), $orgContext->requirePositiveOrgId());
             return;
         }
 
-        if (!$this->isHttpRequest()) {
+        if (! $this->isHttpRequest()) {
             return;
         }
 
-        if ($this->boolModelMethod($model, 'allowOrgZeroContext')) {
-            $builder->where($model->qualifyColumn('org_id'), 0);
+        $publicOrgId = $this->publicContextOrgId($model);
+        if ($orgContext->isPublicContext() && $publicOrgId !== null) {
+            $builder->where($model->qualifyColumn('org_id'), $publicOrgId);
             return;
         }
 
@@ -62,5 +64,23 @@ final class TenantScope implements Scope
         }
 
         return (bool) $model->{$method}();
+    }
+
+    private function publicContextOrgId(Model $model): ?int
+    {
+        if (! method_exists($model, 'publicContextOrgId')) {
+            return $this->boolModelMethod($model, 'allowOrgZeroContext') ? 0 : null;
+        }
+
+        $reflection = new ReflectionMethod($model, 'publicContextOrgId');
+        $value = $reflection->isStatic()
+            ? $model::publicContextOrgId()
+            : $model->publicContextOrgId();
+
+        if ($value === null || ! is_numeric($value)) {
+            return null;
+        }
+
+        return (int) $value;
     }
 }
