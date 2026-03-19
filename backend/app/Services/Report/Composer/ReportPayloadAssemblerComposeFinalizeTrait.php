@@ -12,6 +12,7 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
         $contentPackId = (string) ($input['contentPackId'] ?? '');
         $profileVersion = (string) ($input['profileVersion'] ?? '');
         $contentPackageVersion = (string) ($input['contentPackageVersion'] ?? '');
+        $reportEngineVersion = trim((string) ($input['reportEngineVersion'] ?? ''));
         $locale = (string) ($input['locale'] ?? '');
         $scores = is_array($input['scores'] ?? null) ? $input['scores'] : [];
         $scoresPct = is_array($input['scoresPct'] ?? null) ? $input['scoresPct'] : [];
@@ -50,7 +51,7 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
 
         $reportPayload = [
             'versions' => [
-                'engine' => 'v1.2',
+                'engine' => $reportEngineVersion !== '' ? $reportEngineVersion : 'v1.2',
                 'profile_version' => $profileVersion,
                 'content_package_version' => $contentPackageVersion,
                 'content_pack_id' => $contentPackId,
@@ -200,7 +201,7 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
                 'pack_id' => $contentPackId,
                 'dir_version' => $contentPackageDir,
                 'locale' => $locale,
-                'engine_version' => 'v1.2',
+                'engine_version' => $reportEngineVersion !== '' ? $reportEngineVersion : (string) data_get($reportPayload, 'versions.engine', 'v1.2'),
             ]);
 
             if ($personalization !== []) {

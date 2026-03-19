@@ -363,6 +363,7 @@ trait ReportPayloadAssemblerComposeEntryTrait
             'contentPackId' => $contentPackId,
             'profileVersion' => $profileVersion,
             'contentPackageVersion' => $contentPackageVersion,
+            'reportEngineVersion' => (string) ($result->report_engine_version ?? ''),
             'locale' => $locale,
             'region' => $region,
             'scaleCode' => $scaleCode,
