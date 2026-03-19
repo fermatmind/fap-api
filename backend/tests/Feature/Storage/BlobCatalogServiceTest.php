@@ -127,4 +127,28 @@ final class BlobCatalogServiceTest extends TestCase
             $this->assertDirectoryDoesNotExist($this->isolatedStoragePath.'/app/private');
         }
     }
+
+    public function test_blob_upsert_derives_a_stable_hash_storage_path_when_omitted(): void
+    {
+        $service = app(BlobCatalogService::class);
+        $hash = str_repeat('c', 64);
+
+        $blob = $service->upsertBlob([
+            'hash' => $hash,
+            'disk' => 'local',
+            'size_bytes' => 512,
+            'content_type' => 'application/json',
+        ]);
+
+        $this->assertSame('blobs/sha256/cc/'.$hash, $blob->storage_path);
+        $this->assertSame('blobs/sha256/cc/'.$hash, $service->storagePathForHash($hash));
+        $this->assertDatabaseHas('storage_blobs', [
+            'hash' => $hash,
+            'storage_path' => 'blobs/sha256/cc/'.$hash,
+            'content_type' => 'application/json',
+            'encoding' => 'identity',
+            'ref_count' => 0,
+        ]);
+        $this->assertDirectoryDoesNotExist($this->isolatedStoragePath.'/app/private');
+    }
 }

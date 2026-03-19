@@ -8,18 +8,22 @@ use App\Models\StorageBlob;
 
 class BlobCatalogService
 {
+    public function storagePathForHash(string $hash): string
+    {
+        $hash = $this->normalizeHash($hash);
+
+        return 'blobs/sha256/'.substr($hash, 0, 2).'/'.$hash;
+    }
+
     public function upsertBlob(array $payload): StorageBlob
     {
-        $hash = trim((string) ($payload['hash'] ?? ''));
-        if ($hash === '') {
-            throw new \InvalidArgumentException('hash is required');
-        }
+        $hash = $this->normalizeHash((string) ($payload['hash'] ?? ''));
 
         $disk = trim((string) ($payload['disk'] ?? 'local'));
-        $storagePath = trim((string) ($payload['storage_path'] ?? ''));
-        if ($storagePath === '') {
-            throw new \InvalidArgumentException('storage_path is required');
-        }
+        $storagePath = trim((string) ($payload['storage_path'] ?? $this->storagePathForHash($hash)));
+        $storagePath = $storagePath !== '' ? $storagePath : $this->storagePathForHash($hash);
+
+        $existing = StorageBlob::query()->find($hash);
 
         $existingPathOwner = StorageBlob::query()
             ->where('disk', $disk)
@@ -39,9 +43,9 @@ class BlobCatalogService
                 'size_bytes' => (int) ($payload['size_bytes'] ?? 0),
                 'content_type' => $payload['content_type'] ?? null,
                 'encoding' => (string) ($payload['encoding'] ?? 'identity'),
-                'ref_count' => (int) ($payload['ref_count'] ?? 0),
-                'first_seen_at' => $payload['first_seen_at'] ?? null,
-                'last_verified_at' => $payload['last_verified_at'] ?? null,
+                'ref_count' => max(0, (int) ($payload['ref_count'] ?? $existing?->ref_count ?? 0)),
+                'first_seen_at' => $payload['first_seen_at'] ?? $existing?->first_seen_at,
+                'last_verified_at' => $payload['last_verified_at'] ?? $existing?->last_verified_at,
             ]
         );
 
@@ -50,11 +54,24 @@ class BlobCatalogService
 
     public function findByHash(string $hash): ?StorageBlob
     {
-        $hash = trim($hash);
+        $hash = strtolower(trim($hash));
         if ($hash === '') {
             return null;
         }
 
         return StorageBlob::query()->find($hash);
+    }
+
+    private function normalizeHash(string $hash): string
+    {
+        $hash = strtolower(trim($hash));
+        if ($hash === '') {
+            throw new \InvalidArgumentException('hash is required');
+        }
+        if (preg_match('/^[a-f0-9]{64}$/', $hash) !== 1) {
+            throw new \InvalidArgumentException('hash must be a 64 character sha256 hex digest');
+        }
+
+        return $hash;
     }
 }

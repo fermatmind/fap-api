@@ -81,5 +81,6 @@ final class StorageMigrateLegacyArtifactsCommandTest extends TestCase
             ->where('action', 'storage_migrate_legacy_artifacts')
             ->count();
         $this->assertGreaterThanOrEqual(1, $auditCount);
+        $this->assertDatabaseCount('storage_blobs', 0);
     }
 }
