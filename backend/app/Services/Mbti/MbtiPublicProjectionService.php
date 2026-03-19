@@ -18,6 +18,7 @@ final class MbtiPublicProjectionService
         private readonly MbtiCanonicalPublicResultPayloadBuilder $payloadBuilder,
         private readonly MbtiPublicSummaryV1Builder $summaryBuilder,
         private readonly MbtiPersonalityProfileAuthoritySourceAdapter $profileAuthorityAdapter,
+        private readonly MbtiResultPersonalizationService $personalizationService,
     ) {}
 
     /**
@@ -47,11 +48,26 @@ final class MbtiPublicProjectionService
             );
         }
 
-        return $this->finalizeProjection(
+        $projection = $this->finalizeProjection(
             $this->payloadBuilder->buildProjection($authority),
             $authority,
             $summary
         );
+
+        $personalization = is_array(data_get($reportPayload, 'report._meta.personalization'))
+            ? data_get($reportPayload, 'report._meta.personalization')
+            : $this->personalizationService->buildForReportPayload(
+                $this->arrayOrEmpty($reportPayload['report'] ?? null),
+                [
+                    'type_code' => $identity?->typeCode ?? (string) ($result->type_code ?? ''),
+                    'pack_id' => (string) data_get($reportPayload, 'meta.pack_id', ''),
+                    'dir_version' => (string) data_get($reportPayload, 'meta.dir_version', ''),
+                    'locale' => $locale,
+                    'engine_version' => (string) data_get($reportPayload, 'meta.report_engine_version', 'v1.2'),
+                ]
+            );
+
+        return $this->personalizationService->applyToProjection($projection, is_array($personalization) ? $personalization : []);
     }
 
     /**

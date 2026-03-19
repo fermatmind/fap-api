@@ -267,11 +267,18 @@ class AttemptReadController extends Controller
             $forceRefresh,
         );
 
+        $reportPersonalization = is_array(data_get($gate, 'report._meta.personalization'))
+            ? data_get($gate, 'report._meta.personalization')
+            : [];
+
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
             'scale_code' => (string) ($attempt->scale_code ?? ''),
             'pack_id' => (string) ($attempt->pack_id ?? ''),
             'dir_version' => (string) ($attempt->dir_version ?? ''),
             'type_code' => (string) ($result->type_code ?? ''),
+            'identity' => (string) data_get($reportPersonalization, 'identity', ''),
+            'variant_keys' => array_values((array) data_get($reportPersonalization, 'variant_keys', [])),
+            'engine_version' => (string) data_get($reportPersonalization, 'engine_version', (string) ($result->report_engine_version ?? 'v1.2')),
             'attempt_id' => (string) $attempt->id,
             'locked' => (bool) ($gate['locked'] ?? false),
         ]);
