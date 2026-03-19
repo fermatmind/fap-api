@@ -79,8 +79,28 @@ final class MbtiCanonicalPublicResultPayloadBuilderTest extends TestCase
             $this->findSection($payload['sections'], 'career.work_environment')['title'] ?? null
         );
         $this->assertSame(
+            'Work experiments',
+            $this->findSection($payload['sections'], 'career.work_experiments')['title'] ?? null
+        );
+        $this->assertSame(
             'Career next step',
             $this->findSection($payload['sections'], 'career.next_step')['title'] ?? null
+        );
+        $this->assertSame(
+            'Next actions',
+            $this->findSection($payload['sections'], 'growth.next_actions')['title'] ?? null
+        );
+        $this->assertSame(
+            'Weekly experiments',
+            $this->findSection($payload['sections'], 'growth.weekly_experiments')['title'] ?? null
+        );
+        $this->assertSame(
+            'Watchouts',
+            $this->findSection($payload['sections'], 'growth.watchouts')['title'] ?? null
+        );
+        $this->assertSame(
+            'Try this week',
+            $this->findSection($payload['sections'], 'relationships.try_this_week')['title'] ?? null
         );
         $this->assertSame(
             MbtiCanonicalSectionRegistry::RENDER_VARIANT_PREMIUM_TEASER,

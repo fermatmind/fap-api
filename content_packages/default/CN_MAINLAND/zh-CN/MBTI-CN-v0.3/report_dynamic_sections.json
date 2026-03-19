@@ -1,6 +1,6 @@
 {
     "schema": "fap.mbti.dynamic_sections.v1",
-    "version": "phase6a.v1",
+    "version": "phase7a.v1",
   "labels": {
     "block_kinds": {
       "type_skeleton": "类型骨架",
@@ -13,6 +13,11 @@
       "collaboration_fit": "协作匹配桥接",
       "work_env": "工作环境桥接",
       "career_next_step": "职业下一步桥接",
+      "next_action": "下一步动作",
+      "weekly_experiment": "本周实验",
+      "relationship_practice": "本周关系练习",
+      "work_experiment": "工作实验",
+      "watchout": "风险提醒",
       "decision": "决策场景",
       "stress_recovery": "压力恢复场景",
       "communication": "沟通协作场景",
@@ -99,7 +104,12 @@
         "role_fit": "放到岗位匹配上，这条主轴最容易让你在某类角色里快速进入状态：{{scene_side_hint}}。",
         "collaboration_fit": "放到团队协作里，这条主轴会决定你更自然的对齐、配合与修正方式：{{scene_side_hint}}。",
         "work_env": "放到工作环境里，这条主轴会决定你更需要哪类节奏、边界和反馈方式：{{scene_side_hint}}。",
-        "career_next_step": "放到职业下一步，这条主轴提示你先去试一个更贴近自己的动作：{{scene_side_hint}}。"
+        "career_next_step": "放到职业下一步，这条主轴提示你先去试一个更贴近自己的动作：{{scene_side_hint}}。",
+        "next_action": "把它翻译成下一步动作，最值得先做的是：{{scene_side_hint}}。先让这个动作小到一周内能重复，而不是一次做成大的自我改造。",
+        "weekly_experiment": "放到这周可执行实验，这条主轴最适合变成一个低成本重复动作：{{scene_side_hint}}。目标不是证明你是谁，而是观察哪种做法让你更稳。",
+        "relationship_practice": "放到本周关系练习，这条主轴最适合变成一个可见的小动作：{{scene_side_hint}}。重点不是表现完美，而是让对方更容易读懂你的真实节奏。",
+        "work_experiment": "放到工作实验，这条主轴最适合先试一个可逆动作：{{scene_side_hint}}。先用小范围验证环境、协作或节奏是否更贴近你。",
+        "watchout": "放到风险提醒，这条主轴最容易在高压时把你推向一种默认反应：{{scene_side_hint}}。真正要防的不是做错一次，而是在没察觉的情况下反复复制同一种失衡。"
     },
     "scene_hints": {
         "EI": {
@@ -155,6 +165,11 @@
         "stable": "这一份结果整体比较稳定。主类型不会因为普通情境波动就频繁改写，真正需要留意的，是在{{close_axis_label}}上什么时候需要主动给另一侧留一点空间。",
         "mixed": "这一份结果整体属于“主类型明确，但局部会随场景切换”。你不是不稳定，而是有几条轴会根据任务、人际和压力负荷切换表达入口。{{identity_clause}}",
         "context_sensitive": "这一份结果最需要读成“情境敏感型稳定”，而不是简单稳定或简单摇摆。主类型仍然成立，但近边界轴太多时，你在不同场景里会更明显地表现出不同的切换模式。{{identity_clause}}"
+    },
+    "action_plan_summary_templates": {
+        "stable": "接下来最值得做的，不是继续解释自己，而是把{{growth_hint}}、{{relationship_hint}}和{{work_hint}}分别变成一个小动作。因为你的结果整体较稳定，重点是把高匹配动作重复出来。",
+        "mixed": "接下来最值得做的，是把{{growth_hint}}、{{relationship_hint}}和{{work_hint}}变成低成本可重复的动作。你的主类型已清楚，但局部会随情境切换，所以动作要小、可见、可复盘。",
+        "context_sensitive": "接下来最值得做的，是用更小的动作去验证自己在不同情境里的切换。先从{{growth_hint}}、{{relationship_hint}}和{{work_hint}}各做一个一周内能重复的版本，不要一次想定终局。"
     },
     "boundary_narrative_templates": {
         "overview": "{{axis_label}}靠近中线时，你不是“有点像两边”，而是会在不同情境下切换入口。熟悉场景里你可能先用{{side_label}}，压力或高风险情境里又会迅速调动{{opposite_side_label}}。别人如果只看到其中一面，就容易把你误读成忽冷忽热、摇摆或前后不一。",

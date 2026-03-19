@@ -60,14 +60,14 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase6a.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase7a.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
-        $this->assertSame('phase6a.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('phase7a.v1', $clear['dynamic_sections_version']);
         $this->assertNotSame('', trim((string) ($clear['explainability_summary'] ?? '')));
         $this->assertSame(
             ['ENFJ', 'ENTP'],
@@ -108,6 +108,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertContains('work_env.preference.high_collaboration', data_get($clear, 'work_env_preference_keys'));
         $this->assertContains('work_env.boundary.JP', data_get($clear, 'work_env_preference_keys'));
         $this->assertContains('career_next_step.theme.clarify_decision_criteria', data_get($clear, 'career_next_step_keys'));
+        $this->assertStringContainsString('一周内能重复', (string) ($clear['action_plan_summary'] ?? ''));
+        $this->assertContains('weekly_action.theme.name_decision_rule', data_get($clear, 'weekly_action_keys'));
+        $this->assertContains('relationship_action.theme.name_decision_rule', data_get($clear, 'relationship_action_keys'));
+        $this->assertContains('work_experiment.theme.name_decision_rule', data_get($clear, 'work_experiment_keys'));
+        $this->assertContains('watchout.stability.context_sensitive', data_get($clear, 'watchout_keys'));
         $this->assertSame('work.primary.EI.E.clear', data_get($clear, 'scene_fingerprint.work.style_key'));
         $this->assertSame('work.primary.EI.E.strong', data_get($strong, 'scene_fingerprint.work.style_key'));
         $this->assertSame(
@@ -191,8 +196,28 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             $clear['variant_keys']['career.work_environment'] ?? null
         );
         $this->assertSame(
+            'career.work_experiments:EI.E.clear:identity.T:action.work_experiment_theme_name_decision_rule:boundary.JP',
+            $clear['variant_keys']['career.work_experiments'] ?? null
+        );
+        $this->assertSame(
             'career.next_step:TF.T.boundary:identity.T:boundary.TF',
             $clear['variant_keys']['career.next_step'] ?? null
+        );
+        $this->assertSame(
+            'growth.next_actions:EI.E.clear:identity.T:action.weekly_action_theme_name_decision_rule:boundary.TF',
+            $clear['variant_keys']['growth.next_actions'] ?? null
+        );
+        $this->assertSame(
+            'growth.weekly_experiments:EI.E.clear:identity.T:action.weekly_action_theme_name_decision_rule:boundary.TF',
+            $clear['variant_keys']['growth.weekly_experiments'] ?? null
+        );
+        $this->assertSame(
+            'growth.watchouts:JP.J.boundary:identity.T:action.watchout_stability_context_sensitive:boundary.JP',
+            $clear['variant_keys']['growth.watchouts'] ?? null
+        );
+        $this->assertSame(
+            'relationships.try_this_week:EI.E.clear:identity.T:action.relationship_action_theme_name_decision_rule:boundary.TF',
+            $clear['variant_keys']['relationships.try_this_week'] ?? null
         );
         $this->assertNotSame(
             data_get($clear, 'sections.overview.selected_blocks.0'),
@@ -239,6 +264,10 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             $clear['sections']['career.next_step']['blocks'][1]['kind'] ?? null
         );
         $this->assertSame(
+            'work_experiment',
+            $clear['sections']['career.work_experiments']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
             'why_this_type',
             $clear['sections']['traits.why_this_type']['blocks'][1]['kind'] ?? null
         );
@@ -253,6 +282,22 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame(
             'stability_explanation',
             $clear['sections']['growth.stability_confidence']['blocks'][0]['kind'] ?? null
+        );
+        $this->assertSame(
+            'next_action',
+            $clear['sections']['growth.next_actions']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'weekly_experiment',
+            $clear['sections']['growth.weekly_experiments']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'watchout',
+            $clear['sections']['growth.watchouts']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'relationship_practice',
+            $clear['sections']['relationships.try_this_week']['blocks'][1]['kind'] ?? null
         );
         $this->assertStringContainsString(
             '主类型',
