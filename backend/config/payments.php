@@ -21,6 +21,11 @@ return [
             'billing',
         ],
     ],
+    'primary_provider_overrides' => array_filter([
+        'CN_MAINLAND' => env('PAYMENTS_PRIMARY_PROVIDER_OVERRIDE_CN_MAINLAND', ''),
+        'US' => env('PAYMENTS_PRIMARY_PROVIDER_OVERRIDE_US', ''),
+        'EU' => env('PAYMENTS_PRIMARY_PROVIDER_OVERRIDE_EU', ''),
+    ], static fn (mixed $provider): bool => is_string($provider) && trim($provider) !== ''),
 
     'fallback_provider' => env('FAP_PAYMENT_FALLBACK_PROVIDER', 'billing'),
     'providers' => [
