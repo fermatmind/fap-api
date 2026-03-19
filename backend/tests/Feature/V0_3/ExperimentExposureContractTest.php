@@ -66,6 +66,7 @@ class ExperimentExposureContractTest extends TestCase
                 'PR23_STICKY_BUCKET',
                 (string) (($meta['experiment_exposure'][0]['experiment_key'] ?? ''))
             );
+
         }
     }
 

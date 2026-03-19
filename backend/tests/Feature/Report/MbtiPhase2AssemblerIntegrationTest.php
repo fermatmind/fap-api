@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase5a.v1',
+            'mbti.personalization.phase6a.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -104,8 +104,24 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase5a.v1',
+            'phase6a.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
+        );
+        $this->assertNotSame(
+            '',
+            trim((string) data_get($payload, 'report._meta.personalization.explainability_summary', ''))
+        );
+        $this->assertSame(
+            ['ENFJ', 'ENTP'],
+            data_get($payload, 'report._meta.personalization.neighbor_type_keys')
+        );
+        $this->assertSame(
+            ['JP', 'TF'],
+            array_map(static fn (array $axis): string => (string) ($axis['axis'] ?? ''), data_get($payload, 'report._meta.personalization.close_call_axes', []))
+        );
+        $this->assertContains(
+            'stability.bucket.context_sensitive',
+            data_get($payload, 'report._meta.personalization.confidence_or_stability_keys', [])
         );
         $this->assertStringContainsString(
             '先用把能量投向外部互动',
@@ -194,6 +210,22 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'career.next_step:TF.T.boundary:identity.T:boundary.TF',
             $roundTrippedVariantKeys['career.next_step'] ?? null
         );
+        $this->assertSame(
+            'traits.why_this_type:EI.E.clear:identity.T:boundary.JP',
+            $roundTrippedVariantKeys['traits.why_this_type'] ?? null
+        );
+        $this->assertSame(
+            'traits.close_call_axes:JP.J.boundary:identity.T:boundary.JP',
+            $roundTrippedVariantKeys['traits.close_call_axes'] ?? null
+        );
+        $this->assertSame(
+            'traits.adjacent_type_contrast:JP.J.boundary:identity.T:neighbor.ENFJ',
+            $roundTrippedVariantKeys['traits.adjacent_type_contrast'] ?? null
+        );
+        $this->assertSame(
+            'growth.stability_confidence:stability.context_sensitive:identity.T:boundary.JP',
+            $roundTrippedVariantKeys['growth.stability_confidence'] ?? null
+        );
 
         $projection = app(MbtiPublicProjectionService::class)->buildForReportEnvelope(
             $result,
@@ -223,13 +255,21 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.work_environment');
         $careerNextStep = collect(Arr::wrap($projection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.next_step');
+        $whyThisType = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.why_this_type');
+        $closeCallAxes = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.close_call_axes');
+        $adjacentTypeContrast = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.adjacent_type_contrast');
+        $stabilityConfidence = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.stability_confidence');
 
         $this->assertSame(
-            'mbti.personalization.phase5a.v1',
+            'mbti.personalization.phase6a.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase5a.v1',
+            'phase6a.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
@@ -265,6 +305,22 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'career.next_step:TF.T.boundary:identity.T:boundary.TF',
             $projectionVariantKeys['career.next_step'] ?? null
         );
+        $this->assertSame(
+            'traits.why_this_type:EI.E.clear:identity.T:boundary.JP',
+            $projectionVariantKeys['traits.why_this_type'] ?? null
+        );
+        $this->assertSame(
+            'traits.close_call_axes:JP.J.boundary:identity.T:boundary.JP',
+            $projectionVariantKeys['traits.close_call_axes'] ?? null
+        );
+        $this->assertSame(
+            'traits.adjacent_type_contrast:JP.J.boundary:identity.T:neighbor.ENFJ',
+            $projectionVariantKeys['traits.adjacent_type_contrast'] ?? null
+        );
+        $this->assertSame(
+            'growth.stability_confidence:stability.context_sensitive:identity.T:boundary.JP',
+            $projectionVariantKeys['growth.stability_confidence'] ?? null
+        );
         $this->assertIsArray($relationshipsRelRisks);
         $this->assertIsArray($decisionStyle);
         $this->assertIsArray($stressRecovery);
@@ -272,6 +328,10 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertIsArray($careerCollaborationFit);
         $this->assertIsArray($careerWorkEnvironment);
         $this->assertIsArray($careerNextStep);
+        $this->assertIsArray($whyThisType);
+        $this->assertIsArray($closeCallAxes);
+        $this->assertIsArray($adjacentTypeContrast);
+        $this->assertIsArray($stabilityConfidence);
         $this->assertSame(
             'relationships.rel_risks:TF.T.boundary:identity.T:boundary.TF',
             data_get($relationshipsRelRisks, '_meta.variant_key')
@@ -301,6 +361,22 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($careerNextStep, '_meta.variant_key')
         );
         $this->assertSame(
+            'traits.why_this_type:EI.E.clear:identity.T:boundary.JP',
+            data_get($whyThisType, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'traits.close_call_axes:JP.J.boundary:identity.T:boundary.JP',
+            data_get($closeCallAxes, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'traits.adjacent_type_contrast:JP.J.boundary:identity.T:neighbor.ENFJ',
+            data_get($adjacentTypeContrast, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'growth.stability_confidence:stability.context_sensitive:identity.T:boundary.JP',
+            data_get($stabilityConfidence, '_meta.variant_key')
+        );
+        $this->assertSame(
             'decision',
             data_get($decisionStyle, 'payload.blocks.1.kind')
         );
@@ -324,6 +400,22 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'career_next_step',
             data_get($careerNextStep, 'payload.blocks.1.kind')
         );
+        $this->assertSame(
+            'why_this_type',
+            data_get($whyThisType, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'borderline_axis',
+            data_get($closeCallAxes, 'payload.blocks.0.kind')
+        );
+        $this->assertSame(
+            'adjacent_type_contrast',
+            data_get($adjacentTypeContrast, 'payload.blocks.0.kind')
+        );
+        $this->assertSame(
+            'stability_explanation',
+            data_get($stabilityConfidence, 'payload.blocks.0.kind')
+        );
         $this->assertStringContainsString(
             '两套入口之间切换',
             (string) data_get($decisionStyle, 'payload.blocks.0.text', '')
@@ -339,6 +431,22 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertStringContainsString(
             '两套判断入口之间来回校准',
             (string) data_get($relationshipsRelRisks, 'payload.blocks.3.text', '')
+        );
+        $this->assertStringContainsString(
+            '主类型',
+            (string) data_get($whyThisType, 'payload.blocks.1.text', '')
+        );
+        $this->assertStringContainsString(
+            '只拉开了7个点差',
+            (string) data_get($closeCallAxes, 'payload.blocks.0.text', '')
+        );
+        $this->assertStringContainsString(
+            '最容易把你看成ENFJ',
+            (string) data_get($adjacentTypeContrast, 'payload.blocks.0.text', '')
+        );
+        $this->assertStringContainsString(
+            '情境敏感型稳定',
+            (string) data_get($stabilityConfidence, 'payload.blocks.0.text', '')
         );
     }
 }

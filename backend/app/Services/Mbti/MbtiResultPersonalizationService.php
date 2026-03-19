@@ -24,6 +24,9 @@ final class MbtiResultPersonalizationService
     private const TARGET_SECTIONS = [
         'overview',
         'trait_overview',
+        'traits.why_this_type',
+        'traits.close_call_axes',
+        'traits.adjacent_type_contrast',
         'traits.decision_style',
         'career.summary',
         'career.collaboration_fit',
@@ -34,6 +37,7 @@ final class MbtiResultPersonalizationService
         'career.next_step',
         'career.upgrade_suggestions',
         'growth.summary',
+        'growth.stability_confidence',
         'growth.strengths',
         'growth.weaknesses',
         'growth.stress_recovery',
@@ -53,6 +57,9 @@ final class MbtiResultPersonalizationService
     private const SECTION_SCENE_MAP = [
         'overview' => 'overview',
         'trait_overview' => 'overview',
+        'traits.why_this_type' => 'explainability',
+        'traits.close_call_axes' => 'explainability',
+        'traits.adjacent_type_contrast' => 'explainability',
         'traits.decision_style' => 'decision',
         'career.summary' => 'work',
         'career.collaboration_fit' => 'communication',
@@ -63,6 +70,7 @@ final class MbtiResultPersonalizationService
         'career.next_step' => 'decision',
         'career.upgrade_suggestions' => 'work',
         'growth.summary' => 'growth',
+        'growth.stability_confidence' => 'stability',
         'growth.strengths' => 'growth',
         'growth.weaknesses' => 'growth',
         'growth.stress_recovery' => 'stress_recovery',
@@ -93,6 +101,8 @@ final class MbtiResultPersonalizationService
      */
     private const SCENE_AXIS_PRIORITY = [
         'overview' => ['EI', 'SN', 'TF', 'JP'],
+        'explainability' => ['EI', 'SN', 'TF', 'JP'],
+        'stability' => ['EI', 'SN', 'TF', 'JP'],
         'work' => ['EI', 'JP', 'TF', 'SN'],
         'relationships' => ['TF', 'EI', 'JP', 'SN'],
         'growth' => ['EI', 'SN', 'TF', 'JP'],
@@ -106,6 +116,8 @@ final class MbtiResultPersonalizationService
      */
     private const SCENE_ANCHORS = [
         'overview' => 'overview',
+        'explainability' => 'overview',
+        'stability' => 'growth',
         'work' => 'career',
         'relationships' => 'relationships',
         'growth' => 'growth',
@@ -157,6 +169,10 @@ final class MbtiResultPersonalizationService
         'decision' => '决策场景',
         'stress_recovery' => '压力恢复场景',
         'communication' => '沟通协作场景',
+        'why_this_type' => '为什么是这个类型',
+        'borderline_axis' => '边界轴解释',
+        'adjacent_type_contrast' => '相邻类型对照',
+        'stability_explanation' => '稳定性解释',
     ];
 
     /**
@@ -176,6 +192,10 @@ final class MbtiResultPersonalizationService
         'decision' => 'Decision scene',
         'stress_recovery' => 'Stress recovery scene',
         'communication' => 'Communication scene',
+        'why_this_type' => 'Why-this-type explanation',
+        'borderline_axis' => 'Borderline-axis explanation',
+        'adjacent_type_contrast' => 'Adjacent-type contrast',
+        'stability_explanation' => 'Stability explanation',
     ];
 
     /**
@@ -452,6 +472,50 @@ final class MbtiResultPersonalizationService
         'T' => 'The T identity layer makes this type skeleton more sensitive to quality shifts and detail-level variance, so the same type can feel more self-calibrating and pressure-aware.',
     ];
 
+    /**
+     * @var array<string, string>
+     */
+    private const DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES = [
+        'stable' => '你的结果主要由{{dominant_axis_label}}上的{{dominant_side_label}}偏好拉开差距，因此主类型较稳定。真正最接近边界的是{{close_axis_label}}，它会决定你在哪些场景下更像相邻类型。',
+        'mixed' => '你的结果已经有清晰主轴，但仍保留几条会随场景切换的近边界轴。{{dominant_axis_label}}上的{{dominant_side_label}}解释了“你为什么是这个类型”，而{{close_axis_label}}解释了“你为什么又不像刻板印象里的那种类型”。',
+        'context_sensitive' => '你的结果不是模糊，而是有几条非常接近边界的轴在一起工作。{{dominant_axis_label}}上的{{dominant_side_label}}仍然决定了主类型，但{{close_axis_label}}会显著影响你在不同情境里看起来像哪一类人。',
+    ];
+
+    /**
+     * @var array<string, string>
+     */
+    private const DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES_EN = [
+        'stable' => 'Your result is mainly separated by a stronger {{dominant_side_label}} preference on {{dominant_axis_label}}, so the core type is comparatively stable. The closest call is {{close_axis_label}}, which explains where you can still resemble a nearby type.',
+        'mixed' => 'Your result already has a clear structural axis, but a few near-boundary axes still change shape with context. {{dominant_axis_label}} and {{dominant_side_label}} explain why this type won, while {{close_axis_label}} explains why you do not always feel like the stereotype of it.',
+        'context_sensitive' => 'Your result is not vague; it is context-sensitive because several axes sit close to the middle at once. {{dominant_axis_label}} and {{dominant_side_label}} still decide the main type, but {{close_axis_label}} strongly affects which nearby type you can resemble in different situations.',
+    ];
+
+    private const DEFAULT_CLOSE_CALL_AXIS_TEMPLATE = '在{{axis_label}}上，你最后仍偏向{{side_label}}，但和另一侧只拉开了{{delta}}个点差。也就是说，这条轴更像“近身拉扯”而不是绝对定型：熟悉情境下你常会先用{{side_label}}，而高压、误解或角色变化时，{{opposite_side_label}}会很快进场补位。';
+
+    private const DEFAULT_CLOSE_CALL_AXIS_TEMPLATE_EN = 'On {{axis_label}}, you still end up leaning toward {{side_label}}, but the margin is only {{delta}} points. This axis behaves more like a live tension than a fixed identity: in familiar situations you may start with {{side_label}}, while pressure, misunderstanding, or role shifts can quickly pull in {{opposite_side_label}} as a correction.';
+
+    private const DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE = '如果只看最接近边界的部分，别人最容易把你看成{{neighbor_type}}。原因不是你“测错了”，而是{{axis_label}}离中线太近，导致你在外显风格上经常会借用{{opposite_side_label}}那一面的节奏。真正区分你们的，不是表面像不像，而是你最终仍会回到{{side_label}}来做主判断和收尾。';
+
+    private const DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE_EN = 'If someone only notices the closest-call part of your profile, they are most likely to read you as {{neighbor_type}}. That does not mean the result is wrong; it means {{axis_label}} sits close enough to the middle that your surface style often borrows the rhythm of {{opposite_side_label}}. The real difference is that your final judgment and closure still return to {{side_label}}.';
+
+    /**
+     * @var array<string, string>
+     */
+    private const DEFAULT_STABILITY_EXPLANATION_TEMPLATES = [
+        'stable' => '这一份结果整体比较稳定。主类型不会因为普通情境波动就频繁改写，真正需要留意的，是在{{close_axis_label}}上什么时候需要主动给另一侧留一点空间。',
+        'mixed' => '这一份结果整体属于“主类型明确，但局部会随场景切换”。你不是不稳定，而是有几条轴会根据任务、人际和压力负荷切换表达入口。',
+        'context_sensitive' => '这一份结果最需要读成“情境敏感型稳定”，而不是简单稳定或简单摇摆。主类型仍然成立，但近边界轴太多时，你在不同场景里会更明显地表现出不同的切换模式。',
+    ];
+
+    /**
+     * @var array<string, string>
+     */
+    private const DEFAULT_STABILITY_EXPLANATION_TEMPLATES_EN = [
+        'stable' => 'This result is comparatively stable overall. The core type should not rewrite itself under ordinary context shifts; the real thing to watch is when {{close_axis_label}} needs deliberate room for the opposite side.',
+        'mixed' => 'This result is best read as a clear type with local context shifts. You are not unstable; a few axes simply change entry points across task, relationship, and pressure conditions.',
+        'context_sensitive' => 'This result is best read as context-sensitive stability rather than simple stability or simple wavering. The main type still holds, but several near-boundary axes make your switching pattern more visible across situations.',
+    ];
+
     public function __construct(
         private readonly ContentPacksIndex $packsIndex,
     ) {
@@ -493,10 +557,20 @@ final class MbtiResultPersonalizationService
             $dynamicDoc,
             $locale
         );
+        $explainabilityAuthority = $this->buildExplainabilityAuthority(
+            $typeCode,
+            $identity,
+            $axisVector,
+            $dominantAxes,
+            $reportPayload,
+            $dynamicDoc,
+            $locale
+        );
         $sectionVariants = $this->buildSectionVariants(
             $axisVector,
             $identity,
             $sceneFingerprint,
+            $explainabilityAuthority,
             $dynamicDoc,
             $locale
         );
@@ -513,7 +587,7 @@ final class MbtiResultPersonalizationService
         }
 
         return [
-            'schema_version' => 'mbti.personalization.phase5a.v1',
+            'schema_version' => 'mbti.personalization.phase6a.v1',
             'locale' => $locale,
             'type_code' => $typeCode,
             'identity' => $identity,
@@ -522,6 +596,11 @@ final class MbtiResultPersonalizationService
             'boundary_flags' => $boundaryFlags,
             'dominant_axes' => $dominantAxes,
             'scene_fingerprint' => $sceneFingerprint,
+            'explainability_summary' => $explainabilityAuthority['explainability_summary'],
+            'close_call_axes' => $explainabilityAuthority['close_call_axes'],
+            'neighbor_type_keys' => $explainabilityAuthority['neighbor_type_keys'],
+            'contrast_keys' => $explainabilityAuthority['contrast_keys'],
+            'confidence_or_stability_keys' => $explainabilityAuthority['confidence_or_stability_keys'],
             'work_style_keys' => array_values((array) data_get($sceneFingerprint, 'work.style_keys', [])),
             'relationship_style_keys' => array_values((array) data_get($sceneFingerprint, 'relationships.style_keys', [])),
             'decision_style_keys' => array_values((array) data_get($sceneFingerprint, 'decision.style_keys', [])),
@@ -595,6 +674,7 @@ final class MbtiResultPersonalizationService
                     'kind' => (string) ($block['kind'] ?? 'axis_strength'),
                     'label' => (string) ($block['label'] ?? $this->blockLabelForLocale((string) ($block['kind'] ?? 'axis_strength'), $personalization)),
                     'text' => (string) ($block['text'] ?? ''),
+                    'contrast_key' => trim((string) ($block['contrast_key'] ?? '')),
                 ];
             }
 
@@ -610,7 +690,10 @@ final class MbtiResultPersonalizationService
                 'primary_axis' => is_array($dynamic['primary_axis'] ?? null) ? $dynamic['primary_axis'] : null,
                 'scene_key' => (string) ($dynamic['scene_key'] ?? ''),
                 'style_key' => (string) ($dynamic['style_key'] ?? ''),
+                'contrast_key' => (string) ($dynamic['contrast_key'] ?? ''),
                 'boundary_axes' => array_values((array) ($dynamic['boundary_axes'] ?? [])),
+                'close_call_axes' => array_values((array) ($dynamic['close_call_axes'] ?? [])),
+                'neighbor_type_keys' => array_values((array) ($dynamic['neighbor_type_keys'] ?? [])),
             ];
 
             $section['payload'] = $payload;
@@ -794,6 +877,101 @@ final class MbtiResultPersonalizationService
 
     /**
      * @param  array<string, array<string, mixed>>  $axisVector
+     * @param  list<array<string, mixed>>  $dominantAxes
+     * @param  array<string, mixed>  $reportPayload
+     * @param  array<string, mixed>  $doc
+     * @return array{
+     *   explainability_summary:string,
+     *   close_call_axes:list<array<string,mixed>>,
+     *   dominant_axis:array<string,mixed>|null,
+     *   neighbor_type_keys:list<string>,
+     *   contrast_keys:array<string,string>,
+     *   confidence_or_stability_keys:list<string>,
+     *   stability_bucket:string
+     * }
+     */
+    private function buildExplainabilityAuthority(
+        string $typeCode,
+        string $identity,
+        array $axisVector,
+        array $dominantAxes,
+        array $reportPayload,
+        array $doc,
+        string $locale
+    ): array {
+        $closeCallAxes = $this->resolveCloseCallAxes($axisVector, $locale);
+        $rankedExplainabilityAxes = $this->resolveExplainabilityAxes($axisVector, $locale);
+        $neighborTypeKeys = $this->resolveNeighborTypeKeys($typeCode, $rankedExplainabilityAxes);
+        $stabilityBucket = $this->resolveStabilityBucket($reportPayload, $axisVector, $closeCallAxes, $dominantAxes);
+        $dominantAxis = is_array($dominantAxes[0] ?? null) ? $dominantAxes[0] : $this->resolveScenePrimaryAxis('overview', $axisVector);
+        $closeAxis = is_array($closeCallAxes[0] ?? null) ? $closeCallAxes[0] : $dominantAxis;
+        $dominantAxisCode = trim((string) ($dominantAxis['axis'] ?? ''));
+        $dominantSide = trim((string) ($dominantAxis['side'] ?? ''));
+        $closeAxisCode = trim((string) ($closeAxis['axis'] ?? ''));
+        $closeAxisLabel = trim((string) ($closeAxis['axis_label'] ?? ''));
+
+        $summaryTemplate = $this->resolveTemplate(
+            data_get($doc, 'explainability_summary_templates.'.$stabilityBucket),
+            $locale,
+            $locale === 'zh-CN'
+                ? (self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES[$stabilityBucket] ?? self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES['mixed'])
+                : (self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES_EN[$stabilityBucket] ?? self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES_EN['mixed'])
+        );
+
+        $contrastKeys = [
+            'traits.why_this_type' => sprintf(
+                'traits.why_this_type:dominant.%s.%s.%s',
+                $dominantAxisCode !== '' ? $dominantAxisCode : 'axis',
+                $dominantSide !== '' ? $dominantSide : 'side',
+                trim((string) ($dominantAxis['band'] ?? 'clear'))
+            ),
+            'traits.close_call_axes' => sprintf(
+                'traits.close_call_axes:close.%s',
+                $closeCallAxes === []
+                    ? 'none'
+                    : implode('-', array_values(array_filter(array_map(
+                        static fn (array $axis): string => trim((string) ($axis['axis'] ?? '')),
+                        $closeCallAxes
+                    ))))
+            ),
+            'traits.adjacent_type_contrast' => sprintf(
+                'traits.adjacent_type_contrast:neighbor.%s',
+                $neighborTypeKeys === [] ? 'none' : implode('-', $neighborTypeKeys)
+            ),
+            'growth.stability_confidence' => sprintf(
+                'growth.stability_confidence:stability.%s',
+                $stabilityBucket
+            ),
+        ];
+
+        $confidenceOrStabilityKeys = [sprintf('stability.bucket.%s', $stabilityBucket)];
+        foreach ($closeCallAxes as $axis) {
+            $axisCode = trim((string) ($axis['axis'] ?? ''));
+            if ($axisCode !== '') {
+                $confidenceOrStabilityKeys[] = sprintf('stability.close_call.%s', $axisCode);
+            }
+        }
+        if ($identity !== '') {
+            $confidenceOrStabilityKeys[] = sprintf('stability.identity.%s', $identity);
+        }
+
+        return [
+            'explainability_summary' => $this->renderTemplate($summaryTemplate, [
+                'dominant_axis_label' => trim((string) ($dominantAxis['axis_label'] ?? '')),
+                'dominant_side_label' => trim((string) ($dominantAxis['side_label'] ?? '')),
+                'close_axis_label' => $closeAxisLabel !== '' ? $closeAxisLabel : ($locale === 'zh-CN' ? '最接近边界的那条轴' : 'the closest-call axis'),
+            ]),
+            'close_call_axes' => $closeCallAxes,
+            'dominant_axis' => is_array($dominantAxis) ? $dominantAxis : null,
+            'neighbor_type_keys' => $neighborTypeKeys,
+            'contrast_keys' => $contrastKeys,
+            'confidence_or_stability_keys' => array_values(array_unique(array_filter($confidenceOrStabilityKeys))),
+            'stability_bucket' => $stabilityBucket,
+        ];
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $axisVector
      * @param  array<string, array<string, mixed>>  $sceneFingerprint
      * @param  array<string, mixed>  $doc
      * @return array<string, array<string, mixed>>
@@ -802,12 +980,32 @@ final class MbtiResultPersonalizationService
         array $axisVector,
         string $identity,
         array $sceneFingerprint,
+        array $explainabilityAuthority,
         array $doc,
         string $locale
     ): array {
         $sectionVariants = [];
 
         foreach (self::TARGET_SECTIONS as $sectionKey) {
+            if (in_array($sectionKey, [
+                'traits.why_this_type',
+                'traits.close_call_axes',
+                'traits.adjacent_type_contrast',
+                'growth.stability_confidence',
+            ], true)) {
+                $sectionVariants[$sectionKey] = $this->buildExplainabilitySectionVariant(
+                    $sectionKey,
+                    $axisVector,
+                    $identity,
+                    $sceneFingerprint,
+                    $explainabilityAuthority,
+                    $doc,
+                    $locale
+                );
+
+                continue;
+            }
+
             $sceneKey = self::SECTION_SCENE_MAP[$sectionKey] ?? 'overview';
             $primaryAxis = is_array(data_get($sceneFingerprint, $sceneKey.'.primary_axis'))
                 ? data_get($sceneFingerprint, $sceneKey.'.primary_axis')
@@ -906,12 +1104,275 @@ final class MbtiResultPersonalizationService
                 'primary_axis' => $primaryAxis,
                 'support_axis' => $supportAxis,
                 'boundary_axes' => $boundaryAxes,
+                'contrast_key' => '',
+                'close_call_axes' => [],
+                'neighbor_type_keys' => [],
                 'selected_blocks' => $selectedBlocks,
                 'blocks' => $blocks,
             ];
         }
 
         return $sectionVariants;
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $axisVector
+     * @param  array<string, array<string, mixed>>  $sceneFingerprint
+     * @param  array<string, mixed>  $explainabilityAuthority
+     * @param  array<string, mixed>  $doc
+     * @return array<string, mixed>
+     */
+    private function buildExplainabilitySectionVariant(
+        string $sectionKey,
+        array $axisVector,
+        string $identity,
+        array $sceneFingerprint,
+        array $explainabilityAuthority,
+        array $doc,
+        string $locale
+    ): array {
+        $dominantAxis = is_array($explainabilityAuthority['dominant_axis'] ?? null)
+            ? $explainabilityAuthority['dominant_axis']
+            : $this->resolveScenePrimaryAxis('overview', $axisVector);
+        $closeCallAxes = array_values(array_filter(
+            (array) ($explainabilityAuthority['close_call_axes'] ?? []),
+            static fn (mixed $value): bool => is_array($value)
+        ));
+        $primaryCloseAxis = is_array($closeCallAxes[0] ?? null) ? $closeCallAxes[0] : $dominantAxis;
+        $secondaryCloseAxis = is_array($closeCallAxes[1] ?? null) ? $closeCallAxes[1] : null;
+        $neighborTypeKeys = array_values((array) ($explainabilityAuthority['neighbor_type_keys'] ?? []));
+        $contrastKey = trim((string) data_get($explainabilityAuthority, 'contrast_keys.'.$sectionKey, ''));
+        $stabilityBucket = trim((string) ($explainabilityAuthority['stability_bucket'] ?? 'mixed'));
+
+        $sceneKey = $sectionKey === 'growth.stability_confidence' ? 'stability' : 'explainability';
+        $primaryAxis = $sectionKey === 'growth.stability_confidence'
+            ? $dominantAxis
+            : ($sectionKey === 'traits.why_this_type' ? $dominantAxis : $primaryCloseAxis);
+        $supportAxis = match ($sectionKey) {
+            'traits.why_this_type' => $primaryCloseAxis,
+            'traits.close_call_axes' => $secondaryCloseAxis,
+            'traits.adjacent_type_contrast' => $secondaryCloseAxis ?? $dominantAxis,
+            'growth.stability_confidence' => $primaryCloseAxis,
+            default => null,
+        };
+        $boundaryAxes = array_values(array_filter(array_map(
+            static fn (array $axis): string => trim((string) ($axis['axis'] ?? '')),
+            $closeCallAxes
+        )));
+
+        if (! is_array($primaryAxis)) {
+            return [
+                'variant_key' => $sectionKey.':unresolved',
+                'style_key' => '',
+                'scene_key' => $sceneKey,
+                'primary_axis' => null,
+                'support_axis' => null,
+                'boundary_axes' => $boundaryAxes,
+                'contrast_key' => $contrastKey,
+                'close_call_axes' => $closeCallAxes,
+                'neighbor_type_keys' => $neighborTypeKeys,
+                'selected_blocks' => [],
+                'blocks' => [],
+            ];
+        }
+
+        $identityText = $identity !== '' ? $this->resolveIdentityText($doc, $identity, $locale) : '';
+        $blocks = [];
+        $selectedBlocks = [];
+        $variantKey = '';
+
+        if ($sectionKey === 'traits.why_this_type') {
+            $axisStrengthText = $this->resolveAxisStrengthText($doc, 'overview', (string) ($primaryAxis['band'] ?? 'clear'), $locale, $primaryAxis);
+            if ($axisStrengthText !== '') {
+                $blockId = sprintf('%s.axis_strength.%s.%s.%s', $sectionKey, $primaryAxis['axis'] ?? 'axis', $primaryAxis['side'] ?? 'side', $primaryAxis['band'] ?? 'clear');
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'axis_strength',
+                    'label' => $this->blockLabel('axis_strength', $doc, $locale),
+                    'text' => $axisStrengthText,
+                ];
+            }
+
+            $whyText = $this->resolveWhyThisTypeText($doc, $locale, $primaryAxis, $supportAxis, $identity, $closeCallAxes);
+            if ($whyText !== '') {
+                $blockId = sprintf('%s.why_this_type.%s', $sectionKey, strtolower((string) ($primaryAxis['axis'] ?? 'axis')));
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'why_this_type',
+                    'label' => $this->blockLabel('why_this_type', $doc, $locale),
+                    'text' => $whyText,
+                    'contrast_key' => $contrastKey,
+                ];
+            }
+
+            if ($identityText !== '') {
+                $blockId = sprintf('%s.identity.%s', $sectionKey, strtolower($identity));
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'identity',
+                    'label' => $this->blockLabel('identity', $doc, $locale),
+                    'text' => $identityText,
+                ];
+            }
+
+            $variantKey = implode(':', [
+                $sectionKey,
+                sprintf('%s.%s.%s', $primaryAxis['axis'] ?? 'axis', $primaryAxis['side'] ?? 'side', $primaryAxis['band'] ?? 'clear'),
+                $identity !== '' ? sprintf('identity.%s', $identity) : 'identity.none',
+                $boundaryAxes !== [] ? sprintf('boundary.%s', $boundaryAxes[0]) : 'boundary.none',
+            ]);
+        } elseif ($sectionKey === 'traits.close_call_axes') {
+            foreach ($closeCallAxes as $index => $closeAxis) {
+                $closeAxisCode = trim((string) ($closeAxis['axis'] ?? ''));
+                if ($closeAxisCode === '') {
+                    continue;
+                }
+
+                $text = $this->resolveCloseCallAxisText($doc, $locale, $closeAxis);
+                if ($text === '') {
+                    continue;
+                }
+
+                $blockId = sprintf('%s.borderline_axis.%s.%d', $sectionKey, $closeAxisCode, $index + 1);
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'borderline_axis',
+                    'label' => $this->blockLabel('borderline_axis', $doc, $locale),
+                    'text' => $text,
+                    'contrast_key' => $contrastKey,
+                ];
+            }
+
+            if ($boundaryAxes !== []) {
+                $boundaryNarrative = $this->resolveBoundaryNarrativeText(
+                    $doc,
+                    'overview',
+                    $boundaryAxes[0],
+                    $locale,
+                    $axisVector,
+                    $primaryAxis
+                );
+                if ($boundaryNarrative !== '') {
+                    $blockId = sprintf('%s.boundary.%s', $sectionKey, $boundaryAxes[0]);
+                    $selectedBlocks[] = $blockId;
+                    $blocks[] = [
+                        'id' => $blockId,
+                        'kind' => 'boundary',
+                        'label' => $this->blockLabel('boundary', $doc, $locale),
+                        'text' => $boundaryNarrative,
+                    ];
+                }
+            }
+
+            $variantKey = implode(':', [
+                $sectionKey,
+                sprintf('%s.%s.%s', $primaryAxis['axis'] ?? 'axis', $primaryAxis['side'] ?? 'side', $primaryAxis['band'] ?? 'clear'),
+                $identity !== '' ? sprintf('identity.%s', $identity) : 'identity.none',
+                $boundaryAxes !== [] ? sprintf('boundary.%s', $boundaryAxes[0]) : 'boundary.none',
+            ]);
+        } elseif ($sectionKey === 'traits.adjacent_type_contrast') {
+            $contrastText = $this->resolveAdjacentTypeContrastText(
+                $doc,
+                $locale,
+                $primaryAxis,
+                $neighborTypeKeys,
+                $closeCallAxes
+            );
+            if ($contrastText !== '') {
+                $blockId = sprintf('%s.adjacent_type_contrast.%s', $sectionKey, strtolower((string) ($primaryAxis['axis'] ?? 'axis')));
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'adjacent_type_contrast',
+                    'label' => $this->blockLabel('adjacent_type_contrast', $doc, $locale),
+                    'text' => $contrastText,
+                    'contrast_key' => $contrastKey,
+                ];
+            }
+
+            if ($identityText !== '') {
+                $blockId = sprintf('%s.identity.%s', $sectionKey, strtolower($identity));
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'identity',
+                    'label' => $this->blockLabel('identity', $doc, $locale),
+                    'text' => $identityText,
+                ];
+            }
+
+            $variantKey = implode(':', [
+                $sectionKey,
+                sprintf('%s.%s.%s', $primaryAxis['axis'] ?? 'axis', $primaryAxis['side'] ?? 'side', $primaryAxis['band'] ?? 'clear'),
+                $identity !== '' ? sprintf('identity.%s', $identity) : 'identity.none',
+                sprintf('neighbor.%s', $neighborTypeKeys[0] ?? 'none'),
+            ]);
+        } elseif ($sectionKey === 'growth.stability_confidence') {
+            $stabilityText = $this->resolveStabilityExplanationText(
+                $doc,
+                $locale,
+                $stabilityBucket,
+                $primaryCloseAxis,
+                $identity
+            );
+            if ($stabilityText !== '') {
+                $blockId = sprintf('%s.stability.%s', $sectionKey, $stabilityBucket);
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'stability_explanation',
+                    'label' => $this->blockLabel('stability_explanation', $doc, $locale),
+                    'text' => $stabilityText,
+                    'contrast_key' => $contrastKey,
+                ];
+            }
+
+            if ($boundaryAxes !== []) {
+                $boundaryNarrative = $this->resolveBoundaryNarrativeText(
+                    $doc,
+                    'growth',
+                    $boundaryAxes[0],
+                    $locale,
+                    $axisVector,
+                    $primaryCloseAxis ?? $primaryAxis
+                );
+                if ($boundaryNarrative !== '') {
+                    $blockId = sprintf('%s.boundary.%s', $sectionKey, $boundaryAxes[0]);
+                    $selectedBlocks[] = $blockId;
+                    $blocks[] = [
+                        'id' => $blockId,
+                        'kind' => 'boundary',
+                        'label' => $this->blockLabel('boundary', $doc, $locale),
+                        'text' => $boundaryNarrative,
+                    ];
+                }
+            }
+
+            $variantKey = implode(':', [
+                $sectionKey,
+                sprintf('stability.%s', $stabilityBucket),
+                $identity !== '' ? sprintf('identity.%s', $identity) : 'identity.none',
+                $boundaryAxes !== [] ? sprintf('boundary.%s', $boundaryAxes[0]) : 'boundary.none',
+            ]);
+        }
+
+        return [
+            'variant_key' => $variantKey !== '' ? $variantKey : $sectionKey.':unresolved',
+            'style_key' => $contrastKey,
+            'scene_key' => $sceneKey,
+            'primary_axis' => $primaryAxis,
+            'support_axis' => $supportAxis,
+            'boundary_axes' => $boundaryAxes,
+            'contrast_key' => $contrastKey,
+            'close_call_axes' => $closeCallAxes,
+            'neighbor_type_keys' => $neighborTypeKeys,
+            'selected_blocks' => $selectedBlocks,
+            'blocks' => $blocks,
+        ];
     }
 
     /**
@@ -1047,6 +1508,255 @@ final class MbtiResultPersonalizationService
             'SN' => 'turn_insight_into_evidence',
             default => 'repeat_high_fit_experiment',
         };
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $axisVector
+     * @return list<array<string, mixed>>
+     */
+    private function resolveExplainabilityAxes(array $axisVector, string $locale): array
+    {
+        $axes = [];
+
+        foreach (self::AXIS_ORDER as $axisCode) {
+            if (! is_array($axisVector[$axisCode] ?? null)) {
+                continue;
+            }
+
+            $axis = $axisVector[$axisCode];
+            $side = trim((string) ($axis['side'] ?? ''));
+            $oppositeSide = $this->oppositeSide($axisCode, $side);
+            $axes[] = [
+                ...$axis,
+                'opposite_side' => $oppositeSide,
+                'opposite_side_label' => $this->sideLabel($axisCode, $oppositeSide, $locale),
+                'boundary' => $this->isExplainabilityCloseCall($axis),
+            ];
+        }
+
+        usort($axes, static function (array $left, array $right): int {
+            $leftBoundary = ($left['boundary'] ?? false) === true ? 0 : 1;
+            $rightBoundary = ($right['boundary'] ?? false) === true ? 0 : 1;
+            if ($leftBoundary !== $rightBoundary) {
+                return $leftBoundary <=> $rightBoundary;
+            }
+
+            return ((int) ($left['delta'] ?? 0)) <=> ((int) ($right['delta'] ?? 0));
+        });
+
+        return array_values($axes);
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $axisVector
+     * @return list<array<string, mixed>>
+     */
+    private function resolveCloseCallAxes(array $axisVector, string $locale): array
+    {
+        return array_slice($this->resolveExplainabilityAxes($axisVector, $locale), 0, 2);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rankedAxes
+     * @return list<string>
+     */
+    private function resolveNeighborTypeKeys(string $typeCode, array $rankedAxes): array
+    {
+        $baseType = strtoupper((string) preg_replace('/-(A|T)$/', '', trim($typeCode)));
+        if (strlen($baseType) !== 4) {
+            return [];
+        }
+
+        $axisIndexMap = ['EI' => 0, 'SN' => 1, 'TF' => 2, 'JP' => 3];
+        $neighbors = [];
+        $nonAtAxes = array_values(array_filter(
+            $rankedAxes,
+            static fn (array $axis): bool => trim((string) ($axis['axis'] ?? '')) !== 'AT'
+        ));
+
+        foreach ($nonAtAxes as $index => $axis) {
+            $axisCode = trim((string) ($axis['axis'] ?? ''));
+            if (! array_key_exists($axisCode, $axisIndexMap)) {
+                continue;
+            }
+
+            if ($index > 0 && ! $this->isExplainabilityCloseCall($axis)) {
+                continue;
+            }
+
+            $chars = str_split($baseType);
+            $charIndex = $axisIndexMap[$axisCode];
+            $current = $chars[$charIndex] ?? '';
+            $flipped = $this->oppositeSide($axisCode, $current);
+            if ($flipped === '') {
+                continue;
+            }
+
+            $chars[$charIndex] = $flipped;
+            $neighbors[] = implode('', $chars);
+
+            if (count($neighbors) >= 2) {
+                break;
+            }
+        }
+
+        return array_values(array_unique(array_filter($neighbors)));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $closeCallAxes
+     * @param  list<array<string, mixed>>  $dominantAxes
+     */
+    private function resolveStabilityBucket(
+        array $reportPayload,
+        array $axisVector,
+        array $closeCallAxes,
+        array $dominantAxes
+    ): string {
+        $clarity = strtolower(trim((string) (
+            data_get($reportPayload, 'pci.overall.clarity')
+            ?? data_get($reportPayload, 'result_json.pci.overall.clarity')
+            ?? data_get($reportPayload, 'result_json.axis_scores_json.pci.overall.clarity')
+            ?? ''
+        )));
+
+        if (in_array($clarity, ['high', 'very_high', 'stable'], true)) {
+            return 'stable';
+        }
+
+        if (in_array($clarity, ['low', 'very_low', 'context_sensitive'], true)) {
+            return 'context_sensitive';
+        }
+
+        $eligibleCloseCalls = array_values(array_filter(
+            $closeCallAxes,
+            fn (array $axis): bool => $this->isExplainabilityCloseCall($axis)
+        ));
+
+        if (count($eligibleCloseCalls) >= 2) {
+            return 'context_sensitive';
+        }
+
+        $dominantAxis = is_array($dominantAxes[0] ?? null) ? $dominantAxes[0] : $this->resolveScenePrimaryAxis('overview', $axisVector);
+        if (
+            count($eligibleCloseCalls) === 0
+            && is_array($dominantAxis)
+            && in_array((string) ($dominantAxis['band'] ?? ''), ['strong', 'very_strong'], true)
+        ) {
+            return 'stable';
+        }
+
+        return 'mixed';
+    }
+
+    /**
+     * @param  array<string, mixed>  $axis
+     */
+    private function isExplainabilityCloseCall(array $axis): bool
+    {
+        if ((bool) ($axis['boundary'] ?? false) === true) {
+            return true;
+        }
+
+        if ((string) ($axis['band'] ?? '') === 'boundary') {
+            return true;
+        }
+
+        return (int) ($axis['delta'] ?? 99) < 12;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $closeCallAxes
+     */
+    private function resolveWhyThisTypeText(
+        array $doc,
+        string $locale,
+        array $primaryAxis,
+        ?array $supportAxis,
+        string $identity,
+        array $closeCallAxes
+    ): string {
+        $band = trim((string) ($primaryAxis['band'] ?? 'clear'));
+        $template = $this->resolveTemplate(
+            data_get($doc, 'why_this_type_templates.'.$band),
+            $locale,
+            $locale === 'zh-CN'
+                ? (self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES['mixed'])
+                : (self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES_EN['mixed'])
+        );
+
+        $closeAxis = is_array($closeCallAxes[0] ?? null) ? $closeCallAxes[0] : $supportAxis;
+
+        return $this->renderTemplate($template, [
+            'dominant_axis_label' => trim((string) ($primaryAxis['axis_label'] ?? '')),
+            'dominant_side_label' => trim((string) ($primaryAxis['side_label'] ?? '')),
+            'close_axis_label' => trim((string) ($closeAxis['axis_label'] ?? ($locale === 'zh-CN' ? '最接近边界的那条轴' : 'the closest-call axis'))),
+            'identity_clause' => $this->shortIdentityClause($identity, $locale),
+        ]);
+    }
+
+    private function resolveCloseCallAxisText(array $doc, string $locale, array $axis): string
+    {
+        $template = $this->resolveTemplate(
+            data_get($doc, 'close_call_axis_templates.default'),
+            $locale,
+            $locale === 'zh-CN' ? self::DEFAULT_CLOSE_CALL_AXIS_TEMPLATE : self::DEFAULT_CLOSE_CALL_AXIS_TEMPLATE_EN
+        );
+
+        return $this->renderTemplate($template, [
+            'axis_label' => trim((string) ($axis['axis_label'] ?? '')),
+            'side_label' => trim((string) ($axis['side_label'] ?? '')),
+            'opposite_side_label' => trim((string) ($axis['opposite_side_label'] ?? '')),
+            'delta' => (string) ($axis['delta'] ?? ''),
+        ]);
+    }
+
+    /**
+     * @param  list<string>  $neighborTypeKeys
+     * @param  list<array<string, mixed>>  $closeCallAxes
+     */
+    private function resolveAdjacentTypeContrastText(
+        array $doc,
+        string $locale,
+        array $primaryAxis,
+        array $neighborTypeKeys,
+        array $closeCallAxes
+    ): string {
+        $template = $this->resolveTemplate(
+            data_get($doc, 'adjacent_type_contrast_templates.default'),
+            $locale,
+            $locale === 'zh-CN' ? self::DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE : self::DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE_EN
+        );
+
+        $axis = is_array($closeCallAxes[0] ?? null) ? $closeCallAxes[0] : $primaryAxis;
+
+        return $this->renderTemplate($template, [
+            'neighbor_type' => trim((string) ($neighborTypeKeys[0] ?? ($locale === 'zh-CN' ? '相邻类型' : 'a nearby type'))),
+            'axis_label' => trim((string) ($axis['axis_label'] ?? '')),
+            'side_label' => trim((string) ($axis['side_label'] ?? '')),
+            'opposite_side_label' => trim((string) ($axis['opposite_side_label'] ?? '')),
+        ]);
+    }
+
+    private function resolveStabilityExplanationText(
+        array $doc,
+        string $locale,
+        string $bucket,
+        ?array $closeAxis,
+        string $identity
+    ): string {
+        $template = $this->resolveTemplate(
+            data_get($doc, 'stability_explanation_templates.'.$bucket),
+            $locale,
+            $locale === 'zh-CN'
+                ? (self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES[$bucket] ?? self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES['mixed'])
+                : (self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES_EN[$bucket] ?? self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES_EN['mixed'])
+        );
+
+        return $this->renderTemplate($template, [
+            'close_axis_label' => trim((string) ($closeAxis['axis_label'] ?? ($locale === 'zh-CN' ? '最接近边界的那条轴' : 'the closest-call axis'))),
+            'identity_clause' => $this->shortIdentityClause($identity, $locale),
+        ]);
     }
 
     /**

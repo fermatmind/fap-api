@@ -60,14 +60,24 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase5a.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase6a.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
-        $this->assertSame('phase5a.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('phase6a.v1', $clear['dynamic_sections_version']);
+        $this->assertNotSame('', trim((string) ($clear['explainability_summary'] ?? '')));
+        $this->assertSame(
+            ['ENFJ', 'ENTP'],
+            data_get($clear, 'neighbor_type_keys')
+        );
+        $this->assertSame(
+            ['JP', 'TF'],
+            array_map(static fn (array $axis): string => (string) ($axis['axis'] ?? ''), data_get($clear, 'close_call_axes', []))
+        );
+        $this->assertContains('stability.bucket.context_sensitive', data_get($clear, 'confidence_or_stability_keys', []));
         $this->assertStringContainsString(
             '先用把能量投向外部互动',
             (string) ($clear['work_style_summary'] ?? '')
@@ -131,6 +141,30 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame(
             'overview:EI.E.strong:identity.T:boundary.none',
             data_get($strong, 'variant_keys.overview')
+        );
+        $this->assertSame(
+            'traits.why_this_type:EI.E.clear:identity.T:boundary.JP',
+            $clear['variant_keys']['traits.why_this_type'] ?? null
+        );
+        $this->assertSame(
+            'traits.close_call_axes:JP.J.boundary:identity.T:boundary.JP',
+            $clear['variant_keys']['traits.close_call_axes'] ?? null
+        );
+        $this->assertSame(
+            'traits.adjacent_type_contrast:JP.J.boundary:identity.T:neighbor.ENFJ',
+            $clear['variant_keys']['traits.adjacent_type_contrast'] ?? null
+        );
+        $this->assertSame(
+            'growth.stability_confidence:stability.context_sensitive:identity.T:boundary.JP',
+            $clear['variant_keys']['growth.stability_confidence'] ?? null
+        );
+        $this->assertSame(
+            'traits.why_this_type:dominant.EI.E.clear',
+            $clear['contrast_keys']['traits.why_this_type'] ?? null
+        );
+        $this->assertSame(
+            'traits.adjacent_type_contrast:neighbor.ENFJ-ENTP',
+            $clear['contrast_keys']['traits.adjacent_type_contrast'] ?? null
         );
         $this->assertSame(
             'relationships.rel_risks:TF.T.boundary:identity.T:boundary.TF',
@@ -204,6 +238,38 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'career_next_step',
             $clear['sections']['career.next_step']['blocks'][1]['kind'] ?? null
         );
+        $this->assertSame(
+            'why_this_type',
+            $clear['sections']['traits.why_this_type']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'borderline_axis',
+            $clear['sections']['traits.close_call_axes']['blocks'][0]['kind'] ?? null
+        );
+        $this->assertSame(
+            'adjacent_type_contrast',
+            $clear['sections']['traits.adjacent_type_contrast']['blocks'][0]['kind'] ?? null
+        );
+        $this->assertSame(
+            'stability_explanation',
+            $clear['sections']['growth.stability_confidence']['blocks'][0]['kind'] ?? null
+        );
+        $this->assertStringContainsString(
+            '主类型',
+            (string) ($clear['sections']['traits.why_this_type']['blocks'][1]['text'] ?? '')
+        );
+        $this->assertStringContainsString(
+            '只拉开了7个点差',
+            (string) ($clear['sections']['traits.close_call_axes']['blocks'][0]['text'] ?? '')
+        );
+        $this->assertStringContainsString(
+            '最容易把你看成ENFJ',
+            (string) ($clear['sections']['traits.adjacent_type_contrast']['blocks'][0]['text'] ?? '')
+        );
+        $this->assertStringContainsString(
+            '情境敏感型稳定',
+            (string) ($clear['sections']['growth.stability_confidence']['blocks'][0]['text'] ?? '')
+        );
         $this->assertStringContainsString(
             '压力升高时',
             (string) data_get($clear, 'scene_fingerprint.stress_recovery.summary', '')
@@ -267,6 +333,18 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'growth.stress_recovery:JP.J.clear:identity.T:boundary.TF',
             $clear['variant_keys']['growth.stress_recovery'] ?? null
         );
+        $this->assertSame(
+            'traits.close_call_axes:JP.J.boundary:identity.T:boundary.JP',
+            $boundary['variant_keys']['traits.close_call_axes'] ?? null
+        );
+        $this->assertSame(
+            'traits.close_call_axes:TF.T.boundary:identity.T:boundary.TF',
+            $clear['variant_keys']['traits.close_call_axes'] ?? null
+        );
+        $this->assertNotSame(
+            $boundary['variant_keys']['traits.adjacent_type_contrast'] ?? null,
+            $clear['variant_keys']['traits.adjacent_type_contrast'] ?? null
+        );
         $this->assertNotSame(
             $boundary['variant_keys']['growth.stress_recovery'] ?? null,
             $clear['variant_keys']['growth.stress_recovery'] ?? null
@@ -278,6 +356,185 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertStringContainsString(
             '更稳定的应对入口',
             (string) ($clear['sections']['growth.stress_recovery']['blocks'][0]['text'] ?? '')
+        );
+    }
+
+    public function test_it_reuses_authoritative_dominant_axis_for_explainability_sections(): void
+    {
+        $service = app(MbtiResultPersonalizationService::class);
+
+        $payload = [
+            'versions' => [
+                'engine' => 'v1.2',
+                'content_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+                'dir_version' => 'MBTI-CN-v0.3',
+            ],
+            'profile' => [
+                'type_code' => 'INTP-A',
+            ],
+            'scores' => [
+                'EI' => ['pct' => 57, 'delta' => 7, 'side' => 'I', 'state' => 'moderate'],
+                'SN' => ['pct' => 80, 'delta' => 30, 'side' => 'N', 'state' => 'strong'],
+                'TF' => ['pct' => 61, 'delta' => 11, 'side' => 'T', 'state' => 'balanced'],
+                'JP' => ['pct' => 55, 'delta' => 5, 'side' => 'P', 'state' => 'moderate'],
+                'AT' => ['pct' => 66, 'delta' => 16, 'side' => 'A', 'state' => 'clear'],
+            ],
+            'axis_states' => [
+                'EI' => 'moderate',
+                'SN' => 'strong',
+                'TF' => 'balanced',
+                'JP' => 'moderate',
+                'AT' => 'clear',
+            ],
+        ];
+
+        $personalization = $service->buildForReportPayload($payload, [
+            'type_code' => 'INTP-A',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase6a_contract',
+        ]);
+
+        $this->assertSame('SN', data_get($personalization, 'dominant_axes.0.axis'));
+        $this->assertSame(
+            'traits.why_this_type:SN.N.strong:identity.A:boundary.JP',
+            $personalization['variant_keys']['traits.why_this_type'] ?? null
+        );
+        $this->assertSame(
+            'traits.why_this_type:dominant.SN.N.strong',
+            $personalization['contrast_keys']['traits.why_this_type'] ?? null
+        );
+        $this->assertSame(
+            'SN',
+            $personalization['sections']['traits.why_this_type']['primary_axis']['axis'] ?? null
+        );
+        $this->assertSame(
+            'SN',
+            $personalization['sections']['growth.stability_confidence']['primary_axis']['axis'] ?? null
+        );
+    }
+
+    public function test_it_uses_close_call_thresholds_for_stability_fallback_when_clarity_is_absent(): void
+    {
+        $service = app(MbtiResultPersonalizationService::class);
+
+        $stablePayload = [
+            'versions' => [
+                'engine' => 'v1.2',
+                'content_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+                'dir_version' => 'MBTI-CN-v0.3',
+            ],
+            'profile' => [
+                'type_code' => 'ENFP-T',
+            ],
+            'scores' => [
+                'EI' => ['pct' => 78, 'delta' => 28, 'side' => 'E', 'state' => 'strong'],
+                'SN' => ['pct' => 66, 'delta' => 16, 'side' => 'N', 'state' => 'clear'],
+                'TF' => ['pct' => 64, 'delta' => 14, 'side' => 'T', 'state' => 'clear'],
+                'JP' => ['pct' => 63, 'delta' => 13, 'side' => 'J', 'state' => 'clear'],
+                'AT' => ['pct' => 68, 'delta' => 18, 'side' => 'T', 'state' => 'clear'],
+            ],
+            'axis_states' => [
+                'EI' => 'strong',
+                'SN' => 'clear',
+                'TF' => 'clear',
+                'JP' => 'clear',
+                'AT' => 'clear',
+            ],
+        ];
+
+        $mixedPayload = $stablePayload;
+        $mixedPayload['scores']['JP'] = ['pct' => 57, 'delta' => 7, 'side' => 'J', 'state' => 'moderate'];
+        $mixedPayload['axis_states']['JP'] = 'moderate';
+
+        $contextSensitivePayload = $mixedPayload;
+        $contextSensitivePayload['scores']['TF'] = ['pct' => 59, 'delta' => 9, 'side' => 'T', 'state' => 'balanced'];
+        $contextSensitivePayload['axis_states']['TF'] = 'balanced';
+
+        $stable = $service->buildForReportPayload($stablePayload, [
+            'type_code' => 'ENFP-T',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase6a_contract',
+        ]);
+        $mixed = $service->buildForReportPayload($mixedPayload, [
+            'type_code' => 'ENFP-T',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase6a_contract',
+        ]);
+        $contextSensitive = $service->buildForReportPayload($contextSensitivePayload, [
+            'type_code' => 'ENFP-T',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase6a_contract',
+        ]);
+
+        $this->assertContains('stability.bucket.stable', data_get($stable, 'confidence_or_stability_keys', []));
+        $this->assertSame(
+            'growth.stability_confidence:stability.stable',
+            $stable['contrast_keys']['growth.stability_confidence'] ?? null
+        );
+        $this->assertContains('stability.bucket.mixed', data_get($mixed, 'confidence_or_stability_keys', []));
+        $this->assertSame(
+            'growth.stability_confidence:stability.mixed',
+            $mixed['contrast_keys']['growth.stability_confidence'] ?? null
+        );
+        $this->assertContains('stability.bucket.context_sensitive', data_get($contextSensitive, 'confidence_or_stability_keys', []));
+        $this->assertSame(
+            'growth.stability_confidence:stability.context_sensitive',
+            $contextSensitive['contrast_keys']['growth.stability_confidence'] ?? null
+        );
+    }
+
+    public function test_it_picks_neighbor_types_from_the_closest_non_at_axes(): void
+    {
+        $service = app(MbtiResultPersonalizationService::class);
+
+        $payload = [
+            'versions' => [
+                'engine' => 'v1.2',
+                'content_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+                'dir_version' => 'MBTI-CN-v0.3',
+            ],
+            'profile' => [
+                'type_code' => 'ENFP-T',
+            ],
+            'scores' => [
+                'EI' => ['pct' => 70, 'delta' => 20, 'side' => 'E', 'state' => 'clear'],
+                'SN' => ['pct' => 72, 'delta' => 22, 'side' => 'N', 'state' => 'clear'],
+                'TF' => ['pct' => 68, 'delta' => 18, 'side' => 'T', 'state' => 'clear'],
+                'JP' => ['pct' => 66, 'delta' => 16, 'side' => 'J', 'state' => 'clear'],
+                'AT' => ['pct' => 52, 'delta' => 2, 'side' => 'T', 'state' => 'balanced'],
+            ],
+            'axis_states' => [
+                'EI' => 'clear',
+                'SN' => 'clear',
+                'TF' => 'clear',
+                'JP' => 'clear',
+                'AT' => 'balanced',
+            ],
+        ];
+
+        $personalization = $service->buildForReportPayload($payload, [
+            'type_code' => 'ENFP-T',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase6a_contract',
+        ]);
+
+        $this->assertSame(['AT', 'JP'], array_map(
+            static fn (array $axis): string => (string) ($axis['axis'] ?? ''),
+            data_get($personalization, 'close_call_axes', [])
+        ));
+        $this->assertSame(
+            ['ENFJ'],
+            data_get($personalization, 'neighbor_type_keys')
         );
     }
 
