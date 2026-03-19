@@ -42,8 +42,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
-            $this->assertSame('mbti.personalization.phase4a.v1', (string) ($meta['schema_version'] ?? ''));
-            $this->assertSame('phase4a.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
+            $this->assertSame('mbti.personalization.phase5a.v1', (string) ($meta['schema_version'] ?? ''));
+            $this->assertSame('phase5a.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertIsArray($meta['axis_bands'] ?? null);
             $this->assertSame('boundary', (string) (($meta['axis_bands']['EI'] ?? '')));
             $this->assertSame('boundary', (string) (($meta['axis_bands']['AT'] ?? '')));
@@ -55,11 +55,20 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertNotSame('', trim((string) (($meta['variant_keys']['traits.decision_style'] ?? ''))));
             $this->assertNotSame('', trim((string) (($meta['variant_keys']['growth.stress_recovery'] ?? ''))));
             $this->assertNotSame('', trim((string) (($meta['variant_keys']['relationships.communication_style'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['career.collaboration_fit'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['career.work_environment'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['career.next_step'] ?? ''))));
             $this->assertIsArray($meta['scene_fingerprint'] ?? null);
             $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['work'] ?? ''))));
             $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['decision'] ?? ''))));
             $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['stress_recovery'] ?? ''))));
             $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['communication'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['work_style_summary'] ?? ''))));
+            $this->assertIsArray($meta['role_fit_keys'] ?? null);
+            $this->assertIsArray($meta['collaboration_fit_keys'] ?? null);
+            $this->assertIsArray($meta['work_env_preference_keys'] ?? null);
+            $this->assertIsArray($meta['career_next_step_keys'] ?? null);
+            $this->assertContains('role_fit.role.NT', $meta['role_fit_keys'] ?? []);
         }
 
         $this->assertSame($eventMeta['report_view']['variant_keys'] ?? null, $eventMeta['result_view']['variant_keys'] ?? null);

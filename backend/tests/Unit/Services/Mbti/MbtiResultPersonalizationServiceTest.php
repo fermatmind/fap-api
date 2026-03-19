@@ -26,7 +26,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
                 'EI' => ['pct' => 67, 'delta' => 17, 'side' => 'E', 'state' => 'clear'],
                 'SN' => ['pct' => 64, 'delta' => 14, 'side' => 'N', 'state' => 'clear'],
                 'TF' => ['pct' => 59, 'delta' => 9, 'side' => 'T', 'state' => 'balanced'],
-                'JP' => ['pct' => 57, 'delta' => 7, 'side' => 'P', 'state' => 'moderate'],
+                'JP' => ['pct' => 57, 'delta' => 7, 'side' => 'J', 'state' => 'moderate'],
                 'AT' => ['pct' => 68, 'delta' => 18, 'side' => 'T', 'state' => 'clear'],
             ],
             'axis_states' => [
@@ -60,14 +60,44 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase4a.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase5a.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
-        $this->assertSame('phase4a.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('phase5a.v1', $clear['dynamic_sections_version']);
+        $this->assertStringContainsString(
+            '先用把能量投向外部互动',
+            (string) ($clear['work_style_summary'] ?? '')
+        );
+        $this->assertSame(
+            [
+                'role_fit.role.NF',
+                'role_fit.primary.EI.E.clear',
+                'role_fit.support.JP.J.boundary',
+                'role_fit.identity.T',
+                'role_fit.boundary.JP',
+                'role_fit.boundary.TF',
+            ],
+            data_get($clear, 'role_fit_keys')
+        );
+        $this->assertSame(
+            [
+                'collaboration_fit.primary.EI.E.clear',
+                'collaboration_fit.support.TF.T.boundary',
+                'collaboration_fit.identity.T',
+                'collaboration_fit.boundary.TF',
+                'collaboration_fit.boundary.JP',
+                'collaboration_fit.decision_boundary.TF',
+                'collaboration_fit.decision_boundary.JP',
+            ],
+            data_get($clear, 'collaboration_fit_keys')
+        );
+        $this->assertContains('work_env.preference.high_collaboration', data_get($clear, 'work_env_preference_keys'));
+        $this->assertContains('work_env.boundary.JP', data_get($clear, 'work_env_preference_keys'));
+        $this->assertContains('career_next_step.theme.clarify_decision_criteria', data_get($clear, 'career_next_step_keys'));
         $this->assertSame('work.primary.EI.E.clear', data_get($clear, 'scene_fingerprint.work.style_key'));
         $this->assertSame('work.primary.EI.E.strong', data_get($strong, 'scene_fingerprint.work.style_key'));
         $this->assertSame(
@@ -111,12 +141,24 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             $clear['variant_keys']['traits.decision_style'] ?? null
         );
         $this->assertSame(
-            'growth.stress_recovery:JP.P.boundary:identity.T:boundary.JP',
+            'growth.stress_recovery:JP.J.boundary:identity.T:boundary.JP',
             $clear['variant_keys']['growth.stress_recovery'] ?? null
         );
         $this->assertSame(
             'relationships.communication_style:EI.E.clear:identity.T:boundary.TF',
             $clear['variant_keys']['relationships.communication_style'] ?? null
+        );
+        $this->assertSame(
+            'career.collaboration_fit:EI.E.clear:identity.T:boundary.TF',
+            $clear['variant_keys']['career.collaboration_fit'] ?? null
+        );
+        $this->assertSame(
+            'career.work_environment:EI.E.clear:identity.T:boundary.JP',
+            $clear['variant_keys']['career.work_environment'] ?? null
+        );
+        $this->assertSame(
+            'career.next_step:TF.T.boundary:identity.T:boundary.TF',
+            $clear['variant_keys']['career.next_step'] ?? null
         );
         $this->assertNotSame(
             data_get($clear, 'sections.overview.selected_blocks.0'),
@@ -146,6 +188,22 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'communication',
             $clear['sections']['relationships.communication_style']['blocks'][1]['kind'] ?? null
         );
+        $this->assertSame(
+            'work_style',
+            $clear['sections']['career.summary']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'collaboration_fit',
+            $clear['sections']['career.collaboration_fit']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'work_env',
+            $clear['sections']['career.work_environment']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'career_next_step',
+            $clear['sections']['career.next_step']['blocks'][1]['kind'] ?? null
+        );
         $this->assertStringContainsString(
             '压力升高时',
             (string) data_get($clear, 'scene_fingerprint.stress_recovery.summary', '')
@@ -169,7 +227,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
                 'EI' => ['pct' => 67, 'delta' => 17, 'side' => 'E', 'state' => 'clear'],
                 'SN' => ['pct' => 64, 'delta' => 14, 'side' => 'N', 'state' => 'clear'],
                 'TF' => ['pct' => 59, 'delta' => 9, 'side' => 'T', 'state' => 'balanced'],
-                'JP' => ['pct' => 57, 'delta' => 7, 'side' => 'P', 'state' => 'moderate'],
+                'JP' => ['pct' => 57, 'delta' => 7, 'side' => 'J', 'state' => 'moderate'],
                 'AT' => ['pct' => 68, 'delta' => 18, 'side' => 'T', 'state' => 'clear'],
             ],
             'axis_states' => [
@@ -182,7 +240,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         ];
 
         $clearPayload = $boundaryPayload;
-        $clearPayload['scores']['JP'] = ['pct' => 66, 'delta' => 16, 'side' => 'P', 'state' => 'clear'];
+        $clearPayload['scores']['JP'] = ['pct' => 66, 'delta' => 16, 'side' => 'J', 'state' => 'clear'];
         $clearPayload['axis_states']['JP'] = 'clear';
 
         $boundary = $service->buildForReportPayload($boundaryPayload, [
@@ -202,11 +260,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         ]);
 
         $this->assertSame(
-            'growth.stress_recovery:JP.P.boundary:identity.T:boundary.JP',
+            'growth.stress_recovery:JP.J.boundary:identity.T:boundary.JP',
             $boundary['variant_keys']['growth.stress_recovery'] ?? null
         );
         $this->assertSame(
-            'growth.stress_recovery:JP.P.clear:identity.T:boundary.TF',
+            'growth.stress_recovery:JP.J.clear:identity.T:boundary.TF',
             $clear['variant_keys']['growth.stress_recovery'] ?? null
         );
         $this->assertNotSame(

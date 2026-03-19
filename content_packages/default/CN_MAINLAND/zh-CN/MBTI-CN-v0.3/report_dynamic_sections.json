@@ -1,6 +1,6 @@
 {
     "schema": "fap.mbti.dynamic_sections.v1",
-    "version": "phase4a.v1",
+    "version": "phase5a.v1",
   "labels": {
     "block_kinds": {
       "type_skeleton": "类型骨架",
@@ -8,6 +8,11 @@
       "boundary": "边界深解释",
       "identity": "身份层",
       "scene": "场景应用",
+      "work_style": "工作风格桥接",
+      "role_fit": "角色匹配桥接",
+      "collaboration_fit": "协作匹配桥接",
+      "work_env": "工作环境桥接",
+      "career_next_step": "职业下一步桥接",
       "decision": "决策场景",
       "stress_recovery": "压力恢复场景",
       "communication": "沟通协作场景"
@@ -85,7 +90,12 @@
         "work": "放到工作里，这条主轴更像你的默认操作系统：{{scene_side_hint}}。它会直接影响你更适配的岗位节奏与协作环境。",
         "decision": "放到决策里，这条主轴会决定你先用哪一种入口缩小范围：{{scene_side_hint}}。",
         "stress_recovery": "放到压力与恢复里，这条主轴通常会变成你最先启动的自救方式：{{scene_side_hint}}。",
-        "communication": "放到沟通里，这条主轴通常会变成你的起手表达方式：{{scene_side_hint}}。"
+        "communication": "放到沟通里，这条主轴通常会变成你的起手表达方式：{{scene_side_hint}}。",
+        "work_style": "放到工作方式上，这条主轴会决定你默认怎么开工、怎么协作、怎么接收反馈：{{scene_side_hint}}。",
+        "role_fit": "放到岗位匹配上，这条主轴最容易让你在某类角色里快速进入状态：{{scene_side_hint}}。",
+        "collaboration_fit": "放到团队协作里，这条主轴会决定你更自然的对齐、配合与修正方式：{{scene_side_hint}}。",
+        "work_env": "放到工作环境里，这条主轴会决定你更需要哪类节奏、边界和反馈方式：{{scene_side_hint}}。",
+        "career_next_step": "放到职业下一步，这条主轴提示你先去试一个更贴近自己的动作：{{scene_side_hint}}。"
     },
     "scene_hints": {
         "EI": {

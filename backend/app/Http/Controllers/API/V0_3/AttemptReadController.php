@@ -518,6 +518,11 @@ class AttemptReadController extends Controller
             'scene_fingerprint' => $sceneFingerprint,
             'boundary_flags' => is_array($personalization['boundary_flags'] ?? null) ? $personalization['boundary_flags'] : [],
             'axis_bands' => is_array($personalization['axis_bands'] ?? null) ? $personalization['axis_bands'] : [],
+            'work_style_summary' => trim((string) ($personalization['work_style_summary'] ?? '')),
+            'role_fit_keys' => is_array($personalization['role_fit_keys'] ?? null) ? $personalization['role_fit_keys'] : [],
+            'collaboration_fit_keys' => is_array($personalization['collaboration_fit_keys'] ?? null) ? $personalization['collaboration_fit_keys'] : [],
+            'work_env_preference_keys' => is_array($personalization['work_env_preference_keys'] ?? null) ? $personalization['work_env_preference_keys'] : [],
+            'career_next_step_keys' => is_array($personalization['career_next_step_keys'] ?? null) ? $personalization['career_next_step_keys'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
 

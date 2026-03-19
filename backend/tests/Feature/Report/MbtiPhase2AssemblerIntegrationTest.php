@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase4a.v1',
+            'mbti.personalization.phase5a.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -104,8 +104,12 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase4a.v1',
+            'phase5a.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
+        );
+        $this->assertStringContainsString(
+            '先用把能量投向外部互动',
+            (string) data_get($payload, 'report._meta.personalization.work_style_summary', '')
         );
         $this->assertSame(
             'work.primary.EI.E.clear',
@@ -120,6 +124,21 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
                 'communication.boundary.JP',
             ],
             data_get($payload, 'report._meta.personalization.communication_style_keys')
+        );
+        $this->assertSame(
+            [
+                'role_fit.role.NF',
+                'role_fit.primary.EI.E.clear',
+                'role_fit.support.JP.J.boundary',
+                'role_fit.identity.T',
+                'role_fit.boundary.JP',
+                'role_fit.boundary.TF',
+            ],
+            data_get($payload, 'report._meta.personalization.role_fit_keys')
+        );
+        $this->assertContains(
+            'career_next_step.theme.clarify_decision_criteria',
+            data_get($payload, 'report._meta.personalization.career_next_step_keys', [])
         );
 
         ReportSnapshot::query()->create([
@@ -163,6 +182,18 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'relationships.communication_style:EI.E.clear:identity.T:boundary.TF',
             $roundTrippedVariantKeys['relationships.communication_style'] ?? null
         );
+        $this->assertSame(
+            'career.collaboration_fit:EI.E.clear:identity.T:boundary.TF',
+            $roundTrippedVariantKeys['career.collaboration_fit'] ?? null
+        );
+        $this->assertSame(
+            'career.work_environment:EI.E.clear:identity.T:boundary.JP',
+            $roundTrippedVariantKeys['career.work_environment'] ?? null
+        );
+        $this->assertSame(
+            'career.next_step:TF.T.boundary:identity.T:boundary.TF',
+            $roundTrippedVariantKeys['career.next_step'] ?? null
+        );
 
         $projection = app(MbtiPublicProjectionService::class)->buildForReportEnvelope(
             $result,
@@ -186,13 +217,19 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.stress_recovery');
         $communicationStyle = collect(Arr::wrap($projection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.communication_style');
+        $careerCollaborationFit = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.collaboration_fit');
+        $careerWorkEnvironment = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.work_environment');
+        $careerNextStep = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.next_step');
 
         $this->assertSame(
-            'mbti.personalization.phase4a.v1',
+            'mbti.personalization.phase5a.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase4a.v1',
+            'phase5a.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
@@ -216,10 +253,25 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'relationships.communication_style:EI.E.clear:identity.T:boundary.TF',
             $projectionVariantKeys['relationships.communication_style'] ?? null
         );
+        $this->assertSame(
+            'career.collaboration_fit:EI.E.clear:identity.T:boundary.TF',
+            $projectionVariantKeys['career.collaboration_fit'] ?? null
+        );
+        $this->assertSame(
+            'career.work_environment:EI.E.clear:identity.T:boundary.JP',
+            $projectionVariantKeys['career.work_environment'] ?? null
+        );
+        $this->assertSame(
+            'career.next_step:TF.T.boundary:identity.T:boundary.TF',
+            $projectionVariantKeys['career.next_step'] ?? null
+        );
         $this->assertIsArray($relationshipsRelRisks);
         $this->assertIsArray($decisionStyle);
         $this->assertIsArray($stressRecovery);
         $this->assertIsArray($communicationStyle);
+        $this->assertIsArray($careerCollaborationFit);
+        $this->assertIsArray($careerWorkEnvironment);
+        $this->assertIsArray($careerNextStep);
         $this->assertSame(
             'relationships.rel_risks:TF.T.boundary:identity.T:boundary.TF',
             data_get($relationshipsRelRisks, '_meta.variant_key')
@@ -237,6 +289,18 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($communicationStyle, '_meta.variant_key')
         );
         $this->assertSame(
+            'career.collaboration_fit:EI.E.clear:identity.T:boundary.TF',
+            data_get($careerCollaborationFit, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'career.work_environment:EI.E.clear:identity.T:boundary.JP',
+            data_get($careerWorkEnvironment, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'career.next_step:TF.T.boundary:identity.T:boundary.TF',
+            data_get($careerNextStep, '_meta.variant_key')
+        );
+        $this->assertSame(
             'decision',
             data_get($decisionStyle, 'payload.blocks.1.kind')
         );
@@ -247,6 +311,18 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertSame(
             'communication',
             data_get($communicationStyle, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'collaboration_fit',
+            data_get($careerCollaborationFit, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'work_env',
+            data_get($careerWorkEnvironment, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'career_next_step',
+            data_get($careerNextStep, 'payload.blocks.1.kind')
         );
         $this->assertStringContainsString(
             '两套入口之间切换',
