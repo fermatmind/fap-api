@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services\Storage;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 final class ArtifactStore
 {
+    public function __construct(
+        private readonly BlobCatalogService $blobCatalogService,
+    ) {}
+
     public function reportCanonicalPath(string $scaleCode, string $attemptId): string
     {
         $scale = $this->sanitizeScaleCode($scaleCode);
@@ -48,6 +53,7 @@ final class ArtifactStore
         }
 
         Storage::disk('local')->put($path, $json);
+        $this->catalogBlobMetadata($json, 'application/json');
 
         return $path;
     }
@@ -110,6 +116,7 @@ final class ArtifactStore
     public function putPdf(string $path, string $bytes): void
     {
         Storage::disk('local')->put($path, $bytes);
+        $this->catalogBlobMetadata($bytes, 'application/pdf');
     }
 
     /**
@@ -147,6 +154,42 @@ final class ArtifactStore
         $contents = $disk->get($path);
 
         return is_string($contents) && $contents !== '' ? $contents : null;
+    }
+
+    private function catalogBlobMetadata(string $content, string $contentType): void
+    {
+        if (! $this->shouldDualWriteBlobCatalog()) {
+            return;
+        }
+
+        try {
+            $hash = hash('sha256', $content);
+            $now = now();
+            $existing = $this->blobCatalogService->findByHash($hash);
+
+            $this->blobCatalogService->upsertBlob([
+                'hash' => $hash,
+                'disk' => 'local',
+                'storage_path' => $this->blobCatalogService->storagePathForHash($hash),
+                'size_bytes' => strlen($content),
+                'content_type' => $contentType,
+                'encoding' => 'identity',
+                'ref_count' => 0,
+                'first_seen_at' => $existing?->first_seen_at ?? $now,
+                'last_verified_at' => $now,
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('ARTIFACT_BLOB_CATALOG_WRITE_FAILED', [
+                'content_type' => $contentType,
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    private function shouldDualWriteBlobCatalog(): bool
+    {
+        return (bool) config('storage_rollout.blob_catalog_enabled')
+            && (bool) config('storage_rollout.artifact_dual_write_enabled');
     }
 
     private function sanitizeScaleCode(string $scaleCode): string
