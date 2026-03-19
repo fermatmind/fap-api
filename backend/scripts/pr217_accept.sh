@@ -11,6 +11,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPO_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"
 
+# shellcheck disable=SC1090
+source "${SCRIPT_DIR}/laravel_log_helpers.sh"
+
 SERVE_PORT="${SERVE_PORT:-18217}"
 ART_DIR="${ART_DIR:-${BACKEND_DIR}/artifacts/pr217}"
 mkdir -p "${ART_DIR}"
@@ -44,10 +47,7 @@ fail() {
     echo "--- server.log (tail) ---"
     tail -n 200 "${SERVE_LOG}"
   fi
-  if [ -f "${BACKEND_DIR}/storage/logs/laravel.log" ]; then
-    echo "--- laravel.log (tail) ---"
-    tail -n 200 "${BACKEND_DIR}/storage/logs/laravel.log" | redact
-  fi
+  print_laravel_log_tails "${BACKEND_DIR}" 200 | redact || true
   exit "${code}"
 }
 trap fail ERR

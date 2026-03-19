@@ -6,6 +6,17 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
 
+$stackChannels = array_values(array_unique(array_filter(array_map(
+    static fn (string $channel): string => trim($channel),
+    explode(',', (string) env('LOG_STACK', 'single'))
+), static fn (string $channel): bool => $channel !== '')));
+
+if ($stackChannels === []) {
+    $stackChannels = ['single'];
+}
+
+$dailyRetentionDays = max(1, (int) env('LOG_DAILY_DAYS', (int) env('STORAGE_RETENTION_LOGS_DAYS', 30)));
+
 return [
 
     /*
@@ -55,7 +66,9 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', (string) env('LOG_STACK', 'single')),
+            // Keep `single` in the stack when enabling `daily` / `stderr`
+            // so existing CLI tails and ops evidence still have `laravel.log`.
+            'channels' => $stackChannels,
             'ignore_exceptions' => false,
         ],
 
@@ -74,7 +87,7 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
-            'days' => env('LOG_DAILY_DAYS', 14),
+            'days' => $dailyRetentionDays,
             'formatter' => JsonFormatter::class,
             'formatter_with' => [
                 'includeStacktraces' => true,

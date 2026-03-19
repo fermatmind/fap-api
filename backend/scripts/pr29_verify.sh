@@ -13,7 +13,8 @@ export XDEBUG_MODE=off
 export FAP_PAYMENT_FALLBACK_PROVIDER=billing
 export BILLING_WEBHOOK_SECRET="${BILLING_WEBHOOK_SECRET:-billing_secret}"
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 BACKEND_DIR="${REPO_DIR}/backend"
 ART_DIR="${BACKEND_DIR}/artifacts/pr29"
 LOG_DIR="${ART_DIR}/logs"
@@ -21,6 +22,9 @@ SERVE_PORT="${SERVE_PORT:-1829}"
 HOST="127.0.0.1"
 API="http://${HOST}:${SERVE_PORT}"
 DB_PATH="${DB_DATABASE:-/tmp/pr29.sqlite}"
+
+# shellcheck disable=SC1090
+source "${SCRIPT_DIR}/laravel_log_helpers.sh"
 
 mkdir -p "${ART_DIR}" "${LOG_DIR}"
 mkdir -p "${BACKEND_DIR}/storage/framework/cache" \
@@ -69,7 +73,7 @@ post_billing_webhook() {
 }
 
 cleanup() {
-  cp -f "${BACKEND_DIR}/storage/logs/laravel.log" "${LOG_DIR}/laravel.log" 2>/dev/null || true
+  copy_laravel_logs_to_dir "${BACKEND_DIR}" "${LOG_DIR}"
   if [[ -n "${SERVE_PID:-}" ]] && kill -0 "${SERVE_PID}" >/dev/null 2>&1; then
     kill "${SERVE_PID}" >/dev/null 2>&1 || true
   fi

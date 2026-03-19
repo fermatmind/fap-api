@@ -7,11 +7,15 @@ export COMPOSER_NO_INTERACTION=1
 export GIT_TERMINAL_PROMPT=0
 export NO_COLOR=1
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 BACKEND_DIR="${REPO_DIR}/backend"
 ART_DIR="${ART_DIR:-${REPO_DIR}/backend/artifacts/pr215}"
 SERVE_PORT="${SERVE_PORT:-1815}"
 API_BASE="http://127.0.0.1:${SERVE_PORT}"
+
+# shellcheck disable=SC1090
+source "${SCRIPT_DIR}/laravel_log_helpers.sh"
 
 mkdir -p "${ART_DIR}/logs"
 
@@ -57,7 +61,7 @@ if [[ -z "${ATTEMPT_ID}" ]]; then
   echo "create attempt failed" >&2
   cat "${START_JSON}" >&2 || true
   tail -n 200 "${ART_DIR}/logs/server.log" || true
-  tail -n 200 "${BACKEND_DIR}/storage/logs/laravel.log" 2>/dev/null || true
+  print_laravel_log_tails "${BACKEND_DIR}" 200 >&2 || true
   exit 2
 fi
 

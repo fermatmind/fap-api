@@ -35,6 +35,15 @@ RUN_DIR="${RUN_DIR:-}"
 WORKDIR="${WORKDIR:-}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+LARAVEL_LOG_HELPERS="$SCRIPT_DIR/laravel_log_helpers.sh"
+
+if [[ ! -f "$LARAVEL_LOG_HELPERS" ]]; then
+  echo "[FAIL] missing log helper: $LARAVEL_LOG_HELPERS" >&2
+  exit 2
+fi
+
+# shellcheck disable=SC1090
+source "$LARAVEL_LOG_HELPERS"
 
 if [[ -z "$RUN_DIR" ]]; then
   if [[ -n "$WORKDIR" ]]; then
@@ -404,10 +413,7 @@ else
     echo >&2
     echo "---- server log tail (/tmp/pr4_srv.log) ----" >&2
     tail -n 200 /tmp/pr4_srv.log 2>/dev/null || true
-    echo "---- laravel log tail ($BACKEND_DIR/storage/logs/laravel.log) ----" >&2
-    tail -n 200 "$BACKEND_DIR/storage/logs/laravel.log" 2>/dev/null || true
-    echo "---- laravel log tail (storage/logs/laravel.log) ----" >&2
-    tail -n 200 storage/logs/laravel.log 2>/dev/null || true
+    print_laravel_log_tails "$BACKEND_DIR" 200 >&2 || true
     exit 5
   fi
 
