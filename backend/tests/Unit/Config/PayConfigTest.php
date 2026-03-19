@@ -21,6 +21,7 @@ final class PayConfigTest extends TestCase
         $snapshot = $this->snapshotEnv([
             'ALIPAY_MERCHANT_PRIVATE_KEY',
             'ALIPAY_MERCHANT_PRIVATE_KEY_PATH',
+            'ALIPAY_MODE',
         ]);
 
         try {
@@ -56,6 +57,7 @@ final class PayConfigTest extends TestCase
         $snapshot = $this->snapshotEnv([
             'ALIPAY_MERCHANT_PRIVATE_KEY',
             'ALIPAY_MERCHANT_PRIVATE_KEY_PATH',
+            'ALIPAY_MODE',
         ]);
 
         try {
@@ -69,6 +71,51 @@ final class PayConfigTest extends TestCase
         } finally {
             $this->restoreEnv($snapshot);
             @unlink($path);
+            config(['pay' => require base_path('config/pay.php')]);
+        }
+    }
+
+    public function test_alipay_mode_is_omitted_when_env_is_unset_or_blank(): void
+    {
+        $snapshot = $this->snapshotEnv([
+            'ALIPAY_MODE',
+        ]);
+
+        try {
+            $this->setEnvValue('ALIPAY_MODE', '');
+
+            config(['pay' => require base_path('config/pay.php')]);
+
+            $alipayConfig = config('pay.alipay.default', []);
+
+            $this->assertArrayNotHasKey('mode', $alipayConfig);
+            $this->assertArrayHasKey('app_secret_cert', $alipayConfig);
+            $this->assertArrayHasKey('merchant_private_key_path', $alipayConfig);
+        } finally {
+            $this->restoreEnv($snapshot);
+            config(['pay' => require base_path('config/pay.php')]);
+        }
+    }
+
+    public function test_alipay_mode_is_injected_only_when_explicitly_set(): void
+    {
+        $snapshot = $this->snapshotEnv([
+            'ALIPAY_MODE',
+        ]);
+
+        try {
+            $this->setEnvValue('ALIPAY_MODE', 'service');
+
+            config(['pay' => require base_path('config/pay.php')]);
+
+            $alipayConfig = config('pay.alipay.default', []);
+
+            $this->assertSame('service', $alipayConfig['mode'] ?? null);
+            $this->assertArrayHasKey('app_secret_cert', $alipayConfig);
+            $this->assertArrayHasKey('merchant_private_key_path', $alipayConfig);
+            $this->assertArrayHasKey('notify_url', $alipayConfig);
+        } finally {
+            $this->restoreEnv($snapshot);
             config(['pay' => require base_path('config/pay.php')]);
         }
     }
