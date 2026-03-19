@@ -13,7 +13,6 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Mbti\MbtiPublicProjectionService;
-use App\Services\Mbti\MbtiResultPersonalizationService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
@@ -34,18 +33,6 @@ class AttemptReadController extends Controller
 
     private const SENSITIVE_RESULT_READ_SCALES = ['SDS_20', 'CLINICAL_COMBO_68'];
 
-    private const MBTI_AXIS_ORDER = ['EI', 'SN', 'TF', 'JP', 'AT'];
-
-    private const MBTI_AXIS_TYPE_INDEX = ['EI' => 0, 'SN' => 1, 'TF' => 2, 'JP' => 3];
-
-    private const MBTI_AXIS_SIDE_FALLBACK = [
-        'EI' => ['E', 'I'],
-        'SN' => ['S', 'N'],
-        'TF' => ['T', 'F'],
-        'JP' => ['J', 'P'],
-        'AT' => ['A', 'T'],
-    ];
-
     public function __construct(
         private AttemptSubmissionService $attemptSubmissionService,
         private ReportGatekeeper $reportGatekeeper,
@@ -56,7 +43,6 @@ class AttemptReadController extends Controller
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
         private ReportSubjectRepository $reportSubjects,
-        private MbtiResultPersonalizationService $mbtiPersonalization,
         protected OrgContext $orgContext,
     ) {}
 
@@ -205,18 +191,7 @@ class AttemptReadController extends Controller
         }
 
         $mbtiEventMeta = $scaleCode === 'MBTI'
-            ? $this->mbtiTelemetryMetaFromPersonalization(
-                $this->buildMbtiPersonalizationForResultEvent(
-                    $result,
-                    $attempt,
-                    $compatTypeCode,
-                    $compatScoresPct,
-                    $this->resolveMbtiAxisStates($result, $payload),
-                    $packId,
-                    $dirVersion,
-                    $reportEngineVersion
-                )
-            )
+            ? $this->resolveMbtiResultViewEventMeta($request, $result, $attempt, $attemptId)
             : [];
 
         $this->eventRecorder->recordFromRequest($request, 'result_view', $this->resolveUserId($request), [
@@ -297,35 +272,6 @@ class AttemptReadController extends Controller
             $forceRefresh,
         );
 
-        $reportPersonalization = is_array(data_get($gate, 'report._meta.personalization'))
-            ? data_get($gate, 'report._meta.personalization')
-            : [];
-        $mbtiEventMeta = $scaleCode === 'MBTI'
-            ? $this->mbtiTelemetryMetaFromPersonalization(
-                $reportPersonalization !== []
-                    ? $reportPersonalization
-                    : $this->buildMbtiPersonalizationForResultEvent(
-                        $result,
-                        $attempt,
-                        (string) ($result->type_code ?? ''),
-                        is_array($result->scores_pct) ? $result->scores_pct : [],
-                        $this->resolveMbtiAxisStates($result, []),
-                        (string) ($attempt->pack_id ?? ''),
-                        (string) ($attempt->dir_version ?? ''),
-                        (string) ($result->report_engine_version ?? 'v1.2')
-                    )
-            )
-            : [];
-
-        $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
-            'scale_code' => (string) ($attempt->scale_code ?? ''),
-            'pack_id' => (string) ($attempt->pack_id ?? ''),
-            'dir_version' => (string) ($attempt->dir_version ?? ''),
-            'type_code' => (string) ($result->type_code ?? ''),
-            'attempt_id' => (string) $attempt->id,
-            'locked' => (bool) ($gate['locked'] ?? false),
-            ...$mbtiEventMeta,
-        ]);
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
         $reportViewMeta = [
             'variant' => strtolower(trim((string) ($gate['variant'] ?? 'free'))),
@@ -384,6 +330,20 @@ class AttemptReadController extends Controller
                 $anonId
             );
         }
+
+        $mbtiEventMeta = $scaleCode === 'MBTI'
+            ? $this->resolveMbtiEventMetaFromReportEnvelope($result, $attempt, $responsePayload)
+            : [];
+
+        $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
+            'scale_code' => (string) ($attempt->scale_code ?? ''),
+            'pack_id' => (string) ($attempt->pack_id ?? ''),
+            'dir_version' => (string) ($attempt->dir_version ?? ''),
+            'type_code' => (string) ($result->type_code ?? ''),
+            'attempt_id' => (string) $attempt->id,
+            'locked' => (bool) ($gate['locked'] ?? false),
+            ...$mbtiEventMeta,
+        ]);
 
         return response()->json($responsePayload);
     }
@@ -491,57 +451,45 @@ class AttemptReadController extends Controller
         throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
     }
 
-    /**
-     * @param  array<string,mixed>  $scoresPct
-     * @param  array<string,mixed>  $axisStates
-     * @return array<string,mixed>
-     */
-    private function buildMbtiPersonalizationForResultEvent(
+    private function resolveMbtiResultViewEventMeta(
+        Request $request,
         Result $result,
         ?Attempt $attempt,
-        string $typeCode,
-        array $scoresPct,
-        array $axisStates,
-        string $packId,
-        string $dirVersion,
-        string $reportEngineVersion
+        string $attemptId
     ): array {
-        $normalizedTypeCode = strtoupper(trim($typeCode));
-        if ($normalizedTypeCode === '') {
+        if (! $attempt instanceof Attempt) {
             return [];
         }
 
-        $scores = [];
-        foreach (self::MBTI_AXIS_ORDER as $axisCode) {
-            $pctRaw = $scoresPct[$axisCode] ?? null;
-            if (! is_numeric($pctRaw)) {
-                continue;
-            }
+        $gate = $this->reportGatekeeper->resolve(
+            (int) ($attempt->org_id ?? 0),
+            $attemptId,
+            $this->resolveUserId($request),
+            $this->resolveAnonId($request),
+            $this->orgContext->role(),
+            false,
+            false,
+        );
 
-            $pct = (int) round((float) $pctRaw);
-            $scores[$axisCode] = [
-                'pct' => $pct,
-                'delta' => (int) round(abs($pct - 50)),
-                'side' => $this->resolveMbtiAxisSide($axisCode, $normalizedTypeCode, $pct),
-                'state' => trim((string) ($axisStates[$axisCode] ?? '')),
-            ];
-        }
-
-        if ($scores === []) {
+        if (! ($gate['ok'] ?? false)) {
             return [];
         }
 
-        return $this->mbtiPersonalization->buildForReportPayload([
-            'type_code' => $normalizedTypeCode,
-            'scores' => $scores,
-            'axis_states' => $axisStates,
-        ], [
-            'type_code' => $normalizedTypeCode,
-            'pack_id' => $packId,
-            'dir_version' => $dirVersion,
-            'locale' => (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN')),
-            'engine_version' => $reportEngineVersion,
-        ]);
+        return $this->resolveMbtiEventMetaFromReportEnvelope($result, $attempt, $gate);
+    }
+
+    /**
+     * @param  array<string,mixed>  $reportEnvelope
+     * @return array<string,mixed>
+     */
+    private function resolveMbtiEventMetaFromReportEnvelope(
+        Result $result,
+        Attempt $attempt,
+        array $reportEnvelope
+    ): array {
+        return $this->mbtiTelemetryMetaFromPersonalization(
+            $this->resolveMbtiPersonalizationFromReportEnvelope($result, $attempt, $reportEnvelope)
+        );
     }
 
     /**
@@ -564,6 +512,8 @@ class AttemptReadController extends Controller
 
         $meta = [
             'identity' => trim((string) ($personalization['identity'] ?? '')),
+            'schema_version' => trim((string) ($personalization['schema_version'] ?? '')),
+            'dynamic_sections_version' => trim((string) ($personalization['dynamic_sections_version'] ?? '')),
             'variant_keys' => is_array($personalization['variant_keys'] ?? null) ? $personalization['variant_keys'] : [],
             'scene_fingerprint' => $sceneFingerprint,
             'boundary_flags' => is_array($personalization['boundary_flags'] ?? null) ? $personalization['boundary_flags'] : [],
@@ -585,42 +535,48 @@ class AttemptReadController extends Controller
     }
 
     /**
-     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $reportEnvelope
      * @return array<string,mixed>
      */
-    private function resolveMbtiAxisStates(Result $result, array $payload): array
-    {
-        if (is_array($result->axis_states)) {
-            return $result->axis_states;
+    private function resolveMbtiPersonalizationFromReportEnvelope(
+        Result $result,
+        Attempt $attempt,
+        array $reportEnvelope
+    ): array {
+        $reportPersonalization = data_get($reportEnvelope, 'report._meta.personalization');
+        if (is_array($reportPersonalization) && $reportPersonalization !== []) {
+            return $reportPersonalization;
         }
 
-        $nested = data_get($payload, 'axis_scores_json.axis_states');
-        if (is_array($nested)) {
-            return $nested;
+        $projectionPersonalization = data_get($reportEnvelope, 'mbti_public_projection_v1._meta.personalization');
+        if (is_array($projectionPersonalization) && $projectionPersonalization !== []) {
+            return $projectionPersonalization;
         }
 
-        return [];
-    }
-
-    private function resolveMbtiAxisSide(string $axisCode, string $typeCode, int $pct): string
-    {
-        $normalizedAxis = strtoupper(trim($axisCode));
-        $normalizedType = strtoupper(trim($typeCode));
-
-        if ($normalizedAxis === 'AT' && preg_match('/-(A|T)$/', $normalizedType, $matches) === 1) {
-            return (string) ($matches[1] ?? '');
+        if (! is_array(data_get($reportEnvelope, 'report'))) {
+            return [];
         }
 
-        if (isset(self::MBTI_AXIS_TYPE_INDEX[$normalizedAxis])) {
-            $index = self::MBTI_AXIS_TYPE_INDEX[$normalizedAxis];
-            if (isset($normalizedType[$index])) {
-                return $normalizedType[$index];
-            }
-        }
+        $normalizedEnvelope = $reportEnvelope;
+        $normalizedEnvelope['meta'] = array_merge(
+            is_array($reportEnvelope['meta'] ?? null) ? $reportEnvelope['meta'] : [],
+            [
+                'pack_id' => (string) ($attempt->pack_id ?? ''),
+                'dir_version' => (string) ($attempt->dir_version ?? ''),
+                'report_engine_version' => (string) ($result->report_engine_version ?? 'v1.2'),
+            ],
+        );
 
-        [$primary, $secondary] = self::MBTI_AXIS_SIDE_FALLBACK[$normalizedAxis] ?? ['E', 'I'];
+        $projection = $this->mbtiPublicProjectionService->buildForReportEnvelope(
+            $result,
+            $normalizedEnvelope,
+            (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+            (int) ($attempt->org_id ?? 0),
+        );
 
-        return $pct >= 50 ? $primary : $secondary;
+        $projectionPersonalization = data_get($projection, '_meta.personalization');
+
+        return is_array($projectionPersonalization) ? $projectionPersonalization : [];
     }
 
     private function isPublicResultScale(string $scaleCode): bool

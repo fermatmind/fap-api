@@ -32,14 +32,18 @@ class MbtiResultTelemetryContractTest extends TestCase
         $reportResponse = $this->invokeController('report', $attemptId, $anonId);
         $this->assertSame(200, $reportResponse->getStatusCode());
 
+        $eventMeta = [];
         foreach (['result_view', 'report_view'] as $eventCode) {
             $event = $this->findLatestEventByAttempt($eventCode, $attemptId);
             $this->assertNotNull($event, 'missing event row: ' . $eventCode);
 
             $meta = json_decode((string) ($event->meta_json ?? '{}'), true) ?: [];
+            $eventMeta[$eventCode] = $meta;
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
-            $this->assertSame('v1.2', (string) ($meta['engine_version'] ?? ''));
+            $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
+            $this->assertSame('mbti.personalization.phase4a.v1', (string) ($meta['schema_version'] ?? ''));
+            $this->assertSame('phase4a.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertIsArray($meta['axis_bands'] ?? null);
             $this->assertSame('boundary', (string) (($meta['axis_bands']['EI'] ?? '')));
             $this->assertSame('boundary', (string) (($meta['axis_bands']['AT'] ?? '')));
@@ -48,9 +52,22 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertTrue((bool) (($meta['boundary_flags']['AT'] ?? false)));
             $this->assertIsArray($meta['variant_keys'] ?? null);
             $this->assertNotSame('', trim((string) (($meta['variant_keys']['overview'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['traits.decision_style'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['growth.stress_recovery'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['relationships.communication_style'] ?? ''))));
             $this->assertIsArray($meta['scene_fingerprint'] ?? null);
             $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['work'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['decision'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['stress_recovery'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['communication'] ?? ''))));
         }
+
+        $this->assertSame($eventMeta['report_view']['variant_keys'] ?? null, $eventMeta['result_view']['variant_keys'] ?? null);
+        $this->assertSame($eventMeta['report_view']['scene_fingerprint'] ?? null, $eventMeta['result_view']['scene_fingerprint'] ?? null);
+        $this->assertSame($eventMeta['report_view']['axis_bands'] ?? null, $eventMeta['result_view']['axis_bands'] ?? null);
+        $this->assertSame($eventMeta['report_view']['boundary_flags'] ?? null, $eventMeta['result_view']['boundary_flags'] ?? null);
+        $this->assertSame($eventMeta['report_view']['schema_version'] ?? null, $eventMeta['result_view']['schema_version'] ?? null);
+        $this->assertSame($eventMeta['report_view']['dynamic_sections_version'] ?? null, $eventMeta['result_view']['dynamic_sections_version'] ?? null);
     }
 
     private function seedScales(): void
@@ -134,7 +151,7 @@ class MbtiResultTelemetryContractTest extends TestCase
             'pack_id' => (string) config('content_packs.default_pack_id'),
             'dir_version' => 'MBTI-CN-v0.3',
             'scoring_spec_version' => '2026.01',
-            'report_engine_version' => 'v1.2',
+            'report_engine_version' => 'report_phase4a_contract',
             'is_valid' => true,
             'computed_at' => now(),
         ]);

@@ -56,14 +56,23 @@ final readonly class MbtiReportAuthoritySourceAdapter implements MbtiPublicResul
                         'dimensions' => $this->buildTraitDimensions(),
                     ],
                 ],
+                'traits.decision_style' => [
+                    'body' => null,
+                ],
                 'career.summary' => [
                     'body' => $this->extractFirstCardBody($sections['career'] ?? null),
                 ],
                 'growth.summary' => [
                     'body' => $this->extractFirstCardBody($sections['growth'] ?? null),
                 ],
+                'growth.stress_recovery' => [
+                    'body' => null,
+                ],
                 'relationships.summary' => [
                     'body' => $this->extractFirstCardBody($sections['relationships'] ?? null),
+                ],
+                'relationships.communication_style' => [
+                    'body' => null,
                 ],
             ],
             'premium_teaser' => [
