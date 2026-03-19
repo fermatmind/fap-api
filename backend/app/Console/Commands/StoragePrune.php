@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Storage;
 final class StoragePrune extends Command
 {
     private const SCOPE_REPORTS_BACKUPS = 'reports_backups';
+
     private const SCOPE_CONTENT_RELEASES = 'content_releases_retention';
+
     private const SCOPE_LEGACY_PRIVATE_PRIVATE = 'legacy_private_private_cleanup';
 
     private const STRATEGY_STRICT = 'strict';
+
     private const STRATEGY_BROAD = 'broad';
 
     /** @var list<string> */
@@ -234,16 +237,19 @@ final class StoragePrune extends Command
 
             if (! $this->isPrunablePathForScope($scope, $relPath, $strategy)) {
                 $skippedFiles++;
+
                 continue;
             }
 
             if ($scope === self::SCOPE_LEGACY_PRIVATE_PRIVATE && $canonical !== '' && ! $disk->exists($canonical)) {
                 $skippedFiles++;
+
                 continue;
             }
 
             if (! $disk->exists($relPath)) {
                 $missingFiles++;
+
                 continue;
             }
 
@@ -339,21 +345,9 @@ final class StoragePrune extends Command
         $keepDays = max(0, (int) config('storage_retention.content_releases.keep_days', 180));
         $threshold = now()->subDays($keepDays)->getTimestamp();
 
-        $releaseDirs = [];
-        foreach (new \DirectoryIterator($root) as $item) {
-            if (! $item->isDir() || $item->isDot()) {
-                continue;
-            }
+        $releaseDirs = $this->collectContentReleaseRetentionUnits($root);
 
-            $dirPath = $item->getPathname();
-            $releaseDirs[] = [
-                'name' => $item->getFilename(),
-                'path' => $dirPath,
-                'mtime' => (int) (@filemtime($dirPath) ?: 0),
-            ];
-        }
-
-        usort($releaseDirs, static fn (array $a, array $b): int => $b['mtime'] <=> $a['mtime']);
+        usort($releaseDirs, static fn (array $a, array $b): int => ($b['mtime'] <=> $a['mtime']) ?: strcmp($a['name'], $b['name']));
 
         $items = [];
         foreach ($releaseDirs as $index => $dir) {
@@ -363,29 +357,93 @@ final class StoragePrune extends Command
                 continue;
             }
 
-            $iterator = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator((string) $dir['path'], \FilesystemIterator::SKIP_DOTS)
-            );
-            foreach ($iterator as $file) {
-                if (! $file instanceof \SplFileInfo || ! $file->isFile()) {
-                    continue;
-                }
-
-                $fullPath = $file->getPathname();
-                $prefix = rtrim(storage_path('app/private'), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
-                if (! str_starts_with($fullPath, $prefix)) {
-                    continue;
-                }
-
-                $relPath = str_replace('\\', '/', substr($fullPath, strlen($prefix)));
-                $items[] = [
-                    'path' => $relPath,
-                    'bytes' => max(0, (int) ($file->getSize() ?: 0)),
-                ];
-            }
+            $items = array_merge($items, $this->collectFilesUnderPrivateDirectory((string) $dir['path']));
         }
 
         usort($items, static fn (array $a, array $b): int => strcmp($a['path'], $b['path']));
+
+        return $items;
+    }
+
+    /**
+     * @return list<array{name:string,path:string,mtime:int}>
+     */
+    private function collectContentReleaseRetentionUnits(string $root): array
+    {
+        $units = [];
+
+        foreach (new \DirectoryIterator($root) as $item) {
+            if (! $item->isDir() || $item->isDot()) {
+                continue;
+            }
+
+            $name = $item->getFilename();
+            $dirPath = $item->getPathname();
+
+            if ($name === 'backups') {
+                foreach (new \DirectoryIterator($dirPath) as $backupItem) {
+                    if (! $backupItem->isDir() || $backupItem->isDot()) {
+                        continue;
+                    }
+
+                    $this->appendContentReleaseRetentionUnit(
+                        $units,
+                        'backups/'.$backupItem->getFilename(),
+                        $backupItem->getPathname()
+                    );
+                }
+
+                continue;
+            }
+
+            $this->appendContentReleaseRetentionUnit($units, $name, $dirPath);
+        }
+
+        return $units;
+    }
+
+    /**
+     * @param  list<array{name:string,path:string,mtime:int}>  $units
+     */
+    private function appendContentReleaseRetentionUnit(array &$units, string $name, string $path): void
+    {
+        $units[] = [
+            'name' => $name,
+            'path' => $path,
+            'mtime' => (int) (@filemtime($path) ?: 0),
+        ];
+    }
+
+    /**
+     * @return list<array{path:string,bytes:int}>
+     */
+    private function collectFilesUnderPrivateDirectory(string $dirPath): array
+    {
+        if (! is_dir($dirPath)) {
+            return [];
+        }
+
+        $items = [];
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($dirPath, \FilesystemIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $file) {
+            if (! $file instanceof \SplFileInfo || ! $file->isFile()) {
+                continue;
+            }
+
+            $fullPath = $file->getPathname();
+            $prefix = rtrim(storage_path('app/private'), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+            if (! str_starts_with($fullPath, $prefix)) {
+                continue;
+            }
+
+            $items[] = [
+                'path' => str_replace('\\', '/', substr($fullPath, strlen($prefix))),
+                'bytes' => max(0, (int) ($file->getSize() ?: 0)),
+            ];
+        }
 
         return $items;
     }

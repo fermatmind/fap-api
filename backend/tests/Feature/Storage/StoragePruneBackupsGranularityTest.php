@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Tests\Feature\Storage;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-final class StoragePruneReleaseRetentionTest extends TestCase
+final class StoragePruneBackupsGranularityTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -24,13 +23,17 @@ final class StoragePruneReleaseRetentionTest extends TestCase
 
     private string $originalLocalRoot;
 
+    private string $freshBackupDir = 'content_releases/backups/retention_backup_fresh';
+
+    private string $oldBackupDir = 'content_releases/backups/retention_backup_old';
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->originalStoragePath = $this->app->storagePath();
         $this->originalLocalRoot = (string) config('filesystems.disks.local.root');
-        $this->isolatedStoragePath = sys_get_temp_dir().'/fap-storage-prune-release-'.Str::uuid();
+        $this->isolatedStoragePath = sys_get_temp_dir().'/fap-storage-prune-backups-'.Str::uuid();
         File::ensureDirectoryExists($this->isolatedStoragePath.'/app/private');
         $this->app->useStoragePath($this->isolatedStoragePath);
         config()->set('filesystems.disks.local.root', $this->isolatedStoragePath.'/app/private');
@@ -42,8 +45,8 @@ final class StoragePruneReleaseRetentionTest extends TestCase
 
     protected function tearDown(): void
     {
-        Storage::disk('local')->deleteDirectory('content_releases/release_new');
-        Storage::disk('local')->deleteDirectory('content_releases/release_old');
+        Storage::disk('local')->deleteDirectory($this->freshBackupDir);
+        Storage::disk('local')->deleteDirectory($this->oldBackupDir);
 
         $currentPlans = glob(storage_path('app/private/prune_plans/*.json')) ?: [];
         $newPlans = array_diff($currentPlans, $this->preExistingPlans);
@@ -65,20 +68,21 @@ final class StoragePruneReleaseRetentionTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_content_releases_retention_prunes_old_releases_with_plan_and_audit(): void
+    public function test_content_release_backups_are_pruned_per_backup_directory_instead_of_backups_root(): void
     {
-        config()->set('storage_retention.content_releases.keep_last_n', 1);
+        config()->set('storage_retention.content_releases.keep_last_n', 0);
         config()->set('storage_retention.content_releases.keep_days', 180);
 
-        Storage::disk('local')->put('content_releases/release_new/source_pack/compiled/manifest.json', '{"new":true}');
-        Storage::disk('local')->put('content_releases/release_old/source_pack/compiled/manifest.json', '{"old":true}');
+        Storage::disk('local')->put($this->freshBackupDir.'/previous_pack/compiled/manifest.json', '{"fresh":true}');
+        Storage::disk('local')->put($this->oldBackupDir.'/previous_pack/compiled/manifest.json', '{"old":true}');
 
-        $newDir = storage_path('app/private/content_releases/release_new');
-        $oldDir = storage_path('app/private/content_releases/release_old');
-        $oldTs = now()->subDays(240)->getTimestamp();
-        $newTs = now()->subDays(1)->getTimestamp();
-        @touch($oldDir, $oldTs);
-        @touch($newDir, $newTs);
+        $backupsRoot = storage_path('app/private/content_releases/backups');
+        $freshDir = storage_path('app/private/'.$this->freshBackupDir);
+        $oldDir = storage_path('app/private/'.$this->oldBackupDir);
+
+        @touch($oldDir, now()->subDays(240)->getTimestamp());
+        @touch($freshDir, now()->subDays(1)->getTimestamp());
+        @touch($backupsRoot, now()->getTimestamp());
 
         $this->artisan('storage:prune --dry-run --scope=content_releases_retention')
             ->assertExitCode(0);
@@ -89,25 +93,22 @@ final class StoragePruneReleaseRetentionTest extends TestCase
         usort($newPlans, static fn (string $a, string $b): int => filemtime($a) <=> filemtime($b));
         $latestPlan = (string) end($newPlans);
         $this->assertFileExists($latestPlan);
+
         $plan = json_decode((string) file_get_contents($latestPlan), true);
         $this->assertIsArray($plan);
         $planPaths = array_values(array_map(
             static fn (array $entry): string => (string) ($entry['path'] ?? ''),
             is_array($plan['files'] ?? null) ? $plan['files'] : []
         ));
-        $this->assertContains('content_releases/release_old/source_pack/compiled/manifest.json', $planPaths);
-        $this->assertNotContains('content_releases/release_new/source_pack/compiled/manifest.json', $planPaths);
+
+        $this->assertSame([
+            'content_releases/backups/retention_backup_old/previous_pack/compiled/manifest.json',
+        ], $planPaths);
 
         $this->artisan('storage:prune --execute --scope=content_releases_retention --plan='.$latestPlan)
             ->assertExitCode(0);
 
-        $this->assertTrue(Storage::disk('local')->exists('content_releases/release_new/source_pack/compiled/manifest.json'));
-        $this->assertFalse(Storage::disk('local')->exists('content_releases/release_old/source_pack/compiled/manifest.json'));
-
-        $audit = DB::table('audit_logs')
-            ->where('action', 'storage_prune')
-            ->where('target_id', 'content_releases_retention')
-            ->exists();
-        $this->assertTrue($audit, 'expected storage_prune audit log for content_releases_retention');
+        $this->assertFalse(Storage::disk('local')->exists($this->oldBackupDir.'/previous_pack/compiled/manifest.json'));
+        $this->assertTrue(Storage::disk('local')->exists($this->freshBackupDir.'/previous_pack/compiled/manifest.json'));
     }
 }
