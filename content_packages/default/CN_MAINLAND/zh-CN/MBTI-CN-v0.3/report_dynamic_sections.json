@@ -1,6 +1,6 @@
 {
     "schema": "fap.mbti.dynamic_sections.v1",
-    "version": "phase5a.v1",
+    "version": "phase6a.v1",
   "labels": {
     "block_kinds": {
       "type_skeleton": "类型骨架",
@@ -15,7 +15,11 @@
       "career_next_step": "职业下一步桥接",
       "decision": "决策场景",
       "stress_recovery": "压力恢复场景",
-      "communication": "沟通协作场景"
+      "communication": "沟通协作场景",
+      "why_this_type": "为什么是这个类型",
+      "borderline_axis": "边界轴解释",
+      "adjacent_type_contrast": "相邻类型对照",
+      "stability_explanation": "稳定性解释"
     },
         "band": {
             "boundary": "边界带",
@@ -129,6 +133,28 @@
         "decision": "做决定时，你通常先靠{{primary_hint}}缩小范围，再用{{support_hint}}确认是否值得推进。{{identity_clause}} {{boundary_clause}}",
         "stress_recovery": "压力升高时，你容易先滑向{{primary_hint}}来求快或求稳；恢复阶段则更需要{{support_hint}}把你拉回可用区。{{identity_clause}} {{boundary_clause}}",
         "communication": "沟通里，你通常先以{{primary_hint}}发起，再用{{support_hint}}修正对齐。{{identity_clause}} {{boundary_clause}}"
+    },
+    "explainability_summary_templates": {
+        "stable": "你的结果主要由{{dominant_axis_label}}上的{{dominant_side_label}}偏好拉开差距，因此主类型较稳定。真正最接近边界的是{{close_axis_label}}，它会决定你在哪些场景下更像相邻类型。",
+        "mixed": "你的结果已经有清晰主轴，但仍保留几条会随场景切换的近边界轴。{{dominant_axis_label}}上的{{dominant_side_label}}解释了“你为什么是这个类型”，而{{close_axis_label}}解释了“你为什么又不像刻板印象里的那种类型”。",
+        "context_sensitive": "你的结果不是模糊，而是有几条非常接近边界的轴在一起工作。{{dominant_axis_label}}上的{{dominant_side_label}}仍然决定了主类型，但{{close_axis_label}}会显著影响你在不同情境里看起来像哪一类人。"
+    },
+    "why_this_type_templates": {
+        "boundary": "主类型之所以仍然成立，不是因为所有轴都很极端，而是因为{{dominant_axis_label}}上的主方向最后仍然赢了出来。{{close_axis_label}}离中线很近，所以你会在气质和场景表现上保留更多弹性。{{identity_clause}}",
+        "clear": "主类型之所以成立，是因为{{dominant_axis_label}}上的{{dominant_side_label}}已经形成稳定拉力。它决定了你大多数第一反应的方向，而{{close_axis_label}}则解释了你为什么不会像这个类型的刻板印象那样单一。{{identity_clause}}",
+        "strong": "主类型之所以成立，是因为{{dominant_axis_label}}上的{{dominant_side_label}}偏好已经足够鲜明，会自然拉高你的默认判断和表达节奏。真正让你显得不像标准模板的，是{{close_axis_label}}这种近边界轴。{{identity_clause}}",
+        "very_strong": "主类型之所以成立，是因为{{dominant_axis_label}}上的{{dominant_side_label}}几乎已经成为默认底层模式。别人通常很快就能识别这一点，而{{close_axis_label}}只会在更具体的情境里改变你看起来像谁。{{identity_clause}}"
+    },
+    "close_call_axis_templates": {
+        "default": "在{{axis_label}}上，你最后仍偏向{{side_label}}，但和另一侧只拉开了{{delta}}个点差。也就是说，这条轴更像“近身拉扯”而不是绝对定型：熟悉情境下你常会先用{{side_label}}，而高压、误解或角色变化时，{{opposite_side_label}}会很快进场补位。"
+    },
+    "adjacent_type_contrast_templates": {
+        "default": "如果只看最接近边界的部分，别人最容易把你看成{{neighbor_type}}。原因不是你“测错了”，而是{{axis_label}}离中线太近，导致你在外显风格上经常会借用{{opposite_side_label}}那一面的节奏。真正区分你们的，不是表面像不像，而是你最终仍会回到{{side_label}}来做主判断和收尾。"
+    },
+    "stability_explanation_templates": {
+        "stable": "这一份结果整体比较稳定。主类型不会因为普通情境波动就频繁改写，真正需要留意的，是在{{close_axis_label}}上什么时候需要主动给另一侧留一点空间。",
+        "mixed": "这一份结果整体属于“主类型明确，但局部会随场景切换”。你不是不稳定，而是有几条轴会根据任务、人际和压力负荷切换表达入口。{{identity_clause}}",
+        "context_sensitive": "这一份结果最需要读成“情境敏感型稳定”，而不是简单稳定或简单摇摆。主类型仍然成立，但近边界轴太多时，你在不同场景里会更明显地表现出不同的切换模式。{{identity_clause}}"
     },
     "boundary_narrative_templates": {
         "overview": "{{axis_label}}靠近中线时，你不是“有点像两边”，而是会在不同情境下切换入口。熟悉场景里你可能先用{{side_label}}，压力或高风险情境里又会迅速调动{{opposite_side_label}}。别人如果只看到其中一面，就容易把你误读成忽冷忽热、摇摆或前后不一。",

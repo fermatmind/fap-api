@@ -42,8 +42,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
-            $this->assertSame('mbti.personalization.phase5a.v1', (string) ($meta['schema_version'] ?? ''));
-            $this->assertSame('phase5a.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
+            $this->assertSame('mbti.personalization.phase6a.v1', (string) ($meta['schema_version'] ?? ''));
+            $this->assertSame('phase6a.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertIsArray($meta['axis_bands'] ?? null);
             $this->assertSame('boundary', (string) (($meta['axis_bands']['EI'] ?? '')));
             $this->assertSame('boundary', (string) (($meta['axis_bands']['AT'] ?? '')));
@@ -58,6 +58,16 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertNotSame('', trim((string) (($meta['variant_keys']['career.collaboration_fit'] ?? ''))));
             $this->assertNotSame('', trim((string) (($meta['variant_keys']['career.work_environment'] ?? ''))));
             $this->assertNotSame('', trim((string) (($meta['variant_keys']['career.next_step'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['traits.why_this_type'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['traits.close_call_axes'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['traits.adjacent_type_contrast'] ?? ''))));
+            $this->assertNotSame('', trim((string) (($meta['variant_keys']['growth.stability_confidence'] ?? ''))));
+            $this->assertIsArray($meta['contrast_keys'] ?? null);
+            $this->assertNotSame('', trim((string) (($meta['contrast_keys']['traits.adjacent_type_contrast'] ?? ''))));
+            $this->assertNotSame('', trim((string) ($meta['explainability_summary'] ?? '')));
+            $this->assertIsArray($meta['close_call_axes'] ?? null);
+            $this->assertIsArray($meta['neighbor_type_keys'] ?? null);
+            $this->assertIsArray($meta['confidence_or_stability_keys'] ?? null);
             $this->assertIsArray($meta['scene_fingerprint'] ?? null);
             $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['work'] ?? ''))));
             $this->assertNotSame('', trim((string) (($meta['scene_fingerprint']['decision'] ?? ''))));
@@ -77,6 +87,10 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['boundary_flags'] ?? null, $eventMeta['result_view']['boundary_flags'] ?? null);
         $this->assertSame($eventMeta['report_view']['schema_version'] ?? null, $eventMeta['result_view']['schema_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['dynamic_sections_version'] ?? null, $eventMeta['result_view']['dynamic_sections_version'] ?? null);
+        $this->assertSame($eventMeta['report_view']['contrast_keys'] ?? null, $eventMeta['result_view']['contrast_keys'] ?? null);
+        $this->assertSame($eventMeta['report_view']['close_call_axes'] ?? null, $eventMeta['result_view']['close_call_axes'] ?? null);
+        $this->assertSame($eventMeta['report_view']['neighbor_type_keys'] ?? null, $eventMeta['result_view']['neighbor_type_keys'] ?? null);
+        $this->assertSame($eventMeta['report_view']['confidence_or_stability_keys'] ?? null, $eventMeta['result_view']['confidence_or_stability_keys'] ?? null);
     }
 
     private function seedScales(): void

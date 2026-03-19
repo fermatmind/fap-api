@@ -56,6 +56,15 @@ final readonly class MbtiReportAuthoritySourceAdapter implements MbtiPublicResul
                         'dimensions' => $this->buildTraitDimensions(),
                     ],
                 ],
+                'traits.why_this_type' => [
+                    'body' => null,
+                ],
+                'traits.close_call_axes' => [
+                    'body' => null,
+                ],
+                'traits.adjacent_type_contrast' => [
+                    'body' => null,
+                ],
                 'traits.decision_style' => [
                     'body' => null,
                 ],
@@ -70,6 +79,9 @@ final readonly class MbtiReportAuthoritySourceAdapter implements MbtiPublicResul
                 ],
                 'growth.summary' => [
                     'body' => $this->extractFirstCardBody($sections['growth'] ?? null),
+                ],
+                'growth.stability_confidence' => [
+                    'body' => null,
                 ],
                 'growth.stress_recovery' => [
                     'body' => null,
