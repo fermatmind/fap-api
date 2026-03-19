@@ -7,6 +7,7 @@ use App\Models\Result;
 use App\Services\Content\ContentStore;
 use App\Services\Report\HighlightBuilder;
 use App\Services\Report\ReportAccess;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 trait ReportPayloadAssemblerComposeEntryTrait
@@ -16,12 +17,15 @@ trait ReportPayloadAssemblerComposeEntryTrait
         $attemptId = (string) $attempt->id;
         $orgId = $this->resolveServerOrgId($ctx);
 
-        $attempt = Attempt::query()
-            ->where('id', $attemptId)
-            ->where('org_id', $orgId)
-            ->first();
+        if ((int) ($attempt->org_id ?? 0) !== $orgId) {
+            $attemptRow = DB::table('attempts')
+                ->where('id', $attemptId)
+                ->where('org_id', $orgId)
+                ->first();
+            $attempt = $attemptRow !== null ? (new Attempt)->newFromBuilder((array) $attemptRow) : null;
+        }
 
-        if (!$attempt) {
+        if (! $attempt instanceof Attempt) {
             return [
                 'ok' => false,
                 'error' => 'ATTEMPT_NOT_FOUND',
@@ -30,12 +34,15 @@ trait ReportPayloadAssemblerComposeEntryTrait
             ];
         }
 
-        $result = Result::query()
-            ->where('attempt_id', $attemptId)
-            ->where('org_id', $orgId)
-            ->first();
+        if (! $result instanceof Result || (int) ($result->org_id ?? 0) !== $orgId || (string) ($result->attempt_id ?? '') !== $attemptId) {
+            $resultRow = DB::table('results')
+                ->where('attempt_id', $attemptId)
+                ->where('org_id', $orgId)
+                ->first();
+            $result = $resultRow !== null ? (new Result)->newFromBuilder((array) $resultRow) : null;
+        }
 
-        if (!$result) {
+        if (! $result instanceof Result) {
             return [
                 'ok' => false,
                 'error' => 'RESULT_NOT_FOUND',

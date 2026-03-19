@@ -70,8 +70,8 @@ class Result extends Model
         return $this->belongsTo(Attempt::class, 'attempt_id', 'id');
     }
 
-    public static function allowOrgZeroContext(): bool
+    public static function publicContextOrgId(): ?int
     {
-        return self::allowOrgZeroWithResolvedContext();
+        return self::resolvedPublicContextOrgId();
     }
 }

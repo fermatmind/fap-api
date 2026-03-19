@@ -6,6 +6,8 @@ use App\DTO\ResolvedPack;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Repositories\Report\ReportAccessActor;
+use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
@@ -14,6 +16,7 @@ use App\Services\Report\Resolvers\CrisisPolicyResolver;
 use App\Services\Report\Resolvers\OfferResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
+use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -30,6 +33,8 @@ class ReportGatekeeper
         private AccessResolver $accessResolver,
         private OfferResolver $offerResolver,
         private CrisisPolicyResolver $crisisPolicyResolver,
+        private ReportSubjectRepository $subjects,
+        private OrgContext $orgContext,
     ) {}
 
     public function ensureAccess(
@@ -44,22 +49,23 @@ class ReportGatekeeper
             return $this->badRequest('ATTEMPT_REQUIRED', 'attempt_id is required.');
         }
 
-        $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
-        if (! $attempt) {
-            return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
+        $subject = $this->resolveSubject($orgId, $attemptId, $userId, $anonId, $role, false);
+        if (! ($subject['ok'] ?? false)) {
+            return $subject;
         }
 
-        $result = Result::withoutGlobalScopes()->where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
-        if (! $result) {
-            return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
-        }
+        /** @var Attempt $attempt */
+        $attempt = $subject['attempt'];
+        /** @var Result $result */
+        $result = $subject['result'];
+        $effectiveOrgId = (int) ($subject['org_id'] ?? $orgId);
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {
             return $this->badRequest('SCALE_REQUIRED', 'scale_code missing on attempt.');
         }
 
-        $registry = $this->registry->getByCode($scaleCode, $orgId);
+        $registry = $this->registry->getByCode($scaleCode, $effectiveOrgId);
         if (! $registry) {
             return $this->notFound('SCALE_NOT_FOUND', 'scale not found.');
         }
@@ -68,7 +74,7 @@ class ReportGatekeeper
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
         $accessState = $this->accessResolver->resolveAccess(
-            $orgId,
+            $effectiveOrgId,
             $userId,
             $anonId,
             $attemptId,
@@ -97,15 +103,16 @@ class ReportGatekeeper
             return $this->badRequest('ATTEMPT_REQUIRED', 'attempt_id is required.');
         }
 
-        $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role, $forceSystemAccess)->first();
-        if (! $attempt) {
-            return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
+        $subject = $this->resolveSubject($orgId, $attemptId, $userId, $anonId, $role, $forceSystemAccess);
+        if (! ($subject['ok'] ?? false)) {
+            return $subject;
         }
 
-        $result = Result::withoutGlobalScopes()->where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
-        if (! $result) {
-            return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
-        }
+        /** @var Attempt $attempt */
+        $attempt = $subject['attempt'];
+        /** @var Result $result */
+        $result = $subject['result'];
+        $effectiveOrgId = (int) ($subject['org_id'] ?? $orgId);
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         if ($scaleCode === '') {
@@ -114,7 +121,7 @@ class ReportGatekeeper
         $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? $result->scale_code_v2 ?? '')));
         $isMbtiContract = $this->isMbtiReportContractEnabled($scaleCode, $scaleCodeV2);
 
-        $registry = $this->registry->getByCode($scaleCode, $orgId);
+        $registry = $this->registry->getByCode($scaleCode, $effectiveOrgId);
         if (! $registry) {
             return $this->notFound('SCALE_NOT_FOUND', 'scale not found.');
         }
@@ -124,11 +131,11 @@ class ReportGatekeeper
         $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
-        $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $commercialSpec, $scaleCode, $orgId);
+        $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $commercialSpec, $scaleCode, $effectiveOrgId);
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
 
         $accessState = $this->accessResolver->resolveAccess(
-            $orgId,
+            $effectiveOrgId,
             $userId,
             $anonId,
             $attemptId,
@@ -144,7 +151,7 @@ class ReportGatekeeper
 
         $modulesState = $this->accessResolver->resolveModules(
             $scaleCode,
-            $orgId,
+            $effectiveOrgId,
             $attemptId,
             $hasFullAccess,
             $forceFreeOnly,
@@ -185,12 +192,12 @@ class ReportGatekeeper
         $shouldReadFromSnapshot = $snapshotStrictMode || $shouldUseSnapshot;
         if ($shouldReadFromSnapshot && ($snapshotStrictMode || ! $forceRefresh)) {
             $snapshotRow = DB::table('report_snapshots')
-                ->where('org_id', $orgId)
+                ->where('org_id', $effectiveOrgId)
                 ->where('attempt_id', $attemptId)
                 ->first();
 
             if ($snapshotStrictMode && ($snapshotRow === null || $forceRefresh)) {
-                $this->enqueueSnapshotBuild($orgId, $attempt, $result);
+                $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result);
 
                 return $this->responsePayload(
                     $locked,
@@ -260,8 +267,8 @@ class ReportGatekeeper
                 }
 
                 if ($snapshotStatus !== 'ready') {
-                    Log::warning('[REPORT] snapshot_status_unknown', [
-                        'org_id' => $orgId,
+                        Log::warning('[REPORT] snapshot_status_unknown', [
+                        'org_id' => $effectiveOrgId,
                         'attempt_id' => $attemptId,
                         'status' => $snapshotStatus !== '' ? $snapshotStatus : null,
                         'strict_mode' => $snapshotStrictMode,
@@ -312,7 +319,7 @@ class ReportGatekeeper
                 }
 
                 if ($snapshotStrictMode) {
-                    $this->enqueueSnapshotBuild($orgId, $attempt, $result);
+                    $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result);
 
                     return $this->responsePayload(
                         $locked,
@@ -392,7 +399,7 @@ class ReportGatekeeper
                 $modulesPreview
             );
             $reportFree = is_array($reportFreeBuilt['report'] ?? null) ? $reportFreeBuilt['report'] : [];
-            $this->upsertSnapshotVariants($orgId, $attempt, $result, $reportFree, $report);
+            $this->upsertSnapshotVariants($effectiveOrgId, $attempt, $result, $reportFree, $report);
         }
 
         return $this->responsePayload(
@@ -412,66 +419,64 @@ class ReportGatekeeper
         );
     }
 
-    private function ownedAttemptQuery(
+    private function resolveSubject(
         int $orgId,
         string $attemptId,
         ?string $userId,
         ?string $anonId,
         ?string $role,
-        bool $forceSystemAccess = false
-    ): \Illuminate\Database\Eloquent\Builder {
-        $query = Attempt::withoutGlobalScopes()
-            ->where('id', $attemptId)
-            ->where('org_id', $orgId);
+        bool $forceSystemAccess
+    ): array {
+        $actor = ReportAccessActor::from($userId, $anonId, $role);
 
-        $normalizedRole = $role !== null ? strtolower(trim($role)) : null;
-        $user = $userId !== null ? trim($userId) : '';
-        $anon = $anonId !== null ? trim($anonId) : '';
-        $user = $user !== '' ? $user : null;
-        $anon = $anon !== '' ? $anon : null;
-
-        if ($forceSystemAccess === true) {
-            return $query;
-        }
-
-        if ($normalizedRole !== null && $this->isPrivilegedRole($normalizedRole)) {
-            return $query;
-        }
-
-        if ($normalizedRole !== null && $this->isMemberLikeRole($normalizedRole)) {
-            if ($user === null) {
-                return $query->whereRaw('1=0');
+        if ($this->shouldUseSystemAccess($role, $forceSystemAccess)) {
+            $attempt = $this->subjects->findAttemptForSystem(max(0, $orgId), $attemptId);
+            if (! $attempt instanceof Attempt) {
+                return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
             }
 
-            return $query->where('user_id', $user);
+            $effectiveOrgId = (int) ($attempt->org_id ?? 0);
+            $result = $this->subjects->findResultForRealm($effectiveOrgId, $attemptId);
+            if (! $result instanceof Result) {
+                return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
+            }
+
+            return [
+                'ok' => true,
+                'attempt' => $attempt,
+                'result' => $result,
+                'org_id' => $effectiveOrgId,
+            ];
         }
 
-        if ($user === null && $anon === null) {
-            return $query->whereRaw('1=0');
+        $attempt = $this->subjects->findAttemptForCurrentContext($attemptId, $actor);
+        if (! $attempt instanceof Attempt) {
+            return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
-        return $query->where(function ($q) use ($user, $anon) {
-            if ($user !== null) {
-                $q->where('user_id', $user);
-            }
-            if ($anon !== null) {
-                if ($user !== null) {
-                    $q->orWhere('anon_id', $anon);
-                } else {
-                    $q->where('anon_id', $anon);
-                }
-            }
-        });
+        $effectiveOrgId = (int) ($attempt->org_id ?? 0);
+        $result = $this->subjects->findResultForRealm($effectiveOrgId, $attemptId);
+        if (! $result instanceof Result) {
+            return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
+        }
+
+        return [
+            'ok' => true,
+            'attempt' => $attempt,
+            'result' => $result,
+            'org_id' => $effectiveOrgId,
+        ];
     }
 
-    private function isPrivilegedRole(string $role): bool
+    private function shouldUseSystemAccess(?string $role, bool $forceSystemAccess): bool
     {
-        return in_array($role, ['owner', 'admin'], true);
-    }
+        if ($forceSystemAccess) {
+            return true;
+        }
 
-    private function isMemberLikeRole(string $role): bool
-    {
-        return in_array($role, ['member', 'viewer'], true);
+        $normalizedRole = strtolower(trim((string) $role));
+
+        return $normalizedRole === 'system';
     }
 
     private function upsertSnapshotVariants(

@@ -7,6 +7,8 @@ use App\Http\Controllers\API\V0_3\Concerns\ResolvesAttemptOwnership;
 use App\Http\Controllers\Controller;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Repositories\Report\ReportAccessActor;
+use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
@@ -40,6 +42,7 @@ class AttemptReadController extends Controller
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
+        private ReportSubjectRepository $reportSubjects,
         protected OrgContext $orgContext,
     ) {}
 
@@ -260,7 +263,7 @@ class AttemptReadController extends Controller
             $userId !== null ? (string) $userId : null,
             $anonId,
             $this->orgContext->role(),
-            $this->isPublicReportScale($scaleCode),
+            false,
             $forceRefresh,
         );
 
@@ -337,10 +340,7 @@ class AttemptReadController extends Controller
     private function resolveAttemptForReportRead(Request $request, int $orgId, string $attemptId, string $scaleCode): Attempt
     {
         if ($this->isPublicReportScale($scaleCode)) {
-            $attempt = Attempt::withoutGlobalScopes()
-                ->where('org_id', $orgId)
-                ->where('id', $attemptId)
-                ->first();
+            $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
 
             if ($attempt instanceof Attempt) {
                 return $attempt;
@@ -429,10 +429,7 @@ class AttemptReadController extends Controller
     private function resolveAttemptForResultRead(Request $request, int $orgId, string $attemptId, string $scaleCode): ?Attempt
     {
         if ($this->isPublicResultScale($scaleCode)) {
-            return Attempt::withoutGlobalScopes()
-                ->where('org_id', $orgId)
-                ->where('id', $attemptId)
-                ->first();
+            return $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
         }
 
         $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
@@ -461,6 +458,15 @@ class AttemptReadController extends Controller
         }
 
         return strtoupper(trim((string) ($responseCodes['scale_code'] ?? '')));
+    }
+
+    private function reportActor(Request $request): ReportAccessActor
+    {
+        return ReportAccessActor::from(
+            $this->resolveUserId($request),
+            $this->resolveAnonId($request),
+            $this->orgContext->role(),
+        );
     }
 
     private function resolveAttemptId(Result $result, ?Attempt $attempt, string $fallbackAttemptId): string

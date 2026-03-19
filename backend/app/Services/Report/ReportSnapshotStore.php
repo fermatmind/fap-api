@@ -4,9 +4,12 @@ namespace App\Services\Report;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Repositories\Report\ReportAccessActor;
+use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Scale\ScaleIdentityWriteProjector;
+use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -25,6 +28,7 @@ class ReportSnapshotStore
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
         private ScaleIdentityWriteProjector $identityProjector,
+        private ReportSubjectRepository $subjects,
     ) {}
 
     /**
@@ -145,13 +149,25 @@ class ReportSnapshotStore
             ];
         }
 
-        $attempt = $this->ownedAttemptQuery($orgId, $attemptId, $userId, $anonId, $role)->first();
-        if (! $attempt) {
+        if ($this->isSystemRole($role)) {
+            $attempt = $this->subjects->findAttemptForSystem($orgId, $attemptId);
+        } else {
+            $contextKind = $orgId > 0 ? OrgContext::KIND_TENANT : OrgContext::KIND_PUBLIC;
+            $attempt = $this->subjects->findAttemptForRealm(
+                $contextKind,
+                $orgId,
+                $attemptId,
+                ReportAccessActor::from($userId, $anonId, $role),
+            );
+        }
+
+        if (! $attempt instanceof Attempt) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
-        $result = Result::withoutGlobalScopes()->where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
-        if (! $result) {
+        $orgId = (int) ($attempt->org_id ?? 0);
+        $result = $this->subjects->findResultForRealm($orgId, $attemptId);
+        if (! $result instanceof Result) {
             return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
         }
 
@@ -260,47 +276,6 @@ class ReportSnapshotStore
             'snapshot' => $snapshot ? $this->normalizeSnapshot($snapshot) : null,
             'idempotent' => false,
         ];
-    }
-
-    private function ownedAttemptQuery(
-        int $orgId,
-        string $attemptId,
-        ?string $userId,
-        ?string $anonId,
-        string $role
-    ): \Illuminate\Database\Eloquent\Builder {
-        $query = Attempt::withoutGlobalScopes()
-            ->where('id', $attemptId)
-            ->where('org_id', $orgId);
-
-        if ($this->isSystemRole($role) || $this->isPrivilegedRole($role)) {
-            return $query;
-        }
-
-        if ($this->isMemberLikeRole($role)) {
-            if ($userId === null) {
-                return $query->whereRaw('1=0');
-            }
-
-            return $query->where('user_id', $userId);
-        }
-
-        if ($userId === null && $anonId === null) {
-            return $query->whereRaw('1=0');
-        }
-
-        return $query->where(function ($q) use ($userId, $anonId) {
-            if ($userId !== null) {
-                $q->where('user_id', $userId);
-            }
-            if ($anonId !== null) {
-                if ($userId !== null) {
-                    $q->orWhere('anon_id', $anonId);
-                } else {
-                    $q->where('anon_id', $anonId);
-                }
-            }
-        });
     }
 
     private function normalizeActor(mixed $raw): ?string

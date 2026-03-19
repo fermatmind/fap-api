@@ -26,22 +26,7 @@ final class AttemptSubmissionService
     public function submit(OrgContext $ctx, string $attemptId, SubmitAttemptDTO $dto, bool $preferAsync): array
     {
         $attemptId = trim($attemptId);
-
-        // ✅ org_id 兜底：public/guest 场景没有 org 时统一用 0，并写回 ctx（避免后续 Attempt 全局 org scope 用 null）
-        $orgId = $ctx->orgId() ?? 0;
-        if ($ctx->orgId() === null) {
-            $normalizedUserId = $this->normalizeUserId($ctx->userId());
-            $normalizedAnonId = $this->normalizeAnonId($ctx->anonId());
-
-            $fixedCtx = new OrgContext;
-            $fixedCtx->set(
-                $orgId,
-                $normalizedUserId !== null ? (int) $normalizedUserId : null,
-                'public',
-                $normalizedAnonId
-            );
-            $ctx = $fixedCtx;
-        }
+        $orgId = $ctx->scopedOrgId();
 
         $hasTable = SchemaBaseline::hasTable('attempt_submissions');
 
@@ -227,7 +212,8 @@ final class AttemptSubmissionService
             $orgId,
             $actorUserId !== null ? (int) $actorUserId : null,
             'public',
-            $actorAnonId
+            $actorAnonId,
+            OrgContext::deriveContextKind($orgId)
         );
 
         try {
@@ -265,7 +251,7 @@ final class AttemptSubmissionService
             ];
         }
 
-        $orgId = $ctx->orgId() ?? 0;
+        $orgId = $ctx->scopedOrgId();
         $actorUserId = $this->normalizeUserId($actorUserId);
         $actorAnonId = $this->normalizeAnonId($actorAnonId);
 
@@ -290,24 +276,6 @@ final class AttemptSubmissionService
             ->orderByDesc('updated_at')
             ->orderByDesc('created_at')
             ->first();
-
-        // ✅ org fallback：兼容历史 public attempt/submission 写成 org_id=0
-        if ($row === null && $orgId !== 0) {
-            $fallback = DB::table('attempt_submissions')
-                ->where('org_id', 0)
-                ->where('attempt_id', $attemptId);
-
-            if ($actorUserId !== null) {
-                $fallback->where('actor_user_id', (int) $actorUserId);
-            } elseif ($actorAnonId !== null) {
-                $fallback->where('actor_anon_id', $actorAnonId);
-            }
-
-            $row = $fallback
-                ->orderByDesc('updated_at')
-                ->orderByDesc('created_at')
-                ->first();
-        }
 
         if ($row === null) {
             return [
@@ -386,7 +354,7 @@ final class AttemptSubmissionService
         $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
 
         $payload = $this->buildPayload($dto, $actorUserId, $actorAnonId);
-        $orgId = $ctx->orgId() ?? 0;
+        $orgId = $ctx->scopedOrgId();
         $dedupeKey = $this->buildDedupeKey($orgId, $attemptId, $payload);
         $now = now();
 
@@ -450,7 +418,7 @@ final class AttemptSubmissionService
         $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
 
         $payload = $this->buildPayload($dto, $actorUserId, $actorAnonId);
-        $orgId = $ctx->orgId() ?? 0;
+        $orgId = $ctx->scopedOrgId();
         $dedupeKey = $this->buildDedupeKey($orgId, $attemptId, $payload);
         $now = now();
 
@@ -661,15 +629,9 @@ final class AttemptSubmissionService
         ?string $actorUserId,
         ?string $actorAnonId
     ): Builder {
-        $orgId = $ctx->orgId() ?? 0;
-        $orgIds = $orgId === 0 ? [0] : [$orgId, 0];
-
-        // ✅ 强制走写库 + 去掉全局 scopes
-        // ✅ whereIn(org_id, [$orgId, 0])：兼容历史 attempt 写成 org_id=0 的情况
         $query = Attempt::onWriteConnection()
-            ->withoutGlobalScopes()
             ->where('id', $attemptId)
-            ->whereIn('org_id', $orgIds);
+            ->where('org_id', $ctx->scopedOrgId());
 
         $actorUserId = $this->normalizeUserId($actorUserId);
         $actorAnonId = $this->normalizeAnonId($actorAnonId);

@@ -194,8 +194,8 @@ class Attempt extends Model
         return $this->hasOne(Result::class, 'attempt_id', 'id');
     }
 
-    public static function allowOrgZeroContext(): bool
+    public static function publicContextOrgId(): ?int
     {
-        return self::allowOrgZeroWithResolvedContext();
+        return self::resolvedPublicContextOrgId();
     }
 }

@@ -95,13 +95,14 @@ class FmTokenOptional
         $request->attributes->set('org_id', $orgId);
         $request->attributes->set('org_role', $role);
         $request->attributes->set('org_context_resolved', true);
+        $request->attributes->set('org_context_kind', OrgContext::deriveContextKind($orgId));
 
         if ($orgId <= 0 && $this->isOpsSystemBypass($request, $role)) {
             $request->attributes->set('org_context_bypass', true);
         }
 
         $ctx = new OrgContext;
-        $ctx->set($orgId, $resolvedUserId, $role, $anonId);
+        $ctx->set($orgId, $resolvedUserId, $role, $anonId, OrgContext::deriveContextKind($orgId));
         app()->instance(OrgContext::class, $ctx);
 
         return $next($request);

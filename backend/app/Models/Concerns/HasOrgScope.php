@@ -19,6 +19,11 @@ trait HasOrgScope
         return false;
     }
 
+    public static function publicContextOrgId(): ?int
+    {
+        return null;
+    }
+
     public static function allowOrgZeroContext(): bool
     {
         return false;
@@ -31,20 +36,32 @@ trait HasOrgScope
 
     protected static function allowOrgZeroWithResolvedContext(): bool
     {
+        return self::resolvedPublicContextOrgId() === 0;
+    }
+
+    protected static function resolvedPublicContextOrgId(int $orgId = 0): ?int
+    {
         if (! app()->bound('request')) {
-            return false;
+            return null;
         }
 
         $request = request();
         if (! $request instanceof Request) {
-            return false;
+            return null;
         }
 
-        if (self::truthy($request->attributes->get('org_context_resolved'))) {
-            return true;
+        $contextResolved = self::truthy($request->attributes->get('org_context_resolved'));
+        $contextBypass = self::truthy($request->attributes->get('org_context_bypass'));
+        if (! $contextResolved && ! $contextBypass) {
+            return null;
         }
 
-        return self::truthy($request->attributes->get('org_context_bypass'));
+        $contextKind = strtolower(trim((string) $request->attributes->get('org_context_kind', '')));
+        if ($contextKind !== '' && $contextKind !== 'public') {
+            return null;
+        }
+
+        return $orgId;
     }
 
     private static function truthy(mixed $value): bool
