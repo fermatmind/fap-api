@@ -7,6 +7,7 @@ $alipayMerchantPrivateKeyPath = trim((string) env(
     'ALIPAY_MERCHANT_PRIVATE_KEY_PATH',
     storage_path('app/cert/alipay/app_private_key.pem')
 ));
+$alipayMode = trim((string) env('ALIPAY_MODE', ''));
 $resolvedAlipayPrivateKey = $alipayMerchantPrivateKey;
 
 if (
@@ -67,7 +68,7 @@ return [
             ),
             'notify_url' => env('ALIPAY_NOTIFY_URL', ''),
             'return_url' => env('ALIPAY_RETURN_URL', ''),
-            'mode' => env('ALIPAY_MODE', 'normal'),
+            ...($alipayMode !== '' ? ['mode' => $alipayMode] : []),
         ],
     ],
 ];
