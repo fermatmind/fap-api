@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Commerce\Checkout;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Yansongda\Pay\Pay;
 use function data_get;
 use function url;
@@ -55,12 +56,23 @@ class WechatPayCheckoutService
             $order['appid'] = $appId;
         }
 
+        $isMobile = $this->isMobileUserAgent($userAgent);
+
         try {
-            if ($this->isMobileUserAgent($userAgent)) {
+            if ($isMobile) {
                 $response = Pay::wechat()->h5($order);
                 $payload = $this->responseToArray($response);
                 $url = trim((string) ($payload['h5_url'] ?? $payload['url'] ?? ''));
                 if ($url === '') {
+                    Log::error('WECHAT_H5_URL_MISSING', [
+                        'order_no' => $orderNo,
+                        'out_trade_no' => $outTradeNo,
+                        'appid' => $appId !== '' ? $appId : null,
+                        'amount_cents' => $amountCents,
+                        'currency' => strtoupper(trim($currency)) !== '' ? strtoupper(trim($currency)) : 'CNY',
+                        'payload' => $payload,
+                    ]);
+
                     return [
                         'ok' => false,
                         'error_code' => 'PAYMENT_PROVIDER_ERROR',
@@ -80,6 +92,15 @@ class WechatPayCheckoutService
             $payload = $this->responseToArray($response);
             $url = trim((string) ($payload['code_url'] ?? $payload['url'] ?? ''));
             if ($url === '') {
+                Log::error('WECHAT_CODE_URL_MISSING', [
+                    'order_no' => $orderNo,
+                    'out_trade_no' => $outTradeNo,
+                    'appid' => $appId !== '' ? $appId : null,
+                    'amount_cents' => $amountCents,
+                    'currency' => strtoupper(trim($currency)) !== '' ? strtoupper(trim($currency)) : 'CNY',
+                    'payload' => $payload,
+                ]);
+
                 return [
                     'ok' => false,
                     'error_code' => 'PAYMENT_PROVIDER_ERROR',
@@ -94,6 +115,20 @@ class WechatPayCheckoutService
                 'value' => $url,
             ];
         } catch (\Throwable $e) {
+            Log::error('WECHAT_CHECKOUT_FAILED', [
+                'order_no' => $orderNo,
+                'out_trade_no' => $outTradeNo,
+                'mode' => $isMobile ? 'h5' : 'scan',
+                'appid' => $appId !== '' ? $appId : null,
+                'amount_cents' => $amountCents,
+                'currency' => strtoupper(trim($currency)) !== '' ? strtoupper(trim($currency)) : 'CNY',
+                'exception_class' => get_class($e),
+                'exception_message' => $e->getMessage(),
+                'previous_class' => $e->getPrevious() ? get_class($e->getPrevious()) : null,
+                'previous_message' => $e->getPrevious()?->getMessage(),
+                'trace_top' => array_slice($e->getTrace(), 0, 5),
+            ]);
+
             return [
                 'ok' => false,
                 'error_code' => 'PAYMENT_PROVIDER_ERROR',
