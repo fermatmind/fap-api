@@ -19,12 +19,17 @@ final class MbtiCanonicalSectionRegistryTest extends TestCase
         $this->assertArrayHasKey('career.preferred_roles', $definitions);
         $this->assertArrayHasKey('career.collaboration_fit', $definitions);
         $this->assertArrayHasKey('career.work_environment', $definitions);
+        $this->assertArrayHasKey('career.work_experiments', $definitions);
         $this->assertArrayHasKey('career.next_step', $definitions);
         $this->assertArrayHasKey('traits.why_this_type', $definitions);
         $this->assertArrayHasKey('traits.close_call_axes', $definitions);
         $this->assertArrayHasKey('traits.adjacent_type_contrast', $definitions);
         $this->assertArrayHasKey('growth.stability_confidence', $definitions);
+        $this->assertArrayHasKey('growth.next_actions', $definitions);
+        $this->assertArrayHasKey('growth.weekly_experiments', $definitions);
+        $this->assertArrayHasKey('growth.watchouts', $definitions);
         $this->assertArrayHasKey('growth.motivators', $definitions);
+        $this->assertArrayHasKey('relationships.try_this_week', $definitions);
         $this->assertArrayHasKey('relationships.rel_risks', $definitions);
 
         $this->assertSame(

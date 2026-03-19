@@ -528,6 +528,11 @@ class AttemptReadController extends Controller
             'collaboration_fit_keys' => is_array($personalization['collaboration_fit_keys'] ?? null) ? $personalization['collaboration_fit_keys'] : [],
             'work_env_preference_keys' => is_array($personalization['work_env_preference_keys'] ?? null) ? $personalization['work_env_preference_keys'] : [],
             'career_next_step_keys' => is_array($personalization['career_next_step_keys'] ?? null) ? $personalization['career_next_step_keys'] : [],
+            'action_plan_summary' => trim((string) ($personalization['action_plan_summary'] ?? '')),
+            'weekly_action_keys' => is_array($personalization['weekly_action_keys'] ?? null) ? $personalization['weekly_action_keys'] : [],
+            'relationship_action_keys' => is_array($personalization['relationship_action_keys'] ?? null) ? $personalization['relationship_action_keys'] : [],
+            'work_experiment_keys' => is_array($personalization['work_experiment_keys'] ?? null) ? $personalization['work_experiment_keys'] : [],
+            'watchout_keys' => is_array($personalization['watchout_keys'] ?? null) ? $personalization['watchout_keys'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
 

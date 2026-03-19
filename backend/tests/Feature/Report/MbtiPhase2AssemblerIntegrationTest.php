@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase6a.v1',
+            'mbti.personalization.phase7a.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -104,7 +104,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase6a.v1',
+            'phase7a.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
         );
         $this->assertNotSame(
@@ -155,6 +155,26 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertContains(
             'career_next_step.theme.clarify_decision_criteria',
             data_get($payload, 'report._meta.personalization.career_next_step_keys', [])
+        );
+        $this->assertNotSame(
+            '',
+            trim((string) data_get($payload, 'report._meta.personalization.action_plan_summary', ''))
+        );
+        $this->assertContains(
+            'weekly_action.theme.name_decision_rule',
+            data_get($payload, 'report._meta.personalization.weekly_action_keys', [])
+        );
+        $this->assertContains(
+            'relationship_action.theme.name_decision_rule',
+            data_get($payload, 'report._meta.personalization.relationship_action_keys', [])
+        );
+        $this->assertContains(
+            'work_experiment.theme.name_decision_rule',
+            data_get($payload, 'report._meta.personalization.work_experiment_keys', [])
+        );
+        $this->assertContains(
+            'watchout.stability.context_sensitive',
+            data_get($payload, 'report._meta.personalization.watchout_keys', [])
         );
 
         ReportSnapshot::query()->create([
@@ -211,6 +231,10 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             $roundTrippedVariantKeys['career.next_step'] ?? null
         );
         $this->assertSame(
+            'career.work_experiments:EI.E.clear:identity.T:action.work_experiment_theme_name_decision_rule:boundary.JP',
+            $roundTrippedVariantKeys['career.work_experiments'] ?? null
+        );
+        $this->assertSame(
             'traits.why_this_type:EI.E.clear:identity.T:boundary.JP',
             $roundTrippedVariantKeys['traits.why_this_type'] ?? null
         );
@@ -225,6 +249,22 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertSame(
             'growth.stability_confidence:stability.context_sensitive:identity.T:boundary.JP',
             $roundTrippedVariantKeys['growth.stability_confidence'] ?? null
+        );
+        $this->assertSame(
+            'growth.next_actions:EI.E.clear:identity.T:action.weekly_action_theme_name_decision_rule:boundary.TF',
+            $roundTrippedVariantKeys['growth.next_actions'] ?? null
+        );
+        $this->assertSame(
+            'growth.weekly_experiments:EI.E.clear:identity.T:action.weekly_action_theme_name_decision_rule:boundary.TF',
+            $roundTrippedVariantKeys['growth.weekly_experiments'] ?? null
+        );
+        $this->assertSame(
+            'growth.watchouts:JP.J.boundary:identity.T:action.watchout_stability_context_sensitive:boundary.JP',
+            $roundTrippedVariantKeys['growth.watchouts'] ?? null
+        );
+        $this->assertSame(
+            'relationships.try_this_week:EI.E.clear:identity.T:action.relationship_action_theme_name_decision_rule:boundary.TF',
+            $roundTrippedVariantKeys['relationships.try_this_week'] ?? null
         );
 
         $projection = app(MbtiPublicProjectionService::class)->buildForReportEnvelope(
@@ -263,13 +303,23 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'traits.adjacent_type_contrast');
         $stabilityConfidence = collect(Arr::wrap($projection['sections'] ?? []))
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.stability_confidence');
+        $careerWorkExperiments = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'career.work_experiments');
+        $growthNextActions = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.next_actions');
+        $growthWeeklyExperiments = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.weekly_experiments');
+        $growthWatchouts = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'growth.watchouts');
+        $relationshipsTryThisWeek = collect(Arr::wrap($projection['sections'] ?? []))
+            ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.try_this_week');
 
         $this->assertSame(
-            'mbti.personalization.phase6a.v1',
+            'mbti.personalization.phase7a.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase6a.v1',
+            'phase7a.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
@@ -321,6 +371,26 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'growth.stability_confidence:stability.context_sensitive:identity.T:boundary.JP',
             $projectionVariantKeys['growth.stability_confidence'] ?? null
         );
+        $this->assertSame(
+            'career.work_experiments:EI.E.clear:identity.T:action.work_experiment_theme_name_decision_rule:boundary.JP',
+            $projectionVariantKeys['career.work_experiments'] ?? null
+        );
+        $this->assertSame(
+            'growth.next_actions:EI.E.clear:identity.T:action.weekly_action_theme_name_decision_rule:boundary.TF',
+            $projectionVariantKeys['growth.next_actions'] ?? null
+        );
+        $this->assertSame(
+            'growth.weekly_experiments:EI.E.clear:identity.T:action.weekly_action_theme_name_decision_rule:boundary.TF',
+            $projectionVariantKeys['growth.weekly_experiments'] ?? null
+        );
+        $this->assertSame(
+            'growth.watchouts:JP.J.boundary:identity.T:action.watchout_stability_context_sensitive:boundary.JP',
+            $projectionVariantKeys['growth.watchouts'] ?? null
+        );
+        $this->assertSame(
+            'relationships.try_this_week:EI.E.clear:identity.T:action.relationship_action_theme_name_decision_rule:boundary.TF',
+            $projectionVariantKeys['relationships.try_this_week'] ?? null
+        );
         $this->assertIsArray($relationshipsRelRisks);
         $this->assertIsArray($decisionStyle);
         $this->assertIsArray($stressRecovery);
@@ -332,6 +402,11 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertIsArray($closeCallAxes);
         $this->assertIsArray($adjacentTypeContrast);
         $this->assertIsArray($stabilityConfidence);
+        $this->assertIsArray($careerWorkExperiments);
+        $this->assertIsArray($growthNextActions);
+        $this->assertIsArray($growthWeeklyExperiments);
+        $this->assertIsArray($growthWatchouts);
+        $this->assertIsArray($relationshipsTryThisWeek);
         $this->assertSame(
             'relationships.rel_risks:TF.T.boundary:identity.T:boundary.TF',
             data_get($relationshipsRelRisks, '_meta.variant_key')
@@ -377,6 +452,26 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($stabilityConfidence, '_meta.variant_key')
         );
         $this->assertSame(
+            'career.work_experiments:EI.E.clear:identity.T:action.work_experiment_theme_name_decision_rule:boundary.JP',
+            data_get($careerWorkExperiments, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'growth.next_actions:EI.E.clear:identity.T:action.weekly_action_theme_name_decision_rule:boundary.TF',
+            data_get($growthNextActions, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'growth.weekly_experiments:EI.E.clear:identity.T:action.weekly_action_theme_name_decision_rule:boundary.TF',
+            data_get($growthWeeklyExperiments, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'growth.watchouts:JP.J.boundary:identity.T:action.watchout_stability_context_sensitive:boundary.JP',
+            data_get($growthWatchouts, '_meta.variant_key')
+        );
+        $this->assertSame(
+            'relationships.try_this_week:EI.E.clear:identity.T:action.relationship_action_theme_name_decision_rule:boundary.TF',
+            data_get($relationshipsTryThisWeek, '_meta.variant_key')
+        );
+        $this->assertSame(
             'decision',
             data_get($decisionStyle, 'payload.blocks.1.kind')
         );
@@ -416,6 +511,26 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'stability_explanation',
             data_get($stabilityConfidence, 'payload.blocks.0.kind')
         );
+        $this->assertSame(
+            'work_experiment',
+            data_get($careerWorkExperiments, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'next_action',
+            data_get($growthNextActions, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'weekly_experiment',
+            data_get($growthWeeklyExperiments, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'watchout',
+            data_get($growthWatchouts, 'payload.blocks.1.kind')
+        );
+        $this->assertSame(
+            'relationship_practice',
+            data_get($relationshipsTryThisWeek, 'payload.blocks.1.kind')
+        );
         $this->assertStringContainsString(
             '两套入口之间切换',
             (string) data_get($decisionStyle, 'payload.blocks.0.text', '')
@@ -447,6 +562,26 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertStringContainsString(
             '情境敏感型稳定',
             (string) data_get($stabilityConfidence, 'payload.blocks.0.text', '')
+        );
+        $this->assertStringContainsString(
+            '可逆动作',
+            (string) data_get($careerWorkExperiments, 'payload.blocks.1.text', '')
+        );
+        $this->assertStringContainsString(
+            '下一步动作',
+            (string) data_get($growthNextActions, 'payload.blocks.1.text', '')
+        );
+        $this->assertStringContainsString(
+            '可执行实验',
+            (string) data_get($growthWeeklyExperiments, 'payload.blocks.1.text', '')
+        );
+        $this->assertStringContainsString(
+            '风险提醒',
+            (string) data_get($growthWatchouts, 'payload.blocks.1.text', '')
+        );
+        $this->assertStringContainsString(
+            '本周关系练习',
+            (string) data_get($relationshipsTryThisWeek, 'payload.blocks.1.text', '')
         );
     }
 }
