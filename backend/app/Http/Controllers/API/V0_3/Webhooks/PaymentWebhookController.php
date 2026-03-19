@@ -8,6 +8,7 @@ use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\PaymentWebhookProcessor;
+use App\Services\Payments\PaymentProviderRegistry;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -25,6 +26,7 @@ final class PaymentWebhookController extends Controller
 
     public function __construct(
         private PaymentWebhookProcessor $processor,
+        private PaymentProviderRegistry $paymentProviders,
     ) {}
 
     public function handle(Request $request, string $provider): Response
@@ -403,21 +405,7 @@ final class PaymentWebhookController extends Controller
 
     private function isProviderEnabled(string $provider): bool
     {
-        $provider = strtolower(trim($provider));
-        if ($provider === '') {
-            return false;
-        }
-
-        if ($provider === 'stub') {
-            return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
-        }
-
-        $enabled = config("payments.providers.{$provider}.enabled");
-        if ($enabled !== null) {
-            return (bool) $enabled;
-        }
-
-        return in_array($provider, ['stripe', 'billing'], true);
+        return $this->paymentProviders->isEnabled($provider);
     }
 
     /**

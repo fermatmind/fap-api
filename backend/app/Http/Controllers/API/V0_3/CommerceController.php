@@ -181,6 +181,7 @@ class CommerceController extends Controller
             'currency' => $order->currency ?? null,
             'provider' => $payment['provider'],
             'payment_recovery_token' => $paymentRecoveryToken,
+            'wait_url' => $recoveryUrls['wait_url'],
             'result_url' => $recoveryUrls['result_url'],
             'pay' => $payment['pay'],
             'checkout_url' => $payment['checkout_url'],
@@ -469,10 +470,21 @@ class CommerceController extends Controller
 
         $delivery = $this->buildOrderDelivery($order);
         $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
+        $paymentRecoveryToken = $status === 'pending'
+            ? $this->orders->issuePaymentRecoveryToken($order)
+            : null;
+        $recoveryUrls = $paymentRecoveryToken !== null
+            ? $this->orders->presentPaymentRecoveryUrls(
+                $order,
+                $paymentRecoveryToken,
+                $this->resolveRequestedLocale($request)
+            )
+            : ['wait_url' => null, 'result_url' => $delivery['delivery']['result_url'] ?? null];
         $payment = $this->buildOrderPaymentPayload(
             $request,
             $order,
-            $status === 'pending'
+            $status === 'pending',
+            $paymentRecoveryToken
         );
 
         $payload = [
@@ -481,6 +493,9 @@ class CommerceController extends Controller
             'status' => $status,
             'attempt_id' => $delivery['attempt_id'],
             'provider' => $payment['provider'],
+            'payment_recovery_token' => $paymentRecoveryToken,
+            'wait_url' => $recoveryUrls['wait_url'],
+            'result_url' => $recoveryUrls['result_url'],
             'pay' => $payment['pay'],
             'checkout_url' => $payment['checkout_url'],
             'delivery' => $delivery['delivery'],

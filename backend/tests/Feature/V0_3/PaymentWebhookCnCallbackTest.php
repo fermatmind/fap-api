@@ -142,6 +142,47 @@ final class PaymentWebhookCnCallbackTest extends TestCase
         $response->assertJsonPath('error_code', 'INVALID_SIGNATURE');
     }
 
+    public function test_alipay_auto_enabled_configuration_is_accepted_by_webhook_boundary(): void
+    {
+        $files = $this->createTempCertFiles(4);
+
+        try {
+            config([
+                'payments.providers.alipay.enabled' => false,
+                'payments.providers.alipay.auto_enable_when_configured' => true,
+                'pay.alipay.default.app_id' => 'alipay_auto_enabled_001',
+                'pay.alipay.default.merchant_private_key_path' => $files[0],
+                'pay.alipay.default.app_public_cert_path' => $files[1],
+                'pay.alipay.default.alipay_public_cert_path' => $files[2],
+                'pay.alipay.default.alipay_root_cert_path' => $files[3],
+            ]);
+
+            $processor = Mockery::mock(PaymentWebhookProcessor::class);
+            $processor->shouldNotReceive('process');
+            $this->app->instance(PaymentWebhookProcessor::class, $processor);
+
+            $response = $this->call(
+                'POST',
+                '/api/v0.3/webhooks/payment/alipay',
+                [
+                    'out_trade_no' => 'ord_alipay_invalid_auto_enabled',
+                    'trade_status' => 'TRADE_SUCCESS',
+                ],
+                [],
+                [],
+                [
+                    'CONTENT_TYPE' => 'application/x-www-form-urlencoded',
+                    'HTTP_ACCEPT' => 'application/json',
+                ]
+            );
+
+            $response->assertStatus(400);
+            $response->assertJsonPath('error_code', 'INVALID_SIGNATURE');
+        } finally {
+            $this->cleanupTempFiles($files);
+        }
+    }
+
     public function test_alipay_valid_callback_calls_processor_and_returns_success_ack(): void
     {
         ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
@@ -287,5 +328,36 @@ final class PaymentWebhookCnCallbackTest extends TestCase
         }
 
         return base64_encode($signature);
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function createTempCertFiles(int $count): array
+    {
+        $files = [];
+        for ($index = 0; $index < $count; $index++) {
+            $path = tempnam(sys_get_temp_dir(), 'payment_webhook_cn_');
+            if (! is_string($path) || trim($path) === '') {
+                self::fail('failed to create temporary cert file.');
+            }
+
+            file_put_contents($path, 'dummy-cert-'.$index);
+            $files[] = $path;
+        }
+
+        return $files;
+    }
+
+    /**
+     * @param  array<int, string>  $files
+     */
+    private function cleanupTempFiles(array $files): void
+    {
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                @unlink($file);
+            }
+        }
     }
 }

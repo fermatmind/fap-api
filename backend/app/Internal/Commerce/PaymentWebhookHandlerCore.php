@@ -22,6 +22,7 @@ use App\Services\Email\EmailOutboxService;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
+use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Referral\ReferralRewardService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportSnapshotStore;
@@ -1572,21 +1573,7 @@ class PaymentWebhookHandlerCore
 
     private function isProviderEnabled(string $provider): bool
     {
-        $provider = strtolower(trim($provider));
-        if ($provider === '') {
-            return false;
-        }
-
-        if ($provider === 'stub') {
-            return $this->isStubEnabled();
-        }
-
-        $configured = config("payments.providers.{$provider}.enabled");
-        if ($configured !== null) {
-            return (bool) $configured;
-        }
-
-        return in_array($provider, ['stripe', 'billing'], true);
+        return app(PaymentProviderRegistry::class)->isEnabled($provider);
     }
 
     public function normalizeResultStatus(array $result): array

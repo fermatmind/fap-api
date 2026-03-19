@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Ops;
 
+use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Payments\PaymentRouter;
 
 class GoLiveGateService
 {
     public function __construct(
         private PaymentRouter $paymentRouter,
+        private PaymentProviderRegistry $paymentProviders,
     ) {}
 
     /**
@@ -144,29 +146,7 @@ class GoLiveGateService
      */
     private function enabledPaymentProviders(): array
     {
-        $providers = [];
-        $configured = config('payments.providers', []);
-        if (! is_array($configured)) {
-            return $providers;
-        }
-
-        foreach ($configured as $provider => $providerConfig) {
-            if (! is_string($provider)) {
-                continue;
-            }
-
-            $provider = strtolower(trim($provider));
-            if ($provider === '') {
-                continue;
-            }
-
-            $enabled = (bool) (is_array($providerConfig) ? ($providerConfig['enabled'] ?? false) : false);
-            if ($enabled) {
-                $providers[] = $provider;
-            }
-        }
-
-        return array_values(array_unique($providers));
+        return $this->paymentProviders->enabledProviders();
     }
 
     private function paymentPolicy(): string
@@ -286,8 +266,10 @@ class GoLiveGateService
         }
 
         $certFailures = [];
-        if (! $this->isReadableCertInput($alipay['merchant_private_key_path'] ?? null)) {
-            $certFailures[] = 'merchant_private_key_path';
+        $hasMerchantPrivateKey = trim((string) ($alipay['merchant_private_key'] ?? '')) !== ''
+            || $this->isReadableCertInput($alipay['merchant_private_key_path'] ?? null);
+        if (! $hasMerchantPrivateKey) {
+            $certFailures[] = 'merchant_private_key_or_path';
         }
         if (! $this->isReadableCertInput($alipay['app_public_cert_path'] ?? null)) {
             $certFailures[] = 'app_public_cert_path';

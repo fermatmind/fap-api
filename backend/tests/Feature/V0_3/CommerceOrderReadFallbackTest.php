@@ -131,6 +131,7 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonPath('status', 'pending')
             ->assertJsonPath('attempt_id', $attemptId)
             ->assertJsonPath('payment_recovery_token', $token)
+            ->assertJsonPath('wait_url', "https://web.example.test/en/pay/wait?order_no={$orderNo}&payment_recovery_token={$token}")
             ->assertJsonPath('result_url', "https://web.example.test/en/result/{$attemptId}")
             ->assertJsonPath('provider', 'alipay')
             ->assertJsonPath('pay.type', 'html')
@@ -185,7 +186,10 @@ final class CommerceOrderReadFallbackTest extends TestCase
         $this->insertOrderForOwner($orderNo);
 
         $token = app(PaymentRecoveryToken::class)->issue($orderNo);
-        $tampered = substr($token, 0, -1).(str_ends_with($token, 'a') ? 'b' : 'a');
+        [$payloadSegment, $signatureSegment] = explode('.', $token, 2);
+        $tampered = $payloadSegment.'.'
+            .(str_starts_with($signatureSegment, 'a') ? 'b' : 'a')
+            .substr($signatureSegment, 1);
 
         $response = $this->getJson('/api/v0.3/orders/'.$orderNo.'?payment_recovery_token='.urlencode($tampered));
 

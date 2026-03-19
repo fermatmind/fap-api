@@ -282,6 +282,36 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $this->assertStringContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
     }
 
+    public function test_checkout_cn_mainland_prefers_alipay_when_primary_provider_override_is_enabled(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.wechatpay.enabled' => true,
+            'payments.providers.alipay.enabled' => true,
+            'payments.primary_provider_overrides.CN_MAINLAND' => 'alipay',
+            'app.url' => 'http://localhost:8000',
+        ]);
+
+        $wechatMock = Mockery::mock(WechatPayCheckoutService::class);
+        $wechatMock->shouldReceive('createCheckoutAction')->never();
+        $this->app->instance(WechatPayCheckoutService::class, $wechatMock);
+
+        $response = $this->checkout([
+            'sku' => 'MBTI_CREDIT',
+            'email' => 'alipay-override@example.com',
+            'attempt_id' => 'attempt_alipay_override_001',
+        ], [
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'X-Region' => 'CN_MAINLAND',
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('provider', 'alipay');
+        $response->assertJsonPath('pay.type', 'html');
+        $this->assertStringContainsString('/pay/alipay?scene=desktop', (string) $response->json('pay.value'));
+    }
+
     public function test_checkout_legacy_billing_remains_compatible_without_pay_action(): void
     {
         $this->seedCommerce();
@@ -411,6 +441,38 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('pay.type', 'qr');
         $response->assertJsonPath('pay.value', 'weixin://wxpay/bizpayurl?pr=lookup_include_payment_action');
         $response->assertJsonPath('checkout_url', null);
+    }
+
+    public function test_lookup_pending_alipay_returns_recovery_contract_and_tokenized_launch_url_after_email_match(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'app.url' => 'http://localhost:8000',
+            'app.frontend_url' => 'https://web.example.test',
+        ]);
+
+        $orderNo = 'ord_lookup_alipay_payment_action_1';
+        $anonId = 'anon_lookup_alipay_payment_action_1';
+        $this->insertAttempt('attempt_'.$orderNo, $anonId, 'zh-CN');
+        $this->insertPendingOrder($orderNo, 'alipay', $anonId, 'buyer-alipay@example.com');
+
+        $response = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => 'buyer-alipay@example.com',
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('order_no', $orderNo);
+        $response->assertJsonPath('status', 'pending');
+        $response->assertJsonPath('provider', 'alipay');
+        $response->assertJsonPath('pay.type', 'html');
+        $response->assertJsonPath('checkout_url', null);
+        $response->assertJsonPath('result_url', 'https://web.example.test/zh/result/attempt_'.$orderNo);
+        $this->assertNotSame('', (string) $response->json('payment_recovery_token'));
+        $this->assertStringContainsString('/zh/pay/wait', (string) $response->json('wait_url'));
+        $this->assertStringContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
     }
 
     public function test_get_order_reuses_cached_payment_action_from_checkout_when_gateway_is_not_reinvoked(): void

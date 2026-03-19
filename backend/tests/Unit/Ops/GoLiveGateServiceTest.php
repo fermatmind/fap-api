@@ -79,6 +79,32 @@ final class GoLiveGateServiceTest extends TestCase
         }
     }
 
+    public function test_auto_enabled_alipay_is_checked_by_gate_and_accepts_inline_private_key(): void
+    {
+        $this->setPaymentProviders([]);
+        $files = $this->createTempCertFiles(3);
+
+        try {
+            config([
+                'ops.go_live_gate.payment_policy' => 'enabled_only',
+                'ops.go_live_gate.payment_refund_drill_ok' => true,
+                'payments.providers.alipay.enabled' => false,
+                'payments.providers.alipay.auto_enable_when_configured' => true,
+                'pay.alipay.default.app_id' => 'alipay_auto_enabled_001',
+                'pay.alipay.default.merchant_private_key' => "-----BEGIN PRIVATE KEY-----\ninline-test\n-----END PRIVATE KEY-----",
+                'pay.alipay.default.app_public_cert_path' => $files[0],
+                'pay.alipay.default.alipay_public_cert_path' => $files[1],
+                'pay.alipay.default.alipay_root_cert_path' => $files[2],
+                'pay.alipay.default.notify_url' => 'https://api.fermatmind.com/api/v0.3/webhooks/payment/alipay',
+            ]);
+
+            $checks = $this->paymentChecksByKey();
+            $this->assertTrue((bool) ($checks['provider_alipay_configured']['passed'] ?? false));
+        } finally {
+            $this->cleanupTempFiles($files);
+        }
+    }
+
     public function test_stripe_disabled_does_not_block_payment_group_checks(): void
     {
         $this->setPaymentProviders(['lemonsqueezy']);
@@ -98,18 +124,21 @@ final class GoLiveGateServiceTest extends TestCase
         $this->assertTrue((bool) ($checks['provider_lemonsqueezy_configured']['passed'] ?? false));
     }
 
-    public function test_region_availability_checks_fail_when_no_provider_is_enabled(): void
+    public function test_region_availability_checks_still_reflect_registry_fallback_when_no_provider_is_explicitly_enabled(): void
     {
         $this->setPaymentProviders([]);
         config([
             'ops.go_live_gate.payment_policy' => 'enabled_only',
             'ops.go_live_gate.payment_refund_drill_ok' => true,
+            'payments.providers.wechatpay.auto_enable_when_configured' => false,
+            'payments.providers.alipay.auto_enable_when_configured' => false,
         ]);
 
         $checks = $this->paymentChecksByKey();
-        $this->assertFalse((bool) ($checks['region_cn_provider_available']['passed'] ?? true));
-        $this->assertFalse((bool) ($checks['region_us_provider_available']['passed'] ?? true));
-        $this->assertFalse((bool) ($checks['region_eu_provider_available']['passed'] ?? true));
+        $this->assertTrue((bool) ($checks['region_cn_provider_available']['passed'] ?? false));
+        $this->assertTrue((bool) ($checks['region_us_provider_available']['passed'] ?? false));
+        $this->assertTrue((bool) ($checks['region_eu_provider_available']['passed'] ?? false));
+        $this->assertArrayHasKey('provider_billing_configured', $checks);
     }
 
     /**
