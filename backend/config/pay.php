@@ -2,6 +2,25 @@
 
 declare(strict_types=1);
 
+$alipayMerchantPrivateKey = trim((string) env('ALIPAY_MERCHANT_PRIVATE_KEY', ''));
+$alipayMerchantPrivateKeyPath = trim((string) env(
+    'ALIPAY_MERCHANT_PRIVATE_KEY_PATH',
+    storage_path('app/cert/alipay/app_private_key.pem')
+));
+$resolvedAlipayPrivateKey = $alipayMerchantPrivateKey;
+
+if (
+    $resolvedAlipayPrivateKey === ''
+    && $alipayMerchantPrivateKeyPath !== ''
+    && is_file($alipayMerchantPrivateKeyPath)
+    && is_readable($alipayMerchantPrivateKeyPath)
+) {
+    $loadedAlipayPrivateKey = file_get_contents($alipayMerchantPrivateKeyPath);
+    $resolvedAlipayPrivateKey = is_string($loadedAlipayPrivateKey)
+        ? trim($loadedAlipayPrivateKey)
+        : '';
+}
+
 return [
     'wechat' => [
         'default' => [
@@ -31,11 +50,9 @@ return [
     'alipay' => [
         'default' => [
             'app_id' => env('ALIPAY_APP_ID', ''),
-            'merchant_private_key' => env('ALIPAY_MERCHANT_PRIVATE_KEY', ''),
-            'merchant_private_key_path' => env(
-                'ALIPAY_MERCHANT_PRIVATE_KEY_PATH',
-                storage_path('app/cert/alipay/app_private_key.pem')
-            ),
+            'merchant_private_key' => $alipayMerchantPrivateKey,
+            'merchant_private_key_path' => $alipayMerchantPrivateKeyPath,
+            'app_secret_cert' => $resolvedAlipayPrivateKey,
             'app_public_cert_path' => env(
                 'ALIPAY_APP_PUBLIC_CERT',
                 storage_path('app/cert/alipay/appCertPublicKey.crt')
