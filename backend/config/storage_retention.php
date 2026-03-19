@@ -10,6 +10,7 @@ return [
         'keep_days' => (int) env('STORAGE_RETENTION_RELEASES_DAYS', 180),
     ],
     'logs' => [
+        // PR-13A only aligns logging.daily fallback to this policy; no prune job consumes it yet.
         'keep_days' => (int) env('STORAGE_RETENTION_LOGS_DAYS', 30),
     ],
     'rotation_audits' => [

@@ -1,0 +1,30 @@
+{
+  "search.exclude": {
+    "backend/storage/logs/**": true,
+    "backend/storage/framework/**": true,
+    "backend/storage/app/private/reports/**": true,
+    "backend/storage/app/private/artifacts/**": true,
+    "backend/storage/app/private/content_releases/**": true,
+    "backend/storage/app/private/content_packs_cache/**": true,
+    "backend/storage/app/private/migration_plans/**": true,
+    "backend/storage/app/private/packs_v2/**": true,
+    "backend/storage/app/private/private/**": true,
+    "backend/storage/app/private/prune_plans/**": true,
+    "backend/storage/app/content_packs_v2/**": true,
+    "backend/storage/app/archives/**": true
+  },
+  "files.watcherExclude": {
+    "backend/storage/logs/**": true,
+    "backend/storage/framework/**": true,
+    "backend/storage/app/private/reports/**": true,
+    "backend/storage/app/private/artifacts/**": true,
+    "backend/storage/app/private/content_releases/**": true,
+    "backend/storage/app/private/content_packs_cache/**": true,
+    "backend/storage/app/private/migration_plans/**": true,
+    "backend/storage/app/private/packs_v2/**": true,
+    "backend/storage/app/private/private/**": true,
+    "backend/storage/app/private/prune_plans/**": true,
+    "backend/storage/app/content_packs_v2/**": true,
+    "backend/storage/app/archives/**": true
+  }
+}
