@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Storage;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -17,9 +18,23 @@ final class StoragePruneDoesNotDeleteCanonicalTest extends TestCase
     /** @var list<string> */
     private array $preExistingPlans = [];
 
+    private string $isolatedStoragePath;
+
+    private string $originalStoragePath;
+
+    private string $originalLocalRoot;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->originalStoragePath = $this->app->storagePath();
+        $this->originalLocalRoot = (string) config('filesystems.disks.local.root');
+        $this->isolatedStoragePath = sys_get_temp_dir().'/fap-storage-prune-canonical-'.Str::uuid();
+        File::ensureDirectoryExists($this->isolatedStoragePath.'/app/private');
+        $this->app->useStoragePath($this->isolatedStoragePath);
+        config()->set('filesystems.disks.local.root', $this->isolatedStoragePath.'/app/private');
+        Storage::forgetDisk('local');
 
         $this->attemptId = (string) Str::uuid();
         $this->attemptDir = storage_path('app/private/reports/'.$this->attemptId);
@@ -46,6 +61,15 @@ final class StoragePruneDoesNotDeleteCanonicalTest extends TestCase
             if (is_file($planPath)) {
                 @unlink($planPath);
             }
+        }
+
+        Storage::forgetDisk('local');
+        $this->app->useStoragePath($this->originalStoragePath);
+        config()->set('filesystems.disks.local.root', $this->originalLocalRoot);
+        Storage::forgetDisk('local');
+
+        if (is_dir($this->isolatedStoragePath)) {
+            File::deleteDirectory($this->isolatedStoragePath);
         }
 
         parent::tearDown();
