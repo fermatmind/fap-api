@@ -62,6 +62,12 @@ final readonly class MbtiReportAuthoritySourceAdapter implements MbtiPublicResul
                 'career.summary' => [
                     'body' => $this->extractFirstCardBody($sections['career'] ?? null),
                 ],
+                'career.collaboration_fit' => [
+                    'body' => null,
+                ],
+                'career.work_environment' => [
+                    'body' => null,
+                ],
                 'growth.summary' => [
                     'body' => $this->extractFirstCardBody($sections['growth'] ?? null),
                 ],
@@ -72,6 +78,9 @@ final readonly class MbtiReportAuthoritySourceAdapter implements MbtiPublicResul
                     'body' => $this->extractFirstCardBody($sections['relationships'] ?? null),
                 ],
                 'relationships.communication_style' => [
+                    'body' => null,
+                ],
+                'career.next_step' => [
                     'body' => null,
                 ],
             ],

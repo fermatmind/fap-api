@@ -26,9 +26,12 @@ final class MbtiResultPersonalizationService
         'trait_overview',
         'traits.decision_style',
         'career.summary',
+        'career.collaboration_fit',
+        'career.work_environment',
         'career.advantages',
         'career.weaknesses',
         'career.preferred_roles',
+        'career.next_step',
         'career.upgrade_suggestions',
         'growth.summary',
         'growth.strengths',
@@ -52,9 +55,12 @@ final class MbtiResultPersonalizationService
         'trait_overview' => 'overview',
         'traits.decision_style' => 'decision',
         'career.summary' => 'work',
+        'career.collaboration_fit' => 'communication',
+        'career.work_environment' => 'work',
         'career.advantages' => 'work',
         'career.weaknesses' => 'work',
         'career.preferred_roles' => 'work',
+        'career.next_step' => 'decision',
         'career.upgrade_suggestions' => 'work',
         'growth.summary' => 'growth',
         'growth.strengths' => 'growth',
@@ -143,6 +149,11 @@ final class MbtiResultPersonalizationService
         'boundary' => '边界深解释',
         'identity' => '身份层',
         'scene' => '场景应用',
+        'work_style' => '工作风格桥接',
+        'role_fit' => '角色匹配桥接',
+        'collaboration_fit' => '协作匹配桥接',
+        'work_env' => '工作环境桥接',
+        'career_next_step' => '职业下一步桥接',
         'decision' => '决策场景',
         'stress_recovery' => '压力恢复场景',
         'communication' => '沟通协作场景',
@@ -157,6 +168,11 @@ final class MbtiResultPersonalizationService
         'boundary' => 'Boundary deepening',
         'identity' => 'Identity layer',
         'scene' => 'Scene application',
+        'work_style' => 'Work-style bridge',
+        'role_fit' => 'Role-fit bridge',
+        'collaboration_fit' => 'Collaboration-fit bridge',
+        'work_env' => 'Work-environment bridge',
+        'career_next_step' => 'Career next-step bridge',
         'decision' => 'Decision scene',
         'stress_recovery' => 'Stress recovery scene',
         'communication' => 'Communication scene',
@@ -294,6 +310,11 @@ final class MbtiResultPersonalizationService
         'decision' => '放到决策里，这条主轴会决定你先用哪一种入口缩小范围：{{scene_side_hint}}。',
         'stress_recovery' => '放到压力与恢复里，这条主轴通常会变成你最先启动的自救方式：{{scene_side_hint}}。',
         'communication' => '放到沟通里，这条主轴通常会变成你的起手表达方式：{{scene_side_hint}}。',
+        'work_style' => '放到工作方式上，这条主轴会决定你默认怎么开工、怎么协作、怎么接收反馈：{{scene_side_hint}}。',
+        'role_fit' => '放到岗位匹配上，这条主轴最容易让你在某类角色里快速进入状态：{{scene_side_hint}}。',
+        'collaboration_fit' => '放到团队协作里，这条主轴会决定你更自然的对齐、配合与修正方式：{{scene_side_hint}}。',
+        'work_env' => '放到工作环境里，这条主轴会决定你更需要哪类节奏、边界和反馈方式：{{scene_side_hint}}。',
+        'career_next_step' => '放到职业下一步，这条主轴提示你先去试一个更贴近自己的动作：{{scene_side_hint}}。',
     ];
 
     /**
@@ -308,6 +329,11 @@ final class MbtiResultPersonalizationService
         'decision' => 'In decisions, this axis shapes which entry point you use first to narrow the field: {{scene_side_hint}}.',
         'stress_recovery' => 'In stress and recovery, this axis often becomes the first coping move you activate: {{scene_side_hint}}.',
         'communication' => 'In communication, this axis often becomes your opening expression style: {{scene_side_hint}}.',
+        'work_style' => 'In work style, this axis shapes how you start, collaborate, and receive feedback by default: {{scene_side_hint}}.',
+        'role_fit' => 'In role fit, this axis points to the kinds of roles where you enter high-quality work faster: {{scene_side_hint}}.',
+        'collaboration_fit' => 'In collaboration, this axis shapes the alignment, pacing, and repair moves that feel most natural to you: {{scene_side_hint}}.',
+        'work_env' => 'In work environment fit, this axis shapes the pace, boundaries, and feedback conditions you need most: {{scene_side_hint}}.',
+        'career_next_step' => 'For your next career move, this axis suggests the first experiment worth trying: {{scene_side_hint}}.',
     ];
 
     /**
@@ -474,6 +500,12 @@ final class MbtiResultPersonalizationService
             $dynamicDoc,
             $locale
         );
+        $careerBridgeAuthority = $this->buildCareerBridgeAuthority(
+            $typeCode,
+            $identity,
+            $sceneFingerprint,
+            $sectionVariants
+        );
 
         $variantKeys = [];
         foreach ($sectionVariants as $sectionKey => $variant) {
@@ -481,7 +513,7 @@ final class MbtiResultPersonalizationService
         }
 
         return [
-            'schema_version' => 'mbti.personalization.phase4a.v1',
+            'schema_version' => 'mbti.personalization.phase5a.v1',
             'locale' => $locale,
             'type_code' => $typeCode,
             'identity' => $identity,
@@ -495,6 +527,11 @@ final class MbtiResultPersonalizationService
             'decision_style_keys' => array_values((array) data_get($sceneFingerprint, 'decision.style_keys', [])),
             'stress_recovery_keys' => array_values((array) data_get($sceneFingerprint, 'stress_recovery.style_keys', [])),
             'communication_style_keys' => array_values((array) data_get($sceneFingerprint, 'communication.style_keys', [])),
+            'work_style_summary' => $careerBridgeAuthority['work_style_summary'],
+            'role_fit_keys' => $careerBridgeAuthority['role_fit_keys'],
+            'collaboration_fit_keys' => $careerBridgeAuthority['collaboration_fit_keys'],
+            'work_env_preference_keys' => $careerBridgeAuthority['work_env_preference_keys'],
+            'career_next_step_keys' => $careerBridgeAuthority['career_next_step_keys'],
             'variant_keys' => $variantKeys,
             'sections' => $sectionVariants,
             'pack_id' => trim((string) ($context['pack_id'] ?? data_get($reportPayload, 'versions.content_pack_id', ''))),
@@ -790,6 +827,7 @@ final class MbtiResultPersonalizationService
             $band = (string) ($primaryAxis['band'] ?? 'clear');
             $styleKey = (string) data_get($sceneFingerprint, $sceneKey.'.style_key', '');
             $templateGroup = $this->templateGroupForSection($sectionKey, $sceneKey);
+            $sceneTemplateKey = $this->sceneTemplateKeyForSection($sectionKey, $sceneKey);
 
             $blocks = [];
             $selectedBlocks = [];
@@ -806,9 +844,9 @@ final class MbtiResultPersonalizationService
                 ];
             }
 
-            $sceneText = $this->resolveSceneText($doc, $templateGroup, $locale, $primaryAxis);
+            $sceneText = $this->resolveSceneText($doc, $sceneTemplateKey, $locale, $primaryAxis);
             if ($sceneText !== '') {
-                $sceneBlockKind = $this->sceneBlockKind($sceneKey);
+                $sceneBlockKind = $this->sceneBlockKind($sceneKey, $sectionKey);
                 $blockId = sprintf('%s.%s.%s.%s', $sectionKey, $sceneBlockKind, $axisCode, $side);
                 $selectedBlocks[] = $blockId;
                 $blocks[] = [
@@ -874,6 +912,141 @@ final class MbtiResultPersonalizationService
         }
 
         return $sectionVariants;
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $sceneFingerprint
+     * @param  array<string, array<string, mixed>>  $sectionVariants
+     * @return array{
+     *   work_style_summary:string,
+     *   role_fit_keys:list<string>,
+     *   collaboration_fit_keys:list<string>,
+     *   work_env_preference_keys:list<string>,
+     *   career_next_step_keys:list<string>
+     * }
+     */
+    private function buildCareerBridgeAuthority(
+        string $typeCode,
+        string $identity,
+        array $sceneFingerprint,
+        array $sectionVariants
+    ): array {
+        $workStyleKeys = array_values((array) data_get($sceneFingerprint, 'work.style_keys', []));
+        $communicationStyleKeys = array_values((array) data_get($sceneFingerprint, 'communication.style_keys', []));
+        $decisionStyleKeys = array_values((array) data_get($sceneFingerprint, 'decision.style_keys', []));
+        $roleFitKeys = $this->remapStyleKeys($workStyleKeys, 'role_fit');
+        $roleCluster = $this->resolveRoleCluster($typeCode);
+        if ($roleCluster !== '') {
+            array_unshift($roleFitKeys, sprintf('role_fit.role.%s', $roleCluster));
+        }
+
+        $workEnvPreferenceKeys = $this->remapStyleKeys($workStyleKeys, 'work_env');
+        $workPrimaryAxis = data_get($sceneFingerprint, 'work.primary_axis');
+        if (is_array($workPrimaryAxis)) {
+            $primaryAxisCode = trim((string) ($workPrimaryAxis['axis'] ?? ''));
+            $primarySide = trim((string) ($workPrimaryAxis['side'] ?? ''));
+            if ($primaryAxisCode === 'EI') {
+                $workEnvPreferenceKeys[] = sprintf(
+                    'work_env.preference.%s',
+                    $primarySide === 'E' ? 'high_collaboration' : 'deep_focus'
+                );
+            }
+
+            if ($primaryAxisCode === 'JP') {
+                $workEnvPreferenceKeys[] = sprintf(
+                    'work_env.preference.%s',
+                    $primarySide === 'J' ? 'structured_rhythm' : 'adaptive_rhythm'
+                );
+            }
+        }
+
+        $workBoundaryAxis = trim((string) data_get($sceneFingerprint, 'work.boundary_axes.0', ''));
+        if ($workBoundaryAxis !== '') {
+            $workEnvPreferenceKeys[] = sprintf('work_env.boundary.%s', $workBoundaryAxis);
+        }
+
+        $collaborationFitKeys = $this->remapStyleKeys($communicationStyleKeys, 'collaboration_fit');
+        foreach ((array) data_get($sceneFingerprint, 'decision.boundary_axes', []) as $axisCode) {
+            $axisCode = trim((string) $axisCode);
+            if ($axisCode === '') {
+                continue;
+            }
+
+            $collaborationFitKeys[] = sprintf('collaboration_fit.decision_boundary.%s', $axisCode);
+        }
+
+        $careerNextStepKeys = $this->remapStyleKeys($decisionStyleKeys, 'career_next_step');
+        $careerNextStepKeys[] = sprintf(
+            'career_next_step.theme.%s',
+            $this->resolveCareerNextStepTheme($sceneFingerprint, $sectionVariants)
+        );
+        if ($identity !== '') {
+            $careerNextStepKeys[] = sprintf('career_next_step.identity.%s', $identity);
+        }
+
+        return [
+            'work_style_summary' => trim((string) data_get($sceneFingerprint, 'work.summary', '')),
+            'role_fit_keys' => array_values(array_unique(array_filter($roleFitKeys))),
+            'collaboration_fit_keys' => array_values(array_unique(array_filter($collaborationFitKeys))),
+            'work_env_preference_keys' => array_values(array_unique(array_filter($workEnvPreferenceKeys))),
+            'career_next_step_keys' => array_values(array_unique(array_filter($careerNextStepKeys))),
+        ];
+    }
+
+    /**
+     * @param  list<string>  $styleKeys
+     * @return list<string>
+     */
+    private function remapStyleKeys(array $styleKeys, string $prefix): array
+    {
+        $keys = [];
+
+        foreach ($styleKeys as $styleKey) {
+            $normalized = trim((string) $styleKey);
+            if ($normalized === '') {
+                continue;
+            }
+
+            $parts = explode('.', $normalized);
+            array_shift($parts);
+            $keys[] = implode('.', array_filter(array_merge([$prefix], $parts)));
+        }
+
+        return array_values(array_unique(array_filter($keys)));
+    }
+
+    private function resolveRoleCluster(string $typeCode): string
+    {
+        $baseType = strtoupper((string) preg_replace('/-(A|T)$/', '', trim($typeCode)));
+        if (strlen($baseType) < 4) {
+            return '';
+        }
+
+        $cluster = substr($baseType, 1, 2);
+
+        return in_array($cluster, ['SJ', 'SP', 'NF', 'NT'], true) ? $cluster : '';
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $sceneFingerprint
+     * @param  array<string, array<string, mixed>>  $sectionVariants
+     */
+    private function resolveCareerNextStepTheme(array $sceneFingerprint, array $sectionVariants): string
+    {
+        $focusAxis = trim((string) (
+            data_get($sectionVariants, 'career.next_step.boundary_axes.0')
+            ?? data_get($sceneFingerprint, 'decision.boundary_axes.0')
+            ?? data_get($sceneFingerprint, 'work.boundary_axes.0')
+            ?? ''
+        ));
+
+        return match ($focusAxis) {
+            'JP' => 'make_rhythm_visible',
+            'TF' => 'clarify_decision_criteria',
+            'EI' => 'protect_energy_lanes',
+            'SN' => 'turn_insight_into_evidence',
+            default => 'repeat_high_fit_experiment',
+        };
     }
 
     /**
@@ -989,13 +1162,32 @@ final class MbtiResultPersonalizationService
         };
     }
 
-    private function sceneBlockKind(string $sceneKey): string
+    private function sceneTemplateKeyForSection(string $sectionKey, string $sceneKey): string
     {
-        return match ($sceneKey) {
+        return match ($sectionKey) {
+            'career.summary' => 'work_style',
+            'career.preferred_roles' => 'role_fit',
+            'career.collaboration_fit' => 'collaboration_fit',
+            'career.work_environment' => 'work_env',
+            'career.next_step' => 'career_next_step',
+            default => $this->templateGroupForSection($sectionKey, $sceneKey),
+        };
+    }
+
+    private function sceneBlockKind(string $sceneKey, string $sectionKey): string
+    {
+        return match ($sectionKey) {
+            'career.summary' => 'work_style',
+            'career.preferred_roles' => 'role_fit',
+            'career.collaboration_fit' => 'collaboration_fit',
+            'career.work_environment' => 'work_env',
+            'career.next_step' => 'career_next_step',
+            default => match ($sceneKey) {
             'decision' => 'decision',
             'stress_recovery' => 'stress_recovery',
             'communication' => 'communication',
             default => 'scene',
+            },
         };
     }
 
