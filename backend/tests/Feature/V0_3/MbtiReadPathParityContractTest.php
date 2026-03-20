@@ -57,9 +57,12 @@ final class MbtiReadPathParityContractTest extends TestCase
         $effectiveReportPersonalization = (array) $response->getData(true)['report']['_meta']['personalization'];
         $effectiveProjectionPersonalization = (array) $response->getData(true)['mbti_public_projection_v1']['_meta']['personalization'];
         $readContract = (array) data_get($effectiveReportPersonalization, 'read_contract_v1', []);
+        $privacyContract = (array) data_get($effectiveReportPersonalization, 'privacy_contract_v1', []);
 
         $this->assertSame('mbti.read_contract.v1', $readContract['version'] ?? null);
         $this->assertSame($readContract, (array) ($response->getData(true)['mbti_read_contract_v1'] ?? []));
+        $this->assertSame('mbti.privacy_contract.v1', $privacyContract['version'] ?? null);
+        $this->assertSame($privacyContract, (array) ($response->getData(true)['mbti_privacy_contract_v1'] ?? []));
 
         foreach ((array) data_get($readContract, 'canonical_read_model.personalization_fields', []) as $field) {
             $this->assertSame(

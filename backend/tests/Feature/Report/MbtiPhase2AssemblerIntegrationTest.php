@@ -117,6 +117,14 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'mbti.read_contract.v1',
             data_get($payload, 'report._meta.personalization.read_contract_v1.version')
         );
+        $this->assertSame(
+            'mbti.privacy_contract.v1',
+            data_get($payload, 'report._meta.personalization.privacy_contract_v1.version')
+        );
+        $this->assertSame(
+            true,
+            data_get($payload, 'report._meta.personalization.privacy_contract_v1.consent_scope.subject_export')
+        );
         $this->assertContains(
             'user_state',
             data_get($payload, 'report._meta.personalization.read_contract_v1.overlay_patch.personalization_fields', [])
@@ -371,6 +379,10 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertSame(
             data_get($roundTrippedReport, '_meta.personalization.read_contract_v1'),
             data_get($projection, '_meta.personalization.read_contract_v1')
+        );
+        $this->assertSame(
+            data_get($roundTrippedReport, '_meta.personalization.privacy_contract_v1'),
+            data_get($projection, '_meta.personalization.privacy_contract_v1')
         );
         $this->assertSame(
             data_get($roundTrippedReport, '_meta.personalization.ordered_recommendation_keys'),

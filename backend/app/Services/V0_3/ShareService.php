@@ -7,6 +7,7 @@ use App\Models\PersonalityProfile;
 use App\Models\Result;
 use App\Models\Share;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\Mbti\MbtiPrivacyConsentContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Report\ReportAccess;
@@ -25,6 +26,7 @@ class ShareService
         private readonly ReportComposer $reportComposer,
         private readonly ScaleRegistry $scaleRegistry,
         private readonly PersonalityProfileService $personalityProfileService,
+        private readonly MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
     ) {}
@@ -639,6 +641,7 @@ class ShareService
         $readContract = is_array(data_get($publicSafeReport, '_meta.personalization.read_contract_v1'))
             ? data_get($publicSafeReport, '_meta.personalization.read_contract_v1')
             : null;
+        $privacyContract = $this->extractMbtiPrivacyContract($publicSafeReport, $attempt, $locale);
         $payload = [
             'share_id' => $resolvedShareId !== '' ? $resolvedShareId : null,
             'share_url' => $resolvedShareId !== '' ? $this->buildLocalizedShareUrl($resolvedShareId, $locale) : null,
@@ -668,6 +671,9 @@ class ShareService
 
         if (is_array($readContract)) {
             $payload['mbti_read_contract_v1'] = $readContract;
+        }
+        if ($privacyContract !== []) {
+            $payload['mbti_privacy_contract_v1'] = $privacyContract;
         }
 
         if ($compareEnabled) {
@@ -781,5 +787,25 @@ class ShareService
 
             return $value !== null;
         });
+    }
+
+    /**
+     * @param  array<string, mixed>  $report
+     * @return array<string, mixed>
+     */
+    private function extractMbtiPrivacyContract(array $report, Attempt $attempt, string $locale): array
+    {
+        $personalization = is_array(data_get($report, '_meta.personalization'))
+            ? data_get($report, '_meta.personalization')
+            : [];
+        if ($personalization === []) {
+            return [];
+        }
+
+        return $this->mbtiPrivacyConsentContractService->buildContract($personalization, [
+            'region' => (string) ($attempt->region ?? config('regions.default_region', 'CN_MAINLAND')),
+            'locale' => $locale,
+            'public_safe' => true,
+        ]);
     }
 }

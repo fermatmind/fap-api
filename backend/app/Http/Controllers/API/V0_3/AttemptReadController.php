@@ -12,6 +12,7 @@ use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
+use App\Services\Mbti\MbtiPrivacyConsentContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
@@ -39,6 +40,7 @@ class AttemptReadController extends Controller
         private AttemptSubmissionService $attemptSubmissionService,
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
+        private MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private MbtiUserStateOrchestrationService $mbtiUserStateOrchestrationService,
@@ -352,6 +354,10 @@ class AttemptReadController extends Controller
             if (is_array($readContract)) {
                 $responsePayload['mbti_read_contract_v1'] = $readContract;
             }
+            $privacyContract = data_get($responsePayload, 'report._meta.personalization.privacy_contract_v1');
+            if (is_array($privacyContract)) {
+                $responsePayload['mbti_privacy_contract_v1'] = $privacyContract;
+            }
         }
 
         $mbtiEventMeta = $scaleCode === 'MBTI'
@@ -573,6 +579,13 @@ class AttemptReadController extends Controller
             'continuity' => is_array($personalization['continuity'] ?? null) ? $personalization['continuity'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
+
+        $privacyContract = is_array($personalization['privacy_contract_v1'] ?? null)
+            ? $personalization['privacy_contract_v1']
+            : [];
+        if ($privacyContract !== []) {
+            $meta = array_merge($meta, $this->mbtiPrivacyConsentContractService->buildTelemetryConsentMeta($privacyContract));
+        }
 
         return array_filter($meta, static function (mixed $value): bool {
             if (is_string($value)) {
