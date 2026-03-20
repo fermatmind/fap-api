@@ -12,7 +12,10 @@ final class ContentLintService
 {
     private const CARD_ACCESS_LEVELS = ['free', 'preview', 'paid'];
 
-    public function __construct(private readonly TemplateLintService $templateLint)
+    public function __construct(
+        private readonly TemplateLintService $templateLint,
+        private readonly MbtiContentGovernanceService $mbtiGovernance,
+    )
     {
     }
 
@@ -22,10 +25,7 @@ final class ContentLintService
     public function lintAll(?string $packId = null): array
     {
         $packs = $this->discoverPacks();
-        if (is_string($packId) && trim($packId) !== '') {
-            $packId = trim($packId);
-            $packs = array_values(array_filter($packs, fn (array $pack): bool => (string) ($pack['pack_id'] ?? '') === $packId));
-        }
+        $packs = $this->selectPacks($packs, $packId);
 
         $results = [];
         $ok = true;
@@ -41,6 +41,34 @@ final class ContentLintService
             'ok' => $ok,
             'packs' => $results,
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $packs
+     * @return list<array<string,mixed>>
+     */
+    private function selectPacks(array $packs, ?string $packId): array
+    {
+        if (! is_string($packId) || trim($packId) === '') {
+            return $packs;
+        }
+
+        $packId = trim($packId);
+        $matches = array_values(array_filter(
+            $packs,
+            fn (array $pack): bool => (string) ($pack['pack_id'] ?? '') === $packId
+        ));
+
+        if (count($matches) <= 1) {
+            return $matches;
+        }
+
+        $governedMatches = array_values(array_filter(
+            $matches,
+            fn (array $pack): bool => $this->mbtiGovernance->appliesTo($pack)
+        ));
+
+        return count($governedMatches) === 1 ? $governedMatches : $matches;
     }
 
     /**
@@ -153,6 +181,10 @@ final class ContentLintService
                     }
                 }
             }
+        }
+
+        if ($this->mbtiGovernance->appliesTo($pack)) {
+            $errors = array_merge($errors, $this->mbtiGovernance->lintPack($pack));
         }
 
         return [
