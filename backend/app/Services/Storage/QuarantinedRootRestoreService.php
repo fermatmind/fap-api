@@ -15,6 +15,8 @@ final class QuarantinedRootRestoreService
 
     private const V2_MIRROR_SOURCE_KIND = 'v2.mirror';
 
+    private const V2_PRIMARY_SOURCE_KIND = 'v2.primary';
+
     private const PLAN_SCHEMA = 'storage_restore_quarantined_root_plan.v1';
 
     private const RUN_SCHEMA = 'storage_restore_quarantined_root_run.v1';
@@ -242,7 +244,7 @@ final class QuarantinedRootRestoreService
         }
 
         $sourceKind = trim((string) ($sentinel['source_kind'] ?? ''));
-        if (! in_array($sourceKind, [self::LEGACY_SOURCE_KIND, self::V2_MIRROR_SOURCE_KIND], true)) {
+        if (! in_array($sourceKind, [self::LEGACY_SOURCE_KIND, self::V2_MIRROR_SOURCE_KIND, self::V2_PRIMARY_SOURCE_KIND], true)) {
             throw new \RuntimeException('restore source_kind is not allowed.');
         }
 
@@ -334,7 +336,7 @@ final class QuarantinedRootRestoreService
                 $validation['linked_release_runtime_source_matches_target'] = $resolvedSource === null
                     ? null
                     : true;
-            } else {
+            } elseif ($sourceKind === self::V2_MIRROR_SOURCE_KIND) {
                 if ($resolvedSource === null) {
                     throw new \RuntimeException('linked release currently does not resolve to a stable runtime root.');
                 }
@@ -342,6 +344,14 @@ final class QuarantinedRootRestoreService
                 $resolvedRuntimeRoot = $this->normalizeRoot((string) ($resolvedSource['root'] ?? ''));
                 if ($resolvedRuntimeRoot === $targetRoot) {
                     throw new \RuntimeException('linked release currently resolves to the mirror target.');
+                }
+                $validation['linked_release_runtime_source_preserved'] = true;
+            } else {
+                if ($resolvedSource !== null) {
+                    $resolvedRuntimeRoot = $this->normalizeRoot((string) ($resolvedSource['root'] ?? ''));
+                    if (! in_array($resolvedRuntimeRoot, $candidateRoots, true)) {
+                        throw new \RuntimeException('linked release currently resolves outside the V2 runtime root set.');
+                    }
                 }
                 $validation['linked_release_runtime_source_preserved'] = true;
             }
@@ -482,6 +492,7 @@ final class QuarantinedRootRestoreService
         string $releaseId
     ): void {
         $contentReleasesRoot = $this->normalizeRoot(storage_path('app/private/content_releases'));
+        $privatePacksV2Root = $this->normalizeRoot(storage_path('app/private/packs_v2'));
         $contentPacksV2Root = $this->normalizeRoot(storage_path('app/content_packs_v2'));
         $backupsRoot = $this->normalizeRoot(storage_path('app/private/content_releases/backups'));
         $defaultRoot = $this->normalizeRoot(rtrim((string) config('content_packs.root', ''), '/\\'));
@@ -510,6 +521,22 @@ final class QuarantinedRootRestoreService
             $contentReleasesPattern = '#^'.preg_quote($contentReleasesRoot, '#').'/[^/]+/source_pack$#';
             if (preg_match($contentReleasesPattern, $targetRoot) !== 1) {
                 throw new \RuntimeException('restore target must match legacy content_releases/{release_id}/source_pack shape.');
+            }
+        } elseif ($sourceKind === self::V2_PRIMARY_SOURCE_KIND) {
+            if (! $this->isUnderPrefix($targetRoot, $privatePacksV2Root)) {
+                throw new \RuntimeException('restore target is outside the V2 primary allowlist.');
+            }
+
+            if ($packId === '' || $packVersion === '' || $releaseId === '') {
+                throw new \RuntimeException('restore target is missing V2 primary identity context.');
+            }
+
+            $primaryPattern = '#^'.preg_quote($privatePacksV2Root, '#')
+                .'/'.preg_quote($packId, '#')
+                .'/'.preg_quote($packVersion, '#')
+                .'/'.preg_quote($releaseId, '#').'$#';
+            if (preg_match($primaryPattern, $targetRoot) !== 1) {
+                throw new \RuntimeException('restore target must match V2 primary private/packs_v2/{pack_id}/{pack_version}/{release_id} shape.');
             }
         } elseif ($sourceKind === self::V2_MIRROR_SOURCE_KIND) {
             if (! $this->isUnderPrefix($targetRoot, $contentPacksV2Root)) {

@@ -17,6 +17,7 @@ final class ExactRootQuarantineService
     private const ALLOWED_SOURCE_KINDS = [
         'legacy.source_pack',
         'v2.mirror',
+        'v2.primary',
     ];
 
     private const PLAN_SCHEMA = 'storage_quarantine_exact_roots_plan.v1';
@@ -371,7 +372,7 @@ final class ExactRootQuarantineService
             ];
         }
 
-        if ($sourceKind === 'v2.mirror' && $releaseId !== '') {
+        if (in_array($sourceKind, ['v2.mirror', 'v2.primary'], true) && $releaseId !== '') {
             $release = DB::table('content_pack_releases')->where('id', $releaseId)->first();
             if (! $release) {
                 return [
@@ -383,12 +384,17 @@ final class ExactRootQuarantineService
             }
 
             $runtimeTruth = $this->v2RuntimeTruth->inspectRelease($release, $disk);
-            if (! (bool) ($runtimeTruth['runtime_safe_if_mirror_removed'] ?? false)) {
+            $runtimeSafe = $sourceKind === 'v2.primary'
+                ? (bool) ($runtimeTruth['runtime_safe_if_primary_removed'] ?? false)
+                : (bool) ($runtimeTruth['runtime_safe_if_mirror_removed'] ?? false);
+            if (! $runtimeSafe) {
                 return [
                     'status' => 'blocked',
                     'entry' => $baseEntry + [
-                        'reason' => 'v2_runtime_not_safe_if_mirror_removed',
-                        'detail' => (string) ($runtimeTruth['reason'] ?? 'V2 mirror removal is not runtime safe.'),
+                        'reason' => $sourceKind === 'v2.primary'
+                            ? 'v2_runtime_not_safe_if_primary_removed'
+                            : 'v2_runtime_not_safe_if_mirror_removed',
+                        'detail' => (string) ($runtimeTruth['reason'] ?? sprintf('V2 %s removal is not runtime safe.', $sourceKind === 'v2.primary' ? 'primary' : 'mirror')),
                     ],
                 ];
             }
