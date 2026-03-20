@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Storage;
 
 use App\Models\ContentReleaseExactManifest;
+use App\Services\Content\ContentPackV2RuntimeTruthService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -23,6 +24,7 @@ final class ExactRootQuarantineService
     public function __construct(
         private readonly ExactReleaseRehydrateService $rehydrateService,
         private readonly ReleaseStorageLocator $releaseStorageLocator,
+        private readonly ContentPackV2RuntimeTruthService $v2RuntimeTruth,
     ) {}
 
     /**
@@ -367,6 +369,29 @@ final class ExactRootQuarantineService
                     'missing_locations' => $missingLocations,
                 ],
             ];
+        }
+
+        if ($sourceKind === 'v2.mirror' && $releaseId !== '') {
+            $release = DB::table('content_pack_releases')->where('id', $releaseId)->first();
+            if (! $release) {
+                return [
+                    'status' => 'blocked',
+                    'entry' => $baseEntry + [
+                        'reason' => 'linked_release_missing',
+                    ],
+                ];
+            }
+
+            $runtimeTruth = $this->v2RuntimeTruth->inspectRelease($release, $disk);
+            if (! (bool) ($runtimeTruth['runtime_safe_if_mirror_removed'] ?? false)) {
+                return [
+                    'status' => 'blocked',
+                    'entry' => $baseEntry + [
+                        'reason' => 'v2_runtime_not_safe_if_mirror_removed',
+                        'detail' => (string) ($runtimeTruth['reason'] ?? 'V2 mirror removal is not runtime safe.'),
+                    ],
+                ];
+            }
         }
 
         return [

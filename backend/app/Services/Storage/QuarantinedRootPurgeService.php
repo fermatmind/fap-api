@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Storage;
 
 use App\Models\ContentReleaseExactManifest;
+use App\Services\Content\ContentPackV2RuntimeTruthService;
 use Illuminate\Support\Facades\File;
 
 final class QuarantinedRootPurgeService
@@ -24,6 +25,7 @@ final class QuarantinedRootPurgeService
     public function __construct(
         private readonly QuarantinedRootRestoreService $restoreService,
         private readonly ExactReleaseRehydrateService $rehydrateService,
+        private readonly ContentPackV2RuntimeTruthService $v2RuntimeTruth,
     ) {}
 
     /**
@@ -312,11 +314,38 @@ final class QuarantinedRootPurgeService
         }
         $validation['exact_child_rows_exist'] = true;
 
+        $releaseId = trim((string) ($manifest->content_pack_release_id ?? ''));
+        $runtimeTruth = null;
+        if ($sourceKind === 'v2.mirror' && $releaseId !== '') {
+            $release = \Illuminate\Support\Facades\DB::table('content_pack_releases')->where('id', $releaseId)->first();
+            if (! $release) {
+                throw new \RuntimeException('linked release row is missing.');
+            }
+
+            $runtimeTruth = $this->v2RuntimeTruth->inspectRelease($release, $disk);
+            if (! (bool) ($runtimeTruth['runtime_safe_if_mirror_removed'] ?? false)) {
+                throw new \RuntimeException('v2 mirror removal is not runtime safe: '.(string) ($runtimeTruth['reason'] ?? 'runtime guard blocked'));
+            }
+            $validation['v2_runtime_safe_if_mirror_removed'] = true;
+        }
+
         $restorePlan = $this->restoreService->buildPlan($itemRoot);
         if (($restorePlan['status'] ?? '') !== 'planned') {
-            throw new \RuntimeException('restore dry-run is blocked: '.(string) ($restorePlan['blocked_reason'] ?? 'restore blocked.'));
+            $restoreBlockedReason = (string) ($restorePlan['blocked_reason'] ?? 'restore blocked.');
+            $canBypassRestoreStableRootCheck = $sourceKind === 'v2.mirror'
+                && is_array($runtimeTruth)
+                && (bool) ($runtimeTruth['runtime_safe_if_mirror_removed'] ?? false)
+                && $restoreBlockedReason === 'linked release currently does not resolve to a stable runtime root.';
+
+            if (! $canBypassRestoreStableRootCheck) {
+                throw new \RuntimeException('restore dry-run is blocked: '.$restoreBlockedReason);
+            }
+
+            $validation['restore_dry_run_plannable'] = false;
+            $validation['restore_dry_run_equivalent_via_runtime_truth'] = true;
+        } else {
+            $validation['restore_dry_run_plannable'] = true;
         }
-        $validation['restore_dry_run_plannable'] = true;
 
         $rehydratePlan = $this->rehydrateService->buildPlan($exactManifestId, null, $disk);
         $missingLocations = (int) data_get($rehydratePlan, 'summary.missing_locations', 0);

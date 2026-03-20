@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Storage;
 
+use App\Services\Content\ContentPackV2Resolver;
 use App\Services\Storage\ExactReleaseFileSetCatalogService;
 use App\Services\Storage\ExactRootQuarantineService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -206,6 +207,51 @@ final class ExactRootQuarantineServiceTest extends TestCase
         $this->assertFileExists($fixture['primary_root'].'/compiled/payload.compiled.json');
         $this->assertFileExists((string) ($quarantinedEntry['target_root'] ?? '').'/.quarantine.json');
         $this->assertSame($fixture['storage_path'], (string) DB::table('content_pack_releases')->where('id', $fixture['release_id'])->value('storage_path'));
+    }
+
+    public function test_service_blocks_v2_mirror_quarantine_when_primary_is_missing_and_remote_fallback_is_unavailable(): void
+    {
+        $fixture = $this->seedV2MirrorQuarantineFixture('v2_mirror_primary_missing_blocked');
+        File::deleteDirectory($fixture['primary_root']);
+
+        $service = app(ExactRootQuarantineService::class);
+        $plan = $service->buildPlan('s3');
+
+        $blockedEntry = collect((array) ($plan['blocked'] ?? []))
+            ->firstWhere('exact_manifest_id', $fixture['exact_manifest_id']);
+
+        $this->assertIsArray($blockedEntry);
+        $this->assertSame('v2_runtime_not_safe_if_mirror_removed', (string) ($blockedEntry['reason'] ?? ''));
+        $this->assertSame('PACKS2_REMOTE_REHYDRATE_DISABLED', (string) ($blockedEntry['detail'] ?? ''));
+        $this->assertDirectoryExists($fixture['mirror_root']);
+        $this->assertDirectoryDoesNotExist(storage_path('app/private/packs_v2_materialized'));
+    }
+
+    public function test_service_allows_v2_mirror_quarantine_when_primary_is_missing_and_remote_fallback_is_available(): void
+    {
+        config()->set('storage_rollout.packs_v2_remote_rehydrate_enabled', true);
+
+        $fixture = $this->seedV2MirrorQuarantineFixture('v2_mirror_primary_missing_remote_ok');
+        File::deleteDirectory($fixture['primary_root']);
+
+        $service = app(ExactRootQuarantineService::class);
+        $plan = $service->buildPlan('s3');
+
+        $candidate = collect((array) ($plan['candidates'] ?? []))
+            ->firstWhere('exact_manifest_id', $fixture['exact_manifest_id']);
+        $this->assertIsArray($candidate);
+
+        $result = $service->executePlan($plan);
+        $quarantinedEntry = collect((array) ($result['quarantined'] ?? []))
+            ->firstWhere('exact_manifest_id', $fixture['exact_manifest_id']);
+        $this->assertIsArray($quarantinedEntry);
+        $this->assertDirectoryDoesNotExist($fixture['mirror_root']);
+
+        /** @var ContentPackV2Resolver $resolver */
+        $resolver = app(ContentPackV2Resolver::class);
+        $resolved = $resolver->resolveCompiledPathByManifestHash('BIG5_OCEAN', 'v1', $fixture['manifest_hash']);
+        $expectedMaterializedDir = storage_path('app/private/packs_v2_materialized/BIG5_OCEAN/v1/'.hash('sha256', $fixture['storage_path']).'/'.$fixture['manifest_hash'].'/compiled');
+        $this->assertSame($expectedMaterializedDir, $resolved);
     }
 
     public function test_service_rejects_tampered_plan_source_path_without_moving_arbitrary_directory(): void

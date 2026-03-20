@@ -137,6 +137,51 @@ final class QuarantinedRootPurgeServiceTest extends TestCase
         $this->assertDirectoryDoesNotExist(storage_path('app/private/blobs'));
     }
 
+    public function test_service_blocks_v2_mirror_purge_when_primary_is_missing_and_remote_fallback_is_unavailable(): void
+    {
+        $fixture = $this->quarantineV2MirrorFixture('purge_v2_mirror_primary_missing_blocked');
+        File::deleteDirectory($fixture['primary_root']);
+
+        $service = app(QuarantinedRootPurgeService::class);
+        $plan = $service->buildPlan($fixture['item_root'], 's3');
+
+        $this->assertSame('blocked', (string) ($plan['status'] ?? ''));
+        $this->assertSame(
+            'v2 mirror removal is not runtime safe: PACKS2_REMOTE_REHYDRATE_DISABLED',
+            (string) ($plan['blocked_reason'] ?? '')
+        );
+        $this->assertDirectoryExists($fixture['item_root']);
+        $this->assertDirectoryDoesNotExist(storage_path('app/private/packs_v2_materialized'));
+    }
+
+    public function test_service_purges_v2_mirror_when_primary_is_missing_and_remote_fallback_is_available(): void
+    {
+        config()->set('storage_rollout.packs_v2_remote_rehydrate_enabled', true);
+
+        $fixture = $this->quarantineV2MirrorFixture('purge_v2_mirror_primary_missing_remote_ok');
+        File::deleteDirectory($fixture['primary_root']);
+
+        $service = app(QuarantinedRootPurgeService::class);
+        $plan = $service->buildPlan($fixture['item_root'], 's3');
+
+        $this->assertSame('planned', (string) ($plan['status'] ?? ''));
+        $this->assertSame('v2.mirror', (string) ($plan['source_kind'] ?? ''));
+
+        $result = $service->executePlan($plan, $fixture['item_root']);
+        $this->assertSame('success', (string) ($result['status'] ?? ''));
+        $this->assertDirectoryDoesNotExist($fixture['item_root']);
+        $this->assertFileExists((string) ($result['run_dir'] ?? '').'/run.json');
+        $this->assertFileExists((string) ($result['receipt_path'] ?? ''));
+
+        /** @var ContentPackV2Resolver $resolver */
+        $resolver = app(ContentPackV2Resolver::class);
+        $resolved = $resolver->resolveCompiledPathByManifestHash('BIG5_OCEAN', 'v1', $fixture['manifest_hash']);
+        $expectedMaterializedDir = storage_path('app/private/packs_v2_materialized/BIG5_OCEAN/v1/'.hash('sha256', 'private/packs_v2/BIG5_OCEAN/v1/'.$fixture['release_id']).'/'.$fixture['manifest_hash'].'/compiled');
+        $this->assertSame($expectedMaterializedDir, $resolved);
+        $this->assertDirectoryDoesNotExist(storage_path('app/private/blobs'));
+        $this->assertSame(0, DB::table('content_pack_activations')->count());
+    }
+
     public function test_service_blocks_when_sentinel_or_exact_authority_or_remote_coverage_is_missing(): void
     {
         $fixture = $this->quarantineLegacySourcePackFixture('purge_blocked_sentinel');
