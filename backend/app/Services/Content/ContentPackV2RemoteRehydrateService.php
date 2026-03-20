@@ -118,6 +118,47 @@ final class ContentPackV2RemoteRehydrateService
         }
     }
 
+    /**
+     * @return array{
+     *   available:bool,
+     *   exact_manifest_id:int,
+     *   exact_identity_hash:string,
+     *   source_kind:string,
+     *   manifest_hash:string,
+     *   reason:?string
+     * }
+     */
+    public function probeRemoteFallback(object $release, string $disk): array
+    {
+        $disk = trim($disk);
+        if ($disk === '') {
+            throw new RuntimeException('PACKS2_REMOTE_REHYDRATE_DISK_REQUIRED');
+        }
+
+        $exactManifest = $this->resolveExactManifest($release);
+        $plan = $this->rehydrateService->buildPlan((int) $exactManifest->getKey(), null, $disk);
+        if ((int) data_get($plan, 'summary.missing_locations', 0) > 0) {
+            throw new RuntimeException('PACKS2_REMOTE_REHYDRATE_REMOTE_COVERAGE_INCOMPLETE');
+        }
+
+        /** @var Collection<int,array<string,mixed>> $files */
+        $files = collect(is_array($plan['files'] ?? null) ? $plan['files'] : [])
+            ->filter(static fn ($file): bool => is_array($file))
+            ->values();
+        if ($files->isEmpty()) {
+            throw new RuntimeException('PACKS2_REMOTE_REHYDRATE_PLAN_EMPTY');
+        }
+
+        return [
+            'available' => true,
+            'exact_manifest_id' => (int) $exactManifest->getKey(),
+            'exact_identity_hash' => (string) $exactManifest->exact_identity_hash,
+            'source_kind' => (string) $exactManifest->source_kind,
+            'manifest_hash' => strtolower(trim((string) $exactManifest->manifest_hash)),
+            'reason' => null,
+        ];
+    }
+
     private function resolveExactManifest(object $release): ContentReleaseExactManifest
     {
         $releaseId = trim((string) ($release->id ?? ''));
