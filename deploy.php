@@ -243,6 +243,9 @@ task('ensure:healthz-deps', function () {
     run("mkdir -p {$base}/app/content-packs");
     run("chmod 2775 {$base}/app/content-packs");
 
+    run("mkdir -p {$base}/app/private/packs_v2_materialized");
+    run("chmod 2775 {$base}/app/private/packs_v2_materialized");
+
     run("mkdir -p {$base}/framework/cache {$base}/framework/sessions {$base}/framework/views {$base}/logs");
     run("chmod 2775 {$base}/framework/cache {$base}/framework/sessions {$base}/framework/views {$base}/logs");
 });

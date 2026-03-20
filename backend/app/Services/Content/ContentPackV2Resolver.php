@@ -5,9 +5,15 @@ declare(strict_types=1);
 namespace App\Services\Content;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 final class ContentPackV2Resolver
 {
+    public function __construct(
+        private readonly ContentPackV2Materializer $materializer,
+    ) {}
+
     public function resolveActiveCompiledPath(string $packId, string $packVersion): ?string
     {
         $packId = strtoupper(trim($packId));
@@ -85,11 +91,32 @@ final class ContentPackV2Resolver
         foreach ($roots as $root) {
             $compiledDir = is_dir($root.'/compiled') ? $root.'/compiled' : $root;
             if (is_file($compiledDir.'/manifest.json')) {
-                return $compiledDir;
+                if (! $this->shouldMaterialize()) {
+                    return $compiledDir;
+                }
+
+                try {
+                    return $this->materializer->materialize($release, $compiledDir);
+                } catch (Throwable $e) {
+                    Log::warning('PACKS2_RESOLVER_MATERIALIZATION_FAILED', [
+                        'release_id' => trim((string) ($release->id ?? '')),
+                        'manifest_hash' => strtolower(trim((string) ($release->manifest_hash ?? ''))),
+                        'storage_path' => $storagePath,
+                        'source_compiled_dir' => $compiledDir,
+                        'error' => $e->getMessage(),
+                    ]);
+
+                    return $compiledDir;
+                }
             }
         }
 
         return null;
+    }
+
+    private function shouldMaterialize(): bool
+    {
+        return (bool) config('storage_rollout.resolver_materialization_enabled', false);
     }
 
     /**

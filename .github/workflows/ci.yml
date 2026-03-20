@@ -88,6 +88,7 @@ jobs:
           mkdir -p storage/framework/views
           mkdir -p storage/framework/sessions
           mkdir -p storage/logs
+          mkdir -p storage/app/private/packs_v2_materialized
           mkdir -p bootstrap/cache
           chmod -R ug+rwX storage bootstrap/cache || true
 
