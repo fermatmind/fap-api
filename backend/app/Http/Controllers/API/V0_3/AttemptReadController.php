@@ -14,6 +14,7 @@ use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
+use App\Services\Mbti\MbtiUserStateOrchestrationService;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
@@ -39,6 +40,7 @@ class AttemptReadController extends Controller
         private ReportPdfDocumentService $reportPdfDocumentService,
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
+        private MbtiUserStateOrchestrationService $mbtiUserStateOrchestrationService,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
@@ -132,6 +134,7 @@ class AttemptReadController extends Controller
                 'sections' => is_array($report['sections'] ?? null) ? $report['sections'] : [],
             ];
 
+            $request->merge(['attempt_id' => $attemptId]);
             $this->eventRecorder->recordFromRequest($request, 'result_view', $this->resolveUserId($request), [
                 'scale_code' => $scaleCode,
                 'pack_id' => $packId,
@@ -194,6 +197,7 @@ class AttemptReadController extends Controller
             ? $this->resolveMbtiResultViewEventMeta($request, $result, $attempt, $attemptId)
             : [];
 
+        $request->merge(['attempt_id' => $attemptId]);
         $this->eventRecorder->recordFromRequest($request, 'result_view', $this->resolveUserId($request), [
             'scale_code' => $scaleCode,
             'pack_id' => $packId,
@@ -331,10 +335,24 @@ class AttemptReadController extends Controller
             );
         }
 
-        $mbtiEventMeta = $scaleCode === 'MBTI'
-            ? $this->resolveMbtiEventMetaFromReportEnvelope($result, $attempt, $responsePayload)
+        $effectiveMbtiPersonalization = $scaleCode === 'MBTI'
+            ? $this->resolveEffectiveMbtiPersonalization(
+                $result,
+                $attempt,
+                $responsePayload,
+                ! ((bool) ($gate['locked'] ?? false))
+            )
             : [];
 
+        if ($effectiveMbtiPersonalization !== []) {
+            $responsePayload = $this->applyMbtiPersonalizationToEnvelope($responsePayload, $effectiveMbtiPersonalization);
+        }
+
+        $mbtiEventMeta = $scaleCode === 'MBTI'
+            ? $this->mbtiTelemetryMetaFromPersonalization($effectiveMbtiPersonalization)
+            : [];
+
+        $request->merge(['attempt_id' => (string) $attempt->id]);
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
             'scale_code' => (string) ($attempt->scale_code ?? ''),
             'pack_id' => (string) ($attempt->pack_id ?? ''),
@@ -488,7 +506,12 @@ class AttemptReadController extends Controller
         array $reportEnvelope
     ): array {
         return $this->mbtiTelemetryMetaFromPersonalization(
-            $this->resolveMbtiPersonalizationFromReportEnvelope($result, $attempt, $reportEnvelope)
+            $this->resolveEffectiveMbtiPersonalization(
+                $result,
+                $attempt,
+                $reportEnvelope,
+                ! ((bool) data_get($reportEnvelope, 'locked', false))
+            )
         );
     }
 
@@ -533,6 +556,8 @@ class AttemptReadController extends Controller
             'relationship_action_keys' => is_array($personalization['relationship_action_keys'] ?? null) ? $personalization['relationship_action_keys'] : [],
             'work_experiment_keys' => is_array($personalization['work_experiment_keys'] ?? null) ? $personalization['work_experiment_keys'] : [],
             'watchout_keys' => is_array($personalization['watchout_keys'] ?? null) ? $personalization['watchout_keys'] : [],
+            'user_state' => is_array($personalization['user_state'] ?? null) ? $personalization['user_state'] : [],
+            'orchestration' => is_array($personalization['orchestration'] ?? null) ? $personalization['orchestration'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
 
@@ -592,6 +617,57 @@ class AttemptReadController extends Controller
         $projectionPersonalization = data_get($projection, '_meta.personalization');
 
         return is_array($projectionPersonalization) ? $projectionPersonalization : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $reportEnvelope
+     * @return array<string,mixed>
+     */
+    private function resolveEffectiveMbtiPersonalization(
+        Result $result,
+        Attempt $attempt,
+        array $reportEnvelope,
+        bool $hasUnlock
+    ): array {
+        $personalization = $this->resolveMbtiPersonalizationFromReportEnvelope($result, $attempt, $reportEnvelope);
+        if ($personalization === []) {
+            return [];
+        }
+
+        return $this->mbtiUserStateOrchestrationService->overlayEffective(
+            $personalization,
+            (int) ($attempt->org_id ?? 0),
+            (string) ($attempt->id ?? ''),
+            $hasUnlock
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $reportEnvelope
+     * @param  array<string,mixed>  $personalization
+     * @return array<string,mixed>
+     */
+    private function applyMbtiPersonalizationToEnvelope(array $reportEnvelope, array $personalization): array
+    {
+        if ($personalization === []) {
+            return $reportEnvelope;
+        }
+
+        if (is_array(data_get($reportEnvelope, 'report'))) {
+            $reportMeta = is_array(data_get($reportEnvelope, 'report._meta')) ? data_get($reportEnvelope, 'report._meta') : [];
+            $reportMeta['personalization'] = $personalization;
+            data_set($reportEnvelope, 'report._meta', $reportMeta);
+        }
+
+        if (is_array(data_get($reportEnvelope, 'mbti_public_projection_v1'))) {
+            $projectionMeta = is_array(data_get($reportEnvelope, 'mbti_public_projection_v1._meta'))
+                ? data_get($reportEnvelope, 'mbti_public_projection_v1._meta')
+                : [];
+            $projectionMeta['personalization'] = $personalization;
+            data_set($reportEnvelope, 'mbti_public_projection_v1._meta', $projectionMeta);
+        }
+
+        return $reportEnvelope;
     }
 
     private function isPublicResultScale(string $scaleCode): bool
@@ -693,6 +769,7 @@ class AttemptReadController extends Controller
         $inline = in_array(strtolower(trim((string) $request->query('inline', '0'))), ['1', 'true', 'yes', 'on'], true);
         $disposition = $inline ? 'inline' : 'attachment';
 
+        $request->merge(['attempt_id' => (string) $attempt->id]);
         $this->eventRecorder->recordFromRequest($request, 'report_pdf_view', $this->resolveUserId($request), [
             'scale_code' => (string) ($attempt->scale_code ?? ''),
             'pack_id' => (string) ($attempt->pack_id ?? ''),

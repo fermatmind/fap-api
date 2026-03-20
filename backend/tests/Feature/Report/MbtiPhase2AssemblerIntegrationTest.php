@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase7a.v1',
+            'mbti.personalization.phase7b.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -104,8 +104,23 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase7a.v1',
+            'phase7b.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
+        );
+        $this->assertSame(
+            [
+                'is_first_view' => true,
+                'is_revisit' => false,
+                'has_unlock' => false,
+                'has_feedback' => false,
+                'has_share' => false,
+                'has_action_engagement' => false,
+            ],
+            data_get($payload, 'report._meta.personalization.user_state')
+        );
+        $this->assertSame(
+            'growth.next_actions',
+            data_get($payload, 'report._meta.personalization.orchestration.primary_focus_key')
         );
         $this->assertNotSame(
             '',
@@ -315,12 +330,16 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.try_this_week');
 
         $this->assertSame(
-            'mbti.personalization.phase7a.v1',
+            'mbti.personalization.phase7b.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase7a.v1',
+            'phase7b.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
+        );
+        $this->assertSame(
+            'growth.next_actions',
+            data_get($projection, '_meta.personalization.orchestration.primary_focus_key')
         );
         $this->assertSame(
             'overview:EI.E.clear:identity.T:boundary.none',

@@ -566,6 +566,7 @@ final class MbtiResultPersonalizationService
 
     public function __construct(
         private readonly ContentPacksIndex $packsIndex,
+        private readonly MbtiUserStateOrchestrationService $userStateOrchestrationService,
     ) {
     }
 
@@ -652,8 +653,8 @@ final class MbtiResultPersonalizationService
             $variantKeys[$sectionKey] = (string) ($variant['variant_key'] ?? '');
         }
 
-        return [
-            'schema_version' => 'mbti.personalization.phase7a.v1',
+        return $this->userStateOrchestrationService->withBaseline([
+            'schema_version' => 'mbti.personalization.phase7b.v1',
             'locale' => $locale,
             'type_code' => $typeCode,
             'identity' => $identity,
@@ -688,7 +689,7 @@ final class MbtiResultPersonalizationService
             'engine_version' => trim((string) ($context['engine_version'] ?? data_get($reportPayload, 'versions.engine', ''))),
             'content_package_dir' => trim((string) ($context['dir_version'] ?? data_get($reportPayload, 'versions.dir_version', ''))),
             'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
-        ];
+        ], (bool) ($context['has_unlock'] ?? false));
     }
 
     /**
