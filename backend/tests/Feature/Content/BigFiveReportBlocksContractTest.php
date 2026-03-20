@@ -90,7 +90,24 @@ final class BigFiveReportBlocksContractTest extends TestCase
         $this->assertTrue((bool) ($free['ok'] ?? false));
         $freeSections = (array) data_get($free, 'report.sections', []);
         $freeKeys = array_values(array_map(static fn (array $s): string => (string) ($s['key'] ?? ''), $freeSections));
-        $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'], $freeKeys);
+        $this->assertSame(
+            [
+                'traits.overview',
+                'traits.why_this_profile',
+                'relationships.interpersonal_style',
+                'career.work_style',
+                'growth.next_actions',
+                'disclaimer_top',
+                'summary',
+                'domains_overview',
+                'disclaimer',
+            ],
+            $freeKeys
+        );
+        $this->assertSame('paid', (string) data_get($freeSections, '2.access_level'));
+        $this->assertSame('paid', (string) data_get($freeSections, '3.access_level'));
+        $this->assertSame('paid', (string) data_get($freeSections, '4.access_level'));
+        $this->assertSame('big5.public_projection.v1', (string) data_get($free, 'report._meta.big5_public_projection_v1.schema_version'));
 
         $full = $composer->composeVariant($attempt, $result, ReportAccess::VARIANT_FULL, [
             'modules_allowed' => [
@@ -103,9 +120,24 @@ final class BigFiveReportBlocksContractTest extends TestCase
         $fullSections = (array) data_get($full, 'report.sections', []);
         $fullKeys = array_values(array_map(static fn (array $s): string => (string) ($s['key'] ?? ''), $fullSections));
         $this->assertSame(
-            ['disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
+            [
+                'traits.overview',
+                'traits.why_this_profile',
+                'relationships.interpersonal_style',
+                'career.work_style',
+                'growth.next_actions',
+                'disclaimer_top',
+                'summary',
+                'domains_overview',
+                'facet_table',
+                'top_facets',
+                'facets_deepdive',
+                'action_plan',
+                'disclaimer',
+            ],
             $fullKeys
         );
+        $this->assertSame('big5.public_projection.v1', (string) data_get($full, 'report._meta.big5_public_projection_v1.schema_version'));
 
         $sectionMap = [];
         foreach ($fullSections as $section) {

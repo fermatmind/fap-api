@@ -11,6 +11,7 @@ use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
+use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Mbti\MbtiPrivacyConsentContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
@@ -40,6 +41,7 @@ class AttemptReadController extends Controller
         private AttemptSubmissionService $attemptSubmissionService,
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
+        private BigFivePublicProjectionService $bigFivePublicProjectionService,
         private MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
@@ -197,8 +199,18 @@ class AttemptReadController extends Controller
             $compatScoresPct = [];
         }
 
+        $big5Projection = $scaleCode === 'BIG5_OCEAN'
+            ? $this->bigFivePublicProjectionService->buildFromResult(
+                $result,
+                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
+            )
+            : [];
+
         $mbtiEventMeta = $scaleCode === 'MBTI'
             ? $this->resolveMbtiResultViewEventMeta($request, $result, $attempt, $attemptId)
+            : [];
+        $big5EventMeta = $scaleCode === 'BIG5_OCEAN'
+            ? $this->resolveBigFiveEventMetaFromProjection($big5Projection)
             : [];
 
         $request->merge(['attempt_id' => $attemptId]);
@@ -209,9 +221,10 @@ class AttemptReadController extends Controller
             'type_code' => (string) ($result->type_code ?? ''),
             'attempt_id' => $attemptId,
             ...$mbtiEventMeta,
+            ...$big5EventMeta,
         ]);
 
-        return response()->json([
+        $responsePayload = [
             'ok' => true,
             'attempt_id' => $attemptId,
             'type_code' => $compatTypeCode,
@@ -229,7 +242,12 @@ class AttemptReadController extends Controller
                 'scoring_spec_version' => $scoringSpecVersion,
                 'report_engine_version' => $reportEngineVersion,
             ],
-        ]);
+        ];
+        if ($big5Projection !== []) {
+            $responsePayload['big5_public_projection_v1'] = $big5Projection;
+        }
+
+        return response()->json($responsePayload);
     }
 
     /**
@@ -337,6 +355,17 @@ class AttemptReadController extends Controller
                 $userId !== null ? (string) $userId : null,
                 $anonId
             );
+        } elseif ($scaleCode === 'BIG5_OCEAN') {
+            $projection = data_get($responsePayload, 'report._meta.big5_public_projection_v1');
+            if (! is_array($projection)) {
+                $projection = $this->bigFivePublicProjectionService->buildFromResult(
+                    $result,
+                    (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+                    strtolower(trim((string) ($gate['variant'] ?? 'free'))),
+                    (bool) ($gate['locked'] ?? false)
+                );
+            }
+            $responsePayload['big5_public_projection_v1'] = $projection;
         }
 
         $effectiveMbtiPersonalization = $scaleCode === 'MBTI'
@@ -363,6 +392,9 @@ class AttemptReadController extends Controller
         $mbtiEventMeta = $scaleCode === 'MBTI'
             ? $this->mbtiTelemetryMetaFromPersonalization($effectiveMbtiPersonalization)
             : [];
+        $big5EventMeta = $scaleCode === 'BIG5_OCEAN'
+            ? $this->resolveBigFiveEventMetaFromProjection(is_array($responsePayload['big5_public_projection_v1'] ?? null) ? $responsePayload['big5_public_projection_v1'] : [])
+            : [];
 
         $request->merge(['attempt_id' => (string) $attempt->id]);
         $this->eventRecorder->recordFromRequest($request, 'report_view', $this->resolveUserId($request), [
@@ -373,6 +405,7 @@ class AttemptReadController extends Controller
             'attempt_id' => (string) $attempt->id,
             'locked' => (bool) ($gate['locked'] ?? false),
             ...$mbtiEventMeta,
+            ...$big5EventMeta,
         ]);
 
         return response()->json($responsePayload);
@@ -525,6 +558,32 @@ class AttemptReadController extends Controller
                 ! ((bool) data_get($reportEnvelope, 'locked', false))
             )
         );
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function resolveBigFiveEventMetaFromProjection(array $projection): array
+    {
+        $traitBands = is_array($projection['trait_bands'] ?? null) ? $projection['trait_bands'] : [];
+        $dominantTraits = is_array($projection['dominant_traits'] ?? null) ? $projection['dominant_traits'] : [];
+        $sceneFingerprint = is_array($projection['scene_fingerprint'] ?? null) ? $projection['scene_fingerprint'] : [];
+        $variantKeys = is_array($projection['variant_keys'] ?? null) ? $projection['variant_keys'] : [];
+        $orderedSectionKeys = is_array($projection['ordered_section_keys'] ?? null) ? $projection['ordered_section_keys'] : [];
+
+        return array_filter([
+            'trait_bands' => $traitBands,
+            'dominant_traits' => array_values(array_filter(array_map(
+                static fn (mixed $trait): string => is_array($trait) ? trim((string) ($trait['key'] ?? '')) : '',
+                $dominantTraits
+            ))),
+            'scene_fingerprint' => $sceneFingerprint,
+            'variant_keys' => array_values(array_filter(array_map('strval', $variantKeys))),
+            'ordered_section_keys' => array_values(array_filter(array_map('strval', $orderedSectionKeys))),
+        ], static function (mixed $value): bool {
+            return is_array($value) ? $value !== [] : $value !== null;
+        });
     }
 
     /**
