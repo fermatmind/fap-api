@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase8b.v1',
+            'mbti.personalization.phase8c.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -104,7 +104,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase8b.v1',
+            'phase8c.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
         );
         $this->assertIsArray(data_get($payload, 'report._meta.personalization.ordered_recommendation_keys'));
@@ -121,6 +121,11 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
                 'has_feedback' => false,
                 'has_share' => false,
                 'has_action_engagement' => false,
+                'feedback_sentiment' => 'none',
+                'feedback_coverage' => 'none',
+                'action_completion_tendency' => 'idle',
+                'last_deep_read_section' => '',
+                'current_intent_cluster' => 'default',
             ],
             data_get($payload, 'report._meta.personalization.user_state')
         );
@@ -348,11 +353,11 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.try_this_week');
 
         $this->assertSame(
-            'mbti.personalization.phase8b.v1',
+            'mbti.personalization.phase8c.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase8b.v1',
+            'phase8c.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
