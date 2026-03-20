@@ -654,7 +654,7 @@ final class MbtiResultPersonalizationService
         }
 
         return $this->userStateOrchestrationService->withBaseline([
-            'schema_version' => 'mbti.personalization.phase7b.v1',
+            'schema_version' => 'mbti.personalization.phase8a.v1',
             'locale' => $locale,
             'type_code' => $typeCode,
             'identity' => $identity,

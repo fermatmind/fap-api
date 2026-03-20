@@ -558,6 +558,7 @@ class AttemptReadController extends Controller
             'watchout_keys' => is_array($personalization['watchout_keys'] ?? null) ? $personalization['watchout_keys'] : [],
             'user_state' => is_array($personalization['user_state'] ?? null) ? $personalization['user_state'] : [],
             'orchestration' => is_array($personalization['orchestration'] ?? null) ? $personalization['orchestration'] : [],
+            'continuity' => is_array($personalization['continuity'] ?? null) ? $personalization['continuity'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
 

@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase7b.v1',
+            'mbti.personalization.phase8a.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -104,7 +104,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase7b.v1',
+            'phase8a.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
@@ -121,6 +121,18 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertSame(
             'growth.next_actions',
             data_get($payload, 'report._meta.personalization.orchestration.primary_focus_key')
+        );
+        $this->assertSame(
+            'growth.next_actions',
+            data_get($payload, 'report._meta.personalization.continuity.carryover_focus_key')
+        );
+        $this->assertSame(
+            'unlock_to_continue_focus',
+            data_get($payload, 'report._meta.personalization.continuity.carryover_reason')
+        );
+        $this->assertContains(
+            'weekly_action.theme.name_decision_rule',
+            data_get($payload, 'report._meta.personalization.continuity.carryover_action_keys', [])
         );
         $this->assertNotSame(
             '',
@@ -330,16 +342,20 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.try_this_week');
 
         $this->assertSame(
-            'mbti.personalization.phase7b.v1',
+            'mbti.personalization.phase8a.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase7b.v1',
+            'phase8a.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
             'growth.next_actions',
             data_get($projection, '_meta.personalization.orchestration.primary_focus_key')
+        );
+        $this->assertSame(
+            'growth.next_actions',
+            data_get($projection, '_meta.personalization.continuity.carryover_focus_key')
         );
         $this->assertSame(
             'overview:EI.E.clear:identity.T:boundary.none',
