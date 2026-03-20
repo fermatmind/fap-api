@@ -18,6 +18,7 @@ use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Mbti\MbtiUserStateOrchestrationService;
+use App\Services\Mbti\MbtiWorkingLifeConsolidationService;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
@@ -47,6 +48,7 @@ class AttemptReadController extends Controller
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private MbtiUserStateOrchestrationService $mbtiUserStateOrchestrationService,
         private MbtiReadModelContractService $mbtiReadModelContractService,
+        private MbtiWorkingLifeConsolidationService $mbtiWorkingLifeConsolidationService,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
@@ -642,6 +644,10 @@ class AttemptReadController extends Controller
             'supporting_scales' => is_array($personalization['supporting_scales'] ?? null) ? $personalization['supporting_scales'] : [],
             'big5_influence_keys' => is_array($personalization['big5_influence_keys'] ?? null) ? $personalization['big5_influence_keys'] : [],
             'mbti_adjusted_focus_keys' => is_array($personalization['mbti_adjusted_focus_keys'] ?? null) ? $personalization['mbti_adjusted_focus_keys'] : [],
+            'working_life_v1' => is_array($personalization['working_life_v1'] ?? null) ? $personalization['working_life_v1'] : [],
+            'career_focus_key' => trim((string) ($personalization['career_focus_key'] ?? '')),
+            'career_journey_keys' => is_array($personalization['career_journey_keys'] ?? null) ? $personalization['career_journey_keys'] : [],
+            'career_action_priority_keys' => is_array($personalization['career_action_priority_keys'] ?? null) ? $personalization['career_action_priority_keys'] : [],
             'user_state' => is_array($personalization['user_state'] ?? null) ? $personalization['user_state'] : [],
             'orchestration' => is_array($personalization['orchestration'] ?? null) ? $personalization['orchestration'] : [],
             'continuity' => is_array($personalization['continuity'] ?? null) ? $personalization['continuity'] : [],
@@ -735,13 +741,15 @@ class AttemptReadController extends Controller
             $hasUnlock
         );
 
-        return app(\App\Services\Mbti\MbtiBigFiveSynthesisService::class)->attach($effective, [
+        $effective = app(\App\Services\Mbti\MbtiBigFiveSynthesisService::class)->attach($effective, [
             'org_id' => (int) ($attempt->org_id ?? 0),
             'user_id' => $attempt->user_id ?? null,
             'anon_id' => $attempt->anon_id ?? null,
             'attempt_id' => (string) ($attempt->id ?? ''),
             'locale' => (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
         ]);
+
+        return $this->mbtiWorkingLifeConsolidationService->attach($effective);
     }
 
     /**

@@ -86,14 +86,14 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase8c.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase9c.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
-        $this->assertSame('phase8c.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('phase9c.v1', $clear['dynamic_sections_version']);
         $this->assertSame('mbti.privacy_contract.v1', data_get($clear, 'privacy_contract_v1.version'));
         $this->assertSame(true, data_get($clear, 'privacy_contract_v1.consent_scope.subject_export'));
         $this->assertContains(
@@ -202,6 +202,18 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertContains('work_env.preference.high_collaboration', data_get($clear, 'work_env_preference_keys'));
         $this->assertContains('work_env.boundary.JP', data_get($clear, 'work_env_preference_keys'));
         $this->assertContains('career_next_step.theme.clarify_decision_criteria', data_get($clear, 'career_next_step_keys'));
+        $this->assertSame('mbti.working_life.v1', data_get($clear, 'working_life_v1.version'));
+        $this->assertSame('career.next_step', data_get($clear, 'working_life_v1.career_focus_key'));
+        $this->assertSame(
+            ['career.next_step', 'career.work_experiments', 'career.work_environment', 'career.collaboration_fit'],
+            data_get($clear, 'working_life_v1.career_journey_keys')
+        );
+        $this->assertContains('career_bridge', data_get($clear, 'working_life_v1.career_action_priority_keys', []));
+        $this->assertSame('career.next_step', data_get($clear, 'career_focus_key'));
+        $this->assertSame(
+            ['career.next_step', 'career.work_experiments', 'career.work_environment', 'career.collaboration_fit'],
+            data_get($clear, 'career_journey_keys')
+        );
         $this->assertStringContainsString('一周内能重复', (string) ($clear['action_plan_summary'] ?? ''));
         $this->assertContains('weekly_action.theme.name_decision_rule', data_get($clear, 'weekly_action_keys'));
         $this->assertContains('relationship_action.theme.name_decision_rule', data_get($clear, 'relationship_action_keys'));

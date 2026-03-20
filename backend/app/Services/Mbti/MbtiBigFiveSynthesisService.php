@@ -18,6 +18,7 @@ final class MbtiBigFiveSynthesisService
     private const TARGET_SECTION_KEYS = [
         'growth.stability_confidence',
         'growth.next_actions',
+        'career.next_step',
     ];
 
     public function __construct(
@@ -115,11 +116,13 @@ final class MbtiBigFiveSynthesisService
 
         $stabilityEnhancement = $this->buildStabilityEnhancement($neuroticismBand, $locale);
         $actionEnhancement = $this->buildNextActionEnhancement($conscientiousnessBand, $locale);
+        $careerNextStepEnhancement = $this->buildCareerNextStepEnhancement($conscientiousnessBand, $locale);
         $dominantTraits = is_array($big5Projection['dominant_traits'] ?? null) ? $big5Projection['dominant_traits'] : [];
 
         $synthesisKeys = array_values(array_filter([
             (string) ($stabilityEnhancement['synthesis_key'] ?? ''),
             (string) ($actionEnhancement['synthesis_key'] ?? ''),
+            (string) ($careerNextStepEnhancement['synthesis_key'] ?? ''),
         ]));
 
         return [
@@ -139,6 +142,7 @@ final class MbtiBigFiveSynthesisService
             'section_enhancements' => [
                 'growth.stability_confidence' => $stabilityEnhancement,
                 'growth.next_actions' => $actionEnhancement,
+                'career.next_step' => $careerNextStepEnhancement,
             ],
         ];
     }
@@ -264,6 +268,45 @@ final class MbtiBigFiveSynthesisService
 
         return [
             'section_key' => 'growth.next_actions',
+            'supporting_scale' => 'BIG5_OCEAN',
+            'synthesis_key' => $synthesisKey,
+            'title' => $headline,
+            'body' => $body,
+            'influence_keys' => [sprintf('big5.band.c.%s', $band)],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildCareerNextStepEnhancement(string $band, string $locale): array
+    {
+        [$headline, $body, $synthesisKey] = match ($band) {
+            'high' => [
+                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步适合被做成明确里程碑' : 'Big Five add-on: the next career step works best as a milestone',
+                $locale === 'zh-CN'
+                    ? 'Big Five 显示你的尽责性更高，所以职业下一步最适合被写成带时间边界的里程碑：先定一个可交付成果，再把协作对象、截止时间和验证标准一起钉住。'
+                    : 'Your Big Five result points to higher conscientiousness, so the next career step works best when turned into a milestone with a deadline, owner, and proof point.',
+                'big5.career_next_step.high.commit_to_milestone',
+            ],
+            'low' => [
+                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步更适合先降低动作摩擦' : 'Big Five add-on: the next career step benefits from lower friction',
+                $locale === 'zh-CN'
+                    ? 'Big Five 显示你的尽责性更低，所以职业下一步不要设计成又大又抽象的跃迁。更有效的做法是先把动作缩成一次对话、一次投递、一次作品更新或一次环境试探。'
+                    : 'Your Big Five result points to lower conscientiousness, so the next career step should avoid large abstract leaps. A single conversation, application, portfolio update, or environment test will work better.',
+                'big5.career_next_step.low.reduce_activation_friction',
+            ],
+            default => [
+                $locale === 'zh-CN' ? 'Big Five 补充：职业下一步适合轻量而连续地推进' : 'Big Five add-on: the next career step favors steady cadence',
+                $locale === 'zh-CN'
+                    ? 'Big Five 显示你的尽责性位于中段，所以职业下一步最适合保持轻量但连续：每周固定推进一次，比偶尔冲刺更容易积累可见进展。'
+                    : 'Your Big Five result sits in the middle range for conscientiousness, so the next career step works best as a light but repeatable weekly move.',
+                'big5.career_next_step.mid.keep_light_cadence',
+            ],
+        };
+
+        return [
+            'section_key' => 'career.next_step',
             'supporting_scale' => 'BIG5_OCEAN',
             'synthesis_key' => $synthesisKey,
             'title' => $headline,

@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase8c.v1',
+            'mbti.personalization.phase9c.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -104,7 +104,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase8c.v1',
+            'phase9c.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
         );
         $this->assertIsArray(data_get($payload, 'report._meta.personalization.ordered_recommendation_keys'));
@@ -127,6 +127,10 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         );
         $this->assertContains(
             'user_state',
+            data_get($payload, 'report._meta.personalization.read_contract_v1.overlay_patch.personalization_fields', [])
+        );
+        $this->assertContains(
+            'working_life_v1',
             data_get($payload, 'report._meta.personalization.read_contract_v1.overlay_patch.personalization_fields', [])
         );
         $this->assertSame(
@@ -209,6 +213,18 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertContains(
             'career_next_step.theme.clarify_decision_criteria',
             data_get($payload, 'report._meta.personalization.career_next_step_keys', [])
+        );
+        $this->assertSame(
+            'mbti.working_life.v1',
+            data_get($payload, 'report._meta.personalization.working_life_v1.version')
+        );
+        $this->assertSame(
+            'career.next_step',
+            data_get($payload, 'report._meta.personalization.working_life_v1.career_focus_key')
+        );
+        $this->assertContains(
+            'career_bridge',
+            data_get($payload, 'report._meta.personalization.working_life_v1.career_action_priority_keys', [])
         );
         $this->assertNotSame(
             '',
@@ -369,11 +385,11 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.try_this_week');
 
         $this->assertSame(
-            'mbti.personalization.phase8c.v1',
+            'mbti.personalization.phase9c.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase8c.v1',
+            'phase9c.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(

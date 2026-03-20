@@ -37,16 +37,18 @@ final class MbtiBigFiveSynthesisServiceTest extends TestCase
             [
                 'big5.neuroticism.high.buffer_reactivity',
                 'big5.conscientiousness.low.use_external_scaffolding',
+                'big5.career_next_step.low.reduce_activation_friction',
             ],
             $authority['synthesis_keys']
         );
         $this->assertSame(
-            ['growth.stability_confidence', 'growth.next_actions'],
+            ['growth.stability_confidence', 'growth.next_actions', 'career.next_step'],
             $authority['mbti_adjusted_focus_keys']
         );
         $this->assertSame(['N', 'A', 'O'], $authority['supporting_traits']);
         $stability = $authority['section_enhancements']['growth.stability_confidence'] ?? [];
         $nextActions = $authority['section_enhancements']['growth.next_actions'] ?? [];
+        $careerNextStep = $authority['section_enhancements']['career.next_step'] ?? [];
         $this->assertSame(
             'big5.neuroticism.high.buffer_reactivity',
             $stability['synthesis_key'] ?? null
@@ -62,6 +64,14 @@ final class MbtiBigFiveSynthesisServiceTest extends TestCase
         $this->assertStringContainsString(
             '外部提醒',
             (string) ($nextActions['body'] ?? '')
+        );
+        $this->assertSame(
+            'big5.career_next_step.low.reduce_activation_friction',
+            $careerNextStep['synthesis_key'] ?? null
+        );
+        $this->assertStringContainsString(
+            '职业下一步',
+            (string) ($careerNextStep['title'] ?? '')
         );
     }
 }

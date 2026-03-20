@@ -43,8 +43,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
-            $this->assertSame('mbti.personalization.phase8c.v1', (string) ($meta['schema_version'] ?? ''));
-            $this->assertSame('phase8c.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
+            $this->assertSame('mbti.personalization.phase9c.v1', (string) ($meta['schema_version'] ?? ''));
+            $this->assertSame('phase9c.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertIsArray($meta['axis_bands'] ?? null);
             $this->assertSame('boundary', (string) (($meta['axis_bands']['EI'] ?? '')));
             $this->assertSame('boundary', (string) (($meta['axis_bands']['AT'] ?? '')));
@@ -84,6 +84,10 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['collaboration_fit_keys'] ?? null);
             $this->assertIsArray($meta['work_env_preference_keys'] ?? null);
             $this->assertIsArray($meta['career_next_step_keys'] ?? null);
+            $this->assertIsArray($meta['working_life_v1'] ?? null);
+            $this->assertIsString((string) ($meta['career_focus_key'] ?? ''));
+            $this->assertIsArray($meta['career_journey_keys'] ?? null);
+            $this->assertIsArray($meta['career_action_priority_keys'] ?? null);
             $this->assertNotSame('', trim((string) ($meta['action_plan_summary'] ?? '')));
             $this->assertIsArray($meta['weekly_action_keys'] ?? null);
             $this->assertIsArray($meta['relationship_action_keys'] ?? null);
@@ -118,6 +122,7 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['relationship_action_keys'] ?? null, $eventMeta['result_view']['relationship_action_keys'] ?? null);
         $this->assertSame($eventMeta['report_view']['work_experiment_keys'] ?? null, $eventMeta['result_view']['work_experiment_keys'] ?? null);
         $this->assertSame($eventMeta['report_view']['watchout_keys'] ?? null, $eventMeta['result_view']['watchout_keys'] ?? null);
+        $this->assertSame($eventMeta['report_view']['working_life_v1'] ?? null, $eventMeta['result_view']['working_life_v1'] ?? null);
         $this->assertSame($eventMeta['report_view']['privacy_contract_version'] ?? null, $eventMeta['result_view']['privacy_contract_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['consent_scope'] ?? null, $eventMeta['result_view']['consent_scope'] ?? null);
         $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.is_first_view'));
@@ -153,6 +158,12 @@ class MbtiResultTelemetryContractTest extends TestCase
             ['unlock_full_report', 'share_result', 'career_bridge'],
             data_get($eventMeta, 'report_view.orchestration.cta_priority_keys')
         );
+        $this->assertSame('career.work_experiments', data_get($eventMeta, 'result_view.working_life_v1.career_focus_key'));
+        $this->assertSame(
+            ['career.work_experiments', 'career.next_step', 'career.work_environment', 'career.collaboration_fit'],
+            data_get($eventMeta, 'result_view.working_life_v1.career_journey_keys')
+        );
+        $this->assertContains('career_bridge', data_get($eventMeta, 'result_view.working_life_v1.career_action_priority_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.ordered_recommendation_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.recommendation_priority_keys', []));
         $this->assertSame('weekly_action.theme.protect_energy_lane', data_get($eventMeta, 'result_view.action_focus_key'));
