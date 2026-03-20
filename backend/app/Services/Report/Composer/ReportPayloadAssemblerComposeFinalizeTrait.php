@@ -202,6 +202,11 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
                 'dir_version' => $contentPackageDir,
                 'locale' => $locale,
                 'engine_version' => $reportEngineVersion !== '' ? $reportEngineVersion : (string) data_get($reportPayload, 'versions.engine', 'v1.2'),
+                'has_unlock' => in_array(
+                    strtolower(trim((string) ($input['reportAccessLevel'] ?? ''))),
+                    ['paid', 'full'],
+                    true
+                ) || strtolower(trim((string) ($input['variant'] ?? ''))) === 'full',
             ]);
 
             if ($personalization !== []) {

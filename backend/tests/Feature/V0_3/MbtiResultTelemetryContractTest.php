@@ -25,6 +25,7 @@ class MbtiResultTelemetryContractTest extends TestCase
 
         $anonId = 'mbti_phase3a_anon';
         $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $this->seedPhase7bSignals($attemptId);
 
         $resultResponse = $this->invokeController('result', $attemptId, $anonId);
         $this->assertSame(200, $resultResponse->getStatusCode());
@@ -42,8 +43,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
-            $this->assertSame('mbti.personalization.phase7a.v1', (string) ($meta['schema_version'] ?? ''));
-            $this->assertSame('phase7a.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
+            $this->assertSame('mbti.personalization.phase7b.v1', (string) ($meta['schema_version'] ?? ''));
+            $this->assertSame('phase7b.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertIsArray($meta['axis_bands'] ?? null);
             $this->assertSame('boundary', (string) (($meta['axis_bands']['EI'] ?? '')));
             $this->assertSame('boundary', (string) (($meta['axis_bands']['AT'] ?? '')));
@@ -88,6 +89,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['relationship_action_keys'] ?? null);
             $this->assertIsArray($meta['work_experiment_keys'] ?? null);
             $this->assertIsArray($meta['watchout_keys'] ?? null);
+            $this->assertIsArray($meta['user_state'] ?? null);
+            $this->assertIsArray($meta['orchestration'] ?? null);
             $this->assertContains('role_fit.role.NT', $meta['role_fit_keys'] ?? []);
         }
 
@@ -106,6 +109,25 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['relationship_action_keys'] ?? null, $eventMeta['result_view']['relationship_action_keys'] ?? null);
         $this->assertSame($eventMeta['report_view']['work_experiment_keys'] ?? null, $eventMeta['result_view']['work_experiment_keys'] ?? null);
         $this->assertSame($eventMeta['report_view']['watchout_keys'] ?? null, $eventMeta['result_view']['watchout_keys'] ?? null);
+        $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.is_first_view'));
+        $this->assertSame(false, data_get($eventMeta, 'result_view.user_state.is_revisit'));
+        $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.has_share'));
+        $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.has_feedback'));
+        $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.has_action_engagement'));
+        $this->assertSame(false, data_get($eventMeta, 'report_view.user_state.is_first_view'));
+        $this->assertSame(true, data_get($eventMeta, 'report_view.user_state.is_revisit'));
+        $this->assertSame(
+            'growth.stability_confidence',
+            data_get($eventMeta, 'result_view.orchestration.primary_focus_key')
+        );
+        $this->assertSame(
+            'growth.stability_confidence',
+            data_get($eventMeta, 'report_view.orchestration.primary_focus_key')
+        );
+        $this->assertSame(
+            ['unlock_full_report', 'career_bridge', 'share_result'],
+            data_get($eventMeta, 'result_view.orchestration.cta_priority_keys')
+        );
     }
 
     private function seedScales(): void
@@ -245,5 +267,47 @@ class MbtiResultTelemetryContractTest extends TestCase
             });
 
         return $query->orderByDesc('occurred_at')->first();
+    }
+
+    private function seedPhase7bSignals(string $attemptId): void
+    {
+        DB::table('events')->insert([
+            [
+                'id' => (string) Str::uuid(),
+                'event_code' => 'accuracy_feedback',
+                'event_name' => 'accuracy_feedback',
+                'org_id' => 0,
+                'attempt_id' => $attemptId,
+                'meta_json' => json_encode(['sectionKey' => 'growth.stability_confidence'], JSON_UNESCAPED_UNICODE),
+                'occurred_at' => now()->subMinutes(10),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => (string) Str::uuid(),
+                'event_code' => 'ui_card_interaction',
+                'event_name' => 'ui_card_interaction',
+                'org_id' => 0,
+                'attempt_id' => $attemptId,
+                'meta_json' => json_encode([
+                    'sectionKey' => 'growth.next_actions',
+                    'actionKey' => 'weekly_action.theme.name_decision_rule',
+                ], JSON_UNESCAPED_UNICODE),
+                'occurred_at' => now()->subMinutes(9),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        DB::table('shares')->insert([
+            'id' => (string) Str::uuid(),
+            'attempt_id' => $attemptId,
+            'anon_id' => 'mbti_phase3a_anon',
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'content_package_version' => 'v0.3',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

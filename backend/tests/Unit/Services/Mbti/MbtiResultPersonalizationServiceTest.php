@@ -60,14 +60,34 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase7a.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase7b.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
-        $this->assertSame('phase7a.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('phase7b.v1', $clear['dynamic_sections_version']);
+        $this->assertSame(
+            [
+                'is_first_view' => true,
+                'is_revisit' => false,
+                'has_unlock' => false,
+                'has_feedback' => false,
+                'has_share' => false,
+                'has_action_engagement' => false,
+            ],
+            data_get($clear, 'user_state')
+        );
+        $this->assertSame('growth.next_actions', data_get($clear, 'orchestration.primary_focus_key'));
+        $this->assertSame(
+            ['unlock_full_report', 'career_bridge', 'share_result'],
+            data_get($clear, 'orchestration.cta_priority_keys')
+        );
+        $this->assertLessThan(
+            array_search('growth.summary', data_get($clear, 'orchestration.ordered_section_keys', []), true),
+            array_search('growth.next_actions', data_get($clear, 'orchestration.ordered_section_keys', []), true)
+        );
         $this->assertNotSame('', trim((string) ($clear['explainability_summary'] ?? '')));
         $this->assertSame(
             ['ENFJ', 'ENTP'],
