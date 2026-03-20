@@ -36,7 +36,7 @@ class MbtiResultTelemetryContractTest extends TestCase
         $eventMeta = [];
         foreach (['result_view', 'report_view'] as $eventCode) {
             $event = $this->findLatestEventByAttempt($eventCode, $attemptId);
-            $this->assertNotNull($event, 'missing event row: ' . $eventCode);
+            $this->assertNotNull($event, 'missing event row: '.$eventCode);
 
             $meta = json_decode((string) ($event->meta_json ?? '{}'), true) ?: [];
             $eventMeta[$eventCode] = $meta;
@@ -198,9 +198,46 @@ class MbtiResultTelemetryContractTest extends TestCase
         );
     }
 
+    public function test_mbti_report_view_records_experiments_in_public_context_without_org_scope_failures(): void
+    {
+        $this->seedScales();
+        Config::set('fap_experiments.experiments', [
+            'PR23_STICKY_BUCKET' => [
+                'is_active' => true,
+                'variants' => [
+                    'control' => 50,
+                    'variant_a' => 50,
+                ],
+            ],
+        ]);
+
+        $anonId = 'mbti_report_experiment_anon';
+        $attemptId = $this->createMbtiAttemptWithResult($anonId);
+
+        $reportResponse = $this->invokeController('report', $attemptId, $anonId);
+        $this->assertSame(200, $reportResponse->getStatusCode());
+
+        $event = $this->findLatestEventByAttempt('report_view', $attemptId);
+        $this->assertNotNull($event);
+        $experiments = json_decode((string) ($event->experiments_json ?? '{}'), true) ?: [];
+        $this->assertArrayHasKey('PR23_STICKY_BUCKET', $experiments);
+
+        $assignment = DB::table('experiment_assignments')
+            ->where('org_id', 0)
+            ->where('anon_id', $anonId)
+            ->where('experiment_key', 'PR23_STICKY_BUCKET')
+            ->first();
+
+        $this->assertNotNull($assignment);
+        $this->assertSame(
+            (string) data_get($experiments, 'PR23_STICKY_BUCKET'),
+            (string) ($assignment->variant ?? '')
+        );
+    }
+
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     private function createMbtiAttemptWithResult(string $anonId): string
@@ -289,7 +326,7 @@ class MbtiResultTelemetryContractTest extends TestCase
 
     private function invokeController(string $method, string $attemptId, string $anonId): \Illuminate\Http\JsonResponse
     {
-        $path = "/api/v0.3/attempts/{$attemptId}/" . ($method === 'report' ? 'report' : 'result');
+        $path = "/api/v0.3/attempts/{$attemptId}/".($method === 'report' ? 'report' : 'result');
         $request = Request::create($path, 'GET');
         $request->headers->set('X-Anon-Id', $anonId);
         $request->attributes->set('anon_id', $anonId);
@@ -331,7 +368,7 @@ class MbtiResultTelemetryContractTest extends TestCase
                     return;
                 }
 
-                $inner->orWhereRaw('meta_json like ?', ['%"attempt_id":"' . $attemptId . '"%']);
+                $inner->orWhereRaw('meta_json like ?', ['%"attempt_id":"'.$attemptId.'"%']);
             });
 
         return $query->orderByDesc('occurred_at')->first();
