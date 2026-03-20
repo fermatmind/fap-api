@@ -59,6 +59,7 @@ final class ContentPackV2ResolverPathFallbackTest extends TestCase
         $resolved = $resolver->resolveCompiledPathByManifestHash('BIG5_OCEAN', 'v1', $manifestHash);
 
         $this->assertSame($mirrorCompiledDir, $resolved);
+        $this->assertDirectoryDoesNotExist(storage_path('app/private/packs_v2_materialized'));
 
         File::deleteDirectory(storage_path('app/private/packs_v2/BIG5_OCEAN/v1/'.$releaseId));
         File::deleteDirectory(storage_path('app/content_packs_v2/BIG5_OCEAN/v1/'.$releaseId));
