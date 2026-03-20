@@ -253,6 +253,12 @@ class AttemptReadController extends Controller
             if ($controlledNarrative !== []) {
                 $responsePayload['controlled_narrative_v1'] = $controlledNarrative;
             }
+            $culturalCalibration = is_array($big5Projection['cultural_calibration_v1'] ?? null)
+                ? $big5Projection['cultural_calibration_v1']
+                : [];
+            if ($culturalCalibration !== []) {
+                $responsePayload['cultural_calibration_v1'] = $culturalCalibration;
+            }
         }
 
         return response()->json($responsePayload);
@@ -380,6 +386,12 @@ class AttemptReadController extends Controller
             if ($controlledNarrative !== []) {
                 $responsePayload['controlled_narrative_v1'] = $controlledNarrative;
             }
+            $culturalCalibration = is_array($projection['cultural_calibration_v1'] ?? null)
+                ? $projection['cultural_calibration_v1']
+                : [];
+            if ($culturalCalibration !== []) {
+                $responsePayload['cultural_calibration_v1'] = $culturalCalibration;
+            }
         }
 
         $effectiveMbtiPersonalization = $scaleCode === 'MBTI'
@@ -408,6 +420,10 @@ class AttemptReadController extends Controller
             $controlledNarrative = data_get($responsePayload, 'report._meta.personalization.controlled_narrative_v1');
             if (is_array($controlledNarrative)) {
                 $responsePayload['controlled_narrative_v1'] = $controlledNarrative;
+            }
+            $culturalCalibration = data_get($responsePayload, 'report._meta.personalization.cultural_calibration_v1');
+            if (is_array($culturalCalibration)) {
+                $responsePayload['cultural_calibration_v1'] = $culturalCalibration;
             }
             $crossAssessment = data_get($responsePayload, 'report._meta.personalization.cross_assessment_v1');
             if (is_array($crossAssessment)) {
@@ -598,6 +614,7 @@ class AttemptReadController extends Controller
         $variantKeys = is_array($projection['variant_keys'] ?? null) ? $projection['variant_keys'] : [];
         $orderedSectionKeys = is_array($projection['ordered_section_keys'] ?? null) ? $projection['ordered_section_keys'] : [];
         $controlledNarrative = is_array($projection['controlled_narrative_v1'] ?? null) ? $projection['controlled_narrative_v1'] : [];
+        $culturalCalibration = is_array($projection['cultural_calibration_v1'] ?? null) ? $projection['cultural_calibration_v1'] : [];
 
         $meta = [
             'trait_bands' => $traitBands,
@@ -617,6 +634,18 @@ class AttemptReadController extends Controller
             $meta['narrative_model_version'] = trim((string) ($controlledNarrative['model_version'] ?? ''));
             $meta['narrative_prompt_version'] = trim((string) ($controlledNarrative['prompt_version'] ?? ''));
             $meta['narrative_fingerprint'] = trim((string) ($controlledNarrative['narrative_fingerprint'] ?? ''));
+        }
+        if ($culturalCalibration !== []) {
+            $meta['locale_context'] = trim((string) ($culturalCalibration['locale_context'] ?? ''));
+            $meta['cultural_context'] = trim((string) ($culturalCalibration['cultural_context'] ?? ''));
+            $meta['calibrated_section_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($culturalCalibration['calibrated_section_keys'] ?? null) ? $culturalCalibration['calibrated_section_keys'] : []
+            )));
+            $meta['calibration_fingerprint'] = trim((string) ($culturalCalibration['calibration_fingerprint'] ?? ''));
+            $meta['calibration_contract_version'] = trim((string) ($culturalCalibration['calibration_contract_version'] ?? ''));
+            $meta['calibration_policy_version'] = trim((string) ($culturalCalibration['calibration_policy_version'] ?? ''));
+            $meta['calibration_source'] = trim((string) ($culturalCalibration['calibration_source'] ?? ''));
         }
 
         return array_filter($meta, static function (mixed $value): bool {
@@ -683,6 +712,7 @@ class AttemptReadController extends Controller
             'user_state' => is_array($personalization['user_state'] ?? null) ? $personalization['user_state'] : [],
             'orchestration' => is_array($personalization['orchestration'] ?? null) ? $personalization['orchestration'] : [],
             'continuity' => is_array($personalization['continuity'] ?? null) ? $personalization['continuity'] : [],
+            'cultural_calibration_v1' => is_array($personalization['cultural_calibration_v1'] ?? null) ? $personalization['cultural_calibration_v1'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
 
@@ -710,6 +740,22 @@ class AttemptReadController extends Controller
             : [];
         if ($privacyContract !== []) {
             $meta = array_merge($meta, $this->mbtiPrivacyConsentContractService->buildTelemetryConsentMeta($privacyContract));
+        }
+
+        $culturalCalibration = is_array($personalization['cultural_calibration_v1'] ?? null)
+            ? $personalization['cultural_calibration_v1']
+            : [];
+        if ($culturalCalibration !== []) {
+            $meta['locale_context'] = trim((string) ($culturalCalibration['locale_context'] ?? ''));
+            $meta['cultural_context'] = trim((string) ($culturalCalibration['cultural_context'] ?? ''));
+            $meta['calibrated_section_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($culturalCalibration['calibrated_section_keys'] ?? null) ? $culturalCalibration['calibrated_section_keys'] : []
+            )));
+            $meta['calibration_fingerprint'] = trim((string) ($culturalCalibration['calibration_fingerprint'] ?? ''));
+            $meta['calibration_contract_version'] = trim((string) ($culturalCalibration['calibration_contract_version'] ?? ''));
+            $meta['calibration_policy_version'] = trim((string) ($culturalCalibration['calibration_policy_version'] ?? ''));
+            $meta['calibration_source'] = trim((string) ($culturalCalibration['calibration_source'] ?? ''));
         }
 
         return array_filter($meta, static function (mixed $value): bool {

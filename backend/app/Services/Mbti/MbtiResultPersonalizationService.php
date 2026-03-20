@@ -7,6 +7,7 @@ namespace App\Services\Mbti;
 use App\Services\AI\ControlledGenerationRuntime;
 use App\Services\AI\ControlledNarrativeLayerService;
 use App\Services\Content\ContentPacksIndex;
+use App\Services\Content\CulturalCalibrationLayerService;
 
 final class MbtiResultPersonalizationService
 {
@@ -574,6 +575,7 @@ final class MbtiResultPersonalizationService
         private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
         private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
         private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
+        private readonly CulturalCalibrationLayerService $culturalCalibrationLayerService,
         private readonly MbtiReadModelContractService $readModelContractService,
     ) {
     }
@@ -662,7 +664,7 @@ final class MbtiResultPersonalizationService
         }
 
         $personalization = $this->userStateOrchestrationService->withBaseline([
-                'schema_version' => 'mbti.personalization.phase9c.v1',
+                'schema_version' => 'mbti.personalization.phase9e.v1',
                 'locale' => $locale,
                 'type_code' => $typeCode,
                 'identity' => $identity,
@@ -723,7 +725,7 @@ final class MbtiResultPersonalizationService
                 'type_code' => $typeCode,
                 'identity' => $identity,
                 'engine_version' => trim((string) ($context['engine_version'] ?? data_get($reportPayload, 'versions.engine', ''))),
-                'schema_version' => 'mbti.personalization.phase9c.v1',
+                'schema_version' => 'mbti.personalization.phase9e.v1',
                 'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
                 'user_id' => $context['user_id'] ?? null,
                 'anon_id' => $context['anon_id'] ?? null,
@@ -734,6 +736,15 @@ final class MbtiResultPersonalizationService
             is_array($personalization['narrative_runtime_contract_v1'] ?? null)
                 ? $personalization['narrative_runtime_contract_v1']
                 : []
+        );
+        $personalization['cultural_calibration_v1'] = $this->culturalCalibrationLayerService->buildForMbti(
+            $personalization,
+            [
+                'locale' => $locale,
+                'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
+                'pack_id' => trim((string) ($context['pack_id'] ?? data_get($reportPayload, 'versions.content_pack_id', ''))),
+                'dir_version' => trim((string) ($context['dir_version'] ?? data_get($reportPayload, 'versions.dir_version', ''))),
+            ]
         );
 
         return $this->readModelContractService->attachContract($personalization);

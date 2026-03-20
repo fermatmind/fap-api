@@ -14,11 +14,19 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $service = app(MbtiReadModelContractService::class);
 
         $contract = $service->buildContract([
-            'schema_version' => 'mbti.personalization.phase9c.v1',
+            'schema_version' => 'mbti.personalization.phase9e.v1',
             'identity' => 'A',
             'privacy_contract_v1' => ['version' => 'mbti.privacy_contract.v1'],
             'controlled_narrative_v1' => ['version' => 'controlled_narrative.v1', 'runtime_mode' => 'off'],
             'narrative_runtime_contract_v1' => ['version' => 'narrative_runtime_contract.v1', 'runtime_mode' => 'off'],
+            'cultural_calibration_v1' => [
+                'version' => 'cultural_calibration.v1',
+                'locale_context' => 'zh-CN',
+                'cultural_context' => 'CN_MAINLAND.zh-CN',
+                'calibrated_section_keys' => ['growth.next_actions'],
+                'calibration_fingerprint' => 'fixture-calibration',
+                'calibration_contract_version' => 'cultural_calibration.v1',
+            ],
             'variant_keys' => ['overview' => 'overview:clear'],
             'scene_fingerprint' => ['work' => ['style_key' => 'work.primary.EI.E.clear']],
             'user_state' => ['is_first_view' => true],
@@ -35,11 +43,13 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('privacy_contract_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('controlled_narrative_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('narrative_runtime_contract_v1', $contract['canonical_read_model']['personalization_fields']);
+        $this->assertContains('cultural_calibration_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('variant_keys', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('user_state', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('mbti_privacy_contract_v1', $contract['cacheable_fields']);
         $this->assertContains('controlled_narrative_v1', $contract['cacheable_fields']);
         $this->assertContains('narrative_runtime_contract_v1', $contract['cacheable_fields']);
+        $this->assertContains('cultural_calibration_v1', $contract['cacheable_fields']);
         $this->assertSame(
             [
                 'user_state',
@@ -72,6 +82,8 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('continuity.carryover_focus_key', $contract['telemetry_parity_fields']);
         $this->assertContains('working_life_v1.career_focus_key', $contract['telemetry_parity_fields']);
         $this->assertContains('narrative_runtime_contract_v1.runtime_mode', $contract['telemetry_parity_fields']);
+        $this->assertContains('cultural_calibration_v1.locale_context', $contract['telemetry_parity_fields']);
+        $this->assertContains('cultural_calibration_v1.calibration_fingerprint', $contract['telemetry_parity_fields']);
     }
 
     public function test_apply_overlay_patch_preserves_canonical_fields_and_replaces_only_overlay_fields(): void
