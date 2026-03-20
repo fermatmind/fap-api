@@ -6,6 +6,7 @@ namespace App\Services\Report;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Template\TemplateContext;
@@ -28,6 +29,7 @@ final class BigFiveReportComposer
         private readonly BigFivePackLoader $packLoader,
         private readonly TemplateEngine $templateEngine,
         private readonly BigFiveTelemetry $bigFiveTelemetry,
+        private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
     ) {}
 
     /**
@@ -120,6 +122,15 @@ final class BigFiveReportComposer
         }
 
         $locked = $variant === ReportAccess::VARIANT_FREE;
+        $publicProjection = $this->bigFivePublicProjectionService->build(
+            $scoreResult,
+            $locale,
+            $variant,
+            $locked
+        );
+        $foundationSections = is_array($publicProjection['sections'] ?? null) ? $publicProjection['sections'] : [];
+        $sections = array_merge($foundationSections, $sections);
+
         $this->bigFiveTelemetry->recordReportComposed(
             (int) ($attempt->org_id ?? 0),
             $this->numericUserId($attempt->user_id ?? null),
@@ -152,6 +163,9 @@ final class BigFiveReportComposer
                 ],
                 'quality' => [
                     'level' => (string) ($scoreResult['quality']['level'] ?? 'D'),
+                ],
+                '_meta' => [
+                    'big5_public_projection_v1' => $publicProjection,
                 ],
                 'generated_at' => now()->toISOString(),
             ],
