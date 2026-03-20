@@ -676,6 +676,7 @@ class ShareService
                 $publicSafeReport,
                 $this->normalizeArray($result->result_json ?? null)
             );
+            $payload['mbti_continuity_v1'] = $this->extractMbtiContinuity($publicSafeReport);
             $payload = $this->applyMbtiProjectionAliases($payload);
         }
 
@@ -728,5 +729,50 @@ class ShareService
     private function resolveCompareCtaLabel(string $locale): string
     {
         return $locale === 'zh-CN' ? '邀请朋友来测并对比' : 'Invite a friend to compare';
+    }
+
+    /**
+     * @param  array<string, mixed>  $report
+     * @return array<string, mixed>
+     */
+    private function extractMbtiContinuity(array $report): array
+    {
+        $personalization = is_array(data_get($report, '_meta.personalization'))
+            ? data_get($report, '_meta.personalization')
+            : [];
+        $continuity = is_array($personalization['continuity'] ?? null) ? $personalization['continuity'] : [];
+
+        if ($continuity === []) {
+            return [];
+        }
+
+        $payload = [
+            'carryover_focus_key' => trim((string) ($continuity['carryover_focus_key'] ?? '')),
+            'carryover_reason' => trim((string) ($continuity['carryover_reason'] ?? '')),
+            'recommended_resume_keys' => array_values(array_filter(array_map(
+                static fn (mixed $value): string => trim((string) $value),
+                (array) ($continuity['recommended_resume_keys'] ?? [])
+            ))),
+            'carryover_scene_keys' => array_values(array_filter(array_map(
+                static fn (mixed $value): string => trim((string) $value),
+                (array) ($continuity['carryover_scene_keys'] ?? [])
+            ))),
+            'carryover_action_keys' => array_values(array_filter(array_map(
+                static fn (mixed $value): string => trim((string) $value),
+                (array) ($continuity['carryover_action_keys'] ?? [])
+            ))),
+        ];
+
+        return array_filter($payload, static function (mixed $value): bool {
+            if (is_string($value)) {
+                return $value !== '';
+            }
+
+            if (is_array($value)) {
+                return $value !== [];
+            }
+
+            return $value !== null;
+        });
     }
 }

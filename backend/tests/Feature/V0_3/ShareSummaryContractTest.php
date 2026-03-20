@@ -67,6 +67,9 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame('INTJ', $response->json('mbti_public_projection_v1.canonical_type_code'));
         $this->assertSame('建筑师型', $response->json('mbti_public_projection_v1.profile.type_name'));
         $this->assertSame('公开人格简介兜底文案', $response->json('mbti_public_projection_v1.summary_card.summary'));
+        $this->assertSame('growth.next_actions', $response->json('mbti_continuity_v1.carryover_focus_key'));
+        $this->assertSame('unlock_to_continue_focus', $response->json('mbti_continuity_v1.carryover_reason'));
+        $this->assertSame(['growth.next_actions', 'traits.close_call_axes', 'traits.adjacent_type_contrast'], $response->json('mbti_continuity_v1.recommended_resume_keys'));
         $this->assertSame($response->json('type_code'), $response->json('mbti_public_projection_v1.display_type'));
         $this->assertSame($response->json('type_name'), $response->json('mbti_public_projection_v1.profile.type_name'));
         $this->assertSame($response->json('dimensions'), $response->json('mbti_public_projection_v1.dimensions'));
@@ -132,6 +135,7 @@ final class ShareSummaryContractTest extends TestCase
             'dimensions',
             'primary_cta_label',
             'primary_cta_path',
+            'mbti_continuity_v1',
             'mbti_public_summary_v1',
             'mbti_public_projection_v1',
         ] as $key) {

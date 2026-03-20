@@ -89,6 +89,42 @@ final class MbtiUserStateOrchestrationService
     ];
 
     /**
+     * @var array<string, list<string>>
+     */
+    private const SECTION_CARRYOVER_SCENE_KEYS = [
+        'career.summary' => ['work'],
+        'career.collaboration_fit' => ['work', 'communication'],
+        'career.work_environment' => ['work'],
+        'career.work_experiments' => ['work', 'decision'],
+        'career.next_step' => ['work', 'decision'],
+        'growth.summary' => ['growth'],
+        'growth.stability_confidence' => ['stability'],
+        'growth.next_actions' => ['growth'],
+        'growth.weekly_experiments' => ['growth'],
+        'growth.stress_recovery' => ['stress_recovery'],
+        'growth.watchouts' => ['stress_recovery', 'growth'],
+        'traits.why_this_type' => ['explainability'],
+        'traits.close_call_axes' => ['explainability'],
+        'traits.adjacent_type_contrast' => ['explainability'],
+        'traits.decision_style' => ['decision'],
+        'relationships.communication_style' => ['communication', 'relationships'],
+        'relationships.try_this_week' => ['relationships', 'communication'],
+    ];
+
+    /**
+     * @var array<string, list<string>>
+     */
+    private const SECTION_CARRYOVER_ACTION_FIELDS = [
+        'career.next_step' => ['career_next_step_keys'],
+        'career.work_experiments' => ['work_experiment_keys'],
+        'growth.next_actions' => ['weekly_action_keys'],
+        'growth.weekly_experiments' => ['weekly_action_keys'],
+        'growth.stability_confidence' => ['watchout_keys'],
+        'growth.watchouts' => ['watchout_keys'],
+        'relationships.try_this_week' => ['relationship_action_keys'],
+    ];
+
+    /**
      * @param  array<string, mixed>  $personalization
      * @return array<string, mixed>
      */
@@ -150,6 +186,7 @@ final class MbtiUserStateOrchestrationService
     {
         $primaryFocusKey = $this->resolvePrimaryFocusKey($personalization, $userState);
         $secondaryFocusKeys = $this->resolveSecondaryFocusKeys($primaryFocusKey, $userState);
+        $continuity = $this->resolveContinuity($personalization, $userState, $primaryFocusKey, $secondaryFocusKeys);
 
         return array_merge($personalization, [
             'user_state' => $userState,
@@ -159,7 +196,29 @@ final class MbtiUserStateOrchestrationService
                 'secondary_focus_keys' => $secondaryFocusKeys,
                 'cta_priority_keys' => $this->resolveCtaPriorityKeys($userState),
             ],
+            'continuity' => $continuity,
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  array<string, bool>  $userState
+     * @param  list<string>  $secondaryFocusKeys
+     * @return array<string, mixed>
+     */
+    private function resolveContinuity(
+        array $personalization,
+        array $userState,
+        string $primaryFocusKey,
+        array $secondaryFocusKeys
+    ): array {
+        return [
+            'carryover_focus_key' => $primaryFocusKey,
+            'carryover_reason' => $this->resolveCarryoverReason($primaryFocusKey, $userState),
+            'recommended_resume_keys' => $this->resolveRecommendedResumeKeys($primaryFocusKey, $secondaryFocusKeys, $userState),
+            'carryover_scene_keys' => $this->resolveCarryoverSceneKeys($personalization, $primaryFocusKey, $secondaryFocusKeys),
+            'carryover_action_keys' => $this->resolveCarryoverActionKeys($personalization, $primaryFocusKey, $secondaryFocusKeys),
+        ];
     }
 
     /**
@@ -262,6 +321,148 @@ final class MbtiUserStateOrchestrationService
         }
 
         return ['career_bridge', 'share_result', 'workspace_lite'];
+    }
+
+    /**
+     * @param  array<string, bool>  $userState
+     */
+    private function resolveCarryoverReason(string $primaryFocusKey, array $userState): string
+    {
+        $isRevisit = (bool) ($userState['is_revisit'] ?? false);
+        $hasUnlock = (bool) ($userState['has_unlock'] ?? false);
+        $hasFeedback = (bool) ($userState['has_feedback'] ?? false);
+        $hasShare = (bool) ($userState['has_share'] ?? false);
+        $hasActionEngagement = (bool) ($userState['has_action_engagement'] ?? false);
+
+        if ($isRevisit && $hasActionEngagement) {
+            return 'resume_action_loop';
+        }
+
+        if ($isRevisit && $hasShare) {
+            return 'return_from_share';
+        }
+
+        if ($isRevisit && $hasFeedback) {
+            return 'refine_after_feedback';
+        }
+
+        if (! $hasUnlock) {
+            return 'unlock_to_continue_focus';
+        }
+
+        if (str_starts_with($primaryFocusKey, 'career.')) {
+            return 'continue_career_bridge';
+        }
+
+        if (str_starts_with($primaryFocusKey, 'relationships.')) {
+            return 'continue_relationship_practice';
+        }
+
+        if (str_starts_with($primaryFocusKey, 'traits.')) {
+            return 'continue_explainability_focus';
+        }
+
+        if ($isRevisit) {
+            return 'resume_previous_focus';
+        }
+
+        return 'continue_action_plan';
+    }
+
+    /**
+     * @param  list<string>  $secondaryFocusKeys
+     * @param  array<string, bool>  $userState
+     * @return list<string>
+     */
+    private function resolveRecommendedResumeKeys(
+        string $primaryFocusKey,
+        array $secondaryFocusKeys,
+        array $userState
+    ): array {
+        $keys = [$primaryFocusKey, ...$secondaryFocusKeys];
+        $defaultKey = (bool) ($userState['has_unlock'] ?? false) ? 'career.next_step' : 'growth.next_actions';
+        $keys[] = $defaultKey;
+
+        return array_values(array_slice(array_values(array_unique(array_filter($keys))), 0, 3));
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  list<string>  $secondaryFocusKeys
+     * @return list<string>
+     */
+    private function resolveCarryoverSceneKeys(
+        array $personalization,
+        string $primaryFocusKey,
+        array $secondaryFocusKeys
+    ): array {
+        $sceneKeys = [];
+
+        foreach ([$primaryFocusKey, ...$secondaryFocusKeys] as $sectionKey) {
+            foreach (self::SECTION_CARRYOVER_SCENE_KEYS[$sectionKey] ?? [] as $sceneKey) {
+                $sceneKeys[] = $sceneKey;
+            }
+        }
+
+        if ($sceneKeys === []) {
+            foreach (array_keys((array) ($personalization['scene_fingerprint'] ?? [])) as $sceneKey) {
+                $sceneKeys[] = trim((string) $sceneKey);
+                if (count($sceneKeys) >= 2) {
+                    break;
+                }
+            }
+        }
+
+        return array_values(array_slice(array_values(array_unique(array_filter($sceneKeys))), 0, 3));
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  list<string>  $secondaryFocusKeys
+     * @return list<string>
+     */
+    private function resolveCarryoverActionKeys(
+        array $personalization,
+        string $primaryFocusKey,
+        array $secondaryFocusKeys
+    ): array {
+        $actionKeys = [];
+
+        foreach ([$primaryFocusKey, ...$secondaryFocusKeys] as $sectionKey) {
+            foreach (self::SECTION_CARRYOVER_ACTION_FIELDS[$sectionKey] ?? [] as $field) {
+                $preferredKey = $this->selectPreferredCarryoverActionKey((array) ($personalization[$field] ?? []));
+                if ($preferredKey !== '') {
+                    $actionKeys[] = $preferredKey;
+                }
+            }
+        }
+
+        return array_values(array_slice(array_values(array_unique($actionKeys)), 0, 4));
+    }
+
+    /**
+     * @param  list<mixed>  $keys
+     */
+    private function selectPreferredCarryoverActionKey(array $keys): string
+    {
+        $normalizedKeys = array_values(array_filter(array_map(
+            static fn (mixed $key): string => trim((string) $key),
+            $keys
+        )));
+
+        if ($normalizedKeys === []) {
+            return '';
+        }
+
+        foreach (['.theme.', '.stability.', '.close_call.'] as $needle) {
+            foreach ($normalizedKeys as $key) {
+                if (str_contains($key, $needle)) {
+                    return $key;
+                }
+            }
+        }
+
+        return $normalizedKeys[0];
     }
 
     /**

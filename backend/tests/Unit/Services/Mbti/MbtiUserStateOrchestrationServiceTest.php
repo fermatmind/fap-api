@@ -106,6 +106,18 @@ final class MbtiUserStateOrchestrationServiceTest extends TestCase
             ['career.work_experiments', 'relationships.try_this_week'],
             data_get($effective, 'orchestration.secondary_focus_keys')
         );
+        $this->assertSame('growth.stability_confidence', data_get($effective, 'continuity.carryover_focus_key'));
+        $this->assertSame('resume_action_loop', data_get($effective, 'continuity.carryover_reason'));
+        $this->assertSame(
+            ['growth.stability_confidence', 'career.work_experiments', 'relationships.try_this_week'],
+            data_get($effective, 'continuity.recommended_resume_keys')
+        );
+        $this->assertSame(
+            ['stability', 'work', 'decision'],
+            data_get($effective, 'continuity.carryover_scene_keys')
+        );
+        $this->assertContains('watchout.stability.context_sensitive', data_get($effective, 'continuity.carryover_action_keys', []));
+        $this->assertContains('work_experiment.theme.name_decision_rule', data_get($effective, 'continuity.carryover_action_keys', []));
     }
 
     /**

@@ -43,8 +43,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
-            $this->assertSame('mbti.personalization.phase7b.v1', (string) ($meta['schema_version'] ?? ''));
-            $this->assertSame('phase7b.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
+            $this->assertSame('mbti.personalization.phase8a.v1', (string) ($meta['schema_version'] ?? ''));
+            $this->assertSame('phase8a.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertIsArray($meta['axis_bands'] ?? null);
             $this->assertSame('boundary', (string) (($meta['axis_bands']['EI'] ?? '')));
             $this->assertSame('boundary', (string) (($meta['axis_bands']['AT'] ?? '')));
@@ -91,6 +91,7 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['watchout_keys'] ?? null);
             $this->assertIsArray($meta['user_state'] ?? null);
             $this->assertIsArray($meta['orchestration'] ?? null);
+            $this->assertIsArray($meta['continuity'] ?? null);
             $this->assertContains('role_fit.role.NT', $meta['role_fit_keys'] ?? []);
         }
 
@@ -127,6 +128,50 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame(
             ['unlock_full_report', 'career_bridge', 'share_result'],
             data_get($eventMeta, 'result_view.orchestration.cta_priority_keys')
+        );
+        $this->assertSame(
+            'growth.stability_confidence',
+            data_get($eventMeta, 'result_view.continuity.carryover_focus_key')
+        );
+        $this->assertSame(
+            'growth.stability_confidence',
+            data_get($eventMeta, 'report_view.continuity.carryover_focus_key')
+        );
+        $this->assertSame(
+            'unlock_to_continue_focus',
+            data_get($eventMeta, 'result_view.continuity.carryover_reason')
+        );
+        $this->assertSame(
+            'resume_action_loop',
+            data_get($eventMeta, 'report_view.continuity.carryover_reason')
+        );
+        $this->assertSame(
+            ['growth.stability_confidence', 'traits.close_call_axes', 'traits.adjacent_type_contrast'],
+            data_get($eventMeta, 'result_view.continuity.recommended_resume_keys')
+        );
+        $this->assertSame(
+            ['growth.stability_confidence', 'career.work_experiments', 'relationships.try_this_week'],
+            data_get($eventMeta, 'report_view.continuity.recommended_resume_keys')
+        );
+        $this->assertSame(
+            ['stability', 'explainability'],
+            data_get($eventMeta, 'result_view.continuity.carryover_scene_keys')
+        );
+        $this->assertSame(
+            ['stability', 'work', 'decision'],
+            data_get($eventMeta, 'report_view.continuity.carryover_scene_keys')
+        );
+        $this->assertSame(
+            ['watchout.stability.context_sensitive'],
+            data_get($eventMeta, 'result_view.continuity.carryover_action_keys')
+        );
+        $this->assertSame(
+            [
+                'watchout.stability.context_sensitive',
+                'work_experiment.theme.protect_energy_lane',
+                'relationship_action.theme.protect_energy_lane',
+            ],
+            data_get($eventMeta, 'report_view.continuity.carryover_action_keys')
         );
     }
 
