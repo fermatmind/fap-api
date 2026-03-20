@@ -576,6 +576,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
                 ]
             }
@@ -598,6 +599,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
                 ]
@@ -621,6 +623,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_auth"
                 ]
@@ -1034,6 +1037,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1056,6 +1060,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1078,6 +1083,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1100,6 +1106,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1122,6 +1129,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1144,6 +1152,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1166,6 +1175,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1188,6 +1198,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1210,6 +1221,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1232,6 +1244,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1254,6 +1267,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext",
                     "App\\Http\\Middleware\\RequireOrgRole:owner,admin"
                 ]
             }
@@ -1275,7 +1289,8 @@
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
-                    "App\\Http\\Middleware\\ResolveOrgContext"
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext"
                 ]
             }
         },
@@ -1296,7 +1311,8 @@
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
-                    "App\\Http\\Middleware\\ResolveOrgContext"
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext"
                 ]
             }
         },
@@ -1317,7 +1333,8 @@
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\FmTokenAuth",
-                    "App\\Http\\Middleware\\ResolveOrgContext"
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\RequireTenantContext"
                 ]
             }
         },

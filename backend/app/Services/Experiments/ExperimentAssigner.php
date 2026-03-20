@@ -2,10 +2,8 @@
 
 namespace App\Services\Experiments;
 
-use App\Models\ExperimentAssignment;
 use App\Support\StableBucket;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class ExperimentAssigner
 {
@@ -41,7 +39,7 @@ class ExperimentAssigner
 
     public function attachUserId(int $orgId, string $anonId, int $userId): int
     {
-        if (!\App\Support\SchemaBaseline::hasTable('experiment_assignments')) {
+        if (! \App\Support\SchemaBaseline::hasTable('experiment_assignments')) {
             return 0;
         }
 
@@ -71,7 +69,7 @@ class ExperimentAssigner
     private function assignOne(string $experimentKey, $config, int $orgId, ?string $anonId, ?int $userId): ?string
     {
         $experimentKey = trim($experimentKey);
-        if ($experimentKey === '' || !is_array($config)) {
+        if ($experimentKey === '' || ! is_array($config)) {
             return null;
         }
 
@@ -97,11 +95,11 @@ class ExperimentAssigner
         }
 
         $variants = $config['variants'] ?? [];
-        if (!is_array($variants) || $variants === []) {
+        if (! is_array($variants) || $variants === []) {
             return null;
         }
 
-        $subjectKey = $userId !== null ? 'user:' . $userId : 'anon:' . $anonId;
+        $subjectKey = $userId !== null ? 'user:'.$userId : 'anon:'.$anonId;
         $variant = $this->pickVariant($variants, $subjectKey, $orgId, $experimentKey);
         if ($variant === null) {
             return null;
@@ -130,7 +128,7 @@ class ExperimentAssigner
 
     private function activeExperimentsFromRegistry(int $orgId): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('experiments_registry')) {
+        if (! \App\Support\SchemaBaseline::hasTable('experiments_registry')) {
             return [];
         }
 
@@ -171,16 +169,16 @@ class ExperimentAssigner
     private function activeExperimentsFromConfig(): array
     {
         $configs = config('fap_experiments.experiments', []);
-        if (!is_array($configs)) {
+        if (! is_array($configs)) {
             return [];
         }
 
         $active = [];
         foreach ($configs as $key => $config) {
-            if (!is_array($config)) {
+            if (! is_array($config)) {
                 continue;
             }
-            if (!($config['is_active'] ?? false)) {
+            if (! ($config['is_active'] ?? false)) {
                 continue;
             }
             $active[$key] = $config;
@@ -198,14 +196,14 @@ class ExperimentAssigner
             }
         }
 
-        if (!is_array($payload)) {
+        if (! is_array($payload)) {
             return [];
         }
 
         $normalized = [];
         foreach ($payload as $variant => $weight) {
             $variantKey = trim((string) $variant);
-            if ($variantKey === '' || !is_numeric($weight)) {
+            if ($variantKey === '' || ! is_numeric($weight)) {
                 continue;
             }
 
@@ -220,10 +218,10 @@ class ExperimentAssigner
         return $normalized;
     }
 
-    private function findExisting(string $experimentKey, int $orgId, ?int $userId, string $anonId): ?ExperimentAssignment
+    private function findExisting(string $experimentKey, int $orgId, ?int $userId, string $anonId): ?object
     {
         if ($userId !== null) {
-            $row = ExperimentAssignment::query()
+            $row = DB::table('experiment_assignments')
                 ->where('org_id', $orgId)
                 ->where('user_id', $userId)
                 ->where('experiment_key', $experimentKey)
@@ -234,7 +232,7 @@ class ExperimentAssigner
             }
         }
 
-        return ExperimentAssignment::query()
+        return DB::table('experiment_assignments')
             ->where('org_id', $orgId)
             ->where('anon_id', $anonId)
             ->where('experiment_key', $experimentKey)
@@ -258,12 +256,12 @@ class ExperimentAssigner
             return null;
         }
 
-        $bucket = StableBucket::bucket($subjectKey . '|' . $orgId . '|' . $experimentKey . '|' . $this->salt, 100);
+        $bucket = StableBucket::bucket($subjectKey.'|'.$orgId.'|'.$experimentKey.'|'.$this->salt, 100);
         $target = $bucket % $total;
 
         $cursor = 0;
         foreach ($variants as $variant => $weight) {
-            if (!is_numeric($weight)) {
+            if (! is_numeric($weight)) {
                 continue;
             }
             $w = (int) round((float) $weight);
