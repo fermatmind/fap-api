@@ -567,6 +567,7 @@ final class MbtiResultPersonalizationService
     public function __construct(
         private readonly ContentPacksIndex $packsIndex,
         private readonly MbtiUserStateOrchestrationService $userStateOrchestrationService,
+        private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
         private readonly MbtiReadModelContractService $readModelContractService,
     ) {
     }
@@ -654,8 +655,7 @@ final class MbtiResultPersonalizationService
             $variantKeys[$sectionKey] = (string) ($variant['variant_key'] ?? '');
         }
 
-        return $this->readModelContractService->attachContract(
-            $this->userStateOrchestrationService->withBaseline([
+        $personalization = $this->userStateOrchestrationService->withBaseline([
                 'schema_version' => 'mbti.personalization.phase8c.v1',
                 'locale' => $locale,
                 'type_code' => $typeCode,
@@ -692,8 +692,14 @@ final class MbtiResultPersonalizationService
                 'engine_version' => trim((string) ($context['engine_version'] ?? data_get($reportPayload, 'versions.engine', ''))),
                 'content_package_dir' => trim((string) ($context['dir_version'] ?? data_get($reportPayload, 'versions.dir_version', ''))),
                 'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
-            ], (bool) ($context['has_unlock'] ?? false))
-        );
+            ], (bool) ($context['has_unlock'] ?? false));
+
+        $personalization = $this->privacyConsentContractService->attachContract($personalization, [
+            'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
+            'locale' => $locale,
+        ]);
+
+        return $this->readModelContractService->attachContract($personalization);
     }
 
     /**

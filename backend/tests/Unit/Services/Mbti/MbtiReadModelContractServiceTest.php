@@ -16,6 +16,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $contract = $service->buildContract([
             'schema_version' => 'mbti.personalization.phase8c.v1',
             'identity' => 'A',
+            'privacy_contract_v1' => ['version' => 'mbti.privacy_contract.v1'],
             'variant_keys' => ['overview' => 'overview:clear'],
             'scene_fingerprint' => ['work' => ['style_key' => 'work.primary.EI.E.clear']],
             'user_state' => ['is_first_view' => true],
@@ -27,8 +28,10 @@ final class MbtiReadModelContractServiceTest extends TestCase
 
         $this->assertSame('mbti.read_contract.v1', $contract['version']);
         $this->assertContains('identity', $contract['canonical_read_model']['personalization_fields']);
+        $this->assertContains('privacy_contract_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('variant_keys', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('user_state', $contract['canonical_read_model']['personalization_fields']);
+        $this->assertContains('mbti_privacy_contract_v1', $contract['cacheable_fields']);
         $this->assertSame(
             [
                 'user_state',

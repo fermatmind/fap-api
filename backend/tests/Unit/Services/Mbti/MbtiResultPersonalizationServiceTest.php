@@ -94,6 +94,12 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
         $this->assertSame('phase8c.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('mbti.privacy_contract.v1', data_get($clear, 'privacy_contract_v1.version'));
+        $this->assertSame(true, data_get($clear, 'privacy_contract_v1.consent_scope.subject_export'));
+        $this->assertContains(
+            'action_plan_summary',
+            data_get($clear, 'privacy_contract_v1.exportable_assets.derived_personalization_fields', [])
+        );
         $this->assertSame(
             [
                 'is_first_view' => true,

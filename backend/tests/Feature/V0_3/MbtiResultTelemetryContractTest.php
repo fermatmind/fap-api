@@ -98,6 +98,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['user_state'] ?? null);
             $this->assertIsArray($meta['orchestration'] ?? null);
             $this->assertIsArray($meta['continuity'] ?? null);
+            $this->assertSame('mbti.privacy_contract.v1', (string) ($meta['privacy_contract_version'] ?? ''));
+            $this->assertIsArray($meta['consent_scope'] ?? null);
             $this->assertContains('role_fit.role.NT', $meta['role_fit_keys'] ?? []);
         }
 
@@ -116,6 +118,8 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['relationship_action_keys'] ?? null, $eventMeta['result_view']['relationship_action_keys'] ?? null);
         $this->assertSame($eventMeta['report_view']['work_experiment_keys'] ?? null, $eventMeta['result_view']['work_experiment_keys'] ?? null);
         $this->assertSame($eventMeta['report_view']['watchout_keys'] ?? null, $eventMeta['result_view']['watchout_keys'] ?? null);
+        $this->assertSame($eventMeta['report_view']['privacy_contract_version'] ?? null, $eventMeta['result_view']['privacy_contract_version'] ?? null);
+        $this->assertSame($eventMeta['report_view']['consent_scope'] ?? null, $eventMeta['result_view']['consent_scope'] ?? null);
         $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.is_first_view'));
         $this->assertSame(false, data_get($eventMeta, 'result_view.user_state.is_revisit'));
         $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.has_share'));
@@ -196,6 +200,10 @@ class MbtiResultTelemetryContractTest extends TestCase
             ],
             data_get($eventMeta, 'report_view.continuity.carryover_action_keys')
         );
+        $this->assertSame(true, data_get($eventMeta, 'result_view.consent_scope.subject_export'));
+        $this->assertSame(true, data_get($eventMeta, 'result_view.consent_scope.telemetry_product_improvement'));
+        $this->assertSame(true, data_get($eventMeta, 'result_view.consent_scope.experimentation_pseudonymous'));
+        $this->assertSame(true, data_get($eventMeta, 'result_view.consent_scope.norming_anonymized_only'));
     }
 
     public function test_mbti_report_view_records_experiments_in_public_context_without_org_scope_failures(): void

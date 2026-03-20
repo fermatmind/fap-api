@@ -5,6 +5,7 @@ namespace App\Services\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Repositories\Report\ReportAccessActor;
+use App\Repositories\Report\ReportSubject;
 use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\GenericReportBuilder;
@@ -149,27 +150,14 @@ class ReportSnapshotStore
             ];
         }
 
-        if ($this->isSystemRole($role)) {
-            $attempt = $this->subjects->findAttemptForSystem($orgId, $attemptId);
-        } else {
-            $contextKind = $orgId > 0 ? OrgContext::KIND_TENANT : OrgContext::KIND_PUBLIC;
-            $attempt = $this->subjects->findAttemptForRealm(
-                $contextKind,
-                $orgId,
-                $attemptId,
-                ReportAccessActor::from($userId, $anonId, $role),
-            );
-        }
-
-        if (! $attempt instanceof Attempt) {
+        $subject = $this->resolveSubject($orgId, $attemptId, $userId, $anonId, $role);
+        if (! $subject instanceof ReportSubject) {
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
-        $orgId = (int) ($attempt->org_id ?? 0);
-        $result = $this->subjects->findResultForRealm($orgId, $attemptId);
-        if (! $result instanceof Result) {
-            return $this->notFound('RESULT_NOT_FOUND', 'result not found.');
-        }
+        $attempt = $subject->attempt;
+        $result = $subject->result;
+        $orgId = $subject->orgId;
 
         $scaleCode = strtoupper((string) ($attempt->scale_code ?? ''));
         $attemptScaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? '')));
@@ -310,14 +298,25 @@ class ReportSnapshotStore
         return $role === 'system';
     }
 
-    private function isPrivilegedRole(string $role): bool
-    {
-        return in_array($role, ['owner', 'admin'], true);
-    }
+    private function resolveSubject(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        string $role
+    ): ?ReportSubject {
+        if ($this->isSystemRole($role)) {
+            return $this->subjects->findSubjectForSystem($orgId, $attemptId);
+        }
 
-    private function isMemberLikeRole(string $role): bool
-    {
-        return in_array($role, ['member', 'viewer'], true);
+        $contextKind = $orgId > 0 ? OrgContext::KIND_TENANT : OrgContext::KIND_PUBLIC;
+
+        return $this->subjects->findSubjectForRealm(
+            $contextKind,
+            $orgId,
+            $attemptId,
+            ReportAccessActor::from($userId, $anonId, $role),
+        );
     }
 
     private function buildVariantReport(

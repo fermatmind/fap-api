@@ -201,6 +201,7 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
                 'pack_id' => $contentPackId,
                 'dir_version' => $contentPackageDir,
                 'locale' => $locale,
+                'region' => (string) ($input['region'] ?? config('regions.default_region', 'CN_MAINLAND')),
                 'engine_version' => $reportEngineVersion !== '' ? $reportEngineVersion : (string) data_get($reportPayload, 'versions.engine', 'v1.2'),
                 'has_unlock' => in_array(
                     strtolower(trim((string) ($input['reportAccessLevel'] ?? ''))),
