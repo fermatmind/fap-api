@@ -15,8 +15,6 @@ final class ExactRootQuarantineService
      */
     private const ALLOWED_SOURCE_KINDS = [
         'legacy.source_pack',
-        'v2.primary',
-        'v2.mirror',
     ];
 
     private const PLAN_SCHEMA = 'storage_quarantine_exact_roots_plan.v1';
@@ -131,14 +129,16 @@ final class ExactRootQuarantineService
             }
 
             try {
-                $revalidated = $this->revalidateCandidate($candidate, $disk);
-                if ($revalidated !== null) {
-                    $failures[] = $revalidated;
+                $resolvedCandidate = $this->resolveExecutableCandidate($candidate, $disk);
+                if (($resolvedCandidate['status'] ?? '') !== 'candidate') {
+                    $failures[] = (array) ($resolvedCandidate['entry'] ?? []);
 
                     continue;
                 }
 
-                $sourceRoot = $this->normalizeRoot((string) ($candidate['source_storage_path'] ?? ''));
+                /** @var array<string,mixed> $runtimeCandidate */
+                $runtimeCandidate = (array) ($resolvedCandidate['entry'] ?? []);
+                $sourceRoot = $this->normalizeRoot((string) ($runtimeCandidate['source_storage_path'] ?? ''));
                 $targetRoot = $runBase.DIRECTORY_SEPARATOR.'items'.DIRECTORY_SEPARATOR.hash('sha256', $sourceRoot).DIRECTORY_SEPARATOR.'root';
                 File::ensureDirectoryExists(dirname($targetRoot));
 
@@ -152,19 +152,19 @@ final class ExactRootQuarantineService
 
                 $quarantineMeta = [
                     'schema' => (string) config('storage_rollout.quarantine_run_schema_version', 'storage_quarantine_exact_root_run.v1'),
-                    'exact_manifest_id' => (int) ($candidate['exact_manifest_id'] ?? 0),
-                    'exact_identity_hash' => (string) ($candidate['exact_identity_hash'] ?? ''),
-                    'source_kind' => (string) ($candidate['source_kind'] ?? ''),
-                    'source_disk' => (string) ($candidate['source_disk'] ?? 'local'),
+                    'exact_manifest_id' => (int) ($runtimeCandidate['exact_manifest_id'] ?? 0),
+                    'exact_identity_hash' => (string) ($runtimeCandidate['exact_identity_hash'] ?? ''),
+                    'source_kind' => (string) ($runtimeCandidate['source_kind'] ?? ''),
+                    'source_disk' => (string) ($runtimeCandidate['source_disk'] ?? 'local'),
                     'source_storage_path' => $sourceRoot,
-                    'pack_id' => $candidate['pack_id'] ?? null,
-                    'pack_version' => $candidate['pack_version'] ?? null,
-                    'manifest_hash' => (string) ($candidate['manifest_hash'] ?? ''),
+                    'pack_id' => $runtimeCandidate['pack_id'] ?? null,
+                    'pack_version' => $runtimeCandidate['pack_version'] ?? null,
+                    'manifest_hash' => (string) ($runtimeCandidate['manifest_hash'] ?? ''),
                     'quarantined_at' => now()->toAtomString(),
                     'target_disk' => $disk,
-                    'remote_blob_coverage' => $candidate['remote_blob_coverage'] ?? null,
-                    'file_count' => (int) ($candidate['file_count'] ?? 0),
-                    'total_size_bytes' => (int) ($candidate['total_size_bytes'] ?? 0),
+                    'remote_blob_coverage' => $runtimeCandidate['remote_blob_coverage'] ?? null,
+                    'file_count' => (int) ($runtimeCandidate['file_count'] ?? 0),
+                    'total_size_bytes' => (int) ($runtimeCandidate['total_size_bytes'] ?? 0),
                 ];
 
                 $encoded = json_encode($quarantineMeta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
@@ -175,15 +175,15 @@ final class ExactRootQuarantineService
                 File::put($targetRoot.DIRECTORY_SEPARATOR.'.quarantine.json', $encoded.PHP_EOL);
 
                 $quarantined[] = [
-                    'exact_manifest_id' => (int) ($candidate['exact_manifest_id'] ?? 0),
-                    'source_kind' => (string) ($candidate['source_kind'] ?? ''),
+                    'exact_manifest_id' => (int) ($runtimeCandidate['exact_manifest_id'] ?? 0),
+                    'source_kind' => (string) ($runtimeCandidate['source_kind'] ?? ''),
                     'source_storage_path' => $sourceRoot,
                     'target_root' => $targetRoot,
-                    'file_count' => (int) ($candidate['file_count'] ?? 0),
-                    'total_size_bytes' => (int) ($candidate['total_size_bytes'] ?? 0),
+                    'file_count' => (int) ($runtimeCandidate['file_count'] ?? 0),
+                    'total_size_bytes' => (int) ($runtimeCandidate['total_size_bytes'] ?? 0),
                 ];
-                $quarantinedFiles += (int) ($candidate['file_count'] ?? 0);
-                $quarantinedBytes += (int) ($candidate['total_size_bytes'] ?? 0);
+                $quarantinedFiles += (int) ($runtimeCandidate['file_count'] ?? 0);
+                $quarantinedBytes += (int) ($runtimeCandidate['total_size_bytes'] ?? 0);
             } catch (\Throwable $e) {
                 $failures[] = [
                     'exact_manifest_id' => (int) ($candidate['exact_manifest_id'] ?? 0),
@@ -383,17 +383,20 @@ final class ExactRootQuarantineService
 
     /**
      * @param  array<string,mixed>  $candidate
-     * @return array<string,mixed>|null
+     * @return array{status:string,entry:array<string,mixed>}
      */
-    private function revalidateCandidate(array $candidate, string $disk): ?array
+    private function resolveExecutableCandidate(array $candidate, string $disk): array
     {
         $manifestId = (int) ($candidate['exact_manifest_id'] ?? 0);
         $manifest = ContentReleaseExactManifest::query()->find($manifestId);
         if (! $manifest instanceof ContentReleaseExactManifest) {
             return [
-                'exact_manifest_id' => $manifestId,
-                'source_storage_path' => (string) ($candidate['source_storage_path'] ?? ''),
-                'reason' => 'exact_manifest_missing',
+                'status' => 'blocked',
+                'entry' => [
+                    'exact_manifest_id' => $manifestId,
+                    'source_storage_path' => (string) ($candidate['source_storage_path'] ?? ''),
+                    'reason' => 'exact_manifest_missing',
+                ],
             ];
         }
 
@@ -406,11 +409,36 @@ final class ExactRootQuarantineService
             $this->duplicateSourceRoots(),
         );
 
-        if (($recheck['status'] ?? '') === 'candidate') {
-            return null;
+        if (($recheck['status'] ?? '') !== 'candidate') {
+            return [
+                'status' => 'blocked',
+                'entry' => (array) ($recheck['entry'] ?? []),
+            ];
         }
 
-        return $recheck['entry'];
+        $plannedSourceRoot = $this->normalizeRoot((string) ($candidate['source_storage_path'] ?? ''));
+        $runtimeCandidate = (array) ($recheck['entry'] ?? []);
+        $runtimeSourceRoot = $this->normalizeRoot((string) ($runtimeCandidate['source_storage_path'] ?? ''));
+        if (
+            $plannedSourceRoot !== $runtimeSourceRoot
+            || trim((string) ($candidate['exact_identity_hash'] ?? '')) !== trim((string) ($runtimeCandidate['exact_identity_hash'] ?? ''))
+            || trim((string) ($candidate['source_kind'] ?? '')) !== trim((string) ($runtimeCandidate['source_kind'] ?? ''))
+            || trim((string) ($candidate['manifest_hash'] ?? '')) !== trim((string) ($runtimeCandidate['manifest_hash'] ?? ''))
+        ) {
+            return [
+                'status' => 'blocked',
+                'entry' => [
+                    'exact_manifest_id' => $manifestId,
+                    'source_storage_path' => $plannedSourceRoot,
+                    'reason' => 'plan_candidate_mismatch',
+                ],
+            ];
+        }
+
+        return [
+            'status' => 'candidate',
+            'entry' => $runtimeCandidate,
+        ];
     }
 
     /**

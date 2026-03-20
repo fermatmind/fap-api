@@ -169,6 +169,40 @@ final class StorageQuarantineExactRootsCommandTest extends TestCase
         $this->assertDirectoryExists($root);
     }
 
+    public function test_command_fails_when_plan_candidate_path_is_tampered(): void
+    {
+        $releaseId = (string) Str::uuid();
+        $root = storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
+        $this->seedExactRootFixture($releaseId, 'legacy.source_pack', $root, 'command_quarantine_tampered', 'BIG5_OCEAN', 'v1');
+
+        $this->assertSame(0, Artisan::call('storage:quarantine-exact-roots', [
+            '--dry-run' => true,
+            '--disk' => 's3',
+        ]));
+        $planPath = $this->extractOutputValue(Artisan::output(), 'plan');
+        $this->assertFileExists($planPath);
+
+        $arbitraryRoot = storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
+        $this->createCompiledTree($arbitraryRoot, 'BIG5_OCEAN', 'v1', 'command_arbitrary_root');
+
+        $plan = json_decode((string) File::get($planPath), true);
+        $this->assertIsArray($plan);
+        $plan['candidates'][0]['source_storage_path'] = $arbitraryRoot;
+        File::put($planPath, json_encode($plan, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL);
+
+        $this->assertSame(1, Artisan::call('storage:quarantine-exact-roots', [
+            '--execute' => true,
+            '--disk' => 's3',
+            '--plan' => $planPath,
+        ]));
+
+        $output = Artisan::output();
+        $this->assertStringContainsString('status=failure', $output);
+        $this->assertStringContainsString('failed_root_count=1', $output);
+        $this->assertDirectoryExists($root);
+        $this->assertDirectoryExists($arbitraryRoot);
+    }
+
     /**
      * @return array{manifest_blob_hash:string}
      */

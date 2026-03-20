@@ -72,8 +72,6 @@ final class ExactRootQuarantineServiceTest extends TestCase
     public function test_service_plans_and_quarantines_only_allowed_exact_roots(): void
     {
         $sourcePackReleaseId = (string) Str::uuid();
-        $v2PrimaryReleaseId = (string) Str::uuid();
-        $v2MirrorReleaseId = (string) Str::uuid();
         $activeReleaseId = (string) Str::uuid();
 
         $sourcePackRoot = storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
@@ -87,8 +85,8 @@ final class ExactRootQuarantineServiceTest extends TestCase
         $missingRemoteRoot = storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
 
         $sourcePack = $this->seedExactRootFixture($sourcePackReleaseId, 'legacy.source_pack', $sourcePackRoot, 'source_pack_ok', 'BIG5_OCEAN', 'v1');
-        $v2Primary = $this->seedExactRootFixture($v2PrimaryReleaseId, 'v2.primary', $v2PrimaryRoot, 'v2_primary_ok', 'SDS_20', 'v1');
-        $v2Mirror = $this->seedExactRootFixture($v2MirrorReleaseId, 'v2.mirror', $v2MirrorRoot, 'v2_mirror_ok', 'EQ_60', 'v1');
+        $this->seedExactRootFixture((string) Str::uuid(), 'v2.primary', $v2PrimaryRoot, 'v2_primary_blocked', 'SDS_20', 'v1');
+        $this->seedExactRootFixture((string) Str::uuid(), 'v2.mirror', $v2MirrorRoot, 'v2_mirror_blocked', 'EQ_60', 'v1');
         $this->seedExactRootFixture((string) Str::uuid(), 'legacy.previous_pack', $previousPackRoot, 'blocked_previous', 'BIG5_OCEAN', 'v1');
         $this->seedExactRootFixture((string) Str::uuid(), 'legacy.current_pack', $currentPackRoot, 'blocked_current', 'BIG5_OCEAN', 'v1');
         $this->seedExactRootFixture((string) Str::uuid(), 'live_alias', $liveAliasRoot, 'blocked_live_alias', 'BIG5_OCEAN', 'v1');
@@ -110,12 +108,12 @@ final class ExactRootQuarantineServiceTest extends TestCase
 
         $this->assertSame('storage_quarantine_exact_roots_plan.v1', (string) ($plan['schema'] ?? ''));
         $this->assertSame('s3', (string) ($plan['target_disk'] ?? ''));
-        $this->assertCount(3, (array) ($plan['candidates'] ?? []));
+        $this->assertCount(1, (array) ($plan['candidates'] ?? []));
         $this->assertGreaterThanOrEqual(5, count((array) ($plan['blocked'] ?? [])));
 
         $candidateKinds = array_column((array) ($plan['candidates'] ?? []), 'source_kind');
         sort($candidateKinds);
-        $this->assertSame(['legacy.source_pack', 'v2.mirror', 'v2.primary'], $candidateKinds);
+        $this->assertSame(['legacy.source_pack'], $candidateKinds);
 
         $blockedByReason = collect((array) ($plan['blocked'] ?? []))->keyBy('reason')->all();
         $this->assertArrayHasKey('source_kind_not_allowed', $blockedByReason);
@@ -123,21 +121,21 @@ final class ExactRootQuarantineServiceTest extends TestCase
         $this->assertArrayHasKey('missing_verified_remote_copy', $blockedByReason);
 
         $releaseRowsBefore = DB::table('content_pack_releases')
-            ->whereIn('id', [$sourcePackReleaseId, $v2PrimaryReleaseId, $v2MirrorReleaseId])
+            ->whereIn('id', [$sourcePackReleaseId])
             ->pluck('storage_path', 'id')
             ->all();
 
         $result = $service->executePlan($plan);
 
-        $this->assertSame(3, (int) ($result['quarantined_root_count'] ?? 0));
+        $this->assertSame(1, (int) ($result['quarantined_root_count'] ?? 0));
         $this->assertSame(0, (int) ($result['failed_root_count'] ?? 0));
 
         $runDir = (string) ($result['run_dir'] ?? '');
         $this->assertDirectoryExists($runDir);
         $this->assertFileExists($runDir.'/run.json');
         $this->assertDirectoryDoesNotExist($sourcePackRoot);
-        $this->assertDirectoryDoesNotExist($v2PrimaryRoot);
-        $this->assertDirectoryDoesNotExist($v2MirrorRoot);
+        $this->assertDirectoryExists($v2PrimaryRoot);
+        $this->assertDirectoryExists($v2MirrorRoot);
         $this->assertDirectoryExists($previousPackRoot);
         $this->assertDirectoryExists($currentPackRoot);
         $this->assertDirectoryExists($liveAliasRoot);
@@ -158,7 +156,7 @@ final class ExactRootQuarantineServiceTest extends TestCase
         }
 
         $this->assertSame($releaseRowsBefore, DB::table('content_pack_releases')
-            ->whereIn('id', [$sourcePackReleaseId, $v2PrimaryReleaseId, $v2MirrorReleaseId])
+            ->whereIn('id', [$sourcePackReleaseId])
             ->pluck('storage_path', 'id')
             ->all());
         $this->assertSame(1, DB::table('content_pack_activations')->count());
@@ -186,6 +184,30 @@ final class ExactRootQuarantineServiceTest extends TestCase
         $this->assertSame(1, (int) ($result['failed_root_count'] ?? 0));
         $this->assertDirectoryExists($sourceRoot);
         $this->assertFileExists((string) ($result['run_dir'] ?? '').'/run.json');
+    }
+
+    public function test_service_rejects_tampered_plan_source_path_without_moving_arbitrary_directory(): void
+    {
+        $releaseId = (string) Str::uuid();
+        $sourceRoot = storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
+        $this->seedExactRootFixture($releaseId, 'legacy.source_pack', $sourceRoot, 'tampered_plan', 'BIG5_OCEAN', 'v1');
+
+        $arbitraryRoot = storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
+        $this->createCompiledTree($arbitraryRoot, 'BIG5_OCEAN', 'v1', 'arbitrary_root');
+
+        $service = app(ExactRootQuarantineService::class);
+        $plan = $service->buildPlan('s3');
+        $this->assertCount(1, (array) ($plan['candidates'] ?? []));
+
+        $plan['candidates'][0]['source_storage_path'] = $arbitraryRoot;
+
+        $result = $service->executePlan($plan);
+
+        $this->assertSame(0, (int) ($result['quarantined_root_count'] ?? 0));
+        $this->assertSame(1, (int) ($result['failed_root_count'] ?? 0));
+        $this->assertSame('plan_candidate_mismatch', (string) data_get($result, 'failures.0.reason', ''));
+        $this->assertDirectoryExists($sourceRoot);
+        $this->assertDirectoryExists($arbitraryRoot);
     }
 
     /**
