@@ -86,14 +86,14 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase8b.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase8c.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
-        $this->assertSame('phase8b.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('phase8c.v1', $clear['dynamic_sections_version']);
         $this->assertSame(
             [
                 'is_first_view' => true,
@@ -102,6 +102,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
                 'has_feedback' => false,
                 'has_share' => false,
                 'has_action_engagement' => false,
+                'feedback_sentiment' => 'none',
+                'feedback_coverage' => 'none',
+                'action_completion_tendency' => 'idle',
+                'last_deep_read_section' => '',
+                'current_intent_cluster' => 'default',
             ],
             data_get($clear, 'user_state')
         );

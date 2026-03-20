@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\DB;
 final class MbtiUserStateOrchestrationService
 {
     /**
+     * @var list<string>
+     */
+    private const POSITIVE_FEEDBACK_VALUES = ['accurate', 'helpful_action'];
+
+    /**
+     * @var list<string>
+     */
+    private const MIXED_FEEDBACK_VALUES = ['mixed', 'not_now'];
+
+    /**
+     * @var list<string>
+     */
+    private const NEGATIVE_FEEDBACK_VALUES = ['unclear'];
+
+    /**
      * @var array<string, list<string>>
      */
     private const CHAPTER_SECTIONS = [
@@ -134,16 +149,7 @@ final class MbtiUserStateOrchestrationService
             return [];
         }
 
-        $userState = [
-            'is_first_view' => true,
-            'is_revisit' => false,
-            'has_unlock' => $hasUnlock,
-            'has_feedback' => false,
-            'has_share' => false,
-            'has_action_engagement' => false,
-        ];
-
-        return $this->mergeAuthority($personalization, $userState);
+        return $this->mergeAuthority($personalization, $this->buildBaselineUserState($hasUnlock));
     }
 
     /**
@@ -160,19 +166,41 @@ final class MbtiUserStateOrchestrationService
             return $this->withBaseline($personalization, $hasUnlock);
         }
 
-        $isRevisit = $this->attemptHasAnyEvent($orgId, $attemptId, ['result_view', 'report_view']);
-        $hasFeedback = $this->attemptHasAnyEvent($orgId, $attemptId, ['accuracy_feedback']);
-        $hasShare = $this->attemptHasAnyEvent($orgId, $attemptId, ['share_result']) || $this->attemptHasShareRow($attemptId);
-        $hasActionEngagement = $this->attemptHasActionEngagement($orgId, $attemptId);
+        $eventRows = $this->fetchAttemptEvents($orgId, $attemptId);
+        $isRevisit = $this->eventRowsContainAny($eventRows, ['result_view', 'report_view']);
+        $hasFeedback = $this->eventRowsContainAny($eventRows, ['accuracy_feedback']);
+        $hasShare = $this->eventRowsContainAny($eventRows, ['share_result']) || $this->attemptHasShareRow($attemptId);
+        $hasActionEngagement = $this->eventRowsContainActionEngagement($eventRows);
+        $feedbackSentiment = $this->resolveFeedbackSentiment($eventRows);
+        $feedbackCoverage = $this->resolveFeedbackCoverage($eventRows);
+        $actionCompletionTendency = $this->resolveActionCompletionTendency(
+            $eventRows,
+            $isRevisit,
+            $hasUnlock
+        );
+        $lastDeepReadSection = $this->resolveLastDeepReadSection($eventRows);
+        $currentIntentCluster = $this->resolveCurrentIntentCluster(
+            $eventRows,
+            $hasUnlock,
+            $feedbackSentiment,
+            $feedbackCoverage,
+            $actionCompletionTendency,
+            $lastDeepReadSection,
+            $hasActionEngagement
+        );
 
-        $userState = [
+        $userState = array_merge($this->buildBaselineUserState($hasUnlock), [
             'is_first_view' => ! $isRevisit,
             'is_revisit' => $isRevisit,
-            'has_unlock' => $hasUnlock,
             'has_feedback' => $hasFeedback,
             'has_share' => $hasShare,
             'has_action_engagement' => $hasActionEngagement,
-        ];
+            'feedback_sentiment' => $feedbackSentiment,
+            'feedback_coverage' => $feedbackCoverage,
+            'action_completion_tendency' => $actionCompletionTendency,
+            'last_deep_read_section' => $lastDeepReadSection,
+            'current_intent_cluster' => $currentIntentCluster,
+        ]);
 
         return $this->mergeAuthority($personalization, $userState);
     }
@@ -189,12 +217,14 @@ final class MbtiUserStateOrchestrationService
         $orderedRecommendationKeys = $this->resolveOrderedRecommendationKeys(
             $personalization,
             $primaryFocusKey,
-            $secondaryFocusKeys
+            $secondaryFocusKeys,
+            $userState
         );
         $orderedActionKeys = $this->resolveOrderedActionKeys(
             $personalization,
             $primaryFocusKey,
-            $secondaryFocusKeys
+            $secondaryFocusKeys,
+            $userState
         );
         $continuity = $this->resolveContinuity($personalization, $userState, $primaryFocusKey, $secondaryFocusKeys);
 
@@ -204,7 +234,7 @@ final class MbtiUserStateOrchestrationService
                 'ordered_section_keys' => $this->resolveOrderedSectionKeys($primaryFocusKey, $secondaryFocusKeys),
                 'primary_focus_key' => $primaryFocusKey,
                 'secondary_focus_keys' => $secondaryFocusKeys,
-                'cta_priority_keys' => $this->resolveCtaPriorityKeys($userState),
+                'cta_priority_keys' => $this->resolveCtaPriorityKeys($userState, $primaryFocusKey),
             ],
             'ordered_recommendation_keys' => $orderedRecommendationKeys,
             'ordered_action_keys' => $orderedActionKeys,
@@ -214,6 +244,26 @@ final class MbtiUserStateOrchestrationService
             'action_focus_key' => (string) ($orderedActionKeys[0] ?? ''),
             'continuity' => $continuity,
         ]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildBaselineUserState(bool $hasUnlock): array
+    {
+        return [
+            'is_first_view' => true,
+            'is_revisit' => false,
+            'has_unlock' => $hasUnlock,
+            'has_feedback' => false,
+            'has_share' => false,
+            'has_action_engagement' => false,
+            'feedback_sentiment' => 'none',
+            'feedback_coverage' => 'none',
+            'action_completion_tendency' => 'idle',
+            'last_deep_read_section' => '',
+            'current_intent_cluster' => 'default',
+        ];
     }
 
     /**
@@ -243,12 +293,53 @@ final class MbtiUserStateOrchestrationService
      */
     private function resolvePrimaryFocusKey(array $personalization, array $userState): string
     {
+        $feedbackSentiment = trim((string) ($userState['feedback_sentiment'] ?? ''));
+        $feedbackCoverage = trim((string) ($userState['feedback_coverage'] ?? ''));
+        $actionCompletionTendency = trim((string) ($userState['action_completion_tendency'] ?? ''));
+        $lastDeepReadSection = trim((string) ($userState['last_deep_read_section'] ?? ''));
+        $currentIntentCluster = trim((string) ($userState['current_intent_cluster'] ?? ''));
+        $hasUnlock = (bool) ($userState['has_unlock'] ?? false);
+
+        if (
+            in_array($feedbackSentiment, ['negative', 'mixed'], true)
+            && in_array($feedbackCoverage, ['scene_only', 'explainability_only', 'mixed'], true)
+        ) {
+            if ($this->isKnownSectionKey($lastDeepReadSection) && $this->isClarifySection($lastDeepReadSection)) {
+                return $lastDeepReadSection;
+            }
+
+            return 'traits.close_call_axes';
+        }
+
+        if ($currentIntentCluster === 'career_move') {
+            return $hasUnlock ? 'career.work_experiments' : 'career.next_step';
+        }
+
+        if ($currentIntentCluster === 'relationship_tuning') {
+            return 'relationships.try_this_week';
+        }
+
+        if (
+            $currentIntentCluster === 'action_activation'
+            && in_array($actionCompletionTendency, ['repeatable', 'committed'], true)
+        ) {
+            if ($this->isKnownSectionKey($lastDeepReadSection) && in_array($lastDeepReadSection, self::ACTION_SECTION_KEYS, true)) {
+                return $lastDeepReadSection;
+            }
+
+            return $hasUnlock ? 'career.work_experiments' : 'growth.weekly_experiments';
+        }
+
+        if ($currentIntentCluster === 'deep_reading' && $this->isKnownSectionKey($lastDeepReadSection)) {
+            return $lastDeepReadSection;
+        }
+
         if (($userState['has_feedback'] ?? false) && $this->isLowConfidencePath($personalization)) {
             return 'growth.stability_confidence';
         }
 
         if (($userState['is_revisit'] ?? false) === false) {
-            return ($userState['has_unlock'] ?? false) ? 'career.next_step' : 'growth.next_actions';
+            return $hasUnlock ? 'career.next_step' : 'growth.next_actions';
         }
 
         if ($userState['has_action_engagement'] ?? false) {
@@ -264,7 +355,34 @@ final class MbtiUserStateOrchestrationService
      */
     private function resolveSecondaryFocusKeys(string $primaryFocusKey, array $userState): array
     {
-        $candidates = ($userState['is_revisit'] ?? false) ? self::SECTION_FOCUS_REVISIT : self::SECTION_FOCUS_FIRST_VIEW;
+        $candidates = [];
+        $currentIntentCluster = trim((string) ($userState['current_intent_cluster'] ?? ''));
+        $lastDeepReadSection = trim((string) ($userState['last_deep_read_section'] ?? ''));
+
+        if ($this->isKnownSectionKey($lastDeepReadSection) && $lastDeepReadSection !== $primaryFocusKey) {
+            $candidates[] = $lastDeepReadSection;
+        }
+
+        $intentCandidates = match ($currentIntentCluster) {
+            'career_move' => ['career.next_step', 'growth.weekly_experiments', 'relationships.try_this_week'],
+            'relationship_tuning' => ['relationships.communication_style', 'growth.watchouts', 'career.work_experiments'],
+            'clarify_type' => ['traits.adjacent_type_contrast', 'growth.stability_confidence', 'career.work_experiments'],
+            'action_activation' => ['growth.weekly_experiments', 'career.work_experiments', 'relationships.try_this_week'],
+            'deep_reading' => ['career.work_experiments', 'traits.close_call_axes', 'growth.watchouts'],
+            default => [],
+        };
+
+        foreach ($intentCandidates as $candidate) {
+            if ($this->isKnownSectionKey($candidate)) {
+                $candidates[] = $candidate;
+            }
+        }
+
+        $fallbackCandidates = ($userState['is_revisit'] ?? false) ? self::SECTION_FOCUS_REVISIT : self::SECTION_FOCUS_FIRST_VIEW;
+        foreach ($fallbackCandidates as $candidate) {
+            $candidates[] = $candidate;
+        }
+
         $selected = [];
 
         foreach ($candidates as $candidate) {
@@ -316,13 +434,37 @@ final class MbtiUserStateOrchestrationService
      * @param  array<string, bool>  $userState
      * @return list<string>
      */
-    private function resolveCtaPriorityKeys(array $userState): array
+    private function resolveCtaPriorityKeys(array $userState, string $primaryFocusKey): array
     {
         $hasUnlock = (bool) ($userState['has_unlock'] ?? false);
         $isRevisit = (bool) ($userState['is_revisit'] ?? false);
         $hasFeedback = (bool) ($userState['has_feedback'] ?? false);
         $hasShare = (bool) ($userState['has_share'] ?? false);
         $hasActionEngagement = (bool) ($userState['has_action_engagement'] ?? false);
+        $feedbackSentiment = trim((string) ($userState['feedback_sentiment'] ?? ''));
+        $actionCompletionTendency = trim((string) ($userState['action_completion_tendency'] ?? ''));
+        $currentIntentCluster = trim((string) ($userState['current_intent_cluster'] ?? ''));
+
+        if ($currentIntentCluster === 'career_move' || str_starts_with($primaryFocusKey, 'career.')) {
+            return $hasUnlock
+                ? ['career_bridge', 'workspace_lite', 'share_result']
+                : ['career_bridge', 'unlock_full_report', 'share_result'];
+        }
+
+        if ($currentIntentCluster === 'clarify_type' || in_array($feedbackSentiment, ['negative', 'mixed'], true)) {
+            return $hasUnlock
+                ? ['workspace_lite', 'career_bridge', 'share_result']
+                : ['unlock_full_report', 'share_result', 'career_bridge'];
+        }
+
+        if (
+            $currentIntentCluster === 'action_activation'
+            && in_array($actionCompletionTendency, ['repeatable', 'committed'], true)
+        ) {
+            return $hasUnlock
+                ? ['workspace_lite', 'career_bridge', 'share_result']
+                : ['career_bridge', 'unlock_full_report', 'share_result'];
+        }
 
         if (! $hasUnlock) {
             if ($isRevisit && ($hasFeedback || $hasShare)) {
@@ -347,7 +489,8 @@ final class MbtiUserStateOrchestrationService
     private function resolveOrderedRecommendationKeys(
         array $personalization,
         string $primaryFocusKey,
-        array $secondaryFocusKeys
+        array $secondaryFocusKeys,
+        array $userState
     ): array {
         $candidates = $this->normalizeRecommendationCandidates(
             (array) ($personalization['recommended_read_candidates'] ?? [])
@@ -357,7 +500,7 @@ final class MbtiUserStateOrchestrationService
             return [];
         }
 
-        $primaryThemes = $this->resolveRecommendationThemesForFocus($primaryFocusKey);
+        $primaryThemes = $this->resolveRecommendationThemesForState($primaryFocusKey, $userState);
         $secondaryThemes = [];
 
         foreach ($secondaryFocusKeys as $secondaryFocusKey) {
@@ -399,9 +542,10 @@ final class MbtiUserStateOrchestrationService
     private function resolveOrderedActionKeys(
         array $personalization,
         string $primaryFocusKey,
-        array $secondaryFocusKeys
+        array $secondaryFocusKeys,
+        array $userState
     ): array {
-        $orderedFields = $this->resolveActionFieldOrder($primaryFocusKey, $secondaryFocusKeys);
+        $orderedFields = $this->resolveActionFieldOrder($primaryFocusKey, $secondaryFocusKeys, $userState);
         $ordered = [];
 
         foreach ($orderedFields as $field) {
@@ -418,9 +562,27 @@ final class MbtiUserStateOrchestrationService
      * @param  list<string>  $secondaryFocusKeys
      * @return list<string>
      */
-    private function resolveActionFieldOrder(string $primaryFocusKey, array $secondaryFocusKeys): array
+    private function resolveActionFieldOrder(string $primaryFocusKey, array $secondaryFocusKeys, array $userState): array
     {
         $ordered = [];
+        $currentIntentCluster = trim((string) ($userState['current_intent_cluster'] ?? ''));
+        $actionCompletionTendency = trim((string) ($userState['action_completion_tendency'] ?? ''));
+
+        $intentHints = match ($currentIntentCluster) {
+            'career_move' => ['work_experiment_keys', 'weekly_action_keys'],
+            'relationship_tuning' => ['relationship_action_keys', 'weekly_action_keys'],
+            'clarify_type' => ['watchout_keys', 'weekly_action_keys'],
+            'action_activation' => in_array($actionCompletionTendency, ['repeatable', 'committed'], true)
+                ? ['work_experiment_keys', 'weekly_action_keys', 'relationship_action_keys']
+                : ['weekly_action_keys', 'watchout_keys'],
+            default => [],
+        };
+
+        foreach ($intentHints as $field) {
+            if (! in_array($field, $ordered, true)) {
+                $ordered[] = $field;
+            }
+        }
 
         foreach ($this->resolvePrimaryActionFieldHints($primaryFocusKey) as $field) {
             if (! in_array($field, $ordered, true)) {
@@ -521,6 +683,41 @@ final class MbtiUserStateOrchestrationService
             str_starts_with($focusKey, 'traits.') => ['explainability', 'growth'],
             default => ['action', 'growth', 'career'],
         };
+    }
+
+    /**
+     * @param  array<string, mixed>  $userState
+     * @return list<string>
+     */
+    private function resolveRecommendationThemesForState(string $focusKey, array $userState): array
+    {
+        $currentIntentCluster = trim((string) ($userState['current_intent_cluster'] ?? ''));
+        $feedbackSentiment = trim((string) ($userState['feedback_sentiment'] ?? ''));
+        $feedbackCoverage = trim((string) ($userState['feedback_coverage'] ?? ''));
+
+        if ($currentIntentCluster === 'career_move') {
+            return ['career', 'work', 'action'];
+        }
+
+        if ($currentIntentCluster === 'relationship_tuning') {
+            return ['relationship', 'communication', 'action'];
+        }
+
+        if (
+            $currentIntentCluster === 'clarify_type'
+            || (
+                in_array($feedbackSentiment, ['negative', 'mixed'], true)
+                && in_array($feedbackCoverage, ['scene_only', 'explainability_only', 'mixed'], true)
+            )
+        ) {
+            return ['explainability', 'stability', 'growth'];
+        }
+
+        if ($currentIntentCluster === 'action_activation') {
+            return ['action', 'growth', 'career'];
+        }
+
+        return $this->resolveRecommendationThemesForFocus($focusKey);
     }
 
     /**
@@ -789,22 +986,392 @@ final class MbtiUserStateOrchestrationService
             ->exists();
     }
 
-    private function attemptHasActionEngagement(int $orgId, string $attemptId): bool
+    /**
+     * @return list<array{event_code:string, meta:array<string, mixed>}>
+     */
+    private function fetchAttemptEvents(int $orgId, string $attemptId): array
     {
         $rows = DB::table('events')
             ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
-            ->where('event_code', 'ui_card_interaction')
             ->orderByDesc('occurred_at')
-            ->limit(25)
-            ->pluck('meta_json');
+            ->limit(50)
+            ->get(['event_code', 'meta_json']);
 
-        foreach ($rows as $rawMeta) {
-            $meta = $this->normalizeMetaJson($rawMeta);
+        $events = [];
+
+        foreach ($rows as $row) {
+            $eventCode = trim((string) ($row->event_code ?? ''));
+            if ($eventCode === '') {
+                continue;
+            }
+
+            $events[] = [
+                'event_code' => $eventCode,
+                'meta' => $this->normalizeMetaJson($row->meta_json ?? null),
+            ];
+        }
+
+        return $events;
+    }
+
+    /**
+     * @param  list<array{event_code:string, meta:array<string, mixed>}>  $eventRows
+     * @param  list<string>  $eventCodes
+     */
+    private function eventRowsContainAny(array $eventRows, array $eventCodes): bool
+    {
+        if ($eventCodes === []) {
+            return false;
+        }
+
+        foreach ($eventRows as $row) {
+            if (in_array($row['event_code'], $eventCodes, true)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<array{event_code:string, meta:array<string, mixed>}>  $eventRows
+     */
+    private function eventRowsContainActionEngagement(array $eventRows): bool
+    {
+        foreach ($eventRows as $row) {
+            if ($row['event_code'] !== 'ui_card_interaction') {
+                continue;
+            }
+
+            $meta = $row['meta'];
             $sectionKey = trim((string) ($meta['sectionKey'] ?? $meta['section_key'] ?? ''));
             $actionKey = trim((string) ($meta['actionKey'] ?? $meta['action_key'] ?? ''));
 
             if ($actionKey !== '' || in_array($sectionKey, self::ACTION_SECTION_KEYS, true)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<array{event_code:string, meta:array<string, mixed>}>  $eventRows
+     */
+    private function resolveFeedbackSentiment(array $eventRows): string
+    {
+        $hasPositive = false;
+        $hasMixed = false;
+        $hasNegative = false;
+
+        foreach ($eventRows as $row) {
+            if ($row['event_code'] !== 'accuracy_feedback') {
+                continue;
+            }
+
+            $feedback = trim((string) ($row['meta']['feedback'] ?? ''));
+            if (in_array($feedback, self::POSITIVE_FEEDBACK_VALUES, true)) {
+                $hasPositive = true;
+                continue;
+            }
+
+            if (in_array($feedback, self::MIXED_FEEDBACK_VALUES, true)) {
+                $hasMixed = true;
+                continue;
+            }
+
+            if (in_array($feedback, self::NEGATIVE_FEEDBACK_VALUES, true)) {
+                $hasNegative = true;
+            }
+        }
+
+        if (! $hasPositive && ! $hasMixed && ! $hasNegative) {
+            return 'none';
+        }
+
+        if ($hasNegative && ! $hasPositive && ! $hasMixed) {
+            return 'negative';
+        }
+
+        if ($hasNegative || $hasMixed) {
+            return 'mixed';
+        }
+
+        return 'positive';
+    }
+
+    /**
+     * @param  list<array{event_code:string, meta:array<string, mixed>}>  $eventRows
+     */
+    private function resolveFeedbackCoverage(array $eventRows): string
+    {
+        $categories = [];
+
+        foreach ($eventRows as $row) {
+            if ($row['event_code'] !== 'accuracy_feedback') {
+                continue;
+            }
+
+            $sectionKey = trim((string) ($row['meta']['sectionKey'] ?? $row['meta']['section_key'] ?? ''));
+            $category = $this->categorizeFeedbackSection($sectionKey);
+            if ($category !== '' && ! in_array($category, $categories, true)) {
+                $categories[] = $category;
+            }
+        }
+
+        if ($categories === []) {
+            return 'none';
+        }
+
+        if (count($categories) === 1) {
+            return $categories[0] . '_only';
+        }
+
+        return 'mixed';
+    }
+
+    /**
+     * @param  list<array{event_code:string, meta:array<string, mixed>}>  $eventRows
+     */
+    private function resolveActionCompletionTendency(array $eventRows, bool $isRevisit, bool $hasUnlock): string
+    {
+        $actionInteractionCount = 0;
+        $positiveActionFeedback = false;
+        $hasCommerceIntent = false;
+
+        foreach ($eventRows as $row) {
+            $eventCode = $row['event_code'];
+            $meta = $row['meta'];
+
+            if (in_array($eventCode, ['click_unlock', 'create_order'], true)) {
+                $hasCommerceIntent = true;
+            }
+
+            if ($eventCode === 'accuracy_feedback') {
+                $feedback = trim((string) ($meta['feedback'] ?? ''));
+                $sectionKey = trim((string) ($meta['sectionKey'] ?? $meta['section_key'] ?? ''));
+                if ($feedback === 'helpful_action' || in_array($sectionKey, self::ACTION_SECTION_KEYS, true)) {
+                    $positiveActionFeedback = true;
+                }
+            }
+
+            if ($eventCode !== 'ui_card_interaction') {
+                continue;
+            }
+
+            $sectionKey = trim((string) ($meta['sectionKey'] ?? $meta['section_key'] ?? ''));
+            $actionKey = trim((string) ($meta['actionKey'] ?? $meta['action_key'] ?? ''));
+            if ($actionKey !== '' || in_array($sectionKey, self::ACTION_SECTION_KEYS, true)) {
+                $actionInteractionCount++;
+            }
+        }
+
+        if ($hasCommerceIntent && ($actionInteractionCount > 0 || $positiveActionFeedback)) {
+            return 'committed';
+        }
+
+        if (
+            $actionInteractionCount >= 2
+            || ($isRevisit && $actionInteractionCount >= 1)
+            || ($positiveActionFeedback && $actionInteractionCount >= 1)
+        ) {
+            return 'repeatable';
+        }
+
+        if ($actionInteractionCount >= 1 || $positiveActionFeedback) {
+            return 'warming_up';
+        }
+
+        return $hasUnlock ? 'available' : 'idle';
+    }
+
+    /**
+     * @param  list<array{event_code:string, meta:array<string, mixed>}>  $eventRows
+     */
+    private function resolveLastDeepReadSection(array $eventRows): string
+    {
+        foreach ($eventRows as $row) {
+            if ($row['event_code'] !== 'ui_card_interaction') {
+                continue;
+            }
+
+            $interaction = trim((string) ($row['meta']['interaction'] ?? ''));
+            $sectionKey = trim((string) ($row['meta']['sectionKey'] ?? $row['meta']['section_key'] ?? ''));
+            if ($sectionKey !== '' && $interaction === 'dwell_2500ms') {
+                return $sectionKey;
+            }
+        }
+
+        foreach ($eventRows as $row) {
+            if ($row['event_code'] !== 'ui_card_interaction') {
+                continue;
+            }
+
+            $sectionKey = trim((string) ($row['meta']['sectionKey'] ?? $row['meta']['section_key'] ?? ''));
+            if ($sectionKey !== '') {
+                return $sectionKey;
+            }
+        }
+
+        foreach ($eventRows as $row) {
+            if ($row['event_code'] !== 'accuracy_feedback') {
+                continue;
+            }
+
+            $sectionKey = trim((string) ($row['meta']['sectionKey'] ?? $row['meta']['section_key'] ?? ''));
+            if ($sectionKey !== '') {
+                return $sectionKey;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * @param  list<array{event_code:string, meta:array<string, mixed>}>  $eventRows
+     */
+    private function resolveCurrentIntentCluster(
+        array $eventRows,
+        bool $hasUnlock,
+        string $feedbackSentiment,
+        string $feedbackCoverage,
+        string $actionCompletionTendency,
+        string $lastDeepReadSection,
+        bool $hasActionEngagement
+    ): string {
+        foreach ($eventRows as $row) {
+            $eventCode = $row['event_code'];
+            $meta = $row['meta'];
+            $sectionKey = trim((string) ($meta['sectionKey'] ?? $meta['section_key'] ?? ''));
+            $actionKey = trim((string) ($meta['actionKey'] ?? $meta['action_key'] ?? ''));
+            $ctaKey = trim((string) ($meta['ctaKey'] ?? $meta['cta_key'] ?? ''));
+            $continueTarget = trim((string) ($meta['continueTarget'] ?? $meta['continue_target'] ?? ''));
+            $recommendationKey = trim((string) ($meta['recommendationKey'] ?? $meta['recommendation_key'] ?? ''));
+
+            if (in_array($eventCode, ['click_unlock', 'create_order'], true)) {
+                return 'unlock_readiness';
+            }
+
+            if ($eventCode === 'share_result') {
+                return 'continuity_return';
+            }
+
+            if ($eventCode === 'accuracy_feedback') {
+                return in_array($this->categorizeFeedbackSection($sectionKey), ['action', 'career'], true)
+                    ? 'action_activation'
+                    : 'clarify_type';
+            }
+
+            if ($eventCode !== 'ui_card_interaction') {
+                continue;
+            }
+
+            if ($ctaKey === 'career_bridge' || $continueTarget === 'career_recommendation') {
+                return 'career_move';
+            }
+
+            if ($ctaKey === 'workspace_lite' || str_starts_with($continueTarget, 'history_') || $continueTarget === 'share_take_flow') {
+                return 'continuity_return';
+            }
+
+            if ($recommendationKey !== '' || $continueTarget === 'recommended_read') {
+                return 'deep_reading';
+            }
+
+            if ($actionKey !== '' || in_array($sectionKey, self::ACTION_SECTION_KEYS, true)) {
+                return 'action_activation';
+            }
+
+            if (str_starts_with($sectionKey, 'career.')) {
+                return 'career_move';
+            }
+
+            if (str_starts_with($sectionKey, 'relationships.')) {
+                return 'relationship_tuning';
+            }
+
+            if ($this->isClarifySection($sectionKey) || $sectionKey === 'scene_fingerprint') {
+                return 'clarify_type';
+            }
+        }
+
+        if (
+            in_array($feedbackSentiment, ['negative', 'mixed'], true)
+            && in_array($feedbackCoverage, ['scene_only', 'explainability_only', 'mixed'], true)
+        ) {
+            return 'clarify_type';
+        }
+
+        if ($this->isKnownSectionKey($lastDeepReadSection)) {
+            if (str_starts_with($lastDeepReadSection, 'career.')) {
+                return 'career_move';
+            }
+
+            if (str_starts_with($lastDeepReadSection, 'relationships.')) {
+                return 'relationship_tuning';
+            }
+
+            if ($this->isClarifySection($lastDeepReadSection)) {
+                return 'clarify_type';
+            }
+        }
+
+        if ($hasActionEngagement || in_array($actionCompletionTendency, ['repeatable', 'committed'], true)) {
+            return 'action_activation';
+        }
+
+        return $hasUnlock ? 'default' : 'unlock_readiness';
+    }
+
+    private function categorizeFeedbackSection(string $sectionKey): string
+    {
+        if ($sectionKey === '') {
+            return '';
+        }
+
+        if ($sectionKey === 'scene_fingerprint') {
+            return 'scene';
+        }
+
+        if ($this->isClarifySection($sectionKey)) {
+            return 'explainability';
+        }
+
+        if (in_array($sectionKey, self::ACTION_SECTION_KEYS, true)) {
+            return 'action';
+        }
+
+        if (str_starts_with($sectionKey, 'career.')) {
+            return 'career';
+        }
+
+        if (str_starts_with($sectionKey, 'relationships.')) {
+            return 'relationship';
+        }
+
+        if (str_starts_with($sectionKey, 'growth.')) {
+            return 'growth';
+        }
+
+        return '';
+    }
+
+    private function isClarifySection(string $sectionKey): bool
+    {
+        return $sectionKey === 'scene_fingerprint'
+            || $sectionKey === 'growth.stability_confidence'
+            || str_starts_with($sectionKey, 'traits.');
+    }
+
+    private function isKnownSectionKey(string $sectionKey): bool
+    {
+        if ($sectionKey === '') {
+            return false;
+        }
+
+        foreach (self::CHAPTER_SECTIONS as $sections) {
+            if (in_array($sectionKey, $sections, true)) {
                 return true;
             }
         }
