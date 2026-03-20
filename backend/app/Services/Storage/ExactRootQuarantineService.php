@@ -15,6 +15,7 @@ final class ExactRootQuarantineService
      */
     private const ALLOWED_SOURCE_KINDS = [
         'legacy.source_pack',
+        'v2.mirror',
     ];
 
     private const PLAN_SCHEMA = 'storage_quarantine_exact_roots_plan.v1';
