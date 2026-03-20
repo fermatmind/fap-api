@@ -76,7 +76,6 @@ final class ExactRootQuarantineServiceTest extends TestCase
 
         $sourcePackRoot = storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
         $v2PrimaryRoot = storage_path('app/private/packs_v2/SDS_20/v1/'.Str::uuid());
-        $v2MirrorRoot = storage_path('app/content_packs_v2/EQ_60/v1/'.Str::uuid());
         $previousPackRoot = storage_path('app/private/content_releases/backups/'.Str::uuid().'/previous_pack');
         $currentPackRoot = storage_path('app/private/content_releases/backups/'.Str::uuid().'/current_pack');
         $liveAliasRoot = $this->isolatedPacksRoot.'/default/CN_MAINLAND/zh-CN/BIG5-LIVE';
@@ -86,7 +85,6 @@ final class ExactRootQuarantineServiceTest extends TestCase
 
         $sourcePack = $this->seedExactRootFixture($sourcePackReleaseId, 'legacy.source_pack', $sourcePackRoot, 'source_pack_ok', 'BIG5_OCEAN', 'v1');
         $this->seedExactRootFixture((string) Str::uuid(), 'v2.primary', $v2PrimaryRoot, 'v2_primary_blocked', 'SDS_20', 'v1');
-        $this->seedExactRootFixture((string) Str::uuid(), 'v2.mirror', $v2MirrorRoot, 'v2_mirror_blocked', 'EQ_60', 'v1');
         $this->seedExactRootFixture((string) Str::uuid(), 'legacy.previous_pack', $previousPackRoot, 'blocked_previous', 'BIG5_OCEAN', 'v1');
         $this->seedExactRootFixture((string) Str::uuid(), 'legacy.current_pack', $currentPackRoot, 'blocked_current', 'BIG5_OCEAN', 'v1');
         $this->seedExactRootFixture((string) Str::uuid(), 'live_alias', $liveAliasRoot, 'blocked_live_alias', 'BIG5_OCEAN', 'v1');
@@ -135,7 +133,6 @@ final class ExactRootQuarantineServiceTest extends TestCase
         $this->assertFileExists($runDir.'/run.json');
         $this->assertDirectoryDoesNotExist($sourcePackRoot);
         $this->assertDirectoryExists($v2PrimaryRoot);
-        $this->assertDirectoryExists($v2MirrorRoot);
         $this->assertDirectoryExists($previousPackRoot);
         $this->assertDirectoryExists($currentPackRoot);
         $this->assertDirectoryExists($liveAliasRoot);
@@ -184,6 +181,31 @@ final class ExactRootQuarantineServiceTest extends TestCase
         $this->assertSame(1, (int) ($result['failed_root_count'] ?? 0));
         $this->assertDirectoryExists($sourceRoot);
         $this->assertFileExists((string) ($result['run_dir'] ?? '').'/run.json');
+    }
+
+    public function test_service_quarantines_v2_mirror_without_affecting_primary_runtime_resolution(): void
+    {
+        $fixture = $this->seedV2MirrorQuarantineFixture('v2_mirror_quarantine_ok');
+        $service = app(ExactRootQuarantineService::class);
+
+        $plan = $service->buildPlan('s3');
+        $candidates = collect((array) ($plan['candidates'] ?? []));
+        $mirrorCandidate = $candidates->firstWhere('exact_manifest_id', $fixture['exact_manifest_id']);
+
+        $this->assertIsArray($mirrorCandidate);
+        $this->assertSame('v2.mirror', (string) ($mirrorCandidate['source_kind'] ?? ''));
+
+        $result = $service->executePlan($plan);
+
+        $quarantinedEntry = collect((array) ($result['quarantined'] ?? []))
+            ->firstWhere('exact_manifest_id', $fixture['exact_manifest_id']);
+        $this->assertIsArray($quarantinedEntry);
+        $this->assertDirectoryDoesNotExist($fixture['mirror_root']);
+        $this->assertDirectoryExists($fixture['primary_root']);
+        $this->assertFileExists($fixture['primary_root'].'/compiled/manifest.json');
+        $this->assertFileExists($fixture['primary_root'].'/compiled/payload.compiled.json');
+        $this->assertFileExists((string) ($quarantinedEntry['target_root'] ?? '').'/.quarantine.json');
+        $this->assertSame($fixture['storage_path'], (string) DB::table('content_pack_releases')->where('id', $fixture['release_id'])->value('storage_path'));
     }
 
     public function test_service_rejects_tampered_plan_source_path_without_moving_arbitrary_directory(): void
@@ -358,6 +380,156 @@ final class ExactRootQuarantineServiceTest extends TestCase
                 'git_sha' => null,
                 'pack_version' => $packVersion,
                 'manifest_json' => null,
+                'storage_path' => $storagePath,
+                'source_commit' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+    }
+
+    /**
+     * @return array{
+     *   exact_manifest_id:int,
+     *   manifest_hash:string,
+     *   mirror_root:string,
+     *   primary_root:string,
+     *   release_id:string,
+     *   storage_path:string
+     * }
+     */
+    private function seedV2MirrorQuarantineFixture(string $suffix): array
+    {
+        $releaseId = (string) Str::uuid();
+        $storagePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$releaseId;
+        $primaryRoot = storage_path('app/'.$storagePath);
+        $mirrorRoot = storage_path('app/content_packs_v2/BIG5_OCEAN/v1/'.$releaseId);
+        $files = $this->createCompiledTree($primaryRoot, 'BIG5_OCEAN', 'v1', $suffix);
+        $this->createCompiledTree($mirrorRoot, 'BIG5_OCEAN', 'v1', $suffix);
+        $manifestHash = hash('sha256', $files['compiled/manifest.json']);
+        $this->insertV2Release($releaseId, 'BIG5_OCEAN', 'v1', $storagePath, $manifestHash);
+
+        $manifest = app(ExactReleaseFileSetCatalogService::class)->upsertExactManifest([
+            'content_pack_release_id' => $releaseId,
+            'schema_version' => (string) config('storage_rollout.exact_manifest_schema_version', 'storage_exact_manifest.v1'),
+            'source_kind' => 'v2.mirror',
+            'source_disk' => 'local',
+            'source_storage_path' => $mirrorRoot,
+            'manifest_hash' => $manifestHash,
+            'pack_id' => 'BIG5_OCEAN',
+            'pack_version' => 'v1',
+            'compiled_hash' => hash('sha256', 'compiled|'.$suffix),
+            'content_hash' => hash('sha256', 'content|'.$suffix),
+            'norms_version' => '2026Q1',
+            'source_commit' => 'git-'.$suffix,
+            'payload_json' => ['suffix' => $suffix],
+            'sealed_at' => now(),
+            'last_verified_at' => now(),
+        ], collect($files)->map(
+            fn (string $payload, string $logicalPath): array => [
+                'logical_path' => $logicalPath,
+                'blob_hash' => hash('sha256', $payload),
+                'size_bytes' => strlen($payload),
+                'role' => $logicalPath === 'compiled/manifest.json' ? 'manifest' : 'compiled',
+                'content_type' => 'application/json',
+                'encoding' => 'identity',
+                'checksum' => 'sha256:'.hash('sha256', $payload),
+            ]
+        )->values()->all());
+
+        foreach ($files as $payload) {
+            $hash = hash('sha256', $payload);
+            DB::table('storage_blobs')->updateOrInsert(
+                ['hash' => $hash],
+                [
+                    'disk' => 'local',
+                    'storage_path' => 'blobs/sha256/'.substr($hash, 0, 2).'/'.$hash,
+                    'size_bytes' => strlen($payload),
+                    'content_type' => 'application/json',
+                    'encoding' => 'identity',
+                    'ref_count' => 1,
+                    'first_seen_at' => now(),
+                    'last_verified_at' => now(),
+                ]
+            );
+
+            $remotePath = 'rollout/blobs/sha256/'.substr($hash, 0, 2).'/'.$hash;
+            Storage::disk('s3')->put($remotePath, $payload);
+            DB::table('storage_blob_locations')->insert([
+                'blob_hash' => $hash,
+                'disk' => 's3',
+                'storage_path' => $remotePath,
+                'location_kind' => 'remote_copy',
+                'size_bytes' => strlen($payload),
+                'checksum' => 'sha256:'.$hash,
+                'etag' => 'etag-'.$suffix.'-'.substr($hash, 0, 8),
+                'storage_class' => 'STANDARD_IA',
+                'verified_at' => now(),
+                'meta_json' => json_encode([
+                    'bucket' => 'quarantine-test-bucket',
+                    'region' => 'ap-guangzhou',
+                    'endpoint' => 'https://cos.quarantine.test',
+                    'url' => 'https://cos.quarantine.test/'.$remotePath,
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return [
+            'exact_manifest_id' => (int) $manifest->getKey(),
+            'manifest_hash' => $manifestHash,
+            'mirror_root' => $mirrorRoot,
+            'primary_root' => $primaryRoot,
+            'release_id' => $releaseId,
+            'storage_path' => $storagePath,
+        ];
+    }
+
+    private function insertV2Release(string $releaseId, string $packId, string $packVersion, string $storagePath, string $manifestHash): void
+    {
+        $versionId = 'version-'.$releaseId;
+
+        DB::table('content_pack_versions')->updateOrInsert(
+            ['id' => $versionId],
+            [
+                'region' => 'GLOBAL',
+                'locale' => 'global',
+                'pack_id' => $packId,
+                'content_package_version' => $packVersion,
+                'dir_version_alias' => $packVersion,
+                'source_type' => 'publish',
+                'source_ref' => 'test',
+                'sha256' => hash('sha256', $storagePath),
+                'manifest_json' => '{}',
+                'extracted_rel_path' => ltrim(str_replace('\\', '/', $storagePath), '/'),
+                'created_by' => 'test',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        DB::table('content_pack_releases')->updateOrInsert(
+            ['id' => $releaseId],
+            [
+                'action' => 'packs2_publish',
+                'region' => 'GLOBAL',
+                'locale' => 'global',
+                'dir_alias' => $packVersion,
+                'from_version_id' => null,
+                'to_version_id' => $versionId,
+                'from_pack_id' => null,
+                'to_pack_id' => $packId,
+                'status' => 'success',
+                'message' => 'test',
+                'created_by' => 'test',
+                'manifest_hash' => $manifestHash,
+                'compiled_hash' => $manifestHash,
+                'content_hash' => hash('sha256', 'content|'.$releaseId),
+                'norms_version' => '2026Q1',
+                'git_sha' => null,
+                'pack_version' => $packVersion,
+                'manifest_json' => json_encode(['compiled_hash' => $manifestHash], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'storage_path' => $storagePath,
                 'source_commit' => null,
                 'created_at' => now(),

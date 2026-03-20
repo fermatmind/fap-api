@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\File;
 
 final class QuarantinedRootPurgeService
 {
-    private const ALLOWED_SOURCE_KIND = 'legacy.source_pack';
+    /**
+     * @var list<string>
+     */
+    private const ALLOWED_SOURCE_KINDS = [
+        'legacy.source_pack',
+        'v2.mirror',
+    ];
 
     private const PLAN_SCHEMA = 'storage_purge_quarantined_root_plan.v1';
 
@@ -264,7 +270,7 @@ final class QuarantinedRootPurgeService
         }
 
         $sourceKind = trim((string) ($sentinel['source_kind'] ?? ''));
-        if ($sourceKind !== self::ALLOWED_SOURCE_KIND) {
+        if (! in_array($sourceKind, self::ALLOWED_SOURCE_KINDS, true)) {
             throw new \RuntimeException('purge source_kind is not allowed.');
         }
 

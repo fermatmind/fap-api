@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\File;
 
 final class QuarantinedRootRestoreService
 {
-    private const ALLOWED_SOURCE_KIND = 'legacy.source_pack';
+    private const LEGACY_SOURCE_KIND = 'legacy.source_pack';
+
+    private const V2_MIRROR_SOURCE_KIND = 'v2.mirror';
 
     private const PLAN_SCHEMA = 'storage_restore_quarantined_root_plan.v1';
 
@@ -240,7 +242,7 @@ final class QuarantinedRootRestoreService
         }
 
         $sourceKind = trim((string) ($sentinel['source_kind'] ?? ''));
-        if ($sourceKind !== self::ALLOWED_SOURCE_KIND) {
+        if (! in_array($sourceKind, [self::LEGACY_SOURCE_KIND, self::V2_MIRROR_SOURCE_KIND], true)) {
             throw new \RuntimeException('restore source_kind is not allowed.');
         }
 
@@ -290,17 +292,23 @@ final class QuarantinedRootRestoreService
         $this->verifyRootMatchesExactAuthority($itemRoot, $files, $manifestHash, true);
         $validation['quarantined_root_exact_verified'] = true;
 
+        $releaseId = trim((string) ($manifest->content_pack_release_id ?? ''));
         $targetRoot = $sourceStoragePath;
         if (file_exists($targetRoot)) {
             throw new \RuntimeException('restore target already exists.');
         }
         $validation['target_path_absent'] = true;
 
-        $this->assertTargetAllowed($targetRoot);
+        $this->assertTargetAllowed(
+            $sourceKind,
+            $targetRoot,
+            strtoupper(trim((string) ($manifest->pack_id ?? ''))),
+            trim((string) ($manifest->pack_version ?? '')),
+            $releaseId
+        );
         $validation['target_path_allowlisted'] = true;
         $validation['target_path_not_in_danger_set'] = true;
 
-        $releaseId = trim((string) ($manifest->content_pack_release_id ?? ''));
         if ($releaseId !== '') {
             $release = DB::table('content_pack_releases')->where('id', $releaseId)->first();
             if (! $release) {
@@ -316,15 +324,27 @@ final class QuarantinedRootRestoreService
             $validation['linked_release_declares_target'] = true;
 
             $resolvedSource = $this->releaseStorageLocator->resolveReleaseSource($release);
-            if ($resolvedSource !== null) {
-                $resolvedRuntimeRoot = $this->normalizeRoot((string) ($resolvedSource['root'] ?? ''));
-                if ($resolvedRuntimeRoot !== $targetRoot) {
-                    throw new \RuntimeException('linked release currently resolves to a different runtime root.');
+            if ($sourceKind === self::LEGACY_SOURCE_KIND) {
+                if ($resolvedSource !== null) {
+                    $resolvedRuntimeRoot = $this->normalizeRoot((string) ($resolvedSource['root'] ?? ''));
+                    if ($resolvedRuntimeRoot !== $targetRoot) {
+                        throw new \RuntimeException('linked release currently resolves to a different runtime root.');
+                    }
                 }
+                $validation['linked_release_runtime_source_matches_target'] = $resolvedSource === null
+                    ? null
+                    : true;
+            } else {
+                if ($resolvedSource === null) {
+                    throw new \RuntimeException('linked release currently does not resolve to a stable runtime root.');
+                }
+
+                $resolvedRuntimeRoot = $this->normalizeRoot((string) ($resolvedSource['root'] ?? ''));
+                if ($resolvedRuntimeRoot === $targetRoot) {
+                    throw new \RuntimeException('linked release currently resolves to the mirror target.');
+                }
+                $validation['linked_release_runtime_source_preserved'] = true;
             }
-            $validation['linked_release_runtime_source_matches_target'] = $resolvedSource === null
-                ? null
-                : true;
 
             if (in_array($releaseId, $this->activeReleaseIds(), true)) {
                 throw new \RuntimeException('linked release is active; restore is blocked.');
@@ -454,9 +474,15 @@ final class QuarantinedRootRestoreService
         }
     }
 
-    private function assertTargetAllowed(string $targetRoot): void
-    {
+    private function assertTargetAllowed(
+        string $sourceKind,
+        string $targetRoot,
+        string $packId,
+        string $packVersion,
+        string $releaseId
+    ): void {
         $contentReleasesRoot = $this->normalizeRoot(storage_path('app/private/content_releases'));
+        $contentPacksV2Root = $this->normalizeRoot(storage_path('app/content_packs_v2'));
         $backupsRoot = $this->normalizeRoot(storage_path('app/private/content_releases/backups'));
         $defaultRoot = $this->normalizeRoot(rtrim((string) config('content_packs.root', ''), '/\\'));
         if ($defaultRoot !== '' && basename($defaultRoot) !== 'default') {
@@ -476,13 +502,31 @@ final class QuarantinedRootRestoreService
             $this->restoreRootBase(),
         ];
 
-        if (! $this->isUnderPrefix($targetRoot, $contentReleasesRoot)) {
-            throw new \RuntimeException('restore target is outside the legacy source_pack allowlist.');
-        }
+        if ($sourceKind === self::LEGACY_SOURCE_KIND) {
+            if (! $this->isUnderPrefix($targetRoot, $contentReleasesRoot)) {
+                throw new \RuntimeException('restore target is outside the legacy source_pack allowlist.');
+            }
 
-        $contentReleasesPattern = '#^'.preg_quote($contentReleasesRoot, '#').'/[^/]+/source_pack$#';
-        if (preg_match($contentReleasesPattern, $targetRoot) !== 1) {
-            throw new \RuntimeException('restore target must match legacy content_releases/{release_id}/source_pack shape.');
+            $contentReleasesPattern = '#^'.preg_quote($contentReleasesRoot, '#').'/[^/]+/source_pack$#';
+            if (preg_match($contentReleasesPattern, $targetRoot) !== 1) {
+                throw new \RuntimeException('restore target must match legacy content_releases/{release_id}/source_pack shape.');
+            }
+        } elseif ($sourceKind === self::V2_MIRROR_SOURCE_KIND) {
+            if (! $this->isUnderPrefix($targetRoot, $contentPacksV2Root)) {
+                throw new \RuntimeException('restore target is outside the V2 mirror allowlist.');
+            }
+
+            if ($packId === '' || $packVersion === '' || $releaseId === '') {
+                throw new \RuntimeException('restore target is missing V2 mirror identity context.');
+            }
+
+            $mirrorPattern = '#^'.preg_quote($contentPacksV2Root, '#')
+                .'/'.preg_quote($packId, '#')
+                .'/'.preg_quote($packVersion, '#')
+                .'/'.preg_quote($releaseId, '#').'$#';
+            if (preg_match($mirrorPattern, $targetRoot) !== 1) {
+                throw new \RuntimeException('restore target must match V2 mirror content_packs_v2/{pack_id}/{pack_version}/{release_id} shape.');
+            }
         }
 
         $dangerRoots = array_filter(array_merge([$backupsRoot, $defaultRoot], $artifactRoots, $materializedRoots, $quarantineRoots));
