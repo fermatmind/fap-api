@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase8a.v1',
+            'mbti.personalization.phase8b.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -104,9 +104,15 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase8a.v1',
+            'phase8b.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
         );
+        $this->assertIsArray(data_get($payload, 'report._meta.personalization.ordered_recommendation_keys'));
+        $this->assertIsArray(data_get($payload, 'report._meta.personalization.ordered_action_keys'));
+        $this->assertIsArray(data_get($payload, 'report._meta.personalization.recommendation_priority_keys'));
+        $this->assertIsArray(data_get($payload, 'report._meta.personalization.action_priority_keys'));
+        $this->assertIsString((string) data_get($payload, 'report._meta.personalization.reading_focus_key', ''));
+        $this->assertIsString((string) data_get($payload, 'report._meta.personalization.action_focus_key', ''));
         $this->assertSame(
             [
                 'is_first_view' => true,
@@ -342,12 +348,20 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.try_this_week');
 
         $this->assertSame(
-            'mbti.personalization.phase8a.v1',
+            'mbti.personalization.phase8b.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase8a.v1',
+            'phase8b.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
+        );
+        $this->assertSame(
+            data_get($roundTrippedReport, '_meta.personalization.ordered_recommendation_keys'),
+            data_get($projection, '_meta.personalization.ordered_recommendation_keys')
+        );
+        $this->assertSame(
+            data_get($roundTrippedReport, '_meta.personalization.ordered_action_keys'),
+            data_get($projection, '_meta.personalization.ordered_action_keys')
         );
         $this->assertSame(
             'growth.next_actions',

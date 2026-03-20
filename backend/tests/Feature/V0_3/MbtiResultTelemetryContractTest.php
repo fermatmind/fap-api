@@ -43,8 +43,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
-            $this->assertSame('mbti.personalization.phase8a.v1', (string) ($meta['schema_version'] ?? ''));
-            $this->assertSame('phase8a.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
+            $this->assertSame('mbti.personalization.phase8b.v1', (string) ($meta['schema_version'] ?? ''));
+            $this->assertSame('phase8b.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertIsArray($meta['axis_bands'] ?? null);
             $this->assertSame('boundary', (string) (($meta['axis_bands']['EI'] ?? '')));
             $this->assertSame('boundary', (string) (($meta['axis_bands']['AT'] ?? '')));
@@ -89,6 +89,12 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['relationship_action_keys'] ?? null);
             $this->assertIsArray($meta['work_experiment_keys'] ?? null);
             $this->assertIsArray($meta['watchout_keys'] ?? null);
+            $this->assertIsArray($meta['ordered_recommendation_keys'] ?? []);
+            $this->assertIsArray($meta['ordered_action_keys'] ?? []);
+            $this->assertIsArray($meta['recommendation_priority_keys'] ?? []);
+            $this->assertIsArray($meta['action_priority_keys'] ?? []);
+            $this->assertIsString((string) ($meta['reading_focus_key'] ?? ''));
+            $this->assertIsString((string) ($meta['action_focus_key'] ?? ''));
             $this->assertIsArray($meta['user_state'] ?? null);
             $this->assertIsArray($meta['orchestration'] ?? null);
             $this->assertIsArray($meta['continuity'] ?? null);
@@ -110,6 +116,7 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['relationship_action_keys'] ?? null, $eventMeta['result_view']['relationship_action_keys'] ?? null);
         $this->assertSame($eventMeta['report_view']['work_experiment_keys'] ?? null, $eventMeta['result_view']['work_experiment_keys'] ?? null);
         $this->assertSame($eventMeta['report_view']['watchout_keys'] ?? null, $eventMeta['result_view']['watchout_keys'] ?? null);
+        $this->assertSame($eventMeta['report_view']['ordered_action_keys'] ?? null, $eventMeta['result_view']['ordered_action_keys'] ?? null);
         $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.is_first_view'));
         $this->assertSame(false, data_get($eventMeta, 'result_view.user_state.is_revisit'));
         $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.has_share'));
@@ -129,6 +136,10 @@ class MbtiResultTelemetryContractTest extends TestCase
             ['unlock_full_report', 'career_bridge', 'share_result'],
             data_get($eventMeta, 'result_view.orchestration.cta_priority_keys')
         );
+        $this->assertIsArray(data_get($eventMeta, 'result_view.ordered_recommendation_keys', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.recommendation_priority_keys', []));
+        $this->assertIsString((string) data_get($eventMeta, 'result_view.reading_focus_key', ''));
+        $this->assertIsString((string) data_get($eventMeta, 'result_view.action_focus_key', ''));
         $this->assertSame(
             'growth.stability_confidence',
             data_get($eventMeta, 'result_view.continuity.carryover_focus_key')

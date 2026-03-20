@@ -654,7 +654,7 @@ final class MbtiResultPersonalizationService
         }
 
         return $this->userStateOrchestrationService->withBaseline([
-            'schema_version' => 'mbti.personalization.phase8a.v1',
+            'schema_version' => 'mbti.personalization.phase8b.v1',
             'locale' => $locale,
             'type_code' => $typeCode,
             'identity' => $identity,
@@ -683,6 +683,7 @@ final class MbtiResultPersonalizationService
             'relationship_action_keys' => $actionAuthority['relationship_action_keys'],
             'work_experiment_keys' => $actionAuthority['work_experiment_keys'],
             'watchout_keys' => $actionAuthority['watchout_keys'],
+            'recommended_read_candidates' => $this->extractRecommendationCandidates($reportPayload),
             'variant_keys' => $variantKeys,
             'sections' => $sectionVariants,
             'pack_id' => trim((string) ($context['pack_id'] ?? data_get($reportPayload, 'versions.content_pack_id', ''))),
@@ -690,6 +691,70 @@ final class MbtiResultPersonalizationService
             'content_package_dir' => trim((string) ($context['dir_version'] ?? data_get($reportPayload, 'versions.dir_version', ''))),
             'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
         ], (bool) ($context['has_unlock'] ?? false));
+    }
+
+    /**
+     * @param  array<string, mixed>  $reportPayload
+     * @return list<array{
+     *   key:string,
+     *   type:string,
+     *   title:string,
+     *   priority:int,
+     *   tags:list<string>,
+     *   url:string
+     * }>
+     */
+    private function extractRecommendationCandidates(array $reportPayload): array
+    {
+        $reads = is_array($reportPayload['recommended_reads'] ?? null) ? $reportPayload['recommended_reads'] : [];
+        $candidates = [];
+
+        foreach ($reads as $index => $read) {
+            if (! is_array($read)) {
+                continue;
+            }
+
+            $key = $this->normalizeRecommendationCandidateKey($read, (int) $index);
+            if ($key === '') {
+                continue;
+            }
+
+            $tags = array_values(array_unique(array_filter(array_map(
+                static fn (mixed $tag): string => trim((string) $tag),
+                is_array($read['tags'] ?? null) ? $read['tags'] : []
+            ))));
+
+            $candidates[] = [
+                'key' => $key,
+                'type' => trim((string) ($read['type'] ?? '')),
+                'title' => trim((string) ($read['title'] ?? '')),
+                'priority' => is_numeric($read['priority'] ?? null) ? (int) round((float) $read['priority']) : 0,
+                'tags' => $tags,
+                'url' => trim((string) ($read['url'] ?? $read['canonical_url'] ?? '')),
+            ];
+        }
+
+        return $candidates;
+    }
+
+    /**
+     * @param  array<string, mixed>  $read
+     */
+    private function normalizeRecommendationCandidateKey(array $read, int $index): string
+    {
+        foreach ([
+            trim((string) ($read['id'] ?? '')),
+            trim((string) ($read['canonical_id'] ?? '')),
+            trim((string) ($read['canonical_url'] ?? '')),
+            trim((string) ($read['url'] ?? '')),
+            trim((string) ($read['title'] ?? '')),
+        ] as $candidate) {
+            if ($candidate !== '') {
+                return $candidate;
+            }
+        }
+
+        return sprintf('recommended-read-%d', $index + 1);
     }
 
     /**
