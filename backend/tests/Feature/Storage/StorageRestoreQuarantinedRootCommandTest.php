@@ -156,13 +156,32 @@ final class StorageRestoreQuarantinedRootCommandTest extends TestCase
         $this->assertStringContainsString('restore plan item_root does not match requested item root.', Artisan::output());
     }
 
+    public function test_command_dry_run_fails_when_restore_target_shape_is_not_standard_legacy_source_pack(): void
+    {
+        $fixture = $this->quarantineLegacySourcePackFixture(
+            'command_restore_invalid_shape',
+            storage_path('app/private/content_releases/'.Str::uuid().'/nested/source_pack')
+        );
+
+        $this->assertSame(1, Artisan::call('storage:restore-quarantined-root', [
+            '--dry-run' => true,
+            '--item-root' => $fixture['item_root'],
+        ]));
+        $this->assertStringContainsString(
+            'restore target must match legacy content_releases/{release_id}/source_pack shape.',
+            Artisan::output()
+        );
+        $this->assertDirectoryExists($fixture['item_root']);
+        $this->assertDirectoryDoesNotExist($fixture['source_root']);
+    }
+
     /**
      * @return array{item_root:string,source_root:string,release_id:string}
      */
-    private function quarantineLegacySourcePackFixture(string $suffix): array
+    private function quarantineLegacySourcePackFixture(string $suffix, ?string $root = null): array
     {
         $releaseId = (string) Str::uuid();
-        $root = storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
+        $root ??= storage_path('app/private/content_releases/'.Str::uuid().'/source_pack');
         $files = $this->createCompiledTree($root, 'BIG5_OCEAN', 'v1', $suffix);
         $this->insertRelease($releaseId, 'BIG5_OCEAN', 'v1', $root);
 

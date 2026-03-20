@@ -313,7 +313,18 @@ final class QuarantinedRootRestoreService
             if (! in_array($targetRoot, $candidateRoots, true)) {
                 throw new \RuntimeException('linked release storage path no longer maps to restore target.');
             }
-            $validation['linked_release_matches_target'] = true;
+            $validation['linked_release_declares_target'] = true;
+
+            $resolvedSource = $this->releaseStorageLocator->resolveReleaseSource($release);
+            if ($resolvedSource !== null) {
+                $resolvedRuntimeRoot = $this->normalizeRoot((string) ($resolvedSource['root'] ?? ''));
+                if ($resolvedRuntimeRoot !== $targetRoot) {
+                    throw new \RuntimeException('linked release currently resolves to a different runtime root.');
+                }
+            }
+            $validation['linked_release_runtime_source_matches_target'] = $resolvedSource === null
+                ? null
+                : true;
 
             if (in_array($releaseId, $this->activeReleaseIds(), true)) {
                 throw new \RuntimeException('linked release is active; restore is blocked.');
@@ -469,8 +480,9 @@ final class QuarantinedRootRestoreService
             throw new \RuntimeException('restore target is outside the legacy source_pack allowlist.');
         }
 
-        if (! str_ends_with($targetRoot, '/source_pack')) {
-            throw new \RuntimeException('restore target must resolve to a legacy source_pack root.');
+        $contentReleasesPattern = '#^'.preg_quote($contentReleasesRoot, '#').'/[^/]+/source_pack$#';
+        if (preg_match($contentReleasesPattern, $targetRoot) !== 1) {
+            throw new \RuntimeException('restore target must match legacy content_releases/{release_id}/source_pack shape.');
         }
 
         $dangerRoots = array_filter(array_merge([$backupsRoot, $defaultRoot], $artifactRoots, $materializedRoots, $quarantineRoots));
