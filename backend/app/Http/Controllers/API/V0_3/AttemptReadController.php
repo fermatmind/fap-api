@@ -13,6 +13,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Mbti\MbtiPublicProjectionService;
+use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Mbti\MbtiUserStateOrchestrationService;
 use App\Services\Observability\ClinicalComboTelemetry;
@@ -41,6 +42,7 @@ class AttemptReadController extends Controller
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private MbtiUserStateOrchestrationService $mbtiUserStateOrchestrationService,
+        private MbtiReadModelContractService $mbtiReadModelContractService,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
@@ -346,6 +348,10 @@ class AttemptReadController extends Controller
 
         if ($effectiveMbtiPersonalization !== []) {
             $responsePayload = $this->applyMbtiPersonalizationToEnvelope($responsePayload, $effectiveMbtiPersonalization);
+            $readContract = data_get($responsePayload, 'report._meta.personalization.read_contract_v1');
+            if (is_array($readContract)) {
+                $responsePayload['mbti_read_contract_v1'] = $readContract;
+            }
         }
 
         $mbtiEventMeta = $scaleCode === 'MBTI'
@@ -662,7 +668,11 @@ class AttemptReadController extends Controller
 
         if (is_array(data_get($reportEnvelope, 'report'))) {
             $reportMeta = is_array(data_get($reportEnvelope, 'report._meta')) ? data_get($reportEnvelope, 'report._meta') : [];
-            $reportMeta['personalization'] = $personalization;
+            $canonicalPersonalization = is_array($reportMeta['personalization'] ?? null) ? $reportMeta['personalization'] : [];
+            $reportMeta['personalization'] = $this->mbtiReadModelContractService->applyOverlayPatch(
+                $canonicalPersonalization,
+                $personalization
+            );
             data_set($reportEnvelope, 'report._meta', $reportMeta);
         }
 
@@ -670,7 +680,13 @@ class AttemptReadController extends Controller
             $projectionMeta = is_array(data_get($reportEnvelope, 'mbti_public_projection_v1._meta'))
                 ? data_get($reportEnvelope, 'mbti_public_projection_v1._meta')
                 : [];
-            $projectionMeta['personalization'] = $personalization;
+            $canonicalPersonalization = is_array($projectionMeta['personalization'] ?? null)
+                ? $projectionMeta['personalization']
+                : [];
+            $projectionMeta['personalization'] = $this->mbtiReadModelContractService->applyOverlayPatch(
+                $canonicalPersonalization,
+                $personalization
+            );
             data_set($reportEnvelope, 'mbti_public_projection_v1._meta', $projectionMeta);
         }
 
