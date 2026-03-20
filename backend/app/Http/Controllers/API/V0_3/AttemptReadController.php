@@ -387,6 +387,10 @@ class AttemptReadController extends Controller
             if (is_array($privacyContract)) {
                 $responsePayload['mbti_privacy_contract_v1'] = $privacyContract;
             }
+            $crossAssessment = data_get($responsePayload, 'report._meta.personalization.cross_assessment_v1');
+            if (is_array($crossAssessment)) {
+                $responsePayload['mbti_cross_assessment_v1'] = $crossAssessment;
+            }
         }
 
         $mbtiEventMeta = $scaleCode === 'MBTI'
@@ -633,6 +637,11 @@ class AttemptReadController extends Controller
             'action_priority_keys' => is_array($personalization['action_priority_keys'] ?? null) ? $personalization['action_priority_keys'] : [],
             'reading_focus_key' => trim((string) ($personalization['reading_focus_key'] ?? '')),
             'action_focus_key' => trim((string) ($personalization['action_focus_key'] ?? '')),
+            'cross_assessment_v1' => is_array($personalization['cross_assessment_v1'] ?? null) ? $personalization['cross_assessment_v1'] : [],
+            'synthesis_keys' => is_array($personalization['synthesis_keys'] ?? null) ? $personalization['synthesis_keys'] : [],
+            'supporting_scales' => is_array($personalization['supporting_scales'] ?? null) ? $personalization['supporting_scales'] : [],
+            'big5_influence_keys' => is_array($personalization['big5_influence_keys'] ?? null) ? $personalization['big5_influence_keys'] : [],
+            'mbti_adjusted_focus_keys' => is_array($personalization['mbti_adjusted_focus_keys'] ?? null) ? $personalization['mbti_adjusted_focus_keys'] : [],
             'user_state' => is_array($personalization['user_state'] ?? null) ? $personalization['user_state'] : [],
             'orchestration' => is_array($personalization['orchestration'] ?? null) ? $personalization['orchestration'] : [],
             'continuity' => is_array($personalization['continuity'] ?? null) ? $personalization['continuity'] : [],
@@ -719,12 +728,20 @@ class AttemptReadController extends Controller
             return [];
         }
 
-        return $this->mbtiUserStateOrchestrationService->overlayEffective(
+        $effective = $this->mbtiUserStateOrchestrationService->overlayEffective(
             $personalization,
             (int) ($attempt->org_id ?? 0),
             (string) ($attempt->id ?? ''),
             $hasUnlock
         );
+
+        return app(\App\Services\Mbti\MbtiBigFiveSynthesisService::class)->attach($effective, [
+            'org_id' => (int) ($attempt->org_id ?? 0),
+            'user_id' => $attempt->user_id ?? null,
+            'anon_id' => $attempt->anon_id ?? null,
+            'attempt_id' => (string) ($attempt->id ?? ''),
+            'locale' => (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+        ]);
     }
 
     /**

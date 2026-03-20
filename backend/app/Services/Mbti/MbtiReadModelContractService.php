@@ -14,6 +14,8 @@ final class MbtiReadModelContractService
     private const OVERLAY_PERSONALIZATION_FIELDS = [
         'user_state',
         'orchestration',
+        'sections',
+        'variant_keys',
         'ordered_recommendation_keys',
         'ordered_action_keys',
         'recommendation_priority_keys',
@@ -21,6 +23,11 @@ final class MbtiReadModelContractService
         'reading_focus_key',
         'action_focus_key',
         'continuity',
+        'cross_assessment_v1',
+        'synthesis_keys',
+        'supporting_scales',
+        'big5_influence_keys',
+        'mbti_adjusted_focus_keys',
     ];
 
     /**
@@ -81,6 +88,10 @@ final class MbtiReadModelContractService
         'action_priority_keys',
         'reading_focus_key',
         'action_focus_key',
+        'cross_assessment_v1.synthesis_keys',
+        'cross_assessment_v1.supporting_scales',
+        'cross_assessment_v1.big5_influence_keys',
+        'cross_assessment_v1.mbti_adjusted_focus_keys',
     ];
 
     /**

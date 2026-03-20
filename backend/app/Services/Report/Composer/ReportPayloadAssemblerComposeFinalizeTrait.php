@@ -201,6 +201,10 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
                 'pack_id' => $contentPackId,
                 'dir_version' => $contentPackageDir,
                 'locale' => $locale,
+                'org_id' => (int) ($input['org_id'] ?? 0),
+                'user_id' => $input['user_id'] ?? null,
+                'anon_id' => $input['anon_id'] ?? null,
+                'attempt_id' => $input['attempt_id'] ?? null,
                 'region' => (string) ($input['region'] ?? config('regions.default_region', 'CN_MAINLAND')),
                 'engine_version' => $reportEngineVersion !== '' ? $reportEngineVersion : (string) data_get($reportPayload, 'versions.engine', 'v1.2'),
                 'has_unlock' => in_array(

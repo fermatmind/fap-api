@@ -567,6 +567,7 @@ final class MbtiResultPersonalizationService
     public function __construct(
         private readonly ContentPacksIndex $packsIndex,
         private readonly MbtiUserStateOrchestrationService $userStateOrchestrationService,
+        private readonly MbtiBigFiveSynthesisService $bigFiveSynthesisService,
         private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
         private readonly MbtiReadModelContractService $readModelContractService,
     ) {
@@ -693,6 +694,14 @@ final class MbtiResultPersonalizationService
                 'content_package_dir' => trim((string) ($context['dir_version'] ?? data_get($reportPayload, 'versions.dir_version', ''))),
                 'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
             ], (bool) ($context['has_unlock'] ?? false));
+
+        $personalization = $this->bigFiveSynthesisService->attach($personalization, [
+            'org_id' => (int) ($context['org_id'] ?? 0),
+            'user_id' => $context['user_id'] ?? null,
+            'anon_id' => $context['anon_id'] ?? null,
+            'attempt_id' => $context['attempt_id'] ?? null,
+            'locale' => $locale,
+        ]);
 
         $personalization = $this->privacyConsentContractService->attachContract($personalization, [
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
