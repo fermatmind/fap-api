@@ -19,6 +19,11 @@ final class BigFiveResultEngineFoundationTest extends TestCase
 
     public function test_big5_result_and_report_read_paths_expose_projection_foundation_and_telemetry_meta(): void
     {
+        config()->set('ai.enabled', true);
+        config()->set('ai.narrative.enabled', true);
+        config()->set('ai.narrative.provider', 'mock');
+        config()->set('ai.breaker_enabled', false);
+
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
             ->assertExitCode(0);
@@ -38,6 +43,8 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $resultResponse->assertJsonPath('big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
         $resultResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.0', 'traits.overview');
         $resultResponse->assertJsonPath('big5_public_projection_v1.trait_bands.O', 'mid');
+        $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
+        $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.runtime_mode', 'mock');
 
         $reportResponse = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -48,6 +55,7 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $reportResponse->assertJsonPath('big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
         $reportResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.1', 'traits.why_this_profile');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
+        $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
         $reportResponse->assertJsonPath('report.sections.0.key', 'traits.overview');
         $reportResponse->assertJsonPath('report.sections.4.key', 'growth.next_actions');
 
@@ -61,6 +69,8 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $this->assertSame(['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style', 'career.work_style', 'growth.next_actions'], array_slice((array) ($meta['ordered_section_keys'] ?? []), 0, 5));
         $this->assertArrayHasKey('trait_bands', $meta);
         $this->assertArrayHasKey('scene_fingerprint', $meta);
+        $this->assertSame('controlled_narrative.v1', (string) ($meta['narrative_contract_version'] ?? ''));
+        $this->assertSame('mock', (string) ($meta['narrative_runtime_mode'] ?? ''));
     }
 
     private function seedAttempt(string $anonId): string

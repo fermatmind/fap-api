@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Mbti;
 
 use App\Services\AI\ControlledGenerationRuntime;
+use App\Services\AI\ControlledNarrativeLayerService;
 use App\Services\Content\ContentPacksIndex;
 
 final class MbtiResultPersonalizationService
@@ -572,6 +573,7 @@ final class MbtiResultPersonalizationService
         private readonly MbtiWorkingLifeConsolidationService $workingLifeConsolidationService,
         private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
         private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
+        private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
         private readonly MbtiReadModelContractService $readModelContractService,
     ) {
     }
@@ -727,6 +729,11 @@ final class MbtiResultPersonalizationService
                 'anon_id' => $context['anon_id'] ?? null,
                 'attempt_id' => $context['attempt_id'] ?? null,
             ]
+        );
+        $personalization['controlled_narrative_v1'] = $this->controlledNarrativeLayerService->buildFromRuntimeContract(
+            is_array($personalization['narrative_runtime_contract_v1'] ?? null)
+                ? $personalization['narrative_runtime_contract_v1']
+                : []
         );
 
         return $this->readModelContractService->attachContract($personalization);
