@@ -7,6 +7,7 @@ return [
     'exact_manifest_schema_version' => 'storage_exact_manifest.v1',
     'snapshot_schema_version' => 'storage_snapshot.v1',
     'blob_offload_plan_schema_version' => 'storage_blob_offload_plan.v1',
+    'rehydrate_plan_schema_version' => 'storage_rehydrate_exact_release_plan.v1',
     'blob_catalog_enabled' => false,
     'manifest_catalog_enabled' => false,
     'snapshot_catalog_enabled' => false,
