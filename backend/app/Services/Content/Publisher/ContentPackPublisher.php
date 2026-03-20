@@ -2,6 +2,8 @@
 
 namespace App\Services\Content\Publisher;
 
+use App\Services\Storage\BlobCatalogService;
+use App\Services\Storage\ContentReleaseManifestCatalogService;
 use App\Support\CacheKeys;
 use App\Support\Http\ResilientClient;
 use Illuminate\Http\UploadedFile;
@@ -19,6 +21,11 @@ final class ContentPackPublisher
     private const SOURCE_UPLOAD = 'upload';
 
     private const SOURCE_S3 = 's3';
+
+    public function __construct(
+        private readonly BlobCatalogService $blobCatalogService,
+        private readonly ContentReleaseManifestCatalogService $manifestCatalogService,
+    ) {}
 
     public function ingest(?UploadedFile $file, ?string $s3Key, array $options = []): array
     {
@@ -189,6 +196,10 @@ final class ContentPackPublisher
 
         $tmpDir = '';
         $previousPackPath = '';
+        $sourcePath = '';
+        $packVersion = '';
+        $releaseManifestJson = '';
+        $gitSha = $this->resolveGitSha();
 
         try {
             $version = DB::table('content_pack_versions')->where('id', $versionId)->first();
@@ -218,9 +229,13 @@ final class ContentPackPublisher
             $sourceManifest = $this->manifestFieldsFromDir($sourcePath);
             $toPackId = (string) ($sourceManifest['pack_id'] ?? '');
             $expectedPackId = $toPackId;
+            $packVersion = trim((string) ($sourceManifest['content_package_version'] ?? ''));
             if ($toPackId === '') {
                 $toPackId = (string) ($version->pack_id ?? '');
                 $expectedPackId = $toPackId;
+            }
+            if ($packVersion === '') {
+                $packVersion = trim((string) ($version->content_package_version ?? ''));
             }
 
             $packsRoot = $this->packsRoot();
@@ -260,6 +275,10 @@ final class ContentPackPublisher
                 is_string($version->manifest_json ?? null) ? (string) $version->manifest_json : '',
                 $targetDir
             );
+            $releaseManifestJson = $this->manifestJsonFromDir($targetDir);
+            if ($releaseManifestJson === '' && is_string($version->manifest_json ?? null)) {
+                $releaseManifestJson = (string) $version->manifest_json;
+            }
             $status = 'success';
         } catch (\Throwable $e) {
             $message = $e->getMessage();
@@ -283,7 +302,11 @@ final class ContentPackPublisher
             }
         }
 
-        DB::table('content_pack_releases')->insert([
+        $releaseStoragePath = $status === 'success' && $sourcePath !== ''
+            ? $this->absoluteContentPath($sourcePath)
+            : null;
+
+        $releaseRow = [
             'id' => $releaseId,
             'action' => 'publish',
             'region' => $region,
@@ -300,12 +323,19 @@ final class ContentPackPublisher
             'compiled_hash' => $releaseEvidence['compiled_hash'] !== '' ? $releaseEvidence['compiled_hash'] : null,
             'content_hash' => $releaseEvidence['content_hash'] !== '' ? $releaseEvidence['content_hash'] : null,
             'norms_version' => $releaseEvidence['norms_version'] !== '' ? $releaseEvidence['norms_version'] : null,
-            'git_sha' => $this->resolveGitSha(),
+            'git_sha' => $gitSha,
+            'pack_version' => $status === 'success' && $packVersion !== '' ? $packVersion : null,
+            'manifest_json' => $status === 'success' && $releaseManifestJson !== '' ? $releaseManifestJson : null,
+            'storage_path' => $releaseStoragePath,
+            'source_commit' => $status === 'success' ? $gitSha : null,
             'created_at' => now(),
             'updated_at' => now(),
-        ]);
+        ];
+        DB::table('content_pack_releases')->insert($releaseRow);
+        $this->shadowActivateLegacyRelease($releaseRow);
+        $this->dualWriteLegacyReleaseMetadata($releaseRow);
         $resolvedScaleCode = strtoupper(trim($toPackId));
-        if (!in_array($resolvedScaleCode, ['BIG5_OCEAN', 'SDS_20'], true)) {
+        if (! in_array($resolvedScaleCode, ['BIG5_OCEAN', 'SDS_20'], true)) {
             $resolvedScaleCode = 'BIG5_OCEAN';
         }
         $auditAction = $resolvedScaleCode === 'SDS_20' ? 'sds_pack_publish' : 'big5_pack_publish';
@@ -332,7 +362,7 @@ final class ContentPackPublisher
                 'compiled_hash' => $releaseEvidence['compiled_hash'],
                 'content_hash' => $releaseEvidence['content_hash'],
                 'norms_version' => $releaseEvidence['norms_version'],
-                'git_sha' => $this->resolveGitSha(),
+                'git_sha' => $gitSha,
             ]
         );
 
@@ -354,8 +384,7 @@ final class ContentPackPublisher
         bool $probe,
         ?string $baseUrl = null,
         ?string $toReleaseId = null
-    ): array
-    {
+    ): array {
         $releaseId = (string) Str::uuid();
         $status = 'failed';
         $message = '';
@@ -378,21 +407,27 @@ final class ContentPackPublisher
         $sourceReleaseId = '';
         $releaseEvidence = $this->emptyReleaseEvidence();
         $targetDir = '';
+        $releaseManifestJson = '';
+        $restoredPackVersion = '';
+        $gitSha = $this->resolveGitSha();
+        $manifestVersion = '';
+        $rollbackSourcePath = '';
 
         $tmpDir = '';
 
         try {
             $selected = $this->selectRollbackSourceRelease($region, $locale, $dirAlias, $toReleaseId);
-            if (!($selected['ok'] ?? false)) {
+            if (! ($selected['ok'] ?? false)) {
                 throw new RuntimeException((string) ($selected['error'] ?? 'NO_PUBLISH_TO_ROLLBACK'));
             }
 
             $last = $selected['release'] ?? null;
             $backupPath = (string) ($selected['backup_path'] ?? '');
-            if (!is_object($last) || $backupPath === '') {
+            if (! is_object($last) || $backupPath === '') {
                 throw new RuntimeException('BACKUP_NOT_FOUND');
             }
             $sourceReleaseId = (string) ($last->id ?? '');
+            $rollbackSourcePath = $backupPath;
 
             $fromVersionId = $last->to_version_id ?? null;
             $fromPackId = (string) ($last->to_pack_id ?? '');
@@ -430,6 +465,7 @@ final class ContentPackPublisher
 
             $toVersionId = $rolledBack['version_id'] !== '' ? $rolledBack['version_id'] : ($last->from_version_id ?? null);
             $toPackId = $rolledBack['pack_id'];
+            $restoredPackVersion = trim((string) ($rolledBack['content_package_version'] ?? ''));
             if ($toPackId === '') {
                 $toPackId = (string) ($last->from_pack_id ?? '');
                 if ($toPackId === '') {
@@ -443,15 +479,26 @@ final class ContentPackPublisher
                 $versionRow = DB::table('content_pack_versions')->where('id', (string) $last->from_version_id)->first();
                 if (is_object($versionRow)) {
                     $manifestJson = is_string($versionRow->manifest_json ?? null) ? (string) $versionRow->manifest_json : '';
+                    $manifestVersion = trim((string) ($versionRow->content_package_version ?? ''));
                 }
             }
             if ($manifestJson === '' && is_string($last->to_version_id ?? null) && trim((string) $last->to_version_id) !== '') {
                 $versionRow = DB::table('content_pack_versions')->where('id', (string) $last->to_version_id)->first();
                 if (is_object($versionRow)) {
                     $manifestJson = is_string($versionRow->manifest_json ?? null) ? (string) $versionRow->manifest_json : '';
+                    if ($manifestVersion === '') {
+                        $manifestVersion = trim((string) ($versionRow->content_package_version ?? ''));
+                    }
                 }
             }
+            if ($restoredPackVersion === '') {
+                $restoredPackVersion = $manifestVersion;
+            }
             $releaseEvidence = $this->resolveReleaseEvidence($manifestJson, $targetDir);
+            $releaseManifestJson = $this->manifestJsonFromDir($targetDir);
+            if ($releaseManifestJson === '') {
+                $releaseManifestJson = $manifestJson;
+            }
             $status = 'success';
         } catch (\Throwable $e) {
             $message = $e->getMessage();
@@ -475,7 +522,11 @@ final class ContentPackPublisher
             }
         }
 
-        DB::table('content_pack_releases')->insert([
+        $releaseStoragePath = $status === 'success' && $rollbackSourcePath !== ''
+            ? $this->absoluteContentPath($rollbackSourcePath)
+            : null;
+
+        $releaseRow = [
             'id' => $releaseId,
             'action' => 'rollback',
             'region' => $region,
@@ -491,11 +542,18 @@ final class ContentPackPublisher
             'compiled_hash' => $releaseEvidence['compiled_hash'] !== '' ? $releaseEvidence['compiled_hash'] : null,
             'content_hash' => $releaseEvidence['content_hash'] !== '' ? $releaseEvidence['content_hash'] : null,
             'norms_version' => $releaseEvidence['norms_version'] !== '' ? $releaseEvidence['norms_version'] : null,
-            'git_sha' => $this->resolveGitSha(),
+            'git_sha' => $gitSha,
+            'pack_version' => $status === 'success' && $restoredPackVersion !== '' ? $restoredPackVersion : null,
+            'manifest_json' => $status === 'success' && $releaseManifestJson !== '' ? $releaseManifestJson : null,
+            'storage_path' => $releaseStoragePath,
+            'source_commit' => $status === 'success' ? $gitSha : null,
             'created_by' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),
-        ]);
+        ];
+        DB::table('content_pack_releases')->insert($releaseRow);
+        $this->shadowActivateLegacyRelease($releaseRow);
+        $this->dualWriteLegacyReleaseMetadata($releaseRow);
         $this->recordReleaseAudit(
             'big5_pack_rollback',
             $releaseId,
@@ -517,7 +575,7 @@ final class ContentPackPublisher
                 'compiled_hash' => $releaseEvidence['compiled_hash'],
                 'content_hash' => $releaseEvidence['content_hash'],
                 'norms_version' => $releaseEvidence['norms_version'],
-                'git_sha' => $this->resolveGitSha(),
+                'git_sha' => $gitSha,
             ]
         );
 
@@ -565,7 +623,7 @@ final class ContentPackPublisher
                 ->where('dir_alias', $dirAlias)
                 ->first();
 
-            if (!$candidate) {
+            if (! $candidate) {
                 return [
                     'ok' => false,
                     'error' => 'TARGET_RELEASE_NOT_FOUND',
@@ -573,7 +631,7 @@ final class ContentPackPublisher
             }
 
             $backupPath = $this->backupsRoot((string) $candidate->id).DIRECTORY_SEPARATOR.'previous_pack';
-            if (!File::isDirectory($backupPath)) {
+            if (! File::isDirectory($backupPath)) {
                 return [
                     'ok' => false,
                     'error' => 'TARGET_RELEASE_BACKUP_NOT_FOUND',
@@ -606,7 +664,7 @@ final class ContentPackPublisher
 
         foreach ($publishRows as $candidate) {
             $backupPath = $this->backupsRoot((string) $candidate->id).DIRECTORY_SEPARATOR.'previous_pack';
-            if (!File::isDirectory($backupPath)) {
+            if (! File::isDirectory($backupPath)) {
                 continue;
             }
 
@@ -621,6 +679,173 @@ final class ContentPackPublisher
             'ok' => false,
             'error' => 'BACKUP_NOT_FOUND',
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $release
+     */
+    private function shadowActivateLegacyRelease(array $release): void
+    {
+        if (! $this->shouldDualWriteLegacyBridge()) {
+            return;
+        }
+        if (($release['status'] ?? '') !== 'success') {
+            return;
+        }
+
+        $releaseId = trim((string) ($release['id'] ?? ''));
+        $packId = strtoupper(trim((string) ($release['to_pack_id'] ?? '')));
+        $packVersion = trim((string) ($release['pack_version'] ?? ''));
+        if ($releaseId === '' || $packId === '' || $packVersion === '') {
+            return;
+        }
+
+        try {
+            DB::table('content_pack_activations')->updateOrInsert(
+                [
+                    'pack_id' => $packId,
+                    'pack_version' => $packVersion,
+                ],
+                [
+                    'release_id' => $releaseId,
+                    'activated_at' => now(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
+        } catch (\Throwable $e) {
+            Log::warning('LEGACY_CONTENT_ACTIVATION_WRITE_FAILED', [
+                'release_id' => $releaseId,
+                'pack_id' => $packId,
+                'pack_version' => $packVersion,
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $release
+     */
+    private function dualWriteLegacyReleaseMetadata(array $release): void
+    {
+        if (! $this->shouldDualWriteLegacyBridge()) {
+            return;
+        }
+        if (($release['status'] ?? '') !== 'success') {
+            return;
+        }
+        if (! $this->shouldCatalogLegacyBlobs() && ! $this->shouldCatalogLegacyManifest()) {
+            return;
+        }
+
+        $storagePath = trim((string) ($release['storage_path'] ?? ''));
+        if ($storagePath === '' || ! File::isDirectory($storagePath)) {
+            return;
+        }
+
+        try {
+            $compiledFiles = $this->collectCompiledFilesFromRoot($storagePath);
+        } catch (\Throwable $e) {
+            Log::warning('LEGACY_CONTENT_METADATA_FILE_SCAN_FAILED', [
+                'release_id' => (string) ($release['id'] ?? ''),
+                'storage_path' => $storagePath,
+                'error' => $e->getMessage(),
+            ]);
+
+            return;
+        }
+
+        $blobCatalogHadFailures = false;
+        if ($this->shouldCatalogLegacyBlobs()) {
+            foreach ($compiledFiles as $file) {
+                try {
+                    $this->blobCatalogService->upsertBlob([
+                        'hash' => $file['hash'],
+                        'disk' => 'local',
+                        'storage_path' => $this->blobCatalogService->storagePathForHash($file['hash']),
+                        'size_bytes' => $file['size_bytes'],
+                        'content_type' => $file['content_type'],
+                        'encoding' => 'identity',
+                        'ref_count' => 0,
+                        'last_verified_at' => now(),
+                    ]);
+                } catch (\Throwable $e) {
+                    Log::warning('LEGACY_CONTENT_BLOB_CATALOG_WRITE_FAILED', [
+                        'release_id' => (string) ($release['id'] ?? ''),
+                        'logical_path' => (string) ($file['logical_path'] ?? ''),
+                        'blob_hash' => (string) ($file['hash'] ?? ''),
+                        'error' => $e->getMessage(),
+                    ]);
+                    $blobCatalogHadFailures = true;
+                }
+            }
+        }
+
+        if (! $this->shouldCatalogLegacyManifest()) {
+            return;
+        }
+
+        $manifestHash = trim((string) ($release['manifest_hash'] ?? ''));
+        if ($manifestHash === '') {
+            return;
+        }
+
+        if ($this->shouldCatalogLegacyBlobs() && $blobCatalogHadFailures) {
+            Log::warning('LEGACY_CONTENT_MANIFEST_CATALOG_SKIPPED_DUE_TO_BLOB_FAILURE', [
+                'release_id' => (string) ($release['id'] ?? ''),
+                'manifest_hash' => $manifestHash,
+                'storage_path' => $storagePath,
+            ]);
+
+            return;
+        }
+
+        $existingManifest = $this->manifestCatalogService->findByManifestHash($manifestHash);
+        $manifestReleaseId = $existingManifest?->content_pack_release_id ?: ($release['id'] ?? null);
+        $manifestStorageDisk = trim((string) ($existingManifest?->storage_disk ?? ''));
+        if ($manifestStorageDisk === '') {
+            $manifestStorageDisk = 'local';
+        }
+        $manifestStoragePath = trim((string) ($existingManifest?->storage_path ?? ''));
+        if ($manifestStoragePath === '') {
+            $manifestStoragePath = $storagePath;
+        }
+
+        $files = [];
+        foreach ($compiledFiles as $file) {
+            $files[] = [
+                'logical_path' => $file['logical_path'],
+                'blob_hash' => $file['hash'],
+                'size_bytes' => $file['size_bytes'],
+                'role' => $file['role'],
+                'content_type' => $file['content_type'],
+                'encoding' => 'identity',
+                'checksum' => 'sha256:'.$file['hash'],
+            ];
+        }
+
+        try {
+            $this->manifestCatalogService->upsertManifest([
+                'content_pack_release_id' => $manifestReleaseId,
+                'manifest_hash' => $manifestHash,
+                'storage_disk' => $manifestStorageDisk,
+                'storage_path' => $manifestStoragePath,
+                'pack_id' => $release['to_pack_id'] ?? null,
+                'pack_version' => $release['pack_version'] ?? null,
+                'compiled_hash' => $release['compiled_hash'] ?? null,
+                'content_hash' => $release['content_hash'] ?? null,
+                'norms_version' => $release['norms_version'] ?? null,
+                'source_commit' => $release['source_commit'] ?? null,
+                'payload_json' => $this->decodeManifestJson($release['manifest_json'] ?? null),
+            ], $files);
+        } catch (\Throwable $e) {
+            Log::warning('LEGACY_CONTENT_MANIFEST_CATALOG_WRITE_FAILED', [
+                'release_id' => (string) ($release['id'] ?? ''),
+                'manifest_hash' => $manifestHash,
+                'storage_path' => $storagePath,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -686,7 +911,7 @@ final class ContentPackPublisher
     }
 
     /**
-     * @param array<string,mixed> $hashes
+     * @param  array<string,mixed>  $hashes
      */
     private function hashMap(array $hashes): string
     {
@@ -704,7 +929,7 @@ final class ContentPackPublisher
 
     private function hashDirectory(string $dir): string
     {
-        if (!File::isDirectory($dir)) {
+        if (! File::isDirectory($dir)) {
             return '';
         }
 
@@ -722,14 +947,14 @@ final class ContentPackPublisher
     }
 
     /**
-     * @param array<string,mixed> $groups
+     * @param  array<string,mixed>  $groups
      */
     private function resolveNormsVersionFromGroups(array $groups): string
     {
         $preferred = '';
         $fallback = '';
         foreach ($groups as $group) {
-            if (!is_array($group)) {
+            if (! is_array($group)) {
                 continue;
             }
             $normsVersion = trim((string) ($group['norms_version'] ?? ''));
@@ -761,6 +986,20 @@ final class ContentPackPublisher
         return substr($sha, 0, 64);
     }
 
+    private function manifestJsonFromDir(string $packDir): string
+    {
+        $manifestPath = $packDir.DIRECTORY_SEPARATOR.'manifest.json';
+        if (! File::exists($manifestPath)) {
+            return '';
+        }
+
+        try {
+            return (string) File::get($manifestPath);
+        } catch (\Throwable) {
+            return '';
+        }
+    }
+
     private function recordReleaseAudit(
         string $action,
         string $releaseId,
@@ -768,7 +1007,7 @@ final class ContentPackPublisher
         string $message,
         array $meta
     ): void {
-        if (!\Illuminate\Support\Facades\Schema::hasTable('audit_logs')) {
+        if (! \Illuminate\Support\Facades\Schema::hasTable('audit_logs')) {
             return;
         }
 
@@ -811,6 +1050,20 @@ final class ContentPackPublisher
         }
 
         return $packsRoot;
+    }
+
+    private function absoluteContentPath(string $path): string
+    {
+        $path = trim($path);
+        if ($path === '') {
+            return '';
+        }
+
+        if (str_starts_with($path, DIRECTORY_SEPARATOR)) {
+            return rtrim($path, '/\\');
+        }
+
+        return rtrim(base_path($path), '/\\');
     }
 
     private function targetPackDir(string $packsRoot, string $region, string $locale, string $dirAlias): string
@@ -1198,6 +1451,74 @@ final class ContentPackPublisher
         $row = $query->orderByDesc('created_at')->first();
 
         return $row ? (string) $row->id : null;
+    }
+
+    private function shouldDualWriteLegacyBridge(): bool
+    {
+        $mode = strtolower(trim((string) config('scale_identity.content_publish_mode', 'legacy')));
+
+        return in_array($mode, ['dual', 'v2'], true);
+    }
+
+    private function shouldCatalogLegacyBlobs(): bool
+    {
+        return $this->shouldDualWriteLegacyBridge()
+            && (bool) config('storage_rollout.blob_catalog_enabled', false);
+    }
+
+    private function shouldCatalogLegacyManifest(): bool
+    {
+        return $this->shouldDualWriteLegacyBridge()
+            && (bool) config('storage_rollout.manifest_catalog_enabled', false);
+    }
+
+    /**
+     * @return list<array{logical_path:string,hash:string,size_bytes:int,content_type:?string,role:?string}>
+     */
+    private function collectCompiledFilesFromRoot(string $root): array
+    {
+        $compiledDir = $root.DIRECTORY_SEPARATOR.'compiled';
+        if (! File::isDirectory($compiledDir)) {
+            return [];
+        }
+
+        $files = [];
+        foreach (File::allFiles($compiledDir) as $file) {
+            $absolutePath = $file->getPathname();
+            $relative = ltrim(str_replace('\\', '/', substr($absolutePath, strlen(rtrim($root, '/\\')))), '/');
+            $bytes = (string) File::get($absolutePath);
+            $hash = hash('sha256', $bytes);
+            $files[] = [
+                'logical_path' => $relative,
+                'hash' => $hash,
+                'size_bytes' => strlen($bytes),
+                'content_type' => $this->contentTypeForLogicalPath($relative),
+                'role' => $relative === 'compiled/manifest.json' ? 'manifest' : null,
+            ];
+        }
+
+        usort($files, static fn (array $a, array $b): int => strcmp((string) $a['logical_path'], (string) $b['logical_path']));
+
+        return $files;
+    }
+
+    private function contentTypeForLogicalPath(string $logicalPath): ?string
+    {
+        return str_ends_with(strtolower($logicalPath), '.json') ? 'application/json' : null;
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function decodeManifestJson(mixed $manifestJson): ?array
+    {
+        if (! is_string($manifestJson) || trim($manifestJson) === '') {
+            return null;
+        }
+
+        $decoded = json_decode($manifestJson, true);
+
+        return is_array($decoded) ? $decoded : null;
     }
 
     private function relativeToPrivate(string $path): string
