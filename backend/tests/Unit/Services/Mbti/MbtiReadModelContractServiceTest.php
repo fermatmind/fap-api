@@ -17,6 +17,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
             'schema_version' => 'mbti.personalization.phase9c.v1',
             'identity' => 'A',
             'privacy_contract_v1' => ['version' => 'mbti.privacy_contract.v1'],
+            'controlled_narrative_v1' => ['version' => 'controlled_narrative.v1', 'runtime_mode' => 'off'],
             'narrative_runtime_contract_v1' => ['version' => 'narrative_runtime_contract.v1', 'runtime_mode' => 'off'],
             'variant_keys' => ['overview' => 'overview:clear'],
             'scene_fingerprint' => ['work' => ['style_key' => 'work.primary.EI.E.clear']],
@@ -32,10 +33,12 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertSame('mbti.read_contract.v1', $contract['version']);
         $this->assertContains('identity', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('privacy_contract_v1', $contract['canonical_read_model']['personalization_fields']);
+        $this->assertContains('controlled_narrative_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('narrative_runtime_contract_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('variant_keys', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('user_state', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('mbti_privacy_contract_v1', $contract['cacheable_fields']);
+        $this->assertContains('controlled_narrative_v1', $contract['cacheable_fields']);
         $this->assertContains('narrative_runtime_contract_v1', $contract['cacheable_fields']);
         $this->assertSame(
             [

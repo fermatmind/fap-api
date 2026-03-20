@@ -247,6 +247,12 @@ class AttemptReadController extends Controller
         ];
         if ($big5Projection !== []) {
             $responsePayload['big5_public_projection_v1'] = $big5Projection;
+            $controlledNarrative = is_array($big5Projection['controlled_narrative_v1'] ?? null)
+                ? $big5Projection['controlled_narrative_v1']
+                : [];
+            if ($controlledNarrative !== []) {
+                $responsePayload['controlled_narrative_v1'] = $controlledNarrative;
+            }
         }
 
         return response()->json($responsePayload);
@@ -368,6 +374,12 @@ class AttemptReadController extends Controller
                 );
             }
             $responsePayload['big5_public_projection_v1'] = $projection;
+            $controlledNarrative = is_array($projection['controlled_narrative_v1'] ?? null)
+                ? $projection['controlled_narrative_v1']
+                : [];
+            if ($controlledNarrative !== []) {
+                $responsePayload['controlled_narrative_v1'] = $controlledNarrative;
+            }
         }
 
         $effectiveMbtiPersonalization = $scaleCode === 'MBTI'
@@ -392,6 +404,10 @@ class AttemptReadController extends Controller
             $narrativeRuntime = data_get($responsePayload, 'report._meta.personalization.narrative_runtime_contract_v1');
             if (is_array($narrativeRuntime)) {
                 $responsePayload['narrative_runtime_contract_v1'] = $narrativeRuntime;
+            }
+            $controlledNarrative = data_get($responsePayload, 'report._meta.personalization.controlled_narrative_v1');
+            if (is_array($controlledNarrative)) {
+                $responsePayload['controlled_narrative_v1'] = $controlledNarrative;
             }
             $crossAssessment = data_get($responsePayload, 'report._meta.personalization.cross_assessment_v1');
             if (is_array($crossAssessment)) {
@@ -581,8 +597,9 @@ class AttemptReadController extends Controller
         $sceneFingerprint = is_array($projection['scene_fingerprint'] ?? null) ? $projection['scene_fingerprint'] : [];
         $variantKeys = is_array($projection['variant_keys'] ?? null) ? $projection['variant_keys'] : [];
         $orderedSectionKeys = is_array($projection['ordered_section_keys'] ?? null) ? $projection['ordered_section_keys'] : [];
+        $controlledNarrative = is_array($projection['controlled_narrative_v1'] ?? null) ? $projection['controlled_narrative_v1'] : [];
 
-        return array_filter([
+        $meta = [
             'trait_bands' => $traitBands,
             'dominant_traits' => array_values(array_filter(array_map(
                 static fn (mixed $trait): string => is_array($trait) ? trim((string) ($trait['key'] ?? '')) : '',
@@ -591,7 +608,18 @@ class AttemptReadController extends Controller
             'scene_fingerprint' => $sceneFingerprint,
             'variant_keys' => array_values(array_filter(array_map('strval', $variantKeys))),
             'ordered_section_keys' => array_values(array_filter(array_map('strval', $orderedSectionKeys))),
-        ], static function (mixed $value): bool {
+        ];
+
+        if ($controlledNarrative !== []) {
+            $meta['narrative_contract_version'] = trim((string) ($controlledNarrative['narrative_contract_version'] ?? ''));
+            $meta['narrative_runtime_mode'] = trim((string) ($controlledNarrative['runtime_mode'] ?? ''));
+            $meta['narrative_provider_name'] = trim((string) ($controlledNarrative['provider_name'] ?? ''));
+            $meta['narrative_model_version'] = trim((string) ($controlledNarrative['model_version'] ?? ''));
+            $meta['narrative_prompt_version'] = trim((string) ($controlledNarrative['prompt_version'] ?? ''));
+            $meta['narrative_fingerprint'] = trim((string) ($controlledNarrative['narrative_fingerprint'] ?? ''));
+        }
+
+        return array_filter($meta, static function (mixed $value): bool {
             return is_array($value) ? $value !== [] : $value !== null;
         });
     }
@@ -661,6 +689,12 @@ class AttemptReadController extends Controller
         $narrativeRuntime = is_array($personalization['narrative_runtime_contract_v1'] ?? null)
             ? $personalization['narrative_runtime_contract_v1']
             : [];
+        $controlledNarrative = is_array($personalization['controlled_narrative_v1'] ?? null)
+            ? $personalization['controlled_narrative_v1']
+            : [];
+        if ($controlledNarrative !== []) {
+            $meta['narrative_contract_version'] = trim((string) ($controlledNarrative['narrative_contract_version'] ?? ''));
+        }
         if ($narrativeRuntime !== []) {
             $meta['narrative_runtime_contract_version'] = trim((string) ($narrativeRuntime['version'] ?? ''));
             $meta['narrative_runtime_mode'] = trim((string) ($narrativeRuntime['runtime_mode'] ?? ''));

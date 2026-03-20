@@ -98,6 +98,10 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('off', data_get($clear, 'narrative_runtime_contract_v1.runtime_mode'));
         $this->assertSame('null', data_get($clear, 'narrative_runtime_contract_v1.provider_name'));
         $this->assertSame(false, data_get($clear, 'narrative_runtime_contract_v1.output_present.narrative_intro'));
+        $this->assertSame('controlled_narrative.v1', data_get($clear, 'controlled_narrative_v1.version'));
+        $this->assertSame('controlled_narrative.v1', data_get($clear, 'controlled_narrative_v1.narrative_contract_version'));
+        $this->assertSame('off', data_get($clear, 'controlled_narrative_v1.runtime_mode'));
+        $this->assertSame('', data_get($clear, 'controlled_narrative_v1.narrative_intro'));
         $this->assertContains('working_life_v1', data_get($clear, 'narrative_runtime_contract_v1.truth_guard_fields', []));
         $this->assertSame('mbti.privacy_contract.v1', data_get($clear, 'privacy_contract_v1.version'));
         $this->assertSame(true, data_get($clear, 'privacy_contract_v1.consent_scope.subject_export'));
@@ -748,5 +752,50 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             '在工作里',
             (string) data_get($english, 'scene_fingerprint.work.summary', '')
         );
+    }
+
+    public function test_it_can_emit_visible_controlled_narrative_without_changing_canonical_truth(): void
+    {
+        config()->set('ai.enabled', true);
+        config()->set('ai.narrative.enabled', true);
+        config()->set('ai.narrative.provider', 'mock');
+        config()->set('ai.breaker_enabled', false);
+
+        $personalization = app(MbtiResultPersonalizationService::class)->buildForReportPayload([
+            'versions' => [
+                'engine' => 'v1.2',
+                'content_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+                'dir_version' => 'MBTI-CN-v0.3',
+            ],
+            'profile' => [
+                'type_code' => 'INTJ-A',
+            ],
+            'scores' => [
+                'EI' => ['pct' => 43, 'delta' => -7, 'side' => 'I', 'state' => 'moderate'],
+                'SN' => ['pct' => 71, 'delta' => 21, 'side' => 'N', 'state' => 'strong'],
+                'TF' => ['pct' => 66, 'delta' => 16, 'side' => 'T', 'state' => 'clear'],
+                'JP' => ['pct' => 61, 'delta' => 11, 'side' => 'J', 'state' => 'clear'],
+                'AT' => ['pct' => 59, 'delta' => 9, 'side' => 'A', 'state' => 'balanced'],
+            ],
+            'axis_states' => [
+                'EI' => 'moderate',
+                'SN' => 'strong',
+                'TF' => 'clear',
+                'JP' => 'clear',
+                'AT' => 'balanced',
+            ],
+        ], [
+            'type_code' => 'INTJ-A',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase4a_contract',
+        ]);
+
+        $this->assertSame('mock', data_get($personalization, 'narrative_runtime_contract_v1.runtime_mode'));
+        $this->assertNotSame('', trim((string) data_get($personalization, 'controlled_narrative_v1.narrative_intro')));
+        $this->assertNotSame('', trim((string) data_get($personalization, 'controlled_narrative_v1.narrative_summary')));
+        $this->assertSame('INTJ-A', (string) ($personalization['type_code'] ?? ''));
+        $this->assertSame('A', (string) ($personalization['identity'] ?? ''));
     }
 }

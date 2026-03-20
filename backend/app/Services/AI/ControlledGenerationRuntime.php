@@ -15,6 +15,9 @@ final class ControlledGenerationRuntime
         'type_code',
         'identity',
         'variant_keys',
+        'trait_vector',
+        'trait_bands',
+        'dominant_traits',
         'scene_fingerprint',
         'working_life_v1',
         'cross_assessment_v1',
@@ -98,6 +101,10 @@ final class ControlledGenerationRuntime
             'explainability_summary',
             'action_plan_summary',
             'work_style_summary',
+            'trait_vector',
+            'trait_bands',
+            'dominant_traits',
+            'ordered_section_keys',
             'scene_fingerprint',
             'variant_keys',
             'working_life_v1',
@@ -204,18 +211,15 @@ final class ControlledGenerationRuntime
         string $providerName,
         string $errorCode
     ): NarrativeGenerationResponse {
-        $summary = trim((string) ($request->authority['action_plan_summary'] ?? ''));
+        $summary = $this->extractSummaryText($request->authority['action_plan_summary'] ?? null);
         if ($summary === '') {
-            $summary = trim((string) ($request->authority['explainability_summary'] ?? ''));
+            $summary = $this->extractSummaryText($request->authority['explainability_summary'] ?? null);
         }
         if ($summary === '') {
-            $summary = trim((string) ($request->authority['work_style_summary'] ?? ''));
+            $summary = $this->extractSummaryText($request->authority['work_style_summary'] ?? null);
         }
 
-        $sectionKeys = array_values(array_slice(array_keys((array) ($request->authority['variant_keys'] ?? [])), 0, 4));
-        if ($sectionKeys === []) {
-            $sectionKeys = array_values(array_slice((array) ($request->authority['career_journey_keys'] ?? []), 0, 4));
-        }
+        $sectionKeys = $this->extractNarrativeSectionKeys($request->authority, 4);
 
         $output = [
             'narrative_intro' => 'Deterministic narrative fallback is active.',
@@ -245,5 +249,100 @@ final class ControlledGenerationRuntime
             output: $output,
             errorCode: $errorCode,
         );
+    }
+
+    /**
+     * @param  array<string, mixed>  $authority
+     * @return list<string>
+     */
+    public function extractNarrativeSectionKeys(array $authority, int $limit = 4): array
+    {
+        $variantKeys = $authority['variant_keys'] ?? [];
+        $sectionKeys = [];
+
+        if (is_array($variantKeys)) {
+            $isList = array_is_list($variantKeys);
+            foreach ($variantKeys as $key => $value) {
+                $candidate = null;
+
+                if (! $isList && is_string($key) && trim($key) !== '') {
+                    $candidate = trim($key);
+                } elseif (is_scalar($value)) {
+                    $candidate = trim((string) $value);
+                }
+
+                if ($candidate === null || $candidate === '') {
+                    continue;
+                }
+
+                $sectionKeys[] = $candidate;
+                if (count($sectionKeys) >= $limit) {
+                    return $sectionKeys;
+                }
+            }
+        }
+
+        foreach (['career_journey_keys', 'ordered_section_keys'] as $fallbackKey) {
+            $values = $authority[$fallbackKey] ?? [];
+            if (! is_array($values)) {
+                continue;
+            }
+
+            foreach ($values as $value) {
+                if (! is_scalar($value)) {
+                    continue;
+                }
+
+                $candidate = trim((string) $value);
+                if ($candidate === '' || in_array($candidate, $sectionKeys, true)) {
+                    continue;
+                }
+
+                $sectionKeys[] = $candidate;
+                if (count($sectionKeys) >= $limit) {
+                    return $sectionKeys;
+                }
+            }
+        }
+
+        return $sectionKeys;
+    }
+
+    private function extractSummaryText(mixed $value): string
+    {
+        if (is_string($value)) {
+            return trim($value);
+        }
+
+        if (! is_array($value)) {
+            return '';
+        }
+
+        foreach (['headline', 'summary', 'label'] as $key) {
+            $candidate = trim((string) ($value[$key] ?? ''));
+            if ($candidate !== '') {
+                return $candidate;
+            }
+        }
+
+        foreach (['reasons', 'actions', 'bullets'] as $key) {
+            $items = $value[$key] ?? null;
+            if (! is_array($items)) {
+                continue;
+            }
+
+            foreach ($items as $item) {
+                if (! is_scalar($item)) {
+                    continue;
+                }
+
+                $candidate = trim((string) $item);
+                if ($candidate !== '') {
+                    return $candidate;
+                }
+            }
+        }
+
+        return '';
     }
 }

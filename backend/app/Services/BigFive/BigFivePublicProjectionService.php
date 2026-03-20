@@ -5,10 +5,18 @@ declare(strict_types=1);
 namespace App\Services\BigFive;
 
 use App\Models\Result;
+use App\Services\AI\ControlledGenerationRuntime;
+use App\Services\AI\ControlledNarrativeLayerService;
 
 final class BigFivePublicProjectionService
 {
     private const DOMAIN_ORDER = ['O', 'C', 'E', 'A', 'N'];
+
+    public function __construct(
+        private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
+        private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
+    ) {
+    }
 
     /**
      * @var array<string,array{en:string,zh:string}>
@@ -153,6 +161,19 @@ final class BigFivePublicProjectionService
                 'locked' => $locked,
             ], static fn ($value): bool => $value !== null && $value !== ''),
         ];
+
+        $runtimeContract = $this->controlledGenerationRuntime->buildContract(
+            'big5.report',
+            'BIG5_OCEAN',
+            $locale === 'zh' ? 'zh-CN' : 'en',
+            $projection,
+            [
+                'engine_version' => (string) ($scoreResult['engine_version'] ?? ''),
+                'schema_version' => 'big5.public_projection.v1',
+            ]
+        );
+        $projection['_meta']['narrative_runtime_contract_v1'] = $runtimeContract;
+        $projection['controlled_narrative_v1'] = $this->controlledNarrativeLayerService->buildFromRuntimeContract($runtimeContract);
 
         return $projection;
     }

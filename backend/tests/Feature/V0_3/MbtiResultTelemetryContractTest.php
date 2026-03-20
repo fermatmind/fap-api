@@ -45,6 +45,7 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
             $this->assertSame('mbti.personalization.phase9c.v1', (string) ($meta['schema_version'] ?? ''));
             $this->assertSame('phase9c.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
+            $this->assertSame('controlled_narrative.v1', (string) ($meta['narrative_contract_version'] ?? ''));
             $this->assertSame('narrative_runtime_contract.v1', (string) ($meta['narrative_runtime_contract_version'] ?? ''));
             $this->assertSame('off', (string) ($meta['narrative_runtime_mode'] ?? ''));
             $this->assertSame('null', (string) ($meta['narrative_provider_name'] ?? ''));
@@ -130,6 +131,7 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['working_life_v1'] ?? null, $eventMeta['result_view']['working_life_v1'] ?? null);
         $this->assertSame($eventMeta['report_view']['privacy_contract_version'] ?? null, $eventMeta['result_view']['privacy_contract_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['consent_scope'] ?? null, $eventMeta['result_view']['consent_scope'] ?? null);
+        $this->assertSame($eventMeta['report_view']['narrative_contract_version'] ?? null, $eventMeta['result_view']['narrative_contract_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['narrative_runtime_contract_version'] ?? null, $eventMeta['result_view']['narrative_runtime_contract_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['narrative_fingerprint'] ?? null, $eventMeta['result_view']['narrative_fingerprint'] ?? null);
         $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.is_first_view'));

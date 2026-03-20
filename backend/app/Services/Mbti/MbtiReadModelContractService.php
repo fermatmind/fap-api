@@ -51,6 +51,7 @@ final class MbtiReadModelContractService
         'mbti_public_projection_v1.profile',
         'mbti_public_projection_v1.dimensions',
         'mbti_public_projection_v1.sections',
+        'controlled_narrative_v1',
         'narrative_runtime_contract_v1',
     ];
 
@@ -74,6 +75,7 @@ final class MbtiReadModelContractService
         'mbti_public_projection_v1.dimensions',
         'mbti_public_projection_v1.sections',
         'mbti_read_contract_v1',
+        'controlled_narrative_v1',
         'narrative_runtime_contract_v1',
     ];
 
