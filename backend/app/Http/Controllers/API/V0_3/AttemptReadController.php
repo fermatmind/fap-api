@@ -259,6 +259,12 @@ class AttemptReadController extends Controller
             if ($culturalCalibration !== []) {
                 $responsePayload['cultural_calibration_v1'] = $culturalCalibration;
             }
+            $comparative = is_array($big5Projection['comparative_v1'] ?? null)
+                ? $big5Projection['comparative_v1']
+                : [];
+            if ($comparative !== []) {
+                $responsePayload['comparative_v1'] = $comparative;
+            }
         }
 
         return response()->json($responsePayload);
@@ -392,6 +398,12 @@ class AttemptReadController extends Controller
             if ($culturalCalibration !== []) {
                 $responsePayload['cultural_calibration_v1'] = $culturalCalibration;
             }
+            $comparative = is_array($projection['comparative_v1'] ?? null)
+                ? $projection['comparative_v1']
+                : [];
+            if ($comparative !== []) {
+                $responsePayload['comparative_v1'] = $comparative;
+            }
         }
 
         $effectiveMbtiPersonalization = $scaleCode === 'MBTI'
@@ -428,6 +440,10 @@ class AttemptReadController extends Controller
             $crossAssessment = data_get($responsePayload, 'report._meta.personalization.cross_assessment_v1');
             if (is_array($crossAssessment)) {
                 $responsePayload['mbti_cross_assessment_v1'] = $crossAssessment;
+            }
+            $comparative = data_get($responsePayload, 'report._meta.personalization.comparative_v1');
+            if (is_array($comparative)) {
+                $responsePayload['comparative_v1'] = $comparative;
             }
         }
 
@@ -615,6 +631,7 @@ class AttemptReadController extends Controller
         $orderedSectionKeys = is_array($projection['ordered_section_keys'] ?? null) ? $projection['ordered_section_keys'] : [];
         $controlledNarrative = is_array($projection['controlled_narrative_v1'] ?? null) ? $projection['controlled_narrative_v1'] : [];
         $culturalCalibration = is_array($projection['cultural_calibration_v1'] ?? null) ? $projection['cultural_calibration_v1'] : [];
+        $comparative = is_array($projection['comparative_v1'] ?? null) ? $projection['comparative_v1'] : [];
 
         $meta = [
             'trait_bands' => $traitBands,
@@ -646,6 +663,14 @@ class AttemptReadController extends Controller
             $meta['calibration_contract_version'] = trim((string) ($culturalCalibration['calibration_contract_version'] ?? ''));
             $meta['calibration_policy_version'] = trim((string) ($culturalCalibration['calibration_policy_version'] ?? ''));
             $meta['calibration_source'] = trim((string) ($culturalCalibration['calibration_source'] ?? ''));
+        }
+        if ($comparative !== []) {
+            $meta['comparative_v1'] = $comparative;
+            $meta['comparative_contract_version'] = trim((string) ($comparative['comparative_contract_version'] ?? ''));
+            $meta['comparative_fingerprint'] = trim((string) ($comparative['comparative_fingerprint'] ?? ''));
+            $meta['norming_version'] = trim((string) ($comparative['norming_version'] ?? ''));
+            $meta['norming_scope'] = trim((string) ($comparative['norming_scope'] ?? ''));
+            $meta['norming_source'] = trim((string) ($comparative['norming_source'] ?? ''));
         }
 
         return array_filter($meta, static function (mixed $value): bool {
@@ -706,6 +731,7 @@ class AttemptReadController extends Controller
             'big5_influence_keys' => is_array($personalization['big5_influence_keys'] ?? null) ? $personalization['big5_influence_keys'] : [],
             'mbti_adjusted_focus_keys' => is_array($personalization['mbti_adjusted_focus_keys'] ?? null) ? $personalization['mbti_adjusted_focus_keys'] : [],
             'working_life_v1' => is_array($personalization['working_life_v1'] ?? null) ? $personalization['working_life_v1'] : [],
+            'comparative_v1' => is_array($personalization['comparative_v1'] ?? null) ? $personalization['comparative_v1'] : [],
             'career_focus_key' => trim((string) ($personalization['career_focus_key'] ?? '')),
             'career_journey_keys' => is_array($personalization['career_journey_keys'] ?? null) ? $personalization['career_journey_keys'] : [],
             'career_action_priority_keys' => is_array($personalization['career_action_priority_keys'] ?? null) ? $personalization['career_action_priority_keys'] : [],
@@ -756,6 +782,16 @@ class AttemptReadController extends Controller
             $meta['calibration_contract_version'] = trim((string) ($culturalCalibration['calibration_contract_version'] ?? ''));
             $meta['calibration_policy_version'] = trim((string) ($culturalCalibration['calibration_policy_version'] ?? ''));
             $meta['calibration_source'] = trim((string) ($culturalCalibration['calibration_source'] ?? ''));
+        }
+        $comparative = is_array($personalization['comparative_v1'] ?? null)
+            ? $personalization['comparative_v1']
+            : [];
+        if ($comparative !== []) {
+            $meta['comparative_contract_version'] = trim((string) ($comparative['comparative_contract_version'] ?? ''));
+            $meta['comparative_fingerprint'] = trim((string) ($comparative['comparative_fingerprint'] ?? ''));
+            $meta['norming_version'] = trim((string) ($comparative['norming_version'] ?? ''));
+            $meta['norming_scope'] = trim((string) ($comparative['norming_scope'] ?? ''));
+            $meta['norming_source'] = trim((string) ($comparative['norming_source'] ?? ''));
         }
 
         return array_filter($meta, static function (mixed $value): bool {

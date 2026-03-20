@@ -17,6 +17,11 @@ final class MbtiReadModelContractServiceTest extends TestCase
             'schema_version' => 'mbti.personalization.phase9e.v1',
             'identity' => 'A',
             'privacy_contract_v1' => ['version' => 'mbti.privacy_contract.v1'],
+            'comparative_v1' => [
+                'version' => 'comparative.norming.v1',
+                'percentile' => ['value' => 73],
+                'norming_version' => 'norm_2026_02',
+            ],
             'controlled_narrative_v1' => ['version' => 'controlled_narrative.v1', 'runtime_mode' => 'off'],
             'narrative_runtime_contract_v1' => ['version' => 'narrative_runtime_contract.v1', 'runtime_mode' => 'off'],
             'cultural_calibration_v1' => [
@@ -41,12 +46,14 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertSame('mbti.read_contract.v1', $contract['version']);
         $this->assertContains('identity', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('privacy_contract_v1', $contract['canonical_read_model']['personalization_fields']);
+        $this->assertContains('comparative_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('controlled_narrative_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('narrative_runtime_contract_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('cultural_calibration_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('variant_keys', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('user_state', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('mbti_privacy_contract_v1', $contract['cacheable_fields']);
+        $this->assertContains('comparative_v1', $contract['cacheable_fields']);
         $this->assertContains('controlled_narrative_v1', $contract['cacheable_fields']);
         $this->assertContains('narrative_runtime_contract_v1', $contract['cacheable_fields']);
         $this->assertContains('cultural_calibration_v1', $contract['cacheable_fields']);
@@ -81,6 +88,8 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('user_state', $contract['telemetry_parity_fields']);
         $this->assertContains('continuity.carryover_focus_key', $contract['telemetry_parity_fields']);
         $this->assertContains('working_life_v1.career_focus_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('comparative_v1.percentile.value', $contract['telemetry_parity_fields']);
+        $this->assertContains('comparative_v1.norming_version', $contract['telemetry_parity_fields']);
         $this->assertContains('narrative_runtime_contract_v1.runtime_mode', $contract['telemetry_parity_fields']);
         $this->assertContains('cultural_calibration_v1.locale_context', $contract['telemetry_parity_fields']);
         $this->assertContains('cultural_calibration_v1.calibration_fingerprint', $contract['telemetry_parity_fields']);

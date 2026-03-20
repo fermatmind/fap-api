@@ -7,6 +7,7 @@ namespace App\Services\BigFive;
 use App\Models\Result;
 use App\Services\AI\ControlledGenerationRuntime;
 use App\Services\AI\ControlledNarrativeLayerService;
+use App\Services\Comparative\VersionedComparativeNormingLayerService;
 use App\Services\Content\CulturalCalibrationLayerService;
 
 final class BigFivePublicProjectionService
@@ -16,6 +17,7 @@ final class BigFivePublicProjectionService
     public function __construct(
         private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
         private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
+        private readonly VersionedComparativeNormingLayerService $comparativeNormingLayerService,
         private readonly CulturalCalibrationLayerService $culturalCalibrationLayerService,
     ) {
     }
@@ -178,6 +180,11 @@ final class BigFivePublicProjectionService
         $projection['controlled_narrative_v1'] = $this->controlledNarrativeLayerService->buildFromRuntimeContract($runtimeContract);
         $projection['cultural_calibration_v1'] = $this->culturalCalibrationLayerService->buildForBigFive(
             $projection,
+            ['locale' => $locale]
+        );
+        $projection['comparative_v1'] = $this->comparativeNormingLayerService->buildForBigFive(
+            $projection,
+            $scoreResult,
             ['locale' => $locale]
         );
 

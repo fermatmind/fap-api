@@ -6,6 +6,7 @@ namespace App\Services\Mbti;
 
 use App\Services\AI\ControlledGenerationRuntime;
 use App\Services\AI\ControlledNarrativeLayerService;
+use App\Services\Comparative\VersionedComparativeNormingLayerService;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\CulturalCalibrationLayerService;
 
@@ -573,6 +574,7 @@ final class MbtiResultPersonalizationService
         private readonly MbtiBigFiveSynthesisService $bigFiveSynthesisService,
         private readonly MbtiWorkingLifeConsolidationService $workingLifeConsolidationService,
         private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
+        private readonly VersionedComparativeNormingLayerService $comparativeNormingLayerService,
         private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
         private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
         private readonly CulturalCalibrationLayerService $culturalCalibrationLayerService,
@@ -715,6 +717,15 @@ final class MbtiResultPersonalizationService
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
             'locale' => $locale,
         ]);
+        $personalization['comparative_v1'] = $this->comparativeNormingLayerService->buildForMbti(
+            $personalization,
+            $reportPayload,
+            [
+                'locale' => $locale,
+                'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
+                'norm_version' => trim((string) ($context['norm_version'] ?? data_get($reportPayload, 'norms.version_id', ''))),
+            ]
+        );
 
         $personalization['narrative_runtime_contract_v1'] = $this->controlledGenerationRuntime->buildContract(
             'mbti.report',

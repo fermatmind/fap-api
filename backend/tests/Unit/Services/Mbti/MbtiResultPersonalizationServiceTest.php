@@ -62,6 +62,16 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
                 'JP' => 'moderate',
                 'AT' => 'clear',
             ],
+            'norms' => [
+                'version_id' => 'norm_2026_02',
+                'metrics' => [
+                    'EI' => [
+                        'score_int' => 67,
+                        'percentile' => 0.73,
+                        'over_percent' => 73,
+                    ],
+                ],
+            ],
         ];
 
         $strongPayload = $clearPayload;
@@ -117,6 +127,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'action_plan_summary',
             data_get($clear, 'privacy_contract_v1.exportable_assets.derived_personalization_fields', [])
         );
+        $this->assertSame('comparative.norming.v1', data_get($clear, 'comparative_v1.version'));
+        $this->assertSame(true, data_get($clear, 'comparative_v1.enabled'));
+        $this->assertSame(73, data_get($clear, 'comparative_v1.percentile.value'));
+        $this->assertSame('norm_2026_02', data_get($clear, 'comparative_v1.norming_version'));
+        $this->assertSame('same_type.boundary_axes', data_get($clear, 'comparative_v1.same_type_contrast.key'));
         $this->assertSame(
             [
                 'is_first_view' => true,
