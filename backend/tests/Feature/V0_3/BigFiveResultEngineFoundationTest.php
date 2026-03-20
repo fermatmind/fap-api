@@ -47,6 +47,9 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.runtime_mode', 'mock');
         $resultResponse->assertJsonPath('big5_public_projection_v1.cultural_calibration_v1.version', 'cultural_calibration.v1');
         $resultResponse->assertJsonPath('big5_public_projection_v1.cultural_calibration_v1.cultural_context', 'CN_MAINLAND.zh-CN');
+        $resultResponse->assertJsonPath('big5_public_projection_v1.comparative_v1.version', 'comparative.norming.v1');
+        $this->assertGreaterThan(0, (int) $resultResponse->json('big5_public_projection_v1.comparative_v1.percentile.value'));
+        $this->assertNotSame('', trim((string) $resultResponse->json('big5_public_projection_v1.comparative_v1.norming_source')));
 
         $reportResponse = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -59,8 +62,11 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.cultural_calibration_v1.version', 'cultural_calibration.v1');
+        $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.comparative_v1.version', 'comparative.norming.v1');
         $reportResponse->assertJsonPath('report.sections.0.key', 'traits.overview');
         $reportResponse->assertJsonPath('report.sections.4.key', 'growth.next_actions');
+        $comparativePercentile = (int) $reportResponse->json('big5_public_projection_v1.comparative_v1.percentile.value');
+        $this->assertGreaterThan(0, $comparativePercentile);
 
         $reportEvent = DB::table('events')
             ->where('event_code', 'report_view')
@@ -78,6 +84,12 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $this->assertSame('CN_MAINLAND.zh-CN', (string) ($meta['cultural_context'] ?? ''));
         $this->assertSame('cultural_calibration.v1', (string) ($meta['calibration_contract_version'] ?? ''));
         $this->assertContains('traits.overview', $meta['calibrated_section_keys'] ?? []);
+        $this->assertSame('comparative.norming.v1', (string) ($meta['comparative_contract_version'] ?? ''));
+        $this->assertNotSame('', trim((string) ($meta['comparative_fingerprint'] ?? '')));
+        $this->assertNotSame('', trim((string) ($meta['norming_version'] ?? '')));
+        $this->assertNotSame('', trim((string) ($meta['norming_scope'] ?? '')));
+        $this->assertNotSame('', trim((string) ($meta['norming_source'] ?? '')));
+        $this->assertSame($comparativePercentile, (int) data_get($meta, 'comparative_v1.percentile.value'));
     }
 
     private function seedAttempt(string $anonId): string

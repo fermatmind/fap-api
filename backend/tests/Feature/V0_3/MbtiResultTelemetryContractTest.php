@@ -110,6 +110,12 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['continuity'] ?? null);
             $this->assertSame('mbti.privacy_contract.v1', (string) ($meta['privacy_contract_version'] ?? ''));
             $this->assertIsArray($meta['consent_scope'] ?? null);
+            $this->assertSame('comparative.norming.v1', (string) ($meta['comparative_contract_version'] ?? ''));
+            $this->assertNotSame('', trim((string) ($meta['comparative_fingerprint'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['norming_scope'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['norming_source'] ?? '')));
+            $this->assertGreaterThan(0, (int) data_get($meta, 'comparative_v1.percentile.value', 0));
+            $this->assertSame('same_type.boundary_axes', data_get($meta, 'comparative_v1.same_type_contrast.key'));
             $this->assertSame('zh-CN', (string) ($meta['locale_context'] ?? ''));
             $this->assertSame('CN_MAINLAND.zh-CN', (string) ($meta['cultural_context'] ?? ''));
             $this->assertSame('cultural_calibration.v1', (string) ($meta['calibration_contract_version'] ?? ''));
@@ -141,6 +147,11 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['narrative_contract_version'] ?? null, $eventMeta['result_view']['narrative_contract_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['narrative_runtime_contract_version'] ?? null, $eventMeta['result_view']['narrative_runtime_contract_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['narrative_fingerprint'] ?? null, $eventMeta['result_view']['narrative_fingerprint'] ?? null);
+        $this->assertSame($eventMeta['report_view']['comparative_contract_version'] ?? null, $eventMeta['result_view']['comparative_contract_version'] ?? null);
+        $this->assertSame($eventMeta['report_view']['comparative_fingerprint'] ?? null, $eventMeta['result_view']['comparative_fingerprint'] ?? null);
+        $this->assertSame($eventMeta['report_view']['norming_version'] ?? null, $eventMeta['result_view']['norming_version'] ?? null);
+        $this->assertSame($eventMeta['report_view']['norming_scope'] ?? null, $eventMeta['result_view']['norming_scope'] ?? null);
+        $this->assertSame($eventMeta['report_view']['norming_source'] ?? null, $eventMeta['result_view']['norming_source'] ?? null);
         $this->assertSame($eventMeta['report_view']['locale_context'] ?? null, $eventMeta['result_view']['locale_context'] ?? null);
         $this->assertSame($eventMeta['report_view']['cultural_context'] ?? null, $eventMeta['result_view']['cultural_context'] ?? null);
         $this->assertSame($eventMeta['report_view']['calibrated_section_keys'] ?? null, $eventMeta['result_view']['calibrated_section_keys'] ?? null);
