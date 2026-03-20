@@ -43,7 +43,7 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
-            $this->assertSame('mbti.personalization.phase9c.v1', (string) ($meta['schema_version'] ?? ''));
+            $this->assertSame('mbti.personalization.phase9e.v1', (string) ($meta['schema_version'] ?? ''));
             $this->assertSame('phase9c.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertSame('controlled_narrative.v1', (string) ($meta['narrative_contract_version'] ?? ''));
             $this->assertSame('narrative_runtime_contract.v1', (string) ($meta['narrative_runtime_contract_version'] ?? ''));
@@ -110,6 +110,13 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['continuity'] ?? null);
             $this->assertSame('mbti.privacy_contract.v1', (string) ($meta['privacy_contract_version'] ?? ''));
             $this->assertIsArray($meta['consent_scope'] ?? null);
+            $this->assertSame('zh-CN', (string) ($meta['locale_context'] ?? ''));
+            $this->assertSame('CN_MAINLAND.zh-CN', (string) ($meta['cultural_context'] ?? ''));
+            $this->assertSame('cultural_calibration.v1', (string) ($meta['calibration_contract_version'] ?? ''));
+            $this->assertSame('governance.v1', (string) ($meta['calibration_policy_version'] ?? ''));
+            $this->assertSame('content_governance', (string) ($meta['calibration_source'] ?? ''));
+            $this->assertContains('growth.next_actions', $meta['calibrated_section_keys'] ?? []);
+            $this->assertNotSame('', trim((string) ($meta['calibration_fingerprint'] ?? '')));
             $this->assertContains('role_fit.role.NT', $meta['role_fit_keys'] ?? []);
         }
 
@@ -134,6 +141,10 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['narrative_contract_version'] ?? null, $eventMeta['result_view']['narrative_contract_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['narrative_runtime_contract_version'] ?? null, $eventMeta['result_view']['narrative_runtime_contract_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['narrative_fingerprint'] ?? null, $eventMeta['result_view']['narrative_fingerprint'] ?? null);
+        $this->assertSame($eventMeta['report_view']['locale_context'] ?? null, $eventMeta['result_view']['locale_context'] ?? null);
+        $this->assertSame($eventMeta['report_view']['cultural_context'] ?? null, $eventMeta['result_view']['cultural_context'] ?? null);
+        $this->assertSame($eventMeta['report_view']['calibrated_section_keys'] ?? null, $eventMeta['result_view']['calibrated_section_keys'] ?? null);
+        $this->assertSame($eventMeta['report_view']['calibration_fingerprint'] ?? null, $eventMeta['result_view']['calibration_fingerprint'] ?? null);
         $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.is_first_view'));
         $this->assertSame(false, data_get($eventMeta, 'result_view.user_state.is_revisit'));
         $this->assertSame(true, data_get($eventMeta, 'result_view.user_state.has_share'));

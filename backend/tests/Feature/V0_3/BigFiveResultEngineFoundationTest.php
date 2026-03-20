@@ -45,6 +45,8 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $resultResponse->assertJsonPath('big5_public_projection_v1.trait_bands.O', 'mid');
         $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
         $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.runtime_mode', 'mock');
+        $resultResponse->assertJsonPath('big5_public_projection_v1.cultural_calibration_v1.version', 'cultural_calibration.v1');
+        $resultResponse->assertJsonPath('big5_public_projection_v1.cultural_calibration_v1.cultural_context', 'CN_MAINLAND.zh-CN');
 
         $reportResponse = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -56,6 +58,7 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $reportResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.1', 'traits.why_this_profile');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
+        $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.cultural_calibration_v1.version', 'cultural_calibration.v1');
         $reportResponse->assertJsonPath('report.sections.0.key', 'traits.overview');
         $reportResponse->assertJsonPath('report.sections.4.key', 'growth.next_actions');
 
@@ -71,6 +74,10 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $this->assertArrayHasKey('scene_fingerprint', $meta);
         $this->assertSame('controlled_narrative.v1', (string) ($meta['narrative_contract_version'] ?? ''));
         $this->assertSame('mock', (string) ($meta['narrative_runtime_mode'] ?? ''));
+        $this->assertSame('zh-CN', (string) ($meta['locale_context'] ?? ''));
+        $this->assertSame('CN_MAINLAND.zh-CN', (string) ($meta['cultural_context'] ?? ''));
+        $this->assertSame('cultural_calibration.v1', (string) ($meta['calibration_contract_version'] ?? ''));
+        $this->assertContains('traits.overview', $meta['calibrated_section_keys'] ?? []);
     }
 
     private function seedAttempt(string $anonId): string

@@ -86,7 +86,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase9c.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase9e.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
@@ -102,6 +102,14 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('controlled_narrative.v1', data_get($clear, 'controlled_narrative_v1.narrative_contract_version'));
         $this->assertSame('off', data_get($clear, 'controlled_narrative_v1.runtime_mode'));
         $this->assertSame('', data_get($clear, 'controlled_narrative_v1.narrative_intro'));
+        $this->assertSame('cultural_calibration.v1', data_get($clear, 'cultural_calibration_v1.version'));
+        $this->assertSame('zh-CN', data_get($clear, 'cultural_calibration_v1.locale_context'));
+        $this->assertSame('CN_MAINLAND.zh-CN', data_get($clear, 'cultural_calibration_v1.cultural_context'));
+        $this->assertSame('governance.v1', data_get($clear, 'cultural_calibration_v1.calibration_policy_version'));
+        $this->assertSame('content_governance', data_get($clear, 'cultural_calibration_v1.calibration_source'));
+        $this->assertContains('growth.next_actions', data_get($clear, 'cultural_calibration_v1.calibrated_section_keys', []));
+        $this->assertContains('career.next_step', data_get($clear, 'cultural_calibration_v1.calibrated_section_keys', []));
+        $this->assertNotSame('', trim((string) data_get($clear, 'cultural_calibration_v1.calibration_fingerprint')));
         $this->assertContains('working_life_v1', data_get($clear, 'narrative_runtime_contract_v1.truth_guard_fields', []));
         $this->assertSame('mbti.privacy_contract.v1', data_get($clear, 'privacy_contract_v1.version'));
         $this->assertSame(true, data_get($clear, 'privacy_contract_v1.consent_scope.subject_export'));
@@ -795,6 +803,8 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('mock', data_get($personalization, 'narrative_runtime_contract_v1.runtime_mode'));
         $this->assertNotSame('', trim((string) data_get($personalization, 'controlled_narrative_v1.narrative_intro')));
         $this->assertNotSame('', trim((string) data_get($personalization, 'controlled_narrative_v1.narrative_summary')));
+        $this->assertSame('cultural_calibration.v1', data_get($personalization, 'cultural_calibration_v1.version'));
+        $this->assertSame('zh-CN', data_get($personalization, 'cultural_calibration_v1.locale_context'));
         $this->assertSame('INTJ-A', (string) ($personalization['type_code'] ?? ''));
         $this->assertSame('A', (string) ($personalization['identity'] ?? ''));
     }

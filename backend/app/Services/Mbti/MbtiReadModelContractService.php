@@ -53,6 +53,7 @@ final class MbtiReadModelContractService
         'mbti_public_projection_v1.sections',
         'controlled_narrative_v1',
         'narrative_runtime_contract_v1',
+        'cultural_calibration_v1',
     ];
 
     /**
@@ -77,6 +78,7 @@ final class MbtiReadModelContractService
         'mbti_read_contract_v1',
         'controlled_narrative_v1',
         'narrative_runtime_contract_v1',
+        'cultural_calibration_v1',
     ];
 
     /**
@@ -108,6 +110,11 @@ final class MbtiReadModelContractService
         'narrative_runtime_contract_v1.model_version',
         'narrative_runtime_contract_v1.prompt_version',
         'narrative_runtime_contract_v1.narrative_fingerprint',
+        'cultural_calibration_v1.locale_context',
+        'cultural_calibration_v1.cultural_context',
+        'cultural_calibration_v1.calibrated_section_keys',
+        'cultural_calibration_v1.calibration_fingerprint',
+        'cultural_calibration_v1.calibration_contract_version',
     ];
 
     /**

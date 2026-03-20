@@ -96,7 +96,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame(
-            'mbti.personalization.phase9c.v1',
+            'mbti.personalization.phase9e.v1',
             data_get($payload, 'report._meta.personalization.schema_version')
         );
         $this->assertSame(
@@ -128,6 +128,14 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertSame(
             'controlled_narrative.v1',
             data_get($payload, 'report._meta.personalization.controlled_narrative_v1.version')
+        );
+        $this->assertSame(
+            'cultural_calibration.v1',
+            data_get($payload, 'report._meta.personalization.cultural_calibration_v1.version')
+        );
+        $this->assertSame(
+            'CN_MAINLAND.zh-CN',
+            data_get($payload, 'report._meta.personalization.cultural_calibration_v1.cultural_context')
         );
         $this->assertSame(
             'off',
@@ -401,7 +409,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             ->first(static fn (array $section): bool => (string) ($section['key'] ?? '') === 'relationships.try_this_week');
 
         $this->assertSame(
-            'mbti.personalization.phase9c.v1',
+            'mbti.personalization.phase9e.v1',
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(

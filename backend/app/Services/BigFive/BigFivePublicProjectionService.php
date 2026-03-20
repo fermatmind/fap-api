@@ -7,6 +7,7 @@ namespace App\Services\BigFive;
 use App\Models\Result;
 use App\Services\AI\ControlledGenerationRuntime;
 use App\Services\AI\ControlledNarrativeLayerService;
+use App\Services\Content\CulturalCalibrationLayerService;
 
 final class BigFivePublicProjectionService
 {
@@ -15,6 +16,7 @@ final class BigFivePublicProjectionService
     public function __construct(
         private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
         private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
+        private readonly CulturalCalibrationLayerService $culturalCalibrationLayerService,
     ) {
     }
 
@@ -174,6 +176,10 @@ final class BigFivePublicProjectionService
         );
         $projection['_meta']['narrative_runtime_contract_v1'] = $runtimeContract;
         $projection['controlled_narrative_v1'] = $this->controlledNarrativeLayerService->buildFromRuntimeContract($runtimeContract);
+        $projection['cultural_calibration_v1'] = $this->culturalCalibrationLayerService->buildForBigFive(
+            $projection,
+            ['locale' => $locale]
+        );
 
         return $projection;
     }
