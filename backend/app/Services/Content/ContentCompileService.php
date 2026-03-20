@@ -10,7 +10,10 @@ use RecursiveIteratorIterator;
 
 final class ContentCompileService
 {
-    public function __construct(private readonly ContentLintService $lint)
+    public function __construct(
+        private readonly ContentLintService $lint,
+        private readonly MbtiContentGovernanceService $mbtiGovernance,
+    )
     {
     }
 
@@ -20,10 +23,7 @@ final class ContentCompileService
     public function compileAll(?string $packId = null): array
     {
         $packs = $this->discoverPacks();
-        if (is_string($packId) && trim($packId) !== '') {
-            $packId = trim($packId);
-            $packs = array_values(array_filter($packs, fn (array $pack): bool => (string) ($pack['pack_id'] ?? '') === $packId));
-        }
+        $packs = $this->selectPacks($packs, $packId);
 
         $results = [];
         $ok = true;
@@ -39,6 +39,34 @@ final class ContentCompileService
             'ok' => $ok,
             'packs' => $results,
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $packs
+     * @return list<array<string,mixed>>
+     */
+    private function selectPacks(array $packs, ?string $packId): array
+    {
+        if (! is_string($packId) || trim($packId) === '') {
+            return $packs;
+        }
+
+        $packId = trim($packId);
+        $matches = array_values(array_filter(
+            $packs,
+            fn (array $pack): bool => (string) ($pack['pack_id'] ?? '') === $packId
+        ));
+
+        if (count($matches) <= 1) {
+            return $matches;
+        }
+
+        $governedMatches = array_values(array_filter(
+            $matches,
+            fn (array $pack): bool => $this->mbtiGovernance->appliesTo($pack)
+        ));
+
+        return count($governedMatches) === 1 ? $governedMatches : $matches;
     }
 
     /**
@@ -123,7 +151,10 @@ final class ContentCompileService
             [$baseDir . DIRECTORY_SEPARATOR . 'manifest.json'],
             glob($baseDir . DIRECTORY_SEPARATOR . 'report_cards_*.json') ?: [],
             glob($baseDir . DIRECTORY_SEPARATOR . 'report_select_rules.json') ?: [],
-            glob($baseDir . DIRECTORY_SEPARATOR . 'report_section_policies.json') ?: []
+            glob($baseDir . DIRECTORY_SEPARATOR . 'report_section_policies.json') ?: [],
+            glob($baseDir . DIRECTORY_SEPARATOR . 'report_dynamic_sections.json') ?: [],
+            glob($baseDir . DIRECTORY_SEPARATOR . 'report_recommended_reads.json') ?: [],
+            glob($baseDir . DIRECTORY_SEPARATOR . 'report_content_governance.json') ?: []
         );
         $checksum = $this->computeChecksum($sourceFiles);
         $generatedAt = now()->toIso8601String();
@@ -168,19 +199,32 @@ final class ContentCompileService
             'variables' => $variablesUsed,
         ]);
 
+        $compiledFiles = [
+            'cards.normalized.json',
+            'cards.tag_index.json',
+            'rules.normalized.json',
+            'sections.spec.json',
+            'variables.used.json',
+        ];
+
+        if ($this->mbtiGovernance->appliesTo($pack)) {
+            $governanceDoc = $this->mbtiGovernance->loadDocument($baseDir);
+            if (is_array($governanceDoc)) {
+                $this->writeJson(
+                    $compiledDir . DIRECTORY_SEPARATOR . 'governance.spec.json',
+                    $this->mbtiGovernance->compileSpec($pack, $governanceDoc)
+                );
+                $compiledFiles[] = 'governance.spec.json';
+            }
+        }
+
         $this->writeJson($compiledDir . DIRECTORY_SEPARATOR . 'manifest.json', [
             'schema' => 'fap.content.compiled.manifest.v1',
             'pack_id' => (string) ($pack['pack_id'] ?? ''),
             'source_version' => (string) ($manifest['content_package_version'] ?? ''),
             'generated_at' => $generatedAt,
             'checksum' => $checksum,
-            'files' => [
-                'cards.normalized.json',
-                'cards.tag_index.json',
-                'rules.normalized.json',
-                'sections.spec.json',
-                'variables.used.json',
-            ],
+            'files' => $compiledFiles,
         ]);
 
         return [
