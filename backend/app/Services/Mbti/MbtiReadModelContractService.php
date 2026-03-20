@@ -51,6 +51,7 @@ final class MbtiReadModelContractService
         'mbti_public_projection_v1.profile',
         'mbti_public_projection_v1.dimensions',
         'mbti_public_projection_v1.sections',
+        'narrative_runtime_contract_v1',
     ];
 
     /**
@@ -73,6 +74,7 @@ final class MbtiReadModelContractService
         'mbti_public_projection_v1.dimensions',
         'mbti_public_projection_v1.sections',
         'mbti_read_contract_v1',
+        'narrative_runtime_contract_v1',
     ];
 
     /**
@@ -99,6 +101,11 @@ final class MbtiReadModelContractService
         'working_life_v1.career_focus_key',
         'working_life_v1.career_journey_keys',
         'working_life_v1.career_action_priority_keys',
+        'narrative_runtime_contract_v1.runtime_mode',
+        'narrative_runtime_contract_v1.provider_name',
+        'narrative_runtime_contract_v1.model_version',
+        'narrative_runtime_contract_v1.prompt_version',
+        'narrative_runtime_contract_v1.narrative_fingerprint',
     ];
 
     /**

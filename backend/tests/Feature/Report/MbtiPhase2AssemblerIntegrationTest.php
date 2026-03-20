@@ -122,6 +122,18 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.privacy_contract_v1.version')
         );
         $this->assertSame(
+            'narrative_runtime_contract.v1',
+            data_get($payload, 'report._meta.personalization.narrative_runtime_contract_v1.version')
+        );
+        $this->assertSame(
+            'off',
+            data_get($payload, 'report._meta.personalization.narrative_runtime_contract_v1.runtime_mode')
+        );
+        $this->assertSame(
+            'null',
+            data_get($payload, 'report._meta.personalization.narrative_runtime_contract_v1.provider_name')
+        );
+        $this->assertSame(
             true,
             data_get($payload, 'report._meta.personalization.privacy_contract_v1.consent_scope.subject_export')
         );

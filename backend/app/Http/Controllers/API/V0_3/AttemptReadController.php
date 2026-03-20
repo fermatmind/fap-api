@@ -389,6 +389,10 @@ class AttemptReadController extends Controller
             if (is_array($privacyContract)) {
                 $responsePayload['mbti_privacy_contract_v1'] = $privacyContract;
             }
+            $narrativeRuntime = data_get($responsePayload, 'report._meta.personalization.narrative_runtime_contract_v1');
+            if (is_array($narrativeRuntime)) {
+                $responsePayload['narrative_runtime_contract_v1'] = $narrativeRuntime;
+            }
             $crossAssessment = data_get($responsePayload, 'report._meta.personalization.cross_assessment_v1');
             if (is_array($crossAssessment)) {
                 $responsePayload['mbti_cross_assessment_v1'] = $crossAssessment;
@@ -653,6 +657,19 @@ class AttemptReadController extends Controller
             'continuity' => is_array($personalization['continuity'] ?? null) ? $personalization['continuity'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
+
+        $narrativeRuntime = is_array($personalization['narrative_runtime_contract_v1'] ?? null)
+            ? $personalization['narrative_runtime_contract_v1']
+            : [];
+        if ($narrativeRuntime !== []) {
+            $meta['narrative_runtime_contract_version'] = trim((string) ($narrativeRuntime['version'] ?? ''));
+            $meta['narrative_runtime_mode'] = trim((string) ($narrativeRuntime['runtime_mode'] ?? ''));
+            $meta['narrative_provider_name'] = trim((string) ($narrativeRuntime['provider_name'] ?? ''));
+            $meta['narrative_model_version'] = trim((string) ($narrativeRuntime['model_version'] ?? ''));
+            $meta['narrative_prompt_version'] = trim((string) ($narrativeRuntime['prompt_version'] ?? ''));
+            $meta['narrative_fingerprint'] = trim((string) ($narrativeRuntime['narrative_fingerprint'] ?? ''));
+            $meta['narrative_fail_open_mode'] = trim((string) ($narrativeRuntime['fail_open_mode'] ?? ''));
+        }
 
         $privacyContract = is_array($personalization['privacy_contract_v1'] ?? null)
             ? $personalization['privacy_contract_v1']

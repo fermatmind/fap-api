@@ -26,4 +26,12 @@ return [
     'queue_name' => env('AI_INSIGHTS_QUEUE', 'insights'),
     'cost_per_1k_tokens_usd' => (float) env('AI_COST_PER_1K_TOKENS_USD', 0.002),
     'dev_allow_anon_header' => env('AI_DEV_ALLOW_ANON_HEADER', false),
+
+    'narrative' => [
+        'enabled' => env('AI_NARRATIVE_ENABLED', false),
+        'provider' => env('AI_NARRATIVE_PROVIDER', env('AI_PROVIDER', 'mock')),
+        'model' => env('AI_NARRATIVE_MODEL', env('AI_MODEL', 'mock-model')),
+        'prompt_version' => env('AI_NARRATIVE_PROMPT_VERSION', env('AI_PROMPT_VERSION', 'v1.0.0')),
+        'fail_open_mode' => env('AI_NARRATIVE_FAIL_OPEN_MODE', 'deterministic'),
+    ],
 ];
