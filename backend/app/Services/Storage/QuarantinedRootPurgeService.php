@@ -16,6 +16,7 @@ final class QuarantinedRootPurgeService
     private const ALLOWED_SOURCE_KINDS = [
         'legacy.source_pack',
         'v2.mirror',
+        'v2.primary',
     ];
 
     private const PLAN_SCHEMA = 'storage_purge_quarantined_root_plan.v1';
@@ -316,17 +317,26 @@ final class QuarantinedRootPurgeService
 
         $releaseId = trim((string) ($manifest->content_pack_release_id ?? ''));
         $runtimeTruth = null;
-        if ($sourceKind === 'v2.mirror' && $releaseId !== '') {
+        if (in_array($sourceKind, ['v2.mirror', 'v2.primary'], true) && $releaseId !== '') {
             $release = \Illuminate\Support\Facades\DB::table('content_pack_releases')->where('id', $releaseId)->first();
             if (! $release) {
                 throw new \RuntimeException('linked release row is missing.');
             }
 
             $runtimeTruth = $this->v2RuntimeTruth->inspectRelease($release, $disk);
-            if (! (bool) ($runtimeTruth['runtime_safe_if_mirror_removed'] ?? false)) {
-                throw new \RuntimeException('v2 mirror removal is not runtime safe: '.(string) ($runtimeTruth['reason'] ?? 'runtime guard blocked'));
+            $runtimeSafe = $sourceKind === 'v2.primary'
+                ? (bool) ($runtimeTruth['runtime_safe_if_primary_removed'] ?? false)
+                : (bool) ($runtimeTruth['runtime_safe_if_mirror_removed'] ?? false);
+            if (! $runtimeSafe) {
+                throw new \RuntimeException(sprintf(
+                    'v2 %s removal is not runtime safe: %s',
+                    $sourceKind === 'v2.primary' ? 'primary' : 'mirror',
+                    (string) ($runtimeTruth['reason'] ?? 'runtime guard blocked')
+                ));
             }
-            $validation['v2_runtime_safe_if_mirror_removed'] = true;
+            $validation[$sourceKind === 'v2.primary'
+                ? 'v2_runtime_safe_if_primary_removed'
+                : 'v2_runtime_safe_if_mirror_removed'] = true;
         }
 
         $restorePlan = $this->restoreService->buildPlan($itemRoot);

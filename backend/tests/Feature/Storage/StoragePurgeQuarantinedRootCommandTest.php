@@ -232,6 +232,53 @@ final class StoragePurgeQuarantinedRootCommandTest extends TestCase
         $this->assertSame($fixture['primary_root'].'/compiled', $resolvedAfter);
     }
 
+    public function test_command_plans_and_executes_purge_for_quarantined_v2_primary_when_runtime_safe_if_primary_removed(): void
+    {
+        $fixture = $this->quarantineV2PrimaryFixture('command_purge_v2_primary_success');
+
+        /** @var ContentPackV2Resolver $resolver */
+        $resolver = app(ContentPackV2Resolver::class);
+        $resolvedBefore = $resolver->resolveCompiledPathByManifestHash('BIG5_OCEAN', 'v1', $fixture['manifest_hash']);
+        $this->assertSame($fixture['mirror_root'].'/compiled', $resolvedBefore);
+
+        $this->assertSame(0, Artisan::call('storage:purge-quarantined-root', [
+            '--dry-run' => true,
+            '--disk' => 's3',
+            '--item-root' => $fixture['item_root'],
+        ]));
+
+        $dryRunOutput = Artisan::output();
+        $this->assertStringContainsString('status=planned', $dryRunOutput);
+        $this->assertStringContainsString('source_kind=v2.primary', $dryRunOutput);
+        $planPath = $this->extractOutputValue($dryRunOutput, 'plan');
+        $this->assertFileExists($planPath);
+
+        $releaseStoragePathBefore = DB::table('content_pack_releases')
+            ->where('id', $fixture['release_id'])
+            ->value('storage_path');
+
+        $this->assertSame(0, Artisan::call('storage:purge-quarantined-root', [
+            '--execute' => true,
+            '--disk' => 's3',
+            '--plan' => $planPath,
+        ]));
+
+        $executeOutput = Artisan::output();
+        $this->assertStringContainsString('status=success', $executeOutput);
+        $runDir = $this->extractOutputValue($executeOutput, 'run_dir');
+        $receiptPath = $this->extractOutputValue($executeOutput, 'receipt');
+        $this->assertFileExists($runDir.'/run.json');
+        $this->assertFileExists($receiptPath);
+        $this->assertDirectoryDoesNotExist($fixture['item_root']);
+        $this->assertDirectoryExists($fixture['mirror_root']);
+        $this->assertSame($releaseStoragePathBefore, DB::table('content_pack_releases')
+            ->where('id', $fixture['release_id'])
+            ->value('storage_path'));
+
+        $resolvedAfter = $resolver->resolveCompiledPathByManifestHash('BIG5_OCEAN', 'v1', $fixture['manifest_hash']);
+        $this->assertSame($fixture['mirror_root'].'/compiled', $resolvedAfter);
+    }
+
     /**
      * @return array{item_root:string,release_id:string}
      */
@@ -439,6 +486,123 @@ final class StoragePurgeQuarantinedRootCommandTest extends TestCase
         $runDir = $this->extractOutputValue(Artisan::output(), 'run_dir');
         $itemRoot = collect((array) json_decode((string) File::get($runDir.'/run.json'), true)['quarantined'] ?? [])
             ->firstWhere('source_storage_path', $mirrorRoot)['target_root'] ?? '';
+        $this->assertNotSame('', $itemRoot);
+
+        return [
+            'item_root' => $itemRoot,
+            'release_id' => $releaseId,
+            'primary_root' => $primaryRoot,
+            'mirror_root' => $mirrorRoot,
+            'manifest_hash' => $manifestHash,
+        ];
+    }
+
+    /**
+     * @return array{
+     *   item_root:string,
+     *   release_id:string,
+     *   primary_root:string,
+     *   mirror_root:string,
+     *   manifest_hash:string
+     * }
+     */
+    private function quarantineV2PrimaryFixture(string $suffix, bool $createMirror = true): array
+    {
+        $releaseId = (string) Str::uuid();
+        $storagePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$releaseId;
+        $primaryRoot = storage_path('app/'.$storagePath);
+        $mirrorRoot = storage_path('app/content_packs_v2/BIG5_OCEAN/v1/'.$releaseId);
+        $files = $this->createCompiledTree($primaryRoot, 'BIG5_OCEAN', 'v1', $suffix);
+        if ($createMirror) {
+            $this->createCompiledTree($mirrorRoot, 'BIG5_OCEAN', 'v1', $suffix);
+        }
+        $manifestHash = hash('sha256', $files['compiled/manifest.json']);
+        $this->insertV2Release($releaseId, 'BIG5_OCEAN', 'v1', $storagePath, $manifestHash);
+
+        app(ExactReleaseFileSetCatalogService::class)->upsertExactManifest([
+            'content_pack_release_id' => $releaseId,
+            'schema_version' => (string) config('storage_rollout.exact_manifest_schema_version', 'storage_exact_manifest.v1'),
+            'source_kind' => 'v2.primary',
+            'source_disk' => 'local',
+            'source_storage_path' => $primaryRoot,
+            'manifest_hash' => $manifestHash,
+            'pack_id' => 'BIG5_OCEAN',
+            'pack_version' => 'v1',
+            'compiled_hash' => hash('sha256', 'compiled|'.$suffix),
+            'content_hash' => hash('sha256', 'content|'.$suffix),
+            'norms_version' => '2026Q1',
+            'source_commit' => 'git-'.$suffix,
+            'payload_json' => ['suffix' => $suffix],
+            'sealed_at' => now(),
+            'last_verified_at' => now(),
+        ], collect($files)->map(
+            fn (string $payload, string $logicalPath): array => [
+                'logical_path' => $logicalPath,
+                'blob_hash' => hash('sha256', $payload),
+                'size_bytes' => strlen($payload),
+                'role' => $logicalPath === 'compiled/manifest.json' ? 'manifest' : 'compiled',
+                'content_type' => 'application/json',
+                'encoding' => 'identity',
+                'checksum' => 'sha256:'.hash('sha256', $payload),
+            ]
+        )->values()->all());
+
+        foreach ($files as $payload) {
+            $hash = hash('sha256', $payload);
+            DB::table('storage_blobs')->updateOrInsert(
+                ['hash' => $hash],
+                [
+                    'disk' => 'local',
+                    'storage_path' => 'blobs/sha256/'.substr($hash, 0, 2).'/'.$hash,
+                    'size_bytes' => strlen($payload),
+                    'content_type' => 'application/json',
+                    'encoding' => 'identity',
+                    'ref_count' => 1,
+                    'first_seen_at' => now(),
+                    'last_verified_at' => now(),
+                ]
+            );
+
+            $remotePath = 'rollout/blobs/sha256/'.substr($hash, 0, 2).'/'.$hash;
+            Storage::disk('s3')->put($remotePath, $payload);
+            DB::table('storage_blob_locations')->insert([
+                'blob_hash' => $hash,
+                'disk' => 's3',
+                'storage_path' => $remotePath,
+                'location_kind' => 'remote_copy',
+                'size_bytes' => strlen($payload),
+                'checksum' => 'sha256:'.$hash,
+                'etag' => 'etag-'.$suffix.'-'.substr($hash, 0, 8),
+                'storage_class' => 'STANDARD_IA',
+                'verified_at' => now(),
+                'meta_json' => json_encode([
+                    'bucket' => 'purge-command-bucket',
+                    'region' => 'ap-guangzhou',
+                    'endpoint' => 'https://cos.purge-command.test',
+                    'url' => 'https://cos.purge-command.test/'.$remotePath,
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        $quarantinePlan = Artisan::call('storage:quarantine-exact-roots', [
+            '--dry-run' => true,
+            '--disk' => 's3',
+        ]);
+        $this->assertSame(0, $quarantinePlan);
+        $planPath = $this->extractOutputValue(Artisan::output(), 'plan');
+
+        $quarantineExecute = Artisan::call('storage:quarantine-exact-roots', [
+            '--execute' => true,
+            '--disk' => 's3',
+            '--plan' => $planPath,
+        ]);
+        $this->assertSame(0, $quarantineExecute);
+
+        $runDir = $this->extractOutputValue(Artisan::output(), 'run_dir');
+        $itemRoot = collect((array) json_decode((string) File::get($runDir.'/run.json'), true)['quarantined'] ?? [])
+            ->firstWhere('source_storage_path', $primaryRoot)['target_root'] ?? '';
         $this->assertNotSame('', $itemRoot);
 
         return [

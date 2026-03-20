@@ -254,6 +254,49 @@ final class ExactRootQuarantineServiceTest extends TestCase
         $this->assertSame($expectedMaterializedDir, $resolved);
     }
 
+    public function test_service_quarantines_v2_primary_when_runtime_safe_if_primary_removed(): void
+    {
+        $fixture = $this->seedV2PrimaryQuarantineFixture('v2_primary_quarantine_ok');
+        $service = app(ExactRootQuarantineService::class);
+
+        $plan = $service->buildPlan('s3');
+        $candidate = collect((array) ($plan['candidates'] ?? []))
+            ->firstWhere('exact_manifest_id', $fixture['exact_manifest_id']);
+
+        $this->assertIsArray($candidate);
+        $this->assertSame('v2.primary', (string) ($candidate['source_kind'] ?? ''));
+
+        $result = $service->executePlan($plan);
+        $quarantinedEntry = collect((array) ($result['quarantined'] ?? []))
+            ->firstWhere('exact_manifest_id', $fixture['exact_manifest_id']);
+
+        $this->assertIsArray($quarantinedEntry);
+        $this->assertDirectoryDoesNotExist($fixture['primary_root']);
+        $this->assertDirectoryExists($fixture['mirror_root']);
+        $this->assertSame($fixture['storage_path'], (string) DB::table('content_pack_releases')->where('id', $fixture['release_id'])->value('storage_path'));
+
+        /** @var ContentPackV2Resolver $resolver */
+        $resolver = app(ContentPackV2Resolver::class);
+        $resolved = $resolver->resolveCompiledPathByManifestHash('BIG5_OCEAN', 'v1', $fixture['manifest_hash']);
+        $this->assertSame($fixture['mirror_root'].'/compiled', $resolved);
+    }
+
+    public function test_service_blocks_v2_primary_quarantine_when_runtime_unsafe_if_primary_removed(): void
+    {
+        $fixture = $this->seedV2PrimaryQuarantineFixture('v2_primary_quarantine_blocked', createMirror: false);
+        $service = app(ExactRootQuarantineService::class);
+
+        $plan = $service->buildPlan('s3');
+        $blockedEntry = collect((array) ($plan['blocked'] ?? []))
+            ->firstWhere('exact_manifest_id', $fixture['exact_manifest_id']);
+
+        $this->assertIsArray($blockedEntry);
+        $this->assertSame('v2_runtime_not_safe_if_primary_removed', (string) ($blockedEntry['reason'] ?? ''));
+        $this->assertSame('PACKS2_REMOTE_REHYDRATE_DISABLED', (string) ($blockedEntry['detail'] ?? ''));
+        $this->assertDirectoryExists($fixture['primary_root']);
+        $this->assertDirectoryDoesNotExist(storage_path('app/private/packs_v2_materialized'));
+    }
+
     public function test_service_rejects_tampered_plan_source_path_without_moving_arbitrary_directory(): void
     {
         $releaseId = (string) Str::uuid();
@@ -461,6 +504,106 @@ final class ExactRootQuarantineServiceTest extends TestCase
             'source_kind' => 'v2.mirror',
             'source_disk' => 'local',
             'source_storage_path' => $mirrorRoot,
+            'manifest_hash' => $manifestHash,
+            'pack_id' => 'BIG5_OCEAN',
+            'pack_version' => 'v1',
+            'compiled_hash' => hash('sha256', 'compiled|'.$suffix),
+            'content_hash' => hash('sha256', 'content|'.$suffix),
+            'norms_version' => '2026Q1',
+            'source_commit' => 'git-'.$suffix,
+            'payload_json' => ['suffix' => $suffix],
+            'sealed_at' => now(),
+            'last_verified_at' => now(),
+        ], collect($files)->map(
+            fn (string $payload, string $logicalPath): array => [
+                'logical_path' => $logicalPath,
+                'blob_hash' => hash('sha256', $payload),
+                'size_bytes' => strlen($payload),
+                'role' => $logicalPath === 'compiled/manifest.json' ? 'manifest' : 'compiled',
+                'content_type' => 'application/json',
+                'encoding' => 'identity',
+                'checksum' => 'sha256:'.hash('sha256', $payload),
+            ]
+        )->values()->all());
+
+        foreach ($files as $payload) {
+            $hash = hash('sha256', $payload);
+            DB::table('storage_blobs')->updateOrInsert(
+                ['hash' => $hash],
+                [
+                    'disk' => 'local',
+                    'storage_path' => 'blobs/sha256/'.substr($hash, 0, 2).'/'.$hash,
+                    'size_bytes' => strlen($payload),
+                    'content_type' => 'application/json',
+                    'encoding' => 'identity',
+                    'ref_count' => 1,
+                    'first_seen_at' => now(),
+                    'last_verified_at' => now(),
+                ]
+            );
+
+            $remotePath = 'rollout/blobs/sha256/'.substr($hash, 0, 2).'/'.$hash;
+            Storage::disk('s3')->put($remotePath, $payload);
+            DB::table('storage_blob_locations')->insert([
+                'blob_hash' => $hash,
+                'disk' => 's3',
+                'storage_path' => $remotePath,
+                'location_kind' => 'remote_copy',
+                'size_bytes' => strlen($payload),
+                'checksum' => 'sha256:'.$hash,
+                'etag' => 'etag-'.$suffix.'-'.substr($hash, 0, 8),
+                'storage_class' => 'STANDARD_IA',
+                'verified_at' => now(),
+                'meta_json' => json_encode([
+                    'bucket' => 'quarantine-test-bucket',
+                    'region' => 'ap-guangzhou',
+                    'endpoint' => 'https://cos.quarantine.test',
+                    'url' => 'https://cos.quarantine.test/'.$remotePath,
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return [
+            'exact_manifest_id' => (int) $manifest->getKey(),
+            'manifest_hash' => $manifestHash,
+            'mirror_root' => $mirrorRoot,
+            'primary_root' => $primaryRoot,
+            'release_id' => $releaseId,
+            'storage_path' => $storagePath,
+        ];
+    }
+
+    /**
+     * @return array{
+     *   exact_manifest_id:int,
+     *   manifest_hash:string,
+     *   mirror_root:string,
+     *   primary_root:string,
+     *   release_id:string,
+     *   storage_path:string
+     * }
+     */
+    private function seedV2PrimaryQuarantineFixture(string $suffix, bool $createMirror = true): array
+    {
+        $releaseId = (string) Str::uuid();
+        $storagePath = 'private/packs_v2/BIG5_OCEAN/v1/'.$releaseId;
+        $primaryRoot = storage_path('app/'.$storagePath);
+        $mirrorRoot = storage_path('app/content_packs_v2/BIG5_OCEAN/v1/'.$releaseId);
+        $files = $this->createCompiledTree($primaryRoot, 'BIG5_OCEAN', 'v1', $suffix);
+        if ($createMirror) {
+            $this->createCompiledTree($mirrorRoot, 'BIG5_OCEAN', 'v1', $suffix);
+        }
+        $manifestHash = hash('sha256', $files['compiled/manifest.json']);
+        $this->insertV2Release($releaseId, 'BIG5_OCEAN', 'v1', $storagePath, $manifestHash);
+
+        $manifest = app(ExactReleaseFileSetCatalogService::class)->upsertExactManifest([
+            'content_pack_release_id' => $releaseId,
+            'schema_version' => (string) config('storage_rollout.exact_manifest_schema_version', 'storage_exact_manifest.v1'),
+            'source_kind' => 'v2.primary',
+            'source_disk' => 'local',
+            'source_storage_path' => $primaryRoot,
             'manifest_hash' => $manifestHash,
             'pack_id' => 'BIG5_OCEAN',
             'pack_version' => 'v1',
