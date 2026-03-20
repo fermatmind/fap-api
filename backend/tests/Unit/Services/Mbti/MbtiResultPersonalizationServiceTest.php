@@ -94,6 +94,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
         $this->assertSame('phase9c.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('narrative_runtime_contract.v1', data_get($clear, 'narrative_runtime_contract_v1.version'));
+        $this->assertSame('off', data_get($clear, 'narrative_runtime_contract_v1.runtime_mode'));
+        $this->assertSame('null', data_get($clear, 'narrative_runtime_contract_v1.provider_name'));
+        $this->assertSame(false, data_get($clear, 'narrative_runtime_contract_v1.output_present.narrative_intro'));
+        $this->assertContains('working_life_v1', data_get($clear, 'narrative_runtime_contract_v1.truth_guard_fields', []));
         $this->assertSame('mbti.privacy_contract.v1', data_get($clear, 'privacy_contract_v1.version'));
         $this->assertSame(true, data_get($clear, 'privacy_contract_v1.consent_scope.subject_export'));
         $this->assertContains(

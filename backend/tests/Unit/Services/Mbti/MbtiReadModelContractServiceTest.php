@@ -17,6 +17,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
             'schema_version' => 'mbti.personalization.phase9c.v1',
             'identity' => 'A',
             'privacy_contract_v1' => ['version' => 'mbti.privacy_contract.v1'],
+            'narrative_runtime_contract_v1' => ['version' => 'narrative_runtime_contract.v1', 'runtime_mode' => 'off'],
             'variant_keys' => ['overview' => 'overview:clear'],
             'scene_fingerprint' => ['work' => ['style_key' => 'work.primary.EI.E.clear']],
             'user_state' => ['is_first_view' => true],
@@ -31,9 +32,11 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertSame('mbti.read_contract.v1', $contract['version']);
         $this->assertContains('identity', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('privacy_contract_v1', $contract['canonical_read_model']['personalization_fields']);
+        $this->assertContains('narrative_runtime_contract_v1', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('variant_keys', $contract['canonical_read_model']['personalization_fields']);
         $this->assertNotContains('user_state', $contract['canonical_read_model']['personalization_fields']);
         $this->assertContains('mbti_privacy_contract_v1', $contract['cacheable_fields']);
+        $this->assertContains('narrative_runtime_contract_v1', $contract['cacheable_fields']);
         $this->assertSame(
             [
                 'user_state',
@@ -65,6 +68,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('user_state', $contract['telemetry_parity_fields']);
         $this->assertContains('continuity.carryover_focus_key', $contract['telemetry_parity_fields']);
         $this->assertContains('working_life_v1.career_focus_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('narrative_runtime_contract_v1.runtime_mode', $contract['telemetry_parity_fields']);
     }
 
     public function test_apply_overlay_patch_preserves_canonical_fields_and_replaces_only_overlay_fields(): void

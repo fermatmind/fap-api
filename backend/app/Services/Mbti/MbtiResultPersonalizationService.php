@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Mbti;
 
+use App\Services\AI\ControlledGenerationRuntime;
 use App\Services\Content\ContentPacksIndex;
 
 final class MbtiResultPersonalizationService
@@ -570,6 +571,7 @@ final class MbtiResultPersonalizationService
         private readonly MbtiBigFiveSynthesisService $bigFiveSynthesisService,
         private readonly MbtiWorkingLifeConsolidationService $workingLifeConsolidationService,
         private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
+        private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
         private readonly MbtiReadModelContractService $readModelContractService,
     ) {
     }
@@ -709,6 +711,23 @@ final class MbtiResultPersonalizationService
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
             'locale' => $locale,
         ]);
+
+        $personalization['narrative_runtime_contract_v1'] = $this->controlledGenerationRuntime->buildContract(
+            'mbti.report',
+            'MBTI',
+            $locale,
+            $personalization,
+            [
+                'type_code' => $typeCode,
+                'identity' => $identity,
+                'engine_version' => trim((string) ($context['engine_version'] ?? data_get($reportPayload, 'versions.engine', ''))),
+                'schema_version' => 'mbti.personalization.phase9c.v1',
+                'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
+                'user_id' => $context['user_id'] ?? null,
+                'anon_id' => $context['anon_id'] ?? null,
+                'attempt_id' => $context['attempt_id'] ?? null,
+            ]
+        );
 
         return $this->readModelContractService->attachContract($personalization);
     }
