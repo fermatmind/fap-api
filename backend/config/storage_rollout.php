@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 return [
     'manifest_schema_version' => 'storage_manifest.v1',
+    'exact_manifest_schema_version' => 'storage_exact_manifest.v1',
     'snapshot_schema_version' => 'storage_snapshot.v1',
     'blob_offload_plan_schema_version' => 'storage_blob_offload_plan.v1',
     'blob_catalog_enabled' => false,
