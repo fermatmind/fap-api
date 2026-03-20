@@ -35,7 +35,11 @@ final class PacksPublishBig5Test extends TestCase
         $this->artisan(sprintf(
             'packs:publish --scale=BIG5_OCEAN --pack=BIG5_OCEAN --pack-version=v1 --region=CN_MAINLAND --locale=zh-CN --dir_alias=%s --probe=0',
             self::DIR_ALIAS
-        ))->assertExitCode(0);
+        ))
+            ->expectsOutputToContain('release_id=')
+            ->expectsOutput('status=success')
+            ->expectsOutput('to_pack_id=BIG5_OCEAN')
+            ->assertExitCode(0);
 
         $release = DB::table('content_pack_releases')
             ->where('action', 'publish')
@@ -51,6 +55,19 @@ final class PacksPublishBig5Test extends TestCase
         $this->assertNotEmpty((string) ($release->compiled_hash ?? ''));
         $this->assertNotEmpty((string) ($release->content_hash ?? ''));
         $this->assertNotEmpty((string) ($release->norms_version ?? ''));
+        $expectedSourcePath = storage_path('app/private/content_releases/'.(string) $release->to_version_id.'/source_pack');
+        $this->assertSame('v1', (string) ($release->pack_version ?? ''));
+        $this->assertSame($expectedSourcePath, (string) ($release->storage_path ?? ''));
+        $this->assertSame((string) ($release->git_sha ?? ''), (string) ($release->source_commit ?? ''));
+        $this->assertDatabaseMissing('content_pack_activations', [
+            'pack_id' => 'BIG5_OCEAN',
+            'pack_version' => 'v1',
+        ]);
+
+        $releaseManifest = json_decode((string) ($release->manifest_json ?? '{}'), true);
+        $this->assertIsArray($releaseManifest);
+        $this->assertSame('BIG5_OCEAN', (string) ($releaseManifest['pack_id'] ?? ''));
+        $this->assertSame('v1', (string) ($releaseManifest['content_package_version'] ?? ''));
 
         $version = DB::table('content_pack_versions')->where('id', (string) $release->to_version_id)->first();
         $this->assertNotNull($version);

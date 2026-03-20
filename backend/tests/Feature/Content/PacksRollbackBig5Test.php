@@ -48,8 +48,8 @@ final class PacksRollbackBig5Test extends TestCase
             ->orderByDesc('updated_at')
             ->get();
         foreach ($publishRows as $row) {
-            $backupPath = storage_path('app/private/content_releases/backups/' . (string) $row->id . '/previous_pack');
-            if (!File::isDirectory($backupPath)) {
+            $backupPath = storage_path('app/private/content_releases/backups/'.(string) $row->id.'/previous_pack');
+            if (! File::isDirectory($backupPath)) {
                 continue;
             }
             $targetReleaseId = (string) $row->id;
@@ -61,7 +61,12 @@ final class PacksRollbackBig5Test extends TestCase
             'packs:rollback --scale=BIG5_OCEAN --region=CN_MAINLAND --locale=zh-CN --dir_alias=%s --to_release_id=%s --probe=0',
             self::DIR_ALIAS,
             $targetReleaseId
-        ))->assertExitCode(0);
+        ))
+            ->expectsOutputToContain('release_id=')
+            ->expectsOutput('status=success')
+            ->expectsOutput('rolled_back_pack_id=BIG5_OCEAN')
+            ->expectsOutput('source_release_id='.$targetReleaseId)
+            ->assertExitCode(0);
 
         $release = DB::table('content_pack_releases')
             ->where('action', 'rollback')
@@ -76,6 +81,18 @@ final class PacksRollbackBig5Test extends TestCase
         $this->assertNotEmpty((string) ($release->compiled_hash ?? ''));
         $this->assertNotEmpty((string) ($release->content_hash ?? ''));
         $this->assertNotEmpty((string) ($release->norms_version ?? ''));
+        $this->assertSame('v1', (string) ($release->pack_version ?? ''));
+        $this->assertSame(storage_path('app/private/content_releases/backups/'.$targetReleaseId.'/previous_pack'), (string) ($release->storage_path ?? ''));
+        $this->assertSame((string) ($release->git_sha ?? ''), (string) ($release->source_commit ?? ''));
+        $this->assertDatabaseMissing('content_pack_activations', [
+            'pack_id' => 'BIG5_OCEAN',
+            'pack_version' => 'v1',
+        ]);
+
+        $releaseManifest = json_decode((string) ($release->manifest_json ?? '{}'), true);
+        $this->assertIsArray($releaseManifest);
+        $this->assertSame('BIG5_OCEAN', (string) ($releaseManifest['pack_id'] ?? ''));
+        $this->assertSame('v1', (string) ($releaseManifest['content_package_version'] ?? ''));
 
         $this->assertTrue(File::isDirectory($target.'/compiled'));
         $this->assertTrue(File::exists($target.'/compiled/manifest.json'));

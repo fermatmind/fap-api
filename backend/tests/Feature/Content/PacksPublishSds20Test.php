@@ -35,7 +35,11 @@ final class PacksPublishSds20Test extends TestCase
         $this->artisan(sprintf(
             'packs:publish --scale=SDS_20 --pack=SDS_20 --pack-version=v1 --region=CN_MAINLAND --locale=zh-CN --dir_alias=%s --probe=0 --skip_drift=1',
             self::DIR_ALIAS
-        ))->assertExitCode(0);
+        ))
+            ->expectsOutputToContain('release_id=')
+            ->expectsOutput('status=success')
+            ->expectsOutput('to_pack_id=SDS_20')
+            ->assertExitCode(0);
 
         $release = DB::table('content_pack_releases')
             ->where('action', 'publish')
@@ -50,6 +54,19 @@ final class PacksPublishSds20Test extends TestCase
         $this->assertNotEmpty((string) ($release->manifest_hash ?? ''));
         $this->assertNotEmpty((string) ($release->compiled_hash ?? ''));
         $this->assertNotEmpty((string) ($release->content_hash ?? ''));
+        $expectedSourcePath = storage_path('app/private/content_releases/'.(string) $release->to_version_id.'/source_pack');
+        $this->assertSame('v1', (string) ($release->pack_version ?? ''));
+        $this->assertSame($expectedSourcePath, (string) ($release->storage_path ?? ''));
+        $this->assertSame((string) ($release->git_sha ?? ''), (string) ($release->source_commit ?? ''));
+        $this->assertDatabaseMissing('content_pack_activations', [
+            'pack_id' => 'SDS_20',
+            'pack_version' => 'v1',
+        ]);
+
+        $releaseManifest = json_decode((string) ($release->manifest_json ?? '{}'), true);
+        $this->assertIsArray($releaseManifest);
+        $this->assertSame('SDS_20', (string) ($releaseManifest['pack_id'] ?? ''));
+        $this->assertSame('v1', (string) ($releaseManifest['content_package_version'] ?? ''));
 
         $version = DB::table('content_pack_versions')->where('id', (string) $release->to_version_id)->first();
         $this->assertNotNull($version);

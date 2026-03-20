@@ -14,12 +14,13 @@ final class BigFiveOpsReleaseFlowTest extends TestCase
     use RefreshDatabase;
 
     private const DIR_ALIAS = 'BIG5-OCEAN-OPS-FLOW-CI-TEST';
+
     private const DIR_ALIAS_FAIL = 'BIG5-OCEAN-OPS-FLOW-FAIL-CI-TEST';
 
     protected function tearDown(): void
     {
         foreach ([self::DIR_ALIAS, self::DIR_ALIAS_FAIL] as $alias) {
-            $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/' . $alias);
+            $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.$alias);
             if (File::isDirectory($target)) {
                 File::deleteDirectory($target);
             }
@@ -30,7 +31,7 @@ final class BigFiveOpsReleaseFlowTest extends TestCase
 
     public function test_ops_release_flow_writes_publish_and_rollback_audits(): void
     {
-        $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/' . self::DIR_ALIAS);
+        $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_ALIAS);
         if (File::isDirectory($target)) {
             File::deleteDirectory($target);
         }
@@ -51,8 +52,8 @@ final class BigFiveOpsReleaseFlowTest extends TestCase
             ->orderByDesc('updated_at')
             ->get();
         foreach ($publishRows as $row) {
-            $backupPath = storage_path('app/private/content_releases/backups/' . (string) $row->id . '/previous_pack');
-            if (!File::isDirectory($backupPath)) {
+            $backupPath = storage_path('app/private/content_releases/backups/'.(string) $row->id.'/previous_pack');
+            if (! File::isDirectory($backupPath)) {
                 continue;
             }
             $targetReleaseId = (string) $row->id;
@@ -72,6 +73,12 @@ final class BigFiveOpsReleaseFlowTest extends TestCase
         $this->assertNotNull($publishRelease);
         $this->assertSame('success', (string) $publishRelease->status);
         $this->assertNotSame('', (string) ($publishRelease->manifest_hash ?? ''));
+        $this->assertNotSame('', (string) ($publishRelease->to_version_id ?? ''));
+        $this->assertSame('v1', (string) ($publishRelease->pack_version ?? ''));
+        $this->assertSame(
+            storage_path('app/private/content_releases/'.(string) $publishRelease->to_version_id.'/source_pack'),
+            (string) ($publishRelease->storage_path ?? '')
+        );
 
         $rollbackRelease = DB::table('content_pack_releases')
             ->where('action', 'rollback')
@@ -83,6 +90,15 @@ final class BigFiveOpsReleaseFlowTest extends TestCase
         $this->assertNotSame('', (string) ($rollbackRelease->manifest_hash ?? ''));
         $this->assertNotSame('', (string) ($rollbackRelease->compiled_hash ?? ''));
         $this->assertNotSame('', (string) ($rollbackRelease->content_hash ?? ''));
+        $this->assertSame('v1', (string) ($rollbackRelease->pack_version ?? ''));
+        $this->assertSame(
+            storage_path('app/private/content_releases/backups/'.$targetReleaseId.'/previous_pack'),
+            (string) ($rollbackRelease->storage_path ?? '')
+        );
+        $this->assertDatabaseMissing('content_pack_activations', [
+            'pack_id' => 'BIG5_OCEAN',
+            'pack_version' => 'v1',
+        ]);
 
         $publishAudit = DB::table('audit_logs')
             ->where('action', 'big5_pack_publish')
@@ -108,7 +124,7 @@ final class BigFiveOpsReleaseFlowTest extends TestCase
 
     public function test_ops_release_flow_records_failed_rollback_audit_for_unknown_target_release(): void
     {
-        $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/' . self::DIR_ALIAS_FAIL);
+        $target = base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_ALIAS_FAIL);
         if (File::isDirectory($target)) {
             File::deleteDirectory($target);
         }
