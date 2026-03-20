@@ -23,6 +23,7 @@ return [
     'artifact_dual_write_enabled' => false,
     'content_pack_v2_dual_write_enabled' => false,
     'resolver_materialization_enabled' => false,
+    'packs_v2_remote_rehydrate_enabled' => false,
     'blob_offload_disk' => env('STORAGE_BLOB_OFFLOAD_DISK', 's3'),
     'blob_offload_prefix' => env('STORAGE_BLOB_OFFLOAD_PREFIX', 'rollout/blobs'),
     'blob_offload_storage_class' => env('STORAGE_BLOB_OFFLOAD_STORAGE_CLASS'),

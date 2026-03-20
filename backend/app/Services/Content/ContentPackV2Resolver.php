@@ -12,6 +12,7 @@ final class ContentPackV2Resolver
 {
     public function __construct(
         private readonly ContentPackV2Materializer $materializer,
+        private readonly ContentPackV2RemoteRehydrateService $remoteRehydrate,
     ) {}
 
     public function resolveActiveCompiledPath(string $packId, string $packVersion): ?string
@@ -111,7 +112,32 @@ final class ContentPackV2Resolver
             }
         }
 
-        return null;
+        if (! $this->shouldRemoteRehydrate()) {
+            return null;
+        }
+
+        try {
+            return $this->remoteRehydrate->materializeFromRemote($release, $this->remoteRehydrateDisk());
+        } catch (Throwable $e) {
+            Log::warning('PACKS2_RESOLVER_REMOTE_REHYDRATE_FAILED', [
+                'release_id' => trim((string) ($release->id ?? '')),
+                'manifest_hash' => strtolower(trim((string) ($release->manifest_hash ?? ''))),
+                'storage_path' => $storagePath,
+                'error' => $e->getMessage(),
+            ]);
+
+            return null;
+        }
+    }
+
+    private function shouldRemoteRehydrate(): bool
+    {
+        return (bool) config('storage_rollout.packs_v2_remote_rehydrate_enabled', false);
+    }
+
+    private function remoteRehydrateDisk(): string
+    {
+        return trim((string) config('storage_rollout.blob_offload_disk', 's3'));
     }
 
     private function shouldMaterialize(): bool
