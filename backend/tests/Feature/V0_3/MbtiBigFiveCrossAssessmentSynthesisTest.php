@@ -43,11 +43,17 @@ class MbtiBigFiveCrossAssessmentSynthesisTest extends TestCase
         $nextActionsEnhancement = is_array($crossAssessment['section_enhancements']['growth.next_actions'] ?? null)
             ? $crossAssessment['section_enhancements']['growth.next_actions']
             : [];
+        $careerNextStepEnhancement = is_array($crossAssessment['section_enhancements']['career.next_step'] ?? null)
+            ? $crossAssessment['section_enhancements']['career.next_step']
+            : [];
         $stabilitySection = is_array($personalizationSections['growth.stability_confidence'] ?? null)
             ? $personalizationSections['growth.stability_confidence']
             : [];
         $nextActionsSection = is_array($personalizationSections['growth.next_actions'] ?? null)
             ? $personalizationSections['growth.next_actions']
+            : [];
+        $careerNextStepSection = is_array($personalizationSections['career.next_step'] ?? null)
+            ? $personalizationSections['career.next_step']
             : [];
 
         $this->assertSame('mbti_big5.cross_assessment.v1', data_get($payload, 'mbti_cross_assessment_v1.version'));
@@ -55,6 +61,7 @@ class MbtiBigFiveCrossAssessmentSynthesisTest extends TestCase
             [
                 'big5.neuroticism.high.buffer_reactivity',
                 'big5.conscientiousness.low.use_external_scaffolding',
+                'big5.career_next_step.low.reduce_activation_friction',
             ],
             data_get($payload, 'mbti_cross_assessment_v1.synthesis_keys')
         );
@@ -63,7 +70,7 @@ class MbtiBigFiveCrossAssessmentSynthesisTest extends TestCase
             data_get($payload, 'mbti_cross_assessment_v1.supporting_scales')
         );
         $this->assertSame(
-            ['growth.stability_confidence', 'growth.next_actions'],
+            ['growth.stability_confidence', 'growth.next_actions', 'career.next_step'],
             data_get($payload, 'mbti_cross_assessment_v1.mbti_adjusted_focus_keys')
         );
         $this->assertSame(
@@ -86,6 +93,14 @@ class MbtiBigFiveCrossAssessmentSynthesisTest extends TestCase
             '外部提醒',
             (string) ($nextActionsEnhancement['body'] ?? '')
         );
+        $this->assertSame(
+            'big5.career_next_step.low.reduce_activation_friction',
+            $careerNextStepEnhancement['synthesis_key'] ?? null
+        );
+        $this->assertStringContainsString(
+            '职业下一步',
+            (string) ($careerNextStepEnhancement['title'] ?? '')
+        );
         $this->assertStringContainsString(
             ':synth.big5_neuroticism_high_buffer_reactivity',
             (string) ($stabilitySection['variant_key'] ?? '')
@@ -93,6 +108,10 @@ class MbtiBigFiveCrossAssessmentSynthesisTest extends TestCase
         $this->assertStringContainsString(
             ':synth.big5_conscientiousness_low_use_external_scaffolding',
             (string) ($nextActionsSection['variant_key'] ?? '')
+        );
+        $this->assertStringContainsString(
+            ':synth.big5_career_next_step_low_reduce_activation_friction',
+            (string) ($careerNextStepSection['variant_key'] ?? '')
         );
 
         $event = DB::table('events')

@@ -568,6 +568,7 @@ final class MbtiResultPersonalizationService
         private readonly ContentPacksIndex $packsIndex,
         private readonly MbtiUserStateOrchestrationService $userStateOrchestrationService,
         private readonly MbtiBigFiveSynthesisService $bigFiveSynthesisService,
+        private readonly MbtiWorkingLifeConsolidationService $workingLifeConsolidationService,
         private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
         private readonly MbtiReadModelContractService $readModelContractService,
     ) {
@@ -657,7 +658,7 @@ final class MbtiResultPersonalizationService
         }
 
         $personalization = $this->userStateOrchestrationService->withBaseline([
-                'schema_version' => 'mbti.personalization.phase8c.v1',
+                'schema_version' => 'mbti.personalization.phase9c.v1',
                 'locale' => $locale,
                 'type_code' => $typeCode,
                 'identity' => $identity,
@@ -702,6 +703,7 @@ final class MbtiResultPersonalizationService
             'attempt_id' => $context['attempt_id'] ?? null,
             'locale' => $locale,
         ]);
+        $personalization = $this->workingLifeConsolidationService->attach($personalization);
 
         $personalization = $this->privacyConsentContractService->attachContract($personalization, [
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),

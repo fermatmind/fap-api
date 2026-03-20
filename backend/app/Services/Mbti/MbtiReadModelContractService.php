@@ -28,6 +28,10 @@ final class MbtiReadModelContractService
         'supporting_scales',
         'big5_influence_keys',
         'mbti_adjusted_focus_keys',
+        'working_life_v1',
+        'career_focus_key',
+        'career_journey_keys',
+        'career_action_priority_keys',
     ];
 
     /**
@@ -92,6 +96,9 @@ final class MbtiReadModelContractService
         'cross_assessment_v1.supporting_scales',
         'cross_assessment_v1.big5_influence_keys',
         'cross_assessment_v1.mbti_adjusted_focus_keys',
+        'working_life_v1.career_focus_key',
+        'working_life_v1.career_journey_keys',
+        'working_life_v1.career_action_priority_keys',
     ];
 
     /**

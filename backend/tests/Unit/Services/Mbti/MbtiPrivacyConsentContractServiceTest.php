@@ -189,7 +189,7 @@ final class MbtiPrivacyConsentContractServiceTest extends TestCase
             ],
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'engine_version' => 'report_phase4a_contract',
-            'dynamic_sections_version' => 'phase8c.v1',
+            'dynamic_sections_version' => 'phase9c.v1',
         ];
     }
 }
