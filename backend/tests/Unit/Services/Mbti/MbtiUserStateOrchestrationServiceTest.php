@@ -103,9 +103,17 @@ final class MbtiUserStateOrchestrationServiceTest extends TestCase
             data_get($effective, 'orchestration.cta_priority_keys')
         );
         $this->assertSame(
+            ['read-action', 'read-career', 'read-relationship', 'read-explain'],
+            data_get($effective, 'ordered_recommendation_keys')
+        );
+        $this->assertSame('read-action', data_get($effective, 'reading_focus_key'));
+        $this->assertSame(
             ['career.work_experiments', 'relationships.try_this_week'],
             data_get($effective, 'orchestration.secondary_focus_keys')
         );
+        $this->assertSame('watchout.stability.context_sensitive', data_get($effective, 'action_focus_key'));
+        $this->assertContains('work_experiment.theme.name_decision_rule', data_get($effective, 'ordered_action_keys', []));
+        $this->assertContains('relationship_action.theme.name_decision_rule', data_get($effective, 'ordered_action_keys', []));
         $this->assertSame('growth.stability_confidence', data_get($effective, 'continuity.carryover_focus_key'));
         $this->assertSame('resume_action_loop', data_get($effective, 'continuity.carryover_reason'));
         $this->assertSame(
@@ -133,6 +141,40 @@ final class MbtiUserStateOrchestrationServiceTest extends TestCase
             ],
             'profile' => [
                 'type_code' => 'ENFP-T',
+            ],
+            'recommended_reads' => [
+                [
+                    'id' => 'read-action',
+                    'type' => 'article',
+                    'title' => '一周行动实验',
+                    'priority' => 30,
+                    'tags' => ['growth', 'action'],
+                    'url' => 'https://example.com/read-action',
+                ],
+                [
+                    'id' => 'read-career',
+                    'type' => 'article',
+                    'title' => '职业环境匹配',
+                    'priority' => 10,
+                    'tags' => ['career', 'work'],
+                    'url' => 'https://example.com/read-career',
+                ],
+                [
+                    'id' => 'read-relationship',
+                    'type' => 'article',
+                    'title' => '关系边界阅读',
+                    'priority' => 15,
+                    'tags' => ['relationships', 'communication'],
+                    'url' => 'https://example.com/read-relationship',
+                ],
+                [
+                    'id' => 'read-explain',
+                    'type' => 'article',
+                    'title' => '边界类型解释',
+                    'priority' => 25,
+                    'tags' => ['explainability', 'mbti'],
+                    'url' => 'https://example.com/read-explain',
+                ],
             ],
             'scores' => [
                 'EI' => ['pct' => 67, 'delta' => 17, 'side' => 'E', 'state' => 'clear'],

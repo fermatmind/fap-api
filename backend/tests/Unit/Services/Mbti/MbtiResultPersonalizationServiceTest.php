@@ -22,6 +22,32 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'profile' => [
                 'type_code' => 'ENFP-T',
             ],
+            'recommended_reads' => [
+                [
+                    'id' => 'read-action',
+                    'type' => 'article',
+                    'title' => '一周行动实验',
+                    'priority' => 30,
+                    'tags' => ['growth', 'action'],
+                    'url' => 'https://example.com/read-action',
+                ],
+                [
+                    'id' => 'read-career',
+                    'type' => 'article',
+                    'title' => '职业环境匹配',
+                    'priority' => 10,
+                    'tags' => ['career', 'work'],
+                    'url' => 'https://example.com/read-career',
+                ],
+                [
+                    'id' => 'read-explain',
+                    'type' => 'article',
+                    'title' => '边界类型解释',
+                    'priority' => 25,
+                    'tags' => ['explainability', 'mbti'],
+                    'url' => 'https://example.com/read-explain',
+                ],
+            ],
             'scores' => [
                 'EI' => ['pct' => 67, 'delta' => 17, 'side' => 'E', 'state' => 'clear'],
                 'SN' => ['pct' => 64, 'delta' => 14, 'side' => 'N', 'state' => 'clear'],
@@ -60,14 +86,14 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
 
         $this->assertSame('ENFP-T', $clear['type_code']);
         $this->assertSame('T', $clear['identity']);
-        $this->assertSame('mbti.personalization.phase8a.v1', $clear['schema_version']);
+        $this->assertSame('mbti.personalization.phase8b.v1', $clear['schema_version']);
         $this->assertSame('clear', data_get($clear, 'axis_bands.EI'));
         $this->assertSame('strong', data_get($strong, 'axis_bands.EI'));
         $this->assertSame(false, data_get($clear, 'boundary_flags.EI'));
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
-        $this->assertSame('phase8a.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('phase8b.v1', $clear['dynamic_sections_version']);
         $this->assertSame(
             [
                 'is_first_view' => true,
@@ -84,6 +110,29 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             ['unlock_full_report', 'career_bridge', 'share_result'],
             data_get($clear, 'orchestration.cta_priority_keys')
         );
+        $this->assertSame(
+            ['read-action', 'read-career', 'read-explain'],
+            data_get($clear, 'ordered_recommendation_keys')
+        );
+        $this->assertSame('read-action', data_get($clear, 'reading_focus_key'));
+        $this->assertSame(
+            [
+                'weekly_action.theme.name_decision_rule',
+                'work_experiment.theme.name_decision_rule',
+                'relationship_action.theme.name_decision_rule',
+                'watchout.stability.context_sensitive',
+            ],
+            array_slice((array) data_get($clear, 'ordered_action_keys', []), 0, 4)
+        );
+        $this->assertSame(
+            [
+                'read-action',
+                'read-career',
+                'read-explain',
+            ],
+            data_get($clear, 'recommendation_priority_keys')
+        );
+        $this->assertSame('weekly_action.theme.name_decision_rule', data_get($clear, 'action_focus_key'));
         $this->assertSame('growth.next_actions', data_get($clear, 'continuity.carryover_focus_key'));
         $this->assertSame('unlock_to_continue_focus', data_get($clear, 'continuity.carryover_reason'));
         $this->assertSame(

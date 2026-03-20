@@ -186,6 +186,16 @@ final class MbtiUserStateOrchestrationService
     {
         $primaryFocusKey = $this->resolvePrimaryFocusKey($personalization, $userState);
         $secondaryFocusKeys = $this->resolveSecondaryFocusKeys($primaryFocusKey, $userState);
+        $orderedRecommendationKeys = $this->resolveOrderedRecommendationKeys(
+            $personalization,
+            $primaryFocusKey,
+            $secondaryFocusKeys
+        );
+        $orderedActionKeys = $this->resolveOrderedActionKeys(
+            $personalization,
+            $primaryFocusKey,
+            $secondaryFocusKeys
+        );
         $continuity = $this->resolveContinuity($personalization, $userState, $primaryFocusKey, $secondaryFocusKeys);
 
         return array_merge($personalization, [
@@ -196,6 +206,12 @@ final class MbtiUserStateOrchestrationService
                 'secondary_focus_keys' => $secondaryFocusKeys,
                 'cta_priority_keys' => $this->resolveCtaPriorityKeys($userState),
             ],
+            'ordered_recommendation_keys' => $orderedRecommendationKeys,
+            'ordered_action_keys' => $orderedActionKeys,
+            'recommendation_priority_keys' => array_values(array_slice($orderedRecommendationKeys, 0, 3)),
+            'action_priority_keys' => array_values(array_slice($orderedActionKeys, 0, 4)),
+            'reading_focus_key' => (string) ($orderedRecommendationKeys[0] ?? ''),
+            'action_focus_key' => (string) ($orderedActionKeys[0] ?? ''),
             'continuity' => $continuity,
         ]);
     }
@@ -321,6 +337,260 @@ final class MbtiUserStateOrchestrationService
         }
 
         return ['career_bridge', 'share_result', 'workspace_lite'];
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  list<string>  $secondaryFocusKeys
+     * @return list<string>
+     */
+    private function resolveOrderedRecommendationKeys(
+        array $personalization,
+        string $primaryFocusKey,
+        array $secondaryFocusKeys
+    ): array {
+        $candidates = $this->normalizeRecommendationCandidates(
+            (array) ($personalization['recommended_read_candidates'] ?? [])
+        );
+
+        if ($candidates === []) {
+            return [];
+        }
+
+        $primaryThemes = $this->resolveRecommendationThemesForFocus($primaryFocusKey);
+        $secondaryThemes = [];
+
+        foreach ($secondaryFocusKeys as $secondaryFocusKey) {
+            foreach ($this->resolveRecommendationThemesForFocus($secondaryFocusKey) as $theme) {
+                if (! in_array($theme, $secondaryThemes, true)) {
+                    $secondaryThemes[] = $theme;
+                }
+            }
+        }
+
+        usort($candidates, function (array $left, array $right) use ($primaryThemes, $secondaryThemes): int {
+            $leftScore = $this->scoreRecommendationCandidate($left, $primaryThemes, $secondaryThemes);
+            $rightScore = $this->scoreRecommendationCandidate($right, $primaryThemes, $secondaryThemes);
+
+            if ($leftScore !== $rightScore) {
+                return $rightScore <=> $leftScore;
+            }
+
+            $leftPriority = (int) ($left['priority'] ?? 0);
+            $rightPriority = (int) ($right['priority'] ?? 0);
+            if ($leftPriority !== $rightPriority) {
+                return $leftPriority <=> $rightPriority;
+            }
+
+            return strcmp((string) ($left['key'] ?? ''), (string) ($right['key'] ?? ''));
+        });
+
+        return array_values(array_unique(array_filter(array_map(
+            static fn (array $candidate): string => trim((string) ($candidate['key'] ?? '')),
+            $candidates
+        ))));
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  list<string>  $secondaryFocusKeys
+     * @return list<string>
+     */
+    private function resolveOrderedActionKeys(
+        array $personalization,
+        string $primaryFocusKey,
+        array $secondaryFocusKeys
+    ): array {
+        $orderedFields = $this->resolveActionFieldOrder($primaryFocusKey, $secondaryFocusKeys);
+        $ordered = [];
+
+        foreach ($orderedFields as $field) {
+            $preferredKey = $this->selectPreferredCarryoverActionKey((array) ($personalization[$field] ?? []));
+            if ($preferredKey !== '' && ! in_array($preferredKey, $ordered, true)) {
+                $ordered[] = $preferredKey;
+            }
+        }
+
+        return $ordered;
+    }
+
+    /**
+     * @param  list<string>  $secondaryFocusKeys
+     * @return list<string>
+     */
+    private function resolveActionFieldOrder(string $primaryFocusKey, array $secondaryFocusKeys): array
+    {
+        $ordered = [];
+
+        foreach ($this->resolvePrimaryActionFieldHints($primaryFocusKey) as $field) {
+            if (! in_array($field, $ordered, true)) {
+                $ordered[] = $field;
+            }
+        }
+
+        foreach ($secondaryFocusKeys as $secondaryFocusKey) {
+            foreach ($this->resolveSecondaryActionFieldHints($secondaryFocusKey) as $field) {
+                if (! in_array($field, $ordered, true)) {
+                    $ordered[] = $field;
+                }
+            }
+        }
+
+        foreach (['weekly_action_keys', 'work_experiment_keys', 'relationship_action_keys', 'watchout_keys'] as $field) {
+            if (! in_array($field, $ordered, true)) {
+                $ordered[] = $field;
+            }
+        }
+
+        return $ordered;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function resolvePrimaryActionFieldHints(string $primaryFocusKey): array
+    {
+        return match (true) {
+            str_starts_with($primaryFocusKey, 'career.') => ['work_experiment_keys', 'weekly_action_keys'],
+            str_starts_with($primaryFocusKey, 'relationships.') => ['relationship_action_keys', 'weekly_action_keys'],
+            $primaryFocusKey === 'growth.stability_confidence',
+            $primaryFocusKey === 'growth.watchouts' => ['watchout_keys', 'weekly_action_keys'],
+            str_starts_with($primaryFocusKey, 'traits.') => ['weekly_action_keys', 'watchout_keys'],
+            default => ['weekly_action_keys', 'work_experiment_keys'],
+        };
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function resolveSecondaryActionFieldHints(string $sectionKey): array
+    {
+        return match ($sectionKey) {
+            'career.work_experiments' => ['work_experiment_keys'],
+            'relationships.try_this_week' => ['relationship_action_keys'],
+            'growth.watchouts', 'growth.stability_confidence' => ['watchout_keys'],
+            'growth.next_actions', 'growth.weekly_experiments' => ['weekly_action_keys'],
+            default => [],
+        };
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $candidates
+     * @return list<array<string, mixed>>
+     */
+    private function normalizeRecommendationCandidates(array $candidates): array
+    {
+        $normalized = [];
+
+        foreach ($candidates as $candidate) {
+            if (! is_array($candidate)) {
+                continue;
+            }
+
+            $key = trim((string) ($candidate['key'] ?? ''));
+            if ($key === '') {
+                continue;
+            }
+
+            $normalized[] = [
+                'key' => $key,
+                'type' => trim((string) ($candidate['type'] ?? '')),
+                'title' => trim((string) ($candidate['title'] ?? '')),
+                'priority' => is_numeric($candidate['priority'] ?? null) ? (int) round((float) $candidate['priority']) : 0,
+                'tags' => array_values(array_filter(array_map(
+                    static fn (mixed $tag): string => trim((string) $tag),
+                    is_array($candidate['tags'] ?? null) ? $candidate['tags'] : []
+                ))),
+                'url' => trim((string) ($candidate['url'] ?? '')),
+            ];
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function resolveRecommendationThemesForFocus(string $focusKey): array
+    {
+        return match (true) {
+            str_starts_with($focusKey, 'career.') => ['career', 'work', 'action'],
+            str_starts_with($focusKey, 'relationships.') => ['relationship', 'communication', 'action'],
+            $focusKey === 'growth.stability_confidence',
+            $focusKey === 'growth.watchouts' => ['stability', 'action', 'growth'],
+            str_starts_with($focusKey, 'traits.') => ['explainability', 'growth'],
+            default => ['action', 'growth', 'career'],
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @param  list<string>  $primaryThemes
+     * @param  list<string>  $secondaryThemes
+     */
+    private function scoreRecommendationCandidate(array $candidate, array $primaryThemes, array $secondaryThemes): int
+    {
+        $themes = $this->classifyRecommendationCandidateThemes($candidate);
+        $score = 0;
+
+        foreach ($primaryThemes as $index => $theme) {
+            if (in_array($theme, $themes, true)) {
+                $score += max(0, 140 - ($index * 10));
+            }
+        }
+
+        foreach ($secondaryThemes as $index => $theme) {
+            if (in_array($theme, $themes, true)) {
+                $score += max(0, 70 - ($index * 5));
+            }
+        }
+
+        $priority = (int) ($candidate['priority'] ?? 0);
+        $score += max(0, 50 - min(50, $priority));
+
+        return $score;
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @return list<string>
+     */
+    private function classifyRecommendationCandidateThemes(array $candidate): array
+    {
+        $haystack = strtolower(implode(' ', array_filter([
+            (string) ($candidate['key'] ?? ''),
+            (string) ($candidate['type'] ?? ''),
+            (string) ($candidate['title'] ?? ''),
+            (string) ($candidate['url'] ?? ''),
+            implode(' ', array_map(static fn (mixed $tag): string => trim((string) $tag), (array) ($candidate['tags'] ?? []))),
+        ])));
+
+        $themes = [];
+        $matchers = [
+            'career' => ['career', 'job', 'role', 'work', 'occupation', '职业', '岗位', '工作'],
+            'work' => ['work', 'career', 'job', 'team', 'workspace', '工作', '职场', '团队'],
+            'relationship' => ['relationship', 'communication', 'boundary', 'connection', '沟通', '关系', '边界', '相处'],
+            'communication' => ['communication', 'conversation', 'feedback', 'collaboration', '沟通', '反馈', '协作'],
+            'action' => ['action', 'experiment', 'practice', 'next', 'step', 'guide', 'experiment', '行动', '实验', '练习', '下一步', '建议'],
+            'growth' => ['growth', 'habit', 'improve', 'reflection', '成长', '提升', '复盘'],
+            'explainability' => ['type', 'mbti', 'borderline', 'contrast', 'adjacent', 'why', 'explain', '人格', '类型', '边界', '解释'],
+            'stability' => ['stability', 'stress', 'recovery', 'watchout', 'burnout', '稳定', '压力', '恢复', '风险'],
+        ];
+
+        foreach ($matchers as $theme => $needles) {
+            foreach ($needles as $needle) {
+                if (str_contains($haystack, strtolower($needle))) {
+                    $themes[] = $theme;
+                    break;
+                }
+            }
+        }
+
+        if ($themes === []) {
+            $themes[] = 'growth';
+        }
+
+        return array_values(array_unique($themes));
     }
 
     /**
