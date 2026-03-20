@@ -70,6 +70,8 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame('growth.next_actions', $response->json('mbti_continuity_v1.carryover_focus_key'));
         $this->assertSame('unlock_to_continue_focus', $response->json('mbti_continuity_v1.carryover_reason'));
         $this->assertSame(['growth.next_actions', 'traits.close_call_axes', 'traits.adjacent_type_contrast'], $response->json('mbti_continuity_v1.recommended_resume_keys'));
+        $this->assertSame('mbti.read_contract.v1', $response->json('mbti_read_contract_v1.version'));
+        $this->assertContains('report._meta.personalization.user_state', $response->json('mbti_read_contract_v1.non_cacheable_fields'));
         $this->assertSame($response->json('type_code'), $response->json('mbti_public_projection_v1.display_type'));
         $this->assertSame($response->json('type_name'), $response->json('mbti_public_projection_v1.profile.type_name'));
         $this->assertSame($response->json('dimensions'), $response->json('mbti_public_projection_v1.dimensions'));
@@ -135,6 +137,7 @@ final class ShareSummaryContractTest extends TestCase
             'dimensions',
             'primary_cta_label',
             'primary_cta_path',
+            'mbti_read_contract_v1',
             'mbti_continuity_v1',
             'mbti_public_summary_v1',
             'mbti_public_projection_v1',

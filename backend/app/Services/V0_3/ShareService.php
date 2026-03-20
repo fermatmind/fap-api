@@ -636,6 +636,9 @@ class ShareService
         $resolvedShareId = trim((string) $shareId);
         $locale = (string) ($summary['locale'] ?? 'zh-CN');
         $compareEnabled = strtoupper((string) ($summary['scale_code'] ?? '')) === 'MBTI';
+        $readContract = is_array(data_get($publicSafeReport, '_meta.personalization.read_contract_v1'))
+            ? data_get($publicSafeReport, '_meta.personalization.read_contract_v1')
+            : null;
         $payload = [
             'share_id' => $resolvedShareId !== '' ? $resolvedShareId : null,
             'share_url' => $resolvedShareId !== '' ? $this->buildLocalizedShareUrl($resolvedShareId, $locale) : null,
@@ -662,6 +665,10 @@ class ShareService
                 ? $this->resolveCompareCtaLabel($locale)
                 : null,
         ];
+
+        if (is_array($readContract)) {
+            $payload['mbti_read_contract_v1'] = $readContract;
+        }
 
         if ($compareEnabled) {
             $payload['mbti_public_summary_v1'] = $this->mbtiPublicSummaryV1Builder->buildFromSharePayload(
