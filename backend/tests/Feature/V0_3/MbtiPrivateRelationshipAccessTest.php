@@ -252,6 +252,117 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
         $this->assertSame('continue_dyadic_action', (string) ($journeyOverlay['last_dyadic_pulse_signal'] ?? ''));
     }
 
+    public function test_private_relationship_index_lists_accessible_relationships_and_orders_resume_priority(): void
+    {
+        $this->seedScales();
+
+        [$inviterAttemptId, $inviterAnonId, $inviterToken] = $this->createOwnerContext('anon_private_index_inviter', 'INTJ-A');
+        $shareId = $this->createShareViaApi($inviterAttemptId, $inviterAnonId, $inviterToken);
+        [$inviteeAttemptId, $inviteeAnonId] = $this->createOwnerContext('anon_private_index_invitee', 'ENFP-T');
+        [$outsiderAttemptId, $outsiderAnonId, $outsiderToken] = $this->createOwnerContext('anon_private_index_outsider', 'INFJ-A');
+        $outsiderShareId = $this->createShareViaApi($outsiderAttemptId, $outsiderAnonId, $outsiderToken);
+
+        $readyInviteId = (string) $this->postJson("/api/v0.3/shares/{$shareId}/compare-invites", [
+            'anon_id' => 'scan_probe',
+            'entrypoint' => 'share_page',
+            'compare_intent' => true,
+            'utm_source' => 'share',
+        ])->assertOk()->json('invite_id');
+
+        $refreshInviteId = (string) $this->postJson("/api/v0.3/shares/{$shareId}/compare-invites", [
+            'anon_id' => 'scan_probe_2',
+            'entrypoint' => 'share_page',
+            'compare_intent' => true,
+            'utm_source' => 'share',
+        ])->assertOk()->json('invite_id');
+
+        $awaitingInviteId = (string) $this->postJson("/api/v0.3/shares/{$shareId}/compare-invites", [
+            'anon_id' => 'scan_probe_3',
+            'entrypoint' => 'share_page',
+            'compare_intent' => true,
+            'utm_source' => 'share',
+        ])->assertOk()->json('invite_id');
+
+        $outsiderInviteId = (string) $this->postJson("/api/v0.3/shares/{$outsiderShareId}/compare-invites", [
+            'anon_id' => 'scan_probe_4',
+            'entrypoint' => 'share_page',
+            'compare_intent' => true,
+            'utm_source' => 'share',
+        ])->assertOk()->json('invite_id');
+
+        DB::table('mbti_compare_invites')
+            ->where('id', $readyInviteId)
+            ->update([
+                'invitee_attempt_id' => $inviteeAttemptId,
+                'invitee_anon_id' => $inviteeAnonId,
+                'status' => 'purchased',
+                'accepted_at' => now()->subMinutes(12),
+                'completed_at' => now()->subMinutes(11),
+                'purchased_at' => now()->subMinutes(10),
+                'updated_at' => now()->subMinutes(2),
+            ]);
+
+        DB::table('mbti_compare_invites')
+            ->where('id', $refreshInviteId)
+            ->update([
+                'invitee_attempt_id' => $inviteeAttemptId,
+                'invitee_anon_id' => $inviteeAnonId,
+                'status' => 'purchased',
+                'accepted_at' => now()->subMinutes(9),
+                'completed_at' => now()->subMinutes(8),
+                'purchased_at' => now()->subMinutes(7),
+                'meta_json' => json_encode([
+                    'dyadic_consent_lifecycle_v1' => [
+                        'revocation_state' => 'active',
+                        'expiry_state' => 'expired',
+                        'expires_at' => now()->subMinute()->toISOString(),
+                        'consent_policy_version' => '2025-01-01',
+                    ],
+                    'private_relationship_journey_v1' => [
+                        'journey_state' => 'practice_started',
+                        'progress_state' => 'warming_up',
+                        'revisit_reorder_reason' => 'refresh_private_access',
+                        'updated_at' => now()->subMinute()->toISOString(),
+                    ],
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'updated_at' => now()->subMinute(),
+            ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$inviterToken,
+            'X-Anon-Id' => $inviterAnonId,
+        ])->getJson('/api/v0.3/me/relationships/mbti');
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('scale_code', 'MBTI')
+            ->assertJsonPath('relationship_index_v1.relationship_index_version', 'relationship.index.v1')
+            ->assertJsonPath('relationship_index_v1.index_scope', 'private_relationship_index')
+            ->assertJsonCount(3, 'relationship_index_v1.items')
+            ->assertJsonPath('relationship_index_v1.items.0.invite_id', $readyInviteId)
+            ->assertJsonPath('relationship_index_v1.items.0.relationship_scope', 'private_relationship_protected')
+            ->assertJsonPath('relationship_index_v1.items.0.access_state', 'private_access_ready')
+            ->assertJsonPath('relationship_index_v1.items.0.consent_state', 'purchased')
+            ->assertJsonPath('relationship_index_v1.items.0.journey_state', 'ready_for_first_step')
+            ->assertJsonPath('relationship_index_v1.items.0.resume_target', '/zh/relationships/mbti/'.$readyInviteId)
+            ->assertJsonPath('relationship_index_v1.items.0.relationship_resume_v1.relationship_entry_keys.0', 'ready_to_continue')
+            ->assertJsonPath('relationship_index_v1.items.1.invite_id', $refreshInviteId)
+            ->assertJsonPath('relationship_index_v1.items.1.relationship_resume_v1.relationship_entry_keys.0', 'needs_consent_refresh')
+            ->assertJsonPath('relationship_index_v1.items.2.invite_id', $awaitingInviteId)
+            ->assertJsonPath('relationship_index_v1.items.2.relationship_resume_v1.relationship_entry_keys.0', 'awaiting_partner')
+            ->assertJsonMissingPath('relationship_index_v1.items.0.invitee_attempt_id')
+            ->assertJsonMissingPath('relationship_index_v1.items.0.invitee_anon_id')
+            ->assertJsonMissingPath('relationship_index_v1.items.0.invitee_user_id')
+            ->assertJsonMissingPath('relationship_index_v1.items.0.invitee_order_no');
+
+        $itemIds = array_map(
+            static fn (array $item): string => (string) ($item['invite_id'] ?? ''),
+            (array) $response->json('relationship_index_v1.items', [])
+        );
+
+        $this->assertNotContains($outsiderInviteId, $itemIds);
+    }
+
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder)->run();

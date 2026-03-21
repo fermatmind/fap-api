@@ -121,6 +121,7 @@ Route::prefix('v0.3')->middleware([
 
     Route::middleware(\App\Http\Middleware\FmTokenAuth::class)->group(function () {
         Route::get('/me/attempts', [MeV03Controller::class, 'attempts']);
+        Route::get('/me/relationships/mbti', [MbtiCompareInviteController::class, 'indexPrivate']);
         Route::get('/me/relationships/mbti/{inviteId}', [MbtiCompareInviteController::class, 'showPrivate'])
             ->middleware('uuid:inviteId');
         Route::post('/me/relationships/mbti/{inviteId}/consent', [MbtiCompareInviteController::class, 'mutatePrivateConsent'])

@@ -12,6 +12,7 @@ use App\Models\Share;
 use App\Services\InsightGraph\PrivateRelationshipContractService;
 use App\Services\InsightGraph\PrivateRelationshipJourneyContractService;
 use App\Services\InsightGraph\RelationshipSyncContractService;
+use App\Services\InsightGraph\RelationshipIndexContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -27,6 +28,7 @@ final class MbtiCompareInviteService
         private readonly RelationshipSyncContractService $relationshipSyncContractService,
         private readonly PrivateRelationshipContractService $privateRelationshipContractService,
         private readonly PrivateRelationshipJourneyContractService $privateRelationshipJourneyContractService,
+        private readonly RelationshipIndexContractService $relationshipIndexContractService,
     ) {}
 
     /**
@@ -202,6 +204,99 @@ final class MbtiCompareInviteService
             'private_relationship_journey_v1' => $privateRelationshipJourney,
             'dyadic_pulse_check_v1' => $dyadicPulseCheck,
             'dyadic_graph_v1' => $this->privateRelationshipContractService->buildProtectedGraph($privateRelationship),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function listPrivate(mixed $userId, mixed $anonId): array
+    {
+        $normalizedUserId = $this->nullableString($userId);
+        $normalizedAnonId = $this->nullableString($anonId);
+        $normalizedNumericUserId = $this->normalizeUserId($normalizedUserId);
+
+        $attemptIds = Attempt::query()
+            ->where(static function ($query) use ($normalizedNumericUserId, $normalizedAnonId): void {
+                $hasCondition = false;
+                if ($normalizedNumericUserId !== null) {
+                    $query->where('user_id', $normalizedNumericUserId);
+                    $hasCondition = true;
+                }
+                if ($normalizedAnonId !== null) {
+                    if ($hasCondition) {
+                        $query->orWhere('anon_id', $normalizedAnonId);
+                    } else {
+                        $query->where('anon_id', $normalizedAnonId);
+                    }
+                }
+            })
+            ->pluck('id')
+            ->map(static fn (mixed $value): string => (string) $value)
+            ->all();
+
+        if ($attemptIds === [] && $normalizedNumericUserId === null && $normalizedAnonId === null) {
+            return [
+                'scale_code' => 'MBTI',
+                'relationship_index_v1' => $this->relationshipIndexContractService->buildIndex([]),
+            ];
+        }
+
+        $invites = MbtiCompareInvite::query()
+            ->where(static function ($query) use ($attemptIds, $normalizedNumericUserId, $normalizedAnonId): void {
+                $hasCondition = false;
+                if ($attemptIds !== []) {
+                    $query->whereIn('inviter_attempt_id', $attemptIds)
+                        ->orWhereIn('invitee_attempt_id', $attemptIds);
+                    $hasCondition = true;
+                }
+                if ($normalizedNumericUserId !== null) {
+                    if ($hasCondition) {
+                        $query->orWhere('invitee_user_id', $normalizedNumericUserId);
+                    } else {
+                        $query->where('invitee_user_id', $normalizedNumericUserId);
+                        $hasCondition = true;
+                    }
+                }
+                if ($normalizedAnonId !== null) {
+                    if ($hasCondition) {
+                        $query->orWhere('invitee_anon_id', $normalizedAnonId);
+                    } else {
+                        $query->where('invitee_anon_id', $normalizedAnonId);
+                    }
+                }
+            })
+            ->orderByDesc('updated_at')
+            ->get();
+
+        $items = [];
+
+        foreach ($invites as $invite) {
+            try {
+                $detail = $this->showPrivate((string) $invite->id, $userId, $anonId);
+            } catch (ApiProblemException $exception) {
+                if ($exception->getStatusCode() === 404) {
+                    continue;
+                }
+
+                throw $exception;
+            }
+
+            $locale = $this->normalizeLocale((string) ($detail['locale'] ?? 'zh-CN'));
+            $items[] = $this->relationshipIndexContractService->buildItem(
+                (string) $invite->id,
+                is_array($detail['private_relationship_v1'] ?? null) ? $detail['private_relationship_v1'] : [],
+                is_array($detail['dyadic_consent_v1'] ?? null) ? $detail['dyadic_consent_v1'] : [],
+                is_array($detail['private_relationship_journey_v1'] ?? null) ? $detail['private_relationship_journey_v1'] : [],
+                $this->buildProtectedRelationshipPath($locale, (string) $invite->id),
+                $this->resolveRelationshipUpdatedAt($invite),
+                $locale
+            );
+        }
+
+        return [
+            'scale_code' => 'MBTI',
+            'relationship_index_v1' => $this->relationshipIndexContractService->buildIndex($items),
         ];
     }
 
@@ -711,6 +806,13 @@ final class MbtiCompareInviteService
         return '/'.$segment.'/history/mbti';
     }
 
+    private function buildProtectedRelationshipPath(string $locale, string $inviteId): string
+    {
+        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+
+        return '/'.$segment.'/relationships/mbti/'.rawurlencode($inviteId);
+    }
+
     private function normalizeStatus(string $status): string
     {
         $normalized = strtolower(trim($status));
@@ -1048,6 +1150,15 @@ final class MbtiCompareInviteService
 
         $invite->meta_json = $meta;
         $invite->save();
+    }
+
+    private function resolveRelationshipUpdatedAt(MbtiCompareInvite $invite): string
+    {
+        return $invite->updated_at?->toISOString()
+            ?? $invite->purchased_at?->toISOString()
+            ?? $invite->completed_at?->toISOString()
+            ?? $invite->accepted_at?->toISOString()
+            ?? '';
     }
 
     private function nullableString(mixed $value): ?string
