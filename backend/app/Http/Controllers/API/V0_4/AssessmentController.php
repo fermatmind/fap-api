@@ -180,6 +180,7 @@ class AssessmentController extends Controller
 
         $teamDynamics = is_array($summary['team_dynamics_v1'] ?? null) ? $summary['team_dynamics_v1'] : null;
         $workspaceSurface = is_array($summary['workspace_surface_v1'] ?? null) ? $summary['workspace_surface_v1'] : null;
+        $partnerRead = is_array($summary['partner_read_v1'] ?? null) ? $summary['partner_read_v1'] : null;
         if ($teamDynamics !== null) {
             $this->events->record('team_dynamics_summary_view', $this->resolveUserId($request), [
                 'assessment_id' => (int) $assessment->id,
@@ -192,6 +193,11 @@ class AssessmentController extends Controller
                 'workspace_surface_version' => (string) ($workspaceSurface['version'] ?? ''),
                 'workspace_surface_fingerprint' => (string) ($workspaceSurface['workspace_surface_fingerprint'] ?? ''),
                 'manager_action_keys' => array_values((array) ($workspaceSurface['manager_action_keys'] ?? [])),
+                'partner_read_version' => (string) ($partnerRead['version'] ?? ''),
+                'partner_graph_scope' => (string) ($partnerRead['graph_scope'] ?? ''),
+                'partner_graph_fingerprint' => (string) ($partnerRead['graph_fingerprint'] ?? ''),
+                'partner_read_scope' => (string) ($partnerRead['read_scope'] ?? ''),
+                'partner_attribution_scope' => (string) ($partnerRead['attribution_scope'] ?? ''),
             ], [
                 'org_id' => $orgId,
                 'scale_code' => (string) ($assessment->scale_code ?? ''),

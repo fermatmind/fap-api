@@ -46,6 +46,15 @@ final class AssessmentTeamDynamicsSummaryTest extends TestCase
         $summary->assertJsonPath('summary.workspace_surface_v1.manager_action_keys.0', 'team.action.sync_communication_cadence');
         $summary->assertJsonPath('summary.workspace_surface_v1.member_drill_in_keys.0', 'completed_assignments');
         $this->assertNotEmpty((string) $summary->json('summary.workspace_surface_v1.workspace_surface_fingerprint'));
+        $summary->assertJsonPath('summary.insight_graph_v1.graph_contract_version', 'insight.graph.v1');
+        $summary->assertJsonPath('summary.insight_graph_v1.graph_scope', 'tenant_protected');
+        $summary->assertJsonPath('summary.partner_read_v1.version', 'partner.read.v1');
+        $summary->assertJsonPath('summary.partner_read_v1.graph_scope', 'tenant_protected');
+        $summary->assertJsonPath('summary.partner_read_v1.read_scope', 'partner_tenant_read');
+        $summary->assertJsonPath('summary.partner_read_v1.subject_scope', 'tenant_aggregate_only');
+        $summary->assertJsonPath('summary.partner_read_v1.attribution_scope', 'workspace_partner_surface');
+        $this->assertContains('team_dynamics', (array) $summary->json('summary.partner_read_v1.allowed_node_ids'));
+        $this->assertContains('continues_to', (array) $summary->json('summary.partner_read_v1.allowed_edge_types'));
     }
 
     public function test_summary_team_dynamics_respects_org_boundary(): void

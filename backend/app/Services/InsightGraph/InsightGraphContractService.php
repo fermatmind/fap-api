@@ -180,6 +180,133 @@ final class InsightGraphContractService
     }
 
     /**
+     * @param  array<string,mixed>|null  $teamDynamics
+     * @param  array<string,mixed>|null  $workspaceSurface
+     * @param  array{completed:int,total:int}  $completionRate
+     * @return array<string,mixed>
+     */
+    public function buildForWorkspaceSummary(?array $teamDynamics, ?array $workspaceSurface, array $completionRate): array
+    {
+        if (! is_array($teamDynamics) && ! is_array($workspaceSurface)) {
+            return [];
+        }
+
+        $nodes = [];
+        $edges = [];
+        $supportingScales = $this->normalizeStringList(
+            (is_array($teamDynamics) ? ($teamDynamics['supporting_scales'] ?? []) : [])
+        );
+        if ($supportingScales === [] && is_array($workspaceSurface)) {
+            $supportingScales = $this->normalizeStringList($workspaceSurface['supporting_scales'] ?? []);
+        }
+        if ($supportingScales === []) {
+            $supportingScales = ['MBTI'];
+        }
+
+        $teamFocusKey = $this->normalizeText(
+            is_array($workspaceSurface) ? ($workspaceSurface['workspace_focus_key'] ?? null) : null,
+            is_array($teamDynamics) ? ($teamDynamics['team_focus_key'] ?? null) : null
+        ) ?? 'team_alignment_review';
+
+        $this->pushNode(
+            $nodes,
+            'result_summary',
+            'result_summary',
+            'Protected team workspace',
+            'Focus: '.$teamFocusKey,
+            'workspace_surface_v1'
+        );
+
+        if (is_array($teamDynamics)) {
+            $teamSummaryParts = array_filter([
+                $this->normalizeText($teamDynamics['team_focus_key'] ?? null),
+                implode(' | ', $this->normalizeStringList($teamDynamics['communication_fit_keys'] ?? [])),
+                implode(' | ', $this->normalizeStringList($teamDynamics['decision_mix_keys'] ?? [])),
+                implode(' | ', $this->normalizeStringList($teamDynamics['stress_pattern_keys'] ?? [])),
+            ]);
+
+            $teamSummary = implode(' · ', array_slice(array_values($teamSummaryParts), 0, 4));
+            if ($teamSummary !== '') {
+                $this->pushNode(
+                    $nodes,
+                    'team_dynamics',
+                    'team_dynamics',
+                    'Team dynamics',
+                    $teamSummary,
+                    'team_dynamics_v1'
+                );
+                $edges[] = ['from' => 'team_dynamics', 'to' => 'result_summary', 'relation' => 'enriches'];
+            }
+        }
+
+        if (is_array($workspaceSurface)) {
+            $workspaceSummaryParts = $this->normalizeStringList($workspaceSurface['manager_action_keys'] ?? []);
+            $workspaceSummary = $workspaceSummaryParts !== []
+                ? implode(' -> ', array_slice($workspaceSummaryParts, 0, 3))
+                : $teamFocusKey;
+
+            $this->pushNode(
+                $nodes,
+                'workspace_surface',
+                'workspace_surface',
+                'Workspace focus',
+                $workspaceSummary,
+                'workspace_surface_v1'
+            );
+            $edges[] = ['from' => 'workspace_surface', 'to' => 'result_summary', 'relation' => 'supports'];
+        }
+
+        $completed = max(0, (int) ($completionRate['completed'] ?? 0));
+        $total = max(0, (int) ($completionRate['total'] ?? 0));
+        $pending = max(0, $total - $completed);
+        $memberProgressSummary = sprintf('completed:%d pending:%d total:%d', $completed, $pending, $total);
+        $this->pushNode(
+            $nodes,
+            'member_progress',
+            'member_progress',
+            'Member progress',
+            $memberProgressSummary,
+            'assessment_progress_v1'
+        );
+        $edges[] = ['from' => 'result_summary', 'to' => 'member_progress', 'relation' => 'continues_to'];
+
+        $continueKeys = $this->normalizeStringList(is_array($workspaceSurface) ? ($workspaceSurface['manager_action_keys'] ?? []) : []);
+        if ($continueKeys === []) {
+            $continueKeys = $this->normalizeStringList(is_array($workspaceSurface) ? ($workspaceSurface['member_drill_in_keys'] ?? []) : []);
+        }
+        $continueSummary = $continueKeys !== [] ? implode(' -> ', array_slice($continueKeys, 0, 3)) : 'check_member_progress';
+        $this->pushNode(
+            $nodes,
+            'continue_reading',
+            'continue_reading',
+            'Manager next',
+            $continueSummary,
+            'workspace_surface_v1'
+        );
+        $edges[] = ['from' => 'workspace_surface', 'to' => 'continue_reading', 'relation' => 'recommended_next'];
+        $edges[] = ['from' => 'member_progress', 'to' => 'continue_reading', 'relation' => 'recommended_next'];
+
+        $fingerprintSeed = [
+            'graph_scope' => 'tenant_protected',
+            'team_focus_key' => $teamFocusKey,
+            'supporting_scales' => $supportingScales,
+            'nodes' => $nodes,
+            'edges' => $edges,
+        ];
+
+        return [
+            'version' => 'insight.graph.v1',
+            'graph_contract_version' => 'insight.graph.v1',
+            'root_node' => 'result_summary',
+            'nodes' => $nodes,
+            'edges' => $edges,
+            'graph_fingerprint' => sha1((string) json_encode($fingerprintSeed, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)),
+            'graph_scope' => 'tenant_protected',
+            'supporting_scales' => $supportingScales,
+        ];
+    }
+
+    /**
      * @param  array<int,array<string,mixed>>  $nodes
      */
     private function hasNode(array $nodes, string $id): bool

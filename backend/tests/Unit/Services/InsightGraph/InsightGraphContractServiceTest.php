@@ -53,4 +53,34 @@ final class InsightGraphContractServiceTest extends TestCase
         $this->assertSame('career.next_step', $embed['continue_target']);
         $this->assertSame(['result_summary', 'narrative', 'comparative', 'working_life', 'continue_reading'], $embed['allowed_node_ids']);
     }
+
+    public function test_it_builds_a_tenant_protected_workspace_graph(): void
+    {
+        $service = new InsightGraphContractService;
+
+        $graph = $service->buildForWorkspaceSummary([
+            'team_focus_key' => 'team.communication.energy_translation',
+            'supporting_scales' => ['MBTI', 'BIG5_OCEAN'],
+            'communication_fit_keys' => ['team.communication.energy_translation'],
+            'decision_mix_keys' => ['team.decision.logic_empathy_mix'],
+            'stress_pattern_keys' => ['team.stress.stability_gap'],
+        ], [
+            'workspace_focus_key' => 'team.communication.energy_translation',
+            'manager_action_keys' => ['team.action.sync_communication_cadence', 'check_member_progress'],
+            'member_drill_in_keys' => ['completed_assignments', 'pending_assignments'],
+            'supporting_scales' => ['MBTI', 'BIG5_OCEAN'],
+        ], [
+            'completed' => 2,
+            'total' => 3,
+        ]);
+
+        $this->assertSame('insight.graph.v1', $graph['graph_contract_version']);
+        $this->assertSame('tenant_protected', $graph['graph_scope']);
+        $this->assertSame('result_summary', $graph['root_node']);
+        $this->assertSame(['MBTI', 'BIG5_OCEAN'], $graph['supporting_scales']);
+        $this->assertContains('team_dynamics', array_column($graph['nodes'], 'id'));
+        $this->assertContains('workspace_surface', array_column($graph['nodes'], 'id'));
+        $this->assertContains('member_progress', array_column($graph['nodes'], 'id'));
+        $this->assertContains('continue_reading', array_column($graph['nodes'], 'id'));
+    }
 }
