@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\MbtiCompareInvite;
 use App\Models\Result;
 use App\Models\Share;
+use App\Services\InsightGraph\RelationshipSyncContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -21,6 +22,7 @@ final class MbtiCompareInviteService
         private readonly ShareService $shareService,
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
+        private readonly RelationshipSyncContractService $relationshipSyncContractService,
     ) {}
 
     /**
@@ -114,6 +116,21 @@ final class MbtiCompareInviteService
             }
         }
 
+        $primaryCtaPath = $this->buildTakePath(
+            $locale,
+            (string) $invite->share_id,
+            (string) $invite->id,
+            (string) ($inviterPayload['primary_cta_path'] ?? '')
+        );
+        $relationshipSync = $this->relationshipSyncContractService->build(
+            $inviter,
+            $invitee,
+            $compare,
+            $status,
+            $locale,
+            $primaryCtaPath
+        );
+
         return [
             'invite_id' => (string) $invite->id,
             'share_id' => (string) $invite->share_id,
@@ -123,13 +140,10 @@ final class MbtiCompareInviteService
             'inviter' => $inviter,
             'invitee' => $invitee,
             'compare' => $compare,
+            'relationship_sync_v1' => $relationshipSync,
+            'dyadic_graph_v1' => $this->relationshipSyncContractService->buildGraph($relationshipSync),
             'primary_cta_label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
-            'primary_cta_path' => $this->buildTakePath(
-                $locale,
-                (string) $invite->share_id,
-                (string) $invite->id,
-                (string) ($inviterPayload['primary_cta_path'] ?? '')
-            ),
+            'primary_cta_path' => $primaryCtaPath,
         ];
     }
 
