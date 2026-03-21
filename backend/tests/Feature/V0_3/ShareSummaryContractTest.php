@@ -79,6 +79,16 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame($response->json('type_code'), $response->json('mbti_public_projection_v1.display_type'));
         $this->assertSame($response->json('type_name'), $response->json('mbti_public_projection_v1.profile.type_name'));
         $this->assertSame($response->json('dimensions'), $response->json('mbti_public_projection_v1.dimensions'));
+        $this->assertSame('public.surface.v1', $response->json('public_surface_v1.version'));
+        $this->assertSame('mbti_share_landing', $response->json('public_surface_v1.entry_surface'));
+        $this->assertSame('noindex,follow', $response->json('public_surface_v1.robots_policy'));
+        $this->assertSame('share_public_surface', $response->json('public_surface_v1.attribution_scope'));
+        $this->assertContains('share_landing', $response->json('public_surface_v1.discoverability_keys'));
+        $this->assertContains('continue_here', $response->json('public_surface_v1.discoverability_keys'));
+        $this->assertSame(
+            ['growth.next_actions', 'traits.close_call_axes', 'traits.adjacent_type_contrast'],
+            $response->json('public_surface_v1.continue_reading_keys')
+        );
         $this->assertStringContainsString('/share/'.$response->json('share_id'), (string) $response->json('share_url'));
         $this->assertStringNotContainsString('PRIVATE_PAID_SECTION_BODY', (string) $response->getContent());
         $this->assertStringNotContainsString('PRIVATE_RESULT_PATH', (string) $response->getContent());
@@ -146,6 +156,7 @@ final class ShareSummaryContractTest extends TestCase
             'mbti_continuity_v1',
             'mbti_public_summary_v1',
             'mbti_public_projection_v1',
+            'public_surface_v1',
         ] as $key) {
             $this->assertSame($share->json($key), $view->json($key), "share field mismatch: {$key}");
         }
@@ -170,6 +181,47 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertStringNotContainsString('PRIVATE_PAID_SECTION_BODY', (string) $view->getContent());
         $this->assertStringNotContainsString('PRIVATE_RESULT_PATH', (string) $view->getContent());
         $this->assertStringNotContainsString('PRIVATE_RECOMMENDED_READ', (string) $view->getContent());
+    }
+
+    public function test_big5_attempt_share_returns_public_safe_foundation_contract(): void
+    {
+        $this->seedScales();
+
+        $anonId = 'anon_big5_share_contract';
+        $attemptId = $this->createBig5AttemptWithResult($anonId);
+        $token = $this->issueAnonToken($anonId);
+        $this->grantShareAccess($attemptId, $anonId);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => $anonId,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/share");
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('scale_code', 'BIG5_OCEAN')
+            ->assertJsonPath('type_code', 'BIG5')
+            ->assertJsonPath('type_name', 'Big Five personality')
+            ->assertJsonPath('public_surface_v1.version', 'public.surface.v1')
+            ->assertJsonPath('public_surface_v1.entry_surface', 'big5_share_landing')
+            ->assertJsonPath('public_surface_v1.robots_policy', 'noindex,follow')
+            ->assertJsonPath('public_surface_v1.attribution_scope', 'share_public_surface')
+            ->assertJsonPath('comparative_v1.norming_source', 'scale_norms')
+            ->assertJsonPath('comparative_v1.percentile.metric_key', 'O')
+            ->assertJsonMissingPath('report')
+            ->assertJsonMissingPath('result')
+            ->assertJsonMissingPath('offers')
+            ->assertJsonMissingPath('recommended_reads')
+            ->assertJsonMissingPath('request_id')
+            ->assertJsonMissingPath('order_no');
+
+        $this->assertSame(['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style'], $response->json('public_surface_v1.continue_reading_keys'));
+        $this->assertContains('big5_foundation_summary', $response->json('public_surface_v1.discoverability_keys'));
+        $this->assertContains('comparative', $response->json('public_surface_v1.discoverability_keys'));
+        $this->assertStringContainsString('cohort', (string) $response->json('comparative_v1.cohort_relative_position.label'));
+        $this->assertSame('Openness', $response->json('big5_public_projection_v1.trait_vector.0.label'));
+        $this->assertStringContainsString('/share/'.$response->json('share_id'), (string) $response->json('share_url'));
     }
 
     private function seedScales(): void
@@ -289,6 +341,94 @@ final class ShareSummaryContractTest extends TestCase
             'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'),
             'scoring_spec_version' => '2026.01',
             'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
+        ]);
+
+        return $attemptId;
+    }
+
+    private function createBig5AttemptWithResult(string $anonId): string
+    {
+        $attemptId = (string) Str::uuid();
+
+        Attempt::create([
+            'id' => $attemptId,
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_code_v2' => 'BIG_FIVE_OCEAN_MODEL',
+            'scale_uid' => '22222222-2222-4222-8222-222222222222',
+            'scale_version' => 'v1',
+            'region' => 'US',
+            'locale' => 'en',
+            'question_count' => 120,
+            'client_platform' => 'test',
+            'answers_summary_json' => ['stage' => 'seed'],
+            'started_at' => now()->subMinute(),
+            'submitted_at' => now(),
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'content_package_version' => 'v1',
+            'scoring_spec_version' => '2026.01',
+        ]);
+
+        Result::create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_code_v2' => 'BIG_FIVE_OCEAN_MODEL',
+            'scale_uid' => '22222222-2222-4222-8222-222222222222',
+            'scale_version' => 'v1',
+            'type_code' => 'BIG5',
+            'scores_json' => ['O' => 81, 'C' => 58, 'E' => 44, 'A' => 71, 'N' => 33],
+            'scores_pct' => ['O' => 81, 'C' => 58, 'E' => 44, 'A' => 71, 'N' => 33],
+            'axis_states' => [],
+            'profile_version' => 'big5-v1',
+            'content_package_version' => 'v1',
+            'result_json' => [
+                'type_code' => 'BIG5',
+                'normed_json' => [
+                    'engine_version' => 'big5.scorer.v3',
+                    'raw_scores' => [
+                        'domains_mean' => ['O' => 4.1, 'C' => 3.0, 'E' => 2.6, 'A' => 3.7, 'N' => 2.1],
+                    ],
+                    'scores_0_100' => [
+                        'domains_percentile' => ['O' => 81, 'C' => 58, 'E' => 44, 'A' => 71, 'N' => 33],
+                    ],
+                    'facts' => [
+                        'domain_buckets' => ['O' => 'high', 'C' => 'mid', 'E' => 'mid', 'A' => 'high', 'N' => 'low'],
+                        'top_strength_facets' => ['O1', 'A2'],
+                        'top_growth_facets' => ['E1'],
+                    ],
+                    'tags' => ['profile:explorer'],
+                ],
+            ],
+            'normed_json' => [
+                'engine_version' => 'big5.scorer.v3',
+                'raw_scores' => [
+                    'domains_mean' => ['O' => 4.1, 'C' => 3.0, 'E' => 2.6, 'A' => 3.7, 'N' => 2.1],
+                ],
+                'scores_0_100' => [
+                    'domains_percentile' => ['O' => 81, 'C' => 58, 'E' => 44, 'A' => 71, 'N' => 33],
+                ],
+                'facts' => [
+                    'domain_buckets' => ['O' => 'high', 'C' => 'mid', 'E' => 'mid', 'A' => 'high', 'N' => 'low'],
+                    'top_strength_facets' => ['O1', 'A2'],
+                    'top_growth_facets' => ['E1'],
+                ],
+                'norms' => [
+                    'norms_version' => '2026Q1',
+                    'group_id' => 'US.en-US.big5_population',
+                    'source_id' => 'scale_norms',
+                ],
+                'tags' => ['profile:explorer'],
+            ],
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'scoring_spec_version' => '2026.01',
+            'report_engine_version' => 'v2.0',
             'is_valid' => true,
             'computed_at' => now(),
         ]);
