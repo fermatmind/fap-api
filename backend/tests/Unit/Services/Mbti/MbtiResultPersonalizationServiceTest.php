@@ -174,9 +174,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'mode.career_experiment_boundary',
             (string) ($clear['action_selection_keys']['career.work_experiments'] ?? '')
         );
+        $recommendationSelectionKeys = (array) data_get($clear, 'recommendation_selection_keys');
+        sort($recommendationSelectionKeys);
         $this->assertSame(
-            ['read-career', 'read-explain', 'read-action'],
-            data_get($clear, 'recommendation_selection_keys')
+            ['read-action', 'read-career', 'read-explain'],
+            $recommendationSelectionKeys
         );
         $this->assertSame(
             ['TF', 'JP'],

@@ -37,6 +37,13 @@ final class MbtiReadModelContractServiceTest extends TestCase
             'user_state' => ['is_first_view' => true],
             'orchestration' => ['primary_focus_key' => 'growth.next_actions'],
             'continuity' => ['carryover_focus_key' => 'growth.next_actions'],
+            'longitudinal_memory_v1' => [
+                'memory_contract_version' => 'mbti.longitudinal_memory.v1',
+                'memory_fingerprint' => 'fixture-memory-fingerprint',
+                'memory_scope' => 'identity_recent_mbti_window',
+                'memory_state' => 'resume_ready',
+                'progression_state' => 'reading_loop',
+            ],
             'ordered_recommendation_keys' => ['read-action'],
             'reading_focus_key' => 'read-action',
             'working_life_v1' => ['career_focus_key' => 'career.next_step'],
@@ -71,6 +78,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
                 'action_focus_key',
                 'action_journey_v1',
                 'pulse_check_v1',
+                'longitudinal_memory_v1',
                 'continuity',
                 'cross_assessment_v1',
                 'synthesis_keys',
@@ -99,6 +107,11 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('continuity.carryover_focus_key', $contract['telemetry_parity_fields']);
         $this->assertContains('action_journey_v1.journey_state', $contract['telemetry_parity_fields']);
         $this->assertContains('pulse_check_v1.pulse_state', $contract['telemetry_parity_fields']);
+        $this->assertContains('longitudinal_memory_v1.memory_contract_version', $contract['telemetry_parity_fields']);
+        $this->assertContains('longitudinal_memory_v1.memory_fingerprint', $contract['telemetry_parity_fields']);
+        $this->assertContains('longitudinal_memory_v1.memory_state', $contract['telemetry_parity_fields']);
+        $this->assertContains('longitudinal_memory_v1.progression_state', $contract['telemetry_parity_fields']);
+        $this->assertContains('longitudinal_memory_v1.memory_rewrite_reason', $contract['telemetry_parity_fields']);
         $this->assertContains('working_life_v1.career_focus_key', $contract['telemetry_parity_fields']);
         $this->assertContains('intra_type_profile_v1.version', $contract['telemetry_parity_fields']);
         $this->assertContains('intra_type_profile_v1.profile_seed_key', $contract['telemetry_parity_fields']);
@@ -143,6 +156,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
             'pulse_check_v1' => ['pulse_state' => 'reinforce'],
             'continuity' => ['carryover_focus_key' => 'traits.close_call_axes'],
             'ordered_recommendation_keys' => ['read-explain'],
+            'longitudinal_memory_v1' => ['memory_state' => 'resume_ready'],
             'working_life_v1' => ['career_focus_key' => 'career.work_experiments'],
         ];
 
@@ -154,6 +168,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertSame(['primary_focus_key' => 'traits.close_call_axes'], $merged['orchestration']);
         $this->assertSame(['journey_state' => 'resume_action_loop'], $merged['action_journey_v1']);
         $this->assertSame(['pulse_state' => 'reinforce'], $merged['pulse_check_v1']);
+        $this->assertSame(['memory_state' => 'resume_ready'], $merged['longitudinal_memory_v1']);
         $this->assertSame(['carryover_focus_key' => 'traits.close_call_axes'], $merged['continuity']);
         $this->assertSame(['read-explain'], $merged['ordered_recommendation_keys']);
         $this->assertSame(['career_focus_key' => 'career.work_experiments'], $merged['working_life_v1']);

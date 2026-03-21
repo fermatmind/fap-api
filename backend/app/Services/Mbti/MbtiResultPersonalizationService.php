@@ -572,6 +572,7 @@ final class MbtiResultPersonalizationService
         private readonly ContentPacksIndex $packsIndex,
         private readonly MbtiUserStateOrchestrationService $userStateOrchestrationService,
         private readonly MbtiActionJourneyContractService $actionJourneyContractService,
+        private readonly MbtiLongitudinalMemoryService $longitudinalMemoryService,
         private readonly MbtiBigFiveSynthesisService $bigFiveSynthesisService,
         private readonly MbtiWorkingLifeConsolidationService $workingLifeConsolidationService,
         private readonly MbtiIntraTypeProfileService $intraTypeProfileService,
@@ -716,6 +717,7 @@ final class MbtiResultPersonalizationService
         $personalization = $this->workingLifeConsolidationService->attach($personalization);
         $personalization = $this->actionJourneyContractService->attach($personalization);
         $personalization = $this->intraTypeProfileService->attach($personalization);
+        $personalization = $this->longitudinalMemoryService->attach($personalization, $context);
 
         $personalization = $this->privacyConsentContractService->attachContract($personalization, [
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
@@ -945,6 +947,9 @@ final class MbtiResultPersonalizationService
                 'neighbor_type_keys' => array_values((array) ($dynamic['neighbor_type_keys'] ?? [])),
                 'profile_seed_key' => trim((string) ($personalization['profile_seed_key'] ?? '')),
                 'selection_fingerprint' => trim((string) ($personalization['selection_fingerprint'] ?? '')),
+                'memory_fingerprint' => trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_fingerprint', '')),
+                'memory_state' => trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_state', '')),
+                'memory_rewrite_reason' => trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_rewrite_reason', '')),
             ];
 
             $section['payload'] = $payload;

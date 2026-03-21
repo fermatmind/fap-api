@@ -29,6 +29,7 @@ final class MbtiReadPathParityContractTest extends TestCase
 
         $anonId = 'mbti_read_path_parity_anon';
         $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $this->seedHistoricalMemorySignals($anonId);
         $attempt = Attempt::query()->findOrFail($attemptId);
         $result = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
 
@@ -98,6 +99,9 @@ final class MbtiReadPathParityContractTest extends TestCase
         $this->assertSame(true, data_get($effectiveReportPersonalization, 'user_state.has_share'));
         $this->assertSame(true, data_get($effectiveReportPersonalization, 'user_state.has_action_engagement'));
         $this->assertSame('mbti.intra_type_profile.v1', data_get($effectiveReportPersonalization, 'intra_type_profile_v1.version'));
+        $this->assertSame('mbti.longitudinal_memory.v1', data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.memory_contract_version'));
+        $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.memory_fingerprint')));
+        $this->assertIsArray(data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.section_history_keys'));
         $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'profile_seed_key')));
         $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'selection_fingerprint')));
         $this->assertIsArray(data_get($effectiveReportPersonalization, 'section_selection_keys'));
@@ -116,7 +120,15 @@ final class MbtiReadPathParityContractTest extends TestCase
             (array) data_get($readContract, 'non_cacheable_fields', [])
         );
         $this->assertContains(
+            'report._meta.personalization.longitudinal_memory_v1',
+            (array) data_get($readContract, 'non_cacheable_fields', [])
+        );
+        $this->assertContains(
             'profile_seed_key',
+            (array) data_get($readContract, 'telemetry_parity_fields', [])
+        );
+        $this->assertContains(
+            'longitudinal_memory_v1.memory_fingerprint',
             (array) data_get($readContract, 'telemetry_parity_fields', [])
         );
     }
@@ -289,6 +301,64 @@ final class MbtiReadPathParityContractTest extends TestCase
             'content_package_version' => 'v0.3',
             'created_at' => now(),
             'updated_at' => now(),
+        ]);
+    }
+
+    private function seedHistoricalMemorySignals(string $anonId): void
+    {
+        $previousAttemptId = (string) Str::uuid();
+
+        Attempt::create([
+            'id' => $previousAttemptId,
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'scale_code_v2' => 'MBTI',
+            'scale_uid' => 'mbti',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 144,
+            'client_platform' => 'test',
+            'answers_summary_json' => ['stage' => 'history'],
+            'started_at' => now()->subDays(9),
+            'submitted_at' => now()->subDays(9),
+            'pack_id' => (string) config('content_packs.default_pack_id'),
+            'dir_version' => 'MBTI-CN-v0.3',
+            'content_package_version' => 'v0.3',
+        ]);
+
+        DB::table('events')->insert([
+            [
+                'id' => (string) Str::uuid(),
+                'event_code' => 'result_view',
+                'event_name' => 'result_view',
+                'org_id' => 0,
+                'attempt_id' => $previousAttemptId,
+                'anon_id' => $anonId,
+                'scale_code' => 'MBTI',
+                'meta_json' => null,
+                'occurred_at' => now()->subDays(9),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => (string) Str::uuid(),
+                'event_code' => 'ui_card_interaction',
+                'event_name' => 'ui_card_interaction',
+                'org_id' => 0,
+                'attempt_id' => $previousAttemptId,
+                'anon_id' => $anonId,
+                'scale_code' => 'MBTI',
+                'meta_json' => json_encode([
+                    'sectionKey' => 'traits.close_call_axes',
+                    'interaction' => 'dwell_2500ms',
+                    'continueTarget' => 'type_clarity',
+                ], JSON_UNESCAPED_UNICODE),
+                'occurred_at' => now()->subDays(9)->addMinutes(6),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
