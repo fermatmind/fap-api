@@ -40,6 +40,16 @@ final class MbtiCompareInviteController extends Controller
         return response()->json(array_merge(['ok' => true], $result));
     }
 
+    public function indexPrivate(Request $request): JsonResponse
+    {
+        $result = $this->service->listPrivate(
+            $request->attributes->get('user_id'),
+            $request->attributes->get('anon_id')
+        );
+
+        return response()->json(array_merge(['ok' => true], $result));
+    }
+
     public function mutatePrivateConsent(Request $request, string $inviteId): JsonResponse
     {
         $validated = $request->validate([
