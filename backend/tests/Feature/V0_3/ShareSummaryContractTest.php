@@ -92,6 +92,15 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame('embed.surface.v1', $response->json('embed_surface_v1.version'));
         $this->assertSame('mbti_share_embed_card', $response->json('embed_surface_v1.surface_key'));
         $this->assertSame('growth.next_actions', $response->json('embed_surface_v1.continue_target'));
+        $this->assertSame('partner.read.v1', $response->json('partner_read_v1.version'));
+        $this->assertSame('public_share_safe', $response->json('partner_read_v1.graph_scope'));
+        $this->assertSame('partner_public_read', $response->json('partner_read_v1.read_scope'));
+        $this->assertSame('public_summary_only', $response->json('partner_read_v1.subject_scope'));
+        $this->assertSame('share_public_surface', $response->json('partner_read_v1.attribution_scope'));
+        $this->assertSame('insight.graph.v1', $response->json('partner_read_v1.graph_contract_version'));
+        $this->assertContains('result_summary', (array) $response->json('partner_read_v1.allowed_node_ids'));
+        $this->assertContains('continue_reading', (array) $response->json('partner_read_v1.allowed_node_ids'));
+        $this->assertContains('recommended_next', (array) $response->json('partner_read_v1.allowed_edge_types'));
         $this->assertSame(
             ['growth.next_actions', 'traits.close_call_axes', 'traits.adjacent_type_contrast'],
             $response->json('public_surface_v1.continue_reading_keys')
@@ -166,6 +175,7 @@ final class ShareSummaryContractTest extends TestCase
             'public_surface_v1',
             'insight_graph_v1',
             'embed_surface_v1',
+            'partner_read_v1',
         ] as $key) {
             $this->assertSame($share->json($key), $view->json($key), "share field mismatch: {$key}");
         }
@@ -222,6 +232,9 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('insight_graph_v1.graph_scope', 'public_share_safe')
             ->assertJsonPath('embed_surface_v1.version', 'embed.surface.v1')
             ->assertJsonPath('embed_surface_v1.surface_key', 'big5_share_embed_card')
+            ->assertJsonPath('partner_read_v1.version', 'partner.read.v1')
+            ->assertJsonPath('partner_read_v1.graph_scope', 'public_share_safe')
+            ->assertJsonPath('partner_read_v1.read_scope', 'partner_public_read')
             ->assertJsonMissingPath('report')
             ->assertJsonMissingPath('result')
             ->assertJsonMissingPath('offers')

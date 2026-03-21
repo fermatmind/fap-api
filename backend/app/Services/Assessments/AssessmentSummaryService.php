@@ -5,6 +5,8 @@ namespace App\Services\Assessments;
 use App\Models\Assessment;
 use App\Models\AssessmentAssignment;
 use App\Models\Result;
+use App\Services\InsightGraph\InsightGraphContractService;
+use App\Services\InsightGraph\PartnerReadContractService;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Team\TeamDynamicsSynthesisService;
 use Illuminate\Support\Collection;
@@ -15,6 +17,8 @@ class AssessmentSummaryService
         private ScaleRegistry $registry,
         private TeamDynamicsSynthesisService $teamDynamics,
         private WorkspaceSurfaceContractService $workspaceSurface,
+        private InsightGraphContractService $insightGraph,
+        private PartnerReadContractService $partnerRead,
     ) {}
 
     public function buildSummary(Assessment $assessment): array
@@ -57,6 +61,8 @@ class AssessmentSummaryService
             'total' => $total,
         ];
         $teamDynamics = $this->teamDynamics->buildForAssessment($assessment, $results, $total);
+        $workspaceSurface = $this->workspaceSurface->build($teamDynamics, $completionRate);
+        $insightGraph = $this->insightGraph->buildForWorkspaceSummary($teamDynamics, $workspaceSurface, $completionRate);
 
         return [
             'completion_rate' => [
@@ -71,7 +77,9 @@ class AssessmentSummaryService
             'score_distribution' => $this->scoreDistribution($driverType, $results),
             'dimension_means' => $this->dimensionMeans($driverType, $results),
             'team_dynamics_v1' => $teamDynamics,
-            'workspace_surface_v1' => $this->workspaceSurface->build($teamDynamics, $completionRate),
+            'workspace_surface_v1' => $workspaceSurface,
+            'insight_graph_v1' => $insightGraph,
+            'partner_read_v1' => $this->partnerRead->buildForTenantWorkspace($insightGraph, $workspaceSurface),
         ];
     }
 
