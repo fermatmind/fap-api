@@ -574,6 +574,7 @@ final class MbtiResultPersonalizationService
         private readonly MbtiActionJourneyContractService $actionJourneyContractService,
         private readonly MbtiBigFiveSynthesisService $bigFiveSynthesisService,
         private readonly MbtiWorkingLifeConsolidationService $workingLifeConsolidationService,
+        private readonly MbtiIntraTypeProfileService $intraTypeProfileService,
         private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
         private readonly VersionedComparativeNormingLayerService $comparativeNormingLayerService,
         private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
@@ -714,6 +715,7 @@ final class MbtiResultPersonalizationService
         ]);
         $personalization = $this->workingLifeConsolidationService->attach($personalization);
         $personalization = $this->actionJourneyContractService->attach($personalization);
+        $personalization = $this->intraTypeProfileService->attach($personalization);
 
         $personalization = $this->privacyConsentContractService->attachContract($personalization, [
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
@@ -886,13 +888,52 @@ final class MbtiResultPersonalizationService
             }
 
             if ($blocks !== []) {
-                $payload['blocks'] = array_values(array_filter($blocks, static function (array $block): bool {
+                $visibleBlocks = array_values(array_filter($blocks, static function (array $block): bool {
                     return trim((string) ($block['text'] ?? '')) !== '';
                 }));
+                $selectedBlockIds = array_values(array_filter(array_map(
+                    static fn (mixed $value): string => trim((string) $value),
+                    (array) ($dynamic['selected_blocks'] ?? [])
+                )));
+
+                if ($visibleBlocks !== [] && $selectedBlockIds !== []) {
+                    $blockMap = [];
+                    foreach ($visibleBlocks as $block) {
+                        $blockId = trim((string) ($block['id'] ?? ''));
+                        if ($blockId !== '') {
+                            $blockMap[$blockId] = $block;
+                        }
+                    }
+
+                    $orderedVisibleBlocks = [];
+                    foreach ($visibleBlocks as $block) {
+                        if (trim((string) ($block['kind'] ?? '')) === 'type_skeleton') {
+                            $orderedVisibleBlocks[] = $block;
+                        }
+                    }
+                    foreach ($selectedBlockIds as $blockId) {
+                        if (isset($blockMap[$blockId])) {
+                            $orderedVisibleBlocks[] = $blockMap[$blockId];
+                        }
+                    }
+
+                    $orderedVisibleBlocks = array_values(array_filter($orderedVisibleBlocks, static function (array $block): bool {
+                        return trim((string) ($block['id'] ?? '')) !== '';
+                    }));
+
+                    if (count($orderedVisibleBlocks) > count(array_filter($visibleBlocks, static function (array $block): bool {
+                        return trim((string) ($block['kind'] ?? '')) === 'type_skeleton';
+                    }))) {
+                        $visibleBlocks = $orderedVisibleBlocks;
+                    }
+                }
+
+                $payload['blocks'] = $visibleBlocks;
             }
 
             $payload['personalization'] = [
                 'variant_key' => (string) ($dynamic['variant_key'] ?? ''),
+                'section_selection_key' => trim((string) data_get($personalization, 'section_selection_keys.'.$sectionKey, '')),
                 'selected_blocks' => array_values((array) ($dynamic['selected_blocks'] ?? [])),
                 'primary_axis' => is_array($dynamic['primary_axis'] ?? null) ? $dynamic['primary_axis'] : null,
                 'scene_key' => (string) ($dynamic['scene_key'] ?? ''),
@@ -902,6 +943,8 @@ final class MbtiResultPersonalizationService
                 'boundary_axes' => array_values((array) ($dynamic['boundary_axes'] ?? [])),
                 'close_call_axes' => array_values((array) ($dynamic['close_call_axes'] ?? [])),
                 'neighbor_type_keys' => array_values((array) ($dynamic['neighbor_type_keys'] ?? [])),
+                'profile_seed_key' => trim((string) ($personalization['profile_seed_key'] ?? '')),
+                'selection_fingerprint' => trim((string) ($personalization['selection_fingerprint'] ?? '')),
             ];
 
             $section['payload'] = $payload;

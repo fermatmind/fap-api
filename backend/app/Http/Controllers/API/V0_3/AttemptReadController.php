@@ -13,6 +13,7 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
+use App\Services\Mbti\MbtiIntraTypeProfileService;
 use App\Services\Mbti\MbtiPrivacyConsentContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiReadModelContractService;
@@ -49,6 +50,7 @@ class AttemptReadController extends Controller
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private MbtiUserStateOrchestrationService $mbtiUserStateOrchestrationService,
         private MbtiActionJourneyContractService $mbtiActionJourneyContractService,
+        private MbtiIntraTypeProfileService $mbtiIntraTypeProfileService,
         private MbtiReadModelContractService $mbtiReadModelContractService,
         private MbtiWorkingLifeConsolidationService $mbtiWorkingLifeConsolidationService,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
@@ -739,6 +741,14 @@ class AttemptReadController extends Controller
             'career_focus_key' => trim((string) ($personalization['career_focus_key'] ?? '')),
             'career_journey_keys' => is_array($personalization['career_journey_keys'] ?? null) ? $personalization['career_journey_keys'] : [],
             'career_action_priority_keys' => is_array($personalization['career_action_priority_keys'] ?? null) ? $personalization['career_action_priority_keys'] : [],
+            'intra_type_profile_v1' => is_array($personalization['intra_type_profile_v1'] ?? null) ? $personalization['intra_type_profile_v1'] : [],
+            'profile_seed_key' => trim((string) ($personalization['profile_seed_key'] ?? '')),
+            'same_type_divergence_keys' => is_array($personalization['same_type_divergence_keys'] ?? null) ? $personalization['same_type_divergence_keys'] : [],
+            'section_selection_keys' => is_array($personalization['section_selection_keys'] ?? null) ? $personalization['section_selection_keys'] : [],
+            'action_selection_keys' => is_array($personalization['action_selection_keys'] ?? null) ? $personalization['action_selection_keys'] : [],
+            'recommendation_selection_keys' => is_array($personalization['recommendation_selection_keys'] ?? null) ? $personalization['recommendation_selection_keys'] : [],
+            'selection_fingerprint' => trim((string) ($personalization['selection_fingerprint'] ?? '')),
+            'selection_evidence' => is_array($personalization['selection_evidence'] ?? null) ? $personalization['selection_evidence'] : [],
             'user_state' => is_array($personalization['user_state'] ?? null) ? $personalization['user_state'] : [],
             'orchestration' => is_array($personalization['orchestration'] ?? null) ? $personalization['orchestration'] : [],
             'continuity' => is_array($personalization['continuity'] ?? null) ? $personalization['continuity'] : [],
@@ -834,7 +844,16 @@ class AttemptReadController extends Controller
             $meta['next_pulse_target'] = trim((string) ($pulseCheck['next_pulse_target'] ?? ''));
         }
 
-        return array_filter($meta, static function (mixed $value): bool {
+        return array_filter($meta, static function (mixed $value, string $key): bool {
+            if (in_array($key, [
+                'same_type_divergence_keys',
+                'section_selection_keys',
+                'action_selection_keys',
+                'recommendation_selection_keys',
+            ], true)) {
+                return true;
+            }
+
             if (is_string($value)) {
                 return $value !== '';
             }
@@ -844,7 +863,7 @@ class AttemptReadController extends Controller
             }
 
             return $value !== null;
-        });
+        }, ARRAY_FILTER_USE_BOTH);
     }
 
     /**
@@ -923,8 +942,9 @@ class AttemptReadController extends Controller
         ]);
 
         $effective = $this->mbtiWorkingLifeConsolidationService->attach($effective);
+        $effective = $this->mbtiActionJourneyContractService->attach($effective);
 
-        return $this->mbtiActionJourneyContractService->attach($effective);
+        return $this->mbtiIntraTypeProfileService->attach($effective);
     }
 
     /**

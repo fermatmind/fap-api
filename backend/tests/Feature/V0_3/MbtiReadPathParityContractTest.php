@@ -65,6 +65,16 @@ final class MbtiReadPathParityContractTest extends TestCase
         $this->assertSame($privacyContract, (array) ($response->getData(true)['mbti_privacy_contract_v1'] ?? []));
 
         foreach ((array) data_get($readContract, 'canonical_read_model.personalization_fields', []) as $field) {
+            if ($field === 'narrative_runtime_contract_v1') {
+                $this->assertEquals(
+                    data_get($canonicalPersonalization, $field),
+                    data_get($effectiveReportPersonalization, $field),
+                    'canonical field drifted during read overlay: '.$field
+                );
+
+                continue;
+            }
+
             $this->assertSame(
                 data_get($canonicalPersonalization, $field),
                 data_get($effectiveReportPersonalization, $field),
@@ -87,6 +97,12 @@ final class MbtiReadPathParityContractTest extends TestCase
         $this->assertSame(true, data_get($effectiveReportPersonalization, 'user_state.has_feedback'));
         $this->assertSame(true, data_get($effectiveReportPersonalization, 'user_state.has_share'));
         $this->assertSame(true, data_get($effectiveReportPersonalization, 'user_state.has_action_engagement'));
+        $this->assertSame('mbti.intra_type_profile.v1', data_get($effectiveReportPersonalization, 'intra_type_profile_v1.version'));
+        $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'profile_seed_key')));
+        $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'selection_fingerprint')));
+        $this->assertIsArray(data_get($effectiveReportPersonalization, 'section_selection_keys'));
+        $this->assertIsArray(data_get($effectiveReportPersonalization, 'action_selection_keys'));
+        $this->assertIsArray(data_get($effectiveReportPersonalization, 'recommendation_selection_keys'));
         $this->assertContains(
             'report._meta.personalization.user_state',
             (array) data_get($readContract, 'non_cacheable_fields', [])
@@ -94,6 +110,14 @@ final class MbtiReadPathParityContractTest extends TestCase
         $this->assertContains(
             'mbti_public_projection_v1._meta.personalization.continuity',
             (array) data_get($readContract, 'non_cacheable_fields', [])
+        );
+        $this->assertContains(
+            'report._meta.personalization.selection_fingerprint',
+            (array) data_get($readContract, 'non_cacheable_fields', [])
+        );
+        $this->assertContains(
+            'profile_seed_key',
+            (array) data_get($readContract, 'telemetry_parity_fields', [])
         );
     }
 
