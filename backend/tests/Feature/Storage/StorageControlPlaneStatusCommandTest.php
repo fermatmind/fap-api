@@ -169,6 +169,10 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertStringContainsString('inventory.status=ok', $output);
         $this->assertStringContainsString('runtime_truth.v2_readiness=remote_rehydrate_enabled', $output);
         $this->assertStringContainsString('automation_readiness.auto_dry_run_ok=', $output);
+        $this->assertStringContainsString('attention_digest.overall_state=attention_required', $output);
+        $this->assertStringContainsString('attention_digest.counts.stale=0', $output);
+        $this->assertStringContainsString('attention_digest.counts.never_run=', $output);
+        $this->assertStringContainsString('attention_digest.counts.not_available=0', $output);
     }
 
     private function seedMinimalTruth(): void

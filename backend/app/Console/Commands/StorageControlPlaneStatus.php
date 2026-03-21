@@ -53,6 +53,10 @@ final class StorageControlPlaneStatus extends Command
         $this->line('automation_readiness.auto_dry_run_ok='.(int) count((array) data_get($payload, 'automation_readiness.auto_dry_run_ok', [])));
         $this->line('automation_readiness.manual_execute_only='.(int) count((array) data_get($payload, 'automation_readiness.manual_execute_only', [])));
         $this->line('automation_readiness.not_in_scope_for_pr25='.(int) count((array) data_get($payload, 'automation_readiness.not_in_scope_for_pr25', [])));
+        $this->line('attention_digest.overall_state='.(string) data_get($payload, 'attention_digest.overall_state', 'healthy'));
+        $this->line('attention_digest.counts.stale='.(int) data_get($payload, 'attention_digest.counts.stale', 0));
+        $this->line('attention_digest.counts.never_run='.(int) data_get($payload, 'attention_digest.counts.never_run', 0));
+        $this->line('attention_digest.counts.not_available='.(int) data_get($payload, 'attention_digest.counts.not_available', 0));
 
         return self::SUCCESS;
     }
