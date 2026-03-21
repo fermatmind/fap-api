@@ -10,6 +10,7 @@ use App\Models\MbtiCompareInvite;
 use App\Models\Result;
 use App\Models\Share;
 use App\Services\InsightGraph\PrivateRelationshipContractService;
+use App\Services\InsightGraph\PrivateRelationshipJourneyContractService;
 use App\Services\InsightGraph\RelationshipSyncContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
@@ -25,6 +26,7 @@ final class MbtiCompareInviteService
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private readonly RelationshipSyncContractService $relationshipSyncContractService,
         private readonly PrivateRelationshipContractService $privateRelationshipContractService,
+        private readonly PrivateRelationshipJourneyContractService $privateRelationshipJourneyContractService,
     ) {}
 
     /**
@@ -176,6 +178,18 @@ final class MbtiCompareInviteService
                 'private_relationship_access_version' => 'private.relationship.access.v1',
             ]
         );
+        $journeyOverlay = $this->resolvePrivateJourneyOverlay($invite);
+        $privateRelationshipJourney = $this->privateRelationshipJourneyContractService->buildJourney(
+            $privateRelationship,
+            $dyadicConsent,
+            $journeyOverlay
+        );
+        $dyadicPulseCheck = $this->privateRelationshipJourneyContractService->buildPulseCheck(
+            $privateRelationship,
+            $dyadicConsent,
+            $privateRelationshipJourney,
+            $journeyOverlay
+        );
 
         return [
             'invite_id' => (string) $invite->id,
@@ -185,6 +199,8 @@ final class MbtiCompareInviteService
             'status' => $status,
             'private_relationship_v1' => $privateRelationship,
             'dyadic_consent_v1' => $dyadicConsent,
+            'private_relationship_journey_v1' => $privateRelationshipJourney,
+            'dyadic_pulse_check_v1' => $dyadicPulseCheck,
             'dyadic_graph_v1' => $this->privateRelationshipContractService->buildProtectedGraph($privateRelationship),
         ];
     }
@@ -229,6 +245,98 @@ final class MbtiCompareInviteService
         }
 
         $this->persistDyadicConsentLifecycle($invite, $lifecycle);
+
+        return $this->showPrivate($inviteId, $userId, $anonId);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    public function mutatePrivateJourney(string $inviteId, mixed $userId, mixed $anonId, array $payload): array
+    {
+        $invite = MbtiCompareInvite::query()->findOrFail($inviteId);
+        [, $inviterAttempt, $inviterResult] = $this->resolveMbtiShareContext((string) $invite->share_id);
+        $participantContext = $this->resolveParticipantContext($invite, $userId, $anonId);
+        if ($participantContext === null) {
+            throw new ApiProblemException(404, 'PRIVATE_RELATIONSHIP_NOT_FOUND', 'private relationship not found.');
+        }
+
+        $inviterPayload = $this->shareService->buildPublicSummaryPayload($inviterAttempt, $inviterResult, (string) $invite->share_id);
+        $locale = $this->normalizeLocale(
+            $this->nullableString($invite->locale)
+                ?? $this->nullableString($inviterPayload['locale'] ?? null)
+                ?? 'zh-CN'
+        );
+        $status = $this->normalizeStatus((string) ($invite->status ?? 'pending'));
+        [$inviter, $invitee, $compare] = $this->buildInviteReadContext($invite, $inviterAttempt, $inviterResult, $locale, false);
+        $currentConsentPolicyVersion = $this->resolvePrivacyPolicyVersion($inviterAttempt);
+        $consentLifecycle = $this->resolveDyadicConsentLifecycle($invite, $currentConsentPolicyVersion);
+        $relationshipSync = $this->relationshipSyncContractService->build(
+            $inviter,
+            $invitee,
+            $compare,
+            $status === 'purchased' ? 'ready' : $status,
+            $locale,
+            null
+        );
+
+        $accessState = $this->resolvePrivateAccessState(
+            $status,
+            (bool) ($participantContext['has_invitee'] ?? false),
+            data_get($compare, 'title'),
+            $consentLifecycle
+        );
+        $subjectJoinMode = $this->resolvePrivateJoinMode($status);
+        $relationshipSync = $this->applyPrivateAccessRestrictions(
+            $relationshipSync,
+            $accessState,
+            $locale,
+            (bool) ($consentLifecycle['consent_refresh_required'] ?? false)
+        );
+        $participantAttempt = $participantContext['attempt'] ?? null;
+        $privateRelationship = $this->privateRelationshipContractService->buildPrivateRelationship(
+            $inviter,
+            $invitee,
+            $relationshipSync,
+            (string) ($participantContext['participant_role'] ?? 'inviter'),
+            $accessState,
+            $subjectJoinMode,
+            $locale,
+            $participantAttempt instanceof Attempt
+                ? $this->buildProtectedResultPath($locale, (string) $participantAttempt->id)
+                : $this->buildProtectedHistoryPath($locale),
+            $locale === 'zh-CN' ? '进入我的 MBTI 报告' : 'Open my MBTI reports'
+        );
+        $dyadicConsent = $this->privateRelationshipContractService->buildDyadicConsent(
+            $invite,
+            $this->normalizeConsentState($status),
+            $accessState,
+            $subjectJoinMode,
+            $currentConsentPolicyVersion,
+            $consentLifecycle + [
+                'private_relationship_access_version' => 'private.relationship.access.v1',
+            ]
+        );
+
+        $action = strtolower(trim((string) ($payload['action'] ?? '')));
+        $journeyOverlay = $this->resolvePrivateJourneyOverlay($invite);
+        $journey = $this->privateRelationshipJourneyContractService->buildJourney(
+            $privateRelationship,
+            $dyadicConsent,
+            $journeyOverlay
+        );
+        $updatedOverlay = $this->privateRelationshipJourneyContractService->applyJourneyMutation(
+            $journeyOverlay,
+            $action,
+            (string) ($dyadicConsent['access_state'] ?? ''),
+            (string) ($journey['dyadic_action_focus_key'] ?? ''),
+            is_array($journey['completed_dyadic_action_keys'] ?? null)
+                ? $journey['completed_dyadic_action_keys']
+                : []
+        );
+
+        $this->persistPrivateJourneyOverlay($invite, $updatedOverlay);
 
         return $this->showPrivate($inviteId, $userId, $anonId);
     }
@@ -777,6 +885,16 @@ final class MbtiCompareInviteService
         return is_array($meta) ? $meta : [];
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    private function resolvePrivateJourneyOverlay(MbtiCompareInvite $invite): array
+    {
+        $meta = $this->normalizeMeta($invite->meta_json ?? null);
+
+        return $this->normalizeMeta($meta['private_relationship_journey_v1'] ?? null);
+    }
+
     private function resolvePrivacyPolicyVersion(Attempt $attempt): string
     {
         $region = $this->nullableString($attempt->region ?? null)
@@ -898,6 +1016,34 @@ final class MbtiCompareInviteService
             'consent_policy_version' => $this->nullableString($lifecycle['consent_policy_version'] ?? null),
             'acknowledged_at' => $this->nullableString($lifecycle['acknowledged_at'] ?? null),
             'consent_refresh_required' => (bool) ($lifecycle['consent_refresh_required'] ?? false),
+        ];
+
+        $invite->meta_json = $meta;
+        $invite->save();
+    }
+
+    /**
+     * @param  array<string,mixed>  $overlay
+     */
+    private function persistPrivateJourneyOverlay(MbtiCompareInvite $invite, array $overlay): void
+    {
+        $meta = $this->normalizeMeta($invite->meta_json ?? null);
+        $meta['private_relationship_journey_v1'] = [
+            'journey_state' => $this->nullableString($overlay['journey_state'] ?? null),
+            'progress_state' => $this->nullableString($overlay['progress_state'] ?? null),
+            'completed_dyadic_action_keys' => array_values(array_filter(
+                array_map(fn (mixed $value): ?string => $this->nullableString($value), (array) ($overlay['completed_dyadic_action_keys'] ?? []))
+            )),
+            'recommended_next_dyadic_pulse_keys' => array_values(array_filter(
+                array_map(fn (mixed $value): ?string => $this->nullableString($value), (array) ($overlay['recommended_next_dyadic_pulse_keys'] ?? []))
+            )),
+            'last_dyadic_pulse_signal' => $this->nullableString($overlay['last_dyadic_pulse_signal'] ?? null),
+            'pulse_feedback_mode' => $this->nullableString($overlay['pulse_feedback_mode'] ?? null),
+            'revisit_reorder_reason' => $this->nullableString($overlay['revisit_reorder_reason'] ?? null),
+            'pulse_prompt_keys' => array_values(array_filter(
+                array_map(fn (mixed $value): ?string => $this->nullableString($value), (array) ($overlay['pulse_prompt_keys'] ?? []))
+            )),
+            'updated_at' => $this->nullableString($overlay['updated_at'] ?? null),
         ];
 
         $invite->meta_json = $meta;
