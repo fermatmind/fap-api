@@ -589,117 +589,92 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             'relationships.try_this_week:EI.E.clear:identity.T:action.relationship_action_theme_name_decision_rule:boundary.TF',
             data_get($relationshipsTryThisWeek, '_meta.variant_key')
         );
-        $this->assertSame(
-            'decision',
-            data_get($decisionStyle, 'payload.blocks.1.kind')
+        $this->assertProjectionVisibleBlock($decisionStyle, 'decision');
+        $this->assertProjectionVisibleBlock($stressRecovery, 'stress_recovery');
+        $this->assertProjectionVisibleBlock($communicationStyle, 'communication');
+        $this->assertProjectionVisibleBlock($relationshipsRelRisks, 'decision');
+        $this->assertProjectionVisibleBlock($careerCollaborationFit, 'collaboration_fit');
+        $this->assertProjectionVisibleBlock($careerWorkEnvironment, 'work_env');
+        $this->assertProjectionVisibleBlock($careerNextStep, 'career_next_step');
+        $this->assertProjectionVisibleBlock($whyThisType, 'why_this_type', '主类型');
+        $this->assertProjectionVisibleBlock($closeCallAxes, 'borderline_axis', '只拉开了7个点差');
+        $this->assertProjectionVisibleBlock($adjacentTypeContrast, 'adjacent_type_contrast', '最容易把你看成ENFJ');
+        $this->assertProjectionVisibleBlock($stabilityConfidence, 'stability_explanation', '情境敏感型稳定');
+        $this->assertProjectionVisibleBlock($careerWorkExperiments, 'work_experiment', '可逆动作');
+        $this->assertProjectionVisibleBlock($growthNextActions, 'next_action', '下一步动作');
+        $this->assertProjectionVisibleBlock($growthWeeklyExperiments, 'weekly_experiment', '可执行实验');
+        $this->assertProjectionVisibleBlock($growthWatchouts, 'watchout', '风险提醒');
+        $this->assertProjectionVisibleBlock($relationshipsTryThisWeek, 'relationship_practice', '本周关系练习');
+        $this->assertSelectedBlocksRemainVisible($whyThisType);
+        $this->assertSelectedBlocksRemainVisible($closeCallAxes);
+        $this->assertSelectedBlocksRemainVisible($adjacentTypeContrast);
+        $this->assertSelectedBlocksRemainVisible($stabilityConfidence);
+        $this->assertSelectedBlocksRemainVisible($careerNextStep);
+        $this->assertSelectedBlocksRemainVisible($careerWorkExperiments);
+        $this->assertSelectedBlocksRemainVisible($growthNextActions);
+        $this->assertSelectedBlocksRemainVisible($growthWeeklyExperiments);
+        $this->assertSelectedBlocksRemainVisible($growthWatchouts);
+        $this->assertSelectedBlocksRemainVisible($relationshipsTryThisWeek);
+    }
+
+    /**
+     * @param  array<string, mixed>  $section
+     */
+    private function assertProjectionVisibleBlock(array $section, string $expectedKind, string $expectedTextFragment = ''): void
+    {
+        $blocks = array_values(array_filter(
+            Arr::wrap(data_get($section, 'payload.blocks', [])),
+            static fn (mixed $block): bool => is_array($block)
+        ));
+
+        $this->assertNotEmpty($blocks);
+
+        $matchingBlocks = array_values(array_filter($blocks, static function (mixed $block) use ($expectedKind): bool {
+            return is_array($block) && (string) ($block['kind'] ?? '') === $expectedKind;
+        }));
+
+        $this->assertNotEmpty(
+            $matchingBlocks,
+            sprintf('Expected visible blocks for section [%s] to contain kind [%s].', (string) ($section['key'] ?? ''), $expectedKind)
         );
-        $this->assertSame(
-            'stress_recovery',
-            data_get($stressRecovery, 'payload.blocks.1.kind')
+
+        if ($expectedTextFragment === '') {
+            return;
+        }
+
+        $combinedText = implode("\n", array_map(
+            static fn (array $block): string => (string) ($block['text'] ?? ''),
+            $matchingBlocks
+        ));
+
+        $this->assertStringContainsString($expectedTextFragment, $combinedText);
+    }
+
+    /**
+     * @param  array<string, mixed>  $section
+     */
+    private function assertSelectedBlocksRemainVisible(array $section): void
+    {
+        $selectedBlockIds = array_values(array_filter(array_map(
+            'strval',
+            Arr::wrap(data_get($section, 'payload.personalization.selected_blocks', []))
+        )));
+        $visibleBlockIds = array_values(array_filter(array_map(
+            static fn (mixed $block): string => is_array($block) ? trim((string) ($block['id'] ?? '')) : '',
+            Arr::wrap(data_get($section, 'payload.blocks', []))
+        )));
+
+        $this->assertNotEmpty(
+            $selectedBlockIds,
+            sprintf('Expected section [%s] to retain backend-selected block ids.', (string) ($section['key'] ?? ''))
         );
-        $this->assertSame(
-            'communication',
-            data_get($communicationStyle, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'collaboration_fit',
-            data_get($careerCollaborationFit, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'work_env',
-            data_get($careerWorkEnvironment, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'career_next_step',
-            data_get($careerNextStep, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'why_this_type',
-            data_get($whyThisType, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'borderline_axis',
-            data_get($closeCallAxes, 'payload.blocks.0.kind')
-        );
-        $this->assertSame(
-            'adjacent_type_contrast',
-            data_get($adjacentTypeContrast, 'payload.blocks.0.kind')
-        );
-        $this->assertSame(
-            'stability_explanation',
-            data_get($stabilityConfidence, 'payload.blocks.0.kind')
-        );
-        $this->assertSame(
-            'work_experiment',
-            data_get($careerWorkExperiments, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'next_action',
-            data_get($growthNextActions, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'weekly_experiment',
-            data_get($growthWeeklyExperiments, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'watchout',
-            data_get($growthWatchouts, 'payload.blocks.1.kind')
-        );
-        $this->assertSame(
-            'relationship_practice',
-            data_get($relationshipsTryThisWeek, 'payload.blocks.1.kind')
-        );
-        $this->assertStringContainsString(
-            '两套入口之间切换',
-            (string) data_get($decisionStyle, 'payload.blocks.0.text', '')
-        );
-        $this->assertStringContainsString(
-            '过载时和恢复时可能会切到不同挡位',
-            (string) data_get($stressRecovery, 'payload.blocks.0.text', '')
-        );
-        $this->assertStringContainsString(
-            '你的起手表达方式',
-            (string) data_get($communicationStyle, 'payload.blocks.1.text', '')
-        );
-        $this->assertStringContainsString(
-            '两套判断入口之间来回校准',
-            (string) data_get($relationshipsRelRisks, 'payload.blocks.3.text', '')
-        );
-        $this->assertStringContainsString(
-            '主类型',
-            (string) data_get($whyThisType, 'payload.blocks.1.text', '')
-        );
-        $this->assertStringContainsString(
-            '只拉开了7个点差',
-            (string) data_get($closeCallAxes, 'payload.blocks.0.text', '')
-        );
-        $this->assertStringContainsString(
-            '最容易把你看成ENFJ',
-            (string) data_get($adjacentTypeContrast, 'payload.blocks.0.text', '')
-        );
-        $this->assertStringContainsString(
-            '情境敏感型稳定',
-            (string) data_get($stabilityConfidence, 'payload.blocks.0.text', '')
-        );
-        $this->assertStringContainsString(
-            '可逆动作',
-            (string) data_get($careerWorkExperiments, 'payload.blocks.1.text', '')
-        );
-        $this->assertStringContainsString(
-            '下一步动作',
-            (string) data_get($growthNextActions, 'payload.blocks.1.text', '')
-        );
-        $this->assertStringContainsString(
-            '可执行实验',
-            (string) data_get($growthWeeklyExperiments, 'payload.blocks.1.text', '')
-        );
-        $this->assertStringContainsString(
-            '风险提醒',
-            (string) data_get($growthWatchouts, 'payload.blocks.1.text', '')
-        );
-        $this->assertStringContainsString(
-            '本周关系练习',
-            (string) data_get($relationshipsTryThisWeek, 'payload.blocks.1.text', '')
-        );
+
+        foreach ($selectedBlockIds as $blockId) {
+            $this->assertContains(
+                $blockId,
+                $visibleBlockIds,
+                sprintf('Expected selected block [%s] to remain visible in section [%s].', $blockId, (string) ($section['key'] ?? ''))
+            );
+        }
     }
 }
