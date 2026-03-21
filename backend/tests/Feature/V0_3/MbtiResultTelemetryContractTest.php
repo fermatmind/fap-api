@@ -162,6 +162,14 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['resume_bias_keys'] ?? null);
             $this->assertIsArray($meta['memory_rewrite_keys'] ?? null);
             $this->assertNotSame('', trim((string) ($meta['memory_rewrite_reason'] ?? '')));
+            $this->assertSame('mbti.adaptive_selection.v1', (string) ($meta['adaptive_contract_version'] ?? ''));
+            $this->assertNotSame('', trim((string) ($meta['adaptive_fingerprint'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['selection_rewrite_reason'] ?? '')));
+            $this->assertIsArray($meta['content_feedback_weights'] ?? null);
+            $this->assertIsArray($meta['action_effect_weights'] ?? null);
+            $this->assertIsArray($meta['recommendation_effect_weights'] ?? null);
+            $this->assertIsArray($meta['cta_effect_weights'] ?? null);
+            $this->assertIsArray($meta['next_best_action_v1'] ?? null);
         }
 
         $this->assertSame($eventMeta['report_view']['variant_keys'] ?? null, $eventMeta['result_view']['variant_keys'] ?? null);
@@ -220,11 +228,11 @@ class MbtiResultTelemetryContractTest extends TestCase
             data_get($eventMeta, 'report_view.orchestration.primary_focus_key')
         );
         $this->assertSame(
-            ['unlock_full_report', 'share_result', 'career_bridge'],
+            ['career_bridge', 'unlock_full_report', 'share_result'],
             data_get($eventMeta, 'result_view.orchestration.cta_priority_keys')
         );
         $this->assertSame(
-            ['unlock_full_report', 'share_result', 'career_bridge'],
+            ['career_bridge', 'unlock_full_report', 'share_result'],
             data_get($eventMeta, 'report_view.orchestration.cta_priority_keys')
         );
         $this->assertSame('career.work_experiments', data_get($eventMeta, 'result_view.working_life_v1.career_focus_key'));
@@ -245,6 +253,14 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertIsArray(data_get($eventMeta, 'result_view.section_history_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.behavior_delta_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.memory_rewrite_keys', []));
+        $this->assertSame('mbti.adaptive_selection.v1', data_get($eventMeta, 'result_view.adaptive_contract_version'));
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.adaptive_fingerprint', '')));
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.selection_rewrite_reason', '')));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.content_feedback_weights', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.action_effect_weights', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.recommendation_effect_weights', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.cta_effect_weights', []));
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.next_best_action_key', '')));
         $this->assertSame(
             ['career.work_experiments', 'career.next_step', 'career.work_environment', 'career.collaboration_fit'],
             data_get($eventMeta, 'result_view.working_life_v1.career_journey_keys')
@@ -265,31 +281,29 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame('refine_after_feedback', data_get($eventMeta, 'report_view.journey_state'));
         $this->assertSame('first_view_activation', data_get($eventMeta, 'result_view.journey_state'));
         $this->assertSame(
-            'traits.close_call_axes',
+            data_get($eventMeta, 'result_view.next_best_action_section_key'),
             data_get($eventMeta, 'result_view.continuity.carryover_focus_key')
         );
         $this->assertSame(
-            'traits.close_call_axes',
+            data_get($eventMeta, 'report_view.next_best_action_section_key'),
             data_get($eventMeta, 'report_view.continuity.carryover_focus_key')
         );
         $this->assertSame(
-            'unlock_to_continue_focus',
+            'adaptive_next_best_action',
             data_get($eventMeta, 'result_view.continuity.carryover_reason')
         );
         $this->assertSame(
-            'resume_action_loop',
+            'adaptive_next_best_action',
             data_get($eventMeta, 'report_view.continuity.carryover_reason')
         );
         $resultResumeKeys = (array) data_get($eventMeta, 'result_view.continuity.recommended_resume_keys', []);
         $reportResumeKeys = (array) data_get($eventMeta, 'report_view.continuity.recommended_resume_keys', []);
-        $this->assertContains('traits.close_call_axes', $resultResumeKeys);
+        $this->assertContains((string) data_get($eventMeta, 'result_view.next_best_action_section_key'), $resultResumeKeys);
         $this->assertContains('traits.why_this_type', $resultResumeKeys);
         $this->assertContains('growth.weekly_experiments', $resultResumeKeys);
-        $this->assertContains('career.work_experiments', $resultResumeKeys);
-        $this->assertContains('traits.close_call_axes', $reportResumeKeys);
+        $this->assertContains((string) data_get($eventMeta, 'report_view.next_best_action_section_key'), $reportResumeKeys);
         $this->assertContains('traits.why_this_type', $reportResumeKeys);
         $this->assertContains('growth.weekly_experiments', $reportResumeKeys);
-        $this->assertContains('career.work_experiments', $reportResumeKeys);
         $this->assertSame(
             ['explainability', 'growth', 'work'],
             data_get($eventMeta, 'result_view.continuity.carryover_scene_keys')
@@ -298,17 +312,12 @@ class MbtiResultTelemetryContractTest extends TestCase
             ['explainability', 'growth', 'work'],
             data_get($eventMeta, 'report_view.continuity.carryover_scene_keys')
         );
-        $this->assertSame(
-            ['weekly_action.theme.protect_energy_lane', 'work_experiment.theme.protect_energy_lane'],
-            data_get($eventMeta, 'result_view.continuity.carryover_action_keys')
-        );
-        $this->assertSame(
-            [
-                'weekly_action.theme.protect_energy_lane',
-                'work_experiment.theme.protect_energy_lane',
-            ],
-            data_get($eventMeta, 'report_view.continuity.carryover_action_keys')
-        );
+        $resultCarryoverActionKeys = (array) data_get($eventMeta, 'result_view.continuity.carryover_action_keys', []);
+        $reportCarryoverActionKeys = (array) data_get($eventMeta, 'report_view.continuity.carryover_action_keys', []);
+        $this->assertSame((string) data_get($eventMeta, 'result_view.next_best_action_key'), $resultCarryoverActionKeys[0] ?? null);
+        $this->assertSame((string) data_get($eventMeta, 'report_view.next_best_action_key'), $reportCarryoverActionKeys[0] ?? null);
+        $this->assertContains('work_experiment.theme.protect_energy_lane', $resultCarryoverActionKeys);
+        $this->assertContains('work_experiment.theme.protect_energy_lane', $reportCarryoverActionKeys);
         $this->assertSame(true, data_get($eventMeta, 'result_view.consent_scope.subject_export'));
         $this->assertSame(true, data_get($eventMeta, 'result_view.consent_scope.telemetry_product_improvement'));
         $this->assertSame(true, data_get($eventMeta, 'result_view.consent_scope.experimentation_pseudonymous'));

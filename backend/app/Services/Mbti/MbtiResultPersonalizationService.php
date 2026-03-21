@@ -573,6 +573,7 @@ final class MbtiResultPersonalizationService
         private readonly MbtiUserStateOrchestrationService $userStateOrchestrationService,
         private readonly MbtiActionJourneyContractService $actionJourneyContractService,
         private readonly MbtiLongitudinalMemoryService $longitudinalMemoryService,
+        private readonly MbtiAdaptiveSelectionService $adaptiveSelectionService,
         private readonly MbtiBigFiveSynthesisService $bigFiveSynthesisService,
         private readonly MbtiWorkingLifeConsolidationService $workingLifeConsolidationService,
         private readonly MbtiIntraTypeProfileService $intraTypeProfileService,
@@ -718,6 +719,7 @@ final class MbtiResultPersonalizationService
         $personalization = $this->actionJourneyContractService->attach($personalization);
         $personalization = $this->intraTypeProfileService->attach($personalization);
         $personalization = $this->longitudinalMemoryService->attach($personalization, $context);
+        $personalization = $this->adaptiveSelectionService->attach($personalization);
 
         $personalization = $this->privacyConsentContractService->attachContract($personalization, [
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
@@ -950,6 +952,11 @@ final class MbtiResultPersonalizationService
                 'memory_fingerprint' => trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_fingerprint', '')),
                 'memory_state' => trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_state', '')),
                 'memory_rewrite_reason' => trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_rewrite_reason', '')),
+                'adaptive_contract_version' => trim((string) data_get($personalization, 'adaptive_selection_v1.adaptive_contract_version', '')),
+                'adaptive_fingerprint' => trim((string) data_get($personalization, 'adaptive_selection_v1.adaptive_fingerprint', '')),
+                'selection_rewrite_reason' => trim((string) data_get($personalization, 'adaptive_selection_v1.selection_rewrite_reason', '')),
+                'next_best_action_key' => trim((string) data_get($personalization, 'adaptive_selection_v1.next_best_action_v1.key', '')),
+                'next_best_action_reason' => trim((string) data_get($personalization, 'adaptive_selection_v1.next_best_action_v1.reason', '')),
             ];
 
             $section['payload'] = $payload;
