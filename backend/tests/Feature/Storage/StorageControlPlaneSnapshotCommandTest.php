@@ -75,6 +75,12 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
         $this->assertSame('storage_control_plane_snapshot.v1', $payload['snapshot_schema']);
         $this->assertSame('snapshotted', $payload['status']);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
+        $this->assertArrayHasKey('last_updated_at', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_age_seconds', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_state', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_source_type', $payload['inventory']);
+        $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
         $this->assertSame('remote_rehydrate_enabled', data_get($payload, 'runtime_truth.v2_readiness'));
         $this->assertFileExists((string) $payload['snapshot_path']);
         $this->assertSame($auditCountBefore + 1, DB::table('audit_logs')->count());

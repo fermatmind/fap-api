@@ -77,9 +77,19 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertArrayHasKey('runtime_truth', $payload);
         $this->assertArrayHasKey('automation_readiness', $payload);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
+        $this->assertArrayHasKey('last_updated_at', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_age_seconds', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_state', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_source_type', $payload['inventory']);
+        $this->assertSame('fresh', data_get($payload, 'inventory.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'rehydrate.status'));
+        $this->assertSame('never_run', data_get($payload, 'rehydrate.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'retention.status'));
+        $this->assertSame('never_run', data_get($payload, 'retention.scopes.reports_backups.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'restore.status'));
+        $this->assertSame('never_run', data_get($payload, 'restore.freshness_state'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
 
         $audit = DB::table('audit_logs')
             ->where('action', 'storage_control_plane_snapshot')
@@ -114,10 +124,15 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $payload = app(StorageControlPlaneSnapshotService::class)->createSnapshot();
 
         $this->assertSame('not_available', data_get($payload, 'inventory.status'));
+        $this->assertSame('not_available', data_get($payload, 'inventory.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'retention.status'));
+        $this->assertSame('never_run', data_get($payload, 'retention.scopes.reports_backups.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'blob_coverage.blob_gc.status'));
+        $this->assertSame('never_run', data_get($payload, 'blob_coverage.blob_gc.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'quarantine.status'));
+        $this->assertSame('never_run', data_get($payload, 'quarantine.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'retirement.actions.quarantine.status'));
+        $this->assertSame('never_run', data_get($payload, 'retirement.actions.quarantine.freshness_state'));
     }
 
     private function seedMinimalTruth(): void
