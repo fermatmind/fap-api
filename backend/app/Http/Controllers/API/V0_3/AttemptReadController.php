@@ -17,6 +17,7 @@ use App\Services\Mbti\MbtiPrivacyConsentContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
+use App\Services\Mbti\MbtiActionJourneyContractService;
 use App\Services\Mbti\MbtiUserStateOrchestrationService;
 use App\Services\Mbti\MbtiWorkingLifeConsolidationService;
 use App\Services\Observability\ClinicalComboTelemetry;
@@ -47,6 +48,7 @@ class AttemptReadController extends Controller
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private MbtiUserStateOrchestrationService $mbtiUserStateOrchestrationService,
+        private MbtiActionJourneyContractService $mbtiActionJourneyContractService,
         private MbtiReadModelContractService $mbtiReadModelContractService,
         private MbtiWorkingLifeConsolidationService $mbtiWorkingLifeConsolidationService,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
@@ -731,6 +733,8 @@ class AttemptReadController extends Controller
             'big5_influence_keys' => is_array($personalization['big5_influence_keys'] ?? null) ? $personalization['big5_influence_keys'] : [],
             'mbti_adjusted_focus_keys' => is_array($personalization['mbti_adjusted_focus_keys'] ?? null) ? $personalization['mbti_adjusted_focus_keys'] : [],
             'working_life_v1' => is_array($personalization['working_life_v1'] ?? null) ? $personalization['working_life_v1'] : [],
+            'action_journey_v1' => is_array($personalization['action_journey_v1'] ?? null) ? $personalization['action_journey_v1'] : [],
+            'pulse_check_v1' => is_array($personalization['pulse_check_v1'] ?? null) ? $personalization['pulse_check_v1'] : [],
             'comparative_v1' => is_array($personalization['comparative_v1'] ?? null) ? $personalization['comparative_v1'] : [],
             'career_focus_key' => trim((string) ($personalization['career_focus_key'] ?? '')),
             'career_journey_keys' => is_array($personalization['career_journey_keys'] ?? null) ? $personalization['career_journey_keys'] : [],
@@ -792,6 +796,42 @@ class AttemptReadController extends Controller
             $meta['norming_version'] = trim((string) ($comparative['norming_version'] ?? ''));
             $meta['norming_scope'] = trim((string) ($comparative['norming_scope'] ?? ''));
             $meta['norming_source'] = trim((string) ($comparative['norming_source'] ?? ''));
+        }
+
+        $journey = is_array($personalization['action_journey_v1'] ?? null)
+            ? $personalization['action_journey_v1']
+            : [];
+        if ($journey !== []) {
+            $meta['journey_contract_version'] = trim((string) ($journey['journey_contract_version'] ?? ''));
+            $meta['journey_fingerprint_version'] = trim((string) ($journey['journey_fingerprint_version'] ?? ''));
+            $meta['journey_fingerprint'] = trim((string) ($journey['journey_fingerprint'] ?? ''));
+            $meta['journey_scope'] = trim((string) ($journey['journey_scope'] ?? ''));
+            $meta['journey_state'] = trim((string) ($journey['journey_state'] ?? ''));
+            $meta['progress_state'] = trim((string) ($journey['progress_state'] ?? ''));
+            $meta['completed_action_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($journey['completed_action_keys'] ?? null) ? $journey['completed_action_keys'] : []
+            )));
+            $meta['recommended_next_pulse_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($journey['recommended_next_pulse_keys'] ?? null) ? $journey['recommended_next_pulse_keys'] : []
+            )));
+            $meta['last_pulse_signal'] = trim((string) ($journey['last_pulse_signal'] ?? ''));
+            $meta['revisit_reorder_reason'] = trim((string) ($journey['revisit_reorder_reason'] ?? ''));
+        }
+
+        $pulseCheck = is_array($personalization['pulse_check_v1'] ?? null)
+            ? $personalization['pulse_check_v1']
+            : [];
+        if ($pulseCheck !== []) {
+            $meta['pulse_contract_version'] = trim((string) ($pulseCheck['pulse_contract_version'] ?? ''));
+            $meta['pulse_state'] = trim((string) ($pulseCheck['pulse_state'] ?? ''));
+            $meta['pulse_prompt_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($pulseCheck['pulse_prompt_keys'] ?? null) ? $pulseCheck['pulse_prompt_keys'] : []
+            )));
+            $meta['pulse_feedback_mode'] = trim((string) ($pulseCheck['pulse_feedback_mode'] ?? ''));
+            $meta['next_pulse_target'] = trim((string) ($pulseCheck['next_pulse_target'] ?? ''));
         }
 
         return array_filter($meta, static function (mixed $value): bool {
@@ -882,7 +922,9 @@ class AttemptReadController extends Controller
             'locale' => (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
         ]);
 
-        return $this->mbtiWorkingLifeConsolidationService->attach($effective);
+        $effective = $this->mbtiWorkingLifeConsolidationService->attach($effective);
+
+        return $this->mbtiActionJourneyContractService->attach($effective);
     }
 
     /**

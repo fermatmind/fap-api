@@ -29,6 +29,8 @@ final class MbtiPrivacyConsentContractServiceTest extends TestCase
         $this->assertSame(true, data_get($contract, 'consent_scope.norming_anonymized_only'));
         $this->assertContains('report.sections', data_get($contract, 'exportable_assets.canonical_result_paths', []));
         $this->assertContains('user_state', data_get($contract, 'exportable_assets.derived_personalization_fields', []));
+        $this->assertContains('action_journey_v1', data_get($contract, 'exportable_assets.derived_personalization_fields', []));
+        $this->assertContains('pulse_check_v1', data_get($contract, 'exportable_assets.derived_personalization_fields', []));
         $this->assertContains('share_id', data_get($contract, 'anonymized_vector_contract.forbidden_direct_identifiers', []));
         $this->assertSame(
             AttemptDataLifecycleService::class,

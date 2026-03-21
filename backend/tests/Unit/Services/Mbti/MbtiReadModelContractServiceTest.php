@@ -69,6 +69,8 @@ final class MbtiReadModelContractServiceTest extends TestCase
                 'action_priority_keys',
                 'reading_focus_key',
                 'action_focus_key',
+                'action_journey_v1',
+                'pulse_check_v1',
                 'continuity',
                 'cross_assessment_v1',
                 'synthesis_keys',
@@ -87,6 +89,8 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('mbti_public_projection_v1._meta.personalization.continuity', $contract['non_cacheable_fields']);
         $this->assertContains('user_state', $contract['telemetry_parity_fields']);
         $this->assertContains('continuity.carryover_focus_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('action_journey_v1.journey_state', $contract['telemetry_parity_fields']);
+        $this->assertContains('pulse_check_v1.pulse_state', $contract['telemetry_parity_fields']);
         $this->assertContains('working_life_v1.career_focus_key', $contract['telemetry_parity_fields']);
         $this->assertContains('comparative_v1.percentile.value', $contract['telemetry_parity_fields']);
         $this->assertContains('comparative_v1.norming_version', $contract['telemetry_parity_fields']);
@@ -114,6 +118,8 @@ final class MbtiReadModelContractServiceTest extends TestCase
             'action_plan_summary' => 'Overlay must not rewrite canonical text',
             'user_state' => ['is_first_view' => false, 'is_revisit' => true],
             'orchestration' => ['primary_focus_key' => 'traits.close_call_axes'],
+            'action_journey_v1' => ['journey_state' => 'resume_action_loop'],
+            'pulse_check_v1' => ['pulse_state' => 'reinforce'],
             'continuity' => ['carryover_focus_key' => 'traits.close_call_axes'],
             'ordered_recommendation_keys' => ['read-explain'],
             'working_life_v1' => ['career_focus_key' => 'career.work_experiments'],
@@ -125,6 +131,8 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertSame('Canonical summary', $merged['action_plan_summary']);
         $this->assertSame(['is_first_view' => false, 'is_revisit' => true], $merged['user_state']);
         $this->assertSame(['primary_focus_key' => 'traits.close_call_axes'], $merged['orchestration']);
+        $this->assertSame(['journey_state' => 'resume_action_loop'], $merged['action_journey_v1']);
+        $this->assertSame(['pulse_state' => 'reinforce'], $merged['pulse_check_v1']);
         $this->assertSame(['carryover_focus_key' => 'traits.close_call_axes'], $merged['continuity']);
         $this->assertSame(['read-explain'], $merged['ordered_recommendation_keys']);
         $this->assertSame(['career_focus_key' => 'career.work_experiments'], $merged['working_life_v1']);

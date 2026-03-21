@@ -108,6 +108,8 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['user_state'] ?? null);
             $this->assertIsArray($meta['orchestration'] ?? null);
             $this->assertIsArray($meta['continuity'] ?? null);
+            $this->assertIsArray($meta['action_journey_v1'] ?? null);
+            $this->assertIsArray($meta['pulse_check_v1'] ?? null);
             $this->assertSame('mbti.privacy_contract.v1', (string) ($meta['privacy_contract_version'] ?? ''));
             $this->assertIsArray($meta['consent_scope'] ?? null);
             $this->assertSame('comparative.norming.v1', (string) ($meta['comparative_contract_version'] ?? ''));
@@ -124,6 +126,22 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertContains('growth.next_actions', $meta['calibrated_section_keys'] ?? []);
             $this->assertNotSame('', trim((string) ($meta['calibration_fingerprint'] ?? '')));
             $this->assertContains('role_fit.role.NT', $meta['role_fit_keys'] ?? []);
+            $this->assertSame('action_journey.v1', (string) ($meta['journey_contract_version'] ?? ''));
+            $this->assertSame('action_journey.fingerprint.v1', (string) ($meta['journey_fingerprint_version'] ?? ''));
+            $this->assertSame('result_revisit', (string) ($meta['journey_scope'] ?? ''));
+            $this->assertNotSame('', trim((string) ($meta['journey_fingerprint'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['journey_state'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['progress_state'] ?? '')));
+            if (array_key_exists('completed_action_keys', $meta)) {
+                $this->assertIsArray($meta['completed_action_keys']);
+            }
+            $this->assertIsArray($meta['recommended_next_pulse_keys'] ?? null);
+            $this->assertNotSame('', trim((string) ($meta['revisit_reorder_reason'] ?? '')));
+            $this->assertSame('pulse_check.v1', (string) ($meta['pulse_contract_version'] ?? ''));
+            $this->assertNotSame('', trim((string) ($meta['pulse_state'] ?? '')));
+            if (array_key_exists('pulse_prompt_keys', $meta)) {
+                $this->assertIsArray($meta['pulse_prompt_keys']);
+            }
         }
 
         $this->assertSame($eventMeta['report_view']['variant_keys'] ?? null, $eventMeta['result_view']['variant_keys'] ?? null);
@@ -199,6 +217,10 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertIsArray(data_get($eventMeta, 'result_view.recommendation_priority_keys', []));
         $this->assertSame('weekly_action.theme.protect_energy_lane', data_get($eventMeta, 'result_view.action_focus_key'));
         $this->assertSame('work_experiment.theme.protect_energy_lane', data_get($eventMeta, 'report_view.action_focus_key'));
+        $this->assertSame('repeatable', data_get($eventMeta, 'report_view.progress_state'));
+        $this->assertSame('warming_up', data_get($eventMeta, 'result_view.progress_state'));
+        $this->assertSame('refine_after_feedback', data_get($eventMeta, 'report_view.journey_state'));
+        $this->assertSame('first_view_activation', data_get($eventMeta, 'result_view.journey_state'));
         $this->assertSame(
             'traits.close_call_axes',
             data_get($eventMeta, 'result_view.continuity.carryover_focus_key')

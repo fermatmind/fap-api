@@ -127,6 +127,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'action_plan_summary',
             data_get($clear, 'privacy_contract_v1.exportable_assets.derived_personalization_fields', [])
         );
+        $this->assertSame('action_journey.v1', data_get($clear, 'action_journey_v1.journey_contract_version'));
+        $this->assertSame('result_revisit', data_get($clear, 'action_journey_v1.journey_scope'));
+        $this->assertSame('first_view_activation', data_get($clear, 'action_journey_v1.journey_state'));
+        $this->assertSame('not_started', data_get($clear, 'action_journey_v1.progress_state'));
+        $this->assertSame('pulse_check.v1', data_get($clear, 'pulse_check_v1.pulse_contract_version'));
         $this->assertSame('comparative.norming.v1', data_get($clear, 'comparative_v1.version'));
         $this->assertSame(true, data_get($clear, 'comparative_v1.enabled'));
         $this->assertSame(73, data_get($clear, 'comparative_v1.percentile.value'));
