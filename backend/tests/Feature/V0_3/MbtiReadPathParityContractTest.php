@@ -100,6 +100,8 @@ final class MbtiReadPathParityContractTest extends TestCase
         $this->assertSame(true, data_get($effectiveReportPersonalization, 'user_state.has_action_engagement'));
         $this->assertSame('mbti.intra_type_profile.v1', data_get($effectiveReportPersonalization, 'intra_type_profile_v1.version'));
         $this->assertSame('mbti.longitudinal_memory.v1', data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.memory_contract_version'));
+        $this->assertSame('mbti.adaptive_selection.v1', data_get($effectiveReportPersonalization, 'adaptive_selection_v1.adaptive_contract_version'));
+        $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'adaptive_selection_v1.adaptive_fingerprint')));
         $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.memory_fingerprint')));
         $this->assertIsArray(data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.section_history_keys'));
         $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'profile_seed_key')));
@@ -124,11 +126,19 @@ final class MbtiReadPathParityContractTest extends TestCase
             (array) data_get($readContract, 'non_cacheable_fields', [])
         );
         $this->assertContains(
+            'report._meta.personalization.adaptive_selection_v1',
+            (array) data_get($readContract, 'non_cacheable_fields', [])
+        );
+        $this->assertContains(
             'profile_seed_key',
             (array) data_get($readContract, 'telemetry_parity_fields', [])
         );
         $this->assertContains(
             'longitudinal_memory_v1.memory_fingerprint',
+            (array) data_get($readContract, 'telemetry_parity_fields', [])
+        );
+        $this->assertContains(
+            'adaptive_selection_v1.adaptive_fingerprint',
             (array) data_get($readContract, 'telemetry_parity_fields', [])
         );
     }

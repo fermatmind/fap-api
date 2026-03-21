@@ -79,6 +79,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
                 'action_journey_v1',
                 'pulse_check_v1',
                 'longitudinal_memory_v1',
+                'adaptive_selection_v1',
                 'continuity',
                 'cross_assessment_v1',
                 'synthesis_keys',
@@ -112,6 +113,12 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('longitudinal_memory_v1.memory_state', $contract['telemetry_parity_fields']);
         $this->assertContains('longitudinal_memory_v1.progression_state', $contract['telemetry_parity_fields']);
         $this->assertContains('longitudinal_memory_v1.memory_rewrite_reason', $contract['telemetry_parity_fields']);
+        $this->assertContains('adaptive_selection_v1.adaptive_contract_version', $contract['telemetry_parity_fields']);
+        $this->assertContains('adaptive_selection_v1.adaptive_fingerprint', $contract['telemetry_parity_fields']);
+        $this->assertContains('adaptive_selection_v1.selection_rewrite_reason', $contract['telemetry_parity_fields']);
+        $this->assertContains('adaptive_selection_v1.action_effect_weights', $contract['telemetry_parity_fields']);
+        $this->assertContains('adaptive_selection_v1.recommendation_effect_weights', $contract['telemetry_parity_fields']);
+        $this->assertContains('adaptive_selection_v1.next_best_action_v1.key', $contract['telemetry_parity_fields']);
         $this->assertContains('working_life_v1.career_focus_key', $contract['telemetry_parity_fields']);
         $this->assertContains('intra_type_profile_v1.version', $contract['telemetry_parity_fields']);
         $this->assertContains('intra_type_profile_v1.profile_seed_key', $contract['telemetry_parity_fields']);

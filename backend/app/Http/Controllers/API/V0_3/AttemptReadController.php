@@ -19,6 +19,7 @@ use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Mbti\MbtiActionJourneyContractService;
+use App\Services\Mbti\MbtiAdaptiveSelectionService;
 use App\Services\Mbti\MbtiUserStateOrchestrationService;
 use App\Services\Mbti\MbtiWorkingLifeConsolidationService;
 use App\Services\Observability\ClinicalComboTelemetry;
@@ -50,6 +51,7 @@ class AttemptReadController extends Controller
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private MbtiUserStateOrchestrationService $mbtiUserStateOrchestrationService,
         private MbtiActionJourneyContractService $mbtiActionJourneyContractService,
+        private MbtiAdaptiveSelectionService $mbtiAdaptiveSelectionService,
         private MbtiIntraTypeProfileService $mbtiIntraTypeProfileService,
         private MbtiReadModelContractService $mbtiReadModelContractService,
         private MbtiWorkingLifeConsolidationService $mbtiWorkingLifeConsolidationService,
@@ -738,6 +740,7 @@ class AttemptReadController extends Controller
             'action_journey_v1' => is_array($personalization['action_journey_v1'] ?? null) ? $personalization['action_journey_v1'] : [],
             'pulse_check_v1' => is_array($personalization['pulse_check_v1'] ?? null) ? $personalization['pulse_check_v1'] : [],
             'longitudinal_memory_v1' => is_array($personalization['longitudinal_memory_v1'] ?? null) ? $personalization['longitudinal_memory_v1'] : [],
+            'adaptive_selection_v1' => is_array($personalization['adaptive_selection_v1'] ?? null) ? $personalization['adaptive_selection_v1'] : [],
             'comparative_v1' => is_array($personalization['comparative_v1'] ?? null) ? $personalization['comparative_v1'] : [],
             'career_focus_key' => trim((string) ($personalization['career_focus_key'] ?? '')),
             'career_journey_keys' => is_array($personalization['career_journey_keys'] ?? null) ? $personalization['career_journey_keys'] : [],
@@ -756,6 +759,33 @@ class AttemptReadController extends Controller
             'cultural_calibration_v1' => is_array($personalization['cultural_calibration_v1'] ?? null) ? $personalization['cultural_calibration_v1'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
+
+        $adaptiveSelection = is_array($personalization['adaptive_selection_v1'] ?? null)
+            ? $personalization['adaptive_selection_v1']
+            : [];
+        if ($adaptiveSelection !== []) {
+            $meta['adaptive_contract_version'] = trim((string) ($adaptiveSelection['adaptive_contract_version'] ?? $adaptiveSelection['version'] ?? ''));
+            $meta['adaptive_fingerprint'] = trim((string) ($adaptiveSelection['adaptive_fingerprint'] ?? ''));
+            $meta['selection_rewrite_reason'] = trim((string) ($adaptiveSelection['selection_rewrite_reason'] ?? ''));
+            $meta['content_feedback_weights'] = is_array($adaptiveSelection['content_feedback_weights'] ?? null)
+                ? $adaptiveSelection['content_feedback_weights']
+                : [];
+            $meta['action_effect_weights'] = is_array($adaptiveSelection['action_effect_weights'] ?? null)
+                ? $adaptiveSelection['action_effect_weights']
+                : [];
+            $meta['recommendation_effect_weights'] = is_array($adaptiveSelection['recommendation_effect_weights'] ?? null)
+                ? $adaptiveSelection['recommendation_effect_weights']
+                : [];
+            $meta['cta_effect_weights'] = is_array($adaptiveSelection['cta_effect_weights'] ?? null)
+                ? $adaptiveSelection['cta_effect_weights']
+                : [];
+            $meta['next_best_action_v1'] = is_array($adaptiveSelection['next_best_action_v1'] ?? null)
+                ? $adaptiveSelection['next_best_action_v1']
+                : [];
+            $meta['next_best_action_key'] = trim((string) data_get($adaptiveSelection, 'next_best_action_v1.key', ''));
+            $meta['next_best_action_section_key'] = trim((string) data_get($adaptiveSelection, 'next_best_action_v1.section_key', ''));
+            $meta['next_best_action_reason'] = trim((string) data_get($adaptiveSelection, 'next_best_action_v1.reason', ''));
+        }
 
         $narrativeRuntime = is_array($personalization['narrative_runtime_contract_v1'] ?? null)
             ? $personalization['narrative_runtime_contract_v1']
@@ -989,16 +1019,26 @@ class AttemptReadController extends Controller
             : [];
 
         if ($canonicalMemory !== []) {
-            return $longitudinalMemoryService->attachExistingMemory($effective, $canonicalMemory);
+            $effective = $longitudinalMemoryService->attachExistingMemory($effective, $canonicalMemory);
+        } else {
+            $effective = $longitudinalMemoryService->attach($effective, [
+                'org_id' => (int) ($attempt->org_id ?? 0),
+                'user_id' => $attempt->user_id ?? null,
+                'anon_id' => $attempt->anon_id ?? null,
+                'attempt_id' => (string) ($attempt->id ?? ''),
+                'locale' => (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+            ]);
         }
 
-        return $longitudinalMemoryService->attach($effective, [
-            'org_id' => (int) ($attempt->org_id ?? 0),
-            'user_id' => $attempt->user_id ?? null,
-            'anon_id' => $attempt->anon_id ?? null,
-            'attempt_id' => (string) ($attempt->id ?? ''),
-            'locale' => (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
-        ]);
+        $canonicalAdaptive = is_array($personalization['adaptive_selection_v1'] ?? null)
+            ? $personalization['adaptive_selection_v1']
+            : [];
+
+        if ($canonicalAdaptive !== []) {
+            return $this->mbtiAdaptiveSelectionService->attachExistingAdaptive($effective, $canonicalAdaptive);
+        }
+
+        return $this->mbtiAdaptiveSelectionService->attach($effective);
     }
 
     /**
