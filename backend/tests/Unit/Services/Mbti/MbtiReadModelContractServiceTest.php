@@ -81,6 +81,14 @@ final class MbtiReadModelContractServiceTest extends TestCase
                 'career_focus_key',
                 'career_journey_keys',
                 'career_action_priority_keys',
+                'intra_type_profile_v1',
+                'profile_seed_key',
+                'same_type_divergence_keys',
+                'section_selection_keys',
+                'action_selection_keys',
+                'recommendation_selection_keys',
+                'selection_fingerprint',
+                'selection_evidence',
             ],
             $contract['overlay_patch']['personalization_fields']
         );
@@ -92,6 +100,19 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('action_journey_v1.journey_state', $contract['telemetry_parity_fields']);
         $this->assertContains('pulse_check_v1.pulse_state', $contract['telemetry_parity_fields']);
         $this->assertContains('working_life_v1.career_focus_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('intra_type_profile_v1.version', $contract['telemetry_parity_fields']);
+        $this->assertContains('intra_type_profile_v1.profile_seed_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('intra_type_profile_v1.same_type_divergence_keys', $contract['telemetry_parity_fields']);
+        $this->assertContains('intra_type_profile_v1.section_selection_keys', $contract['telemetry_parity_fields']);
+        $this->assertContains('intra_type_profile_v1.action_selection_keys', $contract['telemetry_parity_fields']);
+        $this->assertContains('intra_type_profile_v1.recommendation_selection_keys', $contract['telemetry_parity_fields']);
+        $this->assertContains('intra_type_profile_v1.selection_fingerprint', $contract['telemetry_parity_fields']);
+        $this->assertContains('profile_seed_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('same_type_divergence_keys', $contract['telemetry_parity_fields']);
+        $this->assertContains('section_selection_keys', $contract['telemetry_parity_fields']);
+        $this->assertContains('action_selection_keys', $contract['telemetry_parity_fields']);
+        $this->assertContains('recommendation_selection_keys', $contract['telemetry_parity_fields']);
+        $this->assertContains('selection_fingerprint', $contract['telemetry_parity_fields']);
         $this->assertContains('comparative_v1.percentile.value', $contract['telemetry_parity_fields']);
         $this->assertContains('comparative_v1.norming_version', $contract['telemetry_parity_fields']);
         $this->assertContains('narrative_runtime_contract_v1.runtime_mode', $contract['telemetry_parity_fields']);
