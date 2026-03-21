@@ -84,6 +84,7 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertArrayHasKey('purge', $payload);
         $this->assertArrayHasKey('retirement', $payload);
         $this->assertArrayHasKey('materialized_cache', $payload);
+        $this->assertArrayHasKey('cost_reclaim_posture', $payload);
         $this->assertArrayHasKey('runtime_truth', $payload);
         $this->assertArrayHasKey('automation_readiness', $payload);
         $this->assertArrayHasKey('attention_digest', $payload);
@@ -111,6 +112,13 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertNull(data_get($payload, 'materialized_cache.freshness_age_seconds'));
         $this->assertSame('unknown_freshness', data_get($payload, 'materialized_cache.freshness_state'));
         $this->assertSame('disk-derived', data_get($payload, 'materialized_cache.freshness_source_type'));
+        $this->assertSame('ok', data_get($payload, 'cost_reclaim_posture.status'));
+        $this->assertSame('storage_cost_analyzer.v1', data_get($payload, 'cost_reclaim_posture.source_schema_version'));
+        $this->assertSame(storage_path(), data_get($payload, 'cost_reclaim_posture.root_path'));
+        $this->assertGreaterThan(0, (int) data_get($payload, 'cost_reclaim_posture.summary.total_bytes'));
+        $this->assertSame(0, data_get($payload, 'cost_reclaim_posture.by_category.v2_materialized_cache.bytes'));
+        $this->assertContains('runtime_or_data_truth', data_get($payload, 'cost_reclaim_posture.no_touch_categories', []));
+        $this->assertNull($this->reclaimCategory($payload, 'v2_materialized_cache'));
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('config-derived', data_get($payload, 'runtime_truth.freshness_source_type'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
@@ -156,6 +164,16 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertNull(data_get($payload, 'materialized_cache.freshness_age_seconds'));
         $this->assertSame('unknown_freshness', data_get($payload, 'materialized_cache.freshness_state'));
         $this->assertSame('disk-derived', data_get($payload, 'materialized_cache.freshness_source_type'));
+        $this->assertSame('ok', data_get($payload, 'cost_reclaim_posture.status'));
+        $this->assertSame('storage_cost_analyzer.v1', data_get($payload, 'cost_reclaim_posture.source_schema_version'));
+        $this->assertSame(storage_path(), data_get($payload, 'cost_reclaim_posture.root_path'));
+        $this->assertSame($this->totalBytesForFiles($bucket), data_get($payload, 'cost_reclaim_posture.by_category.v2_materialized_cache.bytes'));
+        $this->assertSame(3, data_get($payload, 'cost_reclaim_posture.by_category.v2_materialized_cache.file_count'));
+        $this->assertSame([
+            'category' => 'v2_materialized_cache',
+            'bytes' => $this->totalBytesForFiles($bucket),
+            'risk_level' => 'medium',
+        ], $this->reclaimCategory($payload, 'v2_materialized_cache'));
     }
 
     public function test_command_outputs_human_readable_summary(): void
@@ -241,6 +259,24 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
     private function totalBytesForFiles(array $files): int
     {
         return array_sum(array_map(static fn (string $contents): int => strlen($contents), $files));
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function reclaimCategory(array $payload, string $category): ?array
+    {
+        foreach ((array) data_get($payload, 'cost_reclaim_posture.reclaim_categories', []) as $candidate) {
+            if (! is_array($candidate)) {
+                continue;
+            }
+
+            if ((string) ($candidate['category'] ?? '') === $category) {
+                return $candidate;
+            }
+        }
+
+        return null;
     }
 
     /**

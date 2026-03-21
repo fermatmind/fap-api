@@ -22,6 +22,10 @@ final class StorageControlPlaneStatusService
     // Manual dry-run and operator-driven control-plane surfaces age out more slowly.
     private const MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS = 30 * 24 * 60 * 60;
 
+    public function __construct(
+        private readonly StorageCostAnalyzerService $costAnalyzer,
+    ) {}
+
     /**
      * @return array<string,mixed>
      */
@@ -40,6 +44,7 @@ final class StorageControlPlaneStatusService
             'purge' => $this->purgeSection(),
             'retirement' => $this->retirementSection(),
             'materialized_cache' => $this->materializedCacheSection(),
+            'cost_reclaim_posture' => $this->costReclaimPostureSection(),
             'runtime_truth' => $this->runtimeTruthSection(),
             'automation_readiness' => $this->automationReadinessSection(),
         ];
@@ -414,6 +419,52 @@ final class StorageControlPlaneStatusService
             'freshness_age_seconds' => null,
             'freshness_state' => 'unknown_freshness',
             'freshness_source_type' => 'disk-derived',
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function costReclaimPostureSection(): array
+    {
+        try {
+            $payload = $this->costAnalyzer->analyze();
+        } catch (\Throwable) {
+            return [
+                'status' => 'not_available',
+                'source_schema_version' => null,
+                'root_path' => storage_path(),
+                'summary' => null,
+                'by_category' => [],
+                'no_touch_categories' => [],
+                'reclaim_categories' => [],
+            ];
+        }
+
+        $summary = is_array($payload['summary'] ?? null) ? $payload['summary'] : null;
+        $byCategory = is_array($payload['by_category'] ?? null) ? $payload['by_category'] : [];
+        $reclaimCategories = [];
+
+        foreach ((array) ($payload['reclaim_candidates'] ?? []) as $candidate) {
+            if (! is_array($candidate)) {
+                continue;
+            }
+
+            $reclaimCategories[] = [
+                'category' => (string) ($candidate['category'] ?? ''),
+                'bytes' => (int) ($candidate['bytes'] ?? 0),
+                'risk_level' => (string) ($candidate['risk_level'] ?? ''),
+            ];
+        }
+
+        return [
+            'status' => (string) ($payload['status'] ?? 'ok'),
+            'source_schema_version' => (string) ($payload['schema_version'] ?? ''),
+            'root_path' => (string) ($payload['root_path'] ?? storage_path()),
+            'summary' => $summary,
+            'by_category' => $byCategory,
+            'no_touch_categories' => $this->normalizeScalarList((array) ($payload['no_touch_categories'] ?? [])),
+            'reclaim_categories' => $reclaimCategories,
         ];
     }
 
