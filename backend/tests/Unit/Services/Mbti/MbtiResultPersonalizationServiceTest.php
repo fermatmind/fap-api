@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Mbti;
 
+use App\Services\Mbti\MbtiIntraTypeProfileService;
 use App\Services\Mbti\MbtiResultPersonalizationService;
 use Tests\TestCase;
 
@@ -132,6 +133,55 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('first_view_activation', data_get($clear, 'action_journey_v1.journey_state'));
         $this->assertSame('not_started', data_get($clear, 'action_journey_v1.progress_state'));
         $this->assertSame('pulse_check.v1', data_get($clear, 'pulse_check_v1.pulse_contract_version'));
+        $this->assertSame('mbti.intra_type_profile.v1', data_get($clear, 'intra_type_profile_v1.version'));
+        $this->assertSame('same_type.seed.name_decision_rule.jp', data_get($clear, 'profile_seed_key'));
+        $this->assertSame(
+            data_get($clear, 'profile_seed_key'),
+            data_get($clear, 'intra_type_profile_v1.profile_seed_key')
+        );
+        $this->assertContains('same_type.boundary_axis.jp', data_get($clear, 'same_type_divergence_keys', []));
+        $this->assertContains('same_type.boundary_axis.tf', data_get($clear, 'same_type_divergence_keys', []));
+        $this->assertNotSame('', trim((string) data_get($clear, 'selection_fingerprint')));
+        $this->assertNotSame(
+            trim((string) data_get($clear, 'selection_fingerprint')),
+            trim((string) data_get($strong, 'selection_fingerprint'))
+        );
+        $this->assertSame(
+            [
+                'growth.next_actions.next_action.EI.E',
+                'growth.next_actions.boundary.TF',
+                'growth.next_actions.identity.t',
+            ],
+            $clear['sections']['growth.next_actions']['selected_blocks'] ?? null
+        );
+        $this->assertSame(
+            [
+                'career.work_experiments.work_experiment.EI.E',
+                'career.work_experiments.boundary.JP',
+                'career.work_experiments.identity.t',
+            ],
+            $clear['sections']['career.work_experiments']['selected_blocks'] ?? null
+        );
+        $this->assertStringContainsString(
+            'mode.action_boundary_buffered',
+            (string) ($clear['section_selection_keys']['growth.next_actions'] ?? '')
+        );
+        $this->assertStringContainsString(
+            'growth_next_actions_next_action_ei_e+growth_next_actions_boundary_tf+growth_next_actions_identity_t',
+            (string) ($clear['section_selection_keys']['growth.next_actions'] ?? '')
+        );
+        $this->assertStringContainsString(
+            'mode.career_experiment_boundary',
+            (string) ($clear['action_selection_keys']['career.work_experiments'] ?? '')
+        );
+        $this->assertSame(
+            ['read-career', 'read-explain', 'read-action'],
+            data_get($clear, 'recommendation_selection_keys')
+        );
+        $this->assertSame(
+            ['TF', 'JP'],
+            data_get($clear, 'selection_evidence.axis.boundary_axes')
+        );
         $this->assertSame('comparative.norming.v1', data_get($clear, 'comparative_v1.version'));
         $this->assertSame(true, data_get($clear, 'comparative_v1.enabled'));
         $this->assertSame(73, data_get($clear, 'comparative_v1.percentile.value'));
@@ -461,6 +511,93 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertStringContainsString(
             '压力升高时',
             (string) data_get($clear, 'scene_fingerprint.stress_recovery.summary', '')
+        );
+    }
+
+    public function test_it_can_change_same_type_selected_blocks_when_user_intent_changes_without_changing_type(): void
+    {
+        $personalizationService = app(MbtiResultPersonalizationService::class);
+        $intraTypeProfileService = app(MbtiIntraTypeProfileService::class);
+
+        $payload = [
+            'versions' => [
+                'engine' => 'v1.2',
+                'content_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+                'dir_version' => 'MBTI-CN-v0.3',
+            ],
+            'profile' => [
+                'type_code' => 'ENFP-T',
+            ],
+            'scores' => [
+                'EI' => ['pct' => 67, 'delta' => 17, 'side' => 'E', 'state' => 'clear'],
+                'SN' => ['pct' => 64, 'delta' => 14, 'side' => 'N', 'state' => 'clear'],
+                'TF' => ['pct' => 59, 'delta' => 9, 'side' => 'T', 'state' => 'balanced'],
+                'JP' => ['pct' => 57, 'delta' => 7, 'side' => 'J', 'state' => 'moderate'],
+                'AT' => ['pct' => 68, 'delta' => 18, 'side' => 'T', 'state' => 'clear'],
+            ],
+            'axis_states' => [
+                'EI' => 'clear',
+                'SN' => 'clear',
+                'TF' => 'balanced',
+                'JP' => 'moderate',
+                'AT' => 'clear',
+            ],
+        ];
+
+        $base = $personalizationService->buildForReportPayload($payload, [
+            'type_code' => 'ENFP-T',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase4a_contract',
+        ]);
+
+        $clarify = $intraTypeProfileService->attach(array_replace_recursive($base, [
+            'user_state' => [
+                'current_intent_cluster' => 'clarify_type',
+            ],
+        ]));
+        $careerMove = $intraTypeProfileService->attach(array_replace_recursive($base, [
+            'user_state' => [
+                'current_intent_cluster' => 'career_move',
+            ],
+        ]));
+
+        $this->assertSame('ENFP-T', $clarify['type_code']);
+        $this->assertSame('ENFP-T', $careerMove['type_code']);
+        $this->assertSame('T', $clarify['identity']);
+        $this->assertSame('T', $careerMove['identity']);
+        $this->assertSame(
+            [
+                'growth.next_actions.next_action.EI.E',
+                'growth.next_actions.axis_strength.EI.E.clear',
+                'growth.next_actions.identity.t',
+            ],
+            $clarify['sections']['growth.next_actions']['selected_blocks'] ?? null
+        );
+        $this->assertSame(
+            [
+                'growth.next_actions.next_action.EI.E',
+                'growth.next_actions.axis_strength.EI.E.clear',
+                'growth.next_actions.boundary.TF',
+            ],
+            $careerMove['sections']['growth.next_actions']['selected_blocks'] ?? null
+        );
+        $this->assertNotSame(
+            $clarify['sections']['growth.next_actions']['selected_blocks'] ?? null,
+            $careerMove['sections']['growth.next_actions']['selected_blocks'] ?? null
+        );
+        $this->assertStringContainsString(
+            'mode.action_explainable',
+            (string) ($clarify['section_selection_keys']['growth.next_actions'] ?? '')
+        );
+        $this->assertStringContainsString(
+            'mode.action_career_bridge',
+            (string) ($careerMove['section_selection_keys']['growth.next_actions'] ?? '')
+        );
+        $this->assertNotSame(
+            data_get($clarify, 'selection_fingerprint'),
+            data_get($careerMove, 'selection_fingerprint')
         );
     }
 

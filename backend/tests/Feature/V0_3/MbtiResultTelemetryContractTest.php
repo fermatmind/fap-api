@@ -94,6 +94,14 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsString((string) ($meta['career_focus_key'] ?? ''));
             $this->assertIsArray($meta['career_journey_keys'] ?? null);
             $this->assertIsArray($meta['career_action_priority_keys'] ?? null);
+            $this->assertIsArray($meta['intra_type_profile_v1'] ?? null);
+            $this->assertSame('mbti.intra_type_profile.v1', (string) (($meta['intra_type_profile_v1']['version'] ?? '')));
+            $this->assertIsString((string) ($meta['profile_seed_key'] ?? ''));
+            $this->assertIsArray($meta['same_type_divergence_keys'] ?? null);
+            $this->assertIsArray($meta['section_selection_keys'] ?? null);
+            $this->assertIsArray($meta['action_selection_keys'] ?? null);
+            $this->assertIsArray($meta['recommendation_selection_keys'] ?? null);
+            $this->assertNotSame('', trim((string) ($meta['selection_fingerprint'] ?? '')));
             $this->assertNotSame('', trim((string) ($meta['action_plan_summary'] ?? '')));
             $this->assertIsArray($meta['weekly_action_keys'] ?? null);
             $this->assertIsArray($meta['relationship_action_keys'] ?? null);
@@ -208,6 +216,16 @@ class MbtiResultTelemetryContractTest extends TestCase
             data_get($eventMeta, 'report_view.orchestration.cta_priority_keys')
         );
         $this->assertSame('career.work_experiments', data_get($eventMeta, 'result_view.working_life_v1.career_focus_key'));
+        $this->assertSame('mbti.intra_type_profile.v1', data_get($eventMeta, 'result_view.intra_type_profile_v1.version'));
+        $this->assertSame(
+            data_get($eventMeta, 'result_view.profile_seed_key'),
+            data_get($eventMeta, 'report_view.profile_seed_key')
+        );
+        $this->assertContains('same_type.boundary_axis.jp', data_get($eventMeta, 'result_view.same_type_divergence_keys', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.section_selection_keys', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.action_selection_keys', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.recommendation_selection_keys', []));
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.selection_fingerprint', '')));
         $this->assertSame(
             ['career.work_experiments', 'career.next_step', 'career.work_environment', 'career.collaboration_fit'],
             data_get($eventMeta, 'result_view.working_life_v1.career_journey_keys')
