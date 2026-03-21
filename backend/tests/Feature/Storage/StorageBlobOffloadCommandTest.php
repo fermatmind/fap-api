@@ -192,6 +192,7 @@ final class StorageBlobOffloadCommandTest extends TestCase
         $dryRunOutput = Artisan::output();
         $this->assertStringContainsString('status=planned', $dryRunOutput);
         $this->assertStringContainsString('disk=s3', $dryRunOutput);
+        $this->assertStringContainsString('surface=coverage_convergence_backfill', $dryRunOutput);
         $this->assertStringContainsString('candidate_count=7', $dryRunOutput);
         $this->assertStringContainsString('skipped_count=2', $dryRunOutput);
 
@@ -281,6 +282,122 @@ final class StorageBlobOffloadCommandTest extends TestCase
         $this->assertIsArray($auditMeta);
         $this->assertSame('executed', (string) ($auditMeta['mode'] ?? ''));
         $this->assertSame('s3', (string) ($auditMeta['disk'] ?? ''));
+        $this->assertSame('s3', (string) ($auditMeta['target_disk'] ?? ''));
+        $this->assertTrue((bool) ($auditMeta['copy_only'] ?? false));
+    }
+
+    public function test_blob_offload_exposes_overlap_summary_and_keeps_local_verified_copy_after_backfill(): void
+    {
+        $blobCatalog = app(BlobCatalogService::class);
+
+        $localOnly = $this->createArtifactBlob($blobCatalog, 'attempt-local-only', '{"kind":"local_only"}');
+        $both = $this->createArtifactBlob($blobCatalog, 'attempt-both', '{"kind":"both"}');
+        $targetOnly = $this->createArtifactBlob($blobCatalog, 'attempt-target-only', '{"kind":"target_only"}');
+
+        $localOnlyOffloadPath = $this->localOffloadPathForHash($localOnly['hash']);
+        Storage::disk('local')->put($localOnlyOffloadPath, $localOnly['bytes']);
+        $this->seedVerifiedRemoteCopyLocation($localOnly['hash'], 'local', $localOnlyOffloadPath, $localOnly['bytes'], 'local');
+
+        $bothLocalOffloadPath = $this->localOffloadPathForHash($both['hash']);
+        Storage::disk('local')->put($bothLocalOffloadPath, $both['bytes']);
+        $this->seedVerifiedRemoteCopyLocation($both['hash'], 'local', $bothLocalOffloadPath, $both['bytes'], 'local');
+
+        $bothRemotePath = $this->remotePathForHash($both['hash']);
+        Storage::disk('s3')->put($bothRemotePath, $both['bytes']);
+        $this->seedVerifiedRemoteCopyLocation($both['hash'], 's3', $bothRemotePath, $both['bytes'], 's3');
+
+        $targetOnlyRemotePath = $this->remotePathForHash($targetOnly['hash']);
+        Storage::disk('s3')->put($targetOnlyRemotePath, $targetOnly['bytes']);
+        $this->seedVerifiedRemoteCopyLocation($targetOnly['hash'], 's3', $targetOnlyRemotePath, $targetOnly['bytes'], 's3');
+
+        $this->assertSame(0, Artisan::call('storage:blob-offload', [
+            '--dry-run' => true,
+            '--disk' => 's3',
+        ]));
+
+        $dryRunOutput = Artisan::output();
+        $this->assertStringContainsString('status=planned', $dryRunOutput);
+        $this->assertStringContainsString('surface=coverage_convergence_backfill', $dryRunOutput);
+        $this->assertStringContainsString('target_disk=s3', $dryRunOutput);
+        $this->assertStringContainsString('reachable_blob_count=3', $dryRunOutput);
+        $this->assertStringContainsString('verified_remote_copy_counts_by_disk=local:2,s3:2', $dryRunOutput);
+        $this->assertStringContainsString('local_only_count=1', $dryRunOutput);
+        $this->assertStringContainsString('target_only_count=1', $dryRunOutput);
+        $this->assertStringContainsString('both_count=1', $dryRunOutput);
+        $this->assertStringContainsString('candidate_count=1', $dryRunOutput);
+        $this->assertStringContainsString('skipped_count=2', $dryRunOutput);
+
+        $plan = json_decode((string) file_get_contents($this->extractPlanPath($dryRunOutput)), true);
+        $this->assertIsArray($plan);
+        $summary = (array) ($plan['summary'] ?? []);
+        $this->assertSame('s3', (string) ($summary['target_disk'] ?? ''));
+        $this->assertSame(3, (int) ($summary['reachable_blob_count'] ?? -1));
+        $this->assertSame(['local' => 2, 's3' => 2], $summary['verified_remote_copy_counts_by_disk'] ?? null);
+        $this->assertSame(1, (int) ($summary['local_only_count'] ?? -1));
+        $this->assertSame(1, (int) ($summary['target_only_count'] ?? -1));
+        $this->assertSame(1, (int) ($summary['both_count'] ?? -1));
+        $this->assertSame([$localOnly['hash']], array_column((array) ($plan['candidates'] ?? []), 'blob_hash'));
+
+        $this->assertSame(0, Artisan::call('storage:blob-offload', [
+            '--execute' => true,
+            '--disk' => 's3',
+        ]));
+
+        $executeOutput = Artisan::output();
+        $this->assertStringContainsString('status=executed', $executeOutput);
+        $this->assertStringContainsString('surface=coverage_convergence_backfill', $executeOutput);
+        $this->assertStringContainsString('candidate_count=1', $executeOutput);
+        $this->assertStringContainsString('uploaded_count=1', $executeOutput);
+        $this->assertStringContainsString('verified_count=1', $executeOutput);
+        $this->assertStringContainsString('failed_count=0', $executeOutput);
+
+        Storage::disk('s3')->assertExists($this->remotePathForHash($localOnly['hash']));
+        $this->assertTrue(Storage::disk('local')->exists($localOnlyOffloadPath));
+        $this->assertTrue(Storage::disk('local')->exists($bothLocalOffloadPath));
+
+        $this->assertDatabaseHas('storage_blob_locations', [
+            'blob_hash' => $localOnly['hash'],
+            'disk' => 'local',
+            'storage_path' => $localOnlyOffloadPath,
+            'location_kind' => 'remote_copy',
+        ]);
+        $this->assertDatabaseHas('storage_blob_locations', [
+            'blob_hash' => $localOnly['hash'],
+            'disk' => 's3',
+            'storage_path' => $this->remotePathForHash($localOnly['hash']),
+            'location_kind' => 'remote_copy',
+        ]);
+        $this->assertDatabaseHas('storage_blob_locations', [
+            'blob_hash' => $both['hash'],
+            'disk' => 'local',
+            'storage_path' => $bothLocalOffloadPath,
+            'location_kind' => 'remote_copy',
+        ]);
+        $this->assertDatabaseHas('storage_blob_locations', [
+            'blob_hash' => $both['hash'],
+            'disk' => 's3',
+            'storage_path' => $bothRemotePath,
+            'location_kind' => 'remote_copy',
+        ]);
+        $this->assertDatabaseHas('storage_blob_locations', [
+            'blob_hash' => $targetOnly['hash'],
+            'disk' => 's3',
+            'storage_path' => $targetOnlyRemotePath,
+            'location_kind' => 'remote_copy',
+        ]);
+
+        $audit = DB::table('audit_logs')
+            ->where('action', 'storage_blob_offload')
+            ->orderByDesc('id')
+            ->first();
+        $this->assertNotNull($audit);
+        $auditMeta = json_decode((string) ($audit->meta_json ?? '{}'), true);
+        $this->assertIsArray($auditMeta);
+        $this->assertSame(3, (int) ($auditMeta['reachable_blob_count'] ?? -1));
+        $this->assertSame(1, (int) ($auditMeta['local_only_count'] ?? -1));
+        $this->assertSame(1, (int) ($auditMeta['target_only_count'] ?? -1));
+        $this->assertSame(1, (int) ($auditMeta['both_count'] ?? -1));
+        $this->assertSame(['local' => 2, 's3' => 2], $auditMeta['verified_remote_copy_counts_by_disk'] ?? null);
         $this->assertTrue((bool) ($auditMeta['copy_only'] ?? false));
     }
 
@@ -368,6 +485,58 @@ final class StorageBlobOffloadCommandTest extends TestCase
                 'last_verified_at' => now(),
             ]);
         }
+    }
+
+    /**
+     * @return array{hash:string,bytes:string}
+     */
+    private function createArtifactBlob(BlobCatalogService $blobCatalog, string $attemptId, string $payload): array
+    {
+        $relativePath = 'artifacts/reports/MBTI/'.$attemptId.'/report.json';
+        Storage::disk('local')->put($relativePath, $payload);
+
+        $bytes = (string) Storage::disk('local')->get($relativePath);
+        $hash = hash('sha256', $bytes);
+        $blobCatalog->upsertBlob([
+            'hash' => $hash,
+            'disk' => 'local',
+            'storage_path' => $blobCatalog->storagePathForHash($hash),
+            'size_bytes' => strlen($bytes),
+            'content_type' => 'application/json',
+            'encoding' => 'identity',
+            'ref_count' => 0,
+            'last_verified_at' => now(),
+        ]);
+
+        return [
+            'hash' => $hash,
+            'bytes' => $bytes,
+        ];
+    }
+
+    private function localOffloadPathForHash(string $hash): string
+    {
+        return 'offload/blobs/sha256/'.substr($hash, 0, 2).'/'.$hash;
+    }
+
+    private function seedVerifiedRemoteCopyLocation(string $hash, string $disk, string $storagePath, string $bytes, string $driver): void
+    {
+        StorageBlobLocation::query()->create([
+            'blob_hash' => $hash,
+            'disk' => $disk,
+            'storage_path' => $storagePath,
+            'location_kind' => 'remote_copy',
+            'size_bytes' => strlen($bytes),
+            'checksum' => 'sha256:'.hash('sha256', $bytes),
+            'etag' => null,
+            'storage_class' => $disk === 's3' ? 'STANDARD_IA' : null,
+            'verified_at' => now(),
+            'meta_json' => [
+                'driver' => $driver,
+                'source_kind' => 'seeded_test_fixture',
+                'verified_checksum_sha256' => hash('sha256', $bytes),
+            ],
+        ]);
     }
 
     private function remotePathForHash(string $hash): string
