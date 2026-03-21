@@ -76,6 +76,12 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('status', 'purchased')
             ->assertJsonPath('private_relationship_v1.access_state', 'private_access_ready')
+            ->assertJsonPath('private_relationship_journey_v1.journey_contract_version', 'private_relationship_journey.v1')
+            ->assertJsonPath('private_relationship_journey_v1.journey_scope', 'private_relationship_revisit')
+            ->assertJsonPath('private_relationship_journey_v1.journey_state', 'ready_for_first_step')
+            ->assertJsonPath('private_relationship_journey_v1.progress_state', 'not_started')
+            ->assertJsonPath('dyadic_pulse_check_v1.pulse_contract_version', 'dyadic_pulse_check.v1')
+            ->assertJsonPath('dyadic_pulse_check_v1.pulse_state', 'start_shared_practice')
             ->assertJsonPath('private_relationship_v1.participant_role', 'invitee')
             ->assertJsonPath('dyadic_consent_v1.consent_state', 'purchased')
             ->assertJsonPath('dyadic_consent_v1.access_state', 'private_access_ready')
@@ -101,6 +107,14 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
             'X-Anon-Id' => $outsiderAnonId,
         ])->postJson("/api/v0.3/me/relationships/mbti/{$inviteId}/consent", [
             'action' => 'revoke_access',
+        ])->assertNotFound()
+            ->assertJsonPath('error_code', 'PRIVATE_RELATIONSHIP_NOT_FOUND');
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$outsiderToken,
+            'X-Anon-Id' => $outsiderAnonId,
+        ])->postJson("/api/v0.3/me/relationships/mbti/{$inviteId}/journey", [
+            'action' => 'continue_dyadic_action',
         ])->assertNotFound()
             ->assertJsonPath('error_code', 'PRIVATE_RELATIONSHIP_NOT_FOUND');
     }
@@ -136,6 +150,17 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
             ]);
 
         $this->withHeaders([
+            'Authorization' => 'Bearer '.$inviteeToken,
+            'X-Anon-Id' => $inviteeAnonId,
+        ])->postJson("/api/v0.3/me/relationships/mbti/{$inviteId}/journey", [
+            'action' => 'continue_dyadic_action',
+        ])->assertOk()
+            ->assertJsonPath('private_relationship_journey_v1.journey_state', 'practice_started')
+            ->assertJsonPath('private_relationship_journey_v1.progress_state', 'warming_up')
+            ->assertJsonPath('private_relationship_journey_v1.last_dyadic_pulse_signal', 'continue_dyadic_action')
+            ->assertJsonPath('dyadic_pulse_check_v1.pulse_state', 'repeat_shared_practice');
+
+        $this->withHeaders([
             'Authorization' => 'Bearer '.$inviterToken,
             'X-Anon-Id' => $inviterAnonId,
         ])->postJson("/api/v0.3/me/relationships/mbti/{$inviteId}/consent", [
@@ -144,8 +169,21 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
             ->assertJsonPath('dyadic_consent_v1.revocation_state', 'revoked_by_subject')
             ->assertJsonPath('dyadic_consent_v1.access_state', 'private_access_revoked')
             ->assertJsonPath('private_relationship_v1.access_state', 'private_access_revoked')
+            ->assertJsonPath('private_relationship_journey_v1.journey_state', 'access_revoked')
+            ->assertJsonPath('private_relationship_journey_v1.progress_state', 'restricted')
             ->assertJsonCount(0, 'private_relationship_v1.private_sync_sections')
-            ->assertJsonMissingPath('private_relationship_v1.private_action_prompt.key');
+            ->assertJsonMissingPath('private_relationship_v1.private_action_prompt.key')
+            ->assertJsonMissingPath('dyadic_pulse_check_v1.pulse_state');
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$inviteeToken,
+            'X-Anon-Id' => $inviteeAnonId,
+        ])->postJson("/api/v0.3/me/relationships/mbti/{$inviteId}/journey", [
+            'action' => 'continue_dyadic_action',
+        ])->assertOk()
+            ->assertJsonPath('private_relationship_journey_v1.journey_state', 'access_revoked')
+            ->assertJsonPath('private_relationship_journey_v1.progress_state', 'restricted')
+            ->assertJsonMissingPath('dyadic_pulse_check_v1.pulse_state');
 
         $this->withHeaders([
             'Authorization' => 'Bearer '.$inviteeToken,
@@ -166,6 +204,14 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
                         'expires_at' => now()->subMinute()->toISOString(),
                         'consent_policy_version' => '2025-01-01',
                     ],
+                    'private_relationship_journey_v1' => [
+                        'journey_state' => 'practice_started',
+                        'progress_state' => 'warming_up',
+                        'completed_dyadic_action_keys' => ['dyadic_action.name_decision_rule'],
+                        'last_dyadic_pulse_signal' => 'continue_dyadic_action',
+                        'pulse_feedback_mode' => 'protected_dyadic_ack',
+                        'revisit_reorder_reason' => 'activate_first_dyadic_step',
+                    ],
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             ]);
 
@@ -177,7 +223,10 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
             ->assertJsonPath('dyadic_consent_v1.expiry_state', 'expired')
             ->assertJsonPath('dyadic_consent_v1.access_state', 'private_access_expired')
             ->assertJsonPath('dyadic_consent_v1.consent_refresh_required', true)
-            ->assertJsonCount(0, 'private_relationship_v1.private_sync_sections');
+            ->assertJsonCount(0, 'private_relationship_v1.private_sync_sections')
+            ->assertJsonPath('private_relationship_journey_v1.journey_state', 'revisit_after_consent_refresh')
+            ->assertJsonPath('private_relationship_journey_v1.progress_state', 'restricted')
+            ->assertJsonPath('dyadic_pulse_check_v1.pulse_state', 'refresh_private_access');
 
         $refresh = $this->withHeaders([
             'Authorization' => 'Bearer '.$inviteeToken,
@@ -195,8 +244,12 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
         $row = DB::table('mbti_compare_invites')->where('id', $inviteId)->first();
         $meta = is_object($row) ? (array) json_decode((string) ($row->meta_json ?? '{}'), true) : [];
         $overlay = is_array($meta['dyadic_consent_lifecycle_v1'] ?? null) ? $meta['dyadic_consent_lifecycle_v1'] : [];
+        $journeyOverlay = is_array($meta['private_relationship_journey_v1'] ?? null) ? $meta['private_relationship_journey_v1'] : [];
         $this->assertSame('active', (string) ($overlay['expiry_state'] ?? ''));
         $this->assertNotNull($overlay['acknowledged_at'] ?? null);
+        $this->assertSame('practice_started', (string) ($journeyOverlay['journey_state'] ?? ''));
+        $this->assertSame('warming_up', (string) ($journeyOverlay['progress_state'] ?? ''));
+        $this->assertSame('continue_dyadic_action', (string) ($journeyOverlay['last_dyadic_pulse_signal'] ?? ''));
     }
 
     private function seedScales(): void

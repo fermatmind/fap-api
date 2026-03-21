@@ -125,6 +125,8 @@ Route::prefix('v0.3')->middleware([
             ->middleware('uuid:inviteId');
         Route::post('/me/relationships/mbti/{inviteId}/consent', [MbtiCompareInviteController::class, 'mutatePrivateConsent'])
             ->middleware('uuid:inviteId');
+        Route::post('/me/relationships/mbti/{inviteId}/journey', [MbtiCompareInviteController::class, 'mutatePrivateJourney'])
+            ->middleware('uuid:inviteId');
     });
 
     Route::middleware([

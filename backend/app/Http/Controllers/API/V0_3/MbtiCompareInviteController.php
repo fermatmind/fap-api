@@ -55,4 +55,20 @@ final class MbtiCompareInviteController extends Controller
 
         return response()->json(array_merge(['ok' => true], $result));
     }
+
+    public function mutatePrivateJourney(Request $request, string $inviteId): JsonResponse
+    {
+        $validated = $request->validate([
+            'action' => ['required', 'string', Rule::in(['continue_dyadic_action', 'acknowledge_dyadic_pulse'])],
+        ]);
+
+        $result = $this->service->mutatePrivateJourney(
+            $inviteId,
+            $request->attributes->get('user_id'),
+            $request->attributes->get('anon_id'),
+            $validated
+        );
+
+        return response()->json(array_merge(['ok' => true], $result));
+    }
 }
