@@ -13,6 +13,7 @@ use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\InsightGraph\InsightGraphContractService;
 use App\Services\InsightGraph\PartnerReadContractService;
+use App\Services\InsightGraph\WidgetSurfaceContractService;
 use App\Services\PublicSurface\PublicSurfaceContractService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportComposer;
@@ -37,6 +38,7 @@ class ShareService
         private readonly PublicSurfaceContractService $publicSurfaceContractService,
         private readonly InsightGraphContractService $insightGraphContractService,
         private readonly PartnerReadContractService $partnerReadContractService,
+        private readonly WidgetSurfaceContractService $widgetSurfaceContractService,
     ) {}
 
     public function getOrCreateShare(string $attemptId, OrgContext $ctx): array
@@ -820,6 +822,11 @@ class ShareService
         );
         $payload['partner_read_v1'] = $this->partnerReadContractService->buildForPublicShare(
             is_array($payload['insight_graph_v1'] ?? null) ? $payload['insight_graph_v1'] : [],
+            is_array($payload['public_surface_v1'] ?? null) ? $payload['public_surface_v1'] : []
+        );
+        $payload['widget_surface_v1'] = $this->widgetSurfaceContractService->buildForPublicShare(
+            is_array($payload['embed_surface_v1'] ?? null) ? $payload['embed_surface_v1'] : [],
+            is_array($payload['partner_read_v1'] ?? null) ? $payload['partner_read_v1'] : [],
             is_array($payload['public_surface_v1'] ?? null) ? $payload['public_surface_v1'] : []
         );
 
