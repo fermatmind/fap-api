@@ -63,19 +63,37 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
 
         $this->assertSame('storage_control_plane_status.v1', $payload['schema_version']);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
+        $this->assertSame('fresh', data_get($payload, 'inventory.freshness_state'));
+        $this->assertSame('audit-derived', data_get($payload, 'inventory.freshness_source_type'));
+        $this->assertIsString(data_get($payload, 'inventory.last_updated_at'));
+        $this->assertIsInt(data_get($payload, 'inventory.freshness_age_seconds'));
+        $this->assertSame('fresh', data_get($payload, 'retention.scopes.reports_backups.freshness_state'));
+        $this->assertSame('mixed-derived', data_get($payload, 'retention.scopes.reports_backups.freshness_source_type'));
         $this->assertSame(['reports', 'artifacts'], data_get($payload, 'inventory.focus_scopes'));
         $this->assertSame(1, data_get($payload, 'blob_coverage.counts.storage_blobs'));
         $this->assertSame(1, data_get($payload, 'blob_coverage.counts.verified_storage_blob_locations_by_disk.s3'));
+        $this->assertSame('fresh', data_get($payload, 'blob_coverage.blob_gc.freshness_state'));
+        $this->assertSame('fresh', data_get($payload, 'blob_coverage.blob_offload.freshness_state'));
         $this->assertSame(1, data_get($payload, 'exact_authority.counts.content_release_exact_manifests'));
         $this->assertSame(1, data_get($payload, 'exact_authority.counts.content_release_exact_manifest_files'));
+        $this->assertSame('fresh', data_get($payload, 'exact_authority.latest_backfill.freshness_state'));
+        $this->assertSame('audit-derived', data_get($payload, 'exact_authority.latest_backfill.freshness_source_type'));
+        $this->assertSame('fresh', data_get($payload, 'rehydrate.freshness_state'));
         $this->assertSame(1, data_get($payload, 'quarantine.item_root_count'));
+        $this->assertSame('fresh', data_get($payload, 'quarantine.freshness_state'));
         $this->assertSame(1, data_get($payload, 'restore.restore_run_count'));
+        $this->assertSame('fresh', data_get($payload, 'restore.freshness_state'));
         $this->assertSame(1, data_get($payload, 'purge.purge_receipt_count'));
+        $this->assertSame('fresh', data_get($payload, 'purge.freshness_state'));
         $this->assertSame('ok', data_get($payload, 'retirement.actions.quarantine.status'));
         $this->assertSame('ok', data_get($payload, 'retirement.actions.purge.status'));
+        $this->assertSame('fresh', data_get($payload, 'retirement.actions.quarantine.freshness_state'));
+        $this->assertSame('fresh', data_get($payload, 'retirement.actions.purge.freshness_state'));
         $this->assertTrue((bool) data_get($payload, 'runtime_truth.resolver_materialization_enabled'));
         $this->assertFalse((bool) data_get($payload, 'runtime_truth.packs_v2_remote_rehydrate_enabled'));
         $this->assertSame('materialization_enabled_only', data_get($payload, 'runtime_truth.v2_readiness'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
+        $this->assertSame('config-derived', data_get($payload, 'runtime_truth.freshness_source_type'));
         $this->assertSame([
             'storage:inventory',
             'storage:prune',
@@ -86,6 +104,8 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
             'storage:quarantine-exact-roots',
             'storage:retire-exact-roots',
         ], data_get($payload, 'automation_readiness.auto_dry_run_ok'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
+        $this->assertSame('config-derived', data_get($payload, 'automation_readiness.freshness_source_type'));
 
         $this->assertSame($auditCountBefore, DB::table('audit_logs')->count());
         $this->assertSame($filesBefore, $this->storageFilesSnapshot());
@@ -96,16 +116,31 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
         $payload = app(StorageControlPlaneStatusService::class)->buildStatus();
 
         $this->assertSame('not_available', data_get($payload, 'inventory.status'));
+        $this->assertSame('not_available', data_get($payload, 'inventory.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'retention.status'));
+        $this->assertSame('never_run', data_get($payload, 'retention.scopes.reports_backups.freshness_state'));
+        $this->assertSame('never_run', data_get($payload, 'retention.scopes.content_releases_retention.freshness_state'));
+        $this->assertSame('never_run', data_get($payload, 'retention.scopes.legacy_private_private_cleanup.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'blob_coverage.blob_gc.status'));
+        $this->assertSame('never_run', data_get($payload, 'blob_coverage.blob_gc.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'blob_coverage.blob_offload.status'));
+        $this->assertSame('never_run', data_get($payload, 'blob_coverage.blob_offload.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'exact_authority.latest_backfill.status'));
+        $this->assertSame('never_run', data_get($payload, 'exact_authority.latest_backfill.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'rehydrate.status'));
+        $this->assertSame('never_run', data_get($payload, 'rehydrate.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'quarantine.status'));
+        $this->assertSame('never_run', data_get($payload, 'quarantine.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'restore.status'));
+        $this->assertSame('never_run', data_get($payload, 'restore.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'purge.status'));
+        $this->assertSame('never_run', data_get($payload, 'purge.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'retirement.actions.quarantine.status'));
+        $this->assertSame('never_run', data_get($payload, 'retirement.actions.quarantine.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'retirement.actions.purge.status'));
+        $this->assertSame('never_run', data_get($payload, 'retirement.actions.purge.freshness_state'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
     }
 
     private function seedControlPlaneTruth(): void

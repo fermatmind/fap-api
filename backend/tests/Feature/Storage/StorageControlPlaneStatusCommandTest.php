@@ -86,7 +86,19 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertArrayHasKey('runtime_truth', $payload);
         $this->assertArrayHasKey('automation_readiness', $payload);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
+        $this->assertArrayHasKey('last_updated_at', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_age_seconds', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_state', $payload['inventory']);
+        $this->assertArrayHasKey('freshness_source_type', $payload['inventory']);
+        $this->assertArrayHasKey('last_updated_at', data_get($payload, 'retention.scopes.reports_backups', []));
+        $this->assertArrayHasKey('freshness_age_seconds', data_get($payload, 'retention.scopes.reports_backups', []));
+        $this->assertArrayHasKey('freshness_state', data_get($payload, 'retention.scopes.reports_backups', []));
+        $this->assertArrayHasKey('freshness_source_type', data_get($payload, 'retention.scopes.reports_backups', []));
         $this->assertSame('remote_rehydrate_enabled', data_get($payload, 'runtime_truth.v2_readiness'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
+        $this->assertSame('config-derived', data_get($payload, 'runtime_truth.freshness_source_type'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
+        $this->assertSame('config-derived', data_get($payload, 'automation_readiness.freshness_source_type'));
 
         $this->assertSame($auditCountBefore, DB::table('audit_logs')->count());
         $this->assertSame($filesBefore, $this->storageFilesSnapshot());
