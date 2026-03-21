@@ -123,6 +123,8 @@ Route::prefix('v0.3')->middleware([
         Route::get('/me/attempts', [MeV03Controller::class, 'attempts']);
         Route::get('/me/relationships/mbti/{inviteId}', [MbtiCompareInviteController::class, 'showPrivate'])
             ->middleware('uuid:inviteId');
+        Route::post('/me/relationships/mbti/{inviteId}/consent', [MbtiCompareInviteController::class, 'mutatePrivateConsent'])
+            ->middleware('uuid:inviteId');
     });
 
     Route::middleware([

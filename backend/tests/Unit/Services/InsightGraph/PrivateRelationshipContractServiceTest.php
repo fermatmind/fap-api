@@ -87,14 +87,25 @@ final class PrivateRelationshipContractServiceTest extends TestCase
             $invite,
             'purchased',
             'private_access_ready',
-            'share_compare_invite_purchased'
+            'share_compare_invite_purchased',
+            '2026-01-01',
+            [
+                'revocation_state' => 'active',
+                'expiry_state' => 'active',
+                'consent_refresh_required' => false,
+                'private_relationship_access_version' => 'private.relationship.access.v1',
+                'consent_policy_version' => '2026-01-01',
+            ]
         );
 
         $this->assertSame('private_relationship_protected', $consent['consent_scope']);
         $this->assertSame('purchased', $consent['consent_state']);
-        $this->assertSame('not_supported_yet', $consent['revocation_state']);
-        $this->assertSame('not_enforced_yet', $consent['expiry_state']);
+        $this->assertSame('active', $consent['revocation_state']);
+        $this->assertSame('active', $consent['expiry_state']);
         $this->assertSame('dyadic.consent.v1', $consent['consent_artifact_version']);
+        $this->assertSame('private.relationship.access.v1', $consent['private_relationship_access_version']);
+        $this->assertFalse($consent['consent_refresh_required']);
+        $this->assertNotSame('', (string) ($consent['consent_fingerprint'] ?? ''));
 
         $graph = $service->buildProtectedGraph($relationship);
 
