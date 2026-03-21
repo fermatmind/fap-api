@@ -75,6 +75,7 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
         $this->assertSame('storage_control_plane_snapshot.v1', $payload['snapshot_schema']);
         $this->assertSame('snapshotted', $payload['status']);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
+        $this->assertArrayHasKey('attention_digest', $payload);
         $this->assertArrayHasKey('last_updated_at', $payload['inventory']);
         $this->assertArrayHasKey('freshness_age_seconds', $payload['inventory']);
         $this->assertArrayHasKey('freshness_state', $payload['inventory']);
@@ -82,6 +83,10 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
         $this->assertSame('remote_rehydrate_enabled', data_get($payload, 'runtime_truth.v2_readiness'));
+        $this->assertSame('attention_required', data_get($payload, 'attention_digest.overall_state'));
+        $this->assertContains('retention.scopes.reports_backups', data_get($payload, 'attention_digest.never_run_sections', []));
+        $this->assertContains('rehydrate', data_get($payload, 'attention_digest.never_run_sections', []));
+        $this->assertSame([], data_get($payload, 'attention_digest.not_available_sections'));
         $this->assertFileExists((string) $payload['snapshot_path']);
         $this->assertSame($auditCountBefore + 1, DB::table('audit_logs')->count());
         $this->assertDatabaseHas('audit_logs', [

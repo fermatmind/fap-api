@@ -27,7 +27,7 @@ final class StorageControlPlaneStatusService
      */
     public function buildStatus(): array
     {
-        return [
+        $payload = [
             'schema_version' => self::SCHEMA_VERSION,
             'generated_at' => now()->toIso8601String(),
             'inventory' => $this->inventorySection(),
@@ -42,6 +42,10 @@ final class StorageControlPlaneStatusService
             'runtime_truth' => $this->runtimeTruthSection(),
             'automation_readiness' => $this->automationReadinessSection(),
         ];
+
+        $payload['attention_digest'] = $this->buildAttentionDigest($payload);
+
+        return $payload;
     }
 
     /**
@@ -532,6 +536,97 @@ final class StorageControlPlaneStatusService
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function buildAttentionDigest(array $payload): array
+    {
+        $staleSections = [];
+        $neverRunSections = [];
+        $notAvailableSections = [];
+        $attentionItems = [];
+
+        foreach ($this->attentionDigestDescriptors() as $descriptor) {
+            $node = data_get($payload, $descriptor['path']);
+            if (! is_array($node)) {
+                continue;
+            }
+
+            $state = (string) ($node['freshness_state'] ?? '');
+            if (! in_array($state, ['stale', 'never_run', 'not_available'], true)) {
+                continue;
+            }
+
+            if ($state === 'stale') {
+                $staleSections[] = $descriptor['path'];
+            } elseif ($state === 'never_run') {
+                $neverRunSections[] = $descriptor['path'];
+            } else {
+                $notAvailableSections[] = $descriptor['path'];
+            }
+
+            $attentionItems[] = [
+                'path' => $descriptor['path'],
+                'freshness_state' => $state,
+                'last_updated_at' => $node['last_updated_at'] ?? null,
+                'message' => $this->attentionDigestMessage($descriptor['label'], $state),
+            ];
+        }
+
+        $overallState = match (true) {
+            $notAvailableSections !== [] => 'degraded',
+            $staleSections !== [] || $neverRunSections !== [] => 'attention_required',
+            default => 'healthy',
+        };
+
+        return [
+            'overall_state' => $overallState,
+            'stale_sections' => $staleSections,
+            'never_run_sections' => $neverRunSections,
+            'not_available_sections' => $notAvailableSections,
+            'attention_items' => $attentionItems,
+            'counts' => [
+                'stale' => count($staleSections),
+                'never_run' => count($neverRunSections),
+                'not_available' => count($notAvailableSections),
+            ],
+        ];
+    }
+
+    /**
+     * @return list<array{path:string,label:string}>
+     */
+    private function attentionDigestDescriptors(): array
+    {
+        return [
+            ['path' => 'inventory', 'label' => 'inventory'],
+            ['path' => 'retention.scopes.reports_backups', 'label' => 'reports backups retention dry-run'],
+            ['path' => 'retention.scopes.content_releases_retention', 'label' => 'content releases retention dry-run'],
+            ['path' => 'retention.scopes.legacy_private_private_cleanup', 'label' => 'legacy private cleanup dry-run'],
+            ['path' => 'blob_coverage.blob_gc', 'label' => 'blob gc dry-run'],
+            ['path' => 'blob_coverage.blob_offload', 'label' => 'blob offload dry-run'],
+            ['path' => 'exact_authority.latest_backfill', 'label' => 'exact authority backfill'],
+            ['path' => 'rehydrate', 'label' => 'rehydrate'],
+            ['path' => 'quarantine', 'label' => 'quarantine'],
+            ['path' => 'restore', 'label' => 'restore'],
+            ['path' => 'purge', 'label' => 'purge'],
+            ['path' => 'retirement.actions.quarantine', 'label' => 'retirement quarantine action'],
+            ['path' => 'retirement.actions.purge', 'label' => 'retirement purge action'],
+            ['path' => 'runtime_truth', 'label' => 'runtime truth'],
+            ['path' => 'automation_readiness', 'label' => 'automation readiness'],
+        ];
+    }
+
+    private function attentionDigestMessage(string $label, string $state): string
+    {
+        return match ($state) {
+            'stale' => $label.' is stale',
+            'not_available' => $label.' is not available',
+            default => $label.' has never run',
+        };
     }
 
     private function latestAuditForAction(string $action, ?callable $filter = null): ?object
