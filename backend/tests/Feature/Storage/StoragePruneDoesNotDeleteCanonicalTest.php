@@ -96,4 +96,62 @@ final class StoragePruneDoesNotDeleteCanonicalTest extends TestCase
         $this->assertFileDoesNotExist($this->attemptDir.'/report.20260222_123456.json');
         $this->assertFileExists($this->attemptDir.'/report.20260222.json');
     }
+
+    public function test_prune_respects_reports_backup_retention_window_without_touching_canonical_files(): void
+    {
+        config()->set('storage_retention.reports.keep_days', 7);
+        config()->set('storage_retention.reports.keep_timestamp_backups', 1);
+
+        $oldBackup = $this->attemptDir.'/report.20260101_010101.json';
+        $recentBackup = $this->attemptDir.'/report.20260321_010101.json';
+        $newestBackup = $this->attemptDir.'/report.20260321_020202.json';
+
+        File::put($oldBackup, json_encode(['ok' => true, 'kind' => 'old'], JSON_UNESCAPED_UNICODE));
+        File::put($recentBackup, json_encode(['ok' => true, 'kind' => 'recent'], JSON_UNESCAPED_UNICODE));
+        File::put($newestBackup, json_encode(['ok' => true, 'kind' => 'newest'], JSON_UNESCAPED_UNICODE));
+
+        touch($oldBackup, now()->subDays(30)->getTimestamp());
+        touch($recentBackup, now()->subDays(2)->getTimestamp());
+        touch($newestBackup, now()->subDay()->getTimestamp());
+
+        $this->artisan('storage:prune --dry-run --scope=reports_backups')
+            ->assertExitCode(0);
+
+        $latestPlan = $this->latestGeneratedPlanPath();
+        $this->assertIsString($latestPlan);
+        $this->assertTrue(is_file($latestPlan));
+
+        $plan = json_decode((string) file_get_contents($latestPlan), true);
+        $this->assertIsArray($plan);
+        $this->assertSame([
+            [
+                'path' => 'reports/'.$this->attemptId.'/report.20260101_010101.json',
+                'bytes' => filesize($oldBackup),
+            ],
+        ], $plan['files'] ?? []);
+
+        $this->artisan('storage:prune --execute --scope=reports_backups --plan='.$latestPlan)
+            ->assertExitCode(0);
+
+        $this->assertFileExists($this->attemptDir.'/report.json');
+        $this->assertFileDoesNotExist($oldBackup);
+        $this->assertFileExists($recentBackup);
+        $this->assertFileExists($newestBackup);
+        $this->assertFileExists($this->attemptDir.'/report.20260222.json');
+    }
+
+    private function latestGeneratedPlanPath(): ?string
+    {
+        $currentPlans = glob(storage_path('app/private/prune_plans/*.json')) ?: [];
+        $newPlans = array_values(array_diff($currentPlans, $this->preExistingPlans));
+        if ($newPlans === []) {
+            return null;
+        }
+
+        usort($newPlans, static fn (string $a, string $b): int => filemtime($a) <=> filemtime($b));
+
+        $latestPlan = end($newPlans);
+
+        return is_string($latestPlan) ? $latestPlan : null;
+    }
 }

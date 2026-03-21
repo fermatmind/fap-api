@@ -323,10 +323,48 @@ final class StoragePrune extends Command
             $items[] = [
                 'path' => $relPath,
                 'bytes' => max(0, (int) ($file->getSize() ?: 0)),
+                'mtime' => max(0, (int) ($file->getMTime() ?: 0)),
+                'group' => dirname($relPath),
             ];
         }
 
+        $keepTimestampBackups = max(0, (int) config('storage_retention.reports.keep_timestamp_backups', 0));
+        $keepDays = max(0, (int) config('storage_retention.reports.keep_days', 0));
+        $threshold = now()->subDays($keepDays)->getTimestamp();
+
+        $protectedPaths = [];
+        if ($keepTimestampBackups > 0) {
+            $grouped = [];
+            foreach ($items as $item) {
+                $grouped[$item['group']][] = $item;
+            }
+
+            foreach ($grouped as $groupItems) {
+                usort($groupItems, static fn (array $a, array $b): int => ($b['mtime'] <=> $a['mtime']) ?: strcmp($a['path'], $b['path']));
+                foreach (array_slice($groupItems, 0, $keepTimestampBackups) as $protectedItem) {
+                    $protectedPaths[$protectedItem['path']] = true;
+                }
+            }
+        }
+
+        $items = array_values(array_filter($items, static function (array $item) use ($keepDays, $protectedPaths, $threshold): bool {
+            if (isset($protectedPaths[$item['path']])) {
+                return false;
+            }
+
+            if ($keepDays > 0 && $item['mtime'] >= $threshold) {
+                return false;
+            }
+
+            return true;
+        }));
+
         usort($items, static fn (array $a, array $b): int => strcmp($a['path'], $b['path']));
+
+        $items = array_map(static fn (array $item): array => [
+            'path' => $item['path'],
+            'bytes' => $item['bytes'],
+        ], $items);
 
         return $items;
     }
