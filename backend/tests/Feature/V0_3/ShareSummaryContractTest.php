@@ -92,6 +92,16 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame('embed.surface.v1', $response->json('embed_surface_v1.version'));
         $this->assertSame('mbti_share_embed_card', $response->json('embed_surface_v1.surface_key'));
         $this->assertSame('growth.next_actions', $response->json('embed_surface_v1.continue_target'));
+        $this->assertSame('widget.surface.v1', $response->json('widget_surface_v1.version'));
+        $this->assertSame('public_share_safe', $response->json('widget_surface_v1.widget_scope'));
+        $this->assertSame('widget.surface.v1', $response->json('widget_surface_v1.widget_contract_version'));
+        $this->assertSame('card', $response->json('widget_surface_v1.host_mode'));
+        $this->assertSame('public_share_primary', $response->json('widget_surface_v1.slot_key'));
+        $this->assertSame('summary_card', $response->json('widget_surface_v1.size_preset'));
+        $this->assertSame('mbti_share_embed_card', $response->json('widget_surface_v1.surface_key'));
+        $this->assertSame('share_public_surface', $response->json('widget_surface_v1.attribution_scope'));
+        $this->assertContains('comparative', (array) $response->json('widget_surface_v1.allowed_node_ids'));
+        $this->assertContains('continues_to', (array) $response->json('widget_surface_v1.allowed_edge_types'));
         $this->assertSame('partner.read.v1', $response->json('partner_read_v1.version'));
         $this->assertSame('public_share_safe', $response->json('partner_read_v1.graph_scope'));
         $this->assertSame('partner_public_read', $response->json('partner_read_v1.read_scope'));
@@ -175,6 +185,7 @@ final class ShareSummaryContractTest extends TestCase
             'public_surface_v1',
             'insight_graph_v1',
             'embed_surface_v1',
+            'widget_surface_v1',
             'partner_read_v1',
         ] as $key) {
             $this->assertSame($share->json($key), $view->json($key), "share field mismatch: {$key}");
@@ -232,6 +243,12 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('insight_graph_v1.graph_scope', 'public_share_safe')
             ->assertJsonPath('embed_surface_v1.version', 'embed.surface.v1')
             ->assertJsonPath('embed_surface_v1.surface_key', 'big5_share_embed_card')
+            ->assertJsonPath('widget_surface_v1.version', 'widget.surface.v1')
+            ->assertJsonPath('widget_surface_v1.widget_scope', 'public_share_safe')
+            ->assertJsonPath('widget_surface_v1.surface_key', 'big5_share_embed_card')
+            ->assertJsonPath('widget_surface_v1.host_mode', 'card')
+            ->assertJsonPath('widget_surface_v1.slot_key', 'public_share_primary')
+            ->assertJsonPath('widget_surface_v1.size_preset', 'summary_card')
             ->assertJsonPath('partner_read_v1.version', 'partner.read.v1')
             ->assertJsonPath('partner_read_v1.graph_scope', 'public_share_safe')
             ->assertJsonPath('partner_read_v1.read_scope', 'partner_public_read')
