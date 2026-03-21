@@ -31,11 +31,14 @@ final class StorageControlPlaneStatusService
      */
     public function buildStatus(): array
     {
+        $inventory = $this->inventorySection();
+
         $payload = [
             'schema_version' => self::SCHEMA_VERSION,
             'generated_at' => now()->toIso8601String(),
-            'inventory' => $this->inventorySection(),
+            'inventory' => $inventory,
             'retention' => $this->retentionSection(),
+            'reports_artifacts_lifecycle' => $this->reportsArtifactsLifecycleSection($inventory),
             'blob_coverage' => $this->blobCoverageSection(),
             'exact_authority' => $this->exactAuthoritySection(),
             'rehydrate' => $this->rehydrateSection(),
@@ -158,6 +161,72 @@ final class StorageControlPlaneStatusService
             'configured_scopes' => array_keys($configuredScopes),
             'scopes' => $scopes,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $inventory
+     * @return array<string,mixed>
+     */
+    private function reportsArtifactsLifecycleSection(array $inventory): array
+    {
+        $canonicalRootPath = storage_path('app/private/artifacts');
+        $legacyRootPath = storage_path('app/private/reports');
+
+        $canonicalReportJson = $this->matchingFilesStats(
+            $canonicalRootPath,
+            static fn (string $relativePath): bool => str_starts_with($relativePath, 'reports/')
+                && str_ends_with($relativePath, '/report.json')
+        );
+        $canonicalPdf = $this->matchingFilesStats(
+            $canonicalRootPath,
+            static fn (string $relativePath): bool => str_starts_with($relativePath, 'pdf/')
+                && (str_ends_with($relativePath, '/report_free.pdf') || str_ends_with($relativePath, '/report_full.pdf'))
+        );
+        $legacyReportJson = $this->matchingFilesStats(
+            $legacyRootPath,
+            static fn (string $relativePath): bool => str_ends_with($relativePath, '/report.json') || $relativePath === 'report.json'
+        );
+        $legacyPdf = $this->matchingFilesStats(
+            $legacyRootPath,
+            static fn (string $relativePath): bool => str_ends_with($relativePath, '/report_free.pdf')
+                || str_ends_with($relativePath, '/report_full.pdf')
+                || in_array($relativePath, ['report_free.pdf', 'report_full.pdf'], true)
+        );
+        $timestampBackups = $this->matchingFilesStats(
+            $legacyRootPath,
+            static fn (string $relativePath): bool => preg_match('#(^|/)report\.\d{8}_\d{6}\.json$#', $relativePath) === 1
+        );
+
+        $latestInventoryGeneratedAt = $this->normalizeTimestamp($inventory['latest_generated_at'] ?? null);
+
+        return array_merge([
+            'status' => $latestInventoryGeneratedAt === null ? 'not_available' : 'ok',
+            'canonical_root_path' => $canonicalRootPath,
+            'legacy_root_path' => $legacyRootPath,
+            'canonical_user_output' => [
+                'report_json_files' => $canonicalReportJson['files'],
+                'pdf_files' => $canonicalPdf['files'],
+                'bytes' => $canonicalReportJson['bytes'] + $canonicalPdf['bytes'],
+            ],
+            'legacy_fallback_live' => [
+                'report_json_files' => $legacyReportJson['files'],
+                'pdf_files' => $legacyPdf['files'],
+                'bytes' => $legacyReportJson['bytes'] + $legacyPdf['bytes'],
+            ],
+            'safe_to_prune_derived' => [
+                'timestamp_backup_json_files' => $timestampBackups['files'],
+                'latest_reports_backups_policy' => [
+                    'keep_days' => (int) config('storage_retention.reports.keep_days', 0),
+                    'keep_timestamp_backups' => (int) config('storage_retention.reports.keep_timestamp_backups', 0),
+                ],
+            ],
+            'archive_candidate_status' => 'none_proven',
+        ], $this->freshnessFromTimestamp(
+            $latestInventoryGeneratedAt,
+            'audit-derived',
+            self::INVENTORY_STALE_AFTER_SECONDS,
+            'not_available'
+        ));
     }
 
     /**
@@ -693,6 +762,7 @@ final class StorageControlPlaneStatusService
             ['path' => 'retention.scopes.reports_backups', 'label' => 'reports backups retention dry-run'],
             ['path' => 'retention.scopes.content_releases_retention', 'label' => 'content releases retention dry-run'],
             ['path' => 'retention.scopes.legacy_private_private_cleanup', 'label' => 'legacy private cleanup dry-run'],
+            ['path' => 'reports_artifacts_lifecycle', 'label' => 'reports artifacts lifecycle'],
             ['path' => 'blob_coverage.blob_gc', 'label' => 'blob gc dry-run'],
             ['path' => 'blob_coverage.blob_offload', 'label' => 'blob offload dry-run'],
             ['path' => 'exact_authority.latest_backfill', 'label' => 'exact authority backfill'],
@@ -899,6 +969,51 @@ final class StorageControlPlaneStatusService
         return [
             'total_files' => $totalFiles,
             'total_bytes' => $totalBytes,
+        ];
+    }
+
+    /**
+     * @param  callable(string):bool  $matcher
+     * @return array{files:int,bytes:int}
+     */
+    private function matchingFilesStats(string $rootPath, callable $matcher): array
+    {
+        if (! is_dir($rootPath)) {
+            return [
+                'files' => 0,
+                'bytes' => 0,
+            ];
+        }
+
+        $files = 0;
+        $bytes = 0;
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($rootPath, \FilesystemIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $file) {
+            if (! $file->isFile()) {
+                continue;
+            }
+
+            $normalizedRootPath = rtrim(str_replace('\\', '/', $rootPath), '/');
+            $normalizedFilePath = str_replace('\\', '/', $file->getPathname());
+            $relativePath = ltrim((string) preg_replace(
+                '#^'.preg_quote($normalizedRootPath, '#').'/?#',
+                '',
+                $normalizedFilePath
+            ), '/');
+            if ($relativePath === '' || $matcher($relativePath) !== true) {
+                continue;
+            }
+
+            $files++;
+            $bytes += max(0, (int) ($file->getSize() ?: 0));
+        }
+
+        return [
+            'files' => $files,
+            'bytes' => $bytes,
         ];
     }
 

@@ -55,6 +55,7 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
     public function test_service_creates_snapshot_file_and_audit_without_other_mutation(): void
     {
         $this->seedMinimalTruth();
+        $lifecycleFiles = $this->seedReportsArtifactsLifecycleTruth();
         $bucket = [
             '.materialization.json' => json_encode([
                 'storage_path' => 'private/packs_v2/BIG5_OCEAN/v1/release-a',
@@ -83,6 +84,7 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertArrayHasKey('restore', $payload);
         $this->assertArrayHasKey('purge', $payload);
         $this->assertArrayHasKey('retirement', $payload);
+        $this->assertArrayHasKey('reports_artifacts_lifecycle', $payload);
         $this->assertArrayHasKey('materialized_cache', $payload);
         $this->assertArrayHasKey('cost_reclaim_posture', $payload);
         $this->assertArrayHasKey('runtime_truth', $payload);
@@ -100,6 +102,19 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertSame('never_run', data_get($payload, 'retention.scopes.reports_backups.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'restore.status'));
         $this->assertSame('never_run', data_get($payload, 'restore.freshness_state'));
+        $this->assertSame('ok', data_get($payload, 'reports_artifacts_lifecycle.status'));
+        $this->assertSame(storage_path('app/private/artifacts'), data_get($payload, 'reports_artifacts_lifecycle.canonical_root_path'));
+        $this->assertSame(storage_path('app/private/reports'), data_get($payload, 'reports_artifacts_lifecycle.legacy_root_path'));
+        $this->assertSame(1, data_get($payload, 'reports_artifacts_lifecycle.canonical_user_output.report_json_files'));
+        $this->assertSame(2, data_get($payload, 'reports_artifacts_lifecycle.canonical_user_output.pdf_files'));
+        $this->assertSame($lifecycleFiles['canonical_bytes'], data_get($payload, 'reports_artifacts_lifecycle.canonical_user_output.bytes'));
+        $this->assertSame(1, data_get($payload, 'reports_artifacts_lifecycle.legacy_fallback_live.report_json_files'));
+        $this->assertSame(2, data_get($payload, 'reports_artifacts_lifecycle.legacy_fallback_live.pdf_files'));
+        $this->assertSame($lifecycleFiles['legacy_bytes'], data_get($payload, 'reports_artifacts_lifecycle.legacy_fallback_live.bytes'));
+        $this->assertSame(1, data_get($payload, 'reports_artifacts_lifecycle.safe_to_prune_derived.timestamp_backup_json_files'));
+        $this->assertSame('none_proven', data_get($payload, 'reports_artifacts_lifecycle.archive_candidate_status'));
+        $this->assertSame('fresh', data_get($payload, 'reports_artifacts_lifecycle.freshness_state'));
+        $this->assertSame('audit-derived', data_get($payload, 'reports_artifacts_lifecycle.freshness_source_type'));
         $this->assertSame('ok', data_get($payload, 'materialized_cache.status'));
         $this->assertSame(storage_path('app/private/packs_v2_materialized'), data_get($payload, 'materialized_cache.root_path'));
         $this->assertSame(1, data_get($payload, 'materialized_cache.bucket_count'));
@@ -171,6 +186,21 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
 
         $this->assertSame('not_available', data_get($payload, 'inventory.status'));
         $this->assertSame('not_available', data_get($payload, 'inventory.freshness_state'));
+        $this->assertSame('not_available', data_get($payload, 'reports_artifacts_lifecycle.status'));
+        $this->assertSame(storage_path('app/private/artifacts'), data_get($payload, 'reports_artifacts_lifecycle.canonical_root_path'));
+        $this->assertSame(storage_path('app/private/reports'), data_get($payload, 'reports_artifacts_lifecycle.legacy_root_path'));
+        $this->assertSame(0, data_get($payload, 'reports_artifacts_lifecycle.canonical_user_output.report_json_files'));
+        $this->assertSame(0, data_get($payload, 'reports_artifacts_lifecycle.canonical_user_output.pdf_files'));
+        $this->assertSame(0, data_get($payload, 'reports_artifacts_lifecycle.canonical_user_output.bytes'));
+        $this->assertSame(0, data_get($payload, 'reports_artifacts_lifecycle.legacy_fallback_live.report_json_files'));
+        $this->assertSame(0, data_get($payload, 'reports_artifacts_lifecycle.legacy_fallback_live.pdf_files'));
+        $this->assertSame(0, data_get($payload, 'reports_artifacts_lifecycle.legacy_fallback_live.bytes'));
+        $this->assertSame(0, data_get($payload, 'reports_artifacts_lifecycle.safe_to_prune_derived.timestamp_backup_json_files'));
+        $this->assertSame('none_proven', data_get($payload, 'reports_artifacts_lifecycle.archive_candidate_status'));
+        $this->assertNull(data_get($payload, 'reports_artifacts_lifecycle.last_updated_at'));
+        $this->assertNull(data_get($payload, 'reports_artifacts_lifecycle.freshness_age_seconds'));
+        $this->assertSame('not_available', data_get($payload, 'reports_artifacts_lifecycle.freshness_state'));
+        $this->assertSame('audit-derived', data_get($payload, 'reports_artifacts_lifecycle.freshness_source_type'));
         $this->assertSame('never_run', data_get($payload, 'retention.status'));
         $this->assertSame('never_run', data_get($payload, 'retention.scopes.reports_backups.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'blob_coverage.blob_gc.status'));
@@ -203,7 +233,7 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertSame('disk-derived', data_get($payload, 'cost_reclaim_posture.freshness_source_type'));
         $this->assertNull($this->reclaimCategory($payload, 'v2_materialized_cache'));
         $this->assertSame('degraded', data_get($payload, 'attention_digest.overall_state'));
-        $this->assertSame(['inventory'], data_get($payload, 'attention_digest.not_available_sections'));
+        $this->assertSame(['inventory', 'reports_artifacts_lifecycle'], data_get($payload, 'attention_digest.not_available_sections'));
         $this->assertContains('quarantine', data_get($payload, 'attention_digest.never_run_sections', []));
     }
 
@@ -228,6 +258,12 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
             'result' => 'success',
             'created_at' => now(),
         ]);
+    }
+
+    private function writeRaw(string $path, string $contents): void
+    {
+        File::ensureDirectoryExists(dirname($path));
+        File::put($path, $contents);
     }
 
     /**
@@ -255,6 +291,41 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
     private function totalBytesForFiles(array $files): int
     {
         return array_sum(array_map(static fn (string $contents): int => strlen($contents), $files));
+    }
+
+    /**
+     * @return array{canonical_bytes:int,legacy_bytes:int}
+     */
+    private function seedReportsArtifactsLifecycleTruth(): array
+    {
+        $canonicalFiles = [
+            'app/private/artifacts/reports/MBTI/attempt-canonical/report.json' => '{"canonical":true}',
+            'app/private/artifacts/pdf/MBTI/attempt-canonical/nohash/report_free.pdf' => '%PDF-free',
+            'app/private/artifacts/pdf/MBTI/attempt-canonical/nohash/report_full.pdf' => '%PDF-full',
+        ];
+        $legacyFiles = [
+            'app/private/reports/attempt-legacy/report.json' => '{"legacy":true}',
+            'app/private/reports/attempt-legacy/report_free.pdf' => '%PDF-legacy-free',
+            'app/private/reports/attempt-legacy/report_full.pdf' => '%PDF-legacy-full',
+            'app/private/reports/attempt-legacy/report.20260321_010101.json' => '{"backup":true}',
+        ];
+
+        foreach ($canonicalFiles as $relativePath => $contents) {
+            $this->writeRaw(storage_path($relativePath), $contents);
+        }
+
+        foreach ($legacyFiles as $relativePath => $contents) {
+            $this->writeRaw(storage_path($relativePath), $contents);
+        }
+
+        return [
+            'canonical_bytes' => strlen($canonicalFiles['app/private/artifacts/reports/MBTI/attempt-canonical/report.json'])
+                + strlen($canonicalFiles['app/private/artifacts/pdf/MBTI/attempt-canonical/nohash/report_free.pdf'])
+                + strlen($canonicalFiles['app/private/artifacts/pdf/MBTI/attempt-canonical/nohash/report_full.pdf']),
+            'legacy_bytes' => strlen($legacyFiles['app/private/reports/attempt-legacy/report.json'])
+                + strlen($legacyFiles['app/private/reports/attempt-legacy/report_free.pdf'])
+                + strlen($legacyFiles['app/private/reports/attempt-legacy/report_full.pdf']),
+        ];
     }
 
     /**
