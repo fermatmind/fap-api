@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V0_4;
 
 use App\Http\Controllers\Controller;
 use App\Models\Assessment;
+use App\Services\Analytics\EventRecorder;
 use App\Services\Assessments\AssessmentService;
 use App\Services\Scale\ScaleCodeInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
@@ -21,6 +22,7 @@ class AssessmentController extends Controller
         private ScaleCodeInputGuard $inputGuard,
         private ScaleCodeResponseProjector $responseProjector,
         private OrgContext $orgContext,
+        private EventRecorder $events,
     ) {}
 
     /**
@@ -175,6 +177,22 @@ class AssessmentController extends Controller
         }
 
         $summary = $this->assessments->summary($assessment);
+
+        $teamDynamics = is_array($summary['team_dynamics_v1'] ?? null) ? $summary['team_dynamics_v1'] : null;
+        if ($teamDynamics !== null) {
+            $this->events->record('team_dynamics_summary_view', $this->resolveUserId($request), [
+                'assessment_id' => (int) $assessment->id,
+                'team_focus_key' => (string) ($teamDynamics['team_focus_key'] ?? ''),
+                'supporting_scales' => array_values((array) ($teamDynamics['supporting_scales'] ?? [])),
+                'team_member_count' => (int) ($teamDynamics['team_member_count'] ?? 0),
+                'analyzed_member_count' => (int) ($teamDynamics['analyzed_member_count'] ?? 0),
+                'version' => (string) ($teamDynamics['version'] ?? ''),
+                'workspace_scope' => (string) ($teamDynamics['workspace_scope'] ?? ''),
+            ], [
+                'org_id' => $orgId,
+                'scale_code' => (string) ($assessment->scale_code ?? ''),
+            ]);
+        }
 
         return response()->json([
             'ok' => true,
