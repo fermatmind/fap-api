@@ -106,6 +106,16 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
         ], data_get($payload, 'automation_readiness.auto_dry_run_ok'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
         $this->assertSame('config-derived', data_get($payload, 'automation_readiness.freshness_source_type'));
+        $this->assertSame('healthy', data_get($payload, 'attention_digest.overall_state'));
+        $this->assertSame([], data_get($payload, 'attention_digest.stale_sections'));
+        $this->assertSame([], data_get($payload, 'attention_digest.never_run_sections'));
+        $this->assertSame([], data_get($payload, 'attention_digest.not_available_sections'));
+        $this->assertSame([
+            'stale' => 0,
+            'never_run' => 0,
+            'not_available' => 0,
+        ], data_get($payload, 'attention_digest.counts'));
+        $this->assertSame([], data_get($payload, 'attention_digest.attention_items'));
 
         $this->assertSame($auditCountBefore, DB::table('audit_logs')->count());
         $this->assertSame($filesBefore, $this->storageFilesSnapshot());
@@ -141,6 +151,14 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
         $this->assertSame('never_run', data_get($payload, 'retirement.actions.purge.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
+        $this->assertSame('degraded', data_get($payload, 'attention_digest.overall_state'));
+        $this->assertSame(['inventory'], data_get($payload, 'attention_digest.not_available_sections'));
+        $this->assertContains('rehydrate', data_get($payload, 'attention_digest.never_run_sections', []));
+        $this->assertContains('retention.scopes.reports_backups', data_get($payload, 'attention_digest.never_run_sections', []));
+        $this->assertSame([], data_get($payload, 'attention_digest.stale_sections'));
+        $this->assertSame(1, data_get($payload, 'attention_digest.counts.not_available'));
+        $this->assertGreaterThan(0, (int) data_get($payload, 'attention_digest.counts.never_run'));
+        $this->assertSame('inventory is not available', data_get($payload, 'attention_digest.attention_items.0.message'));
     }
 
     private function seedControlPlaneTruth(): void
@@ -219,6 +237,20 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
             'generated_at' => $now->copy()->subMinutes(30)->toIso8601String(),
             'summary' => ['files' => 2, 'bytes' => 512],
         ]);
+        $this->writeJson(storage_path('app/private/prune_plans/20260321_content_releases_retention_seed.json'), [
+            'schema' => 'storage_prune_plan.v2',
+            'scope' => 'content_releases_retention',
+            'strategy' => 'strict',
+            'generated_at' => $now->copy()->subMinutes(25)->toIso8601String(),
+            'summary' => ['files' => 3, 'bytes' => 1024],
+        ]);
+        $this->writeJson(storage_path('app/private/prune_plans/20260321_legacy_private_private_cleanup_seed.json'), [
+            'schema' => 'storage_prune_plan.v2',
+            'scope' => 'legacy_private_private_cleanup',
+            'strategy' => 'strict',
+            'generated_at' => $now->copy()->subMinutes(20)->toIso8601String(),
+            'summary' => ['files' => 1, 'bytes' => 256],
+        ]);
 
         $this->writeJson(storage_path('app/private/quarantine/release_roots/run-1/items/item-1/root/.quarantine.json'), [
             'source_kind' => 'legacy.source_pack',
@@ -258,6 +290,24 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
             'skipped_files' => 0,
             'plan' => storage_path('app/private/prune_plans/20260321_reports_backups_seed.json'),
         ], 'success', 'retention_execute', $now->copy()->subHours(2));
+        $this->insertAudit('storage_prune', 'content_releases_retention', [
+            'scope' => 'content_releases_retention',
+            'strategy' => 'strict',
+            'deleted_files_count' => 0,
+            'deleted_bytes' => 0,
+            'missing_files' => 0,
+            'skipped_files' => 1,
+            'plan' => storage_path('app/private/prune_plans/20260321_content_releases_retention_seed.json'),
+        ], 'success', 'retention_execute', $now->copy()->subHours(2)->addMinutes(5));
+        $this->insertAudit('storage_prune', 'legacy_private_private_cleanup', [
+            'scope' => 'legacy_private_private_cleanup',
+            'strategy' => 'strict',
+            'deleted_files_count' => 0,
+            'deleted_bytes' => 0,
+            'missing_files' => 0,
+            'skipped_files' => 0,
+            'plan' => storage_path('app/private/prune_plans/20260321_legacy_private_private_cleanup_seed.json'),
+        ], 'success', 'retention_execute', $now->copy()->subHours(2)->addMinutes(10));
 
         $this->insertAudit('storage_blob_gc', 'blob_gc', [
             'schema' => 'storage_blob_gc_plan.v1',

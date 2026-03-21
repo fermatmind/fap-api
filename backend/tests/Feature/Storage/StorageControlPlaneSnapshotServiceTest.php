@@ -76,6 +76,7 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertArrayHasKey('retirement', $payload);
         $this->assertArrayHasKey('runtime_truth', $payload);
         $this->assertArrayHasKey('automation_readiness', $payload);
+        $this->assertArrayHasKey('attention_digest', $payload);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
         $this->assertArrayHasKey('last_updated_at', $payload['inventory']);
         $this->assertArrayHasKey('freshness_age_seconds', $payload['inventory']);
@@ -90,6 +91,10 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertSame('never_run', data_get($payload, 'restore.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
+        $this->assertSame('attention_required', data_get($payload, 'attention_digest.overall_state'));
+        $this->assertContains('rehydrate', data_get($payload, 'attention_digest.never_run_sections', []));
+        $this->assertContains('retention.scopes.reports_backups', data_get($payload, 'attention_digest.never_run_sections', []));
+        $this->assertSame([], data_get($payload, 'attention_digest.not_available_sections'));
 
         $audit = DB::table('audit_logs')
             ->where('action', 'storage_control_plane_snapshot')
@@ -133,6 +138,9 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertSame('never_run', data_get($payload, 'quarantine.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'retirement.actions.quarantine.status'));
         $this->assertSame('never_run', data_get($payload, 'retirement.actions.quarantine.freshness_state'));
+        $this->assertSame('degraded', data_get($payload, 'attention_digest.overall_state'));
+        $this->assertSame(['inventory'], data_get($payload, 'attention_digest.not_available_sections'));
+        $this->assertContains('quarantine', data_get($payload, 'attention_digest.never_run_sections', []));
     }
 
     private function seedMinimalTruth(): void
