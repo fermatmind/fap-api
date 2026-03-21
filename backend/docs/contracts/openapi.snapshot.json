@@ -820,6 +820,27 @@
                 ]
             }
         },
+        "/api/v0.3/me/relationships/mbti/{inviteId}/journey": {
+            "post": {
+                "operationId": "post_api_v0_3_me_relationships_mbti_inviteid_journey",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\MbtiCompareInviteController@mutatePrivateJourney",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:inviteId"
+                ]
+            }
+        },
         "/api/v0.3/orders": {
             "post": {
                 "operationId": "post_api_v0_3_orders",
