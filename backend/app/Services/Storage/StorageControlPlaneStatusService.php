@@ -438,6 +438,10 @@ final class StorageControlPlaneStatusService
                 'by_category' => [],
                 'no_touch_categories' => [],
                 'reclaim_categories' => [],
+                'last_updated_at' => null,
+                'freshness_age_seconds' => null,
+                'freshness_state' => 'unknown_freshness',
+                'freshness_source_type' => 'disk-derived',
             ];
         }
 
@@ -465,6 +469,10 @@ final class StorageControlPlaneStatusService
             'by_category' => $byCategory,
             'no_touch_categories' => $this->normalizeScalarList((array) ($payload['no_touch_categories'] ?? [])),
             'reclaim_categories' => $reclaimCategories,
+            'last_updated_at' => null,
+            'freshness_age_seconds' => null,
+            'freshness_state' => 'unknown_freshness',
+            'freshness_source_type' => 'disk-derived',
         ];
     }
 
