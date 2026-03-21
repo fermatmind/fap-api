@@ -6,12 +6,14 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ContentPackVersionResource\Pages;
 use App\Models\ContentPackVersion;
+use App\Services\Content\ContentControlPlaneService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 
 class ContentPackVersionResource extends Resource
 {
@@ -22,6 +24,11 @@ class ContentPackVersionResource extends Resource
     protected static ?string $navigationGroup = 'Content';
 
     protected static ?string $navigationLabel = 'Content Pack Versions';
+
+    /**
+     * @var array<string,array<string,mixed>>
+     */
+    private static array $controlPlaneCache = [];
 
     public static function canViewAny(): bool
     {
@@ -49,6 +56,68 @@ class ContentPackVersionResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
+            Forms\Components\Section::make('Content control plane')
+                ->description('DB-backed authoring metadata coordinates draft, review, release candidate, and rollback flow. Runtime truth still stays on compiled/versioned artifacts.')
+                ->schema([
+                    Forms\Components\Grid::make(3)
+                        ->schema([
+                            Forms\Components\Placeholder::make('cp.authoring_scope')
+                                ->label('Authoring scope')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'authoring_scope', 'backend_filament_ops')),
+                            Forms\Components\Placeholder::make('cp.content_object_type')
+                                ->label('Content object type')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'content_object_type', 'content_pack_authoring_bundle')),
+                            Forms\Components\Placeholder::make('cp.locale_scope')
+                                ->label('Locale scope')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'locale_scope', 'pending')),
+                            Forms\Components\Placeholder::make('cp.draft_state')
+                                ->label('Draft state')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'draft_state', 'draft_pending_ingest')),
+                            Forms\Components\Placeholder::make('cp.review_state')
+                                ->label('Review state')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'review_state', 'review_pending_ingest')),
+                            Forms\Components\Placeholder::make('cp.revision_no')
+                                ->label('Revision no')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'revision_no', 1)),
+                            Forms\Components\Placeholder::make('cp.compile_status')
+                                ->label('Compile status')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'compile_status', 'pending_compile')),
+                            Forms\Components\Placeholder::make('cp.governance_status')
+                                ->label('Governance status')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'governance_status', 'not_applicable')),
+                            Forms\Components\Placeholder::make('cp.release_candidate_status')
+                                ->label('Release candidate')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'release_candidate_status', 'not_ready')),
+                        ]),
+                    Forms\Components\Grid::make(2)
+                        ->schema([
+                            Forms\Components\Placeholder::make('cp.preview_target')
+                                ->label('Preview target')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'preview_target', 'ops://content-pack-versions/pending'))
+                                ->columnSpanFull(),
+                            Forms\Components\Placeholder::make('cp.publish_target')
+                                ->label('Publish target')
+                                ->content(fn (?ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'publish_target', 'default/pending/pending/pending'))
+                                ->columnSpanFull(),
+                            Forms\Components\Placeholder::make('cp.rollback_target')
+                                ->label('Rollback target')
+                                ->content(fn (?ContentPackVersion $record): string => self::renderRollbackTarget($record))
+                                ->columnSpanFull(),
+                            Forms\Components\Placeholder::make('cp.runtime_artifact_ref')
+                                ->label('Runtime artifact ref')
+                                ->content(fn (?ContentPackVersion $record): string => self::renderRuntimeArtifactRef($record))
+                                ->columnSpanFull(),
+                        ]),
+                    Forms\Components\Placeholder::make('cp.experiment_scope')
+                        ->label('Experiment / overlay scope')
+                        ->content(fn (?ContentPackVersion $record): HtmlString => self::renderExperimentScope($record))
+                        ->columnSpanFull(),
+                    Forms\Components\Placeholder::make('cp.content_object_inventory')
+                        ->label('First-wave managed objects')
+                        ->content(fn (?ContentPackVersion $record): HtmlString => self::renderObjectInventory($record))
+                        ->columnSpanFull(),
+                ])
+                ->columns(1),
             Forms\Components\Grid::make(2)
                 ->schema([
                     Forms\Components\TextInput::make('region')->required()->maxLength(32),
@@ -87,6 +156,21 @@ class ContentPackVersionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('pack_id')->searchable(),
                 Tables\Columns\TextColumn::make('content_package_version')->label('Version')->searchable(),
+                Tables\Columns\TextColumn::make('control_plane_draft_state')
+                    ->label('Draft')
+                    ->badge()
+                    ->state(fn (ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'draft_state', 'draft_pending_ingest'))
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('control_plane_review_state')
+                    ->label('Review')
+                    ->badge()
+                    ->state(fn (ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'review_state', 'review_pending_ingest'))
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('control_plane_release_candidate_status')
+                    ->label('Release Candidate')
+                    ->badge()
+                    ->state(fn (ContentPackVersion $record): string => (string) self::controlPlaneValue($record, 'release_candidate_status', 'not_ready'))
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('dir_version_alias')->label('Dir Alias')->searchable(),
                 Tables\Columns\TextColumn::make('region')->sortable(),
                 Tables\Columns\TextColumn::make('locale')->sortable(),
@@ -107,5 +191,123 @@ class ContentPackVersionResource extends Resource
             'create' => Pages\CreateContentPackVersion::route('/create'),
             'edit' => Pages\EditContentPackVersion::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private static function controlPlane(?ContentPackVersion $record): array
+    {
+        if (! $record instanceof ContentPackVersion) {
+            return [
+                'authoring_scope' => 'backend_filament_ops',
+                'content_object_type' => 'content_pack_authoring_bundle',
+                'draft_state' => 'draft_pending_ingest',
+                'revision_no' => 1,
+                'review_state' => 'review_pending_ingest',
+                'preview_target' => 'ops://content-pack-versions/pending',
+                'compile_status' => 'pending_compile',
+                'governance_status' => 'not_applicable',
+                'release_candidate_status' => 'not_ready',
+                'publish_target' => 'default/pending/pending/pending',
+                'rollback_target' => null,
+                'locale_scope' => 'pending',
+                'experiment_scope' => [
+                    'stable_files' => 0,
+                    'experiment_files' => 0,
+                    'commercial_overlay_files' => 0,
+                    'experiment_keys' => [],
+                    'overlay_targets' => [],
+                ],
+                'runtime_artifact_ref' => null,
+                'content_object_inventory' => [],
+            ];
+        }
+
+        $key = (string) $record->getKey();
+        if (! isset(self::$controlPlaneCache[$key])) {
+            self::$controlPlaneCache[$key] = app(ContentControlPlaneService::class)->forVersion($record)['content_control_plane_v1'];
+        }
+
+        return self::$controlPlaneCache[$key];
+    }
+
+    private static function controlPlaneValue(?ContentPackVersion $record, string $key, mixed $default = null): mixed
+    {
+        return self::controlPlane($record)[$key] ?? $default;
+    }
+
+    private static function renderRuntimeArtifactRef(?ContentPackVersion $record): string
+    {
+        $artifact = self::controlPlaneValue($record, 'runtime_artifact_ref');
+        if (! is_array($artifact) || $artifact === []) {
+            return 'No published runtime artifact yet. Draft metadata remains control-plane only until compile + publish succeed.';
+        }
+
+        $parts = array_filter([
+            'release_id='.(string) ($artifact['release_id'] ?? ''),
+            'dir_alias='.(string) ($artifact['dir_alias'] ?? ''),
+            'pack_version='.(string) ($artifact['pack_version'] ?? ''),
+            'storage_path='.(string) ($artifact['storage_path'] ?? ''),
+        ], static fn (string $value): bool => ! str_ends_with($value, '='));
+
+        return implode(' | ', $parts);
+    }
+
+    private static function renderRollbackTarget(?ContentPackVersion $record): string
+    {
+        $target = self::controlPlaneValue($record, 'rollback_target');
+        if (! is_array($target) || $target === []) {
+            return 'No prior runtime artifact recorded for rollback.';
+        }
+
+        return implode(' | ', array_filter([
+            'release_id='.(string) ($target['release_id'] ?? ''),
+            'dir_alias='.(string) ($target['dir_alias'] ?? ''),
+            'pack_version='.(string) ($target['pack_version'] ?? ''),
+        ], static fn (string $value): bool => ! str_ends_with($value, '=')));
+    }
+
+    private static function renderExperimentScope(?ContentPackVersion $record): HtmlString
+    {
+        $scope = self::controlPlaneValue($record, 'experiment_scope', []);
+        if (! is_array($scope)) {
+            $scope = [];
+        }
+
+        $experimentKeys = implode(', ', (array) ($scope['experiment_keys'] ?? []));
+        $overlayTargets = implode(', ', (array) ($scope['overlay_targets'] ?? []));
+
+        $items = [
+            'stable_files='.(int) ($scope['stable_files'] ?? 0),
+            'experiment_files='.(int) ($scope['experiment_files'] ?? 0),
+            'commercial_overlay_files='.(int) ($scope['commercial_overlay_files'] ?? 0),
+            'experiment_keys='.($experimentKeys !== '' ? $experimentKeys : 'none'),
+            'overlay_targets='.($overlayTargets !== '' ? $overlayTargets : 'none'),
+        ];
+
+        return new HtmlString('<ul><li>'.implode('</li><li>', array_map('e', $items)).'</li></ul>');
+    }
+
+    private static function renderObjectInventory(?ContentPackVersion $record): HtmlString
+    {
+        $inventory = self::controlPlaneValue($record, 'content_object_inventory', []);
+        if (! is_array($inventory) || $inventory === []) {
+            return new HtmlString('<span>No control-plane managed objects discovered yet.</span>');
+        }
+
+        $items = array_map(static function (mixed $item): string {
+            if (! is_array($item)) {
+                return '';
+            }
+
+            $type = (string) ($item['type'] ?? 'unknown');
+            $enabled = (bool) ($item['enabled'] ?? false);
+
+            return e($type).': '.($enabled ? 'enabled' : 'not_in_scope');
+        }, $inventory);
+        $items = array_values(array_filter($items, static fn (string $item): bool => $item !== ''));
+
+        return new HtmlString('<ul><li>'.implode('</li><li>', $items).'</li></ul>');
     }
 }
