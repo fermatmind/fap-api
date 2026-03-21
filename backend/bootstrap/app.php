@@ -37,6 +37,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('storage:prune --execute --scope=content_releases_retention')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=legacy_private_private_cleanup')->dailyAt('03:30')->withoutOverlapping();
         $schedule->command('storage:inventory --json')->weeklyOn(1, '04:10')->withoutOverlapping();
+        $schedule->command('storage:control-plane-snapshot --json')->dailyAt('04:20')->withoutOverlapping();
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();

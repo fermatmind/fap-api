@@ -19,8 +19,8 @@ use App\Console\Commands\FapResolvePack;
 use App\Console\Commands\FapSelfCheck;
 use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
-use App\Console\Commands\MetricsWeeklyValidity;
 use App\Console\Commands\MbtiUpgradeLegacyPartialUnlocks;
+use App\Console\Commands\MetricsWeeklyValidity;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\NormsBig5MonthlyDriftCheck;
@@ -61,6 +61,7 @@ use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
+use App\Console\Commands\StorageControlPlaneSnapshot;
 use App\Console\Commands\StorageInventory;
 use App\Console\Commands\StorageMigrateLegacyArtifacts;
 use App\Console\Commands\StoragePrune;
@@ -123,6 +124,7 @@ class Kernel extends ConsoleKernel
         StoragePrune::class,
         StorageMigrateLegacyArtifacts::class,
         StorageInventory::class,
+        StorageControlPlaneSnapshot::class,
         QualityDailySummary::class,
         CiScaleImpact::class,
         ContentPathMirror::class,
@@ -158,6 +160,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('storage:prune --execute --scope=content_releases_retention')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('storage:prune --execute --scope=legacy_private_private_cleanup')->dailyAt('03:30')->withoutOverlapping();
         $schedule->command('storage:inventory --json')->weeklyOn(1, '04:10')->withoutOverlapping();
+        $schedule->exec(PHP_BINARY.' '.base_path('artisan').' storage:control-plane-snapshot --json')->dailyAt('04:20')->withoutOverlapping();
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
