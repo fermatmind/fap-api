@@ -410,6 +410,10 @@ final class StorageControlPlaneStatusService
             'runtime_role' => 'derived_cache_return_surface',
             'source_of_truth' => false,
             'zero_state' => count($bucketRoots) === 0,
+            'last_updated_at' => null,
+            'freshness_age_seconds' => null,
+            'freshness_state' => 'unknown_freshness',
+            'freshness_source_type' => 'disk-derived',
         ];
     }
 
