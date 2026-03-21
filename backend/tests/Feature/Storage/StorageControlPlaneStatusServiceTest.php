@@ -131,6 +131,10 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
         $this->assertSame($expectedBytes, data_get($payload, 'cost_reclaim_posture.by_category.v2_materialized_cache.bytes'));
         $this->assertSame(6, data_get($payload, 'cost_reclaim_posture.by_category.v2_materialized_cache.file_count'));
         $this->assertContains('runtime_or_data_truth', data_get($payload, 'cost_reclaim_posture.no_touch_categories', []));
+        $this->assertNull(data_get($payload, 'cost_reclaim_posture.last_updated_at'));
+        $this->assertNull(data_get($payload, 'cost_reclaim_posture.freshness_age_seconds'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'cost_reclaim_posture.freshness_state'));
+        $this->assertSame('disk-derived', data_get($payload, 'cost_reclaim_posture.freshness_source_type'));
         $this->assertSame([
             'category' => 'v2_materialized_cache',
             'bytes' => $expectedBytes,
@@ -217,6 +221,10 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
         $this->assertSame(0, data_get($payload, 'cost_reclaim_posture.by_category.v2_materialized_cache.bytes'));
         $this->assertSame(0, data_get($payload, 'cost_reclaim_posture.by_category.v2_materialized_cache.file_count'));
         $this->assertContains('runtime_or_data_truth', data_get($payload, 'cost_reclaim_posture.no_touch_categories', []));
+        $this->assertNull(data_get($payload, 'cost_reclaim_posture.last_updated_at'));
+        $this->assertNull(data_get($payload, 'cost_reclaim_posture.freshness_age_seconds'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'cost_reclaim_posture.freshness_state'));
+        $this->assertSame('disk-derived', data_get($payload, 'cost_reclaim_posture.freshness_source_type'));
         $this->assertNull($this->reclaimCategory($payload, 'v2_materialized_cache'));
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
