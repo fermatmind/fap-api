@@ -89,6 +89,10 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
         $this->assertSame([], data_get($payload, 'materialized_cache.sample_bucket_paths'));
         $this->assertFalse((bool) data_get($payload, 'materialized_cache.source_of_truth'));
         $this->assertTrue((bool) data_get($payload, 'materialized_cache.zero_state'));
+        $this->assertNull(data_get($payload, 'materialized_cache.last_updated_at'));
+        $this->assertNull(data_get($payload, 'materialized_cache.freshness_age_seconds'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'materialized_cache.freshness_state'));
+        $this->assertSame('disk-derived', data_get($payload, 'materialized_cache.freshness_source_type'));
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
         $this->assertSame('remote_rehydrate_enabled', data_get($payload, 'runtime_truth.v2_readiness'));
@@ -140,6 +144,10 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
             str_replace('\\', '/', storage_path('app/private/packs_v2_materialized/BIG5_OCEAN/v1/'.str_repeat('a', 64).'/'.str_repeat('b', 64))),
         ], data_get($payload, 'materialized_cache.sample_bucket_paths'));
         $this->assertFalse((bool) data_get($payload, 'materialized_cache.zero_state'));
+        $this->assertNull(data_get($payload, 'materialized_cache.last_updated_at'));
+        $this->assertNull(data_get($payload, 'materialized_cache.freshness_age_seconds'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'materialized_cache.freshness_state'));
+        $this->assertSame('disk-derived', data_get($payload, 'materialized_cache.freshness_source_type'));
     }
 
     public function test_command_outputs_human_readable_summary(): void

@@ -111,6 +111,10 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertSame('derived_cache_return_surface', data_get($payload, 'materialized_cache.runtime_role'));
         $this->assertFalse((bool) data_get($payload, 'materialized_cache.source_of_truth'));
         $this->assertFalse((bool) data_get($payload, 'materialized_cache.zero_state'));
+        $this->assertNull(data_get($payload, 'materialized_cache.last_updated_at'));
+        $this->assertNull(data_get($payload, 'materialized_cache.freshness_age_seconds'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'materialized_cache.freshness_state'));
+        $this->assertSame('disk-derived', data_get($payload, 'materialized_cache.freshness_source_type'));
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
         $this->assertSame('attention_required', data_get($payload, 'attention_digest.overall_state'));
@@ -167,6 +171,10 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertSame([], data_get($payload, 'materialized_cache.sample_bucket_paths'));
         $this->assertFalse((bool) data_get($payload, 'materialized_cache.source_of_truth'));
         $this->assertTrue((bool) data_get($payload, 'materialized_cache.zero_state'));
+        $this->assertNull(data_get($payload, 'materialized_cache.last_updated_at'));
+        $this->assertNull(data_get($payload, 'materialized_cache.freshness_age_seconds'));
+        $this->assertSame('unknown_freshness', data_get($payload, 'materialized_cache.freshness_state'));
+        $this->assertSame('disk-derived', data_get($payload, 'materialized_cache.freshness_source_type'));
         $this->assertSame('degraded', data_get($payload, 'attention_digest.overall_state'));
         $this->assertSame(['inventory'], data_get($payload, 'attention_digest.not_available_sections'));
         $this->assertContains('quarantine', data_get($payload, 'attention_digest.never_run_sections', []));
