@@ -41,6 +41,11 @@ final class AssessmentTeamDynamicsSummaryTest extends TestCase
         $summary->assertJsonPath('summary.team_dynamics_v1.supporting_scales.0', 'MBTI');
         $this->assertNotEmpty((array) $summary->json('summary.team_dynamics_v1.communication_fit_keys'));
         $this->assertNotEmpty((array) $summary->json('summary.team_dynamics_v1.team_action_prompt_keys'));
+        $summary->assertJsonPath('summary.workspace_surface_v1.version', 'workspace.surface.v1');
+        $summary->assertJsonPath('summary.workspace_surface_v1.workspace_focus_key', 'team.communication.energy_translation');
+        $summary->assertJsonPath('summary.workspace_surface_v1.manager_action_keys.0', 'team.action.sync_communication_cadence');
+        $summary->assertJsonPath('summary.workspace_surface_v1.member_drill_in_keys.0', 'completed_assignments');
+        $this->assertNotEmpty((string) $summary->json('summary.workspace_surface_v1.workspace_surface_fingerprint'));
     }
 
     public function test_summary_team_dynamics_respects_org_boundary(): void
