@@ -128,6 +128,8 @@ final class MbtiCompareInviteService
         }
 
         [$inviter, $invitee, $compare] = $this->buildInviteReadContext($invite, $inviterAttempt, $inviterResult, $locale, false);
+        $currentConsentPolicyVersion = $this->resolvePrivacyPolicyVersion($inviterAttempt);
+        $consentLifecycle = $this->resolveDyadicConsentLifecycle($invite, $currentConsentPolicyVersion);
         $relationshipSync = $this->relationshipSyncContractService->build(
             $inviter,
             $invitee,
@@ -140,9 +142,16 @@ final class MbtiCompareInviteService
         $accessState = $this->resolvePrivateAccessState(
             $status,
             (bool) ($participantContext['has_invitee'] ?? false),
-            data_get($compare, 'title')
+            data_get($compare, 'title'),
+            $consentLifecycle
         );
         $subjectJoinMode = $this->resolvePrivateJoinMode($status);
+        $relationshipSync = $this->applyPrivateAccessRestrictions(
+            $relationshipSync,
+            $accessState,
+            $locale,
+            (bool) ($consentLifecycle['consent_refresh_required'] ?? false)
+        );
         $participantAttempt = $participantContext['attempt'] ?? null;
         $privateRelationship = $this->privateRelationshipContractService->buildPrivateRelationship(
             $inviter,
@@ -161,7 +170,11 @@ final class MbtiCompareInviteService
             $invite,
             $this->normalizeConsentState($status),
             $accessState,
-            $subjectJoinMode
+            $subjectJoinMode,
+            $currentConsentPolicyVersion,
+            $consentLifecycle + [
+                'private_relationship_access_version' => 'private.relationship.access.v1',
+            ]
         );
 
         return [
@@ -174,6 +187,50 @@ final class MbtiCompareInviteService
             'dyadic_consent_v1' => $dyadicConsent,
             'dyadic_graph_v1' => $this->privateRelationshipContractService->buildProtectedGraph($privateRelationship),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    public function mutatePrivateConsent(string $inviteId, mixed $userId, mixed $anonId, array $payload): array
+    {
+        $invite = MbtiCompareInvite::query()->findOrFail($inviteId);
+        [, $inviterAttempt] = $this->resolveMbtiShareContext((string) $invite->share_id);
+        $participantContext = $this->resolveParticipantContext($invite, $userId, $anonId);
+        if ($participantContext === null) {
+            throw new ApiProblemException(404, 'PRIVATE_RELATIONSHIP_NOT_FOUND', 'private relationship not found.');
+        }
+
+        $action = strtolower(trim((string) ($payload['action'] ?? '')));
+        $currentConsentPolicyVersion = $this->resolvePrivacyPolicyVersion($inviterAttempt);
+        $lifecycle = $this->resolveDyadicConsentLifecycle($invite, $currentConsentPolicyVersion);
+        $participantRole = (string) ($participantContext['participant_role'] ?? 'inviter');
+
+        switch ($action) {
+            case 'revoke_access':
+                $lifecycle['revocation_state'] = 'revoked_by_subject';
+                $lifecycle['revoked_at'] = now()->toISOString();
+                $lifecycle['revoked_by_role'] = $participantRole;
+                break;
+
+            case 'acknowledge_refresh':
+                $lifecycle['consent_policy_version'] = $currentConsentPolicyVersion;
+                $lifecycle['acknowledged_at'] = now()->toISOString();
+                $lifecycle['consent_refresh_required'] = false;
+                if (($lifecycle['expiry_state'] ?? 'active') === 'expired') {
+                    $lifecycle['expiry_state'] = 'active';
+                    $lifecycle['expires_at'] = null;
+                }
+                break;
+
+            default:
+                throw new ApiProblemException(422, 'DYADIC_CONSENT_ACTION_INVALID', 'dyadic consent action invalid.');
+        }
+
+        $this->persistDyadicConsentLifecycle($invite, $lifecycle);
+
+        return $this->showPrivate($inviteId, $userId, $anonId);
     }
 
     public function attachInviteeFromSubmit(
@@ -562,10 +619,21 @@ final class MbtiCompareInviteService
         };
     }
 
-    private function resolvePrivateAccessState(string $status, bool $hasInvitee, mixed $compareTitle): string
+    /**
+     * @param  array<string,mixed>  $consentLifecycle
+     */
+    private function resolvePrivateAccessState(string $status, bool $hasInvitee, mixed $compareTitle, array $consentLifecycle = []): string
     {
         if ($status === 'pending' || ! $hasInvitee) {
             return 'awaiting_second_subject';
+        }
+
+        if (($consentLifecycle['revocation_state'] ?? 'active') === 'revoked_by_subject') {
+            return 'private_access_revoked';
+        }
+
+        if (($consentLifecycle['expiry_state'] ?? 'active') === 'expired') {
+            return 'private_access_expired';
         }
 
         if ($status === 'purchased') {
@@ -707,6 +775,133 @@ final class MbtiCompareInviteService
     private function normalizeMeta(mixed $meta): array
     {
         return is_array($meta) ? $meta : [];
+    }
+
+    private function resolvePrivacyPolicyVersion(Attempt $attempt): string
+    {
+        $region = $this->nullableString($attempt->region ?? null)
+            ?? $this->nullableString(config('regions.default_region', 'CN_MAINLAND'))
+            ?? 'CN_MAINLAND';
+
+        return $this->nullableString(
+            data_get(config('regions.regions'), "{$region}.policy_versions.privacy")
+        ) ?? '2026-01-01';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function resolveDyadicConsentLifecycle(MbtiCompareInvite $invite, string $currentConsentPolicyVersion): array
+    {
+        $meta = $this->normalizeMeta($invite->meta_json ?? null);
+        $overlay = $this->normalizeMeta($meta['dyadic_consent_lifecycle_v1'] ?? null);
+
+        $expiresAt = $this->nullableString($overlay['expires_at'] ?? null);
+        $expiryState = $this->nullableString($overlay['expiry_state'] ?? null) ?? 'active';
+        if ($expiresAt !== null && $expiryState !== 'expired') {
+            try {
+                if (Carbon::parse($expiresAt)->isPast()) {
+                    $expiryState = 'expired';
+                }
+            } catch (\Throwable) {
+                $expiresAt = null;
+            }
+        }
+
+        $storedPolicyVersion = $this->nullableString($overlay['consent_policy_version'] ?? null);
+        $consentRefreshRequired = filter_var(
+            $overlay['consent_refresh_required'] ?? false,
+            FILTER_VALIDATE_BOOLEAN,
+            FILTER_NULL_ON_FAILURE
+        ) ?? false;
+        if ($storedPolicyVersion !== null && $storedPolicyVersion !== $currentConsentPolicyVersion) {
+            $consentRefreshRequired = true;
+        }
+
+        return [
+            'revocation_state' => $this->nullableString($overlay['revocation_state'] ?? null) === 'revoked_by_subject'
+                ? 'revoked_by_subject'
+                : 'active',
+            'revoked_at' => $this->nullableString($overlay['revoked_at'] ?? null),
+            'revoked_by_role' => $this->nullableString($overlay['revoked_by_role'] ?? null),
+            'expiry_state' => $expiryState === 'expired' ? 'expired' : 'active',
+            'expires_at' => $expiresAt,
+            'consent_policy_version' => $storedPolicyVersion,
+            'acknowledged_at' => $this->nullableString($overlay['acknowledged_at'] ?? null),
+            'consent_refresh_required' => $consentRefreshRequired,
+            'private_relationship_access_version' => 'private.relationship.access.v1',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $relationshipSync
+     * @return array<string,mixed>
+     */
+    private function applyPrivateAccessRestrictions(
+        array $relationshipSync,
+        string $accessState,
+        string $locale,
+        bool $consentRefreshRequired
+    ): array {
+        if (! in_array($accessState, ['private_access_revoked', 'private_access_expired'], true)) {
+            return $relationshipSync;
+        }
+
+        $title = $locale === 'zh-CN'
+            ? '私密关系访问已收紧'
+            : 'Private relationship access has tightened';
+        $summary = match ($accessState) {
+            'private_access_expired' => $locale === 'zh-CN'
+                ? '这段私密关系访问已过期。继续查看前，需要先刷新这次双人访问授权。'
+                : 'This private relationship access has expired. Refresh the dyadic consent before viewing private sections again.',
+            default => $locale === 'zh-CN'
+                ? '其中一方已撤回私密访问。当前仅保留最小关系状态，不再继续显示私密同步内容。'
+                : 'One participant revoked private access. Only the minimum relationship status remains visible and private sync sections are withheld.',
+        };
+
+        if ($consentRefreshRequired && $accessState !== 'private_access_revoked') {
+            $summary .= $locale === 'zh-CN'
+                ? ' 当前还需要确认最新隐私与访问条款。'
+                : ' The latest privacy and access terms also need acknowledgment.';
+        }
+
+        return [
+            'shared_count' => $relationshipSync['shared_count'] ?? null,
+            'diverging_count' => $relationshipSync['diverging_count'] ?? null,
+            'overview' => [
+                'title' => $title,
+                'summary' => $summary,
+            ],
+            'friction_keys' => [],
+            'complement_keys' => [],
+            'communication_bridge_keys' => [],
+            'decision_tension_keys' => [],
+            'stress_interplay_keys' => [],
+            'dyadic_action_prompt_keys' => [],
+            'sections' => [],
+            'action_prompt' => null,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $lifecycle
+     */
+    private function persistDyadicConsentLifecycle(MbtiCompareInvite $invite, array $lifecycle): void
+    {
+        $meta = $this->normalizeMeta($invite->meta_json ?? null);
+        $meta['dyadic_consent_lifecycle_v1'] = [
+            'revocation_state' => $this->nullableString($lifecycle['revocation_state'] ?? null) ?? 'active',
+            'revoked_at' => $this->nullableString($lifecycle['revoked_at'] ?? null),
+            'revoked_by_role' => $this->nullableString($lifecycle['revoked_by_role'] ?? null),
+            'expiry_state' => $this->nullableString($lifecycle['expiry_state'] ?? null) ?? 'active',
+            'expires_at' => $this->nullableString($lifecycle['expires_at'] ?? null),
+            'consent_policy_version' => $this->nullableString($lifecycle['consent_policy_version'] ?? null),
+            'acknowledged_at' => $this->nullableString($lifecycle['acknowledged_at'] ?? null),
+            'consent_refresh_required' => (bool) ($lifecycle['consent_refresh_required'] ?? false),
+        ];
+
+        $invite->meta_json = $meta;
+        $invite->save();
     }
 
     private function nullableString(mixed $value): ?string

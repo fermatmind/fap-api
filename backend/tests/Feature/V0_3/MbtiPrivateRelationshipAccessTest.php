@@ -50,8 +50,9 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
             ->assertJsonPath('private_relationship_v1.participant_role', 'inviter')
             ->assertJsonPath('dyadic_consent_v1.consent_scope', 'private_relationship_protected')
             ->assertJsonPath('dyadic_consent_v1.consent_state', 'pending')
-            ->assertJsonPath('dyadic_consent_v1.revocation_state', 'not_supported_yet')
-            ->assertJsonPath('dyadic_consent_v1.expiry_state', 'not_enforced_yet')
+            ->assertJsonPath('dyadic_consent_v1.revocation_state', 'active')
+            ->assertJsonPath('dyadic_consent_v1.expiry_state', 'active')
+            ->assertJsonPath('dyadic_consent_v1.private_relationship_access_version', 'private.relationship.access.v1')
             ->assertJsonMissingPath('private_relationship_v1.invitee_summary.invitee_user_id');
 
         [$inviteeAttemptId, $inviteeAnonId, $inviteeToken] = $this->createOwnerContext('anon_private_invitee', 'ENFP-T');
@@ -78,6 +79,8 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
             ->assertJsonPath('private_relationship_v1.participant_role', 'invitee')
             ->assertJsonPath('dyadic_consent_v1.consent_state', 'purchased')
             ->assertJsonPath('dyadic_consent_v1.access_state', 'private_access_ready')
+            ->assertJsonPath('dyadic_consent_v1.revocation_state', 'active')
+            ->assertJsonPath('dyadic_consent_v1.expiry_state', 'active')
             ->assertJsonPath('dyadic_graph_v1.graph_scope', 'private_relationship_protected')
             ->assertJsonMissingPath('invitee_attempt_id')
             ->assertJsonMissingPath('invitee_anon_id')
@@ -92,6 +95,108 @@ final class MbtiPrivateRelationshipAccessTest extends TestCase
         ])->getJson("/api/v0.3/me/relationships/mbti/{$inviteId}")
             ->assertNotFound()
             ->assertJsonPath('error_code', 'PRIVATE_RELATIONSHIP_NOT_FOUND');
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$outsiderToken,
+            'X-Anon-Id' => $outsiderAnonId,
+        ])->postJson("/api/v0.3/me/relationships/mbti/{$inviteId}/consent", [
+            'action' => 'revoke_access',
+        ])->assertNotFound()
+            ->assertJsonPath('error_code', 'PRIVATE_RELATIONSHIP_NOT_FOUND');
+    }
+
+    public function test_private_relationship_lifecycle_overlay_restricts_access_and_supports_consent_mutation(): void
+    {
+        $this->seedScales();
+
+        [$inviterAttemptId, $inviterAnonId, $inviterToken] = $this->createOwnerContext('anon_private_lifecycle_inviter', 'INTJ-A');
+        $shareId = $this->createShareViaApi($inviterAttemptId, $inviterAnonId, $inviterToken);
+
+        $invite = $this->postJson("/api/v0.3/shares/{$shareId}/compare-invites", [
+            'anon_id' => 'scan_probe',
+            'entrypoint' => 'share_page',
+            'compare_intent' => true,
+            'utm_source' => 'share',
+        ]);
+        $invite->assertOk();
+
+        $inviteId = (string) $invite->json('invite_id');
+
+        [$inviteeAttemptId, $inviteeAnonId, $inviteeToken] = $this->createOwnerContext('anon_private_lifecycle_invitee', 'ENFP-T');
+
+        DB::table('mbti_compare_invites')
+            ->where('id', $inviteId)
+            ->update([
+                'invitee_attempt_id' => $inviteeAttemptId,
+                'invitee_anon_id' => $inviteeAnonId,
+                'status' => 'purchased',
+                'accepted_at' => now()->subMinutes(5),
+                'completed_at' => now()->subMinutes(4),
+                'purchased_at' => now()->subMinutes(3),
+            ]);
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$inviterToken,
+            'X-Anon-Id' => $inviterAnonId,
+        ])->postJson("/api/v0.3/me/relationships/mbti/{$inviteId}/consent", [
+            'action' => 'revoke_access',
+        ])->assertOk()
+            ->assertJsonPath('dyadic_consent_v1.revocation_state', 'revoked_by_subject')
+            ->assertJsonPath('dyadic_consent_v1.access_state', 'private_access_revoked')
+            ->assertJsonPath('private_relationship_v1.access_state', 'private_access_revoked')
+            ->assertJsonCount(0, 'private_relationship_v1.private_sync_sections')
+            ->assertJsonMissingPath('private_relationship_v1.private_action_prompt.key');
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$inviteeToken,
+            'X-Anon-Id' => $inviteeAnonId,
+        ])->getJson("/api/v0.3/me/relationships/mbti/{$inviteId}")
+            ->assertOk()
+            ->assertJsonPath('dyadic_consent_v1.revocation_state', 'revoked_by_subject')
+            ->assertJsonPath('dyadic_consent_v1.access_state', 'private_access_revoked')
+            ->assertJsonCount(0, 'private_relationship_v1.private_sync_sections');
+
+        DB::table('mbti_compare_invites')
+            ->where('id', $inviteId)
+            ->update([
+                'meta_json' => json_encode([
+                    'dyadic_consent_lifecycle_v1' => [
+                        'revocation_state' => 'active',
+                        'expiry_state' => 'expired',
+                        'expires_at' => now()->subMinute()->toISOString(),
+                        'consent_policy_version' => '2025-01-01',
+                    ],
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            ]);
+
+        $this->withHeaders([
+            'Authorization' => 'Bearer '.$inviteeToken,
+            'X-Anon-Id' => $inviteeAnonId,
+        ])->getJson("/api/v0.3/me/relationships/mbti/{$inviteId}")
+            ->assertOk()
+            ->assertJsonPath('dyadic_consent_v1.expiry_state', 'expired')
+            ->assertJsonPath('dyadic_consent_v1.access_state', 'private_access_expired')
+            ->assertJsonPath('dyadic_consent_v1.consent_refresh_required', true)
+            ->assertJsonCount(0, 'private_relationship_v1.private_sync_sections');
+
+        $refresh = $this->withHeaders([
+            'Authorization' => 'Bearer '.$inviteeToken,
+            'X-Anon-Id' => $inviteeAnonId,
+        ])->postJson("/api/v0.3/me/relationships/mbti/{$inviteId}/consent", [
+            'action' => 'acknowledge_refresh',
+        ]);
+
+        $refresh->assertOk()
+            ->assertJsonPath('dyadic_consent_v1.expiry_state', 'active')
+            ->assertJsonPath('dyadic_consent_v1.consent_refresh_required', false)
+            ->assertJsonPath('dyadic_consent_v1.access_state', 'private_access_ready')
+            ->assertJsonPath('private_relationship_v1.access_state', 'private_access_ready');
+
+        $row = DB::table('mbti_compare_invites')->where('id', $inviteId)->first();
+        $meta = is_object($row) ? (array) json_decode((string) ($row->meta_json ?? '{}'), true) : [];
+        $overlay = is_array($meta['dyadic_consent_lifecycle_v1'] ?? null) ? $meta['dyadic_consent_lifecycle_v1'] : [];
+        $this->assertSame('active', (string) ($overlay['expiry_state'] ?? ''));
+        $this->assertNotNull($overlay['acknowledged_at'] ?? null);
     }
 
     private function seedScales(): void

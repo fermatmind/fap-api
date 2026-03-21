@@ -9,6 +9,7 @@ use App\Http\Requests\V0_3\CreateMbtiCompareInviteRequest;
 use App\Services\V0_3\MbtiCompareInviteService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 final class MbtiCompareInviteController extends Controller
 {
@@ -34,6 +35,22 @@ final class MbtiCompareInviteController extends Controller
             $inviteId,
             $request->attributes->get('user_id'),
             $request->attributes->get('anon_id')
+        );
+
+        return response()->json(array_merge(['ok' => true], $result));
+    }
+
+    public function mutatePrivateConsent(Request $request, string $inviteId): JsonResponse
+    {
+        $validated = $request->validate([
+            'action' => ['required', 'string', Rule::in(['revoke_access', 'acknowledge_refresh'])],
+        ]);
+
+        $result = $this->service->mutatePrivateConsent(
+            $inviteId,
+            $request->attributes->get('user_id'),
+            $request->attributes->get('anon_id'),
+            $validated
         );
 
         return response()->json(array_merge(['ok' => true], $result));

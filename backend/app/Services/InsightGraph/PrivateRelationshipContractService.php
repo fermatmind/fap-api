@@ -80,16 +80,43 @@ final class PrivateRelationshipContractService
         MbtiCompareInvite $invite,
         string $consentState,
         string $accessState,
-        string $subjectJoinMode
+        string $subjectJoinMode,
+        string $currentConsentPolicyVersion,
+        array $lifecycle = []
     ): array {
+        $revocationState = $this->normalizeText($lifecycle['revocation_state'] ?? null) ?? 'active';
+        $expiryState = $this->normalizeText($lifecycle['expiry_state'] ?? null) ?? 'active';
+        $consentRefreshRequired = (bool) ($lifecycle['consent_refresh_required'] ?? false);
+        $privateRelationshipAccessVersion = $this->normalizeText($lifecycle['private_relationship_access_version'] ?? null)
+            ?? 'private.relationship.access.v1';
+        $consentPolicyVersion = $this->normalizeText($lifecycle['consent_policy_version'] ?? null) ?? $currentConsentPolicyVersion;
+
+        $fingerprintSeed = [
+            'scope' => 'private_relationship_protected',
+            'consent_state' => $consentState,
+            'access_state' => $accessState,
+            'revocation_state' => $revocationState,
+            'expiry_state' => $expiryState,
+            'subject_join_mode' => $subjectJoinMode,
+            'consent_refresh_required' => $consentRefreshRequired,
+            'private_relationship_access_version' => $privateRelationshipAccessVersion,
+            'consent_policy_version' => $consentPolicyVersion,
+            'accepted_at' => $invite->accepted_at?->toISOString(),
+            'completed_at' => $invite->completed_at?->toISOString(),
+            'purchased_at' => $invite->purchased_at?->toISOString(),
+        ];
+
         return [
             'version' => 'dyadic.consent.v1',
             'consent_scope' => 'private_relationship_protected',
             'access_state' => $accessState,
             'consent_state' => $consentState,
-            'revocation_state' => 'not_supported_yet',
-            'expiry_state' => 'not_enforced_yet',
+            'revocation_state' => $revocationState,
+            'expiry_state' => $expiryState,
             'subject_join_mode' => $subjectJoinMode,
+            'consent_fingerprint' => sha1((string) json_encode($fingerprintSeed, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)),
+            'consent_refresh_required' => $consentRefreshRequired,
+            'private_relationship_access_version' => $privateRelationshipAccessVersion,
             'accepted_at' => $invite->accepted_at?->toISOString(),
             'completed_at' => $invite->completed_at?->toISOString(),
             'purchased_at' => $invite->purchased_at?->toISOString(),
