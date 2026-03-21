@@ -571,6 +571,7 @@ final class MbtiResultPersonalizationService
     public function __construct(
         private readonly ContentPacksIndex $packsIndex,
         private readonly MbtiUserStateOrchestrationService $userStateOrchestrationService,
+        private readonly MbtiActionJourneyContractService $actionJourneyContractService,
         private readonly MbtiBigFiveSynthesisService $bigFiveSynthesisService,
         private readonly MbtiWorkingLifeConsolidationService $workingLifeConsolidationService,
         private readonly MbtiPrivacyConsentContractService $privacyConsentContractService,
@@ -712,6 +713,7 @@ final class MbtiResultPersonalizationService
             'locale' => $locale,
         ]);
         $personalization = $this->workingLifeConsolidationService->attach($personalization);
+        $personalization = $this->actionJourneyContractService->attach($personalization);
 
         $personalization = $this->privacyConsentContractService->attachContract($personalization, [
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),

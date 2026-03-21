@@ -67,6 +67,8 @@ final class MbtiPrivacyConsentContractService
         'action_priority_keys',
         'reading_focus_key',
         'action_focus_key',
+        'action_journey_v1',
+        'pulse_check_v1',
         'user_state',
         'orchestration',
         'continuity',
