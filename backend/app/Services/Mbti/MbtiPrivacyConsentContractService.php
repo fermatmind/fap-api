@@ -69,6 +69,7 @@ final class MbtiPrivacyConsentContractService
         'action_focus_key',
         'action_journey_v1',
         'pulse_check_v1',
+        'longitudinal_memory_v1',
         'user_state',
         'orchestration',
         'continuity',

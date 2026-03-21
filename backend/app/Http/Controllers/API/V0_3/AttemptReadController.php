@@ -737,6 +737,7 @@ class AttemptReadController extends Controller
             'working_life_v1' => is_array($personalization['working_life_v1'] ?? null) ? $personalization['working_life_v1'] : [],
             'action_journey_v1' => is_array($personalization['action_journey_v1'] ?? null) ? $personalization['action_journey_v1'] : [],
             'pulse_check_v1' => is_array($personalization['pulse_check_v1'] ?? null) ? $personalization['pulse_check_v1'] : [],
+            'longitudinal_memory_v1' => is_array($personalization['longitudinal_memory_v1'] ?? null) ? $personalization['longitudinal_memory_v1'] : [],
             'comparative_v1' => is_array($personalization['comparative_v1'] ?? null) ? $personalization['comparative_v1'] : [],
             'career_focus_key' => trim((string) ($personalization['career_focus_key'] ?? '')),
             'career_journey_keys' => is_array($personalization['career_journey_keys'] ?? null) ? $personalization['career_journey_keys'] : [],
@@ -844,12 +845,49 @@ class AttemptReadController extends Controller
             $meta['next_pulse_target'] = trim((string) ($pulseCheck['next_pulse_target'] ?? ''));
         }
 
+        $longitudinalMemory = is_array($personalization['longitudinal_memory_v1'] ?? null)
+            ? $personalization['longitudinal_memory_v1']
+            : [];
+        if ($longitudinalMemory !== []) {
+            $meta['memory_contract_version'] = trim((string) ($longitudinalMemory['memory_contract_version'] ?? ''));
+            $meta['memory_fingerprint'] = trim((string) ($longitudinalMemory['memory_fingerprint'] ?? ''));
+            $meta['memory_scope'] = trim((string) ($longitudinalMemory['memory_scope'] ?? ''));
+            $meta['memory_state'] = trim((string) ($longitudinalMemory['memory_state'] ?? ''));
+            $meta['memory_progression_state'] = trim((string) ($longitudinalMemory['progression_state'] ?? ''));
+            $meta['section_history_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($longitudinalMemory['section_history_keys'] ?? null) ? $longitudinalMemory['section_history_keys'] : []
+            )));
+            $meta['behavior_delta_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($longitudinalMemory['behavior_delta_keys'] ?? null) ? $longitudinalMemory['behavior_delta_keys'] : []
+            )));
+            $meta['dominant_interest_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($longitudinalMemory['dominant_interest_keys'] ?? null) ? $longitudinalMemory['dominant_interest_keys'] : []
+            )));
+            $meta['resume_bias_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($longitudinalMemory['resume_bias_keys'] ?? null) ? $longitudinalMemory['resume_bias_keys'] : []
+            )));
+            $meta['memory_rewrite_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($longitudinalMemory['memory_rewrite_keys'] ?? null) ? $longitudinalMemory['memory_rewrite_keys'] : []
+            )));
+            $meta['memory_rewrite_reason'] = trim((string) ($longitudinalMemory['memory_rewrite_reason'] ?? ''));
+        }
+
         return array_filter($meta, static function (mixed $value, string $key): bool {
             if (in_array($key, [
                 'same_type_divergence_keys',
                 'section_selection_keys',
                 'action_selection_keys',
                 'recommendation_selection_keys',
+                'section_history_keys',
+                'behavior_delta_keys',
+                'dominant_interest_keys',
+                'resume_bias_keys',
+                'memory_rewrite_keys',
             ], true)) {
                 return true;
             }
@@ -943,8 +981,24 @@ class AttemptReadController extends Controller
 
         $effective = $this->mbtiWorkingLifeConsolidationService->attach($effective);
         $effective = $this->mbtiActionJourneyContractService->attach($effective);
+        $effective = $this->mbtiIntraTypeProfileService->attach($effective);
 
-        return $this->mbtiIntraTypeProfileService->attach($effective);
+        $longitudinalMemoryService = app(\App\Services\Mbti\MbtiLongitudinalMemoryService::class);
+        $canonicalMemory = is_array($personalization['longitudinal_memory_v1'] ?? null)
+            ? $personalization['longitudinal_memory_v1']
+            : [];
+
+        if ($canonicalMemory !== []) {
+            return $longitudinalMemoryService->attachExistingMemory($effective, $canonicalMemory);
+        }
+
+        return $longitudinalMemoryService->attach($effective, [
+            'org_id' => (int) ($attempt->org_id ?? 0),
+            'user_id' => $attempt->user_id ?? null,
+            'anon_id' => $attempt->anon_id ?? null,
+            'attempt_id' => (string) ($attempt->id ?? ''),
+            'locale' => (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+        ]);
     }
 
     /**

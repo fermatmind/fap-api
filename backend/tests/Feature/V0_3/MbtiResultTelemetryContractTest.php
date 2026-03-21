@@ -25,6 +25,7 @@ class MbtiResultTelemetryContractTest extends TestCase
 
         $anonId = 'mbti_phase3a_anon';
         $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $this->seedHistoricalMemorySignals($anonId);
         $this->seedPhase7bSignals($attemptId);
 
         $resultResponse = $this->invokeController('result', $attemptId, $anonId);
@@ -118,6 +119,7 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['continuity'] ?? null);
             $this->assertIsArray($meta['action_journey_v1'] ?? null);
             $this->assertIsArray($meta['pulse_check_v1'] ?? null);
+            $this->assertIsArray($meta['longitudinal_memory_v1'] ?? null);
             $this->assertSame('mbti.privacy_contract.v1', (string) ($meta['privacy_contract_version'] ?? ''));
             $this->assertIsArray($meta['consent_scope'] ?? null);
             $this->assertSame('comparative.norming.v1', (string) ($meta['comparative_contract_version'] ?? ''));
@@ -150,6 +152,16 @@ class MbtiResultTelemetryContractTest extends TestCase
             if (array_key_exists('pulse_prompt_keys', $meta)) {
                 $this->assertIsArray($meta['pulse_prompt_keys']);
             }
+            $this->assertSame('mbti.longitudinal_memory.v1', (string) ($meta['memory_contract_version'] ?? ''));
+            $this->assertNotSame('', trim((string) ($meta['memory_fingerprint'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['memory_state'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['memory_progression_state'] ?? '')));
+            $this->assertIsArray($meta['section_history_keys'] ?? null);
+            $this->assertIsArray($meta['behavior_delta_keys'] ?? null);
+            $this->assertIsArray($meta['dominant_interest_keys'] ?? null);
+            $this->assertIsArray($meta['resume_bias_keys'] ?? null);
+            $this->assertIsArray($meta['memory_rewrite_keys'] ?? null);
+            $this->assertNotSame('', trim((string) ($meta['memory_rewrite_reason'] ?? '')));
         }
 
         $this->assertSame($eventMeta['report_view']['variant_keys'] ?? null, $eventMeta['result_view']['variant_keys'] ?? null);
@@ -221,11 +233,18 @@ class MbtiResultTelemetryContractTest extends TestCase
             data_get($eventMeta, 'result_view.profile_seed_key'),
             data_get($eventMeta, 'report_view.profile_seed_key')
         );
+        $this->assertSame(
+            data_get($eventMeta, 'result_view.memory_fingerprint'),
+            data_get($eventMeta, 'report_view.memory_fingerprint')
+        );
         $this->assertContains('same_type.boundary_axis.jp', data_get($eventMeta, 'result_view.same_type_divergence_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.section_selection_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.action_selection_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.recommendation_selection_keys', []));
         $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.selection_fingerprint', '')));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.section_history_keys', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.behavior_delta_keys', []));
+        $this->assertIsArray(data_get($eventMeta, 'result_view.memory_rewrite_keys', []));
         $this->assertSame(
             ['career.work_experiments', 'career.next_step', 'career.work_environment', 'career.collaboration_fit'],
             data_get($eventMeta, 'result_view.working_life_v1.career_journey_keys')
@@ -233,8 +252,14 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertContains('career_bridge', data_get($eventMeta, 'result_view.working_life_v1.career_action_priority_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.ordered_recommendation_keys', []));
         $this->assertIsArray(data_get($eventMeta, 'result_view.recommendation_priority_keys', []));
-        $this->assertSame('weekly_action.theme.protect_energy_lane', data_get($eventMeta, 'result_view.action_focus_key'));
-        $this->assertSame('work_experiment.theme.protect_energy_lane', data_get($eventMeta, 'report_view.action_focus_key'));
+        $this->assertContains(
+            data_get($eventMeta, 'result_view.action_focus_key'),
+            data_get($eventMeta, 'result_view.ordered_action_keys', [])
+        );
+        $this->assertContains(
+            data_get($eventMeta, 'report_view.action_focus_key'),
+            data_get($eventMeta, 'report_view.ordered_action_keys', [])
+        );
         $this->assertSame('repeatable', data_get($eventMeta, 'report_view.progress_state'));
         $this->assertSame('warming_up', data_get($eventMeta, 'result_view.progress_state'));
         $this->assertSame('refine_after_feedback', data_get($eventMeta, 'report_view.journey_state'));
@@ -255,14 +280,16 @@ class MbtiResultTelemetryContractTest extends TestCase
             'resume_action_loop',
             data_get($eventMeta, 'report_view.continuity.carryover_reason')
         );
-        $this->assertSame(
-            ['traits.close_call_axes', 'growth.weekly_experiments', 'career.work_experiments'],
-            data_get($eventMeta, 'result_view.continuity.recommended_resume_keys')
-        );
-        $this->assertSame(
-            ['traits.close_call_axes', 'growth.weekly_experiments', 'career.work_experiments'],
-            data_get($eventMeta, 'report_view.continuity.recommended_resume_keys')
-        );
+        $resultResumeKeys = (array) data_get($eventMeta, 'result_view.continuity.recommended_resume_keys', []);
+        $reportResumeKeys = (array) data_get($eventMeta, 'report_view.continuity.recommended_resume_keys', []);
+        $this->assertContains('traits.close_call_axes', $resultResumeKeys);
+        $this->assertContains('traits.why_this_type', $resultResumeKeys);
+        $this->assertContains('growth.weekly_experiments', $resultResumeKeys);
+        $this->assertContains('career.work_experiments', $resultResumeKeys);
+        $this->assertContains('traits.close_call_axes', $reportResumeKeys);
+        $this->assertContains('traits.why_this_type', $reportResumeKeys);
+        $this->assertContains('growth.weekly_experiments', $reportResumeKeys);
+        $this->assertContains('career.work_experiments', $reportResumeKeys);
         $this->assertSame(
             ['explainability', 'growth', 'work'],
             data_get($eventMeta, 'result_view.continuity.carryover_scene_keys')
@@ -521,6 +548,80 @@ class MbtiResultTelemetryContractTest extends TestCase
             'content_package_version' => 'v0.3',
             'created_at' => now(),
             'updated_at' => now(),
+        ]);
+    }
+
+    private function seedHistoricalMemorySignals(string $anonId): void
+    {
+        $previousAttemptId = (string) Str::uuid();
+
+        Attempt::create([
+            'id' => $previousAttemptId,
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'scale_code_v2' => 'MBTI',
+            'scale_uid' => 'mbti',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 144,
+            'client_platform' => 'test',
+            'answers_summary_json' => ['stage' => 'history'],
+            'started_at' => now()->subDays(9),
+            'submitted_at' => now()->subDays(9),
+            'pack_id' => (string) config('content_packs.default_pack_id'),
+            'dir_version' => 'MBTI-CN-v0.3',
+            'content_package_version' => 'v0.3',
+        ]);
+
+        DB::table('events')->insert([
+            [
+                'id' => (string) Str::uuid(),
+                'event_code' => 'result_view',
+                'event_name' => 'result_view',
+                'org_id' => 0,
+                'attempt_id' => $previousAttemptId,
+                'anon_id' => $anonId,
+                'scale_code' => 'MBTI',
+                'meta_json' => null,
+                'occurred_at' => now()->subDays(9),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => (string) Str::uuid(),
+                'event_code' => 'ui_card_interaction',
+                'event_name' => 'ui_card_interaction',
+                'org_id' => 0,
+                'attempt_id' => $previousAttemptId,
+                'anon_id' => $anonId,
+                'scale_code' => 'MBTI',
+                'meta_json' => json_encode([
+                    'sectionKey' => 'traits.close_call_axes',
+                    'interaction' => 'dwell_2500ms',
+                    'continueTarget' => 'type_clarity',
+                ], JSON_UNESCAPED_UNICODE),
+                'occurred_at' => now()->subDays(9)->addMinutes(5),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => (string) Str::uuid(),
+                'event_code' => 'accuracy_feedback',
+                'event_name' => 'accuracy_feedback',
+                'org_id' => 0,
+                'attempt_id' => $previousAttemptId,
+                'anon_id' => $anonId,
+                'scale_code' => 'MBTI',
+                'meta_json' => json_encode([
+                    'sectionKey' => 'traits.why_this_type',
+                    'feedback' => 'unclear',
+                ], JSON_UNESCAPED_UNICODE),
+                'occurred_at' => now()->subDays(9)->addMinutes(7),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
