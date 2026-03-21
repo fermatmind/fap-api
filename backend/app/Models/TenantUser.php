@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class TenantUser extends User implements FilamentUser
 {
+    protected $table = 'users';
+
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() !== 'tenant') {

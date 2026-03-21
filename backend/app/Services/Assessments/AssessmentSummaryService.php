@@ -6,13 +6,15 @@ use App\Models\Assessment;
 use App\Models\AssessmentAssignment;
 use App\Models\Result;
 use App\Services\Scale\ScaleRegistry;
+use App\Services\Team\TeamDynamicsSynthesisService;
 use Illuminate\Support\Collection;
 
 class AssessmentSummaryService
 {
-    public function __construct(private ScaleRegistry $registry)
-    {
-    }
+    public function __construct(
+        private ScaleRegistry $registry,
+        private TeamDynamicsSynthesisService $teamDynamics,
+    ) {}
 
     public function buildSummary(Assessment $assessment): array
     {
@@ -61,6 +63,7 @@ class AssessmentSummaryService
             ],
             'score_distribution' => $this->scoreDistribution($driverType, $results),
             'dimension_means' => $this->dimensionMeans($driverType, $results),
+            'team_dynamics_v1' => $this->teamDynamics->buildForAssessment($assessment, $results, $total),
         ];
     }
 
