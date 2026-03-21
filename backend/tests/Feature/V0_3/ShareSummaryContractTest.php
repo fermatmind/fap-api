@@ -85,6 +85,13 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame('share_public_surface', $response->json('public_surface_v1.attribution_scope'));
         $this->assertContains('share_landing', $response->json('public_surface_v1.discoverability_keys'));
         $this->assertContains('continue_here', $response->json('public_surface_v1.discoverability_keys'));
+        $this->assertSame('insight.graph.v1', $response->json('insight_graph_v1.graph_contract_version'));
+        $this->assertSame('public_share_safe', $response->json('insight_graph_v1.graph_scope'));
+        $this->assertSame('result_summary', $response->json('insight_graph_v1.root_node'));
+        $this->assertContains('working_life', array_column((array) $response->json('insight_graph_v1.nodes'), 'id'));
+        $this->assertSame('embed.surface.v1', $response->json('embed_surface_v1.version'));
+        $this->assertSame('mbti_share_embed_card', $response->json('embed_surface_v1.surface_key'));
+        $this->assertSame('growth.next_actions', $response->json('embed_surface_v1.continue_target'));
         $this->assertSame(
             ['growth.next_actions', 'traits.close_call_axes', 'traits.adjacent_type_contrast'],
             $response->json('public_surface_v1.continue_reading_keys')
@@ -157,6 +164,8 @@ final class ShareSummaryContractTest extends TestCase
             'mbti_public_summary_v1',
             'mbti_public_projection_v1',
             'public_surface_v1',
+            'insight_graph_v1',
+            'embed_surface_v1',
         ] as $key) {
             $this->assertSame($share->json($key), $view->json($key), "share field mismatch: {$key}");
         }
@@ -209,6 +218,10 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('public_surface_v1.attribution_scope', 'share_public_surface')
             ->assertJsonPath('comparative_v1.norming_source', 'scale_norms')
             ->assertJsonPath('comparative_v1.percentile.metric_key', 'O')
+            ->assertJsonPath('insight_graph_v1.graph_contract_version', 'insight.graph.v1')
+            ->assertJsonPath('insight_graph_v1.graph_scope', 'public_share_safe')
+            ->assertJsonPath('embed_surface_v1.version', 'embed.surface.v1')
+            ->assertJsonPath('embed_surface_v1.surface_key', 'big5_share_embed_card')
             ->assertJsonMissingPath('report')
             ->assertJsonMissingPath('result')
             ->assertJsonMissingPath('offers')
