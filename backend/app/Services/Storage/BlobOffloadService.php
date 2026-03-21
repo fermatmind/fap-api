@@ -27,13 +27,14 @@ final class BlobOffloadService
     {
         $disk = $this->normalizeDisk($disk);
         $sourceMap = $this->collectSourceMap();
+        $reachableHashes = $this->reachableBlobHashes();
+        $coverage = $this->buildCoverageSummary($reachableHashes, $disk);
 
         $candidates = [];
         $skipped = [];
         $candidateBytes = 0;
         $skippedBytes = 0;
 
-        $reachableHashes = $this->reachableBlobHashes();
         $catalogedBlobs = DB::table('storage_blobs')
             ->when(
                 $reachableHashes !== [],
@@ -56,6 +57,8 @@ final class BlobOffloadService
                 ->where('blob_hash', $hash)
                 ->where('disk', $disk)
                 ->where('storage_path', $remotePath)
+                ->where('location_kind', self::LOCATION_KIND_REMOTE_COPY)
+                ->whereNotNull('verified_at')
                 ->first();
 
             if ($existingLocation !== null) {
@@ -123,6 +126,12 @@ final class BlobOffloadService
             'generated_at' => now()->toAtomString(),
             'disk' => $disk,
             'summary' => [
+                'target_disk' => $disk,
+                'reachable_blob_count' => $coverage['reachable_blob_count'],
+                'verified_remote_copy_counts_by_disk' => $coverage['verified_remote_copy_counts_by_disk'],
+                'local_only_count' => $coverage['local_only_count'],
+                'target_only_count' => $coverage['target_only_count'],
+                'both_count' => $coverage['both_count'],
                 'candidate_count' => count($candidates),
                 'skipped_count' => count($skipped),
                 'bytes' => $candidateBytes,
@@ -238,6 +247,92 @@ final class BlobOffloadService
         }
 
         return $summary;
+    }
+
+    /**
+     * @param  list<string>  $reachableHashes
+     * @return array{
+     *   reachable_blob_count:int,
+     *   verified_remote_copy_counts_by_disk:array<string,int>,
+     *   local_only_count:int,
+     *   target_only_count:int,
+     *   both_count:int
+     * }
+     */
+    private function buildCoverageSummary(array $reachableHashes, string $targetDisk): array
+    {
+        $targetDisk = $this->normalizeDisk($targetDisk);
+
+        if ($reachableHashes === []) {
+            return [
+                'reachable_blob_count' => 0,
+                'verified_remote_copy_counts_by_disk' => [],
+                'local_only_count' => 0,
+                'target_only_count' => 0,
+                'both_count' => 0,
+            ];
+        }
+
+        $verifiedHashesByDisk = [];
+        $rows = StorageBlobLocation::query()
+            ->select(['disk', 'blob_hash'])
+            ->where('location_kind', self::LOCATION_KIND_REMOTE_COPY)
+            ->whereNotNull('verified_at')
+            ->whereIn('blob_hash', $reachableHashes)
+            ->orderBy('disk')
+            ->orderBy('blob_hash')
+            ->get();
+
+        foreach ($rows as $row) {
+            $disk = trim((string) ($row->disk ?? ''));
+            $hash = strtolower(trim((string) ($row->blob_hash ?? '')));
+            if ($disk === '' || ! $this->isValidHash($hash)) {
+                continue;
+            }
+
+            $verifiedHashesByDisk[$disk][$hash] = true;
+        }
+
+        $verifiedCountsByDisk = [];
+        foreach ($verifiedHashesByDisk as $disk => $hashes) {
+            $verifiedCountsByDisk[$disk] = count($hashes);
+        }
+        ksort($verifiedCountsByDisk);
+
+        $localHashes = $verifiedHashesByDisk['local'] ?? [];
+        $targetHashes = $verifiedHashesByDisk[$targetDisk] ?? [];
+        $localOnlyCount = 0;
+        $targetOnlyCount = 0;
+        $bothCount = 0;
+
+        foreach ($reachableHashes as $hash) {
+            $hasLocal = isset($localHashes[$hash]);
+            $hasTarget = isset($targetHashes[$hash]);
+
+            if ($hasLocal && $hasTarget) {
+                $bothCount++;
+
+                continue;
+            }
+
+            if ($hasLocal) {
+                $localOnlyCount++;
+
+                continue;
+            }
+
+            if ($hasTarget) {
+                $targetOnlyCount++;
+            }
+        }
+
+        return [
+            'reachable_blob_count' => count($reachableHashes),
+            'verified_remote_copy_counts_by_disk' => $verifiedCountsByDisk,
+            'local_only_count' => $localOnlyCount,
+            'target_only_count' => $targetOnlyCount,
+            'both_count' => $bothCount,
+        ];
     }
 
     /**

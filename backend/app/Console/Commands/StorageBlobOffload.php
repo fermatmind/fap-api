@@ -177,7 +177,15 @@ final class StorageBlobOffload extends Command
 
         $this->line('status=planned');
         $this->line('disk='.$disk);
+        $this->line('target_disk='.(string) ($summary['target_disk'] ?? $disk));
+        $this->line('copy_only=true');
+        $this->line('surface=coverage_convergence_backfill');
         $this->line('plan='.$planPath);
+        $this->line('reachable_blob_count='.(int) ($summary['reachable_blob_count'] ?? 0));
+        $this->line('verified_remote_copy_counts_by_disk='.$this->formatCountsByDisk($summary['verified_remote_copy_counts_by_disk'] ?? []));
+        $this->line('local_only_count='.(int) ($summary['local_only_count'] ?? 0));
+        $this->line('target_only_count='.(int) ($summary['target_only_count'] ?? 0));
+        $this->line('both_count='.(int) ($summary['both_count'] ?? 0));
         $this->line('candidate_count='.(int) ($summary['candidate_count'] ?? 0));
         $this->line('skipped_count='.(int) ($summary['skipped_count'] ?? 0));
         $this->line('bytes='.(int) ($summary['bytes'] ?? 0));
@@ -193,7 +201,15 @@ final class StorageBlobOffload extends Command
 
         $this->line('status=executed');
         $this->line('disk='.$disk);
+        $this->line('target_disk='.(string) ($summary['target_disk'] ?? $disk));
+        $this->line('copy_only=true');
+        $this->line('surface=coverage_convergence_backfill');
         $this->line('plan='.$planPath);
+        $this->line('reachable_blob_count='.(int) ($summary['reachable_blob_count'] ?? 0));
+        $this->line('verified_remote_copy_counts_by_disk='.$this->formatCountsByDisk($summary['verified_remote_copy_counts_by_disk'] ?? []));
+        $this->line('local_only_count='.(int) ($summary['local_only_count'] ?? 0));
+        $this->line('target_only_count='.(int) ($summary['target_only_count'] ?? 0));
+        $this->line('both_count='.(int) ($summary['both_count'] ?? 0));
         $this->line('candidate_count='.(int) ($summary['candidate_count'] ?? 0));
         $this->line('uploaded_count='.(int) ($result['uploaded_count'] ?? 0));
         $this->line('verified_count='.(int) ($result['verified_count'] ?? 0));
@@ -224,7 +240,15 @@ final class StorageBlobOffload extends Command
                 'schema' => $plan['schema'] ?? null,
                 'mode' => $mode,
                 'disk' => $disk,
+                'target_disk' => $summary['target_disk'] ?? $disk,
                 'plan' => $planPath,
+                'reachable_blob_count' => (int) ($summary['reachable_blob_count'] ?? 0),
+                'verified_remote_copy_counts_by_disk' => is_array($summary['verified_remote_copy_counts_by_disk'] ?? null)
+                    ? $summary['verified_remote_copy_counts_by_disk']
+                    : [],
+                'local_only_count' => (int) ($summary['local_only_count'] ?? 0),
+                'target_only_count' => (int) ($summary['target_only_count'] ?? 0),
+                'both_count' => (int) ($summary['both_count'] ?? 0),
                 'candidate_count' => (int) ($summary['candidate_count'] ?? 0),
                 'skipped_count' => $mode === 'planned'
                     ? (int) ($summary['skipped_count'] ?? 0)
@@ -245,5 +269,32 @@ final class StorageBlobOffload extends Command
             'result' => (int) ($result['failed_count'] ?? 0) > 0 ? 'failed' : 'success',
             'created_at' => now(),
         ]);
+    }
+
+    private function formatCountsByDisk(mixed $value): string
+    {
+        if (! is_array($value) || $value === []) {
+            return 'none';
+        }
+
+        $counts = [];
+        foreach ($value as $disk => $count) {
+            $name = trim((string) $disk);
+            if ($name === '') {
+                continue;
+            }
+
+            $counts[$name] = (int) $count;
+        }
+
+        if ($counts === []) {
+            return 'none';
+        }
+
+        ksort($counts);
+
+        return collect($counts)
+            ->map(static fn (int $count, string $name): string => $name.':'.$count)
+            ->implode(',');
     }
 }
