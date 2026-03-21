@@ -102,6 +102,16 @@ final class MbtiCompareInviteContractTest extends TestCase
             ->assertJsonPath('invitee.mbti_public_summary_v1.runtime_type_code', null)
             ->assertJsonPath('invitee.mbti_public_projection_v1.runtime_type_code', null)
             ->assertJsonPath('compare.mbti_public_summary_v1.runtime_type_code', null)
+            ->assertJsonPath('relationship_sync_v1.relationship_contract_version', 'relationship.sync.v1')
+            ->assertJsonPath('relationship_sync_v1.relationship_fingerprint_version', 'relationship.sync.fp.v1')
+            ->assertJsonPath('relationship_sync_v1.dyadic_scope', 'public_compare_invite_safe')
+            ->assertJsonPath('relationship_sync_v1.subject_join_mode', 'share_compare_invite_pending')
+            ->assertJsonPath('relationship_sync_v1.dyadic_action_prompt_keys.0', 'dyadic_action.complete_compare_invite')
+            ->assertJsonPath('relationship_sync_v1.action_prompt.key', 'dyadic_action.complete_compare_invite')
+            ->assertJsonPath('relationship_sync_v1.action_prompt.cta_path', '/zh/tests/mbti-personality-test-16-personality-types/take?share_id='.$shareId.'&compare_invite_id='.$inviteId)
+            ->assertJsonPath('dyadic_graph_v1.graph_contract_version', 'dyadic.graph.v1')
+            ->assertJsonPath('dyadic_graph_v1.graph_scope', 'public_compare_invite_safe')
+            ->assertJsonPath('dyadic_graph_v1.supporting_scales.0', 'MBTI')
             ->assertJsonMissingPath('compare.mbti_public_projection_v1');
 
         $this->assertSame(
@@ -190,6 +200,18 @@ final class MbtiCompareInviteContractTest extends TestCase
             ->assertJsonPath('compare.mbti_public_summary_v1.runtime_type_code', null)
             ->assertJsonPath('compare.mbti_public_summary_v1.summary_card.title', $response->json('compare.title'))
             ->assertJsonPath('compare.mbti_public_summary_v1.summary_card.share_text', $response->json('compare.summary'))
+            ->assertJsonPath('relationship_sync_v1.relationship_contract_version', 'relationship.sync.v1')
+            ->assertJsonPath('relationship_sync_v1.dyadic_scope', 'public_compare_invite_safe')
+            ->assertJsonPath('relationship_sync_v1.subject_join_mode', 'share_compare_invite_joined')
+            ->assertJsonPath('relationship_sync_v1.shared_count', 1)
+            ->assertJsonPath('relationship_sync_v1.diverging_count', 4)
+            ->assertJsonPath('relationship_sync_v1.communication_bridge_keys.0', 'communication_bridge.energy_pacing')
+            ->assertJsonPath('relationship_sync_v1.decision_tension_keys.0', 'decision_tension.logic_vs_empathy')
+            ->assertJsonPath('relationship_sync_v1.stress_interplay_keys.0', 'stress_interplay.reassurance_gap')
+            ->assertJsonPath('relationship_sync_v1.dyadic_action_prompt_keys.0', 'dyadic_action.name_decision_rule')
+            ->assertJsonPath('dyadic_graph_v1.graph_contract_version', 'dyadic.graph.v1')
+            ->assertJsonPath('dyadic_graph_v1.root_node', 'relationship_sync')
+            ->assertJsonPath('dyadic_graph_v1.graph_scope', 'public_compare_invite_safe')
             ->assertJsonMissingPath('compare.mbti_public_projection_v1');
 
         $this->assertSame(
