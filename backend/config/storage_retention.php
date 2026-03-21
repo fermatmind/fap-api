@@ -17,4 +17,19 @@ return [
         'policy' => (string) env('STORAGE_RETENTION_ROTATION_AUDITS_POLICY', 'ttl'),
         'keep_days' => (int) env('STORAGE_RETENTION_ROTATION_AUDITS_DAYS', 180),
     ],
+    'control_plane_artifacts' => [
+        'control_plane_snapshots' => [
+            'keep_last_n' => (int) env('STORAGE_RETENTION_CONTROL_PLANE_SNAPSHOTS_KEEP_LAST', 30),
+        ],
+        'plan_dirs' => [
+            'keep_last_n' => (int) env('STORAGE_RETENTION_CONTROL_PLANE_PLAN_DIRS_KEEP_LAST', 5),
+        ],
+        'prune_plans' => [
+            'keep_last_n_per_scope' => (int) env('STORAGE_RETENTION_CONTROL_PLANE_PRUNE_PLANS_KEEP_LAST_PER_SCOPE', 3),
+        ],
+        'retain_latest_audit_referenced' => filter_var(
+            env('STORAGE_RETENTION_CONTROL_PLANE_RETAIN_LATEST_AUDIT_REFERENCED', true),
+            FILTER_VALIDATE_BOOL
+        ),
+    ],
 ];
