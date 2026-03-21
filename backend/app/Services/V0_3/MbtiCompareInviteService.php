@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\MbtiCompareInvite;
 use App\Models\Result;
 use App\Models\Share;
+use App\Services\InsightGraph\PrivateRelationshipContractService;
 use App\Services\InsightGraph\RelationshipSyncContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
@@ -23,6 +24,7 @@ final class MbtiCompareInviteService
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private readonly RelationshipSyncContractService $relationshipSyncContractService,
+        private readonly PrivateRelationshipContractService $privateRelationshipContractService,
     ) {}
 
     /**
@@ -73,48 +75,7 @@ final class MbtiCompareInviteService
         );
 
         $status = $this->normalizeStatus((string) ($invite->status ?? 'pending'));
-        $inviter = $this->toSummaryLiteWithProjection(
-            $inviterPayload,
-            true,
-            (int) ($attempt->org_id ?? 0),
-            $locale
-        );
-        $invitee = $this->pendingInviteePayload();
-        $compare = [
-            'mbti_public_summary_v1' => $this->mbtiPublicSummaryV1Builder->buildFromComparePayload([
-                'title' => null,
-                'summary' => null,
-                'axes' => [],
-            ], $locale),
-        ];
-
-        if (in_array($status, ['ready', 'purchased'], true)) {
-            $inviteeAttemptId = trim((string) ($invite->invitee_attempt_id ?? ''));
-            if ($inviteeAttemptId !== '') {
-                $inviteeAttempt = Attempt::query()->where('id', $inviteeAttemptId)->first();
-                if ($inviteeAttempt instanceof Attempt) {
-                    $inviteeResult = Result::query()
-                        ->where('attempt_id', (string) $inviteeAttempt->id)
-                        ->where('org_id', (int) ($inviteeAttempt->org_id ?? 0))
-                        ->first();
-
-                    if ($inviteeResult instanceof Result) {
-                        $inviteePayload = $this->shareService->buildPublicSummaryPayload($inviteeAttempt, $inviteeResult);
-                        $invitee = $this->toSummaryLiteWithProjection(
-                            $inviteePayload,
-                            false,
-                            (int) ($inviteeAttempt->org_id ?? 0),
-                            $locale
-                        );
-                        $compare = $this->buildComparePayload(
-                            $inviter,
-                            $invitee,
-                            $locale
-                        );
-                    }
-                }
-            }
-        }
+        [$inviter, $invitee, $compare] = $this->buildInviteReadContext($invite, $attempt, $result, $locale, true);
 
         $primaryCtaPath = $this->buildTakePath(
             $locale,
@@ -144,6 +105,74 @@ final class MbtiCompareInviteService
             'dyadic_graph_v1' => $this->relationshipSyncContractService->buildGraph($relationshipSync),
             'primary_cta_label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
             'primary_cta_path' => $primaryCtaPath,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function showPrivate(string $inviteId, mixed $userId, mixed $anonId): array
+    {
+        $invite = MbtiCompareInvite::query()->findOrFail($inviteId);
+        [, $inviterAttempt, $inviterResult] = $this->resolveMbtiShareContext((string) $invite->share_id);
+        $inviterPayload = $this->shareService->buildPublicSummaryPayload($inviterAttempt, $inviterResult, (string) $invite->share_id);
+        $locale = $this->normalizeLocale(
+            $this->nullableString($invite->locale)
+                ?? $this->nullableString($inviterPayload['locale'] ?? null)
+                ?? 'zh-CN'
+        );
+        $status = $this->normalizeStatus((string) ($invite->status ?? 'pending'));
+        $participantContext = $this->resolveParticipantContext($invite, $userId, $anonId);
+        if ($participantContext === null) {
+            throw new ApiProblemException(404, 'PRIVATE_RELATIONSHIP_NOT_FOUND', 'private relationship not found.');
+        }
+
+        [$inviter, $invitee, $compare] = $this->buildInviteReadContext($invite, $inviterAttempt, $inviterResult, $locale, false);
+        $relationshipSync = $this->relationshipSyncContractService->build(
+            $inviter,
+            $invitee,
+            $compare,
+            $status === 'purchased' ? 'ready' : $status,
+            $locale,
+            null
+        );
+
+        $accessState = $this->resolvePrivateAccessState(
+            $status,
+            (bool) ($participantContext['has_invitee'] ?? false),
+            data_get($compare, 'title')
+        );
+        $subjectJoinMode = $this->resolvePrivateJoinMode($status);
+        $participantAttempt = $participantContext['attempt'] ?? null;
+        $privateRelationship = $this->privateRelationshipContractService->buildPrivateRelationship(
+            $inviter,
+            $invitee,
+            $relationshipSync,
+            (string) ($participantContext['participant_role'] ?? 'inviter'),
+            $accessState,
+            $subjectJoinMode,
+            $locale,
+            $participantAttempt instanceof Attempt
+                ? $this->buildProtectedResultPath($locale, (string) $participantAttempt->id)
+                : $this->buildProtectedHistoryPath($locale),
+            $locale === 'zh-CN' ? '进入我的 MBTI 报告' : 'Open my MBTI reports'
+        );
+        $dyadicConsent = $this->privateRelationshipContractService->buildDyadicConsent(
+            $invite,
+            $this->normalizeConsentState($status),
+            $accessState,
+            $subjectJoinMode
+        );
+
+        return [
+            'invite_id' => (string) $invite->id,
+            'share_id' => (string) $invite->share_id,
+            'scale_code' => 'MBTI',
+            'locale' => $locale,
+            'status' => $status,
+            'private_relationship_v1' => $privateRelationship,
+            'dyadic_consent_v1' => $dyadicConsent,
+            'dyadic_graph_v1' => $this->privateRelationshipContractService->buildProtectedGraph($privateRelationship),
         ];
     }
 
@@ -347,6 +376,144 @@ final class MbtiCompareInviteService
         ];
     }
 
+    /**
+     * @return array{0:array<string,mixed>,1:array<string,mixed>,2:array<string,mixed>}
+     */
+    private function buildInviteReadContext(
+        MbtiCompareInvite $invite,
+        Attempt $inviterAttempt,
+        Result $inviterResult,
+        string $locale,
+        bool $includeShareIdForInviter
+    ): array {
+        $share = Share::query()->where('id', (string) $invite->share_id)->first();
+        $inviterPayload = $this->shareService->buildPublicSummaryPayload(
+            $inviterAttempt,
+            $inviterResult,
+            (string) $invite->share_id,
+            $share?->created_at?->toISOString()
+        );
+        $inviter = $this->toSummaryLiteWithProjection(
+            $inviterPayload,
+            $includeShareIdForInviter,
+            (int) ($inviterAttempt->org_id ?? 0),
+            $locale
+        );
+        $invitee = $this->pendingInviteePayload();
+        $compare = [
+            'mbti_public_summary_v1' => $this->mbtiPublicSummaryV1Builder->buildFromComparePayload([
+                'title' => null,
+                'summary' => null,
+                'axes' => [],
+            ], $locale),
+        ];
+
+        $inviteeContext = $this->resolveInviteeContext($invite);
+        if ($inviteeContext !== null) {
+            [$inviteeAttempt, $inviteeResult] = $inviteeContext;
+            $inviteePayload = $this->shareService->buildPublicSummaryPayload($inviteeAttempt, $inviteeResult);
+            $invitee = $this->toSummaryLiteWithProjection(
+                $inviteePayload,
+                false,
+                (int) ($inviteeAttempt->org_id ?? 0),
+                $locale
+            );
+            $compare = $this->buildComparePayload($inviter, $invitee, $locale);
+        }
+
+        return [$inviter, $invitee, $compare];
+    }
+
+    /**
+     * @return array{0:Attempt,1:Result}|null
+     */
+    private function resolveInviteeContext(MbtiCompareInvite $invite): ?array
+    {
+        if (! in_array($this->normalizeStatus((string) ($invite->status ?? 'pending')), ['ready', 'purchased'], true)) {
+            return null;
+        }
+
+        $inviteeAttemptId = trim((string) ($invite->invitee_attempt_id ?? ''));
+        if ($inviteeAttemptId === '') {
+            return null;
+        }
+
+        $inviteeAttempt = Attempt::query()->where('id', $inviteeAttemptId)->first();
+        if (! $inviteeAttempt instanceof Attempt) {
+            return null;
+        }
+
+        $inviteeResult = Result::query()
+            ->where('attempt_id', (string) $inviteeAttempt->id)
+            ->where('org_id', (int) ($inviteeAttempt->org_id ?? 0))
+            ->first();
+
+        if (! $inviteeResult instanceof Result) {
+            return null;
+        }
+
+        return [$inviteeAttempt, $inviteeResult];
+    }
+
+    /**
+     * @return array{participant_role:string,attempt:?Attempt,has_invitee:bool}|null
+     */
+    private function resolveParticipantContext(MbtiCompareInvite $invite, mixed $userId, mixed $anonId): ?array
+    {
+        $normalizedUserId = $this->nullableString($userId);
+        $normalizedAnonId = $this->nullableString($anonId);
+        if ($normalizedUserId === null && $normalizedAnonId === null) {
+            return null;
+        }
+
+        $inviterAttempt = Attempt::query()->where('id', (string) $invite->inviter_attempt_id)->first();
+        $inviteeContext = $this->resolveInviteeContext($invite);
+
+        if ($inviterAttempt instanceof Attempt && $this->attemptBelongsToActor($inviterAttempt, $normalizedUserId, $normalizedAnonId)) {
+            return [
+                'participant_role' => 'inviter',
+                'attempt' => $inviterAttempt,
+                'has_invitee' => $inviteeContext !== null,
+            ];
+        }
+
+        if ($inviteeContext !== null) {
+            [$inviteeAttempt] = $inviteeContext;
+            if ($this->attemptBelongsToActor($inviteeAttempt, $normalizedUserId, $normalizedAnonId)) {
+                return [
+                    'participant_role' => 'invitee',
+                    'attempt' => $inviteeAttempt,
+                    'has_invitee' => true,
+                ];
+            }
+        }
+
+        if (
+            ($normalizedUserId !== null && $normalizedUserId === $this->nullableString($invite->invitee_user_id))
+            || ($normalizedAnonId !== null && $normalizedAnonId === $this->nullableString($invite->invitee_anon_id))
+        ) {
+            return [
+                'participant_role' => 'invitee',
+                'attempt' => $inviteeContext[0] ?? null,
+                'has_invitee' => $inviteeContext !== null,
+            ];
+        }
+
+        return null;
+    }
+
+    private function attemptBelongsToActor(Attempt $attempt, ?string $userId, ?string $anonId): bool
+    {
+        $attemptUserId = $this->nullableString($attempt->user_id ?? null);
+        if ($userId !== null && $attemptUserId !== null && $attemptUserId === $userId) {
+            return true;
+        }
+
+        $attemptAnonId = $this->nullableString($attempt->anon_id ?? null);
+
+        return $anonId !== null && $attemptAnonId !== null && $attemptAnonId === $anonId;
+    }
+
     private function buildTakePath(string $locale, string $shareId, string $inviteId, string $primaryCtaPath): string
     {
         $basePath = trim($primaryCtaPath);
@@ -365,11 +532,58 @@ final class MbtiCompareInviteService
         return '/'.$segment.'/compare/mbti/'.rawurlencode($inviteId);
     }
 
+    private function buildProtectedResultPath(string $locale, string $attemptId): string
+    {
+        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+
+        return '/'.$segment.'/result/'.rawurlencode($attemptId);
+    }
+
+    private function buildProtectedHistoryPath(string $locale): string
+    {
+        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+
+        return '/'.$segment.'/history/mbti';
+    }
+
     private function normalizeStatus(string $status): string
     {
         $normalized = strtolower(trim($status));
 
         return in_array($normalized, ['pending', 'ready', 'purchased'], true) ? $normalized : 'pending';
+    }
+
+    private function normalizeConsentState(string $status): string
+    {
+        return match ($status) {
+            'purchased' => 'purchased',
+            'ready' => 'joined',
+            default => 'pending',
+        };
+    }
+
+    private function resolvePrivateAccessState(string $status, bool $hasInvitee, mixed $compareTitle): string
+    {
+        if ($status === 'pending' || ! $hasInvitee) {
+            return 'awaiting_second_subject';
+        }
+
+        if ($status === 'purchased') {
+            return 'private_access_ready';
+        }
+
+        return trim((string) $compareTitle) === ''
+            ? 'private_access_partial'
+            : 'joined_public_only';
+    }
+
+    private function resolvePrivateJoinMode(string $status): string
+    {
+        return match ($status) {
+            'purchased' => 'share_compare_invite_purchased',
+            'ready' => 'share_compare_invite_joined',
+            default => 'share_compare_invite_pending',
+        };
     }
 
     private function normalizeLocale(string $locale): string
@@ -378,7 +592,7 @@ final class MbtiCompareInviteService
     }
 
     /**
-     * @param  array<string, mixed>  $payload
+     * @param  array<string, mixed>  $inviter
      * @param  array<string, mixed>  $invitee
      * @return array<string, mixed>
      */
