@@ -75,11 +75,20 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
         $this->assertSame('storage_control_plane_snapshot.v1', $payload['snapshot_schema']);
         $this->assertSame('snapshotted', $payload['status']);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
+        $this->assertArrayHasKey('materialized_cache', $payload);
         $this->assertArrayHasKey('attention_digest', $payload);
         $this->assertArrayHasKey('last_updated_at', $payload['inventory']);
         $this->assertArrayHasKey('freshness_age_seconds', $payload['inventory']);
         $this->assertArrayHasKey('freshness_state', $payload['inventory']);
         $this->assertArrayHasKey('freshness_source_type', $payload['inventory']);
+        $this->assertSame('ok', data_get($payload, 'materialized_cache.status'));
+        $this->assertSame(storage_path('app/private/packs_v2_materialized'), data_get($payload, 'materialized_cache.root_path'));
+        $this->assertSame(0, data_get($payload, 'materialized_cache.bucket_count'));
+        $this->assertSame(0, data_get($payload, 'materialized_cache.total_files'));
+        $this->assertSame(0, data_get($payload, 'materialized_cache.total_bytes'));
+        $this->assertSame([], data_get($payload, 'materialized_cache.sample_bucket_paths'));
+        $this->assertFalse((bool) data_get($payload, 'materialized_cache.source_of_truth'));
+        $this->assertTrue((bool) data_get($payload, 'materialized_cache.zero_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
         $this->assertSame('remote_rehydrate_enabled', data_get($payload, 'runtime_truth.v2_readiness'));
@@ -102,6 +111,35 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
         $this->assertSame([], $this->existingFilesUnder('app/private/prune_plans'));
         $this->assertSame([], $this->existingFilesUnder('app/private/retirement_runs'));
         $this->assertSame([], $this->existingFilesUnder('app/private/blobs'));
+    }
+
+    public function test_command_json_includes_non_zero_materialized_cache_state(): void
+    {
+        $this->seedMinimalTruth();
+        $bucket = [
+            '.materialization.json' => json_encode([
+                'storage_path' => 'private/packs_v2/BIG5_OCEAN/v1/release-a',
+                'manifest_hash' => str_repeat('b', 64),
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'compiled/manifest.json' => str_repeat('m', 10),
+            'compiled/questions.compiled.json' => str_repeat('q', 7),
+        ];
+        $this->seedMaterializedBucket('BIG5_OCEAN', 'v1', str_repeat('a', 64), str_repeat('b', 64), $bucket);
+
+        $this->assertSame(0, Artisan::call('storage:control-plane-snapshot', [
+            '--json' => true,
+        ]));
+
+        $payload = json_decode(trim(Artisan::output()), true);
+
+        $this->assertIsArray($payload);
+        $this->assertSame(1, data_get($payload, 'materialized_cache.bucket_count'));
+        $this->assertSame(3, data_get($payload, 'materialized_cache.total_files'));
+        $this->assertSame($this->totalBytesForFiles($bucket), data_get($payload, 'materialized_cache.total_bytes'));
+        $this->assertSame([
+            str_replace('\\', '/', storage_path('app/private/packs_v2_materialized/BIG5_OCEAN/v1/'.str_repeat('a', 64).'/'.str_repeat('b', 64))),
+        ], data_get($payload, 'materialized_cache.sample_bucket_paths'));
+        $this->assertFalse((bool) data_get($payload, 'materialized_cache.zero_state'));
     }
 
     public function test_command_outputs_human_readable_summary(): void
@@ -138,6 +176,33 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
             'result' => 'success',
             'created_at' => now(),
         ]);
+    }
+
+    /**
+     * @param  array<string,string>  $files
+     */
+    private function seedMaterializedBucket(
+        string $packId,
+        string $packVersion,
+        string $storageIdentity,
+        string $manifestHash,
+        array $files,
+    ): void {
+        $root = storage_path('app/private/packs_v2_materialized/'.$packId.'/'.$packVersion.'/'.$storageIdentity.'/'.$manifestHash);
+
+        foreach ($files as $relativePath => $contents) {
+            $absolutePath = $root.'/'.ltrim($relativePath, '/');
+            File::ensureDirectoryExists(dirname($absolutePath));
+            File::put($absolutePath, $contents);
+        }
+    }
+
+    /**
+     * @param  array<string,string>  $files
+     */
+    private function totalBytesForFiles(array $files): int
+    {
+        return array_sum(array_map(static fn (string $contents): int => strlen($contents), $files));
     }
 
     /**

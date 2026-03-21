@@ -39,6 +39,7 @@ final class StorageControlPlaneStatusService
             'restore' => $this->restoreSection(),
             'purge' => $this->purgeSection(),
             'retirement' => $this->retirementSection(),
+            'materialized_cache' => $this->materializedCacheSection(),
             'runtime_truth' => $this->runtimeTruthSection(),
             'automation_readiness' => $this->automationReadinessSection(),
         ];
@@ -387,6 +388,29 @@ final class StorageControlPlaneStatusService
             'packs_v2_remote_rehydrate_enabled' => $packsV2RemoteRehydrateEnabled,
             'v2_readiness' => $readiness,
         ] + $this->unknownFreshness('config-derived');
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function materializedCacheSection(): array
+    {
+        $rootPath = storage_path('app/private/packs_v2_materialized');
+        $bucketRoots = $this->materializedBucketRoots($rootPath);
+        $stats = $this->directoryTreeStats($rootPath);
+
+        return [
+            'status' => 'ok',
+            'root_path' => $rootPath,
+            'bucket_count' => count($bucketRoots),
+            'total_files' => $stats['total_files'],
+            'total_bytes' => $stats['total_bytes'],
+            'sample_bucket_paths' => array_slice($bucketRoots, 0, 5),
+            'cache_key_contract' => 'storage_path + manifest_hash',
+            'runtime_role' => 'derived_cache_return_surface',
+            'source_of_truth' => false,
+            'zero_state' => count($bucketRoots) === 0,
+        ];
     }
 
     /**
@@ -756,6 +780,63 @@ final class StorageControlPlaneStatusService
         }
 
         return count(array_filter($matches, 'is_file'));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function materializedBucketRoots(string $rootPath): array
+    {
+        if (! is_dir($rootPath)) {
+            return [];
+        }
+
+        $matches = glob($rootPath.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.'*', GLOB_ONLYDIR);
+        if (! is_array($matches)) {
+            return [];
+        }
+
+        $roots = array_values(array_filter(
+            array_map(static fn (string $path): string => str_replace('\\', '/', $path), $matches),
+            static fn (string $path): bool => $path !== '' && is_dir($path)
+        ));
+
+        sort($roots);
+
+        return array_values(array_unique($roots));
+    }
+
+    /**
+     * @return array{total_files:int,total_bytes:int}
+     */
+    private function directoryTreeStats(string $rootPath): array
+    {
+        if (! is_dir($rootPath)) {
+            return [
+                'total_files' => 0,
+                'total_bytes' => 0,
+            ];
+        }
+
+        $totalFiles = 0;
+        $totalBytes = 0;
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($rootPath, \FilesystemIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $file) {
+            if (! $file->isFile()) {
+                continue;
+            }
+
+            $totalFiles++;
+            $totalBytes += (int) $file->getSize();
+        }
+
+        return [
+            'total_files' => $totalFiles,
+            'total_bytes' => $totalBytes,
+        ];
     }
 
     private function tableCount(string $table): int
