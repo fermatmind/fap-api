@@ -10,6 +10,8 @@ use App\Services\Cms\PersonalityProfileService;
 use App\Services\Mbti\MbtiPrivacyConsentContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
+use App\Services\BigFive\BigFivePublicProjectionService;
+use App\Services\PublicSurface\PublicSurfaceContractService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportComposer;
 use App\Services\Scale\ScaleIdentityWriteProjector;
@@ -29,6 +31,8 @@ class ShareService
         private readonly MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
+        private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
+        private readonly PublicSurfaceContractService $publicSurfaceContractService,
     ) {}
 
     public function getOrCreateShare(string $attemptId, OrgContext $ctx): array
@@ -224,7 +228,13 @@ class ShareService
      *   primary_cta_path:string
      * }
      */
-    private function buildShareSummary(?Share $share, Attempt $attempt, Result $result, ?array $report = null): array
+    private function buildShareSummary(
+        ?Share $share,
+        Attempt $attempt,
+        Result $result,
+        ?array $report = null,
+        ?array $big5Projection = null
+    ): array
     {
         $resultJson = $this->normalizeArray($result->result_json ?? null);
         $report = is_array($report) ? $report : $this->buildPublicSafeReportSnapshot($attempt, $result);
@@ -238,6 +248,10 @@ class ShareService
         }
 
         $locale = $this->normalizeLocale((string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')));
+        if ($scaleCode === 'BIG5_OCEAN') {
+            return $this->buildBigFiveShareSummary($attempt, $locale, $big5Projection ?? []);
+        }
+
         $typeCode = trim((string) ($result->type_code ?? $resultJson['type_code'] ?? ''));
         $typeName = $this->firstNonEmpty(
             $this->stringOrNull($resultJson['type_name'] ?? null),
@@ -299,6 +313,65 @@ class ShareService
             'dimensions' => $dimensions,
             'primary_cta_label' => $this->resolvePrimaryCtaLabel($locale),
             'primary_cta_path' => $this->resolvePrimaryCtaPath($scaleCode, $locale, (int) ($attempt->org_id ?? 0)),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function buildBigFiveShareSummary(Attempt $attempt, string $locale, array $projection): array
+    {
+        $isZh = $locale === 'zh-CN';
+        $traitVector = is_array($projection['trait_vector'] ?? null) ? $projection['trait_vector'] : [];
+        $dominantTraits = is_array($projection['dominant_traits'] ?? null) ? $projection['dominant_traits'] : [];
+        $explainabilitySummary = is_array($projection['explainability_summary'] ?? null) ? $projection['explainability_summary'] : [];
+        $actionPlanSummary = is_array($projection['action_plan_summary'] ?? null) ? $projection['action_plan_summary'] : [];
+        $controlledNarrative = is_array($projection['controlled_narrative_v1'] ?? null) ? $projection['controlled_narrative_v1'] : [];
+
+        $dominantLabels = array_values(array_filter(array_map(
+            fn (mixed $item): string => trim((string) (is_array($item) ? ($item['label'] ?? '') : '')),
+            $dominantTraits
+        )));
+
+        $dimensions = array_values(array_map(
+            static fn (array $trait): array => [
+                'code' => trim((string) ($trait['key'] ?? '')),
+                'label' => trim((string) ($trait['label'] ?? '')),
+                'pct' => (int) ($trait['percentile'] ?? 0),
+                'state' => trim((string) ($trait['band_label'] ?? $trait['band'] ?? '')),
+            ],
+            array_filter($traitVector, static fn (mixed $item): bool => is_array($item))
+        ));
+
+        $summary = $this->firstNonEmpty(
+            $this->stringOrNull($controlledNarrative['narrative_summary'] ?? null),
+            $this->stringOrNull($explainabilitySummary['headline'] ?? null),
+            $this->stringOrNull($actionPlanSummary['headline'] ?? null),
+            $isZh ? '这是一个公开安全的大五人格摘要，只保留核心特质与结果入口。'
+                : 'This is a public-safe Big Five summary that keeps only the core traits and entry path.'
+        );
+
+        return [
+            'scale_code' => 'BIG5_OCEAN',
+            'locale' => $locale,
+            'title' => $isZh ? '大五人格公开摘要' : 'Big Five public summary',
+            'subtitle' => $this->firstNonEmpty(
+                $this->stringOrNull($controlledNarrative['narrative_intro'] ?? null),
+                $this->stringOrNull($explainabilitySummary['headline'] ?? null)
+            ),
+            'summary' => $summary,
+            'type_code' => 'BIG5',
+            'type_name' => $isZh ? '大五人格' : 'Big Five personality',
+            'tagline' => $this->firstNonEmpty(
+                implode(' · ', array_slice($dominantLabels, 0, 3)),
+                $this->stringOrNull($actionPlanSummary['headline'] ?? null)
+            ),
+            'rarity' => null,
+            'tags' => array_slice($dominantLabels, 0, 5),
+            'dimensions' => $dimensions,
+            'primary_cta_label' => $this->resolvePrimaryCtaLabel($locale),
+            'primary_cta_path' => $this->resolvePrimaryCtaPath('BIG5_OCEAN', $locale, (int) ($attempt->org_id ?? 0)),
         ];
     }
 
@@ -634,10 +707,16 @@ class ShareService
         ?string $createdAt
     ): array {
         $publicSafeReport = $this->buildPublicSafeReportSnapshot($attempt, $result);
-        $summary = $this->buildShareSummary($share, $attempt, $result, $publicSafeReport);
+        $normalizedScaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? 'MBTI')));
+        $normalizedLocale = $this->normalizeLocale((string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')));
+        $big5Projection = $normalizedScaleCode === 'BIG5_OCEAN'
+            ? $this->bigFivePublicProjectionService->buildFromResult($result, $normalizedLocale)
+            : [];
+        $summary = $this->buildShareSummary($share, $attempt, $result, $publicSafeReport, $big5Projection);
         $resolvedShareId = trim((string) $shareId);
         $locale = (string) ($summary['locale'] ?? 'zh-CN');
-        $compareEnabled = strtoupper((string) ($summary['scale_code'] ?? '')) === 'MBTI';
+        $scaleCode = strtoupper((string) ($summary['scale_code'] ?? 'MBTI'));
+        $compareEnabled = $scaleCode === 'MBTI';
         $readContract = is_array(data_get($publicSafeReport, '_meta.personalization.read_contract_v1'))
             ? data_get($publicSafeReport, '_meta.personalization.read_contract_v1')
             : null;
@@ -677,6 +756,9 @@ class ShareService
         }
 
         if ($compareEnabled) {
+            $mbtiPersonalization = is_array(data_get($publicSafeReport, '_meta.personalization'))
+                ? data_get($publicSafeReport, '_meta.personalization')
+                : [];
             $payload['mbti_public_summary_v1'] = $this->mbtiPublicSummaryV1Builder->buildFromSharePayload(
                 $payload,
                 $publicSafeReport,
@@ -690,10 +772,121 @@ class ShareService
                 $this->normalizeArray($result->result_json ?? null)
             );
             $payload['mbti_continuity_v1'] = $this->extractMbtiContinuity($publicSafeReport);
+            foreach ([
+                'controlled_narrative_v1',
+                'cultural_calibration_v1',
+                'comparative_v1',
+                'working_life_v1',
+                'cross_assessment_v1',
+            ] as $contractKey) {
+                if (is_array($mbtiPersonalization[$contractKey] ?? null)) {
+                    $payload[$contractKey === 'cross_assessment_v1' ? 'mbti_cross_assessment_v1' : $contractKey] = $mbtiPersonalization[$contractKey];
+                }
+            }
             $payload = $this->applyMbtiProjectionAliases($payload);
+        } elseif ($scaleCode === 'BIG5_OCEAN' && $big5Projection !== []) {
+            $payload['big5_public_projection_v1'] = $big5Projection;
+            foreach ([
+                'controlled_narrative_v1',
+                'cultural_calibration_v1',
+                'comparative_v1',
+            ] as $contractKey) {
+                if (is_array($big5Projection[$contractKey] ?? null)) {
+                    $payload[$contractKey] = $big5Projection[$contractKey];
+                }
+            }
         }
 
+        $payload['public_surface_v1'] = $this->buildPublicSurfaceContract(
+            $payload,
+            $locale,
+            $scaleCode,
+            $resolvedShareId,
+            $big5Projection,
+            $publicSafeReport
+        );
+
         return $payload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $big5Projection
+     * @param  array<string,mixed>  $publicSafeReport
+     * @return array<string,mixed>
+     */
+    private function buildPublicSurfaceContract(
+        array $payload,
+        string $locale,
+        string $scaleCode,
+        string $shareId,
+        array $big5Projection,
+        array $publicSafeReport
+    ): array {
+        $discoverabilityKeys = ['public_safe_summary', 'share_landing', 'return_to_test'];
+        $continueReadingKeys = [];
+
+        if ($scaleCode === 'MBTI') {
+            $continueReadingKeys = array_values(array_filter(array_map(
+                static fn (mixed $value): string => trim((string) $value),
+                (array) data_get($payload, 'mbti_continuity_v1.recommended_resume_keys', [])
+            )));
+            if ($continueReadingKeys === []) {
+                $continueReadingKeys = ['traits.why_this_type', 'growth.next_actions'];
+            }
+            $discoverabilityKeys[] = 'mbti_public_summary';
+            if ($continueReadingKeys !== []) {
+                $discoverabilityKeys[] = 'continue_here';
+            }
+            if (is_array($payload['working_life_v1'] ?? null)) {
+                $discoverabilityKeys[] = 'working_life';
+            }
+            if (is_array($payload['comparative_v1'] ?? null)) {
+                $discoverabilityKeys[] = 'comparative';
+            }
+            if (is_array($payload['controlled_narrative_v1'] ?? null)) {
+                $discoverabilityKeys[] = 'controlled_narrative';
+            }
+            if (($payload['compare_enabled'] ?? false) === true) {
+                $discoverabilityKeys[] = 'compare_invite';
+            }
+        } elseif ($scaleCode === 'BIG5_OCEAN') {
+            $continueReadingKeys = array_values(array_filter(array_map(
+                static fn (mixed $value): string => trim((string) $value),
+                (array) ($big5Projection['ordered_section_keys'] ?? [])
+            )));
+            $continueReadingKeys = array_slice($continueReadingKeys, 0, 3);
+            if ($continueReadingKeys === []) {
+                $continueReadingKeys = ['traits.overview', 'growth.next_actions'];
+            }
+            $discoverabilityKeys[] = 'big5_foundation_summary';
+            if (is_array($payload['comparative_v1'] ?? null)) {
+                $discoverabilityKeys[] = 'comparative';
+            }
+            if (is_array($payload['controlled_narrative_v1'] ?? null)) {
+                $discoverabilityKeys[] = 'controlled_narrative';
+            }
+        }
+
+        return $this->publicSurfaceContractService->build([
+            'entry_surface' => $scaleCode === 'BIG5_OCEAN' ? 'big5_share_landing' : 'mbti_share_landing',
+            'discoverability_keys' => $discoverabilityKeys,
+            'continue_reading_keys' => $continueReadingKeys,
+            'canonical_url' => $shareId !== '' ? $this->buildLocalizedShareUrl($shareId, $locale) : null,
+            'robots_policy' => 'noindex,follow',
+            'attribution_scope' => 'share_public_surface',
+            'scale_code' => $scaleCode,
+            'locale' => $locale,
+            'fingerprint_seed' => [
+                'title' => $payload['title'] ?? null,
+                'summary' => $payload['summary'] ?? null,
+                'type_code' => $payload['type_code'] ?? null,
+                'content_package_version' => $payload['content_package_version'] ?? null,
+                'read_contract_version' => data_get($publicSafeReport, '_meta.personalization.read_contract_v1.version'),
+                'narrative_fingerprint' => data_get($payload, 'controlled_narrative_v1.narrative_fingerprint'),
+                'comparative_fingerprint' => data_get($payload, 'comparative_v1.comparative_fingerprint'),
+            ],
+        ]);
     }
 
     /**

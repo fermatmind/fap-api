@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
-use App\Models\Event;
 use App\Models\Result;
 use App\Models\Share;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -36,16 +36,19 @@ final class ShareClickAttributionTest extends TestCase
             ->assertJsonMissingPath('report')
             ->assertJsonMissingPath('result');
 
-        $event = Event::query()
+        $event = DB::table('events')
             ->where('event_code', 'share_click')
             ->where('share_id', (string) $share->id)
             ->latest('created_at')
-            ->firstOrFail();
+            ->first();
 
+        $this->assertNotNull($event);
+
+        $meta = json_decode((string) ($event->meta_json ?? '{}'), true);
         $this->assertSame('legacy_click_probe', (string) $event->anon_id);
-        $this->assertSame('keep_me', data_get($event->meta_json, 'legacy_marker'));
-        $this->assertSame('legacy-source', data_get($event->meta_json, 'utm.source'));
-        $this->assertSame((string) $share->attempt_id, data_get($event->meta_json, 'attempt_id'));
+        $this->assertSame('keep_me', data_get($meta, 'legacy_marker'));
+        $this->assertSame('legacy-source', data_get($meta, 'utm.source'));
+        $this->assertSame((string) $share->attempt_id, data_get($meta, 'attempt_id'));
     }
 
     public function test_click_persists_new_attribution_meta_without_share_generate_dependency(): void
@@ -76,24 +79,27 @@ final class ShareClickAttributionTest extends TestCase
             ->assertJsonMissingPath('report')
             ->assertJsonMissingPath('result');
 
-        $event = Event::query()
+        $event = DB::table('events')
             ->where('event_code', 'share_click')
             ->where('share_id', (string) $share->id)
             ->latest('created_at')
-            ->firstOrFail();
+            ->first();
+
+        $this->assertNotNull($event);
+        $meta = json_decode((string) ($event->meta_json ?? '{}'), true);
 
         $this->assertSame('scan_probe', (string) $event->anon_id);
-        $this->assertSame('share_page', data_get($event->meta_json, 'entrypoint'));
-        $this->assertSame('share', data_get($event->meta_json, 'utm.source'));
-        $this->assertSame('organic', data_get($event->meta_json, 'utm.medium'));
-        $this->assertSame('pr06', data_get($event->meta_json, 'utm.campaign'));
-        $this->assertSame('mbti', data_get($event->meta_json, 'utm.term'));
-        $this->assertSame('hero', data_get($event->meta_json, 'utm.content'));
-        $this->assertSame('https://ref.example/share', data_get($event->meta_json, 'referrer'));
-        $this->assertSame('/zh/share/'.(string) $share->id, data_get($event->meta_json, 'landing_path'));
-        $this->assertFalse((bool) data_get($event->meta_json, 'compare_intent'));
-        $this->assertSame('INTJ-A', data_get($event->meta_json, 'type_code'));
-        $this->assertSame((string) $share->attempt_id, data_get($event->meta_json, 'attempt_id'));
+        $this->assertSame('share_page', data_get($meta, 'entrypoint'));
+        $this->assertSame('share', data_get($meta, 'utm.source'));
+        $this->assertSame('organic', data_get($meta, 'utm.medium'));
+        $this->assertSame('pr06', data_get($meta, 'utm.campaign'));
+        $this->assertSame('mbti', data_get($meta, 'utm.term'));
+        $this->assertSame('hero', data_get($meta, 'utm.content'));
+        $this->assertSame('https://ref.example/share', data_get($meta, 'referrer'));
+        $this->assertSame('/zh/share/'.(string) $share->id, data_get($meta, 'landing_path'));
+        $this->assertFalse((bool) data_get($meta, 'compare_intent'));
+        $this->assertSame('INTJ-A', data_get($meta, 'type_code'));
+        $this->assertSame((string) $share->attempt_id, data_get($meta, 'attempt_id'));
     }
 
     public function test_click_accepts_flat_utm_fields_and_normalizes_them_into_nested_utm_meta(): void
@@ -116,18 +122,21 @@ final class ShareClickAttributionTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('share_id', (string) $share->id);
 
-        $event = Event::query()
+        $event = DB::table('events')
             ->where('event_code', 'share_click')
             ->where('share_id', (string) $share->id)
             ->latest('created_at')
-            ->firstOrFail();
+            ->first();
 
-        $this->assertSame('share', data_get($event->meta_json, 'utm.source'));
-        $this->assertSame('organic', data_get($event->meta_json, 'utm.medium'));
-        $this->assertSame('pr07a', data_get($event->meta_json, 'utm.campaign'));
-        $this->assertSame('mbti_compare', data_get($event->meta_json, 'utm.term'));
-        $this->assertSame('invite_card', data_get($event->meta_json, 'utm.content'));
-        $this->assertSame('clk_flat_001', data_get($event->meta_json, 'share_click_id'));
+        $this->assertNotNull($event);
+        $meta = json_decode((string) ($event->meta_json ?? '{}'), true);
+
+        $this->assertSame('share', data_get($meta, 'utm.source'));
+        $this->assertSame('organic', data_get($meta, 'utm.medium'));
+        $this->assertSame('pr07a', data_get($meta, 'utm.campaign'));
+        $this->assertSame('mbti_compare', data_get($meta, 'utm.term'));
+        $this->assertSame('invite_card', data_get($meta, 'utm.content'));
+        $this->assertSame('clk_flat_001', data_get($meta, 'share_click_id'));
     }
 
     private function createShareFixture(string $ownerAnonId): Share

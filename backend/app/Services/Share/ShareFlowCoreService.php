@@ -388,7 +388,11 @@ final class ShareFlowCoreService
 
     private function canGeneratePublicShareSummary(Attempt $attempt): bool
     {
-        return strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI';
+        return in_array(
+            strtoupper(trim((string) ($attempt->scale_code ?? ''))),
+            ['MBTI', 'BIG5_OCEAN'],
+            true
+        );
     }
 
     /**
