@@ -14,6 +14,7 @@ class AssessmentSummaryService
     public function __construct(
         private ScaleRegistry $registry,
         private TeamDynamicsSynthesisService $teamDynamics,
+        private WorkspaceSurfaceContractService $workspaceSurface,
     ) {}
 
     public function buildSummary(Assessment $assessment): array
@@ -51,6 +52,12 @@ class AssessmentSummaryService
 
         $driverType = $this->resolveDriverType($assessment);
 
+        $completionRate = [
+            'completed' => $completed,
+            'total' => $total,
+        ];
+        $teamDynamics = $this->teamDynamics->buildForAssessment($assessment, $results, $total);
+
         return [
             'completion_rate' => [
                 'completed' => $completed,
@@ -63,7 +70,8 @@ class AssessmentSummaryService
             ],
             'score_distribution' => $this->scoreDistribution($driverType, $results),
             'dimension_means' => $this->dimensionMeans($driverType, $results),
-            'team_dynamics_v1' => $this->teamDynamics->buildForAssessment($assessment, $results, $total),
+            'team_dynamics_v1' => $teamDynamics,
+            'workspace_surface_v1' => $this->workspaceSurface->build($teamDynamics, $completionRate),
         ];
     }
 
