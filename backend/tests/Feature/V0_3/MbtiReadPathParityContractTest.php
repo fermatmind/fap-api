@@ -101,6 +101,10 @@ final class MbtiReadPathParityContractTest extends TestCase
         $this->assertSame('mbti.intra_type_profile.v1', data_get($effectiveReportPersonalization, 'intra_type_profile_v1.version'));
         $this->assertSame('mbti.longitudinal_memory.v1', data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.memory_contract_version'));
         $this->assertSame('mbti.adaptive_selection.v1', data_get($effectiveReportPersonalization, 'adaptive_selection_v1.adaptive_contract_version'));
+        $this->assertSame('mbti.tone_profile.v1', data_get($effectiveReportPersonalization, 'tone_profile_v1.tone_contract_version'));
+        $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'tone_profile_v1.tone_fingerprint')));
+        $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'tone_profile_v1.default_tone_mode')));
+        $this->assertIsArray(data_get($effectiveReportPersonalization, 'tone_profile_v1.section_tone_modes'));
         $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'adaptive_selection_v1.adaptive_fingerprint')));
         $this->assertNotSame('', trim((string) data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.memory_fingerprint')));
         $this->assertIsArray(data_get($effectiveReportPersonalization, 'longitudinal_memory_v1.section_history_keys'));
@@ -139,6 +143,10 @@ final class MbtiReadPathParityContractTest extends TestCase
         );
         $this->assertContains(
             'adaptive_selection_v1.adaptive_fingerprint',
+            (array) data_get($readContract, 'telemetry_parity_fields', [])
+        );
+        $this->assertContains(
+            'tone_profile_v1.tone_fingerprint',
             (array) data_get($readContract, 'telemetry_parity_fields', [])
         );
     }

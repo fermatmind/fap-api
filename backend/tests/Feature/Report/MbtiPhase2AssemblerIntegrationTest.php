@@ -104,7 +104,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($payload, 'report._meta.personalization.engine_version')
         );
         $this->assertSame(
-            'phase9c.v1',
+            'phase9d.v1',
             data_get($payload, 'report._meta.personalization.dynamic_sections_version')
         );
         $this->assertIsArray(data_get($payload, 'report._meta.personalization.ordered_recommendation_keys'));
@@ -413,7 +413,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($projection, '_meta.personalization.schema_version')
         );
         $this->assertSame(
-            'phase9c.v1',
+            'phase9d.v1',
             data_get($projection, '_meta.personalization.dynamic_sections_version')
         );
         $this->assertSame(
@@ -596,15 +596,15 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
         $this->assertProjectionVisibleBlock($careerCollaborationFit, 'collaboration_fit');
         $this->assertProjectionVisibleBlock($careerWorkEnvironment, 'work_env');
         $this->assertProjectionVisibleBlock($careerNextStep, 'career_next_step');
-        $this->assertProjectionVisibleBlock($whyThisType, 'why_this_type', '主类型');
+        $this->assertProjectionVisibleBlock($whyThisType, 'why_this_type', '判断入口');
         $this->assertProjectionVisibleBlock($closeCallAxes, 'borderline_axis', '只拉开了7个点差');
-        $this->assertProjectionVisibleBlock($adjacentTypeContrast, 'adjacent_type_contrast', '最容易把你看成ENFJ');
-        $this->assertProjectionVisibleBlock($stabilityConfidence, 'stability_explanation', '情境敏感型稳定');
+        $this->assertProjectionVisibleBlock($adjacentTypeContrast, 'adjacent_type_contrast', '和ENFJ看起来有点像');
+        $this->assertProjectionVisibleBlock($stabilityConfidence, 'stability_explanation', '可被照顾的能力');
         $this->assertProjectionVisibleBlock($careerWorkExperiments, 'work_experiment', '可逆动作');
-        $this->assertProjectionVisibleBlock($growthNextActions, 'next_action', '下一步动作');
+        $this->assertProjectionVisibleBlock($growthNextActions, 'next_action', '下一步');
         $this->assertProjectionVisibleBlock($growthWeeklyExperiments, 'weekly_experiment', '可执行实验');
-        $this->assertProjectionVisibleBlock($growthWatchouts, 'watchout', '风险提醒');
-        $this->assertProjectionVisibleBlock($relationshipsTryThisWeek, 'relationship_practice', '本周关系练习');
+        $this->assertProjectionVisibleBlock($growthWatchouts, 'watchout', '提醒');
+        $this->assertProjectionVisibleBlock($relationshipsTryThisWeek, 'relationship_practice', '关系动作');
         $this->assertSelectedBlocksRemainVisible($whyThisType);
         $this->assertSelectedBlocksRemainVisible($closeCallAxes);
         $this->assertSelectedBlocksRemainVisible($adjacentTypeContrast);

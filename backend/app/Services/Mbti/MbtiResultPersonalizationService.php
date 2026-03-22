@@ -141,6 +141,30 @@ final class MbtiResultPersonalizationService
     ];
 
     /**
+     * @var list<string>
+     */
+    private const TONE_TARGET_SECTIONS = [
+        'traits.why_this_type',
+        'growth.stability_confidence',
+        'traits.adjacent_type_contrast',
+        'growth.next_actions',
+        'growth.watchouts',
+        'career.next_step',
+        'relationships.try_this_week',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const TONE_MODES = [
+        'supportive',
+        'direct',
+        'reflective',
+        'stabilizing',
+        'low_pressure',
+    ];
+
+    /**
      * @var array<string, array{label:array<string,string>, sides:array<string,string>}>
      */
     private const AXIS_COPY = [
@@ -858,6 +882,7 @@ final class MbtiResultPersonalizationService
         $personalization = $this->intraTypeProfileService->attach($personalization);
         $personalization = $this->longitudinalMemoryService->attach($personalization, $context);
         $personalization = $this->adaptiveSelectionService->attach($personalization);
+        $personalization = $this->attachToneLayer($personalization, $context, $dynamicDoc, $locale);
         $personalization = $this->attachCtaBundle($personalization, $context, $locale);
 
         $personalization = $this->privacyConsentContractService->attachContract($personalization, [
@@ -920,12 +945,318 @@ final class MbtiResultPersonalizationService
         }
 
         $locale = $this->normalizeLocale((string) ($context['locale'] ?? ($personalization['locale'] ?? '')));
-
-        return $this->attachCtaBundle($personalization, [
+        $resolvedContext = [
             'pack_id' => trim((string) ($context['pack_id'] ?? ($personalization['pack_id'] ?? ''))),
             'dir_version' => trim((string) ($context['dir_version'] ?? ($personalization['content_package_dir'] ?? ''))),
             'locale' => $locale,
-        ], $locale);
+        ];
+        $dynamicDoc = $this->loadDynamicSectionsDoc($resolvedContext, $locale);
+        $personalization = $this->attachToneLayer($personalization, $resolvedContext, $dynamicDoc, $locale);
+
+        return $this->attachCtaBundle($personalization, $resolvedContext, $locale);
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  array<string, mixed>  $context
+     * @param  array<string, mixed>  $dynamicDoc
+     * @return array<string, mixed>
+     */
+    private function attachToneLayer(array $personalization, array $context, array $dynamicDoc, string $locale): array
+    {
+        if ($personalization === []) {
+            return [];
+        }
+
+        $doc = $dynamicDoc !== [] ? $dynamicDoc : $this->loadDynamicSectionsDoc($context, $locale);
+        $toneProfile = $this->buildToneProfile($personalization, $doc, $locale);
+        if ($toneProfile === []) {
+            return $personalization;
+        }
+
+        $personalization['tone_profile_v1'] = $toneProfile;
+        $sections = is_array($personalization['sections'] ?? null) ? $personalization['sections'] : [];
+        if ($sections === []) {
+            return $personalization;
+        }
+
+        $sectionToneModes = is_array($toneProfile['section_tone_modes'] ?? null) ? $toneProfile['section_tone_modes'] : [];
+        $sectionToneReasons = is_array($toneProfile['section_tone_reasons'] ?? null) ? $toneProfile['section_tone_reasons'] : [];
+
+        foreach (self::TONE_TARGET_SECTIONS as $sectionKey) {
+            if (! is_array($sections[$sectionKey] ?? null)) {
+                continue;
+            }
+
+            $toneMode = trim((string) ($sectionToneModes[$sectionKey] ?? ''));
+            if ($toneMode === '') {
+                continue;
+            }
+
+            $sections[$sectionKey] = $this->applyToneToSection(
+                $sectionKey,
+                $sections[$sectionKey],
+                $toneMode,
+                trim((string) ($sectionToneReasons[$sectionKey] ?? '')),
+                $personalization,
+                $doc,
+                $locale
+            );
+        }
+
+        $personalization['sections'] = $sections;
+
+        return $personalization;
+    }
+
+    /**
+     * @param  array<string, mixed>  $section
+     * @param  array<string, mixed>  $personalization
+     * @param  array<string, mixed>  $doc
+     * @return array<string, mixed>
+     */
+    private function applyToneToSection(
+        string $sectionKey,
+        array $section,
+        string $toneMode,
+        string $toneReason,
+        array $personalization,
+        array $doc,
+        string $locale
+    ): array {
+        $section['tone_mode'] = $toneMode;
+        $section['tone_reason'] = $toneReason;
+        $section['phrasing_mode'] = $toneMode;
+        $section['tone_anchor_keys'] = $this->toneAnchorKeys($sectionKey, $toneMode, $personalization, $section);
+
+        $blocks = [];
+        foreach (array_values(array_filter((array) ($section['blocks'] ?? []), 'is_array')) as $block) {
+            $kind = trim((string) ($block['kind'] ?? ''));
+            if ($kind === '') {
+                $blocks[] = $block;
+                continue;
+            }
+
+            $toneText = $this->resolveToneAdjustedText(
+                $doc,
+                $locale,
+                $sectionKey,
+                $kind,
+                $toneMode,
+                $section,
+                $personalization
+            );
+
+            if ($toneText !== '') {
+                $block['text'] = $toneText;
+            }
+
+            $block['tone_mode'] = $toneMode;
+            $blocks[] = $block;
+        }
+
+        $section['blocks'] = $blocks;
+
+        return $section;
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  array<string, mixed>  $doc
+     * @return array<string, mixed>
+     */
+    private function buildToneProfile(array $personalization, array $doc, string $locale): array
+    {
+        $defaultToneMode = $this->resolveDefaultToneMode($personalization);
+        if ($defaultToneMode === '') {
+            return [];
+        }
+
+        $sections = is_array($personalization['sections'] ?? null) ? $personalization['sections'] : [];
+        $sectionToneModes = [];
+        $sectionToneReasons = [];
+
+        foreach (self::TONE_TARGET_SECTIONS as $sectionKey) {
+            if (! is_array($sections[$sectionKey] ?? null)) {
+                continue;
+            }
+
+            [$mode, $reason] = $this->resolveSectionToneMode($sectionKey, $personalization, $defaultToneMode);
+            $sectionToneModes[$sectionKey] = $mode;
+            $sectionToneReasons[$sectionKey] = $reason;
+        }
+
+        $toneEvidence = [
+            'intent_cluster' => trim((string) data_get($personalization, 'user_state.current_intent_cluster', 'default')),
+            'memory_state' => trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_state', 'fresh')),
+            'adaptive_state' => trim((string) data_get($personalization, 'adaptive_selection_v1.selection_rewrite_reason', 'baseline')),
+            'identity' => trim((string) ($personalization['identity'] ?? '')),
+            'stability_bucket' => $this->resolveToneStabilityBucket($personalization),
+            'action_completion_tendency' => trim((string) data_get($personalization, 'user_state.action_completion_tendency', 'idle')),
+            'boundary_axes' => array_values(array_unique(array_filter(array_merge(
+                $this->normalizeStringList(data_get($personalization, 'sections.traits.why_this_type.boundary_axes', [])),
+                $this->normalizeStringList(data_get($personalization, 'sections.growth.stability_confidence.boundary_axes', []))
+            )))),
+        ];
+
+        $toneReason = $this->resolveTopLevelToneReason($defaultToneMode, $toneEvidence);
+        $toneAnchorKeys = [];
+        foreach ($sectionToneModes as $sectionKey => $mode) {
+            $toneAnchorKeys[] = sprintf('%s:%s', $sectionKey, $mode);
+        }
+
+        return [
+            'version' => 'mbti.tone_profile.v1',
+            'tone_contract_version' => 'mbti.tone_profile.v1',
+            'tone_fingerprint' => hash('sha256', json_encode([
+                'default' => $defaultToneMode,
+                'sections' => $sectionToneModes,
+                'evidence' => $toneEvidence,
+                'doc_version' => trim((string) ($doc['version'] ?? '')),
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)),
+            'tone_scope' => 'mbti.result_sections',
+            'default_tone_mode' => $defaultToneMode,
+            'section_tone_modes' => $sectionToneModes,
+            'section_tone_reasons' => $sectionToneReasons,
+            'tone_reason' => $toneReason,
+            'tone_evidence' => $toneEvidence,
+            'phrasing_mode' => $defaultToneMode,
+            'tone_softness_mode' => $defaultToneMode === 'low_pressure' ? 'low_pressure' : 'guided',
+            'tone_anchor_keys' => $toneAnchorKeys,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     */
+    private function resolveDefaultToneMode(array $personalization): string
+    {
+        $adaptiveReason = trim((string) data_get($personalization, 'adaptive_selection_v1.selection_rewrite_reason', ''));
+        $memoryState = trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_state', ''));
+        $intentCluster = trim((string) data_get($personalization, 'user_state.current_intent_cluster', 'default'));
+        $completionTendency = trim((string) data_get($personalization, 'user_state.action_completion_tendency', 'idle'));
+        $stabilityBucket = $this->resolveToneStabilityBucket($personalization);
+
+        return match (true) {
+            str_contains($adaptiveReason, 'reduce_pressure')
+                || in_array($completionTendency, ['idle', 'warming_up'], true) => 'low_pressure',
+            $adaptiveReason !== '' || $stabilityBucket === 'context_sensitive' => 'stabilizing',
+            in_array($memoryState, ['resume_ready', 'resumed', 'revisit'], true) => 'reflective',
+            in_array($intentCluster, ['career_move', 'action_activation'], true) => 'direct',
+            default => 'supportive',
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @return array{0:string,1:string}
+     */
+    private function resolveSectionToneMode(string $sectionKey, array $personalization, string $defaultToneMode): array
+    {
+        $intentCluster = trim((string) data_get($personalization, 'user_state.current_intent_cluster', 'default'));
+        $memoryState = trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_state', ''));
+        $adaptiveReason = trim((string) data_get($personalization, 'adaptive_selection_v1.selection_rewrite_reason', ''));
+        $stabilityBucket = $this->resolveToneStabilityBucket($personalization);
+        $completionTendency = trim((string) data_get($personalization, 'user_state.action_completion_tendency', 'idle'));
+
+        return match ($sectionKey) {
+            'traits.why_this_type', 'traits.adjacent_type_contrast' => match (true) {
+                in_array($memoryState, ['resume_ready', 'resumed', 'revisit'], true)
+                    || in_array($intentCluster, ['clarify_type', 'deep_reading'], true) => ['reflective', 'resume_or_clarity'],
+                $adaptiveReason !== '' => ['stabilizing', 'adaptive_guardrail'],
+                default => ['supportive', 'same_type_explainability'],
+            },
+            'growth.stability_confidence' => match (true) {
+                $adaptiveReason !== '' || $stabilityBucket === 'context_sensitive' => ['stabilizing', 'stability_guardrail'],
+                in_array($memoryState, ['resume_ready', 'resumed', 'revisit'], true) => ['reflective', 'memory_resume'],
+                $intentCluster === 'career_move' => ['direct', 'career_translation'],
+                default => ['supportive', 'baseline_stability'],
+            },
+            'growth.next_actions' => match (true) {
+                str_contains($adaptiveReason, 'reduce_pressure')
+                    || in_array($completionTendency, ['idle', 'warming_up'], true) => ['low_pressure', 'action_pressure_buffer'],
+                in_array($memoryState, ['resume_ready', 'resumed', 'revisit'], true) => ['reflective', 'resume_action_loop'],
+                in_array($intentCluster, ['career_move', 'action_activation'], true) => ['direct', 'activation_path'],
+                default => [$defaultToneMode, 'default_action_mode'],
+            },
+            'growth.watchouts' => match (true) {
+                $adaptiveReason !== '' || $stabilityBucket === 'context_sensitive' => ['stabilizing', 'watchout_stability_guardrail'],
+                in_array($intentCluster, ['career_move', 'action_activation'], true) => ['direct', 'watchout_activation'],
+                default => ['supportive', 'watchout_baseline'],
+            },
+            'career.next_step' => match (true) {
+                in_array($memoryState, ['resume_ready', 'resumed', 'revisit'], true) => ['reflective', 'career_resume'],
+                $intentCluster === 'career_move' => ['direct', 'career_move'],
+                default => ['supportive', 'career_support'],
+            },
+            'relationships.try_this_week' => match (true) {
+                in_array($memoryState, ['resume_ready', 'resumed', 'revisit'], true) => ['reflective', 'relationship_resume'],
+                $adaptiveReason !== '' || $stabilityBucket === 'context_sensitive' => ['stabilizing', 'relationship_stabilize'],
+                default => ['supportive', 'relationship_bridge'],
+            },
+            default => [$defaultToneMode, 'default_tone'],
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     */
+    private function resolveToneStabilityBucket(array $personalization): string
+    {
+        $contrastKey = trim((string) data_get($personalization, 'contrast_keys.growth.stability_confidence', ''));
+        if (preg_match('/stability\.([a-z_]+)/', $contrastKey, $matches) === 1) {
+            return trim((string) ($matches[1] ?? 'mixed'));
+        }
+
+        return 'mixed';
+    }
+
+    /**
+     * @param  array<string, mixed>  $toneEvidence
+     */
+    private function resolveTopLevelToneReason(string $defaultToneMode, array $toneEvidence): string
+    {
+        return match ($defaultToneMode) {
+            'low_pressure' => 'action_pressure_buffer',
+            'stabilizing' => 'adaptive_or_context_sensitive',
+            'reflective' => 'revisit_resume_context',
+            'direct' => 'intent_driven_activation',
+            default => trim((string) ($toneEvidence['intent_cluster'] ?? 'supportive_default')),
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $section
+     * @param  array<string, mixed>  $personalization
+     * @return list<string>
+     */
+    private function toneAnchorKeys(string $sectionKey, string $toneMode, array $personalization, array $section): array
+    {
+        $anchors = [
+            sprintf('tone.%s', $toneMode),
+            sprintf('section.%s', $sectionKey),
+        ];
+
+        $intentCluster = trim((string) data_get($personalization, 'user_state.current_intent_cluster', ''));
+        if ($intentCluster !== '') {
+            $anchors[] = sprintf('intent.%s', $intentCluster);
+        }
+
+        $memoryState = trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_state', ''));
+        if ($memoryState !== '') {
+            $anchors[] = sprintf('memory.%s', $memoryState);
+        }
+
+        $adaptiveReason = trim((string) data_get($personalization, 'adaptive_selection_v1.selection_rewrite_reason', ''));
+        if ($adaptiveReason !== '') {
+            $anchors[] = sprintf('adaptive.%s', $adaptiveReason);
+        }
+
+        foreach ($this->normalizeStringList($section['boundary_axes'] ?? []) as $axisCode) {
+            $anchors[] = sprintf('boundary.%s', strtolower($axisCode));
+        }
+
+        return array_values(array_unique(array_filter($anchors)));
     }
 
     /**
@@ -1254,6 +1585,10 @@ final class MbtiResultPersonalizationService
                 'selection_rewrite_reason' => trim((string) data_get($personalization, 'adaptive_selection_v1.selection_rewrite_reason', '')),
                 'next_best_action_key' => trim((string) data_get($personalization, 'adaptive_selection_v1.next_best_action_v1.key', '')),
                 'next_best_action_reason' => trim((string) data_get($personalization, 'adaptive_selection_v1.next_best_action_v1.reason', '')),
+                'tone_mode' => trim((string) ($dynamic['tone_mode'] ?? data_get($personalization, 'tone_profile_v1.section_tone_modes.'.$sectionKey, ''))),
+                'tone_reason' => trim((string) ($dynamic['tone_reason'] ?? data_get($personalization, 'tone_profile_v1.section_tone_reasons.'.$sectionKey, ''))),
+                'phrasing_mode' => trim((string) ($dynamic['phrasing_mode'] ?? data_get($personalization, 'tone_profile_v1.phrasing_mode', ''))),
+                'tone_anchor_keys' => array_values((array) ($dynamic['tone_anchor_keys'] ?? [])),
             ];
 
             $section['payload'] = $payload;
@@ -2427,9 +2762,13 @@ final class MbtiResultPersonalizationService
         string $identity,
         string $actionTheme,
         string $stabilityBucket,
-        string $boundaryAxis
+        string $boundaryAxis,
+        string $toneMode = ''
     ): string {
-        $templateNode = data_get($doc, 'action_support_templates.'.$sectionKey.'.'.$supportKind);
+        $templateNode = $this->resolveToneTemplateNode($doc, $sectionKey, $supportKind, $toneMode);
+        if ($templateNode === null) {
+            $templateNode = data_get($doc, 'action_support_templates.'.$sectionKey.'.'.$supportKind);
+        }
         if ($templateNode === null) {
             $templateNode = $doc['action_support_templates'][$sectionKey][$supportKind] ?? null;
         }
@@ -2459,6 +2798,130 @@ final class MbtiResultPersonalizationService
             'boundary_clause' => $boundaryClause,
             'stability_bucket' => $stabilityBucket,
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $section
+     * @param  array<string, mixed>  $personalization
+     * @param  array<string, mixed>  $doc
+     */
+    private function resolveToneAdjustedText(
+        array $doc,
+        string $locale,
+        string $sectionKey,
+        string $kind,
+        string $toneMode,
+        array $section,
+        array $personalization
+    ): string {
+        $primaryAxis = is_array($section['primary_axis'] ?? null) ? $section['primary_axis'] : [];
+        $supportAxis = is_array($section['support_axis'] ?? null) ? $section['support_axis'] : null;
+        $closeCallAxes = array_values(array_filter((array) ($section['close_call_axes'] ?? []), 'is_array'));
+        $neighborTypeKeys = $this->normalizeStringList($section['neighbor_type_keys'] ?? []);
+        $boundaryAxes = $this->normalizeStringList($section['boundary_axes'] ?? []);
+        $identity = trim((string) ($personalization['identity'] ?? ''));
+        $stabilityBucket = $this->resolveToneStabilityBucket($personalization);
+        $actionTheme = $this->extractThemeFromActionKey(trim((string) ($section['action_key'] ?? '')));
+        $axisVector = is_array($personalization['axis_vector'] ?? null) ? $personalization['axis_vector'] : [];
+
+        return match ($sectionKey) {
+            'traits.why_this_type' => match ($kind) {
+                'why_this_type' => $this->resolveWhyThisTypeText(
+                    $doc,
+                    $locale,
+                    $primaryAxis,
+                    $supportAxis,
+                    $identity,
+                    $closeCallAxes,
+                    $toneMode
+                ),
+                'misunderstanding_fix' => $this->resolveMisunderstandingFixText(
+                    $doc,
+                    $locale,
+                    $sectionKey,
+                    (string) ($primaryAxis['band'] ?? 'clear'),
+                    $primaryAxis,
+                    $supportAxis,
+                    $identity,
+                    $closeCallAxes,
+                    $neighborTypeKeys,
+                    $toneMode
+                ),
+                default => '',
+            },
+            'traits.adjacent_type_contrast' => match ($kind) {
+                'adjacent_type_contrast' => $this->resolveAdjacentTypeContrastText(
+                    $doc,
+                    $locale,
+                    $primaryAxis,
+                    $neighborTypeKeys,
+                    $closeCallAxes,
+                    $toneMode
+                ),
+                'misunderstanding_fix' => $this->resolveMisunderstandingFixText(
+                    $doc,
+                    $locale,
+                    $sectionKey,
+                    (string) ($primaryAxis['band'] ?? 'clear'),
+                    $primaryAxis,
+                    $supportAxis,
+                    $identity,
+                    $closeCallAxes,
+                    $neighborTypeKeys,
+                    $toneMode
+                ),
+                default => '',
+            },
+            'growth.stability_confidence' => match ($kind) {
+                'stability_explanation' => $this->resolveStabilityExplanationText(
+                    $doc,
+                    $locale,
+                    $stabilityBucket,
+                    $closeCallAxes[0] ?? $primaryAxis,
+                    $identity,
+                    $toneMode
+                ),
+                'stability_reframe' => $this->resolveStabilityReframeText(
+                    $doc,
+                    $locale,
+                    $stabilityBucket,
+                    $closeCallAxes[0] ?? $primaryAxis,
+                    $identity,
+                    $toneMode
+                ),
+                'stress_recovery' => $this->resolveSceneText(
+                    $doc,
+                    'stress_recovery',
+                    $locale,
+                    $closeCallAxes[0] ?? $primaryAxis,
+                    $sectionKey,
+                    $toneMode
+                ),
+                default => '',
+            },
+            'growth.next_actions',
+            'growth.watchouts',
+            'career.next_step',
+            'relationships.try_this_week' => match (true) {
+                in_array($kind, ['next_action', 'watchout', 'career_next_step', 'relationship_practice'], true)
+                    => $this->resolveSceneText($doc, $kind, $locale, $primaryAxis, $sectionKey, $toneMode),
+                true => $this->resolveActionSupportText(
+                    $doc,
+                    $sectionKey,
+                    $kind,
+                    $locale,
+                    is_array($personalization['scene_fingerprint'] ?? null) ? $personalization['scene_fingerprint'] : [],
+                    $primaryAxis,
+                    is_array($supportAxis) ? $supportAxis : null,
+                    $identity,
+                    $actionTheme,
+                    $stabilityBucket,
+                    $boundaryAxes[0] ?? '',
+                    $toneMode
+                ),
+            },
+            default => '',
+        };
     }
 
     private function extractThemeFromActionKey(string $actionKey): string
@@ -2650,11 +3113,13 @@ final class MbtiResultPersonalizationService
         array $primaryAxis,
         ?array $supportAxis,
         string $identity,
-        array $closeCallAxes
+        array $closeCallAxes,
+        string $toneMode = ''
     ): string {
         $band = trim((string) ($primaryAxis['band'] ?? 'clear'));
         $template = $this->resolveTemplate(
-            data_get($doc, 'why_this_type_templates.'.$band),
+            $this->resolveToneTemplateNode($doc, 'traits.why_this_type', 'why_this_type', $toneMode)
+                ?? data_get($doc, 'why_this_type_templates.'.$band),
             $locale,
             $locale === 'zh-CN'
                 ? (self::DEFAULT_EXPLAINABILITY_SUMMARY_TEMPLATES['mixed'])
@@ -2696,10 +3161,12 @@ final class MbtiResultPersonalizationService
         string $locale,
         array $primaryAxis,
         array $neighborTypeKeys,
-        array $closeCallAxes
+        array $closeCallAxes,
+        string $toneMode = ''
     ): string {
         $template = $this->resolveTemplate(
-            data_get($doc, 'adjacent_type_contrast_templates.default'),
+            $this->resolveToneTemplateNode($doc, 'traits.adjacent_type_contrast', 'adjacent_type_contrast', $toneMode)
+                ?? data_get($doc, 'adjacent_type_contrast_templates.default'),
             $locale,
             $locale === 'zh-CN' ? self::DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE : self::DEFAULT_ADJACENT_TYPE_CONTRAST_TEMPLATE_EN
         );
@@ -2727,14 +3194,16 @@ final class MbtiResultPersonalizationService
         ?array $supportAxis,
         string $identity,
         array $closeCallAxes,
-        array $neighborTypeKeys
+        array $neighborTypeKeys,
+        string $toneMode = ''
     ): string {
         $templateKey = $sectionKey === 'traits.adjacent_type_contrast'
             ? 'adjacent_type_contrast'
             : 'why_this_type';
 
         $template = $this->resolveTemplate(
-            data_get($doc, 'misunderstanding_fix_templates.'.$templateKey.'.'.trim($band)),
+            $this->resolveToneTemplateNode($doc, $sectionKey, 'misunderstanding_fix', $toneMode)
+                ?? data_get($doc, 'misunderstanding_fix_templates.'.$templateKey.'.'.trim($band)),
             $locale,
             $locale === 'zh-CN'
                 ? (self::DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES[$templateKey][$band] ?? self::DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES[$templateKey]['clear'])
@@ -2760,10 +3229,12 @@ final class MbtiResultPersonalizationService
         string $locale,
         string $bucket,
         ?array $closeAxis,
-        string $identity
+        string $identity,
+        string $toneMode = ''
     ): string {
         $template = $this->resolveTemplate(
-            data_get($doc, 'stability_explanation_templates.'.$bucket),
+            $this->resolveToneTemplateNode($doc, 'growth.stability_confidence', 'stability_explanation', $toneMode)
+                ?? data_get($doc, 'stability_explanation_templates.'.$bucket),
             $locale,
             $locale === 'zh-CN'
                 ? (self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES[$bucket] ?? self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES['mixed'])
@@ -2781,10 +3252,12 @@ final class MbtiResultPersonalizationService
         string $locale,
         string $bucket,
         ?array $closeAxis,
-        string $identity
+        string $identity,
+        string $toneMode = ''
     ): string {
         $template = $this->resolveTemplate(
-            data_get($doc, 'stability_reframe_templates.'.$bucket),
+            $this->resolveToneTemplateNode($doc, 'growth.stability_confidence', 'stability_reframe', $toneMode)
+                ?? data_get($doc, 'stability_reframe_templates.'.$bucket),
             $locale,
             $locale === 'zh-CN'
                 ? (self::DEFAULT_STABILITY_REFRAME_TEMPLATES[$bucket][$locale] ?? self::DEFAULT_STABILITY_REFRAME_TEMPLATES['mixed'][$locale])
@@ -3428,7 +3901,14 @@ final class MbtiResultPersonalizationService
      * @param  array<string, mixed>  $doc
      * @param  array<string, mixed>  $axis
      */
-    private function resolveSceneText(array $doc, string $sectionKey, string $locale, array $axis): string
+    private function resolveSceneText(
+        array $doc,
+        string $sectionKey,
+        string $locale,
+        array $axis,
+        string $toneSectionKey = '',
+        string $toneMode = ''
+    ): string
     {
         $sceneHint = $this->resolveTemplate(
             data_get($doc, 'scene_hints.'.($axis['axis'] ?? '').'.'.($axis['side'] ?? '')),
@@ -3439,7 +3919,8 @@ final class MbtiResultPersonalizationService
         );
 
         $template = $this->resolveTemplate(
-            data_get($doc, 'scene_templates.'.$sectionKey),
+            ($toneSectionKey !== '' ? $this->resolveToneTemplateNode($doc, $toneSectionKey, $sectionKey, $toneMode) : null)
+                ?? data_get($doc, 'scene_templates.'.$sectionKey),
             $locale,
             $locale === 'zh-CN'
                 ? (self::DEFAULT_SCENE_TEMPLATES[$sectionKey] ?? '')
@@ -3520,6 +4001,23 @@ final class MbtiResultPersonalizationService
                 ? (self::DEFAULT_BAND_LABELS[$band] ?? $band)
                 : (self::DEFAULT_BAND_LABELS_EN[$band] ?? $band)
         );
+    }
+
+    /**
+     * @param  array<string, mixed>  $doc
+     */
+    private function resolveToneTemplateNode(array $doc, string $sectionKey, string $blockKind, string $toneMode): mixed
+    {
+        $normalizedTone = strtolower(trim($toneMode));
+        if ($normalizedTone === '') {
+            return null;
+        }
+
+        $toneTemplates = is_array($doc['tone_templates'] ?? null) ? $doc['tone_templates'] : [];
+        $sectionNode = is_array($toneTemplates[$sectionKey] ?? null) ? $toneTemplates[$sectionKey] : [];
+        $toneNode = is_array($sectionNode[$normalizedTone] ?? null) ? $sectionNode[$normalizedTone] : [];
+
+        return $toneNode[$blockKind] ?? null;
     }
 
     /**
