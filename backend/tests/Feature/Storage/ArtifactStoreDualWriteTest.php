@@ -38,6 +38,10 @@ final class ArtifactStoreDualWriteTest extends TestCase
         Storage::forgetDisk('local');
         config()->set('storage_rollout.blob_catalog_enabled', false);
         config()->set('storage_rollout.artifact_dual_write_enabled', false);
+        config()->set('storage_rollout.receipt_ledger_dual_write_enabled', false);
+        config()->set('storage_rollout.artifact_slot_version_dual_write_enabled', false);
+        config()->set('storage_rollout.lifecycle_ledger_dual_write_enabled', false);
+        config()->set('storage_rollout.access_projection_dual_write_enabled', false);
     }
 
     protected function tearDown(): void
@@ -70,6 +74,11 @@ final class ArtifactStoreDualWriteTest extends TestCase
         $this->assertTrue(Storage::disk('local')->exists($reportPath));
         $this->assertTrue(Storage::disk('local')->exists($pdfPath));
         $this->assertDatabaseCount('storage_blobs', 0);
+        $this->assertDatabaseCount('storage_blob_locations', 0);
+        $this->assertDatabaseCount('attempt_receipts', 0);
+        $this->assertDatabaseCount('report_artifact_slots', 0);
+        $this->assertDatabaseCount('report_artifact_versions', 0);
+        $this->assertDatabaseCount('unified_access_projections', 0);
         $this->assertDirectoryDoesNotExist($this->isolatedStoragePath.'/app/private/blobs');
     }
 
@@ -77,6 +86,8 @@ final class ArtifactStoreDualWriteTest extends TestCase
     {
         config()->set('storage_rollout.blob_catalog_enabled', true);
         config()->set('storage_rollout.artifact_dual_write_enabled', true);
+        config()->set('storage_rollout.receipt_ledger_dual_write_enabled', true);
+        config()->set('storage_rollout.artifact_slot_version_dual_write_enabled', true);
 
         $store = app(ArtifactStore::class);
         $pdfStore = app(ReportPdfArtifactStore::class);
@@ -102,6 +113,10 @@ final class ArtifactStoreDualWriteTest extends TestCase
         $pdfHash = hash('sha256', $pdfBytes);
 
         $this->assertDatabaseCount('storage_blobs', 2);
+        $this->assertDatabaseCount('storage_blob_locations', 2);
+        $this->assertDatabaseCount('attempt_receipts', 2);
+        $this->assertDatabaseCount('report_artifact_slots', 2);
+        $this->assertDatabaseCount('report_artifact_versions', 2);
         $this->assertDatabaseHas('storage_blobs', [
             'hash' => $reportHash,
             'disk' => 'local',
@@ -119,6 +134,48 @@ final class ArtifactStoreDualWriteTest extends TestCase
             'content_type' => 'application/pdf',
             'encoding' => 'identity',
             'ref_count' => 0,
+        ]);
+        $this->assertDatabaseHas('storage_blob_locations', [
+            'blob_hash' => $reportHash,
+            'disk' => 'local',
+            'storage_path' => $reportPath,
+            'location_kind' => 'canonical_file',
+        ]);
+        $this->assertDatabaseHas('storage_blob_locations', [
+            'blob_hash' => $pdfHash,
+            'disk' => 'local',
+            'storage_path' => $pdfPath,
+            'location_kind' => 'canonical_file',
+        ]);
+        $this->assertDatabaseHas('attempt_receipts', [
+            'attempt_id' => $attemptId,
+            'receipt_type' => 'report_json_materialized',
+        ]);
+        $this->assertDatabaseHas('attempt_receipts', [
+            'attempt_id' => $attemptId,
+            'receipt_type' => 'report_pdf_materialized',
+        ]);
+        $this->assertDatabaseHas('report_artifact_slots', [
+            'attempt_id' => $attemptId,
+            'slot_code' => 'report_json_full',
+            'render_state' => 'materialized',
+            'delivery_state' => 'available',
+            'integrity_state' => 'verified',
+        ]);
+        $this->assertDatabaseHas('report_artifact_slots', [
+            'attempt_id' => $attemptId,
+            'slot_code' => 'report_pdf_free',
+            'render_state' => 'materialized',
+            'delivery_state' => 'available',
+            'integrity_state' => 'verified',
+        ]);
+        $this->assertDatabaseHas('report_artifact_versions', [
+            'source_type' => 'report_json',
+            'content_hash' => $reportHash,
+        ]);
+        $this->assertDatabaseHas('report_artifact_versions', [
+            'source_type' => 'report_pdf',
+            'content_hash' => $pdfHash,
         ]);
         $this->assertDirectoryDoesNotExist($this->isolatedStoragePath.'/app/private/blobs');
     }

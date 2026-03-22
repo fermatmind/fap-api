@@ -3,11 +3,16 @@
 namespace App\Services\Commerce;
 
 use App\Services\Report\ReportAccess;
+use App\Services\Storage\UnifiedAccessProjectionWriter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class EntitlementManager
 {
+    public function __construct(
+        private readonly UnifiedAccessProjectionWriter $accessProjections,
+    ) {}
+
     public function hasFullAccess(
         int $orgId,
         ?string $userId,
@@ -122,6 +127,14 @@ class EntitlementManager
                 $existing = DB::table('benefit_grants')->where('id', (string) ($existing->id ?? ''))->first() ?: $existing;
             }
 
+            $this->refreshAccessProjection($attemptId, [
+                'source_system' => 'entitlement_manager',
+                'source_ref' => $orderNo !== '' ? $orderNo : $benefitCode,
+                'actor_type' => $userId !== '' ? 'user' : 'anon',
+                'actor_id' => $userId !== '' ? $userId : $anonId,
+                'reason_code' => 'entitlement_granted',
+            ]);
+
             return [
                 'ok' => true,
                 'grant' => $existing,
@@ -177,6 +190,13 @@ class EntitlementManager
         DB::table('benefit_grants')->insert($row);
 
         $grant = DB::table('benefit_grants')->where('id', $row['id'])->first();
+        $this->refreshAccessProjection($attemptId, [
+            'source_system' => 'entitlement_manager',
+            'source_ref' => $normalizedOrderNo !== '' ? $normalizedOrderNo : $benefitCode,
+            'actor_type' => $userId !== '' ? 'user' : 'anon',
+            'actor_id' => $userId !== '' ? $userId : $anonId,
+            'reason_code' => 'entitlement_granted',
+        ]);
 
         return [
             'ok' => true,
@@ -344,6 +364,29 @@ class EntitlementManager
         }
 
         return [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     */
+    private function refreshAccessProjection(string $attemptId, array $meta): void
+    {
+        try {
+            $this->accessProjections->refreshAttemptProjection(
+                $attemptId,
+                [
+                    'access_state' => 'ready',
+                    'reason_code' => 'entitlement_granted',
+                    'actions_json' => [
+                        'report' => true,
+                        'pdf' => true,
+                    ],
+                ],
+                $meta
+            );
+        } catch (\Throwable) {
+            // Best-effort sidecar only. Preserve entitlement grant behavior.
+        }
     }
 
     private function benefitModuleRuleCatalog(): BenefitModuleRuleCatalog

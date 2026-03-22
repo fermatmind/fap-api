@@ -6,12 +6,18 @@ namespace App\Services\Storage;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Finder\SplFileInfo;
 
 final class ReportArtifactsArchiveService
 {
+    public function __construct(
+        private readonly ArtifactLifecycleLedgerWriter $ledgerWriter,
+        private readonly UnifiedAccessProjectionWriter $accessProjections,
+    ) {}
+
     private const PLAN_SCHEMA = 'storage_archive_report_artifacts_plan.v1';
 
     private const RUN_SCHEMA = 'storage_archive_report_artifacts_run.v1';
@@ -127,6 +133,7 @@ final class ReportArtifactsArchiveService
         $payload['run_path'] = $runPath;
 
         $this->recordAudit($payload);
+        $this->writeSidecars($plan, $payload);
 
         return $payload;
     }
@@ -262,6 +269,92 @@ final class ReportArtifactsArchiveService
             'candidate_bytes' => $candidateBytes,
             'kind_counts' => $kindCounts,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $plan
+     * @param  array<string,mixed>  $payload
+     */
+    private function writeSidecars(array $plan, array $payload): void
+    {
+        try {
+            $this->ledgerWriter->recordArchiveExecution($plan, $payload);
+        } catch (\Throwable $e) {
+            Log::warning('ARCHIVE_LEDGER_SIDE_CAR_WRITE_FAILED', [
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        foreach ($this->resultItems($payload) as $item) {
+            $status = (string) ($item['status'] ?? '');
+            if (! in_array($status, ['copied', 'already_archived'], true)) {
+                continue;
+            }
+
+            $this->refreshProjectionForResult('artifact_archived', 'archived', $item, $payload);
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return list<array<string,mixed>>
+     */
+    private function resultItems(array $payload): array
+    {
+        $items = is_array($payload['results'] ?? null) ? array_values($payload['results']) : [];
+
+        return array_values(array_filter($items, static fn (mixed $item): bool => is_array($item)));
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  array<string,mixed>  $payload
+     */
+    private function refreshProjectionForResult(string $reasonCode, string $artifactState, array $item, array $payload): void
+    {
+        $attemptId = trim((string) ($item['attempt_id'] ?? ''));
+        if ($attemptId === '') {
+            return;
+        }
+
+        $kind = trim((string) ($item['kind'] ?? ''));
+        $patch = $this->projectionPatchForKind($kind, $artifactState);
+        if ($patch === []) {
+            return;
+        }
+
+        try {
+            $this->accessProjections->refreshAttemptProjection(
+                $attemptId,
+                $patch + [
+                    'reason_code' => $reasonCode,
+                ],
+                [
+                    'source_system' => 'artifact_lifecycle',
+                    'source_ref' => trim((string) ($payload['run_path'] ?? data_get($payload, '_meta.plan_path', 'archive_report_artifacts'))),
+                    'actor_type' => 'system',
+                    'actor_id' => 'archive_report_artifacts',
+                ]
+            );
+        } catch (\Throwable $e) {
+            Log::warning('ARCHIVE_ACCESS_PROJECTION_WRITE_FAILED', [
+                'attempt_id' => $attemptId,
+                'kind' => $kind,
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    private function projectionPatchForKind(string $kind, string $artifactState): array
+    {
+        return match ($kind) {
+            'report_json' => ['report_state' => $artifactState],
+            'report_free_pdf', 'report_full_pdf' => ['pdf_state' => $artifactState],
+            default => [],
+        };
     }
 
     /**

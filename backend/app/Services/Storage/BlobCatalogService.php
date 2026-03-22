@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Storage;
 
 use App\Models\StorageBlob;
+use App\Models\StorageBlobLocation;
 
 class BlobCatalogService
 {
@@ -46,6 +47,44 @@ class BlobCatalogService
                 'ref_count' => max(0, (int) ($payload['ref_count'] ?? $existing?->ref_count ?? 0)),
                 'first_seen_at' => $payload['first_seen_at'] ?? $existing?->first_seen_at ?? now(),
                 'last_verified_at' => $payload['last_verified_at'] ?? $existing?->last_verified_at,
+            ]
+        );
+
+        return $record->fresh() ?? $record;
+    }
+
+    public function upsertBlobLocation(array $payload): StorageBlobLocation
+    {
+        $blobHash = $this->normalizeHash((string) ($payload['blob_hash'] ?? ''));
+
+        $disk = trim((string) ($payload['disk'] ?? 'local'));
+        $storagePath = trim((string) ($payload['storage_path'] ?? $this->storagePathForHash($blobHash)));
+        $storagePath = $storagePath !== '' ? $storagePath : $this->storagePathForHash($blobHash);
+
+        $existingPathOwner = StorageBlobLocation::query()
+            ->where('disk', $disk)
+            ->where('storage_path', $storagePath)
+            ->where('blob_hash', '!=', $blobHash)
+            ->first();
+
+        if ($existingPathOwner !== null) {
+            throw new \DomainException('disk + storage_path is already cataloged to a different blob');
+        }
+
+        $record = StorageBlobLocation::query()->updateOrCreate(
+            [
+                'disk' => $disk,
+                'storage_path' => $storagePath,
+            ],
+            [
+                'blob_hash' => $blobHash,
+                'location_kind' => (string) ($payload['location_kind'] ?? 'canonical_file'),
+                'size_bytes' => (int) ($payload['size_bytes'] ?? 0),
+                'checksum' => $payload['checksum'] ?? null,
+                'etag' => $payload['etag'] ?? null,
+                'storage_class' => $payload['storage_class'] ?? null,
+                'verified_at' => $payload['verified_at'] ?? now(),
+                'meta_json' => is_array($payload['meta_json'] ?? null) ? $payload['meta_json'] : null,
             ]
         );
 
