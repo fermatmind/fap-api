@@ -57,7 +57,7 @@ final class ReportPdfDocumentService
         ));
         $cached = $this->artifactStore->getFirst($candidates);
         if (is_string($cached) && $cached !== '') {
-            if (! $this->artifactStore->exists($path)) {
+            if (! $this->legacyDrainEnabled() && ! $this->artifactStore->exists($path)) {
                 $this->artifactStore->put($path, $cached);
             }
 
@@ -92,7 +92,7 @@ final class ReportPdfDocumentService
         ));
         $cached = $this->artifactStore->getFirst($candidates);
         if (is_string($cached) && $cached !== '') {
-            if (! $this->artifactStore->exists($path)) {
+            if (! $this->legacyDrainEnabled() && ! $this->artifactStore->exists($path)) {
                 $this->artifactStore->put($path, $cached);
             }
 
@@ -252,5 +252,10 @@ final class ReportPdfDocumentService
         $value = str_replace(['\\', '(', ')'], ['\\\\', '\\(', '\\)'], $value);
 
         return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/', '', $value) ?? '';
+    }
+
+    private function legacyDrainEnabled(): bool
+    {
+        return (bool) config('storage_rollout.legacy_drain_enabled', false);
     }
 }

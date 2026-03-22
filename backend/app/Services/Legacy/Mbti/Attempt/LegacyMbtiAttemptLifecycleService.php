@@ -542,7 +542,9 @@ class LegacyMbtiAttemptLifecycleService
                 'content_package_version' => $contentPackageVersion,
             ];
 
-            $reportJob = $this->ensureReportJob($attemptId, true);
+            $reportJob = $this->legacyDrainEnabled()
+                ? $this->makeDrainedReportJobShell($attemptId)
+                : $this->ensureReportJob($attemptId, true);
 
             return [
                 'attempt_id' => $attemptId,
@@ -553,7 +555,7 @@ class LegacyMbtiAttemptLifecycleService
             ];
         });
 
-        if (isset($tx['report_job']) && $tx['report_job'] instanceof ReportJob) {
+        if (! $this->legacyDrainEnabled() && isset($tx['report_job']) && $tx['report_job'] instanceof ReportJob && $tx['report_job']->exists) {
             $this->dispatchReportJob($tx['report_job']);
         }
 
@@ -624,6 +626,22 @@ class LegacyMbtiAttemptLifecycleService
     private function dispatchReportJob(ReportJob $job): void
     {
         GenerateReportJob::dispatch($job->attempt_id, $job->id)->onQueue('reports');
+    }
+
+    private function legacyDrainEnabled(): bool
+    {
+        return (bool) config('storage_rollout.legacy_drain_enabled', false);
+    }
+
+    private function makeDrainedReportJobShell(string $attemptId): ReportJob
+    {
+        return new ReportJob([
+            'id' => 'legacy-drained-'.$attemptId,
+            'attempt_id' => $attemptId,
+            'status' => 'queued',
+            'tries' => 0,
+            'available_at' => now(),
+        ]);
     }
 
     private function getQuestionsIndex(?string $region = null, ?string $locale = null, ?string $pkgVersion = null): array

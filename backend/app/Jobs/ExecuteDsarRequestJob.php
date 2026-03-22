@@ -79,6 +79,8 @@ final class ExecuteDsarRequestJob implements ShouldQueue
             [
                 'actor_user_id' => $this->actorUserId,
                 'request_id' => $this->requestId,
+                'task_id' => $this->taskId,
+                'reference_id' => $this->referenceId,
                 'reason' => (string) ($requestRow->reason ?? 'user_dsar_request'),
             ]
         );

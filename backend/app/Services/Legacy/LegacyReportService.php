@@ -8,6 +8,7 @@ use App\DTO\Legacy\LegacyRequestContext;
 use App\Jobs\GenerateReportJob;
 use App\Models\Attempt;
 use App\Models\ReportJob;
+use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Storage\ArtifactStore;
@@ -278,6 +279,10 @@ class LegacyReportService
         $eventAnonId = trim((string) ($attempt->anon_id ?? $anonId));
         if ($eventAnonId === '') {
             $eventAnonId = null;
+        }
+
+        if ($this->legacyDrainEnabled()) {
+            return $this->getDrainedReportPayload($attempt, $result, $context, $hasFullAccess, $contentPackageVersion, $shareId, $refresh, $eventAnonId);
         }
 
         $reportJob = $this->ensureReportJob($attemptId, $refresh);
@@ -560,6 +565,133 @@ class LegacyReportService
     private function dispatchReportJob(ReportJob $job): void
     {
         GenerateReportJob::dispatch($job->attempt_id, $job->id)->onQueue('reports');
+    }
+
+    private function legacyDrainEnabled(): bool
+    {
+        return (bool) config('storage_rollout.legacy_drain_enabled', false);
+    }
+
+    private function drainedJobId(string $attemptId): string
+    {
+        return 'legacy-drained-'.$attemptId;
+    }
+
+    private function getDrainedReportPayload(
+        Attempt $attempt,
+        Result $result,
+        LegacyRequestContext $context,
+        bool $hasFullAccess,
+        string $contentPackageVersion,
+        string $shareId,
+        bool $refresh,
+        ?string $eventAnonId,
+    ): array {
+        $attemptId = (string) $attempt->id;
+        if (! $hasFullAccess) {
+            return [
+                'status' => 402,
+                'body' => [
+                    'ok' => false,
+                    'error' => 'PAYMENT_REQUIRED',
+                    'message' => 'report locked',
+                ],
+            ];
+        }
+
+        $reportPayload = $this->artifactStore->getReportJson((string) ($result->scale_code ?? $attempt->scale_code ?? 'MBTI'), $attemptId);
+        $snapshot = ReportSnapshot::query()
+            ->where('attempt_id', $attemptId)
+            ->first();
+        if (! is_array($reportPayload)) {
+            $snapshotPayload = is_array($snapshot?->report_full_json ?? null)
+                ? $snapshot?->report_full_json
+                : (is_array($snapshot?->report_json ?? null) ? $snapshot?->report_json : null);
+            if (is_array($snapshotPayload)) {
+                $reportPayload = $snapshotPayload;
+            }
+        }
+
+        if (! is_array($reportPayload)) {
+            $snapshotStatus = strtolower(trim((string) ($snapshot?->status ?? 'queued')));
+            if (in_array($snapshotStatus, ['failed', 'error'], true)) {
+                return [
+                    'status' => 500,
+                    'body' => [
+                        'ok' => false,
+                        'status' => 'failed',
+                        'error' => 'REPORT_FAILED',
+                        'message' => (string) ($snapshot?->last_error ?? 'Report generation failed'),
+                        'job_id' => $this->drainedJobId($attemptId),
+                    ],
+                ];
+            }
+
+            return [
+                'status' => 202,
+                'body' => [
+                    'ok' => true,
+                    'status' => 'queued',
+                    'job_id' => $this->drainedJobId($attemptId),
+                ],
+            ];
+        }
+
+        if (! array_key_exists('tags', $reportPayload) || ! is_array($reportPayload['tags'])) {
+            $reportPayload['tags'] = [];
+        }
+
+        $funnel = $this->readFunnelMetaFromContext($context, $attempt);
+        $eventRequest = $context->toEventRequest();
+        $reportViewMeta = $this->mergeEventMeta([
+            'type_code' => (string) ($result->type_code ?? ''),
+            'engine_version' => 'v1.2',
+            'content_package_version' => $contentPackageVersion,
+            'share_id' => ($shareId !== '' ? $shareId : null),
+            'refresh' => $refresh,
+            'cache' => ! $refresh,
+            'legacy_drain_enabled' => true,
+        ], $funnel);
+
+        $this->logEvent('report_view', $eventRequest, [
+            'anon_id' => $eventAnonId,
+            'scale_code' => (string) ($result->scale_code ?? ''),
+            'scale_version' => (string) ($result->scale_version ?? ''),
+            'attempt_id' => $attemptId,
+            'channel' => $funnel['channel'] ?? null,
+            'client_platform' => $funnel['client_platform'] ?? null,
+            'client_version' => $funnel['version'] ?? null,
+            'region' => $attempt->region ?? 'CN_MAINLAND',
+            'locale' => $attempt->locale ?? 'zh-CN',
+            'share_id' => ($shareId !== '' ? $shareId : null),
+            'meta_json' => $reportViewMeta,
+        ]);
+
+        if ($shareId !== '') {
+            $shareViewMeta = $this->mergeEventMeta([
+                'share_id' => $shareId,
+                'page' => 'report_page',
+            ], $funnel);
+
+            $this->logEvent('share_view', $eventRequest, [
+                'anon_id' => $eventAnonId,
+                'scale_code' => (string) ($result->scale_code ?? ''),
+                'scale_version' => (string) ($result->scale_version ?? ''),
+                'attempt_id' => $attemptId,
+                'channel' => $funnel['channel'] ?? null,
+                'client_platform' => $funnel['client_platform'] ?? null,
+                'client_version' => $funnel['version'] ?? null,
+                'region' => $attempt->region ?? 'CN_MAINLAND',
+                'locale' => $attempt->locale ?? 'zh-CN',
+                'share_id' => ($shareId !== '' ? $shareId : null),
+                'meta_json' => $shareViewMeta,
+            ]);
+        }
+
+        return [
+            'status' => 200,
+            'body' => $reportPayload,
+        ];
     }
 
     private function readFunnelMetaFromContext(LegacyRequestContext $context, ?Attempt $attempt = null): array
