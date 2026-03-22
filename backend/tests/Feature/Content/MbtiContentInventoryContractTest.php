@@ -84,6 +84,13 @@ final class MbtiContentInventoryContractTest extends TestCase
         ], $familyKeys);
         $this->assertContains('misunderstanding_fix', data_get($familyIndex, 'explainability_fragment.block_kinds', []));
         $this->assertContains('stability_reframe', data_get($familyIndex, 'explainability_fragment.block_kinds', []));
+        $this->assertContains('action_experiment', data_get($familyIndex, 'action_fragment.block_kinds', []));
+        $this->assertContains('watchout_overextension', data_get($familyIndex, 'watchout_fragment.block_kinds', []));
+        $this->assertContains('work_scene_execution', data_get($familyIndex, 'work_fragment.block_kinds', []));
+        $this->assertContains('relationship_bridge', data_get($familyIndex, 'relationship_fragment.block_kinds', []));
+        $this->assertContains('recovery_reset', data_get($familyIndex, 'recovery_fragment.block_kinds', []));
+        $this->assertContains('revisit_resume', data_get($familyIndex, 'revisit_fragment.block_kinds', []));
+        $this->assertContains('adaptive_retry', data_get($familyIndex, 'adaptive_response_fragment.block_kinds', []));
 
         $selectionTagSchema = is_array($inventory['selection_tag_schema'] ?? null) ? $inventory['selection_tag_schema'] : [];
         foreach ([

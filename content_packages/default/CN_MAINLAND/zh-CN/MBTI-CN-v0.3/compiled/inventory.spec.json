@@ -2,7 +2,7 @@
     "schema": "fap.mbti.content_inventory.compiled.v1",
     "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
     "version": "v0.3",
-    "generated_at": "2026-03-22T13:13:53+00:00",
+    "generated_at": "2026-03-22T14:43:03+00:00",
     "inventory_contract_version": 1,
     "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03",
     "governance_profile": "mbti_content_inventory.v1",
@@ -117,7 +117,9 @@
             ],
             "block_kinds": [
                 "stress_recovery",
-                "weekly_experiment"
+                "weekly_experiment",
+                "recovery_reset",
+                "recovery_reentry"
             ],
             "selection_tags": [
                 "section_key",
@@ -179,7 +181,15 @@
                 "role_fit",
                 "collaboration_fit",
                 "career_next_step",
-                "work_experiment"
+                "work_experiment",
+                "work_scene_execution",
+                "work_scene_collaboration",
+                "work_scene_pacing",
+                "work_scene_role_fit",
+                "work_scene_transition",
+                "work_scene_promotion_readiness",
+                "work_scene_team_friction",
+                "work_scene_focus_recovery"
             ],
             "selection_tags": [
                 "section_key",
@@ -207,7 +217,13 @@
             ],
             "block_kinds": [
                 "communication",
-                "relationship_practice"
+                "relationship_practice",
+                "relationship_bridge",
+                "relationship_boundary_negotiation",
+                "relationship_misread_repair",
+                "relationship_conflict_recovery",
+                "relationship_try_this_week",
+                "relationship_low_intensity_reconnect"
             ],
             "selection_tags": [
                 "section_key",
@@ -237,7 +253,13 @@
                 "next_action",
                 "weekly_experiment",
                 "work_experiment",
-                "relationship_practice"
+                "relationship_practice",
+                "action_experiment",
+                "action_reset",
+                "action_resistance_break",
+                "action_momentum_start",
+                "action_bridge_step",
+                "action_low_pressure_step"
             ],
             "selection_tags": [
                 "section_key",
@@ -265,7 +287,13 @@
             ],
             "block_kinds": [
                 "watchout",
-                "boundary"
+                "boundary",
+                "watchout_overextension",
+                "watchout_people_pleasing",
+                "watchout_overcontrol",
+                "watchout_energy_leak",
+                "watchout_avoidant_delay",
+                "watchout_recovery_gap"
             ],
             "selection_tags": [
                 "section_key",
@@ -387,7 +415,8 @@
                 "relationships.try_this_week"
             ],
             "block_kinds": [
-                "revisit"
+                "revisit",
+                "revisit_resume"
             ],
             "selection_tags": [
                 "section_key",
@@ -417,7 +446,9 @@
                 "cta.surface"
             ],
             "block_kinds": [
-                "adaptive_response"
+                "adaptive_response",
+                "adaptive_retry",
+                "adaptive_reduce_pressure"
             ],
             "selection_tags": [
                 "section_key",

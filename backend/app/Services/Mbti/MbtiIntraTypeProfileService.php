@@ -748,33 +748,33 @@ final class MbtiIntraTypeProfileService
                 default => ['stability_explanation', 'stability_reframe'],
             },
             'growth.next_actions' => match ($selectionMode) {
-                'action_career_bridge' => ['next_action', 'axis_strength', 'boundary'],
-                'action_explainable' => ['next_action', 'axis_strength', 'identity'],
-                'action_boundary_buffered' => ['next_action', 'boundary', 'identity'],
-                default => ['next_action', 'identity', 'axis_strength'],
+                'action_career_bridge' => ['next_action', 'action_bridge_step', 'action_momentum_start', 'boundary', 'identity'],
+                'action_explainable' => ['next_action', 'action_experiment', 'action_resistance_break', 'identity', 'boundary'],
+                'action_boundary_buffered' => ['next_action', 'action_low_pressure_step', 'action_reset', 'boundary', 'axis_strength'],
+                default => ['next_action', 'action_momentum_start', 'action_resistance_break', 'identity', 'boundary'],
             },
             'career.next_step' => match ($selectionMode) {
-                'career_decision_bridge' => ['career_next_step', 'boundary', 'axis_strength'],
-                'career_identity_check' => ['career_next_step', 'identity', 'axis_strength'],
-                default => ['career_next_step', 'axis_strength', 'identity'],
+                'career_decision_bridge' => ['career_next_step', 'work_scene_role_fit', 'work_scene_transition', 'boundary', 'axis_strength'],
+                'career_identity_check' => ['career_next_step', 'work_scene_role_fit', 'work_scene_transition', 'work_scene_execution', 'identity'],
+                default => ['career_next_step', 'work_scene_role_fit', 'work_scene_execution', 'work_scene_collaboration', 'axis_strength'],
             },
             'career.work_experiments' => match ($selectionMode) {
-                'career_experiment_bridge' => ['work_experiment', 'axis_strength', 'boundary'],
-                'career_experiment_boundary' => ['work_experiment', 'boundary', 'identity'],
-                default => ['work_experiment', 'identity', 'axis_strength'],
+                'career_experiment_bridge' => ['work_experiment', 'work_scene_collaboration', 'work_scene_team_friction', 'boundary', 'axis_strength'],
+                'career_experiment_boundary' => ['work_experiment', 'work_scene_transition', 'work_scene_focus_recovery', 'boundary', 'identity'],
+                default => ['work_experiment', 'work_scene_pacing', 'work_scene_execution', 'identity', 'axis_strength'],
             },
             'growth.watchouts' => match ($selectionMode) {
-                'watchout_boundary_buffered' => ['watchout', 'boundary', 'identity'],
-                default => ['watchout', 'identity', 'axis_strength'],
+                'watchout_boundary_buffered' => ['watchout', 'watchout_recovery_gap', 'watchout_energy_leak', 'boundary', 'identity'],
+                default => ['watchout', 'watchout_overextension', 'watchout_overcontrol', 'identity', 'boundary'],
             },
             'traits.adjacent_type_contrast' => match ($selectionMode) {
                 'contrast_boundary' => ['adjacent_type_contrast', 'boundary', 'identity'],
                 default => ['adjacent_type_contrast', 'identity'],
             },
             'relationships.try_this_week' => match ($selectionMode) {
-                'relationship_action_bridge' => ['relationship_practice', 'identity', 'boundary'],
-                'relationship_boundary' => ['relationship_practice', 'boundary', 'axis_strength'],
-                default => ['relationship_practice', 'identity', 'axis_strength'],
+                'relationship_action_bridge' => ['relationship_practice', 'relationship_bridge', 'relationship_misread_repair', 'boundary', 'identity'],
+                'relationship_boundary' => ['relationship_practice', 'relationship_boundary_negotiation', 'relationship_conflict_recovery', 'boundary', 'axis_strength'],
+                default => ['relationship_practice', 'relationship_low_intensity_reconnect', 'relationship_try_this_week', 'identity', 'boundary'],
             },
             default => [],
         };
@@ -785,6 +785,11 @@ final class MbtiIntraTypeProfileService
         return match ($sectionKey) {
             'growth.stability_confidence' => $selectionMode === 'stability_core' ? 2 : 3,
             'traits.adjacent_type_contrast' => $selectionMode === 'contrast_neighbor' ? 2 : 3,
+            'growth.next_actions',
+            'growth.watchouts',
+            'career.next_step',
+            'career.work_experiments',
+            'relationships.try_this_week' => 5,
             default => 3,
         };
     }

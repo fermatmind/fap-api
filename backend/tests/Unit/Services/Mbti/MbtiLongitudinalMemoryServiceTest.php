@@ -114,6 +114,7 @@ final class MbtiLongitudinalMemoryServiceTest extends TestCase
                         ['id' => 'career.work_experiments.identity.a', 'kind' => 'identity'],
                         ['id' => 'career.work_experiments.axis.ei', 'kind' => 'axis_strength'],
                         ['id' => 'career.work_experiments.boundary.jp', 'kind' => 'boundary'],
+                        ['id' => 'career.work_experiments.work.collab', 'kind' => 'work_scene_collaboration'],
                         ['id' => 'career.work_experiments.work', 'kind' => 'work_experiment'],
                     ],
                 ],
@@ -132,6 +133,15 @@ final class MbtiLongitudinalMemoryServiceTest extends TestCase
         $careerNextStepSelectedBlocks = (array) (($personalization['sections']['career.next_step']['selected_blocks'] ?? []));
         $this->assertContains('career.next_step.axis.tf', $careerNextStepSelectedBlocks);
         $this->assertContains('career.next_step.boundary.jp', $careerNextStepSelectedBlocks);
+        $this->assertCount(3, $careerNextStepSelectedBlocks);
+        $this->assertCount(4, (array) (($personalization['sections']['career.work_experiments']['selected_blocks'] ?? [])));
+        $this->assertContains(
+            'work_scene_collaboration',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($personalization, 'career.work_experiments')['blocks'] ?? []))
+            )
+        );
         $this->assertStringContainsString(
             ':memory.resume_career_focus',
             (string) (($personalization['section_selection_keys']['career.next_step'] ?? ''))
@@ -268,6 +278,7 @@ final class MbtiLongitudinalMemoryServiceTest extends TestCase
                         ['id' => 'growth.next_actions.axis.ei', 'kind' => 'axis_strength'],
                         ['id' => 'growth.next_actions.boundary.tf', 'kind' => 'boundary'],
                         ['id' => 'growth.next_actions.next', 'kind' => 'next_action'],
+                        ['id' => 'growth.next_actions.action.experiment', 'kind' => 'action_experiment'],
                     ],
                 ],
                 'career.next_step' => [
@@ -276,6 +287,7 @@ final class MbtiLongitudinalMemoryServiceTest extends TestCase
                         ['id' => 'career.next_step.identity.a', 'kind' => 'identity'],
                         ['id' => 'career.next_step.axis.tf', 'kind' => 'axis_strength'],
                         ['id' => 'career.next_step.boundary.jp', 'kind' => 'boundary'],
+                        ['id' => 'career.next_step.work.role_fit', 'kind' => 'work_scene_role_fit'],
                         ['id' => 'career.next_step.work', 'kind' => 'career_next_step'],
                     ],
                 ],
@@ -291,6 +303,16 @@ final class MbtiLongitudinalMemoryServiceTest extends TestCase
         $this->assertNotContains('career.next_step', data_get($personalization, 'longitudinal_memory_v1.section_history_keys', []));
         $this->assertContains('growth', data_get($personalization, 'longitudinal_memory_v1.dominant_interest_keys', []));
         $this->assertNotContains('career', data_get($personalization, 'longitudinal_memory_v1.dominant_interest_keys', []));
+        $growthNextActionsSelectedBlocks = (array) (($personalization['sections']['growth.next_actions']['selected_blocks'] ?? []));
+        $this->assertContains('growth.next_actions.action.experiment', $growthNextActionsSelectedBlocks);
+        $this->assertCount(4, $growthNextActionsSelectedBlocks);
+        $this->assertContains(
+            'action_experiment',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($personalization, 'growth.next_actions')['blocks'] ?? []))
+            )
+        );
     }
 
     private function createAttempt(string $anonId, \DateTimeInterface $submittedAt): string
@@ -318,5 +340,13 @@ final class MbtiLongitudinalMemoryServiceTest extends TestCase
         ]);
 
         return $attemptId;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function section(array $payload, string $sectionKey): array
+    {
+        return (array) (($payload['sections'][$sectionKey] ?? []));
     }
 }

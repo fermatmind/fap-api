@@ -321,7 +321,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             $roundTrippedVariantKeys['career.work_environment'] ?? null
         );
         $this->assertSame(
-            'career.next_step:TF.T.boundary:identity.T:boundary.TF',
+            'career.next_step:TF.T.boundary:identity.T:action.career_next_step_theme_clarify_decision_criteria:boundary.TF',
             $roundTrippedVariantKeys['career.next_step'] ?? null
         );
         $this->assertSame(
@@ -470,7 +470,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             $projectionVariantKeys['career.work_environment'] ?? null
         );
         $this->assertSame(
-            'career.next_step:TF.T.boundary:identity.T:boundary.TF',
+            'career.next_step:TF.T.boundary:identity.T:action.career_next_step_theme_clarify_decision_criteria:boundary.TF',
             $projectionVariantKeys['career.next_step'] ?? null
         );
         $this->assertSame(
@@ -550,7 +550,7 @@ final class MbtiPhase2AssemblerIntegrationTest extends TestCase
             data_get($careerWorkEnvironment, '_meta.variant_key')
         );
         $this->assertSame(
-            'career.next_step:TF.T.boundary:identity.T:boundary.TF',
+            'career.next_step:TF.T.boundary:identity.T:action.career_next_step_theme_clarify_decision_criteria:boundary.TF',
             data_get($careerNextStep, '_meta.variant_key')
         );
         $this->assertSame(

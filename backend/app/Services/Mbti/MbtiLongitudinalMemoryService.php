@@ -716,12 +716,12 @@ final class MbtiLongitudinalMemoryService
             'traits.why_this_type' => ['why_this_type', 'misunderstanding_fix', 'boundary', 'identity'],
             'growth.stability_confidence' => ['stability_explanation', 'stability_reframe', 'stress_recovery', 'boundary'],
             'growth.next_actions' => $selectionMode === 'memory.action_refine'
-                ? ['next_action', 'boundary', 'identity']
-                : ['next_action', 'identity', 'axis_strength'],
-            'growth.watchouts' => ['watchout', 'boundary', 'identity'],
-            'career.next_step' => ['career_next_step', 'axis_strength', 'boundary'],
-            'career.work_experiments' => ['work_experiment', 'identity', 'boundary'],
-            'relationships.try_this_week' => ['relationship_practice', 'identity', 'boundary'],
+                ? ['next_action', 'revisit_resume', 'adaptive_retry', 'action_experiment', 'boundary']
+                : ['next_action', 'action_experiment', 'action_momentum_start', 'identity', 'boundary'],
+            'growth.watchouts' => ['watchout', 'recovery_reset', 'watchout_overextension', 'boundary', 'identity'],
+            'career.next_step' => ['career_next_step', 'work_scene_transition', 'work_scene_role_fit', 'boundary', 'axis_strength'],
+            'career.work_experiments' => ['work_experiment', 'work_scene_focus_recovery', 'work_scene_collaboration', 'boundary', 'identity'],
+            'relationships.try_this_week' => ['relationship_practice', 'relationship_misread_repair', 'recovery_reentry', 'boundary', 'identity'],
             default => [],
         };
     }
@@ -731,6 +731,11 @@ final class MbtiLongitudinalMemoryService
         return match ($sectionKey) {
             'growth.stability_confidence' => 3,
             'traits.why_this_type' => $selectionMode === 'memory.explainability_resume' ? 3 : 2,
+            'growth.next_actions',
+            'growth.watchouts',
+            'career.next_step',
+            'career.work_experiments',
+            'relationships.try_this_week' => 4,
             default => 3,
         };
     }
