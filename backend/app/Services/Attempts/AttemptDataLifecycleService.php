@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace App\Services\Attempts;
 
+use App\Services\Storage\ArtifactStore;
 use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
 
 final class AttemptDataLifecycleService
 {
+    public function __construct(
+        private readonly ArtifactStore $artifactStore,
+    ) {}
+
     /**
      * @param array<string,mixed> $context
      * @return array<string,mixed>
@@ -34,6 +39,12 @@ final class AttemptDataLifecycleService
             ];
         }
 
+        $result = DB::table('results')
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->first();
+        $artifactResidualAudit = $this->inspectArtifactResidualAudit($attempt, $result);
+
         $counts = [
             'results_deleted' => 0,
             'report_snapshots_deleted' => 0,
@@ -45,7 +56,7 @@ final class AttemptDataLifecycleService
             'attempts_redacted' => 0,
         ];
 
-        DB::transaction(function () use ($attemptId, $orgId, &$counts, $context): void {
+        DB::transaction(function () use ($attemptId, $orgId, &$counts, $context, $artifactResidualAudit): void {
             if (SchemaBaseline::hasTable('attempt_answer_sets')) {
                 $counts['attempt_answer_sets_deleted'] = DB::table('attempt_answer_sets')
                     ->where('org_id', $orgId)
@@ -141,7 +152,9 @@ final class AttemptDataLifecycleService
                         'attempt_id' => $attemptId,
                         'scale_code' => (string) ($context['scale_code'] ?? ''),
                     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                    'result_json' => json_encode($counts, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                    'result_json' => json_encode(array_merge($counts, [
+                        'artifact_residual_audit' => $artifactResidualAudit,
+                    ]), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                     'approved_at' => now(),
                     'executed_at' => now(),
                     'created_at' => now(),
@@ -155,6 +168,99 @@ final class AttemptDataLifecycleService
             'attempt_id' => $attemptId,
             'org_id' => $orgId,
             'counts' => $counts,
+            'artifact_residual_audit' => $artifactResidualAudit,
         ];
+    }
+
+    /**
+     * @param  object  $attempt
+     * @param  object|null  $result
+     * @return array<string,mixed>
+     */
+    private function inspectArtifactResidualAudit(object $attempt, ?object $result): array
+    {
+        $attemptId = trim((string) ($attempt->id ?? ''));
+        $scaleCode = trim((string) ($attempt->scale_code ?? ''));
+        $reportPath = $this->artifactStore->reportCanonicalPath($scaleCode, $attemptId);
+        $reportExists = $this->artifactStore->exists($reportPath);
+
+        $manifestHash = $this->resolveManifestHash($attempt, $result);
+        $variantsChecked = ['free', 'full'];
+        $pdfPaths = [];
+        $pdfExists = false;
+        foreach ($variantsChecked as $variant) {
+            $path = $this->artifactStore->pdfCanonicalPath($scaleCode, $attemptId, $manifestHash, $variant);
+            $pdfPaths[$variant] = $path;
+            if ($this->artifactStore->exists($path)) {
+                $pdfExists = true;
+            }
+        }
+
+        $state = match (true) {
+            $reportExists && $pdfExists => 'residual_report_json_and_pdf_found',
+            $reportExists => 'residual_report_json_found',
+            $pdfExists => 'residual_pdf_found',
+            default => 'no_residual_found',
+        };
+
+        return [
+            'state' => $state,
+            'remote_state' => 'remote_state_unknown',
+            'attempt_id' => $attemptId,
+            'org_id' => (int) ($attempt->org_id ?? 0),
+            'scale_code' => $scaleCode,
+            'report' => [
+                'path' => $reportPath,
+                'exists' => $reportExists,
+            ],
+            'pdf' => [
+                'manifest_hash' => $manifestHash,
+                'paths' => $pdfPaths,
+                'exists' => $pdfExists,
+                'variants_checked' => $variantsChecked,
+            ],
+        ];
+    }
+
+    /**
+     * @param  object  $attempt
+     * @param  object|null  $result
+     */
+    private function resolveManifestHash(object $attempt, ?object $result = null): string
+    {
+        $summary = $this->decodeArray($attempt->answers_summary_json ?? null);
+        $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
+        $hash = trim((string) ($meta['pack_release_manifest_hash'] ?? ''));
+        if ($hash !== '') {
+            return $hash;
+        }
+
+        $resultPayload = $this->decodeArray($result?->result_json ?? null);
+        $hash = trim((string) (
+            data_get($resultPayload, 'version_snapshot.content_manifest_hash')
+            ?? data_get($resultPayload, 'normed_json.version_snapshot.content_manifest_hash')
+            ?? data_get($resultPayload, 'content_manifest_hash')
+            ?? ''
+        ));
+
+        return $hash !== '' ? $hash : 'nohash';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeArray(mixed $value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (! is_string($value) || trim($value) === '') {
+            return [];
+        }
+
+        $decoded = json_decode($value, true);
+
+        return is_array($decoded) ? $decoded : [];
     }
 }

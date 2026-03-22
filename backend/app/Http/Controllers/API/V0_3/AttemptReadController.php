@@ -1145,8 +1145,10 @@ class AttemptReadController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
-        $attempt = $this->ownedAttemptQuery($request, $id)->firstOrFail();
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
+        $responseCodes = $this->resolveResponseScaleCodes($result);
+        $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
+        $attempt = $this->resolveAttemptForReportRead($request, $orgId, $id, $scaleCode);
 
         $gate = $this->reportGatekeeper->resolve(
             $orgId,

@@ -258,7 +258,17 @@ final class NonMbtiReportContractRegressionTest extends TestCase
         $this->assertSharedNonMbtiEnvelope($locked);
         $this->assertMbtiOnlyFieldsAreMissing($locked);
         $this->assertSame(
-            ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
+            [
+                'traits.overview',
+                'traits.why_this_profile',
+                'relationships.interpersonal_style',
+                'career.work_style',
+                'growth.next_actions',
+                'disclaimer_top',
+                'summary',
+                'domains_overview',
+                'disclaimer',
+            ],
             array_map('strval', (array) array_column((array) $locked->json('report.sections'), 'key'))
         );
 
@@ -292,7 +302,21 @@ final class NonMbtiReportContractRegressionTest extends TestCase
         $this->assertSharedNonMbtiEnvelope($unlocked);
         $this->assertMbtiOnlyFieldsAreMissing($unlocked);
         $this->assertSame(
-            ['disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
+            [
+                'traits.overview',
+                'traits.why_this_profile',
+                'relationships.interpersonal_style',
+                'career.work_style',
+                'growth.next_actions',
+                'disclaimer_top',
+                'summary',
+                'domains_overview',
+                'facet_table',
+                'top_facets',
+                'facets_deepdive',
+                'action_plan',
+                'disclaimer',
+            ],
             array_map('strval', (array) array_column((array) $unlocked->json('report.sections'), 'key'))
         );
     }
@@ -404,7 +428,6 @@ final class NonMbtiReportContractRegressionTest extends TestCase
             'report.scores_pct',
             'report.axis_states',
             'report.warnings',
-            'report._meta',
             'report.borderline_note',
             'report.versions',
         ] as $path) {
