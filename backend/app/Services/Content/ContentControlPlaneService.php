@@ -28,6 +28,25 @@ final class ContentControlPlaneService
 
         $draftState = $this->resolveDraftState($compile['status'], $governance['status'], $release);
         $reviewState = $this->resolveReviewState($compile['status'], $governance['status'], $release);
+        $localeScope = $this->resolveLocaleScope($versionData);
+        $publishTarget = $this->resolvePublishTarget($versionData);
+        $previewTarget = $this->resolvePreviewTarget($versionData);
+        $releaseCandidateStatus = $this->resolveReleaseCandidateStatus($release, $compile['status'], $governance['status']);
+        $contentObjects = $this->buildContentObjects(
+            $versionData,
+            $governance['content_object_inventory'],
+            $draftState,
+            $reviewState,
+            $compile['status'],
+            $governance['status'],
+            $releaseCandidateStatus,
+            $previewTarget,
+            $publishTarget,
+            $localeScope,
+            $governance['experiment_scope'],
+            $release['runtime_artifact_ref'],
+            $release['rollback_target'],
+        );
 
         return [
             'content_control_plane_v1' => [
@@ -36,17 +55,18 @@ final class ContentControlPlaneService
                 'draft_state' => $draftState,
                 'revision_no' => $this->resolveRevisionNo($versionData),
                 'review_state' => $reviewState,
-                'preview_target' => $this->resolvePreviewTarget($versionData),
+                'preview_target' => $previewTarget,
                 'compile_status' => $compile['status'],
                 'governance_status' => $governance['status'],
-                'release_candidate_status' => $this->resolveReleaseCandidateStatus($release, $compile['status'], $governance['status']),
-                'publish_target' => $this->resolvePublishTarget($versionData),
+                'release_candidate_status' => $releaseCandidateStatus,
+                'publish_target' => $publishTarget,
                 'rollback_target' => $release['rollback_target'],
-                'locale_scope' => $this->resolveLocaleScope($versionData),
+                'locale_scope' => $localeScope,
                 'experiment_scope' => $governance['experiment_scope'],
                 'runtime_artifact_ref' => $release['runtime_artifact_ref'],
                 'cultural_context' => $governance['cultural_context'],
-                'content_object_inventory' => $governance['content_object_inventory'],
+                'content_object_inventory' => $this->summarizeContentObjects($contentObjects),
+                'content_objects_v1' => $contentObjects,
             ],
         ];
     }
@@ -424,28 +444,275 @@ final class ContentControlPlaneService
             [
                 'type' => 'narrative_fragment',
                 'enabled' => $hasNarrative,
+                'governance_profile' => 'growth_content.narrative_fragment.v1',
+                'layer_scope' => ['scene', 'explainability', 'action'],
             ],
             [
                 'type' => 'calibration_copy',
                 'enabled' => $hasLocaleVariant,
+                'governance_profile' => 'growth_content.calibration_copy.v1',
+                'layer_scope' => ['boundary', 'explainability'],
             ],
             [
                 'type' => 'cta_overlay',
                 'enabled' => $hasCtaOverlay,
+                'governance_profile' => 'growth_content.cta_overlay.v1',
+                'layer_scope' => ['action'],
             ],
             [
-                'type' => 'experiment_overlay',
-                'enabled' => $hasExperimentOverlay,
+                'type' => 'faq_explainability_copy',
+                'enabled' => $hasNarrative,
+                'governance_profile' => 'growth_content.faq_explainability_copy.v1',
+                'layer_scope' => ['explainability'],
+            ],
+            [
+                'type' => 'scene_fragment',
+                'enabled' => $hasNarrative,
+                'governance_profile' => 'growth_content.scene_fragment.v1',
+                'layer_scope' => ['scene'],
+            ],
+            [
+                'type' => 'action_fragment',
+                'enabled' => $hasNarrative,
+                'governance_profile' => 'growth_content.action_fragment.v1',
+                'layer_scope' => ['action'],
             ],
             [
                 'type' => 'locale_variant_draft',
                 'enabled' => $hasLocaleVariant,
+                'governance_profile' => 'growth_content.locale_variant_draft.v1',
+                'layer_scope' => ['skeleton', 'boundary', 'scene', 'explainability', 'action'],
+            ],
+            [
+                'type' => 'experiment_overlay',
+                'enabled' => $hasExperimentOverlay,
+                'governance_profile' => 'growth_content.experiment_overlay.v1',
+                'layer_scope' => ['scene', 'action', 'explainability'],
             ],
             [
                 'type' => 'release_candidate_metadata',
                 'enabled' => $hasReleaseCandidate,
+                'governance_profile' => 'growth_content.release_candidate_metadata.v1',
+                'layer_scope' => [],
             ],
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $inventory
+     * @param  array<string,mixed>  $experimentScope
+     * @param  array<string,mixed>|null  $runtimeArtifactRef
+     * @param  array<string,mixed>|null  $rollbackTarget
+     * @return list<array<string,mixed>>
+     */
+    private function buildContentObjects(
+        array $versionData,
+        array $inventory,
+        string $draftState,
+        string $reviewState,
+        string $compileStatus,
+        string $governanceStatus,
+        string $releaseCandidateStatus,
+        string $previewTarget,
+        string $publishTarget,
+        string $localeScope,
+        array $experimentScope,
+        ?array $runtimeArtifactRef,
+        ?array $rollbackTarget,
+    ): array {
+        $versionId = trim((string) ($versionData['id'] ?? ''));
+        $packId = trim((string) ($versionData['pack_id'] ?? ''));
+        $objects = [];
+
+        foreach ($inventory as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $type = trim((string) ($item['type'] ?? ''));
+            if ($type === '') {
+                continue;
+            }
+
+            $enabled = (bool) ($item['enabled'] ?? false);
+            $runtimeBindable = $enabled && $this->isRuntimeBindableObject($type);
+            $objectId = implode(':', array_filter([$packId, $versionId, $type], static fn (string $value): bool => $value !== ''));
+            $objectPreviewTarget = $enabled && $previewTarget !== ''
+                ? $previewTarget.'?object='.rawurlencode($type)
+                : null;
+            $objectPublishTarget = $runtimeBindable && $publishTarget !== 'default/pending/pending/pending'
+                ? $publishTarget.'#object='.rawurlencode($type)
+                : null;
+            $objectDraftState = $this->resolveObjectDraftState($type, $enabled, $draftState, $compileStatus, $governanceStatus);
+            $objectReviewState = $this->resolveObjectReviewState($type, $enabled, $reviewState, $compileStatus, $governanceStatus);
+            $objectReleaseCandidateStatus = $this->resolveObjectReleaseCandidateStatus($type, $enabled, $releaseCandidateStatus, $compileStatus, $governanceStatus);
+
+            $objects[] = [
+                'content_object_v1' => 'content_object.v1',
+                'content_object_id' => $objectId,
+                'content_object_type' => $type,
+                'authoring_scope' => 'backend_filament_ops',
+                'draft_state' => $objectDraftState,
+                'revision_no' => $this->resolveRevisionNo($versionData),
+                'review_state' => $objectReviewState,
+                'preview_target' => $objectPreviewTarget,
+                'compile_status' => $enabled ? $compileStatus : 'not_in_scope',
+                'governance_status' => $enabled ? $governanceStatus : 'not_in_scope',
+                'release_candidate_status' => $objectReleaseCandidateStatus,
+                'publish_target' => $objectPublishTarget,
+                'rollback_target' => $runtimeBindable ? $this->decorateArtifactRef($rollbackTarget, $type, $objectId) : null,
+                'locale_scope' => $localeScope,
+                'experiment_scope' => $this->buildObjectExperimentScope($type, $experimentScope, $enabled),
+                'runtime_artifact_ref' => $runtimeBindable ? $this->decorateArtifactRef($runtimeArtifactRef, $type, $objectId) : null,
+                'source_pack_version_id' => $versionId !== '' ? $versionId : null,
+                'source_release_id' => $runtimeBindable && is_array($runtimeArtifactRef)
+                    ? trim((string) ($runtimeArtifactRef['release_id'] ?? '')) ?: null
+                    : null,
+                'governance_profile' => trim((string) ($item['governance_profile'] ?? '')) ?: 'growth_content.default.v1',
+            ];
+        }
+
+        return $objects;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $contentObjects
+     * @return list<array<string,mixed>>
+     */
+    private function summarizeContentObjects(array $contentObjects): array
+    {
+        return array_map(static function (array $item): array {
+            return [
+                'type' => (string) ($item['content_object_type'] ?? 'unknown'),
+                'enabled' => ! in_array((string) ($item['draft_state'] ?? 'not_in_scope'), ['not_in_scope'], true),
+                'draft_state' => (string) ($item['draft_state'] ?? 'unknown'),
+                'review_state' => (string) ($item['review_state'] ?? 'unknown'),
+                'release_candidate_status' => (string) ($item['release_candidate_status'] ?? 'unknown'),
+                'runtime_bound' => is_array($item['runtime_artifact_ref'] ?? null),
+            ];
+        }, $contentObjects);
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $artifact
+     * @return array<string,mixed>|null
+     */
+    private function decorateArtifactRef(?array $artifact, string $type, string $objectId): ?array
+    {
+        if (! is_array($artifact) || $artifact === []) {
+            return null;
+        }
+
+        return array_merge($artifact, [
+            'content_object_type' => $type,
+            'content_object_id' => $objectId,
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $experimentScope
+     * @return array<string,mixed>
+     */
+    private function buildObjectExperimentScope(string $type, array $experimentScope, bool $enabled): array
+    {
+        if (! $enabled) {
+            return [
+                'stable_files' => 0,
+                'experiment_files' => 0,
+                'commercial_overlay_files' => 0,
+                'experiment_keys' => [],
+                'overlay_targets' => [],
+            ];
+        }
+
+        if (in_array($type, ['experiment_overlay', 'cta_overlay', 'release_candidate_metadata'], true)) {
+            return $experimentScope;
+        }
+
+        return [
+            'stable_files' => (int) ($experimentScope['stable_files'] ?? 0),
+            'experiment_files' => 0,
+            'commercial_overlay_files' => 0,
+            'experiment_keys' => [],
+            'overlay_targets' => [],
+        ];
+    }
+
+    private function isRuntimeBindableObject(string $type): bool
+    {
+        return in_array($type, [
+            'narrative_fragment',
+            'calibration_copy',
+            'cta_overlay',
+            'faq_explainability_copy',
+            'scene_fragment',
+            'action_fragment',
+            'experiment_overlay',
+        ], true);
+    }
+
+    private function resolveObjectDraftState(
+        string $type,
+        bool $enabled,
+        string $draftState,
+        string $compileStatus,
+        string $governanceStatus
+    ): string {
+        if (! $enabled) {
+            return 'not_in_scope';
+        }
+
+        return match ($type) {
+            'locale_variant_draft' => $compileStatus === 'compiled' && $governanceStatus === 'passing'
+                ? 'locale_variant_draft_ready'
+                : 'locale_variant_draft_pending',
+            'release_candidate_metadata' => $compileStatus === 'compiled' && $governanceStatus === 'passing'
+                ? 'release_metadata_ready'
+                : 'release_metadata_pending',
+            default => $draftState,
+        };
+    }
+
+    private function resolveObjectReviewState(
+        string $type,
+        bool $enabled,
+        string $reviewState,
+        string $compileStatus,
+        string $governanceStatus
+    ): string {
+        if (! $enabled) {
+            return 'not_in_scope';
+        }
+
+        return match ($type) {
+            'locale_variant_draft' => $compileStatus === 'compiled' && $governanceStatus === 'passing'
+                ? 'locale_review_ready'
+                : 'locale_review_pending',
+            'release_candidate_metadata' => $compileStatus === 'compiled' && $governanceStatus === 'passing'
+                ? 'release_review_ready'
+                : 'release_review_pending',
+            default => $reviewState,
+        };
+    }
+
+    private function resolveObjectReleaseCandidateStatus(
+        string $type,
+        bool $enabled,
+        string $releaseCandidateStatus,
+        string $compileStatus,
+        string $governanceStatus
+    ): string {
+        if (! $enabled) {
+            return 'not_in_scope';
+        }
+
+        return match ($type) {
+            'locale_variant_draft' => 'draft_only',
+            'release_candidate_metadata' => $compileStatus === 'compiled' && $governanceStatus === 'passing'
+                ? ($releaseCandidateStatus === 'published' ? 'published_release_metadata' : 'ready_for_release_review')
+                : 'not_ready',
+            default => $releaseCandidateStatus,
+        };
     }
 
     /**
