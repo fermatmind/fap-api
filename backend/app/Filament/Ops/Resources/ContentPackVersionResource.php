@@ -112,6 +112,10 @@ class ContentPackVersionResource extends Resource
                         ->label('Experiment / overlay scope')
                         ->content(fn (?ContentPackVersion $record): HtmlString => self::renderExperimentScope($record))
                         ->columnSpanFull(),
+                    Forms\Components\Placeholder::make('cp.content_inventory_v1')
+                        ->label('MBTI content inventory')
+                        ->content(fn (?ContentPackVersion $record): HtmlString => self::renderInventoryContract($record))
+                        ->columnSpanFull(),
                     Forms\Components\Placeholder::make('cp.content_object_inventory')
                         ->label('First-wave managed objects')
                         ->content(fn (?ContentPackVersion $record): HtmlString => self::renderObjectInventory($record))
@@ -223,6 +227,18 @@ class ContentPackVersionResource extends Resource
                     'experiment_keys' => [],
                     'overlay_targets' => [],
                 ],
+                'content_inventory_v1' => [
+                    'inventory_status' => 'not_applicable',
+                    'inventory_contract_version' => 0,
+                    'inventory_fingerprint' => null,
+                    'governance_profile' => null,
+                    'fragment_family_count' => 0,
+                    'fragment_family_keys' => [],
+                    'selection_tag_count' => 0,
+                    'selection_tag_keys' => [],
+                    'section_family_count' => 0,
+                    'section_family_keys' => [],
+                ],
                 'runtime_artifact_ref' => null,
                 'content_object_inventory' => [],
                 'content_objects_v1' => [],
@@ -289,6 +305,33 @@ class ContentPackVersionResource extends Resource
             'commercial_overlay_files='.(int) ($scope['commercial_overlay_files'] ?? 0),
             'experiment_keys='.($experimentKeys !== '' ? $experimentKeys : 'none'),
             'overlay_targets='.($overlayTargets !== '' ? $overlayTargets : 'none'),
+        ];
+
+        return new HtmlString('<ul><li>'.implode('</li><li>', array_map('e', $items)).'</li></ul>');
+    }
+
+    private static function renderInventoryContract(?ContentPackVersion $record): HtmlString
+    {
+        $inventory = self::controlPlaneValue($record, 'content_inventory_v1', []);
+        if (! is_array($inventory) || $inventory === []) {
+            return new HtmlString('<span>No MBTI content inventory contract available yet.</span>');
+        }
+
+        $fragmentFamilyKeys = implode(', ', (array) ($inventory['fragment_family_keys'] ?? []));
+        $sectionFamilyKeys = implode(', ', (array) ($inventory['section_family_keys'] ?? []));
+        $selectionTagKeys = implode(', ', (array) ($inventory['selection_tag_keys'] ?? []));
+
+        $items = [
+            'inventory_status='.(string) ($inventory['inventory_status'] ?? 'unknown'),
+            'inventory_contract_version='.(int) ($inventory['inventory_contract_version'] ?? 0),
+            'inventory_fingerprint='.(string) ($inventory['inventory_fingerprint'] ?? 'none'),
+            'governance_profile='.(string) ($inventory['governance_profile'] ?? 'none'),
+            'fragment_family_count='.(int) ($inventory['fragment_family_count'] ?? 0),
+            'fragment_family_keys='.($fragmentFamilyKeys !== '' ? $fragmentFamilyKeys : 'none'),
+            'selection_tag_count='.(int) ($inventory['selection_tag_count'] ?? 0),
+            'selection_tag_keys='.($selectionTagKeys !== '' ? $selectionTagKeys : 'none'),
+            'section_family_count='.(int) ($inventory['section_family_count'] ?? 0),
+            'section_family_keys='.($sectionFamilyKeys !== '' ? $sectionFamilyKeys : 'none'),
         ];
 
         return new HtmlString('<ul><li>'.implode('</li><li>', array_map('e', $items)).'</li></ul>');

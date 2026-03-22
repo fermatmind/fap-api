@@ -1,0 +1,721 @@
+{
+  "schema": "fap.mbti.content_inventory.v1",
+  "inventory_contract_version": 1,
+  "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
+  "cultural_context": "CN_MAINLAND.zh-CN",
+  "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03",
+  "governance_profile": "mbti_content_inventory.v1",
+  "fragment_families": [
+    {
+      "key": "explainability_fragment",
+      "label": "Explainability fragment",
+      "description": "Why-this-type, contrast, and stability explanation blocks.",
+      "layer_scope": [
+        "boundary",
+        "explainability"
+      ],
+      "allowed_section_keys": [
+        "overview",
+        "trait_overview",
+        "traits.why_this_type",
+        "growth.stability_confidence",
+        "traits.adjacent_type_contrast"
+      ],
+      "block_kinds": [
+        "why_this_type",
+        "adjacent_type_contrast",
+        "stability_explanation"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "axis_band",
+        "boundary_flag",
+        "scene_key",
+        "tone_mode",
+        "access_tier",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "boundary_fragment",
+      "label": "Boundary fragment",
+      "description": "Boundary-state and borderline-axis explanation blocks.",
+      "layer_scope": [
+        "boundary"
+      ],
+      "allowed_section_keys": [
+        "overview",
+        "trait_overview",
+        "traits.why_this_type",
+        "growth.stability_confidence",
+        "traits.adjacent_type_contrast",
+        "growth.watchouts"
+      ],
+      "block_kinds": [
+        "boundary",
+        "borderline_axis"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "axis_band",
+        "boundary_flag",
+        "scene_key",
+        "tone_mode",
+        "access_tier",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "stress_fragment",
+      "label": "Stress fragment",
+      "description": "Stress, overload, and stability-under-pressure materials.",
+      "layer_scope": [
+        "scene",
+        "boundary"
+      ],
+      "allowed_section_keys": [
+        "growth.stability_confidence",
+        "growth.watchouts"
+      ],
+      "block_kinds": [
+        "stress_recovery",
+        "watchout"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "axis_band",
+        "boundary_flag",
+        "scene_key",
+        "intent_cluster",
+        "memory_state",
+        "tone_mode",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "recovery_fragment",
+      "label": "Recovery fragment",
+      "description": "Recovery, reset, and revisit materials for the next pass.",
+      "layer_scope": [
+        "scene",
+        "action"
+      ],
+      "allowed_section_keys": [
+        "growth.next_actions",
+        "growth.watchouts",
+        "career.work_experiments",
+        "relationships.try_this_week"
+      ],
+      "block_kinds": [
+        "stress_recovery",
+        "weekly_experiment"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "intent_cluster",
+        "memory_state",
+        "adaptive_state",
+        "tone_mode",
+        "access_tier",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "scene_fragment",
+      "label": "Scene fragment",
+      "description": "Scene fingerprints and scene-specific summary blocks.",
+      "layer_scope": [
+        "scene"
+      ],
+      "allowed_section_keys": [
+        "overview",
+        "trait_overview",
+        "growth.summary",
+        "career.summary",
+        "relationships.summary",
+        "traits.why_this_type"
+      ],
+      "block_kinds": [
+        "scene"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "scene_key",
+        "intent_cluster",
+        "memory_state",
+        "tone_mode",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "work_fragment",
+      "label": "Work fragment",
+      "description": "Work style, work environment, and career bridge materials.",
+      "layer_scope": [
+        "scene",
+        "action"
+      ],
+      "allowed_section_keys": [
+        "career.summary",
+        "career.next_step",
+        "career.work_experiments"
+      ],
+      "block_kinds": [
+        "work_style",
+        "work_env",
+        "role_fit",
+        "collaboration_fit",
+        "career_next_step",
+        "work_experiment"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "scene_key",
+        "intent_cluster",
+        "adaptive_state",
+        "tone_mode",
+        "access_tier",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "relationship_fragment",
+      "label": "Relationship fragment",
+      "description": "Relationship and communication materials.",
+      "layer_scope": [
+        "scene",
+        "action"
+      ],
+      "allowed_section_keys": [
+        "relationships.summary",
+        "relationships.try_this_week"
+      ],
+      "block_kinds": [
+        "communication",
+        "relationship_practice"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "scene_key",
+        "intent_cluster",
+        "memory_state",
+        "tone_mode",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "action_fragment",
+      "label": "Action fragment",
+      "description": "Next action, experiment, and bridge steps.",
+      "layer_scope": [
+        "action"
+      ],
+      "allowed_section_keys": [
+        "growth.next_actions",
+        "career.next_step",
+        "career.work_experiments",
+        "relationships.try_this_week"
+      ],
+      "block_kinds": [
+        "next_action",
+        "weekly_experiment",
+        "work_experiment",
+        "relationship_practice"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "intent_cluster",
+        "memory_state",
+        "adaptive_state",
+        "tone_mode",
+        "access_tier",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "watchout_fragment",
+      "label": "Watchout fragment",
+      "description": "Watchout and resistance materials for same-type divergence.",
+      "layer_scope": [
+        "boundary",
+        "action"
+      ],
+      "allowed_section_keys": [
+        "growth.watchouts",
+        "growth.stability_confidence"
+      ],
+      "block_kinds": [
+        "watchout",
+        "boundary"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "boundary_flag",
+        "intent_cluster",
+        "memory_state",
+        "adaptive_state",
+        "tone_mode",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "recommendation_fragment",
+      "label": "Recommendation fragment",
+      "description": "Recommendation pool and reading-path materials.",
+      "layer_scope": [
+        "scene",
+        "action"
+      ],
+      "allowed_section_keys": [
+        "recommendation.surface",
+        "career.next_step"
+      ],
+      "block_kinds": [
+        "recommendation"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "intent_cluster",
+        "memory_state",
+        "adaptive_state",
+        "access_tier",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "cta_bundle_fragment",
+      "label": "CTA bundle fragment",
+      "description": "Primary CTA, secondary CTA, and funnel-copy bundles.",
+      "layer_scope": [
+        "action"
+      ],
+      "allowed_section_keys": [
+        "cta.surface",
+        "recommendation.surface"
+      ],
+      "block_kinds": [
+        "cta_bundle"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "intent_cluster",
+        "adaptive_state",
+        "access_tier",
+        "tone_mode",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "tone_fragment",
+      "label": "Tone fragment",
+      "description": "Tone and phrasing variants that shape how a block reads.",
+      "layer_scope": [
+        "skeleton",
+        "boundary",
+        "explainability",
+        "scene",
+        "action"
+      ],
+      "allowed_section_keys": [
+        "overview",
+        "trait_overview",
+        "traits.why_this_type",
+        "growth.stability_confidence",
+        "traits.adjacent_type_contrast",
+        "growth.next_actions",
+        "growth.watchouts",
+        "career.summary",
+        "career.next_step",
+        "career.work_experiments",
+        "relationships.summary",
+        "relationships.try_this_week",
+        "recommendation.surface",
+        "cta.surface"
+      ],
+      "block_kinds": [
+        "tone"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "tone_mode",
+        "access_tier",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "revisit_fragment",
+      "label": "Revisit fragment",
+      "description": "Memory-aware revisit and continuity materials.",
+      "layer_scope": [
+        "action",
+        "scene"
+      ],
+      "allowed_section_keys": [
+        "overview",
+        "growth.summary",
+        "growth.next_actions",
+        "career.summary",
+        "career.next_step",
+        "relationships.summary",
+        "relationships.try_this_week"
+      ],
+      "block_kinds": [
+        "revisit"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "memory_state",
+        "adaptive_state",
+        "intent_cluster",
+        "tone_mode",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    },
+    {
+      "key": "adaptive_response_fragment",
+      "label": "Adaptive response fragment",
+      "description": "Adaptive and self-healing response materials for follow-through.",
+      "layer_scope": [
+        "action",
+        "boundary"
+      ],
+      "allowed_section_keys": [
+        "growth.next_actions",
+        "growth.watchouts",
+        "career.next_step",
+        "career.work_experiments",
+        "relationships.try_this_week",
+        "cta.surface"
+      ],
+      "block_kinds": [
+        "adaptive_response"
+      ],
+      "selection_tags": [
+        "section_key",
+        "block_family",
+        "adaptive_state",
+        "memory_state",
+        "intent_cluster",
+        "tone_mode",
+        "access_tier",
+        "locale_scope",
+        "evidence_ref"
+      ]
+    }
+  ],
+  "selection_tag_schema": {
+    "section_key": {
+      "type": "string",
+      "values": [
+        "overview",
+        "trait_overview",
+        "traits.why_this_type",
+        "growth.summary",
+        "growth.stability_confidence",
+        "growth.next_actions",
+        "growth.watchouts",
+        "career.summary",
+        "career.next_step",
+        "career.work_experiments",
+        "relationships.summary",
+        "relationships.try_this_week",
+        "traits.adjacent_type_contrast",
+        "recommendation.surface",
+        "cta.surface"
+      ]
+    },
+    "block_family": {
+      "type": "string",
+      "values": [
+        "explainability_fragment",
+        "boundary_fragment",
+        "stress_fragment",
+        "recovery_fragment",
+        "scene_fragment",
+        "work_fragment",
+        "relationship_fragment",
+        "action_fragment",
+        "watchout_fragment",
+        "recommendation_fragment",
+        "cta_bundle_fragment",
+        "tone_fragment",
+        "revisit_fragment",
+        "adaptive_response_fragment"
+      ]
+    },
+    "axis_band": {
+      "type": "string",
+      "values": [
+        "EI",
+        "SN",
+        "TF",
+        "JP",
+        "AT"
+      ]
+    },
+    "boundary_flag": {
+      "type": "string",
+      "values": [
+        "core",
+        "borderline",
+        "boundary_buffered",
+        "contrast",
+        "resume"
+      ]
+    },
+    "scene_key": {
+      "type": "string",
+      "values": [
+        "overview",
+        "growth",
+        "work",
+        "decision",
+        "stress_recovery",
+        "relationship",
+        "communication"
+      ]
+    },
+    "intent_cluster": {
+      "type": "string",
+      "values": [
+        "clarity",
+        "stability",
+        "action",
+        "career",
+        "relationship",
+        "revisit",
+        "adaptive"
+      ]
+    },
+    "memory_state": {
+      "type": "string",
+      "values": [
+        "fresh",
+        "carryover",
+        "revisit",
+        "resumed",
+        "stale"
+      ]
+    },
+    "adaptive_state": {
+      "type": "string",
+      "values": [
+        "baseline",
+        "adaptive",
+        "self_healing",
+        "guardrail"
+      ]
+    },
+    "cross_assessment_key": {
+      "type": "string",
+      "values": [
+        "MBTI",
+        "BigFive",
+        "EQ60",
+        "ClinicalCombo",
+        "SDS20"
+      ]
+    },
+    "tone_mode": {
+      "type": "string",
+      "values": [
+        "neutral",
+        "warm",
+        "direct",
+        "reflective",
+        "pragmatic"
+      ]
+    },
+    "access_tier": {
+      "type": "string",
+      "values": [
+        "stable",
+        "experiment",
+        "commercial_overlay"
+      ]
+    },
+    "locale_scope": {
+      "type": "string",
+      "values": [
+        "CN_MAINLAND.zh-CN",
+        "GLOBAL.en"
+      ]
+    },
+    "evidence_ref": {
+      "type": "string",
+      "description": "Stable reference to authored evidence or compiled artifact sections."
+    }
+  },
+  "section_family_matrix": [
+    {
+      "section_key": "overview",
+      "primary_family": "scene_fragment",
+      "secondary_families": [
+        "explainability_fragment",
+        "revisit_fragment",
+        "tone_fragment"
+      ],
+      "content_goal": "Intro and same-type overview framing."
+    },
+    {
+      "section_key": "trait_overview",
+      "primary_family": "explainability_fragment",
+      "secondary_families": [
+        "boundary_fragment",
+        "scene_fragment",
+        "tone_fragment"
+      ],
+      "content_goal": "Trait-level intro with boundary-aware phrasing."
+    },
+    {
+      "section_key": "traits.why_this_type",
+      "primary_family": "explainability_fragment",
+      "secondary_families": [
+        "boundary_fragment",
+        "scene_fragment",
+        "tone_fragment"
+      ],
+      "content_goal": "Why this type and where it diverges from neighbors."
+    },
+    {
+      "section_key": "growth.summary",
+      "primary_family": "revisit_fragment",
+      "secondary_families": [
+        "stress_fragment",
+        "explainability_fragment",
+        "tone_fragment"
+      ],
+      "content_goal": "Growth summary with revisit-aware framing."
+    },
+    {
+      "section_key": "growth.stability_confidence",
+      "primary_family": "stress_fragment",
+      "secondary_families": [
+        "recovery_fragment",
+        "boundary_fragment",
+        "watchout_fragment"
+      ],
+      "content_goal": "Stability, pressure, and recovery framing."
+    },
+    {
+      "section_key": "traits.adjacent_type_contrast",
+      "primary_family": "explainability_fragment",
+      "secondary_families": [
+        "boundary_fragment",
+        "revisit_fragment"
+      ],
+      "content_goal": "Contrast with adjacent types and boundary states."
+    },
+    {
+      "section_key": "growth.next_actions",
+      "primary_family": "action_fragment",
+      "secondary_families": [
+        "recovery_fragment",
+        "revisit_fragment",
+        "adaptive_response_fragment"
+      ],
+      "content_goal": "Next actions with memory-aware follow-through."
+    },
+    {
+      "section_key": "growth.watchouts",
+      "primary_family": "watchout_fragment",
+      "secondary_families": [
+        "recovery_fragment",
+        "adaptive_response_fragment"
+      ],
+      "content_goal": "Watchouts, resistance, and recovery."
+    },
+    {
+      "section_key": "career.summary",
+      "primary_family": "work_fragment",
+      "secondary_families": [
+        "action_fragment",
+        "tone_fragment",
+        "recommendation_fragment"
+      ],
+      "content_goal": "Career overview and work style summary."
+    },
+    {
+      "section_key": "career.next_step",
+      "primary_family": "work_fragment",
+      "secondary_families": [
+        "action_fragment",
+        "revisit_fragment",
+        "adaptive_response_fragment"
+      ],
+      "content_goal": "Career bridge into the next concrete step."
+    },
+    {
+      "section_key": "career.work_experiments",
+      "primary_family": "work_fragment",
+      "secondary_families": [
+        "action_fragment",
+        "recovery_fragment"
+      ],
+      "content_goal": "Work experiments and adjustment loops."
+    },
+    {
+      "section_key": "relationships.summary",
+      "primary_family": "relationship_fragment",
+      "secondary_families": [
+        "action_fragment",
+        "tone_fragment"
+      ],
+      "content_goal": "Relationship and communication summary."
+    },
+    {
+      "section_key": "relationships.try_this_week",
+      "primary_family": "relationship_fragment",
+      "secondary_families": [
+        "action_fragment",
+        "recovery_fragment",
+        "adaptive_response_fragment"
+      ],
+      "content_goal": "Concrete relationship experiment for this week."
+    },
+    {
+      "section_key": "recommendation.surface",
+      "primary_family": "recommendation_fragment",
+      "secondary_families": [
+        "revisit_fragment",
+        "adaptive_response_fragment"
+      ],
+      "content_goal": "Recommendation pool and reading path."
+    },
+    {
+      "section_key": "cta.surface",
+      "primary_family": "cta_bundle_fragment",
+      "secondary_families": [
+        "adaptive_response_fragment",
+        "tone_fragment"
+      ],
+      "content_goal": "CTA bundle and funnel-copy surface."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "inventory_contract_version": 1,
+  "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03",
+  "governance_profile": "mbti_content_inventory.v1",
+  "fragment_family_keys": [
+    "explainability_fragment",
+    "boundary_fragment",
+    "stress_fragment",
+    "recovery_fragment",
+    "scene_fragment",
+    "work_fragment",
+    "relationship_fragment",
+    "action_fragment",
+    "watchout_fragment",
+    "recommendation_fragment",
+    "cta_bundle_fragment",
+    "tone_fragment",
+    "revisit_fragment",
+    "adaptive_response_fragment"
+  ],
+  "selection_tag_keys": [
+    "section_key",
+    "block_family",
+    "axis_band",
+    "boundary_flag",
+    "scene_key",
+    "intent_cluster",
+    "memory_state",
+    "adaptive_state",
+    "cross_assessment_key",
+    "tone_mode",
+    "access_tier",
+    "locale_scope",
+    "evidence_ref"
+  ],
+  "section_family_keys": [
+    "overview",
+    "trait_overview",
+    "traits.why_this_type",
+    "growth.summary",
+    "growth.stability_confidence",
+    "traits.adjacent_type_contrast",
+    "growth.next_actions",
+    "growth.watchouts",
+    "career.summary",
+    "career.next_step",
+    "career.work_experiments",
+    "relationships.summary",
+    "relationships.try_this_week",
+    "recommendation.surface",
+    "cta.surface"
+  ]
+}

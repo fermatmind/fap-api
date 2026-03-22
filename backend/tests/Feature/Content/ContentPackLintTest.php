@@ -24,6 +24,7 @@ final class ContentPackLintTest extends TestCase
         $this->assertFileExists($compiledDir . '/rules.normalized.json');
         $this->assertFileExists($compiledDir . '/sections.spec.json');
         $this->assertFileExists($compiledDir . '/variables.used.json');
+        $this->assertFileExists($compiledDir . '/inventory.spec.json');
         $this->assertFileExists($compiledDir . '/governance.spec.json');
         $this->assertFileExists($compiledDir . '/manifest.json');
     }

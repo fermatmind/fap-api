@@ -207,6 +207,15 @@ final class ContentCompileService
             'variables.used.json',
         ];
 
+        $inventoryDoc = $this->mbtiGovernance->loadInventoryDocument($baseDir);
+        if (is_array($inventoryDoc)) {
+            $this->writeJson(
+                $compiledDir . DIRECTORY_SEPARATOR . 'inventory.spec.json',
+                $this->mbtiGovernance->compileInventorySpec($pack, $inventoryDoc)
+            );
+            $compiledFiles[] = 'inventory.spec.json';
+        }
+
         if ($this->mbtiGovernance->appliesTo($pack)) {
             $governanceDoc = $this->mbtiGovernance->loadDocument($baseDir);
             if (is_array($governanceDoc)) {

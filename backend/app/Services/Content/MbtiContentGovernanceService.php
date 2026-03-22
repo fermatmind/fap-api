@@ -6,6 +6,70 @@ namespace App\Services\Content;
 
 final class MbtiContentGovernanceService
 {
+    private const INVENTORY_FILE = 'mbti_content_inventory.json';
+
+    private const INVENTORY_SCHEMA = 'fap.mbti.content_inventory.v1';
+
+    /**
+     * @var list<string>
+     */
+    private const REQUIRED_FRAGMENT_FAMILIES = [
+        'explainability_fragment',
+        'boundary_fragment',
+        'stress_fragment',
+        'recovery_fragment',
+        'scene_fragment',
+        'work_fragment',
+        'relationship_fragment',
+        'action_fragment',
+        'watchout_fragment',
+        'recommendation_fragment',
+        'cta_bundle_fragment',
+        'tone_fragment',
+        'revisit_fragment',
+        'adaptive_response_fragment',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const REQUIRED_SELECTION_TAG_KEYS = [
+        'section_key',
+        'block_family',
+        'axis_band',
+        'boundary_flag',
+        'scene_key',
+        'intent_cluster',
+        'memory_state',
+        'adaptive_state',
+        'cross_assessment_key',
+        'tone_mode',
+        'access_tier',
+        'locale_scope',
+        'evidence_ref',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const REQUIRED_SECTION_KEYS = [
+        'overview',
+        'trait_overview',
+        'traits.why_this_type',
+        'growth.summary',
+        'growth.stability_confidence',
+        'traits.adjacent_type_contrast',
+        'growth.next_actions',
+        'growth.watchouts',
+        'career.summary',
+        'career.next_step',
+        'career.work_experiments',
+        'relationships.summary',
+        'relationships.try_this_week',
+        'recommendation.surface',
+        'cta.surface',
+    ];
+
     /**
      * @var list<string>
      */
@@ -66,12 +130,37 @@ final class MbtiContentGovernanceService
         return $baseDir.DIRECTORY_SEPARATOR.'report_content_governance.json';
     }
 
+    public function inventoryPath(string $baseDir): string
+    {
+        return $baseDir.DIRECTORY_SEPARATOR.self::INVENTORY_FILE;
+    }
+
     /**
      * @return array<string,mixed>|null
      */
     public function loadDocument(string $baseDir): ?array
     {
         $path = $this->governancePath($baseDir);
+        if (! is_file($path)) {
+            return null;
+        }
+
+        $raw = file_get_contents($path);
+        if (! is_string($raw) || trim($raw) === '') {
+            return null;
+        }
+
+        $decoded = json_decode($raw, true);
+
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    public function loadInventoryDocument(string $baseDir): ?array
+    {
+        $path = $this->inventoryPath($baseDir);
         if (! is_file($path)) {
             return null;
         }
@@ -163,6 +252,18 @@ final class MbtiContentGovernanceService
                     'taxonomy.block_kinds',
                     "Dynamic block kind '{$blockKind}' is missing from governance taxonomy."
                 );
+            }
+        }
+
+        $inventoryPath = $this->inventoryPath($baseDir);
+        if (! is_file($inventoryPath)) {
+            $errors[] = $this->error($path, 'inventory.doc', 'MBTI pack requires mbti_content_inventory.json.');
+        } else {
+            $inventoryDoc = $this->loadInventoryDocument($baseDir);
+            if (! is_array($inventoryDoc)) {
+                $errors[] = $this->error($inventoryPath, 'inventory.doc', 'Invalid inventory JSON.');
+            } else {
+                $errors = array_merge($errors, $this->lintInventory($inventoryPath, $inventoryDoc, $manifest, $context));
             }
         }
 
@@ -289,6 +390,200 @@ final class MbtiContentGovernanceService
         foreach (self::REQUIRED_POLICY_FILES as $fileName) {
             if (! is_file($baseDir.DIRECTORY_SEPARATOR.$fileName)) {
                 $errors[] = $this->error($path, "file_policies.{$fileName}", "{$fileName} is missing from the MBTI pack root.");
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $pack
+     * @param  array<string,mixed>  $doc
+     * @return array<string,mixed>
+     */
+    public function compileInventorySpec(array $pack, array $doc): array
+    {
+        $fragmentFamilies = is_array($doc['fragment_families'] ?? null) ? array_values($doc['fragment_families']) : [];
+        $selectionTagSchema = is_array($doc['selection_tag_schema'] ?? null) ? $doc['selection_tag_schema'] : [];
+        $sectionFamilyMatrix = is_array($doc['section_family_matrix'] ?? null) ? array_values($doc['section_family_matrix']) : [];
+
+        return [
+            'schema' => 'fap.mbti.content_inventory.compiled.v1',
+            'pack_id' => (string) ($pack['pack_id'] ?? ''),
+            'version' => (string) ($pack['version'] ?? ''),
+            'generated_at' => now()->toIso8601String(),
+            'inventory_contract_version' => (int) ($doc['inventory_contract_version'] ?? 1),
+            'inventory_fingerprint' => (string) ($doc['inventory_fingerprint'] ?? ''),
+            'governance_profile' => (string) ($doc['governance_profile'] ?? 'mbti_content_inventory.v1'),
+            'fragment_families' => $fragmentFamilies,
+            'selection_tag_schema' => $selectionTagSchema,
+            'section_family_matrix' => $sectionFamilyMatrix,
+            'summary' => $this->summarizeInventory($doc),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function summarizeInventory(array $doc): array
+    {
+        $fragmentFamilies = array_values(array_filter((array) ($doc['fragment_families'] ?? []), 'is_array'));
+        $selectionTagSchema = is_array($doc['selection_tag_schema'] ?? null) ? $doc['selection_tag_schema'] : [];
+        $sectionFamilyMatrix = array_values(array_filter((array) ($doc['section_family_matrix'] ?? []), 'is_array'));
+
+        $fragmentFamilyKeys = [];
+        foreach ($fragmentFamilies as $family) {
+            $key = trim((string) ($family['key'] ?? ''));
+            if ($key !== '') {
+                $fragmentFamilyKeys[] = $key;
+            }
+        }
+
+        $sectionKeys = [];
+        foreach ($sectionFamilyMatrix as $row) {
+            $key = trim((string) ($row['section_key'] ?? ''));
+            if ($key !== '') {
+                $sectionKeys[] = $key;
+            }
+        }
+
+        return [
+            'inventory_contract_version' => (int) ($doc['inventory_contract_version'] ?? 1),
+            'inventory_fingerprint' => (string) ($doc['inventory_fingerprint'] ?? ''),
+            'governance_profile' => (string) ($doc['governance_profile'] ?? 'mbti_content_inventory.v1'),
+            'fragment_family_count' => count($fragmentFamilyKeys),
+            'fragment_family_keys' => $fragmentFamilyKeys,
+            'selection_tag_count' => count($selectionTagSchema),
+            'selection_tag_keys' => array_keys($selectionTagSchema),
+            'section_family_count' => count($sectionKeys),
+            'section_family_keys' => $sectionKeys,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $doc
+     * @return list<array{file:string,block_id:string,message:string}>
+     */
+    private function lintInventory(string $path, array $doc, array $manifest, string $context): array
+    {
+        $errors = [];
+
+        if (($doc['schema'] ?? null) !== self::INVENTORY_SCHEMA) {
+            $errors[] = $this->error($path, 'inventory.schema', "schema must be '".self::INVENTORY_SCHEMA."'.");
+        }
+
+        if ((int) ($doc['inventory_contract_version'] ?? 0) < 1) {
+            $errors[] = $this->error($path, 'inventory.inventory_contract_version', 'inventory_contract_version must be >= 1.');
+        }
+
+        if (trim((string) ($doc['pack_id'] ?? '')) !== (string) ($manifest['pack_id'] ?? '')) {
+            $errors[] = $this->error($path, 'inventory.pack_id', 'inventory pack_id must match manifest pack_id.');
+        }
+
+        if (trim((string) ($doc['cultural_context'] ?? '')) !== $context) {
+            $errors[] = $this->error($path, 'inventory.cultural_context', 'inventory cultural_context must match manifest region/locale.');
+        }
+
+        if (trim((string) ($doc['inventory_fingerprint'] ?? '')) === '') {
+            $errors[] = $this->error($path, 'inventory.inventory_fingerprint', 'inventory_fingerprint must be non-empty.');
+        }
+
+        if (trim((string) ($doc['governance_profile'] ?? '')) === '') {
+            $errors[] = $this->error($path, 'inventory.governance_profile', 'governance_profile must be non-empty.');
+        }
+
+        $fragmentFamilies = array_values(array_filter((array) ($doc['fragment_families'] ?? []), 'is_array'));
+        if ($fragmentFamilies === []) {
+            $errors[] = $this->error($path, 'inventory.fragment_families', 'fragment_families must be a non-empty array.');
+        }
+
+        $familyIndex = [];
+        foreach ($fragmentFamilies as $index => $family) {
+            $familyPath = 'fragment_families.'.$index;
+            $key = trim((string) ($family['key'] ?? ''));
+            if ($key === '') {
+                $errors[] = $this->error($path, $familyPath.'.key', 'fragment family requires key.');
+                continue;
+            }
+
+            if (isset($familyIndex[$key])) {
+                $errors[] = $this->error($path, $familyPath.'.key', "fragment family '{$key}' appears more than once.");
+            }
+            $familyIndex[$key] = true;
+
+            if (! in_array($key, self::REQUIRED_FRAGMENT_FAMILIES, true)) {
+                $errors[] = $this->error($path, $familyPath.'.key', "fragment family '{$key}' is not part of the CE-1 required inventory.");
+            }
+
+            if (trim((string) ($family['label'] ?? '')) === '') {
+                $errors[] = $this->error($path, $familyPath.'.label', "fragment family '{$key}' requires label.");
+            }
+
+            $allowedSections = array_values(array_filter(array_map('strval', (array) ($family['allowed_section_keys'] ?? []))));
+            if ($allowedSections === []) {
+                $errors[] = $this->error($path, $familyPath.'.allowed_section_keys', "fragment family '{$key}' requires allowed_section_keys.");
+            }
+
+            $selectionTags = array_values(array_filter(array_map('strval', (array) ($family['selection_tags'] ?? []))));
+            if ($selectionTags === []) {
+                $errors[] = $this->error($path, $familyPath.'.selection_tags', "fragment family '{$key}' requires selection_tags.");
+            } else {
+                foreach ($selectionTags as $selectionTag) {
+                    if (! in_array($selectionTag, self::REQUIRED_SELECTION_TAG_KEYS, true)) {
+                        $errors[] = $this->error($path, $familyPath.'.selection_tags', "fragment family '{$key}' references unknown selection tag '{$selectionTag}'.");
+                    }
+                }
+            }
+        }
+
+        foreach (self::REQUIRED_FRAGMENT_FAMILIES as $requiredKey) {
+            if (! isset($familyIndex[$requiredKey])) {
+                $errors[] = $this->error($path, 'inventory.fragment_families', "Missing required fragment family '{$requiredKey}'.");
+            }
+        }
+
+        $tagSchema = is_array($doc['selection_tag_schema'] ?? null) ? $doc['selection_tag_schema'] : [];
+        foreach (self::REQUIRED_SELECTION_TAG_KEYS as $requiredTagKey) {
+            $tagSchemaNode = is_array($tagSchema[$requiredTagKey] ?? null) ? $tagSchema[$requiredTagKey] : null;
+            if ($tagSchemaNode === null) {
+                $errors[] = $this->error($path, 'inventory.selection_tag_schema', "Missing selection tag schema for '{$requiredTagKey}'.");
+                continue;
+            }
+
+            if (trim((string) ($tagSchemaNode['type'] ?? '')) === '') {
+                $errors[] = $this->error($path, 'inventory.selection_tag_schema', "Selection tag '{$requiredTagKey}' requires type.");
+            }
+        }
+
+        $sectionMatrix = array_values(array_filter((array) ($doc['section_family_matrix'] ?? []), 'is_array'));
+        $matrixIndex = [];
+        foreach ($sectionMatrix as $index => $row) {
+            $sectionKey = trim((string) ($row['section_key'] ?? ''));
+            if ($sectionKey === '') {
+                $errors[] = $this->error($path, 'inventory.section_family_matrix.'.$index.'.section_key', 'section_family_matrix requires section_key.');
+                continue;
+            }
+
+            $matrixIndex[$sectionKey] = true;
+
+            $primaryFamily = trim((string) ($row['primary_family'] ?? ''));
+            if ($primaryFamily === '') {
+                $errors[] = $this->error($path, 'inventory.section_family_matrix.'.$index.'.primary_family', "section '{$sectionKey}' requires primary_family.");
+            } elseif (! isset($familyIndex[$primaryFamily])) {
+                $errors[] = $this->error($path, 'inventory.section_family_matrix.'.$index.'.primary_family', "section '{$sectionKey}' references unknown fragment family '{$primaryFamily}'.");
+            }
+
+            $secondaryFamilies = array_values(array_filter(array_map('strval', (array) ($row['secondary_families'] ?? []))));
+            foreach ($secondaryFamilies as $secondaryFamily) {
+                if (! isset($familyIndex[$secondaryFamily])) {
+                    $errors[] = $this->error($path, 'inventory.section_family_matrix.'.$index.'.secondary_families', "section '{$sectionKey}' references unknown fragment family '{$secondaryFamily}'.");
+                }
+            }
+        }
+
+        foreach (self::REQUIRED_SECTION_KEYS as $requiredSectionKey) {
+            if (! isset($matrixIndex[$requiredSectionKey])) {
+                $errors[] = $this->error($path, 'inventory.section_family_matrix', "Missing required section mapping '{$requiredSectionKey}'.");
             }
         }
 

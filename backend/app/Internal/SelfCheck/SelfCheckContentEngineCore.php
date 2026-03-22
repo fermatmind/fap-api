@@ -2982,6 +2982,7 @@ public function containsAny(string $haystack, array $needles): bool
         'rules'            => 'rules',
         'section_policies' => 'section_policies',
         'dynamic_sections' => 'dynamic_sections',
+        'inventory'        => 'inventory',
         'content_governance' => 'content_governance',
         'meta'             => 'meta',
 
