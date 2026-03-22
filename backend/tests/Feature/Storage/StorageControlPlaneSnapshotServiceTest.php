@@ -57,6 +57,8 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->seedMinimalTruth();
         $lifecycleFiles = $this->seedReportsArtifactsLifecycleTruth();
         $archiveTruth = $this->seedReportArtifactsArchiveTruth();
+        $rehydrateTruth = $this->seedReportArtifactsRehydrateTruth();
+        $shrinkTruth = $this->seedReportArtifactsShrinkTruth();
         $bucket = [
             '.materialization.json' => json_encode([
                 'storage_path' => 'private/packs_v2/BIG5_OCEAN/v1/release-a',
@@ -86,6 +88,7 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertArrayHasKey('purge', $payload);
         $this->assertArrayHasKey('retirement', $payload);
         $this->assertArrayHasKey('report_artifacts_archive', $payload);
+        $this->assertArrayHasKey('report_artifacts_posture', $payload);
         $this->assertArrayHasKey('reports_artifacts_lifecycle', $payload);
         $this->assertArrayHasKey('materialized_cache', $payload);
         $this->assertArrayHasKey('cost_reclaim_posture', $payload);
@@ -128,6 +131,23 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertSame(3, data_get($payload, 'report_artifacts_archive.latest_summary.results_count'));
         $this->assertSame('fresh', data_get($payload, 'report_artifacts_archive.freshness_state'));
         $this->assertSame('audit-derived', data_get($payload, 'report_artifacts_archive.freshness_source_type'));
+        $this->assertSame('ok', data_get($payload, 'report_artifacts_posture.status'));
+        $this->assertSame('audit_logs.meta_json', data_get($payload, 'report_artifacts_posture.durable_receipt_source'));
+        $this->assertSame('s3', data_get($payload, 'report_artifacts_posture.target_disk'));
+        $this->assertSame($archiveTruth['plan_path'], data_get($payload, 'report_artifacts_posture.archive.latest_plan_path'));
+        $this->assertSame($archiveTruth['run_path'], data_get($payload, 'report_artifacts_posture.archive.latest_run_path'));
+        $this->assertTrue((bool) data_get($payload, 'report_artifacts_posture.archive.latest_run_path_exists'));
+        $this->assertSame($rehydrateTruth['plan_path'], data_get($payload, 'report_artifacts_posture.rehydrate.latest_plan_path'));
+        $this->assertFalse((bool) data_get($payload, 'report_artifacts_posture.rehydrate.latest_run_path_exists'));
+        $this->assertSame(2, data_get($payload, 'report_artifacts_posture.rehydrate.latest_summary.skipped_count'));
+        $this->assertSame(1, data_get($payload, 'report_artifacts_posture.rehydrate.latest_summary.blocked_count'));
+        $this->assertSame($shrinkTruth['plan_path'], data_get($payload, 'report_artifacts_posture.shrink.latest_plan_path'));
+        $this->assertFalse((bool) data_get($payload, 'report_artifacts_posture.shrink.latest_run_path_exists'));
+        $this->assertSame(1, data_get($payload, 'report_artifacts_posture.shrink.latest_summary.blocked_missing_remote_count'));
+        $this->assertSame(2, data_get($payload, 'report_artifacts_posture.shrink.latest_summary.blocked_missing_archive_proof_count'));
+        $this->assertSame(1, data_get($payload, 'report_artifacts_posture.shrink.latest_summary.blocked_hash_mismatch_count'));
+        $this->assertSame('fresh', data_get($payload, 'report_artifacts_posture.freshness_state'));
+        $this->assertSame('audit-derived', data_get($payload, 'report_artifacts_posture.freshness_source_type'));
         $this->assertSame('ok', data_get($payload, 'materialized_cache.status'));
         $this->assertSame(storage_path('app/private/packs_v2_materialized'), data_get($payload, 'materialized_cache.root_path'));
         $this->assertSame(1, data_get($payload, 'materialized_cache.bucket_count'));
@@ -225,6 +245,19 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertNull(data_get($payload, 'report_artifacts_archive.freshness_age_seconds'));
         $this->assertSame('not_available', data_get($payload, 'report_artifacts_archive.freshness_state'));
         $this->assertSame('audit-derived', data_get($payload, 'report_artifacts_archive.freshness_source_type'));
+        $this->assertSame('not_available', data_get($payload, 'report_artifacts_posture.status'));
+        $this->assertSame('audit_logs.meta_json', data_get($payload, 'report_artifacts_posture.durable_receipt_source'));
+        $this->assertNull(data_get($payload, 'report_artifacts_posture.target_disk'));
+        $this->assertSame('not_available', data_get($payload, 'report_artifacts_posture.archive.status'));
+        $this->assertSame('not_available', data_get($payload, 'report_artifacts_posture.rehydrate.status'));
+        $this->assertSame('not_available', data_get($payload, 'report_artifacts_posture.shrink.status'));
+        $this->assertSame(0, data_get($payload, 'report_artifacts_posture.archive.latest_summary.candidate_count'));
+        $this->assertSame(0, data_get($payload, 'report_artifacts_posture.rehydrate.latest_summary.blocked_count'));
+        $this->assertSame(0, data_get($payload, 'report_artifacts_posture.shrink.latest_summary.blocked_missing_archive_proof_count'));
+        $this->assertNull(data_get($payload, 'report_artifacts_posture.last_updated_at'));
+        $this->assertNull(data_get($payload, 'report_artifacts_posture.freshness_age_seconds'));
+        $this->assertSame('not_available', data_get($payload, 'report_artifacts_posture.freshness_state'));
+        $this->assertSame('audit-derived', data_get($payload, 'report_artifacts_posture.freshness_source_type'));
         $this->assertSame('never_run', data_get($payload, 'retention.status'));
         $this->assertSame('never_run', data_get($payload, 'retention.scopes.reports_backups.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'blob_coverage.blob_gc.status'));
@@ -257,7 +290,13 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
         $this->assertSame('disk-derived', data_get($payload, 'cost_reclaim_posture.freshness_source_type'));
         $this->assertNull($this->reclaimCategory($payload, 'v2_materialized_cache'));
         $this->assertSame('degraded', data_get($payload, 'attention_digest.overall_state'));
-        $this->assertSame(['inventory', 'report_artifacts_archive', 'reports_artifacts_lifecycle'], data_get($payload, 'attention_digest.not_available_sections'));
+        $this->assertSame([
+            'inventory',
+            'report_artifacts_posture.archive',
+            'report_artifacts_posture.rehydrate',
+            'report_artifacts_posture.shrink',
+            'reports_artifacts_lifecycle',
+        ], data_get($payload, 'attention_digest.not_available_sections'));
         $this->assertContains('quarantine', data_get($payload, 'attention_digest.never_run_sections', []));
     }
 
@@ -330,6 +369,88 @@ final class StorageControlPlaneSnapshotServiceTest extends TestCase
             'plan_path' => $planPath,
             'run_path' => $runPath,
         ];
+    }
+
+    /**
+     * @return array{plan_path:string}
+     */
+    private function seedReportArtifactsRehydrateTruth(): array
+    {
+        $planPath = storage_path('app/private/report_artifact_rehydrate_plans/rehydrate-plan.json');
+        $this->writeRaw($planPath, "{\"schema\":\"storage_rehydrate_report_artifacts_plan.v1\"}\n");
+
+        DB::table('audit_logs')->insert([
+            'org_id' => 0,
+            'actor_admin_id' => null,
+            'action' => 'storage_rehydrate_report_artifacts',
+            'target_type' => 'storage',
+            'target_id' => 'report_artifacts_rehydrate',
+            'meta_json' => json_encode([
+                'schema' => 'storage_rehydrate_report_artifacts_plan.v1',
+                'mode' => 'dry_run',
+                'target_disk' => 's3',
+                'plan' => $planPath,
+                'plan_path' => $planPath,
+                'candidate_count' => 3,
+                'rehydrated_count' => 0,
+                'verified_count' => 0,
+                'skipped_count' => 2,
+                'blocked_count' => 1,
+                'failed_count' => 0,
+                'results_count' => 0,
+                'durable_receipt_source' => 'audit_logs.meta_json',
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => null,
+            'user_agent' => 'test/storage_control_plane_snapshot_service',
+            'request_id' => null,
+            'reason' => 'manual_archive_rehydrate',
+            'result' => 'success',
+            'created_at' => now()->subMinutes(9),
+        ]);
+
+        return ['plan_path' => $planPath];
+    }
+
+    /**
+     * @return array{plan_path:string}
+     */
+    private function seedReportArtifactsShrinkTruth(): array
+    {
+        $planPath = storage_path('app/private/report_artifact_shrink_plans/shrink-plan.json');
+        $this->writeRaw($planPath, "{\"schema\":\"storage_shrink_archived_report_artifacts_plan.v1\"}\n");
+
+        DB::table('audit_logs')->insert([
+            'org_id' => 0,
+            'actor_admin_id' => null,
+            'action' => 'storage_shrink_archived_report_artifacts',
+            'target_type' => 'storage',
+            'target_id' => 'report_artifacts_shrink',
+            'meta_json' => json_encode([
+                'schema' => 'storage_shrink_archived_report_artifacts_plan.v1',
+                'mode' => 'dry_run',
+                'target_disk' => 's3',
+                'plan' => $planPath,
+                'plan_path' => $planPath,
+                'candidate_count' => 3,
+                'deleted_count' => 0,
+                'skipped_missing_local_count' => 0,
+                'blocked_missing_remote_count' => 1,
+                'blocked_missing_archive_proof_count' => 2,
+                'blocked_missing_rehydrate_proof_count' => 0,
+                'blocked_hash_mismatch_count' => 1,
+                'failed_count' => 0,
+                'results_count' => 0,
+                'durable_receipt_source' => 'audit_logs.meta_json',
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => null,
+            'user_agent' => 'test/storage_control_plane_snapshot_service',
+            'request_id' => null,
+            'reason' => 'manual_archive_backed_shrink',
+            'result' => 'success',
+            'created_at' => now()->subMinutes(8),
+        ]);
+
+        return ['plan_path' => $planPath];
     }
 
     private function writeRaw(string $path, string $contents): void

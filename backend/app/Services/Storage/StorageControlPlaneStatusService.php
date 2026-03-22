@@ -39,6 +39,7 @@ final class StorageControlPlaneStatusService
             'inventory' => $inventory,
             'retention' => $this->retentionSection(),
             'report_artifacts_archive' => $this->reportArtifactsArchiveSection(),
+            'report_artifacts_posture' => $this->reportArtifactsPostureSection(),
             'reports_artifacts_lifecycle' => $this->reportsArtifactsLifecycleSection($inventory),
             'blob_coverage' => $this->blobCoverageSection(),
             'exact_authority' => $this->exactAuthoritySection(),
@@ -285,6 +286,77 @@ final class StorageControlPlaneStatusService
             ],
         ], $this->freshnessFromTimestamp(
             $latestGeneratedAt,
+            'audit-derived',
+            self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
+            'not_available'
+        ));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function reportArtifactsPostureSection(): array
+    {
+        $archiveAudit = $this->latestAuditForAction('storage_archive_report_artifacts');
+        $rehydrateAudit = $this->latestAuditForAction('storage_rehydrate_report_artifacts');
+        $shrinkAudit = $this->latestAuditForAction('storage_shrink_archived_report_artifacts');
+
+        $archive = $this->reportArtifactsPostureNode($archiveAudit, [
+            'candidate_count',
+            'copied_count',
+            'verified_count',
+            'already_archived_count',
+            'failed_count',
+            'results_count',
+        ]);
+        $rehydrate = $this->reportArtifactsPostureNode($rehydrateAudit, [
+            'candidate_count',
+            'rehydrated_count',
+            'verified_count',
+            'skipped_count',
+            'blocked_count',
+            'failed_count',
+            'results_count',
+        ]);
+        $shrink = $this->reportArtifactsPostureNode($shrinkAudit, [
+            'candidate_count',
+            'deleted_count',
+            'skipped_missing_local_count',
+            'blocked_missing_remote_count',
+            'blocked_missing_archive_proof_count',
+            'blocked_missing_rehydrate_proof_count',
+            'blocked_hash_mismatch_count',
+            'failed_count',
+            'results_count',
+        ]);
+
+        $statuses = [
+            $archive['status'] ?? 'not_available',
+            $rehydrate['status'] ?? 'not_available',
+            $shrink['status'] ?? 'not_available',
+        ];
+
+        $overallStatus = match (true) {
+            count(array_filter($statuses, static fn (string $status): bool => $status !== 'not_available')) === 0 => 'not_available',
+            in_array('not_available', $statuses, true) => 'partial',
+            default => 'ok',
+        };
+
+        $lastUpdatedAt = $this->latestTimestamp([
+            $archive['latest_generated_at'] ?? null,
+            $rehydrate['latest_generated_at'] ?? null,
+            $shrink['latest_generated_at'] ?? null,
+        ]);
+
+        return array_merge([
+            'status' => $overallStatus,
+            'durable_receipt_source' => 'audit_logs.meta_json',
+            'target_disk' => $this->consistentReportArtifactsTargetDisk([$archiveAudit, $rehydrateAudit, $shrinkAudit]),
+            'archive' => $archive,
+            'rehydrate' => $rehydrate,
+            'shrink' => $shrink,
+        ], $this->freshnessFromTimestamp(
+            $lastUpdatedAt,
             'audit-derived',
             self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
             'not_available'
@@ -768,6 +840,116 @@ final class StorageControlPlaneStatusService
     }
 
     /**
+     * @param  list<string>  $summaryFields
+     * @return array<string,mixed>
+     */
+    private function reportArtifactsPostureNode(?object $audit, array $summaryFields): array
+    {
+        $summary = [];
+        foreach ($summaryFields as $field) {
+            $summary[$field] = 0;
+        }
+
+        if ($audit === null) {
+            return array_merge([
+                'status' => 'not_available',
+                'latest_generated_at' => null,
+                'latest_mode' => null,
+                'latest_plan_path' => null,
+                'latest_run_path' => null,
+                'latest_run_path_exists' => false,
+                'latest_summary' => $summary,
+            ], $this->freshnessFromTimestamp(
+                null,
+                'audit-derived',
+                self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
+                'not_available'
+            ));
+        }
+
+        $meta = $this->decodeAuditMeta($audit);
+        $latestGeneratedAt = $this->normalizeTimestamp($audit->created_at);
+        $latestRunPath = $this->normalizeOptionalString($meta['run_path'] ?? null);
+
+        foreach ($summaryFields as $field) {
+            if ($field === 'results_count') {
+                $summary[$field] = (int) ($meta['results_count'] ?? count((array) ($meta['results'] ?? [])));
+
+                continue;
+            }
+
+            $summary[$field] = (int) ($meta[$field] ?? data_get($meta, 'summary.'.$field, 0));
+        }
+
+        return array_merge([
+            'status' => 'ok',
+            'latest_generated_at' => $latestGeneratedAt,
+            'latest_mode' => $this->normalizeOptionalString($meta['mode'] ?? null),
+            'latest_plan_path' => $this->normalizeOptionalString($meta['plan_path'] ?? $meta['plan'] ?? null),
+            'latest_run_path' => $latestRunPath,
+            'latest_run_path_exists' => $latestRunPath !== null && file_exists($latestRunPath),
+            'latest_summary' => $summary,
+        ], $this->freshnessFromTimestamp(
+            $latestGeneratedAt,
+            'audit-derived',
+            self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
+            'not_available'
+        ));
+    }
+
+    /**
+     * @param  list<object|null>  $audits
+     */
+    private function consistentReportArtifactsTargetDisk(array $audits): ?string
+    {
+        $disks = [];
+
+        foreach ($audits as $audit) {
+            if ($audit === null) {
+                continue;
+            }
+
+            $disk = $this->normalizeOptionalString($this->decodeAuditMeta($audit)['target_disk'] ?? null);
+            if ($disk !== null) {
+                $disks[$disk] = true;
+            }
+        }
+
+        if ($disks === [] || count($disks) > 1) {
+            return null;
+        }
+
+        return array_key_first($disks);
+    }
+
+    /**
+     * @param  list<?string>  $timestamps
+     */
+    private function latestTimestamp(array $timestamps): ?string
+    {
+        $latest = null;
+
+        foreach ($timestamps as $timestamp) {
+            $normalized = $this->normalizeTimestamp($timestamp);
+            if ($normalized === null) {
+                continue;
+            }
+
+            try {
+                $candidate = Carbon::parse($normalized);
+            } catch (\Throwable) {
+                continue;
+            }
+
+            if ($latest === null || $candidate->greaterThan($latest)) {
+                $latest = $candidate;
+            }
+        }
+
+        return $latest?->toIso8601String();
+    }
+
+    /**
      * @param  array<string,mixed>  $payload
      * @return array<string,mixed>
      */
@@ -835,7 +1017,9 @@ final class StorageControlPlaneStatusService
             ['path' => 'retention.scopes.reports_backups', 'label' => 'reports backups retention dry-run'],
             ['path' => 'retention.scopes.content_releases_retention', 'label' => 'content releases retention dry-run'],
             ['path' => 'retention.scopes.legacy_private_private_cleanup', 'label' => 'legacy private cleanup dry-run'],
-            ['path' => 'report_artifacts_archive', 'label' => 'report artifacts archive'],
+            ['path' => 'report_artifacts_posture.archive', 'label' => 'report artifacts archive posture'],
+            ['path' => 'report_artifacts_posture.rehydrate', 'label' => 'report artifacts rehydrate posture'],
+            ['path' => 'report_artifacts_posture.shrink', 'label' => 'report artifacts shrink posture'],
             ['path' => 'reports_artifacts_lifecycle', 'label' => 'reports artifacts lifecycle'],
             ['path' => 'blob_coverage.blob_gc', 'label' => 'blob gc dry-run'],
             ['path' => 'blob_coverage.blob_offload', 'label' => 'blob offload dry-run'],

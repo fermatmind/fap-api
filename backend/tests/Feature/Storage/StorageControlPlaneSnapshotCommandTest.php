@@ -62,6 +62,8 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
     {
         $this->seedMinimalTruth();
         $archiveTruth = $this->seedReportArtifactsArchiveTruth();
+        $rehydrateTruth = $this->seedReportArtifactsRehydrateTruth();
+        $shrinkTruth = $this->seedReportArtifactsShrinkTruth();
 
         $auditCountBefore = DB::table('audit_logs')->count();
         $filesBefore = $this->storageFilesSnapshot();
@@ -77,6 +79,7 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
         $this->assertSame('snapshotted', $payload['status']);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
         $this->assertArrayHasKey('report_artifacts_archive', $payload);
+        $this->assertArrayHasKey('report_artifacts_posture', $payload);
         $this->assertArrayHasKey('reports_artifacts_lifecycle', $payload);
         $this->assertArrayHasKey('materialized_cache', $payload);
         $this->assertArrayHasKey('cost_reclaim_posture', $payload);
@@ -105,6 +108,22 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
         $this->assertTrue((bool) data_get($payload, 'report_artifacts_archive.latest_run_path_exists'));
         $this->assertSame(3, data_get($payload, 'report_artifacts_archive.latest_summary.results_count'));
         $this->assertArrayHasKey('freshness_state', data_get($payload, 'report_artifacts_archive', []));
+        $this->assertSame('ok', data_get($payload, 'report_artifacts_posture.status'));
+        $this->assertSame('audit_logs.meta_json', data_get($payload, 'report_artifacts_posture.durable_receipt_source'));
+        $this->assertSame('s3', data_get($payload, 'report_artifacts_posture.target_disk'));
+        $this->assertSame($archiveTruth['plan_path'], data_get($payload, 'report_artifacts_posture.archive.latest_plan_path'));
+        $this->assertSame($archiveTruth['run_path'], data_get($payload, 'report_artifacts_posture.archive.latest_run_path'));
+        $this->assertTrue((bool) data_get($payload, 'report_artifacts_posture.archive.latest_run_path_exists'));
+        $this->assertSame($rehydrateTruth['plan_path'], data_get($payload, 'report_artifacts_posture.rehydrate.latest_plan_path'));
+        $this->assertFalse((bool) data_get($payload, 'report_artifacts_posture.rehydrate.latest_run_path_exists'));
+        $this->assertSame(2, data_get($payload, 'report_artifacts_posture.rehydrate.latest_summary.skipped_count'));
+        $this->assertSame(1, data_get($payload, 'report_artifacts_posture.rehydrate.latest_summary.blocked_count'));
+        $this->assertSame($shrinkTruth['plan_path'], data_get($payload, 'report_artifacts_posture.shrink.latest_plan_path'));
+        $this->assertFalse((bool) data_get($payload, 'report_artifacts_posture.shrink.latest_run_path_exists'));
+        $this->assertSame(1, data_get($payload, 'report_artifacts_posture.shrink.latest_summary.blocked_missing_remote_count'));
+        $this->assertSame(2, data_get($payload, 'report_artifacts_posture.shrink.latest_summary.blocked_missing_archive_proof_count'));
+        $this->assertSame(1, data_get($payload, 'report_artifacts_posture.shrink.latest_summary.blocked_hash_mismatch_count'));
+        $this->assertArrayHasKey('freshness_state', data_get($payload, 'report_artifacts_posture', []));
         $this->assertSame('ok', data_get($payload, 'materialized_cache.status'));
         $this->assertSame(storage_path('app/private/packs_v2_materialized'), data_get($payload, 'materialized_cache.root_path'));
         $this->assertSame(0, data_get($payload, 'materialized_cache.bucket_count'));
@@ -299,6 +318,88 @@ final class StorageControlPlaneSnapshotCommandTest extends TestCase
             'plan_path' => $planPath,
             'run_path' => $runPath,
         ];
+    }
+
+    /**
+     * @return array{plan_path:string}
+     */
+    private function seedReportArtifactsRehydrateTruth(): array
+    {
+        $planPath = storage_path('app/private/report_artifact_rehydrate_plans/rehydrate-plan.json');
+        $this->writeRaw($planPath, "{\"schema\":\"storage_rehydrate_report_artifacts_plan.v1\"}\n");
+
+        DB::table('audit_logs')->insert([
+            'org_id' => 0,
+            'actor_admin_id' => null,
+            'action' => 'storage_rehydrate_report_artifacts',
+            'target_type' => 'storage',
+            'target_id' => 'report_artifacts_rehydrate',
+            'meta_json' => json_encode([
+                'schema' => 'storage_rehydrate_report_artifacts_plan.v1',
+                'mode' => 'dry_run',
+                'target_disk' => 's3',
+                'plan' => $planPath,
+                'plan_path' => $planPath,
+                'candidate_count' => 3,
+                'rehydrated_count' => 0,
+                'verified_count' => 0,
+                'skipped_count' => 2,
+                'blocked_count' => 1,
+                'failed_count' => 0,
+                'results_count' => 0,
+                'durable_receipt_source' => 'audit_logs.meta_json',
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => null,
+            'user_agent' => 'test/storage_control_plane_snapshot_command',
+            'request_id' => null,
+            'reason' => 'manual_archive_rehydrate',
+            'result' => 'success',
+            'created_at' => now()->subMinutes(9),
+        ]);
+
+        return ['plan_path' => $planPath];
+    }
+
+    /**
+     * @return array{plan_path:string}
+     */
+    private function seedReportArtifactsShrinkTruth(): array
+    {
+        $planPath = storage_path('app/private/report_artifact_shrink_plans/shrink-plan.json');
+        $this->writeRaw($planPath, "{\"schema\":\"storage_shrink_archived_report_artifacts_plan.v1\"}\n");
+
+        DB::table('audit_logs')->insert([
+            'org_id' => 0,
+            'actor_admin_id' => null,
+            'action' => 'storage_shrink_archived_report_artifacts',
+            'target_type' => 'storage',
+            'target_id' => 'report_artifacts_shrink',
+            'meta_json' => json_encode([
+                'schema' => 'storage_shrink_archived_report_artifacts_plan.v1',
+                'mode' => 'dry_run',
+                'target_disk' => 's3',
+                'plan' => $planPath,
+                'plan_path' => $planPath,
+                'candidate_count' => 3,
+                'deleted_count' => 0,
+                'skipped_missing_local_count' => 0,
+                'blocked_missing_remote_count' => 1,
+                'blocked_missing_archive_proof_count' => 2,
+                'blocked_missing_rehydrate_proof_count' => 0,
+                'blocked_hash_mismatch_count' => 1,
+                'failed_count' => 0,
+                'results_count' => 0,
+                'durable_receipt_source' => 'audit_logs.meta_json',
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => null,
+            'user_agent' => 'test/storage_control_plane_snapshot_command',
+            'request_id' => null,
+            'reason' => 'manual_archive_backed_shrink',
+            'result' => 'success',
+            'created_at' => now()->subMinutes(8),
+        ]);
+
+        return ['plan_path' => $planPath];
     }
 
     /**
