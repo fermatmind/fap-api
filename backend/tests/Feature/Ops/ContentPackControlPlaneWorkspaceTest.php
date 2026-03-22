@@ -11,12 +11,29 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class ContentPackControlPlaneWorkspaceTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * @var list<string>
+     */
+    private array $tmpRoots = [];
+
+    protected function tearDown(): void
+    {
+        foreach ($this->tmpRoots as $path) {
+            if (File::isDirectory($path)) {
+                File::deleteDirectory($path);
+            }
+        }
+
+        parent::tearDown();
+    }
 
     public function test_content_pack_version_workspace_renders_control_plane_surface_for_authorized_admin(): void
     {
@@ -26,28 +43,7 @@ final class ContentPackControlPlaneWorkspaceTest extends TestCase
         ]);
         $selectedOrg = $this->createSelectedOrg();
 
-        $version = ContentPackVersion::query()->create([
-            'id' => (string) Str::uuid(),
-            'region' => 'CN_MAINLAND',
-            'locale' => 'zh-CN',
-            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
-            'content_package_version' => 'content_2026_03',
-            'dir_version_alias' => 'MBTI-CN-v0.3-control-plane',
-            'source_type' => 'upload',
-            'source_ref' => 'private://content-control-plane/pack.zip',
-            'sha256' => str_repeat('b', 64),
-            'manifest_json' => [
-                'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
-                'content_package_version' => 'content_2026_03',
-                'region' => 'CN_MAINLAND',
-                'locale' => 'zh-CN',
-                'schemas' => [
-                    'content_governance' => 'fap.mbti.content_governance.v1',
-                ],
-            ],
-            'extracted_rel_path' => '',
-            'created_by' => 'ops_admin',
-        ]);
+        $version = $this->seedVersionFromRealMbtiPack();
 
         $session = [
             'ops_org_id' => $selectedOrg->id,
@@ -68,13 +64,17 @@ final class ContentPackControlPlaneWorkspaceTest extends TestCase
             ->assertSee('Content control plane')
             ->assertSee('Draft state')
             ->assertSee('Runtime artifact ref')
+            ->assertSee('Objectized fragment groups')
             ->assertSee('First-wave managed objects')
             ->assertSee('Object-level contracts')
             ->assertSee('narrative_fragment')
+            ->assertSee('tone_fragment')
+            ->assertSee('faq_explainability_copy')
             ->assertSee('release_candidate_metadata')
             ->assertSee('locale_variant_draft')
             ->assertSee('draft_only')
-            ->assertSee('release_metadata_pending');
+            ->assertSee('release_metadata_ready')
+            ->assertSee('runtime_binding=runtime_bindable');
     }
 
     private function createSelectedOrg(): Organization
@@ -118,5 +118,35 @@ final class ContentPackControlPlaneWorkspaceTest extends TestCase
         $admin->roles()->syncWithoutDetaching([$role->id]);
 
         return $admin;
+    }
+
+    private function seedVersionFromRealMbtiPack(): ContentPackVersion
+    {
+        $sourceDir = base_path('../content_packages/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3');
+        $versionId = (string) Str::uuid();
+        $relativePath = 'content_control_plane_workspace_tests/'.$versionId.'/source_pack';
+        $targetDir = storage_path('app/private/'.$relativePath);
+
+        File::ensureDirectoryExists(dirname($targetDir));
+        File::copyDirectory($sourceDir, $targetDir);
+        $this->tmpRoots[] = dirname(dirname($targetDir));
+
+        $manifest = json_decode((string) file_get_contents($sourceDir.'/manifest.json'), true);
+        $this->assertIsArray($manifest);
+
+        return ContentPackVersion::query()->create([
+            'id' => $versionId,
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'pack_id' => (string) ($manifest['pack_id'] ?? 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'content_package_version' => 'content_2026_03',
+            'dir_version_alias' => 'MBTI-CN-v0.3-control-plane',
+            'source_type' => 'upload',
+            'source_ref' => 'private://content-control-plane/'.$versionId.'/pack.zip',
+            'sha256' => str_repeat('b', 64),
+            'manifest_json' => $manifest,
+            'extracted_rel_path' => $relativePath,
+            'created_by' => 'ops_admin',
+        ]);
     }
 }

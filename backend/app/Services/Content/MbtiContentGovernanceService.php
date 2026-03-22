@@ -55,6 +55,17 @@ final class MbtiContentGovernanceService
     /**
      * @var list<string>
      */
+    private const REQUIRED_OBJECTIZED_FRAGMENT_GROUPS = [
+        'scene_fragment',
+        'action_fragment',
+        'narrative_fragment',
+        'faq_explainability_copy',
+        'tone_fragment',
+    ];
+
+    /**
+     * @var list<string>
+     */
     private const REQUIRED_SECTION_KEYS = [
         'overview',
         'trait_overview',
@@ -408,6 +419,7 @@ final class MbtiContentGovernanceService
     public function compileInventorySpec(array $pack, array $doc): array
     {
         $fragmentFamilies = is_array($doc['fragment_families'] ?? null) ? array_values($doc['fragment_families']) : [];
+        $fragmentObjectGroups = is_array($doc['fragment_object_groups'] ?? null) ? array_values($doc['fragment_object_groups']) : [];
         $selectionTagSchema = is_array($doc['selection_tag_schema'] ?? null) ? $doc['selection_tag_schema'] : [];
         $sectionFamilyMatrix = is_array($doc['section_family_matrix'] ?? null) ? array_values($doc['section_family_matrix']) : [];
 
@@ -420,6 +432,7 @@ final class MbtiContentGovernanceService
             'inventory_fingerprint' => (string) ($doc['inventory_fingerprint'] ?? ''),
             'governance_profile' => (string) ($doc['governance_profile'] ?? 'mbti_content_inventory.v1'),
             'fragment_families' => $fragmentFamilies,
+            'fragment_object_groups' => $fragmentObjectGroups,
             'selection_tag_schema' => $selectionTagSchema,
             'section_family_matrix' => $sectionFamilyMatrix,
             'summary' => $this->summarizeInventory($doc),
@@ -432,6 +445,7 @@ final class MbtiContentGovernanceService
     public function summarizeInventory(array $doc): array
     {
         $fragmentFamilies = array_values(array_filter((array) ($doc['fragment_families'] ?? []), 'is_array'));
+        $fragmentObjectGroups = array_values(array_filter((array) ($doc['fragment_object_groups'] ?? []), 'is_array'));
         $selectionTagSchema = is_array($doc['selection_tag_schema'] ?? null) ? $doc['selection_tag_schema'] : [];
         $sectionFamilyMatrix = array_values(array_filter((array) ($doc['section_family_matrix'] ?? []), 'is_array'));
 
@@ -451,12 +465,22 @@ final class MbtiContentGovernanceService
             }
         }
 
+        $fragmentObjectGroupKeys = [];
+        foreach ($fragmentObjectGroups as $group) {
+            $key = trim((string) ($group['object_group_key'] ?? ''));
+            if ($key !== '') {
+                $fragmentObjectGroupKeys[] = $key;
+            }
+        }
+
         return [
             'inventory_contract_version' => (int) ($doc['inventory_contract_version'] ?? 1),
             'inventory_fingerprint' => (string) ($doc['inventory_fingerprint'] ?? ''),
             'governance_profile' => (string) ($doc['governance_profile'] ?? 'mbti_content_inventory.v1'),
             'fragment_family_count' => count($fragmentFamilyKeys),
             'fragment_family_keys' => $fragmentFamilyKeys,
+            'fragment_object_group_count' => count($fragmentObjectGroupKeys),
+            'fragment_object_group_keys' => $fragmentObjectGroupKeys,
             'selection_tag_count' => count($selectionTagSchema),
             'selection_tag_keys' => array_keys($selectionTagSchema),
             'section_family_count' => count($sectionKeys),
@@ -543,6 +567,67 @@ final class MbtiContentGovernanceService
         foreach (self::REQUIRED_FRAGMENT_FAMILIES as $requiredKey) {
             if (! isset($familyIndex[$requiredKey])) {
                 $errors[] = $this->error($path, 'inventory.fragment_families', "Missing required fragment family '{$requiredKey}'.");
+            }
+        }
+
+        $objectGroups = array_values(array_filter((array) ($doc['fragment_object_groups'] ?? []), 'is_array'));
+        if ($objectGroups === []) {
+            $errors[] = $this->error($path, 'inventory.fragment_object_groups', 'fragment_object_groups must be a non-empty array.');
+        }
+
+        $objectGroupIndex = [];
+        foreach ($objectGroups as $index => $group) {
+            $groupPath = 'fragment_object_groups.'.$index;
+            $objectGroupKey = trim((string) ($group['object_group_key'] ?? ''));
+            if ($objectGroupKey === '') {
+                $errors[] = $this->error($path, $groupPath.'.object_group_key', 'objectized fragment group requires object_group_key.');
+                continue;
+            }
+
+            if (isset($objectGroupIndex[$objectGroupKey])) {
+                $errors[] = $this->error($path, $groupPath.'.object_group_key', "objectized fragment group '{$objectGroupKey}' appears more than once.");
+            }
+            $objectGroupIndex[$objectGroupKey] = true;
+
+            $contentObjectType = trim((string) ($group['content_object_type'] ?? ''));
+            if ($contentObjectType === '') {
+                $errors[] = $this->error($path, $groupPath.'.content_object_type', "objectized fragment group '{$objectGroupKey}' requires content_object_type.");
+            }
+
+            $fragmentFamily = trim((string) ($group['fragment_family'] ?? ''));
+            if ($fragmentFamily === '') {
+                $errors[] = $this->error($path, $groupPath.'.fragment_family', "objectized fragment group '{$objectGroupKey}' requires fragment_family.");
+            } elseif (! isset($familyIndex[$fragmentFamily])) {
+                $errors[] = $this->error($path, $groupPath.'.fragment_family', "objectized fragment group '{$objectGroupKey}' references unknown fragment family '{$fragmentFamily}'.");
+            }
+
+            foreach ([
+                'label',
+                'authoring_scope',
+                'review_state_profile',
+                'preview_target_key',
+                'release_candidate_policy',
+                'publish_target_policy',
+                'rollback_target_policy',
+                'runtime_binding',
+                'locale_scope',
+                'experiment_scope',
+                'governance_profile',
+            ] as $requiredField) {
+                if (trim((string) ($group[$requiredField] ?? '')) === '') {
+                    $errors[] = $this->error($path, $groupPath.'.'.$requiredField, "objectized fragment group '{$objectGroupKey}' requires {$requiredField}.");
+                }
+            }
+
+            $sourceRefs = array_values(array_filter(array_map('strval', (array) ($group['source_refs'] ?? []))));
+            if ($sourceRefs === []) {
+                $errors[] = $this->error($path, $groupPath.'.source_refs', "objectized fragment group '{$objectGroupKey}' requires source_refs.");
+            }
+        }
+
+        foreach (self::REQUIRED_OBJECTIZED_FRAGMENT_GROUPS as $requiredKey) {
+            if (! isset($objectGroupIndex[$requiredKey])) {
+                $errors[] = $this->error($path, 'inventory.fragment_object_groups', "Missing required objectized fragment group '{$requiredKey}'.");
             }
         }
 
