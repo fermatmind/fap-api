@@ -40,10 +40,11 @@ final class ReportArtifactsShrinkService
     /**
      * @return array<string,mixed>
      */
-    public function buildPlan(string $targetDisk): array
+    public function buildPlan(string $targetDisk, array $selection = []): array
     {
         $targetDisk = $this->normalizeDisk($targetDisk);
-        $localFiles = $this->collectLocalCanonicalFiles();
+        $selectionMeta = $this->selectionMeta($selection);
+        $localFiles = $this->collectLocalCanonicalFiles($selectionMeta['requested_attempt_ids']);
         $archiveProofsByPath = $this->collectArchiveProofsByPath($targetDisk);
 
         $candidates = [];
@@ -104,6 +105,11 @@ final class ReportArtifactsShrinkService
         usort($candidates, static fn (array $left, array $right): int => strcmp((string) ($left['local_path'] ?? ''), (string) ($right['local_path'] ?? '')));
         usort($blocked, static fn (array $left, array $right): int => strcmp((string) ($left['local_path'] ?? ''), (string) ($right['local_path'] ?? '')));
 
+        if ($selectionMeta['requested_limit'] !== null) {
+            $candidates = array_slice($candidates, 0, $selectionMeta['requested_limit']);
+            $summary['candidate_count'] = count($candidates);
+        }
+
         $payload = [
             'schema' => self::PLAN_SCHEMA,
             'mode' => 'dry_run',
@@ -111,6 +117,11 @@ final class ReportArtifactsShrinkService
             'generated_at' => now()->toIso8601String(),
             'disk' => $targetDisk,
             'target_disk' => $targetDisk,
+            'selection_scope' => $selectionMeta['selection_scope'],
+            'requested_attempt_ids' => $selectionMeta['requested_attempt_ids'],
+            'requested_limit' => $selectionMeta['requested_limit'],
+            'generated_by_command' => $selectionMeta['generated_by_command'],
+            'candidate_count' => $summary['candidate_count'],
             'summary' => $summary,
             'candidates' => $candidates,
             'blocked' => $blocked,
@@ -130,6 +141,7 @@ final class ReportArtifactsShrinkService
         $this->assertPlanSchema($plan);
 
         $targetDisk = $this->normalizeDisk((string) ($plan['target_disk'] ?? $plan['disk'] ?? ''));
+        $selectionMeta = $this->selectionMetaFromPlan($plan);
         $candidates = is_array($plan['candidates'] ?? null) ? array_values($plan['candidates']) : [];
         $summary = [
             'candidate_count' => count($candidates),
@@ -211,6 +223,11 @@ final class ReportArtifactsShrinkService
             'target_disk' => $targetDisk,
             'plan' => trim((string) data_get($plan, '_meta.plan_path', '')),
             'plan_path' => trim((string) data_get($plan, '_meta.plan_path', '')),
+            'selection_scope' => $selectionMeta['selection_scope'],
+            'requested_attempt_ids' => $selectionMeta['requested_attempt_ids'],
+            'requested_limit' => $selectionMeta['requested_limit'],
+            'generated_by_command' => $selectionMeta['generated_by_command'],
+            'candidate_count' => $summary['candidate_count'],
             'summary' => $summary,
             'results' => $results,
         ];
@@ -232,7 +249,7 @@ final class ReportArtifactsShrinkService
     /**
      * @return list<array<string,mixed>>
      */
-    private function collectLocalCanonicalFiles(): array
+    private function collectLocalCanonicalFiles(array $requestedAttemptIds = []): array
     {
         $artifactsRoot = storage_path('app/private/artifacts');
         if (! is_dir($artifactsRoot)) {
@@ -250,6 +267,10 @@ final class ReportArtifactsShrinkService
             foreach (File::allFiles($root) as $file) {
                 $candidate = $this->localCanonicalFileFromSplFile($file, $artifactsRoot);
                 if ($candidate === null) {
+                    continue;
+                }
+
+                if ($requestedAttemptIds !== [] && ! in_array((string) ($candidate['attempt_id'] ?? ''), $requestedAttemptIds, true)) {
                     continue;
                 }
 
@@ -712,6 +733,11 @@ final class ReportArtifactsShrinkService
                 'failed_count' => $failedCount,
                 'results_count' => count($results),
                 'durable_receipt_source' => 'audit_logs.meta_json',
+                'selection_scope' => $payload['selection_scope'] ?? 'legacy_unscoped_plan',
+                'requested_attempt_ids' => array_values(is_array($payload['requested_attempt_ids'] ?? null) ? $payload['requested_attempt_ids'] : []),
+                'requested_limit' => $payload['requested_limit'] ?? null,
+                'generated_by_command' => $payload['generated_by_command'] ?? null,
+                'candidate_count' => (int) ($payload['candidate_count'] ?? $summary['candidate_count'] ?? 0),
                 'summary' => $summary,
                 'results' => $results,
             ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
@@ -892,5 +918,90 @@ final class ReportArtifactsShrinkService
         $timestamp = trim((string) $value);
 
         return $timestamp === '' ? null : $timestamp;
+    }
+
+    /**
+     * @param  array<string,mixed>  $selection
+     * @return array{
+     *     selection_scope:string,
+     *     requested_attempt_ids:list<string>,
+     *     requested_limit:int|null,
+     *     generated_by_command:string
+     * }
+     */
+    private function selectionMeta(array $selection): array
+    {
+        $requestedAttemptIds = array_values(array_filter(array_map(
+            static fn (mixed $value): string => trim((string) $value),
+            is_array($selection['attempt_ids'] ?? null) ? $selection['attempt_ids'] : []
+        ), static fn (string $value): bool => $value !== ''));
+        $requestedAttemptIds = array_values(array_unique($requestedAttemptIds));
+        sort($requestedAttemptIds);
+
+        $requestedLimit = $this->normalizePlanLimit($selection['limit'] ?? null);
+        $selectionScope = match (true) {
+            $requestedAttemptIds !== [] && $requestedLimit !== null => 'attempt_scoped_limited',
+            $requestedAttemptIds !== [] => 'attempt_scoped',
+            $requestedLimit !== null => 'limit_scoped',
+            default => 'full_scan',
+        };
+
+        return [
+            'selection_scope' => $selectionScope,
+            'requested_attempt_ids' => $requestedAttemptIds,
+            'requested_limit' => $requestedLimit,
+            'generated_by_command' => trim((string) ($selection['generated_by_command'] ?? 'storage:shrink-archived-report-artifacts')),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $plan
+     * @return array{
+     *     selection_scope:string,
+     *     requested_attempt_ids:list<string>,
+     *     requested_limit:int|null,
+     *     generated_by_command:string|null
+     * }
+     */
+    private function selectionMetaFromPlan(array $plan): array
+    {
+        $requestedAttemptIds = array_values(array_filter(array_map(
+            static fn (mixed $value): string => trim((string) $value),
+            is_array($plan['requested_attempt_ids'] ?? null) ? $plan['requested_attempt_ids'] : []
+        ), static fn (string $value): bool => $value !== ''));
+        $requestedAttemptIds = array_values(array_unique($requestedAttemptIds));
+        sort($requestedAttemptIds);
+
+        $selectionScope = trim((string) ($plan['selection_scope'] ?? ''));
+        if ($selectionScope === '') {
+            $selectionScope = 'legacy_unscoped_plan';
+        }
+
+        $generatedByCommand = trim((string) ($plan['generated_by_command'] ?? ''));
+
+        return [
+            'selection_scope' => $selectionScope,
+            'requested_attempt_ids' => $requestedAttemptIds,
+            'requested_limit' => $this->normalizePlanLimit($plan['requested_limit'] ?? null),
+            'generated_by_command' => $generatedByCommand !== '' ? $generatedByCommand : null,
+        ];
+    }
+
+    private function normalizePlanLimit(mixed $value): ?int
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
+            return null;
+        }
+
+        if (! ctype_digit($normalized) || (int) $normalized <= 0) {
+            throw new \RuntimeException('shrink plan limit must be a positive integer.');
+        }
+
+        return (int) $normalized;
     }
 }
