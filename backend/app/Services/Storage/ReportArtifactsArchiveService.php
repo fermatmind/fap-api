@@ -29,7 +29,7 @@ final class ReportArtifactsArchiveService
         $candidates = $this->collectCandidates($targetDisk);
         $summary = $this->buildSummary($candidates);
 
-        return [
+        $payload = [
             'schema' => self::PLAN_SCHEMA,
             'mode' => 'dry_run',
             'status' => 'planned',
@@ -44,6 +44,14 @@ final class ReportArtifactsArchiveService
             ],
             'candidates' => $candidates,
         ];
+
+        $this->recordAudit($payload + [
+            'plan_path' => null,
+            'run_path' => null,
+            'results' => [],
+        ]);
+
+        return $payload;
     }
 
     /**
@@ -105,6 +113,7 @@ final class ReportArtifactsArchiveService
             'disk' => $targetDisk,
             'target_disk' => $targetDisk,
             'plan' => trim((string) data_get($plan, '_meta.plan_path', '')),
+            'plan_path' => trim((string) data_get($plan, '_meta.plan_path', '')),
             'summary' => $summary,
             'results' => $results,
         ];
@@ -402,6 +411,12 @@ final class ReportArtifactsArchiveService
             return;
         }
 
+        $summary = is_array($payload['summary'] ?? null) ? $payload['summary'] : [];
+        $results = is_array($payload['results'] ?? null) ? array_values($payload['results']) : [];
+        $planPath = $this->normalizeOptionalString($payload['plan_path'] ?? $payload['plan'] ?? null);
+        $runPath = $this->normalizeOptionalString($payload['run_path'] ?? null);
+        $failedCount = (int) ($summary['failed_count'] ?? 0);
+
         DB::table('audit_logs')->insert([
             'org_id' => 0,
             'actor_admin_id' => null,
@@ -412,18 +427,37 @@ final class ReportArtifactsArchiveService
                 'schema' => $payload['schema'] ?? null,
                 'mode' => $payload['mode'] ?? null,
                 'target_disk' => $payload['target_disk'] ?? null,
-                'plan' => $payload['plan'] ?? null,
-                'run_path' => $payload['run_path'] ?? null,
-                'summary' => $payload['summary'] ?? [],
-                'results' => $payload['results'] ?? [],
+                'plan' => $planPath,
+                'plan_path' => $planPath,
+                'run_path' => $runPath,
+                'candidate_count' => (int) ($summary['candidate_count'] ?? 0),
+                'copied_count' => (int) ($summary['copied_count'] ?? 0),
+                'verified_count' => (int) ($summary['verified_count'] ?? 0),
+                'already_archived_count' => (int) ($summary['already_archived_count'] ?? 0),
+                'failed_count' => $failedCount,
+                'results_count' => count($results),
+                'durable_receipt_source' => 'audit_logs.meta_json',
+                'summary' => $summary,
+                'results' => $results,
             ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'ip' => null,
             'user_agent' => 'artisan/storage:archive-report-artifacts',
             'request_id' => null,
             'reason' => 'manual_archive_copy',
-            'result' => ($payload['status'] ?? 'executed') === 'executed' ? 'success' : 'partial_failure',
+            'result' => $failedCount > 0 ? 'partial_failure' : 'success',
             'created_at' => now(),
         ]);
+    }
+
+    private function normalizeOptionalString(mixed $value): ?string
+    {
+        if (! is_scalar($value) || $value === null) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized === '' ? null : $normalized;
     }
 
     /**

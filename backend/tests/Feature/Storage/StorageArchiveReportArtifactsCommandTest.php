@@ -8,6 +8,7 @@ use App\Console\Commands\StorageArchiveReportArtifacts;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -102,6 +103,19 @@ final class StorageArchiveReportArtifactsCommandTest extends TestCase
         $planPath = trim((string) ($matches[1] ?? ''));
         $this->assertFileExists($planPath);
 
+        $dryRunAudit = DB::table('audit_logs')
+            ->where('action', 'storage_archive_report_artifacts')
+            ->latest('id')
+            ->first();
+
+        $this->assertNotNull($dryRunAudit);
+        $dryRunMeta = json_decode((string) $dryRunAudit->meta_json, true);
+        $this->assertIsArray($dryRunMeta);
+        $this->assertSame('dry_run', $dryRunMeta['mode'] ?? null);
+        $this->assertSame('audit_logs.meta_json', $dryRunMeta['durable_receipt_source'] ?? null);
+        $this->assertSame(2, $dryRunMeta['candidate_count'] ?? null);
+        $this->assertSame(0, $dryRunMeta['results_count'] ?? null);
+
         $this->assertSame(0, Artisan::call('storage:archive-report-artifacts', [
             '--execute' => true,
             '--disk' => 's3',
@@ -113,6 +127,19 @@ final class StorageArchiveReportArtifactsCommandTest extends TestCase
         $this->assertStringContainsString('copied_count=2', $executeOutput);
         $this->assertStringContainsString('verified_count=2', $executeOutput);
         $this->assertStringContainsString('run_path=', $executeOutput);
+
+        $executeAudit = DB::table('audit_logs')
+            ->where('action', 'storage_archive_report_artifacts')
+            ->latest('id')
+            ->first();
+
+        $this->assertNotNull($executeAudit);
+        $executeMeta = json_decode((string) $executeAudit->meta_json, true);
+        $this->assertIsArray($executeMeta);
+        $this->assertSame('execute', $executeMeta['mode'] ?? null);
+        $this->assertSame($planPath, $executeMeta['plan_path'] ?? null);
+        $this->assertSame(2, $executeMeta['verified_count'] ?? null);
+        $this->assertSame(2, $executeMeta['results_count'] ?? null);
 
         Storage::disk('s3')->assertExists('report_artifacts_archive/reports/MBTI/command-report/report.json');
         Storage::disk('s3')->assertExists('report_artifacts_archive/pdf/BIG5/command-pdf/manifest-123/report_full.pdf');

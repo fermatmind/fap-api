@@ -38,6 +38,7 @@ final class StorageControlPlaneStatusService
             'generated_at' => now()->toIso8601String(),
             'inventory' => $inventory,
             'retention' => $this->retentionSection(),
+            'report_artifacts_archive' => $this->reportArtifactsArchiveSection(),
             'reports_artifacts_lifecycle' => $this->reportsArtifactsLifecycleSection($inventory),
             'blob_coverage' => $this->blobCoverageSection(),
             'exact_authority' => $this->exactAuthoritySection(),
@@ -225,6 +226,67 @@ final class StorageControlPlaneStatusService
             $latestInventoryGeneratedAt,
             'audit-derived',
             self::INVENTORY_STALE_AFTER_SECONDS,
+            'not_available'
+        ));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function reportArtifactsArchiveSection(): array
+    {
+        $audit = $this->latestAuditForAction('storage_archive_report_artifacts');
+        if ($audit === null) {
+            return array_merge([
+                'status' => 'not_available',
+                'durable_receipt_source' => 'audit_logs.meta_json',
+                'target_disk' => null,
+                'latest_generated_at' => null,
+                'latest_mode' => null,
+                'latest_plan_path' => null,
+                'latest_run_path' => null,
+                'latest_run_path_exists' => false,
+                'latest_summary' => [
+                    'candidate_count' => 0,
+                    'copied_count' => 0,
+                    'verified_count' => 0,
+                    'already_archived_count' => 0,
+                    'failed_count' => 0,
+                    'results_count' => 0,
+                ],
+            ], $this->freshnessFromTimestamp(
+                null,
+                'audit-derived',
+                self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
+                'not_available'
+            ));
+        }
+
+        $meta = $this->decodeAuditMeta($audit);
+        $latestGeneratedAt = $this->normalizeTimestamp($audit->created_at);
+        $latestRunPath = $this->normalizeOptionalString($meta['run_path'] ?? null);
+
+        return array_merge([
+            'status' => 'ok',
+            'durable_receipt_source' => (string) ($meta['durable_receipt_source'] ?? 'audit_logs.meta_json'),
+            'target_disk' => $this->normalizeOptionalString($meta['target_disk'] ?? null),
+            'latest_generated_at' => $latestGeneratedAt,
+            'latest_mode' => $this->normalizeOptionalString($meta['mode'] ?? null),
+            'latest_plan_path' => $this->normalizeOptionalString($meta['plan_path'] ?? $meta['plan'] ?? null),
+            'latest_run_path' => $latestRunPath,
+            'latest_run_path_exists' => $latestRunPath !== null && file_exists($latestRunPath),
+            'latest_summary' => [
+                'candidate_count' => (int) ($meta['candidate_count'] ?? data_get($meta, 'summary.candidate_count', 0)),
+                'copied_count' => (int) ($meta['copied_count'] ?? data_get($meta, 'summary.copied_count', 0)),
+                'verified_count' => (int) ($meta['verified_count'] ?? data_get($meta, 'summary.verified_count', 0)),
+                'already_archived_count' => (int) ($meta['already_archived_count'] ?? data_get($meta, 'summary.already_archived_count', 0)),
+                'failed_count' => (int) ($meta['failed_count'] ?? data_get($meta, 'summary.failed_count', 0)),
+                'results_count' => (int) ($meta['results_count'] ?? count((array) ($meta['results'] ?? []))),
+            ],
+        ], $this->freshnessFromTimestamp(
+            $latestGeneratedAt,
+            'audit-derived',
+            self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
             'not_available'
         ));
     }
@@ -694,6 +756,17 @@ final class StorageControlPlaneStatusService
         return $normalized === '' ? null : $normalized;
     }
 
+    private function normalizeOptionalString(mixed $value): ?string
+    {
+        if (! is_scalar($value) || $value === null) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized === '' ? null : $normalized;
+    }
+
     /**
      * @param  array<string,mixed>  $payload
      * @return array<string,mixed>
@@ -762,6 +835,7 @@ final class StorageControlPlaneStatusService
             ['path' => 'retention.scopes.reports_backups', 'label' => 'reports backups retention dry-run'],
             ['path' => 'retention.scopes.content_releases_retention', 'label' => 'content releases retention dry-run'],
             ['path' => 'retention.scopes.legacy_private_private_cleanup', 'label' => 'legacy private cleanup dry-run'],
+            ['path' => 'report_artifacts_archive', 'label' => 'report artifacts archive'],
             ['path' => 'reports_artifacts_lifecycle', 'label' => 'reports artifacts lifecycle'],
             ['path' => 'blob_coverage.blob_gc', 'label' => 'blob gc dry-run'],
             ['path' => 'blob_coverage.blob_offload', 'label' => 'blob offload dry-run'],

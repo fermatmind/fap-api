@@ -56,6 +56,7 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
     {
         $this->seedControlPlaneTruth();
         $lifecycleFiles = $this->seedReportsArtifactsLifecycleTruth();
+        $archiveTruth = $this->seedReportArtifactsArchiveTruth();
         $bucketOne = [
             '.materialization.json' => json_encode([
                 'storage_path' => 'private/packs_v2/BIG5_OCEAN/v1/release-a',
@@ -105,6 +106,21 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
         $this->assertSame('none_proven', data_get($payload, 'reports_artifacts_lifecycle.archive_candidate_status'));
         $this->assertSame('fresh', data_get($payload, 'reports_artifacts_lifecycle.freshness_state'));
         $this->assertSame('audit-derived', data_get($payload, 'reports_artifacts_lifecycle.freshness_source_type'));
+        $this->assertSame('ok', data_get($payload, 'report_artifacts_archive.status'));
+        $this->assertSame('audit_logs.meta_json', data_get($payload, 'report_artifacts_archive.durable_receipt_source'));
+        $this->assertSame('s3', data_get($payload, 'report_artifacts_archive.target_disk'));
+        $this->assertSame('execute', data_get($payload, 'report_artifacts_archive.latest_mode'));
+        $this->assertSame($archiveTruth['plan_path'], data_get($payload, 'report_artifacts_archive.latest_plan_path'));
+        $this->assertSame($archiveTruth['run_path'], data_get($payload, 'report_artifacts_archive.latest_run_path'));
+        $this->assertTrue((bool) data_get($payload, 'report_artifacts_archive.latest_run_path_exists'));
+        $this->assertSame(3, data_get($payload, 'report_artifacts_archive.latest_summary.candidate_count'));
+        $this->assertSame(2, data_get($payload, 'report_artifacts_archive.latest_summary.copied_count'));
+        $this->assertSame(3, data_get($payload, 'report_artifacts_archive.latest_summary.verified_count'));
+        $this->assertSame(1, data_get($payload, 'report_artifacts_archive.latest_summary.already_archived_count'));
+        $this->assertSame(0, data_get($payload, 'report_artifacts_archive.latest_summary.failed_count'));
+        $this->assertSame(3, data_get($payload, 'report_artifacts_archive.latest_summary.results_count'));
+        $this->assertSame('fresh', data_get($payload, 'report_artifacts_archive.freshness_state'));
+        $this->assertSame('audit-derived', data_get($payload, 'report_artifacts_archive.freshness_source_type'));
         $this->assertSame(1, data_get($payload, 'blob_coverage.counts.storage_blobs'));
         $this->assertSame(1, data_get($payload, 'blob_coverage.counts.verified_storage_blob_locations_by_disk.s3'));
         $this->assertSame('fresh', data_get($payload, 'blob_coverage.blob_gc.freshness_state'));
@@ -211,6 +227,20 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
         $this->assertNull(data_get($payload, 'reports_artifacts_lifecycle.freshness_age_seconds'));
         $this->assertSame('not_available', data_get($payload, 'reports_artifacts_lifecycle.freshness_state'));
         $this->assertSame('audit-derived', data_get($payload, 'reports_artifacts_lifecycle.freshness_source_type'));
+        $this->assertSame('not_available', data_get($payload, 'report_artifacts_archive.status'));
+        $this->assertSame('audit_logs.meta_json', data_get($payload, 'report_artifacts_archive.durable_receipt_source'));
+        $this->assertNull(data_get($payload, 'report_artifacts_archive.target_disk'));
+        $this->assertNull(data_get($payload, 'report_artifacts_archive.latest_generated_at'));
+        $this->assertNull(data_get($payload, 'report_artifacts_archive.latest_mode'));
+        $this->assertNull(data_get($payload, 'report_artifacts_archive.latest_plan_path'));
+        $this->assertNull(data_get($payload, 'report_artifacts_archive.latest_run_path'));
+        $this->assertFalse((bool) data_get($payload, 'report_artifacts_archive.latest_run_path_exists'));
+        $this->assertSame(0, data_get($payload, 'report_artifacts_archive.latest_summary.candidate_count'));
+        $this->assertSame(0, data_get($payload, 'report_artifacts_archive.latest_summary.results_count'));
+        $this->assertNull(data_get($payload, 'report_artifacts_archive.last_updated_at'));
+        $this->assertNull(data_get($payload, 'report_artifacts_archive.freshness_age_seconds'));
+        $this->assertSame('not_available', data_get($payload, 'report_artifacts_archive.freshness_state'));
+        $this->assertSame('audit-derived', data_get($payload, 'report_artifacts_archive.freshness_source_type'));
         $this->assertSame('never_run', data_get($payload, 'retention.status'));
         $this->assertSame('never_run', data_get($payload, 'retention.scopes.reports_backups.freshness_state'));
         $this->assertSame('never_run', data_get($payload, 'retention.scopes.content_releases_retention.freshness_state'));
@@ -262,17 +292,18 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
         $this->assertSame('unknown_freshness', data_get($payload, 'runtime_truth.freshness_state'));
         $this->assertSame('unknown_freshness', data_get($payload, 'automation_readiness.freshness_state'));
         $this->assertSame('degraded', data_get($payload, 'attention_digest.overall_state'));
-        $this->assertSame(['inventory', 'reports_artifacts_lifecycle'], data_get($payload, 'attention_digest.not_available_sections'));
+        $this->assertSame(['inventory', 'report_artifacts_archive', 'reports_artifacts_lifecycle'], data_get($payload, 'attention_digest.not_available_sections'));
         $this->assertContains('rehydrate', data_get($payload, 'attention_digest.never_run_sections', []));
         $this->assertContains('retention.scopes.reports_backups', data_get($payload, 'attention_digest.never_run_sections', []));
         $this->assertSame([], data_get($payload, 'attention_digest.stale_sections'));
-        $this->assertSame(2, data_get($payload, 'attention_digest.counts.not_available'));
+        $this->assertSame(3, data_get($payload, 'attention_digest.counts.not_available'));
         $this->assertGreaterThan(0, (int) data_get($payload, 'attention_digest.counts.never_run'));
         $attentionMessages = array_values(array_filter(array_map(
             static fn ($item): ?string => is_array($item) ? ($item['message'] ?? null) : null,
             (array) data_get($payload, 'attention_digest.attention_items', [])
         )));
         $this->assertContains('inventory is not available', $attentionMessages);
+        $this->assertContains('report artifacts archive is not available', $attentionMessages);
         $this->assertContains('reports artifacts lifecycle is not available', $attentionMessages);
     }
 
@@ -528,6 +559,59 @@ final class StorageControlPlaneStatusServiceTest extends TestCase
                 'skipped_count' => 0,
             ],
         ], 'success', 'exact_root_retirement', $now->copy()->subMinutes(40));
+    }
+
+    /**
+     * @return array{plan_path:string,run_path:string}
+     */
+    private function seedReportArtifactsArchiveTruth(bool $runPathExists = true): array
+    {
+        $planPath = storage_path('app/private/report_artifact_archive_plans/archive-plan.json');
+        $runPath = storage_path('app/private/report_artifact_archive_runs/archive-run/run.json');
+        $this->writeJson($planPath, [
+            'schema' => 'storage_archive_report_artifacts_plan.v1',
+            'mode' => 'dry_run',
+        ]);
+
+        if ($runPathExists) {
+            $this->writeJson($runPath, [
+                'schema' => 'storage_archive_report_artifacts_run.v1',
+                'mode' => 'execute',
+            ]);
+        }
+
+        $this->insertAudit('storage_archive_report_artifacts', 'report_artifacts_archive', [
+            'schema' => 'storage_archive_report_artifacts_run.v1',
+            'mode' => 'execute',
+            'target_disk' => 's3',
+            'plan' => $planPath,
+            'plan_path' => $planPath,
+            'run_path' => $runPath,
+            'candidate_count' => 3,
+            'copied_count' => 2,
+            'verified_count' => 3,
+            'already_archived_count' => 1,
+            'failed_count' => 0,
+            'results_count' => 3,
+            'durable_receipt_source' => 'audit_logs.meta_json',
+            'summary' => [
+                'candidate_count' => 3,
+                'copied_count' => 2,
+                'verified_count' => 3,
+                'already_archived_count' => 1,
+                'failed_count' => 0,
+            ],
+            'results' => [
+                ['status' => 'copied'],
+                ['status' => 'copied'],
+                ['status' => 'already_archived'],
+            ],
+        ], 'success', 'manual_archive_copy', now()->subMinutes(10));
+
+        return [
+            'plan_path' => $planPath,
+            'run_path' => $runPath,
+        ];
     }
 
     /**
