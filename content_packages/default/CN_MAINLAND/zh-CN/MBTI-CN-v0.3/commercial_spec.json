@@ -166,5 +166,280 @@
         "badge": "完整版"
       }
     }
-  ]
+  ],
+  "cta_bundle_default": "cta_bundle_growth",
+  "cta_bundles": {
+    "cta_bundle_growth": {
+      "cta_intent": "growth",
+      "softness_mode": "guided",
+      "entry_reason": "growth_clarity_loop",
+      "entries": [
+        {
+          "cta_key": "unlock_full_report",
+          "title": "先把成长路径看完整",
+          "subtitle": "补齐成长、稳定和关系模块，再决定下一步怎么走。",
+          "primary_label": "解锁完整报告",
+          "secondary_label": "先看免费版",
+          "badge": "成长主线",
+          "reason": "complete_growth_view"
+        },
+        {
+          "cta_key": "workspace_lite",
+          "title": "先拿一个轻量动作入口",
+          "subtitle": "如果现在只想先动起来，可以先走低压入口。",
+          "primary_label": "继续成长动作",
+          "secondary_label": "稍后再看",
+          "badge": "低压入口",
+          "reason": "low_pressure_first"
+        },
+        {
+          "cta_key": "share_result",
+          "title": "先把结果发给熟人",
+          "subtitle": "如果你想先验证感受，可以先分享再回来继续。",
+          "primary_label": "分享结果",
+          "secondary_label": "继续阅读",
+          "badge": "外部反馈",
+          "reason": "share_for_reflection"
+        }
+      ]
+    },
+    "cta_bundle_career": {
+      "cta_intent": "career",
+      "softness_mode": "direct",
+      "entry_reason": "career_next_step_focus",
+      "entries": [
+        {
+          "cta_key": "career_bridge",
+          "title": "把这份结果接到职业下一步",
+          "subtitle": "先进入职业桥接路径，把角色匹配、过渡和执行路径接起来。",
+          "primary_label": "继续职业路径",
+          "secondary_label": "先看免费版",
+          "badge": "职业主线",
+          "reason": "career_path_entry"
+        },
+        {
+          "cta_key": "unlock_full_report",
+          "title": "补齐完整职业分析",
+          "subtitle": "完整报告会把成长、职业和关系的判断一起展开。",
+          "primary_label": "解锁完整报告",
+          "secondary_label": "稍后再说",
+          "badge": "完整视角",
+          "reason": "unlock_career_context"
+        },
+        {
+          "cta_key": "share_result",
+          "title": "把职业方向先发给同伴",
+          "subtitle": "如果你需要外部视角，先分享再回来也可以。",
+          "primary_label": "分享职业结果",
+          "secondary_label": "继续阅读",
+          "badge": "外部校准",
+          "reason": "share_career_context"
+        }
+      ]
+    },
+    "cta_bundle_relationship": {
+      "cta_intent": "relationship",
+      "softness_mode": "reflective",
+      "entry_reason": "relationship_repair_path",
+      "entries": [
+        {
+          "cta_key": "unlock_full_report",
+          "title": "先把关系模块看完整",
+          "subtitle": "完整报告会把误读、边界和修复节奏放到同一条线里。",
+          "primary_label": "解锁关系深读",
+          "secondary_label": "先看免费版",
+          "badge": "关系修复",
+          "reason": "unlock_relationship_depth"
+        },
+        {
+          "cta_key": "share_result",
+          "title": "把结果发给对话对象",
+          "subtitle": "如果你想先打开一次更轻的对话，可以先分享。",
+          "primary_label": "分享关系视角",
+          "secondary_label": "继续阅读",
+          "badge": "对话入口",
+          "reason": "share_relationship_context"
+        },
+        {
+          "cta_key": "workspace_lite",
+          "title": "先做一个低强度修复动作",
+          "subtitle": "如果现在不适合深谈，先保留一个轻量入口。",
+          "primary_label": "继续低压动作",
+          "secondary_label": "稍后再看",
+          "badge": "低强度",
+          "reason": "soft_reconnect_first"
+        }
+      ]
+    },
+    "cta_bundle_revisit": {
+      "cta_intent": "revisit",
+      "softness_mode": "guided",
+      "entry_reason": "resume_ready_return",
+      "entries": [
+        {
+          "cta_key": "workspace_lite",
+          "title": "从你上次停住的地方接回来",
+          "subtitle": "先走一个轻量入口，把上次没做完的动作接上。",
+          "primary_label": "继续上次动作",
+          "secondary_label": "先看结果",
+          "badge": "复访继续",
+          "reason": "resume_previous_step"
+        },
+        {
+          "cta_key": "career_bridge",
+          "title": "把复访结果接到职业路径",
+          "subtitle": "如果你这次更关心工作，把桥接路径作为下一步。",
+          "primary_label": "继续职业路径",
+          "secondary_label": "稍后再看",
+          "badge": "复访职业",
+          "reason": "resume_career_path"
+        },
+        {
+          "cta_key": "unlock_full_report",
+          "title": "把完整路径重新看一遍",
+          "subtitle": "如果你想把之前跳过的部分补齐，现在可以直接解锁。",
+          "primary_label": "补齐完整报告",
+          "secondary_label": "继续免费版",
+          "badge": "补齐视图",
+          "reason": "unlock_resume_context"
+        }
+      ]
+    },
+    "cta_bundle_adaptive_next_best": {
+      "cta_intent": "adaptive",
+      "softness_mode": "guided",
+      "entry_reason": "adaptive_next_best_step",
+      "entries": [
+        {
+          "cta_key": "career_bridge",
+          "title": "换一条更适合现在状态的入口",
+          "subtitle": "后台已经改写了推荐顺序，这里直接给你下一条更顺手的入口。",
+          "primary_label": "走下一条更合适的路径",
+          "secondary_label": "先看结果",
+          "badge": "自适应建议",
+          "reason": "adaptive_redirect"
+        },
+        {
+          "cta_key": "workspace_lite",
+          "title": "先降一点压力，再继续推进",
+          "subtitle": "如果现在阻力偏大，先走更轻一点的入口。",
+          "primary_label": "先走低压入口",
+          "secondary_label": "稍后继续",
+          "badge": "减压重试",
+          "reason": "adaptive_reduce_pressure"
+        },
+        {
+          "cta_key": "unlock_full_report",
+          "title": "需要更完整的上下文时再解锁",
+          "subtitle": "如果你想直接把完整视角补齐，也可以现在进入完整版。",
+          "primary_label": "解锁完整报告",
+          "secondary_label": "继续免费版",
+          "badge": "完整视角",
+          "reason": "unlock_after_adaptive"
+        }
+      ]
+    },
+    "cta_bundle_low_pressure": {
+      "cta_intent": "growth",
+      "softness_mode": "low_pressure",
+      "entry_reason": "soft_entry_before_commitment",
+      "entries": [
+        {
+          "cta_key": "workspace_lite",
+          "title": "先从一个更轻的入口开始",
+          "subtitle": "不需要一次做很多，先用一个低阻力动作把节奏带起来。",
+          "primary_label": "先走低压入口",
+          "secondary_label": "稍后再看",
+          "badge": "低压开始",
+          "reason": "soft_start"
+        },
+        {
+          "cta_key": "share_result",
+          "title": "如果你想先听听外部反馈",
+          "subtitle": "先分享，再回来做决定，也是一种更轻的推进方式。",
+          "primary_label": "先分享结果",
+          "secondary_label": "继续阅读",
+          "badge": "轻量校准",
+          "reason": "soft_share_first"
+        },
+        {
+          "cta_key": "unlock_full_report",
+          "title": "准备好了再看完整路径",
+          "subtitle": "如果你想一口气看完整，也可以直接解锁。",
+          "primary_label": "解锁完整报告",
+          "secondary_label": "先看免费版",
+          "badge": "准备后升级",
+          "reason": "unlock_when_ready"
+        }
+      ]
+    },
+    "cta_bundle_share_forward": {
+      "cta_intent": "share_forward",
+      "softness_mode": "share_forward",
+      "entry_reason": "share_before_deepening",
+      "entries": [
+        {
+          "cta_key": "share_result",
+          "title": "把这次结果继续转发出去",
+          "subtitle": "如果你觉得这次结果已经够清楚，可以先分享给想讨论的人。",
+          "primary_label": "分享结果",
+          "secondary_label": "继续阅读",
+          "badge": "分享主位",
+          "reason": "share_forward"
+        },
+        {
+          "cta_key": "unlock_full_report",
+          "title": "想补完整上下文时再回来",
+          "subtitle": "如果你之后想看完整模块，仍然可以回到完整版。",
+          "primary_label": "解锁完整报告",
+          "secondary_label": "先保留免费版",
+          "badge": "后续深化",
+          "reason": "unlock_after_share"
+        },
+        {
+          "cta_key": "career_bridge",
+          "title": "把分享后的反馈接到职业路径",
+          "subtitle": "如果反馈让你更想看职业方向，就直接走桥接。",
+          "primary_label": "继续职业路径",
+          "secondary_label": "稍后再看",
+          "badge": "反馈转入",
+          "reason": "share_to_career"
+        }
+      ]
+    },
+    "cta_bundle_unlock_deepening": {
+      "cta_intent": "unlock_deepening",
+      "softness_mode": "direct",
+      "entry_reason": "unlock_for_deeper_explanation",
+      "entries": [
+        {
+          "cta_key": "unlock_full_report",
+          "title": "把解释层直接看深一层",
+          "subtitle": "如果你现在最需要的是“为什么会这样”，完整版会把解释链条补齐。",
+          "primary_label": "解锁完整报告",
+          "secondary_label": "先看免费版",
+          "badge": "深度解释",
+          "reason": "unlock_explainability"
+        },
+        {
+          "cta_key": "career_bridge",
+          "title": "解释清楚后，顺手接到职业下一步",
+          "subtitle": "如果你已经准备行动，可以直接转入职业桥接。",
+          "primary_label": "继续职业路径",
+          "secondary_label": "稍后再看",
+          "badge": "行动转入",
+          "reason": "career_after_explainability"
+        },
+        {
+          "cta_key": "workspace_lite",
+          "title": "先保留一个轻量继续入口",
+          "subtitle": "如果还没准备好深挖，可以先保留低压入口。",
+          "primary_label": "继续低压入口",
+          "secondary_label": "稍后再说",
+          "badge": "缓冲入口",
+          "reason": "buffer_before_unlock"
+        }
+      ]
+    }
+  }
 }

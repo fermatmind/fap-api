@@ -7,6 +7,7 @@ use App\Http\Controllers\API\V0_3\Concerns\ResolvesAttemptOwnership;
 use App\Http\Controllers\Controller;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Models\UnifiedAccessProjection;
 use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
@@ -475,6 +476,44 @@ class AttemptReadController extends Controller
         return response()->json($responsePayload);
     }
 
+    /**
+     * GET /api/v0.3/attempts/{id}/report-access
+     */
+    public function reportAccess(Request $request, string $id): JsonResponse
+    {
+        $orgId = $this->orgContext->orgId();
+        $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
+        $projection = UnifiedAccessProjection::query()
+            ->where('attempt_id', (string) $attempt->id)
+            ->first();
+
+        $fallbackStates = $this->fallbackProjectionStates($orgId, (string) $attempt->id);
+        $accessState = trim((string) ($projection?->access_state ?? $fallbackStates['access_state']));
+        $reportState = trim((string) ($projection?->report_state ?? $fallbackStates['report_state']));
+        $pdfState = trim((string) ($projection?->pdf_state ?? $fallbackStates['pdf_state']));
+        $reasonCode = trim((string) ($projection?->reason_code ?? $fallbackStates['reason_code']));
+        $projectionVersion = (int) ($projection?->projection_version ?? 1);
+        $payloadJson = is_array($projection?->payload_json) ? $projection->payload_json : $fallbackStates['payload_json'];
+        $producedAt = optional($projection?->produced_at)->toIso8601String();
+        $refreshedAt = optional($projection?->refreshed_at)->toIso8601String();
+
+        return response()->json([
+            'ok' => true,
+            'attempt_id' => (string) $attempt->id,
+            'access_state' => $accessState,
+            'report_state' => $reportState,
+            'pdf_state' => $pdfState,
+            'reason_code' => $reasonCode !== '' ? $reasonCode : null,
+            'projection_version' => $projectionVersion,
+            'actions' => $this->reportAccessActions($attempt, $accessState, $reportState, $pdfState),
+            'payload' => $payloadJson,
+            'meta' => [
+                'produced_at' => $producedAt,
+                'refreshed_at' => $refreshedAt,
+            ],
+        ]);
+    }
+
     private function resolveAttemptForReportRead(Request $request, int $orgId, string $attemptId, string $scaleCode): Attempt
     {
         if ($this->isPublicReportScale($scaleCode)) {
@@ -493,6 +532,115 @@ class AttemptReadController extends Controller
         }
 
         throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+    }
+
+    private function resolveAttemptForAccessRead(Request $request, int $orgId, string $attemptId): Attempt
+    {
+        $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $attemptId)->first();
+        if ($result instanceof Result) {
+            $responseCodes = $this->resolveResponseScaleCodes($result);
+            $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
+
+            return $this->resolveAttemptForReportRead($request, $orgId, $attemptId, $scaleCode);
+        }
+
+        $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+    }
+
+    /**
+     * @return array{access_state:string,report_state:string,pdf_state:string,reason_code:string,payload_json:array<string,mixed>}
+     */
+    private function fallbackProjectionStates(int $orgId, string $attemptId): array
+    {
+        $resultExists = Result::query()
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->exists();
+
+        return [
+            'access_state' => $resultExists ? 'locked' : 'pending',
+            'report_state' => $resultExists ? 'ready' : 'pending',
+            'pdf_state' => 'missing',
+            'reason_code' => $resultExists ? 'projection_missing_result_ready' : 'projection_missing_result_pending',
+            'payload_json' => [
+                'fallback' => true,
+                'result_exists' => $resultExists,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,string|null>
+     */
+    private function reportAccessActions(Attempt $attempt, string $accessState, string $reportState, string $pdfState): array
+    {
+        $pageHref = $this->resultPagePathForAttempt($attempt);
+        $lookupHref = '/orders/lookup';
+        $historyHref = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI'
+            ? '/history/mbti'
+            : null;
+
+        return [
+            'page_href' => $this->supportsPageEntry($accessState, $reportState) ? $pageHref : null,
+            'pdf_href' => $this->supportsPdfDownload($accessState, $pdfState)
+                ? "/api/v0.3/attempts/{$attempt->id}/report.pdf"
+                : null,
+            'wait_href' => $this->isWaitingState($reportState) ? $pageHref : null,
+            'history_href' => $historyHref,
+            'lookup_href' => $lookupHref,
+        ];
+    }
+
+    private function resultPagePathForAttempt(Attempt $attempt): string
+    {
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+
+        return in_array($scaleCode, ['SDS_20', 'CLINICAL_COMBO_68'], true)
+            ? "/attempts/{$attempt->id}/report"
+            : "/result/{$attempt->id}";
+    }
+
+    private function supportsPageEntry(string $accessState, string $reportState): bool
+    {
+        return ! in_array($this->normalizeProjectionState($accessState, 'access'), ['deleted', 'expired'], true)
+            && ! in_array($this->normalizeProjectionState($reportState, 'report'), ['deleted', 'expired', 'unavailable'], true);
+    }
+
+    private function supportsPdfDownload(string $accessState, string $pdfState): bool
+    {
+        return $this->normalizeProjectionState($accessState, 'access') === 'ready'
+            && $this->normalizeProjectionState($pdfState, 'pdf') === 'ready';
+    }
+
+    private function isWaitingState(string $state): bool
+    {
+        return in_array($this->normalizeProjectionState($state, 'report'), ['pending', 'restoring'], true);
+    }
+
+    private function normalizeProjectionState(string $state, string $kind): string
+    {
+        $normalized = strtolower(trim($state));
+
+        return match (true) {
+            $normalized === 'ready' => 'ready',
+            in_array($normalized, ['pending', 'generating', 'queued', 'running', 'submitted'], true) => 'pending',
+            in_array($normalized, ['restoring', 'rehydrating'], true) => 'restoring',
+            in_array($normalized, ['deleted', 'purged', 'anonymized'], true) => 'deleted',
+            $normalized === 'expired' => 'expired',
+            $kind === 'access' && in_array($normalized, ['locked', 'recovery_available'], true) => 'locked',
+            in_array($normalized, ['missing', 'unavailable', 'archived', 'shrunk', 'failed', 'blocked'], true) => 'unavailable',
+            default => $kind === 'access' ? 'locked' : 'unavailable',
+        };
     }
 
     private function resolveReportGate(
@@ -751,6 +899,7 @@ class AttemptReadController extends Controller
             'section_selection_keys' => is_array($personalization['section_selection_keys'] ?? null) ? $personalization['section_selection_keys'] : [],
             'action_selection_keys' => is_array($personalization['action_selection_keys'] ?? null) ? $personalization['action_selection_keys'] : [],
             'recommendation_selection_keys' => is_array($personalization['recommendation_selection_keys'] ?? null) ? $personalization['recommendation_selection_keys'] : [],
+            'cta_bundle_v1' => is_array($personalization['cta_bundle_v1'] ?? null) ? $personalization['cta_bundle_v1'] : [],
             'selection_fingerprint' => trim((string) ($personalization['selection_fingerprint'] ?? '')),
             'selection_evidence' => is_array($personalization['selection_evidence'] ?? null) ? $personalization['selection_evidence'] : [],
             'user_state' => is_array($personalization['user_state'] ?? null) ? $personalization['user_state'] : [],
@@ -759,6 +908,13 @@ class AttemptReadController extends Controller
             'cultural_calibration_v1' => is_array($personalization['cultural_calibration_v1'] ?? null) ? $personalization['cultural_calibration_v1'] : [],
             'engine_version' => trim((string) ($personalization['engine_version'] ?? '')),
         ];
+
+        if (is_array($personalization['cta_bundle_v1'] ?? null)) {
+            $meta['cta_bundle_key'] = trim((string) data_get($personalization, 'cta_bundle_v1.bundle_key', ''));
+            $meta['cta_entry_reason'] = trim((string) data_get($personalization, 'cta_bundle_v1.entry_reason', ''));
+            $meta['cta_softness_mode'] = trim((string) data_get($personalization, 'cta_bundle_v1.softness_mode', ''));
+            $meta['cta_intent'] = trim((string) data_get($personalization, 'cta_bundle_v1.cta_intent', ''));
+        }
 
         $adaptiveSelection = is_array($personalization['adaptive_selection_v1'] ?? null)
             ? $personalization['adaptive_selection_v1']
@@ -1035,10 +1191,17 @@ class AttemptReadController extends Controller
             : [];
 
         if ($canonicalAdaptive !== []) {
-            return $this->mbtiAdaptiveSelectionService->attachExistingAdaptive($effective, $canonicalAdaptive);
+            $effective = $this->mbtiAdaptiveSelectionService->attachExistingAdaptive($effective, $canonicalAdaptive);
+        } else {
+            $effective = $this->mbtiAdaptiveSelectionService->attach($effective);
         }
 
-        return $this->mbtiAdaptiveSelectionService->attach($effective);
+        return app(\App\Services\Mbti\MbtiResultPersonalizationService::class)
+            ->attachCtaBundleForExistingPersonalization($effective, [
+                'pack_id' => trim((string) ($personalization['pack_id'] ?? '')),
+                'dir_version' => trim((string) ($personalization['content_package_dir'] ?? '')),
+                'locale' => (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+            ]);
     }
 
     /**

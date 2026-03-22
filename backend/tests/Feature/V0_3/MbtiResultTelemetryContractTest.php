@@ -102,6 +102,7 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['section_selection_keys'] ?? null);
             $this->assertIsArray($meta['action_selection_keys'] ?? null);
             $this->assertIsArray($meta['recommendation_selection_keys'] ?? null);
+            $this->assertIsArray($meta['cta_bundle_v1'] ?? null);
             $this->assertNotSame('', trim((string) ($meta['selection_fingerprint'] ?? '')));
             $this->assertNotSame('', trim((string) ($meta['action_plan_summary'] ?? '')));
             $this->assertIsArray($meta['weekly_action_keys'] ?? null);
@@ -234,6 +235,16 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame(
             ['career_bridge', 'unlock_full_report', 'share_result'],
             data_get($eventMeta, 'report_view.orchestration.cta_priority_keys')
+        );
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.orchestration.cta_bundle_key', '')));
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'report_view.orchestration.cta_bundle_key', '')));
+        $this->assertSame(
+            data_get($eventMeta, 'result_view.cta_bundle_key'),
+            data_get($eventMeta, 'result_view.cta_bundle_v1.bundle_key')
+        );
+        $this->assertSame(
+            data_get($eventMeta, 'report_view.cta_bundle_key'),
+            data_get($eventMeta, 'report_view.cta_bundle_v1.bundle_key')
         );
         $this->assertSame('career.work_experiments', data_get($eventMeta, 'result_view.working_life_v1.career_focus_key'));
         $this->assertSame('mbti.intra_type_profile.v1', data_get($eventMeta, 'result_view.intra_type_profile_v1.version'));

@@ -742,10 +742,86 @@ final class MbtiUserStateOrchestrationService
             }
         }
 
+        $score += $this->scoreRecommendationCandidateTags($candidate, $this->resolveRecommendationTagWeights($primaryThemes, $secondaryThemes));
+
         $priority = (int) ($candidate['priority'] ?? 0);
         $score += max(0, 50 - min(50, $priority));
 
         return $score;
+    }
+
+    /**
+     * @param  list<string>  $primaryThemes
+     * @param  list<string>  $secondaryThemes
+     * @return array<string, int>
+     */
+    private function resolveRecommendationTagWeights(array $primaryThemes, array $secondaryThemes): array
+    {
+        $weights = [];
+
+        foreach ($primaryThemes as $index => $theme) {
+            foreach ($this->themeToRecommendationTags($theme) as $tag) {
+                $weights[$tag] = max($weights[$tag] ?? 0, max(0, 100 - ($index * 10)));
+            }
+        }
+
+        foreach ($secondaryThemes as $index => $theme) {
+            foreach ($this->themeToRecommendationTags($theme) as $tag) {
+                $weights[$tag] = max($weights[$tag] ?? 0, max(0, 50 - ($index * 5)));
+            }
+        }
+
+        return $weights;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function themeToRecommendationTags(string $theme): array
+    {
+        $normalized = strtolower(trim($theme));
+
+        return match ($normalized) {
+            'career' => ['intent:career_move', 'scene:work', 'focus:career_next_step', 'focus:career_role_fit', 'focus:career_transition'],
+            'work' => ['scene:work', 'focus:career_role_fit', 'focus:scene_execution'],
+            'relationship' => ['intent:relationship_tuning', 'scene:communication', 'focus:relationship_repair', 'focus:relationship_boundary'],
+            'communication' => ['scene:communication', 'focus:relationship_communication', 'focus:scene_conflict'],
+            'stability' => ['scene:stress_recovery', 'focus:growth_recovery', 'focus:scene_recovery'],
+            'explainability' => ['intent:clarify_type', 'focus:growth_boundary'],
+            default => ['intent:action_activation', 'scene:growth', 'focus:growth_clarity'],
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @param  array<string, int>  $weights
+     */
+    private function scoreRecommendationCandidateTags(array $candidate, array $weights): int
+    {
+        if ($weights === []) {
+            return 0;
+        }
+
+        $tags = $this->normalizeRecommendationCandidateTags($candidate);
+        $score = 0;
+
+        foreach ($tags as $tag) {
+            $score += (int) ($weights[$tag] ?? 0);
+        }
+
+        return $score;
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @return list<string>
+     */
+    private function normalizeRecommendationCandidateTags(array $candidate): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn (mixed $tag): string => strtolower(trim((string) $tag)),
+            is_array($candidate['tags'] ?? null) ? $candidate['tags'] : []
+        ))));
     }
 
     /**

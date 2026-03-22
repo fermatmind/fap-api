@@ -46,6 +46,12 @@ final class MbtiReadModelContractServiceTest extends TestCase
             ],
             'ordered_recommendation_keys' => ['read-action'],
             'reading_focus_key' => 'read-action',
+            'cta_bundle_v1' => [
+                'bundle_key' => 'cta_bundle_growth',
+                'cta_intent' => 'growth',
+                'softness_mode' => 'guided',
+                'entry_reason' => 'growth_clarity_loop',
+            ],
             'working_life_v1' => ['career_focus_key' => 'career.next_step'],
             'career_focus_key' => 'career.next_step',
         ]);
@@ -96,6 +102,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
                 'section_selection_keys',
                 'action_selection_keys',
                 'recommendation_selection_keys',
+                'cta_bundle_v1',
                 'selection_fingerprint',
                 'selection_evidence',
             ],
@@ -106,6 +113,8 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('mbti_public_projection_v1._meta.personalization.continuity', $contract['non_cacheable_fields']);
         $this->assertContains('user_state', $contract['telemetry_parity_fields']);
         $this->assertContains('continuity.carryover_focus_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('orchestration.cta_bundle_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('cta_bundle_v1.bundle_key', $contract['telemetry_parity_fields']);
         $this->assertContains('action_journey_v1.journey_state', $contract['telemetry_parity_fields']);
         $this->assertContains('pulse_check_v1.pulse_state', $contract['telemetry_parity_fields']);
         $this->assertContains('longitudinal_memory_v1.memory_contract_version', $contract['telemetry_parity_fields']);
@@ -164,6 +173,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
             'continuity' => ['carryover_focus_key' => 'traits.close_call_axes'],
             'ordered_recommendation_keys' => ['read-explain'],
             'longitudinal_memory_v1' => ['memory_state' => 'resume_ready'],
+            'cta_bundle_v1' => ['bundle_key' => 'cta_bundle_revisit'],
             'working_life_v1' => ['career_focus_key' => 'career.work_experiments'],
         ];
 
@@ -176,6 +186,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertSame(['journey_state' => 'resume_action_loop'], $merged['action_journey_v1']);
         $this->assertSame(['pulse_state' => 'reinforce'], $merged['pulse_check_v1']);
         $this->assertSame(['memory_state' => 'resume_ready'], $merged['longitudinal_memory_v1']);
+        $this->assertSame(['bundle_key' => 'cta_bundle_revisit'], $merged['cta_bundle_v1']);
         $this->assertSame(['carryover_focus_key' => 'traits.close_call_axes'], $merged['continuity']);
         $this->assertSame(['read-explain'], $merged['ordered_recommendation_keys']);
         $this->assertSame(['career_focus_key' => 'career.work_experiments'], $merged['working_life_v1']);

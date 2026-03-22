@@ -50,7 +50,7 @@ final class MbtiContentInventoryContractTest extends TestCase
         $this->assertSame(1, $inventory['inventory_contract_version'] ?? null);
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $inventory['pack_id'] ?? null);
         $this->assertSame('CN_MAINLAND.zh-CN', $inventory['cultural_context'] ?? null);
-        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03', $inventory['inventory_fingerprint'] ?? null);
+        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce4', $inventory['inventory_fingerprint'] ?? null);
         $this->assertSame('mbti_content_inventory.v1', $inventory['governance_profile'] ?? null);
 
         $families = array_values(array_filter((array) ($inventory['fragment_families'] ?? []), 'is_array'));
@@ -91,6 +91,10 @@ final class MbtiContentInventoryContractTest extends TestCase
         $this->assertContains('recovery_reset', data_get($familyIndex, 'recovery_fragment.block_kinds', []));
         $this->assertContains('revisit_resume', data_get($familyIndex, 'revisit_fragment.block_kinds', []));
         $this->assertContains('adaptive_retry', data_get($familyIndex, 'adaptive_response_fragment.block_kinds', []));
+        $this->assertContains('recommendation_career_next_step', data_get($familyIndex, 'recommendation_fragment.block_kinds', []));
+        $this->assertContains('recommendation_relationship_repair', data_get($familyIndex, 'recommendation_fragment.block_kinds', []));
+        $this->assertContains('cta_bundle_career', data_get($familyIndex, 'cta_bundle_fragment.block_kinds', []));
+        $this->assertContains('cta_bundle_revisit', data_get($familyIndex, 'cta_bundle_fragment.block_kinds', []));
 
         $selectionTagSchema = is_array($inventory['selection_tag_schema'] ?? null) ? $inventory['selection_tag_schema'] : [];
         foreach ([
@@ -107,6 +111,9 @@ final class MbtiContentInventoryContractTest extends TestCase
             'access_tier',
             'locale_scope',
             'evidence_ref',
+            'cta_intent',
+            'cta_softness_mode',
+            'cta_entry_reason',
         ] as $tagKey) {
             $this->assertArrayHasKey($tagKey, $selectionTagSchema);
             $this->assertNotSame('', trim((string) ($selectionTagSchema[$tagKey]['type'] ?? '')));

@@ -159,6 +159,7 @@ final class MbtiContentGovernanceContractTest extends TestCase
             'report_cards_growth.json',
             'report_dynamic_sections.json',
             'report_recommended_reads.json',
+            'commercial_spec.json',
             'report_select_rules.json',
             'report_section_policies.json',
         ] as $requiredFile) {

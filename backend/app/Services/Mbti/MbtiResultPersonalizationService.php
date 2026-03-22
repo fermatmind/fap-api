@@ -858,6 +858,7 @@ final class MbtiResultPersonalizationService
         $personalization = $this->intraTypeProfileService->attach($personalization);
         $personalization = $this->longitudinalMemoryService->attach($personalization, $context);
         $personalization = $this->adaptiveSelectionService->attach($personalization);
+        $personalization = $this->attachCtaBundle($personalization, $context, $locale);
 
         $personalization = $this->privacyConsentContractService->attachContract($personalization, [
             'region' => trim((string) ($context['region'] ?? config('regions.default_region', 'CN_MAINLAND'))),
@@ -905,6 +906,148 @@ final class MbtiResultPersonalizationService
         );
 
         return $this->readModelContractService->attachContract($personalization);
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  array<string, mixed>  $context
+     * @return array<string, mixed>
+     */
+    public function attachCtaBundleForExistingPersonalization(array $personalization, array $context = []): array
+    {
+        if ($personalization === []) {
+            return [];
+        }
+
+        $locale = $this->normalizeLocale((string) ($context['locale'] ?? ($personalization['locale'] ?? '')));
+
+        return $this->attachCtaBundle($personalization, [
+            'pack_id' => trim((string) ($context['pack_id'] ?? ($personalization['pack_id'] ?? ''))),
+            'dir_version' => trim((string) ($context['dir_version'] ?? ($personalization['content_package_dir'] ?? ''))),
+            'locale' => $locale,
+        ], $locale);
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  array<string, mixed>  $context
+     * @return array<string, mixed>
+     */
+    private function attachCtaBundle(array $personalization, array $context, string $locale): array
+    {
+        $commercialSpec = $this->loadCommercialSpecDoc($context, $locale);
+        if ($commercialSpec === []) {
+            return $personalization;
+        }
+
+        $bundle = $this->buildCtaBundle($personalization, $commercialSpec);
+        if ($bundle === []) {
+            return $personalization;
+        }
+
+        $personalization['cta_bundle_v1'] = $bundle;
+        $orchestration = is_array($personalization['orchestration'] ?? null) ? $personalization['orchestration'] : [];
+        $orchestration['cta_bundle_key'] = trim((string) ($bundle['bundle_key'] ?? ''));
+        $orchestration['cta_entry_reason'] = trim((string) ($bundle['entry_reason'] ?? ''));
+        $orchestration['cta_softness_mode'] = trim((string) ($bundle['softness_mode'] ?? ''));
+        $personalization['orchestration'] = $orchestration;
+
+        return $personalization;
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     * @param  array<string, mixed>  $commercialSpec
+     * @return array<string, mixed>
+     */
+    private function buildCtaBundle(array $personalization, array $commercialSpec): array
+    {
+        $bundles = is_array($commercialSpec['cta_bundles'] ?? null) ? $commercialSpec['cta_bundles'] : [];
+        if ($bundles === []) {
+            return [];
+        }
+
+        $bundleKey = $this->resolveCtaBundleKey($personalization);
+        $bundle = is_array($bundles[$bundleKey] ?? null) ? $bundles[$bundleKey] : null;
+        if ($bundle === null) {
+            $bundleKey = trim((string) ($commercialSpec['cta_bundle_default'] ?? 'cta_bundle_growth'));
+            $bundle = is_array($bundles[$bundleKey] ?? null) ? $bundles[$bundleKey] : null;
+        }
+
+        if ($bundle === null) {
+            return [];
+        }
+
+        $entryMap = [];
+        foreach (array_values(array_filter((array) ($bundle['entries'] ?? []), 'is_array')) as $entry) {
+            $ctaKey = trim((string) ($entry['cta_key'] ?? ''));
+            if ($ctaKey !== '') {
+                $entryMap[$ctaKey] = $entry;
+            }
+        }
+
+        $orderedEntries = [];
+        foreach ($this->normalizeStringList(data_get($personalization, 'orchestration.cta_priority_keys', [])) as $ctaKey) {
+            if (isset($entryMap[$ctaKey])) {
+                $orderedEntries[] = $entryMap[$ctaKey];
+                unset($entryMap[$ctaKey]);
+            }
+        }
+
+        foreach ($entryMap as $entry) {
+            $orderedEntries[] = $entry;
+        }
+
+        return [
+            'version' => 'mbti.cta_bundle.v1',
+            'bundle_key' => $bundleKey,
+            'cta_intent' => trim((string) ($bundle['cta_intent'] ?? '')),
+            'softness_mode' => trim((string) ($bundle['softness_mode'] ?? '')),
+            'entry_reason' => trim((string) ($bundle['entry_reason'] ?? '')),
+            'entries' => $orderedEntries,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $personalization
+     */
+    private function resolveCtaBundleKey(array $personalization): string
+    {
+        $currentIntentCluster = trim((string) data_get($personalization, 'user_state.current_intent_cluster', ''));
+        $memoryState = trim((string) data_get($personalization, 'longitudinal_memory_v1.memory_state', ''));
+        $adaptiveReason = trim((string) data_get($personalization, 'adaptive_selection_v1.selection_rewrite_reason', ''));
+        $hasUnlock = (bool) data_get($personalization, 'user_state.has_unlock', false);
+        $primaryFocusKey = trim((string) data_get($personalization, 'orchestration.primary_focus_key', ''));
+
+        if ($adaptiveReason !== '') {
+            return 'cta_bundle_adaptive_next_best';
+        }
+
+        if ($memoryState === 'resume_ready') {
+            return 'cta_bundle_revisit';
+        }
+
+        if ($currentIntentCluster === 'career_move' || str_starts_with($primaryFocusKey, 'career.')) {
+            return 'cta_bundle_career';
+        }
+
+        if ($currentIntentCluster === 'relationship_tuning' || str_starts_with($primaryFocusKey, 'relationships.')) {
+            return 'cta_bundle_relationship';
+        }
+
+        if (! $hasUnlock && in_array($currentIntentCluster, ['clarify_type', 'deep_reading'], true)) {
+            return 'cta_bundle_unlock_deepening';
+        }
+
+        if (! $hasUnlock && $currentIntentCluster === 'action_activation') {
+            return 'cta_bundle_low_pressure';
+        }
+
+        if ((bool) data_get($personalization, 'user_state.has_share', false)) {
+            return 'cta_bundle_share_forward';
+        }
+
+        return 'cta_bundle_growth';
     }
 
     /**
@@ -969,6 +1112,22 @@ final class MbtiResultPersonalizationService
         }
 
         return sprintf('recommended-read-%d', $index + 1);
+    }
+
+    /**
+     * @param  mixed  $value
+     * @return list<string>
+     */
+    private function normalizeStringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        return array_values(array_unique(array_filter(array_map(
+            static fn (mixed $item): string => trim((string) $item),
+            $value
+        ))));
     }
 
     /**
@@ -3396,6 +3555,39 @@ final class MbtiResultPersonalizationService
         return $locale === 'zh-CN'
             ? []
             : [];
+    }
+
+    private function loadCommercialSpecDoc(array $context, string $locale): array
+    {
+        $packId = trim((string) ($context['pack_id'] ?? ''));
+        $dirVersion = trim((string) ($context['dir_version'] ?? ''));
+        $requestedLocale = $this->normalizeLocale($locale);
+
+        if ($packId !== '' && $dirVersion !== '') {
+            $found = $this->packsIndex->find($packId, $dirVersion);
+            if (($found['ok'] ?? false) === true) {
+                $item = is_array($found['item'] ?? null) ? $found['item'] : [];
+                $manifestPath = trim((string) ($item['manifest_path'] ?? ''));
+                if ($manifestPath !== '' && is_file($manifestPath)) {
+                    $manifest = json_decode((string) file_get_contents($manifestPath), true);
+                    $manifestLocale = $this->normalizeLocale((string) ($item['locale'] ?? (is_array($manifest) ? ($manifest['locale'] ?? '') : '')));
+                    if ($manifestLocale !== '' && $requestedLocale !== '' && $manifestLocale !== $requestedLocale) {
+                        return [];
+                    }
+
+                    $baseDir = dirname($manifestPath);
+                    $path = $baseDir.DIRECTORY_SEPARATOR.'commercial_spec.json';
+                    if (is_file($path)) {
+                        $json = json_decode((string) file_get_contents($path), true);
+                        if (is_array($json)) {
+                            return $json;
+                        }
+                    }
+                }
+            }
+        }
+
+        return [];
     }
 
     /**

@@ -847,6 +847,7 @@ final class MbtiLongitudinalMemoryService
         foreach ($orderedRecommendationKeys as $index => $key) {
             $orderMap[$key] = $index;
         }
+        $tagWeights = $this->buildRecommendationTagWeights($memory);
 
         $scored = [];
         foreach ($candidates as $index => $candidate) {
@@ -873,6 +874,8 @@ final class MbtiLongitudinalMemoryService
                     $score += 50;
                 }
             }
+
+            $score += $this->scoreCandidateTags($candidate, $tagWeights);
 
             if (isset($orderMap[$key])) {
                 $score += max(0, 70 - ((int) $orderMap[$key] * 5));
@@ -911,6 +914,76 @@ final class MbtiLongitudinalMemoryService
         }
 
         return array_values(array_slice(array_unique(array_filter($selected)), 0, 4));
+    }
+
+    /**
+     * @param  array<string, mixed>  $memory
+     * @return array<string, int>
+     */
+    private function buildRecommendationTagWeights(array $memory): array
+    {
+        $weights = [];
+
+        $memoryState = strtolower(trim((string) ($memory['memory_state'] ?? '')));
+        if ($memoryState !== '') {
+            $weights['memory:'.$memoryState] = 100;
+        }
+
+        foreach ($this->normalizeStringList($memory['dominant_interest_keys'] ?? []) as $interestKey) {
+            $weights['focus:'.$this->normalizeKey($interestKey)] = 90;
+        }
+
+        foreach ($this->normalizeStringList($memory['resume_bias_keys'] ?? []) as $resumeKey) {
+            foreach ($this->resumeBiasKeyToTags($resumeKey) as $tag) {
+                $weights[$tag] = max($weights[$tag] ?? 0, 85);
+            }
+        }
+
+        return $weights;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function resumeBiasKeyToTags(string $resumeKey): array
+    {
+        $normalized = strtolower(trim($resumeKey));
+        if ($normalized === '') {
+            return [];
+        }
+
+        return match (true) {
+            str_contains($normalized, 'career') || str_contains($normalized, 'work') => ['focus:career_next_step', 'scene:work'],
+            str_contains($normalized, 'relationship') || str_contains($normalized, 'communication') => ['focus:relationship_repair', 'scene:communication'],
+            str_contains($normalized, 'watchout') || str_contains($normalized, 'stability') => ['focus:growth_recovery', 'scene:stress_recovery'],
+            default => ['focus:revisit_resume', 'scene:growth'],
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @param  array<string, int>  $weights
+     */
+    private function scoreCandidateTags(array $candidate, array $weights): int
+    {
+        $score = 0;
+        foreach ($this->normalizeCandidateTags($candidate) as $tag) {
+            $score += (int) ($weights[$tag] ?? 0);
+        }
+
+        return $score;
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @return list<string>
+     */
+    private function normalizeCandidateTags(array $candidate): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn (mixed $tag): string => strtolower(trim((string) $tag)),
+            is_array($candidate['tags'] ?? null) ? $candidate['tags'] : []
+        ))));
     }
 
     /**

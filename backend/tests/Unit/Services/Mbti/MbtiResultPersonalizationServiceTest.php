@@ -29,7 +29,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
                     'type' => 'article',
                     'title' => '一周行动实验',
                     'priority' => 30,
-                    'tags' => ['growth', 'action'],
+                    'tags' => ['growth', 'action', 'intent:action_activation', 'scene:growth', 'focus:growth_clarity'],
                     'url' => 'https://example.com/read-action',
                 ],
                 [
@@ -37,7 +37,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
                     'type' => 'article',
                     'title' => '职业环境匹配',
                     'priority' => 10,
-                    'tags' => ['career', 'work'],
+                    'tags' => ['career', 'work', 'intent:career_move', 'scene:work', 'focus:career_next_step'],
                     'url' => 'https://example.com/read-career',
                 ],
                 [
@@ -45,8 +45,24 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
                     'type' => 'article',
                     'title' => '边界类型解释',
                     'priority' => 25,
-                    'tags' => ['explainability', 'mbti'],
+                    'tags' => ['explainability', 'mbti', 'intent:clarify_type', 'scene:stress_recovery', 'focus:growth_boundary'],
                     'url' => 'https://example.com/read-explain',
+                ],
+                [
+                    'id' => 'read-resume',
+                    'type' => 'article',
+                    'title' => '复访后怎么重新接上进度',
+                    'priority' => 14,
+                    'tags' => ['growth', 'memory:resume_ready', 'intent:deep_reading', 'scene:growth', 'focus:revisit_resume'],
+                    'url' => 'https://example.com/read-resume',
+                ],
+                [
+                    'id' => 'read-relationship',
+                    'type' => 'article',
+                    'title' => '关系误读修复',
+                    'priority' => 22,
+                    'tags' => ['relationship', 'communication', 'intent:relationship_tuning', 'scene:communication', 'focus:relationship_repair'],
+                    'url' => 'https://example.com/read-relationship',
                 ],
             ],
             'scores' => [
@@ -181,7 +197,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $recommendationSelectionKeys = (array) data_get($clear, 'recommendation_selection_keys');
         sort($recommendationSelectionKeys);
         $this->assertSame(
-            ['read-action', 'read-career', 'read-explain'],
+            ['read-action', 'read-career', 'read-explain', 'read-relationship'],
             $recommendationSelectionKeys
         );
         $this->assertSame(
@@ -214,8 +230,14 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             ['unlock_full_report', 'career_bridge', 'share_result'],
             data_get($clear, 'orchestration.cta_priority_keys')
         );
+        $this->assertSame('cta_bundle_growth', data_get($clear, 'cta_bundle_v1.bundle_key'));
+        $this->assertSame('growth', data_get($clear, 'cta_bundle_v1.cta_intent'));
+        $this->assertSame('guided', data_get($clear, 'cta_bundle_v1.softness_mode'));
+        $this->assertSame('growth_clarity_loop', data_get($clear, 'cta_bundle_v1.entry_reason'));
+        $this->assertSame('cta_bundle_growth', data_get($clear, 'orchestration.cta_bundle_key'));
+        $this->assertSame('growth_clarity_loop', data_get($clear, 'orchestration.cta_entry_reason'));
         $this->assertSame(
-            ['read-action', 'read-career', 'read-explain'],
+            ['read-action', 'read-career', 'read-explain', 'read-resume', 'read-relationship'],
             data_get($clear, 'ordered_recommendation_keys')
         );
         $this->assertSame('read-action', data_get($clear, 'reading_focus_key'));
@@ -618,6 +640,40 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'profile' => [
                 'type_code' => 'ENFP-T',
             ],
+            'recommended_reads' => [
+                [
+                    'id' => 'read-action',
+                    'type' => 'article',
+                    'title' => '一周行动实验',
+                    'priority' => 30,
+                    'tags' => ['growth', 'action', 'intent:action_activation', 'scene:growth', 'focus:growth_clarity'],
+                    'url' => 'https://example.com/read-action',
+                ],
+                [
+                    'id' => 'read-career',
+                    'type' => 'article',
+                    'title' => '职业环境匹配',
+                    'priority' => 10,
+                    'tags' => ['career', 'work', 'intent:career_move', 'scene:work', 'focus:career_next_step'],
+                    'url' => 'https://example.com/read-career',
+                ],
+                [
+                    'id' => 'read-explain',
+                    'type' => 'article',
+                    'title' => '边界类型解释',
+                    'priority' => 25,
+                    'tags' => ['explainability', 'mbti', 'intent:clarify_type', 'scene:stress_recovery', 'focus:growth_boundary'],
+                    'url' => 'https://example.com/read-explain',
+                ],
+                [
+                    'id' => 'read-relationship',
+                    'type' => 'article',
+                    'title' => '关系误读修复',
+                    'priority' => 22,
+                    'tags' => ['relationship', 'communication', 'intent:relationship_tuning', 'scene:communication', 'focus:relationship_repair'],
+                    'url' => 'https://example.com/read-relationship',
+                ],
+            ],
             'scores' => [
                 'EI' => ['pct' => 67, 'delta' => 17, 'side' => 'E', 'state' => 'clear'],
                 'SN' => ['pct' => 64, 'delta' => 14, 'side' => 'N', 'state' => 'clear'],
@@ -678,6 +734,12 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertNotSame(
             data_get($clarify, 'selection_fingerprint'),
             data_get($careerMove, 'selection_fingerprint')
+        );
+        $this->assertContains('read-explain', (array) data_get($clarify, 'recommendation_selection_keys', []));
+        $this->assertContains('read-career', (array) data_get($careerMove, 'recommendation_selection_keys', []));
+        $this->assertNotSame(
+            data_get($clarify, 'recommendation_selection_keys'),
+            data_get($careerMove, 'recommendation_selection_keys')
         );
     }
 

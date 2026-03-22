@@ -83,9 +83,10 @@ final class MbtiLongitudinalMemoryServiceTest extends TestCase
             'action_selection_keys' => [],
             'recommendation_selection_keys' => ['read-growth', 'read-explain'],
             'recommended_read_candidates' => [
-                ['key' => 'read-growth', 'title' => 'Growth loop', 'priority' => 20, 'tags' => ['growth']],
-                ['key' => 'read-career', 'title' => 'Career next step', 'priority' => 10, 'tags' => ['career', 'work']],
-                ['key' => 'read-explain', 'title' => 'Type explainability', 'priority' => 15, 'tags' => ['mbti', 'type']],
+                ['key' => 'read-growth', 'title' => 'Growth loop', 'priority' => 20, 'tags' => ['growth', 'intent:action_activation', 'scene:growth', 'focus:growth_clarity']],
+                ['key' => 'read-career', 'title' => 'Career next step', 'priority' => 10, 'tags' => ['career', 'work', 'intent:career_move', 'scene:work', 'focus:career_next_step']],
+                ['key' => 'read-explain', 'title' => 'Type explainability', 'priority' => 15, 'tags' => ['mbti', 'type', 'intent:clarify_type', 'scene:stress_recovery', 'focus:growth_boundary']],
+                ['key' => 'read-resume', 'title' => 'Resume and re-enter', 'priority' => 8, 'tags' => ['memory:resume_ready', 'intent:deep_reading', 'scene:growth', 'focus:revisit_resume']],
             ],
             'ordered_recommendation_keys' => ['read-growth', 'read-explain', 'read-career'],
             'ordered_action_keys' => ['career_bridge.theme.clarify_decision_criteria', 'weekly_action.theme.protect_energy_lane'],
@@ -147,6 +148,7 @@ final class MbtiLongitudinalMemoryServiceTest extends TestCase
             (string) (($personalization['section_selection_keys']['career.next_step'] ?? ''))
         );
         $this->assertContains('read-career', data_get($personalization, 'recommendation_selection_keys', []));
+        $this->assertContains('read-resume', data_get($personalization, 'recommendation_selection_keys', []));
         $this->assertNotSame('same-type-only', data_get($personalization, 'selection_fingerprint'));
     }
 
