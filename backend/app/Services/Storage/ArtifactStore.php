@@ -11,6 +11,8 @@ final class ArtifactStore
 {
     public function __construct(
         private readonly BlobCatalogService $blobCatalogService,
+        private readonly ReportArtifactCatalogWriter $reportArtifactCatalogWriter,
+        private readonly UnifiedAccessProjectionWriter $unifiedAccessProjectionWriter,
     ) {}
 
     public function reportCanonicalPath(string $scaleCode, string $attemptId): string
@@ -53,7 +55,18 @@ final class ArtifactStore
         }
 
         Storage::disk('local')->put($path, $json);
-        $this->catalogBlobMetadata($json, 'application/json');
+        $this->catalogBlobMetadata(
+            $path,
+            $json,
+            'application/json',
+            'canonical_file',
+            [
+                'artifact_kind' => 'report_json',
+                'scale_code' => $scaleCode,
+                'attempt_id' => $attemptId,
+            ]
+        );
+        $this->recordReportJsonSidecars($scaleCode, $attemptId, $path, $json, $payload);
 
         return $path;
     }
@@ -116,7 +129,24 @@ final class ArtifactStore
     public function putPdf(string $path, string $bytes): void
     {
         Storage::disk('local')->put($path, $bytes);
-        $this->catalogBlobMetadata($bytes, 'application/pdf');
+        $context = $this->pdfContextFromPath($path);
+        $this->catalogBlobMetadata(
+            $path,
+            $bytes,
+            'application/pdf',
+            'canonical_file',
+            [
+                'artifact_kind' => 'report_pdf',
+                'scale_code' => $context['scale_code'] ?? null,
+                'attempt_id' => $context['attempt_id'] ?? null,
+                'manifest_hash' => $context['manifest_hash'] ?? null,
+                'variant' => $context['variant'] ?? null,
+            ]
+        );
+
+        if (is_array($context)) {
+            $this->recordReportPdfSidecars($context, $path, $bytes);
+        }
     }
 
     /**
@@ -156,7 +186,16 @@ final class ArtifactStore
         return is_string($contents) && $contents !== '' ? $contents : null;
     }
 
-    private function catalogBlobMetadata(string $content, string $contentType): void
+    /**
+     * @param  array<string,mixed>  $meta
+     */
+    private function catalogBlobMetadata(
+        string $storagePath,
+        string $content,
+        string $contentType,
+        string $locationKind,
+        array $meta = []
+    ): void
     {
         if (! $this->shouldDualWriteBlobCatalog()) {
             return;
@@ -167,7 +206,7 @@ final class ArtifactStore
             $now = now();
             $existing = $this->blobCatalogService->findByHash($hash);
 
-            $this->blobCatalogService->upsertBlob([
+            $blob = $this->blobCatalogService->upsertBlob([
                 'hash' => $hash,
                 'disk' => 'local',
                 'storage_path' => $this->blobCatalogService->storagePathForHash($hash),
@@ -178,12 +217,135 @@ final class ArtifactStore
                 'first_seen_at' => $existing?->first_seen_at ?? $now,
                 'last_verified_at' => $now,
             ]);
+
+            $this->blobCatalogService->upsertBlobLocation([
+                'blob_hash' => $blob->hash,
+                'disk' => 'local',
+                'storage_path' => $storagePath,
+                'location_kind' => $locationKind,
+                'size_bytes' => strlen($content),
+                'checksum' => $hash,
+                'etag' => $hash,
+                'storage_class' => 'local',
+                'verified_at' => $now,
+                'meta_json' => array_filter($meta, static fn (mixed $value): bool => $value !== null),
+            ]);
         } catch (\Throwable $e) {
             Log::warning('ARTIFACT_BLOB_CATALOG_WRITE_FAILED', [
+                'storage_path' => $storagePath,
                 'content_type' => $contentType,
                 'error' => $e->getMessage(),
             ]);
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function recordReportJsonSidecars(
+        string $scaleCode,
+        string $attemptId,
+        string $storagePath,
+        string $json,
+        array $payload
+    ): void {
+        try {
+            $this->reportArtifactCatalogWriter->recordReportJsonMaterialized(
+                $attemptId,
+                $scaleCode,
+                $storagePath,
+                $json,
+                $payload
+            );
+
+            $this->unifiedAccessProjectionWriter->refreshAttemptProjection(
+                $attemptId,
+                [
+                    'report_state' => 'ready',
+                    'reason_code' => 'report_json_materialized',
+                ],
+                [
+                    'source_system' => 'artifact_store',
+                    'source_ref' => $storagePath,
+                    'actor_type' => 'system',
+                    'actor_id' => 'artifact_store',
+                ]
+            );
+        } catch (\Throwable $e) {
+            Log::warning('REPORT_JSON_SIDE_CAR_WRITE_FAILED', [
+                'attempt_id' => $attemptId,
+                'storage_path' => $storagePath,
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * @param  array{scale_code:string,attempt_id:string,manifest_hash:string,variant:string}  $context
+     */
+    private function recordReportPdfSidecars(array $context, string $storagePath, string $bytes): void
+    {
+        $attemptId = trim($context['attempt_id']);
+        $scaleCode = trim($context['scale_code']);
+        $manifestHash = trim($context['manifest_hash']);
+        $variant = trim($context['variant']);
+
+        if ($attemptId === '' || $scaleCode === '' || $manifestHash === '' || $variant === '') {
+            return;
+        }
+
+        try {
+            $this->reportArtifactCatalogWriter->recordReportPdfMaterialized(
+                $attemptId,
+                $scaleCode,
+                $variant,
+                $manifestHash,
+                $storagePath,
+                $bytes,
+                [
+                    'manifest_hash' => $manifestHash,
+                    'variant' => $variant,
+                ]
+            );
+
+            $this->unifiedAccessProjectionWriter->refreshAttemptProjection(
+                $attemptId,
+                [
+                    'pdf_state' => 'ready',
+                    'reason_code' => 'report_pdf_materialized',
+                ],
+                [
+                    'source_system' => 'artifact_store',
+                    'source_ref' => $storagePath,
+                    'actor_type' => 'system',
+                    'actor_id' => 'artifact_store',
+                ]
+            );
+        } catch (\Throwable $e) {
+            Log::warning('REPORT_PDF_SIDE_CAR_WRITE_FAILED', [
+                'attempt_id' => $attemptId,
+                'storage_path' => $storagePath,
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * @return array{scale_code:string,attempt_id:string,manifest_hash:string,variant:string}|null
+     */
+    private function pdfContextFromPath(string $path): ?array
+    {
+        $path = ltrim(str_replace('\\', '/', trim($path)), '/');
+        if (preg_match('#^artifacts/pdf/([^/]+)/([^/]+)/([^/]+)/report_(free|full)\.pdf$#', $path, $matches) !== 1) {
+            return null;
+        }
+
+        return [
+            'scale_code' => (string) $matches[1],
+            'attempt_id' => (string) $matches[2],
+            'manifest_hash' => (string) $matches[3],
+            'variant' => (string) $matches[4],
+        ];
     }
 
     private function shouldDualWriteBlobCatalog(): bool

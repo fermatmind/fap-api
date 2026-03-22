@@ -11,6 +11,7 @@ use App\Services\Commerce\BenefitWalletService;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Report\ReportSnapshotStore;
+use App\Services\Storage\UnifiedAccessProjectionWriter;
 use App\Services\V0_3\MbtiCompareInviteService;
 use App\Support\OrgContext;
 use Illuminate\Support\Facades\Log;
@@ -27,6 +28,7 @@ final class AttemptSubmitSideEffects
         private EventRecorder $eventRecorder,
         private ReportGatekeeper $reportGatekeeper,
         private MbtiCompareInviteService $mbtiCompareInvites,
+        private UnifiedAccessProjectionWriter $accessProjections,
     ) {}
 
     public function runAfterSubmit(OrgContext $ctx, array $payload, ?string $actorUserId, ?string $actorAnonId): ?array
@@ -200,6 +202,42 @@ final class AttemptSubmitSideEffects
             ]);
 
             return null;
+        }
+
+        try {
+            $this->accessProjections->refreshAttemptProjection(
+                $attemptId,
+                [
+                    'access_state' => 'locked',
+                    'report_state' => 'pending',
+                    'pdf_state' => 'missing',
+                    'reason_code' => 'submit_received',
+                    'actions_json' => [
+                        'report' => true,
+                        'pdf' => false,
+                    ],
+                    'payload_json' => [
+                        'org_id' => $orgId,
+                        'scale_code' => $scaleCode,
+                        'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                        'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+                        'pack_id' => $packId,
+                        'dir_version' => $dirVersion,
+                    ],
+                ],
+                [
+                    'source_system' => 'attempt_submit',
+                    'source_ref' => $attemptId,
+                    'actor_type' => $actorUserId !== null ? 'user' : 'anon',
+                    'actor_id' => $actorUserId ?? $actorAnonId,
+                ]
+            );
+        } catch (\Throwable $e) {
+            Log::warning('SUBMIT_POST_COMMIT_ACCESS_PROJECTION_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'exception' => $e,
+            ]);
         }
 
         return [
