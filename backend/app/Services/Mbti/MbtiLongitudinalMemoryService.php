@@ -713,8 +713,8 @@ final class MbtiLongitudinalMemoryService
     private function preferredKindsForMode(string $sectionKey, string $selectionMode): array
     {
         return match ($sectionKey) {
-            'traits.why_this_type' => ['why_this_type', 'boundary', 'identity'],
-            'growth.stability_confidence' => ['stability_explanation', 'boundary'],
+            'traits.why_this_type' => ['why_this_type', 'misunderstanding_fix', 'boundary', 'identity'],
+            'growth.stability_confidence' => ['stability_explanation', 'stability_reframe', 'stress_recovery', 'boundary'],
             'growth.next_actions' => $selectionMode === 'memory.action_refine'
                 ? ['next_action', 'boundary', 'identity']
                 : ['next_action', 'identity', 'axis_strength'],
@@ -729,7 +729,7 @@ final class MbtiLongitudinalMemoryService
     private function maxBlocksForSection(string $sectionKey, string $selectionMode): int
     {
         return match ($sectionKey) {
-            'growth.stability_confidence' => 2,
+            'growth.stability_confidence' => 3,
             'traits.why_this_type' => $selectionMode === 'memory.explainability_resume' ? 3 : 2,
             default => 3,
         };

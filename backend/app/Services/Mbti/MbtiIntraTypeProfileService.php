@@ -740,12 +740,12 @@ final class MbtiIntraTypeProfileService
     {
         return match ($sectionKey) {
             'traits.why_this_type' => match ($selectionMode) {
-                'explain_boundary' => ['why_this_type', 'boundary', 'axis_strength', 'identity'],
+                'explain_boundary' => ['why_this_type', 'misunderstanding_fix', 'boundary', 'axis_strength', 'identity'],
                 default => ['why_this_type', 'identity', 'axis_strength'],
             },
             'growth.stability_confidence' => match ($selectionMode) {
-                'boundary_buffered' => ['stability_explanation', 'boundary'],
-                default => ['stability_explanation'],
+                'boundary_buffered' => ['stability_explanation', 'stability_reframe', 'stress_recovery', 'boundary'],
+                default => ['stability_explanation', 'stability_reframe'],
             },
             'growth.next_actions' => match ($selectionMode) {
                 'action_career_bridge' => ['next_action', 'axis_strength', 'boundary'],
@@ -783,7 +783,7 @@ final class MbtiIntraTypeProfileService
     private function maxBlocksForSection(string $sectionKey, string $selectionMode): int
     {
         return match ($sectionKey) {
-            'growth.stability_confidence' => $selectionMode === 'stability_core' ? 1 : 2,
+            'growth.stability_confidence' => $selectionMode === 'stability_core' ? 2 : 3,
             'traits.adjacent_type_contrast' => $selectionMode === 'contrast_neighbor' ? 2 : 3,
             default => 3,
         };

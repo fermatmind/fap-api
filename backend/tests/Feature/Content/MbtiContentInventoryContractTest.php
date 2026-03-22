@@ -58,6 +58,13 @@ final class MbtiContentInventoryContractTest extends TestCase
             static fn (array $family): string => trim((string) ($family['key'] ?? '')),
             $families
         )));
+        $familyIndex = [];
+        foreach ($families as $family) {
+            $familyKey = trim((string) ($family['key'] ?? ''));
+            if ($familyKey !== '') {
+                $familyIndex[$familyKey] = $family;
+            }
+        }
 
         $this->assertEqualsCanonicalizing([
             'explainability_fragment',
@@ -75,6 +82,8 @@ final class MbtiContentInventoryContractTest extends TestCase
             'revisit_fragment',
             'adaptive_response_fragment',
         ], $familyKeys);
+        $this->assertContains('misunderstanding_fix', data_get($familyIndex, 'explainability_fragment.block_kinds', []));
+        $this->assertContains('stability_reframe', data_get($familyIndex, 'explainability_fragment.block_kinds', []));
 
         $selectionTagSchema = is_array($inventory['selection_tag_schema'] ?? null) ? $inventory['selection_tag_schema'] : [];
         foreach ([
@@ -128,6 +137,7 @@ final class MbtiContentInventoryContractTest extends TestCase
 
         $this->assertSame('scene_fragment', $matrixIndex['overview']['primary_family'] ?? null);
         $this->assertSame('explainability_fragment', $matrixIndex['traits.why_this_type']['primary_family'] ?? null);
+        $this->assertContains('explainability_fragment', $matrixIndex['growth.stability_confidence']['secondary_families'] ?? []);
         $this->assertSame('action_fragment', $matrixIndex['growth.next_actions']['primary_family'] ?? null);
         $this->assertSame('cta_bundle_fragment', $matrixIndex['cta.surface']['primary_family'] ?? null);
     }

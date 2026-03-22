@@ -350,6 +350,14 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'traits.why_this_type:EI.E.clear:identity.T:boundary.JP',
             $clear['variant_keys']['traits.why_this_type'] ?? null
         );
+        $this->assertEqualsCanonicalizing(
+            [
+                'traits.why_this_type.why_this_type.ei',
+                'traits.why_this_type.misunderstanding_fix.ei',
+                'traits.why_this_type.axis_strength.EI.E.clear',
+            ],
+            $clear['sections']['traits.why_this_type']['selected_blocks'] ?? null
+        );
         $this->assertSame(
             'traits.close_call_axes:JP.J.boundary:identity.T:boundary.JP',
             $clear['variant_keys']['traits.close_call_axes'] ?? null
@@ -358,9 +366,25 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'traits.adjacent_type_contrast:JP.J.boundary:identity.T:neighbor.ENFJ',
             $clear['variant_keys']['traits.adjacent_type_contrast'] ?? null
         );
+        $this->assertEqualsCanonicalizing(
+            [
+                'traits.adjacent_type_contrast.adjacent_type_contrast.jp',
+                'traits.adjacent_type_contrast.identity.t',
+                'traits.adjacent_type_contrast.misunderstanding_fix.enfj',
+            ],
+            $clear['sections']['traits.adjacent_type_contrast']['selected_blocks'] ?? null
+        );
         $this->assertSame(
             'growth.stability_confidence:stability.context_sensitive:identity.T:boundary.JP',
             $clear['variant_keys']['growth.stability_confidence'] ?? null
+        );
+        $this->assertSame(
+            [
+                'growth.stability_confidence.stability.context_sensitive',
+                'growth.stability_confidence.stability_reframe.context_sensitive',
+                'growth.stability_confidence.stress_recovery.JP',
+            ],
+            $clear['sections']['growth.stability_confidence']['selected_blocks'] ?? null
         );
         $this->assertSame(
             'traits.why_this_type:dominant.EI.E.clear',
@@ -471,6 +495,10 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             $clear['sections']['traits.why_this_type']['blocks'][1]['kind'] ?? null
         );
         $this->assertSame(
+            'misunderstanding_fix',
+            $clear['sections']['traits.why_this_type']['blocks'][2]['kind'] ?? null
+        );
+        $this->assertSame(
             'borderline_axis',
             $clear['sections']['traits.close_call_axes']['blocks'][0]['kind'] ?? null
         );
@@ -481,6 +509,14 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame(
             'stability_explanation',
             $clear['sections']['growth.stability_confidence']['blocks'][0]['kind'] ?? null
+        );
+        $this->assertSame(
+            'stability_reframe',
+            $clear['sections']['growth.stability_confidence']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertSame(
+            'stress_recovery',
+            $clear['sections']['growth.stability_confidence']['blocks'][2]['kind'] ?? null
         );
         $this->assertSame(
             'next_action',
@@ -503,6 +539,10 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             (string) ($clear['sections']['traits.why_this_type']['blocks'][1]['text'] ?? '')
         );
         $this->assertStringContainsString(
+            '误读',
+            (string) ($clear['sections']['traits.why_this_type']['blocks'][2]['text'] ?? '')
+        );
+        $this->assertStringContainsString(
             '只拉开了7个点差',
             (string) ($clear['sections']['traits.close_call_axes']['blocks'][0]['text'] ?? '')
         );
@@ -511,8 +551,20 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             (string) ($clear['sections']['traits.adjacent_type_contrast']['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
+            '回到',
+            (string) ($clear['sections']['traits.adjacent_type_contrast']['blocks'][1]['text'] ?? '')
+        );
+        $this->assertStringContainsString(
             '情境敏感型稳定',
             (string) ($clear['sections']['growth.stability_confidence']['blocks'][0]['text'] ?? '')
+        );
+        $this->assertStringContainsString(
+            '恢复入口',
+            (string) ($clear['sections']['growth.stability_confidence']['blocks'][1]['text'] ?? '')
+        );
+        $this->assertStringContainsString(
+            '自救方式',
+            (string) ($clear['sections']['growth.stability_confidence']['blocks'][2]['text'] ?? '')
         );
         $this->assertStringContainsString(
             '压力升高时',
