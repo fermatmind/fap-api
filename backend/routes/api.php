@@ -183,6 +183,9 @@ Route::prefix('v0.3')->middleware([
         Route::get('/attempts/{id}/report', [AttemptReadController::class, 'report'])
             ->middleware('uuid:id')
             ->name('api.v0_3.attempts.report');
+        Route::get('/attempts/{id}/report-access', [AttemptReadController::class, 'reportAccess'])
+            ->middleware('uuid:id')
+            ->name('api.v0_3.attempts.report_access');
         Route::get('/attempts/{id}/report.pdf', [AttemptReadController::class, 'reportPdf'])
             ->middleware('uuid:id')
             ->name('api.v0_3.attempts.report_pdf');
