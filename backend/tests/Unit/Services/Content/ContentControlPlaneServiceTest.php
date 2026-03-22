@@ -58,10 +58,68 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertArrayHasKey('locale_scope', $contract);
         $this->assertArrayHasKey('experiment_scope', $contract);
         $this->assertArrayHasKey('runtime_artifact_ref', $contract);
+        $this->assertArrayHasKey('content_objects_v1', $contract);
         $this->assertSame('compiled', $contract['compile_status']);
         $this->assertSame('passing', $contract['governance_status']);
         $this->assertNull($contract['runtime_artifact_ref']);
         $this->assertNotEmpty($contract['content_object_inventory']);
+
+        $objects = collect($contract['content_objects_v1']);
+        $this->assertNotEmpty($objects);
+        $this->assertEqualsCanonicalizing([
+            'narrative_fragment',
+            'calibration_copy',
+            'cta_overlay',
+            'faq_explainability_copy',
+            'scene_fragment',
+            'action_fragment',
+            'locale_variant_draft',
+            'experiment_overlay',
+            'release_candidate_metadata',
+        ], $objects->pluck('content_object_type')->all());
+
+        $requiredKeys = [
+            'content_object_v1',
+            'content_object_id',
+            'content_object_type',
+            'authoring_scope',
+            'draft_state',
+            'revision_no',
+            'review_state',
+            'preview_target',
+            'compile_status',
+            'governance_status',
+            'release_candidate_status',
+            'publish_target',
+            'rollback_target',
+            'locale_scope',
+            'experiment_scope',
+            'runtime_artifact_ref',
+            'source_pack_version_id',
+            'source_release_id',
+            'governance_profile',
+        ];
+
+        foreach ($objects as $object) {
+            foreach ($requiredKeys as $key) {
+                $this->assertArrayHasKey($key, $object);
+            }
+        }
+
+        $this->assertTrue($objects->every(fn (array $object): bool => $object['runtime_artifact_ref'] === null));
+
+        $objectsByType = $objects->keyBy('content_object_type');
+        $this->assertSame('locale_variant_draft_ready', $objectsByType['locale_variant_draft']['draft_state']);
+        $this->assertSame('locale_review_ready', $objectsByType['locale_variant_draft']['review_state']);
+        $this->assertSame('draft_only', $objectsByType['locale_variant_draft']['release_candidate_status']);
+        $this->assertNull($objectsByType['locale_variant_draft']['publish_target']);
+        $this->assertNull($objectsByType['locale_variant_draft']['runtime_artifact_ref']);
+
+        $this->assertSame('release_metadata_ready', $objectsByType['release_candidate_metadata']['draft_state']);
+        $this->assertSame('release_review_ready', $objectsByType['release_candidate_metadata']['review_state']);
+        $this->assertSame('ready_for_release_review', $objectsByType['release_candidate_metadata']['release_candidate_status']);
+        $this->assertNull($objectsByType['release_candidate_metadata']['publish_target']);
+        $this->assertNull($objectsByType['release_candidate_metadata']['runtime_artifact_ref']);
     }
 
     public function test_draft_requires_publish_before_runtime_artifact_ref_exists(): void
@@ -78,6 +136,9 @@ final class ContentControlPlaneServiceTest extends TestCase
 
         $this->assertSame('draft_ready', $draftContract['draft_state']);
         $this->assertNull($draftContract['runtime_artifact_ref']);
+        $this->assertTrue(collect($draftContract['content_objects_v1'])->every(
+            fn (array $object): bool => $object['runtime_artifact_ref'] === null
+        ));
 
         $this->insertSuccessfulPublishRelease(
             (string) $version->id,
@@ -94,6 +155,17 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertSame('published', $publishedContract['draft_state']);
         $this->assertIsArray($publishedContract['runtime_artifact_ref']);
         $this->assertSame((string) $version->content_package_version, $publishedContract['runtime_artifact_ref']['pack_version']);
+
+        $publishedObjects = collect($publishedContract['content_objects_v1'])->keyBy('content_object_type');
+        $this->assertIsArray($publishedObjects['narrative_fragment']['runtime_artifact_ref']);
+        $this->assertSame((string) $version->id, $publishedObjects['narrative_fragment']['source_pack_version_id']);
+        $this->assertNotNull($publishedObjects['narrative_fragment']['source_release_id']);
+        $this->assertNull($publishedObjects['locale_variant_draft']['runtime_artifact_ref']);
+        $this->assertNull($publishedObjects['locale_variant_draft']['source_release_id']);
+        $this->assertSame('draft_only', $publishedObjects['locale_variant_draft']['release_candidate_status']);
+        $this->assertNull($publishedObjects['release_candidate_metadata']['runtime_artifact_ref']);
+        $this->assertNull($publishedObjects['release_candidate_metadata']['source_release_id']);
+        $this->assertSame('published_release_metadata', $publishedObjects['release_candidate_metadata']['release_candidate_status']);
     }
 
     public function test_published_version_exposes_previous_release_as_rollback_target(): void
@@ -137,6 +209,13 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertSame('published', $contract['release_candidate_status']);
         $this->assertIsArray($contract['rollback_target']);
         $this->assertSame($previousReleaseId, $contract['rollback_target']['release_id']);
+
+        $publishedObject = collect($contract['content_objects_v1'])
+            ->first(fn (array $object): bool => is_array($object['runtime_artifact_ref'] ?? null));
+
+        $this->assertIsArray($publishedObject);
+        $this->assertIsArray($publishedObject['rollback_target']);
+        $this->assertSame($previousReleaseId, $publishedObject['rollback_target']['release_id']);
     }
 
     /**

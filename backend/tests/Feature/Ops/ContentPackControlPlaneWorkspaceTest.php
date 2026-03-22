@@ -68,7 +68,13 @@ final class ContentPackControlPlaneWorkspaceTest extends TestCase
             ->assertSee('Content control plane')
             ->assertSee('Draft state')
             ->assertSee('Runtime artifact ref')
-            ->assertSee('First-wave managed objects');
+            ->assertSee('First-wave managed objects')
+            ->assertSee('Object-level contracts')
+            ->assertSee('narrative_fragment')
+            ->assertSee('release_candidate_metadata')
+            ->assertSee('locale_variant_draft')
+            ->assertSee('draft_only')
+            ->assertSee('release_metadata_pending');
     }
 
     private function createSelectedOrg(): Organization

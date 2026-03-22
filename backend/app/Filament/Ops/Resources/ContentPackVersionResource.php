@@ -116,6 +116,10 @@ class ContentPackVersionResource extends Resource
                         ->label('First-wave managed objects')
                         ->content(fn (?ContentPackVersion $record): HtmlString => self::renderObjectInventory($record))
                         ->columnSpanFull(),
+                    Forms\Components\Placeholder::make('cp.content_objects_v1')
+                        ->label('Object-level contracts')
+                        ->content(fn (?ContentPackVersion $record): HtmlString => self::renderObjectContracts($record))
+                        ->columnSpanFull(),
                 ])
                 ->columns(1),
             Forms\Components\Grid::make(2)
@@ -221,6 +225,7 @@ class ContentPackVersionResource extends Resource
                 ],
                 'runtime_artifact_ref' => null,
                 'content_object_inventory' => [],
+                'content_objects_v1' => [],
             ];
         }
 
@@ -306,6 +311,42 @@ class ContentPackVersionResource extends Resource
 
             return e($type).': '.($enabled ? 'enabled' : 'not_in_scope');
         }, $inventory);
+        $items = array_values(array_filter($items, static fn (string $item): bool => $item !== ''));
+
+        return new HtmlString('<ul><li>'.implode('</li><li>', $items).'</li></ul>');
+    }
+
+    private static function renderObjectContracts(?ContentPackVersion $record): HtmlString
+    {
+        $contracts = self::controlPlaneValue($record, 'content_objects_v1', []);
+        if (! is_array($contracts) || $contracts === []) {
+            return new HtmlString('<span>No object-level control-plane contracts available yet.</span>');
+        }
+
+        $items = array_map(static function (mixed $item): string {
+            if (! is_array($item)) {
+                return '';
+            }
+
+            $artifact = $item['runtime_artifact_ref'] ?? null;
+            $artifactRef = 'runtime_artifact_ref=none';
+            if (is_array($artifact) && $artifact !== []) {
+                $artifactRef = 'runtime_artifact_ref='.(string) ($artifact['storage_path'] ?? ($artifact['dir_alias'] ?? 'published'));
+            }
+
+            $parts = [
+                (string) ($item['content_object_type'] ?? 'unknown'),
+                'draft='.(string) ($item['draft_state'] ?? 'unknown'),
+                'review='.(string) ($item['review_state'] ?? 'unknown'),
+                'compile='.(string) ($item['compile_status'] ?? 'unknown'),
+                'governance='.(string) ($item['governance_status'] ?? 'unknown'),
+                'release_candidate='.(string) ($item['release_candidate_status'] ?? 'unknown'),
+                'locale='.(string) ($item['locale_scope'] ?? 'unknown'),
+                $artifactRef,
+            ];
+
+            return e(implode(' | ', $parts));
+        }, $contracts);
         $items = array_values(array_filter($items, static fn (string $item): bool => $item !== ''));
 
         return new HtmlString('<ul><li>'.implode('</li><li>', $items).'</li></ul>');
