@@ -277,12 +277,14 @@ final class ReportArtifactsRehydrateService
      */
     private function writeSidecars(array $plan, array $payload): void
     {
-        try {
-            $this->ledgerWriter->recordRehydrateExecution($plan, $payload);
-        } catch (\Throwable $e) {
-            Log::warning('REHYDRATE_LEDGER_SIDE_CAR_WRITE_FAILED', [
-                'error' => $e->getMessage(),
-            ]);
+        if (! $this->isFrontDoorExecution($plan)) {
+            try {
+                $this->ledgerWriter->recordRehydrateExecution($plan, $payload);
+            } catch (\Throwable $e) {
+                Log::warning('REHYDRATE_LEDGER_SIDE_CAR_WRITE_FAILED', [
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
 
         foreach ($this->resultItems($payload) as $item) {
@@ -293,6 +295,15 @@ final class ReportArtifactsRehydrateService
 
             $this->refreshProjectionForResult('artifact_rehydrated', 'ready', $item, $payload);
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $plan
+     */
+    private function isFrontDoorExecution(array $plan): bool
+    {
+        return is_array($plan['_front_door'] ?? null)
+            && isset($plan['_front_door']['job_id']);
     }
 
     /**

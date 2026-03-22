@@ -16,6 +16,7 @@ final class ReportArtifactsShrinkService
     public function __construct(
         private readonly ArtifactLifecycleLedgerWriter $ledgerWriter,
         private readonly UnifiedAccessProjectionWriter $accessProjections,
+        private readonly LegalHoldService $legalHoldService,
     ) {}
 
     private const PLAN_SCHEMA = 'storage_shrink_archived_report_artifacts_plan.v1';
@@ -51,6 +52,7 @@ final class ReportArtifactsShrinkService
             'candidate_count' => 0,
             'deleted_count' => 0,
             'skipped_missing_local_count' => 0,
+            'blocked_legal_hold_count' => 0,
             'blocked_missing_remote_count' => 0,
             'blocked_missing_archive_proof_count' => 0,
             'blocked_missing_rehydrate_proof_count' => 0,
@@ -72,6 +74,12 @@ final class ReportArtifactsShrinkService
             $reason = (string) ($evaluation['blocked']['status'] ?? '');
             if ($reason === 'blocked_missing_remote') {
                 $summary['blocked_missing_remote_count']++;
+
+                continue;
+            }
+
+            if ($reason === 'blocked_legal_hold') {
+                $summary['blocked_legal_hold_count']++;
 
                 continue;
             }
@@ -127,6 +135,7 @@ final class ReportArtifactsShrinkService
             'candidate_count' => count($candidates),
             'deleted_count' => 0,
             'skipped_missing_local_count' => 0,
+            'blocked_legal_hold_count' => 0,
             'blocked_missing_remote_count' => 0,
             'blocked_missing_archive_proof_count' => 0,
             'blocked_missing_rehydrate_proof_count' => 0,
@@ -158,6 +167,12 @@ final class ReportArtifactsShrinkService
 
             if ($status === 'blocked_missing_remote') {
                 $summary['blocked_missing_remote_count']++;
+
+                continue;
+            }
+
+            if ($status === 'blocked_legal_hold') {
+                $summary['blocked_legal_hold_count']++;
 
                 continue;
             }
@@ -253,12 +268,14 @@ final class ReportArtifactsShrinkService
      */
     private function writeSidecars(array $plan, array $payload): void
     {
-        try {
-            $this->ledgerWriter->recordShrinkExecution($plan, $payload);
-        } catch (\Throwable $e) {
-            Log::warning('SHRINK_LEDGER_SIDE_CAR_WRITE_FAILED', [
-                'error' => $e->getMessage(),
-            ]);
+        if (! $this->isFrontDoorExecution($plan)) {
+            try {
+                $this->ledgerWriter->recordShrinkExecution($plan, $payload);
+            } catch (\Throwable $e) {
+                Log::warning('SHRINK_LEDGER_SIDE_CAR_WRITE_FAILED', [
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
 
         foreach ($this->resultItems($payload) as $item) {
@@ -269,6 +286,15 @@ final class ReportArtifactsShrinkService
 
             $this->refreshProjectionForResult('artifact_shrunk', 'archived', $item, $payload);
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $plan
+     */
+    private function isFrontDoorExecution(array $plan): bool
+    {
+        return is_array($plan['_front_door'] ?? null)
+            && isset($plan['_front_door']['job_id']);
     }
 
     /**
@@ -492,6 +518,15 @@ final class ReportArtifactsShrinkService
             ];
         }
 
+        $attemptId = trim((string) ($archiveProof['attempt_id'] ?? $localFile['attempt_id'] ?? ''));
+        $blockedReasonCode = $this->legalHoldBlockedReason($attemptId);
+        if ($blockedReasonCode !== null) {
+            return [
+                'status' => 'blocked',
+                'blocked' => $this->blockedEntry($localFile, 'blocked_legal_hold', $blockedReasonCode, $archiveProof),
+            ];
+        }
+
         $localSha256 = $this->normalizeOptionalString($localFile['local_sha256'] ?? null);
         $sourceSha256 = $this->normalizeOptionalString($archiveProof['source_sha256'] ?? null);
         if ($localSha256 === null || $sourceSha256 === null || ! hash_equals($sourceSha256, $localSha256)) {
@@ -605,6 +640,14 @@ final class ReportArtifactsShrinkService
             ];
         }
 
+        $blockedReasonCode = $this->legalHoldBlockedReason(trim((string) ($candidate['attempt_id'] ?? '')));
+        if ($blockedReasonCode !== null) {
+            return $baseResult + [
+                'status' => 'blocked_legal_hold',
+                'reason' => $blockedReasonCode,
+            ];
+        }
+
         $currentSha256 = hash_file('sha256', $absoluteLocalPath);
         if (! is_string($currentSha256) || $currentSha256 === '' || ! hash_equals($sourceSha256, $currentSha256)) {
             return $baseResult + [
@@ -661,6 +704,7 @@ final class ReportArtifactsShrinkService
                 'candidate_count' => (int) ($summary['candidate_count'] ?? 0),
                 'deleted_count' => (int) ($summary['deleted_count'] ?? 0),
                 'skipped_missing_local_count' => (int) ($summary['skipped_missing_local_count'] ?? 0),
+                'blocked_legal_hold_count' => (int) ($summary['blocked_legal_hold_count'] ?? 0),
                 'blocked_missing_remote_count' => (int) ($summary['blocked_missing_remote_count'] ?? 0),
                 'blocked_missing_archive_proof_count' => (int) ($summary['blocked_missing_archive_proof_count'] ?? 0),
                 'blocked_missing_rehydrate_proof_count' => (int) ($summary['blocked_missing_rehydrate_proof_count'] ?? 0),
@@ -717,6 +761,16 @@ final class ReportArtifactsShrinkService
         }
 
         return Storage::disk($targetDisk)->exists($targetObjectKey);
+    }
+
+    private function legalHoldBlockedReason(string $attemptId): ?string
+    {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return null;
+        }
+
+        return $this->legalHoldService->blockedReasonCodeForAttempt($attemptId);
     }
 
     private function primeRemoteArchiveIndex(string $targetDisk): void

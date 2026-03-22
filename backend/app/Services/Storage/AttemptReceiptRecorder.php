@@ -14,11 +14,12 @@ final class AttemptReceiptRecorder
         string $attemptId,
         string $receiptType,
         array $payload = [],
-        array $meta = []
+        array $meta = [],
+        bool $force = false
     ): ?AttemptReceipt {
         $attemptId = trim($attemptId);
         $receiptType = trim($receiptType);
-        if ($attemptId === '' || $receiptType === '' || ! $this->isEnabled()) {
+        if ($attemptId === '' || $receiptType === '' || ! $this->isEnabled($force)) {
             return null;
         }
 
@@ -101,9 +102,9 @@ final class AttemptReceiptRecorder
         return DB::transaction($work);
     }
 
-    private function isEnabled(): bool
+    private function isEnabled(bool $force = false): bool
     {
-        return (bool) config('storage_rollout.receipt_ledger_dual_write_enabled', false);
+        return $force || (bool) config('storage_rollout.receipt_ledger_dual_write_enabled', false);
     }
 
     private function encodePayload(array $payload): string

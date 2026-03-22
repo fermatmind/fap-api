@@ -277,12 +277,14 @@ final class ReportArtifactsArchiveService
      */
     private function writeSidecars(array $plan, array $payload): void
     {
-        try {
-            $this->ledgerWriter->recordArchiveExecution($plan, $payload);
-        } catch (\Throwable $e) {
-            Log::warning('ARCHIVE_LEDGER_SIDE_CAR_WRITE_FAILED', [
-                'error' => $e->getMessage(),
-            ]);
+        if (! $this->isFrontDoorExecution($plan)) {
+            try {
+                $this->ledgerWriter->recordArchiveExecution($plan, $payload);
+            } catch (\Throwable $e) {
+                Log::warning('ARCHIVE_LEDGER_SIDE_CAR_WRITE_FAILED', [
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
 
         foreach ($this->resultItems($payload) as $item) {
@@ -293,6 +295,15 @@ final class ReportArtifactsArchiveService
 
             $this->refreshProjectionForResult('artifact_archived', 'archived', $item, $payload);
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $plan
+     */
+    private function isFrontDoorExecution(array $plan): bool
+    {
+        return is_array($plan['_front_door'] ?? null)
+            && isset($plan['_front_door']['job_id']);
     }
 
     /**

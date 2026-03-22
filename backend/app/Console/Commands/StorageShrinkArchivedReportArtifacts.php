@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Storage\ReportArtifactsShrinkService;
+use App\Services\Storage\ArtifactLifecycleFrontDoor;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -21,6 +22,7 @@ final class StorageShrinkArchivedReportArtifacts extends Command
 
     public function __construct(
         private readonly ReportArtifactsShrinkService $service,
+        private readonly ArtifactLifecycleFrontDoor $frontDoor,
     ) {
         parent::__construct();
     }
@@ -68,7 +70,9 @@ final class StorageShrinkArchivedReportArtifacts extends Command
             $plan['_meta'] = [
                 'plan_path' => $resolvedPlanPath,
             ];
-            $payload = $this->service->executePlan($plan);
+            $payload = $this->frontDoorEnabled()
+                ? $this->frontDoor->execute('shrink_archived_report_artifacts', $plan, fn (array $resolvedPlan): array => $this->service->executePlan($resolvedPlan))
+                : $this->service->executePlan($plan);
 
             return $this->emitPayload($payload);
         } catch (\Throwable $e) {
@@ -122,6 +126,7 @@ final class StorageShrinkArchivedReportArtifacts extends Command
         $this->line('candidate_count='.(int) ($summary['candidate_count'] ?? 0));
         $this->line('deleted_count='.(int) ($summary['deleted_count'] ?? 0));
         $this->line('skipped_missing_local_count='.(int) ($summary['skipped_missing_local_count'] ?? 0));
+        $this->line('blocked_legal_hold_count='.(int) ($summary['blocked_legal_hold_count'] ?? 0));
         $this->line('blocked_missing_remote_count='.(int) ($summary['blocked_missing_remote_count'] ?? 0));
         $this->line('blocked_missing_archive_proof_count='.(int) ($summary['blocked_missing_archive_proof_count'] ?? 0));
         $this->line('blocked_missing_rehydrate_proof_count='.(int) ($summary['blocked_missing_rehydrate_proof_count'] ?? 0));
@@ -187,5 +192,10 @@ final class StorageShrinkArchivedReportArtifacts extends Command
         }
 
         return storage_path('app/private/'.ltrim($planOption, '/\\'));
+    }
+
+    private function frontDoorEnabled(): bool
+    {
+        return (bool) config('storage_rollout.lifecycle_front_door_enabled', false);
     }
 }

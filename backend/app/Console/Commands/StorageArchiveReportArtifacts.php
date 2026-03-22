@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Storage\ReportArtifactsArchiveService;
+use App\Services\Storage\ArtifactLifecycleFrontDoor;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -21,6 +22,7 @@ final class StorageArchiveReportArtifacts extends Command
 
     public function __construct(
         private readonly ReportArtifactsArchiveService $service,
+        private readonly ArtifactLifecycleFrontDoor $frontDoor,
     ) {
         parent::__construct();
     }
@@ -68,7 +70,9 @@ final class StorageArchiveReportArtifacts extends Command
             $plan['_meta'] = [
                 'plan_path' => $resolvedPlanPath,
             ];
-            $payload = $this->service->executePlan($plan);
+            $payload = $this->frontDoorEnabled()
+                ? $this->frontDoor->execute('archive_report_artifacts', $plan, fn (array $resolvedPlan): array => $this->service->executePlan($resolvedPlan))
+                : $this->service->executePlan($plan);
 
             return $this->emitPayload($payload);
         } catch (\Throwable $e) {
@@ -184,5 +188,10 @@ final class StorageArchiveReportArtifacts extends Command
         }
 
         return storage_path('app/private/'.ltrim($planOption, '/\\'));
+    }
+
+    private function frontDoorEnabled(): bool
+    {
+        return (bool) config('storage_rollout.lifecycle_front_door_enabled', false);
     }
 }

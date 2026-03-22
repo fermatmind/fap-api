@@ -95,6 +95,10 @@ final class UserDataLifecycleService
                         'reason' => 'user_dsar_request',
                         'scale_code' => (string) ($attemptRow->scale_code ?? ''),
                         'mode' => $mode,
+                        'actor_user_id' => $this->nullablePositiveInt($context['actor_user_id'] ?? null),
+                        'request_id' => (string) ($context['request_id'] ?? ''),
+                        'task_id' => (string) ($context['task_id'] ?? ''),
+                        'reference_id' => (string) ($context['reference_id'] ?? ''),
                     ]);
 
                     if (($purge['ok'] ?? false) === true) {
