@@ -14,6 +14,7 @@ use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
@@ -27,6 +28,7 @@ class PersonalityController extends Controller
     public function __construct(
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+        private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
@@ -93,15 +95,27 @@ class PersonalityController extends Controller
         $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
         $meta = $this->personalityProfileSeoService->buildMeta($profile, $variant);
         $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
+        $sections = $this->publicSectionPayloads($profile, $variant);
+        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_public_detail');
+        $landingSurface = $this->buildDetailLandingSurface($profile, $variant, $projection, $validated['locale']);
 
         return response()->json([
             'ok' => true,
             'profile' => $this->profileDetailPayload($profile, $variant),
-            'sections' => $this->publicSectionPayloads($profile, $variant),
+            'sections' => $sections,
             'seo_meta' => $this->seoMetaPayload($profile, $variant),
             'mbti_public_projection_v1' => $projection,
-            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_public_detail'),
-            'landing_surface_v1' => $this->buildDetailLandingSurface($profile, $variant, $projection, $validated['locale']),
+            'seo_surface_v1' => $seoSurface,
+            'landing_surface_v1' => $landingSurface,
+            'answer_surface_v1' => $this->buildDetailAnswerSurface(
+                $profile,
+                $variant,
+                $projection,
+                $sections,
+                $seoSurface,
+                $landingSurface,
+                $validated['locale'],
+            ),
         ]);
     }
 
@@ -229,6 +243,80 @@ class PersonalityController extends Controller
                 'slug' => (string) ($profile->slug ?? ''),
                 'runtime_type_code' => (string) ($variant?->runtime_type_code ?? ''),
                 'locale' => $locale,
+            ],
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @param  array<int,array<string,mixed>>  $sections
+     * @param  array<string,mixed>  $seoSurface
+     * @param  array<string,mixed>  $landingSurface
+     * @return array<string,mixed>
+     */
+    private function buildDetailAnswerSurface(
+        PersonalityProfile $profile,
+        ?PersonalityProfileVariant $variant,
+        array $projection,
+        array $sections,
+        array $seoSurface,
+        array $landingSurface,
+        string $locale
+    ): array {
+        $summary = trim((string) ($projection['summary_card']['summary'] ?? $profile->excerpt ?? ''));
+        $subtitle = trim((string) ($projection['summary_card']['subtitle'] ?? $profile->subtitle ?? ''));
+        $compareBlocks = $this->answerSurfaceContractService->buildCompareBlocksFromDimensionPayloads(
+            is_array($projection['dimensions'] ?? null) ? $projection['dimensions'] : [],
+            2
+        );
+
+        return $this->answerSurfaceContractService->build([
+            'answer_scope' => ($profile->is_indexable ?? false) ? 'public_indexable_detail' : 'public_noindex_detail',
+            'surface_type' => 'personality_public_detail',
+            'summary_blocks' => array_values(array_filter([
+                [
+                    'key' => 'type_summary',
+                    'title' => (string) ($profile->title ?? ''),
+                    'body' => $summary,
+                    'kind' => 'answer_first',
+                ],
+                $subtitle !== ''
+                    ? [
+                        'key' => 'type_context',
+                        'title' => (string) (($variant?->runtime_type_code ?? $profile->type_code ?? '')),
+                        'body' => $subtitle,
+                        'kind' => 'context',
+                    ]
+                    : null,
+            ])),
+            'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
+            'compare_blocks' => $compareBlocks,
+            'next_step_blocks' => $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
+                is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
+                3
+            ),
+            'answer_bundle' => [
+                ['key' => 'summary', 'title' => 'summary', 'count' => 2],
+                ['key' => 'compare', 'title' => 'compare', 'count' => count($compareBlocks)],
+            ],
+            'evidence_refs' => array_values(array_filter([
+                (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+                (string) ($landingSurface['landing_fingerprint'] ?? ''),
+                'mbti_public_projection_v1',
+                count($compareBlocks) > 0 ? 'projection_dimensions' : '',
+                count($sections) > 0 ? 'personality_sections' : '',
+            ])),
+            'public_safety_state' => 'public_indexable',
+            'indexability_state' => ($profile->is_indexable ?? false) ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_personality_answer',
+            'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+            'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),
+            'primary_content_ref' => (string) ($variant?->runtime_type_code ?? $profile->type_code ?? $profile->slug ?? ''),
+            'related_surface_keys' => ['career_recommendation', 'topic_cluster', 'start_test'],
+            'fingerprint_seed' => [
+                'slug' => (string) ($profile->slug ?? ''),
+                'locale' => $locale,
+                'runtime_type_code' => (string) ($variant?->runtime_type_code ?? ''),
             ],
         ]);
     }

@@ -12,6 +12,7 @@ use App\Models\TopicProfileSeoMeta;
 use App\Services\Cms\TopicEntryResolverService;
 use App\Services\Cms\TopicProfileSeoService;
 use App\Services\Cms\TopicProfileService;
+use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
@@ -26,6 +27,7 @@ final class TopicController extends Controller
         private readonly TopicProfileService $topicProfileService,
         private readonly TopicEntryResolverService $topicEntryResolverService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
+        private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
@@ -86,18 +88,29 @@ final class TopicController extends Controller
         $meta = $this->topicProfileSeoService->buildMeta($profile, $validated['locale']);
         $jsonLd = $this->topicProfileSeoService->buildJsonLd($profile, $validated['locale']);
         $entryGroups = $this->topicEntryResolverService->resolveGroupedEntries($profile, $validated['locale']);
+        $sections = array_map(
+            fn (TopicProfileSection $section): array => $this->sectionPayload($section),
+            $profile->sections->all()
+        );
+        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'topic_public_detail');
+        $landingSurface = $this->buildDetailLandingSurface($profile, $entryGroups, $validated['locale']);
 
         return response()->json([
             'ok' => true,
             'profile' => $this->profileDetailPayload($profile),
-            'sections' => array_map(
-                fn (TopicProfileSection $section): array => $this->sectionPayload($section),
-                $profile->sections->all()
-            ),
+            'sections' => $sections,
             'entry_groups' => $entryGroups,
             'seo_meta' => $this->seoMetaPayload($profile->seoMeta),
-            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'topic_public_detail'),
-            'landing_surface_v1' => $this->buildDetailLandingSurface($profile, $entryGroups, $validated['locale']),
+            'seo_surface_v1' => $seoSurface,
+            'landing_surface_v1' => $landingSurface,
+            'answer_surface_v1' => $this->buildDetailAnswerSurface(
+                $profile,
+                $sections,
+                $entryGroups,
+                $seoSurface,
+                $landingSurface,
+                $validated['locale'],
+            ),
         ]);
     }
 
@@ -200,6 +213,95 @@ final class TopicController extends Controller
             'indexability_state' => $profile->is_indexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_topic_landing',
             'surface_family' => 'topic',
+            'primary_content_ref' => (string) ($profile->slug ?? $profile->topic_code ?? ''),
+            'related_surface_keys' => array_keys($entryGroups),
+            'fingerprint_seed' => [
+                'slug' => (string) ($profile->slug ?? ''),
+                'locale' => $locale,
+                'entry_group_count' => count($entryGroups),
+            ],
+        ]);
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $sections
+     * @param  array<string,list<array<string,mixed>>>  $entryGroups
+     * @param  array<string,mixed>  $seoSurface
+     * @param  array<string,mixed>  $landingSurface
+     * @return array<string,mixed>
+     */
+    private function buildDetailAnswerSurface(
+        TopicProfile $profile,
+        array $sections,
+        array $entryGroups,
+        array $seoSurface,
+        array $landingSurface,
+        string $locale
+    ): array {
+        $summaryBlocks = [
+            [
+                'key' => 'topic_summary',
+                'title' => (string) ($profile->title ?? ''),
+                'body' => trim((string) ($profile->excerpt ?? $profile->subtitle ?? '')),
+                'kind' => 'answer_first',
+            ],
+        ];
+
+        $nextStepBlocks = [];
+        foreach ($entryGroups as $groupKey => $entries) {
+            $first = is_array($entries[0] ?? null) ? $entries[0] : null;
+            if ($first === null) {
+                continue;
+            }
+
+            $title = trim((string) ($first['title'] ?? ''));
+            $url = trim((string) ($first['url'] ?? ''));
+            if ($title === '' || $url === '') {
+                continue;
+            }
+
+            $nextStepBlocks[] = [
+                'key' => (string) $groupKey,
+                'title' => $title,
+                'body' => trim((string) ($first['excerpt'] ?? '')),
+                'href' => $url,
+                'kind' => 'content_continue',
+            ];
+        }
+
+        $compareBlocks = [];
+        foreach (['featured', 'articles', 'personalities', 'tests'] as $groupKey) {
+            $count = count($entryGroups[$groupKey] ?? []);
+            if ($count <= 0) {
+                continue;
+            }
+
+            $compareBlocks[] = [
+                'key' => $groupKey,
+                'title' => $groupKey,
+                'body' => $count.' available entries',
+                'kind' => 'entry_group',
+            ];
+        }
+
+        return $this->answerSurfaceContractService->build([
+            'answer_scope' => $profile->is_indexable ? 'public_indexable_detail' : 'public_noindex_detail',
+            'surface_type' => 'topic_public_detail',
+            'summary_blocks' => $summaryBlocks,
+            'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
+            'compare_blocks' => $compareBlocks,
+            'next_step_blocks' => array_slice($nextStepBlocks, 0, 4),
+            'evidence_refs' => array_values(array_filter([
+                (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+                (string) ($landingSurface['landing_fingerprint'] ?? ''),
+                count($entryGroups) > 0 ? 'topic_entry_groups' : '',
+                count($sections) > 0 ? 'topic_sections' : '',
+            ])),
+            'public_safety_state' => 'public_indexable',
+            'indexability_state' => $profile->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_topic_answer',
+            'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+            'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),
             'primary_content_ref' => (string) ($profile->slug ?? $profile->topic_code ?? ''),
             'related_surface_keys' => array_keys($entryGroups),
             'fingerprint_seed' => [

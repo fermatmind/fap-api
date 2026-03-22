@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CareerGuide;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerGuideService;
+use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
@@ -22,6 +23,7 @@ final class CareerGuideController extends Controller
     public function __construct(
         private readonly CareerGuideService $careerGuideService,
         private readonly CareerGuideSeoService $careerGuideSeoService,
+        private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
@@ -81,17 +83,32 @@ final class CareerGuideController extends Controller
 
         $meta = $this->careerGuideSeoService->buildSeoPayload($guide);
         $jsonLd = $this->careerGuideSeoService->buildJsonLd($guide);
+        $relatedJobs = $this->careerGuideService->relatedJobsPayload($guide);
+        $relatedIndustries = $this->careerGuideService->relatedIndustriesPayload($guide);
+        $relatedArticles = $this->careerGuideService->relatedArticlesPayload($guide);
+        $relatedProfiles = $this->careerGuideService->relatedPersonalityProfilesPayload($guide);
+        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'career_guide_public_detail');
+        $landingSurface = $this->buildLandingSurface($guide, $validated['locale']);
 
         return response()->json([
             'ok' => true,
             'guide' => $this->careerGuideService->detailPayload($guide),
-            'related_jobs' => $this->careerGuideService->relatedJobsPayload($guide),
-            'related_industries' => $this->careerGuideService->relatedIndustriesPayload($guide),
-            'related_articles' => $this->careerGuideService->relatedArticlesPayload($guide),
-            'related_personality_profiles' => $this->careerGuideService->relatedPersonalityProfilesPayload($guide),
+            'related_jobs' => $relatedJobs,
+            'related_industries' => $relatedIndustries,
+            'related_articles' => $relatedArticles,
+            'related_personality_profiles' => $relatedProfiles,
             'seo_meta' => $this->careerGuideService->seoMetaPayload($guide),
-            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_guide_public_detail'),
-            'landing_surface_v1' => $this->buildLandingSurface($guide, $validated['locale']),
+            'seo_surface_v1' => $seoSurface,
+            'landing_surface_v1' => $landingSurface,
+            'answer_surface_v1' => $this->buildAnswerSurface(
+                $guide,
+                $relatedJobs,
+                $relatedArticles,
+                $relatedProfiles,
+                $seoSurface,
+                $landingSurface,
+                $validated['locale'],
+            ),
         ]);
     }
 
@@ -200,6 +217,87 @@ final class CareerGuideController extends Controller
             'indexability_state' => $guide->is_indexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_career_guide_landing',
             'surface_family' => 'career_guide',
+            'primary_content_ref' => (string) ($guide->slug ?? ''),
+            'related_surface_keys' => ['career_job', 'article_detail', 'personality_profile'],
+            'fingerprint_seed' => [
+                'slug' => (string) ($guide->slug ?? ''),
+                'locale' => $locale,
+            ],
+        ]);
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $relatedJobs
+     * @param  array<int,array<string,mixed>>  $relatedArticles
+     * @param  array<int,array<string,mixed>>  $relatedProfiles
+     * @param  array<string,mixed>  $seoSurface
+     * @param  array<string,mixed>  $landingSurface
+     * @return array<string,mixed>
+     */
+    private function buildAnswerSurface(
+        CareerGuide $guide,
+        array $relatedJobs,
+        array $relatedArticles,
+        array $relatedProfiles,
+        array $seoSurface,
+        array $landingSurface,
+        string $locale
+    ): array {
+        $summaryBlocks = [
+            [
+                'key' => 'guide_summary',
+                'title' => (string) ($guide->title ?? ''),
+                'body' => trim((string) ($guide->excerpt ?? '')),
+                'kind' => 'answer_first',
+            ],
+        ];
+
+        $nextStepBlocks = $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
+            is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
+            3
+        );
+
+        if ($nextStepBlocks === []) {
+            foreach ([$relatedJobs[0] ?? null, $relatedArticles[0] ?? null, $relatedProfiles[0] ?? null] as $index => $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                $title = trim((string) ($item['title'] ?? ''));
+                $href = trim((string) ($item['href'] ?? ''));
+                if ($title === '' || $href === '') {
+                    continue;
+                }
+
+                $nextStepBlocks[] = [
+                    'key' => 'guide_next_'.$index,
+                    'title' => $title,
+                    'body' => trim((string) ($item['summary'] ?? '')),
+                    'href' => $href,
+                    'kind' => 'content_continue',
+                ];
+            }
+        }
+
+        return $this->answerSurfaceContractService->build([
+            'answer_scope' => $guide->is_indexable ? 'public_indexable_detail' : 'public_noindex_detail',
+            'surface_type' => 'career_guide_public_detail',
+            'summary_blocks' => $summaryBlocks,
+            'faq_blocks' => [],
+            'compare_blocks' => [],
+            'next_step_blocks' => $nextStepBlocks,
+            'evidence_refs' => array_values(array_filter([
+                (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+                (string) ($landingSurface['landing_fingerprint'] ?? ''),
+                $relatedJobs !== [] ? 'related_jobs' : '',
+                $relatedArticles !== [] ? 'related_articles' : '',
+                $relatedProfiles !== [] ? 'related_personality_profiles' : '',
+            ])),
+            'public_safety_state' => 'public_indexable',
+            'indexability_state' => $guide->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_career_guide_answer',
+            'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+            'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),
             'primary_content_ref' => (string) ($guide->slug ?? ''),
             'related_surface_keys' => ['career_job', 'article_detail', 'personality_profile'],
             'fingerprint_seed' => [
