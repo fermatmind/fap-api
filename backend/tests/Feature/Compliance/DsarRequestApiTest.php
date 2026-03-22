@@ -9,6 +9,7 @@ use App\Services\Auth\FmTokenService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -19,6 +20,7 @@ final class DsarRequestApiTest extends TestCase
     public function test_owner_can_create_and_execute_user_dsar_request(): void
     {
         Queue::fake();
+        Storage::fake('local');
 
         $orgId = 701;
         $ownerUserId = 70101;
@@ -245,6 +247,12 @@ final class DsarRequestApiTest extends TestCase
             ->orderByDesc('id')
             ->first();
         $this->assertNotNull($lifecycleAudit);
+        $lifecycleResult = $this->decodeAuditContext($lifecycleAudit->result_json ?? null);
+        $this->assertArrayHasKey('artifact_residual_audits', $lifecycleResult);
+        $this->assertArrayHasKey($attemptId, $lifecycleResult['artifact_residual_audits']);
+        $attemptResidualAudit = (array) ($lifecycleResult['artifact_residual_audits'][$attemptId] ?? []);
+        $this->assertSame('no_residual_found', (string) ($attemptResidualAudit['state'] ?? ''));
+        $this->assertSame('remote_state_unknown', (string) ($attemptResidualAudit['remote_state'] ?? ''));
 
         $this->assertNotEmpty($ownerToken);
     }

@@ -54,6 +54,7 @@ final class UserDataLifecycleService
         ];
 
         $attemptFailures = [];
+        $artifactResidualAudits = [];
         $retentionSummary = [
             'financial_records' => [
                 'strategy' => 'pseudonymize_retain',
@@ -98,6 +99,9 @@ final class UserDataLifecycleService
 
                     if (($purge['ok'] ?? false) === true) {
                         $counts['attempts_purged']++;
+                        $artifactResidualAudits[$attemptId] = is_array($purge['artifact_residual_audit'] ?? null)
+                            ? $purge['artifact_residual_audit']
+                            : [];
                         continue;
                     }
 
@@ -280,7 +284,15 @@ final class UserDataLifecycleService
             $retentionSummary['financial_records']['payment_events_retained'] = $counts['payment_events_pseudonymized'];
             $retentionSummary['financial_records']['benefit_grants_retained'] = $counts['benefit_grants_pseudonymized'];
 
-            $this->recordDataLifecycleRequest($orgId, $subjectUserIdStr, $mode, $context, $counts, $attemptFailures);
+            $this->recordDataLifecycleRequest(
+                $orgId,
+                $subjectUserIdStr,
+                $mode,
+                $context,
+                $counts,
+                $attemptFailures,
+                $artifactResidualAudits
+            );
             $this->recordExecutionTasks($requestId, $orgId, $subjectUserId, $counts, $attemptFailures);
             $this->appendAuditLog(
                 $requestId,
@@ -291,6 +303,7 @@ final class UserDataLifecycleService
                 [
                     'counts' => $counts,
                     'retention' => $retentionSummary,
+                    'artifact_residual_audits' => $artifactResidualAudits,
                 ]
             );
         } catch (\Throwable $e) {
@@ -302,6 +315,7 @@ final class UserDataLifecycleService
                 $context,
                 $counts + ['exception' => $e::class],
                 $attemptFailures,
+                $artifactResidualAudits,
                 'failed',
                 'failed'
             );
@@ -314,6 +328,7 @@ final class UserDataLifecycleService
                 [
                     'exception' => $e::class,
                     'counts' => $counts,
+                    'artifact_residual_audits' => $artifactResidualAudits,
                 ],
                 'error'
             );
@@ -332,6 +347,7 @@ final class UserDataLifecycleService
             'mode' => $mode,
             'counts' => $counts,
             'attempt_failures' => $attemptFailures,
+            'artifact_residual_audits' => $artifactResidualAudits,
             'retention' => $retentionSummary,
         ];
     }
@@ -350,6 +366,7 @@ final class UserDataLifecycleService
      * @param  array<string,mixed>  $context
      * @param  array<string,mixed>  $counts
      * @param  array<string,string>  $attemptFailures
+     * @param  array<string,array<string,mixed>>  $artifactResidualAudits
      */
     private function recordDataLifecycleRequest(
         int $orgId,
@@ -358,6 +375,7 @@ final class UserDataLifecycleService
         array $context,
         array $counts,
         array $attemptFailures,
+        array $artifactResidualAudits,
         string $status = 'done',
         string $result = 'success'
     ): void {
@@ -381,6 +399,7 @@ final class UserDataLifecycleService
             'result_json' => json_encode([
                 'counts' => $counts,
                 'attempt_failures' => $attemptFailures,
+                'artifact_residual_audits' => $artifactResidualAudits,
             ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'approved_at' => now(),
             'executed_at' => now(),

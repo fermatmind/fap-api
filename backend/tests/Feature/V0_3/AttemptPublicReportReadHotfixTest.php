@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -18,6 +19,25 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder)->run();
+    }
+
+    private function issueAnonToken(string $anonId): string
+    {
+        $token = 'fm_'.(string) Str::uuid();
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => hash('sha256', $token),
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $token;
     }
 
     private function createAttempt(string $attemptId, string $scaleCode, string $anonId): void
@@ -125,12 +145,18 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
     public function test_public_mbti_report_can_be_read_without_attempt_ownership(): void
     {
         $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
 
         $attemptId = (string) Str::uuid();
-        $this->createAttempt($attemptId, 'MBTI', 'anon_mbti_owner');
+        $anonId = 'anon_mbti_owner';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, 'MBTI', $anonId);
         $this->createResult($attemptId, 'MBTI');
 
-        $response = $this->withHeader('X-Anon-Id', 'anon_public_probe')
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])
             ->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $response->assertStatus(200);
