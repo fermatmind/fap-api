@@ -670,7 +670,7 @@ final class MbtiAdaptiveSelectionService
                 default => ['work_experiment', 'identity', 'axis_strength'],
             },
             'traits.why_this_type' => match ($selectionMode) {
-                'adaptive_clarify_boundary' => ['why_this_type', 'boundary', 'axis_strength'],
+                'adaptive_clarify_boundary' => ['why_this_type', 'misunderstanding_fix', 'boundary', 'axis_strength'],
                 default => ['why_this_type', 'identity', 'axis_strength'],
             },
             default => [],

@@ -189,9 +189,11 @@ final class MbtiResultPersonalizationService
         'stress_recovery' => '压力恢复场景',
         'communication' => '沟通协作场景',
         'why_this_type' => '为什么是这个类型',
+        'misunderstanding_fix' => '误读修正',
         'borderline_axis' => '边界轴解释',
         'adjacent_type_contrast' => '相邻类型对照',
         'stability_explanation' => '稳定性解释',
+        'stability_reframe' => '稳定性重释',
     ];
 
     /**
@@ -217,9 +219,11 @@ final class MbtiResultPersonalizationService
         'stress_recovery' => 'Stress recovery scene',
         'communication' => 'Communication scene',
         'why_this_type' => 'Why-this-type explanation',
+        'misunderstanding_fix' => 'Misread correction',
         'borderline_axis' => 'Borderline-axis explanation',
         'adjacent_type_contrast' => 'Adjacent-type contrast',
         'stability_explanation' => 'Stability explanation',
+        'stability_reframe' => 'Stability reframe',
     ];
 
     /**
@@ -542,6 +546,42 @@ final class MbtiResultPersonalizationService
         'context_sensitive' => 'Your result is not vague; it is context-sensitive because several axes sit close to the middle at once. {{dominant_axis_label}} and {{dominant_side_label}} still decide the main type, but {{close_axis_label}} strongly affects which nearby type you can resemble in different situations.',
     ];
 
+    /**
+     * @var array<string, array<string, string>>
+     */
+    private const DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES = [
+        'why_this_type' => [
+            'boundary' => '别人之所以会误读你，往往不是因为主类型不成立，而是{{close_axis_label}}和{{identity_clause}}让你在外显风格上保留了更多弹性。你看起来不像刻板印象里的{{dominant_side_label}}，但主判断还是会回到{{dominant_side_label}}。',
+            'clear' => '你会被误读成别的样子，常常是因为{{close_axis_label}}仍会在不同情境里借用另一侧节奏；但主类型成立的真正原因，是{{dominant_axis_label}}上的{{dominant_side_label}}已经形成稳定拉力。{{identity_clause}}',
+            'strong' => '你会被误读成别的样子，通常是因为{{dominant_axis_label}}上的{{dominant_side_label}}已经很强，但{{close_axis_label}}仍会让外显节奏带着一点另一侧的影子。主类型成立，不代表表达方式只有一种。{{identity_clause}}',
+            'very_strong' => '你会被误读成别的样子，更多是因为{{dominant_axis_label}}上的{{dominant_side_label}}太强，以至于别人会把你的局部切换当成整体变化。{{close_axis_label}}解释的是外显波动，不是主类型失效。{{identity_clause}}',
+        ],
+        'adjacent_type_contrast' => [
+            'boundary' => '最容易把你看成{{neighbor_type}}，是因为{{axis_label}}离中线太近，外显风格会借用{{opposite_side_label}}的节奏；但真正的差异在于你最终仍会回到{{side_label}}做主判断。{{identity_clause}}',
+            'clear' => '最容易把你看成{{neighbor_type}}，通常不是因为结果错了，而是{{axis_label}}上的{{side_label}}还没有把外显节奏完全锁死，所以你看起来会借一点{{opposite_side_label}}的影子。真正拉开差异的是最后你仍然会回到{{side_label}}来收尾。{{identity_clause}}',
+            'strong' => '如果只看最接近边界的外显部分，别人最容易把你看成{{neighbor_type}}。原因不是你“测错了”，而是{{axis_label}}上的{{side_label}}会在表达上短暂借用{{opposite_side_label}}的节奏。真正区分你们的，不是表面像不像，而是你最终仍会回到{{side_label}}来做主判断和收尾。{{identity_clause}}',
+            'very_strong' => '你最容易被看成{{neighbor_type}}的时刻，往往来自{{axis_label}}上的{{side_label}}已经很强，却仍保留了足够的近边界弹性，让外显风格偶尔像{{opposite_side_label}}。但真正决定你是谁的，仍然是最后回到{{side_label}}的那一步。{{identity_clause}}',
+        ],
+    ];
+
+    /**
+     * @var array<string, array<string, string>>
+     */
+    private const DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES_EN = [
+        'why_this_type' => [
+            'boundary' => 'People misread you not because the core type is invalid, but because {{close_axis_label}} and {{identity_clause}} keep more elasticity in your surface style. You do not look like a stereotype of {{dominant_side_label}}, but your final judgment still returns there.',
+            'clear' => 'You can be misread because {{close_axis_label}} still borrows the rhythm of the opposite side across contexts; the real reason the core type stands is that {{dominant_axis_label}} and {{dominant_side_label}} already create a stable pull. {{identity_clause}}',
+            'strong' => 'You can be misread because {{dominant_axis_label}} and {{dominant_side_label}} are already strong, while {{close_axis_label}} still lets your surface rhythm borrow some of the opposite side. The core type still stands, but expression does not collapse into one shape.',
+            'very_strong' => 'You can be misread because {{dominant_axis_label}} and {{dominant_side_label}} are so strong that people treat local switching as a full type change. {{close_axis_label}} explains surface fluctuation, not a failed core type. {{identity_clause}}',
+        ],
+        'adjacent_type_contrast' => [
+            'boundary' => 'The easiest mistake is to read you as {{neighbor_type}}, because {{axis_label}} sits close enough to the middle that your surface style borrows the rhythm of {{opposite_side_label}}; the real difference is that you still return to {{side_label}} for final judgment. {{identity_clause}}',
+            'clear' => 'The easiest mistake is to read you as {{neighbor_type}}, usually not because the result is wrong but because the {{side_label}} on {{axis_label}} has not fully locked your surface rhythm, so you can look like you are borrowing a bit of {{opposite_side_label}}. The real split is that you still return to {{side_label}} to close the loop. {{identity_clause}}',
+            'strong' => 'If someone only looks at your closest-boundary surface, they are most likely to read you as {{neighbor_type}}. That is not because the result is wrong; it is because the {{side_label}} on {{axis_label}} may borrow the rhythm of {{opposite_side_label}} in expression. The real difference is that you still return to {{side_label}} for judgment and closure. {{identity_clause}}',
+            'very_strong' => 'The moments when you are most likely to be read as {{neighbor_type}} come from a strong {{side_label}} on {{axis_label}} that still keeps enough near-boundary elasticity to look a bit like {{opposite_side_label}}. What still decides who you are, though, is the final return to {{side_label}}. {{identity_clause}}',
+        ],
+    ];
+
     private const DEFAULT_CLOSE_CALL_AXIS_TEMPLATE = '在{{axis_label}}上，你最后仍偏向{{side_label}}，但和另一侧只拉开了{{delta}}个点差。也就是说，这条轴更像“近身拉扯”而不是绝对定型：熟悉情境下你常会先用{{side_label}}，而高压、误解或角色变化时，{{opposite_side_label}}会很快进场补位。';
 
     private const DEFAULT_CLOSE_CALL_AXIS_TEMPLATE_EN = 'On {{axis_label}}, you still end up leaning toward {{side_label}}, but the margin is only {{delta}} points. This axis behaves more like a live tension than a fixed identity: in familiar situations you may start with {{side_label}}, while pressure, misunderstanding, or role shifts can quickly pull in {{opposite_side_label}} as a correction.';
@@ -566,6 +606,42 @@ final class MbtiResultPersonalizationService
         'stable' => 'This result is comparatively stable overall. The core type should not rewrite itself under ordinary context shifts; the real thing to watch is when {{close_axis_label}} needs deliberate room for the opposite side.',
         'mixed' => 'This result is best read as a clear type with local context shifts. You are not unstable; a few axes simply change entry points across task, relationship, and pressure conditions.',
         'context_sensitive' => 'This result is best read as context-sensitive stability rather than simple stability or simple wavering. The main type still holds, but several near-boundary axes make your switching pattern more visible across situations.',
+    ];
+
+    /**
+     * @var array<string, array<string, string>>
+     */
+    private const DEFAULT_STABILITY_REFRAME_TEMPLATES = [
+        'stable' => [
+            'zh-CN' => '稳定性不是“一直一样”，而是你在{{close_axis_label}}附近仍能保持主类型的回弹能力。{{identity_clause}}',
+            'en' => 'Stability is not “staying the same”; it is the ability to bounce back to the core type even around {{close_axis_label}}. {{identity_clause}}',
+        ],
+        'mixed' => [
+            'zh-CN' => '你的稳定更像“可校准”：主类型会保留，但压力一上来，你会在{{close_axis_label}}和{{identity_clause}}之间重新分配注意力与恢复资源。',
+            'en' => 'Your stability is more like something you can recalibrate: the core type remains, but under pressure you redistribute attention and recovery resources between {{close_axis_label}} and {{identity_clause}}.',
+        ],
+        'context_sensitive' => [
+            'zh-CN' => '你是情境敏感型稳定：不是不稳，而是面对不同压力源时会切换不同的恢复入口。最重要的是把这种切换看成可复用的恢复机制，而不是自我怀疑。{{identity_clause}}',
+            'en' => 'You are context-sensitive in a stable way: not unstable, but switching recovery entry points as different pressure sources appear. The key is to treat that switching as a reusable recovery mechanism, not as self-doubt. {{identity_clause}}',
+        ],
+    ];
+
+    /**
+     * @var array<string, array<string, string>>
+     */
+    private const DEFAULT_STABILITY_REFRAME_TEMPLATES_EN = [
+        'stable' => [
+            'zh-CN' => '稳定性不是“一直一样”，而是你在{{close_axis_label}}附近仍能保持主类型的回弹能力。{{identity_clause}}',
+            'en' => 'Stability is not “staying the same”; it is the ability to bounce back to the core type even around {{close_axis_label}}. {{identity_clause}}',
+        ],
+        'mixed' => [
+            'zh-CN' => '你的稳定更像“可校准”：主类型会保留，但压力一上来，你会在{{close_axis_label}}和{{identity_clause}}之间重新分配注意力与恢复资源。',
+            'en' => 'Your stability is more like something you can recalibrate: the core type remains, but under pressure you redistribute attention and recovery resources between {{close_axis_label}} and {{identity_clause}}.',
+        ],
+        'context_sensitive' => [
+            'zh-CN' => '你是情境敏感型稳定：不是不稳，而是面对不同压力源时会切换不同的恢复入口。最重要的是把这种切换看成可复用的恢复机制，而不是自我怀疑。{{identity_clause}}',
+            'en' => 'You are context-sensitive in a stable way: not unstable, but switching recovery entry points as different pressure sources appear. The key is to treat that switching as a reusable recovery mechanism, not as self-doubt. {{identity_clause}}',
+        ],
     ];
 
     public function __construct(
@@ -1492,6 +1568,29 @@ final class MbtiResultPersonalizationService
                 ];
             }
 
+            $misunderstandingFixText = $this->resolveMisunderstandingFixText(
+                $doc,
+                $locale,
+                $sectionKey,
+                (string) ($primaryAxis['band'] ?? 'clear'),
+                $primaryAxis,
+                $supportAxis,
+                $identity,
+                $closeCallAxes,
+                $neighborTypeKeys
+            );
+            if ($misunderstandingFixText !== '') {
+                $blockId = sprintf('%s.misunderstanding_fix.%s', $sectionKey, strtolower((string) ($primaryAxis['axis'] ?? 'axis')));
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'misunderstanding_fix',
+                    'label' => $this->blockLabel('misunderstanding_fix', $doc, $locale),
+                    'text' => $misunderstandingFixText,
+                    'contrast_key' => $contrastKey,
+                ];
+            }
+
             if ($identityText !== '') {
                 $blockId = sprintf('%s.identity.%s', $sectionKey, strtolower($identity));
                 $selectedBlocks[] = $blockId;
@@ -1579,6 +1678,29 @@ final class MbtiResultPersonalizationService
                 ];
             }
 
+            $misunderstandingFixText = $this->resolveMisunderstandingFixText(
+                $doc,
+                $locale,
+                $sectionKey,
+                (string) ($primaryAxis['band'] ?? 'clear'),
+                $primaryAxis,
+                $supportAxis,
+                $identity,
+                $closeCallAxes,
+                $neighborTypeKeys
+            );
+            if ($misunderstandingFixText !== '') {
+                $blockId = sprintf('%s.misunderstanding_fix.%s', $sectionKey, strtolower((string) ($neighborTypeKeys[0] ?? ($primaryAxis['axis'] ?? 'axis'))));
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'misunderstanding_fix',
+                    'label' => $this->blockLabel('misunderstanding_fix', $doc, $locale),
+                    'text' => $misunderstandingFixText,
+                    'contrast_key' => $contrastKey,
+                ];
+            }
+
             if ($identityText !== '') {
                 $blockId = sprintf('%s.identity.%s', $sectionKey, strtolower($identity));
                 $selectedBlocks[] = $blockId;
@@ -1613,6 +1735,37 @@ final class MbtiResultPersonalizationService
                     'label' => $this->blockLabel('stability_explanation', $doc, $locale),
                     'text' => $stabilityText,
                     'contrast_key' => $contrastKey,
+                ];
+            }
+
+            $stabilityReframeText = $this->resolveStabilityReframeText(
+                $doc,
+                $locale,
+                $stabilityBucket,
+                $primaryCloseAxis ?? $primaryAxis,
+                $identity
+            );
+            if ($stabilityReframeText !== '') {
+                $blockId = sprintf('%s.stability_reframe.%s', $sectionKey, $stabilityBucket);
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'stability_reframe',
+                    'label' => $this->blockLabel('stability_reframe', $doc, $locale),
+                    'text' => $stabilityReframeText,
+                    'contrast_key' => $contrastKey,
+                ];
+            }
+
+            $stressRecoveryText = $this->resolveSceneText($doc, 'stress_recovery', $locale, $primaryCloseAxis ?? $primaryAxis);
+            if ($stressRecoveryText !== '') {
+                $blockId = sprintf('%s.stress_recovery.%s', $sectionKey, $primaryCloseAxis['axis'] ?? $primaryAxis['axis'] ?? 'axis');
+                $selectedBlocks[] = $blockId;
+                $blocks[] = [
+                    'id' => $blockId,
+                    'kind' => 'stress_recovery',
+                    'label' => $this->blockLabel('stress_recovery', $doc, $locale),
+                    'text' => $stressRecoveryText,
                 ];
             }
 
@@ -2127,6 +2280,47 @@ final class MbtiResultPersonalizationService
         ]);
     }
 
+    /**
+     * @param  list<string>  $neighborTypeKeys
+     * @param  list<array<string, mixed>>  $closeCallAxes
+     */
+    private function resolveMisunderstandingFixText(
+        array $doc,
+        string $locale,
+        string $sectionKey,
+        string $band,
+        array $primaryAxis,
+        ?array $supportAxis,
+        string $identity,
+        array $closeCallAxes,
+        array $neighborTypeKeys
+    ): string {
+        $templateKey = $sectionKey === 'traits.adjacent_type_contrast'
+            ? 'adjacent_type_contrast'
+            : 'why_this_type';
+
+        $template = $this->resolveTemplate(
+            data_get($doc, 'misunderstanding_fix_templates.'.$templateKey.'.'.trim($band)),
+            $locale,
+            $locale === 'zh-CN'
+                ? (self::DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES[$templateKey][$band] ?? self::DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES[$templateKey]['clear'])
+                : (self::DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES_EN[$templateKey][$band] ?? self::DEFAULT_MISUNDERSTANDING_FIX_TEMPLATES_EN[$templateKey]['clear'])
+        );
+
+        $closeAxis = is_array($closeCallAxes[0] ?? null) ? $closeCallAxes[0] : $supportAxis;
+
+        return $this->renderTemplate($template, [
+            'dominant_axis_label' => trim((string) ($primaryAxis['axis_label'] ?? '')),
+            'dominant_side_label' => trim((string) ($primaryAxis['side_label'] ?? '')),
+            'axis_label' => trim((string) ($closeAxis['axis_label'] ?? ($primaryAxis['axis_label'] ?? ''))),
+            'side_label' => trim((string) ($closeAxis['side_label'] ?? ($primaryAxis['side_label'] ?? ''))),
+            'opposite_side_label' => trim((string) ($closeAxis['opposite_side_label'] ?? ($primaryAxis['opposite_side_label'] ?? ''))),
+            'close_axis_label' => trim((string) ($closeAxis['axis_label'] ?? ($locale === 'zh-CN' ? '最接近边界的那条轴' : 'the closest-call axis'))),
+            'neighbor_type' => trim((string) ($neighborTypeKeys[0] ?? ($locale === 'zh-CN' ? '相邻类型' : 'a nearby type'))),
+            'identity_clause' => $this->shortIdentityClause($identity, $locale),
+        ]);
+    }
+
     private function resolveStabilityExplanationText(
         array $doc,
         string $locale,
@@ -2140,6 +2334,27 @@ final class MbtiResultPersonalizationService
             $locale === 'zh-CN'
                 ? (self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES[$bucket] ?? self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES['mixed'])
                 : (self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES_EN[$bucket] ?? self::DEFAULT_STABILITY_EXPLANATION_TEMPLATES_EN['mixed'])
+        );
+
+        return $this->renderTemplate($template, [
+            'close_axis_label' => trim((string) ($closeAxis['axis_label'] ?? ($locale === 'zh-CN' ? '最接近边界的那条轴' : 'the closest-call axis'))),
+            'identity_clause' => $this->shortIdentityClause($identity, $locale),
+        ]);
+    }
+
+    private function resolveStabilityReframeText(
+        array $doc,
+        string $locale,
+        string $bucket,
+        ?array $closeAxis,
+        string $identity
+    ): string {
+        $template = $this->resolveTemplate(
+            data_get($doc, 'stability_reframe_templates.'.$bucket),
+            $locale,
+            $locale === 'zh-CN'
+                ? (self::DEFAULT_STABILITY_REFRAME_TEMPLATES[$bucket][$locale] ?? self::DEFAULT_STABILITY_REFRAME_TEMPLATES['mixed'][$locale])
+                : (self::DEFAULT_STABILITY_REFRAME_TEMPLATES_EN[$bucket][$locale] ?? self::DEFAULT_STABILITY_REFRAME_TEMPLATES_EN['mixed'][$locale])
         );
 
         return $this->renderTemplate($template, [
