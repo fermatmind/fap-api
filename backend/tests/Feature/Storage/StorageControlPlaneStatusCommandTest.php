@@ -61,6 +61,7 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
     public function test_command_outputs_full_json_without_mutation_or_audit_inserts(): void
     {
         $this->seedMinimalTruth();
+        $archiveTruth = $this->seedReportArtifactsArchiveTruth();
 
         $auditCountBefore = DB::table('audit_logs')->count();
         $filesBefore = $this->storageFilesSnapshot();
@@ -87,6 +88,7 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertArrayHasKey('cost_reclaim_posture', $payload);
         $this->assertArrayHasKey('runtime_truth', $payload);
         $this->assertArrayHasKey('automation_readiness', $payload);
+        $this->assertArrayHasKey('report_artifacts_archive', $payload);
         $this->assertArrayHasKey('reports_artifacts_lifecycle', $payload);
         $this->assertArrayHasKey('attention_digest', $payload);
         $this->assertSame('ok', data_get($payload, 'inventory.status'));
@@ -111,6 +113,19 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertArrayHasKey('freshness_age_seconds', data_get($payload, 'reports_artifacts_lifecycle', []));
         $this->assertArrayHasKey('freshness_state', data_get($payload, 'reports_artifacts_lifecycle', []));
         $this->assertArrayHasKey('freshness_source_type', data_get($payload, 'reports_artifacts_lifecycle', []));
+        $this->assertSame('ok', data_get($payload, 'report_artifacts_archive.status'));
+        $this->assertSame('audit_logs.meta_json', data_get($payload, 'report_artifacts_archive.durable_receipt_source'));
+        $this->assertSame('s3', data_get($payload, 'report_artifacts_archive.target_disk'));
+        $this->assertSame('execute', data_get($payload, 'report_artifacts_archive.latest_mode'));
+        $this->assertSame($archiveTruth['plan_path'], data_get($payload, 'report_artifacts_archive.latest_plan_path'));
+        $this->assertSame($archiveTruth['run_path'], data_get($payload, 'report_artifacts_archive.latest_run_path'));
+        $this->assertTrue((bool) data_get($payload, 'report_artifacts_archive.latest_run_path_exists'));
+        $this->assertSame(3, data_get($payload, 'report_artifacts_archive.latest_summary.candidate_count'));
+        $this->assertSame(3, data_get($payload, 'report_artifacts_archive.latest_summary.results_count'));
+        $this->assertArrayHasKey('last_updated_at', data_get($payload, 'report_artifacts_archive', []));
+        $this->assertArrayHasKey('freshness_age_seconds', data_get($payload, 'report_artifacts_archive', []));
+        $this->assertArrayHasKey('freshness_state', data_get($payload, 'report_artifacts_archive', []));
+        $this->assertArrayHasKey('freshness_source_type', data_get($payload, 'report_artifacts_archive', []));
         $this->assertSame('remote_rehydrate_enabled', data_get($payload, 'runtime_truth.v2_readiness'));
         $this->assertSame('ok', data_get($payload, 'materialized_cache.status'));
         $this->assertSame(storage_path('app/private/packs_v2_materialized'), data_get($payload, 'materialized_cache.root_path'));
@@ -155,6 +170,7 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
     {
         $this->seedMinimalTruth();
         $lifecycleFiles = $this->seedReportsArtifactsLifecycleTruth();
+        $archiveTruth = $this->seedReportArtifactsArchiveTruth(false);
         $bucket = [
             '.materialization.json' => json_encode([
                 'storage_path' => 'private/packs_v2/BIG5_OCEAN/v1/release-a',
@@ -179,6 +195,9 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertSame(2, data_get($payload, 'reports_artifacts_lifecycle.legacy_fallback_live.pdf_files'));
         $this->assertSame($lifecycleFiles['legacy_bytes'], data_get($payload, 'reports_artifacts_lifecycle.legacy_fallback_live.bytes'));
         $this->assertSame(1, data_get($payload, 'reports_artifacts_lifecycle.safe_to_prune_derived.timestamp_backup_json_files'));
+        $this->assertSame($archiveTruth['run_path'], data_get($payload, 'report_artifacts_archive.latest_run_path'));
+        $this->assertFalse((bool) data_get($payload, 'report_artifacts_archive.latest_run_path_exists'));
+        $this->assertSame(3, data_get($payload, 'report_artifacts_archive.latest_summary.verified_count'));
         $this->assertSame(1, data_get($payload, 'materialized_cache.bucket_count'));
         $this->assertSame(3, data_get($payload, 'materialized_cache.total_files'));
         $this->assertSame($this->totalBytesForFiles($bucket), data_get($payload, 'materialized_cache.total_bytes'));
@@ -217,10 +236,10 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
         $this->assertStringContainsString('inventory.status=ok', $output);
         $this->assertStringContainsString('runtime_truth.v2_readiness=remote_rehydrate_enabled', $output);
         $this->assertStringContainsString('automation_readiness.auto_dry_run_ok=', $output);
-        $this->assertStringContainsString('attention_digest.overall_state=attention_required', $output);
+        $this->assertStringContainsString('attention_digest.overall_state=degraded', $output);
         $this->assertStringContainsString('attention_digest.counts.stale=0', $output);
         $this->assertStringContainsString('attention_digest.counts.never_run=', $output);
-        $this->assertStringContainsString('attention_digest.counts.not_available=0', $output);
+        $this->assertStringContainsString('attention_digest.counts.not_available=1', $output);
     }
 
     private function seedMinimalTruth(): void
@@ -253,6 +272,60 @@ final class StorageControlPlaneStatusCommandTest extends TestCase
             'result' => 'success',
             'created_at' => $now,
         ]);
+    }
+
+    /**
+     * @return array{plan_path:string,run_path:string}
+     */
+    private function seedReportArtifactsArchiveTruth(bool $runPathExists = true): array
+    {
+        $planPath = storage_path('app/private/report_artifact_archive_plans/archive-plan.json');
+        $runPath = storage_path('app/private/report_artifact_archive_runs/archive-run/run.json');
+        $this->writeJson($planPath, [
+            'schema' => 'storage_archive_report_artifacts_plan.v1',
+            'mode' => 'dry_run',
+        ]);
+
+        if ($runPathExists) {
+            $this->writeJson($runPath, [
+                'schema' => 'storage_archive_report_artifacts_run.v1',
+                'mode' => 'execute',
+            ]);
+        }
+
+        DB::table('audit_logs')->insert([
+            'org_id' => 0,
+            'actor_admin_id' => null,
+            'action' => 'storage_archive_report_artifacts',
+            'target_type' => 'storage',
+            'target_id' => 'report_artifacts_archive',
+            'meta_json' => json_encode([
+                'schema' => 'storage_archive_report_artifacts_run.v1',
+                'mode' => 'execute',
+                'target_disk' => 's3',
+                'plan' => $planPath,
+                'plan_path' => $planPath,
+                'run_path' => $runPath,
+                'candidate_count' => 3,
+                'copied_count' => 2,
+                'verified_count' => 3,
+                'already_archived_count' => 1,
+                'failed_count' => 0,
+                'results_count' => 3,
+                'durable_receipt_source' => 'audit_logs.meta_json',
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => null,
+            'user_agent' => 'test/storage_control_plane_status',
+            'request_id' => null,
+            'reason' => 'manual_archive_copy',
+            'result' => 'success',
+            'created_at' => now()->subMinutes(10),
+        ]);
+
+        return [
+            'plan_path' => $planPath,
+            'run_path' => $runPath,
+        ];
     }
 
     /**

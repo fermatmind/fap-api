@@ -71,6 +71,29 @@ final class ReportArtifactsArchiveServiceTest extends TestCase
         $this->assertSame(1, data_get($plan, 'summary.kind_counts.report_json'));
         $this->assertSame(1, data_get($plan, 'summary.kind_counts.report_free_pdf'));
 
+        $dryRunAudit = DB::table('audit_logs')
+            ->where('action', 'storage_archive_report_artifacts')
+            ->latest('id')
+            ->first();
+
+        $this->assertNotNull($dryRunAudit);
+        $this->assertSame('success', $dryRunAudit->result);
+        $dryRunMeta = json_decode((string) $dryRunAudit->meta_json, true);
+        $this->assertIsArray($dryRunMeta);
+        $this->assertSame('dry_run', $dryRunMeta['mode'] ?? null);
+        $this->assertSame('s3', $dryRunMeta['target_disk'] ?? null);
+        $this->assertArrayHasKey('plan_path', $dryRunMeta);
+        $this->assertNull($dryRunMeta['plan_path']);
+        $this->assertArrayHasKey('run_path', $dryRunMeta);
+        $this->assertNull($dryRunMeta['run_path']);
+        $this->assertSame(2, $dryRunMeta['candidate_count'] ?? null);
+        $this->assertSame(0, $dryRunMeta['copied_count'] ?? null);
+        $this->assertSame(0, $dryRunMeta['verified_count'] ?? null);
+        $this->assertSame(0, $dryRunMeta['already_archived_count'] ?? null);
+        $this->assertSame(0, $dryRunMeta['failed_count'] ?? null);
+        $this->assertSame(0, $dryRunMeta['results_count'] ?? null);
+        $this->assertSame('audit_logs.meta_json', $dryRunMeta['durable_receipt_source'] ?? null);
+
         $plan['_meta'] = ['plan_path' => storage_path('app/private/report_artifact_archive_plans/test-plan.json')];
         $result = $service->executePlan($plan);
 
@@ -91,6 +114,25 @@ final class ReportArtifactsArchiveServiceTest extends TestCase
             'target_id' => 'report_artifacts_archive',
             'result' => 'success',
         ]);
+
+        $executeAudit = DB::table('audit_logs')
+            ->where('action', 'storage_archive_report_artifacts')
+            ->latest('id')
+            ->first();
+
+        $this->assertNotNull($executeAudit);
+        $executeMeta = json_decode((string) $executeAudit->meta_json, true);
+        $this->assertIsArray($executeMeta);
+        $this->assertSame('execute', $executeMeta['mode'] ?? null);
+        $this->assertSame($plan['_meta']['plan_path'], $executeMeta['plan_path'] ?? null);
+        $this->assertSame($result['run_path'], $executeMeta['run_path'] ?? null);
+        $this->assertSame(2, $executeMeta['candidate_count'] ?? null);
+        $this->assertSame(2, $executeMeta['copied_count'] ?? null);
+        $this->assertSame(2, $executeMeta['verified_count'] ?? null);
+        $this->assertSame(0, $executeMeta['already_archived_count'] ?? null);
+        $this->assertSame(0, $executeMeta['failed_count'] ?? null);
+        $this->assertSame(2, $executeMeta['results_count'] ?? null);
+        $this->assertSame('audit_logs.meta_json', $executeMeta['durable_receipt_source'] ?? null);
     }
 
     public function test_service_excludes_non_canonical_files_and_marks_already_archived_when_target_matches(): void
@@ -148,6 +190,16 @@ final class ReportArtifactsArchiveServiceTest extends TestCase
         $this->assertSame('partial_failure', $audit->result);
         $meta = json_decode((string) $audit->meta_json, true);
         $this->assertIsArray($meta);
+        $this->assertSame('execute', $meta['mode'] ?? null);
+        $this->assertSame($plan['_meta']['plan_path'], $meta['plan_path'] ?? null);
+        $this->assertSame($result['run_path'], $meta['run_path'] ?? null);
+        $this->assertSame(1, $meta['candidate_count'] ?? null);
+        $this->assertSame(0, $meta['copied_count'] ?? null);
+        $this->assertSame(0, $meta['verified_count'] ?? null);
+        $this->assertSame(0, $meta['already_archived_count'] ?? null);
+        $this->assertSame(1, $meta['failed_count'] ?? null);
+        $this->assertSame(1, $meta['results_count'] ?? null);
+        $this->assertSame('audit_logs.meta_json', $meta['durable_receipt_source'] ?? null);
         $this->assertSame(1, data_get($meta, 'summary.failed_count'));
     }
 
